@@ -124,11 +124,6 @@ Segment::~Segment()
       {
       foreach(Element* e, _elist)
             delete e;
-      foreach(LyricsList ll, _lyrics) {
-            foreach(Lyrics* l, ll) {
-                  delete l;
-                  }
-            }
       }
 
 //---------------------------------------------------------
@@ -141,8 +136,6 @@ void Segment::init()
       int tracks = staves * VOICES;
       for (int i = 0; i < tracks; ++i)
             _elist.push_back(0);
-      for (int i = 0; i < staves; ++i)
-            _lyrics.push_back(LyricsList());
       _prev = 0;
       _next = 0;
       }
@@ -282,7 +275,6 @@ void Segment::insertStaff(int staff)
       int track = staff * VOICES;
       for (int voice = 0; voice < VOICES; ++voice)
             _elist.insert(track, 0);
-      _lyrics.insert(staff, LyricsList());
       fixStaffIdx();
       }
 
@@ -294,7 +286,6 @@ void Segment::removeStaff(int staff)
       {
       int track = staff * VOICES;
       _elist.erase(_elist.begin() + track, _elist.begin() + track + VOICES);
-      _lyrics.removeAt(staff);
 
 /*      foreach(Spanner* sp, _spannerFor) {
             }
@@ -350,19 +341,6 @@ void Segment::add(Element* el)
       int staffIdx = track / VOICES;
 
       switch(el->type()) {
-            case LYRICS:
-                  {
-                  Lyrics* l = static_cast<Lyrics*>(el);
-                  LyricsList* ll = &_lyrics[staffIdx];
-                  int size = ll->size();
-                  if (l->no() >= size) {
-                        for (int i = size-1; i < l->no(); ++i)
-                              ll->append(0);
-                        }
-                  (*ll)[l->no()] = l;
-                  }
-                  break;
-
             case REPEAT_MEASURE:
                   measure()->setRepeatFlags(measure()->repeatFlags() | RepeatMeasureFlag);
                   _elist[track] = el;
@@ -445,33 +423,6 @@ void Segment::remove(Element* el)
       int track = el->track();
 
       switch(el->type()) {
-            case LYRICS:
-                  {
-                  int staffIdx = el->staffIdx();
-                  LyricsList& ll = _lyrics[staffIdx];
-                  for (int i = 0; i < ll.size(); ++i) {
-                        if (ll[i] == el) {
-                              ll[i] = 0;
-                              //
-                              // remove entry if last or rest of list
-                              // is empty
-                              //
-                              int n = 1;
-                              ++i;
-                              for (; i < ll.size(); ++i) {
-                                    if (ll[i])
-                                          return;
-                                    ++n;
-                                    }
-                              for (int i = 0; i < n; ++i)
-                                    ll.removeLast();
-                              return;
-                              }
-                        }
-                  }
-                  printf("Measure::remove: %s %p not found\n", el->name(), el);
-                  break;
-
             case CHORD:
             case REST:
                   {
@@ -479,7 +430,8 @@ void Segment::remove(Element* el)
                   if (cr->tuplet())
                         cr->tuplet()->remove(cr);
                   _elist[track] = 0;
-                  measure()->checkMultiVoices(cr->staffIdx());
+                  int staffIdx = cr->staffIdx();
+                  measure()->checkMultiVoices(staffIdx);
                   }
                   break;
 
@@ -582,17 +534,14 @@ void Segment::removeGeneratedElements()
 void Segment::sortStaves(QList<int>& dst)
       {
       QList<Element*>   dl;
-      QList<LyricsList> ll;
 
       for (int i = 0; i < dst.size(); ++i) {
             int startTrack = dst[i] * VOICES;
             int endTrack   = startTrack + VOICES;
             for (int k = startTrack; k < endTrack; ++k)
                   dl.append(_elist[k]);
-            ll.append(_lyrics[dst[i]]);
             }
       _elist = dl;
-      _lyrics = ll;
       fixStaffIdx();
       }
 
@@ -607,12 +556,6 @@ void Segment::fixStaffIdx()
             if (e)
                   e->setTrack(track);
             ++track;
-            }
-      for (int staffIdx = 0; staffIdx < _lyrics.size(); staffIdx++) {
-            foreach(Lyrics* l, _lyrics[staffIdx]) {
-                  if (l)
-                        l->setTrack(staffIdx * VOICES);
-                  }
             }
       }
 
@@ -648,4 +591,23 @@ void Segment::setTick(int t)
       {
       _tick = t - measure()->tick();
       }
+
+//---------------------------------------------------------
+//   segLyricsList
+//---------------------------------------------------------
+
+const QList<Lyrics*>* Segment::lyricsList(int staffIdx) const
+      {
+      if (!(subtype() & (SegChordRest | SegGrace)))
+            return 0;
+      int strack = staffIdx * VOICES;
+      int etrack = strack + VOICES;
+      for (int track = strack; track < etrack; ++track) {
+            ChordRest* cr = static_cast<ChordRest*>(element(track));
+            if (cr && !cr->lyricsList().isEmpty())
+                  return &cr->lyricsList();
+            }
+      return 0;
+      }
+
 

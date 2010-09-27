@@ -233,7 +233,7 @@ class ExportMusicXml {
       int tenths;
 
       int findBracket(const TextLine* tl) const;
-      void chord(Chord* chord, int staff, const LyricsList* ll, bool useDrumset);
+      void chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bool useDrumset);
       void rest(Rest* chord, int staff);
       void clef(int staff, int clef);
       void timesig(TimeSig* tsig);
@@ -242,7 +242,7 @@ class ExportMusicXml {
       void barlineRight(Measure* m);
       void pitch2xml(Note* note, char& c, int& alter, int& octave);
       void unpitch2xml(Note* note, char& c, int& octave);
-      void lyrics(const LyricsList* ll);
+      void lyrics(const QList<Lyrics*>* ll);
       void work(const MeasureBase* measure);
       void calcDivMoveToTick(int t);
       void calcDivisions();
@@ -1981,7 +1981,7 @@ static Chord* nextChord(Chord* ch)
  For a single-staff part, \a staff equals zero, suppressing the <staff> element.
  */
 
-void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool useDrumset)
+void ExportMusicXml::chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bool useDrumset)
       {
       printf("ExportMusicXml::chord() oldtick=%d\n", tick);
       QList<Note*> nl = chord->notes();
@@ -2926,12 +2926,12 @@ void ExportMusicXml::symbol(Symbol* sym, int staff)
 //   lyrics
 //---------------------------------------------------------
 
-void ExportMusicXml::lyrics(const LyricsList* ll)
+void ExportMusicXml::lyrics(const QList<Lyrics*>* ll)
       {
-      for (ciLyrics i = ll->begin(); i != ll->end(); ++i) {
-            if (*i) {
-                  xml.stag(QString("lyric number=\"%1\"").arg((*i)->no() + 1));
-                  int syl   = (*i)->syllabic();
+      foreach(const Lyrics* l, *ll) {
+            if (l) {
+                  xml.stag(QString("lyric number=\"%1\"").arg(l->no() + 1));
+                  int syl   = l->syllabic();
                   QString s = "";
                   switch(syl) {
                         case Lyrics::SINGLE: s = "single"; break;
@@ -2942,8 +2942,8 @@ void ExportMusicXml::lyrics(const LyricsList* ll)
                               printf("unknown syllabic %d\n", syl);
                         }
                   xml.tag("syllabic", s);
-                  xml.tag("text", (*i)->getText());
-                  if((*i)->endTick() > 0)
+                  xml.tag("text", l->getText());
+                  if(l->endTick() > 0)
                 	  xml.tagE("extend");
                   xml.etag();
                   }
@@ -3695,17 +3695,16 @@ foreach(Element* el, *(score->gel())) {
                                           break;
                                     case CHORD:
                                           {
-                                          // note: in MuseScore there is one lyricslist for each staff
-                                          // MusicXML associates lyrics with notes in a specific voice
-                                          // (too) simple solution: output lyrics only for the first voice
-                                          const LyricsList* ll = 0;
-                                          if ((st % VOICES) == 0) ll = seg->lyricsList(st / VOICES);
-                                          chord((Chord*)el, sstaff, ll, part->instr()->useDrumset());
+                                          Chord* c                 = static_cast<Chord*>(el);
+                                          const QList<Lyrics*>* ll = &c->lyricsList();
+
+                                          chord(c, sstaff, ll, part->instr()->useDrumset());
                                           break;
                                           }
                                     case REST:
                                           rest((Rest*)el, sstaff);
                                           break;
+
                                     case BAR_LINE:
                                           // Following must be enforced (ref MusicXML barline.dtd):
                                           // If location is left, it should be the first element in the measure;

@@ -3508,22 +3508,22 @@ void ExportLy::findLyrics()
 
 	  for(Segment* seg = meas->first(); seg; seg = seg->next())
 	    {
-	      LyricsList * lyrlist = seg->lyricsList(staffno);
+	      const QList<Lyrics*>* lyrlist = seg->lyricsList(staffno);
 
-	      for (ciLyrics lix = lyrlist->begin(); lix != lyrlist->end(); ++lix)
+	      foreach(const Lyrics* lix, *lyrlist)
 		{
-		  if (*lix)
+		  if (lix)
 		    {
-		      verse = (*lix)->no();
+		      verse = (lix)->no();
 		      if ((verse - prevverse) > 1)
 			{
 			  thisLyrics->lyrdat.verselyrics[verse-1] += "__ _ ";
 			}
-		      track = (*lix)->track();
+		      track = (lix)->track();
 		      vox = track - (staffno*VOICES);
 
 		      thisLyrics->lyrdat.segmentnumber[verse]++;
-		      thisLyrics->lyrdat.tick[verse] = (*lix)->segment()->tick();
+		      thisLyrics->lyrdat.tick[verse] = (lix)->segment()->tick();
 
 		      if (verse > thisLyrics->numberofverses)
 			{
@@ -3540,16 +3540,16 @@ void ExportLy::findLyrics()
 			    }
 			}
 
-		      QString lyriks = (*lix)->getText();
+		      QString lyriks = (lix)->getText();
 
 		      thisLyrics->lyrdat.verselyrics[verse] += lyriks.replace(" ", "_"); //bolton: if two words on one note.
 
 		      thisLyrics->lyrdat.staffname =  staffname[staffno].staffid;
 		      thisLyrics->lyrdat.voicename[verse] = staffname[staffno].voicename[vox];
 
-		      thisLyrics->lyrdat.tick[verse] = (*lix)->segment()->tick();
+		      thisLyrics->lyrdat.tick[verse] = (lix)->segment()->tick();
 
-		      int syl   = (*lix)->syllabic();
+		      int syl   = (lix)->syllabic();
 		      switch(syl)
 			{
 			case Lyrics::SINGLE:
@@ -3567,8 +3567,8 @@ void ExportLy::findLyrics()
 			default:
 			  printf("unknown syllabic %d\n", syl);
 			}//switch syllable
-		      cout << " lyrics endtick: " << (*lix)->endTick() << "\n";
-		      if ((*lix)->endTick() > 0) //more than one note on this syllable
+		      cout << " lyrics endtick: " << (lix)->endTick() << "\n";
+		      if ((lix)->endTick() > 0) //more than one note on this syllable
 			{
 			  cout << " _ ";
 			  thisLyrics->lyrdat.verselyrics[verse] += " _ ";

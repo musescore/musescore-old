@@ -2165,20 +2165,6 @@ void Score::writeSegments(Xml& xml, const Measure* m, int strack, int etrack, Se
                                     }
                               }
                         }
-                  if ((track % VOICES) == 0) {
-                        int staff = track / VOICES;
-                        const LyricsList* ll = segment->lyricsList(staff);
-                        for (ciLyrics i = ll->begin(); i != ll->end(); ++i) {
-                              if (*i) {
-                                    if (needTick) {
-                                          xml.tag("tick", segment->tick());
-                                          xml.curTick = segment->tick();
-                                          needTick = false;
-                                          }
-                                    (*i)->write(xml);
-                                    }
-                              }
-                        }
                   if (e && !e->generated()) {
                         if (needTick) {
                               xml.tag("tick", segment->tick());

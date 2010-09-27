@@ -621,28 +621,32 @@ void Measure::layout2()
             return;
 
       double _spatium = spatium();
-      for (int staffIdx = 0; staffIdx < staves.size(); ++staffIdx) {
-            for (Segment* s = first(); s; s = s->next()) {
-                  LyricsList* ll = s->lyricsList(staffIdx);
-                  if (!ll)
+      int tracks = staves.size() * VOICES;
+      for (int track = 0; track < tracks; ++track) {
+            SegmentTypes st = SegGrace | SegChordRest;
+            for (Segment* s = first(st); s; s = s->next(st)) {
+                  ChordRest* cr = static_cast<ChordRest*>(s->element(track));
+                  if (!cr)
                         continue;
-                  foreach(Lyrics* l, *ll) {
-                        if (!l)
-                              continue;
-                        system()->layoutLyrics(l, s, staffIdx);
+                  foreach(Lyrics* lyrics, cr->lyricsList()) {
+                        if (lyrics)
+                              system()->layoutLyrics(lyrics, s, track/VOICES);
                         }
                   }
-            double y = system()->staff(staffIdx)->y();
-            Spacer* sp = staves[staffIdx]->_vspacerDown;
-            if (sp) {
-                  sp->layout();
-                  int n = score()->staff(staffIdx)->lines() - 1;
-                  sp->setPos(_spatium * .5, y + n * _spatium);
-                  }
-            sp = staves[staffIdx]->_vspacerUp;
-            if (sp) {
-                  sp->layout();
-                  sp->setPos(_spatium * .5, y - sp->getSpace().val() * _spatium);
+            if (track % VOICES == 0) {
+                  int staffIdx = track / VOICES;
+                  double y = system()->staff(staffIdx)->y();
+                  Spacer* sp = staves[staffIdx]->_vspacerDown;
+                  if (sp) {
+                        sp->layout();
+                        int n = score()->staff(staffIdx)->lines() - 1;
+                        sp->setPos(_spatium * .5, y + n * _spatium);
+                        }
+                  sp = staves[staffIdx]->_vspacerUp;
+                  if (sp) {
+                        sp->layout();
+                        sp->setPos(_spatium * .5, y - sp->getSpace().val() * _spatium);
+                        }
                   }
             }
 
@@ -694,7 +698,6 @@ void Measure::layout2()
             }
       if (_noText)
             _noText->layout();
-      int tracks = _score->nstaves() * VOICES;
 
       //
       // slur layout needs articulation layout first
@@ -1996,47 +1999,39 @@ void Measure::write(Xml& xml) const
             xml.tagE("breakMultiMeasureRest");
       xml.tag("stretch", _userStretch);
 
-//      if (_noText)
-//            _noText->write(xml);
-
       for (int staffIdx = 0; staffIdx < _score->nstaves(); ++staffIdx) {
             xml.stag("Staff");
             for (ciElement i = _el.begin(); i != _el.end(); ++i) {
                   if ((*i)->staff() == _score->staff(staffIdx) && (*i)->type() != SLUR_SEGMENT)
                         (*i)->write(xml);
                   }
-            for (int track = staffIdx * VOICES; track < staffIdx * VOICES + VOICES; ++track) {
+            int strack = staffIdx * VOICES;
+            int etrack = strack + VOICES;
+            for (int track = strack; track < etrack; ++track) {
                   for (Segment* segment = first(); segment; segment = segment->next()) {
                         Element* e = segment->element(track);
-                        if (e && !e->generated()) {
-                              if (e->isDurationElement()) {
-                                    DurationElement* de = static_cast<DurationElement*>(e);
-                                    Tuplet* tuplet = de->tuplet();
-                                    if (tuplet && tuplet->elements().front() == de) {
-                                          tuplet->setId(xml.tupletId++);
-                                          tuplet->write(xml);
-                                          }
+                        if (!e || e->generated())
+                              continue;
+                        if (e->isDurationElement()) {
+                              DurationElement* de = static_cast<DurationElement*>(e);
+                              Tuplet* tuplet = de->tuplet();
+                              if (tuplet && tuplet->elements().front() == de) {
+                                    tuplet->setId(xml.tupletId++);
+                                    tuplet->write(xml);
                                     }
-                              if (segment->tick() != xml.curTick) {
-                                    xml.tag("tick", segment->tick());
-                                    xml.curTick = segment->tick();
-                                    }
-                              if (segment->subtype() == SegEndBarLine && _multiMeasure > 0) {
-                                    xml.stag("BarLine");
-                                    xml.tag("subtype", _endBarLineType);
-                                    xml.tag("visible", _endBarLineVisible);
-                                    xml.etag();
-                                    }
-                              else
-                                    e->write(xml);
                               }
-                        }
-                  }
-            for (Segment* segment = first(); segment; segment = segment->next()) {
-                  const LyricsList* ll = segment->lyricsList(staffIdx);
-                  for (ciLyrics i = ll->begin(); i != ll->end(); ++i) {
-                        if (*i)
-                              (*i)->write(xml);
+                        if (segment->tick() != xml.curTick) {
+                              xml.tag("tick", segment->tick());
+                              xml.curTick = segment->tick();
+                              }
+                        if (segment->subtype() == SegEndBarLine && _multiMeasure > 0) {
+                              xml.stag("BarLine");
+                              xml.tag("subtype", _endBarLineType);
+                              xml.tag("visible", _endBarLineVisible);
+                              xml.etag();
+                              }
+                        else
+                              e->write(xml);
                         }
                   }
             xml.etag();
@@ -2113,7 +2108,6 @@ void Measure::read(QDomElement e, int staffIdx)
                         if (ps->element(track))
                               ss = ps;
                         }
-
                   Chord* pch = 0;       // previous chord
                   if (ss) {
                         ChordRest* cr = static_cast<ChordRest*>(ss->element(track));
@@ -2122,12 +2116,12 @@ void Measure::read(QDomElement e, int staffIdx)
                         }
 
                   Segment* s = getSegment(chord, score()->curTick);
+
                   if (chord->tremolo() && chord->tremolo()->subtype() < 6) {
                         //
                         // old style tremolo found
                         //
                         Tremolo* tremolo = chord->tremolo();
-printf("old style tremolo %d\n", tremolo->subtype());
                         TremoloType st;
                         switch(tremolo->subtype()) {
                               case 0: st = TREMOLO_R8;  break;
@@ -2139,7 +2133,6 @@ printf("old style tremolo %d\n", tremolo->subtype());
                               }
                         tremolo->setSubtype(st);
                         if (tremolo->twoNotes()) {
-printf("  two notes\n");
                               if (pch) {
                                     tremolo->setParent(pch);
                                     pch->setTremolo(tremolo);
@@ -2151,7 +2144,6 @@ printf("  two notes\n");
                               score()->curTick += chord->ticks() / 2;
                               }
                         else {
-printf("  single note\n");
                               tremolo->setParent(chord);
                               score()->curTick += chord->ticks();
                               }
@@ -2186,7 +2178,6 @@ printf("  single note\n");
                   rest->setDuration(timesig());
                   rest->setTrack(score()->curTrack);
                   rest->read(e, _tuplets, score()->slurs);
-// printf("   Rest %d %d\n", score()->curTick, rest->track());
                   Segment* s = getSegment(rest, score()->curTick);
                   s->add(rest);
                   score()->curTick += rest->ticks();
@@ -2258,12 +2249,16 @@ printf("  single note\n");
                   Segment* s = getSegment(SegKeySig, score()->curTick);
                   s->add(ks);
                   }
-            else if (tag == "Lyrics") {
+            else if (tag == "Lyrics") {                           // obsolete
                   Lyrics* lyrics = new Lyrics(score());
                   lyrics->setTrack(score()->curTrack);
                   lyrics->read(e);
                   Segment* s = getSegment(SegChordRest, score()->curTick);
-                  s->add(lyrics);
+                  ChordRest* cr = static_cast<ChordRest*>(s->element(lyrics->track()));
+                  if (!cr)
+                        printf("=====no cr for lyrics\n");
+                  else
+                        cr->add(lyrics);
                   }
             else if (tag == "Text") {
                   Text* t = new Text(score());
@@ -2457,11 +2452,6 @@ void Measure::scanElements(void* data, void (*func)(void*, Element*))
             for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
                   if (!visible(staffIdx))
                         continue;
-                  LyricsList* ll = s->lyricsList(staffIdx);
-                  foreach(Lyrics* l, *ll) {
-                        if (l)
-                              func(data, l);
-                        }
                   }
             for (int track = 0; track < tracks; ++track) {
                   if (!visible(track/VOICES)) {
@@ -2712,15 +2702,6 @@ void Measure::exchangeVoice(int v1, int v2, int staffIdx1, int staffIdx2)
                               r->setTrack(dtrack);
                               s->setElement(dtrack, r);
                               }
-                        }
-                  LyricsList* ll = s->lyricsList(staffIdx);
-                  foreach(Lyrics* l, *ll) {
-                        if (l == 0)
-                              continue;
-                        if (l->voice() == v1)
-                              l->setVoice(v2);
-                        else if (l->voice() == v2)
-                              l->setVoice(v1);
                         }
                   }
             }
@@ -2994,6 +2975,9 @@ void Measure::layoutX(double stretch)
                   int track  = staffIdx * VOICES;
                   bool found = false;
                   if (s->subtype() & (SegChordRest | SegGrace)) {
+                        double llw = 0.0;
+                        double rrw = 0.0;
+                        Lyrics* lyrics = 0;
                         for (int voice = 0; voice < VOICES; ++voice) {
                               ChordRest* cr = static_cast<ChordRest*>(s->element(track+voice));
                               if (!cr)
@@ -3017,27 +3001,23 @@ void Measure::layoutX(double stretch)
                                     }
                               cr->layout();
                               space.max(cr->space());
-                              }
-
-                        double llw = 0.0;
-                        double rrw = 0.0;
-                        Lyrics* lyrics = 0;
-                        foreach(Lyrics* l, *s->lyricsList(staffIdx)) {
-                              if (!l)
-                                    continue;
-                              l->layout();
-                              lyrics = l;
-                              if (l->endTick() > 0) {
-                                    double rw = l->bbox().width();
-                                    if (rw > rrw)
-                                          rrw = rw;
-                                    }
-                              else {
-                                    double lw = l->bbox().width() * .5;
-                                    if (lw > llw)
-                                          llw = lw;
-                                    if (lw > rrw)
-                                          rrw = lw;
+                              foreach(Lyrics* l, cr->lyricsList()) {
+                                    if (!l)
+                                          continue;
+                                    l->layout();
+                                    lyrics = l;
+                                    if (l->endTick() > 0) {
+                                          double rw = l->bbox().width();
+                                          if (rw > rrw)
+                                                rrw = rw;
+                                          }
+                                    else {
+                                          double lw = l->bbox().width() * .5;
+                                          if (lw > llw)
+                                                llw = lw;
+                                          if (lw > rrw)
+                                                rrw = lw;
+                                          }
                                     }
                               }
                         if (lyrics) {

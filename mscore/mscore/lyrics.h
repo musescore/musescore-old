@@ -22,8 +22,10 @@
 #define __LYRICS_H__
 
 #include "text.h"
+#include "chord.h"
 
 class Segment;
+class Chord;
 
 //---------------------------------------------------------
 //   Lyrics
@@ -44,8 +46,9 @@ class Lyrics : public Text {
       virtual Lyrics* clone() const    { return new Lyrics(*this); }
       virtual ElementType type() const { return LYRICS; }
       virtual QPointF canvasPos() const;
-      Segment* segment() const { return (Segment*)parent(); }
-      Measure* measure() const { return (Measure*)parent()->parent(); }
+      Segment* segment() const { return (Segment*)parent()->parent(); }
+      Measure* measure() const { return (Measure*)parent()->parent()->parent(); }
+      Chord* chord() const     { return (Chord*)parent(); }
 
       virtual void layout();
 

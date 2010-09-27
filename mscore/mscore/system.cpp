@@ -44,6 +44,7 @@
 #include "lyrics.h"
 #include "system.h"
 #include "box.h"
+#include "chordrest.h"
 
 //---------------------------------------------------------
 //   SysStaff
@@ -749,12 +750,21 @@ void System::layoutLyrics(Lyrics* l, Segment* s, int staffIdx)
       int verse   = l->no();
       Segment* ns = s;
 
-      // TODO: then next two values should be style parameters
+      // TODO: the next two values should be style parameters
       const double maxl = 0.5 * _spatium * lmag;   // lyrics hyphen length
       const Spatium hlw(0.14 * lmag);              // hyphen line width
 
-      while ((ns = ns->next1())) {
-            LyricsList* nll = ns->lyricsList(staffIdx);
+      while ((ns = ns->next1(SegChordRest | SegGrace))) {
+            int strack = staffIdx * VOICES;
+            int etrack = strack + VOICES;
+            QList<Lyrics*>* nll = 0;
+            for (int track = strack; track < etrack; ++track) {
+                  ChordRest* cr = static_cast<ChordRest*>(ns->element(track));
+                  if (cr && !cr->lyricsList().isEmpty()) {
+                        nll = &cr->lyricsList();
+                        break;
+                        }
+                  }
             if (!nll)
                   continue;
             Lyrics* nl = nll->value(verse);
