@@ -32,6 +32,7 @@ class Tuplet;
 class Segment;
 class Slur;
 class Articulation;
+class Lyrics;
 
 //---------------------------------------------------------
 //   ChordRest
@@ -54,11 +55,13 @@ class ChordRest : public DurationElement {
       Spatium _extraLeadingSpace;
       Spatium _extraTrailingSpace;
       Space _space;
+      QList<Lyrics*> _lyricsList;
 
    public:
       ChordRest(Score*);
       ChordRest(const ChordRest&);
       ChordRest &operator=(const ChordRest&);
+      ~ChordRest();
       virtual ElementType type() const = 0;
       virtual QPointF canvasPos() const;      ///< position in canvas coordinates
       virtual Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*);
@@ -126,6 +129,11 @@ class ChordRest : public DurationElement {
       virtual void setTrack(int val);
       virtual int tick() const;
       virtual Space space() const               { return _space; }
+
+      const QList<Lyrics*>& lyricsList() const { return _lyricsList; }
+      QList<Lyrics*>& lyricsList()             { return _lyricsList; }
+      virtual void add(Element*);
+      virtual void remove(Element*);
       };
 
 #endif

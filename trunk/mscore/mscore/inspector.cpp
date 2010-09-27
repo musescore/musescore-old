@@ -391,12 +391,14 @@ void Inspector::updateList(Score* s)
                                     }
                               foreach(Element* s, segment->annotations())
                                     new ElementItem(segItem, s);
+#if 0 // TODO
                               for (int i = 0; i < staves; ++i) {
                                     foreach(Lyrics* l, *(segment->lyricsList(i))) {
                                           if (l)
                                                 new ElementItem(segItem, l);
                                           }
                                     }
+#endif
                               }
                         foreach(Tuplet* tuplet, *measure->tuplets()) {
 					ElementItem* item = new ElementItem(mi, tuplet);
@@ -740,6 +742,7 @@ void SegmentView::setElement(Element* e)
       sb.lyrics->clear();
 
       Score* cs = e->score();
+#if 0 // TODO
       for (int i = 0; i < cs->nstaves(); ++i) {
             const LyricsList* ll = s->lyricsList(i);
             if (ll) {
@@ -751,6 +754,7 @@ void SegmentView::setElement(Element* e)
                         }
                   }
             }
+#endif
       sb.spannerFor->clear();
       sb.spannerBack->clear();
       sb.annotations->clear();

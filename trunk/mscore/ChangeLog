@@ -1,4 +1,7 @@
-26.sep(ws)
+27.sep (ws)
+      - moved Lyrics from Segment to ChordRest. This allows for lyrics on
+        grace notes (#6577)
+26.sep (ws)
       - fix clef changes
 25.sep (ws)
       - implemented #6925: Make "reset stretch" work on the selected measure only

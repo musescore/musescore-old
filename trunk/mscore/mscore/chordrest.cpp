@@ -41,6 +41,7 @@
 #include "stafftext.h"
 #include "al/sig.h"
 #include "clef.h"
+#include "lyrics.h"
 
 //---------------------------------------------------------
 //   DurationElement
@@ -134,6 +135,22 @@ void ChordRest::scanElements(void* data, void (*func)(void*, Element*))
             Articulation* a = *i;
             func(data, a);
             }
+      foreach(Lyrics* l, _lyricsList) {
+            if (l)
+                  l->scanElements(data, func);
+            }
+      }
+
+//---------------------------------------------------------
+//   ChordRest
+//---------------------------------------------------------
+
+ChordRest::~ChordRest()
+      {
+      foreach(Lyrics* l, _lyricsList)
+            delete l;
+      foreach(Articulation* a,  articulations)
+            delete a;
       }
 
 //---------------------------------------------------------
@@ -217,6 +234,10 @@ void ChordRest::writeProperties(Xml& xml) const
             xml.tagE(QString("Slur type=\"stop\" number=\"%1\"").arg(s->id()+1));
       if (!xml.clipboardmode && _beam)
             xml.tag("Beam", _beam->id());
+      foreach(Lyrics* lyrics, _lyricsList) {
+            if (lyrics)
+                  lyrics->write(xml);
+            }
       xml.curTick += ticks();
       }
 
@@ -332,6 +353,12 @@ bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets, con
             setDots(i);
       else if (tag == "move")
             _staffMove = i;
+      else if (tag == "Lyrics") {
+            Lyrics* lyrics = new Lyrics(score());
+            lyrics->setTrack(score()->curTrack);
+            lyrics->read(e);
+            add(lyrics);
+            }
       else
             return false;
       return true;
@@ -670,5 +697,74 @@ void ChordRest::setTrack(int val)
 int ChordRest::tick() const
       {
       return segment() ? segment()->tick() : 0;
+      }
+
+//---------------------------------------------------------
+//   add
+//---------------------------------------------------------
+
+void ChordRest::add(Element* e)
+      {
+      e->setParent(this);
+      e->setTrack(track());
+      switch(e->type()) {
+            case ARTICULATION:
+                  articulations.push_back(static_cast<Articulation*>(e));
+                  break;
+            case LYRICS:
+                  {
+                  Lyrics* l = static_cast<Lyrics*>(e);
+                  int size = _lyricsList.size();
+                  if (l->no() >= size) {
+                        for (int i = size-1; i < l->no(); ++i)
+                              _lyricsList.append(0);
+                        }
+                  _lyricsList[l->no()] = l;
+                  }
+                  break;
+            default:
+                  printf("ChordRest::add: unknown element %s\n", e->name());
+                  break;
+            }
+      }
+
+//---------------------------------------------------------
+//   remove
+//---------------------------------------------------------
+
+void ChordRest::remove(Element* e)
+      {
+      switch(e->type()) {
+            case ARTICULATION:
+                  if (!articulations.removeOne(static_cast<Articulation*>(e)))
+                        printf("Chord::remove(): articulation not found\n");
+                  break;
+            case LYRICS:
+                  {
+                  for (int i = 0; i < _lyricsList.size(); ++i) {
+                        if (_lyricsList[i] != e)
+                              continue;
+                        _lyricsList[i] = 0;
+                        //
+                        // remove entry if last or rest of list
+                        // is empty
+                        //
+                        int n = 1;
+                        ++i;
+                        for (; i < _lyricsList.size(); ++i) {
+                              if (_lyricsList[i])
+                                    return;
+                              ++n;
+                              }
+                        for (int i = 0; i < n; ++i)
+                              _lyricsList.removeLast();
+                        return;
+                        }
+                  }
+                  printf("Measure::remove: %s %p not found\n", e->name(), e);
+                  break;
+            default:
+                  printf("ChordRest::remove: unknown element %s\n", e->name());
+            }
       }
 

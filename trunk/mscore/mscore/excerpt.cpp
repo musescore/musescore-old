@@ -387,12 +387,9 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
                                           int ostaffIdx = srcTrack / VOICES;
                                           Staff* nstaff = score->staff(track/VOICES);
                                           if (!nstaff->useTablature()) {
-                                                const LyricsList* ll = oseg->lyricsList(ostaffIdx);
-                                                for (ciLyrics i = ll->begin(); i != ll->end(); ++i) {
-                                                      if (*i) {
-                                                            Lyrics* ly = new Lyrics(**i);
-                                                            s->add(ly);
-                                                            }
+                                                const QList<Lyrics*>* ll = oseg->lyricsList(ostaffIdx);
+                                                foreach(Lyrics* ly, *ll) {
+                                                      s->add(ly);
                                                       }
                                                 }
                                           }

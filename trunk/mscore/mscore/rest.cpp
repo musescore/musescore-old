@@ -35,6 +35,7 @@
 #include "undo.h"
 #include "staff.h"
 #include "harmony.h"
+#include "lyrics.h"
 
 //---------------------------------------------------------
 //    Rest
@@ -288,31 +289,6 @@ void Rest::read(QDomElement e, const QList<Tuplet*>& tuplets, const QList<Slur*>
             }
       QPointF off(userOff());
       setUserOffset(off.x(), off.y());
-      }
-
-//---------------------------------------------------------
-//   add
-//---------------------------------------------------------
-
-void Rest::add(Element* e)
-      {
-      if (e->type() != ARTICULATION)
-            return;
-      e->setParent(this);
-      e->setTrack(track());
-      articulations.push_back((Articulation*)e);
-      }
-
-//---------------------------------------------------------
-//   remove
-//---------------------------------------------------------
-
-void Rest::remove(Element* e)
-      {
-      if (e->type() != ARTICULATION)
-            return;
-      if (!articulations.removeOne(static_cast<Articulation*>(e)))
-            printf("Rest::remove(): articulation not found\n");
       }
 
 //---------------------------------------------------------

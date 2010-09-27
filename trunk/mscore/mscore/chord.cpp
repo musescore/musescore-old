@@ -45,6 +45,7 @@
 #include "noteevent.h"
 #include "undo.h"
 #include "chordline.h"
+#include "lyrics.h"
 
 //---------------------------------------------------------
 //   Stem
@@ -429,7 +430,7 @@ void Chord::add(Element* e)
                   _el.append(e);
                   break;
             default:
-                  printf("Chord::add: unknown element\n");
+                  ChordRest::add(e);
                   break;
             }
       }

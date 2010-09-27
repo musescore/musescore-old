@@ -1424,14 +1424,11 @@ Lyrics* Score::addLyrics()
       Segment* segment = chord->segment();
       int staff        = chord->staffIdx();
 
-      Lyrics* lyrics;
-      LyricsList* ll = segment->lyricsList(staff);
-      int no = 0;
-      if (ll)
-            no = ll->size();
-      lyrics = new Lyrics(this);
+      QList<Lyrics*> ll = chord->lyricsList();
+      int no = ll.size();
+      Lyrics* lyrics = new Lyrics(this);
       lyrics->setTrack(chord->track());
-      lyrics->setParent(segment);
+      lyrics->setParent(chord);
       lyrics->setNo(no);
       undoAddElement(lyrics);
       select(lyrics, SELECT_SINGLE, 0);

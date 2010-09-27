@@ -21,9 +21,9 @@
 #ifndef __GLOBALS_H__
 #define __GLOBALS_H__
 
-#define MSC_VERSION     "1.17"
+#define MSC_VERSION     "1.18"
 
-static const int MSCVERSION = 117;
+static const int MSCVERSION = 118;
 
 // History:
 //    1.3   added staff->_barLineSpan
@@ -40,6 +40,8 @@ static const int MSCVERSION = 117;
 //    1.15  save timesig inline; Lyrics "endTick" replaced by "ticks"
 //    1.16  spanners (hairpin, trill etc.) are now inline and have no ticks anymore
 //    1.17  new <Score> toplevel structure to support linked parts (excerpts)
+//    1.18  save lyrics as subtype to chord/rest to allow them associated with
+//          grace notes
 
 extern bool debugMode;
 extern bool enableExperimental;

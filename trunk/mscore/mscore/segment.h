@@ -36,10 +36,6 @@ class Painter;
 class Spanner;
 class System;
 
-typedef QList<Lyrics*> LyricsList;
-typedef LyricsList::iterator iLyrics;
-typedef LyricsList::const_iterator ciLyrics;
-
 //---------------------------------------------------------
 //   Segment
 //---------------------------------------------------------
@@ -91,7 +87,7 @@ class Segment : public Element {
       QList<Element*> _annotations;
 
       QList<Element*> _elist;      ///< Element storage, size = staves * VOICES.
-      QList<LyricsList> _lyrics;   ///< Lyrics storage, size  = staves.
+//      QList<const QList<Lyrics*>*> _lyrics;   ///< Lyrics storage, size  = staves.
 
       void init();
       void checkEmpty() const;
@@ -128,8 +124,7 @@ class Segment : public Element {
 
       void removeElement(int track);
       void setElement(int track, Element* el);
-      LyricsList* lyricsList(int staffIdx)             { return &_lyrics[staffIdx];  }
-      const LyricsList* lyricsList(int staffIdx) const { return &_lyrics[staffIdx];  }
+      const QList<Lyrics*>* lyricsList(int staffIdx) const;
 
       Measure* measure() const            { return (Measure*)parent(); }
       System* system() const              { return (System*)parent()->parent(); }

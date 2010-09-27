@@ -200,7 +200,7 @@ void MeasureBase::spatiumChanged(double oldValue, double newValue)
                   m->noText()->spatiumChanged(oldValue, newValue);
             for (Segment* s = m->first(); s; s = s->next()) {
                   for (int staffIdx = 0; staffIdx < score()->nstaves(); ++staffIdx) {
-                        LyricsList* ll = s->lyricsList(staffIdx);
+                        const QList<Lyrics*>* ll = s->lyricsList(staffIdx);
                         foreach(Lyrics* l, *ll) {
                               if (l)
                                     l->spatiumChanged(oldValue, newValue);
