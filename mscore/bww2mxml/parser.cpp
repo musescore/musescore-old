@@ -82,6 +82,39 @@ static bool isNonNote(Bww::Symbol sym)
 }
 
 /**
+ Dump beams
+ */
+
+static void dumpBeams(QList<Bww::MeasureDescription> const& measures)
+{
+  for (int j = 0; j < measures.size(); ++j)
+  {
+    QString beams;
+    QString beamStates;
+    for (int i = 0; i < measures.at(j).notes.size(); ++i)
+    {
+      QString beam = measures.at(j).notes.at(i).beam;
+      if (beam == "")
+        beam = " ";
+      if (!measures.at(j).notes.at(i).grace)
+      {
+        beams += beam;
+        switch (measures.at(j).notes.at(i).beamState)
+        {
+        case Bww::ST_NONE:     beamStates += " "; break;
+        case Bww::ST_START:    beamStates += "["; break;
+        case Bww::ST_CONTINUE: beamStates += "_"; break;
+        case Bww::ST_STOP:     beamStates += "]"; break;
+        default:               beamStates += " ";
+        }
+      }
+    }
+    qDebug() << "beams measure #" << j + 1 << beams;
+    qDebug() << "beams measure #" << j + 1 << beamStates;
+  }
+}
+
+/**
  Dump measure contents
  */
 
@@ -182,6 +215,78 @@ static void findIrregularMeasures(QList<Bww::MeasureDescription> & measures, int
     const int d2 = measures.at(j).duration;
     if (d1 > 0 && d2 > 0 && (d1 + d2) == normalDuration)
       measures[j].mbf.irregular = true;
+  }
+}
+
+static QString findNextNextNoteBeam(QList<Bww::MeasureDescription> const& measures, int measureNr, int noteNr)
+{
+  for (int i = noteNr + 1; i < measures.at(measureNr).notes.size(); ++i)
+  {
+    if (measures.at(measureNr).notes.at(i).grace)
+      // ignore grace notes
+      continue;
+    return measures.at(measureNr).notes.at(i).beam;
+  }
+  return " "; // no next non-grace note found
+}
+
+/**
+ Determine all beam states
+ */
+
+static void determineBeamStates(QList<Bww::MeasureDescription> & measures)
+{
+  enum State { NONE, LEFT, RIGHT };
+  for (int j = 0; j < measures.size(); ++j)
+  {
+    State state = NONE;
+    for (int i = 0; i < measures.at(j).notes.size(); ++i)
+    {
+      QString beam = measures.at(j).notes.at(i).beam;
+      if (beam == "")
+      {
+        measures[j].notes[i].beamState = Bww::ST_NONE;
+        state = NONE;
+      }
+      else if (beam == "r")
+      {
+        if (state == NONE)
+        {
+          measures[j].notes[i].beamState = Bww::ST_START;
+          state = LEFT; // now in left part of beam
+        }
+        else if (state == LEFT)
+        {
+          measures[j].notes[i].beamState = Bww::ST_CONTINUE;
+        }
+        else if (state == RIGHT)
+        {
+          // shouldn't happen TODO report (internal?) error
+        }
+      }
+      else if (beam == "l")
+      {
+        if (state == NONE)
+        {
+          // shouldn't happen TODO report error
+        }
+        else if (state == LEFT || state == RIGHT)
+        {
+          // if the beam does not end here (next note has beam "l")
+          // then beamState is CONTINUE else STOP
+          if (findNextNextNoteBeam(measures, j, i) == "l")
+          {
+            measures[j].notes[i].beamState = Bww::ST_CONTINUE;
+            state = RIGHT; // now in right part of beam
+          }
+          else
+          {
+            measures[j].notes[i].beamState = Bww::ST_STOP;
+            state = NONE; // now in right part of beam
+          }
+        }
+      }
+    }
   }
 }
 
@@ -395,7 +500,9 @@ namespace Bww {
 
     calculateMeasureDurations(measures);
     findIrregularMeasures(measures, beats, beat);
+    determineBeamStates(measures);
     dumpMeasures(measures);
+    dumpBeams(measures);
 
     for (int j = 0; j < measures.size(); ++j)
     {
