@@ -1207,13 +1207,13 @@ InsertMeasure::InsertMeasure(MeasureBase* m)
 void InsertMeasure::undo()
       {
       measure->score()->remove(measure);
-      measure->score()->addLayoutFlag(LAYOUT_FIX_TICKS);
+      measure->score()->addLayoutFlags(LAYOUT_FIX_TICKS);
       }
 
 void InsertMeasure::redo()
       {
       measure->score()->addMeasure(measure);
-      measure->score()->addLayoutFlag(LAYOUT_FIX_TICKS);
+      measure->score()->addLayoutFlags(LAYOUT_FIX_TICKS);
       }
 
 //---------------------------------------------------------
@@ -1433,7 +1433,7 @@ void ChangeElement::flip()
       else if (e->type() == KEYSIG)
             e->staff()->setUpdateKeymap(true);
       else if (e->type() == DYNAMIC)
-            e->score()->addLayoutFlag(LAYOUT_FIX_PITCH_VELO);
+            e->score()->addLayoutFlags(LAYOUT_FIX_PITCH_VELO);
       score->setLayoutAll(true);
       }
 
@@ -1537,7 +1537,7 @@ void ChangeMeasureLen::flip()
                   continue;
             segment->setTick(endTick);
             }
-      measure->score()->addLayoutFlag(LAYOUT_FIX_TICKS);
+      measure->score()->addLayoutFlags(LAYOUT_FIX_TICKS);
       oldTicks = ol;
       newTicks = nl;
       }
@@ -1765,7 +1765,7 @@ void ChangeDynamic::flip()
       dynamic->setDynType(dynType);
       dynType  = t;
       velocity = v;
-      dynamic->score()->addLayoutFlag(LAYOUT_FIX_PITCH_VELO);
+      dynamic->score()->addLayoutFlags(LAYOUT_FIX_PITCH_VELO);
       }
 
 #if 0
@@ -2335,7 +2335,7 @@ void ChangeMeasureProperties::flip()
       sig         = _sig;
       len         = _len;
 
-      score->addLayoutFlag(LAYOUT_FIX_TICKS);
+      score->addLayoutFlags(LAYOUT_FIX_TICKS);
       score->setLayoutAll(true);
       score->setDirty();
       }

@@ -1615,7 +1615,7 @@ printf("incomplete Slur\n");
                   nscore->setName(excerpt->title());
                   nscore->rebuildMidiMapping();
                   nscore->updateChannel();
-                  nscore->addLayoutFlag(LAYOUT_FIX_PITCH_VELO);
+                  nscore->addLayoutFlags(LAYOUT_FIX_PITCH_VELO);
                   nscore->layout();
                   excerpt->setScore(nscore);
                   }
