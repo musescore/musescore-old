@@ -682,7 +682,7 @@ void TextB::layout()
             return;
       if (parent()->type() == SEGMENT) {
             Segment* s = static_cast<Segment*>(parent());
-            rypos() += s ? s->measure()->system()->staff(track() / VOICES)->y() : 0.0;
+            rypos() += s ? s->measure()->system()->staff(staffIdx())->y() : 0.0;
             }
       }
 
