@@ -617,12 +617,18 @@ bool Score::read(QString name)
             }
       updateNotes();
       _needLayout = true;
-      layoutFlags |= LAYOUT_FIX_TICKS | LAYOUT_FIX_PITCH_VELO;
+      addLayoutFlags(LAYOUT_FIX_TICKS | LAYOUT_FIX_PITCH_VELO);
       doLayout();
-
       // adjust readPos
       scanElements(0, elementAdjustReadPos);
-
+      foreach(Excerpt* e, _excerpts) {
+            Score* score = e->score();
+            score->updateNotes();
+            score->addLayoutFlags(LAYOUT_FIX_TICKS | LAYOUT_FIX_PITCH_VELO);
+            score->setLayoutAll(true);
+            score->doLayout();
+            score->scanElements(0, elementAdjustReadPos);
+            }
       return true;
       }
 
@@ -726,7 +732,7 @@ void Score::addMeasure(MeasureBase* m)
       if (!m->next())
             m->setNext(tick2measureBase(m->tick()));
       _measures.add(m);
-      addLayoutFlag(LAYOUT_FIX_TICKS);
+      addLayoutFlags(LAYOUT_FIX_TICKS);
       }
 
 //---------------------------------------------------------
@@ -796,7 +802,7 @@ void Score::insertTime(int tick, int len)
                   }
 #endif
             }
-      addLayoutFlag(LAYOUT_FIX_TICKS);
+      addLayoutFlags(LAYOUT_FIX_TICKS);
       }
 
 //---------------------------------------------------------
@@ -1921,7 +1927,7 @@ void Score::addElement(Element* element)
          || element->type() == VBOX
          ) {
             add(element);
-            addLayoutFlag(LAYOUT_FIX_TICKS);
+            addLayoutFlags(LAYOUT_FIX_TICKS);
             return;
             }
 
@@ -1994,7 +2000,7 @@ void Score::removeElement(Element* element)
          || (element->type() == HBOX && parent->type() != VBOX)
          || element->type() == VBOX) {
             remove(element);
-            addLayoutFlag(LAYOUT_FIX_TICKS);
+            addLayoutFlags(LAYOUT_FIX_TICKS);
             return;
             }
       if (element->type() == BEAM)          // beam parent does not survive layout

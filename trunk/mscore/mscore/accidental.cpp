@@ -114,7 +114,7 @@ void Accidental::write(Xml& xml) const
       xml.stag(name());
       if (_hasBracket)
             xml.tag("bracket", _hasBracket);
-      if (_role != AUTO)
+      if (_role != ACC_AUTO)
             xml.tag("role", _role);
       Element::writeProperties(xml);
       xml.etag();

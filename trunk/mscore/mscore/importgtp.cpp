@@ -2897,8 +2897,7 @@ bool Score::importGTP(const QString& name)
             score->updateChannel();
 
             score->setLayoutAll(true);
-            score->addLayoutFlag(LAYOUT_FIX_TICKS);
-            score->addLayoutFlag(LAYOUT_FIX_PITCH_VELO);
+            score->addLayoutFlags(LAYOUT_FIX_TICKS | LAYOUT_FIX_PITCH_VELO);
             score->doLayout();
             }
 #endif

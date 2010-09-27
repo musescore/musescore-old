@@ -113,7 +113,7 @@ void Ottava::endEdit()
             s->pitchOffsets().setPitchOffset(tick1, _pitchShift);
             s->pitchOffsets().setPitchOffset(tick2, 0);
 
-            score()->addLayoutFlag(LAYOUT_FIX_PITCH_VELO);
+            score()->addLayoutFlags(LAYOUT_FIX_PITCH_VELO);
             }
       }
 

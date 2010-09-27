@@ -788,7 +788,7 @@ class Score : public QObject {
       const QList<StaffType*>& staffTypes() const        { return _staffTypes; }
       QList<StaffType*>& staffTypes()                    { return _staffTypes; }
       void setStaffTypeList(const QList<StaffType*>& tl) { _staffTypes = tl;   }
-      void addLayoutFlag(LayoutFlag val)                 { layoutFlags |= val; }
+      void addLayoutFlags(LayoutFlags val)               { layoutFlags |= val; }
       int symIdx() const                                 { return _symIdx; }
       void addImage(Element*);
       void updateHairpin(Hairpin*);       // add/modify hairpin to pitchOffset list

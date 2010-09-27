@@ -3250,7 +3250,6 @@ const char* stateName(ScoreState s)
 
 void MuseScore::excerptsChanged(Score* s)
       {
-printf("excerptsChanged\n");
       if (tab2) {
 //            ScoreView* v = tab2->view();
 //            if (v && v->score() == s) {

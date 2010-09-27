@@ -1066,7 +1066,7 @@ void Measure::add(Element* el)
                               m->setTimesig2(nfraction);
                               }
 #endif
-                        score()->addLayoutFlag(LAYOUT_FIX_TICKS);
+                        score()->addLayoutFlags(LAYOUT_FIX_TICKS);
                         }
                   }
                   break;
@@ -1122,7 +1122,7 @@ void Measure::add(Element* el)
 
             default:
                   printf("Measure::add(%s) not impl.\n", el->name());
-                  abort();
+                 abort();
                   break;
             }
       }

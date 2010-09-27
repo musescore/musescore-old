@@ -88,7 +88,7 @@ QSplitter* ScoreTab::viewSplitter(int n) const
       {
       TabScoreView* tsv = static_cast<TabScoreView*>(tab->tabData(n).value<void*>());
       if (tsv == 0) {
-            printf("ScoreTab::viewSplitter %d is zero\n", n);
+            // printf("ScoreTab::viewSplitter %d is zero\n", n);
             return 0;
             }
       Score* score = tsv->score;
@@ -101,10 +101,8 @@ QSplitter* ScoreTab::viewSplitter(int n) const
       int nn = stack->count();
       for (int i = 0; i < nn; ++i) {
             QSplitter* sp = static_cast<QSplitter*>(stack->widget(i));
-            if (sp->count() == 0) {
-                  printf("splitter count == 0\n");
+            if (sp->count() == 0)
                   return 0;
-                  }
             ScoreView* v = static_cast<ScoreView*>(sp->widget(0));
             if (v->score() == score)
                   return sp;
@@ -199,7 +197,6 @@ void ScoreTab::updateExcerpts()
       Score* score = v->score();
       QList<Excerpt*>* excerpts = score->excerpts();
       if (v && excerpts && !excerpts->isEmpty()) {
-printf("ScoreTab::updateExcerpts()\n");
             int n = tab2->count();
             tab2->blockSignals(true);
             for (int i = 0; i < n; ++i)
@@ -220,7 +217,6 @@ printf("ScoreTab::updateExcerpts()\n");
 
 void ScoreTab::setExcerpt(int n)
       {
-printf("ScoreTab::setExcerpt %d\n", n);
       if (n == -1)
             return;
       int idx           = tab->currentIndex();
@@ -233,7 +229,6 @@ printf("ScoreTab::setExcerpt %d\n", n);
       Score* score = tsv->score;
       if (n) {
             QList<Excerpt*>* excerpts = score->excerpts();
-printf("  excerpts(%p) %d\n", score, excerpts->size());
             if (!excerpts->isEmpty()) {
                   score = excerpts->at(n - 1)->score();
                   }
