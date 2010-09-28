@@ -1,4 +1,5 @@
 28.sep (ws)
+      - linked parts: link ties
       - fixed #7311: dragging tied notes and removing tie gives weird result
       - fixed #7295: margin between clef and first not too narrow
       - fixed #7174: linked parts are not closed when the main score is closed
