@@ -34,16 +34,17 @@
 
 void TrillSegment::draw(QPainter& p, ScoreView* v) const
       {
-      double mags = magS();
-      QRectF b1 = symbols[score()->symIdx()][trillSym].bbox(mags);
-      QRectF b2 = symbols[score()->symIdx()][trillelementSym].bbox(mags);
-      qreal w2  = symbols[score()->symIdx()][trillelementSym].width(mags);
-      int n     = lrint((pos2().x() - b1.width()) / w2);
+      double mag = magS();
+      int idx    = score()->symIdx();
+      QRectF b1  = symbols[idx][trillSym].bbox(mag);
+      QRectF b2  = symbols[idx][trillelementSym].bbox(mag);
+      qreal w2   = symbols[idx][trillelementSym].width(mag);
+//      int n      = lrint((pos2().x() - b1.width()) / w2);
+      int n      = int(floor((pos2().x() - b1.right() - spatium()*1.0) / w2));
+//      QPointF a  = symbols[idx][trillSym].attach(mag);
 
-      QPointF a = symbols[score()->symIdx()][trillSym].attach(mags);
-
-      symbols[score()->symIdx()][trillSym].draw(p, mags, -b1.x(), 0);
-      symbols[score()->symIdx()][trillelementSym].draw(p, mags,  b1.width(), b2.y() * .9, n);
+      symbols[idx][trillSym].draw(p, mag, 0, 0);
+      symbols[idx][trillelementSym].draw(p, mag,  b1.width(), b2.y() * .9, n);
 
       if (spannerSegmentType() == SEGMENT_SINGLE || spannerSegmentType() == SEGMENT_BEGIN) {
             if (trill()->accidental()) {
@@ -62,13 +63,13 @@ void TrillSegment::draw(QPainter& p, ScoreView* v) const
 void TrillSegment::layout()
       {
       QRectF rr(symbols[score()->symIdx()][trillSym].bbox(magS()));
-      QRectF r(0.0, rr.y(), pos2().x(), rr.height());
+      rr |= QRectF(0.0, rr.y(), pos2().x(), rr.height());
       if (spannerSegmentType() == SEGMENT_SINGLE || spannerSegmentType() == SEGMENT_BEGIN) {
             if (trill()->accidental()) {
-                  r |= trill()->accidental()->bbox().translated(trill()->accidental()->pos());
+                  rr |= trill()->accidental()->bbox().translated(trill()->accidental()->pos());
                   }
             }
-      setbbox(r);
+      setbbox(rr);
       }
 
 //---------------------------------------------------------
@@ -147,6 +148,17 @@ void Trill::layout()
       Element::layout();
       SLine::layout();
       double _spatium = spatium();
+
+      //
+      // special case:
+      // if end segment is first chord/rest segment in measure,
+      // shorten trill line so it ends at end of previous measure
+      //
+      Segment* seg  = static_cast<Segment*>(endElement());
+      if ((spannerSegments().size() == 1) && (seg->tick() == seg->measure()->tick())) {
+            LineSegment* ls = frontSegment();
+            ls->setPos2(ls->pos2() + QPointF(-_spatium*2.0, 0.0));
+            }
 
       if (_accidental) {
             _accidental->setMag(.6);

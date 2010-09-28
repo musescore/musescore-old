@@ -687,7 +687,7 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, Fraction sd,
 
 Fraction Score::makeGap(ChordRest* cr, const Fraction& _sd, Tuplet* tuplet)
       {
-printf("makeGap %d/%d at %d track %d\n", _sd.numerator(), _sd.denominator(), cr->tick(), cr->track());
+// printf("makeGap %d/%d at %d track %d\n", _sd.numerator(), _sd.denominator(), cr->tick(), cr->track());
       int track = cr->track();
       Measure* measure = cr->measure();
       setLayout(measure);
@@ -750,6 +750,12 @@ printf("remove %s\n", qPrintable(cr->duration().print()));
                   undoRemoveElement(cr);
                   if (seg->isEmpty())
                         undoRemoveElement(seg);
+                  else {
+                        foreach(Element* e, seg->annotations()) {
+                              if (e->track() == cr->track())
+                                    undoRemoveElement(e);
+                              }
+                        }
                   }
 
             if (sd < td) {
@@ -2395,7 +2401,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                   int staffIdx = i + dstStaffStart;
                   if (staffIdx >= nstaves())
                         break;
-                  if(!makeGap1(dst->tick(), staffIdx, Fraction::fromTicks(tickLen)))
+                  if (!makeGap1(dst->tick(), staffIdx, Fraction::fromTicks(tickLen)))
                         blackList.insert(staffIdx);
                   }
 
