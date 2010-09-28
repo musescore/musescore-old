@@ -134,6 +134,18 @@ void Score::endCmd()
 
 void Score::end()
       {
+      Score* score = parentScore() ? parentScore() : this;
+      score->end1();
+      foreach(Excerpt* e, score->_excerpts)
+            e->score()->end1();
+      }
+
+//---------------------------------------------------------
+//   end1
+//---------------------------------------------------------
+
+void Score::end1()
+      {
       if (layoutAll) {
             _updateAll  = true;
             _needLayout = true;
@@ -157,12 +169,6 @@ void Score::end()
       startLayout = 0;
       if (!noteEntryMode())
             setPadState();
-      Score* score = this;
-      if (parentScore())
-            score = this;
-      foreach (Excerpt* e, score->_excerpts) {
-            e->score()->end();
-            }
       }
 
 //---------------------------------------------------------

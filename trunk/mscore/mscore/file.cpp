@@ -1489,7 +1489,6 @@ bool Score::read(QDomElement dScore)
       if (_mscVersion < 108)
             connectSlurs();
 
-printf("version %d\n", _mscVersion);
       if (_mscVersion < 115) {
             for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
                   Staff* s = _staves[staffIdx];
@@ -1516,7 +1515,6 @@ printf("version %d\n", _mscVersion);
                         int clefId = i->second;
                         Measure* m = tick2measure(tick);
                         Segment* seg = m->getSegment(SegClef, tick);
-printf("clef %d track %d %p\n", clefId, track, seg->element(track));
                         if (seg->element(track))
                               static_cast<Clef*>(seg->element(track))->setGenerated(false);
                         else {

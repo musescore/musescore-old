@@ -447,7 +447,7 @@ SlurTie::SlurTie(const SlurTie& t)
       _slurDirection = t._slurDirection;
       _len           = t._len;
       _lineType      = t._lineType;
-      delSegments    = t.delSegments;
+      // delSegments    = t.delSegments;
       }
 
 //---------------------------------------------------------
@@ -1060,10 +1060,16 @@ void Tie::layout()
       //---------------------------------------------------------
 
       int sysIdx1      = systems->indexOf(s1);
+      if (sysIdx1 == -1) {
+            printf("system not found\n");
+            foreach(System* s, *systems)
+                  printf("   search %p in %p\n", s1, s);
+            return;
+            }
+
       int sysIdx2      = systems->indexOf(s2, sysIdx1);
       unsigned nsegs   = sysIdx2 - sysIdx1 + 1;
       unsigned onsegs  = spannerSegments().size();
-
 
       if (nsegs != onsegs) {
             if (nsegs > onsegs) {

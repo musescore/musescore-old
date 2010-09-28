@@ -524,6 +524,7 @@ class Score : public QObject {
       void startCmd();        // start undoable command
       void endCmd();          // end undoable command
       void end();             // layout & update canvas
+      void end1();
 
       void cmdRemoveTimeSig(TimeSig*);
       void cmdAddTimeSig(Measure*, int);

@@ -741,7 +741,10 @@ void Score::undoAddElement(Element* element)
       else
             ostaff = element->staff();
       if (ostaff == 0 || (element->type() != ARTICULATION
-         && element->type() != SLUR && element->type() != NOTE)) {
+         && element->type() != SLUR
+         && element->type() != TIE
+         && element->type() != NOTE)
+            ) {
             undo()->push(new AddElement(element));
             return;
             }
@@ -759,6 +762,7 @@ void Score::undoAddElement(Element* element)
                   ne = element;
             else {
                   ne = element->clone();
+                  ne->setScore(score);
                   ne->setSelected(false);
                   }
             if (element->type() == ARTICULATION) {
@@ -795,6 +799,32 @@ void Score::undoAddElement(Element* element)
                   nslur->setEndElement(c2);
                   nslur->setParent(0);
                   undo()->push(new AddElement(nslur));
+                  }
+            else if (element->type() == TIE) {
+                  Tie* tie       = static_cast<Tie*>(element);
+                  Note* n1       = tie->startNote();
+                  Note* n2       = tie->endNote();
+                  Chord* cr1     = n1->chord();
+                  Chord* cr2     = n2->chord();
+                  Segment* s1    = cr1->segment();
+                  Segment* s2    = cr2->segment();
+                  Measure* nm1   = score->tick2measure(s1->tick());
+                  Measure* nm2   = score->tick2measure(s2->tick());
+                  Segment* ns1   = nm1->findSegment(s1->segmentType(), s1->tick());
+                  Segment* ns2   = nm2->findSegment(s2->segmentType(), s2->tick());
+                  Chord* c1      = static_cast<Chord*>(ns1->element(staffIdx * VOICES + cr1->voice()));
+                  Chord* c2      = static_cast<Chord*>(ns2->element(staffIdx * VOICES + cr2->voice()));
+                  Note* nn1      = c1->findNote(n1->pitch());
+                  Note* nn2      = c2->findNote(n2->pitch());
+                  Tie* ntie      = static_cast<Tie*>(ne);
+                  QList<SpannerSegment*>& segments = ntie->spannerSegments();
+                  foreach(SpannerSegment* segment, segments)
+                              delete segment;
+                  segments.clear();
+                  ntie->setTrack(c1->track());
+                  ntie->setStartNote(nn1);
+                  ntie->setEndNote(nn2);
+                  undo()->push(new AddElement(ntie));
                   }
             else if (element->type() == NOTE) {
                   Note* note       = static_cast<Note*>(element);

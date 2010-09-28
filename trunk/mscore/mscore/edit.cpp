@@ -846,7 +846,7 @@ void ScoreView::modifyElement(Element* el)
       }
 
 //---------------------------------------------------------
-//   addTie
+//   cmdAddTie
 //---------------------------------------------------------
 
 void Score::cmdAddTie()
