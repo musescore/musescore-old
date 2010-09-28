@@ -386,7 +386,7 @@ void ChordRest::setSmall(bool val)
 
 void ChordRest::layoutArticulations()
       {
-      if (parent() == 0)
+      if (parent() == 0 || articulations.isEmpty())
             return;
       double _spatium  = spatium();
       Measure* m       = measure();
