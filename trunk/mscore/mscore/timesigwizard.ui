@@ -42,7 +42,7 @@
          <number>1</number>
         </property>
         <property name="maximum">
-         <number>32</number>
+         <number>63</number>
         </property>
         <property name="value">
          <number>4</number>
@@ -66,7 +66,11 @@
        </widget>
       </item>
       <item>
-       <widget class="Awl::DenominatorSpinBox" name="timesigN"/>
+       <widget class="Awl::DenominatorSpinBox" name="timesigN">
+        <property name="maximum">
+         <number>63</number>
+        </property>
+       </widget>
       </item>
       <item>
        <spacer>
@@ -112,7 +116,7 @@
          <number>1</number>
         </property>
         <property name="maximum">
-         <number>32</number>
+         <number>63</number>
         </property>
         <property name="value">
          <number>4</number>
@@ -136,7 +140,11 @@
        </widget>
       </item>
       <item>
-       <widget class="Awl::DenominatorSpinBox" name="pickupTimesigN"/>
+       <widget class="Awl::DenominatorSpinBox" name="pickupTimesigN">
+        <property name="maximum">
+         <number>63</number>
+        </property>
+       </widget>
       </item>
       <item>
        <spacer>
