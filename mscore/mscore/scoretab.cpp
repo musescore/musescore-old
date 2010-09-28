@@ -117,6 +117,7 @@ QSplitter* ScoreTab::viewSplitter(int n) const
 void ScoreTab::setCurrent(int n)
       {
       if (n == -1) {
+            tab2->setVisible(false);
             emit currentScoreViewChanged(0);
             return;
             }
