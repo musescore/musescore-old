@@ -1,9 +1,12 @@
+28.sep (ws)
+      - limit values in time signature wizard to 6 bit (1-63)
+        (#7315)
 25.sep (db)
       - fix #6649: Transposition when creating a score from a template
 
  ======== MuseScore 0.9.6.3 released ==============
 24.sep (la)
-      - fix #7150: Changing soundfont does not work for audio export   
+      - fix #7150: Changing soundfont does not work for audio export
 23.sep (la)
       - fix #7233: Transpose by diminished second doesn't work (0.9.6 branch regression)
       - fix #7232: D.S. after coda sign freezes playback
