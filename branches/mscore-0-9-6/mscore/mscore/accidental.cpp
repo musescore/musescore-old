@@ -54,19 +54,19 @@ Acc accList[] = {
       Acc(QT_TRANSLATE_NOOP("accidental", "[double flat]"),      -2),
       Acc(QT_TRANSLATE_NOOP("accidental", "[natural]"),           0),
 
-      Acc(QT_TRANSLATE_NOOP("accidental", "flat-slash"),          0),
+/*16*/Acc(QT_TRANSLATE_NOOP("accidental", "flat-slash"),          0),
       Acc(QT_TRANSLATE_NOOP("accidental", "flat-slash2"),         0),
       Acc(QT_TRANSLATE_NOOP("accidental", "mirrored-flat2"),      0),
       Acc(QT_TRANSLATE_NOOP("accidental", "mirrored-flat"),       0),
       Acc(QT_TRANSLATE_NOOP("accidental", "mirrored-flat-slash"), 0),
       Acc(QT_TRANSLATE_NOOP("accidental", "flat-flat-slash"),     0),
 
-      Acc(QT_TRANSLATE_NOOP("accidental", "sharp-slash"),         0),
+/*22*/Acc(QT_TRANSLATE_NOOP("accidental", "sharp-slash"),         0),
       Acc(QT_TRANSLATE_NOOP("accidental", "sharp-slash2"),        0),
       Acc(QT_TRANSLATE_NOOP("accidental", "sharp-slash3"),        0),
       Acc(QT_TRANSLATE_NOOP("accidental", "sharp-slash4"),        0),
 
-      Acc(QT_TRANSLATE_NOOP("accidental", "sharp arrow up"),      0),
+/*26*/Acc(QT_TRANSLATE_NOOP("accidental", "sharp arrow up"),      0),
       Acc(QT_TRANSLATE_NOOP("accidental", "sharp arrow down"),    0),
       Acc(QT_TRANSLATE_NOOP("accidental", "sharp arrow both"),    0),
       Acc(QT_TRANSLATE_NOOP("accidental", "flat arrow up"),       0),
@@ -149,6 +149,7 @@ int Accidental::symbol()
             case 13:           s = sharpsharpSym;        break;
             case 14:           s = flatflatSym;          break;
             case 15:           s = naturalSym;           break;
+
             case 16:           s = flatslashSym;         break;
             case 17:           s = flatslash2Sym;        break;
             case 18:           s = mirroredflat2Sym;     break;
