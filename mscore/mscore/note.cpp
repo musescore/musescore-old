@@ -861,23 +861,27 @@ void Note::endDrag()
       Staff* staff = score()->staff(staffIdx);
       int npitch;
       int tpc;
-      int nstring = _string;
+      int nString = _string;
+      int nFret   = _fret;
       if (staff->useTablature()) {
-            nstring = nLine;
+            nString = nLine;
             npitch = staff->part()->instr()->tablature()->getPitch(_string, _fret);
             tpc    = pitch2tpc(npitch, 0);
             }
       else {
-            setLine(nLine);
             int tick = chord()->tick();
             int clef = staff->clef(tick);
             int key  = staff->key(tick).accidentalType();
-            npitch   = line2pitch(_line, clef, key);
+            npitch   = line2pitch(nLine, clef, key);
             tpc      = pitch2tpc(npitch, key);
-            _fret = -1;
-            _string = -1;
+            nString  = -1;
+            nFret    = -1;
             }
-      score()->undoChangePitch(this, npitch, tpc, nLine, _fret, _string);
+      Note* n = this;
+      while (n->tieBack())
+            n = n->tieBack()->startNote();
+      for (; n; n = n->tieFor() ? n->tieFor()->endNote() : 0)
+            score()->undoChangePitch(n, npitch, tpc, nLine, nFret, nString);
       score()->select(this, SELECT_SINGLE, 0);
       }
 
