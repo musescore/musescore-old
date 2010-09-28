@@ -87,7 +87,6 @@ class Segment : public Element {
       QList<Element*> _annotations;
 
       QList<Element*> _elist;      ///< Element storage, size = staves * VOICES.
-//      QList<const QList<Lyrics*>*> _lyrics;   ///< Lyrics storage, size  = staves.
 
       void init();
       void checkEmpty() const;
