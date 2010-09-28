@@ -715,6 +715,7 @@ void Score::doLayout()
                   Element* e = segment->element(track);
                   if (e && e->isChordRest()) {
                         ChordRest* cr = static_cast<ChordRest*>(e);
+                        cr->layoutArticulations();    // DEBUG
                         if (cr->beam())
                               continue;
                         cr->layoutStem();
@@ -726,7 +727,7 @@ void Score::doLayout()
                                     if (tie)
                                           tie->layout();
                                     }
-                              c->layoutArticulations();
+                              // c->layoutArticulations();
                               }
                         }
                   else if (e && e->type() == BAR_LINE)
