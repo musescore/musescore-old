@@ -413,6 +413,7 @@ void ChordRest::layoutArticulations()
       //
 
       foreach (Articulation* a, articulations) {
+            a->layout();
             ArticulationAnchor aa = a->anchor();
             if (aa != A_CHORD && aa != A_TOP_CHORD && aa != A_BOTTOM_CHORD)
                   continue;
