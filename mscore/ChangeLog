@@ -1,4 +1,5 @@
 28.sep (ws)
+      - fixed #7295: margin between clef and first not too narrow
       - fixed #7174: linked parts are not closed when the main score is closed
 27.sep (ws)
       - fixed #7294: chord text of staff != 1 shown in wrong position

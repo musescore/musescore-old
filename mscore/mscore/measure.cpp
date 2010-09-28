@@ -2990,14 +2990,14 @@ void Measure::layoutX(double stretch)
                                     }
                               else {
                                     int pt = s->prev()->subtype();
-                                    if (pt == SegKeySig || pt == SegTimeSig) {
+                                    if (! (pt & (SegChordRest | SegGrace))) {
+                                          // distance to first chord/rest in measure
                                           minDistance = clefKeyRightMargin;
                                           }
-                                    else {
+                                    else
                                           minDistance = score()->styleS(ST_minNoteDistance).val() * _spatium;
-                                          if (s->subtype() == SegGrace)
-                                                minDistance *= score()->styleD(ST_graceNoteMag);
-                                          }
+                                    if (s->subtype() == SegGrace)
+                                          minDistance *= score()->styleD(ST_graceNoteMag);
                                     }
                               cr->layout();
                               space.max(cr->space());

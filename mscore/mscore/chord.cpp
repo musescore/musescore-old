@@ -1435,7 +1435,8 @@ void Chord::layout()
             // know the y position of the next staves
             }
 
-      extraSpace    = -lx + _extraLeadingSpace.val() * _spatium;
+//      extraSpace    = -lx + _extraLeadingSpace.val() * _spatium;
+      extraSpace    = -lx;
       double mirror = 0.0;
       double hw     = 0.0;
 
