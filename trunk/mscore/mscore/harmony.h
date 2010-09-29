@@ -273,6 +273,7 @@ class Harmony : public Text {
       virtual void spatiumChanged(double oldValue, double newValue);
       virtual QLineF dragAnchor() const;
       void setHarmony(const QString& s);
+      virtual QPainterPath shape() const;
       };
 
 #endif
