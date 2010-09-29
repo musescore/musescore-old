@@ -222,20 +222,26 @@ void Score::cmdAddSpanner(Spanner* spanner, const QPointF& pos, const QPointF& /
       if (spanner->type() == TRILL) {
             Element* e = segment->element(staffIdx * VOICES);
             if (e && e->type() == CHORD) {
-                  printf("add trill line to chord\n");
-                  Segment* s = segment->next1(SegChordRest);
+                  Chord* chord = static_cast<Chord*>(e);
+                  Fraction l = chord->duration();
+                  if (chord->notes().size() > 1) {
+                        // trill do not work for chords
+                        }
+                  Note* note = chord->upNote();
+                  while (note->tieFor()) {
+                        note = note->tieFor()->endNote();
+                        l += note->chord()->duration();
+                        }
+                  Segment* s = note->chord()->segment();
+                  s = s->next1(SegChordRest);
                   while (s) {
                         Element* e = s->element(staffIdx * VOICES);
-                        if (e) {
-                              // TODO: handle tied notes
+                        if (e)
                               break;
-                              }
                         s = s->next1(SegChordRest);
                         }
                   if (s)
                         spanner->setEndElement(s);
-                  Chord* chord = static_cast<Chord*>(e);
-                  Fraction l = chord->duration();
                   Fraction d(1,32);
                   Fraction e = l / d;
                   int n = e.numerator() / e.denominator();

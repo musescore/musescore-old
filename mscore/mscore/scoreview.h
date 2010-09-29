@@ -350,6 +350,7 @@ class ScoreView : public QWidget {
       void fotoDragDrop(QMouseEvent*);
       const QRectF& getGrip(int n) const { return grip[n]; }
       int gripCount() const { return grips; }              // number of used grips
+      void changeEditElement(Element*);
       };
 
 //---------------------------------------------------------
