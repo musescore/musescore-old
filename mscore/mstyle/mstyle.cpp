@@ -62,7 +62,7 @@ MStyle::MStyle()
 
       _animations    = new Animations(this);
       _transitions   = new Transitions(this);
-      _windowManager = new WindowManager(this);
+//      _windowManager = new WindowManager(this);
       _frameShadowFactory = new FrameShadowFactory(this);
       configurationChanged();
       }
@@ -637,7 +637,7 @@ void MStyle::polish(QWidget* widget)
       // register widget to animations
       animations().registerWidget( widget );
       transitions().registerWidget( widget );
-      windowManager().registerWidget(widget);
+//      windowManager().registerWidget(widget);
       frameShadowFactory().registerWidget(widget, _helper);
 
       // scroll areas
@@ -829,7 +829,7 @@ void MStyle::unpolish(QWidget* widget)
       // register widget to animations
       animations().unregisterWidget( widget );
       transitions().unregisterWidget( widget );
-      windowManager().unregisterWidget( widget );
+//      windowManager().unregisterWidget( widget );
       frameShadowFactory().unregisterWidget( widget );
 
       // event filters
