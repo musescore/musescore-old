@@ -1,3 +1,13 @@
+29.sep (ws)
+      - another attempt to fix #7227
+      - make it easier to parallel install musescore-0.9.6.x and trunk:
+         - changed install path from mscore-0.9 to mscore-1.0
+         - changed "organization name" from MusE to MuseScore
+         - changed "organization domain" from muse.org to musescore.org
+         - changed "application name" from MuseScore to MuseScore1; this changes the
+           shared files path
+         - mscore-0.9.6 can be started parallel to trunk version to make
+           compatibility testing easier
 28.sep (ws)
       - linked parts: link ties
       - fixed #7311: dragging tied notes and removing tie gives weird result

@@ -47,6 +47,8 @@ class BSymbol : public Element {
 
       const QList<Element*>& leafs() const { return _leafs; }
       QList<Element*>& leafs()             { return _leafs; }
+      virtual QPointF canvasPos() const;
+      Segment* segment() const             { return (Segment*)parent(); }
       };
 
 #endif

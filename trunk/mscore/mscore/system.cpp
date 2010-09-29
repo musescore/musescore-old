@@ -839,13 +839,13 @@ void System::scanElements(void* data, void (*func)(void*, Element*))
 //   staffY
 //---------------------------------------------------------
 
-double System::staffY(int idx) const
+double System::staffY(int staffIdx) const
       {
-      if (_staves.size() <= idx) {
+      if (_staves.size() <= staffIdx) {
             printf("staffY: staves %d <= staff %d, vbox %d\n",
-               _staves.size(), idx, _vbox);
+               _staves.size(), staffIdx, _vbox);
             return canvasPos().y();
             }
-      return _staves[idx]->y() + canvasPos().y();
+      return _staves[staffIdx]->y() + canvasPos().y();
       }
 

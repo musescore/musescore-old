@@ -36,15 +36,17 @@ void TrillSegment::draw(QPainter& p, ScoreView* v) const
       {
       double mag = magS();
       int idx    = score()->symIdx();
-      QRectF b1  = symbols[idx][trillSym].bbox(mag);
-      QRectF b2  = symbols[idx][trillelementSym].bbox(mag);
+      QRectF b1(symbols[idx][trillSym].bbox(mag));
+      QRectF b2(symbols[idx][trillelementSym].bbox(mag));
       qreal w2   = symbols[idx][trillelementSym].width(mag);
-//      int n      = lrint((pos2().x() - b1.width()) / w2);
-      int n      = int(floor((pos2().x() - b1.right() - spatium()*1.0) / w2));
-//      QPointF a  = symbols[idx][trillSym].attach(mag);
 
-      symbols[idx][trillSym].draw(p, mag, 0, 0);
-      symbols[idx][trillelementSym].draw(p, mag,  b1.width(), b2.y() * .9, n);
+      qreal x0   = -b1.x();
+      qreal x1   = x0 + b1.width();
+      qreal x2   = pos2().x();
+      int n      = int(floor((x2-x1) / w2));
+
+      symbols[idx][trillSym].draw(p, mag, x0, 0.0);
+      symbols[idx][trillelementSym].draw(p, mag,  x1, b2.y() * .9, n);
 
       if (spannerSegmentType() == SEGMENT_SINGLE || spannerSegmentType() == SEGMENT_BEGIN) {
             if (trill()->accidental()) {
@@ -62,7 +64,10 @@ void TrillSegment::draw(QPainter& p, ScoreView* v) const
 
 void TrillSegment::layout()
       {
-      QRectF rr(symbols[score()->symIdx()][trillSym].bbox(magS()));
+      double mag = magS();
+      int idx    = score()->symIdx();
+      QRectF b1(symbols[idx][trillSym].bbox(mag));
+      QRectF rr(b1.translated(-b1.x(), 0.0));
       rr |= QRectF(0.0, rr.y(), pos2().x(), rr.height());
       if (spannerSegmentType() == SEGMENT_SINGLE || spannerSegmentType() == SEGMENT_BEGIN) {
             if (trill()->accidental()) {
@@ -156,8 +161,12 @@ void Trill::layout()
       //
       Segment* seg  = static_cast<Segment*>(endElement());
       if ((spannerSegments().size() == 1) && (seg->tick() == seg->measure()->tick())) {
-            LineSegment* ls = frontSegment();
-            ls->setPos2(ls->pos2() + QPointF(-_spatium*2.0, 0.0));
+            TrillSegment* ls = static_cast<TrillSegment*>(frontSegment());
+            qreal x1 = seg->canvasPos().x();
+            qreal x2 = seg->prev1() ? seg->prev1()->canvasPos().x() : x1;
+            qreal dx = x1 - x2 + _spatium * .3;
+            ls->setPos2(ls->pos2() + QPointF(-dx, 0.0));
+            ls->layout();
             }
 
       if (_accidental) {
