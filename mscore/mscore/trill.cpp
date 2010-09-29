@@ -160,7 +160,7 @@ void Trill::layout()
       // shorten trill line so it ends at end of previous measure
       //
       Segment* seg  = static_cast<Segment*>(endElement());
-      if ((spannerSegments().size() == 1) && (seg->tick() == seg->measure()->tick())) {
+      if (seg && (spannerSegments().size() == 1) && (seg->tick() == seg->measure()->tick())) {
             TrillSegment* ls = static_cast<TrillSegment*>(frontSegment());
             qreal x1 = seg->canvasPos().x();
             qreal x2 = seg->prev1() ? seg->prev1()->canvasPos().x() : x1;
