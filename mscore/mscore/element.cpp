@@ -75,6 +75,7 @@
 #include "bend.h"
 #include "tremolobar.h"
 #include "chordline.h"
+#include "undo.h"
 
 extern bool debugMode;
 extern bool showInvisible;
@@ -296,6 +297,15 @@ void Element::adjustReadPos()
             setUserOff(_readPos - _pos);
             _readPos = QPointF();
             }
+      }
+
+//---------------------------------------------------------
+//   toDefault
+//---------------------------------------------------------
+
+void Element::toDefault()
+      {
+      score()->undo()->push(new ChangeUserOffset(this, QPointF()));
       }
 
 //---------------------------------------------------------

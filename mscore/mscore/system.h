@@ -124,8 +124,8 @@ class System : public Element {
       QRectF bboxStaff(int staff) const      { return _staves[staff]->bbox(); }
       QList<SysStaff*>* staves()             { return &_staves;   }
       const QList<SysStaff*>* staves() const { return &_staves;   }
-      double staffY(int idx) const;
-      SysStaff* staff(int idx) const         { return _staves[idx]; }
+      double staffY(int staffIdx) const;
+      SysStaff* staff(int staffIdx) const    { return _staves[staffIdx]; }
 
       Spatium distanceUp(int idx) const      { return _staves[idx]->distanceUp(); }
       Spatium distanceDown(int idx) const    { return _staves[idx]->distanceDown(); }

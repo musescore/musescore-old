@@ -26,7 +26,6 @@
 #include "measure.h"
 #include "page.h"
 #include "score.h"
-// #include "scoreview.h"
 #include "image.h"
 
 //---------------------------------------------------------
@@ -115,12 +114,14 @@ void BSymbol::layout()
       {
       foreach(Element* e, _leafs)
             e->layout();
+#if 0
       if (parent() && (parent()->type() == SEGMENT)) {
             Segment* s = static_cast<Segment*>(parent());
             double y = s ? s->measure()->system()->staff(track() / VOICES)->y() : 0.0;
             double x = s ? s->pos().x() : 0.0;
             setPos(ipos() + QPointF(x, y));
             }
+#endif
       }
 
 //---------------------------------------------------------
@@ -330,6 +331,25 @@ void Symbol::propertyAction(ScoreView* viewer, const QString& s)
             }
       else
             Element::propertyAction(viewer, s);
+      }
+
+//---------------------------------------------------------
+//   canvasPos
+//---------------------------------------------------------
+
+QPointF BSymbol::canvasPos() const
+      {
+      if (parent() && (parent()->type() == SEGMENT)) {
+            double xp = x();
+            for (Element* e = parent(); e; e = e->parent())
+                  xp += e->x();
+            double yp = y();
+            Segment* s = static_cast<Segment*>(parent());
+            yp += s->measure()->system()->staffY(staffIdx());
+            return QPointF(xp, yp);
+            }
+      else
+            return Element::canvasPos();
       }
 
 

@@ -153,7 +153,7 @@ static QString getSharePath()
       return dir.absolutePath() + "/";
 #else
 #ifdef Q_WS_MAC
-	  QDir dir(QCoreApplication::applicationDirPath() + QString("/../Resources"));
+      QDir dir(QCoreApplication::applicationDirPath() + QString("/../Resources"));
       return dir.absolutePath() + "/";
 #else
       return QString( INSTPREFIX "/share/" INSTALL_NAME);
@@ -1821,9 +1821,9 @@ int main(int argc, char* av[])
 #endif
 
 #ifdef Q_WS_MAC
-      MuseScoreApplication* app = new MuseScoreApplication("mscore", argc, av);
+      MuseScoreApplication* app = new MuseScoreApplication("mscore1", argc, av);
 #else
-      QtSingleApplication* app = new QtSingleApplication("mscore", argc, av);
+      QtSingleApplication* app = new QtSingleApplication("mscore1", argc, av);
 #endif
       QApplication::setStyle(new MStyle);
 
@@ -1905,9 +1905,9 @@ int main(int argc, char* av[])
 
       QSettings::setDefaultFormat(QSettings::IniFormat);
 
-      QCoreApplication::setOrganizationName("MusE");
-      QCoreApplication::setOrganizationDomain("muse.org");
-      QCoreApplication::setApplicationName("MuseScore");
+      QCoreApplication::setOrganizationName("MuseScore");
+      QCoreApplication::setOrganizationDomain("musescore.org");
+      QCoreApplication::setApplicationName("MuseScore1");
 
       if (!converterMode) {
             if (!argv.isEmpty()) {

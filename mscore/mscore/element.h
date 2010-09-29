@@ -337,7 +337,7 @@ class Element {
       virtual QList<Prop> properties(Xml&, const Element* proto = 0) const;
       virtual void scanElements(void* data, void (*func)(void*, Element*)) { func(data, this); }
 
-      virtual void toDefault() {  setUserOff(QPointF()); }
+      virtual void toDefault();
 
       double mag() const                        { return _mag;   }
       double magS() const;
