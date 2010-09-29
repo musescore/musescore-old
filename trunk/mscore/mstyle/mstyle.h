@@ -29,7 +29,7 @@ class FrameShadowFactory;
 class WidgetExplorer;
 class Animations;
 class Transitions;
-class WindowManager;
+//class WindowManager;
 
 //---------------------------------------------------------
 //   MStyle
@@ -294,7 +294,7 @@ class MStyle : public QCommonStyle {
       StyleHelper _helper;
       Animations* _animations;
       Transitions* _transitions;
-      WindowManager* _windowManager;
+//      WindowManager* _windowManager;
       FrameShadowFactory* _frameShadowFactory;
 
       //! widget explorer
@@ -620,7 +620,7 @@ class MStyle : public QCommonStyle {
 
       Animations& animations() const                 { return *_animations; }
       Transitions& transitions() const               { return *_transitions; }
-      WindowManager& windowManager() const           { return *_windowManager; }
+//      WindowManager& windowManager() const           { return *_windowManager; }
       FrameShadowFactory& frameShadowFactory() const { return *_frameShadowFactory; }
 
    public slots:
