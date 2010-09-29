@@ -1,4 +1,5 @@
 29.sep (ws)
+      - fix #7303
       - another attempt to fix #7227
       - make it easier to parallel install musescore-0.9.6.x and trunk:
          - changed install path from mscore-0.9 to mscore-1.0

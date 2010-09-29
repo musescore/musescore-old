@@ -7,10 +7,10 @@ set (CMAKE_SYSTEM_NAME "Windows")
 set (CROSS /home/ws/mingw)
 set (CROSSQT ${CROSS}/Qt/2010.05-rc1/qt)
 
-set (CMAKE_C_COMPILER     ${CROSS}/bin/i586-mingw32msvc-gcc)
-set (CMAKE_CXX_COMPILER   ${CROSS}/bin/i586-mingw32msvc-g++)
-set (CMAKE_STRIP          ${CROSS}/bin/i586-mingw32msvc-strip)
-set (CMAKE_FIND_ROOT_PATH ${CROSS}/i586-mingw32msvc)
+set (CMAKE_C_COMPILER     ${CROSS}/bin/amd64-mingw32msvc-gcc)
+set (CMAKE_CXX_COMPILER   ${CROSS}/bin/amd64-mingw32msvc-gcc)
+set (CMAKE_STRIP          ${CROSS}/bin/amd64-mingw32msvc-strip)
+set (CMAKE_FIND_ROOT_PATH ${CROSS}/amd64-mingw32msvc)
 
 # adjust the default behaviour of the FIND_XXX() commands:
 # search headers and libraries in the target environment, search
