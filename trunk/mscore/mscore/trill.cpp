@@ -36,25 +36,33 @@ void TrillSegment::draw(QPainter& p, ScoreView* v) const
       {
       double mag = magS();
       int idx    = score()->symIdx();
-      QRectF b1(symbols[idx][trillSym].bbox(mag));
-      QRectF b2(symbols[idx][trillelementSym].bbox(mag));
       qreal w2   = symbols[idx][trillelementSym].width(mag);
-
-      qreal x0   = -b1.x();
-      qreal x1   = x0 + b1.width();
-      qreal x2   = pos2().x();
-      int n      = int(floor((x2-x1) / w2));
-
-      symbols[idx][trillSym].draw(p, mag, x0, 0.0);
-      symbols[idx][trillelementSym].draw(p, mag,  x1, b2.y() * .9, n);
+      QRectF b2(symbols[idx][trillelementSym].bbox(mag));
 
       if (spannerSegmentType() == SEGMENT_SINGLE || spannerSegmentType() == SEGMENT_BEGIN) {
+            QRectF b1(symbols[idx][trillSym].bbox(mag));
+            QRectF b2(symbols[idx][trillelementSym].bbox(mag));
+
+            qreal x0   = -b1.x();
+            qreal x1   = x0 + b1.width();
+            qreal x2   = pos2().x();
+            int n      = int(floor((x2-x1) / w2));
+
+            symbols[idx][trillSym].draw(p, mag, x0, 0.0);
+            symbols[idx][trillelementSym].draw(p, mag,  x1, b2.y() * .9, n);
+
             if (trill()->accidental()) {
                   p.save();
                   p.translate(trill()->accidental()->canvasPos());
                   trill()->accidental()->draw(p, v);
                   p.restore();
                   }
+            }
+      else {
+            qreal x1 = 0.0;
+            qreal x2 = pos2().x();
+            int n = int(floor((x2-x1) / w2));
+            symbols[idx][trillelementSym].draw(p, mag,  x1, b2.y() * .9, n);
             }
       }
 
@@ -154,6 +162,7 @@ void Trill::layout()
       SLine::layout();
       double _spatium = spatium();
 
+#if 0
       //
       // special case:
       // if end segment is first chord/rest segment in measure,
@@ -161,13 +170,18 @@ void Trill::layout()
       //
       Segment* seg  = static_cast<Segment*>(endElement());
       if (seg && (spannerSegments().size() == 1) && (seg->tick() == seg->measure()->tick())) {
-            TrillSegment* ls = static_cast<TrillSegment*>(frontSegment());
             qreal x1 = seg->canvasPos().x();
-            qreal x2 = seg->prev1() ? seg->prev1()->canvasPos().x() : x1;
-            qreal dx = x1 - x2 + _spatium * .3;
-            ls->setPos2(ls->pos2() + QPointF(-dx, 0.0));
-            ls->layout();
+            Measure* m = seg->measure()->prevMeasure();
+            if (m) {
+                  Segment* s2 = m->last();
+                  qreal x2 = s2->canvasPos().x();
+                  qreal dx = x1 - x2 + _spatium * .3;
+                  TrillSegment* ls = static_cast<TrillSegment*>(frontSegment());
+                  ls->setPos2(ls->pos2() + QPointF(-dx, 0.0));
+                  ls->layout();
+                  }
             }
+#endif
 
       if (_accidental) {
             _accidental->setMag(.6);
