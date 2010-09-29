@@ -107,20 +107,38 @@ ChordRest::ChordRest(Score* s)
 ChordRest::ChordRest(const ChordRest& cr)
    : DurationElement(cr)
       {
-      _durationType       = cr._durationType;
-      _beam               = 0;
-      _up                 = cr._up;
-      _staffMove          = cr._staffMove;
-      _small              = cr._small;
-      _beamMode           = cr._beamMode;
-      _space              = cr._space;
+      _durationType = cr._durationType;
+      _staffMove    = cr._staffMove;
 
-      foreach(Articulation* a, cr.articulations) {            // make deep copy
+      foreach(Articulation* a, cr.articulations) {    // make deep copy
             Articulation* na = new Articulation(*a);
             na->setParent(this);
             na->setTrack(track());
             articulations.append(na);
             }
+
+      _beam               = 0;
+      _beamMode           = cr._beamMode;
+      _up                 = cr._up;
+      _small              = cr._small;
+      _extraLeadingSpace  = cr.extraLeadingSpace();
+      _extraTrailingSpace = cr.extraTrailingSpace();
+      _space              = cr._space;
+
+      foreach(Lyrics* l, cr._lyricsList)        // make deep copy
+            _lyricsList.append(new Lyrics(*l));
+      }
+
+//---------------------------------------------------------
+//   ChordRest
+//---------------------------------------------------------
+
+ChordRest::~ChordRest()
+      {
+      foreach(Articulation* a,  articulations)
+            delete a;
+      foreach(Lyrics* l, _lyricsList)
+            delete l;
       }
 
 //---------------------------------------------------------
@@ -139,18 +157,6 @@ void ChordRest::scanElements(void* data, void (*func)(void*, Element*))
             if (l)
                   l->scanElements(data, func);
             }
-      }
-
-//---------------------------------------------------------
-//   ChordRest
-//---------------------------------------------------------
-
-ChordRest::~ChordRest()
-      {
-      foreach(Lyrics* l, _lyricsList)
-            delete l;
-      foreach(Articulation* a,  articulations)
-            delete a;
       }
 
 //---------------------------------------------------------
