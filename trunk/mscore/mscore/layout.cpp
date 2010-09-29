@@ -350,7 +350,7 @@ void Score::layoutChords1(Segment* segment, int staffIdx)
 
       foreach(const AcEl e, aclist) {
             Note* note = e.note;
-            double x    = e.x;
+            double x   = e.x;
             if (moveLeft) {
                   Chord* chord = note->chord();
                   if (((note->mirror() && chord->up()) || (!note->mirror() && !chord->up())))

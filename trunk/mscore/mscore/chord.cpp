@@ -1335,7 +1335,6 @@ void Chord::layout()
       if (_notes.empty())
             return;
 
-      double extraSpace, minSpace;
       double _spatium  = spatium();
 
       foreach(const LedgerLine* l, _ledgerLines)
@@ -1382,7 +1381,6 @@ void Chord::layout()
 
       foreach(Note* note, _notes) {
             note->layout();
-
             double x = 0.0;
 
             bool stemUp = up();
@@ -1399,7 +1397,7 @@ void Chord::layout()
 
             Accidental* accidental = note->accidental();
             if (accidental)
-                  x = (accidental->x() + accidental->bbox().x()) * mag();
+                  x = accidental->x() + note->x();
             if (x < lx)
                   lx = x;
             }
@@ -1420,36 +1418,42 @@ void Chord::layout()
             l->layout();
 
       renderPlayback();
+      double lll = -lx;
 
       if (_arpeggio) {
             double headHeight = upnote->headHeight();
             _arpeggio->layout();
-            lx -= _arpeggio->width() + _spatium * .5;
+            lll += _arpeggio->width() + _spatium * .5;
             double y = upNote()->pos().y() - headHeight * .5;
             double h = downNote()->pos().y() - y;
             _arpeggio->setHeight(h);
-            _arpeggio->setPos(lx, y);
+            _arpeggio->setPos(-lll, y);
 
             // handle the special case of _arpeggio->span() > 1
             // in layoutArpeggio2() after page layout has done so we
             // know the y position of the next staves
             }
 
-//      extraSpace    = -lx + _extraLeadingSpace.val() * _spatium;
-      extraSpace    = -lx;
-      double mirror = 0.0;
-      double hw     = 0.0;
-
       if (_glissando)
-            extraSpace += _spatium * .5;
+            lll += _spatium * .5;
 
-      _dotPosX = 0.0;
+      _dotPosX   = 0.0;
+      double rrr = 0.0;
       foreach(const Note* note, _notes) {
             double lhw = note->headWidth();
-            if (note->mirror() && up() && (mirror < lhw))  // note head on the right side of stem
-                  mirror = lhw;
-            else if (lhw > hw)
-                  hw = lhw;
+            double rr = 0.0;
+            if (note->mirror()) {
+                  if (up())
+                        rr = lhw * 2.0;
+                  else {
+                        if (lhw > lll)
+                              lll = lhw;
+                        }
+                  }
+            else
+                  rr = lhw;
+            if (rr > rrr)
+                  rrr = rr;
             double xx = note->pos().x() + headWidth;
             if (xx > _dotPosX)
                   _dotPosX = xx;
@@ -1458,15 +1462,15 @@ void Chord::layout()
       if (dots())
             rs += point(score()->styleS(ST_dotNoteDistance)) + dots() * point(score()->styleS(ST_dotDotDistance));
 
-      // minSpace = mirror + hw + _extraTrailingSpace.val() * _spatium;
-      minSpace = rs + _extraTrailingSpace.val() * _spatium;
+      rrr += _extraTrailingSpace.val() * _spatium;
 
       if (up() && _hook)
-            minSpace += _hook->width();
-      extraSpace += point(_extraLeadingSpace);
+            rrr += _hook->width();
+      lll += _extraLeadingSpace.val() * _spatium;
 
-      _space.setLw(extraSpace);
-      _space.setRw(minSpace);
+      _space.setLw(lll);
+      _space.setRw(rrr);
+
       foreach(Element* e, _el) {
             e->layout();
             if (e->type() == CHORDLINE) {
