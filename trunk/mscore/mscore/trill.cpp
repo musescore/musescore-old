@@ -162,16 +162,20 @@ void Trill::layout()
       SLine::layout();
       double _spatium = spatium();
 
-#if 0
       //
       // special case:
       // if end segment is first chord/rest segment in measure,
       // shorten trill line so it ends at end of previous measure
       //
-      Segment* seg  = static_cast<Segment*>(endElement());
-      if (seg && (spannerSegments().size() == 1) && (seg->tick() == seg->measure()->tick())) {
-            qreal x1 = seg->canvasPos().x();
-            Measure* m = seg->measure()->prevMeasure();
+      Segment* seg1  = static_cast<Segment*>(startElement());
+      Segment* seg2  = static_cast<Segment*>(endElement());
+      if (seg2
+         && (seg1->system() == seg2->system())
+         && (spannerSegments().size() == 1)
+         && (seg2->tick() == seg2->measure()->tick())
+         ) {
+            qreal x1   = seg2->canvasPos().x();
+            Measure* m = seg2->measure()->prevMeasure();
             if (m) {
                   Segment* s2 = m->last();
                   qreal x2 = s2->canvasPos().x();
@@ -181,7 +185,6 @@ void Trill::layout()
                   ls->layout();
                   }
             }
-#endif
 
       if (_accidental) {
             _accidental->setMag(.6);

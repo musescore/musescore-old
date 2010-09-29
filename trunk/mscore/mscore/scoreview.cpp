@@ -3856,3 +3856,13 @@ void ScoreView::cloneElement(Element* e)
       drag->start(Qt::CopyAction);
       }
 
+//---------------------------------------------------------
+//   changeEditElement
+//---------------------------------------------------------
+
+void ScoreView::changeEditElement(Element* e)
+      {
+      int grip = curGrip;
+      endEdit();
+      startEdit(e, grip);
+      }

@@ -202,8 +202,9 @@ bool LineSegment::edit(ScoreView* sv, int curGrip, int key, Qt::KeyboardModifier
             nls = l->frontSegment();
       else if (st == SEGMENT_END)
             nls = l->backSegment();
-//TODO      if (nls && (nls != this))
-//??            sv->changeEditElement(nls);
+
+      if (nls && (nls != this))
+            sv->changeEditElement(nls);
 
       if (bspDirty)
             _score->rebuildBspTree();
