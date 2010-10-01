@@ -598,7 +598,7 @@ void Score::layoutStage3()
 void Score::doLayout()
       {
       _symIdx = 0;
-      if (_style[ST_MusicalSymbolFont].toString() == "Gonville")
+      if (_style.valueSt(ST_MusicalSymbolFont) == "Gonville")
             _symIdx = 1;
 
       initSymbols(_symIdx);

@@ -20,6 +20,7 @@
 #ifndef __TEXTLINE_H__
 #define __TEXTLINE_H__
 
+#include "globals.h"
 #include "line.h"
 #include "style.h"
 #include "ui_lineproperties.h"
@@ -112,8 +113,8 @@ class TextLine : public SLine {
       void setBeginHookType(HookType val)     { _beginHookType = val;         }
       void setEndHookType(HookType val)       { _endHookType = val;           }
 
-      void setBeginText(const QString& s, int textStyle = TEXT_STYLE_TEXTLINE);
-      void setContinueText(const QString& s, int textStyle = TEXT_STYLE_TEXTLINE);
+      void setBeginText(const QString& s, TextStyleType textStyle = TEXT_STYLE_TEXTLINE);
+      void setContinueText(const QString& s, TextStyleType textStyle = TEXT_STYLE_TEXTLINE);
       TextC* beginText() const                { return _beginText;            }
       void setBeginText(TextC* v);
       TextC* continueText() const             { return _continueText;         }

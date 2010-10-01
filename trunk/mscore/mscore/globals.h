@@ -306,6 +306,52 @@ enum ClefType {
       CLEF_MAX
       };
 
+//---------------------------------------------------------
+//   TextStyleType
+//---------------------------------------------------------
+
+enum TextStyleType {
+      TEXT_STYLE_INVALID = -1,
+//      TEXT_STYLE_SYMBOL1 = 0,
+//      TEXT_STYLE_SYMBOL3,
+      TEXT_STYLE_TITLE = 0,
+      TEXT_STYLE_SUBTITLE,
+      TEXT_STYLE_COMPOSER,
+      TEXT_STYLE_POET,
+      TEXT_STYLE_LYRIC1,
+      TEXT_STYLE_LYRIC2,
+      TEXT_STYLE_FINGERING,
+      TEXT_STYLE_INSTRUMENT_LONG,
+      TEXT_STYLE_INSTRUMENT_SHORT,
+      TEXT_STYLE_INSTRUMENT_EXCERPT,
+      TEXT_STYLE_DYNAMICS,
+      TEXT_STYLE_TECHNIK,
+      TEXT_STYLE_TEMPO,
+      TEXT_STYLE_METRONOME,
+      TEXT_STYLE_COPYRIGHT,
+      TEXT_STYLE_MEASURE_NUMBER,
+      TEXT_STYLE_PAGE_NUMBER_ODD,
+      TEXT_STYLE_PAGE_NUMBER_EVEN,
+
+      TEXT_STYLE_TRANSLATOR,
+      TEXT_STYLE_TUPLET,
+      TEXT_STYLE_SYSTEM,
+      TEXT_STYLE_STAFF,
+      TEXT_STYLE_HARMONY,
+      TEXT_STYLE_REHEARSAL_MARK,
+      TEXT_STYLE_REPEAT,
+      TEXT_STYLE_VOLTA,
+      TEXT_STYLE_FRAME,
+      TEXT_STYLE_TEXTLINE,
+      TEXT_STYLE_GLISSANDO,
+      TEXT_STYLE_STRING_NUMBER,
+      TEXT_STYLE_OTTAVA,
+      TEXT_STYLE_BENCH,
+      TEXT_STYLE_HEADER,
+      TEXT_STYLE_FOOTER,
+      TEXT_STYLES
+      };
+
 extern const char* stateName(ScoreState);
 
 static const int VOICES = 4;

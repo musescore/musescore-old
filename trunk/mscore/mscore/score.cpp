@@ -331,9 +331,6 @@ Score::Score(const Style& s)
       _style          = s;
       _staffTypes     = ::staffTypes;     // init with buildin types
       _swingRatio     = 0.0;
-      // deep copy of defaultTextStyles:
-      for (int i = 0; i < TEXT_STYLES; ++i)
-            _textStyles.append(new TextStyle(defaultTextStyles[i]));
 
       _mscVersion     = MSCVERSION;
       _created        = false;
@@ -397,9 +394,6 @@ Score::Score(Score* parent)
       _style          = parent->style();
       _staffTypes     = ::staffTypes;     // init with buildin types
       _swingRatio     = 0.0;
-      // deep copy of defaultTextStyles:
-      for (int i = 0; i < TEXT_STYLES; ++i)
-            _textStyles.append(new TextStyle(defaultTextStyles[i]));
 
       _mscVersion     = MSCVERSION;
       _created        = false;
@@ -455,9 +449,6 @@ Score::~Score()
       delete _tempomap;
       delete _sigmap;
       delete _repeatList;
-
-      foreach(TextStyle* ts, _textStyles)
-            delete ts;
       }
 
 //---------------------------------------------------------
@@ -521,7 +512,7 @@ bool Score::read(QString name)
                   QFile f(preferences.importStyleFile);
                   // silently ignore style file on error
                   if (f.open(QIODevice::ReadOnly))
-                        loadStyle(&f);
+                        _style.load(&f);
                   }
 
             if (csl == "xml") {
@@ -653,10 +644,7 @@ void Score::write(Xml& xml, bool /*autosave*/)
       xml.curTrack = -1;
 
       _style.save(xml, true);      // save only differences to buildin style
-      for (int i = 0; i < TEXT_STYLES; ++i) {
-            if (*_textStyles[i] != defaultTextStyleArray[i])
-                  _textStyles[i]->write(xml);
-            }
+
       int idx = 0;
       foreach(StaffType* st, _staffTypes) {
             if (st->modified())
@@ -1374,30 +1362,6 @@ bool Score::isSavable() const
       {
       // TODO: check if file can be created if it does not exist
       return info.isWritable() || !info.exists();
-      }
-
-//---------------------------------------------------------
-//   setTextStyles
-//---------------------------------------------------------
-
-void Score::setTextStyles(const QVector<TextStyle*>& s)
-      {
-      foreach(TextStyle* ts, _textStyles)
-            delete ts;
-      _textStyles.clear();
-      foreach(TextStyle* ts, s)
-            _textStyles.append(new TextStyle(*ts));
-      }
-
-//---------------------------------------------------------
-//   swapTextStyles
-//---------------------------------------------------------
-
-QVector<TextStyle*> Score::swapTextStyles(QVector<TextStyle*> s)
-      {
-      QVector<TextStyle*> tmp = _textStyles;
-      _textStyles = s;
-      return tmp;
       }
 
 //---------------------------------------------------------
@@ -2121,40 +2085,9 @@ int Score::utime2utick(double utime)
       return repeatList()->utime2utick(utime);
       }
 
-StyleVal Score::style(StyleIdx idx) const
-      {
-      return _style[idx];
-      }
-
-Spatium Score::styleS(StyleIdx idx) const
-      {
-      return _style[idx].toSpatium();
-      }
-
-QString Score::styleSt(StyleIdx idx) const
-      {
-      return _style[idx].toString();
-      }
-
-bool Score::styleB(StyleIdx idx) const
-      {
-      return _style[idx].toBool();
-      }
-
-double Score::styleD(StyleIdx idx) const
-      {
-      return _style[idx].toDouble();
-      }
-
-int Score::styleI(StyleIdx idx) const
-      {
-      return _style[idx].toInt();
-      }
-
-void Score::setStyle(StyleIdx idx, const StyleVal& v)
-      {
-      _style[idx] = v;
-      }
+//---------------------------------------------------------
+//   inputPos
+//---------------------------------------------------------
 
 int Score::inputPos() const
       {

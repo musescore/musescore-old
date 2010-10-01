@@ -222,21 +222,21 @@ QString TextBase::getHtml() const
 //   writeProperties
 //---------------------------------------------------------
 
-void TextBase::writeProperties(Xml& xml, TextStyle* ts, double /*spatium*/, bool writeText) const
+void TextBase::writeProperties(Xml& xml, const TextStyle* ts, double /*spatium*/, bool writeText) const
       {
       // write all properties which are different from style
 
       xml.tag("frame", _hasFrame);
       if (_hasFrame) {
-            if (ts == 0 || _frameWidth != ts->frameWidth)
+            if (ts == 0 || _frameWidth != ts->frameWidth())
                   xml.tag("frameWidth", _frameWidth);
-            if (ts == 0 || _paddingWidth != ts->paddingWidth)
+            if (ts == 0 || _paddingWidth != ts->paddingWidth())
                   xml.tag("paddingWidth", _paddingWidth);
-            if (ts == 0 || _frameColor != ts->frameColor)
+            if (ts == 0 || _frameColor != ts->frameColor())
                   xml.tag("frameColor", _frameColor);
-            if (ts == 0 || _frameRound != ts->frameRound)
+            if (ts == 0 || _frameRound != ts->frameRound())
                   xml.tag("frameRound", _frameRound);
-            if (ts == 0 || _circle != ts->circle)
+            if (ts == 0 || _circle != ts->circle())
                   xml.tag("circle", _circle);
             }
       if (writeText) {
@@ -392,7 +392,7 @@ TextB::TextB(Score* s)
       cursorPos  = 0;
       cursor     = 0;
       setFlag(ELEMENT_MOVABLE, true);
-      _textStyle = -1;
+      _textStyle = TEXT_STYLE_INVALID;
       _layoutToParentWidth = false;
       }
 
@@ -699,28 +699,28 @@ void TextB::draw(QPainter& p, ScoreView*) const
 //   setTextStyle
 //---------------------------------------------------------
 
-void TextB::setTextStyle(int idx)
+void TextB::setTextStyle(TextStyleType idx)
       {
       _textStyle   = idx;
-      TextStyle* s = score()->textStyle(idx);
-      doc()->setDefaultFont(s->font(spatium()));
+      const TextStyle& s = score()->textStyle(idx);
+      doc()->setDefaultFont(s.font(spatium()));
 
-      _align         = s->align;
-      _xoff          = s->xoff;
-      _yoff          = s->yoff;
-      _reloff.rx()   = s->rxoff;
-      _reloff.ry()   = s->ryoff;
-      _offsetType    = s->offsetType;
-      setColor(s->foregroundColor);
-      _sizeIsSpatiumDependent = s->sizeIsSpatiumDependent;
-      setSystemFlag(s->systemFlag);
+      _align         = s.align();
+      _xoff          = s.xoff();
+      _yoff          = s.yoff();
+      _reloff.rx()   = s.rxoff();
+      _reloff.ry()   = s.ryoff();
+      _offsetType    = s.offsetType();
+      setColor(s.foregroundColor());
+      _sizeIsSpatiumDependent = s.sizeIsSpatiumDependent();
+      setSystemFlag(s.systemFlag());
 
-      textBase()->setFrameWidth(s->frameWidth);
-      textBase()->setHasFrame(s->hasFrame);
-      textBase()->setPaddingWidth(s->paddingWidth);
-      textBase()->setFrameColor(s->frameColor);
-      textBase()->setFrameRound(s->frameRound);
-      textBase()->setCircle(s->circle);
+      textBase()->setFrameWidth(s.frameWidth());
+      textBase()->setHasFrame(s.hasFrame());
+      textBase()->setPaddingWidth(s.paddingWidth());
+      textBase()->setFrameColor(s.frameColor());
+      textBase()->setFrameRound(s.frameRound());
+      textBase()->setCircle(s.circle());
       }
 
 //---------------------------------------------------------
@@ -767,13 +767,16 @@ void TextB::writeProperties(Xml& xml, bool writeText) const
       {
       // write all properties which are different from style
 
-      if (_textStyle >= 0)
+      bool invalid = _textStyle == TEXT_STYLE_INVALID;
+      if (!invalid)
             xml.tag("style", _textStyle);
 
       Element::writeProperties(xml);
 
-      TextStyle* st = score()->textStyle(_textStyle);
-      if (st == 0 || _align != st->align) {
+      const TextStyle* st = 0;
+      if (!invalid)
+            st = &score()->textStyle(_textStyle);
+      if (invalid || _align != st->align()) {
             if (_align & ALIGN_HCENTER)
                   xml.tag("halign", "center");
             else if (_align & ALIGN_RIGHT)
@@ -790,16 +793,16 @@ void TextB::writeProperties(Xml& xml, bool writeText) const
             else
                   xml.tag("valign", "top");
             }
-      if (st == 0 || _xoff != st->xoff)
+      if (invalid || _xoff != st->xoff())
             xml.tag("xoffset", _xoff);
-      if (st == 0 || _yoff != st->yoff)
+      if (invalid || _yoff != st->yoff())
             xml.tag("yoffset", _yoff);
-      if (st == 0 || _reloff.x() != st->rxoff)
+      if (invalid || _reloff.x() != st->rxoff())
             xml.tag("rxoffset", _reloff.x());
-      if (st == 0 || _reloff.y() != st->ryoff)
+      if (invalid || _reloff.y() != st->ryoff())
             xml.tag("ryoffset", _reloff.y());
 
-      if (st == 0 || _offsetType != st->offsetType) {
+      if (invalid || _offsetType != st->offsetType()) {
             const char* p = 0;
             switch(_offsetType) {
                   case OFFSET_SPATIUM:    p = "spatium"; break;
@@ -809,10 +812,11 @@ void TextB::writeProperties(Xml& xml, bool writeText) const
                   xml.tag("offsetType", p);
             }
 
-      if (st == 0 || (!_sizeIsSpatiumDependent && _sizeIsSpatiumDependent != st->sizeIsSpatiumDependent))
+      if (invalid || (!_sizeIsSpatiumDependent && _sizeIsSpatiumDependent != st->sizeIsSpatiumDependent()))
             xml.tag("spatiumSizeDependent", _sizeIsSpatiumDependent);
       if (_textStyle == TEXT_STYLE_MEASURE_NUMBER)
             return;
+
       textBase()->writeProperties(xml, st, score()->spatium(), writeText);
       }
 
@@ -840,7 +844,7 @@ bool TextB::readProperties(QDomElement e)
       if (tag == "style") {
             int i = val.toInt();
             if (i >= 0)
-                  setTextStyle(i);
+                  setTextStyle(TextStyleType(i));
             }
       else if (tag == "align")            // obsolete
             _align = Align(val.toInt());

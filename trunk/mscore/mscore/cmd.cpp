@@ -2158,7 +2158,6 @@ void Score::cmd(const QAction* a)
                   cmdInsertClef(CLEF_F);
             else if (cmd == "load-style") {
                   loadStyle();
-                  setLayoutAll(true);
                   }
             else if (cmd == "tuplet-dialog")
                   tupletDialog();

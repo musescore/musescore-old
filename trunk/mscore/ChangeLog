@@ -1,3 +1,7 @@
+1. oct (ws)
+      - TextStyle and Style are now implicitly shared objects to reduce
+        memory resources and speedup some operations
+      - move TextStyle to Style
 29.sep (ws)
       - fix #7303
       - another attempt to fix #7227

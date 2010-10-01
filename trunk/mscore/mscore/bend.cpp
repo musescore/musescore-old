@@ -74,12 +74,12 @@ void Bend::layout()
             }
       QRectF bb;
 
-      TextStyle* st = score()->textStyle(TEXT_STYLE_BENCH);
+      const TextStyle* st = &score()->textStyle(TEXT_STYLE_BENCH);
       QFont f = st->fontPx(_spatium);
       QFontMetricsF fm(f);
 
       int n    = _points.size();
-      int pt   = 0;
+//      int pt   = 0;
       double x = noteWidth;
       double y = -_spatium * .8;
       double x2, y2;
@@ -172,12 +172,12 @@ void Bend::draw(QPainter& p, ScoreView*) const
       p.setBrush(Qt::black);
 
       double _spatium = spatium();
-      TextStyle* st = score()->textStyle(TEXT_STYLE_BENCH);
+      const TextStyle* st = &score()->textStyle(TEXT_STYLE_BENCH);
       QFont f = st->fontPx(_spatium);
       p.setFont(f);
 
       int n    = _points.size();
-      int pt   = 0;
+//      int pt   = 0;
       double x = noteWidth;
       double y = -_spatium * .8;
       double x2, y2;
@@ -489,8 +489,8 @@ void BendCanvas::mousePressEvent(QMouseEvent* ev)
       int ys = height() / (ROWS);
       int lm = xs / 2;
       int tm = ys / 2;
-      int tw = (COLUMNS - 1) * xs;
-      int th = (ROWS - 1)    * ys;
+//      int tw = (COLUMNS - 1) * xs;
+//      int th = (ROWS - 1)    * ys;
 
       int x = ev->x() - lm;
       int y = ev->y() - tm;

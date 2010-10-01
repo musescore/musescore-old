@@ -318,11 +318,11 @@ QString toQString(const std::string& str) {
 	return codec->toUnicode(str.c_str());
 }
 
-void addText(VBox* & vbox, Score* s, QString strTxt, int sbtp, int stl) {
+void addText(VBox* & vbox, Score* s, QString strTxt, int sbtp, TextStyleType stl) {
 	if (!strTxt.isEmpty()) {
 		Text* text = new Text(s);
 		text->setSubtype(sbtp);
-		text->setTextStyle(stl);
+     	      text->setTextStyle(stl);
 		text->setText(strTxt);
 		if(vbox == 0) {
 			vbox = new VBox(s);

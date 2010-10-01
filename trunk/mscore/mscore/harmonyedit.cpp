@@ -325,7 +325,7 @@ void HarmonyCanvas::render(const QList<RenderAction>& renderList, double& x, dou
       qreal mag  = PALETTE_SPATIUM * extraMag / _spatium;
 
       QList<QFont> fontList;              // temp values used in render()
-      TextStyle* st = gscore->textStyle(TEXT_STYLE_HARMONY);
+      const TextStyle* st = &gscore->textStyle(TEXT_STYLE_HARMONY);
 
       foreach(ChordFont cf, chordList->fonts) {
             if (cf.family.isEmpty() || cf.family == "default")

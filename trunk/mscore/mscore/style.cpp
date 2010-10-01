@@ -31,8 +31,8 @@ Style* style;
 // 120 dpi           screen resolution
 //  spatium = 20/4 points
 
-QVector<TextStyle> defaultTextStyles;
-Style defaultStyle;
+// QVector<TextStyle> defaultTextStyles;
+Style* defaultStyle;
 
 //---------------------------------------------------------
 //   styleTypes
@@ -217,138 +217,141 @@ StyleType styleTypes[] = {
       StyleType("oddFooter",               ST_STRING)
       };
 
-//---------------------------------------------------------
-//   textStyles
-//---------------------------------------------------------
-
 static const QString ff("FreeSerif");
 
 #define MM(x) ((x)/INCH)
 #define OA     OFFSET_ABS
 #define OS     OFFSET_SPATIUM
 #define TR(x)  QT_TRANSLATE_NOOP("MuseScore", x)
+#define AS(x)  defaultStyle->appendTextStyle(x)
 
-const TextStyle defaultTextStyleArray[] = {
-      TextStyle(TR("Symbols1"), QString("MScore"), 20, false, false, false, ALIGN_LEFT),
-      TextStyle(TR("Symbols3"), QString("MScore"), 14, false, false, false, ALIGN_LEFT),
+//---------------------------------------------------------
+//   setDefaultStyle
+//---------------------------------------------------------
 
-      TextStyle(TR("Title"), ff, 24, false, false, false, ALIGN_HCENTER | ALIGN_TOP, 0, 0, OA, 50, 0),
+void setDefaultStyle()
+      {
+      defaultStyle = new Style;
 
-      TextStyle(TR( "Subtitle"), ff, 14, false, false, false,
-         ALIGN_HCENTER | ALIGN_TOP, 0, MM(10), OA, 50, 0),
+//      AS(TextStyle(TR("Symbols1"), QString("MScore"), 20, false, false, false, ALIGN_LEFT));
+//      AS(TextStyle(TR("Symbols3"), QString("MScore"), 14, false, false, false, ALIGN_LEFT));
 
-      TextStyle(TR( "Composer"), ff, 12, false, false, false,
-         ALIGN_RIGHT | ALIGN_BOTTOM, 0, 0, OA, 100, 100),
+      AS(TextStyle(TR("Title"), ff, 24, false, false, false, ALIGN_HCENTER | ALIGN_TOP, 0, 0, OA, 50, 0));
 
-      TextStyle(TR( "Poet"), ff, 12, false, false, false,
-         ALIGN_LEFT | ALIGN_BOTTOM, 0, 0, OA, 0, 100),
+      AS(TextStyle(TR( "Subtitle"), ff, 14, false, false, false,
+         ALIGN_HCENTER | ALIGN_TOP, 0, MM(10), OA, 50, 0));
 
-      TextStyle(TR( "Lyrics odd lines"), ff, 11, false, false, false,
-         ALIGN_HCENTER | ALIGN_TOP, 0, 7, OS, 0.0, 0.0, true),
+      AS(TextStyle(TR( "Composer"), ff, 12, false, false, false,
+         ALIGN_RIGHT | ALIGN_BOTTOM, 0, 0, OA, 100, 100));
 
-      TextStyle(TR( "Lyrics even lines"), ff, 11, false, false, false,
-         ALIGN_HCENTER | ALIGN_TOP, 0, 7, OS, 0.0, 0.0, true),
+      AS(TextStyle(TR( "Poet"), ff, 12, false, false, false,
+         ALIGN_LEFT | ALIGN_BOTTOM, 0, 0, OA, 0, 100));
 
-      TextStyle(TR( "Fingering"), ff,  8, false, false, false,
-         ALIGN_CENTER, 0.0, 0.0, OA, 0.0, 0.0, true),
+      AS(TextStyle(TR( "Lyrics odd lines"), ff, 11, false, false, false,
+         ALIGN_HCENTER | ALIGN_TOP, 0, 7, OS, 0.0, 0.0, true));
 
-      TextStyle(TR( "InstrumentsLong"),   ff, 12, false, false, false,
-         ALIGN_RIGHT | ALIGN_VCENTER, 0.0, 0.0, OA, 0.0, 0.0, true),
+      AS(TextStyle(TR( "Lyrics even lines"), ff, 11, false, false, false,
+         ALIGN_HCENTER | ALIGN_TOP, 0, 7, OS, 0.0, 0.0, true));
 
-      TextStyle(TR( "InstrumentsShort"),   ff, 12, false, false, false,
-         ALIGN_RIGHT | ALIGN_VCENTER, 0.0, 0.0, OA, 0.0, 0.0, true),
+      AS(TextStyle(TR( "Fingering"), ff,  8, false, false, false,
+         ALIGN_CENTER, 0.0, 0.0, OA, 0.0, 0.0, true));
 
-      TextStyle(TR( "InstrumentsExcerpt"), ff, 18, false, false, false,
-         ALIGN_LEFT | ALIGN_TOP, 0.0, 0.0, OA, 0, 0),
+      AS(TextStyle(TR( "InstrumentsLong"),   ff, 12, false, false, false,
+         ALIGN_RIGHT | ALIGN_VCENTER, 0.0, 0.0, OA, 0.0, 0.0, true));
 
-      TextStyle(TR( "Dynamics"), ff, 12, false, true, false,
-         ALIGN_LEFT | ALIGN_BASELINE, 0.0, 8.0, OS, 0, 0, true),
+      AS(TextStyle(TR( "InstrumentsShort"),   ff, 12, false, false, false,
+         ALIGN_RIGHT | ALIGN_VCENTER, 0.0, 0.0, OA, 0.0, 0.0, true));
 
-      TextStyle(TR( "Technik"), ff, 12, false, true, false,
-         ALIGN_LEFT | ALIGN_BASELINE, 0.0, -2.0, OS),
+      AS(TextStyle(TR( "InstrumentsExcerpt"), ff, 18, false, false, false,
+         ALIGN_LEFT | ALIGN_TOP, 0.0, 0.0, OA, 0, 0));
+
+      AS(TextStyle(TR( "Dynamics"), ff, 12, false, true, false,
+         ALIGN_LEFT | ALIGN_BASELINE, 0.0, 8.0, OS, 0, 0, true));
+
+      AS(TextStyle(TR( "Technik"), ff, 12, false, true, false,
+         ALIGN_LEFT | ALIGN_BASELINE, 0.0, -2.0, OS));
 
 /*13*/
-      TextStyle(TR( "Tempo"), ff, 12, true, false, false,
-         ALIGN_LEFT | ALIGN_BASELINE, 0, -4.0, OS, 0, 0, true, .0, .0, 0, Qt::black, false, true),
+      AS(TextStyle(TR( "Tempo"), ff, 12, true, false, false,
+         ALIGN_LEFT | ALIGN_BASELINE, 0, -4.0, OS, 0, 0, true, .0, .0, 0, Qt::black, false, true));
 
-      TextStyle(TR( "Metronome"), ff, 12, true, false, false,
-         ALIGN_LEFT),
+      AS(TextStyle(TR( "Metronome"), ff, 12, true, false, false, ALIGN_LEFT));
 
-      TextStyle(TR( "Copyright"), ff, 8, false, false, false,
-         ALIGN_HCENTER | ALIGN_TOP, 0, MM(-15), OA, 50.0, 100.0),
+      AS(TextStyle(TR( "Copyright"), ff, 8, false, false, false,
+         ALIGN_HCENTER | ALIGN_TOP, 0, MM(-15), OA, 50.0, 100.0));
 
-      TextStyle(TR( "Measure Number"), ff, 8, false, false, false,
-         ALIGN_CENTER | ALIGN_BOTTOM, 0.0, 0.0, OS, 0.0, 0.0, true),
+      AS(TextStyle(TR( "Measure Number"), ff, 8, false, false, false,
+         ALIGN_CENTER | ALIGN_BOTTOM, 0.0, 0.0, OS, 0.0, 0.0, true));
 
-      TextStyle(TR( "Page Number Odd"), ff, 12, false, false, false,
-         ALIGN_RIGHT | ALIGN_BASELINE, MM(-10), MM(-10), OA, 100.0, 100.0),
+      AS(TextStyle(TR( "Page Number Odd"), ff, 12, false, false, false,
+         ALIGN_RIGHT | ALIGN_BASELINE, MM(-10), MM(-10), OA, 100.0, 100.0));
 
-      TextStyle(TR( "Page Number Even"), ff, 12, false, false, false,
-         ALIGN_LEFT | ALIGN_BASELINE, MM(10), MM(-10), OA, 0.0, 100.0),
+      AS(TextStyle(TR( "Page Number Even"), ff, 12, false, false, false,
+         ALIGN_LEFT | ALIGN_BASELINE, MM(10), MM(-10), OA, 0.0, 100.0));
 
-      TextStyle(TR( "Translator"), ff, 11, false, false, false,
-         ALIGN_HCENTER | ALIGN_TOP, 0, 6),
+      AS(TextStyle(TR( "Translator"), ff, 11, false, false, false,
+         ALIGN_HCENTER | ALIGN_TOP, 0, 6));
 
-      TextStyle(TR( "Tuplets"), ff,  8, false, false, false,
-         ALIGN_CENTER),
+      AS(TextStyle(TR( "Tuplets"), ff,  8, false, false, false,
+         ALIGN_CENTER));
 
-      TextStyle(TR( "System"), ff,  10, false, false, false,
+      AS(TextStyle(TR( "System"), ff,  10, false, false, false,
          ALIGN_LEFT, 0, -4.0, OS, 0, 0, true,
-         0.0, 0.0, 25, Qt::black, false, true),
+         0.0, 0.0, 25, Qt::black, false, true));
 
-      TextStyle(TR( "Staff"), ff,  10, false, false, false,
-         ALIGN_LEFT, 0, -4.0, OS, 0, 0, true),
+      AS(TextStyle(TR( "Staff"), ff,  10, false, false, false,
+         ALIGN_LEFT, 0, -4.0, OS, 0, 0, true));
 
-      TextStyle(TR( "Chordname"), ff,  12, false, false, false,
-         ALIGN_LEFT | ALIGN_BASELINE, 0, -4.0, OS, 0, 0, true),
+      AS(TextStyle(TR( "Chordname"), ff,  12, false, false, false,
+         ALIGN_LEFT | ALIGN_BASELINE, 0, -4.0, OS, 0, 0, true));
 
-      TextStyle(TR( "Rehearsal Mark"), ff,  14, true, false, false,
+      AS(TextStyle(TR( "Rehearsal Mark"), ff,  14, true, false, false,
          ALIGN_HCENTER | ALIGN_BASELINE, 0, -3.0, OS, 0, 0, true,
-         0.3, 1.0, 20, Qt::black, false, true),
+         0.3, 1.0, 20, Qt::black, false, true));
 
-      TextStyle(TR( "Repeat Text"), ff,  12, false, false, false,
+      AS(TextStyle(TR( "Repeat Text"), ff,  12, false, false, false,
          ALIGN_HCENTER | ALIGN_BASELINE, 0, -2.0, OS, 100, 0, true,
-         0.0, 0.0, 25, Qt::black, false, true),
+         0.0, 0.0, 25, Qt::black, false, true));
 
-      TextStyle(TR( "Volta"), ff, 11, true, false, false,
-         ALIGN_LEFT, 0.5, .0, OS, 0, 0, true),
+      AS(TextStyle(TR( "Volta"), ff, 11, true, false, false,
+         ALIGN_LEFT, 0.5, .0, OS, 0, 0, true));
 
-      TextStyle(TR( "Frame"), ff, 11, true, false, false,
-         ALIGN_LEFT, 0, 0, OS, 0, 0, true),
+      AS(TextStyle(TR( "Frame"), ff, 11, true, false, false,
+         ALIGN_LEFT, 0, 0, OS, 0, 0, true));
 
-      TextStyle(TR( "TextLine"), ff,  12, false, false, false,
-         ALIGN_LEFT | ALIGN_VCENTER, 0, 0, OS, 0, 0, true),
+      AS(TextStyle(TR( "TextLine"), ff,  12, false, false, false,
+         ALIGN_LEFT | ALIGN_VCENTER, 0, 0, OS, 0, 0, true));
 
-      TextStyle(TR( "Glissando"), ff, 8, false, true, false,
-         ALIGN_HCENTER | ALIGN_BASELINE, 0.0, 0.0, OS, 0, 0, true),
+      AS(TextStyle(TR( "Glissando"), ff, 8, false, true, false,
+         ALIGN_HCENTER | ALIGN_BASELINE, 0.0, 0.0, OS, 0, 0, true));
 
-      TextStyle(TR( "String Number"), ff,  8, false, false, false,
-         ALIGN_CENTER, 0, -5.0, OS, 100, 0, true, 0.2, -0.2, 0, Qt::black, true, false),
+      AS(TextStyle(TR( "String Number"), ff,  8, false, false, false,
+         ALIGN_CENTER, 0, -5.0, OS, 100, 0, true, 0.2, -0.2, 0, Qt::black, true, false));
 
-      TextStyle(TR( "Ottava"), ff, 12, false, true, false,
-         ALIGN_LEFT | ALIGN_VCENTER, 0.0, 0.0, OS, 0, 0, true),
+      AS(TextStyle(TR( "Ottava"), ff, 12, false, true, false,
+         ALIGN_LEFT | ALIGN_VCENTER, 0.0, 0.0, OS, 0, 0, true));
 
-      TextStyle(TR( "Bend"), ff, 8, false, false, false,
-         ALIGN_CENTER | ALIGN_BOTTOM, 0.0, 0.0, OS, 0.0, 0.0, true),
+      AS(TextStyle(TR( "Bend"), ff, 8, false, false, false,
+         ALIGN_CENTER | ALIGN_BOTTOM, 0.0, 0.0, OS, 0.0, 0.0, true));
 
-      TextStyle(TR( "Header"), ff, 8, false, false, false,
-         ALIGN_HCENTER | ALIGN_TOP, 0, MM(-15), OA, 50.0, 0.0),
+      AS(TextStyle(TR( "Header"), ff, 8, false, false, false,
+         ALIGN_HCENTER | ALIGN_TOP, 0, MM(-15), OA, 50.0, 0.0));
 
-      TextStyle(TR( "Footer"), ff, 8, false, false, false,
-         ALIGN_HCENTER | ALIGN_TOP, 0, MM(-15), OA, 50.0, 100.0),
-      };
+      AS(TextStyle(TR( "Footer"), ff, 8, false, false, false,
+         ALIGN_HCENTER | ALIGN_TOP, 0, MM(-15), OA, 50.0, 100.0));
 
 #undef MM
 #undef OA
 #undef OS
 #undef TR
+      }
 
 //---------------------------------------------------------
 //   Style
 //---------------------------------------------------------
 
-Style::Style()
-   : QVector<StyleVal>(ST_STYLES)
+StyleData::StyleData()
+   : _values(ST_STYLES)
       {
       static const StyleVal values[ST_STYLES] = {
             StyleVal(ST_staffUpperBorder, Spatium(7.0)),
@@ -548,30 +551,28 @@ Style::Style()
             };
 
       for (int idx = 0; idx < ST_STYLES; ++idx)
-            (*this)[idx] = values[idx];
+            _values[idx] = values[idx];
+
+// _textStyles.append(TextStyle(defaultTextStyles[i]));
       _chordList = 0;
       };
 
-Style::Style(const Style& s)
-   : QVector<StyleVal>(s)
+StyleData::StyleData(const StyleData& s)
+   : QSharedData(s)
       {
-      _chordList = 0;
-      }
-
-Style& Style::operator=(const Style& s)
-      {
-      delete _chordList;
-      _chordList = 0;
-      foreach(const StyleVal& sv, s)
-            set(sv);
-      return *this;
+      _values = s._values;
+      if (s._chordList)
+            _chordList = new ChordList(*(s._chordList));
+      else
+            _chordList = 0;
+      _textStyles = s._textStyles;
       }
 
 //---------------------------------------------------------
 //   Style
 //---------------------------------------------------------
 
-Style::~Style()
+StyleData::~StyleData()
       {
       delete _chordList;
       }
@@ -580,7 +581,35 @@ Style::~Style()
 //   TextStyle
 //---------------------------------------------------------
 
+TextStyle::TextStyle()
+      {
+      d = new TextStyleData;
+      }
+
 TextStyle::TextStyle(
+   QString _name, QString _family, int _size,
+   bool _bold, bool _italic, bool _underline,
+   Align _align,
+   double _xoff, double _yoff, OffsetType _ot, double _rxoff, double _ryoff,
+   bool sd,
+   double fw, double pw, int fr, QColor co, bool _circle, bool _systemFlag,
+   QColor fg)
+      {
+      d = new TextStyleData(_name, _family, _size,
+         _bold, _italic, _underline, _align, _xoff, _yoff, _ot, _rxoff, _ryoff,
+         sd, fw, pw, fr, co, _circle, _systemFlag, fg);
+      }
+
+TextStyle::TextStyle(const TextStyle& s)
+   : d(s.d)
+      {
+      }
+
+//---------------------------------------------------------
+//   TextStyleData
+//---------------------------------------------------------
+
+TextStyleData::TextStyleData(
    QString _name, QString _family, int _size,
    bool _bold, bool _italic, bool _underline,
    Align _align,
@@ -596,17 +625,16 @@ TextStyle::TextStyle(
    sizeIsSpatiumDependent(sd), frameWidth(fw), paddingWidth(pw),
    frameRound(fr), frameColor(co), circle(_circle), systemFlag(_systemFlag),
    foregroundColor(fg)
-
       {
       hasFrame = fw != 0.0;
-	  family = _family;
+	family = _family;
       }
 
 //---------------------------------------------------------
 //   operator!=
 //---------------------------------------------------------
 
-bool TextStyle::operator!=(const TextStyle& s) const
+bool TextStyleData::operator!=(const TextStyleData& s) const
       {
       return s.name                   != name
           || s.family                 != family
@@ -631,21 +659,10 @@ bool TextStyle::operator!=(const TextStyle& s) const
       }
 
 //---------------------------------------------------------
-//   setDefaultStyle
-//---------------------------------------------------------
-
-void setDefaultStyle()
-      {
-      defaultTextStyles.clear();
-      for (int i = 0; i < TEXT_STYLES; ++i)
-            defaultTextStyles.append(defaultTextStyleArray[i]);
-      }
-
-//---------------------------------------------------------
 //   font
 //---------------------------------------------------------
 
-QFont TextStyle::font(double _spatium) const
+QFont TextStyleData::font(double _spatium) const
       {
       double m = size;
 
@@ -665,7 +682,7 @@ QFont TextStyle::font(double _spatium) const
 //   font
 //---------------------------------------------------------
 
-QFont TextStyle::fontPx(double _spatium) const
+QFont TextStyleData::fontPx(double _spatium) const
       {
       double m = size * DPI / PPI;
 
@@ -685,7 +702,7 @@ QFont TextStyle::fontPx(double _spatium) const
 //   write
 //---------------------------------------------------------
 
-void TextStyle::write(Xml& xml) const
+void TextStyleData::write(Xml& xml) const
       {
       xml.stag(QString("TextStyle name=\"%1\"").arg(name));
       xml.tag("family", family);
@@ -724,7 +741,7 @@ void TextStyle::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void TextStyle::read(QDomElement e)
+void TextStyleData::read(QDomElement e)
       {
       frameWidth = 0.0;
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
@@ -787,42 +804,49 @@ void TextStyle::read(QDomElement e)
 //   load
 //---------------------------------------------------------
 
-void Style::load(QDomElement e, int /*version*/)
+void StyleData::load(QDomElement e)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
 
-            if (tag == "displayInConcertPitch") {
-                  set(ST_concertPitch, bool(val.toInt()));
-                  continue;
+            if (tag == "TextStyle") {
+                  QString name = e.attribute("name");
+                  TextStyle s;
+                  s.read(e);
+                  setTextStyle(s);
                   }
-            if (tag == "stemDir") {
-                  int voice = e.attribute("voice", "1").toInt() - 1;
-                  switch(voice) {
-                        case 0: tag = "StemDir1"; break;
-                        case 1: tag = "StemDir2"; break;
-                        case 2: tag = "StemDir3"; break;
-                        case 3: tag = "StemDir4"; break;
-                        }
+            else if (tag == "displayInConcertPitch") {
+                  set(StyleVal(ST_concertPitch, bool(val.toInt())));
                   }
-            int idx;
-            for (idx = 0; idx < ST_STYLES; ++idx) {
-                  if (styleTypes[idx].name() == tag) {
-                        StyleIdx i = StyleIdx(idx);
-                        switch(styleTypes[idx].valueType()) {
-                              case ST_SPATIUM:   set(i, Spatium(val.toDouble()));   break;
-                              case ST_DOUBLE:    set(i, val.toDouble());            break;
-                              case ST_BOOL:      set(i, bool(val.toInt()));         break;
-                              case ST_INT:       set(i, val.toInt());               break;
-                              case ST_DIRECTION: set(i, Direction(val.toInt()));    break;
-                              case ST_STRING:    set(i, val);                       break;
+            else {
+                  if (tag == "stemDir") {
+                        int voice = e.attribute("voice", "1").toInt() - 1;
+                        switch(voice) {
+                              case 0: tag = "StemDir1"; break;
+                              case 1: tag = "StemDir2"; break;
+                              case 2: tag = "StemDir3"; break;
+                              case 3: tag = "StemDir4"; break;
                               }
-                        break;
                         }
+                  int idx;
+                  for (idx = 0; idx < ST_STYLES; ++idx) {
+                        if (styleTypes[idx].name() == tag) {
+                              StyleIdx i = StyleIdx(idx);
+                              switch(styleTypes[idx].valueType()) {
+                                    case ST_SPATIUM:   set(StyleVal(i, Spatium(val.toDouble()))); break;
+                                    case ST_DOUBLE:    set(StyleVal(i, val.toDouble()));          break;
+                                    case ST_BOOL:      set(StyleVal(i, bool(val.toInt())));       break;
+                                    case ST_INT:       set(StyleVal(i, val.toInt()));             break;
+                                    case ST_DIRECTION: set(StyleVal(i, Direction(val.toInt())));  break;
+                                    case ST_STRING:    set(StyleVal(i, val));                     break;
+                                    }
+                              break;
+                              }
+                        }
+                  if (idx >= ST_STYLES)
+                        domError(e);
                   }
-            if (idx >= ST_STYLES)
-                  domError(e);
             }
       }
 
@@ -830,19 +854,19 @@ void Style::load(QDomElement e, int /*version*/)
 //   isDefault
 //---------------------------------------------------------
 
-bool Style::isDefault(int idx)
+bool StyleData::isDefault(StyleIdx idx) const
       {
       switch(styleTypes[idx].valueType()) {
             case ST_DOUBLE:
             case ST_SPATIUM:
-                  return at(idx).toDouble() == defaultStyle[idx].toDouble();
+                  return _values[idx].toDouble() == defaultStyle->valueD(idx);
             case ST_BOOL:
-                  return at(idx).toBool() == defaultStyle[idx].toBool();
+                  return _values[idx].toBool() == defaultStyle->valueB(idx);
             case ST_INT:
             case ST_DIRECTION:
-                  return at(idx).toInt() == defaultStyle[idx].toInt();
+                  return _values[idx].toInt() == defaultStyle->valueI(idx);
             case ST_STRING:
-                  return at(idx).toString() == defaultStyle[idx].toString();
+                  return _values[idx].toString() == defaultStyle->valueSt(idx);
             }
       return false;
       }
@@ -853,21 +877,26 @@ bool Style::isDefault(int idx)
 //    style
 //---------------------------------------------------------
 
-void Style::save(Xml& xml, bool optimize)
+void StyleData::save(Xml& xml, bool optimize) const
       {
       xml.stag("Style");
 
-      for (int idx = 0; idx < ST_STYLES; ++idx) {
+      for (int i = 0; i < ST_STYLES; ++i) {
+            StyleIdx idx = StyleIdx(i);
             if (optimize && isDefault(idx))
                   continue;
             switch(styleTypes[idx].valueType()) {
-                  case ST_SPATIUM:   xml.tag(styleTypes[idx].name(), at(idx).toSpatium().val()); break;
-                  case ST_DOUBLE:    xml.tag(styleTypes[idx].name(), at(idx).toDouble()); break;
-                  case ST_BOOL:      xml.tag(styleTypes[idx].name(), at(idx).toBool()); break;
-                  case ST_INT:       xml.tag(styleTypes[idx].name(), at(idx).toInt()); break;
-                  case ST_DIRECTION: xml.tag(styleTypes[idx].name(), int(at(idx).toDirection())); break;
-                  case ST_STRING:    xml.tag(styleTypes[idx].name(), at(idx).toString()); break;
+                  case ST_SPATIUM:
+                  case ST_DOUBLE:    xml.tag(styleTypes[idx].name(), value(idx).toDouble()); break;
+                  case ST_BOOL:      xml.tag(styleTypes[idx].name(), value(idx).toBool()); break;
+                  case ST_INT:       xml.tag(styleTypes[idx].name(), value(idx).toInt()); break;
+                  case ST_DIRECTION: xml.tag(styleTypes[idx].name(), int(value(idx).toDirection())); break;
+                  case ST_STRING:    xml.tag(styleTypes[idx].name(), value(idx).toString()); break;
                   }
+            }
+      for (int i = 0; i < TEXT_STYLES; ++i) {
+            if (_textStyles[i] != defaultStyle->textStyle(TextStyleType(i)))
+                  _textStyles[i].write(xml);
             }
       xml.etag();
       }
@@ -876,7 +905,7 @@ void Style::save(Xml& xml, bool optimize)
 //   chordDescription
 //---------------------------------------------------------
 
-const ChordDescription* Style::chordDescription(int id) const
+const ChordDescription* StyleData::chordDescription(int id) const
       {
       return chordList()->value(id);
       }
@@ -885,7 +914,7 @@ const ChordDescription* Style::chordDescription(int id) const
 //   chordList
 //---------------------------------------------------------
 
-ChordList* Style::chordList()  const
+ChordList* StyleData::chordList()  const
       {
       if (_chordList == 0) {
             _chordList = new ChordList();
@@ -946,25 +975,6 @@ StyleVal& StyleVal::operator=(const StyleVal& val)
       return *this;
       }
 
-//---------------------------------------------------------
-//   set
-//---------------------------------------------------------
-
-void Style::set(const StyleVal& val)
-      {
-      (*this)[val.getIdx()] = val;
-      }
-
-//---------------------------------------------------------
-//   clearChordList
-//---------------------------------------------------------
-
-void Style::clearChordList()
-      {
-      delete _chordList;
-      _chordList = 0;
-      }
-
 StyleVal::StyleVal(const QString& name, const QString& val)
       {
       for (int i = 0; i < ST_STYLES; ++i) {
@@ -991,5 +1001,84 @@ StyleVal::StyleVal(const QString& name, const QString& val)
                   }
             break;
             }
+      }
+
+//---------------------------------------------------------
+//   Style
+//---------------------------------------------------------
+
+Style::Style()
+      {
+      d = new StyleData;
+      }
+
+Style::Style(const Style& s)
+   : d(s.d)
+      {
+      }
+
+//---------------------------------------------------------
+//   set
+//---------------------------------------------------------
+
+void Style::set(const StyleVal& v)
+      {
+      d->_values[v.getIdx()] = v;
+      }
+
+//---------------------------------------------------------
+//   value
+//---------------------------------------------------------
+
+StyleVal Style::value(StyleIdx idx) const
+      {
+      return d->_values[idx];
+      }
+
+bool Style::isDefault(StyleIdx idx) const
+      {
+      return d->isDefault(idx);
+      }
+
+const ChordDescription* Style::chordDescription(int id) const
+      {
+      return d->chordDescription(id);
+      }
+
+ChordList* Style::chordList() const
+      {
+      return d->chordList();
+      }
+
+//---------------------------------------------------------
+//   textStyle
+//---------------------------------------------------------
+
+const TextStyle& StyleData::textStyle(const QString& name) const
+      {
+      foreach(const TextStyle& s, _textStyles) {
+            if (s.name() == name)
+                  return s;
+            }
+      printf("TextStyle <%s> not found\n", qPrintable(name));
+      return _textStyles[0];
+      }
+
+//---------------------------------------------------------
+//   setTextStyle
+//---------------------------------------------------------
+
+void StyleData::setTextStyle(const TextStyle& ts)
+      {
+      int idx = 0;
+      foreach(const TextStyle& s, _textStyles) {
+            if (s.name() == ts.name())
+                  break;
+            ++idx;
+            }
+      if (idx < _textStyles.size())
+            _textStyles[idx] = ts;
+      else
+            printf("StyleData::setTextStyle(): TextStyle <%s> not found\n", qPrintable(ts.name()));
       }
 

@@ -690,8 +690,8 @@ void System::layoutLyrics(Lyrics* l, Segment* s, int staffIdx)
             }
       double _spatium = spatium();
 
-      TextStyle* ts = score()->textStyle(l->textStyle());
-      double lmag = double(ts->size) / 11.0;
+      const TextStyle& ts = score()->textStyle(l->textStyle());
+      double lmag = double(ts.size()) / 11.0;
 
       if (l->ticks()) {
             Segment* seg = score()->tick2segment(l->endTick());

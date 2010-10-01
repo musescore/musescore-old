@@ -153,11 +153,11 @@ void Glissando::draw(QPainter& p, ScoreView*) const
             symbols[score()->symIdx()][trillelementSym].draw(p, mags, 0.0, b.height()*.5, n);
             }
       if (_showText) {
-            TextStyle* st = score()->textStyle(TEXT_STYLE_GLISSANDO);
-            QFont f = st->fontPx(_spatium);
+            const TextStyle& st = score()->textStyle(TEXT_STYLE_GLISSANDO);
+            QFont f = st.fontPx(_spatium);
             QRectF r = QFontMetricsF(f).boundingRect(_text);
             if (r.width() < l) {
-                  QFont f = st->fontPx(_spatium);
+                  QFont f = st.fontPx(_spatium);
                   p.setFont(f);
                   double x = (l - r.width()) * .5;
                   p.drawText(x, -_spatium * .5, _text);
