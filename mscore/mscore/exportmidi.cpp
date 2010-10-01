@@ -235,7 +235,7 @@ bool ExportMidi::write(const QString& name)
       mf.setDivision(AL::division);
       mf.setFormat(1);
       QList<MidiTrack*>* tracks = mf.tracks();
-      int nstaves = cs->nstaves();
+//      int nstaves = cs->nstaves();
 
       foreach(Staff* staff, cs->staves()) {
             if (staff->primaryStaff())

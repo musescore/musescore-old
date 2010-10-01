@@ -322,7 +322,7 @@ TextLine::TextLine(const TextLine& e)
 //   setBeginText
 //---------------------------------------------------------
 
-void TextLine::setBeginText(const QString& s, int textStyle)
+void TextLine::setBeginText(const QString& s, TextStyleType textStyle)
       {
       if (!_beginText) {
             _beginText = new TextC(score());
@@ -337,7 +337,7 @@ void TextLine::setBeginText(const QString& s, int textStyle)
 //   setContinueText
 //---------------------------------------------------------
 
-void TextLine::setContinueText(const QString& s, int textStyle)
+void TextLine::setContinueText(const QString& s, TextStyleType textStyle)
       {
       if (!_continueText) {
             _continueText = new TextC(score());

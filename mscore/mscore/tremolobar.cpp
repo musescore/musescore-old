@@ -97,7 +97,7 @@ void TremoloBar::draw(QPainter& p, ScoreView*) const
       p.setBrush(Qt::black);
 
       double _spatium = spatium();
-      TextStyle* st = score()->textStyle(TEXT_STYLE_BENCH);
+      const TextStyle* st = &score()->textStyle(TEXT_STYLE_BENCH);
       QFont f = st->fontPx(_spatium);
       p.setFont(f);
 

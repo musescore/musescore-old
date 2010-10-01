@@ -1096,20 +1096,19 @@ class ChangePart : public UndoCommand {
       };
 
 //---------------------------------------------------------
-//   ChangeTextStyles
+//   ChangeTextStyle
 //---------------------------------------------------------
 
-class ChangeTextStyles : public UndoCommand {
+class ChangeTextStyle : public UndoCommand {
       Score* score;
-      QVector<TextStyle*> styles;
+      TextStyle style;
       void flip();
 
    public:
-      ChangeTextStyles(Score*, const QVector<TextStyle*>& styles);
-      ~ChangeTextStyles();
+      ChangeTextStyle(Score*, const TextStyle& style);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
-      UNDO_NAME("ChangeTextStyles");
+      UNDO_NAME("ChangeTextStyle");
       };
 
 //---------------------------------------------------------

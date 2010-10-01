@@ -148,10 +148,10 @@ void Dynamic::setSubtype(int idx)
             QTextCursor cursor(doc());
             cursor.movePosition(QTextCursor::Start);
             QTextCharFormat tf = cursor.charFormat();
-            TextStyle* ts = score()->textStyle(TEXT_STYLE_DYNAMICS);
-            double size = ts->size;
+            const TextStyle& ts = score()->textStyle(TEXT_STYLE_DYNAMICS);
+            double size = ts.size();
             double m = size;
-            if (ts->sizeIsSpatiumDependent)
+            if (ts.sizeIsSpatiumDependent())
                   m *= (score()->spatium() / (SPATIUM20 * DPI));
             m *= mag();
 

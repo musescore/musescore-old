@@ -48,7 +48,7 @@
 //   TODO: remove duplicate code
 //---------------------------------------------------------
 
-static void addText(VBox* & vbx, Score* s, QString strTxt, int sbtp, int stl)
+static void addText(VBox* & vbx, Score* s, QString strTxt, int sbtp, TextStyleType stl)
       {
       if (!strTxt.isEmpty()) {
             Text* text = new Text(s);

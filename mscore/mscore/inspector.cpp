@@ -741,7 +741,7 @@ void SegmentView::setElement(Element* e)
       sb.segmentType->setCurrentIndex(idx);
       sb.lyrics->clear();
 
-      Score* cs = e->score();
+//      Score* cs = e->score();
 #if 0 // TODO
       for (int i = 0; i < cs->nstaves(); ++i) {
             const LyricsList* ll = s->lyricsList(i);
@@ -1348,9 +1348,8 @@ void TextView::setElement(Element* e)
       {
       Text* te = (Text*)e;
       tb.textStyle->clear();
-      foreach(const TextStyle* s, e->score()->textStyles()) {
-            tb.textStyle->addItem(s->name);
-            }
+      for (int i = 0; i < TEXT_STYLES; ++i)
+            tb.textStyle->addItem(e->score()->textStyle(TextStyleType(i)).name());
 
       ShowElementBase::setElement(e);
       tb.text->setDocument(te->doc()->clone());

@@ -666,10 +666,9 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
       f->p1[idx].rx() = x1;
       f->p2[idx].rx() = x2;
 
-      const Style s(score()->style());
-      double bd(s[ST_beamDistance].toDouble());
-      Spatium bw(s[ST_beamWidth].toSpatium());
-      double beamMinLen = point(s[ST_beamMinLen].toSpatium());
+      double bd         = score()->styleD(ST_beamDistance);
+      Spatium bw        = score()->styleS(ST_beamWidth);
+      double beamMinLen = point(score()->styleS(ST_beamMinLen));
       double graceMag   = score()->styleD(ST_graceNoteMag);
       double beamDist   = point(bd * bw + bw) * (_up ? 1.0 : -1.0);
       if (isGrace)

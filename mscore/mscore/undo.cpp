@@ -2139,29 +2139,25 @@ void ChangePart::flip()
       }
 
 //---------------------------------------------------------
-//   ChangeTextStyles
+//   ChangeTextStyle
 //---------------------------------------------------------
 
-ChangeTextStyles::ChangeTextStyles(Score* s, const QVector<TextStyle*>& st)
+ChangeTextStyle::ChangeTextStyle(Score* s, const TextStyle& st)
       {
       score = s;
-      foreach(TextStyle* s, st)
-            styles.append(new TextStyle(*s));
-      }
-
-ChangeTextStyles::~ChangeTextStyles()
-      {
-      foreach(TextStyle* s, styles)
-            delete s;
+      style = st;
       }
 
 //---------------------------------------------------------
 //   flip
 //---------------------------------------------------------
 
-void ChangeTextStyles::flip()
+void ChangeTextStyle::flip()
       {
-      styles = score->swapTextStyles(styles);
+      TextStyle os = score->style().textStyle(style.name());
+      score->style().setTextStyle(style);
+      style = os;
+      score->setLayoutAll(true);
       }
 
 //---------------------------------------------------------
@@ -2202,8 +2198,8 @@ void ChangeStyle::flip()
       {
       Style tmp = score->style();
 
-      if (score->styleB(ST_concertPitch) != style[ST_concertPitch].toBool())
-            score->cmdConcertPitchChanged(style[ST_concertPitch].toBool(), true);
+      if (score->styleB(ST_concertPitch) != style.valueB(ST_concertPitch))
+            score->cmdConcertPitchChanged(style.valueB(ST_concertPitch), true);
 
       score->setStyle(style);
       style = tmp;

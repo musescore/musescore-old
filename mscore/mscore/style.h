@@ -28,53 +28,12 @@ class Xml;
 class ChordDescription;
 class ChordList;
 
-enum TEXT_STYLE {
-      TEXT_STYLE_SYMBOL1 = 0,
-      TEXT_STYLE_SYMBOL3,
-      TEXT_STYLE_TITLE,
-      TEXT_STYLE_SUBTITLE,
-      TEXT_STYLE_COMPOSER,
-      TEXT_STYLE_POET,
-      TEXT_STYLE_LYRIC1,
-      TEXT_STYLE_LYRIC2,
-      TEXT_STYLE_FINGERING,
-      TEXT_STYLE_INSTRUMENT_LONG,
-      TEXT_STYLE_INSTRUMENT_SHORT,
-      TEXT_STYLE_INSTRUMENT_EXCERPT,
-      TEXT_STYLE_DYNAMICS,
-      TEXT_STYLE_TECHNIK,
-      TEXT_STYLE_TEMPO,
-      TEXT_STYLE_METRONOME,
-      TEXT_STYLE_COPYRIGHT,
-      TEXT_STYLE_MEASURE_NUMBER,
-      TEXT_STYLE_PAGE_NUMBER_ODD,
-      TEXT_STYLE_PAGE_NUMBER_EVEN,
-
-      TEXT_STYLE_TRANSLATOR,  // 20
-      TEXT_STYLE_TUPLET,
-      TEXT_STYLE_SYSTEM,
-      TEXT_STYLE_STAFF,
-      TEXT_STYLE_HARMONY,
-      TEXT_STYLE_REHEARSAL_MARK,
-      TEXT_STYLE_REPEAT,
-      TEXT_STYLE_VOLTA,
-      TEXT_STYLE_FRAME,
-      TEXT_STYLE_TEXTLINE,
-      TEXT_STYLE_GLISSANDO,
-      TEXT_STYLE_STRING_NUMBER,
-      TEXT_STYLE_OTTAVA,
-      TEXT_STYLE_BENCH,
-      TEXT_STYLE_HEADER,
-      TEXT_STYLE_FOOTER,
-      TEXT_STYLES
-      };
-
 //---------------------------------------------------------
-//   TextStyle
+//   TextStyleData
 //---------------------------------------------------------
 
-class TextStyle {
-   public:
+class TextStyleData : public QSharedData {
+   protected:
       QString name;
       QString family;
       int size;
@@ -96,6 +55,38 @@ class TextStyle {
       bool systemFlag;
       QColor foregroundColor;
 
+   public:
+      TextStyleData(QString _name, QString _family, int _size,
+         bool _bold, bool _italic, bool _underline,
+         Align _align,
+         double _xoff, double _yoff, OffsetType _ot,
+         double _rxoff, double _ryoff,
+         bool sd,
+         double fw, double pw, int fr,
+         QColor co, bool circle, bool systemFlag,
+         QColor fg);
+      TextStyleData() {}
+
+      void write(Xml&) const;
+      void read(QDomElement);
+
+      QFont font(double space) const;
+      QFont fontPx(double spatium) const;
+      QRectF bbox(double space, const QString& s) const { return fontMetrics(space).boundingRect(s); }
+      QFontMetricsF fontMetrics(double space) const     { return QFontMetricsF(font(space)); }
+      bool operator!=(const TextStyleData& s) const;
+      friend class TextStyle;
+      };
+
+//---------------------------------------------------------
+//   TextStyle
+//---------------------------------------------------------
+
+class TextStyle {
+      QSharedDataPointer<TextStyleData> d;
+
+   public:
+      TextStyle();
       TextStyle(QString _name, QString _family, int _size,
          bool _bold, bool _italic, bool _underline,
          Align _align,
@@ -106,14 +97,61 @@ class TextStyle {
          QColor co = QColor(Qt::black), bool circle = false, bool systemFlag = false,
          QColor fg = QColor(Qt::black));
 
-      TextStyle() {}
-      void write(Xml&) const;
-      void read(QDomElement);
-      QFont font(double space) const;
-      QFont fontPx(double spatium) const;
-      QRectF bbox(double space, const QString& s) const { return fontMetrics(space).boundingRect(s); }
-      QFontMetricsF fontMetrics(double space) const { return QFontMetricsF(font(space)); }
-      bool operator!=(const TextStyle& s) const;
+      TextStyle(const TextStyle&);
+
+      QString name() const                { return d->name; }
+      QString family() const              { return d->family; }
+      int size() const                    { return d->size; }
+      bool bold() const                   { return d->bold; }
+      bool italic() const                 { return d->italic; }
+      bool underline() const              { return d->underline; }
+      bool hasFrame() const               { return d->hasFrame; }
+      Align align() const                 { return d->align; }
+      double xoff() const                 { return d->xoff; }
+      double yoff() const                 { return d->yoff; }
+      OffsetType offsetType() const       { return d->offsetType; }
+      double rxoff() const                { return d->rxoff; }
+      double ryoff() const                { return d->ryoff; }
+      bool sizeIsSpatiumDependent() const { return d->sizeIsSpatiumDependent; }
+
+      double frameWidth()  const          { return d->frameWidth; }
+      double paddingWidth() const         { return d->paddingWidth; }
+      int frameRound() const              { return d->frameRound; }
+      QColor frameColor() const           { return d->frameColor; }
+      bool circle() const                 { return d->circle;     }
+      bool systemFlag() const             { return d->systemFlag; }
+      QColor foregroundColor() const      { return d->foregroundColor; }
+
+      void setName(const QString& s)      { d->name = s; }
+      void setFamily(const QString& s)    { d->family = s; }
+      void setSize(int v)                 { d->size = v; }
+      void setBold(bool v)                { d->bold = v; }
+      void setItalic(bool v)              { d->italic = v; }
+      void setUnderline(bool v)           { d->underline = v; }
+      void setHasFrame(bool v)            { d->hasFrame = v; }
+      void setAlign(Align v)              { d->align = v; }
+      void setXoff(double v)              { d->xoff = v; }
+      void setYoff(double v)              { d->yoff = v; }
+      void setOffsetType(OffsetType v)    { d->offsetType = v; }
+      void setRxoff(double v)             { d->rxoff = v; }
+      void setRyoff(double v)             { d->ryoff = v; }
+      void setSizeIsSpatiumDependent(bool v) { d->sizeIsSpatiumDependent = v; }
+
+      void setFrameWidth(double v)        { d->frameWidth = v; }
+      void setPaddingWidth(double v)      { d->paddingWidth = v; }
+      void setFrameRound(int v)           { d->frameRound = v; }
+      void setFrameColor(const QColor& v) { d->frameColor = v; }
+      void setCircle(bool v)              { d->circle = v;     }
+      void setSystemFlag(bool v)          { d->systemFlag = v; }
+      void setForegroundColor(const QColor& v) { d->foregroundColor = v; }
+
+      void write(Xml& xml) const                        { d->write(xml); }
+      void read(QDomElement v)                          { d->read(v); }
+      QFont font(double space) const                    { return d->font(space); }
+      QFont fontPx(double spatium) const                { return d->fontPx(spatium); }
+      QRectF bbox(double space, const QString& s) const { return d->bbox(space, s); }
+      QFontMetricsF fontMetrics(double space) const     { return fontMetrics(space); }
+      bool operator!=(const TextStyle& s) const         { return d != s.d; }
       };
 
 //---------------------------------------------------------
@@ -356,37 +394,81 @@ class StyleVal {
       };
 
 //---------------------------------------------------------
-//   Style
+//   StyleData
 //    this structure contains all style elements
 //---------------------------------------------------------
 
-class Style : public QVector<StyleVal> {
-      mutable ChordList* _chordList;     // cached value
+class StyleData : public QSharedData {
+   protected:
+      QVector<StyleVal> _values;
+      mutable ChordList* _chordList;
+      QList<TextStyle> _textStyles;
+
+      void set(const StyleVal& v)                         { _values[v.getIdx()] = v; }
+      StyleVal value(StyleIdx idx) const                  { return _values[idx];     }
+      const TextStyle& textStyle(TextStyleType idx) const { return _textStyles[idx]; }
+      const TextStyle& textStyle(const QString&) const;
+      void setTextStyle(const TextStyle& ts);
+
+   public:
+      StyleData();
+      StyleData(const StyleData&);
+      ~StyleData();
+
+      bool load(QFile* qf);
+      void load(QDomElement e);
+      void save(Xml& xml, bool optimize) const;
+      bool isDefault(StyleIdx) const;
+
+      const ChordDescription* chordDescription(int id) const;
+      ChordList* chordList() const;
+      friend class Style;
+      };
+
+//---------------------------------------------------------
+//   Style
+//---------------------------------------------------------
+
+class Style {
+      QSharedDataPointer<StyleData> d;
 
    public:
       Style();
       Style(const Style&);
-      Style& operator=(const Style&);
-      ~Style();
-      void load(QDomElement e, int version);
-      void save(Xml& xml, bool optimize);
-      bool isDefault(int);
+
+      void set(const StyleVal& v);
+      void set(StyleIdx t, Spatium val)        { set(StyleVal(t, val)); }
+      void set(StyleIdx t, const QString& val) { set(StyleVal(t, val)); }
+      void set(StyleIdx t, bool val)           { set(StyleVal(t, val)); }
+      void set(StyleIdx t, double val)         { set(StyleVal(t, val)); }
+      void set(StyleIdx t, int val)            { set(StyleVal(t, val)); }
+      void set(StyleIdx t, Direction val)      { set(StyleVal(t, val)); }
+
+      StyleVal value(StyleIdx idx) const;
+      Spatium  valueS(StyleIdx idx) const      { return value(idx).toSpatium(); }
+      QString  valueSt(StyleIdx idx) const     { return value(idx).toString();  }
+      bool     valueB(StyleIdx idx) const      { return value(idx).toBool();    }
+      double   valueD(StyleIdx idx) const      { return value(idx).toDouble();  }
+      int      valueI(StyleIdx idx) const      { return value(idx).toInt();     }
+
+      bool load(QFile* qf)                     { return d->load(qf);            }
+      void load(QDomElement e)                 { d->load(e);                    }
+      void save(Xml& xml, bool optimize)       { d->save(xml, optimize);        }
+
+      bool isDefault(StyleIdx idx) const;
       const ChordDescription* chordDescription(int id) const;
       ChordList* chordList() const;
-      void clearChordList();
-      void set(const StyleVal&);
-      void set(StyleIdx t, Spatium val)     { set(StyleVal(t, val)); }
-      void set(StyleIdx t, double val)      { set(StyleVal(t, val)); }
-      void set(StyleIdx t, bool val)        { set(StyleVal(t, val)); }
-      void set(StyleIdx t, int val)         { set(StyleVal(t, val)); }
-      void set(StyleIdx t, Direction val)   { set(StyleVal(t, val)); }
-      void set(StyleIdx t, const QString& v) { set(StyleVal(t, v)); }
+      const TextStyle& textStyle(TextStyleType idx) const   { return d->textStyle(idx); }
+      const TextStyle& textStyle(const QString& name) const { return d->textStyle(name); }
+      void setTextStyle(const TextStyle& ts)                { d->setTextStyle(ts); }
+      void appendTextStyle(const TextStyle& ts)             { d->_textStyles.append(ts);  }
+      const QList<TextStyle>& textStyles() const            { return d->_textStyles; }
       };
 
 extern QVector<TextStyle> defaultTextStyles;
 extern const TextStyle defaultTextStyleArray[];
 
-extern Style defaultStyle;
+extern Style* defaultStyle;
 extern void setDefaultStyle();
 
 #endif

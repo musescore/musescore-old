@@ -1284,7 +1284,7 @@ void Harmony::render(const TextStyle* st)
             return;
 
       if (st == 0)
-            st = score()->textStyle(_textStyle);
+            st = &score()->textStyle(_textStyle);
       ChordList* chordList = score()->style().chordList();
 
       fontList.clear();

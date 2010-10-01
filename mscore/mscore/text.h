@@ -21,6 +21,7 @@
 #ifndef __TEXT_H__
 #define __TEXT_H__
 
+#include "globals.h"
 #include "element.h"
 #include "style.h"
 
@@ -92,7 +93,7 @@ class TextBase {
       void setFrameRound(int v)             { _frameRound = v;      }
       void setCircle(bool v)                { _circle = v;          }
 
-      void writeProperties(Xml&, TextStyle*, double spatium, bool writeText) const;
+      void writeProperties(Xml&, const TextStyle*, double spatium, bool writeText) const;
       bool readProperties(QDomElement e);
       QFont defaultFont() const;
       void setDefaultFont(QFont f);
@@ -120,7 +121,7 @@ class TextB : public Element {
       QTextCursor* cursor;
       bool setCursor(const QPointF& p, QTextCursor::MoveMode mm = QTextCursor::MoveAnchor);
       int cursorPos;
-      int _textStyle;
+      TextStyleType _textStyle;
       bool _layoutToParentWidth;
 
    public:
@@ -199,8 +200,8 @@ class TextB : public Element {
       QTextCursor* getCursor() const { return cursor; }
 
       virtual void spatiumChanged(double oldValue, double newValue);
-      virtual void setTextStyle(int);
-      int textStyle() const                 { return _textStyle; }
+      virtual void setTextStyle(TextStyleType);
+      TextStyleType textStyle() const                 { return _textStyle; }
       void dragTo(const QPointF&p);
       bool editMode() const { return _editMode; }
 

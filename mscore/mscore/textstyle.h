@@ -33,7 +33,7 @@ class TextProp;
 class TextStyleDialog : public QDialog {
       Q_OBJECT
       TextProp* tp;
-      QVector<TextStyle*> styles;   // local copy of text style
+      QList<TextStyle> styles;   // local copy of text style
       Score* cs;
       QListWidget* textNames;
       int current;

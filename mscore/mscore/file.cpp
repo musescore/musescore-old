@@ -206,7 +206,7 @@ void MuseScore::loadFile()
          );
       if (fn.isEmpty())
             return;
-      Score* score = new Score(defaultStyle);
+      Score* score = new Score(*defaultStyle);
       if(score->read(fn)) {
             setCurrentScoreView(appendScore(score));
             lastOpenPath = score->fileInfo()->path();
@@ -602,7 +602,7 @@ void MuseScore::newFile()
       bool pickupMeasure = newWizard->pickupMeasure(&pickupTimesigZ, &pickupTimesigN);
       KeySigEvent ks = newWizard->keysig();
 
-      Score* score = new Score(defaultStyle);
+      Score* score = new Score(*defaultStyle);
       score->setCreated(true);
 
       //
@@ -639,7 +639,7 @@ void MuseScore::newFile()
                   staff->cleflist()->clear();
                   }
 #endif
-            int tracks = score->nstaves() * VOICES;
+//            int tracks = score->nstaves() * VOICES;
             for (Segment* s = score->firstMeasure()->first(); s;) {
                   Segment* ns = s->next1();
                   if (
@@ -942,22 +942,27 @@ void Score::loadStyle()
          );
       if (fn.isEmpty())
             return;
+
       QFile f(fn);
-      if (!f.open(QIODevice::ReadOnly)) {
-            QMessageBox::warning(0,
-               QWidget::tr("MuseScore: Load Style failed:"),
-               QString(strerror(errno)),
-               QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
+      if (f.open(QIODevice::ReadOnly)) {
+            Style st;
+            if (st.load(&f)) {
+                  _undo->push(new ChangeStyle(this, st));
+                  return;
+                  }
             }
-      loadStyle(&f);
+      QMessageBox::warning(0,
+         QWidget::tr("MuseScore: Load Style failed:"),
+         QString(strerror(errno)),
+         QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
       }
 
 //---------------------------------------------------------
-//   loadStyle
+//   load
 //    return true on error
 //---------------------------------------------------------
 
-bool Score::loadStyle(QFile* qf)
+bool StyleData::load(QFile* qf)
       {
       QDomDocument doc;
       int line, column;
@@ -977,27 +982,12 @@ bool Score::loadStyle(QFile* qf)
             if (e.tagName() == "museScore") {
                   QString version = e.attribute(QString("version"));
                   QStringList sl = version.split('.');
-                  _mscVersion = sl[0].toInt() * 100 + sl[1].toInt();
+                  // _mscVersion = sl[0].toInt() * 100 + sl[1].toInt();
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull();  ee = ee.nextSiblingElement()) {
                         QString tag(ee.tagName());
                         QString val(ee.text());
                         if (tag == "Style")
-                              _style.load(ee, _mscVersion);
-                        else if (tag == "TextStyle") {
-                              QString name = ee.attribute("name");
-                              TextStyle* s = 0;
-                              foreach(TextStyle* ts, textStyles()) {
-                                    if (ts->name == name) {
-                                          s = ts;
-                                          break;
-                                          }
-                                    }
-                              if (s == 0) {
-                                    printf("new TextStyle <%s>\n", qPrintable(name));
-                                    }
-                              else
-                                    s->read(ee);
-                              }
+                              load(ee);
                         else
                               domError(ee);
                         }
@@ -1036,9 +1026,6 @@ void Score::saveStyle()
       xml.header();
       xml.stag("museScore version=\"" MSC_VERSION "\"");
       _style.save(xml, false);     // save complete style
-      foreach(TextStyle* ts, textStyles())
-            ts->write(xml);
-
       xml.etag();
       if (f.error() != QFile::NoError) {
             QString s = tr("Write Style failed: ") + f.errorString();
@@ -1383,21 +1370,11 @@ bool Score::read(QDomElement dScore)
             else if (tag == "showFrames")
                   _showFrames = i;
             else if (tag == "Style")
-                  _style.load(ee, _mscVersion);
-            else if (tag == "TextStyle") {
-                  QString name = ee.attribute("name");
-                  TextStyle* s = 0;
-                  foreach(TextStyle* ts, textStyles()) {
-                        if (ts->name == name) {
-                              s = ts;
-                              break;
-                              }
-                        }
-                  if (s == 0) {
-                        printf("new TextStyle <%s>\n", qPrintable(name));
-                        }
-                  else
-                        s->read(ee);
+                  _style.load(ee);
+            else if (tag == "TextStyle") {      // obsolete: is now part of style
+                  TextStyle s;
+                  s.read(ee);
+                  _style.setTextStyle(s);
                   }
             else if (tag == "page-layout")
                   pageFormat()->read(ee);

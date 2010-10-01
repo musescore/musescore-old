@@ -95,18 +95,19 @@ void Bracket::layout()
       else if (subtype() == BRACKET_NORMAL) {
             qreal w = point(score()->styleS(ST_bracketWidth));
 
-            TextStyle* s = score()->textStyle(TEXT_STYLE_SYMBOL1);
             QChar up   = symbols[score()->symIdx()][brackettipsRightUp].code();
             QChar down = symbols[score()->symIdx()][brackettipsRightDown].code();
 
-            QFont f(s->family, lrint(2.0 * _spatium));
+            QFont ff(symbols[score()->symIdx()][brackettipsRightUp].font());
+
+            QFont f(ff.family(), lrint(2.0 * _spatium));
 
             qreal o   = _spatium * .17;
             qreal slw = point(score()->styleS(ST_staffLineWidth));
 
             path.setFillRule(Qt::WindingFill);
 
-            path.addText(QPointF(0.0, -o), f, QString(up));
+            path.addText(QPointF(0.0, -o), f,          QString(up));
             path.addText(QPointF(0.0, h * 2.0 + o), f, QString(down));
             path.addRect(0.0, -slw * .5, w, h * 2.0 + slw);
             }

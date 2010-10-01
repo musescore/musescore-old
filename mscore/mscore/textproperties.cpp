@@ -157,16 +157,16 @@ void TextProp::get(TextB* tb)
 //   set
 //---------------------------------------------------------
 
-void TextProp::set(TextStyle* s)
+void TextProp::set(const TextStyle& s)
       {
-      fontBold->setChecked(s->bold);
-      fontItalic->setChecked(s->italic);
-      fontUnderline->setChecked(s->underline);
-      fontSize->setValue(s->size);
-      color->setColor(s->foregroundColor);
+      fontBold->setChecked(s.bold());
+      fontItalic->setChecked(s.italic());
+      fontUnderline->setChecked(s.underline());
+      fontSize->setValue(s.size());
+      color->setColor(s.foregroundColor());
 
-      systemFlag->setChecked(s->systemFlag);
-      int a = s->align;
+      systemFlag->setChecked(s.systemFlag());
+      int a = s.align();
       if (a & ALIGN_HCENTER)
             alignHCenter->setChecked(true);
       else if (a & ALIGN_RIGHT)
@@ -184,76 +184,79 @@ void TextProp::set(TextStyle* s)
             alignTop->setChecked(true);
 
       QString str;
-      if (s->offsetType == OFFSET_ABS) {
-            xOffset->setValue(s->xoff * INCH);
-            yOffset->setValue(s->yoff * INCH);
+      if (s.offsetType() == OFFSET_ABS) {
+            xOffset->setValue(s.xoff() * INCH);
+            yOffset->setValue(s.yoff() * INCH);
             mmUnit->setChecked(true);
             curUnit = 0;
             }
-      else if (s->offsetType == OFFSET_SPATIUM) {
-            xOffset->setValue(s->xoff);
-            yOffset->setValue(s->yoff);
+      else if (s.offsetType() == OFFSET_SPATIUM) {
+            xOffset->setValue(s.xoff());
+            yOffset->setValue(s.yoff());
             spatiumUnit->setChecked(true);
             curUnit = 1;
             }
-      rxOffset->setValue(s->rxoff);
-      ryOffset->setValue(s->ryoff);
+      rxOffset->setValue(s.rxoff());
+      ryOffset->setValue(s.ryoff());
 
-      QFont f(s->family);
-      f.setPixelSize(lrint(s->size * PDPI / PPI));
-      f.setItalic(s->italic);
-      f.setUnderline(s->underline);
-      f.setBold(s->bold);
+      QFont f(s.family());
+      f.setPixelSize(lrint(s.size() * PDPI / PPI));
+      f.setItalic(s.italic());
+      f.setUnderline(s.underline());
+      f.setBold(s.bold());
       fontSelect->setCurrentFont(f);
 
-      frameColor->setColor(s->frameColor);
-      frameWidth->setValue(s->frameWidth);
-      frame->setChecked(s->hasFrame);
-      paddingWidth->setValue(s->paddingWidth);
-      frameRound->setValue(s->frameRound);
-      circleButton->setChecked(s->circle);
+      frameColor->setColor(s.frameColor());
+      frameWidth->setValue(s.frameWidth());
+      frame->setChecked(s.hasFrame());
+      paddingWidth->setValue(s.paddingWidth());
+      frameRound->setValue(s.frameRound());
+      circleButton->setChecked(s.circle());
       }
 
 //---------------------------------------------------------
 //   get
 //---------------------------------------------------------
 
-void TextProp::get(TextStyle* s)
+TextStyle TextProp::getTextStyle() const
       {
+      TextStyle s;
       if (curUnit == 0)
-            s->offsetType = OFFSET_ABS;
+            s.setOffsetType(OFFSET_ABS);
       else if (curUnit == 1)
-            s->offsetType = OFFSET_SPATIUM;
-      s->bold         = fontBold->isChecked();
-      s->italic       = fontItalic->isChecked();
-      s->underline    = fontUnderline->isChecked();
-      s->size         = fontSize->value();
-      QFont f         = fontSelect->currentFont();
-      s->family       = strdup(qPrintable(f.family()));  // memory leak
-      s->xoff         = xOffset->value() / ((s->offsetType == OFFSET_ABS) ? INCH : 1.0);
-      s->yoff         = yOffset->value() / ((s->offsetType == OFFSET_ABS) ? INCH : 1.0);
-      s->rxoff        = rxOffset->value();
-      s->ryoff        = ryOffset->value();
-      s->frameColor   = frameColor->color();
-      s->frameWidth   = frameWidth->value();
-      s->paddingWidth = paddingWidth->value();
-      s->circle       = circleButton->isChecked();
-      s->frameRound   = frameRound->value();
-      s->hasFrame     = frame->isChecked();
-      s->systemFlag   = systemFlag->isChecked();
-      s->foregroundColor = color->color();
+            s.setOffsetType(OFFSET_SPATIUM);
+      s.setBold(fontBold->isChecked());
+      s.setItalic(fontItalic->isChecked());
+      s.setUnderline(fontUnderline->isChecked());
+      s.setSize(fontSize->value());
+      QFont f = fontSelect->currentFont();
+      s.setFamily(f.family());
+      s.setXoff(xOffset->value() / ((s.offsetType() == OFFSET_ABS) ? INCH : 1.0));
+      s.setYoff(yOffset->value() / ((s.offsetType() == OFFSET_ABS) ? INCH : 1.0));
+      s.setRxoff(rxOffset->value());
+      s.setRyoff(ryOffset->value());
+      s.setFrameColor(frameColor->color());
+      s.setFrameWidth(frameWidth->value());
+      s.setPaddingWidth(paddingWidth->value());
+      s.setCircle(circleButton->isChecked());
+      s.setFrameRound(frameRound->value());
+      s.setHasFrame(frame->isChecked());
+      s.setSystemFlag(systemFlag->isChecked());
+      s.setForegroundColor(color->color());
 
-      s->align = 0;
+      Align a = 0;
       if (alignHCenter->isChecked())
-            s->align |= ALIGN_HCENTER;
+            a |= ALIGN_HCENTER;
       else if (alignRight->isChecked())
-            s->align |= ALIGN_RIGHT;
+            a |= ALIGN_RIGHT;
 
       if (alignVCenter->isChecked())
-            s->align |= ALIGN_VCENTER;
+            a |= ALIGN_VCENTER;
       else if (alignBottom->isChecked())
-            s->align |= ALIGN_BOTTOM;
+            a |= ALIGN_BOTTOM;
       else if (alignBaseline->isChecked())
-            s->align |= ALIGN_BASELINE;
+            a |= ALIGN_BASELINE;
+      s.setAlign(a);
+      return s;
       }
 

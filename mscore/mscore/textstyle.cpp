@@ -26,8 +26,6 @@
 #include "textproperties.h"
 #include "undo.h"
 
-static const int INTERNAL_STYLES = 2;     // do not present first two styles to user
-
 //---------------------------------------------------------
 //   TextStyleDialog
 //---------------------------------------------------------
@@ -47,15 +45,14 @@ TextStyleDialog::TextStyleDialog(QWidget* parent, Score* score)
       layout->addWidget(bb, 1, 0, 1, 2);
       setLayout(layout);
 
-      cs = score;
-      foreach(TextStyle* s, score->textStyles())
-            styles.append(new TextStyle(*s));
+      cs     = score;
+      styles = cs->style().textStyles();
 
       textNames->setSelectionMode(QListWidget::SingleSelection);
       textNames->clear();
-      for (int i = INTERNAL_STYLES; i < styles.size(); ++i) {
-            TextStyle* s = styles.at(i);
-            textNames->addItem(qApp->translate("MuseScore", s->name.toAscii().data()));
+      for (int i = 0; i < styles.size(); ++i) {
+            const TextStyle& s = styles.at(i);
+            textNames->addItem(qApp->translate("MuseScore", s.name().toAscii().data()));
             }
 
       connect(bb, SIGNAL(clicked(QAbstractButton*)), SLOT(buttonClicked(QAbstractButton*)));
@@ -71,9 +68,6 @@ TextStyleDialog::TextStyleDialog(QWidget* parent, Score* score)
 
 TextStyleDialog::~TextStyleDialog()
       {
-      foreach(TextStyle* ts, styles)
-            delete ts;
-      styles.clear();
       }
 
 //---------------------------------------------------------
@@ -84,7 +78,7 @@ void TextStyleDialog::nameSelected(int n)
       {
       if (current != -1)
             saveStyle(current);
-      current = n + INTERNAL_STYLES;
+      current = n;
       tp->set(styles[current]);
       }
 
@@ -94,8 +88,9 @@ void TextStyleDialog::nameSelected(int n)
 
 void TextStyleDialog::saveStyle(int n)
       {
-      TextStyle* s = styles[n];
-      tp->get(s);
+      TextStyle st = tp->getTextStyle();
+      st.setName(styles[n].name());
+      styles[n] = st;
       }
 
 //---------------------------------------------------------
@@ -128,20 +123,15 @@ void TextStyleDialog::apply()
       {
       saveStyle(current);                 // update local copy of style list
 
-      bool styleChanged = false;
-      int n = cs->textStyles().size();
+      int n = cs->style().textStyles().size();
       for (int i = 0; i < n; ++i) {
-            TextStyle* os = cs->textStyle(i);
-            TextStyle* ns = styles[i];
-            if (*os != *ns) {
-                  styleChanged = true;
+            const TextStyle& os = cs->textStyle(TextStyleType(i));
+            const TextStyle& ns = styles[i];
+            if (os != ns) {
+                  cs->undo()->push(new ChangeTextStyle(cs, ns));
                   break;
                   }
             }
-      if (!styleChanged)
-            return;
-      cs->undo()->push(new ChangeTextStyles(cs, styles));
-      cs->setLayoutAll(true);
       cs->end();
       }
 

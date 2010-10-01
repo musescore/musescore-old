@@ -238,7 +238,7 @@ class Score : public QObject {
       InputState _is;
 
       Style _style;
-      QVector<TextStyle*> _textStyles;
+
       QList<StaffType*> _staffTypes;
 
       QFileInfo info;
@@ -630,13 +630,12 @@ class Score : public QObject {
       const Style& style() const               { return _style;                   }
       void setStyle(const Style& s)            { _style = s;                      }
 
-      StyleVal style(StyleIdx idx) const;
-      Spatium styleS(StyleIdx idx) const;
-      QString styleSt(StyleIdx idx) const;
-      bool    styleB(StyleIdx idx) const;
-      double  styleD(StyleIdx idx) const;
-      int     styleI(StyleIdx idx) const;
-      void setStyle(StyleIdx idx, const StyleVal& v);
+      StyleVal style(StyleIdx idx) const       { return _style.value(idx);   }
+      Spatium styleS(StyleIdx idx) const       { return _style.valueS(idx);  }
+      QString styleSt(StyleIdx idx) const      { return _style.valueSt(idx); }
+      bool    styleB(StyleIdx idx) const       { return _style.valueB(idx);  }
+      double  styleD(StyleIdx idx) const       { return _style.valueD(idx);  }
+      int     styleI(StyleIdx idx) const       { return _style.valueI(idx);  }
 
       void insertTime(int tick, int len);
       void cmdRemoveTime(int tick, int len);
@@ -650,11 +649,8 @@ class Score : public QObject {
       void setInputState(const InputState& st) { _is = st;           }
       void setInputTrack(int);
 
-      TextStyle* textStyle(int idx) { return idx < 0 ? 0 : _textStyles[idx]; }
-      const QVector<TextStyle*>& textStyles() const { return _textStyles; }
-      void setTextStyles(const QVector<TextStyle*>&s);
-      QVector<TextStyle*> swapTextStyles(QVector<TextStyle*> s);
-      bool loadStyle(QFile* qf);
+      const TextStyle& textStyle(TextStyleType idx) const { return _style.textStyle(idx); }
+
       void loadStyle();
       void saveStyle();
       void spatiumChanged(double oldValue, double newValue);

@@ -22,9 +22,9 @@
 #define __TEXTPROPERTIES_H__
 
 #include "ui_textproperties.h"
+#include "style.h"
 
 class TextB;
-class TextStyle;
 
 //---------------------------------------------------------
 //   TextProp
@@ -42,8 +42,8 @@ class TextProp : public QWidget, public Ui::TextPropertiesBase {
       TextProp(QWidget* parent = 0);
       void set(TextB*);
       void get(TextB*);
-      void set(TextStyle*);
-      void get(TextStyle*);
+      void set(const TextStyle&);
+      TextStyle getTextStyle() const;
       };
 
 #endif

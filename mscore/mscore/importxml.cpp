@@ -360,7 +360,7 @@ void MusicXml::import(Score* s)
 //   addText
 //---------------------------------------------------------
 
-static void addText(VBox* & vbx, Score* s, QString strTxt, int sbtp, int stl)
+static void addText(VBox* & vbx, Score* s, QString strTxt, int sbtp, TextStyleType stl)
       {
       if (!strTxt.isEmpty()) {
             Text* text = new Text(s);
@@ -3097,8 +3097,8 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
       double rx = e.attribute("relative-x", "0").toDouble()*0.1;
       double ry = e.attribute("relative-y", "0").toDouble()*-0.1;
 
-      double styleYOff = score->textStyle(TEXT_STYLE_HARMONY)->yoff;
-      OffsetType offsetType = score->textStyle(TEXT_STYLE_HARMONY)->offsetType;
+      double styleYOff = score->textStyle(TEXT_STYLE_HARMONY).yoff();
+      OffsetType offsetType = score->textStyle(TEXT_STYLE_HARMONY).offsetType();
       if (offsetType == OFFSET_ABS) {
             styleYOff = styleYOff * DPMM / score->spatium();
             }
