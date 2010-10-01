@@ -732,10 +732,12 @@ void Score::doLayout()
                         }
                   else if (e && e->type() == BAR_LINE)
                         e->layout();
-                  foreach(Spanner* s, segment->spannerFor())
-                        s->layout();
-                  foreach(Element* e, segment->annotations())
-                        e->layout();
+                  if (track == tracks-1) {
+                        foreach(Spanner* s, segment->spannerFor())
+                              s->layout();
+                        foreach(Element* e, segment->annotations())
+                              e->layout();
+                        }
                   }
             }
 

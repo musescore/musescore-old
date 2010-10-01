@@ -744,6 +744,8 @@ void TextStyleData::write(Xml& xml) const
 void TextStyleData::read(QDomElement e)
       {
       frameWidth = 0.0;
+      name = e.attribute("name");
+
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());

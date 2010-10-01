@@ -117,7 +117,6 @@ Score* createExcerpt(const QList<Part*>& parts)
                   int idx = score->staffTypes().indexOf(st);
                   if (idx == -1)
                         score->staffTypes().append(st);
-                  printf("staff type %s\n", qPrintable(st->name()));
 
                   s->linkTo(staff);
                   p->staves()->append(s);
@@ -378,9 +377,11 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
                                     foreach(Element* e, oseg->annotations()) {
                                           if (e->generated())
                                                 continue;
-                                          if ((e->track() != track) && !(e->systemFlag() && track == 0))
+                                          // if ((e->track() != srcTrack) && !(e->systemFlag() && track == 0))
+                                          if (e->track() != srcTrack)
                                                 continue;
                                           Element* ne = e->clone();
+                                          ne->setTrack(track);
                                           s->add(ne);
                                           }
                                     if ((track % VOICES) == 0) {
@@ -388,8 +389,12 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
                                           Staff* nstaff = score->staff(track/VOICES);
                                           if (!nstaff->useTablature()) {
                                                 const QList<Lyrics*>* ll = oseg->lyricsList(ostaffIdx);
-                                                foreach(Lyrics* ly, *ll) {
-                                                      s->add(ly);
+                                                if (ll) {
+                                                      foreach(Lyrics* ly, *ll) {
+                                                            Lyrics* l = ly->clone();
+                                                            l->setTrack(track);
+                                                            s->add(l);
+                                                            }
                                                       }
                                                 }
                                           }
