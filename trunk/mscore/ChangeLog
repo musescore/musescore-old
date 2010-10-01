@@ -1,4 +1,5 @@
 1. oct (ws)
+      - fix #7345: opening bach-bc2 demo causes crash
       - TextStyle and Style are now implicitly shared objects to reduce
         memory resources and speedup some operations
       - move TextStyle to Style
