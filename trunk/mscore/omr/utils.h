@@ -41,6 +41,7 @@ class Benchmark {
       };
 
 extern void initUtils();
+extern double covariance(const double data1[], const double data2[], int n);
 
 #endif
 

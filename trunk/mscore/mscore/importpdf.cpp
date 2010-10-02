@@ -41,10 +41,8 @@ bool Score::importPdf(const QString& path)
             return false;
             }
       _spatium = _omr->spatiumMM() * DPMM;
-      setStyle(ST_systemDistance,
-         StyleVal(ST_systemDistance, Spatium(_omr->systemDistance())));
-      setStyle(ST_akkoladeDistance,
-         StyleVal(ST_akkoladeDistance, Spatium(_omr->staffDistance())));
+      style().set(StyleVal(ST_systemDistance, Spatium(_omr->systemDistance())));
+      style().set(StyleVal(ST_akkoladeDistance, Spatium(_omr->staffDistance())));
 
       Part* part   = new Part(this);
       Staff* staff = new Staff(this, part, 0);

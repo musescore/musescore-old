@@ -32,10 +32,10 @@ set(GCC_VISIBILITY TRUE)                  # requires gcc 4.x?
 set(HAS_AUDIOFILE TRUE)                   # requires libsndfile
 
 set(STATIC_SCRIPT_BINDINGS FALSE)
-set(USE_SSE FALSE)
-set(SOUNDFONT3 TRUE)                      # enable ogg vorbis compressed fonts, require ogg & vorbis
-set(AEOLUS TRUE)                          # pipe organ synthesizer
-set(OMR    FALSE)                         # optical music recognition
+set(USE_SSE     FALSE)
+set(SOUNDFONT3  TRUE)                     # enable ogg vorbis compressed fonts, require ogg & vorbis
+set(AEOLUS      TRUE)                     # pipe organ synthesizer
+set(OMR         TRUE)                     # optical music recognition
 set(EMBED_ICONS FALSE)                    # do not load icons from share/icons
 set(OSC FALSE)                            # osc remote control
 
@@ -253,7 +253,7 @@ if (NOT MINGW AND NOT APPLE)
 endif (NOT MINGW AND NOT APPLE)
 
 set (subdirs al awl bww2mxml osdabzip rtf2html mscore share manual demos
-     scriptgen fluid msynth diff mstyle)
+     scriptgen fluid msynth diff mstyle poppler)
 
 if(USE_SYSTEM_QTSINGLEAPPLICATION)
       find_path(QTSINGLEAPPLICATION_INCLUDE_DIRS qtsingleapplication.h PATH_SUFFIXES QtSolutions)
@@ -294,7 +294,12 @@ include_directories(
    ${ALSA_INCDIR}
    ${JACK_INCDIR}
    ${PORTAUDIO_INCDIR}
+   ${PROJECT_SOURCE_DIR}/poppler
 )
+if (OMR)
+   include_directories(${PROJECT_SOURCE_DIR}/poppler)
+   include_directories(${PROJECT_SOURCE_DIR}/poppler/poppler)
+endif (OMR)
 
 ##
 ## create package target

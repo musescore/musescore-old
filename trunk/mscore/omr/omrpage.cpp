@@ -18,7 +18,6 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include <gsl/gsl_statistics_double.h>
 #include "omrpage.h"
 #include "image.h"
 #include "utils.h"
@@ -507,7 +506,7 @@ void OmrPage::getStaffLines()
       double autoTable[autoTableSize];
       memset(autoTable, 0, sizeof(autoTable));
       for (int i = 0; i < autoTableSize; ++i) {
-            autoTable[i] = gsl_stats_covariance(projection+y1, 1, projection+i+y1, 1, y2-y1-i);
+            autoTable[i] = covariance(projection+y1, projection+i+y1, y2-y1-i);
             }
       //
       // search for first maximum in covariance starting at 10 to skip

@@ -272,7 +272,7 @@ if (MINGW)
    endif (AEOLUS)
 
    if (OMR)
-      target_link_libraries(mscore omr poppler gsl gslcblas tesseract_full tiff)
+      target_link_libraries(mscore omr poppler)
    endif (OMR)
 
    install( TARGETS mscore RUNTIME DESTINATION bin )
@@ -344,7 +344,7 @@ else (MINGW)
    endif (AEOLUS)
 
    if (OMR)
-      target_link_libraries(mscore omr poppler gsl gslcblas tesseract_full tiff)
+      target_link_libraries(mscore omr poppler)
    endif (OMR)
 
    if (APPLE)
@@ -531,5 +531,3 @@ endif (NOT MINGW AND NOT APPLE)
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}/icons
       )
 # endif (NOT EMBED_ICONS)
-
-
