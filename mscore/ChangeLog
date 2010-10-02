@@ -1,4 +1,7 @@
-2. oct (lv)
+2. oct (ws)
+      - added libpoppler to build system
+      - remove libgsl dependency from omr build
+      (lv)
       - #5637 support reading bww files: fix beam start
 1. oct (ws)
       - fix #7345: opening bach-bc2 demo causes crash

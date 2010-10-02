@@ -19,10 +19,10 @@
 //=============================================================================
 
 #include "pdf.h"
-#include <PDFDoc.h>
-#include <OutputDev.h>
-#include <GlobalParams.h>
-#include <GfxState.h>
+#include "poppler/PDFDoc.h"
+#include "poppler/OutputDev.h"
+#include "poppler/GlobalParams.h"
+#include "poppler/GfxState.h"
 
 //------------------------------------------------------------------------
 // QImageOutputDev

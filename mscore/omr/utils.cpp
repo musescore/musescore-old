@@ -35,3 +35,45 @@ void initUtils()
             bitsSetTable[i] = (i & 1) + bitsSetTable[i/2];
       }
 
+//---------------------------------------------------------
+//   mean
+//    Compute the arithmetic mean of a dataset using the
+//    recurrence relation
+//    mean_(n) = mean(n-1) + (data[n] - mean(n-1))/(n+1)
+//---------------------------------------------------------
+
+double mean(const double data[], int size)
+      {
+      long double mean = 0;
+
+      for (int i = 0; i < size; i++)
+            mean += (data[i] - mean) / (i + 1);
+      return mean;
+      }
+
+//---------------------------------------------------------
+//   covariance
+//---------------------------------------------------------
+
+double covariance(const double data1[],
+   const double data2[], int n, double mean1, double mean2)
+      {
+      long double covariance = 0.0;
+
+      /* find the sum of the squares */
+      for (size_t i = 0; i < n; i++) {
+            const long double delta1 = (data1[i] - mean1);
+            const long double delta2 = (data2[i] - mean2);
+            covariance += (delta1 * delta2 - covariance) / (i + 1);
+            }
+      return covariance;
+      }
+
+double covariance(const double data1[], const double data2[], int n)
+      {
+      double mean1 = mean(data1, n);
+      double mean2 = mean(data2, n);
+
+      return covariance(data1, data2, n, mean1, mean2);
+      }
+
