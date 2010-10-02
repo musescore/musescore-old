@@ -50,7 +50,7 @@ namespace Bww {
     void header(const QString title, const QString type,
                 const QString composer, const QString footer,
                 const unsigned int temp);
-    void note(const QString pitch, const QString beam,
+    void note(const QString pitch, const QVector<BeamType> beamList,
               const QString type, const int dots,
               bool tieStart = false, bool tieStop = false,
               StartStop triplet = ST_NONE,

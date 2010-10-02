@@ -91,6 +91,7 @@ static void dumpBeams(QList<Bww::MeasureDescription> const& measures)
   {
     QString beams;
     QString beamStates;
+    QString beamList0;
     for (int i = 0; i < measures.at(j).notes.size(); ++i)
     {
       QString beam = measures.at(j).notes.at(i).beam;
@@ -107,10 +108,21 @@ static void dumpBeams(QList<Bww::MeasureDescription> const& measures)
         case Bww::ST_STOP:     beamStates += "]"; break;
         default:               beamStates += " ";
         }
+        switch (measures.at(j).notes.at(i).beamList.at(0))
+        {
+        case Bww::BM_NONE:          beamList0 += " "; break;
+        case Bww::BM_BEGIN:         beamList0 += "b"; break;
+        case Bww::BM_CONTINUE:      beamList0 += "c"; break;
+        case Bww::BM_END:           beamList0 += "e"; break;
+        case Bww::BM_FORWARD_HOOK:  beamList0 += ">"; break;
+        case Bww::BM_BACKWARD_HOOK: beamList0 += "<"; break;
+        default:                    beamList0 += "?";
+        }
       }
     }
     qDebug() << "beams measure #" << j + 1 << beams;
     qDebug() << "beams measure #" << j + 1 << beamStates;
+    qDebug() << "beams measure #" << j + 1 << beamList0;
   }
 }
 
@@ -246,6 +258,7 @@ static void determineBeamStates(QList<Bww::MeasureDescription> & measures)
       if (beam == "")
       {
         measures[j].notes[i].beamState = Bww::ST_NONE;
+        measures[j].notes[i].beamList[0] = Bww::BM_NONE;
         state = NONE;
       }
       else if (beam == "r")
@@ -253,11 +266,13 @@ static void determineBeamStates(QList<Bww::MeasureDescription> & measures)
         if (state == NONE)
         {
           measures[j].notes[i].beamState = Bww::ST_START;
+          measures[j].notes[i].beamList[0] = Bww::BM_BEGIN;
           state = LEFT; // now in left part of beam
         }
         else if (state == LEFT)
         {
           measures[j].notes[i].beamState = Bww::ST_CONTINUE;
+          measures[j].notes[i].beamList[0] = Bww::BM_CONTINUE;
         }
         else if (state == RIGHT)
         {
@@ -277,11 +292,13 @@ static void determineBeamStates(QList<Bww::MeasureDescription> & measures)
           if (findNextNextNoteBeam(measures, j, i) == "l")
           {
             measures[j].notes[i].beamState = Bww::ST_CONTINUE;
+            measures[j].notes[i].beamList[0] = Bww::BM_CONTINUE;
             state = RIGHT; // now in right part of beam
           }
           else
           {
             measures[j].notes[i].beamState = Bww::ST_STOP;
+            measures[j].notes[i].beamList[0] = Bww::BM_END;
             state = NONE; // now in right part of beam
           }
         }
@@ -510,7 +527,7 @@ namespace Bww {
       for (int i = 0; i < measures.at(j).notes.size(); ++i)
       {
         wrt.note(measures.at(j).notes.at(i).pitch,
-                 measures.at(j).notes.at(i).beam,
+                 measures.at(j).notes.at(i).beamList,
                  measures.at(j).notes.at(i).type,
                  measures.at(j).notes.at(i).dots,
                  measures.at(j).notes.at(i).tieStart,

@@ -132,7 +132,7 @@ namespace Bww {
     void header(const QString title, const QString type,
                         const QString composer, const QString footer,
                         const unsigned int temp);
-    void note(const QString pitch, const QString beam,
+    void note(const QString pitch, const QVector<Bww::BeamType> beamList,
               const QString type, const int dots,
               bool tieStart = false, bool tieStop = false,
               StartStop triplet = ST_NONE,
@@ -300,7 +300,7 @@ void MsScWriter::endMeasure(const Bww::MeasureEndFlags mef)
    Write a single note.
    */
 
-void MsScWriter::note(const QString pitch, const QString /*TODO beam */,
+void MsScWriter::note(const QString pitch, const QVector<Bww::BeamType> beamList,
                       const QString type, const int dots,
                       bool tieStart, bool /*TODO tieStop */,
                       StartStop triplet,
@@ -327,7 +327,7 @@ void MsScWriter::note(const QString pitch, const QString /*TODO beam */,
       qDebug() << "duration:" << durationType.name();
       if (triplet != ST_NONE) ticks = 2 * ticks / 3;
 
-      BeamMode bm  = BEAM_AUTO;
+      BeamMode bm  = (beamList.at(0) == Bww::BM_BEGIN) ? BEAM_BEGIN : BEAM_AUTO;
       Direction sd = AUTO;
 
       // create chord

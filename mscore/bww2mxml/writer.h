@@ -37,6 +37,17 @@ namespace Bww {
 
   static const char* instrumentName = "Bagpipe";
   static const int midiProgram = 72;
+  static const int maxBeamLevel = 3;
+
+  enum BeamType
+  {
+    BM_NONE,
+    BM_BEGIN,
+    BM_CONTINUE,
+    BM_END,
+    BM_FORWARD_HOOK,
+    BM_BACKWARD_HOOK
+  };
 
   /**
    The flags that need to be handled at the beginning of a measure.
@@ -86,7 +97,7 @@ namespace Bww {
     virtual void trailer() = 0;
     virtual void beginMeasure(const Bww::MeasureBeginFlags mbf) = 0;
     virtual void endMeasure(const Bww::MeasureEndFlags mef) = 0;
-    virtual void note(const QString pitch, const QString beam,
+    virtual void note(const QString pitch, const QVector<BeamType> beamList,
                       const QString type, const int dots,
                       bool tieStart = false, bool tieStop = false,
                       StartStop triplet = ST_NONE,
