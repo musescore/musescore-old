@@ -224,6 +224,24 @@ namespace Bww {
       out << "        <stem>up</stem>" << endl;
     else
       out << "        <stem>down</stem>" << endl;
+    for (int i = 0; i < maxBeamLevel; ++i)
+    {
+      QString s;
+      switch (beamList.at(i))
+      {
+      case BM_BEGIN:         s = "begin"; break;
+      case BM_CONTINUE:      s = "continue"; break;
+      case BM_END:           s = "end"; break;
+      case BM_FORWARD_HOOK:  s = "forward hook"; break;
+      case BM_BACKWARD_HOOK: s = "backward hook"; break;
+      default:               s = ""; break;
+      }
+      if (s != "")
+        out << "        <beam number=\"" << i + 1 << "\">"
+            << s << "</beam>" << endl;
+      else
+        break;
+    }
     if (tieStart || tieStop || triplet == ST_START || triplet == ST_STOP)
     {
       out << "        <notations>" << endl;
