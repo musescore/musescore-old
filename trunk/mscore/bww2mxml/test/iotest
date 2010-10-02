@@ -28,6 +28,7 @@ rwtest() {
       }
 
 rwtestAll() {
+      rwtest testBeams.bww
       rwtest testGraces.bww
       rwtest testHello.bww
       rwtest testMidMeasureRepeat.bww
