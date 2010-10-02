@@ -574,6 +574,8 @@ void Score::updateVelo()
       //
       //    collect Dynamics & Ottava & Hairpins
       //
+      if (_measures.size() == 0)
+            return;
 
       for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
             Staff* st      = staff(staffIdx);
