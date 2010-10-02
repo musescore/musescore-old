@@ -30,6 +30,7 @@
 #include <QtCore/QList>
 #include <QtCore/QMap>
 #include <QtCore/QString>
+#include <QtCore/QVector>
 
 #include "writer.h"
 
@@ -48,6 +49,7 @@ namespace Bww {
     StartStop triplet;
     bool grace;
     StartStop beamState;
+    QVector<BeamType> beamList;
     NoteDescription(const QString _pitch, const QString _beam,
                     const QString _type, const int _dots,
                     bool _tieStart = false, bool _tieStop = false,
@@ -58,7 +60,8 @@ namespace Bww {
                       tieStart(_tieStart), tieStop(_tieStop),
                       triplet(_triplet),
                       grace(_grace),
-                      beamState(ST_NONE)
+                      beamState(ST_NONE),
+                      beamList(maxBeamLevel, BM_NONE)
     {}
   };
 

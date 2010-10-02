@@ -180,7 +180,7 @@ namespace Bww {
    Write a single note.
    */
 
-  void MxmlWriter::note(const QString pitch, const QString /*TODO beam */,
+  void MxmlWriter::note(const QString pitch, QVector<BeamType> beamList,
                         const QString type, const int dots,
                         bool tieStart, bool tieStop,
                         StartStop triplet,
