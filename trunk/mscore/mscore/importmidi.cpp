@@ -949,6 +949,7 @@ void Score::convertMidi(MidiFile* mf)
       sigmap()->tickValues(lastTick, &bars, &beat, &tick);
       if (beat > 0 || tick > 0)
             ++bars;
+      ++bars;     //DEBUG
 
       //---------------------------------------------------
       //  create measures
@@ -958,6 +959,9 @@ void Score::convertMidi(MidiFile* mf)
             Measure* measure  = new Measure(this);
             int tick = sigmap()->bar2tick(i, 0, 0);
             measure->setTick(tick);
+            Fraction ts(sigmap()->timesig(tick).timesig());
+            measure->setTimesig(ts);
+            measure->setLen(ts);
 
       	add(measure);
             }
@@ -1005,13 +1009,16 @@ void Score::convertMidi(MidiFile* mf)
                   part->setMidiChannel(track->outChannel());
                   part->setMidiProgram(track->program() & 0x7f);  // only GM
                   }
-            if (track->staffIdx() != -1)
-                  convertTrack(track);
+            //if (track->staffIdx() != -1)
+            //      convertTrack(track);
 
             foreach (Event* e, track->events()) {
                   if (e->type() == ME_META && e->metaType()==META_LYRIC)
                         mf->processMeta(this, track, e);
                   }
+            if (track->staffIdx() != -1)
+                  convertTrack(track);
+
             }
 
       for (AL::iSigEvent is = sigmap()->begin(); is != sigmap()->end(); ++is) {
@@ -1158,16 +1165,28 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                               // split rest on measure boundary
                               if ((ctick + len) > measure->tick() + measure->ticks())
                                     len = measure->tick() + measure->ticks() - ctick;
-                              QList<Duration> dl = toDurationList(Fraction::fromTicks(len), false);
-                              Duration d = dl.back();
-                              Rest* rest = new Rest(this, d);
-                              rest->setDuration(d.fraction());
-                              rest->setTrack(staffIdx * VOICES);
-                              Segment* s = measure->getSegment(rest, ctick);
-                              s->add(rest);
-                              len = d.ticks();
-                              restLen -= len;
-                              ctick   += len;
+                              if (len == measure->ticks()) {
+                                    Duration d(Duration::V_MEASURE);
+                                    Rest* rest = new Rest(this, d);
+                                    rest->setDuration(d.fraction());
+                                    rest->setTrack(staffIdx * VOICES);
+                                    Segment* s = measure->getSegment(rest, ctick);
+                                    s->add(rest);
+                                    restLen -= len;
+                                    ctick   += len;
+                                    }
+                              else {
+                                    QList<Duration> dl = toDurationList(Fraction::fromTicks(len), false);
+                                    foreach (Duration d, dl) {
+                                          Rest* rest = new Rest(this, d);
+                                          rest->setDuration(d.fraction());
+                                          rest->setTrack(staffIdx * VOICES);
+                                          Segment* s = measure->getSegment(rest, ctick);
+                                          s->add(rest);
+                                          restLen -= len;
+                                          ctick   += len;
+                                          }
+                                    }
                               }
                         }
                   else
@@ -1194,10 +1213,15 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
             //
       	// process pending notes
             //
-            Measure* measure;
+            Measure* measure = 0;
             while (!notes.isEmpty()) {
                   int tick = notes[0]->mc->ontime();
             	measure = tick2measure(tick);
+                  if (tick >= measure->tick() + measure->ticks()) {
+                        printf("=======================EOM\n");
+                        break;
+                        }
+
                   Chord* chord = new Chord(this);
                   chord->setTrack(staffIdx * VOICES + voice);
                   Segment* s = measure->getSegment(chord, tick);
@@ -1207,9 +1231,19 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                   	if (n->mc->duration() < len)
                               len = n->mc->duration();
                         }
+                  if (len == 0) {
+                        printf("ImportMidi: note len zero\n");
+                        abort();
+                        }
                   // split notes on measure boundary
+//                  printf("tick %d len %d = %d    mt %d mtl %d = %d\n",
+//                     tick, len, tick+len, measure->tick(), measure->ticks(), measure->tick()+measure->ticks());
                   if ((tick + len) > measure->tick() + measure->ticks()) {
                         len = measure->tick() + measure->ticks() - tick;
+                        if (len == 0) {
+                              printf("ImportMidi2: note len zero\n");
+                              abort();
+                              }
                         }
                   QList<Duration> dl = toDurationList(Fraction::fromTicks(len), false);
                   Duration d = dl.front();
@@ -1260,7 +1294,7 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
             //
             // check for gap and fill with rest
             //
-            int restLen = measure->tick() + measure->ticks() - ctick;
+            int restLen = measure ? (measure->tick() + measure->ticks() - ctick) : 0;
             while (restLen > 0 && voice == 0) {
                   QList<Duration> dl = toDurationList(Fraction::fromTicks(restLen), false);
                   Duration d = dl.back();
@@ -1283,8 +1317,6 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
       for (ciKeyList i = km->begin(); i != km->end(); ++i) {
             int tick = i->first;
             KeySigEvent key  = i->second;
-            if (tick == 0)
-                  continue;
             KeySig* ks = new KeySig(this);
             ks->setTrack(staffIdx * VOICES);
             ks->setGenerated(false);
@@ -1293,6 +1325,18 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
             Measure* m = tick2measure(tick);
             Segment* seg = m->getSegment(ks, tick);
             seg->add(ks);
+            }
+      ClefList* cl = cstaff->clefList();
+      for (ciClefEvent i = cl->begin(); i != cl->end(); ++i) {
+            int tick = i->first;
+            int clefId  = i->second;
+            Clef* clef = new Clef(this, clefId);
+            clef->setTrack(staffIdx * VOICES);
+            clef->setGenerated(false);
+            clef->setMag(cstaff->mag());
+            Measure* m = tick2measure(tick);
+            Segment* seg = m->getSegment(clef, tick);
+            seg->add(clef);
             }
       }
 

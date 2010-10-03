@@ -175,6 +175,7 @@ void OmrPage::readHeader(Score* score)
       if (!s.isEmpty())
             addText(score, TEXT_TITLE, s);
 
+#if 0
       img = OcrImage(_image.bits(), _slices[1], (_image.width() + 31)/32);
       s = _omr->ocr()->readLine(img).trimmed();
       if (!s.isEmpty())
@@ -184,6 +185,7 @@ void OmrPage::readHeader(Score* score)
       s = _omr->ocr()->readLine(img).trimmed();
       if (!s.isEmpty())
             addText(score, TEXT_COMPOSER, s);
+#endif
       }
 
 //---------------------------------------------------------
@@ -254,6 +256,8 @@ void OmrPage::slice()
       int x2    = wordsPerLine() - cropR;
       int xbits = (x2 - x1) * 32;
 
+      _slices.append(QRect(cropL*32, y1, xbits, y2-y1));
+#if 0
       for (int y = y1; y < y2;) {
             //
             // skip contents
@@ -291,6 +295,7 @@ void OmrPage::slice()
                         break;
                   }
             }
+#endif
       }
 
 //---------------------------------------------------------
