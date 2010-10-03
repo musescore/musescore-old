@@ -37,7 +37,7 @@ set(SOUNDFONT3  TRUE)                     # enable ogg vorbis compressed fonts, 
 set(AEOLUS      TRUE)                     # pipe organ synthesizer
 set(OMR         TRUE)                     # optical music recognition
 set(EMBED_ICONS FALSE)                    # do not load icons from share/icons
-set(OSC FALSE)                            # osc remote control
+set(OSC TRUE)                            # osc remote control
 
 if (APPLE OR MINGW)
       set(GCC_VISIBILITY FALSE)           # warnings if not, with gcc4.4 from qt
@@ -253,7 +253,7 @@ if (NOT MINGW AND NOT APPLE)
 endif (NOT MINGW AND NOT APPLE)
 
 set (subdirs al awl bww2mxml osdabzip rtf2html mscore share manual demos
-     scriptgen fluid msynth diff mstyle poppler)
+     scriptgen fluid msynth diff mstyle)
 
 if(USE_SYSTEM_QTSINGLEAPPLICATION)
       find_path(QTSINGLEAPPLICATION_INCLUDE_DIRS qtsingleapplication.h PATH_SUFFIXES QtSolutions)
@@ -277,7 +277,7 @@ if (AEOLUS)
 endif (AEOLUS)
 
 if (OMR)
-      set (subdirs ${subdirs} omr)
+      set (subdirs ${subdirs} poppler omr)
 endif (OMR)
 
 if (OSC)
