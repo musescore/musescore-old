@@ -351,6 +351,7 @@ class MuseScore : public QMainWindow {
       void oscStop();
       void oscVolume(int val);
       void oscTempo(int val);
+      void oscNext();
 #endif
 
    public slots:

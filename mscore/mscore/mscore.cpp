@@ -3288,6 +3288,7 @@ void MuseScore::initOsc()
       {
       if (!preferences.useOsc)
             return;
+
       int port;
       if (oscPort)
             port = oscPort;
@@ -3304,6 +3305,8 @@ void MuseScore::initOsc()
       QObject::connect(oo, SIGNAL(data(int)), SLOT(oscTempo(int)));
       oo = new PathObject( "/volume", QVariant::Int, osc);
       QObject::connect(oo, SIGNAL(data(int)), SLOT(oscVolume(int)));
+      oo = new PathObject( "/next", QVariant::Int, osc);
+      QObject::connect(oo, SIGNAL(data(int)), SLOT(oscNext()));
       }
 
 //---------------------------------------------------------
@@ -3333,6 +3336,13 @@ void MuseScore::oscStop()
       QAction* a = getAction("play");
       if (a->isChecked())
             a->trigger();
+      }
+
+void MuseScore::oscNext()
+      {
+      printf("osc Next\n");
+      QAction* a = getAction("next-chord");
+      a->trigger();
       }
 
 //---------------------------------------------------------
