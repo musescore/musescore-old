@@ -213,6 +213,7 @@ void UndoStack::push(UndoCommand* cmd)
       {
       if (!curCmd) {
             printf("UndoStack:push(): no active command\n");
+abort();
             cmd->redo();
             delete cmd;
             return;

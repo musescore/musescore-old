@@ -1841,24 +1841,19 @@ void Score::spatiumChanged(double oldValue, double newValue)
 
 Measure* Score::getCreateMeasure(int tick)
       {
-      Fraction ts;
-      int lastTick;
       Measure* last = lastMeasure();
-      if (last) {
-            lastTick = last->tick();
-            ts = last->timesig();
-            }
-      else {
-            lastTick = 0;
-            ts = Fraction(4,4);
-            }
-      while (tick >= lastTick) {
-            Measure* m = new Measure(this);
-            m->setTick(lastTick);
-            m->setTimesig(ts);
-            m->setLen(ts);
-            add(m);
-            lastTick += ts.ticks();
+      if (last == 0 || ((last->tick() + last->ticks()) <= tick)) {
+            int lastTick  = last ? (last->tick()+last->ticks()) : 0;
+            while (tick >= lastTick) {
+                  Measure* m = new Measure(this);
+                  Fraction ts = _sigmap->timesig(lastTick).timesig();
+                  m->setTick(lastTick);
+                  m->setTimesig(ts);
+                  m->setLen(ts);
+                  m->setTimesig(ts);
+                  add(m);
+                  lastTick += ts.ticks();
+                  }
             }
       return tick2measure(tick);
       }
