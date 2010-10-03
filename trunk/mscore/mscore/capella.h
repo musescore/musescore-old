@@ -276,9 +276,9 @@ class TransposableObj : public BasicDrawObj {
 //   MetafileObj
 //---------------------------------------------------------
 
-class MetafileObj : public BasicDrawObj {
+class MetafileObj : public BasicRectObj {
    public:
-      MetafileObj(Capella* c) : BasicDrawObj(CAP_METAFILE, c) {}
+      MetafileObj(Capella* c) : BasicRectObj(CAP_METAFILE, c) {}
       void read();
       };
 
@@ -446,6 +446,7 @@ class SimpleTextObj : public BasicDrawObj {
       void read();
       QString text() const { return QString(_text); }
       QFont font() const { return _font; }
+      QPoint pos() const { return relPos; }
       };
 
 //---------------------------------------------------------
@@ -596,7 +597,7 @@ class Capella {
       unsigned char beamRelMax1;
       unsigned nRel;                // presentation parameter
       unsigned nAbs;
-      bool bUseReadSize;
+      bool bUseRealSize;
       bool bAllowCompression;
       bool bPrintLandscape;
 

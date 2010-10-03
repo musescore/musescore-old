@@ -180,10 +180,11 @@ void TransposableObj::read()
 
 void MetafileObj::read()
       {
-      BasicDrawObj::read();
+      BasicRectObj::read();
       unsigned size = cap->readUnsigned();
       char enhMetaFileBits[size];
       cap->read(enhMetaFileBits, size);
+printf("MetaFileObj::read %d bytes\n", size);
       }
 
 //---------------------------------------------------------
@@ -310,20 +311,14 @@ void TrillObj::read()
 
 QList<BasicDrawObj*> Capella::readDrawObjectArray()
       {
-      static int level = 0;
-
       QList<BasicDrawObj*> ol;
       int n = readUnsigned();       // draw obj array
-for (int k = 0; k < level; ++k)
-      printf("   ");
-printf("readDRawObjectArray %d elements\n", n);
-      ++level;
+
+printf("readDrawObjectArray %d elements\n", n);
       for (int i = 0; i < n; ++i) {
             unsigned char type = readByte();
 
-            for (int k = 0; k < level; ++k)
-                  printf("   ");
-printf("readDrawObject %d of %d, type %d\n", i, n, type);
+printf("   readDrawObject %d of %d, type %d\n", i, n, type);
             switch (type) {
                   case  0: {
                         GroupObj* o = new GroupObj(this);
@@ -423,11 +418,10 @@ printf("readDrawObject %d of %d, type %d\n", i, n, type);
                         break;
                   default:
 printf("readDrawObjectArray unsupported type %d\n", type);
-                        // abort();
+                        abort();
                         break;
                   }
             }
-      --level;
       return ol;
       }
 
@@ -496,6 +490,7 @@ void BasicDurationalObj::read()
             }
       if (c & 0x80)
             abort();
+      printf("   DurationObj timestep %d\n", t);
       }
 
 //---------------------------------------------------------
@@ -574,7 +569,6 @@ void ChordObj::read()
             unsigned char b = cap->readByte();
             leftTie  = b & 1;
             rightTie = b & 2;
-printf("Chord: ties %d %d  ticks %d\n", leftTie, rightTie, ticks());
             }
       if (flags & 0x20) {
             beamShift = cap->readChar();
@@ -595,13 +589,11 @@ printf("Chord: ties %d %d  ticks %d\n", leftTie, rightTie, ticks());
                               v.verseNumber = cap->readString();
                         if (b & 16)
                               v.text = cap->readString();
-// printf("         Verse(%d) <%s><%s>\n", i, qPrintable(v.verseNumber), qPrintable(v.text));
                         verse.append(v);
                         }
                   }
             }
       unsigned nNotes = cap->readUnsigned();
-// printf("         Chord %s flags 0x%02x notes %d\n", timeNames[t], flags, nNotes);
       for (unsigned int i = 0; i < nNotes; ++i) {
             CNote n;
             n.explAlteration = 0;
@@ -619,7 +611,6 @@ printf("Chord: ties %d %d  ticks %d\n", leftTie, rightTie, ticks());
             if (b & 0x40)
                   n.explAlteration = 1;
             n.silent = b & 0x80;
-// printf("            Note pitch %d head %d alteration %d\n", n.pitch, n.headType, n.alteration);
             notes.append(n);
             }
       }
@@ -969,6 +960,7 @@ void CapClef::read()
       form            = (FORM) (b & 7);
       line            = (LINE) ((b >> 3) & 7);
       oct             = (OCT)  (b >> 6);
+      printf("Clef::read form %d line %d oct %d\n", form, line, oct);
       }
 
 //---------------------------------------------------------
@@ -1060,11 +1052,13 @@ void CapExplicitBarline::read()
 
 void Capella::readVoice(CapStaff* cs, int idx)
       {
-// printf("      Voice %d\n", idx);
+printf("      Voice %d\n", idx);
+
       if (readChar() != 'C')
             throw CAP_BAD_VOICE_SIG;
 
-      enum {T_REST, T_CHORD, T_CLEF, T_KEY, T_METER,
+      enum {
+            T_REST, T_CHORD, T_CLEF, T_KEY, T_METER,
             T_EXPL_BARLINE, T_IMPL_BARLINE, T_PAGE_BKGR
             };
 
@@ -1080,9 +1074,11 @@ void Capella::readVoice(CapStaff* cs, int idx)
       for (unsigned i = 0; i < nNoteObjs; i++) {
             QColor color       = Qt::black;
             unsigned char type = readByte();
+printf("         Voice %d read object %d\n", idx, type);
             readExtra();
             if (type != T_REST && type != T_CHORD && type != T_PAGE_BKGR)
                   color = readColor();
+
             // Die anderen Objekttypen haben eine komprimierte Farbcodierung
             switch (type) {
                   case T_REST:
@@ -1256,23 +1252,23 @@ void Capella::read(QFile* fp)
       if (memcmp(signature, "cap3-v:", 7) != 0)
             throw CAP_BAD_SIG;
 
-      printf("read Capella file signature <%s>\n", signature);
+//      printf("read Capella file signature <%s>\n", signature);
 
       // TODO: test for signature[7] = a-z
 
       author   = readString();
       keywords = readString();
       comment  = readString();
-//      printf("author <%s> keywords <%s> comment <%s>\n", author, keywords, comment);
+printf("author <%s> keywords <%s> comment <%s>\n", author, keywords, comment);
 
       nRel   = readUnsigned();            // 75
       nAbs   = readUnsigned();            // 16
       unsigned char b   = readByte();
-      bUseReadSize      = b & 1;
+      bUseRealSize      = b & 1;
       bAllowCompression = b & 2;
       bPrintLandscape   = b & 16;
 
-//      printf("  nRel %d  nAbs %d useReadSize %d compresseion %d\n", nRel, nAbs, bUseReadSize, bAllowCompression);
+printf("  nRel %d  nAbs %d useRealSize %d compresseion %d\n", nRel, nAbs, bUseRealSize, bAllowCompression);
 
       readLayout();
 
@@ -1308,10 +1304,8 @@ void Capella::read(QFile* fp)
       btmPageMargins   = readUnsigned();
 
       unsigned nSystems  = readUnsigned();
-      for (unsigned i = 0; i < nSystems; i++) {
-            printf("readSystem %d of %d\n", i, nSystems);
+      for (unsigned i = 0; i < nSystems; i++)
             readSystem();
-            }
       char esig[4];
       read(esig, 4);
       if (memcmp (esig, "\0\0\0\0", 4) != 0)
@@ -1352,6 +1346,48 @@ bool Score::importCapella(const QString& name)
       }
 
 //---------------------------------------------------------
+//   processBasicDrawObj
+//---------------------------------------------------------
+
+static void processBasicDrawObj(QList<BasicDrawObj*> objects, Segment* s, int track)
+      {
+      Score* score = s->score();
+      foreach(BasicDrawObj* oo, objects) {
+            switch(oo->type) {
+                  case CAP_GROUP:
+                  case CAP_TRANSPOSABLE:
+                  case CAP_METAFILE:
+                  case CAP_RECT_ELLIPSE:
+                  case CAP_LINE:
+                  case CAP_POLYGON:
+                  case CAP_WAVY_LINE:
+                  case CAP_SLUR:
+                  case CAP_NOTE_LINES:
+                  case CAP_WEDGE:
+                  case CAP_VOLTA:
+                  case CAP_BRACKET:
+                  case CAP_GUITAR:
+                  case CAP_TRILL:
+                        break;
+                  case CAP_SIMPLE_TEXT:
+                        {
+                        SimpleTextObj* st = static_cast<SimpleTextObj*>(oo);
+                        Text* text = new Text(score);
+                        text->setDefaultFont(st->font());
+                        text->setText(st->text());
+                        text->setUserOff(st->pos());
+                        text->setTrack(track);
+                        s->add(text);
+                        }
+                        break;
+                  case CAP_TEXT:
+printf("======================Text:\n");
+                        break;
+                  }
+            }
+      }
+
+//---------------------------------------------------------
 //   readCapVoice
 //---------------------------------------------------------
 
@@ -1364,7 +1400,6 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
       // pass I
       //
       int startTick = tick;
-printf("=====readCapVoice at staff %d voice %d tick %d\n", staffIdx, voice, tick);
 
       Tuplet* tuplet = 0;
       int tupletCount = 0;
@@ -1385,8 +1420,6 @@ printf("=====readCapVoice at staff %d voice %d tick %d\n", staffIdx, voice, tick
                         int ticks  = o->ticks();
                         int ft     = m->ticks();
                         if (o->fullMeasures) {
-// printf("full measure rests %d, invisible %d len %d %d\n",
-//    o->fullMeasures, o->invisible, ticks, ft);
                               ticks = ft * o->fullMeasures;
                               if (!o->invisible) {
                                     for (unsigned i = 0; i < o->fullMeasures; ++i) {
@@ -1416,6 +1449,7 @@ printf("=====readCapVoice at staff %d voice %d tick %d\n", staffIdx, voice, tick
                               rest->setTrack(track);
                               rest->setVisible(!o->invisible);
                               s->add(rest);
+                              processBasicDrawObj(o->objects, s, track);
                               }
                         tick += ticks;
                         }
@@ -1538,8 +1572,11 @@ printf("=====readCapVoice at staff %d voice %d tick %d\n", staffIdx, voice, tick
                               if (v.hyphen)
                                     l->setSyllabic(Lyrics::BEGIN);
                               l->setNo(v.num);
-                              s->add(l);
+                              chord->add(l);
                               }
+
+                        processBasicDrawObj(o->objects, s, track);
+
                         if (tuplet) {
                               if (++nTuplet >= tupletCount) {
                                     tick = tupletTick + tuplet->ticks();
@@ -1560,7 +1597,12 @@ printf("=====readCapVoice at staff %d voice %d tick %d\n", staffIdx, voice, tick
                         int nclef = o->clef();
                         if (nclef == -1)
                               break;
-                        staff(staffIdx)->changeClef(tick, ClefType(nclef));
+                        staff(staffIdx)->setClef(tick, ClefType(nclef));
+                        Clef* clef = new Clef(this, ClefType(nclef));
+                        clef->setTrack(staffIdx * VOICES);
+                        Measure* m = getCreateMeasure(tick);
+                        Segment* s = m->getSegment(SegClef, tick);
+                        s->add(clef);
                         }
                         break;
                   case T_KEY:
@@ -1580,7 +1622,6 @@ printf("=====readCapVoice at staff %d voice %d tick %d\n", staffIdx, voice, tick
                         break;
                   case T_METER:
                         {
-#if 0 // TODO
                         CapMeter* o = static_cast<CapMeter*>(no);
                         if (o->log2Denom > 7)
                               break;
@@ -1590,12 +1631,10 @@ printf("=====readCapVoice at staff %d voice %d tick %d\n", staffIdx, voice, tick
                               sigmap()->add(tick, ne);
                         TimeSig* ts = new TimeSig(this);
                         ts->setSig(1 << o->log2Denom, o->numerator);
-                        ts->setTick(tick);
                         ts->setTrack(staffIdx * VOICES + voice);
                         Measure* m = getCreateMeasure(tick);
                         Segment* s = m->getSegment(SegTimeSig, tick);
                         s->add(ts);
-#endif
                         }
                         break;
                   case T_EXPL_BARLINE:
@@ -1670,8 +1709,8 @@ printf("=====readCapVoice at staff %d voice %d tick %d\n", staffIdx, voice, tick
                               Text* s = new Text(this);
                               QString ss = rtf2html(QString(to->text));
 
-                              printf("string %d:%d w %d ratio %d <%s>\n",
-                                 to->relPos.x(), to->relPos.y(), to->width, to->yxRatio, qPrintable(ss));
+printf("string %d:%d w %d ratio %d <%s>\n",
+   to->relPos.x(), to->relPos.y(), to->width, to->yxRatio, qPrintable(ss));
                               s->setHtml(ss);
                               MeasureBase* measure = _measures.first();
                               if (measure->type() != VBOX) {
@@ -1684,7 +1723,7 @@ printf("=====readCapVoice at staff %d voice %d tick %d\n", staffIdx, voice, tick
                               }
                               break;
                         default:
-                              printf("draw obj %d\n", o->type);
+                              break;
                         }
                   }
             // TODO: tick is wrong wg. tuplets
@@ -1712,9 +1751,9 @@ void Score::convertCapella(Capella* cap)
             return;
 
       int staves   = cap->systems[0]->staves.size();
-//      CapStaff* cs = cap->systems[0]->staves[0];
-//TODO      if (cs->log2Denom <= 7)
-//            sigmap()->add(0, Fraction(cs->numerator, 1 << cs->log2Denom));
+      CapStaff* cs = cap->systems[0]->staves[0];
+      if (cs->log2Denom <= 7)
+            sigmap()->add(0, Fraction(cs->numerator, 1 << cs->log2Denom));
 
       Part* part = new Part(this);
       for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
