@@ -1,3 +1,5 @@
+3. oct (ws)
+      - create full measure rests on midi import
 2. oct (ws)
       - added libpoppler to build system
       - remove libgsl dependency from omr build

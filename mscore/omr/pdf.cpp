@@ -29,8 +29,8 @@
 //------------------------------------------------------------------------
 
 class QImageOutputDev: public OutputDev {
-      int iy;
       QImage* image;
+      int ny;
 
    public:
       QImageOutputDev()           { image = 0;   }
@@ -39,7 +39,10 @@ class QImageOutputDev: public OutputDev {
 
       virtual GBool interpretType3Chars() { return gFalse; }
       virtual GBool needNonText()         { return gTrue; }
-      virtual GBool upsideDown()          { return gTrue; }
+
+      // 0,0 is top left corner
+      virtual GBool upsideDown()          { return gFalse; }
+
       virtual GBool useDrawChar()         { return gFalse; }
 
   //----- image drawing
@@ -94,65 +97,61 @@ void QImageOutputDev::drawImage(GfxState* state, Object*, Stream* str,
    int width, int height, GfxImageColorMap* colorMap, GBool, int*, GBool)
       {
       if (colorMap->getNumPixelComps() == 1 && colorMap->getBits() == 1) {
-printf("Image %d %d\n", width, height);
-            bool invertBits = colorMap->getDecodeLow(0) == 0.0;
-            str->reset();     // initialize stream
-
             double* ctm = state->getCTM();
-            QMatrix matrix;
+            double xmag = width/ctm[0];
+            double ymag = height/ctm[3];
+            double xoff = (ctm[2]+ctm[4]) * xmag;
+            int ph      = state->getPageHeight() * ymag;
+            int yoff    = int(ph - (ctm[3]+ctm[5]) * ymag);
 
-            matrix.setMatrix(
-              ctm[0] / width,   0,
-              0,                 -ctm[3] / height,
-              ctm[4],  ctm[3] + ctm[5]);
+printf("Image %4d %4d   at %5f %4d   mag %f %f\n",
+   width, height, xoff, yoff, xmag, ymag);
 
-            int pw = state->getPageWidth() / matrix.m11();
-            pw = ((pw+31)/32) * 32;
-            int ph = state->getPageHeight() / matrix.m22();
+            bool invertBits = colorMap->getDecodeLow(0) == 0.0;
+
             if (image->isNull()) {
+                  int pw = state->getPageWidth() * xmag;
+                  pw     = ((pw+31)/32) * 32;
+                  int ph = state->getPageHeight() * ymag;
                   // *image = QImage(pw, ph+32, QImage::Format_MonoLSB);
-                  *image = QImage(width, height, QImage::Format_MonoLSB);
+                  *image = QImage(pw, ph, QImage::Format_MonoLSB);
                   QVector<QRgb> ct(2);
                   ct[0] = qRgb(255, 255, 255);
                   ct[1] = qRgb(0, 0, 0);
                   image->setColorTable(ct);
                   image->fill(0);
-                  iy = 0;
+                  ny = yoff;
                   }
-/*            if (image->width() < pw || image->height() < ph) {
-                  printf("**********drop image %d x %d  <  %d x %d\n",
-                     image->width(), image->height(), pw, ph);
-                  return;
-                  }
-  */
+
             // copy the stream
+            str->reset();     // initialize stream
+
+            if (yoff != ny)
+                  printf("  ***next image does not fit, gap %d\n", yoff - ny);
+            yoff = ny;
+
             int stride  = (width + 7) / 8;
             uchar mask  = 0xff << (stride * 8 - width);
             int qstride = image->bytesPerLine();
             uchar* p    = image->bits();
             for (int y = 0; y < height; ++y) {
-                  p = image->scanLine(y);
-                  int x = 0;
-                  for (; x < stride; ++x) {
+                  p = image->scanLine(y + yoff);
+                  for (int x = 0; x < stride; ++x) {
                         static unsigned char invert[16] = {
                               0, 8, 4, 12, 2, 10, 6, 14, 1, 9, 5, 13, 3, 11, 7, 15
                               };
-                        unsigned char c = str->getChar();
+                        uchar c = str->getChar();
                         if (invertBits)
                               c = ~c;
                         *p++ = (invert[c & 15] << 4) | invert[(c >> 4) & 15];
                         }
                   p[-1] &= ~mask;
-
-//                  for (; x < qstride; ++x)
-//                        *p++ = 0;
                   }
-            iy += height;
-
             str->close();
+            ny += height;
             }
       else {
-printf("Color Image %d %d\n", width, height);
+printf("Color Image ================%d %d\n", width, height);
 #if 0
             fprintf(f, "P6\n");
             fprintf(f, "%d %d\n", width, height);
@@ -176,8 +175,6 @@ printf("Color Image %d %d\n", width, height);
                         p += colorMap->getNumPixelComps();
                         }
                   }
-            imgStr->close();
-            delete imgStr;
 #endif
             }
       }
@@ -214,7 +211,7 @@ QImage Pdf::page(int i)
       QImage image;
       imgOut->setImage(&image);
       // useMediaBox, crop, printing
-      _doc->displayPage(imgOut, i+1, 72, 72, 0, gTrue, gFalse, gFalse);
+      _doc->displayPage(imgOut, i+1, 1200.0, 1200.0, 0, gTrue, gFalse, gFalse);
       return image;
       }
 
