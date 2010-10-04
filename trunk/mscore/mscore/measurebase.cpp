@@ -201,9 +201,11 @@ void MeasureBase::spatiumChanged(double oldValue, double newValue)
             for (Segment* s = m->first(); s; s = s->next()) {
                   for (int staffIdx = 0; staffIdx < score()->nstaves(); ++staffIdx) {
                         const QList<Lyrics*>* ll = s->lyricsList(staffIdx);
-                        foreach(Lyrics* l, *ll) {
-                              if (l)
-                                    l->spatiumChanged(oldValue, newValue);
+                        if (ll) {
+                              foreach(Lyrics* l, *ll) {
+                                    if (l)
+                                          l->spatiumChanged(oldValue, newValue);
+                                    }
                               }
                         }
                   for (int track = 0; track < score()->nstaves()*VOICES; ++track) {

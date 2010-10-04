@@ -81,8 +81,6 @@ class TimeSigMap : public std::map<const int, SigEvent > {
       void tickValues(int t, int* bar, int* beat, int* tick) const;
       int bar2tick(int bar, int beat, int tick) const;
 
-      int ticksMeasure(int tick) const;
-
       unsigned raster(unsigned tick, int raster) const;
       unsigned raster1(unsigned tick, int raster) const;    // round down
       unsigned raster2(unsigned tick, int raster) const;    // round up

@@ -1816,7 +1816,7 @@ int main(int argc, char* av[])
       revision = QString(f.readAll());
       f.close();
 
-#ifdef OMR
+#ifdef OPENGL
       // omr display needs hardware acceleration for pixmap scaling:
       QApplication::setGraphicsSystem(QString("opengl"));
 #endif

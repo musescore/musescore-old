@@ -44,7 +44,7 @@ void PagePreview::setScore(Score* s)
       _score  = s->clone();
       if (_score == 0)
             return;
-      _score->doLayout();
+      layout();
       }
 
 //---------------------------------------------------------
@@ -95,19 +95,16 @@ void PagePreview::layout()
 
 void PagePreview::paintEvent(QPaintEvent* ev)
       {
+      if (_score->needLayout())
+            _score->doLayout();
+
       QColor _fgColor(Qt::white);
       QColor _bgColor(Qt::gray);
       QRect rr;
-      if (_score->needLayout()) {
-            _score->doLayout();
-            rr = QRect(00, 0, width(), height());
-            }
-      else {
-            int dx = lrint(matrix.m11());
-            int dy = lrint(matrix.m22());
-            rr = QRect(ev->rect().x()-dx, ev->rect().y()-dy,
-               ev->rect().width()+2*dx, ev->rect().height()+2*dy);
-            }
+      int dx = lrint(matrix.m11());
+      int dy = lrint(matrix.m22());
+      rr = QRect(ev->rect().x()-dx, ev->rect().y()-dy,
+      ev->rect().width()+2*dx, ev->rect().height()+2*dy);
 
       QPainter p(this);
       p.setRenderHint(QPainter::Antialiasing, true);
@@ -128,8 +125,7 @@ void PagePreview::paintEvent(QPaintEvent* ev)
       QRectF fr = matrix.inverted().mapRect(QRectF(rr));
       QList<const Element*> ell = page->items(fr);
 
-      for (int i = 0; i < ell.size(); ++i) {
-            const Element* e = ell.at(i);
+      foreach(const Element* e, ell) {
             e->itemDiscovered = 0;
 
             if (!(e->visible() || _score->showInvisible()))

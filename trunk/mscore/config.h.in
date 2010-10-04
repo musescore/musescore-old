@@ -37,4 +37,5 @@
 #cmakedefine AEOLUS
 #cmakedefine OMR
 #cmakedefine OSC
+#cmakedefine OPENGL
 
