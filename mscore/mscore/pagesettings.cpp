@@ -142,7 +142,6 @@ PageSettings::PageSettings(QWidget* parent)
 
 PageSettings::~PageSettings()
       {
-      delete preview;
       }
 
 //---------------------------------------------------------
@@ -546,3 +545,4 @@ void PageSettings::pageWidthChanged(double val)
 
       preview->layout();
       }
+

@@ -363,7 +363,6 @@ Score::Score(const Style& s)
                   SynthParams sp;
                   sp.synth = s;
                   Parameter* p = new Sparm(0, "soundfont", preferences.soundFont);
-printf("add default synti %s\n", qPrintable(preferences.soundFont));
                   sp.params.append(p);
                   _syntiSettings.append(sp);
                   }
@@ -1378,37 +1377,6 @@ void Score::setInputTrack(int v)
       }
 
 //---------------------------------------------------------
-//   clone
-//---------------------------------------------------------
-
-Score* Score::clone()
-      {
-      QBuffer buffer;
-      buffer.open(QIODevice::WriteOnly);
-      Xml xml(&buffer);
-      xml.header();
-
-      xml.stag("museScore version=\"" MSC_VERSION "\"");
-      write(xml, false);
-      xml.etag();
-
-      buffer.close();
-
-      QDomDocument doc;
-      int line, column;
-      QString err;
-      if (!doc.setContent(buffer.buffer(), &err, &line, &column)) {
-            printf("error cloning score %d/%d: %s\n<%s>\n",
-               line, column, err.toLatin1().data(), buffer.buffer().data());
-            return 0;
-            }
-      Score* score = new Score(_style);
-      docName = "--";
-      score->read(doc.documentElement());
-      return score;
-      }
-
-//---------------------------------------------------------
 //   setLayout
 //---------------------------------------------------------
 
@@ -2367,5 +2335,79 @@ void Score::updateAccidentals(Measure* m, int staffIdx)
             if (segment->subtype() & (SegChordRest | SegGrace))
                   m->updateAccidentals(segment, staffIdx, tversatz);
             }
+      }
+
+//---------------------------------------------------------
+//   clone
+//---------------------------------------------------------
+
+Score* Score::clone()
+      {
+      QBuffer buffer;
+      buffer.open(QIODevice::WriteOnly);
+      Xml xml(&buffer);
+      xml.header();
+
+      xml.stag("museScore version=\"" MSC_VERSION "\"");
+      write(xml, false);
+      xml.etag();
+
+      buffer.close();
+
+      QDomDocument doc;
+      int line, column;
+      QString err;
+// printf("buffer <%s>\n", buffer.buffer().data());
+      if (!doc.setContent(buffer.buffer(), &err, &line, &column)) {
+            printf("error cloning score %d/%d: %s\n<%s>\n",
+               line, column, err.toLatin1().data(), buffer.buffer().data());
+            return 0;
+            }
+      Score* score = new Score(_style);
+      docName = "--";
+      score->read1(doc.documentElement());
+
+      score->renumberMeasures();
+
+      int staffIdx = 0;
+      foreach(Staff* st, score->staves()) {
+            if (st->updateClefList())
+                  st->clefList()->clear();
+            if (st->updateKeymap())
+                  st->keymap()->clear();
+            int track = staffIdx * VOICES;
+            KeySig* key1 = 0;
+            for (Measure* m = score->firstMeasure(); m; m = m->nextMeasure()) {
+                  for (Segment* s = m->first(); s; s = s->next()) {
+                        if (!s->element(track))
+                              continue;
+                        Element* e = s->element(track);
+                        if (e->generated())
+                              continue;
+                        if ((s->subtype() == SegClef) && st->updateClefList()) {
+                              Clef* clef = static_cast<Clef*>(e);
+                              st->setClef(s->tick(), clef->subtype());
+                              }
+                        else if ((s->subtype() == SegKeySig) && st->updateKeymap()) {
+                              KeySig* ks = static_cast<KeySig*>(e);
+                              int naturals = key1 ? key1->keySigEvent().accidentalType() : 0;
+                              ks->setOldSig(naturals);
+                              st->setKey(s->tick(), ks->keySigEvent());
+                              key1 = ks;
+                              }
+                        }
+                  if (m->sectionBreak())
+                        key1 = 0;
+                  }
+            st->setUpdateClefList(false);
+            st->setUpdateKeymap(false);
+            ++staffIdx;
+            }
+      score->updateNotes();
+      score->layout();
+      score->addLayoutFlags(LAYOUT_FIX_TICKS | LAYOUT_FIX_PITCH_VELO);
+      score->doLayout();
+      score->scanElements(0, elementAdjustReadPos);
+      return score;
       }
 
