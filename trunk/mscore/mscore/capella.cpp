@@ -985,7 +985,10 @@ int CapClef::clef() const
             case FORM_F + (LINE_4 << 3) + (OCT_BASSA << 5): return CLEF_F8;
             case FORM_F + (LINE_3 << 3) + (OCT_NULL << 5):  return CLEF_F_B;
             case FORM_F + (LINE_5 << 3) + (OCT_NULL << 5):  return CLEF_F_C;
+
             default:
+                  if (form == FORM_NULL)
+                        return -1;
                   printf("unknown clef %d %d %d\n", form, line, oct);
                   break;
             }
@@ -1412,12 +1415,31 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                         {
                         Measure* m = getCreateMeasure(tick);
                         RestObj* o = static_cast<RestObj*>(no);
+                        int ticks = o->ticks();
+                        Duration d;
+                        d.setVal(ticks);
                         if (o->count) {
-                              printf("Capella: Tuplet with rest\n");
-                              abort();
+                              if (tuplet == 0) {
+                                    tupletCount = o->count;
+                                    nTuplet     = 0;
+                                    tupletTick  = tick;
+                                    tuplet      = new Tuplet(this);
+                                    Fraction f(3,2);
+                                    if (tupletCount == 3)
+                                          f = Fraction(3,2);
+                                    else
+                                          printf("Capella: unknown tuplet\n");
+                                    tuplet->setRatio(f);
+                                    tuplet->setBaseLen(d);
+                                    tuplet->setTrack(track);
+                                    tuplet->setTick(tick);
+                                    // tuplet->setParent(m);
+                                    int nn = ((tupletCount * ticks) * f.denominator()) / f.numerator();
+                                    tuplet->setDuration(Fraction::fromTicks(nn));
+                                    m->add(tuplet);
+                                    }
                               }
 
-                        int ticks  = o->ticks();
                         int ft     = m->ticks();
                         if (o->fullMeasures) {
                               ticks = ft * o->fullMeasures;

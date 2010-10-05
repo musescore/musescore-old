@@ -2465,8 +2465,16 @@ void Measure::scanElements(void* data, void (*func)(void*, Element*))
                   }
             foreach(Spanner* e, s->spannerFor())
                   e->scanElements(data,  func);
-            foreach(Element* e, s->annotations())
+            foreach(Element* e, s->annotations()) {
+#if 0
+                  if (e->type() == TEMPO_TEXT) {
+                        QString s = static_cast<TempoText*>(e)->getText();
+                        QRectF r(e->abbox());
+                        printf("scan %f %f %f %f<%s>\n", r.x(), r.y(), r.width(), r.height(), qPrintable(s));
+                        }
+#endif
                   e->scanElements(data,  func);
+                  }
             }
       foreach(Tuplet* tuplet, _tuplets) {
             if (visible(tuplet->staffIdx()))

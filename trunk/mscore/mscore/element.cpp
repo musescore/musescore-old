@@ -294,7 +294,7 @@ void Element::setPos(double x, double y)
 void Element::adjustReadPos()
       {
       if (!_readPos.isNull()) {
-            setUserOff(_readPos - _pos);
+            _userOff = _readPos - _pos;
             _readPos = QPointF();
             }
       }

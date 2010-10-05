@@ -1389,7 +1389,8 @@ void ScoreView::paint(const QRect& rr, QPainter& p)
                   //
                   QRectF bpr = pr.adjusted(page->lm(), page->tm(), -page->rm(), -page->bm());
                   p.setPen(QPen(Qt::gray));
-                  p.drawRect(bpr);
+            //      p.drawRect(bpr);
+                  p.drawRect(fr);
                   }
             QList<const Element*> ell = page->items(fr);
             qStableSort(ell.begin(), ell.end(), elementLessThan);
@@ -2284,8 +2285,10 @@ Element* ScoreView::elementNear(const QPointF& p)
       QRectF r(p.x() - w, p.y() - w, 3.0 * w, 3.0 * w);
 
       Page* page = point2page(p);
-      if (!page)
+      if (!page) {
+            // printf("  no page\n");
             return 0;
+            }
 
       QList<const Element*> el = page->items(r);
       QList<const Element*> ll;
@@ -2306,12 +2309,13 @@ Element* ScoreView::elementNear(const QPointF& p)
                         ll.append(e);
                   }
             }
-      if (ll.empty())
+      if (ll.empty()) {
+            // printf("  nothing found\n");
             return 0;
+            }
       qSort(ll.begin(), ll.end(), elementLower);
 
 #if 0
-      printf("elementNear ========= %f\n", w);
       foreach(const Element* e, ll)
             printf("  %s %d\n", e->name(), e->selected());
 #endif

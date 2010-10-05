@@ -30,7 +30,8 @@ static const char* timeNames[] = { "1/1", "1/2", "1/4", "1/8", "1/16", "1/32", "
 
 class Capella;
 
-enum {T_REST, T_CHORD, T_CLEF, T_KEY, T_METER, T_EXPL_BARLINE, T_IMPL_BARLINE,
+enum {
+      T_REST, T_CHORD, T_CLEF, T_KEY, T_METER, T_EXPL_BARLINE, T_IMPL_BARLINE,
       T_PAGE_BKGR
       };
 
@@ -65,11 +66,12 @@ class NoteObj {
 //---------------------------------------------------------
 
 class CapClef : public NoteObj, public CapellaObj {
-      enum FORM { FORM_G, FORM_C, FORM_F, FORM_PERCUSSION,
-                  FORM_NULL, CLEF_UNCHANGED
-                  };
-      enum LINE {LINE_5, LINE_4, LINE_3, LINE_2, LINE_1};
-      enum OCT  {OCT_ALTA, OCT_NULL, OCT_BASSA};
+      enum FORM {
+            FORM_G, FORM_C, FORM_F, FORM_PERCUSSION,
+            FORM_NULL, CLEF_UNCHANGED
+            };
+      enum LINE { LINE_5, LINE_4, LINE_3, LINE_2, LINE_1};
+      enum OCT  { OCT_ALTA, OCT_NULL, OCT_BASSA};
 
       FORM form;
 
