@@ -1,4 +1,6 @@
 5. oct (ws)
+      - better tuplet layout (#7375)
+      - fix copy&paste of tuplets
       - bb import fixes
       - capella import fixes
       - fix: some elements were not clickable before second layout pass

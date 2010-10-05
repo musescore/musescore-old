@@ -2160,6 +2160,11 @@ void Score::writeSegments(Xml& xml, const Measure* m, int strack, int etrack, Se
                               Beam* beam = cr->beam();
                               if (beam && beam->elements().front() == cr)
                                     beam->write(xml);
+                              Tuplet* tuplet = cr->tuplet();
+                              if (tuplet && tuplet->elements().front() == cr) {
+                                    tuplet->setId(xml.tupletId++);
+                                    tuplet->write(xml);
+                                    }
                               }
                         if ((segment->subtype() == SegEndBarLine) && m && (m->multiMeasure() > 0)) {
                               xml.stag("BarLine");
