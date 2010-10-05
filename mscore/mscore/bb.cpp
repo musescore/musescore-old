@@ -382,6 +382,7 @@ bool Score::importBB(const QString& name)
             printf("cannot open file <%s>\n", qPrintable(name));
             return false;
             }
+      *_sigmap = bb.siglist();
 
       QList<BBTrack*>* tracks = bb.tracks();
       int ntracks = tracks->size();
@@ -400,12 +401,13 @@ bool Score::importBB(const QString& name)
       //---------------------------------------------------
 
       for (int i = 0; i < bb.measures(); ++i) {
-#if 0 // TODO
             Measure* measure  = new Measure(this);
             int tick = sigmap()->bar2tick(i, 0, 0);
             measure->setTick(tick);
+            Fraction ts = sigmap()->timesig(tick).timesig();
+            measure->setTimesig(ts);
+            measure->setLen(ts);
       	add(measure);
-#endif
             }
 
       //---------------------------------------------------
@@ -460,17 +462,16 @@ bool Score::importBB(const QString& name)
       static const int table[] = {
             14, 9, 16, 11, 18, 13, 8, 15, 10, 17, 12, 19
             };
-      const QList<BBChord> cl = bb.chords();
-      foreach(BBChord c, cl) {
+      foreach(const BBChord& c, bb.chords()) {
             int tick = c.beat * AL::division;
+// printf("CHORD %d %d\n", c.beat, tick);
             Measure* m = tick2measure(tick);
             if (m == 0) {
                   printf("import BB: measure for tick %d not found\n", tick);
                   continue;
                   }
-#if 0 //TODO1
+            Segment* s = m->getSegment(SegChordRest, tick);
             Harmony* h = new Harmony(this);
-            h->setTick(tick);
             h->setTrack(0);
             h->setRootTpc(table[c.root-1]);
             if (c.bass > 0)
@@ -479,8 +480,7 @@ bool Score::importBB(const QString& name)
                   h->setBaseTpc(INVALID_TPC);
             h->setId(c.extension);
             h->render();
-            m->add(h);
-#endif
+            s->add(h);
             }
 
       //---------------------------------------------------

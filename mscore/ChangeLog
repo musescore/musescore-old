@@ -1,3 +1,7 @@
+5. oct (ws)
+      - bb import fixes
+      - capella import fixes
+      - fix: some elements were not clickable before second layout pass
 3. oct (ws)
       - create full measure rests on midi import
 2. oct (ws)

@@ -611,6 +611,8 @@ bool Score::read(QString name)
       doLayout();
       // adjust readPos
       scanElements(0, elementAdjustReadPos);
+      rebuildBspTree();
+
       foreach(Excerpt* e, _excerpts) {
             Score* score = e->score();
             score->updateNotes();
@@ -1818,7 +1820,6 @@ Measure* Score::getCreateMeasure(int tick)
                   m->setTick(lastTick);
                   m->setTimesig(ts);
                   m->setLen(ts);
-                  m->setTimesig(ts);
                   add(m);
                   lastTick += ts.ticks();
                   }

@@ -293,7 +293,6 @@ bool TextBase::readProperties(QDomElement e)
 void TextBase::layout(double w)
       {
       const double mag = DPI / PDPI;
-      w /= mag;
 
       QTextOption to = _doc->defaultTextOption();
       to.setUseDesignMetrics(true);
@@ -302,6 +301,8 @@ void TextBase::layout(double w)
 
       if (w <= 0.0)
             w = _doc->idealWidth();
+      else
+            w /= mag;
 
       _doc->setTextWidth(w);   // to make alignment work
 
@@ -660,11 +661,10 @@ bool TextB::isEmpty() const
 
 void TextB::layout()
       {
-      if (parent() && _layoutToParentWidth)
-            textBase()->layout(parent()->width());
-      else
-            textBase()->layout(-1.0);
+      double lw = (parent() && _layoutToParentWidth) ? parent()->width() : -1.0;
 
+      setPos(0.0, 0.0);
+      textBase()->layout(lw);
       setbbox(textBase()->bbox());
 
       Element::layout();      // process alignment

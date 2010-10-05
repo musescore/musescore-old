@@ -741,7 +741,6 @@ void Score::doLayout()
                   }
             }
 
-
       for (Measure* m = firstMeasure(); m; m = m->nextMeasure())
             m->layout2();
 
