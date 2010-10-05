@@ -1908,30 +1908,6 @@ void Measure::adjustToLen(int ol, int nl)
       }
 
 //---------------------------------------------------------
-//   writeTuplets
-//---------------------------------------------------------
-
-void Measure::writeTuplets(Xml& xml, int staff) const
-      {
-      for (int level = 0; true; level++) {                // write tuplets
-            bool found = false;
-            foreach(Tuplet* tuplet, _tuplets) {
-                  if (tuplet->staffIdx() == staff) {
-                        int l = 0;
-                        for (Tuplet* t = tuplet->tuplet(); t; t = t->tuplet())
-                              ++l;
-                        if (l == level) {
-                              tuplet->write(xml);
-                              found = true;
-                              }
-                        }
-                  }
-            if (!found)
-                  break;
-            }
-      }
-
-//---------------------------------------------------------
 //   write
 //---------------------------------------------------------
 
@@ -1974,7 +1950,6 @@ void Measure::write(Xml& xml, int staff, bool writeSystemElements) const
                   }
             }
 
-      writeTuplets(xml, staff);
       int track = staff * VOICES;
       score()->writeSegments(xml, this, track, track+VOICES, first(), last()->next1(), writeSystemElements);
       xml.etag();

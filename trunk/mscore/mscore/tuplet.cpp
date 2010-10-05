@@ -173,31 +173,50 @@ void Tuplet::layout()
       //
       double headDistance = _spatium * .75;
       if (_isUp) {
-            p1 = cr1->abbox().topLeft();
+            p1       = cr1->abbox().topLeft();
             p1.ry() -= headDistance;
+            p2       = cr2->abbox().topRight();
+            p2.ry() -= headDistance;
 
             if (cr1->type() == CHORD) {
                   const Chord* chord1 = static_cast<const Chord*>(cr1);
                   Stem* stem = chord1->stem();
+
                   if (stem && chord1->up()) {
                         p1.setY(stem->abbox().y());
                         if (chord1->beam())
                               p1.setX(stem->abbox().x());
                         }
+                  else if ((cr2->type() == CHORD) && stem && !chord1->up()) {
+                        const Chord* chord2 = static_cast<const Chord*>(cr2);
+                        Stem* stem2 = chord2->stem();
+                        if (stem2) {
+                              int l1 = chord1->upNote()->line();
+                              int l2 = chord2->upNote()->line();
+                              p1.ry() = stem2->abbox().top() + _spatium * .5 * (l1 - l2);
+                              }
+                        }
                   }
-
-            p2 = cr2->abbox().topRight();
-            p2.ry() -= headDistance;
 
             if (cr2->type() == CHORD) {
                   const Chord* chord2 = static_cast<const Chord*>(cr2);
                   Stem* stem = chord2->stem();
                   if (stem && chord2->up()) {
+                        p2.setY(stem->abbox().top());
                         if (chord2->beam())
                               p2.setX(stem->abbox().x());
-                        p2.setY(stem->abbox().top());
+                        }
+                  else if ((cr1->type() == CHORD) && stem && !chord2->up()) {
+                        const Chord* chord1 = static_cast<const Chord*>(cr1);
+                        int l1 = chord1->upNote()->line();
+                        int l2 = chord2->upNote()->line();
+                        p2.ry() = p1.ry() + _spatium * .5 * (l2 - l1);
                         }
                   }
+            //
+            // special case: one of the bracket endpoints is
+            // a rest
+            //
             if (cr1->type() != CHORD && cr2->type() == CHORD) {
                   if (p2.y() < p1.y())
                         p1.setY(p2.y());
@@ -209,6 +228,37 @@ void Tuplet::layout()
                         p2.setY(p1.y());
                   else
                         p1.setY(p2.y());
+                  }
+
+            // check for collisions
+
+            int n = _elements.size();
+            if (n >= 3) {
+                  for (int i = 1; i < (n-1); ++i) {
+                        Element* e = _elements[i];
+                        if (e->type() == CHORD) {
+                              const Chord* chord = static_cast<const Chord*>(e);
+                              const Stem* stem = chord->stem();
+                              if (stem) {
+                                    QRectF r;
+                                    if (chord->up())
+                                          r  = stem->abbox();
+                                    else
+                                          r  = chord->abbox();
+                                    double y3 = r.top();
+                                    double x3 = r.x() + r.width() * .5;
+                                    double dx = p2.x() - p1.x();
+                                    double dy = p2.y() - p1.y();
+                                    double d  = dy/dx;
+                                    double y0 = p1.y() + (x3 - p1.x()) * d;
+                                    double c  = y0 - y3;
+                                    if (c > 0) {
+                                          p1.ry() -= c;
+                                          p2.ry() -= c;
+                                          }
+                                    }
+                              }
+                        }
                   }
             }
       else {
@@ -223,6 +273,15 @@ void Tuplet::layout()
                         if (chord1->beam())
                               p1.setX(stem->abbox().x());
                         }
+                  else if ((cr2->type() == CHORD) && stem && chord1->up()) {
+                        const Chord* chord2 = static_cast<const Chord*>(cr2);
+                        Stem* stem2 = chord2->stem();
+                        if (stem2) {
+                              int l1 = chord1->upNote()->line();
+                              int l2 = chord2->upNote()->line();
+                              p1.ry() = stem2->abbox().bottom() + _spatium * .5 * (l1 - l2);
+                              }
+                        }
                   }
 
             p2 = cr2->abbox().bottomRight();
@@ -235,6 +294,12 @@ void Tuplet::layout()
                         if (chord2->beam())
                               p2.setX(stem->abbox().x());
                         p2.setY(stem->abbox().bottom());
+                        }
+                  else if ((cr1->type() == CHORD) && stem && chord2->up()) {
+                        const Chord* chord1 = static_cast<const Chord*>(cr1);
+                        int l1 = chord1->upNote()->line();
+                        int l2 = chord2->upNote()->line();
+                        p2.ry() = p1.ry() + _spatium * .5 * (l2 - l1);
                         }
                   }
             if (cr1->type() != CHORD && cr2->type() == CHORD) {
@@ -249,6 +314,37 @@ void Tuplet::layout()
                   else
                         p1.setY(p2.y());
                   }
+
+            // check for collisions
+
+            int n = _elements.size();
+            if (n >= 3) {
+                  for (int i = 1; i < (n-1); ++i) {
+                        Element* e = _elements[i];
+                        if (e->type() == CHORD) {
+                              const Chord* chord = static_cast<const Chord*>(e);
+                              const Stem* stem = chord->stem();
+                              if (stem) {
+                                    QRectF r;
+                                    if (!chord->up())
+                                          r  = stem->abbox();
+                                    else
+                                          r  = chord->abbox();
+                                    double y3 = r.bottom();
+                                    double x3 = r.x() + r.width() * .5;
+                                    double dx = p2.x() - p1.x();
+                                    double dy = p2.y() - p1.y();
+                                    double d  = dy/dx;
+                                    double y0 = p1.y() + (x3 - p1.x()) * d;
+                                    double c  = y0 - y3;
+                                    if (c < 0) {
+                                          p1.ry() -= c;
+                                          p2.ry() -= c;
+                                          }
+                                    }
+                              }
+                        }
+                  }
             }
 
       qreal l1 = _spatium;          // bracket tip height
@@ -259,10 +355,8 @@ void Tuplet::layout()
       p1 -= mp;
       p2 -= mp;
 
-//      if (_userModified) {
-            p1 += _p1;
-            p2 += _p2;
-//            }
+      p1 += _p1;
+      p2 += _p2;
 
       // center number
       qreal x3 = 0.0, y3 = 0.0;

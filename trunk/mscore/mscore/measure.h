@@ -256,7 +256,6 @@ class Measure : public MeasureBase {
       void layoutChords10(Segment* segment, int startTrack, char* tversatz);
       void updateAccidentals(Segment* segment, int staffIdx, char* tversatz);
       void layoutStage1();
-      void writeTuplets(Xml&, int staff) const;
       };
 
 extern void initLineList(char* ll, int key);
