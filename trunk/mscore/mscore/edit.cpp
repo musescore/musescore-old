@@ -1575,6 +1575,7 @@ printf("createTuplet at %d <%s> duration <%s> ratio <%s> baseLen <%s>\n",
 printf("tuplet note duration %s  actualNotes %d  ticks %d\n",
       qPrintable(tuplet->baseLen().name()), actualNotes, cr->ticks());
 
+#if 0
       SegmentType st = Segment::segmentType(cr->type());
       Segment* seg = measure->findSegment(st, tick);
       if (seg == 0) {
@@ -1583,6 +1584,8 @@ printf("tuplet note duration %s  actualNotes %d  ticks %d\n",
             }
       cr->setParent(seg);
       undoAddElement(cr);
+#endif
+      undoAddCR(cr, measure, tick);
 
       int ticks = cr->ticks();
 
