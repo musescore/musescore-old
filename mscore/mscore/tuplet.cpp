@@ -234,22 +234,16 @@ void Tuplet::layout()
 
             int n = _elements.size();
             if (n >= 3) {
+                  double d = (p2.y() - p1.y())/(p2.x() - p1.x());
                   for (int i = 1; i < (n-1); ++i) {
                         Element* e = _elements[i];
                         if (e->type() == CHORD) {
                               const Chord* chord = static_cast<const Chord*>(e);
                               const Stem* stem = chord->stem();
                               if (stem) {
-                                    QRectF r;
-                                    if (chord->up())
-                                          r  = stem->abbox();
-                                    else
-                                          r  = chord->abbox();
+                                    QRectF r(chord->up() ? stem->abbox() : chord->abbox());
                                     double y3 = r.top();
                                     double x3 = r.x() + r.width() * .5;
-                                    double dx = p2.x() - p1.x();
-                                    double dy = p2.y() - p1.y();
-                                    double d  = dy/dx;
                                     double y0 = p1.y() + (x3 - p1.x()) * d;
                                     double c  = y0 - y3;
                                     if (c > 0) {
@@ -319,22 +313,16 @@ void Tuplet::layout()
 
             int n = _elements.size();
             if (n >= 3) {
+                  double d  = (p2.y() - p1.y())/(p2.x() - p1.x());
                   for (int i = 1; i < (n-1); ++i) {
                         Element* e = _elements[i];
                         if (e->type() == CHORD) {
                               const Chord* chord = static_cast<const Chord*>(e);
                               const Stem* stem = chord->stem();
                               if (stem) {
-                                    QRectF r;
-                                    if (!chord->up())
-                                          r  = stem->abbox();
-                                    else
-                                          r  = chord->abbox();
+                                    QRectF r(chord->up() ? chord->abbox() : stem->abbox());
                                     double y3 = r.bottom();
                                     double x3 = r.x() + r.width() * .5;
-                                    double dx = p2.x() - p1.x();
-                                    double dy = p2.y() - p1.y();
-                                    double d  = dy/dx;
                                     double y0 = p1.y() + (x3 - p1.x()) * d;
                                     double c  = y0 - y3;
                                     if (c < 0) {
