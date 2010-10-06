@@ -54,7 +54,7 @@ endif (MINGW)
 
 if (OMR)
       set(OPENGL TRUE)
-endif (OPENGL)
+endif (OMR)
 
 # DEGUG:
       set(OPENGL FALSE)
