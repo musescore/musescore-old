@@ -38,6 +38,7 @@
 #include "chord.h"
 #include "note.h"
 #include "lyrics.h"
+#include "segment.h"
 
 //---------------------------------------------------------
 //   read

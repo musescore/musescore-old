@@ -735,7 +735,7 @@ class Score : public QObject {
       MeasureBase* last()  const;
       Measure* firstMeasure() const;
       Measure* lastMeasure() const;
-      Segment* firstSegment() const;
+      Segment* firstSegment(SegmentTypes s = SegAll) const;
       Segment* lastSegment() const;
 
       void setPaintDevice(QPaintDevice* d)          { _paintDevice = d; }

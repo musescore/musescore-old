@@ -27,6 +27,7 @@
 #include "sym.h"
 #include "score.h"
 #include "accidental.h"
+#include "segment.h"
 
 //---------------------------------------------------------
 //   draw

@@ -26,7 +26,7 @@
  Definition of classes MStaff, Measure and MeasureList.
 */
 
-#include "segment.h"
+// #include "segment.h"
 #include "measurebase.h"
 #include "al/fraction.h"
 

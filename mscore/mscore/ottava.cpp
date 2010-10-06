@@ -27,6 +27,7 @@
 #include "score.h"
 #include "text.h"
 #include "staff.h"
+#include "segment.h"
 
 //---------------------------------------------------------
 //   Ottava

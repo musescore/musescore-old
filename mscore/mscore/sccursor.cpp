@@ -30,6 +30,7 @@
 #include "script.h"
 #include "system.h"
 #include "sccursor.h"
+#include "segment.h"
 
 //---------------------------------------------------------
 //   SCursor
@@ -467,7 +468,7 @@ void SCursor::add(ChordRest* c)
       {
       ChordRest* chordRest = cr();
       int track       = _staffIdx * VOICES + _voice;
-      
+
       if (!chordRest) {
             if(_voice > 0) { //create rests
                 int t = tick();
@@ -484,13 +485,13 @@ void SCursor::add(ChordRest* c)
                 chordRest = score()->addRest(seg, track, Duration(Duration::V_MEASURE), 0);
                 }
             if (!chordRest) {
-                  printf("SCursor::add: no cr\n");    
+                  printf("SCursor::add: no cr\n");
                   return;
                   }
             }
       int tick = chordRest->tick();
       Fraction len(c->durationType().fraction());
-      
+
       Fraction gap    = score()->makeGap(chordRest, len, chordRest->tuplet());
       if (gap < len) {
             printf("cannot make gap\n");

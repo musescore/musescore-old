@@ -36,6 +36,7 @@
 #include "measure.h"
 #include "textproperties.h"
 #include "box.h"
+#include "segment.h"
 
 TextPalette* textPalette;
 

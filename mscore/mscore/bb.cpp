@@ -35,6 +35,7 @@
 #include "key.h"
 #include "pitchspelling.h"
 #include "measure.h"
+#include "segment.h"
 
 //---------------------------------------------------------
 //   BBTrack

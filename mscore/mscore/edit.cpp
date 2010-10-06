@@ -178,19 +178,12 @@ Rest* Score::addRest(Segment* s, int track, Duration d, Tuplet* tuplet)
 Chord* Score::addChord(int tick, Duration d, Chord* oc, bool genTie, Tuplet* tuplet)
       {
       Measure* measure = tick2measure(tick);
-      SegmentType st = SegChordRest;
-      Segment* seg = measure->findSegment(st, tick);
-      if (seg == 0) {
-            seg = new Segment(measure, st, tick);
-            undoAddElement(seg);
-            }
+
       Chord* chord = new Chord(this);
       chord->setTuplet(tuplet);
       chord->setTrack(oc->track());
       chord->setDurationType(d);
       chord->setDuration(d.fraction());
-      chord->setParent(seg);
-      undoAddElement(chord);
 
       foreach(Note* n, oc->notes()) {
             Note* nn = new Note(this);
@@ -204,6 +197,8 @@ Chord* Score::addChord(int tick, Duration d, Chord* oc, bool genTie, Tuplet* tup
                   undoAddElement(tie);
                   }
             }
+
+      undoAddCR(chord, measure, tick);
       return chord;
       }
 
@@ -1421,8 +1416,8 @@ Lyrics* Score::addLyrics()
             return 0;
 
       Chord* chord     = e->chord();
-      Segment* segment = chord->segment();
-      int staff        = chord->staffIdx();
+//      Segment* segment = chord->segment();
+//      int staff        = chord->staffIdx();
 
       QList<Lyrics*> ll = chord->lyricsList();
       int no = ll.size();

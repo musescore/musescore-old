@@ -40,6 +40,7 @@
 #include "measure.h"
 #include "al/sig.h"
 #include "tuplet.h"
+#include "segment.h"
 
 //---------------------------------------------------------
 //   errmsg

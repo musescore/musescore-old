@@ -45,6 +45,7 @@
 #include "harmony.h"
 #include "bend.h"
 #include "tremolobar.h"
+#include "segment.h"
 
 //---------------------------------------------------------
 //   errmsg

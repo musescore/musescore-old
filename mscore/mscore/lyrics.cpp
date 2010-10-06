@@ -25,6 +25,7 @@
 #include "score.h"
 #include "scoreview.h"
 #include "sym.h"
+#include "segment.h"
 
 //---------------------------------------------------------
 //   Lyrics
