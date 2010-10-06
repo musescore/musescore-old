@@ -93,7 +93,7 @@ class TextBase {
       void setFrameRound(int v)             { _frameRound = v;      }
       void setCircle(bool v)                { _circle = v;          }
 
-      void writeProperties(Xml&, const TextStyle*, double spatium, bool writeText) const;
+      void writeProperties(Xml&, bool styled, const TextStyle*, bool writeText) const;
       bool readProperties(QDomElement e);
       QFont defaultFont() const;
       void setDefaultFont(QFont f);
@@ -122,6 +122,7 @@ class TextB : public Element {
       bool setCursor(const QPointF& p, QTextCursor::MoveMode mm = QTextCursor::MoveAnchor);
       int cursorPos;
       TextStyleType _textStyle;
+      bool _styled;
       bool _layoutToParentWidth;
 
    public:
@@ -210,6 +211,8 @@ class TextB : public Element {
 
       bool layoutToParentWidth() const    { return _layoutToParentWidth; }
       void setLayoutToParentWidth(bool v) { _layoutToParentWidth = v;   }
+      bool styled() const                 { return _styled; }
+      void setStyled(bool v)              { _styled = v; }
       };
 
 //---------------------------------------------------------

@@ -35,6 +35,7 @@
 #include "system.h"
 #include "measure.h"
 #include "textproperties.h"
+#include "box.h"
 
 TextPalette* textPalette;
 
@@ -222,12 +223,12 @@ QString TextBase::getHtml() const
 //   writeProperties
 //---------------------------------------------------------
 
-void TextBase::writeProperties(Xml& xml, const TextStyle* ts, double /*spatium*/, bool writeText) const
+void TextBase::writeProperties(Xml& xml, bool styled, const TextStyle* ts, bool writeText) const
       {
       // write all properties which are different from style
 
       xml.tag("frame", _hasFrame);
-      if (_hasFrame) {
+      if (!styled && _hasFrame) {
             if (ts == 0 || _frameWidth != ts->frameWidth())
                   xml.tag("frameWidth", _frameWidth);
             if (ts == 0 || _paddingWidth != ts->paddingWidth())
@@ -394,6 +395,7 @@ TextB::TextB(Score* s)
       cursor     = 0;
       setFlag(ELEMENT_MOVABLE, true);
       _textStyle = TEXT_STYLE_INVALID;
+      _styled    = false;
       _layoutToParentWidth = false;
       }
 
@@ -404,6 +406,7 @@ TextB::TextB(const TextB& e)
       _editMode               = e._editMode;
       cursorPos               = e.cursorPos;
       _textStyle              = e._textStyle;
+      _styled                 = e._styled;
       _layoutToParentWidth    = e._layoutToParentWidth;
       cursor                  = 0;
       }
@@ -661,13 +664,21 @@ bool TextB::isEmpty() const
 
 void TextB::layout()
       {
-      double lw = (parent() && _layoutToParentWidth) ? parent()->width() : -1.0;
-
-      setPos(0.0, 0.0);
+      double x = 0.0, y = 0.0, lw = -1;
+      if (parent() && _layoutToParentWidth) {
+            lw = parent()->width();
+            if (parent()->type() == HBOX || parent()->type() == VBOX) {
+                  Box* box = static_cast<Box*>(parent());
+                  x = box->leftMargin() * DPMM;
+                  lw -= (box->leftMargin() + box->rightMargin()) * DPMM;
+                  y = box->topMargin() * DPMM;
+                  }
+            }
       textBase()->layout(lw);
       setbbox(textBase()->bbox());
-
       Element::layout();      // process alignment
+      rxpos() += x;
+      rypos() += y;
 
       if ((_align & ALIGN_VCENTER) && (subtype() == TEXT_TEXTLINE)) {
             // special case: vertically centered text with TextLine needs to
@@ -702,6 +713,8 @@ void TextB::draw(QPainter& p, ScoreView*) const
 void TextB::setTextStyle(TextStyleType idx)
       {
       _textStyle   = idx;
+      if (_textStyle != TEXT_STYLE_INVALID)
+            _styled = true;
       const TextStyle& s = score()->textStyle(idx);
       doc()->setDefaultFont(s.font(spatium()));
 
@@ -767,57 +780,59 @@ void TextB::writeProperties(Xml& xml, bool writeText) const
       {
       // write all properties which are different from style
 
-      bool invalid = _textStyle == TEXT_STYLE_INVALID;
-      if (!invalid)
-            xml.tag("style", _textStyle);
+      const TextStyle* st;
+      if (_textStyle != TEXT_STYLE_INVALID) {
+            st = &score()->textStyle(_textStyle);
+            xml.tag("style", st->name());
+            }
+      else
+            st = 0;
 
       Element::writeProperties(xml);
 
-      const TextStyle* st = 0;
-      if (!invalid)
-            st = &score()->textStyle(_textStyle);
-      if (invalid || _align != st->align()) {
-            if (_align & ALIGN_HCENTER)
-                  xml.tag("halign", "center");
-            else if (_align & ALIGN_RIGHT)
-                  xml.tag("halign", "right");
-            else
-                  xml.tag("halign", "left");
+      if (!_styled) {
+            if (!st || _align != st->align()) {
+                  if (_align & ALIGN_HCENTER)
+                        xml.tag("halign", "center");
+                  else if (_align & ALIGN_RIGHT)
+                        xml.tag("halign", "right");
+                  else
+                        xml.tag("halign", "left");
 
-            if (_align & ALIGN_BOTTOM)
-                  xml.tag("valign", "bottom");
-            else if (_align & ALIGN_VCENTER)
-                  xml.tag("valign", "center");
-            else if (_align & ALIGN_BASELINE)
-                  xml.tag("valign", "baseline");
-            else
-                  xml.tag("valign", "top");
-            }
-      if (invalid || _xoff != st->xoff())
-            xml.tag("xoffset", _xoff);
-      if (invalid || _yoff != st->yoff())
-            xml.tag("yoffset", _yoff);
-      if (invalid || _reloff.x() != st->rxoff())
-            xml.tag("rxoffset", _reloff.x());
-      if (invalid || _reloff.y() != st->ryoff())
-            xml.tag("ryoffset", _reloff.y());
-
-      if (invalid || _offsetType != st->offsetType()) {
-            const char* p = 0;
-            switch(_offsetType) {
-                  case OFFSET_SPATIUM:    p = "spatium"; break;
-                  case OFFSET_ABS:        p = "absolute"; break;
+                  if (_align & ALIGN_BOTTOM)
+                        xml.tag("valign", "bottom");
+                  else if (_align & ALIGN_VCENTER)
+                        xml.tag("valign", "center");
+                  else if (_align & ALIGN_BASELINE)
+                        xml.tag("valign", "baseline");
+                  else
+                        xml.tag("valign", "top");
                   }
-            if (p)
-                  xml.tag("offsetType", p);
+            if (!st || _xoff != st->xoff())
+                  xml.tag("xoffset", _xoff);
+            if (!st || _yoff != st->yoff())
+                  xml.tag("yoffset", _yoff);
+            if (!st || _reloff.x() != st->rxoff())
+                  xml.tag("rxoffset", _reloff.x());
+            if (!st || _reloff.y() != st->ryoff())
+                  xml.tag("ryoffset", _reloff.y());
+
+            if (!st || _offsetType != st->offsetType()) {
+                  const char* p = 0;
+                  switch(_offsetType) {
+                        case OFFSET_SPATIUM:    p = "spatium"; break;
+                        case OFFSET_ABS:        p = "absolute"; break;
+                        }
+                  if (p)
+                        xml.tag("offsetType", p);
+                  }
+
+            if (!st || (!_sizeIsSpatiumDependent && _sizeIsSpatiumDependent != st->sizeIsSpatiumDependent()))
+                  xml.tag("spatiumSizeDependent", _sizeIsSpatiumDependent);
+            if (_textStyle == TEXT_STYLE_MEASURE_NUMBER)
+                  return;
             }
-
-      if (invalid || (!_sizeIsSpatiumDependent && _sizeIsSpatiumDependent != st->sizeIsSpatiumDependent()))
-            xml.tag("spatiumSizeDependent", _sizeIsSpatiumDependent);
-      if (_textStyle == TEXT_STYLE_MEASURE_NUMBER)
-            return;
-
-      textBase()->writeProperties(xml, st, score()->spatium(), writeText);
+      textBase()->writeProperties(xml, _styled, st, writeText);
       }
 
 //---------------------------------------------------------
@@ -842,9 +857,56 @@ bool TextB::readProperties(QDomElement e)
       QString val(e.text());
 
       if (tag == "style") {
-            int i = val.toInt();
-            if (i >= 0)
+            bool ok;
+            int i = val.toInt(&ok);
+            if (ok) {
+                  // obsolete old text styles
+                  switch (i) {
+                        case 0:  i = TEXT_STYLE_INVALID;   break;
+                        case 1:  i = TEXT_STYLE_INVALID;   break;
+                        case 2:  i = TEXT_STYLE_TITLE;     break;
+                        case 3:  i = TEXT_STYLE_SUBTITLE;  break;
+                        case 4:  i = TEXT_STYLE_COMPOSER;  break;
+                        case 5:  i = TEXT_STYLE_POET;      break;
+                        case 6:  i = TEXT_STYLE_LYRIC1;    break;
+                        case 7:  i = TEXT_STYLE_LYRIC2;    break;
+                        case 8:  i = TEXT_STYLE_FINGERING; break;
+                        case 9:  i = TEXT_STYLE_INSTRUMENT_LONG;    break;
+                        case 10: i = TEXT_STYLE_INSTRUMENT_SHORT;   break;
+                        case 11: i = TEXT_STYLE_INSTRUMENT_EXCERPT; break;
+
+                        case 12: i = TEXT_STYLE_DYNAMICS;  break;
+                        case 13: i = TEXT_STYLE_TECHNIK;   break;
+                        case 14: i = TEXT_STYLE_TEMPO;     break;
+                        case 15: i = TEXT_STYLE_METRONOME; break;
+                        case 16: i = TEXT_STYLE_COPYRIGHT; break;
+                        case 17: i = TEXT_STYLE_MEASURE_NUMBER; break;
+                        case 18: i = TEXT_STYLE_FOOTER; break;    // TEXT_STYLE_PAGE_NUMBER_ODD
+                        case 19: i = TEXT_STYLE_FOOTER; break;    // TEXT_STYLE_PAGE_NUMBER_EVEN
+                        case 20: i = TEXT_STYLE_TRANSLATOR; break;
+                        case 21: i = TEXT_STYLE_TUPLET;     break;
+
+                        case 22: i = TEXT_STYLE_SYSTEM;         break;
+                        case 23: i = TEXT_STYLE_STAFF;          break;
+                        case 24: i = TEXT_STYLE_HARMONY;        break;
+                        case 25: i = TEXT_STYLE_REHEARSAL_MARK; break;
+                        case 26: i = TEXT_STYLE_REPEAT;         break;
+                        case 27: i = TEXT_STYLE_VOLTA;          break;
+                        case 28: i = TEXT_STYLE_FRAME;          break;
+                        case 29: i = TEXT_STYLE_TEXTLINE;       break;
+                        case 30: i = TEXT_STYLE_GLISSANDO;      break;
+                        case 31: i = TEXT_STYLE_STRING_NUMBER;  break;
+
+                        case 32: i = TEXT_STYLE_OTTAVA;  break;
+                        case 33: i = TEXT_STYLE_BENCH;   break;
+                        case 34: i = TEXT_STYLE_HEADER;  break;
+                        case 35: i = TEXT_STYLE_FOOTER;  break;
+                        default: i = TEXT_STYLE_INVALID; break;
+                        }
                   setTextStyle(TextStyleType(i));
+                  }
+            else
+                  setTextStyle(score()->style().textStyleType(val));
             }
       else if (tag == "align")            // obsolete
             _align = Align(val.toInt());
@@ -1498,7 +1560,9 @@ TextProperties::TextProperties(TextB* t, QWidget* parent)
       {
       setWindowTitle(tr("MuseScore: Text Properties"));
       QGridLayout* layout = new QGridLayout;
-      tp                  = new TextProp;
+
+      tp                  = new TextProp(false);
+
       layout->addWidget(tp, 0, 1);
       QLabel* l = new QLabel;
       l->setPixmap(QPixmap(":/data/bg1.jpg"));
@@ -1515,7 +1579,9 @@ TextProperties::TextProperties(TextB* t, QWidget* parent)
       setLayout(layout);
 
       tb = t;
+
       tp->set(tb);
+
       connect(bb, SIGNAL(accepted()), SLOT(accept()));
       connect(bb, SIGNAL(rejected()), SLOT(reject()));
       }

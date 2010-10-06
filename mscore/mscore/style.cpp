@@ -233,9 +233,6 @@ void setDefaultStyle()
       {
       defaultStyle = new Style;
 
-//      AS(TextStyle(TR("Symbols1"), QString("MScore"), 20, false, false, false, ALIGN_LEFT));
-//      AS(TextStyle(TR("Symbols3"), QString("MScore"), 14, false, false, false, ALIGN_LEFT));
-
       AS(TextStyle(TR("Title"), ff, 24, false, false, false, ALIGN_HCENTER | ALIGN_TOP, 0, 0, OA, 50, 0));
 
       AS(TextStyle(TR( "Subtitle"), ff, 14, false, false, false,
@@ -271,7 +268,7 @@ void setDefaultStyle()
       AS(TextStyle(TR( "Technik"), ff, 12, false, true, false,
          ALIGN_LEFT | ALIGN_BASELINE, 0.0, -2.0, OS));
 
-/*13*/
+/*12*/
       AS(TextStyle(TR( "Tempo"), ff, 12, true, false, false,
          ALIGN_LEFT | ALIGN_BASELINE, 0, -4.0, OS, 0, 0, true, .0, .0, 0, Qt::black, false, true));
 
@@ -282,13 +279,13 @@ void setDefaultStyle()
 
       AS(TextStyle(TR( "Measure Number"), ff, 8, false, false, false,
          ALIGN_CENTER | ALIGN_BOTTOM, 0.0, 0.0, OS, 0.0, 0.0, true));
-
+#if 0
       AS(TextStyle(TR( "Page Number Odd"), ff, 12, false, false, false,
          ALIGN_RIGHT | ALIGN_BASELINE, MM(-10), MM(-10), OA, 100.0, 100.0));
 
       AS(TextStyle(TR( "Page Number Even"), ff, 12, false, false, false,
          ALIGN_LEFT | ALIGN_BASELINE, MM(10), MM(-10), OA, 0.0, 100.0));
-
+#endif
       AS(TextStyle(TR( "Translator"), ff, 11, false, false, false,
          ALIGN_HCENTER | ALIGN_TOP, 0, 6));
 
@@ -1064,6 +1061,22 @@ const TextStyle& StyleData::textStyle(const QString& name) const
             }
       printf("TextStyle <%s> not found\n", qPrintable(name));
       return _textStyles[0];
+      }
+
+//---------------------------------------------------------
+//   textStyleType
+//---------------------------------------------------------
+
+TextStyleType StyleData::textStyleType(const QString& name) const
+      {
+      int idx = 0;
+      foreach(const TextStyle& s, _textStyles) {
+            if (s.name() == name)
+                  return TextStyleType(idx);
+            ++idx;
+            }
+      printf("TextStyle <%s> not found\n", qPrintable(name));
+      return TEXT_STYLE_INVALID;
       }
 
 //---------------------------------------------------------

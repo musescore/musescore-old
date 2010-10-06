@@ -32,6 +32,8 @@
 #include "image.h"
 #include "layoutbreak.h"
 
+static const double BOX_MARGIN = 5.0;
+
 //---------------------------------------------------------
 //   Box
 //---------------------------------------------------------
@@ -42,10 +44,10 @@ Box::Box(Score* score)
       editMode      = false;
       _boxWidth     = Spatium(5.0);
       _boxHeight    = Spatium(10.0);
-      _leftMargin   = 5.0;
-      _rightMargin  = 5.0;
-      _topMargin    = 5.0;
-      _bottomMargin = 5.0;
+      _leftMargin   = BOX_MARGIN;
+      _rightMargin  = BOX_MARGIN;
+      _topMargin    = BOX_MARGIN;
+      _bottomMargin = BOX_MARGIN;
       }
 
 //---------------------------------------------------------
@@ -57,6 +59,7 @@ void Box::layout()
       foreach (Element* el, _el) {
             if ((el->type() == TEXT))
                   static_cast<Text*>(el)->setLayoutToParentWidth(true);
+// printf("box::layout width %f\n", width());
             el->layout();
             }
       }
@@ -163,13 +166,13 @@ void Box::write(Xml& xml) const
             xml.tag("height", _boxHeight.val());
       else if (type() == HBOX)
             xml.tag("width", _boxWidth.val());
-      if (_leftMargin != 0.0)
+      if (_leftMargin != BOX_MARGIN)
             xml.tag("leftMargin", _leftMargin);
-      if (_rightMargin != 0.0)
+      if (_rightMargin != BOX_MARGIN)
             xml.tag("rightMargin", _rightMargin);
-      if (_topMargin != 0.0)
+      if (_topMargin != BOX_MARGIN)
             xml.tag("topMargin", _topMargin);
-      if (_bottomMargin != 0.0)
+      if (_bottomMargin != BOX_MARGIN)
             xml.tag("bottomMargin", _bottomMargin);
       Element::writeProperties(xml);
       foreach (const Element* el, _el)
@@ -183,6 +186,9 @@ void Box::write(Xml& xml) const
 
 void Box::read(QDomElement e)
       {
+      if (score()->mscVersion() < 119)
+            _leftMargin = _rightMargin = _topMargin = _bottomMargin = 0.0;
+
       double _spatium = spatium();
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
@@ -210,23 +216,6 @@ void Box::read(QDomElement e)
             else if (tag == "Text") {
                   Text* t = new Text(score());
                   t->read(e);
-#if 0
-                  does not work as setTextStyle overwrites all
-                  kind of information (align...)
-
-                  // for backward compatibility
-                  QColor c = t->color();
-                  int st = t->subtype();
-                  if (st == TEXT_TITLE)
-                        t->setTextStyle(TEXT_STYLE_TITLE);
-                  else if (st == TEXT_SUBTITLE)
-                        t->setTextStyle(TEXT_STYLE_SUBTITLE);
-                  else if (st == TEXT_COMPOSER)
-                        t->setTextStyle(TEXT_STYLE_COMPOSER);
-                  else if (st == TEXT_POET)
-                        t->setTextStyle(TEXT_STYLE_POET);
-                  t->setColor(c);
-#endif
                   add(t);
                   }
             else if (tag == "Symbol") {

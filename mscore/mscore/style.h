@@ -408,6 +408,7 @@ class StyleData : public QSharedData {
       StyleVal value(StyleIdx idx) const                  { return _values[idx];     }
       const TextStyle& textStyle(TextStyleType idx) const { return _textStyles[idx]; }
       const TextStyle& textStyle(const QString&) const;
+      TextStyleType textStyleType(const QString&) const;
       void setTextStyle(const TextStyle& ts);
 
    public:
@@ -460,6 +461,7 @@ class Style {
       ChordList* chordList() const;
       const TextStyle& textStyle(TextStyleType idx) const   { return d->textStyle(idx); }
       const TextStyle& textStyle(const QString& name) const { return d->textStyle(name); }
+      TextStyleType textStyleType(const QString& name) const { return d->textStyleType(name); }
       void setTextStyle(const TextStyle& ts)                { d->setTextStyle(ts); }
       void appendTextStyle(const TextStyle& ts)             { d->_textStyles.append(ts);  }
       const QList<TextStyle>& textStyles() const            { return d->_textStyles; }

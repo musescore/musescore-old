@@ -35,7 +35,7 @@ TextStyleDialog::TextStyleDialog(QWidget* parent, Score* score)
       {
       setWindowTitle(tr("MuseScore: Edit Text Styles"));
       QGridLayout* layout = new QGridLayout;
-      tp = new TextProp;
+      tp = new TextProp(true);
       layout->addWidget(tp, 0, 1);
       textNames = new QListWidget;
       layout->addWidget(textNames, 0, 0);

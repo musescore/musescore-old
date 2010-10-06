@@ -2132,7 +2132,7 @@ KeySig* Score::customKeySig(int idx) const
 //   keySigFactory
 //---------------------------------------------------------
 
-KeySig* Score::keySigFactory(KeySigEvent e)
+KeySig* Score::keySigFactory(const KeySigEvent& e)
       {
       KeySig* ks;
       if (!e.isValid())

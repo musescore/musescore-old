@@ -24,6 +24,7 @@
 #include "utils.h"
 #include "mscore.h"
 #include "score.h"
+#include "xml.h"
 
 QVector<Sym> symbols[2];
 static bool symbolsInitialized[2] = { false, false };

@@ -25,6 +25,7 @@
 #include "score.h"
 #include "staff.h"
 #include "part.h"
+#include "segment.h"
 
 //---------------------------------------------------------
 //   Arpeggio

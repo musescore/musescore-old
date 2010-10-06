@@ -84,11 +84,12 @@ QT4_WRAP_UI (ui_headers
       chordedit.ui transposedialog.ui tempoproperties.ui importmidi.ui
       lineproperties.ui excerptsdialog.ui lyrics.ui stafftext.ui
       imageproperties.ui tupletdialog.ui tupletproperties.ui
-      glissandoprop.ui articulation.ui metaedit.ui palette.ui textproperties.ui
+      glissandoprop.ui articulation.ui metaedit.ui palette.ui
       dynamicproperties.ui textline.ui slurproperties.ui inspector.ui
       select.ui synthcontrol.ui splitstaff.ui cellproperties.ui beam.ui keyedit.ui
       harmonyedit.ui selectinstr.ui tremolo.ui fretdprops.ui stafftype.ui
       sectionbreak.ui hairpinproperties.ui spanner.ui bend.ui tremolobar.ui
+      textproperties.ui
       )
 
 QT4_WRAP_CPP (mocs
