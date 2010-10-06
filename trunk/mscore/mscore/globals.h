@@ -42,6 +42,8 @@ static const int MSCVERSION = 118;
 //    1.17  new <Score> toplevel structure to support linked parts (excerpts)
 //    1.18  save lyrics as subtype to chord/rest to allow them associated with
 //          grace notes
+//    1.19  replace text style numbers by text style names; box margins are now
+//          used
 
 extern bool debugMode;
 extern bool enableExperimental;
@@ -308,12 +310,12 @@ enum ClefType {
 
 //---------------------------------------------------------
 //   TextStyleType
+//    must be in sync with list in setDefaultStyle()
 //---------------------------------------------------------
 
 enum TextStyleType {
-      TEXT_STYLE_INVALID = -1,
-//      TEXT_STYLE_SYMBOL1 = 0,
-//      TEXT_STYLE_SYMBOL3,
+      TEXT_STYLE_INVALID = -1,      // unstyled
+
       TEXT_STYLE_TITLE = 0,
       TEXT_STYLE_SUBTITLE,
       TEXT_STYLE_COMPOSER,
@@ -324,17 +326,18 @@ enum TextStyleType {
       TEXT_STYLE_INSTRUMENT_LONG,
       TEXT_STYLE_INSTRUMENT_SHORT,
       TEXT_STYLE_INSTRUMENT_EXCERPT,
+
       TEXT_STYLE_DYNAMICS,
       TEXT_STYLE_TECHNIK,
       TEXT_STYLE_TEMPO,
       TEXT_STYLE_METRONOME,
       TEXT_STYLE_COPYRIGHT,
       TEXT_STYLE_MEASURE_NUMBER,
-      TEXT_STYLE_PAGE_NUMBER_ODD,
-      TEXT_STYLE_PAGE_NUMBER_EVEN,
-
+//      TEXT_STYLE_PAGE_NUMBER_ODD,       // obsolete
+//      TEXT_STYLE_PAGE_NUMBER_EVEN,
       TEXT_STYLE_TRANSLATOR,
       TEXT_STYLE_TUPLET,
+
       TEXT_STYLE_SYSTEM,
       TEXT_STYLE_STAFF,
       TEXT_STYLE_HARMONY,
@@ -345,12 +348,35 @@ enum TextStyleType {
       TEXT_STYLE_TEXTLINE,
       TEXT_STYLE_GLISSANDO,
       TEXT_STYLE_STRING_NUMBER,
+
       TEXT_STYLE_OTTAVA,
       TEXT_STYLE_BENCH,
       TEXT_STYLE_HEADER,
       TEXT_STYLE_FOOTER,
       TEXT_STYLES
       };
+
+//---------------------------------------------------------
+//   SegmentType
+//---------------------------------------------------------
+
+enum SegmentType {
+      SegClef                 = 0x1,
+      SegKeySig               = 0x2,
+      SegTimeSig              = 0x4,
+      SegStartRepeatBarLine   = 0x8,
+      SegBarLine              = 0x10,
+      SegGrace                = 0x20,
+      SegChordRest            = 0x40,
+      SegBreath               = 0x80,
+      SegEndBarLine           = 0x100,
+      SegTimeSigAnnounce      = 0x200,
+      SegKeySigAnnounce       = 0x400,
+      SegAll                  = 0xfff
+      };
+typedef QFlags<SegmentType> SegmentTypes;
+Q_DECLARE_OPERATORS_FOR_FLAGS(SegmentTypes)
+
 
 extern const char* stateName(ScoreState);
 

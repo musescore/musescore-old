@@ -20,14 +20,16 @@
 
 #include "textproperties.h"
 #include "text.h"
+#include "score.h"
 
 //---------------------------------------------------------
 //   TextProp
 //---------------------------------------------------------
 
-TextProp::TextProp(QWidget* parent)
+TextProp::TextProp(bool os, QWidget* parent)
    : QWidget(parent)
       {
+      onlyStyle = os;
       setupUi(this);
       QButtonGroup* g1 = new QButtonGroup(this);
       g1->addButton(alignLeft);
@@ -44,6 +46,8 @@ TextProp::TextProp(QWidget* parent)
       g3->addButton(boxButton);
 
       connect(mmUnit, SIGNAL(toggled(bool)), SLOT(mmToggled(bool)));
+      connect(styledGroup, SIGNAL(toggled(bool)), SLOT(styledToggled(bool)));
+      connect(unstyledGroup, SIGNAL(toggled(bool)), SLOT(unstyledToggled(bool)));
       }
 
 //---------------------------------------------------------
@@ -63,6 +67,21 @@ void TextProp::mmToggled(bool val)
 
 void TextProp::set(TextB* tb)
       {
+      styledGroup->setChecked(tb->styled());
+      unstyledGroup->setChecked(!tb->styled());
+
+      Score* score = tb->score();
+      styles->clear();
+      styles->addItem(tr("no style"));
+      foreach(const TextStyle& st, score->style().textStyles())
+            styles->addItem(st.name());
+      int styleIdx = 0;
+      if (tb->styled()) {
+            if (tb->textStyle() != TEXT_STYLE_INVALID)
+                  styleIdx = tb->textStyle() + 1;
+            }
+      styles->setCurrentIndex(styleIdx);
+
       int a = int(tb->align());
       if (a & ALIGN_HCENTER)
             alignHCenter->setChecked(true);
@@ -116,6 +135,8 @@ void TextProp::set(TextB* tb)
 
 void TextProp::get(TextB* tb)
       {
+      if (unstyledGroup->isChecked())
+            tb->setTextStyle(TextStyleType(styles->currentIndex() - 1));
       tb->textBase()->setHasFrame(frame->isChecked());
       tb->setFrameWidth(frameWidth->value());
       tb->setPaddingWidth(paddingWidth->value());
@@ -151,6 +172,7 @@ void TextProp::get(TextB* tb)
       tb->setYoff(yOffset->value());
       tb->setReloff(QPointF(rxOffset->value(), ryOffset->value()));
       tb->setOffsetType(mmUnit->isChecked() ? OFFSET_ABS : OFFSET_SPATIUM);
+      tb->setStyled(styledGroup->isChecked());
       }
 
 //---------------------------------------------------------
@@ -159,6 +181,10 @@ void TextProp::get(TextB* tb)
 
 void TextProp::set(const TextStyle& s)
       {
+      styledGroup->setVisible(false);
+      unstyledGroup->setCheckable(false);
+      unstyledGroup->setTitle(tr("Text Style"));
+
       fontBold->setChecked(s.bold());
       fontItalic->setChecked(s.italic());
       fontUnderline->setChecked(s.underline());
@@ -258,5 +284,23 @@ TextStyle TextProp::getTextStyle() const
             a |= ALIGN_BASELINE;
       s.setAlign(a);
       return s;
+      }
+
+//---------------------------------------------------------
+//   styledToggled
+//---------------------------------------------------------
+
+void TextProp::styledToggled(bool val)
+      {
+      unstyledGroup->setChecked(!val);
+      }
+
+//---------------------------------------------------------
+//   unstyledToggled
+//---------------------------------------------------------
+
+void TextProp::unstyledToggled(bool val)
+      {
+      styledGroup->setChecked(!val);
       }
 

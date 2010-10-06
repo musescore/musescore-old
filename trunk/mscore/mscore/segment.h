@@ -58,23 +58,6 @@ class System;
                                (logicl position is the tick position of the next main note)
 */
 
-enum SegmentType {
-      SegClef                 = 0x1,
-      SegKeySig               = 0x2,
-      SegTimeSig              = 0x4,
-      SegStartRepeatBarLine   = 0x8,
-      SegBarLine              = 0x10,
-      SegGrace                = 0x20,
-      SegChordRest            = 0x40,
-      SegBreath               = 0x80,
-      SegEndBarLine           = 0x100,
-      SegTimeSigAnnounce      = 0x200,
-      SegKeySigAnnounce       = 0x400,
-      SegAll                  = 0xfff
-      };
-typedef QFlags<SegmentType> SegmentTypes;
-Q_DECLARE_OPERATORS_FOR_FLAGS(SegmentTypes)
-
 class Segment : public Element {
       Segment* _next;               // linked list of segments inside a measure
       Segment* _prev;

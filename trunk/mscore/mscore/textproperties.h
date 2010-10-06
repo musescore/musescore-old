@@ -30,16 +30,19 @@ class TextB;
 //   TextProp
 //---------------------------------------------------------
 
-class TextProp : public QWidget, public Ui::TextPropertiesBase {
+class TextProp : public QWidget, public Ui::TextProperties {
       Q_OBJECT
 
       int curUnit;
+      bool onlyStyle;
 
    private slots:
       void mmToggled(bool);
+      void styledToggled(bool);
+      void unstyledToggled(bool);
 
    public:
-      TextProp(QWidget* parent = 0);
+      TextProp(bool _onlyStyle, QWidget* parent = 0);
       void set(TextB*);
       void get(TextB*);
       void set(const TextStyle&);

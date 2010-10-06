@@ -21,6 +21,7 @@
 #include "stafftype.h"
 #include "staff.h"
 #include "score.h"
+#include "xml.h"
 
 QList<StaffType*> staffTypes;
 

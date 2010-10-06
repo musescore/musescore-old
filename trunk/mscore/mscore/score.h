@@ -32,12 +32,9 @@
 #include "durationtype.h"
 #include "select.h"
 #include "config.h"
-#include "element.h"
 #include "al/fraction.h"
 #include "al/al.h"
-#include "key.h"
 #include "interval.h"
-#include "segment.h"
 #include "msynth/fparm.h"
 
 namespace AL {
@@ -69,6 +66,7 @@ class MidiFile;
 class MidiTrack;
 class BSymbol;
 class KeySig;
+class KeySigEvent;
 class Volta;
 class BBTrack;
 class MidiEvent;
@@ -100,6 +98,8 @@ class Omr;
 class Parameter;
 class StaffType;
 class Revisions;
+class Spanner;
+class ScoreView;
 
 extern bool showRubberBand;
 
@@ -767,7 +767,7 @@ class Score : public QObject {
       int customKeySigIdx(KeySig*) const;
       int addCustomKeySig(KeySig*);
       KeySig* customKeySig(int) const;
-      KeySig* keySigFactory(KeySigEvent);
+      KeySig* keySigFactory(const KeySigEvent&);
       void cmdPaste(ScoreView*);
       Element* selectMove(const QString& cmd);
       Element* move(const QString& cmd);

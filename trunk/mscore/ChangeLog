@@ -1,3 +1,10 @@
+6.oct (ws)
+      - remove unused "system" text styles
+      - remove page number text styles
+      - replace text style number by text style name in .msc[xz] files to
+        make text styles more easily extendable
+      - new text property "styled". Styled text changes if the associated
+        style changes.
 5. oct (ws)
       - better tuplet layout (#7375)
       - fix copy&paste of tuplets
