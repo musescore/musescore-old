@@ -27,6 +27,7 @@
 #include "tablature.h"
 #include "chord.h"
 #include "note.h"
+#include "segment.h"
 
 static const int DEFAULT_STRINGS = 6;
 static const int DEFAULT_FRETS = 5;

@@ -24,6 +24,7 @@
 #include "tuplet.h"
 #include "chordrest.h"
 #include "rest.h"
+#include "segment.h"
 
 //---------------------------------------------------------
 //   checkSlurs

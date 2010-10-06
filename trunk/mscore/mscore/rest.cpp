@@ -36,6 +36,7 @@
 #include "staff.h"
 #include "harmony.h"
 #include "lyrics.h"
+#include "segment.h"
 
 //---------------------------------------------------------
 //    Rest

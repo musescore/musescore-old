@@ -30,6 +30,7 @@
 #include "measure.h"
 #include "mscore.h"
 #include "scoreview.h"
+#include "segment.h"
 
 static const bool useJazzFont = true;     // DEBUG
 

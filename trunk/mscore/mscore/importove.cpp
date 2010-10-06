@@ -57,6 +57,7 @@
 #include "tuplet.h"
 #include "tremolo.h"
 #include "volta.h"
+#include "segment.h"
 
 class MeasureToTick {
 public:

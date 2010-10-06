@@ -51,6 +51,7 @@
 #include "bend.h"
 #include "tremolo.h"
 #include "noteevent.h"
+#include "segment.h"
 
 //---------------------------------------------------------
 //   searchVolta

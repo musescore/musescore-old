@@ -26,6 +26,7 @@
 #include "score.h"
 #include "note.h"
 #include "slur.h"
+#include "segment.h"
 
 static const int MAP_OFFSET = 480;
 

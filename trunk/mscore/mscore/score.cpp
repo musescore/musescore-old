@@ -2015,10 +2015,10 @@ Measure* Score::lastMeasure() const
 //   firstSegment
 //---------------------------------------------------------
 
-Segment* Score::firstSegment() const
+Segment* Score::firstSegment(SegmentTypes segType) const
       {
       Measure* m = firstMeasure();
-      return m ? m->first() : 0;
+      return m ? m->first(segType) : 0;
       }
 
 //---------------------------------------------------------

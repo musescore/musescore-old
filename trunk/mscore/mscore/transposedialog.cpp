@@ -32,6 +32,7 @@
 #include "undo.h"
 #include "keysig.h"
 #include "utils.h"
+#include "segment.h"
 
 //---------------------------------------------------------
 //   keydiff2Interval

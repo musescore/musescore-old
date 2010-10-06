@@ -76,6 +76,7 @@
 #include "tremolobar.h"
 #include "chordline.h"
 #include "undo.h"
+#include "segment.h"
 
 extern bool debugMode;
 extern bool showInvisible;

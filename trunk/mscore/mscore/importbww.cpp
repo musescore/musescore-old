@@ -27,7 +27,6 @@
 #include "barline.h"
 #include "box.h"
 #include "chord.h"
-//#include "key.h"
 #include "keysig.h"
 #include "layoutbreak.h"
 #include "measure.h"
@@ -41,6 +40,7 @@
 #include "timesig.h"
 #include "tuplet.h"
 #include "volta.h"
+#include "segment.h"
 
 //---------------------------------------------------------
 //   addText

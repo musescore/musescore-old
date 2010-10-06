@@ -38,6 +38,7 @@
 #include "al/sig.h"
 #include "measure.h"
 #include "timesig.h"
+#include "segment.h"
 
 //---------------------------------------------------------
 //   musicalAttribute

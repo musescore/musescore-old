@@ -30,6 +30,7 @@
 #include "system.h"
 #include "seq.h"
 #include "slur.h"
+#include "segment.h"
 
 //---------------------------------------------------------
 //   SplitStaff
@@ -70,7 +71,7 @@ void Score::splitStaff(int staffIdx, int splitPoint)
       undoInsertStaff(ns, staffIdx+1);
 
       for (Measure* m = firstMeasure(); m; m = m->nextMeasure())
-            m->cmdAddStaves(staffIdx+1, staffIdx+2, true);
+            m->cmdAddStaves(staffIdx+1, staffIdx+2, false);
 
 //      undoChangeBarLineSpan(s, p->nstaves());
       adjustBracketsIns(staffIdx+1, staffIdx+2);
@@ -89,84 +90,100 @@ void Score::splitStaff(int staffIdx, int splitPoint)
       startLayout = 0;
       doLayout();
 
-      QList<SNote>notes;
-
       //
       // move notes
-      //    for now we only move notes from voice 0
       //
       select(0, SELECT_SINGLE, 0);
       int strack = staffIdx * VOICES;
       int dtrack = (staffIdx + 1) * VOICES;
-      QList<Note*> notesToRemove;
-      for (Segment* s = firstSegment(); s; s = s->next1()) {
-            if (s->subtype() != SegChordRest)
-                  continue;
-            ChordRest* cr = static_cast<ChordRest*>(s->element(strack));
-            if (cr == 0 || cr->type() == REST)
-                  continue;
-            Chord* c = static_cast<Chord*>(cr);
-            foreach(Note* note, c->notes()) {
-                  if (note->pitch() < splitPoint) {
-                        if (note->tieBack()) {
-                              notesToRemove.append(note);
+
+      for (Segment* s = firstSegment(SegChordRest); s; s = s->next1(SegChordRest)) {
+            for (int voice = 0; voice < VOICES; ++voice) {
+                  ChordRest* cr = static_cast<ChordRest*>(s->element(strack + voice));
+                  if (cr == 0 || cr->type() == REST)
+                        continue;
+                  Chord* c = static_cast<Chord*>(cr);
+                  QList<Note*> removeNotes;
+                  foreach(Note* note, c->notes()) {
+                        if (note->pitch() >= splitPoint)
+                              continue;
+                        Chord* chord = static_cast<Chord*>(s->element(dtrack + voice));
+                        if (chord && (chord->type() != CHORD))
+                              abort();
+                        if (chord == 0) {
+                              chord = new Chord(*c);
+                              foreach(Note* note, chord->notes())
+                                    delete note;
+                              chord->notes().clear();
+                              chord->setTrack(dtrack + voice);
+                              undoAddElement(chord);
+                              }
+                        Note* nnote = new Note(*note);
+                        nnote->setTrack(dtrack + voice);
+                        chord->add(nnote);
+                        removeNotes.append(note);
+                        }
+                  foreach(Note* note, removeNotes) {
+                        undoRemoveElement(note);
+                        if (note->chord()->notes().isEmpty())
+                              undoRemoveElement(note->chord());
+                        }
+                  }
+            }
+      //
+      // make sure that the timeline for dtrack
+      // has no gaps
+      //
+      int ctick  = 0;
+      for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
+            for (Segment* s = m->first(SegChordRest); s; s = s->next1(SegChordRest)) {
+                  ChordRest* cr = static_cast<ChordRest*>(s->element(dtrack));
+                  if (cr == 0)
+                        continue;
+                  int rest = s->tick() - ctick;
+                  if (rest) {
+                        // insert Rest
+                        Segment* s = tick2segment(ctick);
+                        if (s == 0) {
+                              printf("no segment at %d\n", ctick);
                               continue;
                               }
-                        SNote n;
-                        n.tick     = c->tick();
-                        n.pitch    = note->pitch();
-                        n.fraction = c->durationType().fraction();
-                        Note* nn = note;
-                        while (nn && nn->tieFor()) {
-                              n.fraction += nn->chord()->durationType().fraction();
-                              nn = nn->tieFor()->endNote();
+                        setRest(ctick, dtrack, Fraction::fromTicks(rest), false, 0);
+                        }
+                  ctick = s->tick() + cr->ticks();
+                  }
+            int rest = m->tick() + m->ticks() - ctick;
+            if (rest) {
+                  setRest(ctick, dtrack, Fraction::fromTicks(rest), false, 0);
+                  ctick += rest;
+                  }
+            }
+      //
+      // same for strack
+      //
+      ctick  = 0;
+      for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
+            for (Segment* s = m->first(SegChordRest); s; s = s->next1(SegChordRest)) {
+                  ChordRest* cr = static_cast<ChordRest*>(s->element(strack));
+                  if (cr == 0)
+                        continue;
+                  int rest = s->tick() - ctick;
+                  if (rest) {
+                        // insert Rest
+                        Segment* s = tick2segment(ctick);
+                        if (s == 0) {
+                              printf("no segment at %d\n", ctick);
+                              continue;
                               }
-                        n.note     = note;
-                        notes.append(n);
+                        setRest(ctick, strack, Fraction::fromTicks(rest), false, 0);
                         }
+                  ctick = s->tick() + cr->ticks();
+                  }
+            int rest = m->tick() + m->ticks() - ctick;
+            if (rest) {
+                  setRest(ctick, strack, Fraction::fromTicks(rest), false, 0);
+                  ctick += rest;
                   }
             }
-      int ctick  = 0;
-      foreach(SNote n, notes) {
-            Measure* m = n.note->chord()->measure();
-            if (ctick < m->tick())
-                  ctick = m->tick();
-            if (n.tick > ctick) {
-                  //
-                  // fill with rest
-                  //
-                  Segment* s = m->tick2segment(ctick);
-                  if (s == 0) {
-                        printf("no segment at %d - measure %d\n", ctick, m->tick());
-                        continue;
-                        }
-                  ChordRest* cr = static_cast<ChordRest*>(s->element(dtrack));
-                  if (cr == 0) {
-                        printf("no cr at %d - measure %d\n", ctick, m->tick());
-                        continue;
-                        }
-                  Fraction f = Fraction::fromTicks(n.tick - ctick);
-                  f = makeGap(cr, f, 0);
-
-                  setRest(ctick, dtrack, f, false, 0);
-                  }
-            ctick = n.tick;
-            Segment* s = m->tick2segment(n.tick);
-            if (s == 0) {
-                  printf("no segment at %d - measure %d\n", n.tick, m->tick());
-                  continue;
-                  }
-            ChordRest* cr = static_cast<ChordRest*>(s->element(dtrack));
-            if (cr == 0) {
-                  printf("no cr at %d - measure %d\n", ctick, m->tick());
-                  continue;
-                  }
-            setNoteRest(cr, dtrack, n.pitch, n.fraction, 0, AUTO);
-            ctick += n.fraction.ticks();
-            }
-      foreach(SNote n, notes)
-            deleteItem(n.note);
-      foreach(Note* n, notesToRemove)
-            deleteItem(n);
       }
 

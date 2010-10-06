@@ -42,6 +42,7 @@
 #include "al/sig.h"
 #include "clef.h"
 #include "lyrics.h"
+#include "segment.h"
 
 //---------------------------------------------------------
 //   DurationElement

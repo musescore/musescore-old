@@ -27,6 +27,7 @@
 #include "note.h"
 #include "layoutbreak.h"
 #include "image.h"
+#include "segment.h"
 
 //---------------------------------------------------------
 //   MeasureBase

@@ -76,6 +76,7 @@
 #include "seq.h"
 #include "revisions.h"
 #include "lyrics.h"
+#include "segment.h"
 
 #ifdef OMR
 #include "omr/omr.h"

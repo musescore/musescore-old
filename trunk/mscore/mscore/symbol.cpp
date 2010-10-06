@@ -27,6 +27,7 @@
 #include "page.h"
 #include "score.h"
 #include "image.h"
+#include "segment.h"
 
 //---------------------------------------------------------
 //   BSymbol

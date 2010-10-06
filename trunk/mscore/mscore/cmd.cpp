@@ -83,6 +83,7 @@
 #include "breath.h"
 #include "tablature.h"
 #include "stafftype.h"
+#include "segment.h"
 
 //---------------------------------------------------------
 //   startCmd
