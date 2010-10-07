@@ -959,45 +959,6 @@ void Score::loadStyle()
       }
 
 //---------------------------------------------------------
-//   load
-//    return true on error
-//---------------------------------------------------------
-
-bool StyleData::load(QFile* qf)
-      {
-      QDomDocument doc;
-      int line, column;
-      QString err;
-      if (!doc.setContent(qf, false, &err, &line, &column)) {
-            QString error;
-            error.sprintf("error reading style file %s at line %d column %d: %s\n",
-               qf->fileName().toLatin1().data(), line, column, err.toLatin1().data());
-            QMessageBox::warning(0,
-               QWidget::tr("MuseScore: Load Style failed:"),
-               error,
-               QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
-            return true;
-            }
-      docName = qf->fileName();
-      for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            if (e.tagName() == "museScore") {
-                  QString version = e.attribute(QString("version"));
-                  QStringList sl = version.split('.');
-                  // _mscVersion = sl[0].toInt() * 100 + sl[1].toInt();
-                  for (QDomElement ee = e.firstChildElement(); !ee.isNull();  ee = ee.nextSiblingElement()) {
-                        QString tag(ee.tagName());
-                        QString val(ee.text());
-                        if (tag == "Style")
-                              load(ee);
-                        else
-                              domError(ee);
-                        }
-                  }
-            }
-      return false;
-      }
-
-//---------------------------------------------------------
 //   saveStyle
 //---------------------------------------------------------
 
