@@ -68,7 +68,7 @@
       <item>
        <widget class="Awl::DenominatorSpinBox" name="timesigN">
         <property name="maximum">
-         <number>63</number>
+         <number>32</number>
         </property>
        </widget>
       </item>
@@ -142,7 +142,7 @@
       <item>
        <widget class="Awl::DenominatorSpinBox" name="pickupTimesigN">
         <property name="maximum">
-         <number>63</number>
+         <number>32</number>
         </property>
        </widget>
       </item>
