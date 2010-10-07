@@ -21,7 +21,7 @@
 
 REVISION  = $(shell type mscore\mscore\revision.h)
 VERSION   = 0.9.6r${REVISION}
-MINGW_DIR = C:\Qt\2010.02\mingw
+MINGW_DIR = C:\Qt\2010.05\mingw
 
 win32:
 	if not exist win32build\nul mkdir win32build
