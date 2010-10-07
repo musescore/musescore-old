@@ -20,6 +20,7 @@
 
 #include "globals.h"
 #include "style.h"
+#include "style_p.h"
 #include "xml.h"
 #include "score.h"
 #include "articulation.h"
@@ -31,7 +32,6 @@ Style* style;
 // 120 dpi           screen resolution
 //  spatium = 20/4 points
 
-// QVector<TextStyle> defaultTextStyles;
 Style* defaultStyle;
 
 //---------------------------------------------------------
@@ -601,6 +601,14 @@ TextStyle::TextStyle(const TextStyle& s)
    : d(s.d)
       {
       }
+TextStyle::~TextStyle()
+      {
+      }
+TextStyle& TextStyle::operator=(const TextStyle& s)
+      {
+      d = s.d;
+      return *this;
+      }
 
 //---------------------------------------------------------
 //   TextStyleData
@@ -1096,4 +1104,127 @@ void StyleData::setTextStyle(const TextStyle& ts)
       else
             printf("StyleData::setTextStyle(): TextStyle <%s> not found\n", qPrintable(ts.name()));
       }
+
+QString TextStyle::name() const                              { return d->name; }
+QString TextStyle::family() const                            { return d->family; }
+int TextStyle::size() const                                  { return d->size; }
+bool TextStyle::bold() const                                 { return d->bold; }
+bool TextStyle::italic() const                               { return d->italic; }
+bool TextStyle::underline() const                            { return d->underline; }
+bool TextStyle::hasFrame() const                             { return d->hasFrame; }
+Align TextStyle::align() const                               { return d->align; }
+double TextStyle::xoff() const                               { return d->xoff; }
+double TextStyle::yoff() const                               { return d->yoff; }
+OffsetType TextStyle::offsetType() const                     { return d->offsetType; }
+double TextStyle::rxoff() const                              { return d->rxoff; }
+double TextStyle::ryoff() const                              { return d->ryoff; }
+bool TextStyle::sizeIsSpatiumDependent() const               { return d->sizeIsSpatiumDependent; }
+double TextStyle::frameWidth()  const                        { return d->frameWidth; }
+double TextStyle::paddingWidth() const                       { return d->paddingWidth; }
+int TextStyle::frameRound() const                            { return d->frameRound; }
+QColor TextStyle::frameColor() const                         { return d->frameColor; }
+bool TextStyle::circle() const                               { return d->circle;     }
+bool TextStyle::systemFlag() const                           { return d->systemFlag; }
+QColor TextStyle::foregroundColor() const                    { return d->foregroundColor; }
+void TextStyle::setName(const QString& s)                    { d->name = s; }
+void TextStyle::setFamily(const QString& s)                  { d->family = s; }
+void TextStyle::setSize(int v)                               { d->size = v; }
+void TextStyle::setBold(bool v)                              { d->bold = v; }
+void TextStyle::setItalic(bool v)                            { d->italic = v; }
+void TextStyle::setUnderline(bool v)                         { d->underline = v; }
+void TextStyle::setHasFrame(bool v)                          { d->hasFrame = v; }
+void TextStyle::setAlign(Align v)                            { d->align = v; }
+void TextStyle::setXoff(double v)                            { d->xoff = v; }
+void TextStyle::setYoff(double v)                            { d->yoff = v; }
+void TextStyle::setOffsetType(OffsetType v)                  { d->offsetType = v; }
+void TextStyle::setRxoff(double v)                           { d->rxoff = v; }
+void TextStyle::setRyoff(double v)                           { d->ryoff = v; }
+void TextStyle::setSizeIsSpatiumDependent(bool v)            { d->sizeIsSpatiumDependent = v; }
+void TextStyle::setFrameWidth(double v)                      { d->frameWidth = v; }
+void TextStyle::setPaddingWidth(double v)                    { d->paddingWidth = v; }
+void TextStyle::setFrameRound(int v)                         { d->frameRound = v; }
+void TextStyle::setFrameColor(const QColor& v)               { d->frameColor = v; }
+void TextStyle::setCircle(bool v)                            { d->circle = v;     }
+void TextStyle::setSystemFlag(bool v)                        { d->systemFlag = v; }
+void TextStyle::setForegroundColor(const QColor& v)          { d->foregroundColor = v; }
+void TextStyle::write(Xml& xml) const                        { d->write(xml); }
+void TextStyle::read(QDomElement v)                          { d->read(v); }
+QFont TextStyle::font(double space) const                    { return d->font(space); }
+QFont TextStyle::fontPx(double spatium) const                { return d->fontPx(spatium); }
+QRectF TextStyle::bbox(double space, const QString& s) const { return d->bbox(space, s); }
+QFontMetricsF TextStyle::fontMetrics(double space) const     { return fontMetrics(space); }
+bool TextStyle::operator!=(const TextStyle& s) const         { return d != s.d; }
+
+const TextStyle& Style::textStyle(TextStyleType idx) const   { return d->textStyle(idx); }
+const TextStyle& Style::textStyle(const QString& name) const { return d->textStyle(name); }
+TextStyleType Style::textStyleType(const QString& name) const { return d->textStyleType(name); }
+void Style::setTextStyle(const TextStyle& ts)                { d->setTextStyle(ts); }
+void Style::appendTextStyle(const TextStyle& ts)             { d->_textStyles.append(ts);  }
+const QList<TextStyle>& Style::textStyles() const            { return d->_textStyles; }
+void Style::set(StyleIdx t, Spatium val)                     { set(StyleVal(t, val)); }
+void Style::set(StyleIdx t, const QString& val)              { set(StyleVal(t, val)); }
+void Style::set(StyleIdx t, bool val)                        { set(StyleVal(t, val)); }
+void Style::set(StyleIdx t, double val)                      { set(StyleVal(t, val)); }
+void Style::set(StyleIdx t, int val)                         { set(StyleVal(t, val)); }
+void Style::set(StyleIdx t, Direction val)                   { set(StyleVal(t, val)); }
+
+Spatium  Style::valueS(StyleIdx idx) const                   { return value(idx).toSpatium(); }
+QString  Style::valueSt(StyleIdx idx) const                  { return value(idx).toString();  }
+bool     Style::valueB(StyleIdx idx) const                   { return value(idx).toBool();    }
+double   Style::valueD(StyleIdx idx) const                   { return value(idx).toDouble();  }
+int      Style::valueI(StyleIdx idx) const                   { return value(idx).toInt();     }
+
+bool Style::load(QFile* qf)                                  { return d->load(qf);            }
+void Style::load(QDomElement e)                              { d->load(e);                    }
+void Style::save(Xml& xml, bool optimize)                    { d->save(xml, optimize);        }
+
+Style::~Style()
+      {
+      }
+
+Style& Style::operator=(const Style& s)
+      {
+      d = s.d;
+      return *this;
+      }
+
+//---------------------------------------------------------
+//   load
+//    return true on error
+//---------------------------------------------------------
+
+bool StyleData::load(QFile* qf)
+      {
+      QDomDocument doc;
+      int line, column;
+      QString err;
+      if (!doc.setContent(qf, false, &err, &line, &column)) {
+            QString error;
+            error.sprintf("error reading style file %s at line %d column %d: %s\n",
+               qf->fileName().toLatin1().data(), line, column, err.toLatin1().data());
+            QMessageBox::warning(0,
+               QWidget::tr("MuseScore: Load Style failed:"),
+               error,
+               QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
+            return true;
+            }
+      docName = qf->fileName();
+      for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            if (e.tagName() == "museScore") {
+                  QString version = e.attribute(QString("version"));
+                  QStringList sl = version.split('.');
+                  // _mscVersion = sl[0].toInt() * 100 + sl[1].toInt();
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull();  ee = ee.nextSiblingElement()) {
+                        QString tag(ee.tagName());
+                        QString val(ee.text());
+                        if (tag == "Style")
+                              load(ee);
+                        else
+                              domError(ee);
+                        }
+                  }
+            }
+      return false;
+      }
+
 
