@@ -778,6 +778,9 @@ bool Fluid::addSoundFont(const QString& s)
 bool Fluid::removeSoundFont(const QString& s)
       {
       mutex.lock();
+      foreach(Voice* v, activeVoices)
+            v->off();
+printf("removeSoundFont <%s>\n", qPrintable(s));
       SFont* sf = get_sfont_by_name(s);
       sfunload(sf->id(), true);
       mutex.unlock();
