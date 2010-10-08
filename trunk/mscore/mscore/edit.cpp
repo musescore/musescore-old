@@ -1559,7 +1559,6 @@ printf("createTuplet at %d <%s> duration <%s> ratio <%s> baseLen <%s>\n",
 
       Fraction an     = (tuplet->duration() * tuplet->ratio()) / tuplet->baseLen().fraction();
       int actualNotes = an.numerator() / an.denominator();
-            // tuplet->ratio().numerator();
 
       cr->setTuplet(tuplet);
       cr->setTrack(track);
@@ -1569,16 +1568,6 @@ printf("createTuplet at %d <%s> duration <%s> ratio <%s> baseLen <%s>\n",
 printf("tuplet note duration %s  actualNotes %d  ticks %d\n",
       qPrintable(tuplet->baseLen().name()), actualNotes, cr->ticks());
 
-#if 0
-      SegmentType st = Segment::segmentType(cr->type());
-      Segment* seg = measure->findSegment(st, tick);
-      if (seg == 0) {
-            seg = new Segment(measure, st, tick);
-            undoAddElement(seg);
-            }
-      cr->setParent(seg);
-      undoAddElement(cr);
-#endif
       undoAddCR(cr, measure, tick);
 
       int ticks = cr->ticks();
@@ -1590,6 +1579,7 @@ printf("tuplet note duration %s  actualNotes %d  ticks %d\n",
             rest->setTrack(track);
             rest->setDurationType(tuplet->baseLen());
             rest->setDuration(tuplet->baseLen().fraction());
+#if 0
             SegmentType st = Segment::segmentType(rest->type());
             Segment* seg = measure->findSegment(st, tick);
             if (seg == 0) {
@@ -1597,7 +1587,8 @@ printf("tuplet note duration %s  actualNotes %d  ticks %d\n",
                   undoAddElement(seg);
                   }
             rest->setParent(seg);
-            undoAddElement(rest);
+#endif
+            undoAddCR(rest, measure, tick);
             }
       layoutAll = true;
       }
