@@ -383,17 +383,6 @@ void Note::add(Element* e)
       }
 
 //---------------------------------------------------------
-//   setTieBack
-//---------------------------------------------------------
-
-void Note::setTieBack(Tie* t)
-      {
-      _tieBack = t;
-      if (t && _accidental)         // dont show prefix of second tied note
-            score()->undoRemoveElement(_accidental);
-      }
-
-//---------------------------------------------------------
 //   remove
 //---------------------------------------------------------
 

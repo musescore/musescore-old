@@ -1,4 +1,5 @@
 8.oct (ws)
+      - fix #1395: Accidental after a tied note
       - fix #7415: stems too short for 32th and 64th notes
 6.oct (ws)
       - fix #7403: double note duration (W) changes pitch

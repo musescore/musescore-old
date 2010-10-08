@@ -401,7 +401,7 @@ void Measure::layoutChords10(Segment* segment, int startTrack, char* tversatz)
                               line += 7;
                         else
                               line -= (tpcPitch/12)*7;
-                        tversatz[line] = tpc2alter(tpc);
+                        // tversatz[line] = tpc2alter(tpc);
                         continue;
                         }
 
@@ -447,6 +447,8 @@ int Measure::findAccidental(Note* note) const
                         drumset = chord->staff()->part()->instr()->drumset();
 
                   foreach(Note* note1, chord->notes()) {
+                        if (note1->tieBack())
+                              continue;
                         int pitch   = note1->pitch();
                         //
                         // compute accidental
@@ -459,30 +461,26 @@ int Measure::findAccidental(Note* note) const
                         else
                               line -= (tpcPitch/12)*7;
 
-//                        if (note1->userAccidental())
-//                              ;
-//                        else  {
-                              int accVal = ((tpc + 1) / 7) - 2;
-                              if (accVal != tversatz[line]) {
-                                    if (note == note1) {
-                                          switch(accVal) {
-                                                case -2: return ACC_FLAT2;
-                                                case -1: return ACC_FLAT;
-                                                case  1: return ACC_SHARP;
-                                                case  2: return ACC_SHARP2;
-                                                case  0: return ACC_NATURAL;
-                                                default:
-                                                      printf("bad accidental\n");
-                                                      return 0;
-                                                }
+                        int accVal = ((tpc + 1) / 7) - 2;
+                        if (accVal != tversatz[line]) {
+                              if (note == note1) {
+                                    switch(accVal) {
+                                          case -2: return ACC_FLAT2;
+                                          case -1: return ACC_FLAT;
+                                          case  1: return ACC_SHARP;
+                                          case  2: return ACC_SHARP2;
+                                          case  0: return ACC_NATURAL;
+                                          default:
+                                                printf("bad accidental\n");
+                                                return 0;
                                           }
-                                    tversatz[line] = accVal;
                                     }
-                              else {
-                                    if (note == note1)
-                                          return 0;
-                                    }
-//                              }
+                              tversatz[line] = accVal;
+                              }
+                        else {
+                              if (note == note1)
+                                    return 0;
+                              }
                         }
                   }
             }
@@ -517,6 +515,8 @@ int Measure::findAccidental2(Note* note) const
                         drumset = chord->staff()->part()->instr()->drumset();
 
                   foreach(Note* note1, chord->notes()) {
+                        if (note1->tieBack())
+                              continue;
                         int pitch   = note1->pitch();
 
                         //
@@ -3310,7 +3310,9 @@ void Measure::updateAccidentals(Segment* segment, int staffIdx, char* tversatz)
                                           line += 7;
                                     else
                                           line -= (tpcPitch/12)*7;
-                                    tversatz[line] = tpc2alter(tpc);
+                                    // no!?: tversatz[line] = tpc2alter(tpc);
+                                    if (note->accidental())
+                                          score()->undoRemoveElement(note->accidental());
                                     continue;
                                     }
                               note->updateAccidental(tversatz);
