@@ -744,7 +744,8 @@ void Score::undoAddElement(Element* element)
       if (ostaff == 0 || (element->type() != ARTICULATION
          && element->type() != SLUR
          && element->type() != TIE
-         && element->type() != NOTE)
+         && element->type() != NOTE
+         && element->type() != TUPLET)
             ) {
             undo()->push(new AddElement(element));
             return;
@@ -775,7 +776,6 @@ void Score::undoAddElement(Element* element)
                   Segment* seg     = m->findSegment(SegChordRest, tick);
                   Articulation* na = static_cast<Articulation*>(ne);
                   int ntrack       = staffIdx * VOICES + a->voice();
-                  na->setScore(score);
                   na->setTrack(ntrack);
                   ChordRest* ncr   = static_cast<ChordRest*>(seg->element(ntrack));
                   na->setParent(ncr);
@@ -847,6 +847,15 @@ void Score::undoAddElement(Element* element)
                   score->updateAccidentals(m, staffIdx);
                   score->setLayout(m);
                   }
+            else if (element->type() == TUPLET) {
+                  Tuplet* t      = static_cast<Tuplet*>(element);
+                  Tuplet* nt     = static_cast<Tuplet*>(ne);
+                  int ntrack     = staffIdx * VOICES + t->voice();
+                  Measure* m     = score->tick2measure(t->tick());
+                  nt->setTrack(ntrack);
+                  nt->setParent(m);
+                  undo()->push(new AddElement(nt));
+                  }
             else
                   printf("undoAddElement: unhandled: <%s>\n", element->name());
             }
@@ -884,13 +893,30 @@ void Score::undoAddCR(ChordRest* cr, Measure* measure, int tick)
             ChordRest* newcr = (staff == ostaff) ? cr : static_cast<ChordRest*>(cr->clone());
             newcr->setScore(score);
             int staffIdx = score->staffIdx(staff);
-            newcr->setTrack(staffIdx * VOICES + cr->voice());
+            int ntrack = staffIdx * VOICES + cr->voice();
+            newcr->setTrack(ntrack);
             newcr->setParent(seg);
             if (newcr->type() == CHORD) {
                   Chord* chord = static_cast<Chord*>(newcr);
                   // setTpcFromPitch needs to know the note tick position
                   foreach(Note* note, chord->notes())
                         note->setTpcFromPitch();
+                  }
+            if (cr->tuplet()) {
+                  int tick = cr->tuplet()->tick();
+                  Tuplet* nt = 0;
+                  foreach(Tuplet* t, *m->tuplets()) {
+                        if (t->tick() == tick && t->track() == ntrack) {
+                              nt = t;
+                              break;
+                              }
+                        }
+                  if (nt) {
+                        newcr->setTuplet(nt);
+//                        nt->add(newcr);
+                        }
+                  else
+                        printf("Tuplet not found\n");
                   }
             undo()->push(new AddElement(newcr));
             score->updateAccidentals(m, staffIdx);
