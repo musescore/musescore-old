@@ -385,7 +385,6 @@ class Score : public QObject {
       void setDirty(bool val = true) { setClean(!val); }
 
    public:
-
       // read context
       int curTick;                  // for read optimizations
       int curTrack;

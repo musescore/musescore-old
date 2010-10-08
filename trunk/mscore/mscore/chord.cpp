@@ -1086,14 +1086,12 @@ void Chord::setMag(double val)
 
 //---------------------------------------------------------
 //   layoutStem1
+///   Layout chord stem and hook.
+//
 //    called before layout spacing of notes
 //    set hook if necessary to get right note width for next
 //       pass
 //---------------------------------------------------------
-
-/**
- Layout chord stem and hook.
-*/
 
 void Chord::layoutStem1()
       {
@@ -1143,11 +1141,8 @@ void Chord::layoutStem1()
 
 //---------------------------------------------------------
 //   layoutStem
+///   Layout chord stem and hook.
 //---------------------------------------------------------
-
-/**
- Layout chord stem and hook.
-*/
 
 void Chord::layoutStem()
       {
@@ -1170,13 +1165,18 @@ void Chord::layoutStem()
             Spatium shortest(score()->styleS(ST_shortestStem));
 
             double normalStemLen = small() ? 2.5 : 3.5;
+            switch(hookIdx) {
+                  case 2: normalStemLen += small() ? .5  : 0.75; break;
+                  case 3: normalStemLen += small() ? 1.0 : 1.5;  break;
+                  case 4: normalStemLen += small() ? 1.5 : 2.25; break;
+                  }
+
             if (_noteType != NOTE_NORMAL) {
                   // grace notes stems are not subject to normal
                   // stem rules
                   stemLen = Spatium(qAbs(ul - dl));
                   stemLen += Spatium(normalStemLen * score()->style(ST_graceNoteMag).toDouble());
                   stemLen *= -1;
-//                  stemLen += Spatium(normalStemLen * score()->style(ST_graceNoteMag).toDouble() * (up() ? -1 : 1));
                   }
             else {
                   if (up()) {
@@ -1464,8 +1464,10 @@ void Chord::layout()
 
       rrr += _extraTrailingSpace.val() * _spatium;
 
-      if (up() && _hook)
+      if (up() && _hook) {
+            _hook->layout();
             rrr += _hook->width();
+            }
       lll += _extraLeadingSpace.val() * _spatium;
 
       _space.setLw(lll);
