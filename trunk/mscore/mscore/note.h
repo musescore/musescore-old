@@ -182,16 +182,16 @@ class Note : public Element {
       virtual void add(Element*);
       virtual void remove(Element*);
 
-      bool mirror() const             { return _mirror; }
-      void setMirror(bool val)        { _mirror = val;  }
+      bool mirror() const             { return _mirror;  }
+      void setMirror(bool val)        { _mirror = val;   }
 
-      Tie* tieFor() const             { return _tieFor;     }
-      Tie* tieBack() const            { return _tieBack;    }
-      void setTieFor(Tie* t)          { _tieFor = t;        }
-      void setTieBack(Tie* t);
+      Tie* tieFor() const             { return _tieFor;  }
+      Tie* tieBack() const            { return _tieBack; }
+      void setTieFor(Tie* t)          { _tieFor = t;     }
+      void setTieBack(Tie* t)         { _tieBack = t;    }
 
       Chord* chord() const            { return (Chord*)parent(); }
-      void setChord(Chord* a)         { setParent((Element*)a);    }
+      void setChord(Chord* a)         { setParent((Element*)a);  }
 
       virtual void draw(QPainter&, ScoreView*) const;
       virtual void read(QDomElement);

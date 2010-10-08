@@ -901,7 +901,6 @@ void Score::cmdAddTie()
       tie->setEndNote(note2);
       tie->setTrack(note->track());
       undoAddElement(tie);
-      layoutAll = true;
       select(note2, SELECT_SINGLE, 0);
       endCmd();
       }

@@ -826,6 +826,9 @@ void Score::undoAddElement(Element* element)
                   ntie->setStartNote(nn1);
                   ntie->setEndNote(nn2);
                   undo()->push(new AddElement(ntie));
+                  score->updateAccidentals(nm1, staffIdx);
+                  if (nm1 != nm2)
+                        score->updateAccidentals(nm2, staffIdx);
                   }
             else if (element->type() == NOTE) {
                   Note* note       = static_cast<Note*>(element);
