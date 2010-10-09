@@ -30,6 +30,7 @@ class Xml;
 //---------------------------------------------------------
 
 enum {
+      ME_INVALID    = 0,
       ME_NOTEOFF    = 0x80,
       ME_NOTEON     = 0x90,
       ME_POLYAFTER  = 0xa0,
@@ -129,81 +130,66 @@ enum {
 //   Event
 //---------------------------------------------------------
 
+class EventData;
+
 class Event {
-      int _type;
-
-      int _ontime;
-      int _noquantOntime;
-      int _noquantDuration;
-
-      int _channel;           // mscore channel number, not midi channel
-      int _a, _b;
-      int _duration;
-      int _tpc;               // tonal pitch class
-
-      int _voice;
-      QList<Event*> _notes;
-
-      unsigned char* _data;   // always zero terminated (_data[_len] == 0; )
-      int _len;
-      int _metaType;
-
-      const Note* _note;
-      double _tuning;
+      QSharedDataPointer<EventData> d;
 
    public:
       Event();
       Event(const Event&);
       Event(int t);
       ~Event();
+      Event& operator=(const Event&);
+      bool operator==(const Event&) const;
 
       void write(MidiFile*) const;
       void write(Xml&) const;
-      void read(QDomElement);
+//      void read(QDomElement);
 
       bool isChannelEvent() const;
 
-      int noquantOntime() const      { return _noquantOntime;       }
-      void setNoquantOntime(int v)   { _noquantOntime = v;          }
-      int noquantDuration() const    { return _noquantDuration;     }
-      void setNoquantDuration(int v) { _noquantDuration = v;        }
+      int noquantOntime() const;
+      void setNoquantOntime(int v);
+      int noquantDuration() const;
+      void setNoquantDuration(int v);
 
-      int type() const               { return _type;                }
-      void setType(int v)            { _type = v;                   }
-      int ontime() const             { return _ontime;              }
-      void setOntime(int v)          { _ontime = v;                 }
-      int channel() const            { return _channel;             }
-      void setChannel(int c)         { _channel = c;                }
-      int dataA() const              { return _a;                   }
-      int dataB() const              { return _b;                   }
-      void setDataA(int v)           { _a = v;                      }
-      void setDataB(int v)           { _b = v;                      }
-      int pitch() const              { return _a;                   }
-      void setPitch(int v)           { _a = v;                      }
-      int velo() const               { return _b;                   }
-      void setVelo(int v)            { _b = v;                      }
-      int controller() const         { return _a;                   }
-      void setController(int val)    { _a = val;                    }
-      int value() const              { return _b;                   }
-      void setValue(int v)           { _b = v;                      }
-      int duration() const           { return _duration;            }
-      void setDuration(int v)        { _duration = v;               }
-      int voice() const              { return _voice;               }
-      void setVoice(int val)         { _voice = val;                }
-      int offtime() const            { return ontime() + _duration; }
-      QList<Event*>& notes()         { return _notes;               }
-      unsigned char* data() const    { return _data;                }
-      void setData(unsigned char* d) { _data = d;                   }
-      int len() const                { return _len;                 }
-      void setLen(int l)             { _len = l;                    }
-      int metaType() const           { return _metaType;            }
-      void setMetaType(int v)        { _metaType = v;               }
-      int tpc() const                { return _tpc;                 }
-      void setTpc(int v)             { _tpc = v;                    }
-      const Note* note() const       { return _note;                }
-      void setNote(const Note* v)    { _note = v;                   }
-      double tuning() const          { return _tuning;              }
-      void setTuning(double v)       { _tuning = v;                 }
+      int type() const;
+      void setType(int v);
+      int ontime() const;
+      void setOntime(int v);
+      int channel() const;
+      void setChannel(int c);
+      int dataA() const;
+      int dataB() const;
+      void setDataA(int v);
+      void setDataB(int v);
+      int pitch() const;
+      void setPitch(int v);
+      int velo() const;
+      void setVelo(int v);
+      int controller() const;
+      void setController(int val);
+      int value() const;
+      void setValue(int v);
+      int duration() const;
+      void setDuration(int v);
+      int voice() const;
+      void setVoice(int val);
+      int offtime() const;
+      QList<Event>& notes();
+      const uchar* data() const;
+      void setData(uchar* d);
+      int len() const;
+      void setLen(int l);
+      int metaType() const;
+      void setMetaType(int v);
+      int tpc() const;
+      void setTpc(int v);
+      const Note* note() const;
+      void setNote(const Note* v);
+      double tuning() const;
+      void setTuning(double v);
       };
 
 //---------------------------------------------------------
@@ -211,13 +197,13 @@ class Event {
 //   EventMap
 //---------------------------------------------------------
 
-class EventList : public QList<Event*> {
+class EventList : public QList<Event> {
    public:
-      void insert(Event*);
+      void insert(const Event&);
       void insertNote(int channel, Note*);
       };
 
-class EventMap : public QMap<int, Event*> {};
+class EventMap : public QMap<int, Event> {};
 
 typedef EventList::iterator iEvent;
 typedef EventList::const_iterator ciEvent;

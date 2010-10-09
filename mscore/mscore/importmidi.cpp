@@ -677,14 +677,14 @@ void Score::addLyrics(int tick, int /*staffIdx*/, const QString& txt)
 //   processMeta
 //---------------------------------------------------------
 
-void MidiFile::processMeta(Score* cs, MidiTrack* track, Event* mm)
+void MidiFile::processMeta(Score* cs, MidiTrack* track, const Event& mm)
       {
-      int tick = mm->ontime();
+      int tick = mm.ontime();
       Staff* staff = track->staff();
-      unsigned char* data = (unsigned char*)mm->data();
+      const unsigned char* data = (unsigned char*)mm.data();
       int staffIdx = staff ? cs->staffIdx(staff) : -1;
 
-      switch (mm->metaType()) {
+      switch (mm.metaType()) {
             case META_TEXT:
             case META_LYRIC:
                   if (staff) {
@@ -695,7 +695,7 @@ void MidiFile::processMeta(Score* cs, MidiTrack* track, Event* mm)
 
             case META_TRACK_NAME:
                   if (staff) {
-                        QString txt((char*)data);
+                        QString txt((const char*)data);
                         track->setName(txt);
                         }
                   break;
@@ -710,14 +710,14 @@ void MidiFile::processMeta(Score* cs, MidiTrack* track, Event* mm)
 
             case META_KEY_SIGNATURE:
                   if (staff) {
-                        int key = ((char*)data)[0];
+                        int key = ((const char*)data)[0];
                         if (key < -7 || key > 7) {
                               printf("ImportMidi: illegal key %d\n", key);
                               break;
                               }
                         KeySigEvent ks;
                         ks.setAccidentalType(key);
-                        (*staff->keymap())[mm->ontime()] = ks;
+                        (*staff->keymap())[mm.ontime()] = ks;
                         track->setHasKey(true);
                         }
                   else
@@ -730,7 +730,7 @@ void MidiFile::processMeta(Score* cs, MidiTrack* track, Event* mm)
             case META_TITLE:
                   {
                   Text* text = new Text(cs);
-                  switch(mm->metaType()) {
+                  switch(mm.metaType()) {
                         case META_COMPOSER:
                         case TEXT_TITLE:
                               text->setTextStyle(TEXT_STYLE_COMPOSER);
@@ -749,7 +749,7 @@ void MidiFile::processMeta(Score* cs, MidiTrack* track, Event* mm)
                               break;
                         }
 
-                  text->setText((char*)(mm->data()));
+                  text->setText((const char*)(mm.data()));
 
                   MeasureBase* measure = cs->first();
                   if (measure->type() != VBOX) {
@@ -763,7 +763,7 @@ void MidiFile::processMeta(Score* cs, MidiTrack* track, Event* mm)
                   break;
 
             case META_COPYRIGHT:
-                  cs->setMetaTag("Copyright", QString((char*)(mm->data())));
+                  cs->setMetaTag("Copyright", QString((const char*)(mm.data())));
                   break;
 
             case META_TIME_SIGNATURE:
@@ -772,7 +772,7 @@ void MidiFile::processMeta(Score* cs, MidiTrack* track, Event* mm)
 
             default:
                   if (debugMode)
-                        printf("unknown meta type 0x%02x\n", mm->metaType());
+                        printf("unknown meta type 0x%02x\n", mm.metaType());
                   break;
             }
       }
@@ -806,18 +806,18 @@ void Score::convertMidi(MidiFile* mf)
             track->setProgram(0);
 		int events      = 0;
             const EventList el = track->events();
-            foreach (Event* e, track->events()) {
-                  if (e->type() == ME_NOTE) {
+            foreach (Event e, track->events()) {
+                  if (e.type() == ME_NOTE) {
                         ++events;
-                        int pitch = e->pitch();
+                        int pitch = e.pitch();
                         if (pitch > track->maxPitch)
                               track->maxPitch = pitch;
                         if (pitch < track->minPitch)
                               track->minPitch = pitch;
                         track->medPitch += pitch;
                         }
-                  else if (e->type() == ME_CONTROLLER && e->controller() == CTRL_PROGRAM) {
-                        track->setProgram(e->value());
+                  else if (e.type() == ME_CONTROLLER && e.controller() == CTRL_PROGRAM) {
+                        track->setProgram(e.value());
                         }
                   }
             if (events == 0)
@@ -886,8 +886,8 @@ void Score::convertMidi(MidiFile* mf)
             if (!el.empty()) {
                   ciEvent i = el.end();
                   --i;
-                  if ((*i)->ontime() >lastTick)
-                        lastTick = (*i)->ontime();
+                  if (i->ontime() >lastTick)
+                        lastTick = i->ontime();
                   }
             }
 
@@ -907,13 +907,13 @@ void Score::convertMidi(MidiFile* mf)
             foreach (MidiTrack* midiTrack, *tracks) {
                   if (midiTrack->staffIdx() == -1)
                         continue;
-                  foreach(const Event* ev, midiTrack->events()) {
-                        int t = ev->ontime();
+                  foreach(const Event ev, midiTrack->events()) {
+                        int t = ev.ontime();
                         if (t >= tick2)
                               break;
                         if (t < tick1)
                               continue;
-                        if (ev->type() == ME_NOTE) {
+                        if (ev.type() == ME_NOTE) {
                               ++events;
                               break;
                               }
@@ -938,9 +938,9 @@ void Score::convertMidi(MidiFile* mf)
                   continue;
             const EventList el = midiTrack->events();
             for (ciEvent ie = el.begin(); ie != el.end(); ++ie) {
-                  if ((*ie)->type() != ME_NOTE)
+                  if (ie->type() != ME_NOTE)
                         continue;
-                  int tick = (*ie)->ontime() + (*ie)->duration();
+                  int tick = ie->ontime() + ie->duration();
                   if (tick > lastTick)
                         lastTick = tick;
                   }
@@ -977,8 +977,8 @@ void Score::convertMidi(MidiFile* mf)
       //---------------------------------------------------
 
       foreach (MidiTrack* track, *tracks) {
-            foreach (Event* e, track->events()) {
-                  if (e->type() == ME_META && e->metaType()!=META_LYRIC)
+            foreach (Event e, track->events()) {
+                  if (e.type() == ME_META && e.metaType()!=META_LYRIC)
                         mf->processMeta(this, track, e);
                   }
             if (debugMode) {
@@ -1012,8 +1012,8 @@ void Score::convertMidi(MidiFile* mf)
             //if (track->staffIdx() != -1)
             //      convertTrack(track);
 
-            foreach (Event* e, track->events()) {
-                  if (e->type() == ME_META && e->metaType()==META_LYRIC)
+            foreach (Event e, track->events()) {
+                  if (e.type() == ME_META && e.metaType()==META_LYRIC)
                         mf->processMeta(this, track, e);
                   }
             if (track->staffIdx() != -1)
@@ -1044,11 +1044,11 @@ void Score::convertMidi(MidiFile* mf)
 //---------------------------------------------------------
 
 struct MNote {
-	Event* mc;
+	Event mc;
       QList<Tie*> ties;
 
-      MNote(Event* _mc) : mc(_mc) {
-            for (int i = 0; i < mc->notes().size(); ++i)
+      MNote(const Event& _mc) : mc(_mc) {
+            for (int i = 0; i < mc.notes().size(); ++i)
                   ties.append(0);
             }
       };
@@ -1074,8 +1074,8 @@ void Score::convertTrack(MidiTrack* midiTrack)
             QList<MNote*> notes;
             int ctick = 0;
             for (ciEvent i = el.begin(); i != el.end();) {
-                  Event* e = *i;
-                  if (e->type() != ME_CHORD || e->voice() != voice) {
+                  Event e = *i;
+                  if (e.type() != ME_CHORD || e.voice() != voice) {
                         ++i;
                         continue;
                         }
@@ -1083,13 +1083,13 @@ void Score::convertTrack(MidiTrack* midiTrack)
                   // process pending notes
                   //
                   while (!notes.isEmpty()) {
-                        int tick = notes[0]->mc->ontime();
-                        int len  = (*i)->ontime() - tick;
+                        int tick = notes[0]->mc.ontime();
+                        int len  = i->ontime() - tick;
                         if (len <= 0)
                               break;
                   	foreach (MNote* n, notes) {
-                        	if (n->mc->duration() < len)
-                                    len = n->mc->duration();
+                        	if (n->mc.duration() < len)
+                                    len = n->mc.duration();
                               }
             		Measure* measure = tick2measure(tick);
                         // split notes on measure boundary
@@ -1106,25 +1106,25 @@ void Score::convertTrack(MidiTrack* midiTrack)
                         s->add(chord);
 
                   	foreach (MNote* n, notes) {
-                              QList<Event*>& nl = n->mc->notes();
+                              QList<Event>& nl = n->mc.notes();
                               for (int i = 0; i < nl.size(); ++i) {
-                                    Event* mn = nl[i];
+                                    Event mn = nl[i];
                         		Note* note = new Note(this);
-                                    note->setPitch(mn->pitch(), mn->tpc());
+                                    note->setPitch(mn.pitch(), mn.tpc());
                         		note->setTrack(chord->track());
                   	      	chord->add(note);
-                                    note->setOnTimeUserOffset(mn->noquantOntime() - tick);
-                                    int ot = (mn->noquantOntime() + mn->noquantDuration()) - (tick + chord->ticks());
+                                    note->setOnTimeUserOffset(mn.noquantOntime() - tick);
+                                    int ot = (mn.noquantOntime() + mn.noquantDuration()) - (tick + chord->ticks());
                                     note->setOffTimeUserOffset(ot);
                                     note->setVeloType(USER_VAL);
-                                    note->setVeloOffset(mn->velo());
+                                    note->setVeloOffset(mn.velo());
 
                                     if (useDrumset) {
-                                          if (!drumset->isValid(mn->pitch())) {
-printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
+                                          if (!drumset->isValid(mn.pitch())) {
+printf("unmapped drum note 0x%02x %d\n", mn.pitch(), mn.pitch());
                                                 }
                                           else {
-                                                chord->setStemDirection(drumset->stemDirection(mn->pitch()));
+                                                chord->setStemDirection(drumset->stemDirection(mn.pitch()));
                                                 }
                                           }
 
@@ -1136,28 +1136,28 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                                           note->setOnTimeUserOffset(0);
                                           }
                                     }
-                              if (n->mc->duration() <= len) {
+                              if (n->mc.duration() <= len) {
                                     notes.removeAt(notes.indexOf(n));
                                     continue;
                                     }
                               for (int i = 0; i < nl.size(); ++i) {
-                                    Event* mn = nl[i];
-                                    Note* note = chord->findNote(mn->pitch());
+                                    Event mn = nl[i];
+                                    Note* note = chord->findNote(mn.pitch());
             				n->ties[i] = new Tie(this);
                                     n->ties[i]->setStartNote(note);
                                     note->setOffTimeOffset(0);
                                     note->setOffTimeUserOffset(0);
       		      		note->setTieFor(n->ties[i]);
                                     }
-      	                  n->mc->setOntime(n->mc->ontime() + len);
-                              n->mc->setDuration(n->mc->duration() - len);
+      	                  n->mc.setOntime(n->mc.ontime() + len);
+                              n->mc.setDuration(n->mc.duration() - len);
                               }
                         ctick += len;
                         }
                   //
                   // check for gap and fill with rest
                   //
-                  int restLen = (*i)->ontime() - ctick;
+                  int restLen = i->ontime() - ctick;
                   if (voice == 0) {
                         while (restLen > 0) {
                               int len = restLen;
@@ -1197,12 +1197,12 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                   // tick position
                   //
                   for (;i != el.end(); ++i) {
-                  	Event* e = *i;
-                        if (e->type() != ME_CHORD)
+                  	Event e = *i;
+                        if (e.type() != ME_CHORD)
                               continue;
-                        if ((*i)->ontime() != ctick)
+                        if (i->ontime() != ctick)
                               break;
-                        if (e->voice() != voice)
+                        if (e.voice() != voice)
                               continue;
                   	MNote* n = new MNote(e);
             	      notes.append(n);
@@ -1215,7 +1215,7 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
             //
             Measure* measure = 0;
             while (!notes.isEmpty()) {
-                  int tick = notes[0]->mc->ontime();
+                  int tick = notes[0]->mc.ontime();
             	measure = tick2measure(tick);
                   if (tick >= measure->tick() + measure->ticks()) {
                         printf("=======================EOM\n");
@@ -1228,8 +1228,8 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                   s->add(chord);
                   int len = INT_MAX;
             	foreach (MNote* n, notes) {
-                  	if (n->mc->duration() < len)
-                              len = n->mc->duration();
+                  	if (n->mc.duration() < len)
+                              len = n->mc.duration();
                         }
                   if (len == 0) {
                         printf("ImportMidi: note len zero\n");
@@ -1252,18 +1252,18 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                   ctick += len;
 
             	foreach (MNote* n, notes) {
-                        QList<Event*>& nl = n->mc->notes();
+                        const QList<Event>& nl = n->mc.notes();
                         for (int i = 0; i < nl.size(); ++i) {
-                              Event* mn = nl[i];
+                              const Event& mn = nl[i];
                   		Note* note = new Note(this);
-                              note->setPitch(mn->pitch(), mn->tpc());
+                              note->setPitch(mn.pitch(), mn.tpc());
             	      	note->setTrack(staffIdx * VOICES + voice);
             	      	chord->add(note);
-                              note->setOnTimeUserOffset(mn->noquantOntime() - tick);
-                              int ot = (mn->noquantOntime() + mn->noquantDuration()) - (tick + chord->ticks());
+                              note->setOnTimeUserOffset(mn.noquantOntime() - tick);
+                              int ot = (mn.noquantOntime() + mn.noquantDuration()) - (tick + chord->ticks());
                               note->setOffTimeUserOffset(ot);
                               note->setVeloType(USER_VAL);
-                              note->setVeloOffset(mn->velo());
+                              note->setVeloOffset(mn.velo());
 
                               if (n->ties[i]) {
                                     n->ties[i]->setEndNote(note);
@@ -1273,16 +1273,16 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                                     note->setOnTimeUserOffset(0);
                                     }
                               }
-                        if (n->mc->duration() <= len) {
+                        if (n->mc.duration() <= len) {
                               notes.removeAt(notes.indexOf(n));
                               continue;
                               }
-                        n->mc->setDuration(n->mc->duration() - len);
-                        n->mc->setOntime(n->mc->ontime() + len);
+                        n->mc.setDuration(n->mc.duration() - len);
+                        n->mc.setOntime(n->mc.ontime() + len);
 
                         for (int i = 0; i < nl.size(); ++i) {
-                              Event* mn = nl[i];
-                              Note* note = chord->findNote(mn->pitch());
+                              const Event& mn = nl[i];
+                              Note* note = chord->findNote(mn.pitch());
                               n->ties[i] = new Tie(this);
                               n->ties[i]->setStartNote(note);
                               note->setTieFor(n->ties[i]);

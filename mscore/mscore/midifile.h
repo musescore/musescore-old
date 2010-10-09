@@ -68,7 +68,7 @@ class MidiTrack {
       ~MidiTrack();
 
       bool empty() const;
-      const EventList events() const    { return _events;     }
+      const EventList& events() const   { return _events;     }
       EventList& events()               { return _events;     }
       int outChannel() const            { return _outChannel; }
       void setOutChannel(int n);
@@ -78,8 +78,8 @@ class MidiTrack {
       void setName(const QString& s)    { _name = s;          }
       QString comment() const           { return _comment;    }
       void setComment(const QString& s) { _comment = s;       }
-      void insert(Event* e)             { _events.insert(e);  }
-      void append(Event* e)             { _events.append(e);  }
+      void insert(const Event& e)       { _events.insert(e);  }
+      void append(const Event& e)       { _events.append(e);  }
 
       void addCtrl(int tick, int channel, int type, int value);
 
@@ -141,7 +141,7 @@ class MidiFile {
       int getvl();
       int readShort();
       int readLong();
-      Event* readEvent();
+      bool readEvent(Event*);
       bool readTrack();
       void skip(qint64);
 
@@ -168,11 +168,11 @@ class MidiFile {
       AL::TimeSigMap siglist() const     { return _siglist;         }
       int noRunningStatus() const     { return _noRunningStatus; }
       void setNoRunningStatus(bool v) { _noRunningStatus = v;    }
-      void processMeta(Score*, MidiTrack* track, Event* e);
+      void processMeta(Score*, MidiTrack* track, const Event& e);
       void setShortestNote(int v)     { _shortestNote = v;    }
       int shortestNote() const        { return _shortestNote; }
 
-      friend class Event;
+      friend class EventData;
       friend class MidiTrack;
       };
 

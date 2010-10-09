@@ -104,11 +104,11 @@ bool Score::saveAudio(const QString& name, const QString& ext, QString soundFont
             foreach(const Part* part, _parts) {
                   foreach(const Channel& a, part->instr()->channel()) {
                         a.updateInitList();
-                        foreach(Event* e, a.init) {
-                              if (e == 0)
+                        foreach(Event e, a.init) {
+                              if (e.type() == ME_INVALID)
                                     continue;
-                              e->setChannel(a.channel);
-                              seq->putEvent(*e);
+                              e.setChannel(a.channel);
+                              seq->putEvent(e);
                               }
                         }
                   }
@@ -138,12 +138,12 @@ bool Score::saveAudio(const QString& name, const QString& ext, QString soundFont
                         r         += n * stride;
                         playTime += double(n)/double(sampleRate);
                         frames    -= n;
-                        const Event* e = playPos.value();
-                        if (e->isChannelEvent()) {
-                              int channelIdx = e->channel();
+                        const Event& e = playPos.value();
+                        if (e.isChannelEvent()) {
+                              int channelIdx = e.channel();
                               Channel* c = _midiMapping[channelIdx].articulation;
                               if (!c->mute)
-                                    seq->putEvent(*e);
+                                    seq->putEvent(e);
                               }
                         }
                   if (frames) {

@@ -42,7 +42,7 @@ const int INVALID_TPC = -2;
 
 extern int pitch2tpc(int pitch, int key);
 
-extern void spell(QList<Event*>& notes, int);
+extern void spell(QList<Event>& notes, int);
 extern void spell(QList<Note*>& notes);
 extern int computeWindow(const QList<Note*>& notes, int start, int end);
 extern int tpc(int idx, int pitch, int opt);

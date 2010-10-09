@@ -75,34 +75,33 @@ void ExportMidi::writeHeader()
                   int len     = str.length() + 1;
                   unsigned char* data = new unsigned char[len];
                   strcpy((char*)(data), str.toLatin1().data());
-                  Event* ev = new Event(ME_META);
-                  ev->setOntime(0);
-                  ev->setData(data);
-                  ev->setLen(len);
+                  Event ev(ME_META);
+                  ev.setOntime(0);
+                  ev.setData(data);
+                  ev.setLen(len);
 
                   switch (text->subtype()) {
                         case TEXT_TITLE:
-                              ev->setMetaType(META_TITLE);
+                              ev.setMetaType(META_TITLE);
                               track->insert(ev);
                               break;
                         case TEXT_SUBTITLE:
-                              ev->setMetaType(META_SUBTITLE);
+                              ev.setMetaType(META_SUBTITLE);
                               track->insert(ev);
                               break;
                         case TEXT_COMPOSER:
-                              ev->setMetaType(META_COMPOSER);
+                              ev.setMetaType(META_COMPOSER);
                               track->insert(ev);
                               break;
                         case TEXT_TRANSLATOR:
-                              ev->setMetaType(META_TRANSLATOR);
+                              ev.setMetaType(META_TRANSLATOR);
                               track->insert(ev);
                               break;
                         case TEXT_POET:
-                              ev->setMetaType(META_POET);
+                              ev.setMetaType(META_POET);
                               track->insert(ev);
                               break;
                         default:
-                              delete ev;
                               break;
                         }
                   }
@@ -174,15 +173,15 @@ void ExportMidi::writeHeader()
                   iKeyList ek = keymap->lower_bound(endTick);
 
                   for (iKeyList ik = sk; ik != ek; ++ik) {
-                        Event* ev  = new Event(ME_META);
-                        ev->setOntime(ik->first + tickOffset);
+                        Event ev(ME_META);
+                        ev.setOntime(ik->first + tickOffset);
                         int key       = ik->second.accidentalType();   // -7 -- +7
-                        ev->setMetaType(META_KEY_SIGNATURE);
-                        ev->setLen(2);
+                        ev.setMetaType(META_KEY_SIGNATURE);
+                        ev.setLen(2);
                         unsigned char* data = new unsigned char[2];
                         data[0]   = key;
                         data[1]   = 0;  // major
-                        ev->setData(data);
+                        ev.setData(data);
                         track->insert(ev);
                         }
                   }
@@ -201,20 +200,20 @@ void ExportMidi::writeHeader()
             AL::iTEvent se = tempomap->lower_bound(startTick);
             AL::iTEvent ee = tempomap->lower_bound(endTick);
             for (AL::iTEvent it = se; it != ee; ++it) {
-                  Event* ev = new Event(ME_META);
-                  ev->setOntime(it->first + tickOffset);
+                  Event ev(ME_META);
+                  ev.setOntime(it->first + tickOffset);
                   //
                   // compute midi tempo: microseconds / quarter note
                   //
                   int tempo = lrint((1.0 / it->second.tempo) * 1000000.0);
 
-                  ev->setMetaType(META_TEMPO);
-                  ev->setLen(3);
+                  ev.setMetaType(META_TEMPO);
+                  ev.setLen(3);
                   unsigned char* data = new unsigned char[3];
                   data[0]   = tempo >> 16;
                   data[1]   = tempo >> 8;
                   data[2]   = tempo;
-                  ev->setData(data);
+                  ev.setData(data);
                   track->insert(ev);
                   }
             }
@@ -285,26 +284,24 @@ bool ExportMidi::write(const QString& name)
             cs->renderPart(&events, part);
 
             for (EventMap::const_iterator i = events.begin(); i != events.end(); ++i) {
-                  Event* event = i.value();
-                  if (event->channel() != channel)
+                  Event event = i.value();
+                  if (event.channel() != channel)
                         continue;
-                  if (event->type() == ME_NOTEON) {
-                        Event* ne = new Event(ME_NOTEON);
-                        ne->setOntime(i.key());
-                        ne->setChannel(event->channel());
-                        ne->setPitch(event->pitch());
-                        ne->setVelo(event->velo());
+                  if (event.type() == ME_NOTEON) {
+                        Event ne(ME_NOTEON);
+                        ne.setOntime(i.key());
+                        ne.setChannel(event.channel());
+                        ne.setPitch(event.pitch());
+                        ne.setVelo(event.velo());
                         track->insert(ne);
                         }
-                  else if (event->type() == ME_CONTROLLER) {
-                        track->addCtrl(i.key(), event->channel(), event->controller(), event->value());
+                  else if (event.type() == ME_CONTROLLER) {
+                        track->addCtrl(i.key(), event.channel(), event.controller(), event.value());
                         }
                   else {
-                        printf("writeMidi: unknown midi event 0x%02x\n", event->type());
+                        printf("writeMidi: unknown midi event 0x%02x\n", event.type());
                         }
                   }
             }
       return !mf.write(&f);
       }
-
-

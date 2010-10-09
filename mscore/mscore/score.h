@@ -671,7 +671,8 @@ class Score : public QObject {
       void setLayout(Measure* m);
       int midiPort(int idx) const;
       int midiChannel(int idx) const;
-      QList<MidiMapping>* midiMapping()       { return &_midiMapping; }
+      QList<MidiMapping>* midiMapping()       { return &_midiMapping;          }
+      MidiMapping* midiMapping(int channel)   { return &_midiMapping[channel]; }
       void rebuildMidiMapping();
       void updateChannel();
       void cmdTransposeStaff(int staffIdx, Interval, bool useDoubleSharpsFlats);

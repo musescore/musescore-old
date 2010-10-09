@@ -165,8 +165,8 @@ int main(int argc, char* argv[])
                   if (cleanup)
                         t->cleanup();
                   xml.stag("Track");
-                  foreach (const Event* e, t->events())
-                        e->write(xml);
+                  foreach (const Event& e, t->events())
+                        e.write(xml);
                   xml.etag();
                   }
             xml.etag();
