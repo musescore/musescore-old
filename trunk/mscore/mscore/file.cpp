@@ -1566,6 +1566,10 @@ printf("incomplete Slur\n");
                   excerpt->setScore(nscore);
                   }
             }
+      renumberMeasures();
+      checkScore();
+      rebuildMidiMapping();
+      updateChannel();
       return true;
       }
 

@@ -565,10 +565,10 @@ bool Score::read(QString name)
                   }
             }
 
-      renumberMeasures();
-      checkScore();
-      rebuildMidiMapping();
-      updateChannel();
+//      renumberMeasures();
+//      checkScore();
+//      rebuildMidiMapping();
+//      updateChannel();
       mscore->updateRecentScores(this);
 
       int staffIdx = 0;

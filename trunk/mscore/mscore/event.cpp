@@ -24,12 +24,13 @@
 #include "score.h"
 #include "part.h"
 #include "event.h"
+#include "event_p.h"
 
 //---------------------------------------------------------
 //   Event::Event
 //---------------------------------------------------------
 
-Event::Event()
+EventData::EventData()
       {
       _data   = 0;
       _note   = 0;
@@ -38,7 +39,7 @@ Event::Event()
       _channel = 0;
       }
 
-Event::Event(int t)
+EventData::EventData(int t)
       {
       _type   = t;
       _data   = 0;
@@ -48,8 +49,8 @@ Event::Event(int t)
       _channel = 0;
       }
 
-
-Event::Event(const Event& e)
+EventData::EventData(const EventData& e)
+   : QSharedData(e)
       {
       _type       = e._type;
       _ontime     = e._ontime;
@@ -72,7 +73,7 @@ Event::Event(const Event& e)
       _note     = e._note;
       }
 
-Event::~Event()
+EventData::~EventData()
       {
       delete[] _data;
       }
@@ -81,7 +82,7 @@ Event::~Event()
 //   isChannelEvent
 //---------------------------------------------------------
 
-bool Event::isChannelEvent() const
+bool EventData::isChannelEvent() const
       {
       switch(_type) {
             case ME_NOTEOFF:
@@ -101,30 +102,30 @@ bool Event::isChannelEvent() const
       }
 
 //---------------------------------------------------------
-//   Event::write
+//   EventData::write
 //---------------------------------------------------------
 
-void Event::write(Xml& xml) const
+void EventData::write(Xml& xml) const
       {
       switch(_type) {
             case ME_NOTE:
                   xml.tagE(QString("note  tick=\"%1\" channel=\"%2\" len=\"%3\" pitch=\"%4\" velo=\"%5\"")
-                     .arg(ontime()).arg(channel()).arg(duration()).arg(pitch()).arg(velo()));
+                     .arg(_ontime).arg(_channel).arg(_duration).arg(pitch()).arg(velo()));
                   break;
 
             case ME_NOTEON:
                   xml.tagE(QString("note-on  tick=\"%1\" channel=\"%2\" pitch=\"%3\" velo=\"%4\"")
-                     .arg(ontime()).arg(channel()).arg(pitch()).arg(velo()));
+                     .arg(_ontime).arg(_channel).arg(pitch()).arg(velo()));
                   break;
 
             case ME_NOTEOFF:
                   xml.tagE(QString("note-off  tick=\"%1\" channel=\"%2\" pitch=\"%3\" velo=\"%4\"")
-                     .arg(ontime()).arg(channel()).arg(pitch()).arg(velo()));
+                     .arg(_ontime).arg(_channel).arg(pitch()).arg(velo()));
                   break;
 
             case ME_CONTROLLER:
                   if (controller() == CTRL_PROGRAM) {
-                        if ((ontime() == -1) && (channel() == 0)) {
+                        if ((_ontime == -1) && (_channel == 0)) {
                               xml.tagE(QString("program value=\"%1\"").arg(value()));
                               }
                         else {
@@ -206,11 +207,16 @@ void Event::write(Xml& xml) const
             }
       }
 
+bool EventData::operator==(const EventData& e) const
+      {
+      return false;           // TODO
+      }
+
 //---------------------------------------------------------
-//   Event::write
+//   EventData::write
 //---------------------------------------------------------
 
-void Event::write(MidiFile* mf) const
+void EventData::write(MidiFile* mf) const
       {
       switch(_type) {
             case ME_NOTEON:
@@ -268,4 +274,82 @@ void Event::write(MidiFile* mf) const
                   break;
             }
       }
+
+//---------------------------------------------------------
+//   Event
+//---------------------------------------------------------
+
+Event::Event()
+      {
+      d = new EventData;
+      }
+
+Event::Event(const Event& s)
+   : d(s.d)
+      {
+      }
+
+Event::Event(int t)
+      {
+      d = new EventData(t);
+      }
+
+Event::~Event()
+      {
+      }
+
+Event& Event::operator=(const Event& s)
+      {
+      d = s.d;
+      return *this;
+      }
+
+void Event::write(MidiFile* mf) const { d->write(mf);  }
+void Event::write(Xml& xml) const     { d->write(xml); }
+// void Event::read(QDomElement e)       { d->read(e);    }
+
+bool Event::isChannelEvent() const    { return d->isChannelEvent(); }
+
+int Event::noquantOntime() const      { return d->_noquantOntime;       }
+void Event::setNoquantOntime(int v)   { d->_noquantOntime = v;          }
+int Event::noquantDuration() const    { return d->_noquantDuration;     }
+void Event::setNoquantDuration(int v) { d->_noquantDuration = v;        }
+
+int Event::type() const               { return d->_type;                }
+void Event::setType(int v)            { d->_type = v;                   }
+int Event::ontime() const             { return d->_ontime;              }
+void Event::setOntime(int v)          { d->_ontime = v;                 }
+int Event::channel() const            { return d->_channel;             }
+void Event::setChannel(int c)         { d->_channel = c;                }
+int Event::dataA() const              { return d->_a;                   }
+int Event::dataB() const              { return d->_b;                   }
+void Event::setDataA(int v)           { d->_a = v;                      }
+void Event::setDataB(int v)           { d->_b = v;                      }
+int Event::pitch() const              { return d->_a;                   }
+void Event::setPitch(int v)           { d->_a = v;                      }
+int Event::velo() const               { return d->_b;                   }
+void Event::setVelo(int v)            { d->_b = v;                      }
+int Event::controller() const         { return d->_a;                   }
+void Event::setController(int val)    { d->_a = val;                    }
+int Event::value() const              { return d->_b;                   }
+void Event::setValue(int v)           { d->_b = v;                      }
+int Event::duration() const           { return d->_duration;            }
+void Event::setDuration(int v)        { d->_duration = v;               }
+int Event::voice() const              { return d->_voice;               }
+void Event::setVoice(int val)         { d->_voice = val;                }
+int Event::offtime() const            { return d->ontime() + d->_duration; }
+QList<Event>& Event::notes()          { return d->_notes;               }
+const uchar* Event::data() const      { return d->_data;                }
+void Event::setData(uchar* p)         { d->_data = p;                   }
+int Event::len() const                { return d->_len;                 }
+void Event::setLen(int l)             { d->_len = l;                    }
+int Event::metaType() const           { return d->_metaType;            }
+void Event::setMetaType(int v)        { d->_metaType = v;               }
+int Event::tpc() const                { return d->_tpc;                 }
+void Event::setTpc(int v)             { d->_tpc = v;                    }
+const Note* Event::note() const       { return d->_note;                }
+void Event::setNote(const Note* v)    { d->_note = v;                   }
+double Event::tuning() const          { return d->_tuning;              }
+void Event::setTuning(double v)       { d->_tuning = v;                 }
+bool Event::operator==(const Event& e) const { return d->operator==(*e.d);   }
 

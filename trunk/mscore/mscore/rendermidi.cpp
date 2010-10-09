@@ -136,19 +136,14 @@ static void playNote(EventMap* events, const Note* note, int channel, int pitch,
    int velo, int onTime, int offTime)
       {
       velo = note->customizeVelocity(velo);
-      Event* ev = new Event(ME_NOTEON);
-      ev->setChannel(channel);
-      ev->setPitch(pitch);
-      ev->setVelo(velo);
-      ev->setTuning(note->tuning());
-      ev->setNote(note);
+      Event ev(ME_NOTEON);
+      ev.setChannel(channel);
+      ev.setPitch(pitch);
+      ev.setVelo(velo);
+      ev.setTuning(note->tuning());
+      ev.setNote(note);
       events->insertMulti(onTime, ev);
-
-      ev = new Event(ME_NOTEON);
-      ev->setChannel(channel);
-      ev->setPitch(pitch);
-      ev->setVelo(0);
-      ev->setNote(note);
+      ev.setVelo(0);
       events->insertMulti(offTime, ev);
       }
 
@@ -198,11 +193,11 @@ static void collectNote(EventMap* events, int channel, const Note* note, int vel
                   int pitch = points[pt].pitch;
 
                   if ((pt == 0) && (pitch == points[pt+1].pitch)) {
-                        Event* ev = new Event(ME_CONTROLLER);
-                        ev->setChannel(channel);
-                        ev->setController(CTRL_PITCH);
+                        Event ev(ME_CONTROLLER);
+                        ev.setChannel(channel);
+                        ev.setController(CTRL_PITCH);
                         int midiPitch = (pitch * 16384) / 300;
-                        ev->setValue(midiPitch);
+                        ev.setValue(midiPitch);
                         events->insertMulti(tick, ev);
                         }
                   if (pitch != points[pt+1].pitch) {
@@ -210,15 +205,15 @@ static void collectNote(EventMap* events, int channel, const Note* note, int vel
                         int tick2      = (points[pt+1].time * ticks) / 60;
                         int dt = points[pt+1].time - points[pt].time;
                         for (int tick3 = tick1; tick3 < tick2; tick3 += 16) {
-                              Event* ev = new Event(ME_CONTROLLER);
-                              ev->setChannel(channel);
-                              ev->setController(CTRL_PITCH);
+                              Event ev(ME_CONTROLLER);
+                              ev.setChannel(channel);
+                              ev.setController(CTRL_PITCH);
 
                               int dx = ((tick3-tick1) * 60) / ticks;
                               int p  = pitch + dx * pitchDelta / dt;
 
                               int midiPitch = (p * 16384) / 1200;
-                              ev->setValue(midiPitch);
+                              ev.setValue(midiPitch);
                               events->insertMulti(tick + tick3, ev);
                               }
                         tick1 = tick2;
@@ -226,10 +221,10 @@ static void collectNote(EventMap* events, int channel, const Note* note, int vel
                   if (pt == (n-2))
                         break;
                   }
-            Event* ev = new Event(ME_CONTROLLER);
-            ev->setChannel(channel);
-            ev->setController(CTRL_PITCH);
-            ev->setValue(0);
+            Event ev(ME_CONTROLLER);
+            ev.setChannel(channel);
+            ev.setController(CTRL_PITCH);
+            ev.setValue(0);
             events->insertMulti(tick + ticks, ev);
             }
       }
@@ -353,9 +348,9 @@ static void collectMeasureEvents(EventMap* events, Measure* m, Part* part, int t
                                     continue;
                               int n = nel->events.size();
                               for (int i = n-1; i >= 0; --i) {
-                                    Event* event = new Event(*nel->events[i]);
-                                    event->setOntime(tick);
-                                    event->setChannel(channel);
+                                    Event event(nel->events[i]);
+                                    event.setOntime(tick);
+                                    event.setChannel(channel);
                                     events->insertMulti(tick, event);
                                     }
                               }
@@ -368,29 +363,23 @@ static void collectMeasureEvents(EventMap* events, Measure* m, Part* part, int t
                         for (int i = 0; i < 4; ++i) {
                               for (int k = 0; k < 16; ++k) {
                                     if (st->getAeolusStop(i, k)) {
-                                          Event* event = new Event;
-                                          event->setType(ME_CONTROLLER);
-                                          event->setController(98);
-                                          event->setValue(k);
-                                          event->setOntime(tick);
-                                          event->setChannel(channel);
+                                          Event event;
+                                          event.setType(ME_CONTROLLER);
+                                          event.setController(98);
+                                          event.setValue(k);
+                                          event.setOntime(tick);
+                                          event.setChannel(channel);
                                           events->insertMulti(tick, event);
                                           }
                                     }
-                              Event* event = new Event;
-                              event->setType(ME_CONTROLLER);
-                              event->setController(98);
-                              event->setValue(96 + i);
-                              event->setOntime(tick);
-                              event->setChannel(channel);
+                              Event event(ME_CONTROLLER);
+                              event.setController(98);
+                              event.setValue(96 + i);
+                              event.setOntime(tick);
+                              event.setChannel(channel);
                               events->insertMulti(tick, event);
 
-                              event = new Event;
-                              event->setType(ME_CONTROLLER);
-                              event->setController(98);
-                              event->setValue(64 + i);
-                              event->setOntime(tick);
-                              event->setChannel(channel);
+                              event.setValue(64 + i);
                               events->insertMulti(tick, event);
                               }
                         }

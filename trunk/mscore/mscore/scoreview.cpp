@@ -2644,6 +2644,8 @@ void ScoreView::cmd(const QAction* a)
       else if (cmd == "play") {
             if (seq->canStart())
                   sm->postEvent(new CommandEvent(cmd));
+            else
+                  getAction("play")->setChecked(false);
             }
       else if (cmd == "find")
             sm->postEvent(new CommandEvent(cmd));

@@ -137,7 +137,7 @@ void Seq::setScoreView(ScoreView* v)
       playlistChanged = true;
       if (cs) {
             connect(cs, SIGNAL(selectionChanged(int)), SLOT(selectionChanged(int)));
-            initInstruments();
+//            initInstruments();
             }
       }
 
@@ -410,12 +410,11 @@ void Seq::seqMessage(int msg)
 void Seq::stopTransport()
       {
       // send note off events
-      foreach(const Event* e, activeNotes) {
-            if (e->type() != ME_NOTEON)
+      foreach(Event e, activeNotes) {
+            if (e.type() != ME_NOTEON)
                   continue;
-            Event ee(*e);
-            ee.setVelo(0);
-            putEvent(ee);
+            e.setVelo(0);
+            putEvent(e);
             }
       // send sustain off
       Event e;
@@ -447,12 +446,12 @@ void Seq::startTransport()
 //    send one event to the synthesizer
 //---------------------------------------------------------
 
-void Seq::playEvent(const Event* event)
+void Seq::playEvent(const Event& event)
       {
-      int type = event->type();
+      int type = event.type();
       if (type == ME_NOTEON) {
             bool mute;
-            const Note* note = event->note();
+            const Note* note = event.note();
 
             if (note) {
                   Instrument* instr = note->staff()->part()->instr();
@@ -462,27 +461,26 @@ void Seq::playEvent(const Event* event)
             else
                   mute = false;
 
-            if (event->velo()) {
+            if (event.velo()) {
                   if (!mute) {
-                        putEvent(*event);
+                        putEvent(event);
                         activeNotes.append(event);
                         }
                   }
             else {
-                  for (QList<const Event*>::iterator k = activeNotes.begin(); k != activeNotes.end(); ++k) {
-                        const Event* l = *k;
-                        if (l->channel() == event->channel() && l->pitch() == event->pitch()) {
-                              Event ee(*l);
-                              ee.setVelo(0);
+                  for (QList<Event>::iterator k = activeNotes.begin(); k != activeNotes.end(); ++k) {
+                        Event l = *k;
+                        if (l.channel() == event.channel() && l.pitch() == event.pitch()) {
+                              l.setVelo(0);
                               activeNotes.erase(k);
-                              putEvent(ee);
+                              putEvent(l);
                               break;
                               }
                         }
                   }
             }
       else if (type == ME_CONTROLLER)
-            putEvent(*event);
+            putEvent(event);
       }
 
 //---------------------------------------------------------
@@ -626,12 +624,11 @@ void Seq::initInstruments()
       {
       foreach(const Part* part, *cs->parts()) {
             foreach(const Channel& a, part->instr()->channel()) {
-                  foreach(Event* e, a.init) {
-                        if (e == 0)
+                  foreach(Event e, a.init) {
+                        if (e.type() == ME_INVALID)
                               continue;
-                        Event ee(*e);
-                        ee.setChannel(a.channel);
-                        sendEvent(ee);
+                        e.setChannel(a.channel);
+                        sendEvent(e);
                         }
                   }
             }
@@ -643,8 +640,6 @@ void Seq::initInstruments()
 
 void Seq::collectEvents()
       {
-      foreach(Event* e, events)
-            delete e;
       events.clear();
       activeNotes.clear();
 
@@ -713,10 +708,10 @@ void Seq::heartBeat()
             double f = cs->utick2utime(guiPos.key());
             if (f >= endTime)
                   break;
-            if (guiPos.value()->type() == ME_NOTEON) {
-                  Event* n = guiPos.value();
-                  const Note* note1 = n->note();
-                  if (n->velo()) {
+            if (guiPos.value().type() == ME_NOTEON) {
+                  Event n = guiPos.value();
+                  const Note* note1 = n.note();
+                  if (n.velo()) {
                         note = note1;
                         while (note1) {
                               ((Note*)note1)->setSelected(true);  // HACK
@@ -780,12 +775,11 @@ void Seq::setRelTempo(double relTempo)
 void Seq::setPos(int utick)
       {
       // send note off events
-      foreach(const Event* n, activeNotes) {
-            if (n->type() != ME_NOTEON)
+      foreach(Event n, activeNotes) {
+            if (n.type() != ME_NOTEON)
                   continue;
-            Event e(*n);
-            e.setVelo(0);
-            putEvent(e);
+            n.setVelo(0);
+            putEvent(n);
             }
       activeNotes.clear();
 
@@ -840,9 +834,9 @@ void Seq::startNote(const Channel& a, int pitch, int velo, double nt)
       // for channel/pitch. If found, stop note by
       // sending a note off event
       //
-      foreach(const Event* event, eventList) {
-            if ((event->channel() == a.channel) && (event->pitch() == pitch)) {
-                  sendEvent(*event);
+      foreach(const Event& event, eventList) {
+            if ((event.channel() == a.channel) && (event.pitch() == pitch)) {
+                  sendEvent(event);
                   active = true;
                   break;
                   }
@@ -856,10 +850,10 @@ void Seq::startNote(const Channel& a, int pitch, int velo, double nt)
       sendEvent(ev);
 
       if (!active) {
-            Event* e = new Event(ME_NOTEON);
-            e->setChannel(a.channel);
-            e->setPitch(pitch);
-            e->setVelo(0);
+            Event e(ME_NOTEON);
+            e.setChannel(a.channel);
+            e.setPitch(pitch);
+            e.setVelo(0);
             eventList.append(e);
             }
       }
@@ -893,10 +887,8 @@ void Seq::startNoteTimer(int duration)
 
 void Seq::stopNotes()
       {
-      foreach(const Event* event, eventList) {
-            sendEvent(*event);
-            delete event;
-            }
+      foreach(const Event& event, eventList)
+            sendEvent(event);
       eventList.clear();
       }
 
@@ -936,9 +928,9 @@ void Seq::nextMeasure()
       EventMap::const_iterator i = playPos;
       const Note* note = 0;
       for (;;) {
-            if (i.value()->type() == ME_NOTEON) {
-                  Event* n = i.value();
-                  note = n->note();
+            if (i.value().type() == ME_NOTEON) {
+                  const Event& n = i.value();
+                  note = n.note();
                   break;
                   }
             if (i == events.begin())
@@ -963,10 +955,10 @@ void Seq::nextChord()
       {
       int tick = playPos.key();
       for (EventMap::const_iterator i = playPos; i != events.constEnd(); ++i) {
-            if (i.value()->type() != ME_NOTEON)
+            if (i.value().type() != ME_NOTEON)
                   continue;
-            Event* n = i.value();
-            if (i.key() > tick && n->velo()) {
+            const Event& n = i.value();
+            if (i.key() > tick && n.velo()) {
                   seek(i.key());
                   break;
                   }
@@ -982,8 +974,8 @@ void Seq::prevMeasure()
       EventMap::const_iterator i = playPos;
       const Note* note = 0;
       for (;;) {
-            if (i.value()->type() == ME_NOTEON) {
-                  note = i.value()->note();
+            if (i.value().type() == ME_NOTEON) {
+                  note = i.value().note();
                   break;
                   }
             if (i == events.begin())
@@ -1013,9 +1005,9 @@ void Seq::prevChord()
       //find the chord just before playpos
       EventMap::const_iterator i = playPos;
       for (;;) {
-            if (i.value()->type() == ME_NOTEON) {
-                  Event* n = i.value();
-                  if (i.key() < tick && n->velo()) {
+            if (i.value().type() == ME_NOTEON) {
+                  const Event& n = i.value();
+                  if (i.key() < tick && n.velo()) {
                         tick = i.key();
                         break;
                         }
@@ -1028,9 +1020,9 @@ void Seq::prevChord()
       if (i != events.constBegin()) {
             i = playPos;
             for (;;) {
-                  if (i.value()->type() == ME_NOTEON) {
-                        Event* n = i.value();
-                        if (i.key() < tick && n->velo()) {
+                  if (i.value().type() == ME_NOTEON) {
+                        const Event& n = i.value();
+                        if (i.key() < tick && n.velo()) {
                               seek(i.key());
                               break;
                               }
@@ -1141,7 +1133,8 @@ float Seq::gain() const
 
 void Seq::putEvent(const Event& event)
       {
-      int syntiIdx= cs->midiMapping()->at(event.channel()).articulation->synti;
+      int channel = event.channel();
+      int syntiIdx= cs->midiMapping(channel)->articulation->synti;
       synti->play(event, syntiIdx);
       }
 

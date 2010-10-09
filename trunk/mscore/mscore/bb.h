@@ -47,8 +47,8 @@ class BBTrack {
       EventList& events()               { return _events;     }
       int outChannel() const            { return _outChannel; }
       void setOutChannel(int n)         { _outChannel = n;    }
-      void insert(Event* e)             { _events.insert(e);  }
-      void append(Event* e)             { _events.append(e);  }
+      void insert(const Event& e)       { _events.insert(e);  }
+      void append(const Event& e)       { _events.append(e);  }
 
       void findChords();
       int separateVoices(int);

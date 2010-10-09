@@ -91,7 +91,7 @@ class Seq : public QObject {
 
       EventMap events;                    // playlist
 
-      QList<const Event*> activeNotes;    // notes sounding
+      QList<Event> activeNotes;           // notes sounding
       double playTime;
       double startTime;
 
@@ -106,14 +106,14 @@ class Seq : public QObject {
       QTimer* heartBeatTimer;
       QTimer* noteTimer;
 
-      QList<Event*> eventList;
+      QList<Event> eventList;
 
       void collectMeasureEvents(Measure*, int staffIdx);
 
       void stopTransport();
       void startTransport();
       void setPos(int);
-      void playEvent(const Event*);
+      void playEvent(const Event&);
       void guiToSeq(const SeqMsg& msg);
 
    private slots:

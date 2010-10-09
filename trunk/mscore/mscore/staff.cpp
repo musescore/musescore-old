@@ -554,6 +554,13 @@ void LinkedStaves::remove(Staff* staff)
 
 bool Staff::primaryStaff() const
       {
-      return !_linkedStaves || (_linkedStaves->staves().front() == this);
+      QList<Staff*> s;
+      if (!_linkedStaves)
+            return true;
+      foreach(Staff* staff, _linkedStaves->staves()) {
+            if (staff->score() == score())
+                  s.append(staff);
+            }
+      return s.front() == this;
       }
 
