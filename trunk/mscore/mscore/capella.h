@@ -241,7 +241,7 @@ class BasicRectObj : public BasicDrawObj {
       BasicRectObj(int t, Capella* c) : BasicDrawObj(t, c) {}
       void read();
 
-      QPoint relPos;
+      QPointF relPos;
       int width;
       int yxRatio;
       int height;
@@ -256,7 +256,7 @@ class GroupObj : public BasicDrawObj {
       GroupObj(Capella* c) : BasicDrawObj(CAP_GROUP, c) {}
       void read();
 
-      QPoint relPos;
+      QPointF relPos;
       QList<BasicDrawObj*> objects;
       };
 
@@ -269,7 +269,7 @@ class TransposableObj : public BasicDrawObj {
       TransposableObj(Capella* c) : BasicDrawObj(CAP_TRANSPOSABLE, c) {}
       void read();
 
-      QPoint relPos;
+      QPointF relPos;
       char b;
       QList<BasicDrawObj*> variants;
       };
@@ -295,7 +295,7 @@ class LineObj : public BasicDrawObj {
       LineObj(int t, Capella* c) : BasicDrawObj(t, c) {}
       void read();
 
-      QPoint pt1, pt2;
+      QPointF pt1, pt2;
       QColor color;
       char lineWidth;
       };
@@ -384,7 +384,7 @@ class GuitarObj : public BasicDrawObj {
       GuitarObj(Capella* c) : BasicDrawObj(CAP_GUITAR, c) {}
       void read();
 
-      QPoint relPos;
+      QPointF relPos;
       QColor color;
       short flags;
       int strings;      // 8 Saiten in 8 Halbbytes
@@ -409,7 +409,7 @@ class TrillObj : public BasicDrawObj {
 //---------------------------------------------------------
 
 class SlurObj : public BasicDrawObj {
-      QPoint bezierPoint[4];
+      QPointF bezierPoint[4];
       QColor color;
 
    public:
@@ -438,7 +438,7 @@ class TextObj : public BasicRectObj {
 
 class SimpleTextObj : public BasicDrawObj {
       char* _text;
-      QPoint relPos;
+      QPointF relPos;
       unsigned char align;
       QFont _font;
 
@@ -448,7 +448,7 @@ class SimpleTextObj : public BasicDrawObj {
       void read();
       QString text() const { return QString(_text); }
       QFont font() const { return _font; }
-      QPoint pos() const { return relPos; }
+      QPointF pos() const { return relPos; }
       };
 
 //---------------------------------------------------------
@@ -619,9 +619,6 @@ class Capella {
       QList<QFont> fonts;
       QList<CapStaffLayout*> staves;      // staff layout
 
-      int smallLineDist;            // layout
-      int normalLineDist;
-      int topDist;
       int interDist;
       unsigned char txtAlign;       // Stimmenbezeichnungen 0=links, 1=zentriert, 2=rechts
       unsigned char adjustVert;     // 0=nein, 1=außer letzte Seite, 3=alle Seiten
@@ -662,11 +659,15 @@ class Capella {
       QList<BasicDrawObj*> readDrawObjectArray();
       void read(void* p, qint64 len);
       QFont readFont();
-      QPoint readPoint();
+      QPointF readPoint();
 
       QList<CapSystem*> systems;
       QList<CapBracket> brackets;
       ChordObj* backgroundChord;
+      CapStaffLayout* staffLayout(int idx)  { return staves[idx]; }
+      double smallLineDist;            // spatium unit in metric mm
+      double normalLineDist;
+      int topDist;
       };
 
 #endif

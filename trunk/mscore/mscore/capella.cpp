@@ -41,6 +41,7 @@
 #include "al/sig.h"
 #include "tuplet.h"
 #include "segment.h"
+#include "layoutbreak.h"
 
 //---------------------------------------------------------
 //   errmsg
@@ -117,7 +118,7 @@ void SimpleTextObj::read()
       align  = cap->readByte();
       _font  = cap->readFont();
       _text  = cap->readString();
-printf("read SimpletextObj(%d,%d) len %zd <%s> char0: %02x\n",
+printf("read SimpletextObj(%f,%f) len %zd <%s> char0: %02x\n",
       relPos.x(), relPos.y(), strlen(_text), _text, _text[0]);
       }
 
@@ -132,7 +133,7 @@ void LineObj::read()
       pt2       = cap->readPoint();
       color     = cap->readColor();
       lineWidth = cap->readByte();
-printf("LineObj: %d:%d  %d:%d  width %d\n", pt1.x(), pt1.y(), pt2.x(), pt2.y(), lineWidth);
+printf("LineObj: %f:%f  %f:%f  width %d\n", pt1.x(), pt1.y(), pt2.x(), pt2.y(), lineWidth);
       }
 
 //---------------------------------------------------------
@@ -598,17 +599,17 @@ void ChordObj::read()
       for (unsigned int i = 0; i < nNotes; ++i) {
             CNote n;
             n.explAlteration = 0;
-            char c = cap->readChar();
-            bool bit7 = c & 0x80;
-            bool bit6 = c & 0x40;
-            n.pitch = c;
+            char c           = cap->readChar();
+            bool bit7        = c & 0x80;
+            bool bit6        = c & 0x40;
+            n.pitch          = c;
             if (bit7 != bit6) {
                   n.explAlteration = 2;
                   n.pitch ^= 0x80;
                   }
             unsigned char b = cap->readByte();
-            n.headType = b & 7;
-            n.alteration = ((b >> 3) & 7) - 2;  // -2 -- +2
+            n.headType      = b & 7;
+            n.alteration    = ((b >> 3) & 7) - 2;  // -2 -- +2
             if (b & 0x40)
                   n.explAlteration = 1;
             n.silent = b & 0x80;
@@ -807,13 +808,18 @@ QFont Capella::readFont()
             QColor color           = readColor();
             char* face             = readString();
 
-// printf("Font <%s> size %d, weight %d\n", face, lfHeight, lfWeight);
+printf("Font <%s> size %d, weight %d\n", face, lfHeight, lfWeight);
             QFont font(face);
             font.setPointSizeF(lfHeight / 1000.0);
             font.setItalic(lfItalic);
             font.setStrikeOut(lfStrikeOut);
             font.setUnderline(lfUnderline);
-            font.setWeight(lfWeight / 10);
+
+            switch(lfWeight) {
+                  case 700:  font.setWeight(QFont::Bold); break;
+                  case 400:  font.setWeight(QFont::Normal); break;
+                  case 0:    font.setWeight(QFont::Light); break;
+                  }
             fonts.append(font);
             return font;
             }
@@ -846,6 +852,8 @@ void Capella::readStaveLayout(CapStaffLayout* sl, int /*idx*/)
 //      printf("StaffLayout %d: noteLines %d\n", idx, sl->noteLines);
 
       sl->bSmall      = readByte();
+printf("staff size small %d\n", sl->bSmall);
+
       sl->topDist      = readInt();
       sl->btmDist      = readInt();
       sl->groupDist    = readInt();
@@ -897,8 +905,9 @@ void Capella::readStaveLayout(CapStaffLayout* sl, int /*idx*/)
 
 void Capella::readLayout()
       {
-      smallLineDist  = readInt();
-      normalLineDist = readInt();
+      smallLineDist  = double(readInt()) / 100;
+      normalLineDist = double(readInt()) / 100;
+
       topDist        = readInt();
       interDist      = readInt();
 
@@ -1234,11 +1243,11 @@ int BasicDurationalObj::ticks() const
 //   readPoint
 //---------------------------------------------------------
 
-QPoint Capella::readPoint()
+QPointF Capella::readPoint()
       {
       int x = readInt();
       int y = readInt();
-      return QPoint(x, y);
+      return QPointF(double(x), double(y));
       }
 
 //---------------------------------------------------------
@@ -1263,7 +1272,7 @@ void Capella::read(QFile* fp)
       author   = readString();
       keywords = readString();
       comment  = readString();
-printf("author <%s> keywords <%s> comment <%s>\n", author, keywords, comment);
+// printf("author <%s> keywords <%s> comment <%s>\n", author, keywords, comment);
 
       nRel   = readUnsigned();            // 75
       nAbs   = readUnsigned();            // 16
@@ -1272,11 +1281,11 @@ printf("author <%s> keywords <%s> comment <%s>\n", author, keywords, comment);
       bAllowCompression = b & 2;
       bPrintLandscape   = b & 16;
 
-printf("  nRel %d  nAbs %d useRealSize %d compresseion %d\n", nRel, nAbs, bUseRealSize, bAllowCompression);
+// printf("  nRel %d  nAbs %d useRealSize %d compresseion %d\n", nRel, nAbs, bUseRealSize, bAllowCompression);
 
       readLayout();
 
-      beamRelMin0 = readByte();        // Grundeinstellungen f�r Balkensteigung
+      beamRelMin0 = readByte();        // basic setup for beam slope
       beamRelMin1 = readByte();
       beamRelMax0 = readByte();
       beamRelMax1 = readByte();
@@ -1379,7 +1388,11 @@ static void processBasicDrawObj(QList<BasicDrawObj*> objects, Segment* s, int tr
                         Text* text = new Text(score);
                         text->setDefaultFont(st->font());
                         text->setText(st->text());
+                        QPointF p(st->pos());
+                        p = p / 32.0 * DPMM;
                         text->setUserOff(st->pos());
+                        printf("setText %f %f <%s>\n", st->pos().x(), st->pos().y(), qPrintable(st->text()));
+                        text->setAlign(ALIGN_LEFT | ALIGN_BASELINE);
                         text->setTrack(track);
                         s->add(text);
                         }
@@ -1564,7 +1577,7 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                               l       = l % 7;
 
                               int pitch = pitchKeyAdjust(l, key) + octave * 12;
-                              pitch += n.alteration;
+                              pitch    += n.alteration;
 
                               if (pitch > 127)
                                     pitch = 127;
@@ -1572,12 +1585,10 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                                     pitch = 0;
 
                               note->setPitch(pitch);
-                              note->setTpcFromPitch();
-                              /*int alter1 =*/ tpc2alter(note->tpc());
-                              int _tpc = pitch2tpc(note->pitch(), 0);
-                              /*int alter2 =*/ tpc2alter(_tpc);
+                              note->setTpc(pitch2tpc(pitch, key));
+// TODO: compute tpc from pitch & line
 
-// printf("pitch %d (alter %d), %d - %d\n", pitch, n.alteration, alter1, alter2);
+printf("pitch %d(=%d) (alter %d)\n", n.pitch, pitch, n.alteration);
                               // note->setTpc(tpc);
 
                               chord->add(note);
@@ -1732,7 +1743,7 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                               Text* s = new Text(this);
                               QString ss = rtf2html(QString(to->text));
 
-printf("string %d:%d w %d ratio %d <%s>\n",
+printf("string %f:%f w %d ratio %d <%s>\n",
    to->relPos.x(), to->relPos.y(), to->width, to->yxRatio, qPrintable(ss));
                               s->setHtml(ss);
                               MeasureBase* measure = _measures.first();
@@ -1773,6 +1784,10 @@ void Score::convertCapella(Capella* cap)
       if (cap->systems.isEmpty())
             return;
 
+      style().set(ST_measureSpacing, 1.0);
+      _spatium = cap->normalLineDist * DPMM;
+      style().set(ST_smallStaffMag, cap->smallLineDist / cap->normalLineDist);
+
       int staves   = cap->systems[0]->staves.size();
       CapStaff* cs = cap->systems[0]->staves[0];
       if (cs->log2Denom <= 7)
@@ -1780,7 +1795,9 @@ void Score::convertCapella(Capella* cap)
 
       Part* part = new Part(this);
       for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
+            CapStaffLayout* cl = cap->staffLayout(staffIdx);
             Staff* s = new Staff(this, part, staffIdx);
+            s->setSmall(cl->bSmall);
             part->insertStaff(s);
             _staves.push_back(s);
             }
@@ -1816,11 +1833,29 @@ void Score::convertCapella(Capella* cap)
                   }
             }
 
+      if (cap->topDist) {
+            VBox* mb;
+            if (_measures.first()->type() == VBOX)
+                  mb = static_cast<VBox*>(_measures.first());
+            else {
+                  mb = new VBox(this);
+                  mb->setTick(0);
+                  addMeasure(mb);
+                  }
+            mb->setBoxHeight(Spatium(cap->topDist));
+            }
 
       int systemTick = 0;
       foreach(CapSystem* csys, cap->systems) {
-            int mtick = 0;
+            int mtick    = 0;
             int staffIdx = 0;
+            if (csys->explLeftIndent > 0) {
+                  Measure* m = tick2measure(systemTick);
+                  HBox* mb = new HBox(this);
+                  mb->setTick(systemTick);
+                  mb->setBoxWidth(Spatium(csys->explLeftIndent));
+                  addMeasure(mb);
+                  }
             foreach(CapStaff* cstaff, csys->staves) {
                   int voice = 0;
                   foreach(CapVoice* cvoice, cstaff->voices) {
@@ -1830,6 +1865,13 @@ void Score::convertCapella(Capella* cap)
                               mtick = tick;
                         }
                   ++staffIdx;
+                  }
+            Measure* m = tick2measure(mtick-1);
+            if (m && !m->lineBreak()) {
+                  LayoutBreak* lb = new LayoutBreak(this);
+                  lb->setSubtype(LAYOUT_BREAK_LINE);
+                  lb->setTrack(-1);       // this are system elements
+                  m->add(lb);
                   }
             systemTick = mtick;
             }
