@@ -35,8 +35,8 @@ class StateEffects {
    private:
       enum Effects {
         Intensity = 0,
-        Color = 1,
-        Contrast = 2,
+        Color     = 1,
+        Contrast  = 2,
         // Intensity
         IntensityNoEffect = 0,
         IntensityShade = 1,

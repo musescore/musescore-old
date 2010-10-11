@@ -631,7 +631,7 @@ bool MStyle::isVerticalTab( const QTabBar::Shape& shape ) const
 
 void MStyle::polish(QWidget* widget)
       {
-      if(!widget)
+      if (!widget)
             return;
 
       // register widget to animations
@@ -712,11 +712,11 @@ void MStyle::polish(QWidget* widget)
       add extra margins for widgets in toolbars
       this allows to preserve alignment with respect to actions
       */
-      if( qobject_cast<QToolBar*>(widget->parent()) ) {
+      if (qobject_cast<QToolBar*>(widget->parent()))
             widget->setContentsMargins(0,0,0,1);
-            }
+
       if (qobject_cast<QToolButton*>(widget)) {
-            if ( qobject_cast<QToolBar*>( widget->parent() ) ) {
+            if (qobject_cast<QToolBar*>( widget->parent() ) ) {
                   // this hack is needed to have correct text color
                   // rendered in toolbars. This does not really update nicely when changing styles
                   // but is the best I can do for now since setting the palette color at painting
