@@ -2,6 +2,7 @@
       - fix local handbook disabled when no file is open
       - fix #7425: Space bar for play/pause (and zero for rests)
       - correct stem lengths for multi-flag notes (see bug #7415)
+      - update Fingering and Lines menu windows to match their palettes
 8.oct (ws)
       - fix #7416: triplet causes crash
       - fix #7418: crash when delete soundfont while playing

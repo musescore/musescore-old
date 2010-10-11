@@ -897,6 +897,10 @@ void MuseScore::lineMenu()
 
             double l = gscore->spatium() * 8;
 
+            Slur* slur = new Slur(gscore);
+            slur->setId(0);
+            sp->append(slur, tr("Slur"));
+            
             Hairpin* gabel0 = new Hairpin(gscore);
             gabel0->setSubtype(0);
             gabel0->setLen(l);
@@ -1172,20 +1176,18 @@ void MuseScore::fingeringMenu()
             sp->setGrid(28, 30);
 
             const char finger[] = "012345pimac";
-            Text* k;
 
             for (unsigned i = 0; i < strlen(finger); ++i) {
-                  k = new Text(gscore);
-                  k->setSubtype(TEXT_FINGERING);
-                  k->setText(QString(finger[i]));
-                  sp->append(k, tr("Fingering %1").arg(finger[i]));
+                  Fingering* f = new Fingering(gscore);
+                  f->setText(QString(finger[i]));
+                  sp->append(f, tr("Fingering %1").arg(finger[i]));
                   }
             const char stringnumber[] = "0123456";
             for (unsigned i = 0; i < strlen(stringnumber); ++i) {
-                  Text* k = new Text(gscore);
-                  k->setSubtype(TEXT_STRING_NUMBER);
-                  k->setText(QString(stringnumber[i]));
-                  sp->append(k, tr("String number %1").arg(stringnumber[i]));
+                  Fingering* f = new Fingering(gscore);
+                  f->setTextStyle(TEXT_STYLE_STRING_NUMBER);
+                  f->setText(QString(stringnumber[i]));
+                  sp->append(f, tr("String number %1").arg(stringnumber[i]));
                   }
             }
       fingeringPalette->show();
