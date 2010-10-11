@@ -1222,9 +1222,11 @@ void Note::layout()
             _bbox = symbols[score()->symIdx()][noteHead()].bbox(magS());
       if (parent() == 0)
             return;
-      foreach(Element* e, _el) {
+      foreach (Element* e, _el) {
             e->setMag(mag());
             e->layout();
+            if (e->type() == SYMBOL && static_cast<Symbol*>(e)->sym() == rightparenSym)
+                  e->setPos(headWidth(), 0.0);
             }
       if (_bend)
             _bend->layout();
