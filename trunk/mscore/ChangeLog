@@ -1,4 +1,6 @@
 11.oct (ws)
+      - fix -7461: appstyle-dark.css makes no distinction between active
+        and disabled buttons
       - fix #7447: Lyrics deleted when changing note
 10.oct (ws)
       - improved capella import
