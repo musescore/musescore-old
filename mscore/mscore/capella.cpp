@@ -42,6 +42,7 @@
 #include "tuplet.h"
 #include "segment.h"
 #include "layoutbreak.h"
+#include "dynamics.h"
 
 //---------------------------------------------------------
 //   errmsg
@@ -1359,6 +1360,18 @@ bool Score::importCapella(const QString& name)
       }
 
 //---------------------------------------------------------
+//   addDynamic
+//---------------------------------------------------------
+
+static void addDynamic(Score* score, Segment* s, int track, const char* name)
+      {
+      Dynamic* d = new Dynamic(score);
+      d->setSubtype(name);
+      d->setTrack(track);
+      s->add(d);
+      }
+
+//---------------------------------------------------------
 //   processBasicDrawObj
 //---------------------------------------------------------
 
@@ -1385,13 +1398,64 @@ static void processBasicDrawObj(QList<BasicDrawObj*> objects, Segment* s, int tr
                   case CAP_SIMPLE_TEXT:
                         {
                         SimpleTextObj* st = static_cast<SimpleTextObj*>(oo);
+                        if (st->font().family() == "capella3") {
+                              QString text(st->text());
+                              if (text.size() == 1) {
+                                    QChar c(text[0]);
+                                    ushort code = c.unicode();
+                                    switch(code) {
+                                          case 'p':
+                                                addDynamic(score, s, track, "p");
+                                                break;
+                                          case 'q':
+                                                addDynamic(score, s, track, "pp");
+                                                break;
+                                          case 'r':
+                                                addDynamic(score, s, track, "ppp");
+                                                break;
+                                          case 's':
+                                                addDynamic(score, s, track, "sf");
+                                                break;
+                                          case 'z':
+                                                addDynamic(score, s, track, "sfz");
+                                                break;
+                                          case '{':
+                                                addDynamic(score, s, track, "fz");
+                                                break;
+                                          case '|':
+                                                addDynamic(score, s, track, "fp");
+                                                break;
+                                          case 'f':
+                                                addDynamic(score, s, track, "f");
+                                                break;
+                                          case 'g':
+                                                addDynamic(score, s, track, "ff");
+                                                break;
+                                          case 'h':
+                                                addDynamic(score, s, track, "fff");
+                                                break;
+                                          case 'i':
+                                                addDynamic(score, s, track, "mp");
+                                                break;
+                                          case 'j':
+                                                addDynamic(score, s, track, "mf");
+                                                break;
+                                          default:
+                                                printf("====unsupported capella code %x\n", code);
+                                                break;
+                                          }
+                                    break;
+                                    }
+                              }
                         Text* text = new Text(score);
                         text->setDefaultFont(st->font());
                         text->setText(st->text());
                         QPointF p(st->pos());
                         p = p / 32.0 * DPMM;
                         text->setUserOff(st->pos());
-                        printf("setText %f %f <%s>\n", st->pos().x(), st->pos().y(), qPrintable(st->text()));
+printf("setText %s %f %f <%s>\n",
+           qPrintable(st->font().family()),
+           st->pos().x(), st->pos().y(), qPrintable(st->text()));
                         text->setAlign(ALIGN_LEFT | ALIGN_BASELINE);
                         text->setTrack(track);
                         s->add(text);
@@ -1587,8 +1651,6 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                               note->setPitch(pitch);
                               note->setTpc(pitch2tpc(pitch, key));
 // TODO: compute tpc from pitch & line
-
-printf("pitch %d(=%d) (alter %d)\n", n.pitch, pitch, n.alteration);
                               // note->setTpc(tpc);
 
                               chord->add(note);
@@ -1787,8 +1849,15 @@ void Score::convertCapella(Capella* cap)
       style().set(ST_measureSpacing, 1.0);
       _spatium = cap->normalLineDist * DPMM;
       style().set(ST_smallStaffMag, cap->smallLineDist / cap->normalLineDist);
+      style().set(ST_systemDistance, Spatium(8));
 
-      int staves   = cap->systems[0]->staves.size();
+
+      int staves = 0;
+      foreach(CapSystem* csys, cap->systems) {
+            if (csys->staves.size() > staves)
+                  staves = csys->staves.size();
+            }
+
       CapStaff* cs = cap->systems[0]->staves[0];
       if (cs->log2Denom <= 7)
             sigmap()->add(0, Fraction(cs->numerator, 1 << cs->log2Denom));
@@ -1801,6 +1870,7 @@ void Score::convertCapella(Capella* cap)
             part->insertStaff(s);
             _staves.push_back(s);
             }
+
       foreach(CapBracket cb, cap->brackets) {
             Staff* staff = _staves.value(cb.from);
             if (staff == 0) {
@@ -1835,7 +1905,7 @@ void Score::convertCapella(Capella* cap)
 
       if (cap->topDist) {
             VBox* mb;
-            if (_measures.first()->type() == VBOX)
+            if (_measures.size() && _measures.first()->type() == VBOX)
                   mb = static_cast<VBox*>(_measures.first());
             else {
                   mb = new VBox(this);
@@ -1850,7 +1920,6 @@ void Score::convertCapella(Capella* cap)
             int mtick    = 0;
             int staffIdx = 0;
             if (csys->explLeftIndent > 0) {
-                  Measure* m = tick2measure(systemTick);
                   HBox* mb = new HBox(this);
                   mb->setTick(systemTick);
                   mb->setBoxWidth(Spatium(csys->explLeftIndent));

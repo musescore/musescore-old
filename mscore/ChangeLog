@@ -1,4 +1,8 @@
-10.oct (db)
+11.oct (ws)
+      - fix #7447: Lyrics deleted when changing note
+10.oct (ws)
+      - improved capella import
+      (db)
       - fix local handbook disabled when no file is open
       - fix #7425: Space bar for play/pause (and zero for rests)
       - correct stem lengths for multi-flag notes (see bug #7415)

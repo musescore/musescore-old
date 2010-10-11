@@ -299,9 +299,7 @@ void ScoreView::cmdAddPitch(int note, bool addFlag)
             is.setDrumNote(pitch);
             }
       else {
-            KeySigEvent key;
-            if (!preferences.alternateNoteEntryMethod)
-                  key = _score->staff(is.track() / VOICES)->keymap()->key(is.tick());
+            KeySigEvent key = _score->staff(is.track() / VOICES)->keymap()->key(is.tick());
             int octave = is.pitch / 12;
             pitch      = pitchKeyAdjust(note, key.accidentalType());
             int delta  = is.pitch - (octave*12 + pitch);
@@ -339,20 +337,27 @@ void ScoreView::cmdAddPitch1(int pitch, bool addFlag)
             return;
             }
       if (!noteEntryMode()) {
-            sm->postEvent(new CommandEvent("note-input"));
-            qApp->processEvents();
-            if(is.drumset())
-                  is.setDrumNote(pitch);
+            Element* e = _score->selection().element();
+            if (e == 0 || e->type() != NOTE) {
+                  _score->endCmd();
+                  return;
+                  }
+            Note* note = static_cast<Note*>(e);
+            Chord* chord = note->chord();
+            int key = _score->staff(chord->staffIdx())->key(chord->segment()->tick()).accidentalType();
+            int newTpc = pitch2tpc(pitch, key);
+            _score->undoChangePitch(note, pitch, newTpc, note->line(), note->fret(), note->string());
             }
-
-      _score->addPitch(pitch, addFlag);
-      moveCursor();
-      ChordRest* cr = _score->inputState().cr();
-      if (cr) {
-            Element* e = cr;
-            if (cr->type() == CHORD)
-                  e = static_cast<Chord*>(cr)->upNote();
-            adjustCanvasPosition(e, false);
+      else {
+            _score->addPitch(pitch, addFlag);
+            moveCursor();
+            ChordRest* cr = _score->inputState().cr();
+            if (cr) {
+                  Element* e = cr;
+                  if (cr->type() == CHORD)
+                        e = static_cast<Chord*>(cr)->upNote();
+                  adjustCanvasPosition(e, false);
+                  }
             }
       _score->endCmd();
       }
