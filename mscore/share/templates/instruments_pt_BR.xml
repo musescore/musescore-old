@@ -1992,7 +1992,7 @@
         <aPitchRange>40-67</aPitchRange>
         <pPitchRange>40-70</pPitchRange>
         <channel>
-           <program>60</program>
+           <program>58</program>
            </channel>
         </instrument>
      <instrument>
@@ -2055,7 +2055,7 @@
         <aPitchRange>40-75</aPitchRange>
         <pPitchRange>40-79</pPitchRange>
         <channel>
-           <program>60</program>
+           <program>58</program>
            </channel>
         <extended>1</extended>
 		</instrument>
