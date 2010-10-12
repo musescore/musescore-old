@@ -97,7 +97,7 @@ bool converterMode = false;
 bool externalIcons = false;
 static bool pluginMode = false;
 static bool startWithNewScore = false;
-double converterDpi = 300;
+double converterDpi = 0;
 
 static QString outFileName;
 static QString pluginName;
@@ -1961,6 +1961,9 @@ int main(int argc, char* av[])
       else {
             preferences.soundFont = mscoreGlobalShare + "/sound/TimGM6mb.sf2";
             }
+      if (converterDpi == 0) {
+            converterDpi = preferences.pngResolution;
+            }
 
       QSplashScreen* sc = 0;
       if (!converterMode && !pluginMode && preferences.showSplashScreen) {
@@ -2050,9 +2053,8 @@ int main(int argc, char* av[])
       genIcons();
       initStaffTypes();
 
-      if (!converterMode) {
+      if (!converterMode)
             qApp->setWindowIcon(*icons[window_ICON]);
-            }
       initDrumset();
       gscore = new Score(*defaultStyle);
       mscore = new MuseScore();

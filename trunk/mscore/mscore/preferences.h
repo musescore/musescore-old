@@ -106,7 +106,7 @@ struct Preferences {
       int proximity;          // proximity for selecting elements on canvas
       bool autoSave;
       int autoSaveTime;
-      bool pngResolution;
+      double pngResolution;
       bool pngTransparent;
       QString language;
       bool replaceFractions;
