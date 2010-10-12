@@ -911,10 +911,8 @@ void Score::undoAddCR(ChordRest* cr, Measure* measure, int tick)
                               break;
                               }
                         }
-                  if (nt) {
+                  if (nt)
                         newcr->setTuplet(nt);
-//                        nt->add(newcr);
-                        }
                   else
                         printf("Tuplet not found\n");
                   }

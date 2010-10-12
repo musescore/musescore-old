@@ -291,6 +291,27 @@ Chord::Chord(const Chord& c)
       }
 
 //---------------------------------------------------------
+//   setScore
+//---------------------------------------------------------
+
+void Chord::setScore(Score* s)
+      {
+      Element::setScore(s);
+      foreach(Note* n, notes())
+            n->setScore(s);
+      if (_stem)
+           _stem->setScore(s);
+      if (_hook)
+            _hook->setScore(s);
+      if (_glissando)
+            _glissando->setScore(s);
+      if (_arpeggio)
+            _arpeggio->setScore(s);
+      if (_stemSlash)
+            _stemSlash->setScore(s);
+      }
+
+//---------------------------------------------------------
 //   ~Chord
 //---------------------------------------------------------
 

@@ -157,6 +157,7 @@ class Chord : public ChordRest {
       Chord &operator=(const Chord&);
 
       virtual Chord* clone() const     { return new Chord(*this); }
+      virtual void setScore(Score* s);
       virtual ElementType type() const { return CHORD; }
 
       void write(Xml& xml, int start, int end) const;

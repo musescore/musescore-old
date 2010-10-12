@@ -641,10 +641,7 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, Fraction sd,
                   undoAddCR(ncr, measure, tick);
                   if (ncr->type() == CHORD) {
                         mscore->play(ncr);
-//                        if (note)
-//                              note->setTpcFromPitch();      // chord->tick() must be known
                         }
-                  // undoAddElement(ncr);
                   seg = ncr->segment();
                   tick += ncr->ticks();
                   }

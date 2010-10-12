@@ -1,5 +1,8 @@
+12.oct (ws)
+      - fix #7468: Note change in part not updated in full score if in note
+        entry mode
 11.oct (ws)
-      - fix -7461: appstyle-dark.css makes no distinction between active
+      - fix #7461: appstyle-dark.css makes no distinction between active
         and disabled buttons
       - fix #7447: Lyrics deleted when changing note
 10.oct (ws)
