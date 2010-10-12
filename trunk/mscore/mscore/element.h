@@ -179,7 +179,7 @@ class Element {
       virtual Element* clone() const = 0;
 
       Score* score() const                    { return _score;      }
-      void setScore(Score* s)                 { _score = s;         }
+      virtual void setScore(Score* s)         { _score = s;         }
       Element* parent() const                 { return _parent;     }
       void setParent(Element* e)              { _parent = e;        }
 
