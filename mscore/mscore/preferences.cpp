@@ -167,7 +167,7 @@ void Preferences::init()
       proximity                = 6;
       autoSave                 = true;
       autoSaveTime             = 2;       // minutes
-      pngResolution            = 300;
+      pngResolution            = 300.0;
       pngTransparent           = true;
       language                 = "system";
       style                    = "";
@@ -396,7 +396,7 @@ void Preferences::read()
       proximity                = s.value("proximity", 6).toInt();
       autoSave                 = s.value("autoSave", true).toBool();
       autoSaveTime             = s.value("autoSaveTime", 2).toInt();
-      pngResolution            = s.value("pngResolution", 300).toInt();
+      pngResolution            = s.value("pngResolution", 300.0).toDouble();
       pngTransparent           = s.value("pngTransparent", true).toBool();
       language                 = s.value("language", "system").toString();
       style                    = s.value("style", "").toString();
@@ -1175,6 +1175,7 @@ void PreferenceDialog::apply()
       preferences.autoSaveTime       = autoSaveTime->value();
       preferences.pngResolution      = pngResolution->value();
       preferences.pngTransparent     = pngTransparent->isChecked();
+      converterDpi                   = preferences.pngResolution;
 
       if (shortcutsChanged) {
             shortcutsChanged = false;

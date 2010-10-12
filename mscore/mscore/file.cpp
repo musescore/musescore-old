@@ -1749,8 +1749,6 @@ bool Score::saveSvg(const QString& saveName)
       p.scale(mag, mag);
 
       QList<Element*> eel;
-//      foreach (Element* element, _gel)
-//            element->scanElements(&eel, collectElements);
       foreach (Beam* b, _beams)
             b->scanElements(&eel, collectElements);
       for (MeasureBase* m = _measures.first(); m; m = m->next()) {
@@ -1823,8 +1821,6 @@ bool Score::savePng(const QString& name, bool screenshot, bool transparent, doub
       int pages = pl.size();
 
       QList<Element*> eel;
-//      foreach (Element* element, _gel)
-//            element->scanElements(&eel, collectElements);
       foreach (Beam* b, _beams)
             b->scanElements(&eel, collectElements);
       for (MeasureBase* m = _measures.first(); m; m = m->next()) {

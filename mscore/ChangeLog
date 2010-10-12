@@ -1,4 +1,6 @@
 12.oct (ws)
+      - fix #7479: png resolution preference ignored; command line option
+        now overrides preference setting
       - fix #7468: Note change in part not updated in full score if in note
         entry mode
 11.oct (ws)
