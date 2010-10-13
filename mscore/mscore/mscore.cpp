@@ -168,7 +168,7 @@ static QString getSharePath()
 static void printVersion(const char* prog)
       {
 #ifdef MSCORE_UNSTABLE
-      printf("%s: Music Score Editor\nUnstable Nightly Build for Version %s; Build %s\n",
+      printf("%s: Music Score Editor\nUnstable Prerelease for Version %s; Build %s\n",
          prog, VERSION, qPrintable(revision));
 #else
      printf("%s: Music Score Editor; Version %s; Build %s\n", prog, VERSION, qPrintable(revision));
@@ -319,7 +319,7 @@ MuseScore::MuseScore()
    : QMainWindow()
       {
       _sstate = STATE_INIT;
-      setWindowTitle(QString("R.3579  Nightly Build of MuseScore"));
+      setWindowTitle(QString("MuseScore"));
 
       ucheck                = new UpdateChecker();
 
@@ -906,7 +906,7 @@ void MuseScore::helpBrowser()
             if(!mscoreHelp.isReadable()){
                 mscoreHelp.setFile(mscoreGlobalShare + QString("man/MuseScore-en.pdf"));
                 if (!mscoreHelp.isReadable()) {
-                      QString info(tr("Local handbook not included with nightly build (to reduce download size: \n"));
+                      QString info(tr("MuseScore handbook not found at: \n"));
                       info += mscoreHelp.filePath();
                       info += tr("\n\nFrom the \"Help\" menu try choosing \"Online Handbook\" instead.");
                       QMessageBox::critical(this, tr("MuseScore: Open Help"), info);
@@ -1216,7 +1216,7 @@ void MuseScore::setCurrentScoreView(ScoreView* view)
       else
             mag->setMagIdx(view->magIdx());
 
-      setWindowTitle("R.3579  Nightly Build of MuseScore: " + cs->name());
+      setWindowTitle("MuseScore: " + cs->name());
 
       QAction* a = getAction("concert-pitch");
       a->setChecked(cs->styleB(ST_concertPitch));
@@ -1969,7 +1969,7 @@ int main(int argc, char* av[])
       if (!converterMode && !pluginMode && preferences.showSplashScreen) {
             QPixmap pm(":/data/splash.jpg");
             sc = new QSplashScreen(pm);
-            sc->setWindowTitle(QString("Nightly Build of MuseScore Startup"));
+            sc->setWindowTitle(QString("MuseScore Startup"));
             sc->setWindowFlags(Qt::FramelessWindowHint);
             sc->show();
             qApp->processEvents();
@@ -2241,7 +2241,8 @@ void MuseScore::cmd(QAction* a)
             lastCmd = a;
       if (cmd == "instruments") {
             editInstrList();
-            iledit->updateAll(cs); }
+            iledit->updateAll(cs);
+            }
       else if (cmd == "clefs")
             clefMenu();
       else if (cmd == "keys")
@@ -2679,7 +2680,7 @@ AboutBoxDialog::AboutBoxDialog()
       {
       setupUi(this);
 #ifdef MSCORE_UNSTABLE
-      versionLabel->setText(tr("Unstable Nightly Build for Version: ") + VERSION);
+      versionLabel->setText(tr("Unstable Prerelease for Version: ") + VERSION);
 #else
       versionLabel->setText(tr("Version: ") + VERSION);
 #endif
