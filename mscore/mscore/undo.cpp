@@ -1005,12 +1005,21 @@ void InsertMeasure::redo()
 SortStaves::SortStaves(Score* s, QList<int> l)
       {
       score = s;
+      
+      for(int i=0 ; i < l.size(); i++) {
+            rlist.append(l.indexOf(i));
+            }
       list  = l;
       }
 
-void SortStaves::flip()
+void SortStaves::redo()
       {
       score->sortStaves(list);
+      }
+      
+void SortStaves::undo()
+      {
+      score->sortStaves(rlist);
       }
 
 //---------------------------------------------------------
