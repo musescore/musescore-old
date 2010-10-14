@@ -331,13 +331,12 @@ class RemoveStaves : public UndoCommand {
 class SortStaves : public UndoCommand {
       Score* score;
       QList<int> list;
-
-      void flip();
+      QList<int> rlist;
 
    public:
       SortStaves(Score*, QList<int>);
-      virtual void undo() { flip(); }
-      virtual void redo() { flip(); }
+      virtual void undo();
+      virtual void redo();
       UNDO_NAME("SortStaves");
       };
 

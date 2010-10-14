@@ -2239,7 +2239,8 @@ void MuseScore::cmd(QAction* a)
             lastCmd = a;
       if (cmd == "instruments") {
             editInstrList();
-            iledit->updateAll(cs);
+            if (iledit)
+                  iledit->updateAll(cs);
             }
       else if (cmd == "clefs")
             clefMenu();
