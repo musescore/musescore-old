@@ -719,7 +719,7 @@ void MuseScore::newFile()
                         if (pickupMeasure)
 	                        d.setVal(ticks);
                         Clef* clef = new Clef(score);
-                        clef->setSubtype(staff->clef(0));
+                        clef->setClefType(staff->clef(0));
                         clef->setTrack(staffIdx * VOICES);
                         Segment* segment = measure->getSegment(SegClef, 0);
                         segment->add(clef);
@@ -1451,14 +1451,14 @@ bool Score::read(QDomElement dScore)
                   ClefList* cl = s->clefList();
                   for (ciClefEvent i = cl->begin(); i != cl->end(); ++i) {
                         int tick = i->first;
-                        int clefId = i->second;
+                        ClefType clefId = i->second;
                         Measure* m = tick2measure(tick);
                         Segment* seg = m->getSegment(SegClef, tick);
                         if (seg->element(track))
                               static_cast<Clef*>(seg->element(track))->setGenerated(false);
                         else {
                               Clef* clef = new Clef(this);
-                              clef->setSubtype(clefId);
+                              clef->setClefType(clefId);
                               clef->setTrack(track);
                               clef->setParent(seg);
                               clef->setGenerated(false);

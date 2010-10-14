@@ -1329,8 +1329,9 @@ printf("unmapped drum note 0x%02x %d\n", mn.pitch(), mn.pitch());
       ClefList* cl = cstaff->clefList();
       for (ciClefEvent i = cl->begin(); i != cl->end(); ++i) {
             int tick = i->first;
-            int clefId  = i->second;
-            Clef* clef = new Clef(this, clefId);
+            ClefType clefId  = i->second;
+            Clef* clef = new Clef(this);
+            clef->setClefType(clefId);
             clef->setTrack(staffIdx * VOICES);
             clef->setGenerated(false);
             clef->setMag(cstaff->mag());

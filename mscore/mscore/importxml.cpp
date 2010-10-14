@@ -3257,7 +3257,7 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
 
 void MusicXml::xmlClef(QDomElement e, int staffIdx, Measure* measure)
       {
-      int clef   = 0;
+      ClefType clef   = CLEF_G;
       int clefno = e.attribute(QString("number"), "1").toInt() - 1;
       QString c;
       int i = 0;
@@ -3320,7 +3320,8 @@ void MusicXml::xmlClef(QDomElement e, int staffIdx, Measure* measure)
       (*ct)[tick] = clef;
       if (tick) {
             // dont generate symbol for tick 0
-            Clef* clefs = new Clef(score, clef);
+            Clef* clefs = new Clef(score);
+            clefs->setClefType(clef);
             clefs->setTrack((staffIdx + clefno) * VOICES);
             Segment* s = measure->getSegment(clefs, tick);
             s->add(clefs);

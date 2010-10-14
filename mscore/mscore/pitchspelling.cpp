@@ -65,6 +65,7 @@ int tpc2step(int tpc)
       {
       // 14 - C
       // 15 % 7 = 1
+      //                            f  c  g  d  a  e  b
       static const int steps[7] = { 3, 0, 4, 1, 5, 2, 6 };
       return steps[(tpc+1) % 7];
       }

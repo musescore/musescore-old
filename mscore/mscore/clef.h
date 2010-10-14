@@ -37,11 +37,8 @@ static const int NO_CLEF = -1000;
 
 //---------------------------------------------------------
 //   Clef
+///   Graphic representation of a clef.
 //---------------------------------------------------------
-
-/**
- Graphic representation of a clef.
-*/
 
 class Clef : public Element {
       QList<Element*> elements;
@@ -51,9 +48,9 @@ class Clef : public Element {
    public:
       Clef(Score*);
       Clef(const Clef&);
-      Clef(Score*, int i);
       virtual Clef* clone() const      { return new Clef(*this); }
       virtual ElementType type() const { return CLEF; }
+
       virtual QPointF canvasPos() const;      ///< position in canvas coordinates
       Segment* segment() const         { return (Segment*)parent(); }
       Measure* measure() const         { return (Measure*)parent()->parent(); }
@@ -74,15 +71,18 @@ class Clef : public Element {
       void setShowCourtesyClef(bool v)    { _showCourtesyClef = v;    };
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(ScoreView*, const QString&);
+
+      virtual const QString subtypeName() const;
+      virtual void setSubtype(const QString& s);
+      void setClefType(ClefType i)     { Element::setSubtype(int(i)); }
+      ClefType clefType() const        { return ClefType(subtype());  }
+      static ClefType clefType(const QString& s);
       };
 
 //---------------------------------------------------------
 //   ClefInfo
+///   Info about a clef.
 //---------------------------------------------------------
-
-/**
- Info about a clef.
-*/
 
 struct ClefInfo {
       const char* tag;        ///< comprehensive name for instruments.xml
@@ -102,8 +102,8 @@ extern const ClefInfo clefTable[];
 //   ClefList
 //---------------------------------------------------------
 
-typedef std::map<const int, int>::iterator iClefEvent;
-typedef std::map<const int, int>::const_iterator ciClefEvent;
+typedef std::map<const int, ClefType>::iterator iClefEvent;
+typedef std::map<const int, ClefType>::const_iterator ciClefEvent;
 
 /**
  List of Clefs during time.
@@ -112,13 +112,13 @@ typedef std::map<const int, int>::const_iterator ciClefEvent;
  to keep track of clef changes.
 */
 
-class ClefList : public std::map<const int, int> {
+class ClefList : public std::map<const int, ClefType> {
    public:
       ClefList() {}
-      int clef(int tick) const;
-      void setClef(int tick, int idx);
+      ClefType clef(int tick) const;
+      void setClef(int tick, ClefType idx);
       void read(QDomElement, Score*);
-      void write(Xml&, const char* name) const;
+//      void write(Xml&, const char* name) const;
       void removeTime(int, int);
       void insertTime(int, int);
       };

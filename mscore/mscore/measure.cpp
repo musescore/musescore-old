@@ -1639,7 +1639,7 @@ printf("drop staffList\n");
                       }
                   else
                         delete ks;
-                  staff->changeKeySig(tick(), k);
+                  score()->undoChangeKeySig(staff, tick(), k);
                   break;
                   }
 

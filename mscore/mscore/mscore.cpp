@@ -357,8 +357,6 @@ MuseScore::MuseScore()
       _midiinEnabled        = true;
       _speakerEnabled       = true;
       newWizard             = 0;
-//      drumPalette           = 0;
-//      drumset               = 0;
       lastOpenPath          = preferences.workingDirectory;
       _textTools            = 0;
       _drumTools            = 0;

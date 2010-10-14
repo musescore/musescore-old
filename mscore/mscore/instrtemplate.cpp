@@ -210,7 +210,7 @@ void InstrumentTemplate::read(QDomElement e)
       bool customDrumset = false;
       staves = 1;
       for (int i = 0; i < MAX_STAVES; ++i) {
-            clefIdx[i]    = -1;
+            clefIdx[i]    = CLEF_INVALID;
             staffLines[i] = -1;
             smallStaff[i] = false;
             }
@@ -245,15 +245,11 @@ void InstrumentTemplate::read(QDomElement e)
                   bool ok;
                   int i = val.toInt(&ok);
                   if (!ok) {
-                        i = 0;
-                        for (int k = 0; k < CLEF_MAX; ++k) {
-                              if (clefTable[i].tag == val) {
-                                    i = k;
-                                    break;
-                                    }
-                              }
+                        ClefType ct = Clef::clefType(val);
+                        clefIdx[idx] = ct;
                         }
-                  clefIdx[idx] = i;
+                  else
+                        clefIdx[idx] = ClefType(i);
                   }
             else if (tag == "stafflines") {
                   int idx = e.attribute("staff", "1").toInt() - 1;
@@ -332,14 +328,14 @@ void InstrumentTemplate::read(QDomElement e)
             }
       for (int i = 0; i < MAX_STAVES; ++i) {
             if (tablature) {
-                  if (clefIdx[i] == -1)
-                        clefIdx[i] = 13;
+                  if (clefIdx[i] == CLEF_INVALID)
+                        clefIdx[i] = CLEF_TAB;
                   if (staffLines[i] == -1)
                         staffLines[i] = tablature->strings();
                   }
             else {
-                  if (clefIdx[i] == -1)
-                        clefIdx[i] = 0;
+                  if (clefIdx[i] == CLEF_INVALID)
+                        clefIdx[i] = CLEF_G;
                   if (staffLines[i] == -1)
                         staffLines[i] = 5;
                   }

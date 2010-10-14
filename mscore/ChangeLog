@@ -1,3 +1,8 @@
+14.oct (ws)
+      - synchronise key signature changes with parts
+13.oct (ws)
+      - replace clef number with clef name in msc[xz] files
+      - stronger typing with ClefType
 12.oct (ws)
       - fix #7479: png resolution preference ignored; command line option
         now overrides preference setting

@@ -469,6 +469,7 @@ class Score : public QObject {
       void undoChangeTuning(Note*, double);
       void undoChangePageFormat(PageFormat*, double spatium);
       void undoChangeUserMirror(Note*, DirectionH);
+      void undoChangeKeySig(Staff* ostaff, int tick, KeySigEvent st);
 
       void setGraceNote(Chord*,  int pitch, NoteType type, int len);
       int clefOffset(int tick, Staff*) const;

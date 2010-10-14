@@ -60,14 +60,14 @@ struct PeriodItem {
        };
 
 static PeriodItem updatePeriods[] = {
-  PeriodItem(24,      QT_TRANSLATE_NOOP("preferences","Every day")),
-  PeriodItem(72,      QT_TRANSLATE_NOOP("preferences","Every 3 days")),
-  PeriodItem(7*24,    QT_TRANSLATE_NOOP("preferences","Every week")),
-  PeriodItem(2*7*24,  QT_TRANSLATE_NOOP("preferences","Every 2 weeks")),
-  PeriodItem(30*24,   QT_TRANSLATE_NOOP("preferences","Every month")),
-  PeriodItem(2*30*24, QT_TRANSLATE_NOOP("preferences","Every 2 months")),
-  PeriodItem(-1,      QT_TRANSLATE_NOOP("preferences","Never")),
-};
+      PeriodItem(24,      QT_TRANSLATE_NOOP("preferences","Every day")),
+      PeriodItem(72,      QT_TRANSLATE_NOOP("preferences","Every 3 days")),
+      PeriodItem(7*24,    QT_TRANSLATE_NOOP("preferences","Every week")),
+      PeriodItem(2*7*24,  QT_TRANSLATE_NOOP("preferences","Every 2 weeks")),
+      PeriodItem(30*24,   QT_TRANSLATE_NOOP("preferences","Every month")),
+      PeriodItem(2*30*24, QT_TRANSLATE_NOOP("preferences","Every 2 months")),
+      PeriodItem(-1,      QT_TRANSLATE_NOOP("preferences","Never")),
+      };
 
 //---------------------------------------------------------
 //   appStyleSheet

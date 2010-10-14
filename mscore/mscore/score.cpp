@@ -588,7 +588,7 @@ bool Score::read(QString name)
                               continue;
                         if ((s->subtype() == SegClef) && st->updateClefList()) {
                               Clef* clef = static_cast<Clef*>(e);
-                              st->setClef(s->tick(), clef->subtype());
+                              st->setClef(s->tick(), clef->clefType());
                               }
                         else if ((s->subtype() == SegKeySig) && st->updateKeymap()) {
                               KeySig* ks = static_cast<KeySig*>(e);
@@ -1894,7 +1894,7 @@ void Score::addElement(Element* element)
             Clef* clef       = static_cast<Clef*>(element);
             Segment* segment = clef->segment();
             Staff* staff     = clef->staff();
-            staff->setClef(segment->tick(), clef->subtype());
+            staff->setClef(segment->tick(), clef->clefType());
             updateNoteLines(segment, clef->track());
             }
       else if (element->type() == KEYSIG)
@@ -2387,7 +2387,7 @@ Score* Score::clone()
                               continue;
                         if ((s->subtype() == SegClef) && st->updateClefList()) {
                               Clef* clef = static_cast<Clef*>(e);
-                              st->setClef(s->tick(), clef->subtype());
+                              st->setClef(s->tick(), clef->clefType());
                               }
                         else if ((s->subtype() == SegKeySig) && st->updateKeymap()) {
                               KeySig* ks = static_cast<KeySig*>(e);

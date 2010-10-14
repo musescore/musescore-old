@@ -54,7 +54,7 @@ struct InstrumentTemplate {
       QList<Channel>          channel;
 
       int staves;             // 1 <= MAX_STAVES
-      int clefIdx[MAX_STAVES];
+      ClefType clefIdx[MAX_STAVES];
       int staffLines[MAX_STAVES];
       bool useTablature;
       Tablature* tablature;
@@ -123,7 +123,7 @@ class PartListItem : public QTreeWidgetItem {
 //---------------------------------------------------------
 
 class StaffListItem : public QTreeWidgetItem {
-      int _clef;
+      ClefType _clef;
       int _partIdx;
       bool _linked;
 
@@ -137,8 +137,8 @@ class StaffListItem : public QTreeWidgetItem {
       void setPartIdx(int val);
       int staffIdx;
 
-      void setClef(int val);
-      int clef() const         { return _clef;    }
+      void setClef(ClefType val);
+      ClefType clef() const    { return _clef;    }
       void setLinked(bool val);
       bool linked() const      { return _linked;  }
       bool visible() const;

@@ -399,8 +399,8 @@ void OveToMScore::convertGroups() {
 	}
 }
 
-int OveClefToClef(OVE::ClefType type){
-	int clef = CLEF_G;
+ClefType OveClefToClef(OVE::ClefType type){
+	ClefType clef = CLEF_G;
 	switch(type){
 	case OVE::Clef_Treble:{
 		clef = CLEF_G;
@@ -831,9 +831,10 @@ void OveToMScore::convertSignatures(){
 					if(measure != 0){
 						OVE::Clef* clefPtr = static_cast<OVE::Clef*>(clefs[l]);
 						int absTick = mtt_->getTick(k, clefPtr->getTick());
-						int clefIndex = OveClefToClef(clefPtr->getClefType());
+						ClefType clefIndex = OveClefToClef(clefPtr->getClefType());
 
-			            Clef* clef = new Clef(score_, clefIndex);
+			            Clef* clef = new Clef(score_);
+                              clef->setClefType(clefIndex);
 			            clef->setTrack((staffCount+j)*VOICES);
 
 			            Segment* s = measure->getSegment(clef, absTick);

@@ -85,7 +85,7 @@ void MuseData::musicalAttribute(QString s, Part* part)
                         }
                   staffIdx -= 1;
                   int clef = item.mid(col).toInt();
-                  int mscoreClef = CLEF_G;
+                  ClefType mscoreClef = CLEF_G;
                   switch(clef) {
                         case 4:  mscoreClef = CLEF_G; break;
                         case 22: mscoreClef = CLEF_F; break;

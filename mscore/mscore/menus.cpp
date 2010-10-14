@@ -196,13 +196,16 @@ void MuseScore::populatePalette()
       sp->setMag(0.8);
       sp->setGrid(33, 60);
       sp->setYOffset(1.0);
-      int clefs[20] = {
-            0, 1, 2, 3, 16, 9, 10, 11, 12, 15, 4, 17, 18, 5, 6, 7, 8, 14, 13, CLEF_PERC2
+      static const ClefType clefs[20] = {
+            CLEF_G, CLEF_G1, CLEF_G2, CLEF_G3, CLEF_G4,
+            CLEF_C1, CLEF_C2, CLEF_C3, CLEF_C4, CLEF_C5,
+            CLEF_F, CLEF_F_8VA, CLEF_F_15MA, CLEF_F8, CLEF_F15, CLEF_F_B, CLEF_F_C,
+            CLEF_PERC, CLEF_TAB, CLEF_PERC2
             };
-
       for (int i = 0; i < 20; ++i) {
-            int j = clefs[i];
-            Clef* k = new ::Clef(gscore, j);
+            ClefType j = clefs[i];
+            Clef* k = new ::Clef(gscore);
+            k->setClefType(j);
             sp->append(k, qApp->translate("clefTable", clefTable[j].name));
             }
       paletteBox->addPalette(sp);
@@ -861,7 +864,8 @@ void MuseScore::clefMenu()
             clefPalette->setRestrictHeight(false);
             clefPalette->setWindowTitle(tr("MuseScore: Clefs"));
             for (int i = 0; i < CLEF_MAX; ++i) {
-                  Clef* k = new ::Clef(gscore, i);
+                  Clef* k = new ::Clef(gscore);
+                  k->setClefType(ClefType(i));
                   sp->append(k, qApp->translate("clefTable", clefTable[i].name));
                   }
             }
@@ -900,7 +904,7 @@ void MuseScore::lineMenu()
             Slur* slur = new Slur(gscore);
             slur->setId(0);
             sp->append(slur, tr("Slur"));
-            
+
             Hairpin* gabel0 = new Hairpin(gscore);
             gabel0->setSubtype(0);
             gabel0->setLen(l);

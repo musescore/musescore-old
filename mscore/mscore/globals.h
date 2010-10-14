@@ -298,12 +298,26 @@ enum StaffGroup {
 //---------------------------------------------------------
 
 enum ClefType {
-      CLEF_G, CLEF_G1, CLEF_G2, CLEF_G3,
-      CLEF_F, CLEF_F8, CLEF_F15, CLEF_F_B, CLEF_F_C,
-      CLEF_C1, CLEF_C2, CLEF_C3, CLEF_C4,
-      CLEF_TAB, CLEF_PERC,
-      CLEF_C5, CLEF_G4,
-      CLEF_F_8VA, CLEF_F_15MA,
+      CLEF_INVALID = -1,
+      CLEF_G = 0,
+      CLEF_G1,
+      CLEF_G2,
+      CLEF_G3,
+      CLEF_F,
+      CLEF_F8,
+      CLEF_F15,
+      CLEF_F_B,
+      CLEF_F_C,
+      CLEF_C1,
+      CLEF_C2,
+      CLEF_C3,
+      CLEF_C4,
+      CLEF_TAB,
+      CLEF_PERC,
+      CLEF_C5,
+      CLEF_G4,
+      CLEF_F_8VA,
+      CLEF_F_15MA,
       CLEF_PERC2,
       CLEF_MAX
       };
@@ -333,8 +347,6 @@ enum TextStyleType {
       TEXT_STYLE_METRONOME,
       TEXT_STYLE_COPYRIGHT,
       TEXT_STYLE_MEASURE_NUMBER,
-//      TEXT_STYLE_PAGE_NUMBER_ODD,       // obsolete
-//      TEXT_STYLE_PAGE_NUMBER_EVEN,
       TEXT_STYLE_TRANSLATOR,
       TEXT_STYLE_TUPLET,
 

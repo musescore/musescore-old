@@ -199,7 +199,7 @@ Staff::~Staff()
 //   Staff::clef
 //---------------------------------------------------------
 
-int Staff::clef(int tick) const
+ClefType Staff::clef(int tick) const
       {
       return _clefList->clef(tick);
       }
@@ -295,7 +295,7 @@ void Staff::read(QDomElement e)
                   domError(e);
             }
       }
-
+#if 0
 //---------------------------------------------------------
 //   changeKeySig
 ///   Change key signature.
@@ -330,6 +330,7 @@ void Staff::changeKeySig(int tick, KeySigEvent st)
       else
             _score->undoAddElement(nks);
       }
+#endif
 
 //---------------------------------------------------------
 //   changeClef
@@ -373,7 +374,7 @@ void Staff::changeClef(int tick, ClefType st)
             else {
                   Clef* nclef = new Clef(score);
                   nclef->setTrack(track);
-                  nclef->setSubtype(st);
+                  nclef->setClefType(st);
                   nclef->setParent(segment);
                   score->undo()->push(new AddElement(nclef));
                   }
@@ -429,7 +430,7 @@ void Staff::setKey(int tick, const KeySigEvent& st)
 //   setClef
 //---------------------------------------------------------
 
-void Staff::setClef(int tick, int clef)
+void Staff::setClef(int tick, ClefType clef)
       {
       _clefList->setClef(tick, clef);
       }

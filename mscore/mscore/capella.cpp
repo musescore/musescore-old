@@ -978,7 +978,7 @@ void CapClef::read()
 //   clef
 //---------------------------------------------------------
 
-int CapClef::clef() const
+ClefType CapClef::clef() const
       {
       int idx = form + (line << 3) + (oct << 5);
       switch(idx) {
@@ -999,11 +999,11 @@ int CapClef::clef() const
 
             default:
                   if (form == FORM_NULL)
-                        return -1;
+                        return CLEF_INVALID;
                   printf("unknown clef %d %d %d\n", form, line, oct);
                   break;
             }
-      return -1;
+      return CLEF_INVALID;
       }
 
 //---------------------------------------------------------
@@ -1690,11 +1690,12 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                         {
                         CapClef* o = static_cast<CapClef*>(no);
 // printf("%d:%d <Clef> %s line %d oct %d\n", tick, staffIdx, o->name(), o->line, o->oct);
-                        int nclef = o->clef();
-                        if (nclef == -1)
+                        ClefType nclef = o->clef();
+                        if (nclef == CLEF_INVALID)
                               break;
-                        staff(staffIdx)->setClef(tick, ClefType(nclef));
-                        Clef* clef = new Clef(this, ClefType(nclef));
+                        staff(staffIdx)->setClef(tick, nclef);
+                        Clef* clef = new Clef(this);
+                        clef->setClefType(nclef);
                         clef->setTrack(staffIdx * VOICES);
                         Measure* m = getCreateMeasure(tick);
                         Segment* s = m->getSegment(SegClef, tick);

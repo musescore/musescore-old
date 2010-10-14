@@ -636,7 +636,7 @@ void Score::doLayout()
                                     continue;
                               if ((s->subtype() == SegClef) && st->updateClefList()) {
                                     Clef* clef = static_cast<Clef*>(e);
-                                    st->setClef(s->tick(), clef->subtype());
+                                    st->setClef(s->tick(), clef->clefType());
                                     }
                               else if ((s->subtype() == SegKeySig) && st->updateKeymap()) {
                                     KeySig* ks = static_cast<KeySig*>(e);
@@ -837,7 +837,7 @@ void Score::processSystemHeader(Measure* m, bool isFirstSystem)
                   }
             bool needClef = isFirstSystem || styleB(ST_genClef);
             if (needClef) {
-                  int idx = staff->clefList()->clef(tick);
+                  ClefType idx = staff->clefList()->clef(tick);
                   if (!hasClef) {
                         //
                         // create missing clef
@@ -851,7 +851,7 @@ void Score::processSystemHeader(Measure* m, bool isFirstSystem)
                         s->add(hasClef);
                         m->setDirty();
                         }
-                  hasClef->setSubtype(idx);
+                  hasClef->setClefType(idx);
                   }
             else {
                   if (hasClef) {
@@ -1376,8 +1376,8 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                         int n = _staves.size();
                         for (int staffIdx = 0; staffIdx < n; ++staffIdx) {
                               Staff* staff = _staves[staffIdx];
-                              int c1 = staff->clef(tick - 1);
-                              int c2 = staff->clef(tick);
+                              ClefType c1 = staff->clef(tick - 1);
+                              ClefType c2 = staff->clef(tick);
                               if (c1 != c2) {
                                     // locate a clef in next measure and, if found,
                                     // check if it has court. sig turned off
@@ -1393,7 +1393,7 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                                     int track = staffIdx * VOICES;
                                     if (!s->element(track)) {
                                           c = new Clef(this);
-                                          c->setSubtype(c2);
+                                          c->setClefType(c2);
                                           c->setTrack(track);
                                           c->setGenerated(true);
                                           c->setSmall(true);

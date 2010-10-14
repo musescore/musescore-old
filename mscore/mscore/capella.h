@@ -21,6 +21,8 @@
 #ifndef __CAPELLA_H__
 #define __CAPELLA_H__
 
+#include "globals.h"
+
 enum TIMESTEP { D1, D2, D4, D8, D16, D32, D64, D128, D256, D_BREVE };
 
 #if 0
@@ -82,7 +84,7 @@ class CapClef : public NoteObj, public CapellaObj {
             static const char* formName[] = { "G", "C", "F", "=", " ", "*" };
             return formName[form];
             }
-      int clef() const;
+      ClefType clef() const;
 
       LINE line;
       OCT  oct;
