@@ -2699,6 +2699,12 @@ void Measure::sortStaves(QList<int>& dst)
             int idx = dst.indexOf(staffIdx);
             e->setTrack(idx * VOICES + voice);
             }
+      foreach(Tuplet* tuplet, _tuplets) {
+            int voice    = tuplet->voice();
+            int staffIdx = tuplet->staffIdx();
+            int idx = dst.indexOf(staffIdx);
+            tuplet->setTrack(idx * VOICES + voice);
+            }
       }
 
 //---------------------------------------------------------
