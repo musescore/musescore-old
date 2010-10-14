@@ -498,6 +498,47 @@ void Score::undoChangePitch(Note* note, int pitch, int tpc, int line, int fret, 
       }
 
 //---------------------------------------------------------
+//   undoChangeKeySig
+//---------------------------------------------------------
+
+void Score::undoChangeKeySig(Staff* ostaff, int tick, KeySigEvent st)
+      {
+      QList<Staff*> staffList;
+      LinkedStaves* linkedStaves = ostaff->linkedStaves();
+      if (linkedStaves)
+            staffList = linkedStaves->staves();
+      else
+            staffList.append(ostaff);
+
+      foreach(Staff* staff, staffList) {
+            Score* score = staff->score();
+
+            Measure* measure = score->tick2measure(tick);
+            if (!measure) {
+                  printf("measure for tick %d not found!\n", tick);
+                  continue;
+                  }
+            Segment* s = measure->findSegment(SegKeySig, tick);
+            if (!s) {
+                  s = new Segment(measure, SegKeySig, tick);
+                  score->undoAddElement(s);
+                  }
+            int track  = score->staffIdx(staff) * VOICES;
+            KeySig* ks = static_cast<KeySig*>(s->element(track));
+
+            KeySig* nks = new KeySig(score);
+            nks->setTrack(track);
+            nks->changeKeySigEvent(st);
+            nks->setParent(s);
+
+            if (ks)
+                  undo()->push(new ChangeElement(ks, nks));
+            else
+                  undo()->push(new AddElement(nks));
+            }
+      }
+
+//---------------------------------------------------------
 //   undoChangeTpc
 //---------------------------------------------------------
 
@@ -516,18 +557,18 @@ void Score::undoChangeBeamMode(ChordRest* cr, BeamMode mode)
       }
 
 //---------------------------------------------------------
-//   findLinkedCr
+//   findLinkedVoiceElement
 //---------------------------------------------------------
 
-static ChordRest* findLinkedCr(ChordRest* ocr, Staff* nstaff)
+static Element* findLinkedVoiceElement(Element* e, Staff* nstaff)
       {
-      Score* score = nstaff->score();
-      Segment* segment = ocr->segment();
+      Score* score     = nstaff->score();
+      Segment* segment = static_cast<Segment*>(e->parent());
       Measure* measure = segment->measure();
-      Measure* m = score->tick2measure(measure->tick());
-      Segment* s = m->findSegment(segment->segmentType(), segment->tick());
-      int staffIdx = score->staffIdx(nstaff);
-      return static_cast<ChordRest*>(s->element(staffIdx * VOICES + ocr->voice()));
+      Measure* m       = score->tick2measure(measure->tick());
+      Segment* s       = m->findSegment(segment->segmentType(), segment->tick());
+      int staffIdx     = score->staffIdx(nstaff);
+      return s->element(staffIdx * VOICES + e->voice());
       }
 
 //---------------------------------------------------------
@@ -542,7 +583,7 @@ void Score::undoChangeChordRestLen(ChordRest* cr, const Duration& d)
             foreach(Staff* staff, linkedStaves->staves()) {
                   if (staff == cr->staff())
                         continue;
-                  ChordRest* ncr = findLinkedCr(cr, staff);
+                  ChordRest* ncr = static_cast<ChordRest*>(findLinkedVoiceElement(cr, staff));
                   undo()->push(new ChangeChordRestLen(ncr, d));
                   }
             }
@@ -927,31 +968,36 @@ void Score::undoAddCR(ChordRest* cr, Measure* measure, int tick)
 
 void Score::undoRemoveElement(Element* element)
       {
+      int t = element->type();
+      if (!element->isChordRest() && t != ARTICULATION && t != KEYSIG) {
+            undo()->push(new RemoveElement(element));
+            return;
+            }
+      QList<Staff*> staffList;
       Staff* ostaff = element->staff();
-      if (ostaff && ostaff->linkedStaves()) {
-            LinkedStaves* linkedStaves = ostaff->linkedStaves();
-            foreach(Staff* staff, linkedStaves->staves()) {
-                  if (staff == ostaff)
-                        continue;
-                  if (element->isChordRest()) {
-                        ChordRest* cr = static_cast<ChordRest*>(element);
-                        ChordRest* ncr = findLinkedCr(cr, staff);
-                        undo()->push(new RemoveElement(ncr));
-                        }
-                  else if (element->type() == ARTICULATION) {
-                        Articulation* a  = static_cast<Articulation*>(element);
-                        ChordRest* ncr   = findLinkedCr(a->chordRest(), staff);
-                        Articulation* aa;
-                        foreach(aa, *ncr->getArticulations()) {
-                              if (aa->subtype() == a->subtype()) {
-                                    undo()->push(new RemoveElement(aa));
-                                    break;
-                                    }
+      LinkedStaves* linkedStaves = ostaff->linkedStaves();
+      if (linkedStaves)
+            staffList = linkedStaves->staves();
+      else
+            staffList.append(ostaff);
+
+      foreach(Staff* staff, staffList) {
+            if (element->isChordRest() || t == KEYSIG) {
+                  Element* e = findLinkedVoiceElement(element, staff);
+                  undo()->push(new RemoveElement(e));
+                  }
+            else if (t == ARTICULATION) {
+                  Articulation* a  = static_cast<Articulation*>(element);
+                  ChordRest* ncr   = static_cast<ChordRest*>(findLinkedVoiceElement(a->chordRest(), staff));
+                  Articulation* aa;
+                  foreach(aa, *ncr->getArticulations()) {
+                        if (aa->subtype() == a->subtype()) {
+                              undo()->push(new RemoveElement(aa));
+                              break;
                               }
                         }
                   }
             }
-      undo()->push(new RemoveElement(element));
       }
 
 //---------------------------------------------------------
@@ -1452,7 +1498,7 @@ void ChangeSubtype::flip()
             Clef* clef       = static_cast<Clef*>(element);
             Segment* segment = clef->segment();
             Staff* staff     = clef->staff();
-            staff->setClef(segment->tick(), subtype);
+            staff->setClef(segment->tick(), ClefType(subtype));
             updateNoteLines(segment, clef->track());
             clef->score()->setLayoutAll(true);
             }

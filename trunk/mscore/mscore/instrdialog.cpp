@@ -52,7 +52,7 @@ StaffListItem::StaffListItem(PartListItem* li)
       setPartIdx(0);
       staffIdx = 0;
       setLinked(false);
-      setClef(0);
+      setClef(CLEF_G);
       setFlags(flags() | Qt::ItemIsUserCheckable);
       }
 
@@ -63,7 +63,7 @@ StaffListItem::StaffListItem()
       staff    = 0;
       setPartIdx(0);
       staffIdx = 0;
-      setClef(0);
+      setClef(CLEF_G);
       setLinked(false);
       }
 
@@ -81,7 +81,7 @@ void StaffListItem::setPartIdx(int val)
 //   setClef
 //---------------------------------------------------------
 
-void StaffListItem::setClef(int val)
+void StaffListItem::setClef(ClefType val)
       {
       _clef = val;
       setText(2, qApp->translate("clefTable", clefTable[_clef].name));

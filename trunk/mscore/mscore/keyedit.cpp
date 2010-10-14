@@ -29,6 +29,7 @@
 
 extern bool useFactorySettings;
 extern Palette* newAccidentalsPalette();
+extern Palette* newKeySigPalette();
 
 //---------------------------------------------------------
 //   KeyCanvas
@@ -47,7 +48,8 @@ KeyCanvas::KeyCanvas(QWidget* parent)
       QAction* a = new QAction("delete", this);
       a->setShortcut(Qt::Key_Delete);
       addAction(a);
-      clef = new Clef(gscore, CLEF_G);
+      clef = new Clef(gscore);
+      clef->setClefType(CLEF_G);
       connect(a, SIGNAL(triggered()), SLOT(deleteElement()));
       }
 
@@ -278,7 +280,8 @@ KeyEditor::KeyEditor(QWidget* parent)
       QLayout* l = new QVBoxLayout();
       l->setContentsMargins(0, 0, 0, 0);
       frame->setLayout(l);
-      sp = new Palette();
+
+      sp = newKeySigPalette();
       sp->setReadOnly(false);
 
       PaletteScrollArea* keyPalette = new PaletteScrollArea(sp);
@@ -287,9 +290,6 @@ KeyEditor::KeyEditor(QWidget* parent)
       keyPalette->setRestrictHeight(false);
 
       l->addWidget(keyPalette);
-      sp->setMag(0.8);
-      sp->setGrid(56, 45);
-      sp->setYOffset(6.0);
 
       // create accidental palette
 
@@ -312,22 +312,6 @@ KeyEditor::KeyEditor(QWidget* parent)
             if (f.exists() && sp->read(&f))
                   return;
             }
-      //
-      // create default palette
-      //
-      for (int i = 0; i < 7; ++i) {
-            KeySig* k = new KeySig(gscore);
-            k->setSubtype(i+1);
-            sp->append(k, qApp->translate("MuseScore", keyNames[i*2]));
-            }
-      for (int i = -7; i < 0; ++i) {
-            KeySig* k = new KeySig(gscore);
-            k->setSubtype(i & 0xff);
-            sp->append(k, qApp->translate("MuseScore", keyNames[(7 + i) * 2 + 1]));
-            }
-      KeySig* k = new KeySig(gscore);
-      k->setSubtype(0);
-      sp->append(k, qApp->translate("MuseScore", keyNames[14]));
       }
 
 //---------------------------------------------------------

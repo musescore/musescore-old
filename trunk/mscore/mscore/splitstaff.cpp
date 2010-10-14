@@ -75,7 +75,7 @@ void Score::splitStaff(int staffIdx, int splitPoint)
 
 //      undoChangeBarLineSpan(s, p->nstaves());
       adjustBracketsIns(staffIdx+1, staffIdx+2);
-      ns->changeKeySig(0, s->key(0));
+      undoChangeKeySig(ns, 0, s->key(0));
 
 //      Bracket* b = new Bracket(this);
 //      b->setSubtype(BRACKET_AKKOLADE);

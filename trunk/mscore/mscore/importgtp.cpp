@@ -801,7 +801,7 @@ printf("BeginRepeat=============================================\n");
             //
             Staff* staff = score->staff(i);
             int patch = channelDefaults[midiChannel].patch;
-            int clefId = CLEF_G;
+            ClefType clefId = CLEF_G;
             if (c & 0x1) {
                   clefId = CLEF_PERC;
                   instr->setUseDrumset(true);
@@ -812,7 +812,8 @@ printf("BeginRepeat=============================================\n");
             else if (patch >= 32 && patch < 40)
                   clefId = CLEF_F8;
             Measure* measure = score->firstMeasure();
-            Clef* clef = new Clef(score, clefId);
+            Clef* clef = new Clef(score);
+            clef->setClefType(clefId);
             clef->setTrack(i * VOICES);
             Segment* segment = measure->getSegment(SegClef, 0);
             segment->add(clef);
@@ -1298,7 +1299,7 @@ printf("BeginRepeat=============================================\n");
             //
             Staff* staff = score->staff(i);
             int patch = channelDefaults[midiChannel].patch;
-            int clefId = CLEF_G;
+            ClefType clefId = CLEF_G;
             if (c & 0x1) {
                   clefId = CLEF_PERC;
                   instr->setUseDrumset(true);
@@ -1309,7 +1310,8 @@ printf("BeginRepeat=============================================\n");
             else if (patch >= 32 && patch < 40)
                   clefId = CLEF_F8;
             Measure* measure = score->firstMeasure();
-            Clef* clef = new Clef(score, clefId);
+            Clef* clef = new Clef(score);
+            clef->setClefType(clefId);
             clef->setTrack(i * VOICES);
             Segment* segment = measure->getSegment(SegClef, 0);
             segment->add(clef);
@@ -1836,7 +1838,7 @@ printf("bars %d tracks %d\n", measures, staves);
             //
             Staff* staff = score->staff(i);
             int patch = channelDefaults[midiChannel].patch;
-            int clefId = CLEF_G;
+            ClefType clefId = CLEF_G;
             if (c & 0x1) {
                   clefId = CLEF_PERC;
                   instr->setUseDrumset(true);
@@ -1847,7 +1849,8 @@ printf("bars %d tracks %d\n", measures, staves);
             else if (patch >= 32 && patch < 40)
                   clefId = CLEF_F8;
             Measure* measure = score->firstMeasure();
-            Clef* clef = new Clef(score, clefId);
+            Clef* clef = new Clef(score);
+            clef->setClefType(clefId);
             clef->setTrack(i * VOICES);
             Segment* segment = measure->getSegment(SegClef, 0);
             segment->add(clef);
@@ -2555,7 +2558,7 @@ printf("midi %d %d %d  frets %d capo %d color %d\n", midiPort, midiChannel,
             // determine clef
             //
             int patch = channelDefaults[midiChannel].patch;
-            int clefId = CLEF_G;
+            ClefType clefId = CLEF_G;
             if (c & 0x1) {
                   clefId = CLEF_PERC;
                   instr->setUseDrumset(true);
@@ -2566,7 +2569,8 @@ printf("midi %d %d %d  frets %d capo %d color %d\n", midiPort, midiChannel,
             else if (patch >= 32 && patch < 40)
                   clefId = CLEF_F8;
             Measure* measure = score->firstMeasure();
-            Clef* clef = new Clef(score, clefId);
+            Clef* clef = new Clef(score);
+            clef->setClefType(clefId);
             clef->setTrack(i * VOICES);
             Segment* segment = measure->getSegment(SegClef, 0);
             segment->add(clef);

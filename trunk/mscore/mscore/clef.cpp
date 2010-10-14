@@ -57,7 +57,6 @@ const ClefInfo clefTable[] = {
 { "F8vb", "F",         4, -1, -19, 26, { 2, 5, 1, 4, 7, 3, 6, 6, 3, 7, 4, 8, 5, 9 }, TR("Bass clef 8vb"),          PITCHED_STAFF },
 { "F15mb","F",         4, -2, -26, 19, { 2, 5, 1, 4, 7, 3, 6, 6, 3, 7, 4, 8, 5, 9 }, TR("Bass clef 15mb"),         PITCHED_STAFF },
 { "F3",   "F",         3,  0, -10, 35, { 4, 0, 3,-1, 2, 5, 1, 1, 5, 2, 6, 3, 7, 4 }, TR("Baritone clef (F clef)"), PITCHED_STAFF },
-//{ "F5", "F",         5,  0, -14, 31, { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }, TR("Subbass clef"),           PITCHED_STAFF },
 { "F5",   "F",         5,  0, -14, 31, { 0, 3,-1, 2, 5, 1, 4, 4, 1, 5, 2, 6, 3, 7 }, TR("Subbass clef"),           PITCHED_STAFF },
 { "C1",   "C",         1,  0,  -2, 43, { 5, 1, 4, 0, 3,-1, 2, 2,-1, 3, 0, 4, 1, 5 }, TR("Soprano clef"),           PITCHED_STAFF }, // CLEF_C1
 { "C2",   "C",         2,  0,  -4, 41, { 3, 6, 2, 5, 1, 4, 0, 0, 4, 1, 5, 2, 6, 3 }, TR("Mezzo-soprano clef"),     PITCHED_STAFF }, // CLEF_C2
@@ -66,7 +65,6 @@ const ClefInfo clefTable[] = {
 { "TAB",  "TAB",       5,  0,   0,  0, { 0, 3,-1, 2, 5, 1, 4, 4, 1, 5, 2, 6, 3, 7 }, TR("Tablature"),              TAB_STAFF     },
 { "PERC", "percussion",2,  0,   0, 45, { 0, 3,-1, 2, 5, 1, 4, 4, 1, 5, 2, 6, 3, 7 }, TR("Percussion"),             PERCUSSION_STAFF },
 { "C5",   "C",         5,  0, -10, 35, { 4, 0, 3,-1, 2, 5, 1, 1, 5, 2, 6, 3, 7, 4 }, TR("Baritone clef (C clef)"), PITCHED_STAFF }, // CLEF_C5
-//{ "G1", "G",         1,  0,   2, 47, { 2, 5, 1, 4, 0, 3,-1, 6, 3, 7, 4, 1, 5, 2 }, TR("French violin clef"),     PITCHED_STAFF }, // CLEF_G4
 { "G1",   "G",         1,  0,   2, 47, { 2, 5, 1, 4, 7, 3, 6, 6, 3, 7, 4, 8, 5, 9 }, TR("French violin clef"),     PITCHED_STAFF }, // CLEF_G4
 { "F8va", "F",         4,  1,  -5, 40, { 2, 5, 1, 4, 7, 3, 6, 6, 3, 7, 4, 8, 5, 9 }, TR("Bass clef 8va"),          PITCHED_STAFF }, // CLEF_F_8VA
 { "F15ma","F",         4,  2,   2, 47, { 2, 5, 1, 4, 7, 3, 6, 6, 3, 7, 4, 8, 5, 9 }, TR("Bass clef 15ma"),         PITCHED_STAFF }, // CLEF_F_15MA
@@ -90,14 +88,6 @@ Clef::Clef(const Clef& c)
       {
       _showCourtesyClef = c._showCourtesyClef;
       _small = c._small;
-      }
-
-Clef::Clef(Score* s, int i)
-  : Element(s)
-      {
-      _showCourtesyClef = true;
-      _small = false;
-      setSubtype(i);
       }
 
 //---------------------------------------------------------
@@ -368,13 +358,13 @@ void Clef::propertyAction(ScoreView* viewer, const QString& s)
 //   clef
 //---------------------------------------------------------
 
-int ClefList::clef(int tick) const
+ClefType ClefList::clef(int tick) const
       {
       if (empty())
-            return 0;
+            return CLEF_G;
       ciClefEvent i = upper_bound(tick);
       if (i == begin())
-            return 0;
+            return CLEF_G;
       --i;
       return i->second;
       }
@@ -383,9 +373,9 @@ int ClefList::clef(int tick) const
 //   setClef
 //---------------------------------------------------------
 
-void ClefList::setClef(int tick, int idx)
+void ClefList::setClef(int tick, ClefType idx)
       {
-      std::pair<int, int> clef(tick, idx);
+      std::pair<int, ClefType> clef(tick, idx);
       std::pair<iClefEvent,bool> p = insert(clef);
       if (!p.second)
             (*this)[tick] = idx;
@@ -400,6 +390,7 @@ void ClefList::setClef(int tick, int idx)
             }
       }
 
+#if 0
 //---------------------------------------------------------
 //   ClefList::write
 //---------------------------------------------------------
@@ -411,6 +402,7 @@ void ClefList::write(Xml& xml, const char* name) const
             xml.tagE("clef tick=\"%d\" idx=\"%d\"", i->first, i->second);
       xml.etag();
       }
+#endif
 
 //---------------------------------------------------------
 //   ClefList::read
@@ -420,10 +412,35 @@ void ClefList::read(QDomElement e, Score* cs)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
+            QString val(e.text());
             if (tag == "clef") {
                   int tick = e.attribute("tick", "0").toInt();
-                  int idx = e.attribute("idx", "0").toInt();
-                  (*this)[cs->fileDivision(tick)] = idx;
+                  int i = e.attribute("idx", "0").toInt();
+                  ClefType ct;
+                  switch (i) {
+                        default:
+                        case  0: ct = CLEF_G; break;
+                        case  1: ct = CLEF_G1; break;
+                        case  2: ct = CLEF_G2; break;
+                        case  3: ct = CLEF_G3; break;
+                        case  4: ct = CLEF_F; break;
+                        case  5: ct = CLEF_F8; break;
+                        case  6: ct = CLEF_F15; break;
+                        case  7: ct = CLEF_F_B; break;
+                        case  8: ct = CLEF_F_C; break;
+                        case  9: ct = CLEF_C1; break;
+                        case 10: ct = CLEF_C2; break;
+                        case 11: ct = CLEF_C3; break;
+                        case 12: ct = CLEF_C4; break;
+                        case 13: ct = CLEF_TAB; break;
+                        case 14: ct = CLEF_PERC; break;
+                        case 15: ct = CLEF_C5; break;
+                        case 16: ct = CLEF_G4; break;
+                        case 17: ct = CLEF_F_8VA; break;
+                        case 18: ct = CLEF_F_15MA; break;
+                        case 19: ct = CLEF_PERC2; break;
+                        }
+                  (*this)[cs->fileDivision(tick)] = ct;
                   }
             else
                   domError(e);
@@ -495,14 +512,44 @@ void Clef::setSmall(bool val)
 void Clef::read(QDomElement e)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-//          if (tag == "showCourtesyClef")
-//                _showCourtesyClef = e.text().toInt();
-//          else
-                  if (!Element::readProperties(e))
+            QString tag(e.tagName());
+            QString val(e.text());
+            if (tag == "subtype") {
+                  ClefType ct;
+                  bool ok;
+                  int i = val.toInt(&ok);
+                  if (!ok)
+                        ct = Clef::clefType(val);
+                  else {
+                        switch (i) {
+                              default:
+                              case  0: ct = CLEF_G; break;
+                              case  1: ct = CLEF_G1; break;
+                              case  2: ct = CLEF_G2; break;
+                              case  3: ct = CLEF_G3; break;
+                              case  4: ct = CLEF_F; break;
+                              case  5: ct = CLEF_F8; break;
+                              case  6: ct = CLEF_F15; break;
+                              case  7: ct = CLEF_F_B; break;
+                              case  8: ct = CLEF_F_C; break;
+                              case  9: ct = CLEF_C1; break;
+                              case 10: ct = CLEF_C2; break;
+                              case 11: ct = CLEF_C3; break;
+                              case 12: ct = CLEF_C4; break;
+                              case 13: ct = CLEF_TAB; break;
+                              case 14: ct = CLEF_PERC; break;
+                              case 15: ct = CLEF_C5; break;
+                              case 16: ct = CLEF_G4; break;
+                              case 17: ct = CLEF_F_8VA; break;
+                              case 18: ct = CLEF_F_15MA; break;
+                              case 19: ct = CLEF_PERC2; break;
+                              }
+                        }
+                  setClefType(ct);
+                  }
+            else if (!Element::readProperties(e))
                   domError(e);
             }
-      if (subtype() == 0)      // make sure setSubtype() is called at least once
-            setSubtype(0);
       if (score()->mscVersion() < 113)
             setUserOff(QPointF());
       }
@@ -514,5 +561,42 @@ void Clef::read(QDomElement e)
 int Clef::tick() const
       {
       return segment() ? segment()->tick() : 0;
+      }
+
+//---------------------------------------------------------
+//   subtypeName
+//---------------------------------------------------------
+
+const QString Clef::subtypeName() const
+      {
+      return QString(clefTable[subtype()].tag);
+
+      }
+
+//---------------------------------------------------------
+//   setSubtype
+//---------------------------------------------------------
+
+void Clef::setSubtype(const QString& s)
+      {
+      ClefType ct = clefType(s);
+      if (ct == CLEF_INVALID) {
+            printf("Clef::setSubtype: unknown: <%s>\n", qPrintable(s));
+            ct = CLEF_G;
+            }
+      setClefType(ct);
+      }
+
+//---------------------------------------------------------
+//   clefType
+//---------------------------------------------------------
+
+ClefType Clef::clefType(const QString& s)
+      {
+      for (unsigned i = 0; i < sizeof(clefTable)/sizeof(*clefTable); ++i) {
+            if (clefTable[i].tag == s)
+                  return ClefType(i);
+            }
+      return CLEF_INVALID;
       }
 
