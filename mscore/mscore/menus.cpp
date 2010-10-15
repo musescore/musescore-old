@@ -250,7 +250,7 @@ void MuseScore::populatePalette()
       sp->setGrid(42, 38);
 
       struct {
-            BarType type;
+            BarLineType type;
             const char* name;
             } t[] = {
             { NORMAL_BAR,       QT_TR_NOOP("Normal") },
@@ -263,7 +263,7 @@ void MuseScore::populatePalette()
             };
       for (unsigned i = 0; i < sizeof(t)/sizeof(*t); ++i) {
             BarLine* b  = new BarLine(gscore);
-            b->setSubtype(t[i].type);
+            b->setBarLineType(t[i].type);
             sp->append(b, tr(t[i].name));
             }
       paletteBox->addPalette(sp);
@@ -1142,7 +1142,7 @@ void MuseScore::barMenu()
             sp->setGrid(42, 38);
 
             struct {
-                  BarType type;
+                  BarLineType type;
                   const char* name;
                   } t[] = {
                   { NORMAL_BAR,       QT_TR_NOOP("Normal") },
@@ -1156,7 +1156,7 @@ void MuseScore::barMenu()
             for (unsigned i = 0; i < sizeof(t)/sizeof(*t); ++i) {
                   BarLine* b  = new BarLine(gscore);
                   b->setHeight(4 * gscore->spatium());
-                  b->setSubtype(t[i].type);
+                  b->setBarLineType(t[i].type);
                   sp->append(b, tr(t[i].name));
                   }
             }

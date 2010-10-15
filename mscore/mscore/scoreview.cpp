@@ -1923,6 +1923,7 @@ void ScoreView::dropEvent(QDropEvent* event)
                               if (el == 0) {
                                     printf("cannot drop here\n");
                                     delete dragElement;
+                                    dragElement = 0;
                                     break;
                                     }
                              }

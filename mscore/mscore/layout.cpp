@@ -1444,7 +1444,7 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                         // if last bar has a courtesy key signature,
                         // create a double bar line as end bar line
                         //
-                        int bl = hasCourtesyKeysig ? DOUBLE_BAR : NORMAL_BAR;
+                        BarLineType bl = hasCourtesyKeysig ? DOUBLE_BAR : NORMAL_BAR;
 
                         if (m->repeatFlags() & RepeatEnd)
                               m->setEndBarLineType(END_REPEAT, true);

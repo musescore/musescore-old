@@ -1074,33 +1074,33 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
                         BarLine* barLine = new BarLine(score);
                         bool visible = true;
                         if (barStyle == "light-heavy" && repeat == "backward") {
-                              barLine->setSubtype(END_REPEAT);
+                              barLine->setBarLineType(END_REPEAT);
                               }
                         else if (barStyle == "heavy-light" && repeat == "forward") {
-                              barLine->setSubtype(START_REPEAT);
+                              barLine->setBarLineType(START_REPEAT);
                               }
                         else if (barStyle == "light-heavy" && repeat.isEmpty())
-                              barLine->setSubtype(END_BAR);
+                              barLine->setBarLineType(END_BAR);
                         else if (barStyle == "regular")
-                              barLine->setSubtype(NORMAL_BAR);
+                              barLine->setBarLineType(NORMAL_BAR);
                         else if (barStyle == "dotted")
-                              barLine->setSubtype(BROKEN_BAR);
+                              barLine->setBarLineType(BROKEN_BAR);
                         else if (barStyle == "light-light")
-                              barLine->setSubtype(DOUBLE_BAR);
+                              barLine->setBarLineType(DOUBLE_BAR);
       /*                  else if (barStyle == "heavy-light")
                               ;
                         else if (barStyle == "heavy-heavy")
                               ;
       */
                         else if (barStyle == "none"){
-                              barLine->setSubtype(NORMAL_BAR);
+                              barLine->setBarLineType(NORMAL_BAR);
                               visible = false;
                         }
                         else if (barStyle == "") {
                               if (repeat == "backward")
-                                    barLine->setSubtype(END_REPEAT);
+                                    barLine->setBarLineType(END_REPEAT);
                               else if (repeat == "forward")
-                                    barLine->setSubtype(START_REPEAT);
+                                    barLine->setBarLineType(START_REPEAT);
                               else
                                     printf("ImportXml: warning: empty bar type\n");
                               }
@@ -1114,7 +1114,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
                               measure->setRepeatFlags(RepeatEnd);
                               }
                         else
-                              measure->setEndBarLineType(barLine->subtype(), false, visible);
+                              measure->setEndBarLineType(barLine->barLineType(), false, visible);
                         }
                   if (!(endingNumber.isEmpty() && endingType.isEmpty())) {
                         if (endingNumber.isEmpty())

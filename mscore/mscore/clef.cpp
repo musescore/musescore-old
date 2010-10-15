@@ -570,7 +570,6 @@ int Clef::tick() const
 const QString Clef::subtypeName() const
       {
       return QString(clefTable[subtype()].tag);
-
       }
 
 //---------------------------------------------------------

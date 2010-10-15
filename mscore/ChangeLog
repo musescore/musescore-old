@@ -1,10 +1,14 @@
-15.oct (lv)
+15.oct (ws)
+      - stronger typing for BarLineType
+      - fix #7497: adding parentheses to notes causes crash
+      (lv)
       - #5637 support reading bww files: updated testfiles
 14.oct (la)
       - fix #7520: Undo reorder instruments does not work as expected
       - fix #7519: Moving instrument causes crash
-14.oct (ws)
-      - synchronise key signature changes with parts
+      (ws)
+      - sync bar line changes with parts
+      - sync key signature changes with parts
 13.oct (ws)
       - replace clef number with clef name in msc[xz] files
       - stronger typing with ClefType

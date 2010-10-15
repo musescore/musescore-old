@@ -389,6 +389,14 @@ enum SegmentType {
 typedef QFlags<SegmentType> SegmentTypes;
 Q_DECLARE_OPERATORS_FOR_FLAGS(SegmentTypes)
 
+//---------------------------------------------------------
+//   BarLineType
+//---------------------------------------------------------
+
+enum BarLineType {
+      NORMAL_BAR, DOUBLE_BAR, START_REPEAT, END_REPEAT,
+      BROKEN_BAR, END_BAR, END_START_REPEAT
+      };
 
 extern const char* stateName(ScoreState);
 

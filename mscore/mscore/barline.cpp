@@ -27,13 +27,23 @@
 #include "segment.h"
 
 //---------------------------------------------------------
+//   barLineNames
+//    must be synchronized with enum BarLineType
+//---------------------------------------------------------
+
+static const char* barLineNames[] = {
+      "normal", "double", "start-repeat", "end-repeat", "dashed", "end",
+      "end-start-repeat"
+      };
+
+//---------------------------------------------------------
 //   BarLine
 //---------------------------------------------------------
 
 BarLine::BarLine(Score* s)
    : Element(s)
       {
-      setSubtype(NORMAL_BAR);
+      setBarLineType(NORMAL_BAR);
       _span = 1;
       yoff  = 0.0;
       setHeight(4.0 * spatium()); // for use in palettes
@@ -346,10 +356,31 @@ void BarLine::write(Xml& xml) const
 void BarLine::read(QDomElement e)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            if (!Element::readProperties(e))
+            QString tag(e.tagName());
+            QString val(e.text());
+            if (tag == "subtype") {
+                  BarLineType ct;
+                  bool ok;
+                  int i = val.toInt(&ok);
+                  if (!ok)
+                        ct = BarLine::barLineType(val);
+                  else {
+                        switch (i) {
+                              default:
+                              case  0: ct = NORMAL_BAR; break;
+                              case  1: ct = DOUBLE_BAR; break;
+                              case  2: ct = START_REPEAT; break;
+                              case  3: ct = END_REPEAT; break;
+                              case  4: ct = BROKEN_BAR; break;
+                              case  5: ct = END_BAR; break;
+                              case  6: ct = END_START_REPEAT; break;
+                              }
+                        }
+                  setBarLineType(ct);
+                  }
+            else if (!Element::readProperties(e))
                   AL::domError(e);
             }
-      setSubtype(subtype());
       }
 
 //---------------------------------------------------------
@@ -566,4 +597,36 @@ int BarLine::tick() const
       {
       return segment() ? segment()->tick() : 0;
       }
+
+//---------------------------------------------------------
+//   subtypeName
+//---------------------------------------------------------
+
+const QString BarLine::subtypeName() const
+      {
+      return QString(barLineNames[subtype()]);
+      }
+
+//---------------------------------------------------------
+//   setSubtype
+//---------------------------------------------------------
+
+void BarLine::setSubtype(const QString& s)
+      {
+      setBarLineType(barLineType(s));
+      }
+
+//---------------------------------------------------------
+//   barLineType
+//---------------------------------------------------------
+
+BarLineType BarLine::barLineType(const QString& s)
+      {
+      for (unsigned i = 0; i < sizeof(barLineNames)/sizeof(*barLineNames); ++i) {
+            if (barLineNames[i] == s)
+                  return BarLineType(i);
+            }
+      return NORMAL_BAR;
+      }
+
 
