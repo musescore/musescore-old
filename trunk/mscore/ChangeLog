@@ -1,3 +1,5 @@
+15.oct (lv)
+      - #5637 support reading bww files: updated testfiles
 14.oct (la)
       - fix #7520: Undo reorder instruments does not work as expected
       - fix #7519: Moving instrument causes crash

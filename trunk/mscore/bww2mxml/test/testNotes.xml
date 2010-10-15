@@ -87,6 +87,7 @@
         <duration>8</duration>
         <type>eighth</type>
         <stem>down</stem>
+        <beam number="1">begin</beam>
       </note>
       <note>
         <pitch>
@@ -96,6 +97,8 @@
         <duration>4</duration>
         <type>16th</type>
         <stem>down</stem>
+        <beam number="1">continue</beam>
+        <beam number="2">begin</beam>
       </note>
       <note>
         <pitch>
@@ -105,6 +108,9 @@
         <duration>2</duration>
         <type>32nd</type>
         <stem>down</stem>
+        <beam number="1">continue</beam>
+        <beam number="2">continue</beam>
+        <beam number="3">begin</beam>
       </note>
       <note>
         <pitch>
@@ -115,6 +121,9 @@
         <duration>2</duration>
         <type>32nd</type>
         <stem>down</stem>
+        <beam number="1">end</beam>
+        <beam number="2">end</beam>
+        <beam number="3">end</beam>
       </note>
     </measure>
     <measure number="3">
