@@ -67,6 +67,7 @@
 #include "articulation.h"
 #include "noteevent.h"
 #include "slur.h"
+#include "excerpt.h"
 
 extern Measure* tick2measure(int tick);
 
@@ -172,6 +173,8 @@ void UndoStack::beginMacro()
             return;
             }
       curCmd = new UndoCommand();
+      if (debugMode)
+            printf("UndoStack::beginMacro %p, UndoStack %p\n", curCmd, this);
       }
 
 //---------------------------------------------------------
@@ -180,6 +183,8 @@ void UndoStack::beginMacro()
 
 void UndoStack::endMacro(bool rollback)
       {
+      if (debugMode)
+            printf("UndoStack::endMacro %d\n", rollback);
       if (curCmd == 0) {
             printf("UndoStack:endMacro(): not active\n");
             return;
@@ -212,7 +217,7 @@ void UndoStack::endMacro(bool rollback)
 void UndoStack::push(UndoCommand* cmd)
       {
       if (!curCmd) {
-            printf("UndoStack:push(): no active command\n");
+            printf("UndoStack:push(): no active command, UndoStack %p\n", this);
 abort();
             cmd->redo();
             delete cmd;
@@ -594,7 +599,7 @@ void Score::undoChangeChordRestLen(ChordRest* cr, const Duration& d)
 //   undoChangeEndBarLineType
 //---------------------------------------------------------
 
-void Score::undoChangeEndBarLineType(Measure* m, int subtype)
+void Score::undoChangeEndBarLineType(Measure* m, BarLineType subtype)
       {
       undo()->push(new ChangeEndBarLineType(m, subtype));
       }
@@ -1327,7 +1332,7 @@ void InsertMeasure::redo()
 SortStaves::SortStaves(Score* s, QList<int> l)
       {
       score = s;
-      
+
       for(int i=0 ; i < l.size(); i++) {
             rlist.append(l.indexOf(i));
             }
@@ -1338,7 +1343,7 @@ void SortStaves::redo()
       {
       score->sortStaves(list);
       }
-      
+
 void SortStaves::undo()
       {
       score->sortStaves(rlist);
@@ -1686,6 +1691,7 @@ void ChangeRepeatFlags::flip()
       {
       int tmp = measure->repeatFlags();
       measure->setRepeatFlags(flags);
+      measure->score()->setLayout(measure);
       flags = tmp;
       }
 
@@ -1799,7 +1805,7 @@ void ChangeBeamMode::flip()
 //   ChangeEndBarLineType
 //---------------------------------------------------------
 
-ChangeEndBarLineType::ChangeEndBarLineType(Measure* m, int st)
+ChangeEndBarLineType::ChangeEndBarLineType(Measure* m, BarLineType st)
       {
       measure = m;
       subtype = st;
@@ -1807,7 +1813,7 @@ ChangeEndBarLineType::ChangeEndBarLineType(Measure* m, int st)
 
 void ChangeEndBarLineType::flip()
       {
-      int typ = measure->endBarLineType();
+      BarLineType typ = measure->endBarLineType();
       measure->setEndBarLineType(subtype, false);
       subtype = typ;
       }
@@ -2708,5 +2714,50 @@ void ChangeBeamProperties::flip()
       grow1 = g1;
       grow2 = g2;
       }
+
+//---------------------------------------------------------
+//   undoChangeBarLine
+//---------------------------------------------------------
+
+void Score::undoChangeBarLine(Measure* m, BarLineType barType)
+      {
+      Score* s = parentScore() ? parentScore() : this;
+      QList<Score*> scores;
+      scores.append(s);
+      foreach (Excerpt* ex, *s->excerpts())
+            scores.append(ex->score());
+      foreach(Score* score, scores) {
+            Measure* measure = score->tick2measure(m->tick());
+            Measure* nm      = m->nextMeasure();
+            switch(barType) {
+                  case END_BAR:
+                  case NORMAL_BAR:
+                  case DOUBLE_BAR:
+                  case BROKEN_BAR:
+                        {
+                        s->undoChangeRepeatFlags(measure, measure->repeatFlags() & ~RepeatEnd);
+                        if (nm)
+                              s->undoChangeRepeatFlags(nm, nm->repeatFlags() & ~RepeatStart);
+                        score->undoChangeEndBarLineType(measure, barType);
+                        measure->setEndBarLineGenerated (false);
+                        }
+                        break;
+                  case START_REPEAT:
+                        s->undoChangeRepeatFlags(measure, measure->repeatFlags() | RepeatStart);
+                        break;
+                  case END_REPEAT:
+                        s->undoChangeRepeatFlags(measure, measure->repeatFlags() | RepeatEnd);
+                        if (nm)
+                              s->undoChangeRepeatFlags(nm, nm->repeatFlags() & ~RepeatStart);
+                        break;
+                  case END_START_REPEAT:
+                        s->undoChangeRepeatFlags(measure, measure->repeatFlags() | RepeatEnd);
+                        if (nm)
+                              s->undoChangeRepeatFlags(nm, nm->repeatFlags() | RepeatStart);
+                        break;
+                  }
+            }
+      }
+
 
 

@@ -21,6 +21,7 @@
 #ifndef __IMPORTGTP_H__
 #define __IMPORTGTP_H__
 
+#include "globals.h"
 #include "al/fraction.h"
 
 class Score;
@@ -45,7 +46,7 @@ struct GpBar {
       Fraction timesig;
       int keysig;
       QString marker;
-      int barLine;
+      BarLineType barLine;
       int repeatFlags;
       int repeats;
 

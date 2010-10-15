@@ -452,7 +452,7 @@ class Score : public QObject {
       void undoChangeTpc(Note* note, int tpc);
       void undoChangeBeamMode(ChordRest* cr, BeamMode mode);
       void undoChangeChordRestLen(ChordRest* cr, const Duration&);
-      void undoChangeEndBarLineType(Measure*, int);
+      void undoChangeEndBarLineType(Measure*, BarLineType);
       void undoChangeBarLineSpan(Staff*, int);
       void undoChangeUserOffset(Element* e, const QPointF& offset);
       void undoChangeDynamic(Dynamic* e, int velocity, DynamicType type);
@@ -470,6 +470,7 @@ class Score : public QObject {
       void undoChangePageFormat(PageFormat*, double spatium);
       void undoChangeUserMirror(Note*, DirectionH);
       void undoChangeKeySig(Staff* ostaff, int tick, KeySigEvent st);
+      void undoChangeBarLine(Measure* m, BarLineType);
 
       void setGraceNote(Chord*,  int pitch, NoteType type, int len);
       int clefOffset(int tick, Staff*) const;

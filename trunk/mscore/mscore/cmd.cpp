@@ -93,6 +93,8 @@
 
 void Score::startCmd()
       {
+      if (debugMode)
+            printf("===startCmd()\n");
       layoutAll = true;      ///< do a complete relayout
 
       // Start collecting low-level undo operations for a
@@ -115,6 +117,8 @@ void Score::startCmd()
 
 void Score::endCmd()
       {
+      if (debugMode)
+            printf("===endCmd()\n");
       if (!undo()->active()) {
             // if (debugMode)
                   fprintf(stderr, "Score::endCmd(): no cmd active\n");

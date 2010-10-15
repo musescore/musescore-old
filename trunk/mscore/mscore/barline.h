@@ -26,11 +26,6 @@
 class ScoreView;
 class Segment;
 
-enum BarType {
-      NORMAL_BAR, DOUBLE_BAR, START_REPEAT, END_REPEAT,
-      BROKEN_BAR, END_BAR, END_START_REPEAT
-      };
-
 //---------------------------------------------------------
 //   BarLine
 //---------------------------------------------------------
@@ -67,6 +62,12 @@ class BarLine : public Element {
       virtual void endEditDrag();
       virtual void updateGrips(int*, QRectF*) const;
       int tick() const;
+
+      virtual const QString subtypeName() const;
+      virtual void setSubtype(const QString& s);
+      void setBarLineType(BarLineType i)  { Element::setSubtype(int(i));    }
+      BarLineType barLineType() const     { return BarLineType(subtype());  }
+      static BarLineType barLineType(const QString& s);
       };
 
 #endif

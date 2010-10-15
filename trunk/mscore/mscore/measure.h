@@ -110,9 +110,9 @@ class Measure : public MeasureBase {
 
       bool _endBarLineGenerated;
       bool _endBarLineVisible;
-      int _endBarLineType;
+      BarLineType _endBarLineType;
 
-      int _mmEndBarLineType;       ///< bar line type if this measure is presented
+      BarLineType _mmEndBarLineType;       ///< bar line type if this measure is presented
                                    ///< as multi measure rest
 
       int _multiMeasure;      // set from layout();
@@ -217,9 +217,9 @@ class Measure : public MeasureBase {
       Segment* findSegment(SegmentType st, int t);
 
       bool createEndBarLines();
-      void setEndBarLineType(int val, bool g, bool visible = true, QColor color = Qt::black);
-      int endBarLineType() const                { return _endBarLineType; }
-      void setMmEndBarLineType(int v)           { _mmEndBarLineType = v;    }
+      void setEndBarLineType(BarLineType val, bool g, bool visible = true, QColor color = Qt::black);
+      BarLineType endBarLineType() const        { return _endBarLineType; }
+      void setMmEndBarLineType(BarLineType v)   { _mmEndBarLineType = v;    }
       bool setStartRepeatBarLine(bool);
       bool endBarLineGenerated() const          { return _endBarLineGenerated; }
       void setEndBarLineGenerated(bool v)       { _endBarLineGenerated = v;    }

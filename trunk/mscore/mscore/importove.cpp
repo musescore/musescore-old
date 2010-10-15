@@ -1163,7 +1163,7 @@ void OveToMScore::convertMeasureMisc(Measure* measure, int part, int staff, int 
 	}
 
 	// barline
-	BarType bartype = NORMAL_BAR;
+	BarLineType bartype = NORMAL_BAR;
 
 	switch(measurePtr->getRightBarline()) {
 	case OVE::Barline_Default:{

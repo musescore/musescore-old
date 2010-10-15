@@ -656,11 +656,11 @@ class ChangeChordRestSpace : public UndoCommand {
 
 class ChangeEndBarLineType : public UndoCommand {
       Measure* measure;
-      int subtype;
+      BarLineType subtype;
       void flip();
 
    public:
-      ChangeEndBarLineType(Measure*, int subtype);
+      ChangeEndBarLineType(Measure*, BarLineType subtype);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       UNDO_NAME("ChangeEndBarLineType");

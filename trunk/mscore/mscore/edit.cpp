@@ -1632,7 +1632,8 @@ void Score::toggleInvisible(Element* e)
             Element* pe = e->parent();
             if (pe->type() == SEGMENT && pe->subtype() == SegEndBarLine) {
                   Measure* m = static_cast<Segment*>(pe)->measure();
-                  m->setEndBarLineType(e->subtype(), false, e->visible(), e->color());
+                  BarLine* bl = static_cast<BarLine*>(e);
+                  m->setEndBarLineType(bl->barLineType(), false, e->visible(), e->color());
                   }
             }
       else if (e->type() == TEXT && e->subtype() == TEXT_INSTRUMENT_SHORT) {
@@ -1665,7 +1666,8 @@ void Score::colorItem(Element* element)
                         Element* ep = e->parent();
                         if (ep->type() == SEGMENT && ep->subtype() == SegEndBarLine) {
                               Measure* m = static_cast<Segment*>(ep)->measure();
-                              m->setEndBarLineType(e->subtype(), false, e->visible(), e->color());
+                              BarLine* bl = static_cast<BarLine*>(e);
+                              m->setEndBarLineType(bl->barLineType(), false, e->visible(), e->color());
                               }
                         }
                   else if (e->type() == TEXT && e->subtype() == TEXT_INSTRUMENT_SHORT) {

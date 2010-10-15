@@ -1687,38 +1687,8 @@ printf("drop staffList\n");
                   }
 
             case BAR_LINE:
-                  {
-                  BarLine* bl = (BarLine*)e;
-                  Measure* nm = nextMeasure();
-                  switch(bl->subtype()) {
-                        case END_BAR:
-                        case NORMAL_BAR:
-                        case DOUBLE_BAR:
-                        case BROKEN_BAR:
-                              {
-                              score()->undoChangeRepeatFlags(this, _repeatFlags & ~RepeatEnd);
-                              if (nm)
-                                    score()->undoChangeRepeatFlags(nm, nm->repeatFlags() & ~RepeatStart);
-                              score()->undoChangeEndBarLineType(this, bl->subtype());
-                              _endBarLineGenerated = false;
-                              }
-                              break;
-                        case START_REPEAT:
-                              score()->undoChangeRepeatFlags(this, _repeatFlags | RepeatStart);
-                              break;
-                        case END_REPEAT:
-                              score()->undoChangeRepeatFlags(this, _repeatFlags | RepeatEnd);
-                              if (nm)
-                                    score()->undoChangeRepeatFlags(nm, nm->repeatFlags() & ~RepeatStart);
-                              break;
-                        case END_START_REPEAT:
-                              score()->undoChangeRepeatFlags(this, _repeatFlags | RepeatEnd);
-                              if (nm)
-                                    score()->undoChangeRepeatFlags(nm, nm->repeatFlags() | RepeatStart);
-                              break;
-                        }
-                  delete bl;
-                  }
+                  score()->undoChangeBarLine(this, static_cast<BarLine*>(e)->barLineType());
+                  delete e;
                   break;
 
             case REPEAT_MEASURE:
@@ -2066,7 +2036,7 @@ void Measure::read(QDomElement e, int staffIdx)
                         s->add(barLine);
                         }
                   else {
-                        setEndBarLineType(barLine->subtype(), false, barLine->visible(), barLine->color());
+                        setEndBarLineType(barLine->barLineType(), false, barLine->visible(), barLine->color());
                         delete barLine;
                         }
                   }
@@ -2373,7 +2343,7 @@ void Measure::read(QDomElement e, int staffIdx)
             Segment* s = last();
             if (s && s->subtype() == SegBarLine) {
                   BarLine* b = static_cast<BarLine*>(s->element(0));
-                  setEndBarLineType(b->subtype(), false, b->visible(), b->color());
+                  setEndBarLineType(b->barLineType(), false, b->visible(), b->color());
                   s->remove(b);
                   delete b;
                   }
@@ -2517,7 +2487,7 @@ bool Measure::setStartRepeatBarLine(bool val)
             if (!found && val) {
                   bl = new BarLine(score());
                   bl->setTrack(track);
-                  bl->setSubtype(START_REPEAT);
+                  bl->setBarLineType(START_REPEAT);
                   // bl->setGenerated(true);
                   Segment* seg = getSegment(SegStartRepeatBarLine, tick());
                   seg->add(bl);
@@ -2566,9 +2536,9 @@ bool Measure::createEndBarLines()
                   }
             if (bl) {
                   bl->setMag(staff->mag());
-                  int et = _multiMeasure > 0 ? _mmEndBarLineType : _endBarLineType;
+                  BarLineType et = _multiMeasure > 0 ? _mmEndBarLineType : _endBarLineType;
                   if (bl->subtype() != et) {
-                        bl->setSubtype(et);
+                        bl->setBarLineType(et);
                         changed = true;
                         }
                   bl->setVisible(_endBarLineVisible);
@@ -2598,7 +2568,7 @@ bool Measure::createEndBarLines()
 //   setEndBarLineType
 //---------------------------------------------------------
 
-void Measure::setEndBarLineType(int val, bool g, bool visible, QColor color)
+void Measure::setEndBarLineType(BarLineType val, bool g, bool visible, QColor color)
       {
       _endBarLineType      = val;
       _endBarLineGenerated = g;
