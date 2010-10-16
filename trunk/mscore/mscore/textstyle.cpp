@@ -127,10 +127,8 @@ void TextStyleDialog::apply()
       for (int i = 0; i < n; ++i) {
             const TextStyle& os = cs->textStyle(TextStyleType(i));
             const TextStyle& ns = styles[i];
-            if (os != ns) {
+            if (os != ns)
                   cs->undo()->push(new ChangeTextStyle(cs, ns));
-                  break;
-                  }
             }
       cs->end();
       }

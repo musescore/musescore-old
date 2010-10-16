@@ -1,3 +1,5 @@
+16.oct (ws)
+      - fix #7538: edit text style dlg box: only changes to title are accepted
 15.oct (ws)
       - stronger typing for BarLineType
       - fix #7497: adding parentheses to notes causes crash
