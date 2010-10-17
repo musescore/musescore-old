@@ -1,4 +1,5 @@
 17.oct (lv)
+      - fix MusicXML import/export of clefs
       - fix #7504: test XML files crashing during playback
 16.oct (ws)
       - fix #7538: edit text style dlg box: only changes to title are accepted

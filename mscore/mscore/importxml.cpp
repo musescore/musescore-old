@@ -3320,14 +3320,12 @@ void MusicXml::xmlClef(QDomElement e, int staffIdx, Measure* measure)
       Staff* part = score->staff(staffIdx + clefno);
       ClefList* ct = part->clefList();
       (*ct)[tick] = clef;
-      if (tick) {
-            // dont generate symbol for tick 0
-            Clef* clefs = new Clef(score);
-            clefs->setClefType(clef);
-            clefs->setTrack((staffIdx + clefno) * VOICES);
-            Segment* s = measure->getSegment(clefs, tick);
-            s->add(clefs);
-            ++clefno;   // ??
-            }
+      // note: also generate symbol for tick 0
+      // was not necessary before 0.9.6
+      Clef* clefs = new Clef(score);
+      clefs->setClefType(clef);
+      clefs->setTrack((staffIdx + clefno) * VOICES);
+      Segment* s = measure->getSegment(clefs, tick);
+      s->add(clefs);
       }
 
