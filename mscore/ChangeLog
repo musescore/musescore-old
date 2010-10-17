@@ -1,3 +1,9 @@
+17.oct (la)
+      - fix #7530: Hairpin starting on the first note is lost on reload
+14.oct (la)
+      - fix #7514: Moving instrument deletes tuplets
+      - fix #7520: Undo reorder instruments does not work as expected
+      - fix #7519: Moving instrument causes crash
 10.oct (db)
       - fix: Local Handbook disabled when no file is open
 28.sep (ws)

@@ -282,6 +282,7 @@ Score::Score(const Style& s)
       _tempomap       = new AL::TempoMap;
       _sigmap         = new AL::TimeSigMap;
       _sigmap->add(0, Fraction(4, 4));
+      curTick = 0;
       connect(_undo, SIGNAL(cleanChanged(bool)), SLOT(setClean(bool)));
       }
 
