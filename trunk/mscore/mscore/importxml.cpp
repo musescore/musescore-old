@@ -294,6 +294,7 @@ void Score::importMusicXml(const QString& name)
       MusicXml musicxml(lx.doc());
       musicxml.import(this);
       connectTies();
+      rebuildMidiMapping();
       layoutAll = true;
       _created = false;
       }
@@ -314,6 +315,7 @@ void Score::importCompressedMusicXml(const QString& name)
       MusicXml musicxml(lx.doc());
       musicxml.import(this);
       connectTies();
+      rebuildMidiMapping();
       layoutAll = true;
       _created = false;
       }
