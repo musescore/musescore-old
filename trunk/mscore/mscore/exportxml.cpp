@@ -3556,11 +3556,14 @@ foreach(Element* el, *(score->gel())) {
                                           Clef* cle = static_cast<Clef*>(el);
                                           int ti = cle->segment()->tick();
                                           int ct = cle->subtype();
-                                          printf("exportxml: clef ti=%d ct=%d\n", ti, ct);
+                                          printf("exportxml: clef at start measure ti=%d ct=%d gen=%d\n", ti, ct, el->generated());
                                           ClefList* cl = score->staff(st/VOICES)->clefList();
                                           ciClefEvent ci = cl->find(ti);
                                           if (ci != cl->end()) {
                                                 clef(sstaff, ct);
+                                                }
+                                          else {
+                                                printf("exportxml: clef not exported\n");
                                                 }
                                           }
                                     }
@@ -3655,14 +3658,22 @@ foreach(Element* el, *(score->gel())) {
                                           {
                                           // output only clef changes, not generated clefs
                                           // at line beginning
-                                          // also ignore clefs at the start o a measure,
+                                          // also ignore clefs at the start of a measure,
                                           // these have already been output
                                           int ti = seg->tick();
                                           int ct = ((Clef*)el)->subtype();
+                                          printf("exportxml: clef in measure ti=%d ct=%d gen=%d\n", ti, ct, el->generated());
+                                          if (el->generated()) {
+                                                printf("exportxml: generated clef not exported\n");
+                                                break;
+                                                }
                                           ClefList* cl = score->staff(st/VOICES)->clefList();
                                           ciClefEvent ci = cl->find(ti);
                                           if (ci != cl->end() && seg->tick() != m->tick()) {
                                                 clef(sstaff, ct);
+                                                }
+                                          else {
+                                                printf("exportxml: clef not exported\n");
                                                 }
                                           }
                                           break;
