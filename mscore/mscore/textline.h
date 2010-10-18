@@ -26,9 +26,8 @@
 #include "ui_lineproperties.h"
 
 class TextLine;
-class TextB;
-class TextC;
 class Element;
+class Text;
 
 //---------------------------------------------------------
 //   TextLineSegment
@@ -37,7 +36,7 @@ class Element;
 class TextLineSegment : public LineSegment {
    Q_DECLARE_TR_FUNCTIONS(TextLineSegment)
 
-   TextC* _text;
+   Text* _text;
 
    protected:
 
@@ -53,7 +52,7 @@ class TextLineSegment : public LineSegment {
       virtual void layout();
       virtual void setSelected(bool f);
 
-      TextC* text() const { return _text; }
+      Text* text() const { return _text; }
       void clearText();
 
       virtual bool genPropertyMenu(QMenu*) const;
@@ -85,8 +84,8 @@ class TextLine : public SLine {
       double _sp;       // cached value from last spatiumChanged() call
 
    protected:
-      TextC* _beginText;
-      TextC* _continueText;
+      Text* _beginText;
+      Text* _continueText;
       friend class TextLineSegment;
 
    public:
@@ -115,10 +114,10 @@ class TextLine : public SLine {
 
       void setBeginText(const QString& s, TextStyleType textStyle = TEXT_STYLE_TEXTLINE);
       void setContinueText(const QString& s, TextStyleType textStyle = TEXT_STYLE_TEXTLINE);
-      TextC* beginText() const                { return _beginText;            }
-      void setBeginText(TextC* v);
-      TextC* continueText() const             { return _continueText;         }
-      void setContinueText(TextC* v);
+      Text* beginText() const                { return _beginText;            }
+      void setBeginText(Text* v);
+      Text* continueText() const             { return _continueText;         }
+      void setContinueText(Text* v);
       Placement beginTextPlace() const        { return _beginTextPlace;       }
       void setBeginTextPlace(Placement p)     { _beginTextPlace = p;          }
       Placement continueTextPlace() const     { return _continueTextPlace;    }

@@ -38,7 +38,6 @@ Pedal::Pedal(Score* s)
       setBeginHookHeight(Spatium(-1.2));
       setEndHookHeight(Spatium(-1.2));
 
-      setOffsetType(OFFSET_SPATIUM);
       setYoff(8.0);
       }
 

@@ -26,7 +26,7 @@
 
 Q_DECLARE_METATYPE(Part*);
 Q_DECLARE_METATYPE(Score*);
-Q_DECLARE_METATYPE(TextC*);
+Q_DECLARE_METATYPE(Text*);
 
 static const char* const function_names_part[] = {
       "longName", "shortName", "midiProgram", "midiChannel", "staves"

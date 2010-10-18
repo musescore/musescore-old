@@ -567,7 +567,7 @@ ScoreView::ScoreView(QWidget* parent)
 
       setContextMenuPolicy(Qt::DefaultContextMenu);
 
-      double mag  = preferences.mag * PDPI / DPI;
+      double mag  = preferences.mag;
       _matrix     = QTransform(mag, 0.0, 0.0, mag, 0.0, 0.0);
       imatrix     = _matrix.inverted();
       _magIdx     = preferences.mag == 1.0 ? MAG_100 : MAG_FREE;
@@ -1143,10 +1143,10 @@ void ScoreView::startEdit()
       score()->setLayoutAll(false);
       curElement  = 0;
       setFocus();
-      if (origEditObject->isTextB()) {
+      if (origEditObject->isText()) {
             editObject = origEditObject;
             editObject->startEdit(this, startMove);
-            TextB* t = static_cast<TextB*>(editObject);
+            Text* t = static_cast<Text*>(editObject);
             _editText = t;
             mscore->textTools()->setText(t);
             mscore->textTools()->setCharFormat(t->getCursor()->charFormat());
@@ -1403,11 +1403,10 @@ void ScoreView::paint(const QRect& rr, QPainter& p)
             p.fillRect(dropRectangle, QColor(80, 0, 0, 80));
 
       if (_editText) {
-            QRectF r = _editText->abbox();
-            qreal w = 6.0 / matrix().m11();   // 6 pixel border
-            r.adjust(-w, -w, w, w);
-            w = 2.0 / matrix().m11();   // 2 pixel pen size
-            p.setPen(QPen(QBrush(Qt::blue), w));
+            QRectF r = _editText->pageRectangle(); // abbox();
+//            qreal w = 6.0 / matrix().m11();   // 6 pixel border
+//            r.adjust(-w, -w, w, w);
+            p.setPen(QPen(QBrush(Qt::blue), 2.0 / matrix().m11()));  // 2 pixel pen size
             p.setBrush(QBrush(Qt::NoBrush));
             p.drawRect(r);
             }
@@ -2163,7 +2162,7 @@ void ScoreView::zoom(int step, const QPoint& pos)
       QPointF p2 = imatrix.map(QPointF(pos));
       QPointF p3 = p2 - p1;
 
-      double m = _mag * PDPI/DPI;
+      double m = _mag;
 
       int dx    = lrint(p3.x() * m);
       int dy    = lrint(p3.y() * m);
@@ -2389,7 +2388,6 @@ void ScoreView::setMag(qreal nmag)
       if (nmag == m)
             return;
       double deltamag = nmag / m;
-      nmag *= (PDPI/DPI);
 
       _matrix.setMatrix(nmag, _matrix.m12(), _matrix.m13(), _matrix.m21(),
          nmag, _matrix.m23(), _matrix.dx()*deltamag, _matrix.dy()*deltamag, _matrix.m33());
@@ -2477,11 +2475,11 @@ void ScoreView::setFocusRect()
 
 void ScoreView::editCopy()
       {
-      if (editObject && editObject->isTextB()) {
+      if (editObject && editObject->isText()) {
             //
             // store selection as plain text
             //
-            TextB* text = static_cast<TextB*>(editObject);
+            Text* text = static_cast<Text*>(editObject);
             QTextCursor* tcursor = text->getCursor();
             if (tcursor && tcursor->hasSelection())
                   QApplication::clipboard()->setText(tcursor->selectedText(), QClipboard::Clipboard);
@@ -2530,8 +2528,8 @@ void ScoreView::normalCut()
 
 void ScoreView::editPaste()
       {
-      if (editObject->isTextB())
-            static_cast<TextB*>(editObject)->paste();
+      if (editObject->isText())
+            static_cast<Text*>(editObject)->paste();
       }
 
 //---------------------------------------------------------
@@ -2627,8 +2625,6 @@ void ScoreView::cmd(const QAction* a)
             cmdAddText(TEXT_COMPOSER);
       else if (cmd == "poet-text")
             cmdAddText(TEXT_POET);
-      else if (cmd == "copyright-text")
-            cmdAddText(TEXT_COPYRIGHT);
       else if (cmd == "system-text")
             cmdAddText(TEXT_SYSTEM);
       else if (cmd == "staff-text")
@@ -2772,8 +2768,8 @@ void ScoreView::endEdit()
       editObject->endEdit();
       _score->addRefresh(editObject->bbox());
 
-      if (editObject->isTextB()) {
-            TextB* t = static_cast<TextB*>(editObject);
+      if (editObject->isText()) {
+            Text* t = static_cast<Text*>(editObject);
             if (textUndoLevel)
                   _score->undo()->push(new EditText(t, textUndoLevel));
             disconnect(t->doc(), SIGNAL(undoCommandAdded()), this, SLOT(textUndoLevelAdded()));
@@ -3127,8 +3123,8 @@ void ScoreView::doDragEdit(QMouseEvent* ev)
       QPointF delta = p - startMove;
       _score->setLayoutAll(false);
       score()->addRefresh(editObject->abbox());
-      if (editObject->isTextB()) {
-            TextB* text = static_cast<TextB*>(editObject);
+      if (editObject->isText()) {
+            Text* text = static_cast<Text*>(editObject);
             text->dragTo(p);
             }
       else {
@@ -3147,7 +3143,7 @@ bool ScoreView::editElementDragTransition(QMouseEvent* ev)
       {
       startMove = imatrix.map(QPointF(ev->pos()));
       Element* e = elementNear(startMove);
-      if (e && (e == editObject) && (editObject->isTextB())) {
+      if (e && (e == editObject) && (editObject->isText())) {
             if (editObject->mousePress(startMove, ev)) {
                   _score->addRefresh(editObject->abbox());
                   _score->end();
@@ -3378,7 +3374,7 @@ void ScoreView::setDropAnchor(const QLineF& l)
 
 qreal ScoreView::mag() const
       {
-      return _matrix.m11() *  DPI/PDPI;
+      return _matrix.m11();
       }
 
 //---------------------------------------------------------
@@ -3387,10 +3383,6 @@ qreal ScoreView::mag() const
 
 void ScoreView::setOffset(qreal x, qreal y)
       {
-      double m = PDPI / DPI;
-      x *= m;
-      y *= m;
-
       _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m13(), _matrix.m21(),
          _matrix.m22(), _matrix.m23(), x, y, _matrix.m33());
       imatrix = _matrix.inverted();
@@ -3404,7 +3396,7 @@ void ScoreView::setOffset(qreal x, qreal y)
 
 qreal ScoreView::xoffset() const
       {
-      return _matrix.dx() * DPI / PDPI;
+      return _matrix.dx();
       }
 
 //---------------------------------------------------------
@@ -3413,7 +3405,7 @@ qreal ScoreView::xoffset() const
 
 qreal ScoreView::yoffset() const
       {
-      return _matrix.dy() * DPI / PDPI;
+      return _matrix.dy();
       }
 
 //---------------------------------------------------------
@@ -3809,7 +3801,7 @@ void ScoreView::cmdAddSlur(Note* firstNote, Note* lastNote)
             //
             // start slur in edit mode if lastNote is not given
             //
-            if (origEditObject && origEditObject->isTextB()) {
+            if (origEditObject && origEditObject->isText()) {
                   _score->endCmd();
                   return;
                   }

@@ -110,12 +110,24 @@ TextTools::TextTools(QWidget* parent)
       leftAlign->setCheckable(true);
 
       centerAlign = tb->addAction(*icons[textCenter_ICON], "");
-      centerAlign->setToolTip(tr("align center"));
+      centerAlign->setToolTip(tr("align horizontal center"));
       centerAlign->setCheckable(true);
 
       rightAlign  = tb->addAction(*icons[textRight_ICON],  "");
       rightAlign->setToolTip(tr("align right"));
       rightAlign->setCheckable(true);
+
+      topAlign  = tb->addAction(*icons[textTop_ICON],  "");
+      topAlign->setToolTip(tr("align top"));
+      topAlign->setCheckable(true);
+
+      bottomAlign  = tb->addAction(*icons[textBottom_ICON],  "");
+      bottomAlign->setToolTip(tr("align bottom"));
+      bottomAlign->setCheckable(true);
+
+      vcenterAlign  = tb->addAction(*icons[textVCenter_ICON],  "");
+      vcenterAlign->setToolTip(tr("align vertical center"));
+      vcenterAlign->setCheckable(true);
 
       typefaceSubscript   = tb->addAction(*icons[textSub_ICON], "");
       typefaceSubscript->setToolTip(tr("subscript"));
@@ -149,6 +161,9 @@ TextTools::TextTools(QWidget* parent)
       connect(leftAlign,           SIGNAL(triggered()), SLOT(setLeftAlign()));
       connect(rightAlign,          SIGNAL(triggered()), SLOT(setRightAlign()));
       connect(centerAlign,         SIGNAL(triggered()), SLOT(setHCenterAlign()));
+      connect(topAlign,            SIGNAL(triggered()), SLOT(setTopAlign()));
+      connect(bottomAlign,         SIGNAL(triggered()), SLOT(setBottomAlign()));
+      connect(vcenterAlign,        SIGNAL(triggered()), SLOT(setVCenterAlign()));
       connect(showKeyboard,        SIGNAL(triggered(bool)), SLOT(showKeyboardClicked(bool)));
       }
 
@@ -156,9 +171,24 @@ TextTools::TextTools(QWidget* parent)
 //   setText
 //---------------------------------------------------------
 
-void TextTools::setText(TextB* te)
+void TextTools::setText(Text* te)
       {
       _textElement = te;
+      bool unstyled = !te->styled();
+      typefaceSize->setEnabled(unstyled);
+      typefaceFamily->setEnabled(unstyled);
+      typefaceBold->setEnabled(unstyled);
+      typefaceItalic->setEnabled(unstyled);
+      typefaceUnderline->setEnabled(unstyled);
+      typefaceSubscript->setEnabled(unstyled);
+      typefaceSuperscript->setEnabled(unstyled);
+      typefaceFamily->setEnabled(unstyled);
+      leftAlign->setEnabled(unstyled);
+      rightAlign->setEnabled(unstyled);
+      centerAlign->setEnabled(unstyled);
+      topAlign->setEnabled(unstyled);
+      bottomAlign->setEnabled(unstyled);
+      vcenterAlign->setEnabled(unstyled);
       }
 
 //---------------------------------------------------------
@@ -178,6 +208,9 @@ void TextTools::blockAllSignals(bool val)
       leftAlign->blockSignals(val);
       rightAlign->blockSignals(val);
       centerAlign->blockSignals(val);
+      topAlign->blockSignals(val);
+      bottomAlign->blockSignals(val);
+      vcenterAlign->blockSignals(val);
       showKeyboard->blockSignals(val);
       }
 
@@ -216,6 +249,22 @@ void TextTools::setBlockFormat(const QTextBlockFormat& bf)
       centerAlign->setChecked(bf.alignment() & Qt::AlignHCenter);
       leftAlign->setChecked  (bf.alignment() & Qt::AlignLeft);
       rightAlign->setChecked (bf.alignment() & Qt::AlignRight);
+      Align align = _textElement->align();
+      if (align & ALIGN_BOTTOM) {
+            topAlign->setChecked(false);
+            bottomAlign->setChecked(true);
+            vcenterAlign->setChecked(false);
+            }
+      else if (align & ALIGN_VCENTER) {
+            topAlign->setChecked(false);
+            bottomAlign->setChecked(false);
+            vcenterAlign->setChecked(true);
+            }
+      else {
+            topAlign->setChecked(true);
+            bottomAlign->setChecked(false);
+            vcenterAlign->setChecked(false);
+            }
       blockAllSignals(false);
       }
 
@@ -301,7 +350,7 @@ void TextTools::italicClicked(bool val)
 
 void TextTools::setHCenterAlign()
       {
-      bformat.setAlignment(Qt::AlignHCenter);
+      bformat.setAlignment((bformat.alignment() & ~Qt::AlignHorizontal_Mask) | Qt::AlignHCenter);
       _textElement->setBlockFormat(bformat);
       setBlockFormat(bformat);
       moveFocus();
@@ -313,7 +362,7 @@ void TextTools::setHCenterAlign()
 
 void TextTools::setLeftAlign()
       {
-      bformat.setAlignment(Qt::AlignLeft);
+      bformat.setAlignment((bformat.alignment() & ~Qt::AlignHorizontal_Mask) | Qt::AlignLeft);
       _textElement->setBlockFormat(bformat);
       setBlockFormat(bformat);
       moveFocus();
@@ -325,8 +374,44 @@ void TextTools::setLeftAlign()
 
 void TextTools::setRightAlign()
       {
-      bformat.setAlignment(Qt::AlignRight);
+      bformat.setAlignment((bformat.alignment() & ~Qt::AlignHorizontal_Mask) | Qt::AlignRight);
       _textElement->setBlockFormat(bformat);
+      setBlockFormat(bformat);
+      moveFocus();
+      }
+
+//---------------------------------------------------------
+//   setTopAlign
+//---------------------------------------------------------
+
+void TextTools::setTopAlign()
+      {
+      Align align = (_textElement->align() & ~ALIGN_HMASK) | ALIGN_TOP;
+      _textElement->setAlign(align);
+      setBlockFormat(bformat);
+      moveFocus();
+      }
+
+//---------------------------------------------------------
+//   setBottomAlign
+//---------------------------------------------------------
+
+void TextTools::setBottomAlign()
+      {
+      Align align = (_textElement->align() & ~ALIGN_HMASK) | ALIGN_BOTTOM;
+      _textElement->setAlign(align);
+      setBlockFormat(bformat);
+      moveFocus();
+      }
+
+//---------------------------------------------------------
+//   setVCenterAlign
+//---------------------------------------------------------
+
+void TextTools::setVCenterAlign()
+      {
+      Align align = (_textElement->align() & ~ALIGN_HMASK) | ALIGN_VCENTER;
+      _textElement->setAlign(align);
       setBlockFormat(bformat);
       moveFocus();
       }
@@ -527,7 +612,7 @@ void TextPalette::symbolClicked(int n)
 //   setText
 //---------------------------------------------------------
 
-void TextPalette::setText(TextB* te)
+void TextPalette::setText(Text* te)
       {
       _textElement = te;
       }

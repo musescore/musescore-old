@@ -469,19 +469,19 @@ void System::setInstrumentName(int staffIdx)
       //
       // instrument name can change after inserting/deleting parts
       //
-      TextC* iname = staff->instrumentName;
+      Text* iname = staff->instrumentName;
       Part* part = s->part();
 
       if (!iname) {
             Part* part = s->part();
-            iname = new TextC(_firstSystem ? (*part->longName()) : (*part->shortName()));
+            iname = new Text(_firstSystem ? (*part->longName()) : (*part->shortName()));
             staff->instrumentName = iname;
             }
       else {
-            TextBase* otb = iname->textBase();
-            TextBase* ntb = _firstSystem ? part->longName()->textBase() : part->shortName()->textBase();
-            if (otb != ntb)
-                  iname->changeBase(ntb);
+//TODOxx            TextBase* otb = iname->textBase();
+//            TextBase* ntb = _firstSystem ? part->longName()->textBase() : part->shortName()->textBase();
+//            if (otb != ntb)
+//                  iname->changeBase(ntb);
             }
       iname->setParent(this);
       iname->setTrack(staffIdx * VOICES);
@@ -524,7 +524,7 @@ void System::add(Element* el)
       {
       el->setParent(this);
       if (el->type() == TEXT && (el->subtype() == TEXT_INSTRUMENT_LONG || el->subtype() == TEXT_INSTRUMENT_SHORT)) {
-            _staves[el->staffIdx()]->instrumentName = static_cast<TextC*>(el);
+            _staves[el->staffIdx()]->instrumentName = static_cast<Text*>(el);
             }
       else if (el->type() == BEAM)
             score()->add(el);

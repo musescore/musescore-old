@@ -187,7 +187,7 @@ void ChordStyleEditor::loadChordDescriptionFile(const QString& s)
 void ChordStyleEditor::updateChordDescription(ChordDescription* d)
       {
       double extraMag     = 3.0;
-      double _spatium     = 2.0 * PALETTE_SPATIUM / (PDPI/DPI * extraMag);
+      double _spatium     = 2.0 * PALETTE_SPATIUM / extraMag;
       double mag          = PALETTE_SPATIUM * extraMag / _spatium;
       d->renderList.clear();
       QList<TextSegment*> tl = canvas->getTextList();
@@ -284,7 +284,7 @@ void HarmonyCanvas::paintEvent(QPaintEvent* event)
       if (!chordDescription)
             return;
 
-      double spatium = 2.0 * PALETTE_SPATIUM / (PDPI/DPI * extraMag);
+      double spatium = 2.0 * PALETTE_SPATIUM / extraMag;
       gscore->setSpatium(spatium);
       gscore->setPaintDevice(this);
 
@@ -321,7 +321,7 @@ void HarmonyCanvas::render(const QList<RenderAction>& renderList, double& x, dou
       {
       QStack<QPointF> stack;
       int fontIdx = 0;
-      double _spatium = 2.0 * PALETTE_SPATIUM / (PDPI/DPI * extraMag);
+      double _spatium = 2.0 * PALETTE_SPATIUM / extraMag;
       qreal mag  = PALETTE_SPATIUM * extraMag / _spatium;
 
       QList<QFont> fontList;              // temp values used in render()

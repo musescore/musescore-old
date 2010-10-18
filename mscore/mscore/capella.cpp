@@ -1448,7 +1448,12 @@ static void processBasicDrawObj(QList<BasicDrawObj*> objects, Segment* s, int tr
                                     }
                               }
                         Text* text = new Text(score);
-                        text->setDefaultFont(st->font());
+                        QFont f(st->font());
+                        text->setItalic(f.italic());
+//                        text->setUnderline(f.underline());
+                        text->setBold(f.bold());
+                        text->setSize(f.pointSizeF());
+
                         text->setText(st->text());
                         QPointF p(st->pos());
                         p = p / 32.0 * DPMM;
@@ -1889,7 +1894,12 @@ void Score::convertCapella(Capella* cap)
                         SimpleTextObj* to = static_cast<SimpleTextObj*>(o);
                         Text* s = new Text(this);
                         s->setSubtype(TEXT_TITLE);
-                        s->setDefaultFont(to->font());
+                        QFont f(to->font());
+                        s->setItalic(f.italic());
+//                        s->setUnderline(f.underline());
+                        s->setBold(f.bold());
+                        s->setSize(f.pointSizeF());
+
                         QString ss = to->text();
                         s->setText(ss);
                         MeasureBase* measure = new VBox(this);

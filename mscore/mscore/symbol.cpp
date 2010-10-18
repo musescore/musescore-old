@@ -189,9 +189,9 @@ void Symbol::layout()
       setMag(m);
       foreach(Element* e, leafs())
             e->layout();
-      Element::layout();
+      ElementLayout::layout(this);
       BSymbol::layout();
-      setPos(QPointF());
+//      setPos(QPointF());
       _bbox = symbols[score()->symIdx()][_sym].bbox(magS());
       }
 

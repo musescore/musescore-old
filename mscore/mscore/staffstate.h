@@ -22,6 +22,7 @@
 #define __STAFFSTATE_H__
 
 #include "element.h"
+#include "elementlayout.h"
 
 // staff state change subtypes:
 
@@ -34,7 +35,7 @@ enum {
 //   StaffState
 //---------------------------------------------------------
 
-class StaffState : public Element {
+class StaffState : public Element, public ElementLayout {
       qreal lw;
       QPainterPath path;
 

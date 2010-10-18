@@ -138,11 +138,10 @@ void HairpinSegment::propertyAction(ScoreView* viewer, const QString& s)
 Hairpin::Hairpin(Score* s)
    : SLine(s)
       {
-      setOffsetType(OFFSET_SPATIUM);
-      setYoff(8.0);
       setLen(spatium() * 7);   // for use in palettes
       _veloChange = 10;
       _dynType    = DYNAMIC_PART;
+      _yoffset    = 8.0;
       }
 
 //---------------------------------------------------------
@@ -152,7 +151,7 @@ Hairpin::Hairpin(Score* s)
 
 void Hairpin::layout()
       {
-      Element::layout();
+      setPos(0.0, spatium() * _yoffset);
       SLine::layout();
       }
 

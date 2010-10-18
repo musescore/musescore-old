@@ -189,12 +189,12 @@ void Marker::layout()
             case MARKER_CODA:
             case MARKER_VARCODA:
             case MARKER_CODETTA:
-                  _reloff.rx() = 0.0;           // move to start of measure
+                  reloff().rx() = 0.0;           // move to start of measure
                   break;
 
             case MARKER_FINE:
             case MARKER_TOCODA:
-                  _reloff.rx() = 100.0;         // move to end of measure
+                  reloff().rx() = 100.0;         // move to end of measure
                   break;
 
             case MARKER_USER:

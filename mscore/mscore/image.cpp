@@ -304,7 +304,7 @@ void RasterImage::setPath(const QString& s)
       else
             doc.load(path());
       if (!doc.isNull()) {
-            sz = doc.size() * 0.4 * DPI / PDPI;
+            sz = doc.size() * 0.4;
             _dirty = true;
             }
       }

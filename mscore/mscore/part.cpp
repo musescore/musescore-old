@@ -37,10 +37,10 @@
 Part::Part(Score* s)
       {
       _instr = new Instrument;
-      _longName  = new TextC(s);
+      _longName  = new Text(s);
       _longName->setSubtype(TEXT_INSTRUMENT_LONG);
       _longName->setTextStyle(TEXT_STYLE_INSTRUMENT_LONG);
-      _shortName = new TextC(s);
+      _shortName = new Text(s);
       _shortName->setSubtype(TEXT_INSTRUMENT_SHORT);
       _shortName->setTextStyle(TEXT_STYLE_INSTRUMENT_SHORT);
       _score = s;
@@ -199,7 +199,7 @@ void Part::setLongNameHtml(const QString& s)
 
 void Part::setLongName(const QTextDocument& s)
       {
-      _longName->setDoc(s);
+//TODOxx      _longName->setDoc(s);
       }
 
 //---------------------------------------------------------
@@ -223,7 +223,7 @@ void Part::setShortNameHtml(const QString& s)
 
 void Part::setShortName(const QTextDocument& s)
       {
-      _shortName->setDoc(s);
+//TODOxx      _shortName->setDoc(s);
       }
 
 //---------------------------------------------------------

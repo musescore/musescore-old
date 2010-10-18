@@ -37,8 +37,8 @@ class InstrumentTemplate;
 class Part {
       Score* _score;
       Instrument* _instr;
-      TextC* _longName;
-      TextC* _shortName;
+      Text* _longName;
+      Text* _shortName;
       QList<Staff*> _staves;
       QString _id;                  ///< used for MusicXml import
       bool _show;                   ///< show part in partitur if true
@@ -60,8 +60,8 @@ class Part {
       QString shortNameHtml() const;
       QString longNameHtml()  const;
 
-      TextC* longName()                         { return _longName; }
-      TextC* shortName()                        { return _shortName; }
+      Text* longName()                         { return _longName; }
+      Text* shortName()                        { return _shortName; }
       void setLongName(const QString& s);
       void setLongNameEncoded(const QString& s);
       void setShortNameEncoded(const QString& s);

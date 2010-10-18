@@ -1340,30 +1340,9 @@ bool Score::read(QDomElement dScore)
                   }
             else if (tag == "page-layout")
                   pageFormat()->read(ee);
-            else if (tag == "rights") {   // obsolete
-#if 0 // TODO: compatibility
-                  if (rights == 0) {
-                        rights = new TextC(this);
-                        rights->setSubtype(TEXT_COPYRIGHT);
-                        rights->setTextStyle(TEXT_STYLE_COPYRIGHT);
-                        }
-                  if (mscVersion() <= 103)
-                        rights->setHtml(val);
-                  else
-                        rights->setHtml(Xml::htmlToString(ee.firstChildElement()));
-#endif
-                  }
-            else if (tag == "copyright") {
-#if 0 // TODO: compatibility
-                  if (rights == 0) {
-                        rights = new TextC(this);
-                        rights->setSubtype(TEXT_COPYRIGHT);
-                        rights->setTextStyle(TEXT_STYLE_COPYRIGHT);
-                        rights->read(ee);
-                        }
-#endif
-                  }
-            else if (tag == "movement-number")              // obsolete, replaced with <metaTag>
+            else if (tag == "copyright" || tag == "rights")
+                  setMetaTag("copyright", val);
+            else if (tag == "movement-number")
                   setMetaTag("movementNumber", val);
             else if (tag == "movement-title")
                   setMetaTag("movementTitle", val);
@@ -1373,6 +1352,10 @@ bool Score::read(QDomElement dScore)
                   setMetaTag("workTitle", val);
             else if (tag == "source")
                   setMetaTag("source", val);
+            else if (tag == "metaTag") {
+                  QString name = ee.attribute("name");
+                  setMetaTag(name, val);
+                  }
             else if (tag == "Part") {
                   Part* part = new Part(this);
                   part->read(ee);

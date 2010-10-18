@@ -245,9 +245,9 @@ Element::Element(Score* s) :
    _color(preferences.defaultColor),
    _mag(1.0),
    _score(s),
-   _align(ALIGN_LEFT | ALIGN_TOP),
-   _xoff(0), _yoff(0),
-   _offsetType(OFFSET_SPATIUM),
+//   _align(ALIGN_LEFT | ALIGN_TOP),
+//   _xoff(0), _yoff(0),
+//   _offsetType(OFFSET_SPATIUM),
    _mxmlOff(0),
    itemDiscovered(0)
       {
@@ -266,12 +266,12 @@ Element::Element(const Element& e)
       _mag        = e._mag;
       _score      = e._score;
       _pos        = e._pos;
-      _align      = e._align;
-      _xoff       = e._xoff;
-      _yoff       = e._yoff;
-      _reloff     = e._reloff;
-      _offsetType = e._offsetType;
-      _userOff    = e._userOff;
+//      _align      = e._align;
+//      _xoff       = e._xoff;
+//      _yoff       = e._yoff;
+//      _reloff     = e._reloff;
+//      _offsetType = e._offsetType;
+//    _userOff    = e._userOff;
       _mxmlOff    = e._mxmlOff;
       _readPos    = e._readPos;
       _bbox       = e._bbox;
@@ -434,37 +434,6 @@ bool Element::intersects(const QRectF& rr) const
       r.translate(pos());
 //      return bbox().intersects(r);
       return shape().intersects(r);
-      }
-
-//---------------------------------------------------------
-//   layout
-//    height() and width() should return sensible
-//    values when calling this method
-//---------------------------------------------------------
-
-void Element::layout()
-      {
-      QPointF o(_xoff, _yoff);
-      if (_offsetType == OFFSET_SPATIUM)
-            o *= spatium();
-      else
-            o *= DPI;
-      if (parent())
-            o += QPointF(_reloff.x() * parent()->width() * 0.01, _reloff.y() * parent()->height() * 0.01);
-      double h = height();
-      double w = width();
-      QPointF p;
-      if (_align & ALIGN_BOTTOM)
-            p.setY(-h);
-      else if (_align & ALIGN_VCENTER)
-            p.setY(-(h * .5));
-      else if (_align & ALIGN_BASELINE)
-            p.setY(-baseLine());
-      if (_align & ALIGN_RIGHT)
-            p.setX(-w);
-      else if (_align & ALIGN_HCENTER)
-            p.setX(-(w * .5));
-      setPos(p + o);
       }
 
 //---------------------------------------------------------
@@ -1427,7 +1396,7 @@ bool elementLessThan(const Element* const e1, const Element* const e2)
       {
       return e1->type() > e2->type();
       }
-
+#if 0
 //---------------------------------------------------------
 //   setAlign
 //---------------------------------------------------------
@@ -1436,4 +1405,5 @@ void Element::setAlign(Align val)
       {
       _align = val;
       }
+#endif
 

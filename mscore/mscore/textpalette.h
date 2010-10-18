@@ -23,7 +23,7 @@
 
 #include "ui_textpalette.h"
 
-class TextB;
+class Text;
 
 //---------------------------------------------------------
 //   TextPalette
@@ -32,7 +32,7 @@ class TextB;
 class TextPalette : public QWidget, public Ui::TextPaletteBase {
       Q_OBJECT
 
-      TextB* _textElement;
+      Text* _textElement;
       QPushButton* buttons[256];;
       QButtonGroup* sg;
       int curPage;
@@ -45,8 +45,8 @@ class TextPalette : public QWidget, public Ui::TextPaletteBase {
 
    public:
       TextPalette(QWidget* parent);
-      void setText(TextB* te);
-      TextB* text() { return _textElement; }
+      void setText(Text* te);
+      Text* text() { return _textElement; }
       };
 
 //---------------------------------------------------------
@@ -56,7 +56,7 @@ class TextPalette : public QWidget, public Ui::TextPaletteBase {
 class TextTools : public QDockWidget {
       Q_OBJECT
 
-      TextB* _textElement;
+      Text* _textElement;
       QTextCharFormat format;
       QTextBlockFormat bformat;
       QDoubleSpinBox* typefaceSize;
@@ -66,6 +66,9 @@ class TextTools : public QDockWidget {
       QAction* typefaceUnderline;
       QAction* leftAlign;
       QAction* centerAlign;
+      QAction* topAlign;
+      QAction* bottomAlign;
+      QAction* vcenterAlign;
       QAction* rightAlign;
       QAction* typefaceSubscript;
       QAction* typefaceSuperscript;
@@ -85,11 +88,14 @@ class TextTools : public QDockWidget {
       void setLeftAlign();
       void setRightAlign();
       void setHCenterAlign();
+      void setTopAlign();
+      void setBottomAlign();
+      void setVCenterAlign();
       void showKeyboardClicked(bool);
 
    public:
       TextTools(QWidget* parent = 0);
-      void setText(TextB* te);
+      void setText(Text* te);
       void setCharFormat(const QTextCharFormat&);
       void setBlockFormat(const QTextBlockFormat&);
       QAction* kbAction() const { return showKeyboard; }

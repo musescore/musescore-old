@@ -36,6 +36,7 @@ MetaEditDialog::MetaEditDialog(Score* s, QWidget* parent)
       workNumber->setText(score->metaTag("workNumber"));
       workTitle->setText(score->metaTag("workTitle"));
       source->setText(score->metaTag("source"));
+      copyright->setText(score->metaTag("copyright"));
       }
 
 //---------------------------------------------------------
@@ -49,6 +50,7 @@ void MetaEditDialog::accept()
       score->setMetaTag("workNumber", workNumber->text());
       score->setMetaTag("workTitle", workTitle->text());
       score->setMetaTag("source", source->text());
+      score->setMetaTag("copyright", copyright->text());
       score->setDirty(true);
       QDialog::accept();
       }

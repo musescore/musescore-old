@@ -46,7 +46,6 @@ Rest::Rest(Score* s)
   : ChordRest(s)
       {
       setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
-      setOffsetType(OFFSET_SPATIUM);
       _beamMode  = BEAM_NO;
       dotline    = -1;
       _sym       = rest4Sym;
@@ -58,7 +57,6 @@ Rest::Rest(Score* s, const Duration& d)
       setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
       _beamMode  = BEAM_NO;
       dotline    = -1;
-      setOffsetType(OFFSET_SPATIUM);
       _sym       = rest4Sym;
       setDurationType(d);
       if (d.fraction().isValid())
@@ -233,7 +231,6 @@ Element* Rest::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Eleme
                   StaffText* s = static_cast<StaffText*>(e);
                   s->setTrack((track() / VOICES) * VOICES);
                   s->setSystemFlag(false);
-//                  s->setSubtype(STAFF_TEXT);
                   s->setParent(segment());
                   score()->undoAddElement(s);
                   score()->setLayoutAll(true);
@@ -346,8 +343,8 @@ void Rest::layout()
                   dotline = -1;
                   break;
             }
-
-      int line       = lrint(userOff().y() / spatium());
+      double _spatium = spatium();
+      int line       = lrint(userOff().y() / _spatium);
       int lineOffset = 0;
       if (measure()->mstaff(staffIdx())->hasVoices) {
             // move rests in a multi voice context
@@ -397,7 +394,7 @@ void Rest::layout()
       _sym = getSymbol(durationType().type(), line + lineOffset/2, &yo);
       setYoff(double(yo) + double(lineOffset) * .5);
       layoutArticulations();
-      Element::layout();
+      setPos(0.0, yoff() * _spatium);
 
       Spatium rs;
       if (dots()) {
@@ -416,9 +413,10 @@ QRectF Rest::bbox() const
       {
       Segment* s = segment();
       if (s && s->measure() && s->measure()->multiMeasure()) {
-            double h = spatium() * 6.5;
+            double _spatium = spatium();
+            double h = _spatium * 6.5;
             double w = point(score()->styleS(ST_minMMRestWidth));
-            return QRectF(-w * .5, -h + 2 * spatium(), w, h);
+            return QRectF(-w * .5, -h + 2 * _spatium, w, h);
             }
       return symbols[score()->symIdx()][_sym].bbox(magS());
       }

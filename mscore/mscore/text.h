@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2002-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -24,6 +24,7 @@
 #include "globals.h"
 #include "element.h"
 #include "style.h"
+#include "elementlayout.h"
 
 class TextPalette;
 class ScoreView;
@@ -34,140 +35,111 @@ struct SymCode;
 extern TextPalette* palette;
 
 enum {
-      TEXT_UNKNOWN = 0, TEXT_TITLE, TEXT_SUBTITLE, TEXT_COMPOSER, TEXT_POET,
-      TEXT_TRANSLATOR, TEXT_MEASURE_NUMBER,
-      TEXT_PAGE_NUMBER_ODD, TEXT_PAGE_NUMBER_EVEN,
-      TEXT_COPYRIGHT, TEXT_FINGERING,
+      TEXT_UNKNOWN = 0,
+      TEXT_TITLE,
+      TEXT_SUBTITLE,
+      TEXT_COMPOSER,
+      TEXT_POET,
+      TEXT_TRANSLATOR,
+      TEXT_MEASURE_NUMBER,
+      TEXT_FINGERING,
       TEXT_INSTRUMENT_LONG,
       TEXT_INSTRUMENT_SHORT,
       TEXT_INSTRUMENT_EXCERPT,
-      TEXT_TEMPO, TEXT_LYRIC, TEXT_TUPLET, TEXT_SYSTEM,
-      TEXT_STAFF, TEXT_CHORD, TEXT_REHEARSAL_MARK,
-      TEXT_REPEAT, TEXT_VOLTA, TEXT_FRAME, TEXT_TEXTLINE,
+      TEXT_TEMPO,
+      TEXT_LYRIC,
+      TEXT_TUPLET,
+      TEXT_SYSTEM,
+      TEXT_STAFF,
+      TEXT_CHORD,
+      TEXT_REHEARSAL_MARK,
+      TEXT_REPEAT,
+      TEXT_VOLTA,
+      TEXT_FRAME,
+      TEXT_TEXTLINE,
       TEXT_STRING_NUMBER,
       TEXT_HEADER,
       TEXT_FOOTER
       };
 
 //---------------------------------------------------------
-//   TextBase
+//   Text
 //---------------------------------------------------------
 
-class TextBase {
-      int _refCount;
+class Text : public Element {
       QTextDocument* _doc;
-      double _frameWidth;                 // unit: mm
-      double _paddingWidth;               // unit: mm
-      QColor _frameColor;
-      int _frameRound;
-      bool _circle;
-      bool _hasFrame;
-      double _sp;
+      QRectF frame;           // set by layout()
+      bool _styled;
 
-      QRectF frame;
-      QRectF _bbox;
+      Q_DECLARE_TR_FUNCTIONS(Text)
 
-   public:
-      TextBase();
-      ~TextBase();
-      TextBase(const TextBase&);
-
-      int refCount() const                  { return _refCount; }
-      void incRefCount()                    { ++_refCount; }
-      void decRefCount()                    { --_refCount; }
-
-      void setDoc(const QTextDocument& d);
-      QTextDocument* swapDoc(QTextDocument* d);
-
-      QTextDocument* doc() const            { return _doc;          }
-      bool hasFrame() const                 { return _hasFrame;     }
-      void setHasFrame(bool val)            { _hasFrame = val;      }
-      double frameWidth() const             { return _frameWidth;   }
-      double paddingWidth() const           { return _paddingWidth; }
-      QColor frameColor() const             { return _frameColor;   }
-      int frameRound() const                { return _frameRound;   }
-      bool circle() const                   { return _circle;       }
-      void setFrameWidth(double v)          { _frameWidth = v;      }
-      void setPaddingWidth(double v)        { _paddingWidth = v;    }
-      void setFrameColor(const QColor& v)   { _frameColor = v;      }
-      void setFrameRound(int v)             { _frameRound = v;      }
-      void setCircle(bool v)                { _circle = v;          }
-
-      void writeProperties(Xml&, bool styled, const TextStyle*, bool writeText) const;
-      bool readProperties(QDomElement e);
-      QFont defaultFont() const;
-      void setDefaultFont(QFont f);
-      void clear()                          { _doc->clear();              }
-      void layout(double w);
-      QRectF bbox() const                   { return _bbox; }
-      void draw(QPainter&, QTextCursor*) const;
-      void setText(const QString&, Align);
-      QString getText() const;
-      QString getHtml() const;
-      void setHtml(const QString& s);
-      bool isEmpty() const                  { return _doc->isEmpty(); }
-      void setModified(bool v)              { _doc->setModified(v);   }
-      void scale(double, double);
-      };
-
-//---------------------------------------------------------
-//   TextB
-//---------------------------------------------------------
-
-class TextB : public Element {
    protected:
-      bool _sizeIsSpatiumDependent;       // font size depends on _spatium unit
       bool _editMode;
       QTextCursor* cursor;
       bool setCursor(const QPointF& p, QTextCursor::MoveMode mm = QTextCursor::MoveAnchor);
       int cursorPos;
-      TextStyleType _textStyle;
-      bool _styled;
+
+      TextStyle  _localStyle;       // use this properties if _styled is false
+      TextStyleType _textStyle;     // text style to use if _styled is true
       bool _layoutToParentWidth;
 
    public:
-      TextB(Score*);
-      TextB(const TextB&);
+      Text(Score*);
+      Text(const Text&);
+      ~Text();
 
-      TextB &operator=(const TextB&);
-
-      virtual ElementType type() const        { return TEXT; }
+      Text &operator=(const Text&);
+      virtual Text* clone() const         { return new Text(*this); }
+      virtual ElementType type() const    { return TEXT; }
 
       virtual const QString subtypeName() const;
       virtual void setSubtype(const QString& s);
       virtual void setSubtype(int val)      { Element::setSubtype(val);    }
 
-      virtual TextBase* textBase() const = 0;
-      void clear()                          { textBase()->clear();          }
-      void setText(const QString& s)        { textBase()->setText(s, _align); }
-      QString getText() const               { return textBase()->getText(); }
-      QString getHtml() const               { return textBase()->getHtml(); }
-      void setHtml(const QString& s)        { textBase()->setHtml(s);       }
-      void setDoc(const QTextDocument&);
-      QTextDocument* swapDoc(QTextDocument* d);
-      QTextDocument* doc() const            { return textBase()->doc(); }
+      void setText(const QString& s);
+      QString getText() const;
+      QString getHtml() const;
+      void setHtml(const QString& s);
+      QTextDocument* doc() const            { return _doc; }
 
       virtual void resetMode();
-      virtual bool isEmpty() const;
 
-      double frameWidth() const             { return textBase()->frameWidth();   }
-      double paddingWidth() const           { return textBase()->paddingWidth(); }
-      QColor frameColor() const             { return textBase()->frameColor();   }
-      int frameRound() const                { return textBase()->frameRound();   }
-      bool circle() const                   { return textBase()->circle();       }
-
-      bool sizeIsSpatiumDependent() const   { return _sizeIsSpatiumDependent;    }
-      void setSizeIsSpatiumDependent(int v) { _sizeIsSpatiumDependent = v;       }
-
-      void setFrameWidth(double val)        { textBase()->setFrameWidth(val);    }
-      void setPaddingWidth(double val)      { textBase()->setPaddingWidth(val);  }
-      void setFrameColor(const QColor& val) { textBase()->setFrameColor(val);    }
-      void setFrameRound(int val)           { textBase()->setFrameRound(val);    }
-      void setCircle(bool val)              { textBase()->setCircle(val);        }
+      double frameWidth() const;
+      double paddingWidth() const;
+      QColor frameColor() const;
+      int frameRound() const;
+      bool circle() const;
+      bool sizeIsSpatiumDependent() const;
+      void setSizeIsSpatiumDependent(int v);
+      void setFrameWidth(double val);
+      void setPaddingWidth(double val);
+      void setFrameColor(const QColor& val);
+      void setFrameRound(int val);
+      void setCircle(bool val);
+      bool hasFrame() const;
+      void setHasFrame(bool);
+      double xoff() const;
+      double yoff() const;
+      Align align() const;
+      OffsetType offsetType() const;
+      QPointF reloff() const;
+      void setAlign(Align val);
+      void setXoff(double val);
+      void setYoff(double val);
+      void setOffsetType(OffsetType val);
+      void setRxoff(double v);
+      void setRyoff(double v);
+      double rxoff() const;
+      double ryoff() const;
+      void setReloff(const QPointF&);
+      QFont font() const;
+      void setFont(const QFont&);
+      void setItalic(bool);
+      void setBold(bool);
+      void setSize(double);
 
       virtual void draw(QPainter&, ScoreView*) const;
 
-      virtual bool isEditable() const;
       virtual void startEdit(ScoreView*, const QPointF&);
       virtual bool edit(ScoreView*, int grip, int key, Qt::KeyboardModifiers, const QString&);
       virtual void endEdit();
@@ -190,9 +162,6 @@ class TextB : public Element {
 
       virtual QLineF dragAnchor() const;
 
-      QFont defaultFont() const    { return textBase()->defaultFont(); }
-      void setDefaultFont(QFont f) { textBase()->setDefaultFont(f);    }
-
       void setAbove(bool val);
       virtual qreal baseLine() const;
       virtual void paste();
@@ -202,7 +171,12 @@ class TextB : public Element {
 
       virtual void spatiumChanged(double oldValue, double newValue);
       virtual void setTextStyle(TextStyleType);
-      TextStyleType textStyle() const                 { return _textStyle; }
+      TextStyleType textStyle() const        { return _textStyle; }
+      const TextStyle& style() const;
+      const TextStyle& localStyle() const    { return _localStyle; }
+      TextStyle& localStyle()                { return _localStyle; }
+      void setLocalStyle(const TextStyle& s) { _localStyle = s; }
+
       void dragTo(const QPointF&p);
       bool editMode() const { return _editMode; }
 
@@ -213,42 +187,12 @@ class TextB : public Element {
       void setLayoutToParentWidth(bool v) { _layoutToParentWidth = v;   }
       bool styled() const                 { return _styled; }
       void setStyled(bool v)              { _styled = v; }
-      };
 
-//---------------------------------------------------------
-//   class Text
-//---------------------------------------------------------
-
-class Text : public TextB {
-      Q_DECLARE_TR_FUNCTIONS(Text)
-
-      TextBase* _tb;
-
-   public:
-      Text(Score*);
-      Text(const Text&);
-      ~Text();
-      virtual Text* clone() const         { return new Text(*this); }
-      virtual TextBase* textBase() const  { return _tb; }
-      void setModified(bool v)            { _tb->setModified(v); }
-      };
-
-//---------------------------------------------------------
-//   class Text
-//    shared text, used for coypright and instrument names
-//---------------------------------------------------------
-
-class TextC : public TextB {
-      TextBase*  _tb;
-
-   public:
-      TextC(Score*);
-      TextC(const TextC&);
-      ~TextC();
-      virtual TextC* clone() const;
-      virtual TextBase* textBase() const { return _tb; }
-      void baseChanged();
-      void changeBase(TextBase* b);
+      bool isEmpty() const                { return _doc->isEmpty(); }
+      void setModified(bool v)            { _doc->setModified(v);   }
+      void clear()                        { _doc->clear();          }
+      QRectF pageRectangle() const;
+      void restyle();
       };
 
 //---------------------------------------------------------
@@ -258,14 +202,14 @@ class TextC : public TextB {
 class TextProperties : public QDialog {
       Q_OBJECT
       TextProp* tp;
-      TextB* tb;
+      Text* text;
       QCheckBox* cb;
 
    private slots:
       virtual void accept();
 
    public:
-      TextProperties(TextB*, QWidget* parent = 0);
+      TextProperties(Text*, QWidget* parent = 0);
       bool applyToAll() const { return cb->isChecked(); }
       };
 

@@ -25,6 +25,7 @@
 #include "score.h"
 #include "articulation.h"
 #include "harmony.h"
+#include "preferences.h"
 
 Style* style;
 //  20 points        font design size
@@ -227,22 +228,24 @@ static const QString ff("FreeSerif");
 
 //---------------------------------------------------------
 //   setDefaultStyle
+//    synchronize with TextStyleType
 //---------------------------------------------------------
 
 void setDefaultStyle()
       {
       defaultStyle = new Style;
 
-      AS(TextStyle(TR("Title"), ff, 24, false, false, false, ALIGN_HCENTER | ALIGN_TOP, 0, 0, OA, 50, 0));
+      AS(TextStyle(TR("Title"), ff, 24, false, false, false,
+         ALIGN_HCENTER | ALIGN_TOP));
 
-      AS(TextStyle(TR( "Subtitle"), ff, 14, false, false, false,
-         ALIGN_HCENTER | ALIGN_TOP, 0, MM(10), OA, 50, 0));
+      AS(TextStyle(TR("Subtitle"), ff, 14, false, false, false,
+         ALIGN_HCENTER | ALIGN_TOP, 0, MM(10), OA));
 
-      AS(TextStyle(TR( "Composer"), ff, 12, false, false, false,
-         ALIGN_RIGHT | ALIGN_BOTTOM, 0, 0, OA, 100, 100));
+      AS(TextStyle(TR("Composer"), ff, 12, false, false, false,
+         ALIGN_RIGHT | ALIGN_BOTTOM));
 
-      AS(TextStyle(TR( "Poet"), ff, 12, false, false, false,
-         ALIGN_LEFT | ALIGN_BOTTOM, 0, 0, OA, 0, 100));
+      AS(TextStyle(TR("Poet"), ff, 12, false, false, false,
+         ALIGN_LEFT | ALIGN_BOTTOM));
 
       AS(TextStyle(TR( "Lyrics odd lines"), ff, 11, false, false, false,
          ALIGN_HCENTER | ALIGN_TOP, 0, 7, OS, 0.0, 0.0, true));
@@ -274,18 +277,9 @@ void setDefaultStyle()
 
       AS(TextStyle(TR( "Metronome"), ff, 12, true, false, false, ALIGN_LEFT));
 
-      AS(TextStyle(TR( "Copyright"), ff, 8, false, false, false,
-         ALIGN_HCENTER | ALIGN_TOP, 0, MM(-15), OA, 50.0, 100.0));
-
       AS(TextStyle(TR( "Measure Number"), ff, 8, false, false, false,
-         ALIGN_CENTER | ALIGN_BOTTOM, 0.0, 0.0, OS, 0.0, 0.0, true));
-#if 0
-      AS(TextStyle(TR( "Page Number Odd"), ff, 12, false, false, false,
-         ALIGN_RIGHT | ALIGN_BASELINE, MM(-10), MM(-10), OA, 100.0, 100.0));
+         ALIGN_CENTER | ALIGN_BOTTOM, -1, 0.0, OS, 0.0, 0.0, true));
 
-      AS(TextStyle(TR( "Page Number Even"), ff, 12, false, false, false,
-         ALIGN_LEFT | ALIGN_BASELINE, MM(10), MM(-10), OA, 0.0, 100.0));
-#endif
       AS(TextStyle(TR( "Translator"), ff, 11, false, false, false,
          ALIGN_HCENTER | ALIGN_TOP, 0, 6));
 
@@ -335,7 +329,7 @@ void setDefaultStyle()
          ALIGN_HCENTER | ALIGN_TOP, 0, MM(-15), OA, 50.0, 0.0));
 
       AS(TextStyle(TR( "Footer"), ff, 8, false, false, false,
-         ALIGN_HCENTER | ALIGN_TOP, 0, MM(-15), OA, 50.0, 100.0));
+         ALIGN_HCENTER | ALIGN_BOTTOM, MM(-10), MM(-15), OA));
 
 #undef MM
 #undef OA
@@ -584,7 +578,7 @@ TextStyle::TextStyle()
       }
 
 TextStyle::TextStyle(
-   QString _name, QString _family, int _size,
+   QString _name, QString _family, double _size,
    bool _bold, bool _italic, bool _underline,
    Align _align,
    double _xoff, double _yoff, OffsetType _ot, double _rxoff, double _ryoff,
@@ -614,19 +608,37 @@ TextStyle& TextStyle::operator=(const TextStyle& s)
 //   TextStyleData
 //---------------------------------------------------------
 
+TextStyleData::TextStyleData()
+      {
+      name                   = "default";
+      family                 = "FreeSerif";
+      double size            = 10.0;
+      bold                   = false;
+      italic                 = false;
+      underline              = false;
+      hasFrame               = false;
+      sizeIsSpatiumDependent = true;
+      frameWidth             = 0.35;
+      paddingWidth           = 0.0;
+      frameRound             = 25;
+      frameColor             = preferences.defaultColor;
+      circle                 = false;
+      systemFlag             = false;
+      foregroundColor        = Qt::black;
+      }
+
 TextStyleData::TextStyleData(
-   QString _name, QString _family, int _size,
+   QString _name, QString _family, double _size,
    bool _bold, bool _italic, bool _underline,
    Align _align,
    double _xoff, double _yoff, OffsetType _ot, double _rxoff, double _ryoff,
    bool sd,
    double fw, double pw, int fr, QColor co, bool _circle, bool _systemFlag,
    QColor fg)
-
-   : name(_name), size(_size), bold(_bold),
+   :
+   ElementLayout(_align, _xoff, _yoff, _ot, _rxoff, _ryoff),
+   name(_name), size(_size), bold(_bold),
    italic(_italic), underline(_underline),
-   align(_align),
-   xoff(_xoff), yoff(_yoff), offsetType(_ot), rxoff(_rxoff), ryoff(_ryoff),
    sizeIsSpatiumDependent(sd), frameWidth(fw), paddingWidth(pw),
    frameRound(fr), frameColor(co), circle(_circle), systemFlag(_systemFlag),
    foregroundColor(fg)
@@ -647,12 +659,12 @@ bool TextStyleData::operator!=(const TextStyleData& s) const
           || s.bold                   != bold
           || s.italic                 != italic
           || s.underline              != underline
-          || s.align                  != align
-          || s.xoff                   != xoff
-          || s.yoff                   != yoff
-          || s.rxoff                  != rxoff
-          || s.ryoff                  != ryoff
-          || s.offsetType             != offsetType
+          || s.align()                != align()
+          || s.xoff()                 != xoff()
+          || s.yoff()                 != yoff()
+          || s.rxoff()                != rxoff()
+          || s.ryoff()                != ryoff()
+          || s.offsetType()           != offsetType()
           || s.sizeIsSpatiumDependent != sizeIsSpatiumDependent
           || s.frameWidth             != frameWidth
           || s.paddingWidth           != paddingWidth
@@ -710,25 +722,36 @@ QFont TextStyleData::fontPx(double _spatium) const
 void TextStyleData::write(Xml& xml) const
       {
       xml.stag(QString("TextStyle name=\"%1\"").arg(name));
+      writeProperties(xml);
+      xml.etag();
+      }
+
+//---------------------------------------------------------
+//   writeProperties
+//---------------------------------------------------------
+
+void TextStyleData::writeProperties(Xml& xml) const
+      {
+      ElementLayout::writeProperties(xml);
       xml.tag("family", family);
       xml.tag("size", size);
       xml.tag("bold", bold);
       xml.tag("italic", italic);
       xml.tag("underline", underline);
-      xml.tag("align", int(align));
-      xml.tag("offsetType", offsetType);
+      xml.tag("align", int(align()));
+      xml.tag("offsetType", offsetType());
       xml.tag("sizeIsSpatiumDependent", sizeIsSpatiumDependent);
       xml.tag("foregroundColor", foregroundColor);
-      if (offsetType == OFFSET_ABS) {
-            xml.tag("xoffset", xoff * INCH);
-            xml.tag("yoffset", yoff * INCH);
+      if (offsetType() == OFFSET_ABS) {
+            xml.tag("xoffset", xoff() * INCH);
+            xml.tag("yoffset", yoff() * INCH);
             }
       else {
-            xml.tag("xoffset", xoff);
-            xml.tag("yoffset", yoff);
+            xml.tag("xoffset", xoff());
+            xml.tag("yoffset", yoff());
             }
-      xml.tag("rxoffset", rxoff);
-      xml.tag("ryoffset", ryoff);
+      xml.tag("rxoffset", rxoff());
+      xml.tag("ryoffset", ryoff());
       if (hasFrame) {
             xml.tag("frameWidth", frameWidth);
             xml.tag("paddingWidth", paddingWidth);
@@ -739,7 +762,6 @@ void TextStyleData::write(Xml& xml) const
             }
       if (systemFlag)
             xml.tag("systemFlag", systemFlag);
-      xml.etag();
       }
 
 //---------------------------------------------------------
@@ -752,59 +774,62 @@ void TextStyleData::read(QDomElement e)
       name = e.attribute("name");
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            QString val(e.text());
-            int i = val.toInt();
-
-            if (tag == "family")
-                  family = val;
-            else if (tag == "size")
-                  size = i;
-            else if (tag == "bold")
-                  bold = i;
-            else if (tag == "italic")
-                  italic = i;
-            else if (tag == "underline")
-                  underline = i;
-            else if (tag == "align")
-                  align = Align(i);
-            else if (tag == "anchor")     // obsolete
-                  ;
-            else if (tag == "xoffset")
-                  xoff = val.toDouble();
-            else if (tag == "yoffset")
-                  yoff = val.toDouble();
-            else if (tag == "rxoffset")
-                  rxoff = val.toDouble();
-            else if (tag == "ryoffset")
-                  ryoff = val.toDouble();
-            else if (tag == "offsetType")
-                  offsetType = (OffsetType)i;
-            else if (tag == "sizeIsSpatiumDependent")
-                  sizeIsSpatiumDependent = val.toDouble();
-            else if (tag == "frameWidth") {
-                  frameWidth = val.toDouble();
-                  hasFrame = frameWidth != 0.0;
-                  }
-            else if (tag == "paddingWidth")
-                  paddingWidth = val.toDouble();
-            else if (tag == "frameRound")
-                  frameRound = i;
-            else if (tag == "frameColor")
-                  frameColor = readColor(e);
-            else if (tag == "foregroundColor")
-                  foregroundColor = readColor(e);
-            else if (tag == "circle")
-                  circle = val.toInt();
-            else if (tag == "systemFlag")
-                  systemFlag = val.toInt();
-            else
+            if (!readProperties(e))
                   domError(e);
             }
-      if (offsetType == OFFSET_ABS) {
-            xoff /= INCH;
-            yoff /= INCH;
+      if (offsetType() == OFFSET_ABS) {
+            setXoff(xoff() / INCH);
+            setYoff(yoff() / INCH);
             }
+      }
+
+//---------------------------------------------------------
+//   readProperties
+//---------------------------------------------------------
+
+bool TextStyleData::readProperties(QDomElement e)
+      {
+      QString tag(e.tagName());
+      QString val(e.text());
+      int i = val.toInt();
+
+      if (tag == "family")
+            family = val;
+      else if (tag == "size")
+            size = val.toDouble();
+      else if (tag == "bold")
+            bold = i;
+      else if (tag == "italic")
+            italic = i;
+      else if (tag == "underline")
+            underline = i;
+      else if (tag == "align")
+            setAlign(Align(i));
+      else if (tag == "anchor")     // obsolete
+            ;
+      else if (ElementLayout::readProperties(e))
+            ;
+      else if (tag == "sizeIsSpatiumDependent")
+            sizeIsSpatiumDependent = val.toDouble();
+      else if (tag == "frameWidth") {
+            frameWidth = val.toDouble();
+            hasFrame = frameWidth != 0.0;
+            }
+      else if (tag == "paddingWidth")
+            paddingWidth = val.toDouble();
+      else if (tag == "frameRound")
+            frameRound = i;
+      else if (tag == "frameColor")
+            frameColor = readColor(e);
+      else if (tag == "foregroundColor")
+            foregroundColor = readColor(e);
+      else if (tag == "circle")
+            circle = val.toInt();
+      else if (tag == "systemFlag")
+            systemFlag = val.toInt();
+      else
+            return false;
+      return true;
       }
 
 //---------------------------------------------------------
@@ -1011,29 +1036,6 @@ StyleVal::StyleVal(const QString& name, const QString& val)
       }
 
 //---------------------------------------------------------
-//   Style
-//---------------------------------------------------------
-
-Style::Style()
-      {
-      d = new StyleData;
-      }
-
-Style::Style(const Style& s)
-   : d(s.d)
-      {
-      }
-
-//---------------------------------------------------------
-//   set
-//---------------------------------------------------------
-
-void Style::set(const StyleVal& v)
-      {
-      d->_values[v.getIdx()] = v;
-      }
-
-//---------------------------------------------------------
 //   value
 //---------------------------------------------------------
 
@@ -1105,78 +1107,79 @@ void StyleData::setTextStyle(const TextStyle& ts)
             printf("StyleData::setTextStyle(): TextStyle <%s> not found\n", qPrintable(ts.name()));
       }
 
-QString TextStyle::name() const                              { return d->name; }
-QString TextStyle::family() const                            { return d->family; }
-int TextStyle::size() const                                  { return d->size; }
-bool TextStyle::bold() const                                 { return d->bold; }
-bool TextStyle::italic() const                               { return d->italic; }
-bool TextStyle::underline() const                            { return d->underline; }
-bool TextStyle::hasFrame() const                             { return d->hasFrame; }
-Align TextStyle::align() const                               { return d->align; }
-double TextStyle::xoff() const                               { return d->xoff; }
-double TextStyle::yoff() const                               { return d->yoff; }
-OffsetType TextStyle::offsetType() const                     { return d->offsetType; }
-double TextStyle::rxoff() const                              { return d->rxoff; }
-double TextStyle::ryoff() const                              { return d->ryoff; }
-bool TextStyle::sizeIsSpatiumDependent() const               { return d->sizeIsSpatiumDependent; }
-double TextStyle::frameWidth()  const                        { return d->frameWidth; }
-double TextStyle::paddingWidth() const                       { return d->paddingWidth; }
-int TextStyle::frameRound() const                            { return d->frameRound; }
-QColor TextStyle::frameColor() const                         { return d->frameColor; }
-bool TextStyle::circle() const                               { return d->circle;     }
-bool TextStyle::systemFlag() const                           { return d->systemFlag; }
-QColor TextStyle::foregroundColor() const                    { return d->foregroundColor; }
-void TextStyle::setName(const QString& s)                    { d->name = s; }
-void TextStyle::setFamily(const QString& s)                  { d->family = s; }
-void TextStyle::setSize(int v)                               { d->size = v; }
-void TextStyle::setBold(bool v)                              { d->bold = v; }
-void TextStyle::setItalic(bool v)                            { d->italic = v; }
-void TextStyle::setUnderline(bool v)                         { d->underline = v; }
-void TextStyle::setHasFrame(bool v)                          { d->hasFrame = v; }
-void TextStyle::setAlign(Align v)                            { d->align = v; }
-void TextStyle::setXoff(double v)                            { d->xoff = v; }
-void TextStyle::setYoff(double v)                            { d->yoff = v; }
-void TextStyle::setOffsetType(OffsetType v)                  { d->offsetType = v; }
-void TextStyle::setRxoff(double v)                           { d->rxoff = v; }
-void TextStyle::setRyoff(double v)                           { d->ryoff = v; }
-void TextStyle::setSizeIsSpatiumDependent(bool v)            { d->sizeIsSpatiumDependent = v; }
-void TextStyle::setFrameWidth(double v)                      { d->frameWidth = v; }
-void TextStyle::setPaddingWidth(double v)                    { d->paddingWidth = v; }
-void TextStyle::setFrameRound(int v)                         { d->frameRound = v; }
-void TextStyle::setFrameColor(const QColor& v)               { d->frameColor = v; }
-void TextStyle::setCircle(bool v)                            { d->circle = v;     }
-void TextStyle::setSystemFlag(bool v)                        { d->systemFlag = v; }
-void TextStyle::setForegroundColor(const QColor& v)          { d->foregroundColor = v; }
-void TextStyle::write(Xml& xml) const                        { d->write(xml); }
-void TextStyle::read(QDomElement v)                          { d->read(v); }
-QFont TextStyle::font(double space) const                    { return d->font(space); }
-QFont TextStyle::fontPx(double spatium) const                { return d->fontPx(spatium); }
-QRectF TextStyle::bbox(double space, const QString& s) const { return d->bbox(space, s); }
-QFontMetricsF TextStyle::fontMetrics(double space) const     { return fontMetrics(space); }
-bool TextStyle::operator!=(const TextStyle& s) const         { return d != s.d; }
+QString TextStyle::name() const                           { return d->name; }
+QString TextStyle::family() const                         { return d->family; }
+double TextStyle::size() const                            { return d->size; }
+bool TextStyle::bold() const                              { return d->bold; }
+bool TextStyle::italic() const                            { return d->italic; }
+bool TextStyle::underline() const                         { return d->underline; }
+bool TextStyle::hasFrame() const                          { return d->hasFrame; }
+Align TextStyle::align() const                            { return d->align(); }
+double TextStyle::xoff() const                            { return d->xoff(); }
+double TextStyle::yoff() const                            { return d->yoff(); }
+OffsetType TextStyle::offsetType() const                  { return d->offsetType(); }
+double TextStyle::rxoff() const                           { return d->rxoff(); }
+double TextStyle::ryoff() const                           { return d->ryoff(); }
+bool TextStyle::sizeIsSpatiumDependent() const            { return d->sizeIsSpatiumDependent; }
+double TextStyle::frameWidth()  const                     { return d->frameWidth; }
+double TextStyle::paddingWidth() const                    { return d->paddingWidth; }
+int TextStyle::frameRound() const                         { return d->frameRound; }
+QColor TextStyle::frameColor() const                      { return d->frameColor; }
+bool TextStyle::circle() const                            { return d->circle;     }
+bool TextStyle::systemFlag() const                        { return d->systemFlag; }
+QColor TextStyle::foregroundColor() const                 { return d->foregroundColor; }
+void TextStyle::setName(const QString& s)                 { d->name = s; }
+void TextStyle::setFamily(const QString& s)               { d->family = s; }
+void TextStyle::setSize(double v)                         { d->size = v; }
+void TextStyle::setBold(bool v)                           { d->bold = v; }
+void TextStyle::setItalic(bool v)                         { d->italic = v; }
+void TextStyle::setUnderline(bool v)                      { d->underline = v; }
+void TextStyle::setHasFrame(bool v)                       { d->hasFrame = v; }
+void TextStyle::setAlign(Align v)                         { d->setAlign(v); }
+void TextStyle::setXoff(double v)                         { d->setXoff(v); }
+void TextStyle::setYoff(double v)                         { d->setYoff(v); }
+void TextStyle::setOffsetType(OffsetType v)               { d->setOffsetType(v); }
+void TextStyle::setRxoff(double v)                        { d->setRxoff(v); }
+void TextStyle::setRyoff(double v)                        { d->setRyoff(v); }
+void TextStyle::setSizeIsSpatiumDependent(bool v)         { d->sizeIsSpatiumDependent = v; }
+void TextStyle::setFrameWidth(double v)                   { d->frameWidth = v; }
+void TextStyle::setPaddingWidth(double v)                 { d->paddingWidth = v; }
+void TextStyle::setFrameRound(int v)                      { d->frameRound = v; }
+void TextStyle::setFrameColor(const QColor& v)            { d->frameColor = v; }
+void TextStyle::setCircle(bool v)                         { d->circle = v;     }
+void TextStyle::setSystemFlag(bool v)                     { d->systemFlag = v; }
+void TextStyle::setForegroundColor(const QColor& v)       { d->foregroundColor = v; }
+void TextStyle::write(Xml& xml) const                     { d->write(xml); }
+void TextStyle::read(QDomElement v)                       { d->read(v); }
+QFont TextStyle::font(double space) const                 { return d->font(space); }
+QFont TextStyle::fontPx(double spatium) const             { return d->fontPx(spatium); }
+QRectF TextStyle::bbox(double sp, const QString& s) const { return d->bbox(sp, s); }
+QFontMetricsF TextStyle::fontMetrics(double space) const  { return fontMetrics(space); }
+bool TextStyle::operator!=(const TextStyle& s) const      { return d != s.d; }
+void TextStyle::layout(Element* e) const                  { d->layout(e);    }
+void TextStyle::writeProperties(Xml& xml) const           { d->writeProperties(xml); }
+QPointF TextStyle::reloff() const                         { return QPointF(rxoff(), ryoff()); }
+void TextStyle::setReloff(const QPointF& p)               { setRxoff(p.x()), setRyoff(p.y()); }
+bool TextStyle::readProperties(QDomElement v)             { return d->readProperties(v); }
 
-const TextStyle& Style::textStyle(TextStyleType idx) const   { return d->textStyle(idx); }
-const TextStyle& Style::textStyle(const QString& name) const { return d->textStyle(name); }
-TextStyleType Style::textStyleType(const QString& name) const { return d->textStyleType(name); }
-void Style::setTextStyle(const TextStyle& ts)                { d->setTextStyle(ts); }
-void Style::appendTextStyle(const TextStyle& ts)             { d->_textStyles.append(ts);  }
-const QList<TextStyle>& Style::textStyles() const            { return d->_textStyles; }
-void Style::set(StyleIdx t, Spatium val)                     { set(StyleVal(t, val)); }
-void Style::set(StyleIdx t, const QString& val)              { set(StyleVal(t, val)); }
-void Style::set(StyleIdx t, bool val)                        { set(StyleVal(t, val)); }
-void Style::set(StyleIdx t, double val)                      { set(StyleVal(t, val)); }
-void Style::set(StyleIdx t, int val)                         { set(StyleVal(t, val)); }
-void Style::set(StyleIdx t, Direction val)                   { set(StyleVal(t, val)); }
+void TextStyle::setFont(const QFont& f)
+      {
+      //TODOxx
+      }
 
-Spatium  Style::valueS(StyleIdx idx) const                   { return value(idx).toSpatium(); }
-QString  Style::valueSt(StyleIdx idx) const                  { return value(idx).toString();  }
-bool     Style::valueB(StyleIdx idx) const                   { return value(idx).toBool();    }
-double   Style::valueD(StyleIdx idx) const                   { return value(idx).toDouble();  }
-int      Style::valueI(StyleIdx idx) const                   { return value(idx).toInt();     }
+//---------------------------------------------------------
+//   Style
+//---------------------------------------------------------
 
-bool Style::load(QFile* qf)                                  { return d->load(qf);            }
-void Style::load(QDomElement e)                              { d->load(e);                    }
-void Style::save(Xml& xml, bool optimize)                    { d->save(xml, optimize);        }
+Style::Style()
+      {
+      d = new StyleData;
+      }
+
+Style::Style(const Style& s)
+   : d(s.d)
+      {
+      }
 
 Style::~Style()
       {
@@ -1186,6 +1189,115 @@ Style& Style::operator=(const Style& s)
       {
       d = s.d;
       return *this;
+      }
+
+//---------------------------------------------------------
+//   set
+//---------------------------------------------------------
+
+void Style::set(const StyleVal& v)
+      {
+      d->_values[v.getIdx()] = v;
+      }
+
+const TextStyle& Style::textStyle(TextStyleType idx) const
+      {
+      return d->textStyle(idx);
+      }
+
+const TextStyle& Style::textStyle(const QString& name) const
+      {
+      return d->textStyle(name);
+      }
+
+TextStyleType Style::textStyleType(const QString& name) const
+      {
+      return d->textStyleType(name);
+      }
+
+void Style::setTextStyle(const TextStyle& ts)
+      {
+      d->setTextStyle(ts);
+      }
+
+void Style::appendTextStyle(const TextStyle& ts)
+      {
+      d->_textStyles.append(ts);
+      }
+
+const QList<TextStyle>& Style::textStyles() const
+      {
+      return d->_textStyles;
+      }
+
+void Style::set(StyleIdx t, Spatium val)
+      {
+      set(StyleVal(t, val));
+      }
+
+void Style::set(StyleIdx t, const QString& val)
+      {
+      set(StyleVal(t, val));
+      }
+
+void Style::set(StyleIdx t, bool val)
+      {
+      set(StyleVal(t, val));
+      }
+
+void Style::set(StyleIdx t, double val)
+      {
+      set(StyleVal(t, val));
+      }
+
+void Style::set(StyleIdx t, int val)
+      {
+      set(StyleVal(t, val));
+      }
+
+void Style::set(StyleIdx t, Direction val)
+      {
+      set(StyleVal(t, val));
+      }
+
+Spatium Style::valueS(StyleIdx idx) const
+      {
+      return value(idx).toSpatium();
+      }
+
+QString Style::valueSt(StyleIdx idx) const
+      {
+      return value(idx).toString();
+      }
+
+bool Style::valueB(StyleIdx idx) const
+      {
+      return value(idx).toBool();
+      }
+
+double Style::valueD(StyleIdx idx) const
+      {
+      return value(idx).toDouble();
+      }
+
+int Style::valueI(StyleIdx idx) const
+      {
+      return value(idx).toInt();
+      }
+
+bool Style::load(QFile* qf)
+      {
+      return d->load(qf);
+      }
+
+void Style::load(QDomElement e)
+      {
+      d->load(e);
+      }
+
+void Style::save(Xml& xml, bool optimize)
+      {
+      d->save(xml, optimize);
       }
 
 //---------------------------------------------------------

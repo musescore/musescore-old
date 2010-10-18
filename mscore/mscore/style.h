@@ -27,6 +27,7 @@
 class Xml;
 class ChordDescription;
 class ChordList;
+class Element;
 
 class TextStyleData;
 
@@ -39,7 +40,8 @@ class TextStyle {
 
    public:
       TextStyle();
-      TextStyle(QString _name, QString _family, int _size,
+      TextStyle(QString _name, QString _family,
+         double _size,
          bool _bold, bool _italic, bool _underline,
          Align _align,
          double _xoff = 0, double _yoff = 0, OffsetType _ot = OFFSET_SPATIUM,
@@ -55,7 +57,7 @@ class TextStyle {
 
       QString name() const;
       QString family() const;
-      int size() const;
+      double size() const;
       bool bold() const;
       bool italic() const;
       bool underline() const;
@@ -66,6 +68,8 @@ class TextStyle {
       OffsetType offsetType() const;
       double rxoff() const;
       double ryoff() const;
+      QPointF reloff() const;
+      void setReloff(const QPointF& p);
       bool sizeIsSpatiumDependent() const;
       double frameWidth()  const;
       double paddingWidth() const;
@@ -76,7 +80,7 @@ class TextStyle {
       QColor foregroundColor() const;
       void setName(const QString& s);
       void setFamily(const QString& s);
-      void setSize(int v);
+      void setSize(double v);
       void setBold(bool v);
       void setItalic(bool v);
       void setUnderline(bool v);
@@ -96,12 +100,16 @@ class TextStyle {
       void setSystemFlag(bool v);
       void setForegroundColor(const QColor& v);
       void write(Xml& xml) const;
+      void writeProperties(Xml& xml) const;
       void read(QDomElement v);
+      bool readProperties(QDomElement v);
       QFont font(double space) const;
       QFont fontPx(double spatium) const;
       QRectF bbox(double space, const QString& s) const;
       QFontMetricsF fontMetrics(double space) const;
       bool operator!=(const TextStyle& s) const;
+      void layout(Element*) const;
+      void setFont(const QFont& f);
       };
 
 //---------------------------------------------------------

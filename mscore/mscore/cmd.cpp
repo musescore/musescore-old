@@ -1114,7 +1114,7 @@ void ScoreView::cmdAddText(int subtype)
       Page* page = _score->pages().front();
       const QList<System*>* sl = page->systems();
       const QList<MeasureBase*>& ml = sl->front()->measures();
-      TextB* s = 0;
+      Text* s = 0;
       _score->startCmd();
       switch(subtype) {
             case TEXT_TITLE:
@@ -1140,16 +1140,7 @@ void ScoreView::cmdAddText(int subtype)
                   s->setParent(measure);
                   }
                   break;
-#if 0
-            case TEXT_COPYRIGHT:
-                  if (_score->rights == 0)
-                        _score->rights = new TextC(_score);
-                  s = new TextC(*_score->rights);
-                  s->setParent(page);
-                  s->setTextStyle(TEXT_STYLE_COPYRIGHT);
-                  s->setSubtype(subtype);
-                  break;
-#endif
+
             case TEXT_REHEARSAL_MARK:
                   {
                   ChordRest* cr = _score->getSelectedChordRest();

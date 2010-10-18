@@ -26,7 +26,6 @@
 
 class System;
 class Text;
-class TextC;
 class Measure;
 class Xml;
 class Score;

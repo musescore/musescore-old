@@ -2221,8 +2221,8 @@ void ChangePart::flip()
       {
       Instrument oi         = *part->instr();
       part->setInstrument(instrument);
-      longName              = part->longName()->swapDoc(longName);
-      shortName             = part->shortName()->swapDoc(shortName);
+//TODOxx      longName              = part->longName()->swapDoc(longName);
+//      shortName             = part->shortName()->swapDoc(shortName);
       instrument            = oi;
       part->score()->setInstrumentNames();
       }
@@ -2237,6 +2237,16 @@ ChangeTextStyle::ChangeTextStyle(Score* s, const TextStyle& st)
       style = st;
       }
 
+static void updateTextStyle(void* a, Element* e)
+      {
+      TextStyleType ts = *(TextStyleType*)a;
+      if (e->isText()) {
+            Text* text = static_cast<Text*>(e);
+            if ((text->textStyle() == ts) && text->styled())
+                  text->setText(text->getText());     // destroy formatting
+            }
+      }
+
 //---------------------------------------------------------
 //   flip
 //---------------------------------------------------------
@@ -2246,6 +2256,8 @@ void ChangeTextStyle::flip()
       TextStyle os = score->style().textStyle(style.name());
       score->style().setTextStyle(style);
       style = os;
+      TextStyleType ts = score->style().textStyleType(style.name());
+      score->scanElements(&ts, updateTextStyle);
       score->setLayoutAll(true);
       }
 

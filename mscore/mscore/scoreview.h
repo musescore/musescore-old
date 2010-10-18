@@ -36,8 +36,8 @@ class Segment;
 class Measure;
 class System;
 class Score;
-class TextB;
 class ScoreView;
+class Text;
 
 //---------------------------------------------------------
 //   CommandTransition
@@ -114,7 +114,7 @@ class ScoreView : public QWidget {
       QLineF dropAnchor;            ///< line to current anchor point during dragMove
 
       // in text edit mode text is framed
-      TextB* _editText;
+      Text* _editText;
 
       QTransform _matrix, imatrix;
       int _magIdx;
@@ -316,8 +316,8 @@ class ScoreView : public QWidget {
       void setDropTarget(const Element*);
       void setDropAnchor(const QLineF&);
       const QTransform& matrix() const           { return _matrix; }
-      void setEditText(TextB* t)                 { _editText = t;      }
-      TextB* editText() const                    { return _editText;   }
+      void setEditText(Text* t)                 { _editText = t;      }
+      Text* editText() const                    { return _editText;   }
       qreal mag() const;
       int magIdx() const                         { return _magIdx; }
       void setMag(int idx, double mag);

@@ -30,11 +30,6 @@
 LayoutBreak::LayoutBreak(Score* score)
    : Element(score)
       {
-      _reloff.rx() = 100.0;
-      setXoff(-1.0);
-      setYoff(-2.0);
-      setOffsetType(OFFSET_SPATIUM);
-      setAlign(ALIGN_RIGHT | ALIGN_BOTTOM);
       _pause = score->styleD(ST_SectionPause);
       }
 
@@ -143,7 +138,10 @@ void LayoutBreak::layout()
       QRectF bb(0, 0, w, h);
       bb.adjust(-lw, -lw, lw, lw);
       setbbox(bb);
-      Element::layout();      // alignment & offset
+
+      if (parent()) {
+            setPos(-_spatium - w + parent()->width(), -2 * _spatium - h);
+            }
       }
 
 //---------------------------------------------------------

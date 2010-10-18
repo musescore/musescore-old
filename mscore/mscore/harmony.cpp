@@ -672,7 +672,7 @@ void Harmony::startEdit(ScoreView* view, const QPointF& p)
             QString s(harmonyName());
             setText(s);
             }
-      TextB::startEdit(view, p);
+      Text::startEdit(view, p);
       }
 
 //---------------------------------------------------------
@@ -829,7 +829,7 @@ void Harmony::layout()
             Text::layout();
             return;
             }
-      Element::layout();
+      style().layout(this);
       Measure* m = measure();
       double yy = track() < 0 ? 0.0 : m->system()->staff(track() / VOICES)->y();
       double xx = 0.0;  // (segment()->tick() < 0) ? 0.0 : m->tick2pos(segment()->tick());

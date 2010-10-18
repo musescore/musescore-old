@@ -450,7 +450,6 @@ void SCursor::putStaffText(Text* s)
       {
       if (!cr() || !s)
             return;
-      QFont f = s->defaultFont();
       s->setTrack(cr()->track());
       s->setSystemFlag(false);
       s->setSubtype(TEXT_STAFF);

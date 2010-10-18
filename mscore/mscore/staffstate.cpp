@@ -132,7 +132,7 @@ void StaffState::layout()
       QRectF bb(0, 0, w, h);
       bb.adjust(-lw, -lw, lw, lw);
       setbbox(bb);
-      Element::layout();      // alignment & offset
+      ElementLayout::layout(this);      // alignment & offset
       }
 
 //---------------------------------------------------------

@@ -1082,8 +1082,8 @@ void ExportLy::dynamic(Dynamic* dyn, int nop)
 //-----------------------------------------------------------------------------------
 void ExportLy::findTextProperties(Text* tekst, QString &tekststyle, int &fontsize)
 {
-  fontsize= tekst->defaultFont().pointSize();
-  QFont fontprops=tekst->defaultFont();
+  QFont fontprops=tekst->font();
+  fontsize= fontprops.pointSizeF();
   switch (fontprops.style())
     {
     case QFont::StyleNormal :

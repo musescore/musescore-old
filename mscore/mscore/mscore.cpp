@@ -2024,13 +2024,7 @@ int main(int argc, char* av[])
       QWidget wi(0);
 
       PDPI = wi.logicalDpiX();         // physical resolution
-      DPI  = pdev->logicalDpiX();      // logical drawing resolution
-
-      // sanity check for DPI
-      if (DPI == 0) {           // this happens on windows if there is no printer installed
-            DPI = PDPI;
-            pdev = &wi;   //pdev is used to draw text, if it's qprinter, text is tiny.
-            }
+      DPI  = PDPI; // pdev->logicalDpiX();      // logical drawing resolution
       DPMM = DPI / INCH;      // dots/mm
 
       if (debugMode) {

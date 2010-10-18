@@ -21,7 +21,11 @@
 #ifndef __STYLE_P_H__
 #define __STYLE_P_H__
 
+//
 // private header for Style
+//
+
+#include "elementlayout.h"
 
 class Xml;
 class ChordDescription;
@@ -31,19 +35,16 @@ class ChordList;
 //   TextStyleData
 //---------------------------------------------------------
 
-class TextStyleData : public QSharedData {
+class TextStyleData : public QSharedData, public ElementLayout {
    protected:
       QString name;
       QString family;
-      int size;
+      double size;
       bool bold;
       bool italic;
       bool underline;
       bool hasFrame;
-      Align align;
-      double xoff, yoff;                  // absolute offset: inch or spatium
-      OffsetType offsetType;
-      double rxoff, ryoff;                // relative offset: % of parent width/height
+
       bool sizeIsSpatiumDependent;        // text point size depends on _spatium unit
 
       double frameWidth;
@@ -55,7 +56,7 @@ class TextStyleData : public QSharedData {
       QColor foregroundColor;
 
    public:
-      TextStyleData(QString _name, QString _family, int _size,
+      TextStyleData(QString _name, QString _family, double _size,
          bool _bold, bool _italic, bool _underline,
          Align _align,
          double _xoff, double _yoff, OffsetType _ot,
@@ -64,10 +65,12 @@ class TextStyleData : public QSharedData {
          double fw, double pw, int fr,
          QColor co, bool circle, bool systemFlag,
          QColor fg);
-      TextStyleData() {}
+      TextStyleData();
 
       void write(Xml&) const;
+      void writeProperties(Xml& xml) const;
       void read(QDomElement);
+      bool readProperties(QDomElement v);
 
       QFont font(double space) const;
       QFont fontPx(double spatium) const;

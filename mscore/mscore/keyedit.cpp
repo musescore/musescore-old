@@ -87,7 +87,7 @@ void KeyCanvas::clear()
 
 void KeyCanvas::paintEvent(QPaintEvent*)
       {
-      double spatium = 2.0 * PALETTE_SPATIUM / (PDPI/DPI * extraMag);
+      double spatium = 2.0 * PALETTE_SPATIUM / extraMag;
       gscore->setSpatium(spatium);
       gscore->setPaintDevice(this);
 
@@ -259,7 +259,7 @@ void KeyCanvas::dropEvent(QDropEvent*)
 void KeyCanvas::snap(Accidental* a)
       {
       double y = a->ipos().y();
-      double spatium2 = PALETTE_SPATIUM / (PDPI/DPI * extraMag);
+      double spatium2 = PALETTE_SPATIUM / extraMag;
       int line = int(y / spatium2);
       y = line * spatium2;
       a->rypos() = y;
@@ -324,7 +324,7 @@ void KeyEditor::addClicked()
 
       double extraMag = 2.0;
       const QList<Accidental*> al = canvas->getAccidentals();
-      double spatium = 2.0 * PALETTE_SPATIUM / (PDPI/DPI * extraMag);
+      double spatium = 2.0 * PALETTE_SPATIUM / extraMag;
       double xoff = 10000000.0;
       foreach(Accidental* a, al) {
             QPointF pos = a->ipos();
