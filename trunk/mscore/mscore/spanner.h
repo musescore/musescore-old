@@ -71,6 +71,7 @@ class Spanner : public Element {
    protected:
       Element* oStartElement; // start/end element at startEdit()
       Element* oEndElement;
+      double _yoffset;        // in spatium units
 
    public:
       Spanner(Score*);
@@ -106,6 +107,8 @@ class Spanner : public Element {
       virtual void scanElements(void* data, void (*func)(void*, Element*));
       virtual void startEdit(ScoreView*, const QPointF&);
       virtual void setSelected(bool f);
+      void setYoff(double d) { _yoffset = d;        }
+      double yoff() const    { return _yoffset;     }
       };
 #endif
 

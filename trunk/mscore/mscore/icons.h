@@ -40,7 +40,8 @@ enum { longaUp_ICON, brevis_ICON, note_ICON, note2_ICON, note4_ICON, note8_ICON,
       viewmag_ICON, window_ICON, acciaccatura_ICON, appoggiatura_ICON,
       grace4_ICON, grace16_ICON, grace32_ICON, noteEntry_ICON, keys_ICON, tie_ICON,
       textBold_ICON, textItalic_ICON, textUnderline_ICON,
-      textLeft_ICON, textCenter_ICON, textRight_ICON, textSuper_ICON, textSub_ICON,
+      textLeft_ICON, textCenter_ICON, textRight_ICON, textTop_ICON, textBottom_ICON, textVCenter_ICON,
+      textSuper_ICON, textSub_ICON,
       fotomode_ICON,
       ICONS
       };

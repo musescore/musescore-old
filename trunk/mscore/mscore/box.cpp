@@ -32,7 +32,7 @@
 #include "image.h"
 #include "layoutbreak.h"
 
-static const double BOX_MARGIN = 5.0;
+static const double BOX_MARGIN = 0.0;
 
 //---------------------------------------------------------
 //   Box

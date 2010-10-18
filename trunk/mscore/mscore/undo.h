@@ -58,7 +58,7 @@ class MStaff;
 class MeasureBase;
 class Dynamic;
 class Selection;
-class TextB;
+class Text;
 class Channel;
 struct PageFormat;
 class TextStyle;
@@ -971,11 +971,11 @@ class ChangeConcertPitch : public UndoCommand {
 //---------------------------------------------------------
 
 class EditText : public UndoCommand {
-      TextB* text;
+      Text* text;
       int undoLevel;
 
    public:
-      EditText(TextB* t, int l) : text(t), undoLevel(l) {}
+      EditText(Text* t, int l) : text(t), undoLevel(l) {}
       virtual void undo();
       virtual void redo();
       UNDO_NAME("EditText");

@@ -37,7 +37,6 @@ Ottava::Ottava(Score* s)
    : TextLine(s)
       {
       setSubtype(0);
-      setOffsetType(OFFSET_SPATIUM);
       setYoff(-3.5);    // default position
       }
 
@@ -47,7 +46,7 @@ Ottava::Ottava(Score* s)
 
 void Ottava::layout()
       {
-      Element::layout();
+      setPos(0.0, yoff() * spatium());
       SLine::layout();
       }
 

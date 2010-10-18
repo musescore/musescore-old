@@ -1,3 +1,5 @@
+18.oct (ws)
+      - update of "styled" text implementation
 17.oct (lv)
       - fix MusicXML import/export of clefs
       - fix #7504: test XML files crashing during playback

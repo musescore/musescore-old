@@ -140,13 +140,14 @@ enum AlignmentFlags {
       ALIGN_TOP      = 0,
       ALIGN_BOTTOM   = 4,
       ALIGN_VCENTER  = 8,
-      ALIGN_BASELINE = 16
+      ALIGN_BASELINE = 16,
+      ALIGN_CENTER = ALIGN_HCENTER | ALIGN_VCENTER,
+      ALIGN_HMASK = ALIGN_LEFT | ALIGN_RIGHT | ALIGN_HCENTER,
+      ALIGN_VMASK = ALIGN_TOP | ALIGN_BOTTOM | ALIGN_VCENTER | ALIGN_BASELINE
       };
 
 Q_DECLARE_FLAGS(Align, AlignmentFlags);
 Q_DECLARE_OPERATORS_FOR_FLAGS(Align);
-
-static const Align ALIGN_CENTER = ALIGN_HCENTER | ALIGN_VCENTER;
 
 //---------------------------------------------------------
 //   OffsetType
@@ -345,7 +346,6 @@ enum TextStyleType {
       TEXT_STYLE_TECHNIK,
       TEXT_STYLE_TEMPO,
       TEXT_STYLE_METRONOME,
-      TEXT_STYLE_COPYRIGHT,
       TEXT_STYLE_MEASURE_NUMBER,
       TEXT_STYLE_TRANSLATOR,
       TEXT_STYLE_TUPLET,

@@ -79,7 +79,6 @@ void TextLineSegment::draw(QPainter& p, ScoreView* v) const
       qreal l = 0.0;
       int sym = spannerSegmentType() == SEGMENT_MIDDLE ? tl->continueSymbol() : tl->beginSymbol();
       if (_text) {
-            QFont f = _text->defaultFont();
             if (
                ((spannerSegmentType() == SEGMENT_SINGLE || spannerSegmentType() == SEGMENT_BEGIN) && (tl->beginTextPlace() == PLACE_LEFT))
                || ((spannerSegmentType() == SEGMENT_MIDDLE || spannerSegmentType() == SEGMENT_END) && (tl->continueTextPlace() == PLACE_LEFT))
@@ -215,7 +214,7 @@ void TextLineSegment::layout()
             case SEGMENT_BEGIN:
                   if (tl->beginText()) {
                         if (_text == 0) {
-                              _text = new TextC(*tl->beginText());
+                              _text = new Text(*tl->beginText());
                               _text->setFlag(ELEMENT_MOVABLE, false);
                               _text->setParent(this);
                               }
@@ -229,7 +228,7 @@ void TextLineSegment::layout()
             case SEGMENT_END:
                   if (tl->continueText()) {
                         if (_text == 0) {
-                              _text = new TextC(*tl->continueText());
+                              _text = new Text(*tl->continueText());
                               _text->setFlag(ELEMENT_MOVABLE, false);
                               _text->setParent(this);
                               }
@@ -325,7 +324,7 @@ TextLine::TextLine(const TextLine& e)
 void TextLine::setBeginText(const QString& s, TextStyleType textStyle)
       {
       if (!_beginText) {
-            _beginText = new TextC(score());
+            _beginText = new Text(score());
             _beginText->setSubtype(TEXT_TEXTLINE);
             _beginText->setTextStyle(textStyle);
             _beginText->setParent(this);
@@ -340,7 +339,7 @@ void TextLine::setBeginText(const QString& s, TextStyleType textStyle)
 void TextLine::setContinueText(const QString& s, TextStyleType textStyle)
       {
       if (!_continueText) {
-            _continueText = new TextC(score());
+            _continueText = new Text(score());
             _continueText->setSubtype(TEXT_TEXTLINE);
             _continueText->setTextStyle(textStyle);
             _continueText->setParent(this);
@@ -476,7 +475,7 @@ bool TextLine::readProperties(QDomElement e)
       else if (tag == "lineColor")
             _lineColor = readColor(e);
       else if (tag == "beginText") {
-            _beginText = new TextC(score());
+            _beginText = new Text(score());
             _beginText->setSubtype(TEXT_TEXTLINE);
             for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                   if (!_beginText->readProperties(ee))
@@ -484,7 +483,7 @@ bool TextLine::readProperties(QDomElement e)
                   }
             }
       else if (tag == "continueText") {
-            _continueText = new TextC(score());
+            _continueText = new Text(score());
             _continueText->setSubtype(TEXT_TEXTLINE);
             for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                   if (!_continueText->readProperties(ee))
@@ -771,7 +770,7 @@ void LineProperties::beginTextProperties()
                   TextLineSegment* tls = static_cast<TextLineSegment*>(ls);
                   if (!tls->text())
                         continue;
-                  TextC* t = tls->text();
+                  Text* t = tls->text();
                   t->setColor(tl->beginText()->color());
                   }
             }
@@ -793,7 +792,7 @@ void LineProperties::continueTextProperties()
                   TextLineSegment* tls = static_cast<TextLineSegment*>(ls);
                   if (!tls->text())
                         continue;
-                  TextC* t = tls->text();
+                  Text* t = tls->text();
                   t->setColor(tl->continueText()->color());
                   }
             }
@@ -803,7 +802,7 @@ void LineProperties::continueTextProperties()
 //   setBeginText
 //---------------------------------------------------------
 
-void TextLine::setBeginText(TextC* v)
+void TextLine::setBeginText(Text* v)
       {
       delete _beginText;
       _beginText = v;
@@ -813,7 +812,7 @@ void TextLine::setBeginText(TextC* v)
 //   setContinueText
 //---------------------------------------------------------
 
-void TextLine::setContinueText(TextC* v)
+void TextLine::setContinueText(Text* v)
       {
       delete _continueText;
       _continueText = v;
@@ -826,7 +825,7 @@ void TextLine::setContinueText(TextC* v)
 
 void TextLine::layout()
       {
-      Element::layout();
+      setPos(0.0, yoff() * spatium());
       SLine::layout();
       }
 

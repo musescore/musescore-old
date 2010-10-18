@@ -674,8 +674,6 @@ void Score::write(Xml& xml, bool /*autosave*/)
       xml.curTrack = 0;
       foreach(Beam* beam, _beams)
             beam->setId(xml.beamId++);
-//      foreach(Element* el, _gel)
-//            el->write(xml);
       for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
             xml.stag(QString("Staff id=\"%1\"").arg(staffIdx + 1));
             xml.curTick  = 0;

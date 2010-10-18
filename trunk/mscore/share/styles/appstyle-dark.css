@@ -7,6 +7,9 @@
 *:disabled {
       color: gray
       }
+QPushButton {
+      color: white
+      }
 QToolTip {
       color: black;
       opacity: 200;

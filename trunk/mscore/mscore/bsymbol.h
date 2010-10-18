@@ -22,13 +22,14 @@
 #define __BSYMBOL_H__
 
 #include "element.h"
+#include "elementlayout.h"
 
 //---------------------------------------------------------
 //   BSymbol
 //    base class for Symbol and Image
 //---------------------------------------------------------
 
-class BSymbol : public Element {
+class BSymbol : public Element, public ElementLayout {
       QList<Element*> _leafs;
 
    public:
@@ -48,7 +49,7 @@ class BSymbol : public Element {
       const QList<Element*>& leafs() const { return _leafs; }
       QList<Element*>& leafs()             { return _leafs; }
       virtual QPointF canvasPos() const;
-      Segment* segment() const             { return (Segment*)parent(); }
+      Segment* segment() const            { return (Segment*)parent(); }
       };
 
 #endif

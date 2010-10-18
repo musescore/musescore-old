@@ -505,7 +505,7 @@ void MusicXml::doCredits()
             score->measures()->add(vbox);
             }
       if (crwCopyRight)
-            score->setMetaTag("Copyright", crwCopyRight->words);
+            score->setMetaTag("copyright", crwCopyRight->words);
       }
 
 //---------------------------------------------------------
@@ -1614,16 +1614,15 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   t->setTextStyle(TEXT_STYLE_TECHNIK);
                   }
             Segment* s = measure->getSegment(SegChordRest, tick);
-            if (fontSize != "" || fontStyle != "" || fontWeight != "") {
-                  QFont f = t->defaultFont();
-                  if (fontSize != "") {
+            if (!fontSize.isEmpty() || !fontStyle.isEmpty() || !fontWeight.isEmpty()) {
+                  if (!fontSize.isEmpty()) {
                         bool ok = true;
-                        float size = fontSize.toFloat();
-                        if (ok) f.setPointSizeF(size);
+                        float size = fontSize.toFloat(&ok);
+                        if (ok)
+                              t->setSize(size);
                         }
-                  f.setItalic(fontStyle == "italic");
-                  f.setBold(fontWeight == "bold");
-                  t->setDefaultFont(f);
+                  t->setItalic(fontStyle == "italic");
+                  t->setBold(fontWeight == "bold");
                   }
             t->setText(txt);
             if (metrEl.tagName() != "") metronome(metrEl, t);
@@ -3077,11 +3076,13 @@ void MusicXml::genWedge(int no, int /*endTick*/, Measure* /*measure*/, int staff
 //TODO-WS      hp->setTick(wedgeList[no].startTick);
 //TODO-WS      hp->setTick2(endTick);
       hp->setSubtype(wedgeList[no].subType);
-      if (wedgeList[no].hasYoffset) hp->setYoff(wedgeList[no].yoffset);
-      else hp->setYoff(wedgeList[no].above ? -3 : 8);
+      if (wedgeList[no].hasYoffset)
+            hp->setYoff(wedgeList[no].yoffset);
+      else
+            hp->setYoff(wedgeList[no].above ? -3 : 8);
       hp->setUserOff(QPointF(wedgeList[no].rx, wedgeList[no].ry));
       hp->setTrack(staff * VOICES);
-      if(hp->check())
+      if (hp->check())
           score->add(hp);
 
 // printf("gen wedge %p staff %d, tick %d-%d\n", hp, staff, hp->tick(), hp->tick2());

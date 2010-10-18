@@ -254,7 +254,6 @@ void Dynamic::toDefault()
 
 void Dynamic::layout()
       {
-      Element::layout();
       setSubtype(subtype());  // re-apply style
       Text::layout();
       }

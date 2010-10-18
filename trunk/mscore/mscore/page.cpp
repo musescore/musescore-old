@@ -633,6 +633,21 @@ QString Page::replaceTextMacros(const QString& s)
                         case '$':
                               d += '$';
                               break;
+                        case ':':
+                              {
+                              QString tag;
+                              int k = i+2;
+                              for (; k < n; ++k) {
+                                    if (s[k].toAscii() == ':')
+                                          break;
+                                    tag += s[k];
+                                    }
+                              if (k != n) {       // found ':' ?
+                                    d += score()->metaTag(tag);
+                                    i = k-1;
+                                    }
+                              }
+                              break;
                         default:
                               d += '$';
                               d += c;

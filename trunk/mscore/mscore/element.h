@@ -156,11 +156,13 @@ class Element {
 
    protected:
       Score* _score;
+#if 0
                                   ///< Usually set from layout().
       Align  _align;
       double _xoff, _yoff;
       QPointF _reloff;
       OffsetType _offsetType;
+#endif
 
       int _mxmlOff;               ///< MusicXML offset in ticks.
                                   ///< Note: interacts with userXoffset.
@@ -272,7 +274,7 @@ class Element {
       virtual void remove(Element*);
       virtual void change(Element* o, Element* n);
 
-      virtual void layout();
+      virtual void layout() {}
       virtual void spatiumChanged(double /*oldValue*/, double /*newValue*/);
       virtual void resetMode() {}
 
@@ -348,6 +350,7 @@ class Element {
  for some element types this hints are fixed and not saved to
  the *.msc file
  */
+#if 0
       Align align() const                   { return _align;        }
       OffsetType offsetType() const         { return _offsetType;   }
       double xoff() const                   { return _xoff;         }
@@ -358,8 +361,9 @@ class Element {
       void setXoff(double val)              { _xoff   = val;        }
       void setYoff(double val)              { _yoff   = val;        }
       void setOffsetType(OffsetType val)    { _offsetType = val;    }
+#endif
 
-      bool isTextB() { return
+      bool isText() { return
                   type()  == TEXT
                 || type() == LYRICS
                 || type() == DYNAMIC

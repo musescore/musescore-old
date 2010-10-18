@@ -75,10 +75,10 @@ static QScriptValue prototype_Text_call(QScriptContext* context, QScriptEngine*)
                   break;
             case 1:     // "defaultFont",
                   if (context->argumentCount() == 0)
-                        return qScriptValueFromValue(context->engine(), text->defaultFont());
+                        return qScriptValueFromValue(context->engine(), text->font());
                   else if (context->argumentCount() == 1) {
                         QFont f = qscriptvalue_cast<QFont>(context->argument(0));
-                        text->setDefaultFont(f);
+                        text->setFont(f);
                         return context->engine()->undefinedValue();
                         }
                   break;

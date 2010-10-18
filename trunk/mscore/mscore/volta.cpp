@@ -41,7 +41,6 @@ Volta::Volta(Score* s)
 
       setBeginHook(true);
       setBeginHookHeight(Spatium(1.9));
-      setOffsetType(OFFSET_SPATIUM);
       setYoff(-4.0);
       setEndHookHeight(Spatium(1.9));
       setAnchor(ANCHOR_MEASURE);
@@ -71,7 +70,7 @@ void Volta::setSubtype(int val)
 
 void Volta::layout()
       {
-      Element::layout();
+      setPos(0.0, yoff() * spatium());
       TextLine::layout();
       }
 

@@ -1192,10 +1192,10 @@ void ExportMusicXml::credits(Xml& xml)
                   printf("x=%g, y=%g fs=%d\n",
                          text->canvasPos().x(),
                          h - text->canvasPos().y(),
-                         text->defaultFont().pointSize()
+                         text->font().pointSize()
                         );
                   const double ty = h - getTenthsFromDots(text->canvasPos().y());
-                  const int fs = text->defaultFont().pointSize();
+                  const int fs = text->font().pointSize();
                   switch (text->subtype()) {
                         case TEXT_TITLE:
                               creditWords(xml, w / 2, ty, fs, "center", "top", text->getText());
@@ -1218,7 +1218,7 @@ void ExportMusicXml::credits(Xml& xml)
                   }
             }
       if (!rights.isEmpty()) {
-            const int fs = 8; // score->copyright()->defaultFont().pointSize();
+            const int fs = 8; // score->copyright()->font().pointSize();
             creditWords(xml, w / 2, bm, fs, "center", "bottom", rights);
             }
 /**/

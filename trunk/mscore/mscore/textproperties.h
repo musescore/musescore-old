@@ -24,7 +24,8 @@
 #include "ui_textproperties.h"
 #include "style.h"
 
-class TextB;
+class Text;
+class Score;
 
 //---------------------------------------------------------
 //   TextProp
@@ -42,11 +43,13 @@ class TextProp : public QWidget, public Ui::TextProperties {
       void unstyledToggled(bool);
 
    public:
-      TextProp(bool _onlyStyle, QWidget* parent = 0);
-      void set(TextB*);
-      void get(TextB*);
-      void set(const TextStyle&);
-      TextStyle getTextStyle() const;
+      TextProp(bool _onlyStyle, Score*, QWidget* parent = 0);
+      void setTextStyle(const TextStyle&);
+      TextStyle textStyle() const;
+      bool isStyled() const;
+      void setStyled(bool val);
+      void setTextStyleType(TextStyleType);
+      TextStyleType textStyleType() const;
       };
 
 #endif

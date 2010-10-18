@@ -124,6 +124,7 @@ QLineF FretDiagram::dragAnchor() const
       double th = height();
       double x  = 0.0;
       double y  = 0.0;
+#if 0 // TODOxx
       if (_align & ALIGN_BOTTOM)
             y = th;
       else if (_align & ALIGN_VCENTER)
@@ -134,6 +135,7 @@ QLineF FretDiagram::dragAnchor() const
             x = tw;
       else if (_align & ALIGN_HCENTER)
             x = (tw * .5);
+#endif
       return QLineF(p1, abbox().topLeft() + QPointF(x, y));
       }
 
@@ -273,7 +275,7 @@ void FretDiagram::layout()
             h -= y;
             }
       setbbox(QRectF(x, y, w, h));
-      Element::layout();      // alignment & offset
+//      Element::layout();      // alignment & offset
       setPos(ipos() + QPointF(-w * .5, - (h + _spatium * 1.5)));
       }
 

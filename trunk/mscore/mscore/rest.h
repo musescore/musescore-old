@@ -39,6 +39,7 @@ class Rest : public ChordRest {
 
       int dotline;            // depends on rest symbol
       double _mmWidth;        // width of multi measure rest
+      double _yoffset;        // in spatium units
 
       virtual QRectF drag(const QPointF& s);
       virtual qreal upPos()   const;
@@ -67,6 +68,9 @@ class Rest : public ChordRest {
       void setMMWidth(double val)   { _mmWidth = val; }
       double mmWidth() const        { return _mmWidth; }
       static int getSymbol(Duration::DurationType type, int line, int* yoffset);
+
+      void setYoff(double d) { _yoffset = d;        }
+      double yoff() const    { return _yoffset;     }
       };
 
 #endif

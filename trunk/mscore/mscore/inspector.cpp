@@ -1598,13 +1598,14 @@ void ShowElementBase::setElement(Element* e)
       eb.cposy->setValue(e->canvasPos().y());
       eb.offsetx->setValue(e->userOff().x());
       eb.offsety->setValue(e->userOff().y());
-      eb.layoutXoff->setValue(e->xoff());
-      eb.layoutYoff->setValue(e->yoff());
-      eb.layoutRXoff->setValue(e->reloff().x());
-      eb.layoutRYoff->setValue(e->reloff().y());
+//      eb.layoutXoff->setValue(e->xoff());
+//      eb.layoutYoff->setValue(e->yoff());
+//      eb.layoutRXoff->setValue(e->reloff().x());
+//      eb.layoutRYoff->setValue(e->reloff().y());
       eb.readPosX->setValue(e->readPos().x());
       eb.readPosY->setValue(e->readPos().y());
 
+#if 0
       Align a = e->align();
       QString s;
       s += a & ALIGN_LEFT ? "L" : "-";
@@ -1616,6 +1617,7 @@ void ShowElementBase::setElement(Element* e)
       s += a & ALIGN_BOTTOM ? "B" : "-";
       s += a & ALIGN_BASELINE ? "L" : "-";
       eb.alignment->setText(s);
+#endif
 
       eb.bboxx->setValue(e->bbox().x());
       eb.bboxy->setValue(e->bbox().y());

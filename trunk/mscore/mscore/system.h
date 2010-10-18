@@ -33,11 +33,11 @@ class Staff;
 class StaffLines;
 class Clef;
 class Page;
-class TextC;
 class Bracket;
 class Lyrics;
 class Segment;
 class MeasureBase;
+class Text;
 
 //---------------------------------------------------------
 //   SysStaff
@@ -56,7 +56,7 @@ class SysStaff {
    public:
       int idx;
       QList<Bracket*> brackets;
-      TextC* instrumentName;
+      Text* instrumentName;
 
       const QRectF& bbox() const     { return _bbox; }
       QRectF& rbb()                  { return _bbox; }

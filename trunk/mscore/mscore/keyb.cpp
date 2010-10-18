@@ -123,7 +123,7 @@ void ScoreView::editKey(QKeyEvent* ev)
                   _score->end();
                   return;
                   }
-            if (e->isTextB() && (ev->key() == Qt::Key_Left || ev->key() == Qt::Key_Right)) {
+            if (e->isText() && (ev->key() == Qt::Key_Left || ev->key() == Qt::Key_Right)) {
                   ev->accept();
                   _score->end();
                   //return;
