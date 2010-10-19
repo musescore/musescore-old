@@ -1491,12 +1491,13 @@ QList<System*> Score::searchSystem(const QPointF& pos) const
       for (int i = 0; i < n; ++i) {
             System* s = sl->at(i);
             System* ns = 0;               // next system row
-            for (int ii = i+1; ii < n; ++ii) {
+            int ii = i + 1;
+            for (; ii < n; ++ii) {
                   ns = sl->at(ii);
                   if (ns->y() != s->y())
                         break;
                   }
-            if (ns == 0)
+            if ((ii == n) || (ns == 0))
                   y2 = page->height();
             else  {
                   double sy2 = s->y() + s->bbox().height();
@@ -1554,12 +1555,10 @@ static Segment* getNextValidInputSegment(Segment* s, int track, int voice)
                         break;
                   }
             if ((v != VOICES) && voice) {
-                  Segment* s1;
-                  // Measure* m = s->measure();
                   int ntick;
                   bool skipChord = false;
                   bool ns        = false;
-                  for (s1 = s->measure()->first(st); s1; s1 = s1->next(st)) {
+                  for (Segment* s1 = s->measure()->first(st); s1; s1 = s1->next(st)) {
                         ChordRest* cr = static_cast<ChordRest*>(s1->element(track + voice));
                         if (cr) {
                               if (ns)
@@ -1632,6 +1631,7 @@ bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
 
       // int track = pos->staffIdx * VOICES + voice;
       int track = pos->staffIdx * VOICES;
+
       for (segment = pos->measure->first(SegChordRest); segment;) {
             segment = getNextValidInputSegment(segment, track, voice);
             if (segment == 0)
@@ -1656,8 +1656,6 @@ bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
                   break;
                   }
 
-//            if (x < (x1 + d * .5) && segment->element(track)) {
-//            if (x < (x1 + d * .5) && isStaffElement(segment, track)) {
             if (x < (x1 + d * .5)) {
                   x = x1;
                   pos->segment = segment;

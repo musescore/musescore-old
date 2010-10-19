@@ -33,7 +33,7 @@ set(HAS_AUDIOFILE TRUE)                   # requires libsndfile
 
 set(STATIC_SCRIPT_BINDINGS FALSE)
 set(USE_SSE     FALSE)
-set(SOUNDFONT3  FALSE)                    # enable ogg vorbis compressed fonts, require ogg & vorbis
+set(SOUNDFONT3  TRUE)                     # enable ogg vorbis compressed fonts, require ogg & vorbis
 set(AEOLUS      TRUE)                     # pipe organ synthesizer
 set(OMR         FALSE)                    # optical music recognition
 set(EMBED_ICONS FALSE)                    # do not load icons from share/icons
@@ -143,16 +143,11 @@ FIND_PATH(QT_QTSCRIPT_INCLUDE_DIR QtScript
    NO_DEFAULT_PATH
    )
 
-# Set QT_QTSCRIPT_LIBRARY (for cmake 2.4)
-#FIND_LIBRARY(QT_QTSCRIPT_LIBRARY_RELEASE NAMES QtScript QtScript4 PATHS ${QT_LIBRARY_DIR}        NO_DEFAULT_PATH)
-#FIND_LIBRARY(QT_QTSCRIPT_LIBRARY_DEBUG   NAMES QtScript QtScript_debug QtScriptd4 PATHS ${QT_LIBRARY_DIR} NO_DEFAULT_PATH)
-#_QT4_ADJUST_LIB_VARS(QTSCRIPT)
-
 # Set QT_QTSCRIPT_TOOLS_LIBRARY (apparently still needed on Ubuntu 9.10 - cmake 2.6.4)
 if (NOT MINGW AND NOT APPLE)
-FIND_LIBRARY(QT_QTSCRIPT_TOOLS_LIBRARY_RELEASE NAMES QtScriptTools QtScriptTools4 PATHS ${QT_LIBRARY_DIR}        NO_DEFAULT_PATH)
-FIND_LIBRARY(QT_QTSCRIPT_TOOLS_LIBRARY_DEBUG   NAMES QtScriptTools QtScriptTools_debug QtScriptToolsd4 PATHS ${QT_LIBRARY_DIR} NO_DEFAULT_PATH)
-_QT4_ADJUST_LIB_VARS(QTSCRIPT_TOOLS)
+      FIND_LIBRARY(QT_QTSCRIPT_TOOLS_LIBRARY_RELEASE NAMES QtScriptTools QtScriptTools4 PATHS ${QT_LIBRARY_DIR}        NO_DEFAULT_PATH)
+      FIND_LIBRARY(QT_QTSCRIPT_TOOLS_LIBRARY_DEBUG   NAMES QtScriptTools QtScriptTools_debug QtScriptToolsd4 PATHS ${QT_LIBRARY_DIR} NO_DEFAULT_PATH)
+      _QT4_ADJUST_LIB_VARS(QTSCRIPT_TOOLS)
 endif (NOT MINGW AND NOT APPLE)
 
 include(${QT_USE_FILE})
