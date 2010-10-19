@@ -619,6 +619,7 @@ void Sample::load()
       unsigned int size = end - start;
 
       if (sampletype & FLUID_SAMPLETYPE_OGG_VORBIS) {
+#ifdef SOUNDFONT3
             char* p = new char[size];
             if (fd.read(p, size) != size) {
                   printf("  read %d failed\n", size);
@@ -626,6 +627,7 @@ void Sample::load()
                   }
             decompressOggVorbis(p, size);
             delete[] p;
+#endif
             }
       else {
             data = new short[size];
