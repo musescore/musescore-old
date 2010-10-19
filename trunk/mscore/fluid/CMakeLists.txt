@@ -22,10 +22,16 @@ set(CMAKE_CXX_FLAGS         "-g -Wall -Wextra -Winvalid-pch")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DQT_NO_DEBUG")
 set(CMAKE_CXX_FLAGS_DEBUG   "-DQT_DEBUG")
 
-add_library (fluid STATIC
+set(SRC
   dsp.cpp fluid.cpp voice.cpp chan.cpp sfont.cpp chorus.cpp
   conv.cpp gen.cpp mod.cpp rev.cpp tuning.cpp sfont3.cpp
   )
+
+if (SOUNDFONT3)
+      set(SRC ${SRC} sfont3.cpp)
+endif (SOUNDFONT3)
+
+add_library (fluid STATIC ${SRC})
 
 set_target_properties( fluid
    PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h"
