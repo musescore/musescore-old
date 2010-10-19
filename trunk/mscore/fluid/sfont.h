@@ -23,6 +23,7 @@
 #ifndef _FLUID_DEFSFONT_H
 #define _FLUID_DEFSFONT_H
 
+#include "config.h"
 #include "fluid.h"
 
 namespace FluidS {
@@ -153,7 +154,9 @@ class Sample {
       void load();
       bool valid() const    { return _valid; }
       void setValid(bool v) { _valid = v; }
+#ifdef SOUNDFONT3
       bool decompressOggVorbis(char* p, int size);
+#endif
       };
 
 //---------------------------------------------------------

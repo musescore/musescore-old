@@ -93,6 +93,7 @@
 #include <QtCore/QProcess>
 #include <QtGui/QDesktopServices>
 #include <QtGui/QTextDocument>
+#include <QtGui/QTextDocumentFragment>
 #include <QtGui/QTextCursor>
 #include <QtGui/QAbstractTextDocumentLayout>
 #include <QtGui/QToolBox>

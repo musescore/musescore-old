@@ -38,4 +38,5 @@
 #cmakedefine OMR
 #cmakedefine OSC
 #cmakedefine OPENGL
+#cmakedefine SOUNDFONT3
 
