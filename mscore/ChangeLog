@@ -1,3 +1,5 @@
+20.oct (ws)
+      - mark score dirty if synthesizer settings (mixer) are changed
 19.oct (ws)
       - fix #7564: mouse note entry before a horizontal frame
 18.oct (ws)

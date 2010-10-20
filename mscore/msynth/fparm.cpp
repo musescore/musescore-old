@@ -119,3 +119,19 @@ void SyntiSettings::read(QDomElement e)
             }
       }
 
+//---------------------------------------------------------
+//   operator
+//---------------------------------------------------------
+
+bool SynthParams::operator==(const SynthParams& sp) const
+      {
+      int n = params.size();
+      if (sp.params.size() != n)
+            return false;
+      for (int i = 0; i < n; ++i) {
+            if (!(*sp.params[i] == *params[i]))
+                  return false;
+            }
+      return true;
+      }
+

@@ -42,7 +42,9 @@ class Parameter {
       virtual ParameterType type() const = 0;
       virtual void write(Xml&) const = 0;
       const QString& name() const { return _name; }
-      int id() const { return _id; }
+      int id() const              { return _id; }
+
+      virtual bool operator==(const Parameter&) const = 0;
       };
 
 //---------------------------------------------------------
@@ -68,6 +70,9 @@ class Fparm : public Parameter {
       void setMin(float val) { _min = val; }
       void setMax(float val) { _max = val; }
       void set(const QString& name, float val, float min, float max);
+      virtual bool operator==(const Parameter& p) const {
+            return p.id() == id() && ((const Fparm&)p).val() == val();
+            }
       };
 
 //---------------------------------------------------------
@@ -87,6 +92,9 @@ class Sparm : public Parameter {
       QString val() const                          { return _val; }
       void setVal(const QString& s)                { _val = s; }
       void set(const QString& n, const QString& s) { _name = n; _val = s; }
+      virtual bool operator==(const Parameter& p) const {
+            return p.id() == id() && ((const Sparm&)p).val() == val();
+            }
       };
 
 //---------------------------------------------------------
@@ -99,6 +107,7 @@ struct SynthParams {
       QList<Parameter*> params;
 
       void write(Xml&) const;
+      bool operator==(const SynthParams& sp) const;
       };
 
 //---------------------------------------------------------
