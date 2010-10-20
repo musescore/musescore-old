@@ -207,7 +207,7 @@ void MuseScore::loadFile()
          );
       if (fn.isEmpty())
             return;
-      Score* score = new Score(*defaultStyle);
+      Score* score = new Score(defaultStyle);
       if(score->read(fn)) {
             setCurrentScoreView(appendScore(score));
             lastOpenPath = score->fileInfo()->path();
@@ -603,7 +603,7 @@ void MuseScore::newFile()
       bool pickupMeasure = newWizard->pickupMeasure(&pickupTimesigZ, &pickupTimesigN);
       KeySigEvent ks = newWizard->keysig();
 
-      Score* score = new Score(*defaultStyle);
+      Score* score = new Score(defaultStyle);
       score->setCreated(true);
 
       //
@@ -946,16 +946,18 @@ void Score::loadStyle()
 
       QFile f(fn);
       if (f.open(QIODevice::ReadOnly)) {
-            Style st;
+            Style st = defaultStyle;
             if (st.load(&f)) {
                   _undo->push(new ChangeStyle(this, st));
                   return;
                   }
             }
-      QMessageBox::warning(0,
-         QWidget::tr("MuseScore: Load Style failed:"),
-         QString(strerror(errno)),
-         QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
+      else {
+            QMessageBox::warning(0,
+               QWidget::tr("MuseScore: Load Style failed:"),
+               QString(strerror(errno)),
+               QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
+            }
       }
 
 //---------------------------------------------------------

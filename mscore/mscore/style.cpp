@@ -33,7 +33,7 @@ Style* style;
 // 120 dpi           screen resolution
 //  spatium = 20/4 points
 
-Style* defaultStyle;
+Style defaultStyle;
 
 //---------------------------------------------------------
 //   styleTypes
@@ -224,7 +224,7 @@ static const QString ff("FreeSerif");
 #define OA     OFFSET_ABS
 #define OS     OFFSET_SPATIUM
 #define TR(x)  QT_TRANSLATE_NOOP("MuseScore", x)
-#define AS(x)  defaultStyle->appendTextStyle(x)
+#define AS(x)  defaultStyle.appendTextStyle(x)
 
 //---------------------------------------------------------
 //   setDefaultStyle
@@ -233,8 +233,6 @@ static const QString ff("FreeSerif");
 
 void setDefaultStyle()
       {
-      defaultStyle = new Style;
-
       AS(TextStyle(TR("Title"), ff, 24, false, false, false,
          ALIGN_HCENTER | ALIGN_TOP));
 
@@ -891,14 +889,14 @@ bool StyleData::isDefault(StyleIdx idx) const
       switch(styleTypes[idx].valueType()) {
             case ST_DOUBLE:
             case ST_SPATIUM:
-                  return _values[idx].toDouble() == defaultStyle->valueD(idx);
+                  return _values[idx].toDouble() == defaultStyle.valueD(idx);
             case ST_BOOL:
-                  return _values[idx].toBool() == defaultStyle->valueB(idx);
+                  return _values[idx].toBool() == defaultStyle.valueB(idx);
             case ST_INT:
             case ST_DIRECTION:
-                  return _values[idx].toInt() == defaultStyle->valueI(idx);
+                  return _values[idx].toInt() == defaultStyle.valueI(idx);
             case ST_STRING:
-                  return _values[idx].toString() == defaultStyle->valueSt(idx);
+                  return _values[idx].toString() == defaultStyle.valueSt(idx);
             }
       return false;
       }
@@ -927,7 +925,7 @@ void StyleData::save(Xml& xml, bool optimize) const
                   }
             }
       for (int i = 0; i < TEXT_STYLES; ++i) {
-            if (_textStyles[i] != defaultStyle->textStyle(TextStyleType(i)))
+            if (!optimize || _textStyles[i] != defaultStyle.textStyle(TextStyleType(i)))
                   _textStyles[i].write(xml);
             }
       xml.etag();
@@ -1099,12 +1097,16 @@ void StyleData::setTextStyle(const TextStyle& ts)
       foreach(const TextStyle& s, _textStyles) {
             if (s.name() == ts.name())
                   break;
+            printf("<%s><%s>\n", qPrintable(s.name()), qPrintable(ts.name()));
             ++idx;
             }
       if (idx < _textStyles.size())
             _textStyles[idx] = ts;
-      else
-            printf("StyleData::setTextStyle(): TextStyle <%s> not found\n", qPrintable(ts.name()));
+      else {
+            _textStyles.append(ts);
+            if (debugMode)
+                  printf("StyleData::setTextStyle(): TextStyle <%s> not found\n", qPrintable(ts.name()));
+            }
       }
 
 QString TextStyle::name() const                           { return d->name; }
@@ -1162,7 +1164,7 @@ QPointF TextStyle::reloff() const                         { return QPointF(rxoff
 void TextStyle::setReloff(const QPointF& p)               { setRxoff(p.x()), setRyoff(p.y()); }
 bool TextStyle::readProperties(QDomElement v)             { return d->readProperties(v); }
 
-void TextStyle::setFont(const QFont& f)
+void TextStyle::setFont(const QFont&)
       {
       //TODOxx
       }
@@ -1302,7 +1304,7 @@ void Style::save(Xml& xml, bool optimize)
 
 //---------------------------------------------------------
 //   load
-//    return true on error
+//    return true on success
 //---------------------------------------------------------
 
 bool StyleData::load(QFile* qf)
@@ -1318,7 +1320,7 @@ bool StyleData::load(QFile* qf)
                QWidget::tr("MuseScore: Load Style failed:"),
                error,
                QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
-            return true;
+            return false;
             }
       docName = qf->fileName();
       for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
@@ -1336,7 +1338,7 @@ bool StyleData::load(QFile* qf)
                         }
                   }
             }
-      return false;
+      return true;
       }
 
 
