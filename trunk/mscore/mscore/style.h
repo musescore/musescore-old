@@ -399,7 +399,7 @@ class Style {
 extern QVector<TextStyle> defaultTextStyles;
 extern const TextStyle defaultTextStyleArray[];
 
-extern Style* defaultStyle;
+extern Style defaultStyle;
 extern void setDefaultStyle();
 
 #endif

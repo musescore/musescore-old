@@ -421,7 +421,7 @@ static QScriptValue static_Score_call(QScriptContext* context, QScriptEngine*)
       {
       if (context->thisObject().strictlyEquals(context->engine()->globalObject()))
             return context->throwError(QString::fromLatin1("Score(): Did you forget to construct with 'new'?"));
-      Score* score = new Score(*defaultStyle);
+      Score* score = new Score(defaultStyle);
       score->setName(mscore->createDefaultName());
       mscore->setCurrentScoreView(mscore->appendScore(score));
       score->startCmd();

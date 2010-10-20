@@ -1,4 +1,5 @@
 20.oct (ws)
+      - fixes for save/load style file (*.mss)
       - mark score dirty if synthesizer settings (mixer) are changed
 19.oct (ws)
       - fix #7564: mouse note entry before a horizontal frame

@@ -2291,6 +2291,15 @@ ChangeStyle::ChangeStyle(Score* s, const Style& st)
       {
       }
 
+static void updateTextStyle2(void*, Element* e)
+      {
+      if (e->isText()) {
+            Text* text = static_cast<Text*>(e);
+            if (text->styled())
+                  text->setText(text->getText());     // destroy formatting
+            }
+      }
+
 //---------------------------------------------------------
 //   flip
 //---------------------------------------------------------
@@ -2303,6 +2312,9 @@ void ChangeStyle::flip()
             score->cmdConcertPitchChanged(style.valueB(ST_concertPitch), true);
 
       score->setStyle(style);
+      score->scanElements(0, updateTextStyle2);
+      score->setLayoutAll(true);
+
       style = tmp;
       }
 
