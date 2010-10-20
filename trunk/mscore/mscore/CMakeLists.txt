@@ -210,7 +210,9 @@ if (STATIC_SCRIPT_BINDINGS)
 endif (STATIC_SCRIPT_BINDINGS)
 
 if (APPLE)
-      set_target_properties (mscore PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${PROJECT_SOURCE_DIR}/packaging/MacOSXBundleInfo.plist.in)
+      set_target_properties (mscore
+         PROPERTIES
+            MACOSX_BUNDLE_INFO_PLIST ${PROJECT_SOURCE_DIR}/packaging/MacOSXBundleInfo.plist.in)
 endif(APPLE)
 
 if (OSC)

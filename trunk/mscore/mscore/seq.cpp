@@ -896,10 +896,10 @@ void Seq::stopNotes()
 //   setController
 //---------------------------------------------------------
 
-void Seq::setController(int idx, int ctrl, int data)
+void Seq::setController(int channel, int ctrl, int data)
       {
       Event event(ME_CONTROLLER);
-      event.setChannel(idx);
+      event.setChannel(channel);
       event.setController(ctrl);
       event.setValue(data);
       sendEvent(event);

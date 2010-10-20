@@ -782,7 +782,7 @@ class Score : public QObject {
       void layoutChords1(Segment* segment, int staffIdx);
       void emitSelectionChanged(int val)                 { emit selectionChanged(val); }
       const SyntiSettings& syntiSettings() const         { return _syntiSettings;      }
-      void setSyntiSettings(const SyntiSettings& s)      { _syntiSettings = s;      }
+      void setSyntiSettings(const SyntiSettings& s);
       const QList<StaffType*>& staffTypes() const        { return _staffTypes; }
       QList<StaffType*>& staffTypes()                    { return _staffTypes; }
       void setStaffTypeList(const QList<StaffType*>& tl) { _staffTypes = tl;   }

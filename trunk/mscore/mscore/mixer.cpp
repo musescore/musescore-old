@@ -110,7 +110,7 @@ void InstrumentListEditor::updateAll(Score* score)
       {
       cs = score;
       int n = -vb->count();
-      if(cs) {
+      if (cs) {
             QList<MidiMapping>* mm = cs->midiMapping();
             n = mm->size() - vb->count();
             }
