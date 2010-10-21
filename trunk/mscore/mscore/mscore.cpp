@@ -1824,8 +1824,7 @@ int main(int argc, char* av[])
 #else
       QtSingleApplication* app = new QtSingleApplication("mscore1", argc, av);
 #endif
-      QApplication::setStyle(new MStyle);
-
+      
       QStringList argv =  QCoreApplication::arguments();
       argv.removeFirst();
 
@@ -1973,6 +1972,8 @@ int main(int argc, char* av[])
             qApp->processEvents();
             }
 
+      QApplication::setStyle(new MStyle);
+      
       if (!useFactorySettings && !converterMode) {
             qApp->setStyleSheet(appStyleSheet());
             if (!preferences.style.isEmpty())
