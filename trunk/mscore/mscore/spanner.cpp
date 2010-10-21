@@ -65,6 +65,7 @@ Spanner::Spanner(const Spanner& s)
       _startElement = s._startElement;
       _endElement   = s._endElement;
       _anchor       = s._anchor;
+      _yoffset      = s._yoffset;
       foreach(SpannerSegment* ss, s.segments)
             add(ss->clone());
       }
