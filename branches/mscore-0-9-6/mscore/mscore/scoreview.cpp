@@ -3434,7 +3434,12 @@ void ScoreView::cmdEnterRest()
 
 void ScoreView::cmdEnterRest(const Duration& d)
       {
-printf("cmdEnterRest %s\n", qPrintable(d.name()));
+      InputState& is = _score->inputState();
+      if (is.cr() == 0) {
+            printf("cannot enter rest here\n");
+            return;
+            }
+      printf("cmdEnterRest %s\n", qPrintable(d.name()));
       if (!noteEntryMode())
             sm->postEvent(new CommandEvent("note-input"));
       _score->cmdEnterRest(d);
