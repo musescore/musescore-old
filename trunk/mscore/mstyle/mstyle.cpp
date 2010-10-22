@@ -145,8 +145,6 @@ bool MStyle::drawMenuBarItem(const QStyleOption* option, QPainter* painter,
 
 int MStyle::pixelMetric(PixelMetric metric, const QStyleOption* option, const QWidget* widget ) const
       {
-      int val;
-
       switch (metric) {
             // rely on QCommonStyle here
             case PM_SmallIconSize:
@@ -305,12 +303,29 @@ int MStyle::pixelMetric(PixelMetric metric, const QStyleOption* option, const QW
             // spacing between widget and scrollbars
             case PM_ScrollView_ScrollBarSpacing: return -2;
 
-            default:
-            break;
-            }
+            case 10: return 9;
+            case 28: return 0;
+            case 29: return 0;
+            case 65: return 16;
+            case 69: return 2;
+            case 70: return 2;
+            case 72: return 6;
+            case 73: return 16;
+            case 78: return 2;
+            case 86: return 1;
+            case 87: return 1;
+            case 88: return 16;
+            case 89: return 16;
+            case 91: return -5;
 
-      // fallback
-      return QCommonStyle::pixelMetric(metric, option, widget);
+
+            default:
+                  {
+                  int val = QCommonStyle::pixelMetric(metric, option, widget);
+printf("metrik %d -> %d\n", int(metric), val);
+                  return val;
+                  }
+            }
       }
 
 //---------------------------------------------------------
