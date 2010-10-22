@@ -797,6 +797,10 @@ void Score::undoAddElement(Element* element)
          && element->type() != TIE
          && element->type() != NOTE
          && element->type() != HAIRPIN
+         && element->type() != OTTAVA
+         && element->type() != TRILL
+         && element->type() != TEXTLINE
+         && element->type() != VOLTA
          && element->type() != TUPLET)
             ) {
             undo()->push(new AddElement(element));
@@ -853,8 +857,13 @@ void Score::undoAddElement(Element* element)
                   nslur->setParent(0);
                   undo()->push(new AddElement(nslur));
                   }
-            else if (element->type() == HAIRPIN) {
-                  Hairpin* hp    = static_cast<Hairpin*>(element);
+            else if (element->type() == HAIRPIN
+               || element->type() == OTTAVA
+               || element->type() == TRILL
+               || element->type() == TEXTLINE
+               || element->type() == VOLTA
+               ) {
+                  SLine* hp      = static_cast<SLine*>(element);
                   Segment* s1    = static_cast<Segment*>(hp->startElement());
                   Segment* s2    = static_cast<Segment*>(hp->endElement());
                   Measure* m1    = s1->measure();
@@ -863,7 +872,7 @@ void Score::undoAddElement(Element* element)
                   Measure* nm2   = score->tick2measure(m2->tick());
                   Segment* ns1   = nm1->findSegment(s1->segmentType(), s1->tick());
                   Segment* ns2   = nm2->findSegment(s2->segmentType(), s2->tick());
-                  Hairpin* nhp   = static_cast<Hairpin*>(ne);
+                  SLine* nhp     = static_cast<SLine*>(ne);
                   nhp->setStartElement(ns1);
                   nhp->setEndElement(ns2);
                   nhp->setParent(ns1);
