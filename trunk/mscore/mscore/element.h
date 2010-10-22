@@ -39,6 +39,7 @@ class Sym;
 class ScoreView;
 class Segment;
 class TextStyle;
+class Element;
 
 /**
   The value of this enum determines the "stacking order" the elements are
@@ -123,6 +124,27 @@ class Space {
       };
 
 //---------------------------------------------------------
+//   LinkedElements
+//---------------------------------------------------------
+
+class LinkedElements {
+      static int _linkId;
+      QList<Element*> _elements;
+      int _lid;                     // unique id for every linked list
+
+   public:
+      LinkedElements()                        { _lid = _linkId++;           }
+      LinkedElements(int id)                  { _lid = id;                  }
+      QList<Element*>& elements()             { return _elements;           }
+      const QList<Element*>& elements() const { return _elements;           }
+      void add(Element* e)                    { _elements.append(e);        }
+      void remove(Element* e)                 { _elements.removeOne(e);     }
+      bool isEmpty() const                    { return _elements.isEmpty(); }
+      void setLid(int val)                    { _linkId = _lid = val;       }
+      int lid() const                         { return _lid;                }
+      };
+
+//---------------------------------------------------------
 ///   \brief base class of score layout elements
 ///
 ///   The Element class is the virtual base class of all
@@ -134,6 +156,7 @@ class Space {
 class Element {
       Q_DECLARE_TR_FUNCTIONS(Element)
 
+      LinkedElements* _links;
       Element* _parent;
 
       bool _selected:1;           ///< set if element is selected
@@ -156,13 +179,6 @@ class Element {
 
    protected:
       Score* _score;
-#if 0
-                                  ///< Usually set from layout().
-      Align  _align;
-      double _xoff, _yoff;
-      QPointF _reloff;
-      OffsetType _offsetType;
-#endif
 
       int _mxmlOff;               ///< MusicXML offset in ticks.
                                   ///< Note: interacts with userXoffset.
@@ -179,6 +195,12 @@ class Element {
       virtual ~Element();
       Element &operator=(const Element&);
       virtual Element* clone() const = 0;
+      virtual Element* linkedClone();
+
+      void linkTo(Element*);
+      int lid() const                         { return _links ? _links->lid() : 0; }
+      LinkedElements* links() const           { return _links;      }
+      void setLinks(LinkedElements* le)       { _links = le;        }
 
       Score* score() const                    { return _score;      }
       virtual void setScore(Score* s)         { _score = s;         }

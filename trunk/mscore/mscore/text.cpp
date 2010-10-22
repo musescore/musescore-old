@@ -446,6 +446,14 @@ void Text::read(QDomElement e)
             if (!readProperties(e))
                   domError(e);
             }
+      if (score()->mscVersion() < 119) {
+            //
+            // Reset text in old version to
+            // style.
+            //
+            if (_textStyle != TEXT_STYLE_INVALID)
+                  restyle();
+            }
       cursorPos = 0;
       }
 

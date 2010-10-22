@@ -173,15 +173,30 @@ bool LineSegment::edit(ScoreView* sv, int curGrip, int key, Qt::KeyboardModifier
             return true;
 
       LineSegment* ls = 0;
+      LinkedElements* links = l->links();
       if (l->startElement() != s1) {
             if (s1->system() != (static_cast<Segment*>(l->startElement())->system())) {
                   bspDirty = true;
                   if (key == Qt::Key_Right)
                         ls = l->takeFirstSegment();
                   }
-            static_cast<Segment*>(l->startElement())->remove(l);
-            l->setStartElement(s1);
-            s1->add(parent());
+            if (links) {
+                  int tick = s1->tick();
+                  foreach(Element* e, links->elements()) {
+                        Score* score = e->score();
+                        SLine* ll = static_cast<SLine*>(e);
+                        static_cast<Segment*>(ll->endElement())->removeSpannerBack(ll);
+                        Measure* m = score->tick2measure(tick);
+                        Segment* segment1 = m->findSegment(SegChordRest, tick);
+                        ll->setStartElement(segment1);
+                        segment1->add(ll);
+                        }
+                  }
+            else {
+                  static_cast<Segment*>(l->startElement())->remove(l);
+                  l->setStartElement(s1);
+                  s1->add(l);
+                  }
             }
       else if (l->endElement() != s2) {
             if (removeSegment) {
@@ -189,9 +204,23 @@ bool LineSegment::edit(ScoreView* sv, int curGrip, int key, Qt::KeyboardModifier
                   if (key == Qt::Key_Left)
                         ls = l->takeLastSegment();
                   }
-            static_cast<Segment*>(l->endElement())->removeSpannerBack(line());
-            l->setEndElement(s2);
-            s2->addSpannerBack(line());
+            if (links) {
+                  int tick = s2->tick();
+                  foreach(Element* e, links->elements()) {
+                        Score* score = e->score();
+                        SLine* ll = static_cast<SLine*>(e);
+                        static_cast<Segment*>(ll->endElement())->removeSpannerBack(ll);
+                        Measure* m = score->tick2measure(tick);
+                        Segment* segment2 = m->findSegment(SegChordRest, tick);
+                        ll->setEndElement(segment2);
+                        segment2->addSpannerBack(ll);
+                        }
+                  }
+            else {
+                  static_cast<Segment*>(l->endElement())->removeSpannerBack(l);
+                  l->setEndElement(s2);
+                  s2->addSpannerBack(l);
+                  }
             }
       l->layout();
 

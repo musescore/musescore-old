@@ -376,6 +376,7 @@ Score::Score(const Style& s)
 //    _sigmap
 //    _tempomap
 //    _repeatList
+//    _links
 //
 Score::Score(Score* parent)
    : _selection(this)
@@ -1837,8 +1838,8 @@ Measure* Score::getCreateMeasure(int tick)
 void Score::addElement(Element* element)
       {
       if (debugMode) {
-            printf("   Score::addElement %p(%s) parent %p(%s)\n",
-               element, element->name(), element->parent(),
+            printf("   Score(%p)::addElement %p(%s) parent %p(%s)\n",
+               this, element, element->name(), element->parent(),
                element->parent() ? element->parent()->name() : "");
             }
       if (element->type() == TREMOLO) {
@@ -1910,8 +1911,8 @@ void Score::removeElement(Element* element)
       Element* parent = element->parent();
 
       if (debugMode)
-            printf("   Score::removeElement %p(%s) parent %p(%s)\n",
-               element, element->name(), parent, parent ? parent->name() : "");
+            printf("   Score(%p)::removeElement %p(%s) parent %p(%s)\n",
+               this, element, element->name(), parent, parent ? parent->name() : "");
 
       // special for MEASURE, HBOX, VBOX
       // their parent is not static
@@ -2196,6 +2197,18 @@ RepeatList* Score::repeatList()  const
       }
 
 //---------------------------------------------------------
+//   links
+//---------------------------------------------------------
+
+QHash<int, LinkedElements*>& Score::links()
+      {
+      Score* score = this;
+      while (score->parentScore())
+            score = parentScore();
+      return score->_elinks;
+      }
+
+//---------------------------------------------------------
 //   tempomap
 //---------------------------------------------------------
 
@@ -2422,5 +2435,19 @@ void Score::setSyntiSettings(const SyntiSettings& s)
             _dirty = _syntiSettings != s;
             _syntiSettings = s;
             }
+      }
+
+//---------------------------------------------------------
+//   setLayoutAll
+//---------------------------------------------------------
+
+void Score::setLayoutAll(bool val)
+      {
+      Score* score = this;
+      while (score->parentScore())
+            score = parentScore();
+      foreach(Excerpt* excerpt, score->_excerpts)
+            excerpt->score()->layoutAll = val;
+      score->layoutAll = val;
       }
 
