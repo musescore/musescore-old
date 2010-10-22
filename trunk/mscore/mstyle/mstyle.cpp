@@ -145,18 +145,19 @@ bool MStyle::drawMenuBarItem(const QStyleOption* option, QPainter* painter,
 
 int MStyle::pixelMetric(PixelMetric metric, const QStyleOption* option, const QWidget* widget ) const
       {
-      switch(metric) {
+      int val;
+
+      switch (metric) {
             // rely on QCommonStyle here
             case PM_SmallIconSize:
             case PM_ButtonIconSize:
-                  // return KIconLoader::global()->currentSize(KIconLoader::Small);
+                  return 16;
             case PM_ToolBarIconSize:
-                  // return KIconLoader::global()->currentSize(KIconLoader::Toolbar);
+                  return 22;
             case PM_LargeIconSize:
-                  // return KIconLoader::global()->currentSize(KIconLoader::Dialog);
+                  return 32;              //??
             case PM_MessageBoxIconSize:
-                  // return KIconLoader::SizeHuge;
-                  break;
+                  return 22;              //??
 
             case PM_DefaultFrameWidth:
                   {
@@ -168,7 +169,8 @@ int MStyle::pixelMetric(PixelMetric metric, const QStyleOption* option, const QW
                         return Frame_FrameWidth;
                   else if( qstyleoption_cast<const QStyleOptionGroupBox *>(option) )
                         return GroupBox_FrameWidth;
-                  else return 1;
+                  else
+                        return 1;
                   }
 
             case PM_LayoutLeftMargin:
@@ -308,7 +310,7 @@ int MStyle::pixelMetric(PixelMetric metric, const QStyleOption* option, const QW
             }
 
       // fallback
-      return QCommonStyle::pixelMetric( metric, option, widget );
+      return QCommonStyle::pixelMetric(metric, option, widget);
       }
 
 //---------------------------------------------------------
