@@ -714,9 +714,7 @@ QPixmap StyleHelper::verticalGradient(const QColor &color, int height, int offse
             QPainter p(pixmap);
             p.setCompositionMode(QPainter::CompositionMode_Source);
             p.fillRect(pixmap->rect(), gradient);
-
             p.end();
-
             m_backgroundCache.insert(key, pixmap);
             }
       return *pixmap;
@@ -734,6 +732,7 @@ QPixmap StyleHelper::radialGradient(const QColor &color, int width, int height) 
       if (!pixmap) {
             pixmap = new QPixmap(width, height);
             pixmap->fill(Qt::transparent);
+
             QColor radialColor = backgroundRadialColor(color);
             radialColor.setAlpha(255);
             QRadialGradient gradient(64, height-64, 64);
@@ -748,6 +747,7 @@ QPixmap StyleHelper::radialGradient(const QColor &color, int width, int height) 
             p.scale(width/128.0,1);
             p.fillRect(QRect(0,0,128,height), gradient);
             p.end();
+
             m_backgroundCache.insert(key, pixmap);
             }
       return *pixmap;
