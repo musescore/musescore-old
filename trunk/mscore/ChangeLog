@@ -1,5 +1,5 @@
 22.oct (ws)
-      - updates for "linked parts" implementation; synchronize hair pins
+      - updates for "linked parts" implementation; synchronize line elements
 20.oct (ws)
       - fixes for save/load style file (*.mss)
       - mark score dirty if synthesizer settings (mixer) are changed
