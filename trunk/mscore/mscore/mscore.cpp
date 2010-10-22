@@ -1824,7 +1824,7 @@ int main(int argc, char* av[])
 #else
       QtSingleApplication* app = new QtSingleApplication("mscore1", argc, av);
 #endif
-      
+
       QStringList argv =  QCoreApplication::arguments();
       argv.removeFirst();
 
@@ -1973,12 +1973,9 @@ int main(int argc, char* av[])
             }
 
       QApplication::setStyle(new MStyle);
-      
-      if (!useFactorySettings && !converterMode) {
+
+      if (!useFactorySettings && !converterMode)
             qApp->setStyleSheet(appStyleSheet());
-            if (!preferences.style.isEmpty())
-                  QApplication::setStyle(preferences.style);
-            }
 
       //
       //  load internal fonts
