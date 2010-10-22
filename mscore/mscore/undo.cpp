@@ -515,6 +515,7 @@ void Score::undoChangeKeySig(Staff* ostaff, int tick, KeySigEvent st)
       else
             staffList.append(ostaff);
 
+      LinkedElements* links = 0;
       foreach(Staff* staff, staffList) {
             Score* score = staff->score();
 
@@ -535,6 +536,10 @@ void Score::undoChangeKeySig(Staff* ostaff, int tick, KeySigEvent st)
             nks->setTrack(track);
             nks->changeKeySigEvent(st);
             nks->setParent(s);
+            if (links == 0)
+                  links = new LinkedElements;
+            links->add(nks);
+            nks->setLinks(links);
 
             if (ks)
                   undo()->push(new ChangeElement(ks, nks));
@@ -791,6 +796,7 @@ void Score::undoAddElement(Element* element)
          && element->type() != SLUR
          && element->type() != TIE
          && element->type() != NOTE
+         && element->type() != HAIRPIN
          && element->type() != TUPLET)
             ) {
             undo()->push(new AddElement(element));
@@ -809,7 +815,7 @@ void Score::undoAddElement(Element* element)
             if (staff == ostaff)
                   ne = element;
             else {
-                  ne = element->clone();
+                  ne = element->linkedClone();
                   ne->setScore(score);
                   ne->setSelected(false);
                   }
@@ -846,6 +852,22 @@ void Score::undoAddElement(Element* element)
                   nslur->setEndElement(c2);
                   nslur->setParent(0);
                   undo()->push(new AddElement(nslur));
+                  }
+            else if (element->type() == HAIRPIN) {
+                  Hairpin* hp    = static_cast<Hairpin*>(element);
+                  Segment* s1    = static_cast<Segment*>(hp->startElement());
+                  Segment* s2    = static_cast<Segment*>(hp->endElement());
+                  Measure* m1    = s1->measure();
+                  Measure* m2    = s2->measure();
+                  Measure* nm1   = score->tick2measure(m1->tick());
+                  Measure* nm2   = score->tick2measure(m2->tick());
+                  Segment* ns1   = nm1->findSegment(s1->segmentType(), s1->tick());
+                  Segment* ns2   = nm2->findSegment(s2->segmentType(), s2->tick());
+                  Hairpin* nhp   = static_cast<Hairpin*>(ne);
+                  nhp->setStartElement(ns1);
+                  nhp->setEndElement(ns2);
+                  nhp->setParent(ns1);
+                  undo()->push(new AddElement(nhp));
                   }
             else if (element->type() == TIE) {
                   Tie* tie       = static_cast<Tie*>(element);
@@ -973,36 +995,13 @@ void Score::undoAddCR(ChordRest* cr, Measure* measure, int tick)
 
 void Score::undoRemoveElement(Element* element)
       {
-      int t = element->type();
-      if (!element->isChordRest() && t != ARTICULATION && t != KEYSIG) {
-            undo()->push(new RemoveElement(element));
-            return;
-            }
-      QList<Staff*> staffList;
-      Staff* ostaff = element->staff();
-      LinkedStaves* linkedStaves = ostaff->linkedStaves();
-      if (linkedStaves)
-            staffList = linkedStaves->staves();
-      else
-            staffList.append(ostaff);
-
-      foreach(Staff* staff, staffList) {
-            if (element->isChordRest() || t == KEYSIG) {
-                  Element* e = findLinkedVoiceElement(element, staff);
+      LinkedElements* le = element->links();
+      if (le) {
+            foreach(Element* e, le->elements())
                   undo()->push(new RemoveElement(e));
-                  }
-            else if (t == ARTICULATION) {
-                  Articulation* a  = static_cast<Articulation*>(element);
-                  ChordRest* ncr   = static_cast<ChordRest*>(findLinkedVoiceElement(a->chordRest(), staff));
-                  Articulation* aa;
-                  foreach(aa, *ncr->getArticulations()) {
-                        if (aa->subtype() == a->subtype()) {
-                              undo()->push(new RemoveElement(aa));
-                              break;
-                              }
-                        }
-                  }
             }
+      else
+            undo()->push(new RemoveElement(element));
       }
 
 //---------------------------------------------------------
@@ -1531,6 +1530,12 @@ ChangeElement::ChangeElement(Element* oe, Element* ne)
 
 void ChangeElement::flip()
       {
+      LinkedElements* links = oldElement->links();
+      if (links) {
+            links->remove(oldElement);
+            links->add(newElement);
+            }
+
       Score* score = oldElement->score();
       if (oldElement->selected())
             score->deselect(oldElement);
@@ -1543,15 +1548,13 @@ void ChangeElement::flip()
       else {
             oldElement->parent()->change(oldElement, newElement);
             }
-      Element* e = oldElement;
-      oldElement = newElement;
-      newElement = e;
-      if (e->type() == CLEF)
-            e->staff()->setUpdateClefList(true);
-      else if (e->type() == KEYSIG)
-            e->staff()->setUpdateKeymap(true);
-      else if (e->type() == DYNAMIC)
-            e->score()->addLayoutFlags(LAYOUT_FIX_PITCH_VELO);
+      qSwap(oldElement, newElement);
+      if (newElement->type() == CLEF)
+            newElement->staff()->setUpdateClefList(true);
+      else if (newElement->type() == KEYSIG)
+            newElement->staff()->setUpdateKeymap(true);
+      else if (newElement->type() == DYNAMIC)
+            newElement->score()->addLayoutFlags(LAYOUT_FIX_PITCH_VELO);
       score->setLayoutAll(true);
       }
 

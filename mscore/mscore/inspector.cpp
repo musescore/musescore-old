@@ -1562,6 +1562,7 @@ ShowElementBase::ShowElementBase()
       connect(eb.offsety,        SIGNAL(valueChanged(double)), SLOT(offsetyChanged(double)));
       connect(eb.selected,       SIGNAL(clicked(bool)), SLOT(selectedClicked(bool)));
       connect(eb.visible,        SIGNAL(clicked(bool)), SLOT(visibleClicked(bool)));
+      connect(eb.link1,          SIGNAL(clicked()), SLOT(linkClicked()));
       }
 
 //---------------------------------------------------------
@@ -1598,10 +1599,6 @@ void ShowElementBase::setElement(Element* e)
       eb.cposy->setValue(e->canvasPos().y());
       eb.offsetx->setValue(e->userOff().x());
       eb.offsety->setValue(e->userOff().y());
-//      eb.layoutXoff->setValue(e->xoff());
-//      eb.layoutYoff->setValue(e->yoff());
-//      eb.layoutRXoff->setValue(e->reloff().x());
-//      eb.layoutRYoff->setValue(e->reloff().y());
       eb.readPosX->setValue(e->readPos().x());
       eb.readPosY->setValue(e->readPos().y());
 
@@ -1625,6 +1622,7 @@ void ShowElementBase::setElement(Element* e)
       eb.bboxh->setValue(e->bbox().height());
       eb.color->setColor(e->color());
       eb.parentButton->setEnabled(e->parent());
+      eb.link1->setEnabled(e->links());
       eb.mag->setValue(e->mag());
       eb.systemFlag->setChecked(e->systemFlag());
       }
@@ -1661,6 +1659,22 @@ void ShowElementBase::visibleClicked(bool val)
 void ShowElementBase::parentClicked()
       {
       emit elementChanged(el->parent());
+      }
+
+//---------------------------------------------------------
+//   linkClicked
+//---------------------------------------------------------
+
+void ShowElementBase::linkClicked()
+      {
+      printf("linkClicked\n");
+      foreach(Element* e, el->links()->elements()) {
+            printf("  element <%p> <%p>\n", e->score(), e);
+            if (e != el) {
+                  emit elementChanged(e);
+                  break;
+                  }
+            }
       }
 
 //---------------------------------------------------------

@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2010 Werner Schweer and others
+//  Copyright (C) 2002-2010 Werner Schweer et al.
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -1159,6 +1159,7 @@ bool Score::loadMsc(QString name)
 
 bool Score::read1(QDomElement e)
       {
+      _elinks.clear();
       for (; !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "museScore") {
                   QString version = e.attribute("version");
@@ -1214,7 +1215,7 @@ bool Score::read1(QDomElement e)
                         else if (tag == "programRevision")
                               ;
                         else if (tag == "Score")
-                              return read(ee);
+                              read(ee);
                         else if (tag == "Revision") {
                               Revision* revision = new Revision;
                               revision->read(e);
@@ -1227,7 +1228,11 @@ bool Score::read1(QDomElement e)
             else
                   domError(e);
             }
-      return false;
+      int id = 1;
+      foreach(LinkedElements* le, _elinks)
+            le->setLid(id++);
+      _elinks.clear();
+      return true;
       }
 
 //---------------------------------------------------------

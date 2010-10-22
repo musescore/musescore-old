@@ -51,6 +51,7 @@ TextProp::TextProp(bool os, Score* score, QWidget* parent)
       QButtonGroup* g2 = new QButtonGroup(this);
       g2->addButton(alignTop);
       g2->addButton(alignVCenter);
+      g2->addButton(alignBaseline);
       g2->addButton(alignBottom);
 
       QButtonGroup* g3 = new QButtonGroup(this);

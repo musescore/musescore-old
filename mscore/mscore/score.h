@@ -98,6 +98,7 @@ class StaffType;
 class Revisions;
 class Spanner;
 class ScoreView;
+class LinkedElements;
 
 extern bool showRubberBand;
 
@@ -281,6 +282,7 @@ class Score : public QObject {
 
       int _fileDivision; ///< division of current loading *.msc file
       int _mscVersion;   ///< version of current loading *.msc file
+      QHash<int, LinkedElements*> _elinks;
 
       QMap<QString, QString> _metaTags;
 
@@ -529,7 +531,7 @@ class Score : public QObject {
       void cmdAddTimeSig(Measure*, int);
 
       void setUpdateAll(bool v = true) { _updateAll = v;   }
-      void setLayoutAll(bool val)      { layoutAll = val;  }
+      void setLayoutAll(bool val);
       void addRefresh(const QRectF& r) { refresh |= r;     }
 
       void changeVoice(int);
@@ -809,6 +811,8 @@ class Score : public QObject {
       void updateNotes();
       void cmdUpdateNotes();
       void updateAccidentals(Measure* m, int staffIdx);
+      QHash<int, LinkedElements*>& links();
+
       };
 
 extern Score* gscore;

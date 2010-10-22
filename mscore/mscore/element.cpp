@@ -160,6 +160,8 @@ static const char* elementNames[] = {
       QT_TRANSLATE_NOOP("elementName", "AccidentalBracket")
       };
 
+int LinkedElements::_linkId = 1;
+
 //---------------------------------------------------------
 //   spatiumChanged
 //---------------------------------------------------------
@@ -218,6 +220,15 @@ QRectF Element::abbox() const
 
 Element::~Element()
       {
+      if (_links) {
+            _links->remove(this);
+            if (_links->isEmpty()) {
+                  //DEBUG:
+                  score()->links().remove(_links->lid());
+                  //
+                  delete _links;
+                  }
+            }
       if (score()) {
             foreach(Element* e, score()->selection().elements()) {
                   if (e == this) {
@@ -235,6 +246,7 @@ Element::~Element()
 //---------------------------------------------------------
 
 Element::Element(Score* s) :
+   _links(0),
    _parent(0),
    _selected(false),
    _generated(false),
@@ -245,9 +257,6 @@ Element::Element(Score* s) :
    _color(preferences.defaultColor),
    _mag(1.0),
    _score(s),
-//   _align(ALIGN_LEFT | ALIGN_TOP),
-//   _xoff(0), _yoff(0),
-//   _offsetType(OFFSET_SPATIUM),
    _mxmlOff(0),
    itemDiscovered(0)
       {
@@ -255,6 +264,7 @@ Element::Element(Score* s) :
 
 Element::Element(const Element& e)
       {
+      _links      = e._links;
       _parent     = e._parent;
       _selected   = e._selected;
       _generated  = e._generated;
@@ -266,16 +276,39 @@ Element::Element(const Element& e)
       _mag        = e._mag;
       _score      = e._score;
       _pos        = e._pos;
-//      _align      = e._align;
-//      _xoff       = e._xoff;
-//      _yoff       = e._yoff;
-//      _reloff     = e._reloff;
-//      _offsetType = e._offsetType;
-//    _userOff    = e._userOff;
       _mxmlOff    = e._mxmlOff;
       _readPos    = e._readPos;
       _bbox       = e._bbox;
       itemDiscovered = 0;
+      }
+
+//---------------------------------------------------------
+//   linkTo
+//---------------------------------------------------------
+
+void Element::linkTo(Element* element)
+      {
+      if (!_links) {
+            if (element->links())
+                  _links = element->links();
+            else {
+                  _links = new LinkedElements;
+                  _links->add(element);
+                  element->setLinks(_links);
+                  }
+            }
+      _links->add(this);
+      }
+
+//---------------------------------------------------------
+//   linkedClone
+//---------------------------------------------------------
+
+Element* Element::linkedClone()
+      {
+      Element* e = clone();
+      linkTo(e);
+      return e;
       }
 
 //---------------------------------------------------------
@@ -443,6 +476,8 @@ bool Element::intersects(const QRectF& rr) const
 QList<Prop> Element::properties(Xml& xml, const Element* proto) const
       {
       QList<Prop> pl;
+      if (_links && (_links->elements().size() > 1))
+            pl.append(Prop("lid", _links->lid()));
       if (_subtype) {
             QString s(subtypeName());
             if (!s.isEmpty())
@@ -485,7 +520,17 @@ bool Element::readProperties(QDomElement e)
       QString val(e.text());
       int i = val.toInt();
 
-      if (tag == "subtype") {
+      if (tag == "lid") {
+            _links = score()->links().value(i);
+            if (!_links) {
+                  if (score()->parentScore())   // DEBUG
+                        printf("---link %d not found (%d)\n", i, score()->links().size());
+                  _links = new LinkedElements(i);
+                  score()->links().insert(i, _links);
+                  }
+            _links->add(this);
+            }
+      else if (tag == "subtype") {
             // does not always call Element::setSubtype():
             this->setSubtype(val);
             }

@@ -587,6 +587,7 @@ ScoreView::ScoreView(QWidget* parent)
       grips       = 0;
       origEditObject   = 0;
       editObject  = 0;
+      addSelect   = false;
 
 
       if (converterMode)      // HACK
@@ -1145,7 +1146,6 @@ void ScoreView::startEdit()
       setFocus();
       if (origEditObject->isText()) {
             editObject = origEditObject;
-            editObject->startEdit(this, startMove);
             Text* t = static_cast<Text*>(editObject);
             _editText = t;
             mscore->textTools()->setText(t);
@@ -1158,18 +1158,45 @@ void ScoreView::startEdit()
             origEditObject->resetMode();
             SpannerSegment* ols = (SpannerSegment*)origEditObject;
             Spanner* ohp        = ols->spanner();
-            Spanner* hp         = (Spanner*)ohp->clone();
-            int idx             = ohp->spannerSegments().indexOf(ols);
-            editObject          = hp->spannerSegments().at(idx);
-            _score->undoChangeElement(ohp, hp);
-            editObject->startEdit(this, startMove);
+
+            LinkedElements* links = ohp->links();
+            if (links) {
+                  foreach(Element* e, links->elements()) {
+                        Spanner* sp = static_cast<Spanner*>(e);
+                        Spanner* csp = static_cast<Spanner*>(sp->clone());
+                        if (sp == ohp) {
+                              int idx = sp->spannerSegments().indexOf(ols);
+                              editObject = csp->spannerSegments().at(idx);
+                              }
+                        _score->undoChangeElement(sp, csp);
+                        }
+                  }
+            else {
+                  Spanner* hp         = (Spanner*)ohp->clone();
+                  int idx             = ohp->spannerSegments().indexOf(ols);
+                  editObject          = hp->spannerSegments().at(idx);
+                  _score->undoChangeElement(ohp, hp);
+                  }
             }
       else {
-            editObject = origEditObject->clone();
-            editObject->setSelected(true);
-            _score->undoChangeElement(origEditObject, editObject);
-            editObject->startEdit(this, startMove);
+            LinkedElements* links = origEditObject->links();
+            if (links) {
+                  foreach(Element* e, links->elements()) {
+                        Element* ce = e->clone();
+                        if (e == origEditObject) {
+                              editObject = ce;
+                              editObject->setSelected(true);
+                              }
+                        _score->undoChangeElement(e, ce);
+                        }
+                  }
+            else {
+                  editObject = origEditObject->clone();
+                  editObject->setSelected(true);
+                  _score->undoChangeElement(origEditObject, editObject);
+                  }
             }
+      editObject->startEdit(this, startMove);
       qreal w = 8.0 / _matrix.m11();
       qreal h = 8.0 / _matrix.m22();
       QRectF r(-w*.5, -h*.5, w, h);
@@ -2774,7 +2801,6 @@ void ScoreView::endEdit()
                   _score->undo()->push(new EditText(t, textUndoLevel));
             disconnect(t->doc(), SIGNAL(undoCommandAdded()), this, SLOT(textUndoLevelAdded()));
             }
-
       int tp = editObject->type();
 
       if (tp == LYRICS)
@@ -3865,3 +3891,5 @@ void ScoreView::changeEditElement(Element* e)
       endEdit();
       startEdit(e, grip);
       }
+
+

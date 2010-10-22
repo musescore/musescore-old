@@ -291,6 +291,20 @@ Chord::Chord(const Chord& c)
       }
 
 //---------------------------------------------------------
+//   linkedClone
+//---------------------------------------------------------
+
+Chord* Chord::linkedClone()
+      {
+      Chord* chord = new Chord(*this);
+      chord->linkTo(this);
+      int n = notes().size();
+      for (int i = 0; i < n; ++i)
+            chord->_notes[i]->linkTo(_notes[i]);
+      return chord;
+      }
+
+//---------------------------------------------------------
 //   setScore
 //---------------------------------------------------------
 

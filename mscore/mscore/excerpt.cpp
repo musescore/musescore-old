@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2009 Werner Schweer and others
+//  Copyright (C) 2009-2010 Werner Schweer et al.
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -337,7 +337,11 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
                               Element* oe = oseg->element(srcTrack);
                               if (oe == 0)
                                     continue;
-                              Element* ne = oe->clone();
+                              Element* ne;
+                              if (oe->generated())
+                                    ne = oe->clone();
+                              else
+                                    ne = oe->linkedClone();
                               ne->setTrack(track);
                               ne->scanElements(score, localSetScore);
                               ne->setScore(score);
@@ -467,7 +471,11 @@ void cloneStaff(Staff* srcStaff, Staff* dstStaff)
                         Element* oe = seg->element(srcTrack);
                         if (oe == 0)
                               continue;
-                        Element* ne = oe->clone();
+                        Element* ne;
+                        if (oe->generated())
+                              ne = oe->clone();
+                        else
+                              ne = oe->linkedClone();
                         ne->setTrack(dstTrack);
                         seg->add(ne);
                         if (oe->isChordRest()) {
@@ -538,14 +546,6 @@ void cloneStaff(Staff* srcStaff, Staff* dstStaff)
                               }
                         }
                   }
-//            foreach(Element* e, *m->el()) {
-//                  Element* ne = e->clone();
-//                  ne->setScore(score);
-//                  nmb->add(ne);
-//                  }
             }
-      //DEBUG:
-//      for (int track = 0; track < tracks; ++track)
-//            slurMap[track].check();
       }
 
