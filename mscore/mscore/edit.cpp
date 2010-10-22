@@ -1700,13 +1700,12 @@ printf("exchange voice %d %d, tick %d-%d, measure %p-%p\n", s, d, t1, t2, m1, m2
 
 void Score::cmdEnterRest(const Duration& d)
       {
-      startCmd();
-      expandVoice();
       if (_is.cr() == 0) {
             printf("cannot enter rest here\n");
             return;
             }
-
+      startCmd();
+      expandVoice();
       int track = _is.track;
       Segment* seg  = setNoteRest(_is.cr(), track, -1, d.fraction(), 0, AUTO);
       ChordRest* cr = static_cast<ChordRest*>(seg->element(track));
