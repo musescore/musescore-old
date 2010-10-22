@@ -1,5 +1,6 @@
 22.oct (la)
       - fix #7624: pressing space bar when slur is selected crashes program
+      - fix #7562: Cursor in text remains in print or PDF
 17.oct (la)
       - fix #7530: Hairpin starting on the first note is lost on reload
 14.oct (la)

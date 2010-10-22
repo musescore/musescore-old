@@ -697,7 +697,10 @@ void TextB::layout()
 
 void TextB::draw(QPainter& p) const
       {
-      textBase()->draw(p, cursor);
+      if(score() && score()->printing())
+            textBase()->draw(p, 0);
+      else
+            textBase()->draw(p, cursor);
       }
 
 //---------------------------------------------------------
