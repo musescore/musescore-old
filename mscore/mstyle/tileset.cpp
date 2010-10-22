@@ -122,7 +122,7 @@ inline bool bits(TileSet::Tiles flags, TileSet::Tiles testFlags)
 void TileSet::render(const QRect &r, QPainter *p, Tiles t) const
       {
       // check initialization
-      if( _pixmaps.size() < 9)
+      if (_pixmaps.size() < 9)
             return;
 
       int x0, y0, w, h;
@@ -132,7 +132,7 @@ void TileSet::render(const QRect &r, QPainter *p, Tiles t) const
       int wLeft(0);
       int wRight(0);
       if (_w1+_w3 > 0) {
-            qreal wRatio( qreal(_w1)/qreal(_w1 + _w3));
+            qreal wRatio(qreal(_w1)/qreal(_w1 + _w3));
             wLeft = (t&Right) ? qMin(_w1, int(w*wRatio)) : _w1;
             wRight = (t&Left) ? qMin(_w3, int(w*(1.0-wRatio))) : _w3;
             }

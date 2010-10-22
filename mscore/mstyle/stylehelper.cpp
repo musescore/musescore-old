@@ -1554,7 +1554,7 @@ TileSet* StyleHelper::roundCorner(const QColor &color, int size) const
 
 TileSet* StyleHelper::slope(const QColor &color, qreal shade, int size) const
       {
-      const quint64 key( (quint64(color.rgba()) << 32)|(quint64(256.0*shade)<<24)|size );
+      const quint64 key((quint64(color.rgba()) << 32)|(quint64(256.0*shade)<<24)|size);
       TileSet *tileSet = m_slopeCache.object(key);
 
       if (!tileSet) {
@@ -1742,7 +1742,7 @@ void StyleHelper::drawShadow(QPainter &p, const QColor &color, int size) const
       for (int i = 0; i < 8; i++) {
             // sinusoidal gradient
             const qreal k1( (k0 * qreal(8 - i) + qreal(i)) * 0.125 );
-            const qreal a( (cos(3.14159 * i * 0.125) + 1.0) * 0.30 );
+            const qreal a((cos(3.14159 * i * 0.125) + 1.0) * 0.30 );
             shadowGradient.setColorAt(k1, alphaColor(color, a * _shadowGain));
             }
 
