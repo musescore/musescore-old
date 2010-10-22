@@ -58,7 +58,7 @@ MStyle::MStyle()
       _hintCounter       = QStyle::SH_CustomBase;
       _controlCounter    = QStyle::CE_CustomBase;
       _subElementCounter = QStyle::SE_CustomBase;
-      CE_CapacityBar = newControlElement("CE_CapacityBar");
+      CE_CapacityBar     = newControlElement("CE_CapacityBar");
 
       _animations    = new Animations(this);
       _transitions   = new Transitions(this);
@@ -302,10 +302,12 @@ int MStyle::pixelMetric(PixelMetric metric, const QStyleOption* option, const QW
 
             // spacing between widget and scrollbars
             case PM_ScrollView_ScrollBarSpacing: return -2;
-
+#if 0
             case 10: return 9;
             case 28: return 0;
             case 29: return 0;
+            case PM_HeaderMargin: return 4;           // 50
+
             case 65: return 16;
             case 69: return 2;
             case 70: return 2;
@@ -317,12 +319,11 @@ int MStyle::pixelMetric(PixelMetric metric, const QStyleOption* option, const QW
             case 88: return 16;
             case 89: return 16;
             case 91: return -5;
-
+#endif
 
             default:
                   {
                   int val = QCommonStyle::pixelMetric(metric, option, widget);
-printf("metrik %d -> %d\n", int(metric), val);
                   return val;
                   }
             }
@@ -1196,16 +1197,18 @@ bool MStyle::drawFrameGroupBoxPrimitive(const QStyleOption* option, QPainter* pa
       painter->setPen(Qt::NoPen);
 
       QLinearGradient innerGradient(0, r.top()-r.height()+12, 0, r.bottom()+r.height()-19);
-      QColor light( _helper.calcLightColor(base) );
-      light.setAlphaF(0.4); innerGradient.setColorAt(0.0, light);
-      light.setAlphaF(0.0); innerGradient.setColorAt(1.0, light);
+      QColor light(_helper.calcLightColor(base));
+      light.setAlphaF(0.4);
+      innerGradient.setColorAt(0.0, light);
+      light.setAlphaF(0.0);
+      innerGradient.setColorAt(1.0, light);
       painter->setBrush(innerGradient);
       painter->setClipRect(r.adjusted(0, 0, 0, -19));
       _helper.fillSlab(*painter, r);
 
-      TileSet *slopeTileSet = _helper.slope( base, 0.0);
+      TileSet* slopeTileSet = _helper.slope(base, 0.0);
       painter->setClipping(false);
-      slopeTileSet->render( r, painter );
+      slopeTileSet->render(r, painter);
 
       painter->restore();
       return true;
@@ -3344,74 +3347,68 @@ void MStyle::renderButtonSlab(QPainter *painter, QRect r, const QColor &color, S
 
           }
 
-void MStyle::renderSlab(
-        QPainter *painter, QRect r,
-        const QColor &color,
-        StyleOptions options, qreal opacity,
-        AnimationMode mode,
-        TileSet::Tiles tiles) const
-    {
+//---------------------------------------------------------
+//   renderSlab
+//---------------------------------------------------------
 
-              // check rect
-              if( !r.isValid() ) return;
+void MStyle::renderSlab(QPainter *painter, QRect r, const QColor &color, StyleOptions options, qreal opacity,
+   AnimationMode mode, TileSet::Tiles tiles) const
+      {
+      // check rect
+      if( !r.isValid() )
+            return;
 
-              // this is needed for button vertical alignment
-              r.translate(0,-1);
-              if( !painter->clipRegion().isEmpty() ) painter->setClipRegion( painter->clipRegion().translated(0,-1) );
+      // this is needed for button vertical alignment
+      r.translate(0,-1);
+      if (!painter->clipRegion().isEmpty())
+            painter->setClipRegion( painter->clipRegion().translated(0,-1));
 
-              // additional adjustment for sunken frames
-              if( options & Sunken) r.adjust(-1,0,1,2);
+      // additional adjustment for sunken frames
+      if (options & Sunken)
+            r.adjust(-1,0,1,2);
 
-              // fill
-              if( !(options & NoFill))
-                    {
-                        painter->save();
-                        painter->setRenderHint(QPainter::Antialiasing);
-                        painter->setPen(Qt::NoPen);
+      // fill
+      if (!(options & NoFill)) {
+            painter->save();
+            painter->setRenderHint(QPainter::Antialiasing);
+            painter->setPen(Qt::NoPen);
 
-                        if( _helper.calcShadowColor(color).value() > color.value() && (options & Sunken) )
-                              {
+            if( _helper.calcShadowColor(color).value() > color.value() && (options & Sunken) ) {
+                  QLinearGradient innerGradient(0, r.top(), 0, r.bottom() + r.height());
+                  innerGradient.setColorAt(0.0, color);
+                  innerGradient.setColorAt(1.0, _helper.calcLightColor(color));
+                  painter->setBrush(innerGradient);
+                  }
+            else {
+                  QLinearGradient innerGradient(0, r.top() - r.height(), 0, r.bottom());
+                  innerGradient.setColorAt(0.0, _helper.calcLightColor(color));
+                  innerGradient.setColorAt(1.0, color);
+                  painter->setBrush(innerGradient);
+                  }
+            _helper.fillSlab(*painter, r);
+            painter->restore();
+            }
 
-                                  QLinearGradient innerGradient(0, r.top(), 0, r.bottom() + r.height());
-                                  innerGradient.setColorAt(0.0, color);
-                                  innerGradient.setColorAt(1.0, _helper.calcLightColor(color));
-                                  painter->setBrush(innerGradient);
+      // edges
+      // for slabs, hover takes precedence over focus (other way around for holes)
+      // but in any case if the button is sunken we don't show focus nor hover
 
-                              } else {
-
-                                  QLinearGradient innerGradient(0, r.top() - r.height(), 0, r.bottom());
-                                  innerGradient.setColorAt(0.0, _helper.calcLightColor(color));
-                                  innerGradient.setColorAt(1.0, color);
-                                  painter->setBrush(innerGradient);
-
-                              }
-
-                        _helper.fillSlab( *painter, r );
-
-                        painter->restore();
-                    }
-
-              // edges
-              // for slabs, hover takes precedence over focus (other way around for holes)
-              // but in any case if the button is sunken we don't show focus nor hover
-              TileSet *tile(0);
-              if( (options & Sunken) && color.isValid() )
-                    {
-                        tile = _helper.slabSunken(color, 0.0);
-
-                    } else {
-
-                        // calculate proper glow color based on current settings and opacity
-                        QColor glow( slabShadowColor( color, options, opacity, mode ) );
-                        if( glow.isValid() ) tile = _helper.slabFocused(color, glow , 0.0);
-                              else if( color.isValid() ) tile = _helper.slab(color, 0.0);
-                              else return;
-
-                    }
-
-              // render tileset
+      TileSet* tile = 0;
+      if ((options & Sunken) && color.isValid())
+            tile = _helper.slabSunken(color, 0.0);
+      else {
+            // calculate proper glow color based on current settings and opacity
+            QColor glow(slabShadowColor(color, options, opacity, mode));
+            if (glow.isValid())
+                  tile = _helper.slabFocused(color, glow , 0.0);
+            else if (color.isValid())
+                  tile = _helper.slab(color, 0.0);
+            else
+                  return;
+            }
+      // render tileset
       if (tile)
-            tile->render( r, painter, tiles );
+            tile->render(r, painter, tiles);
       }
 
 void MStyle::fillTabBackground( QPainter* painter, const QRect &r, const QColor &color, QTabBar::Shape shape, const QWidget* widget ) const
@@ -3562,7 +3559,6 @@ void MStyle::drawControl(ControlElement element, const QStyleOption* option, QPa
                   default:  break;
                   }
             }
-
       if (!(fcn && (this->*fcn)(option, painter, widget)))
             QCommonStyle::drawControl(element, option, painter, widget);
       painter->restore();
@@ -4276,7 +4272,7 @@ bool MStyle::eventFilterDockWidget( QDockWidget* dockWidget, QEvent* event )
                                   if(dockWidget->isWindow())
                                         {
 
-                                            #ifndef Q_WS_WIN
+#ifndef Q_WS_WIN
                                             bool hasAlpha( _helper.hasAlphaChannel( dockWidget ) );
                                             if( hasAlpha )
                                                   {
@@ -4288,15 +4284,15 @@ bool MStyle::eventFilterDockWidget( QDockWidget* dockWidget, QEvent* event )
                                                       painter.setCompositionMode( QPainter::CompositionMode_SourceOver );
                                                       painter.setClipRegion( _helper.roundedMask( r.adjusted( 1, 1, -1, -1 ) ), Qt::IntersectClip );
                                                   }
-                                            #endif
+#endif
 
                                             _helper.renderWindowBackground( &painter, r, dockWidget, color );
 
-                                            #ifndef Q_WS_WIN
+#ifndef Q_WS_WIN
                                             if( hasAlpha ) painter.setClipping( false );
 
-                                            _helper.drawFloatFrame( &painter, r, color, !hasAlpha );
-                                            #endif
+                                                _helper.drawFloatFrame( &painter, r, color, !hasAlpha );
+#endif
 
                                         } else {
 
@@ -5686,76 +5682,78 @@ bool MStyle::drawTabBarTabLabelControl( const QStyleOption* option, QPainter* pa
 
           }
 
-bool MStyle::drawTabBarTabShapeControl_Single( const QStyleOption* option, QPainter* painter, const QWidget* widget) const
-    {
+bool MStyle::drawTabBarTabShapeControl_Single(const QStyleOption* option, QPainter* painter, const QWidget* widget) const
+      {
+      const QStyleOptionTab* tabOpt( qstyleoption_cast<const QStyleOptionTab*>(option) );
+      if (!tabOpt)
+            return true;
 
-              const QStyleOptionTab* tabOpt( qstyleoption_cast<const QStyleOptionTab*>(option) );
-              if( !tabOpt ) return true;
+      const State& flags(option->state);
+      const QRect& r(option->rect);
+      const QPalette& palette(option->palette);
 
-              const State& flags( option->state );
-              const QRect& r( option->rect );
-              const QPalette& palette( option->palette );
+      const bool enabled(flags & State_Enabled);
+      const bool selected(flags&State_Selected);
+      const bool reverseLayout(option->direction == Qt::RightToLeft);
 
-              const bool enabled( flags & State_Enabled );
-              const bool selected( flags&State_Selected );
-              const bool reverseLayout( option->direction == Qt::RightToLeft );
+      // this is needed to complete the base frame when there are widgets in tabbar
+      const QTabBar* tabBar(qobject_cast<const QTabBar*>(widget));
+      const QRect tabBarRect(tabBar ? insideMargin(tabBar->rect(), -GlowWidth ):QRect());
 
-              // this is needed to complete the base frame when there are widgets in tabbar
-              const QTabBar* tabBar( qobject_cast<const QTabBar*>( widget ) );
-              const QRect tabBarRect( tabBar ? insideMargin( tabBar->rect(), -GlowWidth ):QRect() );
+      // check if tab is being dragged
+      const bool isDragged(selected && painter->device() != tabBar);
 
-              // check if tab is being dragged
-              const bool isDragged( selected && painter->device() != tabBar );
+      // hover and animation flags
+      /* all are disabled when tabBar is locked (drag in progress) */
+      const bool tabBarLocked( tabBarData().locks( tabBar ) );
+      const bool mouseOver( enabled && !tabBarLocked && (flags & State_MouseOver) );
 
-              // hover and animation flags
-              /* all are disabled when tabBar is locked (drag in progress) */
-              const bool tabBarLocked( tabBarData().locks( tabBar ) );
-              const bool mouseOver( enabled && !tabBarLocked && (flags & State_MouseOver) );
+      // animation state
+      animations().tabBarEngine().updateState( widget, r.topLeft(), mouseOver );
+      const bool animated( enabled && !selected && !tabBarLocked && animations().tabBarEngine().isAnimated( widget, r.topLeft() ) );
 
-              // animation state
-              animations().tabBarEngine().updateState( widget, r.topLeft(), mouseOver );
-              const bool animated( enabled && !selected && !tabBarLocked && animations().tabBarEngine().isAnimated( widget, r.topLeft() ) );
+      // handle base frame painting, for tabbars in which tab is being dragged
+      tabBarData().drawTabBarBaseControl(tabOpt, painter, widget);
+      if (selected && tabBar && isDragged)
+            tabBarData().lock( tabBar );
+      else if( selected  && tabBarData().locks( tabBar ) )
+            tabBarData().release();
 
-              // handle base frame painting, for tabbars in which tab is being dragged
-              tabBarData().drawTabBarBaseControl( tabOpt, painter, widget );
-              if( selected && tabBar && isDragged ) tabBarData().lock( tabBar );
-                    else if( selected  && tabBarData().locks( tabBar ) ) tabBarData().release();
+      // tab position and flags
+      const QStyleOptionTab::TabPosition& position = tabOpt->position;
+      const bool isFirst( position == QStyleOptionTab::OnlyOneTab || position == QStyleOptionTab::Beginning );
+      const bool isRightOfSelected( tabOpt->selectedPosition == QStyleOptionTab::PreviousIsSelected );
 
-              // tab position and flags
-              const QStyleOptionTab::TabPosition& position = tabOpt->position;
-              const bool isFirst( position == QStyleOptionTab::OnlyOneTab || position == QStyleOptionTab::Beginning );
-              const bool isRightOfSelected( tabOpt->selectedPosition == QStyleOptionTab::PreviousIsSelected );
+      // document mode
+      const QStyleOptionTabV3 *tabOptV3 = qstyleoption_cast<const QStyleOptionTabV3 *>(option);
+      bool documentMode = tabOptV3 ? tabOptV3->documentMode : false;
+      const QTabWidget *tabWidget = (widget && widget->parentWidget()) ? qobject_cast<const QTabWidget *>(widget->parentWidget()) : NULL;
+      documentMode |= (tabWidget ? tabWidget->documentMode() : true );
 
-              // document mode
-              const QStyleOptionTabV3 *tabOptV3 = qstyleoption_cast<const QStyleOptionTabV3 *>(option);
-              bool documentMode = tabOptV3 ? tabOptV3->documentMode : false;
-              const QTabWidget *tabWidget = (widget && widget->parentWidget()) ? qobject_cast<const QTabWidget *>(widget->parentWidget()) : NULL;
-              documentMode |= (tabWidget ? tabWidget->documentMode() : true );
+      // corner widgets
+      const bool hasLeftCornerWidget( tabOpt->cornerWidgets & QStyleOptionTab::LeftCornerWidget );
+      const bool hasRightCornerWidget( tabOpt->cornerWidgets & QStyleOptionTab::RightCornerWidget );
 
-              // corner widgets
-              const bool hasLeftCornerWidget( tabOpt->cornerWidgets & QStyleOptionTab::LeftCornerWidget );
-              const bool hasRightCornerWidget( tabOpt->cornerWidgets & QStyleOptionTab::RightCornerWidget );
+      // true if widget is alligned to the frame
+      /* need to check for 'isRightOfSelected' because for some reason the isFirst flag is set when active tab is being moved */
+      const bool isFrameAligned( !documentMode && isFirst && !hasLeftCornerWidget && !isRightOfSelected && !isDragged );
 
-              // true if widget is alligned to the frame
-              /* need to check for 'isRightOfSelected' because for some reason the isFirst flag is set when active tab is being moved */
-              const bool isFrameAligned( !documentMode && isFirst && !hasLeftCornerWidget && !isRightOfSelected && !isDragged );
+      // part of the tab in which the text is drawn
+      QRect tabRect( r );
 
-              // part of the tab in which the text is drawn
-              QRect tabRect( r );
+      // connection to the frame
+      SlabRectList slabs;
 
-              // connection to the frame
-              SlabRectList slabs;
-
-              switch( tabOpt->shape )
-              {
-                        case QTabBar::RoundedNorth:
-                        case QTabBar::TriangularNorth:
-                        {
-
-                                  // part of the tab in which the text is drawn
-                                  // larger tabs when selected
-                                  if( selected ) tabRect.adjust( 0, -1, 0, 2 );
-                                        else tabRect.adjust( 0, 1, 0, 2 );
+      switch(tabOpt->shape) {
+            case QTabBar::RoundedNorth:
+            case QTabBar::TriangularNorth:
+                  {
+                  // part of the tab in which the text is drawn
+                  // larger tabs when selected
+                  if( selected )
+                        tabRect.adjust( 0, -1, 0, 2 );
+                  else
+                        tabRect.adjust( 0, 1, 0, 2 );
 
                                   // reduces the space between tabs
                                   tabRect.adjust(-GlowWidth,0,GlowWidth,0);
@@ -5861,8 +5859,8 @@ bool MStyle::drawTabBarTabShapeControl_Single( const QStyleOption* option, QPain
 
                               }
 
-                        case QTabBar::RoundedSouth:
-                        case QTabBar::TriangularSouth:
+            case QTabBar::RoundedSouth:
+            case QTabBar::TriangularSouth:
                         {
 
                                   // larger tabs when selected
@@ -5973,8 +5971,8 @@ bool MStyle::drawTabBarTabShapeControl_Single( const QStyleOption* option, QPain
 
                               }
 
-                        case QTabBar::RoundedWest:
-                        case QTabBar::TriangularWest:
+            case QTabBar::RoundedWest:
+            case QTabBar::TriangularWest:
                         {
 
                                   // larger tabs when selected
@@ -6059,8 +6057,8 @@ bool MStyle::drawTabBarTabShapeControl_Single( const QStyleOption* option, QPain
                                   break;
                               }
 
-                        case QTabBar::RoundedEast:
-                        case QTabBar::TriangularEast:
+            case QTabBar::RoundedEast:
+            case QTabBar::TriangularEast:
                         {
 
                                   // larger tabs when selected
@@ -6145,71 +6143,69 @@ bool MStyle::drawTabBarTabShapeControl_Single( const QStyleOption* option, QPain
                                   break;
                               }
 
-                        default: break;
-                    }
+            default:
+                  break;
+            }
 
 
-              // slab options
-              StyleOptions slabOptions( NoFill );
-              if( MStyleConfigData::tabSubtleShadow) slabOptions |= SubtleShadow;
-                    if( (!selected ) && ( mouseOver || animated ) ) slabOptions |= Hover;
+      // slab options
+      StyleOptions slabOptions( NoFill );
+      if( MStyleConfigData::tabSubtleShadow)
+            slabOptions |= SubtleShadow;
+      if ((!selected) && (mouseOver || animated))
+            slabOptions |= Hover;
 
-              // color
-              const QColor color( palette.color(QPalette::Window) );
+      // color
+      const QColor color( palette.color(QPalette::Window) );
 
-              // render connections to frame
-              // extra care must be taken care of so that no slab
-              // extends beyond tabWidget frame, if any
-              const bool verticalTabs( isVerticalTab( tabOpt ) );
-              const QRect tabWidgetRect( tabWidget ?
-                  insideMargin( tabWidget->rect(), -GlowWidth ).translated( -widget->geometry().topLeft() ) :
-                  QRect() );
+      // render connections to frame
+      // extra care must be taken care of so that no slab
+      // extends beyond tabWidget frame, if any
+      const bool verticalTabs( isVerticalTab( tabOpt ) );
+      const QRect tabWidgetRect( tabWidget ?
+      insideMargin( tabWidget->rect(), -GlowWidth ).translated( -widget->geometry().topLeft() ) :
+      QRect() );
 
-              foreach( SlabRect slab, slabs ) // krazy:exclude=foreach
-                    {
-                        adjustSlabRect( slab, tabWidgetRect, documentMode, verticalTabs );
-                        if( selected || !animated ) renderSlab( painter, slab, color, slabOptions );
-                              else {
+      foreach( SlabRect slab, slabs ) { // krazy:exclude=foreach
+            adjustSlabRect( slab, tabWidgetRect, documentMode, verticalTabs );
+            if (selected || !animated )
+                  renderSlab( painter, slab, color, slabOptions );
+            else {
+                  const qreal opacity( animations().tabBarEngine().opacity( widget, r.topLeft() ) );
+                  renderSlab( painter, slab, color, slabOptions, opacity, AnimationHover);
+                  }
+            }
 
-                                  const qreal opacity( animations().tabBarEngine().opacity( widget, r.topLeft() ) );
-                                  renderSlab( painter, slab, color, slabOptions, opacity, AnimationHover);
+      //  adjust clip rect and render tabs
+      if( tabBar ) {
+            painter->save();
+            painter->setClipRegion( tabBarClipRegion( tabBar ) );
+            }
 
-                              }
+      // draw tab
+      TileSet::Tiles tiles(tilesByShape(tabOpt->shape));
+      if (selected) {
+            // render window background in case of dragged tabwidget
+            if (isDragged)
+                  fillTabBackground(painter, tabRect, color, tabOpt->shape, widget);
+            renderSlab(painter, tabRect, color, slabOptions, tiles);
+            }
+      else if (animated) {
+            const qreal opacity(animations().tabBarEngine().opacity(widget, r.topLeft()));
+            renderSlab(painter, tabRect, color, slabOptions, opacity, AnimationHover, tiles);
+            }
+      else
+            renderSlab(painter, tabRect, color, slabOptions, tiles);
 
-                    }
+      // fill tab
+      fillTab(painter, tabRect, color, tabOpt->shape, selected);
 
-              //  adjust clip rect and render tabs
-              if( tabBar )
-                    {
-                        painter->save();
-                        painter->setClipRegion( tabBarClipRegion( tabBar ) );
-                    }
+      // restore clip region
+      if (tabBar)
+            painter->restore();
 
-              // draw tab
-              TileSet::Tiles tiles( tilesByShape( tabOpt->shape ) );
-              if( selected )
-                    {
-
-                        // render window background in case of dragged tabwidget
-                        if( isDragged ) fillTabBackground( painter, tabRect, color, tabOpt->shape, widget );
-                              renderSlab( painter, tabRect, color, slabOptions, tiles );
-
-                    } else if( animated ) {
-
-                        const qreal opacity( animations().tabBarEngine().opacity( widget, r.topLeft() ) );
-                        renderSlab( painter, tabRect, color, slabOptions, opacity, AnimationHover, tiles);
-
-                    } else renderSlab( painter, tabRect, color, slabOptions, tiles );
-
-              // fill tab
-              fillTab( painter, tabRect, color, tabOpt->shape, selected );
-
-              // restore clip region
-              if( tabBar ) painter->restore();
-
-              return true;
-
-          }
+      return true;
+      }
 
 bool MStyle::drawTabBarTabShapeControl_Plain( const QStyleOption* option, QPainter* painter, const QWidget* widget) const
     {
