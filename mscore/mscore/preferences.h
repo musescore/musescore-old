@@ -118,8 +118,6 @@ struct Preferences {
       double spatium;
       double mag;
 
-      QString style;
-
       //update
       int checkUpdateStartup;
 

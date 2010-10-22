@@ -170,7 +170,6 @@ void Preferences::init()
       pngResolution            = 300.0;
       pngTransparent           = true;
       language                 = "system";
-      style                    = "";
 
       replaceCopyrightSymbol  = true;
       replaceFractions        = true;
@@ -274,7 +273,6 @@ void Preferences::write()
       s.setValue("pngResolution",      pngResolution);
       s.setValue("pngTransparent",     pngTransparent);
       s.setValue("language",           language);
-      s.setValue("style", style);
 
       s.setValue("replaceFractions", replaceFractions);
       s.setValue("replaceCopyrightSymbol", replaceCopyrightSymbol);
@@ -399,7 +397,6 @@ void Preferences::read()
       pngResolution            = s.value("pngResolution", 300.0).toDouble();
       pngTransparent           = s.value("pngTransparent", true).toBool();
       language                 = s.value("language", "system").toString();
-      style                    = s.value("style", "").toString();
 
       replaceFractions = s.value("replaceFractions", true).toBool();
       replaceCopyrightSymbol = s.value("replaceCopyrightSymbol", true).toBool();
@@ -1232,7 +1229,6 @@ void PreferenceDialog::apply()
 
       qApp->setStyleSheet(appStyleSheet());
 
-      preferences.style = QString();
       genIcons();
 
       emit preferencesChanged();
