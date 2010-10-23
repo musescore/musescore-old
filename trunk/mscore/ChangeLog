@@ -1,3 +1,6 @@
+23.oct (ws)
+      - mstyle: replaced pixmap operations with QImage as composite modes
+        are only supported on X11 for pixmaps
 22.oct (ws)
       - updates for "linked parts" implementation; synchronize line elements
 20.oct (ws)
