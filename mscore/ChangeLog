@@ -1,3 +1,5 @@
+23.oct (la)
+      - fix default fingering font
 22.oct (la)
       - fix #7624: pressing space bar when slur is selected crashes program
       - fix #7562: Cursor in text remains in print or PDF
