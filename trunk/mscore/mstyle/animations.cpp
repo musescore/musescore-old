@@ -40,10 +40,10 @@
     {
 
         widgetEnabilityEngine_ = new WidgetStateEngine( this );
-        spinBoxEngine_ = new SpinBoxEngine( this );
-        comboBoxEngine_ = new WidgetStateEngine( this );
-        toolButtonEngine_ = new WidgetStateEngine( this );
-        toolBoxEngine_ = new ToolBoxEngine( this );
+        spinBoxEngine_         = new SpinBoxEngine( this );
+        comboBoxEngine_        = new WidgetStateEngine( this );
+        toolButtonEngine_      = new WidgetStateEngine( this );
+        toolBoxEngine_         = new ToolBoxEngine( this );
 
         registerEngine( splitterEngine_ = new SplitterEngine( this ) );
         registerEngine( dockSeparatorEngine_ = new DockSeparatorEngine( this ) );
