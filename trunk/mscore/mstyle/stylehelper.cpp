@@ -696,7 +696,7 @@ QPixmap StyleHelper::verticalGradient(const QColor &color, int height, int offse
 
       if (!pixmap) {
             QImage image(1, height,  QImage::Format_ARGB32_Premultiplied);
-            image.fill(Qt::transparent );
+            image.fill(Qt::transparent);
 
             QLinearGradient gradient(0, offset, 0, height+offset);
             gradient.setColorAt(0.0, backgroundTopColor(color));
@@ -705,7 +705,7 @@ QPixmap StyleHelper::verticalGradient(const QColor &color, int height, int offse
 
             QPainter p(&image);
             p.setCompositionMode(QPainter::CompositionMode_Source);
-            p.fillRect(pixmap->rect(), gradient);
+            p.fillRect(image.rect(), gradient);
             p.end();
             pixmap = new QPixmap(QPixmap::fromImage(image));
             m_backgroundCache.insert(key, pixmap);
