@@ -302,24 +302,6 @@ int MStyle::pixelMetric(PixelMetric metric, const QStyleOption* option, const QW
 
             // spacing between widget and scrollbars
             case PM_ScrollView_ScrollBarSpacing: return -2;
-#if 0
-            case 10: return 9;
-            case 28: return 0;
-            case 29: return 0;
-            case PM_HeaderMargin: return 4;           // 50
-
-            case 65: return 16;
-            case 69: return 2;
-            case 70: return 2;
-            case 72: return 6;
-            case 73: return 16;
-            case 78: return 2;
-            case 86: return 1;
-            case 87: return 1;
-            case 88: return 16;
-            case 89: return 16;
-            case 91: return -5;
-#endif
 
             default:
                   {
@@ -2896,8 +2878,11 @@ void MStyle::renderScrollBarHole(
 
           }
 
-    //______________________________________________________________________________
-    void MStyle::renderScrollBarHandle(
+//---------------------------------------------------------
+//   renderScrollBarHandle
+//---------------------------------------------------------
+
+void MStyle::renderScrollBarHandle(
         QPainter* painter, const QRect& r, const QPalette& palette,
         const Qt::Orientation& orientation, const bool& hover, const qreal& opacity ) const
     {
@@ -3024,35 +3009,33 @@ void MStyle::renderScrollBarHole(
 
           }
 
-    //______________________________________________________________________________
-    void MStyle::renderScrollBarArrow(
-        QPainter* painter, const QRect& r, const QColor& color, const QColor& background,
-        ArrowOrientation orientation ) const
-    {
+//---------------------------------------------------------
+//   renderScrollBarArrow
+//---------------------------------------------------------
 
-              const qreal penThickness = 1.6;
-              QPolygonF a( genericArrow( orientation, ArrowNormal ) );
+void MStyle::renderScrollBarArrow(QPainter* painter, const QRect& r, const QColor& color,
+   const QColor& background, ArrowOrientation orientation) const
+      {
+      const qreal penThickness = 1.6;
+      QPolygonF a(genericArrow(orientation, ArrowNormal));
 
-              const QColor contrast( _helper.calcLightColor( background ) );
-              const QColor base( _helper.decoColor( background, color ) );
+      const QColor contrast(_helper.calcLightColor(background));
+      const QColor base(_helper.decoColor(background, color));
 
-              painter->save();
-              painter->translate( r.center() );
-              painter->setRenderHint(QPainter::Antialiasing);
+      painter->save();
+      painter->translate( r.center() );
+      painter->setRenderHint(QPainter::Antialiasing);
 
-              const qreal offset( qMin( penThickness, qreal(1.0)) );
-              painter->translate(0,offset);
-              painter->setPen( QPen( contrast, penThickness, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-              painter->drawPolyline(a);
-              painter->translate(0,-offset);
+      const qreal offset( qMin( penThickness, qreal(1.0)) );
+      painter->translate(0,offset);
+      painter->setPen( QPen( contrast, penThickness, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+      painter->drawPolyline(a);
+      painter->translate(0,-offset);
 
-              painter->setPen(QPen( base, penThickness, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-              painter->drawPolyline(a);
-              painter->restore();
-
-              return;
-
-          }
+      painter->setPen(QPen( base, penThickness, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+      painter->drawPolyline(a);
+      painter->restore();
+      }
 
     //______________________________________________________________________________
     QColor MStyle::scrollBarArrowColor( const QStyleOption* option, const SubControl& control, const QWidget* widget ) const

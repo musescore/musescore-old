@@ -501,7 +501,8 @@ void FlatFrameShadow::paintEvent(QPaintEvent *event )
                   return;
             }
       QWidget *parent = parentWidget();
-      QPixmap pm(size());
+      QImage pm(size(),  QImage::Format_ARGB32_Premultiplied);
+
       {
       pm.fill(Qt::transparent);
       QPainter p(&pm);
@@ -521,7 +522,7 @@ void FlatFrameShadow::paintEvent(QPaintEvent *event )
       QPainter p(this);
       p.setClipRegion(event->region());
       p.fillRect(rect(), Qt::transparent);
-      p.drawPixmap(QPoint(0,0), pm);
+      p.drawPixmap(QPoint(0,0), QPixmap::fromImage(pm));
       return;
       }
 
