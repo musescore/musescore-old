@@ -25,6 +25,7 @@ class Element;
 class Sym;
 class Xml;
 class Palette;
+class PaletteScrollArea;
 
 #include "ui_palette.h"
 #include "ui_cellproperties.h"
@@ -85,11 +86,13 @@ class PaletteBoxButton : public QToolButton {
       Q_OBJECT
 
       Palette* palette;
+      PaletteScrollArea* scrollArea;
       QAction* editAction;
 
       int id;
 
       virtual void changeEvent(QEvent*);
+      virtual void paintEvent( QPaintEvent * );
 
    private slots:
       void deleteTriggered()     { emit paletteCmd(PALETTE_DELETE, id);  }
@@ -99,12 +102,13 @@ class PaletteBoxButton : public QToolButton {
       void newTriggered()        { emit paletteCmd(PALETTE_NEW, id);     }
       void beforePulldown();
       void enableEditing(bool);
+      void showPalette(bool);
 
    signals:
       void paletteCmd(int, int);
-
+      
    public:
-      PaletteBoxButton(QWidget*, Palette*, QWidget* parent = 0);
+      PaletteBoxButton(PaletteScrollArea*, Palette*, QWidget* parent = 0);
       void setId(int v) { id = v; }
       };
 

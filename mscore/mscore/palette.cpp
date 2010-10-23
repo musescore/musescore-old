@@ -994,16 +994,19 @@ void Palette::actionToggled(bool /*val*/)
 //   PaletteBoxButton
 //---------------------------------------------------------
 
-PaletteBoxButton::PaletteBoxButton(QWidget* w, Palette* p, QWidget* parent)
+PaletteBoxButton::PaletteBoxButton(PaletteScrollArea* sa, Palette* p, QWidget* parent)
    : QToolButton(parent)
       {
       palette = p;
+      scrollArea = sa;
       setCheckable(true);
       setFocusPolicy(Qt::NoFocus);
-      connect(this, SIGNAL(clicked(bool)), w, SLOT(setVisible(bool)));
+      connect(this, SIGNAL(clicked(bool)), this, SLOT(showPalette(bool)));
       setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
       QMenu* menu = new QMenu;
       connect(menu, SIGNAL(aboutToShow()), SLOT(beforePulldown()));
+      setArrowType(Qt::RightArrow);
+      setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
 
       QAction* action;
 
@@ -1055,6 +1058,28 @@ void PaletteBoxButton::changeEvent(QEvent* ev)
       {
       if (ev->type() == QEvent::FontChange)
             setFixedHeight(QFontMetrics(font()).height() + 2);
+      }
+
+//---------------------------------------------------------
+//   showPalette
+//---------------------------------------------------------      
+void PaletteBoxButton::showPalette(bool visible) 
+      {
+      scrollArea->setVisible(visible);
+      setArrowType(visible ? Qt::DownArrow : Qt::RightArrow );
+      }
+      
+//---------------------------------------------------------
+//   paintEvent
+//---------------------------------------------------------
+void PaletteBoxButton::paintEvent( QPaintEvent * )
+      {
+      //remove automatic menu arrow 
+      QStylePainter p( this ); 
+      QStyleOptionToolButton opt; 
+      initStyleOption( & opt ); 
+      opt.features &= (~ QStyleOptionToolButton::HasMenu); 
+      p.drawComplexControl( QStyle::CC_ToolButton, opt ); 
       }
 
 //---------------------------------------------------------
