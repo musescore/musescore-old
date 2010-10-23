@@ -30,8 +30,6 @@
 #include "windowmanager.h"
 #include "mconfig.h"
 
-#include "../mscore/palette.h"      // WSHACK
-
 #define MStyleConfigData_toolTipTransparent            true
 #define MStyleConfigData_toolBarDrawItemSeparator      true
 #define MStyleConfigData_viewDrawTriangularExpander    true
@@ -7160,15 +7158,6 @@ bool MStyle::drawToolBoxTabShapeControl( const QStyleOption* option, QPainter* p
 
 bool MStyle::drawToolButtonLabelControl(const QStyleOption* option, QPainter* painter, const QWidget* widget) const
       {
-      // WSHACK
-      const PaletteBoxButton* pb(qobject_cast<const PaletteBoxButton*>(widget));
-      if (pb) {
-            QRect r(8, 0, pb->rect().width() - 8, pb->rect().height());
-
-            drawItemText(painter, r, Qt::AlignLeft | Qt::AlignVCenter, option->palette,
-               option->state & State_Enabled, pb->text(), QPalette::ButtonText);
-            return true;
-            }
       // need to customize palettes to deal with autoraised buttons
       const State& flags( option->state );
       const bool autoRaised(flags & State_AutoRaise);
