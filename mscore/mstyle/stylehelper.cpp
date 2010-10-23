@@ -258,10 +258,10 @@ TileSet* StyleHelper::hole(const QColor &color, qreal shade, int size, bool outl
 
       if (!tileSet) {
             const int rsize( (int)ceil(qreal(size) * 5.0/7.0 ) );
-            QPixmap pixmap(rsize*2, rsize*2);
-            pixmap.fill(Qt::transparent);
+            QImage image(rsize*2, rsize*2,  QImage::Format_ARGB32_Premultiplied);
+            image.fill(Qt::transparent);
 
-            QPainter p(&pixmap);
+            QPainter p(&image);
             p.setRenderHints(QPainter::Antialiasing);
             p.setPen(Qt::NoPen);
             p.setWindow(2,2,10,10);
@@ -288,7 +288,7 @@ TileSet* StyleHelper::hole(const QColor &color, qreal shade, int size, bool outl
 
             p.end();
 
-            tileSet = new TileSet(pixmap, rsize, rsize, rsize, rsize, rsize-1, rsize, 2, 1);
+            tileSet = new TileSet(QPixmap::fromImage(image), rsize, rsize, rsize, rsize, rsize-1, rsize, 2, 1);
 
             m_holeCache.insert(key, tileSet);
             }
@@ -306,10 +306,10 @@ TileSet* StyleHelper::holeFlat(const QColor& color, qreal shade, int size) const
 
       if (!tileSet) {
             const int rsize((int)ceil(qreal(size) * 5.0/7.0) );
-            QPixmap pixmap(rsize*2, rsize*2);
-            pixmap.fill(Qt::transparent);
+            QImage image(rsize*2, rsize*2,  QImage::Format_ARGB32_Premultiplied);
+            image.fill(Qt::transparent);
 
-            QPainter p(&pixmap);
+            QPainter p(&image);
             p.setRenderHints(QPainter::Antialiasing);
             p.setPen(Qt::NoPen);
             p.setWindow(2,2,10,10);
@@ -323,7 +323,7 @@ TileSet* StyleHelper::holeFlat(const QColor& color, qreal shade, int size) const
 
             p.end();
 
-            tileSet = new TileSet(pixmap, rsize, rsize, rsize, rsize, rsize-1, rsize, 2, 1);
+            tileSet = new TileSet(QPixmap::fromImage(image), rsize, rsize, rsize, rsize, rsize-1, rsize, 2, 1);
             m_holeFlatCache.insert(key, tileSet);
             }
       return tileSet;
@@ -424,26 +424,20 @@ TileSet* StyleHelper::holeFocused(const QColor &color, const QColor &glowColor, 
 
       if (!tileSet) {
             const int rsize( (int)ceil(qreal(size) * 5.0/7.0) );
-            QPixmap pixmap(rsize*2, rsize*2);
-            pixmap.fill(Qt::transparent);
+            QImage image(rsize*2, rsize*2,  QImage::Format_ARGB32_Premultiplied);
+            image.fill(Qt::transparent);
 
-            QPainter p(&pixmap);
+            QPainter p(&image);
             p.setRenderHints(QPainter::Antialiasing);
             p.setPen(Qt::NoPen);
 
             TileSet *holeTileSet = hole(color, shade, size, outline);
-
-            // hole
             holeTileSet->render(QRect(0,0,10,10), &p);
-
             p.setWindow(2,2,10,10);
-
-            // glow
             drawInverseGlow(p, glowColor, 3, 8, size);
-
             p.end();
 
-            tileSet = new TileSet(pixmap, rsize, rsize, rsize, rsize, rsize-1, rsize, 2, 1);
+            tileSet = new TileSet(QPixmap::fromImage(image), rsize, rsize, rsize, rsize, rsize-1, rsize, 2, 1);
 
             cache->insert(key, tileSet);
             }
@@ -457,83 +451,81 @@ TileSet* StyleHelper::holeFocused(const QColor &color, const QColor &glowColor, 
 TileSet* StyleHelper::scrollHole(const QColor &color, Qt::Orientation orientation, bool smallShadow) const
       {
       const quint64 key( quint64(color.rgba()) << 32 | (orientation == Qt::Horizontal ? 2 : 0) | (smallShadow ? 1 : 0) );
-              TileSet *tileSet = m_scrollHoleCache.object(key);
-              if (!tileSet)
-                    {
-                        QPixmap pm(15, 15);
-                        pm.fill(Qt::transparent);
+      TileSet *tileSet = m_scrollHoleCache.object(key);
+      if (!tileSet) {
+            QImage image(15, 15,  QImage::Format_ARGB32_Premultiplied);
+            image.fill(Qt::transparent);
 
-                        QPainter p(&pm);
+            QPainter p(&image);
 
-                        const QColor dark( calcDarkColor(color) );
-                        const QColor light( calcLightColor(color) );
-                        const QColor shadow( calcShadowColor(color) );
+            const QColor dark( calcDarkColor(color) );
+            const QColor light( calcLightColor(color) );
+            const QColor shadow( calcShadowColor(color) );
 
-                        // use space for white border
-                        const QRect r( QRect(0,0,15,15) );
-                        const QRect rect( r.adjusted(1, 0, -1, -1) );
-                        int shadowWidth(0);
-                        if( smallShadow ) shadowWidth = (orientation == Qt::Horizontal) ? 2 : 1;
-                              else shadowWidth = (orientation == Qt::Horizontal) ? 3 : 2;
+            // use space for white border
+            const QRect r( QRect(0,0,15,15) );
+            const QRect rect( r.adjusted(1, 0, -1, -1) );
+            int shadowWidth(0);
+            if( smallShadow )
+                  shadowWidth = (orientation == Qt::Horizontal) ? 2 : 1;
+            else
+                  shadowWidth = (orientation == Qt::Horizontal) ? 3 : 2;
 
-                        p.setRenderHints(QPainter::Antialiasing);
-                        p.setBrush(dark);
-                        p.setPen(Qt::NoPen);
+            p.setRenderHints(QPainter::Antialiasing);
+            p.setBrush(dark);
+            p.setPen(Qt::NoPen);
 
-                        // base
-                        p.drawRoundedRect(rect, 4.5, 4.5);
+            // base
+            p.drawRoundedRect(rect, 4.5, 4.5);
 
-                        // slight shadow across the whole hole
-                        QLinearGradient shadowGradient(rect.topLeft(),
-                            orientation == Qt::Horizontal ?
-                            rect.bottomLeft():rect.topRight());
+            // slight shadow across the whole hole
+            QLinearGradient shadowGradient(rect.topLeft(),
+               orientation == Qt::Horizontal ? rect.bottomLeft():rect.topRight());
 
-                        shadowGradient.setColorAt(0.0, alphaColor(shadow, 0.1));
-                        shadowGradient.setColorAt(0.6, Qt::transparent);
-                        p.setBrush(shadowGradient);
-                        p.drawRoundedRect(rect, 4.5, 4.5);
+            shadowGradient.setColorAt(0.0, alphaColor(shadow, 0.1));
+            shadowGradient.setColorAt(0.6, Qt::transparent);
+            p.setBrush(shadowGradient);
+            p.drawRoundedRect(rect, 4.5, 4.5);
 
-                        // strong shadow
+            // strong shadow
 
-                        // left
-                        QLinearGradient l1 = QLinearGradient(rect.topLeft(), rect.topLeft()+QPoint(shadowWidth,0));
-                        l1.setColorAt(0.0, alphaColor(shadow, orientation == Qt::Horizontal ? 0.3 : 0.2));
-                        l1.setColorAt(0.5, alphaColor(shadow, orientation == Qt::Horizontal ? 0.1 : 0.1));
-                        l1.setColorAt(1.0, Qt::transparent);
-                        p.setBrush(l1);
-                        p.drawRoundedRect(QRect(rect.topLeft(), rect.bottomLeft()+QPoint(shadowWidth,0)), 4.5, 4.5);
+            // left
+            QLinearGradient l1 = QLinearGradient(rect.topLeft(), rect.topLeft()+QPoint(shadowWidth,0));
+            l1.setColorAt(0.0, alphaColor(shadow, orientation == Qt::Horizontal ? 0.3 : 0.2));
+            l1.setColorAt(0.5, alphaColor(shadow, orientation == Qt::Horizontal ? 0.1 : 0.1));
+            l1.setColorAt(1.0, Qt::transparent);
+            p.setBrush(l1);
+            p.drawRoundedRect(QRect(rect.topLeft(), rect.bottomLeft()+QPoint(shadowWidth,0)), 4.5, 4.5);
 
-                        // right
-                        l1 = QLinearGradient(rect.topRight(), rect.topRight()-QPoint(shadowWidth,0));
-                        l1.setColorAt(0.0, alphaColor(shadow, orientation == Qt::Horizontal ? 0.3 : 0.2));
-                        l1.setColorAt(0.5, alphaColor(shadow, orientation == Qt::Horizontal ? 0.1 : 0.1));
-                        l1.setColorAt(1.0, Qt::transparent);
-                        p.setBrush(l1);
-                        p.drawRoundedRect(QRect(rect.topRight()-QPoint(shadowWidth,0), rect.bottomRight()), 4.5, 4.5);
+            // right
+            l1 = QLinearGradient(rect.topRight(), rect.topRight()-QPoint(shadowWidth,0));
+            l1.setColorAt(0.0, alphaColor(shadow, orientation == Qt::Horizontal ? 0.3 : 0.2));
+            l1.setColorAt(0.5, alphaColor(shadow, orientation == Qt::Horizontal ? 0.1 : 0.1));
+            l1.setColorAt(1.0, Qt::transparent);
+            p.setBrush(l1);
+            p.drawRoundedRect(QRect(rect.topRight()-QPoint(shadowWidth,0), rect.bottomRight()), 4.5, 4.5);
 
-                        //top
-                        l1 = QLinearGradient(rect.topLeft(), rect.topLeft()+QPoint(0,3));
-                        l1.setColorAt(0.0, alphaColor(shadow, 0.3));
-                        l1.setColorAt(1.0, Qt::transparent);
-                        p.setBrush(l1);
-                        p.drawRoundedRect(QRect(rect.topLeft(),rect.topRight()+QPoint(0,3)), 4.5, 4.5);
+            //top
+            l1 = QLinearGradient(rect.topLeft(), rect.topLeft()+QPoint(0,3));
+            l1.setColorAt(0.0, alphaColor(shadow, 0.3));
+            l1.setColorAt(1.0, Qt::transparent);
+            p.setBrush(l1);
+            p.drawRoundedRect(QRect(rect.topLeft(),rect.topRight()+QPoint(0,3)), 4.5, 4.5);
 
-                        // light border
-                        QLinearGradient borderGradient(r.topLeft()+QPoint(0,r.height()/2-1), r.bottomLeft());
-                        borderGradient.setColorAt(0.0, Qt::transparent);
-                        borderGradient.setColorAt(1.0, alphaColor(light, 0.8));
-                        p.setPen( QPen(borderGradient, 1.0) );
-                        p.setBrush(Qt::NoBrush);
-                        p.drawRoundedRect(r.adjusted(0.5,0,-0.5,0), 5.0, 5.0);
+            // light border
+            QLinearGradient borderGradient(r.topLeft()+QPoint(0,r.height()/2-1), r.bottomLeft());
+            borderGradient.setColorAt(0.0, Qt::transparent);
+            borderGradient.setColorAt(1.0, alphaColor(light, 0.8));
+            p.setPen( QPen(borderGradient, 1.0) );
+            p.setBrush(Qt::NoBrush);
+            p.drawRoundedRect(r.adjusted(0.5,0,-0.5,0), 5.0, 5.0);
+            p.end();
 
-                        p.end();
-
-                        tileSet = new TileSet(pm, 7, 7, 1, 1);
-
-                        m_scrollHoleCache.insert(key, tileSet);
-                    }
-              return tileSet;
-          }
+            tileSet = new TileSet(QPixmap::fromImage(image), 7, 7, 1, 1);
+            m_scrollHoleCache.insert(key, tileSet);
+            }
+      return tileSet;
+      }
 
 //---------------------------------------------------------
 //   calcLightColor
@@ -543,7 +535,7 @@ const QColor& StyleHelper::calcLightColor(const QColor &color) const
       {
       const quint64 key( color.rgba() );
       QColor* out( m_lightColorCache.object( key ) );
-      if( !out ) {
+      if (!out) {
             out = new QColor( highThreshold(color) ? color: ColorScheme::shade(color, ColorScheme::LightShade, _contrast) );
             m_lightColorCache.insert(key, out );
             }
@@ -682,7 +674,7 @@ void StyleHelper::renderMenuBackground(QPainter* p, const QRect& clipRect, const
       const int splitY( qMin(200, (3*height)/4) );
 
       const QRect upperRect( QRect(0, 0, r.width(), splitY) );
-      const QPixmap tile( verticalGradient(color, splitY) );
+      const QPixmap tile(verticalGradient(color, splitY));
       p->drawTiledPixmap(upperRect, tile);
 
       const QRect lowerRect( 0,splitY, r.width(), r.height() - splitY );
@@ -699,22 +691,23 @@ void StyleHelper::renderMenuBackground(QPainter* p, const QRect& clipRect, const
 
 QPixmap StyleHelper::verticalGradient(const QColor &color, int height, int offset) const
       {
-      const quint64 key( (quint64(color.rgba()) << 32) | height | 0x8000 );
-      QPixmap *pixmap( m_backgroundCache.object( key ) );
+      const quint64 key((quint64(color.rgba()) << 32) | height | 0x8000);
+      QPixmap* pixmap(m_backgroundCache.object(key));
 
       if (!pixmap) {
-            pixmap = new QPixmap(1, height);
-            pixmap->fill( Qt::transparent );
+            QImage image(1, height,  QImage::Format_ARGB32_Premultiplied);
+            image.fill(Qt::transparent );
 
             QLinearGradient gradient(0, offset, 0, height+offset);
             gradient.setColorAt(0.0, backgroundTopColor(color));
             gradient.setColorAt(0.5, color);
             gradient.setColorAt(1.0, backgroundBottomColor(color));
 
-            QPainter p(pixmap);
+            QPainter p(&image);
             p.setCompositionMode(QPainter::CompositionMode_Source);
             p.fillRect(pixmap->rect(), gradient);
             p.end();
+            pixmap = new QPixmap(QPixmap::fromImage(image));
             m_backgroundCache.insert(key, pixmap);
             }
       return *pixmap;
@@ -989,10 +982,10 @@ QPixmap StyleHelper::progressBarIndicator(const QPalette& pal, const QRect& rect
             // set topLeft corner to 0.0
             local.translate( -local.topLeft() );
 
-            pixmap = new QPixmap(local.size());
-            pixmap->fill( Qt::transparent );
+            QImage image(local.size(),  QImage::Format_ARGB32_Premultiplied);
+            image.fill( Qt::transparent );
 
-            QPainter p( pixmap );
+            QPainter p(&image);
             p.setRenderHints( QPainter::Antialiasing );
             p.setBrush(Qt::NoBrush);
 
@@ -1014,7 +1007,7 @@ QPixmap StyleHelper::progressBarIndicator(const QPalette& pal, const QRect& rect
 
             // fake radial gradient
             local.adjust( 0, 0, -1, 0 );
-            QPixmap pm(local.size());
+            QImage pm(local.size(),  QImage::Format_ARGB32_Premultiplied);
             pm.fill(Qt::transparent);
             {
             QRectF pmRect = pm.rect();
@@ -1037,7 +1030,7 @@ QPixmap StyleHelper::progressBarIndicator(const QPalette& pal, const QRect& rect
             pp.end();
             }
 
-            p.drawPixmap( QPoint(1,1), pm);
+            p.drawPixmap( QPoint(1,1), QPixmap::fromImage(pm));
 
             // bevel
             p.setRenderHint(QPainter::Antialiasing, false);
@@ -1057,6 +1050,7 @@ QPixmap StyleHelper::progressBarIndicator(const QPalette& pal, const QRect& rect
             p.setPen(QPen(lightHl, 1));
             p.drawLine(local.topLeft(), local.topRight());
             p.end();
+            pixmap = new QPixmap(QPixmap::fromImage(image));
             m_progressBarCache.insert(key, pixmap);
             }
       return *pixmap;
@@ -1073,12 +1067,12 @@ QPixmap StyleHelper::dialSlab(const QColor &color, qreal shade, int size) const
       const quint64 key( (quint64(256.0 * shade) << 24) | size );
       QPixmap *pixmap = cache->object(key);
       if (!pixmap) {
-            pixmap = new QPixmap( size, size );
-            pixmap->fill( Qt::transparent );
+            QImage image(size, size,  QImage::Format_ARGB32_Premultiplied);
+            image.fill( Qt::transparent );
 
-            const QRectF rect( pixmap->rect() );
+            const QRectF rect(image.rect() );
 
-            QPainter p( pixmap );
+            QPainter p(&image);
             p.setPen( Qt::NoPen );
             p.setRenderHints(QPainter::Antialiasing);
 
@@ -1114,7 +1108,7 @@ QPixmap StyleHelper::dialSlab(const QColor &color, qreal shade, int size) const
             const qreal offset( baseOffset+0.5*penWidth );
             p.drawEllipse( rect.adjusted( offset, offset, -offset, -offset ) );
             }
-
+            pixmap = new QPixmap(QPixmap::fromImage(image));
             cache->insert(key, pixmap);
             }
 
@@ -1132,12 +1126,12 @@ QPixmap StyleHelper::dialSlabFocused(const QColor &color, const QColor& glowColo
       const quint64 key((quint64(glowColor.rgba()) << 32) | (quint64(256.0 * shade) << 24) | size);
       QPixmap *pixmap = cache->object(key);
       if (!pixmap) {
-            pixmap = new QPixmap(size, size);
-            pixmap->fill(Qt::transparent);
+            QImage image(size, size,  QImage::Format_ARGB32_Premultiplied);
+            image.fill(Qt::transparent);
 
-            QRectF rect(pixmap->rect());
+            QRectF rect(image.rect());
 
-            QPainter p( pixmap );
+            QPainter p(&image);
             p.setPen( Qt::NoPen );
             p.setRenderHints(QPainter::Antialiasing);
 
@@ -1175,6 +1169,7 @@ QPixmap StyleHelper::dialSlabFocused(const QColor &color, const QColor& glowColo
             p.drawEllipse(rect.adjusted( offset, offset, -offset, -offset));
             }
 
+            pixmap = new QPixmap(QPixmap::fromImage(image));
             cache->insert(key, pixmap);
             }
       return *pixmap;
@@ -1522,12 +1517,12 @@ TileSet* StyleHelper::roundCorner(const QColor &color, int size) const
       TileSet *tileSet = m_cornerCache.object(key);
 
       if (!tileSet) {
-            QPixmap pixmap = QPixmap( size*2, size*2 );
-            pixmap.fill( Qt::transparent );
+            QImage image(size*2, size*2,  QImage::Format_ARGB32_Premultiplied);
+            image.fill( Qt::transparent );
 
-            QPainter p( &pixmap );
-            p.setRenderHint( QPainter::Antialiasing );
-            p.setPen( Qt::NoPen );
+            QPainter p(&image);
+            p.setRenderHint(QPainter::Antialiasing);
+            p.setPen(Qt::NoPen);
 
             QLinearGradient lg = QLinearGradient(0.0, size-4.5, 0.0, size+4.5);
             lg.setColorAt(0.0, calcLightColor( backgroundTopColor(color) ));
@@ -1543,9 +1538,8 @@ TileSet* StyleHelper::roundCorner(const QColor &color, int size) const
             p.setBrush( Qt::black );
             p.drawEllipse( QRectF( size-3, size-3, 6, 6 ) );
 
-            tileSet = new TileSet(pixmap, size, size, 1, 1);
+            tileSet = new TileSet(QPixmap::fromImage(image), size, size, 1, 1);
             m_cornerCache.insert(key, tileSet);
-
             }
       return tileSet;
       }
@@ -1560,10 +1554,10 @@ TileSet* StyleHelper::slope(const QColor &color, qreal shade, int size) const
       TileSet *tileSet = m_slopeCache.object(key);
 
       if (!tileSet) {
-            QPixmap pixmap(size*4, size*4);
-            pixmap.fill(Qt::transparent);
+            QImage image(size*4, size*4,  QImage::Format_ARGB32_Premultiplied);
+            image.fill(Qt::transparent);
 
-            QPainter p(&pixmap);
+            QPainter p(&image);
             p.setPen(Qt::NoPen);
 
             // edges
@@ -1592,7 +1586,7 @@ TileSet* StyleHelper::slope(const QColor &color, qreal shade, int size) const
             p.drawRect(0, 9, 28, 19);
             p.end();
 
-            tileSet = new TileSet(pixmap, size, size, size*2, 2);
+            tileSet = new TileSet(QPixmap::fromImage(image), size, size, size*2, 2);
             m_slopeCache.insert(key, tileSet);
             }
       return tileSet;
@@ -1609,12 +1603,12 @@ TileSet *StyleHelper::selection(const QColor &color, int height, bool custom) co
       if (!tileSet) {
             const qreal rounding( 2.5 );
 
-            QPixmap pixmap( 32+16, height);
-            pixmap.fill( Qt::transparent );
+            QImage image(32+16, height,  QImage::Format_ARGB32_Premultiplied);
+            image.fill( Qt::transparent );
 
-            QRect r( pixmap.rect().adjusted(0, 0, -1, -1) );
+            QRect r(image.rect().adjusted(0, 0, -1, -1));
 
-            QPainter p(&pixmap);
+            QPainter p(&image);
             p.setRenderHint(QPainter::Antialiasing);
             p.translate(.5, .5);
 
@@ -1643,7 +1637,7 @@ TileSet *StyleHelper::selection(const QColor &color, int height, bool custom) co
             }
 
             p.end();
-            tileSet = new TileSet( pixmap, 8, 0, 32, height );
+            tileSet = new TileSet(QPixmap::fromImage(image), 8, 0, 32, height );
             m_selectionCache.insert(key, tileSet);
             }
       return tileSet;
@@ -1659,12 +1653,12 @@ TileSet *StyleHelper::slitFocused(const QColor &glowColor) const
       TileSet *tileSet = m_slitCache.object(key);
 
       if (!tileSet) {
-            QPixmap pixmap(9,9);
+            QImage image(9, 9,  QImage::Format_ARGB32_Premultiplied);
             QPainter p;
 
-            pixmap.fill(Qt::transparent);
+            image.fill(Qt::transparent);
 
-            p.begin(&pixmap);
+            p.begin(&image);
             p.setPen(Qt::NoPen);
             p.setRenderHint(QPainter::Antialiasing);
             QRadialGradient rg = QRadialGradient(4.5, 4.5, 4.5, 4.5, 4.5);
@@ -1679,7 +1673,7 @@ TileSet *StyleHelper::slitFocused(const QColor &glowColor) const
             p.drawEllipse(QRectF(0, 0, 9, 9));
 
             p.end();
-            tileSet = new TileSet(pixmap, 4, 4, 1, 1);
+            tileSet = new TileSet(QPixmap::fromImage(image), 4, 4, 1, 1);
             m_slitCache.insert(key, tileSet);
             }
       return tileSet;
@@ -1842,10 +1836,10 @@ TileSet *StyleHelper::groove(const QColor &color, qreal shade, int size) const
 
       if (!tileSet) {
             const int rsize((int)ceil(qreal(size) * 3.0/7.0));
-            QPixmap pixmap(rsize*2, rsize*2);
-            pixmap.fill(Qt::transparent);
+            QImage image(rsize*2, rsize*2,  QImage::Format_ARGB32_Premultiplied);
+            image.fill(Qt::transparent);
 
-            QPainter p(&pixmap);
+            QPainter p(&image);
             p.setRenderHints(QPainter::Antialiasing);
             p.setPen(Qt::NoPen);
             p.setWindow(2,2,6,6);
@@ -1861,7 +1855,7 @@ TileSet *StyleHelper::groove(const QColor &color, qreal shade, int size) const
 
             p.end();
 
-            tileSet = new TileSet(pixmap, rsize, rsize, rsize, rsize, rsize-1, rsize, 2, 1);
+            tileSet = new TileSet(QPixmap::fromImage(image), rsize, rsize, rsize, rsize, rsize-1, rsize, 2, 1);
 
             m_grooveCache.insert(key, tileSet);
             }
@@ -1900,7 +1894,7 @@ TileSet *StyleHelper::dockFrame(const QColor &color, int w)
             // fixed height
             const int h = 9;
 
-            QPixmap pm(w, h);
+            QImage pm(w,h,  QImage::Format_ARGB32_Premultiplied);
             pm.fill(Qt::transparent);
 
             QPainter p(&pm);
@@ -1940,7 +1934,7 @@ TileSet *StyleHelper::dockFrame(const QColor &color, int w)
             drawSeparator(&p, QRect(0,0,w,2), color, Qt::Horizontal);
             drawSeparator(&p, QRect(0,h-2,w,2), color, Qt::Horizontal);
             p.end();
-            tileSet = new TileSet(pm, 4, 4, w-8, h-8);
+            tileSet = new TileSet(QPixmap::fromImage(pm), 4, 4, w-8, h-8);
             m_dockFrameCache.insert(key, tileSet);
             }
       return tileSet;
@@ -1956,13 +1950,13 @@ QPixmap StyleHelper::windecoButton(const QColor &color, bool pressed, int size) 
       QPixmap *pixmap = m_windecoButtonCache.object(key);
 
       if (!pixmap) {
-            pixmap = new QPixmap(size, size);
-            pixmap->fill(Qt::transparent);
+            QImage image(size, size,  QImage::Format_ARGB32_Premultiplied);
+            image.fill(Qt::transparent);
 
             const QColor light( calcLightColor(color) );
             const QColor dark( calcDarkColor(color) );
 
-            QPainter p(pixmap);
+            QPainter p(&image);
             p.setRenderHints(QPainter::Antialiasing);
             p.setPen(Qt::NoPen);
             const qreal u( size/18.0 );
@@ -1979,6 +1973,7 @@ QPixmap StyleHelper::windecoButton(const QColor &color, bool pressed, int size) 
             p.drawEllipse( r );
             p.end();
             }
+            pixmap = new QPixmap(QPixmap::fromImage(image));
             m_windecoButtonCache.insert(key, pixmap);
             }
       return *pixmap;
