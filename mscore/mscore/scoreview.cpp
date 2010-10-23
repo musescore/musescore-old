@@ -1146,6 +1146,7 @@ void ScoreView::startEdit()
       setFocus();
       if (origEditObject->isText()) {
             editObject = origEditObject;
+            editObject->startEdit(this, startMove);
             Text* t = static_cast<Text*>(editObject);
             _editText = t;
             mscore->textTools()->setText(t);
@@ -1177,6 +1178,7 @@ void ScoreView::startEdit()
                   editObject          = hp->spannerSegments().at(idx);
                   _score->undoChangeElement(ohp, hp);
                   }
+            editObject->startEdit(this, startMove);
             }
       else {
             LinkedElements* links = origEditObject->links();
@@ -1195,8 +1197,8 @@ void ScoreView::startEdit()
                   editObject->setSelected(true);
                   _score->undoChangeElement(origEditObject, editObject);
                   }
+            editObject->startEdit(this, startMove);
             }
-      editObject->startEdit(this, startMove);
       qreal w = 8.0 / _matrix.m11();
       qreal h = 8.0 / _matrix.m22();
       QRectF r(-w*.5, -h*.5, w, h);
