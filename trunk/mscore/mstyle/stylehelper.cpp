@@ -1192,9 +1192,9 @@ QPixmap StyleHelper::roundSlab(const QColor &color, qreal shade, int size) const
       QPixmap *pixmap = cache->object(key);
 
       if (!pixmap) {
-            pixmap = new QPixmap(size*3, size*3);
-            pixmap->fill(Qt::transparent);
-            QPainter p(pixmap);
+            QImage image(size*3, size*3,  QImage::Format_ARGB32_Premultiplied);
+            image.fill(Qt::transparent);
+            QPainter p(&image);
             p.setRenderHints(QPainter::Antialiasing);
             p.setPen(Qt::NoPen);
             p.setWindow(0,0,21,21);
@@ -1202,6 +1202,7 @@ QPixmap StyleHelper::roundSlab(const QColor &color, qreal shade, int size) const
             drawShadow(p, calcShadowColor(color), 21);
             drawRoundSlab(p, color, shade);
             p.end();
+            pixmap = new QPixmap(QPixmap::fromImage(image));
             cache->insert(key, pixmap);
             }
       return *pixmap;
@@ -1219,9 +1220,9 @@ QPixmap StyleHelper::roundSlabFocused(const QColor &color, const QColor &glowCol
       QPixmap *pixmap = cache->object(key);
 
       if (!pixmap) {
-            pixmap = new QPixmap(size*3, size*3);
-            pixmap->fill(Qt::transparent);
-            QPainter p(pixmap);
+            QImage image(size*3, size*3,  QImage::Format_ARGB32_Premultiplied);
+            image.fill(Qt::transparent);
+            QPainter p(&image);
             p.setRenderHints(QPainter::Antialiasing);
             p.setPen(Qt::NoPen);
             p.setWindow(0,0,21,21);
@@ -1229,6 +1230,7 @@ QPixmap StyleHelper::roundSlabFocused(const QColor &color, const QColor &glowCol
             drawOuterGlow(p, glowColor, 21);
             drawRoundSlab(p, color, shade);
             p.end();
+            pixmap = new QPixmap(QPixmap::fromImage(image));
             cache->insert(key, pixmap);
             }
       return *pixmap;
@@ -1250,10 +1252,10 @@ TileSet *StyleHelper::slabFocused(const QColor &color, const QColor &glowColor, 
       const int vSize( size );
 
       if (!tileSet) {
-            QPixmap pixmap(hSize*2,vSize*2);
-            pixmap.fill(Qt::transparent);
+            QImage image(hSize*2, vSize*2,  QImage::Format_ARGB32_Premultiplied);
+            image.fill(Qt::transparent);
 
-            QPainter p(&pixmap);
+            QPainter p(&image);
             p.setRenderHints(QPainter::Antialiasing);
             p.setPen(Qt::NoPen);
 
@@ -1268,7 +1270,7 @@ TileSet *StyleHelper::slabFocused(const QColor &color, const QColor &glowColor, 
             if (color.isValid())
                   drawSlab(p, color, shade);
             p.end();
-            tileSet = new TileSet(pixmap, hSize, vSize, hSize, vSize, hSize-1, vSize, 2, 1);
+            tileSet = new TileSet(QPixmap::fromImage(image), hSize, vSize, hSize, vSize, hSize-1, vSize, 2, 1);
             cache->insert(key, tileSet);
             }
       return tileSet;
@@ -1284,10 +1286,10 @@ TileSet *StyleHelper::slabSunken(const QColor &color, qreal shade, int size) con
       TileSet *tileSet = m_slabSunkenCache.object(key);
 
       if (!tileSet) {
-            QPixmap pixmap(size*2, size*2);
-            pixmap.fill(Qt::transparent);
+            QImage image(size*2, size*2,  QImage::Format_ARGB32_Premultiplied);
+            image.fill(Qt::transparent);
 
-            QPainter p(&pixmap);
+            QPainter p(&image);
             p.setRenderHints(QPainter::Antialiasing);
             p.setPen(Qt::NoPen);
             p.setWindow(0,0,14,14);
@@ -1300,7 +1302,7 @@ TileSet *StyleHelper::slabSunken(const QColor &color, qreal shade, int size) con
             drawInverseShadow(p, calcShadowColor(color), 3, 8, 0.0);
 
             p.end();
-            tileSet = new TileSet(pixmap, size, size, size, size, size-1, size, 2, 1);
+            tileSet = new TileSet(QPixmap::fromImage(image), size, size, size, size, size-1, size, 2, 1);
             m_slabSunkenCache.insert(key, tileSet);
             }
       return tileSet;
@@ -1316,10 +1318,10 @@ TileSet *StyleHelper::slabInverted(const QColor &color, qreal shade, int size) c
       TileSet *tileSet = m_slabInvertedCache.object(key);
 
       if (!tileSet) {
-            QPixmap pixmap(size*2, size*2);
-            pixmap.fill(Qt::transparent);
+            QImage image(size*2, size*2,  QImage::Format_ARGB32_Premultiplied);
+            image.fill(Qt::transparent);
 
-            QPainter p(&pixmap);
+            QPainter p(&image);
             p.setRenderHints(QPainter::Antialiasing);
             p.setPen(Qt::NoPen);
             p.setWindow(0,0,14,14);
@@ -1360,7 +1362,7 @@ TileSet *StyleHelper::slabInverted(const QColor &color, qreal shade, int size) c
             p.setCompositionMode(QPainter::CompositionMode_DestinationOver);
             drawInverseShadow(p, calcShadowColor(color), 4, 6, 0.5);
             p.end();
-            tileSet = new TileSet(pixmap, size, size, size, size, size-1, size, 2, 1);
+            tileSet = new TileSet(QPixmap::fromImage(image), size, size, size, size, size-1, size, 2, 1);
             m_slabInvertedCache.insert(key, tileSet);
             }
       return tileSet;
@@ -1377,10 +1379,10 @@ TileSet* StyleHelper::slab(const QColor &color, qreal shade, int size) const
       TileSet *tileSet( cache->object( key ) );
 
       if (!tileSet) {
-            QPixmap pixmap(size*2, size*2);
-            pixmap.fill(Qt::transparent);
+            QImage image(size*2, size*2,  QImage::Format_ARGB32_Premultiplied);
+            image.fill(Qt::transparent);
 
-            QPainter p(&pixmap);
+            QPainter p(&image);
             p.setRenderHints(QPainter::Antialiasing);
             p.setPen(Qt::NoPen);
             p.setWindow(0,0,14,14);
@@ -1391,7 +1393,7 @@ TileSet* StyleHelper::slab(const QColor &color, qreal shade, int size) const
 
             p.end();
 
-            tileSet = new TileSet(pixmap, size, size, size, size, size-1, size, 2, 1);
+            tileSet = new TileSet(QPixmap::fromImage(image), size, size, size, size, size-1, size, 2, 1);
 
             cache->insert(key, tileSet);
             }
@@ -1757,7 +1759,7 @@ void StyleHelper::drawShadow(QPainter &p, const QColor &color, int size) const
 //   drawOuterGlow
 //---------------------------------------------------------
 
-void StyleHelper::drawOuterGlow( QPainter &p, const QColor &color, int size) const
+void StyleHelper::drawOuterGlow(QPainter &p, const QColor &color, int size) const
       {
       const QRectF r(.0, .0, size, size);
       const qreal m = qreal(size) * 0.5;
@@ -1766,9 +1768,9 @@ void StyleHelper::drawOuterGlow( QPainter &p, const QColor &color, int size) con
       const qreal bias(_glowBias * qreal(14)/size);
 
       // k0 is located at width - bias from the outer edge
-      const qreal gm( m + bias - 0.9 );
-      const qreal k0( (m-width+bias) / gm );
-      QRadialGradient glowGradient(m, m, gm );
+      const qreal gm(m + bias - 0.9);
+      const qreal k0((m-width+bias) / gm);
+      QRadialGradient glowGradient(m, m, gm);
       for (int i = 0; i < 8; i++) {
             // k1 grows linearly from k0 to 1.0
             const qreal k1( k0 + qreal(i)*(1.0-k0)/8.0 );

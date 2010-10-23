@@ -3373,7 +3373,7 @@ void MStyle::renderSlab(QPainter *painter, QRect r, const QColor &color, StyleOp
             painter->setRenderHint(QPainter::Antialiasing);
             painter->setPen(Qt::NoPen);
 
-            if( _helper.calcShadowColor(color).value() > color.value() && (options & Sunken) ) {
+            if (_helper.calcShadowColor(color).value() > color.value() && (options & Sunken)) {
                   QLinearGradient innerGradient(0, r.top(), 0, r.bottom() + r.height());
                   innerGradient.setColorAt(0.0, color);
                   innerGradient.setColorAt(1.0, _helper.calcLightColor(color));
