@@ -1044,6 +1044,7 @@ void MuseScore::fingeringMenu()
             for (unsigned i = 0; i < strlen(finger); ++i) {
                   k = new Text(gscore);
                   k->setSubtype(TEXT_FINGERING);
+                  k->setTextStyle(TEXT_STYLE_FINGERING);
                   k->setText(QString(finger[i]));
                   sp->append(k, tr("Fingering %1").arg(finger[i]));
                   }
@@ -1051,6 +1052,7 @@ void MuseScore::fingeringMenu()
             for (unsigned i = 0; i < strlen(stringnumber); ++i) {
                   Text* k = new Text(gscore);
                   k->setSubtype(TEXT_STRING_NUMBER);
+                  k->setTextStyle(TEXT_STYLE_STRING_NUMBER);
                   k->setText(QString(stringnumber[i]));
                   sp->append(k, tr("String number %1").arg(stringnumber[i]));
                   }
