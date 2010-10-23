@@ -30,6 +30,8 @@
 #include "windowmanager.h"
 #include "mconfig.h"
 
+#include "../mscore/palette.h"      // WSHACK
+
 #define MStyleConfigData_toolTipTransparent            true
 #define MStyleConfigData_toolBarDrawItemSeparator      true
 #define MStyleConfigData_viewDrawTriangularExpander    true
@@ -1687,6 +1689,10 @@ bool MStyle::drawPanelButtonCommandPrimitive( const QStyleOption* option, QPaint
               return true;
 
           }
+
+//---------------------------------------------------------
+//   drawPanelButtonToolPrimitive
+//---------------------------------------------------------
 
 bool MStyle::drawPanelButtonToolPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const
       {
@@ -4085,115 +4091,104 @@ bool MStyle::drawTitleBarComplexControl( const QStyleOptionComplex* option, QPai
               return true;
           }
 
+//---------------------------------------------------------
+//   drawToolButtonComplexControl
+//---------------------------------------------------------
+
 bool MStyle::drawToolButtonComplexControl( const QStyleOptionComplex* option, QPainter* painter, const QWidget* widget ) const
       {
       // check autoRaise state
-              const State flags( option->state );
-              const bool isInToolBar( widget && qobject_cast<QToolBar*>(widget->parent()) );
+      const State flags( option->state );
+      const bool isInToolBar( widget && qobject_cast<QToolBar*>(widget->parent()) );
 
-              // get rect and palette
-              const QRect& rect( option->rect );
-              const QStyleOptionToolButton *tool( qstyleoption_cast<const QStyleOptionToolButton *>(option) );
-              if( !tool ) return true;
+      // get rect and palette
+      const QRect& rect(option->rect );
+      const QStyleOptionToolButton *tool(qstyleoption_cast<const QStyleOptionToolButton *>(option) );
+      if (!tool)
+            return true;
 
-              const bool enabled( flags & State_Enabled );
-              const bool mouseOver(enabled && (flags & State_MouseOver));
-              const bool hasFocus(enabled && (flags&State_HasFocus));
-              const bool sunken( flags & (State_Sunken|State_On) );
+      const bool enabled( flags & State_Enabled );
+      const bool mouseOver(enabled && (flags & State_MouseOver));
+      const bool hasFocus(enabled && (flags&State_HasFocus));
+      const bool sunken( flags & (State_Sunken|State_On) );
 
-              if( isInToolBar )
-                    {
+      if( isInToolBar ) {
+            animations().widgetStateEngine().updateState( widget, AnimationHover, mouseOver );
+            }
+      else {
+            // mouseOver has precedence over focus
+            animations().widgetStateEngine().updateState( widget, AnimationHover, mouseOver );
+            animations().widgetStateEngine().updateState( widget, AnimationFocus, hasFocus&&!mouseOver );
+            }
 
-                        animations().widgetStateEngine().updateState( widget, AnimationHover, mouseOver );
+      // toolbar animation
+      const bool toolBarAnimated( isInToolBar && animations().toolBarEngine().isAnimated( widget->parentWidget() ) );
+      const QRect animatedRect( animations().toolBarEngine().animatedRect( widget->parentWidget() ) );
+      const QRect currentRect( animations().toolBarEngine().currentRect( widget->parentWidget() ) );
+      const bool current( isInToolBar && currentRect.intersects( rect.translated( widget->mapToParent( QPoint(0,0) ) ) ) );
+      const bool toolBarTimerActive( isInToolBar && animations().toolBarEngine().isTimerActive( widget->parentWidget() ) );
 
-                    } else {
+      // normal toolbutton animation
+      const bool hoverAnimated( animations().widgetStateEngine().isAnimated( widget, AnimationHover ) );
+      const bool focusAnimated( animations().widgetStateEngine().isAnimated( widget, AnimationFocus ) );
 
-                        // mouseOver has precedence over focus
-                        animations().widgetStateEngine().updateState( widget, AnimationHover, mouseOver );
-                        animations().widgetStateEngine().updateState( widget, AnimationFocus, hasFocus&&!mouseOver );
+      // local copy of option
+      QStyleOptionToolButton tOpt(*tool);
 
-                    }
+      if( enabled && !(mouseOver || hasFocus || sunken ) ) {
+            if (hoverAnimated || (focusAnimated && !hasFocus) || (((toolBarAnimated && animatedRect.isNull())||toolBarTimerActive) && current)) {
+                  QRect buttonRect = subControlRect(CC_ToolButton, option, SC_ToolButton, widget);
+                  tOpt.rect = buttonRect;
+                  tOpt.state = flags;
+                  drawPrimitive(PE_PanelButtonTool, &tOpt, painter, widget );
+                  }
+            }
 
-              // toolbar animation
-              const bool toolBarAnimated( isInToolBar && animations().toolBarEngine().isAnimated( widget->parentWidget() ) );
-              const QRect animatedRect( animations().toolBarEngine().animatedRect( widget->parentWidget() ) );
-              const QRect currentRect( animations().toolBarEngine().currentRect( widget->parentWidget() ) );
-              const bool current( isInToolBar && currentRect.intersects( rect.translated( widget->mapToParent( QPoint(0,0) ) ) ) );
-              const bool toolBarTimerActive( isInToolBar && animations().toolBarEngine().isTimerActive( widget->parentWidget() ) );
+      QRect buttonRect = subControlRect(CC_ToolButton, tool, SC_ToolButton, widget);
+      QRect menuRect   = subControlRect(CC_ToolButton, tool, SC_ToolButtonMenu, widget);
 
-              // normal toolbutton animation
-              const bool hoverAnimated( animations().widgetStateEngine().isAnimated( widget, AnimationHover ) );
-              const bool focusAnimated( animations().widgetStateEngine().isAnimated( widget, AnimationFocus ) );
+      // State_AutoRaise: only draw button when State_MouseOver
+      State bflags = tool->state;
+      if (bflags & State_AutoRaise && !(bflags & State_MouseOver))
+            bflags &= ~State_Raised;
 
-              // local copy of option
-              QStyleOptionToolButton tOpt(*tool);
+      tOpt.palette = option->palette;
+      tOpt.state   = bflags;
 
-              if( enabled && !(mouseOver || hasFocus || sunken ) )
-                    {
+      if (tool->subControls & SC_ToolButton && (bflags & (State_Sunken | State_On | State_Raised))) {
+            tOpt.rect = buttonRect;
+            drawPrimitive(PE_PanelButtonTool, &tOpt, painter, widget );
+            }
 
-                        if( hoverAnimated || (focusAnimated && !hasFocus) || ( ((toolBarAnimated && animatedRect.isNull())||toolBarTimerActive) && current ) )
-                              {
-                                  QRect buttonRect = subControlRect(CC_ToolButton, option, SC_ToolButton, widget);
-                                  tOpt.rect = buttonRect;
-                                  tOpt.state = flags;
-                                  drawPrimitive(PE_PanelButtonTool, &tOpt, painter, widget );
-                              }
+      if( tool->subControls & SC_ToolButtonMenu) {
+            tOpt.rect = menuRect;
+            painter->save();
+            drawIndicatorButtonDropDownPrimitive( &tOpt, painter, widget );
+            painter->restore();
+            }
+      else if (tool->features & QStyleOptionToolButton::HasMenu) {
+            // This is requesting KDE3-style arrow indicator, per Qt 4.4 behavior. Qt 4.3 prefers to hide
+            // the fact of the menu's existence. Whee! Since we don't know how to paint this right,
+            // though, we have to have some metrics set for it to look nice.
+            const int size( ToolButton_InlineMenuIndicatorSize );
+            if ( size) {
+                  const int xOff( ToolButton_InlineMenuIndicatorXOff );
+                  const int yOff( ToolButton_InlineMenuIndicatorYOff );
 
-                    }
+                  QRect r = QRect(buttonRect.right() + xOff + 1, buttonRect.bottom() + yOff + 1, size, size);
+                  tOpt.rect  = r;
+                  painter->save();
+                  drawIndicatorButtonDropDownPrimitive( &tOpt, painter, widget );
+                  painter->restore();
+                  }
+            }
 
-              QRect buttonRect = subControlRect( CC_ToolButton, tool, SC_ToolButton, widget );
-              QRect menuRect = subControlRect( CC_ToolButton, tool, SC_ToolButtonMenu, widget );
-
-              // State_AutoRaise: only draw button when State_MouseOver
-              State bflags = tool->state;
-              if( bflags & State_AutoRaise && !(bflags & State_MouseOver) )
-                    { bflags &= ~State_Raised; }
-
-              tOpt.palette = option->palette;
-              tOpt.state = bflags;
-
-              if( tool->subControls & SC_ToolButton && ( bflags & (State_Sunken | State_On | State_Raised) ) )
-                    {
-                        tOpt.rect = buttonRect;
-                        drawPrimitive(PE_PanelButtonTool, &tOpt, painter, widget );
-                    }
-
-              if( tool->subControls & SC_ToolButtonMenu)
-                    {
-                        tOpt.rect = menuRect;
-                        painter->save();
-                        drawIndicatorButtonDropDownPrimitive( &tOpt, painter, widget );
-                        painter->restore();
-
-                    } else if( tool->features & QStyleOptionToolButton::HasMenu) {
-
-                        // This is requesting KDE3-style arrow indicator, per Qt 4.4 behavior. Qt 4.3 prefers to hide
-                        // the fact of the menu's existence. Whee! Since we don't know how to paint this right,
-                        // though, we have to have some metrics set for it to look nice.
-                        const int size( ToolButton_InlineMenuIndicatorSize );
-                        if( size)
-                              {
-
-                                  const int xOff( ToolButton_InlineMenuIndicatorXOff );
-                                  const int yOff( ToolButton_InlineMenuIndicatorYOff );
-
-                                  QRect r = QRect(buttonRect.right() + xOff + 1, buttonRect.bottom() + yOff + 1, size, size);
-                                  tOpt.rect  = r;
-                                  painter->save();
-                                  drawIndicatorButtonDropDownPrimitive( &tOpt, painter, widget );
-                                  painter->restore();
-                              }
-
-                    }
-
-              // CE_ToolButtonLabel expects a readjusted rect, for the button area proper
-              QStyleOptionToolButton labelOpt = *tool;
-              labelOpt.rect = buttonRect;
-              drawControl(CE_ToolButtonLabel, &labelOpt, painter, widget );
-
-              return true;
-
-          }
+      // CE_ToolButtonLabel expects a readjusted rect, for the button area proper
+      QStyleOptionToolButton labelOpt = *tool;
+      labelOpt.rect = buttonRect;
+      drawControl(CE_ToolButtonLabel, &labelOpt, painter, widget );
+      return true;
+      }
 
 bool MStyle::eventFilterComboBoxContainer( QWidget* widget, QEvent* event )
     {
@@ -7165,6 +7160,15 @@ bool MStyle::drawToolBoxTabShapeControl( const QStyleOption* option, QPainter* p
 
 bool MStyle::drawToolButtonLabelControl(const QStyleOption* option, QPainter* painter, const QWidget* widget) const
       {
+      // WSHACK
+      const PaletteBoxButton* pb(qobject_cast<const PaletteBoxButton*>(widget));
+      if (pb) {
+            QRect r(8, 0, pb->rect().width() - 8, pb->rect().height());
+
+            drawItemText(painter, r, Qt::AlignLeft | Qt::AlignVCenter, option->palette,
+               option->state & State_Enabled, pb->text(), QPalette::ButtonText);
+            return true;
+            }
       // need to customize palettes to deal with autoraised buttons
       const State& flags( option->state );
       const bool autoRaised(flags & State_AutoRaise);

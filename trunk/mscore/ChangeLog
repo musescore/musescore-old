@@ -1,6 +1,7 @@
 23.oct (ws)
+      - left align palette buttons text
       - mstyle: replaced pixmap operations with QImage as composite modes
-        are only supported on X11 for pixmaps
+        are only supported on X11 for pixmaps (did not work on OS-X)
 22.oct (ws)
       - updates for "linked parts" implementation; synchronize line elements
 20.oct (ws)

@@ -1097,7 +1097,7 @@ PaletteBox::PaletteBox(QWidget* parent)
       QWidget* mainWidget = new QWidget;
       vbox = new QVBoxLayout;
       vbox->setMargin(0);
-      vbox->setSpacing(2);
+      vbox->setSpacing(1);    // 2
       vbox->addStretch();
       mainWidget->setLayout(vbox);
       setWidget(mainWidget);
