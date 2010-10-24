@@ -45,6 +45,20 @@ void Sparm::write(Xml& xml) const
       }
 
 //---------------------------------------------------------
+//   print
+//    for debugging
+//---------------------------------------------------------
+
+void Fparm::print() const
+      {
+      printf("<id=%d name=%s val=%f>", _id, qPrintable(_name), _val);
+      }
+void Sparm::print() const
+      {
+      printf("<id=%d name=%s val=%s>", _id, qPrintable(_name), qPrintable(_val));
+      }
+
+//---------------------------------------------------------
 //   set
 //---------------------------------------------------------
 
@@ -56,13 +70,17 @@ void Fparm::set(const QString& name, float val, float min, float max)
       _max  = max;
       }
 
+bool Fparm::operator==(const Parameter& p) const
+      {
+      return (p.id() == id()) && (qAbs(((const Fparm&)p)._val - _val) < 0.000001);
+      }
+
 //---------------------------------------------------------
 //   SynthParams::write
 //---------------------------------------------------------
 
 void SynthParams::write(Xml& xml) const
       {
-printf("SynthParams::write %p %s\n", synth, synth->name());
       xml.stag(QString("Synth name=\"%1\"").arg(synth->name()));
       foreach(const Parameter* p, params)
             p->write(xml);
@@ -120,18 +138,31 @@ void SyntiSettings::read(QDomElement e)
       }
 
 //---------------------------------------------------------
-//   operator
+//   operator==
 //---------------------------------------------------------
 
 bool SynthParams::operator==(const SynthParams& sp) const
       {
       int n = params.size();
-      if (sp.params.size() != n)
+      if (sp.params.size() != n) {
+            printf(" != %d %d", sp.params.size(), n);
             return false;
+            }
       for (int i = 0; i < n; ++i) {
-            if (!(*sp.params[i] == *params[i]))
+            if (!(*sp.params[i] == *params[i])) {
+/*                  printf(" != ");
+                  sp.params[i]->print();
+                  params[i]->print();
+                  printf("\n");
+                  */
                   return false;
+                  }
             }
       return true;
+      }
+
+bool SynthParams::operator!=(const SynthParams& sp) const
+      {
+      return !(*this == sp);
       }
 

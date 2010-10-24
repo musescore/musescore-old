@@ -2427,14 +2427,10 @@ Score* Score::clone()
 
 void Score::setSyntiSettings(const SyntiSettings& s)
       {
-//      if (!_dirty) {
-            // check for mixer/synthesizer changes
-            // this changes are not undoable and therefore not reflected
-            // in the score->dirty flag
-            //
-            _dirty = _syntiSettings != s;
+      if (_syntiSettings != s) {
+            _dirty = true;
             _syntiSettings = s;
-//            }
+            }
       }
 
 //---------------------------------------------------------
