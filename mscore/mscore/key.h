@@ -34,6 +34,7 @@ class KeySigEvent {
       int _customType;
       bool _custom;
       bool _invalid;
+      void enforceLimits();
 
    public:
       KeySigEvent();

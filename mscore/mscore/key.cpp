@@ -43,6 +43,36 @@ KeySigEvent::KeySigEvent(int n)
       _customType     = 0;
       _custom         = false;
       _invalid        = false;
+      enforceLimits();
+      }
+
+//---------------------------------------------------------
+//   enforceLimits - ensure _accidentalType and _naturalType
+//   are within acceptable limits (-7 .. +7).
+//   see KeySig::layout()
+//---------------------------------------------------------
+
+void KeySigEvent::enforceLimits()
+      {
+      char * msg = 0;
+      if (_accidentalType < -7) {
+            _accidentalType = -7;
+            msg = "accidentalType < -7";
+            }
+      else if (_accidentalType > 7) {
+            _accidentalType = 7;
+            msg = "accidentalType > 7";
+            }
+      if (_naturalType < -7) {
+            _naturalType = -7;
+            msg = "naturalType < -7";
+            }
+      else if (_naturalType > 7) {
+            _naturalType = 7;
+            msg = "naturalType > 7";
+            }
+      if (msg)
+            printf("KeySigEvent: %s\n", msg);
       }
 
 //---------------------------------------------------------
@@ -83,6 +113,7 @@ void KeySigEvent::setAccidentalType(int v)
       _accidentalType = v;
       _custom         = false;
       _invalid        = false;
+      enforceLimits();
       }
 
 //---------------------------------------------------------
@@ -271,5 +302,6 @@ void KeySigEvent::initFromSubtype(int st)
       _customType     = a._customType;
       _custom         = a._custom;
       _invalid        = a._invalid;
+      enforceLimits();
       }
 

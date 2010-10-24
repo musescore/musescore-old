@@ -2642,6 +2642,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   len = 0;
                   }
             cr = new Rest(score, durationType);
+            cr->setDuration(Fraction::fromTicks(ticks));
             cr->setDots(dots);
             if (beamMode == BEAM_BEGIN || beamMode == BEAM_MID)
                   cr->setBeamMode(BEAM_MID);
