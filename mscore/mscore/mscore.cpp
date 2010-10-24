@@ -420,7 +420,7 @@ MuseScore::MuseScore()
       navigator->setShown(preferences.showNavigator);
 
       QList<int> sizes;
-      sizes << 500 << 100;
+      sizes << 500 << 500;
       mainWindow->setSizes(sizes);
 
       splitter = new QSplitter;
@@ -2561,10 +2561,10 @@ void MuseScore::writeSettings()
       settings.setValue("state", saveState());
       settings.setValue("splitScreen", _splitScreen);
       settings.setValue("inspectorSplitter", mainWindow->saveState());
-      if (_splitScreen) {
+//      if (_splitScreen) {
             settings.setValue("split", _horizontalSplit);
             settings.setValue("splitter", splitter->saveState());
-            }
+//            }
       settings.endGroup();
       if (paletteBox && paletteBox->dirty()) {
             QDir dir;
@@ -2593,24 +2593,24 @@ void MuseScore::readSettings()
             return;
             }
       QSettings settings;
+
       settings.beginGroup("MainWindow");
       resize(settings.value("size", QSize(950, 700)).toSize());
       mainWindow->restoreState(settings.value("inspectorSplitter").toByteArray());
-      settings.setValue("inspectorSplitter", mainWindow->saveState());
       move(settings.value("pos", QPoint(10, 10)).toPoint());
       if (settings.value("maximized", false).toBool())
             showMaximized();
       mscore->showPalette(settings.value("showPanel", "0").toBool());
       restoreState(settings.value("state").toByteArray());
-      if (settings.value("splitScreen", false).toBool()) {
-            splitWindow(settings.value("split").toBool());
-            QAction* a = getAction(_horizontalSplit ? "split-h" : "split-v");
-            a->setChecked(true);
-            }
-      else
-            _splitScreen = false;
+      _horizontalSplit = settings.value("split", true).toBool();
+      if (settings.value("splitScreen", false).toBool())
+            splitWindow(_horizontalSplit);
+      splitter->restoreState(settings.value("splitter").toByteArray());
+      QAction* a = getAction(_horizontalSplit ? "split-h" : "split-v");
+      a->setChecked(true);
       settings.endGroup();
-      QAction* a = getAction("toggle-transport");
+
+      a = getAction("toggle-transport");
       a->setChecked(!transportTools->isHidden());
       a = getAction("toggle-noteinput");
       a->setChecked(!entryTools->isHidden());
@@ -3060,7 +3060,7 @@ bool MuseScore::restoreSession(bool always)
             return false;
             }
       int tab = 0;
-      int idx = 0;
+      int idx = -1;
       bool cleanExit = false;
       for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "museScore") {
@@ -3121,6 +3121,7 @@ printf("set name <%s>\n", qPrintable(name));
                                                       dirty = false;
                                                       created = false;
                                                       }
+printf("restoreSession: appendScore\n");
                                                 appendScore(score);
                                                 score->setDirty(dirty);
                                                 score->setCreated(created);
@@ -3180,8 +3181,7 @@ printf("set name <%s>\n", qPrintable(name));
                   }
             }
 printf("setCurrentView noScore %d  tab %d idx %d\n", mscore->noScore(), tab, idx);
-//      setCurrentView(tab, idx);
-      setCurrentView(tab, -1);
+      setCurrentView(tab, idx);
       f.close();
       return true;
       }

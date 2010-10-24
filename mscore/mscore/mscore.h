@@ -252,8 +252,6 @@ class MuseScore : public QMainWindow {
       NewWizard* newWizard;
 
       PaletteBox* paletteBox;
-//      Palette* drumPalette;
-//      Drumset* drumset;                   // drumset associated with drumPalette
 
       bool _midiinEnabled;
       bool _speakerEnabled;
@@ -341,7 +339,6 @@ class MuseScore : public QMainWindow {
       void removeTab();
       void cmd(QAction*);
       void clipboardChanged();
-//      void drumPaletteSelected(int);
       void endSearch();
       void closeSynthControl();
       void loadPluginDir(const QString& pluginPath);
@@ -396,11 +393,9 @@ class MuseScore : public QMainWindow {
       bool loadPlugin(const QString& filename);
       QString createDefaultName() const;
       void startAutoSave();
-//      void updateDrumset();
       double getMag(ScoreView*) const;
       void setMag(double);
       bool noScore() const { return scoreList.isEmpty(); }
-//      void setDrumPalette(Palette* p) { drumPalette = p; }
 
       TextTools* textTools();
       DrumTools* drumTools();
