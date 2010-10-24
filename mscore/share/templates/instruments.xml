@@ -3751,7 +3751,7 @@
         </instrument>
      </instrument-group>
 
-   <instrument-group name="Guitars">
+   <instrument-group name="Fretted Instruments">
      <instrument>
         <name>Soprano Guitar</name>
         <short-name>S. Guit.</short-name>
@@ -3893,6 +3893,115 @@
            </channel>
         </instrument>
      <instrument>
+        <name>Lute</name>
+        <short-name>Lute</short-name>
+        <stafftype>tablature</stafftype>
+        <aPitchRange>33-79</aPitchRange>
+        <pPitchRange>33-79</pPitchRange>
+        <channel>
+           <program>25</program>
+           </channel>
+        </instrument>
+     <instrument>
+        <name>Renaissance Tenor Lute (5 course)</name>
+        <short-name>R. Lute</short-name>
+        <stafftype>tablature</stafftype>
+        <aPitchRange>48-79</aPitchRange>
+        <pPitchRange>48-79</pPitchRange>
+        <channel>
+           <program>25</program>
+           </channel>
+        <extended>1</extended>
+        </instrument>
+     <instrument>
+        <name>Renaissance Tenor Lute (6 course)</name>
+        <short-name>R. Lute</short-name>
+        <stafftype>tablature</stafftype>
+        <aPitchRange>43-79</aPitchRange>
+        <pPitchRange>43-79</pPitchRange>
+        <channel>
+           <program>25</program>
+           </channel>
+        <extended>1</extended>
+        </instrument>
+     <instrument>
+        <name>Renaissance Tenor Lute (7 course)</name>
+        <short-name>R. Lute</short-name>
+        <stafftype>tablature</stafftype>
+        <aPitchRange>38-79</aPitchRange>
+        <pPitchRange>38-79</pPitchRange>
+        <channel>
+           <program>25</program>
+           </channel>
+        <extended>1</extended>
+        </instrument>
+     <instrument>
+        <name>Renaissance Tenor Lute (8 course)</name>
+        <short-name>R. Lute.</short-name>
+        <stafftype>tablature</stafftype>
+        <aPitchRange>38-79</aPitchRange>
+        <pPitchRange>38-79</pPitchRange>
+        <channel>
+           <program>25</program>
+           </channel>
+        <extended>1</extended>
+        </instrument>
+     <instrument>
+        <name>Renaissance Tenor Lute (9 course)</name>
+        <short-name>R. Lute</short-name>
+        <stafftype>tablature</stafftype>
+        <aPitchRange>38-79</aPitchRange>
+        <pPitchRange>38-79</pPitchRange>
+        <channel>
+           <program>25</program>
+           </channel>
+        <extended>1</extended>
+        </instrument>
+     <instrument>
+        <name>Renaissance Tenor Lute (10 course)</name>
+        <short-name>R. Lute</short-name>
+        <stafftype>tablature</stafftype>
+        <aPitchRange>36-79</aPitchRange>
+        <pPitchRange>36-79</pPitchRange>
+        <channel>
+           <program>25</program>
+           </channel>
+        <extended>1</extended>
+        </instrument>
+     <instrument>
+        <name>Baroque Lute (13 course)</name>
+        <short-name>B. Lute</short-name>
+        <stafftype>tablature</stafftype>
+        <aPitchRange>33-77</aPitchRange>
+        <pPitchRange>33-77</pPitchRange>
+        <channel>
+           <program>25</program>
+           </channel>
+        <extended>1</extended>
+        </instrument>
+     <instrument>
+        <name>Archlute (14 course)</name>
+        <short-name>A. Lute</short-name>
+        <stafftype>tablature</stafftype>
+        <aPitchRange>33-77</aPitchRange>
+        <pPitchRange>33-77</pPitchRange>
+        <channel>
+           <program>25</program>
+           </channel>
+        <extended>1</extended>
+        </instrument>
+     <instrument>
+        <name>Theorbo (15 course)</name>
+        <short-name>Thb.</short-name>
+        <stafftype>tablature</stafftype>
+        <aPitchRange>33-71</aPitchRange>
+        <pPitchRange>33-71</pPitchRange>
+        <channel>
+           <program>25</program>
+           </channel>
+        <extended>1</extended>
+        </instrument>
+     <instrument>
         <name>Mandolin</name>
         <short-name>Mdn.</short-name>
         <clef>0</clef>
@@ -3913,7 +4022,7 @@
            </channel>
         </instrument>
      <instrument>
-        <name>Bouzouki (3-course)</name>
+        <name>Bouzouki (3 course)</name>
         <short-name>Bou.</short-name>
         <clef>3</clef>
         <aPitchRange>38-89</aPitchRange>
@@ -3924,7 +4033,7 @@
         <extended>1</extended>
         </instrument>
      <instrument>
-        <name>Bouzouki (4-course)</name>
+        <name>Bouzouki (4 course)</name>
         <short-name>Bou.</short-name>
         <clef>3</clef>
         <aPitchRange>36-89</aPitchRange>
