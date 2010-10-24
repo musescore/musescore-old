@@ -3,6 +3,9 @@
        (ws)
       - fix save/restore split window settings of session
       - fix #7653: crash when play panel is open with no score
+      (db)
+      - added lutes to instrument list
+      - renamed guitar category to "fretted instruments"
 23.oct (ws)
       - left align palette buttons text
       - mstyle: replaced pixmap operations with QImage as composite modes
