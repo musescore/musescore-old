@@ -1415,7 +1415,7 @@ bool MuseScore::processMidiRemote(MidiRemoteType type, int data)
             if (preferences.midiRemote[i].type == type && preferences.midiRemote[i].data == data) {
                   if (cv == 0)
                         return false;
-                  QAction* a;
+                  QAction* a = 0;
                   switch (i) {
                         case RMIDI_REWIND:      a = getAction("rewind"); break;
                         case RMIDI_TOGGLE_PLAY: a = getAction("play");  break;
