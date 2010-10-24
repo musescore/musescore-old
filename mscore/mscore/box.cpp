@@ -474,6 +474,7 @@ void VBox::propertyAction(ScoreView* viewer, const QString& cmd)
       if (cmd == "frame-text") {
             Text* t = new Text(score());
             t->setSubtype(TEXT_FRAME);
+            t->setTextStyle(TEXT_STYLE_FRAME);
             s = t;
             }
       else if (cmd == "title-text") {

@@ -1067,7 +1067,7 @@ void Score::deleteItem(Element* el)
                         undo()->push(new ChangeInstrumentShort(el->staff()->part(), ""));
                         break;
                         }
-                  undoRemoveElement(el->parent());
+                  undoRemoveElement(el);
                   break;
 
             case TIMESIG:

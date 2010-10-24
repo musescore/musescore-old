@@ -1543,6 +1543,8 @@ TextProperties::TextProperties(Text* t, QWidget* parent)
       setLayout(layout);
 
       text = t;
+      if (t->styled())
+            text->setLocalStyle(text->score()->textStyle(text->textStyle()));
       tp->setTextStyle(text->localStyle());
       tp->setStyled(t->styled());
       tp->setTextStyleType(t->textStyle());
