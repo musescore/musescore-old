@@ -45,6 +45,7 @@ class Parameter {
       int id() const              { return _id; }
 
       virtual bool operator==(const Parameter&) const = 0;
+      virtual void print() const = 0;
       };
 
 //---------------------------------------------------------
@@ -70,9 +71,8 @@ class Fparm : public Parameter {
       void setMin(float val) { _min = val; }
       void setMax(float val) { _max = val; }
       void set(const QString& name, float val, float min, float max);
-      virtual bool operator==(const Parameter& p) const {
-            return p.id() == id() && ((const Fparm&)p).val() == val();
-            }
+      virtual bool operator==(const Parameter& p) const;
+      virtual void print() const;
       };
 
 //---------------------------------------------------------
@@ -93,8 +93,9 @@ class Sparm : public Parameter {
       void setVal(const QString& s)                { _val = s; }
       void set(const QString& n, const QString& s) { _name = n; _val = s; }
       virtual bool operator==(const Parameter& p) const {
-            return p.id() == id() && ((const Sparm&)p).val() == val();
+            return (p.id() == id()) && ((const Sparm&)p)._val == _val;
             }
+      virtual void print() const;
       };
 
 //---------------------------------------------------------
@@ -108,6 +109,7 @@ struct SynthParams {
 
       void write(Xml&) const;
       bool operator==(const SynthParams& sp) const;
+      bool operator!=(const SynthParams& sp) const;
       };
 
 //---------------------------------------------------------

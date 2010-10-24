@@ -1156,13 +1156,3 @@ QString Seq::synthIndexToName(int idx) const
       return synti->synthIndexToName(idx);
       }
 
-#if 0
-//---------------------------------------------------------
-//   getSynth
-//---------------------------------------------------------
-
-Synth* Seq::getSynth(int n)
-      {
-      return synti->getSynth(n);
-      }
-#endif

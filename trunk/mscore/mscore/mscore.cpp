@@ -1156,13 +1156,12 @@ void MuseScore::setCurrentView(int tabIdx, int idx)
 void MuseScore::setCurrentScoreView(ScoreView* view)
       {
       cv = view;
+      MasterSynth* ms = seq->getSynti();
+      if (cs)
+            cs->setSyntiSettings(ms->synthParams());
       if (view) {
-            if (view->score() && cs != view->score()) {
-                  MasterSynth* ms = seq->getSynti();
-                  if (cs)
-                        cs->setSyntiSettings(ms->synthParams());
+            if (view->score() && cs != view->score())
                   ms->setSynthParams(view->score()->syntiSettings());
-                  }
             cs = view->score();
             view->setFocusRect();
             }
