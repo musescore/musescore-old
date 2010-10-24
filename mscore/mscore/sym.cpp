@@ -406,12 +406,15 @@ QFont fontId2font(int fontId)
       // rastral size is 20pt = 20/72 inch
       //
       int size = lrint(20.0 * DPI / PPI);
-      if (fontId == 0)
+      if (fontId == 0) {
             _font.setFamily("MScore");
+            _font.setStyleStrategy(QFont::NoFontMerging);
+            }
       else if (fontId == 1)
             _font.setFamily("MScore1-test");
       else if (fontId == 2) {
             _font.setFamily("FreeSerif");
+            _font.setStyleStrategy(QFont::NoFontMerging);
             size = lrint(8 * DPI / PPI);
             }
       else if (fontId == 3) {

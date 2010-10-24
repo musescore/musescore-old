@@ -1,3 +1,5 @@
+24.oct (ws)
+      - fix #7653: crash when play panel is open with no score
 23.oct (ws)
       - left align palette buttons text
       - mstyle: replaced pixmap operations with QImage as composite modes

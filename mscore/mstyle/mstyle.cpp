@@ -196,19 +196,6 @@ int MStyle::pixelMetric(PixelMetric metric, const QStyleOption* option, const QW
                   else
                         return PushButton_MenuIndicatorSize;
 
-            // tabbars
-            case PM_TabBarTabHSpace:
-                  {
-                  if( const QStyleOptionTab* tabOpt = qstyleoption_cast<const QStyleOptionTab*>(option) ) {
-                        if( tabOpt->text.isNull() && !tabOpt->icon.isNull())
-                              return 0;
-                        if( tabOpt->icon.isNull() && !tabOpt->text.isNull())
-                              return 0;
-                        }
-                  else
-                        return 4;
-                  }
-
             case PM_ScrollBarExtent:
                   return MStyleConfigData::scrollBarWidth + 2;
 
@@ -259,6 +246,7 @@ int MStyle::pixelMetric(PixelMetric metric, const QStyleOption* option, const QW
             case PM_MenuTearoffHeight: return 10;
 
             //! tabbar
+            case PM_TabBarTabHSpace: return 0;
             case PM_TabBarTabVSpace: return 0;
             case PM_TabBarBaseHeight: return TabBar_BaseHeight;
             case PM_TabBarBaseOverlap: return TabBar_BaseOverlap;
@@ -301,14 +289,18 @@ int MStyle::pixelMetric(PixelMetric metric, const QStyleOption* option, const QW
             case PM_TitleBarHeight: return 20;
 
             // spacing between widget and scrollbars
-            case PM_ScrollView_ScrollBarSpacing: return -2;
+            case PM_ScrollView_ScrollBarSpacing:
+                  if (const QFrame* frame = qobject_cast<const QFrame*>(widget)) {
+                        const bool framed(frame->frameShape() != QFrame::NoFrame);
+                        return framed ? -2 : 0;
+                        }
+                  else
+                        return -2;
 
             default:
-                  {
-                  int val = QCommonStyle::pixelMetric(metric, option, widget);
-                  return val;
-                  }
+                  break;
             }
+      return QCommonStyle::pixelMetric(metric, option, widget);
       }
 
 //---------------------------------------------------------
@@ -8011,7 +8003,7 @@ int MStyle::styleHint(StyleHint hint, const QStyleOption* option, const QWidget*
                         case SH_MenuBar_MouseTracking: return true;
                         case SH_Menu_MouseTracking: return true;
 
-                        case SH_Menu_SubMenuPopupDelay: return 96;
+                        case SH_Menu_SubMenuPopupDelay: return 150;
                         case SH_TitleBar_NoBorder: return 0;
                         case SH_GroupBox_TextLabelVerticalAlignment: return Qt::AlignVCenter;
                         case SH_DialogButtonLayout: return QDialogButtonBox::KdeLayout;

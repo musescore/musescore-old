@@ -132,7 +132,7 @@ SynthControl::SynthControl(MasterSynth* s, QWidget* parent)
 
 void SynthControl::setScore(Score* cs)
       {
-      setWindowTitle("MuseScore:Synthesizer " + cs->name());
+      setWindowTitle("MuseScore:Synthesizer " + (cs ? cs->name() : tr("no score")));
       Synth* sy = synti->synth("Fluid");
       soundFonts->clear();
       if (sy)

@@ -28,14 +28,14 @@ bool MStyleConfigData::progressBarAnimated = true;
 int  MStyleConfigData::menuBarAnimationType = MStyleConfigData::MB_FADE;
 int  MStyleConfigData::menuAnimationType = MStyleConfigData::ME_FADE;
 
-int  MStyleConfigData::genericAnimationsDuration = 300;
-int  MStyleConfigData::toolBarAnimationsDuration = 500;
-int  MStyleConfigData::menuAnimationsDuration;
+int  MStyleConfigData::genericAnimationsDuration = 150;
+int  MStyleConfigData::toolBarAnimationsDuration = 50;
+int  MStyleConfigData::menuAnimationsDuration = 150;
 int  MStyleConfigData::progressBarAnimationsDuration;
-int  MStyleConfigData::progressBarBusyStepDuration;
-int  MStyleConfigData::menuBarAnimationsDuration;
-int  MStyleConfigData::menuFollowMouseAnimationsDuration;
-int  MStyleConfigData::menuBarFollowMouseAnimationsDuration;
+int  MStyleConfigData::progressBarBusyStepDuration = 50;
+int  MStyleConfigData::menuBarAnimationsDuration = 150;
+int  MStyleConfigData::menuFollowMouseAnimationsDuration = 40;
+int  MStyleConfigData::menuBarFollowMouseAnimationsDuration = 80;
 bool MStyleConfigData::menuBarAnimationsEnabled = true;
 bool MStyleConfigData::menuAnimationsEnabled = true;
 int  MStyleConfigData::toolBarAnimationType = MStyleConfigData::TB_FADE;
@@ -44,24 +44,24 @@ int  MStyleConfigData::menuHighlightMode = MStyleConfigData::MM_DARK;
 bool MStyleConfigData::tabSubtleShadow = true;
 bool MStyleConfigData::showMnemonics = true;
 int  MStyleConfigData::scrollBarAddLineButtons = 2;
-int  MStyleConfigData::scrollBarSubLineButtons = 2;
+int  MStyleConfigData::scrollBarSubLineButtons = 1;
 int  MStyleConfigData::tabStyle = MStyleConfigData::TS_SINGLE;
 bool MStyleConfigData::viewDrawFocusIndicator = true;
 bool MStyleConfigData::cacheEnabled = true;
-int  MStyleConfigData::maxCacheSize = 50;
-bool MStyleConfigData::widgetExplorerEnabled = true;
+int  MStyleConfigData::maxCacheSize = 512;
+bool MStyleConfigData::widgetExplorerEnabled = false;
 bool MStyleConfigData::drawWidgetRects = true;
-int  MStyleConfigData::scrollBarWidth  = 13;
+int  MStyleConfigData::scrollBarWidth  = 15;
 
 bool MStyleConfigData::comboBoxTransitionsEnabled = true;
 bool MStyleConfigData::labelTransitionsEnabled = true;
 bool MStyleConfigData::lineEditTransitionsEnabled = true;
 bool MStyleConfigData::stackedWidgetTransitionsEnabled = true;
 
-int  MStyleConfigData::comboBoxTransitionsDuration = 300;
-int  MStyleConfigData::labelTransitionsDuration = 300;
-int  MStyleConfigData::lineEditTransitionsDuration = 300;
-int  MStyleConfigData::stackedWidgetTransitionsDuration = 300;
+int  MStyleConfigData::comboBoxTransitionsDuration = 75;
+int  MStyleConfigData::labelTransitionsDuration = 75;
+int  MStyleConfigData::lineEditTransitionsDuration = 150;
+int  MStyleConfigData::stackedWidgetTransitionsDuration = 150;
 
 bool MStyleConfigData::toolTipDrawStyledFrames = true;
 
