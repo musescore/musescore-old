@@ -1,4 +1,5 @@
 24.oct (ws)
+      - fix save/restore split window settings of session
       - fix #7653: crash when play panel is open with no score
 23.oct (ws)
       - left align palette buttons text
