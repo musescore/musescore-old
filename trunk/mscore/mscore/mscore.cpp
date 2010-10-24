@@ -2688,7 +2688,6 @@ void MuseScore::dirtyChanged(Score* score)
             printf("score not in list\n");
             return;
             }
-printf("dirtyChanged ============ %d\n", score->dirty());
       QString label(score->name());
       if (score->dirty())
             label += "*";
