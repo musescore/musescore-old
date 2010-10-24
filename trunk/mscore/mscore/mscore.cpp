@@ -191,7 +191,7 @@ void MuseScore::closeEvent(QCloseEvent* ev)
             if (score->created() && !score->dirty())
                   removeList.append(score);
             else {
-                  if (checkDirty(score)) {
+                  if (checkDirty(score)) {      // ask user if file is dirty
                         ev->ignore();
                         return;
                         }
@@ -2689,6 +2689,7 @@ void MuseScore::dirtyChanged(Score* score)
             printf("score not in list\n");
             return;
             }
+printf("dirtyChanged ============ %d\n", score->dirty());
       QString label(score->name());
       if (score->dirty())
             label += "*";
@@ -2898,7 +2899,7 @@ void MuseScore::editInDrumroll(Staff* staff)
 
 void MuseScore::writeSessionFile(bool cleanExit)
       {
-//      printf("write session file\n");
+// printf("write session file\n");
 
       QDir dir;
       dir.mkpath(dataPath);
@@ -2915,6 +2916,7 @@ void MuseScore::writeSessionFile(bool cleanExit)
             xml.stag("Score");
             xml.tag("created", score->created());
             xml.tag("dirty", score->dirty());
+// printf("  %d <%s>\n", score->dirty(), qPrintable(score->fileInfo()->absoluteFilePath()));
             if (score->tmpName().isEmpty()) {
                   xml.tag("path", score->fileInfo()->absoluteFilePath());
                   }
@@ -3060,6 +3062,7 @@ bool MuseScore::restoreSession(bool always)
             }
       int tab = 0;
       int idx = 0;
+      bool cleanExit = false;
       for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "museScore") {
                   /* QString version = e.attribute(QString("version"));
@@ -3073,6 +3076,7 @@ bool MuseScore::restoreSession(bool always)
                                     f.close();
                                     return false;
                                     }
+                              cleanExit = true;
                               }
                         else if (tag == "dirty") {
                               QMessageBox::StandardButton b = QMessageBox::question(0,
@@ -3112,6 +3116,11 @@ printf("failed to restore <%s>\n", qPrintable(val));
                                                 if (!name.isEmpty()) {
 printf("set name <%s>\n", qPrintable(name));
                                                       score->setName(name);
+                                                      }
+                                                if (cleanExit) {
+                                                      // override if last session did a clean exit
+                                                      dirty = false;
+                                                      created = false;
                                                       }
                                                 appendScore(score);
                                                 score->setDirty(dirty);
