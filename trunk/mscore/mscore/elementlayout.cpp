@@ -21,6 +21,7 @@
 #include "elementlayout.h"
 #include "xml.h"
 #include "element.h"
+#include "text.h"
 
 //---------------------------------------------------------
 //   ElementLayout
@@ -54,12 +55,15 @@ void ElementLayout::layout(Element* e) const
             }
 //      double w = e->width();
       QPointF p;
+      if (e->type() == TEXT && static_cast<Text*>(e)->layoutToParentWidth() && e->parent())
+            h = e->parent()->height();
       if (_align & ALIGN_BOTTOM)
             p.setY(h - e->height());
       else if (_align & ALIGN_VCENTER)
             p.setY((h - e->height()) * .5);
       else if (_align & ALIGN_BASELINE)
             p.setY(-e->baseLine());
+
 //      if (_align & ALIGN_RIGHT)
 //            p.setX(-w);
 //      else if (_align & ALIGN_HCENTER)

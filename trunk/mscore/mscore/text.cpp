@@ -409,9 +409,13 @@ void Text::draw(QPainter& p, ScoreView*) const
 
 void Text::setTextStyle(TextStyleType idx)
       {
-      _textStyle   = idx;
-      if (_textStyle != TEXT_STYLE_INVALID)
-            _styled = true;
+      if (_textStyle != idx) {
+            _textStyle = idx;
+            if (_textStyle != TEXT_STYLE_INVALID) {
+                  _styled = true;
+                  setText("");      // init style
+                  }
+            }
       }
 
 //---------------------------------------------------------
