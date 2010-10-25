@@ -1,3 +1,5 @@
+25.oct (la)
+      - fix #7665: Change instrument, undo does not undo sound
 24.oct (lv)
       - fix #6404: Crash editing a MusicXML file
        (ws)
