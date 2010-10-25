@@ -2237,6 +2237,9 @@ void ChangePart::flip()
 //      shortName             = part->shortName()->swapDoc(shortName);
       instrument            = oi;
       part->score()->setInstrumentNames();
+      part->score()->rebuildMidiMapping();
+      seq->initInstruments();
+      part->score()->setPlaylistDirty(true);
       }
 
 //---------------------------------------------------------

@@ -163,9 +163,6 @@ void EditStaff::apply()
 
       if (snd || lnd || !(instrument == *part->instr())) {
             score->undo()->push(new ChangePart(part, ln, sn, instrument));
-            score->rebuildMidiMapping();
-            seq->initInstruments();
-            score->setPlaylistDirty(true);
             }
 
       bool s   = small->isChecked();
