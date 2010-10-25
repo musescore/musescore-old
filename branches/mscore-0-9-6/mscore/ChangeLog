@@ -1,3 +1,5 @@
+25.oct (la)
+      - fix #7665: Change instrument, undo does not undo sound
 23.oct (la)
       - fix default fingering font
 22.oct (la)
