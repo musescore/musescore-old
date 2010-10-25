@@ -159,9 +159,6 @@ void EditStaff::apply()
 
       if (snd || lnd || !(instrument == *part)) {
             score->undo()->push(new ChangePart(part, ln, sn, instrument));
-            score->rebuildMidiMapping();
-            seq->initInstruments();
-            score->setPlaylistDirty(true);
             }
 
       int l        = lines->value();
