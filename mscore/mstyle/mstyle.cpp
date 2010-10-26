@@ -7971,18 +7971,12 @@ int MStyle::styleHint(StyleHint hint, const QStyleOption* option, const QWidget*
                         case SH_ToolTip_Mask:
                         case SH_Menu_Mask:
                         {
-
-                                  if( !_helper.hasAlphaChannel( widget ) && (!widget || widget->isWindow() ) )
-                                        {
-
-                                            // mask should be set only if compositing is disabled
-                                            if( QStyleHintReturnMask *mask = qstyleoption_cast<QStyleHintReturnMask *>(returnData))
-                                                  { mask->region = _helper.roundedMask( option->rect ); }
-
-                                        }
-
-                                  return true;
-
+                        if( !_helper.hasAlphaChannel( widget ) && (!widget || widget->isWindow())) {
+                              // mask should be set only if compositing is disabled
+                              if( QStyleHintReturnMask *mask = qstyleoption_cast<QStyleHintReturnMask *>(returnData)) {
+                                    mask->region = _helper.roundedMask( option->rect ); }
+                                    }
+                              return true;
                               }
 
                         // mouse tracking

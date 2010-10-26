@@ -1160,7 +1160,6 @@ void MuseScore::setCurrentScoreView(ScoreView* view)
             cs->setSyntiState(ms->state());
       if (view) {
             if (view->score() && cs != view->score()) {
-                  printf("MuseScore::setSynthParams\n");
                   ms->setState(view->score()->syntiState());
                   }
             cs = view->score();

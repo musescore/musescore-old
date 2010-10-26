@@ -1062,7 +1062,7 @@ SyntiState Fluid::state() const
       QStringList sfl = soundFonts();
 
       foreach(QString sf, sfl)
-            sp.append(SyntiParameter(SParmId(FLUID_ID, 0, 0).val, "SoundFont", sf));
+            sp.append(SyntiParameter(SParmId(FLUID_ID, 0, 0).val, "soundfont", sf));
 
       //
       // fill in struct with actual values
