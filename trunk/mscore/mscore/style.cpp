@@ -610,7 +610,7 @@ TextStyleData::TextStyleData()
       {
       name                   = "default";
       family                 = "FreeSerif";
-      double size            = 10.0;
+      size                   = 10.0;
       bold                   = false;
       italic                 = false;
       underline              = false;
@@ -1097,7 +1097,7 @@ void StyleData::setTextStyle(const TextStyle& ts)
       foreach(const TextStyle& s, _textStyles) {
             if (s.name() == ts.name())
                   break;
-            printf("<%s><%s>\n", qPrintable(s.name()), qPrintable(ts.name()));
+//            printf("<%s><%s>\n", qPrintable(s.name()), qPrintable(ts.name()));
             ++idx;
             }
       if (idx < _textStyles.size())
