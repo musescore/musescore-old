@@ -1104,6 +1104,8 @@ void Fluid::setState(const SyntiState& sp)
                               break;
                               }
                         }
+                  if (id == -1 && p.name() == "soundfont")
+                        id = SParmId(FLUID_ID, 0, 0).val;
                   if (id == -1)     // not for this synthesizer
                         continue;
                   }
@@ -1112,6 +1114,8 @@ void Fluid::setState(const SyntiState& sp)
                   continue;
             int group = spid.subsystemId;
             int no    = spid.paramId;
+
+            printf("Fluid::setState: "); p.print(); printf("\n");
 
             if (group == 0) {
                   sfs.append(p.sval());

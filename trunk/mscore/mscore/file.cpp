@@ -1329,6 +1329,20 @@ bool Score::read(QDomElement dScore)
             else if (tag == "SyntiSettings") {
                   _syntiState.clear();
                   _syntiState.read(ee);
+                  //
+                  // check for soundfont,
+                  // add default soundfont if none found
+                  // (for compatibility with old scores)
+                  //
+                  bool hasSoundfont = false;
+                  foreach(const SyntiParameter& sp, _syntiState) {
+                        if (sp.name() == "soundfont") {
+                              hasSoundfont = true;
+                              break;
+                              }
+                        }
+                  if (!hasSoundfont)
+                        _syntiState.append(SyntiParameter("soundfont", preferences.soundFont));
                   }
             else if (tag == "Spatium")
                   setSpatium (val.toDouble() * DPMM);
