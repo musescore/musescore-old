@@ -304,8 +304,8 @@ void TremoloBarCanvas::paintEvent(QPaintEvent* ev)
       static const int GRIP  = 10;
       static const int GRIP2 = 5;
 
-      int x1;
-      int y1;
+      int x1 = 0;
+      int y1 = 0;
       int idx = 0;
       pen = p.pen();
       pen.setWidth(5);
