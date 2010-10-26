@@ -33,31 +33,86 @@ QIcon* icons[ICONS];
 //    create some icons
 //---------------------------------------------------------
 
+static const char* iconNames[] = {
+      "longaUp.svg",
+      "brevis.svg",
+      "note.svg",
+      "note2.svg",
+      "note4.svg",
+      "note8.svg",
+      "note16.svg",
+      "note32.svg",
+      "note64.svg",
+      "natural.svg",
+      "sharp.svg",
+      "sharpsharp.svg",
+      "flat.svg",
+      "flatflat.svg",
+      "staccato.svg",
+      "quartrest.svg",
+      "dot.svg",
+      "dotdot.svg",
+      "sforzatoaccent.svg",
+      "tenuto.svg",
+      "plus.svg",
+      "flip.svg",
+      "undo.svg",
+      "redo.svg",
+      "editcut.svg",
+      "editcopy.svg",
+      "editpaste.svg",
+      "fileprint.svg",
+      "clef.svg",
+      "midiin.svg",
+      "speaker.svg",
+      "start.svg",
+      "play.svg",
+      "repeat.svg",
+      "sbeam.svg",
+      "mbeam.svg",
+      "nbeam.svg",
+      "beam32.svg",
+      "beam64.svg",
+      "abeam.svg",
+      "fbeam1.svg",
+      "fbeam2.svg",
+      "fileopen.svg",
+      "filenew.svg",
+      "filesave.svg",
+      "filesaveas.svg",
+      "exit.svg",
+      "viewmag.svg",
+      "mscore.xpm",
+      "acciaccatura.svg",
+      "appoggiatura.svg",
+      "grace4.svg",
+      "grace16.svg",
+      "grace32.svg",
+      "noteentry.svg",
+      "keyboard.svg",
+      "tie.svg",
+      "text_bold.svg",
+      "text_italic.svg",
+      "text_under.svg",
+      "text_left.svg",
+      "text_center.svg",
+      "text_right.svg",
+      "text_top.svg",
+      "text_bottom.svg",
+      "text_vcenter.svg",
+      "superscript.svg",
+      "subscript.svg",
+      "fotomode.svg"
+      };
+
 void genIcons()
       {
-      icons[longaUp_ICON]        = new QIcon(iconPath + "longaUp.svg");
-      icons[brevis_ICON]         = new QIcon(iconPath + "brevis.svg");
-      icons[note_ICON]           = new QIcon(iconPath + "note.svg");
-      icons[note2_ICON]          = new QIcon(iconPath + "note2.svg");
-      icons[note4_ICON]          = new QIcon(iconPath + "note4.svg");
-      icons[note8_ICON]          = new QIcon(iconPath + "note8.svg");
-      icons[note16_ICON]         = new QIcon(iconPath + "note16.svg");
-      icons[note32_ICON]         = new QIcon(iconPath + "note32.svg");
-      icons[note64_ICON]         = new QIcon(iconPath + "note64.svg");
-      icons[natural_ICON]        = new QIcon(iconPath + "natural.svg");
-      icons[sharp_ICON]          = new QIcon(iconPath + "sharp.svg");
-      icons[sharpsharp_ICON]     = new QIcon(iconPath + "sharpsharp.svg");
-      icons[flat_ICON]           = new QIcon(iconPath + "flat.svg");
-      icons[flatflat_ICON]       = new QIcon(iconPath + "flatflat.svg");
-      icons[quartrest_ICON]      = new QIcon(iconPath + "quartrest.svg");
-      icons[dot_ICON]            = new QIcon(iconPath + "dot.svg");
-      icons[dotdot_ICON]         = new QIcon(iconPath + "dotdot.svg");
-      icons[sforzatoaccent_ICON] = new QIcon(iconPath + "sforzatoaccent.svg");
-      icons[staccato_ICON]       = new QIcon(iconPath + "staccato.svg");
-      icons[tenuto_ICON]         = new QIcon(iconPath + "tenuto.svg");
-      icons[plus_ICON]           = new QIcon(iconPath + "plus.svg");
-      icons[clef_ICON]           = new QIcon(iconPath + "clef.svg");
-      icons[staccato_ICON]       = new QIcon(iconPath + "staccato.svg");
+      for (int i = 0; i < voice1_ICON; ++i) {
+            icons[i] = new QIcon(iconPath + iconNames[i]);
+//            if (icons[i]->isNull() || icons[i]->pixmap(12).isNull()) {
+//                  printf("cannot load Icon <%s>\n", iconNames[i]);
+//                  }
+            }
 
       static const char* vtext[VOICES] = { "1","2","3","4" };
       int iw = 16;
@@ -83,54 +138,5 @@ void genIcons()
             painter.end();
             icons[voice1_ICON + i]->addPixmap(image, QIcon::Normal, QIcon::On);
             }
-
-      icons[cut_ICON]           = new QIcon(iconPath + "editcut.svg");
-      icons[copy_ICON]          = new QIcon(iconPath + "editcopy.svg");
-      icons[paste_ICON]         = new QIcon(iconPath + "editpaste.svg");
-      icons[print_ICON]         = new QIcon(iconPath + "fileprint.svg");
-      icons[acciaccatura_ICON]  = new QIcon(iconPath + "acciaccatura.svg");
-      icons[appoggiatura_ICON]  = new QIcon(iconPath + "appoggiatura.svg");
-      icons[flip_ICON]          = new QIcon(iconPath + "flip.svg");
-      icons[undo_ICON]          = new QIcon(iconPath + "undo.svg");
-      icons[redo_ICON]          = new QIcon(iconPath + "redo.svg");
-      icons[midiin_ICON]        = new QIcon(iconPath + "midiin.svg");
-      icons[speaker_ICON]       = new QIcon(iconPath + "speaker.svg");
-      icons[start_ICON]         = new QIcon(iconPath + "start.svg");
-      icons[play_ICON]          = new QIcon(iconPath + "play.svg");
-      icons[sbeam_ICON]         = new QIcon(iconPath + "sbeam.svg");
-      icons[mbeam_ICON]         = new QIcon(iconPath + "mbeam.svg");
-      icons[nbeam_ICON]         = new QIcon(iconPath + "nbeam.svg");
-      icons[beam32_ICON]        = new QIcon(iconPath + "beam32.svg");
-      icons[beam64_ICON]        = new QIcon(iconPath + "beam64.svg");
-      icons[abeam_ICON]         = new QIcon(iconPath + "abeam.svg");
-      icons[fbeam1_ICON]        = new QIcon(iconPath + "fbeam1.svg");
-      icons[fbeam2_ICON]        = new QIcon(iconPath + "fbeam2.svg");
-      icons[fileOpen_ICON]      = new QIcon(iconPath + "fileopen.svg");
-      icons[fileNew_ICON]       = new QIcon(iconPath + "filenew.svg");
-      icons[fileSave_ICON]      = new QIcon(iconPath + "filesave.svg");
-      icons[fileSaveAs_ICON]    = new QIcon(iconPath + "filesaveas.svg");
-      icons[exit_ICON]          = new QIcon(iconPath + "exit.svg");
-      icons[viewmag_ICON]       = new QIcon(iconPath + "viewmag.svg");
-      icons[repeat_ICON]        = new QIcon(iconPath + "repeat.svg");
-      icons[noteEntry_ICON]     = new QIcon(iconPath + "noteentry.svg");
-      icons[grace4_ICON]        = new QIcon(iconPath + "grace4.svg");
-      icons[grace16_ICON]       = new QIcon(iconPath + "grace16.svg");
-      icons[grace32_ICON]       = new QIcon(iconPath + "grace32.svg");
-      icons[keys_ICON]          = new QIcon(iconPath + "keyboard.svg");
-      icons[tie_ICON]           = new QIcon(iconPath + "tie.svg");
-      icons[window_ICON]        = new QIcon(iconPath + "mscore.xpm");
-      icons[textBold_ICON]      = new QIcon(iconPath + "text_bold.svg");
-      icons[textItalic_ICON]    = new QIcon(iconPath + "text_italic.svg");
-      icons[textUnderline_ICON] = new QIcon(iconPath + "text_under.svg");
-      icons[textLeft_ICON]      = new QIcon(iconPath + "text_left.svg");
-      icons[textCenter_ICON]    = new QIcon(iconPath + "text_center.svg");
-      icons[textRight_ICON]     = new QIcon(iconPath + "text_right.svg");
-      icons[textTop_ICON]       = new QIcon(iconPath + "text_top.svg");
-      icons[textBottom_ICON]    = new QIcon(iconPath + "text_bottom.svg");
-      icons[textVCenter_ICON]   = new QIcon(iconPath + "text_vcenter.svg");
-
-      icons[textSuper_ICON]     = new QIcon(iconPath + "superscript.svg");
-      icons[textSub_ICON]       = new QIcon(iconPath + "subscript.svg");
-      icons[fotomode_ICON]      = new QIcon(iconPath + "fotomode.svg");
       }
 

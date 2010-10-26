@@ -54,6 +54,7 @@
       <file>data/recordOn.svg</file>
       <file>data/recordOff.svg</file>
       <file>data/mscore.png</file>
+      <file>data/mscore.xpm</file>
       <file>data/acciaccatura.svg</file>
       <file>data/grace4.svg</file>
       <file>data/grace16.svg</file>
@@ -107,7 +108,6 @@
       <file>data/note8.svg</file>
       <file>data/note.svg</file>
       <file>data/ouvert.svg</file>
-      <file>data/plus.svg</file>
       <file>data/plusstop.svg</file>
       <file>data/popping.svg</file>
       <file>data/prallmordent.svg</file>

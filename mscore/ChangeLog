@@ -1,4 +1,5 @@
 26.oct (ws)
+      - add missing "windowIcon"
       - implement "single palette mode"; enable in palette context menu
         (right click into empty area of palette box)
       - add missing "standardIconImplementation()" to mstyle; palette title buttons

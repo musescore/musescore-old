@@ -32,7 +32,7 @@ extern void genIcons();
 enum { longaUp_ICON, brevis_ICON, note_ICON, note2_ICON, note4_ICON, note8_ICON, note16_ICON,
       note32_ICON, note64_ICON, natural_ICON, sharp_ICON, sharpsharp_ICON, flat_ICON, flatflat_ICON,
       staccato_ICON, quartrest_ICON, dot_ICON, dotdot_ICON, sforzatoaccent_ICON,
-      tenuto_ICON, plus_ICON, flip_ICON, voice1_ICON, voice2_ICON, voice3_ICON, voice4_ICON,
+      tenuto_ICON, plus_ICON, flip_ICON,
       undo_ICON, redo_ICON, cut_ICON, copy_ICON, paste_ICON, print_ICON, clef_ICON,
       midiin_ICON, speaker_ICON, start_ICON, play_ICON, repeat_ICON,
       sbeam_ICON, mbeam_ICON, nbeam_ICON, beam32_ICON, beam64_ICON, abeam_ICON, fbeam1_ICON, fbeam2_ICON,
@@ -43,8 +43,10 @@ enum { longaUp_ICON, brevis_ICON, note_ICON, note2_ICON, note4_ICON, note8_ICON,
       textLeft_ICON, textCenter_ICON, textRight_ICON, textTop_ICON, textBottom_ICON, textVCenter_ICON,
       textSuper_ICON, textSub_ICON,
       fotomode_ICON,
+      voice1_ICON, voice2_ICON, voice3_ICON, voice4_ICON,
       ICONS
       };
+
 extern QIcon* icons[ICONS];
 
 class Sym;
