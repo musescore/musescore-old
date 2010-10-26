@@ -447,7 +447,7 @@ endif (NOT MINGW AND NOT APPLE)
       data/filesave.svg
       data/filesaveas.svg
       data/exit.svg
-      data/viewmag.xpm
+      data/viewmag.svg
       data/repeat.svg
       data/noteentry.svg
       data/grace4.svg

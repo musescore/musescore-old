@@ -110,7 +110,7 @@ void genIcons()
       icons[fileSave_ICON]      = new QIcon(iconPath + "filesave.svg");
       icons[fileSaveAs_ICON]    = new QIcon(iconPath + "filesaveas.svg");
       icons[exit_ICON]          = new QIcon(iconPath + "exit.svg");
-      icons[viewmag_ICON]       = new QIcon(iconPath + "viewmag.xpm");
+      icons[viewmag_ICON]       = new QIcon(iconPath + "viewmag.svg");
       icons[repeat_ICON]        = new QIcon(iconPath + "repeat.svg");
       icons[noteEntry_ICON]     = new QIcon(iconPath + "noteentry.svg");
       icons[grace4_ICON]        = new QIcon(iconPath + "grace4.svg");

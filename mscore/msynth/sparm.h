@@ -69,7 +69,7 @@ class SyntiParameter {
       float max() const;
       void setRange(float a, float b);
 
-      bool operator==(const SyntiParameter&);
+      bool operator==(const SyntiParameter&) const;
       void print() const;
       };
 
@@ -85,6 +85,7 @@ class SyntiState : public QList<SyntiParameter> {
       SyntiState();
       void write(Xml&) const;
       void read(QDomElement);
+      bool operator==(const SyntiState&) const;
       };
 
 #endif

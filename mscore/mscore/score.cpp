@@ -2418,7 +2418,6 @@ Score* Score::clone()
 
 void Score::setSyntiState(const SyntiState& s)
       {
-printf("Score::setSyntiSettings\n");
       if (_syntiState != s) {
             _dirty = true;
             _syntiState = s;
