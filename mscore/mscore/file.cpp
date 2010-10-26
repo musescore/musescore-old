@@ -235,7 +235,7 @@ void MuseScore::saveFile()
       {
       if (cs == 0)
             return;
-      cs->setSyntiSettings(seq->getSynti()->synthParams());
+      cs->setSyntiState(seq->getSynti()->state());
       if (cs->saveFile(false)) {
             setWindowTitle("MuseScore: " + cs->name());
             int idx = scoreList.indexOf(cs);
@@ -1327,8 +1327,8 @@ bool Score::read(QDomElement dScore)
             else if (tag == "showOmr")
                   _showOmr = i;
             else if (tag == "SyntiSettings") {
-                  _syntiSettings.clear();       // TODO: memory leak
-                  _syntiSettings.read(ee);
+                  _syntiState.clear();
+                  _syntiState.read(ee);
                   }
             else if (tag == "Spatium")
                   setSpatium (val.toDouble() * DPMM);
@@ -1606,36 +1606,36 @@ void Score::connectSlurs()
 
 void Score::printFile()
       {
-      QPrinter* printerDev = static_cast<QPrinter*>(pdev);
+      QPrinter printerDev(QPrinter::HighResolution);
 
       if (paperSizes[pageFormat()->size].qtsize == QPrinter::Custom) {
-            printerDev->setPaperSize(QSizeF(pageFormat()->_width, pageFormat()->_height),
+            printerDev.setPaperSize(QSizeF(pageFormat()->_width, pageFormat()->_height),
                QPrinter::Inch);
             }
       else
-            printerDev->setPaperSize(paperSizes[pageFormat()->size].qtsize);
+            printerDev.setPaperSize(paperSizes[pageFormat()->size].qtsize);
 
-      printerDev->setOrientation(pageFormat()->landscape ? QPrinter::Landscape : QPrinter::Portrait);
-      printerDev->setCreator("MuseScore Version: " VERSION);
-      printerDev->setFullPage(true);
-      printerDev->setColorMode(QPrinter::Color);
+      printerDev.setOrientation(pageFormat()->landscape ? QPrinter::Landscape : QPrinter::Portrait);
+      printerDev.setCreator("MuseScore Version: " VERSION);
+      printerDev.setFullPage(true);
+      printerDev.setColorMode(QPrinter::Color);
 
-      printerDev->setDocName(name());
-      printerDev->setDoubleSidedPrinting(pageFormat()->twosided);
-      printerDev->setOutputFormat(QPrinter::NativeFormat);
+      printerDev.setDocName(name());
+      printerDev.setDoubleSidedPrinting(pageFormat()->twosided);
+      printerDev.setOutputFormat(QPrinter::NativeFormat);
 
 #if defined(Q_WS_MAC) || defined(__MINGW32__)
       printerDev->setOutputFileName("");
 #else
       // when setting this on windows platform, pd.exec() does not
       // show dialog
-      printerDev->setOutputFileName(info.path() + "/" + name() + ".pdf");
+      printerDev.setOutputFileName(info.path() + "/" + name() + ".pdf");
 #endif
 
-      QPrintDialog pd(printerDev, 0);
+      QPrintDialog pd(&printerDev, 0);
       if (!pd.exec())
             return;
-      print(printerDev);
+      print(&printerDev);
       }
 
 //---------------------------------------------------------
@@ -1724,15 +1724,12 @@ bool Score::savePsPdf(const QString& saveName, QPrinter::OutputFormat format)
 bool Score::saveSvg(const QString& saveName)
       {
       QSvgGenerator printer;
-      QPaintDevice* opdev = pdev;
-      pdev = &printer;
-
       printer.setResolution(int(DPI));
       printer.setFileName(saveName);
 
       _printing = true;
 
-      QPainter p(pdev);
+      QPainter p(&printer);
       p.setRenderHint(QPainter::Antialiasing, true);
       p.setRenderHint(QPainter::TextAntialiasing, true);
       double mag = converterDpi / DPI;
@@ -1776,7 +1773,6 @@ bool Score::saveSvg(const QString& saveName)
 
       _printing = false;
       p.end();
-      pdev = opdev;
       return true;
       }
 

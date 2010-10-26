@@ -77,6 +77,9 @@ void Xml::valueTypeTag(const char* name, ValueType t)
             case AUTO_VAL:   s = "auto"; break;
             case USER_VAL:   s = "user"; break;
             case OFFSET_VAL: s = "offset"; break;
+            default:
+                  s = "?";
+                  break;
             }
       tag(name, s);
       }

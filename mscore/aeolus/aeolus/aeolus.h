@@ -61,7 +61,7 @@ class Aeolus : public Synth {
       Division*       _divisp [NDIVIS];
       Reverb          _reverb;
       unsigned char   _keymap [NNOTES];
-      Fparm           _audiopar[4];
+      SyntiParameter  _audiopar[4];
       float           _revsize;
       float           _revtime;
 
@@ -106,11 +106,13 @@ class Aeolus : public Synth {
 
       virtual const QList<MidiPatch*>& getPatchInfo() const;
 
-      virtual const Fparm& effectParameter(int /*effect*/, int /*parameter*/) const;
-      virtual double setEffectParameter(int /*effect*/, int /*parameter*/, double /*value*/ );
+      // set/get a single parameter
+      virtual SyntiParameter parameter(int id) const;
+      virtual void setParameter(int id, double val);
 
-      virtual SynthParams getParams() const;
-      virtual void setParams(const SynthParams&);
+      // get/set synthesizer state
+      virtual SyntiState state() const;
+      virtual void setState(const SyntiState&);
 
       friend class Model;
       };

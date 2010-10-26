@@ -25,6 +25,7 @@
 #include "gen.h"
 #include "chorus.h"
 #include "voice.h"
+#include "msynth/sparm_p.h"
 
 namespace FluidS {
 
@@ -64,18 +65,17 @@ static const Mod defaultMod[] = {
 //
 // list of fluid paramters as saved in score
 //
-static Parameter* params[] = {
-      new Fparm(0x10000, "RevRoomsize", 0.0),
-      new Fparm(0x10001, "RevDamp",   0.0),
-      new Fparm(0x10002, "RevWidth",  0.0),
-      new Fparm(0x10003, "RevGain",   0.0),
+static SyntiParameter params[] = {
+      SyntiParameter(SParmId(FLUID_ID, 1, 0).val, "RevRoomsize", 0.0),
+      SyntiParameter(SParmId(FLUID_ID, 1, 1).val, "RevDamp",   0.0),
+      SyntiParameter(SParmId(FLUID_ID, 1, 2).val, "RevWidth",  0.0),
+      SyntiParameter(SParmId(FLUID_ID, 1, 3).val, "RevGain",   0.0),
 
-      new Fparm(0x20000, "ChoType",   0.0),
-      new Fparm(0x20001, "ChoSpeed",  0.0),
-      new Fparm(0x20002, "ChoDepth",  0.0),
-      new Fparm(0x20003, "ChoBlocks", 0.0),
-      new Fparm(0x20004, "ChoGain",   0.0),
-      0
+      SyntiParameter(SParmId(FLUID_ID, 2, 0).val, "ChoType",   0.0),
+      SyntiParameter(SParmId(FLUID_ID, 2, 1).val, "ChoSpeed",  0.0),
+      SyntiParameter(SParmId(FLUID_ID, 2, 2).val, "ChoDepth",  0.0),
+      SyntiParameter(SParmId(FLUID_ID, 2, 3).val, "ChoBlocks", 0.0),
+      SyntiParameter(SParmId(FLUID_ID, 2, 4).val, "ChoGain",   0.0),
       };
 
 //---------------------------------------------------------
@@ -119,7 +119,7 @@ void Fluid::init(int sr)
       sfont_id           = 0;
       _gain              = .2;
 
-      state       = FLUID_SYNTH_PLAYING; // as soon as the synth is created it starts playing.
+      _state       = FLUID_SYNTH_PLAYING; // as soon as the synth is created it starts playing.
       noteid      = 0;
       for (int i = 0; i < 128; ++i)
             _tuning[i] = i * 100.0;
@@ -139,7 +139,7 @@ void Fluid::init(int sr)
 
 Fluid::~Fluid()
       {
-      state = FLUID_SYNTH_STOPPED;
+      _state = FLUID_SYNTH_STOPPED;
       foreach(Voice* v, activeVoices)
             delete v;
       foreach(Voice* v, freeVoices)
@@ -1004,22 +1004,33 @@ void Fluid::remove_bank_offset(int sfont_id)
 		bank_offsets.removeAll(bank_offset);
       }
 
-double Fluid::effectParameter(int effect, int parameter)
+SyntiParameter Fluid::parameter(int id) const
       {
-      if (effect == 0)
-            return reverb->parameter(parameter);
-      else if (effect == 1)
-            return chorus->parameter(parameter);
-      return 0.0;
+      for (unsigned i = 0; i < sizeof(params)/sizeof(*params); ++i) {
+            SyntiParameter& p = params[i];
+            if (id == p.id()) {
+                  SParmId spid(p.id());
+                  int group = spid.subsystemId;
+                  int no    = spid.paramId;
+                  if (group == 1)
+                        params[i].set(reverb->parameter(no));
+                  else if (group == 2)
+                        params[i].set(chorus->parameter(no));
+                  return params[i];
+                  }
+            }
+      return SyntiParameter();
       }
 
-double Fluid::setEffectParameter(int effect, int parameter, double value)
+void Fluid::setParameter(int id, double value)
       {
-      if (effect == 0)
-            reverb->setParameter(parameter, value);
-      else if (effect == 1)
-            chorus->setParameter(parameter, value);
-      return value;
+      SParmId spid(id);
+      if (spid.syntiId != FLUID_ID)
+            return;
+      if (spid.subsystemId == 0)
+            reverb->setParameter(spid.paramId, value);
+      else if (spid.subsystemId == 1)
+            chorus->setParameter(spid.paramId, value);
       }
 
 /**
@@ -1041,58 +1052,76 @@ bool Fluid::log(const char* fmt, ...)
       }
 
 //---------------------------------------------------------
-//   getParams
+//   state
 //---------------------------------------------------------
 
-SynthParams Fluid::getParams() const
+SyntiState Fluid::state() const
       {
-      SynthParams sp;
-      sp.synth = (Fluid*)this;
+      SyntiState sp;
 
       QStringList sfl = soundFonts();
-      int id = 0;
-      foreach(QString sf, sfl) {
-            Sparm* s = new Sparm(id++, "soundfont", sf);
-            sp.params.append(s);
-            }
+
+      foreach(QString sf, sfl)
+            sp.append(SyntiParameter(SParmId(FLUID_ID, 0, 0).val, "SoundFont", sf));
+
       //
       // fill in struct with actual values
       //
-      for (int i = 0;; ++i) {
-            Parameter* p = params[i];
-            if (p == 0)
-                  break;
-            int id    = p->id();
-            int group = (id & 0xffff0000) >> 16;
-            int no    = id & 0xffff;
+      for (unsigned i = 0; i < sizeof(params)/sizeof(*params); ++i) {
+            SyntiParameter& p = params[i];
+            SParmId spid(p.id());
+
+            int group = spid.subsystemId;
+            int no    = spid.paramId;
 
             if (group == 1)
-                  static_cast<Fparm*>(p)->setVal(reverb->parameter(no));
+                  params[i].set(reverb->parameter(no));
             else if (group == 2)
-                  static_cast<Fparm*>(p)->setVal(chorus->parameter(no));
-            sp.params.append(p->clone());
+                  params[i].set(chorus->parameter(no));
+            sp.append(params[i]);
             }
       return sp;
       }
 
 //---------------------------------------------------------
-//   setParams
+//   setState
 //---------------------------------------------------------
 
-void Fluid::setParams(const SynthParams& sp)
+void Fluid::setState(const SyntiState& sp)
       {
       QStringList sfs;
-      foreach(const Parameter* p, sp.params) {
-            int id    = p->id();
-            int group = (id & 0xffff0000) >> 16;
-            int no    = id & 0xffff;
+      foreach(const SyntiParameter& p, sp) {
+            int id = p.id();
+            if (id == -1) {
+                  //
+                  // if id of parameter is invalid, name must be
+                  // valid; lookup name in params table
+                  //
+                  for (unsigned i = 0; i < sizeof(params)/sizeof(*params); ++i) {
+                        SyntiParameter& p2 = params[i];
+                        if (p2.name() == p.name()) {
+                              id = p2.id();
+                              break;
+                              }
+                        }
+                  if (id == -1)     // not for this synthesizer
+                        continue;
+                  }
+            SParmId spid(id);
+            if (spid.syntiId != FLUID_ID)
+                  continue;
+            int group = spid.subsystemId;
+            int no    = spid.paramId;
 
-            if (group == 0)
-                  sfs.append(static_cast<const Sparm*>(p)->val());
-            else if (group == 1)
-                  reverb->setParameter(no, static_cast<const Fparm*>(p)->val());
-            else if (group == 2)
-                  chorus->setParameter(no, static_cast<const Fparm*>(p)->val());
+            if (group == 0) {
+                  sfs.append(p.sval());
+                  }
+            else if (group == 1) {
+                  reverb->setParameter(no, p.fval());
+                  }
+            else if (group == 2) {
+                  chorus->setParameter(no, p.fval());
+                  }
             }
       loadSoundFonts(sfs);
       }

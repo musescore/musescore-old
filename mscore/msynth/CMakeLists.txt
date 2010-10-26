@@ -46,7 +46,7 @@ add_library (
       msynth STATIC
       ${PROJECT_BINARY_DIR}/all.h
       ${PROJECT_BINARY_DIR}/all.h.pch
-      synti.cpp fparm.cpp
+      synti.cpp sparm.cpp
       )
 
 set_target_properties(msynth

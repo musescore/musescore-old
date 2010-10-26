@@ -1,3 +1,7 @@
+26.oct (la)
+      - add missing "standardIconImplementation()" to mstyle; palette title buttons
+        are now visible
+      - cleaner synthesizer initialization
 25.oct (la)
       - fix #7665: Change instrument, undo does not undo sound
 24.oct (lv)

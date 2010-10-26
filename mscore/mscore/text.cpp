@@ -918,7 +918,7 @@ qreal Text::baseLine() const
 
 double Text::lineSpacing() const
       {
-      return QFontMetricsF(doc()->defaultFont(), pdev).lineSpacing();
+      return QFontMetricsF(style().font(spatium())).lineSpacing();
       }
 
 //---------------------------------------------------------
@@ -928,8 +928,7 @@ double Text::lineSpacing() const
 
 double Text::lineHeight() const
       {
-      QFontMetricsF fm(doc()->defaultFont(), pdev);
-      return fm.height();
+      return QFontMetricsF(style().font(spatium())).height();
       }
 
 //---------------------------------------------------------

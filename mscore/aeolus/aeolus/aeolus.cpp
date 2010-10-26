@@ -24,6 +24,7 @@ extern QString mscoreGlobalShare;
 
 #include "event.h"
 #include "xml.h"
+#include "msynth/sparm_p.h"
 
 //---------------------------------------------------------
 //   init
@@ -176,58 +177,65 @@ const QList<MidiPatch*>& Aeolus::getPatchInfo() const
 //   effectParameter
 //---------------------------------------------------------
 
-const Fparm& Aeolus::effectParameter(int effect, int parameter) const
+SyntiParameter Aeolus::parameter(int id) const
       {
-      switch (effect) {
+      SParmId spid(id);
+      if (spid.syntiId != AEOLUS_ID)
+            return SyntiParameter();
+
+      switch (spid.subsystemId) {
             case 0:     // audio
-                  return _audiopar[parameter];
+                  return _audiopar[spid.paramId];
             case 1:
             case 2:
             case 3:
             case 4:
                   {
-                  Fparm* fp = _asectp[effect-1]->get_apar();
-                  return fp[parameter];
+                  SyntiParameter* fp = _asectp[spid.subsystemId-1]->get_apar();
+                  return fp[spid.paramId];
                   }
 
             default:
                   break;
             }
-      return defaultParameter;
+      return SyntiParameter();
       }
 
 //---------------------------------------------------------
-//   setEffectParameter
+//   setParameter
 //---------------------------------------------------------
 
-double Aeolus::setEffectParameter(int effect, int parameter, double value)
+void Aeolus::setParameter(int id, double value)
       {
-      Fparm* p = 0;
+      SParmId spid(id);
+      if (spid.syntiId != AEOLUS_ID)
+            return;
 
-      switch(effect) {
+      SyntiParameter* p = 0;
+
+      switch(spid.subsystemId) {
             case 0:     // audio
-                  p = &_audiopar[parameter];
+                  p = &_audiopar[spid.paramId];
                   break;
             case 1:
             case 2:
             case 3:
             case 4:
                   {
-                  Fparm* fp = _asectp[effect-1]->get_apar();
-                  p = &fp[parameter];
+                  SyntiParameter* fp = _asectp[spid.subsystemId-1]->get_apar();
+                  p = &fp[spid.paramId];
                   }
             default:
                   break;
             }
       if (p == 0)
-            return 0.0;
+            return;
       if (value > p->max())
             value = p->max();
       else if (value < p->min())
             value = p->min();
 // printf("aeolus set %d %d %f\n", effect, parameter, value);
-      p->setVal(value);
-      return value;
+      p->set(value);
       }
 
 //---------------------------------------------------------
@@ -267,23 +275,12 @@ void Aeolus::printGui()
             }
       }
 
-//---------------------------------------------------------
-//   getParams
-//---------------------------------------------------------
-
-SynthParams Aeolus::getParams() const
+SyntiState Aeolus::state() const
       {
-      SynthParams sp;
-      sp.synth = (Aeolus*)this;
-      return sp;
+      return SyntiState();
       }
 
-//---------------------------------------------------------
-//   setParams
-//---------------------------------------------------------
-
-void Aeolus::setParams(const SynthParams&)
+void Aeolus::setState(const SyntiState&)
       {
       }
-
 

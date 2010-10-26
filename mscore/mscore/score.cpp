@@ -356,17 +356,8 @@ Score::Score(const Style& s)
       _tempomap       = new AL::TempoMap;
 
       // set default soundfont
-      MasterSynth* ms = seq->getSynti();
-      if (ms) {
-            Synth* s = ms->synth("Fluid");
-            if (s) {
-                  SynthParams sp;
-                  sp.synth = s;
-                  Parameter* p = new Sparm(0, "soundfont", preferences.soundFont);
-                  sp.params.append(p);
-                  _syntiSettings.append(sp);
-                  }
-            }
+      _syntiState.append(SyntiParameter("soundfont", preferences.soundFont));
+
       connect(_undo, SIGNAL(cleanChanged(bool)), SLOT(setClean(bool)));
       }
 
@@ -639,7 +630,7 @@ void Score::write(Xml& xml, bool /*autosave*/)
             xml.tag("showOmr", _showOmr);
 #endif
 
-      _syntiSettings.write(xml);
+      _syntiState.write(xml);
 
       xml.tag("Spatium", _spatium / DPMM);
       xml.tag("Division", AL::division);
@@ -2425,11 +2416,12 @@ Score* Score::clone()
 //   setSyntiSettings
 //---------------------------------------------------------
 
-void Score::setSyntiSettings(const SyntiSettings& s)
+void Score::setSyntiState(const SyntiState& s)
       {
-      if (_syntiSettings != s) {
+printf("Score::setSyntiSettings\n");
+      if (_syntiState != s) {
             _dirty = true;
-            _syntiSettings = s;
+            _syntiState = s;
             }
       }
 

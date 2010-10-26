@@ -35,7 +35,7 @@
 #include "al/fraction.h"
 #include "al/al.h"
 #include "interval.h"
-#include "msynth/fparm.h"
+#include "msynth/sparm.h"
 
 namespace AL {
       class TempoMap;
@@ -295,7 +295,7 @@ class Score : public QObject {
       Omr* _omr;
       bool _showOmr;
 
-      SyntiSettings _syntiSettings;
+      SyntiState _syntiState;
 
       //------------------
 
@@ -783,8 +783,8 @@ class Score : public QObject {
       void doLayout();
       void layoutChords1(Segment* segment, int staffIdx);
       void emitSelectionChanged(int val)                 { emit selectionChanged(val); }
-      const SyntiSettings& syntiSettings() const         { return _syntiSettings;      }
-      void setSyntiSettings(const SyntiSettings& s);
+      const SyntiState& syntiState() const               { return _syntiState;         }
+      void setSyntiState(const SyntiState& s);
       const QList<StaffType*>& staffTypes() const        { return _staffTypes; }
       QList<StaffType*>& staffTypes()                    { return _staffTypes; }
       void setStaffTypeList(const QList<StaffType*>& tl) { _staffTypes = tl;   }

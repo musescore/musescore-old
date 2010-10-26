@@ -274,8 +274,6 @@ void TimeSig::layout()
                   sz += QString("+%1").arg(z4);
             sn = QString("%1").arg(n);
 
-            // QFontMetricsF fm(fontId2font(0), pdev);
-
             QFontMetricsF fm(fontId2font(0));
             QRectF rz = fm.tightBoundingRect(sz);
             QRectF rn = fm.tightBoundingRect(sn);

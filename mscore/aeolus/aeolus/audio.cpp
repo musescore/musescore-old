@@ -158,14 +158,14 @@ void Aeolus::process(unsigned nframes, float* lout, float* rout, int stride, flo
       for (int d = 0; d < _ndivis; d++)
             _divisp[d]->update(_keymap);
 
-      if (fabsf(_revsize - _audiopar [REVSIZE].val()) > 0.001f) {
-            _revsize = _audiopar[REVSIZE].val();
+      if (fabsf(_revsize - _audiopar [REVSIZE].fval()) > 0.001f) {
+            _revsize = _audiopar[REVSIZE].fval();
             _reverb.set_delay(_revsize);
             for (int j = 0; j < _nasect; j++)
                   _asectp[j]->set_size(_revsize);
             }
-      if (fabsf(_revtime - _audiopar [REVTIME].val()) > 0.1f) {
-            _revtime = _audiopar [REVTIME].val();
+      if (fabsf(_revtime - _audiopar [REVTIME].fval()) > 0.1f) {
+            _revtime = _audiopar [REVTIME].fval();
             _reverb.set_t60mf(_revtime);
             _reverb.set_t60lo(_revtime * 1.50f, 250.0f);
             _reverb.set_t60hi(_revtime * 0.50f, 3e3f);
@@ -190,7 +190,7 @@ void Aeolus::process(unsigned nframes, float* lout, float* rout, int stride, flo
 
                   _reverb.process(PERIOD, gain, R, W, X, Y);
 
-                  float stposit = _audiopar[STPOSIT].val();
+                  float stposit = _audiopar[STPOSIT].fval();
                   for (int j = 0; j < PERIOD; j++) {
                         loutb[j] = W[j] + stposit * X[j] + Y[j];
                         routb[j] = W[j] + stposit * X[j] - Y[j];

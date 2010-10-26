@@ -28,8 +28,7 @@
 #include "aeolus/aeolus/aeolus.h"
 #endif
 #include "xml.h"
-
-const Fparm Synth::defaultParameter = Fparm(0, "default", 0, 0, 0);
+#include "sparm_p.h"
 
 //---------------------------------------------------------
 //   MasterSynth
@@ -72,11 +71,11 @@ void MasterSynth::init(int sampleRate)
             s->init(sampleRate);
       foreach(Synth* s, syntis) {
             s->setMasterTuning(preferences.tuning);
-            s->setEffectParameter(0, 0, preferences.reverbRoomSize);
-            s->setEffectParameter(0, 1, preferences.reverbDamp);
-            s->setEffectParameter(0, 2, preferences.reverbWidth);
-            s->setEffectParameter(0, 3, preferences.reverbGain);
-            s->setEffectParameter(1, 4, preferences.chorusGain);
+            s->setParameter(SParmId(FLUID_ID, 1, 0).val, preferences.reverbRoomSize);
+            s->setParameter(SParmId(FLUID_ID, 1, 1).val, preferences.reverbDamp);
+            s->setParameter(SParmId(FLUID_ID, 1, 2).val, preferences.reverbWidth);
+            s->setParameter(SParmId(FLUID_ID, 1, 3).val, preferences.reverbGain);
+            s->setParameter(SParmId(FLUID_ID, 2, 4).val, preferences.chorusGain);
             }
       _gain = preferences.masterGain;
       }
@@ -100,28 +99,6 @@ void MasterSynth::play(const Event& event, int syntiIdx)
 //      printf("play synti %d ch %d type 0x%02x\n", syntiIdx, event.channel(), event.type());
       syntis[syntiIdx]->play(event);
       }
-
-#if 0
-//---------------------------------------------------------
-//   loadSoundFont
-//---------------------------------------------------------
-
-bool MasterSynth::loadSoundFont(const QString& s)
-      {
-      foreach(Synth* synti, syntis)
-            synti->loadSoundFont(s);
-      return true;
-      }
-
-//---------------------------------------------------------
-//   soundFont
-//---------------------------------------------------------
-
-QString MasterSynth::soundFont() const
-      {
-      return "";
-      }
-#endif
 
 //---------------------------------------------------------
 //   synthNameToIndex
@@ -167,66 +144,48 @@ QList<MidiPatch*> MasterSynth::getPatchInfo() const
       return pl;
       }
 
-#if 0
 //---------------------------------------------------------
-//   getSynth
+//   parameter
 //---------------------------------------------------------
 
-Synth* MasterSynth::getSynth(int n)
+SyntiParameter MasterSynth::parameter(int id) const
       {
-      return syntis[n];
+      SParmId spid(id);
+      return syntis[spid.syntiId]->parameter(id);
       }
 
 //---------------------------------------------------------
-//   getSyntis
+//   setParameter
 //---------------------------------------------------------
 
-const QList<Synth*>& MasterSynth::getSyntis() const
+void MasterSynth::setParameter(int id, double val)
       {
-      return syntis;
-      }
-#endif
-
-//---------------------------------------------------------
-//   effectParameter
-//---------------------------------------------------------
-
-const Fparm& MasterSynth::effectParameter(int synti, int effect, int param) const
-      {
-      return syntis[synti]->effectParameter(effect, param);
+      SParmId spid(id);
+      syntis[spid.syntiId]->setParameter(id, val);
       }
 
 //---------------------------------------------------------
-//   setEffectParameter
+//   state
 //---------------------------------------------------------
 
-double MasterSynth::setEffectParameter(int synti, int effect, int param, double val)
+SyntiState MasterSynth::state() const
       {
-      return syntis[synti]->setEffectParameter(effect, param, val);
-      }
-
-//---------------------------------------------------------
-//   synthParams
-//---------------------------------------------------------
-
-SyntiSettings MasterSynth::synthParams() const
-      {
-      SyntiSettings ss;
+      SyntiState ss;
       foreach(Synth* s, syntis) {
-            SynthParams sp = s->getParams();
-            ss.append(sp);
+            SyntiState st = s->state();
+            ss.append(st);
             }
       return ss;
       }
 
 //---------------------------------------------------------
-//   setSynthParams
+//   setState
 //---------------------------------------------------------
 
-void MasterSynth::setSynthParams(const SyntiSettings& ss)
+void MasterSynth::setState(const SyntiState& ss)
       {
-      foreach(const SynthParams& sp, ss)
-            sp.synth->setParams(sp);
+      foreach(Synth* synti, syntis)
+            synti->setState(ss);
       }
 
 //---------------------------------------------------------

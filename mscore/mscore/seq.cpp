@@ -137,7 +137,7 @@ void Seq::setScoreView(ScoreView* v)
       playlistChanged = true;
       if (cs) {
             connect(cs, SIGNAL(selectionChanged(int)), SLOT(selectionChanged(int)));
-//            initInstruments();
+            initInstruments();
             }
       }
 
