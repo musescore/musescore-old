@@ -598,6 +598,12 @@ class MStyle : public QCommonStyle {
       QRect tabWidgetRightCornerRect( const QStyleOption* option, const QWidget* widget ) const;
       bool emptyPrimitive( const QStyleOption*, QPainter*, const QWidget* ) const { return true; }
 
+   protected slots:
+      virtual QIcon standardIconImplementation(StandardPixmap standardIcon,
+         const QStyleOption *option, const QWidget *widget) const;
+
+   public slots:
+      void configurationChanged();
 
    public:
       MStyle();
@@ -622,9 +628,6 @@ class MStyle : public QCommonStyle {
       Transitions& transitions() const               { return *_transitions; }
 //      WindowManager& windowManager() const           { return *_windowManager; }
       FrameShadowFactory& frameShadowFactory() const { return *_frameShadowFactory; }
-
-   public slots:
-      void configurationChanged();
       };
 
 //---------------------------------------------------------

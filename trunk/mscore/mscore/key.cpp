@@ -54,7 +54,7 @@ KeySigEvent::KeySigEvent(int n)
 
 void KeySigEvent::enforceLimits()
       {
-      char * msg = 0;
+      const char* msg = 0;
       if (_accidentalType < -7) {
             _accidentalType = -7;
             msg = "accidentalType < -7";

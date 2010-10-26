@@ -1666,7 +1666,7 @@ bool MStyle::drawPanelButtonCommandPrimitive( const QStyleOption* option, QPaint
 //   drawPanelButtonToolPrimitive
 //---------------------------------------------------------
 
-bool MStyle::drawPanelButtonToolPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const
+bool MStyle::drawPanelButtonToolPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget) const
       {
       /*
       For toolbutton in TabBars, corresponding to expanding arrows, no frame is drawn
@@ -1819,12 +1819,15 @@ bool MStyle::drawPanelButtonToolPrimitive( const QStyleOption* option, QPainter*
                     }
 
               //! fine tuning of slitRect geometry
-              if( widget && widget->inherits( "QDockWidgetTitleButton" ) ) slitRect.adjust( 1, 0, 0, 0 );
-                    else if( widget && widget->inherits( "QToolBarExtension" ) ) slitRect.adjust( 1, 1, -1, -1 );
-                    else if( widget && widget->objectName() == "qt_menubar_ext_button" ) slitRect.adjust( -1, -1, 0, 0 );
+      if( widget && widget->inherits( "QDockWidgetTitleButton" ) )
+            slitRect.adjust( 1, 0, 0, 0 );
+      else if( widget && widget->inherits( "QToolBarExtension" ) )
+            slitRect.adjust( 1, 1, -1, -1 );
+      else if( widget && widget->objectName() == "qt_menubar_ext_button" )
+            slitRect.adjust( -1, -1, 0, 0 );
 
-              // normal (auto-raised) toolbuttons
-              if( flags & (State_Sunken|State_On) )
+      // normal (auto-raised) toolbuttons
+      if( flags & (State_Sunken|State_On) )
                     {
                         if( enabled && hoverAnimated )
                               {
@@ -4211,78 +4214,68 @@ bool MStyle::eventFilterComboBoxContainer( QWidget* widget, QEvent* event )
                     }
           }
 
+//---------------------------------------------------------
+//   eventFilterDockWidget
+//---------------------------------------------------------
+
 bool MStyle::eventFilterDockWidget( QDockWidget* dockWidget, QEvent* event )
-    {
-              switch( event->type() )
-              {
-                        case QEvent::Show:
-                        case QEvent::Resize:
-                        {
-                                  // make sure mask is appropriate
-                                  if( dockWidget->isFloating() && !_helper.hasAlphaChannel( dockWidget ) )
-                                        {
+      {
+      switch( event->type() ) {
+            case QEvent::Show:
+            case QEvent::Resize:
+                  {
+                  // make sure mask is appropriate
+                  if( dockWidget->isFloating() && !_helper.hasAlphaChannel( dockWidget ) ) {
+                        dockWidget->setMask(_helper.roundedMask( dockWidget->rect() ) );
+                        }
+                  else
+                        dockWidget->clearMask();
+                  return false;
+                  }
 
-                                            dockWidget->setMask(_helper.roundedMask( dockWidget->rect() ) );
+            case QEvent::Paint:
+                  {
+                  QPainter painter( dockWidget );
+                  QPaintEvent *paintEvent = static_cast<QPaintEvent*>( event );
+                  painter.setClipRegion(paintEvent->region());
 
-                                        } else dockWidget->clearMask();
-
-                                  return false;
-                              }
-
-                        case QEvent::Paint:
-                        {
-                                  QPainter painter( dockWidget );
-                                  QPaintEvent *paintEvent = static_cast<QPaintEvent*>( event );
-                                  painter.setClipRegion(paintEvent->region());
-
-                                  const QColor color( dockWidget->palette().color(QPalette::Window) );
-                                  const QRect r( dockWidget->rect() );
-                                  if(dockWidget->isWindow())
-                                        {
-
+                  const QColor color( dockWidget->palette().color(QPalette::Window) );
+                  const QRect r( dockWidget->rect() );
+                  if (dockWidget->isWindow()) {
 #ifndef Q_WS_WIN
-                                            bool hasAlpha( _helper.hasAlphaChannel( dockWidget ) );
-                                            if( hasAlpha )
-                                                  {
-                                                      painter.setCompositionMode( QPainter::CompositionMode_Source );
-                                                      TileSet *tileSet( _helper.roundCorner(color) );
-                                                      tileSet->render( r, &painter );
-
-                                                      // set clip region
-                                                      painter.setCompositionMode( QPainter::CompositionMode_SourceOver );
-                                                      painter.setClipRegion( _helper.roundedMask( r.adjusted( 1, 1, -1, -1 ) ), Qt::IntersectClip );
-                                                  }
-#endif
-
-                                            _helper.renderWindowBackground( &painter, r, dockWidget, color );
-
-#ifndef Q_WS_WIN
-                                            if( hasAlpha ) painter.setClipping( false );
-
-                                                _helper.drawFloatFrame( &painter, r, color, !hasAlpha );
-#endif
-
-                                        } else {
-
-                                            // need to draw window background for autoFilled dockWidgets for better rendering
-                                            if( dockWidget->autoFillBackground() )
-                                                  { _helper.renderWindowBackground( &painter, r, dockWidget, color ); }
-
-                                            // adjust color
-                                            QColor local( _helper.backgroundColor( color, dockWidget, r.center() ) );
-                                            TileSet *tileSet = _helper.dockFrame( local, r.width() );
-                                            tileSet->render( r, &painter );
-
-                                        }
-
-                                  return false;
+                        bool hasAlpha( _helper.hasAlphaChannel( dockWidget ) );
+                        if( hasAlpha ) {
+                              painter.setCompositionMode( QPainter::CompositionMode_Source );
+                              TileSet *tileSet( _helper.roundCorner(color) );
+                              tileSet->render( r, &painter );
+                              // set clip region
+                              painter.setCompositionMode( QPainter::CompositionMode_SourceOver);
+                              painter.setClipRegion(_helper.roundedMask(r.adjusted(1, 1, -1, -1)), Qt::IntersectClip);
                               }
+#endif
+                        _helper.renderWindowBackground( &painter, r, dockWidget, color );
+#ifndef Q_WS_WIN
+                        if( hasAlpha ) painter.setClipping( false );
+                              _helper.drawFloatFrame( &painter, r, color, !hasAlpha );
+#endif
+                        }
+                  else {
+                        // need to draw window background for autoFilled dockWidgets for better rendering
+                        if( dockWidget->autoFillBackground() ) {
+                              _helper.renderWindowBackground( &painter, r, dockWidget, color );
+                              }
+                        // adjust color
+                        QColor local( _helper.backgroundColor( color, dockWidget, r.center() ) );
+                        TileSet *tileSet = _helper.dockFrame( local, r.width() );
+                        tileSet->render( r, &painter );
+                        }
+                  return false;
+                  }
+            default:
+                  return false;
+            }
+      }
 
-                        default: return false;
-
-                    }
-
-          }
 
 bool MStyle::eventFilterMdiSubWindow( QMdiSubWindow* subWindow, QEvent* event )
     {
@@ -4513,84 +4506,78 @@ bool MStyle::drawComboBoxLabelControl( const QStyleOption* option, QPainter* pai
 
           }
 
+//---------------------------------------------------------
+//   drawDockWidgetTitleControl
+//---------------------------------------------------------
+
 bool MStyle::drawDockWidgetTitleControl( const QStyleOption* option, QPainter* painter, const QWidget* widget) const
-    {
+      {
+      // cast option and check
+      const QStyleOptionDockWidget* dwOpt = ::qstyleoption_cast<const QStyleOptionDockWidget*>(option);
+      if (!dwOpt)
+            return true;
 
-              // cast option and check
-              const QStyleOptionDockWidget* dwOpt = ::qstyleoption_cast<const QStyleOptionDockWidget*>(option);
-              if (!dwOpt) return true;
+      const QPalette& palette( option->palette );
+      const State& flags( option->state );
+      const bool enabled( flags & State_Enabled );
+      const bool reverseLayout( option->direction == Qt::RightToLeft );
 
-              const QPalette& palette( option->palette );
-              const State& flags( option->state );
-              const bool enabled( flags & State_Enabled );
-              const bool reverseLayout( option->direction == Qt::RightToLeft );
+      // cast to v2 to check vertical bar
+      const QStyleOptionDockWidgetV2 *v2 = qstyleoption_cast<const QStyleOptionDockWidgetV2*>( option );
+      const bool verticalTitleBar( v2 ? v2->verticalTitleBar : false);
 
-              // cast to v2 to check vertical bar
-              const QStyleOptionDockWidgetV2 *v2 = qstyleoption_cast<const QStyleOptionDockWidgetV2*>( option );
-              const bool verticalTitleBar( v2 ? v2->verticalTitleBar : false );
+      const QRect btnr(subElementRect(dwOpt->floatable ? SE_DockWidgetFloatButton : SE_DockWidgetCloseButton, option, widget));
 
-              const QRect btnr( subElementRect( dwOpt->floatable ? SE_DockWidgetFloatButton : SE_DockWidgetCloseButton, option, widget) );
+      // get rectangle and adjust to properly accounts for buttons
+      QRect r(insideMargin(dwOpt->rect, DockWidget_TitleMargin));
+      if (verticalTitleBar) {
+            if (btnr.isValid())
+                  r.setTop(btnr.bottom()+1);
+            }
+      else if (reverseLayout) {
+            if( btnr.isValid() )
+                  r.setLeft(btnr.right()+1);
+            r.adjust(0,0,-4,0);
+            }
+      else {
+            if (btnr.isValid())
+                  r.setRight(btnr.left()-1);
+            r.adjust(4,0,0,0);
+            }
 
-              // get rectangle and adjust to properly accounts for buttons
-              QRect r( insideMargin( dwOpt->rect, DockWidget_TitleMargin ) );
-              if( verticalTitleBar )
-                    {
+      QString title(dwOpt->title);
+      QString tmpTitle = title;
 
-                        if( btnr.isValid() ) r.setTop(btnr.bottom()+1);
+      // problem: find expanded width of text with mnemonic macro
+      // this is quite suboptimal
+      // and does not really work
+      if (tmpTitle.contains("&")) {
+            int pos = tmpTitle.indexOf("&");
+            if (!(tmpTitle.size()-1 > pos && tmpTitle.at(pos+1) == QChar('&')))
+                  tmpTitle.remove(pos, 1);
+            }
 
-                    } else if(reverseLayout) {
+      int tw = dwOpt->fontMetrics.width(tmpTitle);
+      int width = verticalTitleBar ? r.height() : r.width();
+      if (width < tw)
+            title = dwOpt->fontMetrics.elidedText(title, Qt::ElideRight, width, Qt::TextShowMnemonic);
 
-                        if( btnr.isValid() ) r.setLeft(btnr.right()+1);
-                              r.adjust(0,0,-4,0);
+      if (verticalTitleBar) {
+            QSize s = r.size();
+            s.transpose();
+            r.setSize(s);
 
-                    } else {
-
-                        if( btnr.isValid() ) r.setRight(btnr.left()-1);
-                              r.adjust(4,0,0,0);
-
-                    }
-
-              QString title( dwOpt->title );
-              QString tmpTitle = title;
-
-              // this is quite suboptimal
-              // and does not really work
-              if(tmpTitle.contains("&"))
-                    {
-                        int pos = tmpTitle.indexOf("&");
-                        if(!(tmpTitle.size()-1 > pos && tmpTitle.at(pos+1) == QChar('&'))) tmpTitle.remove(pos, 1);
-
-                    }
-
-              int tw = dwOpt->fontMetrics.width(tmpTitle);
-              int width = verticalTitleBar ? r.height() : r.width();
-              if( width < tw) title = dwOpt->fontMetrics.elidedText(title, Qt::ElideRight, width, Qt::TextShowMnemonic);
-
-              if( verticalTitleBar)
-                    {
-
-                        QSize s = r.size();
-                        s.transpose();
-                        r.setSize(s);
-
-                        painter->save();
-                        painter->translate(r.left(), r.top() + r.width());
-                        painter->rotate(-90);
-                        painter->translate(-r.left(), -r.top());
-                        drawItemText( painter, r, Qt::AlignLeft | Qt::AlignVCenter | Qt::TextShowMnemonic, palette, enabled, title, QPalette::WindowText);
-                        painter->restore();
-
-
-                    } else {
-
-                        drawItemText( painter, r, Qt::AlignLeft | Qt::AlignVCenter | Qt::TextShowMnemonic, palette, enabled, title, QPalette::WindowText);
-
-                    }
-
-              return true;
-
-
-          }
+            painter->save();
+            painter->translate(r.left(), r.top() + r.width());
+            painter->rotate(-90);
+            painter->translate(-r.left(), -r.top());
+            drawItemText(painter, r, Qt::AlignLeft | Qt::AlignVCenter | Qt::TextShowMnemonic, palette, enabled, title, QPalette::WindowText);
+            painter->restore();
+            }
+      else
+            drawItemText(painter, r, Qt::AlignLeft | Qt::AlignVCenter | Qt::TextShowMnemonic, palette, enabled, title, QPalette::WindowText);
+      return true;
+      }
 
 bool MStyle::drawHeaderEmptyAreaControl( const QStyleOption* option, QPainter* painter, const QWidget* widget) const
     {
@@ -8423,4 +8410,309 @@ void MStyle::configurationChanged()
       else
             _frameFocusPrimitive = &MStyle::emptyPrimitive;
       }
+
+//---------------------------------------------------------
+//   standardIconImplementation
+//---------------------------------------------------------
+
+QIcon MStyle::standardIconImplementation(StandardPixmap standardIcon,
+   const QStyleOption *option, const QWidget *widget) const
+      {
+#if 0
+      switch( standardIcon ) {
+            // copied from kstyle
+            case SP_DesktopIcon: return KIcon( "user-desktop" );
+            case SP_TrashIcon: return KIcon( "user-trash" );
+            case SP_ComputerIcon: return KIcon( "computer" );
+            case SP_DriveFDIcon: return KIcon( "media-floppy" );
+            case SP_DriveHDIcon: return KIcon( "drive-harddisk" );
+            case SP_DriveCDIcon: return KIcon( "drive-optical" );
+            case SP_DriveDVDIcon: return KIcon( "drive-optical" );
+            case SP_DriveNetIcon: return KIcon( "folder-remote" );
+            case SP_DirHomeIcon: return KIcon( "user-home" );
+            case SP_DirOpenIcon: return KIcon( "document-open-folder" );
+            case SP_DirClosedIcon: return KIcon( "folder" );
+            case SP_DirIcon: return KIcon( "folder" );
+
+            //TODO: generate ( !? ) folder with link emblem
+            case SP_DirLinkIcon: return KIcon( "folder" );
+
+            //TODO: look for a better icon
+            case SP_FileIcon: return KIcon( "text-plain" );
+
+            //TODO: generate ( !? ) file with link emblem
+            case SP_FileLinkIcon: return KIcon( "text-plain" );
+
+            //TODO: find correct icon
+            case SP_FileDialogStart: return KIcon( "media-playback-start" );
+
+            //TODO: find correct icon
+            case SP_FileDialogEnd: return KIcon( "media-playback-stop" );
+
+            case SP_FileDialogToParent: return KIcon( "go-up" );
+            case SP_FileDialogNewFolder: return KIcon( "folder-new" );
+            case SP_FileDialogDetailedView: return KIcon( "view-list-details" );
+            case SP_FileDialogInfoView: return KIcon( "document-properties" );
+            case SP_FileDialogContentsView: return KIcon( "view-list-icons" );
+            case SP_FileDialogListView: return KIcon( "view-list-text" );
+            case SP_FileDialogBack: return KIcon( "go-previous" );
+            case SP_MessageBoxInformation: return KIcon( "dialog-information" );
+            case SP_MessageBoxWarning: return KIcon( "dialog-warning" );
+            case SP_MessageBoxCritical: return KIcon( "dialog-error" );
+            case SP_MessageBoxQuestion: return KIcon( "dialog-information" );
+            case SP_DialogOkButton: return KIcon( "dialog-ok" );
+            case SP_DialogCancelButton: return KIcon( "dialog-cancel" );
+            case SP_DialogHelpButton: return KIcon( "help-contents" );
+            case SP_DialogOpenButton: return KIcon( "document-open" );
+            case SP_DialogSaveButton: return KIcon( "document-save" );
+            case SP_DialogCloseButton: return KIcon( "dialog-close" );
+            case SP_DialogApplyButton: return KIcon( "dialog-ok-apply" );
+            case SP_DialogResetButton: return KIcon( "document-revert" );
+            case SP_DialogDiscardButton: return KIcon( "dialog-cancel" );
+            case SP_DialogYesButton: return KIcon( "dialog-ok-apply" );
+            case SP_DialogNoButton: return KIcon( "dialog-cancel" );
+            case SP_ArrowUp: return KIcon( "go-up" );
+            case SP_ArrowDown: return KIcon( "go-down" );
+            case SP_ArrowLeft: return KIcon( "go-previous-view" );
+            case SP_ArrowRight: return KIcon( "go-next-view" );
+            case SP_ArrowBack: return KIcon( "go-previous" );
+            case SP_ArrowForward: return KIcon( "go-next" );
+            case SP_BrowserReload: return KIcon( "view-refresh" );
+            case SP_BrowserStop: return KIcon( "process-stop" );
+            case SP_MediaPlay: return KIcon( "media-playback-start" );
+            case SP_MediaStop: return KIcon( "media-playback-stop" );
+            case SP_MediaPause:        return KIcon( "media-playback-pause" );
+            case SP_MediaSkipForward:  return KIcon( "media-skip-forward" );
+            case SP_MediaSkipBackward: return KIcon( "media-skip-backward" );
+            case SP_MediaSeekForward:  return KIcon( "media-seek-forward" );
+            case SP_MediaSeekBackward: return KIcon( "media-seek-backward" );
+            case SP_MediaVolume:       return KIcon( "audio-volume-medium" );
+            case SP_MediaVolumeMuted:  return KIcon( "audio-volume-muted" );
+
+            default:
+                  break;
+            }
+#endif
+
+      // MDI windows buttons
+      // get button color ( unfortunately option and widget might not be set )
+      QColor buttonColor;
+      QColor iconColor;
+      if (option) {
+            buttonColor = option->palette.window().color();
+            iconColor   = option->palette.windowText().color();
+            }
+      else if (widget) {
+            buttonColor = widget->palette().window().color();
+            iconColor   = widget->palette().windowText().color();
+            }
+      else if (qApp) {
+            // might not have a QApplication
+            buttonColor = qApp->palette().window().color();
+            iconColor   = qApp->palette().windowText().color();
+            }
+      else {
+            // KCS is always safe
+            buttonColor = ColorScheme(QPalette::Active, ColorScheme::Window).background().color();
+            iconColor   = ColorScheme(QPalette::Active, ColorScheme::Window).foreground().color();
+            }
+
+      switch(standardIcon) {
+            case SP_TitleBarNormalButton:
+                  {
+                  QPixmap realpm( pixelMetric( QStyle::PM_SmallIconSize,0,0 ), pixelMetric( QStyle::PM_SmallIconSize,0,0 ) );
+                  realpm.fill( Qt::transparent );
+                  QPixmap pm = _helper.windecoButton( buttonColor, false, 15 );
+                  QPainter painter( &realpm );
+                  painter.drawPixmap( 1,1,pm );
+                  painter.setRenderHints( QPainter::Antialiasing );
+
+                  // should use the same icons as in the deco
+                  QPointF points[4] = {QPointF( 8.5, 6 ), QPointF( 11, 8.5 ), QPointF( 8.5, 11 ), QPointF( 6, 8.5 )};
+                  {
+                  const qreal width( 1.1 );
+                  painter.translate( 0, 0.5 );
+                  painter.setBrush( Qt::NoBrush );
+                  painter.setPen( QPen( _helper.calcLightColor( buttonColor ), width, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin ) );
+                  painter.drawPolygon( points, 4 );
+                  }
+
+                  {
+                  const qreal width( 1.1 );
+                  painter.translate( 0,-1 );
+                  painter.setBrush( Qt::NoBrush );
+                  painter.setPen( QPen( iconColor, width, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin ) );
+                  painter.drawPolygon( points, 4 );
+                  }
+                  painter.end();
+                  return QIcon(realpm);
+                  }
+
+            case SP_TitleBarShadeButton:
+                  {
+                  QPixmap realpm( pixelMetric( QStyle::PM_SmallIconSize,0,0 ), pixelMetric( QStyle::PM_SmallIconSize,0,0 ) );
+                  realpm.fill( Qt::transparent );
+                  QPixmap pm = _helper.windecoButton( buttonColor, false, 15 );
+                  QPainter painter( &realpm );
+                  painter.drawPixmap( 1,1,pm );
+                  painter.setRenderHints( QPainter::Antialiasing );
+                  {
+                                            qreal width( 1.1 );
+                                            painter.translate( 0, 0.5 );
+                                            painter.setBrush( Qt::NoBrush );
+                                            painter.setPen( QPen( _helper.calcLightColor( buttonColor ), width, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin ) );
+                                            painter.drawLine( QPointF( 6.5,6.5 ), QPointF( 8.75,8.75 ) );
+                                            painter.drawLine( QPointF( 8.75,8.75 ), QPointF( 11.0,6.5 ) );
+                                            painter.drawLine( QPointF( 6.5,11.0 ), QPointF( 11.0,11.0 ) );
+                                        }
+
+                                  {
+                                            qreal width( 1.1 );
+                                            painter.translate( 0,-1 );
+                                            painter.setBrush( Qt::NoBrush );
+                                            painter.setPen( QPen( iconColor, width, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin ) );
+                                            painter.drawLine( QPointF( 6.5,6.5 ), QPointF( 8.75,8.75 ) );
+                                            painter.drawLine( QPointF( 8.75,8.75 ), QPointF( 11.0,6.5 ) );
+                                            painter.drawLine( QPointF( 6.5,11.0 ), QPointF( 11.0,11.0 ) );
+                                        }
+
+                                  painter.end();
+
+                                  return QIcon( realpm );
+                              }
+
+                        case SP_TitleBarUnshadeButton:
+                        {
+                                  QPixmap realpm( pixelMetric( QStyle::PM_SmallIconSize,0,0 ), pixelMetric( QStyle::PM_SmallIconSize,0,0 ) );
+                                  realpm.fill( Qt::transparent );
+                                  QPixmap pm = _helper.windecoButton( buttonColor, false, 15 );
+                                  QPainter painter( &realpm );
+                                  painter.drawPixmap( 1,1,pm );
+                                  painter.setRenderHints( QPainter::Antialiasing );
+
+                                  {
+
+                                            qreal width( 1.1 );
+                                            painter.translate( 0, 0.5 );
+                                            painter.setBrush( Qt::NoBrush );
+                                            painter.setPen( QPen( _helper.calcLightColor( buttonColor ), width, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin ) );
+                                            painter.drawLine( QPointF( 6.5,8.75 ), QPointF( 8.75,6.5 ) );
+                                            painter.drawLine( QPointF( 8.75,6.5 ), QPointF( 11.0,8.75 ) );
+                                            painter.drawLine( QPointF( 6.5,11.0 ), QPointF( 11.0,11.0 ) );
+                                        }
+
+                                  {
+                                            qreal width( 1.1 );
+                                            painter.translate( 0,-1 );
+                                            painter.setBrush( Qt::NoBrush );
+                                            painter.setPen( QPen( iconColor, width, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin ) );
+                                            painter.drawLine( QPointF( 6.5,8.75 ), QPointF( 8.75,6.5 ) );
+                                            painter.drawLine( QPointF( 8.75,6.5 ), QPointF( 11.0,8.75 ) );
+                                            painter.drawLine( QPointF( 6.5,11.0 ), QPointF( 11.0,11.0 ) );
+                                        }
+                                  painter.end();
+
+                                  return QIcon( realpm );
+                              }
+
+                        case SP_TitleBarCloseButton:
+                        case SP_DockWidgetCloseButton:
+                        {
+                                  QPixmap realpm( pixelMetric( QStyle::PM_SmallIconSize,0,0 ), pixelMetric( QStyle::PM_SmallIconSize,0,0 ) );
+                                  realpm.fill( Qt::transparent );
+                                  QPixmap pm = _helper.windecoButton( buttonColor, false, 15 );
+                                  QPainter painter( &realpm );
+                                  painter.drawPixmap( 1,1,pm );
+                                  painter.setRenderHints( QPainter::Antialiasing );
+                                  painter.setBrush( Qt::NoBrush );
+                                  {
+
+                                            qreal width( 1.1 );
+                                            painter.translate( 0, 0.5 );
+                                            painter.setBrush( Qt::NoBrush );
+                                            painter.setPen( QPen( _helper.calcLightColor( buttonColor ), width, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin ) );
+                                            painter.drawLine( QPointF( 6.5,6.5 ), QPointF( 11.0,11.0 ) );
+                                            painter.drawLine( QPointF( 11.0,6.5 ), QPointF( 6.5,11.0 ) );
+                                        }
+
+                                  {
+                                            qreal width( 1.1 );
+                                            painter.translate( 0,-1 );
+                                            painter.setBrush( Qt::NoBrush );
+                                            painter.setPen( QPen( iconColor, width, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin ) );
+                                            painter.drawLine( QPointF( 6.5,6.5 ), QPointF( 11.0,11.0 ) );
+                                            painter.drawLine( QPointF( 11.0,6.5 ), QPointF( 6.5,11.0 ) );
+                                        }
+
+                                  painter.end();
+
+                                  return QIcon( realpm );
+                              }
+
+                        case SP_ToolBarHorizontalExtensionButton:
+                        {
+
+                                  QPixmap realpm( pixelMetric( QStyle::PM_SmallIconSize,0,0 ), pixelMetric( QStyle::PM_SmallIconSize,0,0 ) );
+                                  realpm.fill( Qt::transparent );
+                                  QPainter painter( &realpm );
+                                  painter.setRenderHints( QPainter::Antialiasing );
+                                  painter.setBrush( Qt::NoBrush );
+
+                                  painter.translate( qreal( realpm.width() )/2.0, qreal( realpm.height() )/2.0 );
+
+                                  const bool reverseLayout( option && option->direction == Qt::RightToLeft );
+                                  QPolygonF a = genericArrow( reverseLayout ? ArrowLeft:ArrowRight, ArrowTiny );
+                                  {
+                                            qreal width( 1.1 );
+                                            painter.translate( 0, 0.5 );
+                                            painter.setBrush( Qt::NoBrush );
+                                            painter.setPen( QPen( _helper.calcLightColor( buttonColor ), width, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin ) );
+                                            painter.drawPolyline( a );
+                                        }
+
+                                  {
+                                            qreal width( 1.1 );
+                                            painter.translate( 0,-1 );
+                                            painter.setBrush( Qt::NoBrush );
+                                            painter.setPen( QPen( iconColor, width, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin ) );
+                                            painter.drawPolyline( a );
+                                        }
+
+                                  return QIcon( realpm );
+                              }
+
+                        case SP_ToolBarVerticalExtensionButton:
+                        {
+                                  QPixmap realpm( pixelMetric( QStyle::PM_SmallIconSize,0,0 ), pixelMetric( QStyle::PM_SmallIconSize,0,0 ) );
+                                  realpm.fill( Qt::transparent );
+                                  QPainter painter( &realpm );
+                                  painter.setRenderHints( QPainter::Antialiasing );
+                                  painter.setBrush( Qt::NoBrush );
+
+                                  QPolygonF a = genericArrow( ArrowDown, ArrowTiny );
+                                  {
+                                            qreal width( 1.1 );
+                                            painter.translate( 0, 0.5 );
+                                            painter.setBrush( Qt::NoBrush );
+                                            painter.setPen( QPen( _helper.calcLightColor( buttonColor ), width, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin ) );
+                                            painter.drawPolyline( a );
+                                        }
+
+                                  {
+                                            qreal width( 1.1 );
+                                            painter.translate( 0,-1 );
+                                            painter.setBrush( Qt::NoBrush );
+                                            painter.setPen( QPen( iconColor, width, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin ) );
+                                            painter.drawPolyline( a );
+                                        }
+
+                                  return QIcon( realpm );
+                              }
+
+                        default:
+                        return QCommonStyle::standardIconImplementation( standardIcon, option, widget );
+                    }
+          }
+
+
 

@@ -84,7 +84,6 @@ bool enableExperimental = false;
 
 QString dataPath;
 QString iconPath;
-QPaintDevice* pdev;
 qreal PDPI, DPI, DPMM;
 double SPATIUM;
 
@@ -184,7 +183,7 @@ static const int RECENT_LIST_SIZE = 10;
 void MuseScore::closeEvent(QCloseEvent* ev)
       {
       if (cs)
-            cs->setSyntiSettings(seq->getSynti()->synthParams());
+            cs->setSyntiState(seq->getSynti()->state());
       unloadPlugins();
       QList<Score*> removeList;
       foreach(Score* score, scoreList) {
@@ -1158,10 +1157,12 @@ void MuseScore::setCurrentScoreView(ScoreView* view)
       cv = view;
       MasterSynth* ms = seq->getSynti();
       if (cs)
-            cs->setSyntiSettings(ms->synthParams());
+            cs->setSyntiState(ms->state());
       if (view) {
-            if (view->score() && cs != view->score())
-                  ms->setSynthParams(view->score()->syntiSettings());
+            if (view->score() && cs != view->score()) {
+                  printf("MuseScore::setSynthParams\n");
+                  ms->setState(view->score()->syntiState());
+                  }
             cs = view->score();
             view->setFocusRect();
             }
@@ -2017,18 +2018,13 @@ int main(int argc, char* av[])
 #endif
       QLocale::setDefault(QLocale(QLocale::C));
 
-      pdev = new QPrinter(QPrinter::HighResolution);
       QWidget wi(0);
 
       PDPI = wi.logicalDpiX();         // physical resolution
-      DPI  = PDPI; // pdev->logicalDpiX();      // logical drawing resolution
+      DPI  = PDPI;                     // logical drawing resolution
       DPMM = DPI / INCH;      // dots/mm
 
       if (debugMode) {
-            printf("printer DPI %f(%d) display PDPI %f(%d) DPMM %f\n",
-               DPI, pdev->physicalDpiX(),
-               PDPI, wi.physicalDpiX(),
-               DPMM);
             QStringList sl(QCoreApplication::libraryPaths());
             foreach(const QString& s, sl)
                   printf("LibraryPath: <%s>\n", qPrintable(s));
@@ -2264,13 +2260,13 @@ void MuseScore::cmd(QAction* a)
             removeTab(scoreList.indexOf(cs));
       else if (cmd == "file-save-as") {
             if (cs) {
-                  cs->setSyntiSettings(seq->getSynti()->synthParams());
+                  cs->setSyntiState(seq->getSynti()->state());
                   cs->saveAs(false);
                   }
             }
       else if (cmd == "file-save-a-copy") {
             if (cs) {
-                  cs->setSyntiSettings(seq->getSynti()->synthParams());
+                  cs->setSyntiState(seq->getSynti()->state());
                   cs->saveAs(true);
                   }
             }
@@ -2853,12 +2849,15 @@ void MuseScore::handleMessage(const QString& message)
       {
       if (message.isEmpty())
             return;
+printf("handle message=========\n");
       ((QtSingleApplication*)(qApp))->activateWindow();
       Score* score = new Score(defaultStyle);
-      if(score->read(message)) {
+      if (score->read(message)) {
             setCurrentScoreView(appendScore(score));
             lastOpenPath = score->fileInfo()->path();
             }
+      else
+            delete score;
       }
 
 //---------------------------------------------------------
@@ -3120,7 +3119,6 @@ printf("set name <%s>\n", qPrintable(name));
                                                       dirty = false;
                                                       created = false;
                                                       }
-printf("restoreSession: appendScore\n");
                                                 appendScore(score);
                                                 score->setDirty(dirty);
                                                 score->setCreated(created);
@@ -3179,7 +3177,6 @@ printf("restoreSession: appendScore\n");
                   return false;
                   }
             }
-printf("setCurrentView noScore %d  tab %d idx %d\n", mscore->noScore(), tab, idx);
       setCurrentView(tab, idx);
       f.close();
       return true;
@@ -3317,7 +3314,6 @@ void MuseScore::initOsc()
 
 void MuseScore::oscIntMessage(int val)
       {
-      printf("OSC: int %d\n", val);
       if (val < 128)
             midiNoteReceived(val, false);
       else
@@ -3326,7 +3322,6 @@ void MuseScore::oscIntMessage(int val)
 
 void MuseScore::oscPlay()
       {
-      printf("osc Play\n");
       QAction* a = getAction("play");
       if (!a->isChecked())
             a->trigger();
@@ -3334,7 +3329,6 @@ void MuseScore::oscPlay()
 
 void MuseScore::oscStop()
       {
-      printf("osc Stop\n");
       QAction* a = getAction("play");
       if (a->isChecked())
             a->trigger();
@@ -3342,7 +3336,6 @@ void MuseScore::oscStop()
 
 void MuseScore::oscNext()
       {
-      printf("osc Next\n");
       QAction* a = getAction("next-chord");
       a->trigger();
       }
@@ -3358,7 +3351,6 @@ void MuseScore::oscTempo(int val)
       if (val > 127)
             val = 127;
       val = (val * 240) / 128;
-printf("oscTempo %d\n", val);
       if (playPanel)
             playPanel->setRelTempo(val);
       if (seq)
@@ -3371,7 +3363,6 @@ printf("oscTempo %d\n", val);
 
 void MuseScore::oscVolume(int val)
       {
-printf("oscVolume %d\n", val);
       double v = val / 128.0;
       if (seq)
             seq->setGain(v);

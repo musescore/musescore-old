@@ -27,6 +27,7 @@
 #include "aeolus/aeolus/aeolus.h"
 #include "score.h"
 #include "file.h"
+#include "msynth/sparm_p.h"
 
 //---------------------------------------------------------
 //   SynthControl
@@ -47,25 +48,26 @@ SynthControl::SynthControl(MasterSynth* s, QWidget* parent)
       masterTuning->setValue(synti->masterTuning());
       setGain(synti->gain());
 
-      reverb->setValue(synti->effectParameter(0, 0, 3).val());
-      roomSizeBox->setValue(synti->effectParameter(0, 0, 0).val());
-      dampBox->setValue(synti->effectParameter(0, 0, 1).val());
-      widthBox->setValue(synti->effectParameter(0, 0, 2).val());
+      reverb->setValue(synti->parameter(SParmId(FLUID_ID, 0, 3).val).fval());
+      roomSizeBox->setValue(synti->parameter(SParmId(FLUID_ID, 0, 0).val).fval());
+      dampBox->setValue(synti->parameter(SParmId(FLUID_ID, 0, 1).val).fval());
+      widthBox->setValue(synti->parameter(SParmId(FLUID_ID, 0, 2).val).fval());
 
-      chorus->setValue(synti->effectParameter(0, 1, 4).val());
-      chorusSpeed->setValue(synti->effectParameter(0, 1, 1).val());
-      chorusDepth->setValue(synti->effectParameter(0, 1, 2).val());
+      chorus->setValue(synti->parameter(SParmId(FLUID_ID, 1, 4).val).fval());
+      chorusSpeed->setValue(synti->parameter(SParmId(FLUID_ID, 1, 1).val).fval());
+      chorusDepth->setValue(synti->parameter(SParmId(FLUID_ID, 1, 2).val).fval());
 
-      reverbDelay->init(synti->effectParameter(1, 0, AEOLUS_REVSIZE));
+      reverbDelay->init(synti->parameter(SParmId(AEOLUS_ID, 0, AEOLUS_REVSIZE).val));
       reverbDelay->setId(AEOLUS_REVSIZE);
       connect(reverbDelay, SIGNAL(valueChanged(double, int)), SLOT(setAeolusValue(double, int)));
 
-      reverbTime->init(synti->effectParameter(1, 0, AEOLUS_REVTIME));
+      reverbTime->init(synti->parameter(SParmId(AEOLUS_ID, 0, AEOLUS_REVTIME).val));
       reverbTime->setId(AEOLUS_REVTIME);
       connect(reverbTime, SIGNAL(valueChanged(double, int)), SLOT(setAeolusValue(double, int)));
 
-      position->init(synti->effectParameter(1, 0, AEOLUS_STPOSIT));
+      position->init(synti->parameter(SParmId(AEOLUS_ID, 0, AEOLUS_STPOSIT).val));
       position->setId(AEOLUS_STPOSIT);
+
       connect(position, SIGNAL(valueChanged(double, int)), SLOT(setAeolusValue(double, int)));
 
       aeolusSection[0][0] = aeolusAzimuth3;
@@ -94,7 +96,7 @@ SynthControl::SynthControl(MasterSynth* s, QWidget* parent)
 
       for (int i = 0; i < 4; ++i) {
             for (int k = 0; k < 5; ++k) {
-                  aeolusSection[i][k]->init(synti->effectParameter(1, i+1, k));
+                  aeolusSection[i][k]->init(synti->parameter(SParmId(AEOLUS_ID, i+1, k).val));
                   aeolusSection[i][k]->setId(((i+1) << 8) + k);
                   connect(aeolusSection[i][k], SIGNAL(valueChanged(double, int)), SLOT(setAeolusValue(double, int)));
                   }
@@ -337,7 +339,7 @@ void SynthControl::stop()
 
 void SynthControl::reverbValueChanged(double val, int idx)
       {
-      synti->setEffectParameter(0, 0, idx, val);
+      synti->setParameter(SParmId(FLUID_ID, 0, idx).val, val);
       }
 
 //---------------------------------------------------------
@@ -346,7 +348,7 @@ void SynthControl::reverbValueChanged(double val, int idx)
 
 void SynthControl::chorusValueChanged(double val, int idx)
       {
-      synti->setEffectParameter(0, 1, idx, val);
+      synti->setParameter(SParmId(FLUID_ID, 1, idx).val, val);
       }
 
 //---------------------------------------------------------
@@ -355,7 +357,7 @@ void SynthControl::chorusValueChanged(double val, int idx)
 
 void SynthControl::setAeolusValue(double val, int idx)
       {
-      synti->setEffectParameter(1, idx >> 8, idx & 0xff, val);
+      synti->setParameter(SParmId(AEOLUS_ID, idx >> 8, idx & 0xff).val, val);
       }
 
 //---------------------------------------------------------

@@ -25,7 +25,7 @@ struct MidiPatch;
 class Event;
 class Synth;
 
-#include "fparm.h"
+#include "sparm.h"
 
 //---------------------------------------------------------
 //   MidiPatch
@@ -45,7 +45,6 @@ struct MidiPatch {
 class Synth {
 
    protected:
-      static const Fparm defaultParameter;
 
    public:
       Synth() {}
@@ -58,7 +57,7 @@ class Synth {
       virtual double masterTuning() const { return 440.0; }
 
       virtual bool loadSoundFonts(const QStringList&) = 0;
-      virtual bool addSoundFont(const QString&) { return false; }
+      virtual bool addSoundFont(const QString&)    { return false; }
       virtual bool removeSoundFont(const QString&) { return false; }
 
       virtual QStringList soundFonts() const = 0;
@@ -68,13 +67,14 @@ class Synth {
 
       virtual const QList<MidiPatch*>& getPatchInfo() const = 0;
 
-      virtual const Fparm& effectParameter(int /*effect*/, int /*param*/) const {
-            return defaultParameter;
-            }
-      virtual double setEffectParameter(int /*effect*/, int /*param*/, double /*val*/ ) { return 0.0; }
+      // set/get a single parameter
+      virtual SyntiParameter parameter(int /*id*/) const { return SyntiParameter(); }
+      virtual void setParameter(int /*id*/, double /*val*/) {}
+      virtual void setParameter(int /*id*/, const QString&) {}
 
-      virtual SynthParams getParams() const = 0;
-      virtual void setParams(const SynthParams&) = 0;
+      // get/set synthesizer state
+      virtual SyntiState state() const = 0;
+      virtual void setState(const SyntiState&) {}
       };
 
 //---------------------------------------------------------
@@ -104,11 +104,13 @@ class MasterSynth {
 
       QList<MidiPatch*> getPatchInfo() const;
 
-      const Fparm& effectParameter(int synti, int effect, int param) const;
-      double setEffectParameter(int synti, int effect, int param, double val);
+      // set/get a single parameter
+      SyntiParameter parameter(int id) const;
+      void setParameter(int id, double val);
 
-      SyntiSettings synthParams() const;
-      void setSynthParams(const SyntiSettings&);
+      // get/set synthesizer state
+      SyntiState state() const;
+      void setState(const SyntiState&);
 
       Synth* synth(const QString& name);
       };

@@ -313,7 +313,7 @@ class Fluid : public Synth {
       void updatePatchList();
 
    protected:
-      int state;                          // the synthesizer state
+      int _state;                         // the synthesizer state
 
       unsigned int sfont_id;
 
@@ -347,14 +347,15 @@ class Fluid : public Synth {
       virtual void play(const Event&);
       virtual const QList<MidiPatch*>& getPatchInfo() const { return patches; }
 
-      virtual double effectParameter(int effect, int parameter);
-      virtual double setEffectParameter(int ffect, int parameter, double value);
+      // set/get a single parameter
+      virtual SyntiParameter parameter(int id) const;
+      virtual void setParameter(int id, double val);
 
-      virtual SynthParams getParams() const;
-      virtual void setParams(const SynthParams&);
+      // get/set synthesizer state (parameter set)
+      virtual SyntiState state() const;
+      virtual void setState(const SyntiState&);
 
       bool log(const char* fmt, ...);
-
       bool set_reverb_preset(int num);
 
       Preset* get_preset(unsigned int sfontnum, unsigned int banknum, unsigned int prognum);
