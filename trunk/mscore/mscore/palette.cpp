@@ -1062,24 +1062,30 @@ void PaletteBoxButton::changeEvent(QEvent* ev)
 
 //---------------------------------------------------------
 //   showPalette
-//---------------------------------------------------------      
-void PaletteBoxButton::showPalette(bool visible) 
+//---------------------------------------------------------
+
+void PaletteBoxButton::showPalette(bool visible)
       {
+      if (visible && preferences.singlePalette) {
+            // close all palettes
+            emit closeAll();
+            }
       scrollArea->setVisible(visible);
       setArrowType(visible ? Qt::DownArrow : Qt::RightArrow );
       }
-      
+
 //---------------------------------------------------------
 //   paintEvent
 //---------------------------------------------------------
-void PaletteBoxButton::paintEvent( QPaintEvent * )
+
+void PaletteBoxButton::paintEvent(QPaintEvent*)
       {
-      //remove automatic menu arrow 
-      QStylePainter p( this ); 
-      QStyleOptionToolButton opt; 
-      initStyleOption( & opt ); 
-      opt.features &= (~ QStyleOptionToolButton::HasMenu); 
-      p.drawComplexControl( QStyle::CC_ToolButton, opt ); 
+      //remove automatic menu arrow
+      QStylePainter p(this);
+      QStyleOptionToolButton opt;
+      initStyleOption(&opt);
+      opt.features &= (~QStyleOptionToolButton::HasMenu);
+      p.drawComplexControl( QStyle::CC_ToolButton, opt );
       }
 
 //---------------------------------------------------------
@@ -1137,15 +1143,28 @@ PaletteBox::PaletteBox(QWidget* parent)
 
 void PaletteBox::contextMenu(const QPoint& pt)
       {
-      QMenu menu;
-      QAction* a = menu.addAction("Reset to factory defaults");
+      QMenu menu(this);
+      menu.setObjectName("PaletteContext");
+
+      QAction* titel = new QAction(tr("Palette Operations"), &menu);
+      QFont titleFont(font());
+      titleFont.setBold(true);
+      titel->setFont(titleFont);
+      menu.addAction(titel);
+      menu.addSeparator();
+
+      QAction* b = menu.addAction(tr("Single Palette Mode"));
+      b->setCheckable(true);
+      b->setChecked(preferences.singlePalette);
+
+      QAction* a = menu.addAction(tr("Reset to factory defaults"));
       QString s(dataPath + "/" + "mscore-palette.xml");
       QFile f(s);
       if (!f.exists() && !_dirty)
             a->setEnabled(false);
 
-      QAction* b = menu.exec(mapToGlobal(pt));
-      if (a == b) {
+      QAction* ra = menu.exec(mapToGlobal(pt));
+      if (a == ra) {
             if (f.exists())
                   QFile::remove(s);
             int n = vbox->count() - 1;    // do not delete last spacer item
@@ -1157,6 +1176,10 @@ void PaletteBox::contextMenu(const QPoint& pt)
                   }
             vbox->invalidate();
             mscore->populatePalette();      // hack
+            }
+      else if (b == ra) {
+            preferences.singlePalette = b->isChecked();
+            preferences.dirty = true;
             }
       }
 
@@ -1176,6 +1199,7 @@ void PaletteBox::addPalette(Palette* w)
       vbox->insertWidget(slotIdx+1, sa, 1000);
       b->setId(slotIdx);
       connect(b, SIGNAL(paletteCmd(int,int)), SLOT(paletteCmd(int,int)));
+      connect(b, SIGNAL(closeAll()), SLOT(closeAll()));
       connect(w, SIGNAL(changed()), SLOT(setDirty()));
       }
 
@@ -1279,6 +1303,18 @@ void PaletteBox::closeEvent(QCloseEvent* ev)
       {
       emit paletteVisible(false);
       QWidget::closeEvent(ev);
+      }
+
+//---------------------------------------------------------
+//   closeAll
+//---------------------------------------------------------
+
+void PaletteBox::closeAll()
+      {
+      for (int i = 0; i < (vbox->count() - 1); i += 2) {
+            PaletteScrollArea* sa = static_cast<PaletteScrollArea*>(vbox->itemAt(i + 1)->widget());
+            sa->setVisible(false);
+            }
       }
 
 //---------------------------------------------------------

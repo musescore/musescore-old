@@ -137,6 +137,7 @@ struct Preferences {
       bool useOsc;
       int oscPort;
       QString appStyleFile;
+      bool singlePalette;
 
       bool dirty;
 

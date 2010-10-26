@@ -106,7 +106,8 @@ class PaletteBoxButton : public QToolButton {
 
    signals:
       void paletteCmd(int, int);
-      
+      void closeAll();
+
    public:
       PaletteBoxButton(PaletteScrollArea*, Palette*, QWidget* parent = 0);
       void setId(int v) { id = v; }
@@ -128,6 +129,7 @@ class PaletteBox : public QDockWidget {
       void paletteCmd(int, int);
       void setDirty() { _dirty = true; }
       void contextMenu(const QPoint&);
+      void closeAll();
 
    signals:
       void paletteVisible(bool);
