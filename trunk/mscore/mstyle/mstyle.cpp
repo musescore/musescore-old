@@ -4226,7 +4226,9 @@ bool MStyle::eventFilterDockWidget( QDockWidget* dockWidget, QEvent* event )
                   {
                   // make sure mask is appropriate
                   if( dockWidget->isFloating() && !_helper.hasAlphaChannel( dockWidget ) ) {
+#ifndef Q_WS_WIN
                         dockWidget->setMask(_helper.roundedMask( dockWidget->rect() ) );
+#endif
                         }
                   else
                         dockWidget->clearMask();
