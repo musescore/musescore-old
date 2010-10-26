@@ -1639,7 +1639,7 @@ void Score::printFile()
       printerDev.setOutputFormat(QPrinter::NativeFormat);
 
 #if defined(Q_WS_MAC) || defined(__MINGW32__)
-      printerDev->setOutputFileName("");
+      printerDev.setOutputFileName("");
 #else
       // when setting this on windows platform, pd.exec() does not
       // show dialog
