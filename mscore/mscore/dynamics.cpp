@@ -134,6 +134,10 @@ void Dynamic::read(QDomElement e)
                   domError(e);
             }
       setSubtype(subtype());
+      if (score()->mscVersion() < 118) {
+            setTextStyle(TEXT_STYLE_DYNAMICS);
+            setStyled(true);
+            }
       }
 
 //---------------------------------------------------------
