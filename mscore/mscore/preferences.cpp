@@ -200,6 +200,8 @@ void Preferences::init()
       useOsc                  = false;
       oscPort                 = 5282;
       appStyleFile            = ":/data/appstyle-dark.css";
+
+      singlePalette           = false;
       };
 
 //---------------------------------------------------------
@@ -300,6 +302,7 @@ void Preferences::write()
       s.setValue("useOsc", useOsc);
       s.setValue("oscPort", oscPort);
       s.setValue("appStyle", appStyleFile);
+      s.setValue("singlePalette", singlePalette);
 
       //update
       s.setValue("checkUpdateStartup", checkUpdateStartup);
@@ -424,6 +427,7 @@ void Preferences::read()
       useOsc                 = s.value("useOsc", false).toBool();
       oscPort                = s.value("oscPort", 5282).toInt();
       appStyleFile           = s.value("appStyle", ":/data/appstyle-dark.css").toString();
+      singlePalette          = s.value("singlePalette", false).toBool();
 
       checkUpdateStartup = s.value("checkUpdateStartup", UpdateChecker::defaultPeriod()).toInt();
       if (checkUpdateStartup == 0) {
