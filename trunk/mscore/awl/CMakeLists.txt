@@ -30,7 +30,6 @@ QT4_WRAP_CPP (mocs
       mslider.h
       pitchedit.h
       pitchlabel.h
-#      posedit.h
       poslabel.h
       denomspinbox.h
       )
@@ -135,7 +134,7 @@ set_target_properties( awlplugin
 install( TARGETS awlplugin DESTINATION ${QT_PLUGINS_DIR}/designer/ )
 
 add_executable(ltest ltest.cpp)
-target_link_libraries (ltest awlplugin ${QT_LIBRARIES})
+target_link_libraries (ltest awlplugin msynth al ${QT_LIBRARIES})
 
 
 endif (NOT MINGW AND NOT APPLE)

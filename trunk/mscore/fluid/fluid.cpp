@@ -1115,7 +1115,7 @@ void Fluid::setState(const SyntiState& sp)
             int group = spid.subsystemId;
             int no    = spid.paramId;
 
-            printf("Fluid::setState: "); p.print(); printf("\n");
+// printf("Fluid::setState: "); p.print(); printf("\n");
 
             if (group == 0) {
                   sfs.append(p.sval());

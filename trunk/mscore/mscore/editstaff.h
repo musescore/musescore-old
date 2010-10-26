@@ -67,7 +67,7 @@ class SelectInstrument : public QDialog, private Ui::SelectInstrument {
       void on_instrumentList_itemDoubleClicked(QTreeWidgetItem* item, int);
 
    public:
-      SelectInstrument(QWidget* parent = 0);
+      SelectInstrument(const Instrument&, QWidget* parent = 0);
       InstrumentTemplate* instrTemplate() const;
       };
 

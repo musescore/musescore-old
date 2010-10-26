@@ -195,7 +195,7 @@ void EditStaff::editDrumsetClicked()
 
 void EditStaff::showInstrumentDialog()
       {
-      SelectInstrument si(this);
+      SelectInstrument si(instrument, this);
       if (si.exec()) {
             InstrumentTemplate* t = si.instrTemplate();
             // setMidiProgram(t->midiProgram);
@@ -217,7 +217,6 @@ void EditStaff::showInstrumentDialog()
                   }
             else
                   instrument.setUseDrumset(false);
-//            typeDrum->setChecked(instrument.useDrumset());
             instrument.setMidiActions(t->midiActions);
             instrument.setArticulation(t->articulation);
             instrument.setChannel(t->channel);
@@ -228,10 +227,11 @@ void EditStaff::showInstrumentDialog()
 //   SelectInstrument
 //---------------------------------------------------------
 
-SelectInstrument::SelectInstrument(QWidget* parent)
+SelectInstrument::SelectInstrument(const Instrument& instrument, QWidget* parent)
    : QDialog(parent)
       {
       setupUi(this);
+      currentInstrument->setText(instrument.trackName());
       buildTemplateList();
       buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
       connect(showMore, SIGNAL(clicked()), SLOT(buildTemplateList()));
