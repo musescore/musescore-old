@@ -1,4 +1,6 @@
-26.oct (ws)
+26.oct (lv)
+      - fix #7593: Incorrect measure duration importing MusicXML
+       (ws)
       - add missing "windowIcon"
       - implement "single palette mode"; enable in palette context menu
         (right click into empty area of palette box)

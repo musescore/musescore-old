@@ -1177,6 +1177,9 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
             }
       staves         = part->nstaves();
       int measureLen = maxtick - measure->tick();
+      printf("end_of_measure measure->tick()=%d maxtick=%d lastMeasureLen=%d measureLen=%d\n",
+             measure->tick(), maxtick, lastMeasureLen, measureLen);
+      measure->setLen(Fraction::fromTicks(measureLen));
 
       if (lastMeasureLen != measureLen) {
 #if 0 // TODOxx
