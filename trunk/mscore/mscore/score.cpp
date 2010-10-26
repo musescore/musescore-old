@@ -2418,7 +2418,7 @@ Score* Score::clone()
 
 void Score::setSyntiState(const SyntiState& s)
       {
-      if (_syntiState != s) {
+      if (!(_syntiState == s)) {
             _dirty = true;
             _syntiState = s;
             }

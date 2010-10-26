@@ -1157,7 +1157,7 @@ QFont TextStyle::font(double space) const                 { return d->font(space
 QFont TextStyle::fontPx(double spatium) const             { return d->fontPx(spatium); }
 QRectF TextStyle::bbox(double sp, const QString& s) const { return d->bbox(sp, s); }
 QFontMetricsF TextStyle::fontMetrics(double space) const  { return fontMetrics(space); }
-bool TextStyle::operator!=(const TextStyle& s) const      { return d != s.d; }
+bool TextStyle::operator!=(const TextStyle& s) const      { return d->operator!=(*s.d); }
 void TextStyle::layout(Element* e) const                  { d->layout(e);    }
 void TextStyle::writeProperties(Xml& xml) const           { d->writeProperties(xml); }
 QPointF TextStyle::reloff() const                         { return QPointF(rxoff(), ryoff()); }
