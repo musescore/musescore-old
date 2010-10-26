@@ -93,6 +93,7 @@ SyntiParameter& SyntiParameter::operator=(const SyntiParameter& sp)
 
 bool SyntiParameterData::operator==(const SyntiParameterData& sp) const
       {
+printf("SyntiParameterData==\n");
       if (_id == -1 ? (_name != sp._name) : (_id != sp._id))
             return false;
       switch(_type) {
@@ -321,8 +322,9 @@ void SyntiParameter::setRange(float a, float b)
 //   operator==
 //---------------------------------------------------------
 
-bool SyntiParameter::operator==(const SyntiParameter& sp)
+bool SyntiParameter::operator==(const SyntiParameter& sp) const
       {
+printf("SyntiParameter==\n");
       return d != sp.d;
       }
 
@@ -341,5 +343,17 @@ void SyntiParameter::print() const
 
 SyntiState::SyntiState()
       {
+      }
+
+bool SyntiState::operator==(const SyntiState& st) const
+      {
+      int n = size();
+      if (n != st.size())
+            return false;
+      for (int i = 0; i < n; ++i) {
+            if (!(at(i) == st.at(i)))
+                  return false;
+            }
+      return true;
       }
 
