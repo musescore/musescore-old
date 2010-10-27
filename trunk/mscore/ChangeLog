@@ -1,3 +1,6 @@
+27.oct (ws)
+      - show anchor while dragging repeats
+      - fix layout of repeats
 26.oct (lv)
       - fix #7593: Incorrect measure duration importing MusicXML
        (ws)

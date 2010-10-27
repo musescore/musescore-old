@@ -206,7 +206,6 @@ class Score : public QObject {
 
       double _spatium;
       PageFormat* _pageFormat;
-      QPaintDevice* _paintDevice;
 
       //
       // generated objects during layout:
@@ -739,9 +738,6 @@ class Score : public QObject {
       Measure* lastMeasure() const;
       Segment* firstSegment(SegmentTypes s = SegAll) const;
       Segment* lastSegment() const;
-
-      void setPaintDevice(QPaintDevice* d)          { _paintDevice = d; }
-      QPaintDevice* paintDevice() const             { return _paintDevice; }
 
       void setInstrumentNames();
       void connectTies();

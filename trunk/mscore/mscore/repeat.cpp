@@ -136,26 +136,27 @@ Marker::Marker(Score* s)
 //   setMarkerType
 //---------------------------------------------------------
 
-void Marker::setMarkerType(int t)
+void Marker::setMarkerType(MarkerType t)
       {
+      _markerType = t;
       switch(t) {
             case MARKER_SEGNO:
-                  setHtml(symToHtml(symbols[score()->symIdx()][segnoSym], 80));
+                  setHtml(symToHtml(symbols[score()->symIdx()][segnoSym], 8));
                   setLabel("segno");
                   break;
 
             case MARKER_CODA:
-                  setHtml(symToHtml(symbols[score()->symIdx()][codaSym], 80));
+                  setHtml(symToHtml(symbols[score()->symIdx()][codaSym], 8));
                   setLabel("codab");
                   break;
 
             case MARKER_VARCODA:
-                  setHtml(symToHtml(symbols[score()->symIdx()][varcodaSym], 80));
+                  setHtml(symToHtml(symbols[score()->symIdx()][varcodaSym], 8));
                   setLabel("varcoda");
                   break;
 
             case MARKER_CODETTA:
-                  setHtml(symToHtml(symbols[score()->symIdx()][codaSym], symbols[score()->symIdx()][codaSym], 80));
+                  setHtml(symToHtml(symbols[score()->symIdx()][codaSym], symbols[score()->symIdx()][codaSym], 8));
                   setLabel("codetta");
                   break;
 
@@ -176,6 +177,15 @@ void Marker::setMarkerType(int t)
                   printf("unknown marker type %d\n", t);
                   break;
             }
+      }
+
+//---------------------------------------------------------
+//   styleChanged
+//---------------------------------------------------------
+
+void Marker::styleChanged()
+      {
+      setMarkerType(_markerType);
       }
 
 //---------------------------------------------------------
@@ -219,31 +229,22 @@ QPointF Marker::canvasPos() const
       }
 
 //---------------------------------------------------------
-//   dragAnchor
-//---------------------------------------------------------
-
-QLineF Marker::dragAnchor() const
-      {
-      return Element::dragAnchor();
-      }
-
-//---------------------------------------------------------
 //   markerType
 //---------------------------------------------------------
 
-int Marker::markerType() const
+MarkerType Marker::markerType(const QString& s) const
       {
-      if (_label == "segno")
+      if (s == "segno")
             return MARKER_SEGNO;
-      else if (_label == "codab")
+      else if (s == "codab")
             return MARKER_CODA;
-      else if (_label == "varcoda")
+      else if (s == "varcoda")
             return MARKER_VARCODA;
-      else if (_label == "codetta")
+      else if (s == "codetta")
             return MARKER_CODETTA;
-      else if (_label == "fine")
+      else if (s == "fine")
             return MARKER_FINE;
-      else if (_label == "coda")
+      else if (s == "coda")
             return MARKER_TOCODA;
       else
             return MARKER_USER;
@@ -258,8 +259,10 @@ void Marker::read(QDomElement e)
       setAlign(0);
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
-            if (tag == "label")
-                  _label = e.text();
+            if (tag == "label") {
+                  setLabel(e.text());
+                  setMarkerType(markerType(e.text()));
+                  }
             else if (!Text::readProperties(e))
                   domError(e);
             }
@@ -301,6 +304,15 @@ void Marker::propertyAction(ScoreView* viewer, const QString& s)
             }
       else
             Element::propertyAction(viewer, s);
+      }
+
+//---------------------------------------------------------
+//   dragAnchor
+//---------------------------------------------------------
+
+QLineF Marker::dragAnchor() const
+      {
+      return QLineF(measure()->canvasPos(), canvasPos());
       }
 
 //---------------------------------------------------------

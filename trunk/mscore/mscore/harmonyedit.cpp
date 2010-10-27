@@ -286,7 +286,6 @@ void HarmonyCanvas::paintEvent(QPaintEvent* event)
 
       double spatium = 2.0 * PALETTE_SPATIUM / extraMag;
       gscore->setSpatium(spatium);
-      gscore->setPaintDevice(this);
 
       QPainter p(this);
 

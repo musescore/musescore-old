@@ -89,7 +89,6 @@ void KeyCanvas::paintEvent(QPaintEvent*)
       {
       double spatium = 2.0 * PALETTE_SPATIUM / extraMag;
       gscore->setSpatium(spatium);
-      gscore->setPaintDevice(this);
 
       QPainter p(this);
       p.setRenderHint(QPainter::Antialiasing, true);

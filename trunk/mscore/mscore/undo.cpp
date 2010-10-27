@@ -2258,7 +2258,7 @@ static void updateTextStyle(void* a, Element* e)
       if (e->isText()) {
             Text* text = static_cast<Text*>(e);
             if ((text->textStyle() == ts) && text->styled())
-                  text->setText(text->getText());     // destroy formatting
+                  text->styleChanged();
             }
       }
 
