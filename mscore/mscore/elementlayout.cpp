@@ -95,18 +95,28 @@ void ElementLayout::writeProperties(Xml& xml) const
             xml.tag("valign", "baseline");
       else
             xml.tag("valign", "top");
-      xml.tag("xoffset", _xoff);
-      xml.tag("yoffset", _yoff);
-      xml.tag("rxoffset", _reloff.x());
-      xml.tag("ryoffset", _reloff.y());
+
+      if (_xoff != 0.0 || _yoff != 0.0) {
+            if (offsetType() == OFFSET_ABS) {
+                  xml.tag("xoffset", xoff() * INCH);
+                  xml.tag("yoffset", yoff() * INCH);
+                  }
+            else {
+                  xml.tag("xoffset", xoff());
+                  xml.tag("yoffset", yoff());
+                  }
+            }
+      if (_reloff.x() != 0.0)
+            xml.tag("rxoffset", _reloff.x());
+      if (_reloff.y() != 0.0)
+            xml.tag("ryoffset", _reloff.y());
 
       const char* p = 0;
       switch(_offsetType) {
-            case OFFSET_SPATIUM:    p = "spatium"; break;
-            case OFFSET_ABS:        p = "absolute"; break;
+            case OFFSET_SPATIUM: p = "spatium"; break;
+            case OFFSET_ABS:     p = "absolute"; break;
             }
-      if (p)
-            xml.tag("offsetType", p);
+      xml.tag("offsetType", p);
       }
 
 //---------------------------------------------------------

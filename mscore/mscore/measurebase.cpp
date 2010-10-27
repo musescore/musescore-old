@@ -57,9 +57,8 @@ MeasureBase::MeasureBase(const MeasureBase& m)
       _sectionBreak = m._sectionBreak;
       _pause        = m._pause;
 
-      foreach(Element* e, m._el) {
+      foreach(Element* e, m._el)
             add(e->clone());
-            }
       }
 
 //---------------------------------------------------------
@@ -99,18 +98,18 @@ void MeasureBase::scanElements(void* data, void (*func)(void*, Element*))
  Add new Element \a el to MeasureBase
 */
 
-void MeasureBase::add(Element* el)
+void MeasureBase::add(Element* e)
       {
-      el->setParent(this);
-      if (el->type() == LAYOUT_BREAK) {
+      e->setParent(this);
+      if (e->type() == LAYOUT_BREAK) {
             for (iElement i = _el.begin(); i != _el.end(); ++i) {
-                  if ((*i)->type() == LAYOUT_BREAK && (*i)->subtype() == el->subtype()) {
+                  if ((*i)->type() == LAYOUT_BREAK && (*i)->subtype() == e->subtype()) {
                         if (debugMode)
                               printf("warning: layout break already set\n");
                         return;
                         }
                   }
-            switch(el->subtype()) {
+            switch(e->subtype()) {
                   case LAYOUT_BREAK_PAGE:
                         _pageBreak = true;
                         break;
@@ -122,9 +121,9 @@ void MeasureBase::add(Element* el)
                         break;
                   }
             }
-      _el.append(el);
-      if (el->type() == IMAGE)
-            static_cast<Image*>(el)->reference();
+      _el.append(e);
+      if (e->type() == IMAGE)
+            static_cast<Image*>(e)->reference();
       }
 
 //---------------------------------------------------------

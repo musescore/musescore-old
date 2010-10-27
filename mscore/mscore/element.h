@@ -431,7 +431,7 @@ class Element {
             else
                   _flags &= ~ELEMENT_DROP_TARGET;
             }
-      bool isMovable() const           { return flag(ELEMENT_MOVABLE);     }
+      virtual bool isMovable() const   { return flag(ELEMENT_MOVABLE);     }
       bool isSegment() const           { return flag(ELEMENT_SEGMENT);     }
       };
 

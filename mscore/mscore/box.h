@@ -36,7 +36,6 @@ class ScoreView;
 //---------------------------------------------------------
 
 class Box : public MeasureBase {
-
       Spatium _boxWidth;       // only valid for HBox
       Spatium _boxHeight;      // only valid for VBox
       double _leftMargin, _rightMargin;   // values in metric mm
@@ -46,7 +45,6 @@ class Box : public MeasureBase {
    public:
       Box(Score*);
       virtual void draw(QPainter&, ScoreView*) const;
-
       virtual bool isEditable() const { return true; }
       virtual void startEdit(ScoreView*, const QPointF&);
       virtual bool edit(ScoreView*, int grip, int key, Qt::KeyboardModifiers, const QString& s);
@@ -60,6 +58,7 @@ class Box : public MeasureBase {
       virtual void read(QDomElement);
       virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*);
+      virtual void add(Element* e);
 
       Spatium boxWidth() const         { return _boxWidth;     }
       void setBoxWidth(Spatium val)    { _boxWidth = val;      }
@@ -83,8 +82,8 @@ class HBox : public Box {
       Q_DECLARE_TR_FUNCTIONS(HBox)
 
    public:
-      HBox(Score* score);
-      ~HBox();
+      HBox(Score* score) : Box(score) {}
+      ~HBox() {}
       virtual HBox* clone() const      { return new HBox(*this); }
       virtual ElementType type() const { return HBOX;       }
 
@@ -94,6 +93,7 @@ class HBox : public Box {
       virtual void propertyAction(ScoreView*, const QString&);
       virtual QRectF drag(const QPointF& s);
       void layout2();
+      virtual bool isMovable() const;
       };
 
 //---------------------------------------------------------
@@ -105,6 +105,7 @@ class VBox : public Box {
 
    public:
       VBox(Score* score) : Box(score) {}
+      ~VBox() {}
       virtual VBox* clone() const      { return new VBox(*this); }
       virtual ElementType type() const { return VBOX;       }
 
