@@ -2395,7 +2395,7 @@ void ScoreView::drawElements(QPainter& p,const QList<const Element*>& el)
                         if (e->parent()->type() == SEGMENT) {
                               qreal w = 7.0 / p.matrix().m11();
                               QPointF pt = e->parent()->canvasPos();
-                              p.setPen(QPen(Qt::blue, 2, Qt::SolidLine));
+                              p.setPen(QPen(Qt::blue, 0, Qt::SolidLine));
                               p.drawLine(QLineF(pt.x()-w, pt.y()-h, pt.x()+w, pt.y()+h));
                               p.drawLine(QLineF(pt.x()+w, pt.y()-h, pt.x()-w, pt.y()+h));
                               }

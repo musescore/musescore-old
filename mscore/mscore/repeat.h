@@ -45,7 +45,7 @@ class RepeatMeasure : public Rest {
       virtual void scanElements(void* data, void (*func)(void*, Element*)) { func(data, this); }
       };
 
-enum {
+enum MarkerType {
       MARKER_SEGNO,
       MARKER_CODA,
       MARKER_VARCODA,
@@ -62,13 +62,16 @@ enum {
 class Marker : public Text {
       Q_DECLARE_TR_FUNCTIONS(Marker)
 
+      MarkerType _markerType;
       QString _label;               ///< referenced from Jump() element
+
+      MarkerType markerType(const QString&) const;
 
    public:
       Marker(Score*);
 
-      void setMarkerType(int t);
-      int markerType() const;
+      void setMarkerType(MarkerType t);
+      MarkerType markerType() const    { return _markerType; }
 
       virtual Marker* clone() const    { return new Marker(*this); }
       virtual ElementType type() const { return MARKER; }
@@ -88,6 +91,7 @@ class Marker : public Text {
       virtual void layout();
       virtual QPointF canvasPos() const;
       virtual QLineF dragAnchor() const;
+      virtual void styleChanged();
       };
 
 enum {

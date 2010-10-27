@@ -192,7 +192,8 @@ class Text : public Element {
       void setModified(bool v)            { _doc->setModified(v);   }
       void clear()                        { _doc->clear();          }
       QRectF pageRectangle() const;
-      void restyle();
+      virtual void styleChanged();
+      virtual void setScore(Score* s);
       };
 
 //---------------------------------------------------------

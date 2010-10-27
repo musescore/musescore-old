@@ -323,7 +323,6 @@ Score::Score(const Style& s)
       _symIdx         = 0;
       _spatium        = preferences.spatium * DPI;
       _pageFormat     = new PageFormat;
-      _paintDevice    = 0;
       _needLayout     = false;
       startLayout     = 0;
       _undo           = new UndoStack();
@@ -377,7 +376,6 @@ Score::Score(Score* parent)
       _symIdx         = 0;
       _spatium        = preferences.spatium * DPI;
       _pageFormat     = new PageFormat;
-      _paintDevice    = 0;
       _needLayout     = false;
       startLayout     = 0;
       _undo           = 0;

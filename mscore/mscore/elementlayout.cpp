@@ -49,25 +49,29 @@ void ElementLayout::layout(Element* e) const
       else
             o *= DPI;
       double h = 0.0;
+      double w = 0.0;
       if (e->parent()) {
             o += QPointF(_reloff.x() * e->parent()->width() * 0.01, _reloff.y() * e->parent()->height() * 0.01);
 //            h = e->parent()->height();
             }
-//      double w = e->width();
+      bool frameText = e->type() == TEXT && static_cast<Text*>(e)->layoutToParentWidth() && e->parent();
       QPointF p;
-      if (e->type() == TEXT && static_cast<Text*>(e)->layoutToParentWidth() && e->parent())
+      if (frameText)
             h = e->parent()->height();
+      else
+            w = e->width();
       if (_align & ALIGN_BOTTOM)
             p.setY(h - e->height());
       else if (_align & ALIGN_VCENTER)
             p.setY((h - e->height()) * .5);
       else if (_align & ALIGN_BASELINE)
             p.setY(-e->baseLine());
-
-//      if (_align & ALIGN_RIGHT)
-//            p.setX(-w);
-//      else if (_align & ALIGN_HCENTER)
-//            p.setX(-(w * .5));
+      if (!frameText) {
+            if (_align & ALIGN_RIGHT)
+                  p.setX(-w);
+            else if (_align & ALIGN_HCENTER)
+                  p.setX(-(w * .5));
+            }
       e->setPos(p + o);
       }
 

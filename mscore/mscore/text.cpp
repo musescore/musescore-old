@@ -320,7 +320,7 @@ void Text::layout()
             _bbox = frame.adjusted(-w, -w, w, w);
             }
       else {
-            _bbox = _doc->documentLayout()->frameBoundingRect(_doc->rootFrame());
+            _bbox = QRectF(QPointF(0.0, 0.0), _doc->size()); //_doc->documentLayout()->frameBoundingRect(_doc->rootFrame());
             }
       _doc->setModified(false);
       style().layout(this);      // process alignment
@@ -455,8 +455,10 @@ void Text::read(QDomElement e)
             // Reset text in old version to
             // style.
             //
-            if (_textStyle != TEXT_STYLE_INVALID)
-                  restyle();
+            if (_textStyle != TEXT_STYLE_INVALID) {
+                  _styled = true;
+                  styleChanged();
+                  }
             }
       cursorPos = 0;
       }
@@ -890,7 +892,9 @@ QPainterPath Text::shape() const
             QTextLayout* tl = tb.layout();
             int n = tl->lineCount();
             for (int i = 0; i < n; ++i) {
-                  QRectF r(tl->lineAt(0).naturalTextRect().translated(tl->position()));
+                  QTextLine l = tl->lineAt(i);
+                  QRectF r(l.rect().translated(tl->position()));
+                  r.adjust(-l.position().x(), 0.0, 0.0, 0.0);
                   pp.addRect(r);
                   }
             }
@@ -1499,14 +1503,25 @@ QFont Text::font() const
       }
 
 //---------------------------------------------------------
-//   restyle
+//   styleChanged
 //---------------------------------------------------------
 
-void Text::restyle()
+void Text::styleChanged()
       {
-      setStyled(true);
-      setText(getText());     // destroy formatting
-      score()->setLayoutAll(true);
+      if (_styled) {
+            setText(getText());     // destroy formatting
+            score()->setLayoutAll(true);
+            }
+      }
+
+//---------------------------------------------------------
+//   setScore
+//---------------------------------------------------------
+
+void Text::setScore(Score* s)
+      {
+      Element::setScore(s);
+      styleChanged();
       }
 
 //---------------------------------------------------------
@@ -1566,9 +1581,8 @@ void TextProperties::accept()
       QDialog::accept();
       if (tp->isStyled() != text->styled()) {
             text->setTextStyle(tp->textStyleType());  // this sets styled = true
-            if (tp->isStyled())
-                  text->restyle();
             text->setStyled(tp->isStyled());
+            text->styleChanged();
             }
       }
 
