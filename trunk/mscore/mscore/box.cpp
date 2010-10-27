@@ -56,12 +56,8 @@ Box::Box(Score* score)
 
 void Box::layout()
       {
-      foreach (Element* el, _el) {
-            if ((el->type() == TEXT))
-                  static_cast<Text*>(el)->setLayoutToParentWidth(true);
-// printf("box::layout width %f\n", width());
+      foreach (Element* el, _el)
             el->layout();
-            }
       }
 
 //---------------------------------------------------------
@@ -267,20 +263,45 @@ void Box::read(QDomElement e)
             else if (!Element::readProperties(e))
                   domError(e);
             }
+      adjustReadPos();
       }
 
 //---------------------------------------------------------
-//   HBox
+//   add
+///   Add new Element \a el to Box
 //---------------------------------------------------------
 
-HBox::HBox(Score* score)
-   : Box(score)
+void Box::add(Element* e)
       {
+      e->setParent(this);
+      if (e->type() == LAYOUT_BREAK) {
+            for (iElement i = _el.begin(); i != _el.end(); ++i) {
+                  if ((*i)->type() == LAYOUT_BREAK && (*i)->subtype() == e->subtype()) {
+                        if (debugMode)
+                              printf("warning: layout break already set\n");
+                        return;
+                        }
+                  }
+            switch(e->subtype()) {
+                  case LAYOUT_BREAK_PAGE:
+                        _pageBreak = true;
+                        break;
+                  case LAYOUT_BREAK_LINE:
+                        _lineBreak = true;
+                        break;
+                  case LAYOUT_BREAK_SECTION:
+                        _sectionBreak = true;
+                        break;
+                  }
+            }
+      if (e->type() == TEXT) {
+            static_cast<Text*>(e)->setLayoutToParentWidth(true);
+            }
+      _el.append(e);
+      if (e->type() == IMAGE)
+            static_cast<Image*>(e)->reference();
       }
 
-HBox::~HBox()
-      {
-      }
 
 //---------------------------------------------------------
 //   layout
@@ -417,6 +438,15 @@ QRectF HBox::drag(const QPointF& pos)
       QRectF r(abbox());
       setUserOff(QPointF(pos.x(), 0.0));
       return abbox() | r;
+      }
+
+//---------------------------------------------------------
+//   isMovable
+//---------------------------------------------------------
+
+bool HBox::isMovable() const
+      {
+      return parent() && (parent()->type() == HBOX || parent()->type() == VBOX);
       }
 
 //---------------------------------------------------------

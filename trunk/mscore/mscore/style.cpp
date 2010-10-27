@@ -733,23 +733,17 @@ void TextStyleData::writeProperties(Xml& xml) const
       ElementLayout::writeProperties(xml);
       xml.tag("family", family);
       xml.tag("size", size);
-      xml.tag("bold", bold);
-      xml.tag("italic", italic);
-      xml.tag("underline", underline);
-      xml.tag("align", int(align()));
-      xml.tag("offsetType", offsetType());
-      xml.tag("sizeIsSpatiumDependent", sizeIsSpatiumDependent);
-      xml.tag("foregroundColor", foregroundColor);
-      if (offsetType() == OFFSET_ABS) {
-            xml.tag("xoffset", xoff() * INCH);
-            xml.tag("yoffset", yoff() * INCH);
-            }
-      else {
-            xml.tag("xoffset", xoff());
-            xml.tag("yoffset", yoff());
-            }
-      xml.tag("rxoffset", rxoff());
-      xml.tag("ryoffset", ryoff());
+      if (bold)
+            xml.tag("bold", bold);
+      if (italic)
+            xml.tag("italic", italic);
+      if (underline)
+            xml.tag("underline", underline);
+      if (sizeIsSpatiumDependent)
+            xml.tag("sizeIsSpatiumDependent", sizeIsSpatiumDependent);
+      if (foregroundColor != Qt::black)
+            xml.tag("foregroundColor", foregroundColor);
+
       if (hasFrame) {
             xml.tag("frameWidth", frameWidth);
             xml.tag("paddingWidth", paddingWidth);

@@ -893,7 +893,7 @@ QPainterPath Text::shape() const
             int n = tl->lineCount();
             for (int i = 0; i < n; ++i) {
                   QTextLine l = tl->lineAt(i);
-                  QRectF r(l.rect().translated(tl->position()));
+                  QRectF r(l.naturalTextRect().translated(tl->position()));
                   r.adjust(-l.position().x(), 0.0, 0.0, 0.0);
                   pp.addRect(r);
                   }

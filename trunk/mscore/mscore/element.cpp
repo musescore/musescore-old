@@ -274,10 +274,11 @@ Element::Element(const Element& e)
       _track      = e._track;
       _color      = e._color;
       _mag        = e._mag;
-      _score      = e._score;
       _pos        = e._pos;
-      _mxmlOff    = e._mxmlOff;
+      _userOff    = e._userOff;
       _readPos    = e._readPos;
+      _score      = e._score;
+      _mxmlOff    = e._mxmlOff;
       _bbox       = e._bbox;
       itemDiscovered = 0;
       }
@@ -483,7 +484,7 @@ QList<Prop> Element::properties(Xml& xml, const Element* proto) const
             if (!s.isEmpty())
                   pl.append(Prop("subtype", subtypeName()));
             }
-      if (flag(ELEMENT_MOVABLE) && !userOff().isNull())
+      if (isMovable() && !userOff().isNull())
             pl.append(Prop("pos", pos() / spatium()));
       if ((track() != xml.curTrack) && (track() != -1)) {
             int t;

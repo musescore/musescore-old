@@ -1,4 +1,5 @@
 27.oct (ws)
+      - fixes for frames (fixes save/restore of "schnee.mscz" example)
       - show anchor while dragging repeats
       - fix layout of repeats
 26.oct (lv)
