@@ -276,7 +276,7 @@ void Text::layout()
       setPos(0.0, 0.0);
       if (parent() && _layoutToParentWidth) {
             pageSize.setWidth(parent()->width());
-            if (parent()->type() == HBOX || parent()->type() == VBOX) {
+            if (parent()->type() == HBOX || parent()->type() == VBOX || parent()->type() == TBOX) {
                   Box* box = static_cast<Box*>(parent());
                   rxpos() += box->leftMargin() * DPMM;
                   rypos() += box->topMargin() * DPMM;
@@ -348,7 +348,7 @@ void Text::layout()
 
 QRectF Text::pageRectangle() const
       {
-      if (parent() && (parent()->type() == HBOX || parent()->type() == VBOX)) {
+      if (parent() && (parent()->type() == HBOX || parent()->type() == VBOX || parent()->type() == TBOX)) {
             QRectF r = parent()->abbox();
             Box* box = static_cast<Box*>(parent());
             double x = r.x() + box->leftMargin() * DPMM;
@@ -413,6 +413,7 @@ void Text::setTextStyle(TextStyleType idx)
             _textStyle = idx;
             if (_textStyle != TEXT_STYLE_INVALID) {
                   _styled = true;
+                  _localStyle = score()->textStyle(_textStyle);
                   setText("");      // init style
                   }
             }
@@ -804,8 +805,22 @@ bool Text::edit(ScoreView* view, int /*grip*/, int key, Qt::KeyboardModifiers mo
             }
       mscore->textTools()->setCharFormat(cursor->charFormat());
       mscore->textTools()->setBlockFormat(cursor->blockFormat());
+
       layout();
-      score()->addRefresh(abbox().adjusted(-w, -w, w, w));
+      if (parent() && parent()->type() == TBOX) {
+            TBox* tb = static_cast<TBox*>(parent());
+            qreal h;
+            if (isEmpty()) {
+                  QFontMetricsF fm(font());
+                  h = fm.lineSpacing();
+                  }
+            else
+                  h = height();
+            tb->setHeight(h);
+            score()->addRefresh(tb->abbox().adjusted(-w, -w, w, w));
+            }
+      else
+            score()->addRefresh(abbox().adjusted(-w, -w, w, w));
       return true;
       }
 

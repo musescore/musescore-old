@@ -1029,6 +1029,30 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         "insert-textframe",
+         QT_TRANSLATE_NOOP("action","Insert Text Frame"),
+         0,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","Insert Text Frame")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "append-textframe",
+         QT_TRANSLATE_NOOP("action","Append Text Frame"),
+         0,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","Append Text Frame")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "insert-fretframe",
+         QT_TRANSLATE_NOOP("action","Insert Fret Diagram Frame"),
+         0,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","Insert Fret Diagram Frame")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
          "insert-vbox",
          QT_TRANSLATE_NOOP("action","Insert Vertical Frame"),
          0,

@@ -296,7 +296,7 @@ void MeasureBaseList::change(MeasureBase* ob, MeasureBase* nb)
             _last = nb;
       if (ob == _first)
             _first = nb;
-      if (nb->type() == HBOX || nb->type() == VBOX)
+      if (nb->type() == HBOX || nb->type() == VBOX || nb->type() == TBOX || nb->type() == FBOX)
             nb->setSystem(ob->system());
       foreach(Element* e, *nb->el())
             e->setParent(nb);
@@ -1081,17 +1081,11 @@ void Score::readStaff(QDomElement e)
                   measure->read(e, staff);
                   curTick = measure->tick() + measure->ticks();
                   }
-            else if (tag == "HBox") {
-                  HBox* hbox = new HBox(this);
-                  hbox->read(e);
-                  hbox->setTick(curTick);
-                  add(hbox);
-                  }
-            else if (tag == "VBox") {
-                  VBox* vbox = new VBox(this);
-                  vbox->read(e);
-                  vbox->setTick(curTick);
-                  add(vbox);
+            else if (tag == "HBox" || tag == "VBox" || tag == "TBox" || tag == "FBox") {
+                  MeasureBase* mb = static_cast<MeasureBase*>(Element::name2Element(tag, this));
+                  mb->read(e);
+                  mb->setTick(curTick);
+                  add(mb);
                   }
             else
                   domError(e);
@@ -1831,14 +1825,17 @@ void Score::addElement(Element* element)
                this, element, element->name(), element->parent(),
                element->parent() ? element->parent()->name() : "");
             }
-      if (element->type() == TREMOLO) {
+      ElementType et = element->type();
+      if (et == TREMOLO) {
             Chord* chord = static_cast<Chord*>(element->parent());
             setLayout(chord->measure());
             }
 
-      else if (element->type() == MEASURE
-         || (element->type() == HBOX && element->parent()->type() != VBOX)
-         || element->type() == VBOX
+      else if (et == MEASURE
+         || (et == HBOX && element->parent()->type() != VBOX)
+         || et == VBOX
+         || et == TBOX
+         || et == FBOX
          ) {
             add(element);
             addLayoutFlags(LAYOUT_FIX_TICKS);
@@ -1906,18 +1903,22 @@ void Score::removeElement(Element* element)
       // special for MEASURE, HBOX, VBOX
       // their parent is not static
 
-      if (element->type() == TREMOLO) {
+      ElementType et = element->type();
+      if (et == TREMOLO) {
             Chord* chord = static_cast<Chord*>(element->parent());
             setLayout(chord->measure());
             }
-      else if (element->type() == MEASURE
-         || (element->type() == HBOX && parent->type() != VBOX)
-         || element->type() == VBOX) {
+      else if (et == MEASURE
+         || (et == HBOX && parent->type() != VBOX)
+         || et == VBOX
+         || et == TBOX
+         || et == FBOX
+            ) {
             remove(element);
             addLayoutFlags(LAYOUT_FIX_TICKS);
             return;
             }
-      if (element->type() == BEAM)          // beam parent does not survive layout
+      if (et == BEAM)          // beam parent does not survive layout
             element->setParent(0);
 
       if (parent)

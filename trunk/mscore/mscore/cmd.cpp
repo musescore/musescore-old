@@ -1337,33 +1337,26 @@ void Score::upDown(bool up, UpDownMode mode)
 //    - called from pulldown menu
 //---------------------------------------------------------
 
-void Score::cmdAppendMeasures(int n)
+void ScoreView::cmdAppendMeasures(int n, ElementType type)
       {
-      startCmd();
-      appendMeasures(n, MEASURE);
-      endCmd();
+      _score->startCmd();
+      appendMeasures(n, type);
+      _score->endCmd();
       }
 
 //---------------------------------------------------------
 //   appendMeasure
 //---------------------------------------------------------
 
-MeasureBase* Score::appendMeasure(int type)
+MeasureBase* Score::appendMeasure(ElementType type)
       {
-      MeasureBase* last = _measures.last();
       int tick = 0;
-      if (last) {
-            tick = last->tick();
-            if (last->type() == MEASURE)
-                  tick += static_cast<Measure*>(last)->ticks();
+      if (last()) {
+            tick = last()->tick();
+            if (last()->type() == MEASURE)
+                  tick += static_cast<Measure*>(last())->ticks();
             }
-      MeasureBase* mb = 0;
-      if (type == MEASURE)
-            mb = new Measure(this);
-      else if (type == HBOX)
-            mb = new HBox(this);
-      else if (type == VBOX)
-            mb = new VBox(this);
+      MeasureBase* mb = static_cast<MeasureBase*>(Element::create(type, this));
       mb->setTick(tick);
 
       if (type == MEASURE) {
@@ -1380,7 +1373,16 @@ MeasureBase* Score::appendMeasure(int type)
                   }
             }
       undoInsertMeasure(mb);
-      layoutAll = true;
+      return mb;
+      }
+
+//---------------------------------------------------------
+//   appendMeasure
+//---------------------------------------------------------
+
+MeasureBase* ScoreView::appendMeasure(ElementType type)
+      {
+      MeasureBase* mb = _score->appendMeasure(type);
       return mb;
       }
 
@@ -1388,9 +1390,9 @@ MeasureBase* Score::appendMeasure(int type)
 //   appendMeasures
 //---------------------------------------------------------
 
-void Score::appendMeasures(int n, int type)
+void ScoreView::appendMeasures(int n, ElementType type)
       {
-      if (noStaves()) {
+      if (_score->noStaves()) {
             QMessageBox::warning(0, "MuseScore",
                tr("No staves found:\n"
                   "please use the instruments dialog to\n"
@@ -1398,6 +1400,40 @@ void Score::appendMeasures(int n, int type)
             return;
             }
       bool createEndBar = false;
+      bool endBarGenerated = false;
+      if (type == MEASURE) {
+            Measure* lm = _score->lastMeasure();
+            if (lm && lm->endBarLineType() == END_BAR) {
+                  if (!lm->endBarLineGenerated()) {
+                        _score->undoChangeEndBarLineType(lm, NORMAL_BAR);
+                        createEndBar = true;
+                        // move end Bar to last Measure;
+                        }
+                  else {
+                        createEndBar    = true;
+                        endBarGenerated = true;
+                        lm->setEndBarLineType(NORMAL_BAR, endBarGenerated);
+                        }
+                  }
+            else if (lm == 0)
+                  createEndBar = true;
+            }
+      for (int i = 0; i < n; ++i)
+            _score->appendMeasure(type);
+      if (createEndBar) {
+            Measure* lm = _score->lastMeasure();
+            if (lm)
+                  lm->setEndBarLineType(END_BAR, endBarGenerated);
+            }
+      }
+
+//---------------------------------------------------------
+//   appendMeasures
+//---------------------------------------------------------
+
+void Score::appendMeasures(int n, ElementType type)
+      {
+      bool createEndBar    = false;
       bool endBarGenerated = false;
       if (type == MEASURE) {
             Measure* lm = lastMeasure();
@@ -1429,141 +1465,161 @@ void Score::appendMeasures(int n, int type)
 //   cmdInsertMeasures
 //    - keyboard callback
 //    - called from pulldown menu
-// Added from cmdAppendMeasures by DK 06.08.07
 //---------------------------------------------------------
 
-void Score::cmdInsertMeasures(int n)
+void ScoreView::cmdInsertMeasures(int n, ElementType type)
       {
-      startCmd();
-      insertMeasures(n, MEASURE);
-      endCmd();
+      _score->startCmd();
+      insertMeasures(n, type);
+      _score->endCmd();
       }
 
 //---------------------------------------------------------
 //   insertMeasures
-//  Changed by DK 05.08.07, loop for inserting "n"
-//    Measures to be added
-//    (loopcounter ino -- insert numbers)
 //---------------------------------------------------------
 
-void Score::insertMeasures(int n, int type)
+void ScoreView::insertMeasures(int n, ElementType type)
       {
-	if (selection().state() != SEL_RANGE) {
+	if (_score->selection().state() != SEL_RANGE) {
 		QMessageBox::warning(0, "MuseScore",
 			tr("No Measure selected:\n"
 			"please select a measure and try again"));
 		return;
             }
+	int tick  = _score->selection().startSegment()->tick();
+	for (int i = 0; i < n; ++i)
+            insertMeasure(type, tick);
+      _score->select(0, SELECT_SINGLE, 0);
+      }
 
-	int tick  = selection().startSegment()->tick();
-      Measure* m = tick2measure(tick);
-      Fraction f(m->timesig());
-	int ticks = f.ticks();
+//---------------------------------------------------------
+//   cmdInsertMeasure
+//---------------------------------------------------------
 
-	for (int i = 0; i < n; ++i) {
-            switch(type) {
-                  case MEASURE:
-                        {
-                        Measure* measure = new Measure(this);
-                        measure->setTick(tick);
-                        measure->setTimesig(f);
-                        measure->setLen(f);
-	            	for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
-    		                  Rest* rest = new Rest(this, Duration(Duration::V_MEASURE));
-                              rest->setDuration(measure->len());
-        	            	rest->setTrack(staffIdx * VOICES);
-        	      	      Segment* s = measure->getSegment(SegChordRest, tick);
-        	      		s->add(rest);
-		                  }
-                        QList<TimeSig*> tsl;
-                        QList<KeySig*>  ksl;
+void ScoreView::cmdInsertMeasure(ElementType type)
+      {
+	if (_score->selection().state() != SEL_RANGE) {
+		QMessageBox::warning(0, "MuseScore",
+			tr("No Measure selected:\n"
+			"please select a measure and try again"));
+		return;
+            }
+      _score->startCmd();
+	int tick  = _score->selection().startSegment()->tick();
+      MeasureBase* mb = insertMeasure(type, tick);
+      if (mb->type() == TBOX) {
+            Text* s = new Text(_score);
+            s->setTextStyle(TEXT_STYLE_FRAME);
+            s->setSubtype(TEXT_FRAME);
+            s->setParent(mb);
+            s->setStyled(false);
+            _score->undoAddElement(s);
+            _score->select(s, SELECT_SINGLE, 0);
+            _score->endCmd();
+            startEdit(s);
+            return;
+            }
+      _score->select(0, SELECT_SINGLE, 0);
+      _score->endCmd();
+      }
 
-                        if (tick == 0) {
-                              //
-                              // remove time and key signatures
-                              //
-                              for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
-                                    for (Segment* s = firstSegment(); s && s->tick() == 0; s = s->next()) {
-                                          if (s->subtype() == SegKeySig) {
-                                                KeySig* e = static_cast<KeySig*>(s->element(staffIdx * VOICES));
-                                                if (e) {
-                                                      if (!e->generated())
-                                                            ksl.append(static_cast<KeySig*>(e));
-                                                      undoRemoveElement(e);
-                                                      if (e->segment()->isEmpty())
-                                                            undoRemoveElement(e->segment());
-                                                      }
-                                                }
-                                          else if (s->subtype() == SegTimeSig) {
-                                                TimeSig* e = static_cast<TimeSig*>(s->element(staffIdx * VOICES));
-                                                if (e) {
-                                                      if (!e->generated())
-                                                            tsl.append(static_cast<TimeSig*>(e));
-                                                      undoRemoveElement(e);
-                                                      if (e->segment()->isEmpty())
-                                                            undoRemoveElement(e->segment());
-                                                      }
-                                                }
-                                          else if (s->subtype() == SegClef) {
-                                                Element* e = s->element(staffIdx * VOICES);
-                                                if (e) {
-                                                      undoRemoveElement(e);
-                                                      if (static_cast<Segment*>(e->parent())->isEmpty())
-                                                            undoRemoveElement(e->parent());
-                                                      }
-                                                }
+//---------------------------------------------------------
+//   insertMeasure
+//---------------------------------------------------------
+
+MeasureBase* ScoreView::insertMeasure(ElementType type, int tick)
+      {
+      MeasureBase* mb = static_cast<MeasureBase*>(Element::create(type, _score));
+      mb->setTick(tick);
+
+      if (type == MEASURE) {
+            Measure* m = _score->tick2measure(tick);
+            Fraction f(m->timesig());
+	      int ticks = f.ticks();
+
+            Measure* measure = static_cast<Measure*>(mb);
+            measure->setTimesig(f);
+            measure->setLen(f);
+	      for (int staffIdx = 0; staffIdx < _score->nstaves(); ++staffIdx) {
+    	            Rest* rest = new Rest(_score, Duration(Duration::V_MEASURE));
+                  rest->setDuration(measure->len());
+              	rest->setTrack(staffIdx * VOICES);
+                    Segment* s = measure->getSegment(SegChordRest, tick);
+              	s->add(rest);
+	            }
+            QList<TimeSig*> tsl;
+            QList<KeySig*>  ksl;
+
+            if (tick == 0) {
+                  //
+                  // remove time and key signatures
+                  //
+                  for (int staffIdx = 0; staffIdx < _score->nstaves(); ++staffIdx) {
+                        for (Segment* s = _score->firstSegment(); s && s->tick() == 0; s = s->next()) {
+                              if (s->subtype() == SegKeySig) {
+                                    KeySig* e = static_cast<KeySig*>(s->element(staffIdx * VOICES));
+                                    if (e) {
+                                          if (!e->generated())
+                                                ksl.append(static_cast<KeySig*>(e));
+                                          _score->undoRemoveElement(e);
+                                          if (e->segment()->isEmpty())
+                                                _score->undoRemoveElement(e->segment());
+                                          }
+                                    }
+                              else if (s->subtype() == SegTimeSig) {
+                                    TimeSig* e = static_cast<TimeSig*>(s->element(staffIdx * VOICES));
+                                    if (e) {
+                                          if (!e->generated())
+                                                tsl.append(static_cast<TimeSig*>(e));
+                                          _score->undoRemoveElement(e);
+                                          if (e->segment()->isEmpty())
+                                                _score->undoRemoveElement(e->segment());
+                                          }
+                                    }
+                              else if (s->subtype() == SegClef) {
+                                    Element* e = s->element(staffIdx * VOICES);
+                                    if (e) {
+                                          _score->undoRemoveElement(e);
+                                          if (static_cast<Segment*>(e->parent())->isEmpty())
+                                                _score->undoRemoveElement(e->parent());
                                           }
                                     }
                               }
-                        undoInsertMeasure(measure);
-                        undoInsertTime(tick, ticks);
+                        }
+                  }
+            _score->undoInsertMeasure(measure);
+            _score->undoInsertTime(tick, ticks);
 
-                        //
-                        // if measure is inserted at tick zero,
-                        // create key and time signature
-                        //
-                        foreach(TimeSig* ts, tsl) {
-                              TimeSig* nts = new TimeSig(*ts);
-                              SegmentType st = SegTimeSig;
-                              Segment* s = measure->findSegment(st, 0);
-                              if (s == 0) {
-                                    s = new Segment(measure, st, 0);
-                                    undoAddElement(s);
-                                    }
-                              nts->setParent(s);
-                              undoAddElement(nts);
-                              }
-                        foreach(KeySig* ks, ksl) {
-                              KeySig* nks = new KeySig(*ks);
-                              SegmentType st = SegKeySig;
-                              Segment* s = measure->findSegment(st, 0);
-                              if (s == 0) {
-                                    s = new Segment(measure, st, 0);
-                                    undoAddElement(s);
-                                    }
-                              nks->setParent(s);
-                              undoAddElement(nks);
-                              }
+            //
+            // if measure is inserted at tick zero,
+            // create key and time signature
+            //
+            foreach(TimeSig* ts, tsl) {
+                  TimeSig* nts = new TimeSig(*ts);
+                  SegmentType st = SegTimeSig;
+                  Segment* s = measure->findSegment(st, 0);
+                  if (s == 0) {
+                        s = new Segment(measure, st, 0);
+                        _score->undoAddElement(s);
                         }
-                        break;
-                  case HBOX:
-                        {
-                        MeasureBase* mb = new HBox(this);
-                        mb->setTick(tick);
-                        undoInsertMeasure(mb);
+                  nts->setParent(s);
+                  _score->undoAddElement(nts);
+                  }
+            foreach(KeySig* ks, ksl) {
+                  KeySig* nks = new KeySig(*ks);
+                  SegmentType st = SegKeySig;
+                  Segment* s = measure->findSegment(st, 0);
+                  if (s == 0) {
+                        s = new Segment(measure, st, 0);
+                        _score->undoAddElement(s);
                         }
-                        break;
-                  case VBOX:
-                        {
-                        MeasureBase* mb = new VBox(this);
-                        mb->setTick(tick);
-                        undoInsertMeasure(mb);
-                        }
-                        break;
+                  nks->setParent(s);
+                  _score->undoAddElement(nks);
                   }
             }
-      select(0, SELECT_SINGLE, 0);
-      layoutAll = true;
+      else
+            _score->undoInsertMeasure(mb);
+      return mb;
       }
 
 //---------------------------------------------------------
@@ -1960,22 +2016,6 @@ void Score::cmd(const QAction* a)
                         cmdMoveRest(static_cast<Rest*>(el), DOWN);
                   else
                         upDown(false, UP_DOWN_CHROMATIC);
-                  }
-            else if (cmd == "append-measure")
-                  appendMeasures(1, MEASURE);
-            else if (cmd == "insert-measure")
-		      insertMeasures(1, MEASURE);
-            else if (cmd == "insert-hbox")
-		      insertMeasures(1, HBOX);
-            else if (cmd == "insert-vbox")
-		      insertMeasures(1, VBOX);
-            else if (cmd == "append-hbox") {
-		      MeasureBase* mb = appendMeasure(HBOX);
-                  select(mb, SELECT_SINGLE, 0);
-                  }
-            else if (cmd == "append-vbox") {
-		      MeasureBase* mb = appendMeasure(VBOX);
-                  select(mb, SELECT_SINGLE, 0);
                   }
 	      else if (cmd == "add-staccato")
                   addArticulation(StaccatoSym);

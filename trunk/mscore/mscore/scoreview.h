@@ -21,6 +21,7 @@
 #ifndef __SCANVAS_H__
 #define __SCANVAS_H__
 
+#include "globals.h"
 #include "durationtype.h"
 
 class ChordRest;
@@ -38,6 +39,7 @@ class System;
 class Score;
 class ScoreView;
 class Text;
+class MeasureBase;
 
 //---------------------------------------------------------
 //   CommandTransition
@@ -209,6 +211,12 @@ class ScoreView : public QWidget {
       Page* point2page(const QPointF&);
       void setupFotoMode();
 
+      void insertMeasures(int, ElementType);
+      void appendMeasures(int, ElementType);
+      MeasureBase* appendMeasure(ElementType);
+      void cmdInsertMeasure(ElementType);
+      MeasureBase* insertMeasure(ElementType, int tick);
+
    private slots:
       void textUndoLevelAdded();
       void enterState();
@@ -351,6 +359,9 @@ class ScoreView : public QWidget {
       const QRectF& getGrip(int n) const { return grip[n]; }
       int gripCount() const { return grips; }              // number of used grips
       void changeEditElement(Element*);
+
+      void cmdAppendMeasures(int, ElementType);
+      void cmdInsertMeasures(int, ElementType);
       };
 
 //---------------------------------------------------------

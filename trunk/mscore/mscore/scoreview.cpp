@@ -65,6 +65,7 @@
 #include "shadownote.h"
 #include "sym.h"
 #include "lasso.h"
+#include "box.h"
 
 //---------------------------------------------------------
 //   stateNames
@@ -860,17 +861,16 @@ void ScoreView::objectPopup(const QPoint& pos, Element* obj)
       QMenu* popup = new QMenu(this);
       popup->setSeparatorsCollapsible(true);
 
-      QAction* a = popup->addAction(obj->userName());
-      a->setEnabled(false);
-
+      popup->addAction(obj->userName());
+      popup->addSeparator();
       popup->addAction(getAction("cut"));
       popup->addAction(getAction("copy"));
       popup->addAction(getAction("paste"));
-      popup->addSeparator();
+
       QMenu* selMenu = popup->addMenu(tr("Select"));
       selMenu->addAction(getAction("select-similar"));
       selMenu->addAction(getAction("select-similar-staff"));
-      a = selMenu->addAction(tr("More..."));
+      QAction* a = selMenu->addAction(tr("More..."));
       a->setData("select-dialog");
       popup->addSeparator();
       obj->genPropertyMenu(popup);
@@ -1153,7 +1153,7 @@ void ScoreView::startEdit()
             mscore->textTools()->setCharFormat(t->getCursor()->charFormat());
             mscore->textTools()->setBlockFormat(t->getCursor()->blockFormat());
             textUndoLevel = 0;
-            connect(t->doc(), SIGNAL(undoCommandAdded()), this, SLOT(textUndoLevelAdded()));
+            connect(t->doc(), SIGNAL(undoCommandAdded()), SLOT(textUndoLevelAdded()));
             }
       else if (origEditObject->isSegment()) {
             origEditObject->resetMode();
@@ -1431,7 +1431,10 @@ void ScoreView::paint(const QRect& rr, QPainter& p)
       if (dropRectangle.isValid())
             p.fillRect(dropRectangle, QColor(80, 0, 0, 80));
 
-      if (_editText) {
+      //
+      // frame text in edit mode, except for text in a text frame
+      //
+      if (_editText && !(_editText->parent() && _editText->parent()->type() == TBOX)) {
             QRectF r = _editText->pageRectangle(); // abbox();
 //            qreal w = 6.0 / matrix().m11();   // 6 pixel border
 //            r.adjust(-w, -w, w, w);
@@ -2767,6 +2770,28 @@ void ScoreView::cmd(const QAction* a)
                   s = s->parentScore();
             s->createRevision();
             }
+      else if (cmd == "append-measure")
+            cmdAppendMeasures(1, MEASURE);
+      else if (cmd == "insert-measure")
+	      cmdInsertMeasures(1, MEASURE);
+      else if (cmd == "insert-hbox")
+	      cmdInsertMeasures(1, HBOX);
+      else if (cmd == "insert-vbox")
+	      cmdInsertMeasures(1, VBOX);
+      else if (cmd == "append-hbox") {
+	      MeasureBase* mb = appendMeasure(HBOX);
+            _score->select(mb, SELECT_SINGLE, 0);
+            }
+      else if (cmd == "append-vbox") {
+	      MeasureBase* mb = appendMeasure(VBOX);
+            _score->select(mb, SELECT_SINGLE, 0);
+            }
+      else if (cmd == "insert-textframe")
+            cmdInsertMeasure(TBOX);
+      else if (cmd == "append-textframe")
+            appendMeasure(TBOX);
+      else if (cmd == "insert-fretframe")
+            cmdInsertMeasure(FBOX);
       else
             _score->cmd(a);
       _score->processMidiInput();

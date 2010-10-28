@@ -245,10 +245,10 @@ void setDefaultStyle()
       AS(TextStyle(TR("Poet"), ff, 12, false, false, false,
          ALIGN_LEFT | ALIGN_BOTTOM));
 
-      AS(TextStyle(TR( "Lyrics odd lines"), ff, 11, false, false, false,
+      AS(TextStyle(TR("Lyrics odd lines"), ff, 11, false, false, false,
          ALIGN_HCENTER | ALIGN_TOP, 0, 7, OS, 0.0, 0.0, true));
 
-      AS(TextStyle(TR( "Lyrics even lines"), ff, 11, false, false, false,
+      AS(TextStyle(TR("Lyrics even lines"), ff, 11, false, false, false,
          ALIGN_HCENTER | ALIGN_TOP, 0, 7, OS, 0.0, 0.0, true));
 
       AS(TextStyle(TR( "Fingering"), ff,  8, false, false, false,
@@ -305,8 +305,7 @@ void setDefaultStyle()
       AS(TextStyle(TR( "Volta"), ff, 11, true, false, false,
          ALIGN_LEFT, 0.5, .0, OS, 0, 0, true));
 
-      AS(TextStyle(TR( "Frame"), ff, 11, true, false, false,
-         ALIGN_LEFT, 0, 0, OS, 0, 0, true));
+      AS(TextStyle(TR( "Frame"), ff, 12, false, false, false, ALIGN_LEFT | ALIGN_TOP));
 
       AS(TextStyle(TR( "TextLine"), ff,  12, false, false, false,
          ALIGN_LEFT | ALIGN_VCENTER, 0, 0, OS, 0, 0, true));

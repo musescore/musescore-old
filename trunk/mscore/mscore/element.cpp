@@ -77,6 +77,7 @@
 #include "chordline.h"
 #include "undo.h"
 #include "segment.h"
+#include "box.h"
 
 extern bool debugMode;
 extern bool showInvisible;
@@ -156,6 +157,8 @@ static const char* elementNames[] = {
       QT_TRANSLATE_NOOP("elementName", "Layout"),
       QT_TRANSLATE_NOOP("elementName", "HBox"),
       QT_TRANSLATE_NOOP("elementName", "VBox"),
+      QT_TRANSLATE_NOOP("elementName", "TBox"),
+      QT_TRANSLATE_NOOP("elementName", "FBox"),
       QT_TRANSLATE_NOOP("elementName", "Icon"),
       QT_TRANSLATE_NOOP("elementName", "AccidentalBracket")
       };
@@ -1269,6 +1272,10 @@ Element* Element::create(ElementType type, Score* score)
             case SLUR:              return new Slur(score);
             case ACCIDENTAL_BRACKET: return new AccidentalBracket(score);
             case FINGERING:          return new Fingering(score);
+            case HBOX:              return new HBox(score);
+            case VBOX:              return new VBox(score);
+            case TBOX:              return new TBox(score);
+            case FBOX:              return new FBox(score);
 
             case SLUR_SEGMENT:
             case STEM_SLASH:
@@ -1300,8 +1307,6 @@ Element* Element::create(ElementType type, Score* score)
             case STAFF_LIST:
             case MEASURE_LIST:
             case LAYOUT:
-            case HBOX:
-            case VBOX:
             case MAXTYPE:
             case INVALID:  break;
             }
@@ -1390,6 +1395,8 @@ const char* Element::name(ElementType type)
             case LAYOUT:            return "Layout";
             case HBOX:              return "HBox";
             case VBOX:              return "VBox";
+            case TBOX:              return "TBox";
+            case FBOX:              return "FBox";
             case ICON:              return "Icon";
             case ACCIDENTAL_BRACKET: return "AccidentalBracket";
             case INVALID:

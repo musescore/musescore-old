@@ -41,6 +41,7 @@ class Box : public MeasureBase {
       double _leftMargin, _rightMargin;   // values in metric mm
       double _topMargin, _bottomMargin;
       bool editMode;
+      qreal dragX;            // used during drag of hbox
 
    public:
       Box(Score*);
@@ -113,6 +114,40 @@ class VBox : public Box {
 
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(ScoreView*, const QString&);
+      };
+
+//---------------------------------------------------------
+//   TBox
+//---------------------------------------------------------
+
+class TBox : public VBox {
+      Q_DECLARE_TR_FUNCTIONS(TBox)
+
+   public:
+      TBox(Score* score) : VBox(score) {}
+      ~TBox() {}
+      virtual TBox* clone() const      { return new TBox(*this); }
+      virtual ElementType type() const { return TBOX;       }
+
+      virtual void layout();
+      virtual void add(Element*);
+      };
+
+//---------------------------------------------------------
+//   FBox
+//    frame containing fret diagrams
+//---------------------------------------------------------
+
+class FBox : public VBox {
+      Q_DECLARE_TR_FUNCTIONS(FBox)
+
+   public:
+      FBox(Score* score) : VBox(score) {}
+      ~FBox() {}
+      virtual FBox* clone() const      { return new FBox(*this); }
+      virtual ElementType type() const { return FBOX;       }
+
+      virtual void layout();
       };
 
 #endif

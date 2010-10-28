@@ -137,7 +137,7 @@ void InsertMeasuresDialog::accept()
       {
 	int n = insmeasures->value();
 	if (mscore->currentScore())
-            mscore->currentScore()->cmdInsertMeasures(n);
+            mscore->currentScoreView()->cmdInsertMeasures(n, MEASURE);
 	done(1);
       }
 
@@ -1380,7 +1380,7 @@ void MeasuresDialog::accept()
 	{
 	int n = measures->value();
       if (mscore->currentScore())
-            mscore->currentScore()->cmdAppendMeasures(n);
+            mscore->currentScoreView()->cmdAppendMeasures(n, MEASURE);
       done(1);
 	}
 

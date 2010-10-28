@@ -1,4 +1,8 @@
+28.oct (ws)
+      - initial implementation of textframe object
 27.oct (ws)
+      - added stubs for "Text Frame" and "Fret Diagram Frame" elements
+      - splitted "Measures" menu into "Measures" and "Frames"
       - fixes for frames (fixes save/restore of "schnee.mscz" example)
       - show anchor while dragging repeats
       - fix layout of repeats

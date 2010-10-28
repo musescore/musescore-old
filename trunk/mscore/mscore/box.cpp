@@ -182,7 +182,7 @@ void Box::write(Xml& xml) const
 
 void Box::read(QDomElement e)
       {
-      if (score()->mscVersion() < 119)
+//      if (score()->mscVersion() < 119)
             _leftMargin = _rightMargin = _topMargin = _bottomMargin = 0.0;
 
       double _spatium = spatium();
@@ -263,7 +263,6 @@ void Box::read(QDomElement e)
             else if (!Element::readProperties(e))
                   domError(e);
             }
-      adjustReadPos();
       }
 
 //---------------------------------------------------------
@@ -302,7 +301,6 @@ void Box::add(Element* e)
             static_cast<Image*>(e)->reference();
       }
 
-
 //---------------------------------------------------------
 //   layout
 //---------------------------------------------------------
@@ -314,13 +312,15 @@ void HBox::layout()
             double x = vb->leftMargin() * DPMM;
             double y = vb->topMargin() * DPMM;
             double w = point(boxWidth());
-            double h = vb->height() - vb->topMargin() * DPMM - vb->bottomMargin() * DPMM;
+            double h = vb->height() - (vb->topMargin() + vb->bottomMargin()) * DPMM;
             setPos(x, y);
             setbbox(QRectF(0.0, 0.0, w, h));
             }
       else {
+            setPos(0.0, 0.0);
             setbbox(QRectF(0.0, 0.0, point(boxWidth()), system()->height()));
             }
+      adjustReadPos();
       }
 
 //---------------------------------------------------------
@@ -435,8 +435,20 @@ void HBox::propertyAction(ScoreView* viewer, const QString& cmd)
 
 QRectF HBox::drag(const QPointF& pos)
       {
+      QPointF delta(pos - startDragPosition());
       QRectF r(abbox());
-      setUserOff(QPointF(pos.x(), 0.0));
+      qreal diff = delta.x();
+      qreal x1   = userOff().x() + diff;
+      if (parent()->type() == VBOX) {
+            VBox* vb = static_cast<VBox*>(parent());
+            qreal x2 = parent()->width() - width() - (vb->leftMargin() + vb->rightMargin()) * DPMM;
+            if (x1 < 0.0)
+                  x1 = 0.0;
+            else if (x1 > x2)
+                  x1 = x2;
+            }
+      setUserOff(QPointF(x1, 0.0));
+      setStartDragPosition(pos);
       return abbox() | r;
       }
 
@@ -566,3 +578,59 @@ void VBox::layout()
       setbbox(QRectF(0.0, 0.0, system()->width(), point(boxHeight())));
       Box::layout();
       }
+
+//---------------------------------------------------------
+//   layout
+///   The text box layout() adjusts the frame height to text
+///   height.
+//---------------------------------------------------------
+
+void TBox::layout()
+      {
+      setPos(QPointF());      // !?
+      setbbox(QRectF(0.0, 0.0, system()->width(), point(boxHeight())));
+      if (_el.size() == 1) {
+            Text* text = static_cast<Text*>(_el[0]);
+            if (text->type() != TEXT)
+                  return;
+            text->layout();
+            qreal h;
+            if (text->isEmpty()) {
+                  QFontMetricsF fm(text->font());
+                  h = fm.lineSpacing();
+                  }
+            else
+                  h = text->height();
+            setbbox(QRectF(0.0, 0.0, system()->width(), h));
+            }
+      }
+
+//---------------------------------------------------------
+//   add
+///   Add new Element \a el to Box
+//---------------------------------------------------------
+
+void TBox::add(Element* e)
+      {
+      e->setParent(this);
+      if (e->type() == TEXT) {
+            Text* text = static_cast<Text*>(e);
+            text->setLayoutToParentWidth(true);
+            text->setFlag(ELEMENT_MOVABLE, false);
+            }
+      _el.append(e);
+      if (e->type() == IMAGE)
+            static_cast<Image*>(e)->reference();
+      }
+
+//---------------------------------------------------------
+//   layout
+//---------------------------------------------------------
+
+void FBox::layout()
+      {
+      setPos(QPointF());      // !?
+      setbbox(QRectF(0.0, 0.0, system()->width(), point(boxHeight())));
+      Box::layout();
+      }
+
