@@ -390,8 +390,6 @@ class Score : public QObject {
       QList<Slur*> slurs;
 
       void rebuildBspTree();
-      void cmdAppendMeasures(int);
-      void cmdInsertMeasures(int);
       bool noStaves() const         { return _staves.empty(); }
       void insertPart(Part*, int);
       void removePart(Part*);
@@ -399,7 +397,6 @@ class Score : public QObject {
       void cmdRemoveStaff(int staffIdx);
       void removeStaff(Staff*);
       void addMeasure(MeasureBase*);
-      void appendMeasures(int, int);
       void readStaff(QDomElement);
 
       void cmdInsertPart(Part*, int);
@@ -661,7 +658,6 @@ class Score : public QObject {
       int mscVersion() const    { return _mscVersion; }
       void setMscVersion(int v) { _mscVersion = v; }
 
-      MeasureBase* appendMeasure(int type);
       void addLyrics(int tick, int staffIdx, const QString&);
 
       QList<Excerpt*>* excerpts()  { return &_excerpts; }
@@ -761,7 +757,7 @@ class Score : public QObject {
       Lyrics* addLyrics();
       void expandVoice();
       Note* addPitch(int pitch, bool addFlag);
-      void insertMeasures(int, int);
+
       int customKeySigIdx(KeySig*) const;
       int addCustomKeySig(KeySig*);
       KeySig* customKeySig(int) const;
@@ -772,9 +768,9 @@ class Score : public QObject {
       void cmdEnterRest(const Duration& d);
       void cmdAddInterval(int, const QList<Note*>&);
       void cmdCreateTuplet(ChordRest*, Tuplet*);
-      Omr* omr() const        { return _omr;     }
-      bool showOmr() const    { return _showOmr; }
-      void setShowOmr(bool v) { _showOmr = v;    }
+      Omr* omr() const                         { return _omr;     }
+      bool showOmr() const                     { return _showOmr; }
+      void setShowOmr(bool v)                  { _showOmr = v;    }
       void enqueueMidiEvent(MidiInputEvent ev) { midiInputQueue.enqueue(ev); }
       void doLayout();
       void layoutChords1(Segment* segment, int staffIdx);
@@ -808,7 +804,8 @@ class Score : public QObject {
       void cmdUpdateNotes();
       void updateAccidentals(Measure* m, int staffIdx);
       QHash<int, LinkedElements*>& links();
-
+      void appendMeasures(int, ElementType);
+      MeasureBase* appendMeasure(ElementType type);
       };
 
 extern Score* gscore;

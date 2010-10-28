@@ -932,7 +932,8 @@ bool Score::layoutPage()
       while (curMeasure) {
             double h;
             QList<System*> sl;
-            if (curMeasure->type() == VBOX) {
+            ElementType t = curMeasure->type();
+            if (t == VBOX || t == TBOX || t == FBOX) {
                   System* system = getNextSystem(false, true);
 
                   foreach(SysStaff* ss, *system->staves())
@@ -1187,11 +1188,12 @@ bool Score::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
 
             minWidth += ww;
             system->measures().append(curMeasure);
+            ElementType nt = curMeasure->next() ? curMeasure->next()->type() : INVALID;
             int n = styleI(ST_FixMeasureNumbers);
             if ((n && system->measures().size() >= n)
                || continueFlag || curMeasure->pageBreak()
                || curMeasure->lineBreak()
-               || (curMeasure->next() && curMeasure->next()->type() == VBOX)) {
+               || (nt == VBOX || nt == TBOX || nt == FBOX)) {
                   system->setPageBreak(curMeasure->pageBreak());
                   curMeasure = nextMeasure;
                   break;
@@ -1662,6 +1664,8 @@ void Score::add(Element* el)
             case MEASURE:
             case HBOX:
             case VBOX:
+            case TBOX:
+            case FBOX:
                   measures()->add((MeasureBase*)el);
                   break;
             case BEAM:
@@ -1691,6 +1695,8 @@ void Score::remove(Element* el)
             case MEASURE:
             case HBOX:
             case VBOX:
+            case TBOX:
+            case FBOX:
                   measures()->remove(static_cast<MeasureBase*>(el));
                   break;
             case BEAM:

@@ -69,6 +69,54 @@ extern qreal DPI;       // logical drawing resolution
 extern qreal DPMM;      // logical dots/mm
 
 //---------------------------------------------------------
+//   ElementType
+//    The value of this enum determines the "stacking order" the elements are
+//    put on the canvas.
+//---------------------------------------------------------
+
+enum ElementType {
+      INVALID = -1,
+      SYMBOL  = 0,
+      TEXT, SLUR_SEGMENT, BAR_LINE,
+      STEM_SLASH, LINE, BRACKET,
+      ARPEGGIO,
+      ACCIDENTAL, NOTE,
+      STEM,
+      CLEF, KEYSIG, TIMESIG, REST,
+      BREATH, GLISSANDO,
+      REPEAT_MEASURE,
+      IMAGE,
+/*19*/TIE,
+      ARTICULATION, CHORDLINE, DYNAMIC, BEAM, HOOK, LYRICS, MARKER, JUMP,
+      FINGERING,
+      TUPLET,
+/*30*/TEMPO_TEXT,
+      STAFF_TEXT,
+      HARMONY, FRET_DIAGRAM, BEND, TREMOLOBAR,
+      VOLTA,
+      HAIRPIN_SEGMENT, OTTAVA_SEGMENT, TRILL_SEGMENT, TEXTLINE_SEGMENT,
+      VOLTA_SEGMENT,
+      LAYOUT_BREAK, SPACER, STAFF_STATE,
+      LEDGER_LINE,
+      NOTEHEAD, NOTEDOT, TREMOLO,
+      MEASURE, STAFF_LINES,
+      CURSOR, SELECTION, LASSO, SHADOW_NOTE, RUBBERBAND,
+
+      PAGE,
+
+      // not drawable elements:
+      HAIRPIN, OTTAVA, PEDAL, TRILL, TEXTLINE,
+      SEGMENT, SYSTEM, COMPOUND, CHORD, SLUR,
+
+      // special types for drag& drop:
+      ELEMENT, ELEMENT_LIST, STAFF_LIST, MEASURE_LIST, LAYOUT,
+      HBOX, VBOX, TBOX, FBOX,
+      ICON,
+      ACCIDENTAL_BRACKET,
+      MAXTYPE
+      };
+
+//---------------------------------------------------------
 //   NoteHeadGroup
 //---------------------------------------------------------
 

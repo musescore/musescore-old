@@ -803,10 +803,14 @@ QMenu* MuseScore::genCreateMenu(QWidget* parent)
       measures->addAction(getAction("append-measures"));
       measures->addAction(getAction("insert-measure"));
       measures->addAction(getAction("insert-measures"));
-      measures->addAction(getAction("insert-hbox"));
-      measures->addAction(getAction("insert-vbox"));
-      measures->addAction(getAction("append-hbox"));
-      measures->addAction(getAction("append-vbox"));
+      QMenu* frames = popup->addMenu(tr("Frames"));
+      frames->addAction(getAction("insert-hbox"));
+      frames->addAction(getAction("insert-vbox"));
+      frames->addAction(getAction("append-hbox"));
+      frames->addAction(getAction("append-vbox"));
+      frames->addAction(getAction("insert-textframe"));
+      frames->addAction(getAction("append-textframe"));
+      frames->addAction(getAction("insert-fretframe"));
 
       popup->addAction(tr("Barlines..."),        this, SLOT(barMenu()));
       popup->addAction(getAction("clefs"));

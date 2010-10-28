@@ -523,13 +523,13 @@ int System::y2staff(qreal y) const
 void System::add(Element* el)
       {
       el->setParent(this);
-      if (el->type() == TEXT && (el->subtype() == TEXT_INSTRUMENT_LONG || el->subtype() == TEXT_INSTRUMENT_SHORT)) {
+      ElementType et = el->type();
+      if (et == TEXT && (el->subtype() == TEXT_INSTRUMENT_LONG || el->subtype() == TEXT_INSTRUMENT_SHORT)) {
             _staves[el->staffIdx()]->instrumentName = static_cast<Text*>(el);
             }
-      else if (el->type() == BEAM)
+      else if (et == BEAM)
             score()->add(el);
-      else if (el->type() == BRACKET) {
-printf("add bracket\n");
+      else if (et == BRACKET) {
             SysStaff* ss = _staves[el->staffIdx()];
             Bracket* b   = static_cast<Bracket*>(el);
             int level    = b->level();
@@ -551,7 +551,7 @@ printf("add bracket\n");
             b->staff()->setBracket(level,   b->subtype());
             b->staff()->setBracketSpan(level, b->span());
             }
-      else if (el->type() == MEASURE || el->type() == HBOX || el->type() == VBOX)
+      else if (et == MEASURE || et == HBOX || et == VBOX || et == TBOX || et == FBOX)
             score()->addMeasure((MeasureBase*)el);
       else
             printf("System::add(%s) not implemented\n", el->name());
@@ -563,12 +563,13 @@ printf("add bracket\n");
 
 void System::remove(Element* el)
       {
-      if (el->type() == TEXT && (el->subtype() == TEXT_INSTRUMENT_LONG || el->subtype() == TEXT_INSTRUMENT_SHORT)) {
+      ElementType et = el->type();
+      if (et == TEXT && (el->subtype() == TEXT_INSTRUMENT_LONG || el->subtype() == TEXT_INSTRUMENT_SHORT)) {
             _staves[el->staffIdx()]->instrumentName = 0;
             }
-      else if (el->type() == BEAM)
+      else if (et == BEAM)
             score()->remove(el);
-      else if (el->type() == BRACKET) {
+      else if (et == BRACKET) {
             SysStaff* staff = _staves[el->staffIdx()];
             for (int i = 0; i < staff->brackets.size(); ++i) {
                   if (staff->brackets[i] == el) {
@@ -580,7 +581,7 @@ void System::remove(Element* el)
                   }
             printf("internal error: bracket not found\n");
             }
-      else if (el->type() == MEASURE || el->type() == HBOX || el->type() == VBOX)
+      else if (et == MEASURE || et == HBOX || et == VBOX || et == TBOX || et == FBOX)
             score()->remove(el);
       else
             printf("System::remove(%s) not implemented\n", el->name());
@@ -592,7 +593,7 @@ void System::remove(Element* el)
 
 void System::change(Element* o, Element* n)
       {
-      if (o->type() == VBOX || o->type() == HBOX) {
+      if (o->type() == VBOX || o->type() == HBOX || o->type() == TBOX || o->type() == FBOX) {
             score()->remove((MeasureBase*)o);
             score()->add((MeasureBase*)n);
             }

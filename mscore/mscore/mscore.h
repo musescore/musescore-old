@@ -189,7 +189,7 @@ class MuseScore : public QMainWindow {
       UpdateChecker* ucheck;
       QList<Score*> scoreList;
       Score* cs;              // current score
-      ScoreView* cv;             // current viewer
+      ScoreView* cv;          // current viewer
 
       QVBoxLayout* layout;    // main window layout
       QSplitter* splitter;
@@ -383,7 +383,10 @@ class MuseScore : public QMainWindow {
 	    void cmdAppendMeasures(int);
       bool midiinEnabled() const;
       bool playEnabled() const;
-      Score* currentScore() const { return cs; }
+
+      Score* currentScore() const         { return cs; }
+      ScoreView* currentScoreView() const { return cv; }
+
       static Shortcut sc[];
       static Shortcut scSeq[];
       void incMag();
@@ -419,7 +422,6 @@ class MuseScore : public QMainWindow {
       DrumrollEditor* getDrumrollEditor() const   { return drumrollEditor; }
       void writeSessionFile(bool);
       bool restoreSession(bool);
-      ScoreView* currentScoreView() const { return cv; }
       bool splitScreen() const { return _splitScreen; }
       void setCurrentView(int tabIdx, int idx);
       void loadPlugins();
