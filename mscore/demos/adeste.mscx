@@ -5,7 +5,7 @@
 </programRevision>
   <Score>
     <SyntiSettings>
-      <s name="SoundFont" val="/home/ws/sfont/FluidR3.SF2"/>
+      <s name="soundfont" val="/home/ws/sfont/FluidR3.SF2"/>
       <f name="RevRoomsize" val="0.84"/>
       <f name="RevDamp" val="0.2"/>
       <f name="RevWidth" val="1"/>

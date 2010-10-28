@@ -31,6 +31,7 @@
 #include "system.h"
 #include "image.h"
 #include "layoutbreak.h"
+#include "fret.h"
 
 static const double BOX_MARGIN = 0.0;
 
@@ -607,7 +608,7 @@ void TBox::layout()
 
 //---------------------------------------------------------
 //   add
-///   Add new Element \a el to Box
+///   Add new Element \a e to text box
 //---------------------------------------------------------
 
 void TBox::add(Element* e)
@@ -618,9 +619,11 @@ void TBox::add(Element* e)
             text->setLayoutToParentWidth(true);
             text->setFlag(ELEMENT_MOVABLE, false);
             }
+      else {
+            printf("TBox::add: element not allowed\n");
+            return;
+            }
       _el.append(e);
-      if (e->type() == IMAGE)
-            static_cast<Image*>(e)->reference();
       }
 
 //---------------------------------------------------------
@@ -632,5 +635,24 @@ void FBox::layout()
       setPos(QPointF());      // !?
       setbbox(QRectF(0.0, 0.0, system()->width(), point(boxHeight())));
       Box::layout();
+      }
+
+//---------------------------------------------------------
+//   add
+///   Add new Element \a e to fret diagram box
+//---------------------------------------------------------
+
+void FBox::add(Element* e)
+      {
+      e->setParent(this);
+      if (e->type() == FRET_DIAGRAM) {
+            FretDiagram* fd = static_cast<FretDiagram*>(e);
+            fd->setFlag(ELEMENT_MOVABLE, false);
+            }
+      else {
+            printf("FBox::add: element not allowed\n");
+            return;
+            }
+      _el.append(e);
       }
 

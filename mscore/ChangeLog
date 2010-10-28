@@ -1,4 +1,6 @@
 28.oct (ws)
+      - fix tempo changes (worked only after reloading score), now also works
+        with undo/redo
       - initial implementation of textframe object
 27.oct (ws)
       - added stubs for "Text Frame" and "Fret Diagram Frame" elements

@@ -308,14 +308,12 @@ int Articulation::name2idx(const QString& s)
 
 QPointF Articulation::canvasPos() const
       {
-      if (parent() == 0)
+      if (parent() == 0 || parent()->parent() == 0)
             return pos();
       double xp = x();
       for (Element* e = parent(); e; e = e->parent())
             xp += e->x();
       ChordRest* cr = chordRest();
-      if (cr == 0 || cr->parent() == 0)
-            return pos();
       Measure* m = cr->measure();
       if (m == 0)
             return pos();

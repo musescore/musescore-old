@@ -1844,44 +1844,60 @@ void Score::addElement(Element* element)
 
       if (element->parent() == 0)
             add(element);
-      else {
+      else
             element->parent()->add(element);
-            }
-
-      if (element->type() == SLUR) {
-            Slur* s = static_cast<Slur*>(element);
-            if (s->startElement())
-                  static_cast<ChordRest*>(s->startElement())->addSlurFor(s);
-            if (s->endElement())
-                  static_cast<ChordRest*>(s->endElement())->addSlurBack(s);
-            }
-      else if (element->type() == OTTAVA) {
-            Ottava* o = static_cast<Ottava*>(element);
-            Staff* s  = o->staff();
-            if (o->startElement()) {
-                  int tick = static_cast<Segment*>(o->startElement())->tick();
-                  s->pitchOffsets().setPitchOffset(tick, o->pitchShift());
+      switch(element->type()) {
+            case SLUR:
+                  {
+                  Slur* s = static_cast<Slur*>(element);
+                  if (s->startElement())
+                        static_cast<ChordRest*>(s->startElement())->addSlurFor(s);
+                  if (s->endElement())
+                        static_cast<ChordRest*>(s->endElement())->addSlurBack(s);
                   }
-            if (o->endElement()) {
-                  int tick = static_cast<Segment*>(o->endElement())->tick();
-                  s->pitchOffsets().setPitchOffset(tick, 0);
+                  break;
+            case OTTAVA:
+                  {
+                  Ottava* o = static_cast<Ottava*>(element);
+                  Staff* s  = o->staff();
+                  if (o->startElement()) {
+                        int tick = static_cast<Segment*>(o->startElement())->tick();
+                        s->pitchOffsets().setPitchOffset(tick, o->pitchShift());
+                        }
+                  if (o->endElement()) {
+                        int tick = static_cast<Segment*>(o->endElement())->tick();
+                        s->pitchOffsets().setPitchOffset(tick, 0);
+                        }
+                  layoutFlags |= LAYOUT_FIX_PITCH_VELO;
+                  _playlistDirty = true;
                   }
-            layoutFlags |= LAYOUT_FIX_PITCH_VELO;
-            _playlistDirty = true;
+                  break;
+            case DYNAMIC:
+                  layoutFlags |= LAYOUT_FIX_PITCH_VELO;
+                  _playlistDirty = true;
+                  break;
+            case CLEF:
+                  {
+                  Clef* clef       = static_cast<Clef*>(element);
+                  Segment* segment = clef->segment();
+                  Staff* staff     = clef->staff();
+                  staff->setClef(segment->tick(), clef->clefType());
+                  updateNoteLines(segment, clef->track());
+                  }
+                  break;
+            case KEYSIG:
+                  element->staff()->setUpdateKeymap(true);
+                  break;
+            case TEMPO_TEXT:
+                  {
+                  TempoText* tt = static_cast<TempoText*>(element);
+                  int tick = tt->segment()->tick();
+                  _tempomap->addTempo(tick, AL::TEvent(tt->tempo()));
+                  }
+                  break;
+            default:
+                  break;
             }
-      else if (element->type() == DYNAMIC) {
-            layoutFlags |= LAYOUT_FIX_PITCH_VELO;
-            _playlistDirty = true;
-            }
-      else if (element->type() == CLEF) {
-            Clef* clef       = static_cast<Clef*>(element);
-            Segment* segment = clef->segment();
-            Staff* staff     = clef->staff();
-            staff->setClef(segment->tick(), clef->clefType());
-            updateNoteLines(segment, clef->track());
-            }
-      else if (element->type() == KEYSIG)
-            element->staff()->setUpdateKeymap(true);
       setLayoutAll(true);
       }
 
@@ -1959,18 +1975,28 @@ void Score::removeElement(Element* element)
                   static_cast<ChordRest*>(s->endElement())->removeSlurBack(s);
                   }
                   break;
+            case CLEF:
+                  {
+                  Clef* clef       = static_cast<Clef*>(element);
+                  Segment* segment = clef->segment();
+                  Staff* staff     = clef->staff();
+                  staff->clefList()->erase(segment->tick());
+                  updateNoteLines(segment, clef->track());
+                  }
+                  break;
+            case KEYSIG:
+                  element->staff()->setUpdateKeymap(true);
+                  break;
+            case TEMPO_TEXT:
+                  {
+                  TempoText* tt = static_cast<TempoText*>(element);
+                  int tick = tt->segment()->tick();
+                  _tempomap->delTempo(tick);
+                  }
+                  break;
             default:
                   break;
             }
-      if (element->type() == CLEF) {
-            Clef* clef       = static_cast<Clef*>(element);
-            Segment* segment = clef->segment();
-            Staff* staff     = clef->staff();
-            staff->clefList()->erase(segment->tick());
-            updateNoteLines(segment, clef->track());
-            }
-      else if (element->type() == KEYSIG)
-            element->staff()->setUpdateKeymap(true);
       setLayoutAll(true);
       }
 

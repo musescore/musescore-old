@@ -68,6 +68,7 @@
 #include "noteevent.h"
 #include "slur.h"
 #include "excerpt.h"
+#include "tempotext.h"
 
 extern Measure* tick2measure(int tick);
 
@@ -1564,7 +1565,11 @@ void ChangeElement::flip()
             newElement->staff()->setUpdateKeymap(true);
       else if (newElement->type() == DYNAMIC)
             newElement->score()->addLayoutFlags(LAYOUT_FIX_PITCH_VELO);
-      score->setLayoutAll(true);
+      else if (newElement->type() == TEMPO_TEXT) {
+            TempoText* t = static_cast<TempoText*>(oldElement);
+            int tick = t->segment()->tick();
+            score->tempomap()->changeTempo(tick, t->tempo());
+            }
       }
 
 //---------------------------------------------------------
