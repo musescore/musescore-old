@@ -525,13 +525,13 @@ void MuseScore::populatePalette()
       sp->setMag(1.3);
       sp->setGrid(33, 36);
       sp->setDrawGrid(true);
+
       for (int i = 0; i < HEAD_GROUPS; ++i) {
             int sym = noteHeads[0][i][1];
             NoteHead* nh = new NoteHead(gscore);
             nh->setSym(sym);
             sp->append(nh, qApp->translate("symbol", symbols[0][sym].name()));
             }
-
       paletteBox->addPalette(sp);
 
       //-----------------------------------
@@ -1216,14 +1216,13 @@ void Score::addTempo()
       int rv = editTempo->exec();
       if (rv == 1) {
             double bps = editTempo->bpm() / 60.0;
-            tempomap()->addTempo(cr->tick(), bps);
             TempoText* tt = new TempoText(this);
             tt->setParent(cr->segment());
             tt->setTrack(cr->track());
             tt->setText(editTempo->text());
             tt->setTempo(bps);
             undoAddElement(tt);
-            refresh |= tt->abbox();
+            refresh |= tt->abbox(); // ??
             }
       }
 

@@ -148,6 +148,7 @@ class FBox : public VBox {
       virtual ElementType type() const { return FBOX;       }
 
       virtual void layout();
+      void add(Element*);
       };
 
 #endif
