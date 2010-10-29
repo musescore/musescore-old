@@ -581,7 +581,11 @@ void Chord::addLedgerLine(double x, int staffIdx, int line, int lr)
       h->setTrack(staffIdx * VOICES);
       h->setVisible(!staff()->invisible());
 
-      Spatium len(h->len());
+      // ledger lines extend less than half a space on each side
+      // of the notehead:
+      //
+      double ll = _notes[0]->headWidth() + _spatium * .95;
+      Spatium len(ll / _spatium);
 
       if (_noteType != NOTE_NORMAL)
             len *= score()->style(ST_graceNoteMag).toDouble();
@@ -1066,7 +1070,6 @@ LedgerLine::LedgerLine(Score* s)
    : Line(s, false)
       {
       setSelectable(false);
-      setLen(Spatium(2.0));
       }
 
 //---------------------------------------------------------
