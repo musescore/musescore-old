@@ -587,16 +587,38 @@ NewWizardPage5::NewWizardPage5(QWidget* parent)
    : QWizardPage(parent)
       {
       setTitle(tr("Create New Score"));
-      setSubTitle(tr("Select Key Signature:"));
+      setSubTitle(tr("Select Key Signature and Tempo:"));
 
+      QGroupBox* b1 = new QGroupBox;
+      b1->setTitle(tr("Key Signature"));
       sp = newKeySigPalette();
       sp->setSelectable(true);
       sp->setSelected(14);
       PaletteScrollArea* sa = new PaletteScrollArea(sp);
+      QVBoxLayout* l1 = new QVBoxLayout;
+      l1->addWidget(sa);
+      b1->setLayout(l1);
 
-      QVBoxLayout* layout = new QVBoxLayout;
-      layout->addWidget(sa);
-      setLayout(layout);
+      tempoGroup = new QGroupBox;
+      tempoGroup->setCheckable(true);
+      tempoGroup->setChecked(true);
+      tempoGroup->setTitle(tr("Tempo"));
+      QLabel* bpm = new QLabel;
+      bpm->setText(tr("BPM:"));
+      _tempo = new QDoubleSpinBox;
+      _tempo->setRange(20.0, 400.0);
+      _tempo->setValue(100.0);
+      QHBoxLayout* l2 = new QHBoxLayout;
+      l2->addWidget(bpm);
+      l2->addWidget(_tempo);
+      l2->addStretch(100);
+      tempoGroup->setLayout(l2);
+
+      QVBoxLayout* l3 = new QVBoxLayout;
+      l3->addWidget(b1);
+      l3->addWidget(tempoGroup);
+      l3->addStretch(100);
+      setLayout(l3);
       }
 
 //---------------------------------------------------------

@@ -166,11 +166,15 @@ class NewWizardPage5 : public QWizardPage {
       Q_OBJECT
 
       Palette* sp;
+      QDoubleSpinBox* _tempo;
+      QGroupBox* tempoGroup;
 
    public:
       NewWizardPage5(QWidget* parent = 0);
       virtual bool isComplete() const { return true; }
       KeySigEvent keysig() const;
+      double tempo() const            { return _tempo->value(); }
+      bool createTempo() const        { return tempoGroup->isChecked(); }
       void init();
       };
 
@@ -204,8 +208,10 @@ class NewWizard : public QWizard {
       QString composer() const           { return p1->composer();    }
       QString poet() const               { return p1->poet();        }
       QString copyright() const          { return p1->copyright();   }
-      KeySigEvent keysig() const                 { return p5->keysig();      }
+      KeySigEvent keysig() const          { return p5->keysig();      }
       bool pickupMeasure(int* z, int* n) const { return p3->pickupMeasure(z, n); }
+      double tempo() const                { return p5->tempo(); }
+      bool createTempo() const            { return p5->createTempo(); }
       };
 
 #endif
