@@ -402,7 +402,9 @@ enum TextStyleType {
       TEXT_STYLE_STAFF,
       TEXT_STYLE_HARMONY,
       TEXT_STYLE_REHEARSAL_MARK,
-      TEXT_STYLE_REPEAT,
+      TEXT_STYLE_REPEAT_LEFT,       // align to start of measure
+      TEXT_STYLE_REPEAT_RIGHT,      // align to end of measure
+      TEXT_STYLE_REPEAT,            // obsolete
       TEXT_STYLE_VOLTA,
       TEXT_STYLE_FRAME,
       TEXT_STYLE_TEXTLINE,

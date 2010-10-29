@@ -51,8 +51,16 @@ void ElementLayout::layout(Element* e) const
       double h = 0.0;
       double w = 0.0;
       if (e->parent()) {
-            o += QPointF(_reloff.x() * e->parent()->width() * 0.01, _reloff.y() * e->parent()->height() * 0.01);
-//            h = e->parent()->height();
+            double pw, ph;
+            if ((e->type() == MARKER || e->type() == JUMP) && e->parent()->parent()) {
+                  pw = e->parent()->parent()->width();      // measure width
+                  ph = e->parent()->parent()->height();
+                  }
+            else {
+                  pw = e->parent()->width();
+                  ph = e->parent()->height();
+                  }
+            o += QPointF(_reloff.x() * pw * 0.01, _reloff.y() * ph * 0.01);
             }
       bool frameText = e->type() == TEXT && static_cast<Text*>(e)->layoutToParentWidth() && e->parent();
       QPointF p;
@@ -97,14 +105,14 @@ void ElementLayout::writeProperties(Xml& xml) const
             xml.tag("valign", "top");
 
       if (_xoff != 0.0 || _yoff != 0.0) {
+            double x(_xoff);
+            double y(_yoff);
             if (offsetType() == OFFSET_ABS) {
-                  xml.tag("xoffset", xoff() * INCH);
-                  xml.tag("yoffset", yoff() * INCH);
+                  x *= INCH;
+                  y *= INCH;
                   }
-            else {
-                  xml.tag("xoffset", xoff());
-                  xml.tag("yoffset", yoff());
-                  }
+            xml.tag("xoffset", x);
+            xml.tag("yoffset", y);
             }
       if (_reloff.x() != 0.0)
             xml.tag("rxoffset", _reloff.x());
@@ -153,16 +161,36 @@ bool ElementLayout::readProperties(QDomElement e)
             else
                   printf("Text::readProperties: unknown alignment: <%s>\n", qPrintable(val));
             }
-      else if (tag == "xoffset")
-            setXoff(val.toDouble());
-      else if (tag == "yoffset")
-            setYoff(val.toDouble());
+      else if (tag == "xoffset") {
+            double xo = val.toDouble();
+            if (offsetType() == OFFSET_ABS)
+                  xo /= INCH;
+            setXoff(xo);
+            }
+      else if (tag == "yoffset") {
+            double yo = val.toDouble();
+            if (offsetType() == OFFSET_ABS)
+                  yo /= INCH;
+            setYoff(yo);
+            }
       else if (tag == "rxoffset")
             setRxoff(val.toDouble());
       else if (tag == "ryoffset")
             setRyoff(val.toDouble());
-      else if (tag == "offsetType")
-            setOffsetType((OffsetType)i);
+      else if (tag == "offsetType") {
+            OffsetType ot = (OffsetType)i;
+            if (ot != offsetType()) {
+                  setOffsetType(ot);
+                  if (ot == OFFSET_ABS) {
+                        _xoff /= INCH;
+                        _yoff /= INCH;
+                        }
+                  else {
+                        _xoff *= INCH;
+                        _yoff *= INCH;
+                        }
+                  }
+            }
       else
             return false;
       return true;
