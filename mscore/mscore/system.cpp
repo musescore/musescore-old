@@ -123,13 +123,10 @@ SysStaff* System::removeStaff(int idx)
 
 //---------------------------------------------------------
 //   layout
+///   Layout the System
 //    If first MeasureBase is a HBOX, then xo1 is the
 //    width of this box.
 //---------------------------------------------------------
-
-/**
- Layout the System.
-*/
 
 void System::layout(double xo1)
       {

@@ -269,7 +269,6 @@ void setDefaultStyle()
       AS(TextStyle(TR( "Technik"), ff, 12, false, true, false,
          ALIGN_LEFT | ALIGN_BASELINE, 0.0, -2.0, OS));
 
-/*12*/
       AS(TextStyle(TR( "Tempo"), ff, 12, true, false, false,
          ALIGN_LEFT | ALIGN_BASELINE, 0, -4.0, OS, 0, 0, true, .0, .0, 0, Qt::black, false, true));
 
@@ -298,7 +297,15 @@ void setDefaultStyle()
          ALIGN_HCENTER | ALIGN_BASELINE, 0, -3.0, OS, 0, 0, true,
          0.3, 1.0, 20, Qt::black, false, true));
 
-      AS(TextStyle(TR( "Repeat Text"), ff,  12, false, false, false,
+      AS(TextStyle(TR( "Repeat Text Left"), ff,  12, false, false, false,
+         ALIGN_LEFT | ALIGN_BASELINE, 0, -2.0, OS, 0, 0, true,
+         0.0, 0.0, 25, Qt::black, false, true));
+
+      AS(TextStyle(TR( "Repeat Text Right"), ff,  12, false, false, false,
+         ALIGN_RIGHT | ALIGN_BASELINE, 0, -2.0, OS, 100, 0, true,
+         0.0, 0.0, 25, Qt::black, false, true));
+
+      AS(TextStyle(TR( "Repeat Text"), ff,  12, false, false, false,          // for backward compatibility
          ALIGN_HCENTER | ALIGN_BASELINE, 0, -2.0, OS, 100, 0, true,
          0.0, 0.0, 25, Qt::black, false, true));
 
@@ -768,10 +775,6 @@ void TextStyleData::read(QDomElement e)
             if (!readProperties(e))
                   domError(e);
             }
-      if (offsetType() == OFFSET_ABS) {
-            setXoff(xoff() / INCH);
-            setYoff(yoff() / INCH);
-            }
       }
 
 //---------------------------------------------------------
@@ -1060,7 +1063,7 @@ const TextStyle& StyleData::textStyle(const QString& name) const
             if (s.name() == name)
                   return s;
             }
-      printf("TextStyle <%s> not found\n", qPrintable(name));
+printf("TextStyle <%s> not found\n", qPrintable(name));
       return _textStyles[0];
       }
 
@@ -1076,7 +1079,7 @@ TextStyleType StyleData::textStyleType(const QString& name) const
                   return TextStyleType(idx);
             ++idx;
             }
-      printf("TextStyle <%s> not found\n", qPrintable(name));
+printf("TextStyle <%s> not found\n", qPrintable(name));
       return TEXT_STYLE_INVALID;
       }
 

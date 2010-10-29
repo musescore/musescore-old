@@ -25,6 +25,7 @@
 #include "markerproperties.h"
 #include "system.h"
 #include "measure.h"
+#include "globals.h"
 
 //---------------------------------------------------------
 //   JumpProperties
@@ -194,26 +195,6 @@ void Marker::styleChanged()
 
 void Marker::layout()
       {
-      switch(markerType()) {
-            case MARKER_SEGNO:
-            case MARKER_CODA:
-            case MARKER_VARCODA:
-            case MARKER_CODETTA:
-                  reloff().rx() = 0.0;           // move to start of measure
-                  break;
-
-            case MARKER_FINE:
-            case MARKER_TOCODA:
-                  reloff().rx() = 100.0;         // move to end of measure
-                  break;
-
-            case MARKER_USER:
-                  break;
-
-            default:
-                  printf("unknown marker type %d\n", markerType());
-                  break;
-            }
       Text::layout();
       }
 
@@ -256,16 +237,34 @@ MarkerType Marker::markerType(const QString& s) const
 
 void Marker::read(QDomElement e)
       {
-      setAlign(0);
+      MarkerType mt;
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             if (tag == "label") {
                   setLabel(e.text());
-                  setMarkerType(markerType(e.text()));
+                  mt = markerType(e.text());
                   }
             else if (!Text::readProperties(e))
                   domError(e);
             }
+      switch(mt) {
+            case MARKER_SEGNO:
+            case MARKER_CODA:
+            case MARKER_VARCODA:
+            case MARKER_CODETTA:
+                  setTextStyle(TEXT_STYLE_REPEAT_LEFT);
+                  break;
+
+            case MARKER_FINE:
+            case MARKER_TOCODA:
+                  setTextStyle(TEXT_STYLE_REPEAT_RIGHT);
+                  break;
+
+            case MARKER_USER:
+                  setTextStyle(TEXT_STYLE_REPEAT);
+                  break;
+            }
+      setMarkerType(mt);
       }
 
 //---------------------------------------------------------
@@ -408,7 +407,6 @@ int Jump::jumpType() const
 
 void Jump::read(QDomElement e)
       {
-      setAlign(0);
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             if (tag == "jumpTo")
@@ -420,6 +418,7 @@ void Jump::read(QDomElement e)
             else if (!Text::readProperties(e))
                   domError(e);
             }
+      setTextStyle(TEXT_STYLE_REPEAT_RIGHT);
       }
 
 //---------------------------------------------------------

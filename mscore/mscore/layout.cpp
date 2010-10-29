@@ -812,7 +812,7 @@ void Score::processSystemHeader(Measure* m, bool isFirstSystem)
                         }
                   }
             bool needKeysig = keyIdx.isValid()
-               && keyIdx.accidentalType() != 0
+               /* && keyIdx.accidentalType() != 0 */
                && (isFirstSystem || styleB(ST_genKeysig))
                ;
             if (staff->useTablature())
