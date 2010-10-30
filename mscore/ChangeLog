@@ -1,3 +1,5 @@
+30.oct (lv)
+      - fix #7721: Incorrect chord duration importing MusicXML dotted notes
 29.oct (ws)
       - fix #3092: Cannot see 8th note ledger lines
       - fix #6317: ledger lines not long enough for whole notes
