@@ -3255,7 +3255,9 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
             ha->render();
             }
       ha->setVisible(printObject == "yes");
-      measure->add(ha);
+// measure->add does not accept Harmony anymore
+// TODO-LV: add Harmony to parent segment of next chord
+//      measure->add(ha);
       }
 
 //---------------------------------------------------------
