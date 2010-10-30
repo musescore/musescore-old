@@ -2750,8 +2750,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                               durationType.setType(Duration::V_QUARTER);
                         cr->setDurationType(durationType);
                         }
-                  cr->setDuration(durationType.fraction());
                   cr->setDots(dots);
+                  cr->setDuration(cr->durationType().fraction());
 //                  printf(" cr->tick()=%d ", cr->tick());
                   Segment* s = measure->getSegment(st, tick, gl);
                   s->add(cr);
