@@ -84,11 +84,15 @@ class EditStaffType : public QDialog, private Ui::EditStaffType {
       Staff* staff;
       QList<StaffType*> staffTypes;
       bool modified;
+      void saveCurrent(QListWidgetItem*);
 
    private slots:
       void typeChanged(QListWidgetItem*, QListWidgetItem*);
       void createNewType();
       void nameEdited(const QString&);
+
+   public slots:
+      virtual void accept();
 
    public:
       EditStaffType(QWidget* parent, Staff*);
