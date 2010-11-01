@@ -91,8 +91,11 @@ System::System(Score* s)
 System::~System()
       {
       delete barLine;
-      foreach(SysStaff* s, _staves)
+      foreach(SysStaff* s, _staves) {
+//too late:       if (s->instrumentName && s->instrumentName->selected())
+//                  score()->deselect(s->instrumentName);
             delete s;
+            }
       }
 
 //---------------------------------------------------------
@@ -470,6 +473,7 @@ void System::setInstrumentName(int staffIdx)
 
       if (!iname) {
             iname = new Text(score());
+            iname->setSelectable(false);
             if (_firstSystem) {
                   iname->setSubtype(TEXT_INSTRUMENT_LONG);
                   iname->setTextStyle(TEXT_STYLE_INSTRUMENT_LONG);
