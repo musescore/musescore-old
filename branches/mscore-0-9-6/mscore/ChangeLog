@@ -1,3 +1,7 @@
+1.nov  (la)
+      - fix #7614: menu item crash when continuing session with no scores
+      - fix #7740: drag and delete + undo causes crash
+      - Better voltas + multimeasure rest layout
 25.oct (la)
       - fix #7665: Change instrument, undo does not undo sound
 23.oct (la)

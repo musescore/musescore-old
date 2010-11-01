@@ -68,6 +68,7 @@ Seq::Seq()
       running         = false;
       playlistChanged = false;
       cs              = 0;
+      cv              = 0;
 
       endTick  = 0;
       state    = STOP;

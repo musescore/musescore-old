@@ -648,6 +648,7 @@ void Measure::layout2()
                   _noText->setSubtype(TEXT_MEASURE_NUMBER);
                   _noText->setTextStyle(TEXT_STYLE_MEASURE_NUMBER);
                   _noText->setParent(this);
+                  _noText->setSelectable(false);
                   }
             if (_noText->getText() != s)
                   _noText->setText(s);
