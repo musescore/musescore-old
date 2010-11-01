@@ -143,7 +143,6 @@
       <file>data/fileprint.svg</file>
       <file>data/fotomode.svg</file>
       <file alias="data/appstyle-dark.css">../share/styles/appstyle-dark.css</file>
-
    </qresource>
 </RCC>
 

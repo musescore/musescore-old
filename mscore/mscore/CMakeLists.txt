@@ -111,7 +111,12 @@ QT4_WRAP_CPP (mocs
       drumtools.h
       )
 
-QT4_ADD_RESOURCES (qrc_files mscore.qrc)
+if (APPLE)
+      QT4_ADD_RESOURCES (qrc_files mscore-apple.qrc)
+else (APPLE)
+      QT4_ADD_RESOURCES (qrc_files mscore.qrc)
+endif (APPLE)
+
 
 set (AUDIO "")
 if (MINGW)
