@@ -23,8 +23,31 @@ install(FILES
       chords.xml
       stdchords.xml
       jazzchords.xml
+      DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}styles
+      )
+
+if (APPLE)
+
+install(FILES
+      appstyle-mac.css
+      RENAME appstyle.css
+      DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}styles
+      )
+
+install(FILES
+      appstyle-mac-dark.css
+      RENAME appstyle-dark.css
+      DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}styles
+      )
+
+else (APPLE)
+
+install(FILES
       appstyle.css
       appstyle-dark.css
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}styles
       )
+
+endif (APPLE)
+
 
