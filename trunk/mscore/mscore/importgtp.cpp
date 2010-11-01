@@ -792,7 +792,7 @@ printf("BeginRepeat=============================================\n");
             Part* part = score->part(i);
             Instrument* instr = part->instr();
             instr->setTablature(tab);
-            instr->setTrackName(name);
+            part->setTrackName(name);
             instr->setTranspose(Interval(capo));
             part->setLongName(name);
 
@@ -1290,7 +1290,7 @@ printf("BeginRepeat=============================================\n");
             Part* part = score->part(i);
             Instrument* instr = part->instr();
             instr->setTablature(tab);
-            instr->setTrackName(name);
+            part->setTrackName(name);
             part->setLongName(name);
             instr->setTranspose(Interval(capo));
 
@@ -1829,7 +1829,7 @@ printf("bars %d tracks %d\n", measures, staves);
             Part* part = score->part(i);
             Instrument* instr = part->instr();
             instr->setTablature(tab);
-            instr->setTrackName(name);
+            part->setTrackName(name);
             instr->setTranspose(Interval(capo));
             part->setLongName(name);
 
@@ -2550,7 +2550,7 @@ printf("midi %d %d %d  frets %d capo %d color %d\n", midiPort, midiChannel,
             Tablature* tab = new Tablature(frets, strings, tuning2);
             Instrument* instr = part->instr();
             instr->setTablature(tab);
-            instr->setTrackName(name);
+            part->setTrackName(name);
             part->setLongName(name);
             instr->setTranspose(Interval(capo));
 
@@ -2871,7 +2871,7 @@ bool Score::importGTP(const QString& name)
 
             cloneStaves(this, score, stavesMap);
 
-            score->setName(part->instr()->trackName());
+            score->setName(part->trackName());
             Excerpt* excerpt = new Excerpt(score);
             _excerpts.append(excerpt);
             if (part->staves()->front()->staffType()->group() == PITCHED_STAFF) {
@@ -2891,7 +2891,7 @@ bool Score::importGTP(const QString& name)
             Text* txt = new Text(score);
             txt->setSubtype(TEXT_INSTRUMENT_EXCERPT);
             txt->setTextStyle(TEXT_STYLE_INSTRUMENT_EXCERPT);
-            txt->setText(part->longName()->getText());
+            txt->setText(part->longName().toPlainText());
             measure->add(txt);
 
             //

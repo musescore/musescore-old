@@ -44,6 +44,7 @@ static const int MSCVERSION = 118;
 //          grace notes
 //    1.19  replace text style numbers by text style names; box margins are now
 //          used
+//    1.20  instrument names are saved as html again
 
 extern bool debugMode;
 extern bool enableExperimental;
@@ -92,6 +93,7 @@ enum ElementType {
       TUPLET,
 /*30*/TEMPO_TEXT,
       STAFF_TEXT,
+      INSTRUMENT_CHANGE,
       HARMONY, FRET_DIAGRAM, BEND, TREMOLOBAR,
       VOLTA,
       HAIRPIN_SEGMENT, OTTAVA_SEGMENT, TRILL_SEGMENT, TEXTLINE_SEGMENT,
@@ -415,6 +417,7 @@ enum TextStyleType {
       TEXT_STYLE_BENCH,
       TEXT_STYLE_HEADER,
       TEXT_STYLE_FOOTER,
+      TEXT_STYLE_INSTRUMENT_CHANGE,
       TEXT_STYLES
       };
 

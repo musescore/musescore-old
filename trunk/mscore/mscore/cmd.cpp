@@ -1164,11 +1164,13 @@ void ScoreView::cmdAddText(int subtype)
                         s->setTrack(0);
                         s->setSystemFlag(true);
                         s->setTextStyle(TEXT_STYLE_SYSTEM);
+                        s->setSubtype(TEXT_SYSTEM);
                         }
                   else {
                         s->setTrack(cr->track());
                         s->setSystemFlag(false);
                         s->setTextStyle(TEXT_STYLE_STAFF);
+                        s->setSubtype(TEXT_STAFF);
                         }
                   s->setSubtype(subtype);
                   s->setParent(cr->segment());

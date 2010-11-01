@@ -69,6 +69,7 @@
 #include "slur.h"
 #include "excerpt.h"
 #include "tempotext.h"
+#include "instrchange.h"
 
 extern Measure* tick2measure(int tick);
 
@@ -797,6 +798,7 @@ void Score::undoAddElement(Element* element)
          && element->type() != SLUR
          && element->type() != TIE
          && element->type() != NOTE
+         && element->type() != INSTRUMENT_CHANGE
          && element->type() != HAIRPIN
          && element->type() != OTTAVA
          && element->type() != TRILL
@@ -857,6 +859,16 @@ void Score::undoAddElement(Element* element)
                   nslur->setEndElement(c2);
                   nslur->setParent(0);
                   undo()->push(new AddElement(nslur));
+                  }
+            else if (element->type() == INSTRUMENT_CHANGE) {
+                  InstrumentChange* is = static_cast<InstrumentChange*>(element);
+                  Segment* s1    = is->segment();
+                  Measure* m1    = s1->measure();
+                  Measure* nm1   = score->tick2measure(m1->tick());
+                  Segment* ns1   = nm1->findSegment(s1->segmentType(), s1->tick());
+                  InstrumentChange* nis = static_cast<InstrumentChange*>(ne);
+                  nis->setParent(ns1);
+                  undo()->push(new AddElement(nis));
                   }
             else if (element->type() == HAIRPIN
                || element->type() == OTTAVA
@@ -1980,9 +1992,11 @@ ChangeInstrumentShort::ChangeInstrumentShort(Part* p, const QString& t)
 
 void ChangeInstrumentShort::flip()
       {
+#if 0 // TODOxx
       QString s = part->shortNameHtml();
       part->setShortNameHtml(text);
       text = s;
+#endif
       }
 
 //---------------------------------------------------------
@@ -1997,9 +2011,11 @@ ChangeInstrumentLong::ChangeInstrumentLong(Part* p, const QString& t)
 
 void ChangeInstrumentLong::flip()
       {
+#if 0 // TODOxx
       QString s = part->longNameHtml();
       part->setLongNameHtml(text);
       text = s;
+#endif
       }
 
 //---------------------------------------------------------
@@ -2801,6 +2817,24 @@ void Score::undoChangeBarLine(Measure* m, BarLineType barType)
                         break;
                   }
             }
+      }
+
+//---------------------------------------------------------
+//   ChangeInstrument::flip
+//---------------------------------------------------------
+
+void ChangeInstrument::flip()
+      {
+      Instrument oi = is->instrument();
+      is->setInstrument(instrument);
+printf("change instr <%s> -> <%s>\n",
+      qPrintable(oi.trackName()), qPrintable(instrument.trackName()));
+
+      is->staff()->part()->setInstrument(instrument, is->segment()->tick());
+      is->score()->rebuildMidiMapping();
+      seq->initInstruments();
+      is->score()->setLayoutAll(true);
+      instrument = oi;
       }
 
 

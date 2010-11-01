@@ -555,10 +555,6 @@ bool Score::read(QString name)
                   }
             }
 
-//      renumberMeasures();
-//      checkScore();
-//      rebuildMidiMapping();
-//      updateChannel();
       mscore->updateRecentScores(this);
 
       int staffIdx = 0;
@@ -649,7 +645,8 @@ void Score::write(Xml& xml, bool /*autosave*/)
       QMapIterator<QString, QString> i(_metaTags);
       while (i.hasNext()) {
             i.next();
-            xml.tag(QString("metaTag name=\"%1\"").arg(i.key()), i.value());
+            if (!i.value().isEmpty())
+                  xml.tag(QString("metaTag name=\"%1\"").arg(i.key()), i.value());
             }
 
       foreach(KeySig* ks, customKeysigs)
@@ -1394,33 +1391,35 @@ void Score::rebuildMidiMapping()
       int channel = 0;
       int idx     = 0;
       foreach(Part* part, _parts) {
-            bool drum = part->instr()->useDrumset();
-
-            for (int k = 0; k < part->instr()->channel().size(); ++k) {
-                  Channel* a = &part->instr()->channel(k);
-                  MidiMapping mm;
-                  if (drum) {
-                        mm.port    = port;
-                        mm.channel = 9;
-                        }
-                  else {
-                        mm.port    = port;
-                        mm.channel = channel;
-                        if (channel == 15) {
-                              channel = 0;
-                              ++port;
+            InstrumentList* il = part->instrList();
+            for (iInstrument i = il->begin(); i != il->end(); ++i) {
+                  bool drum = i->second.useDrumset();
+                  for (int k = 0; k < i->second.channel().size(); ++k) {
+                        Channel* a = &(i->second.channel(k));
+                        MidiMapping mm;
+                        if (drum) {
+                              mm.port    = port;
+                              mm.channel = 9;
                               }
                         else {
-                              ++channel;
-                              if (channel == 9)
+                              mm.port    = port;
+                              mm.channel = channel;
+                              if (channel == 15) {
+                                    channel = 0;
+                                    ++port;
+                                    }
+                              else {
                                     ++channel;
+                                    if (channel == 9)
+                                          ++channel;
+                                    }
                               }
+                        mm.part         = part;
+                        mm.articulation = a;
+                        _midiMapping.append(mm);
+                        a->channel = idx;
+                        ++idx;
                         }
-                  mm.part         = part;
-                  mm.articulation = a;
-                  _midiMapping.append(mm);
-                  a->channel = idx;
-                  ++idx;
                   }
             }
       }
@@ -1771,14 +1770,6 @@ void Score::spatiumChanged(double oldValue, double newValue)
       double data[2];
       data[0] = oldValue;
       data[1] = newValue;
-      foreach(Part* part, _parts) {
-            if (part->longName())
-                  part->longName()->spatiumChanged(oldValue, newValue);
-            if (part->shortName()) {
-                  printf("ShortName: spatiumChanged\n");
-                  part->shortName()->spatiumChanged(oldValue, newValue);
-                  }
-            }
       scanElements(data, spatiumHasChanged);
       }
 
@@ -1895,6 +1886,11 @@ void Score::addElement(Element* element)
                   _tempomap->addTempo(tick, AL::TEvent(tt->tempo()));
                   }
                   break;
+            case INSTRUMENT_CHANGE:
+                  rebuildMidiMapping();
+                  seq->initInstruments();
+                  break;
+
             default:
                   break;
             }
@@ -1993,6 +1989,10 @@ void Score::removeElement(Element* element)
                   int tick = tt->segment()->tick();
                   _tempomap->delTempo(tick);
                   }
+                  break;
+            case INSTRUMENT_CHANGE:
+                  rebuildMidiMapping();
+                  seq->initInstruments();
                   break;
             default:
                   break;

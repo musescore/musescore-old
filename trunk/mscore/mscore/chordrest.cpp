@@ -636,15 +636,16 @@ Element* ChordRest::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, 
                   }
                   break;
 
+            case TEXT:
             case STAFF_TEXT:
-                  {
-                  StaffText* st = static_cast<StaffText*>(e);
-//TODO1                  st->setTick(tick());
-                  e->setTrack(staffIdx() * VOICES);
-                  e->setParent(m);
+            case HARMONY:
+            case STAFF_STATE:
+            case INSTRUMENT_CHANGE:
+                  e->setParent(segment());
+                  e->setTrack((track() / VOICES) * VOICES);
+                  score()->select(e, SELECT_SINGLE, 0);
                   score()->undoAddElement(e);
-                  }
-                  break;
+                  return e;
             default:
                   printf("cannot drop %s\n", e->name());
                   delete e;

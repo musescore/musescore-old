@@ -78,6 +78,7 @@
 #include "undo.h"
 #include "segment.h"
 #include "box.h"
+#include "instrchange.h"
 
 extern bool debugMode;
 extern bool showInvisible;
@@ -115,6 +116,7 @@ static const char* elementNames[] = {
       QT_TRANSLATE_NOOP("elementName", "Tuplet"),
       QT_TRANSLATE_NOOP("elementName", "Tempo"),
       QT_TRANSLATE_NOOP("elementName", "StaffText"),
+      QT_TRANSLATE_NOOP("elementName", "InstrumentChange"),
       QT_TRANSLATE_NOOP("elementName", "Harmony"),
       QT_TRANSLATE_NOOP("elementName", "FretDiagram"),
       QT_TRANSLATE_NOOP("elementName", "Bend"),
@@ -1253,6 +1255,7 @@ Element* Element::create(ElementType type, Score* score)
             case DYNAMIC:           return new Dynamic(score);
             case TEXT:              return new Text(score);
             case STAFF_TEXT:        return new StaffText(score);
+            case INSTRUMENT_CHANGE: return new InstrumentChange(score);
             case NOTEHEAD:          return new NoteHead(score);
             case NOTEDOT:           return new NoteDot(score);
             case TREMOLO:           return new Tremolo(score);
@@ -1359,6 +1362,7 @@ const char* Element::name(ElementType type)
             case TUPLET:            return "Tuplet";
             case TEMPO_TEXT:        return "Tempo";
             case STAFF_TEXT:        return "StaffText";
+            case INSTRUMENT_CHANGE: return "InstrumentChange";
             case HARMONY:           return "Harmony";
             case FRET_DIAGRAM:      return "FretDiagram";
             case BEND:              return "Bend";

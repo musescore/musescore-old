@@ -4112,8 +4112,8 @@ void ExportLy::writeScore()
       resetAnchor(anker);
 
       int n = part->staves()->size();
-      staffname[staffInd].partname  = part->longName()->getText();
-      staffname[staffInd].partshort = part->shortName()->getText();
+      staffname[staffInd].partname  = part->longName().toPlainText();
+      staffname[staffInd].partshort = part->shortName().toPlainText();
       curTicks=-1;
       pickup=false;
 

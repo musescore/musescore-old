@@ -2236,8 +2236,10 @@ void Measure::read(QDomElement e, int staffIdx)
                || tag == "Symbol"
                || tag == "Tempo"
                || tag == "StaffText"
+               || tag == "InstrumentChange"
                || tag == "Marker"
                || tag == "Jump"
+               || tag == "StaffState"
                ) {
                   Element* el = Element::name2Element(tag, score());
                   el->setTrack(score()->curTrack);
@@ -3260,7 +3262,7 @@ void Measure::updateAccidentals(Segment* segment, int staffIdx, char* tversatz)
       int startTrack = staffIdx * VOICES;
       int endTrack   = startTrack + VOICES;
 
-      Instrument* instrument = staff->part()->instr();
+      const Instrument* instrument = staff->part()->instr();
       for (int track = startTrack; track < endTrack; ++track) {
             Element* e = segment->element(track);
             if (!e || e->type() != CHORD)

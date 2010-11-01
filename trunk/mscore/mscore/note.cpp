@@ -514,7 +514,7 @@ void Note::draw(QPainter& p, ScoreView* v) const
                   // by coloring the note head
                   //
                   if (chord() && chord()->segment() && staff() && !selected() && !score()->printing() && preferences.warnPitchRange) {
-                        Instrument* in = staff()->part()->instr();
+                        const Instrument* in = staff()->part()->instr();
                         int i = ppitch();
                         if (i < in->minPitchP() || i > in->maxPitchP())
                               p.setPen(Qt::red);
@@ -890,6 +890,8 @@ bool Note::acceptDrop(ScoreView*, const QPointF&, int type, int subtype) const
          || type == NOTEHEAD
          || type == NOTE
          || type == TREMOLO
+         || type == STAFF_STATE
+         || type == INSTRUMENT_CHANGE
          || type == IMAGE
          || type == CHORD
          || type == HARMONY
@@ -924,6 +926,9 @@ Element* Note::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Eleme
       Chord* ch = chord();
       switch(e->type()) {
             case TEXT:
+                  if (e->subtype() == TEXT_REHEARSAL_MARK)
+                        return ch->drop(view, p1, p2, e);
+
             case SYMBOL:
             case IMAGE:
             case FINGERING:
@@ -937,17 +942,9 @@ Element* Note::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Eleme
                   view->cmdAddSlur(this, 0);
                   return 0;
 
-            case HARMONY:
-                  e->setParent(ch->segment());
-                  e->setTrack((track() / VOICES) * VOICES);
-                  score()->select(e, SELECT_SINGLE, 0);
-                  score()->undoAddElement(e);
-                  return e;
-
             case LYRICS:
-                  e->setParent(ch->measure());
-                  e->setTrack((track() / VOICES) * VOICES);
                   e->setParent(ch->segment());
+                  e->setTrack((track() / VOICES) * VOICES);
                   score()->select(e, SELECT_SINGLE, 0);
                   score()->undoAddElement(e);
                   return e;

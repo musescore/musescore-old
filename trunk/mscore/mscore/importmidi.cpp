@@ -1005,7 +1005,7 @@ void Score::convertMidi(MidiFile* mf)
                         }
                   else
                         part->setLongName(track->name());
-                  part->instr()->setTrackName(part->longName()->getText());
+                  part->setTrackName(part->longName().toPlainText());
                   part->setMidiChannel(track->outChannel());
                   part->setMidiProgram(track->program() & 0x7f);  // only GM
                   }

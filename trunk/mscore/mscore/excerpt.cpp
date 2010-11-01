@@ -141,7 +141,7 @@ Score* createExcerpt(const QList<Part*>& parts)
       Text* txt = new Text(score);
       txt->setSubtype(TEXT_INSTRUMENT_EXCERPT);
       txt->setTextStyle(TEXT_STYLE_INSTRUMENT_EXCERPT);
-      txt->setText(parts.front()->longName()->getText());
+      txt->setText(parts.front()->longName().toPlainText());
       measure->add(txt);
 
       //

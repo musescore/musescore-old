@@ -64,6 +64,8 @@
 #include "bend.h"
 #include "tremolobar.h"
 #include "chordline.h"
+#include "stafftext.h"
+#include "instrchange.h"
 
 extern bool useFactorySettings;
 
@@ -275,7 +277,6 @@ void MuseScore::populatePalette()
       sp = new Palette;
       sp->setName(tr("Lines"));
       sp->setMag(.8);
-//      sp->setGrid(84, 23);
       sp->setGrid(82, 23);
 
       Slur* slur = new Slur(gscore);
@@ -478,7 +479,6 @@ void MuseScore::populatePalette()
       sp->setName(tr("Dynamics"));
       sp->setMag(.8);
       sp->setGrid(42, 28);
-//      sp->setYOffset(-12.0);
 
       static const char* dynS[] = {
             "ppp", "pp", "p", "mp", "mf", "f", "ff", "fff"
@@ -647,6 +647,44 @@ void MuseScore::populatePalette()
       paletteBox->addPalette(sp);
 
       //-----------------------------------
+      //    Text
+      //-----------------------------------
+
+      sp = new Palette;
+      sp->setName(tr("Text"));
+      sp->setMag(0.65);
+      sp->setGrid(84, 28);
+      sp->setDrawGrid(true);
+
+      StaffText* st = new StaffText(gscore);
+      st->setSystemFlag(false);
+      st->setTextStyle(TEXT_STYLE_STAFF);
+      st->setSubtype(TEXT_STAFF);
+      st->setText(tr("staff-text"));
+      sp->append(st, tr("Staff Text"));
+
+      st = new StaffText(gscore);
+      st->setSystemFlag(true);
+      st->setTextStyle(TEXT_STYLE_SYSTEM);
+      st->setSubtype(TEXT_SYSTEM);
+      st->setText(tr("system-text"));
+      sp->append(st, tr("System Text"));
+
+      Text* text = new Text(gscore);
+      text->setTrack(0);
+      text->setTextStyle(TEXT_STYLE_REHEARSAL_MARK);
+      text->setSubtype(TEXT_REHEARSAL_MARK);
+      text->setText(tr("B1"));
+      text->setSystemFlag(true);
+      sp->append(text, tr("Rehearsal Mark"));
+
+      InstrumentChange* is = new InstrumentChange(gscore);
+      is->setText(tr("Instrument"));
+      sp->append(is, tr("Instrument Change"));
+
+      paletteBox->addPalette(sp);
+
+      //-----------------------------------
       //    breaks
       //-----------------------------------
 
@@ -684,8 +722,9 @@ void MuseScore::populatePalette()
       //    staff state changes
       //-----------------------------------
 
+#if 0
       sp = new Palette;
-      sp->setName(tr("Layout Changes"));
+      sp->setName(tr("Staff Changes"));
       sp->setMag(.7);
       sp->setGrid(42, 36);
       sp->setDrawGrid(true);
@@ -707,6 +746,7 @@ void MuseScore::populatePalette()
       sp->append(st, tr("change instrument"));
 
       paletteBox->addPalette(sp);
+#endif
 
       //-----------------------------------
       //    beam properties

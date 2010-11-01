@@ -746,7 +746,7 @@ void Score::putNote(const QPointF& pos, bool replace)
 printf("putNote at tick %d staff %d line %d key %d clef %d pitch %d\n",
    tick, staffIdx, line, key.accidentalType(), clef, pitch);
 
-      Instrument* instr       = st->part()->instr();
+      const Instrument* instr       = st->part()->instr();
       _is.setTrack(staffIdx * VOICES + (_is.track() % VOICES));
       _is.pitch               = pitch;
       int headGroup           = 0;
@@ -1635,6 +1635,7 @@ void Score::toggleInvisible(Element* e)
                   m->setEndBarLineType(bl->barLineType(), false, e->visible(), e->color());
                   }
             }
+#if 0       // TODOxx
       else if (e->type() == TEXT && e->subtype() == TEXT_INSTRUMENT_SHORT) {
             Part* part = e->staff()->part();
             part->shortName()->setVisible(e->visible());
@@ -1643,6 +1644,7 @@ void Score::toggleInvisible(Element* e)
             Part* part = e->staff()->part();
             part->longName()->setVisible(e->visible());
             }
+#endif
       }
 
 //---------------------------------------------------------
@@ -1669,6 +1671,7 @@ void Score::colorItem(Element* element)
                               m->setEndBarLineType(bl->barLineType(), false, e->visible(), e->color());
                               }
                         }
+#if 0 // TODOxx
                   else if (e->type() == TEXT && e->subtype() == TEXT_INSTRUMENT_SHORT) {
                         Part* part = e->staff()->part();
                         part->shortName()->setColor(e->color());
@@ -1677,6 +1680,7 @@ void Score::colorItem(Element* element)
                         Part* part = e->staff()->part();
                         part->longName()->setColor(e->color());
                         }
+#endif
                   }
             }
       _selection.deselectAll();

@@ -622,14 +622,13 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer, int stride)
 
 void Seq::initInstruments()
       {
-      foreach(const Part* part, *cs->parts()) {
-            foreach(const Channel& a, part->instr()->channel()) {
-                  foreach(Event e, a.init) {
-                        if (e.type() == ME_INVALID)
-                              continue;
-                        e.setChannel(a.channel);
-                        sendEvent(e);
-                        }
+      foreach(const MidiMapping& mm, *cs->midiMapping()) {
+            Channel* channel = mm.articulation;
+            foreach(Event e, channel->init) {
+                  if (e.type() == ME_INVALID)
+                        continue;
+                  e.setChannel(channel->channel);
+                  sendEvent(e);
                   }
             }
       }

@@ -1084,7 +1084,7 @@ void PaletteBoxButton::paintEvent(QPaintEvent*)
       QStyleOptionToolButton opt;
       initStyleOption(&opt);
       opt.features &= (~QStyleOptionToolButton::HasMenu);
-      p.drawComplexControl( QStyle::CC_ToolButton, opt );
+      p.drawComplexControl(QStyle::CC_ToolButton, opt);
       }
 
 //---------------------------------------------------------

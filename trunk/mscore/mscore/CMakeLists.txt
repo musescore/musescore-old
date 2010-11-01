@@ -97,7 +97,7 @@ QT4_WRAP_CPP (mocs
       mscore.h navigator.h pagesettings.h palette.h mixer.h playpanel.h
       measureproperties.h preview.h score.h seq.h textpalette.h textstyle.h
       timedialog.h symboldialog.h shortcutcapturedialog.h simplebutton.h
-      greendotbutton.h recordbutton.h editdrumset.h editstaff.h
+      greendotbutton.h recordbutton.h editdrumset.h editstaff.h selinstrument.h
       voltaproperties.h chordproperties.h restproperties.h
       jumpproperties.h markerproperties.h boxproperties.h newwizard.h
       transposedialog.h chordedit.h tempotext.h importmidi.h textline.h
@@ -195,7 +195,7 @@ add_executable ( ${ExecutableName}
       fret.cpp stafftype.cpp staffstate.cpp spanner.cpp fingering.cpp
       shadownote.cpp pitch.cpp importgtp.cpp revisions.cpp bend.cpp tremolobar.cpp
       noteevent.cpp chordline.cpp lasso.cpp fotomode.cpp drumtools.cpp
-      elementlayout.cpp
+      elementlayout.cpp selinstrument.cpp instrchange.cpp
       ${OMR_FILES}
       ${AUDIO}
       )

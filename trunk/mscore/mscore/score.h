@@ -666,12 +666,14 @@ class Score : public QObject {
       bool checkHasMeasures() const;
 
       void setLayout(Measure* m);
+
       int midiPort(int idx) const;
       int midiChannel(int idx) const;
       QList<MidiMapping>* midiMapping()       { return &_midiMapping;          }
       MidiMapping* midiMapping(int channel)   { return &_midiMapping[channel]; }
       void rebuildMidiMapping();
       void updateChannel();
+
       void cmdTransposeStaff(int staffIdx, Interval, bool useDoubleSharpsFlats);
       void cmdConcertPitchChanged(bool, bool useSharpsFlats);
 

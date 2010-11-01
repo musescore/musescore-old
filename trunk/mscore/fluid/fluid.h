@@ -291,7 +291,7 @@ class Channel {
 //---------------------------------------------------------
 
 class Fluid : public Synth {
-      static const int SILENT_BLOCKS = 32;
+      static const int SILENT_BLOCKS = 32*5;
       int silentBlocks;
 
       QList<SFont*> sfonts;               // the loaded soundfonts

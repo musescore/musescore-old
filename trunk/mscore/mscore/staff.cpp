@@ -153,7 +153,7 @@ void Staff::cleanupBrackets()
 
 QString Staff::trackName() const
       {
-      return _part->instr()->trackName();
+      return _part->trackName();
       }
 
 //---------------------------------------------------------

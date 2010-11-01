@@ -36,22 +36,9 @@
 
 Part::Part(Score* s)
       {
-      _instr = new Instrument;
-      _longName  = new Text(s);
-      _longName->setSubtype(TEXT_INSTRUMENT_LONG);
-      _longName->setTextStyle(TEXT_STYLE_INSTRUMENT_LONG);
-      _shortName = new Text(s);
-      _shortName->setSubtype(TEXT_INSTRUMENT_SHORT);
-      _shortName->setTextStyle(TEXT_STYLE_INSTRUMENT_SHORT);
       _score = s;
       _show  = true;
-      }
-
-Part::~Part()
-      {
-      delete _instr;
-      delete _longName;
-      delete _shortName;
+      setInstrument(Instrument(), 0);     // default instrument
       }
 
 //---------------------------------------------------------
@@ -60,22 +47,9 @@ Part::~Part()
 
 void Part::initFromInstrTemplate(const InstrumentTemplate* t)
       {
-      _instr->setAmateurPitchRange(t->minPitchA, t->maxPitchA);
-      _instr->setProfessionalPitchRange(t->minPitchP, t->maxPitchP);
-
-      setShortNameEncoded(t->shortName);
-      _instr->setTrackName(t->trackName);
-      setLongNameEncoded(t->longName);
-
-      _instr->setTranspose(t->transpose);
-      if (t->useDrumset) {
-            _instr->setUseDrumset(true);
-            _instr->setDrumset(new Drumset(*((t->drumset) ? t->drumset : smDrumset)));
-            }
-      _instr->setMidiActions(t->midiActions);
-      _instr->setArticulation(t->articulation);
-      _instr->setChannel(t->channel);
-      _instr->setTablature(t->tablature ? new Tablature(*t->tablature) : 0);
+      _trackName = t->trackName;
+      Instrument instr = Instrument::fromTemplate(t);
+      setInstrument(instr, 0);
       }
 
 //---------------------------------------------------------
@@ -105,26 +79,39 @@ void Part::read(QDomElement e)
                   ++rstaff;
                   }
             else if (tag == "Instrument")
-                  _instr->read(e);
+                  instr(0)->read(e);
             else if (tag == "name") {
                   if (_score->mscVersion() <= 101)
-                        _longName->setHtml(val);
+                        instr(0)->longName() = QTextDocumentFragment::fromHtml(val);
                   else if (_score->mscVersion() <= 110)
-                        _longName->setHtml(Xml::htmlToString(e.firstChildElement()));
-                  else
-                        _longName->read(e);
+                        instr(0)->longName() = QTextDocumentFragment::fromHtml(Xml::htmlToString(e.firstChildElement()));
+                  else if (_score->mscVersion() < 120) {
+                        Text* t = new Text(score());
+                        t->read(e);
+                        instr(0)->longName() = t->getFragment();
+                        delete t;
+                        }
+                  else {
+                        instr(0)->longName() = QTextDocumentFragment::fromHtml(val);
+                        }
                   }
             else if (tag == "shortName") {
                   if (_score->mscVersion() <= 101)
-                        _shortName->setHtml(val);
+                        instr(0)->shortName() = QTextDocumentFragment::fromHtml(val);
                   else if (_score->mscVersion() <= 110)
-                        _shortName->setHtml(Xml::htmlToString(e.firstChildElement()));
-                  else
-                        _shortName->read(e);
+                        instr(0)->shortName() = QTextDocumentFragment::fromHtml(Xml::htmlToString(e.firstChildElement()));
+                  else if (_score->mscVersion() < 120) {
+                        Text* t = new Text(score());
+                        t->read(e);
+                        instr(0)->shortName() = t->getFragment();
+                        delete t;
+                        }
+                  else {
+                        instr(0)->shortName() = QTextDocumentFragment::fromHtml(val);
+                        }
                   }
-            else if (tag == "trackName") {
-                  _instr->setTrackName(val);
-                  }
+            else if (tag == "trackName")
+                  _trackName = val;
             else if (tag == "show")
                   _show = val.toInt();
             else
@@ -133,14 +120,31 @@ void Part::read(QDomElement e)
       }
 
 //---------------------------------------------------------
+//   write
+//---------------------------------------------------------
+
+void Part::write(Xml& xml) const
+      {
+      xml.stag("Part");
+      foreach(const Staff* staff, _staves)
+            staff->write(xml);
+      if (!_show)
+            xml.tag("show", _show);
+      xml.tag("trackName", _trackName);
+      instr(0)->write(xml);
+      xml.etag();
+      }
+
+//---------------------------------------------------------
 //   parseInstrName
 //---------------------------------------------------------
 
-static void parseInstrName(QTextDocument* doc, const QString& name)
+static QTextDocumentFragment parseInstrName(const QString& name)
       {
       if (name.isEmpty())
-            return;
-      QTextCursor cursor(doc);
+            return QTextDocumentFragment();
+      QTextDocument doc;
+      QTextCursor cursor(&doc);
       QTextCharFormat f = cursor.charFormat();
       QTextCharFormat sf(f);
 
@@ -157,7 +161,7 @@ static void parseInstrName(QTextDocument* doc, const QString& name)
             QString error = err + "\n at line " + ln + " column " + col;
             printf("parse instrument name: %s\n", qPrintable(error));
             printf("   data:<%s>\n", qPrintable(name));
-            return;
+            return QTextDocumentFragment();
             }
 
       for (QDomNode e = dom.documentElement(); !e.isNull(); e = e.nextSibling()) {
@@ -176,91 +180,21 @@ static void parseInstrName(QTextDocument* doc, const QString& name)
                         cursor.insertText(t.data(), f);
                   }
             }
+      return QTextDocumentFragment(&doc);
       }
 
 //---------------------------------------------------------
 //   setLongName
 //---------------------------------------------------------
 
-void Part::setLongNameEncoded(const QString& name)
-      {
-      parseInstrName(_longName->doc(), name);
-      }
-
 void Part::setLongName(const QString& name)
       {
-      _longName->setText(name);
-      }
-
-void Part::setLongNameHtml(const QString& s)
-      {
-      _longName->setHtml(s);
-      }
-
-void Part::setLongName(const QTextDocument& s)
-      {
-//TODOxx      _longName->setDoc(s);
-      }
-
-//---------------------------------------------------------
-//   setShortName
-//---------------------------------------------------------
-
-void Part::setShortNameEncoded(const QString& s)
-      {
-      parseInstrName(_shortName->doc(), s);
+      instr(0)->longName() = QTextDocumentFragment::fromPlainText(name);
       }
 
 void Part::setShortName(const QString& s)
       {
-      _shortName->setText(s);
-      }
-
-void Part::setShortNameHtml(const QString& s)
-      {
-      _shortName->setHtml(s);
-      }
-
-void Part::setShortName(const QTextDocument& s)
-      {
-//TODOxx      _shortName->setDoc(s);
-      }
-
-//---------------------------------------------------------
-//   shortNameHtml
-//---------------------------------------------------------
-
-QString Part::shortNameHtml() const
-      {
-      return _shortName->getHtml();
-      }
-
-//---------------------------------------------------------
-//   longNameHtml
-//---------------------------------------------------------
-
-QString Part::longNameHtml() const
-      {
-      return _longName->getHtml();
-      }
-
-//---------------------------------------------------------
-//   write
-//---------------------------------------------------------
-
-void Part::write(Xml& xml) const
-      {
-      xml.stag("Part");
-      foreach(const Staff* staff, _staves)
-            staff->write(xml);
-      if (!_longName->isEmpty())
-            _longName->write(xml, "name");
-      if (!_shortName->isEmpty())
-            _shortName->write(xml, "shortName");
-      if (!_show)
-            xml.tag("show", _show);
-      _instr->write(xml);
-      xml.etag();
+      instr(0)->shortName() = QTextDocumentFragment::fromPlainText(s);
       }
 
 //---------------------------------------------------------
@@ -337,35 +271,35 @@ void Part::setMidiProgram(int p)
       {
       // LVIFIX: check if this is correct
       // at least it fixes the MIDI program handling in the MusicXML regression test
-      Channel c = _instr->channel(0);
+      Channel c = instr(0)->channel(0);
       c.program = p;
       c.updateInitList();
-      _instr->setChannel(0, c);
+//TODOxx      instr(0)->setChannel(0, c);
       }
 
 int Part::volume() const
       {
-      return _instr->channel(0).volume;
+      return instr(0)->channel(0).volume;
       }
 
 int Part::reverb() const
       {
-      return _instr->channel(0).reverb;
+      return instr(0)->channel(0).reverb;
       }
 
 int Part::chorus() const
       {
-      return _instr->channel(0).chorus;
+      return instr(0)->channel(0).chorus;
       }
 
 int Part::pan() const
       {
-      return _instr->channel(0).pan;
+      return instr(0)->channel(0).pan;
       }
 
 int Part::midiProgram() const
       {
-      return _instr->channel(0).program;
+      return instr(0)->channel(0).program;
       }
 
 //---------------------------------------------------------
@@ -374,7 +308,7 @@ int Part::midiProgram() const
 
 int Part::midiChannel() const
       {
-      return score()->midiChannel(_instr->channel(0).channel);
+      return score()->midiChannel(instr(0)->channel(0).channel);
       }
 
 //---------------------------------------------------------
@@ -390,22 +324,48 @@ void Part::setMidiChannel(int) const
 //   setInstrument
 //---------------------------------------------------------
 
-void Part::setInstrument(const Instrument& i)
+void Part::setInstrument(const Instrument& i, int tick)
       {
-      delete _instr;
-      _instr = new Instrument(i);
+      _instrList.setInstrument(i, tick);
 
-      if (!_score->styleB(ST_concertPitch) && _instr->transpose().chromatic) {
+      if (!_score->styleB(ST_concertPitch) && i.transpose().chromatic) {
             foreach(Staff* staff, _staves) {
-                  _score->cmdTransposeStaff(staff->idx(), _instr->transpose(), false);
+                  _score->cmdTransposeStaff(staff->idx(), i.transpose(), false);
                   }
             }
-      if (!_score->styleB(ST_concertPitch) && _instr->transpose().chromatic) {
+      if (!_score->styleB(ST_concertPitch) && i.transpose().chromatic) {
             foreach(Staff* staff, _staves) {
-                  Interval iv(_instr->transpose());
+                  Interval iv(i.transpose());
                   iv.flip();
                   _score->cmdTransposeStaff(staff->idx(), iv, false);
                   }
             }
+      }
+
+//---------------------------------------------------------
+//   removeInstrument
+//---------------------------------------------------------
+
+void Part::removeInstrument(int tick)
+      {
+      _instrList.erase(tick);
+      }
+
+//---------------------------------------------------------
+//   instr
+//---------------------------------------------------------
+
+Instrument* Part::instr(int tick)
+      {
+      return &_instrList.instrument(tick);
+      }
+
+//---------------------------------------------------------
+//   instr
+//---------------------------------------------------------
+
+const Instrument* Part::instr(int tick) const
+      {
+      return &_instrList.instrument(tick);
       }
 

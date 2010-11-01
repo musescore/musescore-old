@@ -107,8 +107,7 @@ SysStaff* System::insertStaff(int idx)
             staff->rbb().setY(_staves[idx-1]->y() + 6 * spatium());
             }
       _staves.insert(idx, staff);
-      if (!_vbox)
-            setInstrumentName(idx);
+      setInstrumentName(idx);
       return staff;
       }
 
@@ -470,16 +469,17 @@ void System::setInstrumentName(int staffIdx)
       Part* part = s->part();
 
       if (!iname) {
-            Part* part = s->part();
-            iname = new Text(_firstSystem ? (*part->longName()) : (*part->shortName()));
+            iname = new Text(score());
+            if (_firstSystem) {
+                  iname->setSubtype(TEXT_INSTRUMENT_LONG);
+                  iname->setTextStyle(TEXT_STYLE_INSTRUMENT_LONG);
+                  }
             staff->instrumentName = iname;
             }
-      else {
-//TODOxx            TextBase* otb = iname->textBase();
-//            TextBase* ntb = _firstSystem ? part->longName()->textBase() : part->shortName()->textBase();
-//            if (otb != ntb)
-//                  iname->changeBase(ntb);
-            }
+      int tick = ml.isEmpty() ? 0 : ml.front()->tick();
+      QTextDocumentFragment frag = _firstSystem ? part->longName(tick) : part->shortName(tick);
+
+      iname->setText(frag);
       iname->setParent(this);
       iname->setTrack(staffIdx * VOICES);
       }

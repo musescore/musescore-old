@@ -1477,36 +1477,36 @@ bool MStyle::drawFrameWindowPrimitive( const QStyleOption* option, QPainter* pai
 
 bool MStyle::drawIndicatorArrowPrimitive( ArrowOrientation orientation, const QStyleOption* option, QPainter* painter, const QWidget* ) const
       {
-      const QRect& r( option->rect );
-      const QPalette& palette( option->palette );
-      const State& flags( option->state );
-      const bool enabled( flags & State_Enabled );
-      const bool mouseOver( enabled && (flags & State_MouseOver ) );
+      const QRect& r(option->rect);
+      const QPalette& palette(option->palette);
+      const State& flags(option->state);
+      const bool enabled(flags & State_Enabled);
+      const bool mouseOver(enabled && (flags & State_MouseOver));
 
-              // define gradient and polygon for drawing arrow
-              const QPolygonF a = genericArrow( orientation, ArrowNormal );
+      // define gradient and polygon for drawing arrow
+      const QPolygonF a = genericArrow(orientation, ArrowNormal);
 
-              QColor color = palette.color( QPalette::WindowText );
-              const QColor background = palette.color(QPalette::Window);
-              const QColor highlight( _helper.viewHoverBrush().brush(palette).color() );
-              const qreal penThickness = 1.6;
-              const qreal offset( qMin( penThickness, qreal(1.0)) );
+      QColor color = palette.color(QPalette::WindowText);
+      const QColor background = palette.color(QPalette::Window);
+      const QColor highlight( _helper.viewHoverBrush().brush(palette).color());
+      const qreal penThickness = 1.6;
+      const qreal offset(qMin( penThickness, qreal(1.0)));
 
-              if( mouseOver ) color = highlight;
+      if (mouseOver)
+            color = highlight;
 
-              painter->translate( r.center() );
-              painter->setRenderHint(QPainter::Antialiasing);
+      painter->translate(r.center());
+      painter->setRenderHint(QPainter::Antialiasing);
 
-              painter->translate(0,offset);
-              painter->setPen(QPen(_helper.calcLightColor(background), penThickness, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-              painter->drawPolyline(a);
-              painter->translate(0,-offset);
+      painter->translate(0,offset);
+      painter->setPen(QPen(_helper.calcLightColor(background), penThickness, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+      painter->drawPolyline(a);
+      painter->translate(0,-offset);
 
-              painter->setPen(QPen( _helper.decoColor( background, color ) , penThickness, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-              painter->drawPolyline(a);
-
-              return true;
-          }
+      painter->setPen(QPen(_helper.decoColor(background, color), penThickness, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+      painter->drawPolyline(a);
+      return true;
+      }
 
 bool MStyle::drawIndicatorHeaderArrowPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const
       {
@@ -3139,51 +3139,60 @@ void MStyle::renderScrollBarArrow(QPainter* painter, const QRect& r, const QColo
               painter->restore();
           }
 
-    QPolygonF MStyle::genericArrow(MStyle::ArrowOrientation orientation, MStyle::ArrowSize size) const
-    {
+//---------------------------------------------------------
+//   genericArrow
+//---------------------------------------------------------
 
-              QPolygonF a;
-              switch( orientation )
-              {
-                        case ArrowUp:
-                        {
-                                  if( size == ArrowTiny ) a << QPointF( -1.75, 1.125 ) << QPointF( 0.5, -1.125 ) << QPointF( 2.75, 1.125 );
-                                        else if( size == ArrowSmall ) a << QPointF( -2,1.5) << QPointF(0.5, -1.5) << QPointF(3,1.5);
-                                        else a << QPointF( -3,2.5) << QPointF(0.5, -1.5) << QPointF(4,2.5);
-                                        break;
-                              }
+QPolygonF MStyle::genericArrow(MStyle::ArrowOrientation orientation, MStyle::ArrowSize size) const
+      {
+      QPolygonF a(3);
 
-                        case ArrowDown:
-                        {
-                                  if( size == ArrowTiny ) a << QPointF( -1.75, -1.125 ) << QPointF( 0.5, 1.125 ) << QPointF( 2.75, -1.125 );
-                                        else if( size == ArrowSmall ) a << QPointF( -2,-1.5) << QPointF(0.5, 1.5) << QPointF(3,-1.5);
-                                        else a << QPointF( -3,-1.5) << QPointF(0.5, 2.5) << QPointF(4,-1.5);
-                                        break;
-                              }
+      switch (orientation) {
+            case ArrowUp: {
+                  if (size == ArrowTiny)
+                        a << QPointF(-1.75, 1.125) << QPointF(0.5, -1.125) << QPointF(2.75, 1.125);
+                  else if( size == ArrowSmall )
+                        a << QPointF( -2,1.5) << QPointF(0.5, -1.5) << QPointF(3,1.5);
+                  else
+                        a << QPointF( -3,2.5) << QPointF(0.5, -1.5) << QPointF(4,2.5);
+                  break;
+                  }
 
-                        case ArrowLeft:
-                        {
-                                  if( size == ArrowTiny ) a << QPointF( 1.125, -1.75 ) << QPointF( -1.125, 0.5 ) << QPointF( 1.125, 2.75 );
-                                        else if( size == ArrowSmall ) a << QPointF(1.5,-2) << QPointF(-1.5, 0.5) << QPointF(1.5,3);
-                                        else a << QPointF(2.5,-3) << QPointF(-1.5, 0.5) << QPointF(2.5,4);
-                                        break;
-                              }
+            case ArrowDown: {
+                  if( size == ArrowTiny )
+                        a << QPointF( -1.75, -1.125 ) << QPointF( 0.5, 1.125 ) << QPointF( 2.75, -1.125 );
+                  else if( size == ArrowSmall )
+                        a << QPointF( -2,-1.5) << QPointF(0.5, 1.5) << QPointF(3,-1.5);
+                  else
+                        a << QPointF( -3,-1.5) << QPointF(0.5, 2.5) << QPointF(4,-1.5);
+                  break;
+                  }
 
-                        case ArrowRight:
-                        {
-                                  if( size == ArrowTiny ) a << QPointF( -1.125, -1.75 ) << QPointF( 1.125, 0.5 ) << QPointF( -1.125, 2.75 );
-                                        else if( size == ArrowSmall ) a << QPointF(-1.5,-2) << QPointF(1.5, 0.5) << QPointF(-1.5,3);
-                                        else a << QPointF(-1.5,-3) << QPointF(2.5, 0.5) << QPointF(-1.5,4);
-                                        break;
-                              }
+            case ArrowLeft: {
+                  if( size == ArrowTiny )
+                        a << QPointF( 1.125, -1.75 ) << QPointF( -1.125, 0.5 ) << QPointF( 1.125, 2.75 );
+                  else if( size == ArrowSmall )
+                        a << QPointF(1.5,-2) << QPointF(-1.5, 0.5) << QPointF(1.5,3);
+                  else
+                        a << QPointF(2.5,-3) << QPointF(-1.5, 0.5) << QPointF(2.5,4);
+                  break;
+                  }
 
-                        default: break;
+            case ArrowRight: {
+                  if( size == ArrowTiny )
+                        a << QPointF( -1.125, -1.75 ) << QPointF( 1.125, 0.5 ) << QPointF( -1.125, 2.75 );
+                  else if( size == ArrowSmall )
+                        a << QPointF(-1.5,-2) << QPointF(1.5, 0.5) << QPointF(-1.5,3);
+                  else
+                        a << QPointF(-1.5,-3) << QPointF(2.5, 0.5) << QPointF(-1.5,4);
+                  break;
+                  }
 
-                    }
-
-              return a;
-
-          }
+            default:
+                  break;
+            }
+      return a;
+      }
 
 //---------------------------------------------------------
 //   renderDialSlab
