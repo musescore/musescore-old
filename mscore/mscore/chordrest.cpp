@@ -774,8 +774,7 @@ void ChordRest::remove(Element* e)
                                     return;
                               ++n;
                               }
-                        for (int i = 0; i < n; ++i)
-                              _lyricsList.removeLast();
+                        _lyricsList.clear();
                         return;
                         }
                   }

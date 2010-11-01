@@ -536,7 +536,8 @@ void ScoreView::lyricsEndEdit()
 
 void Lyrics::layout()
       {
-      setTextStyle((_no % 2) ? TEXT_STYLE_LYRIC2 : TEXT_STYLE_LYRIC1);
+      if (!styled())
+            _textStyle = (_no % 2) ? TEXT_STYLE_LYRIC2 : TEXT_STYLE_LYRIC1;
       Text::layout();
       double lh             = lineSpacing();
       double noteHeadWidth2 = symbols[score()->symIdx()][quartheadSym].width(magS()) * .5;
@@ -552,7 +553,7 @@ void Lyrics::layout()
       //
       // left align if syllable spans more than one note
       //
-      if (_ticks == 0)
+      if (_ticks == 0 && (align() & ALIGN_HCENTER))
             x = noteHeadWidth2 - bbox().width() * .5;
       else
             x = 0.0;
