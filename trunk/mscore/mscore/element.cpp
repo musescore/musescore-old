@@ -239,7 +239,8 @@ Element::~Element()
                   if (e == this) {
 //                        if (debugMode)
                               printf("======~Element: %p still in selection!\n", this);
-                        abort();
+                        if (debugMode)
+                              abort();
                         score()->deselect(this);
                         }
                   }
