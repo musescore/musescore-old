@@ -156,6 +156,20 @@ void SyntiState::read(QDomElement e)
                   }
             else if (tag == "s")
                   append(SyntiParameter(name, e.attribute("val")));
+            else if (tag == "Synth") {
+                  // obsolete
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        QString tag(ee.tagName());
+                        if (tag == "f") {
+                              double val = ee.attribute("val").toDouble();
+                              append(SyntiParameter(name, val));
+                              }
+                        else if (tag == "s")
+                              append(SyntiParameter(name, ee.attribute("val")));
+                        else
+                              domError(ee);
+                        }
+                  }
             else
                   domError(e);
             }
