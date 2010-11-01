@@ -661,7 +661,7 @@ MuseScore::MuseScore()
       //    Menu Create
       //---------------------
 
-      menuCreate = genCreateMenu(mb);
+      QMenu* menuCreate = genCreateMenu(mb);
       mb->setObjectName("Create");
       mb->addMenu(menuCreate);
 
@@ -1155,23 +1155,6 @@ void MuseScore::setCurrentScoreView(ScoreView* view)
       else
             cs = 0;
       bool enable = cs != 0;
-      if (paletteBox)
-            paletteBox->setEnabled(enable);
-      transportTools->setEnabled(enable);
-      cpitchTools->setEnabled(enable);
-      mag->setEnabled(enable);
-      entryTools->setEnabled(enable);
-
-      QList<QObject*> ol = menuBar()->children();
-      foreach(QObject* o, ol) {
-            QMenu* menu = qobject_cast<QMenu*>(o);
-            if (!menu)
-                  continue;
-            QString s(menu->objectName());
-            if (s == "File" || s == "Help" || s == "Edit")
-                  continue;
-            menu->setEnabled(enable);
-            }
       if (seq)
             seq->setScoreView(cv);
       if (playPanel)
@@ -2304,6 +2287,24 @@ void MuseScore::changeState(ScoreState val)
             }
       if (val != STATE_SEARCH && searchDialog)
             searchDialog->hide();
+      
+      bool enable = val != STATE_DISABLED;
+      QList<QObject*> ol = menuBar()->children();
+      foreach(QObject* o, ol) {
+           QMenu* menu = qobject_cast<QMenu*>(o);
+           if (!menu)
+                 continue;
+           QString s(menu->objectName());
+           if (s == "File" || s == "Help" || s == "Edit")
+                 continue;
+           menu->setEnabled(enable);
+           }
+      if (paletteBox)
+           paletteBox->setEnabled(enable);
+      transportTools->setEnabled(enable && !noSeq);
+      cpitchTools->setEnabled(enable);
+      mag->setEnabled(enable);
+      entryTools->setEnabled(enable);
 
       switch(val) {
             case STATE_DISABLED:

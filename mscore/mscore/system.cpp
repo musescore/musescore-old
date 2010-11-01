@@ -479,6 +479,7 @@ void System::setInstrumentName(int staffIdx)
       if (!iname) {
             Part* part = s->part();
             iname = new TextC(_firstSystem ? (*part->longName()) : (*part->shortName()));
+            iname->setSelectable(false);
             staff->instrumentName = iname;
             }
       else {

@@ -413,7 +413,7 @@ void Score::layoutStage1()
                                     foreach(const Element* el, _gel) {
                                           if (el->type() == VOLTA) {
                                                 const Volta* volta = static_cast<const Volta*>(el);
-                                                if (m->tick() >= volta->tick() && m->tick() <= volta->tick2()) {
+                                                if (m->tick() == volta->tick2()) {
                                                       m->setBreakMMRest(true);
                                                       break;
                                                       }
