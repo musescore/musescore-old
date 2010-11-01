@@ -196,11 +196,11 @@ const QColor& StyleHelper::backgroundTopColor(const QColor &color) const
 const QColor& StyleHelper::backgroundBottomColor(const QColor &color) const
       {
       const quint64 key( color.rgba() );
-      QColor* out( m_backgroundBottomColorCache.object( key ) );
-      if( !out ) {
-            const QColor midColor(ColorScheme::shade(color, ColorScheme::MidShade, 0.0) );
-            if( lowThreshold(color) )
-                  out = new QColor( midColor );
+      QColor* out(m_backgroundBottomColorCache.object(key));
+      if (!out) {
+            const QColor midColor(ColorScheme::shade(color, ColorScheme::MidShade, 0.0));
+            if (lowThreshold(color))
+                  out = new QColor(midColor);
             else {
                   const qreal by(ColorUtils::luma(color) );
                   const qreal my(ColorUtils::luma(midColor) );
@@ -680,9 +680,8 @@ void StyleHelper::renderMenuBackground(QPainter* p, const QRect& clipRect, const
       const QRect lowerRect( 0,splitY, r.width(), r.height() - splitY );
       p->fillRect(lowerRect, backgroundBottomColor(color));
 
-      if (clipRect.isValid()) {
+      if (clipRect.isValid())
             p->restore();
-            }
       }
 
 //---------------------------------------------------------
@@ -719,12 +718,12 @@ QPixmap StyleHelper::verticalGradient(const QColor &color, int height, int offse
 
 QPixmap StyleHelper::radialGradient(const QColor &color, int width, int height) const
       {
-      const quint64 key( ( quint64(color.rgba()) << 32) | width | 0xb000 );
-      QPixmap *pixmap( m_backgroundCache.object( key ) );
+      const quint64 key((quint64(color.rgba()) << 32) | width | 0xb000);
+      QPixmap *pixmap(m_backgroundCache.object(key));
 
       if (!pixmap) {
-            pixmap = new QPixmap(width, height);
-            pixmap->fill(Qt::transparent);
+            QImage image(width, height,  QImage::Format_ARGB32_Premultiplied);
+            image.fill(Qt::transparent);
 
             QColor radialColor = backgroundRadialColor(color);
             radialColor.setAlpha(255);
@@ -736,11 +735,11 @@ QPixmap StyleHelper::radialGradient(const QColor &color, int width, int height) 
             gradient.setColorAt(0.75, radialColor);
             radialColor.setAlpha(0);
             gradient.setColorAt(1, radialColor);
-            QPainter p(pixmap);
+            QPainter p(&image);
             p.scale(width/128.0,1);
             p.fillRect(QRect(0,0,128,height), gradient);
             p.end();
-
+            pixmap = new QPixmap(QPixmap::fromImage(image));
             m_backgroundCache.insert(key, pixmap);
             }
       return *pixmap;
