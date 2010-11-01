@@ -51,7 +51,7 @@ bool MStyleConfigData::cacheEnabled = true;
 int  MStyleConfigData::maxCacheSize = 512;
 bool MStyleConfigData::widgetExplorerEnabled = false;
 bool MStyleConfigData::drawWidgetRects = true;
-int  MStyleConfigData::scrollBarWidth  = 15;
+int  MStyleConfigData::scrollBarWidth  = 12;    // 15;
 
 bool MStyleConfigData::comboBoxTransitionsEnabled = true;
 bool MStyleConfigData::labelTransitionsEnabled = true;

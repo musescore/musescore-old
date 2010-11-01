@@ -276,7 +276,8 @@ void FretDiagram::layout()
             }
       setbbox(QRectF(x, y, w, h));
 //      Element::layout();      // alignment & offset
-      setPos(ipos() + QPointF(-w * .5, - (h + _spatium * 1.5)));
+//      setPos(ipos() + QPointF(-w * .5, - (h + _spatium * 1.5)));
+      setPos(0.0, 0.0);
       }
 
 //---------------------------------------------------------
