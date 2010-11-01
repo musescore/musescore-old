@@ -29,6 +29,7 @@
 #include "palette.h"
 #include "keysig.h"
 #include "measure.h"
+#include "tablature.h"
 
 extern Palette* newKeySigPalette();
 
@@ -352,12 +353,22 @@ void InstrumentWizard::createInstruments(Score* cs)
                   staff->setClef(0, sli->clef());
 
                   staff->setUseTablature(t->useTablature);
+
+                  if (staff->useTablature())
+                        staff->setClef(0, CLEF_TAB);
+                  else
+                        staff->setClef(0, sli->clef());
+
                   if (cidx > MAX_STAVES) {
                         staff->setLines(5);
                         staff->setSmall(false);
+                        staff->setUseTablature(false);
                         }
                   else {
-                        staff->setLines(t->staffLines[cidx]);
+                        if (staff->useTablature())
+                              staff->setLines(t->tablature->strings());
+                        else
+                              staff->setLines(t->staffLines[cidx]);
                         staff->setSmall(t->smallStaff[cidx]);
                         }
                   if (cidx == 0) {
