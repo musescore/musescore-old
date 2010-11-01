@@ -180,6 +180,8 @@ bool Rest::acceptDrop(ScoreView*, const QPointF&, int type, int subtype) const
          || (type == BAR_LINE)
          || (type == BREATH)
          || (type == CHORD)
+         || (type == STAFF_STATE)
+         || (type == INSTRUMENT_CHANGE)
          || (type == DYNAMIC)
          || (type == HARMONY)
          || (type == STAFF_TEXT)
@@ -226,17 +228,6 @@ Element* Rest::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Eleme
                   delete e;
                   break;
 
-            case STAFF_TEXT:
-                  {
-                  StaffText* s = static_cast<StaffText*>(e);
-                  s->setTrack((track() / VOICES) * VOICES);
-                  s->setSystemFlag(false);
-                  s->setParent(segment());
-                  score()->undoAddElement(s);
-                  score()->setLayoutAll(true);
-                  }
-                  break;
-
             case CHORD:
                   {
                   Chord* c      = static_cast<Chord*>(e);
@@ -252,12 +243,6 @@ Element* Rest::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Eleme
                   delete e;
                   }
                   break;
-            case HARMONY:
-                  e->setParent(segment());
-                  e->setTrack((track() / VOICES) * VOICES);
-                  score()->select(e, SELECT_SINGLE, 0);
-                  score()->undoAddElement(e);
-                  return e;
             default:
                   return ChordRest::drop(view, p1, p2, e);
             }

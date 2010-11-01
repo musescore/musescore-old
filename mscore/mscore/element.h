@@ -346,6 +346,7 @@ class Element {
                 || type() == MARKER
                 || type() == JUMP
                 || type() == STAFF_TEXT
+                || type() == INSTRUMENT_CHANGE
                 || type() == TEMPO_TEXT;
             }
       double point(const Spatium sp) const { return sp.val() * spatium(); }

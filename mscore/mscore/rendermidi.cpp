@@ -245,7 +245,6 @@ struct OttavaShiftSegment {
 
 static void collectMeasureEvents(EventMap* events, Measure* m, Part* part, int tickOffset)
       {
-      Instrument* instr = part->instr();
       int firstStaffIdx = m->score()->staffIdx(part);
       int nextStaffIdx  = firstStaffIdx + part->nstaves();
 
@@ -254,6 +253,7 @@ static void collectMeasureEvents(EventMap* events, Measure* m, Part* part, int t
       int etrack      = nextStaffIdx * VOICES;
 
       for (Segment* seg = m->first(st); seg; seg = seg->next(st)) {
+            int tick = seg->tick();
             for (int track = strack; track < etrack; ++track) {
                   // skip linked staves, except primary
                   if (!m->score()->staff(track / VOICES)->primaryStaff()) {
@@ -265,14 +265,14 @@ static void collectMeasureEvents(EventMap* events, Measure* m, Part* part, int t
                         Chord* chord = static_cast<Chord*>(cr);
                         Staff* staff = chord->staff();
                         int velocity = staff->velocities().velo(seg->tick());
-                        Instrument* instr = chord->staff()->part()->instr();
+                        Instrument* instr = chord->staff()->part()->instr(tick);
                         //
                         // adjust velocity for instrument, channel and
                         // depending on articulation marks
                         //
                         int channel = 0;  // note->subchannel();
                         instr->updateVelocity(&velocity, channel, "");
-                        foreach(Articulation* a, *chord->getArticulations())
+                        foreach (Articulation* a, *chord->getArticulations())
                               instr->updateVelocity(&velocity, channel, a->subtypeName());
 
                         Tremolo* tremolo = chord->tremolo();
@@ -333,6 +333,7 @@ static void collectMeasureEvents(EventMap* events, Measure* m, Part* part, int t
       // collect program changes and controller
       //
       for (Segment* s = m->first(SegChordRest); s; s = s->next(SegChordRest)) {
+            int tick = s->tick();
             foreach(Element* e, s->annotations()) {
                   if (e->type() != STAFF_TEXT
                      || e->staffIdx() < firstStaffIdx
@@ -340,6 +341,8 @@ static void collectMeasureEvents(EventMap* events, Measure* m, Part* part, int t
                         continue;
                   const StaffText* st = static_cast<const StaffText*>(e);
                   int tick = s->tick() + tickOffset;
+
+                  Instrument* instr = e->staff()->part()->instr(tick);
                   foreach (const ChannelActions& ca, *st->channelActions()) {
                         int channel = ca.channel;
                         foreach(const QString& ma, ca.midiActionNames) {

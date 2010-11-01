@@ -38,6 +38,8 @@
 #include "hairpin.h"
 #include "ottava.h"
 #include "al/sig.h"
+#include "staffstate.h"
+#include "instrchange.h"
 
 //---------------------------------------------------------
 //   subTypeName
@@ -388,6 +390,22 @@ void Segment::add(Element* el)
             case TEXT:
                   _annotations.append(el);
                   break;
+            case STAFF_STATE:
+                  if (el->subtype() == STAFF_STATE_INSTRUMENT) {
+                        StaffState* ss = static_cast<StaffState*>(el);
+                        Part* part = el->staff()->part();
+                        part->setInstrument(ss->instrument(), tick());
+                        }
+                  _annotations.append(el);
+                  break;
+
+            case INSTRUMENT_CHANGE: {
+                  InstrumentChange* is = static_cast<InstrumentChange*>(el);
+                  Part* part = is->staff()->part();
+                  part->setInstrument(is->instrument(), tick());
+                  _annotations.append(el);
+                  break;
+                  }
 
             case CHORD:
             case REST:
@@ -476,6 +494,22 @@ void Segment::remove(Element* el)
             case JUMP:
             case IMAGE:
             case TEXT:
+                  _annotations.removeOne(el);
+                  break;
+            case STAFF_STATE:
+                  if (el->subtype() == STAFF_STATE_INSTRUMENT) {
+                        Part* part = el->staff()->part();
+                        part->removeInstrument(tick());
+                        }
+                  _annotations.removeOne(el);
+                  break;
+
+            case INSTRUMENT_CHANGE:
+                  {
+                  InstrumentChange* is = static_cast<InstrumentChange*>(el);
+                  Part* part = is->staff()->part();
+                  part->removeInstrument(tick());
+                  }
                   _annotations.removeOne(el);
                   break;
 

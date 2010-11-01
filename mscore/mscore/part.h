@@ -36,16 +36,16 @@ class InstrumentTemplate;
 
 class Part {
       Score* _score;
-      Instrument* _instr;
-      Text* _longName;
-      Text* _shortName;
+
+      QString _trackName;           ///< used in tracklist
+      InstrumentList _instrList;
+
       QList<Staff*> _staves;
       QString _id;                  ///< used for MusicXml import
       bool _show;                   ///< show part in partitur if true
 
    public:
       Part(Score*);
-      ~Part();
       void initFromInstrTemplate(const InstrumentTemplate*);
 
       void read(QDomElement);
@@ -57,19 +57,13 @@ class Part {
       void setId(const QString& s)              { _id = s; }
       QString id() const                        { return _id; }
 
-      QString shortNameHtml() const;
-      QString longNameHtml()  const;
+      const QTextDocumentFragment& longName(int tick = 0) const  { return instr(tick)->longName();  }
+      const QTextDocumentFragment& shortName(int tick = 0) const { return instr(tick)->shortName(); }
+      QTextDocumentFragment& longName(int tick = 0)              { return instr(tick)->longName();  }
+      QTextDocumentFragment& shortName(int tick = 0)             { return instr(tick)->shortName(); }
 
-      Text* longName()                         { return _longName; }
-      Text* shortName()                        { return _shortName; }
       void setLongName(const QString& s);
-      void setLongNameEncoded(const QString& s);
-      void setShortNameEncoded(const QString& s);
       void setShortName(const QString& s);
-      void setLongNameHtml(const QString& s);
-      void setShortNameHtml(const QString& s);
-      void setLongName(const QTextDocument& s);
-      void setShortName(const QTextDocument& s);
 
       void setStaves(int);
 
@@ -88,8 +82,15 @@ class Part {
       bool show() const                        { return _show;        }
       void setShow(bool val);
       Score* score() const                     { return _score; }
-      Instrument* instr() const                { return _instr; }
-      void setInstrument(const Instrument&);
+
+      Instrument* instr(int tick = 0);
+      const Instrument* instr(int tick = 0) const;
+      void setInstrument(const Instrument&, int tick = 0);
+      void removeInstrument(int tick);
+
+      QString trackName() const                { return _trackName; }
+      void setTrackName(const QString& s)      { _trackName = s; }
+      InstrumentList* instrList()              { return &_instrList;       }
       };
 
 #endif

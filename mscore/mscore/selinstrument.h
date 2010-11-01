@@ -1,7 +1,7 @@
 //=============================================================================
 //  MuseScore
 //  Linux Music Score Editor
-//  $Id$
+//  $Id: editstaff.h 3629 2010-10-26 10:40:47Z wschweer $
 //
 //  Copyright (C) 2002-2009 Werner Schweer and others
 //
@@ -18,40 +18,29 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __EDITSTAFF_H__
-#define __EDITSTAFF_H__
+#ifndef __SELINSTRUMENT_H__
+#define __SELINSTRUMENT_H__
 
-#include "ui_editstaff.h"
 #include "ui_selectinstr.h"
-#include "instrument.h"
 
-class Staff;
+class Instrument;
 class InstrumentTemplate;
 
 //---------------------------------------------------------
-//   EditStaff
-//    edit staff and part properties
+//   SelectInstrument
 //---------------------------------------------------------
 
-class EditStaff : public QDialog, private Ui::EditStaffBase {
+class SelectInstrument : public QDialog, private Ui::SelectInstrument {
       Q_OBJECT
 
-      Staff* staff;
-      Instrument instrument;
-
-      void apply();
-      void initFromInstrument(const Instrument&);
-      void setInterval(const Interval&);
-
    private slots:
-      void bboxClicked(QAbstractButton* button);
-      void editDrumsetClicked();
-      void editTablatureClicked();
-      void showInstrumentDialog();
-      void showEditStaffType();
+      void buildTemplateList();
+      void on_instrumentList_itemSelectionChanged();
+      void on_instrumentList_itemDoubleClicked(QTreeWidgetItem* item, int);
 
    public:
-      EditStaff(Staff*, QWidget* parent = 0);
+      SelectInstrument(const Instrument&, QWidget* parent = 0);
+      const InstrumentTemplate* instrTemplate() const;
       };
 
 #endif

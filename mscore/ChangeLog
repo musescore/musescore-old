@@ -1,3 +1,6 @@
+1.nov (ws)
+      - new text element "Instrument Change"
+      - added new palette for text objects
 30.oct (lv)
       - fix #7721: Incorrect chord duration importing MusicXML dotted notes
 29.oct (ws)

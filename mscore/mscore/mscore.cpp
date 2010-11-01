@@ -63,6 +63,7 @@
 #include "navigator.h"
 #include "chord.h"
 #include "mstyle/mstyle.h"
+#include "segment.h"
 
 #ifdef OSC
 #include "ofqf/qoscserver.h"
@@ -2627,9 +2628,11 @@ void MuseScore::play(Element* e) const
                   seq->stopNotes();
                   Chord* c = static_cast<Chord*>(e);
                   Part* part = c->staff()->part();
+                  int tick = c->segment() ? c->segment()->tick() : 0;
+                  Instrument* instr = part->instr(tick);
                   foreach(Note* n, c->notes()) {
-                        seq->startNote(part->instr()->channel(n->subchannel()), n->ppitch(), 80,
-                           n->tuning());
+                        const Channel& channel = instr->channel(n->subchannel());
+                        seq->startNote(channel, n->ppitch(), 80, n->tuning());
                         }
                   seq->startNoteTimer(preferences.defaultPlayDuration);
                   }
@@ -2641,8 +2644,10 @@ void MuseScore::play(Element* e, int pitch) const
       if (mscore->playEnabled() && e->type() == NOTE) {
             Note* note = static_cast<Note*>(e);
             Part* part = note->staff()->part();
-            seq->startNote(part->instr()->channel(note->subchannel()), pitch, 80,
-               preferences.defaultPlayDuration, note->tuning());
+            int tick = note->chord()->segment() ? note->chord()->segment()->tick() : 0;
+            Instrument* instr = part->instr(tick);
+            const Channel& channel = instr->channel(note->subchannel());
+            seq->startNote(channel, pitch, 80, preferences.defaultPlayDuration, note->tuning());
             }
       }
 

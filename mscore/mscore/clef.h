@@ -118,7 +118,6 @@ class ClefList : public std::map<const int, ClefType> {
       ClefType clef(int tick) const;
       void setClef(int tick, ClefType idx);
       void read(QDomElement, Score*);
-//      void write(Xml&, const char* name) const;
       void removeTime(int, int);
       void insertTime(int, int);
       };

@@ -526,7 +526,7 @@ void Fluid::process(unsigned len, float* lout, float* rout, int stride, float ga
 
       if (mutex.tryLock()) {
             if (activeVoices.isEmpty())
-                  silentBlocks = 0;
+                  silentBlocks--;
             else {
                   silentBlocks = SILENT_BLOCKS;
                   foreach (Voice* v, activeVoices)

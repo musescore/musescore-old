@@ -856,7 +856,7 @@ void MusicXml::xmlScorePart(QDomElement e, QString id)
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         if (ee.tagName() == "instrument-name") {
                               // part-name or instrument-name?
-                              if (part->longName()->getText().isEmpty())
+                              if (part->longName().isEmpty())
                                     part->setLongName(ee.text());
                               }
                         else

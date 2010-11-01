@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -30,6 +30,7 @@
 #include "instrtemplate.h"
 #include "seq.h"
 #include "stafftype.h"
+#include "selinstrument.h"
 
 //---------------------------------------------------------
 //   EditStaff
@@ -57,8 +58,8 @@ EditStaff::EditStaff(Staff* s, QWidget* parent)
 
       small->setChecked(staff->small());
       setInterval(instrument.transpose());
-      shortName->setHtml(part->shortNameHtml());
-      longName->setHtml(part->longNameHtml());
+      shortName->setHtml(part->instr(0)->shortName().toHtml());
+      longName->setHtml(part->instr(0)->longName().toHtml());
       invisible->setChecked(staff->invisible());
 
       aPitchMin->setValue(instrument.minPitchA());
@@ -153,8 +154,8 @@ void EditStaff::apply()
       const QTextDocument* ln = longName->document();
       const QTextDocument* sn = shortName->document();
 
-      bool snd = sn->toHtml() != part->shortName()->doc()->toHtml();
-      bool lnd = ln->toHtml() != part->longName()->doc()->toHtml();
+      bool snd = sn->toHtml() != part->shortName().toHtml();
+      bool lnd = ln->toHtml() != part->longName().toHtml();
 
       instrument.setMinPitchA(aPitchMin->value());
       instrument.setMaxPitchA(aPitchMax->value());
@@ -197,7 +198,7 @@ void EditStaff::showInstrumentDialog()
       {
       SelectInstrument si(instrument, this);
       if (si.exec()) {
-            InstrumentTemplate* t = si.instrTemplate();
+            const InstrumentTemplate* t = si.instrTemplate();
             // setMidiProgram(t->midiProgram);
 
             aPitchMin->setValue(t->minPitchA);
@@ -207,7 +208,7 @@ void EditStaff::showInstrumentDialog()
 
             shortName->setHtml(t->shortName);
             longName->setHtml(t->longName);
-            instrument.setTrackName(t->trackName);
+//TODOxx            trackName = t->trackName;
 
             setInterval(t->transpose);
 
@@ -221,64 +222,6 @@ void EditStaff::showInstrumentDialog()
             instrument.setArticulation(t->articulation);
             instrument.setChannel(t->channel);
             }
-      }
-
-//---------------------------------------------------------
-//   SelectInstrument
-//---------------------------------------------------------
-
-SelectInstrument::SelectInstrument(const Instrument& instrument, QWidget* parent)
-   : QDialog(parent)
-      {
-      setupUi(this);
-      currentInstrument->setText(instrument.trackName());
-      buildTemplateList();
-      buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
-      connect(showMore, SIGNAL(clicked()), SLOT(buildTemplateList()));
-      }
-
-//---------------------------------------------------------
-//   buildTemplateList
-//---------------------------------------------------------
-
-void SelectInstrument::buildTemplateList()
-      {
-      populateInstrumentList(instrumentList, showMore->isChecked());
-      }
-
-//---------------------------------------------------------
-//   on_instrumentList_itemSelectionChanged
-//---------------------------------------------------------
-
-void SelectInstrument::on_instrumentList_itemSelectionChanged()
-      {
-      QList<QTreeWidgetItem*> wi = instrumentList->selectedItems();
-      bool flag = !wi.isEmpty();
-      buttonBox->button(QDialogButtonBox::Ok)->setEnabled(flag);
-      }
-
-//---------------------------------------------------------
-//   on_instrumentList
-//---------------------------------------------------------
-
-void SelectInstrument::on_instrumentList_itemDoubleClicked(QTreeWidgetItem*, int)
-      {
-      QList<QTreeWidgetItem*> wi = instrumentList->selectedItems();
-      if(!wi.isEmpty())
-          done(true);
-      }
-
-//---------------------------------------------------------
-//   instrTemplate
-//---------------------------------------------------------
-
-InstrumentTemplate* SelectInstrument::instrTemplate() const
-      {
-      QList<QTreeWidgetItem*> wi = instrumentList->selectedItems();
-      if (wi.isEmpty())
-            return 0;
-      InstrumentTemplateListItem* item = (InstrumentTemplateListItem*)wi.front();
-      return item->instrumentTemplate();
       }
 
 //---------------------------------------------------------

@@ -25,10 +25,8 @@
 #include "event.h"
 #include "interval.h"
 
-class Instrument;
+class InstrumentTemplate;
 class Xml;
-class Staff;
-class Score;
 class Drumset;
 class Tablature;
 
@@ -106,23 +104,17 @@ struct Channel {
 //   Instrument
 //---------------------------------------------------------
 
-struct Instrument {
-      QString _trackName;           ///< used in tracklist
-      char _minPitchA, _maxPitchA, _minPitchP, _maxPitchP;
-      Interval _transpose;
+class InstrumentData;
 
-      bool _useDrumset;
-      Drumset* _drumset;
-      Tablature* _tablature;
-
-      QList<NamedEventList> _midiActions;
-      QList<MidiArticulation> _articulation;
-      QList<Channel> _channel;      // at least one entry
+class Instrument {
+      QSharedDataPointer<InstrumentData> d;
 
    public:
       Instrument();
       Instrument(const Instrument&);
       ~Instrument();
+      Instrument& operator=(const Instrument&);
+      bool operator==(const Instrument&) const;
 
       void read(QDomElement);
       void write(Xml& xml) const;
@@ -130,41 +122,60 @@ struct Instrument {
       int channelIdx(const QString& s) const;
       void updateVelocity(int* velocity, int channel, const QString& name);
 
-      bool operator==(const Instrument&) const;
-
-      int minPitchP() const                                  { return _minPitchP;  }
-      int maxPitchP() const                                  { return _maxPitchP;  }
-      int minPitchA() const                                  { return _minPitchA;  }
-      int maxPitchA() const                                  { return _maxPitchA;  }
-      void setMinPitchP(int v)                               { _minPitchP = v;     }
-      void setMaxPitchP(int v)                               { _maxPitchP = v;     }
-      void setMinPitchA(int v)                               { _minPitchA = v;     }
-      void setMaxPitchA(int v)                               { _maxPitchA = v;     }
-      Interval transpose() const                             { return _transpose; }
-      void setTranspose(const Interval& v)                   { _transpose = v; }
-
-      QString trackName() const                              { return _trackName;  }
-      void setTrackName(const QString& s)                    { _trackName = s; }
+      int minPitchP() const;
+      int maxPitchP() const;
+      int minPitchA() const;
+      int maxPitchA() const;
+      void setMinPitchP(int v);
+      void setMaxPitchP(int v);
+      void setMinPitchA(int v);
+      void setMaxPitchA(int v);
+      Interval transpose() const;
+      void setTranspose(const Interval& v);
 
       void setDrumset(Drumset* ds);       // drumset is now owned by Instrument
-      Drumset* drumset() const                               { return _drumset;    }
-      bool useDrumset() const                                { return _useDrumset; }
+      Drumset* drumset() const;
+      bool useDrumset() const;
       void setUseDrumset(bool val);
-      void setAmateurPitchRange(int a, int b)                { _minPitchA = a; _maxPitchA = b; }
-      void setProfessionalPitchRange(int a, int b)           { _minPitchP = a; _maxPitchP = b; }
-      Channel& channel(int idx)                              { return _channel[idx]; }
-      const Channel& channel(int idx) const                  { return _channel[idx]; }
+      void setAmateurPitchRange(int a, int b);
+      void setProfessionalPitchRange(int a, int b);
+      Channel& channel(int idx);
+      const Channel& channel(int idx) const;
 
-      const QList<NamedEventList>& midiActions() const       { return _midiActions; }
-      const QList<MidiArticulation>& articulation() const    { return _articulation; }
-      const QList<Channel>& channel() const                  { return _channel; }
+      const QList<NamedEventList>& midiActions() const;
+      const QList<MidiArticulation>& articulation() const;
+      const QList<Channel>& channel() const;
 
-      void setMidiActions(const QList<NamedEventList>& l)    { _midiActions = l;  }
-      void setArticulation(const QList<MidiArticulation>& l) { _articulation = l; }
-      void setChannel(const QList<Channel>& l)               { _channel = l;      }
-      void setChannel(int i, const Channel& c)               { _channel[i] = c;   }
+      void setMidiActions(const QList<NamedEventList>& l);
+      void setArticulation(const QList<MidiArticulation>& l);
+      void setChannel(const QList<Channel>& l);
+      void setChannel(int i, const Channel& c);
       Tablature* tablature() const;
-      void setTablature(Tablature* t);    // tablature is now owned by Instrument
+      void setTablature(Tablature* t);
+      static Instrument fromTemplate(const InstrumentTemplate*);
+
+      const QTextDocumentFragment& longName() const;
+      const QTextDocumentFragment& shortName() const;
+      QTextDocumentFragment& longName();
+      QTextDocumentFragment& shortName();
+      QString trackName() const;
+      void setTrackName(const QString&);
+      };
+
+//---------------------------------------------------------
+//   InstrumentList
+//---------------------------------------------------------
+
+typedef std::map<const int, Instrument>::iterator iInstrument;
+typedef std::map<const int, Instrument>::const_iterator ciInstrument;
+
+class InstrumentList : public std::map<const int, Instrument> {
+      static Instrument defaultInstrument;
+   public:
+      InstrumentList() {}
+      const Instrument& instrument(int tick) const;
+      Instrument& instrument(int tick);
+      void setInstrument(const Instrument&, int tick);
       };
 
 #endif

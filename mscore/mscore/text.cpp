@@ -37,6 +37,7 @@
 #include "textproperties.h"
 #include "box.h"
 #include "segment.h"
+// #include "preferences.h"
 
 TextPalette* textPalette;
 
@@ -126,6 +127,11 @@ void Text::setText(const QString& s)
       cursor.insertText(s);
       }
 
+void Text::setText(const QTextDocumentFragment& f)
+      {
+      setHtml(f.toHtml());
+      }
+
 //---------------------------------------------------------
 //   setHtml
 //---------------------------------------------------------
@@ -192,6 +198,7 @@ const QString Text::subtypeName() const
             case TEXT_FRAME:            return "Frame";
             case TEXT_TEXTLINE:         return "TextLine";
             case TEXT_STRING_NUMBER:    return "StringNumber";
+            case TEXT_INSTRUMENT_CHANGE: return "InstrumentChange";
             default:
                   printf("unknown text subtype %d\n", subtype());
                   break;
@@ -250,6 +257,8 @@ void Text::setSubtype(const QString& s)
             st = TEXT_TEXTLINE;
       else if (s == "StringNumber")
             st = TEXT_STRING_NUMBER;
+      else if (s == "InstrumentChange")
+            st = TEXT_INSTRUMENT_CHANGE;
       else
             printf("setSubtype: unknown type <%s>\n", qPrintable(s));
       setSubtype(st);
@@ -390,7 +399,12 @@ void Text::draw(QPainter& p, ScoreView*) const
 
       // draw frame
       if (hasFrame()) {
-            p.setPen(QPen(QBrush(frameColor()), frameWidth() * DPMM));
+            QColor color(frameColor());
+            if (!visible())
+                  color = Qt::gray;
+            else if (selected())
+                  color = preferences.selectColor[track() == -1 ? 0 : voice()];
+            p.setPen(QPen(QBrush(color), frameWidth() * DPMM));
             p.setBrush(QBrush(Qt::NoBrush));
             if (circle())
                   p.drawArc(frame, 0, 5760);

@@ -53,7 +53,7 @@ void PartEdit::setPart(Part* p, Channel* a)
       {
       channel = a;
       part    = p;
-      QString s = part->instr()->trackName();
+      QString s = part->trackName();
       if (!a->name.isEmpty())
             s += "-" + a->name;
       partName->setText(s);

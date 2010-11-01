@@ -74,6 +74,7 @@ class Bend;
 class TremoloBar;
 class NoteEvent;
 class SlurSegment;
+class InstrumentChange;
 
 // #define DEBUG_UNDO
 
@@ -1501,6 +1502,23 @@ class ChangeBeamProperties : public UndoCommand {
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       UNDO_NAME("ChangeBeamProperties");
+      };
+
+//---------------------------------------------------------
+//   ChangeInstrument
+//---------------------------------------------------------
+
+class ChangeInstrument : public UndoCommand {
+      InstrumentChange* is;
+      Instrument instrument;
+
+      void flip();
+
+   public:
+      ChangeInstrument(InstrumentChange* _is, const Instrument& i) : is(_is), instrument(i) {}
+      virtual void undo() { flip(); }
+      virtual void redo() { flip(); }
+      UNDO_NAME("ChangeInstrument");
       };
 
 extern void updateNoteLines(Segment* segment, int track);

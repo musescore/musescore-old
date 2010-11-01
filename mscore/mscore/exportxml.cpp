@@ -3341,12 +3341,12 @@ foreach(Element* el, *(score->gel())) {
                   }
 
             xml.stag(QString("score-part id=\"P%1\"").arg(idx+1));
-            xml.tag("part-name", part->longName()->getText());
-            if(part->shortName() && ! part->shortName()->getText().isEmpty ())
-                xml.tag("part-abbreviation", part->shortName()->getText());
+            xml.tag("part-name", part->longName().toPlainText());
+            if (!part->shortName().isEmpty())
+                xml.tag("part-abbreviation", part->shortName().toPlainText());
 
             xml.stag(QString("score-instrument id=\"P%1-I%2\"").arg(idx+1).arg(3));
-            xml.tag("instrument-name", part->longName()->getText());
+            xml.tag("instrument-name", part->longName().toPlainText());
             xml.etag();
 
             xml.stag(QString("midi-instrument id=\"P%1-I%2\"").arg(idx+1).arg(3));
@@ -3581,7 +3581,7 @@ foreach(Element* el, *(score->gel())) {
                             xml.etag();
                           }
                         }
-                        Instrument* instrument = part->instr();
+                        const Instrument* instrument = part->instr();
                         if (instrument->transpose().chromatic) {
                           xml.stag("transpose");
                           xml.tag("diatonic",  instrument->transpose().diatonic);

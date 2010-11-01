@@ -59,7 +59,8 @@ enum {
       TEXT_TEXTLINE,
       TEXT_STRING_NUMBER,
       TEXT_HEADER,
-      TEXT_FOOTER
+      TEXT_FOOTER,
+      TEXT_INSTRUMENT_CHANGE
       };
 
 //---------------------------------------------------------
@@ -97,9 +98,13 @@ class Text : public Element {
       virtual void setSubtype(int val)      { Element::setSubtype(val);    }
 
       void setText(const QString& s);
+      void setText(const QTextDocumentFragment&);
+      void setHtml(const QString& s);
+
       QString getText() const;
       QString getHtml() const;
-      void setHtml(const QString& s);
+      QTextDocumentFragment getFragment() const { return QTextDocumentFragment(_doc); }
+
       QTextDocument* doc() const            { return _doc; }
 
       virtual void resetMode();

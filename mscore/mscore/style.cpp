@@ -335,6 +335,9 @@ void setDefaultStyle()
       AS(TextStyle(TR( "Footer"), ff, 8, false, false, false,
          ALIGN_HCENTER | ALIGN_BOTTOM, MM(-10), MM(-15), OA));
 
+      AS(TextStyle(TR( "Instrument Change"), ff,  12, true, false, false,
+         ALIGN_LEFT | ALIGN_BOTTOM, 0, -3.0, OS, 0, 0, true));
+
 #undef MM
 #undef OA
 #undef OS

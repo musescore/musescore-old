@@ -1096,7 +1096,7 @@ bool Score::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
       if (curMeasure->type() == HBOX)
             xo = point(static_cast<Box*>(curMeasure)->boxWidth());
 
-      system->setInstrumentNames();
+//      system->setInstrumentNames();
       system->layout(xo);
 
       minWidth            = system->leftMargin();
@@ -1201,6 +1201,7 @@ bool Score::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
             else
                   curMeasure = nextMeasure;
             }
+      system->setInstrumentNames();
 
       //
       //    hide empty staves

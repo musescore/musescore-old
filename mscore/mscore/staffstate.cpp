@@ -22,6 +22,12 @@
 #include "preferences.h"
 #include "score.h"
 #include "scoreview.h"
+#include "selinstrument.h"
+#include "instrtemplate.h"
+#include "segment.h"
+#include "staff.h"
+#include "part.h"
+#include "seq.h"
 
 //---------------------------------------------------------
 //   StaffState
@@ -30,11 +36,6 @@
 StaffState::StaffState(Score* score)
    : Element(score)
       {
-      _reloff.rx() = 100.0;
-      setXoff(-1.0);
-      setYoff(-2.0);
-      setOffsetType(OFFSET_SPATIUM);
-      setAlign(ALIGN_RIGHT | ALIGN_BOTTOM);
       }
 
 //---------------------------------------------------------
@@ -44,6 +45,8 @@ StaffState::StaffState(Score* score)
 void StaffState::write(Xml& xml) const
       {
       xml.stag(name());
+      if (subtype() == STAFF_STATE_INSTRUMENT)
+            _instrument.write(xml);
       Element::writeProperties(xml);
       xml.etag();
       }
@@ -55,8 +58,10 @@ void StaffState::write(Xml& xml) const
 void StaffState::read(QDomElement e)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            // QString tag(e.tagName());
-            if (!Element::readProperties(e))
+            QString tag(e.tagName());
+            if (tag == "Instrument")
+                  _instrument.read(e);
+            else if (!Element::readProperties(e))
                   domError(e);
             }
       }
@@ -102,6 +107,10 @@ void StaffState::layout()
                   path.lineTo(w, h);
                   path.lineTo(0.0, h);
                   path.lineTo(0.0, 0.0);
+                  path.moveTo(w * .5, h - _spatium * .5);
+                  path.lineTo(w * .5, _spatium * 2);
+                  path.moveTo(w * .5, _spatium * .8);
+                  path.lineTo(w * .5, _spatium * 1.0);
                   break;
 
             case STAFF_STATE_TYPE:
@@ -132,7 +141,7 @@ void StaffState::layout()
       QRectF bb(0, 0, w, h);
       bb.adjust(-lw, -lw, lw, lw);
       setbbox(bb);
-      ElementLayout::layout(this);      // alignment & offset
+      setPos(0.0, _spatium * -6.0);
       }
 
 //---------------------------------------------------------
@@ -196,14 +205,12 @@ Element* StaffState::drop(ScoreView*, const QPointF& /*p1*/, const QPointF& /*p2
 
 bool StaffState::genPropertyMenu(QMenu* popup) const
       {
-#if 0
-      if (subtype() == LAYOUT_BREAK_SECTION) {
+      if (subtype() == STAFF_STATE_INSTRUMENT) {
             QAction* a;
-            a = popup->addAction(tr("Section Break Properties..."));
+            a = popup->addAction(tr("Change Instrument Properties..."));
             a->setData("props");
             return true;
             }
-#endif
       return false;
       }
 
@@ -213,24 +220,27 @@ bool StaffState::genPropertyMenu(QMenu* popup) const
 
 void StaffState::propertyAction(ScoreView* viewer, const QString& s)
       {
-#if 0
-      if (subtype() != LAYOUT_BREAK_SECTION) {
+      if (subtype() != STAFF_STATE_INSTRUMENT) {
             Element::propertyAction(viewer, s);
             return;
             }
       if (s == "props") {
-            SectionBreakProperties sbp(this, 0);
-            if (sbp.exec()) {
-                  if (pause() != sbp.pause()) {
-                        StaffState* nlb = new StaffState(*this);
-                        nlb->setParent(parent());
-                        nlb->setPause(sbp.pause());
-                        score()->undoChangeElement(this, nlb);
+            SelectInstrument si(_instrument, 0);
+            if (si.exec()) {
+                  const InstrumentTemplate* it = si.instrTemplate();
+                  if (it) {
+                        // TODO: undo/redo
+                        _instrument = Instrument::fromTemplate(it);
+                        staff()->part()->setInstrument(_instrument, segment()->tick());
+                        score()->rebuildMidiMapping();
+                        seq->initInstruments();
+                        score()->setLayoutAll(true);
                         }
+                  else
+                        printf("no template selected?\n");
                   }
             }
       else
             Element::propertyAction(viewer, s);
-#endif
       }
 

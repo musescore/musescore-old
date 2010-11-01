@@ -1289,7 +1289,7 @@ void ScoreView::setShadowNote(const QPointF& p)
       shadowNote->setVisible(true);
       Staff* staff      = score()->staff(pos.staffIdx);
       shadowNote->setMag(staff->mag());
-      Instrument* instr = staff->part()->instr();
+      const Instrument* instr = staff->part()->instr();
       int noteheadGroup = 0;
       int line          = pos.line;
       int noteHead      = score()->inputState().duration().headType();
@@ -1693,6 +1693,8 @@ void ScoreView::dragEnterEvent(QDragEnterEvent* event)
                   case LAYOUT_BREAK:
                   case FRET_DIAGRAM:
                   case MARKER:
+                  case STAFF_STATE:
+                  case INSTRUMENT_CHANGE:
                   case JUMP:
                   case REPEAT_MEASURE:
                   case ICON:
@@ -1829,6 +1831,8 @@ void ScoreView::dragMoveEvent(QDragMoveEvent* event)
                   case TREMOLO:
                   case LAYOUT_BREAK:
                   case MARKER:
+                  case STAFF_STATE:
+                  case INSTRUMENT_CHANGE:
                   case JUMP:
                   case REPEAT_MEASURE:
                   case ICON:
@@ -1989,6 +1993,8 @@ void ScoreView::dropEvent(QDropEvent* event)
                   case TREMOLO:
                   case LAYOUT_BREAK:
                   case MARKER:
+                  case STAFF_STATE:
+                  case INSTRUMENT_CHANGE:
                   case JUMP:
                   case REPEAT_MEASURE:
                   case ICON:
@@ -3097,11 +3103,10 @@ void ScoreView::select(QMouseEvent* ev)
                   st = SELECT_ADD;
                   }
             _score->select(curElement, st, dragStaff);
-            if (mscore->playEnabled() && curElement && curElement->type() == NOTE) {
+            if (curElement && curElement->type() == NOTE) {
                   Note* note = static_cast<Note*>(curElement);
-                  Part* part = note->staff()->part();
                   int pitch = note->ppitch();
-                  seq->startNote(part->instr()->channel(note->subchannel()), pitch, 60, 1000, note->tuning());
+                  mscore->play(note, pitch);
                   }
             }
       else
