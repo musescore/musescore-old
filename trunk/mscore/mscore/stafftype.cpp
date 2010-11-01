@@ -166,56 +166,62 @@ EditStaffType::EditStaffType(QWidget* parent, Staff* st)
       }
 
 //---------------------------------------------------------
+//   saveCurrent
+//---------------------------------------------------------
+
+void EditStaffType::saveCurrent(QListWidgetItem* o)
+      {
+      int idx       = o->data(Qt::UserRole).toInt();
+      StaffType* st = staffTypes[idx];
+      StaffGroup sg;
+      if (typePitched->isChecked())
+            sg = PITCHED_STAFF;
+      else if (typeTab->isChecked())
+            sg = TAB_STAFF;
+      else if (typePercussion->isChecked())
+            sg = PERCUSSION_STAFF;
+
+      if (name->text() != st->name()
+         || st->group() != sg
+         || st->lines() != lines->value()
+         || st->lineDistance().val() != lineDistance->value()
+         || st->genClef() != useClef->isChecked()
+         || st->genKeysig() != useKeysig->isChecked()
+         || st->slashStyle() != stemless->isChecked()
+         || st->showBarlines() != useBarlines->isChecked()
+         || st->showLedgerLines() != useLedgerLines->isChecked()
+         ) {
+#if 0
+            if (!st->modified()) {
+                  StaffType* nst = new StaffType(*st);
+                  nst->setModified(true);
+                  staffTypes[idx] = nst;
+                  st = nst;
+                  }
+#endif
+            st->setName(o->text());
+            st->setGroup(sg);
+            st->setLines(lines->value());
+            st->setLineDistance(Spatium(lineDistance->value()));
+            st->setGenClef(useClef->isChecked());
+            st->setGenKeysig(useKeysig->isChecked());
+            st->setSlashStyle(stemless->isChecked());
+            st->setShowBarlines(useBarlines->isChecked());
+            st->setShowLedgerLines(useLedgerLines->isChecked());
+            modified = true;
+            }
+      }
+
+//---------------------------------------------------------
 //   typeChanged
 //---------------------------------------------------------
 
 void EditStaffType::typeChanged(QListWidgetItem* n, QListWidgetItem* o)
       {
-      printf("%p -> %p\n", o, n);
       if (n == 0)
             return;
-      if (o) {
-            //
-            // save modified StaffType
-            //
-            int idx       = o->data(Qt::UserRole).toInt();
-            StaffType* st = staffTypes[idx];
-            StaffGroup sg;
-            if (typePitched->isChecked())
-                  sg = PITCHED_STAFF;
-            else if (typeTab->isChecked())
-                  sg = TAB_STAFF;
-            else if (typePercussion->isChecked())
-                  sg = PERCUSSION_STAFF;
-
-            if (name->text() != st->name()
-               || st->group() != sg
-               || st->lines() != lines->value()
-               || st->lineDistance().val() != lineDistance->value()
-               || st->genClef() != useClef->isChecked()
-               || st->genKeysig() != useKeysig->isChecked()
-               || st->slashStyle() != stemless->isChecked()
-               || st->showBarlines() != useBarlines->isChecked()
-               || st->showLedgerLines() != useLedgerLines->isChecked()
-               ) {
-                  if (!st->modified()) {
-                        StaffType* nst = new StaffType(*st);
-                        nst->setModified(true);
-                        staffTypes[idx] = nst;
-                        st = nst;
-                        }
-                  st->setName(o->text());
-                  st->setGroup(sg);
-                  st->setLines(lines->value());
-                  st->setLineDistance(Spatium(lineDistance->value()));
-                  st->setGenClef(useClef->isChecked());
-                  st->setGenKeysig(useKeysig->isChecked());
-                  st->setSlashStyle(stemless->isChecked());
-                  st->setShowBarlines(useBarlines->isChecked());
-                  st->setShowLedgerLines(useLedgerLines->isChecked());
-                  modified = true;
-                  }
-            }
+      if (o)
+            saveCurrent(o);
       int idx = n->data(Qt::UserRole).toInt();
       StaffType* st = staffTypes[idx];
       name->setText(st->name());
@@ -257,14 +263,15 @@ void EditStaffType::createNewType()
                   }
             if (k == n) {
                   ns->setName(name);
-                  staffTypes.append(ns);
-                  QListWidgetItem* item = new QListWidgetItem(ns->name());
-                  item->setData(Qt::UserRole, n);
-                  staffTypeList->addItem(item);
-                  staffTypeList->setCurrentItem(item);
                   break;
                   }
             }
+      staffTypes.append(ns);
+      QListWidgetItem* item = new QListWidgetItem(ns->name());
+      item->setData(Qt::UserRole, staffTypes.size() - 1);
+      staffTypeList->addItem(item);
+      staffTypeList->setCurrentItem(item);
+      modified = true;
       }
 
 //---------------------------------------------------------
@@ -274,5 +281,17 @@ void EditStaffType::createNewType()
 void EditStaffType::nameEdited(const QString& s)
       {
       staffTypeList->currentItem()->setText(s);
+      }
+
+//---------------------------------------------------------
+//   accept
+//---------------------------------------------------------
+
+void EditStaffType::accept()
+      {
+      QListWidgetItem* item = staffTypeList->currentItem();
+      if (item)
+            saveCurrent(item);
+      QDialog::accept();
       }
 

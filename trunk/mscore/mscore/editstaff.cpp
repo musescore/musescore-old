@@ -46,8 +46,8 @@ EditStaff::EditStaff(Staff* s, QWidget* parent)
       instrument = *part->instr();
 
       Score* score = part->score();
-      int idx = 0;
-      int curIdx = 0;
+      int idx      = 0;
+      int curIdx   = 0;
       foreach(StaffType* st, score->staffTypes()) {
             staffType->addItem(st->name(), idx);
             if (st == s->staffType())
@@ -242,7 +242,18 @@ void EditStaff::showEditStaffType()
       EditStaffType* est = new EditStaffType(this, staff);
       if (est->exec() && est->isModified()) {
             QList<StaffType*> tl = est->getStaffTypes();
-            staff->score()->setStaffTypeList(tl);
+            Score* score = staff->score();
+            score->setStaffTypeList(tl);
+            int curIdx   = 0;
+            staffType->clear();
+            int idx = 0;
+            foreach(StaffType* st, tl) {
+                  staffType->addItem(st->name(), idx);
+                  if (st == staff->staffType())
+                        curIdx = idx;
+                  ++idx;
+                  }
+            staffType->setCurrentIndex(curIdx);
             }
       }
 
