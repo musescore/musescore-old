@@ -1284,6 +1284,7 @@ Element* Element::create(ElementType type, Score* score)
             case VBOX:              return new VBox(score);
             case TBOX:              return new TBox(score);
             case FBOX:              return new FBox(score);
+            case MEASURE:           return new Measure(score);
 
             case SLUR_SEGMENT:
             case STEM_SLASH:
@@ -1300,7 +1301,6 @@ Element* Element::create(ElementType type, Score* score)
             case TEXTLINE_SEGMENT:
             case VOLTA_SEGMENT:
             case LEDGER_LINE:
-            case MEASURE:
             case STAFF_LINES:
             case CURSOR:
             case SELECTION:
