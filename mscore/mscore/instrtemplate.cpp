@@ -69,7 +69,6 @@ void InstrumentTemplate::init(const InstrumentTemplate& t)
       shortName  = t.shortName;
       staves     = t.staves;
       extended   = t.extended;
-      tablature  = t.tablature;
 
       for (int i = 0; i < MAX_STAVES; ++i) {
             clefIdx[i]    = t.clefIdx[i];
@@ -87,6 +86,10 @@ void InstrumentTemplate::init(const InstrumentTemplate& t)
             drumset = new Drumset(*t.drumset);
       else
             drumset = 0;
+      if (t.tablature)
+            tablature = new Tablature(*t.tablature);
+      else
+            tablature = 0;
       midiActions = t.midiActions;
       channel = t.channel;
       }
@@ -320,25 +323,20 @@ void InstrumentTemplate::read(QDomElement e)
             else if (tag == "init") {
                   InstrumentTemplate* ttt = searchTemplate(val);
                   if (ttt) {
+// printf("Instrument template init <%s> from <%s>\n", qPrintable(trackName), qPrintable(ttt->trackName));
                         init(*ttt);
                         }
+                  else
+                        printf("Instrument template <%s> not found\n", qPrintable(val));
                   }
             else
                   domError(e);
             }
       for (int i = 0; i < MAX_STAVES; ++i) {
-            if (tablature) {
-                  if (clefIdx[i] == CLEF_INVALID)
-                        clefIdx[i] = CLEF_TAB;
-                  if (staffLines[i] == -1)
-                        staffLines[i] = tablature->strings();
-                  }
-            else {
-                  if (clefIdx[i] == CLEF_INVALID)
-                        clefIdx[i] = CLEF_G;
-                  if (staffLines[i] == -1)
-                        staffLines[i] = 5;
-                  }
+            if (clefIdx[i] == CLEF_INVALID)
+                  clefIdx[i] = CLEF_G;
+            if (staffLines[i] == -1)
+                  staffLines[i] = 5;
             }
       if (channel.isEmpty()) {
             Channel a;
@@ -429,10 +427,10 @@ bool loadInstrumentTemplates(const QString& instrTemplates)
                         QString val(ee.text());
                         if (tag == "instrument-group" || tag == "InstrumentGroup") {
                               InstrumentGroup* group = new InstrumentGroup;
+                              instrumentGroups.append(group);
                               group->name = ee.attribute("name");
                               group->extended = ee.attribute("extended", "0").toInt();
                               readInstrumentGroup(group, ee);
-                              instrumentGroups.append(group);
                               }
                         else if (tag == "Articulation") {
                               MidiArticulation* a = new MidiArticulation;
@@ -455,6 +453,7 @@ InstrumentTemplate* searchTemplate(const QString& name)
       {
       foreach(InstrumentGroup* g, instrumentGroups) {
             foreach(InstrumentTemplate* it, g->instrumentTemplates) {
+// printf("<%s><%s>\n", qPrintable(name), qPrintable(it->trackName));
                   if (it->trackName == name)
                         return it;
                   }

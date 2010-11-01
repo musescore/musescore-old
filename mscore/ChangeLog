@@ -1,4 +1,5 @@
 1.nov (ws)
+      - fix #7636: Guitar Staff has wrong amount of lines
       - new text element "Instrument Change"
       - added new palette for text objects
 30.oct (lv)
