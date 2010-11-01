@@ -218,7 +218,7 @@ class MuseScore : public QMainWindow {
       InsertMeasuresDialog* insertMeasuresDialog;
       QMenu* _fileMenu;
       QMenu* menuEdit;
-      QMenu* menuCreate;
+//      QMenu* menuCreate;
       QMenu* menuNotes;
       QMenu* menuLayout;
       QMenu* menuStyle;
@@ -369,7 +369,7 @@ class MuseScore : public QMainWindow {
       void setFotomode()       { changeState(STATE_FOTO); }
       void checkForUpdate();
       void registerPlugin(QAction*);
-      QMenu* fileMenu() const  { return _fileMenu; }
+//      QMenu* fileMenu() const  { return _fileMenu; }
 
    public:
       MuseScore();
