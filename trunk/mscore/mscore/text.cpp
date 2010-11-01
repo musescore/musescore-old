@@ -83,6 +83,7 @@ Text::Text(const Text& e)
       cursor                = 0;
 
       if (_editMode) {
+printf("clone in editMode================================================\n");
             cursor = new QTextCursor(_doc);
             cursor->setVisualNavigation(true);
             cursor->setPosition(cursorPos);
@@ -1119,22 +1120,19 @@ void Text::propertyAction(ScoreView* viewer, const QString& s)
             TextProperties tp(nText);
             int rv = tp.exec();
             if (rv) {
-                  QList<Element*> sl;
-                  if (tp.applyToAll())
-                        score()->scanElements(&sl, collectElements);
-                  else
-                        sl = score()->selection().elements();
+                  QList<Element*> sl = score()->selection().elements();
                   QList<Element*> selectedElements;
                   foreach(Element* e, sl) {
                         if ((e->type() != type()) || (e->subtype() != subtype()))
                               continue;
                         Text* t  = static_cast<Text*>(e);
                         Text* tt = t->clone();
-                        if (nText->styled() != styled())
-                              tt->setStyled(nText->styled());
-                        if (nText->textStyle() != textStyle())
-                              tt->setTextStyle(nText->textStyle());
-                        if (!nText->styled()) {
+
+                        if (nText->_styled != _styled)
+                              tt->_styled = nText->_styled;
+                        if (nText->_textStyle != _textStyle)
+                              tt->_textStyle = nText->_textStyle;
+                        if (!nText->_styled) {
                               if (nText->hasFrame() != hasFrame())
                                     tt->setHasFrame(nText->hasFrame());
                               if (nText->frameWidth() != frameWidth())
@@ -1172,6 +1170,7 @@ void Text::propertyAction(ScoreView* viewer, const QString& s)
                               if (nText->offsetType() != offsetType())
                                     tt->setOffsetType(nText->offsetType());
                               }
+
                         tt->doc()->setModified(true);
                         if (t->selected())
                               selectedElements.append(tt);
@@ -1581,9 +1580,6 @@ TextProperties::TextProperties(Text* t, QWidget* parent)
 
       layout->addWidget(l, 0, 0, 2, 1);
       QHBoxLayout* hb = new QHBoxLayout;
-      cb = new QCheckBox;
-      cb->setText(tr("apply to all elements of same type"));
-      hb->addWidget(cb);
       QDialogButtonBox* bb = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
       hb->addWidget(bb);
       layout->addLayout(hb, 1, 1);
@@ -1614,5 +1610,4 @@ void TextProperties::accept()
             text->styleChanged();
             }
       }
-
 

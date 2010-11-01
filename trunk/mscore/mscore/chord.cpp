@@ -528,7 +528,8 @@ void Chord::remove(Element* e)
                   _el.removeOne(e);
                   break;
             default:
-                  printf("Chord::remove: unknown element\n");
+                  ChordRest::remove(e);
+                  break;
             }
       }
 

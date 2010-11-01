@@ -530,7 +530,6 @@ SegmentType Segment::segmentType(ElementType type)
       switch (type) {
             case CHORD:
             case REST:
-            case LYRICS:
             case REPEAT_MEASURE:
                   return SegChordRest;
             case CLEF:

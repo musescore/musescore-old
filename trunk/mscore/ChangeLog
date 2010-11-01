@@ -1,4 +1,5 @@
 1.nov (ws)
+      - fixed lyrics text style; left align lyrics now work
       - fixes for editing staff type
       - fix #7636: Guitar Staff has wrong amount of lines
       - new text element "Instrument Change"
