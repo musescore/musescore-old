@@ -340,6 +340,7 @@ void ScoreView::startFotomode()
       qreal w = 8.0 / _matrix.m11();
       qreal h = 8.0 / _matrix.m22();
       QRectF r(-w*.5, -h*.5, w, h);
+      _foto->setRect(QRectF(-10, -10, 0, 0));
       for (int i = 0; i < MAX_GRIPS; ++i)
             grip[i] = r;
       curGrip = 0;

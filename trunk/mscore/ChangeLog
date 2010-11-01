@@ -3,6 +3,9 @@
       - fix #7636: Guitar Staff has wrong amount of lines
       - new text element "Instrument Change"
       - added new palette for text objects
+      (la)
+      - fix #7745: Insert measure causes crash
+      - start foto mode out of scoreview
 30.oct (lv)
       - fix #7721: Incorrect chord duration importing MusicXML dotted notes
 29.oct (ws)
