@@ -451,6 +451,19 @@ enum BarLineType {
       BROKEN_BAR, END_BAR, END_START_REPEAT
       };
 
+//---------------------------------------------------------
+//   NoteVal
+//    helper structure
+//---------------------------------------------------------
+
+struct NoteVal {
+      char pitch;
+      char fret;
+      char string;
+      char headGroup;
+      NoteVal() { pitch = -1; fret = -1; string = -1; headGroup = 0; }
+      };
+
 extern const char* stateName(ScoreState);
 
 static const int VOICES = 4;

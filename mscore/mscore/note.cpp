@@ -1103,13 +1103,14 @@ Element* Note::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Eleme
                   {
                   Chord* c      = static_cast<Chord*>(e);
                   Note* n       = c->upNote();
-                  int headGroup = n->headGroup();
                   Direction dir = c->stemDirection();
                   int t         = (staffIdx() * VOICES) + (n->voice() % VOICES);
                   score()->select(0, SELECT_SINGLE, 0);
-                  Segment* seg = score()->setNoteRest(chord(), t, n->pitch(),
-                     score()->inputState().duration().fraction(),
-                     headGroup, dir);
+                  NoteVal nval;
+                  nval.pitch = n->pitch();
+                  nval.headGroup = n->headGroup();
+                  Segment* seg = score()->setNoteRest(chord(), t, nval,
+                     score()->inputState().duration().fraction(), dir);
                   ChordRest* cr = static_cast<ChordRest*>(seg->element(t));
                   if (cr)
                         score()->nextInputPos(cr, true);
@@ -1587,4 +1588,14 @@ void Note::updateLine()
       }
 
 
+//---------------------------------------------------------
+//   setNval
+//---------------------------------------------------------
 
+void Note::setNval(NoteVal nval)
+      {
+      setPitch(nval.pitch);
+      _fret      = nval.fret;
+      _string    = nval.string;
+      _headGroup = nval.headGroup;
+      }

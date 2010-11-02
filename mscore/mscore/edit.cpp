@@ -50,6 +50,8 @@
 #include "measure.h"
 #include "al/tempo.h"
 #include "undo.h"
+#include "tablature.h"
+#include "stafftype.h"
 
 //---------------------------------------------------------
 //   getSelectedNote
@@ -741,30 +743,42 @@ void Score::putNote(const QPointF& pos, bool replace)
       Staff* st       = staff(staffIdx);
       KeySigEvent key = st->keymap()->key(tick);
       int clef        = st->clef(tick);
-      int pitch       = line2pitch(line, clef, key.accidentalType());
 
-printf("putNote at tick %d staff %d line %d key %d clef %d pitch %d\n",
-   tick, staffIdx, line, key.accidentalType(), clef, pitch);
+printf("putNote at tick %d staff %d line %d key %d clef %d\n",
+   tick, staffIdx, line, key.accidentalType(), clef);
 
-      const Instrument* instr       = st->part()->instr();
-      _is.setTrack(staffIdx * VOICES + (_is.track() % VOICES));
-      _is.pitch               = pitch;
-      int headGroup           = 0;
+      _is.setTrack(staffIdx * VOICES + _is.voice());
+      _is.setSegment(s);
+      const Instrument* instr = st->part()->instr();
       Direction stemDirection = AUTO;
+      NoteVal nval;
 
-      if (instr->useDrumset()) {
-            Drumset* ds   = instr->drumset();
-            pitch         = _is.drumNote();
-            if (pitch < 0)
-                  return;
-            headGroup = ds->noteHead(pitch);
-            if(headGroup < 0) {
-                  return;
+      switch(st->staffType()->group()) {
+            case PERCUSSION_STAFF: {
+                  Drumset* ds   = instr->drumset();
+                  nval.pitch    = _is.drumNote();
+                  if (nval.pitch < 0)
+                        return;
+                  nval.headGroup = ds->noteHead(nval.pitch);
+                  if (nval.headGroup < 0)
+                        return;
+                  stemDirection = ds->stemDirection(nval.pitch);
+                  break;
                   }
-            stemDirection = ds->stemDirection(pitch);
+            case TAB_STAFF: {
+                  Tablature* tab = instr->tablature();
+                  nval.pitch     = tab->getPitch(line, 0);
+                  nval.fret      = 0;
+                  nval.string    = line;
+                  break;
+                  }
+
+            case PITCHED_STAFF:
+                  nval.pitch = line2pitch(line, clef, key.accidentalType());
+                  break;
             }
 
-      _is.setSegment(s);
+      _is.pitch = nval.pitch;
       expandVoice();
       ChordRest* cr = _is.cr();
       if (cr == 0)
@@ -780,7 +794,7 @@ printf("putNote at tick %d staff %d line %d key %d clef %d pitch %d\n",
       if (!replace && (cr->durationType() == _is.duration()) && (cr->type() == CHORD) && !_is.rest) {
 
             Chord* chord = static_cast<Chord*>(cr);
-            Note* note = chord->findNote(pitch);
+            Note* note = chord->findNote(nval.pitch);
             if (note) {
                   // remove note from chord
                   if (chord->notes().size() > 1)
@@ -790,12 +804,12 @@ printf("putNote at tick %d staff %d line %d key %d clef %d pitch %d\n",
             addToChord = true;
             }
       if (addToChord && cr->type() == CHORD)
-            addNote(static_cast<Chord*>(cr), pitch);
+            addNote(static_cast<Chord*>(cr), nval.pitch);
       else {
             // replace chord
             if (_is.rest)
-                  pitch = -1;
-            setNoteRest(cr, _is.track(), pitch, _is.duration().fraction(), headGroup, stemDirection);
+                  nval.pitch = -1;
+            setNoteRest(cr, _is.track(), nval, _is.duration().fraction(), stemDirection);
             }
       moveToNextInputPos();
       }
@@ -1731,7 +1745,8 @@ void Score::cmdEnterRest(const Duration& d)
             }
 
       int track = _is.track();
-      Segment* seg  = setNoteRest(_is.cr(), track, -1, d.fraction(), 0, AUTO);
+      NoteVal nval;
+      Segment* seg  = setNoteRest(_is.cr(), track, nval, d.fraction(), AUTO);
       ChordRest* cr = static_cast<ChordRest*>(seg->element(track));
       if (cr)
             nextInputPos(cr, false);

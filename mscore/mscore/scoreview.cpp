@@ -702,7 +702,7 @@ ScoreView::ScoreView(QWidget* parent)
       s->addTransition(new class DragLassoTransition(this));                  // drag
       connect(s, SIGNAL(exited()), SLOT(endLasso()));
 
-      // setup note entry state
+      //----------------------setup note entry state
       s = states[NOTE_ENTRY];
       s->assignProperty(this, "cursor", QCursor(Qt::UpArrowCursor));
       s->addTransition(new CommandTransition("escape", states[NORMAL]));      // ->normal
@@ -1243,10 +1243,12 @@ void ScoreView::moveCursor(Segment* segment, int staffIdx)
       double _spatium = _cursor->spatium();
       double d        = _spatium * .5;
 
-      _score->addRefresh(_cursor->abbox().adjusted(-d, -d, 2*d, 2*d));
+      _score->addRefresh(_cursor->abbox().adjusted(-d, -d, _spatium, _spatium));
       _cursor->setPos(x - _spatium, y - _spatium);
-      double h = 6.0 * _spatium;
+
+      double h;
       if (staffIdx == -1) {
+            h  = 6 * _spatium;
             //
             // set cursor height for whole system
             //
@@ -1258,6 +1260,12 @@ void ScoreView::moveCursor(Segment* segment, int staffIdx)
                   y2 = ss->y();
                   }
             h += y2;
+            }
+      else {
+            Staff* staff    = _score->staff(staffIdx);
+            double lineDist = staff->useTablature() ? 1.5 * _spatium : _spatium;
+            int lines       = staff->lines();
+            h               = (lines - 1) * lineDist + 2 * _spatium;
             }
       _cursor->setHeight(h);
       _cursor->setTick(segment->tick());

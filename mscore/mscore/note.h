@@ -89,21 +89,23 @@ class Note : public Element {
       char _fret;             ///< for tablature view
       char _string;
       bool _ghost;            ///< ghost note (guitar: death note)
-
-      bool dragMode;
+      char _headGroup;
       char _pitch;            ///< Note pitch as midi value (0 - 127).
       char _tpc;              ///< tonal pitch class
-
       char _ppitch;           ///< played pitch (honor voltas etc.); cached value
-
       bool _hidden;           ///< markes this note as the hidden one if there are
                               ///< overlapping notes; hidden notes are not played
                               ///< and heads + accidentals are not shown
 
-      double _tuning;         ///< pitch offset in cent, playable only by internal synthesizer
+      bool dragMode;
+      bool _mirror;           ///< True if note is mirrored at stem.
+
+      NoteHeadType _headType;
 
       ValueType _veloType;
       int _veloOffset;        ///< velocity user offset in percent, or absolute velocity for this note
+
+      double _tuning;         ///< pitch offset in cent, playable only by internal synthesizer
 
       int _onTimeOffset;      ///< start note offset in ticks
       int _onTimeUserOffset;  ///< start note user offset
@@ -111,10 +113,6 @@ class Note : public Element {
       int _offTimeOffset;     ///< stop note offset in ticks
       int _offTimeUserOffset; ///< stop note user offset
 
-      char _headGroup;
-      NoteHeadType _headType;
-
-      bool _mirror;           ///< True if note is mirrored at stem.
       DirectionH _userMirror; ///< user override of mirror
 
       Accidental* _accidental;
@@ -245,6 +243,7 @@ class Note : public Element {
       NoteDot* dot(int n)              { return _dots[n];           }
       void updateAccidental(char* tversatz);
       void updateLine();
+      void setNval(NoteVal);
       };
 
 extern Sym* noteHeadSym(bool up, int group, int n);
