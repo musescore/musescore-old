@@ -48,7 +48,7 @@ class Lyrics : public Text {
       virtual QPointF canvasPos() const;
       Segment* segment() const { return (Segment*)parent()->parent(); }
       Measure* measure() const { return (Measure*)parent()->parent()->parent(); }
-      Chord* chord() const     { return (Chord*)parent(); }
+      ChordRest* chordRest() const { return (ChordRest*)parent(); }
 
       virtual void layout();
 

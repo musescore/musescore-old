@@ -1126,7 +1126,7 @@ void Measure::add(Element* el)
 
             default:
                   printf("Measure::add(%s) not impl.\n", el->name());
-                 abort();
+                  abort();
                   break;
             }
       }
@@ -1215,6 +1215,7 @@ void Measure::remove(Element* el)
                   break;
 
             default:
+                  abort();
                   printf("Measure::remove %s: not impl.\n", el->name());
                   break;
             }

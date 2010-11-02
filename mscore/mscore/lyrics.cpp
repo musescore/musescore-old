@@ -158,11 +158,10 @@ QPointF Lyrics::canvasPos() const
 void ScoreView::lyricsUpDown(bool up, bool end)
       {
       Lyrics* lyrics   = static_cast<Lyrics*>(editObject);
-      // int staffIdx     = lyrics->staffIdx();
       int track        = lyrics->track();
-      Segment* segment = lyrics->segment();
+      ChordRest* cr    = lyrics->chordRest();
       int verse        = lyrics->no();
-      const QList<Lyrics*>* ll = &lyrics->chord()->lyricsList();
+      const QList<Lyrics*>* ll = &lyrics->chordRest()->lyricsList();
 
       if (up) {
             if (verse == 0)
@@ -180,7 +179,7 @@ void ScoreView::lyricsUpDown(bool up, bool end)
       if (!lyrics) {
             lyrics = new Lyrics(_score);
             lyrics->setTrack(track);
-            lyrics->setParent(segment);
+            lyrics->setParent(cr);
             lyrics->setNo(verse);
             _score->undoAddElement(lyrics);
             }
@@ -211,7 +210,7 @@ void ScoreView::lyricsTab(bool back, bool end, bool moveOnly)
       Segment* nextSegment = segment;
       if (back) {
             // search prev chord
-            while ((nextSegment = nextSegment->prev1())) {
+            while ((nextSegment = nextSegment->prev1(SegChordRest | SegGrace))) {
                   Element* el = nextSegment->element(track);
                   if (el &&  el->type() == CHORD)
                         break;
@@ -219,7 +218,7 @@ void ScoreView::lyricsTab(bool back, bool end, bool moveOnly)
             }
       else {
             // search next chord
-            while ((nextSegment = nextSegment->next1())) {
+            while ((nextSegment = nextSegment->next1(SegChordRest | SegGrace))) {
                   Element* el = nextSegment->element(track);
                   if (el &&  el->type() == CHORD)
                         break;
@@ -235,24 +234,31 @@ void ScoreView::lyricsTab(bool back, bool end, bool moveOnly)
       if (!back) {
             while (segment) {
                   const QList<Lyrics*>* nll = segment->lyricsList(staffIdx);
-                  if (!nll)
-                        continue;
-                  oldLyrics = nll->value(verse);
-                  if (oldLyrics)
-                        break;
+                  if (nll) {
+                        oldLyrics = nll->value(verse);
+                        if (oldLyrics)
+                              break;
+                        }
                   segment = segment->prev1(SegChordRest | SegGrace);
                   }
             }
 
       const QList<Lyrics*>* ll = nextSegment->lyricsList(staffIdx);
-      lyrics         = ll->value(verse);
-      bool newLyrics = (lyrics == 0);
+      if (ll == 0) {
+            printf("no next lyrics list: %s\n", nextSegment->element(track)->name());
+            return;
+            }
+      lyrics = ll->value(verse);
+
+      bool newLyrics = false;
       if (!lyrics) {
             lyrics = new Lyrics(_score);
             lyrics->setTrack(track);
-            lyrics->setParent(nextSegment);
+            ChordRest* cr = static_cast<ChordRest*>(nextSegment->element(track));
+            lyrics->setParent(cr);
             lyrics->setNo(verse);
             lyrics->setSyllabic(Lyrics::SINGLE);
+            newLyrics = true;
             }
 
       _score->startCmd();
@@ -282,7 +288,7 @@ void ScoreView::lyricsTab(bool back, bool end, bool moveOnly)
                   }
             }
 
-      if(newLyrics)
+      if (newLyrics)
           _score->undoAddElement(lyrics);
 
       _score->select(lyrics, SELECT_SINGLE, 0);
@@ -305,14 +311,14 @@ void ScoreView::lyricsMinus()
       Lyrics* lyrics   = (Lyrics*)editObject;
       int track        = lyrics->track();
       int staffIdx     = lyrics->staffIdx();
-      Segment* segment = (Segment*)(lyrics->parent());
+      Segment* segment = lyrics->segment();
       int verse        = lyrics->no();
 
       endEdit();
 
       // search next chord
       Segment* nextSegment = segment;
-      while ((nextSegment = nextSegment->next1())) {
+      while ((nextSegment = nextSegment->next1(SegChordRest | SegGrace))) {
             Element* el = nextSegment->element(track);
             if (el &&  el->type() == CHORD)
                   break;
@@ -330,7 +336,7 @@ void ScoreView::lyricsMinus()
             oldLyrics = nll->value(verse);
             if (oldLyrics)
                   break;
-            segment = segment->prev1();
+            segment = segment->prev1(SegChordRest | SegGrace);
             }
 
       _score->startCmd();
@@ -341,7 +347,7 @@ void ScoreView::lyricsMinus()
       if (!lyrics) {
             lyrics = new Lyrics(_score);
             lyrics->setTrack(track);
-            lyrics->setParent(nextSegment);
+            lyrics->setParent(nextSegment->element(track));
             lyrics->setNo(verse);
             lyrics->setSyllabic(Lyrics::END);
             }
@@ -395,7 +401,7 @@ void ScoreView::lyricsUnderscore()
 
       // search next chord
       Segment* nextSegment = segment;
-      while ((nextSegment = nextSegment->next1())) {
+      while ((nextSegment = nextSegment->next1(SegChordRest | SegGrace))) {
             Element* el = nextSegment->element(track);
             if (el &&  el->type() == CHORD)
                   break;
@@ -410,7 +416,7 @@ void ScoreView::lyricsUnderscore()
             oldLyrics = nll->value(verse);
             if (oldLyrics)
                   break;
-            segment = segment->prev1();
+            segment = segment->prev1(SegChordRest | SegGrace);
             }
 
       if (nextSegment == 0) {
@@ -436,7 +442,7 @@ void ScoreView::lyricsUnderscore()
       if (!lyrics) {
             lyrics = new Lyrics(_score);
             lyrics->setTrack(track);
-            lyrics->setParent(nextSegment);
+            lyrics->setParent(nextSegment->element(track));
             lyrics->setNo(verse);
             }
 
@@ -472,7 +478,7 @@ void ScoreView::lyricsUnderscore()
 void ScoreView::lyricsReturn()
       {
       Lyrics* lyrics   = (Lyrics*)editObject;
-      Segment* segment = (Segment*)(lyrics->parent());
+      Segment* segment = lyrics->segment();
 
       endEdit();
 
@@ -482,7 +488,7 @@ void ScoreView::lyricsReturn()
 
       lyrics = new Lyrics(_score);
       lyrics->setTrack(oldLyrics->track());
-      lyrics->setParent(segment);
+      lyrics->setParent(segment->element(oldLyrics->track()));
       lyrics->setNo(oldLyrics->no() + 1);
       _score->undoAddElement(lyrics);
       _score->select(lyrics, SELECT_SINGLE, 0);
@@ -507,7 +513,7 @@ void ScoreView::lyricsEndEdit()
 
       // search previous lyric
       Lyrics* oldLyrics = 0;
-      Segment* segment  = (Segment*)(lyrics->parent());
+      Segment* segment  = lyrics->segment();
       while (segment) {
             const QList<Lyrics*>* nll = segment->lyricsList(staffIdx);
             if (nll) {
@@ -515,13 +521,11 @@ void ScoreView::lyricsEndEdit()
                   if (oldLyrics)
                         break;
                   }
-            segment = segment->prev1();
+            segment = segment->prev1(SegChordRest | SegGrace);
             }
 
-      if (lyrics->isEmpty() && origL->isEmpty()) {
-            Measure* measure = (Measure*)(lyrics->parent());
-            measure->remove(lyrics);
-            }
+      if (lyrics->isEmpty() && origL->isEmpty())
+            lyrics->parent()->remove(lyrics);
       else {
             if (oldLyrics && oldLyrics->syllabic() == Lyrics::END) {
                   if (oldLyrics->endTick() >= endTick)
@@ -544,7 +548,7 @@ void Lyrics::layout()
 
       Segment* seg   = segment();
       System* sys    = seg->measure()->system();
-      const QList<Lyrics*>* ll = &(chord()->lyricsList());
+      const QList<Lyrics*>* ll = &(chordRest()->lyricsList());
 
       int line       = ll->indexOf(this);
       double y       = lh * line + point(score()->styleS(ST_lyricsDistance))
