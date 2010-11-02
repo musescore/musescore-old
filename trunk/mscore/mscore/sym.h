@@ -341,6 +341,8 @@ enum {
       halfdiamond2headSym,
       diamond2headSym,
 
+      tabclef2Sym,
+
       lastSym
       };
 

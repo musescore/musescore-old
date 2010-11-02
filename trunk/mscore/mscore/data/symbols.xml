@@ -1302,4 +1302,11 @@
     <attach x="7.81252" y="0"/>
     <bbox x="0" y="-10.4167" w="7.81252" h="10.4167"/>
     </Glyph>
+  <Glyph>
+    <name>clefs.tab2</name>
+    <code>0xe1cb</code>
+    <attach x="13" y="0"/>
+    <bbox x="0.0" y="-20" w="10" h="40"/>
+    </Glyph>
+
   </museScore>

@@ -1,4 +1,5 @@
 2.nov (ws)
+      - add alternate TAB clef
       - fix #7766 space or hypen in lyrics causes crash
       - more code for tablature editing with mouse; fixes #7769
       (la)

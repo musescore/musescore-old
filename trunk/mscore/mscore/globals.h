@@ -370,6 +370,7 @@ enum ClefType {
       CLEF_F_8VA,
       CLEF_F_15MA,
       CLEF_PERC2,
+      CLEF_TAB2,
       CLEF_MAX
       };
 

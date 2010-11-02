@@ -201,6 +201,7 @@ void ScoreView::lyricsUpDown(bool up, bool end)
 
 void ScoreView::lyricsTab(bool back, bool end, bool moveOnly)
       {
+printf("===lyricsTAB\n");
       Lyrics* lyrics   = (Lyrics*)editObject;
       int track        = lyrics->track();
       int staffIdx     = lyrics->staffIdx();
@@ -587,8 +588,6 @@ void Lyrics::paste()
       score()->end();
       txt = txt.mid(sl[0].size() + 1);
       QApplication::clipboard()->setText(txt, mode);
-
-//TODO-S      score()->lyricsTab(false, true);
       }
 
 //---------------------------------------------------------

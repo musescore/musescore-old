@@ -198,11 +198,11 @@ void MuseScore::populatePalette()
       sp->setMag(0.8);
       sp->setGrid(33, 60);
       sp->setYOffset(1.0);
-      static const ClefType clefs[20] = {
+      static const ClefType clefs[21] = {
             CLEF_G, CLEF_G1, CLEF_G2, CLEF_G3, CLEF_G4,
             CLEF_C1, CLEF_C2, CLEF_C3, CLEF_C4, CLEF_C5,
             CLEF_F, CLEF_F_8VA, CLEF_F_15MA, CLEF_F8, CLEF_F15, CLEF_F_B, CLEF_F_C,
-            CLEF_PERC, CLEF_TAB, CLEF_PERC2
+            CLEF_PERC, CLEF_TAB, CLEF_TAB2, CLEF_PERC2
             };
       for (int i = 0; i < 20; ++i) {
             ClefType j = clefs[i];
