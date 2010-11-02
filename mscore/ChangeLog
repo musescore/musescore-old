@@ -1,6 +1,8 @@
 2.nov (ws)
       - fix #7766 space or hypen in lyrics causes crash
       - more code for tablature editing with mouse; fixes #7769
+      (la)
+      - fix #6451: score jump to current position when record MIDI in Note Input Mode
 1.nov (ws)
       - fix #7614: menu item crash when continuing session with no scores
       - fix #7740: drag and delete + undo causes crash

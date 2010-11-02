@@ -2287,6 +2287,7 @@ void Score::processMidiInput()
             return;
 
       bool cmdActive = false;
+      Note* n = 0; 
       while (!midiInputQueue.isEmpty()) {
             MidiInputEvent ev = midiInputQueue.dequeue();
             if (debugMode)
@@ -2304,13 +2305,16 @@ void Score::processMidiInput()
             else  {
                   startCmd();
                   cmdActive = true;
-                  addPitch(ev.pitch, ev.chord);
+                  n = addPitch(ev.pitch, ev.chord);
                   mscore->currentScoreView()->moveCursor();
                   }
             }
       if (cmdActive) {
             layoutAll = true;
             endCmd();
+            //after relayout
+            if(n)
+                  mscore->currentScoreView()->adjustCanvasPosition(n, false);
             }
       }
 
