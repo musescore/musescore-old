@@ -2574,8 +2574,12 @@ void ScoreView::normalCut()
 
 void ScoreView::editPaste()
       {
-      if (editObject->isText())
+printf("editPaste=========================\n");
+      if (editObject->isText()) {
             static_cast<Text*>(editObject)->paste();
+            if (editObject->type() == LYRICS)
+                  lyricsTab(false, false, true);
+            }
       }
 
 //---------------------------------------------------------

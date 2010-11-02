@@ -261,6 +261,7 @@ SymbolNames lilypondNames[] = {
       { letterpSym,           QT_TRANSLATE_NOOP("symbol", "p"),                    "p" },
       { lettermSym,           QT_TRANSLATE_NOOP("symbol", "m"),                    "m" },
       { letterrSym,           QT_TRANSLATE_NOOP("symbol", "r"),                    "r" },
+      { tabclef2Sym,          QT_TRANSLATE_NOOP("symbol", "tab2 clef"),            "clefs.tab2" },
       };
 
 SymCode pSymbols[] = {

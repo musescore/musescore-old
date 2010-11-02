@@ -69,6 +69,7 @@ const ClefInfo clefTable[] = {
 { "F8va", "F",         4,  1,  -5, 40, { 2, 5, 1, 4, 7, 3, 6, 6, 3, 7, 4, 8, 5, 9 }, TR("Bass clef 8va"),          PITCHED_STAFF }, // CLEF_F_8VA
 { "F15ma","F",         4,  2,   2, 47, { 2, 5, 1, 4, 7, 3, 6, 6, 3, 7, 4, 8, 5, 9 }, TR("Bass clef 15ma"),         PITCHED_STAFF }, // CLEF_F_15MA
 { "PERC2","percussion",2,  0,   0, 45, { 0, 3,-1, 2, 5, 1, 4, 4, 1, 5, 2, 6, 3, 7 }, TR("Percussion"),             PERCUSSION_STAFF }, // CLEF_PERC2 placeholder
+{ "TAB2", "TAB",       5,  0,   0,  0, { 0, 3,-1, 2, 5, 1, 4, 4, 1, 5, 2, 6, 3, 7 }, TR("Tablature2"),             TAB_STAFF     },
       };
 #undef TR
 
@@ -131,7 +132,9 @@ void Clef::layout()
       elements.clear();
       Symbol* symbol = new Symbol(score());
 
-      int st = (staff() && staff()->useTablature()) ? CLEF_TAB : subtype();
+      int st = subtype();
+      if (staff() && staff()->useTablature() && clefTable[st].staffGroup != TAB_STAFF)
+            st = CLEF_TAB;
 
       switch (st) {
             case CLEF_G:
@@ -229,6 +232,22 @@ void Clef::layout()
             case CLEF_TAB:
                   {
                   symbol->setSym(tabclefSym);
+                  Staff* st = staff();
+                  if (st && st->useTablature()) {
+                        Tablature* tab = st->part()->instr()->tablature();
+                        switch(tab->strings()) {
+                              default:
+                              case 6: yoff = 3.5; break;
+                              case 4: yoff = 2.0; break;
+                              }
+                        }
+                  else
+                        yoff = 2.0;
+                  }
+                  break;
+            case CLEF_TAB2:
+                  {
+                  symbol->setSym(tabclef2Sym);
                   Staff* st = staff();
                   if (st && st->useTablature()) {
                         Tablature* tab = st->part()->instr()->tablature();

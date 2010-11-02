@@ -348,9 +348,12 @@ void Staff::changeClef(int tick, ClefType st)
       foreach(Staff* staff, staffList) {
             Score* score = staff->score();
             if (staff->staffType()->group() != clefTable[st].staffGroup) {
-                  printf("Staff::changeClef: invalid staff group\n");
+                  printf("Staff::changeClef(%d): invalid staff group, src %d, dst %d\n",
+                     st, clefTable[st].staffGroup, staff->staffType()->group());
                   continue;
                   }
+            else
+                  printf("Staff::changeClef\n");
             Measure* measure = score->tick2measure(tick);
             if (!measure) {
                   printf("measure for tick %d not found!\n", tick);

@@ -537,9 +537,9 @@ bool Beam::contains(const QPointF& p) const
 
 void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
       {
-      Chord* c1 = 0;
-      Chord* c2 = 0;
-      foreach(ChordRest* cr, crl) {
+      Chord* c1 = 0;          // first chord in beam
+      Chord* c2 = 0;          // last chord in beam
+      foreach (ChordRest* cr, crl) {
             if (cr->type() == CHORD) {
                   if (c1 == 0)
                         c1 = static_cast<Chord*>(cr);
@@ -550,12 +550,12 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
             return;
       BeamFragment* f = fragments[frag];
       int idx         = (_direction == AUTO || _direction == DOWN) ? 0 : 1;
-      QPointF cp      = canvasPos();
       double _spatium = spatium();
       double p1x      = c1->upNote()->canvasPos().x();
       double p2x      = c2->upNote()->canvasPos().x();
       cut             = 0;
 
+      QPointF cp(canvasPos());
       f->p1[idx] += cp;
       f->p2[idx] += cp;
 
@@ -616,27 +616,27 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
             _up = -1;
             }
       else {
+            //
+            //    compute concave flag
+            //
             bool concave = false;
             for (int i = 0; i < crl.size() - 2; ++i) {
-                  int l1 = crl[i]->line(_up);
-                  int l  = crl[i+1]->line(_up);
-                  int l2 = crl[i+2]->line(_up);
-
-                  concave = ((l1 < l2) && ((l < l1) || (l > l2)))
-                    || ((l1 > l2) && ((l > l1) || (l < l2)));
+                  if (crl[i]->type() != CHORD)
+                        continue;
+                  int s1 = crl[i+1]->line(_up) - crl[i+0]->line(_up);
+                  int s2 = crl[i+2]->line(_up) - crl[i+1]->line(_up);
+                  concave = s1 && s2 && ((s1>0) ^ (s2>0));
                   if (concave)
                         break;
                   }
-            int l1 = crl.front()->line(_up);
-            int l2 = crl.back()->line(_up);
 
             if (!concave) {
-                  const ChordRest* a1 = crl.front();
-                  const ChordRest* a2 = crl.back();
-                  double dx = a2->canvasPos().x() - a1->canvasPos().x();
-                  double maxSlope = score()->style(ST_beamMaxSlope).toDouble();
+                  int l1    = c1->line(_up);
+                  int l2    = c2->line(_up);
+                  double dx = c2->canvasPos().x() - c1->canvasPos().x();
                   if (dx) {
-                        slope = (l2 - l1) * _spatium * .5 / dx;
+                        double maxSlope = score()->style(ST_beamMaxSlope).toDouble();
+                        slope           = (l2 - l1) * _spatium * .5 / dx;
                         if (fabs(slope) < score()->style(ST_beamMinSlope).toDouble()) {
                               cut = slope > 0.0 ? 0 : -1;
                               slope = 0;
@@ -678,10 +678,9 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
             //
             // compute final y position position of 1/8 beam
             //
-
             if (cross) {
-                  double yDownMax   = -100000;
-                  double yUpMin = 100000;
+                  double yDownMax = -100000;
+                  double yUpMin   = 100000;
                   foreach(ChordRest* cr, crl) {
                         if (cr->type() != CHORD)
                               continue;
@@ -710,35 +709,60 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                         f->p2[idx].ry() = p2s.y();
                         f->p1[idx].ry() = f->p2[idx].y() - ys;
                         }
-                  double min =  1000.0;
-                  double max = -1000.0;
+                  double my  = _spatium * 2.0 + cp.y();
+
+                  double min        =  1000.0;
+                  double max        = -1000.0;
+                  bool toMiddleLine = true;
+                  double minStemLen = 3.0 * _spatium;
+                  if (isGrace)
+                        minStemLen *= graceMag;
+
                   foreach(ChordRest* cr, crl) {
                         if (cr->type() != CHORD)
                               continue;
                         Chord* chord  = static_cast<Chord*>(cr);
                         QPointF npos(chord->stemPos(_up, true));
                         // grow beams with factor 0.5
-                        double bd      = (chord->beams() - 1) * beamDist * .5 * (_up ? 1.0 : -1.0);
-                        double y1      = npos.y();
-                        double y2      = f->p1[idx].y() + (npos.x() - x1) * slope;
-                        double stemLen = _up ? (y1 - y2) : (y2 - y1);
+                        double bd = (chord->beams() - 1) * beamDist * .5 * (_up ? 1.0 : -1.0);
+                        double y1 = npos.y();
+                        double y2 = f->p1[idx].y() + (npos.x() - x1) * slope;
+                        double stemLen;
+                        if (_up) {
+                              if ((y1-my) < minStemLen)
+                                    toMiddleLine = false;
+                              stemLen = y1 - y2;
+                              }
+                        else {
+                              if ((my-y1) < my)
+                                    toMiddleLine = false;
+                              stemLen = y2 - y1;
+                              }
                         stemLen -= bd;
                         if (stemLen < min)
                               min = stemLen;
                         if (stemLen > max)
                               max = stemLen;
                         }
-                  // adjust beam position
-                  double n = 3.0;
-                  if (fabs(max-min) > (_spatium * 2.0))
-                        n = 2.0;    // reduce minimum stem len (heuristic)
-                  if (isGrace)
-                        n *= graceMag;
-                  double diff = n * _spatium - min;
-                  if (_up)
-                        diff = -diff;
-                  f->p1[idx].ry() += diff;
-                  f->p2[idx].ry() += diff;
+                  if (toMiddleLine) {
+                        // extend stems to middle staff line
+                        f->p1[idx].ry() = my;
+                        f->p2[idx].ry() = my;
+                        slope = 0.0;
+                        }
+                  else {
+                        // adjust beam position
+                        double n = 3.0;
+                        if (fabs(max-min) > (_spatium * 2.0))
+                              n = 2.0;    // reduce minimum stem len (heuristic)
+                        if (isGrace)
+                              n *= graceMag;
+                        double diff = n * _spatium - min;
+                        if (_up)
+                              diff = -diff;
+                        f->p1[idx].ry() += diff;
+                        f->p2[idx].ry() += diff;
+                        }
                   }
             }
       f->p1[idx] -= cp;
@@ -841,7 +865,6 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
             if (cr->type() != CHORD)
                   continue;
             Chord* chord = static_cast<Chord*>(cr);
-            bool _up = chord->up();
 
             Stem* stem = chord->stem();
             if (!stem) {
@@ -850,6 +873,7 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                   }
             chord->setHook(0);
 
+            bool _up = chord->up();
             QPointF npos(chord->stemPos(_up, false));
 
             double x2 = npos.x();
