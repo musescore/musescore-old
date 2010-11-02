@@ -686,7 +686,8 @@ MeasureBase* System::nextMeasure(const MeasureBase* m) const
 
 void System::layoutLyrics(Lyrics* l, Segment* s, int staffIdx)
       {
-      if ((l->syllabic() == Lyrics::SINGLE || l->syllabic() == Lyrics::END) && (l->endTick() == 0)) {
+//      if ((l->syllabic() == Lyrics::SINGLE || l->syllabic() == Lyrics::END) && (l->endTick() == 0)) {
+      if ((l->syllabic() == Lyrics::SINGLE || l->syllabic() == Lyrics::END) && (l->ticks() == 0)) {
             l->clearSeparator();
             return;
             }

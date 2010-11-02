@@ -631,13 +631,16 @@ void Segment::setTick(int t)
 
 const QList<Lyrics*>* Segment::lyricsList(int staffIdx) const
       {
-      if (!(subtype() & (SegChordRest | SegGrace)))
+      if (!(subtype() & (SegChordRest | SegGrace))) {
+            printf("  bad segment type <%s><%s>\n", name(), subTypeName());
             return 0;
+            }
       int strack = staffIdx * VOICES;
       int etrack = strack + VOICES;
       for (int track = strack; track < etrack; ++track) {
             ChordRest* cr = static_cast<ChordRest*>(element(track));
-            if (cr && !cr->lyricsList().isEmpty())
+//            if (cr && !cr->lyricsList().isEmpty()) {
+            if (cr)
                   return &cr->lyricsList();
             }
       return 0;
