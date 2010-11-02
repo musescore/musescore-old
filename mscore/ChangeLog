@@ -1,3 +1,5 @@
+2.nov  (la)
+      - fix #6451: score jump to current position when record MIDI in Note Input Mode
 1.nov  (la)
       - fix #7614: menu item crash when continuing session with no scores
       - fix #7740: drag and delete + undo causes crash
