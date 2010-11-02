@@ -2240,10 +2240,12 @@ void Score::processMidiInput()
                               }
                         else{
                               startCmd();
-                              addPitch(ev.pitch, ev.chord);
+                              Note* n = addPitch(ev.pitch, ev.chord);
                               mscore->currentScoreView()->moveCursor();
                               layoutAll = true;
                               endCmd();
+                              if(n)
+                                  mscore->currentScoreView()->adjustCanvasPosition(n, false);
                               }
                     }
             }
