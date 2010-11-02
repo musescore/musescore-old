@@ -1,3 +1,5 @@
+2.nov (ws)
+      - more code for tablature editing with mouse; fixes #7769
 1.nov (ws)
       - fix #7614: menu item crash when continuing session with no scores
       - fix #7740: drag and delete + undo causes crash

@@ -438,7 +438,10 @@ Note* Score::addPitch(int pitch, bool addFlag)
             }
       if(!_is.cr())
             return 0;
-      Segment* seg = setNoteRest(_is.cr(), track, pitch, _is.duration().fraction(), headGroup, stemDirection);
+      NoteVal nval;
+      nval.pitch = pitch;
+      nval.headGroup = headGroup;
+      Segment* seg = setNoteRest(_is.cr(), track, nval, _is.duration().fraction(), stemDirection);
       Note* note = static_cast<Chord*>(seg->element(track))->upNote();
       setLayout(note->chord()->measure());
 
@@ -575,8 +578,8 @@ void Score::setGraceNote(Chord* ch, int pitch, NoteType type, int len)
 //    return segment of last created note/rest
 //---------------------------------------------------------
 
-Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, Fraction sd,
-   int headGroup, Direction stemDirection)
+Segment* Score::setNoteRest(ChordRest* cr, int track, NoteVal nval, Fraction sd,
+Direction stemDirection)
       {
       int tick      = cr->tick();
       Element* nr   = 0;
@@ -608,7 +611,7 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, Fraction sd,
                   //      }
                   ChordRest* ncr;
                   Note* note = 0;
-                  if (pitch == -1) {
+                  if (nval.pitch == -1) {
                         nr = new Rest(this);
                         nr->setTrack(track);
                         ncr = (Rest*)nr;
@@ -620,7 +623,6 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, Fraction sd,
                         note = new Note(this);
                         nr = note;
                         note->setTrack(track);
-                        note->setHeadGroup(headGroup);
 
                         if (tie) {
                               tie->setEndNote(note);
@@ -632,7 +634,7 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, Fraction sd,
                         chord->setDuration(d.fraction());
                         chord->setStemDirection(stemDirection);
                         chord->add(note);
-                        note->setPitch(pitch);
+                        note->setNval(nval);
                         ncr = chord;
                         if (i+1 < n) {
                               tie = new Tie(this);
@@ -674,7 +676,7 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, int pitch, Fraction sd,
             //
             //  Note does not fit on current measure, create Tie to
             //  next part of note
-            if (pitch != -1) {
+            if (nval.pitch != -1) {
                   tie = new Tie(this);
                   tie->setStartNote((Note*)nr);
                   tie->setTrack(nr->track());

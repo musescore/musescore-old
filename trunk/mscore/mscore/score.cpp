@@ -1651,22 +1651,32 @@ bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
       //
       // TODO: restrict to reasonable values (pitch 0-127)
       //
-      double mag = staff(pos->staffIdx)->mag();
-      pos->line  = lrint((pppp.y() - sstaff->bbox().y()) / (_spatium * mag) * 2.0);
-      y          = pos->measure->canvasPos().y() + sstaff->y();
-      y         += pos->line * _spatium * .5 * mag;
-      pos->pos  = QPointF(x + pos->measure->canvasPos().x(), y);
-
-      int minLine = pitch2line(0);
       Staff* s    = staff(pos->staffIdx);
-      int clef    = s->clefList()->clef(pos->segment->tick());
-      minLine     = 127 - minLine - 82 + clefTable[clef].yOffset;
-      int maxLine = pitch2line(127);
-      maxLine     = 127 - maxLine - 82 + clefTable[clef].yOffset;
+      double mag = staff(pos->staffIdx)->mag();
+      double lineDist = (s->useTablature() ? 1.5 * _spatium : _spatium * .5) * mag;
 
-      if (pos->line > minLine || pos->line < maxLine)
-            return false;
+      pos->line  = lrint((pppp.y() - sstaff->bbox().y()) / lineDist);
+      if (s->useTablature()) {
+            if (pos->line < -1 || pos->line > s->lines()+1)
+                  return false;
+            if (pos->line < 0)
+                  pos->line = 0;
+            else if (pos->line >= s->lines())
+                  pos->line = s->lines() - 1;
+            }
+      else {
+            int minLine = pitch2line(0);
+            int clef    = s->clefList()->clef(pos->segment->tick());
+            minLine     = 127 - minLine - 82 + clefTable[clef].yOffset;
+            int maxLine = pitch2line(127);
+            maxLine     = 127 - maxLine - 82 + clefTable[clef].yOffset;
 
+            if (pos->line > minLine || pos->line < maxLine)
+                  return false;
+            }
+
+      y         = pos->measure->canvasPos().y() + sstaff->y() + pos->line * lineDist;
+      pos->pos  = QPointF(x + pos->measure->canvasPos().x(), y);
       return true;
       }
 

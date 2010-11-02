@@ -405,9 +405,9 @@ void ChordRest::layoutArticulations()
       if (parent() == 0 || articulations.isEmpty())
             return;
       double _spatium  = spatium();
-      Measure* m       = measure();
-      System* s        = m->system();
-      int idx          = staff()->rstaff() + staffMove();   // DEBUG
+//      Measure* m       = measure();
+//      System* s        = m->system();
+//      int idx          = staff()->rstaff() + staffMove();   // DEBUG
 
       qreal x          = centerX();
 
@@ -630,8 +630,10 @@ Element* ChordRest::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, 
             case NOTE:
                   {
                   Note* note = static_cast<Note*>(e);
-                  score()->setNoteRest(this, track(), note->pitch(),
-                     Fraction(1, 4), note->headGroup(), AUTO);
+                  NoteVal nval;
+                  nval.pitch = note->pitch();
+                  nval.headGroup = note->headGroup();
+                  score()->setNoteRest(this, track(), nval, Fraction(1, 4), AUTO);
                   delete e;
                   }
                   break;
