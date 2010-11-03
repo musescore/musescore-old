@@ -1,3 +1,10 @@
+3.nov (ws)
+      - fix #7789: Arrow too far on tablature causes crash
+      - Add lyrics verse number to text palette. Verse numbers can be dropped to
+        lyrics. Lyrics with verse numbers are always left aligned.
+      - new text style for lyrics verse numbers
+      - allow editing of instrument name in staff properties menu with text editor
+      - change alternate TAB clef to bold
 2.nov (ws)
       - add alternate TAB clef
       - fix #7766 space or hypen in lyrics causes crash

@@ -35,9 +35,45 @@ Lyrics::Lyrics(Score* s)
    : Text(s)
       {
       setTextStyle(TEXT_STYLE_LYRIC1);
-      _no        = 0;
-      _ticks     = 0;
-      _syllabic  = SINGLE;
+      _no          = 0;
+      _ticks       = 0;
+      _syllabic    = SINGLE;
+      _verseNumber = 0;
+      }
+
+Lyrics::Lyrics(const Lyrics& l)
+   : Text(l)
+      {
+      _no  = l._no;
+      _ticks = l._ticks;
+      _syllabic = l._syllabic;
+      if (l._verseNumber)
+            _verseNumber = new Text(*l._verseNumber);
+      else
+            _verseNumber = 0;
+      QList<Line*> _separator;
+      foreach(Line* l, l._separator)
+            _separator.append(new Line(*l));
+      }
+
+//---------------------------------------------------------
+//   Lyrics
+//---------------------------------------------------------
+
+Lyrics::~Lyrics()
+      {
+      delete _verseNumber;
+      }
+
+//---------------------------------------------------------
+//   scanElements
+//---------------------------------------------------------
+
+void Lyrics::scanElements(void* data, void (*func)(void*, Element*))
+      {
+      if (_verseNumber)
+            func(data, _verseNumber);
+      func(data, this);
       }
 
 //---------------------------------------------------------
@@ -58,6 +94,8 @@ void Lyrics::write(Xml& xml) const
       if (_ticks)
             xml.tag("ticks", _ticks);
       Text::writeProperties(xml);
+      if (_verseNumber)
+            _verseNumber->write(xml, "Number");
       xml.etag();
       }
 
@@ -91,6 +129,11 @@ void Lyrics::read(QDomElement e)
                   }
             else if (tag == "ticks")
                   _ticks = i;
+            else if (tag == "Number") {
+                  _verseNumber = new Text(score());
+                  _verseNumber->read(e);
+                  _verseNumber->setParent(this);
+                  }
             else if (!Text::readProperties(e))
                   domError(e);
             }
@@ -102,8 +145,11 @@ void Lyrics::read(QDomElement e)
 
 void Lyrics::add(Element* el)
       {
+      el->setParent(this);
       if (el->type() == LINE)
             _separator.append((Line*)el);
+      else if (el->type() == TEXT && el->subtype() == TEXT_LYRICS_VERSE_NUMBER)
+            _verseNumber = static_cast<Text*>(el);
       else
             printf("Lyrics::add: unknown element %s\n", el->name());
       }
@@ -116,6 +162,8 @@ void Lyrics::remove(Element* el)
       {
       if (el->type() == LINE)
             _separator.removeAll((Line*)el);
+      else if (el->type() == TEXT && el->subtype() == TEXT_LYRICS_VERSE_NUMBER)
+            _verseNumber = 0;
       else
             printf("Lyrics::remove: unknown element %s\n", el->name());
       }
@@ -556,13 +604,15 @@ void Lyrics::layout()
                        + sys->staff(staffIdx())->bbox().height();
       double x;
       //
-      // left align if syllable spans more than one note
+      // left align if syllable has a number
       //
-      if (_ticks == 0 && (align() & ALIGN_HCENTER))
+      if (_ticks == 0 && (align() & ALIGN_HCENTER) && !_verseNumber)
             x = noteHeadWidth2 - bbox().width() * .5;
       else
             x = 0.0;
       setPos(x, y);
+      if (_verseNumber)
+            _verseNumber->layout();
       }
 
 //---------------------------------------------------------
@@ -598,4 +648,28 @@ int Lyrics::endTick() const
       {
       return segment()->tick() + ticks();
       }
+
+//---------------------------------------------------------
+//   acceptDrop
+//---------------------------------------------------------
+
+bool Lyrics::acceptDrop(ScoreView*, const QPointF&, int type, int subtype) const
+      {
+      return (type == TEXT && subtype == TEXT_LYRICS_VERSE_NUMBER);
+      }
+
+//---------------------------------------------------------
+//   drop
+//---------------------------------------------------------
+
+Element* Lyrics::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Element* e)
+      {
+      if (!(e->type() == TEXT && e->subtype() == TEXT_LYRICS_VERSE_NUMBER))
+            return 0;
+      e->setParent(this);
+      score()->select(e, SELECT_SINGLE, 0);
+      score()->undoAddElement(e);
+      return e;
+      }
+
 

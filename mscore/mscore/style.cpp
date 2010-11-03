@@ -338,6 +338,9 @@ void setDefaultStyle()
       AS(TextStyle(TR( "Instrument Change"), ff,  12, true, false, false,
          ALIGN_LEFT | ALIGN_BOTTOM, 0, -3.0, OS, 0, 0, true));
 
+      AS(TextStyle(TR("Lyrics Verse"), ff, 11, false, false, false,
+         ALIGN_RIGHT | ALIGN_TOP, 0, 0, OS, 0.0, 0.0, true));
+
 #undef MM
 #undef OA
 #undef OS
@@ -1163,6 +1166,10 @@ QPointF TextStyle::reloff() const                         { return QPointF(rxoff
 void TextStyle::setReloff(const QPointF& p)               { setRxoff(p.x()), setRyoff(p.y()); }
 bool TextStyle::readProperties(QDomElement v)             { return d->readProperties(v); }
 
+//---------------------------------------------------------
+//   setFont
+//---------------------------------------------------------
+
 void TextStyle::setFont(const QFont&)
       {
       //TODOxx
@@ -1201,6 +1208,10 @@ void Style::set(const StyleVal& v)
       d->_values[v.getIdx()] = v;
       }
 
+//---------------------------------------------------------
+//   TextStyle
+//---------------------------------------------------------
+
 const TextStyle& Style::textStyle(TextStyleType idx) const
       {
       return d->textStyle(idx);
@@ -1211,25 +1222,45 @@ const TextStyle& Style::textStyle(const QString& name) const
       return d->textStyle(name);
       }
 
+//---------------------------------------------------------
+//   textStyleType
+//---------------------------------------------------------
+
 TextStyleType Style::textStyleType(const QString& name) const
       {
       return d->textStyleType(name);
       }
+
+//---------------------------------------------------------
+//   setTextStyle
+//---------------------------------------------------------
 
 void Style::setTextStyle(const TextStyle& ts)
       {
       d->setTextStyle(ts);
       }
 
+//---------------------------------------------------------
+//   appendTextStyle
+//---------------------------------------------------------
+
 void Style::appendTextStyle(const TextStyle& ts)
       {
       d->_textStyles.append(ts);
       }
 
+//---------------------------------------------------------
+//   textStyles
+//---------------------------------------------------------
+
 const QList<TextStyle>& Style::textStyles() const
       {
       return d->_textStyles;
       }
+
+//---------------------------------------------------------
+//   set
+//---------------------------------------------------------
 
 void Style::set(StyleIdx t, Spatium val)
       {
@@ -1261,30 +1292,54 @@ void Style::set(StyleIdx t, Direction val)
       set(StyleVal(t, val));
       }
 
+//---------------------------------------------------------
+//   valueS
+//---------------------------------------------------------
+
 Spatium Style::valueS(StyleIdx idx) const
       {
       return value(idx).toSpatium();
       }
+
+//---------------------------------------------------------
+//   valueSt
+//---------------------------------------------------------
 
 QString Style::valueSt(StyleIdx idx) const
       {
       return value(idx).toString();
       }
 
+//---------------------------------------------------------
+//   valueB
+//---------------------------------------------------------
+
 bool Style::valueB(StyleIdx idx) const
       {
       return value(idx).toBool();
       }
+
+//---------------------------------------------------------
+//   valueD
+//---------------------------------------------------------
 
 double Style::valueD(StyleIdx idx) const
       {
       return value(idx).toDouble();
       }
 
+//---------------------------------------------------------
+//   valueI
+//---------------------------------------------------------
+
 int Style::valueI(StyleIdx idx) const
       {
       return value(idx).toInt();
       }
+
+//---------------------------------------------------------
+//   load
+//---------------------------------------------------------
 
 bool Style::load(QFile* qf)
       {
@@ -1295,6 +1350,10 @@ void Style::load(QDomElement e)
       {
       d->load(e);
       }
+
+//---------------------------------------------------------
+//   save
+//---------------------------------------------------------
 
 void Style::save(Xml& xml, bool optimize)
       {

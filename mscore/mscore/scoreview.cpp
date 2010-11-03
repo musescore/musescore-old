@@ -2228,6 +2228,20 @@ void ScoreView::zoom(int step, const QPoint& pos)
 
 void ScoreView::wheelEvent(QWheelEvent* event)
       {
+      if (event->buttons() & Qt::RightButton) {
+//            Element* e = score()->getSelectedElement();
+//            if (e->type() == NOTE) {
+                  int n = event->delta() / 120;
+                  bool up = n > 0;
+                  if (!up)
+                        n = -n;
+                  score()->startCmd();
+                  for (int i = 0; i < n; ++i)
+                        score()->upDown(up, UP_DOWN_CHROMATIC);
+                  score()->endCmd();
+//                  }
+            return;
+            }
       if (event->modifiers() & Qt::ControlModifier) {
             QApplication::sendPostedEvents(this, 0);
             zoom(event->delta() / 120, event->pos());

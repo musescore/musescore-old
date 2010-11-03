@@ -60,7 +60,8 @@ enum {
       TEXT_STRING_NUMBER,
       TEXT_HEADER,
       TEXT_FOOTER,
-      TEXT_INSTRUMENT_CHANGE
+      TEXT_INSTRUMENT_CHANGE,
+      TEXT_LYRICS_VERSE_NUMBER
       };
 
 //---------------------------------------------------------
