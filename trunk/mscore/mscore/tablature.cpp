@@ -88,6 +88,8 @@ bool Tablature::convertPitch(int pitch, int* string, int* fret) const
                   return true;
                   }
             }
+      *string = 0;
+      *fret   = 0;
       return false;
       }
 

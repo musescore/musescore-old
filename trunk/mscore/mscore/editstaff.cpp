@@ -31,6 +31,7 @@
 #include "seq.h"
 #include "stafftype.h"
 #include "selinstrument.h"
+#include "texteditor.h"
 
 //---------------------------------------------------------
 //   EditStaff
@@ -67,9 +68,11 @@ EditStaff::EditStaff(Staff* s, QWidget* parent)
       pPitchMin->setValue(instrument.minPitchP());
       pPitchMax->setValue(instrument.maxPitchP());
 
-      connect(buttonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(bboxClicked(QAbstractButton*)));
+      connect(buttonBox, SIGNAL(clicked(QAbstractButton*)), SLOT(bboxClicked(QAbstractButton*)));
       connect(changeInstrument, SIGNAL(clicked()), SLOT(showInstrumentDialog()));
-      connect(editStaffType, SIGNAL(clicked()), SLOT(showEditStaffType()));
+      connect(editStaffType,    SIGNAL(clicked()), SLOT(showEditStaffType()));
+      connect(editShortName,    SIGNAL(clicked()), SLOT(editShortNameClicked()));
+      connect(editLongName,     SIGNAL(clicked()), SLOT(editLongNameClicked()));
       }
 
 //---------------------------------------------------------
@@ -257,4 +260,22 @@ void EditStaff::showEditStaffType()
             }
       }
 
+//---------------------------------------------------------
+//   editShortNameClicked
+//---------------------------------------------------------
 
+void EditStaff::editShortNameClicked()
+      {
+      QString s = editText(shortName->toHtml());
+      shortName->setHtml(s);
+      }
+
+//---------------------------------------------------------
+//   editLongNameClicked
+//---------------------------------------------------------
+
+void EditStaff::editLongNameClicked()
+      {
+      QString s = editText(longName->toHtml());
+      longName->setHtml(s);
+      }

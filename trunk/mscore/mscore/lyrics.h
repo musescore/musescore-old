@@ -40,12 +40,19 @@ class Lyrics : public Text {
       int _ticks;             ///< if > 0 then draw an underline to tick() + _ticks
       Syllabic _syllabic;
       QList<Line*> _separator;
+      Text* _verseNumber;
 
    public:
       Lyrics(Score*);
+      Lyrics(const Lyrics&);
+      ~Lyrics();
       virtual Lyrics* clone() const    { return new Lyrics(*this); }
       virtual ElementType type() const { return LYRICS; }
       virtual QPointF canvasPos() const;
+      virtual void scanElements(void* data, void (*func)(void*, Element*));
+      virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
+      virtual Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*);
+
       Segment* segment() const { return (Segment*)parent()->parent(); }
       Measure* measure() const { return (Measure*)parent()->parent()->parent(); }
       ChordRest* chordRest() const { return (ChordRest*)parent(); }
@@ -69,6 +76,8 @@ class Lyrics : public Text {
       void clearSeparator()         { _separator.clear(); } // TODO: memory leak
       QList<Line*>* separatorList() { return &_separator; }
       virtual void paste();
+      Text* verseNumber() const     { return _verseNumber; }
+      void setVerseNumber(Text* t)  { _verseNumber = t;    }
       };
 
 #endif

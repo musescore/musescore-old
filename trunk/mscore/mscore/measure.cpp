@@ -2963,18 +2963,16 @@ void Measure::layoutX(double stretch)
                                           continue;
                                     l->layout();
                                     lyrics = l;
-                                    if (l->endTick() > 0) {
-                                          double rw = l->bbox().width();
-                                          if (rw > rrw)
-                                                rrw = rw;
-                                          }
-                                    else {
-                                          double lw = l->bbox().width() * .5;
-                                          if (lw > llw)
-                                                llw = lw;
-                                          if (lw > rrw)
-                                                rrw = lw;
-                                          }
+                                    QRectF b(l->bbox().translated(l->pos()));
+                                    // double lw = l->bbox().width() * .5;
+                                    double lw = -b.left();
+                                    if (lw > llw)
+                                          llw = lw;
+                                    if (lw > rrw)
+                                          rrw = lw;
+                                    double rw = b.right();
+                                    if (rw > rrw)
+                                          rrw = rw;
                                     }
                               }
                         if (lyrics) {
@@ -3308,13 +3306,13 @@ void Measure::updateAccidentals(Segment* segment, int staffIdx, char* tversatz)
                         case TAB_STAFF:
                               {
                               Tablature* tab = instrument->tablature();
-                              int string = note->string();
-                              int fret = note->fret();
+                              int string     = note->string();
+                              int fret       = note->fret();
                               if (string == -1 || fret == -1 || tab->getPitch(string, fret) != note->pitch()) {
                                     int nstring, nfret;
                                     tab->convertPitch(note->pitch(), &nstring, &nfret);
-                                    score()->undoChangePitch(note, note->pitch(), note->tpc(),
-                                       note->line(), nfret, nstring);
+                                    score()->undo()->push(new ChangePitch(note, note->pitch(), note->tpc(),
+                                       note->line(), nfret, nstring));
                                     }
                               }
                               break;

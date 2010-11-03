@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2002-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -44,7 +44,6 @@ class EditStyle : public QDialog, private Ui::EditStyleBase {
       void setValues();
 
       void apply();
-      QString editText(const QString&);
 
    private slots:
       void selectChordDescriptionFile();
@@ -57,45 +56,6 @@ class EditStyle : public QDialog, private Ui::EditStyleBase {
    public:
       EditStyle(Score*, QWidget*);
       };
-
-//---------------------------------------------------------
-//   TextEditor
-//---------------------------------------------------------
-
-class TextEditor : public QDialog {
-      Q_OBJECT
-      QTextEdit* edit;
-      QToolButton* typefaceBold;
-      QToolButton* typefaceItalic;
-      QToolButton* typefaceUnderline;
-      QToolButton* leftAlign;
-      QToolButton* centerAlign;
-      QToolButton* rightAlign;
-      QToolButton* typefaceSubscript;
-      QToolButton* typefaceSuperscript;
-      QDoubleSpinBox* typefaceSize;
-      QFontComboBox* typefaceFamily;
-
-   private slots:
-      void toggleBold(bool);
-      void toggleUnderline(bool);
-      void toggleItalic(bool);
-      void toggleLeftAlign(bool);
-      void toggleCenterAlign(bool);
-      void toggleRightAlign(bool);
-      void toggleTypefaceSubscript(bool);
-      void toggleTypefaceSuperscript(bool);
-      void charFormatChanged(const QTextCharFormat& f);
-      void cursorPositionChanged();
-      void sizeChanged(double);
-      void fontChanged(const QFont&);
-
-   public:
-      TextEditor(QWidget* parent = 0);
-      QString text() const;
-      void setText(const QString&);
-      };
-
 
 #endif
 
