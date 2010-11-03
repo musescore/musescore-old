@@ -1059,7 +1059,6 @@ Cursor::Cursor(Score* s, ScoreView* v)
       {
       viewer    = v;
       _on       = false;
-      _blink    = true;
       _h        = 6 * spatium();
       _seg      = 0;
       }
@@ -1081,7 +1080,7 @@ QRectF Cursor::bbox() const
 
 void Cursor::draw(QPainter& p, ScoreView*) const
       {
-      if (!(_on && _blink))
+      if (!_on)
             return;
       double x = pos().x();
       if (_seg)

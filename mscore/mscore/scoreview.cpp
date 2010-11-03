@@ -3718,6 +3718,26 @@ printf("cmdEnterRest %s\n", qPrintable(d.name()));
       }
 
 //---------------------------------------------------------
+//   mscoreState
+//---------------------------------------------------------
+
+ScoreState ScoreView::mscoreState() const
+      {
+      if (sm->configuration().contains(states[NOTE_ENTRY]))
+            return STATE_NOTE_ENTRY;
+      else if (sm->configuration().contains(states[EDIT]))
+            return STATE_EDIT;
+      else if (sm->configuration().contains(states[FOTOMODE]))
+            return STATE_FOTO;
+      else if (sm->configuration().contains(states[PLAY]))
+            return STATE_PLAY;
+      else if (sm->configuration().contains(states[SEARCH]))
+            return STATE_SEARCH;
+      else
+            return STATE_NORMAL;
+      }
+
+//---------------------------------------------------------
 //   enterState
 //    for debugging
 //---------------------------------------------------------
@@ -3725,7 +3745,7 @@ printf("cmdEnterRest %s\n", qPrintable(d.name()));
 void ScoreView::enterState()
       {
       if (debugMode)
-            printf("enterState <%s>\n", qPrintable(sender()->objectName()));
+            printf("%p enterState <%s>\n", this, qPrintable(sender()->objectName()));
       }
 
 //---------------------------------------------------------
@@ -3736,7 +3756,7 @@ void ScoreView::enterState()
 void ScoreView::exitState()
       {
       if (debugMode)
-            printf("exitState <%s>\n", qPrintable(sender()->objectName()));
+            printf("%p exitState <%s>\n", this, qPrintable(sender()->objectName()));
       }
 
 //---------------------------------------------------------
@@ -3789,11 +3809,8 @@ void ScoreView::startUndoRedo()
 
 //---------------------------------------------------------
 //   endUndoRedo
+///   Common handling for ending undo or redo
 //---------------------------------------------------------
-
-/**
- Common handling for ending undo or redo
-*/
 
 void ScoreView::endUndoRedo()
       {
