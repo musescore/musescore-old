@@ -99,7 +99,7 @@ class Page : public Element {
 
       int no() const                     { return _no;        }
       void setNo(int n);
-      bool isOdd() const                 { return (_no+1) & 1;    }
+      bool isOdd() const;
 
       double tm() const;            // margins in pixel
       double bm() const;

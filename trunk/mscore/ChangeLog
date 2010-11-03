@@ -1,4 +1,5 @@
 3.nov (ws)
+      - fix #7776: Page::isOdd() does not take page offset into account
       - fix #7779: Score::print() does not take page offset into account
       - fix #7789: Arrow too far on tablature causes crash
       - Add lyrics verse number to text palette. Verse numbers can be dropped to
