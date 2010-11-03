@@ -38,12 +38,6 @@
 #include "part.h"
 #include "undo.h"
 
-//      PITCHED_STAFF, PERCUSSION_STAFF, TAB_STAFF
-
-// FIXME!
-// all checked excepted TAB, PERC, PERC2
-
-
 #define TR(a)  QT_TRANSLATE_NOOP("clefTable", a)
 
 const ClefInfo clefTable[] = {
@@ -237,8 +231,8 @@ void Clef::layout()
                         Tablature* tab = st->part()->instr()->tablature();
                         switch(tab->strings()) {
                               default:
-                              case 6: yoff = 3.5; break;
-                              case 4: yoff = 2.0; break;
+                              case 6: yoff = 2.5 * 1.5; break;
+                              case 4: yoff = 1.5 * 1.5; break;
                               }
                         }
                   else
@@ -253,8 +247,8 @@ void Clef::layout()
                         Tablature* tab = st->part()->instr()->tablature();
                         switch(tab->strings()) {
                               default:
-                              case 6: yoff = 3.5; break;
-                              case 4: yoff = 2.0; break;
+                              case 6: yoff = 2.5 * 1.5; break;
+                              case 4: yoff = 1.5 * 1.5; break;
                               }
                         }
                   else
