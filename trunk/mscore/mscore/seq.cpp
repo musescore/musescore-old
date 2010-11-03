@@ -304,6 +304,8 @@ void Seq::start()
 
 void Seq::stop()
       {
+      if (state == STOP)
+            return;
       if (!driver)
             return;
       driver->stopTransport();

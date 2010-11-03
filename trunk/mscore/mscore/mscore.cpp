@@ -1185,6 +1185,7 @@ void MuseScore::setCurrentScoreView(ScoreView* view)
                   navigator->setScore(0);
             return;
             }
+      changeState(view->mscoreState());
 
       _undoGroup->setActiveStack(cs->undo());
       view->setFocus(Qt::OtherFocusReason);

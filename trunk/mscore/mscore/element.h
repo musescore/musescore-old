@@ -421,7 +421,6 @@ class StaffLines : public Element {
 
 class Cursor : public Element {
       ScoreView* viewer;
-      bool _blink;
       bool _on;
       double _h;
       Segment* _seg;
@@ -435,9 +434,7 @@ class Cursor : public Element {
       virtual QRectF bbox() const;
 
       void setOn(bool f)               { _on = f; }
-      bool isOn() const                { return _on; }
-      void blink()                     { _blink = !_blink; }
-      void noBlinking()                { _blink = true; }
+      bool on() const                  { return _on; }
       virtual void setHeight(qreal v)  { _h = v; }
       void setSegment(Segment* s)      { _seg = s; }
       Segment* segment() const         { return _seg;  }

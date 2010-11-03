@@ -1,4 +1,5 @@
 3.nov (ws)
+      - fix #7788: Note entry button does not toggle when switching tabs
       - fix #7776: Page::isOdd() does not take page offset into account
       - fix #7779: Score::print() does not take page offset into account
       - fix #7789: Arrow too far on tablature causes crash
