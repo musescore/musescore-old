@@ -71,6 +71,7 @@ struct PageFormat {
       void readMusicXML(QDomElement, double);
       void write(Xml&);
       void writeMusicXML(Xml&, double);
+      int pageOffset() const { return _pageOffset; }
       };
 
 //---------------------------------------------------------
