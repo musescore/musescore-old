@@ -661,4 +661,12 @@ QString Page::replaceTextMacros(const QString& s)
       return d;
       }
 
+//---------------------------------------------------------
+//   isOdd
+//---------------------------------------------------------
+
+bool Page::isOdd() const
+      {
+      return (_no + 1 + score()->pageFormat()->pageOffset()) & 1;
+      }
 
