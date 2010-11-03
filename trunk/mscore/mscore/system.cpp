@@ -478,6 +478,10 @@ void System::setInstrumentName(int staffIdx)
                   iname->setSubtype(TEXT_INSTRUMENT_LONG);
                   iname->setTextStyle(TEXT_STYLE_INSTRUMENT_LONG);
                   }
+            else {
+                  iname->setSubtype(TEXT_INSTRUMENT_SHORT);
+                  iname->setTextStyle(TEXT_STYLE_INSTRUMENT_SHORT);
+                  }
             staff->instrumentName = iname;
             }
       int tick = ml.isEmpty() ? 0 : ml.front()->tick();
