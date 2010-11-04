@@ -1,3 +1,5 @@
+4.nov (ws)
+      - do not link clefs in linked parts
 3.nov (ws)
       - fix #7788: Note entry button does not toggle when switching tabs
       - fix #7776: Page::isOdd() does not take page offset into account

@@ -66,6 +66,7 @@
 #include "sym.h"
 #include "lasso.h"
 #include "box.h"
+#include "cursor.h"
 
 //---------------------------------------------------------
 //   stateNames
@@ -814,7 +815,7 @@ void ScoreView::setScore(Score* s)
       {
       _score = s;
       if (_cursor == 0) {
-            _cursor = new Cursor(_score, this);
+            _cursor = new Cursor(_score);
             shadowNote = new ShadowNote(_score);
             _cursor->setVisible(false);
             shadowNote->setVisible(false);
@@ -825,7 +826,7 @@ void ScoreView::setScore(Score* s)
             }
       lasso->setScore(s);
       _foto->setScore(s);
-      connect(s, SIGNAL(updateAll()),     SLOT(update()));
+      connect(s, SIGNAL(updateAll()),                SLOT(updateAll()));
       connect(s, SIGNAL(dataChanged(const QRectF&)), SLOT(dataChanged(const QRectF&)));
       }
 
@@ -1105,16 +1106,20 @@ void ScoreView::setForeground(const QColor& color)
 
 void ScoreView::dataChanged(const QRectF& r)
       {
-      redraw(r);
+      if (noteEntryMode())
+            moveCursor();
+      update(_matrix.mapRect(r).toRect());  // generate paint event
       }
 
 //---------------------------------------------------------
-//   redraw
+//   updateAll
 //---------------------------------------------------------
 
-void ScoreView::redraw(const QRectF& fr)
+void ScoreView::updateAll()
       {
-      update(_matrix.mapRect(fr).toRect());  // generate paint event
+      if (noteEntryMode())
+            moveCursor();
+      update();
       }
 
 //---------------------------------------------------------
@@ -1125,12 +1130,10 @@ void ScoreView::startEdit(Element* element, int startGrip)
       {
       origEditObject = element;
       startEdit();
-//      editObject->updateGrips(&grips, grip);
       if (startGrip == -1)
             curGrip = grips-1;
       else if (startGrip >= 0)
             curGrip = startGrip;
-      // startGrip == -2  -> do not change curGrip
       }
 
 //---------------------------------------------------------
@@ -1216,33 +1219,33 @@ void ScoreView::startEdit()
 
 void ScoreView::moveCursor()
       {
-      int track = _score->inputTrack();
+      const InputState& is = _score->inputState();
+      int track = is.track();
       if (track == -1)
             track = 0;
 
       _cursor->setTrack(track);
-      _cursor->setTick(_score->inputPos());
-
-      Segment* segment = _score->tick2segment(_cursor->tick());
+      Segment* segment = is.segment();
       if (segment)
-            moveCursor(segment, track / VOICES);
+            moveCursor(segment, track);
       }
 
-void ScoreView::moveCursor(Segment* segment, int staffIdx)
+void ScoreView::moveCursor(Segment* segment, int track)
       {
+      int staffIdx = track / VOICES;
+
       System* system = segment->measure()->system();
       if (system == 0) {
             // a new measure was appended but no layout took place
             printf("zero SYSTEM\n");
             return;
             }
-      _cursor->setSegment(segment);
       int idx         = staffIdx == -1 ? 0 : staffIdx;
       double x        = segment->canvasPos().x();
       double y        = system->staffY(idx);
       double _spatium = _cursor->spatium();
 
-      _score->addRefresh(_cursor->abbox());
+      update(_matrix.mapRect(_cursor->abbox()).toRect());
 
       double h;
       double w;
@@ -1273,9 +1276,9 @@ void ScoreView::moveCursor(Segment* segment, int staffIdx)
             y              -= 2.0 * _spatium;
             }
       _cursor->setPos(x, y);
-      _cursor->setbbox(QRectF(0.0, 0.0, w, h));
-      _cursor->setTick(segment->tick());
-      _score->addRefresh(_cursor->abbox());
+      QRectF r(0.0, 0.0, w, h);
+      _cursor->setbbox(r);
+      update(_matrix.mapRect(_cursor->abbox()).toRect());
       }
 
 //---------------------------------------------------------
@@ -1285,7 +1288,7 @@ void ScoreView::moveCursor(Segment* segment, int staffIdx)
 void ScoreView::setCursorOn(bool val)
       {
       if (_cursor)
-            _cursor->setOn(val);
+            _cursor->setVisible(val);
       }
 
 //---------------------------------------------------------
@@ -1356,8 +1359,6 @@ static void paintElement(void* data, Element* e)
 
 void ScoreView::paintEvent(QPaintEvent* ev)
       {
-      if (_score->needLayout())
-            _score->doLayout();
       QPainter p(this);
       p.setRenderHint(QPainter::Antialiasing, preferences.antialiasedDrawing);
       p.setRenderHint(QPainter::TextAntialiasing, true);
@@ -1504,9 +1505,6 @@ void ScoreView::paint(const QRect& rr, QPainter& p)
 
             for (Segment* s = ss; s && (s != es);) {
                   Segment* ns = s->next1();
-//                  Segment* ns = s->nextCR();
-//                  if (ns->tick() >= es->tick())
-//                        break;
                   system1  = system2;
                   system2  = s->measure()->system();
                   pt       = s->canvasPos();
@@ -1763,12 +1761,6 @@ void ScoreView::dragEnterEvent(QDragEnterEvent* event)
       printf("unknown drop format: formats:\n");
       foreach(const QString& s, formats)
             printf("  <%s>\n", qPrintable(s));
-#if 0 // message box freezes system
-      QString s = tr("unknown drop format: formats %1:\n").arg(data->hasFormat(mimeSymbolFormat));
-      foreach(QString ss, data->formats())
-            s += (QString("   <%1>\n").arg(ss));
-      QMessageBox::warning(0, "Drop:", s, QString::null, "Quit", QString::null, 0, 1);
-#endif
       }
 
 //---------------------------------------------------------
@@ -2235,17 +2227,14 @@ void ScoreView::zoom(int step, const QPoint& pos)
 void ScoreView::wheelEvent(QWheelEvent* event)
       {
       if (event->buttons() & Qt::RightButton) {
-//            Element* e = score()->getSelectedElement();
-//            if (e->type() == NOTE) {
-                  int n = event->delta() / 120;
-                  bool up = n > 0;
-                  if (!up)
-                        n = -n;
-                  score()->startCmd();
-                  for (int i = 0; i < n; ++i)
-                        score()->upDown(up, UP_DOWN_CHROMATIC);
-                  score()->endCmd();
-//                  }
+            int n = event->delta() / 120;
+            bool up = n > 0;
+            if (!up)
+                  n = -n;
+            score()->startCmd();
+            for (int i = 0; i < n; ++i)
+                  score()->upDown(up, UP_DOWN_CHROMATIC);
+            score()->endCmd();
             return;
             }
       if (event->modifiers() & Qt::ControlModifier) {
@@ -2737,8 +2726,7 @@ void ScoreView::cmd(const QAction* a)
             Element* el = _score->selectMove(cmd);
             if (el)
                   adjustCanvasPosition(el, false);
-            moveCursor();
-            update();
+            updateAll();
             }
       else if (cmd == "next-chord"
          || cmd == "prev-chord"
@@ -2747,7 +2735,7 @@ void ScoreView::cmd(const QAction* a)
             Element* el = _score->move(cmd);
             if (el)
                   adjustCanvasPosition(el, false);
-            update();
+            updateAll();
             }
       else if (cmd == "rest")
             cmdEnterRest();
@@ -2768,10 +2756,8 @@ void ScoreView::cmd(const QAction* a)
                   _score->cmdAddInterval(n, nl);
                   }
             }
-      else if (cmd == "tie") {
+      else if (cmd == "tie")
             _score->cmdAddTie();
-            moveCursor();
-            }
       else if (cmd == "duplet")
             cmdTuplet(2);
       else if (cmd == "triplet")
@@ -2966,7 +2952,6 @@ void ScoreView::startNoteEntry()
       _score->inputState().noteEntryMode = true;
       _score->setPadState();
       setCursorOn(true);
-      moveCursor();
       _score->inputState().rest = false;
       getAction("pad-rest")->setChecked(false);
       setMouseTracking(true);
@@ -2991,7 +2976,6 @@ void ScoreView::endNoteEntry()
             static_cast<ChordRest*>(_score->inputState().slur->endElement())->addSlurBack(_score->inputState().slur);
             _score->inputState().slur = 0;
             }
-      moveCursor();
       setMouseTracking(false);
       shadowNote->setVisible(false);
       setCursorOn(false);
@@ -3074,7 +3058,6 @@ void ScoreView::noteEntryButton(QMouseEvent* ev)
       _score->startCmd();
       _score->putNote(p, ev->modifiers() & Qt::ShiftModifier);
       _score->endCmd();
-      moveCursor();
       }
 
 //---------------------------------------------------------
@@ -3636,37 +3619,23 @@ void ScoreView::adjustCanvasPosition(const Element* el, bool playBack)
       if (r.contains(showRect))
             return;
 
-//       qDebug() << "showRect" << showRect << "\tcanvas" << r;
-
       qreal x   = - xoffset() / mag();
       qreal y   = - yoffset() / mag();
 
       qreal oldX = x, oldY = y;
 
-      if (showRect.left() < r.left()) {
-//             qDebug() << "left < r.left";
+      if (showRect.left() < r.left())
             x = showRect.left() - BORDER_X;
-            }
-      else if (showRect.left() > r.right()) {
-//             qDebug() << "left > r.right";
+      else if (showRect.left() > r.right())
             x = showRect.right() - width() / mag() + BORDER_X;
-            }
-      else if (r.width() >= showRect.width() && showRect.right() > r.right()) {
-//             qDebug() << "r.width >= width && right > r.right";
+      else if (r.width() >= showRect.width() && showRect.right() > r.right())
             x = showRect.left() - BORDER_X;
-            }
-      if (showRect.top() < r.top() && showRect.bottom() < r.bottom()) {
-//             qDebug() << "top < r.top";
+      if (showRect.top() < r.top() && showRect.bottom() < r.bottom())
             y = showRect.top() - BORDER_Y;
-            }
-      else if (showRect.top() > r.bottom()) {
-//             qDebug() << "top > r.bottom";
+      else if (showRect.top() > r.bottom())
             y = showRect.bottom() - height() / mag() + BORDER_Y;
-            }
-      else if (r.height() >= showRect.height() && showRect.bottom() > r.bottom()) {
-//             qDebug() << "r.height >= height && bottom > r.bottom";
+      else if (r.height() >= showRect.height() && showRect.bottom() > r.bottom())
             y = showRect.top() - BORDER_Y;
-            }
 
       // align to page borders if extends beyond
       Page* page = sys->page();
@@ -3720,7 +3689,6 @@ printf("cmdEnterRest %s\n", qPrintable(d.name()));
             nextInputPos(cr, false);
       _is.rest = false;  // continue with normal note entry
 #endif
-      moveCursor();
       }
 
 //---------------------------------------------------------
@@ -3833,8 +3801,6 @@ void ScoreView::endUndoRedo()
       _score->updateSelection();
       _score->setLayoutAll(true);
       _score->setPadState();
-      if (noteEntryMode())
-            moveCursor();
       _score->end();
       }
 

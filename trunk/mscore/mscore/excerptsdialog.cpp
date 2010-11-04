@@ -263,7 +263,7 @@ void ExcerptsDialog::createExcerptClicked(QListWidgetItem* cur)
       nscore->rebuildMidiMapping();
       nscore->updateChannel();
       nscore->addLayoutFlags(LAYOUT_FIX_PITCH_VELO);
-      nscore->layout();
+      nscore->setLayoutAll(true);
       score->startCmd();
       score->undo()->push(new AddExcerpt(nscore));
       score->endCmd();

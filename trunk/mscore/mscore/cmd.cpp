@@ -151,6 +151,7 @@ void Score::end()
 
 void Score::end1()
       {
+      bool _needLayout = false;
       if (layoutAll) {
             _updateAll  = true;
             _needLayout = true;
@@ -168,6 +169,8 @@ void Score::end1()
             refresh.adjust(-d, -d, 2 * d, 2 * d);
             emit dataChanged(refresh);
             }
+      if (_needLayout)
+            doLayout();
       refresh     = QRectF();
       layoutAll   = false;
       _updateAll  = false;
@@ -353,15 +356,10 @@ void ScoreView::cmdAddPitch1(int pitch, bool addFlag)
             _score->undoChangePitch(note, pitch, newTpc, note->line(), note->fret(), note->string());
             }
       else {
-            _score->addPitch(pitch, addFlag);
-            moveCursor();
-            ChordRest* cr = _score->inputState().cr();
-            if (cr) {
-                  Element* e = cr;
-                  if (cr->type() == CHORD)
-                        e = static_cast<Chord*>(cr)->upNote();
-                  adjustCanvasPosition(e, false);
-                  }
+            const InputState& is = _score->inputState();
+            Note* note = _score->addPitch(pitch, addFlag);
+            if (note)
+                  adjustCanvasPosition(note, false);
             }
       _score->endCmd();
       }
@@ -2287,7 +2285,7 @@ void Score::processMidiInput()
             return;
 
       bool cmdActive = false;
-      Note* n = 0; 
+      Note* n = 0;
       while (!midiInputQueue.isEmpty()) {
             MidiInputEvent ev = midiInputQueue.dequeue();
             if (debugMode)
@@ -2306,14 +2304,13 @@ void Score::processMidiInput()
                   startCmd();
                   cmdActive = true;
                   n = addPitch(ev.pitch, ev.chord);
-                  mscore->currentScoreView()->moveCursor();
                   }
             }
       if (cmdActive) {
             layoutAll = true;
             endCmd();
             //after relayout
-            if(n)
+            if (n)
                   mscore->currentScoreView()->adjustCanvasPosition(n, false);
             }
       }
@@ -2849,10 +2846,8 @@ Element* Score::move(const QString& cmd)
 
       Element* el = 0;
       if (cmd == "next-chord") {
-            if (noteEntryMode()){
+            if (noteEntryMode())
                   moveToNextInputPos();
-                  mscore->currentScoreView()->moveCursor();
-                  }
             el = nextChordRest(cr);
             }
       else if (cmd == "prev-chord") {
@@ -2878,7 +2873,6 @@ Element* Score::move(const QString& cmd)
                   if (s && !s->element(track))
                         s = m->firstCRSegment();
                   moveInputPos(s);
-                  mscore->currentScoreView()->moveCursor();
                   }
             el = prevChordRest(cr);
             }
@@ -2887,7 +2881,6 @@ Element* Score::move(const QString& cmd)
             if (noteEntryMode() && el && (el->type() == CHORD || el->type() == REST)){
                 ChordRest* crc = static_cast<ChordRest*>(el);
                 moveInputPos(crc->segment());
-                mscore->currentScoreView()->moveCursor();
                 }
             }
       else if (cmd == "prev-measure"){
@@ -2895,7 +2888,6 @@ Element* Score::move(const QString& cmd)
             if (noteEntryMode() && el && (el->type() == CHORD || el->type() == REST)){
                 ChordRest* crc = static_cast<ChordRest*>(el);
                 moveInputPos(crc->segment());
-                mscore->currentScoreView()->moveCursor();
                 }
             }
       if (el) {

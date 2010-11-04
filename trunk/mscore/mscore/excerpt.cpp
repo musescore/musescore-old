@@ -338,7 +338,7 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
                               if (oe == 0)
                                     continue;
                               Element* ne;
-                              if (oe->generated())
+                              if (oe->generated() || oe->type() == CLEF)
                                     ne = oe->clone();
                               else
                                     ne = oe->linkedClone();
@@ -472,7 +472,7 @@ void cloneStaff(Staff* srcStaff, Staff* dstStaff)
                         if (oe == 0)
                               continue;
                         Element* ne;
-                        if (oe->generated())
+                        if (oe->generated() || oe->type() == CLEF)
                               ne = oe->clone();
                         else
                               ne = oe->linkedClone();

@@ -323,7 +323,7 @@ Score::Score(const Style& s)
       _symIdx         = 0;
       _spatium        = preferences.spatium * DPI;
       _pageFormat     = new PageFormat;
-      _needLayout     = false;
+//      _needLayout     = false;
       startLayout     = 0;
       _undo           = new UndoStack();
       _repeatList     = new RepeatList(this);
@@ -376,7 +376,7 @@ Score::Score(Score* parent)
       _symIdx         = 0;
       _spatium        = preferences.spatium * DPI;
       _pageFormat     = new PageFormat;
-      _needLayout     = false;
+//      _needLayout     = false;
       startLayout     = 0;
       _undo           = 0;
       _repeatList     = 0;
@@ -592,7 +592,6 @@ bool Score::read(QString name)
             ++staffIdx;
             }
       updateNotes();
-      _needLayout = true;
       addLayoutFlags(LAYOUT_FIX_TICKS | LAYOUT_FIX_PITCH_VELO);
       doLayout();
       // adjust readPos
@@ -2440,7 +2439,6 @@ Score* Score::clone()
             ++staffIdx;
             }
       score->updateNotes();
-      score->layout();
       score->addLayoutFlags(LAYOUT_FIX_TICKS | LAYOUT_FIX_PITCH_VELO);
       score->doLayout();
       score->scanElements(0, elementAdjustReadPos);
