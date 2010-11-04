@@ -1241,12 +1241,11 @@ void ScoreView::moveCursor(Segment* segment, int staffIdx)
       double x        = segment->canvasPos().x();
       double y        = system->staffY(idx);
       double _spatium = _cursor->spatium();
-      double d        = _spatium * .5;
 
-      _score->addRefresh(_cursor->abbox().adjusted(-d, -d, _spatium, _spatium));
-      _cursor->setPos(x - _spatium, y - _spatium);
+      _score->addRefresh(_cursor->abbox());
 
       double h;
+      double w;
       if (staffIdx == -1) {
             h  = 6 * _spatium;
             //
@@ -1260,16 +1259,23 @@ void ScoreView::moveCursor(Segment* segment, int staffIdx)
                   y2 = ss->y();
                   }
             h += y2;
+            w = _spatium * 2.0;
+            x -= _spatium;
+            y -= _spatium;
             }
       else {
             Staff* staff    = _score->staff(staffIdx);
             double lineDist = staff->useTablature() ? 1.5 * _spatium : _spatium;
             int lines       = staff->lines();
-            h               = (lines - 1) * lineDist + 2 * _spatium;
+            h               = (lines - 1) * lineDist + 4 * _spatium;
+            w               = _spatium * 2.0 + symbols[score()->symIdx()][quartheadSym].width(_cursor->magS());
+            x              -= _spatium;
+            y              -= 2.0 * _spatium;
             }
-      _cursor->setHeight(h);
+      _cursor->setPos(x, y);
+      _cursor->setbbox(QRectF(0.0, 0.0, w, h));
       _cursor->setTick(segment->tick());
-      _score->addRefresh(_cursor->abbox().adjusted(-d, -d, 2*d, 2*d));
+      _score->addRefresh(_cursor->abbox());
       }
 
 //---------------------------------------------------------

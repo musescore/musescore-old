@@ -197,9 +197,9 @@ class Element {
 
       virtual QRectF bbox() const             { return _bbox;              }
       virtual double height() const           { return bbox().height();    }
-      virtual void setHeight(qreal v)         { return _bbox.setHeight(v); }
+      virtual void setHeight(qreal v)         { _bbox.setHeight(v);        }
       virtual double width() const            { return bbox().width();     }
-      virtual void setWidth(qreal v)          { return _bbox.setWidth(v);  }
+      virtual void setWidth(qreal v)          { _bbox.setWidth(v);         }
       QRectF abbox() const;
       virtual void setbbox(const QRectF& r) const   { _bbox = r;           }
       virtual bool contains(const QPointF& p) const;
@@ -422,7 +422,6 @@ class StaffLines : public Element {
 class Cursor : public Element {
       ScoreView* viewer;
       bool _on;
-      double _h;
       Segment* _seg;
       int _tick;
 
@@ -431,11 +430,9 @@ class Cursor : public Element {
       virtual Cursor* clone() const    { return new Cursor(*this); }
       virtual ElementType type() const { return CURSOR; }
       virtual void draw(QPainter&, ScoreView*) const;
-      virtual QRectF bbox() const;
 
       void setOn(bool f)               { _on = f; }
       bool on() const                  { return _on; }
-      virtual void setHeight(qreal v)  { _h = v; }
       void setSegment(Segment* s)      { _seg = s; }
       Segment* segment() const         { return _seg;  }
       int tick() const                 { return _tick; }

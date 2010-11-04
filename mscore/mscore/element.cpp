@@ -1057,21 +1057,9 @@ void Compound::clear()
 Cursor::Cursor(Score* s, ScoreView* v)
    : Element(s)
       {
-      viewer    = v;
-      _on       = false;
-      _h        = 6 * spatium();
-      _seg      = 0;
-      }
-
-//---------------------------------------------------------
-//   bbox
-//---------------------------------------------------------
-
-QRectF Cursor::bbox() const
-      {
-      double w  = 3.0 / viewer->matrix().m11();
-      _bbox = QRectF(0.0, 0.0, w, _h);
-      return _bbox;
+      viewer = v;
+      _on    = false;
+      _seg   = 0;
       }
 
 //---------------------------------------------------------
@@ -1082,12 +1070,10 @@ void Cursor::draw(QPainter& p, ScoreView*) const
       {
       if (!_on)
             return;
-      double x = pos().x();
-      if (_seg)
-            x = _seg->canvasPos().x() - spatium();
-
       int v = track() == -1 ? 0 : voice();
-      p.fillRect(QRectF(x, pos().y(), _bbox.width(), _bbox.height()), QBrush(preferences.selectColor[v]));
+      QColor c(preferences.selectColor[v]);
+      c.setAlpha(50);
+      p.fillRect(abbox(), QBrush(c));
       }
 
 //---------------------------------------------------------
