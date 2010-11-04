@@ -201,6 +201,7 @@ add_executable ( ${ExecutableName}
       shadownote.cpp pitch.cpp importgtp.cpp revisions.cpp bend.cpp tremolobar.cpp
       noteevent.cpp chordline.cpp lasso.cpp fotomode.cpp drumtools.cpp
       elementlayout.cpp selinstrument.cpp instrchange.cpp texteditor.cpp
+      cursor.cpp
       ${OMR_FILES}
       ${AUDIO}
       )

@@ -1616,7 +1616,8 @@ void ScoreView::changeVoice(int voice)
       if ((is->track() % VOICES) == voice)
             return;
 
-      is->setTrack((is->track() / VOICES) * VOICES + voice);
+      int track = (is->track() / VOICES) * VOICES + voice;
+      is->setTrack(track);
       //
       // in note entry mode search for a valid input
       // position
@@ -1624,8 +1625,8 @@ void ScoreView::changeVoice(int voice)
       if (!is->noteEntryMode || is->cr())
             return;
 
+      Segment* segment = is->segment()->measure()->firstCRSegment();
       is->setSegment(is->segment()->measure()->firstCRSegment());
-      moveCursor();
       score()->setUpdateAll(true);
       score()->end();
       mscore->setPos(is->segment()->tick());

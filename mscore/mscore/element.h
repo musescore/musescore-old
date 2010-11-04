@@ -416,30 +416,6 @@ class StaffLines : public Element {
       };
 
 //---------------------------------------------------------
-//   Cursor
-//---------------------------------------------------------
-
-class Cursor : public Element {
-      ScoreView* viewer;
-      bool _on;
-      Segment* _seg;
-      int _tick;
-
-   public:
-      Cursor(Score*, ScoreView*);
-      virtual Cursor* clone() const    { return new Cursor(*this); }
-      virtual ElementType type() const { return CURSOR; }
-      virtual void draw(QPainter&, ScoreView*) const;
-
-      void setOn(bool f)               { _on = f; }
-      bool on() const                  { return _on; }
-      void setSegment(Segment* s)      { _seg = s; }
-      Segment* segment() const         { return _seg;  }
-      int tick() const                 { return _tick; }
-      void setTick(int val)            { _tick = val;  }
-      };
-
-//---------------------------------------------------------
 //   Line
 //---------------------------------------------------------
 

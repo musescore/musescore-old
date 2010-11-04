@@ -231,6 +231,7 @@ class ScoreView : public QWidget {
       void moveCursor();
       void setViewRect(const QRectF&);
       void dataChanged(const QRectF&);
+      void updateAll();
 
       void startEdit();
       void endEdit();
@@ -284,7 +285,6 @@ class ScoreView : public QWidget {
       void setScore(Score* s);
 
       void setMag(qreal m);
-      void redraw(const QRectF& r);
       Element* elementAt(const QPointF& pp);
       Element* elementNear(const QPointF& pp);
       bool navigatorVisible() const;

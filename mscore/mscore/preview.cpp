@@ -95,8 +95,8 @@ void PagePreview::layout()
 
 void PagePreview::paintEvent(QPaintEvent* ev)
       {
-      if (_score->needLayout())
-            _score->doLayout();
+//      if (_score->needLayout())
+//            _score->doLayout();
 
       QColor _fgColor(Qt::white);
       QColor _bgColor(Qt::gray);

@@ -247,7 +247,6 @@ class Score : public QObject {
       //   modified during cmd processing and used in endCmd() to
       //   determine what to layout and what to repaint:
 
-      bool _needLayout;
       QRectF refresh;
       bool _updateAll;
       Measure* startLayout;   ///< start a relayout at this measure
@@ -721,13 +720,11 @@ class Score : public QObject {
       void nextInputPos(ChordRest* cr, bool);
       void cmdMirrorNoteHead();
 
-      void layout()                           { _needLayout = true; }
       double spatium() const                  { return _spatium; }
       PageFormat* pageFormat() const          { return _pageFormat; }
       void setPageFormat(const PageFormat& pf);
       const QList<Page*>& pages() const       { return _pages; }
       QList<System*>* systems()               { return &_systems; }
-      bool needLayout() const                 { return _needLayout; }
 
       MeasureBase* first() const;
       MeasureBase* last()  const;
