@@ -544,7 +544,7 @@
        <item>
         <widget class="QGroupBox" name="groupBox_3">
          <property name="title">
-          <string>Notesheet</string>
+          <string>Paper</string>
          </property>
          <property name="flat">
           <bool>false</bool>
@@ -613,7 +613,7 @@
        <item>
         <widget class="QGroupBox" name="groupBox_4">
          <property name="title">
-          <string>Misc.</string>
+          <string>Miscellaneous</string>
          </property>
          <property name="flat">
           <bool>false</bool>
@@ -749,7 +749,7 @@
           <item>
            <widget class="QCheckBox" name="enableMidiInput">
             <property name="text">
-             <string>Enable midi input</string>
+             <string>Enable MIDI input</string>
             </property>
            </widget>
           </item>
@@ -778,7 +778,7 @@
             <item>
              <widget class="QLabel" name="label_37">
               <property name="text">
-               <string>Default duration:</string>
+               <string>Default Duration:</string>
               </property>
              </widget>
             </item>
@@ -863,7 +863,10 @@
           <item row="0" column="0">
            <widget class="QLabel" name="label_15">
             <property name="text">
-             <string>Rewind</string>
+             <string>rewind</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>
@@ -890,7 +893,7 @@
           <item row="1" column="0">
            <widget class="QLabel" name="label_20">
             <property name="text">
-             <string>Toggle Play</string>
+             <string>toggle play</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -933,14 +936,20 @@
           <item row="0" column="4">
            <widget class="QLabel" name="label_14">
             <property name="text">
-             <string>1/1 note</string>
+             <string>whole note</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>
           <item row="1" column="4">
            <widget class="QLabel" name="label_16">
             <property name="text">
-             <string>1/2 note</string>
+             <string>half note</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>
@@ -975,21 +984,27 @@
           <item row="2" column="4">
            <widget class="QLabel" name="label_39">
             <property name="text">
-             <string>1/4 note</string>
+             <string>quarter note</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>
           <item row="3" column="4">
            <widget class="QLabel" name="label_40">
             <property name="text">
-             <string>1/8 note</string>
+             <string>8th note</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>
           <item row="3" column="8">
            <widget class="QLabel" name="label_44">
             <property name="text">
-             <string>Rest</string>
+             <string>rest</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1034,7 +1049,7 @@
           <item row="0" column="12">
            <widget class="QLabel" name="label_45">
             <property name="text">
-             <string>dot</string>
+             <string>augmentation dot</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1044,7 +1059,7 @@
           <item row="1" column="12">
            <widget class="QLabel" name="label_46">
             <property name="text">
-             <string>dot dot</string>
+             <string>double augmentation dot</string>
             </property>
            </widget>
           </item>
@@ -1149,14 +1164,20 @@
           <item row="2" column="0">
            <widget class="QLabel" name="label_50">
             <property name="text">
-             <string>Play</string>
+             <string>play</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>
           <item row="3" column="0">
            <widget class="QLabel" name="label_51">
             <property name="text">
-             <string>Stop</string>
+             <string>stop</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>
@@ -1203,7 +1224,10 @@
           <item row="4" column="0">
            <widget class="QLabel" name="label_52">
             <property name="text">
-             <string>Edit Mode</string>
+             <string>note entry</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>
@@ -1230,7 +1254,7 @@
           <item row="4" column="4">
            <widget class="QLabel" name="label_41">
             <property name="text">
-             <string>1/16 note</string>
+             <string>16th note</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1268,7 +1292,7 @@
           <item row="0" column="8">
            <widget class="QLabel" name="label_42">
             <property name="text">
-             <string>1/32 note</string>
+             <string>32nd note</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1278,7 +1302,7 @@
           <item row="1" column="8">
            <widget class="QLabel" name="label_43">
             <property name="text">
-             <string>1/64 note</string>
+             <string>64nd note</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1363,7 +1387,7 @@
           <item row="4" column="0" colspan="2">
            <widget class="QCheckBox" name="twosided">
             <property name="text">
-             <string>Two Sided</string>
+             <string>Two sided</string>
             </property>
            </widget>
           </item>
@@ -1875,7 +1899,7 @@
              </sizepolicy>
             </property>
             <property name="title">
-             <string>Portaudio</string>
+             <string>PortAudio</string>
             </property>
             <property name="flat">
              <bool>true</bool>
@@ -1887,7 +1911,7 @@
              <item>
               <widget class="QLabel" name="label_21">
                <property name="text">
-                <string>Api:</string>
+                <string>API:</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1946,7 +1970,7 @@
        <item>
         <widget class="QGroupBox" name="groupBox_14">
          <property name="title">
-          <string>Default Soundfont</string>
+          <string>Default SoundFont</string>
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_11">
           <item>
@@ -2207,7 +2231,7 @@
           <item row="1" column="0">
            <widget class="QCheckBox" name="pngTransparent">
             <property name="text">
-             <string>Transparent Background</string>
+             <string>Transparent background</string>
             </property>
            </widget>
           </item>
@@ -2249,7 +2273,7 @@
           </sizepolicy>
          </property>
          <property name="title">
-          <string>Export MIDI</string>
+          <string>MIDI</string>
          </property>
          <property name="flat">
           <bool>false</bool>
@@ -2258,7 +2282,7 @@
           <item>
            <widget class="QCheckBox" name="expandRepeats">
             <property name="text">
-             <string>Expand Repeats</string>
+             <string>Expand repeats</string>
             </property>
            </widget>
           </item>

@@ -140,7 +140,7 @@
       </sizepolicy>
      </property>
      <property name="currentIndex">
-      <number>4</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="Seite_5">
       <layout class="QVBoxLayout" name="verticalLayout_20">
@@ -403,7 +403,7 @@
              </sizepolicy>
             </property>
             <property name="text">
-             <string>Akkolade distance</string>
+             <string>Grand staff distance</string>
             </property>
            </widget>
           </item>
@@ -530,6 +530,9 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="toolTip">
+             <string>Vertical-frame upper margin</string>
+            </property>
             <property name="text">
              <string>V-frame upper margin</string>
             </property>
@@ -561,6 +564,9 @@
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
+            </property>
+            <property name="toolTip">
+             <string>Vertical-frame lower margin</string>
             </property>
             <property name="text">
              <string>V-frame lower margin</string>
@@ -594,8 +600,14 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="toolTip">
+             <string/>
+            </property>
+            <property name="whatsThis">
+             <string/>
+            </property>
             <property name="text">
-             <string>Page fill threshold:</string>
+             <string>Page fill threshold</string>
             </property>
            </widget>
           </item>
@@ -2431,7 +2443,7 @@ p, li { white-space: pre-wrap; }
        <item>
         <widget class="QGroupBox" name="groupBox">
          <property name="title">
-          <string>Stem Direction in Multi Voice Context</string>
+          <string>Stem Direction in Multi-Voice Context</string>
          </property>
          <property name="flat">
           <bool>false</bool>
@@ -2447,14 +2459,14 @@ p, li { white-space: pre-wrap; }
           <item row="0" column="1">
            <widget class="QRadioButton" name="voice1Up">
             <property name="text">
-             <string>Up</string>
+             <string>up</string>
             </property>
            </widget>
           </item>
           <item row="0" column="2">
            <widget class="QRadioButton" name="voice1Down">
             <property name="text">
-             <string>Down</string>
+             <string>down</string>
             </property>
            </widget>
           </item>
@@ -2468,14 +2480,14 @@ p, li { white-space: pre-wrap; }
           <item row="1" column="1">
            <widget class="QRadioButton" name="voice2Up">
             <property name="text">
-             <string>Up</string>
+             <string>up</string>
             </property>
            </widget>
           </item>
           <item row="1" column="2">
            <widget class="QRadioButton" name="voice2Down">
             <property name="text">
-             <string>Down</string>
+             <string>down</string>
             </property>
            </widget>
           </item>
@@ -2489,14 +2501,14 @@ p, li { white-space: pre-wrap; }
           <item row="2" column="1">
            <widget class="QRadioButton" name="voice3Up">
             <property name="text">
-             <string>Up</string>
+             <string>up</string>
             </property>
            </widget>
           </item>
           <item row="2" column="2">
            <widget class="QRadioButton" name="voice3Down">
             <property name="text">
-             <string>Down</string>
+             <string>down</string>
             </property>
            </widget>
           </item>
@@ -2510,14 +2522,14 @@ p, li { white-space: pre-wrap; }
           <item row="3" column="1">
            <widget class="QRadioButton" name="voice4Up">
             <property name="text">
-             <string>Up</string>
+             <string>up</string>
             </property>
            </widget>
           </item>
           <item row="3" column="2">
            <widget class="QRadioButton" name="voice4Down">
             <property name="text">
-             <string>Down</string>
+             <string>down</string>
             </property>
            </widget>
           </item>
