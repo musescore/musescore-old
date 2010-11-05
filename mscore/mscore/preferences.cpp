@@ -163,7 +163,7 @@ void Preferences::init()
       layoutBreakColor         = Qt::green;
       antialiasedDrawing       = true;
       sessionStart             = SCORE_SESSION;
-      startScore               = ":/data/demo.mscx";
+      startScore               = ":/data/Promenade_Example.mscx";
       workingDirectory         = QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation);
       showSplashScreen         = true;
 
@@ -449,7 +449,7 @@ void Preferences::read()
       else if (ss == "empty")
             sessionStart = EMPTY_SESSION;
 
-      startScore     = s.value("startScore", ":/data/demo.mscx").toString();
+      startScore     = s.value("startScore", ":/data/Promenade_Example.mscx").toString();
       instrumentList = s.value("instrumentList", ":/data/instruments.xml").toString();
 
       s.beginGroup("PlayPanel");

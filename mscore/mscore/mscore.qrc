@@ -38,7 +38,7 @@
       <file>fonts/MuseJazz.ttf</file>
       <file alias="data/instruments.xml">../share/templates/instruments.xml</file>
       <file>data/splash.jpg</file>
-      <file alias="data/demo.mscx">../demos/promenade.mscx</file>
+      <file alias="data/Promenade_Example.mscx">../demos/promenade.mscx</file>
       <file>data/speaker.svg</file>
       <file>data/midiin.svg</file>
       <file>data/undo.svg</file>
