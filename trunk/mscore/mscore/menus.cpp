@@ -432,8 +432,8 @@ void MuseScore::populatePalette()
       // b1->setHeight(_spatium * 7);
       // b2->setHeight(_spatium * 7);
 
-      sp->append(b1, tr("Bracket"));
-      sp->append(b2, tr("Akkolade"));
+      sp->append(b1, tr("Square bracket"));
+      sp->append(b2, tr("Curly bracket"));
 
       paletteBox->addPalette(sp);
 

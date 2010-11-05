@@ -207,7 +207,7 @@
             <property name="maximum">
              <number>32</number>
             </property>
-           </widget>  
+           </widget>
           </item>
           <item row="0" column="4" colspan="2">
            <widget class="QLabel" name="nominalN">
@@ -271,7 +271,7 @@
              <string>do not count</string>
             </property>
             <property name="text">
-             <string>irregular</string>
+             <string>Exclude from measure count</string>
             </property>
            </widget>
           </item>

@@ -49,8 +49,8 @@ MagBox::MagBox(QWidget* parent)
       freeMag = 1.0;
       setEditable(true);
       setInsertPolicy(QComboBox::InsertAtBottom);
-      setToolTip(tr("Magnification"));
-      setWhatsThis(tr("Zoom Canvas"));
+      setToolTip(tr("Zoom"));
+      setWhatsThis(tr("Zoom In"));
       setValidator(new MagValidator(this));
 
       unsigned int n = sizeof(magTable)/sizeof(*magTable) - 1;

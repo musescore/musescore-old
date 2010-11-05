@@ -1150,7 +1150,7 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "note-longa",
-         QT_TRANSLATE_NOOP("action","note longa"),
+         QT_TRANSLATE_NOOP("action","Note duration: longa"),
          Qt::Key_9,
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Longa"),
@@ -1160,7 +1160,7 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "note-breve",
-         QT_TRANSLATE_NOOP("action","note breve"),
+         QT_TRANSLATE_NOOP("action","Note duration: breve"),
          Qt::Key_8,
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Double whole note (breve)"),
@@ -1170,7 +1170,7 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "pad-note-1",
-         QT_TRANSLATE_NOOP("action","pad note 1/1"),
+         QT_TRANSLATE_NOOP("action","Note duration: whole"),
          Qt::Key_7,
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Whole note (semibreve)"),
@@ -1180,7 +1180,7 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "pad-note-2",
-         QT_TRANSLATE_NOOP("action","pad note 1/2"),
+         QT_TRANSLATE_NOOP("action","Note duration: half"),
          Qt::Key_6,
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Half note (minim)"),
@@ -1190,7 +1190,7 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "pad-note-4",
-         QT_TRANSLATE_NOOP("action","pad note 1/4"),
+         QT_TRANSLATE_NOOP("action","Note duration: quarter"),
          Qt::Key_5,
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Quarter note (crochet)"),
@@ -1200,7 +1200,7 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "pad-note-8",
-         QT_TRANSLATE_NOOP("action","pad note 1/8"),
+         QT_TRANSLATE_NOOP("action","Note duration: 8th"),
          Qt::Key_4,
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Eighth note (quaver)"),
@@ -1210,7 +1210,7 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "pad-note-16",
-         QT_TRANSLATE_NOOP("action","pad note 1/16"),
+         QT_TRANSLATE_NOOP("action","Note duration: 16th"),
          Qt::Key_3,
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","16th note (semiquaver)"),
@@ -1220,97 +1220,97 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "pad-note-32",
-         QT_TRANSLATE_NOOP("action","pad note 1/32"),
+         QT_TRANSLATE_NOOP("action","Note duration: 32nd"),
          Qt::Key_2,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","32nd note (demi-semiquaver)"),
-         QT_TRANSLATE_NOOP("action","32nd note (demi-semiquaver)"),
+         QT_TRANSLATE_NOOP("action","32nd note (hemisemiquaver)"),
+         QT_TRANSLATE_NOOP("action","32nd note (hemisemiquaver)"),
           note32_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "pad-note-64",
-         QT_TRANSLATE_NOOP("action","pad note 1/64"),
+         QT_TRANSLATE_NOOP("action","Note duration: 64th"),
          Qt::Key_1,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","64th note (semi-demi-semiquaver)"),
-         QT_TRANSLATE_NOOP("action","64th note (semi-demi-semiquaver)"),
+         QT_TRANSLATE_NOOP("action","64th note (hemidemisemiquaver)"),
+         QT_TRANSLATE_NOOP("action","64th note (hemidemisemiquaver)"),
           note64_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "pad-dot",
-         QT_TRANSLATE_NOOP("action","pad dot"),
+         QT_TRANSLATE_NOOP("action","Note duration: augmentation dot"),
          Qt::Key_Period,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","Dot"),
-         QT_TRANSLATE_NOOP("action","Dot"),
+         QT_TRANSLATE_NOOP("action","Augmentation dot"),
+         QT_TRANSLATE_NOOP("action","Augmentation dot"),
           dot_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "pad-dotdot",
-         QT_TRANSLATE_NOOP("action","pad double dot"),
+         QT_TRANSLATE_NOOP("action","Note duration: double augmentation dot"),
          0,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","Double dot"),
-         QT_TRANSLATE_NOOP("action","Double dot"),
+         QT_TRANSLATE_NOOP("action","Double augmentation dot"),
+         QT_TRANSLATE_NOOP("action","Double augmentation dot"),
           dotdot_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "tie",
-         QT_TRANSLATE_NOOP("action","tie"),
+         QT_TRANSLATE_NOOP("action","Note duration: tie"),
          Qt::Key_Plus,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","tie"),
-         QT_TRANSLATE_NOOP("action","tie"),
+         QT_TRANSLATE_NOOP("action","Tie"),
+         QT_TRANSLATE_NOOP("action","Tie"),
          tie_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "pad-rest",
-         QT_TRANSLATE_NOOP("action","pad rest"),
+         QT_TRANSLATE_NOOP("action","Note entry: rest"),
          0,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","rest"),
-         QT_TRANSLATE_NOOP("action","rest"),
+         QT_TRANSLATE_NOOP("action","Rest"),
+         QT_TRANSLATE_NOOP("action","Rest"),
           quartrest_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "sharp2",
-         QT_TRANSLATE_NOOP("action","double sharp"),
+         QT_TRANSLATE_NOOP("action","Note entry: double sharp"),
          0,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","double sharp"),
-         QT_TRANSLATE_NOOP("action","double sharp"),
+         QT_TRANSLATE_NOOP("action","Double sharp"),
+         QT_TRANSLATE_NOOP("action","Double sharp"),
           sharpsharp_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "sharp",
-         QT_TRANSLATE_NOOP("action","sharp"),
+         QT_TRANSLATE_NOOP("action","Note entry: sharp"),
          0,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","sharp"),
-         QT_TRANSLATE_NOOP("action","sharp"),
+         QT_TRANSLATE_NOOP("action","Sharp"),
+         QT_TRANSLATE_NOOP("action","Sharp"),
           sharp_ICON
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "nat",
-         QT_TRANSLATE_NOOP("action","natural"),
+         QT_TRANSLATE_NOOP("action","Note entry: natural"),
          0,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","natural"),
-         QT_TRANSLATE_NOOP("action","natural"),
+         QT_TRANSLATE_NOOP("action","Natural"),
+         QT_TRANSLATE_NOOP("action","Natural"),
           natural_ICON
          ),
        Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "flat",
-         QT_TRANSLATE_NOOP("action","Flat"),
+         QT_TRANSLATE_NOOP("action","Note entry: Flat"),
          Qt::Key_Minus,
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Flat"),
@@ -1320,11 +1320,11 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "flat2",
-         QT_TRANSLATE_NOOP("action","double flat"),
+         QT_TRANSLATE_NOOP("action","Note entry: double flat"),
          0,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","double flat"),
-         QT_TRANSLATE_NOOP("action","double flat"),
+         QT_TRANSLATE_NOOP("action","Double flat"),
+         QT_TRANSLATE_NOOP("action","Double flat"),
           flatflat_ICON
          ),
       Shortcut(
@@ -1423,11 +1423,11 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "midi-on",
-         QT_TRANSLATE_NOOP("action","midi input in"),
+         QT_TRANSLATE_NOOP("action","MIDI input"),
          0,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","Enable MIDI Input"),
-         QT_TRANSLATE_NOOP("action","Enable MIDI Input"),
+         QT_TRANSLATE_NOOP("action","Enable MIDI input"),
+         QT_TRANSLATE_NOOP("action","Enable MIDI input"),
           midiin_ICON
          ),
       Shortcut(
@@ -1721,11 +1721,11 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "poet-text",
-         QT_TRANSLATE_NOOP("action","Add Poet"),
+         QT_TRANSLATE_NOOP("action","Add Lyricist"),
          0,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","Poet"),
-         QT_TRANSLATE_NOOP("action","Add Poet Text")
+         QT_TRANSLATE_NOOP("action","Lyricist"),
+         QT_TRANSLATE_NOOP("action","Add Lyricist Text")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
@@ -2097,52 +2097,52 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "rest-1",
-         QT_TRANSLATE_NOOP("action","enter 1/1 rest"),
+         QT_TRANSLATE_NOOP("action","Note entry: whole rest"),
          QKeySequence(Qt::SHIFT+Qt::Key_R, Qt::SHIFT+Qt::Key_S),
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","1/1 rest"),
-         QT_TRANSLATE_NOOP("action","enter 1/1 rest")
+         QT_TRANSLATE_NOOP("action","Whole rest"),
+         QT_TRANSLATE_NOOP("action","Whole rest")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "rest-2",
-         QT_TRANSLATE_NOOP("action","enter 1/2 rest"),
+         QT_TRANSLATE_NOOP("action","Note entry: half rest"),
          QKeySequence(Qt::SHIFT+Qt::Key_R, Qt::SHIFT+Qt::Key_M),
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","1/2 rest"),
-         QT_TRANSLATE_NOOP("action","enter 1/2 rest")
+         QT_TRANSLATE_NOOP("action","Half rest"),
+         QT_TRANSLATE_NOOP("action","Half rest")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "rest-4",
-         QT_TRANSLATE_NOOP("action","enter 1/4 rest"),
+         QT_TRANSLATE_NOOP("action","Note entry: quarter rest"),
          QKeySequence(Qt::SHIFT+Qt::Key_R, Qt::SHIFT+Qt::Key_R),
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","1/4 rest"),
-         QT_TRANSLATE_NOOP("action","enter 1/4 rest")
+         QT_TRANSLATE_NOOP("action","Quarter rest"),
+         QT_TRANSLATE_NOOP("action","Quarter rest")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "rest-8",
-         QT_TRANSLATE_NOOP("action","enter 1/8 rest"),
+         QT_TRANSLATE_NOOP("action","Note entry: 8th rest"),
          QKeySequence(Qt::SHIFT+Qt::Key_R, Qt::SHIFT+Qt::Key_Q),
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","1/8 rest"),
-         QT_TRANSLATE_NOOP("action","enter 1/8 rest")
+         QT_TRANSLATE_NOOP("action","8th rest"),
+         QT_TRANSLATE_NOOP("action","8th rest")
          ),
       Shortcut(                     // mapped to undo in note entry mode
          STATE_NOTE_ENTRY,
          "backspace",
-         QT_TRANSLATE_NOOP("action","backspace"),
+         QT_TRANSLATE_NOOP("action","Backspace"),
          QKeySequence(Qt::Key_Backspace),    // QKeySequence::Back,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","backspace"),
-         QT_TRANSLATE_NOOP("action","backspace")
+         QT_TRANSLATE_NOOP("action","Backspace"),
+         QT_TRANSLATE_NOOP("action","Backspace")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_SEARCH,
          "find",
-         QT_TRANSLATE_NOOP("action","search"),
+         QT_TRANSLATE_NOOP("action","Search"),
          QKeySequence::Find,        // Qt::CTRL + Qt::Key_F,
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Search"),

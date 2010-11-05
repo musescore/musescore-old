@@ -242,7 +242,7 @@ void setDefaultStyle()
       AS(TextStyle(TR("Composer"), ff, 12, false, false, false,
          ALIGN_RIGHT | ALIGN_BOTTOM));
 
-      AS(TextStyle(TR("Poet"), ff, 12, false, false, false,
+      AS(TextStyle(TR("Lyricist"), ff, 12, false, false, false,
          ALIGN_LEFT | ALIGN_BOTTOM));
 
       AS(TextStyle(TR("Lyrics odd lines"), ff, 11, false, false, false,
