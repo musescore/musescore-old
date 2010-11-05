@@ -220,7 +220,7 @@ void UndoStack::push(UndoCommand* cmd)
       {
       if (!curCmd) {
             printf("UndoStack:push(): no active command, UndoStack %p\n", this);
-abort();
+// abort();
             cmd->redo();
             delete cmd;
             return;
@@ -957,7 +957,6 @@ void Score::undoAddElement(Element* element)
 
 void Score::undoAddCR(ChordRest* cr, Measure* measure, int tick)
       {
-printf("undoAddCR:\n");
       QList<Staff*> staffList;
       Staff* ostaff = cr->staff();
       LinkedStaves* linkedStaves = ostaff->linkedStaves();
@@ -1018,16 +1017,13 @@ printf("undoAddCR:\n");
 
 void Score::undoRemoveElement(Element* element)
       {
-printf("undoRemoveElement:\n");
       LinkedElements* le = element->links();
       if (le) {
             foreach(Element* e, *le) {
-printf(" remove linked %p %s\n", e, e->name());
                   undo()->push(new RemoveElement(e));
                   }
             }
       else {
-printf(" remove %p %s\n", element, element->name());
             undo()->push(new RemoveElement(element));
             }
       }
@@ -2833,8 +2829,6 @@ void ChangeInstrument::flip()
       {
       Instrument oi = is->instrument();
       is->setInstrument(instrument);
-printf("change instr <%s> -> <%s>\n",
-      qPrintable(oi.trackName()), qPrintable(instrument.trackName()));
 
       is->staff()->part()->setInstrument(instrument, is->segment()->tick());
       is->score()->rebuildMidiMapping();

@@ -1661,7 +1661,7 @@ static void loadScores(const QStringList& argv)
                               if(score->read(preferences.startScore)) {
                                     currentScoreView = mscore->appendScore(score);
                                     }
-                              else { 
+                              else {
                                     delete score;
                                     Score* score = new Score(defaultStyle);
                                     scoreCreated = true;
@@ -2344,15 +2344,18 @@ void MuseScore::cmd(QAction* a)
 
 void MuseScore::clipboardChanged()
       {
+#if 0
       const QMimeData* ms = QApplication::clipboard()->mimeData();
-      if (ms == 0)
-            return;
       QStringList formats = ms->formats();
 
       bool flag = ms->hasFormat(mimeSymbolFormat)
             ||    ms->hasFormat(mimeStaffListFormat)
-            ||    ms->hasFormat(mimeSymbolListFormat);
+            ||    ms->hasFormat(mimeSymbolListFormat)
+            ||    ms->hasText();
       // TODO: depends on selection state
+#endif
+
+      bool flag = true;
       getAction("paste")->setEnabled(flag);
       }
 
