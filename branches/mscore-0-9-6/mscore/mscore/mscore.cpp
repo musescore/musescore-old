@@ -1557,8 +1557,18 @@ static void loadScores(const QStringList& argv)
                         case SCORE_SESSION:
                               Score* score = new Score(defaultStyle);
                               scoreCreated = true;
-                              if(score->read(preferences.startScore))
+                              if(score->read(preferences.startScore)) {
                                     currentScoreView = mscore->appendScore(score);
+                                    }
+                              else { 
+                                    delete score;
+                                    Score* score = new Score(defaultStyle);
+                                    scoreCreated = true;
+                                    if (score->read(":/data/Promenade_Example.mscx")){
+                                          preferences.startScore = ":/data/Promenade_Example.mscx";
+                                          currentScoreView = mscore->appendScore(score);
+                                          }
+                                    }
                               break;
                         }
                   }
