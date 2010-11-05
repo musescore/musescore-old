@@ -1,3 +1,5 @@
+5.nov (ws)
+      - fix #7734: pasting lyrics with spaces is not working
 4.nov (ws)
       - do not link clefs in linked parts
       (db)

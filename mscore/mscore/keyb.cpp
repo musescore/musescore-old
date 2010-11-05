@@ -59,11 +59,10 @@ void ScoreView::editKey(QKeyEvent* ev)
             printf("keyPressEvent key 0x%02x mod 0x%04x <%s>\n",
                key, int(modifiers), qPrintable(s));
 
-      Element* e = editObject;
-      if (!e)
+      if (!editObject)
             return;
 
-      if (e->type() == LYRICS) {
+      if (editObject->type() == LYRICS) {
             int found = false;
 		if (ev->key() == Qt::Key_Space && !(modifiers & CONTROL_MODIFIER)) {
                   // TODO: shift+tab events are filtered by qt
@@ -71,14 +70,14 @@ void ScoreView::editKey(QKeyEvent* ev)
                   found = true;
                   }
             else if (ev->key() == Qt::Key_Left) {
-                  if (!ctrl && e->edit(this, curGrip, key, modifiers, s))
+                  if (!ctrl && editObject->edit(this, curGrip, key, modifiers, s))
                         _score->end();
                   else
                         lyricsTab(true, true, true);      // go to previous lyrics
                   found = true;
                   }
             else if (ev->key() == Qt::Key_Right) {
-                  if (!ctrl && e->edit(this, curGrip, key, modifiers, s))
+                  if (!ctrl && editObject->edit(this, curGrip, key, modifiers, s))
                         _score->end();
                   else
                         lyricsTab(false, false, true);    // go to next lyrics
@@ -109,7 +108,7 @@ void ScoreView::editKey(QKeyEvent* ev)
                   return;
                   }
             }
-      if (e->type() == HARMONY) {
+      if (editObject->type() == HARMONY) {
             if (ev->key() == Qt::Key_Space && !(modifiers & CONTROL_MODIFIER)) {
                   chordTab(modifiers & Qt::ShiftModifier);
                   ev->accept();
@@ -117,13 +116,13 @@ void ScoreView::editKey(QKeyEvent* ev)
                   }
             }
       if (!((modifiers & Qt::ShiftModifier) && (key == Qt::Key_Backtab))) {
-            if (e->edit(this, curGrip, key, modifiers, s)) {
+            if (editObject->edit(this, curGrip, key, modifiers, s)) {
                   updateGrips();
                   ev->accept();
                   _score->end();
                   return;
                   }
-            if (e->isText() && (ev->key() == Qt::Key_Left || ev->key() == Qt::Key_Right)) {
+            if (editObject->isText() && (ev->key() == Qt::Key_Left || ev->key() == Qt::Key_Right)) {
                   ev->accept();
                   _score->end();
                   //return;
@@ -152,7 +151,7 @@ void ScoreView::editKey(QKeyEvent* ev)
                   ev->ignore();
                   return;
             }
-      e->editDrag(curGrip, delta);
+      editObject->editDrag(curGrip, delta);
       updateGrips();
       _score->end();
       ev->accept();

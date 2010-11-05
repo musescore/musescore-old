@@ -2583,7 +2583,6 @@ void ScoreView::normalCut()
 
 void ScoreView::editPaste()
       {
-printf("editPaste=========================\n");
       if (editObject->isText()) {
             static_cast<Text*>(editObject)->paste();
             if (editObject->type() == LYRICS)
