@@ -80,20 +80,14 @@ class Space {
 //   LinkedElements
 //---------------------------------------------------------
 
-class LinkedElements {
+class LinkedElements : public QList<Element*> {
       static int _linkId;
-      QList<Element*> _elements;
       int _lid;                     // unique id for every linked list
 
    public:
-      LinkedElements()                        { _lid = _linkId++;           }
-      LinkedElements(int id)                  { _lid = id;                  }
-      QList<Element*>& elements()             { return _elements;           }
-      const QList<Element*>& elements() const { return _elements;           }
-      void add(Element* e)                    { _elements.append(e);        }
-      void remove(Element* e)                 { _elements.removeOne(e);     }
-      bool isEmpty() const                    { return _elements.isEmpty(); }
-      void setLid(int val)                    { _linkId = _lid = val;       }
+      LinkedElements();
+      LinkedElements(int id);
+      void setLid(int val);
       int lid() const                         { return _lid;                }
       };
 

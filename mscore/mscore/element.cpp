@@ -165,7 +165,34 @@ static const char* elementNames[] = {
       QT_TRANSLATE_NOOP("elementName", "AccidentalBracket")
       };
 
-int LinkedElements::_linkId = 1;
+int LinkedElements::_linkId = 0;    // highest id in use
+
+//---------------------------------------------------------
+//   LinkedElements
+//---------------------------------------------------------
+
+LinkedElements::LinkedElements()
+      {
+      _lid = ++_linkId; // create new unique id
+      }
+
+LinkedElements::LinkedElements(int id)
+      {
+      _lid = id;
+      if (_linkId <= id)
+            _linkId = id;
+      }
+
+//---------------------------------------------------------
+//   setLid
+//---------------------------------------------------------
+
+void LinkedElements::setLid(int id)
+      {
+      _lid = id;
+      if (_linkId <= id)
+            _linkId = id;
+      }
 
 //---------------------------------------------------------
 //   spatiumChanged
@@ -226,7 +253,7 @@ QRectF Element::abbox() const
 Element::~Element()
       {
       if (_links) {
-            _links->remove(this);
+            _links->removeOne(this);
             if (_links->isEmpty()) {
                   //DEBUG:
                   score()->links().remove(_links->lid());
@@ -270,7 +297,7 @@ Element::Element(Score* s) :
 
 Element::Element(const Element& e)
       {
-      _links      = e._links;
+      _links      = 0;
       _parent     = e._parent;
       _selected   = e._selected;
       _generated  = e._generated;
@@ -300,11 +327,11 @@ void Element::linkTo(Element* element)
                   _links = element->links();
             else {
                   _links = new LinkedElements;
-                  _links->add(element);
+                  _links->append(element);
                   element->setLinks(_links);
                   }
             }
-      _links->add(this);
+      _links->append(this);
       }
 
 //---------------------------------------------------------
@@ -483,7 +510,7 @@ bool Element::intersects(const QRectF& rr) const
 QList<Prop> Element::properties(Xml& xml, const Element* proto) const
       {
       QList<Prop> pl;
-      if (_links && (_links->elements().size() > 1))
+      if (_links && (_links->size() > 1))
             pl.append(Prop("lid", _links->lid()));
       if (_subtype) {
             QString s(subtypeName());
@@ -535,7 +562,7 @@ bool Element::readProperties(QDomElement e)
                   _links = new LinkedElements(i);
                   score()->links().insert(i, _links);
                   }
-            _links->add(this);
+            _links->append(this);
             }
       else if (tag == "subtype") {
             // does not always call Element::setSubtype():

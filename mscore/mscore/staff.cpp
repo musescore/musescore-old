@@ -568,3 +568,30 @@ bool Staff::primaryStaff() const
       return s.front() == this;
       }
 
+//---------------------------------------------------------
+//   setStaffType
+//---------------------------------------------------------
+
+void Staff::setStaffType(StaffType* st)
+      {
+      if (_staffType == st)
+            return;
+      _staffType = st;
+
+      //
+      //    check for right clef-type and fix
+      //    if necessary
+      //
+      ClefType ct = _clefList->clef(0);
+      StaffGroup csg = clefTable[ct].staffGroup;
+
+      if (_staffType->group() != csg) {
+            _clefList->clear();
+            switch(_staffType->group()) {
+                  case TAB_STAFF:        ct = CLEF_TAB2; break;
+                  case PITCHED_STAFF:    ct = CLEF_G; break;      // TODO: use preferred clef for instrument
+                  case PERCUSSION_STAFF: ct = CLEF_PERC; break;
+                  }
+            }
+      }
+

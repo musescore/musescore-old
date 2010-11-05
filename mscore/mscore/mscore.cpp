@@ -1977,7 +1977,7 @@ int main(int argc, char* av[])
       static const char* fonts[] = {
 //            "mscore-20", "mscore1-20", "MuseJazz", "DejaVuSans", "DejaVuSerif"
             "mscore-20", "MScore1-20_new", "MuseJazz", "FreeSans", "FreeSerif",
-            "gonville-20",
+            "gonville-20"
             };
       for (unsigned i = 0; i < sizeof(fonts)/sizeof(*fonts); ++i) {
             if (-1 == QFontDatabase::addApplicationFont(QString(":/fonts/%1.ttf").arg(fonts[i]))) {

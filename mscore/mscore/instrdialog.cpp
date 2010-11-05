@@ -640,11 +640,10 @@ void MuseScore::editInstrList()
                               staff->setKey(0, nKey);
 
                               if (sli->linked()) {
-                                    // TODO: link staff
-                                    printf("TODO: link staff\n");
                                     int idx = cs->staffIdx(staff);
                                     if (idx > 0) {
                                           Staff* ostaff = cs->staff(idx - 1);
+                                          staff->setStaffType(ostaff->staffType());
                                           cloneStaff(ostaff, staff);
                                           }
                                     }

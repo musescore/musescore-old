@@ -3,7 +3,7 @@
 #  Linux Music Editor
 #  $Id:$
 #
-#  Copyright (C) 2002-2008 by Werner Schweer and others
+#  Copyright (C) 2002-2010 by Werner Schweer and others
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License version 2.
@@ -27,27 +27,22 @@ install(FILES
       )
 
 if (APPLE)
-
-install(FILES
-      appstyle-mac.css
-      RENAME appstyle.css
-      DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}styles
-      )
-
-install(FILES
-      appstyle-mac-dark.css
-      RENAME appstyle-dark.css
-      DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}styles
-      )
-
+      install(FILES
+            appstyle-mac.css
+            RENAME appstyle.css
+            DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}styles
+            )
+      install(FILES
+            appstyle-mac-dark.css
+            RENAME appstyle-dark.css
+            DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}styles
+            )
 else (APPLE)
-
-install(FILES
-      appstyle.css
-      appstyle-dark.css
-      DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}styles
-      )
-
+      install(FILES
+            appstyle.css
+            appstyle-dark.css
+            DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}styles
+            )
 endif (APPLE)
 
 
