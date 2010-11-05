@@ -1165,7 +1165,7 @@ void ScoreView::startEdit()
 
             LinkedElements* links = ohp->links();
             if (links) {
-                  foreach(Element* e, links->elements()) {
+                  foreach(Element* e, *links) {
                         Spanner* sp = static_cast<Spanner*>(e);
                         Spanner* csp = static_cast<Spanner*>(sp->clone());
                         if (sp == ohp) {
@@ -1186,7 +1186,7 @@ void ScoreView::startEdit()
       else {
             LinkedElements* links = origEditObject->links();
             if (links) {
-                  foreach(Element* e, links->elements()) {
+                  foreach(Element* e, *links) {
                         Element* ce = e->clone();
                         if (e == origEditObject) {
                               editObject = ce;

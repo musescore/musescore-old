@@ -1668,7 +1668,7 @@ void ShowElementBase::parentClicked()
 void ShowElementBase::linkClicked()
       {
       printf("linkClicked\n");
-      foreach(Element* e, el->links()->elements()) {
+      foreach(Element* e, *el->links()) {
             printf("  element <%p> <%p>\n", e->score(), e);
             if (e != el) {
                   emit elementChanged(e);

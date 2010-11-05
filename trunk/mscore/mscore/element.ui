@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>597</width>
+    <width>525</width>
     <height>229</height>
    </rect>
   </property>
@@ -53,7 +53,7 @@
         <item>
          <widget class="QPushButton" name="link1">
           <property name="text">
-           <string>Link1</string>
+           <string notr="true">Link1</string>
           </property>
          </widget>
         </item>
@@ -73,21 +73,21 @@
         <item>
          <widget class="QLabel" name="label_9">
           <property name="text">
-           <string>Score:</string>
+           <string notr="true">Score:</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="score">
           <property name="text">
-           <string>0</string>
+           <string notr="true">0</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="label_12">
           <property name="text">
-           <string>Addr.:</string>
+           <string notr="true">Addr.:</string>
           </property>
          </widget>
         </item>
@@ -182,7 +182,7 @@
            <string notr="true"/>
           </property>
           <property name="text">
-           <string>selectable</string>
+           <string notr="true">selectable</string>
           </property>
          </widget>
         </item>
@@ -192,7 +192,7 @@
            <string notr="true"/>
           </property>
           <property name="text">
-           <string>droptarget</string>
+           <string notr="true">droptarget</string>
           </property>
          </widget>
         </item>
@@ -610,7 +610,7 @@
         <item row="0" column="3">
          <widget class="QLabel" name="label_2">
           <property name="text">
-           <string>CPos</string>
+           <string notr="true">CPos</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -620,7 +620,7 @@
         <item row="3" column="3">
          <widget class="QLabel" name="label_6">
           <property name="text">
-           <string>w/h</string>
+           <string notr="true">w/h</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

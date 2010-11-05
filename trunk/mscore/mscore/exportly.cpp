@@ -4175,6 +4175,8 @@ void ExportLy::writeScore()
 	      relativ="'";
 	      staffpitch=12*5;
 	      break;
+          default:      //??
+            break;
 	    }
 
 	  staffrelativ=relativ;

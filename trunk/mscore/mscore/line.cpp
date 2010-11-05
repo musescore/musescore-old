@@ -182,7 +182,7 @@ bool LineSegment::edit(ScoreView* sv, int curGrip, int key, Qt::KeyboardModifier
                   }
             if (links) {
                   int tick = s1->tick();
-                  foreach(Element* e, links->elements()) {
+                  foreach(Element* e, *links) {
                         Score* score = e->score();
                         SLine* ll = static_cast<SLine*>(e);
                         static_cast<Segment*>(ll->endElement())->removeSpannerBack(ll);
@@ -206,7 +206,7 @@ bool LineSegment::edit(ScoreView* sv, int curGrip, int key, Qt::KeyboardModifier
                   }
             if (links) {
                   int tick = s2->tick();
-                  foreach(Element* e, links->elements()) {
+                  foreach(Element* e, *links) {
                         Score* score = e->score();
                         SLine* ll = static_cast<SLine*>(e);
                         static_cast<Segment*>(ll->endElement())->removeSpannerBack(ll);

@@ -540,7 +540,7 @@ void Score::undoChangeKeySig(Staff* ostaff, int tick, KeySigEvent st)
             nks->setParent(s);
             if (links == 0)
                   links = new LinkedElements;
-            links->add(nks);
+            links->append(nks);
             nks->setLinks(links);
 
             if (ks)
@@ -957,6 +957,7 @@ void Score::undoAddElement(Element* element)
 
 void Score::undoAddCR(ChordRest* cr, Measure* measure, int tick)
       {
+printf("undoAddCR:\n");
       QList<Staff*> staffList;
       Staff* ostaff = cr->staff();
       LinkedStaves* linkedStaves = ostaff->linkedStaves();
@@ -980,7 +981,7 @@ void Score::undoAddCR(ChordRest* cr, Measure* measure, int tick)
                   seg = new Segment(m, segmentType, tick);
                   score->undoAddElement(seg);
                   }
-            ChordRest* newcr = (staff == ostaff) ? cr : static_cast<ChordRest*>(cr->clone());
+            ChordRest* newcr = (staff == ostaff) ? cr : static_cast<ChordRest*>(cr->linkedClone());
             newcr->setScore(score);
             int staffIdx = score->staffIdx(staff);
             int ntrack = staffIdx * VOICES + cr->voice();
@@ -1017,13 +1018,18 @@ void Score::undoAddCR(ChordRest* cr, Measure* measure, int tick)
 
 void Score::undoRemoveElement(Element* element)
       {
+printf("undoRemoveElement:\n");
       LinkedElements* le = element->links();
       if (le) {
-            foreach(Element* e, le->elements())
+            foreach(Element* e, *le) {
+printf(" remove linked %p %s\n", e, e->name());
                   undo()->push(new RemoveElement(e));
+                  }
             }
-      else
+      else {
+printf(" remove %p %s\n", element, element->name());
             undo()->push(new RemoveElement(element));
+            }
       }
 
 //---------------------------------------------------------
@@ -1554,8 +1560,8 @@ void ChangeElement::flip()
       {
       LinkedElements* links = oldElement->links();
       if (links) {
-            links->remove(oldElement);
-            links->add(newElement);
+            links->removeOne(oldElement);
+            links->append(newElement);
             }
 
       Score* score = oldElement->score();

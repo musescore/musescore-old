@@ -597,13 +597,11 @@ void Score::layoutStage3()
 
 void Score::doLayout()
       {
-printf("doLayout\n");
       _symIdx = 0;
       if (_style.valueSt(ST_MusicalSymbolFont) == "Gonville")
             _symIdx = 1;
 
       initSymbols(_symIdx);
-//      _needLayout = false;
 
       if (layoutFlags & LAYOUT_FIX_TICKS)
             fixTicks();
@@ -656,7 +654,6 @@ printf("doLayout\n");
                   st->setUpdateKeymap(false);
                   }
             }
-//      _needLayout = 0;
 
 #if 0 // DEBUG
       if (startLayout) {

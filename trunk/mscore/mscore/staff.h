@@ -159,7 +159,7 @@ class Staff {
       bool useTablature() const;
       void setUseTablature(bool val);
       StaffType* staffType() const     { return _staffType;      }
-      void setStaffType(StaffType* st) { _staffType = st;        }
+      void setStaffType(StaffType* st);
       bool updateClefList() const      { return _updateClefList; }
       bool updateKeymap() const        { return _updateKeymap;   }
       void setUpdateClefList(bool v)   { _updateClefList = v;    }

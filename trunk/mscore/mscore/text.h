@@ -192,7 +192,7 @@ class Text : public Element {
       bool layoutToParentWidth() const    { return _layoutToParentWidth; }
       void setLayoutToParentWidth(bool v) { _layoutToParentWidth = v;   }
       bool styled() const                 { return _styled; }
-      void setStyled(bool v)              { _styled = v; }
+      void setStyled(bool v);
 
       bool isEmpty() const                { return _doc->isEmpty(); }
       void setModified(bool v)            { _doc->setModified(v);   }
