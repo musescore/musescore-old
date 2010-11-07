@@ -35,7 +35,7 @@ class Tablature;
 //---------------------------------------------------------
 
 struct InstrumentTemplate {
-      QString trackName;     ///< also used for track name
+      QString trackName;
       QString longName;      ///< shown on first system
       QString shortName;     ///< shown on followup systems
 

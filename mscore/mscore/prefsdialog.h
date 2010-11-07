@@ -62,7 +62,6 @@ class PreferenceDialog : public QDialog, private Ui::PrefsDialogBase {
       void pageFormatSelected(int);
       void landscapeToggled(bool);
       void styleFileButtonClicked();
-      void appStyleFileButtonClicked();
       void recordButtonClicked(int);
       void midiRemoteControlClearClicked();
       void selectSoundFont();

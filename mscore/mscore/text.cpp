@@ -600,7 +600,8 @@ bool Text::readProperties(QDomElement e)
                   }
             else
                   setTextStyle(score()->style().textStyleType(val));
-            _styled = true;
+            if (textStyle() != TEXT_STYLE_INVALID)
+                  _styled = true;
             }
       else if (tag == "align") {            // obsolete
             _localStyle.setAlign(Align(val.toInt()));

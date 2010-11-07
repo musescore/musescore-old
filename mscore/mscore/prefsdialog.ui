@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>772</width>
-    <height>534</height>
+    <height>538</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -96,7 +96,7 @@
                <string>Browse...</string>
               </property>
               <property name="icon">
-               <iconset resource="mscore.qrc">
+               <iconset>
                 <normaloff>:/data/fileopen.svg</normaloff>:/data/fileopen.svg</iconset>
               </property>
              </widget>
@@ -234,7 +234,7 @@
              <string>Browse...</string>
             </property>
             <property name="icon">
-             <iconset resource="mscore.qrc">
+             <iconset>
               <normaloff>:/data/fileopen.svg</normaloff>:/data/fileopen.svg</iconset>
             </property>
            </widget>
@@ -255,7 +255,7 @@
              <string>Browse...</string>
             </property>
             <property name="icon">
-             <iconset resource="mscore.qrc">
+             <iconset>
               <normaloff>:/data/fileopen.svg</normaloff>:/data/fileopen.svg</iconset>
             </property>
            </widget>
@@ -433,24 +433,17 @@
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_10">
           <item>
-           <widget class="QLabel" name="label_2">
-            <property name="text">
-             <string>Style File:</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="styleFile"/>
-          </item>
-          <item>
-           <widget class="QToolButton" name="appStyleFileButton">
-            <property name="text">
-             <string>Browse...</string>
-            </property>
-            <property name="icon">
-             <iconset resource="mscore.qrc">
-              <normaloff>:/data/fileopen.svg</normaloff>:/data/fileopen.svg</iconset>
-            </property>
+           <widget class="QComboBox" name="styleName">
+            <item>
+             <property name="text">
+              <string>dark</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>light</string>
+             </property>
+            </item>
            </widget>
           </item>
          </layout>
@@ -518,7 +511,7 @@
                <string>Browse...</string>
               </property>
               <property name="icon">
-               <iconset resource="mscore.qrc">
+               <iconset>
                 <normaloff>:/data/fileopen.svg</normaloff>:/data/fileopen.svg</iconset>
               </property>
              </widget>
@@ -573,7 +566,7 @@
                <string>Browse...</string>
               </property>
               <property name="icon">
-               <iconset resource="mscore.qrc">
+               <iconset>
                 <normaloff>:/data/fileopen.svg</normaloff>:/data/fileopen.svg</iconset>
               </property>
              </widget>
@@ -1982,7 +1975,7 @@
              <string>...</string>
             </property>
             <property name="icon">
-             <iconset resource="mscore.qrc">
+             <iconset>
               <normaloff>:/data/fileopen.svg</normaloff>:/data/fileopen.svg</iconset>
             </property>
            </widget>
@@ -2144,7 +2137,7 @@
                <string>Browse...</string>
               </property>
               <property name="icon">
-               <iconset resource="mscore.qrc">
+               <iconset>
                 <normaloff>:/data/fileopen.svg</normaloff>:/data/fileopen.svg</iconset>
               </property>
              </widget>

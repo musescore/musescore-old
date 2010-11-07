@@ -84,7 +84,7 @@ bool debugMode          = false;
 bool enableExperimental = false;
 
 QString dataPath;
-QString iconPath;
+QString iconPath, iconGroup;
 qreal PDPI, DPI, DPMM;
 double SPATIUM;
 
@@ -104,6 +104,7 @@ static QString pluginName;
 static QString styleFile;
 static QString localeName;
 bool useFactorySettings = false;
+QString styleName, appStyleFile;
 
 QString revision;
 extern void initStaffTypes();
@@ -1894,6 +1895,7 @@ int main(int argc, char* av[])
             }
       mscoreGlobalShare = getSharePath();
       iconPath = externalIcons ? mscoreGlobalShare + QString("/icons/") :  QString(":/data/");
+      iconGroup = "icons-dark/";
 
       QSettings::setDefaultFormat(QSettings::IniFormat);
 

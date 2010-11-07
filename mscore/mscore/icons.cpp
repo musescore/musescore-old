@@ -25,7 +25,7 @@
 #include "preferences.h"
 #include "sym.h"
 
-extern QString iconPath;
+extern QString iconPath, iconGroup;
 QIcon* icons[ICONS];
 
 //---------------------------------------------------------
@@ -108,10 +108,10 @@ static const char* iconNames[] = {
 void genIcons()
       {
       for (int i = 0; i < voice1_ICON; ++i) {
-            icons[i] = new QIcon(iconPath + iconNames[i]);
-//            if (icons[i]->isNull() || icons[i]->pixmap(12).isNull()) {
-//                  printf("cannot load Icon <%s>\n", iconNames[i]);
-//                  }
+            icons[i] = new QIcon(iconPath + iconGroup + iconNames[i]);
+            if (icons[i]->isNull() || icons[i]->pixmap(12).isNull()) {
+                  printf("cannot load Icon <%s>\n", qPrintable(iconPath + iconGroup + iconNames[i]));
+                  }
             }
 
       static const char* vtext[VOICES] = { "1","2","3","4" };

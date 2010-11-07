@@ -2200,7 +2200,7 @@ void Measure::read(QDomElement e, int staffIdx)
                   Lyrics* lyrics = new Lyrics(score());
                   lyrics->setTrack(score()->curTrack);
                   lyrics->read(e);
-                  Segment* s = getSegment(SegChordRest, score()->curTick);
+                  Segment* s    = getSegment(SegChordRest, score()->curTick);
                   ChordRest* cr = static_cast<ChordRest*>(s->element(lyrics->track()));
                   if (!cr)
                         printf("=====no cr for lyrics\n");
