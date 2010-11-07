@@ -8525,12 +8525,12 @@ QIcon MStyle::standardIconImplementation(StandardPixmap standardIcon,
       switch(standardIcon) {
             case SP_TitleBarNormalButton:
                   {
-                  QPixmap realpm( pixelMetric( QStyle::PM_SmallIconSize,0,0 ), pixelMetric( QStyle::PM_SmallIconSize,0,0 ) );
+                  QPixmap realpm(pixelMetric(QStyle::PM_SmallIconSize,0,0), pixelMetric(QStyle::PM_SmallIconSize,0,0));
                   realpm.fill( Qt::transparent );
-                  QPixmap pm = _helper.windecoButton( buttonColor, false, 15 );
-                  QPainter painter( &realpm );
-                  painter.drawPixmap( 1,1,pm );
-                  painter.setRenderHints( QPainter::Antialiasing );
+                  QPixmap pm = _helper.windecoButton(buttonColor, false, 15);
+                  QPainter painter(&realpm);
+                  painter.drawPixmap(1, 1, pm);
+                  painter.setRenderHints(QPainter::Antialiasing);
 
                   // should use the same icons as in the deco
                   QPointF points[4] = {QPointF( 8.5, 6 ), QPointF( 11, 8.5 ), QPointF( 8.5, 11 ), QPointF( 6, 8.5 )};

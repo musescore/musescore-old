@@ -107,6 +107,7 @@ static const char* iconNames[] = {
 
 void genIcons()
       {
+// printf("genIcons <%s>\n", qPrintable(iconPath + iconGroup));
       for (int i = 0; i < voice1_ICON; ++i) {
             icons[i] = new QIcon(iconPath + iconGroup + iconNames[i]);
             if (icons[i]->isNull() || icons[i]->pixmap(12).isNull()) {

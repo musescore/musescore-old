@@ -55,6 +55,7 @@
 Stem::Stem(Score* s)
    : Element(s)
       {
+      _len = 0.0;
       setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
       }
 
@@ -252,6 +253,7 @@ Chord::Chord(Score* s)
       _stemDirection = AUTO;
       _arpeggio      = 0;
       _tremolo       = 0;
+      _tremoloChordType = TremoloSingle;
       _glissando     = 0;
       _noteType      = NOTE_NORMAL;
       _stemSlash     = 0;
@@ -285,9 +287,10 @@ Chord::Chord(const Chord& c)
             _stemSlash->setParent(this);
             _stemSlash->setTrack(track());
             }
-      _stemDirection = c._stemDirection;
-      _tremolo       = 0;
-      _noteType      = c._noteType;
+      _stemDirection    = c._stemDirection;
+      _tremoloChordType = TremoloSingle;
+      _tremolo          = 0;
+      _noteType         = c._noteType;
       }
 
 //---------------------------------------------------------

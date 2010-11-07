@@ -45,7 +45,9 @@ bool useALSA = false, useJACK = false, usePortaudio = false;
 
 extern bool useFactorySettings;
 extern bool externalStyle;
-extern QString styleName, iconGroup, appStyleFile;
+extern QString iconGroup;
+
+static QString appStyleFile;
 
 //---------------------------------------------------------
 //   PeriodItem
@@ -77,7 +79,7 @@ static PeriodItem updatePeriods[] = {
 QString appStyleSheet()
       {
       QString s;
-      QFile f(preferences.appStyleFile);
+      QFile f(appStyleFile);
       if (f.open(QIODevice::ReadOnly)) {
             s = f.readAll();
             f.close();
@@ -855,6 +857,11 @@ void PreferenceDialog::updateValues(Preferences* p)
       oscServer->setChecked(p->useOsc);
       oscPort->setValue(p->oscPort);
 
+      if (p->styleName == "dark")
+            styleName->setCurrentIndex(0);
+      else if (p->styleName == "light")
+            styleName->setCurrentIndex(1);
+
       sfChanged = false;
       }
 
@@ -1234,14 +1241,15 @@ void PreferenceDialog::apply()
       preferences.oscPort = oscPort->value();
       // preferences.appStyleFile = styleFile->text();
       if (styleName->currentIndex() == 0) {
-            iconGroup = "icons/";
-            appStyleFile = ":/data/appstyle.css";
-            }
-      else {
             iconGroup = "icons-dark/";
             appStyleFile = ":/data/appstyle-dark.css";
+            preferences.styleName = "dark";
             }
-
+      else {
+            iconGroup = "icons/";
+            appStyleFile = ":/data/appstyle.css";
+            preferences.styleName = "light";
+            }
 
       if (languageChanged) {
             setMscoreLocale(preferences.language);
@@ -1249,7 +1257,6 @@ void PreferenceDialog::apply()
             }
 
       qApp->setStyleSheet(appStyleSheet());
-
       genIcons();
 
       emit preferencesChanged();

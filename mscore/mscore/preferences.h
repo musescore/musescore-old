@@ -136,8 +136,8 @@ struct Preferences {
       bool followSong;
       bool useOsc;
       int oscPort;
-      QString appStyleFile;
       bool singlePalette;
+      QString styleName;
 
       bool dirty;
 

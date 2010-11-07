@@ -28,6 +28,11 @@
       <file>data/musescore_logo_full.png</file>
       <file alias="data/appstyle-dark.css">../share/styles/appstyle-dark.css</file>
 
+      <file>data/greendot.svg</file>
+      <file>data/darkgreendot.svg</file>
+      <file>data/recordOn.svg</file>
+      <file>data/recordOff.svg</file>
+
       <file>data/icons/minus.svg</file>
       <file>data/icons/flip.svg</file>
       <file>data/icons/undo.svg</file>

@@ -433,6 +433,13 @@ endif (NOT MINGW AND NOT APPLE)
 
 # if (NOT EMBED_ICONS)
    install (FILES
+      data/greendot.svg
+      data/darkgreendot.svg
+      data/recordOn.svg
+      data/recordOff.svg
+      DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}/icons
+      )
+   install (FILES
       data/icons/text_top.svg
       data/icons/text_bottom.svg
       data/icons/text_vcenter.svg
@@ -538,7 +545,6 @@ endif (NOT MINGW AND NOT APPLE)
       data/icons/subscript.svg
       data/icons/superscript.svg
       data/icons/fotomode.svg
-
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}/icons/icons
       )
    install (FILES
