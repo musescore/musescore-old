@@ -32,6 +32,7 @@ set(GCC_VISIBILITY TRUE)                  # requires gcc 4.x?
 set(HAS_AUDIOFILE TRUE)                   # requires libsndfile
 
 set(STATIC_SCRIPT_BINDINGS FALSE)
+set(BUILD_SCRIPTGEN TRUE)                 #Generate Qt script bindings. (collides with qtscriptgenerator project on several distrib)
 set(USE_SSE     FALSE)
 set(SOUNDFONT3  TRUE)                     # enable ogg vorbis compressed fonts, require ogg & vorbis
 set(AEOLUS      TRUE)                     # pipe organ synthesizer
@@ -255,7 +256,11 @@ if (NOT MINGW AND NOT APPLE)
 endif (NOT MINGW AND NOT APPLE)
 
 set (subdirs al awl bww2mxml osdabzip rtf2html mscore share manual demos
-     scriptgen fluid msynth diff mstyle)
+      fluid msynth diff mstyle)
+
+if (BUILD_SCRIPTGEN)
+      set (subdirs ${subdirs} scriptgen)
+endif (BUILD_SCRIPTGEN)
 
 if(USE_SYSTEM_QTSINGLEAPPLICATION)
       find_path(QTSINGLEAPPLICATION_INCLUDE_DIRS qtsingleapplication.h PATH_SUFFIXES QtSolutions)
