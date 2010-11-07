@@ -31,6 +31,7 @@ set(MSCORE_UNSTABLE  FALSE)                # mark as unstable
 set(GCC_VISIBILITY TRUE)                  # requires gcc 4.x?
 set(HAS_AUDIOFILE TRUE)                   # requires libsndfile
 
+set(BUILD_SCRIPTGEN TRUE)                 #Generate Qt script bindings. (collides with qtscriptgenerator project on several distrib)
 set(STATIC_SCRIPT_BINDINGS FALSE)
 set(USE_SSE FALSE)
 
@@ -234,7 +235,11 @@ if (NOT MINGW AND NOT APPLE)
 endif (NOT MINGW AND NOT APPLE)
 
 set (subdirs al awl osdabzip rtf2html mscore share manual demos
-     scriptgen singleapp fluid)
+      singleapp fluid)
+
+if (BUILD_SCRIPTGEN)
+      set (subdirs ${subdirs} scriptgen)
+endif (BUILD_SCRIPTGEN)
 
 if (MINGW OR APPLE)
       set (subdirs ${subdirs} portmidi)
