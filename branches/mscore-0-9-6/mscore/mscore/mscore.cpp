@@ -2254,7 +2254,7 @@ void MuseScore::clipboardChanged()
 
       bool flag = ms->hasFormat(mimeSymbolFormat)
             ||    ms->hasFormat(mimeStaffListFormat)
-            ||    ms->hasFormat(mimeSymbolListFormat);
+            ||    ms->hasFormat(mimeSymbolListFormat) || ms->hasText();
       // TODO: depends on selection state
       getAction("paste")->setEnabled(flag);
       }

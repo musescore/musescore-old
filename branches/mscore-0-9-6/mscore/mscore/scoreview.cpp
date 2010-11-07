@@ -2396,6 +2396,14 @@ void ScoreView::editPaste()
       {
       if (editObject->isTextB())
             static_cast<TextB*>(editObject)->paste();
+#if defined(Q_WS_MAC) || defined(__MINGW32__)
+            QClipboard::Mode mode = QClipboard::Clipboard;
+#else
+            QClipboard::Mode mode = QClipboard::Selection;
+#endif
+            QString txt = QApplication::clipboard()->text(mode);
+            if (editObject->type() == LYRICS && !txt.isEmpty())
+	                  lyricsTab(false, false, true);
       }
 
 //---------------------------------------------------------
