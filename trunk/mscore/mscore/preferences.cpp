@@ -45,6 +45,7 @@ bool useALSA = false, useJACK = false, usePortaudio = false;
 
 extern bool useFactorySettings;
 extern bool externalStyle;
+extern QString styleName, iconGroup, appStyleFile;
 
 //---------------------------------------------------------
 //   PeriodItem
@@ -260,8 +261,6 @@ void Preferences::write()
             }
       s.setValue("startScore",         startScore);
       s.setValue("workingDirectory",   workingDirectory);
-//      s.setValue("lastSaveDirectory",  lastSaveDirectory);
-//      s.setValue("lastSaveCopyDirectory",  lastSaveCopyDirectory);
       s.setValue("showSplashScreen",   showSplashScreen);
 
       s.setValue("midiExpandRepeats",  midiExpandRepeats);
@@ -301,7 +300,8 @@ void Preferences::write()
 
       s.setValue("useOsc", useOsc);
       s.setValue("oscPort", oscPort);
-      s.setValue("appStyle", appStyleFile);
+//      s.setValue("appStyle", appStyleFile);
+      s.setValue("style", styleName);
       s.setValue("singlePalette", singlePalette);
 
       //update
@@ -426,7 +426,16 @@ void Preferences::read()
 
       useOsc                 = s.value("useOsc", false).toBool();
       oscPort                = s.value("oscPort", 5282).toInt();
-      appStyleFile           = s.value("appStyle", ":/data/appstyle-dark.css").toString();
+//      appStyleFile           = s.value("appStyle", ":/data/appstyle-dark.css").toString();
+      styleName              = s.value("style", "dark").toString();
+      if (styleName == "light") {
+            iconGroup = "icons/";
+            appStyleFile = ":/data/appstyle.css";
+            }
+      else {
+            iconGroup = "icons-dark/";
+            appStyleFile = ":/data/appstyle-dark.css";
+            }
       singlePalette          = s.value("singlePalette", false).toBool();
 
       checkUpdateStartup = s.value("checkUpdateStartup", UpdateChecker::defaultPeriod()).toInt();
@@ -559,7 +568,6 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
 
       connect(recordButtons,          SIGNAL(buttonClicked(int)), SLOT(recordButtonClicked(int)));
       connect(midiRemoteControlClear, SIGNAL(clicked()), SLOT(midiRemoteControlClearClicked()));
-      connect(appStyleFileButton,     SIGNAL(clicked()), SLOT(appStyleFileButtonClicked()));
       connect(sfOpenButton,           SIGNAL(clicked()), SLOT(selectSoundFont()));
       updateRemote();
       }
@@ -846,7 +854,6 @@ void PreferenceDialog::updateValues(Preferences* p)
 
       oscServer->setChecked(p->useOsc);
       oscPort->setValue(p->oscPort);
-      styleFile->setText(p->appStyleFile);
 
       sfChanged = false;
       }
@@ -891,7 +898,8 @@ void PreferenceDialog::updateSCListView()
                   continue;
             ShortcutItem* newItem = new ShortcutItem;
             newItem->setText(0, s->descr);
-            newItem->setIcon(0, *icons[s->icon]);
+            if (s->icon != -1)
+                  newItem->setIcon(0, *icons[s->icon]);
             if(!s->key.isEmpty())
                 newItem->setText(1, s->key.toString(QKeySequence::NativeText));
             else{
@@ -1224,7 +1232,16 @@ void PreferenceDialog::apply()
 
       preferences.useOsc  = oscServer->isChecked();
       preferences.oscPort = oscPort->value();
-      preferences.appStyleFile = styleFile->text();
+      // preferences.appStyleFile = styleFile->text();
+      if (styleName->currentIndex() == 0) {
+            iconGroup = "icons/";
+            appStyleFile = ":/data/appstyle.css";
+            }
+      else {
+            iconGroup = "icons-dark/";
+            appStyleFile = ":/data/appstyle-dark.css";
+            }
+
 
       if (languageChanged) {
             setMscoreLocale(preferences.language);
@@ -1462,24 +1479,6 @@ void PreferenceDialog::styleFileButtonClicked()
       if (fn.isEmpty())
             return;
       importStyleFile->setText(fn);
-      }
-
-//---------------------------------------------------------
-//   appStyleFileButtonClicked
-//---------------------------------------------------------
-
-void PreferenceDialog::appStyleFileButtonClicked()
-      {
-      QString fn = QFileDialog::getOpenFileName(
-         0, QWidget::tr("MuseScore: Load Application Style"),
-         mscoreGlobalShare + "/styles/",
-            QWidget::tr("MuseScore Application Styles (*.css);;"
-            "All Files (*)"
-            )
-         );
-      if (fn.isEmpty())
-            return;
-      styleFile->setText(fn);
       }
 
 //---------------------------------------------------------
