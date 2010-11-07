@@ -1945,21 +1945,21 @@ TileSet *StyleHelper::dockFrame(const QColor &color, int w)
 
 QPixmap StyleHelper::windecoButton(const QColor &color, bool pressed, int size) const
       {
-      const quint64 key( (quint64(color.rgba()) << 32) | (size << 1) | quint64(pressed) );
-      QPixmap *pixmap = m_windecoButtonCache.object(key);
+      const quint64 key((quint64(color.rgba()) << 32) | (size << 1) | quint64(pressed));
+      QPixmap* pixmap = m_windecoButtonCache.object(key);
 
       if (!pixmap) {
             QImage image(size, size,  QImage::Format_ARGB32_Premultiplied);
             image.fill(Qt::transparent);
 
-            const QColor light( calcLightColor(color) );
-            const QColor dark( calcDarkColor(color) );
+            const QColor light(calcLightColor(color));
+            const QColor dark(calcDarkColor(color));
 
             QPainter p(&image);
             p.setRenderHints(QPainter::Antialiasing);
             p.setPen(Qt::NoPen);
-            const qreal u( size/18.0 );
-            p.translate( 0.5*u, (0.5-0.668)*u );
+            const qreal u(size/18.0 );
+            p.translate(0.5*u, (0.5-0.668) * u);
 
             {
             // outline circle

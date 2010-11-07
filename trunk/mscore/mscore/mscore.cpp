@@ -104,7 +104,7 @@ static QString pluginName;
 static QString styleFile;
 static QString localeName;
 bool useFactorySettings = false;
-QString styleName, appStyleFile;
+QString styleName;
 
 QString revision;
 extern void initStaffTypes();
