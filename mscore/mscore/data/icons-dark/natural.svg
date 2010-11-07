@@ -29,7 +29,7 @@
      id="namedview4"
      showgrid="false"
      inkscape:zoom="9.8333333"
-     inkscape:cx="-5.050848"
+     inkscape:cx="9.318527"
      inkscape:cy="11.649199"
      inkscape:window-x="857"
      inkscape:window-y="119"
@@ -61,7 +61,8 @@
   </defs>
   <g
      style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;font-family:MScore1;-inkscape-font-specification:MScore1"
-     id="text2816">
+     id="text2816"
+     transform="matrix(1.4,0,0,1.4,-3.4097629,-5.976271)">
     <path
        d="m 7.4671191,5.1525421 c 0.1866666,-0.093323 0.3599998,-0.1399898 0.52,-0.14 0.1466661,1.02e-5 0.3133326,0.046677 0.5,0.14 l -0.06,3.66 2.1199999,-0.4 0.06,0 c 0.239997,6.8e-6 0.359997,0.11334 0.36,0.34 l 0.14,11.3999999 c -0.18667,0.09333 -0.353336,0.139995 -0.5,0.14 -0.146669,-5e-6 -0.313336,-0.04667 -0.5,-0.14 l 0.06,-3.66 -2.1199999,0.4 -0.06,0 c -0.2400002,-2e-6 -0.36,-0.113335 -0.36,-0.34 l -0.16,-11.3999999 m 2.7199999,9.3999999 0.06,-4.14 -1.8399999,0.34 -0.06,4.14 1.8399999,-0.34"
        style="fill:#ffffff;fill-opacity:1"
