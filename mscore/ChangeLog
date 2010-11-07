@@ -1,3 +1,6 @@
+7.nov  (la)
+      - fix #7832: Extra spaces cause lyric pasting to repeat words
+      - fix #7734: Pasting lyrics with spaces is not working (regression)
 5.nov  (la)
       - fix #6345: First time users confuse demo score for demo software
 2.nov  (la)

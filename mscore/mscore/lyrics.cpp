@@ -573,7 +573,7 @@ void Lyrics::paste()
       QClipboard::Mode mode = QClipboard::Selection;
 #endif
       QString txt = QApplication::clipboard()->text(mode);
-      QStringList sl = txt.split(" ", QString::SkipEmptyParts);
+      QStringList sl = txt.split(QRegExp("\\s+"), QString::SkipEmptyParts);
       if (sl.isEmpty())
             return;
       cursor->insertText(sl[0]);
@@ -582,9 +582,8 @@ void Lyrics::paste()
       score()->setLayoutAll(lo);
       score()->setUpdateAll();
       score()->end();
-      txt = txt.mid(sl[0].size() + 1);
+      sl.removeFirst();
+      txt = sl.join(" ");   
       QApplication::clipboard()->setText(txt, mode);
-
-//TODO-S      score()->lyricsTab(false, true);
       }
 
