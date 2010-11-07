@@ -43,14 +43,16 @@ void VoiceButton::paintEvent(QPaintEvent* e)
       {
       QPainter p(this);
       QColor c(preferences.selectColor[voice]);
-      p.fillRect(e->rect(), isChecked() ? c.light(170) : c.light(100));
+      QColor bg(palette().color(QPalette::Normal, QPalette::Window));
+//      p.fillRect(e->rect(), isChecked() ? c.light(170) : c.light(100));
+      p.fillRect(e->rect(), isChecked() ? c.light(170) : bg);
       p.setPen(QPen(palette().color(QPalette::Normal, QPalette::Text)));
-      if (isChecked())
-            p.drawRect(0, 0, width()-1, height()-1);
+//      if (isChecked())
+//            p.drawRect(0, 0, width()-1, height()-1);
       QFont f = font();
       f.setPixelSize(height());
       p.setFont(f);
-      p.drawText(rect(), Qt::AlignCenter, QString("%1").arg(voice+1));
+      p.drawText(QRect(0, 1, width(), height()), Qt::AlignCenter, QString("%1").arg(voice+1));
       }
 
 //---------------------------------------------------------
@@ -60,6 +62,8 @@ void VoiceButton::paintEvent(QPaintEvent* e)
 VoiceSelector::VoiceSelector(QWidget* parent)
    : QFrame(parent)
       {
+      setLineWidth(2);
+      setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
       QGridLayout* vwl = new QGridLayout;
       vwl->setSpacing(0);
       vwl->setContentsMargins(0, 0, 0, 0);
