@@ -199,7 +199,7 @@ InstrumentsDialog::InstrumentsDialog(QWidget* parent)
       removeButton->setEnabled(false);
       upButton->setEnabled(false);
       downButton->setEnabled(false);
-      editButton->setEnabled(false);
+//      editButton->setEnabled(false);
       belowButton->setEnabled(false);
       linkedButton->setEnabled(false);
       connect(showMore, SIGNAL(clicked()), SLOT(buildTemplateList()));
@@ -427,6 +427,7 @@ void InstrumentsDialog::on_downButton_clicked()
 //    start instrument editor for selected instrument
 //---------------------------------------------------------
 
+#if 0
 void InstrumentsDialog::on_editButton_clicked()
       {
       QList<QTreeWidgetItem*> wi = instrumentList->selectedItems();
@@ -445,6 +446,7 @@ void InstrumentsDialog::on_editButton_clicked()
       editInstrument->setInstrument(tp);
       editInstrument->show();
       }
+#endif
 
 //---------------------------------------------------------
 //   on_belowButton_clicked
