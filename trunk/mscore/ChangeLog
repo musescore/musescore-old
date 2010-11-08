@@ -1,5 +1,8 @@
 7.nov (ws)
       - reorganized styles, to allow for different icon sets for dark and light theme
+      (db)
+      - fix vertical alignment of breve icon
+      - minor copy edits to UI
 5.nov (ws)
       - fix #7734: pasting lyrics with spaces is not working
 4.nov (ws)
