@@ -1232,7 +1232,7 @@ void ScoreView::moveCursor()
 
 void ScoreView::moveCursor(Segment* segment, int track)
       {
-      int staffIdx = track / VOICES;
+      int staffIdx = (track == -1) ? -1 : (track / VOICES);
 
       System* system = segment->measure()->system();
       if (system == 0) {
@@ -1262,7 +1262,8 @@ void ScoreView::moveCursor(Segment* segment, int track)
                   y2 = ss->y();
                   }
             h += y2;
-            w = _spatium * 2.0;
+            // w = _spatium * 2.0;
+            w  = _spatium * 2.0 + symbols[score()->symIdx()][quartheadSym].width(_cursor->magS());
             x -= _spatium;
             y -= _spatium;
             }
@@ -2584,7 +2585,7 @@ void ScoreView::normalCut()
 void ScoreView::editPaste()
       {
       if (editObject->isText()) {
-            static_cast<Text*>(editObject)->paste(); 
+            static_cast<Text*>(editObject)->paste();
 #if defined(Q_WS_MAC) || defined(__MINGW32__)
             QClipboard::Mode mode = QClipboard::Clipboard;
 #else

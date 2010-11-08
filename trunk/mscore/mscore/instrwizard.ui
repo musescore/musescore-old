@@ -140,19 +140,6 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="aboveButton">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-        <string>Add Above</string>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QPushButton" name="belowButton">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -161,7 +148,14 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Add Below</string>
+        <string>Add Staff</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="linkedButton">
+       <property name="text">
+        <string>Add linked Staff</string>
        </property>
       </widget>
      </item>

@@ -54,7 +54,7 @@ InstrumentWizard::InstrumentWizard(QWidget* parent)
       removeButton->setEnabled(false);
       upButton->setEnabled(false);
       downButton->setEnabled(false);
-      aboveButton->setEnabled(false);
+      linkedButton->setEnabled(false);
       belowButton->setEnabled(false);
       connect(showMore, SIGNAL(clicked()), SLOT(buildTemplateList()));
       }
@@ -104,7 +104,7 @@ void InstrumentWizard::on_partiturList_itemSelectionChanged()
       removeButton->setEnabled(flag);
       upButton->setEnabled(flag);
       downButton->setEnabled(flag);
-      aboveButton->setEnabled(item && item->type() == STAFF_LIST_ITEM);
+      linkedButton->setEnabled(item && item->type() == STAFF_LIST_ITEM);
       belowButton->setEnabled(item && item->type() == STAFF_LIST_ITEM);
       }
 
@@ -265,11 +265,12 @@ void InstrumentWizard::on_downButton_clicked()
       }
 
 //---------------------------------------------------------
-//   on_aboveButton_clicked
+//   on_linkedButton_clicked
 //---------------------------------------------------------
 
 void InstrumentWizard::on_aboveButton_clicked()
       {
+#if 0       // TODOxx
       QList<QTreeWidgetItem*> wi = partiturList->selectedItems();
       if (wi.isEmpty())
             return;
@@ -288,6 +289,7 @@ void InstrumentWizard::on_aboveButton_clicked()
       pli->insertChild(pli->indexOfChild(sli), nsli);
       partiturList->clearSelection();     // should not be necessary
       partiturList->setItemSelected(nsli, true);
+#endif
       }
 
 //---------------------------------------------------------
@@ -697,10 +699,10 @@ NewWizard::NewWizard(QWidget* parent)
       setPixmap(QWizard::LogoPixmap, QPixmap(":/data/mscore.png"));
       setPixmap(QWizard::WatermarkPixmap, QPixmap(":/data/bg1.jpg"));
       setWindowTitle(tr("MuseScore: Create New Score"));
-    setOption(QWizard::NoCancelButton, false);
-    setOption(QWizard::CancelButtonOnLeft, true);
-    setOption(QWizard::HaveFinishButtonOnEarlyPages, true);
-    setOption(QWizard::HaveNextButtonOnLastPage, true);
+      setOption(QWizard::NoCancelButton, false);
+      setOption(QWizard::CancelButtonOnLeft, true);
+      setOption(QWizard::HaveFinishButtonOnEarlyPages, true);
+      setOption(QWizard::HaveNextButtonOnLastPage, true);
 
 
       p1 = new NewWizardPage1;

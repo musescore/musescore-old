@@ -1,9 +1,9 @@
 //=============================================================================
-//  MuseScore
-//  Linux Music Score Editor
-//  $Id:$
+//  MusE Reader
+//  Music Score Reader
+//  $Id$
 //
-//  Copyright (C) 2010 Werner Schweer and others
+//  Copyright (C) 2010 Werner Schweer
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -18,30 +18,21 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "cursor.h"
-#include "preferences.h"
+#ifndef __PATTERN_H__
+#define __PATTERN_H__
 
 //---------------------------------------------------------
-//   Cursor
+//   Pattern
 //---------------------------------------------------------
 
-Cursor::Cursor(Score* s)
-   : Element(s)
-      {
-      setVisible(false);
-      }
+struct Pattern {
+      int _n;
+      const int* _img;
 
-//---------------------------------------------------------
-//   draw
-//---------------------------------------------------------
+   public:
+      Pattern(int n, const int* img) : _n(n), _img(img) {}
+      double match(const Pattern*) const;
+      };
 
-void Cursor::draw(QPainter& p, ScoreView*) const
-      {
-      if (!visible())
-            return;
-      int v = track() == -1 ? 0 : voice();
-      QColor c(preferences.selectColor[v]);
-      c.setAlpha(50);
-      p.fillRect(abbox(), QBrush(c));
-      }
+#endif
 

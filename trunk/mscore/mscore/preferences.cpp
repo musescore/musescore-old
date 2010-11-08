@@ -302,7 +302,6 @@ void Preferences::write()
 
       s.setValue("useOsc", useOsc);
       s.setValue("oscPort", oscPort);
-//      s.setValue("appStyle", appStyleFile);
       s.setValue("style", styleName);
       s.setValue("singlePalette", singlePalette);
 
@@ -433,10 +432,12 @@ void Preferences::read()
       if (styleName == "light") {
             iconGroup = "icons/";
             appStyleFile = ":/data/appstyle.css";
+            globalStyle  = 1;
             }
       else {
             iconGroup = "icons-dark/";
             appStyleFile = ":/data/appstyle-dark.css";
+            globalStyle  = 0;
             }
       singlePalette          = s.value("singlePalette", false).toBool();
 
@@ -857,10 +858,7 @@ void PreferenceDialog::updateValues(Preferences* p)
       oscServer->setChecked(p->useOsc);
       oscPort->setValue(p->oscPort);
 
-      if (p->styleName == "dark")
-            styleName->setCurrentIndex(0);
-      else if (p->styleName == "light")
-            styleName->setCurrentIndex(1);
+      styleName->setCurrentIndex(p->globalStyle);
 
       sfChanged = false;
       }
@@ -1244,11 +1242,13 @@ void PreferenceDialog::apply()
             iconGroup = "icons-dark/";
             appStyleFile = ":/data/appstyle-dark.css";
             preferences.styleName = "dark";
+            preferences.globalStyle = 0;
             }
       else {
             iconGroup = "icons/";
             appStyleFile = ":/data/appstyle.css";
             preferences.styleName = "light";
+            preferences.globalStyle = 1;
             }
 
       if (languageChanged) {

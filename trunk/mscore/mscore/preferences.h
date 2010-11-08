@@ -138,6 +138,7 @@ struct Preferences {
       int oscPort;
       bool singlePalette;
       QString styleName;
+      int globalStyle;        // 0 - dark, 1 - light
 
       bool dirty;
 

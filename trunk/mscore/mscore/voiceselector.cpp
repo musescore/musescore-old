@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2009 Werner Schweer and others
+//  Copyright (C) 2009-2010 Werner Schweer et al.
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -44,11 +44,10 @@ void VoiceButton::paintEvent(QPaintEvent* e)
       QPainter p(this);
       QColor c(preferences.selectColor[voice]);
       QColor bg(palette().color(QPalette::Normal, QPalette::Window));
-//      p.fillRect(e->rect(), isChecked() ? c.light(170) : c.light(100));
       p.fillRect(e->rect(), isChecked() ? c.light(170) : bg);
-      p.setPen(QPen(palette().color(QPalette::Normal, QPalette::Text)));
-//      if (isChecked())
-//            p.drawRect(0, 0, width()-1, height()-1);
+      p.setPen(QPen(preferences.globalStyle == 0 ? Qt::white : Qt::black));
+      if (isChecked())
+            p.setPen(QPen(Qt::black));
       QFont f = font();
       f.setPixelSize(height());
       p.setFont(f);
