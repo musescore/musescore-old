@@ -1310,7 +1310,7 @@ Shortcut MuseScore::sc[] = {
        Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "flat",
-         QT_TRANSLATE_NOOP("action","Note entry: Flat"),
+         QT_TRANSLATE_NOOP("action","Note entry: flat"),
          Qt::Key_Minus,
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Flat"),
