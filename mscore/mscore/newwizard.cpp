@@ -268,9 +268,8 @@ void InstrumentWizard::on_downButton_clicked()
 //   on_linkedButton_clicked
 //---------------------------------------------------------
 
-void InstrumentWizard::on_aboveButton_clicked()
+void InstrumentWizard::on_linkedButton_clicked()
       {
-#if 0       // TODOxx
       QList<QTreeWidgetItem*> wi = partiturList->selectedItems();
       if (wi.isEmpty())
             return;
@@ -284,12 +283,13 @@ void InstrumentWizard::on_aboveButton_clicked()
       StaffListItem* nsli = new StaffListItem();
       nsli->staff         = staff;
       nsli->setClef(sli->clef());
+      nsli->setLinked(true);
+      nsli->setVisible(true);
       if (staff)
             nsli->op = ITEM_ADD;
-      pli->insertChild(pli->indexOfChild(sli), nsli);
+      pli->insertChild(pli->indexOfChild(sli)+1, nsli);
       partiturList->clearSelection();     // should not be necessary
       partiturList->setItemSelected(nsli, true);
-#endif
       }
 
 //---------------------------------------------------------
@@ -353,7 +353,6 @@ void InstrumentWizard::createInstruments(Score* cs)
                   ++rstaff;
 
                   staff->setClef(0, sli->clef());
-
                   staff->setUseTablature(t->useTablature);
 
                   if (staff->useTablature())

@@ -860,10 +860,10 @@ void ScoreView::objectPopup(const QPoint& pos, Element* obj)
             }
 
       QMenu* popup = new QMenu(this);
-      popup->setSeparatorsCollapsible(true);
+      popup->setSeparatorsCollapsible(false);
+      QAction* a = popup->addSeparator();
+      a->setText(obj->userName());
 
-      popup->addAction(obj->userName());
-      popup->addSeparator();
       popup->addAction(getAction("cut"));
       popup->addAction(getAction("copy"));
       popup->addAction(getAction("paste"));
@@ -871,7 +871,7 @@ void ScoreView::objectPopup(const QPoint& pos, Element* obj)
       QMenu* selMenu = popup->addMenu(tr("Select"));
       selMenu->addAction(getAction("select-similar"));
       selMenu->addAction(getAction("select-similar-staff"));
-      QAction* a = selMenu->addAction(tr("More..."));
+      a = selMenu->addAction(tr("More..."));
       a->setData("select-dialog");
       popup->addSeparator();
       obj->genPropertyMenu(popup);

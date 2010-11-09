@@ -42,6 +42,7 @@ install(FILES
       Hymn.mscz
       leadsheet.mscx
       Piano.mscx
+      guitartab.mscx
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}templates
       )
 

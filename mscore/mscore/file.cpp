@@ -634,14 +634,6 @@ void MuseScore::newFile()
             // remove all notes & rests
             //
             score->deselectAll();
-#if 0
-            for (int staffIdx = 0; staffIdx < score->nstaves(); ++staffIdx) {
-                  Staff* staff = score->staff(staffIdx);
-                  staff->keymap()->clear();
-                  staff->cleflist()->clear();
-                  }
-#endif
-//            int tracks = score->nstaves() * VOICES;
             for (Segment* s = score->firstMeasure()->first(); s;) {
                   Segment* ns = s->next1();
                   if (
@@ -650,8 +642,7 @@ void MuseScore::newFile()
                      || (s->subtype() == SegKeySig)
                      || (s->subtype() == SegGrace)
                      || (s->subtype() == SegBreath)
-//                     || (s->subtype() == SegTimeSig)
-                        ) {
+                     ) {
                         s->measure()->remove(s);
                         delete s;
                         }
@@ -690,8 +681,8 @@ void MuseScore::newFile()
             int ticks = measure->ticks();
 	      for (int staffIdx = 0; staffIdx < score->nstaves(); ++staffIdx) {
                   Duration d(Duration::V_MEASURE);
+                  Staff* staff = score->staff(staffIdx);
                   if (tick == 0) {
-                        Staff* staff = score->staff(staffIdx);
                         if (!staff->useTablature()) {
                               TimeSig* ts = new TimeSig(score, timesigN, timesigZ);
                               ts->setTrack(staffIdx * VOICES);
@@ -725,15 +716,29 @@ void MuseScore::newFile()
                         Segment* segment = measure->getSegment(SegClef, 0);
                         segment->add(clef);
                         }
-		      Rest* rest = new Rest(score, d);
-                  rest->setDuration(measure->len());
-      	      rest->setTrack(staffIdx * VOICES);
-	      	Segment* s = measure->getSegment(rest, tick);
-		      s->add(rest);
+                  if (staff->primaryStaff()) {
+		            Rest* rest = new Rest(score, d);
+                        rest->setDuration(measure->len());
+            	      rest->setTrack(staffIdx * VOICES);
+	            	Segment* s = measure->getSegment(rest, tick);
+		            s->add(rest);
+                        }
                   }
             tick += ticks;
             }
       score->fixTicks();
+      //
+      // ceate linked staves
+      //
+      foreach(Staff* staff, score->staves()) {
+            if (!staff->linkedStaves())
+                  continue;
+            foreach(Staff* lstaff, staff->linkedStaves()->staves()) {
+                  if (staff != lstaff) {
+                        cloneStaff(staff, lstaff);
+                        }
+                  }
+            }
       //
       // select first rest
       //

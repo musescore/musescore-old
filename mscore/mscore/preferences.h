@@ -50,6 +50,12 @@ enum {
       MIDI_REMOTES
       };
 
+enum MuseScoreStyleType {
+      STYLE_DARK,
+      STYLE_LIGHT,
+      STYLE_NATIVE
+      };
+
 //---------------------------------------------------------
 //   Preferences
 //---------------------------------------------------------
