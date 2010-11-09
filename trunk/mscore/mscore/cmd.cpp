@@ -2008,6 +2008,8 @@ void Score::cmd(const QAction* a)
                         cmdMove(el, QPointF(0.0, -.25));
                   else if (el && el->type() == REST)
                         cmdMoveRest(static_cast<Rest*>(el), UP);
+                  else if (el && el->type() == LYRICS)
+                        cmdMoveLyrics(static_cast<Lyrics*>(el), UP);
                   else
                         upDown(true, UP_DOWN_CHROMATIC);
                   }
@@ -2016,6 +2018,8 @@ void Score::cmd(const QAction* a)
                         cmdMove(el, QPointF(0.0, .25));
                   else if (el && el->type() == REST)
                         cmdMoveRest(static_cast<Rest*>(el), DOWN);
+                  else if (el && el->type() == LYRICS)
+                        cmdMoveLyrics(static_cast<Lyrics*>(el), DOWN);
                   else
                         upDown(false, UP_DOWN_CHROMATIC);
                   }
@@ -2815,17 +2819,16 @@ Element* Score::move(const QString& cmd)
       if (!cr) {
             if (selection().elements().isEmpty())
                   return 0;
-            Element* ee = selection().elements().front();
-            Element* e = ee->parent();
+            Element* e = selection().elements().front();
             if (e->type() == NOTE)
                   cr = static_cast<Note*>(e)->chord();
             else if (e->isChordRest())
                   cr = static_cast<ChordRest*>(e);
-            else if (e->type() == SEGMENT) {
-                  Segment* segment = static_cast<Segment*>(e);
+            else if (e->parent() && e->parent()->type() == SEGMENT) {
+                  Segment* segment = static_cast<Segment*>(e->parent());
                   if (segment->subtype() != SegChordRest) {
                         segment = segment->next1(SegChordRest);
-                        Element* el = segment->element(ee->track());
+                        Element* el = segment->element(e->track());
                         if (el == 0)
                               return 0;
                         if (el->type() == CHORD) {
@@ -2836,9 +2839,40 @@ Element* Score::move(const QString& cmd)
                         select(el, SELECT_SINGLE, 0);
                         return el;
                         }
-                  cr = static_cast<ChordRest*>(segment->element(ee->track()));
+                  cr = static_cast<ChordRest*>(segment->element(e->track()));
                   if (cr == 0)
                         return 0;
+                  }
+            else if (e->type() == LYRICS) {
+                  Lyrics* lyrics = static_cast<Lyrics*>(e);
+                  ChordRest* cr  = lyrics->chordRest();
+                  int no         = lyrics->no();
+                  Element* el    = 0;
+                  if (cmd == "next-chord") {
+                        for (ChordRest* ncr = cr;;) {
+                              ncr = nextChordRest(ncr);
+                              if (ncr == 0)
+                                    break;
+                              if (ncr->isChordRest() && ncr->lyrics(no)) {
+                                    el = ncr->lyrics(no);
+                                    break;
+                                    }
+                              }
+                        }
+                  else if (cmd == "prev-chord") {
+                        for (ChordRest* pcr = cr;;) {
+                              pcr = prevChordRest(pcr);
+                              if (pcr == 0)
+                                    break;
+                              if (pcr->isChordRest() && pcr->lyrics(no)) {
+                                    el = pcr->lyrics(no);
+                                    break;
+                                    }
+                              }
+                        }
+                  if (el)
+                        select(el, SELECT_SINGLE, 0);
+                  return el;
                   }
             else
                   return 0;
@@ -3156,5 +3190,37 @@ void Score::cmdMoveRest(Rest* rest, Direction dir)
       else if (dir == DOWN)
             pos.ry() += spatium();
       undoChangeUserOffset(rest, pos);
+      }
+
+//---------------------------------------------------------
+//   cmdMoveLyrics
+//---------------------------------------------------------
+
+void Score::cmdMoveLyrics(Lyrics* lyrics, Direction dir)
+      {
+      ChordRest* cr      = lyrics->chordRest();
+      QList<Lyrics*>& ll = cr->lyricsList();
+      int no             = lyrics->no();
+      if (dir == UP) {
+            if (no) {
+                  if (ll[no-1] == 0) {
+                        ll[no-1] = ll[no];
+                        ll[no] = 0;
+                        lyrics->setNo(no-1);
+                        }
+                  }
+            }
+      else {
+            if (no == ll.size()-1) {
+                  ll.append(ll[no]);
+                  ll[no] = 0;
+                  lyrics->setNo(no+1);
+                  }
+            else if (ll[no + 1] == 0) {
+                  ll[no+1] = ll[no];
+                  ll[no] = 0;
+                  lyrics->setNo(no+1);
+                  }
+            }
       }
 

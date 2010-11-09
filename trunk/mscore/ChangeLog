@@ -1,4 +1,7 @@
 9.nov (ws)
+      - entering lyrics entry mode also by selecting lyrics + Ctrl+L
+      - up/down moves lyrics to next/previous verse (if slot is empty)
+      - if lyrics is selected, cursor next/previous move to next/prev lyrics
       - fix: hide cursor after play ends
       - fix: clef changes are not always saved
       - fix: cursor left/right to next/prev. lyrics in lyrics editing mode

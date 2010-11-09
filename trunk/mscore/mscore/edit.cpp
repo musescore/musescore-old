@@ -1427,19 +1427,28 @@ void ScoreView::chordTab(bool back)
 
 Lyrics* Score::addLyrics()
       {
-      Note* e = getSelectedNote();
-      if (e == 0)
+      Element* el = selection().element();
+      if (el == 0 || (el->type() != NOTE && el->type() != LYRICS)) {
+            QMessageBox::information(0,
+               QMessageBox::tr("MuseScore:"),
+               QMessageBox::tr("No note or lyrics selected:\n"
+                  "Please select a single note or lyrics and retry operation\n"),
+               QMessageBox::Ok, QMessageBox::NoButton);
+            return 0;
+            }
+      ChordRest* cr;
+      if (el->type() == NOTE)
+            cr = static_cast<Note*>(el)->chord();
+      else if (el->type() == LYRICS)
+            cr = static_cast<Lyrics*>(el)->chordRest();
+      else
             return 0;
 
-      Chord* chord     = e->chord();
-//      Segment* segment = chord->segment();
-//      int staff        = chord->staffIdx();
-
-      QList<Lyrics*> ll = chord->lyricsList();
+      QList<Lyrics*> ll = cr->lyricsList();
       int no = ll.size();
       Lyrics* lyrics = new Lyrics(this);
-      lyrics->setTrack(chord->track());
-      lyrics->setParent(chord);
+      lyrics->setTrack(cr->track());
+      lyrics->setParent(cr);
       lyrics->setNo(no);
       undoAddElement(lyrics);
       select(lyrics, SELECT_SINGLE, 0);
@@ -1629,7 +1638,7 @@ void ScoreView::changeVoice(int voice)
       if (!is->noteEntryMode || is->cr())
             return;
 
-      Segment* segment = is->segment()->measure()->firstCRSegment();
+//      Segment* segment = is->segment()->measure()->firstCRSegment();
       is->setSegment(is->segment()->measure()->firstCRSegment());
       score()->setUpdateAll(true);
       score()->end();
