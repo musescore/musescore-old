@@ -1,3 +1,5 @@
+9.nov  (la)
+      - fix #7881: Exchange voices does not work on last measure
 7.nov  (la)
       - fix #7832: Extra spaces cause lyric pasting to repeat words
       - fix #7734: Pasting lyrics with spaces is not working (regression)

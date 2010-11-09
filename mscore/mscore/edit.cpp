@@ -1689,7 +1689,7 @@ printf("exchange voice %d %d, tick %d-%d, measure %p-%p\n", s, d, t1, t2, m1, m2
             while (mb && mb->type() != MEASURE)
                   mb = mb->next();
             m1 = static_cast<Measure*>(mb);
-            if (m1 == 0 || m1 == m2)
+            if (m1 == 0 || (m1 !=0 && m1->tick() > t2))
                   break;
             }
       }
