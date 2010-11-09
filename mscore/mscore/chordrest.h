@@ -132,6 +132,7 @@ class ChordRest : public DurationElement {
 
       const QList<Lyrics*>& lyricsList() const { return _lyricsList; }
       QList<Lyrics*>& lyricsList()             { return _lyricsList; }
+      Lyrics* lyrics(int no)                   { return _lyricsList.value(no); }
       virtual void add(Element*);
       virtual void remove(Element*);
       };
