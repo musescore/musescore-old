@@ -535,11 +535,14 @@ void ScoreView::fotoContextPopup(QMouseEvent* ev)
       {
       QPoint pos(ev->globalPos());
       QMenu* popup = new QMenu(this);
-      popup->setSeparatorsCollapsible(true);
+      popup->setSeparatorsCollapsible(false);
+      QAction* a = popup->addSeparator();
+      a->setText(tr("Foto-Mode"));
 
-      QAction* a = popup->addAction(tr("Foto-Mode"));
-      a->setEnabled(false);
-
+      a = getAction("copy");
+      a->setEnabled(true);
+      popup->addAction(a);
+      popup->addSeparator();
       a = new QAction(*icons[fileSave_ICON], tr("Save As (print mode)..."), this);
       a->setData("print");
       popup->addAction(a);
@@ -555,6 +558,29 @@ void ScoreView::fotoContextPopup(QMouseEvent* ev)
             saveFotoAs(true, _foto->rect());
       else if (cmd == "screenshot")
             saveFotoAs(false, _foto->rect());
+      else if (cmd == "copy") {
+            QMimeData* mimeData = new QMimeData;
+
+            // oowriter wants transparent==false
+            bool transparent = false; // preferences.pngTransparent;
+            double convDpi   = DPI; // preferences.pngResolution;
+            double mag       = convDpi / DPI;
+
+            QRectF r(_foto->abbox());
+            int w = lrint(r.width()  * mag);
+            int h = lrint(r.height() * mag);
+            QImage::Format f;
+            f = QImage::Format_ARGB32_Premultiplied;
+            QImage printer(w, h, f);
+            printer.setDotsPerMeterX(lrint(DPMM * 1000.0));
+            printer.setDotsPerMeterY(lrint(DPMM * 1000.0));
+            printer.fill(transparent ? 0 : 0xffffffff);
+            QPainter p(&printer);
+            paintRect(true, p, r, mag);
+            p.end();
+            mimeData->setImageData(printer);
+            QApplication::clipboard()->setMimeData(mimeData);
+            }
       }
 
 //---------------------------------------------------------

@@ -2977,8 +2977,9 @@ void Measure::layoutX(double stretch)
                               }
                         if (lyrics) {
                               found = true;
-                              double y = lyrics->ipos().y() + lyrics->lineHeight()
-                                 + point(score()->styleS(ST_lyricsMinBottomDistance));
+//                              double y = lyrics->ipos().y() + lyrics->lineHeight()
+//                                 + point(score()->styleS(ST_lyricsMinBottomDistance));
+                              double y = lyrics->ipos().y() + point(score()->styleS(ST_lyricsMinBottomDistance));
                               if (y > staves[staffIdx]->distanceDown)
                                  staves[staffIdx]->distanceDown = y;
                               }

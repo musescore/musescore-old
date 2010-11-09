@@ -415,6 +415,7 @@ class ChangeTpc : public UndoCommand {
 class ChangeSubtype : public UndoCommand {
       Element* element;
       int subtype;
+      bool generated;
       void flip();
 
    public:
@@ -1080,15 +1081,12 @@ class ChangeStaff : public UndoCommand {
 
 class ChangePart : public UndoCommand {
       Part* part;
-      QTextDocument* longName;
-      QTextDocument* shortName;
       Instrument instrument;
 
       void flip();
 
    public:
-      ChangePart(Part*, const QTextDocument*, const QTextDocument*, const Instrument&);
-      ~ChangePart();
+      ChangePart(Part*, const Instrument&);
 
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }

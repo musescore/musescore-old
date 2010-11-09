@@ -144,7 +144,7 @@ Shortcut MuseScore::sc[] = {
           cut_ICON
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_FOTO,
          "copy",
          QT_TRANSLATE_NOOP("action","Copy"),
          Qt::CTRL+Qt::Key_C,        // QKeySequence::Copy,

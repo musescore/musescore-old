@@ -369,6 +369,7 @@ class Score : public QObject {
       bool rewriteMeasures(Measure* fm, Measure* lm, const Fraction&);
       void rewriteMeasures(Measure* fm, const Fraction& ns);
       void updateVelo();
+      QString createDefaultFileName();
 
    signals:
       void selectionChanged(int);
