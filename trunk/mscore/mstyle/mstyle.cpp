@@ -115,19 +115,16 @@ bool MStyle::drawMenuBarItem(const QStyleOption* option, QPainter* painter,
                         color = _helper.calcMidColor(_helper.backgroundColor(color, widget, r.center()));
 
                   // drawing
-                  if (animated && intersected) {
+                  if (animated && intersected)
                         _helper.holeFlat(color, 0.0)->render(animatedRect.adjusted(1,1,-1,-1), painter, TileSet::Full);
-                        }
-                  else if (timerIsActive && current) {
+                  else if (timerIsActive && current)
                         _helper.holeFlat(color, 0.0)->render(r.adjusted(1,1,-1,-1), painter, TileSet::Full);
-                        }
                   else if (animated && current) {
                         color.setAlphaF(opacity);
                         _helper.holeFlat(color, 0.0)->render(r.adjusted(1,1,-1,-1), painter, TileSet::Full);
                         }
-                  else if (active ) {
+                  else if (active )
                         _helper.holeFlat(color, 0.0)->render(r.adjusted(1,1,-1,-1), painter, TileSet::Full);
-                        }
                   }
             }
 
@@ -3550,8 +3547,9 @@ void MStyle::drawControl(ControlElement element, const QStyleOption* option, QPa
                   default:  break;
                   }
             }
-      if (!(fcn && (this->*fcn)(option, painter, widget)))
+      if (!(fcn && (this->*fcn)(option, painter, widget))) {
             QCommonStyle::drawControl(element, option, painter, widget);
+            }
       painter->restore();
       }
 
@@ -4773,88 +4771,89 @@ bool MStyle::drawMenuBarItemControl( const QStyleOption* option, QPainter* paint
 
           }
 
-bool MStyle::drawMenuItemControl( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const
-    {
-              const QRect& r( option->rect );
-              const QPalette& palette( option->palette );
-              const State& flags( option->state );
-              const bool active( flags & State_Selected );
-              const bool enabled( flags & State_Enabled );
-              const bool hasFocus( enabled && (flags & State_HasFocus));
-              const bool mouseOver( enabled && (flags & State_MouseOver) );
+//---------------------------------------------------------
+//   drawMenuItemControl
+//---------------------------------------------------------
 
-              //First of all,render the background.
-              renderMenuItemBackground( option, painter, widget );
+bool MStyle::drawMenuItemControl(const QStyleOption* option, QPainter* painter, const QWidget* widget) const
+      {
+      const QRect& r( option->rect );
+      const QPalette& palette( option->palette );
+      const State& flags( option->state );
+      const bool active( flags & State_Selected );
+      const bool enabled( flags & State_Enabled );
+      const bool hasFocus( enabled && (flags & State_HasFocus));
+      const bool mouseOver( enabled && (flags & State_MouseOver) );
 
-              // do nothing if invalid option, or empty area
-              const QStyleOptionMenuItem* menuItemOption = qstyleoption_cast<const QStyleOptionMenuItem*>(option);
-              if( !menuItemOption || menuItemOption->menuItemType == QStyleOptionMenuItem::EmptyArea) return true;
+      //First of all,render the background.
+      renderMenuItemBackground( option, painter, widget );
 
-              //First, figure out the left column width.
-              const int iconColW = qMax( menuItemOption->maxIconWidth, (int)MenuItem_IconWidth );
-              const int checkColW = MenuItem_CheckWidth;
-              const int checkSpace = MenuItem_CheckSpace;
+      // do nothing if invalid option, or empty area
+      const QStyleOptionMenuItem* menuItemOption = qstyleoption_cast<const QStyleOptionMenuItem*>(option);
+      if( !menuItemOption || menuItemOption->menuItemType == QStyleOptionMenuItem::EmptyArea)
+            return true;
 
-              int leftColW = iconColW;
+      //First, figure out the left column width.
+      const int iconColW = qMax( menuItemOption->maxIconWidth, (int)MenuItem_IconWidth );
+      const int checkColW = MenuItem_CheckWidth;
+      const int checkSpace = MenuItem_CheckSpace;
 
-              // only use the additional check row if the menu has checkable menuItems.
-              bool hasCheckableItems = menuItemOption->menuHasCheckableItems;
-              if( hasCheckableItems ) leftColW += checkColW + checkSpace;
+      int leftColW = iconColW;
 
-              // right arrow column...
-              int rightColW = MenuItem_ArrowSpace + MenuItem_ArrowWidth;
+      // only use the additional check row if the menu has checkable menuItems.
+      bool hasCheckableItems = menuItemOption->menuHasCheckableItems;
+      if (hasCheckableItems)
+            leftColW += checkColW + checkSpace;
 
-              //Separators: done with the bg, can paint them and bail them out.
-              if( menuItemOption->menuItemType == QStyleOptionMenuItem::Separator)
-                    {
-                        // check text and icon
-                        // separators with non empty text are rendered as checked toolbuttons
-                        if( !menuItemOption->text.isEmpty() )
-                              {
+      // right arrow column...
+      int rightColW = MenuItem_ArrowSpace + MenuItem_ArrowWidth;
 
-                                  QStyleOptionToolButton toolButtonOpt;
-                                  toolButtonOpt.features = QStyleOptionToolButton::None;
-                                  toolButtonOpt.state = State_On|State_Sunken|State_Enabled;
-                                  toolButtonOpt.rect = r.adjusted( 0, 0, 0, 1 );
-                                  toolButtonOpt.subControls = SC_ToolButton;
-                                  toolButtonOpt.icon =  menuItemOption->icon;
+      //Separators: done with the bg, can paint them and bail them out.
+      if (menuItemOption->menuItemType == QStyleOptionMenuItem::Separator) {
+            // check text and icon
+            // separators with non empty text are rendered as checked toolbuttons
+            if (!menuItemOption->text.isEmpty()) {
+                  QStyleOptionToolButton toolButtonOpt;
+                  toolButtonOpt.features    = QStyleOptionToolButton::None;
+                  toolButtonOpt.state       = State_On|State_Sunken|State_Enabled;
+                  toolButtonOpt.rect        = r.adjusted( 0, 0, 0, 1 );
+                  toolButtonOpt.subControls = SC_ToolButton;
+                  toolButtonOpt.icon        =  menuItemOption->icon;
 
-                                  toolButtonOpt.font = widget->font();
-                                  toolButtonOpt.font.setBold(true);
+                  toolButtonOpt.font = widget->font();
+                  toolButtonOpt.font.setBold(true);
 
-                                  toolButtonOpt.iconSize = QSize(
-                                      pixelMetric(QStyle::PM_SmallIconSize,0,0),
-                                      pixelMetric(QStyle::PM_SmallIconSize,0,0) );
+                  toolButtonOpt.iconSize = QSize(
+                     pixelMetric(QStyle::PM_SmallIconSize,0,0),
+                     pixelMetric(QStyle::PM_SmallIconSize,0,0)
+                     );
 
-                                  // for now menu size is not calculated properly
-                                  // (meaning it doesn't account for titled separators width
-                                  // as a fallback, we elide the text to be displayed
-                                  int width( r.width() );
-                                  if( !menuItemOption->icon.isNull() )
-                                        { width -= toolButtonOpt.iconSize.width() + 2; }
-                                  width -= 2*ToolButton_ContentsMargin;
-                                  toolButtonOpt.text = QFontMetrics( toolButtonOpt.font ).elidedText( menuItemOption->text, Qt::ElideRight, width );
+                  // for now menu size is not calculated properly
+                  // (meaning it doesn't account for titled separators width
+                  // as a fallback, we elide the text to be displayed
+                  int width(r.width());
+                  if (!menuItemOption->icon.isNull())
+                        width -= toolButtonOpt.iconSize.width() + 2;
+                  width -= 2*ToolButton_ContentsMargin;
 
-                                  toolButtonOpt.toolButtonStyle = Qt::ToolButtonTextBesideIcon;
-                                  drawComplexControl( CC_ToolButton, &toolButtonOpt, painter, widget );
-                                  return true;
+                  toolButtonOpt.text = QFontMetrics(toolButtonOpt.font).elidedText(menuItemOption->text, Qt::ElideRight, width);
 
-                              } else {
+                  toolButtonOpt.toolButtonStyle = Qt::ToolButtonTextBesideIcon;
+                  drawComplexControl(CC_ToolButton, &toolButtonOpt, painter, widget);
+                  }
+            else {
+                  // in all other cases draw regular separator
+                  const QColor color(_helper.menuBackgroundColor(palette.color(QPalette::Window), widget, r.center()));
+                  _helper.drawSeparator(painter, r, color, Qt::Horizontal);
+                  }
+            return true;
+            }
 
-                                  // in all other cases draw regular separator
-                                  const QColor color( _helper.menuBackgroundColor( palette.color(QPalette::Window), widget, r.center() ) );
-                                  _helper.drawSeparator( painter, r, color, Qt::Horizontal);
-                                  return true;
+      //Remove the margin (for everything but the column background)
+      const QRect ir( insideMargin(r, MenuItem_Margin ) );
 
-                              }
-
-                    }
-
-              //Remove the margin (for everything but the column background)
-              const QRect ir( insideMargin(r, MenuItem_Margin ) );
-
-              //Active indicator...
-              if( active && enabled )
+      //Active indicator...
+      if( active && enabled )
                     {
 
                         // check if there is a 'sliding' animation in progress, in which case, do nothing
@@ -5004,7 +5003,6 @@ bool MStyle::drawMenuItemControl( const QStyleOption* option, QPainter* painter,
 
                         painter->setPen(QPen( _helper.decoColor( background, color ) , penThickness, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
                         painter->drawPolyline(a);
-
 
                     }
 

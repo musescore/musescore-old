@@ -442,7 +442,7 @@ bool Rest::genPropertyMenu(QMenu* popup) const
       {
       Element::genPropertyMenu(popup);
       QAction* a = popup->addSeparator();
-      a->setText(tr("Rest"));
+//      a->setText(tr("Rest"));
       if (tuplet()) {
             QMenu* menuTuplet = popup->addMenu(tr("Tuplet..."));
             a = menuTuplet->addAction(tr("Tuplet Properties..."));

@@ -1968,10 +1968,28 @@ int main(int argc, char* av[])
             qApp->processEvents();
             }
 
-      QApplication::setStyle(new MStyle);
-
-      if (!useFactorySettings && !converterMode)
+      if (!useFactorySettings && !converterMode) {
+            QApplication::setStyle(new MStyle);
             qApp->setStyleSheet(appStyleSheet());
+            switch(preferences.globalStyle) {
+                  case STYLE_DARK: {
+                        QPalette p(QApplication::palette());
+                        p.setColor(QPalette::Window,        QColor(0x52, 0x52, 0x52));
+                        p.setColor(QPalette::WindowText,    Qt::white);
+                        p.setColor(QPalette::Base,          QColor(0x42, 0x42, 0x42));
+                        p.setColor(QPalette::AlternateBase, QColor(0x62, 0x62, 0x62));
+                        p.setColor(QPalette::Text,          Qt::white);
+                        p.setColor(QPalette::Button,        QColor(0x52, 0x52, 0x52));
+                        p.setColor(QPalette::ButtonText,    Qt::white);
+                        p.setColor(QPalette::BrightText,    Qt::black);
+                        QApplication::setPalette(p);
+                        break;
+                        }
+                  case STYLE_LIGHT:
+                  case STYLE_NATIVE:
+                        break;
+                  }
+            }
 
       //
       //  load internal fonts

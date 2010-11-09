@@ -269,7 +269,7 @@ void Dynamic::layout()
 bool Dynamic::genPropertyMenu(QMenu* popup) const
       {
       QAction* a = popup->addSeparator();
-      a->setText(tr("Dynamics"));
+//      a->setText(tr("Dynamics"));
       if (visible())
             a = popup->addAction(tr("Set Invisible"));
       else

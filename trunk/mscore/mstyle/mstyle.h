@@ -628,6 +628,7 @@ class MStyle : public QCommonStyle {
       Transitions& transitions() const               { return *_transitions; }
 //      WindowManager& windowManager() const           { return *_windowManager; }
       FrameShadowFactory& frameShadowFactory() const { return *_frameShadowFactory; }
+//      virtual QPalette standardPalette() const;
       };
 
 //---------------------------------------------------------

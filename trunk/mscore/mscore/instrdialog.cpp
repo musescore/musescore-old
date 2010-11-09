@@ -199,7 +199,6 @@ InstrumentsDialog::InstrumentsDialog(QWidget* parent)
       removeButton->setEnabled(false);
       upButton->setEnabled(false);
       downButton->setEnabled(false);
-//      editButton->setEnabled(false);
       belowButton->setEnabled(false);
       linkedButton->setEnabled(false);
       connect(showMore, SIGNAL(clicked()), SLOT(buildTemplateList()));
