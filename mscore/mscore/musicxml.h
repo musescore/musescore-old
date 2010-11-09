@@ -42,6 +42,7 @@ class Pedal;
 class Volta;
 class TextLine;
 class Chord;
+class Harmony;
 
 //---------------------------------------------------------
 //   MusicXmlWedge
@@ -163,6 +164,7 @@ class MusicXml {
       Ottava* ottava;    ///< Current ottava
       Trill* trill;      ///< Current trill
       Pedal* pedal;      ///< Current pedal
+      Harmony* harmony;  ///< Current harmony
       Chord* tremStart;  ///< Starting chord for current tremolo
       BeamMode beamMode; ///< Current beam mode
 

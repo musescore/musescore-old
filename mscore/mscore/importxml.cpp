@@ -345,6 +345,7 @@ void MusicXml::import(Score* s)
       ottava = 0;
       trill = 0;
       pedal = 0;
+      harmony = 0;
       tremStart = 0;
 
       // TODO only if multi-measure rests used ???
@@ -3028,6 +3029,14 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   printf("unknown tremolo type %d\n", tremolo);
             }
 
+      // add a pending harmony to the current track
+      if (harmony) {
+            harmony->setTrack(track);
+            Segment* s = static_cast<Segment*>(cr->parent());
+            s->add(harmony);
+            harmony = 0;
+            }
+
       if (!grace) {
             lastLen = ticks;
             tick += ticks;
@@ -3118,6 +3127,11 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
 
       QString kind, kindText;
       QList<HDegree> degreeList;
+
+      if (harmony) {
+            printf("MusicXML::import: more than one harmony\n");
+            return;
+            };
 
       Harmony* ha = new Harmony(score);
       ha->setUserOff(QPointF(rx, ry + dy - styleYOff));
@@ -3255,9 +3269,9 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
             ha->render();
             }
       ha->setVisible(printObject == "yes");
-// measure->add does not accept Harmony anymore
-// TODO-LV: add Harmony to parent segment of next chord
-//      measure->add(ha);
+
+      // TODO-LV: do this only if ha points to a valid harmony
+      harmony = ha;
       }
 
 //---------------------------------------------------------
