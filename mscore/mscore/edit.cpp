@@ -1073,6 +1073,9 @@ void Score::deleteItem(Element* el)
       {
       switch(el->type()) {
             case TEXT:
+#if 0
+            // problem: instrument name cannot be selected
+
                   if (el->subtype() == TEXT_INSTRUMENT_LONG) {
                         undo()->push(new ChangeInstrumentLong(el->staff()->part(), ""));
                         break;
@@ -1081,6 +1084,7 @@ void Score::deleteItem(Element* el)
                         undo()->push(new ChangeInstrumentShort(el->staff()->part(), ""));
                         break;
                         }
+#endif
                   undoRemoveElement(el);
                   break;
 

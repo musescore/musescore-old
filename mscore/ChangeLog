@@ -1,4 +1,12 @@
 9.nov (ws)
+      - fix: hide cursor after play ends
+      - fix: clef changes are not always saved
+      - fix: cursor left/right to next/prev. lyrics in lyrics editing mode
+      - fix: delete verse > 1 of lyrics
+      - fix: changing instrument name in part properties did not work
+      - fix creation of new scores with pickup measure
+      - suggest first "Title" string as filename on first save. Replace spaces
+        and newlines with underscore.
       - If a global color is specified in appstyle.css, menus are not rendered
         anymore by mstyle and menu titles (separators with text) disappear.
         To avoid this i moved the color spec from appstyle.css to mscore.cpp.

@@ -336,6 +336,7 @@ void MuseScore::seqStarted()
 
 void MuseScore::seqStopped()
       {
+      cv->setCursorOn(false);
 #if 0
       cs->setLayoutAll(false);
       cs->setUpdateAll();

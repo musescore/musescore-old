@@ -154,19 +154,16 @@ void EditStaff::apply()
             interval.flip();
       instrument.setTranspose(interval);
 
-      const QTextDocument* ln = longName->document();
-      const QTextDocument* sn = shortName->document();
-
-      bool snd = sn->toHtml() != part->shortName().toHtml();
-      bool lnd = ln->toHtml() != part->longName().toHtml();
-
       instrument.setMinPitchA(aPitchMin->value());
       instrument.setMaxPitchA(aPitchMax->value());
       instrument.setMinPitchP(pPitchMin->value());
       instrument.setMaxPitchP(pPitchMax->value());
+      instrument.setShortName(QTextDocumentFragment(shortName->document()));
+      instrument.setLongName(QTextDocumentFragment(longName->document()));
 
-      if (snd || lnd || !(instrument == *part->instr())) {
-            score->undo()->push(new ChangePart(part, ln, sn, instrument));
+      if (!(instrument == *part->instr())) {
+printf("instrument changed <%s>\n", qPrintable(instrument.longName().toPlainText()));
+            score->undo()->push(new ChangePart(part, instrument));
             }
 
       bool s   = small->isChecked();

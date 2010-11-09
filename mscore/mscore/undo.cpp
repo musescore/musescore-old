@@ -1523,14 +1523,18 @@ void FlipTupletDirection::flip()
 
 ChangeSubtype::ChangeSubtype(Element* e, int st)
       {
-      element = e;
-      subtype = st;
+      element   = e;
+      generated = false;
+      subtype   = st;
       }
 
 void ChangeSubtype::flip()
       {
-      int st = element->subtype();
+      int st  = element->subtype();
+      bool og = element->generated();
+
       element->setSubtype(subtype);
+      element->setGenerated(generated);
       if (element->type() == CLEF) {
             Clef* clef       = static_cast<Clef*>(element);
             Segment* segment = clef->segment();
@@ -1539,7 +1543,8 @@ void ChangeSubtype::flip()
             updateNoteLines(segment, clef->track());
             clef->score()->setLayoutAll(true);
             }
-      subtype = st;
+      subtype   = st;
+      generated = og;
       }
 
 //---------------------------------------------------------
@@ -2233,19 +2238,10 @@ void ChangeStaff::flip()
 //   ChangePart
 //---------------------------------------------------------
 
-ChangePart::ChangePart(Part* _part, const QTextDocument* _longName, const QTextDocument* _shortName,
-   const Instrument& i)
+ChangePart::ChangePart(Part* _part, const Instrument& i)
       {
-      longName   = _longName->clone(0);
-      shortName  = _shortName->clone(0);
       instrument = i;
       part       = _part;
-      }
-
-ChangePart::~ChangePart()
-      {
-      delete longName;
-      delete shortName;
       }
 
 //---------------------------------------------------------
@@ -2256,8 +2252,6 @@ void ChangePart::flip()
       {
       Instrument oi         = *part->instr();
       part->setInstrument(instrument);
-//TODOxx      longName              = part->longName()->swapDoc(longName);
-//      shortName             = part->shortName()->swapDoc(shortName);
       instrument            = oi;
       part->score()->setInstrumentNames();
       part->score()->rebuildMidiMapping();
@@ -2274,6 +2268,10 @@ ChangeTextStyle::ChangeTextStyle(Score* s, const TextStyle& st)
       score = s;
       style = st;
       }
+
+//---------------------------------------------------------
+//   updateTextStyle
+//---------------------------------------------------------
 
 static void updateTextStyle(void* a, Element* e)
       {

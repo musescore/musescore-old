@@ -158,6 +158,9 @@ class Instrument {
       const QTextDocumentFragment& shortName() const;
       QTextDocumentFragment& longName();
       QTextDocumentFragment& shortName();
+      void setLongName(const QTextDocumentFragment&);
+      void setShortName(const QTextDocumentFragment&);
+
       QString trackName() const;
       void setTrackName(const QString&);
       };

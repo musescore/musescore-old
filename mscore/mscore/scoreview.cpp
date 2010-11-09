@@ -1232,6 +1232,7 @@ void ScoreView::moveCursor()
 
 void ScoreView::moveCursor(Segment* segment, int track)
       {
+//     printf("moveCursor %d\n", segment->tick());
       int staffIdx = (track == -1) ? -1 : (track / VOICES);
 
       System* system = segment->measure()->system();
@@ -1288,8 +1289,10 @@ void ScoreView::moveCursor(Segment* segment, int track)
 
 void ScoreView::setCursorOn(bool val)
       {
-      if (_cursor)
+      if (_cursor && (_cursor->visible() != val)) {
             _cursor->setVisible(val);
+            update(_matrix.mapRect(_cursor->abbox()).toRect());
+            }
       }
 
 //---------------------------------------------------------

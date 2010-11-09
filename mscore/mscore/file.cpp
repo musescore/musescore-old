@@ -254,23 +254,40 @@ void MuseScore::saveFile()
             }
       }
 
-/**
- If file has generated name, create a modal file save dialog
- and ask filename.
- Rename old file to backup file (.xxxx.msc?,).
- Default is to save score in .mscz format,
- Return true if OK and false on error.
- */
+//---------------------------------------------------------
+//   createDefaultFileName
+//---------------------------------------------------------
+
+QString Score::createDefaultFileName()
+      {
+      QString fn = info.baseName();
+      Text* t = getText(TEXT_TITLE);
+      if (t)
+            fn = t->getText();
+      fn = fn.replace(QChar(' '), "_");
+      fn = fn.replace(QChar('\n'), "_");
+      return fn;
+      }
+
+//---------------------------------------------------------
+//   saveFile
+///   If file has generated name, create a modal file save dialog
+///   and ask filename.
+///   Rename old file to backup file (.xxxx.msc?,).
+///   Default is to save score in .mscz format,
+///   Return true if OK and false on error.
+//---------------------------------------------------------
 
 bool Score::saveFile(bool autosave)
       {
       if (created()) {
             QString selectedFilter;
+            QString name = createDefaultFileName();
             QString f1 = tr("Compressed MuseScore File (*.mscz)");
             QString f2 = tr("MuseScore File (*.mscx)");
             QString fn = QFileDialog::getSaveFileName(
                mscore, tr("MuseScore: Save Score"),
-               QString("%1/%2.mscz").arg(preferences.workingDirectory).arg(info.baseName()),
+               QString("%1/%2.mscz").arg(preferences.workingDirectory).arg(name),
                f1 + ";;" + f2,
                &selectedFilter
                );
@@ -662,9 +679,11 @@ void MuseScore::newFile()
             Measure* m = new Measure(score);
             if (i == 0 && pickupMeasure) {
                   m->setIrregular(true);
+                  m->setTimesig(Fraction(timesigZ, timesigN));
                   m->setLen(Fraction(pickupTimesigZ, pickupTimesigN));
                   }
             m->setTimesig(Fraction(timesigZ, timesigN));
+            m->setLen(Fraction(timesigZ, timesigN));
             score->measures()->add(m);
             }
 

@@ -634,6 +634,9 @@ bool InstrumentData::operator==(const InstrumentData& i) const
          &&  i._articulation == _articulation
          &&  i._transpose.diatonic == _transpose.diatonic
          &&  i._transpose.chromatic == _transpose.chromatic
+         &&  i._longName.toHtml() == _longName.toHtml()
+         &&  i._shortName.toHtml() == _shortName.toHtml()
+         &&  i._trackName == _trackName
          ;
       }
 
@@ -1067,6 +1070,24 @@ const QTextDocumentFragment& Instrument::shortName() const
 QTextDocumentFragment& Instrument::longName()
       {
       return d->_longName;
+      }
+
+//---------------------------------------------------------
+//   setLongName
+//---------------------------------------------------------
+
+void Instrument::setLongName(const QTextDocumentFragment& f)
+      {
+      d->_longName = f;
+      }
+
+//---------------------------------------------------------
+//   setShortName
+//---------------------------------------------------------
+
+void Instrument::setShortName(const QTextDocumentFragment& f)
+      {
+      d->_shortName = f;
       }
 
 //---------------------------------------------------------

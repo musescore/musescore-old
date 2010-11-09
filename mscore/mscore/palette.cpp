@@ -1145,12 +1145,9 @@ void PaletteBox::contextMenu(const QPoint& pt)
       QMenu menu(this);
       menu.setObjectName("PaletteContext");
 
-      QAction* titel = new QAction(tr("Palette Operations"), &menu);
-      QFont titleFont(font());
-      titleFont.setBold(true);
-      titel->setFont(titleFont);
-      menu.addAction(titel);
-      menu.addSeparator();
+      menu.setSeparatorsCollapsible(false);
+      QAction* titel = menu.addSeparator();
+      titel->setText(tr("Palette Operations"));
 
       QAction* b = menu.addAction(tr("Single Palette Mode"));
       b->setCheckable(true);

@@ -781,15 +781,13 @@ bool Text::edit(ScoreView* view, int /*grip*/, int key, Qt::KeyboardModifiers mo
                   break;
 
             case Qt::Key_Left:
-                  cursor->movePosition(QTextCursor::Left, mm);
-                  // if (!cursor->movePosition(QTextCursor::Left, mm))
-                  //      return false;
+                  if (!cursor->movePosition(QTextCursor::Left, mm) && (type() == LYRICS))
+                        return false;
                   break;
 
             case Qt::Key_Right:
-                  cursor->movePosition(QTextCursor::Right, mm);
-                  // if (!cursor->movePosition(QTextCursor::Right, mm))
-                  //      return false;
+                  if (!cursor->movePosition(QTextCursor::Right, mm) && (type() == LYRICS))
+                        return false;
                   break;
 
             case Qt::Key_Up:
