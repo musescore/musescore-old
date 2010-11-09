@@ -1,3 +1,5 @@
+9.nov  (la)
+      - fix #7881: Exchange voices does not work on last measure
 7.nov (ws)
       - reorganized styles, to allow for different icon sets for dark and light theme
       (db)
