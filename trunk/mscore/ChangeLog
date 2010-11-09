@@ -1,4 +1,6 @@
-9.nov (ws)
+9.nov (lv)
+      - fix MusicXML import of <harmony>
+      (ws)
       - entering lyrics entry mode also by selecting lyrics + Ctrl+L
       - up/down moves lyrics to next/previous verse (if slot is empty)
       - if lyrics is selected, cursor next/previous move to next/prev lyrics
