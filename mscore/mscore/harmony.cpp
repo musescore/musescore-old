@@ -629,10 +629,8 @@ void Harmony::parseHarmony(const QString& ss, int* root, int* base)
       QString s = ss.simplified();
       _userName = s;
       int n = s.size();
-      if (n < 1) {
-            printf("harmony is empty %d\n", segment()->tick());
+      if (n < 1)
             return;
-            }
       bool germanNames = score()->styleB(ST_useGermanNoteNames);
       int r = convertRoot(s, germanNames);
       if (r == INVALID_TPC) {

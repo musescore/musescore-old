@@ -419,6 +419,7 @@ void HBox::propertyAction(ScoreView* viewer, const QString& cmd)
       else if (cmd == "frame-text") {
             Text* s = new Text(score());
             s->setSubtype(TEXT_FRAME);
+            s->setTextStyle(TEXT_STYLE_FRAME);
             s->setParent(this);
             score()->undoAddElement(s);
             score()->select(s, SELECT_SINGLE, 0);

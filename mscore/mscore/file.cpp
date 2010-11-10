@@ -264,8 +264,15 @@ QString Score::createDefaultFileName()
       Text* t = getText(TEXT_TITLE);
       if (t)
             fn = t->getText();
-      fn = fn.replace(QChar(' '), "_");
+      fn = fn.replace(QChar(' '),  "_");
       fn = fn.replace(QChar('\n'), "_");
+      fn = fn.replace(QChar(0xe4), "ae");
+      fn = fn.replace(QChar(0xf6), "oe");
+      fn = fn.replace(QChar(0xfc), "ue");
+      fn = fn.replace(QChar(0xdf), "ss");
+      fn = fn.replace(QChar(0xc4), "Ae");
+      fn = fn.replace(QChar(0xd6), "Oe");
+      fn = fn.replace(QChar(0xdc), "Ue");
       return fn;
       }
 
@@ -614,11 +621,11 @@ void MuseScore::newFile()
       newWizard->restart();
       if (newWizard->exec() != QDialog::Accepted)
             return;
-      int measures = newWizard->measures();
       int pickupTimesigZ, pickupTimesigN;
-      Fraction timesig = newWizard->timesig();
+      int measures       = newWizard->measures();
+      Fraction timesig   = newWizard->timesig();
       bool pickupMeasure = newWizard->pickupMeasure(&pickupTimesigZ, &pickupTimesigN);
-      KeySigEvent ks = newWizard->keysig();
+      KeySigEvent ks     = newWizard->keysig();
 
       Score* score = new Score(defaultStyle);
       score->setCreated(true);
@@ -642,10 +649,6 @@ void MuseScore::newFile()
                   if (mb->type() == MEASURE)
                         ++m;
                   }
-            if (m < measures)
-                  measures -= m;
-            else
-                  measures = 0;
             //
             // remove all notes & rests
             //
@@ -674,8 +677,17 @@ void MuseScore::newFile()
             }
       if (!newWizard->title().isEmpty())
             score->fileInfo()->setFile(newWizard->title());
+      Measure* pm = score->firstMeasure();
       for (int i = 0; i < measures; ++i) {
-            Measure* m = new Measure(score);
+            Measure* m;
+            if (pm) {
+                  m  = pm;
+                  pm = pm->nextMeasure();
+                  }
+            else {
+                  m = new Measure(score);
+                  score->measures()->add(m);
+                  }
             m->setTimesig(timesig);
             if (pickupMeasure) {
                   if (i == 0) {
@@ -689,12 +701,11 @@ void MuseScore::newFile()
                   }
             else
                   m->setLen(timesig);
-            score->measures()->add(m);
+            if (i == (measures - 1))
+                  m->setEndBarLineType(END_BAR, false);
+            else
+                  m->setEndBarLineType(NORMAL_BAR, true);
             }
-
-      Measure* lastMeasure = score->lastMeasure();
-      if (lastMeasure && (lastMeasure->endBarLineType() == NORMAL_BAR))
-            lastMeasure->setEndBarLineType(END_BAR, false);
 
       int tick = 0;
       for (MeasureBase* mb = score->measures()->first(); mb; mb = mb->next()) {
