@@ -294,7 +294,16 @@ void Staff::read(QDomElement e)
             else
                   domError(e);
             }
+      //
+      // for compatibility with old scores:
+      //
+      if (!_clefList->empty()) {
+            ClefType ct = clef(0);
+            if (ct == CLEF_PERC2 || ct == CLEF_PERC)
+                  _staffType = staffTypes[PERCUSSION_STAFF_TYPE];
+            }
       }
+
 #if 0
 //---------------------------------------------------------
 //   changeKeySig

@@ -29,6 +29,7 @@
 #include "text.h"
 #include "measure.h"
 #include "tablature.h"
+#include "stafftype.h"
 
 //---------------------------------------------------------
 //   Part
@@ -328,16 +329,20 @@ void Part::setInstrument(const Instrument& i, int tick)
       {
       _instrList.setInstrument(i, tick);
 
+      //CHECK: ??
+
       if (!_score->styleB(ST_concertPitch) && i.transpose().chromatic) {
             foreach(Staff* staff, _staves) {
-                  _score->cmdTransposeStaff(staff->idx(), i.transpose(), false);
+                  if (staff->staffType()->group() != PERCUSSION_STAFF)
+                        _score->cmdTransposeStaff(staff->idx(), i.transpose(), false);
                   }
             }
       if (!_score->styleB(ST_concertPitch) && i.transpose().chromatic) {
             foreach(Staff* staff, _staves) {
                   Interval iv(i.transpose());
                   iv.flip();
-                  _score->cmdTransposeStaff(staff->idx(), iv, false);
+                  if (staff->staffType()->group() != PERCUSSION_STAFF)
+                        _score->cmdTransposeStaff(staff->idx(), iv, false);
                   }
             }
       }

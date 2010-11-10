@@ -1,4 +1,5 @@
 10.nov (ws)
+      - fix #7882: Transposing a score shouldn't transpose a drum staff
       - added "instruments-band.xml" from ndwinton
       - save title and copyright as meta data when creating new score
       - do not create measure rests if nominal len of measure is different from

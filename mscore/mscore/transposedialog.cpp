@@ -33,6 +33,7 @@
 #include "keysig.h"
 #include "utils.h"
 #include "segment.h"
+#include "stafftype.h"
 
 //---------------------------------------------------------
 //   keydiff2Interval
@@ -216,6 +217,8 @@ void Score::transpose()
       bool useDoubleSharpsFlats = td.useDoubleSharpsFlats();
       if (_selection.state() == SEL_LIST) {
             foreach(Element* e, _selection.elements()) {
+                  if (e->staff()->staffType()->group() == PERCUSSION_STAFF)
+                        continue;
                   if (e->type() == NOTE)
                         transpose(static_cast<Note*>(e), interval, useDoubleSharpsFlats);
                   else if ((e->type() == HARMONY) && transposeChordNames) {
@@ -239,8 +242,10 @@ void Score::transpose()
       int startTrack = _selection.staffStart() * VOICES;
       int endTrack   = _selection.staffEnd() * VOICES;
 
-      for (int st = startTrack; st < endTrack; ++st) {
-            for (Segment* segment = _selection.startSegment(); segment && segment != _selection.endSegment(); segment = segment->next1()) {
+      for (Segment* segment = _selection.startSegment(); segment && segment != _selection.endSegment(); segment = segment->next1()) {
+            for (int st = startTrack; st < endTrack; ++st) {
+                  if (staff(st/VOICES)->staffType()->group() == PERCUSSION_STAFF)
+                        continue;
                   Element* e = segment->element(st);
                   if (!e || e->type() != CHORD)
                         continue;
@@ -249,36 +254,21 @@ void Score::transpose()
                   foreach (Note* n, nl)
                         transpose(n, interval, useDoubleSharpsFlats);
                   }
-            }
-
-      if (trKeys) {
-            transposeKeys(_selection.staffStart(), _selection.staffEnd(),
-               _selection.tickStart(), _selection.tickEnd(), interval.chromatic);
-            }
-
-      if (transposeChordNames) {
-            Measure* sm = _selection.startSegment()->measure();
-            Segment* es =  _selection.endSegment();
-            Measure* em = es ? es->measure() : lastMeasure();
-            int stick   = _selection.tickStart();
-            int etick   = _selection.tickEnd();
-
-            for (Measure* m = sm; m; m = m->nextMeasure()) {
-#if 0 //TODO1
-                  foreach (Element* e, *m->el()) {
-                        if ((e->type() != HARMONY) || (e->tick() < stick))
+            if (transposeChordNames) {
+                  foreach (Element* e, segment->annotations()) {
+                        if ((e->type() != HARMONY) || (e->track() < startTrack) || (e->track() >= endTrack))
                               continue;
-                        if (e->tick() >= etick)
-                              break;
                         Harmony* h  = static_cast<Harmony*>(e);
                         int rootTpc = transposeTpc(h->rootTpc(), interval, false);
                         int baseTpc = transposeTpc(h->baseTpc(), interval, false);
                         undoTransposeHarmony(h, rootTpc, baseTpc);
                         }
-                  if (m == em)
-                        break;
-#endif
                   }
+            }
+
+      if (trKeys) {
+            transposeKeys(_selection.staffStart(), _selection.staffEnd(),
+               _selection.tickStart(), _selection.tickEnd(), interval.chromatic);
             }
       setLayoutAll(true);
       }
@@ -289,6 +279,8 @@ void Score::transpose()
 
 void Score::cmdTransposeStaff(int staffIdx, Interval interval, bool useDoubleSharpsFlats)
       {
+      if (staff(staffIdx)->staffType()->group() == PERCUSSION_STAFF)
+            return;
       int startTrack = staffIdx * VOICES;
       int endTrack   = startTrack + VOICES;
 
@@ -330,6 +322,8 @@ void Score::cmdConcertPitchChanged(bool flag, bool useDoubleSharpsFlats)
       undo()->push(new ChangeConcertPitch(this, flag));
 
       foreach(Staff* staff, _staves) {
+            if (staff->staffType()->group() == PERCUSSION_STAFF)
+                  continue;
             Instrument* instr = staff->part()->instr();
             Interval interval = instr->transpose();
             if (interval.isZero())
@@ -361,6 +355,8 @@ void Score::transpose(Note* n, Interval interval, bool useDoubleSharpsFlats)
 void Score::transposeKeys(int staffStart, int staffEnd, int tickStart, int tickEnd, int semitones)
       {
       for (int staffIdx = staffStart; staffIdx < staffEnd; ++staffIdx) {
+            if (staff(staffIdx)->staffType()->group() == PERCUSSION_STAFF)
+                  continue;
             for (Segment* s = firstSegment(); s; s = s->next1()) {
                   if (s->subtype() != SegKeySig)
                         continue;
