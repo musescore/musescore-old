@@ -35,6 +35,7 @@ install(FILES
       instruments_zh_CN.xml
       instruments_zh_TW.xml
       instruments.xml
+      instruments-band.xml
       Chamber\ Orchestra.mscx
       Choir\ SATB.mscx
       Choir\ SATB\ with\ Piano.mscx
