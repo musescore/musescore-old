@@ -615,9 +615,8 @@ void MuseScore::newFile()
       if (newWizard->exec() != QDialog::Accepted)
             return;
       int measures = newWizard->measures();
-      int timesigZ, timesigN;
       int pickupTimesigZ, pickupTimesigN;
-      newWizard->timesig(&timesigZ, &timesigN);
+      Fraction timesig = newWizard->timesig();
       bool pickupMeasure = newWizard->pickupMeasure(&pickupTimesigZ, &pickupTimesigN);
       KeySigEvent ks = newWizard->keysig();
 
@@ -677,13 +676,19 @@ void MuseScore::newFile()
             score->fileInfo()->setFile(newWizard->title());
       for (int i = 0; i < measures; ++i) {
             Measure* m = new Measure(score);
-            if (i == 0 && pickupMeasure) {
-                  m->setIrregular(true);
-                  m->setTimesig(Fraction(timesigZ, timesigN));
-                  m->setLen(Fraction(pickupTimesigZ, pickupTimesigN));
+            m->setTimesig(timesig);
+            if (pickupMeasure) {
+                  if (i == 0) {
+                        m->setIrregular(true);        // dont count pickup measure
+                        m->setLen(Fraction(pickupTimesigZ, pickupTimesigN));
+                        }
+                  else if (i == (measures - 1)) {
+                        // last measure is shorter
+                        m->setLen(timesig - Fraction(pickupTimesigZ, pickupTimesigN));
+                        }
                   }
-            m->setTimesig(Fraction(timesigZ, timesigN));
-            m->setLen(Fraction(timesigZ, timesigN));
+            else
+                  m->setLen(timesig);
             score->measures()->add(m);
             }
 
@@ -699,11 +704,10 @@ void MuseScore::newFile()
             Measure* measure = static_cast<Measure*>(mb);
             int ticks = measure->ticks();
 	      for (int staffIdx = 0; staffIdx < score->nstaves(); ++staffIdx) {
-                  Duration d(Duration::V_MEASURE);
                   Staff* staff = score->staff(staffIdx);
                   if (tick == 0) {
                         if (!staff->useTablature()) {
-                              TimeSig* ts = new TimeSig(score, timesigN, timesigZ);
+                              TimeSig* ts = new TimeSig(score, timesig);
                               ts->setTrack(staffIdx * VOICES);
                               Segment* s = measure->getSegment(ts, 0);
                               s->add(ts);
@@ -727,8 +731,6 @@ void MuseScore::newFile()
                                     s->add(keysig);
                                     }
                               }
-                        if (pickupMeasure)
-	                        d.setVal(ticks);
                         Clef* clef = new Clef(score);
                         clef->setClefType(staff->clef(0));
                         clef->setTrack(staffIdx * VOICES);
@@ -736,11 +738,27 @@ void MuseScore::newFile()
                         segment->add(clef);
                         }
                   if (staff->primaryStaff()) {
-		            Rest* rest = new Rest(score, d);
-                        rest->setDuration(measure->len());
-            	      rest->setTrack(staffIdx * VOICES);
-	            	Segment* s = measure->getSegment(rest, tick);
-		            s->add(rest);
+                        if (measure->timesig() != measure->len()) {
+                              int tick = measure->tick();
+                              QList<Duration> dList = toDurationList(measure->len(), false);
+                              if (!dList.isEmpty()) {
+                                    foreach(Duration d, dList) {
+		                              Rest* rest = new Rest(score, d);
+                                          rest->setDuration(d.fraction());
+            	                        rest->setTrack(staffIdx * VOICES);
+	            	                  Segment* s = measure->getSegment(rest, tick);
+		                              s->add(rest);
+                                          tick += rest->ticks();
+                                          }
+                                    }
+                              }
+                        else {
+		                  Rest* rest = new Rest(score, Duration(Duration::V_MEASURE));
+                              rest->setDuration(measure->len());
+            	            rest->setTrack(staffIdx * VOICES);
+	            	      Segment* s = measure->getSegment(rest, tick);
+		                  s->add(rest);
+                              }
                         }
                   }
             tick += ticks;
@@ -792,6 +810,7 @@ void MuseScore::newFile()
                   s->setTextStyle(TEXT_STYLE_TITLE);
                   s->setText(title);
                   measure->add(s);
+                  score->setMetaTag("workTitle", title);
                   }
             if (!subtitle.isEmpty()) {
                   Text* s = new Text(score);
@@ -832,8 +851,8 @@ void MuseScore::newFile()
             seg->add(tt);
             score->tempomap()->changeTempo(0, tempo);
             }
-//      if (!copyright.isEmpty())
-//            score->setCopyright(copyright);
+      if (!copyright.isEmpty())
+            score->setMetaTag("copyright", copyright);
 
       score->rebuildMidiMapping();
       score->doLayout();

@@ -1,3 +1,9 @@
+10.nov (ws)
+      - save title and copyright as meta data when creating new score
+      - do not create measure rests if nominal len of measure is different from
+        actual len
+      - when creating new scores with a pickup measure, also adjust the len
+        of the last measure so that pickup measure + last measure = normal measure
 9.nov (lv)
       - fix MusicXML import of <harmony>
       (ws)

@@ -1814,7 +1814,7 @@ void Measure::adjustToLen(int ol, int nl)
                   }
             if (rests == 1 && chords == 0 && rest->durationType().type() == Duration::V_MEASURE)
                   continue;
-            if ((_timesig == _len) && (rests == 1) && (chords == 0) && !_irregular) {
+            if ((_timesig == _len) && (rests == 1) && (chords == 0)) {
                   rest->setDurationType(Duration::V_MEASURE);    // whole measure rest
                   }
             else {
@@ -2447,13 +2447,8 @@ void Measure::createVoice(int track)
       for (Segment* s = first(); s; s = s->next()) {
             if (s->subtype() != SegChordRest)
                   continue;
-            if (s->element(track) == 0) {
-                  Rest* rest = new Rest(score(), Duration(Duration::V_MEASURE));
-                  rest->setDuration(len());
-                  rest->setTrack(track);
-                  rest->setParent(s);
-                  score()->undoAddElement(rest);
-                  }
+            if (s->element(track) == 0)
+                  score()->setRest(s->tick(), track, len(), true, 0);
             break;
             }
       }

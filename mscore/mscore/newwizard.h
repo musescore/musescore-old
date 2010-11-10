@@ -26,6 +26,7 @@
 #include "ui_newwizard.h"
 
 #include "key.h"
+#include "fraction.h"
 
 class Score;
 class Palette;
@@ -68,7 +69,7 @@ class TimesigWizard : public QWidget, private Ui::TimesigWizard {
    public:
       TimesigWizard(QWidget* parent = 0);
       int measures() const;
-      void timesig(int* z, int* n) const;
+      Fraction timesig() const;
       bool pickup(int* z, int* n) const;
       };
 
@@ -133,8 +134,8 @@ class NewWizardPage3 : public QWizardPage {
 
    public:
       NewWizardPage3(QWidget* parent = 0);
-      int measures() const                     { return w->measures();          }
-      void timesig(int* z, int* n) const       { w->timesig(z, n);              }
+      int measures() const                     { return w->measures();   }
+      Fraction timesig() const                 { return w->timesig();    }
       bool pickupMeasure(int* z, int* n) const { return w->pickup(z, n); }
       };
 
@@ -201,7 +202,7 @@ class NewWizard : public QWizard {
       QString templatePath() const       { return p4->templatePath(); }
       bool useTemplate() const;
       int measures() const               { return p3->measures();    }
-      void timesig(int* z, int* n) const { p3->timesig(z, n);        }
+      Fraction timesig() const           { return p3->timesig();     }
       void createInstruments(Score* s)   { p2->createInstruments(s); }
       QString title() const              { return p1->title();       }
       QString subtitle() const           { return p1->subtitle();    }
