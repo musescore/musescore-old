@@ -26,7 +26,7 @@
 #include "ui_newwizard.h"
 
 #include "key.h"
-#include "fraction.h"
+#include "al/fraction.h"
 
 class Score;
 class Palette;
