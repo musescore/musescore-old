@@ -431,10 +431,9 @@ int TimesigWizard::measures() const
 //   timesig
 //---------------------------------------------------------
 
-void TimesigWizard::timesig(int* z, int* n) const
+Fraction TimesigWizard::timesig() const
       {
-      *z = timesigZ->value();
-      *n = timesigN->value();
+      return Fraction(timesigZ->value(), timesigN->value());
       }
 
 //---------------------------------------------------------
