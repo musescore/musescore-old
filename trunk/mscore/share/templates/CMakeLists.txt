@@ -44,6 +44,7 @@ install(FILES
       leadsheet.mscx
       Piano.mscx
       guitartab.mscx
+      carol.mscx
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}templates
       )
 

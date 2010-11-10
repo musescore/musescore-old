@@ -2821,8 +2821,23 @@ void ScoreView::cmd(const QAction* a)
             }
       else if (cmd == "insert-textframe")
             cmdInsertMeasure(TBOX);
-      else if (cmd == "append-textframe")
-            appendMeasure(TBOX);
+      else if (cmd == "append-textframe") {
+            MeasureBase* mb = appendMeasure(TBOX);
+            if (mb) {
+                  TBox* tf = static_cast<TBox*>(mb);
+                  Text* text = 0;
+                  foreach(Element* e, *tf->el()) {
+                        if (e->type() == TEXT) {
+                              text = static_cast<Text*>(e);
+                              break;
+                              }
+                        }
+                  if (text) {
+                        _score->select(text, SELECT_SINGLE, 0);
+                        startEdit(text);
+                        }
+                  }
+            }
       else if (cmd == "insert-fretframe")
             cmdInsertMeasure(FBOX);
       else

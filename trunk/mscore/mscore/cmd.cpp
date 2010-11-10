@@ -1374,6 +1374,16 @@ MeasureBase* Score::appendMeasure(ElementType type)
                   s->add(rest);
                   }
             }
+      else if (type == TBOX) {
+            undoInsertMeasure(mb);
+            Text* s = new Text(this);
+            s->setTextStyle(TEXT_STYLE_FRAME);
+            s->setSubtype(TEXT_FRAME);
+            s->setParent(mb);
+            s->setStyled(false);
+            undoAddElement(s);
+            return mb;
+            }
       undoInsertMeasure(mb);
       return mb;
       }
@@ -1384,7 +1394,9 @@ MeasureBase* Score::appendMeasure(ElementType type)
 
 MeasureBase* ScoreView::appendMeasure(ElementType type)
       {
+      _score->startCmd();
       MeasureBase* mb = _score->appendMeasure(type);
+      _score->endCmd();
       return mb;
       }
 
