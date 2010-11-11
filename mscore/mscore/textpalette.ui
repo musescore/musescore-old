@@ -172,12 +172,6 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tab_2" >
-      <attribute name="title" >
-       <string>Frame</string>
-      </attribute>
-      <layout class="QGridLayout" />
-     </widget>
     </widget>
    </item>
   </layout>
