@@ -215,6 +215,8 @@ void Score::transpose()
       bool useDoubleSharpsFlats = td.useDoubleSharpsFlats();
       if (_selection.state() == SEL_LIST) {
             foreach(Element* e, _selection.elements()) {
+                  if (e->staff()->part()->useDrumset())
+                        continue;
                   if (e->type() == NOTE)
                         transpose(static_cast<Note*>(e), interval, useDoubleSharpsFlats);
                   else if ((e->type() == HARMONY) && transposeChordNames) {
@@ -241,6 +243,8 @@ void Score::transpose()
             for (Segment* segment = _selection.startSegment(); segment && segment != _selection.endSegment(); segment = segment->next1()) {
                   Element* e = segment->element(st);
                   if (!e || e->type() != CHORD)
+                        continue;
+                  if (e->staff()->part()->useDrumset())
                         continue;
                   Chord* chord = static_cast<Chord*>(e);
                   QList<Note*> nl = chord->notes();
@@ -359,6 +363,8 @@ void Score::transposeKeys(int staffStart, int staffEnd, int tickStart, int tickE
 printf("transpose keys %d\n", semitones);
 
       for (int staffIdx = staffStart; staffIdx < staffEnd; ++staffIdx) {
+            if(part(staffIdx)->useDrumset())
+                  continue; 
             KeyList* km = staff(staffIdx)->keymap();
             for (iKeyList ke = km->lower_bound(tickStart);
                ke != km->lower_bound(tickEnd); ++ke) {
