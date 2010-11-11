@@ -1,3 +1,5 @@
+11.nov (la)
+      - fix #7882: Transposing a score shouldn't transpose a drum staff (from trunk)
 9.nov  (la)
       - fix #7881: Exchange voices does not work on last measure
 7.nov  (la)
