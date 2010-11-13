@@ -758,7 +758,13 @@ void Note::endDrag()
       int clef     = staff->clef(tick);
       int key      = staff->key(tick).accidentalType();
       int npitch   = line2pitch(_line, clef, key);
-      score()->undoChangePitch(this, npitch, pitch2tpc(npitch, key), 0);
+      
+      Note* n = this;
+      while (n->tieBack())
+            n = n->tieBack()->startNote();
+      for (; n; n = n->tieFor() ? n->tieFor()->endNote() : 0)
+            score()->undoChangePitch(n, npitch, pitch2tpc(npitch, key), 0);
+        
       score()->select(this, SELECT_SINGLE, 0);
       }
 
