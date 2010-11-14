@@ -1757,7 +1757,7 @@ void Score::print(QPrinter* printer)
 
                   QRectF fr = page->abbox();
                   QList<const Element*> ell = page->items(fr);
-
+                  qStableSort(ell.begin(), ell.end(), elementLessThan);
                   foreach(const Element* e, ell) {
                         e->itemDiscovered = 0;
                         if (!e->visible())
