@@ -1312,6 +1312,7 @@ void ScoreView::paint(const QRect& rr, QPainter& p)
 //      p.setClipRect(fr);
 
       QList<const Element*> ell = _score->items(fr);
+      qStableSort(ell.begin(), ell.end(), elementLessThan);
       drawElements(p, ell);
 
       if (dropRectangle.isValid())

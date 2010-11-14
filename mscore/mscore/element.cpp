@@ -1424,3 +1424,11 @@ void collectElements(void* data, Element* e)
       el->append(e);
       }
 
+//---------------------------------------------------------
+//   elementLessThan
+//---------------------------------------------------------
+
+bool elementLessThan(const Element* const e1, const Element* const e2)
+      {
+      return e1->type() > e2->type();
+      }

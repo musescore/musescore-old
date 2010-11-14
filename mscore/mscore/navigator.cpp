@@ -169,7 +169,7 @@ void Navigator::paintEvent(QPaintEvent* ev)
 
                   QRectF fr = matrix.inverted().mapRect(QRectF(rr));
                   QList<const Element*> ell = _score->items(fr);
-
+                  qStableSort(ell.begin(), ell.end(), elementLessThan);
                   for (int i = 0; i < ell.size(); ++i) {
                         const Element* e = ell.at(i);
                         e->itemDiscovered = 0;
