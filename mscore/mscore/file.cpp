@@ -689,6 +689,7 @@ void MuseScore::newFile()
                   score->measures()->add(m);
                   }
             m->setTimesig(timesig);
+            m->setLen(timesig);
             if (pickupMeasure) {
                   if (i == 0) {
                         m->setIrregular(true);        // dont count pickup measure
@@ -699,8 +700,6 @@ void MuseScore::newFile()
                         m->setLen(timesig - Fraction(pickupTimesigZ, pickupTimesigN));
                         }
                   }
-            else
-                  m->setLen(timesig);
             if (i == (measures - 1))
                   m->setEndBarLineType(END_BAR, false);
             else
@@ -1627,7 +1626,6 @@ printf("incomplete Slur\n");
                         }
                   }
             }
-      checkScore();
 
       if (_mscVersion < 117) {
             // create excerpts

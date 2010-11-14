@@ -668,7 +668,7 @@ void MeasureView::setElement(Element* e)
       mb.multiMeasure->setValue(m->multiMeasure());
       mb.timesig->setText(m->timesig().print());
       mb.len->setText(m->len().print());
-      mb.tick->setText(QString("%1").arg(m->tick()));
+      mb.tick->setValue(m->tick());
       mb.sel->clear();
       foreach(const Element* e, *m->el()) {
             QTreeWidgetItem* item = new QTreeWidgetItem;
@@ -737,7 +737,7 @@ void SegmentView::setElement(Element* e)
             if ((1 << idx) == st)
                   break;
             }
-      sb.tick->setNum(s->tick());
+      sb.tick->setValue(s->tick());
       sb.segmentType->setCurrentIndex(idx);
       sb.lyrics->clear();
 
