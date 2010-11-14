@@ -1018,8 +1018,10 @@ void Tie::layout()
       //
       // TODO: if there is a startNote but no endNote
       //    show short bow
-      if (startElement() == 0 || endElement() == 0)
+      if (startElement() == 0 || endElement() == 0) {
+            printf("Tie::layout(): no start or end\n");
             return;
+            }
 
       double _spatium = spatium();
 
