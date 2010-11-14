@@ -82,7 +82,26 @@ printf("empty tuplet: removing\n");
 
 void Score::checkScore()
       {
-return;
+      for (Segment* s = firstMeasure()->first(); s;) {
+            Segment* ns = s->next1();
+
+            if (s->subtype() & (SegChordRest | SegGrace)) {
+                  bool empty = true;
+                  foreach(Element* e, s->elist()) {
+                        if (e) {
+                              empty = false;
+                              break;
+                              }
+                        }
+                  if (empty) {
+                        Measure* m = s->measure();
+printf("checkScore: remove empty ChordRest segment\n");
+//                        m->remove(s);
+                        }
+                  }
+            s = ns;
+            }
+#if 0
       checkSlurs();
       checkTuplets();
 
@@ -138,5 +157,6 @@ return;
                         }
                   }
             }
+#endif
       }
 

@@ -1,3 +1,5 @@
+14.nov (ws)
+      - add patch from Miwarre which fixes #7338: wrong naturals in key signatures
 10.nov (ws)
       - fix #7882: Transposing a score shouldn't transpose a drum staff
       - added "instruments-band.xml" from ndwinton

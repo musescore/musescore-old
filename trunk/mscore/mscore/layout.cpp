@@ -820,6 +820,11 @@ void Score::processSystemHeader(Measure* m, bool isFirstSystem)
                   // create missing key signature
                   //
                   KeySig* ks = keySigFactory(keyIdx);
+                  KeySigEvent oKeySigBefore = staff->key(tick-1);
+                  // if signature is not custom or prev. signature has same accid. as
+                  // this one, reset naturals
+                  if (!ks->isCustom() && oKeySigBefore.accidentalType() == ks->keySignature())
+                        ks->setOldSig(0);
                   ks->setTrack(i * VOICES);
                   ks->setGenerated(true);
                   ks->setMag(staff->mag());
