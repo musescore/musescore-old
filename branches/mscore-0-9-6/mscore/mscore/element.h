@@ -564,6 +564,7 @@ class Icon : public Element {
       };
 
 extern void collectElements(void*, Element*);
+extern bool elementLessThan(const Element* const, const Element* const);
 
 #endif
 
