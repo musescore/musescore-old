@@ -714,18 +714,16 @@ void Score::doLayout()
                   if (e && e->isChordRest()) {
                         ChordRest* cr = static_cast<ChordRest*>(e);
                         cr->layoutArticulations();    // DEBUG
-                        if (cr->beam())
-                              continue;
-                        cr->layoutStem();
                         if (cr->type() == CHORD) {
                               Chord* c = static_cast<Chord*>(cr);
+                              if (!c->beam())
+                                    c->layoutStem();
                               c->layoutArpeggio2();
                               foreach(Note* n, c->notes()) {
                                     Tie* tie = n->tieFor();
                                     if (tie)
                                           tie->layout();
                                     }
-                              // c->layoutArticulations();
                               }
                         }
                   else if (e && e->type() == BAR_LINE)
@@ -1621,11 +1619,8 @@ static Note* searchTieNote(Note* note, Segment* segment, int track)
 
 //---------------------------------------------------------
 //   connectTies
+///   Rebuild tie connections.
 //---------------------------------------------------------
-
-/**
- Rebuild tie connections.
-*/
 
 void Score::connectTies()
       {

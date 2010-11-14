@@ -1,4 +1,5 @@
 14.nov (ws)
+      - fix: tie disappeared when first note was beamed
       - add patch from Miwarre which fixes #7338: wrong naturals in key signatures
 10.nov (ws)
       - fix #7882: Transposing a score shouldn't transpose a drum staff
