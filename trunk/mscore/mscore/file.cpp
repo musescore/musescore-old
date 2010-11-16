@@ -303,6 +303,7 @@ bool Score::saveFile(bool autosave)
             info.setFile(fn);
             mscore->updateRecentScores(this);
             setCreated(false);
+            mscore->writeSessionFile(false);
             }
       QString suffix = info.suffix();
       if ((suffix != "mscx") && (suffix != "mscz")) {
@@ -655,7 +656,14 @@ void MuseScore::newFile()
             score->deselectAll();
             for (Segment* s = score->firstMeasure()->first(); s;) {
                   Segment* ns = s->next1();
-                  if (
+                  if (s->subtype() == SegChordRest && s->tick() == 0) {
+                        int tracks = s->elist().size();
+                        for (int track = 0; track < tracks; ++track) {
+                              delete s->element(track);
+                              s->setElement(track, 0);
+                              }
+                        }
+                  else if (
                      (s->subtype() == SegChordRest)
                      || (s->subtype() == SegClef)
                      || (s->subtype() == SegKeySig)

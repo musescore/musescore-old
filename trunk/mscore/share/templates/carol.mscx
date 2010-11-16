@@ -22,10 +22,7 @@
       <systemDistance>9.2</systemDistance>
       <lyricsMinBottomDistance>5</lyricsMinBottomDistance>
       <bracketDistance>0.2</bracketDistance>
-      <pageFillLimit>0.7</pageFillLimit>
-      <smallNoteMag>0.7</smallNoteMag>
-      <graceNoteMag>0.7</graceNoteMag>
-      <smallStaffMag>0.7</smallStaffMag>
+      <pageFillLimit>1.0</pageFillLimit>
       <evenHeader>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }

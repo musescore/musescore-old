@@ -368,13 +368,13 @@ void ScoreView::cmdAddPitch1(int pitch, bool addFlag)
 //   expandVoice
 //---------------------------------------------------------
 
-void Score::expandVoice()
+void Score::expandVoice(Segment* s, int track)
       {
-      Segment* s = _is.segment();
-      int track  = _is.track();
-
-      if (s->element(track))
+      if (s->element(track)) {
+            ChordRest* cr = (ChordRest*)(s->element(track));
+            printf("expand voice: found %s %s\n", cr->name(), qPrintable(cr->duration().print()));
             return;
+            }
 
       Segment* ps;
       for (ps = s; ps; ps = ps->prev(SegChordRest)) {
@@ -399,7 +399,15 @@ void Score::expandVoice()
             f = Fraction::fromTicks(ns->tick() - s->tick());
       else
             f = Fraction::fromTicks(m->ticks() - s->rtick());
+printf("expand voice %s\n", qPrintable(f.print()));
       addRest(_is.segment(), _is.track(), Duration(f), 0);
+      }
+
+void Score::expandVoice()
+      {
+      Segment* s = _is.segment();
+      int track  = _is.track();
+      expandVoice(s, track);
       }
 
 //---------------------------------------------------------
@@ -577,15 +585,18 @@ void Score::setGraceNote(Chord* ch, int pitch, NoteType type, int len)
 //---------------------------------------------------------
 
 Segment* Score::setNoteRest(ChordRest* cr, int track, NoteVal nval, Fraction sd,
-Direction stemDirection)
+   Direction stemDirection)
       {
       int tick      = cr->tick();
       Element* nr   = 0;
       Tie* tie      = 0;
 
-      Segment* seg = 0;
+      Segment* seg     = 0;
       Measure* measure = 0;
       for (;;) {
+            if (track % VOICES)
+                  expandVoice(cr->segment(), track);
+
             // the returned gap ends at the measure boundary or at tuplet end
             Fraction dd = makeGap(cr, sd, cr->tuplet());
 
@@ -700,8 +711,8 @@ Direction stemDirection)
 
 Fraction Score::makeGap(ChordRest* cr, const Fraction& _sd, Tuplet* tuplet)
       {
-// printf("makeGap %d/%d at %d track %d\n", _sd.numerator(), _sd.denominator(), cr->tick(), cr->track());
-      int track = cr->track();
+      int track        = cr->track();
+printf("makeGap %s at %d track %d\n", qPrintable(_sd.print()), cr->tick(), track);
       Measure* measure = cr->measure();
       setLayout(measure);
       Fraction akkumulated;
@@ -716,11 +727,9 @@ Fraction Score::makeGap(ChordRest* cr, const Fraction& _sd, Tuplet* tuplet)
                         }
                   continue;
                   }
-            if (!seg->isChordRest())
-                  continue;
-            if (!seg->element(track))
-                  continue;
             cr = static_cast<ChordRest*>(seg->element(track));
+            if (!cr || !cr->isChordRest())
+                  continue;
             //
             // limit to tuplet level
             //
@@ -740,7 +749,8 @@ Fraction Score::makeGap(ChordRest* cr, const Fraction& _sd, Tuplet* tuplet)
                         }
                   }
             Fraction td(cr->duration());
-printf("remove %s\n", qPrintable(cr->duration().print()));
+printf("remove %s %s at tick %d track %d\n",
+   cr->name(), qPrintable(cr->duration().print()), seg->tick(), track);
 
             Tuplet* ltuplet = cr->tuplet();
             if (cr->tuplet() != tuplet) {
@@ -1376,12 +1386,6 @@ MeasureBase* Score::appendMeasure(ElementType type)
             }
       else if (type == TBOX) {
             undoInsertMeasure(mb);
-            Text* s = new Text(this);
-            s->setTextStyle(TEXT_STYLE_FRAME);
-            s->setSubtype(TEXT_FRAME);
-            s->setParent(mb);
-            s->setStyled(false);
-            undoAddElement(s);
             return mb;
             }
       undoInsertMeasure(mb);
@@ -1522,12 +1526,8 @@ void ScoreView::cmdInsertMeasure(ElementType type)
 	int tick  = _score->selection().startSegment()->tick();
       MeasureBase* mb = insertMeasure(type, tick);
       if (mb->type() == TBOX) {
-            Text* s = new Text(_score);
-            s->setTextStyle(TEXT_STYLE_FRAME);
-            s->setSubtype(TEXT_FRAME);
-            s->setParent(mb);
-            s->setStyled(false);
-            _score->undoAddElement(s);
+            TBox* tbox = static_cast<TBox*>(mb);
+            Text* s = tbox->getText();
             _score->select(s, SELECT_SINGLE, 0);
             _score->endCmd();
             startEdit(s);

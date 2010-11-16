@@ -379,8 +379,10 @@ void ScoreView::lyricsMinus()
       Lyrics* oldLyrics = 0;
       while (segment) {
             const QList<Lyrics*>* nll = segment->lyricsList(staffIdx);
-            if (!nll)
+            if (!nll) {
+                  segment = segment->prev1(SegChordRest | SegGrace);
                   continue;
+                  }
             oldLyrics = nll->value(verse);
             if (oldLyrics)
                   break;

@@ -1732,10 +1732,6 @@ Element* Chord::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Elem
                         }
                   return atr;
                   }
-            case TEMPO_TEXT:
-                  e->setParent(segment());
-                  score()->undoAddElement(e);
-                  break;
             case CHORDLINE:
                   e->setParent(this);
                   score()->undoAddElement(e);

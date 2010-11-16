@@ -1,4 +1,7 @@
+16.nov (ws)
+      - fix crash when trying to enter lyrics on voice 2
 14.nov (ws)
+      - add tempo text template to text palette
       - fix: tie disappeared when first note was beamed
       - add patch from Miwarre which fixes #7338: wrong naturals in key signatures
 10.nov (ws)

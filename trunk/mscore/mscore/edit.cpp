@@ -145,6 +145,7 @@ int Score::pos()
 
 Rest* Score::addRest(int tick, int track, Duration d, Tuplet* tuplet)
       {
+printf("addRest1 %d\n", track);
       Measure* measure = tick2measure(tick);
       Rest* rest       = new Rest(this, d);
       rest->setDuration(d.type() == Duration::V_MEASURE ? measure->len() : d.fraction());
@@ -160,8 +161,9 @@ Rest* Score::addRest(int tick, int track, Duration d, Tuplet* tuplet)
 
 Rest* Score::addRest(Segment* s, int track, Duration d, Tuplet* tuplet)
       {
+printf("addRest2 %d\n", track);
       Rest* rest = new Rest(this, d);
-      rest->setDuration(d.fraction());
+      rest->setDuration(d.type() == Duration::V_MEASURE ? s->measure()->len() : d.fraction());
       rest->setTrack(track);
       rest->setParent(s);
       rest->setTuplet(tuplet);

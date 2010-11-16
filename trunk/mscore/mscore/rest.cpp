@@ -184,6 +184,7 @@ bool Rest::acceptDrop(ScoreView*, const QPointF&, int type, int subtype) const
          || (type == INSTRUMENT_CHANGE)
          || (type == DYNAMIC)
          || (type == HARMONY)
+         || (type == TEMPO_TEXT)
          || (type == STAFF_TEXT)
          ) {
             return true;
