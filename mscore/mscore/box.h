@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2002-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -30,6 +30,7 @@
 
 class BarLine;
 class ScoreView;
+class Text;
 
 //---------------------------------------------------------
 //   Box
@@ -124,13 +125,16 @@ class TBox : public VBox {
       Q_DECLARE_TR_FUNCTIONS(TBox)
 
    public:
-      TBox(Score* score) : VBox(score) {}
+      TBox(Score* score);
       ~TBox() {}
       virtual TBox* clone() const      { return new TBox(*this); }
       virtual ElementType type() const { return TBOX;       }
 
       virtual void layout();
       virtual void add(Element*);
+      Text* getText();
+      virtual bool genPropertyMenu(QMenu*) const;
+      virtual void propertyAction(ScoreView*, const QString&);
       };
 
 //---------------------------------------------------------

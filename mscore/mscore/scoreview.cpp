@@ -2851,6 +2851,8 @@ void ScoreView::cmd(const QAction* a)
 
 void ScoreView::startEdit(Element* e)
       {
+      if (e->type() == TBOX)
+            e = static_cast<TBox*>(e)->getText();
       origEditObject = e;
       sm->postEvent(new CommandEvent("edit"));
       _score->end();

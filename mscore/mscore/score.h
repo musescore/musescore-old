@@ -755,6 +755,7 @@ class Score : public QObject {
       Beam* beam(int id) const;
       void processMidiInput();
       Lyrics* addLyrics();
+      void expandVoice(Segment* s, int track);
       void expandVoice();
       Note* addPitch(int pitch, bool addFlag);
 

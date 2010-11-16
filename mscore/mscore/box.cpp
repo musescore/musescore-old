@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2008 Werner Schweer and others
+//  Copyright (C) 2002-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -183,8 +183,7 @@ void Box::write(Xml& xml) const
 
 void Box::read(QDomElement e)
       {
-//      if (score()->mscVersion() < 119)
-            _leftMargin = _rightMargin = _topMargin = _bottomMargin = 0.0;
+      _leftMargin = _rightMargin = _topMargin = _bottomMargin = 0.0;
 
       double _spatium = spatium();
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
@@ -211,9 +210,16 @@ void Box::read(QDomElement e)
             else if (tag == "bottomMargin")
                   _bottomMargin = val.toDouble();
             else if (tag == "Text") {
-                  Text* t = new Text(score());
-                  t->read(e);
-                  add(t);
+                  Text* t;
+                  if (type() == TBOX) {
+                        t = static_cast<TBox*>(this)->getText();
+                        t->read(e);
+                        }
+                  else {
+                        t = new Text(score());
+                        t->read(e);
+                        add(t);
+                        }
                   }
             else if (tag == "Symbol") {
                   Symbol* s = new Symbol(score());
@@ -579,52 +585,6 @@ void VBox::layout()
       setPos(QPointF());      // !?
       setbbox(QRectF(0.0, 0.0, system()->width(), point(boxHeight())));
       Box::layout();
-      }
-
-//---------------------------------------------------------
-//   layout
-///   The text box layout() adjusts the frame height to text
-///   height.
-//---------------------------------------------------------
-
-void TBox::layout()
-      {
-      setPos(QPointF());      // !?
-      setbbox(QRectF(0.0, 0.0, system()->width(), point(boxHeight())));
-      if (_el.size() == 1) {
-            Text* text = static_cast<Text*>(_el[0]);
-            if (text->type() != TEXT)
-                  return;
-            text->layout();
-            qreal h;
-            if (text->isEmpty()) {
-                  QFontMetricsF fm(text->font());
-                  h = fm.lineSpacing();
-                  }
-            else
-                  h = text->height();
-            setbbox(QRectF(0.0, 0.0, system()->width(), h));
-            }
-      }
-
-//---------------------------------------------------------
-//   add
-///   Add new Element \a e to text box
-//---------------------------------------------------------
-
-void TBox::add(Element* e)
-      {
-      e->setParent(this);
-      if (e->type() == TEXT) {
-            Text* text = static_cast<Text*>(e);
-            text->setLayoutToParentWidth(true);
-            text->setFlag(ELEMENT_MOVABLE, false);
-            }
-      else {
-            printf("TBox::add: element not allowed\n");
-            return;
-            }
-      _el.append(e);
       }
 
 //---------------------------------------------------------

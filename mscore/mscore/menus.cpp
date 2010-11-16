@@ -690,6 +690,15 @@ void MuseScore::populatePalette()
       text->setSystemFlag(true);
       sp->append(text, tr("Lyrics Verse Number"));
 
+      TempoText* tt = new TempoText(gscore);
+      tt->setTrack(0);
+      tt->setTempo(80.0/60.0);
+      int uc = 0x1d15f;
+      QChar h(QChar::highSurrogate(uc));
+      QChar l(QChar::lowSurrogate(uc));
+      tt->setText(QString("%1%2 = 80 ").arg(h).arg(l));
+      sp->append(tt, tr("Tempo Text"));
+
       paletteBox->addPalette(sp);
 
       //-----------------------------------
