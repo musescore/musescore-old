@@ -1,5 +1,7 @@
 19.nov (ws)
-      - fix from Miwarre #7983: any edit to text style set sizeIsSpatiumDependent true
+      - fixes from Miwarre:
+            #7983: any edit to text style set sizeIsSpatiumDependent true
+            #7986: text styles backward compatibility issue
 16.nov (ws)
       - fix crash when trying to enter lyrics on voice 2
 14.nov (ws)

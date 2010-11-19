@@ -1436,6 +1436,11 @@ bool Score::read(QDomElement dScore)
             else if (tag == "TextStyle") {      // obsolete: is now part of style
                   TextStyle s;
                   s.read(ee);
+                  // settings for _reloff::x and _reloff::y in old formats
+                  // is now included in style; setting them to 0 fixes most
+                  // cases of backward compatibility
+                  s.setRxoff(0);
+                  s.setRyoff(0);
                   _style.setTextStyle(s);
                   }
             else if (tag == "page-layout")
