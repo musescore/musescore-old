@@ -185,7 +185,8 @@ void EditStyle::getValues()
       lstyle.set(ST_genCourtesyKeysig,       genCourtesyKeysig->isChecked());
       lstyle.set(ST_genCourtesyClef,         genCourtesyClef->isChecked());
 
-      lstyle.set(ST_chordDescriptionFile,   chordDescriptionFile->text());
+      lstyle.set(ST_useGermanNoteNames,      useGermanNoteNames->isChecked());
+      lstyle.set(ST_chordDescriptionFile,    chordDescriptionFile->text());
 
       lstyle.set(ST_concertPitch,            concertPitch->isChecked());
       lstyle.set(ST_createMultiMeasureRests, multiMeasureRests->isChecked());
