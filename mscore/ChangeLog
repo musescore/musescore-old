@@ -2,6 +2,7 @@
       - fixes from Miwarre:
             #7983: any edit to text style set sizeIsSpatiumDependent true
             #7986: text styles backward compatibility issue
+            #7709: Clutter after end-start repeat sign
 16.nov (ws)
       - fix crash when trying to enter lyrics on voice 2
 14.nov (ws)
