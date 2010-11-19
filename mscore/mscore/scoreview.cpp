@@ -591,10 +591,6 @@ ScoreView::ScoreView(QWidget* parent)
       editObject  = 0;
       addSelect   = false;
 
-
-      if (converterMode)      // HACK
-            return;
-
       //---setup state machine-------------------------------------------------
       sm          = new QStateMachine(this);
       QState* stateActive = new QState();
@@ -604,6 +600,10 @@ ScoreView::ScoreView(QWidget* parent)
             connect(states[i], SIGNAL(entered()), SLOT(enterState()));
             connect(states[i], SIGNAL(exited()), SLOT(exitState()));
             }
+
+      if (converterMode)      // HACK
+            return;
+
       connect(stateActive, SIGNAL(entered()), SLOT(enterState()));
       connect(stateActive, SIGNAL(exited()), SLOT(exitState()));
 

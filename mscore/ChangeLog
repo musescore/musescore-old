@@ -1,4 +1,5 @@
 19.nov (ws)
+      - fix #7835: converter mode crash
       - fixes from Miwarre:
             #7983: any edit to text style set sizeIsSpatiumDependent true
             #7986: text styles backward compatibility issue
