@@ -442,7 +442,6 @@ class MuseScore : public QMainWindow {
       bool processMidiRemote(MidiRemoteType type, int data);
       };
 
-extern QMenu* genCreateMenu(QWidget* parent);
 extern MuseScore* mscore;
 extern QString dataPath;
 
