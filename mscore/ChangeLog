@@ -1,3 +1,7 @@
+19.nov (la)
+      - fix #7017: Chord names does not support "H" name as chord
+14.nov (la)
+      - fix #7249: Notehead should be on top of the staff lines
 13.nov (la)
       - fix #7311: Dragging tied notes and removing tie gives weird result
 11.nov (la)
