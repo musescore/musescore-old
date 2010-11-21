@@ -1,3 +1,7 @@
+21.nov (db)
+      - fix #8005: Dots too close on right side of "end-start repeat" barline
+      - normal five-line staff for Temple blocks
+      - copy edits to Page Settings dialog
 19.nov (ws)
       - fix #7835: converter mode crash
       - fixes from Miwarre:
