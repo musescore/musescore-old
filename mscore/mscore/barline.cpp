@@ -282,7 +282,7 @@ void BarLine::draw(QPainter& p, ScoreView*) const
                   double x1   =  dotw + d1 + lw * .5;                                // thin bar
                   double x2   =  dotw + d1 + lw + d1 + lw2 * .5;                     // thick bar
                   double x3   =  dotw + d1 + lw + d1 + lw2 + d1 + lw * .5;           // thin bar
-                  double x4   =  dotw + d1 + lw + d1 + lw2 + d1 + lw + dotw * .5;    // dots
+                  double x4   =  dotw + d1 + lw + d1 + lw2 + d1 + lw + d1;           // dot position
 
                   if (parent() == 0) {    // for use in palette
                         dotsym.draw(p, mags, .0, 1.5 * ld);

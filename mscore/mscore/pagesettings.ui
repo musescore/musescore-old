@@ -140,7 +140,7 @@
         <item row="2" column="0">
          <widget class="QLabel" name="label_3">
           <property name="text">
-           <string>Height</string>
+           <string>Height:</string>
           </property>
           <property name="textFormat">
            <enum>Qt::PlainText</enum>
@@ -153,7 +153,7 @@
         <item row="1" column="0">
          <widget class="QLabel" name="label_2">
           <property name="text">
-           <string>Width</string>
+           <string>Width:</string>
           </property>
           <property name="textFormat">
            <enum>Qt::PlainText</enum>
@@ -183,8 +183,14 @@
         </property>
         <item>
          <widget class="QLabel" name="label">
+          <property name="toolTip">
+           <string>Distance between two lines on a normal staff</string>
+          </property>
+          <property name="whatsThis">
+           <string>Distance between two lines on a normal staff</string>
+          </property>
           <property name="text">
-           <string>Space</string>
+           <string>Space:</string>
           </property>
           <property name="textFormat">
            <enum>Qt::PlainText</enum>
@@ -227,7 +233,7 @@
        <item>
         <widget class="QLabel" name="label_12">
          <property name="text">
-          <string>First page no.</string>
+          <string>First page no.:</string>
          </property>
          <property name="textFormat">
           <enum>Qt::PlainText</enum>
@@ -350,7 +356,7 @@
         <item row="3" column="0">
          <widget class="QLabel" name="label_7">
           <property name="text">
-           <string>Bottom Margin</string>
+           <string>Bottom margin:</string>
           </property>
           <property name="textFormat">
            <enum>Qt::PlainText</enum>
@@ -363,7 +369,7 @@
         <item row="2" column="0">
          <widget class="QLabel" name="label_6">
           <property name="text">
-           <string>Top Margin</string>
+           <string>Top margin:</string>
           </property>
           <property name="textFormat">
            <enum>Qt::PlainText</enum>
@@ -376,7 +382,7 @@
         <item row="1" column="0">
          <widget class="QLabel" name="label_5">
           <property name="text">
-           <string>Right Margin</string>
+           <string>Right margin:</string>
           </property>
           <property name="textFormat">
            <enum>Qt::PlainText</enum>
@@ -389,7 +395,7 @@
         <item row="0" column="0">
          <widget class="QLabel" name="label_4">
           <property name="text">
-           <string>Left Margin</string>
+           <string>Left margin:</string>
           </property>
           <property name="textFormat">
            <enum>Qt::PlainText</enum>
@@ -469,7 +475,7 @@
         <item row="3" column="0">
          <widget class="QLabel" name="label_11">
           <property name="text">
-           <string>Bottom Margin</string>
+           <string>Bottom margin:</string>
           </property>
           <property name="textFormat">
            <enum>Qt::PlainText</enum>
@@ -482,7 +488,7 @@
         <item row="2" column="0">
          <widget class="QLabel" name="label_10">
           <property name="text">
-           <string>Top Margin</string>
+           <string>Top margin:</string>
           </property>
           <property name="textFormat">
            <enum>Qt::PlainText</enum>
@@ -495,7 +501,7 @@
         <item row="1" column="0">
          <widget class="QLabel" name="label_9">
           <property name="text">
-           <string>Right Margin</string>
+           <string>Right margin:</string>
           </property>
           <property name="textFormat">
            <enum>Qt::PlainText</enum>
@@ -508,7 +514,7 @@
         <item row="0" column="0">
          <widget class="QLabel" name="label_8">
           <property name="text">
-           <string>Left Margin</string>
+           <string>Left margin:</string>
           </property>
           <property name="textFormat">
            <enum>Qt::PlainText</enum>
