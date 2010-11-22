@@ -3506,7 +3506,8 @@ void ExportLy::findLyrics()
 	    continue;
 	  Measure* meas = (Measure*)mb;
 
-	  for(Segment* seg = meas->first(); seg; seg = seg->next())
+        SegmentTypes st = SegChordRest | SegGrace;
+	  for(Segment* seg = meas->first(st); seg; seg = seg->next(st))
 	    {
 	      const QList<Lyrics*>* lyrlist = seg->lyricsList(staffno);
 
@@ -3541,8 +3542,14 @@ void ExportLy::findLyrics()
 			}
 
 		      QString lyriks = (lix)->getText();
+                  // ws: escape '"' character
+                  // (does not work!?)
 
-		      thisLyrics->lyrdat.verselyrics[verse] += lyriks.replace(" ", "_"); //bolton: if two words on one note.
+                  if (lyriks.contains('"'))
+                        lyriks = "\"" + lyriks.replace('"', "\\\"") + "\"";
+
+		      lyriks = lyriks.replace(" ", "_"); //bolton: if two words on one note.
+		      thisLyrics->lyrdat.verselyrics[verse] += lyriks;
 
 		      thisLyrics->lyrdat.staffname =  staffname[staffno].staffid;
 		      thisLyrics->lyrdat.voicename[verse] = staffname[staffno].voicename[vox];

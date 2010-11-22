@@ -69,6 +69,9 @@ void ShortcutCaptureDialog::keyPressEvent(QKeyEvent* e)
             case 1: key = QKeySequence(key[0], k); break;
             case 2: key = QKeySequence(key[0], key[1], k); break;
             case 3: key = QKeySequence(key[0], key[1], key[2], k); break;
+            default:
+                  printf("internal error: bad key count\n");
+                  break;
             }
 
       // Check against conflicting shortcuts

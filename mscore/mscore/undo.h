@@ -75,6 +75,7 @@ class TremoloBar;
 class NoteEvent;
 class SlurSegment;
 class InstrumentChange;
+class Box;
 
 // #define DEBUG_UNDO
 
@@ -1520,6 +1521,25 @@ class ChangeInstrument : public UndoCommand {
       };
 
 extern void updateNoteLines(Segment* segment, int track);
+
+//---------------------------------------------------------
+//   ChangeBoxProperties
+//---------------------------------------------------------
+
+class ChangeBoxProperties : public UndoCommand {
+      Box* _box;
+
+      double      _marginLeft, _marginTop, _marginRight, _marginBottom;
+      double      _height, _width;
+
+      void flip();
+
+   public:
+      ChangeBoxProperties(Box *, double, double, double, double, double, double);
+      virtual void undo() { flip(); }
+      virtual void redo() { flip(); }
+      UNDO_NAME("ChangeBoxProperties");
+      };
 
 #endif
 

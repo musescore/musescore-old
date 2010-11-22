@@ -70,6 +70,7 @@
 #include "excerpt.h"
 #include "tempotext.h"
 #include "instrchange.h"
+#include "box.h"
 
 extern Measure* tick2measure(int tick);
 
@@ -2835,5 +2836,56 @@ void ChangeInstrument::flip()
       instrument = oi;
       }
 
+//---------------------------------------------------------
+//   ChangeBoxProperties
+//---------------------------------------------------------
 
+ChangeBoxProperties::ChangeBoxProperties(Box* box,
+   double marginLeft, double marginTop, double marginRight, double marginBottom,
+   double height, double width)
+      {
+      _box              = box;
+      _marginLeft       = marginLeft;
+      _marginTop        = marginTop;
+      _marginRight      = marginRight;
+      _marginBottom     = marginBottom;
+      _height           = height;
+      _width            = width;
+      }
+
+//---------------------------------------------------------
+//   flip
+//---------------------------------------------------------
+
+void ChangeBoxProperties::flip()
+      {
+      // flip margins
+      double marginLeft       = _box->leftMargin();
+      double marginTop        = _box->topMargin();
+      double marginRight      = _box->rightMargin();
+      double marginBottom     = _box->bottomMargin();
+
+      _box->setLeftMargin  (_marginLeft);
+      _box->setRightMargin (_marginRight);
+      _box->setTopMargin   (_marginTop);
+      _box->setBottomMargin(_marginBottom);
+
+      _marginLeft       = marginLeft;
+      _marginTop        = marginTop;
+      _marginRight      = marginRight;
+      _marginBottom     = marginBottom;
+
+      // according to box type, flip either height or width (or none)
+      double val;
+      if (_box->type() == VBOX) {
+            val = _box->boxHeight().val();
+            _box->setBoxHeight(Spatium(_height));
+            _height = val;
+            }
+      if (_box->type() == HBOX) {
+            val = _box->boxWidth().val();
+            _box->setBoxWidth(Spatium(_width));
+            _width = val;
+            }
+      }
 

@@ -255,43 +255,41 @@ if (NOT MINGW AND NOT APPLE)
       install( FILES packaging/mscore.desktop DESTINATION share/applications)
 endif (NOT MINGW AND NOT APPLE)
 
-set (subdirs al awl bww2mxml osdabzip rtf2html mscore share manual demos
+subdirs(al awl bww2mxml osdabzip rtf2html mscore share manual demos
       fluid msynth diff mstyle)
 
 if (BUILD_SCRIPTGEN)
-      set (subdirs ${subdirs} scriptgen)
+      subdirs (scriptgen)
 endif (BUILD_SCRIPTGEN)
 
 if(USE_SYSTEM_QTSINGLEAPPLICATION)
       find_path(QTSINGLEAPPLICATION_INCLUDE_DIRS qtsingleapplication.h PATH_SUFFIXES QtSolutions)
       find_library(QTSINGLEAPPLICATION_LIBRARIES QtSolutions_SingleApplication-2.6)
 else(USE_SYSTEM_QTSINGLEAPPLICATION)
-      set (subdirs ${subdirs} singleapp)
+      subdirs (singleapp)
       set(QTSINGLEAPPLICATION_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/singleapp/src)
       set(QTSINGLEAPPLICATION_LIBRARIES qtsingleapp)
 endif(USE_SYSTEM_QTSINGLEAPPLICATION)
 
 if (MINGW OR APPLE)
-      set (subdirs ${subdirs} portmidi)
+      subdirs (portmidi)
 endif (MINGW OR APPLE)
 
 if (SF_COMPRESSOR)
-      set (subdirs ${subdirs} sfont)
+      subdirs (sfont)
 endif (SF_COMPRESSOR)
 
 if (AEOLUS)
-      set (subdirs ${subdirs} aeolus)
+      subdirs (aeolus)
 endif (AEOLUS)
 
 if (OMR)
-      set (subdirs ${subdirs} poppler omr)
+      subdirs (poppler omr)
 endif (OMR)
 
 if (OSC)
-      set (subdirs ${subdirs} ofqf)
+      subdirs (ofqf)
 endif (OSC)
-
-subdirs(${subdirs})
 
 include_directories(
    ${PROJECT_SOURCE_DIR}
@@ -335,7 +333,7 @@ include (InstallRequiredSystemLibraries)
       SET(CPACK_NSIS_DISPLAY_NAME "MuseScore ${Mscore_VERSION_MAJOR}.${Mscore_VERSION_MINOR}.${Mscore_VERSION_PATCH} MuseScore score typesetter")
       SET(CPACK_NSIS_HELP_LINK "http://www.musescore.org/")
       SET(CPACK_NSIS_URL_INFO_ABOUT "http://www.musescore.org/")
-      SET(CPACK_NSIS_CONTACT "ws@seh.de")
+      SET(CPACK_NSIS_CONTACT "ws@wschweer.de")
       SET(CPACK_NSIS_MODIFY_PATH OFF)
       SET(CPACK_STRIP_FILES "mscore.exe")
 
@@ -378,7 +376,7 @@ include (InstallRequiredSystemLibraries)
   set(CPACK_DEBIAN_PACKAGE_RECOMMENDS   "")
   set(CPACK_DEBIAN_PACKAGE_SUGGESTS     "")
 
-  set(CPACK_PACKAGE_CONTACT       "ws@seh.de")
+  set(CPACK_PACKAGE_CONTACT       "ws@schweer.de")
 
 if (MINGW)
   set(CPACK_GENERATOR             "NSIS")

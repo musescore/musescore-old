@@ -37,7 +37,7 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Show local handbook")        // Appears if you use Help > What's This?
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
+         STATE_DISABLED | STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "file-open",
          QT_TRANSLATE_NOOP("action","File open"),
          QKeySequence::Open,
@@ -94,7 +94,7 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Close current score")
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
+         STATE_DISABLED | STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "file-new",
          QT_TRANSLATE_NOOP("action","file new"),
          Qt::CTRL+Qt::Key_N,
@@ -1607,7 +1607,7 @@ Shortcut MuseScore::sc[] = {
          ),
 
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
+         STATE_DISABLED | STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "quit",
          QT_TRANSLATE_NOOP("action","Quit"),
          Qt::CTRL + Qt::Key_Q,
