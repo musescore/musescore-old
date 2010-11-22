@@ -402,13 +402,9 @@ Element* Box::drop(ScoreView*, const QPointF&, const QPointF&, Element* e)
 bool HBox::genPropertyMenu(QMenu* popup) const
       {
       QMenu* textMenu = popup->addMenu(tr("Add"));
-      QAction* a = getAction("frame-text");
-      textMenu->addAction(a);
-      a = getAction("picture");
-      textMenu->addAction(a);
-
-      a = popup->addAction(tr("Frame Properties..."));
-      a->setData("props");
+      textMenu->addAction(getAction("frame-text"));
+      textMenu->addAction(getAction("picture"));
+      popup->addAction(tr("Frame Properties..."))->setData("props");
       return true;
       }
 
@@ -476,36 +472,14 @@ bool HBox::isMovable() const
 bool VBox::genPropertyMenu(QMenu* popup) const
       {
       QMenu* textMenu = popup->addMenu(tr("Add"));
-
-      QAction* a = getAction("frame-text");
-      a->blockSignals(true);
-      textMenu->addAction(a);
-
-      a = getAction("title-text");
-      a->blockSignals(true);
-      textMenu->addAction(a);
-
-      a = getAction("subtitle-text");
-      a->blockSignals(true);
-      textMenu->addAction(a);
-
-      a = getAction("composer-text");
-      a->blockSignals(true);
-      textMenu->addAction(a);
-
-      a = getAction("poet-text");
-      a->blockSignals(true);
-      textMenu->addAction(a);
-
-      a = getAction("insert-hbox");
-      a->blockSignals(true);
-      textMenu->addAction(a);
-
-      a = getAction("picture");
-      textMenu->addAction(a);
-
-      a = popup->addAction(tr("Frame Properties..."));
-      a->setData("props");
+      textMenu->addAction(getAction("frame-text"));
+      textMenu->addAction(getAction("title-text"));
+      textMenu->addAction(getAction("subtitle-text"));
+      textMenu->addAction(getAction("composer-text"));
+      textMenu->addAction(getAction("poet-text"));
+      textMenu->addAction(getAction("insert-hbox"));
+      textMenu->addAction(getAction("picture"));
+      popup->addAction(tr("Frame Properties..."))->setData("props");
       return true;
       }
 

@@ -2406,13 +2406,14 @@ void MuseScore::changeState(ScoreState val)
                   // s->action->setEnabled(driver && driver->getSynth());
                   s->action->setEnabled(driver);
                   }
-            else
-                  s->action->setEnabled(s->state & val);
-            if (val == STATE_DISABLED) {
-                  const char* names[] = { "file-open", "file-new", "quit", 0 };
-                  for (const char** p = names; *p; ++p) {
-                        if (strcmp(*p, s->xml) == 0)
-                              s->action->setEnabled(true);
+            else {
+                  bool enable = s->state & val;
+                  s->action->setEnabled(enable);
+                  if (debugMode) {
+                        if (enable)
+                              printf("MuseScore::enable: %s\n", s->xml);
+                        else
+                              printf("MuseScore::disable: %s\n", s->xml);
                         }
                   }
             }

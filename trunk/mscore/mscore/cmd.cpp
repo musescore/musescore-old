@@ -356,7 +356,7 @@ void ScoreView::cmdAddPitch1(int pitch, bool addFlag)
             _score->undoChangePitch(note, pitch, newTpc, note->line(), note->fret(), note->string());
             }
       else {
-            const InputState& is = _score->inputState();
+//            const InputState& is = _score->inputState();
             Note* note = _score->addPitch(pitch, addFlag);
             if (note)
                   adjustCanvasPosition(note, false);
@@ -1487,6 +1487,7 @@ void Score::appendMeasures(int n, ElementType type)
 
 void ScoreView::cmdInsertMeasures(int n, ElementType type)
       {
+printf("cmdInsertMeasures %d\n", n);
       _score->startCmd();
       insertMeasures(n, type);
       _score->endCmd();
@@ -1504,7 +1505,7 @@ void ScoreView::insertMeasures(int n, ElementType type)
 			"please select a measure and try again"));
 		return;
             }
-	int tick  = _score->selection().startSegment()->tick();
+	int tick  = _score->selection().startSegment()->measure()->tick();
 	for (int i = 0; i < n; ++i)
             insertMeasure(type, tick);
       _score->select(0, SELECT_SINGLE, 0);
@@ -1631,8 +1632,10 @@ MeasureBase* ScoreView::insertMeasure(ElementType type, int tick)
                   _score->undoAddElement(nks);
                   }
             }
-      else
+      else {
+printf("insert measure\n");
             _score->undoInsertMeasure(mb);
+            }
       return mb;
       }
 

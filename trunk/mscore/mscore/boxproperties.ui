@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>508</width>
-    <height>210</height>
+    <width>433</width>
+    <height>197</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -56,6 +56,12 @@
             </property>
             <property name="text">
              <string>left:</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+            <property name="margin">
+             <number>5</number>
             </property>
            </widget>
           </item>
@@ -118,6 +124,12 @@
             <property name="text">
              <string>right:</string>
             </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+            <property name="margin">
+             <number>5</number>
+            </property>
            </widget>
           </item>
           <item row="1" column="1">
@@ -147,6 +159,12 @@
             <property name="text">
              <string>bottom:</string>
             </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+            <property name="margin">
+             <number>5</number>
+            </property>
            </widget>
           </item>
           <item row="1" column="0">
@@ -160,23 +178,90 @@
             <property name="text">
              <string>top:</string>
             </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+            <property name="margin">
+             <number>5</number>
+            </property>
            </widget>
-          </item>
-          <item row="2" column="1">
-           <spacer name="verticalSpacer">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>40</height>
-             </size>
-            </property>
-           </spacer>
           </item>
          </layout>
         </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_2">
+         <property name="title">
+          <string>Size</string>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <widget class="QLabel" name="labelWidth">
+            <property name="text">
+             <string>width:</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+            <property name="margin">
+             <number>5</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QDoubleSpinBox" name="frameWidth">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="suffix">
+             <string>sp</string>
+            </property>
+            <property name="maximum">
+             <double>999.000000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="labelHeight">
+            <property name="text">
+             <string>height:</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+            <property name="margin">
+             <number>5</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QDoubleSpinBox" name="frameHeight">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="suffix">
+             <string>sp</string>
+            </property>
+            <property name="maximum">
+             <double>999.000000000000000</double>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
        </item>
        <item>
         <widget class="QDialogButtonBox" name="dialogButtonBox">
@@ -194,6 +279,15 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>leftMargin</tabstop>
+  <tabstop>topMargin</tabstop>
+  <tabstop>rightMargin</tabstop>
+  <tabstop>bottomMargin</tabstop>
+  <tabstop>frameWidth</tabstop>
+  <tabstop>frameHeight</tabstop>
+  <tabstop>dialogButtonBox</tabstop>
+ </tabstops>
  <resources>
   <include location="mscore.qrc"/>
  </resources>
