@@ -1092,8 +1092,15 @@ SeqMsgFifo::SeqMsgFifo()
 
 void SeqMsgFifo::enqueue(const SeqMsg& msg)
       {
-      if (isFull()) {
+      int i = 0;
+      for (; i < 5; ++i) {
+            if (!isFull())
+                  break;
             printf("SeqMsgFifo: overflow\n");
+            sleep(1);
+            }
+      if (i == 5) {
+            printf("===SeqMsgFifo: overflow\n");
             return;
             }
       messages[widx] = msg;
