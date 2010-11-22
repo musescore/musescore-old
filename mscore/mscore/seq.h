@@ -54,7 +54,7 @@ struct SeqMsg {
 //   SeqMsgFifo
 //---------------------------------------------------------
 
-static const int SEQ_MSG_FIFO_SIZE = 256;
+static const int SEQ_MSG_FIFO_SIZE = 512;
 
 class SeqMsgFifo : public FifoBase {
       SeqMsg messages[SEQ_MSG_FIFO_SIZE];
