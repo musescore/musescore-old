@@ -1,4 +1,5 @@
 22.nov (ws)
+      - better single note tremolo layout (beamed chords)
       - added patch from Miwarre to extend frame properties
 21.nov (db)
       - fix #8005: Dots too close on right side of "end-start repeat" barline

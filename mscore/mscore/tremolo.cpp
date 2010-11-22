@@ -105,7 +105,7 @@ void Tremolo::layout()
       Stem* stem    = _chord1->stem();
       qreal x;
       if (stem) {
-            x = stem->pos().x();
+            x  = stem->pos().x();
             y  = stem->pos().y();
             h  = stem->stemLen();
             }
@@ -117,14 +117,28 @@ void Tremolo::layout()
             if (anchor1->line() > 4)
                   h *= -1;
             }
-      y += (h - bbox().height()) * .5;
       if (!twoNotes()) {
-            if (_chord1->hook())
+            if (_chord1->hook()) {
+                  y += (h - bbox().height()) * .5;
                   y -= spatium() * .5 * (_chord1->up() ? -1.0 : 1.0);
+                  }
+            else {
+                  bool up = _chord1->up();
+                  double d = _chord1->downNote()->y() - _chord1->upNote()->y();
+                  if (_chord1->beam()) {
+                        double bd  = score()->styleD(ST_beamDistance);
+                        double bw = score()->styleS(ST_beamWidth).val() * sp;
+                        int n = _chord1->durationType().hooks();
+                        double beamHeight = bw * n + bw * bd * (n-1);
+                        h -= beamHeight;
+                        }
+                  y = stem->pos().y() + d + (h-d) * (up ? -.5 : .5);
+                  }
             setPos(x, y);
             _chord1->setTremoloChordType(TremoloSingle);
             return;
             }
+      y += (h - bbox().height()) * .5;
       //
       // two chord tremolo
       //
