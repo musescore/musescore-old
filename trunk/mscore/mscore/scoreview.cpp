@@ -194,6 +194,7 @@ class SeekTransition : public QMouseEventTransition
             }
       virtual void onTransition(QEvent*) {
             seq->seek(cr->tick());
+            canvas->setCursorVisible(true);
             }
    public:
       SeekTransition(ScoreView* c, QState* target)
@@ -3965,4 +3966,12 @@ void ScoreView::changeEditElement(Element* e)
       startEdit(e, grip);
       }
 
+//---------------------------------------------------------
+//   setCursorVisible
+//---------------------------------------------------------
+
+void ScoreView::setCursorVisible(bool v)
+      {
+      _cursor->setVisible(v);
+      }
 
