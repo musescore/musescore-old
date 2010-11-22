@@ -364,6 +364,7 @@ class ScoreView : public QWidget {
       void cmdInsertMeasures(int, ElementType);
 
       ScoreState mscoreState() const;
+      void setCursorVisible(bool v);
       };
 
 //---------------------------------------------------------
