@@ -825,10 +825,14 @@ void ScoreView::setScore(Score* s)
             _cursor->setScore(_score);
             shadowNote->setScore(_score);
             }
+      cursorSegment = 0;
+      cursorTrack   = -2;
+
       lasso->setScore(s);
       _foto->setScore(s);
       connect(s, SIGNAL(updateAll()),                SLOT(updateAll()));
       connect(s, SIGNAL(dataChanged(const QRectF&)), SLOT(dataChanged(const QRectF&)));
+      connect(s, SIGNAL(inputCursorChanged()),       SLOT(moveCursor()));
       }
 
 //---------------------------------------------------------
@@ -1107,8 +1111,6 @@ void ScoreView::setForeground(const QColor& color)
 
 void ScoreView::dataChanged(const QRectF& r)
       {
-      if (noteEntryMode())
-            moveCursor();
       update(_matrix.mapRect(r).toRect());  // generate paint event
       }
 
@@ -1118,8 +1120,6 @@ void ScoreView::dataChanged(const QRectF& r)
 
 void ScoreView::updateAll()
       {
-      if (noteEntryMode())
-            moveCursor();
       update();
       }
 
@@ -1233,7 +1233,11 @@ void ScoreView::moveCursor()
 
 void ScoreView::moveCursor(Segment* segment, int track)
       {
-//     printf("moveCursor %d\n", segment->tick());
+      if (cursorSegment == segment && cursorTrack == track)
+            return;
+      cursorTrack = track;
+      cursorSegment = segment;
+
       int staffIdx = (track == -1) ? -1 : (track / VOICES);
 
       System* system = segment->measure()->system();
@@ -1292,6 +1296,8 @@ void ScoreView::setCursorOn(bool val)
       {
       if (_cursor && (_cursor->visible() != val)) {
             _cursor->setVisible(val);
+            cursorSegment = 0;
+            cursorTrack   = -1;
             update(_matrix.mapRect(_cursor->abbox()).toRect().adjusted(-1,-1,2,2));
             }
       }

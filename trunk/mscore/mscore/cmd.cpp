@@ -177,6 +177,8 @@ void Score::end1()
       startLayout = 0;
       if (!noteEntryMode())
             setPadState();
+      else
+            emit inputCursorChanged();
       }
 
 //---------------------------------------------------------
