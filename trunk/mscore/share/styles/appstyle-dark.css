@@ -1,9 +1,5 @@
 * {
       font-size: 10pt; font-family: "freeSans";
-/*      background: #525252;
-      alternate-background-color: #626262;
-      color: white
-      */
       }
 *:disabled {
       color: gray
