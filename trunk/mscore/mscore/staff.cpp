@@ -342,59 +342,6 @@ void Staff::changeKeySig(int tick, KeySigEvent st)
 #endif
 
 //---------------------------------------------------------
-//   changeClef
-//---------------------------------------------------------
-
-void Staff::changeClef(int tick, ClefType st)
-      {
-      QList<Staff*> staffList;
-      Staff* ostaff = this;
-      LinkedStaves* linkedStaves = ostaff->linkedStaves();
-      if (linkedStaves)
-            staffList = linkedStaves->staves();
-      else
-            staffList.append(ostaff);
-      foreach(Staff* staff, staffList) {
-            Score* score = staff->score();
-            if (staff->staffType()->group() != clefTable[st].staffGroup) {
-                  printf("Staff::changeClef(%d): invalid staff group, src %d, dst %d\n",
-                     st, clefTable[st].staffGroup, staff->staffType()->group());
-                  continue;
-                  }
-            else
-                  printf("Staff::changeClef\n");
-            Measure* measure = score->tick2measure(tick);
-            if (!measure) {
-                  printf("measure for tick %d not found!\n", tick);
-                  continue;
-                  }
-            if (measure->tick() == tick) {
-                  if (measure->prevMeasure())
-                        measure = measure->prevMeasure();
-                  }
-            Segment* segment = measure->findSegment(SegClef, tick);
-            if (!segment) {
-                  segment = new Segment(measure, SegClef, tick);
-                  score->undoAddElement(segment);
-                  }
-            int track  = staff->idx() * VOICES;
-            Clef* clef = static_cast<Clef*>(segment->element(track));
-
-            if (clef) {
-                  score->undoChangeSubtype(clef, st);
-                  }
-            else {
-                  Clef* nclef = new Clef(score);
-                  nclef->setTrack(track);
-                  nclef->setClefType(st);
-                  nclef->setParent(segment);
-                  score->undo()->push(new AddElement(nclef));
-                  }
-            }
-      score()->setLayoutAll(true);
-      }
-
-//---------------------------------------------------------
 //   height
 //---------------------------------------------------------
 
@@ -436,6 +383,15 @@ void Staff::setKey(int tick, int st)
 void Staff::setKey(int tick, const KeySigEvent& st)
       {
       (*_keymap)[tick] = st;
+      }
+
+//---------------------------------------------------------
+//   removeKey
+//---------------------------------------------------------
+
+void Staff::removeKey(int tick)
+      {
+      _keymap->erase(tick);
       }
 
 //---------------------------------------------------------

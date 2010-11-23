@@ -1507,9 +1507,10 @@ void Chord::layout()
 
       rrr += _extraTrailingSpace.val() * _spatium;
 
-      if (up() && _hook) {
+      if (_hook) {
             _hook->layout();
-            rrr += _hook->width();
+            if (up())
+                  rrr += _hook->width();
             }
       lll += _extraLeadingSpace.val() * _spatium;
 

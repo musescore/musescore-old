@@ -646,4 +646,16 @@ const QList<Lyrics*>* Segment::lyricsList(int staffIdx) const
       return 0;
       }
 
+//---------------------------------------------------------
+//   swapElements
+//---------------------------------------------------------
+
+void Segment::swapElements(int i1, int i2)
+      {
+      _elist.swap(i1, i2);
+      if (_elist[i1])
+            _elist[i1]->setTrack(i1);
+      if (_elist[i2])
+            _elist[i2]->setTrack(i2);
+      }
 

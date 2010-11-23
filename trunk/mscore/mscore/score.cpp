@@ -1886,7 +1886,12 @@ void Score::addElement(Element* element)
                   }
                   break;
             case KEYSIG:
-                  element->staff()->setUpdateKeymap(true);
+                  {
+                  KeySig* ks = static_cast<KeySig*>(element);
+                  Staff*  staff = element->staff();
+                  KeySigEvent keySigEvent = ks->keySigEvent();
+                  staff->setKey(ks->segment()->tick(), keySigEvent);
+                  }
                   break;
             case TEMPO_TEXT:
                   {
@@ -1990,7 +1995,12 @@ void Score::removeElement(Element* element)
                   }
                   break;
             case KEYSIG:
-                  element->staff()->setUpdateKeymap(true);
+                  {
+                  KeySig* ks    = static_cast<KeySig*>(element);
+                  Staff*  staff = element->staff();
+                  staff->removeKey(ks->segment()->tick());
+                  }
+//                  element->staff()->setUpdateKeymap(true);
                   break;
             case TEMPO_TEXT:
                   {
@@ -2348,6 +2358,7 @@ void Score::updateNotes()
 
 void Score::cmdUpdateNotes()
       {
+printf("cmdUpdateNotes\n");
       for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
             for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx)
                   updateAccidentals(m, staffIdx);

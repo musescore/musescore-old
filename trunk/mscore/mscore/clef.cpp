@@ -330,7 +330,7 @@ Element* Clef::drop(ScoreView*, const QPointF&, const QPointF&, Element* e)
       if (e->type() == CLEF) {
             int stype  = e->subtype();
             if (subtype() != stype) {
-                  staff()->changeClef(segment()->tick(), ClefType(stype));
+                  score()->undoChangeClef(staff(), segment()->tick(), ClefType(stype));
                   clef = this;
                   }
             }
