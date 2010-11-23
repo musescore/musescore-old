@@ -379,6 +379,7 @@ class Score : public QObject {
       void updateAll();
       void dataChanged(const QRectF&);
       void layoutChanged();
+      void inputCursorChanged();
 
    public slots:
       void setClean(bool val);

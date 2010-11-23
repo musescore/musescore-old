@@ -146,6 +146,8 @@ class ScoreView : public QWidget {
 
       //--input state:
       Cursor* _cursor;
+      Segment* cursorSegment;
+      int cursorTrack;
       ShadowNote* shadowNote;
 
       Lasso* lasso;           ///< temporarily drawn lasso selection
