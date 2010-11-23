@@ -1,4 +1,6 @@
 22.nov (ws)
+      - fix update of note accidentals after inserting/deleting key signature
+      - fixes for exchangeVoice()
       - fix: missing bbox calculation for hook on stem down chord
       - enable playback cursor again after seek in play mode
       - fix #7944: missing instrument initialization; instruments limit?
