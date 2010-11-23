@@ -130,12 +130,12 @@ class Staff {
 
       KeyList* keymap() const        { return _keymap;      }
       ClefList* clefList() const     { return _clefList;    }
-      void changeClef(int tick, ClefType);
       ClefType clef(int tick) const;
       void setClef(int tick, ClefType clef);
       KeySigEvent key(int tick) const;
       void setKey(int tick, int st);
       void setKey(int tick, const KeySigEvent& st);
+      void removeKey(int tick);
 
       bool show() const              { return _show;        }
       bool slashStyle() const;

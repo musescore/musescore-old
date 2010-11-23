@@ -1,4 +1,5 @@
 22.nov (ws)
+      - fix: missing bbox calculation for hook on stem down chord
       - enable playback cursor again after seek in play mode
       - fix #7944: missing instrument initialization; instruments limit?
       - better single note tremolo layout (beamed chords)

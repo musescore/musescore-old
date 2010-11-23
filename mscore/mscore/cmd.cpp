@@ -1913,8 +1913,7 @@ void Score::cmdInsertClef(ClefType type)
       {
       if (!noteEntryMode())
             return;
-      int tick = inputPos();
-      staff(inputTrack()/VOICES)->changeClef(tick, type);
+      undoChangeClef(staff(inputTrack()/VOICES), inputPos(), type);
       }
 
 //---------------------------------------------------------

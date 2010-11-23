@@ -115,14 +115,6 @@ void BSymbol::layout()
       {
       foreach(Element* e, _leafs)
             e->layout();
-#if 0
-      if (parent() && (parent()->type() == SEGMENT)) {
-            Segment* s = static_cast<Segment*>(parent());
-            double y = s ? s->measure()->system()->staff(track() / VOICES)->y() : 0.0;
-            double x = s ? s->pos().x() : 0.0;
-            setPos(ipos() + QPointF(x, y));
-            }
-#endif
       }
 
 //---------------------------------------------------------
@@ -191,7 +183,6 @@ void Symbol::layout()
             e->layout();
       ElementLayout::layout(this);
       BSymbol::layout();
-//      setPos(QPointF());
       _bbox = symbols[score()->symIdx()][_sym].bbox(magS());
       }
 
