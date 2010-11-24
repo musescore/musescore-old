@@ -3542,11 +3542,10 @@ void ExportLy::findLyrics()
 			}
 
 		      QString lyriks = (lix)->getText();
-                  // ws: escape '"' character
-                  // (does not work!?)
-
-                  if (lyriks.contains('"'))
-                        lyriks = "\"" + lyriks.replace('"', "\\\"") + "\"";
+          
+          //  escape '"' character
+          if (lyriks.contains('"'))
+                 lyriks = "\"" + lyriks.replace("\"","\\\"") + "\"";
 
 		      lyriks = lyriks.replace(" ", "_"); //bolton: if two words on one note.
 		      thisLyrics->lyrdat.verselyrics[verse] += lyriks;
