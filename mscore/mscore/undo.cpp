@@ -512,9 +512,33 @@ void Score::undoTransposeHarmony(Harmony* h, int rootTpc, int baseTpc)
 //   undoExchangeVoice
 //---------------------------------------------------------
 
-void Score::undoExchangeVoice(Measure* measure, int val1, int val2, int staff1, int staff2)
+void Score::undoExchangeVoice(Measure* measure, int v1, int v2, int staff1, int staff2)
       {
-      _undo->push(new ExchangeVoice(measure, val1, val2, staff1, staff2));
+      undo()->push(new ExchangeVoice(measure, v1, v2, staff1, staff2));
+      if (v1 == 0 || v2 == 0) {
+            for (int staffIdx = staff1; staffIdx < staff2; ++staffIdx) {
+                  // check for complete timeline of voice 0
+                  int ctick  = measure->tick();
+                  int track = staffIdx * VOICES;
+                  for (Segment* s = measure->first(SegChordRest); s; s = s->next(SegChordRest)) {
+                        ChordRest* cr = static_cast<ChordRest*>(s->element(track));
+                        if (cr == 0)
+                              continue;
+                        if (ctick < s->tick()) {
+                              // fill gap
+                              int ticks = s->tick() - ctick;
+                              setRest(ctick, track, Fraction::fromTicks(ticks), false, 0);
+                              }
+                        ctick = s->tick() + cr->ticks();
+                        }
+                  int etick = measure->tick() + measure->tickLen();
+                  if (ctick < etick) {
+                        // fill gap
+                        int ticks = etick - ctick;
+                        setRest(ctick, track, Fraction::fromTicks(ticks), false, 0);
+                        }
+                  }
+            }
       }
 
 //---------------------------------------------------------
