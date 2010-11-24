@@ -3527,7 +3527,9 @@ void ExportLy::findLyrics()
 			}
 
 		      QString lyriks = (*lix)->getText();
-
+          if (lyriks.contains('"'))
+                lyriks = "\"" + lyriks.replace("\"","\\\"") + "\"";
+          
 		      thisLyrics->lyrdat.verselyrics[verse] += lyriks.replace(" ", "_"); //bolton: if two words on one note.
 
 		      thisLyrics->lyrdat.staffname =  staffname[staffno].staffid;

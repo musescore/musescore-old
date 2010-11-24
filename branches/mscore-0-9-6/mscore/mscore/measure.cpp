@@ -2714,52 +2714,11 @@ void Measure::sortStaves(QList<int>& dst)
 
 void Measure::exchangeVoice(int v1, int v2, int staffIdx1, int staffIdx2)
       {
-      for (Segment* s = first(); s; s = s->next()) {
-            if (s->subtype() != SegChordRest)
-                  continue;
-            for (int staffIdx = staffIdx1; staffIdx < staffIdx2; ++ staffIdx) {
+      for (int staffIdx = staffIdx1; staffIdx < staffIdx2; ++ staffIdx) {
+            for (Segment* s = first(SegChordRest); s; s = s->next(SegChordRest)) {
                   int strack = staffIdx * VOICES + v1;
                   int dtrack = staffIdx * VOICES + v2;
-                  if (s->element(strack) && s->element(dtrack)) {
-                        Element* e = s->element(strack);
-                        e->setTrack(dtrack);
-                        s->element(dtrack)->setTrack(strack);
-                        s->setElement(strack, s->element(dtrack));
-                        s->setElement(dtrack, e);
-                        }
-                  else if (s->element(strack) && !s->element(dtrack)) {
-                        s->setElement(dtrack, s->element(strack));
-                        s->element(dtrack)->setTrack(dtrack);
-                        if(v1 != 0)
-                              s->setElement(strack, 0);
-                        else {
-                              ChordRest* cr = static_cast<ChordRest*>(s->element(strack));
-                              Rest* r = new Rest(score(), s->tick(), cr->duration());
-                              r->setTrack(strack);
-                              s->setElement(strack, r);
-                              }
-                        }
-                  else if (!s->element(strack) && s->element(dtrack)) {
-                        s->setElement(strack, s->element(dtrack));
-                        s->element(strack)->setTrack(strack);
-                        if(v2 != 0)
-                              s->setElement(dtrack, 0);
-                        else {
-                              ChordRest* cr = static_cast<ChordRest*>(s->element(dtrack));
-                              Rest* r = new Rest(score(), s->tick(), cr->duration());
-                              r->setTrack(dtrack);
-                              s->setElement(dtrack, r);
-                              }
-                        }
-                  LyricsList* ll = s->lyricsList(staffIdx);
-                  foreach(Lyrics* l, *ll) {
-                        if (l == 0)
-                              continue;
-                        if (l->voice() == v1)
-                              l->setVoice(v2);
-                        else if (l->voice() == v2)
-                              l->setVoice(v1);
-                        }
+                  s->swapElements(strack, dtrack);
                   }
             }
       }

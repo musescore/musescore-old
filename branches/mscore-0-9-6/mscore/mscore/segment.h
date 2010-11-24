@@ -127,6 +127,7 @@ class Segment : public Element {
 
       virtual void add(Element*);
       virtual void remove(Element*);
+      void swapElements(int i1, int i2);
 
       void sortStaves(QList<int>& dst);
       const char* subTypeName() const;

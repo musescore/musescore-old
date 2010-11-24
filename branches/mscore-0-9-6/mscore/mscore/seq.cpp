@@ -1103,8 +1103,21 @@ SeqMsgFifo::SeqMsgFifo()
 
 void SeqMsgFifo::enqueue(const SeqMsg& msg)
       {
-      if (isFull()) {
-            printf("SeqMsgFifo: overflow\n");
+      int i = 0;
+#ifdef __MINGW32__
+      int n = 500000;
+#else
+      int n = 50;
+#endif
+      for (; i < n; ++i) {
+            if (!isFull())
+                  break;
+#ifndef __MINGW32__
+            usleep(100000);
+#endif
+            }
+      if (i == n) {
+            printf("===SeqMsgFifo: overflow\n");
             return;
             }
       messages[widx] = msg;
