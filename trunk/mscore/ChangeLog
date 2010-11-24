@@ -1,3 +1,7 @@
+24.nov (la)
+      - fix #8018: Lilypond: Quote marks in lyrics need to be escaped
+       (ws)
+      - fix #7892: Exchange voices adds extra rests
 22.nov (ws)
       - fix update of note accidentals after inserting/deleting key signature
       - fixes for exchangeVoice()
