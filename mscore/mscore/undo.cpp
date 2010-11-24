@@ -727,6 +727,12 @@ void Score::undoExchangeVoice(Measure* measure, int v1, int v2, int staff1, int 
                               }
                         ctick = s->tick() + cr->ticks();
                         }
+                  int etick = measure->tick() + measure->ticks();
+                  if (ctick < etick) {
+                        // fill gap
+                        int ticks = etick - ctick;
+                        setRest(ctick, track, Fraction::fromTicks(ticks), false, 0);
+                        }
                   }
             }
       }
