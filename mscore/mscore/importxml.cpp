@@ -1697,7 +1697,8 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   s->setUserOff(QPointF(rx, ry));
                   s->setMxmlOff(offset);
                   s->setTrack((staff + rstaff) * VOICES);
-                  measure->add(s);
+                  Segment* seg = measure->getSegment(SegChordRest, tick);
+                  seg->add(s);
                   }
             }
       else if (dirType == "dynamics") {
@@ -3082,12 +3083,9 @@ void MusicXml::addWedge(int no, int startTick, qreal rx, qreal ry, bool above, b
  Called when the wedge stop is read. Wedge stop tick was unknown until this time.
  */
 
-void MusicXml::genWedge(int no, int /*endTick*/, Measure* /*measure*/, int staff)
+void MusicXml::genWedge(int no, int endTick, Measure* measure, int staff)
       {
       Hairpin* hp = new Hairpin(score);
-
-//TODO-WS      hp->setTick(wedgeList[no].startTick);
-//TODO-WS      hp->setTick2(endTick);
       hp->setSubtype(wedgeList[no].subType);
       if (wedgeList[no].hasYoffset)
             hp->setYoff(wedgeList[no].yoffset);
@@ -3095,9 +3093,13 @@ void MusicXml::genWedge(int no, int /*endTick*/, Measure* /*measure*/, int staff
             hp->setYoff(wedgeList[no].above ? -3 : 8);
       hp->setUserOff(QPointF(wedgeList[no].rx, wedgeList[no].ry));
       hp->setTrack(staff * VOICES);
-      if (hp->check())
-          score->add(hp);
-
+      Segment* seg = measure->getSegment(SegChordRest, wedgeList[no].startTick);
+      hp->setStartElement(seg);
+      seg->add(hp);
+      seg = measure->getSegment(SegChordRest, endTick);
+      hp->setEndElement(seg);
+      seg->addSpannerBack(hp);
+      score->updateHairpin(hp);
 // printf("gen wedge %p staff %d, tick %d-%d\n", hp, staff, hp->tick(), hp->tick2());
       }
 

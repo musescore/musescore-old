@@ -1,3 +1,5 @@
+25.nov (lv)
+      - fix MusicXML import of pedal syms and hairpins
 24.nov (la)
       - fix #8018: Lilypond: Quote marks in lyrics need to be escaped
        (ws)
