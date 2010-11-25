@@ -3574,7 +3574,7 @@ void ExportLy::findLyrics()
 			  printf("unknown syllabic %d\n", syl);
 			}//switch syllable
 		      cout << " lyrics endtick: " << (lix)->endTick() << "\n";
-		      if ((lix)->endTick() > 0) //more than one note on this syllable
+		      if ((lix)->ticks() > 0) //more than one note on this syllable
 			{
 			  cout << " _ ";
 			  thisLyrics->lyrdat.verselyrics[verse] += " _ ";
