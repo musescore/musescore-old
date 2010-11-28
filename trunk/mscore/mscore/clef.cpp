@@ -124,11 +124,15 @@ void Clef::layout()
       double msp  = _spatium * smag;
       double yoff = 0.0;
       elements.clear();
-      Symbol* symbol = new Symbol(score());
 
       int st = subtype();
-      if (staff() && staff()->useTablature() && clefTable[st].staffGroup != TAB_STAFF)
+	  if (staff() && staff()->useTablature())
+	  {	  if(!staff()->tablature()->showClef())
+			return;
+		  if (clefTable[st].staffGroup != TAB_STAFF)
             st = CLEF_TAB;
+	  }
+	  Symbol* symbol = new Symbol(score());
 
       switch (st) {
             case CLEF_G:
@@ -303,7 +307,9 @@ void Clef::layout()
 
 void Clef::draw(QPainter& p, ScoreView* v) const
       {
-      foreach(Element* e, elements) {
+	  if (staff() && staff()->useTablature() && !staff()->tablature()->showClef())
+		  return;
+	  foreach(Element* e, elements) {
             QPointF pt(e->pos());
             p.translate(pt);
             e->draw(p, v);

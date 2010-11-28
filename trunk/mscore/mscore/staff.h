@@ -39,6 +39,7 @@ class Score;
 class KeyList;
 class StaffType;
 class Staff;
+class Tablature;
 
 //---------------------------------------------------------
 //   LinkedStaves
@@ -158,6 +159,7 @@ class Staff {
 
       bool useTablature() const;
       void setUseTablature(bool val);
+	  Tablature* tablature() const;
       StaffType* staffType() const     { return _staffType;      }
       void setStaffType(StaffType* st);
       bool updateClefList() const      { return _updateClefList; }

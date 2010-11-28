@@ -30,6 +30,7 @@
 #include "segment.h"
 #include "measure.h"
 #include "staff.h"
+#include "tablature.h"
 
 //---------------------------------------------------------
 //   TimeSig
@@ -255,14 +256,26 @@ void TimeSig::layout()
       double _spatium = spatium();
       QRectF bb;
 
-      int st = subtype();
-      if (st == 0)
+	  int st = subtype();
+	  // if tablature, but without time sig, set empty symbol
+	  if (staff() && staff()->useTablature() && !staff()->tablature()->showTimeSig())
+		  st = 0;
+	  if (st == 0)											// no symbol: empty bounding box
             bb = QRectF(0, 0,0, 0);
-      else if (st ==  TSIG_FOUR_FOUR)
-            bb = symbols[score()->symIdx()][fourfourmeterSym].bbox(magS()).translated(0.0, 2.0 * _spatium);
-      else if (st == TSIG_ALLA_BREVE)
-            bb = symbols[score()->symIdx()][allabreveSym].bbox(magS()).translated(0.0, 2.0 * _spatium);
-      else {
+	  else
+	  {   // if some symbol
+		  double	yoff = 2.0;								// assume vert. displ. by half staff height
+		  if (staff() && staff()->useTablature())			// if tablature, vert. displ....
+		  {   Tablature* tab = staff()->tablature();
+			  yoff = (tab->strings()-1) / 2.0 * 1.5;		// by half the number fo staff spaces * space height
+		  }
+		  yoff *= _spatium;
+		  if (st ==  TSIG_FOUR_FOUR)
+			bb = symbols[score()->symIdx()][fourfourmeterSym].bbox(magS()).translated(0.0, yoff);
+		  else if (st == TSIG_ALLA_BREVE)
+			bb = symbols[score()->symIdx()][allabreveSym].bbox(magS()).translated(0.0, yoff);
+		  else
+		  {
             int n, z1, z2, z3, z4;
             getSig(&n, &z1, &z2, &z3, &z4);
             sz = QString("%1").arg(z1);
@@ -284,16 +297,17 @@ void TimeSig::layout()
             rz = QRectF(rz.x() * m, rz.y() * m, rz.width() * m, rz.height() * m);
             rn = QRectF(rn.x() * m, rn.y() * m, rn.width() * m, rn.height() * m);
 
-            pz = QPointF(0.0, 2.0 * _spatium);
-            pn = QPointF((rz.width() - rn.width())*.5, 4.0 * _spatium);
+			pz = QPointF(0.0, yoff);
+			pn = QPointF((rz.width() - rn.width())*.5, yoff * 2.0);
 
             bb |= rz.translated(pz);
             bb |= rn.translated(pn);
 
             pz *= im;
             pn *= im;
-            }
-      setbbox(bb);
+		  }
+	  }
+	  setbbox(bb);
       }
 
 //---------------------------------------------------------
@@ -303,14 +317,25 @@ void TimeSig::layout()
 void TimeSig::draw(QPainter& p, ScoreView*) const
       {
       int st = subtype();
-      if (st == 0 || (staff() && staff()->useTablature()))
-            return;
-      double _spatium = spatium();
-      if (st ==  TSIG_FOUR_FOUR)
-            symbols[score()->symIdx()][fourfourmeterSym].draw(p, magS(), 0.0, 2.0 * _spatium);
+	  if (st == 0)											// if no symbol, do nothing
+		  return;
+	  // compute vert. displacement to center in the staff height
+	  double yoff = 2.0;									// assume vert. displ. is half a staff height
+	  if ((staff() && staff()->useTablature()))				// if tablature...
+	  {	  if(!staff()->tablature()->showTimeSig())			// ...with no time sig: do nothing
+			  return;
+		  else												// ...with time sig: displace sym vertically...
+		  {	  Tablature* tab = staff()->tablature();
+			  yoff = (tab->strings()-1) / 2.0 * 1.5;		// ...by half the number of staff spaces * space size
+		  }
+	  }
+	  double _spatium = spatium();
+	  yoff *= _spatium;
+	  if (st ==  TSIG_FOUR_FOUR)
+			symbols[score()->symIdx()][fourfourmeterSym].draw(p, magS(), 0.0, yoff);
       else if (st == TSIG_ALLA_BREVE)
-            symbols[score()->symIdx()][allabreveSym].draw(p, magS(), 0.0, 2.0 * _spatium);
-      else {
+			symbols[score()->symIdx()][allabreveSym].draw(p, magS(), 0.0, yoff);
+	  else {
             p.setFont(symbols[score()->symIdx()][allabreveSym].font());
             double m  = _spatium / (DPI * SPATIUM20);
             double im = 1.0 / m;

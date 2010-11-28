@@ -36,6 +36,8 @@
 #include "al/al.h"
 #include "icons.h"
 #include "undo.h"
+#include "staff.h"
+#include "tablature.h"
 
 //---------------------------------------------------------
 //   endBeam
@@ -285,7 +287,12 @@ void Beam::remove(ChordRest* a)
 
 void Beam::draw(QPainter& p, ScoreView*) const
       {
-      QColor color(p.pen().color());
+	if(staff()->useTablature())
+		if(!staff()->tablature()->showStems())
+		  return;
+//		else
+//			// TO DO: ADD HERE BEAMS FOR TABLATURE
+	  QColor color(p.pen().color());
       p.setPen(QPen(Qt::NoPen));
       p.setBrush(color);
       qreal lw2 = point(score()->styleS(ST_beamWidth)) * .5 * mag();

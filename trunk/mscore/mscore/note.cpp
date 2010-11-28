@@ -490,24 +490,53 @@ void Note::draw(QPainter& p, ScoreView* v) const
             if (tablature) {
                   if (tieBack())
                         return;
-                  double mag = magS();
-                  QFont f("FreeSans");
-                  int size = lrint(9.0 * DPI / PPI);
-                  f.setPixelSize(size);
-                  double imag = 1.0 / mag;
-                  p.scale(mag, mag);
-                  p.setFont(f);
+				  Tablature* tab = staff()->tablature();
+				  double mag = magS();
+				  double imag = 1.0 / mag;
+				  double currSpatium = spatium();
+/*				  if (generated())
+				  {
+					  QFont f(tab->durationFont());
+					  int size = lrint(10.0 * DPI / PPI);
+					  f.setPixelSize(size);
+					  p.scale(mag, mag);
+					  p.setFont(f);
+					  Duration::DurationType durType = chord()->durationType().type();
+					  QString s = QString(g_cDurationChars[durType]);
+					  for(int count=chord()->dots(); count > 0; count--)
+						  s.append(g_cDurationChars[Duration::V_INVALID]);
+					  p.drawText(0.0, 0.0, s);
+				  }
+				  else
+*/				  {
+						QFont f(tab->fretFontName());
+						int size = lrint(tab->fretFontSize() * DPI / PPI);
+						f.setPixelSize(size);
+						p.scale(mag, mag);
+						p.setFont(f);
 
-                  QString s = _ghost ? "X" : QString::number(_fret);
-                  double d  = spatium() * .2;
-                  QRectF bb = bbox().adjusted(-d, 0.0, d, 0.0);
-                  if (v)
-                        v->drawBackground(p, bb);
-                  else
-                        p.eraseRect(bb);
-                  p.drawText(0.0, bbox().height() * .5, s);
-                  p.scale(imag, imag);
-                  }
+						// when using letters, "+(_fret > 7)" skips 'j'
+						QString s = _ghost ? "X" :
+							  ( tab->useNumbers() ? QString::number(_fret) : QString('a' + _fret + (_fret > 7)) );
+						double d  = currSpatium * .2;
+						QRectF bb = bbox().adjusted(-d, 0.0, d, 0.0);
+	  //				  QRectF bb = QRectF(bbox().x()-d, tab->charBoxY(currSpatium), bbox().width()+d*2.0, tab->charBoxY(currSpatium));
+						if(!tab->linesThrough() || tab->showStems())
+						{
+							if (v)
+								  v->drawBackground(p, bb);
+							else
+								  p.eraseRect(bb);
+						}
+	  #if(0)
+	  //				  p.drawText(0.0, 0.0, s);
+						p.drawText(0.0, bbox().height() * .5, s);
+	  #else
+						p.drawText(_bbox.x(), tab->fretY(currSpatium) * currSpatium * mag, s);
+	  #endif
+				  }
+				  p.scale(imag, imag);
+				  }
             else {
                   //
                   // warn if pitch extends usable range of instrument
@@ -1205,17 +1234,31 @@ void Note::propertyAction(ScoreView* viewer, const QString& s)
 
 void Note::layout()
       {
-      if (staff() && staff()->useTablature()) {
-            QFont f("FreeSerif");
-            int size = lrint(9.0 * DPI / PPI);
-            f.setPixelSize(size);
-            QFontMetricsF fm(f);
-            double mag = magS();
-            QString s  = QString::number(_fret);
-            QRectF bb(fm.tightBoundingRect(s));
-            bb = bb.translated(0.0, bb.height() * .5);
-            _bbox = QRectF(bb.x() * mag, bb.y() * mag, bb.width() * mag, bb.height() * mag);
-            }
+	  bool useTablature = staff() && staff()->useTablature();
+	  if (useTablature)
+	  {
+		  Tablature* tab = staff()->tablature();
+		  double mag = magS();
+		  double currSpatium = spatium();
+		  QFont f(tab->fretFontName());
+		  int size = lrint(tab->fretFontSize() * DPI / PPI);
+		  f.setPixelSize(size);
+		  QFontMetricsF fm(f);
+		  // when using letters, "+(_fret > 7)" skips 'j'
+		  QString s = _ghost ? "X" :
+						( tab->useNumbers() ? QString::number(_fret) : QString('a' + _fret + (_fret > 7)) );
+#if(0)
+		  QRectF bb(fm.tightBoundingRect(s));
+		  bb = bb.translated(0.0, bb.height() * .5);
+		  _bbox = QRectF(bb.x() * mag, bb.y() * mag, bb.width() * mag, bb.height() * mag);
+#else
+//		  QRectF bb(fm.boundingRect(s));
+		  double w = fm.width(s) * mag;
+//		  _bbox = QRectF(-w/2.0, bb.y() * mag, w, bb.height()*mag);
+		  _bbox = QRectF(0.0, tab->charBoxY(currSpatium)*currSpatium*mag,
+					w, tab->charBoxH(currSpatium)*currSpatium*mag);
+#endif
+			}
       else
             _bbox = symbols[score()->symIdx()][noteHead()].bbox(magS());
       if (parent() == 0)
@@ -1228,44 +1271,49 @@ void Note::layout()
             }
       if (_bend)
             _bend->layout();
-      int dots = chord()->dots();
-      for (int i = 0; i < 3; ++i) {
-            if (i < dots) {
-                  if (_dots[i] == 0) {
-                        _dots[i] = new NoteDot(score());
-                        _dots[i]->setIdx(i);
-                        _dots[i]->setParent(this);
-                        }
-                  _dots[i]->layout();
-                  }
-            else {
-                  delete _dots[i];
-                  _dots[i] = 0;
-                  }
-            }
-      if (dots) {
-            double _spatium = spatium();
-            double d  = point(score()->styleS(ST_dotNoteDistance));
-            double dd = point(score()->styleS(ST_dotDotDistance));
-            double y  = 0;
-            double x  = chord()->dotPosX() - pos().x();
+//	  if(!useTablature)
+//	  {
+		  int dots = chord()->dots();
+		  for (int i = 0; i < 3; ++i) {
+				if (i < dots) {
+					  if (_dots[i] == 0) {
+							_dots[i] = new NoteDot(score());
+							_dots[i]->setIdx(i);
+							_dots[i]->setParent(this);
+							if(useTablature)
+								_dots[i]->setVisible(false);
+							}
+					  _dots[i]->layout();
+					  }
+				else {
+					  delete _dots[i];
+					  _dots[i] = 0;
+					  }
+				}
+		  if (dots) {
+				double _spatium = spatium();
+				double d  = point(score()->styleS(ST_dotNoteDistance));
+				double dd = point(score()->styleS(ST_dotDotDistance));
+				double y  = 0;
+				double x  = chord()->dotPosX() - pos().x();
 
-            // do not draw dots on staff line
-            if ((_line & 1) == 0) {
-                  Measure* m = chord()->measure();
-                  if (m->mstaff(staffIdx())->hasVoices) {
-                        if (voice() == 0 || voice() == 2)
-                              y = -_spatium *.5;
-                        else
-                              y = _spatium *.5;
-                        }
-                  else
-                        y = -_spatium *.5;
-                  }
-            for (int i = 0; i < dots; ++i)
-                  _dots[i]->setPos(x + d + dd * i, y);
-            }
-      }
+				// do not draw dots on staff line
+				if ((_line & 1) == 0) {
+					  Measure* m = chord()->measure();
+					  if (m->mstaff(staffIdx())->hasVoices) {
+							if (voice() == 0 || voice() == 2)
+								  y = -_spatium *.5;
+							else
+								  y = _spatium *.5;
+							}
+					  else
+							y = -_spatium *.5;
+					  }
+				for (int i = 0; i < dots; ++i)
+					  _dots[i]->setPos(x + d + dd * i, y);
+				}
+//	  }
+}
 
 //---------------------------------------------------------
 //   layout10
