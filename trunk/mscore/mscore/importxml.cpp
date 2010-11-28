@@ -1661,11 +1661,13 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                         else {
                               pedal = new Pedal(score);
                               pedal->setTrack((staff + rstaff) * VOICES);
-//TODO-WS                              pedal->setTick(tick);
                               if (placement == "") placement = "below";
                               setSLinePlacement(pedal,
                                           score->spatium(), placement,
                                           hasYoffset, yoffset);
+                              Segment* seg = measure->getSegment(SegChordRest, tick);
+                              pedal->setStartElement(seg);
+                              seg->add(pedal);
                               }
                         }
                   else if (type == "stop") {
@@ -1673,8 +1675,9 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                               printf("pedal line stop without start\n");
                               }
                         else {
-//TODO-WS                              pedal->setTick2(tick);
-                              score->add(pedal);
+                              Segment* seg = measure->getSegment(SegChordRest, tick);
+                              pedal->setEndElement(seg);
+                              seg->addSpannerBack(pedal);
                               pedal = 0;
                               }
                         }
@@ -1685,7 +1688,6 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   Symbol* s = new Symbol(score);
                   s->setAlign(ALIGN_LEFT | ALIGN_BASELINE);
                   s->setOffsetType(OFFSET_SPATIUM);
-//TODO-WS                  s->setTick(tick);
                   if (type == "start")
                         s->setSym(pedalPedSym);
                   else if (type == "stop")
@@ -2877,7 +2879,9 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   else {
                         trill = new Trill(score);
                         trill->setTrack((staff + relStaff) * VOICES);
-//TODO-WS                        trill->setTick(tick);
+                        Segment* seg = measure->getSegment(SegChordRest, tick);
+                        trill->setStartElement(seg);
+                        seg->add(trill);
                         wavyLineStart = true;
                         }
                   }
@@ -2886,8 +2890,9 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                         printf("wavy-line stop without start\n");
                         }
                   else {
-//TODO-WS                        trill->setTick2(tick+ticks);
-                        score->add(trill);
+                        Segment* seg = measure->getSegment(SegChordRest, tick);
+                        trill->setEndElement(seg);
+                        seg->addSpannerBack(trill);
                         trill = 0;
                         }
                   }

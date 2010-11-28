@@ -1,4 +1,6 @@
-28.nov (mi)
+28.nov (lv)
+      - fix MusicXML import of pedal and trill lines
+       (mi)
       - first implementation. of configurable tablatures
 25.nov (lv)
       - fix MusicXML import of pedal syms and hairpins
