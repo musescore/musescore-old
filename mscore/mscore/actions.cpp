@@ -826,6 +826,24 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","right+shift")
          ),
       Shortcut(
+         STATE_NOTE_ENTRY,
+         "move-right",
+         QT_TRANSLATE_NOOP("action","move chord/rest right"),
+         Qt::SHIFT+Qt::Key_Right,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","move chord/rest right"),
+         QT_TRANSLATE_NOOP("action","move chord/rest right")
+         ),
+      Shortcut(
+         STATE_NOTE_ENTRY,
+         "move-left",
+         QT_TRANSLATE_NOOP("action","move chord/rest left"),
+         Qt::SHIFT+Qt::Key_Left,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","move chord/rest left"),
+         QT_TRANSLATE_NOOP("action","move chord/rest left")
+         ),
+      Shortcut(
          STATE_NORMAL,
          "select-next-measure",
          QT_TRANSLATE_NOOP("action","select to end of measure"),

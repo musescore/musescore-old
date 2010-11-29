@@ -470,6 +470,7 @@ class Score : public QObject {
       void undoChangeKeySig(Staff* ostaff, int tick, KeySigEvent st);
       void undoChangeClef(Staff* ostaff, int tick, ClefType st);
       void undoChangeBarLine(Measure* m, BarLineType);
+      void undoSwapCR(ChordRest* cr1, ChordRest* cr2);
 
       void setGraceNote(Chord*,  int pitch, NoteType type, int len);
       int clefOffset(int tick, Staff*) const;

@@ -32,6 +32,7 @@
 #include "stafftype.h"
 #include "selinstrument.h"
 #include "texteditor.h"
+#include "editstafftype.h"
 
 //---------------------------------------------------------
 //   EditStaff

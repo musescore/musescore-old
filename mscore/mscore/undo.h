@@ -1541,5 +1541,23 @@ class ChangeBoxProperties : public UndoCommand {
       UNDO_NAME("ChangeBoxProperties");
       };
 
+//---------------------------------------------------------
+//   SwapCR
+//---------------------------------------------------------
+
+class SwapCR : public UndoCommand {
+      ChordRest* cr1;
+      ChordRest* cr2;
+
+      void flip();
+
+   public:
+      SwapCR(ChordRest* a, ChordRest* b) : cr1(a), cr2(b) {}
+      virtual void undo() { flip(); }
+      virtual void redo() { flip(); }
+      UNDO_NAME("SwapCR");
+      };
+
+
 #endif
 

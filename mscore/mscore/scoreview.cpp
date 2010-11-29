@@ -2847,6 +2847,34 @@ void ScoreView::cmd(const QAction* a)
             }
       else if (cmd == "insert-fretframe")
             cmdInsertMeasure(FBOX);
+      else if (cmd == "move-left") {
+            Element* e = _score->getSelectedElement();
+            if (e && (e->type() == NOTE || e->type() == REST)) {
+                  if (e->type() == NOTE)
+                        e = e->parent();
+                  ChordRest* cr1 = static_cast<ChordRest*>(e);
+                  ChordRest* cr2 = prevChordRest(cr1);
+                  if (cr2) {
+                        _score->startCmd();
+                        _score->undoSwapCR(cr1, cr2);
+                        _score->endCmd();
+                        }
+                  }
+            }
+      else if (cmd == "move-right") {
+            Element* e = _score->getSelectedElement();
+            if (e && (e->type() == NOTE || e->type() == REST)) {
+                  if (e->type() == NOTE)
+                        e = e->parent();
+                  ChordRest* cr1 = static_cast<ChordRest*>(e);
+                  ChordRest* cr2 = nextChordRest(cr1);
+                  if (cr2) {
+                        _score->startCmd();
+                        _score->undoSwapCR(cr1, cr2);
+                        _score->endCmd();
+                        }
+                  }
+            }
       else
             _score->cmd(a);
       _score->processMidiInput();

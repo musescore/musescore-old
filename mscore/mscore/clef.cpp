@@ -126,13 +126,13 @@ void Clef::layout()
       elements.clear();
 
       int st = subtype();
-	  if (staff() && staff()->useTablature())
-	  {	  if(!staff()->tablature()->showClef())
-			return;
-		  if (clefTable[st].staffGroup != TAB_STAFF)
-            st = CLEF_TAB;
-	  }
-	  Symbol* symbol = new Symbol(score());
+      if (staff() && staff()->useTablature()) {
+            if (!staff()->tablature()->showClef())
+		      return;
+            if (clefTable[st].staffGroup != TAB_STAFF)
+                  st = CLEF_TAB;
+	      }
+      Symbol* symbol = new Symbol(score());
 
       switch (st) {
             case CLEF_G:
