@@ -1769,7 +1769,9 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                               printf("unsupported line-type: %s\n", lineType.toLatin1().data());
 
                         b->setTrack((staff + rstaff) * VOICES);
-//TODO-WS                        b->setTick(tick);
+                        Segment* seg = measure->getSegment(SegChordRest, tick);
+                        b->setStartElement(seg);
+                        seg->add(b);
                         bracket[n] = b;
                         }
                   }
@@ -1778,7 +1780,6 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                         printf("bracket stop without start, number %d\n", number);
                         }
                   else {
-//TODO-WS                        b->setTick2(tick);
                         // TODO: MuseScore doesn't support lines which start and end on different staves
                         /*
                         QPointF userOff = b->userOff();
@@ -1796,60 +1797,41 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                         b->setEndHook(lineEnd != "none");
                         if (lineEnd == "up")
                               b->setEndHookHeight(-1 * b->endHookHeight());
-                        score->add(b);
+                        Segment* seg = measure->getSegment(SegChordRest, tick);
+                        b->setEndElement(seg);
+                        seg->addSpannerBack(b);
                         bracket[n] = 0;
                         }
                   }
             }
       else if (dirType == "octave-shift") {
-            if (type == "down") {
+            if (type == "up" || type == "down") {
                   if (ottava) {
                         printf("overlapping octave-shift not supported\n");
                         delete ottava;
                         ottava = 0;
                         }
                   else {
-                        ottava = new Ottava(score);
-                        ottava->setTrack((staff + rstaff) * VOICES);
-//TODO-WS                        ottava->setTick(tick);
-                        if (ottavasize == 8)
-                              ottava->setSubtype(0);
-                        else if (ottavasize == 15)
-                              ottava->setSubtype(1);
-                        else {
+                        if (!(ottavasize == 8 || ottavasize == 15)) {
                               printf("unknown octave-shift size %d\n", ottavasize);
                               delete ottava;
                               ottava = 0;
                               }
-                        if (placement == "") placement = "above"; // set default
-                        if (ottava) setSLinePlacement(ottava,
-                                          score->spatium(), placement,
-                                          hasYoffset, yoffset);
-                        }
-                  }
-            else if (type == "up") {
-                  if (ottava) {
-                        printf("overlapping octave-shift not supported\n");
-                        delete ottava;
-                        ottava = 0;
-                        }
-                  else {
-                        ottava = new Ottava(score);
-                        ottava->setTrack((staff + rstaff) * VOICES);
-//TODO-WS                        ottava->setTick(tick);
-                        if (ottavasize == 8)
-                              ottava->setSubtype(2);
-                        else if (ottavasize == 15)
-                              ottava->setSubtype(3);
                         else {
-                              printf("unknown octave-shift size %d\n", ottavasize);
-                              delete ottava;
-                              ottava = 0;
+                              ottava = new Ottava(score);
+                              ottava->setTrack((staff + rstaff) * VOICES);
+                              if (type == "down" && ottavasize ==  8) ottava->setSubtype(0);
+                              if (type == "down" && ottavasize == 15) ottava->setSubtype(1);
+                              if (type ==   "up" && ottavasize ==  8) ottava->setSubtype(2);
+                              if (type ==   "up" && ottavasize == 15) ottava->setSubtype(3);
+                              if (placement == "") placement = "above"; // set default
+                              setSLinePlacement(ottava,
+                                                score->spatium(), placement,
+                                                hasYoffset, yoffset);
+                              Segment* seg = measure->getSegment(SegChordRest, tick);
+                              ottava->setStartElement(seg);
+                              seg->add(ottava);
                               }
-                        if (placement == "") placement = "below"; // set default
-                        if (ottava) setSLinePlacement(ottava,
-                                          score->spatium(), placement,
-                                          hasYoffset, yoffset);
                         }
                   }
             else if (type == "stop") {
@@ -1857,8 +1839,14 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                         printf("octave-shift stop without start\n");
                         }
                   else {
-//TODO-WS                        ottava->setTick2(tick);
-                        score->add(ottava);
+                        Segment* seg = measure->getSegment(SegChordRest, tick);
+                        ottava->setEndElement(seg);
+                        seg->addSpannerBack(ottava);
+                        int shift = ottava->pitchShift();
+                        Staff* st = ottava->staff();
+                        int tick1 = static_cast<Segment*>(ottava->startElement())->tick();
+                        st->pitchOffsets().setPitchOffset(tick1, shift);
+                        st->pitchOffsets().setPitchOffset(seg->tick(), 0);
                         ottava = 0;
                         }
                   }

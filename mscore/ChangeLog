@@ -1,3 +1,5 @@
+29.nov (lv)
+      - fix MusicXML import of bracket and octave-shift
 28.nov (lv)
       - fix MusicXML import of pedal and trill lines
        (mi)
