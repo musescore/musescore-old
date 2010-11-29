@@ -2974,3 +2974,28 @@ void ChangeBoxProperties::flip()
             }
       }
 
+//---------------------------------------------------------
+//   undoSwapCR
+//---------------------------------------------------------
+
+void Score::undoSwapCR(ChordRest* cr1, ChordRest* cr2)
+      {
+      undo()->push(new SwapCR(cr1, cr2));
+      }
+
+//---------------------------------------------------------
+//   flip
+//---------------------------------------------------------
+
+void SwapCR::flip()
+      {
+      Segment* s1 = cr1->segment();
+      Segment* s2 = cr2->segment();
+      int track = cr1->track();
+
+      Element* cr = s1->element(track);
+      s1->setElement(track, s2->element(track));
+      s2->setElement(track, cr);
+      cr1->score()->setLayoutAll(true);
+      }
+

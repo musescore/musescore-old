@@ -106,7 +106,7 @@ QT4_WRAP_CPP (mocs
       text.h sccursor.h dynamics.h undo.h textproperties.h
       slurproperties.h select.h synthcontrol.h drumroll.h pianoroll.h piano.h ruler.h
       pianoview.h drumview.h splitstaff.h scoretab.h keyedit.h keycanvas.h harmonyedit.h
-      harmonycanvas.h updatechecker.h fret.h fretcanvas.h stafftype.h
+      harmonycanvas.h updatechecker.h fret.h fretcanvas.h editstafftype.h
       prefsdialog.h layoutbreak.h hairpin.h bend.h bendcanvas.h tremolobar.h tremolobarcanvas.h
       drumtools.h texteditor.h
       )
@@ -201,7 +201,7 @@ add_executable ( ${ExecutableName}
       shadownote.cpp pitch.cpp importgtp.cpp revisions.cpp bend.cpp tremolobar.cpp
       noteevent.cpp chordline.cpp lasso.cpp fotomode.cpp drumtools.cpp
       elementlayout.cpp selinstrument.cpp instrchange.cpp texteditor.cpp
-      cursor.cpp textframe.cpp
+      cursor.cpp textframe.cpp editstafftype.cpp
       ${OMR_FILES}
       ${AUDIO}
       )
