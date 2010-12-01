@@ -38,6 +38,7 @@ class Part;
 class Score;
 class KeyList;
 class StaffType;
+class StaffTypeTablature;
 class Staff;
 class Tablature;
 
@@ -157,11 +158,10 @@ class Staff {
       int channel(int tick, int voice) const;
       QMap<int,int>* channelList(int voice) { return  &_channelList[voice]; }
 
-      bool useTablature() const;
-      void setUseTablature(bool val);
-	  Tablature* tablature() const;
       StaffType* staffType() const     { return _staffType;      }
       void setStaffType(StaffType* st);
+      bool useTablature() const;
+      void setUseTablature(bool val);
       bool updateClefList() const      { return _updateClefList; }
       bool updateKeymap() const        { return _updateKeymap;   }
       void setUpdateClefList(bool v)   { _updateClefList = v;    }
