@@ -34,7 +34,8 @@
 #include "style.h"
 #include "segment.h"
 #include "measure.h"
-#include "tablature.h"
+#include "stafftype.h"
+//#include "tablature.h"
 #include "part.h"
 #include "undo.h"
 
@@ -127,7 +128,7 @@ void Clef::layout()
 
       int st = subtype();
       if (staff() && staff()->useTablature()) {
-            if (!staff()->tablature()->showClef())
+            if (!staff()->staffType()->genClef())
 		      return;
             if (clefTable[st].staffGroup != TAB_STAFF)
                   st = CLEF_TAB;
@@ -231,32 +232,38 @@ void Clef::layout()
                   {
                   symbol->setSym(tabclefSym);
                   Staff* st = staff();
-                  if (st && st->useTablature()) {
-                        Tablature* tab = st->part()->instr()->tablature();
-                        switch(tab->strings()) {
-                              default:
-                              case 6: yoff = 2.5 * 1.5; break;
-                              case 4: yoff = 1.5 * 1.5; break;
-                              }
-                        }
-                  else
-                        yoff = 2.0;
+//                  if (st && st->useTablature()) {
+                        int numOfLines  = st->staffType()->lines();
+                        double lineDist = st->staffType()->lineDistance().val();
+//                        switch(numOfLines) {
+//                              default:
+//                              case 6: yoff = 2.5 * 1.5; break;
+//                              case 4: yoff = 1.5 * 1.5; break;
+//                              }
+                        // on tablature, position clef at half the number of spaces * line distance
+                        yoff = lineDist * (numOfLines-1) / 2.0;
+//                        }
+//                  else
+//                        yoff = 2.0;
                   }
                   break;
             case CLEF_TAB2:
                   {
                   symbol->setSym(tabclef2Sym);
                   Staff* st = staff();
-                  if (st && st->useTablature()) {
-                        Tablature* tab = st->part()->instr()->tablature();
-                        switch(tab->strings()) {
-                              default:
-                              case 6: yoff = 2.5 * 1.5; break;
-                              case 4: yoff = 1.5 * 1.5; break;
-                              }
-                        }
-                  else
-                        yoff = 2.0;
+//                  if (st && st->useTablature()) {
+                        int numOfLines  = st->staffType()->lines();
+                        double lineDist = st->staffType()->lineDistance().val();
+//                        switch(numOfLines) {
+//                              default:
+//                              case 6: yoff = 2.5 * 1.5; break;
+//                              case 4: yoff = 1.5 * 1.5; break;
+//                              }
+                        // on tablature, position clef at half the number of spaces * line distance
+                        yoff = lineDist * (numOfLines-1) / 2.0;
+//                        }
+//                  else
+//                        yoff = 2.0;
                   }
                   break;
             case CLEF_PERC:
@@ -307,7 +314,7 @@ void Clef::layout()
 
 void Clef::draw(QPainter& p, ScoreView* v) const
       {
-	  if (staff() && staff()->useTablature() && !staff()->tablature()->showClef())
+        if (staff() && staff()->useTablature() && !staff()->staffType()->genClef())
 		  return;
 	  foreach(Element* e, elements) {
             QPointF pt(e->pos());

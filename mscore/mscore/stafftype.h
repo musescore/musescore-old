@@ -24,6 +24,7 @@
 #include "spatium.h"
 #include "globals.h"
 
+//class Instrument;
 class Staff;
 class Xml;
 
@@ -67,8 +68,10 @@ class StaffType {
       bool showLedgerLines() const             { return _showLedgerLines; }
       bool modified() const                    { return _modified;        }
       void setModified(bool val)               { _modified = val;         }
-      void write(Xml& xml, int) const;
-      void read(QDomElement);
+      virtual void write(Xml& xml, int) const;
+      void writeProperties(Xml& xml) const;
+      virtual void read(QDomElement);
+      bool readProperties(QDomElement e);
       };
 
 // first three staff types in staffTypes[] are build in:
@@ -95,14 +98,78 @@ class StaffTypePitched : public StaffType {
 //   StaffTypeTablature
 //---------------------------------------------------------
 
+// TEMPORARY HACK FOR FURATIONS AS TEXT ELEMENTS
+#include "text.h"
+
 class StaffTypeTablature : public StaffType {
 
+//      Instrument* _instrument;            // to access the underlying string data
+      QString	_durationFontName;	// the name of the font used for duration symbols
+      double	_durationFontSize;	// the size (in points) for the duration symbol font
+      double	_durationFontY;		// the vertical offset (in sp. units) for the duration symb. font
+      QString	_fretFontName;		// the name of the font used for fret marks
+      double	_fretFontSize;		// the size (in points) for the fret marks font
+      double	_fretY;			// additional vert. offset of fret marks with respect to
+                                          // the string line (sp. unit) user configurable
+      bool		_genDurations;		// whether duration symbols are drawn or not
+      bool        _genTimesig;            // whether time signature is shown or not
+      bool		_linesThrough;		// whether lines for strings and stems may pass through fret marks or not
+      bool		_onLines;			// whether fret marks are drawn on the string lines or between them
+      bool		_useNumbers;		// true: use numbers ('0' - ...) for frets | false: use letters ('a' - ...)
+
+      double	_charBoxH, _charBoxY;	// the height and the y rect.coord. of a box bounding all fret characters
+                                          // internally computed: depends upon _onString and _useNumbers and the
+                                          // metrics of the fret font (sp. units)
+      TextStyle   _durationTextStyle;	// a pre-computed text style to be used for duration symbols
+      double	_fretYOffset;		// the vertical offset to draw fret marks with the respect to the string
+                                          // internally computed: depends upon _onString and _useNumbers and the
+                                          // metrics of the fret font (sp. units)
+      bool		_metricsValid;		// whether metrics are valid or not
+      qreal		_refDPI, _refSpatium;	// reference values used to last compute metrics and to see if they are still valid
+
+      void init();                        // init to reasonable defaults
+
    public:
-      StaffTypeTablature() : StaffType() {}
-      StaffTypeTablature(const QString& s) : StaffType(s) {}
+      StaffTypeTablature() : StaffType() { init(); }
+      StaffTypeTablature(const QString& s) : StaffType(s) { init(); }
       virtual StaffGroup group() const          { return TAB_STAFF; }
       virtual StaffTypeTablature* clone() const { return new StaffTypeTablature(*this); }
       virtual const char* groupName() const     { return "tablature"; }
+      virtual void read(QDomElement e);
+      virtual void write(Xml& xml, int) const;
+
+      // properties getters (some getters may require to update the metrics)
+      double  charBoxH(double spatium)    { setMetrics(spatium); return _charBoxH; }
+      double  charBoxY(double spatium)    { setMetrics(spatium); return _charBoxY + _fretY; }
+const	QString durationFontName() const	{ return _durationFontName; }
+      double  durationFontSize() const    { return _durationFontSize; }
+      double  durationFontY() const       { return _durationFontY;    }
+      Text *  durationTextElement(QString text);
+const	TextStyle* durationTextStyle() const	{ return &_durationTextStyle; }
+const	QString fretFontName() const		{ return _fretFontName;     }
+      double  fretFontSize() const        { return _fretFontSize;     }
+      double  fretY(double spatium)       { setMetrics(spatium); return _fretYOffset + _fretY; }
+      double  fretYActual() const         { return _fretY;            }
+      bool    genDurations() const		{ return _genDurations;     }
+      bool    genTimesig() const		{ return _genTimesig;       }
+      bool    linesThrough() const		{ return _linesThrough;     }
+      bool    onLines() const             { return _onLines;          }
+      bool    useNumbers() const		{ return _useNumbers;       }
+      // properties setters (setting some props invalidates metrics)
+      void    setDurationFontName(QString name);
+      void    setDurationFontSize(double val);
+      void    setDurationFontY(double val);
+      void    setFretFontName(QString name) { _fretFontName = name; _metricsValid = false; }
+      void    setFretFontSize(double val)	{ _fretFontSize = val; _metricsValid = false; }
+      void    setFretY(double val)		{ _fretY = val;             }
+      void    setGenDurations(bool val)	{ _genDurations = val;      }
+      void    setGenTimesig(bool val)	{ _genTimesig = val;        }
+      void    setLinesThrough(bool val)	{ _linesThrough = val;      }
+      void    setOnLines(bool val);
+      void    setUseNumbers(bool val)	{ _useNumbers = val; _metricsValid = false; }
+
+protected:
+      void    setMetrics(double spatium);
       };
 
 //---------------------------------------------------------

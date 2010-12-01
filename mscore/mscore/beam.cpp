@@ -37,7 +37,7 @@
 #include "icons.h"
 #include "undo.h"
 #include "staff.h"
-#include "tablature.h"
+#include "stafftype.h"
 
 //---------------------------------------------------------
 //   endBeam
@@ -288,8 +288,8 @@ void Beam::remove(ChordRest* a)
 void Beam::draw(QPainter& p, ScoreView*) const
       {
 	if(staff()->useTablature())
-		if(!staff()->tablature()->showStems())
-		  return;
+            if(staff()->staffType()->slashStyle())
+                  return;
 //		else
 //			// TO DO: ADD HERE BEAMS FOR TABLATURE
 	  QColor color(p.pen().color());

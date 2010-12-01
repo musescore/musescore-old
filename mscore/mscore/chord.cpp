@@ -47,7 +47,7 @@
 #include "chordline.h"
 #include "lyrics.h"
 #include "navigate.h"
-#include "tablature.h"
+#include "stafftype.h"
 
 //---------------------------------------------------------
 //   Stem
@@ -67,14 +67,13 @@ Stem::Stem(Score* s)
 
 void Stem::draw(QPainter& p, ScoreView*) const
       {
-	  if(staff()->useTablature())
-	  {
-		  if(!staff()->tablature()->showStems())
-			return;
+      if(staff()->useTablature()) {
+            if(staff()->staffType()->slashStyle())
+                  return;
 //		  else
 //			  // TO DO: ADD HERE STEMS FOR TABLATURE
-	  }
-	  qreal lw = point(score()->styleS(ST_stemWidth));
+            }
+      qreal lw = point(score()->styleS(ST_stemWidth));
       QPen pen(p.pen());
       pen.setWidthF(lw);
 //      pen.setCapStyle(Qt::FlatCap);
@@ -1398,9 +1397,11 @@ void Chord::layout()
       _ledgerLines.clear();
 
       if (staff() && staff()->useTablature()) {
+            StaffTypeTablature * tab = (StaffTypeTablature*)staff()->staffType();
+            double lineDist = tab->lineDistance().val();
             foreach(Note* note, _notes) {
                   note->layout();
-                  note->setPos(0.0, _spatium * note->string() * 1.5);
+                  note->setPos(0.0, _spatium * note->string() * lineDist);
                   }
             delete _stem;
             _stem = 0;
@@ -1408,48 +1409,45 @@ void Chord::layout()
             _hook = 0;
             delete _stemSlash;
             _stemSlash = 0;
-			Tablature * tab = staff()->tablature();
-			if(tab->showStems())
-				return;
-			Segment * segm = segment();
-			if(segm)
-			{
-				// check duration of prev. CR segm
-				ChordRest * prevCR = prevChordRest(this);
-				// if no previous CR or duration type and/or number of dots is different from current CR
-				if(prevCR == 0 || prevCR->durationType().type() != durationType().type()
-						|| prevCR->dots() != dots())
-				{	// remove previously added duration symbol, if any
-					foreach(Element * el, segm->annotations())
-					{
-						if(el->track() == track() && el->type() == TEXT && el->generated())
-						{	segm->removeAnnotation(el);
-							break;
-						}
-					}
-					// create a new TEXT element with duration symbol style
-					// (duration symbol style is not (yet?) a proper style and should be created manually)
-					TextStyle txtStyle = TextStyle();
-					txtStyle.setFamily(tab->durationFontName());
-					txtStyle.setSize(tab->durarionFontSize());
-					txtStyle.setOffsetType(OFFSET_SPATIUM);
-					txtStyle.setYoff(-1.75 - (tab->onStrings() ? 0.0 : 0.75) + tab->durationFontY());
-					Text * durSym = new Text(score());
-					durSym->setSubtype(TEXT_UNKNOWN);
-					durSym->setLocalStyle(txtStyle);
-					durSym->setStyled(false);
-					// text string is a main symbol plus as many dots as required by chord duration
-					QString s = QString(g_cDurationChars[durationType().type()]);
-					for(int count=dots(); count > 0; count--)
-						s.append(g_cDurationChars[Duration::V_ZERO]);
-					durSym->setText(s);
-					durSym->setGenerated(true);
-					durSym->setTrack(track());
-//					durSym->layout();
-					segm->add(durSym);	// add text to segment annotations
-				}
-			}
-			return;
+            if(!tab->genDurations())
+                  return;
+            Segment * segm = segment();
+            if(segm) {
+                  // check duration of prev. CR segm
+                  ChordRest * prevCR = prevChordRest(this);
+                  // if no previous CR or duration type and/or number of dots is different from current CR
+                  if(prevCR == 0 || prevCR->durationType().type() != durationType().type()
+                              || prevCR->dots() != dots()) {
+                        // remove previously added duration symbol, if any
+                        foreach(Element * el, segm->annotations()) {
+                              if(el->track() == track() && el->type() == TEXT && el->generated()) {
+                                    segm->removeAnnotation(el);
+                                    break;
+                                    }
+                              }
+                        // create a new TEXT element with duration symbol style
+                        // (duration symbol style is not (yet?) a proper style and should be created manually)
+                        TextStyle txtStyle = TextStyle();
+                        txtStyle.setFamily(tab->durationFontName());
+                        txtStyle.setSize(tab->durationFontSize());
+                        txtStyle.setOffsetType(OFFSET_SPATIUM);
+                        txtStyle.setYoff(-1.75 - (tab->onLines() ? 0.0 : 0.75) + tab->durationFontY());
+                        Text * durSym = new Text(score());
+                        durSym->setSubtype(TEXT_UNKNOWN);
+                        durSym->setLocalStyle(txtStyle);
+                        durSym->setStyled(false);
+                        // text string is a main symbol plus as many dots as required by chord duration
+                        QString s = QString(g_cDurationChars[durationType().type()]);
+                        for(int count=dots(); count > 0; count--)
+                              s.append(g_cDurationChars[Duration::V_ZERO]);
+                        durSym->setText(s);
+                        durSym->setGenerated(true);
+                        durSym->setTrack(track());
+//                      durSym->layout();
+                        segm->add(durSym);	// add text to segment annotations
+                        }
+                  }
+            return;
             }
 
       if (!segment()) {
