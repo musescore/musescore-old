@@ -1,3 +1,9 @@
+1.dec (ws)
+      - save StaffGroup type in xml for StaffType
+      - add method clone() to StaffType()
+      - make StaffType() a virtual base class (so it cannot be created)
+30.nov (ws)
+      - add "styled" button to text toolbar (gives a hint why most widgets are inactive)
 29.nov (ws)
       - split StaffType() into StaffTypePitched() StaffTypeTablature() and
         StaffTypePercussion()

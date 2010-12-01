@@ -37,7 +37,7 @@
 #include "textproperties.h"
 #include "box.h"
 #include "segment.h"
-// #include "preferences.h"
+#include "texttools.h"
 
 TextPalette* textPalette;
 
@@ -445,8 +445,10 @@ void Text::setTextStyle(TextStyleType idx)
 
 void Text::setStyled(bool v)
       {
-      _styled = v;
-      setSystemFlag(style().systemFlag());
+      if (_styled != v) {
+            _styled = v;
+            setSystemFlag(style().systemFlag());
+            }
       }
 
 //---------------------------------------------------------

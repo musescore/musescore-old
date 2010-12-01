@@ -55,7 +55,7 @@ PaletteBoxButton {
       font-size: 11pt; font-family: "FreeSans";
       border: 1px solid #787878;
       border-style: outset;
-      border-radius: 6px;
+      border-radius: 4px;
       background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
          stop: 0 #606060, stop: 1 #707070);
       color: white;
@@ -78,14 +78,14 @@ PaletteBox {
 QMenu#PaletteContext  {
       border: 1px solid #787878;
       border-style: outset;
-      border-radius: 6px;
+      border-radius: 4px;
       background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
          stop: 0 #606060, stop: 1 #707070);
       color: white
       }
 Palette {
       color: black;
-      background-color: #a0a0a0;
+      background-color: #b0b0b0;
       alternate-background-color: blue;
       }
 VoiceSelector VoiceButton {

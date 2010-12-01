@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>584</width>
-    <height>375</height>
+    <width>560</width>
+    <height>376</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -81,6 +81,12 @@
                <property name="text">
                 <string>additional leading space </string>
                </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+               <property name="margin">
+                <number>5</number>
+               </property>
               </widget>
              </item>
              <item row="0" column="1">
@@ -101,6 +107,12 @@
                <property name="text">
                 <string>additional trailing space</string>
                </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+               <property name="margin">
+                <number>5</number>
+               </property>
               </widget>
              </item>
              <item row="1" column="1">
@@ -120,6 +132,12 @@
               <widget class="QLabel" name="label_6">
                <property name="text">
                 <string>stem direction</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+               <property name="margin">
+                <number>5</number>
                </property>
               </widget>
              </item>
@@ -171,7 +189,7 @@
            <item>
             <layout class="QFormLayout" name="formLayout_3">
              <property name="verticalSpacing">
-              <number>1</number>
+              <number>0</number>
              </property>
              <item row="5" column="0">
               <widget class="QLabel" name="label_4">
@@ -183,6 +201,12 @@
                </property>
                <property name="text">
                 <string>tuning offset</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+               <property name="margin">
+                <number>5</number>
                </property>
               </widget>
              </item>
@@ -222,12 +246,30 @@
                <property name="text">
                 <string>velocity type</string>
                </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+               <property name="margin">
+                <number>5</number>
+               </property>
               </widget>
              </item>
              <item row="8" column="0">
               <widget class="QLabel" name="label_8">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="text">
                 <string>velocity (0-127)</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+               <property name="margin">
+                <number>5</number>
                </property>
               </widget>
              </item>
@@ -277,6 +319,12 @@
                <property name="text">
                 <string>note head positon </string>
                </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+               <property name="margin">
+                <number>5</number>
+               </property>
               </widget>
              </item>
              <item row="4" column="1">
@@ -306,15 +354,39 @@
              </item>
              <item row="2" column="0">
               <widget class="QLabel" name="label_13">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="text">
                 <string>Note Head Group</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+               <property name="margin">
+                <number>5</number>
                </property>
               </widget>
              </item>
              <item row="3" column="0">
               <widget class="QLabel" name="label_14">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="text">
                 <string>Note Head Type</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+               <property name="margin">
+                <number>5</number>
                </property>
               </widget>
              </item>
@@ -431,12 +503,18 @@
               <enum>QFormLayout::ExpandingFieldsGrow</enum>
              </property>
              <property name="verticalSpacing">
-              <number>1</number>
+              <number>0</number>
              </property>
              <item row="0" column="0">
               <widget class="QLabel" name="label_10">
                <property name="text">
                 <string>ontime offset</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+               <property name="margin">
+                <number>5</number>
                </property>
               </widget>
              </item>
@@ -463,6 +541,12 @@
               <widget class="QLabel" name="label_12">
                <property name="text">
                 <string>offtime</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+               <property name="margin">
+                <number>5</number>
                </property>
               </widget>
              </item>

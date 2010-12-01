@@ -42,7 +42,7 @@ static QTextDocumentFragment parseInstrName(const QString& name)
       QTextCharFormat f = cursor.charFormat();
       QTextCharFormat sf(f);
 
-      QFont font("MScore1-test");
+      QFont font("MScore1");
       sf.setFont(font);
 
       QDomDocument dom;

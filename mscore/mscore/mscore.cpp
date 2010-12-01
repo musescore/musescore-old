@@ -369,16 +369,19 @@ MuseScore::MuseScore()
       _midiRecordId         = -1;
 
       _positionLabel = new QLabel;
+      _positionLabel->setObjectName("decoration widget");  // this prevents animations
+
       _positionLabel->setText("001:01:000");
-      _positionLabel->setAutoFillBackground(true);
-      QPalette p(_positionLabel->palette());
-      p.setColor(QPalette::Window, QColor(176, 190, 242));
-      _positionLabel->setPalette(p);
+//      _positionLabel->setAutoFillBackground(true);
+//      QPalette p(_positionLabel->palette());
+//      p.setColor(QPalette::Window, QColor(176, 190, 242));
+//      _positionLabel->setPalette(p);
 
       _modeText = new QLabel;
       _modeText->setAutoFillBackground(true);
-      p.setColor(QPalette::Window, QColor(176, 190, 242));
-      _modeText->setPalette(p);
+//      QPalette p(_positionLabel->palette());
+//      p.setColor(QPalette::Window, QColor(176, 190, 242));
+//      _modeText->setPalette(p);
       _statusBar = new QStatusBar;
       _statusBar->addPermanentWidget(_modeText, 0);
       _statusBar->addPermanentWidget(_positionLabel, 0);
@@ -513,7 +516,7 @@ MuseScore::MuseScore()
       a->setChecked(preferences.playRepeats);
       transportTools->addAction(a);
 
-      fileTools->addAction(getAction("mag"));
+//      fileTools->addAction(getAction("mag"));
 
       mag = new MagBox;
       connect(mag, SIGNAL(magChanged(int)), SLOT(magChanged(int)));
@@ -1996,7 +1999,7 @@ int main(int argc, char* av[])
       //
       static const char* fonts[] = {
 //            "mscore-20", "mscore1-20", "MuseJazz", "DejaVuSans", "DejaVuSerif"
-            "mscore-20", "MScore1-20_new", "MuseJazz", "FreeSans", "FreeSerif",
+            "mscore-20", "mscore1-20", "MuseJazz", "FreeSans", "FreeSerif",
             "gonville-20"
             };
       for (unsigned i = 0; i < sizeof(fonts)/sizeof(*fonts); ++i) {

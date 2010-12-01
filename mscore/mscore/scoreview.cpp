@@ -67,6 +67,7 @@
 #include "lasso.h"
 #include "box.h"
 #include "cursor.h"
+#include "texttools.h"
 
 //---------------------------------------------------------
 //   stateNames

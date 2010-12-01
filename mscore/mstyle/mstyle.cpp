@@ -624,8 +624,8 @@ void MStyle::polish(QWidget* widget)
             return;
 
       // register widget to animations
-      animations().registerWidget( widget );
-      transitions().registerWidget( widget );
+      animations().registerWidget(widget);
+      transitions().registerWidget(widget);
 //      windowManager().registerWidget(widget);
       frameShadowFactory().registerWidget(widget, _helper);
 
@@ -816,8 +816,10 @@ void MStyle::polish(QWidget* widget)
 void MStyle::unpolish(QWidget* widget)
       {
       // register widget to animations
-      animations().unregisterWidget( widget );
-      transitions().unregisterWidget( widget );
+
+      animations().unregisterWidget(widget);
+      transitions().unregisterWidget(widget);
+
 //      windowManager().unregisterWidget( widget );
       frameShadowFactory().unregisterWidget( widget );
 
@@ -4786,7 +4788,7 @@ bool MStyle::drawMenuItemControl(const QStyleOption* option, QPainter* painter, 
       const bool mouseOver( enabled && (flags & State_MouseOver) );
 
       //First of all,render the background.
-      renderMenuItemBackground( option, painter, widget );
+      renderMenuItemBackground(option, painter, widget);
 
       // do nothing if invalid option, or empty area
       const QStyleOptionMenuItem* menuItemOption = qstyleoption_cast<const QStyleOptionMenuItem*>(option);
@@ -4794,8 +4796,8 @@ bool MStyle::drawMenuItemControl(const QStyleOption* option, QPainter* painter, 
             return true;
 
       //First, figure out the left column width.
-      const int iconColW = qMax( menuItemOption->maxIconWidth, (int)MenuItem_IconWidth );
-      const int checkColW = MenuItem_CheckWidth;
+      const int iconColW   = qMax( menuItemOption->maxIconWidth, (int)MenuItem_IconWidth );
+      const int checkColW  = MenuItem_CheckWidth;
       const int checkSpace = MenuItem_CheckSpace;
 
       int leftColW = iconColW;
@@ -4852,105 +4854,95 @@ bool MStyle::drawMenuItemControl(const QStyleOption* option, QPainter* painter, 
       //Remove the margin (for everything but the column background)
       const QRect ir( insideMargin(r, MenuItem_Margin ) );
 
-      //Active indicator...
-      if( active && enabled )
-                    {
+      // Active indicator...
+      if (active && enabled) {
+            // check if there is a 'sliding' animation in progress, in which case, do nothing
+            const QRect animatedRect( animations().menuEngine().animatedRect( widget ) );
+            if (animatedRect.isNull()) {
+                  const bool animated( animations().menuEngine().isAnimated(widget, Current ) );
+                  const QRect currentRect( animations().menuEngine().currentRect( widget, Current ) );
+                  const bool intersected( currentRect.contains( r.topLeft() ) );
 
-                        // check if there is a 'sliding' animation in progress, in which case, do nothing
-                        const QRect animatedRect( animations().menuEngine().animatedRect( widget ) );
-                        if( animatedRect.isNull() )
-                              {
+                  const QColor color( _helper.menuBackgroundColor( palette.color( QPalette::Window ), widget, r.center() ) );
 
-                                  const bool animated( animations().menuEngine().isAnimated(widget, Current ) );
-                                  const QRect currentRect( animations().menuEngine().currentRect( widget, Current ) );
-                                  const bool intersected( currentRect.contains( r.topLeft() ) );
+                  if (animated && intersected)
+                        renderMenuItemRect( option, r, color, palette, painter, animations().menuEngine().opacity( widget, Current ) );
+                  else
+                        renderMenuItemRect( option, r, color, palette, painter );
+                  }
+            }
 
-                                  const QColor color( _helper.menuBackgroundColor( palette.color( QPalette::Window ), widget, r.center() ) );
+      // color
+      QPalette::ColorRole textRole((active && enabled && MStyleConfigData::menuHighlightMode == MStyleConfigData::MM_STRONG ) ?
+         QPalette::HighlightedText: QPalette::WindowText);
 
-                                  if( animated && intersected ) renderMenuItemRect( option, r, color, palette, painter, animations().menuEngine().opacity( widget, Current ) );
-                                        else renderMenuItemRect( option, r, color, palette, painter );
+      //Readjust the column rectangle back to proper height
+      QRect leftColRect(ir.x(), ir.y(), leftColW, ir.height());
 
-                              }
+      // paint a normal check- resp. radiomark.
+      const QRect checkColRect(leftColRect.x(), leftColRect.y(),checkColW, leftColRect.height());
 
-                    }
+      const CheckBoxState checkBoxState( menuItemOption->checked ? CheckOn:CheckOff );
+      if (menuItemOption->checkType == QStyleOptionMenuItem::NonExclusive) {
+            StyleOptions opts(0);
+            opts |= Sunken;
+            if (!enabled)
+                  opts |= Disabled;
+            if (mouseOver)
+                  opts |= Hover;
+            if( hasFocus)
+                  opts |= Focus;
 
-              // color
-              QPalette::ColorRole textRole( ( active && enabled && MStyleConfigData::menuHighlightMode == MStyleConfigData::MM_STRONG ) ?
-                  QPalette::HighlightedText:
-                  QPalette::WindowText );
+            const QRect r( handleRTL(option, checkColRect) );
+            QPalette localPalette( palette );
+            localPalette.setColor( QPalette::Window, _helper.menuBackgroundColor( palette.color( QPalette::Window ), widget, r.topLeft() ) );
+            renderCheckBox( painter, r.adjusted(2,-2,2,2), localPalette, opts, checkBoxState );
+            }
+      else if( menuItemOption->checkType == QStyleOptionMenuItem::Exclusive) {
+            StyleOptions opts(0);
+            if( !enabled )
+                  opts |= Disabled;
+            if( mouseOver )
+                  opts |= Hover;
+            if( hasFocus )
+                  opts |= Focus;
 
-              //Readjust the column rectangle back to proper height
-              QRect leftColRect(ir.x(), ir.y(), leftColW, ir.height());
+            const QRect r( handleRTL(option, checkColRect) );
+            QPalette localPalette( palette );
+            localPalette.setColor( QPalette::Window, _helper.menuBackgroundColor( palette.color( QPalette::Window ), widget, r.topLeft() ) );
+            renderRadioButton( painter, r.adjusted(2,-2,2,2), localPalette, opts, checkBoxState );
+            }
 
-              // paint a normal check- resp. radiomark.
-              const QRect checkColRect(
-                  leftColRect.x(), leftColRect.y(),
-                  checkColW, leftColRect.height() );
+      // Paint the menu icon.
+      if( !menuItemOption->icon.isNull()) {
+            QRect iconColRect;
+            if( hasCheckableItems ) {
+                  iconColRect = QRect(
+                     leftColRect.x()+checkColW+checkSpace, leftColRect.y(),
+                     leftColRect.width()-(checkColW+checkSpace), leftColRect.height() );
+                  }
+            else
+                  iconColRect = leftColRect;
+            // icon mode
+            QIcon::Mode mode;
+            if (enabled)
+                  mode = active ? QIcon::Active: QIcon::Normal;
+            else
+                  mode = QIcon::Disabled;
 
-              const CheckBoxState checkBoxState( menuItemOption->checked ? CheckOn:CheckOff );
-              if( menuItemOption->checkType == QStyleOptionMenuItem::NonExclusive)
-                    {
+            // icon state
+            const QIcon::State iconState(
+               ( (flags & State_On) || (flags & State_Sunken) ) ? QIcon::On:QIcon::Off );
 
-                        StyleOptions opts(0);
-                        opts |= Sunken;
-                        if( !enabled ) opts |= Disabled;
-                              if( mouseOver ) opts |= Hover;
-                              if( hasFocus ) opts |= Focus;
-
-                        const QRect r( handleRTL(option, checkColRect) );
-                        QPalette localPalette( palette );
-                        localPalette.setColor( QPalette::Window, _helper.menuBackgroundColor( palette.color( QPalette::Window ), widget, r.topLeft() ) );
-                        renderCheckBox( painter, r.adjusted(2,-2,2,2), localPalette, opts, checkBoxState );
-
-                    } else if( menuItemOption->checkType == QStyleOptionMenuItem::Exclusive) {
-
-                        StyleOptions opts(0);
-                        if( !enabled ) opts |= Disabled;
-                              if( mouseOver ) opts |= Hover;
-                              if( hasFocus ) opts |= Focus;
-
-                        const QRect r( handleRTL(option, checkColRect) );
-                        QPalette localPalette( palette );
-                        localPalette.setColor( QPalette::Window, _helper.menuBackgroundColor( palette.color( QPalette::Window ), widget, r.topLeft() ) );
-                        renderRadioButton( painter, r.adjusted(2,-2,2,2), localPalette, opts, checkBoxState );
-
-                    }
-
-              // Paint the menu icon.
-              if( !menuItemOption->icon.isNull())
-                    {
-
-                        QRect iconColRect;
-
-                        if( hasCheckableItems )
-                              {
-
-                                  iconColRect = QRect(
-                                      leftColRect.x()+checkColW+checkSpace, leftColRect.y(),
-                                      leftColRect.width()-(checkColW+checkSpace), leftColRect.height() );
-
-                              } else iconColRect = leftColRect;
-
-                        // icon mode
-                        QIcon::Mode mode;
-                        if( enabled ) mode = active ? QIcon::Active: QIcon::Normal;
-                              else mode = QIcon::Disabled;
-
-                        // icon state
-                        const QIcon::State iconState(
-                            ( (flags & State_On) || (flags & State_Sunken) ) ?
-                            QIcon::On:QIcon::Off );
-
-                        // icon size
-                        const QSize size( pixelMetric(PM_SmallIconSize), pixelMetric(PM_SmallIconSize) );
-                        const QRect r( handleRTL(option, centerRect(iconColRect, size ) ) );
-                        const QPixmap icon = menuItemOption->icon.pixmap(size, mode, iconState);
-                        painter->drawPixmap( centerRect( r, size ), icon );
-
-                    }
+            // icon size
+            const QSize size( pixelMetric(PM_SmallIconSize), pixelMetric(PM_SmallIconSize) );
+            const QRect r( handleRTL(option, centerRect(iconColRect, size ) ) );
+            const QPixmap icon = menuItemOption->icon.pixmap(size, mode, iconState);
+            painter->drawPixmap( centerRect( r, size ), icon );
+            }
 
 
-              //Now include the spacing when calculating the next columns
+      //Now include the spacing when calculating the next columns
               leftColW += MenuItem_IconSpace;
 
               //Render the text, including any accel.
@@ -4972,42 +4964,38 @@ bool MStyle::drawMenuItemControl(const QStyleOption* option, QPainter* painter, 
 
                     }
 
-              //Draw the text.
-              drawItemText(
-                  painter, textRect, Qt::AlignVCenter | Qt::TextShowMnemonic, palette,
-                  enabled, text, textRole);
+      //Draw the text.
+      drawItemText(
+         painter, textRect, Qt::AlignVCenter | Qt::TextShowMnemonic, palette,
+         enabled, text, textRole);
 
-              //Render arrow, if need be.
-              if( menuItemOption->menuItemType == QStyleOptionMenuItem::SubMenu )
-                    {
+      //Render arrow, if need be.
+      if( menuItemOption->menuItemType == QStyleOptionMenuItem::SubMenu ) {
+            const qreal penThickness = 1.6;
+            const QColor color = palette.color( textRole );
+            const QColor background = palette.color(QPalette::Window);
 
-                        const qreal penThickness = 1.6;
-                        const QColor color = palette.color( textRole );
-                        const QColor background = palette.color(QPalette::Window);
+            const int aw = MenuItem_ArrowWidth;
+            QRect arrowRect = handleRTL( option, QRect(ir.x() + ir.width() - aw, ir.y(), aw, ir.height()) );
 
-                        const int aw = MenuItem_ArrowWidth;
-                        QRect arrowRect = handleRTL( option, QRect(ir.x() + ir.width() - aw, ir.y(), aw, ir.height()) );
+            // get arrow shape
+            QPolygonF a = genericArrow( option->direction == Qt::LeftToRight ? ArrowRight : ArrowLeft, ArrowNormal );
 
-                        // get arrow shape
-                        QPolygonF a = genericArrow( option->direction == Qt::LeftToRight ? ArrowRight : ArrowLeft, ArrowNormal );
+            painter->translate( arrowRect.center() );
+            painter->setRenderHint(QPainter::Antialiasing);
 
-                        painter->translate( arrowRect.center() );
-                        painter->setRenderHint(QPainter::Antialiasing);
+            // white reflection
+            const qreal offset( qMin( penThickness, qreal(1.0)) );
+            painter->translate(0,offset);
+            painter->setPen(QPen(_helper.calcLightColor( background ), penThickness, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+            painter->drawPolyline(a);
+            painter->translate(0,-offset);
 
-                        // white reflection
-                        const qreal offset( qMin( penThickness, qreal(1.0)) );
-                        painter->translate(0,offset);
-                        painter->setPen(QPen(_helper.calcLightColor( background ), penThickness, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-                        painter->drawPolyline(a);
-                        painter->translate(0,-offset);
-
-                        painter->setPen(QPen( _helper.decoColor( background, color ) , penThickness, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-                        painter->drawPolyline(a);
-
-                    }
-
-              return true;
-          }
+            painter->setPen(QPen( _helper.decoColor( background, color ) , penThickness, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+            painter->drawPolyline(a);
+            }
+      return true;
+      }
 
 bool MStyle::drawProgressBarControl( const QStyleOption* option, QPainter* painter, const QWidget* widget) const
     {

@@ -35,7 +35,6 @@ class StaffType {
       bool _modified;         // if true, this StaffType belongs to Score(),
                               // otherwise it is a global build in
       QString _name;
-      StaffGroup _group;
       uchar _lines;
       Spatium _lineDistance;
       bool _genClef;          // create clef at beginning of system
@@ -49,8 +48,9 @@ class StaffType {
       StaffType(const QString& s);
       QString name() const                     { return _name;            }
       void setName(const QString& val)         { _name = val;             }
-      void setGroup(StaffGroup g)              { _group = g;              }
-      StaffGroup group() const                 { return _group;           }
+      virtual StaffGroup group() const = 0;
+      virtual StaffType* clone() const = 0;
+      virtual const char* groupName() const = 0;
       void setLines(int val)                   { _lines = val;            }
       int lines() const                        { return _lines;           }
       void setLineDistance(const Spatium& val) { _lineDistance = val;     }
@@ -86,6 +86,9 @@ class StaffTypePitched : public StaffType {
    public:
       StaffTypePitched() : StaffType() {}
       StaffTypePitched(const QString& s) : StaffType(s) {}
+      virtual StaffGroup group() const        { return PITCHED_STAFF; }
+      virtual StaffTypePitched* clone() const { return new StaffTypePitched(*this); }
+      virtual const char* groupName() const   { return "pitched"; }
       };
 
 //---------------------------------------------------------
@@ -97,6 +100,9 @@ class StaffTypeTablature : public StaffType {
    public:
       StaffTypeTablature() : StaffType() {}
       StaffTypeTablature(const QString& s) : StaffType(s) {}
+      virtual StaffGroup group() const          { return TAB_STAFF; }
+      virtual StaffTypeTablature* clone() const { return new StaffTypeTablature(*this); }
+      virtual const char* groupName() const     { return "tablature"; }
       };
 
 //---------------------------------------------------------
@@ -108,6 +114,9 @@ class StaffTypePercussion : public StaffType {
    public:
       StaffTypePercussion() : StaffType() {}
       StaffTypePercussion(const QString& s) : StaffType(s) {}
+      virtual StaffGroup group() const           { return PERCUSSION_STAFF; }
+      virtual StaffTypePercussion* clone() const { return new StaffTypePercussion(*this); }
+      virtual const char* groupName() const      { return "percussion"; }
       };
 
 extern void initStaffTypes();

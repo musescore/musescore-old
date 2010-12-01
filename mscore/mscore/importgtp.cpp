@@ -2846,7 +2846,7 @@ bool Score::importGTP(const QString& name)
             s->setUpdateKeymap(true);
             StaffType* st = staff->staffType();
             if (st->modified())
-                  st = new StaffType(*st);
+                  st = st->clone();
             s->setStaffType(st);
             int idx = score->staffTypes().indexOf(st);
             if (idx == -1)

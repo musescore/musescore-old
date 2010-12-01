@@ -88,7 +88,7 @@ void EditStaffType::saveCurrent(QListWidgetItem* o)
                   }
 #endif
             st->setName(o->text());
-            st->setGroup(sg);
+//TODO: cannot morph            st->setGroup(sg);
             st->setLines(lines->value());
             st->setLineDistance(Spatium(lineDistance->value()));
             st->setGenClef(useClef->isChecked());
@@ -135,7 +135,7 @@ void EditStaffType::createNewType()
       // initialize new StaffType with current selected one
       //
       int idx       = staffTypeList->currentItem()->data(Qt::UserRole).toInt();
-      StaffType* ns = new StaffType(*staffTypes[idx]);
+      StaffType* ns = staffTypes[idx]->clone();
       ns->setModified(true);
 
       //

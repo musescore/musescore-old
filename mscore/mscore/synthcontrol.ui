@@ -123,10 +123,6 @@
                <property name="text">
                 <string>...</string>
                </property>
-               <property name="icon">
-                <iconset resource="mscore.qrc">
-                 <normaloff>:/data/fileopen.svg</normaloff>:/data/fileopen.svg</iconset>
-               </property>
               </widget>
              </item>
             </layout>
@@ -294,10 +290,6 @@
                <property name="text">
                 <string>...</string>
                </property>
-               <property name="icon">
-                <iconset resource="mscore.qrc">
-                 <normaloff>:/data/filesave.svg</normaloff>:/data/filesave.svg</iconset>
-               </property>
               </widget>
              </item>
             </layout>
@@ -427,10 +419,6 @@
               <widget class="QToolButton" name="saveChorusPreset">
                <property name="text">
                 <string>...</string>
-               </property>
-               <property name="icon">
-                <iconset resource="mscore.qrc">
-                 <normaloff>:/data/filesave.svg</normaloff>:/data/filesave.svg</iconset>
                </property>
               </widget>
              </item>
