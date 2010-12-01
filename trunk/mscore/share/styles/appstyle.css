@@ -42,7 +42,7 @@ PaletteBoxButton {
       font-size: 9pt; font-family: "FreeSans";
       border: 1px solid #787878;
       border-style: outset;
-      border-radius: 5px;
+      border-radius: 4px;
       background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
          stop: 0 #606060, stop: 1 #707070);
       color: white;

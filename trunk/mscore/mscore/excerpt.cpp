@@ -113,8 +113,8 @@ Score* createExcerpt(const QList<Part*>& parts)
                   s->setUpdateKeymap(true);
                   StaffType* st = staff->staffType();
                   if (st->modified())
-                        st = new StaffType(*st);
-                  s->setStaffType(staff->staffType());
+                        st = st->clone();
+                  s->setStaffType(st);
                   int idx = score->staffTypes().indexOf(st);
                   if (idx == -1)
                         score->staffTypes().append(st);

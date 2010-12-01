@@ -49,57 +49,5 @@ class TextPalette : public QWidget, public Ui::TextPaletteBase {
       Text* text() { return _textElement; }
       };
 
-//---------------------------------------------------------
-//   TextTools
-//---------------------------------------------------------
-
-class TextTools : public QDockWidget {
-      Q_OBJECT
-
-      Text* _textElement;
-      QTextCharFormat format;
-      QTextBlockFormat bformat;
-      QDoubleSpinBox* typefaceSize;
-      QFontComboBox* typefaceFamily;
-      QAction* typefaceBold;
-      QAction* typefaceItalic;
-      QAction* typefaceUnderline;
-      QAction* leftAlign;
-      QAction* centerAlign;
-      QAction* topAlign;
-      QAction* bottomAlign;
-      QAction* vcenterAlign;
-      QAction* rightAlign;
-      QAction* typefaceSubscript;
-      QAction* typefaceSuperscript;
-      QAction* showKeyboard;
-
-      void blockAllSignals(bool val);
-
-   private slots:
-      void sizeChanged(double value);
-      void moveFocus();
-      void fontChanged(const QFont&);
-      void boldClicked(bool);
-      void italicClicked(bool);
-      void underlineClicked(bool);
-      void subscriptClicked(bool);
-      void superscriptClicked(bool);
-      void setLeftAlign();
-      void setRightAlign();
-      void setHCenterAlign();
-      void setTopAlign();
-      void setBottomAlign();
-      void setVCenterAlign();
-      void showKeyboardClicked(bool);
-
-   public:
-      TextTools(QWidget* parent = 0);
-      void setText(Text* te);
-      void setCharFormat(const QTextCharFormat&);
-      void setBlockFormat(const QTextBlockFormat&);
-      QAction* kbAction() const { return showKeyboard; }
-      };
-
 #endif
 

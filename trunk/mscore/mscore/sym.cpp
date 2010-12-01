@@ -412,7 +412,7 @@ QFont fontId2font(int fontId)
             _font.setStyleStrategy(QFont::NoFontMerging);
             }
       else if (fontId == 1)
-            _font.setFamily("MScore1-test");
+            _font.setFamily("MScore1");
       else if (fontId == 2) {
             _font.setFamily("FreeSerif");
             _font.setStyleStrategy(QFont::NoFontMerging);

@@ -112,6 +112,7 @@ enum ElementType {
 
       // special types for drag& drop:
       ELEMENT, ELEMENT_LIST, STAFF_LIST, MEASURE_LIST, LAYOUT,
+
       HBOX, VBOX, TBOX, FBOX,
       ICON,
       ACCIDENTAL_BRACKET,

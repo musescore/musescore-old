@@ -217,16 +217,22 @@
 
     }
 
-    //____________________________________________________________
-    void Animations::registerWidget( QWidget* widget ) const
-    {
+//---------------------------------------------------------
+//   registerWidget
+//---------------------------------------------------------
 
-        if( !widget ) return;
+void Animations::registerWidget( QWidget* widget ) const
+      {
+      if (!widget)
+            return;
 
-        // these are needed to not register animations for kwin widgets
-        if( widget->objectName() == "decoration widget" ) return;
-        if( widget->inherits( "KCommonDecorationButton" ) ) return;
-        if( widget->inherits( "QShapedPixmapWidget" ) ) return;
+      // these are needed to not register animations for kwin widgets
+      if (widget->objectName() == "decoration widget")
+            return;
+      if (widget->inherits("KCommonDecorationButton"))
+            return;
+      if (widget->inherits("QShapedPixmapWidget"))
+            return;
 
         // all widgets are registered to the enability engine.
         widgetEnabilityEngine().registerWidget( widget, AnimationEnable );
@@ -302,8 +308,7 @@
 
     }
 
-    //____________________________________________________________
-    void Animations::unregisterWidget( QWidget* widget ) const
+void Animations::unregisterWidget( QWidget* widget ) const
     {
 
         if( !widget ) return;

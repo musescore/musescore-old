@@ -28,6 +28,7 @@
 #include "score.h"
 #include "file.h"
 #include "msynth/sparm_p.h"
+#include "icons.h"
 
 //---------------------------------------------------------
 //   SynthControl
@@ -37,6 +38,10 @@ SynthControl::SynthControl(MasterSynth* s, QWidget* parent)
    : QWidget(parent, Qt::Dialog)
       {
       setupUi(this);
+      sfButton->setIcon(*icons[fileOpen_ICON]);
+      saveReverbPreset->setIcon(*icons[fileSave_ICON]);
+      saveChorusPreset->setIcon(*icons[fileSave_ICON]);
+
       synti = s;
 
       reverbRoomSize->setId(0);

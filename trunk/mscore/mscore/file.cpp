@@ -1342,11 +1342,22 @@ bool Score::read(QDomElement dScore)
             else if (tag == "StaffType") {
                   int idx        = ee.attribute("idx").toInt();
                   StaffType* ost = _staffTypes.value(idx);
-                  StaffType* st  = ost ? new StaffType(*ost) : new StaffType;
+                  StaffType* st;
+                  if (ost)
+                        st = ost->clone();
+                  else {
+                        QString group  = ee.attribute("group", "pitched");
+                        if (group == "percussion")
+                              st  = new StaffTypePercussion();
+                        else if (group == "tablature")
+                              st  = new StaffTypeTablature();
+                        else
+                              st  = new StaffTypePitched();
+                        }
                   st->read(ee);
-                  if (_staffTypes.value(idx)) {            // if there is already a stafftype
-                        if (_staffTypes[idx]->modified())  // if it belongs to Score()
-                              delete _staffTypes[idx];
+                  if (ost) {            // if there is already a stafftype
+                        if (ost->modified())  // if it belongs to Score()
+                              delete ost;
                         _staffTypes[idx] = st;
                         }
                   else

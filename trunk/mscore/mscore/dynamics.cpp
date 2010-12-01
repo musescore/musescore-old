@@ -159,7 +159,7 @@ void Dynamic::setSubtype(int idx)
                   m *= (score()->spatium() / (SPATIUM20 * DPI));
             m *= mag();
 
-            QFont font("MScore1-test");
+            QFont font("MScore1");
             font.setPointSizeF(m);
             font.setKerning(true);
             font.setStyleStrategy(QFont::NoFontMerging);

@@ -32,7 +32,6 @@ QList<StaffType*> staffTypes;
 void initStaffTypes()
       {
       StaffType* st = new StaffTypePitched("Pitched 5 lines");
-      st->setGroup(PITCHED_STAFF);
       st->setLines(5);
       st->setLineDistance(Spatium(1.0));
       st->setGenClef(true);
@@ -43,7 +42,6 @@ void initStaffTypes()
       staffTypes.append(st);
 
       st = new StaffTypeTablature("Tab");
-      st->setGroup(TAB_STAFF);
       st->setLines(6);
       st->setLineDistance(Spatium(1.5));
       st->setGenClef(true);
@@ -54,7 +52,6 @@ void initStaffTypes()
       staffTypes.append(st);
 
       st = new StaffTypePercussion("Percussion 5 lines");
-      st->setGroup(PERCUSSION_STAFF);
       st->setLines(5);
       st->setLineDistance(Spatium(1.0));
       st->setGenClef(true);
@@ -86,7 +83,7 @@ StaffType::StaffType(const QString& s)
 
 void StaffType::write(Xml& xml, int idx) const
       {
-      xml.stag(QString("StaffType idx=\"%1\"").arg(idx));
+      xml.stag(QString("StaffType idx=\"%1\" group=\"%2\"").arg(idx).arg(groupName()));
       xml.tag("name", name());
       if (lines() != 5)
             xml.tag("lines", lines());
