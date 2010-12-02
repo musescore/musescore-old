@@ -1,7 +1,7 @@
 //=============================================================================
 //  MusE Score
 //  Linux Music Score Editor
-//  $Id:$
+//  $Id$
 //
 //  Copyright (C) 2010 Werner Schweer and others
 //
@@ -208,10 +208,10 @@ void StaffTypeTablature::init()
       // for specific members
       setDurationFontName("FreeSans");
       setDurationFontSize(10.0);
-      setDurationFontY(0.0);
+      setDurationFontUserY(0.0);
       setFretFontName("FreeSans");
       setFretFontSize(9.0);
-      setFretY(0.0);
+      setFretFontUserY(0.0);
       setGenDurations(false);
       setLinesThrough(false);
       setOnLines(true);
@@ -238,13 +238,13 @@ void StaffTypeTablature::read(QDomElement e)
             else if(tag == "durationFontSize")
                   setDurationFontSize(val);
             else if(tag == "durationFontY")
-                  setDurationFontY(val);
+                  setDurationFontUserY(val);
             else if(tag == "fretFontName")
                   setFretFontName(e.text());
             else if(tag == "fretFontSize")
                   setFretFontSize(val);
-            else if(tag == "fretY")
-                  setFretY(val);
+            else if(tag == "fretFontY")
+                  setFretFontUserY(val);
             else if(tag == "linesThrough")
                   setLinesThrough(v != 0);
             else if(tag == "onLines")
@@ -265,15 +265,15 @@ void StaffTypeTablature::read(QDomElement e)
 
 void StaffTypeTablature::write(Xml& xml, int idx) const
       {
-      xml.stag(QString("StaffType idx=\"%1\" group=\"%2\"").arg(idx).arg( (int)group() ));
+      xml.stag(QString("StaffType idx=\"%1\" group=\"%2\"").arg(idx).arg(groupName()));
       StaffType::writeProperties(xml);
       xml.tag("durations",        _genDurations);
       xml.tag("durationFontName", _durationFontName);
       xml.tag("durationFontSize", _durationFontSize);
-      xml.tag("durationFontY",    _durationFontY);
+      xml.tag("durationFontY",    _durationFontUserY);
       xml.tag("fretFontName",     _fretFontName);
       xml.tag("fretFontSize",     _fretFontSize);
-      xml.tag("fretY",            _fretY);
+      xml.tag("fretFontY",        _fretFontUserY);
       xml.tag("linesThrough",     _linesThrough);
       xml.tag("onLines",          _onLines);
       xml.tag("timesig",          _genTimesig);
@@ -284,7 +284,7 @@ void StaffTypeTablature::write(Xml& xml, int idx) const
 //---------------------------------------------------------
 //   duration font properties
 //---------------------------------------------------------
-
+/*
 void StaffTypeTablature::setDurationFontName(QString name)
 {
       _durationTextStyle.setFamily(name);
@@ -299,12 +299,12 @@ void StaffTypeTablature::setDurationFontY(double val)
 {
       _durationTextStyle.setYoff(TAB_DEFAULT_DUR_YOFFS - (_onLines ? 0.0 : lineDistance().val()/2.0) + val);
       _durationFontY = val;
-}
+} */
 void StaffTypeTablature::setOnLines(bool val)
 {
       _onLines = val;
       _metricsValid = false;
-      setDurationFontY(durationFontY());
+      _durationYOffset = TAB_DEFAULT_DUR_YOFFS - (_onLines ? 0.0 : lineDistance().val()/2.0);
 }
 
 //---------------------------------------------------------
@@ -312,12 +312,12 @@ void StaffTypeTablature::setOnLines(bool val)
 //    return a new Text element already set to the proper duration style. The caller only needs to set
 //		the required text and dispose of the element once done.
 //---------------------------------------------------------
-
+/*
 Text * StaffTypeTablature::durationTextElement(QString text)
 {
       return 0;
 }
-
+*/
 //---------------------------------------------------------
 //   setMetrics
 //    checks whether the internally computed metrics are is still valid and re-computes them, if not
@@ -361,3 +361,46 @@ void StaffTypeTablature::setMetrics(double spatium)
       _refDPI = DPI;
       _refSpatium = spatium;
 }
+
+//---------------------------------------------------------
+//   TabDurationSymbol
+//---------------------------------------------------------
+
+TabDurationSymbol::TabDurationSymbol(Score* s)
+   : Element(s)
+      {
+      setFlags(ELEMENT_SELECTABLE);
+      setGenerated(true);
+      _tab  = 0;
+      _text = QString();
+      }
+
+TabDurationSymbol::TabDurationSymbol(const TabDurationSymbol& e)
+   : Element(e)
+      {
+      _tab = e._tab;
+      _text = e._text;
+      }
+
+//---------------------------------------------------------
+//   draw
+//---------------------------------------------------------
+
+void TabDurationSymbol::draw(QPainter& p, ScoreView*) const
+      {
+      if(!_tab)
+            return;
+      double mag = magS();
+      double imag = 1.0 / mag;
+      double currSpatium = spatium();
+
+      QFont f(_tab->durationFontName());
+      int size = lrint(_tab->durationFontSize() * DPI / PPI);
+      f.setPixelSize(size);
+      p.scale(mag, mag);
+      p.setFont(f);
+
+      p.drawText(0.0, _tab->durationFontYOffset() * spatium(), _text);
+
+      p.scale(imag, imag);
+      }

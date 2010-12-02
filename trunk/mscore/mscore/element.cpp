@@ -79,6 +79,7 @@
 #include "segment.h"
 #include "box.h"
 #include "instrchange.h"
+#include "stafftype.h"
 
 extern bool debugMode;
 extern bool showInvisible;
@@ -144,6 +145,7 @@ static const char* elementNames[] = {
       QT_TRANSLATE_NOOP("elementName", "Lasso"),
       QT_TRANSLATE_NOOP("elementName", "ShadowNote"),
       QT_TRANSLATE_NOOP("elementName", "RubberBand"),
+      QT_TRANSLATE_NOOP("elementName", "TabDurationSymbol"),
       QT_TRANSLATE_NOOP("elementName", "Page"),
       QT_TRANSLATE_NOOP("elementName", "HairPin"),
       QT_TRANSLATE_NOOP("elementName", "Ottava"),
@@ -1275,6 +1277,7 @@ Element* Element::create(ElementType type, Score* score)
             case TBOX:              return new TBox(score);
             case FBOX:              return new FBox(score);
             case MEASURE:           return new Measure(score);
+            case TAB_DURATION_SYMBOL: return new TabDurationSymbol(score);
 
             case SLUR_SEGMENT:
             case STEM_SLASH:
@@ -1397,7 +1400,8 @@ const char* Element::name(ElementType type)
             case TBOX:              return "TBox";
             case FBOX:              return "FBox";
             case ICON:              return "Icon";
-            case ACCIDENTAL_BRACKET: return "AccidentalBracket";
+            case ACCIDENTAL_BRACKET:  return "AccidentalBracket";
+            case TAB_DURATION_SYMBOL: return "TabDurationSymbol";
             case INVALID:
             case MAXTYPE:
                   break;
