@@ -61,19 +61,11 @@ void EditStaffType::saveCurrent(QListWidgetItem* o)
       {
       int idx       = o->data(Qt::UserRole).toInt();
       StaffType* st = staffTypes[idx];
-      StaffGroup sg;
-      if (typePitched->isChecked())
-            sg = PITCHED_STAFF;
-      else if (typeTab->isChecked())
-            sg = TAB_STAFF;
-      else if (typePercussion->isChecked())
-            sg = PERCUSSION_STAFF;
 
       if (name->text() != st->name()
-         || st->group() != sg
          || st->lines() != lines->value()
          || st->lineDistance().val() != lineDistance->value()
-         || st->genClef() != useClef->isChecked()
+//         || st->genClef() != useClef->isChecked()
          || st->genKeysig() != useKeysig->isChecked()
          || st->slashStyle() != stemless->isChecked()
          || st->showBarlines() != useBarlines->isChecked()
@@ -91,7 +83,7 @@ void EditStaffType::saveCurrent(QListWidgetItem* o)
 //TODO: cannot morph            st->setGroup(sg);
             st->setLines(lines->value());
             st->setLineDistance(Spatium(lineDistance->value()));
-            st->setGenClef(useClef->isChecked());
+//            st->setGenClef(useClef->isChecked());
             st->setGenKeysig(useKeysig->isChecked());
             st->setSlashStyle(stemless->isChecked());
             st->setShowBarlines(useBarlines->isChecked());
@@ -113,12 +105,23 @@ void EditStaffType::typeChanged(QListWidgetItem* n, QListWidgetItem* o)
       int idx = n->data(Qt::UserRole).toInt();
       StaffType* st = staffTypes[idx];
       name->setText(st->name());
-      typePitched->setChecked(st->group() == PITCHED_STAFF);
-      typeTab->setChecked(st->group() == TAB_STAFF);
-      typePercussion->setChecked(st->group() == PERCUSSION_STAFF);
+      switch(st->group()) {
+            case PITCHED_STAFF:
+                  stack->setCurrentIndex(0);
+                  staffGroup->setText(tr("Pitched"));
+                  break;
+            case TAB_STAFF:
+                  stack->setCurrentIndex(1);
+                  staffGroup->setText(tr("Tablature"));
+                  break;
+            case PERCUSSION_STAFF:
+                  stack->setCurrentIndex(2);
+                  staffGroup->setText(tr("Percussion"));
+                  break;
+            }
       lines->setValue(st->lines());
       lineDistance->setValue(st->lineDistance().val());
-      useClef->setChecked(st->genClef());
+//      useClef->setChecked(st->genClef());
       useKeysig->setChecked(st->genKeysig());
       stemless->setChecked(st->slashStyle());
       useBarlines->setChecked(st->showBarlines());
