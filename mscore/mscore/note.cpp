@@ -1264,8 +1264,9 @@ void Note::layout()
                         _dots[i] = new NoteDot(score());
                         _dots[i]->setIdx(i);
                         _dots[i]->setParent(this);
-                        if(useTablature)
-                              _dots[i]->setVisible(false);
+//                        if(useTablature)
+//                              _dots[i]->setVisible(false);
+                        _dots[i]->setTrack(track());  // needed to know the staff it belongs to (and detect tablature)
                         }
                   _dots[i]->layout();
                   }
