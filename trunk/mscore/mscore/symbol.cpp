@@ -192,7 +192,8 @@ void Symbol::layout()
 
 void Symbol::draw(QPainter& p, ScoreView*) const
       {
-      symbols[score()->symIdx()][_sym].draw(p, magS());
+      if(type() != NOTEDOT || !staff()->useTablature())
+            symbols[score()->symIdx()][_sym].draw(p, magS());
       }
 
 //---------------------------------------------------------
