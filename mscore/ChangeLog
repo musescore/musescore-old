@@ -1,3 +1,8 @@
+2.dec (mi)
+      - replaced use of Text() element for tablature duration symbols
+        with specific TAB_DURATION_SYMBOL element
+1.dec (mi)
+      - moved tablature visual config. from Tablature() to StaffTypeTablature()
 1.dec (ws)
       - save StaffGroup type in xml for StaffType
       - add method clone() to StaffType()

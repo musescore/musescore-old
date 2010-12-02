@@ -1420,28 +1420,19 @@ void Chord::layout()
                               || prevCR->dots() != dots()) {
                         // remove previously added duration symbol, if any
                         foreach(Element * el, segm->annotations()) {
-                              if(el->track() == track() && el->type() == TEXT && el->generated()) {
+                              if(el->track() == track() && el->type() == TAB_DURATION_SYMBOL && el->generated()) {
                                     segm->removeAnnotation(el);
                                     break;
                                     }
                               }
-                        // create a new TEXT element with duration symbol style
-                        // (duration symbol style is not (yet?) a proper style and should be created manually)
-                        TextStyle txtStyle = TextStyle();
-                        txtStyle.setFamily(tab->durationFontName());
-                        txtStyle.setSize(tab->durationFontSize());
-                        txtStyle.setOffsetType(OFFSET_SPATIUM);
-                        txtStyle.setYoff(-1.75 - (tab->onLines() ? 0.0 : 0.75) + tab->durationFontY());
-                        Text * durSym = new Text(score());
-                        durSym->setSubtype(TEXT_UNKNOWN);
-                        durSym->setLocalStyle(txtStyle);
-                        durSym->setStyled(false);
+                        // create a new TAB_DURATION_SYMBOL element with duration symbol(s)
+                        TabDurationSymbol * durSym = new TabDurationSymbol(score());
                         // text string is a main symbol plus as many dots as required by chord duration
                         QString s = QString(g_cDurationChars[durationType().type()]);
                         for(int count=dots(); count > 0; count--)
                               s.append(g_cDurationChars[Duration::V_ZERO]);
                         durSym->setText(s);
-                        durSym->setGenerated(true);
+                        durSym->setTablature(tab);
                         durSym->setTrack(track());
 //                      durSym->layout();
                         segm->add(durSym);	// add text to segment annotations

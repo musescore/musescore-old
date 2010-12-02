@@ -1,7 +1,7 @@
 //=============================================================================
 //  MusE Score
 //  Linux Music Score Editor
-//  $Id:$
+//  $Id$
 //
 //  Copyright (C) 2010 Werner Schweer and others
 //
@@ -106,11 +106,12 @@ class StaffTypeTablature : public StaffType {
 //      Instrument* _instrument;            // to access the underlying string data
       QString	_durationFontName;	// the name of the font used for duration symbols
       double	_durationFontSize;	// the size (in points) for the duration symbol font
-      double	_durationFontY;		// the vertical offset (in sp. units) for the duration symb. font
+      double	_durationFontUserY;	// the vertical offset (in sp. units) for the duration symb. font
+                                          // (sp. units; user configurable
       QString	_fretFontName;		// the name of the font used for fret marks
       double	_fretFontSize;		// the size (in points) for the fret marks font
-      double	_fretY;			// additional vert. offset of fret marks with respect to
-                                          // the string line (sp. unit) user configurable
+      double	_fretFontUserY;         // additional vert. offset of fret marks with respect to
+                                          // the string line (sp. unit); user configurable
       bool		_genDurations;		// whether duration symbols are drawn or not
       bool        _genTimesig;            // whether time signature is shown or not
       bool		_linesThrough;		// whether lines for strings and stems may pass through fret marks or not
@@ -120,7 +121,8 @@ class StaffTypeTablature : public StaffType {
       double	_charBoxH, _charBoxY;	// the height and the y rect.coord. of a box bounding all fret characters
                                           // internally computed: depends upon _onString and _useNumbers and the
                                           // metrics of the fret font (sp. units)
-      TextStyle   _durationTextStyle;	// a pre-computed text style to be used for duration symbols
+      double      _durationYOffset;       // the vertical offset to draw duration symbols with the respect
+                                          // to the string; internally computed: depends upon _onString (sp. units)
       double	_fretYOffset;		// the vertical offset to draw fret marks with the respect to the string
                                           // internally computed: depends upon _onString and _useNumbers and the
                                           // metrics of the fret font (sp. units)
@@ -140,28 +142,29 @@ class StaffTypeTablature : public StaffType {
 
       // properties getters (some getters may require to update the metrics)
       double  charBoxH(double spatium)    { setMetrics(spatium); return _charBoxH; }
-      double  charBoxY(double spatium)    { setMetrics(spatium); return _charBoxY + _fretY; }
+      double  charBoxY(double spatium)    { setMetrics(spatium); return _charBoxY + _fretFontUserY; }
 const	QString durationFontName() const	{ return _durationFontName; }
       double  durationFontSize() const    { return _durationFontSize; }
-      double  durationFontY() const       { return _durationFontY;    }
-      Text *  durationTextElement(QString text);
-const	TextStyle* durationTextStyle() const	{ return &_durationTextStyle; }
-const	QString fretFontName() const		{ return _fretFontName;     }
+      double  durationFontUserY() const   { return _durationFontUserY;    }
+      double  durationFontYOffset() const { return _durationYOffset + _durationFontUserY; }
+//      Text *  durationTextElement(QString text);
+//const TextStyle* durationTextStyle() const	{ return &_durationTextStyle; }
+const QString fretFontName() const		{ return _fretFontName;     }
       double  fretFontSize() const        { return _fretFontSize;     }
-      double  fretY(double spatium)       { setMetrics(spatium); return _fretYOffset + _fretY; }
-      double  fretYActual() const         { return _fretY;            }
+      double  fretFontUserY() const       { return _fretFontUserY;        }
+      double  fretFontYOffset(double spatium)       { setMetrics(spatium); return _fretYOffset + _fretFontUserY; }
       bool    genDurations() const		{ return _genDurations;     }
       bool    genTimesig() const		{ return _genTimesig;       }
       bool    linesThrough() const		{ return _linesThrough;     }
       bool    onLines() const             { return _onLines;          }
       bool    useNumbers() const		{ return _useNumbers;       }
       // properties setters (setting some props invalidates metrics)
-      void    setDurationFontName(QString name);
-      void    setDurationFontSize(double val);
-      void    setDurationFontY(double val);
+      void    setDurationFontName(QString name) { _durationFontName = name; }
+      void    setDurationFontSize(double val)   { _durationFontSize = val;  }
+      void    setDurationFontUserY(double val)  { _durationFontUserY = val; }
       void    setFretFontName(QString name) { _fretFontName = name; _metricsValid = false; }
       void    setFretFontSize(double val)	{ _fretFontSize = val; _metricsValid = false; }
-      void    setFretY(double val)		{ _fretY = val;             }
+      void    setFretFontUserY(double val){ _fretFontUserY = val;     }
       void    setGenDurations(bool val)	{ _genDurations = val;      }
       void    setGenTimesig(bool val)	{ _genTimesig = val;        }
       void    setLinesThrough(bool val)	{ _linesThrough = val;      }
@@ -188,5 +191,33 @@ class StaffTypePercussion : public StaffType {
 
 extern void initStaffTypes();
 extern QList<StaffType*> staffTypes;
+
+//---------------------------------------------------------
+//   TabDurationSymbol
+//    Element used to draw duration symbols above tablatures
+//---------------------------------------------------------
+
+class TabDurationSymbol : public Element
+{
+      StaffTypeTablature *    _tab;
+      QString                 _text;
+
+public:
+      TabDurationSymbol(Score* s);
+      TabDurationSymbol(const TabDurationSymbol&);
+      virtual ElementType type() const         { return TAB_DURATION_SYMBOL; }
+      virtual TabDurationSymbol* clone() const { return new TabDurationSymbol(*this); }
+//      virtual QPointF canvasPos() const;  ///< position in canvas coordinates
+
+//      virtual bool isEditable() const { return true; }
+//      virtual void write(Xml& xml) const;
+//      virtual void read(QDomElement);
+
+//      void layout();
+      virtual void draw(QPainter&, ScoreView*) const;
+
+      void setTablature(StaffTypeTablature * tab)     { _tab = tab; }
+      void setText(QString s)                         { _text = s; }
+};
 
 #endif

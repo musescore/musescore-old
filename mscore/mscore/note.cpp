@@ -518,7 +518,7 @@ void Note::draw(QPainter& p, ScoreView* v) const
                   // p.drawText(0.0, 0.0, s);
                   p.drawText(0.0, bbox().height() * .5, s);
 #else
-                  p.drawText(_bbox.x(), tab->fretY(currSpatium) * currSpatium * mag, s);
+                  p.drawText(_bbox.x(), tab->fretFontYOffset(currSpatium) * currSpatium * mag, s);
 #endif
                   p.scale(imag, imag);
                   }
