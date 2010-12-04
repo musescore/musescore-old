@@ -1,3 +1,5 @@
+4.dec (la)
+      - fix #8161: Missing lyrics in MIDI import
 24.nov (la)
       - fix #8018: Lilypond: Quote marks in lyrics need to be escaped
       - fix #7892: Exchange voices adds extra rests

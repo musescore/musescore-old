@@ -642,6 +642,8 @@ static QString instrName(int type, int hbank, int lbank, int program)
 
 void Score::addLyrics(int tick, int staffIdx, const QString& txt)
       {
+      if(txt.trimmed().isEmpty())
+            return;  
       Measure* measure = tick2measure(tick);
       Segment* seg = measure->findSegment(SegChordRest, tick);
       if (seg == 0) {
