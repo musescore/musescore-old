@@ -1,3 +1,5 @@
+4.dec (la)
+      - fix #8161: Missing lyrics in MIDI import
 2.dec (mi)
       - replaced use of Text() element for tablature duration symbols
         with specific TAB_DURATION_SYMBOL element
