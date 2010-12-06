@@ -84,22 +84,7 @@ StaffType::StaffType(const QString& s)
 void StaffType::write(Xml& xml, int idx) const
       {
       xml.stag(QString("StaffType idx=\"%1\" group=\"%2\"").arg(idx).arg(groupName()));
-/*      xml.tag("name", name());
-      if (lines() != 5)
-            xml.tag("lines", lines());
-      if (lineDistance().val() != 1.0)
-            xml.tag("lineDistance", lineDistance().val());
-      if (!genClef())
-            xml.tag("clef", genClef());
-      if (!genKeysig())
-            xml.tag("keysig", genKeysig());
-      if (slashStyle())
-            xml.tag("slashStyle", slashStyle());
-      if (!showBarlines())
-            xml.tag("barlines", showBarlines());
-      if (!showLedgerLines())
-            xml.tag("ledgerlines", showLedgerLines());
-*/      writeProperties(xml);
+      writeProperties(xml);
       xml.etag();
       }
 
@@ -133,27 +118,6 @@ void StaffType::writeProperties(Xml& xml) const
 void StaffType::read(QDomElement e)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-/*            QString tag(e.tagName());
-            int v = e.text().toInt();
-            if (tag == "group")
-                  setGroup( (StaffGroup)v );
-            else if (tag == "name")
-                  setName(e.text());
-            else if (tag == "lines")
-                  setLines(v);
-            else if (tag == "lineDistance")
-                  setLineDistance(Spatium(e.text().toDouble()));
-            else if (tag == "clef")
-                  setGenClef(v);
-            else if (tag == "keysig")
-                  setGenKeysig(v);
-            else if (tag == "slashStyle")
-                  setSlashStyle(v);
-            else if (tag == "barlines")
-                  setShowBarlines(v);
-            else if (tag == "ledgerlines")
-                  setShowLedgerLines(v);
-            else */
             if(!readProperties(e))
                   domError(e);
             }
@@ -282,24 +246,9 @@ void StaffTypeTablature::write(Xml& xml, int idx) const
       }
 
 //---------------------------------------------------------
-//   duration font properties
+//   setOnLines
 //---------------------------------------------------------
-/*
-void StaffTypeTablature::setDurationFontName(QString name)
-{
-      _durationTextStyle.setFamily(name);
-      _durationFontName = name;
-}
-void StaffTypeTablature::setDurationFontSize(double val)
-{
-      _durationTextStyle.setSize(val);
-      _durationFontSize = val;
-}
-void StaffTypeTablature::setDurationFontY(double val)
-{
-      _durationTextStyle.setYoff(TAB_DEFAULT_DUR_YOFFS - (_onLines ? 0.0 : lineDistance().val()/2.0) + val);
-      _durationFontY = val;
-} */
+
 void StaffTypeTablature::setOnLines(bool val)
 {
       _onLines = val;
@@ -307,17 +256,6 @@ void StaffTypeTablature::setOnLines(bool val)
       _durationYOffset = TAB_DEFAULT_DUR_YOFFS - (_onLines ? 0.0 : lineDistance().val()/2.0);
 }
 
-//---------------------------------------------------------
-//   durationTextElement
-//    return a new Text element already set to the proper duration style. The caller only needs to set
-//		the required text and dispose of the element once done.
-//---------------------------------------------------------
-/*
-Text * StaffTypeTablature::durationTextElement(QString text)
-{
-      return 0;
-}
-*/
 //---------------------------------------------------------
 //   setMetrics
 //    checks whether the internally computed metrics are is still valid and re-computes them, if not
@@ -392,13 +330,13 @@ void TabDurationSymbol::draw(QPainter& p, ScoreView*) const
             return;
       double mag = magS();
       double imag = 1.0 / mag;
-      double currSpatium = spatium();
 
-      QFont f(_tab->durationFontName());
-      int size = lrint(_tab->durationFontSize() * DPI / PPI);
-      f.setPixelSize(size);
+//      QFont f(_tab->durationFontName());
+//      int size = lrint(_tab->durationFontSize() * DPI / PPI);
+//      f.setPixelSize(size);
       p.scale(mag, mag);
-      p.setFont(f);
+//      p.setFont(f);
+      p.setFont(_tab->durationFont());
 
       p.drawText(0.0, _tab->durationFontYOffset() * spatium(), _text);
 
