@@ -388,6 +388,7 @@ void Segment::add(Element* el)
             case JUMP:
             case IMAGE:
             case TEXT:
+            case TAB_DURATION_SYMBOL:
                   _annotations.append(el);
                   break;
             case STAFF_STATE:
@@ -494,6 +495,7 @@ void Segment::remove(Element* el)
             case JUMP:
             case IMAGE:
             case TEXT:
+            case TAB_DURATION_SYMBOL:
                   _annotations.removeOne(el);
                   break;
             case STAFF_STATE:
@@ -634,7 +636,7 @@ const QList<Lyrics*>* Segment::lyricsList(int staffIdx) const
       if (!(subtype() & (SegChordRest | SegGrace))) {
             printf("  bad segment type <%s><%s>\n", name(), subTypeName());
             abort();
-            // return 0;
+//            return 0;
             }
       int strack = staffIdx * VOICES;
       int etrack = strack + VOICES;

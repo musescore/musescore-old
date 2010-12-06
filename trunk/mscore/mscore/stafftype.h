@@ -103,6 +103,7 @@ class StaffTypePitched : public StaffType {
 
 class StaffTypeTablature : public StaffType {
 
+      // configurable properties
 //      Instrument* _instrument;            // to access the underlying string data
       QString	_durationFontName;	// the name of the font used for duration symbols
       double	_durationFontSize;	// the size (in points) for the duration symbol font
@@ -118,11 +119,14 @@ class StaffTypeTablature : public StaffType {
       bool		_onLines;			// whether fret marks are drawn on the string lines or between them
       bool		_useNumbers;		// true: use numbers ('0' - ...) for frets | false: use letters ('a' - ...)
 
+      // internally managed variables
       double	_charBoxH, _charBoxY;	// the height and the y rect.coord. of a box bounding all fret characters
                                           // internally computed: depends upon _onString and _useNumbers and the
                                           // metrics of the fret font (sp. units)
+      QFont       _durationFont;          // font used to draw dur. symbols; cached for efficiency
       double      _durationYOffset;       // the vertical offset to draw duration symbols with the respect
                                           // to the string; internally computed: depends upon _onString (sp. units)
+      QFont       _fretFont;              // font used to draw fret marks; cached for efficiency
       double	_fretYOffset;		// the vertical offset to draw fret marks with the respect to the string
                                           // internally computed: depends upon _onString and _useNumbers and the
                                           // metrics of the fret font (sp. units)
@@ -143,15 +147,15 @@ class StaffTypeTablature : public StaffType {
       // properties getters (some getters may require to update the metrics)
       double  charBoxH(double spatium)    { setMetrics(spatium); return _charBoxH; }
       double  charBoxY(double spatium)    { setMetrics(spatium); return _charBoxY + _fretFontUserY; }
+const QFont&  durationFont()              { return _durationFont;     }
 const	QString durationFontName() const	{ return _durationFontName; }
       double  durationFontSize() const    { return _durationFontSize; }
-      double  durationFontUserY() const   { return _durationFontUserY;    }
+      double  durationFontUserY() const   { return _durationFontUserY;}
       double  durationFontYOffset() const { return _durationYOffset + _durationFontUserY; }
-//      Text *  durationTextElement(QString text);
-//const TextStyle* durationTextStyle() const	{ return &_durationTextStyle; }
+const QFont&  fretFont()                  { return _fretFont;         }
 const QString fretFontName() const		{ return _fretFontName;     }
       double  fretFontSize() const        { return _fretFontSize;     }
-      double  fretFontUserY() const       { return _fretFontUserY;        }
+      double  fretFontUserY() const       { return _fretFontUserY;    }
       double  fretFontYOffset(double spatium)       { setMetrics(spatium); return _fretYOffset + _fretFontUserY; }
       bool    genDurations() const		{ return _genDurations;     }
       bool    genTimesig() const		{ return _genTimesig;       }
@@ -159,11 +163,15 @@ const QString fretFontName() const		{ return _fretFontName;     }
       bool    onLines() const             { return _onLines;          }
       bool    useNumbers() const		{ return _useNumbers;       }
       // properties setters (setting some props invalidates metrics)
-      void    setDurationFontName(QString name) { _durationFontName = name; }
-      void    setDurationFontSize(double val)   { _durationFontSize = val;  }
+      void    setDurationFontName(QString name) { _durationFontName = name; _durationFont.setFamily(name); }
+      void    setDurationFontSize(double val)   { _durationFontSize = val; _durationFont.setPointSizeF(val); }
       void    setDurationFontUserY(double val)  { _durationFontUserY = val; }
-      void    setFretFontName(QString name) { _fretFontName = name; _metricsValid = false; }
-      void    setFretFontSize(double val)	{ _fretFontSize = val; _metricsValid = false; }
+      void    setFretFontName(QString name)     { _fretFontName = name;
+                                                  _fretFont.setFamily(name);
+                                                  _metricsValid = false; }
+      void    setFretFontSize(double val)       { _fretFontSize = val;
+                                                  _fretFont.setPointSizeF(val);
+                                                  _metricsValid = false; }
       void    setFretFontUserY(double val){ _fretFontUserY = val;     }
       void    setGenDurations(bool val)	{ _genDurations = val;      }
       void    setGenTimesig(bool val)	{ _genTimesig = val;        }
@@ -205,16 +213,15 @@ class TabDurationSymbol : public Element
 public:
       TabDurationSymbol(Score* s);
       TabDurationSymbol(const TabDurationSymbol&);
-      virtual ElementType type() const         { return TAB_DURATION_SYMBOL; }
-      virtual TabDurationSymbol* clone() const { return new TabDurationSymbol(*this); }
-//      virtual QPointF canvasPos() const;  ///< position in canvas coordinates
+      virtual TabDurationSymbol* clone() const  { return new TabDurationSymbol(*this); }
+      virtual void draw(QPainter&, ScoreView*) const;
+      virtual bool isEditable() const           { return false; }
+      virtual ElementType type() const          { return TAB_DURATION_SYMBOL; }
 
-//      virtual bool isEditable() const { return true; }
+//      virtual QPointF canvasPos() const;  ///< position in canvas coordinates
 //      virtual void write(Xml& xml) const;
 //      virtual void read(QDomElement);
-
 //      void layout();
-      virtual void draw(QPainter&, ScoreView*) const;
 
       void setTablature(StaffTypeTablature * tab)     { _tab = tab; }
       void setText(QString s)                         { _text = s; }
