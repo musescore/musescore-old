@@ -45,14 +45,14 @@
 
 Page::Page(Score* s)
    : Element(s),
-   _no(0), _footer(0), _header(0)
+   _no(0)
       {
       }
 
 Page::~Page()
       {
-      delete _footer;
-      delete _header;
+//      delete _footer;
+//      delete _header;
       }
 
 //---------------------------------------------------------
@@ -139,52 +139,6 @@ void Page::setNo(int n)
 void Page::layout()
       {
       setbbox(QRectF(0.0, 0.0, loWidth(), loHeight()));
-
-      // add page number
-      int n = no() + 1 + _score->pageFormat()->_pageOffset;
-
-      if (_score->styleB(ST_showHeader) && (n || _score->styleB(ST_headerFirstPage))) {
-            if (_header == 0) {
-                  _header = new Text(score());
-                  _header->setFlag(ELEMENT_MOVABLE, false);
-                  _header->setGenerated(true);
-                  _header->setParent(this);
-                  _header->setTextStyle(TEXT_STYLE_HEADER);
-                  _header->setSubtype(TEXT_HEADER);
-                  _header->setLayoutToParentWidth(true);
-                  }
-            bool odd = (n & 1) && _score->styleB(ST_headerOddEven);
-            QString s = _score->styleSt(odd ? ST_oddHeader : ST_evenHeader);
-            _header->setHtml(replaceTextMacros(s));
-            double w = loWidth() - lm() - rm();
-            _header->layout(w, lm(), tm());
-            }
-      else {
-            delete _header;
-            _header = 0;
-            }
-
-      if (_score->styleB(ST_showFooter) && (n || _score->styleB(ST_footerFirstPage))) {
-            if (_footer == 0) {
-                  _footer = new Text(score());
-                  _footer->setFlag(ELEMENT_MOVABLE, false);
-                  _footer->setGenerated(true);
-                  _footer->setParent(this);
-                  _footer->setTextStyle(TEXT_STYLE_FOOTER);
-                  _footer->setSubtype(TEXT_FOOTER);
-                  _footer->setLayoutToParentWidth(true);
-                  }
-            bool odd = (n & 1) && _score->styleB(ST_footerOddEven);
-            QString s = _score->styleSt(odd ? ST_oddFooter : ST_evenFooter);
-            _footer->setHtml(replaceTextMacros(s));
-            double w = loWidth() - lm() - rm();
-            _footer->layout(w, lm(), -bm());
-printf("footer %f %f  %f\n", _footer->x(), _footer->y(), lm());
-            }
-      else {
-            delete _footer;
-            _footer = 0;
-            }
       }
 
 //---------------------------------------------------------
@@ -270,6 +224,78 @@ void Page::draw(QPainter& p, ScoreView*) const
                   p.drawLine(QLineF(x2-bw+i, y1, x2-bw+i, y2));
                   }
             }
+      //
+      // draw header/footer
+      //
+
+      QTextDocument d;
+      int n = no() + 1 + _score->pageFormat()->_pageOffset;
+      d.setTextWidth(loWidth() - lm() - rm());
+
+      QAbstractTextDocumentLayout::PaintContext c;
+      c.cursorPosition = -1;
+      p.translate(lm(), 0.0);
+
+      if (_score->styleB(ST_showHeader) && (n || _score->styleB(ST_headerFirstPage))) {
+            TextStyle ts = score()->textStyle(TEXT_STYLE_HEADER);
+            c.palette.setColor(QPalette::Text, ts.foregroundColor());
+
+            QPointF o(ts.xoff(), ts.yoff());
+            if (ts.offsetType() == OFFSET_SPATIUM)
+                  o *= spatium();
+            else
+                  o *= DPI;
+            p.translate(o);
+            d.setTextWidth(loWidth() - lm() - rm() - (2.0 * o.x()));
+
+            bool odd = (n & 1) && _score->styleB(ST_headerOddEven);
+            QString s = _score->styleSt(odd ? ST_oddHeaderL : ST_evenHeaderL);
+            if (!s.isEmpty()) {
+                  d.setHtml(replaceTextMacros(s));
+                  d.documentLayout()->draw(&p, c);
+                  }
+            s = _score->styleSt(odd ? ST_oddHeaderC : ST_evenHeaderC);
+            if (!s.isEmpty()) {
+                  d.setHtml(replaceTextMacros(s));
+                  d.documentLayout()->draw(&p, c);
+                  }
+            s = _score->styleSt(odd ? ST_oddHeaderR : ST_evenHeaderR);
+            if (!s.isEmpty()) {
+                  d.setHtml(replaceTextMacros(s));
+                  d.documentLayout()->draw(&p, c);
+                  }
+            p.translate(-o);
+            }
+      if (_score->styleB(ST_showFooter) && (n || _score->styleB(ST_footerFirstPage))) {
+            TextStyle ts = score()->textStyle(TEXT_STYLE_FOOTER);
+            c.palette.setColor(QPalette::Text, ts.foregroundColor());
+
+            QPointF o(ts.xoff(), ts.yoff());
+            if (ts.offsetType() == OFFSET_SPATIUM)
+                  o *= spatium();
+            else
+                  o *= DPI;
+            p.translate(o);
+            d.setTextWidth(loWidth() - lm() - rm() - (2.0 * o.x()));
+
+            bool odd = (n & 1) && _score->styleB(ST_footerOddEven);
+            QString s = _score->styleSt(odd ? ST_oddFooterL : ST_evenFooterL);
+            p.translate(0.0, loHeight() - (tm()+bm()));
+            if (!s.isEmpty()) {
+                  d.setHtml(replaceTextMacros(s));
+                  d.documentLayout()->draw(&p, c);
+                  }
+            s = _score->styleSt(odd ? ST_oddFooterC : ST_evenFooterC);
+            if (!s.isEmpty()) {
+                  d.setHtml(replaceTextMacros(s));
+                  d.documentLayout()->draw(&p, c);
+                  }
+            s = _score->styleSt(odd ? ST_oddFooterR : ST_evenFooterR);
+            if (!s.isEmpty()) {
+                  d.setHtml(replaceTextMacros(s));
+                  d.documentLayout()->draw(&p, c);
+                  }
+            }
       }
 
 //---------------------------------------------------------
@@ -278,10 +304,11 @@ void Page::draw(QPainter& p, ScoreView*) const
 
 void Page::scanElements(void* data, void (*func)(void*, Element*))
       {
-      if (_header)
+/*      if (_header)
             func(data, _header);
       if (_footer)
             func(data, _footer);
+      */
       foreach(System* s, _systems)
             s->scanElements(data, func);
       func(data, this);
@@ -609,9 +636,20 @@ void Page::rebuildBspTree()
 
 //---------------------------------------------------------
 //   replaceTextMacros
+//    $p          - page number
+//    $$          - $
+//    $n          - number of pages
+//    $:tag:      - meta data tag
+//       already defined tags:
+//       movementNumber
+//       movementTitle
+//       workNumber
+//       workTitle
+//       source
+//       copyright
 //---------------------------------------------------------
 
-QString Page::replaceTextMacros(const QString& s)
+QString Page::replaceTextMacros(const QString& s) const
       {
       int pageno = no() + 1 + _score->pageFormat()->_pageOffset;
       QString d;

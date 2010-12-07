@@ -84,13 +84,26 @@ EditStyle::EditStyle(Score* s, QWidget* parent)
             cb->addItem(tr("Chord"), A_CHORD);
             articulationTable->setCellWidget(i, 1, cb);
             }
+      QButtonGroup* bg = new QButtonGroup(this);
+      bg->addButton(editEvenHeaderL, 0);
+      bg->addButton(editEvenHeaderC, 1);
+      bg->addButton(editEvenHeaderR, 2);
+      bg->addButton(editEvenFooterL, 3);
+      bg->addButton(editEvenFooterC, 4);
+      bg->addButton(editEvenFooterR, 5);
+
+      bg->addButton(editOddHeaderL, 6);
+      bg->addButton(editOddHeaderC, 7);
+      bg->addButton(editOddHeaderR, 8);
+      bg->addButton(editOddFooterL, 9);
+      bg->addButton(editOddFooterC, 10);
+      bg->addButton(editOddFooterR, 11);
+
       setValues();
       connect(buttonBox, SIGNAL(clicked(QAbstractButton*)), SLOT(buttonClicked(QAbstractButton*)));
       connect(chordDescriptionFileButton, SIGNAL(clicked()), SLOT(selectChordDescriptionFile()));
-      connect(editEvenHeader, SIGNAL(clicked()), SLOT(editEvenHeaderClicked()));
-      connect(editOddHeader,  SIGNAL(clicked()), SLOT(editOddHeaderClicked()));
-      connect(editEvenFooter, SIGNAL(clicked()), SLOT(editEvenFooterClicked()));
-      connect(editOddFooter,  SIGNAL(clicked()), SLOT(editOddFooterClicked()));
+
+      connect(bg, SIGNAL(buttonClicked(int)), SLOT(editTextClicked(int)));
       }
 
 //---------------------------------------------------------
@@ -229,14 +242,22 @@ void EditStyle::getValues()
       lstyle.set(ST_showHeader,              showHeader->isChecked());
       lstyle.set(ST_headerFirstPage,         showHeaderFirstPage->isChecked());
       lstyle.set(ST_headerOddEven,           headerOddEven->isChecked());
-      lstyle.set(ST_evenHeader,              evenHeader->toHtml());
-      lstyle.set(ST_oddHeader,               oddHeader->toHtml());
+      lstyle.set(ST_evenHeaderL,             evenHeaderL->toHtml());
+      lstyle.set(ST_evenHeaderC,             evenHeaderC->toHtml());
+      lstyle.set(ST_evenHeaderR,             evenHeaderR->toHtml());
+      lstyle.set(ST_oddHeaderL,              oddHeaderL->toHtml());
+      lstyle.set(ST_oddHeaderC,              oddHeaderC->toHtml());
+      lstyle.set(ST_oddHeaderR,              oddHeaderR->toHtml());
 
       lstyle.set(ST_showFooter,              showFooter->isChecked());
       lstyle.set(ST_footerFirstPage,         showFooterFirstPage->isChecked());
       lstyle.set(ST_footerOddEven,           footerOddEven->isChecked());
-      lstyle.set(ST_evenFooter,              evenFooter->toHtml());
-      lstyle.set(ST_oddFooter,               oddFooter->toHtml());
+      lstyle.set(ST_evenFooterL,             evenFooterL->toHtml());
+      lstyle.set(ST_evenFooterC,             evenFooterC->toHtml());
+      lstyle.set(ST_evenFooterR,             evenFooterR->toHtml());
+      lstyle.set(ST_oddFooterL,              oddFooterL->toHtml());
+      lstyle.set(ST_oddFooterC,              oddFooterC->toHtml());
+      lstyle.set(ST_oddFooterR,              oddFooterR->toHtml());
 
       for (int i = 0; i < ARTICULATIONS; ++i) {
             QComboBox* cb = static_cast<QComboBox*>(articulationTable->cellWidget(i, 1));
@@ -377,14 +398,22 @@ void EditStyle::setValues()
       showHeader->setChecked(lstyle.value(ST_showHeader).toBool());
       showHeaderFirstPage->setChecked(lstyle.value(ST_headerFirstPage).toBool());
       headerOddEven->setChecked(lstyle.value(ST_headerOddEven).toBool());
-      evenHeader->setHtml(lstyle.value(ST_evenHeader).toString());
-      oddHeader->setHtml(lstyle.value(ST_oddHeader).toString());
+      evenHeaderL->setHtml(lstyle.value(ST_evenHeaderL).toString());
+      evenHeaderC->setHtml(lstyle.value(ST_evenHeaderC).toString());
+      evenHeaderR->setHtml(lstyle.value(ST_evenHeaderR).toString());
+      oddHeaderL->setHtml(lstyle.value(ST_oddHeaderL).toString());
+      oddHeaderC->setHtml(lstyle.value(ST_oddHeaderC).toString());
+      oddHeaderR->setHtml(lstyle.value(ST_oddHeaderR).toString());
 
       showFooter->setChecked(lstyle.value(ST_showFooter).toBool());
       showFooterFirstPage->setChecked(lstyle.value(ST_footerFirstPage).toBool());
       footerOddEven->setChecked(lstyle.value(ST_footerOddEven).toBool());
-      evenFooter->setHtml(lstyle.value(ST_evenFooter).toString());
-      oddFooter->setHtml(lstyle.value(ST_oddFooter).toString());
+      evenFooterL->setHtml(lstyle.value(ST_evenFooterL).toString());
+      evenFooterC->setHtml(lstyle.value(ST_evenFooterC).toString());
+      evenFooterR->setHtml(lstyle.value(ST_evenFooterR).toString());
+      oddFooterL->setHtml(lstyle.value(ST_oddFooterL).toString());
+      oddFooterC->setHtml(lstyle.value(ST_oddFooterC).toString());
+      oddFooterR->setHtml(lstyle.value(ST_oddFooterR).toString());
       }
 
 //---------------------------------------------------------
@@ -409,39 +438,24 @@ void EditStyle::selectChordDescriptionFile()
 //   editEvenHeaderClicked
 //---------------------------------------------------------
 
-void EditStyle::editEvenHeaderClicked()
+void EditStyle::editTextClicked(int id)
       {
-      QString s = editText(evenHeader->toHtml());
-      evenHeader->setHtml(s);
-      }
+      QTextEdit* e;
 
-//---------------------------------------------------------
-//   editOddHeaderClicked
-//---------------------------------------------------------
-
-void EditStyle::editOddHeaderClicked()
-      {
-      QString s = editText(oddHeader->toHtml());
-      oddHeader->setHtml(s);
-      }
-
-//---------------------------------------------------------
-//   editEvenFooterClicked
-//---------------------------------------------------------
-
-void EditStyle::editEvenFooterClicked()
-      {
-      QString s = editText(evenFooter->toHtml());
-      evenFooter->setHtml(s);
-      }
-
-//---------------------------------------------------------
-//   editOddFooterClicked
-//---------------------------------------------------------
-
-void EditStyle::editOddFooterClicked()
-      {
-      QString s = editText(oddFooter->toHtml());
-      oddFooter->setHtml(s);
+      switch(id) {
+            case  0:  e = evenHeaderL;break;
+            case  1:  e = evenHeaderC;break;
+            case  2:  e = evenHeaderR;break;
+            case  3:  e = evenFooterL;break;
+            case  4:  e = evenFooterC;break;
+            case  5:  e = evenFooterR;break;
+            case  6:  e = oddHeaderL;break;
+            case  7:  e = oddHeaderC;break;
+            case  8:  e = oddHeaderR;break;
+            case  9:  e = oddFooterL;break;
+            case 10:  e = oddFooterC;break;
+            case 11:  e = oddFooterR;break;
+            }
+      e->setHtml(editText(e->toHtml()));
       }
 

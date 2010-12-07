@@ -303,14 +303,22 @@ enum StyleIdx {
       ST_showHeader,
       ST_headerFirstPage,
       ST_headerOddEven,
-      ST_evenHeader,
-      ST_oddHeader,
+      ST_evenHeaderL,
+      ST_evenHeaderC,
+      ST_evenHeaderR,
+      ST_oddHeaderL,
+      ST_oddHeaderC,
+      ST_oddHeaderR,
 
       ST_showFooter,
       ST_footerFirstPage,
       ST_footerOddEven,
-      ST_evenFooter,
-      ST_oddFooter,
+      ST_evenFooterL,
+      ST_evenFooterC,
+      ST_evenFooterR,
+      ST_oddFooterL,
+      ST_oddFooterC,
+      ST_oddFooterR,
 
       ST_STYLES
       };

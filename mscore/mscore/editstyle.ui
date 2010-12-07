@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>670</width>
-    <height>486</height>
+    <width>631</width>
+    <height>500</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -140,7 +140,7 @@
       </sizepolicy>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="Seite_5">
       <layout class="QVBoxLayout" name="verticalLayout_20">
@@ -772,14 +772,11 @@
       </layout>
      </widget>
      <widget class="QWidget" name="headerFooterNumbers">
-      <layout class="QVBoxLayout">
-       <property name="spacing">
-        <number>6</number>
-       </property>
+      <layout class="QGridLayout" name="gridLayout_10">
        <property name="margin">
         <number>8</number>
        </property>
-       <item>
+       <item row="0" column="0">
         <widget class="QGroupBox" name="showHeader">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
@@ -796,109 +793,270 @@
          <property name="checkable">
           <bool>true</bool>
          </property>
-         <layout class="QGridLayout" name="gridLayout_5">
-          <property name="rightMargin">
-           <number>0</number>
-          </property>
-          <property name="verticalSpacing">
-           <number>0</number>
-          </property>
-          <item row="0" column="0">
-           <widget class="QCheckBox" name="showHeaderFirstPage">
-            <property name="toolTip">
-             <string>show header also on first page</string>
-            </property>
-            <property name="text">
-             <string>show first</string>
-            </property>
-           </widget>
+         <layout class="QVBoxLayout" name="verticalLayout_23">
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_4">
+            <item>
+             <widget class="QCheckBox" name="showHeaderFirstPage">
+              <property name="toolTip">
+               <string>show header also on first page</string>
+              </property>
+              <property name="text">
+               <string>show first</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="headerOddEven">
+              <property name="toolTip">
+               <string>use odd even page header</string>
+              </property>
+              <property name="text">
+               <string>odd/even</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_4">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
           </item>
-          <item row="0" column="1">
-           <widget class="QCheckBox" name="headerOddEven">
-            <property name="toolTip">
-             <string>use odd even page header</string>
-            </property>
-            <property name="text">
-             <string>odd/even</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="label_67">
-            <property name="text">
-             <string>even page</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="label_66">
-            <property name="text">
-             <string>odd page</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QTextEdit" name="evenHeader">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>40</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>16777215</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QTextEdit" name="oddHeader">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>40</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>16777215</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="2">
-           <widget class="QToolButton" name="editEvenHeader">
-            <property name="toolTip">
-             <string>edit even page header</string>
-            </property>
-            <property name="text">
-             <string>...</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="2">
-           <widget class="QToolButton" name="editOddHeader">
-            <property name="toolTip">
-             <string>add odd page header</string>
-            </property>
-            <property name="text">
-             <string>...</string>
-            </property>
-           </widget>
+          <item>
+           <layout class="QGridLayout" name="gridLayout_5">
+            <item row="0" column="1">
+             <widget class="QLabel" name="label_5">
+              <property name="text">
+               <string>left</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="3">
+             <widget class="QLabel" name="label_6">
+              <property name="text">
+               <string>middle</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="5">
+             <widget class="QLabel" name="label_7">
+              <property name="text">
+               <string>right</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_67">
+              <property name="text">
+               <string>even page</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QTextEdit" name="evenHeaderL">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>16777215</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QToolButton" name="editEvenHeaderL">
+              <property name="toolTip">
+               <string>edit even page header</string>
+              </property>
+              <property name="text">
+               <string>...</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="3">
+             <widget class="QTextEdit" name="evenHeaderC">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>16777215</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="4">
+             <widget class="QToolButton" name="editEvenHeaderC">
+              <property name="toolTip">
+               <string>edit even page header</string>
+              </property>
+              <property name="text">
+               <string>...</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="5">
+             <widget class="QTextEdit" name="evenHeaderR">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>16777215</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="6">
+             <widget class="QToolButton" name="editEvenHeaderR">
+              <property name="toolTip">
+               <string>edit even page header</string>
+              </property>
+              <property name="text">
+               <string>...</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_66">
+              <property name="text">
+               <string>odd page</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QTextEdit" name="oddHeaderL">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>16777215</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="2">
+             <widget class="QToolButton" name="editOddHeaderL">
+              <property name="toolTip">
+               <string>add odd page header</string>
+              </property>
+              <property name="text">
+               <string>...</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="3">
+             <widget class="QTextEdit" name="oddHeaderC">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>16777215</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="4">
+             <widget class="QToolButton" name="editOddHeaderC">
+              <property name="toolTip">
+               <string>add odd page header</string>
+              </property>
+              <property name="text">
+               <string>...</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="5">
+             <widget class="QTextEdit" name="oddHeaderR">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>16777215</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="6">
+             <widget class="QToolButton" name="editOddHeaderR">
+              <property name="toolTip">
+               <string>add odd page header</string>
+              </property>
+              <property name="text">
+               <string>...</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
          </layout>
         </widget>
        </item>
-       <item>
+       <item row="1" column="0">
         <widget class="QGroupBox" name="showFooter">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
@@ -918,91 +1076,216 @@
          <property name="checkable">
           <bool>true</bool>
          </property>
-         <layout class="QGridLayout" name="gridLayout_6">
-          <property name="rightMargin">
-           <number>0</number>
-          </property>
-          <property name="verticalSpacing">
-           <number>0</number>
-          </property>
-          <item row="0" column="0">
-           <widget class="QCheckBox" name="showFooterFirstPage">
-            <property name="toolTip">
-             <string>show footer also on first page</string>
-            </property>
-            <property name="text">
-             <string>show first</string>
-            </property>
-           </widget>
+         <layout class="QVBoxLayout" name="verticalLayout_22">
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <item>
+             <widget class="QCheckBox" name="showFooterFirstPage">
+              <property name="toolTip">
+               <string>show footer also on first page</string>
+              </property>
+              <property name="text">
+               <string>show first</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="footerOddEven">
+              <property name="toolTip">
+               <string>use odd even page footer</string>
+              </property>
+              <property name="text">
+               <string>odd/even</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_3">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
           </item>
-          <item row="0" column="1">
-           <widget class="QCheckBox" name="footerOddEven">
-            <property name="toolTip">
-             <string>use odd even page footer</string>
-            </property>
-            <property name="text">
-             <string>odd/even</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="label_64">
-            <property name="text">
-             <string>even page</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="label_65">
-            <property name="text">
-             <string>odd page</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QTextEdit" name="evenFooter">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>40</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QTextEdit" name="oddFooter">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>40</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="2">
-           <widget class="QToolButton" name="editEvenFooter">
-            <property name="toolTip">
-             <string>edit even page footer</string>
-            </property>
-            <property name="text">
-             <string>...</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="2">
-           <widget class="QToolButton" name="editOddFooter">
-            <property name="toolTip">
-             <string>edit odd page header</string>
-            </property>
-            <property name="text">
-             <string>...</string>
-            </property>
-           </widget>
+          <item>
+           <layout class="QGridLayout" name="gridLayout_6">
+            <item row="1" column="4">
+             <widget class="QToolButton" name="editEvenFooterC">
+              <property name="toolTip">
+               <string>edit even page footer</string>
+              </property>
+              <property name="text">
+               <string>...</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="2">
+             <widget class="QToolButton" name="editOddFooterL">
+              <property name="toolTip">
+               <string>edit odd page header</string>
+              </property>
+              <property name="text">
+               <string>...</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="3">
+             <widget class="QTextEdit" name="oddFooterC">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>30</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="3">
+             <widget class="QTextEdit" name="evenFooterC">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>30</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QTextEdit" name="oddFooterL">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>30</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_80">
+              <property name="text">
+               <string>even page</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QTextEdit" name="evenFooterL">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>30</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QToolButton" name="editEvenFooterL">
+              <property name="toolTip">
+               <string>edit even page footer</string>
+              </property>
+              <property name="text">
+               <string>...</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="5" colspan="2">
+             <widget class="QTextEdit" name="evenFooterR">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>30</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="7">
+             <widget class="QToolButton" name="editEvenFooterR">
+              <property name="toolTip">
+               <string>edit even page footer</string>
+              </property>
+              <property name="text">
+               <string>...</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_65">
+              <property name="text">
+               <string>odd page</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="4">
+             <widget class="QToolButton" name="editOddFooterC">
+              <property name="toolTip">
+               <string>edit odd page header</string>
+              </property>
+              <property name="text">
+               <string>...</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLabel" name="label_2">
+              <property name="text">
+               <string>left</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="3">
+             <widget class="QLabel" name="label_3">
+              <property name="text">
+               <string>middle</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="5" colspan="2">
+             <widget class="QLabel" name="label_4">
+              <property name="text">
+               <string>right</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="7">
+             <widget class="QToolButton" name="editOddFooterR">
+              <property name="toolTip">
+               <string>edit odd page header</string>
+              </property>
+              <property name="text">
+               <string>...</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="5" colspan="2">
+             <widget class="QTextEdit" name="oddFooterR">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>30</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
          </layout>
         </widget>
        </item>
-       <item>
+       <item row="2" column="0">
         <widget class="QLabel" name="label_68">
          <property name="text">
           <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -1021,7 +1304,7 @@ p, li { white-space: pre-wrap; }
          </property>
         </widget>
        </item>
-       <item>
+       <item row="3" column="0">
         <widget class="QGroupBox" name="showMeasureNumber">
          <property name="title">
           <string>Measure Numbers</string>
@@ -2310,7 +2593,7 @@ p, li { white-space: pre-wrap; }
                <string>...</string>
               </property>
               <property name="icon">
-               <iconset resource="mscore.qrc">
+               <iconset>
                 <normaloff>:/data/fileopen.svg</normaloff>:/data/fileopen.svg</iconset>
               </property>
              </widget>

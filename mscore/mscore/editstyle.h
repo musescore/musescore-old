@@ -48,10 +48,7 @@ class EditStyle : public QDialog, private Ui::EditStyleBase {
    private slots:
       void selectChordDescriptionFile();
       void buttonClicked(QAbstractButton*);
-      void editEvenHeaderClicked();
-      void editOddHeaderClicked();
-      void editEvenFooterClicked();
-      void editOddFooterClicked();
+      void editTextClicked(int id);
 
    public:
       EditStyle(Score*, QWidget*);
