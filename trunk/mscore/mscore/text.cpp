@@ -285,28 +285,40 @@ void Text::resetMode()
 
 void Text::layout()
       {
-      QSizeF pageSize(-1.0, 1000000);
-      setPos(0.0, 0.0);
+      double w = -1.0;
+      double x = 0.0;
+      double y = 0.0;
       if (parent() && _layoutToParentWidth) {
-            pageSize.setWidth(parent()->width());
+            w = parent()->width();
             if (parent()->type() == HBOX || parent()->type() == VBOX || parent()->type() == TBOX) {
                   Box* box = static_cast<Box*>(parent());
-                  rxpos() += box->leftMargin() * DPMM;
-                  rypos() += box->topMargin() * DPMM;
-                  // pageSize.setHeight(box->height() - (box->topMargin() + box->bottomMargin()) * DPMM);
-                  pageSize.setWidth(box->width()   - (box->leftMargin() + box->rightMargin()) * DPMM);
+                  x += box->leftMargin() * DPMM;
+                  y += box->topMargin() * DPMM;
+                  w = box->width()   - ((box->leftMargin() + box->rightMargin()) * DPMM);
                   }
             }
 
       QTextOption to = _doc->defaultTextOption();
       to.setUseDesignMetrics(true);
-      to.setWrapMode(pageSize.width() <= 0.0 ? QTextOption::NoWrap : QTextOption::WrapAtWordBoundaryOrAnywhere);
+      to.setWrapMode(w <= 0.0 ? QTextOption::NoWrap : QTextOption::WrapAtWordBoundaryOrAnywhere);
+      _doc->setDefaultTextOption(to);
+      layout(w, x, y);
+      }
+
+//---------------------------------------------------------
+//   layoutW
+//---------------------------------------------------------
+
+void Text::layout(double layoutWidth, double x, double y)
+      {
+      QTextOption to = _doc->defaultTextOption();
+      to.setUseDesignMetrics(true);
+      to.setWrapMode(layoutWidth < 0.0 ? QTextOption::NoWrap : QTextOption::WrapAtWordBoundaryOrAnywhere);
       _doc->setDefaultTextOption(to);
 
-      if (pageSize.width() <= 0.0)
-            _doc->setTextWidth(_doc->idealWidth());
-      else
-            _doc->setPageSize(pageSize);
+      if (layoutWidth < 0.0)
+            layoutWidth = _doc->idealWidth();
+      _doc->setTextWidth(layoutWidth);
 
       if (hasFrame()) {
             frame = QRectF();
@@ -333,7 +345,7 @@ void Text::layout()
             _bbox = frame.adjusted(-w, -w, w, w);
             }
       else {
-            _bbox = QRectF(QPointF(0.0, 0.0), _doc->size()); //_doc->documentLayout()->frameBoundingRect(_doc->rootFrame());
+            _bbox = QRectF(QPointF(0.0, 0.0), _doc->size());
             }
       _doc->setModified(false);
       style().layout(this);      // process alignment
@@ -353,6 +365,8 @@ void Text::layout()
             Segment* s = static_cast<Segment*>(parent());
             rypos() += s ? s->measure()->system()->staff(staffIdx())->y() : 0.0;
             }
+      rxpos() += x;
+      rypos() += y;
       }
 
 //---------------------------------------------------------

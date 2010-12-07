@@ -330,10 +330,10 @@ void setDefaultStyle()
          ALIGN_CENTER | ALIGN_BOTTOM, 0.0, 0.0, OS, 0.0, 0.0, true));
 
       AS(TextStyle(TR( "Header"), ff, 8, false, false, false,
-         ALIGN_HCENTER | ALIGN_TOP, 0, MM(-15), OA, 50.0, 0.0));
+         ALIGN_HCENTER | ALIGN_TOP));
 
       AS(TextStyle(TR( "Footer"), ff, 8, false, false, false,
-         ALIGN_HCENTER | ALIGN_BOTTOM, MM(-10), MM(-15), OA));
+         ALIGN_HCENTER | ALIGN_BOTTOM));
 
       AS(TextStyle(TR( "Instrument Change"), ff,  12, true, false, false,
          ALIGN_LEFT | ALIGN_BOTTOM, 0, -3.0, OS, 0, 0, true));
@@ -530,7 +530,7 @@ StyleData::StyleData()
                    "</head>"
                  "<body style=\" font-family:'%1'; font-size:%2pt;\">"
                    "<p align=\"left\" style=\" margin-top:0px; margin-bottom:0px; margin-left:%3px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">"
-                       "    $p"
+                       "$p"
                      "</p>"
                    "</body>"
                  "</html>")),
@@ -545,7 +545,7 @@ StyleData::StyleData()
                    "</head>"
                  "<body style=\" font-family:'%1'; font-size:%2pt;\">"
                    "<p align=\"right\" style=\" margin-top:0px; margin-bottom:0px; margin-left:%3px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">"
-                       "$p    "
+                       "$p"
                      "</p>"
                    "</body>"
                  "</html>")),

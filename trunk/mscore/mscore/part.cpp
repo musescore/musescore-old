@@ -79,8 +79,9 @@ void Part::read(QDomElement e)
                   staff->read(e);
                   ++rstaff;
                   }
-            else if (tag == "Instrument")
+            else if (tag == "Instrument") {
                   instr(0)->read(e);
+                  }
             else if (tag == "name") {
                   if (_score->mscVersion() <= 101)
                         instr(0)->longName() = QTextDocumentFragment::fromHtml(val);
@@ -118,6 +119,8 @@ void Part::read(QDomElement e)
             else
                   domError(e);
             }
+      if (_trackName.isEmpty())
+            _trackName = instr(0)->trackName();
       }
 
 //---------------------------------------------------------

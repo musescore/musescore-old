@@ -1,3 +1,8 @@
+7.dec (ws)
+      - offset footer/header text position by page margins (feature request #8059)
+      - excerpts now have "multi measure rests" flag on by default
+      - fix excerpts dialog: show track names
+      - fixed track number for chord elements after creating excerpt, fixes a crash
 4.dec (la)
       - fix #8161: Missing lyrics in MIDI import
 2.dec (mi)

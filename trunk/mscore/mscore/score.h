@@ -629,6 +629,8 @@ class Score : public QObject {
       Style& style()                           { return _style;                   }
       const Style& style() const               { return _style;                   }
       void setStyle(const Style& s)            { _style = s;                      }
+      void loadStyle();
+      void saveStyle();
 
       StyleVal style(StyleIdx idx) const       { return _style.value(idx);   }
       Spatium styleS(StyleIdx idx) const       { return _style.valueS(idx);  }
@@ -636,6 +638,7 @@ class Score : public QObject {
       bool    styleB(StyleIdx idx) const       { return _style.valueB(idx);  }
       double  styleD(StyleIdx idx) const       { return _style.valueD(idx);  }
       int     styleI(StyleIdx idx) const       { return _style.valueI(idx);  }
+      const TextStyle& textStyle(TextStyleType idx) const { return _style.textStyle(idx); }
 
       void insertTime(int tick, int len);
       void cmdRemoveTime(int tick, int len);
@@ -649,10 +652,6 @@ class Score : public QObject {
       void setInputState(const InputState& st) { _is = st;           }
       void setInputTrack(int);
 
-      const TextStyle& textStyle(TextStyleType idx) const { return _style.textStyle(idx); }
-
-      void loadStyle();
-      void saveStyle();
       void spatiumChanged(double oldValue, double newValue);
 
       void pasteStaff(QDomElement, ChordRest* dst);

@@ -29,6 +29,26 @@
 QVector<Sym> symbols[2];
 static bool symbolsInitialized[2] = { false, false };
 
+#if 0
+//---------------------------------------------------------
+//   dumpTable
+//    for debugging
+//---------------------------------------------------------
+
+void dumpTable()
+      {
+      for (int i = 0; i < lastSym; ++i) {
+            Sym s = symbols[0][i];
+            QRectF r = s.getBbox();
+            QPointF p = s.getAttach();
+
+            printf("   Sym(\"%s\", %d, 0, QPointF(%f,%f), QRectF(%f,%f,%f,%f));\n",
+               s.name(), s.code(), p.x(), p.y(), r.x(), r.y(), r.width(), r.height()
+               );
+            }
+      }
+#endif
+
 QMap<const char*, SymCode*> charReplaceMap;
 
 struct SymbolNames {
@@ -442,12 +462,6 @@ Sym::Sym(const char* name, int c, int fid, double ax, double ay)
             printf("Sym: character 0x%x(%d) <%s> are not in font <%s>\n", c, c, _name, qPrintable(_font.family()));
       w     = fm.width(_code);
       _bbox = fm.boundingRect(_code);
-#ifdef USE_STATIC_TEXT
-      createStaticText();
-#endif
-#ifdef USE_PIXMAP
-      setupPixmap();
-#endif
       }
 
 Sym::Sym(const char* name, int c, int fid, const QPointF& a, const QRectF& b)
@@ -457,75 +471,7 @@ Sym::Sym(const char* name, int c, int fid, const QPointF& a, const QRectF& b)
       _bbox.setRect(b.x() * s, b.y() * s, b.width() * s, b.height() * s);
       _attach = a * s;
       w = _bbox.width();
-#ifdef USE_STATIC_TEXT
-      createStaticText();
-#endif
-#ifdef USE_PIXMAP
-      setupPixmap();
-#endif
       }
-
-//---------------------------------------------------------
-//   createStaticText
-//    create a cached text layout to speedup drawing
-//---------------------------------------------------------
-
-#ifdef USE_STATIC_TEXT
-void Sym::createStaticText()
-      {
-      st.setTextFormat(Qt::PlainText);
-      st.setTextWidth(10000.0);
-      QTextOption to(Qt::AlignLeft | Qt::AlignVCenter);
-      to.setWrapMode(QTextOption::NoWrap);
-      st.setTextOption(to);
-      if (_code & 0xffff0000) {
-            QChar ss[2];
-            ss[0] = QChar(QChar::highSurrogate(_code));
-            ss[1] = QChar(QChar::lowSurrogate(_code));
-            QString s(ss, 2);
-            st.setText(s);
-            }
-      else {
-            st.setText(QString(_code));
-            }
-      }
-#endif
-#ifdef USE_PIXMAP
-//---------------------------------------------------------
-//   setupPixmap
-//---------------------------------------------------------
-
-void Sym::setupPixmap()
-      {
-      scale = 0.0;
-      }
-
-//---------------------------------------------------------
-//   preparePixmap
-//---------------------------------------------------------
-
-void Sym::preparePixmap(double sc) const
-      {
-      QRectF bb(bbox(sc));
-      pixmap = QPixmap(int(bb.width())+1, int(bb.height())+1);
-
-      pixmap.fill(QColor(Qt::transparent));
-      QString s;
-      QPainter painter(&pixmap);
-      painter.scale(sc, sc);
-      painter.setFont(_font);
-      if (_code & 0xffff0000) {
-            s = QChar(QChar::highSurrogate(_code));
-            s += QChar(QChar::lowSurrogate(_code));
-            }
-      else
-            s = QChar(_code);
-      dx    = bb.x();
-      dy    = bb.y();
-      scale = sc;
-      painter.drawText(-_bbox.x(), -_bbox.y(), s);
-      }
-#endif
 
 //---------------------------------------------------------
 //   bbox
@@ -542,24 +488,6 @@ const QRectF Sym::bbox(double mag) const
 
 void Sym::draw(QPainter& painter, double mag, qreal x, qreal y) const
       {
-#ifdef USE_STATIC_TEXT
-      double imag = 1.0 / mag;
-      painter.scale(mag, mag);
-      painter.setFont(_font);
-      painter.drawStaticText(x * imag, y * imag, st);
-      painter.scale(imag, imag);
-#else
-#ifdef USE_PIXMAP
-      double m = painter.worldTransform().m11();
-      double ddx = painter.worldTransform().dx();
-      double ddy = painter.worldTransform().dy();
-      double mm = m * mag;
-      if (scale != mm)
-            preparePixmap(mm);
-      painter.setWorldMatrixEnabled(false);
-      painter.drawPixmap(ddx + dx, ddy + dy, pixmap);
-      painter.setWorldMatrixEnabled(true);
-#else
       double imag = 1.0 / mag;
       painter.scale(mag, mag);
       QString s;
@@ -572,8 +500,6 @@ void Sym::draw(QPainter& painter, double mag, qreal x, qreal y) const
             s = QChar(_code);
       painter.drawText(x * imag, y * imag, s);
       painter.scale(imag, imag);
-#endif
-#endif
       }
 
 //---------------------------------------------------------
@@ -758,5 +684,6 @@ void initSymbols(int idx)
                   charReplaceMap.insert(pSymbols[i].text, &pSymbols[i]);
                   }
             }
+//      dumpTable();
       }
 

@@ -86,7 +86,6 @@ bool enableExperimental = false;
 QString dataPath;
 QString iconPath, iconGroup;
 qreal PDPI, DPI, DPMM;
-double SPATIUM;
 
 QString mscoreGlobalShare;
 static QStringList recentScores;

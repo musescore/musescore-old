@@ -23,12 +23,6 @@
 
 #include "style.h"
 
-#if QT_VERSION >= 0x040700
-// does not work now    #define USE_STATIC_TEXT
-#endif
-
-// #define USE_PIXMAP   // uncomplete: does not handle color
-
 extern void initSymbols(int);
 
 enum SymbolType {
@@ -67,17 +61,6 @@ class Sym {
       double w;
       QRectF _bbox;
       QPointF _attach;
-#ifdef USE_STATIC_TEXT
-      QStaticText st;
-      void createStaticText();
-#endif
-#ifdef USE_PIXMAP
-      mutable QPixmap pixmap;
-      mutable double scale;
-      mutable double dx, dy;
-      void setupPixmap();
-      void preparePixmap(double) const;
-#endif
 
    public:
       Sym() { _code = 0; }
@@ -98,6 +81,8 @@ class Sym {
       void draw(QPainter& painter, double mag, qreal x = 0.0, qreal y = 0.0) const;
       void setAttach(const QPointF& r)       { _attach = r; }
       bool isValid() const                   { return _code != 0; }
+      QRectF getBbox() const    { return _bbox; }
+      QPointF getAttach() const { return _attach; }
       };
 
 enum {

@@ -399,7 +399,12 @@ Staff* Element::staff() const
       {
       if (_track == -1)
             return 0;
-      return score()->staff(staffIdx());
+      Staff* st = score()->staff(staffIdx());
+      if (st == 0) {
+            printf("no staff: <%s> track %d staffIdx %d, staves %d\n",
+               name(), track(), track()/VOICES, score()->staves().size());
+            }
+      return st;
       }
 
 //---------------------------------------------------------

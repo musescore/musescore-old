@@ -323,7 +323,6 @@ Score::Score(const Style& s)
       _symIdx         = 0;
       _spatium        = preferences.spatium * DPI;
       _pageFormat     = new PageFormat;
-//      _needLayout     = false;
       startLayout     = 0;
       _undo           = new UndoStack();
       _repeatList     = new RepeatList(this);

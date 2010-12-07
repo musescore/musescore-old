@@ -159,6 +159,7 @@ class Text : public Element {
       void writeProperties(Xml& xml, bool writeText = true) const;
       bool readProperties(QDomElement node);
       virtual void layout();
+      virtual void layout(double width, double x, double y);
       virtual QPainterPath shape() const;
       virtual bool mousePress(const QPointF&, QMouseEvent* ev);
       double lineSpacing() const;
