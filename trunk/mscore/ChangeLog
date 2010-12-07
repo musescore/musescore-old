@@ -1,4 +1,7 @@
 7.dec (ws)
+      - Splitted header/footer into three parts: left/center/right.
+        Footer/center is preconfigured with copyright meta data.
+        This should fix #8154 (test needed).
       - offset footer/header text position by page margins (feature request #8059)
       - excerpts now have "multi measure rests" flag on by default
       - fix excerpts dialog: show track names

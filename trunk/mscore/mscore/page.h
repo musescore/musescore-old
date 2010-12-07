@@ -81,11 +81,11 @@ struct PageFormat {
 class Page : public Element {
       QList<System*> _systems;
       int _no;                      // page number
-      Text* _footer;
-      Text* _header;
+//      Text* _footer;
+//      Text* _header;
       BspTree bspTree;
 
-      QString replaceTextMacros(const QString&);
+      QString replaceTextMacros(const QString&) const;
 
    public:
       Page(Score*);
@@ -94,6 +94,8 @@ class Page : public Element {
       virtual ElementType type() const       { return PAGE; }
       const QList<System*>* systems() const  { return &_systems;   }
       QList<System*>* systems()              { return &_systems;   }
+
+      virtual void layout();
 
       void appendSystem(System* s);
 
@@ -107,11 +109,6 @@ class Page : public Element {
       double rm() const;
       double loWidth() const;
       double loHeight() const;
-
-      Text* footer() const { return _footer; }
-      Text* header() const { return _header; }
-
-      void layout();
 
       virtual void draw(QPainter&, ScoreView*) const;
       virtual void scanElements(void* data, void (*func)(void*, Element*));

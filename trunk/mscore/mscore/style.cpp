@@ -208,14 +208,22 @@ StyleType styleTypes[] = {
       StyleType("showHeader",              ST_BOOL),
       StyleType("headerFirstPage",         ST_BOOL),
       StyleType("headerOddEven",           ST_BOOL),
-      StyleType("evenHeader",              ST_STRING),
-      StyleType("oddHeader",               ST_STRING),
+      StyleType("evenHeaderL",             ST_STRING),
+      StyleType("evenHeaderC",             ST_STRING),
+      StyleType("evenHeaderR",             ST_STRING),
+      StyleType("oddHeaderL",              ST_STRING),
+      StyleType("oddHeaderC",              ST_STRING),
+      StyleType("oddHeaderR",              ST_STRING),
 
       StyleType("showFooter",              ST_BOOL),
       StyleType("footerFirstPage",         ST_BOOL),
       StyleType("footerOddEven",           ST_BOOL),
-      StyleType("evenFooter",              ST_STRING),
-      StyleType("oddFooter",               ST_STRING)
+      StyleType("evenFooterL",             ST_STRING),
+      StyleType("evenFooterC",             ST_STRING),
+      StyleType("evenFooterR",             ST_STRING),
+      StyleType("oddFooterL",              ST_STRING),
+      StyleType("oddFooterC",              ST_STRING),
+      StyleType("oddFooterR",              ST_STRING)
       };
 
 static const QString ff("FreeSerif");
@@ -333,7 +341,7 @@ void setDefaultStyle()
          ALIGN_HCENTER | ALIGN_TOP));
 
       AS(TextStyle(TR( "Footer"), ff, 8, false, false, false,
-         ALIGN_HCENTER | ALIGN_BOTTOM));
+         ALIGN_HCENTER | ALIGN_BOTTOM, 0.0, MM(5), OA));
 
       AS(TextStyle(TR( "Instrument Change"), ff,  12, true, false, false,
          ALIGN_LEFT | ALIGN_BOTTOM, 0, -3.0, OS, 0, 0, true));
@@ -513,13 +521,17 @@ StyleData::StyleData()
             StyleVal(ST_showHeader, false),
             StyleVal(ST_headerFirstPage, false),
             StyleVal(ST_headerOddEven,  true),
-            StyleVal(ST_evenHeader,  ""),
-            StyleVal(ST_oddHeader,   ""),
+            StyleVal(ST_evenHeaderL,  ""),
+            StyleVal(ST_evenHeaderC,  ""),
+            StyleVal(ST_evenHeaderR,  ""),
+            StyleVal(ST_oddHeaderL,   ""),
+            StyleVal(ST_oddHeaderC,   ""),
+            StyleVal(ST_oddHeaderR,   ""),
 
             StyleVal(ST_showFooter,  true),
             StyleVal(ST_footerFirstPage, true),
             StyleVal(ST_footerOddEven, true),
-            StyleVal(ST_evenFooter,
+            StyleVal(ST_evenFooterL,
                QString("<html>"
                  "<head>"
                    "<meta name=\"qrichtext\" content=\"1\" >"
@@ -534,7 +546,41 @@ StyleData::StyleData()
                      "</p>"
                    "</body>"
                  "</html>")),
-            StyleVal(ST_oddFooter,
+            StyleVal(ST_evenFooterR, ""),
+            StyleVal(ST_evenFooterC,
+               QString("<html>"
+                 "<head>"
+                   "<meta name=\"qrichtext\" content=\"1\" >"
+                   "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf8\" />"
+                   "<style type=\"text/css\">"
+                     "p, li { white-space: pre-wrap; }"
+                     "</style>"
+                   "</head>"
+                 "<body style=\" font-family:'%1'; font-size:%2pt;\">"
+                   "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:%3px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">"
+                       "$:copyright:"
+                     "</p>"
+                   "</body>"
+                 "</html>")),
+
+            StyleVal(ST_oddFooterL,
+               QString("<html>"
+                 "<head>"
+                   "<meta name=\"qrichtext\" content=\"1\" >"
+                   "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf8\" />"
+                   "<style type=\"text/css\">"
+                     "p, li { white-space: pre-wrap; }"
+                     "</style>"
+                   "</head>"
+                 "<body style=\" font-family:'%1'; font-size:%2pt;\">"
+                   "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:%3px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">"
+                       "$:copyright:"
+                     "</p>"
+                   "</body>"
+                 "</html>")),
+
+            StyleVal(ST_oddFooterR, ""),
+            StyleVal(ST_oddFooterC,
                QString("<html>"
                  "<head>"
                    "<meta name=\"qrichtext\" content=\"1\" >"
@@ -861,6 +907,11 @@ void StyleData::load(QDomElement e)
                               case 3: tag = "StemDir4"; break;
                               }
                         }
+                  // for compatibility:
+                  if (tag == "oddHeader" || tag == "evenHeader"
+                     || tag == "oddFooter" || tag == "evenFooter")
+                        tag += "C";
+
                   int idx;
                   for (idx = 0; idx < ST_STYLES; ++idx) {
                         if (styleTypes[idx].name() == tag) {
@@ -876,8 +927,18 @@ void StyleData::load(QDomElement e)
                               break;
                               }
                         }
-                  if (idx >= ST_STYLES)
-                        domError(e);
+                  if (idx >= ST_STYLES) {
+                        if (tag == "oddHeader")
+                              ;
+                        else if (tag == "evenHeader")
+                              ;
+                        else if (tag == "oddFooter")
+                              ;
+                        else if (tag == "evenHeader")
+                              ;
+                        else
+                              domError(e);
+                        }
                   }
             }
       }
