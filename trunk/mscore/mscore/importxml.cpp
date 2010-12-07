@@ -2670,7 +2670,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             char c     = step[0].toLatin1();
             Note* note = new Note(score);
             note->setHeadGroup(headGroup);
-            note->setTrack(track);
+            // note->setTrack(track);
             // note->setStaffMove(move);
 
             if (!fingering.isEmpty()) {
