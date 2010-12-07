@@ -1,4 +1,6 @@
-7.dec (ws)
+7.dec (lv)
+      - fix segfault when importing MusicXML file
+      (ws)
       - Splitted header/footer into three parts: left/center/right.
         Footer/center is preconfigured with copyright meta data.
         This should fix #8154 (test needed).
