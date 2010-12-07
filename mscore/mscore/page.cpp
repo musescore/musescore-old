@@ -143,30 +143,28 @@ void Page::layout()
       // add page number
       int n = no() + 1 + _score->pageFormat()->_pageOffset;
 
-      if (_score->styleB(ST_showHeader) && (n != 0 || _score->styleB(ST_headerFirstPage))) {
+      if (_score->styleB(ST_showHeader) && (n || _score->styleB(ST_headerFirstPage))) {
             if (_header == 0) {
                   _header = new Text(score());
                   _header->setFlag(ELEMENT_MOVABLE, false);
                   _header->setGenerated(true);
                   _header->setParent(this);
                   _header->setTextStyle(TEXT_STYLE_HEADER);
-                  _header->setSubtype(TEXT_FOOTER);
+                  _header->setSubtype(TEXT_HEADER);
                   _header->setLayoutToParentWidth(true);
                   }
-            QString s;
-            if (_score->styleB(ST_headerOddEven))
-                  s = _score->styleSt(n & 0x1 ? ST_oddHeader : ST_evenHeader);
-            else
-                  s = _score->styleSt(ST_evenHeader);
+            bool odd = (n & 1) && _score->styleB(ST_headerOddEven);
+            QString s = _score->styleSt(odd ? ST_oddHeader : ST_evenHeader);
             _header->setHtml(replaceTextMacros(s));
-            _header->layout();
+            double w = loWidth() - lm() - rm();
+            _header->layout(w, lm(), tm());
             }
       else {
             delete _header;
             _header = 0;
             }
 
-      if (_score->styleB(ST_showFooter) && (n != 0 || _score->styleB(ST_footerFirstPage))) {
+      if (_score->styleB(ST_showFooter) && (n || _score->styleB(ST_footerFirstPage))) {
             if (_footer == 0) {
                   _footer = new Text(score());
                   _footer->setFlag(ELEMENT_MOVABLE, false);
@@ -176,13 +174,12 @@ void Page::layout()
                   _footer->setSubtype(TEXT_FOOTER);
                   _footer->setLayoutToParentWidth(true);
                   }
-            QString s;
-            if (_score->styleB(ST_footerOddEven))
-                  s = _score->styleSt(n & 0x1 ? ST_oddFooter : ST_evenFooter);
-            else
-                  s = _score->styleSt(ST_evenFooter);
+            bool odd = (n & 1) && _score->styleB(ST_footerOddEven);
+            QString s = _score->styleSt(odd ? ST_oddFooter : ST_evenFooter);
             _footer->setHtml(replaceTextMacros(s));
-            _footer->layout();
+            double w = loWidth() - lm() - rm();
+            _footer->layout(w, lm(), -bm());
+printf("footer %f %f  %f\n", _footer->x(), _footer->y(), lm());
             }
       else {
             delete _footer;

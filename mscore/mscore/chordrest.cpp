@@ -707,6 +707,10 @@ void ChordRest::setTrack(int val)
       foreach(Articulation* a, articulations)
             a->setTrack(val);
       Element::setTrack(val);
+      if (type() == CHORD) {
+            foreach(Note* n, static_cast<Chord*>(this)->notes())
+                  n->setTrack(val);
+            }
       }
 
 //---------------------------------------------------------

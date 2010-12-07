@@ -34,7 +34,7 @@
 //---------------------------------------------------------
 
 BSymbol::BSymbol(const BSymbol& s)
-   : Element(s)
+   : Element(s), ElementLayout(s)
       {
       foreach(Element* e, s._leafs) {
             Element* ee = e->clone();
@@ -192,7 +192,7 @@ void Symbol::layout()
 
 void Symbol::draw(QPainter& p, ScoreView*) const
       {
-      if(type() != NOTEDOT || !staff()->useTablature())
+      if (type() != NOTEDOT || !staff()->useTablature())
             symbols[score()->symIdx()][_sym].draw(p, magS());
       }
 
