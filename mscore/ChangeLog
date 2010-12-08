@@ -1,3 +1,5 @@
+8.dec (la)
+      - fix #8184: Creating parts with cross staff barlines crash
 7.dec (lv)
       - fix segfault when importing MusicXML file
       (ws)
