@@ -1,3 +1,5 @@
+8.dec (la)
+      - fix #8184: Creating parts with cross staff barlines crash
 4.dec (la)
       - fix #8161: Missing lyrics in MIDI import
 24.nov (la)

@@ -320,8 +320,10 @@ void Segment::add(Element* el)
                         measure()->mstaff(staffIdx)->hasVoices = true;
 
             default:
-                  _elist[track] = el;
-                  empty = false;
+                  if(track < _elist.size()) {
+                        _elist[track] = el;
+                        empty = false;
+                        }
                   break;
             }
       }
