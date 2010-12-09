@@ -1377,10 +1377,6 @@ void Chord::layout2()
 #endif
       }
 
-//static	QChar	g_cDurationChars[] = { ' ', 'Z', '[', '\\', ']', '^', '_', '`', 'a', ' ', ' ', ' ', ' ', '\x9A' };
-static	QChar	g_cDurationChars[] = { '\xA1', '\xA2', '\xA3', '\xA4', '\xA5', '\xA6', '\xA7', '\xA8', '\xA9', '\xAA', '\xAB', '\xAC', '\xAD', '\xAE' };
-//                                        L       B       W       H       Q       8      16      32      64      128     256     dot   2 dots  3 dots
-
 //---------------------------------------------------------
 //   layout
 //---------------------------------------------------------
@@ -1425,14 +1421,7 @@ void Chord::layout()
                                     break;
                                     }
                               }
-                        // create a new TAB_DURATION_SYMBOL element with duration symbol(s)
-                        TabDurationSymbol * durSym = new TabDurationSymbol(score());
-                        // text string is a main symbol plus as many dots as required by chord duration
-                        QString s = QString(g_cDurationChars[durationType().type()]);
-                        for(int count=dots(); count > 0; count--)
-                              s.append(g_cDurationChars[Duration::V_ZERO]);
-                        durSym->setText(s);
-                        durSym->setTablature(tab);
+                        TabDurationSymbol * durSym = new TabDurationSymbol(score(), tab, durationType().type(), dots());
                         durSym->setTrack(track());
 //                      durSym->layout();
                         segm->add(durSym);	// add text to segment annotations

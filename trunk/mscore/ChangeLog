@@ -1,3 +1,7 @@
+9.dec (mi)
+      - Made StaffTypeTablature() more self-contained and more efficient.
+      - New Score wizard does not create a tablature staff if the instrument
+        does not contain a tablature string list.
 8.dec (la)
       - fix #8184: Creating parts with cross staff barlines crash
 7.dec (lv)
