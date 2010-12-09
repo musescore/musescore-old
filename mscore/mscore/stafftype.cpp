@@ -20,7 +20,7 @@
 
 #include "stafftype.h"
 #include "staff.h"
-#include "score.h"
+//#include "score.h"
 #include "xml.h"
 
 QList<StaffType*> staffTypes;
@@ -182,7 +182,7 @@ void StaffTypeTablature::init()
       setUseNumbers(true);
       // internal
       _metricsValid = false;
-      _charBoxH = _charBoxY = _fretYOffset = _refDPI = _refSpatium = 0.0;
+      _charBoxH = _charBoxY = _fretYOffset = _refDPI = 0.0;
       }
 
 //---------------------------------------------------------
@@ -264,16 +264,12 @@ void StaffTypeTablature::setOnLines(bool val)
 static QString	g_strNumbers("0123456789");
 static QString	g_strLetters("abcdefghiklmnopq");
 
-void StaffTypeTablature::setMetrics(double spatium)
-{      int				size;
-
-      if(_metricsValid && _refDPI == DPI && _refSpatium == spatium)
+void StaffTypeTablature::setMetrics()
+{
+      if(_metricsValid && _refDPI == DPI)
             return;
 
-      QFont f(_fretFontName);
-      size = lrint(_fretFontSize * DPI / PPI);
-      f.setPixelSize(size);
-      QFontMetricsF fm(f);
+      QFontMetricsF fm(fretFont());
       QRectF bb(fm.tightBoundingRect(_useNumbers ? g_strNumbers : g_strLetters));
       if(_useNumbers) {
             // for numbers: move down by the whole part above (negative) the base line ( -bb.y() )
@@ -285,19 +281,17 @@ void StaffTypeTablature::setMetrics(double spatium)
             QRectF bx( fm.tightBoundingRect("a") );
             _fretYOffset = -bx.y() / 2.0;
             }
-      _fretYOffset /= spatium;
       // if on string, we are done; if between strings, raise by half space
       if(!_onLines)
-            _fretYOffset -= lineDistance().val() / 2.0;
+            _fretYOffset -= lineDistance().val()*DPI*SPATIUM20 / 2.0;
 
       // from _fretYOffset, compute _charBoxH and _charBoxY
-      _charBoxH = bb.height() / spatium;
-      _charBoxY = bb.y() / spatium + _fretYOffset;
+      _charBoxH = bb.height();
+      _charBoxY = bb.y()  + _fretYOffset;
 
       // keep track of the conditions under which metrics have been computed
       _metricsValid = true;
       _refDPI = DPI;
-      _refSpatium = spatium;
 }
 
 //---------------------------------------------------------
@@ -307,10 +301,27 @@ void StaffTypeTablature::setMetrics(double spatium)
 TabDurationSymbol::TabDurationSymbol(Score* s)
    : Element(s)
       {
-      setFlags(ELEMENT_SELECTABLE);
+      setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
       setGenerated(true);
       _tab  = 0;
       _text = QString();
+      }
+
+static QChar g_cDurationChars[] = { 0xE0FF, 0xE100, 0xE101, 0xE102, 0xE103, 0xE104,
+//                                   Longa  Brevis   Whole   Half   Quarter  1/8
+                                    0xE105, 0xE106, 0xE107, 0xE108, 0xE109, 0xE10B, ' ', ' '};
+//                                   1\16    1\32    1\64    1\128   1\256   dot
+
+TabDurationSymbol::TabDurationSymbol(Score* s, StaffTypeTablature * tab, Duration::DurationType type, int dots)
+   : Element(s)
+      {
+      setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
+      setGenerated(true);
+      _tab  = tab;
+      // text string is a main symbol plus as many dots as required by chord duration
+      _text = QString(g_cDurationChars[type]);
+      for(int count=0; count < dots; count++)
+            _text.append(g_cDurationChars[11]);
       }
 
 TabDurationSymbol::TabDurationSymbol(const TabDurationSymbol& e)
@@ -331,14 +342,8 @@ void TabDurationSymbol::draw(QPainter& p, ScoreView*) const
       double mag = magS();
       double imag = 1.0 / mag;
 
-//      QFont f(_tab->durationFontName());
-//      int size = lrint(_tab->durationFontSize() * DPI / PPI);
-//      f.setPixelSize(size);
       p.scale(mag, mag);
-//      p.setFont(f);
       p.setFont(_tab->durationFont());
-
       p.drawText(0.0, _tab->durationFontYOffset() * spatium(), _text);
-
       p.scale(imag, imag);
       }

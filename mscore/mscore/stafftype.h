@@ -21,8 +21,10 @@
 #ifndef __STAFFTYPE_H__
 #define __STAFFTYPE_H__
 
+#include "element.h"
 #include "spatium.h"
 #include "globals.h"
+#include "durationtype.h"
 
 //class Instrument;
 class Staff;
@@ -98,40 +100,37 @@ class StaffTypePitched : public StaffType {
 //   StaffTypeTablature
 //---------------------------------------------------------
 
-// TEMPORARY HACK FOR FURATIONS AS TEXT ELEMENTS
-#include "text.h"
-
 class StaffTypeTablature : public StaffType {
 
       // configurable properties
 //      Instrument* _instrument;            // to access the underlying string data
-      QString	_durationFontName;	// the name of the font used for duration symbols
-      double	_durationFontSize;	// the size (in points) for the duration symbol font
-      double	_durationFontUserY;	// the vertical offset (in sp. units) for the duration symb. font
-                                          // (sp. units; user configurable
-      QString	_fretFontName;		// the name of the font used for fret marks
-      double	_fretFontSize;		// the size (in points) for the fret marks font
-      double	_fretFontUserY;         // additional vert. offset of fret marks with respect to
-                                          // the string line (sp. unit); user configurable
-      bool		_genDurations;		// whether duration symbols are drawn or not
+      QString     _durationFontName;	// the name of the font used for duration symbols
+      double      _durationFontSize;	// the size (in points) for the duration symbol font
+      double      _durationFontUserY;	// the vertical offset (in sp. units) for the duration symb. font
+                                          // user configurable
+      QString     _fretFontName;		// the name of the font used for fret marks
+      double      _fretFontSize;		// the size (in points) for the fret marks font
+      double      _fretFontUserY;         // additional vert. offset of fret marks with respect to
+                                          // the string line (raster unit); user configurable
+      bool        _genDurations;		// whether duration symbols are drawn or not
       bool        _genTimesig;            // whether time signature is shown or not
-      bool		_linesThrough;		// whether lines for strings and stems may pass through fret marks or not
-      bool		_onLines;			// whether fret marks are drawn on the string lines or between them
-      bool		_useNumbers;		// true: use numbers ('0' - ...) for frets | false: use letters ('a' - ...)
+      bool        _linesThrough;		// whether lines for strings and stems may pass through fret marks or not
+      bool        _onLines;			// whether fret marks are drawn on the string lines or between them
+      bool        _useNumbers;		// true: use numbers ('0' - ...) for frets | false: use letters ('a' - ...)
 
       // internally managed variables
-      double	_charBoxH, _charBoxY;	// the height and the y rect.coord. of a box bounding all fret characters
-                                          // internally computed: depends upon _onString and _useNumbers and the
-                                          // metrics of the fret font (sp. units)
+      double      _charBoxH, _charBoxY;	// the height and the y rect.coord. of a box bounding all fret characters
+                                          // (raster units) internally computed: depends upon _onString, _useNumbers
+                                          // and the metrics of the fret font
       QFont       _durationFont;          // font used to draw dur. symbols; cached for efficiency
-      double      _durationYOffset;       // the vertical offset to draw duration symbols with the respect
-                                          // to the string; internally computed: depends upon _onString (sp. units)
+      double      _durationYOffset;       // the vertical offset to draw duration symbols with respect to the
+                                          // string lines (raster units); internally computed: depends upon _onString
       QFont       _fretFont;              // font used to draw fret marks; cached for efficiency
-      double	_fretYOffset;		// the vertical offset to draw fret marks with the respect to the string
-                                          // internally computed: depends upon _onString and _useNumbers and the
-                                          // metrics of the fret font (sp. units)
-      bool		_metricsValid;		// whether metrics are valid or not
-      qreal		_refDPI, _refSpatium;	// reference values used to last compute metrics and to see if they are still valid
+      double      _fretYOffset;		// the vertical offset to draw fret marks with respect to the string lines;
+                                          // (raster units)internally computed: depends upon _onString, _useNumbers and the
+                                          // metrics of the fret font
+      bool        _metricsValid;		// whether metrics are valid or not
+      qreal       _refDPI;                // reference value used to last compute metrics and to see if they are still valid
 
       void init();                        // init to reasonable defaults
 
@@ -145,8 +144,8 @@ class StaffTypeTablature : public StaffType {
       virtual void write(Xml& xml, int) const;
 
       // properties getters (some getters may require to update the metrics)
-      double  charBoxH(double spatium)    { setMetrics(spatium); return _charBoxH; }
-      double  charBoxY(double spatium)    { setMetrics(spatium); return _charBoxY + _fretFontUserY; }
+      double  charBoxH()                  { setMetrics(); return _charBoxH; }
+      double  charBoxY()                  { setMetrics(); return _charBoxY + _fretFontUserY; }
 const QFont&  durationFont()              { return _durationFont;     }
 const	QString durationFontName() const	{ return _durationFontName; }
       double  durationFontSize() const    { return _durationFontSize; }
@@ -156,7 +155,7 @@ const QFont&  fretFont()                  { return _fretFont;         }
 const QString fretFontName() const		{ return _fretFontName;     }
       double  fretFontSize() const        { return _fretFontSize;     }
       double  fretFontUserY() const       { return _fretFontUserY;    }
-      double  fretFontYOffset(double spatium)       { setMetrics(spatium); return _fretYOffset + _fretFontUserY; }
+      double  fretFontYOffset()           { setMetrics(); return _fretYOffset + _fretFontUserY; }
       bool    genDurations() const		{ return _genDurations;     }
       bool    genTimesig() const		{ return _genTimesig;       }
       bool    linesThrough() const		{ return _linesThrough;     }
@@ -180,7 +179,7 @@ const QString fretFontName() const		{ return _fretFontName;     }
       void    setUseNumbers(bool val)	{ _useNumbers = val; _metricsValid = false; }
 
 protected:
-      void    setMetrics(double spatium);
+      void    setMetrics();
       };
 
 //---------------------------------------------------------
@@ -200,18 +199,21 @@ class StaffTypePercussion : public StaffType {
 extern void initStaffTypes();
 extern QList<StaffType*> staffTypes;
 
+class ScoreView;
+
 //---------------------------------------------------------
 //   TabDurationSymbol
 //    Element used to draw duration symbols above tablatures
 //---------------------------------------------------------
 
-class TabDurationSymbol : public Element
-{
+class TabDurationSymbol : public Element {
+
       StaffTypeTablature *    _tab;
       QString                 _text;
 
 public:
       TabDurationSymbol(Score* s);
+      TabDurationSymbol(Score* s, StaffTypeTablature * tab, Duration::DurationType type, int dots);
       TabDurationSymbol(const TabDurationSymbol&);
       virtual TabDurationSymbol* clone() const  { return new TabDurationSymbol(*this); }
       virtual void draw(QPainter&, ScoreView*) const;
@@ -225,6 +227,6 @@ public:
 
       void setTablature(StaffTypeTablature * tab)     { _tab = tab; }
       void setText(QString s)                         { _text = s; }
-};
+      };
 
 #endif
