@@ -353,7 +353,7 @@ void InstrumentWizard::createInstruments(Score* cs)
                   ++rstaff;
 
                   staff->setClef(0, sli->clef());
-                  staff->setUseTablature(t->useTablature);
+                  staff->setUseTablature(t->useTablature && t->tablature);
 
                   if (staff->useTablature())
                         staff->setClef(0, CLEF_TAB);
