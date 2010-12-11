@@ -1,3 +1,8 @@
+10.dec (mi)
+      - Extended EditStaffType dlg box to deal with different properties
+        for each staff group.
+      - Added 4 (alpha) fonts for tabulatures, as both .sfd FontForge sources
+        and generated .ttf.
 9.dec (mi)
       - Made StaffTypeTablature() more self-contained and more efficient.
       - New Score wizard does not create a tablature staff if the instrument
