@@ -181,7 +181,7 @@ static void initChannelCombo(QComboBox* cb, StaffText* st)
       Part* part = st->staff()->part();
       foreach(const Channel& a, part->instr()->channel()) {
             if (a.name.isEmpty())
-                  cb->addItem(cb->tr("normal"));
+                  cb->addItem("normal");
             else
                   cb->addItem(a.descr);
             }
