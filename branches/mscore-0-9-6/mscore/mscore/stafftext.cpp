@@ -108,7 +108,7 @@ StaffTextProperties::StaffTextProperties(StaffText* st, QWidget* parent)
       Part* part = st->staff()->part();
       foreach(const Channel& a, part->channel()) {
             if (a.name.isEmpty())
-                  channelList->addItem(tr("normal"));
+                  channelList->addItem("normal");
             else
                   channelList->addItem(a.name);
             }
