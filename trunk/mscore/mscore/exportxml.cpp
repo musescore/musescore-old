@@ -80,6 +80,7 @@
 #include "element.h"
 #include "glissando.h"
 #include "navigate.h"
+#include "spanner.h"
 
 static bool isTwoNoteTremolo(Chord* chord);
 
@@ -3206,10 +3207,11 @@ static void measureStyle(Xml& xml, Attributes& attr, Measure* m)
       }
 
 //---------------------------------------------------------
-//  annotations
+//  findTrackForAnnotations
 //---------------------------------------------------------
 
-// Annotations are attched to the staff, find a track
+// An annotation is attched to the staff, with track set
+// to the lowest track in the staff. Find a track for it
 // (the lowest track in this staff that has a chord or rest)
 
 static int findTrackForAnnotations(int track, Segment* seg)
@@ -3229,6 +3231,10 @@ static int findTrackForAnnotations(int track, Segment* seg)
             }
       return -1;
       }
+
+//---------------------------------------------------------
+//  annotations
+//---------------------------------------------------------
 
 static void annotations(ExportMusicXml* exp, int strack, int etrack, int track, int sstaff, Segment* seg)
       {
@@ -3257,6 +3263,43 @@ static void annotations(ExportMusicXml* exp, int strack, int etrack, int track, 
                                     break;
                               default:
                                     printf("annotations: direction type %s at tick %d not implemented\n",
+                                            Element::name(e->type()), seg->tick());
+                                    break;
+                              }
+                        }
+                  } // foreach
+            }
+      }
+
+//---------------------------------------------------------
+//  spannerStart
+//---------------------------------------------------------
+
+// TODO
+// for each spanner start:
+// find start track
+// find stop track
+// if stop track < start track
+//   get data from list of already stopped spanners
+// else
+//   calculate data
+// write start if in right track
+
+static void spannerStart(ExportMusicXml* exp, int strack, int etrack, int track, int sstaff, Segment* seg)
+      {
+      printf("spannerStart(strack=%d etrack=%d track=%d sstaff=%d seg=%p)\n", strack, etrack, track, sstaff, seg);
+      if (seg->segmentType() == SegChordRest) {
+            foreach(const Element* e, seg->spannerFor()) {
+                  const Spanner* sp = static_cast<const Spanner*>(e);
+                  printf("spannerStart seg %p elem %p type %d (%s) track %d endElem %p\n",
+                         seg, e, e->type(), qPrintable(e->subtypeName()), e->track(), sp->endElement());
+                  int wtrack = -1; // track to write spanner
+                  if (strack <= e->track() && e->track() < etrack)
+                        wtrack = findTrackForAnnotations(e->track(), seg);
+                  if (track == wtrack) {
+                        switch(e->type()) {
+                              default:
+                                    printf("spannerStart: direction type %s at tick %d not implemented\n",
                                             Element::name(e->type()), seg->tick());
                                     break;
                               }
@@ -3716,6 +3759,7 @@ foreach(Element* el, *(score->gel())) {
 //                              dh.handleElement(this, el, sstaff, true);
                               if (el->isChordRest()) {
                                     annotations(this, strack, etrack, st, sstaff, seg);
+                                    spannerStart(this, strack, etrack, st, sstaff, seg);
                                     }
 
                               switch (el->type()) {
