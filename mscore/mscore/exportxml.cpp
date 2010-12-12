@@ -1449,14 +1449,14 @@ void ExportMusicXml::moveToTick(int t)
       {
 //      printf("ExportMusicXml::moveToTick(t=%d) tick=%d\n", t, tick);
       if (t < tick) {
-            printf(" -> backup");
+            printf(" -> backup\n");
             attr.doAttr(xml, false);
             xml.stag("backup");
             xml.tag("duration", (tick - t) / div);
             xml.etag();
             }
       else if (t > tick) {
-            printf(" -> forward");
+            printf(" -> forward\n");
             attr.doAttr(xml, false);
             xml.stag("forward");
             xml.tag("duration", (t - tick) / div);
@@ -3206,6 +3206,66 @@ static void measureStyle(Xml& xml, Attributes& attr, Measure* m)
       }
 
 //---------------------------------------------------------
+//  annotations
+//---------------------------------------------------------
+
+// Annotations are attched to the staff, find a track
+// (the lowest track in this staff that has a chord or rest)
+
+static int findTrackForAnnotations(int track, Segment* seg)
+      {
+//      printf("findTrackForAnnotations(track=%d seg=%p)\n", track, seg);
+      if (seg->segmentType() != SegChordRest)
+            return -1;
+      int staff = track / VOICES;
+      int strack = staff * VOICES;      // start track of staff containing track
+      int etrack = strack + VOICES;     // end track of staff containing track + 1
+//      printf("findTrackForAnnotations() strack=%d etrack=%d\n", strack, etrack);
+      for (int i = strack; i < etrack; i++) {
+            if (seg->element(i)) {
+//                  printf("findTrackForAnnotations() found element at track=%d\n", i);
+                  return i;
+                  }
+            }
+      return -1;
+      }
+
+static void annotations(ExportMusicXml* exp, int strack, int etrack, int track, int sstaff, Segment* seg)
+      {
+//      printf("annotations(strack=%d etrack=%d track=%d sstaff=%d seg=%p)\n", strack, etrack, track, sstaff, seg);
+      if (seg->segmentType() == SegChordRest) {
+            foreach(const Element* e, seg->annotations()) {
+//                  printf("annotation seg %p elem %p type %d (%s) track %d\n",
+//                         seg, e, e->type(), qPrintable(e->subtypeName()), e->track());
+                  int wtrack = -1; // track to write annotation
+                  if (strack <= e->track() && e->track() < etrack)
+                        wtrack = findTrackForAnnotations(e->track(), seg);
+                  if (track == wtrack) {
+                        switch(e->type()) {
+                              case SYMBOL:
+                                    exp->symbol((Symbol*) e, sstaff);
+                                    break;
+                              case TEMPO_TEXT:
+                                    exp->tempoText((TempoText*) e, sstaff);
+                                    break;
+                              case STAFF_TEXT:
+                              case TEXT:
+                                    exp->words((Text*) e, sstaff);
+                                    break;
+                              case DYNAMIC:
+                                    exp->dynamic((Dynamic*) e, sstaff);
+                                    break;
+                              default:
+                                    printf("annotations: direction type %s at tick %d not implemented\n",
+                                            Element::name(e->type()), seg->tick());
+                                    break;
+                              }
+                        }
+                  } // foreach
+            }
+      }
+
+//---------------------------------------------------------
 //  write
 //---------------------------------------------------------
 
@@ -3652,7 +3712,12 @@ foreach(Element* el, *(score->gel())) {
                                     printf(" newtick=%d\n", tick);
                                     }
 */
-                              dh.handleElement(this, el, sstaff, true);
+                              // handle annottations (directions attached to this note or rest)
+//                              dh.handleElement(this, el, sstaff, true);
+                              if (el->isChordRest()) {
+                                    annotations(this, strack, etrack, st, sstaff, seg);
+                                    }
+
                               switch (el->type()) {
                                     case CLEF:
                                           {
