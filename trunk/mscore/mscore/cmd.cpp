@@ -623,17 +623,13 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, NoteVal nval, Fraction sd,
                   ChordRest* ncr;
                   Note* note = 0;
                   if (nval.pitch == -1) {
-                        nr = new Rest(this);
+                        nr = ncr = new Rest(this);
                         nr->setTrack(track);
-                        ncr = (Rest*)nr;
                         ncr->setDurationType(d);
                         ncr->setDuration(d.fraction());
-                        // ncr->setParent(seg);
                         }
                   else {
-                        note = new Note(this);
-                        nr = note;
-                        note->setTrack(track);
+                        nr = note = new Note(this);
 
                         if (tie) {
                               tie->setEndNote(note);
@@ -649,8 +645,8 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, NoteVal nval, Fraction sd,
                         ncr = chord;
                         if (i+1 < n) {
                               tie = new Tie(this);
-                              tie->setStartNote((Note*)nr);
-                              tie->setTrack(nr->track());
+                              tie->setStartNote(note);
+                              tie->setTrack(track);
                               note->setTieFor(tie);
                               }
                         }
