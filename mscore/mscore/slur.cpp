@@ -35,6 +35,7 @@
 #include "articulation.h"
 #include "slurproperties.h"
 #include "undo.h"
+#include "stem.h"
 
 //---------------------------------------------------------
 //   SlurSegment

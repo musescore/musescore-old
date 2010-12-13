@@ -352,7 +352,7 @@ void Score::transpose(Note* n, Interval interval, bool useDoubleSharpsFlats)
 //    key -   -7(Cb) - +7(C#)
 //---------------------------------------------------------
 
-void Score::transposeKeys(int staffStart, int staffEnd, int tickStart, int tickEnd, int semitones)
+void Score::transposeKeys(int staffStart, int staffEnd, int tickStart, int tickEnd, int /*semitones*/)
       {
       for (int staffIdx = staffStart; staffIdx < staffEnd; ++staffIdx) {
             if (staff(staffIdx)->staffType()->group() == PERCUSSION_STAFF)

@@ -30,6 +30,7 @@
 #include "utils.h"
 #include "measure.h"
 #include "undo.h"
+#include "stem.h"
 
 //---------------------------------------------------------
 //   Tuplet

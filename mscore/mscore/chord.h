@@ -23,7 +23,7 @@
 
 /**
  \file
- Definition of classes Chord, HelpLine, NoteList and Stem.
+ Definition of classes Chord, HelpLine and NoteList.
 */
 
 #include "globals.h"
@@ -36,45 +36,9 @@ class Tremolo;
 class Chord;
 class Glissando;
 class NoteEvent;
+class Stem;
 
 enum TremoloChordType { TremoloSingle, TremoloFirstNote, TremoloSecondNote };
-
-//---------------------------------------------------------
-//   Stem
-//    Notenhals
-//---------------------------------------------------------
-
-/**
- Graphic representation of a note stem.
-*/
-
-class Stem : public Element {
-      double _len;
-      Spatium _userLen;
-
-   public:
-      Stem(Score*);
-      Stem &operator=(const Stem&);
-
-      virtual Stem* clone() const      { return new Stem(*this); }
-      virtual ElementType type() const { return STEM; }
-      virtual void draw(QPainter&, ScoreView*) const;
-      void setLen(double v)            { _len = v; }
-      double stemLen() const           { return _len + point(_userLen); }
-      virtual QRectF bbox() const;
-      virtual bool isEditable() const { return true; }
-
-      virtual void editDrag(int, const QPointF&);
-      virtual void updateGrips(int*, QRectF*) const;
-      virtual void write(Xml& xml) const;
-      virtual void read(QDomElement e);
-      virtual void toDefault();
-      Spatium userLen() const         { return _userLen; }
-      virtual void setVisible(bool f);
-      virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
-      virtual Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*);
-      Chord* chord() const            { return (Chord*)parent(); }
-      };
 
 //---------------------------------------------------------
 //   StemSlash

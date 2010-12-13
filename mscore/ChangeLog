@@ -1,3 +1,6 @@
+13.dec (ws)
+      - fix #8227: New drum score crash
+      - move Stem class into stem.cpp/stem.h
 12.dec (lv)
       - MusicXML export of annotations
 10.dec (mi)

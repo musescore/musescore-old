@@ -38,6 +38,7 @@
 #include "undo.h"
 #include "staff.h"
 #include "stafftype.h"
+#include "stem.h"
 
 //---------------------------------------------------------
 //   endBeam

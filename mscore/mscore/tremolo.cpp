@@ -25,6 +25,7 @@
 #include "note.h"
 #include "measure.h"
 #include "segment.h"
+#include "stem.h"
 
 //---------------------------------------------------------
 //   Tremolo

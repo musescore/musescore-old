@@ -25,6 +25,7 @@
 #include "chord.h"
 #include "score.h"
 #include "note.h"
+#include "stem.h"
 
 enum { COL_PITCH, COL_NOTE, COL_SHORTCUT, COL_NAME };
 
