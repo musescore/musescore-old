@@ -102,7 +102,7 @@ static const char* iconNames[] = {
       "text_vcenter.svg",
       "superscript.svg",
       "subscript.svg",
-      "fotomode.svg"
+      "fotomode.svg",
       };
 
 void genIcons()

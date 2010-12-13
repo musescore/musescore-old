@@ -67,7 +67,6 @@ SysStaff::~SysStaff()
             delete b;
       brackets.clear();
       delete instrumentName;
-      instrumentName = 0;
       }
 
 //---------------------------------------------------------
@@ -91,11 +90,8 @@ System::System(Score* s)
 System::~System()
       {
       delete barLine;
-      foreach(SysStaff* s, _staves) {
-//too late:       if (s->instrumentName && s->instrumentName->selected())
-//                  score()->deselect(s->instrumentName);
+      foreach(SysStaff* s, _staves)
             delete s;
-            }
       }
 
 //---------------------------------------------------------
@@ -118,9 +114,9 @@ SysStaff* System::insertStaff(int idx)
 //   removeStaff
 //---------------------------------------------------------
 
-SysStaff* System::removeStaff(int idx)
+void System::removeStaff(int idx)
       {
-      return _staves.takeAt(idx);
+      _staves.takeAt(idx);
       }
 
 //---------------------------------------------------------
@@ -459,11 +455,13 @@ void System::setInstrumentName(int staffIdx)
       if (isVbox())                 // ignore vbox
             return;
 
-      Staff* s = score()->staff(staffIdx);
-      if (!s->isTop())
-            return;
-
       SysStaff* staff = _staves[staffIdx];
+      Staff* s = score()->staff(staffIdx);
+      if (!s->isTop()) {
+            delete staff->instrumentName;
+            staff->instrumentName = 0;
+            return;
+            }
 
       //
       // instrument name can change after inserting/deleting parts
@@ -580,7 +578,6 @@ void System::remove(Element* el)
                   if (staff->brackets[i] == el) {
                         staff->brackets[i] = 0;
                         el->staff()->setBracket(i, NO_BRACKET);
-//TODO                        score()->layout();
                         return;
                         }
                   }

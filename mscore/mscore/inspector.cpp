@@ -51,6 +51,7 @@
 #include "ottava.h"
 #include "bend.h"
 #include "stem.h"
+#include "icons.h"
 
 extern bool useFactorySettings;
 

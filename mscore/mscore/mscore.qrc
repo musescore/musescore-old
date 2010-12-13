@@ -5,6 +5,9 @@
         <file>data/paper3.png</file>
         <file>data/paper4.png</file>
         <file>data/paper5.png</file>
+        <file>data/previous.png</file>
+        <file>data/next.png</file>
+        <file>data/reload.png</file>
         <file>data/tab_remove.png</file>
         <file>data/symbols.xml</file>
         <file>data/gonville.xml</file>

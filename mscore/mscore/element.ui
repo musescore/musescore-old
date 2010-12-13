@@ -141,7 +141,7 @@
         <item row="0" column="5">
          <widget class="QLabel" name="label_4">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
@@ -154,6 +154,9 @@
           </property>
           <property name="alignment">
            <set>Qt::AlignRight</set>
+          </property>
+          <property name="indent">
+           <number>5</number>
           </property>
          </widget>
         </item>
@@ -224,6 +227,12 @@
         </item>
         <item row="1" column="5">
          <widget class="QLabel" name="label_11">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="toolTip">
            <string notr="true"/>
           </property>
@@ -232,6 +241,9 @@
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+          <property name="indent">
+           <number>5</number>
           </property>
          </widget>
         </item>
@@ -275,6 +287,12 @@
         </item>
         <item row="2" column="5">
          <widget class="QLabel" name="label_3">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="toolTip">
            <string notr="true"/>
           </property>
@@ -286,6 +304,9 @@
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+          <property name="indent">
+           <number>5</number>
           </property>
          </widget>
         </item>
@@ -311,6 +332,12 @@
         </property>
         <item row="0" column="0">
          <widget class="QLabel" name="label_5">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="text">
            <string notr="true" comment="do not translate">Pos</string>
           </property>
@@ -319,6 +346,9 @@
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+          <property name="indent">
+           <number>5</number>
           </property>
          </widget>
         </item>
@@ -363,7 +393,7 @@
         <item row="3" column="0">
          <widget class="QLabel" name="label_7">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
@@ -373,6 +403,9 @@
           </property>
           <property name="textFormat">
            <enum>Qt::PlainText</enum>
+          </property>
+          <property name="indent">
+           <number>5</number>
           </property>
          </widget>
         </item>
@@ -536,15 +569,24 @@
         </item>
         <item row="1" column="0">
          <widget class="QLabel" name="label_8">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="text">
            <string notr="true">Rpos</string>
+          </property>
+          <property name="indent">
+           <number>5</number>
           </property>
          </widget>
         </item>
         <item row="1" column="3">
          <widget class="QLabel" name="label_10">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
@@ -554,6 +596,9 @@
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+          <property name="indent">
+           <number>5</number>
           </property>
          </widget>
         </item>
@@ -609,21 +654,39 @@
         </item>
         <item row="0" column="3">
          <widget class="QLabel" name="label_2">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="text">
            <string notr="true">CPos</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
+          <property name="indent">
+           <number>5</number>
+          </property>
          </widget>
         </item>
         <item row="3" column="3">
          <widget class="QLabel" name="label_6">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="text">
            <string notr="true">w/h</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+          <property name="indent">
+           <number>5</number>
           </property>
          </widget>
         </item>
