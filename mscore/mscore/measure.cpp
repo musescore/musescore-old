@@ -3022,6 +3022,17 @@ void Measure::layoutX(double stretch)
             else
                   ticksList[segmentIdx] = 0;
             }
+
+      for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
+            double distAbove;
+//            StaffTypeTablature * tab;
+            Staff * staff = _score->staff(staffIdx);
+            if(staff->useTablature()) {
+                  distAbove = -((StaffTypeTablature*)(staff->staffType()))->durationBoxY();
+                  if (distAbove > staves[staffIdx]->distanceUp)
+                     staves[staffIdx]->distanceUp = distAbove;
+                  }
+            }
       double segmentWidth = 0.0;
       for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx)
             segmentWidth = qMax(segmentWidth, rest[staffIdx]);

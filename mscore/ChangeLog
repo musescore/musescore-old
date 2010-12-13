@@ -1,3 +1,5 @@
+13.dec (mi)
+      - Added extra distance above tabulature staff, if duration symbols are presents.
 13.dec (ws)
       - fix #8194: Edit instruments
       - fix #8213: Note entry crash

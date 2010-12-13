@@ -35,6 +35,8 @@ class Xml;
 //---------------------------------------------------------
 
 class StaffType {
+
+   protected:
       bool _modified;         // if true, this StaffType belongs to Score(),
                               // otherwise it is a global build in
       QString _name;
@@ -102,34 +104,39 @@ class StaffTypePitched : public StaffType {
 
 class StaffTypeTablature : public StaffType {
 
+   protected:
       // configurable properties
 //      Instrument* _instrument;            // to access the underlying string data
-      QString     _durationFontName;	// the name of the font used for duration symbols
-      double      _durationFontSize;	// the size (in points) for the duration symbol font
-      double      _durationFontUserY;	// the vertical offset (in sp. units) for the duration symb. font
+      QString     _durationFontName;      // the name of the font used for duration symbols
+      double      _durationFontSize;      // the size (in points) for the duration symbol font
+      double      _durationFontUserY;     // the vertical offset (spatium units) for the duration symb. font
                                           // user configurable
-      QString     _fretFontName;		// the name of the font used for fret marks
-      double      _fretFontSize;		// the size (in points) for the fret marks font
+      QString     _fretFontName;          // the name of the font used for fret marks
+      double      _fretFontSize;          // the size (in points) for the fret marks font
       double      _fretFontUserY;         // additional vert. offset of fret marks with respect to
-                                          // the string line (raster unit); user configurable
-      bool        _genDurations;		// whether duration symbols are drawn or not
+                                          // the string line (spatium unit); user configurable
+      bool        _genDurations;          // whether duration symbols are drawn or not
       bool        _genTimesig;            // whether time signature is shown or not
-      bool        _linesThrough;		// whether lines for strings and stems may pass through fret marks or not
-      bool        _onLines;			// whether fret marks are drawn on the string lines or between them
-      bool        _useNumbers;		// true: use numbers ('0' - ...) for frets | false: use letters ('a' - ...)
+      bool        _linesThrough;          // whether lines for strings and stems may pass through fret marks or not
+      bool        _onLines;               // whether fret marks are drawn on the string lines or between them
+      bool        _useNumbers;            // true: use numbers ('0' - ...) for frets | false: use letters ('a' - ...)
 
       // internally managed variables
-      double      _charBoxH, _charBoxY;	// the height and the y rect.coord. of a box bounding all fret characters
-                                          // (raster units) internally computed: depends upon _onString, _useNumbers
-                                          // and the metrics of the fret font
+      double      _durationBoxH, _durationBoxY; // the height and the y rect.coord. (relative to staff top line)
+                                          // of a box bounding all duration symbols (raster units) internally computed:
+                                          // depends upon _onString and the metrics of the duration font
       QFont       _durationFont;          // font used to draw dur. symbols; cached for efficiency
       double      _durationYOffset;       // the vertical offset to draw duration symbols with respect to the
                                           // string lines (raster units); internally computed: depends upon _onString
+      bool        _durationMetricsValid;  // whether duration font metrics are valid or not
+      double      _fretBoxH, _fretBoxY;   // the height and the y rect.coord. (relative to staff line)
+                                          // of a box bounding all fret characters (raster units) internally computed:
+                                          // depends upon _onString, _useNumbers and the metrics of the fret font
       QFont       _fretFont;              // font used to draw fret marks; cached for efficiency
-      double      _fretYOffset;		// the vertical offset to draw fret marks with respect to the string lines;
-                                          // (raster units)internally computed: depends upon _onString, _useNumbers and the
-                                          // metrics of the fret font
-      bool        _metricsValid;		// whether metrics are valid or not
+      double      _fretYOffset;           // the vertical offset to draw fret marks with respect to the string lines;
+                                          // (raster units); internally computed: depends upon _onString, _useNumbers
+                                          // and the metrics of the fret font
+      bool        _fretMetricsValid;      // whether fret font metrics are valid or not
       qreal       _refDPI;                // reference value used to last compute metrics and to see if they are still valid
 
       void init();                        // init to reasonable defaults
@@ -143,43 +150,52 @@ class StaffTypeTablature : public StaffType {
       virtual void read(QDomElement e);
       virtual void write(Xml& xml, int) const;
 
-      // properties getters (some getters may require to update the metrics)
-      double  charBoxH()                  { setMetrics(); return _charBoxH; }
-      double  charBoxY()                  { setMetrics(); return _charBoxY + _fretFontUserY; }
+      // properties getters (some getters require updated metrics)
+      double  durationBoxH()              { if(!_genDurations && !_slashStyle) return 0.0;
+                                            setDurationMetrics(); return _durationBoxH; }
+      double  durationBoxY()              { if(!_genDurations && !_slashStyle) return 0.0;
+                                            setDurationMetrics(); return _durationBoxY + _durationFontUserY; }
 const QFont&  durationFont()              { return _durationFont;     }
-const	QString durationFontName() const	{ return _durationFontName; }
+const	QString durationFontName() const    { return _durationFontName; }
       double  durationFontSize() const    { return _durationFontSize; }
       double  durationFontUserY() const   { return _durationFontUserY;}
-      double  durationFontYOffset() const { return _durationYOffset + _durationFontUserY; }
+      double  durationFontYOffset()       { setDurationMetrics(); return _durationYOffset + _durationFontUserY; }
+      double  fretBoxH()                  { setFretMetrics(); return _fretBoxH; }
+      double  fretBoxY()                  { setFretMetrics(); return _fretBoxY + _fretFontUserY; }
 const QFont&  fretFont()                  { return _fretFont;         }
-const QString fretFontName() const		{ return _fretFontName;     }
+const QString fretFontName() const        { return _fretFontName;     }
       double  fretFontSize() const        { return _fretFontSize;     }
       double  fretFontUserY() const       { return _fretFontUserY;    }
-      double  fretFontYOffset()           { setMetrics(); return _fretYOffset + _fretFontUserY; }
-      bool    genDurations() const		{ return _genDurations;     }
-      bool    genTimesig() const		{ return _genTimesig;       }
-      bool    linesThrough() const		{ return _linesThrough;     }
+      double  fretFontYOffset()           { setFretMetrics(); return _fretYOffset + _fretFontUserY; }
+      bool    genDurations() const        { return _genDurations;     }
+      bool    genTimesig() const          { return _genTimesig;       }
+      bool    linesThrough() const        { return _linesThrough;     }
       bool    onLines() const             { return _onLines;          }
-      bool    useNumbers() const		{ return _useNumbers;       }
+      bool    useNumbers() const          { return _useNumbers;       }
       // properties setters (setting some props invalidates metrics)
-      void    setDurationFontName(QString name) { _durationFontName = name; _durationFont.setFamily(name); }
-      void    setDurationFontSize(double val)   { _durationFontSize = val; _durationFont.setPointSizeF(val); }
+      void    setDurationFontName(QString name) { _durationFontName = name;
+                                                  _durationFont.setFamily(name);
+                                                  _durationMetricsValid = false; }
+      void    setDurationFontSize(double val)   { _durationFontSize = val;
+                                                  _durationFont.setPointSizeF(val);
+                                                  _durationMetricsValid = false; }
       void    setDurationFontUserY(double val)  { _durationFontUserY = val; }
       void    setFretFontName(QString name)     { _fretFontName = name;
                                                   _fretFont.setFamily(name);
-                                                  _metricsValid = false; }
+                                                  _fretMetricsValid = false; }
       void    setFretFontSize(double val)       { _fretFontSize = val;
                                                   _fretFont.setPointSizeF(val);
-                                                  _metricsValid = false; }
+                                                  _fretMetricsValid = false; }
       void    setFretFontUserY(double val){ _fretFontUserY = val;     }
-      void    setGenDurations(bool val)	{ _genDurations = val;      }
-      void    setGenTimesig(bool val)	{ _genTimesig = val;        }
-      void    setLinesThrough(bool val)	{ _linesThrough = val;      }
+      void    setGenDurations(bool val)   { _genDurations = val;      }
+      void    setGenTimesig(bool val)     { _genTimesig = val;        }
+      void    setLinesThrough(bool val)   { _linesThrough = val;      }
       void    setOnLines(bool val);
-      void    setUseNumbers(bool val)	{ _useNumbers = val; _metricsValid = false; }
+      void    setUseNumbers(bool val)     { _useNumbers = val; _fretMetricsValid = false; }
 
 protected:
-      void    setMetrics();
+      void    setDurationMetrics();
+      void    setFretMetrics();
       };
 
 //---------------------------------------------------------
