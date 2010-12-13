@@ -133,7 +133,7 @@ class System : public Element {
       void setPageBreak(bool val)            { _pageBreak = val; }
 
       SysStaff* insertStaff(int);
-      SysStaff* removeStaff(int);
+      void removeStaff(int);
 
       Line* getBarLine() const             { return barLine; }
       int y2staff(qreal y) const;

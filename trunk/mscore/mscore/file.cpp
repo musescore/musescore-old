@@ -1531,6 +1531,27 @@ bool Score::read(QDomElement dScore)
             for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
                   Staff* s = _staves[staffIdx];
                   int track = staffIdx * VOICES;
+
+                  ClefList* cl = s->clefList();
+                  for (ciClefEvent i = cl->begin(); i != cl->end(); ++i) {
+                        int tick = i->first;
+                        ClefType clefId = i->second;
+                        Measure* m = tick2measure(tick);
+                        if ((tick == m->tick()) && m->prevMeasure())
+                              m = m->prevMeasure();
+                        Segment* seg = m->getSegment(SegClef, tick);
+                        if (seg->element(track))
+                              static_cast<Clef*>(seg->element(track))->setGenerated(false);
+                        else {
+                              Clef* clef = new Clef(this);
+                              clef->setClefType(clefId);
+                              clef->setTrack(track);
+                              clef->setParent(seg);
+                              clef->setGenerated(false);
+                              seg->add(clef);
+                              }
+                        }
+
                   KeyList* km = s->keymap();
                   for (ciKeyList i = km->begin(); i != km->end(); ++i) {
                         int tick = i->first;
@@ -1547,24 +1568,6 @@ bool Score::read(QDomElement dScore)
                               seg->add(ks);
                               }
                         }
-                  ClefList* cl = s->clefList();
-                  for (ciClefEvent i = cl->begin(); i != cl->end(); ++i) {
-                        int tick = i->first;
-                        ClefType clefId = i->second;
-                        Measure* m = tick2measure(tick);
-                        Segment* seg = m->getSegment(SegClef, tick);
-                        if (seg->element(track))
-                              static_cast<Clef*>(seg->element(track))->setGenerated(false);
-                        else {
-                              Clef* clef = new Clef(this);
-                              clef->setClefType(clefId);
-                              clef->setTrack(track);
-                              clef->setParent(seg);
-                              clef->setGenerated(false);
-                              seg->add(clef);
-                              }
-                        }
-
                   }
             }
       if (_mscVersion < 116) {
