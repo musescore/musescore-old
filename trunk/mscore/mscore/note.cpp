@@ -1226,7 +1226,7 @@ void Note::layout()
             QString s = _ghost ? "X" :
                         ( tab->useNumbers() ? QString::number(_fret) : QString('a' + _fret + (_fret > 8)) );
             double w = fm.width(s) * mags;
-            _bbox = QRectF(0.0, tab->charBoxY() * mags, w, tab->charBoxH() * mags);
+            _bbox = QRectF(0.0, tab->fretBoxY() * mags, w, tab->fretBoxH() * mags);
             }
       else
             _bbox = symbols[score()->symIdx()][noteHead()].bbox(magS());

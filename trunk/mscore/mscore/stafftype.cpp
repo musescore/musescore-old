@@ -20,7 +20,6 @@
 
 #include "stafftype.h"
 #include "staff.h"
-//#include "score.h"
 #include "xml.h"
 
 QList<StaffType*> staffTypes;
@@ -181,8 +180,8 @@ void StaffTypeTablature::init()
       setOnLines(true);
       setUseNumbers(true);
       // internal
-      _metricsValid = false;
-      _charBoxH = _charBoxY = _fretYOffset = _refDPI = 0.0;
+      _durationMetricsValid = _fretMetricsValid = false;
+      _durationBoxH = _durationBoxY = _durationYOffset = _fretBoxH = _fretBoxY = _fretYOffset = _refDPI = 0.0;
       }
 
 //---------------------------------------------------------
@@ -252,32 +251,60 @@ void StaffTypeTablature::write(Xml& xml, int idx) const
 void StaffTypeTablature::setOnLines(bool val)
 {
       _onLines = val;
-      _metricsValid = false;
-      _durationYOffset = TAB_DEFAULT_DUR_YOFFS - (_onLines ? 0.0 : lineDistance().val()/2.0);
+      _durationMetricsValid = _fretMetricsValid = false;
 }
 
 //---------------------------------------------------------
-//   setMetrics
+//   set metrics
 //    checks whether the internally computed metrics are is still valid and re-computes them, if not
 //---------------------------------------------------------
 
-static QString	g_strNumbers("0123456789");
-static QString	g_strLetters("abcdefghiklmnopq");
+static QString    g_strNumbers("0123456789");
+static QString    g_strLetters("abcdefghiklmnopq");
+static QChar g_cDurationChars[] = { 0xE0FF, 0xE100, 0xE101, 0xE102, 0xE103, 0xE104,
+//                                   Longa  Brevis   Whole   Half   Quarter  1/8
+                                    0xE105, 0xE106, 0xE107, 0xE108, 0xE109, 0xE10B, ' ', ' '};
+//                                   1\16    1\32    1\64    1\128   1\256   dot
 
-void StaffTypeTablature::setMetrics()
+
+void StaffTypeTablature::setDurationMetrics()
 {
-      if(_metricsValid && _refDPI == DPI)
+      if(_durationMetricsValid && _refDPI == DPI)           // metrics are still valid
+            return;
+
+      QFontMetricsF fm(durationFont());
+      QRectF bb( fm.tightBoundingRect(QString(g_cDurationChars, 12)) );
+      // move down by the whole part above (negative) the base line
+      // ( -bb.y() ) then up by the whole height ( -bb.height()/2 )
+      _durationYOffset = -bb.y() - bb.height()
+      // then move up by a default margin and, if marks are above lines, by half the line distance
+      // (converted from ssatium units to raster units)
+            + ( TAB_DEFAULT_DUR_YOFFS - (_onLines ? 0.0 : lineDistance().val()/2.0) ) * DPI*SPATIUM20;
+      _durationBoxH = bb.height();
+      _durationBoxY = bb.y()  + _durationYOffset;
+      // keep track of the conditions under which metrics have been computed
+      _refDPI = DPI;
+      _durationMetricsValid = true;
+}
+
+void StaffTypeTablature::setFretMetrics()
+{
+      if(_fretMetricsValid && _refDPI == DPI)
             return;
 
       QFontMetricsF fm(fretFont());
+      // compute total height of used characters
       QRectF bb(fm.tightBoundingRect(_useNumbers ? g_strNumbers : g_strLetters));
+      // compute vertical displacement
       if(_useNumbers) {
-            // for numbers: move down by the whole part above (negative) the base line ( -bb.y() )
-            // then up by half the whole height ( -bb.height()/2 )
-            _fretYOffset = -(bb.y() + bb.height()/2.0);
+            // for numbers: centre on '0': move down by the whole part above (negative)
+            // the base line ( -bb.y() ) then up by half the whole height ( -bb.height()/2 )
+            QRectF bx( fm.tightBoundingRect("0") );
+            _fretYOffset = -(bx.y() + bx.height()/2.0);
+            // _fretYOffset = -(bb.y() + bb.height()/2.0);  // <- using bbox of all chars
             }
       else {
-            // for letters: centre on the x height, by moving down half of the part above the base line in bx
+            // for letters: centre on the 'a' ascender, by moving down half of the part above the base line in bx
             QRectF bx( fm.tightBoundingRect("a") );
             _fretYOffset = -bx.y() / 2.0;
             }
@@ -286,12 +313,12 @@ void StaffTypeTablature::setMetrics()
             _fretYOffset -= lineDistance().val()*DPI*SPATIUM20 / 2.0;
 
       // from _fretYOffset, compute _charBoxH and _charBoxY
-      _charBoxH = bb.height();
-      _charBoxY = bb.y()  + _fretYOffset;
+      _fretBoxH = bb.height();
+      _fretBoxY = bb.y()  + _fretYOffset;
 
       // keep track of the conditions under which metrics have been computed
-      _metricsValid = true;
       _refDPI = DPI;
+      _fretMetricsValid = true;
 }
 
 //---------------------------------------------------------
@@ -306,11 +333,6 @@ TabDurationSymbol::TabDurationSymbol(Score* s)
       _tab  = 0;
       _text = QString();
       }
-
-static QChar g_cDurationChars[] = { 0xE0FF, 0xE100, 0xE101, 0xE102, 0xE103, 0xE104,
-//                                   Longa  Brevis   Whole   Half   Quarter  1/8
-                                    0xE105, 0xE106, 0xE107, 0xE108, 0xE109, 0xE10B, ' ', ' '};
-//                                   1\16    1\32    1\64    1\128   1\256   dot
 
 TabDurationSymbol::TabDurationSymbol(Score* s, StaffTypeTablature * tab, Duration::DurationType type, int dots)
    : Element(s)
@@ -344,6 +366,6 @@ void TabDurationSymbol::draw(QPainter& p, ScoreView*) const
 
       p.scale(mag, mag);
       p.setFont(_tab->durationFont());
-      p.drawText(0.0, _tab->durationFontYOffset() * spatium(), _text);
+      p.drawText(0.0, _tab->durationFontYOffset() /* * spatium() */, _text);
       p.scale(imag, imag);
       }
