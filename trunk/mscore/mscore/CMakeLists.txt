@@ -165,7 +165,7 @@ add_executable ( ${ExecutableName}
       ${PROJECT_BINARY_DIR}/all.h.pch
       ${resource_file}
 
-      actions.cpp accidental.cpp barline.cpp beam.cpp
+      actions.cpp accidental.cpp barline.cpp beam.cpp stem.cpp
       bracket.cpp scoreview.cpp chord.cpp chordrest.cpp clef.cpp
       cmd.cpp dynamics.cpp edit.cpp editinstrument.cpp editstyle.cpp
       edittempo.cpp element.cpp exportxml.cpp file.cpp

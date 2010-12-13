@@ -50,6 +50,7 @@
 #include "articulation.h"
 #include "ottava.h"
 #include "bend.h"
+#include "stem.h"
 
 extern bool useFactorySettings;
 

@@ -21,6 +21,7 @@
 #include "hook.h"
 #include "sym.h"
 #include "chord.h"
+#include "stem.h"
 
 //---------------------------------------------------------
 //   Hook

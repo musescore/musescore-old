@@ -333,7 +333,7 @@ static void collectMeasureEvents(EventMap* events, Measure* m, Part* part, int t
       // collect program changes and controller
       //
       for (Segment* s = m->first(SegChordRest); s; s = s->next(SegChordRest)) {
-            int tick = s->tick();
+            // int tick = s->tick();
             foreach(Element* e, s->annotations()) {
                   if (e->type() != STAFF_TEXT
                      || e->staffIdx() < firstStaffIdx

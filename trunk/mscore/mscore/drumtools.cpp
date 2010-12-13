@@ -30,6 +30,7 @@
 #include "editdrumset.h"
 #include "staff.h"
 #include "part.h"
+#include "stem.h"
 
 //---------------------------------------------------------
 //   DrumTools
