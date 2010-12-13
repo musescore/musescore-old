@@ -367,7 +367,7 @@ printf("Rest: no symbol for 1/256\n");
                   _sym = rest128Sym;  // TODO
                   break;
             }
-      layoutArticulations();
+//      layoutArticulations();
       Element::layout();
       }
 

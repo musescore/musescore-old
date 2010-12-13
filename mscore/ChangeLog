@@ -1,3 +1,5 @@
+13.dec (ws)
+      - fix #8194 Edit instruments
 8.dec (la)
       - fix #8184: Creating parts with cross staff barlines crash
 4.dec (la)
@@ -14,7 +16,7 @@
       - fix #7311: Dragging tied notes and removing tie gives weird result
 11.nov (la)
       - fix #7882: Transposing a score shouldn't transpose a drum staff (from trunk)
-      - fix #6320: Add œ in F2 text palette 
+      - fix #6320: Add œ in F2 text palette
 9.nov  (la)
       - fix #7881: Exchange voices does not work on last measure
 7.nov  (la)
