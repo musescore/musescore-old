@@ -464,11 +464,13 @@ void System::setInstrumentName(int staffIdx)
       if (isVbox())                 // ignore vbox
             return;
 
-      Staff* s   = score()->staff(staffIdx);
-      if (!s->isTop())
-            return;
-
+      Staff* s        = score()->staff(staffIdx);
       SysStaff* staff = _staves[staffIdx];
+      if (!s->isTop()) {
+            delete staff->instrumentName;
+            staff->instrumentName = 0;
+            return;
+            }
 
       //
       // instrument name can change after inserting/deleting parts

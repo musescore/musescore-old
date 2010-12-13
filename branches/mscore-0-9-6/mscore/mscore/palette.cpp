@@ -199,6 +199,7 @@ static void applyDrop(Score* score, ScoreView* viewer, Element* target, Element*
       QPointF pt;
       if (target->acceptDrop(viewer, pt, e->type(), e->subtype())) {
             Element* ne = e->clone();
+            ne->setScore(score);
             ne = target->drop(viewer, pt, pt, ne);
             if (ne)
                   score->select(ne, SELECT_SINGLE, 0);
