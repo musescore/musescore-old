@@ -78,6 +78,7 @@
 #include "lyrics.h"
 #include "segment.h"
 #include "tempotext.h"
+#include "sym.h"
 
 #ifdef OMR
 #include "omr/omr.h"
@@ -856,12 +857,7 @@ void MuseScore::newFile()
             double tempo = newWizard->tempo();
             TempoText* tt = new TempoText(score);
 
-            int _code = 0x1d15f;
-            QChar ss[2];
-            ss[0] = QChar(QChar::highSurrogate(_code));
-            ss[1] = QChar(QChar::lowSurrogate(_code));
-            QString s(ss, 2);
-
+            QString s = symbols[0][note4Sym].toString();
             tt->setText(QString("%1 = %2 ").arg(s).arg(tempo));
             tt->setTempo(tempo/60.0);
             tt->setTrack(0);

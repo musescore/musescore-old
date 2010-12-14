@@ -503,6 +503,22 @@ void Sym::draw(QPainter& painter, double mag, qreal x, qreal y) const
       }
 
 //---------------------------------------------------------
+//   toString
+//---------------------------------------------------------
+
+QString Sym::toString() const
+      {
+      QString s;
+      if (_code & 0xffff0000) {
+            s = QChar(QChar::highSurrogate(_code));
+            s += QChar(QChar::lowSurrogate(_code));
+            }
+      else
+            s = QChar(_code);
+      return s;
+      }
+
+//---------------------------------------------------------
 //   draw
 //---------------------------------------------------------
 
@@ -579,28 +595,29 @@ void initSymbols(int idx)
             return;
       symbolsInitialized[idx] = true;
 
+#define MT(a) QT_TRANSLATE_NOOP("symbol", a)
       symbols[idx] = QVector<Sym>(lastSym);
-      symbols[idx][clefEightSym] = Sym(QT_TRANSLATE_NOOP("symbol", "clef eight"), 0x38, 2);
-      symbols[idx][clefOneSym]   = Sym(QT_TRANSLATE_NOOP("symbol", "clef one"),   0x31, 2);
-      symbols[idx][clefFiveSym]  = Sym(QT_TRANSLATE_NOOP("symbol", "clef five"),  0x35, 2);
-      symbols[idx][letterfSym]   = Sym(QT_TRANSLATE_NOOP("symbol", "f"),          0x66, 1);
-      symbols[idx][lettermSym]   = Sym(QT_TRANSLATE_NOOP("symbol", "m"),          0x6d, 1);
-      symbols[idx][letterpSym]   = Sym(QT_TRANSLATE_NOOP("symbol", "p"),          0x70, 1);
-      symbols[idx][letterrSym]   = Sym(QT_TRANSLATE_NOOP("symbol", "r"),          0x72, 1);
-      symbols[idx][lettersSym]   = Sym(QT_TRANSLATE_NOOP("symbol", "s"),          0x73, 1);
-      symbols[idx][letterzSym]   = Sym(QT_TRANSLATE_NOOP("symbol", "z"),          0x7a, 1);
-      symbols[idx][letterTSym]   = Sym(QT_TRANSLATE_NOOP("symbol", "T"),          'T', 2);
-      symbols[idx][letterSSym]   = Sym(QT_TRANSLATE_NOOP("symbol", "S"),          'S', 2);
-      symbols[idx][letterPSym]   = Sym(QT_TRANSLATE_NOOP("symbol", "P"),          'P', 2);
-
+      symbols[idx][clefEightSym] = Sym(MT("clef eight"), 0x38, 2);
+      symbols[idx][clefOneSym]   = Sym(MT("clef one"),   0x31, 2);
+      symbols[idx][clefFiveSym]  = Sym(MT("clef five"),  0x35, 2);
+      symbols[idx][letterfSym]   = Sym(MT("f"),          0x66, 1);
+      symbols[idx][lettermSym]   = Sym(MT("m"),          0x6d, 1);
+      symbols[idx][letterpSym]   = Sym(MT("p"),          0x70, 1);
+      symbols[idx][letterrSym]   = Sym(MT("r"),          0x72, 1);
+      symbols[idx][lettersSym]   = Sym(MT("s"),          0x73, 1);
+      symbols[idx][letterzSym]   = Sym(MT("z"),          0x7a, 1);
+      symbols[idx][letterTSym]   = Sym(MT("T"),          'T', 2);
+      symbols[idx][letterSSym]   = Sym(MT("S"),          'S', 2);
+      symbols[idx][letterPSym]   = Sym(MT("P"),          'P', 2);
       // used for GUI:
-      symbols[idx][note2Sym]     = Sym(QT_TRANSLATE_NOOP("symbol", "note 1/2"),   0xe104, 1);
-      symbols[idx][note4Sym]     = Sym(QT_TRANSLATE_NOOP("symbol", "note 1/4"),   0x1d15f, 1);
-      symbols[idx][note8Sym]     = Sym(QT_TRANSLATE_NOOP("symbol", "note 1/8"),   0xe106, 1);
-      symbols[idx][note16Sym]    = Sym(QT_TRANSLATE_NOOP("symbol", "note 1/16"),  0xe107, 1);
-      symbols[idx][note32Sym]    = Sym(QT_TRANSLATE_NOOP("symbol", "note 1/32"),  0xe108, 1);
-      symbols[idx][note64Sym]    = Sym(QT_TRANSLATE_NOOP("symbol", "note 1/64"),  0xe109, 1);
-      symbols[idx][dotdotSym]    = Sym(QT_TRANSLATE_NOOP("symbol", "dot dot"),    0xe10b, 1);
+      symbols[idx][note2Sym]     = Sym(MT("note 1/4"),   0xe104, 1);
+      symbols[idx][note4Sym]     = Sym(MT("note 1/4"),  0x1d15f, 1);
+      symbols[idx][note8Sym]     = Sym(MT("note 1/8"),   0xe106, 1);
+      symbols[idx][note16Sym]    = Sym(MT("note 1/16"),  0xe107, 1);
+      symbols[idx][note32Sym]    = Sym(MT("note 1/32"),  0xe108, 1);
+      symbols[idx][note64Sym]    = Sym(MT("note 1/64"),  0xe109, 1);
+      symbols[idx][dotdotSym]    = Sym(MT("dot dot"),    0xe10b, 1);
+#undef MT
 
       QHash<QString, int> lnhash;
       for (unsigned int i = 0; i < sizeof(lilypondNames)/sizeof(*lilypondNames); ++i)

@@ -1997,7 +1997,6 @@ int main(int argc, char* av[])
       //  load internal fonts
       //
       static const char* fonts[] = {
-//            "mscore-20", "mscore1-20", "MuseJazz", "DejaVuSans", "DejaVuSerif"
             "mscore-20", "mscore1-20", "MuseJazz", "FreeSans", "FreeSerif",
             "gonville-20",
             "mscore_tab_baroque", "mscore_tab_modern", "mscore_tab_renaiss", "mscore_tab_renaiss2"
