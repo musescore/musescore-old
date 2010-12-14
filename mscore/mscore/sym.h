@@ -83,6 +83,7 @@ class Sym {
       bool isValid() const                   { return _code != 0; }
       QRectF getBbox() const    { return _bbox; }
       QPointF getAttach() const { return _attach; }
+      QString toString() const;
       };
 
 enum {

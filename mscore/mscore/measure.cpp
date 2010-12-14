@@ -667,38 +667,42 @@ void Measure::layout2()
       //
       //   set measure number
       //
-      int pn    = _no;
-      QString s = QString("%1").arg(pn + 1);
-
-      QString ns;
+      bool smn = false;
       if (score()->styleB(ST_showMeasureNumber)
          && !_irregular
-         && (pn || score()->styleB(ST_showMeasureNumberOne))) {
+         && (_no || score()->styleB(ST_showMeasureNumberOne))) {
             if (score()->styleB(ST_measureNumberSystem)) {
-                  if (system() && !system()->measures().empty() && system()->measures().front() == this)
-                        ns = s;
+                  Measure* fm = system() ? system()->firstMeasure() : 0;
+                  smn = fm == this;
                   }
-            else if ((pn % score()->style(ST_measureNumberInterval).toInt()) == 0)
-                  ns = s;
-            }
-      if (!ns.isEmpty()) {
-            if (_noText == 0) {
-                  _noText = new Text(score());
-                  _noText->setGenerated(true);
-                  _noText->setSubtype(TEXT_MEASURE_NUMBER);
-                  _noText->setTextStyle(TEXT_STYLE_MEASURE_NUMBER);
-                  _noText->setParent(this);
-                  _noText->setSelectable(false);
+            else {
+                  smn = (_no % score()->style(ST_measureNumberInterval).toInt()) == 0;
                   }
-            if (_noText->getText() != s)
-                  _noText->setText(s);
+            if (smn) {
+                  QString s(QString("%1").arg(_no + 1));
+                  if (_noText == 0) {
+                        _noText = new Text(score());
+                        _noText->setGenerated(true);
+                        _noText->setSubtype(TEXT_MEASURE_NUMBER);
+                        _noText->setTextStyle(TEXT_STYLE_MEASURE_NUMBER);
+                        _noText->setParent(this);
+                        _noText->setSelectable(false);
+                        _noText->setText(s);
+                        }
+                  else {
+                        // if (_noText->getText() != s)
+                              _noText->setText(s);
+                        }
+// printf("mn %d <%s>\n", _no, qPrintable(s));
+                  _noText->layout();
+                  }
             }
-      else {
+      if (!smn) {
+//            if (_noText)
+//                  printf("delete no %d\n", _no);
             delete _noText;
             _noText = 0;
             }
-      if (_noText)
-            _noText->layout();
 
       //
       // slur layout needs articulation layout first
@@ -1113,20 +1117,13 @@ void Measure::add(Element* el)
                   break;
 
             case HBOX:
-                  if (type == TEXT && el->subtype() == TEXT_MEASURE_NUMBER) {
-                        _noText = static_cast<Text*>(el);
-                        }
-                  else {
-                      if (el->staff() != 0 ){
-                        el->setMag(el->staff()->mag());
-                      }
-                      _el.append(el);
-                      }
+                  if (el->staff())
+                        el->setMag(el->staff()->mag());     // ?!
+                  _el.append(el);
                   break;
 
             default:
                   printf("Measure::add(%s) not impl.\n", el->name());
-                  abort();
                   break;
             }
       }
@@ -1215,7 +1212,6 @@ void Measure::remove(Element* el)
                   break;
 
             default:
-                  abort();
                   printf("Measure::remove %s: not impl.\n", el->name());
                   break;
             }
@@ -2214,12 +2210,13 @@ void Measure::read(QDomElement e, int staffIdx)
 
                   // TODO: measure numbers are generated and should no be
                   //       in msc file (discard?)
-
+#if 0
                   if (t->subtype() == TEXT_MEASURE_NUMBER) {
                         t->setTextStyle(TEXT_STYLE_MEASURE_NUMBER);
                         t->setTrack(-1);
                         _noText = t;
                         }
+#endif
                   }
 
             //----------------------------------------------------

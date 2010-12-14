@@ -773,14 +773,15 @@ void Score::processSystemHeader(Measure* m, bool isFirstSystem)
                   continue;
                   }
 
-            KeySig* hasKeysig = 0;
-            Clef*   hasClef   = 0;
-            int strack        = i * VOICES;
+            KeySig* keysig  = 0;
+            Clef*   hasClef = 0;
+            int strack      = i * VOICES;
 
             // we assume that keysigs and clefs are only in the first
-            // track of a segment
+            // track (voice 0) of a staff
 
-            const KeySigEvent& keyIdx = staff->keymap()->key(tick);
+            const KeySigEvent& keyIdx = staff->key(tick);
+            const KeySigEvent& oKeySigBefore = staff->key(tick-1);
 
             for (Segment* seg = m->first(); seg; seg = seg->next()) {
                   // search only up to the first ChordRest
@@ -791,9 +792,11 @@ void Score::processSystemHeader(Measure* m, bool isFirstSystem)
                         continue;
                   switch (el->type()) {
                         case KEYSIG:
-                              hasKeysig = static_cast<KeySig*>(el);
-                              hasKeysig->changeKeySigEvent(keyIdx);
-                              hasKeysig->setMag(staff->mag());
+                              keysig = static_cast<KeySig*>(el);
+                              keysig->changeKeySigEvent(keyIdx);
+                              if (!keysig->isCustom() && oKeySigBefore.accidentalType() == keysig->keySignature())
+                                    keysig->setOldSig(0);
+                              keysig->setMag(staff->mag());
                               break;
                         case CLEF:
                               hasClef = static_cast<Clef*>(el);
@@ -813,26 +816,25 @@ void Score::processSystemHeader(Measure* m, bool isFirstSystem)
                ;
             if (staff->useTablature())
                   needKeysig = false;
-            if (needKeysig && !hasKeysig) {
+            if (needKeysig && !keysig) {
                   //
                   // create missing key signature
                   //
-                  KeySig* ks = keySigFactory(keyIdx);
-                  KeySigEvent oKeySigBefore = staff->key(tick-1);
+                  keysig = keySigFactory(keyIdx);
                   // if signature is not custom or prev. signature has same accid. as
                   // this one, reset naturals
-                  if (!ks->isCustom() && oKeySigBefore.accidentalType() == ks->keySignature())
-                        ks->setOldSig(0);
-                  ks->setTrack(i * VOICES);
-                  ks->setGenerated(true);
-                  ks->setMag(staff->mag());
-                  Segment* seg = m->getSegment(ks, tick);
-                  seg->add(ks);
+                  if (!keysig->isCustom() && oKeySigBefore.accidentalType() == keysig->keySignature())
+                        keysig->setOldSig(0);
+                  keysig->setTrack(i * VOICES);
+                  keysig->setGenerated(true);
+                  keysig->setMag(staff->mag());
+                  Segment* seg = m->getSegment(keysig, tick);
+                  seg->add(keysig);
                   m->setDirty();
                   }
-            else if (!needKeysig && hasKeysig) {
-                  int track = hasKeysig->track();
-                  Segment* seg = hasKeysig->segment();
+            else if (!needKeysig && keysig) {
+                  int track = keysig->track();
+                  Segment* seg = keysig->segment();
                   seg->setElement(track, 0);    // TODO: delete element
                   m->setDirty();
                   }
