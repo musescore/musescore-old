@@ -3275,7 +3275,7 @@ static void annotations(ExportMusicXml* exp, int strack, int etrack, int track, 
 //  spannerStart
 //---------------------------------------------------------
 
-// TODO
+// TODO (check)
 // for each spanner start:
 // find start track
 // find stop track
@@ -3298,8 +3298,62 @@ static void spannerStart(ExportMusicXml* exp, int strack, int etrack, int track,
                         wtrack = findTrackForAnnotations(e->track(), seg);
                   if (track == wtrack) {
                         switch(e->type()) {
+                              case HAIRPIN:
+                                    exp->hairpin((Hairpin*) e, sstaff, seg->tick());
+                                    break;
+                              case OTTAVA:
+                                    exp->ottava((Ottava*) e, sstaff, seg->tick());
+                                    break;
+                              case PEDAL:
+                                    exp->pedal((Pedal*) e, sstaff, seg->tick());
+                                    break;
+                              case TEXTLINE:
+                                    exp->textLine((TextLine*) e, sstaff, seg->tick());
+                                    break;
                               default:
                                     printf("spannerStart: direction type %s at tick %d not implemented\n",
+                                            Element::name(e->type()), seg->tick());
+                                    break;
+                              }
+                        }
+                  } // foreach
+            }
+      }
+
+//---------------------------------------------------------
+//  spannerStop
+//---------------------------------------------------------
+
+// TODO
+// see spanner start
+
+static void spannerStop(ExportMusicXml* exp, int strack, int etrack, int track, int sstaff, Segment* seg)
+      {
+      printf("spannerStop(strack=%d etrack=%d track=%d sstaff=%d seg=%p)\n", strack, etrack, track, sstaff, seg);
+      if (seg->segmentType() == SegChordRest) {
+            foreach(const Element* e, seg->spannerBack()) {
+                  const Spanner* sp = static_cast<const Spanner*>(e);
+                  printf("spannerStop seg %p elem %p type %d (%s) track %d endElem %p\n",
+                         seg, e, e->type(), qPrintable(e->subtypeName()), e->track(), sp->endElement());
+                  int wtrack = -1; // track to write spanner
+                  if (strack <= e->track() && e->track() < etrack)
+                        wtrack = findTrackForAnnotations(e->track(), seg);
+                  if (track == wtrack) {
+                        switch(e->type()) {
+                              case HAIRPIN:
+                                    exp->hairpin((Hairpin*) e, sstaff, -1);
+                                    break;
+                              case OTTAVA:
+                                    exp->ottava((Ottava*) e, sstaff, -1);
+                                    break;
+                              case PEDAL:
+                                    exp->pedal((Pedal*) e, sstaff, -1);
+                                    break;
+                              case TEXTLINE:
+                                    exp->textLine((TextLine*) e, sstaff, -1);
+                                    break;
+                              default:
+                                    printf("spannerStop: direction type %s at tick %d not implemented\n",
                                             Element::name(e->type()), seg->tick());
                                     break;
                               }
@@ -3755,10 +3809,11 @@ foreach(Element* el, *(score->gel())) {
                                     printf(" newtick=%d\n", tick);
                                     }
 */
-                              // handle annottations (directions attached to this note or rest)
+                              // handle annotations and spanners (directions attached to this note or rest)
 //                              dh.handleElement(this, el, sstaff, true);
                               if (el->isChordRest()) {
                                     annotations(this, strack, etrack, st, sstaff, seg);
+                                    spannerStop(this, strack, etrack, st, sstaff, seg);
                                     spannerStart(this, strack, etrack, st, sstaff, seg);
                                     }
 
