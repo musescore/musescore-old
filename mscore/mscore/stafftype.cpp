@@ -261,10 +261,13 @@ void StaffTypeTablature::setOnLines(bool val)
 
 static QString    g_strNumbers("0123456789");
 static QString    g_strLetters("abcdefghiklmnopq");
+// used both to generate duration symbols and to compute duration metrics:
 static QChar g_cDurationChars[] = { 0xE0FF, 0xE100, 0xE101, 0xE102, 0xE103, 0xE104,
 //                                   Longa  Brevis   Whole   Half   Quarter  1/8
                                     0xE105, 0xE106, 0xE107, 0xE108, 0xE109, 0xE10B, ' ', ' '};
 //                                   1\16    1\32    1\64    1\128   1\256   dot
+#define STAFFTYPETAB_NUMOFDURCHARS  12    /* how many used chars there are in g_cDurationChar[] */
+#define STAFFTYPETAB_IDXOFDOTCHAR   11    /* the offset of the dot char in g_cDurationChars[] */
 
 
 void StaffTypeTablature::setDurationMetrics()
@@ -273,12 +276,13 @@ void StaffTypeTablature::setDurationMetrics()
             return;
 
       QFontMetricsF fm(durationFont());
-      QRectF bb( fm.tightBoundingRect(QString(g_cDurationChars, 12)) );
+      QRectF bb( fm.tightBoundingRect(QString(g_cDurationChars, STAFFTYPETAB_NUMOFDURCHARS)) );
+      // move symbols so that the lowest margin 'sits' on the base line:
       // move down by the whole part above (negative) the base line
       // ( -bb.y() ) then up by the whole height ( -bb.height()/2 )
       _durationYOffset = -bb.y() - bb.height()
       // then move up by a default margin and, if marks are above lines, by half the line distance
-      // (converted from ssatium units to raster units)
+      // (converted from spatium units to raster units)
             + ( TAB_DEFAULT_DUR_YOFFS - (_onLines ? 0.0 : lineDistance().val()/2.0) ) * DPI*SPATIUM20;
       _durationBoxH = bb.height();
       _durationBoxY = bb.y()  + _durationYOffset;
@@ -308,7 +312,7 @@ void StaffTypeTablature::setFretMetrics()
             QRectF bx( fm.tightBoundingRect("a") );
             _fretYOffset = -bx.y() / 2.0;
             }
-      // if on string, we are done; if between strings, raise by half space
+      // if on string, we are done; if between strings, raise by half line distance
       if(!_onLines)
             _fretYOffset -= lineDistance().val()*DPI*SPATIUM20 / 2.0;
 
@@ -343,7 +347,7 @@ TabDurationSymbol::TabDurationSymbol(Score* s, StaffTypeTablature * tab, Duratio
       // text string is a main symbol plus as many dots as required by chord duration
       _text = QString(g_cDurationChars[type]);
       for(int count=0; count < dots; count++)
-            _text.append(g_cDurationChars[11]);
+            _text.append(g_cDurationChars[STAFFTYPETAB_IDXOFDOTCHAR]);
       }
 
 TabDurationSymbol::TabDurationSymbol(const TabDurationSymbol& e)
@@ -353,6 +357,18 @@ TabDurationSymbol::TabDurationSymbol(const TabDurationSymbol& e)
       _text = e._text;
       }
 
+//---------------------------------------------------------
+//   layout
+//---------------------------------------------------------
+/*
+void TabDurationSymbol::layout()
+      {
+      QFontMetricsF fm(_tab->durationFont());
+      double mags = magS();
+      double w = fm.width(_text);
+      _bbox = QRectF(0.0, _tab->durationBoxY() * mags, w * mags, _tab->durationBoxH() * mags);
+      }
+*/
 //---------------------------------------------------------
 //   draw
 //---------------------------------------------------------
@@ -366,6 +382,6 @@ void TabDurationSymbol::draw(QPainter& p, ScoreView*) const
 
       p.scale(mag, mag);
       p.setFont(_tab->durationFont());
-      p.drawText(0.0, _tab->durationFontYOffset() /* * spatium() */, _text);
+      p.drawText(0.0, _tab->durationFontYOffset(), _text);
       p.scale(imag, imag);
       }
