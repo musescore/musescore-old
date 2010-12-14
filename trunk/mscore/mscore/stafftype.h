@@ -177,14 +177,16 @@ const QString fretFontName() const        { return _fretFontName;     }
                                                   _durationFont.setFamily(name);
                                                   _durationMetricsValid = false; }
       void    setDurationFontSize(double val)   { _durationFontSize = val;
-                                                  _durationFont.setPointSizeF(val);
+//                                                  _durationFont.setPointSizeF(val);
+                                                  _durationFont.setPixelSize( lrint(val * DPI / PPI) );
                                                   _durationMetricsValid = false; }
       void    setDurationFontUserY(double val)  { _durationFontUserY = val; }
       void    setFretFontName(QString name)     { _fretFontName = name;
                                                   _fretFont.setFamily(name);
                                                   _fretMetricsValid = false; }
       void    setFretFontSize(double val)       { _fretFontSize = val;
-                                                  _fretFont.setPointSizeF(val);
+//                                                  _fretFont.setPointSizeF(val);
+                                                    _fretFont.setPixelSize( lrint(val * DPI / PPI) );
                                                   _fretMetricsValid = false; }
       void    setFretFontUserY(double val){ _fretFontUserY = val;     }
       void    setGenDurations(bool val)   { _genDurations = val;      }
@@ -233,16 +235,15 @@ public:
       TabDurationSymbol(const TabDurationSymbol&);
       virtual TabDurationSymbol* clone() const  { return new TabDurationSymbol(*this); }
       virtual void draw(QPainter&, ScoreView*) const;
+//      void layout();
       virtual bool isEditable() const           { return false; }
       virtual ElementType type() const          { return TAB_DURATION_SYMBOL; }
 
 //      virtual QPointF canvasPos() const;  ///< position in canvas coordinates
 //      virtual void write(Xml& xml) const;
 //      virtual void read(QDomElement);
-//      void layout();
 
       void setTablature(StaffTypeTablature * tab)     { _tab = tab; }
-      void setText(QString s)                         { _text = s; }
       };
 
 #endif
