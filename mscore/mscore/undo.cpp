@@ -2339,7 +2339,7 @@ void ChangePart::flip()
       Instrument oi         = *part->instr();
       part->setInstrument(instrument);
       instrument            = oi;
-      part->score()->setInstrumentNames();
+//      part->score()->setInstrumentNames();
       part->score()->rebuildMidiMapping();
       seq->initInstruments();
       part->score()->setPlaylistDirty(true);
