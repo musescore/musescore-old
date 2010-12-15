@@ -1,4 +1,6 @@
-15.dec
+15.dec (ws)
+      - fix #8275: Crash when opening clef palette
+      - make foreground color of text editable
       - fix #8145: Instrument name after a section break
       - fixes to *.ove import from Rui Fan
       (mi)

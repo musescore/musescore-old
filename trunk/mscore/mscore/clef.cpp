@@ -233,7 +233,6 @@ void Clef::layout()
                   symbol->setSym(tabclefSym);
                   Staff* st = staff();
                   if (st) {               // clefs in palette do not have a staff
-//                      if (st && st->useTablature()) {
                         int numOfLines  = st->staffType()->lines();
                         double lineDist = st->staffType()->lineDistance().val();
 //                        switch(numOfLines) {
@@ -252,7 +251,7 @@ void Clef::layout()
                   {
                   symbol->setSym(tabclef2Sym);
                   Staff* st = staff();
-//                  if (st && st->useTablature()) {
+                  if (st) {
                         int numOfLines  = st->staffType()->lines();
                         double lineDist = st->staffType()->lineDistance().val();
 //                        switch(numOfLines) {
@@ -262,9 +261,9 @@ void Clef::layout()
 //                              }
                         // on tablature, position clef at half the number of spaces * line distance
                         yoff = lineDist * (numOfLines-1) / 2.0;
-//                        }
-//                  else
-//                        yoff = 2.0;
+                        }
+                  else
+                        yoff = 2.0;
                   }
                   break;
             case CLEF_PERC:

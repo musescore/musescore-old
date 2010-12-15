@@ -204,6 +204,9 @@ TextStyle TextProp::textStyle() const
       s.setSystemFlag(systemFlag->isChecked());
       s.setForegroundColor(color->color());
 
+QColor c(s.foregroundColor());
+printf("Color r %d\n", c.red());
+
       Align a = 0;
       if (alignHCenter->isChecked())
             a |= ALIGN_HCENTER;
