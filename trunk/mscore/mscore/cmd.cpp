@@ -556,7 +556,6 @@ void Score::setGraceNote(Chord* ch, int pitch, NoteType type, int len)
             double mag = staff->mag() * styleD(ST_graceNoteMag);
 
             Note* note = new Note(score);
-            note->setTrack(track);
             note->setMag(mag);
             note->setPitch(pitch);
 

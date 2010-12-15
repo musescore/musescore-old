@@ -1,6 +1,7 @@
 15.dec (ws)
+      - fix #8277: crash when entering grace note
       - fix #8275: Crash when opening clef palette
-      - make foreground color of text editable
+      - make text foreground color editable in properties
       - fix #8145: Instrument name after a section break
       - fixes to *.ove import from Rui Fan
       (mi)
