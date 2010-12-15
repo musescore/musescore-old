@@ -1,3 +1,6 @@
+15.dec (la)
+      - fix #7415: Stems too short for 32nd and 64th notes
+      - fix #8273: Unecessary courtesy clef remains when clef is changed
 13.dec (ws)
       - fix #8194 Edit instruments
 8.dec (la)

@@ -402,10 +402,6 @@ void Staff::changeClef(int tick, int st)
                         _score->undoRemoveElement(e);
                         m->cmdRemoveEmptySegment(segment);
                         }
-                  if (etick > tick) {
-                        found = true;
-                        break;
-                        }
                   }
             if (found)
                   break;

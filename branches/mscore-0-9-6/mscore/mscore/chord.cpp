@@ -206,17 +206,14 @@ void StemSlash::draw(QPainter& p) const
       }
 
 //---------------------------------------------------------
-//   bbox
+//   setLine
 //---------------------------------------------------------
 
-QRectF StemSlash::bbox() const
+void StemSlash::setLine(const QLineF& l)
       {
+      line = l;
       double w = point(score()->styleS(ST_stemWidth)) * .5;
-      QRectF r(line.p1().x(), line.p2().y(),
-         line.p2().x()-line.p1().x(),
-         line.p1().y()-line.p2().y()
-         );
-      return r.adjusted(-w, -w, 2.0 * w, 2.0 * w);
+      _bbox = QRectF(line.p1(), line.p2()).normalized().adjusted(-w, w, 2.0*w, 2.0*w);
       }
 
 //---------------------------------------------------------
@@ -1113,9 +1110,16 @@ void Chord::layoutStem()
             Spatium shortest(score()->styleS(ST_shortestStem));
 
             double normalStemLen = small() ? 2.5 : 3.5;
-            if (_noteType != NOTE_NORMAL)
-                  normalStemLen *= score()->style(ST_graceNoteMag).toDouble();
+            switch(hookIdx) {
+                  case 3: normalStemLen += small() ? .5  : 0.75; break; //32nd notes
+                  case 4: normalStemLen += small() ? 1.0 : 1.5;  break; //64th notes
+                  //case 5: normalStemLen += small() ? 1.5 : 2.25; break; //128th notes not yet supported in MuseScore
+                  }
 
+            if (_noteType != NOTE_NORMAL) {
+                  normalStemLen *= score()->style(ST_graceNoteMag).toDouble();
+                  }
+           
             if (up()) {
                   double dy  = dl + downnote->stemYoff(true);
                   double sel = ul - normalStemLen;
@@ -1140,6 +1144,7 @@ void Chord::layoutStem()
                   if (stemLen < shortest)
                         stemLen = shortest;
                   }
+                  
 
             QPointF npos(stemPos(_up, false));
 
