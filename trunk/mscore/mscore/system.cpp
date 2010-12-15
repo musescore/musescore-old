@@ -106,7 +106,7 @@ SysStaff* System::insertStaff(int idx)
             staff->rbb().setY(_staves[idx-1]->y() + 6 * spatium());
             }
       _staves.insert(idx, staff);
-      setInstrumentName(idx);
+//      setInstrumentName(idx);
       return staff;
       }
 
@@ -440,17 +440,17 @@ void System::clear()
 //   setInstrumentNames
 //---------------------------------------------------------
 
-void System::setInstrumentNames()
+void System::setInstrumentNames(bool longName)
       {
       for (int staff = 0; staff < score()->nstaves(); ++staff)
-            setInstrumentName(staff);
+            setInstrumentName(staff, longName);
       }
 
 //---------------------------------------------------------
 //   setInstrumentName
 //---------------------------------------------------------
 
-void System::setInstrumentName(int staffIdx)
+void System::setInstrumentName(int staffIdx, bool longName)
       {
       if (isVbox())                 // ignore vbox
             return;
@@ -472,7 +472,7 @@ void System::setInstrumentName(int staffIdx)
       if (!iname) {
             iname = new Text(score());
             iname->setSelectable(false);
-            if (_firstSystem) {
+            if (longName) {
                   iname->setSubtype(TEXT_INSTRUMENT_LONG);
                   iname->setTextStyle(TEXT_STYLE_INSTRUMENT_LONG);
                   }
@@ -483,7 +483,7 @@ void System::setInstrumentName(int staffIdx)
             staff->instrumentName = iname;
             }
       int tick = ml.isEmpty() ? 0 : ml.front()->tick();
-      QTextDocumentFragment frag = _firstSystem ? part->longName(tick) : part->shortName(tick);
+      QTextDocumentFragment frag = longName ? part->longName(tick) : part->shortName(tick);
 
       iname->setText(frag);
       iname->setParent(this);
@@ -637,6 +637,8 @@ int System::snapNote(int tick, const QPointF p, int staff) const
 
 Measure* System::firstMeasure() const
       {
+      if (ml.isEmpty())
+            return 0;
       for (MeasureBase* mb = ml.front(); mb; mb = mb->next()) {
             if (mb->type() != MEASURE)
                   continue;
@@ -651,6 +653,8 @@ Measure* System::firstMeasure() const
 
 Measure* System::lastMeasure() const
       {
+      if (ml.isEmpty())
+            return 0;
       for (MeasureBase* mb = ml.back(); mb; mb = mb->prev()) {
             if (mb->type() != MEASURE)
                   continue;

@@ -1,4 +1,5 @@
 15.dec
+      - fix #8145: Instrument name after a section break
       - fixes to *.ove import from Rui Fan
       (mi)
       - Sizes for tablature fonts were set in a way incompatible with printing: corrected.

@@ -1613,7 +1613,7 @@ printf("incomplete Slur\n");
             }
       slurs.clear();
       connectTies();
-      setInstrumentNames();
+//      setInstrumentNames();
 
       searchSelectedElements();
 

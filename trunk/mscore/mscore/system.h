@@ -97,7 +97,7 @@ class System : public Element {
 
       bool _vbox;             ///< contains only one VBox in ml
 
-      void setInstrumentName(int staff);
+      void setInstrumentName(int staff, bool longName);
       void setDistanceUp(int n, Spatium v)   { _staves[n]->setDistanceUp(v); }
       void setDistanceDown(int n, Spatium v) { _staves[n]->setDistanceDown(v); }
 
@@ -137,7 +137,7 @@ class System : public Element {
 
       Line* getBarLine() const             { return barLine; }
       int y2staff(qreal y) const;
-      void setInstrumentNames();
+      void setInstrumentNames(bool longName);
       int snap(int tick, const QPointF p) const;
       int snapNote(int tick, const QPointF p, int staff) const;
 

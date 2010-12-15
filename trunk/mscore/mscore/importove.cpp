@@ -2128,8 +2128,25 @@ void OveToMScore::convertRepeats(Measure* measure, int part, int staff, int trac
 		if (absTick1 < absTick2) {
 			Volta* volta = new Volta(score_);
 			volta->setTrack(track);
-			//TODO-WS        volta->setTick(absTick1);
-			//TODO-WS        volta->setTick2(absTick2);
+
+			// volta->setTick1(absTick1);
+			// volta->setTick2(absTick2);
+
+                  // does not work as segments do not exist
+                  // at time of call (ws)
+
+                  Segment* s1 = score_->tick2segment(absTick1);
+                  Segment* s2 = score_->tick2segment(absTick2);
+                  if (s1 == 0 || s2 == 0) {
+                        printf("cannot place %s at tick %d - %d (%p-%p)\n",
+                           volta->name(), absTick1, absTick2, s1, s2);
+                        }
+                  else {
+                        volta->setStartElement(s1);
+                        volta->setEndElement(s2);
+                        s1->add(volta);
+                        }
+
 			volta->setSubtype(Volta::VOLTA_CLOSED);
 			volta->setText(ending->getText());
 
@@ -2138,13 +2155,6 @@ void OveToMScore::convertRepeats(Measure* measure, int part, int staff, int trac
 			for (int j = 0; j < numbers.size(); ++j) {
 				volta->endings().append(numbers[j]);
 			}
-
-			score_->add(volta);
-			/*		if(volta->tick2() > volta->tick()){
-			 score_->add(volta);
-			 } else {
-			 delete volta;
-			 }*/
 		}
 	}
 }

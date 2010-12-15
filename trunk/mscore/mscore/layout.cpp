@@ -929,7 +929,7 @@ bool Score::layoutPage()
       page->clear();
       qreal y = page->tm();
 
-      int rows = 0;
+      int  rows = 0;
       bool firstSystemOnPage = true;
 
       while (curMeasure) {
@@ -1014,7 +1014,8 @@ bool Score::layoutPage()
                         page->appendSystem(system);
                         system->rypos() = y;
                         }
-                  firstSystem       = false;
+                  firstSystem = !sl.isEmpty() && sl.back()->lastMeasure()
+                     && sl.back()->lastMeasure()->sectionBreak();
                   firstSystemOnPage = false;
                   y += h;
                   }
@@ -1099,7 +1100,8 @@ bool Score::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
       if (curMeasure->type() == HBOX)
             xo = point(static_cast<Box*>(curMeasure)->boxWidth());
 
-//      system->setInstrumentNames();
+      bool longName = isFirstSystem;
+      system->setInstrumentNames(longName);
       system->layout(xo);
 
       minWidth            = system->leftMargin();
@@ -1204,7 +1206,6 @@ bool Score::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
             else
                   curMeasure = nextMeasure;
             }
-      system->setInstrumentNames();
 
       //
       //    hide empty staves
@@ -1594,11 +1595,13 @@ void Score::setPageFormat(const PageFormat& pf)
 //   setInstrumentNames
 //---------------------------------------------------------
 
+#if 0
 void Score::setInstrumentNames()
       {
       for (iSystem is = systems()->begin(); is != systems()->end(); ++is)
             (*is)->setInstrumentNames();
       }
+#endif
 
 //---------------------------------------------------------
 //   searchTieNote
