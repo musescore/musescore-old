@@ -132,7 +132,7 @@ class SlurTie : public Spanner {
 //---------------------------------------------------------
 
 class Slur : public SlurTie {
-      int _track2;      // obsolete used temporarily for reading old version
+      int _track2; // obsolete used temporarily for reading old version
 
    public:
       Slur(Score*);
