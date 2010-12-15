@@ -21,15 +21,6 @@
 #ifndef OVE_DATA_H
 #define OVE_DATA_H
 
-#include <map>
-#include <vector>
-#include <string>
-#include <QMap>
-#include <QPair>
-
-#include <QString>
-#include <QStringList>
-
 #ifdef WIN32
 #define DLL_EXPORT extern "C" __declspec(dllexport)
 #else
