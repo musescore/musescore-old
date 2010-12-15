@@ -1678,11 +1678,8 @@ printf("incomplete Slur\n");
 
 void Score::connectSlurs()
       {
-#if 0 //TODO1
-      foreach (Element* e, _gel) {
-            if (e->type() != SLUR)
-                  continue;
-            Slur* s = static_cast<Slur*>(e);
+#if 0
+      foreach (Slur* s, slurs) {
             Element* n1 = searchNote(s->tick(), s->track());
             Element* n2 = searchNote(s->tick2(), s->track2());
             if (n1 == 0 || n2 == 0) {
