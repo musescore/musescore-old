@@ -1424,6 +1424,8 @@ void Note::setTrack(int val)
             _accidental->setTrack(val);
       if (_bend)
             _bend->setTrack(val);
+//      if (!chord())
+//            return;
       for (int i = 0; i < chord()->dots(); ++i) {
             if (_dots[i])
                   _dots[i]->setTrack(val);
