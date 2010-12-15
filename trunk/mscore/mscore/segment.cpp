@@ -535,6 +535,8 @@ SegmentType Segment::segmentType(ElementType type)
             case CHORD:
             case REST:
             case REPEAT_MEASURE:
+            case JUMP:
+            case MARKER:
                   return SegChordRest;
             case CLEF:
                   return SegClef;
@@ -545,7 +547,7 @@ SegmentType Segment::segmentType(ElementType type)
             case BAR_LINE:
                   return SegStartRepeatBarLine;
             default:
-                  printf("Segment:segmentType()  bad type!\n");
+                  printf("Segment:segmentType():  bad type: <%s>\n", Element::name(type));
                   return (SegmentType)-1;
             }
       }
