@@ -410,7 +410,10 @@ void Text::draw(QPainter& p, ScoreView*) const
                   }
             c.cursorPosition = cursor->position();
             }
-      QColor color = p.pen().color();
+      QColor color(
+            (selected() && !(score() && score()->printing()))
+            ? preferences.selectColor[0] : style().foregroundColor()
+            );
       c.palette.setColor(QPalette::Text, color);
 
       _doc->documentLayout()->draw(&p, c);
@@ -1175,8 +1178,9 @@ void Text::propertyAction(ScoreView* viewer, const QString& s)
                                     tt->setFrameRound(nText->frameRound());
                               if (nText->circle() != circle())
                                     tt->setCircle(nText->circle());
-                              if (nText->color() != color())
-                                    tt->setColor(nText->color());
+                              if (nText->style().foregroundColor() != style().foregroundColor()) {
+                                    tt->localStyle().setForegroundColor(nText->style().foregroundColor());
+                                    }
 
                               if (nText->localStyle().family() != localStyle().family())
                                     tt->localStyle().setFamily(nText->localStyle().family());
@@ -1616,8 +1620,10 @@ TextProperties::TextProperties(Text* t, QWidget* parent)
       setLayout(layout);
 
       text = t;
-      if (t->styled())
+      if (t->styled()) {
             text->setLocalStyle(text->score()->textStyle(text->textStyle()));
+            }
+
       tp->setTextStyle(text->localStyle());
       tp->setStyled(t->styled());
       tp->setTextStyleType(t->textStyle());
@@ -1633,6 +1639,7 @@ TextProperties::TextProperties(Text* t, QWidget* parent)
 void TextProperties::accept()
       {
       text->setLocalStyle(tp->textStyle());
+
       QDialog::accept();
       if (tp->isStyled() != text->styled()) {
             text->setTextStyle(tp->textStyleType());  // this sets styled = true
