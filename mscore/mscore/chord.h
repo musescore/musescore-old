@@ -86,12 +86,11 @@ class StemSlash : public Element {
       StemSlash(Score*);
       StemSlash &operator=(const Stem&);
 
-      void setLine(const QLineF& l)    { line = l; }
+      void setLine(const QLineF& l);
 
       virtual StemSlash* clone() const { return new StemSlash(*this); }
       virtual ElementType type() const { return STEM_SLASH; }
       virtual void draw(QPainter& p) const;
-      virtual QRectF bbox() const;
       };
 
 //---------------------------------------------------------

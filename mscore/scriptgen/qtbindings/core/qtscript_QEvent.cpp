@@ -362,14 +362,14 @@ static const char * const qtscript_QEvent_Type_keys[] = {
     , "UngrabMouse"
     , "GrabKeyboard"
     , "UngrabKeyboard"
-    , "CocoaRequestModal"
+//    , "CocoaRequestModal"
     , "User"
     , "MaxUser"
 };
 
 static QString qtscript_QEvent_Type_toStringHelper(QEvent::Type value)
 {
-    for (int i = 0; i < 145; ++i) {
+    for (int i = 0; i < 144; ++i) {
         if (qtscript_QEvent_Type_values[i] == value)
             return QString::fromLatin1(qtscript_QEvent_Type_keys[i]);
     }
@@ -390,7 +390,7 @@ static void qtscript_QEvent_Type_fromScriptValue(const QScriptValue &value, QEve
 static QScriptValue qtscript_construct_QEvent_Type(QScriptContext *context, QScriptEngine *engine)
 {
     int arg = context->argument(0).toInt32();
-    for (int i = 0; i < 145; ++i) {
+    for (int i = 0; i < 144; ++i) {
         if (qtscript_QEvent_Type_values[i] == arg)
             return qScriptValueFromValue(engine,  static_cast<QEvent::Type>(arg));
     }
@@ -416,7 +416,7 @@ static QScriptValue qtscript_create_QEvent_Type_class(QScriptEngine *engine, QSc
         qtscript_QEvent_Type_valueOf, qtscript_QEvent_Type_toString);
     qScriptRegisterMetaType<QEvent::Type>(engine, qtscript_QEvent_Type_toScriptValue,
         qtscript_QEvent_Type_fromScriptValue, ctor.property(QString::fromLatin1("prototype")));
-    for (int i = 0; i < 145; ++i) {
+    for (int i = 0; i < 144; ++i) {
         clazz.setProperty(QString::fromLatin1(qtscript_QEvent_Type_keys[i]),
             engine->newVariant(qVariantFromValue(qtscript_QEvent_Type_values[i])),
             QScriptValue::ReadOnly | QScriptValue::Undeletable);
