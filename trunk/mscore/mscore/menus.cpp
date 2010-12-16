@@ -883,7 +883,6 @@ QMenu* MuseScore::genCreateMenu(QWidget* parent)
       text->addAction(getAction("subtitle-text"));
       text->addAction(getAction("composer-text"));
       text->addAction(getAction("poet-text"));
-      text->addAction(getAction("copyright-text"));
       text->addSeparator();
       text->addAction(getAction("system-text"));
       text->addAction(getAction("staff-text"));
