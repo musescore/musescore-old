@@ -34,11 +34,13 @@ class Tablature {
    public:
       Tablature() {}
       Tablature(int numFrets, int numStrings, int strings[]);
+      Tablature(int numFrets, QList<int>& strings);
       bool convertPitch(int pitch, int* string, int* fret) const;
       int fret(int pitch, int string) const;
       int getPitch(int string, int fret) const;
-      int strings() const { return stringTable.size(); }
-      int frets() const   { return _frets; }
+      int strings() const           { return stringTable.size(); }
+      QList<int> stringList() const { return stringTable; }
+      int frets() const             { return _frets; }
       void read(QDomElement);
       void write(Xml&) const;
       };

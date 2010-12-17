@@ -11,6 +11,7 @@
       <file>data/next.png</file>
       <file>data/reload.png</file>
       <file>data/tab_remove.png</file>
+      <file>data/table.svg</file>
       <file>data/symbols.xml</file>
       <file>data/gonville.xml</file>
       <file>fonts/gonville-20.otf</file>
@@ -255,4 +256,3 @@
       <file>data/icons-dark/mscore.xpm</file>
    </qresource>
 </RCC>
-

@@ -90,7 +90,7 @@ QT4_WRAP_UI (ui_headers
       select.ui synthcontrol.ui splitstaff.ui cellproperties.ui beam.ui keyedit.ui
       harmonyedit.ui selectinstr.ui tremolo.ui fretdprops.ui stafftype.ui
       sectionbreak.ui hairpinproperties.ui spanner.ui bend.ui tremolobar.ui
-      textproperties.ui
+      textproperties.ui editpitch.ui editstringdata.ui
       )
 
 QT4_WRAP_CPP (mocs
@@ -109,7 +109,7 @@ QT4_WRAP_CPP (mocs
       pianoview.h drumview.h splitstaff.h scoretab.h keyedit.h keycanvas.h harmonyedit.h
       harmonycanvas.h updatechecker.h fret.h fretcanvas.h editstafftype.h
       prefsdialog.h layoutbreak.h hairpin.h bend.h bendcanvas.h tremolobar.h tremolobarcanvas.h
-      drumtools.h texteditor.h texttools.h
+      drumtools.h texteditor.h texttools.h editpitch.h  editstringdata.h
       )
 
 if (APPLE)
@@ -202,7 +202,8 @@ add_executable ( ${ExecutableName}
       shadownote.cpp pitch.cpp importgtp.cpp revisions.cpp bend.cpp tremolobar.cpp
       noteevent.cpp chordline.cpp lasso.cpp fotomode.cpp drumtools.cpp
       elementlayout.cpp selinstrument.cpp instrchange.cpp texteditor.cpp
-      cursor.cpp textframe.cpp editstafftype.cpp texttools.cpp
+      cursor.cpp textframe.cpp editstafftype.cpp texttools.cpp editpitch.cpp
+      editstringdata.cpp
       ${OMR_FILES}
       ${AUDIO}
       )

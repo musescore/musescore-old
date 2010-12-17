@@ -1,3 +1,10 @@
+18.dec (mi)
+      - string tuning data of the instrument of a staff editable
+        from Staff Properties dlg box.
+      - Staff Properties dlg box: pitch ranges use readable note
+        names instead of MIDI pitch codes
+      - Staff Properties dlg box: changes of staff type to TAB or
+        changes in TAB string data trigger note update.
 17.dec (ws)
       - fix #6380: conflicting flag directions for sub-beams
       - fix #8278: inverse stem of grace note causes bad hook layout
