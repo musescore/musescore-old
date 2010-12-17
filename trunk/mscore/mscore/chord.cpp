@@ -1078,7 +1078,8 @@ void Chord::layoutStem()
                   // stem rules
                   stemLen = Spatium(qAbs(ul - dl));
                   stemLen += Spatium(normalStemLen * score()->style(ST_graceNoteMag).toDouble());
-                  stemLen *= -1;
+                  if (up())
+                        stemLen *= -1;
                   }
             else {
                   if (up()) {
@@ -1116,8 +1117,12 @@ void Chord::layoutStem()
                   // TODO: does not work for chords
                   double l = spatium() * 1.0;
                   double x = _stem->pos().x() + l * .1;
-                  double y = _stem->pos().y() + point(stemLen) + l * 1.2;
-                  double h2 = l * .4;
+                  double y = _stem->pos().y() + point(stemLen);
+                  if (up())
+                        y += l * 1.2;
+                  else
+                        y -= l * 1.2;
+                  double h2 = l * (up() ? .4 : -.4);
                   double w  = upnote->headWidth() * .7;
                   _stemSlash->setLine(QLineF(QPointF(x + w, y - h2), QPointF(x - w, y + h2)));
                   }

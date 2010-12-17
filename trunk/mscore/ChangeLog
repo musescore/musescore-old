@@ -1,3 +1,5 @@
+17.dec (ws)
+      - fix #8278: inverse stem of grace note causes bad hook layout
 16.dec (ws)
       - removed copyright text item from create menu
 15.dec (ws)
