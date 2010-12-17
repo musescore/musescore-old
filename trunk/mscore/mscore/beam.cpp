@@ -288,12 +288,13 @@ void Beam::remove(ChordRest* a)
 
 void Beam::draw(QPainter& p, ScoreView*) const
       {
-	if(staff()->useTablature())
-            if(staff()->staffType()->slashStyle())
+	if (staff()->useTablature()) {
+            if (staff()->staffType()->slashStyle())
                   return;
 //		else
 //			// TO DO: ADD HERE BEAMS FOR TABLATURE
-	  QColor color(p.pen().color());
+            }
+      QColor color(p.pen().color());
       p.setPen(QPen(Qt::NoPen));
       p.setBrush(color);
       qreal lw2 = point(score()->styleS(ST_beamWidth)) * .5 * mag();
@@ -790,21 +791,37 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
 
       qreal stemWidth2 = point(score()->styleS(ST_stemWidth)) * .5;
       double p1dy = f->p1[idx].y();
-      int beamNo = 0;
-      for (Duration d(Duration::V_EIGHT); d >= Duration(Duration::V_256TH); d = d.shift(1)) {
+
+      int beamLevels = 1;
+      int chordRests = crl.size();
+      bool hasBeamSegment[chordRests];
+      for (int idx = 0; idx < chordRests; ++idx) {
+            int n = crl[idx]->durationType().hooks();
+            if (n > beamLevels)
+                  beamLevels = n;
+            hasBeamSegment[idx] = false;
+            }
+
+      for (int beamLevel = 0; beamLevel < beamLevels; ++beamLevel) {
             Chord* cr1 = 0;
             Chord* cr2 = 0;
+            bool hasBeamSegment1[chordRests];
+            memset(hasBeamSegment1, 0, sizeof(hasBeamSegment));
 
-            double dist = beamDist * beamNo;
+            double dist = beamDist * beamLevel;
             double y1   = p1dy + dist;
 
-            foreach (ChordRest* cr, crl) {
+            for (int idx = 0; idx < chordRests; ++idx) {
+                  ChordRest* cr = crl[idx];
                   if (cr->type() != CHORD)
                         continue;
                   Chord* chord = static_cast<Chord*>(cr);
-                  bool b32 = (beamNo >= 1) && (chord->beamMode() == BEAM_BEGIN32);
-                  bool b64 = (beamNo >= 2) && (chord->beamMode() == BEAM_BEGIN64);
-                  if ((chord->durationType().type() < d.type()) || b32 || b64) {
+                  bool b32 = (beamLevel >= 1) && (chord->beamMode() == BEAM_BEGIN32);
+                  bool b64 = (beamLevel >= 2) && (chord->beamMode() == BEAM_BEGIN64);
+
+                  // end current beam level?
+                  int crLevel = chord->durationType().hooks() - 1;
+                  if ((crLevel < beamLevel) || b32 || b64) {
                         if (cr2) {
                               // create short segment
                               double x2 = cr1->stemPos(cr1->up(), false).x();
@@ -815,7 +832,15 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                         else if (cr1) {
                               // create broken segment
                               double len = beamMinLen;
-                              if (cr1 != crl[0]) {
+
+                              // find out direction of beam fragment
+                              // if on first chord: right
+                              // if on last chord:  left
+                              // else ...
+                              //    point to same direction as beam starting
+                              //       one level higher
+                              //
+                              if (!hasBeamSegment[idx-1] && (cr1 != crl[0])) {
                                     Duration d = cr1->durationType();
                                     d = d.shift(-1);
                                     int rtick = cr1->tick() - cr1->measure()->tick();
@@ -826,18 +851,24 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                               double x3 = x2 + len;
                               beamSegments.push_back(new QLineF(x2 - cp.x(), (x2 - x1) * slope + y1,
                                  x3 - cp.x(), (x3 - x1) * slope + y1));
+                              hasBeamSegment1[idx-1] = false;
                               }
-                        if (chord->durationType().type() >= d.type()) {
+                        if (crLevel >= beamLevel) {
                               cr1 = chord;
+                              hasBeamSegment1[idx] = true;
                               cr2 = 0;
                               }
                         else {
+                              hasBeamSegment1[idx] = false;
                               cr1 = cr2 = 0;
                               }
                         }
-                  else
+                  else {
                         (cr1 ? cr2 : cr1) = chord;
+                        hasBeamSegment1[idx] = (cr2 == 0);
+                        }
                   }
+            memcpy(hasBeamSegment, hasBeamSegment1, sizeof(hasBeamSegment));
             if (cr2) {
                   // create segment
                   double x2 = cr1->stemPos(cr1->up(), false).x();
@@ -862,7 +893,6 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                   beamSegments.push_back(new QLineF(x2 - cp.x(), (x2 - x1) * slope + p1dy + dist,
                      x3 - cp.x(), (x3 - x1) * slope + p1dy + dist));
                   }
-            ++beamNo;
             }
 
       //---------------------------------------------------
