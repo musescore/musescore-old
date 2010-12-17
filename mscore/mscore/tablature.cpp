@@ -36,6 +36,14 @@ Tablature::Tablature(int numFrets, int numStrings, int strings[])
             stringTable.append(strings[i]);
       }
 
+Tablature::Tablature(int numFrets, QList<int>& strings)
+      {
+      _frets = numFrets;
+      // DEEP COPY!
+      foreach(int i, strings)
+            stringTable.append(i);
+      }
+
 //---------------------------------------------------------
 //   read
 //---------------------------------------------------------

@@ -33,6 +33,9 @@
 #include "selinstrument.h"
 #include "texteditor.h"
 #include "editstafftype.h"
+#include "editpitch.h"
+#include "editstringdata.h"
+#include "tablature.h"
 
 //---------------------------------------------------------
 //   EditStaff
@@ -64,16 +67,32 @@ EditStaff::EditStaff(Staff* s, QWidget* parent)
       longName->setHtml(part->instr(0)->longName().toHtml());
       invisible->setChecked(staff->invisible());
 
-      aPitchMin->setValue(instrument.minPitchA());
-      aPitchMax->setValue(instrument.maxPitchA());
-      pPitchMin->setValue(instrument.minPitchP());
-      pPitchMax->setValue(instrument.maxPitchP());
+//      aPitchMin->setValue(instrument.minPitchA());
+//      aPitchMax->setValue(instrument.maxPitchA());
+//      pPitchMin->setValue(instrument.minPitchP());
+//      pPitchMax->setValue(instrument.maxPitchP());
+      _minPitchA = instrument.minPitchA();
+      _maxPitchA = instrument.maxPitchA();
+      _minPitchP = instrument.minPitchP();
+      _maxPitchP = instrument.maxPitchP();
+      minPitchA->setText(midiCodeToStr(_minPitchA));
+      maxPitchA->setText(midiCodeToStr(_maxPitchA));
+      minPitchP->setText(midiCodeToStr(_minPitchP));
+      maxPitchP->setText(midiCodeToStr(_maxPitchP));
+
+      int numStr = instrument.tablature() ? instrument.tablature()->strings() : 0;
+      numOfStrings->setText(QString::number(numStr));
 
       connect(buttonBox, SIGNAL(clicked(QAbstractButton*)), SLOT(bboxClicked(QAbstractButton*)));
       connect(changeInstrument, SIGNAL(clicked()), SLOT(showInstrumentDialog()));
       connect(editStaffType,    SIGNAL(clicked()), SLOT(showEditStaffType()));
       connect(editShortName,    SIGNAL(clicked()), SLOT(editShortNameClicked()));
       connect(editLongName,     SIGNAL(clicked()), SLOT(editLongNameClicked()));
+      connect(minPitchASelect,  SIGNAL(clicked()), SLOT(minPitchAClicked()));
+      connect(maxPitchASelect,  SIGNAL(clicked()), SLOT(maxPitchAClicked()));
+      connect(minPitchPSelect,  SIGNAL(clicked()), SLOT(minPitchPClicked()));
+      connect(maxPitchPSelect,  SIGNAL(clicked()), SLOT(maxPitchPClicked()));
+      connect(editStringData,   SIGNAL(clicked()), SLOT(editStringDataClicked()));
       }
 
 //---------------------------------------------------------
@@ -155,21 +174,32 @@ void EditStaff::apply()
             interval.flip();
       instrument.setTranspose(interval);
 
-      instrument.setMinPitchA(aPitchMin->value());
-      instrument.setMaxPitchA(aPitchMax->value());
-      instrument.setMinPitchP(pPitchMin->value());
-      instrument.setMaxPitchP(pPitchMax->value());
+//      instrument.setMinPitchA(aPitchMin->value());
+//      instrument.setMaxPitchA(aPitchMax->value());
+//      instrument.setMinPitchP(pPitchMin->value());
+//      instrument.setMaxPitchP(pPitchMax->value());
+      instrument.setMinPitchA(_minPitchA);
+      instrument.setMaxPitchA(_maxPitchA);
+      instrument.setMinPitchP(_minPitchP);
+      instrument.setMaxPitchP(_maxPitchP);
       instrument.setShortName(QTextDocumentFragment(shortName->document()));
       instrument.setLongName(QTextDocumentFragment(longName->document()));
+
+      bool s   = small->isChecked();
+      bool inv = invisible->isChecked();
+      StaffType* st = score->staffTypes()[staffType->currentIndex()];
+      bool updateNeeded = false;
+      // before changing instrument, check if notes need to be updated
+      // true if new staff is type TAB and old staff was not TAB or had a different TAB
+      if(st->group() == TAB_STAFF &&
+         (staff->staffType()->group() != TAB_STAFF || instrument.tablature() != part->instr()->tablature()) )
+            updateNeeded = true;
 
       if (!(instrument == *part->instr())) {
 printf("instrument changed <%s>\n", qPrintable(instrument.longName().toPlainText()));
             score->undo()->push(new ChangePart(part, instrument));
             }
 
-      bool s   = small->isChecked();
-      bool inv = invisible->isChecked();
-      StaffType* st = score->staffTypes()[staffType->currentIndex()];
 
       if (
          s != staff->small()
@@ -177,6 +207,10 @@ printf("instrument changed <%s>\n", qPrintable(instrument.longName().toPlainText
          || st  != staff->staffType()
            )
             score->undo()->push(new ChangeStaff(staff, s, inv, staff->show(), st));
+
+      if(updateNeeded)
+            score->cmdUpdateNotes();
+
       score->setLayoutAll(true);
       score->end();
       }
@@ -202,10 +236,18 @@ void EditStaff::showInstrumentDialog()
             const InstrumentTemplate* t = si.instrTemplate();
             // setMidiProgram(t->midiProgram);
 
-            aPitchMin->setValue(t->minPitchA);
-            aPitchMax->setValue(t->maxPitchA);
-            pPitchMin->setValue(t->minPitchP);
-            pPitchMax->setValue(t->maxPitchP);
+//            aPitchMin->setValue(t->minPitchA);
+//            aPitchMax->setValue(t->maxPitchA);
+//            pPitchMin->setValue(t->minPitchP);
+//            pPitchMax->setValue(t->maxPitchP);
+            _minPitchA = t->minPitchA;
+            _maxPitchA = t->maxPitchA;
+            _minPitchP = t->minPitchP;
+            _maxPitchP = t->maxPitchP;
+            minPitchA->setText(midiCodeToStr(_minPitchA));
+            maxPitchA->setText(midiCodeToStr(_maxPitchA));
+            minPitchP->setText(midiCodeToStr(_minPitchP));
+            maxPitchP->setText(midiCodeToStr(_maxPitchP));
 
             shortName->setHtml(t->shortName);
             longName->setHtml(t->longName);
@@ -223,15 +265,6 @@ void EditStaff::showInstrumentDialog()
             instrument.setArticulation(t->articulation);
             instrument.setChannel(t->channel);
             }
-      }
-
-//---------------------------------------------------------
-//   editTablatureClicked
-//---------------------------------------------------------
-
-void EditStaff::editTablatureClicked()
-      {
-      printf("Edit Tablature\n");
       }
 
 //---------------------------------------------------------
@@ -276,4 +309,81 @@ void EditStaff::editLongNameClicked()
       {
       QString s = editText(longName->toHtml());
       longName->setHtml(s);
+      }
+
+//---------------------------------------------------------
+//   <Pitch>Clicked
+//---------------------------------------------------------
+
+void EditStaff::minPitchAClicked()
+      {
+      int         newCode;
+
+      EditPitch* ep = new EditPitch(this, instrument.minPitchA() );
+      if ( (newCode=ep->exec()) != -1) {
+            minPitchA->setText(midiCodeToStr(newCode));
+            _minPitchA = newCode;
+            }
+      }
+
+void EditStaff::maxPitchAClicked()
+      {
+      int         newCode;
+
+      EditPitch* ep = new EditPitch(this, instrument.maxPitchA() );
+      if ( (newCode=ep->exec()) != -1) {
+            maxPitchA->setText(midiCodeToStr(newCode));
+            _maxPitchA = newCode;
+            }
+      }
+
+void EditStaff::minPitchPClicked()
+      {
+      int         newCode;
+
+      EditPitch* ep = new EditPitch(this, instrument.minPitchP() );
+      if ( (newCode=ep->exec()) != -1) {
+            minPitchP->setText(midiCodeToStr(newCode));
+            _minPitchP = newCode;
+            }
+      }
+
+void EditStaff::maxPitchPClicked()
+      {
+      int         newCode;
+
+      EditPitch* ep = new EditPitch(this, instrument.maxPitchP() );
+      if ( (newCode=ep->exec()) != -1) {
+            maxPitchP->setText(midiCodeToStr(newCode));
+            _maxPitchP = newCode;
+            }
+      }
+
+//---------------------------------------------------------
+//   editStringDataClicked
+//---------------------------------------------------------
+
+void EditStaff::editStringDataClicked()
+      {
+      int         frets = instrument.tablature()->frets();
+      QList<int>  stringList = instrument.tablature()->stringList();
+
+      EditStringData* esd = new EditStringData(this, &stringList, &frets);
+      if (esd->exec()) {
+            Tablature * tab = new Tablature(frets, stringList);
+            instrument.setTablature(tab);
+            }
+      }
+
+//---------------------------------------------------------
+//   midiCodeToStr
+//    Converts a MIDI numeric pitch code to human-readable note name
+//---------------------------------------------------------
+
+static char g_cNoteName[12][4] =
+{"C", "C#", "D", "Eb", "E", "F", "F#", "G", "Ab", "A", "Bb", "B" };
+
+QString EditStaff::midiCodeToStr(int midiCode)
+      {
+      return QString("%1 %2").arg(g_cNoteName[midiCode % 12]).arg(midiCode / 12 - 1);
       }

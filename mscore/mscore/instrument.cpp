@@ -637,6 +637,7 @@ bool InstrumentData::operator==(const InstrumentData& i) const
          &&  i._longName.toHtml() == _longName.toHtml()
          &&  i._shortName.toHtml() == _shortName.toHtml()
          &&  i._trackName == _trackName
+         &&  i.tablature() == tablature();
          ;
       }
 

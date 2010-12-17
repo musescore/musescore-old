@@ -36,21 +36,29 @@ class InstrumentTemplate;
 class EditStaff : public QDialog, private Ui::EditStaffBase {
       Q_OBJECT
 
-      Staff* staff;
-      Instrument instrument;
+      Staff*      staff;
+      Instrument  instrument;
+      int         _minPitchA, _maxPitchA, _minPitchP, _maxPitchP;
 
       void apply();
       void initFromInstrument(const Instrument&);
       void setInterval(const Interval&);
 
+   protected:
+      QString midiCodeToStr(int midiCode);
+
    private slots:
       void bboxClicked(QAbstractButton* button);
       void editDrumsetClicked();
-      void editTablatureClicked();
+      void editStringDataClicked();
       void showInstrumentDialog();
       void showEditStaffType();
       void editShortNameClicked();
       void editLongNameClicked();
+      void minPitchAClicked();
+      void maxPitchAClicked();
+      void minPitchPClicked();
+      void maxPitchPClicked();
 
    public:
       EditStaff(Staff*, QWidget* parent = 0);
