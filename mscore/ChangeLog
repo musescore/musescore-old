@@ -1,3 +1,5 @@
+17.dec (la)
+      - fix #6536: Position of stemslash in grace note chord
 15.dec (la)
       - fix #7415: Stems too short for 32nd and 64th notes
       - fix #8273: Unecessary courtesy clef remains when clef is changed

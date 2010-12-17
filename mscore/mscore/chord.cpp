@@ -1117,32 +1117,38 @@ void Chord::layoutStem()
                   }
 
             if (_noteType != NOTE_NORMAL) {
-                  normalStemLen *= score()->style(ST_graceNoteMag).toDouble();
-                  }
-           
-            if (up()) {
-                  double dy  = dl + downnote->stemYoff(true);
-                  double sel = ul - normalStemLen;
-
-                  if (shortenStem && (sel < 0.0) && (hookIdx == 0 || !downnote->mirror()))
-                        sel -= sel  * progression.val();
-                  if (sel > 2.0)
-                        sel = 2.0;
-                  stemLen = Spatium(sel - dy);
-                  if (-stemLen < shortest)
-                        stemLen = -shortest;
+                  // grace notes stems are not subject to normal
+                  // stem rules
+                  stemLen = Spatium(qAbs(ul - dl));
+                  stemLen += Spatium(normalStemLen * score()->style(ST_graceNoteMag).toDouble());
+                  if (up())
+                        stemLen *= -1;
                   }
             else {
-                  double uy  = ul + upnote->stemYoff(false);
-                  double sel = dl + normalStemLen;
-
-                  if (shortenStem && (sel > 4.0) && (hookIdx == 0 || downnote->mirror()))
-                        sel -= (sel - 4.0)  * progression.val();
-                  if (sel < 2.0)
-                        sel = 2.0;
-                  stemLen    = Spatium(sel - uy);
-                  if (stemLen < shortest)
-                        stemLen = shortest;
+                  if (up()) {
+                        double dy  = dl + downnote->stemYoff(true);
+                        double sel = ul - normalStemLen;
+      
+                        if (shortenStem && (sel < 0.0) && (hookIdx == 0 || !downnote->mirror()))
+                              sel -= sel  * progression.val();
+                        if (sel > 2.0)
+                              sel = 2.0;
+                        stemLen = Spatium(sel - dy);
+                        if (-stemLen < shortest)
+                              stemLen = -shortest;
+                        }
+                  else {
+                        double uy  = ul + upnote->stemYoff(false);
+                        double sel = dl + normalStemLen;
+      
+                        if (shortenStem && (sel > 4.0) && (hookIdx == 0 || downnote->mirror()))
+                              sel -= (sel - 4.0)  * progression.val();
+                        if (sel < 2.0)
+                              sel = 2.0;
+                        stemLen    = Spatium(sel - uy);
+                        if (stemLen < shortest)
+                              stemLen = shortest;
+                        }
                   }
                   
 
@@ -1153,13 +1159,16 @@ void Chord::layoutStem()
 
             if (_stemSlash) {
                   // TODO: does not work for chords
-                  double x = _stem->pos().x();
-                  double y = _stem->pos().y();
-                  double l = point(stemLen) * .5;
-                  y += l;
-                  double h2 = l * .5;
+                  double l = spatium() * 1.0;
+                  double x = _stem->pos().x() + l * .1;
+                  double y = _stem->pos().y() + point(stemLen);
+                  if (up())
+                        y += l * 1.2;
+                  else
+                        y -= l * 1.2;
+                  double h2 = l * (up() ? .4 : -.4);
                   double w  = upnote->headWidth() * .7;
-                  _stemSlash->setLine(QLineF(QPointF(x + w, y + h2), QPointF(x - w, y - h2)));
+                  _stemSlash->setLine(QLineF(QPointF(x + w, y - h2), QPointF(x - w, y + h2)));
                   }
 
             if (hookIdx) {
