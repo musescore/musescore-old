@@ -1635,7 +1635,6 @@ printf("incomplete Slur\n");
       if (_omr == 0)
             _showOmr = false;
 
-      renumberMeasures();
       if (_mscVersion < 103) {
             foreach(Staff* staff, _staves) {
                   Part* part = staff->part();

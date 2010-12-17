@@ -19,12 +19,12 @@
 #=============================================================================
 
 if (GCC_VISIBILITY)
-set(CMAKE_CXX_FLAGS "-g -Wall -Wextra -Winvalid-pch -fvisibility=hidden -fvisibility-inlines-hidden")
+set(CMAKE_CXX_FLAGS "-g -Wall -W -Winvalid-pch -fvisibility=hidden -fvisibility-inlines-hidden")
 else (GCC_VISIBILITY)
-set(CMAKE_CXX_FLAGS "-g -Wall -Wextra -Winvalid-pch")
+set(CMAKE_CXX_FLAGS "-g -Wall -W -Winvalid-pch")
 endif (GCC_VISIBILITY)
 
-set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DQT_NO_DEBUG")
+set(CMAKE_CXX_FLAGS_RELEASE "-O2 -DQT_NO_DEBUG")
 set(CMAKE_CXX_FLAGS_DEBUG   "-DQT_DEBUG")
 
 if (NOT MINGW)
@@ -35,6 +35,7 @@ if (NOT MINGW)
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wl,-rpath,${QT_LIBRARY_DIR}")
 endif (NOT MINGW)
 
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DQT_SHARED -DQT_OPENGL_LIB -D_LARGEFILE64_SOURCE -D_LARGEFILE_SOURCE")
 
 SET_SOURCE_FILES_PROPERTIES(revision.h PROPERTIES GENERATED TRUE)
 

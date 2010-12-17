@@ -1,21 +1,28 @@
 <!DOCTYPE RCC>
 <RCC version="1.0">
-   <qresource>
+   <qresource prefix="/">
       <file>data/paper1.png</file>
       <file>data/paper2.png</file>
       <file>data/paper3.png</file>
       <file>data/paper4.png</file>
       <file>data/paper5.png</file>
 
+      <file>data/previous.png</file>
+      <file>data/next.png</file>
+      <file>data/reload.png</file>
       <file>data/tab_remove.png</file>
       <file>data/symbols.xml</file>
       <file>data/gonville.xml</file>
       <file>fonts/gonville-20.otf</file>
       <file>fonts/mscore-20.ttf</file>
-      <file>fonts/MScore1-20_new.ttf</file>
+      <file>fonts/mscore1-20.ttf</file>
       <file>fonts/MuseJazz.ttf</file>
       <file>fonts/FreeSerif.ttf</file>
       <file>fonts/FreeSans.ttf</file>
+      <file>fonts/mscore_tab_baroque.ttf</file>
+      <file>fonts/mscore_tab_modern.ttf</file>
+      <file>fonts/mscore_tab_renaiss.ttf</file>
+      <file>fonts/mscore_tab_renaiss2.ttf</file>
       <file alias="data/instruments.xml">../share/templates/instruments.xml</file>
       <file>data/splash.jpg</file>
       <file alias="data/Promenade_Example.mscx">../demos/promenade.mscx</file>
@@ -28,7 +35,11 @@
       <file>data/musescore_logo_full.png</file>
       <file alias="data/appstyle-dark.css">../share/styles/appstyle-mac-dark.css</file>
 
-      <file>data/icons/mscore.xpm</file>
+      <file>data/greendot.svg</file>
+      <file>data/darkgreendot.svg</file>
+      <file>data/recordOn.svg</file>
+      <file>data/recordOff.svg</file>
+
       <file>data/icons/minus.svg</file>
       <file>data/icons/flip.svg</file>
       <file>data/icons/undo.svg</file>
@@ -134,9 +145,8 @@
       <file>data/icons/text_top.svg</file>
       <file>data/icons/text_bottom.svg</file>
       <file>data/icons/text_vcenter.svg</file>
+      <file>data/icons/mscore.xpm</file>
 
-
-      <file>data/icons-dark/mscore.xpm</file>
       <file>data/icons-dark/minus.svg</file>
       <file>data/icons-dark/flip.svg</file>
       <file>data/icons-dark/undo.svg</file>
@@ -242,7 +252,7 @@
       <file>data/icons-dark/text_top.svg</file>
       <file>data/icons-dark/text_bottom.svg</file>
       <file>data/icons-dark/text_vcenter.svg</file>
-
+      <file>data/icons-dark/mscore.xpm</file>
    </qresource>
 </RCC>
 
