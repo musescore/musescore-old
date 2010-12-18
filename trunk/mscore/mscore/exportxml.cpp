@@ -3261,6 +3261,9 @@ static void annotations(ExportMusicXml* exp, int strack, int etrack, int track, 
                               case DYNAMIC:
                                     exp->dynamic((Dynamic*) e, sstaff);
                                     break;
+                              case HARMONY:
+                                    exp->harmony((Harmony*) e /*, sstaff */);
+                                    break;
                               default:
                                     printf("annotations: direction type %s at tick %d not implemented\n",
                                             Element::name(e->type()), seg->tick());
@@ -3812,6 +3815,7 @@ foreach(Element* el, *(score->gel())) {
                               // handle annotations and spanners (directions attached to this note or rest)
 //                              dh.handleElement(this, el, sstaff, true);
                               if (el->isChordRest()) {
+                                    attr.doAttr(xml, false);
                                     annotations(this, strack, etrack, st, sstaff, seg);
                                     spannerStop(this, strack, etrack, st, sstaff, seg);
                                     spannerStart(this, strack, etrack, st, sstaff, seg);

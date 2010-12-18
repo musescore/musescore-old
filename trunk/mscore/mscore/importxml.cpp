@@ -1172,7 +1172,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
             else if (e.tagName() == "sound")
                   domNotImplemented(e);
             else if (e.tagName() == "harmony")
-                  xmlHarmony(e, tick, measure);
+                  xmlHarmony(e, tick, measure, staff);
             else
                   domError(e);
             }
@@ -3024,12 +3024,14 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             }
 
       // add a pending harmony to the current track
+/*
       if (harmony) {
             harmony->setTrack(track);
             Segment* s = static_cast<Segment*>(cr->parent());
             s->add(harmony);
             harmony = 0;
             }
+*/
 
       if (!grace) {
             lastLen = ticks;
@@ -3100,7 +3102,7 @@ void MusicXml::genWedge(int no, int endTick, Measure* measure, int staff)
 //   xmlHarmony
 //---------------------------------------------------------
 
-void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
+void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure, int staff)
       {
       // type:
 
@@ -3266,7 +3268,10 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
       ha->setVisible(printObject == "yes");
 
       // TODO-LV: do this only if ha points to a valid harmony
-      harmony = ha;
+      // harmony = ha;
+      ha->setTrack(staff * VOICES);
+      Segment* s = measure->getSegment(SegChordRest, tick);
+      s->add(ha);
       }
 
 //---------------------------------------------------------
