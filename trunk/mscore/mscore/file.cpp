@@ -1781,11 +1781,11 @@ void Score::print(QPrinter* printer)
                         e->itemDiscovered = 0;
                         if (!e->visible())
                               continue;
-                        QPointF ap(e->canvasPos() - page->pos());
-                        p.translate(ap);
+                        p.save();
+                        p.translate(e->canvasPos() - page->pos());
                         p.setPen(QPen(e->color()));
                         e->draw(p, 0);
-                        p.translate(-ap);
+                        p.restore();
                         }
                   }
             if ((copy + 1) < printer->numCopies())
@@ -1858,20 +1858,20 @@ bool Score::saveSvg(const QString& saveName)
             foreach(const Element* e, eel) {
                   if (!e->visible())
                         continue;
-                  QPointF ap(e->canvasPos() - page->pos());
-                  p.translate(ap);
+                  p.save();
+                  p.translate(e->canvasPos() - page->pos());
                   p.setPen(QPen(e->color()));
                   e->draw(p, 0);
-                  p.translate(-ap);
+                  p.restore();
                   }
             foreach(const Element* e, el) {
                   if (!e->visible())
                         continue;
-                  QPointF ap(e->canvasPos() - page->pos());
-                  p.translate(ap);
+                  p.save();
+                  p.translate(e->canvasPos() - page->pos());
                   p.setPen(QPen(e->color()));
                   e->draw(p, 0);
-                  p.translate(-ap);
+                  p.restore();
                   }
             }
 

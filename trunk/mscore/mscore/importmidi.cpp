@@ -643,7 +643,7 @@ static QString instrName(int type, int hbank, int lbank, int program)
 void Score::addLyrics(int tick, int /*staffIdx*/, const QString& txt)
       {
       if(txt.trimmed().isEmpty())
-            return; 
+            return;
       Measure* measure = tick2measure(tick);
       Segment* seg = measure->findSegment(SegChordRest, tick);
       if (seg == 0) {
@@ -1113,7 +1113,6 @@ void Score::convertTrack(MidiTrack* midiTrack)
                                     Event mn = nl[i];
                         		Note* note = new Note(this);
                                     note->setPitch(mn.pitch(), mn.tpc());
-                        		note->setTrack(chord->track());
                   	      	chord->add(note);
                                     note->setOnTimeUserOffset(mn.noquantOntime() - tick);
                                     int ot = (mn.noquantOntime() + mn.noquantDuration()) - (tick + chord->ticks());
@@ -1259,7 +1258,6 @@ printf("unmapped drum note 0x%02x %d\n", mn.pitch(), mn.pitch());
                               const Event& mn = nl[i];
                   		Note* note = new Note(this);
                               note->setPitch(mn.pitch(), mn.tpc());
-            	      	note->setTrack(staffIdx * VOICES + voice);
             	      	chord->add(note);
                               note->setOnTimeUserOffset(mn.noquantOntime() - tick);
                               int ot = (mn.noquantOntime() + mn.noquantDuration()) - (tick + chord->ticks());

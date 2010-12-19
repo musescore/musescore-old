@@ -32,21 +32,40 @@
 
 EventData::EventData()
       {
-      _data   = 0;
-      _note   = 0;
-      _tuning = 0.0;
-      _ontime = -1;
-      _channel = 0;
+      _type            = 0;
+      _ontime          = 0;
+      _noquantOntime   = 0;
+      _noquantDuration = 0;
+      _channel         = 0;
+      _a               = 0;
+      _b               = 0;
+      _duration        = 0;
+      _tpc             = 0;
+      _voice           = 0;
+      _data            = 0;
+      _len             = 0;
+      _metaType        = 0;
+      _note            = 0;
+      _tuning          = 0.0;
       }
 
 EventData::EventData(int t)
       {
-      _type   = t;
-      _data   = 0;
-      _note   = 0;
-      _tuning = 0.0;
-      _ontime = -1;
-      _channel = 0;
+      _type            = t;
+      _ontime          = 0;
+      _noquantOntime   = 0;
+      _noquantDuration = 0;
+      _channel         = 0;
+      _a               = 0;
+      _b               = 0;
+      _duration        = 0;
+      _tpc             = 0;
+      _voice           = 0;
+      _data            = 0;
+      _len             = 0;
+      _metaType        = 0;
+      _note            = 0;
+      _tuning          = 0.0;
       }
 
 EventData::EventData(const EventData& e)
@@ -54,23 +73,25 @@ EventData::EventData(const EventData& e)
       {
       _type       = e._type;
       _ontime     = e._ontime;
+      _noquantOntime   = e._noquantOntime;
+      _noquantDuration = e._noquantDuration;
       _channel    = e._channel;
       _a          = e._a;
       _b          = e._b;
-      _tuning     = e._tuning;
       _duration   = e._duration;
       _tpc        = e._tpc;
       _voice      = e._voice;
       _notes      = e._notes;
-      _len        = e._len;
       if (e._data) {
-            _data = new unsigned char[_len + 1];      // dont forget trailing zero
-            memcpy(_data, e._data, _len+1);
+            _data = new unsigned char[e._len + 1];      // dont forget trailing zero
+            memcpy(_data, e._data, e._len+1);
             }
       else
             _data = 0;
-      _metaType = e._metaType;
-      _note     = e._note;
+      _len        = e._len;
+      _metaType   = e._metaType;
+      _note       = e._note;
+      _tuning     = e._tuning;
       }
 
 EventData::~EventData()
