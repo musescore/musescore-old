@@ -8,6 +8,9 @@
         to current mscore1-20.ttf)
       - set TextStyleData::sizeIsSpatiumDependent default to false (as it is only
         written to file if it is true)
+      - changed StaffTypeTabulature defaults in constructor to better suit
+        modern guitar tabulature style.
+      - Cosmetic changes to tabulature-related dlg boxes.
 18.dec (lv)
       - MusicXML import/export of harmony
        (mi)

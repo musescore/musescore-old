@@ -145,7 +145,7 @@
           <number>2</number>
          </property>
          <property name="currentIndex">
-          <number>1</number>
+          <number>0</number>
          </property>
          <widget class="QWidget" name="page">
           <layout class="QVBoxLayout" name="verticalLayout_7" stretch="0,0,0">
@@ -701,6 +701,9 @@
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
       <widget class="QPushButton" name="save">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="text">
         <string>Save</string>
        </property>
@@ -708,6 +711,9 @@
      </item>
      <item>
       <widget class="QPushButton" name="load">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="text">
         <string>Load</string>
        </property>
@@ -740,6 +746,39 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>name</tabstop>
+  <tabstop>lines</tabstop>
+  <tabstop>lineDistance</tabstop>
+  <tabstop>genClefPitched</tabstop>
+  <tabstop>stemlessPitched</tabstop>
+  <tabstop>showBarlinesPitched</tabstop>
+  <tabstop>genKeysig</tabstop>
+  <tabstop>showLedgerLines</tabstop>
+  <tabstop>genClefTablature</tabstop>
+  <tabstop>stemlessTablature</tabstop>
+  <tabstop>showBarlinesTablature</tabstop>
+  <tabstop>genTimesigTablature</tabstop>
+  <tabstop>genDurations</tabstop>
+  <tabstop>fretFontName</tabstop>
+  <tabstop>fretFontSize</tabstop>
+  <tabstop>fretY</tabstop>
+  <tabstop>numbersRadio</tabstop>
+  <tabstop>lettersRadio</tabstop>
+  <tabstop>onLinesRadio</tabstop>
+  <tabstop>aboveLinesRadio</tabstop>
+  <tabstop>linesThroughRadio</tabstop>
+  <tabstop>linesBrokenRadio</tabstop>
+  <tabstop>durFontName</tabstop>
+  <tabstop>durFontSize</tabstop>
+  <tabstop>durY</tabstop>
+  <tabstop>genClefPercussion</tabstop>
+  <tabstop>newType</tabstop>
+  <tabstop>staffTypeList</tabstop>
+  <tabstop>save</tabstop>
+  <tabstop>load</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>
