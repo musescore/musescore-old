@@ -673,7 +673,7 @@ TextStyleData::TextStyleData()
       italic                 = false;
       underline              = false;
       hasFrame               = false;
-      sizeIsSpatiumDependent = true;
+      sizeIsSpatiumDependent = false;
       frameWidth             = 0.35;
       paddingWidth           = 0.0;
       frameRound             = 25;
@@ -889,7 +889,7 @@ void StyleData::load(QDomElement e)
             QString val(e.text());
 
             if (tag == "TextStyle") {
-                  QString name = e.attribute("name");
+//                  QString name = e.attribute("name");
                   TextStyle s;
                   s.read(e);
                   setTextStyle(s);
