@@ -3052,6 +3052,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
 
 void MusicXml::addWedge(int no, int startTick, qreal rx, qreal ry, bool above, bool hasYoffset, qreal yoffset, int subType)
       {
+      printf("addWedge(no %d, startTick %d, subType %d)\n", no, startTick, subType);
       MusicXmlWedge wedge;
       wedge.number = no;
       wedge.startTick = startTick;
@@ -3080,6 +3081,7 @@ void MusicXml::addWedge(int no, int startTick, qreal rx, qreal ry, bool above, b
 
 void MusicXml::genWedge(int no, int endTick, Measure* measure, int staff)
       {
+      printf("genWedge(no %d, endTick %d\n", no, endTick);
       Hairpin* hp = new Hairpin(score);
       hp->setSubtype(wedgeList[no].subType);
       if (wedgeList[no].hasYoffset)
@@ -3088,10 +3090,13 @@ void MusicXml::genWedge(int no, int endTick, Measure* measure, int staff)
             hp->setYoff(wedgeList[no].above ? -3 : 8);
       hp->setUserOff(QPointF(wedgeList[no].rx, wedgeList[no].ry));
       hp->setTrack(staff * VOICES);
+      // TODO LVI following fails for wedges starting in a different measure !
       Segment* seg = measure->getSegment(SegChordRest, wedgeList[no].startTick);
+      printf("start seg %p", seg);
       hp->setStartElement(seg);
       seg->add(hp);
       seg = measure->getSegment(SegChordRest, endTick);
+      printf(", stop seg %p\n", seg);
       hp->setEndElement(seg);
       seg->addSpannerBack(hp);
       score->updateHairpin(hp);
