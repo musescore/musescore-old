@@ -1,4 +1,6 @@
-19.dec (ws)
+19.dec (lv)
+      - fix #8327: Crash on tremolo between notes
+       (ws)
       - fixed #8323: Layout wrong in print-outs, PDF and Page Settings
       (mi)
       - added FontForge source for mscore1-20.ttf (mscore1-20.sfd)

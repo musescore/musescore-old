@@ -133,7 +133,7 @@ void Tremolo::layout()
                         double beamHeight = bw * n + bw * bd * (n-1);
                         h -= beamHeight;
                         }
-                  y = stem->pos().y() + d + (h-d) * (up ? -.5 : .5);
+                  y += d + (h-d) * (up ? -.5 : .5);
                   }
             setPos(x, y);
             _chord1->setTremoloChordType(TremoloSingle);
