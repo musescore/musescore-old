@@ -158,70 +158,72 @@ void Page::draw(QPainter& p, ScoreView*) const
       // draw page border gradients
       //-----------------------------------------
 
-      const QColor c1("#befbbefbbefb");
-      const QColor c2("#79e779e779e7");
-      int h1, h2, s1, s2, v1, v2;
-      int bw = 6;
-      c2.getHsv(&h1, &s1, &v1);
-      c1.getHsv(&h2, &s2, &v2);
-
-      if ((no() & 1) == 0) {
-            int bbw = bw/2-1;
-            bbw = bbw >= 1 ? bbw : 1;
-            for (int i = 0; i < bw/2; ++i) {
-                  QColor c;
-                  c.setHsv(h1+((h2-h1)*i)/bbw,
-                     s1+((s2-s1)*i)/bbw,
-                     v1+((v2-v1)*i)/bbw);
-                  p.setPen(c);
-                  p.drawLine(QLineF(x1+i, y1, x1+i, y2));
-                  }
-            c1.getHsv(&h1, &s1, &v1);
-            c2.getHsv(&h2, &s2, &v2);
-
-            p.fillRect(QRectF(x2-bw, y1, bw, bw), preferences.bgColor);
-            p.fillRect(QRectF(x2-bw, y2-bw, bw, bw), preferences.bgColor);
-
-            bbw = bw-1;
-            bbw = bbw >= 1 ? bbw : 1;
-            for (int i = 0; i < bw; ++i) {
-                  QColor c;
-                  c.setHsv(h1+((h2-h1)*i)/bbw,
-                     s1+((s2-s1)*i)/bbw,
-                     v1+((v2-v1)*i)/bbw);
-                  p.setPen(c);
-                  p.drawLine(QLineF(x2-bw+i, y1+i+1, x2-bw+i, y2-i-1));
-                  }
-            }
-      else {
+      if (!score()->printing()) {
+            const QColor c1("#befbbefbbefb");
+            const QColor c2("#79e779e779e7");
+            int h1, h2, s1, s2, v1, v2;
+            int bw = 6;
             c2.getHsv(&h1, &s1, &v1);
             c1.getHsv(&h2, &s2, &v2);
 
-            p.fillRect(QRectF(x1, y1, bw, bw), preferences.bgColor);
-            p.fillRect(QRectF(x1, y2-bw, bw, bw), preferences.bgColor);
-            int bbw = bw-1;
-            bbw = bbw >= 1 ? bbw : 1;
-            for (int i = 0; i < bw; ++i) {
-                  QColor c;
-                  c.setHsv(h1+((h2-h1)*i)/bbw,
-                     s1+((s2-s1)*i)/bbw,
-                     v1+((v2-v1)*i)/bbw);
-                  p.setPen(c);
-                  p.drawLine(QLineF(x1+i, y1+(bw-i), x1+i, y2-(bw-i)-1));
-                  }
-            c1.getHsv(&h1, &s1, &v1);
-            c2.getHsv(&h2, &s2, &v2);
+            if ((no() & 1) == 0) {
+                  int bbw = bw/2-1;
+                  bbw = bbw >= 1 ? bbw : 1;
+                  for (int i = 0; i < bw/2; ++i) {
+                        QColor c;
+                        c.setHsv(h1+((h2-h1)*i)/bbw,
+                           s1+((s2-s1)*i)/bbw,
+                           v1+((v2-v1)*i)/bbw);
+                        p.setPen(c);
+                        p.drawLine(QLineF(x1+i, y1, x1+i, y2));
+                        }
+                  c1.getHsv(&h1, &s1, &v1);
+                  c2.getHsv(&h2, &s2, &v2);
 
-            bw/=2;
-            bbw = bw-1;
-            bbw = bbw >= 1 ? bbw : 1;
-            for (int i = 0; i < bw; ++i) {
-                     QColor c;
-                     c.setHsv(h1+((h2-h1)*i)/bbw,
-                     s1+((s2-s1)*i)/bbw,
-                     v1+((v2-v1)*i)/bbw);
-                  p.setPen(c);
-                  p.drawLine(QLineF(x2-bw+i, y1, x2-bw+i, y2));
+                  p.fillRect(QRectF(x2-bw, y1, bw, bw), preferences.bgColor);
+                  p.fillRect(QRectF(x2-bw, y2-bw, bw, bw), preferences.bgColor);
+
+                  bbw = bw-1;
+                  bbw = bbw >= 1 ? bbw : 1;
+                  for (int i = 0; i < bw; ++i) {
+                        QColor c;
+                        c.setHsv(h1+((h2-h1)*i)/bbw,
+                           s1+((s2-s1)*i)/bbw,
+                           v1+((v2-v1)*i)/bbw);
+                        p.setPen(c);
+                        p.drawLine(QLineF(x2-bw+i, y1+i+1, x2-bw+i, y2-i-1));
+                        }
+                  }
+            else {
+                  c2.getHsv(&h1, &s1, &v1);
+                  c1.getHsv(&h2, &s2, &v2);
+
+                  p.fillRect(QRectF(x1, y1, bw, bw), preferences.bgColor);
+                  p.fillRect(QRectF(x1, y2-bw, bw, bw), preferences.bgColor);
+                  int bbw = bw-1;
+                  bbw = bbw >= 1 ? bbw : 1;
+                  for (int i = 0; i < bw; ++i) {
+                        QColor c;
+                        c.setHsv(h1+((h2-h1)*i)/bbw,
+                           s1+((s2-s1)*i)/bbw,
+                           v1+((v2-v1)*i)/bbw);
+                        p.setPen(c);
+                        p.drawLine(QLineF(x1+i, y1+(bw-i), x1+i, y2-(bw-i)-1));
+                        }
+                  c1.getHsv(&h1, &s1, &v1);
+                  c2.getHsv(&h2, &s2, &v2);
+
+                  bw/=2;
+                  bbw = bw-1;
+                  bbw = bbw >= 1 ? bbw : 1;
+                  for (int i = 0; i < bw; ++i) {
+                           QColor c;
+                           c.setHsv(h1+((h2-h1)*i)/bbw,
+                           s1+((s2-s1)*i)/bbw,
+                           v1+((v2-v1)*i)/bbw);
+                        p.setPen(c);
+                        p.drawLine(QLineF(x2-bw+i, y1, x2-bw+i, y2));
+                        }
                   }
             }
       //

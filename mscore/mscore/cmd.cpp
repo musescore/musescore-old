@@ -176,7 +176,7 @@ void Score::end1()
       _updateAll  = false;
       startLayout = 0;
       if (!noteEntryMode())
-            setPadState();
+            updateInputState();
       else
             emit inputCursorChanged();
       }
@@ -346,22 +346,25 @@ void ScoreView::cmdAddPitch1(int pitch, bool addFlag)
             return;
             }
       if (!noteEntryMode()) {
-            Element* e = _score->selection().element();
-            if (e == 0 || e->type() != NOTE) {
-                  _score->endCmd();
-                  return;
-                  }
-            Note* note = static_cast<Note*>(e);
-            Chord* chord = note->chord();
-            int key = _score->staff(chord->staffIdx())->key(chord->segment()->tick()).accidentalType();
-            int newTpc = pitch2tpc(pitch, key);
-            _score->undoChangePitch(note, pitch, newTpc, note->line(), note->fret(), note->string());
+            sm->postEvent(new CommandEvent("note-input"));
+            qApp->processEvents();
+            if (is.drumset())
+                  is.setDrumNote(pitch);
             }
-      else {
-//            const InputState& is = _score->inputState();
+      if (noteEntryMode()) {
             Note* note = _score->addPitch(pitch, addFlag);
             if (note)
                   adjustCanvasPosition(note, false);
+            }
+      else {
+            Element* e = _score->selection().element();
+            if (e && e->type() == NOTE) {
+                  Note* note = static_cast<Note*>(e);
+                  Chord* chord = note->chord();
+                  int key = _score->staff(chord->staffIdx())->key(chord->segment()->tick()).accidentalType();
+                  int newTpc = pitch2tpc(pitch, key);
+                  _score->undoChangePitch(note, pitch, newTpc, note->line(), note->fret(), note->string());
+                  }
             }
       _score->endCmd();
       }
@@ -3045,7 +3048,7 @@ void Score::cmdHalfDuration()
       else
             changeCRlen(cr, d);
       _is.setDuration(d);
-      setPadState();
+      updateInputState();
       nextInputPos(cr, false);
       }
 
@@ -3076,7 +3079,7 @@ void Score::cmdDoubleDuration()
       else
             changeCRlen(cr, d);
       _is.setDuration(d);
-      setPadState();
+      updateInputState();
       nextInputPos(cr, false);
       }
 

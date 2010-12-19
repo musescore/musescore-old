@@ -185,6 +185,7 @@ void Selection::deselectAll()
       if (_state == SEL_RANGE)
             _score->setUpdateAll();
       clear();
+      updateState();
       }
 
 //---------------------------------------------------------
@@ -298,7 +299,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
             Element* ee = e;
             if (ee->type() == NOTE)
                   ee = ee->parent();
-            setPlayPos(static_cast<ChordRest*>(ee)->tick());
+            setPlayPos(static_cast<ChordRest*>(ee)->segment()->tick());
             }
       if (debugMode)
             printf("select element <%s> type %d(state %d) staff %d\n",
@@ -693,31 +694,19 @@ void Selection::dump()
 
 //---------------------------------------------------------
 //   updateState
+///   update selection and input state
 //---------------------------------------------------------
-
-/**
- Update cis and padState.
-*/
 
 void Selection::updateState()
       {
       int n = _el.size();
-      if (n == 0) {
-            setState(SEL_NONE);
-            return;
-            }
-      if (_state == SEL_NONE)
-            _state = SEL_LIST;
-
       Element* e = element();
-      if (e && (e->type() == NOTE || e->type() == REST)) {
-            if (!_score->noteEntryMode())
-                  _score->setPadState(e);
-            e->setSelected(true);
-            if (e->type() == NOTE)
-                  e = e->parent();
-            _score->setInputTrack(e->track());
-            }
+      if (n == 0)
+            setState(SEL_NONE);
+      else if (_state == SEL_NONE)
+            _state = SEL_LIST;
+      if (!_score->noteEntryMode())
+             _score->setInputState(e);
       }
 
 //---------------------------------------------------------

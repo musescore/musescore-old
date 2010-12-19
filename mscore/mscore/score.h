@@ -518,8 +518,8 @@ class Score : public QObject {
       void toggleInvisible(Element* obj);
 
       void putNote(const QPointF& pos, bool replace);
-      void setPadState();
-      void setPadState(Element* obj);
+      void updateInputState();
+      void setInputState(Element* obj);
 
       void startCmd();        // start undoable command
       void endCmd();          // end undoable command

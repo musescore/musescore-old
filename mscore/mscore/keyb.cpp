@@ -221,7 +221,7 @@ void Score::padToggle(int n)
                   cmdSetBeamMode(BEAM_BEGIN32);
                   break;
             }
-      setPadState();
+      updateInputState();
       if (n < PAD_NOTE00 || n > PAD_DOTDOT)
             return;
 
@@ -236,7 +236,7 @@ void Score::padToggle(int n)
             }
 
       if (noteEntryMode() || !selection().isSingle()) {
-            setPadState();    // updates dot state
+            updateInputState();    // updates dot state
             return;
             }
 
@@ -247,7 +247,7 @@ void Score::padToggle(int n)
             Duration d = r->durationType();
             if (d.type() == Duration::V_MEASURE) {
                   _is.setDots(0);
-                  setPadState();    // updates dot state
+                  updateInputState();    // updates dot state
                   // return;
                   }
             }
@@ -270,11 +270,36 @@ void Score::padToggle(int n)
       }
 
 //---------------------------------------------------------
-//   setPadState
+//   enableInputToolbar
 //---------------------------------------------------------
 
-void Score::setPadState(Element* e)
+static void enableInputToolbar(bool val)
       {
+      static const char* actionNames[] = {
+            "pad-rest", "pad-dot", "pad-dotdot", "note-longa",
+            "note-breve", "pad-note-1", "pad-note-2", "pad-note-4",
+            "pad-note-8", "pad-note-16", "pad-note-32", "pad-note-64",
+            "voice-1", "voice-2", "voice-3", "voice-4",
+            "pad-acciaccatura", "pad-appoggiatura", "pad-grace4", "pad-grace16",
+            "pad-grace32", "beam-start", "beam-mid", "no-beam", "beam32",
+            "auto-beam"
+            };
+      for (unsigned i = 0; i < sizeof(actionNames)/sizeof(*actionNames); ++i) {
+            getAction(actionNames[i])->setEnabled(val);
+            }
+      }
+
+//---------------------------------------------------------
+//   setInputState
+//---------------------------------------------------------
+
+void Score::setInputState(Element* e)
+      {
+      bool enable = e && (e->type() == NOTE || e->type() == REST);
+      enableInputToolbar(enable);
+      if (e == 0)
+            return;
+
       _is.setDrumNote(-1);
 
       Drumset* drumset = 0;
@@ -300,12 +325,13 @@ void Score::setPadState(Element* e)
             _is.noteType = NOTE_NORMAL;
             }
       else {
-            _is.rest     = false;
+/*            _is.rest     = false;
             _is.setDots(0);
             _is.setDuration(Duration::V_INVALID);
             _is.noteType = NOTE_INVALID;
             _is.beamMode = BEAM_INVALID;
             _is.noteType = NOTE_NORMAL;
+*/
             }
       if (e->type() == NOTE || e->type() == REST) {
             const Instrument* instr   = e->staff()->part()->instr();
@@ -327,14 +353,14 @@ void Score::setPadState(Element* e)
             mscore->hideDrumTools();
             }
       _is.setDrumset(drumset);
-      setPadState();
+      updateInputState();
       }
 
 //---------------------------------------------------------
-//   setPadState
+//   updateInputState
 //---------------------------------------------------------
 
-void Score::setPadState()
+void Score::updateInputState()
       {
       getAction("pad-rest")->setChecked(_is.rest);
       getAction("pad-dot")->setChecked(_is.duration().dots() == 1);
