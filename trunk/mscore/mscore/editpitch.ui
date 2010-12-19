@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>635</width>
-    <height>400</height>
+    <height>420</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,6 +23,11 @@
    </item>
    <item>
     <widget class="QTableWidget" name="tableWidget">
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
      <property name="editTriggers">
       <set>QAbstractItemView::DoubleClicked</set>
      </property>
@@ -40,6 +45,12 @@
      </attribute>
      <attribute name="horizontalHeaderMinimumSectionSize">
       <number>20</number>
+     </attribute>
+     <attribute name="horizontalHeaderMinimumSectionSize">
+      <number>20</number>
+     </attribute>
+     <attribute name="horizontalHeaderDefaultSectionSize">
+      <number>45</number>
      </attribute>
      <row>
       <property name="text">

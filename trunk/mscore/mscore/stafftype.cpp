@@ -41,13 +41,6 @@ void initStaffTypes()
       staffTypes.append(st);
 
       st = new StaffTypeTablature("Tab");
-      st->setLines(6);
-      st->setLineDistance(Spatium(1.5));
-      st->setGenClef(true);
-      st->setGenKeysig(false);
-      st->setSlashStyle(false);
-      st->setShowBarlines(true);
-      st->setShowLedgerLines(false);
       staffTypes.append(st);
 
       st = new StaffTypePercussion("Percussion 5 lines");
@@ -169,13 +162,14 @@ void StaffTypeTablature::init()
       setShowBarlines(true);
       setShowLedgerLines(false);
       // for specific members
-      setDurationFontName("FreeSans");
-      setDurationFontSize(10.0);
+      setDurationFontName("MScoreTabulatureModern");
+      setDurationFontSize(15.0);
       setDurationFontUserY(0.0);
-      setFretFontName("FreeSans");
-      setFretFontSize(9.0);
+      setFretFontName("MScoreTabulatureModern");
+      setFretFontSize(10.0);
       setFretFontUserY(0.0);
       setGenDurations(false);
+      setGenTimesig(false);
       setLinesThrough(false);
       setOnLines(true);
       setUseNumbers(true);
