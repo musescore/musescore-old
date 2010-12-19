@@ -1,3 +1,9 @@
+19.dec (mi)
+      - added FontForge source for mscore1-20.ttf (mscore1-20.sfd)
+      - removed unused MScore1-20_new.ttf (anyway practically identical
+        to current mscore1-20.ttf)
+      - set TextStyleData::sizeIsSpatiumDependent default to false (as it is only
+        written to file if it is true)
 18.dec (lv)
       - MusicXML import/export of harmony
        (mi)
