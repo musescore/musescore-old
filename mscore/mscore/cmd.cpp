@@ -398,14 +398,11 @@ void Score::expandVoice(Segment* s, int track)
             if (ns->element(track))
                   break;
             }
-      Measure* m  = s->measure();
-      Fraction f;
-      if (ns)
-            f = Fraction::fromTicks(ns->tick() - s->tick());
-      else
-            f = Fraction::fromTicks(m->ticks() - s->rtick());
-printf("expand voice %s\n", qPrintable(f.print()));
-      addRest(_is.segment(), _is.track(), Duration(f), 0);
+      Measure* m = s->measure();
+      int ticks  = ns ? (ns->tick() - s->tick()) : (m->ticks() - s->rtick());
+      Duration d = ticks == m->ticks() ? Duration(Duration::V_MEASURE) : Duration(Fraction::fromTicks(ticks));
+
+      addRest(s, track, d, 0);
       }
 
 void Score::expandVoice()
