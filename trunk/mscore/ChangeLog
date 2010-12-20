@@ -1,5 +1,7 @@
 20.dec (ws)
       - fix #8149: Note entry voice2 crash for 5/4 measure
+       (la)
+      - fix #8024: "Layout | Page settings" crashes the program
 19.dec (lv)
       - fix #8327: Crash on tremolo between notes
        (ws)

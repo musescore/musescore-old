@@ -638,9 +638,9 @@ void Segment::setTick(int t)
 const QList<Lyrics*>* Segment::lyricsList(int staffIdx) const
       {
       if (!(subtype() & (SegChordRest | SegGrace))) {
-            printf("  bad segment type <%s><%s>\n", name(), subTypeName());
-            abort();
-//            return 0;
+            if (debugMode)
+                  printf("warning : lyricsList  bad segment type <%s><%s>\n", name(), subTypeName());
+            return 0;
             }
       int strack = staffIdx * VOICES;
       int etrack = strack + VOICES;
