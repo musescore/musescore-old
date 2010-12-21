@@ -1244,19 +1244,26 @@ void Score::upDown(bool up, UpDownMode mode)
                         {
                         Tablature* tab = part->instr()->tablature();
                         switch(mode) {
-                              case UP_DOWN_OCTAVE:
+                              case UP_DOWN_OCTAVE:          // move same note to next string, if possible
                                     {
                                     string += (up ? -1 : 1);
-                                    if (string < 0)
-                                          string = 0;
-                                    else if (string >= tab->strings())
-                                          string = tab->strings() - 1;
-                                    fret = 0;
-                                    newPitch      = tab->getPitch(string, fret);
-                                    Chord* chord  = oNote->chord();
-                                    Staff* estaff = staff(chord->staffIdx() + chord->staffMove());
-                                    KeySigEvent ks = estaff->key(chord->tick());
-                                    newTpc         = pitch2tpc(newPitch, ks.accidentalType());
+//                                    if (string < 0)
+//                                          string = 0;
+//                                    else if (string >= tab->strings())
+//                                          string = tab->strings() - 1;
+//                                    fret = 0;
+//                                    newPitch      = tab->getPitch(string, fret);
+//                                    Chord* chord  = oNote->chord();
+//                                    Staff* estaff = staff(chord->staffIdx() + chord->staffMove());
+//                                    KeySigEvent ks = estaff->key(chord->tick());
+//                                    newTpc         = pitch2tpc(newPitch, ks.accidentalType());
+                                    if(string < 0 || string >= tab->strings())
+                                          return;           // no next string to move to
+                                    fret = tab->fret(pitch, string);
+                                    if(fret == -1)          // can't have that note on that string
+                                          return;
+                                    newPitch = pitch;       // these didn't change
+                                    newTpc   = oNote->tpc();
                                     }
                                     break;
 
