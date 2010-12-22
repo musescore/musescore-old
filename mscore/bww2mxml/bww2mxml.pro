@@ -19,24 +19,19 @@
 #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #=============================================================================
 
-add_library(bww STATIC
-   lexer.cpp
-   parser.cpp
-   symbols.cpp
-   writer.cpp
-   )
-
-if (NOT MINGW)
-add_executable(bww2mxml
-   lexer.cpp
-   main.cpp
-   mxmlwriter.cpp
-   parser.cpp
-   symbols.cpp
-   writer.cpp
-   )
-endif (NOT MINGW)
-
-target_link_libraries(bww2mxml
-   ${QT_LIBRARIES}
-   )
+QT -= gui
+TARGET = bww2mxml
+CONFIG += console
+CONFIG -= app_bundle
+TEMPLATE = app
+SOURCES += lexer.cpp \
+    main.cpp \
+    mxmlwriter.cpp \
+    parser.cpp \
+    symbols.cpp \
+    writer.cpp
+HEADERS += lexer.h \
+    mxmlwriter.h \
+    parser.h \
+    symbols.h \
+    writer.h

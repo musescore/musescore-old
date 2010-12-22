@@ -1,5 +1,5 @@
 22.dec (lv)
-      - feature request #8355: bww import: framework
+      - feature request #8355: bww import: framework and bww to xml converter
        (la)
       - fix #8358: new score: create one measure more when pickup measure selected
       - fix #8347: tie in note entry does not work for voice > 1 after a barline (patch by fnbecker)
