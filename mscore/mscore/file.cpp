@@ -192,19 +192,18 @@ void MuseScore::loadFile()
          this,
          tr("MuseScore: Load Score"),
          lastOpenPath,
-         tr("All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.pdf *.ove *.bww *.GTP *.GP3 *.GP4);;"
-            "MuseScore Files (*.mscz *.mscx *.msc);;"
-            "MusicXML Files (*.xml *.mxl);;"
-            "MIDI Files (*.mid *.midi *.kar);;"
-            "Muse Data Files (*.md);;"
-            "Capella Files (*.cap);;"
-            "BB Files <experimental> (*.mgu *.MGU *.sgu *.SGU);;"
-            "PDF Files <experimental omr> (*.pdf);;"
-        	"Overture Files <experimental> (*.ove);;"
-            "Bagpipe Music Writer Files <experimental> (*.bww);;"
-            "Guitar Pro (*.GTP *.GP3 *.GP4 *.GP5);;"
-            "All Files (*)"
-            )
+         tr("All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.pdf *.ove *.bww *.GTP *.GP3 *.GP4);;")+
+         tr("MuseScore Files (*.mscz *.mscx *.msc);;")+
+         tr("MusicXML Files (*.xml *.mxl);;")+
+         tr("MIDI Files (*.mid *.midi *.kar);;")+
+         tr("Muse Data Files (*.md);;")+
+         tr("Capella Files (*.cap);;")+
+         tr("BB Files <experimental> (*.mgu *.MGU *.sgu *.SGU);;")+
+         tr("PDF Files <experimental omr> (*.pdf);;")+
+         tr("Overture Files <experimental> (*.ove);;")+
+         tr("Bagpipe Music Writer Files <experimental> (*.bww);;")+
+         tr("Guitar Pro (*.GTP *.GP3 *.GP4 *.GP5);;")+
+         tr("All Files (*)")
          );
       if (fn.isEmpty())
             return;
