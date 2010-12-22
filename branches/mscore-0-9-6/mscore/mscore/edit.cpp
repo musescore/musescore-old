@@ -1423,8 +1423,14 @@ void ScoreView::cmdTuplet(int n)
       else {
             QSet<ChordRest*> set;
             foreach(Element* e, _score->selection().elements()) {
-                  if (e->type() == NOTE)
-                        e = static_cast<Note*>(e)->chord();
+                  if (e->type() == NOTE) {
+                        Note* note = static_cast<Note*>(e); 
+                        if(note->noteType() != NOTE_NORMAL) { //no tuplet on grace notes
+                              _score->endCmd();
+                              return; 
+                              }
+                        e = note->chord();
+                        }
                   if (e->isChordRest()) {
                         ChordRest* cr = static_cast<ChordRest*>(e);
                         if(!set.contains(cr)) {

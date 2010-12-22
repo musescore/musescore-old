@@ -4,6 +4,7 @@
       - fix #8358: new score: create one measure more when pickup measure selected
       - fix #8347: tie in note entry does not work for voice > 1 after a barline (patch by fnbecker)
       - fix #8356: Configurable first page number (patch by Miwarre)
+      - fix #8308: Creating triplet in grace note leads to time corruption
 17.dec (la)
       - fix #6536: Position of stemslash in grace note chord
 15.dec (la)
