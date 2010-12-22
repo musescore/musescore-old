@@ -1,3 +1,5 @@
+22.dec (ws)
+      - fix #8358: new score: create one measure more when pickup measure selected
 21.dec (mi)
       - in tablatures, changed Ctrl-Up/Dn to move same note on next string
 20.dec (ws)

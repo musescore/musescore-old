@@ -81,15 +81,6 @@ Text::Text(const Text& e)
       _textStyle            = e._textStyle;
       _layoutToParentWidth  = e._layoutToParentWidth;
       cursor                = 0;
-
-      if (_editMode) {
-printf("clone in editMode================================================\n");
-            cursor = new QTextCursor(_doc);
-            cursor->setVisualNavigation(true);
-            cursor->setPosition(cursorPos);
-            cursor->setBlockFormat(e.cursor->blockFormat());
-            cursor->setCharFormat(e.cursor->charFormat());
-            }
       }
 
 Text::~Text()

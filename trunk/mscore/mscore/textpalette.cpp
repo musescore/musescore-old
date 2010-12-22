@@ -122,7 +122,7 @@ void TextPalette::populate()
                   // 16 bit
                   //
                   tb->setFont(f);
-                  if ((code & 0xffff0000) || fm.inFont(QChar(code))) {
+                  if (fm.inFontUcs4(code)) {
                         rowEmpty = false;
                         QString ss;
                         if (code & 0xffff0000) {
@@ -136,12 +136,14 @@ void TextPalette::populate()
                               tb->setToolTip(QString("0x%1").arg(code, 4, 16, QLatin1Char('0')));
                               tb->setIcon(codeIcon(ss,f));
                               }
+                        sg->setId(tb, code);
+                        tb->setEnabled(true);
                         }
                   else {
                         tb->setIcon(QIcon());
+                        tb->setEnabled(false);
+                        sg->setId(tb, -1);      // no glyph available
                         }
-
-                  sg->setId(tb, code);
                   }
             if (rowEmpty)
                   ++rowOffset;
