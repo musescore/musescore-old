@@ -179,16 +179,15 @@ void MuseScore::loadFile()
          this,
          tr("MuseScore: Load Score"),
          lastOpenPath,
-         tr("All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;"
-            "MuseScore Files (*.mscz *.mscx *.msc);;"
-            "MusicXML Files (*.xml *.mxl);;"
-            "MIDI Files (*.mid *.midi *.kar);;"
-            "Muse Data Files (*.md);;"
-            "Capella Files (*.cap);;"
-//            "LilyPond Files <experimental> (*.ly);;"
-            "BB Files <experimental> (*.mgu *.MGU *.sgu *.SGU);;"
-        	  "Overture Files <experimental> (*.ove);;"
-            "All Files (*)"
+         tr("All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;")+
+         tr("MuseScore Files (*.mscz *.mscx *.msc);;")+
+         tr("MusicXML Files (*.xml *.mxl);;")+
+         tr("MIDI Files (*.mid *.midi *.kar);;")+
+         tr("Muse Data Files (*.md);;")+
+         tr("Capella Files (*.cap);;")+
+         tr("BB Files <experimental> (*.mgu *.MGU *.sgu *.SGU);;")+
+         tr("Overture Files <experimental> (*.ove);;")+
+         tr("All Files (*)")
             )
          );
       if (fn.isEmpty())
@@ -580,6 +579,8 @@ void MuseScore::newFile()
       int pickupTimesigZ, pickupTimesigN;
       newWizard->timesig(&timesigZ, &timesigN);
       bool pickupMeasure = newWizard->pickupMeasure(&pickupTimesigZ, &pickupTimesigN);
+      if (pickupMeasure)
+	 	       measures += 1;
       KeySigEvent ks = newWizard->keysig();
 
       Score* score = new Score(defaultStyle);
