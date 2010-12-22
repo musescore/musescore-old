@@ -1570,8 +1570,8 @@ void Score::print(QPrinter* printer)
             const QList<Page*> pl = pages();
             int pages = pl.size();
 
-            int fromPage = printer->fromPage() - 1;
-            int toPage   = printer->toPage() - 1;
+            int fromPage = printer->fromPage() - 1 - pageFormat()->_pageOffset;
+            int toPage   = printer->toPage() - 1 - pageFormat()->_pageOffset;
             if (fromPage < 0)
                   fromPage = 0;
             if ((toPage < 0) || (toPage >= pages))

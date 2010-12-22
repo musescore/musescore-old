@@ -55,6 +55,14 @@ Page::~Page()
       }
 
 //---------------------------------------------------------
+//   isOdd
+//---------------------------------------------------------
+bool Page::isOdd() const
+      {
+      return (_no+1 + _score->pageFormat()->_pageOffset) & 1;
+      }
+
+//---------------------------------------------------------
 //   tm
 //---------------------------------------------------------
 
@@ -119,7 +127,7 @@ void Page::layout()
       setbbox(QRectF(0.0, 0.0, loWidth(), loHeight()));
 
       // add page number
-      int n = no() + 1 + _score->_pageOffset;
+      int n = no() + 1 + _score->pageFormat()->_pageOffset;
       if (score()->styleB(ST_showPageNumber) && ((n > 1) || score()->styleB(ST_showPageNumberOne))) {
             int subtype = (n & 1) ? TEXT_PAGE_NUMBER_ODD : TEXT_PAGE_NUMBER_EVEN;
             int style   = (n & 1) ? TEXT_STYLE_PAGE_NUMBER_ODD : TEXT_STYLE_PAGE_NUMBER_EVEN;
@@ -282,7 +290,8 @@ PageFormat::PageFormat()
    oddTopMargin(10.0 / INCH),
    oddBottomMargin(20.0 / INCH),
    landscape(preferences.landscape),
-   twosided(preferences.twosided)
+   twosided(preferences.twosided),
+   _pageOffset(0)
       {
       }
 
@@ -389,6 +398,8 @@ void PageFormat::read(QDomElement e)
                   size = paperSizeNameToIndex("Custom");
                   _width = val.toDouble() * .5 / PPI;
                   }
+            else if (tag == "page-offset")
+                  _pageOffset = val.toInt();
             else
                   domError(e);
             }
@@ -508,6 +519,8 @@ void PageFormat::write(Xml& xml)
       xml.tag("bottom-margin", oddBottomMargin * t);
       xml.etag();
 
+      xml.tag("page-offset", _pageOffset);
+      
       xml.etag();
       }
 

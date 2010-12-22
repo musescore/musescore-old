@@ -60,6 +60,7 @@ struct PageFormat {
       double oddBottomMargin;
       bool landscape;
       bool twosided;
+      int _pageOffset;              ///< Offset for page numbers.
 
    public:
       PageFormat();
@@ -70,6 +71,7 @@ struct PageFormat {
       void readMusicXML(QDomElement, double);
       void write(Xml&);
       void writeMusicXML(Xml&, double);
+      int pageOffset() const { return _pageOffset; }
       };
 
 //---------------------------------------------------------
@@ -98,7 +100,7 @@ class Page : public Element {
 
       int no() const                     { return _no;        }
       void setNo(int n);
-      bool isOdd() const                 { return (_no+1) & 1;    }
+      bool isOdd() const;
 
       double tm() const;            // margins in pixel
       double bm() const;

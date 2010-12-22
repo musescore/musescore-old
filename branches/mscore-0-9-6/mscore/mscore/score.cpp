@@ -278,7 +278,6 @@ Score::Score(const Style& s)
       _creditsRead    = false;
       _defaultsRead   = false;
       rights          = 0;
-      _pageOffset     = 0;
       _tempomap       = new AL::TempoMap;
       _sigmap         = new AL::TimeSigMap;
       _sigmap->add(0, Fraction(4, 4));
