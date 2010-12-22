@@ -1,3 +1,5 @@
+22.dec (la)
+      - fix #8358: new score: create one measure more when pickup measure selected
 17.dec (la)
       - fix #6536: Position of stemslash in grace note chord
 15.dec (la)
