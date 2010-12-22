@@ -277,7 +277,10 @@ void setDefaultStyle()
       AS(TextStyle(TR( "Technik"), ff, 12, false, true, false,
          ALIGN_LEFT | ALIGN_BASELINE, 0.0, -2.0, OS));
 
-      AS(TextStyle(TR( "Tempo"), ff, 12, true, false, false,
+//      AS(TextStyle(TR( "Tempo"), ff, 12, true, false, false,
+// (temporarly) switch bold off as Qt cannot show bold glyphs with codepoint > 16bit
+// (used for musical symbols)
+      AS(TextStyle(TR( "Tempo"), ff, 12, false, false, false,
          ALIGN_LEFT | ALIGN_BASELINE, 0, -4.0, OS, 0, 0, true, .0, .0, 0, Qt::black, false, true));
 
       AS(TextStyle(TR( "Metronome"), ff, 12, true, false, false, ALIGN_LEFT));

@@ -1517,7 +1517,7 @@ TileSet* StyleHelper::roundCorner(const QColor &color, int size) const
 
       if (!tileSet) {
             QImage image(size*2, size*2,  QImage::Format_ARGB32_Premultiplied);
-            image.fill( Qt::transparent );
+            image.fill(Qt::transparent);
 
             QPainter p(&image);
             p.setRenderHint(QPainter::Antialiasing);

@@ -63,7 +63,16 @@ void TempoText::read(QDomElement e)
             else if (!Text::readProperties(e))
                   domError(e);
             }
-      cursorPos = 0;
+      if (score()->mscVersion() < 119) {
+            //
+            // Reset text in old version to
+            // style.
+            //
+            if (_textStyle != TEXT_STYLE_INVALID) {
+                  setStyled(true);
+                  styleChanged();
+                  }
+            }
       }
 
 //---------------------------------------------------------

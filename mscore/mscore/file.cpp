@@ -198,7 +198,6 @@ void MuseScore::loadFile()
             "MIDI Files (*.mid *.midi *.kar);;"
             "Muse Data Files (*.md);;"
             "Capella Files (*.cap);;"
-//            "LilyPond Files <experimental> (*.ly);;"
             "BB Files <experimental> (*.mgu *.MGU *.sgu *.SGU);;"
             "PDF Files <experimental omr> (*.pdf);;"
         	"Overture Files <experimental> (*.ove);;"
@@ -265,6 +264,10 @@ QString Score::createDefaultFileName()
       Text* t = getText(TEXT_TITLE);
       if (t)
             fn = t->getText();
+      //
+      // special characters in filenames are a constant source
+      // of trouble, this replaces some of them common in german:
+      //
       fn = fn.replace(QChar(' '),  "_");
       fn = fn.replace(QChar('\n'), "_");
       fn = fn.replace(QChar(0xe4), "ae");
@@ -627,6 +630,8 @@ void MuseScore::newFile()
       int measures       = newWizard->measures();
       Fraction timesig   = newWizard->timesig();
       bool pickupMeasure = newWizard->pickupMeasure(&pickupTimesigZ, &pickupTimesigN);
+      if (pickupMeasure)
+            measures += 1;
       KeySigEvent ks     = newWizard->keysig();
 
       Score* score = new Score(defaultStyle);
@@ -858,7 +863,7 @@ void MuseScore::newFile()
             TempoText* tt = new TempoText(score);
 
             QString s = symbols[0][note4Sym].toString();
-            tt->setText(QString("%1 = %2 ").arg(s).arg(tempo));
+            tt->setText(QString("%1 = %2").arg(s).arg(tempo));
             tt->setTempo(tempo/60.0);
             tt->setTrack(0);
             Segment* seg = score->firstMeasure()->first(SegChordRest);
