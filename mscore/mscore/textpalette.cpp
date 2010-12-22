@@ -122,7 +122,7 @@ void TextPalette::populate()
                   // 16 bit
                   //
                   tb->setFont(f);
-                  if (fm.inFontUcs4(code)) {
+                  if (fm.inFont(code)) {
                         rowEmpty = false;
                         QString ss;
                         if (code & 0xffff0000) {
