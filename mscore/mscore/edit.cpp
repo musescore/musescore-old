@@ -681,8 +681,9 @@ void Score::cmdAddTie()
       Chord* chord  = note->chord();
       if (noteEntryMode()) {
             if (_is.cr() == 0) {
-                  printf("cmdAddTie: no pos\n");
-                  return;
+                  if(debugMode)
+                        printf("cmdAddTie: no pos\n");
+                  expandVoice();
                   }
             startCmd();
             Note* n = addPitch(note->pitch(), false);
