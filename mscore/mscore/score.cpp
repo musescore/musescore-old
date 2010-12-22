@@ -404,6 +404,10 @@ bool Score::read(QString name)
                   if(!importOve(name))
             		        return false;
 				          }
+            else if (csl == "bww") {
+                  if (!importBww(name))
+                        return false;
+                  }
             else {
                   printf("unknown file suffix <%s>, name <%s>\n", qPrintable(cs), qPrintable(name));
                   return false;

@@ -179,12 +179,13 @@ void MuseScore::loadFile()
          this,
          tr("MuseScore: Load Score"),
          lastOpenPath,
-         tr("All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;")+
+         tr("All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;")+
          tr("MuseScore Files (*.mscz *.mscx *.msc);;")+
          tr("MusicXML Files (*.xml *.mxl);;")+
          tr("MIDI Files (*.mid *.midi *.kar);;")+
          tr("Muse Data Files (*.md);;")+
          tr("Capella Files (*.cap);;")+
+         tr("Bagpipe Music Writer Files (*.bww);;")+
          tr("BB Files <experimental> (*.mgu *.MGU *.sgu *.SGU);;")+
          tr("Overture Files <experimental> (*.ove);;")+
          tr("All Files (*)")            
