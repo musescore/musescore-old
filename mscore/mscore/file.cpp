@@ -187,8 +187,7 @@ void MuseScore::loadFile()
          tr("Capella Files (*.cap);;")+
          tr("BB Files <experimental> (*.mgu *.MGU *.sgu *.SGU);;")+
          tr("Overture Files <experimental> (*.ove);;")+
-         tr("All Files (*)")
-            )
+         tr("All Files (*)")            
          );
       if (fn.isEmpty())
             return;
