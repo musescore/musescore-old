@@ -372,7 +372,6 @@ class Score : public QObject {
       int curTrack;
 
       TextC* rights;                ///< Copyright printed at bottom of page
-      int _pageOffset;              ///< Offset for page numbers.
 
       void cmdAppendMeasures(int);
       void cmdInsertMeasures(int);

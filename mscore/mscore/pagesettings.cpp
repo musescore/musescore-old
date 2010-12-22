@@ -180,6 +180,7 @@ void PageSettings::setScore(Score* s)
       connect(evenPageRightMargin, SIGNAL(valueChanged(double)), SLOT(ermChanged(double)));
       connect(pageGroup, SIGNAL(activated(int)), SLOT(pageFormatSelected(int)));
       connect(spatiumEntry, SIGNAL(valueChanged(double)), SLOT(spatiumChanged(double)));
+      connect(pageOffsetEntry, SIGNAL(valueChanged(int)), SLOT(pageOffsetChanged(int)));
       }
 
 //---------------------------------------------------------
@@ -201,6 +202,7 @@ void PageSettings::setValues(Score* sc)
       spatiumEntry->blockSignals(true);
       pageWidth->blockSignals(true);
       pageHeight->blockSignals(true);
+      pageOffsetEntry->blockSignals(true);
 
       const char* suffix = mm ? "mm" : "in";
       oddPageTopMargin->setSuffix(suffix);
@@ -256,6 +258,8 @@ void PageSettings::setValues(Score* sc)
 
       landscape->setChecked(pf->landscape);
       twosided->setChecked(pf->twosided);
+      
+      pageOffsetEntry->setValue(pf->_pageOffset + 1);
 
       pageWidth->blockSignals(false);
       pageHeight->blockSignals(false);
@@ -268,6 +272,7 @@ void PageSettings::setValues(Score* sc)
       evenPageLeftMargin->blockSignals(false);
       evenPageRightMargin->blockSignals(false);
       spatiumEntry->blockSignals(false);
+      pageOffsetEntry->blockSignals(false);
       }
 
 //---------------------------------------------------------
@@ -336,6 +341,7 @@ void PageSettings::apply()
       pf.oddRightMargin   = oddPageRightMargin->value() * f;
       pf.landscape        = landscape->isChecked();
       pf.twosided         = twosided->isChecked();
+      pf._pageOffset      = pageOffsetEntry->value() - 1;
 
       double sp = spatiumEntry->value() * f1;
 
@@ -480,6 +486,17 @@ void PageSettings::spatiumChanged(double val)
       {
       val *= mmUnit ? DPMM : DPI;
       preview->score()->setSpatium(val);
+      preview->layout();
+      }
+
+//---------------------------------------------------------
+//   pageOffsetChanged
+//---------------------------------------------------------
+
+void PageSettings::pageOffsetChanged(int val)
+      {
+      PageFormat* f = preview->score()->pageFormat();
+      f->_pageOffset = val - 1;
       preview->layout();
       }
 

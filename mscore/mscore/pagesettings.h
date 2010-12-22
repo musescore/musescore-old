@@ -60,6 +60,7 @@ class PageSettings : public QDialog, private Ui::PageSettingsBase {
       void spatiumChanged(double val);
       void pageHeightChanged(double);
       void pageWidthChanged(double);
+      void pageOffsetChanged(int val);
 
    public:
       PageSettings(QWidget* parent = 0);
