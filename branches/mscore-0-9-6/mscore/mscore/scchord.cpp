@@ -24,6 +24,7 @@
 #include "script.h"
 #include "harmony.h"
 #include "measure.h"
+#include "lyrics.h"
 
 Q_DECLARE_METATYPE(Chord);
 Q_DECLARE_METATYPE(Chord*);
@@ -32,10 +33,10 @@ Q_DECLARE_METATYPE(Score*);
 Q_DECLARE_METATYPE(Note*);
 
 static const char* const function_names_chord[] = {
-      "tickLen", "addHarmony", "topNote", "addNote", "removeNote", "notes", "note", "type"
+      "tickLen", "addHarmony", "topNote", "addNote", "removeNote", "notes", "note", "type", "lyrics"
       };
 static const int function_lengths_chord[] = {
-      1, 1, 0, 1, 1, 0, 1, 0
+      1, 1, 0, 1, 1, 0, 1, 0, 0
       };
 static const QScriptValue::PropertyFlags flags_chord[] = {
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
@@ -45,11 +46,12 @@ static const QScriptValue::PropertyFlags flags_chord[] = {
       QScriptValue::SkipInEnumeration,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::ReadOnly,
       QScriptValue::SkipInEnumeration,
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::ReadOnly,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::ReadOnly
       };
 
 ScriptInterface chordInterface = {
-      8,
+      9,
       function_names_chord,
       function_lengths_chord,
       flags_chord
@@ -156,6 +158,12 @@ static QScriptValue prototype_Chord_call(QScriptContext* context, QScriptEngine*
                   break;
             case 7:     // "type"
                   return qScriptValueFromValue(context->engine(), int(chord->noteType()));
+            case 8:     // "lyric"
+                  QStringList ll; 
+                  LyricsList * lyrlist = chord->segment()->lyricsList(0);
+	                for (ciLyrics lix = lyrlist->begin(); lix != lyrlist->end(); ++lix)      
+                      ll.append((*lix)->getText());
+                  return qScriptValueFromValue(context->engine(), ll);
             }
       return context->throwError(QScriptContext::TypeError,
          QString::fromLatin1("Chord.%0(): bad argument count or value")
