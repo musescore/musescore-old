@@ -46,14 +46,14 @@ static const char* const function_names_score[] = {
       "load", "save",
       "setExpandRepeat", "appendPart", "appendMeasures",
       "pages", "measures", "parts", "part", "startUndo", "endUndo", "setStyle", "hasLyrics", "hasHarmonies",
-      "staves", "keysig", "duration", "pageFormat"
+      "staves", "keysig", "duration", "pageFormat", "source"
       };
 static const int function_lengths_score[] = {
       1, 1, 1, 1,
       1, 6,
       1, 1, 1,
       0, 0, 0, 1, 0, 0, 2, 0, 0,
-      0, 0, 0, 0
+      0, 0, 0, 0, 1
       };
 
 static const QScriptValue::PropertyFlags flags_score[] = {
@@ -83,6 +83,7 @@ static const QScriptValue::PropertyFlags flags_score[] = {
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
       };
 
 ScriptInterface scoreInterface = {
@@ -405,6 +406,17 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
             case 21:   //pageFormat
                   if (argc == 0){
                     return qScriptValueFromValue(context->engine(), score->pageFormat());
+                  }
+                  break;
+            case 22:   //source
+                  if (argc == 0) {           
+                        return qScriptValueFromValue(context->engine(), score->source());
+                        }
+                  else if (argc == 1) {
+                        QString s = qscriptvalue_cast<QString>(context->argument(0));
+                        if (s != 0)
+                              score->setSource(s);
+                        return context->engine()->undefinedValue();
                   }
                   break;
             }
