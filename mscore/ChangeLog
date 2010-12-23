@@ -1,3 +1,5 @@
+23.dec (ws)
+      - fix #8365: Create tuplet crash
 22.dec (la)
       - fix #8347: tie in note entry does not work for voice > 1 after a barline (patch by fnbecker)
       - fix #8308: Creating triplet in grace note leads to time corruption

@@ -1475,10 +1475,10 @@ void ScoreView::cmdTuplet(int n)
             QSet<ChordRest*> set;
             foreach(Element* e, _score->selection().elements()) {
                   if (e->type() == NOTE) {
-                        Note* note = static_cast<Note*>(e); 
+                        Note* note = static_cast<Note*>(e);
                         if(note->noteType() != NOTE_NORMAL) { //no tuplet on grace notes
                               _score->endCmd();
-                              return; 
+                              return;
                               }
                         e = note->chord();
                         }
@@ -1585,7 +1585,6 @@ printf("createTuplet at %d <%s> duration <%s> ratio <%s> baseLen <%s>\n",
             foreach(Note* oldNote, static_cast<Chord*>(ocr)->notes()) {
                   Note* note = new Note(this);
                   note->setPitch(oldNote->pitch(), oldNote->tpc());
-                  note->setTrack(track);
                   cr->add(note);
                   }
             }
