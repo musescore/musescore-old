@@ -122,7 +122,12 @@ void TextPalette::populate()
                   // 16 bit
                   //
                   tb->setFont(f);
-                  if (fm.inFont(code)) {
+#if QT_VERSION >= 0x040800
+                  if (fm.inFontUcs4(code))
+#else
+                  if (fm.inFont(code) || (code & 0xffff0000))
+#endif
+                        {
                         rowEmpty = false;
                         QString ss;
                         if (code & 0xffff0000) {

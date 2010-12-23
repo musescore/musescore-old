@@ -47,7 +47,7 @@ extern bool useFactorySettings;
 extern bool externalStyle;
 extern QString iconGroup;
 
-static QString appStyleFile;
+static const char* appStyleFile;
 
 //---------------------------------------------------------
 //   PeriodItem
@@ -123,9 +123,6 @@ void Preferences::init()
       enableMidiInput    = true;
       playNotes          = true;
 
-      lPort              = "";
-      rPort              = "";
-      soundFont          = "";
       showNavigator      = true;
       showPlayPanel      = false;
       showStatusBar      = true;
@@ -147,7 +144,6 @@ void Preferences::init()
       alsaPeriodSize     = 1024;
       alsaFragments      = 3;
       portaudioDevice    = -1;
-      portMidiInput      = "";
       midiPorts          = 2;
       rememberLastMidiConnections = true;
 
@@ -427,7 +423,6 @@ void Preferences::read()
 
       useOsc                 = s.value("useOsc", false).toBool();
       oscPort                = s.value("oscPort", 5282).toInt();
-//      appStyleFile           = s.value("appStyle", ":/data/appstyle-dark.css").toString();
       styleName              = s.value("style", "dark").toString();
       if (styleName == "light") {
             iconGroup = "icons/";
@@ -1237,7 +1232,6 @@ void PreferenceDialog::apply()
 
       preferences.useOsc  = oscServer->isChecked();
       preferences.oscPort = oscPort->value();
-      // preferences.appStyleFile = styleFile->text();
       if (styleName->currentIndex() == 0) {
             iconGroup = "icons-dark/";
             appStyleFile = ":/data/appstyle-dark.css";
@@ -1506,6 +1500,6 @@ void PreferenceDialog::midiRemoteControlClearClicked()
 void PreferenceDialog::selectSoundFont()
       {
       QString s = ::getSoundFont(soundFont->text());
-            soundFont->setText(s);
+      soundFont->setText(s);
       }
 
