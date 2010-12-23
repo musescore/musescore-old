@@ -878,13 +878,6 @@ void Score::cmdRemoveStaff(int staffIdx)
                               undoRemoveElement(e);
                               }
                         break;
-                  case SLUR:
-                        {
-                        Slur* slur = static_cast<Slur*>(e);
-                        if ((slur->staffIdx() == staffIdx) || (slur->staffIdx2() == staffIdx))
-                              undoRemoveElement(slur);
-                        }
-                        break;
                   default:
                         break;
                   }
