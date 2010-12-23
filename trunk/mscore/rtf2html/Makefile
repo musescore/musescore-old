@@ -30,24 +30,27 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /usr/bin/cmake
+CMAKE_COMMAND = "/Applications/CMake 2.8-2.app/Contents/bin/cmake"
 
 # The command to remove a file.
-RM = /usr/bin/cmake -E remove -f
+RM = "/Applications/CMake 2.8-2.app/Contents/bin/cmake" -E remove -f
+
+# The program to use to edit the cache.
+CMAKE_EDIT_COMMAND = "/Applications/CMake 2.8-2.app/Contents/bin/ccmake"
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ws/mscore/mscore/trunk/mscore
+CMAKE_SOURCE_DIR = /Users/ws/mscore-1/trunk/mscore
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ws/mscore/mscore/trunk/mscore
+CMAKE_BINARY_DIR = /Users/ws/mscore-1/trunk/mscore
 
 #=============================================================================
 # Targets provided globally by CMake.
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running interactive CMake command-line interface..."
-	/usr/bin/cmake -i .
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
+	"/Applications/CMake 2.8-2.app/Contents/bin/ccmake" -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -57,19 +60,19 @@ edit_cache/fast: edit_cache
 # Special rule for the target install
 install: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/usr/bin/cmake -P cmake_install.cmake
+	"/Applications/CMake 2.8-2.app/Contents/bin/cmake" -P cmake_install.cmake
 .PHONY : install
 
 # Special rule for the target install
 install/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/usr/bin/cmake -P cmake_install.cmake
+	"/Applications/CMake 2.8-2.app/Contents/bin/cmake" -P cmake_install.cmake
 .PHONY : install/fast
 
 # Special rule for the target install/local
 install/local: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+	"/Applications/CMake 2.8-2.app/Contents/bin/cmake" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local
 
 # Special rule for the target install/local
@@ -79,7 +82,7 @@ install/local/fast: install/local
 # Special rule for the target install/strip
 install/strip: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+	"/Applications/CMake 2.8-2.app/Contents/bin/cmake" -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
 .PHONY : install/strip
 
 # Special rule for the target install/strip
@@ -98,7 +101,7 @@ list_install_components/fast: list_install_components
 # Special rule for the target package
 package: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool..."
-	cd /home/ws/mscore/mscore/trunk/mscore && /usr/bin/cpack --config ./CPackConfig.cmake
+	cd /Users/ws/mscore-1/trunk/mscore && "/Applications/CMake 2.8-2.app/Contents/bin/cpack" --config ./CPackConfig.cmake
 .PHONY : package
 
 # Special rule for the target package
@@ -108,7 +111,7 @@ package/fast: package
 # Special rule for the target package_source
 package_source:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Run CPack packaging tool for source..."
-	cd /home/ws/mscore/mscore/trunk/mscore && /usr/bin/cpack --config ./CPackSourceConfig.cmake /home/ws/mscore/mscore/trunk/mscore/CPackSourceConfig.cmake
+	cd /Users/ws/mscore-1/trunk/mscore && "/Applications/CMake 2.8-2.app/Contents/bin/cpack" --config ./CPackSourceConfig.cmake /Users/ws/mscore-1/trunk/mscore/CPackSourceConfig.cmake
 .PHONY : package_source
 
 # Special rule for the target package_source
@@ -118,7 +121,7 @@ package_source/fast: package_source
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	"/Applications/CMake 2.8-2.app/Contents/bin/cmake" -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -127,14 +130,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/ws/mscore/mscore/trunk/mscore && $(CMAKE_COMMAND) -E cmake_progress_start /home/ws/mscore/mscore/trunk/mscore/CMakeFiles /home/ws/mscore/mscore/trunk/mscore/rtf2html/CMakeFiles/progress.marks
-	cd /home/ws/mscore/mscore/trunk/mscore && $(MAKE) -f CMakeFiles/Makefile2 rtf2html/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ws/mscore/mscore/trunk/mscore/CMakeFiles 0
+	cd /Users/ws/mscore-1/trunk/mscore && $(CMAKE_COMMAND) -E cmake_progress_start /Users/ws/mscore-1/trunk/mscore/CMakeFiles /Users/ws/mscore-1/trunk/mscore/rtf2html/CMakeFiles/progress.marks
+	cd /Users/ws/mscore-1/trunk/mscore && $(MAKE) -f CMakeFiles/Makefile2 rtf2html/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/ws/mscore-1/trunk/mscore/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/ws/mscore/mscore/trunk/mscore && $(MAKE) -f CMakeFiles/Makefile2 rtf2html/clean
+	cd /Users/ws/mscore-1/trunk/mscore && $(MAKE) -f CMakeFiles/Makefile2 rtf2html/clean
 .PHONY : clean
 
 # The main clean target
@@ -143,22 +146,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/ws/mscore/mscore/trunk/mscore && $(MAKE) -f CMakeFiles/Makefile2 rtf2html/preinstall
+	cd /Users/ws/mscore-1/trunk/mscore && $(MAKE) -f CMakeFiles/Makefile2 rtf2html/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/ws/mscore/mscore/trunk/mscore && $(MAKE) -f CMakeFiles/Makefile2 rtf2html/preinstall
+	cd /Users/ws/mscore-1/trunk/mscore && $(MAKE) -f CMakeFiles/Makefile2 rtf2html/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/ws/mscore/mscore/trunk/mscore && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /Users/ws/mscore-1/trunk/mscore && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 rtf2html/CMakeFiles/rtf2html.dir/rule:
-	cd /home/ws/mscore/mscore/trunk/mscore && $(MAKE) -f CMakeFiles/Makefile2 rtf2html/CMakeFiles/rtf2html.dir/rule
+	cd /Users/ws/mscore-1/trunk/mscore && $(MAKE) -f CMakeFiles/Makefile2 rtf2html/CMakeFiles/rtf2html.dir/rule
 .PHONY : rtf2html/CMakeFiles/rtf2html.dir/rule
 
 # Convenience name for target.
@@ -167,7 +170,7 @@ rtf2html: rtf2html/CMakeFiles/rtf2html.dir/rule
 
 # fast build rule for target.
 rtf2html/fast:
-	cd /home/ws/mscore/mscore/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/build
+	cd /Users/ws/mscore-1/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/build
 .PHONY : rtf2html/fast
 
 fmt_opts.o: fmt_opts.cpp.o
@@ -175,7 +178,7 @@ fmt_opts.o: fmt_opts.cpp.o
 
 # target to build an object file
 fmt_opts.cpp.o:
-	cd /home/ws/mscore/mscore/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/fmt_opts.cpp.o
+	cd /Users/ws/mscore-1/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/fmt_opts.cpp.o
 .PHONY : fmt_opts.cpp.o
 
 fmt_opts.i: fmt_opts.cpp.i
@@ -183,7 +186,7 @@ fmt_opts.i: fmt_opts.cpp.i
 
 # target to preprocess a source file
 fmt_opts.cpp.i:
-	cd /home/ws/mscore/mscore/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/fmt_opts.cpp.i
+	cd /Users/ws/mscore-1/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/fmt_opts.cpp.i
 .PHONY : fmt_opts.cpp.i
 
 fmt_opts.s: fmt_opts.cpp.s
@@ -191,7 +194,7 @@ fmt_opts.s: fmt_opts.cpp.s
 
 # target to generate assembly for a file
 fmt_opts.cpp.s:
-	cd /home/ws/mscore/mscore/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/fmt_opts.cpp.s
+	cd /Users/ws/mscore-1/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/fmt_opts.cpp.s
 .PHONY : fmt_opts.cpp.s
 
 rtf2html.o: rtf2html.cpp.o
@@ -199,7 +202,7 @@ rtf2html.o: rtf2html.cpp.o
 
 # target to build an object file
 rtf2html.cpp.o:
-	cd /home/ws/mscore/mscore/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/rtf2html.cpp.o
+	cd /Users/ws/mscore-1/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/rtf2html.cpp.o
 .PHONY : rtf2html.cpp.o
 
 rtf2html.i: rtf2html.cpp.i
@@ -207,7 +210,7 @@ rtf2html.i: rtf2html.cpp.i
 
 # target to preprocess a source file
 rtf2html.cpp.i:
-	cd /home/ws/mscore/mscore/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/rtf2html.cpp.i
+	cd /Users/ws/mscore-1/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/rtf2html.cpp.i
 .PHONY : rtf2html.cpp.i
 
 rtf2html.s: rtf2html.cpp.s
@@ -215,7 +218,7 @@ rtf2html.s: rtf2html.cpp.s
 
 # target to generate assembly for a file
 rtf2html.cpp.s:
-	cd /home/ws/mscore/mscore/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/rtf2html.cpp.s
+	cd /Users/ws/mscore-1/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/rtf2html.cpp.s
 .PHONY : rtf2html.cpp.s
 
 rtf_keyword.o: rtf_keyword.cpp.o
@@ -223,7 +226,7 @@ rtf_keyword.o: rtf_keyword.cpp.o
 
 # target to build an object file
 rtf_keyword.cpp.o:
-	cd /home/ws/mscore/mscore/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/rtf_keyword.cpp.o
+	cd /Users/ws/mscore-1/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/rtf_keyword.cpp.o
 .PHONY : rtf_keyword.cpp.o
 
 rtf_keyword.i: rtf_keyword.cpp.i
@@ -231,7 +234,7 @@ rtf_keyword.i: rtf_keyword.cpp.i
 
 # target to preprocess a source file
 rtf_keyword.cpp.i:
-	cd /home/ws/mscore/mscore/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/rtf_keyword.cpp.i
+	cd /Users/ws/mscore-1/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/rtf_keyword.cpp.i
 .PHONY : rtf_keyword.cpp.i
 
 rtf_keyword.s: rtf_keyword.cpp.s
@@ -239,7 +242,7 @@ rtf_keyword.s: rtf_keyword.cpp.s
 
 # target to generate assembly for a file
 rtf_keyword.cpp.s:
-	cd /home/ws/mscore/mscore/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/rtf_keyword.cpp.s
+	cd /Users/ws/mscore-1/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/rtf_keyword.cpp.s
 .PHONY : rtf_keyword.cpp.s
 
 rtf_table.o: rtf_table.cpp.o
@@ -247,7 +250,7 @@ rtf_table.o: rtf_table.cpp.o
 
 # target to build an object file
 rtf_table.cpp.o:
-	cd /home/ws/mscore/mscore/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/rtf_table.cpp.o
+	cd /Users/ws/mscore-1/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/rtf_table.cpp.o
 .PHONY : rtf_table.cpp.o
 
 rtf_table.i: rtf_table.cpp.i
@@ -255,7 +258,7 @@ rtf_table.i: rtf_table.cpp.i
 
 # target to preprocess a source file
 rtf_table.cpp.i:
-	cd /home/ws/mscore/mscore/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/rtf_table.cpp.i
+	cd /Users/ws/mscore-1/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/rtf_table.cpp.i
 .PHONY : rtf_table.cpp.i
 
 rtf_table.s: rtf_table.cpp.s
@@ -263,7 +266,7 @@ rtf_table.s: rtf_table.cpp.s
 
 # target to generate assembly for a file
 rtf_table.cpp.s:
-	cd /home/ws/mscore/mscore/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/rtf_table.cpp.s
+	cd /Users/ws/mscore-1/trunk/mscore && $(MAKE) -f rtf2html/CMakeFiles/rtf2html.dir/build.make rtf2html/CMakeFiles/rtf2html.dir/rtf_table.cpp.s
 .PHONY : rtf_table.cpp.s
 
 # Help Target
@@ -304,6 +307,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/ws/mscore/mscore/trunk/mscore && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /Users/ws/mscore-1/trunk/mscore && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

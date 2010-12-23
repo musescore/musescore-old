@@ -602,7 +602,6 @@ void StyleHelper::drawInverseGlow(
         QPainter &p, const QColor &color,
         int pad, int size, int rsize) const
     {
-
               const QRectF r(pad, pad, size, size);
               const qreal m( qreal(size)*0.5 );
 
@@ -736,7 +735,7 @@ QPixmap StyleHelper::radialGradient(const QColor &color, int width, int height) 
             radialColor.setAlpha(0);
             gradient.setColorAt(1, radialColor);
             QPainter p(&image);
-            p.scale(width/128.0,1);
+            p.scale(width/128.0, 1);
             p.fillRect(QRect(0,0,128,height), gradient);
             p.end();
             pixmap = new QPixmap(QPixmap::fromImage(image));
@@ -768,17 +767,18 @@ const QColor& StyleHelper::backgroundRadialColor(const QColor &color) const
 //   renderWindowBackground
 //---------------------------------------------------------
 
-void StyleHelper::renderWindowBackground(QPainter *p, const QRect &clipRect, const QWidget *widget,
+void StyleHelper::renderWindowBackground(QPainter* p, const QRect& clipRect, const QWidget* widget,
    const QWidget* window, const QColor& color, int y_shift, int gradientHeight) const
       {
       // get coordinates relative to the client area
       // this is stupid. One could use mapTo if this was taking const QWidget* and not
       // QWidget* as argument.
+
       const QWidget* w( widget );
       int x(0);
       int y(-y_shift);
 
-      while ( w != window && !w->isWindow() && w != w->parentWidget() ) {
+      while (w != window && !w->isWindow() && w != w->parentWidget()) {
             x += w->geometry().x();
             y += w->geometry().y();
             w = w->parentWidget();
@@ -792,15 +792,17 @@ void StyleHelper::renderWindowBackground(QPainter *p, const QRect &clipRect, con
       // calculate upper part height
       // special tricks are needed
       // to handle both window contents and window decoration
+
       const QRect r = window->rect();
-      int height( window->frameGeometry().height() );
-      int width( window->frameGeometry().width() );
-      if( y_shift > 0 ) {
+      int height    = window->frameGeometry().height();
+      int width     = window->frameGeometry().width();
+
+      if (y_shift > 0) {
             height -= 2*y_shift;
-            width -= 2*y_shift;
+            width  -= 2*y_shift;
             }
 
-      const int splitY( qMin(300, (3*height)/4) );
+      const int splitY(qMin(300, (3*height)/4) );
 
       // draw upper linear gradient
       const QRect upperRect(-x, -y, r.width(), splitY);
@@ -812,16 +814,18 @@ void StyleHelper::renderWindowBackground(QPainter *p, const QRect &clipRect, con
       p->fillRect(lowerRect, backgroundBottomColor(color));
 
       // draw upper radial gradient
-      const int radialW( qMin(600, width) );
+      // WS: dont know how this should look like, but its
+      // obviously wrong on MAC:
+#if 0  //DEBUG
+      const int radialW (qMin(600, width));
       const QRect radialRect( (r.width() - radialW) / 2-x, -y, radialW, gradientHeight);
       if (clipRect.intersects(radialRect)) {
             tile = radialGradient(color, radialW, gradientHeight);
             p->drawPixmap(radialRect, tile);
             }
-
-      if (clipRect.isValid()) {
+#endif
+      if (clipRect.isValid())
             p->restore();
-            }
       }
 
 //---------------------------------------------------------
@@ -1120,6 +1124,8 @@ QPixmap StyleHelper::dialSlab(const QColor &color, qreal shade, int size) const
 
 QPixmap StyleHelper::dialSlabFocused(const QColor &color, const QColor& glowColor, qreal shade, int size) const
       {
+return QPixmap();
+
       Cache<QPixmap>::Value* cache =  m_dialSlabCache.get(color);
 
       const quint64 key((quint64(glowColor.rgba()) << 32) | (quint64(256.0 * shade) << 24) | size);
