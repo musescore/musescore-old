@@ -46,14 +46,14 @@ static const char* const function_names_score[] = {
       "load", "save",
       "setExpandRepeat", "appendPart", "appendMeasures",
       "pages", "measures", "parts", "part", "startUndo", "endUndo", "setStyle", "hasLyrics", "hasHarmonies",
-      "staves", "keysig", "duration", "pageFormat"
+      "staves", "keysig", "duration", "pageFormat", "metatag"
       };
 static const int function_lengths_score[] = {
       1, 1, 1, 1,
       1, 6,
       1, 1, 1,
       0, 0, 0, 1, 0, 0, 2, 0, 0,
-      0, 0, 0, 0
+      0, 0, 0, 0, 2
       };
 
 static const QScriptValue::PropertyFlags flags_score[] = {
@@ -83,6 +83,7 @@ static const QScriptValue::PropertyFlags flags_score[] = {
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
+      QScriptValue::SkipInEnumeration,
       };
 
 ScriptInterface scoreInterface = {
@@ -405,6 +406,19 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
             case 21:   //pageFormat
                   if (argc == 0){
                     return qScriptValueFromValue(context->engine(), score->pageFormat());
+                  }
+                  break;
+            case 22:   //metatag
+                  if (argc == 1) {
+                        QString tag = qscriptvalue_cast<QString>(context->argument(0));
+                        QString val = score->metaTag(tag);         
+                        return qScriptValueFromValue(context->engine(), val);
+                        }
+                  else if (argc == 2) {
+                        QString tag = qscriptvalue_cast<QString>(context->argument(0));
+                        QString val = qscriptvalue_cast<QString>(context->argument(1));
+                        score->setMetaTag(tag, val);
+                        return context->engine()->undefinedValue();
                   }
                   break;
             }
