@@ -1,3 +1,5 @@
+23.dec (la)
+      - fix #8369: Delete one instrument removes slurs from others
 22.dec (lv)
       - feature request #8355: bww import: framework and bww to xml converter
        (la)
