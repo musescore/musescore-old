@@ -26,6 +26,10 @@ Build (using Qt only, no MuseScore dependencies):
       - qmake
       - make
 
+Test:
+      - cd test
+      - ./iotest
+
 Usage:
       bww2mxml file.bww file.xml
 
