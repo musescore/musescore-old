@@ -1,7 +1,7 @@
 //=============================================================================
 //  MusE Score
 //  Linux Music Score Editor
-//  $Id: importove.cpp 3075 2010-05-14 14:45:09Z vanferry $
+//  $Id: importove.cpp 3763 2010-12-15 15:52:09Z vanferry $
 //
 //  Copyright (C) 2002-2009 Werner Schweer and others
 //
@@ -20,10 +20,6 @@
 
 #ifndef OVE_DATA_H
 #define OVE_DATA_H
-
-#include <map>
-#include <vector>
-#include <string>
 
 #ifdef WIN32
 #define DLL_EXPORT extern "C" __declspec(dllexport)
@@ -560,12 +556,11 @@ public:
 	virtual ~IOveNotify() {}
 
 public:
-	virtual void loadInfo(const std::string& info) = 0;
+	virtual void loadInfo(const QString& info) = 0;
 	virtual void loadError() = 0;
 	virtual void loadPosition(int currentMeasure, int totalMeasure, int currentTrack, int totalTrack) = 0;
 };
 
-// IOveStreamLoader.h
 class IOVEStreamLoader {
 public:
 	IOVEStreamLoader() {}
@@ -789,27 +784,27 @@ public:
 	void setPlayStyle(PlayStyle style);
 	PlayStyle getPlayStyle() const;
 
-	void addTitle(const std::string& str);
-	std::vector<std::string> getTitles(void) const;
+	void addTitle(const QString& str);
+	QList<QString> getTitles(void) const;
 
-	void addAnnotate(const std::string& str);
-	std::vector<std::string> getAnnotates(void) const;
+	void addAnnotate(const QString& str);
+	QList<QString> getAnnotates(void) const;
 
-	void addWriter(const std::string& str);
-	std::vector<std::string> getWriters(void) const;
+	void addWriter(const QString& str);
+	QList<QString> getWriters(void) const;
 
-	void addCopyright(const std::string& str);
-	std::vector<std::string> getCopyrights(void) const;
+	void addCopyright(const QString& str);
+	QList<QString> getCopyrights(void) const;
 
-	void addHeader(const std::string& str);
-	std::vector<std::string> getHeaders(void) const;
+	void addHeader(const QString& str);
+	QList<QString> getHeaders(void) const;
 
-	void addFooter(const std::string& str);
-	std::vector<std::string> getFooters(void) const;
+	void addFooter(const QString& str);
+	QList<QString> getFooters(void) const;
 
 	void addTrack(Track* ptr);
 	int getTrackCount(void) const;
-	std::vector<Track*> getTracks() const;
+	QList<Track*> getTracks() const;
 	Track* getTrack(int part, int staff) const;
 
 	void setTrackBarCount(int count);
@@ -833,14 +828,17 @@ public:
 	MeasureData* getMeasureData(int track, int bar) const;
 
 	// tool
-	void setPartStaffCounts(const std::vector<int>& partStaffCounts);
+	void setPartStaffCounts(const QList<int>& partStaffCounts);
 	int getPartCount() const;
 	int getStaffCount(int part) const;
 	int getPartBarCount() const;
 
 	void clear(void);
 
-	std::pair<int, int> trackToPartStaff(int track) const;
+	QPair<int, int> trackToPartStaff(int track) const;
+
+	void setTextCodecName(const QString& codecName);
+	QString getCodecString(const QByteArray& text);
 
 private:
 	int partStaffToTrack(int part, int staff) const;
@@ -857,21 +855,22 @@ private:
 	bool playRepeat_;
 	PlayStyle playStyle_;
 
-	std::vector<std::string> titles_;
-	std::vector<std::string> annotates_;
-	std::vector<std::string> writers_;
-	std::vector<std::string> copyrights_;
-	std::vector<std::string> headers_;
-	std::vector<std::string> footers_;
-		
-	std::vector<Track*> tracks_;
-	std::vector<Page*> pages_;
-	std::vector<Line*> lines_;
-	std::vector<Measure*> measures_;
-	std::vector<MeasureData*> measureDatas_;
-	int trackBarCount_;
+	QList<QString> titles_;
+	QList<QString> annotates_;
+	QList<QString> writers_;
+	QList<QString> copyrights_;
+	QList<QString> headers_;
+	QList<QString> footers_;
 
-	std::vector<int> partStaffCounts_;
+	QList<Track*> tracks_;
+	QList<Page*> pages_;
+	QList<Line*> lines_;
+	QList<Measure*> measures_;
+	QList<MeasureData*> measureDatas_;
+	int trackBarCount_;	//equal to measures_.size()
+
+	QList<int> partStaffCounts_;
+	QTextCodec* codec_;
 };
 
 class Voice {
@@ -916,11 +915,11 @@ public:
 	~Track();
 
 public:
-	void setName(const std::string& str);
-	std::string getName(void) const;
+	void setName(const QString& str);
+	QString getName(void) const;
 
-	void setBriefName(const std::string& str);
-	std::string getBriefName(void) const;
+	void setBriefName(const QString& str);
+	QString getBriefName(void) const;
 
 	void setPatch(unsigned int patch); // -1: percussion
 	unsigned int getPatch() const;
@@ -947,7 +946,7 @@ public:
 	int getVoiceCount() const;
 
 	void addVoice(Voice* voice);
-	std::vector<Voice*> getVoices() const;
+	QList<Voice*> getVoices() const;
 
 	void setShowTranspose(bool show);
 	bool getShowTranspose() const;
@@ -1004,7 +1003,7 @@ public:
 		DrumNode():line_(0), headType_(0), pitch_(0), voice_(0){}
 	};
 	void addDrum(const DrumNode& node);
-	std::vector<DrumNode> getDrumKit() const;
+	QList<DrumNode> getDrumKit() const;
 
 	void clear(void);
 
@@ -1014,8 +1013,8 @@ public:
 
 private:
 	int number_;
-	std::string name_;
-	std::string briefName_;
+	QString name_;
+	QString briefName_;
 	unsigned int patch_;
 	int channel_;
 	int transpose_;
@@ -1026,7 +1025,7 @@ private:
 	unsigned int displayPercent_;
 	int startKey_;
 	int voiceCount_;
-	std::vector<Voice*> voices_;
+	QList<Voice*> voices_;
 
 	bool showName_;
 	bool showBriefName_;
@@ -1044,7 +1043,7 @@ private:
 	bool mute_;
 	bool solo_;
 
-	std::vector<DrumNode> drumKit_;
+	QList<DrumNode> drumKit_;
 
 	//////////////////////////////
 	int part_;
@@ -1141,7 +1140,7 @@ public:
 	int getRightXOffset() const;
 
 private:
-	std::vector<Staff*> staffs_;
+	QList<Staff*> staffs_;
 	unsigned int beginBar_;
 	unsigned int barCount_;
 	int yOffset_;
@@ -1189,8 +1188,8 @@ public:
 	void setIsRest(bool rest);
 	bool getIsRest() const;
 
-	void setNote(unsigned int note);
-	unsigned int getNote() const;
+	void setNote(int note);
+	int getNote() const;
 
 	void setAccidental(int type);		//AccidentalType
 	AccidentalType getAccidental() const;
@@ -1221,7 +1220,7 @@ public:
 
 private:
 	bool rest_;
-	unsigned int note_;
+	int note_;
 	AccidentalType accidental_;
 	bool showAccidental_;
 	unsigned int onVelocity_;
@@ -1252,7 +1251,7 @@ public:
 
 	// for xml
 	enum XmlType {
-		Xml_Articulation, 
+		Xml_Articulation,
 		Xml_Technical,
 		Xml_Arpeggiate,
 		Xml_Ornament,
@@ -1266,7 +1265,7 @@ public:
 	// sound setting
 	bool getChangeSoundEffect() const;
 	void setSoundEffect(int soundFrom, int soundTo);
-	std::pair<int, int> getSoundEffect() const;
+	QPair<int, int> getSoundEffect() const;
 
 	bool getChangeLength() const;
 	void setLengthPercentage(int percentage);
@@ -1321,7 +1320,7 @@ private:
 	bool above_;
 
 	bool changeSoundEffect_;
-	std::pair<int, int> soundEffect_;
+	QPair<int, int> soundEffect_;
 	bool changeLength_;
 	int lengthPercentage_;
 	bool changeVelocity_;
@@ -1379,15 +1378,15 @@ public:
 
 	void setTuplet(int tuplet);
 	int getTuplet() const;
-	
+
 	void setSpace(int space);
 	int getSpace() const;
 
 	void addNoteRest(Note* note);
-	std::vector<Note*> getNotesRests() const;
+	QList<Note*> getNotesRests() const;
 
 	void addArticulation(Articulation* art);
-	std::vector<Articulation*> getArticulations() const;
+	QList<Articulation*> getArticulations() const;
 
 	void setNoteShift(int octave);
 	int getNoteShift() const;
@@ -1412,8 +1411,8 @@ private:
 	int stemLength_;	// line count span
 	int noteShift_;
 
-	std::vector<Note*> notes_;
-	std::vector<Articulation*> articulations_;
+	QList<Note*> notes_;
+	QList<Articulation*> articulations_;
 };
 
 class Beam : public MusicData, public PairEnds {
@@ -1426,11 +1425,11 @@ public:
 	bool getIsGrace() const;
 
 	void addLine(const MeasurePos& startMp, const MeasurePos& endMp);
-	const std::vector<std::pair<MeasurePos, MeasurePos> > getLines() const;
+	const QList<QPair<MeasurePos, MeasurePos> > getLines() const;
 
 private:
 	bool grace_;
-	std::vector<std::pair<MeasurePos, MeasurePos> > lines_;
+	QList<QPair<MeasurePos, MeasurePos> > lines_;
 };
 
 class Tie : public MusicData, public PairEnds {
@@ -1463,15 +1462,15 @@ public:
 	void setStraightWavy(bool straight);
 	bool getStraightWavy() const;
 
-	void setText(const std::string& text);
-	std::string getText() const;
+	void setText(const QString& text);
+	QString getText() const;
 
 	void setLineThick(int thick);
 	int getLineThick() const;
 
 private:
 	bool straight_;
-	std::string text_;
+	QString text_;
 	int lineThick_;
 };
 
@@ -1585,14 +1584,14 @@ public:
 	virtual ~Lyric(){}
 
 public:
-	void setLyric(const std::string& lyric);
-	std::string getLyric() const;
+	void setLyric(const QString& lyricText);
+	QString getLyric() const;
 
 	void setVerse(int verse);
 	int getVerse() const;
 
 private:
-	std::string lyric_;
+	QString lyric_;
 	int verse_;
 };
 
@@ -1728,11 +1727,11 @@ public:
 	virtual ~Expressions() {}
 
 public:
-	void setText(const std::string& str);
-	std::string getText() const;
+	void setText(const QString& str);
+	QString getText() const;
 
 private:
-	std::string text_;
+	QString text_;
 };
 
 class HarpPedal: public MusicData {
@@ -1828,11 +1827,11 @@ public:
 	int getTypeTempo() const;
 	int getQuarterTempo() const;
 
-	void setLeftText(const std::string& str);// string at left of the mark
-	std::string getLeftText() const;
+	void setLeftText(const QString& str);// string at left of the mark
+	QString getLeftText() const;
 
-	void setRightText(const std::string& str);
-	std::string getRightText() const;
+	void setRightText(const QString& str);
+	QString getRightText() const;
 
 	void setSwingEighth(bool swing);
 	bool getSwingEighth() const;
@@ -1846,8 +1845,8 @@ private:
 	bool showText_;
 	bool showParenthesis_;
 	int typeTempo_;
-	std::string leftText_;
-	std::string rightText_;
+	QString leftText_;
+	QString rightText_;
 	bool swingEighth_;
 	int rightNoteType_;
 };
@@ -1876,8 +1875,8 @@ public:
 	void setLineThick(int thick);
 	int getLineThick() const;
 
-	void setText(const std::string& text);
-	std::string getText() const;
+	void setText(const QString& text);
+	QString getText() const;
 
 	void setWidth(int width);
 	int getWidth() const;
@@ -1890,7 +1889,7 @@ private:
 	int horiMargin_;
 	int vertMargin_;
 	int lineThick_;
-	std::string text_;
+	QString text_;
 	int width_;
 	int height_;
 };
@@ -1961,7 +1960,7 @@ private:
 			startTick_(0) {
 		}
 	};
-	std::vector<BeatNode> beats_;
+	QList<BeatNode> beats_;
 	int barLengthUnits_;
 
 	bool replaceFont_;
@@ -2012,14 +2011,14 @@ public:
 	virtual ~RepeatSymbol() {}
 
 public:
-	void setText(const std::string& text);
-	std::string getText() const;
+	void setText(const QString& text);
+	QString getText() const;
 
 	void setRepeatType(int repeatType);
 	RepeatType getRepeatType() const;
 
 private:
-	std::string text_;
+	QString text_;
 	RepeatType repeatType_;
 };
 
@@ -2034,14 +2033,14 @@ public:
 	void setHeight(int height);
 	int getHeight() const;
 
-	void setText(const std::string& text);
-	std::string getText() const;
-	std::vector<int> getNumbers() const;
+	void setText(const QString& text);
+	QString getText() const;
+	QList<int> getNumbers() const;
 	int getJumpCount() const;
 
 private:
 	int height_;
-	std::string text_;
+	QString text_;
 	OffsetElement* numericHandle_;
 };
 
@@ -2066,8 +2065,8 @@ public:
 	void setShowEveryBarCount(int count);
 	int getShowEveryBarCount() const;
 
-	void setPrefix(const std::string& str);
-	std::string getPrefix() const;
+	void setPrefix(const QString& str);
+	QString getPrefix() const;
 
 private:
 	int index_;
@@ -2075,7 +2074,7 @@ private:
 	int align_;
 	int showFlag_;
 	int barRange_;
-	std::string prefix_;
+	QString prefix_;
 };
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -2196,12 +2195,12 @@ public:
 	Key* getKey() const;
 
 	void addNoteContainer(NoteContainer* ptr);
-	std::vector<NoteContainer*> getNoteContainers() const;
+	QList<NoteContainer*> getNoteContainers() const;
 
 	// put Tempo, Text, RepeatSymbol to MeasureData at part=0 && staff=0
 	void addMusicData(MusicData* ptr);
 	// if type==MusicData_None, return all
-	std::vector<MusicData*> getMusicDatas(MusicDataType type);//MusicXml: note|direction|harmony
+	QList<MusicData*> getMusicDatas(MusicDataType type);//MusicXml: note|direction|harmony
 
 	// put NumericEnding to MeasureData at part=0 && staff=0
 	void addCrossMeasureElement(MusicData* ptr, bool start);
@@ -2210,19 +2209,19 @@ public:
 		PairType_Stop,
 		PairType_All
 	};
-	std::vector<MusicData*> getCrossMeasureElements(MusicDataType type, PairType pairType);
+	QList<MusicData*> getCrossMeasureElements(MusicDataType type, PairType pairType);
 
 	// for midi
 	void addMidiData(MidiData* ptr);
-	std::vector<MidiData*> getMidiDatas(MidiType type);
+	QList<MidiData*> getMidiDatas(MidiType type);
 
 private:
 	Key* key_;
 	Clef* clef_;
-	std::vector<MusicData*> musicDatas_;
-	std::vector<NoteContainer*> noteContainers_;
-	std::vector<std::pair<MusicData*, bool> > crossMeasureElements_;
-	std::vector<MidiData*> midiDatas_;
+	QList<MusicData*> musicDatas_;
+	QList<NoteContainer*> noteContainers_;
+	QList<QPair<MusicData*, bool> > crossMeasureElements_;
+	QList<MidiData*> midiDatas_;
 };
 
 // StreamHandle
@@ -2267,15 +2266,15 @@ public:
 	bool toBoolean() const;
 	unsigned int toUnsignedInt() const;
 	int toInt() const;
-	std::string toString() const;
-	std::string fixedSizeBufferToString() const;
+	QByteArray toStrByteArray() const;					// string
+	QByteArray fixedSizeBufferToStrByteArray() const;	// string
 
 private:
 	void doResize(unsigned int count);
 
 private:
 	// char [-128, 127], unsigned char [0, 255]
-	std::vector<unsigned char> data_;
+	QList<unsigned char> data_;
 };
 
 class FixedBlock: public Block {
@@ -2315,10 +2314,7 @@ public:
 
 public:
 	// ingore data more than 4 bytes
-	//	void setValue(const char* const name) ;
-	bool isEqual(const std::string& name) const;
-	//	bool operator == (const std::string& name) const ;
-	//	bool operator != (const std::string& name) const ;
+	bool isEqual(const QString& name) const;
 };
 
 // 2 bytes block in ove to store count
@@ -2343,13 +2339,13 @@ public:
 	}
 
 public:
-	const static std::string TrackName;
-	const static std::string PageName;
-	const static std::string LineName;
-	const static std::string StaffName;
-	const static std::string MeasureName;
-	const static std::string ConductName;
-	const static std::string BdatName;
+	const static QString TrackName;
+	const static QString PageName;
+	const static QString LineName;
+	const static QString StaffName;
+	const static QString MeasureName;
+	const static QString ConductName;
+	const static QString BdatName;
 
 	NameBlock getName() const;
 
@@ -2404,7 +2400,7 @@ protected:
 	bool readBuffer(Block& placeHolder, unsigned int size);
 	bool jump(int offset);
 
-	void messageOut(const std::string& str);
+	void messageOut(const QString& str);
 
 protected:
 	OveSong* ove_;
@@ -2453,7 +2449,7 @@ public:
 	virtual bool parse();
 
 private:
-	std::vector<SizeChunk*> sizeChunks_;
+	QList<SizeChunk*> sizeChunks_;
 };
 
 class PageGroupParse: public BasicParse {
@@ -2470,7 +2466,7 @@ private:
 	bool parsePage(SizeChunk* chunk, Page* page);
 
 private:
-	std::vector<SizeChunk*> pageChunks_;
+	QList<SizeChunk*> pageChunks_;
 };
 
 class StaffCountGetter: public BasicParse {
@@ -2500,8 +2496,8 @@ private:
 
 private:
 	GroupChunk* chunk_;
-	std::vector<SizeChunk*> lineChunks_;
-	std::vector<SizeChunk*> staffChunks_;
+	QList<SizeChunk*> lineChunks_;
+	QList<SizeChunk*> staffChunks_;
 };
 
 class BarsParse: public BasicParse {
@@ -2568,9 +2564,9 @@ private:
 	bool parseOffsetElement(OffsetElement* ptr);//size==2
 
 private:
-	std::vector<SizeChunk*> measureChunks_;
-	std::vector<SizeChunk*> conductChunks_;
-	std::vector<SizeChunk*> bdatChunks_;
+	QList<SizeChunk*> measureChunks_;
+	QList<SizeChunk*> conductChunks_;
+	QList<SizeChunk*> bdatChunks_;
 };
 
 class LyricChunkParse: public BasicParse {
@@ -2591,15 +2587,15 @@ private:
 		int voice_;
 		int wordCount_;
 		int lyricSize_;
-		std::string name_;
-		std::string lyric_;
+		QString name_;
+		QString lyric_;
 		int font_;
 		int fontSize_;
 		int fontStyle_;
 
 		LyricInfo() :
 			track_(0), measure_(0), verse_(0), voice_(0), wordCount_(0),
-					lyricSize_(0), name_(std::string()), lyric_(std::string()),
+					lyricSize_(0), name_(QString()), lyric_(QString()),
 					font_(0), fontSize_(12), fontStyle_(0) {}
 	};
 
@@ -2620,7 +2616,7 @@ public:
 	virtual bool parse();
 
 private:
-	void addToOve(const std::string& str, unsigned int titleType);
+	void addToOve(const QString& str, unsigned int titleType);
 
 private:
 	unsigned int titleType_;
@@ -2683,7 +2679,7 @@ public:
 
 private:
 	bool readNameBlock(NameBlock& nameBlock);
-	bool readChunkName(Chunk* chunk, const std::string& name);
+	bool readChunkName(Chunk* chunk, const QString& name);
 	bool readSizeChunk(SizeChunk* sizeChunk); // contains a SizeChunk and data buffer
 	bool readDataChunk(Block* block, unsigned int size);
 	bool readGroupChunk(GroupChunk* groupChunk);
@@ -2697,7 +2693,7 @@ private:
 	bool readOveEnd();
 
 	void messageOutError();
-	void messageOut(const std::string& str);
+	void messageOut(const QString& str);
 
 private:
 	OveSong* ove_;

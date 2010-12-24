@@ -1,7 +1,7 @@
 //=============================================================================
 //  MusE Score
 //  Linux Music Score Editor
-//  $Id: importove.cpp 3075 2010-05-14 14:45:09Z vanferry $
+//  $Id: importove.cpp 3763 2010-12-15 15:51:09Z vanferry $
 //
 //  Copyright (C) 2002-2009 Werner Schweer and others
 //
@@ -27,7 +27,7 @@
 namespace OVE {
 
 /*template <class T>
-inline void deleteVector(std::vector<T*>& vec) {
+inline void deleteVector(QList<T*>& vec) {
 	for (int i=0; i<vec.size(); ++i)
 		delete vec[i];
 	}
@@ -332,7 +332,8 @@ MidiType MidiData::getMidiType() const {
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-OveSong::OveSong() {
+OveSong::OveSong() :
+	codec_(0) {
 	clear();
 }
 
@@ -412,51 +413,51 @@ OveSong::PlayStyle OveSong::getPlayStyle() const {
 	return playStyle_;
 }
 
-void OveSong::addTitle(const std::string& str) {
+void OveSong::addTitle(const QString& str) {
 	titles_.push_back(str);
 }
 
-std::vector<std::string> OveSong::getTitles(void) const {
+QList<QString> OveSong::getTitles(void) const {
 	return titles_;
 }
 
-void OveSong::addAnnotate(const std::string& str) {
+void OveSong::addAnnotate(const QString& str) {
 	annotates_.push_back(str);
 }
 
-std::vector<std::string> OveSong::getAnnotates(void) const {
+QList<QString> OveSong::getAnnotates(void) const {
 	return annotates_;
 }
 
-void OveSong::addWriter(const std::string& str) {
+void OveSong::addWriter(const QString& str) {
 	writers_.push_back(str);
 }
 
-std::vector<std::string> OveSong::getWriters(void) const {
+QList<QString> OveSong::getWriters(void) const {
 	return writers_;
 }
 
-void OveSong::addCopyright(const std::string& str) {
+void OveSong::addCopyright(const QString& str) {
 	copyrights_.push_back(str);
 }
 
-std::vector<std::string> OveSong::getCopyrights(void) const {
+QList<QString> OveSong::getCopyrights(void) const {
 	return copyrights_;
 }
 
-void OveSong::addHeader(const std::string& str) {
+void OveSong::addHeader(const QString& str) {
 	headers_.push_back(str);
 }
 
-std::vector<std::string> OveSong::getHeaders(void) const {
+QList<QString> OveSong::getHeaders(void) const {
 	return headers_;
 }
 
-void OveSong::addFooter(const std::string& str) {
+void OveSong::addFooter(const QString& str) {
 	footers_.push_back(str);
 }
 
-std::vector<std::string> OveSong::getFooters(void) const {
+QList<QString> OveSong::getFooters(void) const {
 	return footers_;
 }
 
@@ -468,7 +469,7 @@ int OveSong::getTrackCount(void) const {
 	return tracks_.size();
 }
 
-std::vector<Track*> OveSong::getTracks() const {
+QList<Track*> OveSong::getTracks() const {
 	return tracks_;
 }
 
@@ -572,8 +573,11 @@ MeasureData* OveSong::getMeasureData(int track, int bar) const {
 	return 0;
 }
 
-void OveSong::setPartStaffCounts(const std::vector<int>& partStaffCounts) {
-	partStaffCounts_.assign(partStaffCounts.begin(), partStaffCounts.end());
+void OveSong::setPartStaffCounts(const QList<int>& partStaffCounts) {
+	//partStaffCounts_.assign(partStaffCounts.begin(), partStaffCounts.end());
+	for(int i=0; i<partStaffCounts.size(); ++i) {
+		partStaffCounts_.push_back(partStaffCounts[i]);
+	}
 }
 
 int OveSong::getPartCount() const {
@@ -592,24 +596,24 @@ int OveSong::getPartBarCount() const {
 	return measureDatas_.size() / tracks_.size();
 }
 
-std::pair<int, int> OveSong::trackToPartStaff(int track) const {
-	std::pair<int, int> partStaff;
-	unsigned int i;
+QPair<int, int> OveSong::trackToPartStaff(int track) const {
+	QPair<int, int> partStaff;
+	int i;
 	int staffCount = 0;
 
 	for( i=0; i<partStaffCounts_.size(); ++i ) {
 		if( staffCount + partStaffCounts_[i] > track ) {
-			return std::make_pair(i, track-staffCount);
+			return qMakePair((int)i, track-staffCount);
 		}
 
 		staffCount += partStaffCounts_[i];
 	}
 
-	return std::make_pair(partStaffCounts_.size(), 0);
+	return qMakePair((int)partStaffCounts_.size(), 0);
 }
 
 int OveSong::partStaffToTrack(int part, int staff) const {
-	unsigned int i;
+	int i;
 	unsigned int staffCount = 0;
 
 	for( i=0; i<partStaffCounts_.size(); ++i ) {
@@ -627,7 +631,22 @@ int OveSong::partStaffToTrack(int part, int staff) const {
 	return tracks_.size();
 }
 
-void OveSong::clear(void) {
+void OveSong::setTextCodecName(const QString& codecName) {
+	codec_ = QTextCodec::codecForName(codecName.toLatin1());
+}
+
+QString OveSong::getCodecString(const QByteArray& text) {
+    QString s;
+    if (codec_ == NULL)
+        s = QString(text);
+    else
+        s = codec_->toUnicode(text);
+
+    return s;
+}
+
+void OveSong::clear(void)
+{
 	version4_ = true;
 	quarter_ = 480;
 	showPageMargin_ = false;
@@ -646,19 +665,19 @@ void OveSong::clear(void) {
 	writers_.clear();
 
 //	deleteVector(tracks_);
-	for(unsigned int i=0; i<tracks_.size(); ++i){
+	for(int i=0; i<tracks_.size(); ++i){
 		delete tracks_[i];
 	}
-	for(unsigned int i=0; i<pages_.size(); ++i){
+	for(int i=0; i<pages_.size(); ++i){
 		delete pages_[i];
 	}
-	for(unsigned int i=0; i<lines_.size(); ++i){
+	for(int i=0; i<lines_.size(); ++i){
 		delete lines_[i];
 	}
-	for(unsigned int i=0; i<measures_.size(); ++i){
+	for(int i=0; i<measures_.size(); ++i){
 		delete measures_[i];
 	}
-	for(unsigned int i=0; i<measureDatas_.size(); ++i){
+	for(int i=0; i<measureDatas_.size(); ++i){
 		delete measureDatas_[i];
 	}
 	tracks_.clear();
@@ -667,6 +686,7 @@ void OveSong::clear(void) {
 	measures_.clear();
 	measureDatas_.clear();
 	trackBarCount_ = 0;
+	partStaffCounts_.clear();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -744,19 +764,19 @@ Track::~Track() {
 	clear();
 }
 
-void Track::setName(const std::string& str) {
+void Track::setName(const QString& str) {
 	name_ = str;
 }
 
-std::string Track::getName(void) const {
+QString Track::getName(void) const {
 	return name_;
 }
 
-void Track::setBriefName(const std::string& str) {
+void Track::setBriefName(const QString& str) {
 	briefName_ = str;
 }
 
-std::string Track::getBriefName(void) const {
+QString Track::getBriefName(void) const {
 	return briefName_;
 }
 
@@ -828,7 +848,7 @@ void Track::addVoice(Voice* voice) {
 	voices_.push_back(voice);
 }
 
-std::vector<Voice*> Track::getVoices() const {
+QList<Voice*> Track::getVoices() const {
 	return voices_;
 }
 
@@ -961,7 +981,7 @@ void Track::addDrum(const DrumNode& node) {
 	drumKit_.push_back(node);
 }
 
-std::vector<Track::DrumNode> Track::getDrumKit() const {
+QList<Track::DrumNode> Track::getDrumKit() const {
 	return drumKit_;
 }
 
@@ -976,7 +996,7 @@ int Track::getPart() const {
 void Track::clear(void) {
 	number_ = 0;
 
-	name_ = std::string();
+	name_ = QString();
 
 	patch_ = 0;
 	channel_ = 0;
@@ -1009,7 +1029,7 @@ void Track::clear(void) {
 
 	part_ = 0;
 
-	for(unsigned int i=0; i<voices_.size(); ++i){
+	for(int i=0; i<voices_.size(); ++i){
 		delete voices_[i];
 	}
 	voices_.clear();
@@ -1150,7 +1170,7 @@ Line::Line() {
 }
 
 Line::~Line() {
-	for(unsigned int i=0; i<staffs_.size(); ++i){
+	for(int i=0; i<staffs_.size(); ++i){
 		delete staffs_[i];
 	}
 	staffs_.clear();
@@ -1284,11 +1304,11 @@ bool Note::getIsRest() const {
 	return rest_;
 }
 
-void Note::setNote(unsigned int note) {
+void Note::setNote(int note) {
 	note_ = note;
 }
 
-unsigned int Note::getNote() const {
+int Note::getNote() const {
 	return note_;
 }
 
@@ -1374,7 +1394,7 @@ Articulation::Articulation() {
 	changeVelocity_ = false;
 	changeExtraLength_ = false;
 
-	soundEffect_ = std::make_pair(0, 0);
+	soundEffect_ = qMakePair(0, 0);
 	lengthPercentage_ = 100;
 	velocityType_ = Velocity_Offset;
 	velocityValue_ = 0;
@@ -1408,11 +1428,11 @@ bool Articulation::getChangeSoundEffect() const {
 }
 
 void Articulation::setSoundEffect(int soundFrom, int soundTo) {
-	soundEffect_ = std::make_pair(soundFrom, soundTo);
+	soundEffect_ = qMakePair(soundFrom, soundTo);
 	changeSoundEffect_ = true;
 }
 
-std::pair<int, int> Articulation::getSoundEffect() const {
+QPair<int, int> Articulation::getSoundEffect() const {
 	return soundEffect_;
 }
 
@@ -1705,10 +1725,10 @@ NoteContainer::NoteContainer() {
 }
 
 NoteContainer::~NoteContainer(){
-	for(unsigned int i=0; i<notes_.size(); ++i){
+	for(int i=0; i<notes_.size(); ++i){
 		delete notes_[i];
 	}
-	for(unsigned int i=0; i<articulations_.size(); ++i){
+	for(int i=0; i<articulations_.size(); ++i){
 		delete articulations_[i];
 	}
 	notes_.clear();
@@ -1842,7 +1862,7 @@ void NoteContainer::addNoteRest(Note* note) {
 	notes_.push_back(note);
 }
 
-std::vector<Note*> NoteContainer::getNotesRests() const {
+QList<Note*> NoteContainer::getNotesRests() const {
 	return notes_;
 }
 
@@ -1850,7 +1870,7 @@ void NoteContainer::addArticulation(Articulation* art) {
 	articulations_.push_back(art);
 }
 
-std::vector<Articulation*> NoteContainer::getArticulations() const {
+QList<Articulation*> NoteContainer::getArticulations() const {
 	return articulations_;
 }
 
@@ -1867,8 +1887,8 @@ int NoteContainer::getOffsetStaff() const {
 		return 0;
 
 	int staffMove = 0;
-	std::vector<OVE::Note*> notes = getNotesRests();
-	for (unsigned int i = 0; i < notes.size(); ++i) {
+	QList<OVE::Note*> notes = getNotesRests();
+	for (int i = 0; i < notes.size(); ++i) {
 		OVE::Note* notePtr = notes[i];
 		staffMove = notePtr->getOffsetStaff();
 	}
@@ -1952,10 +1972,10 @@ bool Beam::getIsGrace() const {
 }
 
 void Beam::addLine(const MeasurePos& startMp, const MeasurePos& endMp) {
-	lines_.push_back(std::make_pair(startMp, endMp));
+	lines_.push_back(qMakePair(startMp, endMp));
 }
 
-const std::vector<std::pair<MeasurePos, MeasurePos> > Beam::getLines() const {
+const QList<QPair<MeasurePos, MeasurePos> > Beam::getLines() const {
 	return lines_;
 }
 
@@ -2009,11 +2029,11 @@ bool Glissando::getStraightWavy() const {
 	return straight_;
 }
 
-void Glissando::setText(const std::string& text) {
+void Glissando::setText(const QString& text) {
 	text_ = text;
 }
 
-std::string Glissando::getText() const {
+QString Glissando::getText() const {
 	return text_;
 }
 
@@ -2184,15 +2204,15 @@ ClefType Clef::getClefType() const {
 Lyric::Lyric() {
 	musicDataType_ = MusicData_Lyric;
 
-	lyric_ = std::string();
+	lyric_ = QString();
 	verse_ = 0;
 }
 
-void Lyric::setLyric(const std::string& lyric) {
-	lyric_ = lyric;
+void Lyric::setLyric(const QString& lyricText) {
+	lyric_ = lyricText;
 }
 
-std::string Lyric::getLyric() const {
+QString Lyric::getLyric() const {
 	return lyric_;
 }
 
@@ -2414,14 +2434,14 @@ KuoHaoType KuoHao::getKuohaoType() const {
 Expressions::Expressions() {
 	musicDataType_ = MusicData_Expressions;
 
-	text_ = std::string();
+	text_ = QString();
 }
 
-void Expressions::setText(const std::string& str) {
+void Expressions::setText(const QString& str) {
 	text_ = str;
 }
 
-std::string Expressions::getText() const {
+QString Expressions::getText() const {
 	return text_;
 }
 
@@ -2555,8 +2575,8 @@ Tempo::Tempo() {
 	showText_ = false;
 	showParenthesis_ = false;
 	typeTempo_ = 96;
-	leftText_ = std::string();
-	rightText_ = std::string();
+	leftText_ = QString();
+	rightText_ = QString();
 	swingEighth_ = false;
 	rightNoteType_ = 3;
 }
@@ -2608,19 +2628,19 @@ int Tempo::getQuarterTempo() const {
 	return tempo;
 }
 
-void Tempo::setLeftText(const std::string& str) {
+void Tempo::setLeftText(const QString& str) {
 	leftText_ = str;
 }
 
-std::string Tempo::getLeftText() const {
+QString Tempo::getLeftText() const {
 	return leftText_;
 }
 
-void Tempo::setRightText(const std::string& str) {
+void Tempo::setRightText(const QString& str) {
 	rightText_ = str;
 }
 
-std::string Tempo::getRightText() const {
+QString Tempo::getRightText() const {
 	return rightText_;
 }
 
@@ -2648,7 +2668,7 @@ Text::Text() {
 	horiMargin_ = 8;
 	vertMargin_ = 8;
 	lineThick_ = 4;
-	text_ = std::string();
+	text_ = QString();
 	width_ = 0;
 	height_ = 0;
 }
@@ -2685,11 +2705,11 @@ int Text::getLineThick() const {
 	return lineThick_;
 }
 
-void Text::setText(const std::string& text) {
+void Text::setText(const QString& text) {
 	text_ = text;
 }
 
-std::string Text::getText() const {
+QString Text::getText() const {
 	return text_;
 }
 
@@ -2789,7 +2809,7 @@ void TimeSignature::addBeat(int startUnit, int lengthUnit, int startTick) {
 }
 
 void TimeSignature::endAddBeat() {
-	unsigned int i;
+	int i;
 	barLengthUnits_ = 0;
 
 	for (i = 0; i < beats_.size(); ++i) {
@@ -2904,15 +2924,15 @@ int Key::getSymbolCount() const {
 
 ///////////////////////////////////////////////////////////////////////////////
 RepeatSymbol::RepeatSymbol() :
-	text_(std::string("#1")), repeatType_(Repeat_Segno) {
+	text_("#1"), repeatType_(Repeat_Segno) {
 	musicDataType_ = MusicData_Repeat;
 }
 
-void RepeatSymbol::setText(const std::string& text) {
+void RepeatSymbol::setText(const QString& text) {
 	text_ = text;
 }
 
-std::string RepeatSymbol::getText() const {
+QString RepeatSymbol::getText() const {
 	return text_;
 }
 
@@ -2929,7 +2949,7 @@ NumericEnding::NumericEnding() {
 	musicDataType_ = MusicData_Numeric_Ending;
 
 	height_ = 0;
-	text_ = std::string();
+	text_ = QString();
 	numericHandle_ = new OffsetElement();
 }
 
@@ -2949,61 +2969,33 @@ int NumericEnding::getHeight() const {
 	return height_;
 }
 
-void NumericEnding::setText(const std::string& text) {
+void NumericEnding::setText(const QString& text) {
 	text_ = text;
 }
 
-std::vector<std::string> split(const std::string& s, const std::string& sep) {
-	std::vector<std::string> strs;
-
-	if (s.empty()) {
-		return strs;
-	}
-
-	if (sep.empty() || std::string::npos == s.find(sep)) {
-		strs.push_back(s);
-		return strs;
-	}
-
-	typedef std::string::size_type SST;
-	SST seplen = sep.size();
-	SST beg = 0, end = std::string::npos;
-
-	while (std::string::npos != (end = s.find(sep, beg))) {
-		strs.push_back(s.substr(beg, end - beg));
-		beg = end + seplen;
-	}
-
-	strs.push_back(s.substr(beg, s.size() - beg));
-
-	return strs;
-}
-
-int string_2_int(const std::string& str) {
-	return atoi(str.c_str());
-}
-
-std::string NumericEnding::getText() const {
+QString NumericEnding::getText() const {
 	return text_;
 }
 
-std::vector<int> NumericEnding::getNumbers() const {
-	unsigned int i;
-	std::vector<std::string> strs = split(text_, ",");
-	std::vector<int> endings;
+QList<int> NumericEnding::getNumbers() const {
+	int i;
+	QStringList strs = text_.split(",", QString::SkipEmptyParts);
+	QList<int> endings;
 
 	for (i = 0; i < strs.size(); ++i) {
-		endings.push_back(string_2_int(strs[i]));
+		bool ok;
+		int num = strs[i].toInt(&ok);
+		endings.push_back(num);
 	}
 
 	return endings;
 }
 
 int NumericEnding::getJumpCount() const {
-	std::vector<int> numbers = getNumbers();
+	QList<int> numbers = getNumbers();
 	int count = 0;
 
-	for (unsigned int i = 0; i < numbers.size(); ++i) {
+	for (int i = 0; i < numbers.size(); ++i) {
 		if ((int)i + 1 != numbers[i]) {
 			break;
 		}
@@ -3021,7 +3013,7 @@ BarNumber::BarNumber() {
 	align_ = 0;
 	showFlag_ = 1; // staff
 	barRange_ = 1; // can't be 0
-	prefix_ = std::string();
+	prefix_ = QString();
 }
 
 void BarNumber::setIndex(int index) {
@@ -3065,11 +3057,11 @@ int BarNumber::getShowEveryBarCount() const {
 	return barRange_;
 }
 
-void BarNumber::setPrefix(const std::string& str) {
+void BarNumber::setPrefix(const QString& str) {
 	prefix_ = str;
 }
 
-std::string BarNumber::getPrefix() const {
+QString BarNumber::getPrefix() const {
 	return prefix_;
 }
 
@@ -3236,7 +3228,7 @@ MeasureData::MeasureData() {
 }
 
 MeasureData::~MeasureData(){
-	unsigned int i;
+	int i;
 	for(i=0; i<musicDatas_.size(); ++i){
 		delete musicDatas_[i];
 	}
@@ -3274,7 +3266,7 @@ void MeasureData::addNoteContainer(NoteContainer* ptr) {
 	noteContainers_.push_back(ptr);
 }
 
-std::vector<NoteContainer*> MeasureData::getNoteContainers() const {
+QList<NoteContainer*> MeasureData::getNoteContainers() const {
 	return noteContainers_;
 }
 
@@ -3282,9 +3274,9 @@ void MeasureData::addMusicData(MusicData* ptr) {
 	musicDatas_.push_back(ptr);
 }
 
-std::vector<MusicData*> MeasureData::getMusicDatas(MusicDataType type) {
-	unsigned int i;
-	std::vector<MusicData*> notations;
+QList<MusicData*> MeasureData::getMusicDatas(MusicDataType type) {
+	int i;
+	QList<MusicData*> notations;
 
 	for (i = 0; i < musicDatas_.size(); ++i) {
 		if (type == MusicData_None || musicDatas_[i]->getMusicDataType() == type) {
@@ -3296,13 +3288,14 @@ std::vector<MusicData*> MeasureData::getMusicDatas(MusicDataType type) {
 }
 
 void MeasureData::addCrossMeasureElement(MusicData* ptr, bool start) {
-	crossMeasureElements_.push_back(std::make_pair(ptr, start));
+	crossMeasureElements_.push_back(qMakePair(ptr, start));
 }
 
-std::vector<MusicData*> MeasureData::getCrossMeasureElements(
-		MusicDataType type, PairType pairType) {
-	unsigned int i;
-	std::vector<MusicData*> pairs;
+QList<MusicData*> MeasureData::getCrossMeasureElements(
+		MusicDataType type, PairType pairType)
+{
+	int i;
+	QList<MusicData*> pairs;
 
 	for (i = 0; i < crossMeasureElements_.size(); ++i) {
 		if ((type == MusicData_None || crossMeasureElements_[i].first->getMusicDataType() == type)
@@ -3319,9 +3312,9 @@ void MeasureData::addMidiData(MidiData* ptr) {
 	midiDatas_.push_back(ptr);
 }
 
-std::vector<MidiData*> MeasureData::getMidiDatas(MidiType type) {
-	unsigned int i;
-	std::vector<MidiData*> datas;
+QList<MidiData*> MeasureData::getMidiDatas(MidiType type) {
+	int i;
+	QList<MidiData*> datas;
 
 	for (i = 0; i < midiDatas_.size(); ++i) {
 		if (type == Midi_None || midiDatas_[i]->getMidiType() == type) {
@@ -3376,7 +3369,11 @@ void Block::resize(unsigned int count) {
 }
 
 void Block::doResize(unsigned int count) {
-	data_.resize(count);
+	data_.clear();
+	for(unsigned int i=0; i<count; ++i) {
+		data_.push_back('\0');
+	}
+	//data_.resize(count);
 }
 
 const unsigned char* Block::data() const {
@@ -3441,19 +3438,19 @@ int Block::toInt() const {
 	return num;
 }
 
-std::string Block::toString() const {
+QByteArray Block::toStrByteArray() const {
 	if (data() == NULL) {
-		return std::string();
+		return QByteArray();
 	}
 
-	std::string str((char*) data(), size());
+	QByteArray arr((char*) data(), size());
 
-	return str;
+	return arr;
 }
 
-std::string Block::fixedSizeBufferToString() const {
+QByteArray Block::fixedSizeBufferToStrByteArray() const {
 	unsigned int i;
-	std::string str;
+	QByteArray str;
 
 	for (i = 0; i < size(); ++i) {
 		if (*(data() + i) == '\0') {
@@ -3536,14 +3533,15 @@ NameBlock::NameBlock() :
  }
  }*/
 
-bool NameBlock::isEqual(const std::string& name) const {
-	unsigned int i;
+bool NameBlock::isEqual(const QString& name) const
+{
+	unsigned int i, nsize = static_cast<unsigned>(name.size());
 
-	if (name.size() != size()) {
+	if (nsize != size()) {
 		return false;
 	}
 
-	for (i = 0; i < size() && name.size(); ++i) {
+	for (i = 0; i < size() && nsize; ++i) {
 		if (data()[i] != name[i]) {
 			return false;
 		}
@@ -3551,11 +3549,6 @@ bool NameBlock::isEqual(const std::string& name) const {
 
 	return true;
 }
-
-/*bool NameBlock::operator != (const std::string& name) const
- {
- return !( *this == name );
- }*/
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 CountBlock::CountBlock() :
@@ -3586,13 +3579,13 @@ unsigned short CountBlock::toCount() const {
 }
 
 // Chunk.cpp
-const std::string Chunk::TrackName = "TRAK";
-const std::string Chunk::PageName = "PAGE";
-const std::string Chunk::LineName = "LINE";
-const std::string Chunk::StaffName = "STAF";
-const std::string Chunk::MeasureName = "MEAS";
-const std::string Chunk::ConductName = "COND";
-const std::string Chunk::BdatName = "BDAT";
+const QString Chunk::TrackName	= "TRAK";
+const QString Chunk::PageName	= "PAGE";
+const QString Chunk::LineName	= "LINE";
+const QString Chunk::StaffName	= "STAF";
+const QString Chunk::MeasureName = "MEAS";
+const QString Chunk::ConductName = "COND";
+const QString Chunk::BdatName	= "BDAT";
 
 Chunk::Chunk() {
 }
@@ -3712,7 +3705,7 @@ bool BasicParse::jump(int offset) {
 	return true;
 }
 
-void BasicParse::messageOut(const std::string& str) {
+void BasicParse::messageOut(const QString& str) {
 	if (notify_ != NULL) {
 		notify_->loadInfo(str);
 	}
@@ -3744,7 +3737,7 @@ bool OvscParse::parse() {
 	bool version4 = placeHolder.toUnsignedInt() == 4;
 	ove_->setIsVersion4(version4);
 
-	std::string str = std::string("This file is created by Overture ") + (version4 ? "4" : "3");
+	QString str = QString("This file is created by Overture ") + (version4 ? "4" : "3");
 	messageOut(str);
 
 	if( !jump(6) ) { return false; }
@@ -3801,7 +3794,8 @@ void TrackParse::setTrack(SizeChunk* chunk) {
 	chunk_ = chunk;
 }
 
-bool TrackParse::parse() {
+bool TrackParse::parse()
+{
 	Block* dataBlock = chunk_->getDataBlock();
 	unsigned int blockSize = ove_->getIsVersion4() ? chunk_->getSizeBlock()->toSize() : SizeChunk::version3TrackSize;
 	StreamHandle handle(dataBlock->data(), blockSize);
@@ -3814,10 +3808,10 @@ bool TrackParse::parse() {
 
 	// 2 32bytes long track name buffer
 	if( !readBuffer(placeHolder, 32) ) { return false; }
-	oveTrack->setName(placeHolder.fixedSizeBufferToString());
+	oveTrack->setName(ove_->getCodecString(placeHolder.fixedSizeBufferToStrByteArray()));
 
 	if( !readBuffer(placeHolder, 32) ) { return false; }
-	oveTrack->setBriefName(placeHolder.fixedSizeBufferToString());
+	oveTrack->setBriefName(ove_->getCodecString(placeHolder.fixedSizeBufferToStrByteArray()));
 
 	if( !jump(8) ) { return false; } //0x fffa0012 fffa0012
 	if( !jump(1) ) { return false; }
@@ -3920,8 +3914,8 @@ bool TrackParse::parse() {
 	if( !jump(12) ) { return false; }
 
 	// 8 voices
-	unsigned int i;
-	std::vector<Voice*> voices;
+	int i;
+	QList<Voice*> voices;
 	for( i=0; i<8; ++i ) {
 		Voice* voicePtr = new Voice();
 
@@ -3961,8 +3955,10 @@ bool TrackParse::parse() {
 	}
 
 	// percussion define
-	std::vector<Track::DrumNode> nodes;
-	nodes.assign(16, Track::DrumNode());
+	QList<Track::DrumNode> nodes;
+	for(i=0; i<16; ++i) {
+		nodes.push_back(Track::DrumNode());
+	}
 
 	// line
 	for( i=0; i<16; ++i ) {
@@ -4034,9 +4030,11 @@ void PageGroupParse::addPage(SizeChunk* chunk) {
 }
 
 bool PageGroupParse::parse() {
-	if( pageChunks_.empty() ) { return false; }
+	if( pageChunks_.empty() ) {
+	    return false;
+	}
 
-	unsigned int i;
+	int i;
 	for( i=0; i<pageChunks_.size(); ++i ) {
 		Page* page = new Page();
 		ove_->addPage(page);
@@ -4153,10 +4151,11 @@ void LineGroupParse::addStaff(SizeChunk* chunk) {
 	staffChunks_.push_back(chunk);
 }
 
-bool LineGroupParse::parse() {
+bool LineGroupParse::parse()
+{
 	if( lineChunks_.empty() || staffChunks_.size() % lineChunks_.size() != 0 ) { return false; }
 
-	unsigned int i;
+	int i;
 	unsigned int j;
 	unsigned int lineStaffCount = staffChunks_.size() / lineChunks_.size();
 
@@ -4296,8 +4295,8 @@ bool BarsParse::parse() {
 	int trackMeasureCount = ove_->getTrackBarCount();
 	int trackCount = ove_->getTrackCount();
 	int measureDataCount = trackCount * measureChunks_.size();
-	std::vector<Measure*> measures;
-	std::vector<MeasureData*> measureDatas;
+	QList<Measure*> measures;
+	QList<MeasureData*> measureDatas;
 
 	if( measureChunks_.empty() ||
 		measureChunks_.size() != conductChunks_.size() ||
@@ -4325,11 +4324,8 @@ bool BarsParse::parse() {
 
 		// MEAS
 		if( !parseMeas(measure, measureChunks_[i]) ) {
-			std::stringstream ss;
-			ss << "failed in parse MEAS ";
-			ss << i;
-
-			messageOut(ss.str());
+			QString ss = "failed in parse MEAS " + i;
+			messageOut(ss);
 
 			return false;
 		}
@@ -4338,11 +4334,8 @@ bool BarsParse::parse() {
 	for( i=0; i<(int)conductChunks_.size(); ++i ) {
 		// COND
 		if( !parseCond(measures[i], measureDatas[i], conductChunks_[i]) ) {
-			std::stringstream ss;
-			ss << "failed in parse COND ";
-			ss << i;
-
-			messageOut(ss.str());
+			QString ss = "failed in parse COND " + i;
+			messageOut(ss);
 
 			return false;
 		}
@@ -4353,11 +4346,8 @@ bool BarsParse::parse() {
 
 		// BDAT
 		if( !parseBdat(measures[measId], measureDatas[i], bdatChunks_[i]) ) {
-			std::stringstream ss;
-			ss << "failed in parse BDAT ";
-			ss << i;
-
-			messageOut(ss.str());
+			QString ss = "failed in parse BDAT " + i;
+			messageOut(ss);
 
 			return false;
 		}
@@ -4723,7 +4713,7 @@ bool BarsParse::parseNumericEndings(MeasureData* measureData, int /*length*/) {
 
 	// text : size maybe a huge value
 	if( !readBuffer(placeHolder, size) ) { return false; }
-	numeric->setText(placeHolder.fixedSizeBufferToString());
+	numeric->setText(ove_->getCodecString(placeHolder.fixedSizeBufferToStrByteArray()));
 
 	// fix for wedding march.ove
 	if( size % 2 == 0 ) {
@@ -4780,7 +4770,7 @@ bool BarsParse::parseTempo(MeasureData* measureData, int /*length*/) {
 
 	// 31 bytes left text
 	if( !readBuffer(placeHolder, 31) ) { return false; }
-	tempo->setLeftText(placeHolder.fixedSizeBufferToString());
+	tempo->setLeftText(ove_->getCodecString(placeHolder.fixedSizeBufferToStrByteArray()));
 
 	if( !readBuffer(placeHolder, 1) ) { return false; }
 	thisByte = placeHolder.toUnsignedInt();
@@ -4794,7 +4784,7 @@ bool BarsParse::parseTempo(MeasureData* measureData, int /*length*/) {
 	// right text
 	if( ove_->getIsVersion4() ) {
 		if( !readBuffer(placeHolder, 31) ) { return false; }
-		tempo->setRightText(placeHolder.fixedSizeBufferToString());
+		tempo->setRightText(ove_->getCodecString(placeHolder.fixedSizeBufferToStrByteArray()));
 
 		if( !jump(1) ) { return false; }
 	}
@@ -4834,7 +4824,7 @@ bool BarsParse::parseBarNumber(Measure* measure, int /*length*/) {
 
 	// prefix
 	if( !readBuffer(placeHolder, 2) ) { return false; }
-	barNumber->setPrefix(placeHolder.fixedSizeBufferToString());
+	barNumber->setPrefix(ove_->getCodecString(placeHolder.fixedSizeBufferToStrByteArray()));
 
 	if( !jump(18) ) { return false; }
 
@@ -4914,7 +4904,7 @@ bool BarsParse::parseText(MeasureData* measureData, int length) {
 
 	// text string, maybe huge
 	if( !readBuffer(placeHolder, size) ) { return false; }
-	text->setText(placeHolder.fixedSizeBufferToString());
+	text->setText(ove_->getCodecString(placeHolder.fixedSizeBufferToStrByteArray()));
 
 	if( !includeLineBreak ) {
 		if( !jump(6) ) { return false; }
@@ -4975,7 +4965,7 @@ bool BarsParse::parseRepeatSymbol(MeasureData* measureData, int /*length*/) {
 
 	// text, maybe huge
 	if( !readBuffer(placeHolder, size) ) { return false; }
-	repeat->setText(placeHolder.fixedSizeBufferToString());
+	repeat->setText(ove_->getCodecString(placeHolder.fixedSizeBufferToStrByteArray()));
 
 	// last 0
 	if( size % 2 == 0 ) {
@@ -5290,8 +5280,8 @@ bool BarsParse::parseNoteRest(MeasureData* measureData, int length, BdatType typ
 
 			// note
 			if( !readBuffer(placeHolder, 1) ) { return false; }
-			unsigned int note = placeHolder.toUnsignedInt();
-			notePtr->setNote(note);
+			int note = placeHolder.toInt();
+			notePtr->setNote(note); // change from unsigned int to int, for invalid drum note
 
 			// note on velocity
 			if( !readBuffer(placeHolder, 1) ) { return false; }
@@ -5455,7 +5445,7 @@ int tupletToSpace(int tuplet) {
 }
 
 bool BarsParse::parseBeam(MeasureData* measureData, int length) {
-	unsigned int i;
+	int i;
 	Block placeHolder;
 
 	Beam* beam = new Beam();
@@ -5483,7 +5473,7 @@ bool BarsParse::parseBeam(MeasureData* measureData, int length) {
 
 	// beam count
 	if( !readBuffer(placeHolder, 1) ) { return false; }
-	unsigned int beamCount = placeHolder.toUnsignedInt();
+	int beamCount = placeHolder.toUnsignedInt();
 
 	if( !jump(1) ) { return false; }
 
@@ -5500,7 +5490,7 @@ bool BarsParse::parseBeam(MeasureData* measureData, int length) {
 	}
 
 	int currentCursor = ove_->getIsVersion4() ? 23 : 13;
-	unsigned int count = (length - currentCursor)/16;
+	int count = (length - currentCursor)/16;
 
 	if( count != beamCount ) { return false; }
 
@@ -5552,7 +5542,7 @@ bool BarsParse::parseBeam(MeasureData* measureData, int length) {
 		}
 	}
 
-	const std::vector<std::pair<MeasurePos, MeasurePos> > lines = beam->getLines();
+	const QList<QPair<MeasurePos, MeasurePos> > lines = beam->getLines();
 	MeasurePos offsetMp;
 
 	for( i=0; i<lines.size(); ++i ) {
@@ -5896,7 +5886,7 @@ bool BarsParse::parseLyric(MeasureData* measureData, int length) {
 		// lyric
 		if( length > 29 ) {
 			if( !readBuffer(placeHolder, length-29) ) { return false; }
-			lyric->setLyric(placeHolder.fixedSizeBufferToString());
+			lyric->setLyric(ove_->getCodecString(placeHolder.fixedSizeBufferToStrByteArray()));
 		}
 	}
 
@@ -5909,7 +5899,11 @@ bool BarsParse::parseSlur(MeasureData* measureData, int /*length*/) {
 	Slur* slur = new Slur();
 	measureData->addCrossMeasureElement(slur, true);
 
-	if( !jump(3) ) { return false; }
+	if( !jump(2) ) { return false; }
+
+	// voice
+	if( !readBuffer(placeHolder, 1) ) { return false; }
+	slur->setVoice(getLowNibble(placeHolder.toUnsignedInt())&0x7);
 
 	// common
 	if( !parseCommonBlock(slur) ) { return false; }
@@ -5992,7 +5986,7 @@ bool BarsParse::parseGlissando(MeasureData* measureData, int /*length*/) {
 
 		// text 32 bytes
 		if( !readBuffer(placeHolder, 32) ) { return false; }
-		glissando->setText(placeHolder.fixedSizeBufferToString());
+		glissando->setText(ove_->getCodecString(placeHolder.fixedSizeBufferToStrByteArray()));
 
 		if( !jump(6) ) { return false; }
 	}
@@ -6340,10 +6334,10 @@ bool BarsParse::parseWedge(MeasureData* measureData, int length) {
 			// words
 			if( length > 39 ) {
 				if( !readBuffer(placeHolder, length-39) ) { return false; }
-				express->setText(placeHolder.fixedSizeBufferToString());
+				express->setText(ove_->getCodecString(placeHolder.fixedSizeBufferToStrByteArray()));
 			}
 		} else {
-			std::string str = wedgeType==Wedge_Cres ? "cresc" : "decresc";
+			QString str = wedgeType==Wedge_Cres ? "cresc" : "decresc";
 			express->setText(str);
 
 			if( !jump(8) ) { return false; }
@@ -6542,7 +6536,7 @@ bool BarsParse::parseExpressions(MeasureData* measureData, int length) {
 	int cursor = ove_->getIsVersion4() ? 35 : 33;
 	if( length > cursor ) {
 		if( !readBuffer(placeHolder, length-cursor) ) { return false; }
-		expressions->setText(placeHolder.fixedSizeBufferToString());
+		expressions->setText(ove_->getCodecString(placeHolder.fixedSizeBufferToStrByteArray()));
 	}
 
 	return true;
@@ -6622,7 +6616,7 @@ bool BarsParse::parseHarmonyGuitarFrame(MeasureData* measureData, int length) {
 	return true;
 }
 
-void extractOctave(unsigned int Bits, OctaveShiftType& octaveShiftType,	std::vector<OctaveShiftPosition>& positions) {
+void extractOctave(unsigned int Bits, OctaveShiftType& octaveShiftType,	QList<OctaveShiftPosition>& positions) {
 	octaveShiftType = OctaveShift_8;
 	positions.clear();
 
@@ -6732,7 +6726,7 @@ bool BarsParse::parseOctaveShift(MeasureData* measureData, int /*length*/) {
 	if( !readBuffer(placeHolder, 1) ) { return false; }
 	unsigned int type = getLowNibble(placeHolder.toUnsignedInt());
 	OctaveShiftType octaveShiftType = OctaveShift_8;
-	std::vector<OctaveShiftPosition> positions;
+	QList<OctaveShiftPosition> positions;
 	extractOctave(type, octaveShiftType, positions);
 
 	octave->setOctaveShiftType(octaveShiftType);
@@ -6754,7 +6748,7 @@ bool BarsParse::parseOctaveShift(MeasureData* measureData, int /*length*/) {
 	octave->setEndTick(placeHolder.toUnsignedInt());
 
 	// start & stop maybe appear in same measure
-	for(unsigned int i=0; i<positions.size(); ++i) {
+	for (int i=0; i<positions.size(); ++i) {
 		OctaveShiftPosition position = positions[i];
 		OctaveShiftEndPoint* octavePoint = new OctaveShiftEndPoint();
 		measureData->addMusicData(octavePoint);
@@ -7115,13 +7109,13 @@ bool LyricChunkParse::parse() {
 
 		// name
 		if( !readBuffer(placeHolder, 32) ) { return false; }
-		info.name_ = placeHolder.fixedSizeBufferToString();
+		info.name_ = ove_->getCodecString(placeHolder.fixedSizeBufferToStrByteArray());
 
 		if( info.lyricSize_ > 0 ) {
 			// lyric
 			if( info.lyricSize_ > 0 ) {
 				if( !readBuffer(placeHolder, info.lyricSize_) ) { return false; }
-				info.lyric_ = placeHolder.fixedSizeBufferToString();
+				info.lyric_ = ove_->getCodecString(placeHolder.fixedSizeBufferToStrByteArray());
 			}
 
 			if( !jump(4) ) { return false; }
@@ -7157,62 +7151,16 @@ bool isSpace(char c) {
 	return c == ' ' || c == '\n';
 }
 
-std::string trimString(const std::string& str) {
-	std::string t = str;
-    std::string::iterator i;
-
-    for ( i=t.begin(); i!=t.end(); ++i ) {
-        if (!isSpace(*i)) {
-            t.erase(t.begin(), i);
-            break;
-        }
-    }
-
-    if (i == t.end()) {
-        return t;
-    }
-
-    for ( i=t.end()-1; i!=t.begin(); --i ) {
-        if (!isSpace(*i)) {
-            t.erase(i + 1, t.end());
-            break;
-        }
-    }
-
-    return t;
-}
-
-std::vector<std::string> stringToWords(const std::string& str) {
-	std::vector<std::string> words;
-	std::string strtemp;
-	std::string::size_type pos1 = 0;
-	std::string::size_type pos2 = std::min(str.find(' ', pos1), str.find('\n', pos1));
-
-	while ( std::string::npos != pos2 ) {
-		std::string subStr = trimString(str.substr(pos1, pos2 - pos1));
-		if( subStr != std::string() ) {
-			words.push_back(subStr);
-		}
-
-		pos1 = pos2 + 1;
-		pos2 = std::min(str.find(' ', pos1), str.find('\n', pos1));
-	}
-
-    words.push_back(str.substr(pos1));
-
-	return words;
-}
-
 void LyricChunkParse::processLyricInfo(const LyricInfo& info) {
-	unsigned int i;
-	unsigned int j;
-	unsigned int index = 0; //words
+	int i;
+	int j;
+	int index = 0; //words
 
 	int measureId = info.measure_-1;
 	bool changeMeasure = true;
 	MeasureData* measureData = 0;
 	int trackMeasureCount = ove_->getTrackBarCount();
-	std::vector<std::string> words = stringToWords(info.lyric_);
+	QStringList words = info.lyric_.split(" ", QString::SkipEmptyParts);
 
 	while ( index < words.size() && measureId+1 < trackMeasureCount ) {
 		if( changeMeasure ) {
@@ -7222,8 +7170,8 @@ void LyricChunkParse::processLyricInfo(const LyricInfo& info) {
 		}
 
 		if( measureData == 0 ) { return; }
-		std::vector<NoteContainer*> containers = measureData->getNoteContainers();
-		std::vector<MusicData*> lyrics = measureData->getMusicDatas(MusicData_Lyric);
+		QList<NoteContainer*> containers = measureData->getNoteContainers();
+		QList<MusicData*> lyrics = measureData->getMusicDatas(MusicData_Lyric);
 
 		for( i=0; i<containers.size() && index<words.size(); ++i ) {
 			if( containers[i]->getIsRest() ) {
@@ -7231,13 +7179,18 @@ void LyricChunkParse::processLyricInfo(const LyricInfo& info) {
 			}
 
 			for( j=0; j<lyrics.size(); ++j ) {
-				Lyric* lyricPtr = static_cast<Lyric*>(lyrics[j]);
+				Lyric* lyric = static_cast<Lyric*>(lyrics[j]);
 
-				if( containers[i]->start()->getOffset() == lyricPtr->start()->getOffset() &&
+				if( containers[i]->start()->getOffset() == lyric->start()->getOffset() &&
 					(int)containers[i]->getVoice() == info.voice_ &&
-					lyricPtr->getVerse() == info.verse_ ) {
-					lyricPtr->setLyric(words[index]);
-					lyricPtr->setVoice(info.voice_);
+					lyric->getVerse() == info.verse_ ) {
+						if(index<words.size()) {
+							QString l = words[index].trimmed();
+							if(!l.isEmpty()) {
+								lyric->setLyric(l);
+								lyric->setVoice(info.voice_);
+							}
+						}
 
 					++index;
 				}
@@ -7297,8 +7250,8 @@ bool TitleChunkParse::parse() {
 			Block dataBlock;
 			if( !readBuffer(dataBlock, titleSize) ) { return false; }
 
-			std::string str((char*)dataBlock.data(), dataBlock.size());
-			addToOve(str, titleType);
+			QByteArray array((char*)dataBlock.data(), dataBlock.size());
+			addToOve(ove_->getCodecString(array), titleType);
 		}
 
 		return true;
@@ -7314,8 +7267,8 @@ bool TitleChunkParse::parse() {
 		Block dataBlock;
 		if( !readBuffer(dataBlock, titleSize) ) { return false; }
 
-		std::string str((char*)dataBlock.data(), dataBlock.size());
-		addToOve(str, titleType);
+		QByteArray array((char*)dataBlock.data(), dataBlock.size());
+		addToOve(ove_->getCodecString(array), titleType);
 
 		//0x 00 AB 00 0C 00 00
 		if( !jump(6) ) { return false; }
@@ -7326,8 +7279,8 @@ bool TitleChunkParse::parse() {
 	return false;
 }
 
-void TitleChunkParse::addToOve(const std::string& str, unsigned int titleType) {
-	if( str.empty() ) { return; }
+void TitleChunkParse::addToOve(const QString& str, unsigned int titleType) {
+	if( str.isEmpty() ) { return; }
 
 	if (titleType == titleType_) {
 		ove_->addTitle(str);
@@ -7372,7 +7325,7 @@ void OveOrganizer::organize() {
 void OveOrganizer::organizeAttributes() {
 	int i;
 	int j;
-	unsigned int k;
+	int k;
 
 	// key
 	if(ove_->getLineCount() > 0) {
@@ -7382,7 +7335,7 @@ void OveOrganizer::organizeAttributes() {
 
 		if(line != 0){
 			for(i=0; i<line->getStaffCount(); ++i) {
-				std::pair<int, int> partStaff = ove_->trackToPartStaff(i);
+				QPair<int, int> partStaff = ove_->trackToPartStaff(i);
 				Staff* staff = line->getStaff(i);
 				lastKey = staff->getKeyType();
 
@@ -7390,20 +7343,20 @@ void OveOrganizer::organizeAttributes() {
 					MeasureData* measureData = ove_->getMeasureData(partStaff.first, partStaff.second, j);
 
 					if(measureData != 0) {
-						Key* keyPtr = measureData->getKey();
+						Key* key = measureData->getKey();
 
 						if( j==0 ) {
-							keyPtr->setKey(lastKey);
-							keyPtr->setPreviousKey(lastKey);
+							key->setKey(lastKey);
+							key->setPreviousKey(lastKey);
 						}
 
-						if( !keyPtr->getSetKey() ) {
-							keyPtr->setKey(lastKey);
-							keyPtr->setPreviousKey(lastKey);
+						if( !key->getSetKey() ) {
+							key->setKey(lastKey);
+							key->setPreviousKey(lastKey);
 						}
 						else {
-							if( keyPtr->getKey() != lastKey ) {
-								lastKey = keyPtr->getKey();
+							if( key->getKey() != lastKey ) {
+								lastKey = key->getKey();
 							}
 						}
 					}
@@ -7420,7 +7373,7 @@ void OveOrganizer::organizeAttributes() {
 
 		if(line != 0){
 			for( i=0; i<line->getStaffCount(); ++i ) {
-				std::pair<int, int> partStaff = ove_->trackToPartStaff(i);
+				QPair<int, int> partStaff = ove_->trackToPartStaff(i);
 				Staff* staff = line->getStaff(i);
 				lastClefType = staff->getClefType();
 
@@ -7431,11 +7384,11 @@ void OveOrganizer::organizeAttributes() {
 						Clef* clefPtr = measureData->getClef();
 						clefPtr->setClefType((int)lastClefType);
 
-						const std::vector<MusicData*>& clefs = measureData->getMusicDatas(MusicData_Clef);
+						const QList<MusicData*>& clefs = measureData->getMusicDatas(MusicData_Clef);
 
 						for( k=0; k<clefs.size(); ++k ) {
-							Clef* ptr = static_cast<Clef*>(clefs[k]);
-							lastClefType = ptr->getClefType();
+							Clef* clef = static_cast<Clef*>(clefs[k]);
+							lastClefType = clef->getClefType();
 						}
 					}
 				}
@@ -7457,12 +7410,14 @@ Staff* getStaff(OveSong* ove, int track) {
 }
 
 void OveOrganizer::organizeTracks() {
-	unsigned int i;
-	//std::vector<std::pair<ClefType, int> > trackChannels;
-	std::vector<Track*> tracks = ove_->getTracks();
-	std::vector<bool> comboStaveStarts;
+	int i;
+	//QList<QPair<ClefType, int> > trackChannels;
+	QList<Track*> tracks = ove_->getTracks();
+	QList<bool> comboStaveStarts;
 
-	comboStaveStarts.assign(tracks.size(), false);
+	for( i=0; i<tracks.size(); ++i ) {
+		comboStaveStarts.push_back(false);
+	}
 
 	for( i=0; i<tracks.size(); ++i ) {
 		Staff* staff = getStaff(ove_, i);
@@ -7481,7 +7436,7 @@ void OveOrganizer::organizeTracks() {
 	}
 
 	int trackId = 0;
-	std::vector<int> partStaffCounts;
+	QList<int> partStaffCounts;
 
 	while( trackId < (int)tracks.size() ) {
 		int partTrackCount = 1;
@@ -7525,8 +7480,8 @@ void OveOrganizer::organizeMeasure(int part, int track, Measure* measure, Measur
 	organizeCrossMeasureElements(part, track, measure, measureData);
 }
 
-void addToList(std::vector<int>& list, int number) {
-	for(unsigned int i=0; i<list.size(); ++i){
+void addToList(QList<int>& list, int number) {
+	for(int i=0; i<list.size(); ++i){
 		if(list[i] == number){
 			return;
 		}
@@ -7535,11 +7490,12 @@ void addToList(std::vector<int>& list, int number) {
 	list.push_back(number);
 }
 
-void OveOrganizer::organizeContainers(int /*part*/, int /*track*/, Measure* measure, MeasureData* measureData) {
-	unsigned int i;
-	std::vector<NoteContainer*> containers = measureData->getNoteContainers();
+void OveOrganizer::organizeContainers(int /*part*/, int /*track*/,
+        Measure* measure, MeasureData* measureData) {
+	int i;
+	QList<NoteContainer*> containers = measureData->getNoteContainers();
 	int barUnits = measure->getTime()->getUnits();
-	std::vector<int> voices;
+	QList<int> voices;
 
 	for(i=0; i<containers.size(); ++i){
 		int endUnit = barUnits;
@@ -7552,12 +7508,14 @@ void OveOrganizer::organizeContainers(int /*part*/, int /*track*/, Measure* meas
 	}
 
 	// shift voices
-	std::sort(voices.begin(), voices.end());
+	qSort(voices.begin(), voices.end());
+
 	for (i = 0; i < voices.size(); ++i) {
 		int voice = voices[i];
 		// voice -> i
 		for(int j=0; j<(int)containers.size(); ++j) {
-			if( (int)containers[j]->getVoice() == voice && containers[j]->getVoice() != i ){
+		    int avoice = containers[j]->getVoice();
+			if ( avoice == voice && avoice != i ) {
 				containers[j]->setVoice(i);
 			}
 		}
@@ -7565,9 +7523,9 @@ void OveOrganizer::organizeContainers(int /*part*/, int /*track*/, Measure* meas
 }
 
 void OveOrganizer::organizeMusicDatas(int /*part*/, int /*track*/, Measure* measure, MeasureData* measureData) {
-	unsigned int i;
+	int i;
 	int barIndex = measure->getBarNumber()->getIndex();
-	std::vector<MusicData*> datas = measureData->getMusicDatas(MusicData_None);
+	QList<MusicData*> datas = measureData->getMusicDatas(MusicData_None);
 
 	for(i=0; i<datas.size(); ++i) {
 		datas[i]->start()->setMeasure(barIndex);
@@ -7575,8 +7533,8 @@ void OveOrganizer::organizeMusicDatas(int /*part*/, int /*track*/, Measure* meas
 }
 
 void OveOrganizer::organizeCrossMeasureElements(int part, int track, Measure* measure, MeasureData* measureData) {
-	unsigned int i;
-	std::vector<MusicData*> pairs = measureData->getCrossMeasureElements(MusicData_None, MeasureData::PairType_Start);
+	int i;
+	QList<MusicData*> pairs = measureData->getCrossMeasureElements(MusicData_None, MeasureData::PairType_Start);
 
 	for(i=0; i<pairs.size(); ++i) {
 		MusicData* pair = pairs[i];
@@ -7628,9 +7586,9 @@ void OveOrganizer::organizePairElement(
 
 	if( data->getMusicDataType() == MusicData_Tuplet ){
 		Tuplet* tuplet = static_cast<Tuplet*>(data);
-		const std::vector<NoteContainer*> containers = measureData->getNoteContainers();
+		const QList<NoteContainer*> containers = measureData->getNoteContainers();
 
-		for(unsigned int i=0; i<containers.size(); ++i){
+		for(int i=0; i<containers.size(); ++i){
 			if(containers[i]->getTick() > tuplet->getTick()){
 				break;
 			}
@@ -7644,7 +7602,7 @@ void OveOrganizer::organizePairElement(
 		if( tuplet->getTick() % tupletTick != 0 ) {
 			int newStartTick = (tuplet->getTick() / tupletTick) * tupletTick;
 
-			for(unsigned int i=0; i<containers.size(); ++i){
+			for(int i=0; i<containers.size(); ++i){
 				if( containers[i]->getTick() == newStartTick &&
 					containers[i]->getTuplet() == tuplet->getTuplet()) {
 					tuplet->setTick(containers[i]->getTick());
@@ -7660,8 +7618,8 @@ void OveOrganizer::organizeOctaveShift(
 						Measure* measure,
 						MeasureData* measureData) {
 	// octave shift
-	unsigned int i;
-	const std::vector<NoteContainer*> containers = measureData->getNoteContainers();
+	int i;
+	const QList<NoteContainer*> containers = measureData->getNoteContainers();
 	int barIndex = measure->getBarNumber()->getIndex();
 
 	octave->start()->setMeasure(barIndex);
@@ -7680,8 +7638,8 @@ bool getMiddleUnit(
 			OveSong* ove, int /*part*/, int /*track*/,
 			Measure* measure1, Measure* measure2, int unit1, int /*unit2*/,
 			Measure* middleMeasure, int& middleUnit) {
-	std::vector<int> barUnits;
-	unsigned int i;
+	QList<int> barUnits;
+	int i;
 	int bar1Index = measure1->getBarNumber()->getIndex();
 	int bar2Index = measure2->getBarNumber()->getIndex();
 	int sumUnit = 0;
@@ -7763,11 +7721,6 @@ void OveOrganizer::organizeWedge(Wedge* wedge, int part, int track, Measure* mea
 			middleMeasure, middleUnit);
 
 		if( middleMeasure != 0 ) {
-//			MeasureData* middleMeasureData = ove_->getMeasureData(
-//														part,
-//														track,
-//														middleMeasure->getBarNumber()->getIndex());
-
 			WedgeEndPoint* midStopPoint = new WedgeEndPoint();
 			measureData->addMusicData(midStopPoint);
 
@@ -7927,11 +7880,12 @@ int chunkTypeToMaxTimes(ChunkType type) {
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 OveSerialize::OveSerialize() :
-	ove_(NULL), streamHandle_(NULL), notify_(NULL) {
+	ove_(0),
+	streamHandle_(0),
+	notify_(0) {
 }
 
 OveSerialize::~OveSerialize() {
-	notify_ = NULL;
 	if(streamHandle_ != 0) {
 		delete streamHandle_;
 		streamHandle_ = 0;
@@ -7956,7 +7910,7 @@ void OveSerialize::messageOutError() {
 	}
 }
 
-void OveSerialize::messageOut(const std::string& str) {
+void OveSerialize::messageOut(const QString& str) {
 	if (notify_ != NULL) {
 		notify_->loadInfo(str);
 	}
@@ -7972,7 +7926,7 @@ bool OveSerialize::load(void) {
 	}
 
 	unsigned int i;
-	std::map<ChunkType, int> chunkTimes;
+	QMap<ChunkType, int> chunkTimes;
 	//bool firstEnter = true;
 
 	for( i=(int)Chunk_OVSC; i<(int)Chunk_NONE; ++i ) {
@@ -8094,7 +8048,7 @@ bool OveSerialize::load(void) {
 		default:
 			/*if( firstEnter )
 			 {
-			 std::string info = "Not compatible file, try to load and save with newer version, Overture 4 is recommended.";
+			 QString info = "Not compatible file, try to load and save with newer version, Overture 4 is recommended.";
 			 messageOut(info);
 			 messageOutError();
 
@@ -8139,7 +8093,7 @@ bool OveSerialize::readHeader() {
 		}
 	}
 
-	std::string info = "Not compatible file, try to load and save with newer version, Overture 4 is recommended.";
+	QString info = "Not compatible file, try to load and save with newer version, Overture 4 is recommended.";
 	messageOut(info);
 
 	return false;
@@ -8228,10 +8182,10 @@ bool OveSerialize::readLinesData() {
 		return false;
 
 	unsigned short lineCount = lineGroupChunk.getCountBlock()->toCount();
-	unsigned int i;
+	int i;
 	unsigned int j;
-	std::vector<SizeChunk*> lineChunks;
-	std::vector<SizeChunk*> staffChunks;
+	QList<SizeChunk*> lineChunks;
+	QList<SizeChunk*> staffChunks;
 
 	for (i = 0; i < lineCount; ++i) {
 		SizeChunk* lineChunk = new SizeChunk();
@@ -8289,9 +8243,9 @@ bool OveSerialize::readBarsData() {
 	unsigned short measCount = barGroupChunk.getCountBlock()->toCount();
 	int i;
 
-	std::vector<SizeChunk*> measureChunks;
-	std::vector<SizeChunk*> conductChunks;
-	std::vector<SizeChunk*> bdatChunks;
+	QList<SizeChunk*> measureChunks;
+	QList<SizeChunk*> conductChunks;
+	QList<SizeChunk*> bdatChunks;
 
 	ove_->setTrackBarCount(measCount);
 
@@ -8392,7 +8346,7 @@ bool OveSerialize::readNameBlock(NameBlock& nameBlock) {
 	return true;
 }
 
-bool OveSerialize::readChunkName(Chunk* /*chunk*/, const std::string& name) {
+bool OveSerialize::readChunkName(Chunk* /*chunk*/, const QString& name) {
 	if (streamHandle_ == 0)
 		return false;
 
@@ -8401,7 +8355,7 @@ bool OveSerialize::readChunkName(Chunk* /*chunk*/, const std::string& name) {
 	if (!streamHandle_->read((char*) nameBlock.data(), nameBlock.size()))
 		return false;
 
-	if (!(nameBlock.toString() == name))
+	if (!(nameBlock.toStrByteArray() == name))
 		return false;
 
 	return true;
