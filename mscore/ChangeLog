@@ -3,6 +3,7 @@
       - feature request #8355: bww import: bww2mxml regression test
        (la)
       - fix #7764: crashes when open ove file (vanferry patch)
+      - fix #8372: Fix to end-start-repeat bar line width (miwarre patch)
 23.dec (lv)
       - feature request #8355: bww import: initial implementation
        (la)
