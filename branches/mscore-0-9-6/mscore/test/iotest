@@ -28,6 +28,23 @@ rwtest() {
       testcount=$(($testcount+1))
       }
 
+rwtestBww() {
+      echo -n "testing load/save $1";
+      REF=bwwrefs/`basename $1 .bww`.xml
+      $MSCORE ../bww2mxml/test/$1 -d -o mops.xml &> /dev/null
+      if diff -q $REF mops.xml &> /dev/null; then
+            echo -e "\r\t\t\t\t\t\t...OK";
+      else
+            echo -e "\r\t\t\t\t\t\t...FAILED";
+            failures=$(($failures+1));
+            echo "+++++++++DIFF++++++++++++++"
+            diff $REF mops.xml
+            echo "+++++++++++++++++++++++++++"
+      fi
+      rm mops.xml
+      testcount=$(($testcount+1))
+      }
+
 rwtestXml() {
       echo -n "testing load/save $1";
       $MSCORE $1 -d -o mops.xml &> /dev/null
@@ -42,6 +59,14 @@ rwtestXml() {
       fi
       rm mops.xml
       testcount=$(($testcount+1))
+      }
+
+rwtestAllBww() {
+      rwtestBww testGraces.bww
+      rwtestBww testHello.bww
+      rwtestBww testNotes.bww
+      rwtestBww testTempo60.bww
+      rwtestBww testTempo120.bww
       }
 
 rwtestAllDemos() {
@@ -120,18 +145,21 @@ rwtestAllXml() {
       }
 
 usage() {
-      echo "usage: $0 [demos | msc | xml]"
-      echo "or: $0 [msc | xml] <file>"
+      echo "usage: $0 [bww | demos | msc | xml]"
+      echo "or: $0 [bww | msc | xml] <file>"
       echo
       exit 1
       }
 
 if [ $# -eq 0 ]; then
+      rwtestAllBww
       rwtestAllDemos
       rwtestAllMsc
       rwtestAllXml
 elif [ $# -eq 1 ]; then
-      if [ "$1" == "demos" ]; then
+      if [ "$1" == "bww" ]; then
+            rwtestAllBww
+      elif [ "$1" == "demos" ]; then
             rwtestAllDemos
       elif [ "$1" == "msc" ]; then
             rwtestAllMsc
@@ -141,7 +169,9 @@ elif [ $# -eq 1 ]; then
             usage
       fi
 elif [ $# -eq 2 ]; then
-      if [ "$1" == "msc" ]; then
+      if [ "$1" == "bww" ]; then
+            rwtest $2
+      elif [ "$1" == "msc" ]; then
             rwtest $2
       elif [ "$1" == "xml" ]; then
             rwtestXml $2
