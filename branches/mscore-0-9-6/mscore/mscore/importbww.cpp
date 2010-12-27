@@ -42,6 +42,7 @@
 #include "volta.h"
 #include "al/tempo.h"
 #include "sym.h"
+#include "clef.h"
 
 //---------------------------------------------------------
 //   addText
@@ -274,6 +275,11 @@ namespace Bww {
 
       // set key and time signature in the first measure
       if (measureNumber == 1) {
+            // clef
+            int clef = CLEF_G;
+            Staff* part = score->staff(0);
+            ClefList* ct = part->clefList();
+            (*ct)[0] = clef;
             // keysig
             KeySigEvent key;
             key.setAccidentalType(2);
@@ -375,7 +381,6 @@ void MsScWriter::note(const QString pitch, const QVector<Bww::BeamType> beamList
       Direction sd = AUTO;
 
       // create chord
-      SegmentType st = grace ? SegGrace : SegChordRest;
       ChordRest* cr = new Chord(score);
       cr->setTick(tick);
       cr->setBeamMode(bm);
@@ -406,7 +411,7 @@ void MsScWriter::note(const QString pitch, const QVector<Bww::BeamType> beamList
             }
       cr->add(note);
       // add chord to measure
-      Segment* s = currentMeasure->getSegment(st, cr->tick());
+      Segment* s = currentMeasure->getSegment(cr);
       s->add(cr);
       //doTriplet(cr, triplet);
       if (!grace) {

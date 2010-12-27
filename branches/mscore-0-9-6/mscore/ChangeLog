@@ -1,4 +1,5 @@
 27.dec (lv)
+      - feature request #8355: bww import: fixed clefs and multiple grace notes
       - feature request #8355: bww import: updated mscore regression testfiles
 24.dec (lv)
       - feature request #8355: bww import: mscore regression test
