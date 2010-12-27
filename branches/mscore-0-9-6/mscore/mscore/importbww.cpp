@@ -177,7 +177,7 @@ namespace Bww {
     void tsig(const int beats, const int beat);
     void trailer();
   private:
-    void doTriplet(Chord* cr, StartStop triplet = ST_NONE);
+    void doTriplet(ChordRest* cr, StartStop triplet = ST_NONE);
     static const int WHOLE_DUR = 64;                    ///< Whole note duration
     struct StepAlterOct {                               ///< MusicXML step/alter/oct values
       QChar s;
@@ -197,6 +197,7 @@ namespace Bww {
     Tuplet* tuplet;                                     ///< Current tuplet
     Volta* lastVolta;                                   ///< Current volta
     unsigned int tempo;                                 ///< Tempo (0 = not specified)
+    unsigned int ending;                                ///< Current ending
   };
 
   /**
@@ -212,7 +213,8 @@ namespace Bww {
     currentMeasure(0),
     tuplet(0),
     lastVolta(0),
-    tempo(0)
+    tempo(0),
+    ending(0)
   {
     qDebug() << "MsScWriter::MsScWriter()";
 
@@ -260,15 +262,17 @@ namespace Bww {
       if (mbf.endingFirst || mbf.endingSecond) {
             Volta* volta = new Volta(score);
             volta->setTrack(0);
-// TODO            volta->setTick(tick);
+            volta->setTick(tick);
             volta->endings().clear();
             if (mbf.endingFirst) {
                   volta->setText("1");
                   volta->endings().append(1);
+                  ending = 1;
                   }
             else {
                   volta->setText("2");
                   volta->endings().append(2);
+                  ending = 2;
                   }
             lastVolta = volta;
             }
@@ -314,8 +318,11 @@ void MsScWriter::endMeasure(const Bww::MeasureEndFlags mef)
       if (mef.endingEnd) {
             if (lastVolta) {
                   printf("adding volta\n");
-                  lastVolta->setSubtype(Volta::VOLTA_CLOSED);
-// TODO                  lastVolta->setTick2(tick);
+                  if (ending == 1)
+                        lastVolta->setSubtype(Volta::VOLTA_CLOSED);
+                  else
+                        lastVolta->setSubtype(Volta::VOLTA_OPEN);
+                  lastVolta->setTick2(tick);
                   score->add(lastVolta);
                   lastVolta = 0;
                   }
@@ -413,8 +420,8 @@ void MsScWriter::note(const QString pitch, const QVector<Bww::BeamType> beamList
       // add chord to measure
       Segment* s = currentMeasure->getSegment(cr);
       s->add(cr);
-      //doTriplet(cr, triplet);
       if (!grace) {
+            doTriplet(cr, triplet);
             int tickBefore = tick;
             tick += ticks;
             Fraction nl(Fraction::fromTicks(tick - currentMeasure->tick()));
@@ -494,7 +501,7 @@ void MsScWriter::note(const QString pitch, const QVector<Bww::BeamType> beamList
    Handle the triplet.
    */
 
-  void MsScWriter::doTriplet(Chord* cr, StartStop triplet)
+  void MsScWriter::doTriplet(ChordRest* cr, StartStop triplet)
   {
       qDebug() << "MsScWriter::doTriplet(" << triplet << ")"
         ;
@@ -510,6 +517,20 @@ void MsScWriter::note(const QString pitch, const QVector<Bww::BeamType> beamList
             if (tuplet) {
                   cr->setTuplet(tuplet);
                   tuplet->add(cr);
+                  int totalDuration = 0;
+                  foreach(DurationElement* de, tuplet->elements()) {
+                        if (de->type() == CHORD || de->type() == REST){
+                              totalDuration += de->tickLen();
+                              }
+                        }
+                  if (totalDuration) {
+                        Duration d;
+                        d.setVal(totalDuration);
+                        tuplet->setFraction(d.fraction());
+                        Duration d2;
+                        d2.setVal(totalDuration / 2);
+                        tuplet->setBaseLen(d2.fraction());
+                        }
                   tuplet = 0;
                   }
             else
