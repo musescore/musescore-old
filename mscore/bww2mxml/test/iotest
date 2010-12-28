@@ -29,6 +29,7 @@ rwtest() {
 
 rwtestAll() {
       rwtest testBeams.bww
+      rwtest testDuration.bww
       rwtest testGraces.bww
       rwtest testHello.bww
       rwtest testMidMeasureRepeat.bww
@@ -37,6 +38,7 @@ rwtestAll() {
       rwtest testTempo120.bww
       rwtest testTempo60.bww
       rwtest testTieTriplet.bww
+      rwtest testTriplets.bww
       }
 
 usage() {

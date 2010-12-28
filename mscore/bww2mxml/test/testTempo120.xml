@@ -26,7 +26,7 @@
   <part id="P1">
     <measure number="1">
       <attributes>
-        <divisions>16</divisions>
+        <divisions>48</divisions>
         <key>
           <fifths>2</fifths>
           <mode>major</mode>
@@ -42,7 +42,7 @@
       </attributes>
       <direction placement="above">
         <direction-type>
-          <metronome>
+          <metronome parentheses="no">
             <beat-unit>quarter</beat-unit>
             <per-minute>120</per-minute>
           </metronome>
@@ -54,7 +54,7 @@
           <step>G</step>
           <octave>4</octave>
         </pitch>
-        <duration>16</duration>
+        <duration>48</duration>
         <type>quarter</type>
         <stem>down</stem>
       </note>
@@ -63,7 +63,7 @@
           <step>A</step>
           <octave>4</octave>
         </pitch>
-        <duration>16</duration>
+        <duration>48</duration>
         <type>quarter</type>
         <stem>down</stem>
       </note>
@@ -72,7 +72,7 @@
           <step>B</step>
           <octave>4</octave>
         </pitch>
-        <duration>16</duration>
+        <duration>48</duration>
         <type>quarter</type>
         <stem>down</stem>
       </note>
@@ -82,7 +82,7 @@
           <alter>1</alter>
           <octave>5</octave>
         </pitch>
-        <duration>16</duration>
+        <duration>48</duration>
         <type>quarter</type>
         <stem>down</stem>
       </note>
@@ -93,7 +93,7 @@
           <step>D</step>
           <octave>5</octave>
         </pitch>
-        <duration>16</duration>
+        <duration>48</duration>
         <type>quarter</type>
         <stem>down</stem>
       </note>
@@ -102,7 +102,7 @@
           <step>E</step>
           <octave>5</octave>
         </pitch>
-        <duration>16</duration>
+        <duration>48</duration>
         <type>quarter</type>
         <stem>down</stem>
       </note>
@@ -112,7 +112,7 @@
           <alter>1</alter>
           <octave>5</octave>
         </pitch>
-        <duration>16</duration>
+        <duration>48</duration>
         <type>quarter</type>
         <stem>down</stem>
       </note>
@@ -121,7 +121,7 @@
           <step>G</step>
           <octave>5</octave>
         </pitch>
-        <duration>16</duration>
+        <duration>48</duration>
         <type>quarter</type>
         <stem>down</stem>
       </note>

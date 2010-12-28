@@ -26,7 +26,7 @@
   <part id="P1">
     <measure number="1">
       <attributes>
-        <divisions>16</divisions>
+        <divisions>48</divisions>
         <key>
           <fifths>2</fifths>
           <mode>major</mode>
@@ -42,7 +42,7 @@
       </attributes>
       <direction placement="above">
         <direction-type>
-          <metronome>
+          <metronome parentheses="no">
             <beat-unit>quarter</beat-unit>
             <per-minute>90</per-minute>
           </metronome>
@@ -54,9 +54,8 @@
           <step>G</step>
           <octave>4</octave>
         </pitch>
-        <duration>64</duration>
+        <duration>192</duration>
         <type>whole</type>
-        <stem>down</stem>
       </note>
     </measure>
   </part>

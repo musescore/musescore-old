@@ -30,7 +30,7 @@
         <repeat direction="forward"/>
       </barline>
       <attributes>
-        <divisions>16</divisions>
+        <divisions>48</divisions>
         <key>
           <fifths>2</fifths>
           <mode>major</mode>
@@ -49,7 +49,7 @@
           <step>G</step>
           <octave>4</octave>
         </pitch>
-        <duration>32</duration>
+        <duration>96</duration>
         <type>half</type>
         <stem>down</stem>
       </note>
@@ -60,7 +60,7 @@
           <step>A</step>
           <octave>4</octave>
         </pitch>
-        <duration>32</duration>
+        <duration>96</duration>
         <type>half</type>
         <stem>down</stem>
       </note>
@@ -75,7 +75,7 @@
           <step>B</step>
           <octave>4</octave>
         </pitch>
-        <duration>32</duration>
+        <duration>96</duration>
         <type>half</type>
         <stem>down</stem>
       </note>
@@ -87,7 +87,7 @@
           <alter>1</alter>
           <octave>5</octave>
         </pitch>
-        <duration>32</duration>
+        <duration>96</duration>
         <type>half</type>
         <stem>down</stem>
       </note>
@@ -103,7 +103,7 @@
           <step>G</step>
           <octave>4</octave>
         </pitch>
-        <duration>32</duration>
+        <duration>96</duration>
         <type>half</type>
         <stem>down</stem>
       </note>
@@ -117,7 +117,7 @@
           <step>A</step>
           <octave>4</octave>
         </pitch>
-        <duration>32</duration>
+        <duration>96</duration>
         <type>half</type>
         <stem>down</stem>
       </note>
@@ -136,7 +136,7 @@
           <step>B</step>
           <octave>4</octave>
         </pitch>
-        <duration>32</duration>
+        <duration>96</duration>
         <type>half</type>
         <stem>down</stem>
       </note>
@@ -151,7 +151,7 @@
           <alter>1</alter>
           <octave>5</octave>
         </pitch>
-        <duration>32</duration>
+        <duration>96</duration>
         <type>half</type>
         <stem>down</stem>
       </note>

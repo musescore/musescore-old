@@ -131,7 +131,7 @@ namespace Bww {
       {
         out << "      <direction placement=\"above\">" << endl;
         out << "        <direction-type>" << endl;
-        out << "          <metronome>" << endl;
+        out << "          <metronome parentheses=\"no\">" << endl;
         out << "            <beat-unit>quarter</beat-unit>" << endl;
         out << "            <per-minute>" << tempo << "</per-minute>" << endl;
         out << "          </metronome>" << endl;
@@ -198,6 +198,7 @@ namespace Bww {
 
     int dur = WHOLE_DUR / type.toInt();
     if (dots == 1) dur = 3 * dur / 2;
+    if (triplet != ST_NONE) dur = 2 * dur / 3;
     out << "      <note>" << endl;
     if (grace) out << "        <grace/>" << endl;
     out << "        <pitch>" << endl;
@@ -223,7 +224,10 @@ namespace Bww {
     if (grace)
       out << "        <stem>up</stem>" << endl;
     else
-      out << "        <stem>down</stem>" << endl;
+    {
+      if (type != "1")
+        out << "        <stem>down</stem>" << endl;
+    }
     for (int i = 0; i < maxBeamLevel; ++i)
     {
       QString s;
@@ -250,7 +254,12 @@ namespace Bww {
       if (tieStop)
         out << "          <tied type=\"stop\"/>" << endl;
       if (triplet == ST_START)
-        out << "          <tuplet type=\"start\"/>" << endl;
+      {
+        if (type == "1" || type == "2" || type == "4")
+          out << "          <tuplet type=\"start\" bracket=\"yes\"/>" << endl;
+        else
+          out << "          <tuplet type=\"start\" bracket=\"no\"/>" << endl;
+      }
       if (triplet == ST_STOP)
         out << "          <tuplet type=\"stop\"/>" << endl;
       out << "        </notations>" << endl;
@@ -262,7 +271,7 @@ namespace Bww {
    Write the header.
    */
 
-  void MxmlWriter::header(const QString title, const QString type,
+  void MxmlWriter::header(const QString title, const QString /* type */,
                           const QString composer, const QString footer,
                           const unsigned int temp)
   {

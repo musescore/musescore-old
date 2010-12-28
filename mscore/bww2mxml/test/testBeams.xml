@@ -26,7 +26,7 @@
   <part id="P1">
     <measure number="1">
       <attributes>
-        <divisions>16</divisions>
+        <divisions>48</divisions>
         <key>
           <fifths>2</fifths>
           <mode>major</mode>
@@ -42,7 +42,7 @@
       </attributes>
       <direction placement="above">
         <direction-type>
-          <metronome>
+          <metronome parentheses="no">
             <beat-unit>quarter</beat-unit>
             <per-minute>90</per-minute>
           </metronome>
@@ -54,7 +54,7 @@
           <step>G</step>
           <octave>4</octave>
         </pitch>
-        <duration>8</duration>
+        <duration>24</duration>
         <type>eighth</type>
         <stem>down</stem>
         <beam number="1">begin</beam>
@@ -64,7 +64,7 @@
           <step>A</step>
           <octave>4</octave>
         </pitch>
-        <duration>8</duration>
+        <duration>24</duration>
         <type>eighth</type>
         <stem>down</stem>
         <beam number="1">end</beam>
@@ -74,7 +74,7 @@
           <step>B</step>
           <octave>4</octave>
         </pitch>
-        <duration>8</duration>
+        <duration>24</duration>
         <type>eighth</type>
         <stem>down</stem>
         <beam number="1">begin</beam>
@@ -85,7 +85,7 @@
           <alter>1</alter>
           <octave>5</octave>
         </pitch>
-        <duration>8</duration>
+        <duration>24</duration>
         <type>eighth</type>
         <stem>down</stem>
         <beam number="1">end</beam>
@@ -95,7 +95,7 @@
           <step>G</step>
           <octave>4</octave>
         </pitch>
-        <duration>8</duration>
+        <duration>24</duration>
         <type>eighth</type>
         <stem>down</stem>
         <beam number="1">begin</beam>
@@ -105,7 +105,7 @@
           <step>A</step>
           <octave>4</octave>
         </pitch>
-        <duration>4</duration>
+        <duration>12</duration>
         <type>16th</type>
         <stem>down</stem>
         <beam number="1">continue</beam>
@@ -116,7 +116,7 @@
           <step>B</step>
           <octave>4</octave>
         </pitch>
-        <duration>4</duration>
+        <duration>12</duration>
         <type>16th</type>
         <stem>down</stem>
         <beam number="1">end</beam>
@@ -127,7 +127,7 @@
           <step>G</step>
           <octave>4</octave>
         </pitch>
-        <duration>12</duration>
+        <duration>36</duration>
         <type>eighth</type>
         <dot/>
         <stem>down</stem>
@@ -138,7 +138,7 @@
           <step>A</step>
           <octave>4</octave>
         </pitch>
-        <duration>4</duration>
+        <duration>12</duration>
         <type>16th</type>
         <stem>down</stem>
         <beam number="1">end</beam>
@@ -149,7 +149,7 @@
           <step>G</step>
           <octave>4</octave>
         </pitch>
-        <duration>4</duration>
+        <duration>12</duration>
         <type>16th</type>
         <stem>down</stem>
         <beam number="1">begin</beam>
@@ -160,7 +160,7 @@
           <step>A</step>
           <octave>4</octave>
         </pitch>
-        <duration>12</duration>
+        <duration>36</duration>
         <type>eighth</type>
         <dot/>
         <stem>down</stem>
@@ -171,7 +171,7 @@
           <step>G</step>
           <octave>4</octave>
         </pitch>
-        <duration>2</duration>
+        <duration>6</duration>
         <type>32nd</type>
         <stem>down</stem>
         <beam number="1">begin</beam>
@@ -183,7 +183,7 @@
           <step>A</step>
           <octave>4</octave>
         </pitch>
-        <duration>2</duration>
+        <duration>6</duration>
         <type>32nd</type>
         <stem>down</stem>
         <beam number="1">continue</beam>
@@ -195,7 +195,7 @@
           <step>B</step>
           <octave>4</octave>
         </pitch>
-        <duration>4</duration>
+        <duration>12</duration>
         <type>16th</type>
         <stem>down</stem>
         <beam number="1">continue</beam>
@@ -207,7 +207,7 @@
           <alter>1</alter>
           <octave>5</octave>
         </pitch>
-        <duration>8</duration>
+        <duration>24</duration>
         <type>eighth</type>
         <stem>down</stem>
         <beam number="1">end</beam>
