@@ -43,6 +43,7 @@
 #include "al/tempo.h"
 #include "sym.h"
 #include "clef.h"
+#include "musicxml.h"
 
 //---------------------------------------------------------
 //   addText
@@ -453,7 +454,11 @@ void MsScWriter::note(const QString pitch, const QVector<Bww::BeamType> beamList
       // save tempo for later use
       tempo = temp;
 
-//  score->setWorkTitle(title);
+      score->setWorkTitle(title);
+      QString strType = "composer";
+      QString strComposer = composer; // TODO: const parameters ctor MusicXmlCreator
+      score->addCreator(new MusicXmlCreator(strType, strComposer));
+      score->setmxmlRights(footer);
       VBox* vbox  = 0;
       addText(vbox, score, title, TEXT_TITLE, TEXT_STYLE_TITLE);
       addText(vbox, score, type, TEXT_SUBTITLE, TEXT_STYLE_SUBTITLE);
