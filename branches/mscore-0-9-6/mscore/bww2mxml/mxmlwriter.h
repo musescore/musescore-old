@@ -59,7 +59,7 @@ namespace Bww {
     void tsig(const int beats, const int beat);
     void trailer();
   private:
-    static const int WHOLE_DUR = 64;                    ///< Whole note duration
+    static const int WHOLE_DUR = 3 * 64;                ///< Whole note duration
     struct StepAlterOct {                               ///< MusicXML step/alter/oct values
       QChar s;
       int a;

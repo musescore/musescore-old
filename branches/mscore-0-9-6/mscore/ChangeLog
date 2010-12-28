@@ -1,4 +1,5 @@
 28.dec (lv)
+      - feature request #8355: bww import: fixed export of metronome, triplet and stem
       - feature request #8355: bww import: fixed export of title, composer and rights
 27.dec (lv)
       - feature request #8355: bww import: fixed voltas and triplets

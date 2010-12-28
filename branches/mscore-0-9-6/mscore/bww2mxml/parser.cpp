@@ -512,7 +512,7 @@ namespace Bww {
    TODO: remove
    */
 
-  void Parser::beginMeasure(const Bww::MeasureBeginFlags mbf)
+  void Parser::beginMeasure(const Bww::MeasureBeginFlags /* mbf */)
   {
     /*
     qDebug() << "Parser::beginMeasure("
@@ -535,7 +535,7 @@ namespace Bww {
    TODO: remove
    */
 
-  void Parser::endMeasure(const Bww::MeasureEndFlags mef)
+  void Parser::endMeasure(const Bww::MeasureEndFlags /* mef */)
   {
     /*
     qDebug() << "Parser::endMeasure("

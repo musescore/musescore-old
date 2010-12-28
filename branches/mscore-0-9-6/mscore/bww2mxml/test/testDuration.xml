@@ -2,11 +2,11 @@
 <!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 2.0 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise>
   <work>
-    <work-title>Test Tempo 60</work-title>
+    <work-title>Duration</work-title>
   </work>
   <identification>
     <creator type="composer">Leon Vinken</creator>
-    <rights></rights>
+    <rights>Part of bbw2mxml</rights>
     <encoding>
       <software>bww2mxml</software>
     </encoding>
@@ -32,8 +32,8 @@
           <mode>major</mode>
         </key>
         <time>
-          <beats>4</beats>
-          <beat-type>4</beat-type>
+          <beats>2</beats>
+          <beat-type>16</beat-type>
         </time>
         <clef>
           <sign>G</sign>
@@ -44,37 +44,64 @@
         <direction-type>
           <metronome parentheses="no">
             <beat-unit>quarter</beat-unit>
-            <per-minute>60</per-minute>
+            <per-minute>90</per-minute>
           </metronome>
         </direction-type>
-        <sound tempo="60"/>
+        <sound tempo="90"/>
       </direction>
       <note>
         <pitch>
           <step>G</step>
           <octave>4</octave>
         </pitch>
-        <duration>48</duration>
-        <type>quarter</type>
+        <duration>4</duration>
+        <type>32nd</type>
+        <time-modification>
+          <actual-notes>3</actual-notes>
+          <normal-notes>2</normal-notes>
+        </time-modification>
         <stem>down</stem>
+        <beam number="1">begin</beam>
+        <beam number="2">begin</beam>
+        <beam number="3">begin</beam>
+        <notations>
+          <tuplet type="start" bracket="no"/>
+        </notations>
       </note>
       <note>
         <pitch>
           <step>A</step>
           <octave>4</octave>
         </pitch>
-        <duration>48</duration>
-        <type>quarter</type>
+        <duration>4</duration>
+        <type>32nd</type>
+        <time-modification>
+          <actual-notes>3</actual-notes>
+          <normal-notes>2</normal-notes>
+        </time-modification>
         <stem>down</stem>
+        <beam number="1">continue</beam>
+        <beam number="2">continue</beam>
+        <beam number="3">continue</beam>
       </note>
       <note>
         <pitch>
           <step>B</step>
           <octave>4</octave>
         </pitch>
-        <duration>48</duration>
-        <type>quarter</type>
+        <duration>4</duration>
+        <type>32nd</type>
+        <time-modification>
+          <actual-notes>3</actual-notes>
+          <normal-notes>2</normal-notes>
+        </time-modification>
         <stem>down</stem>
+        <beam number="1">end</beam>
+        <beam number="2">end</beam>
+        <beam number="3">end</beam>
+        <notations>
+          <tuplet type="stop"/>
+        </notations>
       </note>
       <note>
         <pitch>
@@ -82,48 +109,49 @@
           <alter>1</alter>
           <octave>5</octave>
         </pitch>
-        <duration>48</duration>
-        <type>quarter</type>
+        <duration>12</duration>
+        <type>16th</type>
         <stem>down</stem>
       </note>
     </measure>
     <measure number="2">
       <note>
         <pitch>
-          <step>D</step>
-          <octave>5</octave>
-        </pitch>
-        <duration>48</duration>
-        <type>quarter</type>
-        <stem>down</stem>
-      </note>
-      <note>
-        <pitch>
-          <step>E</step>
-          <octave>5</octave>
-        </pitch>
-        <duration>48</duration>
-        <type>quarter</type>
-        <stem>down</stem>
-      </note>
-      <note>
-        <pitch>
-          <step>F</step>
-          <alter>1</alter>
-          <octave>5</octave>
-        </pitch>
-        <duration>48</duration>
-        <type>quarter</type>
-        <stem>down</stem>
-      </note>
-      <note>
-        <pitch>
           <step>G</step>
-          <octave>5</octave>
+          <octave>4</octave>
         </pitch>
-        <duration>48</duration>
-        <type>quarter</type>
+        <duration>9</duration>
+        <type>32nd</type>
+        <dot/>
         <stem>down</stem>
+        <beam number="1">begin</beam>
+        <beam number="2">begin</beam>
+        <beam number="3">begin</beam>
+      </note>
+      <note>
+        <pitch>
+          <step>A</step>
+          <octave>4</octave>
+        </pitch>
+        <duration>9</duration>
+        <type>32nd</type>
+        <dot/>
+        <stem>down</stem>
+        <beam number="1">continue</beam>
+        <beam number="2">continue</beam>
+        <beam number="3">continue</beam>
+      </note>
+      <note>
+        <pitch>
+          <step>B</step>
+          <octave>4</octave>
+        </pitch>
+        <duration>6</duration>
+        <type>32nd</type>
+        <stem>down</stem>
+        <beam number="1">end</beam>
+        <beam number="2">end</beam>
+        <beam number="3">end</beam>
       </note>
     </measure>
   </part>
