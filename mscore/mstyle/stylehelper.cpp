@@ -725,6 +725,8 @@ QPixmap StyleHelper::radialGradient(const QColor &color, int width, int height) 
             image.fill(Qt::transparent);
 
             QColor radialColor = backgroundRadialColor(color);
+printf("radialGradient %d %d  %d %d %d\n", width, height,
+        radialColor.red(), radialColor.green(), radialColor.blue());
             radialColor.setAlpha(255);
             QRadialGradient gradient(64, height-64, 64);
             gradient.setColorAt(0, radialColor);

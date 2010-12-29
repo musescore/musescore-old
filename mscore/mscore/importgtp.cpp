@@ -2833,7 +2833,7 @@ bool Score::importGTP(const QString& name)
       //
       foreach(Part* part, _parts) {
             Score* score = new Score(this);
-            score->style().set(ST_createMultiMeasureRests, true);
+            score->style()->set(ST_createMultiMeasureRests, true);
 
             QList<int> stavesMap;
             Part* p = new Part(score);

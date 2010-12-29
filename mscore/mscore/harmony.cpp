@@ -302,7 +302,7 @@ QString Harmony::harmonyName() const
             hc.add(_degreeList);
             // try to find the chord in chordList
             const ChordDescription* newExtension = 0;
-            ChordList* cl = score()->style().chordList();
+            ChordList* cl = score()->style()->chordList();
             foreach(const ChordDescription* cd, *cl) {
                   if (cd->chord == hc && !cd->name.isEmpty()) {
                         newExtension = cd;
@@ -351,7 +351,7 @@ void Harmony::resolveDegreeList()
 // _descr->chord.print();
 
       // try to find the chord in chordList
-      ChordList* cl = score()->style().chordList();
+      ChordList* cl = score()->style()->chordList();
       foreach(const ChordDescription* cd, *cl) {
             if ((cd->chord == hc) && !cd->name.isEmpty()) {
 printf("ResolveDegreeList: found in table as %s\n", qPrintable(cd->name));
@@ -649,7 +649,7 @@ void Harmony::parseHarmony(const QString& ss, int* root, int* base)
       else
             s = s.mid(idx).simplified();
       s = s.toLower();
-      ChordList* cl = score()->style().chordList();
+      ChordList* cl = score()->style()->chordList();
       foreach(const ChordDescription* cd, *cl) {
             if (cd->name.toLower() == s) {
                   _id = cd->id;
@@ -753,7 +753,7 @@ const ChordDescription* Harmony::fromXml(const QString& kind,  const QList<HDegr
             degrees.append(d.text());
 
       QString lowerCaseKind = kind.toLower();
-      ChordList* cl = score()->style().chordList();
+      ChordList* cl = score()->style()->chordList();
       foreach(const ChordDescription* cd, *cl) {
             QString k     = cd->xmlKind;
             QStringList d = cd->xmlDegrees;
@@ -774,7 +774,7 @@ const ChordDescription* Harmony::fromXml(const QString& kind,  const QList<HDegr
 const ChordDescription* Harmony::fromXml(const QString& kind)
       {
       QString lowerCaseKind = kind.toLower();
-      ChordList* cl = score()->style().chordList();
+      ChordList* cl = score()->style()->chordList();
       foreach(const ChordDescription* cd, *cl) {
             if (lowerCaseKind == cd->xmlKind)
                   return cd;
@@ -788,7 +788,7 @@ const ChordDescription* Harmony::fromXml(const QString& kind)
 
 const ChordDescription* Harmony::descr() const
       {
-      return score()->style().chordDescription(_id);
+      return score()->style()->chordDescription(_id);
       }
 
 //---------------------------------------------------------
@@ -1197,7 +1197,7 @@ bool ChordList::write(const QString& name)
 
 void Harmony::render(const QList<RenderAction>& renderList, double& x, double& y, int tpc)
       {
-      ChordList* chordList = score()->style().chordList();
+      ChordList* chordList = score()->style()->chordList();
       QStack<QPointF> stack;
       int fontIdx = 0;
       double _spatium = spatium();
@@ -1284,7 +1284,7 @@ void Harmony::render(const TextStyle* st)
 
       if (st == 0)
             st = &score()->textStyle(_textStyle);
-      ChordList* chordList = score()->style().chordList();
+      ChordList* chordList = score()->style()->chordList();
 
       fontList.clear();
       foreach(ChordFont cf, chordList->fonts) {

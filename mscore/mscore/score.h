@@ -371,6 +371,7 @@ class Score : public QObject {
       void rewriteMeasures(Measure* fm, const Fraction& ns);
       void updateVelo();
       QString createDefaultFileName();
+      void addAudioTrack();
 
    signals:
       void selectionChanged(int);
@@ -409,7 +410,7 @@ class Score : public QObject {
       void transpose();
       void transpose(Note* n, Interval, bool useSharpsFlats);
 
-      Score(const Style&);
+      Score(const Style*);
       Score(Score*);                // used for excerpts
       ~Score();
 
@@ -626,8 +627,8 @@ class Score : public QObject {
       void spell(Note*);
       int nextSeg(int tick, int track);
 
-      Style& style()                           { return _style;                   }
-      const Style& style() const               { return _style;                   }
+      Style* style()                           { return &_style;                  }
+      const Style* style() const               { return &_style;                  }
       void setStyle(const Style& s)            { _style = s;                      }
       void loadStyle();
       void saveStyle();

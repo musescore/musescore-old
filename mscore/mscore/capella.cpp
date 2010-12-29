@@ -1852,10 +1852,10 @@ void Score::convertCapella(Capella* cap)
       if (cap->systems.isEmpty())
             return;
 
-      style().set(ST_measureSpacing, 1.0);
+      style()->set(ST_measureSpacing, 1.0);
       _spatium = cap->normalLineDist * DPMM;
-      style().set(ST_smallStaffMag, cap->smallLineDist / cap->normalLineDist);
-      style().set(ST_systemDistance, Spatium(8));
+      style()->set(ST_smallStaffMag, cap->smallLineDist / cap->normalLineDist);
+      style()->set(ST_systemDistance, Spatium(8));
 
 
       int staves = 0;

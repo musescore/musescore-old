@@ -366,6 +366,18 @@ MuseScore::MuseScore()
       _horizontalSplit      = true;
       chordStyleEditor      = 0;
       _midiRecordId         = -1;
+      _defaultStyle         = new Style();
+      setDefaultStyle(_defaultStyle);
+      _baseStyle            = new Style(*_defaultStyle);
+      if (!preferences.styleName.isEmpty()) {
+            QFile f(preferences.styleName);
+            if (f.open(QIODevice::ReadOnly)) {
+                  _defaultStyle->load(&f);
+                  f.close();
+                  }
+            }
+
+      // TODO: read default style from file
 
       _positionLabel = new QLabel;
       _positionLabel->setObjectName("decoration widget");  // this prevents animations
@@ -484,7 +496,6 @@ MuseScore::MuseScore()
       fileTools->addAction(getAction("file-new"));
       fileTools->addAction(getAction("file-open"));
       fileTools->addAction(getAction("file-save"));
-
       fileTools->addAction(getAction("print"));
       fileTools->addAction(whatsThis);
       fileTools->addSeparator();
@@ -615,6 +626,8 @@ MuseScore::MuseScore()
 
       _fileMenu->addSeparator();
       _fileMenu->addAction(getAction("parts"));
+      if (enableExperimental)
+            _fileMenu->addAction(getAction("add-audio"));
       _fileMenu->addAction(getAction("print"));
       _fileMenu->addSeparator();
       _fileMenu->addAction(getAction("quit"));
@@ -869,6 +882,15 @@ MuseScore::MuseScore()
       }
 
 //---------------------------------------------------------
+//   MuseScore
+//---------------------------------------------------------
+
+MuseScore::~MuseScore()
+      {
+      delete _defaultStyle;
+      }
+
+//---------------------------------------------------------
 //   startAutoSave
 //---------------------------------------------------------
 
@@ -987,7 +1009,7 @@ void MuseScore::selectScore(QAction* action)
       {
       QString a = action->data().toString();
       if (!a.isEmpty()) {
-            Score* score = new Score(defaultStyle);
+            Score* score = new Score(_defaultStyle);
             if(score->read(a)) //! \todo add a warning dialog "file not found"
                 setCurrentScoreView(appendScore(score));
             }
@@ -1244,7 +1266,7 @@ void MuseScore::dropEvent(QDropEvent* event)
             int view = -1;
             foreach(const QUrl& u, event->mimeData()->urls()) {
                   if (u.scheme() == "file") {
-                        Score* score = new Score(defaultStyle);
+                        Score* score = new Score(_defaultStyle);
                         if(score->read(u.toLocalFile()))
                               view = appendScore(score);
                         else
@@ -1643,7 +1665,7 @@ static void loadScores(const QStringList& argv)
                               int c = settings.value("currentScore", 0).toInt();
                               for (int i = 0; i < n; ++i) {
                                     QString s = settings.value(QString("score-%1").arg(i),"").toString();
-                                    Score* score = new Score(defaultStyle);
+                                    Score* score = new Score(mscore->defaultStyle());
                                     scoreCreated = true;
                                     if (score->read(s)) {
                                           int view = mscore->appendScore(score);
@@ -1659,14 +1681,14 @@ static void loadScores(const QStringList& argv)
                               mscore->newFile();
                               break;
                         case SCORE_SESSION:
-                              Score* score = new Score(defaultStyle);
+                              Score* score = new Score(mscore->defaultStyle());
                               scoreCreated = true;
                               if(score->read(preferences.startScore)) {
                                     currentScoreView = mscore->appendScore(score);
                                     }
                               else {
                                     delete score;
-                                    Score* score = new Score(defaultStyle);
+                                    Score* score = new Score(mscore->defaultStyle());
                                     scoreCreated = true;
                                     if (score->read(":/data/Promenade_Example.mscx")){
                                           preferences.startScore = ":/data/Promenade_Example.mscx";
@@ -1681,7 +1703,7 @@ static void loadScores(const QStringList& argv)
             foreach(const QString& name, argv) {
                   if (name.isEmpty())
                         continue;
-                  Score* score = new Score(defaultStyle);
+                  Score* score = new Score(mscore->defaultStyle());
                   scoreCreated = true;
                   if (!score->read(name)) {
                         QMessageBox::warning(0,
@@ -1700,7 +1722,7 @@ static void loadScores(const QStringList& argv)
       if (!scoreCreated && preferences.sessionStart != EMPTY_SESSION
          && preferences.sessionStart != NEW_SESSION) {
             // start with empty score:
-            Score* score = new Score(defaultStyle);
+            Score* score = new Score(mscore->defaultStyle());
             score->fileInfo()->setFile(mscore->createDefaultName());
             score->setCreated(true);
             mscore->appendScore(score);
@@ -1725,7 +1747,7 @@ static bool processNonGui()
                   if (!styleFile.isEmpty()) {
                         QFile f(styleFile);
                         if (f.open(QIODevice::ReadOnly))
-                              cs->style().load(&f);
+                              cs->style()->load(&f);
                         }
                   cs->startCmd();
                   cs->setLayoutAll(true);
@@ -1743,7 +1765,7 @@ static bool processNonGui()
             if (!styleFile.isEmpty()) {
                   QFile f(styleFile);
                   if (f.open(QIODevice::ReadOnly)) {
-                        cs->style().load(&f);
+                        cs->style()->load(&f);
                         }
                   }
             cs->doLayout();
@@ -1932,7 +1954,6 @@ int main(int argc, char* av[])
       QDir dir;
       dir.mkpath(dataPath + "/plugins");
 
-      setDefaultStyle();
       if (debugMode)
             printf("global share: <%s>\n", qPrintable(mscoreGlobalShare));
 
@@ -2057,8 +2078,8 @@ int main(int argc, char* av[])
       if (!converterMode)
             qApp->setWindowIcon(*icons[window_ICON]);
       initDrumset();
-      gscore = new Score(defaultStyle);
       mscore = new MuseScore();
+      gscore = new Score(mscore->defaultStyle());
 #ifdef Q_WS_MAC
       QApplication::instance()->installEventFilter(mscore);
 #endif
@@ -2265,7 +2286,7 @@ void MuseScore::cmd(QAction* a)
                         cv->postCmd("escape");
                         qApp->processEvents();
                         }
-                  Score* score = new Score(defaultStyle);
+                  Score* score = new Score(mscore->defaultStyle());
                   score->read(cs->filePath());
                   // hack: so we don't get another checkDirty in appendScore
                   cs->setDirty(false);
@@ -2893,7 +2914,7 @@ void MuseScore::handleMessage(const QString& message)
             return;
 printf("handle message=========\n");
       ((QtSingleApplication*)(qApp))->activateWindow();
-      Score* score = new Score(defaultStyle);
+      Score* score = new Score(mscore->defaultStyle());
       if (score->read(message)) {
             setCurrentScoreView(appendScore(score));
             lastOpenPath = score->fileInfo()->path();
@@ -3144,7 +3165,7 @@ bool MuseScore::restoreSession(bool always)
                                           dirty = val.toInt();
                                     else if (tag == "path") {
 printf("restore <%s>\n", qPrintable(val));
-                                          Score* score = new Score(defaultStyle);
+                                          Score* score = new Score(_defaultStyle);
                                           if (!score->read(val)) {
 printf("failed to restore <%s>\n", qPrintable(val));
                                                 delete score;

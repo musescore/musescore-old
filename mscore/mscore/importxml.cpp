@@ -349,7 +349,7 @@ void MusicXml::import(Score* s)
       tremStart = 0;
 
       // TODO only if multi-measure rests used ???
-      score->style().set(ST_createMultiMeasureRests, true);
+      score->style()->set(ST_createMultiMeasureRests, true);
 
       for (QDomElement e = doc->documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "score-partwise")
@@ -611,7 +611,7 @@ void MusicXml::scorePartwise(QDomElement ee)
                             if (tag == "system-margins")
                                 ;
                             else if (tag == "system-distance") {
-                                score->style().set(ST_systemDistance, val);
+                                score->style()->set(ST_systemDistance, val);
                                 printf("system distance %f\n", val.val());
                             }
                             else if (tag == "top-system-distance")
@@ -625,7 +625,7 @@ void MusicXml::scorePartwise(QDomElement ee)
                             QString tag(eee.tagName());
                             Spatium val(eee.text().toDouble() / 10.0);
                             if (tag == "staff-distance")
-                                score->style().set(ST_staffDistance, val);
+                                score->style()->set(ST_staffDistance, val);
                             else
                                 domError(eee);
                         }

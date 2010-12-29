@@ -341,7 +341,7 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                         QString name = qscriptvalue_cast<QString>(context->argument(0));
                         QString val  = qscriptvalue_cast<QString>(context->argument(1));
                         StyleVal sv(name, val);
-                        score->style().set(sv);
+                        score->style()->set(sv);
                         return context->engine()->undefinedValue();
                         }
                   break;
@@ -411,7 +411,7 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
             case 22:   //metatag
                   if (argc == 1) {
                         QString tag = qscriptvalue_cast<QString>(context->argument(0));
-                        QString val = score->metaTag(tag);         
+                        QString val = score->metaTag(tag);
                         return qScriptValueFromValue(context->engine(), val);
                         }
                   else if (argc == 2) {
@@ -435,7 +435,7 @@ static QScriptValue static_Score_call(QScriptContext* context, QScriptEngine*)
       {
       if (context->thisObject().strictlyEquals(context->engine()->globalObject()))
             return context->throwError(QString::fromLatin1("Score(): Did you forget to construct with 'new'?"));
-      Score* score = new Score(defaultStyle);
+      Score* score = new Score(mscore->defaultStyle());
       score->setName(mscore->createDefaultName());
       mscore->setCurrentScoreView(mscore->appendScore(score));
       score->startCmd();

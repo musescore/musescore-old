@@ -2359,6 +2359,15 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","styled"),
          QT_TRANSLATE_NOOP("action","toggle styled")
          ),
+      Shortcut(
+         STATE_ALL,
+         "add-audio",
+         QT_TRANSLATE_NOOP("action","add audio track"),
+	   0,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","Add audio track"),
+         QT_TRANSLATE_NOOP("action","add audio track")
+         ),
       // xml==0  marks end of list
       Shortcut(0, 0, 0, QKeySequence::UnknownKey)
       };

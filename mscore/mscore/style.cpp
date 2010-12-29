@@ -22,6 +22,7 @@
 #include "style.h"
 #include "style_p.h"
 #include "xml.h"
+#include "mscore.h"
 #include "score.h"
 #include "articulation.h"
 #include "harmony.h"
@@ -32,8 +33,6 @@ Style* style;
 //  72 points/inch   point size
 // 120 dpi           screen resolution
 //  spatium = 20/4 points
-
-Style defaultStyle;
 
 //---------------------------------------------------------
 //   styleTypes
@@ -232,14 +231,14 @@ static const QString ff("FreeSerif");
 #define OA     OFFSET_ABS
 #define OS     OFFSET_SPATIUM
 #define TR(x)  QT_TRANSLATE_NOOP("MuseScore", x)
-#define AS(x)  defaultStyle.appendTextStyle(x)
+#define AS(x)  s->appendTextStyle(x)
 
 //---------------------------------------------------------
 //   setDefaultStyle
 //    synchronize with TextStyleType
 //---------------------------------------------------------
 
-void setDefaultStyle()
+void setDefaultStyle(Style* s)
       {
       AS(TextStyle(TR("Title"), ff, 24, false, false, false,
          ALIGN_HCENTER | ALIGN_TOP));
@@ -955,14 +954,14 @@ bool StyleData::isDefault(StyleIdx idx) const
       switch(styleTypes[idx].valueType()) {
             case ST_DOUBLE:
             case ST_SPATIUM:
-                  return _values[idx].toDouble() == defaultStyle.valueD(idx);
+                  return _values[idx].toDouble() == mscore->baseStyle()->valueD(idx);
             case ST_BOOL:
-                  return _values[idx].toBool() == defaultStyle.valueB(idx);
+                  return _values[idx].toBool() == mscore->baseStyle()->valueB(idx);
             case ST_INT:
             case ST_DIRECTION:
-                  return _values[idx].toInt() == defaultStyle.valueI(idx);
+                  return _values[idx].toInt() == mscore->baseStyle()->valueI(idx);
             case ST_STRING:
-                  return _values[idx].toString() == defaultStyle.valueSt(idx);
+                  return _values[idx].toString() == mscore->baseStyle()->valueSt(idx);
             }
       return false;
       }
@@ -991,7 +990,7 @@ void StyleData::save(Xml& xml, bool optimize) const
                   }
             }
       for (int i = 0; i < TEXT_STYLES; ++i) {
-            if (!optimize || _textStyles[i] != defaultStyle.textStyle(TextStyleType(i)))
+            if (!optimize || _textStyles[i] != mscore->defaultStyle()->textStyle(TextStyleType(i)))
                   _textStyles[i].write(xml);
             }
       xml.etag();

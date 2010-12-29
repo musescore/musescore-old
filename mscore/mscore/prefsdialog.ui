@@ -223,6 +223,9 @@
             <property name="text">
              <string>Instrument List:</string>
             </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
            </widget>
           </item>
           <item row="0" column="1">
@@ -239,17 +242,20 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="0">
+          <item row="2" column="0">
            <widget class="QLabel" name="label_23">
             <property name="text">
              <string>Working Directory:</string>
             </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
            </widget>
           </item>
-          <item row="1" column="1">
+          <item row="2" column="1">
            <widget class="QLineEdit" name="workingDirectory"/>
           </item>
-          <item row="1" column="2">
+          <item row="2" column="2">
            <widget class="QToolButton" name="workingDirectoryButton">
             <property name="text">
              <string>Browse...</string>
@@ -257,6 +263,26 @@
             <property name="icon">
              <iconset>
               <normaloff>:/data/fileopen.svg</normaloff>:/data/fileopen.svg</iconset>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>Default Style:</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="defaultStyle"/>
+          </item>
+          <item row="1" column="2">
+           <widget class="QToolButton" name="defaultStyleButton">
+            <property name="text">
+             <string/>
             </property>
            </widget>
           </item>
@@ -407,6 +433,9 @@
            <widget class="QLabel" name="label">
             <property name="text">
              <string>Port Number:</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>
@@ -604,6 +633,19 @@
         </widget>
        </item>
        <item>
+        <spacer name="verticalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
         <widget class="QGroupBox" name="groupBox_4">
          <property name="title">
           <string>Miscellaneous</string>
@@ -660,19 +702,6 @@
           </item>
          </layout>
         </widget>
-       </item>
-       <item>
-        <spacer name="verticalSpacer_3">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
        </item>
       </layout>
      </widget>
