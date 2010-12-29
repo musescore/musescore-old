@@ -62,11 +62,17 @@ rwtestXml() {
       }
 
 rwtestAllBww() {
+      rwtestBww testBeams.bww
+      rwtestBww testDuration.bww
       rwtestBww testGraces.bww
       rwtestBww testHello.bww
+      rwtestBww testMidMeasureRepeat.bww
       rwtestBww testNotes.bww
+      rwtestBww testRepeats.bww
       rwtestBww testTempo60.bww
       rwtestBww testTempo120.bww
+      rwtestBww testTieTriplet.bww
+      rwtestBww testTriplets.bww
       }
 
 rwtestAllDemos() {
