@@ -80,7 +80,7 @@ ChordEdit::ChordEdit(Score* s, QWidget* parent)
       extensionGroup->addButton(extOther,  0);
 
       extOtherCombo->clear();
-      ChordList* cl = score->style().chordList();
+      ChordList* cl = score->style()->chordList();
       foreach (const ChordDescription* cd, *cl) {
             QString p(cd->name);
             extOtherCombo->addItem(p, cd->id);
@@ -224,10 +224,10 @@ const ChordDescription* ChordEdit::extension()
             return 0;
       else if (id == 0) {
             int idx = extOtherCombo->currentIndex();
-            return score->style().chordDescription(extOtherCombo->itemData(idx).toInt());
+            return score->style()->chordDescription(extOtherCombo->itemData(idx).toInt());
             }
       else
-            return score->style().chordDescription(id);
+            return score->style()->chordDescription(id);
       }
 
 //---------------------------------------------------------

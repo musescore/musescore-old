@@ -315,7 +315,7 @@ void Score::setSpatium(double v)
 //   Score
 //---------------------------------------------------------
 
-Score::Score(const Style& s)
+Score::Score(const Style* s)
    : _selection(this)
       {
       _parentScore    = 0;
@@ -326,7 +326,7 @@ Score::Score(const Style& s)
       startLayout     = 0;
       _undo           = new UndoStack();
       _repeatList     = new RepeatList(this);
-      _style          = s;
+      _style          = *s;
       _staffTypes     = ::staffTypes;     // init with buildin types
       _swingRatio     = 0.0;
 
@@ -379,7 +379,7 @@ Score::Score(Score* parent)
       startLayout     = 0;
       _undo           = 0;
       _repeatList     = 0;
-      _style          = parent->style();
+      _style          = *parent->style();
       _staffTypes     = ::staffTypes;     // init with buildin types
       _swingRatio     = 0.0;
 
@@ -2408,7 +2408,7 @@ Score* Score::clone()
                line, column, err.toLatin1().data(), buffer.buffer().data());
             return 0;
             }
-      Score* score = new Score(_style);
+      Score* score = new Score(style());
       docName = "--";
       score->read1(doc.documentElement());
 

@@ -108,7 +108,7 @@ void KeyCanvas::paintEvent(QPaintEvent*)
       QRectF r = imatrix.mapRect(QRectF(x, y, w, wh));
 
       QPen pen(palette().brush(QPalette::Normal, QPalette::Text).color());
-      pen.setWidthF(defaultStyle.valueS(ST_staffLineWidth).val() * spatium);
+      pen.setWidthF(mscore->defaultStyle()->valueS(ST_staffLineWidth).val() * spatium);
       p.setPen(pen);
 
       for (int i = 0; i < 5; ++i) {

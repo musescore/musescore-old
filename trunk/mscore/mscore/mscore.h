@@ -68,6 +68,7 @@ class ChordStyleEditor;
 class UndoGroup;
 class Navigator;
 class LanguageItem;
+class Style;
 
 extern QString mscoreGlobalShare;
 static const int PROJECT_LIST_LEN = 6;
@@ -218,7 +219,6 @@ class MuseScore : public QMainWindow {
       InsertMeasuresDialog* insertMeasuresDialog;
       QMenu* _fileMenu;
       QMenu* menuEdit;
-//      QMenu* menuCreate;
       QMenu* menuNotes;
       QMenu* menuLayout;
       QMenu* menuStyle;
@@ -275,6 +275,10 @@ class MuseScore : public QMainWindow {
       QString rev;
 
       int _midiRecordId;
+
+      Style* _defaultStyle;
+      Style* _baseStyle;
+
       //---------------------
 
       virtual void closeEvent(QCloseEvent*);
@@ -369,10 +373,10 @@ class MuseScore : public QMainWindow {
       void setFotomode()       { changeState(STATE_FOTO); }
       void checkForUpdate();
       void registerPlugin(QAction*);
-//      QMenu* fileMenu() const  { return _fileMenu; }
 
    public:
       MuseScore();
+      ~MuseScore();
       bool checkDirty(Score*);
       PlayPanel* getPlayPanel() const { return playPanel; }
       QMenu* genCreateMenu(QWidget* parent = 0);
@@ -440,6 +444,8 @@ class MuseScore : public QMainWindow {
       void populatePalette();
       void excerptsChanged(Score*);
       bool processMidiRemote(MidiRemoteType type, int data);
+      Style* defaultStyle() const { return _defaultStyle; }
+      Style* baseStyle() const { return _baseStyle; }
       };
 
 extern MuseScore* mscore;

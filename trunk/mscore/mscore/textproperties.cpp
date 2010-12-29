@@ -39,7 +39,7 @@ TextProp::TextProp(bool os, Score* score, QWidget* parent)
             }
       else {
             styles->clear();
-            foreach(const TextStyle& st, score->style().textStyles())
+            foreach(const TextStyle& st, score->style()->textStyles())
                   styles->addItem(st.name());
             }
 

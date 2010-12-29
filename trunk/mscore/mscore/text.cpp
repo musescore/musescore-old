@@ -609,7 +609,7 @@ bool Text::readProperties(QDomElement e)
                   setTextStyle(TextStyleType(i));
                   }
             else
-                  setTextStyle(score()->style().textStyleType(val));
+                  setTextStyle(score()->style()->textStyleType(val));
             if (textStyle() != TEXT_STYLE_INVALID)
                   _styled = true;
             }

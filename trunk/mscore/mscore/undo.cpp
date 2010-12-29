@@ -1285,7 +1285,7 @@ ChangeConcertPitch::ChangeConcertPitch(Score* s, bool v)
 void ChangeConcertPitch::flip()
       {
       int oval = int(score->styleB(ST_concertPitch));
-      score->style().set(ST_concertPitch, val);
+      score->style()->set(ST_concertPitch, val);
       QAction* action = getAction("concert-pitch");
       action->setChecked(score->styleB(ST_concertPitch));
       val = oval;
@@ -2375,10 +2375,10 @@ static void updateTextStyle(void* a, Element* e)
 
 void ChangeTextStyle::flip()
       {
-      TextStyle os = score->style().textStyle(style.name());
-      score->style().setTextStyle(style);
+      TextStyle os = score->style()->textStyle(style.name());
+      score->style()->setTextStyle(style);
       style = os;
-      TextStyleType ts = score->style().textStyleType(style.name());
+      TextStyleType ts = score->style()->textStyleType(style.name());
       score->scanElements(&ts, updateTextStyle);
       score->setLayoutAll(true);
       }
@@ -2428,7 +2428,7 @@ static void updateTextStyle2(void*, Element* e)
 
 void ChangeStyle::flip()
       {
-      Style tmp = score->style();
+      Style tmp = *score->style();
 
       if (score->styleB(ST_concertPitch) != style.valueB(ST_concertPitch))
             score->cmdConcertPitchChanged(style.valueB(ST_concertPitch), true);

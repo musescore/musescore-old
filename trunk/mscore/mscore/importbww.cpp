@@ -408,7 +408,7 @@ void MsScWriter::note(const QString pitch, const QVector<Bww::BeamType> beamList
             score->measures()->add(vbox);
             }
       if (!footer.isEmpty())
-            score->style().set(ST_oddFooterC, footer);
+            score->style()->set(ST_oddFooterC, footer);
 
       Part* part = score->part(0);
       part->setLongName(Bww::instrumentName);

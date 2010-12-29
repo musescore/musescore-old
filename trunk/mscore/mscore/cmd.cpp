@@ -2284,10 +2284,12 @@ void Score::cmd(const QAction* a)
                   cmdDoubleDuration();
             else if (cmd == "half-duration")
                   cmdHalfDuration();
-            else if (cmd == ""){ //Midi note received only?
-                  if(!noteEntryMode())
-                      setLayoutAll(false);
+            else if (cmd == "") {               //Midi note received only?
+                  if (!noteEntryMode())
+                        setLayoutAll(false);
                   }
+            else if (cmd == "add-audio")
+                  addAudioTrack();
             else
                   printf("1unknown cmd <%s>\n", qPrintable(cmd));
 

@@ -39,7 +39,7 @@ EditStyle::EditStyle(Score* s, QWidget* parent)
    : QDialog(parent)
       {
       cs     = s;
-      lstyle = s->style();
+      lstyle = *s->style();
       setModal(true);
       setupUi(this);
 

@@ -259,6 +259,7 @@ void Preferences::write()
             }
       s.setValue("startScore",         startScore);
       s.setValue("workingDirectory",   workingDirectory);
+      s.setValue("defaultStyle",       defaultStyle);
       s.setValue("showSplashScreen",   showSplashScreen);
 
       s.setValue("midiExpandRepeats",  midiExpandRepeats);
@@ -384,6 +385,7 @@ void Preferences::read()
 
       QString path = QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation);
       workingDirectory   = s.value("workingDirectory", path).toString();
+      defaultStyle       = s.value("defaultStyle").toString();
 
       showSplashScreen         = s.value("showSplashScreen", true).toBool();
       midiExpandRepeats        = s.value("midiExpandRepeats", true).toBool();
@@ -499,6 +501,14 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
    : QDialog(parent)
       {
       setupUi(this);
+      startWithButton->setIcon(*icons[fileOpen_ICON]);
+      instrumentListButton->setIcon(*icons[fileOpen_ICON]);
+      defaultStyleButton->setIcon(*icons[fileOpen_ICON]);
+      workingDirectoryButton->setIcon(*icons[fileOpen_ICON]);
+      bgWallpaperSelect->setIcon(*icons[fileOpen_ICON]);
+      fgWallpaperSelect->setIcon(*icons[fileOpen_ICON]);
+      sfOpenButton->setIcon(*icons[fileOpen_ICON]);
+      styleFileButton->setIcon(*icons[fileOpen_ICON]);
       shortcutsChanged        = false;
 
 #ifndef USE_JACK
@@ -531,6 +541,7 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       connect(fgWallpaperSelect,  SIGNAL(clicked()), SLOT(selectFgWallpaper()));
       connect(bgWallpaperSelect,  SIGNAL(clicked()), SLOT(selectBgWallpaper()));
       connect(workingDirectoryButton, SIGNAL(clicked()), SLOT(selectWorkingDirectory()));
+      connect(defaultStyleButton,     SIGNAL(clicked()), SLOT(selectDefaultStyle()));
       connect(instrumentListButton,   SIGNAL(clicked()), SLOT(selectInstrumentList()));
       connect(startWithButton,        SIGNAL(clicked()), SLOT(selectStartWith()));
       connect(playPanelCur,   SIGNAL(clicked()), SLOT(playPanelCurClicked()));
@@ -1007,6 +1018,21 @@ void PreferenceDialog::selectWorkingDirectory()
          );
       if (!s.isNull())
             workingDirectory->setText(s);
+      }
+
+//---------------------------------------------------------
+//   selectDefaultStyle
+//---------------------------------------------------------
+
+void PreferenceDialog::selectDefaultStyle()
+      {
+      QString s = QFileDialog::getExistingDirectory(
+         this,
+         tr("Choose Default Style"),
+         defaultStyle->text()
+         );
+      if (!s.isNull())
+            defaultStyle->setText(s);
       }
 
 //---------------------------------------------------------

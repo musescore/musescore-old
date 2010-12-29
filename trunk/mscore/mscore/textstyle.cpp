@@ -46,7 +46,7 @@ TextStyleDialog::TextStyleDialog(QWidget* parent, Score* score)
       setLayout(layout);
 
       cs     = score;
-      styles = cs->style().textStyles();
+      styles = cs->style()->textStyles();
 
       textNames->setSelectionMode(QListWidget::SingleSelection);
       textNames->clear();
@@ -125,7 +125,7 @@ void TextStyleDialog::apply()
       {
       saveStyle(current);                 // update local copy of style list
 
-      int n = cs->style().textStyles().size();
+      int n = cs->style()->textStyles().size();
       for (int i = 0; i < n; ++i) {
             const TextStyle& os = cs->textStyle(TextStyleType(i));
             const TextStyle& ns = styles[i];

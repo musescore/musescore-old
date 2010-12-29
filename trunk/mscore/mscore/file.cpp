@@ -207,7 +207,7 @@ void MuseScore::loadFile()
          );
       if (fn.isEmpty())
             return;
-      Score* score = new Score(defaultStyle);
+      Score* score = new Score(_defaultStyle);
       if(score->read(fn)) {
             setCurrentScoreView(appendScore(score));
             lastOpenPath = score->fileInfo()->path();
@@ -633,7 +633,7 @@ void MuseScore::newFile()
             measures += 1;
       KeySigEvent ks     = newWizard->keysig();
 
-      Score* score = new Score(defaultStyle);
+      Score* score = new Score(_defaultStyle);
       score->setCreated(true);
 
       //
@@ -1025,7 +1025,7 @@ void Score::loadStyle()
 
       QFile f(fn);
       if (f.open(QIODevice::ReadOnly)) {
-            Style st = defaultStyle;
+            Style st(*mscore->defaultStyle());
             if (st.load(&f)) {
                   _undo->push(new ChangeStyle(this, st));
                   return;
@@ -2248,5 +2248,14 @@ QString getSoundFont(const QString& d)
          MuseScore::tr("SoundFont Files (*.sf2 *.SF2);;All (*)")
          );
       return s;
+      }
+
+//---------------------------------------------------------
+//   addAudioTrack
+//---------------------------------------------------------
+
+void Score::addAudioTrack()
+      {
+
       }
 
