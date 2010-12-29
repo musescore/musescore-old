@@ -97,29 +97,27 @@ static void dumpBeams(QList<Bww::MeasureDescription> const& measures)
       QString beam = measures.at(j).notes.at(i).beam;
       if (beam == "")
         beam = " ";
-      if (!measures.at(j).notes.at(i).grace)
+
+      beams += beam;
+      switch (measures.at(j).notes.at(i).beamState)
       {
-        beams += beam;
-        switch (measures.at(j).notes.at(i).beamState)
-        {
-        case Bww::ST_NONE:     beamStates += " "; break;
-        case Bww::ST_START:    beamStates += "["; break;
-        case Bww::ST_CONTINUE: beamStates += "_"; break;
-        case Bww::ST_STOP:     beamStates += "]"; break;
-        default:               beamStates += " ";
-        }
-        for (int k = 0; k < 3; k++)
-          switch (measures.at(j).notes.at(i).beamList.at(k))
-          {
-          case Bww::BM_NONE:          beamList[k] += " "; break;
-          case Bww::BM_BEGIN:         beamList[k] += "b"; break;
-          case Bww::BM_CONTINUE:      beamList[k] += "c"; break;
-          case Bww::BM_END:           beamList[k] += "e"; break;
-          case Bww::BM_FORWARD_HOOK:  beamList[k] += ">"; break;
-          case Bww::BM_BACKWARD_HOOK: beamList[k] += "<"; break;
-          default:                    beamList[k] += "?";
-          }
+      case Bww::ST_NONE:     beamStates += " "; break;
+      case Bww::ST_START:    beamStates += "["; break;
+      case Bww::ST_CONTINUE: beamStates += "_"; break;
+      case Bww::ST_STOP:     beamStates += "]"; break;
+      default:               beamStates += " ";
       }
+      for (int k = 0; k < 3; k++)
+        switch (measures.at(j).notes.at(i).beamList.at(k))
+        {
+        case Bww::BM_NONE:          beamList[k] += " "; break;
+        case Bww::BM_BEGIN:         beamList[k] += "b"; break;
+        case Bww::BM_CONTINUE:      beamList[k] += "c"; break;
+        case Bww::BM_END:           beamList[k] += "e"; break;
+        case Bww::BM_FORWARD_HOOK:  beamList[k] += ">"; break;
+        case Bww::BM_BACKWARD_HOOK: beamList[k] += "<"; break;
+        default:                    beamList[k] += "?";
+        }
     }
     qDebug() << "beams measure #" << j + 1 << beams;
     qDebug() << "beams measure #" << j + 1 << beamStates;
@@ -269,66 +267,74 @@ static void calculateHigherBeamStates(Bww::MeasureDescription & m)
         ;
 
     if (m.notes.at(i).grace)
-      continue; // ignore grace notes
-
-    int blp = -1; // beam level previous chord
-    int blc = -1; // beam level current chord
-    int bln = -1; // beam level next chord
-
-    // find beam level current note
-    blc = type2beams(m.notes.at(i).type);
-    if (blc == 0)
-      continue; // note does not have a beam
-
-    // find beam level previous note
-    if (m.notes.at(i).beamList[0] == Bww::BM_CONTINUE
-        || m.notes.at(i).beamList[0] == Bww::BM_END)
     {
-      for (int j = i - 1; blp == -1 && j >= 0; --j)
+      // just copy beamList[0] into beamList[1] and beamList[2]
+      m.notes[i].beamList[1] = m.notes.at(i).beamList[0];
+      m.notes[i].beamList[2] = m.notes.at(i).beamList[0];
+    }
+    else
+    {
+      int blp = -1; // beam level previous chord
+      int blc = -1; // beam level current chord
+      int bln = -1; // beam level next chord
+
+      // find beam level current note
+      blc = type2beams(m.notes.at(i).type);
+      if (blc == 0)
+        continue; // note does not have a beam
+
+      // find beam level previous note
+      if (m.notes.at(i).beamList[0] == Bww::BM_CONTINUE
+          || m.notes.at(i).beamList[0] == Bww::BM_END)
       {
-        if (m.notes.at(j).grace)
-          continue; // ignore grace notes
-        blp = type2beams(m.notes.at(j).type);
+        for (int j = i - 1; blp == -1 && j >= 0; --j)
+        {
+          if (m.notes.at(j).grace)
+            continue; // ignore grace notes
+          blp = type2beams(m.notes.at(j).type);
+        }
       }
-    }
 
-    // find beam level next note
-    if (m.notes.at(i).beamList[0] == Bww::BM_BEGIN
-        || m.notes.at(i).beamList[0] == Bww::BM_CONTINUE)
-    {
-      for (int j = i + 1; bln == -1 && j < m.notes.size(); ++j)
+      // find beam level next note
+      if (m.notes.at(i).beamList[0] == Bww::BM_BEGIN
+          || m.notes.at(i).beamList[0] == Bww::BM_CONTINUE)
       {
-        if (m.notes.at(j).grace)
-          continue; // ignore grace notes
-        bln = type2beams(m.notes.at(j).type);
+        for (int j = i + 1; bln == -1 && j < m.notes.size(); ++j)
+        {
+          if (m.notes.at(j).grace)
+            continue; // ignore grace notes
+          bln = type2beams(m.notes.at(j).type);
+        }
       }
-    }
 
-    qDebug()
-        << "blp" << blp
-        << "blc" << blc
-        << "bln" << bln;
-    for (int j = 2; j <= blc; ++j)
-    {
-      Bww::BeamType bt = Bww::BM_NONE;
-      if (blp < j && bln >= j) bt = Bww::BM_BEGIN;
-      else if (blp < j && bln < j) {
-        if (bln > 0) bt = Bww::BM_FORWARD_HOOK;
-        else if (blp > 0) bt = Bww::BM_BACKWARD_HOOK;
+      qDebug()
+          << "blp" << blp
+          << "blc" << blc
+          << "bln" << bln;
+      for (int j = 2; j <= blc; ++j)
+      {
+        Bww::BeamType bt = Bww::BM_NONE;
+        if (blp < j && bln >= j) bt = Bww::BM_BEGIN;
+        else if (blp < j && bln < j) {
+          if (bln > 0) bt = Bww::BM_FORWARD_HOOK;
+          else if (blp > 0) bt = Bww::BM_BACKWARD_HOOK;
+        }
+        else if (blp >= j && bln < j) bt = Bww::BM_END;
+        else if (blp >= j && bln >= j) bt = Bww::BM_CONTINUE;
+        m.notes[i].beamList[j - 1] = bt;
+        qDebug() << "beamList" << j - 1 << "=" << bt;
       }
-      else if (blp >= j && bln < j) bt = Bww::BM_END;
-      else if (blp >= j && bln >= j) bt = Bww::BM_CONTINUE;
-      m.notes[i].beamList[j - 1] = bt;
-      qDebug() << "beamList" << j - 1 << "=" << bt;
-    }
-
-  }
+    } // else
+  } // for (int i = 0; i < m.notes.size(); ++i)
 }
 
 /**
  Determine all beam states.
- First convert "r" and "l" in notes.beam into BM_BEGIN, BM_CONTINUE and BM_END
- in notes.beamList[0]. Then calculate the higher level beams.
+ First for normal notes convert "r" and "l" in notes.beam into BM_BEGIN,
+ BM_CONTINUE and BM_END in notes.beamList[0]. For grace notes "b", "c" and
+ "e" can be directly converted into the corresponding beam states in
+ notes.beamList[0].
+ Then calculate the higher level beams.
  */
 
 static void determineBeamStates(QList<Bww::MeasureDescription> & measures)
@@ -340,6 +346,7 @@ static void determineBeamStates(QList<Bww::MeasureDescription> & measures)
     for (int i = 0; i < measures.at(j).notes.size(); ++i)
     {
       QString beam = measures.at(j).notes.at(i).beam;
+      // handle normal notes
       if (beam == "")
       {
         measures[j].notes[i].beamState = Bww::ST_NONE;
@@ -388,6 +395,10 @@ static void determineBeamStates(QList<Bww::MeasureDescription> & measures)
           }
         }
       }
+      // handle grace notes
+      else if (beam == "b") measures[j].notes[i].beamList[0] = Bww::BM_BEGIN;
+      else if (beam == "c") measures[j].notes[i].beamList[0] = Bww::BM_CONTINUE;
+      else if (beam == "e") measures[j].notes[i].beamList[0] = Bww::BM_END;
     }
     calculateHigherBeamStates(measures[j]);
   }
@@ -754,6 +765,20 @@ namespace Bww {
   }
 
   /**
+   Determine beam for grace note \a index in a group of \a size grace notes.
+   */
+
+  static QString graceBeam(const int size, const int index)
+  {
+    if (size <= 1) return " ";                // no beam
+    if (index < 0) return " ";                // no beam (but should not happen)
+    if (index == 0) return "b";               // begin
+    else if (index == (size - 1)) return "e"; // end
+    else if (index >= size) return " ";       // no beam (but should not happen)
+    else return "c";                          // continue
+  }
+
+  /**
    Parse a bww embellishment.
    */
 
@@ -761,7 +786,6 @@ namespace Bww {
   {
     qDebug() << "Parser::parseGraces() value:" << qPrintable(lex.symValue());
 
-    const QString beam = " "; // TODO
     const QString type = "32";
     const int dots = 0;
     if (graceMap.contains(lex.symValue()))
@@ -769,6 +793,7 @@ namespace Bww {
       QStringList graces = graceMap.value(lex.symValue()).split(" ");
       for (int i = 0; i < graces.size(); ++i)
       {
+        const QString beam = graceBeam(graces.size(), i);
         NoteDescription noteDesc(graces.at(i), beam, type, dots, false, false, ST_NONE, true);
         if (measures.isEmpty())
         {
