@@ -1,3 +1,5 @@
+29.dec (lv)
+      - feature request #8355: bww import: fixed bww2mxml triplet beam
 28.dec (lv)
       - feature request #8355: bww import: fixed export of metronome, triplet and stem
       - feature request #8355: bww import: fixed export of title, composer and rights

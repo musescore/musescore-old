@@ -153,5 +153,65 @@
         <stem>down</stem>
         </note>
       </measure>
+    <measure number="3">
+      <note>
+        <pitch>
+          <step>G</step>
+          <octave>4</octave>
+          </pitch>
+        <duration>4</duration>
+        <voice>1</voice>
+        <type>eighth</type>
+        <stem>down</stem>
+        <beam number="1">begin</beam>
+        </note>
+      <note>
+        <grace/>
+        <pitch>
+          <step>D</step>
+          <octave>5</octave>
+          </pitch>
+        <voice>1</voice>
+        <type>32nd</type>
+        <stem>up</stem>
+        <beam number="1">begin</beam>
+        <beam number="2">begin</beam>
+        <beam number="3">begin</beam>
+        </note>
+      <note>
+        <grace/>
+        <pitch>
+          <step>E</step>
+          <octave>5</octave>
+          </pitch>
+        <voice>1</voice>
+        <type>32nd</type>
+        <stem>up</stem>
+        <beam number="1">end</beam>
+        <beam number="2">end</beam>
+        <beam number="3">end</beam>
+        </note>
+      <note>
+        <pitch>
+          <step>A</step>
+          <octave>4</octave>
+          </pitch>
+        <duration>4</duration>
+        <voice>1</voice>
+        <type>eighth</type>
+        <stem>down</stem>
+        <beam number="1">end</beam>
+        </note>
+      <note>
+        <pitch>
+          <step>B</step>
+          <octave>4</octave>
+          </pitch>
+        <duration>8</duration>
+        <voice>1</voice>
+        <type>quarter</type>
+        <stem>down</stem>
+        </note>
+      </measure>
     </part>
   </score-partwise>
