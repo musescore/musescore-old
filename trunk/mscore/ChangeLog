@@ -1,3 +1,5 @@
+30.dec (lv)
+      - add MusicXML regression testfile testVoiceMapper1.xml for #8385
 29.dec (ws)
       - make default style configurable in preferences
 25.dec (mi)
