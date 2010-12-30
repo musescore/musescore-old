@@ -907,6 +907,11 @@ void MusicXml::xmlPart(QDomElement e, QString id)
       multiMeasureRestCount = 0;
       startMultiMeasureRest = false;
 
+      // initialize voice list
+      // for (int i = 0; i < part->nstaves(); ++i) {
+      for (int i = 0; i < MAX_STAVES; ++i)
+            voicelist[i].clear();
+
       if (!score->measures()->first()) {
             doCredits();
             }
@@ -968,11 +973,6 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
                 measure->mstaff(staff+i)->lines->setLines(reals->lines());
             }
       }
-
-      // initialize voice list
-      // for (int i = 0; i < part->nstaves(); ++i) {
-      for (int i = 0; i < MAX_STAVES; ++i)
-            voicelist[i].clear();
 
 // must remember volta to handle <ending type="discontinue">
 //      Volta* lastVolta = 0;       // ws: move to global to allow for voltas spanning more

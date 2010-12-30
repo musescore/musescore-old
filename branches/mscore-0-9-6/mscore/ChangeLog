@@ -1,4 +1,5 @@
 30.dec (lv)
+      - fix #8428: musicxml import: voices mixed up
       - fix #4858: Courtesy accidentals do not import/export in MusicXML anymore
       - fix #8400: musicxml export: stem on whole note in triplet
 29.dec (lv)
