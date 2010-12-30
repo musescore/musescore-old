@@ -2775,7 +2775,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
 //                   score->staff(staff + relStaff), staff, relStaff);
             // LVIFIX: accidental handling is ugly, replace magic numbers by constants
             if (1 <= accidental &&  accidental <= 5 && editorial)
-                  note->setAccidentalType(accidental + 5);
+                  note->setUserAccidental(accidental + 0x8000);
             // LVIFIX: quarter tone accidentals support is "drawing only"
             if (accidental == 18
                 || accidental == 19

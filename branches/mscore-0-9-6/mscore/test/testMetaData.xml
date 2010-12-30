@@ -45,10 +45,10 @@
     <credit-words default-x="661.415" default-y="1737.7" font-size="14" justify="center" valign="top">PrintedSubtitle</credit-words>
     </credit>
   <credit page="1">
-    <credit-words default-x="1259.84" default-y="1743.23" font-size="12" justify="right" valign="top">PrintedComposer</credit-words>
+    <credit-words default-x="1259.84" default-y="1746.87" font-size="12" justify="right" valign="top">PrintedComposer</credit-words>
     </credit>
   <credit page="1">
-    <credit-words default-x="62.9921" default-y="1743.23" font-size="12" justify="left" valign="top">PrintedPoet</credit-words>
+    <credit-words default-x="62.9921" default-y="1746.87" font-size="12" justify="left" valign="top">PrintedPoet</credit-words>
     </credit>
   <credit page="1">
     <credit-words default-x="661.415" default-y="125.984" font-size="8" justify="center" valign="bottom">PrintedCopyright</credit-words>
@@ -70,8 +70,8 @@
       <print>
         <system-layout>
           <system-margins>
-            <left-margin>78.27</left-margin>
-            <right-margin>1004.21</right-margin>
+            <left-margin>76.73</left-margin>
+            <right-margin>1005.75</right-margin>
             </system-margins>
           <top-system-distance>180.00</top-system-distance>
           </system-layout>
