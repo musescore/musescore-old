@@ -1,3 +1,5 @@
+30.dec (lv)
+      - fix #8400: musicxml export: stem on whole note in triplet
 29.dec (lv)
       - feature request #8355: bww import: fixed bww2mxml triplet beam
 28.dec (lv)
