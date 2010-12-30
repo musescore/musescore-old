@@ -1,4 +1,5 @@
 30.dec (lv)
+      - fix #4858: Courtesy accidentals do not import/export in MusicXML anymore
       - fix #8400: musicxml export: stem on whole note in triplet
 29.dec (lv)
       - feature request #8355: bww import: fixed bww2mxml triplet beam
