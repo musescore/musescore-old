@@ -47,7 +47,7 @@ class Omr {
    public:
       Omr(Score*);
       Omr(const QString& path, Score*);
-      bool read();
+      bool readPdf();
       int pagesInDocument() const;
       int numPages() const                 { return pages.size();          }
       OmrPage* page(int idx)               { return pages[idx];            }

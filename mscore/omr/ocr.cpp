@@ -20,7 +20,7 @@
 
 #include "ocr.h"
 
-// #include <tesseract/baseapi.h>
+#include <tesseract/baseapi.h>
 #include <locale.h>
 
 //---------------------------------------------------------
@@ -37,7 +37,7 @@ Ocr::Ocr()
 
 void Ocr::init()
       {
-//      TessBaseAPI::SimpleInit("/usr/share/tesseract-ocr/tessdata", 0, false);
+      TessBaseAPI::SimpleInit("/usr/share/tesseract-ocr/tessdata", 0, false);
       }
 
 //---------------------------------------------------------
@@ -46,7 +46,7 @@ void Ocr::init()
 
 QString Ocr::readLine(const OcrImage& img)
       {
-#if 0
+#if 1
       int w = img.r.width();
       int h = img.r.height();
 
@@ -71,7 +71,8 @@ QString Ocr::readLine(const OcrImage& img)
             }
       char* txt = TessBaseAPI::TesseractRect(d, 0, bw, 0, 0, w, h);
       return QString(txt);
-#endif
+#else
       return QString();
+#endif
       }
 

@@ -1,3 +1,6 @@
+31.dec (ws)
+      - better capella import: detect upbeat
+      - save omr images along with score in mscz container
 30.dec (lv)
       - add MusicXML regression testfile testVoiceMapper1.xml for #8385
 29.dec (ws)

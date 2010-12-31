@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2009 Werner Schweer and others
+//  Copyright (C) 2009-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -43,6 +43,7 @@
 #include "segment.h"
 #include "layoutbreak.h"
 #include "dynamics.h"
+#include "barline.h"
 
 //---------------------------------------------------------
 //   errmsg
@@ -886,7 +887,7 @@ printf("staff size small %d\n", sl->bSmall);
             f->read(sl->soundMapOut, n);
             curPos += n;
             }
-      sl->sound = readInt();
+      sl->sound  = readInt();
       sl->volume = readInt();
       sl->transp = readInt();
 //      printf("   sound %d vol %d transp %d\n", sl->sound, sl->volume, sl->transp);
@@ -933,7 +934,7 @@ void Capella::readLayout()
       for (unsigned iStave = 0; iStave < nStaveLayouts; iStave++) {
             CapStaffLayout* sl = new CapStaffLayout;
             readStaveLayout(sl, iStave);
-            staves.append(sl);
+            _staffLayouts.append(sl);
             }
 
       // system brackets:
@@ -1048,16 +1049,13 @@ void WedgeObj::read()
 
 void CapExplicitBarline::read()
       {
-      enum {BAR_SINGLE, BAR_DOUBLE, BAR_END,
-            BAR_REPEND, BAR_REPSTART, BAR_REPENDSTART};
-
       unsigned char b = cap->readByte();
-      type = b & 0x0f;
-      barMode = b >> 4;         // 0 = auto, 1 = nur Zeilen, 2 = durchgezogen
-      assert (type <= BAR_REPENDSTART);
-      assert (barMode <= 2);
+      _type = b & 0x0f;
+      _barMode = b >> 4;         // 0 = auto, 1 = nur Zeilen, 2 = durchgezogen
+      assert (_type <= BAR_REPENDSTART);
+      assert (_barMode <= 2);
 
-// printf("         Expl.Barline type %d mode %d\n", type, barMode);
+// printf("         Expl.Barline type %d mode %d\n", _type, _barMode);
       }
 
 //---------------------------------------------------------
@@ -1066,15 +1064,10 @@ void CapExplicitBarline::read()
 
 void Capella::readVoice(CapStaff* cs, int idx)
       {
-printf("      Voice %d\n", idx);
+printf("      readVoice %d\n", idx);
 
       if (readChar() != 'C')
             throw CAP_BAD_VOICE_SIG;
-
-      enum {
-            T_REST, T_CHORD, T_CLEF, T_KEY, T_METER,
-            T_EXPL_BARLINE, T_IMPL_BARLINE, T_PAGE_BKGR
-            };
 
       CapVoice* v   = new CapVoice;
       v->voiceNo    = idx;
@@ -1090,7 +1083,7 @@ printf("      Voice %d\n", idx);
             unsigned char type = readByte();
 printf("         Voice %d read object %d\n", idx, type);
             readExtra();
-            if (type != T_REST && type != T_CHORD && type != T_PAGE_BKGR)
+            if ((type != T_REST) && (type != T_CHORD) && (type != T_PAGE_BKGR))
                   color = readColor();
 
             // Die anderen Objekttypen haben eine komprimierte Farbcodierung
@@ -1135,6 +1128,7 @@ printf("         Voice %d read object %d\n", idx, type);
                         {
                         CapExplicitBarline* bl = new CapExplicitBarline(this);
                         bl->read();
+printf("append Expl Barline==========\n");
                         v->objects.append(bl);
                         }
                         break;
@@ -1158,14 +1152,14 @@ void Capella::readStaff(CapSystem* system)
       CapStaff* staff = new CapStaff;
       //Meter
       staff->numerator = readByte();
-      unsigned char d = readByte();
+      uchar d          = readByte();
       staff->log2Denom = (d & 0x7f) - 1;
       staff->allaBreve = d & 0x80;
 
-      staff->iLayout = readByte();
-      staff->topDistX = readInt();
-      staff->btmDistX = readInt();
-      staff->color = readColor();
+      staff->iLayout   = readByte();
+      staff->topDistX  = readInt();
+      staff->btmDistX  = readInt();
+      staff->color     = readColor();
       readExtra();
 
 // printf("      Staff iLayout %d\n", staff->iLayout);
@@ -1273,6 +1267,7 @@ void Capella::read(QFile* fp)
       author   = readString();
       keywords = readString();
       comment  = readString();
+
 // printf("author <%s> keywords <%s> comment <%s>\n", author, keywords, comment);
 
       nRel   = readUnsigned();            // 75
@@ -1492,13 +1487,15 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
       int nTuplet;
       int tupletTick;
 
+//printf("    read voice: tick %d track: %d)\n", tick, track);
       foreach(NoteObj* no, cvoice->objects) {
             switch(no->type()) {
                   case T_REST:
                         {
+//printf("     <Rest>\n");
                         Measure* m = getCreateMeasure(tick);
                         RestObj* o = static_cast<RestObj*>(no);
-                        int ticks = o->ticks();
+                        int ticks  = o->ticks();
                         Duration d;
                         d.setVal(ticks);
                         if (o->count) {
@@ -1561,6 +1558,7 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                         break;
                   case T_CHORD:
                         {
+//printf("     <Chord>\n");
                         ChordObj* o = static_cast<ChordObj*>(no);
                         int ticks = o->ticks();
                         Duration d;
@@ -1693,6 +1691,7 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                         break;
                   case T_CLEF:
                         {
+//printf("     <Clef>\n");
                         CapClef* o = static_cast<CapClef*>(no);
 // printf("%d:%d <Clef> %s line %d oct %d\n", tick, staffIdx, o->name(), o->line, o->oct);
                         ClefType nclef = o->clef();
@@ -1709,6 +1708,7 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                         break;
                   case T_KEY:
                         {
+//printf("   <Key>\n");
                         CapKey* o = static_cast<CapKey*>(no);
                         int key = staff(staffIdx)->key(tick).accidentalType();
                         if (key != o->signature) {
@@ -1725,6 +1725,7 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                   case T_METER:
                         {
                         CapMeter* o = static_cast<CapMeter*>(no);
+//printf("     %d<Meter> %d %d\n", tick, o->numerator, 1 << o->log2Denom);
                         if (o->log2Denom > 7)
                               break;
                         AL::SigEvent se = sigmap()->timesig(tick);
@@ -1740,10 +1741,46 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                         }
                         break;
                   case T_EXPL_BARLINE:
-                        printf("<Barline>\n");
+                  case T_IMPL_BARLINE:    // does not exist?
+                        {
+                        CapExplicitBarline* o = static_cast<CapExplicitBarline*>(no);
+printf("     <Barline>\n");
+                        Measure* m = getCreateMeasure(tick);
+                        int ticks = tick - m->tick();
+                        if (ticks > 0 && ticks != m->ticks()) {
+                              // this is a measure with different actual duration
+                              m->setLen(Fraction::fromTicks(ticks));
+                              }
+                        else
+                              m = m->prevMeasure();
+                        if (m == 0)
+                              break;
+
+                        BarLineType st = NORMAL_BAR;
+                        switch (o->type()) {
+                              case CapExplicitBarline::BAR_SINGLE:      st = NORMAL_BAR; break;
+                              case CapExplicitBarline::BAR_DOUBLE:      st = DOUBLE_BAR; break;
+                              case CapExplicitBarline::BAR_END:         st = END_BAR; break;
+                              case CapExplicitBarline::BAR_REPEND:      st = END_REPEAT; break;
+                              case CapExplicitBarline::BAR_REPSTART:    st = START_REPEAT; break;
+                              case CapExplicitBarline::BAR_REPENDSTART: st = END_START_REPEAT; break;
+                              }
+                        if (st == NORMAL_BAR)
+                              break;
+
+                        if (st == START_REPEAT || st == END_START_REPEAT) {
+                              Measure* nm = m->nextMeasure();
+                              nm->setRepeatFlags(nm->repeatFlags() | RepeatStart);
+                              }
+//                        if (st != START_REPEAT)
+//                              m->setEndBarLineType(st, false, true, Qt::black);
+                        if (st == END_REPEAT || st == END_START_REPEAT)
+                              m->setRepeatFlags(m->repeatFlags() | RepeatEnd);
+
+                        }
                         break;
                   case T_PAGE_BKGR:
-                        printf("<PageBreak>\n");
+// printf("     <PageBreak>\n");
                         break;
                   }
             }
@@ -1851,17 +1888,37 @@ void Score::convertCapella(Capella* cap)
       {
       if (cap->systems.isEmpty())
             return;
+      printf("==================convert-capella\n");
 
       style()->set(ST_measureSpacing, 1.0);
       _spatium = cap->normalLineDist * DPMM;
       style()->set(ST_smallStaffMag, cap->smallLineDist / cap->normalLineDist);
       style()->set(ST_systemDistance, Spatium(8));
 
-
-      int staves = 0;
+#if 0
       foreach(CapSystem* csys, cap->systems) {
-            if (csys->staves.size() > staves)
-                  staves = csys->staves.size();
+            printf("Staff:\n");
+            foreach(CapStaff* cstaff, csys->staves) {
+                  CapStaffLayout* cl = cap->staffLayout(cstaff->iLayout);
+                  printf("  Staff layout %d  barline %d-%d mode %d\n",
+                     cstaff->iLayout, cl->barlineFrom, cl->barlineTo, cl->barlineMode);
+                  }
+            }
+#endif
+
+      //
+      // find out the maximum number of staves
+      //
+      int staves = 0;
+      foreach(CapSystem* csys, cap->systems)
+            staves = qMax(staves, csys->staves.size());
+      //
+      // check the assumption that every stave should be
+      // associated with a CapStaffLayout
+      //
+      if (staves != cap->staffLayouts().size()) {
+            printf("Capella: max number of staves != number of staff layouts\n");
+            staves = qMax(staves, cap->staffLayouts().size());
             }
 
       CapStaff* cs = cap->systems[0]->staves[0];
@@ -1869,13 +1926,27 @@ void Score::convertCapella(Capella* cap)
             sigmap()->add(0, Fraction(cs->numerator, 1 << cs->log2Denom));
 
       Part* part = new Part(this);
+      Staff* bstaff = 0;
+      int span;
       for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
             CapStaffLayout* cl = cap->staffLayout(staffIdx);
             Staff* s = new Staff(this, part, staffIdx);
+            s->setBarLineSpan(0);
+            if (bstaff == 0) {
+                  bstaff = s;
+                  span = 0;
+                  }
+            ++span;
+            if (cl->barlineMode == 1) {
+                  bstaff->setBarLineSpan(span);
+                  bstaff = 0;
+                  }
             s->setSmall(cl->bSmall);
             part->insertStaff(s);
             _staves.push_back(s);
             }
+      if (bstaff)
+            bstaff->setBarLineSpan(span);
 
       foreach(CapBracket cb, cap->brackets) {
             Staff* staff = _staves.value(cb.from);
@@ -1928,15 +1999,22 @@ void Score::convertCapella(Capella* cap)
 
       int systemTick = 0;
       foreach(CapSystem* csys, cap->systems) {
-            int mtick    = 0;
-            int staffIdx = 0;
+printf("readCapSystem\n");
             if (csys->explLeftIndent > 0) {
                   HBox* mb = new HBox(this);
                   mb->setTick(systemTick);
                   mb->setBoxWidth(Spatium(csys->explLeftIndent));
                   addMeasure(mb);
                   }
+            int mtick = 0;
             foreach(CapStaff* cstaff, csys->staves) {
+                  //
+                  // assumption: layout index is mscore staffIdx
+                  //    which means that there is a 1:1 relation between layout/staff
+                  //
+
+printf("  ReadCapStaff %d/%d\n", cstaff->numerator, 1 << cstaff->log2Denom);
+                  int staffIdx = cstaff->iLayout;
                   int voice = 0;
                   foreach(CapVoice* cvoice, cstaff->voices) {
                         int tick = readCapVoice(cvoice, staffIdx, systemTick);
@@ -1944,7 +2022,6 @@ void Score::convertCapella(Capella* cap)
                         if (tick > mtick)
                               mtick = tick;
                         }
-                  ++staffIdx;
                   }
             Measure* m = tick2measure(mtick-1);
             if (m && !m->lineBreak()) {
@@ -1955,7 +2032,29 @@ void Score::convertCapella(Capella* cap)
                   }
             systemTick = mtick;
             }
+      SegmentType st = SegChordRest;
+      for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
+            for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
+                  bool empty = true;
+                  for (Segment* s = m->first(st); s; s = s->next(st)) {
+                        if (s->element(staffIdx * VOICES)) {
+                              empty = false;
+                              break;
+                              }
+                        }
+                  if (empty) {
+                        Segment* s = m->getSegment(SegChordRest, m->tick());
+                        Rest* rest = new Rest(this);
+                        rest->setDurationType(Duration::V_MEASURE);
+                        rest->setDuration(m->len());
+                        rest->setTrack(staffIdx * VOICES);
+                        s->add(rest);
+                        }
+                  }
+            }
       _parts.push_back(part);
       connectTies();
+      connectSlurs();
+      rebuildMidiMapping();
       }
 

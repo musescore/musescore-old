@@ -1901,7 +1901,6 @@ void Measure::write(Xml& xml, int staff, bool writeSystemElements) const
             if (_noOffset)
                   xml.tag("noOffset", _noOffset);
             }
-
       MStaff* mstaff = staves[staff];
       if (mstaff->_vspacerUp)
             xml.tag("vspacerUp", mstaff->_vspacerUp->getSpace().val());

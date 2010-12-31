@@ -71,7 +71,7 @@ void OmrPage::read(int pageNo)
       getStaffLines();
 
       int numStaves = staves.size();
-      printf("===numStaves: %d\n", numStaves);
+printf("===numStaves: %d\n", numStaves);
 
       //--------------------------------------------------
       //    search bar lines
@@ -126,7 +126,7 @@ void OmrPage::read(int pageNo)
                   staves[idx+1].setWidth(dx - staves[idx+1].x());
                   }
             }
-#if 0
+#if 1
       foreach(QRectF r, staves) {
             int x1 = r.x();
             int x2 = x1 + r.width();
@@ -175,7 +175,7 @@ void OmrPage::readHeader(Score* score)
       if (!s.isEmpty())
             addText(score, TEXT_TITLE, s);
 
-#if 0
+#if 1
       img = OcrImage(_image.bits(), _slices[1], (_image.width() + 31)/32);
       s = _omr->ocr()->readLine(img).trimmed();
       if (!s.isEmpty())
@@ -256,8 +256,8 @@ void OmrPage::slice()
       int x2    = wordsPerLine() - cropR;
       int xbits = (x2 - x1) * 32;
 
-      _slices.append(QRect(cropL*32, y1, xbits, y2-y1));
-#if 0
+//      _slices.append(QRect(cropL*32, y1, xbits, y2-y1));
+#if 1
       for (int y = y1; y < y2;) {
             //
             // skip contents
@@ -642,4 +642,48 @@ double OmrPage::systemDistance() const
             return 6.0;
       return ((staves[2].y() - staves[1].y()) / _spatium) - 4.0;
       }
+
+//---------------------------------------------------------
+//   write
+//---------------------------------------------------------
+
+void OmrPage::write(Xml& xml) const
+      {
+      xml.stag("OmrPage");
+      xml.tag("cropL", cropL);
+      xml.tag("cropR", cropR);
+      xml.tag("cropT", cropT);
+      xml.tag("cropB", cropB);
+      foreach(const QRectF& r, staves)
+            xml.tag("staff", r);
+      xml.etag();
+      }
+
+//---------------------------------------------------------
+//   read
+//---------------------------------------------------------
+
+void OmrPage::read(QDomElement e)
+      {
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            QString tag(e.tagName());
+            QString val(e.text());
+
+            if (tag == "cropL")
+                  cropL = val.toInt();
+            else if (tag == "cropR")
+                  cropR = val.toInt();
+            else if (tag == "cropT")
+                  cropT = val.toInt();
+            else if (tag == "cropB")
+                  cropB = val.toInt();
+            else if (tag == "staff") {
+                  QRectF r = readRectF(e);
+                  staves.append(r);
+                  }
+            else
+                  domError(e);
+            }
+      }
+
 

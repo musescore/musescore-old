@@ -23,6 +23,7 @@
 
 class Omr;
 class Score;
+class Xml;
 
 struct HLine {
       int x1, x2, y;
@@ -37,14 +38,14 @@ struct HLine {
 class OmrPage {
       Omr* _omr;
       QImage _image;
+      double _spatium;
+
       int cropL, cropR;       // crop values in words (32 bit) units
       int cropT, cropB;       // crop values in pixel units
 
       QList<QRect> _slices;
       QList<QRectF> staves;
       QList<HLine> slines;
-
-      double _spatium;
 
       QList<QLine>  lines;
       QList<QLineF> barlines;
@@ -82,6 +83,9 @@ class OmrPage {
       double staffDistance() const;
       double systemDistance() const;
       void readHeader(Score* score);
+
+      void write(Xml&) const;
+      void read(QDomElement e);
       };
 
 #endif
