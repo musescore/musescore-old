@@ -27,6 +27,7 @@
 #include "al/al.h"
 #include "rest.h"
 #include "omr/omrpage.h"
+#include "segment.h"
 
 //---------------------------------------------------------
 //   importPdf
@@ -35,14 +36,14 @@
 bool Score::importPdf(const QString& path)
       {
       _omr = new Omr(path, this);
-      if (!_omr->read()) {
+      if (!_omr->readPdf()) {
             delete _omr;
             _omr = 0;
             return false;
             }
       _spatium = _omr->spatiumMM() * DPMM;
-      style().set(StyleVal(ST_systemDistance, Spatium(_omr->systemDistance())));
-      style().set(StyleVal(ST_akkoladeDistance, Spatium(_omr->staffDistance())));
+      style()->set(StyleVal(ST_systemDistance, Spatium(_omr->systemDistance())));
+      style()->set(StyleVal(ST_akkoladeDistance, Spatium(_omr->staffDistance())));
 
       Part* part   = new Part(this);
       Staff* staff = new Staff(this, part, 0);

@@ -67,6 +67,11 @@ void Omr::write(Xml& xml) const
       {
       xml.stag("Omr");
       xml.tag("path", _path);
+      xml.tag("spatium", _spatium);
+      xml.tag("dpmm", _dpmm);
+      foreach(OmrPage* page, pages) {
+            page->write(xml);
+            }
       xml.etag();
       }
 
@@ -76,6 +81,10 @@ void Omr::write(Xml& xml) const
 
 void Omr::read(QDomElement e)
       {
+      _doc = 0;
+      if (_ocr == 0)
+            _ocr = new Ocr;
+      _ocr->init();
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
@@ -83,6 +92,15 @@ void Omr::read(QDomElement e)
             if (tag == "path") {
                   _path = val;
                   }
+            else if (tag == "OmrPage") {
+                  OmrPage* page = new OmrPage(this);
+                  page->read(e);
+                  pages.append(page);
+                  }
+            else if (tag == "spatium")
+                  _spatium = val.toDouble();
+            else if (tag == "dpmm")
+                  _dpmm = val.toDouble();
             else
                   domError(e);
             }
@@ -98,17 +116,18 @@ int Omr::pagesInDocument() const
       }
 
 //---------------------------------------------------------
-//   read
+//   readPdf
 //    return true on success
 //---------------------------------------------------------
 
-bool Omr::read()
+bool Omr::readPdf()
       {
       if (_ocr == 0)
             _ocr = new Ocr;
       _ocr->init();
 
 printf("Omr::read <%s>\n", qPrintable(_path));
+
       _doc = new Pdf(_path);
 
       int n = _doc->numPages();

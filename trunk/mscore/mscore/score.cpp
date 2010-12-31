@@ -528,10 +528,9 @@ bool Score::read(QString name)
             else if (csl == "cap") {
                   if (!importCapella(name))
                         return false;
-                  connectSlurs();
                   }
             else if (csl == "ove") {
-                  if(!importOve(name))
+                  if (!importOve(name))
             	      return false;
       	      }
 #ifdef OMR

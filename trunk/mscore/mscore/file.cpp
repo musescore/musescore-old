@@ -82,6 +82,7 @@
 
 #ifdef OMR
 #include "omr/omr.h"
+#include "omr/omrpage.h"
 #endif
 
 #include "diff/diff_match_patch.h"
@@ -937,6 +938,7 @@ void Score::saveCompressedFile(QIODevice* f, QFileInfo& info, bool autosave)
             ++idx;
             }
 
+
       xml.etag();
       xml.etag();
       cbuf.seek(0);
@@ -973,6 +975,28 @@ void Score::saveCompressedFile(QIODevice* f, QFileInfo& info, bool autosave)
             ip->setPath(dstPath);   // image now has local path
             ++idx;
             }
+#ifdef OMR
+      //
+      // save OMR page images
+      //
+      if (_omr) {
+            int n = _omr->numPages();
+            for (int i = 0; i < n; ++i) {
+                  QString path = QString("OmrPages/page%1.png").arg(i+1);
+                  QBuffer cbuf;
+                  OmrPage* page = _omr->page(i);
+                  QImage image = page->image();
+                  if (!image.save(&cbuf, "PNG"))
+                        throw(QString("cannot create image"));
+                  if (!cbuf.open(QIODevice::ReadOnly))
+                        throw(QString("cannot open buffer cbuf"));
+                  ec = uz.createEntry(path, cbuf, dt);
+                  if (ec != Zip::Ok)
+                        throw(QString("Cannot add <%1> to zipfile\n").arg(path));
+                  cbuf.close();
+                  }
+            }
+#endif
 
       QBuffer dbuf;
       dbuf.open(QIODevice::ReadWrite);
@@ -1174,7 +1198,6 @@ bool Score::loadCompressedMsc(QString name)
             else
                   ip->setLoaded(true);
             }
-
       if (rootfile.isEmpty()) {
             printf("can't find rootfile in: %s\n", qPrintable(name));
             return false;
@@ -1195,7 +1218,36 @@ bool Score::loadCompressedMsc(QString name)
             }
       dbuf.close();
       docName = info.completeBaseName();
-      return read1(doc.documentElement());
+      bool retval = read1(doc.documentElement());
+
+#ifdef OMR
+      //
+      // load OMR page images
+      //
+      if (_omr) {
+            int n = _omr->numPages();
+            for (int i = 0; i < n; ++i) {
+                  QBuffer dbuf;
+                  dbuf.open(QIODevice::WriteOnly);
+                  QString path = QString("OmrPages/page%1.png").arg(i+1);
+                  ec = uz.extractFile(path, &dbuf);
+                  if (ec != UnZip::Ok) {
+                        printf("Cannot read <%s> from zipfile\n", qPrintable(path));
+                        }
+                  else  {
+                        OmrPage* page = _omr->page(i);
+                        QImage image;
+                        if (image.loadFromData(dbuf.data(), "PNG")) {
+                              page->setImage(image);
+                              // printf("read image %s\n", qPrintable(path));
+                              }
+                        else
+                              printf("load image failed\n");
+                        }
+                  }
+            }
+#endif
+      return retval;
       }
 
 //---------------------------------------------------------
@@ -1408,10 +1460,12 @@ bool Score::read(QDomElement dScore)
             else if (tag == "Omr") {
                   _omr = new Omr(this);
                   _omr->read(ee);
-                  if (!_omr->read()) {
+/*                  if (!_omr->read()) {
                         delete _omr;
                         _omr = 0;
                         }
+                  */
+
                   }
 #endif
             else if (tag == "showOmr")

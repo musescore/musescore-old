@@ -32,7 +32,7 @@ static const char* timeNames[] = { "1/1", "1/2", "1/4", "1/8", "1/16", "1/32", "
 
 class Capella;
 
-enum {
+enum CapellaNoteObjectType {
       T_REST, T_CHORD, T_CLEF, T_KEY, T_METER, T_EXPL_BARLINE, T_IMPL_BARLINE,
       T_PAGE_BKGR
       };
@@ -56,11 +56,11 @@ class CapellaObj {
 //---------------------------------------------------------
 
 class NoteObj {
-      int _type;
+      CapellaNoteObjectType _type;
 
    public:
-      NoteObj(int t) { _type = t; }
-      int type() const  { return _type; }
+      NoteObj(CapellaNoteObjectType t) { _type = t; }
+      CapellaNoteObjectType type() const  { return _type; }
       };
 
 //---------------------------------------------------------
@@ -121,15 +121,17 @@ class CapMeter : public NoteObj, public CapellaObj {
 //---------------------------------------------------------
 
 class CapExplicitBarline : public NoteObj, public CapellaObj {
-      enum {BAR_SINGLE, BAR_DOUBLE, BAR_END,
-            BAR_REPEND, BAR_REPSTART, BAR_REPENDSTART};
-
-      int type;
-      int barMode;      // 0 = auto, 1 = nur Zeilen, 2 = durchgezogen
+      int _type;
+      int _barMode;      // 0 = auto, 1 = nur Zeilen, 2 = durchgezogen
 
    public:
-      CapExplicitBarline(Capella* c) : NoteObj(T_IMPL_BARLINE), CapellaObj(c) {}
+      CapExplicitBarline(Capella* c) : NoteObj(T_EXPL_BARLINE), CapellaObj(c) {}
       void read();
+      int type() const    { return _type; }
+      int barMode() const { return _barMode; }
+
+      enum { BAR_SINGLE, BAR_DOUBLE, BAR_END,
+            BAR_REPEND, BAR_REPSTART, BAR_REPENDSTART};
       };
 
 //---------------------------------------------------------
@@ -137,8 +139,8 @@ class CapExplicitBarline : public NoteObj, public CapellaObj {
 //---------------------------------------------------------
 
 struct CapVoice {
-      unsigned char y0Lyrics;
-      unsigned char dyLyrics;
+      uchar y0Lyrics;
+      uchar dyLyrics;
       QFont lyricsFont;
       unsigned char stemDir;
       QList<NoteObj*> objects;
@@ -150,11 +152,11 @@ struct CapVoice {
 //---------------------------------------------------------
 
 struct CapStaff {
-      unsigned char numerator;      // default time signature
+      uchar numerator;      // default time signature
       int log2Denom;
       bool allaBreve;
 
-      unsigned char iLayout;
+      uchar iLayout;
       int topDistX;
       int btmDistX;
       QColor color;
@@ -166,14 +168,14 @@ struct CapStaff {
 //---------------------------------------------------------
 
 struct CapStaffLayout {
-      unsigned char barlineMode;
-      unsigned char noteLines;
+      uchar barlineMode;
+      uchar noteLines;
       bool bSmall;
       int topDist;
       int btmDist;
       int groupDist;
-      unsigned char barlineFrom;
-      unsigned char barlineTo;
+      uchar barlineFrom;
+      uchar barlineTo;
 
       int form, line, oct;          // clef
 
@@ -619,7 +621,7 @@ class Capella {
       unsigned btmPageMargins;
 
       QList<QFont> fonts;
-      QList<CapStaffLayout*> staves;      // staff layout
+      QList<CapStaffLayout*> _staffLayouts;      // staff layout
 
       int interDist;
       unsigned char txtAlign;       // Stimmenbezeichnungen 0=links, 1=zentriert, 2=rechts
@@ -666,7 +668,9 @@ class Capella {
       QList<CapSystem*> systems;
       QList<CapBracket> brackets;
       ChordObj* backgroundChord;
-      CapStaffLayout* staffLayout(int idx)  { return staves[idx]; }
+      CapStaffLayout* staffLayout(int idx)               { return _staffLayouts[idx]; }
+      const QList<CapStaffLayout*>& staffLayouts() const { return _staffLayouts; }
+
       double smallLineDist;            // spatium unit in metric mm
       double normalLineDist;
       int topDist;
