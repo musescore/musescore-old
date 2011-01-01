@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2010 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -597,6 +597,7 @@ void Score::layoutStage3()
 
 void Score::doLayout()
       {
+printf("=====doLayout\n");
       _symIdx = 0;
       if (_style.valueSt(ST_MusicalSymbolFont) == "Gonville")
             _symIdx = 1;
@@ -1212,6 +1213,7 @@ bool Score::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
       //
       bool showChanged = false;
       int staves = system->staves()->size();
+#if 0
       int staffIdx = 0;
       foreach (Part* p, _parts) {
             int nstaves   = p->nstaves();
@@ -1242,6 +1244,38 @@ bool Score::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
                   }
             staffIdx += nstaves;
             }
+#else
+      int staffIdx = 0;
+      foreach (Staff* staff, _staves) {
+            if (styleB(ST_hideEmptyStaves) && (staves > 1)) {
+                  bool hideStaff = true;
+                  foreach(MeasureBase* m, system->measures()) {
+                        if (m->type() != MEASURE)
+                              continue;
+                        Measure* measure = static_cast<Measure*>(m);
+                        if (!measure->isMeasureRest(staffIdx)) {
+                              hideStaff = false;
+                              break;
+                              }
+                        }
+                  SysStaff* s  = system->staff(staffIdx);
+                  bool oldShow = s->show();
+                  s->setShow(hideStaff ? false : staff->show());
+                  if (oldShow != s->show()) {
+                        showChanged = true;
+                        foreach(MeasureBase* m, system->measures()) {
+                              if (m->type() != MEASURE)
+                                    continue;
+                              Measure* measure = static_cast<Measure*>(m);
+                              measure->createEndBarLines();
+                              }
+                        }
+                  }
+            ++staffIdx;
+            }
+#endif
+
+
 #if 0 // DEBUG: endless recursion can happen if number of measures change
       // relayout if stave's show status has changed
       if (showChanged) {
