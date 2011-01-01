@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2010 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -2500,60 +2500,56 @@ bool Measure::setStartRepeatBarLine(bool val)
 bool Measure::createEndBarLines()
       {
       bool changed = false;
+      int nstaves  = score()->nstaves();
+      Segment* seg = getSegment(SegEndBarLine, tick() + ticks());
 
-      for (int staffIdx = 0; staffIdx < score()->nstaves(); ++staffIdx) {
-            Segment* s;
-            BarLine* bl  = 0;
+      for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
             Staff* staff = score()->staff(staffIdx);
-            for (s = first(); s; s = s->next()) {
-                  if (s->subtype() == SegEndBarLine) {
-                        bl = (BarLine*)(s->element(staffIdx * VOICES));
-                        break;
-                        }
-                  }
             int span = staff->barLineSpan();
-            if (span == 0) {
-                  if (bl) {
-                        delete bl;
-                        bl = 0;
-                        s->setElement(staffIdx * VOICES, 0);
+            BarLine* bl = 0;
+            int aspan;
+            for (int i = 0; i < span; ++i) {
+                  int track = (staffIdx + i) * VOICES;
+                  SysStaff* s  = system()->staff(staffIdx + i);
+                  if (!s->show()) {
+                        BarLine* bl1 = static_cast<BarLine*>(seg->element(track));
+                        if (bl1) {
+                              seg->setElement(track, 0);
+                              delete bl1;
+                              changed = true;
+                              }
+                        continue;
                         }
-                  }
-            else {
                   if (bl == 0) {
-                        bl = new BarLine(score());
-                        bl->setTrack(staffIdx * VOICES);
-                        Segment* seg = getSegment(SegEndBarLine, tick() + ticks());
+                        bl = static_cast<BarLine*>(seg->element(track));
+                        if (bl == 0) {
+                              bl = new BarLine(score());
+                              changed = true;
+                              }
+                        bl->setTrack(track);
+                        bl->setVisible(_endBarLineVisible);
+                        bl->setColor(_endBarLineColor);
+                        bl->setGenerated(_endBarLineGenerated);
+                        BarLineType et = _multiMeasure > 0 ? _mmEndBarLineType : _endBarLineType;
+                        if (bl->subtype() != et) {
+                              bl->setBarLineType(et);
+                              changed = true;
+                              }
+                        aspan = 0;
                         seg->add(bl);
-                        changed = true;
-                        bl->layout();
                         }
-                  }
-            if (bl) {
-                  bl->setMag(staff->mag());
-                  BarLineType et = _multiMeasure > 0 ? _mmEndBarLineType : _endBarLineType;
-                  if (bl->subtype() != et) {
-                        bl->setBarLineType(et);
-                        changed = true;
-                        }
-                  bl->setVisible(_endBarLineVisible);
-                  bl->setColor(_endBarLineColor);
-                  bl->setGenerated(_endBarLineGenerated);
-                  span = staff->barLineSpan();
-                  if (system() && !system()->staff(staffIdx + span - 1)->show()) {
-                        //
-                        // if the barline ends on an invisible staff
-                        // find last visible staff in barline
-                        //
-                        for (int j = staffIdx + bl->span() - 2; j >= staffIdx; --j) {
-                              if (system()->staff(j)->show()) {
-                                    bl->setSpan(j - staffIdx + 1);
-                                    break;
-                                    }
+                  else {
+                        BarLine* bl1 = static_cast<BarLine*>(seg->element(track));
+                        if (bl1) {
+                              seg->setElement(track, 0);
+                              delete bl1;
+                              changed = true;
                               }
                         }
-                  staffIdx += (span - 1);
+                  ++aspan;
                   }
+            if (bl)
+                  bl->setSpan(aspan);
             }
 
       return changed;

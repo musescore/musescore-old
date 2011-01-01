@@ -1770,7 +1770,8 @@ printf("     <Barline>\n");
 
                         if (st == START_REPEAT || st == END_START_REPEAT) {
                               Measure* nm = m->nextMeasure();
-                              nm->setRepeatFlags(nm->repeatFlags() | RepeatStart);
+                              if (nm)
+                                    nm->setRepeatFlags(nm->repeatFlags() | RepeatStart);
                               }
 //                        if (st != START_REPEAT)
 //                              m->setEndBarLineType(st, false, true, Qt::black);
@@ -1894,6 +1895,7 @@ void Score::convertCapella(Capella* cap)
       _spatium = cap->normalLineDist * DPMM;
       style()->set(ST_smallStaffMag, cap->smallLineDist / cap->normalLineDist);
       style()->set(ST_systemDistance, Spatium(8));
+      style()->set(ST_hideEmptyStaves, true);
 
 #if 0
       foreach(CapSystem* csys, cap->systems) {
@@ -2032,6 +2034,10 @@ printf("  ReadCapStaff %d/%d\n", cstaff->numerator, 1 << cstaff->log2Denom);
                   }
             systemTick = mtick;
             }
+
+      //
+      // fill empty measures with rests
+      //
       SegmentType st = SegChordRest;
       for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
             for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
@@ -2045,7 +2051,11 @@ printf("  ReadCapStaff %d/%d\n", cstaff->numerator, 1 << cstaff->log2Denom);
                   if (empty) {
                         Segment* s = m->getSegment(SegChordRest, m->tick());
                         Rest* rest = new Rest(this);
-                        rest->setDurationType(Duration::V_MEASURE);
+                        Duration d(m->len());
+                        if ((m->len() == m->timesig()) || !d.isValid())
+                              rest->setDurationType(Duration::V_MEASURE);
+                        else
+                              rest->setDurationType(d.type());
                         rest->setDuration(m->len());
                         rest->setTrack(staffIdx * VOICES);
                         s->add(rest);

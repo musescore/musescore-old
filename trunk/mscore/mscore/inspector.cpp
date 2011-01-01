@@ -1410,6 +1410,7 @@ void BarLineView::setElement(Element* e)
       BarLine* barline = (BarLine*)e;
       ShowElementBase::setElement(e);
       bl.subType->setValue(barline->subtype());
+      bl.span->setValue(barline->span());
       }
 
 //---------------------------------------------------------

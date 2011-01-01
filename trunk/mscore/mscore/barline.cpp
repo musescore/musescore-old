@@ -534,7 +534,7 @@ void BarLine::endEditDrag()
 
 void BarLine::layout()
       {
-      _span = staff() ? staff()->barLineSpan() : 1;
+//      _span = staff() ? staff()->barLineSpan() : 1;
 
       double y1, y2;
       getY(&y1, &y2);
