@@ -3229,18 +3229,33 @@ void Measure::layoutStage1()
 
 void Measure::updateAccidentals(Segment* segment, int staffIdx, char* tversatz)
       {
-      Staff* staff   = score()->staff(staffIdx);
-      int startTrack = staffIdx * VOICES;
-      int endTrack   = startTrack + VOICES;
-
+      Staff* staff            = score()->staff(staffIdx);
+      int startTrack          = staffIdx * VOICES;
+      int endTrack            = startTrack + VOICES;
+      StaffGroup staffGroup   = staff->staffType()->group();
+      Tablature* tab;
       const Instrument* instrument = staff->part()->instr();
+
+      if(staffGroup == TAB_STAFF)
+            tab    = instrument->tablature();
+
       for (int track = startTrack; track < endTrack; ++track) {
             Element* e = segment->element(track);
             if (!e || e->type() != CHORD)
                  continue;
             Chord* chord = static_cast<Chord*>(e);
+
+            // TAB_STAFF is different, as each note has to be fretted in the context of the whole chord
+
+            if(staffGroup == TAB_STAFF) {
+                  tab->fretChord(chord);
+                  continue;                                 // skip other staff type cases
+                  }
+
+            // PITCHED_ and PERCUSSION_STAFF can go note by note
+
             foreach(Note* note, chord->notes()) {
-                  switch(staff->staffType()->group()) {
+                  switch(staffGroup) {
                         case PITCHED_STAFF:
                               if (note->tieBack()) {
                                     int line = note->tieBack()->startNote()->line();
@@ -3271,19 +3286,6 @@ void Measure::updateAccidentals(Segment* segment, int staffIdx, char* tversatz)
                                     note->setHeadGroup(drumset->noteHead(pitch));
                                     note->setLine(drumset->line(pitch));
                                     continue;
-                                    }
-                              }
-                              break;
-                        case TAB_STAFF:
-                              {
-                              Tablature* tab = instrument->tablature();
-                              int string     = note->string();
-                              int fret       = note->fret();
-                              if (string == -1 || fret == -1 || tab->getPitch(string, fret) != note->pitch()) {
-                                    int nstring, nfret;
-                                    tab->convertPitch(note->pitch(), &nstring, &nfret);
-                                    score()->undo()->push(new ChangePitch(note, note->pitch(), note->tpc(),
-                                       note->line(), nfret, nstring));
                                     }
                               }
                               break;

@@ -96,6 +96,8 @@ class Note : public Element {
       bool _hidden;           ///< markes this note as the hidden one if there are
                               ///< overlapping notes; hidden notes are not played
                               ///< and heads + accidentals are not shown
+      bool _fretConflict;     ///< used by TAB staves to mark a fretting conflict:
+                              ///< two or mor enotes on the same string
 
       bool dragMode;
       bool _mirror;           ///< True if note is mirrored at stem.
@@ -176,6 +178,8 @@ class Note : public Element {
       void setString(int val);
       bool ghost() const              { return _ghost;  }
       void setGhost(bool val)         { _ghost = val;   }
+      bool fretConflict() const       { return _fretConflict; }
+      void setFretConflict(bool val)  { _fretConflict = val; }
 
       virtual void add(Element*);
       virtual void remove(Element*);
