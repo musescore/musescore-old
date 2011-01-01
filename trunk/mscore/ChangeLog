@@ -1,3 +1,7 @@
+01.jan (2011!) (mi)
+      - Measure::updateAccidentals for TAB staves uses whole chord context to avoid (or reduce)
+        fretting conflicts (multiple notes of a chord on teh same string)
+      - Added visible marks (red background) for notes with fretting conflicts
 31.dec (ws)
       - better capella import: detect upbeat
       - save omr images along with score in mscz container

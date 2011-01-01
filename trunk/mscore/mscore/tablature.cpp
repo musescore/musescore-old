@@ -19,6 +19,10 @@
 //=============================================================================
 
 #include "tablature.h"
+#include "chord.h"
+#include "note.h"
+#include "score.h"
+#include "undo.h"
 
 static int guitarStrings[6] = { 40, 45, 50, 55, 59, 64 };
 
@@ -32,16 +36,28 @@ Tablature guitarTablature(13, 6, guitarStrings);
 Tablature::Tablature(int numFrets, int numStrings, int strings[])
       {
       _frets = numFrets;
-      for (int i = 0; i < numStrings; ++i)
-            stringTable.append(strings[i]);
+      int   i, j;
+
+      // insert string pitches into member variable in increasing pitch value
+      for (i = 0; i < numStrings; i++) {
+            for(j=0; j < stringTable.size() && stringTable.at(j) < strings[i]; j++)
+                  ;
+            stringTable.insert(j, strings[i]);
+            }
       }
 
 Tablature::Tablature(int numFrets, QList<int>& strings)
       {
       _frets = numFrets;
+      int   i, j;
+
+      // insert string pitches into member variable in increasing pitch value
       // DEEP COPY!
-      foreach(int i, strings)
-            stringTable.append(i);
+      foreach(i, strings) {
+            for(j=0; j < stringTable.size() && stringTable.at(j) < i; j++)
+                  ;
+            stringTable.insert(j, i);
+            }
       }
 
 //---------------------------------------------------------
@@ -50,15 +66,25 @@ Tablature::Tablature(int numFrets, QList<int>& strings)
 
 void Tablature::read(QDomElement e)
       {
+      int   i, j;
+      QList<int> stringsLoc;
+
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             int v = e.text().toInt();
             if (tag == "frets")
                   _frets = v;
             else if (tag == "string")
-                  stringTable.append(v);
+                  stringsLoc.append(v);         // accumulate string pitches in local variable
             else
                   domError(e);
+            }
+      // copy string pitches to member variable in increasing pitch order
+      // DEEP COPY!
+      foreach(i, stringsLoc) {
+            for(j=0; j < stringTable.size() && stringTable.at(j) < i; j++)
+                  ;
+            stringTable.insert(j, i);
             }
       }
 
@@ -77,33 +103,47 @@ void Tablature::write(Xml& xml) const
 
 //---------------------------------------------------------
 //   convertPitch
+//   Finds string and fret for a note.
+//
+//   Fills *string and *fret with suitable values for pitch
+//   using the highest possible string.
+//   If note cannot be fretted, uses fret 0 on nearest string and returns false
+//
+//    Note: Strings are stored internally from lowest (0) to highest (strings()-1),
+//          but the returned *string value references strings in reversed, 'visual', order:
+//          from highest (0) to lowest (strings()-1)
 //---------------------------------------------------------
 
 bool Tablature::convertPitch(int pitch, int* string, int* fret) const
       {
       int strings = stringTable.size();
 
-      for (int i = 0; i < strings; ++i) {
-            int min = stringTable[i];
-            int max;
-            if (i + 1 == strings)
-                  max = min + _frets;
-            else
-                  max = stringTable[i+1] - 1;
+      // if above max fret on highest string, fret on first string, but return failure
+      if(pitch > stringTable.at(strings-1) + _frets) {
+            *string = 0;
+            *fret   = 0;
+            return false;
+            }
 
-            if (pitch >= min && pitch <= max) {
+      // look for a suitable string, starting from the highest
+      for (int i = strings-1; i >=0; i--) {
+            if(pitch >= stringTable.at(i)) {
                   *string = strings - i - 1;
-                  *fret   = pitch - min;
+                  *fret   = pitch - stringTable.at(i);
                   return true;
                   }
             }
-      *string = 0;
+
+      // if no string found, pitch is below lowest string:
+      // fret on last string, but return failure
+      *string = strings-1;
       *fret   = 0;
       return false;
       }
 
 //---------------------------------------------------------
 //   getPitch
+//   Returns the pitch corresponding to the string / fret combination
 //---------------------------------------------------------
 
 int Tablature::getPitch(int string, int fret) const
@@ -114,8 +154,8 @@ int Tablature::getPitch(int string, int fret) const
 
 //---------------------------------------------------------
 //   fret
-//    return fret for given pitch and string
-//    return -1 if not possible
+//    Returns the fret corresponding to the pitch / string combination
+//    returns -1 if not possible
 //---------------------------------------------------------
 
 int Tablature::fret(int pitch, int string) const
@@ -130,4 +170,73 @@ int Tablature::fret(int pitch, int string) const
       return fret;
       }
 
+//---------------------------------------------------------
+//   fretChord
+//    Assigns fretting to all the notes of the chord,
+//    re-using existing fretting wherever possible
+//
+//    Minimizes fret conflicts (multiple notes on the same string)
+//    but marks as fretConflict notes which cannot be fretted
+//    (outside tablature range) or which cannot be assigned
+//    a separate string
+//---------------------------------------------------------
+
+void Tablature::fretChord(Chord * chord) const
+      {
+      int nCount, nCount2;
+      Note * note, * note2;
+      int nFret, nNewFret, nTempFret;
+      int nString, nNewString;
+      int nNextFreeString = 0;                  // initially all strings are available
+
+      // scan chord notes from highest, matching with strings from the highest
+      for(nCount=chord->notes().size()-1; nCount >= 0; nCount--) {
+            note                    = chord->notes().at(nCount);
+            nString = nNewString    = note->string();
+            nFret   = nNewFret      = note->fret();
+            note->setFretConflict(false);       // assume no conflicts on this note
+            // if no fretting yet or current fretting is no longer valid
+            if (nString == -1 || nFret == -1 || getPitch(nString, nFret) != note->pitch()) {
+                  // get a new fretting
+                  if(!convertPitch(note->pitch(), &nNewString, &nNewFret) ) {
+                        // no way to fit this note in this tab:
+                        // mark as fretting conflict
+                        note->setFretConflict(true);
+                        // store pitch change without affecting chord context
+                        chord->score()->undo()->push(new ChangePitch(note, note->pitch(), note->tpc(),
+                           note->line(), nNewFret, nNewString));
+                        continue;
+                        }
+                  }
+            // if fretting falls in an already used string...
+            if(nNewString < nNextFreeString) {
+                  // ...try with each next available string
+                  for( ; nNextFreeString < strings(); nNextFreeString++) {
+                        if( (nTempFret=fret(note->pitch(), nNextFreeString)) != -1) {
+                              // suitable string found
+                              nNewFret    = nTempFret;
+                              nNewString  = nNextFreeString;
+                              break;
+                              }
+                        }
+                  if(nNextFreeString >= strings()) {
+                        // no way to fit this chord in this tab:
+                        // mark as fretting conflict this note...
+                        note->setFretConflict(true);
+                        // and any note already scanned and set on the same string
+                        for(nCount2=chord->notes().size()-1; nCount2 > nCount; nCount2--) {
+                              note2 = chord->notes().at(nCount2);
+                              if(note2->string() == nNewString)
+                                    note2->setFretConflict(true);
+                              }
+                        }
+                  }
+            // if fretting did change, store as a pitch change
+            if(nString != nNewString || nFret != nNewFret) {
+                  chord->score()->undo()->push(new ChangePitch(note, note->pitch(), note->tpc(),
+                     note->line(), nNewFret, nNewString));
+                  }
+            nNextFreeString = nNewString+1;     // string is used
+            }
+      }
 

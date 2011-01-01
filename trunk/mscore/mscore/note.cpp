@@ -496,23 +496,28 @@ void Note::draw(QPainter& p, ScoreView* v) const
                   double imag = 1.0 / mag;
                   double currSpatium = spatium();
 
-//                  QFont f(tab->fretFontName());
-//                  int size = lrint(tab->fretFontSize() * DPI / PPI);
-//                  f.setPixelSize(size);
                   p.scale(mag, mag);
-//                  p.setFont(f);
                   p.setFont(tab->fretFont());
 
                   // when using letters, "+(_fret > 8)" skips 'j'
                   QString s = _ghost ? "X" :
                           ( tab->useNumbers() ? QString::number(_fret) : QString('a' + _fret + (_fret > 8)) );
                   double d  = currSpatium * .2;
-                  QRectF bb = bbox().adjusted(-d, 0.0, d, 0.0);
-                  if(!tab->linesThrough() || !tab->slashStyle()) {
-                        if (v)
+                  // draw background, if required
+                  if(!tab->linesThrough() || !tab->slashStyle() || fretConflict()) {
+                        QRectF bb = bbox().adjusted(-d, 0.0, d, 0.0);
+                        if (v) {
                               v->drawBackground(p, bb);
+                              }
                         else
                               p.eraseRect(bb);
+                        if(fretConflict()) {          //on fret conflict, draw on red background
+                              QPen oldPen = p.pen();
+                              p.setPen(Qt::red);
+                              p.setBrush(Qt::red);
+                              p.drawRect(bb);
+                              p.setPen(oldPen);
+                              }
                         }
                   p.drawText(_bbox.x(), tab->fretFontYOffset() * mag, s);
                   p.scale(imag, imag);

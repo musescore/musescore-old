@@ -23,6 +23,8 @@
 
 #include "xml.h"
 
+class Chord;
+
 //---------------------------------------------------------
 //   Tablature
 //---------------------------------------------------------
@@ -37,6 +39,7 @@ class Tablature {
       Tablature(int numFrets, QList<int>& strings);
       bool convertPitch(int pitch, int* string, int* fret) const;
       int fret(int pitch, int string) const;
+      void fretChord(Chord * chord) const;
       int getPitch(int string, int fret) const;
       int strings() const           { return stringTable.size(); }
       QList<int> stringList() const { return stringTable; }
