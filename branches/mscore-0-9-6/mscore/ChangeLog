@@ -1,3 +1,5 @@
+2.jan.2011 (lv)
+      - fix #
 30.dec (lv)
       - fix #8428: musicxml import: voices mixed up
       - fix #4858: Courtesy accidentals do not import/export in MusicXML anymore
