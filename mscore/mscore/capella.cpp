@@ -1594,6 +1594,7 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                         Chord* chord = new Chord(this);
                         chord->setTuplet(tuplet);
                         chord->setDurationType(d);
+                        chord->setDuration(d.fraction());
                         chord->setTrack(track);
                         switch (o->stemDir) {
                               case -1:    // down
@@ -1725,16 +1726,18 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                   case T_METER:
                         {
                         CapMeter* o = static_cast<CapMeter*>(no);
-//printf("     %d<Meter> %d %d\n", tick, o->numerator, 1 << o->log2Denom);
+printf("     %d<Meter> %d %d\n", tick, o->numerator, 1 << o->log2Denom);
                         if (o->log2Denom > 7)
                               break;
                         AL::SigEvent se = sigmap()->timesig(tick);
-                        AL::SigEvent ne(Fraction(o->numerator, 1 << o->log2Denom));
+                        Fraction f(o->numerator, 1 << o->log2Denom);
+                        AL::SigEvent ne(f);
                         if (!(se == ne))
                               sigmap()->add(tick, ne);
                         TimeSig* ts = new TimeSig(this);
-                        ts->setSig(1 << o->log2Denom, o->numerator);
-                        ts->setTrack(staffIdx * VOICES + voice);
+                        // ts->setSig(1 << o->log2Denom, o->numerator);
+                        ts->setSig(f);
+                        ts->setTrack(track);
                         Measure* m = getCreateMeasure(tick);
                         Segment* s = m->getSegment(SegTimeSig, tick);
                         s->add(ts);
@@ -1749,7 +1752,14 @@ printf("     <Barline>\n");
                         int ticks = tick - m->tick();
                         if (ticks > 0 && ticks != m->ticks()) {
                               // this is a measure with different actual duration
-                              m->setLen(Fraction::fromTicks(ticks));
+                              Fraction f = Fraction::fromTicks(ticks);
+                              m->setLen(f);
+                              AL::SigEvent ne(f);
+                              ne.setNominal(m->timesig());
+                              sigmap()->add(m->tick(), ne);
+
+                              AL::SigEvent ne2(m->timesig());
+                              sigmap()->add(m->tick() + m->ticks(), ne2);
                               }
                         else
                               m = m->prevMeasure();
@@ -1919,7 +1929,8 @@ void Score::convertCapella(Capella* cap)
       // associated with a CapStaffLayout
       //
       if (staves != cap->staffLayouts().size()) {
-            printf("Capella: max number of staves != number of staff layouts\n");
+            printf("Capella: max number of staves != number of staff layouts (%d, %d)\n",
+               staves, cap->staffLayouts().size());
             staves = qMax(staves, cap->staffLayouts().size());
             }
 
