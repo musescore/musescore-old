@@ -114,7 +114,7 @@ namespace Bww {
     {
       out << "      <attributes>" << endl;
       out << "        <divisions>" << WHOLE_DUR / 4 << "</divisions>" << endl;
-      out << "        <key>" << endl;
+      out << "        <key print-object=\"no\">" << endl;
       out << "          <fifths>2</fifths>" << endl;
       out << "          <mode>major</mode>" << endl;
       out << "        </key>" << endl;
@@ -149,10 +149,10 @@ namespace Bww {
   void MxmlWriter::endMeasure(const Bww::MeasureEndFlags mef)
   {
     // qDebug() << "MxmlWriter::endMeasure()";
-    if (mef.repeatEnd || mef.endingEnd)
+    if (mef.repeatEnd || mef.endingEnd || mef.lastOfPart)
     {
       out << "      <barline location=\"right\">" << endl;
-      if (mef.repeatEnd)
+      if (mef.repeatEnd || mef.lastOfPart)
       {
         out << "        <bar-style>light-heavy</bar-style>" << endl;
       }

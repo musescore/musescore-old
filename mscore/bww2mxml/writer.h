@@ -76,10 +76,12 @@ namespace Bww {
     bool repeatEnd;
     bool endingEnd;
     bool lastOfSystem;
+    bool lastOfPart;
     MeasureEndFlags() :
         repeatEnd(false),
         endingEnd(false),
-        lastOfSystem(false)
+        lastOfSystem(false),
+        lastOfPart(false)
     {}
   };
 

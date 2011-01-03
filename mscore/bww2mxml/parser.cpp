@@ -162,6 +162,7 @@ static void dumpMeasures(QList<Bww::MeasureDescription> const& measures)
         << "repeatEnd" << measures.at(j).mef.repeatEnd
         << "endingEnd" << measures.at(j).mef.endingEnd
         << "lastOfSystem" << measures.at(j).mef.lastOfSystem
+        << "lastOfPart" << measures.at(j).mef.lastOfPart
         ;
     qDebug() << "duration:" << measures.at(j).duration;
   }
@@ -228,6 +229,23 @@ static void findIrregularMeasures(QList<Bww::MeasureDescription> & measures, int
     if (d1 > 0 && d2 > 0 && (d1 + d2) == normalDuration)
       measures[j].mbf.irregular = true;
   }
+}
+
+/**
+ Set mef.lastOfPart flag on last measure
+ */
+
+static void setLastOfPart(QList<Bww::MeasureDescription> & measures)
+{
+  qDebug() << "dumpMeasures #measures" << measures.size()
+      ;
+
+  // need at least one measure
+  if (measures.size() == 0) return;
+
+  // set lastOfPart flag on last measure
+  int j = measures.size() - 1;
+  measures[j].mef.lastOfPart = true;
 }
 
 static QString findNextNextNoteBeam(QList<Bww::MeasureDescription> const& measures, int measureNr, int noteNr)
@@ -615,6 +633,7 @@ namespace Bww {
     calculateMeasureDurations(measures);
     findIrregularMeasures(measures, beats, beat);
     determineBeamStates(measures);
+    setLastOfPart(measures);
     dumpMeasures(measures);
     dumpBeams(measures);
 
