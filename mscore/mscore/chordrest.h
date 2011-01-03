@@ -33,6 +33,7 @@ class Segment;
 class Slur;
 class Articulation;
 class Lyrics;
+class TabDurationSymbol;
 
 //---------------------------------------------------------
 //   ChordRest
@@ -56,6 +57,7 @@ class ChordRest : public DurationElement {
       Spatium _extraTrailingSpace;
       Space _space;
       QList<Lyrics*> _lyricsList;
+      TabDurationSymbol * _tabDur;        // stores a duration symbol in tablature staves
 
    public:
       ChordRest(Score*);

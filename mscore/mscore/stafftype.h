@@ -229,6 +229,8 @@ class TabDurationSymbol : public Element {
       StaffTypeTablature *    _tab;
       QString                 _text;
 
+      void buildText(Duration::DurationType type, int dots);
+
 public:
       TabDurationSymbol(Score* s);
       TabDurationSymbol(Score* s, StaffTypeTablature * tab, Duration::DurationType type, int dots);
@@ -243,7 +245,8 @@ public:
 //      virtual void write(Xml& xml) const;
 //      virtual void read(QDomElement);
 
-      void setTablature(StaffTypeTablature * tab)     { _tab = tab; }
+      void setDuration(Duration::DurationType type, int dots) { buildText(type, dots); }
+      void setTablature(StaffTypeTablature * tab)             { _tab = tab; }
       };
 
 #endif

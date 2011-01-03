@@ -1,3 +1,7 @@
+02.jan (mi)
+      - tablature duration symbols were incorrectly placed above topmost staff rather than
+        above tablature staff: corrected
+      - Note::_fretConflict was not properly initialized: corrected.
 01.jan (2011!) (mi)
       - Measure::updateAccidentals for TAB staves uses whole chord context to avoid (or reduce)
         fretting conflicts (multiple notes of a chord on teh same string)
