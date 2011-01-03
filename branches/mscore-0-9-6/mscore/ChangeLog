@@ -1,4 +1,6 @@
 3.jan.2011 (lv)
+      - feature request #8355: bww import: add end barline
+      - feature request #8355: bww import: hide key signature (not complete yet)
       - fix #8498: musicxml import/export: print-object="no" not handled for key signature
       - fix #8435: musicxml import: print-object="no" ignored on rest
 2.jan.2011 (lv)

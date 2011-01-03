@@ -289,6 +289,13 @@ namespace Bww {
             KeySigEvent key;
             key.setAccidentalType(2);
             (*score->staff(0)->keymap())[tick] = key; 
+            KeySig* keysig = new KeySig(score);
+            keysig->setTick(tick);
+            keysig->setTrack(0);
+            keysig->setSubtype(key);
+            keysig->setVisible(false);
+            Segment* s = currentMeasure->getSegment(keysig);
+            s->add(keysig);
             // timesig
             TimeSig ts = TimeSig(score, beat, beats);
             int st = ts.subtype();
@@ -337,6 +344,10 @@ void MsScWriter::endMeasure(const Bww::MeasureEndFlags mef)
             lb->setTrack(0);
             lb->setSubtype(LAYOUT_BREAK_LINE);
             currentMeasure->add(lb);
+            }
+
+      if (mef.lastOfPart && !mef.repeatEnd) {
+            currentMeasure->setEndBarLineType(END_BAR, false, true);
             }
 
       int mTick = currentMeasure->tick();
