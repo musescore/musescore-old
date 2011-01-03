@@ -144,6 +144,7 @@ Note::Note(Score* s)
       _line              = 0;
       _fret              = -1;
       _string            = -1;
+      _fretConflict      = false;
       _ghost             = false;
       _lineOffset        = 0;
       _tieFor            = 0;
@@ -188,6 +189,7 @@ Note::Note(const Note& n)
       _line              = n._line;
       _fret              = n._fret;
       _string            = n._string;
+      _fretConflict      = n._fretConflict;
       _ghost             = n._ghost;
       dragMode           = n.dragMode;
       _pitch             = n._pitch;

@@ -43,6 +43,7 @@
 #include "clef.h"
 #include "lyrics.h"
 #include "segment.h"
+#include "stafftype.h"
 
 //---------------------------------------------------------
 //   DurationElement
@@ -103,6 +104,7 @@ ChordRest::ChordRest(Score* s)
       _beamMode  = BEAM_AUTO;
       _up        = true;
       _staffMove = 0;
+      _tabDur    = 0;
       }
 
 ChordRest::ChordRest(const ChordRest& cr)
@@ -110,6 +112,7 @@ ChordRest::ChordRest(const ChordRest& cr)
       {
       _durationType = cr._durationType;
       _staffMove    = cr._staffMove;
+      _tabDur       = 0;                  // tab sur. symb. depends upon context: can't be simply copied from another CR
 
       foreach(Articulation* a, cr.articulations) {    // make deep copy
             Articulation* na = new Articulation(*a);
@@ -158,6 +161,8 @@ void ChordRest::scanElements(void* data, void (*func)(void*, Element*))
             if (l)
                   l->scanElements(data, func);
             }
+      if(_tabDur)
+            func(data, _tabDur);
       }
 
 //---------------------------------------------------------

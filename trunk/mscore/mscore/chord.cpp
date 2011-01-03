@@ -1262,28 +1262,39 @@ void Chord::layout()
             _hook = 0;
             delete _stemSlash;
             _stemSlash = 0;
-            if(!tab->genDurations())
-                  return;
-            Segment * segm = segment();
-            if(segm) {
-                  // check duration of prev. CR segm
-                  ChordRest * prevCR = prevChordRest(this);
-                  // if no previous CR or duration type and/or number of dots is different from current CR
-                  if(prevCR == 0 || prevCR->durationType().type() != durationType().type()
-                              || prevCR->dots() != dots()) {
-                        // remove previously added duration symbol, if any
-                        foreach(Element * el, segm->annotations()) {
-                              if(el->track() == track() && el->type() == TAB_DURATION_SYMBOL && el->generated()) {
-                                    segm->removeAnnotation(el);
-                                    break;
-                                    }
-                              }
-                        TabDurationSymbol * durSym = new TabDurationSymbol(score(), tab, durationType().type(), dots());
-                        durSym->setTrack(track());
-//                      durSym->layout();
-                        segm->add(durSym);	// add text to segment annotations
+
+            if(!tab->genDurations() ||          // if tab is not set for duration symbols
+               track() % VOICES != 0) {         // or not in first voice
+                  if(_tabDur) {                 // delete an existing duration symbol
+                        delete _tabDur;
+                        _tabDur = 0;
                         }
+                  return;                       // and ignore duration symbols
                   }
+
+            // check duration of prev. CR segm
+            ChordRest * prevCR = prevChordRest(this);
+            // if no previous CR or duration type and/or number of dots is different from current CR
+            // set a duration symbol (trying to re-use existing symbols where existing to minimize
+            // symbol creation and deletion)
+            if(prevCR == 0 || prevCR->durationType().type() != durationType().type()
+                        || prevCR->dots() != dots()) {
+                  // symbol needed; if not exist, create
+                  if(!_tabDur) {
+                        _tabDur = new TabDurationSymbol(score(), tab, durationType().type(), dots());
+                        }
+                  // if exists, update duration
+                  else
+                        _tabDur->setDuration(durationType().type(), dots());
+                  _tabDur->setParent(this);
+// needed?        _tabDur->setTrack(track());
+//                _tabDur->layout();
+                  }
+            else                    // symbol not needed: if exists, delete
+                  if(_tabDur) {
+                        delete _tabDur;
+                        _tabDur = 0;
+                        }
             return;
             }
 
