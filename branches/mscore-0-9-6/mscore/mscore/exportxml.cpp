@@ -237,7 +237,7 @@ class ExportMusicXml {
       void rest(Rest* chord, int staff);
       void clef(int staff, int clef);
       void timesig(TimeSig* tsig);
-      void keysig(int key);
+      void keysig(int key, bool visible = true);
       void barlineLeft(Measure* m);
       void barlineRight(Measure* m);
       void pitch2xml(Note* note, char& c, int& alter, int& octave);
@@ -1496,10 +1496,13 @@ void ExportMusicXml::timesig(TimeSig* tsig)
 //   keysig
 //---------------------------------------------------------
 
-void ExportMusicXml::keysig(int key)
+void ExportMusicXml::keysig(int key, bool visible)
       {
       attr.doAttr(xml, true);
-      xml.stag("key");
+      if (visible)
+            xml.stag("key");
+      else
+            xml.stag("key print-object=\"no\"");
       xml.tag("fifths", key);
       xml.tag("mode", QString("major"));
       xml.etag();
@@ -3458,7 +3461,7 @@ foreach(Element* el, *(score->gel())) {
                         KeySigEvent key = kl->key(ti);
                         ciKeyList ci = kl->find(ti);
                         if (ci != kl->end()) {
-                              keysig(key.accidentalType());
+                              keysig(key.accidentalType(), ksig->visible());
                               }
                         }
                   else if (tick == 0)

@@ -127,6 +127,7 @@ rwtestAllXml() {
       rwtestXml testHarmony2.xml
       rwtestXml testHello.xml
       rwtestXml testImplicitMeasure1.xml
+      rwtestXml testInvisibleElements.xml
       rwtestXml testKeysig1.xml
       rwtestXml testLines1.xml
       rwtestXml testLines2.xml

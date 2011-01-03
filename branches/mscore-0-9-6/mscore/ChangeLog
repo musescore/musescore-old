@@ -1,5 +1,8 @@
+3.jan.2011 (lv)
+      - fix #8498: musicxml import/export: print-object="no" not handled for key signature
+      - fix #8435: musicxml import: print-object="no" ignored on rest
 2.jan.2011 (lv)
-      - fix #8474MusicXML import: Audiveris ".0" not handled in alter and in backup and forward duration
+      - fix #8474: MusicXML import: Audiveris ".0" not handled in alter and in backup and forward duration
 30.dec (lv)
       - fix #8428: musicxml import: voices mixed up
       - fix #4858: Courtesy accidentals do not import/export in MusicXML anymore
