@@ -1474,6 +1474,16 @@
            </channel>
         <extended>1</extended>
         </instrument>
+      <instrument>
+        <name>Bagpipe</name>
+        <short-name>Bagp.</short-name>
+        <clef>0</clef>
+        <aPitchRange>67-81</aPitchRange>
+        <pPitchRange>67-81</pPitchRange>
+        <channel>
+           <program>109</program>
+           </channel>
+        </instrument>
      </instrument-group>
 
   <instrument-group name="Brass">
