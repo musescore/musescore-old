@@ -405,6 +405,9 @@ Score::Score(Score* parent)
       _showOmr        = false;
       _sigmap         = 0;
       _tempomap       = 0;
+
+      // set default soundfont
+      _syntiState.append(SyntiParameter("soundfont", preferences.soundFont));
       }
 
 //---------------------------------------------------------

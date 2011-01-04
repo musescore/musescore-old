@@ -2913,6 +2913,7 @@ bool Score::importGTP(const QString& name)
       _saved = false;
       _created = true;
       delete gp;
+      rebuildMidiMapping();
       return true;
       }
 

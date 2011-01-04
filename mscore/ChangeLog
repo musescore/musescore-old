@@ -1,4 +1,5 @@
 04.jan (ws)
+      - fix #8450: problem while playing imported guitar pro file
       - fixes for synthesizer parameter load/restore
 02.jan (mi)
       - tablature duration symbols were incorrectly placed above topmost staff rather than
