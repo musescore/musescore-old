@@ -222,6 +222,8 @@
         <name>Cornemuse</name>
         <short-name>Crnmus.</short-name>
         <clef>0</clef>
+        <transposeDiatonic>-1</transposeDiatonic>
+        <transposeChromatic>-2</transposeChromatic>
         <aPitchRange>67-81</aPitchRange>
         <pPitchRange>67-81</pPitchRange>
         <channel>
