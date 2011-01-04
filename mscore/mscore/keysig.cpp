@@ -26,6 +26,7 @@
 #include "segment.h"
 #include "measure.h"
 #include "score.h"
+#include "undo.h"
 
 const char* keyNames[15] = {
       QT_TRANSLATE_NOOP("MuseScore", "G major, E minor"),   QT_TRANSLATE_NOOP("MuseScore", "Cb major, Ab minor"),
@@ -45,10 +46,15 @@ const char* keyNames[15] = {
 KeySig::KeySig(Score* s)
   : Element(s)
       {
-      }
+      _showCourtesySig = true;
+      _showNaturals = true;
+	  }
+
 KeySig::KeySig(const KeySig& k)
    : Element(k)
       {
+      _showCourtesySig = k.showCourtesySig();
+      _showNaturals = k.showNaturals();
       foreach(KeySym* ks, k.keySymbols)
             keySymbols.append(new KeySym(*ks));
       }
@@ -161,12 +167,13 @@ void KeySig::layout()
       if (!((t1 > 0) ^ (t2 > 0)))
             naturals &= ~accidentals;
 
-      for (int i = 0; i < 7; ++i) {
-            if (naturals & (1 << i)) {
-                  addLayout(naturalSym, xo, clefTable[clef].lines[i + coffset]);
-                  xo += 1.0;
+      if(_showNaturals)
+            for (int i = 0; i < 7; ++i) {
+                  if (naturals & (1 << i)) {
+                        addLayout(naturalSym, xo, clefTable[clef].lines[i + coffset]);
+                        xo += 1.0;
+                        }
                   }
-            }
       switch(t1) {
             case 7:  addLayout(sharpSym, xo + 6.0, clefTable[clef].lines[6]);
             case 6:  addLayout(sharpSym, xo + 5.0, clefTable[clef].lines[5]);
@@ -244,6 +251,40 @@ Element* KeySig::drop(ScoreView*, const QPointF&, const QPointF&, Element* e)
       }
 
 //---------------------------------------------------------
+//   genPropertyMenu
+//---------------------------------------------------------
+
+bool KeySig::genPropertyMenu(QMenu* popup) const
+      {
+      Element::genPropertyMenu(popup);
+      if (!generated()) {
+            QAction* a = popup->addAction(_showCourtesySig
+                  ? tr("Hide courtesy signature")
+                  : tr("Show courtesy signature") );
+            a->setData("courtesy");
+            a = popup->addAction(_showNaturals
+                  ? tr("Hide naturals")
+                  : tr("Show naturals") );
+            a->setData("naturals");
+            }
+      return true;
+      }
+
+//---------------------------------------------------------
+//   propertyAction
+//---------------------------------------------------------
+
+void KeySig::propertyAction(ScoreView* viewer, const QString& s)
+      {
+      if (s == "courtesy")
+            score()->undo()->push(new ChangeKeySig(this, keySigEvent(), !_showCourtesySig, _showNaturals));
+      else if (s == "naturals")
+            score()->undo()->push(new ChangeKeySig(this, keySigEvent(), _showCourtesySig, !_showNaturals));
+      else
+      Element::propertyAction(viewer, s);
+      }
+
+//---------------------------------------------------------
 //   setSig
 //---------------------------------------------------------
 
@@ -289,6 +330,8 @@ void KeySig::write(Xml& xml) const
             xml.tag("pos", ks->spos);
             xml.etag();
             }
+      xml.tag("showCourtesySig", _showCourtesySig);
+      xml.tag("showNaturals",    _showNaturals);
       xml.etag();
       }
 
@@ -314,6 +357,10 @@ void KeySig::read(QDomElement e)
                         }
                   keySymbols.append(ks);
                   }
+            else if (tag == "showCourtesySig")
+                  _showCourtesySig = e.text().toInt();
+            else if (tag == "showNaturals")
+                  _showNaturals = e.text().toInt();
             else if (!Element::readProperties(e))
                   domError(e);
             }

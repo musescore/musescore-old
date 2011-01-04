@@ -1,3 +1,5 @@
+4.jan (la)
+      - fix #8357: Key sig properties : hide courtesy, hide naturals (patch by Miwarre)
 3.jan.2011 (lv)
       - feature request #8355: bww import: add end barline
       - feature request #8355: bww import: hide key signature (not complete yet)

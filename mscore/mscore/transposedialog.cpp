@@ -230,7 +230,8 @@ void Score::transpose()
                         KeySigEvent key  = km->key(ks->tick());
                         KeySigEvent okey = km->key(ks->tick() - 1);
                         key.setNaturalType(okey.accidentalType());
-                        _undo->push(new ChangeKeySig(ks, key));
+                        _undo->push(new ChangeKeySig(ks, key, ks->showCourtesySig(),
+                             ks->showNaturals()));
                         }
                   }
             return;
@@ -387,7 +388,8 @@ printf("transpose keys %d\n", semitones);
                         KeySigEvent key  = km->key(s->tick());
                         KeySigEvent okey = km->key(s->tick() - 1);
                         key.setNaturalType(okey.accidentalType());
-                        _undo->push(new ChangeKeySig(ks, key));
+                        _undo->push(new ChangeKeySig(ks, key, ks->showCourtesySig(),
+                              ks->showNaturals()));
                         }
                   }
             }
