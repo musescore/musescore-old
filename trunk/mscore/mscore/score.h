@@ -779,7 +779,7 @@ class Score : public QObject {
       void doLayout();
       void layoutChords1(Segment* segment, int staffIdx);
       void emitSelectionChanged(int val)                 { emit selectionChanged(val); }
-      const SyntiState& syntiState() const               { return _syntiState;         }
+      SyntiState& syntiState()                           { return _syntiState;         }
       void setSyntiState(const SyntiState& s);
       const QList<StaffType*>& staffTypes() const        { return _staffTypes; }
       QList<StaffType*>& staffTypes()                    { return _staffTypes; }

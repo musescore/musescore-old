@@ -21,17 +21,29 @@
 #ifndef __PATTERN_H__
 #define __PATTERN_H__
 
+class Sym;
+
 //---------------------------------------------------------
 //   Pattern
+//    _n % sizeof(int)  is zero, patterns are 32bit padded
 //---------------------------------------------------------
 
-struct Pattern {
-      int _n;
-      const int* _img;
+class Pattern : QImage {
+   protected:
+      QImage _image;
 
    public:
-      Pattern(int n, const int* img) : _n(n), _img(img) {}
+      Pattern();
+      ~Pattern();
+      Pattern(Sym* symbol, double spatium);
+      Pattern(QImage*, int, int, int, int);
+
       double match(const Pattern*) const;
+      void dump() const;
+      const QImage* image() const { return &_image; }
+      int w() const { return _image.width(); }
+      int h() const { return _image.height(); }
+      bool dot(int x, int y) const;
       };
 
 #endif

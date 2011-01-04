@@ -81,8 +81,6 @@ class Seq : public QObject {
       bool playlistChanged;
 
       SeqMsgFifo toSeq;
-
-      MasterSynth* synti;
       Driver* driver;
 
       double meterValue[2];
@@ -97,7 +95,7 @@ class Seq : public QObject {
 
       EventMap::const_iterator playPos;   // moved in real time thread
       EventMap::const_iterator guiPos;    // moved in gui thread
-      QList<const Note*> markedNotes;           // notes marked as sounding
+      QList<const Note*> markedNotes;     // notes marked as sounding
 
       int endTick;
       int curTick;
@@ -180,8 +178,6 @@ class Seq : public QObject {
 
       float gain() const;
 
-      MasterSynth* getSynti() const { return synti; }
-
       int synthNameToIndex(const QString&) const;
       QString synthIndexToName(int) const;
       void putEvent(const Event&);
@@ -190,6 +186,8 @@ class Seq : public QObject {
       };
 
 extern Seq* seq;
+extern MasterSynth* synti;
+
 extern void initSequencer();
 extern bool initMidi();
 #endif

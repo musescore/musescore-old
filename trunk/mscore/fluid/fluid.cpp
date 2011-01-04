@@ -66,16 +66,16 @@ static const Mod defaultMod[] = {
 // list of fluid paramters as saved in score
 //
 static SyntiParameter params[] = {
-      SyntiParameter(SParmId(FLUID_ID, 1, 0).val, "RevRoomsize", 0.0),
-      SyntiParameter(SParmId(FLUID_ID, 1, 1).val, "RevDamp",   0.0),
-      SyntiParameter(SParmId(FLUID_ID, 1, 2).val, "RevWidth",  0.0),
-      SyntiParameter(SParmId(FLUID_ID, 1, 3).val, "RevGain",   0.0),
+      SyntiParameter(SParmId(FLUID_ID, REVERB_GROUP, REVERB_ROOMSIZE).val, "RevRoomsize", 0.0),
+      SyntiParameter(SParmId(FLUID_ID, REVERB_GROUP, REVERB_DAMP).val, "RevDamp",   0.0),
+      SyntiParameter(SParmId(FLUID_ID, REVERB_GROUP, REVERB_WIDTH).val, "RevWidth",  0.0),
+      SyntiParameter(SParmId(FLUID_ID, REVERB_GROUP, REVERB_GAIN).val, "RevGain",   0.0),
 
-      SyntiParameter(SParmId(FLUID_ID, 2, 0).val, "ChoType",   0.0),
-      SyntiParameter(SParmId(FLUID_ID, 2, 1).val, "ChoSpeed",  0.0),
-      SyntiParameter(SParmId(FLUID_ID, 2, 2).val, "ChoDepth",  0.0),
-      SyntiParameter(SParmId(FLUID_ID, 2, 3).val, "ChoBlocks", 0.0),
-      SyntiParameter(SParmId(FLUID_ID, 2, 4).val, "ChoGain",   0.0),
+      SyntiParameter(SParmId(FLUID_ID, CHORUS_GROUP, CHORUS_TYPE).val, "ChoType",   0.0),
+      SyntiParameter(SParmId(FLUID_ID, CHORUS_GROUP, CHORUS_SPEED).val, "ChoSpeed",  0.0),
+      SyntiParameter(SParmId(FLUID_ID, CHORUS_GROUP, CHORUS_DEPTH).val, "ChoDepth",  0.0),
+      SyntiParameter(SParmId(FLUID_ID, CHORUS_GROUP, CHORUS_BLOCKS).val, "ChoBlocks", 0.0),
+      SyntiParameter(SParmId(FLUID_ID, CHORUS_GROUP, CHORUS_GAIN).val, "ChoGain",   0.0),
       };
 
 //---------------------------------------------------------
@@ -478,38 +478,6 @@ void Fluid::program_reset()
             program_change(i, channel[i]->getPrognum());
       }
 
-/*
- * fluid_synth_set_reverb_preset
- */
-bool Fluid::set_reverb_preset(int num)
-      {
-      return reverb->setPreset(num);
-      }
-
-/*
- * fluid_synth_set_reverb
- */
-void Fluid::set_reverb(double roomsize, double damping, double width, double level)
-      {
-      reverb->setroomsize(roomsize);
-      reverb->setdamp(damping);
-      reverb->setwidth(width);
-      reverb->setlevel(level);
-      }
-
-/*
- * fluid_synth_set_chorus
- */
-void Fluid::set_chorus(int nr, double level, double speed, double depth_ms, int type)
-      {
-      chorus->set_nr(nr);
-      chorus->set_level((float)level);
-      chorus->set_speed_Hz((float)speed);
-      chorus->set_depth_ms((float)depth_ms);
-      chorus->set_type(type);
-      chorus->update();
-      }
-
 //---------------------------------------------------------
 //   process
 //---------------------------------------------------------
@@ -745,7 +713,11 @@ bool Fluid::loadSoundFonts(const QStringList& sl)
       if (ol == sl)
             return true;
       mutex.lock();
-      system_reset();
+
+      foreach(Voice* v, activeVoices)
+            v->off();
+      foreach(Channel* c, channel)
+            c->reset();
       foreach (SFont* sf, sfonts)
             sfunload(sf->id(), true);
       bool ok = true;
@@ -780,7 +752,6 @@ bool Fluid::removeSoundFont(const QString& s)
       mutex.lock();
       foreach(Voice* v, activeVoices)
             v->off();
-printf("removeSoundFont <%s>\n", qPrintable(s));
       SFont* sf = get_sfont_by_name(s);
       sfunload(sf->id(), true);
       mutex.unlock();
@@ -991,11 +962,19 @@ int Fluid::set_bank_offset(int sfont_id, int offset)
 	return 0;
       }
 
+//---------------------------------------------------------
+//   get_bank_offset
+//---------------------------------------------------------
+
 int Fluid::get_bank_offset(int sfont_id)
       {
       BankOffset* bank_offset = get_bank_offset0(sfont_id);
       return (bank_offset == 0)? 0 : bank_offset->offset;
       }
+
+//---------------------------------------------------------
+//   remove_bank_offset
+//---------------------------------------------------------
 
 void Fluid::remove_bank_offset(int sfont_id)
       {
@@ -1004,23 +983,33 @@ void Fluid::remove_bank_offset(int sfont_id)
 		bank_offsets.removeAll(bank_offset);
       }
 
+//---------------------------------------------------------
+//   parameter
+//---------------------------------------------------------
+
 SyntiParameter Fluid::parameter(int id) const
       {
+      SParmId spid(id);
+      int group = spid.subsystemId;
+      int no    = spid.paramId;
       for (unsigned i = 0; i < sizeof(params)/sizeof(*params); ++i) {
             SyntiParameter& p = params[i];
             if (id == p.id()) {
-                  SParmId spid(p.id());
-                  int group = spid.subsystemId;
-                  int no    = spid.paramId;
-                  if (group == 1)
+                  if (group == REVERB_GROUP)
                         params[i].set(reverb->parameter(no));
-                  else if (group == 2)
+                  else if (group == CHORUS_GROUP)
                         params[i].set(chorus->parameter(no));
                   return params[i];
                   }
             }
+      printf("Fluid::parameter: (%d,%d,%d) not found\n",
+         spid.syntiId, group, no);
       return SyntiParameter();
       }
+
+//---------------------------------------------------------
+//   setParameter
+//---------------------------------------------------------
 
 void Fluid::setParameter(int id, double value)
       {
@@ -1074,10 +1063,12 @@ SyntiState Fluid::state() const
             int group = spid.subsystemId;
             int no    = spid.paramId;
 
-            if (group == 1)
+            if (group == REVERB_GROUP)
                   params[i].set(reverb->parameter(no));
-            else if (group == 2)
+            else if (group == CHORUS_GROUP)
                   params[i].set(chorus->parameter(no));
+            else
+                  printf("Fluid::state: unknown group %d\n", group);
             sp.append(params[i]);
             }
       return sp;
@@ -1087,11 +1078,13 @@ SyntiState Fluid::state() const
 //   setState
 //---------------------------------------------------------
 
-void Fluid::setState(const SyntiState& sp)
+void Fluid::setState(SyntiState& sp)
       {
       QStringList sfs;
-      foreach(const SyntiParameter& p, sp) {
-            int id = p.id();
+      int n = sp.size();
+      for (int i = 0; i < n; ++i) {
+            SyntiParameter* p = &sp[i];
+            int id = p->id();
             if (id == -1) {
                   //
                   // if id of parameter is invalid, name must be
@@ -1099,34 +1092,43 @@ void Fluid::setState(const SyntiState& sp)
                   //
                   for (unsigned i = 0; i < sizeof(params)/sizeof(*params); ++i) {
                         SyntiParameter& p2 = params[i];
-                        if (p2.name() == p.name()) {
+                        if (p2.name() == p->name()) {
                               id = p2.id();
+                              p->setId(id);
                               break;
                               }
                         }
-                  if (id == -1 && p.name() == "soundfont")
+                  if (id == -1 && p->name() == "soundfont")
                         id = SParmId(FLUID_ID, 0, 0).val;
                   if (id == -1)     // not for this synthesizer
                         continue;
                   }
+            SParmId spid(id);
+            int group = spid.subsystemId;
+            if (spid.syntiId != FLUID_ID)
+                  continue;
+            if (group == FLUID_GROUP)
+                  sfs.append(p->sval());
+            }
+      loadSoundFonts(sfs);
+      foreach(const SyntiParameter& p, sp) {
+            int id = p.id();
+            if (id == -1)
+                  continue;
             SParmId spid(id);
             if (spid.syntiId != FLUID_ID)
                   continue;
             int group = spid.subsystemId;
             int no    = spid.paramId;
 
-// printf("Fluid::setState: "); p.print(); printf("\n");
-
-            if (group == 0) {
-                  sfs.append(p.sval());
-                  }
-            else if (group == 1) {
+            if (group == FLUID_GROUP)
+                  ;
+            else if (group == REVERB_GROUP)
                   reverb->setParameter(no, p.fval());
-                  }
-            else if (group == 2) {
+            else if (group == CHORUS_GROUP)
                   chorus->setParameter(no, p.fval());
-                  }
+            else
+                  printf("Fluid::setState: unknown group %d\n", group);
             }
-      loadSoundFonts(sfs);
       }
 }

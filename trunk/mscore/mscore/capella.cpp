@@ -863,9 +863,9 @@ printf("staff size small %d\n", sl->bSmall);
       sl->barlineTo   = readByte();
 
       unsigned char clef = readByte();
-      sl->form = clef & 7;
-      sl->line = (clef >> 3) & 7;
-      sl->oct  = (clef >> 6);
+      sl->form = FORM(clef & 7);
+      sl->line = CLEF_LINE((clef >> 3) & 7);
+      sl->oct  = OCT((clef >> 6));
 //      printf("   clef %x  form %d, line %d, oct %d\n", clef, sl->form, sl->line, sl->oct);
 
         // Schlagzeuginformation
@@ -970,7 +970,7 @@ void CapClef::read()
       {
       unsigned char b = cap->readByte();
       form            = (FORM) (b & 7);
-      line            = (LINE) ((b >> 3) & 7);
+      line            = (CLEF_LINE) ((b >> 3) & 7);
       oct             = (OCT)  (b >> 6);
       printf("Clef::read form %d line %d oct %d\n", form, line, oct);
       }
@@ -980,6 +980,11 @@ void CapClef::read()
 //---------------------------------------------------------
 
 ClefType CapClef::clef() const
+      {
+      return clefType(form, line, oct);
+      }
+
+ClefType CapClef::clefType(FORM form, CLEF_LINE line, OCT oct)
       {
       int idx = form + (line << 3) + (oct << 5);
       switch(idx) {
@@ -1726,7 +1731,7 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                   case T_METER:
                         {
                         CapMeter* o = static_cast<CapMeter*>(no);
-printf("     %d<Meter> %d %d\n", tick, o->numerator, 1 << o->log2Denom);
+printf("     <Meter> tick %d %d/%d\n", tick, o->numerator, 1 << o->log2Denom);
                         if (o->log2Denom > 7)
                               break;
                         AL::SigEvent se = sigmap()->timesig(tick);
@@ -1735,7 +1740,6 @@ printf("     %d<Meter> %d %d\n", tick, o->numerator, 1 << o->log2Denom);
                         if (!(se == ne))
                               sigmap()->add(tick, ne);
                         TimeSig* ts = new TimeSig(this);
-                        // ts->setSig(1 << o->log2Denom, o->numerator);
                         ts->setSig(f);
                         ts->setTrack(track);
                         Measure* m = getCreateMeasure(tick);
@@ -1748,21 +1752,20 @@ printf("     %d<Meter> %d %d\n", tick, o->numerator, 1 << o->log2Denom);
                         {
                         CapExplicitBarline* o = static_cast<CapExplicitBarline*>(no);
 printf("     <Barline>\n");
-                        Measure* m = getCreateMeasure(tick);
+                        Measure* m = getCreateMeasure(tick-1);
                         int ticks = tick - m->tick();
                         if (ticks > 0 && ticks != m->ticks()) {
                               // this is a measure with different actual duration
                               Fraction f = Fraction::fromTicks(ticks);
                               m->setLen(f);
+#if 0
                               AL::SigEvent ne(f);
                               ne.setNominal(m->timesig());
                               sigmap()->add(m->tick(), ne);
-
                               AL::SigEvent ne2(m->timesig());
                               sigmap()->add(m->tick() + m->ticks(), ne2);
+#endif
                               }
-                        else
-                              m = m->prevMeasure();
                         if (m == 0)
                               break;
 
@@ -1859,8 +1862,8 @@ printf("     <Barline>\n");
                               Text* s = new Text(this);
                               QString ss = rtf2html(QString(to->text));
 
-printf("string %f:%f w %d ratio %d <%s>\n",
-   to->relPos.x(), to->relPos.y(), to->width, to->yxRatio, qPrintable(ss));
+//printf("string %f:%f w %d ratio %d <%s>\n",
+//   to->relPos.x(), to->relPos.y(), to->width, to->yxRatio, qPrintable(ss));
                               s->setHtml(ss);
                               MeasureBase* measure = _measures.first();
                               if (measure->type() != VBOX) {
@@ -1905,11 +1908,11 @@ void Score::convertCapella(Capella* cap)
       _spatium = cap->normalLineDist * DPMM;
       style()->set(ST_smallStaffMag, cap->smallLineDist / cap->normalLineDist);
       style()->set(ST_systemDistance, Spatium(8));
-      style()->set(ST_hideEmptyStaves, true);
+//      style()->set(ST_hideEmptyStaves, true);
 
-#if 0
+#if 1
       foreach(CapSystem* csys, cap->systems) {
-            printf("Staff:\n");
+            printf("System:\n");
             foreach(CapStaff* cstaff, csys->staves) {
                   CapStaffLayout* cl = cap->staffLayout(cstaff->iLayout);
                   printf("  Staff layout %d  barline %d-%d mode %d\n",
@@ -1944,6 +1947,9 @@ void Score::convertCapella(Capella* cap)
       for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
             CapStaffLayout* cl = cap->staffLayout(staffIdx);
             Staff* s = new Staff(this, part, staffIdx);
+            ClefType clefType = CapClef::clefType(cl->form, cl->line, cl->oct);
+            s->setClef(0, clefType);
+printf("Staff %d defaultClef %d\n", staffIdx, int(clefType));
             s->setBarLineSpan(0);
             if (bstaff == 0) {
                   bstaff = s;

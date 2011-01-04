@@ -28,13 +28,17 @@
 #include "score.h"
 #include "file.h"
 #include "msynth/sparm_p.h"
+#include "fluid/rev.h"
+#include "fluid/fluid.h"
 #include "icons.h"
+
+using namespace FluidS;
 
 //---------------------------------------------------------
 //   SynthControl
 //---------------------------------------------------------
 
-SynthControl::SynthControl(MasterSynth* s, QWidget* parent)
+SynthControl::SynthControl(QWidget* parent)
    : QWidget(parent, Qt::Dialog)
       {
       setupUi(this);
@@ -42,35 +46,11 @@ SynthControl::SynthControl(MasterSynth* s, QWidget* parent)
       saveReverbPreset->setIcon(*icons[fileSave_ICON]);
       saveChorusPreset->setIcon(*icons[fileSave_ICON]);
 
-      synti = s;
-
       reverbRoomSize->setId(0);
       reverbDamp->setId(1);
       reverbWidth->setId(2);
       reverb->setId(3);
       chorus->setId(4);
-
-      masterTuning->setValue(synti->masterTuning());
-      setGain(synti->gain());
-
-      reverb->setValue(synti->parameter(SParmId(FLUID_ID, 0, 3).val).fval());
-      roomSizeBox->setValue(synti->parameter(SParmId(FLUID_ID, 0, 0).val).fval());
-      dampBox->setValue(synti->parameter(SParmId(FLUID_ID, 0, 1).val).fval());
-      widthBox->setValue(synti->parameter(SParmId(FLUID_ID, 0, 2).val).fval());
-
-      chorus->setValue(synti->parameter(SParmId(FLUID_ID, 1, 4).val).fval());
-      chorusSpeed->setValue(synti->parameter(SParmId(FLUID_ID, 1, 1).val).fval());
-      chorusDepth->setValue(synti->parameter(SParmId(FLUID_ID, 1, 2).val).fval());
-
-      reverbDelay->init(synti->parameter(SParmId(AEOLUS_ID, 0, AEOLUS_REVSIZE).val));
-      reverbDelay->setId(AEOLUS_REVSIZE);
-      connect(reverbDelay, SIGNAL(valueChanged(double, int)), SLOT(setAeolusValue(double, int)));
-
-      reverbTime->init(synti->parameter(SParmId(AEOLUS_ID, 0, AEOLUS_REVTIME).val));
-      reverbTime->setId(AEOLUS_REVTIME);
-      connect(reverbTime, SIGNAL(valueChanged(double, int)), SLOT(setAeolusValue(double, int)));
-
-      position->init(synti->parameter(SParmId(AEOLUS_ID, 0, AEOLUS_STPOSIT).val));
       position->setId(AEOLUS_STPOSIT);
 
       connect(position, SIGNAL(valueChanged(double, int)), SLOT(setAeolusValue(double, int)));
@@ -131,6 +111,37 @@ SynthControl::SynthControl(MasterSynth* s, QWidget* parent)
       connect(soundFontAdd,    SIGNAL(clicked()),                SLOT(sfAddClicked()));
       connect(soundFont,       SIGNAL(textChanged(const QString&)), SLOT(sfChanged(const QString&)));
       connect(soundFonts,      SIGNAL(currentRowChanged(int)),   SLOT(currentSoundFontChanged(int)));
+
+      updateSyntiValues();
+      }
+
+//---------------------------------------------------------
+//   updateSyntiValues
+//---------------------------------------------------------
+
+void SynthControl::updateSyntiValues()
+      {
+      masterTuning->setValue(synti->masterTuning());
+      setGain(synti->gain());
+
+      roomSizeBox->setValue(synti->parameter(SParmId(FLUID_ID, REVERB_GROUP, REVERB_ROOMSIZE).val).fval());
+      dampBox->setValue(synti->parameter    (SParmId(FLUID_ID, REVERB_GROUP, REVERB_DAMP).val).fval());
+      widthBox->setValue(synti->parameter   (SParmId(FLUID_ID, REVERB_GROUP, REVERB_WIDTH).val).fval());
+      reverb->setValue(synti->parameter     (SParmId(FLUID_ID, REVERB_GROUP, REVERB_GAIN).val).fval());
+
+      chorus->setValue(synti->parameter     (SParmId(FLUID_ID, CHORUS_GROUP, CHORUS_GAIN).val).fval());
+      chorusSpeed->setValue(synti->parameter(SParmId(FLUID_ID, CHORUS_GROUP, CHORUS_SPEED).val).fval());
+      chorusDepth->setValue(synti->parameter(SParmId(FLUID_ID, CHORUS_GROUP, CHORUS_DEPTH).val).fval());
+
+      reverbDelay->init(synti->parameter(SParmId(AEOLUS_ID, 0, AEOLUS_REVSIZE).val));
+      reverbDelay->setId(AEOLUS_REVSIZE);
+      connect(reverbDelay, SIGNAL(valueChanged(double, int)), SLOT(setAeolusValue(double, int)));
+
+      reverbTime->init(synti->parameter(SParmId(AEOLUS_ID, 0, AEOLUS_REVTIME).val));
+      reverbTime->setId(AEOLUS_REVTIME);
+      connect(reverbTime, SIGNAL(valueChanged(double, int)), SLOT(setAeolusValue(double, int)));
+
+      position->init(synti->parameter(SParmId(AEOLUS_ID, 0, AEOLUS_STPOSIT).val));
       }
 
 //---------------------------------------------------------
@@ -144,6 +155,7 @@ void SynthControl::setScore(Score* cs)
       soundFonts->clear();
       if (sy)
             soundFonts->addItems(sy->soundFonts());
+      updateSyntiValues();
       }
 
 //---------------------------------------------------------
@@ -172,7 +184,7 @@ void SynthControl::closeEvent(QCloseEvent* ev)
 void MuseScore::showSynthControl(bool val)
       {
       if (synthControl == 0) {
-            synthControl = new SynthControl(seq->getSynti(), this);
+            synthControl = new SynthControl(this);
             synthControl->setScore(cs);
             connect(synthControl, SIGNAL(closed()), SLOT(closeSynthControl()));
             connect(seq, SIGNAL(gainChanged(float)), synthControl, SLOT(setGain(float)));

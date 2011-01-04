@@ -99,9 +99,9 @@ class Reverb {
 
       float roomsize;
       float damp;
-      float wet, wet1, wet2;
       float width;
       float gain;
+      float wet, wet1, wet2;
 
       float newRoomsize;
       float newDamp;

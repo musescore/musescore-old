@@ -139,6 +139,7 @@ printf("Omr::read <%s>\n", qPrintable(_path));
             }
       double sp = 0;
       double w  = 0;
+n = 1;
       for (int i = 0; i < n; ++i) {
             pages[i]->read(i);
             sp += pages[i]->spatium();

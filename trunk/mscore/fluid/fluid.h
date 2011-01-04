@@ -286,6 +286,27 @@ class Channel {
       int getInterpMethod() const         { return interp_method; }
       };
 
+enum {
+      FLUID_GROUP  = 0,
+      REVERB_GROUP = 1,
+      CHORUS_GROUP = 2
+      };
+
+enum {
+      REVERB_ROOMSIZE = 0,
+      REVERB_DAMP,
+      REVERB_WIDTH,
+      REVERB_GAIN
+      };
+
+enum {
+      CHORUS_TYPE = 0,
+      CHORUS_SPEED,
+      CHORUS_DEPTH,
+      CHORUS_BLOCKS,
+      CHORUS_GAIN
+      };
+
 //---------------------------------------------------------
 //   Fluid
 //---------------------------------------------------------
@@ -353,10 +374,9 @@ class Fluid : public Synth {
 
       // get/set synthesizer state (parameter set)
       virtual SyntiState state() const;
-      virtual void setState(const SyntiState&);
+      virtual void setState(SyntiState&);
 
       bool log(const char* fmt, ...);
-      bool set_reverb_preset(int num);
 
       Preset* get_preset(unsigned int sfontnum, unsigned int banknum, unsigned int prognum);
       Preset* find_preset(unsigned int banknum, unsigned int prognum);
@@ -401,8 +421,6 @@ class Fluid : public Synth {
 
       virtual void process(unsigned len, float* lout, float* rout, int stride, float gain);
 
-      void set_chorus(int nr, double level, double speed, double depth_ms, int type);
-      void set_reverb(double roomsize, double damping, double width, double level);
       void program_reset();
 
       bool program_select2(int chan, char* sfont_name, unsigned bank_num, unsigned preset_num);

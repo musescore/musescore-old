@@ -63,18 +63,24 @@ class NoteObj {
       CapellaNoteObjectType type() const  { return _type; }
       };
 
+enum FORM {
+      FORM_G, FORM_C, FORM_F, FORM_PERCUSSION,
+      FORM_NULL, CLEF_UNCHANGED
+      };
+
+enum CLEF_LINE {
+      LINE_5, LINE_4, LINE_3, LINE_2, LINE_1
+      };
+
+enum OCT  {
+      OCT_ALTA, OCT_NULL, OCT_BASSA
+      };
+
 //---------------------------------------------------------
 //   CapClef
 //---------------------------------------------------------
 
 class CapClef : public NoteObj, public CapellaObj {
-      enum FORM {
-            FORM_G, FORM_C, FORM_F, FORM_PERCUSSION,
-            FORM_NULL, CLEF_UNCHANGED
-            };
-      enum LINE { LINE_5, LINE_4, LINE_3, LINE_2, LINE_1};
-      enum OCT  { OCT_ALTA, OCT_NULL, OCT_BASSA};
-
       FORM form;
 
    public:
@@ -86,8 +92,9 @@ class CapClef : public NoteObj, public CapellaObj {
             }
       ClefType clef() const;
 
-      LINE line;
+      CLEF_LINE line;
       OCT  oct;
+      static ClefType clefType(FORM, CLEF_LINE, OCT);
       };
 
 //---------------------------------------------------------
@@ -177,7 +184,9 @@ struct CapStaffLayout {
       uchar barlineFrom;
       uchar barlineTo;
 
-      int form, line, oct;          // clef
+      FORM form;
+      CLEF_LINE line;
+      OCT oct;                // clef
 
       // Schlagzeuginformation
       bool bPercussion;             // use drum channel

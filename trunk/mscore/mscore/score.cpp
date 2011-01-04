@@ -1795,6 +1795,7 @@ Measure* Score::getCreateMeasure(int tick)
             while (tick >= lastTick) {
                   Measure* m = new Measure(this);
                   Fraction ts = _sigmap->timesig(lastTick).timesig();
+// printf("getCreateMeasure %d  %d/%d\n", tick, ts.numerator(), ts.denominator());
                   m->setTick(lastTick);
                   m->setTimesig(ts);
                   m->setLen(ts);

@@ -24,11 +24,27 @@
 class Omr;
 class Score;
 class Xml;
+class Pattern;
+
+#include "durationtype.h"
+
+//---------------------------------------------------------
+//   HLine
+//---------------------------------------------------------
 
 struct HLine {
       int x1, x2, y;
       HLine() {}
       HLine(int a, int b, int c) : x1(a), x2(b), y(c) {}
+      };
+
+//---------------------------------------------------------
+//   OmrNote
+//---------------------------------------------------------
+
+struct OmrNote {
+      Duration::DurationType type;
+      QRect r;
       };
 
 //---------------------------------------------------------
@@ -49,7 +65,7 @@ class OmrPage {
 
       QList<QLine>  lines;
       QList<QLineF> barlines;
-      QList<QRect> _notes;
+      QList<OmrNote> _notes;
 
       bool dot(int x, int y) const;
       void crop();
@@ -60,7 +76,7 @@ class OmrPage {
       double xproject2(int y);
       int xproject(const uint* p, int wl);
       void radonTransform(ulong* projection, int w, int n, const QRect&);
-      void searchNotes(int line, int x1, int x2, int y);
+      void searchNotes(Pattern*, int x1, int x2, int y, Duration::DurationType);
 
    public:
       OmrPage(Omr* _parent);
@@ -77,8 +93,9 @@ class OmrPage {
       const QList<HLine>& l()            { return slines;   }
       const QList<QRectF>& r()           { return staves;   }
       const QList<QLineF>& bl()          { return barlines; }
+
       const QList<QRect>& slices() const { return _slices;  }
-      const QList<QRect>& notes() const  { return _notes;   }
+      const QList<OmrNote>& notes() const  { return _notes;   }
       double spatium() const             { return _spatium; }
       double staffDistance() const;
       double systemDistance() const;

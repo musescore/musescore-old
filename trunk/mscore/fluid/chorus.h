@@ -74,7 +74,7 @@ class Chorus {
       int counter;
       long phase[MAX_CHORUS];
       long modulation_period_samples;
-      int *lookup_tab;
+      int* lookup_tab;
       float sample_rate;
 
       /* sinc lookup table */
@@ -85,12 +85,13 @@ class Chorus {
       ~Chorus();
 
       void update();
+#if 0
       void set_nr(int nr)                      { new_number_blocks = nr;       }
       void set_level(float level)              { new_level         = level;    }
       void set_speed_Hz(float speed_Hz)        { new_speed_Hz      = speed_Hz; }
       void set_depth_ms(float depth_ms)        { new_depth_ms      = depth_ms; }
       void set_type(int type)                  { new_type          = type;     }
-
+#endif
       void process(int, float *in, float *left_out, float *right_out);
       void reset();
 

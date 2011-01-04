@@ -123,10 +123,17 @@ void SyntiParameterData::write(Xml& xml) const
 
 void SyntiParameterData::print() const
       {
-      if (_type == P_FLOAT)
-            printf("<id=%d name=%s val=%f>", _id, qPrintable(_name), _fval);
-      else if (_type == P_STRING)
-            printf("<id=%d name=%s val=%s>", _id, qPrintable(_name), qPrintable(_sval));
+      SParmId spid(_id);
+      if (_type == P_FLOAT) {
+            printf("<id=(%d,%d,%d) name=%s val=%f>",
+               spid.syntiId, spid.subsystemId, spid.paramId,
+               qPrintable(_name), _fval);
+            }
+      else if (_type == P_STRING) {
+            printf("<id=(%d,%d,%d) name=%s val=%s>",
+               spid.syntiId, spid.subsystemId, spid.paramId,
+               qPrintable(_name), qPrintable(_sval));
+            }
       }
 
 //---------------------------------------------------------

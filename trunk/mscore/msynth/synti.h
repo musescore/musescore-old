@@ -74,7 +74,7 @@ class Synth {
 
       // get/set synthesizer state
       virtual SyntiState state() const = 0;
-      virtual void setState(const SyntiState&) {}
+      virtual void setState(SyntiState&) {}
       };
 
 //---------------------------------------------------------
@@ -110,7 +110,7 @@ class MasterSynth {
 
       // get/set synthesizer state
       SyntiState state() const;
-      void setState(const SyntiState&);
+      void setState(SyntiState&);
 
       Synth* synth(const QString& name);
       };

@@ -27,6 +27,8 @@
 #include "text.h"
 #include "measurebase.h"
 #include "box.h"
+#include "sym.h"
+#include "pattern.h"
 
 struct Lv {
       int line;
@@ -126,17 +128,28 @@ printf("===numStaves: %d\n", numStaves);
                   staves[idx+1].setWidth(dx - staves[idx+1].x());
                   }
             }
-#if 1
+      //
+      //    search note heads
+      //
+      Pattern* quarter = new Pattern(&symbols[0][quartheadSym], _spatium);
       foreach(QRectF r, staves) {
             int x1 = r.x();
             int x2 = x1 + r.width();
             int y = r.y();
-            for (int i = -1; i < 10; ++i) {
-                  if (i & 0x1)
-                        searchNotes(i, x1, x2, y + i * _spatium*.5);
+            for (int i = -4; i < 12; ++i) {
+                  searchNotes(quarter, x1, x2, y + i * _spatium * .5, Duration::V_QUARTER);
                   }
             }
-#endif
+      Pattern* half = new Pattern(&symbols[0][halfheadSym], _spatium);
+      foreach(QRectF r, staves) {
+            int x1 = r.x();
+            int x2 = x1 + r.width();
+            int y = r.y();
+            for (int i = -4; i < 12; ++i) {
+                  searchNotes(half, x1, x2, y + i * _spatium * .5, Duration::V_HALF);
+                  }
+            }
+      delete quarter;
       }
 
 //---------------------------------------------------------
@@ -589,35 +602,62 @@ struct Hv {
             }
       };
 
+struct Peak {
+      int x;
+      double val;
+
+      bool operator<(const Peak& p) const { return p.val < val; }
+      };
+
 //---------------------------------------------------------
 //   searchNotes
 //---------------------------------------------------------
 
-void OmrPage::searchNotes(int line, int x1, int x2, int y)
+void OmrPage::searchNotes(Pattern* pattern, int x1, int x2, int y, Duration::DurationType dt)
       {
-      QList<Hv> val;
+      y -= 4;                 // MAGIC
 
-      int w = _spatium * 1.3;
-      x1 += w/2;
-      x2 -= w/2;
-      bool on = false;
-      int xx1;
+      // look for note heads
+      double w2 = _spatium * .5;
+      int hh = pattern->h();
+      int hw = pattern->w();
+      x2 -= hw;
+
+      QList<Peak> notePeaks;
+      int xx1 = -1000;
+      double val;
 
       for (int x = x1; x < x2; ++x) {
-            if (dot(x, y)) {
-                  if (!on) {
-                        on = true;
+            Pattern p(&_image, x, y - hh/2, hw, hh);
+            double val1 = p.match(pattern);
+            if (x > (xx1 + hw)) {
+                  if (xx1 >= 0) {
+                        Peak peak;
+                        peak.x   = xx1;
+                        peak.val = val;
+                        notePeaks.append(peak);
+                        }
+                  xx1 = x;
+                  val = val1;
+                  }
+            else {
+                  if (val1 > val) {
+                        val = val1;
                         xx1 = x;
                         }
                   }
-            else {
-                  if (on) {
-                        int w = x - xx1;
-                        if (w > _spatium && w < (_spatium*1.5))
-                              _notes.append(QRect(xx1, y-_spatium*.5, w, _spatium));
-                        on = false;
-                        }
-                  }
+            }
+
+      qSort(notePeaks);
+      int n = notePeaks.size();
+      for (int i = 0; i < n; ++i) {
+            if (notePeaks[i].val < 0.75)
+                  break;
+            int x = notePeaks[i].x;
+            OmrNote note;
+            note.r = QRect(x, y - hh/2, hw, hh);
+            note.type = dt;
+            _notes.append(note);
             }
       }
 
@@ -685,5 +725,4 @@ void OmrPage::read(QDomElement e)
                   domError(e);
             }
       }
-
 
