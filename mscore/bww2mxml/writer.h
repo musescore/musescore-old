@@ -36,7 +36,7 @@ class QIODevice;
 namespace Bww {
 
   static const char* instrumentName = "Bagpipe";
-  static const int midiProgram = 72;
+  static const int midiProgram = 110;
   static const int maxBeamLevel = 3;
 
   enum BeamType
