@@ -2379,7 +2379,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
             int tickLen       = e.attribute("len", "0").toInt();
             int srcStaffStart = e.attribute("staff", "0").toInt();
             int staves        = e.attribute("staves", "0").toInt();
-            
+
             QSet<int> blackList;
             for (int i = 0; i < staves; ++i) {
                   int staffIdx = i + dstStaffStart;

@@ -996,7 +996,8 @@ void Measure::add(Element* el)
                               break;
                               }
                         if (s && s->subtype() != SegEndBarLine) {
-                              for (; s && s->subtype() != SegChordRest; s = s->next())
+                              for (; s && s->subtype() != SegChordRest
+                                 && s->subtype() != SegEndBarLine; s = s->next())
                                     ;
                               }
                         insert(seg, s);

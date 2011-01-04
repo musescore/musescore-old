@@ -1,4 +1,6 @@
-4.jan (la)
+4.jan (ws)
+      - fix #6347: Multiple grace notes do not copy correctly
+      (la)
       - fix #8357: Key sig properties : hide courtesy, hide naturals (patch by Miwarre)
 3.jan.2011 (lv)
       - feature request #8355: bww import: add end barline
