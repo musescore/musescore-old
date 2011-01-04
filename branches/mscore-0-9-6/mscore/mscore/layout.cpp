@@ -1306,7 +1306,19 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                               Staff* staff = _staves[staffIdx];
                               KeySigEvent key1 = staff->key(tick - 1);
                               KeySigEvent key2 = staff->key(tick);
-                              if (key1 != key2) {
+
+                              // locate a key sig. in next measure and, if found, check it has court. sig turned off
+                              Measure * nm = m->nextMeasure();
+                              Segment * pKeySigSegm;
+                              Element * pKeySigElem;
+                              bool bShowCourtesySig = true;	// assume this key change has court. sig turned on
+                              if(nm && (pKeySigSegm = nm->findSegment(SegKeySig, tick)) != 0) {
+                                    pKeySigElem = pKeySigSegm->element(staffIdx*VOICES);
+                                    if(pKeySigElem != 0 && !((KeySig*)pKeySigElem)->showCourtesySig())
+                                    bShowCourtesySig = false;
+                                    }
+
+                              if (key1 != key2 && bShowCourtesySig) {
                                     hasCourtesyKeysig = true;
                                     Segment* s  = m->getSegment(SegKeySigAnnounce, tick);
                                     int track = staffIdx * VOICES;

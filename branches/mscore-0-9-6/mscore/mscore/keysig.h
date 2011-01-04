@@ -42,6 +42,8 @@ struct KeySym {
       };
 
 class KeySig : public Element {
+      bool	_showCourtesySig;
+      bool	_showNaturals;
       QList<KeySym*> keySymbols;
       void addLayout(int sym, double x, int y);
 
@@ -70,6 +72,13 @@ class KeySig : public Element {
       bool operator==(const KeySig&) const;
       void changeType(KeySigEvent);
       void setSubtype(KeySigEvent e)  { Element::setSubtype(e.subtype); }
+
+      bool showCourtesySig() const    { return _showCourtesySig; };
+      bool showNaturals() const       { return _showNaturals;    };
+      void setShowCourtesySig(bool v) { _showCourtesySig = v;    };
+      void setShowNaturals(bool v)    { _showNaturals = v;       };
+      virtual bool genPropertyMenu(QMenu*) const;
+      virtual void propertyAction(ScoreView*, const QString&);
       };
 
 extern const char* keyNames[15];

@@ -425,6 +425,24 @@ class FlipBeamDirection : public UndoCommand {
       };
 
 //---------------------------------------------------------
+//   ChangeKeySig
+//---------------------------------------------------------
+
+class ChangeKeySig : public UndoCommand {
+	  KeySig* keysig;
+	  KeySigEvent ks;
+	  bool showCourtesy;
+	  bool showNaturals;
+
+	  void flip();
+
+   public:
+	  ChangeKeySig(KeySig*, KeySigEvent newKeySig, bool sc, bool sn);
+	  virtual void undo() { flip(); }
+	  virtual void redo() { flip(); }
+	  };
+
+//---------------------------------------------------------
 //   FlipTupletDirection
 //---------------------------------------------------------
 
@@ -452,22 +470,6 @@ class ChangeKey : public UndoCommand {
       ChangeKey(Staff*, int tick, KeySigEvent oldKeySig, KeySigEvent newKeySig);
       virtual void undo();
       virtual void redo();
-      };
-
-//---------------------------------------------------------
-//   ChangeKeySig
-//---------------------------------------------------------
-
-class ChangeKeySig : public UndoCommand {
-      KeySig* keysig;
-      KeySigEvent ks;
-
-      void flip();
-
-   public:
-      ChangeKeySig(KeySig*, KeySigEvent newKeySig);
-      virtual void undo() { flip(); }
-      virtual void redo() { flip(); }
       };
 
 //---------------------------------------------------------
