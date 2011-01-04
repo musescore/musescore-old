@@ -37,7 +37,12 @@ struct SParmId {
             unsigned val;
             };
       SParmId(int v) : val(v) {}
-      SParmId(int a, int b, int c) : syntiId(a), subsystemId(b), paramId(c) {}
+      SParmId(int a, int b, int c) {
+            val         = 0;
+            syntiId     = a;
+            subsystemId = b;
+            paramId     = c;
+            }
       };
 
 enum {

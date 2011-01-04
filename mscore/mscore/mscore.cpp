@@ -184,7 +184,7 @@ static const int RECENT_LIST_SIZE = 10;
 void MuseScore::closeEvent(QCloseEvent* ev)
       {
       if (cs)
-            cs->setSyntiState(seq->getSynti()->state());
+            cs->setSyntiState(synti->state());
       unloadPlugins();
       QList<Score*> removeList;
       foreach(Score* score, scoreList) {
@@ -1180,15 +1180,25 @@ void MuseScore::setCurrentView(int tabIdx, int idx)
 
 void MuseScore::setCurrentScoreView(ScoreView* view)
       {
+      //
+      // save current synthesizer setting to score
+      //
+      if (cs) {
+            printf("synti settings -> score\n");
+            cs->setSyntiState(synti->state());
+            }
+
       cv = view;
-      MasterSynth* ms = seq->getSynti();
-      if (cs)
-            cs->setSyntiState(ms->state());
-      if (view) {
-            if (view->score() && cs != view->score()) {
-                  ms->setState(view->score()->syntiState());
+      if (cv) {
+            if (cv->score() && (cs != cv->score())) {
+                  //
+                  //   initialize synthesizer with new score
+                  //    settings
+
+                  printf("score -> synti settings\n");
+                  synti->setState(cv->score()->syntiState());
                   }
-            cs = view->score();
+            cs = cv->score();
             view->setFocusRect();
             }
       else
@@ -2037,7 +2047,8 @@ int main(int argc, char* av[])
             }
       else {
       */
-            seq = new Seq();
+            synti = new MasterSynth();
+            seq   = new Seq();
             if (!noSeq) {
                   if (!seq->init()) {
                         printf("sequencer init failed\n");
@@ -2297,13 +2308,13 @@ void MuseScore::cmd(QAction* a)
             removeTab(scoreList.indexOf(cs));
       else if (cmd == "file-save-as") {
             if (cs) {
-                  cs->setSyntiState(seq->getSynti()->state());
+                  cs->setSyntiState(synti->state());
                   cs->saveAs(false);
                   }
             }
       else if (cmd == "file-save-a-copy") {
             if (cs) {
-                  cs->setSyntiState(seq->getSynti()->state());
+                  cs->setSyntiState(synti->state());
                   cs->saveAs(true);
                   }
             }

@@ -182,7 +182,7 @@ SyntiState MasterSynth::state() const
 //   setState
 //---------------------------------------------------------
 
-void MasterSynth::setState(const SyntiState& ss)
+void MasterSynth::setState(SyntiState& ss)
       {
       foreach(Synth* synti, syntis)
             synti->setState(ss);

@@ -53,7 +53,7 @@ add_library (
       ${mocs}
       omrview.cpp pdf.cpp omrpage.cpp
       skew.cpp utils.cpp
-      omr.cpp ocr.cpp
+      omr.cpp ocr.cpp pattern.cpp
       )
 
 set_target_properties( omr

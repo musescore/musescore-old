@@ -37,11 +37,10 @@ class Score;
 class SynthControl : public QWidget, Ui::SynthControl {
       Q_OBJECT
 
-      MasterSynth* synti;
-
       Awl::AbstractSlider* aeolusSection[4][5];
 
       virtual void closeEvent(QCloseEvent*);
+      void updateSyntiValues();
 
    private slots:
       void selectSoundFont();
@@ -67,8 +66,7 @@ class SynthControl : public QWidget, Ui::SynthControl {
       void setGain(float);
 
    public:
-      SynthControl(MasterSynth*, QWidget* parent);
-      MasterSynth* getSynth() const { return synti; }
+      SynthControl(QWidget* parent);
       void updatePreferences();
       void setMeter(float, float, float, float);
       void stop();

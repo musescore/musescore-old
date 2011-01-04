@@ -1,3 +1,5 @@
+04.jan (ws)
+      - fixes for synthesizer parameter load/restore
 02.jan (mi)
       - tablature duration symbols were incorrectly placed above topmost staff rather than
         above tablature staff: corrected

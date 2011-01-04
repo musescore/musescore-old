@@ -96,16 +96,13 @@ namespace FluidS {
 
 Chorus::Chorus(float sr)
       {
-      Chorus* chorus = this;
-
-      memset(this, 0, sizeof(Chorus));
+      counter     = 0;
       sample_rate = sr;
 
       /* Lookup table for the SI function (impulse response of an ideal low pass) */
 
       /* i: Offset in terms of whole samples */
-      for (int i = 0; i < INTERPOLATION_SAMPLES; i++){
-
+      for (int i = 0; i < INTERPOLATION_SAMPLES; i++) {
             /* ii: Offset in terms of fractional samples ('subsamples') */
             for (int ii = 0; ii < INTERPOLATION_SUBSAMPLES; ii++){
                   /* Move the origin into the center of the table */
@@ -123,8 +120,7 @@ Chorus::Chorus(float sr)
                         }
                   }
             }
-
-      lookup_tab = new int[(int) (chorus->sample_rate / MIN_SPEED_HZ)];
+      lookup_tab = new int[(int) (sample_rate / MIN_SPEED_HZ)];
       chorusbuf  = new float[MAX_SAMPLES];
       reset();
       }
@@ -136,13 +132,11 @@ Chorus::Chorus(float sr)
 void Chorus::reset()
       {
       memset(chorusbuf, 0, MAX_SAMPLES * sizeof(*chorusbuf));
-
-      set_nr(FLUID_CHORUS_DEFAULT_N);
-      set_level(FLUID_CHORUS_DEFAULT_LEVEL);
-      set_speed_Hz(FLUID_CHORUS_DEFAULT_SPEED);
-      set_depth_ms(FLUID_CHORUS_DEFAULT_DEPTH);
-      set_type(FLUID_CHORUS_MOD_SINE);
-
+      new_number_blocks = FLUID_CHORUS_DEFAULT_N;
+      new_level         = FLUID_CHORUS_DEFAULT_LEVEL;
+      new_speed_Hz      = FLUID_CHORUS_DEFAULT_SPEED;
+      new_depth_ms      = FLUID_CHORUS_DEFAULT_DEPTH;
+      new_type          = FLUID_CHORUS_MOD_SINE;
       update();
       }
 
@@ -189,16 +183,6 @@ void Chorus::update()
             new_depth_ms = 0.0;
             }
       /* Depth: Check for too high value through modulation_depth_samples. */
-
-      if (new_level < 0.0) {
-            fluid_log(FLUID_WARN, "chorus: level must be positive! Setting value to 0.");
-            new_level = 0.0;
-            }
-      else if (new_level > 10) {
-            fluid_log(FLUID_WARN, "chorus: level must be < 10. A reasonable level is << 1! "
-               "Setting it to 0.1.");
-            new_level = 0.1;
-            }
 
       /* The modulating LFO goes through a full period every x samples: */
       modulation_period_samples = lrint(sample_rate / new_speed_Hz);
@@ -341,12 +325,17 @@ void Chorus::triangle(int *buf, int len, int depth)
 void Chorus::setParameter(int idx, double value)
       {
       switch (idx) {
-            case 0: type = lrint(value); break;
-            case 1: speed_Hz = value * MAX_SPEED_HZ + MIN_SPEED_HZ; break;
-            case 2: depth_ms = value * MAX_DEPTH; break;
-            case 3: number_blocks = lrint(value * 100.0); break;
-            case 4: new_level = value; break;
+            case CHORUS_TYPE:   type = lrint(value); break;
+            case CHORUS_SPEED:  speed_Hz = value * MAX_SPEED_HZ + MIN_SPEED_HZ; break;
+            case CHORUS_DEPTH:  depth_ms = value * MAX_DEPTH; break;
+            case CHORUS_BLOCKS: number_blocks = lrint(value * 100.0); break;
+            case CHORUS_GAIN:   new_level = value; break;
+            default:
+                  printf("Chorus:setParameter: %x invalid\n", idx);
+                  break;
             }
+// printf("Chorus: setParameter %d %f\n", idx, value);
+      update();
       }
 
 //---------------------------------------------------------
@@ -355,14 +344,19 @@ void Chorus::setParameter(int idx, double value)
 
 double Chorus::parameter(int idx) const
       {
+      float value = 0.0;
       switch (idx) {
-            case 0: return type;
-            case 1: return (speed_Hz-MIN_SPEED_HZ) / MAX_SPEED_HZ;
-            case 2: return depth_ms / MAX_DEPTH;
-            case 3: return number_blocks / 100.0;
-            case 4: return level;
+            case CHORUS_TYPE:   value = type; break;
+            case CHORUS_SPEED:  value = (speed_Hz-MIN_SPEED_HZ) / MAX_SPEED_HZ; break;
+            case CHORUS_DEPTH:  value = depth_ms / MAX_DEPTH; break;
+            case CHORUS_BLOCKS: value = number_blocks / 100.0; break;
+            case CHORUS_GAIN:   value = new_level; break;
+            default:
+                  printf("Chorus::parameter: 0x%x invalid\n", idx);
+                  break;
             }
-      return 0.0;
+// printf("Chorus: parameter %d %f\n", idx, value);
+      return value;
       }
 
 }

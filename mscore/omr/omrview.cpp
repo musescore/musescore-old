@@ -26,6 +26,10 @@
 #include "score.h"
 #include "scoreview.h"
 
+static bool showLines = false;
+static bool showStaffLines = true;
+static bool showBarLines = false;
+
 //---------------------------------------------------------
 //   OmrView
 //---------------------------------------------------------
@@ -147,7 +151,7 @@ void OmrView::paintEvent(QPaintEvent* event)
             }
       OmrPage* page = _omr->page(curPage);
 
-      if (debugMode == 1) {
+      if (showLines) {
             p.setPen(QPen(QColor(255, 0, 0, 80), 1.0));
             foreach(QLine l, page->sl())
                   p.drawLine(QLineF(l.x1()+.5, l.y1()+.5, l.x2()+.5, l.y2()+.5));
@@ -155,14 +159,18 @@ void OmrView::paintEvent(QPaintEvent* event)
       foreach(const QRect r, page->slices())
             p.fillRect(r, QBrush(QColor(0, 100, 100, 50)));
 
-      p.setPen(QPen(QColor(255, 0, 0), 3.0));
-      foreach(const QRect r, page->notes())
-            p.drawRect(r);
+      foreach(const OmrNote n, page->notes()) {
+            if (n.type == Duration::V_QUARTER)
+                  p.setPen(QPen(QColor(255, 0, 0), 2.0));
+            else
+                  p.setPen(QPen(QColor(0, 0, 255), 2.0));
+            p.drawRect(n.r);
+            }
 
       foreach(const QRectF& r, page->r())       // staves
             p.fillRect(r, QBrush(QColor(0, 0, 100, 50)));
       p.setPen(QPen(Qt::blue));
-      if (debugMode == 1) {
+      if (showBarLines) {
             foreach(const QLineF& l, page->bl()) {
                   p.drawLine(l);
                   }

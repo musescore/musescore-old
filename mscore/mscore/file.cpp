@@ -236,7 +236,7 @@ void MuseScore::saveFile()
       {
       if (cs == 0)
             return;
-      cs->setSyntiState(seq->getSynti()->state());
+      cs->setSyntiState(synti->state());
       if (cs->saveFile(false)) {
             setWindowTitle("MuseScore: " + cs->name());
             int idx = scoreList.indexOf(cs);

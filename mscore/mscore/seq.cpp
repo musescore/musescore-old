@@ -59,6 +59,7 @@
 #include "fluid.h"
 
 Seq* seq;
+MasterSynth* synti;
 
 static const int guiRefresh   = 10;       // Hz
 static const int peakHoldTime = 1400;     // msec
@@ -70,8 +71,6 @@ static const int peakHold     = (peakHoldTime * guiRefresh) / 1000;
 
 Seq::Seq()
       {
-      synti = new MasterSynth();
-
       running         = false;
       playlistChanged = false;
       cs              = 0;

@@ -10,6 +10,7 @@
 */
 
 #include "rev.h"
+#include "fluid.h"
 
 namespace FluidS {
 
@@ -102,7 +103,7 @@ Reverb::Reverb()
             }
       gain = 0.30;      // input gain
       setPreset(0);
-      init();     // Clear all buffers
+      init();           // Clear all buffers
       parameterChanged = false;
       }
 
@@ -201,13 +202,21 @@ bool Reverb::setPreset(int nr)
       return true;
       }
 
+//---------------------------------------------------------
+//   setParameter
+//---------------------------------------------------------
+
 void Reverb::setParameter(int idx, double value)
       {
+// printf("Reverb:setParameter %d: %f\n", idx, value);
       switch (idx) {
-            case 0:     newRoomsize = value; break;
-            case 1:     newDamp     = value; break;
-            case 2:     newWidth    = value; break;
-            case 3:     newGain     = value; break;
+            case REVERB_ROOMSIZE: newRoomsize = value; break;
+            case REVERB_DAMP:     newDamp     = value; break;
+            case REVERB_WIDTH:    newWidth    = value; break;
+            case REVERB_GAIN:     newGain     = value; break;
+            default:
+                  printf("Reverb:setParameter: %x invalid\n", idx);
+                  break;
             }
       parameterChanged = true;
       }
@@ -218,13 +227,17 @@ void Reverb::setParameter(int idx, double value)
 
 double Reverb::parameter(int idx) const
       {
+      double val = 0.0;
       switch (idx) {
-            case 0:     return roomsize;
-            case 1:     return damp;
-            case 2:     return width;
-            case 3:     return gain;
+            case REVERB_ROOMSIZE: val = newRoomsize; break;
+            case REVERB_DAMP:     val = newDamp; break;
+            case REVERB_WIDTH:    val = newWidth; break;
+            case REVERB_GAIN:     val = newGain; break;
+            default:
+                  break;
             }
-      return 0.0;
+// printf("Reverb:parameter %d: %f\n", idx, val);
+      return val;
       }
 
 
