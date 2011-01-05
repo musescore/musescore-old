@@ -375,6 +375,7 @@ void SlurSegment::layout(const QPointF& p1, const QPointF& p2, qreal b)
       qreal y1, y2;
       bool up = slurTie()->isUp();
 
+#if 0
       if (!up && (y3 > y0)) {
             y1 = y2 = (y3 + _spatium * .5);
             }
@@ -387,10 +388,11 @@ void SlurSegment::layout(const QPointF& p1, const QPointF& p2, qreal b)
       else if (up && (y3 < y0)) {
             y1 = y2 = (y3 - _spatium * .5);
             }
-      else {
-            // y1 = y0 + (x1-x0) * slope + bow;
-            // y2 = y0 + (x2-x0) * slope + bow;
-            y1 = y2 = y0 + bow;
+      else
+#endif
+            {
+            y1 = y0 + (x1-x0) * slope + bow;
+            y2 = y0 + (x2-x0) * slope + bow;
             }
 
       ups[1].p = QPointF(x1, y1);
@@ -478,23 +480,6 @@ SlurTie::~SlurTie()
       {
       }
 
-#if 0
-//---------------------------------------------------------
-//   change
-//---------------------------------------------------------
-
-void SlurTie::change(Element* o, Element* n)
-      {
-      int idx = segments.indexOf((SlurSegment*)o);
-      if (idx == -1) {
-            printf("SlurTie: cannot change %p\n", o);
-            return;
-            }
-      n->setParent(this);
-      segments[idx] = (SlurSegment*)n;
-      }
-#endif
-
 //---------------------------------------------------------
 //   slurPos
 //---------------------------------------------------------
@@ -519,7 +504,7 @@ QPointF SlurTie::slurPos(Element* e, System*& s)
       if (cr->type() != CHORD)
             return cr->canvasPos() + QPointF(xo, yo);
 
-      Chord* c = static_cast<Chord*>(cr);
+      Chord* c   = static_cast<Chord*>(cr);
       Stem* stem = c->stem();
       Beam* beam = c->beam();
 
@@ -529,19 +514,91 @@ QPointF SlurTie::slurPos(Element* e, System*& s)
       else
             sc = (Chord*)startElement();
 
-      bool startIsGrace         = sc->type() == CHORD && sc->noteType() != NOTE_NORMAL;
-      bool mainNoteOfGraceSlur  = startIsGrace && (c == endElement()) && (c->noteType() == NOTE_NORMAL);
+      Chord* ec;
+      if (endElement()->type() == NOTE)
+            ec = ((Note*)endElement())->chord();
+      else
+            ec = (Chord*)endElement();
+
+      bool startIsGrace         = (sc->type() == CHORD) && (sc->noteType() != NOTE_NORMAL);
+      bool mainNoteOfGraceSlur  = startIsGrace && (c == endElement())   && (c->noteType() == NOTE_NORMAL);
       bool firstNoteOfGraceSlur = startIsGrace && (c == startElement()) && (c->noteType() != NOTE_NORMAL);
 
       Note* note;
+      //
+      // default position:
+      //    horizontal: middle of note head
+      //    vertical:   _spatium * .4 above/below note head
+      //
+      note = up ? c->upNote() : c->downNote();
+      xo   = note->headWidth() * .5;
+      yo   = note->pos().y() + (note->headHeight() * .5 + _spatium * .4) * (up ? -1.0 : 1.0);
+
+      if (stem) {
+            if (beam && (c->up() == up)) {
+                  double sh = stem->height() + _spatium;
+                  if (up)
+                        yo = c->downNote()->pos().y() - sh;
+                  else
+                        yo = c->upNote()->pos().y() + sh;
+                  xo = stem->pos().x();
+                  }
+            else {
+                  if (cr == startElement() && c->up() && up)
+                        xo = note->headWidth() + _spatium * .3;
+                  else if (cr == endElement() && !c->up() && !up)
+                        xo = -_spatium * .3;
+
+                  //
+                  // handle case: stem up   - stem down
+                  //              stem down - stem up
+                  //
+                  if ((sc->up() != ec->up()) && (c->up() == up)) {
+                        Note* n1 = sc->up() ? sc->downNote() : sc->upNote();
+                        Note* n2 = ec->up() ? ec->downNote() : ec->upNote();
+                        double yd = n2->pos().y() - n1->pos().y();
+
+                        double mh = stem->height();    // limit y move
+                        if (yd > 0.0) {
+                              if (yd > mh)
+                                    yd = mh;
+                              }
+                        else {
+                              if (yd < - mh)
+                                    yd = -mh;
+                              }
+
+                        if (cr == startElement()) {
+                              if ((up && (yd < -_spatium)) || (!up && (yd > _spatium)))
+                                    yo += yd;
+                              }
+                        else {
+                              if ((up && (yd > _spatium)) || (!up && (yd < -_spatium)))
+                                    yo -= yd;
+                              }
+                        }
+#if 1
+                  else if (c->up() != up) {
+                        //
+                        // handle special case of tenuto and staccato;
+                        // should be generalized
+                        //
+                        QList<Articulation*>* al = c->getArticulations();
+                        if (al->size() == 1) {
+                              Articulation* a = al->at(0);
+                              if (a->subtype() == TenutoSym || a->subtype() == StaccatoSym)
+                                    yo = a->y() + (a->height() + _spatium * .5) * (up ? -1.0 : 1.0);
+                              }
+                        }
+#endif
+                  }
+            }
+
+#if 0
       if (up) {
             //
             // up slur
             //
-            note = c->upNote();
-            yo   = note->pos().y() - (c->upNote()->headHeight() * .5 + _spatium * .4);
-            xo   = note->headWidth() * .5;
-
             //
             // handle special case of tenuto and staccato;
             // should be generalized
@@ -567,10 +624,6 @@ QPointF SlurTie::slurPos(Element* e, System*& s)
             //
             // down slur
             //
-            note = c->downNote();
-            yo   = note->pos().y() + c->downNote()->headHeight() * .5 + _spatium * .4;
-            xo   = note->headWidth() * .5;
-
             //
             // handle special case of tenuto and staccato;
             // should be generalized
@@ -581,6 +634,7 @@ QPointF SlurTie::slurPos(Element* e, System*& s)
                   if (a->subtype() == TenutoSym || a->subtype() == StaccatoSym)
                         yo = a->y() + a->height() + _spatium * .5;
                   }
+
             if (!c->up() && stem) {
                   if (beam && !mainNoteOfGraceSlur)
                         yo = c->upNote()->pos().y() + stem->height() + _spatium;
@@ -600,16 +654,16 @@ QPointF SlurTie::slurPos(Element* e, System*& s)
                   // to the stem rather than the middle of the notehead
                   xo = stem->pos().x();
                   if (cr == startElement())
-                        xo += stem->width() * .5;
+                        xo += _spatium * .3;   // stem->width() * .5;
                   else
-                        xo -= stem->width() * .5;
+                        xo -= _spatium * .3;    // stem->width() * .5;
                   }
             else {
                   if (cr == startElement()) {
                         // don't collide with start stem
                         xo = stem->pos().x() + _spatium * .5;
                         }
-                  if (cr == endElement()) {
+                  else {
                         // don't collide with end stem
                         xo = stem->pos().x() - _spatium * .5;
                         }
@@ -619,6 +673,8 @@ QPointF SlurTie::slurPos(Element* e, System*& s)
             xo = c->downNote()->headWidth() * .5;
       if (!up && mainNoteOfGraceSlur)
             xo = _spatium * .3;
+#endif
+
       return cr->canvasPos() + QPointF(xo, yo);
       }
 
@@ -762,24 +818,15 @@ static bool chordsHaveTie (Chord* c1, Chord* c2)
 //   directionMixture
 //---------------------------------------------------------
 
-static bool isDirectionMixture (Chord* c1, Chord* c2)
+static bool isDirectionMixture(Chord* c1, Chord* c2)
       {
       bool up = c1->up();
-      for (Segment* seg = c1->segment(); seg; seg = seg->next()) {
-            if (seg->subtype() == SegChordRest) {
-                  Element* e = seg->element(c1->track());
-                  if (!e)
-                        continue;
-                  Chord* c = 0;
-                  if (e->type() == NOTE)
-                        c = static_cast<Note*>(e)->chord();
-                  else if (e->type() == CHORD)
-                        c = static_cast<Chord*>(e);
-                  else
-                        continue;
-                  if (c && c->up() != up)
-                        return true;
-                  }
+      for (Segment* seg = c1->segment(); seg; seg = seg->next(SegChordRest)) {
+            Chord* c = static_cast<Chord*>(seg->element(c1->track()));
+            if (!c || c->type() != CHORD)
+                  continue;
+            if (c->up() != up)
+                  return true;
             if (seg == c2->segment())
                   break;
             }
@@ -846,20 +893,20 @@ void Slur::layout()
                         // long slurs are always above
                         up = true;
                         }
-                  if (cr1->type() == CHORD && cr2->type() == CHORD) {
-                        if (isDirectionMixture(c1, c2) && c1->noteType() == NOTE_NORMAL) {
-                              // slurs go above if start and end note have different stem directions,
-                              // but grace notes are exceptions
-                              up = true;
-                              }
-                        else if (m1->mstaff(cr1->staffIdx())->hasVoices && c1->noteType() == NOTE_NORMAL) {
-                              // in polyphonic passage, slurs go on the stem side
-                              up = cr1->up();
-                              }
-                        else if (chordsHaveTie(c1, c2)) {
-                              // could confuse slur with tie, put slur on stem side
-                              up = cr1->up();
-                              }
+                  else
+                        up = !(cr1->up());
+                  if (isDirectionMixture(c1, c2) && c1->noteType() == NOTE_NORMAL) {
+                        // slurs go above if start and end note have different stem directions,
+                        // but grace notes are exceptions
+                        up = true;
+                        }
+                  else if (m1->mstaff(cr1->staffIdx())->hasVoices && c1->noteType() == NOTE_NORMAL) {
+                        // in polyphonic passage, slurs go on the stem side
+                        up = cr1->up();
+                        }
+                  else if (chordsHaveTie(c1, c2)) {
+                        // could confuse slur with tie, put slur on stem side
+                        up = cr1->up();
                         }
                   }
                   break;

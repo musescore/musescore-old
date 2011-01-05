@@ -1,5 +1,7 @@
 05.jan (ws)
-      - tuning slur layout
+      - "reset to default" resets stem direction of chords to "auto"
+      - tuning slur layout (test file slur1.mscx, slur2.mcx)
+        (TODO: tuning of grace note slurs)
       - "reset to default" now also works in edit mode
 04.jan (ws)
       - fix #8450: problem while playing imported guitar pro file

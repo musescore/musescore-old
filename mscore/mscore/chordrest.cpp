@@ -44,6 +44,7 @@
 #include "lyrics.h"
 #include "segment.h"
 #include "stafftype.h"
+#include "undo.h"
 
 //---------------------------------------------------------
 //   DurationElement
@@ -677,6 +678,8 @@ void ChordRest::toDefault()
       {
       score()->undoChangeChordRestSpace(this, Spatium(0.0), Spatium(0.0));
       score()->undoChangeUserOffset(this, QPointF());
+      if (type() == CHORD)
+            score()->undo()->push(new SetStemDirection(static_cast<Chord*>(this), AUTO));
       }
 
 //---------------------------------------------------------
