@@ -68,7 +68,8 @@ void SlurSegment::updatePath()
       for (int i = 0; i < 4; ++i)
             pp[i] = ups[i].p + ups[i].off * _spatium;
       path = QPainterPath();
-      QPointF t(0.0, score()->styleS(ST_SlurMidWidth).val() * _spatium);    // thickness of slur
+      double w = (score()->styleS(ST_SlurMidWidth).val() - score()->styleS(ST_SlurEndWidth).val()) * _spatium;
+      QPointF t(0.0, w);    // thickness of slur
 
       path.moveTo(pp[0]);
       path.cubicTo(pp[1]-t, pp[2]-t, pp[3]);
@@ -346,11 +347,10 @@ void SlurSegment::layout(const QPointF& p1, const QPointF& p2, qreal b)
       //  compute bezier help points
       //
       double _spatium = spatium();
-      qreal x0 = ups[0].p.x() + ups[0].off.x() * _spatium;
-      qreal x3 = ups[3].p.x() + ups[3].off.x() * _spatium;
-
-      qreal y0 = ups[0].p.y() + ups[0].off.y() * _spatium;
-      qreal y3 = ups[3].p.y() + ups[3].off.y() * _spatium;
+      qreal x0 = p1.x() + ups[0].off.x() * _spatium;
+      qreal y0 = p1.y() + ups[0].off.y() * _spatium;
+      qreal x3 = p2.x() + ups[3].off.x() * _spatium;
+      qreal y3 = p2.y() + ups[3].off.y() * _spatium;
 
       qreal xdelta = x3 - x0;
       if (xdelta == 0.0 || (x0 > x3)) {
@@ -369,10 +369,29 @@ void SlurSegment::layout(const QPointF& p1, const QPointF& p2, qreal b)
             else
                   bow = -maxBow;
             }
-      qreal slope = (y3 - y0) / xdelta;
+      qreal dy = y3 - y0;
+      qreal slope = dy / xdelta;
 
-      qreal y1 = y0 + (x1-x0) * slope + bow;
-      qreal y2 = y0 + (x2-x0) * slope + bow;
+      qreal y1, y2;
+      bool up = slurTie()->isUp();
+
+      if (!up && (y3 > y0)) {
+            y1 = y2 = (y3 + _spatium * .5);
+            }
+      else if (!up && (y3 < y0)) {
+            y1 = y2 = (y0 + _spatium * .5);
+            }
+      else if (up && (y3 > y0)) {
+            y1 = y2 = (y0 - _spatium * .5);
+            }
+      else if (up && (y3 < y0)) {
+            y1 = y2 = (y3 - _spatium * .5);
+            }
+      else {
+            // y1 = y0 + (x1-x0) * slope + bow;
+            // y2 = y0 + (x2-x0) * slope + bow;
+            y1 = y2 = y0 + bow;
+            }
 
       ups[1].p = QPointF(x1, y1);
       ups[2].p = QPointF(x2, y2);
@@ -497,95 +516,109 @@ QPointF SlurTie::slurPos(Element* e, System*& s)
 
       qreal xo = cr->width() * .5;
       qreal yo = 0.0;
-      if (cr->type() == CHORD) {
-            Chord* c = static_cast<Chord*>(cr);
-            Stem* stem = c->stem();
-            Beam* beam = c->beam();
+      if (cr->type() != CHORD)
+            return cr->canvasPos() + QPointF(xo, yo);
 
-            Chord* sc;
-            if (startElement()->type() == NOTE)
-                  sc = ((Note*)startElement())->chord();
-            else
-                  sc = (Chord*)startElement();
+      Chord* c = static_cast<Chord*>(cr);
+      Stem* stem = c->stem();
+      Beam* beam = c->beam();
 
-            bool startIsGrace         = sc->type() == CHORD && sc->noteType() != NOTE_NORMAL;
-            bool mainNoteOfGraceSlur  = startIsGrace && (c == endElement()) && (c->noteType() == NOTE_NORMAL);
-            bool firstNoteOfGraceSlur = startIsGrace && (c == startElement()) && (c->noteType() != NOTE_NORMAL);
+      Chord* sc;
+      if (startElement()->type() == NOTE)
+            sc = ((Note*)startElement())->chord();
+      else
+            sc = (Chord*)startElement();
 
-            if (up) {
-                  yo = c->upNote()->pos().y() - c->upNote()->headHeight();
-                  //
-                  // handle special case of tenuto and staccato;
-                  // should be generalized
-                  //
-                  QList<Articulation*>* al = c->getArticulations();
-                  if (al->size() == 1) {
-                        Articulation* a = al->at(0);
-                        if (a->subtype() == TenutoSym || a->subtype() == StaccatoSym) {
-                              yo = a->y() - _spatium * .5;
-                              }
+      bool startIsGrace         = sc->type() == CHORD && sc->noteType() != NOTE_NORMAL;
+      bool mainNoteOfGraceSlur  = startIsGrace && (c == endElement()) && (c->noteType() == NOTE_NORMAL);
+      bool firstNoteOfGraceSlur = startIsGrace && (c == startElement()) && (c->noteType() != NOTE_NORMAL);
+
+      Note* note;
+      if (up) {
+            //
+            // up slur
+            //
+            note = c->upNote();
+            yo   = note->pos().y() - (c->upNote()->headHeight() * .5 + _spatium * .4);
+            xo   = note->headWidth() * .5;
+
+            //
+            // handle special case of tenuto and staccato;
+            // should be generalized
+            //
+            QList<Articulation*>* al = c->getArticulations();
+            if (al->size() == 1) {
+                  Articulation* a = al->at(0);
+                  if (a->subtype() == TenutoSym || a->subtype() == StaccatoSym) {
+                        yo = a->y() - _spatium * .5;
                         }
-                  if (c->up() && stem) {
-                        if (beam && !mainNoteOfGraceSlur)
-                              yo = c->downNote()->pos().y() - stem->height() - _spatium;
-                        else if (!startIsGrace) {
-                              // slurs on the stem side of stemmed notes start half
-                              // of a staff space from the end of the stem
-                              yo = c->downNote()->pos().y() - stem->height() + _spatium * .5;
-                              }
+                  }
+            if (c->up() && stem) {
+                  if (beam && !mainNoteOfGraceSlur)
+                        yo = c->downNote()->pos().y() - stem->height() - _spatium;
+                  else if (!startIsGrace) {
+                        // slurs on the stem side of stemmed notes start half
+                        // of a staff space from the end of the stem
+                        yo = c->downNote()->pos().y() - stem->height() + _spatium * .5;
                         }
+                  }
+            }
+      else {
+            //
+            // down slur
+            //
+            note = c->downNote();
+            yo   = note->pos().y() + c->downNote()->headHeight() * .5 + _spatium * .4;
+            xo   = note->headWidth() * .5;
+
+            //
+            // handle special case of tenuto and staccato;
+            // should be generalized
+            //
+            QList<Articulation*>* al = c->getArticulations();
+            if (al->size() == 1) {
+                  Articulation* a = al->at(0);
+                  if (a->subtype() == TenutoSym || a->subtype() == StaccatoSym)
+                        yo = a->y() + a->height() + _spatium * .5;
+                  }
+            if (!c->up() && stem) {
+                  if (beam && !mainNoteOfGraceSlur)
+                        yo = c->upNote()->pos().y() + stem->height() + _spatium;
+                  else if (!startIsGrace) {
+                        // slurs on the stem side of stemmed notes start half
+                        // of a staff space from the end of the stem
+                        yo = c->upNote()->pos().y() + stem->height() - _spatium * .5;
+                        }
+                  }
+            }
+      if (up == c->up() && stem) {
+            if (firstNoteOfGraceSlur) {
+                  xo -= c->upNote()->headWidth() * .5;
+                  }
+            else if (beam && !mainNoteOfGraceSlur) {
+                  // for beamed notes and slurs on stem side, slurs are aligned
+                  // to the stem rather than the middle of the notehead
+                  xo = stem->pos().x();
+                  if (cr == startElement())
+                        xo += stem->width() * .5;
+                  else
+                        xo -= stem->width() * .5;
                   }
             else {
-                  yo = c->downNote()->pos().y() + c->downNote()->headHeight();
-                  //
-                  // handle special case of tenuto and staccato;
-                  // should be generalized
-                  //
-                  QList<Articulation*>* al = c->getArticulations();
-                  if (al->size() == 1) {
-                        Articulation* a = al->at(0);
-                        if (a->subtype() == TenutoSym || a->subtype() == StaccatoSym)
-                              yo = a->y() + a->height() + _spatium * .5;
+                  if (cr == startElement()) {
+                        // don't collide with start stem
+                        xo = stem->pos().x() + _spatium * .5;
                         }
-                  if (!c->up() && stem) {
-                        if (beam && !mainNoteOfGraceSlur)
-                              yo = c->upNote()->pos().y() + stem->height() + _spatium;
-                        else if (!startIsGrace) {
-                              // slurs on the stem side of stemmed notes start half
-                              // of a staff space from the end of the stem
-                              yo = c->upNote()->pos().y() + stem->height() - _spatium * .5;
-                              }
+                  if (cr == endElement()) {
+                        // don't collide with end stem
+                        xo = stem->pos().x() - _spatium * .5;
                         }
                   }
-            if (up == c->up() && stem) {
-                  if (firstNoteOfGraceSlur) {
-                        xo -= c->upNote()->headWidth() * .5;
-                        }
-                  else if (beam && !mainNoteOfGraceSlur) {
-                        // for beamed notes and slurs on stem side, slurs are aligned
-                        // to the stem rather than the middle of the notehead
-                        xo = stem->pos().x();
-                        if (cr == startElement())
-                              xo += stem->width() * .5;
-                        else
-                              xo -= stem->width() * .5;
-                        }
-                  else {
-                        if (cr == startElement()) {
-                              // don't collide with start stem
-                              xo = stem->pos().x() + _spatium * .5;
-                              }
-                        if (cr == endElement()) {
-                              // don't collide with end stem
-                              xo = stem->pos().x() - _spatium * .5;
-                              }
-                        }
-                  }
-            if (firstNoteOfGraceSlur)
-                  xo = c->downNote()->headWidth() * .5;
-            if (!up && mainNoteOfGraceSlur)
-                  xo = _spatium * .3;
             }
+      if (firstNoteOfGraceSlur)
+            xo = c->downNote()->headWidth() * .5;
+      if (!up && mainNoteOfGraceSlur)
+            xo = _spatium * .3;
       return cr->canvasPos() + QPointF(xo, yo);
       }
 
@@ -648,6 +681,7 @@ void SlurSegment::toDefault()
       for (int i = 0; i < 4; ++i)
             ups[i].off = QPointF();
       parent()->toDefault();
+      parent()->layout();
       }
 
 //---------------------------------------------------------
@@ -760,7 +794,7 @@ void Slur::layout()
       {
       double _spatium = spatium();
 
-      if (score() == gscore || !startElement()) {      // HACK
+      if (score() == gscore || !startElement()) {
             //
             // when used in a palette, slur has no parent and
             // tick and tick2 has no meaning so no layout is
@@ -833,7 +867,7 @@ void Slur::layout()
 
       System *s1, *s2;
       QPointF p1 = slurPos(startElement(), s1);
-      QPointF p2 = slurPos(endElement(), s2);
+      QPointF p2 = slurPos(endElement(),   s2);
 
       QList<System*>* sl = score()->systems();
       iSystem is = sl->begin();

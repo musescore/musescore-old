@@ -511,8 +511,8 @@ StyleData::StyleData()
             StyleVal(ST_FixMeasureNumbers, 0),
             StyleVal(ST_FixMeasureWidth, false),
 
-            StyleVal(ST_SlurEndWidth, Spatium(.05)),
-            StyleVal(ST_SlurMidWidth, Spatium(.08)),
+            StyleVal(ST_SlurEndWidth, Spatium(.07)),
+            StyleVal(ST_SlurMidWidth, Spatium(.15)),
             StyleVal(ST_SlurDottedWidth, Spatium(.1)),
             StyleVal(ST_SlurBow, Spatium(1.6)),
 

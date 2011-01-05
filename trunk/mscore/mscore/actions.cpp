@@ -2040,7 +2040,7 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Edit Element")
          ),
       Shortcut(
-         STATE_NORMAL,
+         STATE_NORMAL | STATE_EDIT,
          "reset-positions",
          QT_TRANSLATE_NOOP("action","reset positions"),
          Qt::CTRL+Qt::Key_R,

@@ -1,3 +1,6 @@
+05.jan (ws)
+      - tuning slur layout
+      - "reset to default" now also works in edit mode
 04.jan (ws)
       - fix #8450: problem while playing imported guitar pro file
       - fixes for synthesizer parameter load/restore
