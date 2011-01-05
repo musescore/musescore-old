@@ -521,7 +521,7 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "rest",
          QT_TRANSLATE_NOOP("action","Enter rest"),
-         Qt::Key_Space,
+         Qt::Key_0,
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Rest"),
          QT_TRANSLATE_NOOP("action","Enter rest"),
@@ -1623,7 +1623,7 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
          "play",
          QT_TRANSLATE_NOOP("action","Player play"),
-         0, // Qt::CTRL + Qt::Key_Space, (do not use: used for multibyte (asian) languages)
+         Qt::Key_Space,
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Play"),
          QT_TRANSLATE_NOOP("action","Start or stop playback"),
