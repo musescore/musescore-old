@@ -1821,21 +1821,6 @@ void Score::addArticulation(Element* el, Articulation* atr)
       }
 
 //---------------------------------------------------------
-//   resetUserOffsets
-///   Reset user offset for all selected notes.
-///
-///   Called from pulldown menu.
-//---------------------------------------------------------
-
-void Score::toDefault()
-      {
-      foreach(Element* e, selection().elements())
-            e->toDefault();
-      layoutAll = true;
-      setClean(false);
-      }
-
-//---------------------------------------------------------
 //   resetUserStretch
 //---------------------------------------------------------
 
@@ -2266,8 +2251,6 @@ void Score::cmd(const QAction* a)
                               }
                         }
                   }
-            else if (cmd == "reset-positions")
-                  toDefault();
             else if (cmd == "reset-stretch")
                   resetUserStretch();
             else if (cmd == "mirror-note")

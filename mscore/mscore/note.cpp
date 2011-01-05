@@ -1533,7 +1533,6 @@ int Note::customizeVelocity(int velo) const
 
 void Note::endEdit()
       {
-      printf("note end edit\n");
       Chord* ch = chord();
       if (ch->notes().size() == 1) {
             ch->setUserOff(userOff());

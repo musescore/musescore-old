@@ -346,7 +346,6 @@ class Score : public QObject {
       void cmdDoubleDuration();
 
       void resetUserStretch();
-      void toDefault();
 
       Page* addPage();
       bool layoutPage();

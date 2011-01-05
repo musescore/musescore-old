@@ -1039,8 +1039,7 @@ void ScoreView::resizeEvent(QResizeEvent* /*ev*/)
 
 void ScoreView::updateGrips()
       {
-      Element* e = editObject;
-      if (e == 0)
+      if (editObject == 0)
             return;
 
       double dx = 1.5 / _matrix.m11();
@@ -1055,17 +1054,17 @@ void ScoreView::updateGrips()
       for (int i = 0; i < MAX_GRIPS; ++i)
             grip[i] = r;
 
-      e->updateGrips(&grips, grip);
+      editObject->updateGrips(&grips, grip);
 
       for (int i = 0; i < grips; ++i)
             score()->addRefresh(grip[i].adjusted(-dx, -dy, dx, dy));
 
-      QPointF anchor = e->gripAnchor(curGrip);
+      QPointF anchor = editObject->gripAnchor(curGrip);
       if (!anchor.isNull())
             setDropAnchor(QLineF(anchor, grip[curGrip].center()));
       else
             setDropTarget(0); // this also resets dropAnchor
-      score()->addRefresh(e->abbox());
+      score()->addRefresh(editObject->abbox());
       }
 
 //---------------------------------------------------------
@@ -1181,6 +1180,7 @@ void ScoreView::startEdit()
                   Spanner* hp         = (Spanner*)ohp->clone();
                   int idx             = ohp->spannerSegments().indexOf(ols);
                   editObject          = hp->spannerSegments().at(idx);
+                  hp->setSelected(true);
                   _score->undoChangeElement(ohp, hp);
                   }
             editObject->startEdit(this, startMove);
@@ -2876,6 +2876,20 @@ void ScoreView::cmd(const QAction* a)
                         }
                   }
             }
+      else if (cmd == "reset-positions") {
+            if (editMode()) {
+                  editObject->toDefault();
+                  updateGrips();
+                  _score->end();
+                  }
+            else {
+                  _score->startCmd();
+                  foreach(Element* e, _score->selection().elements())
+                        e->toDefault();
+                  _score->endCmd();
+                  }
+            _score->setLayoutAll(true);
+            }
       else
             _score->cmd(a);
       _score->processMidiInput();
@@ -2904,6 +2918,7 @@ void ScoreView::endEdit()
       setEditText(0);
       if (!editObject)
 	      return;
+
       _score->addRefresh(editObject->bbox());
       editObject->endEdit();
       _score->addRefresh(editObject->bbox());
