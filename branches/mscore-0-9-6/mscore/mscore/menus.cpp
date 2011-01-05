@@ -1080,7 +1080,7 @@ void Score::addTempo()
             _tempomap->addTempo(tick, bps);
             TempoText* tt = new TempoText(this);
             tt->setTick(tick);
-            tt->setTrack(cr->track());
+            tt->setTrack(0);
             tt->setText(editTempo->text());
             tt->setTempo(bps);
             tt->setParent(m);

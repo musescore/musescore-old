@@ -1660,7 +1660,10 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
             else t->setAbove(placement == "above");
             t->setUserOff(QPointF(rx, ry));
             t->setMxmlOff(offset);
-            t->setTrack((staff + rstaff) * VOICES);
+            if (tempo != "")
+                  t->setTrack(0); //Track 0 for tempo text (system text)
+            else
+                  t->setTrack((staff + rstaff) * VOICES);
             measure->add(t);
             }
       else if (dirType == "rehearsal") {

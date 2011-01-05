@@ -1,5 +1,6 @@
 5.jan (la)
       - fix #8503: Spacebar for play/pause (patch by David Bolton)
+      - fix #6362: Tempo text position not saved for part > 1
 4.jan (ws)
       - fix #6347: Multiple grace notes do not copy correctly
       (la)
