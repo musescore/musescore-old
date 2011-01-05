@@ -19,7 +19,7 @@
       </score-instrument>
       <midi-instrument id="P1-I1">
         <midi-channel>1</midi-channel>
-        <midi-program>72</midi-program>
+        <midi-program>110</midi-program>
       </midi-instrument>
     </score-part>
   </part-list>
@@ -153,6 +153,9 @@
         <beam number="2">end</beam>
         <beam number="3">end</beam>
       </note>
+      <barline location="right">
+        <bar-style>light-heavy</bar-style>
+      </barline>
     </measure>
   </part>
 </score-partwise>
