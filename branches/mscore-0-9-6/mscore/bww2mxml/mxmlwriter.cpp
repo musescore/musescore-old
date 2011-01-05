@@ -114,7 +114,8 @@ namespace Bww {
     {
       out << "      <attributes>" << endl;
       out << "        <divisions>" << WHOLE_DUR / 4 << "</divisions>" << endl;
-      out << "        <key print-object=\"no\">" << endl;
+//      out << "        <key print-object=\"no\">" << endl;
+      out << "        <key>" << endl;
       out << "          <fifths>2</fifths>" << endl;
       out << "          <mode>major</mode>" << endl;
       out << "        </key>" << endl;

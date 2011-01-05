@@ -293,7 +293,7 @@ namespace Bww {
             keysig->setTick(tick);
             keysig->setTrack(0);
             keysig->setSubtype(key);
-            keysig->setVisible(false);
+//            keysig->setVisible(false);
             Segment* s = currentMeasure->getSegment(keysig);
             s->add(keysig);
             // timesig
