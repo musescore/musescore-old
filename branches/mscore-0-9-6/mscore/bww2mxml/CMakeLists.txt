@@ -26,7 +26,7 @@ add_library(bww STATIC
    writer.cpp
    )
 
-if (NOT MINGW)
+if (NOT MINGW AND NOT APPLE)
 add_executable(bww2mxml
    lexer.cpp
    main.cpp
@@ -35,7 +35,7 @@ add_executable(bww2mxml
    symbols.cpp
    writer.cpp
    )
-endif (NOT MINGW)
+endif (NOT MINGW AND NOT APPLE)
 
 target_link_libraries(bww2mxml
    ${QT_LIBRARIES}
