@@ -38,11 +38,14 @@ TimeDialog::TimeDialog(QWidget* parent)
       QLayout* l = new QVBoxLayout();
       frame->setLayout(l);
       sp = new Palette();
+      sp->setReadOnly(false);
+      connect(sp, SIGNAL(changed()), SLOT(setDirty()));
+      
       PaletteScrollArea* timePalette = new PaletteScrollArea(sp);
       QSizePolicy policy(QSizePolicy::Expanding, QSizePolicy::Expanding);
       timePalette->setSizePolicy(policy);
       timePalette->setRestrictHeight(false);
-
+            
       l->addWidget(timePalette);
       sp->setGrid(60, 60);
 
