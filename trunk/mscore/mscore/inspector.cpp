@@ -148,6 +148,7 @@ Inspector::Inspector(QWidget* parent)
       beamView     = new BeamView;
       tremoloView  = new TremoloView;
       ottavaView   = new OttavaView;
+      slurSegmentView = new SlurSegmentView;
 
       stack->addWidget(pagePanel);
       stack->addWidget(systemPanel);
@@ -173,6 +174,7 @@ Inspector::Inspector(QWidget* parent)
       stack->addWidget(beamView);
       stack->addWidget(tremoloView);
       stack->addWidget(ottavaView);
+      stack->addWidget(slurSegmentView);
 
       connect(pagePanel,    SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
       connect(systemPanel,  SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
@@ -198,6 +200,7 @@ Inspector::Inspector(QWidget* parent)
       connect(beamView,     SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
       connect(tremoloView,  SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
       connect(ottavaView,   SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
+      connect(slurSegmentView, SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
       connect(tupletView,   SIGNAL(scoreChanged()), SLOT(layoutScore()));
       connect(notePanel,    SIGNAL(scoreChanged()), SLOT(layoutScore()));
 
@@ -381,8 +384,12 @@ void Inspector::updateList(Score* s)
                                           }
                                     if (e->isChordRest()) {
                                           ChordRest* cr = static_cast<ChordRest*>(e);
-                                          foreach(Slur* slur, cr->slurFor())
-                                                new ElementItem(sei, slur);
+                                          foreach(Slur* slur, cr->slurFor()) {
+                                                ElementItem* sli = new ElementItem(sei, slur);
+                                                foreach(SpannerSegment* ss, slur->spannerSegments()) {
+                                                      new ElementItem(sli, ss);
+                                                      }
+                                                }
                                           }
                                     }
                               foreach(Spanner* s, segment->spannerFor()) {
@@ -533,6 +540,7 @@ void Inspector::updateElement(Element* el)
             case BEAM:          ew = beamView;     break;
             case TREMOLO:       ew = tremoloView;  break;
             case OTTAVA:        ew = ottavaView;   break;
+            case SLUR_SEGMENT:  ew = slurSegmentView; break;
             case MARKER:
             case JUMP:
             case TEXT:
@@ -2134,3 +2142,46 @@ void OttavaView::endElementClicked()
       {
       emit elementChanged(static_cast<Ottava*>(element())->endElement());
       }
+
+//---------------------------------------------------------
+//   SlurSegmentView
+//---------------------------------------------------------
+
+SlurSegmentView::SlurSegmentView()
+   : ShowElementBase()
+      {
+      QWidget* w = new QWidget;
+      ss.setupUi(w);
+      layout->addWidget(w);
+      layout->addStretch(10);
+      }
+
+//---------------------------------------------------------
+//   SlurSegmentView
+//---------------------------------------------------------
+
+void SlurSegmentView::setElement(Element* e)
+      {
+      SlurSegment* s = static_cast<SlurSegment*>(e);
+      ShowElementBase::setElement(e);
+      ss.up1px->setValue(s->getUps(0)->p.x());
+      ss.up1py->setValue(s->getUps(0)->p.y());
+      ss.up1ox->setValue(s->getUps(0)->off.x());
+      ss.up1oy->setValue(s->getUps(0)->off.y());
+
+      ss.up2px->setValue(s->getUps(1)->p.x());
+      ss.up2py->setValue(s->getUps(1)->p.y());
+      ss.up2ox->setValue(s->getUps(1)->off.x());
+      ss.up2oy->setValue(s->getUps(1)->off.y());
+
+      ss.up3px->setValue(s->getUps(2)->p.x());
+      ss.up3py->setValue(s->getUps(2)->p.y());
+      ss.up3ox->setValue(s->getUps(2)->off.x());
+      ss.up3oy->setValue(s->getUps(2)->off.y());
+
+      ss.up4px->setValue(s->getUps(3)->p.x());
+      ss.up4py->setValue(s->getUps(3)->p.y());
+      ss.up4ox->setValue(s->getUps(3)->off.x());
+      ss.up4oy->setValue(s->getUps(3)->off.y());
+      }
+

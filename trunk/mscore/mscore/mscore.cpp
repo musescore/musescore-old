@@ -1184,7 +1184,6 @@ void MuseScore::setCurrentScoreView(ScoreView* view)
       // save current synthesizer setting to score
       //
       if (cs) {
-            printf("synti settings -> score\n");
             cs->setSyntiState(synti->state());
             }
 
@@ -1194,8 +1193,6 @@ void MuseScore::setCurrentScoreView(ScoreView* view)
                   //
                   //   initialize synthesizer with new score
                   //    settings
-
-                  printf("score -> synti settings\n");
                   synti->setState(cv->score()->syntiState());
                   }
             cs = cv->score();

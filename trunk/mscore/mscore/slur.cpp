@@ -335,7 +335,7 @@ void SlurSegment::computeBezier()
       if (bow * 2 > dx)       // limit bow for small slurs
             bow = dx * .5;
 
-      qreal d     = dx / 6.0;
+      qreal d     = dx / 5.0;
       qreal x1    = x0 + d;
       qreal x2    = x3 - d;
       qreal dy    = y3 - y0;
@@ -485,7 +485,9 @@ QPointF SlurTie::slurPos(Element* e, System*& s)
       double _spatium = spatium();
 
       ChordRest* cr;
-      if (e->type() == NOTE)
+      bool isTie = e->type() == NOTE;
+
+      if (isTie)
             cr = static_cast<Note*>(e)->chord();
       else
             cr = static_cast<ChordRest*>(e);
@@ -522,18 +524,29 @@ QPointF SlurTie::slurPos(Element* e, System*& s)
       //    horizontal: middle of note head
       //    vertical:   _spatium * .4 above/below note head
       //
-      note = up ? c->upNote() : c->downNote();
-      xo   = note->headWidth() * .5;
-      yo   = note->pos().y() + (note->headHeight() * .5 + _spatium * .4) * (up ? -1.0 : 1.0);
+      if (e->type() == NOTE)
+            note = static_cast<Note*>(e);
+      else
+            note = up ? c->upNote() : c->downNote();
 
+      double hw = note->headWidth();
+      if (isTie && sc->notes().size() > 1) {
+            if (c == sc)
+                  xo = hw * 1.12;
+            else
+                  xo = -hw * .12;
+            yo = note->pos().y() + hw * .3 * (up ? -1 : 1);
+            return cr->canvasPos() + QPointF(xo, yo);
+            }
+      xo   = hw * .5;
+      yo   = note->pos().y() + (note->headHeight() * .5 + _spatium * .4) * (up ? -1.0 : 1.0);
       if (!stem)
             return cr->canvasPos() + QPointF(xo, yo);
-
       bool startIsGrace         = sc->noteType() != NOTE_NORMAL;
       bool mainNoteOfGraceSlur  = startIsGrace && (c == endElement())   && (c->noteType() == NOTE_NORMAL);
 //      bool firstNoteOfGraceSlur = startIsGrace && (c == startElement()) && (c->noteType() != NOTE_NORMAL);
 
-      if (beam && (c->up() == up) && !mainNoteOfGraceSlur) {
+      if ((c == sc) && beam && (c->up() == up) && !mainNoteOfGraceSlur) {
             double sh = stem->height() + _spatium;
             if (up)
                   yo = c->downNote()->pos().y() - sh;
@@ -542,9 +555,9 @@ QPointF SlurTie::slurPos(Element* e, System*& s)
             xo = stem->pos().x();
             }
       else {
-            if (cr == startElement() && c->up() && up)
+            if ((c == sc) && c->up() && up)
                   xo = note->headWidth() + _spatium * .3;
-            else if (cr == endElement() && !c->up() && !up)
+            else if (c == ec && !c->up() && !up)
                   xo = -_spatium * .3;
 
             //
@@ -566,7 +579,7 @@ QPointF SlurTie::slurPos(Element* e, System*& s)
                               yd = -mh;
                         }
 
-                  if (cr == startElement()) {
+                  if (c == sc) {
                         if ((up && (yd < -_spatium)) || (!up && (yd > _spatium)))
                               yo += yd;
                         }
@@ -1015,10 +1028,10 @@ void Tie::layout()
 
       Chord* c1   = startNote()->chord();
       Measure* m1 = c1->measure();
-      System* s1  = m1->system();
+//      System* s1  = m1->system();
       Chord* c2   = endNote()->chord();
       Measure* m2 = c2->measure();
-      System* s2  = m2->system();
+//      System* s2  = m2->system();
 
       if (_slurDirection == AUTO)
             if (m1->mstaff(c1->staffIdx())->hasVoices) {
@@ -1038,8 +1051,15 @@ void Tie::layout()
       QPointF off2(0.0, yo);
 
       QPointF ppos(canvasPos());
-      QPointF p1 = startNote()->canvasPos() + off1;
-      QPointF p2 = endNote()->canvasPos()   + off2;
+//      QPointF p1 = startNote()->canvasPos() + off1;
+//      QPointF p2 = endNote()->canvasPos()   + off2;
+
+      // TODO: cleanup
+
+      System* s1;
+      QPointF p1 = slurPos(startNote(), s1);
+      System* s2;
+      QPointF p2 = slurPos(endNote(), s2);
 
       QList<System*>* systems = score()->systems();
       setPos(0, 0);

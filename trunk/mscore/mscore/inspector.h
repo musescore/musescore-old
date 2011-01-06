@@ -43,6 +43,7 @@
 #include "ui_beam.h"
 #include "ui_tremolo.h"
 #include "ui_spanner.h"
+#include "ui_slursegment.h"
 
 class ShowElementBase;
 class Element;
@@ -88,6 +89,7 @@ class Inspector : public QDialog, public Ui::InspectorBase {
       ShowElementBase* beamView;
       ShowElementBase* tremoloView;
       ShowElementBase* ottavaView;
+      ShowElementBase* slurSegmentView;
 
       bool searchElement(QTreeWidgetItem* pi, Element* el);
       void addSymbol(ElementItem* parent, BSymbol* bs);
@@ -577,6 +579,20 @@ class OttavaView : public ShowElementBase {
 
    public:
       OttavaView();
+      virtual void setElement(Element*);
+      };
+
+//---------------------------------------------------------
+//   SlurSegmentView
+//---------------------------------------------------------
+
+class SlurSegmentView : public ShowElementBase {
+      Q_OBJECT;
+
+      Ui::SlurSegment ss;
+
+   public:
+      SlurSegmentView();
       virtual void setElement(Element*);
       };
 
