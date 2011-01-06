@@ -1,5 +1,7 @@
 06.jan (ws)
       - more slur optimizations
+       (la)
+      - enable time signature deletion in timesig palette
 05.jan (ws)
       - "reset to default" resets stem direction of chords to "auto"
       - tuning slur layout (test file slur1.mscx, slur2.mcx)
