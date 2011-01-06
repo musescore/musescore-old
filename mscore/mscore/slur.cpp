@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2010 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -52,7 +52,6 @@ SlurSegment::SlurSegment(const SlurSegment& b)
       for (int i = 0; i < 4; ++i)
             ups[i] = b.ups[i];
       path         = b.path;
-      bow          = b.bow;
       _system      = b._system;
       }
 
@@ -230,33 +229,9 @@ QPointF SlurSegment::gripAnchor(int grip) const
 
 void SlurSegment::editDrag(int curGrip, const QPointF& delta)
       {
-      double _spatium = spatium();
-
       ups[curGrip].off += (delta / spatium());
-
-      if (curGrip == 0 || curGrip == 3) {
-            //
-            //  compute bezier help points
-            //
-            QPointF p0 = ups[0].p + ups[0].off * _spatium;
-            QPointF p3 = ups[3].p + ups[3].off * _spatium;
-
-            qreal xdelta = p3.x() - p0.x();
-            if (xdelta == 0.0) {
-                  printf("bad slur slope\n");
-                  return;
-                  }
-
-            qreal d    = xdelta / 4.0;
-            qreal x1   = p0.x() + d;
-            qreal x2   = p3.x() - d;
-
-            qreal slope = (p3.y() - p0.y()) / xdelta;
-            qreal y1    = p0.y() + (x1-p0.x()) * slope + bow;
-            qreal y2    = p0.y() + (x2-p0.x()) * slope + bow;
-            ups[1].p    = QPointF(x1, y1);
-            ups[2].p    = QPointF(x2, y2);
-            }
+      if (curGrip == 0 || curGrip == 3)
+            computeBezier();
       updatePath();
       }
 
@@ -334,69 +309,90 @@ void SlurSegment::read(QDomElement e)
       }
 
 //---------------------------------------------------------
-//   layout
+//   computeBezier
+//    compute help points of slur bezier segment
 //---------------------------------------------------------
 
-void SlurSegment::layout(const QPointF& p1, const QPointF& p2, qreal b)
+void SlurSegment::computeBezier()
       {
-      bow      = b;
-      ups[0].p = p1;
-      ups[3].p = p2;
-
+      double _spatium = spatium();
+      qreal bow       = score()->styleS(ST_SlurBow).val() * _spatium;
       //
       //  compute bezier help points
       //
-      double _spatium = spatium();
-      qreal x0 = p1.x() + ups[0].off.x() * _spatium;
-      qreal y0 = p1.y() + ups[0].off.y() * _spatium;
-      qreal x3 = p2.x() + ups[3].off.x() * _spatium;
-      qreal y3 = p2.y() + ups[3].off.y() * _spatium;
+      QPointF p1 = ups[0].p;
+      QPointF p2 = ups[3].p;
+      qreal x0   = p1.x() + ups[0].off.x() * _spatium;
+      qreal y0   = p1.y() + ups[0].off.y() * _spatium;
+      qreal x3   = p2.x() + ups[3].off.x() * _spatium;
+      qreal y3   = p2.y() + ups[3].off.y() * _spatium;
 
-      qreal xdelta = x3 - x0;
-      if (xdelta == 0.0 || (x0 > x3)) {
+      qreal dx = x3 - x0;
+      if (dx == 0.0 || (x0 > x3)) {
             printf("illegal slurSegment\n");
             return;
             }
+      if (bow * 2 > dx)       // limit bow for small slurs
+            bow = dx * .5;
 
-      qreal d  = xdelta / 6.0;
-      qreal x1 = x0 + d;
-      qreal x2 = x3 - d;
-
-      double maxBow = xdelta * .4;
-      if (fabs(bow) > maxBow) {          // limit bow for small slurs
-            if (bow > 0.0)
-                  bow = maxBow;
-            else
-                  bow = -maxBow;
-            }
-      qreal dy = y3 - y0;
-      qreal slope = dy / xdelta;
+      qreal d     = dx / 6.0;
+      qreal x1    = x0 + d;
+      qreal x2    = x3 - d;
+      qreal dy    = y3 - y0;
+      qreal slope = dy / dx;
 
       qreal y1, y2;
-      bool up = slurTie()->isUp();
-
-#if 0
-      if (!up && (y3 > y0)) {
-            y1 = y2 = (y3 + _spatium * .5);
+      bool up   = slurTie()->isUp();
+      qreal ddx = dx * .1 * slope;
+      qreal ddy = bow * (1.0 - qAbs(slope) * 1.5);
+      if (ddy < 0.5 * _spatium)
+            ddy = 0.5 * _spatium;
+      if (up) {
+            if (slope > 0.0) {
+                  y1 = y0 - ddy;
+                  y2 = y3 - bow - dy * slope * .8;
+                  if (y2 < y1)
+                        y2 = y1;
+                  x2 += ddx;
+                  }
+            else {
+                  y2 = y3 - ddy;
+                  y1 = y0 - bow - dy * slope * .8;
+                  if (y1 < y2)
+                        y1 = y2;
+                  x1 -= ddx;
+                  }
             }
-      else if (!up && (y3 < y0)) {
-            y1 = y2 = (y0 + _spatium * .5);
-            }
-      else if (up && (y3 > y0)) {
-            y1 = y2 = (y0 - _spatium * .5);
-            }
-      else if (up && (y3 < y0)) {
-            y1 = y2 = (y3 - _spatium * .5);
-            }
-      else
-#endif
-            {
-            y1 = y0 + (x1-x0) * slope + bow;
-            y2 = y0 + (x2-x0) * slope + bow;
+      else {
+            if (slope < 0.0) {
+                  y1 = y0 + ddy;
+                  y2 = y3 + bow + dy * slope * .8;
+                  if (y2 > y1)
+                        y2 = y1;
+                  x2 += ddx;
+                  }
+            else {
+                  y2 = y3 + ddy;
+                  y1 = y0 + bow + dy * slope * .8;
+                  if (y1 > y2)
+                        y1 = y2;
+                  x1 -= ddx;
+                  }
             }
 
       ups[1].p = QPointF(x1, y1);
       ups[2].p = QPointF(x2, y2);
+      }
+
+//---------------------------------------------------------
+//   layout
+//---------------------------------------------------------
+
+void SlurSegment::layout(const QPointF& p1, const QPointF& p2)
+      {
+      ups[0].p = p1;
+      ups[3].p = p2;
+      computeBezier();
       updatePath();
       }
 
@@ -533,9 +529,9 @@ QPointF SlurTie::slurPos(Element* e, System*& s)
       if (!stem)
             return cr->canvasPos() + QPointF(xo, yo);
 
-      bool startIsGrace         = (sc->type() == CHORD) && (sc->noteType() != NOTE_NORMAL);
+      bool startIsGrace         = sc->noteType() != NOTE_NORMAL;
       bool mainNoteOfGraceSlur  = startIsGrace && (c == endElement())   && (c->noteType() == NOTE_NORMAL);
-      bool firstNoteOfGraceSlur = startIsGrace && (c == startElement()) && (c->noteType() != NOTE_NORMAL);
+//      bool firstNoteOfGraceSlur = startIsGrace && (c == startElement()) && (c->noteType() != NOTE_NORMAL);
 
       if (beam && (c->up() == up) && !mainNoteOfGraceSlur) {
             double sh = stem->height() + _spatium;
@@ -774,9 +770,7 @@ void Slur::layout()
                   s = frontSegment();
                   }
             s->setSpannerSegmentType(SEGMENT_SINGLE);
-            qreal bow = up ? 1.5 * -_spatium : 1.5 * _spatium;
-
-            s->layout(QPointF(0, 0), QPointF(_len, 0), bow);
+            s->layout(QPointF(0, 0), QPointF(_len, 0));
             return;
             }
       switch (_slurDirection) {
@@ -873,10 +867,6 @@ void Slur::layout()
                   }
             }
 
-      qreal bow = point(score()->styleS(ST_SlurBow));
-      if (up)
-            bow = -bow;
-
       for (int i = 0; is != sl->end(); ++i, ++is) {
             System* system  = *is;
             SlurSegment* segment = segmentAt(i);
@@ -889,26 +879,26 @@ void Slur::layout()
             // case 1: one segment
             if (s1 == s2) {
                   segment->setSubtype(SEGMENT_SINGLE);
-                  segment->layout(p1, p2, bow);
+                  segment->layout(p1, p2);
                   }
             // case 2: start segment
             else if (i == 0) {
                   segment->setSubtype(SEGMENT_BEGIN);
                   qreal x = sp.x() + system->bbox().width();
-                  segment->layout(p1, QPointF(x, p1.y()), bow);
+                  segment->layout(p1, QPointF(x, p1.y()));
                   }
             // case 3: middle segment
             else if (i != 0 && system != s2) {
                   segment->setSubtype(SEGMENT_MIDDLE);
                   qreal x1 = firstNoteRestSegmentX(system) - _spatium;
                   qreal x2 = sp.x() + system->bbox().width();
-                  segment->layout(QPointF(x1, sp.y()), QPointF(x2, sp.y()), bow);
+                  segment->layout(QPointF(x1, sp.y()), QPointF(x2, sp.y()));
                   }
             // case 4: end segment
             else {
                   segment->setSubtype(SEGMENT_END);
                   qreal x = firstNoteRestSegmentX(system) - _spatium;
-                  segment->layout(QPointF(x, p2.y()), p2, bow);
+                  segment->layout(QPointF(x, p2.y()), p2);
                   }
             if (system == s2)
                   break;
@@ -1089,8 +1079,6 @@ void Tie::layout()
                   }
             }
 
-      qreal bow = up ? -_spatium : _spatium;
-
       p1 -= canvasPos();
       p2 -= canvasPos();
       for (unsigned int i = 0; i < nsegs; ++i) {
@@ -1101,13 +1089,13 @@ void Tie::layout()
 
             // case 1: one segment
             if (s1 == s2) {
-                  segment->layout(p1, p2, bow);
+                  segment->layout(p1, p2);
                   segment->setSpannerSegmentType(SEGMENT_SINGLE);
                   }
             // case 2: start segment
             else if (i == 0) {
                   qreal x = sp.x() + system->bbox().width();
-                  segment->layout(p1, QPointF(x, p1.y()), bow);
+                  segment->layout(p1, QPointF(x, p1.y()));
                   segment->setSpannerSegmentType(SEGMENT_BEGIN);
                   }
             // case 3: middle segment
@@ -1124,7 +1112,7 @@ void Tie::layout()
                   // qreal x = sp.x();
                   qreal x = firstNoteRestSegmentX(system) - 2 * _spatium - canvasPos().x();
 
-                  segment->layout(QPointF(x, p2.y()), p2, bow);
+                  segment->layout(QPointF(x, p2.y()), p2);
                   segment->setSpannerSegmentType(SEGMENT_END);
                   }
             }

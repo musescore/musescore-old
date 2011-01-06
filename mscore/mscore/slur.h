@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -25,6 +25,7 @@
 #include "spanner.h"
 
 class Note;
+class Chord;
 class System;
 class SlurTie;
 class Score;
@@ -44,9 +45,9 @@ class SlurSegment : public SpannerSegment {
 
       struct UP ups[4];
       QPainterPath path;
-      qreal bow;
       System* _system;
 
+      void computeBezier();
       void updatePath();
 
    public:
@@ -57,7 +58,7 @@ class SlurSegment : public SpannerSegment {
 
       virtual QRectF bbox() const;
 
-      void layout(const QPointF& p1, const QPointF& p2, qreal bow);
+      void layout(const QPointF& p1, const QPointF& p2);
       virtual QPainterPath shape() const;
       virtual void draw(QPainter&, ScoreView*) const;
 
@@ -129,6 +130,7 @@ class SlurTie : public Spanner {
 
 //---------------------------------------------------------
 //   Slur
+//    slurs have Chord's as startElement/endElement
 //---------------------------------------------------------
 
 class Slur : public SlurTie {
@@ -149,6 +151,9 @@ class Slur : public SlurTie {
       int staffIdx2() const   { return _track2 / VOICES; }
       void setTrack2(int val) { _track2 = val; }
 
+      Chord* startChord() const { return (Chord*)startElement(); }
+      Chord* endChord() const   { return (Chord*)endElement();   }
+
       // obsolete:
       void setStart(int /*tick*/, int /*track*/) {}
       void setEnd(int /*tick*/,   int /*track*/) {}
@@ -156,6 +161,7 @@ class Slur : public SlurTie {
 
 //---------------------------------------------------------
 //   Tie
+//    slurs have Note's as startElement/endElement
 //---------------------------------------------------------
 
 class Tie : public SlurTie {
