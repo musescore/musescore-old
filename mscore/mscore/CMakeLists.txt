@@ -90,7 +90,7 @@ QT4_WRAP_UI (ui_headers
       select.ui synthcontrol.ui splitstaff.ui cellproperties.ui beam.ui keyedit.ui
       harmonyedit.ui selectinstr.ui tremolo.ui fretdprops.ui stafftype.ui
       sectionbreak.ui hairpinproperties.ui spanner.ui bend.ui tremolobar.ui
-      textproperties.ui editpitch.ui editstringdata.ui
+      textproperties.ui editpitch.ui editstringdata.ui slursegment.ui
       )
 
 QT4_WRAP_CPP (mocs
