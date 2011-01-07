@@ -60,9 +60,9 @@ set(CMAKE_BUILD_WITH_INSTALL_RPATH ON)
 set(CMAKE_SKIP_RULE_DEPENDENCY TRUE)
 
 # The Mscore version number.
-SET(Mscore_VERSION_MAJOR  "0")
-SET(Mscore_VERSION_MINOR  "9")
-SET(Mscore_VERSION_PATCH  "6.3")
+SET(Mscore_VERSION_MAJOR  "1")
+SET(Mscore_VERSION_MINOR  "0")
+SET(Mscore_VERSION_PATCH  "0")
 
 SET(Mscore_VERSION       "${Mscore_VERSION_MAJOR}.${Mscore_VERSION_MINOR}")
 SET(Mscore_VERSION_FULL  "${Mscore_VERSION}.${Mscore_VERSION_PATCH}")
@@ -285,7 +285,7 @@ include (InstallRequiredSystemLibraries)
       SET(CPACK_NSIS_DISPLAY_NAME "MuseScore ${Mscore_VERSION_MAJOR}.${Mscore_VERSION_MINOR}.${Mscore_VERSION_PATCH} MuseScore score typesetter")
       SET(CPACK_NSIS_HELP_LINK "http://www.musescore.org/")
       SET(CPACK_NSIS_URL_INFO_ABOUT "http://www.musescore.org/")
-      SET(CPACK_NSIS_CONTACT "ws@seh.de")
+      SET(CPACK_NSIS_CONTACT "ws@wschweer.de")
       SET(CPACK_NSIS_MODIFY_PATH OFF)
       SET(CPACK_STRIP_FILES "mscore.exe")
 
@@ -328,7 +328,7 @@ include (InstallRequiredSystemLibraries)
   set(CPACK_DEBIAN_PACKAGE_RECOMMENDS   "")
   set(CPACK_DEBIAN_PACKAGE_SUGGESTS     "")
 
-  set(CPACK_PACKAGE_CONTACT       "ws@seh.de")
+  set(CPACK_PACKAGE_CONTACT       "ws@wschweer.de")
 
 if (MINGW)
   set(CPACK_GENERATOR             "NSIS")
