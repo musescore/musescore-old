@@ -1114,6 +1114,7 @@ static void usage()
         "   -F        use factory settings\n"
         "   -i        load icons from INSTALLPATH/icons\n"
         "   -e        enable experimental features\n"
+        "   -c dir    override config/settings directory\n"
         );
       exit(-1);
       }
@@ -1851,6 +1852,11 @@ int main(int argc, char* av[])
       QtSingleApplication* app = new QtSingleApplication("mscore1", argc, av);
 #endif
 
+      QCoreApplication::setOrganizationName("MuseScore");
+      QCoreApplication::setOrganizationDomain("musescore.org");
+      QCoreApplication::setApplicationName("MuseScore1");
+      QSettings::setDefaultFormat(QSettings::IniFormat);
+
       QStringList argv =  QCoreApplication::arguments();
       argv.removeFirst();
 
@@ -1919,6 +1925,13 @@ int main(int argc, char* av[])
                   case 'e':
                         enableExperimental = true;
                         break;
+                  case 'c':
+                        {
+                        QString path = argv.takeAt(i + 1);
+                        QSettings::setPath(QSettings::IniFormat, QSettings::UserScope, path);
+                        QSettings::setPath(QSettings::IniFormat, QSettings::SystemScope, path);
+                        }
+                        break;
                   default:
                         usage();
                   }
@@ -1927,12 +1940,6 @@ int main(int argc, char* av[])
       mscoreGlobalShare = getSharePath();
       iconPath = externalIcons ? mscoreGlobalShare + QString("/icons/") :  QString(":/data/");
       iconGroup = "icons-dark/";
-
-      QSettings::setDefaultFormat(QSettings::IniFormat);
-
-      QCoreApplication::setOrganizationName("MuseScore");
-      QCoreApplication::setOrganizationDomain("musescore.org");
-      QCoreApplication::setApplicationName("MuseScore1");
 
       if (!converterMode) {
             if (!argv.isEmpty()) {
