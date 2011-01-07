@@ -1,4 +1,5 @@
 07.jan (ws)
+      - new command line option to override config path (#6599)
       - implement dynamics for linked parts
       - new symbols for grace note palett
       - fix grace note entry
