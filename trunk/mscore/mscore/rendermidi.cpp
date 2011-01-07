@@ -54,27 +54,6 @@
 #include "segment.h"
 
 //---------------------------------------------------------
-//   searchVolta
-//    return volta at tick
-//---------------------------------------------------------
-
-Volta* Score::searchVolta(int tick) const
-      {
-      Measure* fm = firstMeasure();
-      for (Segment* s = fm->first(SegChordRest); s; s = s->next1(SegChordRest)) {
-            foreach(Spanner* e, s->spannerFor()) {
-                  if (e->type() != VOLTA)
-                        continue;
-                  int tick1 = static_cast<Segment*>(e->startElement())->tick();
-                  int tick2 = static_cast<Segment*>(e->endElement())->tick();
-                  if (tick >= tick1 && tick < tick2)
-                        return static_cast<Volta*>(e);
-                  }
-            }
-      return 0;
-      }
-
-//---------------------------------------------------------
 //   updateChannel
 //---------------------------------------------------------
 
@@ -388,28 +367,6 @@ static void collectMeasureEvents(EventMap* events, Measure* m, Part* part, int t
                         }
                   }
             }
-      }
-
-//---------------------------------------------------------
-//   searchLabel
-//---------------------------------------------------------
-
-Measure* Score::searchLabel(const QString& s, Measure* start)
-      {
-      if (s == "start")
-            return firstMeasure();
-      if (start == 0)
-            start = firstMeasure();
-      for (Measure* m = start; m; m = m->nextMeasure()) {
-            foreach(const Element* e, *m->el()) {
-                  if (e->type() == MARKER) {
-                        const Marker* marker = static_cast<const Marker*>(e);
-                        if (marker->label() == s)
-                              return m;
-                        }
-                  }
-            }
-      return 0;
       }
 
 //---------------------------------------------------------

@@ -715,7 +715,7 @@ class Score : public QObject {
       UndoStack* undo() const;
 
       void endUndoRedo();
-      Measure* searchLabel(const QString& s, Measure* start = 0);
+      Measure* searchLabel(const QString& s);
       RepeatList* repeatList() const;
       double utick2utime(int tick) const;
       int utime2utick(double utime);
