@@ -1,3 +1,7 @@
+07.jan (ws)
+      - implement dynamics for linked parts
+      - new symbols for grace note palett
+      - fix grace note entry
 06.jan (ws)
       - add SlurSegment into "inspector"
       - more slur optimizations

@@ -159,32 +159,32 @@ void MuseScore::populatePalette()
 
       Palette* notePalette = new Palette;
       notePalette->setName(tr("Grace Notes"));
-      notePalette->setGrid(27, 40);
+      notePalette->setGrid(32, 40);
       notePalette->setDrawGrid(true);
 
       Icon* ik = new Icon(gscore);
       ik->setSubtype(ICON_ACCIACCATURA);
-      ik->setAction(getAction("pad-acciaccatura"));
+      ik->setAction(getAction("acciaccatura"));
       notePalette->append(ik, tr("Acciaccatura"));
 
       ik = new Icon(gscore);
       ik->setSubtype(ICON_APPOGGIATURA);
-      ik->setAction(getAction("pad-appoggiatura"));
+      ik->setAction(getAction("appoggiatura"));
       notePalette->append(ik, tr("Appoggiatura"));
 
       ik = new Icon(gscore);
       ik->setSubtype(ICON_GRACE4);
-      ik->setAction(getAction("pad-grace4"));
+      ik->setAction(getAction("grace4"));
       notePalette->append(ik, tr("Quarter grace note"));
 
       ik = new Icon(gscore);
       ik->setSubtype(ICON_GRACE16);
-      ik->setAction(getAction("pad-grace16"));
+      ik->setAction(getAction("grace16"));
       notePalette->append(ik, tr("16th grace note"));
 
       ik = new Icon(gscore);
       ik->setSubtype(ICON_GRACE32);
-      ik->setAction(getAction("pad-grace32"));
+      ik->setAction(getAction("grace32"));
       notePalette->append(ik, tr("32nd grace note"));
 
       paletteBox->addPalette(notePalette);

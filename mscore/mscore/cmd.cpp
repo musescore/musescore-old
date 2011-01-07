@@ -526,57 +526,26 @@ void Score::cmdAddInterval(int val, const QList<Note*>& nl)
 
 void Score::setGraceNote(Chord* ch, int pitch, NoteType type, int len)
       {
-      Staff* ostaff = ch->staff();
-      QList<Staff*> staffList;
-      LinkedStaves* linkedStaves = ostaff->linkedStaves();
-      if (linkedStaves)
-            staffList = linkedStaves->staves();
-      else
-            staffList.append(ostaff);
+      Measure* measure = ch->measure();
+      Note* note       = new Note(this);
+      note->setPitch(pitch);
 
-      int tick = ch->segment()->tick();
+      Chord* chord = new Chord(this);
+      chord->setTrack(ch->track());
+      chord->add(note);
 
-      foreach(Staff* staff, staffList) {
-            Score* score     = staff->score();
-            Measure* measure = score->tick2measure(tick);
-            Segment* seg     = measure->findSegment(SegChordRest, tick);
-            int track        = score->staffIdx(staff) * VOICES + ch->voice();
+      Duration d;
+      d.setVal(len);
+      chord->setDurationType(d);
+      chord->setDuration(d.fraction());
+      chord->setStemDirection(UP);
+      chord->setNoteType(type);
+      chord->setMag(ch->staff()->mag() * styleD(ST_graceNoteMag));
 
-            SegmentType st = SegGrace;
-            Segment* s     = seg->prev();
+      undoAddCR(chord, measure, ch->segment()->tick());
 
-            while (s && s->subtype() == st && s->element(track))
-                  s = s->prev();
-            if (s && (s->subtype() == st) && (!s->element(track)))
-                  seg = s;
-            else {
-                  seg = new Segment(measure, st, tick);
-                  undo()->push(new AddElement(seg));
-                  }
-            double mag = staff->mag() * styleD(ST_graceNoteMag);
-
-            Note* note = new Note(score);
-            note->setMag(mag);
-            note->setPitch(pitch);
-
-            Chord* chord = new Chord(score);
-            chord->setTrack(track);
-            chord->add(note);
-
-            Duration d;
-            d.setVal(len);
-            chord->setDurationType(d);
-            chord->setDuration(d.fraction());
-            chord->setStemDirection(UP);
-            chord->setNoteType(type);
-            chord->setParent(seg);
-            chord->setMag(mag);
-
-            undoAddElement(chord);
-            note->setTpcFromPitch();      // tick must be known
-            if (staff == ostaff)
-                  select(note, SELECT_SINGLE, 0);
-            }
+      note->setTpcFromPitch();      // tick must be known
+      select(note, SELECT_SINGLE, 0);
       }
 
 //---------------------------------------------------------

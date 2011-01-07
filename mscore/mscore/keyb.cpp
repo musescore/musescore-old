@@ -280,8 +280,8 @@ static void enableInputToolbar(bool val)
             "note-breve", "pad-note-1", "pad-note-2", "pad-note-4",
             "pad-note-8", "pad-note-16", "pad-note-32", "pad-note-64",
             "voice-1", "voice-2", "voice-3", "voice-4",
-            "pad-acciaccatura", "pad-appoggiatura", "pad-grace4", "pad-grace16",
-            "pad-grace32", "beam-start", "beam-mid", "no-beam", "beam32",
+            "acciaccatura", "appoggiatura", "grace4", "grace16",
+            "grace32", "beam-start", "beam-mid", "no-beam", "beam32",
             "auto-beam"
             };
       for (unsigned i = 0; i < sizeof(actionNames)/sizeof(*actionNames); ++i) {
@@ -382,11 +382,11 @@ void Score::updateInputState()
       getAction("voice-3")->setChecked(voice == 2);
       getAction("voice-4")->setChecked(voice == 3);
 
-      getAction("pad-acciaccatura")->setChecked(_is.noteType == NOTE_ACCIACCATURA);
-      getAction("pad-appoggiatura")->setChecked(_is.noteType == NOTE_APPOGGIATURA);
-      getAction("pad-grace4")->setChecked(_is.noteType  == NOTE_GRACE4);
-      getAction("pad-grace16")->setChecked(_is.noteType == NOTE_GRACE16);
-      getAction("pad-grace32")->setChecked(_is.noteType == NOTE_GRACE32);
+      getAction("acciaccatura")->setChecked(_is.noteType == NOTE_ACCIACCATURA);
+      getAction("appoggiatura")->setChecked(_is.noteType == NOTE_APPOGGIATURA);
+      getAction("grace4")->setChecked(_is.noteType  == NOTE_GRACE4);
+      getAction("grace16")->setChecked(_is.noteType == NOTE_GRACE16);
+      getAction("grace32")->setChecked(_is.noteType == NOTE_GRACE32);
 
       getAction("beam-start")->setChecked(_is.beamMode == BEAM_BEGIN);
       getAction("beam-mid")->setChecked(_is.beamMode   == BEAM_MID);

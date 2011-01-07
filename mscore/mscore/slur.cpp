@@ -36,6 +36,7 @@
 #include "slurproperties.h"
 #include "undo.h"
 #include "stem.h"
+#include "beam.h"
 
 //---------------------------------------------------------
 //   SlurSegment
@@ -546,7 +547,7 @@ QPointF SlurTie::slurPos(Element* e, System*& s)
       bool mainNoteOfGraceSlur  = startIsGrace && (c == endElement())   && (c->noteType() == NOTE_NORMAL);
 //      bool firstNoteOfGraceSlur = startIsGrace && (c == startElement()) && (c->noteType() != NOTE_NORMAL);
 
-      if ((c == sc) && beam && (c->up() == up) && !mainNoteOfGraceSlur) {
+      if ((c == sc) && beam && (beam->elements().back() != sc) && (c->up() == up) && !mainNoteOfGraceSlur) {
             double sh = stem->height() + _spatium;
             if (up)
                   yo = c->downNote()->pos().y() - sh;

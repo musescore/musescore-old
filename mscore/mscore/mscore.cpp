@@ -580,7 +580,7 @@ MuseScore::MuseScore()
             }
 
       sl1.clear();
-      sl1 << "pad-appoggiatura" << "pad-acciaccatura" << "pad-grace4" <<"pad-grace16" << "pad-grace32"
+      sl1 << "appoggiatura" << "acciaccatura" << "grace4" <<"grace16" << "grace32"
           << "beam-start" << "beam-mid" << "no-beam" << "beam32" << "auto-beam"
           << "show-invisible" << "show-frames";
 
