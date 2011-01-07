@@ -1,5 +1,6 @@
 7.jan (la)
       - fix #7303: Collision between rest and accidentals
+      - fix #6599: Command line option to change config/settings directory
 6.jan (la)
       - enable time signature deletion in timesig palette
 5.jan (lv)
