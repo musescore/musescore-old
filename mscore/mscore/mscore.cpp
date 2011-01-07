@@ -1927,9 +1927,14 @@ int main(int argc, char* av[])
                         break;
                   case 'c':
                         {
+                        if (argv.size() - i < 2)
+                              usage();
                         QString path = argv.takeAt(i + 1);
-                        QSettings::setPath(QSettings::IniFormat, QSettings::UserScope, path);
-                        QSettings::setPath(QSettings::IniFormat, QSettings::SystemScope, path);
+                        QDir dir;
+                        if (dir.exists(path)) {
+                              QSettings::setPath(QSettings::IniFormat, QSettings::UserScope, path);
+                              QSettings::setPath(QSettings::IniFormat, QSettings::SystemScope, path);
+                              }
                         }
                         break;
                   default:
