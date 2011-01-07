@@ -1347,7 +1347,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
-         "pad-acciaccatura",
+         "acciaccatura",
          QT_TRANSLATE_NOOP("action","acciaccatura"),
          Qt::Key_Slash,
          Qt::WindowShortcut,
@@ -1357,7 +1357,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
-         "pad-appoggiatura",
+         "appoggiatura",
          QT_TRANSLATE_NOOP("action","appoggiatura"),
          0,
          Qt::WindowShortcut,
@@ -1368,7 +1368,7 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
 	 /* no stroke: 4th*/
-        "pad-grace4",
+        "grace4",
         QT_TRANSLATE_NOOP("action","grace-4"),
         0,
         Qt::WindowShortcut,
@@ -1379,7 +1379,7 @@ Shortcut MuseScore::sc[] = {
      Shortcut(
         STATE_NORMAL | STATE_NOTE_ENTRY,
       /* no stroke: 16th*/
-        "pad-grace16",
+        "grace16",
         QT_TRANSLATE_NOOP("action","grace-16"),
         0,
         Qt::WindowShortcut,
@@ -1390,7 +1390,7 @@ Shortcut MuseScore::sc[] = {
      Shortcut(
         STATE_NORMAL | STATE_NOTE_ENTRY,
       /* no stroke: 32th*/
-        "pad-grace32",
+        "grace32",
         QT_TRANSLATE_NOOP("action","grace-32"),
         0,
         Qt::WindowShortcut,

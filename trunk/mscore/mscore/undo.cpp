@@ -885,6 +885,7 @@ void Score::undoAddElement(Element* element)
          && element->type() != TRILL
          && element->type() != TEXTLINE
          && element->type() != VOLTA
+         && element->type() != DYNAMIC
          && element->type() != TUPLET)
             ) {
             undo()->push(new AddElement(element));
@@ -920,6 +921,18 @@ void Score::undoAddElement(Element* element)
                   ChordRest* ncr   = static_cast<ChordRest*>(seg->element(ntrack));
                   na->setParent(ncr);
                   undo()->push(new AddElement(na));
+                  }
+            else if (element->type() == DYNAMIC) {
+                  Dynamic* d       = static_cast<Dynamic*>(element);
+                  Segment* segment = d->segment();
+                  int tick         = segment->tick();
+                  Measure* m       = score->tick2measure(tick);
+                  Segment* seg     = m->findSegment(SegChordRest, tick);
+                  Dynamic* nd      = static_cast<Dynamic*>(ne);
+                  int ntrack       = staffIdx * VOICES + d->voice();
+                  nd->setTrack(ntrack);
+                  nd->setParent(seg);
+                  undo()->push(new AddElement(nd));
                   }
             else if (element->type() == SLUR) {
                   Slur* slur     = static_cast<Slur*>(element);
