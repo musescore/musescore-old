@@ -1083,6 +1083,7 @@ static void usage()
         "   -p name   execute named plugin\n"
         "   -F        use factory settings\n"
         "   -e        enable experimental features\n"
+        "   -c dir    override config/settings directory\n"
         );
       exit(-1);
       }
@@ -1711,6 +1712,11 @@ int main(int argc, char* av[])
       QtSingleApplication* app = new QtSingleApplication("mscore", argc, av);
 #endif
 
+      QCoreApplication::setOrganizationName("MusE");
+      QCoreApplication::setOrganizationDomain("muse.org");
+      QCoreApplication::setApplicationName("MuseScore");
+      QSettings::setDefaultFormat(QSettings::IniFormat);
+
       QStringList argv =  QCoreApplication::arguments();
       argv.removeFirst();
 
@@ -1780,20 +1786,28 @@ int main(int argc, char* av[])
                         enableExperimental = true;
                         enableInspector = true;
                         break;
+                   case 'c':
+                        {
+                        if (argv.size() - i < 2)
+                              usage();
+                        QString path = argv.takeAt(i + 1);
+                        QDir dir;
+                        if (dir.exists(path)) {
+                              QSettings::setPath(QSettings::IniFormat, QSettings::UserScope, path);
+                              QSettings::setPath(QSettings::IniFormat, QSettings::SystemScope, path);
+                              }
+                        }
+                        break;
                   default:
                         usage();
                   }
             argv.removeAt(i);
             }
 
-      QSettings::setDefaultFormat(QSettings::IniFormat);
+      
 
       for (int i = 0; i < 128; ++i)
             midiActionMap[i] = 0;
-
-      QCoreApplication::setOrganizationName("MusE");
-      QCoreApplication::setOrganizationDomain("muse.org");
-      QCoreApplication::setApplicationName("MuseScore");
 
       if (!converterMode) {
             if (!argv.isEmpty()) {
