@@ -115,7 +115,6 @@ class Jump : public Text {
       QString _playUntil;
       QString _continueAt;
 
-
    public:
       Jump(Score*);
 

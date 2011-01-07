@@ -24,6 +24,49 @@
 #include "repeat.h"
 #include "al/tempo.h"
 #include "volta.h"
+#include "segment.h"
+
+//---------------------------------------------------------
+//   searchVolta
+//    return volta at tick
+//---------------------------------------------------------
+
+Volta* Score::searchVolta(int tick) const
+      {
+      Measure* fm = firstMeasure();
+      for (Segment* s = fm->first(SegChordRest); s; s = s->next1(SegChordRest)) {
+            foreach(Spanner* e, s->spannerFor()) {
+                  if (e->type() != VOLTA)
+                        continue;
+                  int tick1 = static_cast<Segment*>(e->startElement())->tick();
+                  int tick2 = static_cast<Segment*>(e->endElement())->tick();
+
+                  if (tick >= tick1 && tick < tick2)
+                        return static_cast<Volta*>(e);
+                  }
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
+//   searchLabel
+//---------------------------------------------------------
+
+Measure* Score::searchLabel(const QString& s)
+      {
+      if (s == "start")
+            return firstMeasure();
+      for (Segment* segment = firstMeasure()->first(); segment; segment = segment->next1()) {
+            foreach(const Element* e, segment->annotations()) {
+                  if (e->type() == MARKER) {
+                        const Marker* marker = static_cast<const Marker*>(e);
+                        if (marker->label() == s)
+                              return segment->measure();
+                        }
+                  }
+            }
+      return 0;
+      }
 
 //---------------------------------------------------------
 //   RepeatLoop
@@ -198,196 +241,106 @@ void RepeatList::unwind()
             delete s;
       clear();
 
-      QStack<RepeatLoop> rstack;
-      int tickOffset = 0;
-
-      //
-      // check for necessary implicit repeat start
-      //
-      int loopCount = 0;
-      for (Measure* m = _score->firstMeasure(); m; m = m->nextMeasure()) {
-            if (m->repeatFlags() & RepeatStart)
-                  ++ loopCount;
-            if (m->repeatFlags() & RepeatEnd)
-                  --loopCount;
-            }
-      bool implicitRepeat = loopCount == -1;
-      if (implicitRepeat)
-            rstack.push(RepeatLoop(_score->firstMeasure()));
-      else if (loopCount != 0)
-            printf("unbalanced repeat start-end\n");
-
-      RepeatSegment* rs = new RepeatSegment;
-      rs->tick       = 0;
-      rs->utick      = 0;
-      rs->utime      = 0.0;
-      rs->timeOffset = 0.0;
+      rs                 = new RepeatSegment;
+      rs->tick           = 0;
+      Measure* endRepeat = 0;
+      Measure* continueAt = 0;
+      int loop           = 0;
+      int repeatCount    = 0;
+      bool isGoto        = false;
 
       for (Measure* m = _score->firstMeasure(); m;) {
             int flags = m->repeatFlags();
-            //
-            //  check for repeat start
-            //
-            if ((flags & RepeatStart) && (rstack.isEmpty() || rstack.top().m != m)) {
-// printf("startRepeat stack empty %d --- %p != %p\n", rstack.isEmpty(),
-//                  rstack.isEmpty() ? 0 : rstack.top().m, m);
-                  rstack.push(RepeatLoop(m));
-                  }
 
-            //
-            // Voltas outside of loops are ignored.
-            // Voltas on first measure of a loop are also ignored. Its
-            // assumed that they belong to a previous loop.
-            //
-            if (!rstack.isEmpty() && !(flags & RepeatStart)) {
+            if (endRepeat) {
                   Volta* volta = _score->searchVolta(m->tick());
-                  int n = rstack.top().count + 1;
-                  if (volta && (rstack.size() > 1 || !volta->hasEnding(n))
-                     && (rstack.top().type == RepeatLoop::LOOP_REPEAT))
-                        {
-                        tickOffset -= m->ticks();   // skip this measure
-                        rs->len = m->tick() - rs->tick;
-                        if (rs->len) {
+                  if (volta && !volta->hasEnding(loop+1)) {
+                        // skip measure
+                        if (rs->tick < m->tick()) {
+                              rs->len = m->tick() - rs->tick;
                               append(rs);
                               rs = new RepeatSegment;
                               }
-                        rs->tick  = m->tick() + m->ticks();
-                        rs->utick = rs->tick + tickOffset;
+                        rs->tick = m->tick() + m->ticks();
                         }
                   }
-
-            if (rstack.isEmpty()) {
+            else {
                   // Jumps are only accepted outside of other repeats
                   if (flags & RepeatJump) {
                         Jump* s = 0;
-                        foreach(Element* e, *m->el()) {
-                              if (e->type() == JUMP) {
-                                    s = static_cast<Jump*>(e);
-                                    break;
+                        for (Segment* seg = m->first(); seg; seg = seg->next()) {
+                              foreach(Element* e, seg->annotations()) {
+                                    if (e->type() == JUMP) {
+                                          s = static_cast<Jump*>(e);
+                                          break;
+                                          }
                                     }
+                              if (s)
+                                    break;
                               }
                         if (s) {
-                              const QString& jumpTo = s->jumpTo();
-                              Measure* nmb = _score->searchLabel(jumpTo);
-                              if (nmb) {
-                                    rstack.push(RepeatLoop(s->playUntil(), s->continueAt()));
-                                    tickOffset += m->tick() + m->ticks() - nmb->tick();
+                              Measure* nm = _score->searchLabel(s->jumpTo());
+                              endRepeat   = _score->searchLabel(s->playUntil());
+                              continueAt  = _score->searchLabel(s->continueAt());
+                              isGoto      = true;
 
+                              if (nm) {
                                     rs->len = m->tick() + m->ticks() - rs->tick;
                                     append(rs);
                                     rs = new RepeatSegment;
-                                    rs->tick  = nmb->tick();
-                                    rs->utick = rs->tick + tickOffset;
-
-                                    m = nmb;
-                                    if (implicitRepeat && m == _score->firstMeasure()) {
-                                          rstack.push(RepeatLoop(m));
-                                          }
+                                    rs->tick  = nm->tick();
+                                    m = nm;
                                     continue;
                                     }
-                              else
-                                    printf("JUMP: label <%s> not found\n",
-                                       qPrintable(jumpTo));
                               }
                         else
                               printf("Jump not found\n");
                         }
                   }
-            else if (rstack.top().type == RepeatLoop::LOOP_REPEAT) {
-                  if (flags & RepeatEnd) {
-                        //
-                        // increment repeat count
-                        //
-                        // CHECK for nested repeats:
-                        //    repeat a repeat inside a repeat only on first
-                        //    pass of outer reapeat (?!?)
-                        //
-                        bool nestedRepeat = false;
-                        int n = rstack.size();
-                        if (n > 1 && rstack[n-2].type == RepeatLoop::LOOP_REPEAT) {
-                              if (rstack[n-2].count)
-                                    nestedRepeat = true;
-                              }
-                        //
-                        // do not repeat in a jump (d.c. al fine etc.)
-                        //
-                        if (n > 1 && rstack[n-2].type == RepeatLoop::LOOP_JUMP) {
-                              nestedRepeat = true;
-                              }
-                        if (!nestedRepeat && (++rstack.top().count < m->repeatCount())) {
-                              //
-                              // goto start of loop, fix tickOffset
-                              //
 
-                              Measure* nm = rstack.top().m;
-
-                              rs->len = m->tick() + m->ticks() - rs->tick;
+            if (isGoto && (endRepeat == m)) {
+                  if (continueAt == 0) {
+                        rs->len = m->tick() + m->ticks() - rs->tick;
+                        if (rs->len)
                               append(rs);
-
-                              tickOffset += m->tick() + m->ticks() - nm->tick();
-
-                              rs = new RepeatSegment;
-                              rs->tick  = nm->tick();
-                              rs->utick = nm->tick() + tickOffset;
-
-                              m = nm;
-                              continue;
-                              }
-                        if (!rstack.isEmpty()) {
-                              rstack.pop();     // end this loop
-                              if (flags & RepeatStart)      // if start/end repeat in one measure
-                                    m = m->nextMeasure();
-                              }
                         else
-                              printf("repeatStack:: cannot pop\n");
-                        continue;
+                              delete rs;
+                        update();
+                        return;
                         }
+                  rs->len = m->tick() + m->ticks() - rs->tick;
+                  append(rs);
+                  rs       = new RepeatSegment;
+                  rs->tick = continueAt->tick();
+                  m        = continueAt;
+                  isGoto   = false;
+                  continue;
                   }
-            if (!rstack.isEmpty() && (rstack.top().type == RepeatLoop::LOOP_JUMP)) {
-                  Measure* nm = _score->searchLabel(rstack.top().stop);
-                  if (nm == 0)
-                        printf("LOOP_JUMP: stop label <%s> not found\n", qPrintable(rstack.top().stop));
-                  if (nm == m) {
-                        if (m->nextMeasure() == 0)
-                              break;
-                        Measure* nmb = _score->searchLabel(rstack.top().cont, nm->nextMeasure());
-                        if (nmb) {
-                              tickOffset += m->tick() + m->ticks() - nmb->tick();
-                              rs->len = m->tick() + m->ticks() - rs->tick;
-                              append(rs);
-                              rs = new RepeatSegment;
-                              rs->tick  = nmb->tick();
-                              rs->utick = rs->tick + tickOffset;
+            else if (flags & RepeatEnd) {
+                  if (endRepeat == m) {
+                        ++loop;
+                        if (loop >= repeatCount) {
+                              endRepeat = 0;
+                              loop = 0;
                               }
-                        else if (!rstack.top().cont.isEmpty())
-                              printf("Cont label <%s> not found\n", qPrintable(rstack.top().cont));
                         else {
-                              rs->len = m->tick() + m->ticks() - rs->tick;
-                              append(rs);
-                              rs = 0;
+                              m = jumpToStartRepeat(m);
                               }
-
-                        m = nmb;
-                        if (!rstack.isEmpty())
-                              rstack.pop();     // end this loop
-                        else
-                              printf("repeatStack:: cannot pop\n");
+                        }
+                  else {
+                        endRepeat   = m;
+                        repeatCount = m->repeatCount();
+                        loop        = 1;
+                        m = jumpToStartRepeat(m);
                         continue;
                         }
                   }
             m = m->nextMeasure();
             }
-      if (!rstack.isEmpty()) {
-            if (rstack.top().type == RepeatLoop::LOOP_JUMP
-               && rstack.top().stop == "end")
-                  ;
-            else
-                  printf("repeat stack not empty!\n");
-            }
 
-      Measure* lm = _score->lastMeasure();
       if (rs) {
-            rs->len = lm->tick() - rs->tick + lm->ticks();
+            Measure* lm = _score->lastMeasure();
+            rs->len     = lm->tick() - rs->tick + lm->ticks();
             if (rs->len)
                   append(rs);
             else
@@ -395,4 +348,24 @@ void RepeatList::unwind()
             }
       update();
       }
+
+//---------------------------------------------------------
+//   jumpToStartRepeat
+//---------------------------------------------------------
+
+Measure* RepeatList::jumpToStartRepeat(Measure* m)
+      {
+      Measure* nm;
+      for (nm = m; nm && nm != _score->firstMeasure(); nm = nm->prevMeasure()) {
+            if (nm->repeatFlags() & RepeatStart)
+                  break;
+            }
+      rs->len = m->tick() + m->ticks() - rs->tick;
+      append(rs);
+
+      rs        = new RepeatSegment;
+      rs->tick  = nm->tick();
+      return nm;
+      }
+
 

@@ -22,6 +22,7 @@
 #define __REPEATLIST_H__
 
 class Score;
+class Measure;
 
 //---------------------------------------------------------
 //   RepeatSegment
@@ -46,6 +47,10 @@ class RepeatList: public QList<RepeatSegment*>
       {
       Score* _score;
       mutable unsigned idx1, idx2;   // cached values
+
+      RepeatSegment* rs;            // tmp value during unwind()
+
+      Measure* jumpToStartRepeat(Measure*);
 
    public:
       RepeatList(Score* s);

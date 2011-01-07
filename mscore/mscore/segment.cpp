@@ -385,12 +385,16 @@ void Segment::add(Element* el)
             case TEMPO_TEXT:
             case STAFF_TEXT:
             case MARKER:
-            case JUMP:
             case IMAGE:
             case TEXT:
             case TAB_DURATION_SYMBOL:
                   _annotations.append(el);
                   break;
+            case JUMP:
+                  measure()->setRepeatFlags(measure()->repeatFlags() | RepeatJump);
+                  _annotations.append(el);
+                  break;
+
             case STAFF_STATE:
                   if (el->subtype() == STAFF_STATE_INSTRUMENT) {
                         StaffState* ss = static_cast<StaffState*>(el);
@@ -494,12 +498,17 @@ void Segment::remove(Element* el)
             case TEMPO_TEXT:
             case STAFF_TEXT:
             case MARKER:
-            case JUMP:
             case IMAGE:
             case TEXT:
             case TAB_DURATION_SYMBOL:
                   _annotations.removeOne(el);
                   break;
+
+            case JUMP:
+                  measure()->setRepeatFlags(measure()->repeatFlags() & ~RepeatJump);
+                  _annotations.removeOne(el);
+                  break;
+
             case STAFF_STATE:
                   if (el->subtype() == STAFF_STATE_INSTRUMENT) {
                         Part* part = el->staff()->part();
