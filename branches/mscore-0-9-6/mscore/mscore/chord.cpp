@@ -1306,8 +1306,10 @@ void Chord::layout()
                   _dotPosX = xx;
 
             Accidental* accidental = note->accidental();
-            if (accidental)
-                  x = (accidental->x() + accidental->bbox().x()) * mag();
+            if (accidental){
+                  x = accidental->x() + note->x();
+                  }
+            
             if (x < lx)
                   lx = x;
             }
