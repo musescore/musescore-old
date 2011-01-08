@@ -1,5 +1,6 @@
 08.jan (lv)
-      - fix #8474: musicxml import: Audiveris ".0" not handled in alter and in backup and forward duration
+      - fix #8499: musicxml import/export: print-object="no" fixes
+      - fix #8475: musicxml import: Audiveris ".0" not handled in alter and in backup and forward duration
       - fix #8429: musicxml import: voices mixed up
        (mi)
       - Cosmetic changes to Staff Type Properties Dlg Box
