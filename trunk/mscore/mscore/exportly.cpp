@@ -3542,7 +3542,7 @@ void ExportLy::findLyrics()
 			}
 
 		      QString lyriks = (lix)->getText();
-          
+
           //  escape '"' character
           if (lyriks.contains('"'))
                  lyriks = "\"" + lyriks.replace("\"","\\\"") + "\"";

@@ -788,15 +788,31 @@ printf("putNote at tick %d staff %d line %d key %d clef %d\n",
 
       bool addToChord = false;
 
-      //
-      // TODO: if _is.duration != cr->duration then
-      //       add a note with cr->duration tied to another note which adds
-      //       to a total duration of _is.duration
-      //
-      if (!replace && (cr->durationType() == _is.duration()) && (cr->type() == CHORD) && !_is.rest) {
-
+      Duration d = cr->durationType();
+      Note* note = 0;
+      if (cr->type() == CHORD) {
+            Fraction f = cr->duration();
+            note = static_cast<Chord*>(cr)->upNote();
+            if (note) {
+                  Note* note2 = note;
+                  while (note2->tieFor()) {
+                        note2 = note2->tieFor()->endNote();
+                        f += note2->chord()->duration();
+                        }
+                  Duration dd(f);
+                  if (dd.isValid())
+                        d = dd;
+                  }
+            else
+                  printf("note not found: %d!\n", nval.pitch);
+            }
+      if (!replace
+         && (d == _is.duration())
+         && (cr->type() == CHORD)
+         && !_is.rest)
+            {
             Chord* chord = static_cast<Chord*>(cr);
-            Note* note = chord->findNote(nval.pitch);
+            note = chord->findNote(nval.pitch);
             if (note) {
                   // remove note from chord
                   if (chord->notes().size() > 1)
