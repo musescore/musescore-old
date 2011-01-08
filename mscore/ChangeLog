@@ -1,3 +1,6 @@
+08.jan (mi)
+      - In non-stemless tablature staves, stems, hooks and beams moved to a running
+        strip above the staff.
 07.jan (ws)
       - fix repeats
       - new command line option to override config path (#6599)

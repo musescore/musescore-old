@@ -506,7 +506,7 @@ void Note::draw(QPainter& p, ScoreView* v) const
                           ( tab->useNumbers() ? QString::number(_fret) : QString('a' + _fret + (_fret > 8)) );
                   double d  = currSpatium * .2;
                   // draw background, if required
-                  if(!tab->linesThrough() || !tab->slashStyle() || fretConflict()) {
+                  if(!tab->linesThrough() || fretConflict()) {
                         QRectF bb = bbox().adjusted(-d, 0.0, d, 0.0);
                         if (v) {
                               v->drawBackground(p, bb);
