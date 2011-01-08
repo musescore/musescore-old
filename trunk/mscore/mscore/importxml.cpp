@@ -1919,7 +1919,8 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                         }
                   }
             else if (e.tagName() == "key") {
-                  int number  = e.attribute(QString("number"), "-1").toInt();
+                  int number = e.attribute(QString("number"), "-1").toInt();
+                  QString printObject(e.attribute("print-object", "yes"));
                   int staffIdx = staff;
                   if (number != -1)
                         staffIdx += number - 1;
@@ -1940,6 +1941,7 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                         //       we see the "staves" tag
                         //
                         int staves = score->part(staff)->nstaves();
+                        // apply to all staves in part
                         for (int i = 0; i < staves; ++i) {
                               KeySigEvent oldkey = score->staff(staffIdx+i)->keymap()->key(tick);
                               if (oldkey != key) {
@@ -1947,6 +1949,7 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                                     KeySig* keysig = new KeySig(score);
                                     keysig->setTrack((staffIdx + i) * VOICES);
                                     keysig->setKeySigEvent(key);
+                                    keysig->setVisible(printObject == "yes");
                                     Segment* s = measure->getSegment(keysig, tick);
                                     s->add(keysig);
                                     }
@@ -1962,6 +1965,7 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                               KeySig* keysig = new KeySig(score);
                               keysig->setTrack(staffIdx * VOICES);
                               keysig->setKeySigEvent(key);
+                              keysig->setVisible(printObject == "yes");
                               Segment* s = measure->getSegment(keysig, tick);
                               s->add(keysig);
                               }
@@ -2264,7 +2268,11 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       int headGroup = 0;
       bool noStem = false;
 
-      QString printObject(e.attribute("print-object", "yes"));
+      QString printObject = "yes";
+      if (pn.isElement() && pn.nodeName() == "note") {
+            QDomElement pne = pn.toElement();
+            printObject = pne.attribute("print-object", "yes");
+            }
 
       for (; !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
