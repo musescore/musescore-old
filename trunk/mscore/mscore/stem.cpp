@@ -42,21 +42,34 @@ Stem::Stem(Score* s)
 //   draw
 //---------------------------------------------------------
 
+// TEMPORARY HACK!!
+#include "sym.h"
+// END OF HACK
+
 void Stem::draw(QPainter& p, ScoreView*) const
       {
+      bool useTab = false;
       Staff* st = staff();
       if (st && st->useTablature()) {     // stems used in palette do not have a staff
+            useTab = true;
             if (st->staffType()->slashStyle())
                   return;
-//		  else
-//			  // TO DO: ADD HERE STEMS FOR TABLATURE
             }
       qreal lw = point(score()->styleS(ST_stemWidth));
       QPen pen(p.pen());
       pen.setWidthF(lw);
       pen.setCapStyle(Qt::RoundCap);
       p.setPen(pen);
-      p.drawLine(QLineF(0.0, 0.0, 0.0, stemLen()));
+      p.drawLine(QLineF(0.0, 0.0, 0.0, stemLen()) );
+      // NOT THE BEST PLACE FOR THIS?
+      // with tablatures, dots are not drawn near 'notes', but near stems
+      if(useTab) {
+            int nDots = chord()->dots();
+            if(nDots > 0)
+//            for( ; nDots>0; nDots--) {
+                  symbols[score()->symIdx()][dotSym].draw(p, magS(), spatium(), stemLen(), nDots);
+//                  }
+            }
       }
 
 //---------------------------------------------------------

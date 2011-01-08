@@ -243,6 +243,11 @@ void Chord::setStem(Stem* s)
 
 QPointF Chord::stemPos(bool upFlag, bool top) const
       {
+      if(staff() && staff()->useTablature()) {
+            double sp = spatium();
+            return QPointF(STAFFTYPE_TAB_DEFAULTSTEMPOSX*sp, STAFFTYPE_TAB_DEFAULTSTEMPOSY*sp) +
+                        canvasPos();
+            }
       const Note* note = (top ? !upFlag : upFlag) ? downNote() : upNote();
       return note->stemPos(upFlag);
       }
@@ -530,7 +535,7 @@ void Chord::addLedgerLines(double x, int move)
 //          If the two notes are the same distance from the middle line:
 //             stem can go in either direction. but most engravers prefer
 //             downward stems
-//       > two notes:
+//      > two notes:
 //          If the interval of the highest note above the middle line is greater
 //             than the interval of the lowest note below the middle line:
 //             downward stems
@@ -543,10 +548,18 @@ void Chord::addLedgerLines(double x, int move)
 //               downward stems
 //             - If the majority of the notes are below the middle:
 //               upward stems
+//      exception: in tablatures all stems are up.
 //-----------------------------------------------------------------------------
 
 void Chord::computeUp()
       {
+      // tablatures
+      if(staff() && staff()->useTablature()) {
+            _up =true;
+            return;
+            }
+
+      // pitched staves
       if (_stemDirection != AUTO) {
             _up = _stemDirection == UP;
             }
@@ -997,8 +1010,6 @@ void Chord::setMag(double val)
 
 void Chord::layoutStem1()
       {
-      if (staff()->useTablature())
-            return;
       int istaff = staffIdx();
 
       //-----------------------------------------
@@ -1011,6 +1022,10 @@ void Chord::layoutStem1()
       if (hasStem) {
             if (!_stem)
                   setStem(new Stem(score()));
+            if (staff()->useTablature()) {                  // in tab, all stems are up (if present)
+//                  setStemDirection(UP);
+//                  setUp(true);
+                  }
             }
       else
             setStem(0);
@@ -1048,8 +1063,25 @@ void Chord::layoutStem1()
 
 void Chord::layoutStem()
       {
-      if (staff()->useTablature())
+      if(staff() && staff()->useTablature()) {
+            // tablatures require stems only is not stemless
+            if(!staff()->staffType()->slashStyle() && _stem) {   // if tab uses stems and this chord has one
+                  // in tablatures, stem/hook setup is fixed: a simple 'comb' above the staff
+                  double sp = spatium();
+                  // process stem
+                  _stem->setLen(STAFFTYPE_TAB_DEFAULTSTEMLEN*sp);
+                  _stem->setPos(STAFFTYPE_TAB_DEFAULTSTEMPOSX*sp, STAFFTYPE_TAB_DEFAULTSTEMPOSY*sp);
+                  // process hook
+                  int hookIdx = durationType().hooks();
+                  if(hookIdx != 0) {
+                        _hook->setSubtype(hookIdx);
+                        _hook->setPos(STAFFTYPE_TAB_DEFAULTSTEMPOSX*sp, STAFFTYPE_TAB_DEFAULTSTEMPOSY*sp);
+                        _hook->setMag(mag()*score()->styleD(ST_smallNoteMag));
+                        }
+                  }
             return;
+            }
+
       System* s = segment()->measure()->system();
       if (s == 0)       //DEBUG
             return;
@@ -1256,12 +1288,23 @@ void Chord::layout()
                   note->layout();
                   note->setPos(0.0, _spatium * note->string() * lineDist);
                   }
-            delete _stem;
-            _stem = 0;
-            delete _hook;
-            _hook = 0;
-            delete _stemSlash;
-            _stemSlash = 0;
+            // if tab type is stemless or duration longer than crochet
+            // remove stems
+            if(tab->slashStyle() || durationType().type() < Duration::V_QUARTER) {
+                  if(_stem) {
+                        delete _stem;
+                        _stem = 0;
+                        }
+                  if(_hook) {
+                        delete _hook;
+                        _hook = 0;
+                        }
+                  }
+            // unconditionally delete grace slashes
+            if(_stemSlash) {
+                  delete _stemSlash;
+                  _stemSlash = 0;
+            }
 
             if(!tab->genDurations() ||          // if tab is not set for duration symbols
                track() % VOICES != 0) {         // or not in first voice
@@ -1288,7 +1331,6 @@ void Chord::layout()
                         _tabDur->setDuration(durationType().type(), dots());
                   _tabDur->setParent(this);
 // needed?        _tabDur->setTrack(track());
-//                _tabDur->layout();
                   }
             else                    // symbol not needed: if exists, delete
                   if(_tabDur) {
@@ -1296,7 +1338,7 @@ void Chord::layout()
                         _tabDur = 0;
                         }
             return;
-            }
+            }                       // end of if(useTablature)
 
       if (!segment()) {
             //

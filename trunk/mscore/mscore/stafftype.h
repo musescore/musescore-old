@@ -26,6 +26,11 @@
 #include "globals.h"
 #include "durationtype.h"
 
+#define STAFFTYPE_TAB_DEFAULTSTEMLEN      (3.0)
+#define STAFFTYPE_TAB_DEFAULTSTEMDIST     (1.0)
+#define STAFFTYPE_TAB_DEFAULTSTEMPOSX     (0.75)
+#define STAFFTYPE_TAB_DEFAULTSTEMPOSY     (-STAFFTYPE_TAB_DEFAULTSTEMLEN - STAFFTYPE_TAB_DEFAULTSTEMDIST)
+
 //class Instrument;
 class Staff;
 class Xml;
