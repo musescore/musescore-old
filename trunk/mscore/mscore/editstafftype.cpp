@@ -46,7 +46,9 @@ EditStaffType::EditStaffType(QWidget* parent, Staff* st)
             }
       connect(staffTypeList, SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)),
          SLOT(typeChanged(QListWidgetItem*, QListWidgetItem*)));
-      connect(newType, SIGNAL(clicked()), SLOT(createNewType()));
+      connect(newTypePitched,    SIGNAL(clicked()), SLOT(createNewType()));
+      connect(newTypeTablature,  SIGNAL(clicked()), SLOT(createNewType()));
+      connect(newTypePercussion, SIGNAL(clicked()), SLOT(createNewType()));
       connect(name, SIGNAL(textEdited(const QString&)), SLOT(nameEdited(const QString&)));
       if (ci)
             staffTypeList->setCurrentItem(ci);
@@ -68,16 +70,16 @@ void EditStaffType::saveCurrent(QListWidgetItem* o)
       if (name->text()              != st->name()
          || st->lines()             != lines->value()
          || st->lineDistance().val()!= lineDistance->value()
-         || st->genKeysig()         != genKeysig->isChecked()
-         || st->showLedgerLines()   != showLedgerLines->isChecked()
          )
             modif = true;
       // or if any of the props specific to each group is modified
       switch(st->group()) {
       case PITCHED_STAFF:
             if(st->genClef() != genClefPitched->isChecked()
-               || st->showBarlines() != showBarlinesPitched->isChecked()
-               || st->slashStyle()   != stemlessPitched->isChecked()
+               || st->showBarlines()      != showBarlinesPitched->isChecked()
+               || st->slashStyle()        != stemlessPitched->isChecked()
+               || st->genKeysig()         != genKeysigPitched->isChecked()
+               || st->showLedgerLines()   != showLedgerLinesPitched->isChecked()
                )
                   modif = true;
             break;
@@ -93,11 +95,13 @@ void EditStaffType::saveCurrent(QListWidgetItem* o)
                || stt->fretFontName()     != fretFontName->currentFont().family()
                || stt->fretFontSize()     != fretFontSize->value()
                || stt->fretFontUserY()    != fretY->value()
-               || stt->genDurations()     != genDurations->isChecked()
                || stt->genTimesig()       != genTimesigTablature->isChecked()
                || stt->linesThrough()     != linesThroughRadio->isChecked()
                || stt->onLines()          != onLinesRadio->isChecked()
                || stt->useNumbers()       != numbersRadio->isChecked()
+               || ( noteValues0->isChecked() && (!stt->slashStyle() ||  stt->genDurations()) )
+               || ( noteValues1->isChecked() && (!stt->slashStyle() || !stt->genDurations()) )
+               || ( noteValues2->isChecked() && ( stt->slashStyle() ||  stt->genDurations()) )
                )
                   modif = true;
             break;
@@ -120,27 +124,31 @@ void EditStaffType::saveCurrent(QListWidgetItem* o)
             st->setName(o->text());
             st->setLines(lines->value());
             st->setLineDistance(Spatium(lineDistance->value()));
-            st->setGenKeysig(genKeysig->isChecked());
-            st->setShowLedgerLines(showLedgerLines->isChecked());
             // save-group specific properties
             switch(st->group()) {
             case PITCHED_STAFF:
                   st->setGenClef(genClefPitched->isChecked());
                   st->setSlashStyle(stemlessPitched->isChecked());
                   st->setShowBarlines(showBarlinesPitched->isChecked());
+                  st->setGenKeysig(genKeysigPitched->isChecked());
+                  st->setShowLedgerLines(showLedgerLinesPitched->isChecked());
                   break;
             case TAB_STAFF:
-                  st->setGenClef(genClefTablature->isChecked());
-                  st->setSlashStyle(stemlessTablature->isChecked());
-                  st->setShowBarlines(showBarlinesTablature->isChecked());
                   stt = (StaffTypeTablature*)st;
+                  st->setSlashStyle(true);                 // assume no note values
+                  stt->setGenDurations(false);
+                  if(noteValues1->isChecked())
+                        stt->setGenDurations(true);
+                  if(noteValues2->isChecked())
+                        st->setSlashStyle(false);
+                  st->setGenClef(genClefTablature->isChecked());
+                  st->setShowBarlines(showBarlinesTablature->isChecked());
                   stt->setDurationFontName(durFontName->currentText());
                   stt->setDurationFontSize(durFontSize->value());
                   stt->setDurationFontUserY(durY->value());
                   stt->setFretFontName(fretFontName->currentText());
                   stt->setFretFontSize(fretFontSize->value());
                   stt->setFretFontUserY(fretY->value());
-                  stt->setGenDurations(genDurations->isChecked());
                   stt->setGenTimesig(genTimesigTablature->isChecked());
                   stt->setLinesThrough(linesThroughRadio->isChecked());
                   stt->setOnLines(onLinesRadio->isChecked());
@@ -176,25 +184,23 @@ void EditStaffType::typeChanged(QListWidgetItem* n, QListWidgetItem* o)
       genClefPitched->setChecked(st->genClef());
       genClefTablature->setChecked(st->genClef());
       genClefPercussion->setChecked(st->genClef());
-      genKeysig->setChecked(st->genKeysig());
+      genKeysigPitched->setChecked(st->genKeysig());
       stemlessPitched->setChecked(st->slashStyle());
-      stemlessTablature->setChecked(st->slashStyle());
       showBarlinesPitched->setChecked(st->showBarlines());
       showBarlinesTablature->setChecked(st->showBarlines());
-      showLedgerLines->setChecked(st->showLedgerLines());
       // switch to stack page and set props specific to each staff group
       QFont f = QFont();
       switch(st->group()) {
             case PITCHED_STAFF:
                   stack->setCurrentIndex(0);
-//                  staffGroup->setText(tr("Pitched"));
+                  genKeysigPitched->setChecked(st->genKeysig());
+                  showLedgerLinesPitched->setChecked(st->showLedgerLines());
                   break;
             case TAB_STAFF:
                   stack->setCurrentIndex(1);
 //                  staffGroup->setText(tr("Tablature"));
                   tab = (StaffTypeTablature*)st;
                   genTimesigTablature->setChecked(tab->genTimesig());
-                  genDurations->setChecked(tab->genDurations());
                   f.setFamily(tab->fretFontName());
                   f.setPointSizeF(tab->fretFontSize());
                   fretFontName->setCurrentFont(f);
@@ -211,6 +217,25 @@ void EditStaffType::typeChanged(QListWidgetItem* n, QListWidgetItem* o)
                   durFontName->setCurrentFont(f);
                   durFontSize->setValue(tab->durationFontSize());
                   durY->setValue(tab->durationFontUserY());
+                  // convert combined values of genDurations and slashStyle
+                  // into noteValuesx radio buttons
+                  if(tab->genDurations()) {
+                        noteValues0->setChecked(false);
+                        noteValues1->setChecked(true);
+                        noteValues2->setChecked(false);
+                        }
+                  else {
+                        if(tab->slashStyle()) {
+                              noteValues0->setChecked(true);
+                              noteValues1->setChecked(false);
+                              noteValues2->setChecked(false);
+                              }
+                        else {
+                              noteValues0->setChecked(false);
+                              noteValues1->setChecked(false);
+                              noteValues2->setChecked(true);
+                              }
+                        }
                   break;
             case PERCUSSION_STAFF:
                   stack->setCurrentIndex(2);
