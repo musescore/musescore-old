@@ -87,6 +87,17 @@ class SlurSegment : public SpannerSegment {
       };
 
 //---------------------------------------------------------
+//   SlurPos
+//---------------------------------------------------------
+
+struct SlurPos {
+      QPointF p1;             // start point of slur
+      System* system1;        // start system of slur
+      QPointF p2;             // end point of slur
+      System* system2;        // end system of slur
+      };
+
+//---------------------------------------------------------
 //   SlurTie
 //---------------------------------------------------------
 
@@ -116,7 +127,7 @@ class SlurTie : public Spanner {
 
       void writeProperties(Xml& xml) const;
       bool readProperties(QDomElement);
-      QPointF slurPos(Element*, System*& s);
+      void slurPos(SlurPos*);
 
       virtual void toDefault();
       void setLen(double v)               { _len = v; }
@@ -148,9 +159,9 @@ class Slur : public SlurTie {
       virtual QRectF bbox() const;
       virtual void setTrack(int val);
 
-      int track2() const      { return _track2; }
-      int staffIdx2() const   { return _track2 / VOICES; }
-      void setTrack2(int val) { _track2 = val; }
+      int track2() const        { return _track2; }
+      int staffIdx2() const     { return _track2 / VOICES; }
+      void setTrack2(int val)   { _track2 = val; }
 
       Chord* startChord() const { return (Chord*)startElement(); }
       Chord* endChord() const   { return (Chord*)endElement();   }

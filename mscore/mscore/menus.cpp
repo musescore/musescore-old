@@ -513,6 +513,8 @@ void MuseScore::populatePalette()
             f->setText(QString(stringnumber[i]));
             sp->append(f, tr("String number %1").arg(stringnumber[i]));
             }
+      Symbol* symbol = new Symbol(gscore, thumbSym);
+      sp->append(symbol, tr("Thumb"));
 
       paletteBox->addPalette(sp);
 

@@ -191,23 +191,25 @@ bool SlurSegment::edit(ScoreView* viewer, int curGrip, int key, Qt::KeyboardModi
 
 QPointF SlurSegment::gripAnchor(int grip) const
       {
-      Slur* sl = (Slur*) slurTie();
+      SlurPos spos;
+      slurTie()->slurPos(&spos);
 
       QPointF sp(_system->canvasPos());
-      System* s;  // dummy
       switch(spannerSegmentType()) {
             case SEGMENT_SINGLE:
                   if (grip == 0)
-                        return sl->slurPos(sl->startElement(), s);
+                        return spos.p1;
                   else if (grip == 3)
-                        return sl->slurPos(sl->endElement(), s);
+                        return spos.p2;
                   return QPointF();
+
             case SEGMENT_BEGIN:
                   if (grip == 0)
-                        return sl->slurPos(sl->startElement(), s);
+                        return spos.p1;
                   else if (grip == 3)
                         return _system->abbox().topRight();
                   break;
+
             case SEGMENT_MIDDLE:
                   if (grip == 0)
                         return sp;
@@ -218,7 +220,7 @@ QPointF SlurSegment::gripAnchor(int grip) const
                   if (grip == 0)
                         return sp;
                   else if (grip == 3)
-                        return sl->slurPos(sl->endElement(), s);
+                        return spos.p2;
                   break;
             }
       return QPointF();
@@ -478,130 +480,181 @@ SlurTie::~SlurTie()
       }
 
 //---------------------------------------------------------
-//   slurPos
+//   fixArticulations
 //---------------------------------------------------------
 
-QPointF SlurTie::slurPos(Element* e, System*& s)
+static qreal fixArticulations(qreal yo, Chord* c, qreal _up)
+      {
+      //
+      // handle special case of tenuto and staccato;
+      //
+      QList<Articulation*>* al = c->getArticulations();
+      if (al->size() == 1) {
+            Articulation* a = al->at(0);
+            if (a->subtype() == TenutoSym || a->subtype() == StaccatoSym)
+                  yo = a->y() + (a->height() + c->score()->spatium() * .5) * _up;
+            }
+      return yo;
+      }
+
+//---------------------------------------------------------
+//   slurPos
+//    calculate position of start- and endpoint of slur
+//---------------------------------------------------------
+
+void SlurTie::slurPos(SlurPos* sp)
       {
       double _spatium = spatium();
+      Element* e1 = startElement();
+      Element* e2 = endElement();
+      bool isTie  = e1->type() == NOTE;
 
-      ChordRest* cr;
-      bool isTie = e->type() == NOTE;
-
-      if (isTie)
-            cr = static_cast<Note*>(e)->chord();
-      else
-            cr = static_cast<ChordRest*>(e);
-      s = cr->measure()->system();
-
-      //-----------------------------------------
-      //    off
-      //-----------------------------------------
-
-      qreal xo = cr->width() * .5;
-      qreal yo = 0.0;
-      if (cr->type() != CHORD)
-            return cr->canvasPos() + QPointF(xo, yo);
-
-      Chord* c   = static_cast<Chord*>(cr);
-      Stem* stem = c->stem();
-      Beam* beam = c->beam();
-
+      Note* note1;
+      Note* note2;
       Chord* sc;
-      if (startElement()->type() == NOTE)
-            sc = ((Note*)startElement())->chord();
-      else
-            sc = (Chord*)startElement();
-
       Chord* ec;
-      if (endElement()->type() == NOTE)
-            ec = ((Note*)endElement())->chord();
-      else
-            ec = (Chord*)endElement();
 
-      Note* note;
+      if (isTie) {
+            note1 = static_cast<Note*>(e1);
+            note2 = static_cast<Note*>(e2);
+            sc    = note1->chord();
+            ec    = note2->chord();
+            }
+      else {
+            if ((e1->type() != CHORD) || (e2->type() != CHORD)) {
+                  sp->p1 = QPointF(e1->canvasPos().x() + e1->width(), 0.0);
+                  sp->p2 = QPointF(e2->canvasPos().x() + e2->width(), 0.0);
+                  return;
+                  }
+            sc    = static_cast<Chord*>(e1);
+            ec    = static_cast<Chord*>(e2);
+            note1 = up ? sc->upNote() : sc->downNote();
+            note2 = up ? ec->upNote() : ec->downNote();
+            }
+      sp->p1      = sc->canvasPos();
+      sp->p2      = ec->canvasPos();
+      sp->system1 = sc->measure()->system();
+      sp->system2 = ec->measure()->system();
+
+      qreal xo, yo;
+
+      Stem* stem1 = sc->stem();
+      Stem* stem2 = ec->stem();
+      Beam* beam1 = sc->beam();
+      Beam* beam2 = ec->beam();
+
       //
       // default position:
       //    horizontal: middle of note head
       //    vertical:   _spatium * .4 above/below note head
       //
-      if (e->type() == NOTE)
-            note = static_cast<Note*>(e);
-      else
-            note = up ? c->upNote() : c->downNote();
+      double hw  = note1->headWidth();
+      double hh  = note1->headHeight();
+      double _up = up ? -1.0 : 1.0;
 
-      double hw = note->headWidth();
+      //------p1
+      xo = hw * .5;
+      yo = 0.0;
       if (isTie && sc->notes().size() > 1) {
-            if (c == sc)
-                  xo = hw * 1.12;
-            else
-                  xo = -hw * .12;
-            yo = note->pos().y() + hw * .3 * (up ? -1 : 1);
-            return cr->canvasPos() + QPointF(xo, yo);
-            }
-      xo   = hw * .5;
-      yo   = note->pos().y() + (note->headHeight() * .5 + _spatium * .4) * (up ? -1.0 : 1.0);
-      if (!stem)
-            return cr->canvasPos() + QPointF(xo, yo);
-      bool startIsGrace         = sc->noteType() != NOTE_NORMAL;
-      bool mainNoteOfGraceSlur  = startIsGrace && (c == endElement())   && (c->noteType() == NOTE_NORMAL);
-//      bool firstNoteOfGraceSlur = startIsGrace && (c == startElement()) && (c->noteType() != NOTE_NORMAL);
-
-      if ((c == sc) && beam && (beam->elements().back() != sc) && (c->up() == up) && !mainNoteOfGraceSlur) {
-            double sh = stem->height() + _spatium;
-            if (up)
-                  yo = c->downNote()->pos().y() - sh;
-            else
-                  yo = c->upNote()->pos().y() + sh;
-            xo = stem->pos().x();
+            xo = hw * 1.12;
+            yo = note1->pos().y() + hw * .3 * _up;
             }
       else {
-            if ((c == sc) && c->up() && up)
-                  xo = note->headWidth() + _spatium * .3;
-            else if (c == ec && !c->up() && !up)
-                  xo = -_spatium * .3;
+            yo = note1->pos().y() + (hh * .5 + _spatium * .4) * _up;
+            if (stem1) {
+                  bool startIsGrace = sc->noteType() != NOTE_NORMAL;
 
-            //
-            // handle case: stem up   - stem down
-            //              stem down - stem up
-            //
-            if ((sc->up() != ec->up()) && (c->up() == up)) {
-                  Note* n1 = sc->up() ? sc->downNote() : sc->upNote();
-                  Note* n2 = ec->up() ? ec->downNote() : ec->upNote();
-                  double yd = n2->pos().y() - n1->pos().y();
-
-                  double mh = stem->height();    // limit y move
-                  if (yd > 0.0) {
-                        if (yd > mh)
-                              yd = mh;
+                  if (beam1 && (beam1->elements().back() != sc) && (sc->up() == up)) {
+                        double sh = stem1->height() + _spatium;
+                        if (up)
+                              yo = sc->downNote()->pos().y() - sh;
+                        else
+                              yo = sc->upNote()->pos().y() + sh;
+                        xo = stem1->pos().x();
                         }
                   else {
-                        if (yd < - mh)
-                              yd = -mh;
-                        }
+                        if (sc->up() && up)
+                              xo = note1->headWidth() + _spatium * .3;
 
-                  if (c == sc) {
-                        if ((up && (yd < -_spatium)) || (!up && (yd > _spatium)))
-                              yo += yd;
+                        //
+                        // handle case: stem up   - stem down
+                        //              stem down - stem up
+                        //
+                        if ((sc->up() != ec->up()) && (sc->up() == up)) {
+                              Note* n1 = sc->up() ? sc->downNote() : sc->upNote();
+                              Note* n2 = ec->up() ? ec->downNote() : ec->upNote();
+                              double yd = n2->pos().y() - n1->pos().y();
+
+                              double mh = stem1->height();    // limit y move
+                              if (yd > 0.0) {
+                                    if (yd > mh)
+                                          yd = mh;
+                                    }
+                              else {
+                                    if (yd < - mh)
+                                          yd = -mh;
+                                    }
+                              if ((up && (yd < -_spatium)) || (!up && (yd > _spatium)))
+                                    yo += yd;
+                              }
+                        else if (sc->up() != up)
+                              yo = fixArticulations(yo, sc, _up);
                         }
-                  else {
+                  }
+            }
+      sp->p1 += QPointF(xo, yo);
+
+      //------p2
+      xo = hw * .5;
+      yo = 0.0;
+      if (isTie && ec->notes().size() > 1) {
+            xo = hw * 1.12;
+            yo = note2->pos().y() + hw * .3 * _up;
+            }
+      else {
+            yo = note2->pos().y() + (hh * .5 + _spatium * .4) * _up;
+            if (stem2) {
+                  if (beam2
+                     && (beam2->elements().front() != ec)
+                     && (ec->up() == up)
+                     && (sc->noteType() == NOTE_NORMAL)
+                        ) {
+                        double sh = stem2->height() + _spatium;
+                        if (up)
+                              yo = ec->downNote()->pos().y() - sh;
+                        else
+                              yo = ec->upNote()->pos().y() + sh;
+                        xo = stem2->pos().x();
+                        }
+                  else if (!ec->up() && !up)
+                        xo = -_spatium * .3;
+                  //
+                  // handle case: stem up   - stem down
+                  //              stem down - stem up
+                  //
+                  if ((sc->up() != ec->up()) && (ec->up() == up)) {
+                        Note* n1 = sc->up() ? sc->downNote() : sc->upNote();
+                        Note* n2 = ec->up() ? ec->downNote() : ec->upNote();
+                        double yd = n2->pos().y() - n1->pos().y();
+
+                        double mh = stem2->height();    // limit y move
+                        if (yd > 0.0) {
+                              if (yd > mh)
+                                    yd = mh;
+                              }
+                        else {
+                              if (yd < - mh)
+                                    yd = -mh;
+                              }
+
                         if ((up && (yd > _spatium)) || (!up && (yd < -_spatium)))
                               yo -= yd;
                         }
-                  }
-            else if (c->up() != up) {
-                  //
-                  // handle special case of tenuto and staccato;
-                  //
-                  QList<Articulation*>* al = c->getArticulations();
-                  if (al->size() == 1) {
-                        Articulation* a = al->at(0);
-                        if (a->subtype() == TenutoSym || a->subtype() == StaccatoSym)
-                              yo = a->y() + (a->height() + _spatium * .5) * (up ? -1.0 : 1.0);
-                        }
+                  else if (ec->up() != up)
+                        yo = fixArticulations(yo, ec, _up);
                   }
             }
-      return cr->canvasPos() + QPointF(xo, yo);
+      sp->p2 += QPointF(xo, yo);
       }
 
 //---------------------------------------------------------
@@ -836,14 +889,13 @@ void Slur::layout()
                   break;
             }
 
-      System *s1, *s2;
-      QPointF p1 = slurPos(startElement(), s1);
-      QPointF p2 = slurPos(endElement(),   s2);
+      SlurPos sPos;
+      slurPos(&sPos);
 
       QList<System*>* sl = score()->systems();
       iSystem is = sl->begin();
       while (is != sl->end()) {
-            if (*is == s1)
+            if (*is == sPos.system1)
                   break;
             ++is;
             }
@@ -856,7 +908,7 @@ void Slur::layout()
 
       unsigned nsegs = 1;
       for (iSystem iis = is; iis != sl->end(); ++iis) {
-            if (*iis == s2)
+            if (*iis == sPos.system2)
                   break;
             ++nsegs;
             }
@@ -891,18 +943,18 @@ void Slur::layout()
             sp.ry() += ss->y();
 
             // case 1: one segment
-            if (s1 == s2) {
+            if (sPos.system1 == sPos.system2) {
                   segment->setSubtype(SEGMENT_SINGLE);
-                  segment->layout(p1, p2);
+                  segment->layout(sPos.p1, sPos.p2);
                   }
             // case 2: start segment
             else if (i == 0) {
                   segment->setSubtype(SEGMENT_BEGIN);
                   qreal x = sp.x() + system->bbox().width();
-                  segment->layout(p1, QPointF(x, p1.y()));
+                  segment->layout(sPos.p1, QPointF(x, sPos.p1.y()));
                   }
             // case 3: middle segment
-            else if (i != 0 && system != s2) {
+            else if (i != 0 && system != sPos.system2) {
                   segment->setSubtype(SEGMENT_MIDDLE);
                   qreal x1 = firstNoteRestSegmentX(system) - _spatium;
                   qreal x2 = sp.x() + system->bbox().width();
@@ -912,9 +964,9 @@ void Slur::layout()
             else {
                   segment->setSubtype(SEGMENT_END);
                   qreal x = firstNoteRestSegmentX(system) - _spatium;
-                  segment->layout(QPointF(x, p2.y()), p2);
+                  segment->layout(QPointF(x, sPos.p2.y()), sPos.p2);
                   }
-            if (system == s2)
+            if (system == sPos.system2)
                   break;
             }
       }
@@ -1031,7 +1083,7 @@ void Tie::layout()
       Measure* m1 = c1->measure();
 //      System* s1  = m1->system();
       Chord* c2   = endNote()->chord();
-      Measure* m2 = c2->measure();
+//      Measure* m2 = c2->measure();
 //      System* s2  = m2->system();
 
       if (_slurDirection == AUTO)
@@ -1052,15 +1104,13 @@ void Tie::layout()
       QPointF off2(0.0, yo);
 
       QPointF ppos(canvasPos());
-//      QPointF p1 = startNote()->canvasPos() + off1;
-//      QPointF p2 = endNote()->canvasPos()   + off2;
 
       // TODO: cleanup
 
-      System* s1;
-      QPointF p1 = slurPos(startNote(), s1);
-      System* s2;
-      QPointF p2 = slurPos(endNote(), s2);
+      SlurPos sPos;
+      slurPos(&sPos);
+
+      // p1, p2, s1, s2
 
       QList<System*>* systems = score()->systems();
       setPos(0, 0);
@@ -1070,17 +1120,17 @@ void Tie::layout()
       //    user offsets (drags) are retained
       //---------------------------------------------------------
 
-      int sysIdx1      = systems->indexOf(s1);
+      int sysIdx1 = systems->indexOf(sPos.system1);
       if (sysIdx1 == -1) {
             printf("system not found\n");
             foreach(System* s, *systems)
-                  printf("   search %p in %p\n", s1, s);
+                  printf("   search %p in %p\n", sPos.system1, s);
             return;
             }
 
-      int sysIdx2      = systems->indexOf(s2, sysIdx1);
-      unsigned nsegs   = sysIdx2 - sysIdx1 + 1;
-      unsigned onsegs  = spannerSegments().size();
+      int sysIdx2     = systems->indexOf(sPos.system2, sysIdx1);
+      unsigned nsegs  = sysIdx2 - sysIdx1 + 1;
+      unsigned onsegs = spannerSegments().size();
 
       if (nsegs != onsegs) {
             if (nsegs > onsegs) {
@@ -1100,8 +1150,8 @@ void Tie::layout()
                   }
             }
 
-      p1 -= canvasPos();
-      p2 -= canvasPos();
+      sPos.p1 -= canvasPos();
+      sPos.p2 -= canvasPos();
       for (unsigned int i = 0; i < nsegs; ++i) {
             System* system       = (*systems)[sysIdx1++];
             SlurSegment* segment = segmentAt(i);
@@ -1109,18 +1159,18 @@ void Tie::layout()
             QPointF sp(system->canvasPos() - canvasPos());
 
             // case 1: one segment
-            if (s1 == s2) {
-                  segment->layout(p1, p2);
+            if (sPos.system1 == sPos.system2) {
+                  segment->layout(sPos.p1, sPos.p2);
                   segment->setSpannerSegmentType(SEGMENT_SINGLE);
                   }
             // case 2: start segment
             else if (i == 0) {
                   qreal x = sp.x() + system->bbox().width();
-                  segment->layout(p1, QPointF(x, p1.y()));
+                  segment->layout(sPos.p1, QPointF(x, sPos.p1.y()));
                   segment->setSpannerSegmentType(SEGMENT_BEGIN);
                   }
             // case 3: middle segment
-            else if (i != 0 && system != s2) {
+            else if (i != 0 && system != sPos.system2) {
                   // cannot happen
                   printf("sysIdx %d - %d\n", sysIdx1, sysIdx2);
                   Measure* m1 = c1->measure();
@@ -1133,7 +1183,7 @@ void Tie::layout()
                   // qreal x = sp.x();
                   qreal x = firstNoteRestSegmentX(system) - 2 * _spatium - canvasPos().x();
 
-                  segment->layout(QPointF(x, p2.y()), p2);
+                  segment->layout(QPointF(x, sPos.p2.y()), sPos.p2);
                   segment->setSpannerSegmentType(SEGMENT_END);
                   }
             }

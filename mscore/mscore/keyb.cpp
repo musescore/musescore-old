@@ -307,6 +307,17 @@ void Score::setInputState(Element* e)
             Note* note    = static_cast<Note*>(e);
             Chord* chord  = note->chord();
             _is.setDuration(chord->durationType());
+            if (note->tieFor()) {
+                  Fraction f = note->chord()->duration();
+                  Note* note2 = note;
+                  while (note2->tieFor()) {
+                        note2 = note2->tieFor()->endNote();
+                        f += note2->chord()->duration();
+                        }
+                  Duration dt(f);
+                  if (dt.isValid())
+                        _is.setDuration(dt);
+                  }
             _is.rest      = false;
             _is.setTrack(note->track());
             _is.pitch     = note->pitch();
