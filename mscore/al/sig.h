@@ -43,6 +43,7 @@ class SigEvent {
 
       SigEvent() : _timesig(0, 0) {}       ///< default SigEvent is invalid
       SigEvent(const Fraction& s, int bar = 0) : _timesig(s), _bar(bar) {}
+      SigEvent(const SigEvent& e);
 
       bool operator==(const SigEvent& e) const;
       bool valid() const       { return _timesig.isValid(); }
