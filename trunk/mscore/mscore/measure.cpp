@@ -809,9 +809,9 @@ Segment* Measure::findSegment(SegmentType st, int t)
                   return ss;
             }
 #if 0
-      printf("segment at %d type %d not found\n", t, st);
+      printf("segment at %d type %d not found (%d-%d)\n", t, st, tick(), ticks());
       for (Segment* s = first(); s; s = s->next())
-            printf("  %d: %d\n", s->tick(), s->subtype());
+            printf("  %d: %s\n", s->tick(), s->subTypeName());
 #endif
       return 0;
       }

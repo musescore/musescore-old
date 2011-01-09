@@ -39,6 +39,15 @@ static int ticks_beat(int n)
       }
 
 //---------------------------------------------------------
+//   ticks_measure
+//---------------------------------------------------------
+
+static int ticks_measure(const Fraction& f)
+      {
+      return (AL::division * 4 * f.numerator()) / f.denominator();
+      }
+
+//---------------------------------------------------------
 //   operator==
 //---------------------------------------------------------
 
@@ -93,13 +102,14 @@ void TimeSigMap::normalize()
       int n    = 4;
       int tick = 0;
       int bar  = 0;
+      int tm   = ticks_measure(Fraction(z, n));
 
       for (iSigEvent i = begin(); i != end(); ++i) {
             SigEvent& e  = i->second;
-            int tm = 1; // TODO
             e.setBar(bar + (i->first - tick) / tm);
             bar  = e.bar();
             tick = i->first;
+            tm   = ticks_measure(e.timesig());
             }
       }
 
@@ -207,6 +217,17 @@ void TimeSigMap::read(QDomElement e, int fileDivision)
                   domError(e);
             }
       normalize();
+      }
+
+//---------------------------------------------------------
+//   SigEvent
+//---------------------------------------------------------
+
+SigEvent::SigEvent(const SigEvent& e)
+      {
+      _timesig = e._timesig;
+      _nominal = e._nominal;
+      _bar     = e._bar;
       }
 
 //---------------------------------------------------------
@@ -333,7 +354,7 @@ int TimeSigMap::rasterStep(unsigned t, int raster) const
             }
       return raster;
       }
-      
+
 //---------------------------------------------------------
 //   TimeSigMap::dump
 //---------------------------------------------------------

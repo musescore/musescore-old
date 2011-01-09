@@ -642,24 +642,10 @@ static QString instrName(int type, int hbank, int lbank, int program)
 
 void Score::addLyrics(int tick, int /*staffIdx*/, const QString& txt)
       {
-      if(txt.trimmed().isEmpty())
+      if (txt.trimmed().isEmpty())
             return;
       Measure* measure = tick2measure(tick);
-      Segment* seg = measure->findSegment(SegChordRest, tick);
-      if (seg == 0) {
-            for (seg = measure->first(); seg;) {
-                  if (seg->subtype() != SegChordRest) {
-                        seg = seg->next();
-                        continue;
-                        }
-                  Segment* ns;
-                  for (ns = seg->next(); ns && ns->subtype() != SegChordRest; ns = ns->next())
-                        ;
-                  if (ns == 0 || ns->tick() > tick)
-                        break;
-                  seg = ns;
-                  }
-            }
+      Segment* seg     = measure->findSegment(SegChordRest, tick);
       if (seg == 0) {
             printf("no segment found for lyrics<%s> at tick %d\n",
                qPrintable(txt), tick);
@@ -962,11 +948,13 @@ void Score::convertMidi(MidiFile* mf)
             int tick = sigmap()->bar2tick(i, 0, 0);
             measure->setTick(tick);
             Fraction ts(sigmap()->timesig(tick).timesig());
+// printf("Measure %d tick %d\n", i, tick);
             measure->setTimesig(ts);
             measure->setLen(ts);
 
       	add(measure);
             }
+fixTicks();
 
 	foreach (MidiTrack* midiTrack, *tracks) {
             if (midiTrack->staffIdx() == -1)
@@ -1432,6 +1420,7 @@ bool Score::importMidi(const QString& name)
 
       _saved = false;
       convertMidi(&mf);
+      rebuildMidiMapping();
       _created = true;
       return true;
       }
