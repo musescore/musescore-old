@@ -200,6 +200,13 @@ void EditStaff::showInstrumentDialog()
 
             shortName->setHtml(t->shortName);
             longName->setHtml(t->longName);
+            
+            Score* score  = staff->score();
+            TextStyle* s = score->textStyle(TEXT_STYLE_INSTRUMENT_SHORT);
+            shortName->document()->setDefaultFont(s->font(score->spatium()));
+            s = score->textStyle(TEXT_STYLE_INSTRUMENT_LONG);
+            longName->document()->setDefaultFont(s->font(score->spatium()));
+            
             instrument.setTrackName(t->trackName);
 
             setInterval(t->transpose);

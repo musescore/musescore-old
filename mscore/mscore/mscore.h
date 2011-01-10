@@ -365,7 +365,7 @@ class MuseScore : public QMainWindow {
       void setSearchState()    { changeState(STATE_SEARCH); }
       void checkForUpdate();
       void registerPlugin(QAction*);
-      //QMenu* fileMenu() const  { return _fileMenu; }
+      QMenu* fileMenu() const  { return _fileMenu; }
 
    public:
       MuseScore();
