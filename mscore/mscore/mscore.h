@@ -373,6 +373,7 @@ class MuseScore : public QMainWindow {
       void setFotomode()       { changeState(STATE_FOTO); }
       void checkForUpdate();
       void registerPlugin(QAction*);
+      QMenu* fileMenu() const  { return _fileMenu; }
 
    public:
       MuseScore();
