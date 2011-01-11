@@ -1981,7 +1981,7 @@ int main(int argc, char* av[])
              //
             // TODO: delete old session backups
             //
-            if (files || !mscore->restoreSession(preferences.sessionStart == LAST_SESSION))
+            if (!mscore->restoreSession(preferences.sessionStart == LAST_SESSION) || files)
                   loadScores(argv);
 #endif
             }
