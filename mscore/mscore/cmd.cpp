@@ -928,8 +928,15 @@ bool Score::makeGap1(int tick, int staffIdx, Fraction len)
             }
       cr = static_cast<ChordRest*>(seg->element(staffIdx * VOICES));
       if (!cr) {
-            printf("makeGap1: no chord/rest at %d staff %d\n", tick, staffIdx);
-            return false;
+            if (seg->subtype() & SegGrace) {
+                  while (seg && !(seg->subtype() & SegChordRest))
+                        seg = seg->next1();
+                  cr = static_cast<ChordRest*>(seg->element(staffIdx * VOICES));
+                  if (!cr) {
+                        printf("makeGap1: no chord/rest at %d staff %d\n", tick, staffIdx);
+                        return false;    
+                        }
+                  }
             }
 
       Fraction gap;
