@@ -2122,7 +2122,7 @@ int main(int argc, char* av[])
             //
             // TODO: delete old session backups
             //
-            if (!mscore->restoreSession(preferences.sessionStart == LAST_SESSION) || files)
+            if (!mscore->restoreSession((preferences.sessionStart == LAST_SESSION) && (files == 0)) || files)
                   loadScores(argv);
 #endif
             }

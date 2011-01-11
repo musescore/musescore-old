@@ -2486,6 +2486,8 @@ void ChangeChordStaffMove::flip()
       {
       int v = chord->staffMove();
       chord->setStaffMove(staffMove);
+      chord->score()->updateAccidentals(chord->measure(), chord->staffIdx());
+      chord->score()->setLayoutAll(true);
       staffMove = v;
       }
 
