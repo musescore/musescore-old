@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -149,6 +149,7 @@ Inspector::Inspector(QWidget* parent)
       tremoloView  = new TremoloView;
       ottavaView   = new OttavaView;
       slurSegmentView = new SlurSegmentView;
+      accidentalView  = new AccidentalView;
 
       stack->addWidget(pagePanel);
       stack->addWidget(systemPanel);
@@ -175,6 +176,7 @@ Inspector::Inspector(QWidget* parent)
       stack->addWidget(tremoloView);
       stack->addWidget(ottavaView);
       stack->addWidget(slurSegmentView);
+      stack->addWidget(accidentalView);
 
       connect(pagePanel,    SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
       connect(systemPanel,  SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
@@ -201,6 +203,7 @@ Inspector::Inspector(QWidget* parent)
       connect(tremoloView,  SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
       connect(ottavaView,   SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
       connect(slurSegmentView, SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
+      connect(accidentalView, SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
       connect(tupletView,   SIGNAL(scoreChanged()), SLOT(layoutScore()));
       connect(notePanel,    SIGNAL(scoreChanged()), SLOT(layoutScore()));
 
@@ -541,6 +544,7 @@ void Inspector::updateElement(Element* el)
             case TREMOLO:       ew = tremoloView;  break;
             case OTTAVA:        ew = ottavaView;   break;
             case SLUR_SEGMENT:  ew = slurSegmentView; break;
+            case ACCIDENTAL:    ew = accidentalView; break;
             case MARKER:
             case JUMP:
             case TEXT:
@@ -2183,5 +2187,32 @@ void SlurSegmentView::setElement(Element* e)
       ss.up4py->setValue(s->getUps(3)->p.y());
       ss.up4ox->setValue(s->getUps(3)->off.x());
       ss.up4oy->setValue(s->getUps(3)->off.y());
+      }
+
+//---------------------------------------------------------
+//   AccidentalView
+//---------------------------------------------------------
+
+AccidentalView::AccidentalView()
+   : ShowElementBase()
+      {
+      QWidget* w = new QWidget;
+      acc.setupUi(w);
+      layout->addWidget(w);
+      layout->addStretch(10);
+      }
+
+//---------------------------------------------------------
+//   AccidentalView
+//---------------------------------------------------------
+
+void AccidentalView::setElement(Element* e)
+      {
+      Accidental* s = static_cast<Accidental*>(e);
+      ShowElementBase::setElement(e);
+
+      acc.hasBracket->setChecked(s->hasBracket());
+      acc.accAuto->setChecked(s->role() == ACC_AUTO);
+      acc.accUser->setChecked(s->role() == ACC_USER);
       }
 

@@ -158,32 +158,6 @@ Chorus::~Chorus()
 
 void Chorus::update()
       {
-      if (new_number_blocks < 0) {
-            fluid_log(FLUID_WARN, "chorus: number blocks must be >=0! Setting value to 0.");
-            new_number_blocks = 0;
-            }
-      else if (new_number_blocks > MAX_CHORUS) {
-            fluid_log(FLUID_WARN, "chorus: number blocks larger than max. allowed! Setting value to %d.",
-               MAX_CHORUS);
-            new_number_blocks = MAX_CHORUS;
-            }
-
-      if (new_speed_Hz < MIN_SPEED_HZ) {
-            fluid_log(FLUID_WARN, "chorus: speed is too low (min %f)! Setting value to min.",
-               (double) MIN_SPEED_HZ);
-            new_speed_Hz = MIN_SPEED_HZ;
-            }
-      else if (new_speed_Hz > MAX_SPEED_HZ) {
-            fluid_log(FLUID_WARN, "chorus: speed must be below %f Hz! Setting value to max.",
-               (double) MAX_SPEED_HZ);
-            new_speed_Hz = MAX_SPEED_HZ;
-            }
-      if (new_depth_ms < 0.0) {
-            fluid_log(FLUID_WARN, "chorus: depth must be positive! Setting value to 0.");
-            new_depth_ms = 0.0;
-            }
-      /* Depth: Check for too high value through modulation_depth_samples. */
-
       /* The modulating LFO goes through a full period every x samples: */
       modulation_period_samples = lrint(sample_rate / new_speed_Hz);
 
@@ -198,13 +172,12 @@ void Chorus::update()
             }
 
       /* initialize LFO table */
-      if (type == FLUID_CHORUS_MOD_SINE)
+      if (new_type == FLUID_CHORUS_MOD_SINE)
             sine(lookup_tab, modulation_period_samples, modulation_depth_samples);
-      else if (type == FLUID_CHORUS_MOD_TRIANGLE)
+      else if (new_type == FLUID_CHORUS_MOD_TRIANGLE)
             triangle(lookup_tab, modulation_period_samples, modulation_depth_samples);
       else {
-            fluid_log(FLUID_WARN, "chorus: Unknown modulation type. Using sinewave.");
-            type = FLUID_CHORUS_MOD_SINE;
+            new_type = FLUID_CHORUS_MOD_SINE;
             sine(lookup_tab, modulation_period_samples, modulation_depth_samples);
             }
 

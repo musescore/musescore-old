@@ -46,6 +46,10 @@ set_source_files_properties(
       PROPERTIES generated true
       )
 
+if (OCR)
+      set (OCR_SRC ocr.cpp)
+endif (OCR)
+
 add_library (
       omr STATIC
       ${PROJECT_BINARY_DIR}/all.h
@@ -53,7 +57,8 @@ add_library (
       ${mocs}
       omrview.cpp pdf.cpp omrpage.cpp
       skew.cpp utils.cpp
-      omr.cpp ocr.cpp pattern.cpp
+      omr.cpp pattern.cpp
+      ${OCR_SRC}
       )
 
 set_target_properties( omr

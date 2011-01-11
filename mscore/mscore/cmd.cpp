@@ -1680,19 +1680,26 @@ void Score::changeAccidental(Note* note, AccidentalType accidental)
       int pitch, tpc;
       if (accidental == ACC_NONE) {
             //
-            //  delete accidental
+            //  delete accidentals
             //
             accType = ACC_NONE;
             pitch   = line2pitch(note->line(), clef, 0) + acc2;
             tpc     = step2tpc(step, acc2);
+            // check if there's accidentals left, previously set as
+            // precautionary accidentals
+            Accidental *a_rem = note->accidental();
+            if (a_rem)
+                  undoRemoveElement(note->accidental());
             }
       else {
             if (acc2 == acc) {
                   //
                   // this is a precautionary accidental
                   //
-                  pitch = note->pitch();
-                  tpc   = note->tpc();
+                  accType = accidental;
+                  pitch = line2pitch(note->line(), clef, 0) + Accidental::subtype2value(accType);
+                  tpc   = step2tpc(step, acc);
+
                   Accidental* a = new Accidental(this);
                   a->setParent(note);
                   a->setSubtype(accidental);

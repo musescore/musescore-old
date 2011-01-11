@@ -91,6 +91,7 @@ QT4_WRAP_UI (ui_headers
       harmonyedit.ui selectinstr.ui tremolo.ui fretdprops.ui stafftype.ui
       sectionbreak.ui hairpinproperties.ui spanner.ui bend.ui tremolobar.ui
       textproperties.ui editpitch.ui editstringdata.ui slursegment.ui
+      accidental.ui
       )
 
 QT4_WRAP_CPP (mocs
@@ -284,7 +285,10 @@ if (MINGW)
    endif (AEOLUS)
 
    if (OMR)
-      target_link_libraries(mscore omr poppler tesseract_full tiff)
+      target_link_libraries(mscore omr poppler)
+      if (OCR)
+            target_link_libraries(mscore tesseract_api)
+      endif (OCR)
    endif (OMR)
 
    install( TARGETS mscore RUNTIME DESTINATION bin )
@@ -356,7 +360,10 @@ else (MINGW)
    endif (AEOLUS)
 
    if (OMR)
-      target_link_libraries(mscore omr poppler tesseract_full tiff)
+      target_link_libraries(mscore omr poppler)
+      if (OCR)
+            target_link_libraries(mscore tesseract_api)
+      endif (OCR)
    endif (OMR)
 
    if (APPLE)

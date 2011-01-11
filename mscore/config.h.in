@@ -36,6 +36,7 @@
 
 #cmakedefine AEOLUS
 #cmakedefine OMR
+#cmakedefine OCR
 #cmakedefine OSC
 #cmakedefine OPENGL
 #cmakedefine SOUNDFONT3

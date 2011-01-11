@@ -20,11 +20,12 @@
 
 #include "omr.h"
 #include "omrview.h"
-#include "omr.h"
 #include "xml.h"
 #include "omrpage.h"
 #include "pdf.h"
+#ifdef OCR
 #include "ocr.h"
+#endif
 #include "utils.h"
 
 class ScoreView;
@@ -36,7 +37,9 @@ class ScoreView;
 Omr::Omr(Score* s)
       {
       _score = s;
+#ifdef OCR
       _ocr = 0;
+#endif
       initUtils();
       }
 
@@ -82,9 +85,11 @@ void Omr::write(Xml& xml) const
 void Omr::read(QDomElement e)
       {
       _doc = 0;
+#ifdef OCR
       if (_ocr == 0)
             _ocr = new Ocr;
       _ocr->init();
+#endif
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
@@ -122,9 +127,11 @@ int Omr::pagesInDocument() const
 
 bool Omr::readPdf()
       {
+#ifdef OCR
       if (_ocr == 0)
             _ocr = new Ocr;
       _ocr->init();
+#endif
 
 printf("Omr::read <%s>\n", qPrintable(_path));
 
@@ -139,7 +146,7 @@ printf("Omr::read <%s>\n", qPrintable(_path));
             }
       double sp = 0;
       double w  = 0;
-n = 1;
+
       for (int i = 0; i < n; ++i) {
             pages[i]->read(i);
             sp += pages[i]->spatium();
@@ -179,5 +186,4 @@ double Omr::systemDistance() const
       {
       return pages[0]->systemDistance();
       }
-
 
