@@ -1,4 +1,5 @@
 11.jan (ws)
+      - fix #8608: crash on loading 0.9.6.3 file
       - fix repeat regression (testfiles test/repeat*.mscz)
       - applied patch from fnbecker (#8404); needs more testing
        (la)
