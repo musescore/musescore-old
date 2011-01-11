@@ -249,15 +249,19 @@ void RepeatList::unwind()
       int repeatCount    = 0;
       bool isGoto        = false;
 
+      for (Measure* m = _score->firstMeasure(); m; m = m->nextMeasure())
+            m->setPlaybackCount(0);
+
       for (Measure* m = _score->firstMeasure(); m;) {
+            m->setPlaybackCount(m->playbackCount() + 1);
             int flags = m->repeatFlags();
 
-//            printf("repeat m%d loop %d repeatCount %d isGoto %d endRepeat %p\n",
-//               m->no(), loop, repeatCount, isGoto, endRepeat);
+            printf("repeat m%d(%d) loop %d repeatCount %d isGoto %d endRepeat %p\n",
+               m->no(), m->playbackCount(), loop, repeatCount, isGoto, endRepeat);
 
             if (endRepeat) {
                   Volta* volta = _score->searchVolta(m->tick());
-                  if (volta && !volta->hasEnding(loop+1)) {
+                  if (volta && !volta->hasEnding(m->playbackCount())) {
                         // skip measure
                         if (rs->tick < m->tick()) {
                               rs->len = m->tick() - rs->tick;

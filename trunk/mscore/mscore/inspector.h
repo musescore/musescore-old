@@ -496,6 +496,8 @@ class VoltaView : public ShowElementBase {
       void segmentClicked(QTreeWidgetItem* item);
       void beginTextClicked();
       void continueTextClicked();
+      void leftElementClicked();
+      void rightElementClicked();
 
    public:
       VoltaView();
