@@ -1,5 +1,6 @@
 11.jan (la)
       - fix #8613: MuseScore doesn't ask to restore session if you open from file
+      - fix #8612: Cannot paste to measure with a grace note before beat 1
 9.jan (lv)
       - fix #8546: MusicXML import: dynamics in notations element are ignored
 7.jan (la)
