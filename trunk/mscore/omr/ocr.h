@@ -21,6 +21,11 @@
 #ifndef __OCR_H__
 #define __OCR_H__
 
+
+namespace tesseract {
+      class TessBaseAPI;
+      };
+
 //---------------------------------------------------------
 //   OcrImage
 //---------------------------------------------------------
@@ -43,6 +48,7 @@ struct OcrImage {
 //---------------------------------------------------------
 
 class Ocr {
+      tesseract::TessBaseAPI* tess;
 
    public:
       Ocr();

@@ -25,6 +25,7 @@
 #include "omrpage.h"
 #include "score.h"
 #include "scoreview.h"
+#include "sym.h"
 
 static bool showLines = false;
 static bool showStaffLines = true;
@@ -159,12 +160,12 @@ void OmrView::paintEvent(QPaintEvent* event)
       foreach(const QRect r, page->slices())
             p.fillRect(r, QBrush(QColor(0, 100, 100, 50)));
 
-      foreach(const OmrNote n, page->notes()) {
-            if (n.type == Duration::V_QUARTER)
+      foreach(const OmrNote* n, page->notes()) {
+            if (n->sym == quartheadSym)
                   p.setPen(QPen(QColor(255, 0, 0), 2.0));
             else
                   p.setPen(QPen(QColor(0, 0, 255), 2.0));
-            p.drawRect(n.r);
+            p.drawRect(n->r);
             }
 
       foreach(const QRectF& r, page->r())       // staves

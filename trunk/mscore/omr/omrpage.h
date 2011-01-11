@@ -43,8 +43,9 @@ struct HLine {
 //---------------------------------------------------------
 
 struct OmrNote {
-      Duration::DurationType type;
+      int sym;
       QRect r;
+      double prob;      // probability
       };
 
 //---------------------------------------------------------
@@ -65,7 +66,7 @@ class OmrPage {
 
       QList<QLine>  lines;
       QList<QLineF> barlines;
-      QList<OmrNote> _notes;
+      QList<OmrNote*> _notes;
 
       bool dot(int x, int y) const;
       void crop();
@@ -76,7 +77,8 @@ class OmrPage {
       double xproject2(int y);
       int xproject(const uint* p, int wl);
       void radonTransform(ulong* projection, int w, int n, const QRect&);
-      void searchNotes(Pattern*, int x1, int x2, int y, Duration::DurationType);
+      void searchNotes(int sym);
+      void searchNotes(QList<OmrNote*>*, Pattern*, int x1, int x2, int y, int sym);
 
    public:
       OmrPage(Omr* _parent);
@@ -95,7 +97,7 @@ class OmrPage {
       const QList<QLineF>& bl()          { return barlines; }
 
       const QList<QRect>& slices() const { return _slices;  }
-      const QList<OmrNote>& notes() const  { return _notes;   }
+      const QList<OmrNote*>& notes() const  { return _notes;   }
       double spatium() const             { return _spatium; }
       double staffDistance() const;
       double systemDistance() const;

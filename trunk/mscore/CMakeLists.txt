@@ -36,9 +36,10 @@ set(BUILD_SCRIPTGEN TRUE)                 #Generate Qt script bindings. (collide
 set(USE_SSE     FALSE)
 set(SOUNDFONT3  TRUE)                     # enable ogg vorbis compressed fonts, require ogg & vorbis
 set(AEOLUS      TRUE)                     # pipe organ synthesizer
-set(OMR         TRUE)                    # optical music recognition
 set(EMBED_ICONS FALSE)                    # do not load icons from share/icons
 set(OSC        FALSE)                     # osc remote control
+
+#OMR - optical music recognition
 
 if (APPLE OR MINGW)
       set(GCC_VISIBILITY FALSE)           # warnings if not, with gcc4.4 from qt
@@ -47,6 +48,7 @@ if (APPLE OR MINGW)
       set(OMR FALSE)
 else (APPLE OR MINGW)
       set(SF_COMPRESSOR TRUE)             # build sfconvert, require ogg, vorbis, vorbisenc
+      set(OMR TRUE)
 endif (APPLE OR MINGW)
 
 if (MINGW)
@@ -54,11 +56,13 @@ if (MINGW)
 endif (MINGW)
 
 if (OMR)
-      set(OPENGL TRUE)
-endif (OMR)
-
-# DEGUG:
       set(OPENGL FALSE)
+      set(OCR    TRUE) # requires tesseract 3.0
+                       # for installation see: http://ubuntuforums.org/showthread.php?t=1647350
+else (OMR)
+      set(OCR FALSE)
+      set(OPENGL FALSE)
+endif (OMR)
 
 if (APPLE)
       set(HAS_AUDIOFILE TRUE)            # requires libsndfile

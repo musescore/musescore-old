@@ -29,6 +29,7 @@
 
 Ocr::Ocr()
       {
+      tess = 0;
       }
 
 //---------------------------------------------------------
@@ -37,7 +38,9 @@ Ocr::Ocr()
 
 void Ocr::init()
       {
-      TessBaseAPI::SimpleInit("/usr/share/tesseract-ocr/tessdata", 0, false);
+      if (tess == 0)
+            tess = new tesseract::TessBaseAPI;
+      tess->Init("/usr/local/share/tessdata", 0, 0, 0, false);
       }
 
 //---------------------------------------------------------
@@ -46,7 +49,6 @@ void Ocr::init()
 
 QString Ocr::readLine(const OcrImage& img)
       {
-#if 1
       int w = img.r.width();
       int h = img.r.height();
 
@@ -69,10 +71,7 @@ QString Ocr::readLine(const OcrImage& img)
                   *p++ = ~dst;
                   }
             }
-      char* txt = TessBaseAPI::TesseractRect(d, 0, bw, 0, 0, w, h);
+      char* txt = tess->TesseractRect(d, 0, bw, 0, 0, w, h);
       return QString(txt);
-#else
-      return QString();
-#endif
       }
 

@@ -3143,11 +3143,12 @@ void Measure::layoutX(double stretch)
                         chord->layout2();
                         }
                   else if ((t == CLEF) && (s != first())) {
-                        double w   = 0.0;
+                        double w = 0.0;
                         if (types[seg+1] != SegChordRest)
                               w = xpos[seg+1] - xpos[seg];
                         double m  = score()->styleS(ST_clefBarlineDistance).val() * _spatium;
-                        e->rxpos() = w - e->width() - m;
+                        // e->rxpos() = w - e->width() - m;
+                        e->rxpos() = w - e->width()*.5; //  - m;
                         }
                   else {
                         e->setPos(-e->bbox().x(), 0.0);
@@ -3289,3 +3290,4 @@ void Measure::updateAccidentals(Segment* segment, int staffIdx, char* tversatz)
                   }
             }
       }
+

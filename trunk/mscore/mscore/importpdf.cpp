@@ -74,9 +74,8 @@ bool Score::importPdf(const QString& path)
             measures()->add(measure);
             }
       setShowOmr(true);
-
       _omr->page(0)->readHeader(this);
-
+      rebuildMidiMapping();
       return true;
       }
 

@@ -21,6 +21,8 @@
 #ifndef __OMR_H__
 #define __OMR_H__
 
+#include "config.h"
+
 class OmrView;
 class Xml;
 class Pdf;
@@ -52,8 +54,9 @@ class Omr {
       int numPages() const                 { return pages.size();          }
       OmrPage* page(int idx)               { return pages[idx];            }
       OmrView* newOmrView(ScoreView*);
+#ifdef OCR
       Ocr* ocr() const                     { return _ocr; }
-
+#endif
       void write(Xml&) const;
       void read(QDomElement e);
 

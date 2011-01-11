@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -44,6 +44,7 @@
 #include "ui_tremolo.h"
 #include "ui_spanner.h"
 #include "ui_slursegment.h"
+#include "ui_accidental.h"
 
 class ShowElementBase;
 class Element;
@@ -90,6 +91,7 @@ class Inspector : public QDialog, public Ui::InspectorBase {
       ShowElementBase* tremoloView;
       ShowElementBase* ottavaView;
       ShowElementBase* slurSegmentView;
+      ShowElementBase* accidentalView;
 
       bool searchElement(QTreeWidgetItem* pi, Element* el);
       void addSymbol(ElementItem* parent, BSymbol* bs);
@@ -593,6 +595,20 @@ class SlurSegmentView : public ShowElementBase {
 
    public:
       SlurSegmentView();
+      virtual void setElement(Element*);
+      };
+
+//---------------------------------------------------------
+//   AccidentalView
+//---------------------------------------------------------
+
+class AccidentalView : public ShowElementBase {
+      Q_OBJECT;
+
+      Ui::Accidental acc;
+
+   public:
+      AccidentalView();
       virtual void setElement(Element*);
       };
 

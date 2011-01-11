@@ -252,6 +252,9 @@ void RepeatList::unwind()
       for (Measure* m = _score->firstMeasure(); m;) {
             int flags = m->repeatFlags();
 
+//            printf("repeat m%d loop %d repeatCount %d isGoto %d endRepeat %p\n",
+//               m->no(), loop, repeatCount, isGoto, endRepeat);
+
             if (endRepeat) {
                   Volta* volta = _score->searchVolta(m->tick());
                   if (volta && !volta->hasEnding(loop+1)) {
@@ -327,7 +330,7 @@ void RepeatList::unwind()
                               m = jumpToStartRepeat(m);
                               }
                         }
-                  else {
+                  else if (endRepeat == 0) {
                         endRepeat   = m;
                         repeatCount = m->repeatCount();
                         loop        = 1;

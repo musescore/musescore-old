@@ -22,7 +22,9 @@
 #include "image.h"
 #include "utils.h"
 #include "omr.h"
+#ifdef OCR
 #include "ocr.h"
+#endif
 #include "score.h"
 #include "text.h"
 #include "measurebase.h"
@@ -131,25 +133,40 @@ printf("===numStaves: %d\n", numStaves);
       //
       //    search note heads
       //
-      Pattern* quarter = new Pattern(&symbols[0][quartheadSym], _spatium);
+      searchNotes(quartheadSym);
+      searchNotes(halfheadSym);
+      }
+
+//---------------------------------------------------------
+//   searchNotes
+//---------------------------------------------------------
+
+void OmrPage::searchNotes(int sym)
+      {
+      Pattern* pattern = new Pattern(&symbols[0][sym], _spatium);
+
+      QList<OmrNote*> nl1;
+      QList<OmrNote*> nl2;
       foreach(QRectF r, staves) {
             int x1 = r.x();
             int x2 = x1 + r.width();
             int y = r.y();
             for (int i = -4; i < 12; ++i) {
-                  searchNotes(quarter, x1, x2, y + i * _spatium * .5, Duration::V_QUARTER);
+                  searchNotes(&nl2, pattern, x1, x2, y + i * _spatium * .5, sym);
+                  foreach(OmrNote* n, nl1) {
+                        foreach(OmrNote* m, nl2) {
+                              if (m->r.intersects(n->r)) {
+                                    nl2.removeOne(m);
+                                    }
+                              }
+                        }
+                  _notes.append(nl1);
+                  nl1 = nl2;
+                  nl2.clear();      // TODO: optimize
                   }
+            _notes.append(nl2);
             }
-      Pattern* half = new Pattern(&symbols[0][halfheadSym], _spatium);
-      foreach(QRectF r, staves) {
-            int x1 = r.x();
-            int x2 = x1 + r.width();
-            int y = r.y();
-            for (int i = -4; i < 12; ++i) {
-                  searchNotes(half, x1, x2, y + i * _spatium * .5, Duration::V_HALF);
-                  }
-            }
-      delete quarter;
+      delete pattern;
       }
 
 //---------------------------------------------------------
@@ -183,12 +200,50 @@ static void addText(Score* score, int subtype, const QString& s)
 
 void OmrPage::readHeader(Score* score)
       {
+      if (_slices.isEmpty())
+            return;
+      double maxHeight = _spatium * 4 * 2;
+
+      int slice = 0;
+      double maxH = 0.0;
+      int maxIdx;
+      for (;slice < _slices.size(); ++slice) {
+            double h = _slices[slice].height();
+
+            if (h > maxHeight)
+                  break;
+            if (h > maxH) {
+                  maxH = h;
+                  maxIdx = slice;
+                  }
+            }
+      //
+      // assume that highest slice contains header text
+      //
+      OcrImage img = OcrImage(_image.bits(), _slices[maxIdx], (_image.width() + 31)/32);
+      QString s    = _omr->ocr()->readLine(img).trimmed();
+      if (!s.isEmpty())
+            addText(score, TEXT_TITLE, s);
+
+      QString subTitle;
+      for (int i = maxIdx + 1; i < slice; ++i) {
+            OcrImage img = OcrImage(_image.bits(), _slices[i], (_image.width() + 31)/32);
+            QString s = _omr->ocr()->readLine(img).trimmed();
+            if (!s.isEmpty()) {
+                  if (!subTitle.isEmpty())
+                        subTitle += "\n";
+                  subTitle += s;
+                  }
+            }
+      if (!subTitle.isEmpty())
+            addText(score, TEXT_SUBTITLE, subTitle);
+
+#if 0
       OcrImage img = OcrImage(_image.bits(), _slices[0], (_image.width() + 31)/32);
       QString s = _omr->ocr()->readLine(img).trimmed();
       if (!s.isEmpty())
             addText(score, TEXT_TITLE, s);
 
-#if 1
       img = OcrImage(_image.bits(), _slices[1], (_image.width() + 31)/32);
       s = _omr->ocr()->readLine(img).trimmed();
       if (!s.isEmpty())
@@ -502,13 +557,16 @@ void OmrPage::getStaffLines()
       {
       int h  = height();
       int wl = wordsPerLine();
+printf("getStaffLines %d %d  crop %d %d\n", h, wl, cropT, cropB);
+      if (h < 1)
+            return;
+
       int y1 = cropT;
-      if (y1 < 1)
-            y1 = 1;
       int y2 = h - cropB;
       if (y2 >= h)
             --y2;
 
+printf("  getStaffLines %d-%d, wl %d\n", y1, y2, wl);
       double projection[h];
       for (int y = 0; y < y1; ++y)
             projection[y] = 0;
@@ -521,6 +579,7 @@ void OmrPage::getStaffLines()
       int autoTableSize = (wl * 32) / 10;       // 1/10 page width
       if (autoTableSize > y2-y1)
             autoTableSize = y2 - y1;
+printf("   autoTableSize %d\n", autoTableSize);
       double autoTable[autoTableSize];
       memset(autoTable, 0, sizeof(autoTable));
       for (int i = 0; i < autoTableSize; ++i) {
@@ -613,7 +672,8 @@ struct Peak {
 //   searchNotes
 //---------------------------------------------------------
 
-void OmrPage::searchNotes(Pattern* pattern, int x1, int x2, int y, Duration::DurationType dt)
+void OmrPage::searchNotes(QList<OmrNote*>* noteList, Pattern* pattern,
+   int x1, int x2, int y, int sym)
       {
       y -= 4;                 // MAGIC
 
@@ -654,10 +714,11 @@ void OmrPage::searchNotes(Pattern* pattern, int x1, int x2, int y, Duration::Dur
             if (notePeaks[i].val < 0.75)
                   break;
             int x = notePeaks[i].x;
-            OmrNote note;
-            note.r = QRect(x, y - hh/2, hw, hh);
-            note.type = dt;
-            _notes.append(note);
+            OmrNote* note = new OmrNote;
+            note->r    = QRect(x, y - hh/2, hw, hh);
+            note->sym  = sym;
+            note->prob = notePeaks[i].val;
+            noteList->append(note);
             }
       }
 

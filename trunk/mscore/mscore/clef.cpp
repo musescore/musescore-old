@@ -517,7 +517,8 @@ void ClefList::insertTime(int tick, int len)
 
 Space Clef::space() const
       {
-      return Space(point(score()->styleS(ST_clefLeftMargin)), width());
+//      return Space(point(score()->styleS(ST_clefLeftMargin)), width());
+      return Space(point(score()->styleS(ST_clefLeftMargin)), width() * .5 * mag());
       }
 
 //---------------------------------------------------------
