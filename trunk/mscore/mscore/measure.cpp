@@ -2881,12 +2881,14 @@ void Measure::layoutX(double stretch)
             double segmentWidth    = 0.0;
             double minDistance     = 0.0;
             double stretchDistance = 0.0;
+            Segment* pSeg          = s->prev();
+            SegmentTypes segType   = s->segmentType();
 
             for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
                   Space space;
                   int track  = staffIdx * VOICES;
                   bool found = false;
-                  if (s->subtype() & (SegChordRest | SegGrace)) {
+                  if (segType & (SegChordRest | SegGrace)) {
                         double llw = 0.0;
                         double rrw = 0.0;
                         Lyrics* lyrics = 0;
@@ -2895,21 +2897,22 @@ void Measure::layoutX(double stretch)
                               if (!cr)
                                     continue;
                               found = true;
-                              if (s == first() || s->prev()->subtype() == SegStartRepeatBarLine) {
+                              if (!pSeg || (pSeg->subtype() == SegStartRepeatBarLine)) {
                                     double sp       = score()->styleS(ST_barNoteDistance).val() * _spatium;
                                     minDistance     = sp * .3;
                                     stretchDistance = sp * .7;
                                     }
                               else {
-                                    int pt = s->prev()->subtype();
+                                    int pt = pSeg->subtype();
                                     if (! (pt & (SegChordRest | SegGrace))) {
-                                          // distance to first chord/rest in measure
-                                          minDistance = clefKeyRightMargin;
+                                          //  minDistance = clefKeyRightMargin;
+                                          minDistance = 0.0;
                                           }
-                                    else
+                                    else {
                                           minDistance = score()->styleS(ST_minNoteDistance).val() * _spatium;
-                                    if (s->subtype() == SegGrace)
-                                          minDistance *= score()->styleD(ST_graceNoteMag);
+                                          if (s->subtype() == SegGrace)
+                                                minDistance *= score()->styleD(ST_graceNoteMag);
+                                          }
                                     }
                               cr->layout();
                               space.max(cr->space());
@@ -2931,22 +2934,20 @@ void Measure::layoutX(double stretch)
                                     }
                               }
                         if (lyrics) {
-                              found = true;
-//                              double y = lyrics->ipos().y() + lyrics->lineHeight()
-//                                 + point(score()->styleS(ST_lyricsMinBottomDistance));
                               double y = lyrics->ipos().y() + point(score()->styleS(ST_lyricsMinBottomDistance));
                               if (y > staves[staffIdx]->distanceDown)
                                  staves[staffIdx]->distanceDown = y;
+                              space.max(Space(llw, rrw));
                               }
-                        space.max(Space(llw, rrw));
                         }
                   else {
                         Element* e = s->element(track);
-                        if (s->subtype() == SegStartRepeatBarLine) {
+                        if (segType == SegClef && (segmentIdx == 0))
+                              minDistance = score()->styleS(ST_clefLeftMargin).val() * _spatium;
+                        else if (segType == SegStartRepeatBarLine)
                               minDistance = .5 * _spatium;
-                              }
-                        else if ((s->subtype() == SegEndBarLine) && segmentIdx) {
-                              if (s->prev()->subtype() == SegClef)
+                        else if ((segType == SegEndBarLine) && segmentIdx) {
+                              if (pSeg->subtype() == SegClef)
                                     minDistance = score()->styleS(ST_clefBarlineDistance).val() * _spatium;
                               else
                                     stretchDistance = score()->styleS(ST_noteBarDistance).val() * _spatium;
@@ -2962,11 +2963,7 @@ void Measure::layoutX(double stretch)
                         if (e) {
                               found = true;
                               e->layout();
-                              Space sp = e->space();
-                              if ((e->type() == CLEF) && (s != first())) {
-                                    sp.rLw() += sp.rw();
-                                    sp.rRw() = 0.0;
-                                    }
+                              Space sp(e->space());
                               space.max(sp);
                               }
                         }
@@ -2985,6 +2982,9 @@ void Measure::layoutX(double stretch)
             xpos[segmentIdx]  = x;
             if (segmentIdx)
                   width[segmentIdx-1] = segmentWidth;
+            if (s->prev())
+                  s->prev()->setbbox(QRectF(0.0, 0.0, segmentWidth, _spatium * 5));
+
             for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
                   if (rest2[staffIdx])
                         rest[staffIdx] -= segmentWidth;
@@ -3142,13 +3142,12 @@ void Measure::layoutX(double stretch)
                         Chord* chord = static_cast<Chord*>(e);
                         chord->layout2();
                         }
-                  else if ((t == CLEF) && (s != first())) {
-                        double w = 0.0;
-                        if (types[seg+1] != SegChordRest)
-                              w = xpos[seg+1] - xpos[seg];
-                        double m  = score()->styleS(ST_clefBarlineDistance).val() * _spatium;
-                        // e->rxpos() = w - e->width() - m;
-                        e->rxpos() = w - e->width()*.5; //  - m;
+                  else if (t == CLEF) {
+                        double gap = 0.0;
+                        Segment* ps = s->prev();
+                        if (ps)
+                              gap = s->x() - (ps->x() + ps->width());
+                        e->rxpos() = -gap * .5;
                         }
                   else {
                         e->setPos(-e->bbox().x(), 0.0);

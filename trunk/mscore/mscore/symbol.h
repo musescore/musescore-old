@@ -34,7 +34,7 @@ class Symbol : public BSymbol {
 
    protected:
       int _sym;
-      bool _small;
+//      bool _small;
 
    public:
       Symbol(Score* s);
@@ -58,8 +58,8 @@ class Symbol : public BSymbol {
 
       virtual qreal baseLine() const { return 0.0; }
       Segment* segment() const { return (Segment*)parent(); }
-      bool small() const       { return _small; }
-      void setSmall(bool val)  { _small = val; }
+//      bool small() const       { return _small; }
+//      void setSmall(bool val)  { _small = val; }
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(ScoreView*, const QString&);
       };

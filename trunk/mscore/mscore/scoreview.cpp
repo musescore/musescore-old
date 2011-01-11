@@ -68,6 +68,7 @@
 #include "box.h"
 #include "cursor.h"
 #include "texttools.h"
+#include "clef.h"
 
 //---------------------------------------------------------
 //   stateNames
@@ -2428,15 +2429,23 @@ void ScoreView::drawElements(QPainter& p,const QList<const Element*>& el)
                   p.drawLine(QLineF(x+w, y-h, x-w, y+h));
                   if (e->parent()) {
                         p.restore();
+                        const Element* ee = e->parent();
+                        if (e->type() == NOTE)
+                              ee = static_cast<const Note*>(e)->chord()->segment();
+                        else if (e->type() == CLEF)
+                              ee = static_cast<const Clef*>(e)->segment();
+
                         p.setPen(QPen(Qt::green, 0, Qt::SolidLine));
-                        p.drawRect(e->parent()->abbox());
-                        if (e->parent()->type() == SEGMENT) {
-                              qreal w = 7.0 / p.matrix().m11();
-                              QPointF pt = e->parent()->canvasPos();
+                        p.drawRect(ee->abbox());
+#if 1
+                        if (ee->type() == SEGMENT) {
+                              qreal w    = 7.0 / p.matrix().m11();
+                              QPointF pt = ee->canvasPos();
                               p.setPen(QPen(Qt::blue, 0, Qt::SolidLine));
                               p.drawLine(QLineF(pt.x()-w, pt.y()-h, pt.x()+w, pt.y()+h));
                               p.drawLine(QLineF(pt.x()+w, pt.y()-h, pt.x()-w, pt.y()+h));
                               }
+#endif
                         continue;
                         }
                   }

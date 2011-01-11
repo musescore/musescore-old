@@ -120,10 +120,10 @@ QPointF Clef::canvasPos() const
 
 void Clef::layout()
       {
-      double smag = _small ? score()->style(ST_smallClefMag).toDouble() : 1.0;
+      double smag     = _small ? score()->style(ST_smallClefMag).toDouble() : 1.0;
       double _spatium = spatium();
-      double msp  = _spatium * smag;
-      double yoff = 0.0;
+      double msp      = _spatium * smag;
+      double yoff     = 0.0;
       elements.clear();
 
       int st = subtype();
@@ -299,8 +299,9 @@ void Clef::layout()
                   }
                   break;
             }
-      add(symbol, .0, yoff * _spatium);
       symbol->setMag(smag * mag());
+      symbol->layout();
+      add(symbol, .0, yoff * _spatium);
       _bbox = QRectF();
       for (iElement i = elements.begin(); i != elements.end(); ++i) {
             Element* e = *i;
@@ -518,7 +519,7 @@ void ClefList::insertTime(int tick, int len)
 Space Clef::space() const
       {
 //      return Space(point(score()->styleS(ST_clefLeftMargin)), width());
-      return Space(point(score()->styleS(ST_clefLeftMargin)), width() * .5 * mag());
+      return Space(0.0, width());
       }
 
 //---------------------------------------------------------
