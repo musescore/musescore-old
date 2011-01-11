@@ -120,6 +120,9 @@ class Measure : public MeasureBase {
                               // > 0 - multi measure rest;
                               // < 0 - skipped measure
 
+      int _playbackCount;     // temp. value used in RepeatList
+                              // counts how many times this measure was already played
+
       QColor _endBarLineColor;
 
       void push_back(Segment* e);
@@ -256,6 +259,8 @@ class Measure : public MeasureBase {
       void layoutChords10(Segment* segment, int startTrack, char* tversatz);
       void updateAccidentals(Segment* segment, int staffIdx, char* tversatz);
       void layoutStage1();
+      int playbackCount() const      { return _playbackCount; }
+      void setPlaybackCount(int val) { _playbackCount = val; }
       };
 
 extern void initLineList(char* ll, int key);

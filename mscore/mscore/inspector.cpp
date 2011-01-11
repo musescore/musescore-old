@@ -1885,6 +1885,8 @@ VoltaView::VoltaView()
       connect(lb.segments, SIGNAL(itemClicked(QTreeWidgetItem*,int)), SLOT(segmentClicked(QTreeWidgetItem*)));
       connect(tlb.beginText, SIGNAL(clicked()), SLOT(beginTextClicked()));
       connect(tlb.continueText, SIGNAL(clicked()), SLOT(continueTextClicked()));
+      connect(lb.leftElement, SIGNAL(clicked()), SLOT(leftElementClicked()));
+      connect(lb.rightElement, SIGNAL(clicked()), SLOT(rightElementClicked()));
       }
 
 //---------------------------------------------------------
@@ -1899,8 +1901,8 @@ void VoltaView::setElement(Element* e)
       tlb.lineWidth->setValue(volta->lineWidth().val());
       lb.anchor->setCurrentIndex(int(volta->anchor()));
       lb.diagonal->setChecked(volta->diagonal());
-      lb.leftElement->setText(QString("%1").arg((unsigned long)volta->startElement()));
-      lb.rightElement->setText(QString("%1").arg((unsigned long)volta->endElement()));
+      lb.leftElement->setText(QString("%1").arg((unsigned long)volta->startElement(), 8, 16));
+      lb.rightElement->setText(QString("%1").arg((unsigned long)volta->endElement(), 8, 16));
 
       lb.segments->clear();
       const QList<SpannerSegment*>& el = volta->spannerSegments();
@@ -1912,6 +1914,24 @@ void VoltaView::setElement(Element* e)
             }
       tlb.beginText->setEnabled(volta->beginText());
       tlb.continueText->setEnabled(volta->continueText());
+      }
+
+//---------------------------------------------------------
+//   leftElementClicked
+//---------------------------------------------------------
+
+void VoltaView::leftElementClicked()
+      {
+      emit elementChanged(static_cast<Volta*>(element())->startElement());
+      }
+
+//---------------------------------------------------------
+//   rightElementClicked
+//---------------------------------------------------------
+
+void VoltaView::rightElementClicked()
+      {
+      emit elementChanged(static_cast<Volta*>(element())->endElement());
       }
 
 //---------------------------------------------------------

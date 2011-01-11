@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>525</width>
+    <width>412</width>
     <height>229</height>
    </rect>
   </property>
@@ -52,6 +52,9 @@
         </item>
         <item>
          <widget class="QPushButton" name="link1">
+          <property name="toolTip">
+           <string notr="true"/>
+          </property>
           <property name="text">
            <string notr="true">Link1</string>
           </property>
@@ -72,6 +75,9 @@
         </item>
         <item>
          <widget class="QLabel" name="label_9">
+          <property name="toolTip">
+           <string notr="true"/>
+          </property>
           <property name="text">
            <string notr="true">Score:</string>
           </property>
@@ -86,6 +92,9 @@
         </item>
         <item>
          <widget class="QLabel" name="label_12">
+          <property name="toolTip">
+           <string notr="true"/>
+          </property>
           <property name="text">
            <string notr="true">Addr.:</string>
           </property>
@@ -174,6 +183,9 @@
           <property name="readOnly">
            <bool>true</bool>
           </property>
+          <property name="buttonSymbols">
+           <enum>QAbstractSpinBox::NoButtons</enum>
+          </property>
           <property name="maximum">
            <number>999999999</number>
           </property>
@@ -220,6 +232,9 @@
           <property name="toolTip">
            <string notr="true"/>
           </property>
+          <property name="buttonSymbols">
+           <enum>QAbstractSpinBox::NoButtons</enum>
+          </property>
           <property name="value">
            <double>1.000000000000000</double>
           </property>
@@ -260,6 +275,9 @@
           </property>
           <property name="readOnly">
            <bool>true</bool>
+          </property>
+          <property name="buttonSymbols">
+           <enum>QAbstractSpinBox::NoButtons</enum>
           </property>
           <property name="minimum">
            <number>0</number>
@@ -338,6 +356,9 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="toolTip">
+           <string notr="true"/>
+          </property>
           <property name="text">
            <string notr="true" comment="do not translate">Pos</string>
           </property>
@@ -366,6 +387,9 @@
           <property name="readOnly">
            <bool>true</bool>
           </property>
+          <property name="buttonSymbols">
+           <enum>QAbstractSpinBox::NoButtons</enum>
+          </property>
           <property name="maximum">
            <double>100000.000000000000000</double>
           </property>
@@ -385,6 +409,9 @@
           <property name="readOnly">
            <bool>true</bool>
           </property>
+          <property name="buttonSymbols">
+           <enum>QAbstractSpinBox::NoButtons</enum>
+          </property>
           <property name="maximum">
            <double>100000.000000000000000</double>
           </property>
@@ -397,6 +424,9 @@
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="toolTip">
+           <string notr="true"/>
           </property>
           <property name="text">
            <string notr="true" comment="do not translate">BBox</string>
@@ -423,6 +453,9 @@
           <property name="readOnly">
            <bool>true</bool>
           </property>
+          <property name="buttonSymbols">
+           <enum>QAbstractSpinBox::NoButtons</enum>
+          </property>
           <property name="minimum">
            <double>-100000.000000000000000</double>
           </property>
@@ -444,6 +477,9 @@
           </property>
           <property name="readOnly">
            <bool>true</bool>
+          </property>
+          <property name="buttonSymbols">
+           <enum>QAbstractSpinBox::NoButtons</enum>
           </property>
           <property name="minimum">
            <double>-100000.000000000000000</double>
@@ -467,6 +503,9 @@
           <property name="readOnly">
            <bool>true</bool>
           </property>
+          <property name="buttonSymbols">
+           <enum>QAbstractSpinBox::NoButtons</enum>
+          </property>
           <property name="minimum">
            <double>-100000.000000000000000</double>
           </property>
@@ -489,6 +528,9 @@
           <property name="readOnly">
            <bool>true</bool>
           </property>
+          <property name="buttonSymbols">
+           <enum>QAbstractSpinBox::NoButtons</enum>
+          </property>
           <property name="minimum">
            <double>-100000.000000000000000</double>
           </property>
@@ -508,6 +550,9 @@
           <property name="toolTip">
            <string notr="true">canvas x position</string>
           </property>
+          <property name="buttonSymbols">
+           <enum>QAbstractSpinBox::NoButtons</enum>
+          </property>
           <property name="maximum">
            <double>1000000.000000000000000</double>
           </property>
@@ -524,6 +569,9 @@
           <property name="toolTip">
            <string notr="true">canvas y position</string>
           </property>
+          <property name="buttonSymbols">
+           <enum>QAbstractSpinBox::NoButtons</enum>
+          </property>
           <property name="maximum">
            <double>1000000.000000000000000</double>
           </property>
@@ -539,6 +587,9 @@
           </property>
           <property name="toolTip">
            <string notr="true">read x position</string>
+          </property>
+          <property name="buttonSymbols">
+           <enum>QAbstractSpinBox::NoButtons</enum>
           </property>
           <property name="minimum">
            <double>-100000.000000000000000</double>
@@ -559,6 +610,9 @@
           <property name="toolTip">
            <string notr="true">read y position</string>
           </property>
+          <property name="buttonSymbols">
+           <enum>QAbstractSpinBox::NoButtons</enum>
+          </property>
           <property name="minimum">
            <double>-100000.000000000000000</double>
           </property>
@@ -575,6 +629,9 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="toolTip">
+           <string notr="true"/>
+          </property>
           <property name="text">
            <string notr="true">Rpos</string>
           </property>
@@ -590,6 +647,9 @@
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="toolTip">
+           <string notr="true"/>
           </property>
           <property name="text">
            <string notr="true" comment="do not translate">Uoff</string>
@@ -612,6 +672,9 @@
           </property>
           <property name="toolTip">
            <string notr="true">user x offset</string>
+          </property>
+          <property name="buttonSymbols">
+           <enum>QAbstractSpinBox::NoButtons</enum>
           </property>
           <property name="suffix">
            <string comment="do not translate"/>
@@ -638,6 +701,9 @@
           <property name="toolTip">
            <string notr="true"/>
           </property>
+          <property name="buttonSymbols">
+           <enum>QAbstractSpinBox::NoButtons</enum>
+          </property>
           <property name="suffix">
            <string comment="do not translate"/>
           </property>
@@ -660,6 +726,9 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="toolTip">
+           <string notr="true"/>
+          </property>
           <property name="text">
            <string notr="true">CPos</string>
           </property>
@@ -678,6 +747,9 @@
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="toolTip">
+           <string notr="true"/>
           </property>
           <property name="text">
            <string notr="true">w/h</string>
