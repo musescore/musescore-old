@@ -782,7 +782,7 @@ void Slur::read(QDomElement e)
 //   chordsHaveTie
 //---------------------------------------------------------
 
-static bool chordsHaveTie (Chord* c1, Chord* c2)
+static bool chordsHaveTie(Chord* c1, Chord* c2)
       {
       foreach(Note* n1, c1->notes()) {
             foreach(Note* n2, c2->notes()) {
@@ -849,20 +849,16 @@ void Slur::layout()
                   break;
             case AUTO:
                   {
-                  ChordRest* cr1 = (ChordRest*)startElement();
-                  ChordRest* cr2 = (ChordRest*)endElement();
+                  //
+                  // assumption:
+                  // slurs have only chords or rests as start/end elements
+                  //
+                  ChordRest* cr1 = static_cast<ChordRest*>(startElement());
+                  ChordRest* cr2 = static_cast<ChordRest*>(endElement());
                   Measure* m1    = cr1->measure();
 
-                  Chord* c1;
-                  if (cr1->type() == NOTE)
-                        c1 = ((Note*)cr1)->chord();
-                  else
-                        c1 = (Chord*)cr1;
-                  Chord* c2;
-                  if (cr2->type() == NOTE)
-                        c2 = ((Note*)cr2)->chord();
-                  else
-                        c2 = (Chord*)cr2;
+                  Chord* c1 = (cr1->type() == CHORD) ? static_cast<Chord*>(cr1) : 0;
+                  Chord* c2 = (cr2->type() == CHORD) ? static_cast<Chord*>(cr2) : 0;
 
                   up = !(cr1->up());
 
@@ -872,16 +868,17 @@ void Slur::layout()
                         }
                   else
                         up = !(cr1->up());
-                  if (isDirectionMixture(c1, c2) && c1->noteType() == NOTE_NORMAL) {
+
+                  if (c1 && c2 && isDirectionMixture(c1, c2) && (c1->noteType() == NOTE_NORMAL)) {
                         // slurs go above if start and end note have different stem directions,
                         // but grace notes are exceptions
                         up = true;
                         }
-                  else if (m1->mstaff(cr1->staffIdx())->hasVoices && c1->noteType() == NOTE_NORMAL) {
+                  else if (m1->mstaff(cr1->staffIdx())->hasVoices && c1 && c1->noteType() == NOTE_NORMAL) {
                         // in polyphonic passage, slurs go on the stem side
                         up = cr1->up();
                         }
-                  else if (chordsHaveTie(c1, c2)) {
+                  else if (c1 && c2 && chordsHaveTie(c1, c2)) {
                         // could confuse slur with tie, put slur on stem side
                         up = cr1->up();
                         }
