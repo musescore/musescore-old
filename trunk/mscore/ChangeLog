@@ -1,6 +1,8 @@
 11.jan (ws)
       - fix repeat regression (testfiles test/repeat*.mscz)
       - applied patch from fnbecker (#8404); needs more testing
+       (la)
+      - fix #8613: MuseScore doesn't ask to restore session if you open from file
 08.jan (lv)
       - fix #8499: musicxml import/export: print-object="no" fixes
       - fix #8475: musicxml import: Audiveris ".0" not handled in alter and in backup and forward duration
