@@ -2119,7 +2119,7 @@ int main(int argc, char* av[])
             if (!mscore->restoreSession(preferences.sessionStart == LAST_SESSION))
                   loadScores(static_cast<MuseScoreApplication*>(qApp)->paths);
 #else
-             //
+            //
             // TODO: delete old session backups
             //
             if (!mscore->restoreSession(preferences.sessionStart == LAST_SESSION) || files)
