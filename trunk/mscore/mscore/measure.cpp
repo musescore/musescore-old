@@ -2905,8 +2905,11 @@ void Measure::layoutX(double stretch)
                               else {
                                     int pt = pSeg->subtype();
                                     if (! (pt & (SegChordRest | SegGrace))) {
-                                          //  minDistance = clefKeyRightMargin;
-                                          minDistance = 0.0;
+                                          // if (pt & (SegKeySig | SegClef))
+                                          if (pt & (SegKeySig))
+                                                minDistance = clefKeyRightMargin;
+                                          else
+                                                minDistance = 0.0;
                                           }
                                     else {
                                           minDistance = score()->styleS(ST_minNoteDistance).val() * _spatium;
@@ -2922,7 +2925,6 @@ void Measure::layoutX(double stretch)
                                     l->layout();
                                     lyrics = l;
                                     QRectF b(l->bbox().translated(l->pos()));
-                                    // double lw = l->bbox().width() * .5;
                                     double lw = -b.left();
                                     if (lw > llw)
                                           llw = lw;
@@ -2980,10 +2982,10 @@ void Measure::layoutX(double stretch)
                   }
             x += segmentWidth;
             xpos[segmentIdx]  = x;
-            if (segmentIdx)
+            if (segmentIdx) {
                   width[segmentIdx-1] = segmentWidth;
-            if (s->prev())
-                  s->prev()->setbbox(QRectF(0.0, 0.0, segmentWidth, _spatium * 5));
+                  pSeg->setbbox(QRectF(0.0, 0.0, segmentWidth, _spatium * 5));
+                  }
 
             for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
                   if (rest2[staffIdx])

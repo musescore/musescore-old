@@ -256,8 +256,8 @@ void RepeatList::unwind()
             m->setPlaybackCount(m->playbackCount() + 1);
             int flags = m->repeatFlags();
 
-            printf("repeat m%d(%d) loop %d repeatCount %d isGoto %d endRepeat %p\n",
-               m->no(), m->playbackCount(), loop, repeatCount, isGoto, endRepeat);
+//            printf("repeat m%d(%d) loop %d repeatCount %d isGoto %d endRepeat %p\n",
+//               m->no(), m->playbackCount(), loop, repeatCount, isGoto, endRepeat);
 
             if (endRepeat) {
                   Volta* volta = _score->searchVolta(m->tick());
