@@ -2906,7 +2906,8 @@ void Measure::layoutX(double stretch)
                                     int pt = pSeg->subtype();
                                     if (! (pt & (SegChordRest | SegGrace))) {
                                           // if (pt & (SegKeySig | SegClef))
-                                          if (pt & (SegKeySig))
+                                          bool firstClef = (segmentIdx == 1) && (pt == SegClef);
+                                          if ((pt & (SegKeySig | SegTimeSig)) || firstClef)
                                                 minDistance = clefKeyRightMargin;
                                           else
                                                 minDistance = 0.0;
@@ -2944,7 +2945,7 @@ void Measure::layoutX(double stretch)
                         }
                   else {
                         Element* e = s->element(track);
-                        if (segType == SegClef && (segmentIdx == 0))
+                        if ((segType == SegClef) && (segmentIdx == 0))
                               minDistance = score()->styleS(ST_clefLeftMargin).val() * _spatium;
                         else if (segType == SegStartRepeatBarLine)
                               minDistance = .5 * _spatium;

@@ -819,7 +819,7 @@ bool Score::makeGap1(int tick, int staffIdx, Fraction len)
                   cr = static_cast<ChordRest*>(seg->element(staffIdx * VOICES));
                   if (!cr) {
                         printf("makeGap1: no chord/rest at %d staff %d\n", tick, staffIdx);
-                        return false;    
+                        return false;
                         }
                   }
             }
@@ -1832,7 +1832,6 @@ void Score::moveUp(Chord* chord)
       if ((staffMove == -1) || (rstaff + staffMove <= 0))
             return;
       undo()->push(new ChangeChordStaffMove(chord, staffMove - 1));
-      layoutAll = true;
       }
 
 //---------------------------------------------------------
