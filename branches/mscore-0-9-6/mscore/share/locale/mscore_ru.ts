@@ -1403,7 +1403,7 @@ failed: </source>
     </message>
     <message>
         <source>Perfect Unison</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Идеальный унисон</translation>
     </message>
     <message>
         <source>Augmented Unison</source>
@@ -1415,11 +1415,11 @@ failed: </source>
     </message>
     <message>
         <source>Minor Second</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Уменьшенная секунда</translation>
     </message>
     <message>
         <source>Major Second</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Увеличенная секунда</translation>
     </message>
     <message>
         <source>Augmented Second</source>
@@ -1431,11 +1431,11 @@ failed: </source>
     </message>
     <message>
         <source>Minor Third</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Уменьшенная терция</translation>
     </message>
     <message>
         <source>Major Third</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Увеличенная терция</translation>
     </message>
     <message>
         <source>Augmented Third</source>
@@ -1503,7 +1503,7 @@ failed: </source>
     </message>
     <message>
         <source>Perfect Octave</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Идеальная октава</translation>
     </message>
     <message>
         <source>up</source>
@@ -2121,7 +2121,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Text Properties...</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Свойства текста...</translation>
     </message>
 </context>
 <context>
@@ -2352,7 +2352,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>show more</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Показать больше</translation>
     </message>
 </context>
 <context>
@@ -2468,6 +2468,25 @@ failed: </source>
     <message>
         <source>MuseScore: Key Signatures</source>
         <translation>MuseScore: Тональности</translation>
+    </message>
+</context>
+<context>
+    <name>KeySig</name>
+    <message>
+        <source>Hide courtesy signature</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Show courtesy signature</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Hide naturals</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Show naturals</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -3433,7 +3452,7 @@ From the "Help" menu try choosing "Online Handbook" instead.</source>
     </message>
     <message>
         <source>Barlines</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Тактовые черты</translation>
     </message>
     <message>
         <source>Normal</source>
@@ -3631,7 +3650,43 @@ is incompatible with current interface</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Overture Files &lt;experimental&gt; (*.ove);;All Files (*)</source>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>MuseScore Files (*.mscz *.mscx *.msc);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>MusicXML Files (*.xml *.mxl);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>MIDI Files (*.mid *.midi *.kar);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Muse Data Files (*.md);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Capella Files (*.cap);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Bagpipe Music Writer Files (*.bww);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>All Files (*)</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -3884,6 +3939,10 @@ is incompatible with current interface</source>
         <source>Odd Page Margins</source>
         <translation>Поля нечётных страниц</translation>
     </message>
+    <message>
+        <source>First page no.</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>Palette</name>
@@ -4059,7 +4118,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Velocity:</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Сила нажатия:</translation>
     </message>
     <message>
         <source>auto</source>
@@ -4071,7 +4130,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>offset</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">смещение</translation>
     </message>
     <message>
         <source>Pitch:</source>
@@ -4227,10 +4286,6 @@ is incompatible with current interface</source>
         <translation>Цвета</translation>
     </message>
     <message>
-        <source>...</source>
-        <translation>...</translation>
-    </message>
-    <message>
         <source>General</source>
         <translation>Общие</translation>
     </message>
@@ -4371,34 +4426,6 @@ is incompatible with current interface</source>
         <translation>Расположение</translation>
     </message>
     <message>
-        <source>enable midi remote control</source>
-        <translation>Включить удаленное управление по MIDI</translation>
-    </message>
-    <message>
-        <source>Stop</source>
-        <translation>Остановить</translation>
-    </message>
-    <message>
-        <source>is active</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>record</source>
-        <translation>Записать</translation>
-    </message>
-    <message>
-        <source>Record</source>
-        <translation>Записать</translation>
-    </message>
-    <message>
-        <source>Rewind</source>
-        <translation>Перемотать назад</translation>
-    </message>
-    <message>
-        <source>Play</source>
-        <translation>Воспроизвести</translation>
-    </message>
-    <message>
         <source>192000</source>
         <translation>192000</translation>
     </message>
@@ -4515,38 +4542,6 @@ is incompatible with current interface</source>
         <translation>Язык интерфейса</translation>
     </message>
     <message>
-        <source>de German</source>
-        <translation>Немецкий</translation>
-    </message>
-    <message>
-        <source>en English</source>
-        <translation>Английский</translation>
-    </message>
-    <message>
-        <source>es Spanish</source>
-        <translation>Испанский</translation>
-    </message>
-    <message>
-        <source>fr French</source>
-        <translation>Французский</translation>
-    </message>
-    <message>
-        <source>it Italian</source>
-        <translation>Итальянский</translation>
-    </message>
-    <message>
-        <source>pt Portuguese</source>
-        <translation>Португальский</translation>
-    </message>
-    <message>
-        <source>ru Russian</source>
-        <translation>Русский</translation>
-    </message>
-    <message>
-        <source>nl Dutch</source>
-        <translation>Нидерландский</translation>
-    </message>
-    <message>
         <source>Attention: changing the language requires a restart of MuseScore.</source>
         <translation>Внимание: после смены языка придется перезапустить MuseScore.</translation>
     </message>
@@ -4583,10 +4578,6 @@ is incompatible with current interface</source>
         <translation>Если вы используете стандартный способ ввода, высота тона ноты будет зависеть от текущего ключевого знака. Например, по нажатию F в cоль-мажоре (G maj) будет создан фа-диез (F sharp). Если же включен альтернативный способ ввода, текущий ключевой знак никак не вляет на набор. В таком случае по нажатию F всегда будет создаваться фа-бекар.</translation>
     </message>
     <message>
-        <source>cz Czech</source>
-        <translation>Чешский</translation>
-    </message>
-    <message>
         <source>Style</source>
         <translation>Стиль</translation>
     </message>
@@ -4597,10 +4588,6 @@ is incompatible with current interface</source>
     <message>
         <source>start empty</source>
         <translation>Начинать с нуля</translation>
-    </message>
-    <message>
-        <source>gl Galician</source>
-        <translation>Галицийский</translation>
     </message>
     <message>
         <source>Text</source>
@@ -4635,10 +4622,6 @@ is incompatible with current interface</source>
         <translation>Цель перетаскиваемого элемента</translation>
     </message>
     <message>
-        <source>tr Turkey</source>
-        <translation>Турецкий</translation>
-    </message>
-    <message>
         <source>Score</source>
         <translation>Партитура</translation>
     </message>
@@ -4653,14 +4636,6 @@ is incompatible with current interface</source>
     <message>
         <source>Landscape</source>
         <translation>Альбом</translation>
-    </message>
-    <message>
-        <source>hi_IN Hindi</source>
-        <translation>Хинди</translation>
-    </message>
-    <message>
-        <source>pt_BR Brasilian Portuguese</source>
-        <translation>Португальский (Бразилия)</translation>
     </message>
     <message>
         <source>Default duration:</source>
@@ -4700,10 +4675,6 @@ is incompatible with current interface</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <source>MIDI Remote Control</source>
-        <translation>Управление по MIDI</translation>
-    </message>
-    <message>
         <source>Auto-correction</source>
         <translation>Автоисправление</translation>
     </message>
@@ -4726,10 +4697,6 @@ is incompatible with current interface</source>
     <message>
         <source>Use style file:</source>
         <translation>Использовать файл стиля:</translation>
-    </message>
-    <message>
-        <source>System</source>
-        <translation type="unfinished">Система</translation>
     </message>
     <message>
         <source>Navigator:</source>
@@ -4761,6 +4728,14 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Use Current Position</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Character Set used when import non-unicode strings. (For binary file import)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Character Set</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -5213,7 +5188,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>Write Style failed: </source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Не удалось записать стиль: </translation>
     </message>
     <message>
         <source>Load failed: </source>
@@ -5378,7 +5353,7 @@ Try saving to a different location.</source>
     </message>
     <message>
         <source>show more</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Показать больше</translation>
     </message>
 </context>
 <context>
@@ -5507,7 +5482,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>beam begin</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Начало группы</translation>
     </message>
     <message>
         <source>beam mid</source>
@@ -5515,7 +5490,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>beam end</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Конец группы</translation>
     </message>
     <message>
         <source>no beam</source>
@@ -5523,7 +5498,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>begin 1/32</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Начало 1/32</translation>
     </message>
 </context>
 <context>
@@ -5624,10 +5599,6 @@ and check that the file location is correct</source>
 </context>
 <context>
     <name>StaffTextProperties</name>
-    <message>
-        <source>normal</source>
-        <translation>normal</translation>
-    </message>
     <message>
         <source>MuseScore: Staff Text Properties</source>
         <translation>MuseScore: Свойства текста нотного стана</translation>
@@ -5797,7 +5768,7 @@ and check that the file location is correct</source>
     <name>Text</name>
     <message>
         <source>Text Properties...</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Свойства текста...</translation>
     </message>
     <message>
         <source>Set Invisible</source>
@@ -5869,7 +5840,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Text Properties...</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Свойства текста...</translation>
     </message>
 </context>
 <context>
@@ -5919,10 +5890,6 @@ and check that the file location is correct</source>
     <message>
         <source>Text</source>
         <translation>Текст</translation>
-    </message>
-    <message>
-        <source>Frame</source>
-        <translation>Рамка</translation>
     </message>
 </context>
 <context>
@@ -9028,6 +8995,14 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>score</name>
+    <message>
+        <source>Cannot read this score:
+your version of MuseScore is too old.</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>symbol</name>
     <message>
         <source>acc discant</source>
@@ -9111,7 +9086,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>m</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">m</translation>
     </message>
     <message>
         <source>p</source>

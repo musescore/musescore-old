@@ -1684,7 +1684,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Hide Empty Staves</source>
-        <translation>Cacher les portées vides</translation>
+        <translation>Masquer les portées vides</translation>
     </message>
     <message>
         <source>Articulations, Ornaments</source>
@@ -2478,6 +2478,25 @@ failed: </source>
     <message>
         <source>MuseScore: Key Signatures</source>
         <translation>MuseScore: Armatures</translation>
+    </message>
+</context>
+<context>
+    <name>KeySig</name>
+    <message>
+        <source>Hide courtesy signature</source>
+        <translation>Masquer l'armature de précaution</translation>
+    </message>
+    <message>
+        <source>Show courtesy signature</source>
+        <translation>Afficher l'armature de précaution</translation>
+    </message>
+    <message>
+        <source>Hide naturals</source>
+        <translation>Masquer les bécarres</translation>
+    </message>
+    <message>
+        <source>Show naturals</source>
+        <translation>Afficher les bécarres</translation>
     </message>
 </context>
 <context>
@@ -3648,8 +3667,44 @@ est incompatible avec l'interface actuelle</translation>
 %3</translation>
     </message>
     <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Overture Files &lt;experimental&gt; (*.ove);;All Files (*)</source>
-        <translation>Tous les fichiers supportés (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;Fichiers MuseScore (*.mscz *.mscx *.msc);;Fichiers MusicXML (*.xml *.mxl);;Fichiers MIDI (*.mid *.midi *.kar);;Fichiers Muse Data (*.md);;Fichiers Capella (*.cap);;Fichiers BB &lt;expérimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Fichier Overture &lt;expérimental&gt; (*.ove);;Tous les fichiers (*)</translation>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</source>
+        <translation>Tous les Fichiers Supportés (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</translation>
+    </message>
+    <message>
+        <source>MuseScore Files (*.mscz *.mscx *.msc);;</source>
+        <translation>Fichiers MuseScore (*.mscz *.mscx *.msc);;</translation>
+    </message>
+    <message>
+        <source>MusicXML Files (*.xml *.mxl);;</source>
+        <translation>Fichiers MusicXML (*.xml *.mxl);;</translation>
+    </message>
+    <message>
+        <source>MIDI Files (*.mid *.midi *.kar);;</source>
+        <translation>Fichiers MIDI (*.mid *.midi *.kar);;</translation>
+    </message>
+    <message>
+        <source>Muse Data Files (*.md);;</source>
+        <translation>Fichiers Muse Data (*.md);;</translation>
+    </message>
+    <message>
+        <source>Capella Files (*.cap);;</source>
+        <translation>Fichiers Capella (*.cap);;</translation>
+    </message>
+    <message>
+        <source>Bagpipe Music Writer Files (*.bww);;</source>
+        <translation>Fichiers Bagpipe Music Writer (*.bww);;</translation>
+    </message>
+    <message>
+        <source>BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;</source>
+        <translation>Fichiers BB &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;</translation>
+    </message>
+    <message>
+        <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
+        <translation>Fichiers Overture &lt;experimental&gt; (*.ove);;</translation>
+    </message>
+    <message>
+        <source>All Files (*)</source>
+        <translation>Tous les Fichiers (*)</translation>
     </message>
 </context>
 <context>
@@ -3900,6 +3955,10 @@ est incompatible avec l'interface actuelle</translation>
     <message>
         <source>Odd Page Margins</source>
         <translation>Marges des pages impaires</translation>
+    </message>
+    <message>
+        <source>First page no.</source>
+        <translation>Numéro de la première page</translation>
     </message>
 </context>
 <context>
@@ -4233,10 +4292,6 @@ est incompatible avec l'interface actuelle</translation>
         <translation>Démarrer avec une nouvelle partition</translation>
     </message>
     <message>
-        <source>...</source>
-        <translation>...</translation>
-    </message>
-    <message>
         <source>start with score:</source>
         <translation>Démarrer avec la partition :</translation>
     </message>
@@ -4343,34 +4398,6 @@ est incompatible avec l'interface actuelle</translation>
     <message>
         <source>Expand Repeats</source>
         <translation>Développer les reprises</translation>
-    </message>
-    <message>
-        <source>enable midi remote control</source>
-        <translation>Activer le contrôle a distance midi</translation>
-    </message>
-    <message>
-        <source>Stop</source>
-        <translation>Stop</translation>
-    </message>
-    <message>
-        <source>is active</source>
-        <translation>est actif</translation>
-    </message>
-    <message>
-        <source>record</source>
-        <translation>enregistrer</translation>
-    </message>
-    <message>
-        <source>Record</source>
-        <translation>Enregistrer</translation>
-    </message>
-    <message>
-        <source>Rewind</source>
-        <translation>Aller au début</translation>
-    </message>
-    <message>
-        <source>Play</source>
-        <translation>Jouer</translation>
     </message>
     <message>
         <source>I/O</source>
@@ -4533,38 +4560,6 @@ est incompatible avec l'interface actuelle</translation>
         <translation>Langue</translation>
     </message>
     <message>
-        <source>de German</source>
-        <translation>Deutsch - Allemand</translation>
-    </message>
-    <message>
-        <source>en English</source>
-        <translation>English - Anglais</translation>
-    </message>
-    <message>
-        <source>es Spanish</source>
-        <translation>Español - Espagnol</translation>
-    </message>
-    <message>
-        <source>fr French</source>
-        <translation>Français</translation>
-    </message>
-    <message>
-        <source>it Italian</source>
-        <translation>Italiano - Italien</translation>
-    </message>
-    <message>
-        <source>pt Portuguese</source>
-        <translation>Português - Portuguais</translation>
-    </message>
-    <message>
-        <source>ru Russian</source>
-        <translation>Русский - Russe</translation>
-    </message>
-    <message>
-        <source>nl Dutch</source>
-        <translation>Nederlands - Néerlandais</translation>
-    </message>
-    <message>
         <source>Attention: changing the language requires a restart of MuseScore.</source>
         <translation>Attention : Le changement de langue nécessite le redémarrage de MuseScore.</translation>
     </message>
@@ -4609,16 +4604,8 @@ est incompatible avec l'interface actuelle</translation>
         <translation>Si vous utilisez la méthode d'entrée standard, la hauteur de la note dépendra de l'armature. Par exemple, ajouter un Fa en Sol majeur créera un Fa dièse. Si vous choisissez la méthode d'entrée alternative, l'armature ne sera pas utilisée. Par exemple, ajouter un Fa créera toujours un Fa naturel.</translation>
     </message>
     <message>
-        <source>cz Czech</source>
-        <translation>Česky - Tchèque</translation>
-    </message>
-    <message>
         <source>start empty</source>
         <translation>Démarrer vide</translation>
-    </message>
-    <message>
-        <source>gl Galician</source>
-        <translation>Galego - Galicien</translation>
     </message>
     <message>
         <source>Text</source>
@@ -4653,10 +4640,6 @@ est incompatible avec l'interface actuelle</translation>
         <translation>Elément cible</translation>
     </message>
     <message>
-        <source>tr Turkey</source>
-        <translation>Türk - Turc</translation>
-    </message>
-    <message>
         <source>Score</source>
         <translation>Partition</translation>
     </message>
@@ -4671,14 +4654,6 @@ est incompatible avec l'interface actuelle</translation>
     <message>
         <source>Landscape</source>
         <translation>Paysage</translation>
-    </message>
-    <message>
-        <source>hi_IN Hindi</source>
-        <translation>हिन्दी - Hindi</translation>
-    </message>
-    <message>
-        <source>pt_BR Brasilian Portuguese</source>
-        <translation>Brasileiro - Brésilien</translation>
     </message>
     <message>
         <source>Default duration:</source>
@@ -4718,10 +4693,6 @@ est incompatible avec l'interface actuelle</translation>
         <translation>Export MIDI</translation>
     </message>
     <message>
-        <source>MIDI Remote Control</source>
-        <translation>Contrôle à distance MIDI</translation>
-    </message>
-    <message>
         <source>Auto-correction</source>
         <translation>Correction automatique</translation>
     </message>
@@ -4744,10 +4715,6 @@ est incompatible avec l'interface actuelle</translation>
     <message>
         <source>Use style file:</source>
         <translation>Utiliser le fichier de style :</translation>
-    </message>
-    <message>
-        <source>System</source>
-        <translation>Système</translation>
     </message>
     <message>
         <source>Navigator:</source>
@@ -4780,6 +4747,14 @@ est incompatible avec l'interface actuelle</translation>
     <message>
         <source>Use Current Position</source>
         <translation>Utiliser position actuelle</translation>
+    </message>
+    <message>
+        <source>Character Set used when import non-unicode strings. (For binary file import)</source>
+        <translation>Jeu de caractères utilisé pour l'import de chaînes non unicode. (Pour import de fichier binaire)</translation>
+    </message>
+    <message>
+        <source>Character Set</source>
+        <translation>Jeu de caractères</translation>
     </message>
 </context>
 <context>
@@ -5180,7 +5155,7 @@ failed: </source>
     </message>
     <message>
         <source>PDF File (*.pdf)</source>
-        <translation>Fichier PDF  (*.pdf)</translation>
+        <translation>Fichier PDF (*.pdf)</translation>
     </message>
     <message>
         <source>PostScript File (*.ps)</source>
@@ -5658,10 +5633,6 @@ et vérifier que le chemin du fichier est correct</translation>
 <context>
     <name>StaffTextProperties</name>
     <message>
-        <source>normal</source>
-        <translation>normal</translation>
-    </message>
-    <message>
         <source>MuseScore: Staff Text Properties</source>
         <translation>MuseScore : Propriétés du texte de portée</translation>
     </message>
@@ -5952,10 +5923,6 @@ et vérifier que le chemin du fichier est correct</translation>
     <message>
         <source>Text</source>
         <translation>Texte</translation>
-    </message>
-    <message>
-        <source>Frame</source>
-        <translation>Cadre</translation>
     </message>
 </context>
 <context>
@@ -7295,7 +7262,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Append Vertical Frame</source>
-        <translation>Ajouter une cadre vertical</translation>
+        <translation>Ajouter un cadre vertical</translation>
     </message>
     <message>
         <source>Duplet</source>
@@ -9058,6 +9025,15 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Every 2 months</source>
         <translation>Tous les 2 mois</translation>
+    </message>
+</context>
+<context>
+    <name>score</name>
+    <message>
+        <source>Cannot read this score:
+your version of MuseScore is too old.</source>
+        <translation>Impossible d'ouvrir cette partition :&#13;
+votre version de MuseScore est trop ancienne.</translation>
     </message>
 </context>
 <context>

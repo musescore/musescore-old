@@ -2480,6 +2480,25 @@ epäonnistui: </translation>
     </message>
 </context>
 <context>
+    <name>KeySig</name>
+    <message>
+        <source>Hide courtesy signature</source>
+        <translation>Piilota huomaavaisuusmerkinnät</translation>
+    </message>
+    <message>
+        <source>Show courtesy signature</source>
+        <translation>Näytä huomaavaisuusmerkinnät</translation>
+    </message>
+    <message>
+        <source>Hide naturals</source>
+        <translation>Piilota palautusmerkit</translation>
+    </message>
+    <message>
+        <source>Show naturals</source>
+        <translation>Näytä palautusmerkit</translation>
+    </message>
+</context>
+<context>
     <name>LinePropertiesDialog</name>
     <message>
         <source>MuseScore: Line Properties</source>
@@ -3510,7 +3529,7 @@ Yritä sen sijaan valitsemalla "Ohje"-valikosta "Online-käsikirja".</translatio
     </message>
     <message>
         <source>Articulations &amp;&amp; Ornaments</source>
-        <translation>Atikulointi &amp;&amp; Korukuviot</translation>
+        <translation>Artikulointi &amp;&amp; Korukuviot</translation>
     </message>
     <message>
         <source>Fingering %1</source>
@@ -3606,7 +3625,7 @@ Palauta istunto?</translation>
     </message>
     <message>
         <source>Varied coda</source>
-        <translation>Toisenlainen coda</translation>
+        <translation>Muuttuva coda</translation>
     </message>
     <message>
         <source>MuseScore: Articulations &amp; Ornaments</source>
@@ -3647,8 +3666,44 @@ on ristiriidassa nykyisen rajapinnan kanssa</translation>
 %3</translation>
     </message>
     <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Overture Files &lt;experimental&gt; (*.ove);;All Files (*)</source>
-        <translation>Kaikki tuetut tiedostot (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Overture Files &lt;experimental&gt; (*.ove);;All Files (*)</translation>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</source>
+        <translation>Kaikki tuetut tiedostot (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</translation>
+    </message>
+    <message>
+        <source>MuseScore Files (*.mscz *.mscx *.msc);;</source>
+        <translation>MuseScore tiedostot (*.mscz *.mscx *.msc);;</translation>
+    </message>
+    <message>
+        <source>MusicXML Files (*.xml *.mxl);;</source>
+        <translation>MusicXML tiedostot (*.xml *.mxl);;</translation>
+    </message>
+    <message>
+        <source>MIDI Files (*.mid *.midi *.kar);;</source>
+        <translation>MIDI tiedostot (*.mid *.midi *.kar);;</translation>
+    </message>
+    <message>
+        <source>Muse Data Files (*.md);;</source>
+        <translation>Muse Data tiedostot (*.md);;</translation>
+    </message>
+    <message>
+        <source>Capella Files (*.cap);;</source>
+        <translation>Capella tiedostot (*.cap);;</translation>
+    </message>
+    <message>
+        <source>Bagpipe Music Writer Files (*.bww);;</source>
+        <translation>Bagpipe Music Writer tiedostot (*.bww);;</translation>
+    </message>
+    <message>
+        <source>BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;</source>
+        <translation>BB tiedostot &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;</translation>
+    </message>
+    <message>
+        <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
+        <translation>Overture tiedostot &lt;experimental&gt; (*.ove);;</translation>
+    </message>
+    <message>
+        <source>All Files (*)</source>
+        <translation>Kaikki tiedostot (*)</translation>
     </message>
 </context>
 <context>
@@ -3899,6 +3954,10 @@ on ristiriidassa nykyisen rajapinnan kanssa</translation>
     <message>
         <source>Odd Page Margins</source>
         <translation>Parittoman sivun marginaalit</translation>
+    </message>
+    <message>
+        <source>First page no.</source>
+        <translation>Ensimmäisen sivun nro.</translation>
     </message>
 </context>
 <context>
@@ -4231,10 +4290,6 @@ on ristiriidassa nykyisen rajapinnan kanssa</translation>
         <translation>aloita uusi partituuri</translation>
     </message>
     <message>
-        <source>...</source>
-        <translation>...</translation>
-    </message>
-    <message>
         <source>start with score:</source>
         <translation>aloita partituurilla:</translation>
     </message>
@@ -4281,34 +4336,6 @@ on ristiriidassa nykyisen rajapinnan kanssa</translation>
     <message>
         <source>Language</source>
         <translation>Kieli</translation>
-    </message>
-    <message>
-        <source>de German</source>
-        <translation>de Saksa</translation>
-    </message>
-    <message>
-        <source>en English</source>
-        <translation>en Englanti</translation>
-    </message>
-    <message>
-        <source>es Spanish</source>
-        <translation>es Espanja</translation>
-    </message>
-    <message>
-        <source>fr French</source>
-        <translation>fr Ranska</translation>
-    </message>
-    <message>
-        <source>it Italian</source>
-        <translation>it Italia</translation>
-    </message>
-    <message>
-        <source>pt Portuguese</source>
-        <translation>pt Portugali</translation>
-    </message>
-    <message>
-        <source>ru Russian</source>
-        <translation>ru Venäjä</translation>
     </message>
     <message>
         <source>Canvas</source>
@@ -4373,34 +4400,6 @@ on ristiriidassa nykyisen rajapinnan kanssa</translation>
     <message>
         <source>Expand Repeats</source>
         <translation>Lisää kertaukset</translation>
-    </message>
-    <message>
-        <source>enable midi remote control</source>
-        <translation>salli midin etäkontrolli</translation>
-    </message>
-    <message>
-        <source>Stop</source>
-        <translation>Pysäytä</translation>
-    </message>
-    <message>
-        <source>is active</source>
-        <translation>on aktiivinen</translation>
-    </message>
-    <message>
-        <source>record</source>
-        <translation>äänitä</translation>
-    </message>
-    <message>
-        <source>Record</source>
-        <translation>Äänitä</translation>
-    </message>
-    <message>
-        <source>Rewind</source>
-        <translation>Palauta</translation>
-    </message>
-    <message>
-        <source>Play</source>
-        <translation>Toista</translation>
     </message>
     <message>
         <source>I/O</source>
@@ -4563,30 +4562,6 @@ on ristiriidassa nykyisen rajapinnan kanssa</translation>
         <translation>aloita tyhjä</translation>
     </message>
     <message>
-        <source>cz Czech</source>
-        <translation>cz Tšekki</translation>
-    </message>
-    <message>
-        <source>gl Galician</source>
-        <translation>gl Galicia</translation>
-    </message>
-    <message>
-        <source>hi_IN Hindi</source>
-        <translation>hi_IN Hindi</translation>
-    </message>
-    <message>
-        <source>nl Dutch</source>
-        <translation>nl Hollanti</translation>
-    </message>
-    <message>
-        <source>pt_BR Brasilian Portuguese</source>
-        <translation>pt_BR Brasilian portugali</translation>
-    </message>
-    <message>
-        <source>tr Turkey</source>
-        <translation>tr Turkki</translation>
-    </message>
-    <message>
         <source>Attention: changing the language requires a restart of MuseScore.</source>
         <translation>Huomio: kielen vaihtaminen edellyttää MuseScoren käynnistämisen uudelleen.</translation>
     </message>
@@ -4716,10 +4691,6 @@ on ristiriidassa nykyisen rajapinnan kanssa</translation>
         <translation>Vie MIDI</translation>
     </message>
     <message>
-        <source>MIDI Remote Control</source>
-        <translation>MIDI kaukosäädin</translation>
-    </message>
-    <message>
         <source>Auto-correction</source>
         <translation>Automaattinen korjaus</translation>
     </message>
@@ -4742,10 +4713,6 @@ on ristiriidassa nykyisen rajapinnan kanssa</translation>
     <message>
         <source>Use style file:</source>
         <translation>Käytä tyylitiedostoa:</translation>
-    </message>
-    <message>
-        <source>System</source>
-        <translation>Systeemi</translation>
     </message>
     <message>
         <source>Navigator:</source>
@@ -4779,6 +4746,14 @@ on ristiriidassa nykyisen rajapinnan kanssa</translation>
         <source>Use Current Position</source>
         <translation>Käytä nykyistä sijaintia</translation>
     </message>
+    <message>
+        <source>Character Set used when import non-unicode strings. (For binary file import)</source>
+        <translation>Merkistö käytössä kun  ei-unicode merkkijonoja tuodaan.(Binääritiedoston tuonti)</translation>
+    </message>
+    <message>
+        <source>Character Set</source>
+        <translation>Merkistö</translation>
+    </message>
 </context>
 <context>
     <name>QComboBox</name>
@@ -4796,7 +4771,7 @@ on ristiriidassa nykyisen rajapinnan kanssa</translation>
     </message>
     <message>
         <source>dash (Pedal)</source>
-        <translation>dash (Pedaali)</translation>
+        <translation>viiva (Pedal)</translation>
     </message>
     <message>
         <source>tr (Trill)</source>
@@ -5656,10 +5631,6 @@ ja tarkista, että tiedoston sijainti on oikein.</translation>
 <context>
     <name>StaffTextProperties</name>
     <message>
-        <source>normal</source>
-        <translation>normaali</translation>
-    </message>
-    <message>
         <source>MuseScore: Staff Text Properties</source>
         <translation>MuseScore:  Viivaston tekstiominaisuudet</translation>
     </message>
@@ -5730,7 +5701,7 @@ ja tarkista, että tiedoston sijainti on oikein.</translation>
     </message>
     <message>
         <source>Master Tuning</source>
-        <translation>Päävivirys</translation>
+        <translation>Perusviritys</translation>
     </message>
     <message>
         <source>Hz</source>
@@ -5950,10 +5921,6 @@ ja tarkista, että tiedoston sijainti on oikein.</translation>
     <message>
         <source>Text</source>
         <translation>Teksti</translation>
-    </message>
-    <message>
-        <source>Frame</source>
-        <translation>Kehys</translation>
     </message>
 </context>
 <context>
@@ -6219,7 +6186,7 @@ ja tarkista, että tiedoston sijainti on oikein.</translation>
     </message>
     <message>
         <source>4/4 common time</source>
-        <translation type="unfinished">4/4 vastaava aika</translation>
+        <translation>4/4 aika</translation>
     </message>
     <message>
         <source>2/2 alla breve</source>
@@ -6742,11 +6709,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>flat-slash</source>
-        <translation>alennus-vinoviiva</translation>
+        <translation>alennus vinoviivalla</translation>
     </message>
     <message>
         <source>flat-slash2</source>
-        <translation>alennus-vinoviivoja 2</translation>
+        <translation>alennus 2 vinoviivaa</translation>
     </message>
     <message>
         <source>mirrored-flat2</source>
@@ -6758,63 +6725,63 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>mirrored-flat-slash</source>
-        <translation>peilikuva-alennus-vinoviivalla</translation>
+        <translation>peilikuva-alennus vinoviivalla</translation>
     </message>
     <message>
         <source>flat-flat-slash</source>
-        <translation>kaksoisalennus-vinoviivalla</translation>
+        <translation>kaksoisalennus vinoviivalla</translation>
     </message>
     <message>
         <source>sharp-slash</source>
-        <translation>korotus-vinoviivalla</translation>
+        <translation>korotus vinoviivalla</translation>
     </message>
     <message>
         <source>sharp-slash2</source>
-        <translation>korotus-vinoviivoja 2</translation>
+        <translation>korotus 2 vinoviivaa</translation>
     </message>
     <message>
         <source>sharp-slash3</source>
-        <translation>korotus-vinoviivoja 3</translation>
+        <translation>korotus 3 vinoviivaa</translation>
     </message>
     <message>
         <source>sharp-slash4</source>
-        <translation>korotus-vinoviivoja 4</translation>
+        <translation>korotus 4 vinoviivaa</translation>
     </message>
     <message>
         <source>sharp arrow up</source>
-        <translation>korotus-ylänuoli</translation>
+        <translation>korotus ylänuoli</translation>
     </message>
     <message>
         <source>sharp arrow down</source>
-        <translation>korotus-alanuoli</translation>
+        <translation>korotus alanuoli</translation>
     </message>
     <message>
         <source>sharp arrow both</source>
-        <translation>korotus-nuolilla</translation>
+        <translation>korotus nuolilla</translation>
     </message>
     <message>
         <source>flat arrow up</source>
-        <translation>alennus-ylänuoli</translation>
+        <translation>alennus ylänuolella</translation>
     </message>
     <message>
         <source>flat arrow down</source>
-        <translation>alennus-alanuoli</translation>
+        <translation>alennus alanuolella</translation>
     </message>
     <message>
         <source>flat arrow both</source>
-        <translation>alennus-nuolilla</translation>
+        <translation>alennus nuolilla</translation>
     </message>
     <message>
         <source>natural arrow up</source>
-        <translation>palautus-ylänuoli</translation>
+        <translation>palautus ylänuoli</translation>
     </message>
     <message>
         <source>natural arrow down</source>
-        <translation>palautus-alanuoli</translation>
+        <translation>palautus alanuoli</translation>
     </message>
     <message>
         <source>natural arrow both</source>
-        <translation>palautus-nuolilla</translation>
+        <translation>palautus nuolilla</translation>
     </message>
 </context>
 <context>
@@ -7269,7 +7236,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Append Measures...</source>
-        <translation>Lisää lahteja loppuun ...</translation>
+        <translation>Lisää tahteja loppuun ...</translation>
     </message>
     <message>
         <source>Insert Measure</source>
@@ -8409,7 +8376,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Timewise Delete</source>
-        <translation type="unfinished"/>
+        <translation>Timewise poisto</translation>
     </message>
     <message>
         <source>Delete element and duration</source>
@@ -8444,11 +8411,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>ustaccatissimo</source>
-        <translation>ustaccatissimo</translation>
+        <translation>ylä staccatissimo</translation>
     </message>
     <message>
         <source>dstaccatissimo</source>
-        <translation>dstaccatissimo</translation>
+        <translation>ala staccatissimo</translation>
     </message>
     <message>
         <source>tenuto</source>
@@ -8456,19 +8423,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>uportato</source>
-        <translation>uportato</translation>
+        <translation>ylä portato</translation>
     </message>
     <message>
         <source>dportato</source>
-        <translation>dportato</translation>
+        <translation>ala portato</translation>
     </message>
     <message>
         <source>umarcato</source>
-        <translation>umarcato</translation>
+        <translation>ylä marcato</translation>
     </message>
     <message>
         <source>dmarcato</source>
-        <translation>dmarcato</translation>
+        <translation>ala marcato</translation>
     </message>
     <message>
         <source>ouvert</source>
@@ -8480,19 +8447,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>upbow</source>
-        <translation>upbow</translation>
+        <translation>työntöjousi</translation>
     </message>
     <message>
         <source>downbow</source>
-        <translation>downbow</translation>
+        <translation>vetojousi</translation>
     </message>
     <message>
         <source>reverseturn</source>
-        <translation>reverseturn</translation>
+        <translation>käänteinen korukuvio</translation>
     </message>
     <message>
         <source>turn</source>
-        <translation>turn</translation>
+        <translation>korukuvio</translation>
     </message>
     <message>
         <source>trill</source>
@@ -9059,6 +9026,15 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>score</name>
+    <message>
+        <source>Cannot read this score:
+your version of MuseScore is too old.</source>
+        <translation>Et voi lukea tätä partituuria:&#13;
+sinun MuseScore versio on liian vanha.</translation>
+    </message>
+</context>
+<context>
     <name>symbol</name>
     <message>
         <source>clef eight</source>
@@ -9134,11 +9110,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>outside whole rest</source>
-        <translation>kokotauon ulkopuolella</translation>
+        <translation>kokotauko ulkopuolella</translation>
     </message>
     <message>
         <source>outside half rest</source>
-        <translation>puolitauon ulkopuolella</translation>
+        <translation>puolitauko ulkopuolella</translation>
     </message>
     <message>
         <source>rest M3</source>
@@ -9158,11 +9134,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>clas quart rest</source>
-        <translation>luokka neljäsosatauko</translation>
+        <translation>vanha neljäsosatauko</translation>
     </message>
     <message>
         <source>eight rest</source>
-        <translation>tahdeksasosatauko</translation>
+        <translation>kahdeksasosatauko</translation>
     </message>
     <message>
         <source>16' rest</source>
@@ -9186,27 +9162,27 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>sharp arrow up</source>
-        <translation>korotus-ylänuoli</translation>
+        <translation>korotus ylänuoli</translation>
     </message>
     <message>
         <source>sharp arrow both</source>
-        <translation>korotus-nuolilla</translation>
+        <translation>korotus nuolilla</translation>
     </message>
     <message>
         <source>sharp slash</source>
-        <translation>korotus-vinoviivalla</translation>
+        <translation>korotus vinoviivalla</translation>
     </message>
     <message>
         <source>sharp slash2</source>
-        <translation>korotus-2vinoviivaa</translation>
+        <translation>korotus 2 vinoviivaa</translation>
     </message>
     <message>
         <source>sharp slash3</source>
-        <translation>korotus-3vinoviivaa</translation>
+        <translation>korotus 3 vinoviivaa</translation>
     </message>
     <message>
         <source>sharp slash4</source>
-        <translation>korotus-4vinoviivaa</translation>
+        <translation>korotus 4 vinoviivaa</translation>
     </message>
     <message>
         <source>natural</source>
@@ -9214,15 +9190,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>natural arrow up</source>
-        <translation>palautus-ylänuoli</translation>
+        <translation>palautus ylänuoli</translation>
     </message>
     <message>
         <source>natural arrow down</source>
-        <translation>palautus-alanuoli</translation>
+        <translation>palautus alanuoli</translation>
     </message>
     <message>
         <source>natural arrow both</source>
-        <translation>palautus-nuolilla</translation>
+        <translation>palautus nuolilla</translation>
     </message>
     <message>
         <source>flat</source>
@@ -9230,11 +9206,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>flat arrow up</source>
-        <translation>alennus-ylänuoli</translation>
+        <translation>alennus ylänuolella</translation>
     </message>
     <message>
         <source>flat arrow both</source>
-        <translation>alennus-nuolilla</translation>
+        <translation>alennus nuolilla</translation>
     </message>
     <message>
         <source>flat slash</source>
@@ -9242,7 +9218,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>flat slash2</source>
-        <translation>alennus-2vinoviivaa</translation>
+        <translation>alennus 2 vinoviivaa</translation>
     </message>
     <message>
         <source>mirrored flat2</source>
@@ -9254,7 +9230,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>mirrored flat slash</source>
-        <translation>peilikuva-alennus-vinoviivalla</translation>
+        <translation>peilikuva-alennus vinoviivalla</translation>
     </message>
     <message>
         <source>flat flat</source>
@@ -9262,7 +9238,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>flat flat slash</source>
-        <translation>kaksoisalennus-vinoviivalla</translation>
+        <translation>kaksoisalennus vinoviivalla</translation>
     </message>
     <message>
         <source>sharp sharp</source>
@@ -9270,11 +9246,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>right parenthesis</source>
-        <translation>oikea sivuhuomautus</translation>
+        <translation>oikea sulku</translation>
     </message>
     <message>
         <source>left parenthesis</source>
-        <translation>vasen sivuhuomautus</translation>
+        <translation>vasen sulku</translation>
     </message>
     <message>
         <source>dot</source>
@@ -9342,19 +9318,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>whole slash head</source>
-        <translation type="unfinished"/>
+        <translation>koko kauttaviivanuppi</translation>
     </message>
     <message>
         <source>half slash head</source>
-        <translation type="unfinished"/>
+        <translation>puoli kauttaviivanuppi</translation>
     </message>
     <message>
         <source>quart slash head</source>
-        <translation type="unfinished"/>
+        <translation>neljäsosa kauttaviivanuppi</translation>
     </message>
     <message>
         <source>whole cross head</source>
-        <translation type="unfinished"/>
+        <translation>koko ristinuppi</translation>
     </message>
     <message>
         <source>half cross head</source>
@@ -9366,115 +9342,115 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>x circle head</source>
-        <translation type="unfinished"/>
+        <translation>ympyröity ristinuppi</translation>
     </message>
     <message>
         <source>s0do head</source>
-        <translation type="unfinished"/>
+        <translation>s0do nuppi</translation>
     </message>
     <message>
         <source>d1do head</source>
-        <translation type="unfinished"/>
+        <translation>d1do nuppi</translation>
     </message>
     <message>
         <source>u1do head</source>
-        <translation type="unfinished"/>
+        <translation>u1do nuppi</translation>
     </message>
     <message>
         <source>d2do head</source>
-        <translation type="unfinished"/>
+        <translation>d2do nuppi</translation>
     </message>
     <message>
         <source>u2do head</source>
-        <translation type="unfinished"/>
+        <translation>u2do nuppi</translation>
     </message>
     <message>
         <source>s0re head</source>
-        <translation type="unfinished"/>
+        <translation>s0re nuppi</translation>
     </message>
     <message>
         <source>u1re head</source>
-        <translation type="unfinished"/>
+        <translation>u1re nuppi</translation>
     </message>
     <message>
         <source>d1re head</source>
-        <translation type="unfinished"/>
+        <translation>d1re nuppi</translation>
     </message>
     <message>
         <source>u2re head</source>
-        <translation type="unfinished"/>
+        <translation>u2re nuppi</translation>
     </message>
     <message>
         <source>d2re head</source>
-        <translation type="unfinished"/>
+        <translation>d2re nuppi</translation>
     </message>
     <message>
         <source>s0mi head</source>
-        <translation type="unfinished"/>
+        <translation>s0mi nuppi</translation>
     </message>
     <message>
         <source>s1mi head</source>
-        <translation type="unfinished"/>
+        <translation>s1mi nuppi</translation>
     </message>
     <message>
         <source>s2mi head</source>
-        <translation type="unfinished"/>
+        <translation>s2mi nuppi</translation>
     </message>
     <message>
         <source>u0fa head</source>
-        <translation type="unfinished"/>
+        <translation>u0fa nuppi</translation>
     </message>
     <message>
         <source>d0fa head</source>
-        <translation type="unfinished"/>
+        <translation>d0fa nuppi</translation>
     </message>
     <message>
         <source>u1fa head</source>
-        <translation type="unfinished"/>
+        <translation>u1fa nuppi</translation>
     </message>
     <message>
         <source>d1fa head</source>
-        <translation type="unfinished"/>
+        <translation>d1fa nuppi</translation>
     </message>
     <message>
         <source>u2fa head</source>
-        <translation type="unfinished"/>
+        <translation>u2fa nuppi</translation>
     </message>
     <message>
         <source>d2fa head</source>
-        <translation type="unfinished"/>
+        <translation>d2fa nuppi</translation>
     </message>
     <message>
         <source>s0la head</source>
-        <translation type="unfinished"/>
+        <translation>s0la nuppi</translation>
     </message>
     <message>
         <source>s1la head</source>
-        <translation type="unfinished"/>
+        <translation>s1la nuppi</translation>
     </message>
     <message>
         <source>s2la head</source>
-        <translation type="unfinished"/>
+        <translation>s2la nuppi</translation>
     </message>
     <message>
         <source>s0ti head</source>
-        <translation type="unfinished"/>
+        <translation>s0ti nuppi</translation>
     </message>
     <message>
         <source>u1ti head</source>
-        <translation type="unfinished"/>
+        <translation>u1ti nuppi</translation>
     </message>
     <message>
         <source>d1ti head</source>
-        <translation type="unfinished"/>
+        <translation>d1ti nuppi</translation>
     </message>
     <message>
         <source>u2ti head</source>
-        <translation type="unfinished"/>
+        <translation>u2ti nuppi</translation>
     </message>
     <message>
         <source>d2ti head</source>
-        <translation type="unfinished"/>
+        <translation>d2ti nuppi</translation>
     </message>
     <message>
         <source>ufermata</source>
@@ -9486,7 +9462,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>snappizzicato</source>
-        <translation type="unfinished"/>
+        <translation>snap pizzicato</translation>
     </message>
     <message>
         <source>ushortfermata</source>
@@ -9518,7 +9494,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>sforza to accent</source>
-        <translation type="unfinished"/>
+        <translation>Sforza aksentti</translation>
     </message>
     <message>
         <source>espressivo</source>
@@ -9530,11 +9506,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>ustaccatissimo</source>
-        <translation>ustaccatissimo</translation>
+        <translation>ylä staccatissimo</translation>
     </message>
     <message>
         <source>dstaccatissimo</source>
-        <translation>dstaccatissimo</translation>
+        <translation>ala staccatissimo</translation>
     </message>
     <message>
         <source>tenuto</source>
@@ -9542,19 +9518,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>uportato</source>
-        <translation>uportato</translation>
+        <translation>ylä portato</translation>
     </message>
     <message>
         <source>dportato</source>
-        <translation>dportato</translation>
+        <translation>ala portato</translation>
     </message>
     <message>
         <source>umarcato</source>
-        <translation>umarcato</translation>
+        <translation>ylä marcato</translation>
     </message>
     <message>
         <source>dmarcato</source>
-        <translation>dmarcato</translation>
+        <translation>ala marcato</translation>
     </message>
     <message>
         <source>ouvert</source>
@@ -9566,19 +9542,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>up bow</source>
-        <translation>up bow</translation>
+        <translation>työntöjousi</translation>
     </message>
     <message>
         <source>down bow</source>
-        <translation>down bow</translation>
+        <translation>vetojousi</translation>
     </message>
     <message>
         <source>reverse turn</source>
-        <translation>reverse turn</translation>
+        <translation>käänteinen korukuvio</translation>
     </message>
     <message>
         <source>turn</source>
-        <translation>turn</translation>
+        <translation>korukuvio</translation>
     </message>
     <message>
         <source>trill</source>
@@ -9586,23 +9562,23 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>upedal heel</source>
-        <translation type="unfinished"/>
+        <translation>upedal kanta</translation>
     </message>
     <message>
         <source>dpedalheel</source>
-        <translation type="unfinished"/>
+        <translation>dpedal kanta</translation>
     </message>
     <message>
         <source>upedal toe</source>
-        <translation type="unfinished"/>
+        <translation>upedal varvas</translation>
     </message>
     <message>
         <source>dpedal toe</source>
-        <translation type="unfinished"/>
+        <translation>dpedal varvas</translation>
     </message>
     <message>
         <source>flageolet</source>
-        <translation>flageolet</translation>
+        <translation>huiluääni</translation>
     </message>
     <message>
         <source>segno</source>
@@ -9614,15 +9590,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>varied coda</source>
-        <translation type="unfinished"/>
+        <translation>muuttuva coda</translation>
     </message>
     <message>
         <source>rcomma</source>
-        <translation type="unfinished"/>
+        <translation>oikea pilkku</translation>
     </message>
     <message>
         <source>lcomma</source>
-        <translation type="unfinished"/>
+        <translation>vasen pilkku</translation>
     </message>
     <message>
         <source>arpeggio</source>
@@ -9630,7 +9606,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>trillelement</source>
-        <translation type="unfinished"/>
+        <translation>trilli elementti</translation>
     </message>
     <message>
         <source>arpeggio arrow down</source>
@@ -9722,11 +9698,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>grace dash</source>
-        <translation type="unfinished"/>
+        <translation>grace viiva</translation>
     </message>
     <message>
         <source>dgrace dash</source>
-        <translation type="unfinished"/>
+        <translation>dgrace viiva</translation>
     </message>
     <message>
         <source>dsixteenth flag</source>
@@ -9750,7 +9726,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>calto clef</source>
-        <translation type="unfinished"/>
+        <translation>c alttoavain</translation>
     </message>
     <message>
         <source>bass clef</source>
@@ -9758,7 +9734,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>cbass clef</source>
-        <translation type="unfinished"/>
+        <translation>c bassoavain</translation>
     </message>
     <message>
         <source>trebleclef</source>
@@ -9766,7 +9742,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>ctrebleclef</source>
-        <translation type="unfinished"/>
+        <translation>c diskanttiavain</translation>
     </message>
     <message>
         <source>percussion clef</source>
@@ -9774,7 +9750,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>cpercussion clef</source>
-        <translation type="unfinished"/>
+        <translation>c lyömäsoitinavain</translation>
     </message>
     <message>
         <source>tab clef</source>
@@ -9782,11 +9758,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>ctab clef</source>
-        <translation type="unfinished"/>
+        <translation>c tab avain</translation>
     </message>
     <message>
         <source>four four meter</source>
-        <translation type="unfinished"/>
+        <translation>neljä neljäsosaa</translation>
     </message>
     <message>
         <source>allabreve</source>
@@ -9794,71 +9770,71 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>pedalasterisk</source>
-        <translation type="unfinished"/>
+        <translation>pedal asterisk</translation>
     </message>
     <message>
         <source>pedaldash</source>
-        <translation type="unfinished"/>
+        <translation>pedal viiva</translation>
     </message>
     <message>
         <source>pedaldot</source>
-        <translation type="unfinished"/>
+        <translation>pedal piste</translation>
     </message>
     <message>
         <source>pedalP</source>
-        <translation type="unfinished"/>
+        <translation>pedal P</translation>
     </message>
     <message>
         <source>pedald</source>
-        <translation type="unfinished"/>
+        <translation>pedal d</translation>
     </message>
     <message>
         <source>pedale</source>
-        <translation>pedaali</translation>
+        <translation>pedal e</translation>
     </message>
     <message>
         <source>pedal ped</source>
-        <translation type="unfinished"/>
+        <translation>pedal ped</translation>
     </message>
     <message>
         <source>bracket tips up</source>
-        <translation>Sulkumerkin piikit ylös</translation>
+        <translation>sulun kärjet ylös</translation>
     </message>
     <message>
         <source>bracket tips down</source>
-        <translation>Sulkumerkin piikit alas</translation>
+        <translation>sulun kärjet alas</translation>
     </message>
     <message>
         <source>bracket tips left up</source>
-        <translation type="unfinished"/>
+        <translation>sulun kärjet vas. ylös</translation>
     </message>
     <message>
         <source>bracket tips left down</source>
-        <translation type="unfinished"/>
+        <translation>sulun kärjet vas. alas</translation>
     </message>
     <message>
         <source>acc dot</source>
-        <translation type="unfinished"/>
+        <translation>acc piste</translation>
     </message>
     <message>
         <source>acc freebase</source>
-        <translation type="unfinished"/>
+        <translation>acc freebase</translation>
     </message>
     <message>
         <source>acc stdbase</source>
-        <translation type="unfinished"/>
+        <translation>acc stdbase</translation>
     </message>
     <message>
         <source>acc bayanbase</source>
-        <translation type="unfinished"/>
+        <translation>acc bayanbase</translation>
     </message>
     <message>
         <source>acc old ee</source>
-        <translation type="unfinished"/>
+        <translation>acc vanha ee</translation>
     </message>
     <message>
         <source>acc discant</source>
-        <translation type="unfinished"/>
+        <translation>acc diskantti</translation>
     </message>
     <message>
         <source>zero</source>

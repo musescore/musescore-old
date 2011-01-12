@@ -2471,6 +2471,25 @@ failed: </source>
     </message>
 </context>
 <context>
+    <name>KeySig</name>
+    <message>
+        <source>Hide courtesy signature</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Show courtesy signature</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Hide naturals</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Show naturals</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>LinePropertiesDialog</name>
     <message>
         <source>MuseScore: Line Properties</source>
@@ -3633,7 +3652,43 @@ is incompatible with current interface</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Overture Files &lt;experimental&gt; (*.ove);;All Files (*)</source>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>MuseScore Files (*.mscz *.mscx *.msc);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>MusicXML Files (*.xml *.mxl);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>MIDI Files (*.mid *.midi *.kar);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Muse Data Files (*.md);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Capella Files (*.cap);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Bagpipe Music Writer Files (*.bww);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>All Files (*)</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -3885,6 +3940,10 @@ is incompatible with current interface</source>
     <message>
         <source>Odd Page Margins</source>
         <translation>حدود الصفحات الفردية</translation>
+    </message>
+    <message>
+        <source>First page no.</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -4225,48 +4284,12 @@ is incompatible with current interface</source>
         <translation>البدء بالمدوّنة:</translation>
     </message>
     <message>
-        <source>...</source>
-        <translation>...</translation>
-    </message>
-    <message>
         <source>show splash screen</source>
         <translation>إظهار إعلان البداية</translation>
     </message>
     <message>
         <source>Language</source>
         <translation>اللغة</translation>
-    </message>
-    <message>
-        <source>de German</source>
-        <translation/>
-    </message>
-    <message>
-        <source>en English</source>
-        <translation/>
-    </message>
-    <message>
-        <source>es Spanish</source>
-        <translation/>
-    </message>
-    <message>
-        <source>fr French</source>
-        <translation/>
-    </message>
-    <message>
-        <source>it Italian</source>
-        <translation/>
-    </message>
-    <message>
-        <source>nl Dutch</source>
-        <translation/>
-    </message>
-    <message>
-        <source>pt Portuguese</source>
-        <translation/>
-    </message>
-    <message>
-        <source>ru Russian</source>
-        <translation/>
     </message>
     <message>
         <source>Attention: changing the language requires a restart of MuseScore.</source>
@@ -4407,34 +4430,6 @@ is incompatible with current interface</source>
     <message>
         <source>Expand Repeats</source>
         <translation>فكّ الإعادات</translation>
-    </message>
-    <message>
-        <source>enable midi remote control</source>
-        <translation>تفعيل تشغيل الميدى عن بُعد</translation>
-    </message>
-    <message>
-        <source>Stop</source>
-        <translation>إيقاف</translation>
-    </message>
-    <message>
-        <source>is active</source>
-        <translation>مفعّل</translation>
-    </message>
-    <message>
-        <source>record</source>
-        <translation>تسجيل</translation>
-    </message>
-    <message>
-        <source>Record</source>
-        <translation>تسجيل</translation>
-    </message>
-    <message>
-        <source>Rewind</source>
-        <translation>إرجاع</translation>
-    </message>
-    <message>
-        <source>Play</source>
-        <translation>عزف</translation>
     </message>
     <message>
         <source>I/O</source>
@@ -4593,16 +4588,8 @@ is incompatible with current interface</source>
         <translation>تعريف...</translation>
     </message>
     <message>
-        <source>cz Czech</source>
-        <translation/>
-    </message>
-    <message>
         <source>start empty</source>
         <translation>بداية خالية</translation>
-    </message>
-    <message>
-        <source>gl Galician</source>
-        <translation/>
     </message>
     <message>
         <source>Text</source>
@@ -4637,10 +4624,6 @@ is incompatible with current interface</source>
         <translation>هدف للإسقاط</translation>
     </message>
     <message>
-        <source>tr Turkey</source>
-        <translation/>
-    </message>
-    <message>
         <source>Score</source>
         <translation>مدوّنة</translation>
     </message>
@@ -4655,14 +4638,6 @@ is incompatible with current interface</source>
     <message>
         <source>Landscape</source>
         <translation>بالعرض</translation>
-    </message>
-    <message>
-        <source>hi_IN Hindi</source>
-        <translation/>
-    </message>
-    <message>
-        <source>pt_BR Brasilian Portuguese</source>
-        <translation/>
     </message>
     <message>
         <source>Default duration:</source>
@@ -4702,10 +4677,6 @@ is incompatible with current interface</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <source>MIDI Remote Control</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <source>Auto-correction</source>
         <translation type="unfinished"/>
     </message>
@@ -4728,10 +4699,6 @@ is incompatible with current interface</source>
     <message>
         <source>Use style file:</source>
         <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>System</source>
-        <translation type="unfinished">مجموعة</translation>
     </message>
     <message>
         <source>Navigator:</source>
@@ -4763,6 +4730,14 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Use Current Position</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Character Set used when import non-unicode strings. (For binary file import)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Character Set</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -5642,10 +5617,6 @@ and check that the file location is correct</source>
         <source>Midi Action</source>
         <translation>وظيفة الميدى</translation>
     </message>
-    <message>
-        <source>normal</source>
-        <translation>اعتيادى</translation>
-    </message>
 </context>
 <context>
     <name>SymbolDialog</name>
@@ -5925,10 +5896,6 @@ and check that the file location is correct</source>
     <message>
         <source>Text</source>
         <translation>النصّ</translation>
-    </message>
-    <message>
-        <source>Frame</source>
-        <translation>إطار</translation>
     </message>
 </context>
 <context>
@@ -9030,6 +8997,14 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Every 2 months</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
+    <name>score</name>
+    <message>
+        <source>Cannot read this score:
+your version of MuseScore is too old.</source>
         <translation type="unfinished"/>
     </message>
 </context>

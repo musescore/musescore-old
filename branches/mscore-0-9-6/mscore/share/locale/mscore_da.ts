@@ -2480,6 +2480,25 @@ fejlede: </translation>
     </message>
 </context>
 <context>
+    <name>KeySig</name>
+    <message>
+        <source>Hide courtesy signature</source>
+        <translation>Skjul hjælpe toneart</translation>
+    </message>
+    <message>
+        <source>Show courtesy signature</source>
+        <translation>Vis hjælpe toneart</translation>
+    </message>
+    <message>
+        <source>Hide naturals</source>
+        <translation>Skjul opløsningstegn</translation>
+    </message>
+    <message>
+        <source>Show naturals</source>
+        <translation>Vis opløsningstegn</translation>
+    </message>
+</context>
+<context>
     <name>LinePropertiesDialog</name>
     <message>
         <source>MuseScore: Line Properties</source>
@@ -3038,7 +3057,7 @@ fejlede: </translation>
     </message>
     <message>
         <source>&amp;Style</source>
-        <translation>&amp;Layoustil</translation>
+        <translation>&amp;Layoutstil</translation>
     </message>
     <message>
         <source>&amp;Display</source>
@@ -3647,8 +3666,44 @@ er ikke kompatibelt med det nuværende interface</translation>
 %3</translation>
     </message>
     <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Overture Files &lt;experimental&gt; (*.ove);;All Files (*)</source>
-        <translation>Alle understøttede filer (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap);;MuseScore filer (*.mscz *.mscx *.msc);;MusicXML filer (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data filer (*.md);;Capella filer (*.cap);;BB filer &lt;eksperimentel&gt; (*.mgu *.MGU *.sgu *.SGU);;Overture filer &lt;experimental&gt; (*.ove);;Alle filer (*)</translation>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</source>
+        <translation>Alle understøttede filer (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</translation>
+    </message>
+    <message>
+        <source>MuseScore Files (*.mscz *.mscx *.msc);;</source>
+        <translation>MuseScore filer (*.mscz *.mscx *.msc);;</translation>
+    </message>
+    <message>
+        <source>MusicXML Files (*.xml *.mxl);;</source>
+        <translation>MusicXML filer(*.xml *.mxl);;</translation>
+    </message>
+    <message>
+        <source>MIDI Files (*.mid *.midi *.kar);;</source>
+        <translation>MIDI filer(*.mid *.midi *.kar);;</translation>
+    </message>
+    <message>
+        <source>Muse Data Files (*.md);;</source>
+        <translation>Muse data filer (*.md);;</translation>
+    </message>
+    <message>
+        <source>Capella Files (*.cap);;</source>
+        <translation>Capella filer (*.cap);;</translation>
+    </message>
+    <message>
+        <source>Bagpipe Music Writer Files (*.bww);;</source>
+        <translation>Bagpipe Music Writer filer (*.bww);;</translation>
+    </message>
+    <message>
+        <source>BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;</source>
+        <translation>BB filer &lt;eksperimentel funktion&gt; (*.mgu *.MGU *.sgu *.SGU);;</translation>
+    </message>
+    <message>
+        <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
+        <translation>Overture filer&lt;eksperimentel funktion&gt; (*.ove);;</translation>
+    </message>
+    <message>
+        <source>All Files (*)</source>
+        <translation>Alle filer (*)</translation>
     </message>
 </context>
 <context>
@@ -3899,6 +3954,10 @@ er ikke kompatibelt med det nuværende interface</translation>
     <message>
         <source>Odd Page Margins</source>
         <translation>Ulige siders margen</translation>
+    </message>
+    <message>
+        <source>First page no.</source>
+        <translation>Første sidenummer</translation>
     </message>
 </context>
 <context>
@@ -4239,48 +4298,12 @@ er ikke kompatibelt med det nuværende interface</translation>
         <translation>Start med nodeark:</translation>
     </message>
     <message>
-        <source>...</source>
-        <translation>...</translation>
-    </message>
-    <message>
         <source>show splash screen</source>
         <translation>Vis opstartsbillede</translation>
     </message>
     <message>
         <source>Language</source>
         <translation>Sprog</translation>
-    </message>
-    <message>
-        <source>de German</source>
-        <translation>de Tysk</translation>
-    </message>
-    <message>
-        <source>en English</source>
-        <translation>en Britisk</translation>
-    </message>
-    <message>
-        <source>es Spanish</source>
-        <translation>es Spansk</translation>
-    </message>
-    <message>
-        <source>fr French</source>
-        <translation>fr fransk</translation>
-    </message>
-    <message>
-        <source>it Italian</source>
-        <translation>it Italiensk</translation>
-    </message>
-    <message>
-        <source>nl Dutch</source>
-        <translation>nl Hollansk</translation>
-    </message>
-    <message>
-        <source>pt Portuguese</source>
-        <translation>pt Portugesisk</translation>
-    </message>
-    <message>
-        <source>ru Russian</source>
-        <translation>ru Russisk</translation>
     </message>
     <message>
         <source>Attention: changing the language requires a restart of MuseScore.</source>
@@ -4421,34 +4444,6 @@ er ikke kompatibelt med det nuværende interface</translation>
     <message>
         <source>Expand Repeats</source>
         <translation>Udvid gentagelser</translation>
-    </message>
-    <message>
-        <source>enable midi remote control</source>
-        <translation>slå midi fjernstyring til</translation>
-    </message>
-    <message>
-        <source>Stop</source>
-        <translation>Stop</translation>
-    </message>
-    <message>
-        <source>is active</source>
-        <translation>er aktiv</translation>
-    </message>
-    <message>
-        <source>record</source>
-        <translation>optag</translation>
-    </message>
-    <message>
-        <source>Record</source>
-        <translation>Optag</translation>
-    </message>
-    <message>
-        <source>Rewind</source>
-        <translation>Spol tilbage</translation>
-    </message>
-    <message>
-        <source>Play</source>
-        <translation>Afspil</translation>
     </message>
     <message>
         <source>I/O</source>
@@ -4607,16 +4602,8 @@ er ikke kompatibelt med det nuværende interface</translation>
         <translation>Definér...</translation>
     </message>
     <message>
-        <source>cz Czech</source>
-        <translation>cs Tjekkisk</translation>
-    </message>
-    <message>
         <source>start empty</source>
         <translation>Start tomt</translation>
-    </message>
-    <message>
-        <source>gl Galician</source>
-        <translation>gl Gællisk</translation>
     </message>
     <message>
         <source>Text</source>
@@ -4651,10 +4638,6 @@ er ikke kompatibelt med det nuværende interface</translation>
         <translation>Drop mål</translation>
     </message>
     <message>
-        <source>tr Turkey</source>
-        <translation>tr Tyrkisk</translation>
-    </message>
-    <message>
         <source>Score</source>
         <translation>Stykke</translation>
     </message>
@@ -4669,14 +4652,6 @@ er ikke kompatibelt med det nuværende interface</translation>
     <message>
         <source>Landscape</source>
         <translation>Liggende</translation>
-    </message>
-    <message>
-        <source>hi_IN Hindi</source>
-        <translation>hi_IN Hindi</translation>
-    </message>
-    <message>
-        <source>pt_BR Brasilian Portuguese</source>
-        <translation>pt_BR Brasiliansk</translation>
     </message>
     <message>
         <source>Default duration:</source>
@@ -4716,10 +4691,6 @@ er ikke kompatibelt med det nuværende interface</translation>
         <translation>Eksportér MIDI</translation>
     </message>
     <message>
-        <source>MIDI Remote Control</source>
-        <translation>MIDI Fjernstyring</translation>
-    </message>
-    <message>
         <source>Auto-correction</source>
         <translation>Automatiske rettelser</translation>
     </message>
@@ -4742,10 +4713,6 @@ er ikke kompatibelt med det nuværende interface</translation>
     <message>
         <source>Use style file:</source>
         <translation>Benyt layoutstil fra filen:</translation>
-    </message>
-    <message>
-        <source>System</source>
-        <translation>System</translation>
     </message>
     <message>
         <source>Navigator:</source>
@@ -4778,6 +4745,14 @@ er ikke kompatibelt med det nuværende interface</translation>
     <message>
         <source>Use Current Position</source>
         <translation>Benyt nuværende placering</translation>
+    </message>
+    <message>
+        <source>Character Set used when import non-unicode strings. (For binary file import)</source>
+        <translation>Karaktersæt der skal benyttes ved import af ikke--unicode strenge. (For binær fil import)</translation>
+    </message>
+    <message>
+        <source>Character Set</source>
+        <translation>Karaktersæt</translation>
     </message>
 </context>
 <context>
@@ -5667,10 +5642,6 @@ og kontrollér at filplaceringen er korrekt.</translation>
         <source>Midi Action</source>
         <translation>Midi handling</translation>
     </message>
-    <message>
-        <source>normal</source>
-        <translation>normal</translation>
-    </message>
 </context>
 <context>
     <name>SymbolDialog</name>
@@ -5950,10 +5921,6 @@ og kontrollér at filplaceringen er korrekt.</translation>
     <message>
         <source>Text</source>
         <translation>Tekst</translation>
-    </message>
-    <message>
-        <source>Frame</source>
-        <translation>Ramme</translation>
     </message>
 </context>
 <context>
@@ -9057,6 +9024,15 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Every 2 months</source>
         <translation>Hver 2. måned</translation>
+    </message>
+</context>
+<context>
+    <name>score</name>
+    <message>
+        <source>Cannot read this score:
+your version of MuseScore is too old.</source>
+        <translation>Kan ikke læse dette stykke:&#13;
+din version af MuseScore er for gammel</translation>
     </message>
 </context>
 <context>

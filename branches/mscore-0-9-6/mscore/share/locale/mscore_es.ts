@@ -5,7 +5,7 @@
     <name>AboutBox</name>
     <message>
         <source>AboutBox</source>
-        <translation>Acerca de</translation>
+        <translation>Acerca de MuseScore</translation>
     </message>
     <message>
         <source>Version: 0.9.0</source>
@@ -26,7 +26,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt; &lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt; p, li { white-space: pre-wrap; } &lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt; &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Visita &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; para nuevas versiones y más información &lt;/span&gt;&lt;/p&gt; &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Apoya MuseScore con &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;tu donación&lt;/span&gt;&lt;/a&gt;&lt;/p&gt; &lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt; &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt; &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Publicado bajo la GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt; &lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt; p, li { white-space: pre-wrap; } &lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt; &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Visita &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; para nuevas versiones y más información &lt;/span&gt;&lt;/p&gt; &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Apoya MuseScore con &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;tu donación&lt;/span&gt;&lt;/a&gt;&lt;/p&gt; &lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt; &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer y otros. &lt;/span&gt;&lt;/p&gt; &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Publicado bajo la GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -2471,6 +2471,25 @@ fallido: </translation>
     </message>
 </context>
 <context>
+    <name>KeySig</name>
+    <message>
+        <source>Hide courtesy signature</source>
+        <translation>ocultar armaduras de cortesía</translation>
+    </message>
+    <message>
+        <source>Show courtesy signature</source>
+        <translation>mostrar armaduras de cortesía</translation>
+    </message>
+    <message>
+        <source>Hide naturals</source>
+        <translation>ocultar becuadros</translation>
+    </message>
+    <message>
+        <source>Show naturals</source>
+        <translation>mostrar becuadros</translation>
+    </message>
+</context>
+<context>
     <name>LinePropertiesDialog</name>
     <message>
         <source>MuseScore: Line Properties</source>
@@ -3137,7 +3156,7 @@ fallido: </translation>
     </message>
     <message>
         <source>About&amp;Qt</source>
-        <translation>Acerca de&amp;Qt</translation>
+        <translation>Acerca de &amp;Qt</translation>
     </message>
     <message>
         <source>MuseScore: Open Help</source>
@@ -3635,8 +3654,44 @@ no es compatible con el interfaz actual</translation>
 %3</translation>
     </message>
     <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Overture Files &lt;experimental&gt; (*.ove);;All Files (*)</source>
-        <translation>Todos los Archivos Soportados (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;Archivos MuseScore (*.mscz *.mscx *.msc);;Archivos MusicXML (*.xml *.mxl);;Archivos MIDI (*.mid *.midi *.kar);;Archivos Muse Data (*.md);;Archivos Capella (*.cap);;Archivos BB &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Archivos Overture &lt;experimental&gt; (*.ove);;Todos los archivos (*)</translation>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</source>
+        <translation>Todos los archivos soportados (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</translation>
+    </message>
+    <message>
+        <source>MuseScore Files (*.mscz *.mscx *.msc);;</source>
+        <translation>Archivos de MuseScore (*.mscz *.mscx *.msc);;</translation>
+    </message>
+    <message>
+        <source>MusicXML Files (*.xml *.mxl);;</source>
+        <translation>Archivos MusicXML (*.xml *.mxl);;</translation>
+    </message>
+    <message>
+        <source>MIDI Files (*.mid *.midi *.kar);;</source>
+        <translation>Archivos MIDI (*.mid *.midi *.kar);;</translation>
+    </message>
+    <message>
+        <source>Muse Data Files (*.md);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Capella Files (*.cap);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Bagpipe Music Writer Files (*.bww);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;</source>
+        <translation>Archivos BB &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;</translation>
+    </message>
+    <message>
+        <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>All Files (*)</source>
+        <translation>Todos los archivos (*)</translation>
     </message>
 </context>
 <context>
@@ -3887,6 +3942,10 @@ no es compatible con el interfaz actual</translation>
     <message>
         <source>Odd Page Margins</source>
         <translation>Margen de las Páginas Impares</translation>
+    </message>
+    <message>
+        <source>First page no.</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -4219,10 +4278,6 @@ no es compatible con el interfaz actual</translation>
         <translation>comenzar con una partitura nueva</translation>
     </message>
     <message>
-        <source>...</source>
-        <translation>...</translation>
-    </message>
-    <message>
         <source>start with score:</source>
         <translation>comenzar con la partitura:</translation>
     </message>
@@ -4329,34 +4384,6 @@ no es compatible con el interfaz actual</translation>
     <message>
         <source>Expand Repeats</source>
         <translation>Expandir Repeticiones</translation>
-    </message>
-    <message>
-        <source>enable midi remote control</source>
-        <translation>habilitar el control remoto del midi</translation>
-    </message>
-    <message>
-        <source>Stop</source>
-        <translation>Detener</translation>
-    </message>
-    <message>
-        <source>is active</source>
-        <translation>está activo</translation>
-    </message>
-    <message>
-        <source>record</source>
-        <translation>grabar</translation>
-    </message>
-    <message>
-        <source>Record</source>
-        <translation>Grabar</translation>
-    </message>
-    <message>
-        <source>Rewind</source>
-        <translation>Retroceder</translation>
-    </message>
-    <message>
-        <source>Play</source>
-        <translation>Reproducir</translation>
     </message>
     <message>
         <source>I/O</source>
@@ -4519,60 +4546,8 @@ no es compatible con el interfaz actual</translation>
         <translation>Lenguaje</translation>
     </message>
     <message>
-        <source>de German</source>
-        <translation>de Alemán</translation>
-    </message>
-    <message>
-        <source>en English</source>
-        <translation>en Inglés</translation>
-    </message>
-    <message>
-        <source>es Spanish</source>
-        <translation>es Castellano</translation>
-    </message>
-    <message>
-        <source>fr French</source>
-        <translation>fr Francés</translation>
-    </message>
-    <message>
-        <source>it Italian</source>
-        <translation>it Italiano</translation>
-    </message>
-    <message>
-        <source>pt Portuguese</source>
-        <translation>pt Portugués</translation>
-    </message>
-    <message>
-        <source>ru Russian</source>
-        <translation>ru Ruso</translation>
-    </message>
-    <message>
         <source>start empty</source>
         <translation>comenzar sin cargar ningún documento</translation>
-    </message>
-    <message>
-        <source>cz Czech</source>
-        <translation>cz Checo</translation>
-    </message>
-    <message>
-        <source>gl Galician</source>
-        <translation>gl Gallego</translation>
-    </message>
-    <message>
-        <source>hi_IN Hindi</source>
-        <translation>hi_IN Indú</translation>
-    </message>
-    <message>
-        <source>nl Dutch</source>
-        <translation>nl Holandés</translation>
-    </message>
-    <message>
-        <source>pt_BR Brasilian Portuguese</source>
-        <translation>pr_BR Portugués Brasileño</translation>
-    </message>
-    <message>
-        <source>tr Turkey</source>
-        <translation>tr Turco</translation>
     </message>
     <message>
         <source>Attention: changing the language requires a restart of MuseScore.</source>
@@ -4704,10 +4679,6 @@ no es compatible con el interfaz actual</translation>
         <translation>Exportar MIDI</translation>
     </message>
     <message>
-        <source>MIDI Remote Control</source>
-        <translation>Control Remoto del MIDI</translation>
-    </message>
-    <message>
         <source>Auto-correction</source>
         <translation>Auto-corrección</translation>
     </message>
@@ -4730,10 +4701,6 @@ no es compatible con el interfaz actual</translation>
     <message>
         <source>Use style file:</source>
         <translation>Usar archivo de estilo:</translation>
-    </message>
-    <message>
-        <source>System</source>
-        <translation>Sistema</translation>
     </message>
     <message>
         <source>Navigator:</source>
@@ -4766,6 +4733,14 @@ no es compatible con el interfaz actual</translation>
     <message>
         <source>Use Current Position</source>
         <translation>Usar Posición Actual</translation>
+    </message>
+    <message>
+        <source>Character Set used when import non-unicode strings. (For binary file import)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Character Set</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -5641,10 +5616,6 @@ y comprueba que la ruta al archivo es correcta.</translation>
 <context>
     <name>StaffTextProperties</name>
     <message>
-        <source>normal</source>
-        <translation>normal</translation>
-    </message>
-    <message>
         <source>MuseScore: Staff Text Properties</source>
         <translation>MuseScore: Propiedades de Texto de Pentagrama</translation>
     </message>
@@ -5936,10 +5907,6 @@ y comprueba que la ruta al archivo es correcta.</translation>
         <source>Text</source>
         <translation>Texto</translation>
     </message>
-    <message>
-        <source>Frame</source>
-        <translation>MArco</translation>
-    </message>
 </context>
 <context>
     <name>TextProp</name>
@@ -6175,7 +6142,7 @@ y comprueba que la ruta al archivo es correcta.</translation>
     </message>
     <message>
         <source>System Flag</source>
-        <translation type="unfinished">Bandera del Sistema</translation>
+        <translation>Bandera del sistema</translation>
     </message>
 </context>
 <context>
@@ -8707,11 +8674,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>open high conga</source>
-        <translation type="unfinished"/>
+        <translation>conga aguda</translation>
     </message>
     <message>
         <source>low conga</source>
-        <translation type="unfinished"/>
+        <translation>conga grave</translation>
     </message>
 </context>
 <context>
@@ -9041,6 +9008,15 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Every 2 months</source>
         <translation>Cada 2 meses</translation>
+    </message>
+</context>
+<context>
+    <name>score</name>
+    <message>
+        <source>Cannot read this score:
+your version of MuseScore is too old.</source>
+        <translation>Esta partitura no puede ser leída:&#13;
+Su versión de MuseScore es muy antigua</translation>
     </message>
 </context>
 <context>

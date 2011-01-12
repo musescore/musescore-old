@@ -9,7 +9,7 @@
     </message>
     <message>
         <source>Version: 0.9.0</source>
-        <translation>Έκδοση: 0.9.6</translation>
+        <translation>Έκδοση: 1.00</translation>
     </message>
     <message>
         <source>Revision: 628</source>
@@ -2503,6 +2503,25 @@ failed: </source>
     </message>
 </context>
 <context>
+    <name>KeySig</name>
+    <message>
+        <source>Hide courtesy signature</source>
+        <translation>Απόκρυψη courtesy signature</translation>
+    </message>
+    <message>
+        <source>Show courtesy signature</source>
+        <translation>Εμφάνιση courtesy signature</translation>
+    </message>
+    <message>
+        <source>Hide naturals</source>
+        <translation>Απόκρυψη αναιρέσεων</translation>
+    </message>
+    <message>
+        <source>Show naturals</source>
+        <translation>Εμφάνιση ανεραίσεων</translation>
+    </message>
+</context>
+<context>
     <name>LinePropertiesDialog</name>
     <message>
         <source>MuseScore: Line Properties</source>
@@ -3670,8 +3689,44 @@ is incompatible with current interface</translation>
 %3</translation>
     </message>
     <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Overture Files &lt;experimental&gt; (*.ove);;All Files (*)</source>
-        <translation>Όλα τα υποστηριζόμενα αρχεία (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;Αρχεία MuseScore (*.mscz *.mscx *.msc);;Αρχεία MusicXML (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Αρχεία Δεδομένων Muse (*.md);;Αρχεία Capella (*.cap);;Αρχεία BB &lt;πειραματικό&gt; (*.mgu *.MGU *.sgu *.SGU);;Αρχεία Overture &lt;πειραματικό&gt; (*.ove);;Όλα τα αρχεία (*)</translation>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</source>
+        <translation>Όλα τα Υποστηριζόμενα Αρχεία (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</translation>
+    </message>
+    <message>
+        <source>MuseScore Files (*.mscz *.mscx *.msc);;</source>
+        <translation>Αρχεία MuseScore (*.mscz *.mscx *.msc);;</translation>
+    </message>
+    <message>
+        <source>MusicXML Files (*.xml *.mxl);;</source>
+        <translation>Αρχεία MusicXML (*.xml *.mxl);;</translation>
+    </message>
+    <message>
+        <source>MIDI Files (*.mid *.midi *.kar);;</source>
+        <translation>Αρχεία MIDI (*.mid *.midi *.kar);;</translation>
+    </message>
+    <message>
+        <source>Muse Data Files (*.md);;</source>
+        <translation>Αρχεία Muse Data (*.md);;</translation>
+    </message>
+    <message>
+        <source>Capella Files (*.cap);;</source>
+        <translation>Αρχεία Capella (*.cap);;</translation>
+    </message>
+    <message>
+        <source>Bagpipe Music Writer Files (*.bww);;</source>
+        <translation>Αρχεία Bagpipe Music Writer (*bww);;</translation>
+    </message>
+    <message>
+        <source>BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;</source>
+        <translation>Αρχεία BB &lt;πειραματικά&gt; (*.mgu *.MGU *.sgu *.SGU);;</translation>
+    </message>
+    <message>
+        <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
+        <translation>Αρχεία Overture &lt;πειραματικά&gt; (*.ove);;</translation>
+    </message>
+    <message>
+        <source>All Files (*)</source>
+        <translation>Όλα τα Αρχεία (*)</translation>
     </message>
 </context>
 <context>
@@ -3922,6 +3977,10 @@ is incompatible with current interface</translation>
     <message>
         <source>Odd Page Margins</source>
         <translation>Περιθόρια Μονών Σελίδων</translation>
+    </message>
+    <message>
+        <source>First page no.</source>
+        <translation>Όχι την πρώτη σελίδα</translation>
     </message>
 </context>
 <context>
@@ -4284,58 +4343,6 @@ is incompatible with current interface</translation>
         <translation>Γλώσσα</translation>
     </message>
     <message>
-        <source>cz Czech</source>
-        <translation>cz Czech</translation>
-    </message>
-    <message>
-        <source>de German</source>
-        <translation>de German</translation>
-    </message>
-    <message>
-        <source>en English</source>
-        <translation>en English</translation>
-    </message>
-    <message>
-        <source>es Spanish</source>
-        <translation>es Spanish</translation>
-    </message>
-    <message>
-        <source>fr French</source>
-        <translation>fr French</translation>
-    </message>
-    <message>
-        <source>gl Galician</source>
-        <translation>gl Galician</translation>
-    </message>
-    <message>
-        <source>hi_IN Hindi</source>
-        <translation>hi_IN Hindi</translation>
-    </message>
-    <message>
-        <source>it Italian</source>
-        <translation>it Italian</translation>
-    </message>
-    <message>
-        <source>nl Dutch</source>
-        <translation>nl Dutch</translation>
-    </message>
-    <message>
-        <source>pt Portuguese</source>
-        <translation>pt Portuguese</translation>
-    </message>
-    <message>
-        <source>pt_BR Brasilian Portuguese</source>
-        <translation>pt_BR Brasilian Portuguese</translation>
-    </message>
-    <message>
-        <source>ru Russian</source>
-        <translation>ru Russian</translation>
-    </message>
-    <message>
-        <source>tr Turkey</source>
-        <translation>tr Turkey</translation>
-    </message>
-    <message>
         <source>Attention: changing the language requires a restart of MuseScore.</source>
         <translation>Προσοχή: Η αλλαγή της γλώσσας απαιτεί επανεκκίνηση του MuseScore.</translation>
     </message>
@@ -4523,42 +4530,6 @@ is incompatible with current interface</translation>
     <message>
         <source>Expand Repeats</source>
         <translation>Επέκταση Επαναλήψεων</translation>
-    </message>
-    <message>
-        <source>enable midi remote control</source>
-        <translation>ενεργοποίηση τηλεχειριστηρίου midi</translation>
-    </message>
-    <message>
-        <source>MIDI Remote Control</source>
-        <translation>Τηλεχειριστήριο MIDI</translation>
-    </message>
-    <message>
-        <source>Stop</source>
-        <translation>Στοπ</translation>
-    </message>
-    <message>
-        <source>is active</source>
-        <translation>είναι ενεργό</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation>...</translation>
-    </message>
-    <message>
-        <source>record</source>
-        <translation>εγγραφή</translation>
-    </message>
-    <message>
-        <source>Record</source>
-        <translation>Εγγραφή</translation>
-    </message>
-    <message>
-        <source>Rewind</source>
-        <translation>Γρήγορη κίνηση πίσω</translation>
-    </message>
-    <message>
-        <source>Play</source>
-        <translation>Αναπαραγωγή</translation>
     </message>
     <message>
         <source>Score</source>
@@ -4770,10 +4741,6 @@ is incompatible with current interface</translation>
         <translation>χρήση αρχείου στυλ:</translation>
     </message>
     <message>
-        <source>System</source>
-        <translation>Σύστημα</translation>
-    </message>
-    <message>
         <source>Navigator:</source>
         <translation>Πλοηγός:</translation>
     </message>
@@ -4804,6 +4771,14 @@ is incompatible with current interface</translation>
     <message>
         <source>Use Current Position</source>
         <translation>Χρήση Τρέχουσας Θέσης</translation>
+    </message>
+    <message>
+        <source>Character Set used when import non-unicode strings. (For binary file import)</source>
+        <translation>Σύνολο Χαρακτήρων που χρησιμοποιούνται κατά την εισαγωγή non-unicode strings. (Για εισαγωγή δυαδικών (binary) αρχείων)</translation>
+    </message>
+    <message>
+        <source>Character Set</source>
+        <translation>Σύνολο Χαρακτήρων</translation>
     </message>
 </context>
 <context>
@@ -5682,10 +5657,6 @@ and check that the file location is correct</source>
 <context>
     <name>StaffTextProperties</name>
     <message>
-        <source>normal</source>
-        <translation>κανονικό</translation>
-    </message>
-    <message>
         <source>MuseScore: Staff Text Properties</source>
         <translation>MuseScore: Ιδιότητες Κειμένου Πενταγράμμου</translation>
     </message>
@@ -5978,10 +5949,6 @@ and check that the file location is correct</source>
     <message>
         <source>Text</source>
         <translation>Κείμενο</translation>
-    </message>
-    <message>
-        <source>Frame</source>
-        <translation>Πλαίσιο</translation>
     </message>
 </context>
 <context>
@@ -9085,6 +9052,15 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Every 2 months</source>
         <translation>Κάθε 2 μήνες</translation>
+    </message>
+</context>
+<context>
+    <name>score</name>
+    <message>
+        <source>Cannot read this score:
+your version of MuseScore is too old.</source>
+        <translation>Το διάβασμα αυτής της παρτιτούρας είναι αδύνατο:&#13;
+η έκδοση του MuseScore είναι πολύ παλιά.</translation>
     </message>
 </context>
 <context>

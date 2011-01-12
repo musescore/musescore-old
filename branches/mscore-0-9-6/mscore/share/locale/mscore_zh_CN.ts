@@ -2480,6 +2480,25 @@ failed: </translation>
     </message>
 </context>
 <context>
+    <name>KeySig</name>
+    <message>
+        <source>Hide courtesy signature</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Show courtesy signature</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Hide naturals</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Show naturals</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>LinePropertiesDialog</name>
     <message>
         <source>MuseScore: Line Properties</source>
@@ -3648,8 +3667,44 @@ is incompatible with current interface</source>
 %3</translation>
     </message>
     <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Overture Files &lt;experimental&gt; (*.ove);;All Files (*)</source>
-        <translation>全部支持的文件 (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;MuseScore 文件 (*.mscz *.mscx *.msc);;MusicXML 文件 (*.xml *.mxl);;MIDI 文件 (*.mid *.midi *.kar);;Muse Data 文件 (*.md);;Capella 文件 (*.cap);;BB 文件 &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Overture 文件 &lt;experimental&gt; (*.ove);;所有文件 (*)</translation>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>MuseScore Files (*.mscz *.mscx *.msc);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>MusicXML Files (*.xml *.mxl);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>MIDI Files (*.mid *.midi *.kar);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Muse Data Files (*.md);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Capella Files (*.cap);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Bagpipe Music Writer Files (*.bww);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>All Files (*)</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -3900,6 +3955,10 @@ is incompatible with current interface</source>
     <message>
         <source>Odd Page Margins</source>
         <translation>奇数页边距</translation>
+    </message>
+    <message>
+        <source>First page no.</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -4232,10 +4291,6 @@ is incompatible with current interface</source>
         <translation>启动时创建新乐谱</translation>
     </message>
     <message>
-        <source>...</source>
-        <translation>...</translation>
-    </message>
-    <message>
         <source>start with score:</source>
         <translation>启动时载入乐谱：</translation>
     </message>
@@ -4282,34 +4337,6 @@ is incompatible with current interface</source>
     <message>
         <source>Language</source>
         <translation>语言</translation>
-    </message>
-    <message>
-        <source>de German</source>
-        <translation>德语</translation>
-    </message>
-    <message>
-        <source>en English</source>
-        <translation>英语</translation>
-    </message>
-    <message>
-        <source>es Spanish</source>
-        <translation>西班牙语</translation>
-    </message>
-    <message>
-        <source>fr French</source>
-        <translation>法语</translation>
-    </message>
-    <message>
-        <source>it Italian</source>
-        <translation>意大利语</translation>
-    </message>
-    <message>
-        <source>pt Portuguese</source>
-        <translation>葡萄牙语</translation>
-    </message>
-    <message>
-        <source>ru Russian</source>
-        <translation>俄语</translation>
     </message>
     <message>
         <source>Canvas</source>
@@ -4374,34 +4401,6 @@ is incompatible with current interface</source>
     <message>
         <source>Expand Repeats</source>
         <translation>播放反复记号</translation>
-    </message>
-    <message>
-        <source>enable midi remote control</source>
-        <translation>启用 MIDI 远程控制</translation>
-    </message>
-    <message>
-        <source>Stop</source>
-        <translation>停止</translation>
-    </message>
-    <message>
-        <source>is active</source>
-        <translation>工作中</translation>
-    </message>
-    <message>
-        <source>record</source>
-        <translation>录音</translation>
-    </message>
-    <message>
-        <source>Record</source>
-        <translation>录音</translation>
-    </message>
-    <message>
-        <source>Rewind</source>
-        <translation>后退</translation>
-    </message>
-    <message>
-        <source>Play</source>
-        <translation>播放</translation>
     </message>
     <message>
         <source>I/O</source>
@@ -4564,30 +4563,6 @@ is incompatible with current interface</source>
         <translation>启动时打开空白乐谱</translation>
     </message>
     <message>
-        <source>cz Czech</source>
-        <translation>捷克语</translation>
-    </message>
-    <message>
-        <source>gl Galician</source>
-        <translation>加里西亚语</translation>
-    </message>
-    <message>
-        <source>hi_IN Hindi</source>
-        <translation>北印度语</translation>
-    </message>
-    <message>
-        <source>nl Dutch</source>
-        <translation>荷兰语</translation>
-    </message>
-    <message>
-        <source>pt_BR Brasilian Portuguese</source>
-        <translation>巴西葡萄牙语</translation>
-    </message>
-    <message>
-        <source>tr Turkey</source>
-        <translation>土耳其语</translation>
-    </message>
-    <message>
         <source>Attention: changing the language requires a restart of MuseScore.</source>
         <translation>注意：改变语言需要重新启动 MuseScore。</translation>
     </message>
@@ -4717,10 +4692,6 @@ is incompatible with current interface</source>
         <translation>导出 Midi</translation>
     </message>
     <message>
-        <source>MIDI Remote Control</source>
-        <translation>Midi 远程控制</translation>
-    </message>
-    <message>
         <source>Auto-correction</source>
         <translation>自动纠正</translation>
     </message>
@@ -4743,10 +4714,6 @@ is incompatible with current interface</source>
     <message>
         <source>Use style file:</source>
         <translation>使用样式文件：</translation>
-    </message>
-    <message>
-        <source>System</source>
-        <translation>系统</translation>
     </message>
     <message>
         <source>Navigator:</source>
@@ -4779,6 +4746,14 @@ is incompatible with current interface</source>
     <message>
         <source>Use Current Position</source>
         <translation>使用当前位置</translation>
+    </message>
+    <message>
+        <source>Character Set used when import non-unicode strings. (For binary file import)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Character Set</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -5656,10 +5631,6 @@ and check that the file location is correct</source>
 <context>
     <name>StaffTextProperties</name>
     <message>
-        <source>normal</source>
-        <translation>标准</translation>
-    </message>
-    <message>
         <source>MuseScore: Staff Text Properties</source>
         <translation>MuseScore：谱表文字属性</translation>
     </message>
@@ -5950,10 +5921,6 @@ and check that the file location is correct</source>
     <message>
         <source>Text</source>
         <translation>文字</translation>
-    </message>
-    <message>
-        <source>Frame</source>
-        <translation>占位框</translation>
     </message>
 </context>
 <context>
@@ -9061,6 +9028,14 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Every 2 months</source>
         <translation>每两个月</translation>
+    </message>
+</context>
+<context>
+    <name>score</name>
+    <message>
+        <source>Cannot read this score:
+your version of MuseScore is too old.</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>

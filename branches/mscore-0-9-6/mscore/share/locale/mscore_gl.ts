@@ -1731,7 +1731,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Minimum Number of empty measures:</source>
-        <translation>Número mínimo de compases valeiros:</translation>
+        <translation>Número mínimo de compases baleiros:</translation>
     </message>
     <message>
         <source>System Bracket Distance:</source>
@@ -2477,6 +2477,25 @@ fallou: </translation>
     <message>
         <source>MuseScore: Key Signatures</source>
         <translation>MuseScore: Armaduras</translation>
+    </message>
+</context>
+<context>
+    <name>KeySig</name>
+    <message>
+        <source>Hide courtesy signature</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Show courtesy signature</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Hide naturals</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Show naturals</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -3647,8 +3666,44 @@ is incompatible with current interface</source>
 %3</translation>
     </message>
     <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Overture Files &lt;experimental&gt; (*.ove);;All Files (*)</source>
-        <translation>Todos os ficheiros coñecidos (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;ficheiros do MuseScore (*.mscz *.mscx *.msc);;Ficheiros MusicXML (*.xml *.mxl);;Ficheiros MIDI (*.mid *.midi *.kar);;Ficheiros de datos do Muse (*.md);;Ficheiros do Capella (*.cap);;Ficheiros do BB &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Ficheiros do Overture &lt;experimental&gt; (*.ove);;Todos os ficheiros (*)</translation>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</source>
+        <translation>Todos os ficheiros admitidos (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</translation>
+    </message>
+    <message>
+        <source>MuseScore Files (*.mscz *.mscx *.msc);;</source>
+        <translation>Ficheiros do MuseScore (*.mscz *.mscx *.msc);;</translation>
+    </message>
+    <message>
+        <source>MusicXML Files (*.xml *.mxl);;</source>
+        <translation>Ficheiros MusicXML (*.xml *.mxl);;</translation>
+    </message>
+    <message>
+        <source>MIDI Files (*.mid *.midi *.kar);;</source>
+        <translation>Ficheiros MIDI (*.mid *.midi *.kar);;</translation>
+    </message>
+    <message>
+        <source>Muse Data Files (*.md);;</source>
+        <translation>Ficheiros de datos do Muse (*.md);;</translation>
+    </message>
+    <message>
+        <source>Capella Files (*.cap);;</source>
+        <translation>Ficheiros do Capella (*.cap);;</translation>
+    </message>
+    <message>
+        <source>Bagpipe Music Writer Files (*.bww);;</source>
+        <translation>Ficheiros do Bagpipe Music Writer (*.bww);;</translation>
+    </message>
+    <message>
+        <source>BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;</source>
+        <translation>Ficheiros BB &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;</translation>
+    </message>
+    <message>
+        <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
+        <translation>Ficheiros do Overture &lt;experimental&gt; (*.ove);;</translation>
+    </message>
+    <message>
+        <source>All Files (*)</source>
+        <translation>Todos os ficheiros (*)</translation>
     </message>
 </context>
 <context>
@@ -3899,6 +3954,10 @@ is incompatible with current interface</source>
     <message>
         <source>Odd Page Margins</source>
         <translation>Marxes das páxinas impares</translation>
+    </message>
+    <message>
+        <source>First page no.</source>
+        <translation>Número da primeira páxina</translation>
     </message>
 </context>
 <context>
@@ -4239,48 +4298,12 @@ is incompatible with current interface</source>
         <translation>comezar con esta partitura:</translation>
     </message>
     <message>
-        <source>...</source>
-        <translation>...</translation>
-    </message>
-    <message>
         <source>show splash screen</source>
         <translation>mostrar a pantalla de inicio</translation>
     </message>
     <message>
         <source>Language</source>
         <translation>Lingua</translation>
-    </message>
-    <message>
-        <source>de German</source>
-        <translation>de alemán</translation>
-    </message>
-    <message>
-        <source>en English</source>
-        <translation>en inglés</translation>
-    </message>
-    <message>
-        <source>es Spanish</source>
-        <translation>es español</translation>
-    </message>
-    <message>
-        <source>fr French</source>
-        <translation>fr francés</translation>
-    </message>
-    <message>
-        <source>it Italian</source>
-        <translation>it italiano</translation>
-    </message>
-    <message>
-        <source>nl Dutch</source>
-        <translation>nl holandés</translation>
-    </message>
-    <message>
-        <source>pt Portuguese</source>
-        <translation>pt portugués</translation>
-    </message>
-    <message>
-        <source>ru Russian</source>
-        <translation>ru ruso</translation>
     </message>
     <message>
         <source>Attention: changing the language requires a restart of MuseScore.</source>
@@ -4421,34 +4444,6 @@ is incompatible with current interface</source>
     <message>
         <source>Expand Repeats</source>
         <translation>Expandir as repeticións</translation>
-    </message>
-    <message>
-        <source>enable midi remote control</source>
-        <translation>activar o control remoto do midi</translation>
-    </message>
-    <message>
-        <source>Stop</source>
-        <translation>Deter</translation>
-    </message>
-    <message>
-        <source>is active</source>
-        <translation>está activo</translation>
-    </message>
-    <message>
-        <source>record</source>
-        <translation>gravar</translation>
-    </message>
-    <message>
-        <source>Record</source>
-        <translation>Gravar</translation>
-    </message>
-    <message>
-        <source>Rewind</source>
-        <translation>Rebobinar</translation>
-    </message>
-    <message>
-        <source>Play</source>
-        <translation>Reproducir</translation>
     </message>
     <message>
         <source>I/O</source>
@@ -4611,26 +4606,6 @@ is incompatible with current interface</source>
         <translation>comezar en branco</translation>
     </message>
     <message>
-        <source>cz Czech</source>
-        <translation>cz Checo</translation>
-    </message>
-    <message>
-        <source>gl Galician</source>
-        <translation>gl Galego</translation>
-    </message>
-    <message>
-        <source>hi_IN Hindi</source>
-        <translation>hi_IN Hindi</translation>
-    </message>
-    <message>
-        <source>pt_BR Brasilian Portuguese</source>
-        <translation>pt_BR Portugués do Brasil</translation>
-    </message>
-    <message>
-        <source>tr Turkey</source>
-        <translation>tr Turquía</translation>
-    </message>
-    <message>
         <source>Text</source>
         <translation>Texto</translation>
     </message>
@@ -4716,10 +4691,6 @@ is incompatible with current interface</source>
         <translation>Exportar a MIDI</translation>
     </message>
     <message>
-        <source>MIDI Remote Control</source>
-        <translation>Control remoto de MIDI</translation>
-    </message>
-    <message>
         <source>Auto-correction</source>
         <translation>Corrección automática</translation>
     </message>
@@ -4742,10 +4713,6 @@ is incompatible with current interface</source>
     <message>
         <source>Use style file:</source>
         <translation>Empregar un ficheiro de estilo:</translation>
-    </message>
-    <message>
-        <source>System</source>
-        <translation>Sistema</translation>
     </message>
     <message>
         <source>Navigator:</source>
@@ -4778,6 +4745,14 @@ is incompatible with current interface</source>
     <message>
         <source>Use Current Position</source>
         <translation>Empregar a posición actual</translation>
+    </message>
+    <message>
+        <source>Character Set used when import non-unicode strings. (For binary file import)</source>
+        <translation>Conxunto de caracteres empregado ao importar cadeas fóra do unicode. (Para importar ficheiros binarios)</translation>
+    </message>
+    <message>
+        <source>Character Set</source>
+        <translation>Conxunto de caracteres</translation>
     </message>
 </context>
 <context>
@@ -5667,10 +5642,6 @@ e verifique que a localización do ficheiro é a correcta</translation>
         <source>Midi Action</source>
         <translation>Acción Midi</translation>
     </message>
-    <message>
-        <source>normal</source>
-        <translation>normal</translation>
-    </message>
 </context>
 <context>
     <name>SymbolDialog</name>
@@ -5950,10 +5921,6 @@ e verifique que a localización do ficheiro é a correcta</translation>
     <message>
         <source>Text</source>
         <translation>Texto</translation>
-    </message>
-    <message>
-        <source>Frame</source>
-        <translation>Moldura</translation>
     </message>
 </context>
 <context>
@@ -7310,11 +7277,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Sextuplet</source>
-        <translation>Septillo</translation>
+        <translation>Sextillo</translation>
     </message>
     <message>
         <source>Septuplet</source>
-        <translation>Setpillo</translation>
+        <translation>Septillo</translation>
     </message>
     <message>
         <source>Octuplet</source>
@@ -9053,6 +9020,15 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Every 2 months</source>
         <translation>Cada dous meses</translation>
+    </message>
+</context>
+<context>
+    <name>score</name>
+    <message>
+        <source>Cannot read this score:
+your version of MuseScore is too old.</source>
+        <translation>Non é posíbel ler esta partiture:&#13;
+esta versión do MuseScore é vella de máis.</translation>
     </message>
 </context>
 <context>

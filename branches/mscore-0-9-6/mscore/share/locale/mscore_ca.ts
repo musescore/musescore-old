@@ -2480,6 +2480,25 @@ Fallada: </translation>
     </message>
 </context>
 <context>
+    <name>KeySig</name>
+    <message>
+        <source>Hide courtesy signature</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Show courtesy signature</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Hide naturals</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Show naturals</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>LinePropertiesDialog</name>
     <message>
         <source>MuseScore: Line Properties</source>
@@ -3645,7 +3664,43 @@ is incompatible with current interface</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Overture Files &lt;experimental&gt; (*.ove);;All Files (*)</source>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>MuseScore Files (*.mscz *.mscx *.msc);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>MusicXML Files (*.xml *.mxl);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>MIDI Files (*.mid *.midi *.kar);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Muse Data Files (*.md);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Capella Files (*.cap);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Bagpipe Music Writer Files (*.bww);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>All Files (*)</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -3897,6 +3952,10 @@ is incompatible with current interface</source>
     <message>
         <source>Odd Page Margins</source>
         <translation>Marges de pàgina senar</translation>
+    </message>
+    <message>
+        <source>First page no.</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -4229,10 +4288,6 @@ is incompatible with current interface</source>
         <translation>Inicia amb una nova partitura</translation>
     </message>
     <message>
-        <source>...</source>
-        <translation>...</translation>
-    </message>
-    <message>
         <source>start with score:</source>
         <translation>Inicia amb la partitura:</translation>
     </message>
@@ -4339,34 +4394,6 @@ is incompatible with current interface</source>
     <message>
         <source>Expand Repeats</source>
         <translation>Expandir repeticions</translation>
-    </message>
-    <message>
-        <source>enable midi remote control</source>
-        <translation>Habilita control remot de MIDI</translation>
-    </message>
-    <message>
-        <source>Stop</source>
-        <translation>Atura</translation>
-    </message>
-    <message>
-        <source>is active</source>
-        <translation>Està actiu</translation>
-    </message>
-    <message>
-        <source>record</source>
-        <translation>Enregistra</translation>
-    </message>
-    <message>
-        <source>Record</source>
-        <translation>Enregistra</translation>
-    </message>
-    <message>
-        <source>Rewind</source>
-        <translation>Retrocedeix</translation>
-    </message>
-    <message>
-        <source>Play</source>
-        <translation>Reprodueix</translation>
     </message>
     <message>
         <source>I/O</source>
@@ -4529,60 +4556,8 @@ is incompatible with current interface</source>
         <translation>Llengua</translation>
     </message>
     <message>
-        <source>de German</source>
-        <translation>de German</translation>
-    </message>
-    <message>
-        <source>en English</source>
-        <translation>en English</translation>
-    </message>
-    <message>
-        <source>es Spanish</source>
-        <translation>es Spanish</translation>
-    </message>
-    <message>
-        <source>fr French</source>
-        <translation>fr French</translation>
-    </message>
-    <message>
-        <source>it Italian</source>
-        <translation>it Italian</translation>
-    </message>
-    <message>
-        <source>pt Portuguese</source>
-        <translation>pt Portuguese</translation>
-    </message>
-    <message>
-        <source>ru Russian</source>
-        <translation>ru Russian</translation>
-    </message>
-    <message>
         <source>start empty</source>
         <translation>Inicia sense res</translation>
-    </message>
-    <message>
-        <source>cz Czech</source>
-        <translation>cz Czech</translation>
-    </message>
-    <message>
-        <source>gl Galician</source>
-        <translation>gl Galician</translation>
-    </message>
-    <message>
-        <source>hi_IN Hindi</source>
-        <translation>hi_IN Hindi</translation>
-    </message>
-    <message>
-        <source>nl Dutch</source>
-        <translation>nl Dutch</translation>
-    </message>
-    <message>
-        <source>pt_BR Brasilian Portuguese</source>
-        <translation>pt_BR Brasilian Portuguese</translation>
-    </message>
-    <message>
-        <source>tr Turkey</source>
-        <translation>tr Turkey</translation>
     </message>
     <message>
         <source>Attention: changing the language requires a restart of MuseScore.</source>
@@ -4715,10 +4690,6 @@ Si habilites el mètode d'entrada alternatiu llavors l'armadura actual és irrel
         <translation>Exporta MIDI</translation>
     </message>
     <message>
-        <source>MIDI Remote Control</source>
-        <translation>Control remot MIDI</translation>
-    </message>
-    <message>
         <source>Auto-correction</source>
         <translation>Correcció automàtca</translation>
     </message>
@@ -4741,10 +4712,6 @@ Si habilites el mètode d'entrada alternatiu llavors l'armadura actual és irrel
     <message>
         <source>Use style file:</source>
         <translation>Utilitza fitxer d'estil:</translation>
-    </message>
-    <message>
-        <source>System</source>
-        <translation>Sistema</translation>
     </message>
     <message>
         <source>Navigator:</source>
@@ -4776,6 +4743,14 @@ Si habilites el mètode d'entrada alternatiu llavors l'armadura actual és irrel
     </message>
     <message>
         <source>Use Current Position</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Character Set used when import non-unicode strings. (For binary file import)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Character Set</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -5647,10 +5622,6 @@ and check that the file location is correct</source>
 <context>
     <name>StaffTextProperties</name>
     <message>
-        <source>normal</source>
-        <translation>Normal</translation>
-    </message>
-    <message>
         <source>MuseScore: Staff Text Properties</source>
         <translation>MuseScore: Propietats de text de pentagrama</translation>
     </message>
@@ -5941,10 +5912,6 @@ and check that the file location is correct</source>
     <message>
         <source>Text</source>
         <translation>Text</translation>
-    </message>
-    <message>
-        <source>Frame</source>
-        <translation>Marc</translation>
     </message>
 </context>
 <context>
@@ -9047,6 +9014,14 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <source>Every 2 months</source>
         <translation>Cada dos mesos</translation>
+    </message>
+</context>
+<context>
+    <name>score</name>
+    <message>
+        <source>Cannot read this score:
+your version of MuseScore is too old.</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
