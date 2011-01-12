@@ -1,3 +1,6 @@
+12.jan (mi)
+      - note minimum spacing algorithm (in Chord::layout() ) applied to tablature staves too
+        (without any change to the algorithm itself)
 11.jan (ws)
       - fix #8608: crash on loading 0.9.6.3 file
       - fix repeat regression (testfiles test/repeat*.mscz)

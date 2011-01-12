@@ -1281,7 +1281,14 @@ void Chord::layout()
             delete l;
       _ledgerLines.clear();
 
+      double lx         = 0.0;
+      Note*  upnote     = upNote();
+      double headWidth  = upnote->headWidth();
+
       if (staff() && staff()->useTablature()) {
+            //
+            // TABLATURE STAVES
+            //
             StaffTypeTablature * tab = (StaffTypeTablature*)staff()->staffType();
             double lineDist = tab->lineDistance().val();
             foreach(Note* note, _notes) {
@@ -1308,100 +1315,114 @@ void Chord::layout()
 
             if(!tab->genDurations() ||          // if tab is not set for duration symbols
                track() % VOICES != 0) {         // or not in first voice
+                  //
+                  // no tab duration symbols
+                  //
                   if(_tabDur) {                 // delete an existing duration symbol
                         delete _tabDur;
                         _tabDur = 0;
                         }
-                  return;                       // and ignore duration symbols
+//                  return;                       // and ignore duration symbols
                   }
-
-            // check duration of prev. CR segm
-            ChordRest * prevCR = prevChordRest(this);
-            // if no previous CR or duration type and/or number of dots is different from current CR
-            // set a duration symbol (trying to re-use existing symbols where existing to minimize
-            // symbol creation and deletion)
-            if(prevCR == 0 || prevCR->durationType().type() != durationType().type()
-                        || prevCR->dots() != dots()) {
-                  // symbol needed; if not exist, create
-                  if(!_tabDur) {
-                        _tabDur = new TabDurationSymbol(score(), tab, durationType().type(), dots());
+            else {
+                  //
+                  // tab duration symbols
+                  //
+                  // check duration of prev. CR segm
+                  ChordRest * prevCR = prevChordRest(this);
+                  // if no previous CR or duration type and/or number of dots is different from current CR
+                  // set a duration symbol (trying to re-use existing symbols where existing to minimize
+                  // symbol creation and deletion)
+                  if(prevCR == 0 || prevCR->durationType().type() != durationType().type()
+                              || prevCR->dots() != dots()) {
+                        // symbol needed; if not exist, create
+                        if(!_tabDur) {
+                              _tabDur = new TabDurationSymbol(score(), tab, durationType().type(), dots());
+                              }
+                        // if exists, update duration
+                        else
+                              _tabDur->setDuration(durationType().type(), dots());
+                        _tabDur->setParent(this);
+      // needed?        _tabDur->setTrack(track());
                         }
-                  // if exists, update duration
-                  else
-                        _tabDur->setDuration(durationType().type(), dots());
-                  _tabDur->setParent(this);
-// needed?        _tabDur->setTrack(track());
-                  }
-            else                    // symbol not needed: if exists, delete
-                  if(_tabDur) {
-                        delete _tabDur;
-                        _tabDur = 0;
-                        }
-            return;
+                  else                    // symbol not needed: if exists, delete
+                        if(_tabDur) {
+                              delete _tabDur;
+                              _tabDur = 0;
+                              }
+                  }                 // end of if(duration_symbols)
+//            return;
             }                       // end of if(useTablature)
+      else {
+            //
+            // NON-TABLATURE STAVES
+            //
+            if (!segment()) {
+                  //
+                  // hack for use in palette
+                  //
+                  foreach(Note* note, _notes) {
+                        note->layout();
+                        double x = 0.0;
+                        double y = note->line() * _spatium * .5;
+                        note->setPos(x, y);
+                        }
+                  return;
+                  }
 
-      if (!segment()) {
-            //
-            // hack for use in palette
-            //
+//            Note* upnote     = upNote();
+//            double headWidth = upnote->headWidth();
+
+            //-----------------------------------------
+            //  process notes
+            //    - position
+            //-----------------------------------------
+
+//            double lx = 0.0;
+            double stepDistance = _spatium * .5;
+
             foreach(Note* note, _notes) {
                   note->layout();
                   double x = 0.0;
-                  double y = note->line() * _spatium * .5;
-                  note->setPos(x, y);
+
+                  bool stemUp = up();
+                  if (staffMove() < 0)
+                        stemUp = false;
+                  else if (staffMove() > 0)
+                        stemUp = true;
+
+                  if (note->mirror())
+                        x += stemUp ? headWidth : - headWidth;
+
+                  note->setPos(x, note->line() * stepDistance);
+                  note->adjustReadPos();
+
+                  Accidental* accidental = note->accidental();
+                  if (accidental)
+                        x = accidental->x() + note->x();
+                  if (x < lx)
+                        lx = x;
                   }
-            return;
-            }
+            adjustReadPos();
 
-      Note* upnote     = upNote();
-      double headWidth = upnote->headWidth();
+            //---------------------------------------------------
+            //    create ledger lines for notes moved to
+            //    upper staff
+            //---------------------------------------------------
 
-      //-----------------------------------------
-      //  process notes
-      //    - position
-      //-----------------------------------------
+            double x  = upnote->pos().x();
+            if ((up() && !upnote->mirror()) || (!up() && upnote->mirror()))
+                  x += headWidth;
 
-      double lx = 0.0;
-      double stepDistance = _spatium * .5;
+            addLedgerLines(x, staffMove());
 
-      foreach(Note* note, _notes) {
-            note->layout();
-            double x = 0.0;
+            foreach(LedgerLine* l, _ledgerLines)
+                  l->layout();
+      }
 
-            bool stemUp = up();
-            if (staffMove() < 0)
-                  stemUp = false;
-            else if (staffMove() > 0)
-                  stemUp = true;
-
-            if (note->mirror())
-                  x += stemUp ? headWidth : - headWidth;
-
-            note->setPos(x, note->line() * stepDistance);
-            note->adjustReadPos();
-
-            Accidental* accidental = note->accidental();
-            if (accidental)
-                  x = accidental->x() + note->x();
-            if (x < lx)
-                  lx = x;
-            }
-      adjustReadPos();
-
-      //---------------------------------------------------
-      //    create ledger lines for notes moved to
-      //    upper staff
-      //---------------------------------------------------
-
-      double x  = upnote->pos().x();
-      if ((up() && !upnote->mirror()) || (!up() && upnote->mirror()))
-            x += headWidth;
-
-      addLedgerLines(x, staffMove());
-
-      foreach(LedgerLine* l, _ledgerLines)
-            l->layout();
-
+      //
+      // COMMON TO ALL STAVES
+      //
       renderPlayback();
       double lll = -lx;
 
