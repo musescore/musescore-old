@@ -335,8 +335,8 @@ void SlurSegment::computeBezier()
             printf("illegal slurSegment\n");
             return;
             }
-      if (bow * 2 > dx)       // limit bow for small slurs
-            bow = dx * .5;
+      if (bow > (dx * .2))       // limit bow for small slurs
+            bow = dx * .2;
 
       qreal d     = dx / 5.0;
       qreal x1    = x0 + d;
@@ -560,16 +560,16 @@ void SlurTie::slurPos(SlurPos* sp)
             yo = note1->pos().y() + hw * .3 * _up;
             }
       else {
-            yo = note1->pos().y() + (hh * .5 + _spatium * .4) * _up;
+            yo = note1->yPos() + (hh * .5 + _spatium * .4) * _up;
             if (stem1) {
                   bool startIsGrace = sc->noteType() != NOTE_NORMAL;
 
                   if (beam1 && (beam1->elements().back() != sc) && (sc->up() == up)) {
                         double sh = stem1->height() + _spatium;
                         if (up)
-                              yo = sc->downNote()->pos().y() - sh;
+                              yo = sc->downNote()->yPos() - sh;
                         else
-                              yo = sc->upNote()->pos().y() + sh;
+                              yo = sc->upNote()->yPos() + sh;
                         xo = stem1->pos().x();
                         }
                   else {
@@ -581,9 +581,9 @@ void SlurTie::slurPos(SlurPos* sp)
                         //              stem down - stem up
                         //
                         if ((sc->up() != ec->up()) && (sc->up() == up)) {
-                              Note* n1 = sc->up() ? sc->downNote() : sc->upNote();
-                              Note* n2 = ec->up() ? ec->downNote() : ec->upNote();
-                              double yd = n2->pos().y() - n1->pos().y();
+                              Note* n1  = sc->up() ? sc->downNote() : sc->upNote();
+                              Note* n2  = ec->up() ? ec->downNote() : ec->upNote();
+                              double yd = n2->yPos() - n1->yPos();
 
                               double mh = stem1->height();    // limit y move
                               if (yd > 0.0) {
@@ -612,7 +612,7 @@ void SlurTie::slurPos(SlurPos* sp)
             yo = note2->pos().y() + hw * .3 * _up;
             }
       else {
-            yo = note2->pos().y() + (hh * .5 + _spatium * .4) * _up;
+            yo = note2->yPos() + (hh * .5 + _spatium * .4) * _up;
             if (stem2) {
                   if (beam2
                      && (beam2->elements().front() != ec)
@@ -621,9 +621,9 @@ void SlurTie::slurPos(SlurPos* sp)
                         ) {
                         double sh = stem2->height() + _spatium;
                         if (up)
-                              yo = ec->downNote()->pos().y() - sh;
+                              yo = ec->downNote()->yPos() - sh;
                         else
-                              yo = ec->upNote()->pos().y() + sh;
+                              yo = ec->upNote()->yPos() + sh;
                         xo = stem2->pos().x();
                         }
                   else if (!ec->up() && !up)
@@ -635,7 +635,7 @@ void SlurTie::slurPos(SlurPos* sp)
                   if ((sc->up() != ec->up()) && (ec->up() == up)) {
                         Note* n1 = sc->up() ? sc->downNote() : sc->upNote();
                         Note* n2 = ec->up() ? ec->downNote() : ec->upNote();
-                        double yd = n2->pos().y() - n1->pos().y();
+                        double yd = n2->yPos() - n1->yPos();
 
                         double mh = stem2->height();    // limit y move
                         if (yd > 0.0) {

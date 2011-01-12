@@ -126,7 +126,6 @@ void ScoreTab::setCurrent(int n)
 
       ScoreView* v;
       if (!vs) {
-            Score* score = scoreList->value(n);
             vs = new QSplitter;
             v = new ScoreView;
             tab2->blockSignals(true);
@@ -135,29 +134,40 @@ void ScoreTab::setCurrent(int n)
             vs->addWidget(v);
             v->setScore(scoreList->value(n));
             stack->addWidget(vs);
-
-#ifdef OMR
-            if (score->showOmr()) {
-                  Omr* omr = score->omr();
-                  OmrView* sv = omr->newOmrView(v);
-                  vs->addWidget(sv);
-                  connect(v, SIGNAL(scaleChanged(double)), sv, SLOT(setScale(double)));
-                  connect(v, SIGNAL(offsetChanged(double,double)), sv, SLOT(setOffset(double,double)));
-                  connect(v, SIGNAL(nextPage()), sv, SLOT(nextPage()));
-                  connect(v, SIGNAL(previousPage()), sv, SLOT(previousPage()));
-                  const QTransform _matrix = v->matrix();
-                  double _spatium = score->spatium();
-                  double scale = _matrix.m11() * _spatium;
-                  sv->setScale(scale);
-                  sv->setOffset(_matrix.dx(), _matrix.dy());
-                  QList<int> sizes;
-                  sizes << 100 << 100;
-                  vs->setSizes(sizes);
-                  }
-#endif
             }
-      else
+      else {
             v = static_cast<ScoreView*>(vs->widget(0));
+            }
+#ifdef OMR
+      if (v) {
+            Score* score = v->score();
+            if (score->showOmr()) {
+                  if (vs->count() < 2) {
+                        Omr* omr = score->omr();
+                        OmrView* sv = omr->newOmrView(v);
+                        vs->addWidget(sv);
+                        connect(v, SIGNAL(scaleChanged(double)), sv, SLOT(setScale(double)));
+                        connect(v, SIGNAL(offsetChanged(double,double)), sv, SLOT(setOffset(double,double)));
+                        connect(v, SIGNAL(nextPage()), sv, SLOT(nextPage()));
+                        connect(v, SIGNAL(previousPage()), sv, SLOT(previousPage()));
+                        const QTransform _matrix = v->matrix();
+                        double _spatium = score->spatium();
+                        double scale = _matrix.m11() * _spatium;
+                        sv->setScale(scale);
+                        sv->setOffset(_matrix.dx(), _matrix.dy());
+                        QList<int> sizes;
+                        sizes << 100 << 100;
+                        vs->setSizes(sizes);
+                        }
+                  }
+            else {
+                  if (vs->count() > 1) {
+                        QWidget* w = vs->widget(1);
+                        delete w;
+                        }
+                  }
+            }
+#endif
       stack->setCurrentWidget(vs);
       if (v) {
             Score* score = v->score();

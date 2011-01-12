@@ -617,12 +617,11 @@ bool Score::read(QString name)
 void Score::write(Xml& xml, bool /*autosave*/)
       {
       xml.stag("Score");
-#ifdef OMR
+
       if (_omr)
             _omr->write(xml);
       if (_showOmr)
             xml.tag("showOmr", _showOmr);
-#endif
 
       _syntiState.write(xml);
 

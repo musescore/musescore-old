@@ -202,6 +202,7 @@ class Note : public Element {
 
       QPointF stemPos(bool upFlag) const;    ///< Point to connect stem.
       double stemYoff(bool upFlag) const;
+      qreal yPos() const;
 
       virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*);

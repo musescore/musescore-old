@@ -447,6 +447,8 @@ class MuseScore : public QMainWindow {
       bool processMidiRemote(MidiRemoteType type, int data);
       Style* defaultStyle() const { return _defaultStyle; }
       Style* baseStyle() const { return _baseStyle; }
+      ScoreTab* getTab1() const { return tab1; }
+      ScoreTab* getTab2() const { return tab2; }
       };
 
 extern MuseScore* mscore;

@@ -48,9 +48,6 @@ class ScoreTab : public QWidget {
       QTabBar* tab2;
       QStackedLayout* stack;
 
-   private slots:
-      void setCurrent(int);
-
    signals:
       void currentScoreViewChanged(ScoreView*);
       void tabCloseRequested(int);
@@ -58,6 +55,7 @@ class ScoreTab : public QWidget {
    public slots:
       void updateExcerpts();
       void setExcerpt(int);
+      void setCurrent(int);
 
    public:
       ScoreTab(QList<Score*>*, QWidget* parent = 0);
