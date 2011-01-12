@@ -35,8 +35,9 @@ add_executable(bww2mxml
    symbols.cpp
    writer.cpp
    )
-endif (NOT MINGW AND NOT APPLE)
 
 target_link_libraries(bww2mxml
    ${QT_LIBRARIES}
    )
+endif (NOT MINGW AND NOT APPLE)
+
