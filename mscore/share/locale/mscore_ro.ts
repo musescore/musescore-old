@@ -2497,6 +2497,25 @@ eroare: </translation>
     </message>
 </context>
 <context>
+    <name>KeySig</name>
+    <message>
+        <source>Hide courtesy signature</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Show courtesy signature</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Hide naturals</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Show naturals</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>LinePropertiesDialog</name>
     <message>
         <source>MuseScore: Line Properties</source>
@@ -3660,8 +3679,44 @@ nu este compatibil cu interfaţa curentă</translation>
 %3</translation>
     </message>
     <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Overture Files &lt;experimental&gt; (*.ove);;All Files (*)</source>
-        <translation>Toate fișierele recunoscute (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;Fișiere MuseScore (*.mscz *.mscx *.msc);;Fișiere MusicXML (*.xml *.mxl);;Fișiere MIDI (*.mid *.midi *.kar);;Fișiere Muse Data (*.md);;Capella Files (*.cap);;Fișiere BB &lt;cu titlu de experiment&gt; (*.mgu *.MGU *.sgu *.SGU);;Fișiere Overture &lt;cu titlu de experiment&gt; (*.ove);;Toate Fișierele (*)</translation>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>MuseScore Files (*.mscz *.mscx *.msc);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>MusicXML Files (*.xml *.mxl);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>MIDI Files (*.mid *.midi *.kar);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Muse Data Files (*.md);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Capella Files (*.cap);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Bagpipe Music Writer Files (*.bww);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>All Files (*)</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -3912,6 +3967,10 @@ nu este compatibil cu interfaţa curentă</translation>
     <message>
         <source>Odd Page Margins</source>
         <translation>Margini pentru Pagini Impare</translation>
+    </message>
+    <message>
+        <source>First page no.</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -4256,68 +4315,12 @@ nu este compatibil cu interfaţa curentă</translation>
         <translation>porneşte cu partitura:</translation>
     </message>
     <message>
-        <source>...</source>
-        <translation>...</translation>
-    </message>
-    <message>
         <source>show splash screen</source>
         <translation>afişează ecran de pornire</translation>
     </message>
     <message>
         <source>Language</source>
         <translation>Limbă</translation>
-    </message>
-    <message>
-        <source>cz Czech</source>
-        <translation>cz Cehă</translation>
-    </message>
-    <message>
-        <source>de German</source>
-        <translation>de Germană</translation>
-    </message>
-    <message>
-        <source>en English</source>
-        <translation>en Engleză</translation>
-    </message>
-    <message>
-        <source>es Spanish</source>
-        <translation>es Spaniolă</translation>
-    </message>
-    <message>
-        <source>fr French</source>
-        <translation>fr Franceză</translation>
-    </message>
-    <message>
-        <source>gl Galician</source>
-        <translation>gl Galiciană</translation>
-    </message>
-    <message>
-        <source>hi_IN Hindi</source>
-        <translation>hi_IN Hindusă</translation>
-    </message>
-    <message>
-        <source>it Italian</source>
-        <translation>it Italiană</translation>
-    </message>
-    <message>
-        <source>nl Dutch</source>
-        <translation>nl Olandeză</translation>
-    </message>
-    <message>
-        <source>pt Portuguese</source>
-        <translation>pt Portugheză</translation>
-    </message>
-    <message>
-        <source>pt_BR Brasilian Portuguese</source>
-        <translation>pt_BR Portugheză Brasiliană</translation>
-    </message>
-    <message>
-        <source>ru Russian</source>
-        <translation>ru Rusă</translation>
-    </message>
-    <message>
-        <source>tr Turkey</source>
-        <translation>tr Turcă</translation>
     </message>
     <message>
         <source>Attention: changing the language requires a restart of MuseScore.</source>
@@ -4498,34 +4501,6 @@ nu este compatibil cu interfaţa curentă</translation>
     <message>
         <source>Expand Repeats</source>
         <translation>Respectă Repetiţiile</translation>
-    </message>
-    <message>
-        <source>enable midi remote control</source>
-        <translation>controlează de la distanţă prin MIDI</translation>
-    </message>
-    <message>
-        <source>Stop</source>
-        <translation>Stop</translation>
-    </message>
-    <message>
-        <source>is active</source>
-        <translation>este activ</translation>
-    </message>
-    <message>
-        <source>record</source>
-        <translation>înregistrează</translation>
-    </message>
-    <message>
-        <source>Record</source>
-        <translation>Înregistrează</translation>
-    </message>
-    <message>
-        <source>Rewind</source>
-        <translation>Înapoi</translation>
-    </message>
-    <message>
-        <source>Play</source>
-        <translation>Redare</translation>
     </message>
     <message>
         <source>Score</source>
@@ -4729,10 +4704,6 @@ nu este compatibil cu interfaţa curentă</translation>
         <translation>Exportă MIDI</translation>
     </message>
     <message>
-        <source>MIDI Remote Control</source>
-        <translation>Control de la Distanţă prin intermediul MIDI</translation>
-    </message>
-    <message>
         <source>Auto-correction</source>
         <translation>Corecţie Automată</translation>
     </message>
@@ -4755,10 +4726,6 @@ nu este compatibil cu interfaţa curentă</translation>
     <message>
         <source>Use style file:</source>
         <translation>Foloseşte fişierul de stil:</translation>
-    </message>
-    <message>
-        <source>System</source>
-        <translation>Sistem</translation>
     </message>
     <message>
         <source>Navigator:</source>
@@ -4791,6 +4758,14 @@ nu este compatibil cu interfaţa curentă</translation>
     <message>
         <source>Use Current Position</source>
         <translation>Foloseşte Poziţia Curentă</translation>
+    </message>
+    <message>
+        <source>Character Set used when import non-unicode strings. (For binary file import)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Character Set</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -5669,10 +5644,6 @@ Accesaţi "Afişează" &gt; "Sintetizator" din meniu&#13;
 <context>
     <name>StaffTextProperties</name>
     <message>
-        <source>normal</source>
-        <translation>normal</translation>
-    </message>
-    <message>
         <source>MuseScore: Staff Text Properties</source>
         <translation>MuseScore: Proprietăţile indicaţiei</translation>
     </message>
@@ -5963,10 +5934,6 @@ Accesaţi "Afişează" &gt; "Sintetizator" din meniu&#13;
     <message>
         <source>Text</source>
         <translation>Text</translation>
-    </message>
-    <message>
-        <source>Frame</source>
-        <translation>Cadru</translation>
     </message>
 </context>
 <context>
@@ -9069,6 +9036,14 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <source>Every 2 months</source>
         <translation>Odată la două luni</translation>
+    </message>
+</context>
+<context>
+    <name>score</name>
+    <message>
+        <source>Cannot read this score:
+your version of MuseScore is too old.</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>

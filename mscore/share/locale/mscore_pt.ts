@@ -889,7 +889,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>left of stem</source>
-        <translation type="unfinished"/>
+        <translation>esquerda da haste</translation>
     </message>
     <message>
         <source>right of stem</source>
@@ -960,11 +960,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>diamond</source>
-        <translation type="unfinished"/>
+        <translation>diamante</translation>
     </message>
     <message>
         <source>triangle</source>
-        <translation type="unfinished"/>
+        <translation>triângulo</translation>
     </message>
     <message>
         <source>slash</source>
@@ -972,7 +972,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>xcircle</source>
-        <translation type="unfinished"/>
+        <translation>circulo com x</translation>
     </message>
     <message>
         <source>do</source>
@@ -2470,6 +2470,25 @@ Falhou: </translation>
     </message>
 </context>
 <context>
+    <name>KeySig</name>
+    <message>
+        <source>Hide courtesy signature</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Show courtesy signature</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Hide naturals</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Show naturals</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>LinePropertiesDialog</name>
     <message>
         <source>MuseScore: Line Properties</source>
@@ -3635,8 +3654,44 @@ is incompatible with current interface</source>
 %3</translation>
     </message>
     <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Overture Files &lt;experimental&gt; (*.ove);;All Files (*)</source>
-        <translation>Todos os ficheiros suportados (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Overture Files &lt;experimental&gt; (*.ove);;todos os ficheiros(*)</translation>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>MuseScore Files (*.mscz *.mscx *.msc);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>MusicXML Files (*.xml *.mxl);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>MIDI Files (*.mid *.midi *.kar);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Muse Data Files (*.md);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Capella Files (*.cap);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Bagpipe Music Writer Files (*.bww);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>All Files (*)</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -3887,6 +3942,10 @@ is incompatible with current interface</source>
     <message>
         <source>Odd Page Margins</source>
         <translation>Margem das Páginas Ímpares</translation>
+    </message>
+    <message>
+        <source>First page no.</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -4219,10 +4278,6 @@ is incompatible with current interface</source>
         <translation>iniciar com nova partitura</translation>
     </message>
     <message>
-        <source>...</source>
-        <translation>...</translation>
-    </message>
-    <message>
         <source>start with score:</source>
         <translation>iniciar com partitura:</translation>
     </message>
@@ -4293,34 +4348,6 @@ is incompatible with current interface</source>
     <message>
         <source>Expand Repeats</source>
         <translation>Expandir repetições</translation>
-    </message>
-    <message>
-        <source>enable midi remote control</source>
-        <translation>ligar controlo remoto por Midi</translation>
-    </message>
-    <message>
-        <source>Stop</source>
-        <translation>Parar</translation>
-    </message>
-    <message>
-        <source>is active</source>
-        <translation>está activo</translation>
-    </message>
-    <message>
-        <source>record</source>
-        <translation>Gravar</translation>
-    </message>
-    <message>
-        <source>Record</source>
-        <translation>Gravar</translation>
-    </message>
-    <message>
-        <source>Rewind</source>
-        <translation>Rebobinar</translation>
-    </message>
-    <message>
-        <source>Play</source>
-        <translation>Reproduzir</translation>
     </message>
     <message>
         <source>JACK Audio Server</source>
@@ -4519,34 +4546,6 @@ is incompatible with current interface</source>
         <translation>Idioma</translation>
     </message>
     <message>
-        <source>de German</source>
-        <translation>(de) Alemão</translation>
-    </message>
-    <message>
-        <source>en English</source>
-        <translation>(en) Inglês</translation>
-    </message>
-    <message>
-        <source>es Spanish</source>
-        <translation>(es) Espanhol</translation>
-    </message>
-    <message>
-        <source>fr French</source>
-        <translation>(fr) Francês</translation>
-    </message>
-    <message>
-        <source>it Italian</source>
-        <translation>(it) Italiano</translation>
-    </message>
-    <message>
-        <source>ru Russian</source>
-        <translation>(ru) Russo</translation>
-    </message>
-    <message>
-        <source>nl Dutch</source>
-        <translation>(nl) Holândes</translation>
-    </message>
-    <message>
         <source>Attention: changing the language requires a restart of MuseScore.</source>
         <translation>Atenção: A mudança de idioma requer que o MuseScore seja reiniciado.</translation>
     </message>
@@ -4587,16 +4586,8 @@ is incompatible with current interface</source>
         <translation>Se usar o modo de entrada padrão, então a altura criada nas notas depende da armadura actual. Por exemplo, digitando Fá na armadura de Sol maior, cria um Fá sustenido. Se o modo de entrada alternativo estiver activo, a armadura será ignorada. Por exemplo, digitando Fá na armadura de Sol maior, criará sempre um Fá natural.</translation>
     </message>
     <message>
-        <source>cz Czech</source>
-        <translation>(cz) Tcheco</translation>
-    </message>
-    <message>
         <source>start empty</source>
         <translation>Iniciar vazio</translation>
-    </message>
-    <message>
-        <source>gl Galician</source>
-        <translation>(gl) Galego</translation>
     </message>
     <message>
         <source>Text</source>
@@ -4631,10 +4622,6 @@ is incompatible with current interface</source>
         <translation>Soltar Objecto no Destino</translation>
     </message>
     <message>
-        <source>tr Turkey</source>
-        <translation>(tr) Turco</translation>
-    </message>
-    <message>
         <source>Score</source>
         <translation>Partitura</translation>
     </message>
@@ -4651,24 +4638,12 @@ is incompatible with current interface</source>
         <translation>Horizontal</translation>
     </message>
     <message>
-        <source>hi_IN Hindi</source>
-        <translation>(hi_IN) Indiano</translation>
-    </message>
-    <message>
-        <source>pt_BR Brasilian Portuguese</source>
-        <translation>(pt_BR) Português do Brasil</translation>
-    </message>
-    <message>
         <source>Default duration:</source>
         <translation>duração pré-definida:</translation>
     </message>
     <message>
         <source>ms</source>
         <translation>ms</translation>
-    </message>
-    <message>
-        <source>pt Portuguese</source>
-        <translation>pt Português</translation>
     </message>
     <message>
         <source>pt</source>
@@ -4704,10 +4679,6 @@ is incompatible with current interface</source>
         <translation>Exportar MIDI</translation>
     </message>
     <message>
-        <source>MIDI Remote Control</source>
-        <translation>Controlo Remoto MIDI</translation>
-    </message>
-    <message>
         <source>Auto-correction</source>
         <translation>Correcção Automática</translation>
     </message>
@@ -4730,10 +4701,6 @@ is incompatible with current interface</source>
     <message>
         <source>Use style file:</source>
         <translation type="unfinished"/>
-    </message>
-    <message>
-        <source>System</source>
-        <translation>Sistema</translation>
     </message>
     <message>
         <source>Navigator:</source>
@@ -4765,6 +4732,14 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Use Current Position</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Character Set used when import non-unicode strings. (For binary file import)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Character Set</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -5640,10 +5615,6 @@ and check that the file location is correct</source>
         <translation>Acção MIDI</translation>
     </message>
     <message>
-        <source>normal</source>
-        <translation>normal</translation>
-    </message>
-    <message>
         <source>Channel</source>
         <translation>Canal</translation>
     </message>
@@ -5682,7 +5653,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Synthesizer</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Sintetizador</translation>
     </message>
     <message>
         <source>Rev</source>
@@ -5926,10 +5897,6 @@ and check that the file location is correct</source>
     <message>
         <source>Text</source>
         <translation>Texto</translation>
-    </message>
-    <message>
-        <source>Frame</source>
-        <translation>Caixa</translation>
     </message>
 </context>
 <context>
@@ -6374,51 +6341,51 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Diminished Second</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Segunda Menor</translation>
     </message>
     <message>
         <source>Minor Second</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Segunda menor</translation>
     </message>
     <message>
         <source>Major Second</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Segunda maior</translation>
     </message>
     <message>
         <source>Augmented Second</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">segunda Maior</translation>
     </message>
     <message>
         <source>Diminished Third</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Terceira Menor</translation>
     </message>
     <message>
         <source>Minor Third</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Terceira menor</translation>
     </message>
     <message>
         <source>Major Third</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Terceira maior</translation>
     </message>
     <message>
         <source>Augmented Third</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Terceira Maior</translation>
     </message>
     <message>
         <source>Diminished Fourth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Quarta Menor</translation>
     </message>
     <message>
         <source>Perfect Fourth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Quarta Perfeita</translation>
     </message>
     <message>
         <source>Augmented Fourth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Quarta Maior</translation>
     </message>
     <message>
         <source>Diminished Fifth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Quinta Menor</translation>
     </message>
     <message>
         <source>Perfect Fifth</source>
@@ -6426,43 +6393,43 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Augmented Fifth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Quinta Maior</translation>
     </message>
     <message>
         <source>Diminished Sixth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Sexta Menor</translation>
     </message>
     <message>
         <source>Minor Sixth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Sexta menor</translation>
     </message>
     <message>
         <source>Major Sixth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Sexta maior</translation>
     </message>
     <message>
         <source>Augmented Sixth</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Sexta Maior</translation>
     </message>
     <message>
         <source>Diminished Seventh</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Sétima Menor</translation>
     </message>
     <message>
         <source>Minor Seventh</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Sétima menor</translation>
     </message>
     <message>
         <source>Major Seventh</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Sétima maior</translation>
     </message>
     <message>
         <source>Augmented Seventh</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Sétima Maior</translation>
     </message>
     <message>
         <source>Diminished Octave</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Oitava Menor</translation>
     </message>
     <message>
         <source>Perfect Octave</source>
@@ -8448,7 +8415,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>ouvert</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">ouvert</translation>
     </message>
     <message>
         <source>plusstop</source>
@@ -9032,6 +8999,14 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Every 2 months</source>
         <translation>A Cada 2 Meses</translation>
+    </message>
+</context>
+<context>
+    <name>score</name>
+    <message>
+        <source>Cannot read this score:
+your version of MuseScore is too old.</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>

@@ -949,7 +949,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source> ticks</source>
-        <translation> Varighet</translation>
+        <translation> pkt</translation>
     </message>
     <message>
         <source>Note Head Group</source>
@@ -1075,7 +1075,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>MuseScore: Chord Style Editor</source>
-        <translation>MuseScore: Akkordstilbehandler</translation>
+        <translation>MuseScore: Besifringsstil</translation>
     </message>
 </context>
 <context>
@@ -1598,7 +1598,7 @@ feilet: </translation>
     </message>
     <message>
         <source>Chordnames</source>
-        <translation>Akkordnavn</translation>
+        <translation>Besifring</translation>
     </message>
     <message>
         <source>Articulations, Ornaments</source>
@@ -2480,6 +2480,25 @@ mislykket: </translation>
     </message>
 </context>
 <context>
+    <name>KeySig</name>
+    <message>
+        <source>Hide courtesy signature</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Show courtesy signature</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Hide naturals</source>
+        <translation>Skjul oppløsningstegn</translation>
+    </message>
+    <message>
+        <source>Show naturals</source>
+        <translation>Vis oppløsningstegn</translation>
+    </message>
+</context>
+<context>
     <name>LinePropertiesDialog</name>
     <message>
         <source>MuseScore: Line Properties</source>
@@ -3312,7 +3331,7 @@ før lukking?</translation>
     </message>
     <message>
         <source>Chordname</source>
-        <translation>Akkordnavn</translation>
+        <translation>Besifring</translation>
     </message>
     <message>
         <source>Repeat Text</source>
@@ -3643,8 +3662,44 @@ er ikke kompatibelt med nåværende grensesnitt</translation>
 %3</translation>
     </message>
     <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Overture Files &lt;experimental&gt; (*.ove);;All Files (*)</source>
-        <translation>Alle støttede filetyper (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;MuseScore-filer (*.mscz *.mscx *.msc);;MusicXML-filer (*.xml *.mxl);;MIDI-filer (*.mid *.midi *.kar);;Muse data-filer (*.md);;Capella-filer (*.cap);;BB-filer &lt;eksperimentelt&gt; (*.mgu *.MGU *.sgu *.SGU);;Overture-filer &lt;eksperimentelt&gt; (*.ove);;Alle filer (*)</translation>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</source>
+        <translation>All støttede filer (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</translation>
+    </message>
+    <message>
+        <source>MuseScore Files (*.mscz *.mscx *.msc);;</source>
+        <translation>MuseScore-filer (*.mscz *.mscx *.msc);;</translation>
+    </message>
+    <message>
+        <source>MusicXML Files (*.xml *.mxl);;</source>
+        <translation>MusicXML-filer (*.xml *.mxl);;</translation>
+    </message>
+    <message>
+        <source>MIDI Files (*.mid *.midi *.kar);;</source>
+        <translation>MIDI-filer (*.mid *.midi *.kar);;</translation>
+    </message>
+    <message>
+        <source>Muse Data Files (*.md);;</source>
+        <translation>Muse datafiler (*.md);;</translation>
+    </message>
+    <message>
+        <source>Capella Files (*.cap);;</source>
+        <translation>Capella-filer (*.cap);;</translation>
+    </message>
+    <message>
+        <source>Bagpipe Music Writer Files (*.bww);;</source>
+        <translation>Bagpipe Music Writer-filer (*.bww);;</translation>
+    </message>
+    <message>
+        <source>BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;</source>
+        <translation>BB-filer &lt;eksperimentell&gt; (*.mgu *.MGU *.sgu *.SGU);;</translation>
+    </message>
+    <message>
+        <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
+        <translation>Overture-filer &lt;eksperimentell&gt; (*.ove);;</translation>
+    </message>
+    <message>
+        <source>All Files (*)</source>
+        <translation>Alle filer (*)</translation>
     </message>
 </context>
 <context>
@@ -3895,6 +3950,10 @@ er ikke kompatibelt med nåværende grensesnitt</translation>
     <message>
         <source>Odd Page Margins</source>
         <translation>Marg for oddetallssider</translation>
+    </message>
+    <message>
+        <source>First page no.</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -4239,68 +4298,12 @@ er ikke kompatibelt med nåværende grensesnitt</translation>
         <translation>Start med noteark:</translation>
     </message>
     <message>
-        <source>...</source>
-        <translation>...</translation>
-    </message>
-    <message>
         <source>show splash screen</source>
         <translation>Vis oppstartsvindu</translation>
     </message>
     <message>
         <source>Language</source>
         <translation>Språk</translation>
-    </message>
-    <message>
-        <source>cz Czech</source>
-        <translation>cz Tjekkisk</translation>
-    </message>
-    <message>
-        <source>de German</source>
-        <translation>de Tysk</translation>
-    </message>
-    <message>
-        <source>en English</source>
-        <translation>en Engelsk</translation>
-    </message>
-    <message>
-        <source>es Spanish</source>
-        <translation>es Spansk</translation>
-    </message>
-    <message>
-        <source>fr French</source>
-        <translation>fr Fransk</translation>
-    </message>
-    <message>
-        <source>gl Galician</source>
-        <translation>gl Galicisk</translation>
-    </message>
-    <message>
-        <source>hi_IN Hindi</source>
-        <translation>hi_IN Hindu</translation>
-    </message>
-    <message>
-        <source>it Italian</source>
-        <translation>it Italiensk</translation>
-    </message>
-    <message>
-        <source>nl Dutch</source>
-        <translation>nl Nederlandsk</translation>
-    </message>
-    <message>
-        <source>pt Portuguese</source>
-        <translation>pt Portugisisk</translation>
-    </message>
-    <message>
-        <source>pt_BR Brasilian Portuguese</source>
-        <translation>pt_BR Portugisisk (Brasil)</translation>
-    </message>
-    <message>
-        <source>ru Russian</source>
-        <translation>ru Russisk</translation>
-    </message>
-    <message>
-        <source>tr Turkey</source>
-        <translation>tr Tyrkisk</translation>
     </message>
     <message>
         <source>Attention: changing the language requires a restart of MuseScore.</source>
@@ -4481,34 +4484,6 @@ er ikke kompatibelt med nåværende grensesnitt</translation>
     <message>
         <source>Expand Repeats</source>
         <translation>Utvid repetisjoner</translation>
-    </message>
-    <message>
-        <source>enable midi remote control</source>
-        <translation>Aktiver MIDI fjernstyring</translation>
-    </message>
-    <message>
-        <source>Stop</source>
-        <translation>Stopp</translation>
-    </message>
-    <message>
-        <source>is active</source>
-        <translation>Er aktiv</translation>
-    </message>
-    <message>
-        <source>record</source>
-        <translation>Spill inn</translation>
-    </message>
-    <message>
-        <source>Record</source>
-        <translation>Spill inn</translation>
-    </message>
-    <message>
-        <source>Rewind</source>
-        <translation>Spol tilbake</translation>
-    </message>
-    <message>
-        <source>Play</source>
-        <translation>Spill av</translation>
     </message>
     <message>
         <source>Score</source>
@@ -4712,10 +4687,6 @@ er ikke kompatibelt med nåværende grensesnitt</translation>
         <translation>Eksporter MIDI</translation>
     </message>
     <message>
-        <source>MIDI Remote Control</source>
-        <translation>MIDI fjernkontroll</translation>
-    </message>
-    <message>
         <source>Auto-correction</source>
         <translation>Autoretting</translation>
     </message>
@@ -4738,10 +4709,6 @@ er ikke kompatibelt med nåværende grensesnitt</translation>
     <message>
         <source>Use style file:</source>
         <translation>Bruk stilfil</translation>
-    </message>
-    <message>
-        <source>System</source>
-        <translation>System</translation>
     </message>
     <message>
         <source>Navigator:</source>
@@ -4774,6 +4741,14 @@ er ikke kompatibelt med nåværende grensesnitt</translation>
     <message>
         <source>Use Current Position</source>
         <translation>Bruk nåværende posisjon</translation>
+    </message>
+    <message>
+        <source>Character Set used when import non-unicode strings. (For binary file import)</source>
+        <translation>Tegnsett brukt ved importering av ikke-unicode tegn (for binær importering)</translation>
+    </message>
+    <message>
+        <source>Character Set</source>
+        <translation>Tegnsett</translation>
     </message>
 </context>
 <context>
@@ -5652,10 +5627,6 @@ og sjekk at stilen til fila er riktig</translation>
 <context>
     <name>StaffTextProperties</name>
     <message>
-        <source>normal</source>
-        <translation>Normal</translation>
-    </message>
-    <message>
         <source>MuseScore: Staff Text Properties</source>
         <translation>MuseScore: Egenskaper for notesystemtekst</translation>
     </message>
@@ -5946,10 +5917,6 @@ og sjekk at stilen til fila er riktig</translation>
     <message>
         <source>Text</source>
         <translation>Tekst</translation>
-    </message>
-    <message>
-        <source>Frame</source>
-        <translation>Ramme</translation>
     </message>
 </context>
 <context>
@@ -6298,7 +6265,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Transpose chord names</source>
-        <translation>Transponér akkorder</translation>
+        <translation>Transponér besifring</translation>
     </message>
     <message>
         <source>MuseScore: Transpose</source>
@@ -7677,19 +7644,19 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Add Chord Name</source>
-        <translation>Legg til akkordnavn</translation>
+        <translation>Legg til besifring</translation>
     </message>
     <message>
         <source>Chord Name</source>
-        <translation>Akkordnavn</translation>
+        <translation>Besifring</translation>
     </message>
     <message>
         <source>Add Chord Text</source>
-        <translation>Legg til akkordtekst</translation>
+        <translation>Legg til besifring</translation>
     </message>
     <message>
         <source>show harmony properties for chord</source>
-        <translation>Vis besifringsegenskaper for akkord</translation>
+        <translation>Vis harmoniegenskaper for akkord</translation>
     </message>
     <message>
         <source>Harmony Properties</source>
@@ -8393,7 +8360,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Edit Chord Style...</source>
-        <translation>Endre akkordstil...</translation>
+        <translation>Endre besifringsstil...</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -9052,6 +9019,15 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <source>Every 2 months</source>
         <translation>Hver 2 måned</translation>
+    </message>
+</context>
+<context>
+    <name>score</name>
+    <message>
+        <source>Cannot read this score:
+your version of MuseScore is too old.</source>
+        <translation>Kan ikke lese dette notearket:&#13;
+din versjon av MuseScore er for gammel.</translation>
     </message>
 </context>
 <context>

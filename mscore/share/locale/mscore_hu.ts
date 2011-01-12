@@ -26,15 +26,15 @@ p, li { white-space: pre-wrap; }
 &lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;!DOCTYPE  HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;line break&#13;
-&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;line break&#13;
-p, li { white-space: pre-wrap; }line break&#13;
-&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;line break&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Visit &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; for new versions and more information.&lt;/span&gt;&lt;/p&gt;line break&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Support MuseScore with &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;your donation&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;line break&#13;
-line break&#13;
-&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;line break&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;line break&#13;
+        <translation>&lt;!DOCTYPE  HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;&#13;
+&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;&#13;
+p, li { white-space: pre-wrap; }&#13;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Látogasd meg a &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; oldalt új verziókért és további információért.&lt;/span&gt;&lt;/p&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Támogasd a MuseScore-t &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;adománnyal&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&#13;
+&#13;
+&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer és mások. &lt;/span&gt;&lt;/p&gt;&#13;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;A GNU General Public License feltételeinek megfelelő kiadás&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
@@ -57,7 +57,7 @@ line break&#13;
     <name>Accidental</name>
     <message>
         <source>round bracket</source>
-        <translation>zárójelben</translation>
+        <translation>kerek zárójel</translation>
     </message>
 </context>
 <context>
@@ -1329,7 +1329,7 @@ sikertelen: </translation>
     </message>
     <message>
         <source>Staves</source>
-        <translation>Vonalrendszerek</translation>
+        <translation>Kottasorok</translation>
     </message>
     <message>
         <source>OK</source>
@@ -1348,11 +1348,11 @@ sikertelen: </translation>
     <name>EditStaffBase</name>
     <message>
         <source>MuseScore: Edit Staff/Part Properties</source>
-        <translation>MuseScore: Vonalrendszer/Kivonat tulajdonságok szerkesztése</translation>
+        <translation>MuseScore: Kottasor/Kivonat tulajdonságok szerkesztése</translation>
     </message>
     <message>
         <source>Staff Properties</source>
-        <translation>Vonalrendszer tulajdonságai</translation>
+        <translation>Kottasor tulajdonságai</translation>
     </message>
     <message>
         <source>Lines:</source>
@@ -2353,7 +2353,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Staves</source>
-        <translation>Vonalrendszerek</translation>
+        <translation>Kottasorok</translation>
     </message>
     <message>
         <source>Clef</source>
@@ -2368,7 +2368,7 @@ space unit</extracomment>
     <name>InstrumentsDialog</name>
     <message>
         <source>Staff %1</source>
-        <translation>%1. vonalrendszer</translation>
+        <translation>%1. kottasor</translation>
     </message>
     <message>
         <source>Instrument List</source>
@@ -2376,7 +2376,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Staves</source>
-        <translation>Vonalrendszerek</translation>
+        <translation>Kottasorok</translation>
     </message>
     <message>
         <source>Clef</source>
@@ -2477,6 +2477,25 @@ sikertelen: </translation>
     <message>
         <source>MuseScore: Key Signatures</source>
         <translation>MuseScore: Előjegyzések</translation>
+    </message>
+</context>
+<context>
+    <name>KeySig</name>
+    <message>
+        <source>Hide courtesy signature</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Show courtesy signature</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Hide naturals</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Show naturals</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -2730,11 +2749,11 @@ sikertelen: </translation>
     </message>
     <message>
         <source>Staves</source>
-        <translation>Vonalrendszerek</translation>
+        <translation>Kottasorok</translation>
     </message>
     <message>
         <source>Staff</source>
-        <translation>Vonalrendszer</translation>
+        <translation>Kottasor</translation>
     </message>
     <message>
         <source>Visible</source>
@@ -3116,7 +3135,7 @@ módosításait bezárás előtt?</translation>
     </message>
     <message>
         <source>Coda</source>
-        <translation>Coda</translation>
+        <translation>Kóda</translation>
     </message>
     <message>
         <source>Codetta</source>
@@ -3140,7 +3159,7 @@ módosításait bezárás előtt?</translation>
     </message>
     <message>
         <source>To Coda</source>
-        <translation>To Coda</translation>
+        <translation>Ugrás kódára</translation>
     </message>
     <message>
         <source>Beam Properties</source>
@@ -3348,7 +3367,7 @@ módosításait bezárás előtt?</translation>
     </message>
     <message>
         <source>Staff</source>
-        <translation>Vonalrendszer</translation>
+        <translation>Kottasor</translation>
     </message>
     <message>
         <source>Chordname</source>
@@ -3546,7 +3565,7 @@ A "Súgó" menüben válaszd inkább az "Online kézikönyv" pontot.</translatio
     </message>
     <message>
         <source>Staff spacer</source>
-        <translation>Vonalrendszer térköz</translation>
+        <translation>Kottasor térköz</translation>
     </message>
     <message>
         <source>Start beam</source>
@@ -3602,7 +3621,7 @@ Helyreállítsa a munkamenetet?</translation>
     </message>
     <message>
         <source>Varied coda</source>
-        <translation>Coda változat</translation>
+        <translation>Kóda változat</translation>
     </message>
     <message>
         <source>MuseScore: Articulations &amp; Ornaments</source>
@@ -3644,8 +3663,44 @@ szkript futtatásához</translation>
 %3</translation>
     </message>
     <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Overture Files &lt;experimental&gt; (*.ove);;All Files (*)</source>
-        <translation>Minden támogatott fájl (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;MuseScore fájlok (*.mscz *.mscx *.msc);;MusicXML fájlok (*.xml *.mxl);;MIDI fájlok (*.mid *.midi *.kar);;Muse Data fájlok (*.md);;Capella Files (*.cap);;BB fájlok &lt;kísérleti&gt; (*.mgu *.MGU *.sgu *.SGU);;Overture fájlok &lt;kísérleti&gt; (*.ove);;Minden fájl (*)</translation>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>MuseScore Files (*.mscz *.mscx *.msc);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>MusicXML Files (*.xml *.mxl);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>MIDI Files (*.mid *.midi *.kar);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Muse Data Files (*.md);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Capella Files (*.cap);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Bagpipe Music Writer Files (*.bww);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>All Files (*)</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -3706,7 +3761,7 @@ szkript futtatásához</translation>
     </message>
     <message>
         <source>Define a set of instruments. Each instrument is represented by one or more staves</source>
-        <translation>Add meg a hangszereket. Minden hangszerhez egy vagy több vonalrendszer tartozik</translation>
+        <translation>Add meg a hangszereket. Minden hangszerhez egy vagy több kottasor tartozik</translation>
     </message>
 </context>
 <context>
@@ -3896,6 +3951,10 @@ szkript futtatásához</translation>
     <message>
         <source>Odd Page Margins</source>
         <translation>Páratlan oldalak margói</translation>
+    </message>
+    <message>
+        <source>First page no.</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -4092,7 +4151,7 @@ szkript futtatásához</translation>
     </message>
     <message>
         <source>MuseScore: &lt;%1&gt; Staff: %2</source>
-        <translation>MuseScore: &lt;%1&gt; Vonalrendszer: %2</translation>
+        <translation>MuseScore: &lt;%1&gt; Kottasor: %2</translation>
     </message>
     <message>
         <source>toolbar1</source>
@@ -4240,68 +4299,12 @@ szkript futtatásához</translation>
         <translation>ezzel a kottával indul:</translation>
     </message>
     <message>
-        <source>...</source>
-        <translation>...</translation>
-    </message>
-    <message>
         <source>show splash screen</source>
         <translation>Indulóképernyő mutatása</translation>
     </message>
     <message>
         <source>Language</source>
         <translation>Nyelv</translation>
-    </message>
-    <message>
-        <source>cz Czech</source>
-        <translation>cz Cseh</translation>
-    </message>
-    <message>
-        <source>de German</source>
-        <translation>de Német</translation>
-    </message>
-    <message>
-        <source>en English</source>
-        <translation>en Angol</translation>
-    </message>
-    <message>
-        <source>es Spanish</source>
-        <translation>es Spanyol</translation>
-    </message>
-    <message>
-        <source>fr French</source>
-        <translation>fr Francia</translation>
-    </message>
-    <message>
-        <source>gl Galician</source>
-        <translation>gl Galíciai</translation>
-    </message>
-    <message>
-        <source>hi_IN Hindi</source>
-        <translation>hi_IN Hindi</translation>
-    </message>
-    <message>
-        <source>it Italian</source>
-        <translation>it Olasz</translation>
-    </message>
-    <message>
-        <source>nl Dutch</source>
-        <translation>nl Holland</translation>
-    </message>
-    <message>
-        <source>pt Portuguese</source>
-        <translation>pt Portugál</translation>
-    </message>
-    <message>
-        <source>pt_BR Brasilian Portuguese</source>
-        <translation>pt_BR Brazíliai portugál</translation>
-    </message>
-    <message>
-        <source>ru Russian</source>
-        <translation>ru Orosz</translation>
-    </message>
-    <message>
-        <source>tr Turkey</source>
-        <translation>tr Török</translation>
     </message>
     <message>
         <source>Attention: changing the language requires a restart of MuseScore.</source>
@@ -4482,34 +4485,6 @@ szkript futtatásához</translation>
     <message>
         <source>Expand Repeats</source>
         <translation>Ismétlések kibontása</translation>
-    </message>
-    <message>
-        <source>enable midi remote control</source>
-        <translation>MIDI távirányítás engedélyezése</translation>
-    </message>
-    <message>
-        <source>Stop</source>
-        <translation>Leállítás</translation>
-    </message>
-    <message>
-        <source>is active</source>
-        <translation>aktív</translation>
-    </message>
-    <message>
-        <source>record</source>
-        <translation>felvétel</translation>
-    </message>
-    <message>
-        <source>Record</source>
-        <translation>Felvétel</translation>
-    </message>
-    <message>
-        <source>Rewind</source>
-        <translation>Visszatekerés</translation>
-    </message>
-    <message>
-        <source>Play</source>
-        <translation>Lejátszás</translation>
     </message>
     <message>
         <source>Score</source>
@@ -4713,10 +4688,6 @@ szkript futtatásához</translation>
         <translation>MIDI exportálás</translation>
     </message>
     <message>
-        <source>MIDI Remote Control</source>
-        <translation>MIDI távirányítás</translation>
-    </message>
-    <message>
         <source>Auto-correction</source>
         <translation>Auto-javítás</translation>
     </message>
@@ -4739,10 +4710,6 @@ szkript futtatásához</translation>
     <message>
         <source>Use style file:</source>
         <translation>Stílusfájl használata:</translation>
-    </message>
-    <message>
-        <source>System</source>
-        <translation>Rendszer</translation>
     </message>
     <message>
         <source>Navigator:</source>
@@ -4775,6 +4742,14 @@ szkript futtatásához</translation>
     <message>
         <source>Use Current Position</source>
         <translation>Aktuális pozíció használata</translation>
+    </message>
+    <message>
+        <source>Character Set used when import non-unicode strings. (For binary file import)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Character Set</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -4831,7 +4806,7 @@ Válassz ki egyetlen hangjegyet vagy szünetet és próbáld újra
     <message>
         <source>Please select one or more staves and retry operation
 </source>
-        <translation>Válassz ki egy vagy több vonalrendszert és próbáld újra
+        <translation>Válassz ki egy vagy több kottasort és próbáld újra
 </translation>
     </message>
 </context>
@@ -5033,9 +5008,9 @@ Válassz ki egyetlen hangjegyet vagy szünetet és próbáld újra
         <source>No staves found:
 please use the instruments dialog to
 first create some staves</source>
-        <translation>Nem található vonalrendszer:
-a hangszerek ablak segítségével
-hozz létre először néhány vonalrendszert</translation>
+        <translation>Nem található kottasor:&#13;
+a Hangszerek ablak segítségével&#13;
+hozz létre először néhány kottasort</translation>
     </message>
     <message>
         <source>No Measure selected:
@@ -5256,7 +5231,7 @@ Próbáld más helyre menteni.</translation>
     </message>
     <message>
         <source>Staff</source>
-        <translation>Vonalrendszer</translation>
+        <translation>Kottasor</translation>
     </message>
     <message>
         <source>Edit Drumset...</source>
@@ -5272,11 +5247,11 @@ Próbáld más helyre menteni.</translation>
     </message>
     <message>
         <source>Staff Properties...</source>
-        <translation>Vonalrendszer tulajdonságai...</translation>
+        <translation>Kottasor tulajdonságai...</translation>
     </message>
     <message>
         <source>Split Staff...</source>
-        <translation>Vonalrendszer szétválasztása...</translation>
+        <translation>Kottasor szétválasztása...</translation>
     </message>
     <message>
         <source>Measure</source>
@@ -5285,7 +5260,8 @@ Próbáld más helyre menteni.</translation>
     <message>
         <source>unknown drop format: formats %1:
 </source>
-        <translation type="unfinished"/>
+        <translation>ismeretlen célformátum: %1 formátumok:
+</translation>
     </message>
 </context>
 <context>
@@ -5355,7 +5331,7 @@ Próbáld más helyre menteni.</translation>
     </message>
     <message>
         <source>same staff</source>
-        <translation>ugyanebben a vonalrendszerben</translation>
+        <translation>ugyanebben a kottasorban</translation>
     </message>
     <message>
         <source>same voice</source>
@@ -5406,7 +5382,8 @@ Próbáld más helyre menteni.</translation>
     <message>
         <source>Init audio driver failed.
 Sequencer will be disabled.</source>
-        <translation type="unfinished"/>
+        <translation>Az audiodriver inicializálása sikertelen.&#13;
+A sequencer le lesz tiltva.</translation>
     </message>
     <message>
         <source>MuseScore: Load SoundFont</source>
@@ -5568,7 +5545,7 @@ győződj meg arról, hogy helyes-e a SoundFont fájl elérési útja.</translat
     </message>
     <message>
         <source>Staff:</source>
-        <translation>Vonalrendszer:</translation>
+        <translation>Kottasor:</translation>
     </message>
     <message>
         <source>Voice:</source>
@@ -5634,7 +5611,7 @@ győződj meg arról, hogy helyes-e a SoundFont fájl elérési útja.</translat
     </message>
     <message>
         <source>Split Staff</source>
-        <translation>Vonalrendszer szétválasztása</translation>
+        <translation>Kottasor szétválasztása</translation>
     </message>
     <message>
         <source>Split Point</source>
@@ -5645,18 +5622,14 @@ győződj meg arról, hogy helyes-e a SoundFont fájl elérési útja.</translat
     <name>StaffText</name>
     <message>
         <source>Staff Text Properties...</source>
-        <translation>Vonalrendszer szöveg tulajdonságai...</translation>
+        <translation>Kottasor szöveg tulajdonságai...</translation>
     </message>
 </context>
 <context>
     <name>StaffTextProperties</name>
     <message>
-        <source>normal</source>
-        <translation>normál</translation>
-    </message>
-    <message>
         <source>MuseScore: Staff Text Properties</source>
-        <translation>MuseScore: Vonalrendszer szöveg tulajdonságai</translation>
+        <translation>MuseScore: Kottasor szöveg tulajdonságai</translation>
     </message>
     <message>
         <source>Channel</source>
@@ -5945,10 +5918,6 @@ győződj meg arról, hogy helyes-e a SoundFont fájl elérési útja.</translat
     <message>
         <source>Text</source>
         <translation>Szöveg</translation>
-    </message>
-    <message>
-        <source>Frame</source>
-        <translation>Keret</translation>
     </message>
 </context>
 <context>
@@ -7216,11 +7185,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>add staff above to selection</source>
-        <translation>vonalrendszer hozzáadása a kijelölés fölé</translation>
+        <translation>kottasor hozzáadása a kijelölés fölé</translation>
     </message>
     <message>
         <source>add staff below to selection</source>
-        <translation>vonalrendszer hozzáadása a kijelölés alá</translation>
+        <translation>kottasor hozzáadása a kijelölés alá</translation>
     </message>
     <message>
         <source>page-prev</source>
@@ -7600,11 +7569,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add Staff Text</source>
-        <translation>Vonalrendszer szöveg hozzáadása</translation>
+        <translation>Kottasor szöveg hozzáadása</translation>
     </message>
     <message>
         <source>Staff Text</source>
-        <translation>Vonalrendszer szöveg</translation>
+        <translation>Kottasor szöveg</translation>
     </message>
     <message>
         <source>Add Text</source>
@@ -7964,11 +7933,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Select all similar elements in same staff</source>
-        <translation>Minden hasonló elem kijelölése ebben a vonalrendszerben</translation>
+        <translation>Minden hasonló elem kijelölése ebben a kottasorban</translation>
     </message>
     <message>
         <source>All Similar Elements in Same Staff</source>
-        <translation>Minden hasonló elem ebben a vonalrendszerben</translation>
+        <translation>Minden hasonló elem ebben a kottasorban</translation>
     </message>
     <message>
         <source>Synthesizer</source>
@@ -8848,7 +8817,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>StaffText</source>
-        <translation>VonalrendszerSzöveg</translation>
+        <translation>KottasorSzöveg</translation>
     </message>
     <message>
         <source>Harmony</source>
@@ -8980,7 +8949,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>StaffList</source>
-        <translation>VonalrendszerLista</translation>
+        <translation>KottasorLista</translation>
     </message>
     <message>
         <source>MeasureList</source>
@@ -9051,6 +9020,14 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Every 2 months</source>
         <translation>Kéthavonta</translation>
+    </message>
+</context>
+<context>
+    <name>score</name>
+    <message>
+        <source>Cannot read this score:
+your version of MuseScore is too old.</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -9605,11 +9582,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>coda</source>
-        <translation>coda</translation>
+        <translation>kóda</translation>
     </message>
     <message>
         <source>varied coda</source>
-        <translation>variált coda</translation>
+        <translation>variált kóda</translation>
     </message>
     <message>
         <source>rcomma</source>

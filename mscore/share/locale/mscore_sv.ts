@@ -2480,6 +2480,25 @@ misslyckades: </translation>
     </message>
 </context>
 <context>
+    <name>KeySig</name>
+    <message>
+        <source>Hide courtesy signature</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Show courtesy signature</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Hide naturals</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Show naturals</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>LinePropertiesDialog</name>
     <message>
         <source>MuseScore: Line Properties</source>
@@ -3638,8 +3657,44 @@ is incompatible with current interface</source>
         <translation>Fel vid inläsning av plugin "%1" line %2: %3</translation>
     </message>
     <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Overture Files &lt;experimental&gt; (*.ove);;All Files (*)</source>
-        <translation>Alla stödda filformat (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Overture Files &lt;experimental&gt; (*.ove);;All Files (*)</translation>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>MuseScore Files (*.mscz *.mscx *.msc);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>MusicXML Files (*.xml *.mxl);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>MIDI Files (*.mid *.midi *.kar);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Muse Data Files (*.md);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Capella Files (*.cap);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Bagpipe Music Writer Files (*.bww);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>All Files (*)</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -3890,6 +3945,10 @@ is incompatible with current interface</source>
     <message>
         <source>Odd Page Margins</source>
         <translation>Marginaler på udda sidor</translation>
+    </message>
+    <message>
+        <source>First page no.</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -4234,68 +4293,12 @@ is incompatible with current interface</source>
         <translation>starta med dokument:</translation>
     </message>
     <message>
-        <source>...</source>
-        <translation>...</translation>
-    </message>
-    <message>
         <source>show splash screen</source>
         <translation>visa vinjettfönster</translation>
     </message>
     <message>
         <source>Language</source>
         <translation>Språk</translation>
-    </message>
-    <message>
-        <source>cz Czech</source>
-        <translation>cz tjeckiska</translation>
-    </message>
-    <message>
-        <source>de German</source>
-        <translation>de tyska</translation>
-    </message>
-    <message>
-        <source>en English</source>
-        <translation>en engelska</translation>
-    </message>
-    <message>
-        <source>es Spanish</source>
-        <translation>es spanska</translation>
-    </message>
-    <message>
-        <source>fr French</source>
-        <translation>fr franska</translation>
-    </message>
-    <message>
-        <source>gl Galician</source>
-        <translation>gl galiciska</translation>
-    </message>
-    <message>
-        <source>hi_IN Hindi</source>
-        <translation>hi_IN hindi</translation>
-    </message>
-    <message>
-        <source>it Italian</source>
-        <translation>it italienska</translation>
-    </message>
-    <message>
-        <source>nl Dutch</source>
-        <translation>nl nederländska</translation>
-    </message>
-    <message>
-        <source>pt Portuguese</source>
-        <translation>pt portugisiska</translation>
-    </message>
-    <message>
-        <source>pt_BR Brasilian Portuguese</source>
-        <translation>pt_BR brasiliansk portugisiska</translation>
-    </message>
-    <message>
-        <source>ru Russian</source>
-        <translation>ru ryska</translation>
-    </message>
-    <message>
-        <source>tr Turkey</source>
-        <translation>tr turkiska</translation>
     </message>
     <message>
         <source>Attention: changing the language requires a restart of MuseScore.</source>
@@ -4476,34 +4479,6 @@ is incompatible with current interface</source>
     <message>
         <source>Expand Repeats</source>
         <translation>Utvidga repriser</translation>
-    </message>
-    <message>
-        <source>enable midi remote control</source>
-        <translation>aktivera MIDI-fjärrkontroll</translation>
-    </message>
-    <message>
-        <source>Stop</source>
-        <translation>Stopp</translation>
-    </message>
-    <message>
-        <source>is active</source>
-        <translation>är aktiv</translation>
-    </message>
-    <message>
-        <source>record</source>
-        <translation>spela in</translation>
-    </message>
-    <message>
-        <source>Record</source>
-        <translation>Spela in</translation>
-    </message>
-    <message>
-        <source>Rewind</source>
-        <translation>Spola tillbaka</translation>
-    </message>
-    <message>
-        <source>Play</source>
-        <translation>Spela</translation>
     </message>
     <message>
         <source>Score</source>
@@ -4707,10 +4682,6 @@ is incompatible with current interface</source>
         <translation>Exportera MIDI</translation>
     </message>
     <message>
-        <source>MIDI Remote Control</source>
-        <translation>MIDI Fjärrkontroll</translation>
-    </message>
-    <message>
         <source>Auto-correction</source>
         <translation>Autokorrigering</translation>
     </message>
@@ -4733,10 +4704,6 @@ is incompatible with current interface</source>
     <message>
         <source>Use style file:</source>
         <translation>Använd formatmall:</translation>
-    </message>
-    <message>
-        <source>System</source>
-        <translation>System</translation>
     </message>
     <message>
         <source>Navigator:</source>
@@ -4769,6 +4736,14 @@ is incompatible with current interface</source>
     <message>
         <source>Use Current Position</source>
         <translation>Använd aktuell position</translation>
+    </message>
+    <message>
+        <source>Character Set used when import non-unicode strings. (For binary file import)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Character Set</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -5641,10 +5616,6 @@ and check that the file location is correct</source>
 <context>
     <name>StaffTextProperties</name>
     <message>
-        <source>normal</source>
-        <translation>normal</translation>
-    </message>
-    <message>
         <source>MuseScore: Staff Text Properties</source>
         <translation>MuseScore: Systemtextegenskaper</translation>
     </message>
@@ -5935,10 +5906,6 @@ and check that the file location is correct</source>
     <message>
         <source>Text</source>
         <translation>Text</translation>
-    </message>
-    <message>
-        <source>Frame</source>
-        <translation>Ram</translation>
     </message>
 </context>
 <context>
@@ -9041,6 +9008,14 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Every 2 months</source>
         <translation>Varannan månad</translation>
+    </message>
+</context>
+<context>
+    <name>score</name>
+    <message>
+        <source>Cannot read this score:
+your version of MuseScore is too old.</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>

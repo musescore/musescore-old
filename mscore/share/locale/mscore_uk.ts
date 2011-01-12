@@ -1360,7 +1360,7 @@ failed: </source>
     </message>
     <message>
         <source>Small</source>
-        <translation type="unfinished"/>
+        <translation>малі</translation>
     </message>
     <message>
         <source>Part Properties</source>
@@ -1384,11 +1384,11 @@ failed: </source>
     </message>
     <message>
         <source>Stemless</source>
-        <translation>Без штилів</translation>
+        <translation>без штилів</translation>
     </message>
     <message>
         <source>Invisible</source>
-        <translation type="unfinished"/>
+        <translation>невидимі</translation>
     </message>
     <message>
         <source>Usable Pitch Range:</source>
@@ -1396,19 +1396,19 @@ failed: </source>
     </message>
     <message>
         <source>Amateur:</source>
-        <translation type="unfinished"/>
+        <translation>Любитель:</translation>
     </message>
     <message>
         <source>-</source>
-        <translation type="unfinished"/>
+        <translation>—</translation>
     </message>
     <message>
         <source>Professional:</source>
-        <translation type="unfinished"/>
+        <translation>Професіонал:</translation>
     </message>
     <message>
         <source>Play Transposition:</source>
-        <translation type="unfinished"/>
+        <translation>Грати в транспозиції:</translation>
     </message>
     <message>
         <source>Perfect Unison</source>
@@ -1516,11 +1516,11 @@ failed: </source>
     </message>
     <message>
         <source>up</source>
-        <translation type="unfinished">вгору</translation>
+        <translation>вгору</translation>
     </message>
     <message>
         <source>down</source>
-        <translation type="unfinished">вниз</translation>
+        <translation>вниз</translation>
     </message>
     <message>
         <source>Change Instrument...</source>
@@ -1528,7 +1528,7 @@ failed: </source>
     </message>
     <message>
         <source>+octave</source>
-        <translation type="unfinished"/>
+        <translation>+ октава</translation>
     </message>
 </context>
 <context>
@@ -1972,7 +1972,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>BPM:</source>
-        <translation type="unfinished">BPM:</translation>
+        <translation>Уд/Хв:</translation>
     </message>
     <message>
         <source>Text:</source>
@@ -2010,7 +2010,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>selectable</source>
-        <translation type="unfinished"/>
+        <translation>вибірний</translation>
     </message>
     <message>
         <source>droptarget</source>
@@ -2481,6 +2481,25 @@ failed: </source>
     </message>
 </context>
 <context>
+    <name>KeySig</name>
+    <message>
+        <source>Hide courtesy signature</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Show courtesy signature</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Hide naturals</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Show naturals</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>LinePropertiesDialog</name>
     <message>
         <source>MuseScore: Line Properties</source>
@@ -2596,11 +2615,11 @@ failed: </source>
     </message>
     <message>
         <source>LineSegment</source>
-        <translation>СегментЛінії</translation>
+        <translation>Сегмент лінії</translation>
     </message>
     <message>
         <source>SegmentType:</source>
-        <translation>ТипСегменту:</translation>
+        <translation>Тип сегменту:</translation>
     </message>
     <message>
         <source>SINGLE</source>
@@ -2717,7 +2736,7 @@ failed: </source>
     <name>MeasureProperties</name>
     <message>
         <source>visible</source>
-        <translation type="unfinished">видимий</translation>
+        <translation>видимий</translation>
     </message>
     <message>
         <source>stemless</source>
@@ -2800,7 +2819,7 @@ failed: </source>
     </message>
     <message>
         <source>visible</source>
-        <translation type="unfinished">видимий</translation>
+        <translation>видимий</translation>
     </message>
     <message>
         <source>c</source>
@@ -3370,7 +3389,7 @@ before closing?</source>
     </message>
     <message>
         <source>TextLine</source>
-        <translation>Текстовий рядок</translation>
+        <translation>Лінія тексту</translation>
     </message>
     <message>
         <source>Glissando</source>
@@ -3484,7 +3503,7 @@ From the "Help" menu try choosing "Online Handbook" instead.</source>
     </message>
     <message>
         <source>Text line</source>
-        <translation>Текстовий рядок</translation>
+        <translation>Лінія тексту</translation>
     </message>
     <message>
         <source>Line</source>
@@ -3642,8 +3661,44 @@ is incompatible with current interface</source>
 %3</translation>
     </message>
     <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Overture Files &lt;experimental&gt; (*.ove);;All Files (*)</source>
-        <translation>Усі підтримувані файли (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;Файли MuseScore (*.mscz *.mscx *.msc);;Файли MusicXML (*.xml *.mxl);;MIDI-файли (*.mid *.midi *.kar);;Файли даних Muse (*.md);;Файли Capella (*.cap);;Файли BB &lt;експериментально&gt; (*.mgu *.MGU *.sgu *.SGU);;Файли Overture &lt;експериментально&gt; (*.ove);;Усі файли (*)</translation>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</source>
+        <translation>Усі підтримувані файли (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</translation>
+    </message>
+    <message>
+        <source>MuseScore Files (*.mscz *.mscx *.msc);;</source>
+        <translation>Файли MuseScore (*.mscz *.mscx *.msc);;</translation>
+    </message>
+    <message>
+        <source>MusicXML Files (*.xml *.mxl);;</source>
+        <translation>Файли MusicXML (*.xml *.mxl);;</translation>
+    </message>
+    <message>
+        <source>MIDI Files (*.mid *.midi *.kar);;</source>
+        <translation>Файли MIDI  (*.mid *.midi *.kar);;</translation>
+    </message>
+    <message>
+        <source>Muse Data Files (*.md);;</source>
+        <translation>Файли даних Muse (*.md);;</translation>
+    </message>
+    <message>
+        <source>Capella Files (*.cap);;</source>
+        <translation>Файли Capella (*.cap);;</translation>
+    </message>
+    <message>
+        <source>Bagpipe Music Writer Files (*.bww);;</source>
+        <translation>Файли Bagpipe Music Writer (*.bww);;</translation>
+    </message>
+    <message>
+        <source>BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;</source>
+        <translation>Файли BB &lt;експериментально&gt; (*.mgu *.MGU *.sgu *.SGU);;</translation>
+    </message>
+    <message>
+        <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
+        <translation>Файли Overture &lt;експериментально&gt; (*.ove);;</translation>
+    </message>
+    <message>
+        <source>All Files (*)</source>
+        <translation>Усі файли (*)</translation>
     </message>
 </context>
 <context>
@@ -3895,6 +3950,10 @@ is incompatible with current interface</source>
         <source>Odd Page Margins</source>
         <translation>Поля непарних сторінок</translation>
     </message>
+    <message>
+        <source>First page no.</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>Palette</name>
@@ -4121,7 +4180,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>120bpm</source>
-        <translation>120bpm</translation>
+        <translation>120 уд/хв</translation>
     </message>
     <message>
         <source>100%</source>
@@ -4236,10 +4295,6 @@ is incompatible with current interface</source>
     <message>
         <source>Colors</source>
         <translation>Кольори</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation>…</translation>
     </message>
     <message>
         <source>General</source>
@@ -4382,34 +4437,6 @@ is incompatible with current interface</source>
         <translation>Розташування</translation>
     </message>
     <message>
-        <source>enable midi remote control</source>
-        <translation>Увімкнути віддалене керування MIDI</translation>
-    </message>
-    <message>
-        <source>Stop</source>
-        <translation>Зупинити</translation>
-    </message>
-    <message>
-        <source>is active</source>
-        <translation>активне</translation>
-    </message>
-    <message>
-        <source>record</source>
-        <translation>запис</translation>
-    </message>
-    <message>
-        <source>Record</source>
-        <translation>Записати</translation>
-    </message>
-    <message>
-        <source>Rewind</source>
-        <translation>Перемотати назад</translation>
-    </message>
-    <message>
-        <source>Play</source>
-        <translation>Грати</translation>
-    </message>
-    <message>
         <source>192000</source>
         <translation>192000</translation>
     </message>
@@ -4504,58 +4531,6 @@ is incompatible with current interface</source>
     <message>
         <source>Language</source>
         <translation>Мова інтерфейсу</translation>
-    </message>
-    <message>
-        <source>cz Czech</source>
-        <translation>cz Чешська</translation>
-    </message>
-    <message>
-        <source>de German</source>
-        <translation>de Німецька</translation>
-    </message>
-    <message>
-        <source>en English</source>
-        <translation>en Англійська</translation>
-    </message>
-    <message>
-        <source>es Spanish</source>
-        <translation>es Іспанська</translation>
-    </message>
-    <message>
-        <source>fr French</source>
-        <translation>fr Французька</translation>
-    </message>
-    <message>
-        <source>gl Galician</source>
-        <translation>gl Ґаліційська</translation>
-    </message>
-    <message>
-        <source>hi_IN Hindi</source>
-        <translation>hi_IN Гінді</translation>
-    </message>
-    <message>
-        <source>it Italian</source>
-        <translation>it Італійська</translation>
-    </message>
-    <message>
-        <source>nl Dutch</source>
-        <translation>nl Нідерландська</translation>
-    </message>
-    <message>
-        <source>pt Portuguese</source>
-        <translation>pt Португальска</translation>
-    </message>
-    <message>
-        <source>pt_BR Brasilian Portuguese</source>
-        <translation>pt_BR Португальска (Бразилія)</translation>
-    </message>
-    <message>
-        <source>ru Russian</source>
-        <translation>ru Російська</translation>
-    </message>
-    <message>
-        <source>tr Turkey</source>
-        <translation>tr Турецька</translation>
     </message>
     <message>
         <source>Attention: changing the language requires a restart of MuseScore.</source>
@@ -4723,10 +4698,6 @@ is incompatible with current interface</source>
         <translation>Експорт MIDI</translation>
     </message>
     <message>
-        <source>MIDI Remote Control</source>
-        <translation>Віддалене керування MIDI</translation>
-    </message>
-    <message>
         <source>Style Used for Import</source>
         <translation>Стилі, що використовуються при імпорті</translation>
     </message>
@@ -4737,10 +4708,6 @@ is incompatible with current interface</source>
     <message>
         <source>Use style file:</source>
         <translation>використовувати файл стилю:</translation>
-    </message>
-    <message>
-        <source>System</source>
-        <translation>Система</translation>
     </message>
     <message>
         <source>Navigator:</source>
@@ -4773,6 +4740,14 @@ is incompatible with current interface</source>
     <message>
         <source>Use Current Position</source>
         <translation>Використати поточне розташування</translation>
+    </message>
+    <message>
+        <source>Character Set used when import non-unicode strings. (For binary file import)</source>
+        <translation>Набір символів, що застосовується при імпорті рядків у не-Unicode кодуванні (для імпорту бінарних файлів).</translation>
+    </message>
+    <message>
+        <source>Character Set</source>
+        <translation>Набір символів</translation>
     </message>
 </context>
 <context>
@@ -5002,11 +4977,11 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>LineSegments</source>
-        <translation>СегментиЛінії</translation>
+        <translation>Сегмент лінії</translation>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished">1</translation>
+        <translation>1</translation>
     </message>
     <message>
         <source>Anchor:</source>
@@ -5657,10 +5632,6 @@ and check that the file location is correct</source>
         <translation>MIDI-подія</translation>
     </message>
     <message>
-        <source>normal</source>
-        <translation type="unfinished">Тактова риска</translation>
-    </message>
-    <message>
         <source>Channel</source>
         <translation>Канал</translation>
     </message>
@@ -5723,7 +5694,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished">…</translation>
+        <translation>…</translation>
     </message>
     <message>
         <source>Master Tuning</source>
@@ -5803,7 +5774,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>BPM</source>
-        <translation type="unfinished"/>
+        <translation>Уд/Хв</translation>
     </message>
     <message>
         <source>Tempo Properties</source>
@@ -5946,10 +5917,6 @@ and check that the file location is correct</source>
     <message>
         <source>Text</source>
         <translation>Текст</translation>
-    </message>
-    <message>
-        <source>Frame</source>
-        <translation>Рамка</translation>
     </message>
 </context>
 <context>
@@ -6580,7 +6547,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>/</source>
-        <translation type="unfinished">/</translation>
+        <translation>/</translation>
     </message>
 </context>
 <context>
@@ -7553,7 +7520,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Mag</source>
-        <translation type="unfinished">Масштаб відображення</translation>
+        <translation>Величина</translation>
     </message>
     <message>
         <source>Zoom Canvas</source>
@@ -7665,15 +7632,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add Copyright</source>
-        <translation type="unfinished">Додати дані про авторські права</translation>
+        <translation>Додати авторські права</translation>
     </message>
     <message>
         <source>Copyright</source>
-        <translation type="unfinished">Авторське право</translation>
+        <translation>Авторські права</translation>
     </message>
     <message>
         <source>Add Copyright Text</source>
-        <translation type="unfinished">Додати дані про авторські права</translation>
+        <translation>Додати текст авторських прав</translation>
     </message>
     <message>
         <source>Add Chord Name</source>
@@ -7861,19 +7828,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>show invisible</source>
-        <translation type="unfinished">показувати невидиме</translation>
+        <translation>показати невидиме</translation>
     </message>
     <message>
         <source>Show Invisible</source>
-        <translation type="unfinished">Показувати невидиме</translation>
+        <translation>Показати невидиме</translation>
     </message>
     <message>
         <source>show frames</source>
-        <translation type="unfinished">показувати рамки</translation>
+        <translation>показати рамки</translation>
     </message>
     <message>
         <source>Show Frames</source>
-        <translation type="unfinished">Показувати рамки</translation>
+        <translation>Показати рамки</translation>
     </message>
     <message>
         <source>show keyboard</source>
@@ -8737,7 +8704,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>SlurSegment</source>
-        <translation>СегментЛіги</translation>
+        <translation>Сегмент ліги</translation>
     </message>
     <message>
         <source>BarLine</source>
@@ -8862,31 +8829,31 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>HairpinSegment</source>
-        <translation>СегментВилки</translation>
+        <translation>Сегмент вилки</translation>
     </message>
     <message>
         <source>OttavaSegment</source>
-        <translation>СегментОктави</translation>
+        <translation>Сегмент октави</translation>
     </message>
     <message>
         <source>PedalSegment</source>
-        <translation>СегментПедаль</translation>
+        <translation>Сегмент педалі</translation>
     </message>
     <message>
         <source>TrillSegment</source>
-        <translation>СегментТрелі</translation>
+        <translation>Сегмент трелі</translation>
     </message>
     <message>
         <source>TextLineSegment</source>
-        <translation>Сегмент_текстового_рядка</translation>
+        <translation>Сегмент лінії тексту</translation>
     </message>
     <message>
         <source>VoltaSegment</source>
-        <translation>СегментВольти</translation>
+        <translation>Сегмент вольти</translation>
     </message>
     <message>
         <source>LayoutBreak</source>
-        <translation>РозривМакету</translation>
+        <translation>Розрив макету</translation>
     </message>
     <message>
         <source>Spacer</source>
@@ -8910,7 +8877,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>StaffLines</source>
-        <translation type="unfinished"/>
+        <translation>Лінії нотного стану</translation>
     </message>
     <message>
         <source>Cursor</source>
@@ -8994,11 +8961,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>HBox</source>
-        <translation type="unfinished"/>
+        <translation>Горизонтальний блок</translation>
     </message>
     <message>
         <source>VBox</source>
-        <translation type="unfinished"/>
+        <translation>Вертикальний блок</translation>
     </message>
     <message>
         <source>Icon</source>
@@ -9053,6 +9020,14 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Every 2 months</source>
         <translation>кожні 2 місяці</translation>
+    </message>
+</context>
+<context>
+    <name>score</name>
+    <message>
+        <source>Cannot read this score:
+your version of MuseScore is too old.</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>

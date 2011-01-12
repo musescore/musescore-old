@@ -1486,7 +1486,7 @@ niepowodzenie: </translation>
     </message>
     <message>
         <source>Major Sixth</source>
-        <translation>Seksta mała</translation>
+        <translation>Seksta wielka</translation>
     </message>
     <message>
         <source>Augmented Sixth</source>
@@ -2479,6 +2479,25 @@ nie udane: </translation>
     <message>
         <source>MuseScore: Key Signatures</source>
         <translation>MuseScore: Oznaczenie tonacji</translation>
+    </message>
+</context>
+<context>
+    <name>KeySig</name>
+    <message>
+        <source>Hide courtesy signature</source>
+        <translation>Ukryj przypominające oznaczenie tonacji</translation>
+    </message>
+    <message>
+        <source>Show courtesy signature</source>
+        <translation>Pokaż oznaczenie przypominające</translation>
+    </message>
+    <message>
+        <source>Hide naturals</source>
+        <translation>Ukryj kasowniki</translation>
+    </message>
+    <message>
+        <source>Show naturals</source>
+        <translation>Pokaż kasowniki</translation>
     </message>
 </context>
 <context>
@@ -3642,8 +3661,44 @@ jest niekompatybilny z obecnym interfejsem.</translation>
 %3</translation>
     </message>
     <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;MuseScore Files (*.mscz *.mscx *.msc);;MusicXML Files (*.xml *.mxl);;MIDI Files (*.mid *.midi *.kar);;Muse Data Files (*.md);;Capella Files (*.cap);;BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;Overture Files &lt;experimental&gt; (*.ove);;All Files (*)</source>
-        <translation>Wszystkie obsługiwane pliki (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove);;Pliki MuseScore (*.mscz *.mscx *.msc);;Pliki MusicXML (*.xml *.mxl);;Pliki MIDI (*.mid *.midi *.kar);;Pliki Muse Data (*.md);;Capella Files (*.cap);;Pliki BB &lt;próbne&gt; (*.mgu *.MGU *.sgu *.SGU);;Pliki Overture &lt;próbne&gt; (*.ove);;Wszystkie pliki (*)</translation>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</source>
+        <translation>Wszystkie obsługiwane pliki (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</translation>
+    </message>
+    <message>
+        <source>MuseScore Files (*.mscz *.mscx *.msc);;</source>
+        <translation>Pliki MuseScore (*.mscz *.mscx *.msc);;</translation>
+    </message>
+    <message>
+        <source>MusicXML Files (*.xml *.mxl);;</source>
+        <translation>Pliki MusicXML (*.xml *.mxl);;</translation>
+    </message>
+    <message>
+        <source>MIDI Files (*.mid *.midi *.kar);;</source>
+        <translation>Pliki MIDI (*.mid *.midi *.kar);;</translation>
+    </message>
+    <message>
+        <source>Muse Data Files (*.md);;</source>
+        <translation>Pliki Muse Data (*.md);;</translation>
+    </message>
+    <message>
+        <source>Capella Files (*.cap);;</source>
+        <translation>Pliki Capella (*.cap);;</translation>
+    </message>
+    <message>
+        <source>Bagpipe Music Writer Files (*.bww);;</source>
+        <translation>Pliki Bagpipe Music Writer (*.bww);;</translation>
+    </message>
+    <message>
+        <source>BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;</source>
+        <translation>Pliki BB&lt;eksperymentalnie&gt; (*.mgu *.MGU *.sgu *.SGU);;</translation>
+    </message>
+    <message>
+        <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
+        <translation>Pliki Overture&lt;eksperymentalnie&gt; (*.ove);</translation>
+    </message>
+    <message>
+        <source>All Files (*)</source>
+        <translation>Wszystkie pliki (*)</translation>
     </message>
 </context>
 <context>
@@ -3894,6 +3949,10 @@ jest niekompatybilny z obecnym interfejsem.</translation>
     <message>
         <source>Odd Page Margins</source>
         <translation>Marginesy stron nieparzystych</translation>
+    </message>
+    <message>
+        <source>First page no.</source>
+        <translation>Numer pierwszej strony</translation>
     </message>
 </context>
 <context>
@@ -4238,68 +4297,12 @@ jest niekompatybilny z obecnym interfejsem.</translation>
         <translation>startuj z partyturą:</translation>
     </message>
     <message>
-        <source>...</source>
-        <translation>...</translation>
-    </message>
-    <message>
         <source>show splash screen</source>
         <translation>pokaż ekran splash</translation>
     </message>
     <message>
         <source>Language</source>
         <translation>Język</translation>
-    </message>
-    <message>
-        <source>cz Czech</source>
-        <translation>cz Czech</translation>
-    </message>
-    <message>
-        <source>de German</source>
-        <translation>de German</translation>
-    </message>
-    <message>
-        <source>en English</source>
-        <translation>en English</translation>
-    </message>
-    <message>
-        <source>es Spanish</source>
-        <translation>es Spanish</translation>
-    </message>
-    <message>
-        <source>fr French</source>
-        <translation>fr French</translation>
-    </message>
-    <message>
-        <source>gl Galician</source>
-        <translation>gl Galician</translation>
-    </message>
-    <message>
-        <source>hi_IN Hindi</source>
-        <translation>hi_IN Hindi</translation>
-    </message>
-    <message>
-        <source>it Italian</source>
-        <translation>it Italian</translation>
-    </message>
-    <message>
-        <source>nl Dutch</source>
-        <translation>nl Dutch</translation>
-    </message>
-    <message>
-        <source>pt Portuguese</source>
-        <translation>pt Portuguese</translation>
-    </message>
-    <message>
-        <source>pt_BR Brasilian Portuguese</source>
-        <translation>pt_BR Brasilian Portuguese</translation>
-    </message>
-    <message>
-        <source>ru Russian</source>
-        <translation>ru Russian</translation>
-    </message>
-    <message>
-        <source>tr Turkey</source>
-        <translation>tr Turkey</translation>
     </message>
     <message>
         <source>Attention: changing the language requires a restart of MuseScore.</source>
@@ -4480,34 +4483,6 @@ jest niekompatybilny z obecnym interfejsem.</translation>
     <message>
         <source>Expand Repeats</source>
         <translation>Dołączaj powtórki</translation>
-    </message>
-    <message>
-        <source>enable midi remote control</source>
-        <translation>włącz zdalne sterowanie Midi</translation>
-    </message>
-    <message>
-        <source>Stop</source>
-        <translation>Stop</translation>
-    </message>
-    <message>
-        <source>is active</source>
-        <translation>aktywne</translation>
-    </message>
-    <message>
-        <source>record</source>
-        <translation>nagraj</translation>
-    </message>
-    <message>
-        <source>Record</source>
-        <translation>Nagraj</translation>
-    </message>
-    <message>
-        <source>Rewind</source>
-        <translation>Przewiń</translation>
-    </message>
-    <message>
-        <source>Play</source>
-        <translation>Odtwarzaj</translation>
     </message>
     <message>
         <source>Score</source>
@@ -4711,10 +4686,6 @@ jest niekompatybilny z obecnym interfejsem.</translation>
         <translation>Eksportuj MIDI</translation>
     </message>
     <message>
-        <source>MIDI Remote Control</source>
-        <translation>Zdalne sterowanie MIDI</translation>
-    </message>
-    <message>
         <source>Auto-correction</source>
         <translation>Auto-poprawianie</translation>
     </message>
@@ -4737,10 +4708,6 @@ jest niekompatybilny z obecnym interfejsem.</translation>
     <message>
         <source>Use style file:</source>
         <translation>Użyj pliku stylu:</translation>
-    </message>
-    <message>
-        <source>System</source>
-        <translation>System</translation>
     </message>
     <message>
         <source>Navigator:</source>
@@ -4773,6 +4740,14 @@ jest niekompatybilny z obecnym interfejsem.</translation>
     <message>
         <source>Use Current Position</source>
         <translation>Użyj obecnej pozycji</translation>
+    </message>
+    <message>
+        <source>Character Set used when import non-unicode strings. (For binary file import)</source>
+        <translation>Zestaw znaków dla importu tekstów nie w unikodzie (import plików binarnych)</translation>
+    </message>
+    <message>
+        <source>Character Set</source>
+        <translation>Zestaw znaków</translation>
     </message>
 </context>
 <context>
@@ -4925,7 +4900,7 @@ proszę zaznaczyć pojedynczą nutę lub pauzę i powtórzyć operację
     </message>
     <message>
         <source>MuseScore: register script plugin:</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: rejestr skryptów wtyczek</translation>
     </message>
 </context>
 <context>
@@ -5652,10 +5627,6 @@ i sprawdź czy położenie pliku jest właściwe.</translation>
 <context>
     <name>StaffTextProperties</name>
     <message>
-        <source>normal</source>
-        <translation>normalny</translation>
-    </message>
-    <message>
         <source>MuseScore: Staff Text Properties</source>
         <translation>MuseScore: Właściwości tekstu pięciolinii</translation>
     </message>
@@ -5946,10 +5917,6 @@ i sprawdź czy położenie pliku jest właściwe.</translation>
     <message>
         <source>Text</source>
         <translation>Tekst</translation>
-    </message>
-    <message>
-        <source>Frame</source>
-        <translation>Ramka</translation>
     </message>
 </context>
 <context>
@@ -9052,6 +9019,15 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Every 2 months</source>
         <translation>Кожні 2 місяці</translation>
+    </message>
+</context>
+<context>
+    <name>score</name>
+    <message>
+        <source>Cannot read this score:
+your version of MuseScore is too old.</source>
+        <translation>Nie można odczytać tej parytury:&#13;
+Twoja wersja MuseScore'a jest zbyt stara.</translation>
     </message>
 </context>
 <context>
