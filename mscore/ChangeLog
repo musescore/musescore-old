@@ -1,3 +1,8 @@
+12.jan (la)
+      - add SVG icons for note entry toolbar
+      - change toolbar icon default size
+      - fix default saveas and save copy directory
+      - display palettes on first start
 11.jan (la)
       - fix #8613: MuseScore doesn't ask to restore session if you open from file
       - fix #8612: Cannot paste to measure with a grace note before beat 1
