@@ -411,7 +411,11 @@ bool Score::saveAs(bool saveCopy)
             mscore->lastSaveDirectory = settings.value("lastSaveDirectory", preferences.workingDirectory).toString();
       QString saveDirectory = saveCopy ?
             mscore->lastSaveCopyDirectory : mscore->lastSaveDirectory;
-
+      
+      if (saveDirectory.isEmpty()) {
+            saveDirectory = preferences.workingDirectory;
+            }
+      
       QString selectedFilter;
       QString fn = QFileDialog::getSaveFileName(
                0,

@@ -66,6 +66,26 @@
       <file>data/noteentry.svg</file>
       <file>data/symbols.xml</file>
       <file>data/tie.svg</file>
+      
+      <file>data/brevis.svg</file>
+      <file>data/dot.svg</file>
+      <file>data/dotdot.svg</file>
+      <file>data/flat.svg</file>
+      <file>data/flatflat.svg</file>
+      <file>data/longaUp.svg</file>
+      <file>data/natural.svg</file>
+      <file>data/note.svg</file>
+      <file>data/note2.svg</file>
+      <file>data/note4.svg</file>
+      <file>data/note8.svg</file>
+      <file>data/note16.svg</file>
+      <file>data/note32.svg</file>
+      <file>data/note64.svg</file>
+      <file>data/quartrest.svg</file>
+      <file>data/sharp.svg</file>
+      <file>data/sharpsharp.svg</file>
+      
+      
       <file alias="images/bookmark.svg">data/bookmark.svg</file>
       <file alias="images/pending.svg">data/pending.svg</file>
       <file alias="images/breakpoint.svg">data/breakpoint.svg</file>

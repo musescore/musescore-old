@@ -377,6 +377,9 @@ MuseScore::MuseScore()
       _splitScreen          = false;
       _horizontalSplit      = true;
       chordStyleEditor      = 0;
+      
+      lastSaveCopyDirectory = "";
+      lastSaveDirectory     = "";
 
       _positionLabel = new QLabel;
       _positionLabel->setText("001:01:000");
@@ -1981,7 +1984,7 @@ int main(int argc, char* av[])
              //
             // TODO: delete old session backups
             //
-            if (!mscore->restoreSession(preferences.sessionStart == LAST_SESSION) || files)
+            if (!mscore->restoreSession((preferences.sessionStart == LAST_SESSION) && (files == 0)) || files)
                   loadScores(argv);
 #endif
             }
@@ -2520,7 +2523,7 @@ void MuseScore::readSettings()
       move(settings.value("pos", QPoint(10, 10)).toPoint());
       if (settings.value("maximized", false).toBool())
             showMaximized();
-      mscore->showPalette(settings.value("showPanel", "0").toBool());
+      mscore->showPalette(settings.value("showPanel", "1").toBool());
       restoreState(settings.value("state").toByteArray());
       if (settings.value("splitScreen", false).toBool()) {
             splitWindow(settings.value("split").toBool());
