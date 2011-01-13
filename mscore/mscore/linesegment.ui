@@ -17,10 +17,10 @@
    <item row="0" column="0" colspan="2">
     <widget class="QGroupBox" name="MeasureBase_2">
      <property name="title">
-      <string>LineSegment</string>
+      <string notr="true">LineSegment</string>
      </property>
      <property name="flat">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <layout class="QVBoxLayout">
       <item>
@@ -28,30 +28,39 @@
         <item>
          <widget class="QLabel" name="label">
           <property name="text">
-           <string>SegmentType:</string>
+           <string notr="true">SegmentType:</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+          <property name="indent">
+           <number>5</number>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QComboBox" name="segmentType">
+          <property name="toolTip">
+           <string notr="true"/>
+          </property>
           <item>
            <property name="text">
-            <string>SINGLE</string>
+            <string notr="true">SINGLE</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>BEGIN</string>
+            <string notr="true">BEGIN</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>MIDDLE</string>
+            <string notr="true">MIDDLE</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>END</string>
+            <string notr="true">END</string>
            </property>
           </item>
          </widget>
@@ -76,34 +85,95 @@
         <item>
          <widget class="QLabel" name="label_2">
           <property name="text">
-           <string>Pos2</string>
+           <string notr="true">Pos2</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
+          <property name="indent">
+           <number>5</number>
+          </property>
          </widget>
         </item>
         <item>
-         <widget class="QDoubleSpinBox" name="pos2x"/>
+         <widget class="QDoubleSpinBox" name="pos2x">
+          <property name="toolTip">
+           <string notr="true"/>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+          <property name="buttonSymbols">
+           <enum>QAbstractSpinBox::NoButtons</enum>
+          </property>
+          <property name="minimum">
+           <double>-999999.000000000000000</double>
+          </property>
+          <property name="maximum">
+           <double>999999.000000000000000</double>
+          </property>
+         </widget>
         </item>
         <item>
-         <widget class="QDoubleSpinBox" name="pos2y"/>
+         <widget class="QDoubleSpinBox" name="pos2y">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+          <property name="buttonSymbols">
+           <enum>QAbstractSpinBox::NoButtons</enum>
+          </property>
+          <property name="minimum">
+           <double>-999999.000000000000000</double>
+          </property>
+          <property name="maximum">
+           <double>999999.000000000000000</double>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QLabel" name="label_3">
           <property name="text">
-           <string>Offset2</string>
+           <string notr="true">Offset2</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
+          <property name="indent">
+           <number>5</number>
+          </property>
          </widget>
         </item>
         <item>
-         <widget class="QDoubleSpinBox" name="offset2x"/>
+         <widget class="QDoubleSpinBox" name="offset2x">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+          <property name="buttonSymbols">
+           <enum>QAbstractSpinBox::NoButtons</enum>
+          </property>
+          <property name="minimum">
+           <double>-999999.000000000000000</double>
+          </property>
+          <property name="maximum">
+           <double>999999.000000000000000</double>
+          </property>
+         </widget>
         </item>
         <item>
-         <widget class="QDoubleSpinBox" name="offset2y"/>
+         <widget class="QDoubleSpinBox" name="offset2y">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+          <property name="buttonSymbols">
+           <enum>QAbstractSpinBox::NoButtons</enum>
+          </property>
+          <property name="minimum">
+           <double>-999999.000000000000000</double>
+          </property>
+          <property name="maximum">
+           <double>999999.000000000000000</double>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>

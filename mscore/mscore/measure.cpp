@@ -2131,7 +2131,11 @@ void Measure::read(QDomElement e, int staffIdx)
                   int id = e.attribute("id").toInt();
                   Spanner* e = score()->findSpanner(id);
                   if (e) {
-                        Segment* s = getSegment(SegChordRest, score()->curTick);
+                        Segment* s;
+                        if (e->anchor() == ANCHOR_MEASURE && score()->curTick == (tick()+ticks()))
+                              s = getSegment(SegEndBarLine, score()->curTick);
+                        else
+                              s = getSegment(SegChordRest, score()->curTick);
                         e->setEndElement(s);
                         s->addSpannerBack(e);
                         if (e->type() == OTTAVA) {

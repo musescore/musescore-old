@@ -542,6 +542,15 @@ void ScoreView::fotoContextPopup(QMouseEvent* ev)
       a = getAction("copy");
       a->setEnabled(true);
       popup->addAction(a);
+
+      popup->addSeparator();
+      a = popup->addAction(QString(tr("Resolution (%1 dpi)...")).arg(preferences.pngResolution));
+      a->setData("set-res");
+      QAction* bgAction = popup->addAction(tr("transparent background"));
+      bgAction->setCheckable(true);
+      bgAction->setChecked(preferences.pngTransparent);
+      bgAction->setData("set-bg");
+
       popup->addSeparator();
       a = new QAction(*icons[fileSave_ICON], tr("Save As (print mode)..."), this);
       a->setData("print");
@@ -563,7 +572,7 @@ void ScoreView::fotoContextPopup(QMouseEvent* ev)
 
             // oowriter wants transparent==false
             bool transparent = false; // preferences.pngTransparent;
-            double convDpi   = DPI; // preferences.pngResolution;
+            double convDpi   = preferences.pngResolution;
             double mag       = convDpi / DPI;
 
             QRectF r(_foto->abbox());
@@ -580,6 +589,24 @@ void ScoreView::fotoContextPopup(QMouseEvent* ev)
             p.end();
             mimeData->setImageData(printer);
             QApplication::clipboard()->setMimeData(mimeData);
+            }
+      else if (cmd == "set-res") {
+            bool ok;
+            double resolution = QInputDialog::getDouble(this,
+               tr("MuseScore: Set Output Resolution"),
+               tr("Set output resolution for png/svg"),
+               preferences.pngResolution,
+               16.0, 2400.0, 1,
+               &ok
+               );
+            if (ok) {
+                  preferences.pngResolution = resolution;
+                  preferences.dirty = true;
+                  }
+            }
+      if (bgAction->isChecked() != preferences.pngTransparent) {
+            preferences.pngTransparent = bgAction->isChecked();
+            preferences.dirty = true;
             }
       }
 
@@ -650,7 +677,7 @@ bool ScoreView::saveFotoAs(bool printMode, const QRectF& r)
             fn += "." + ext;
 
       bool transparent = preferences.pngTransparent;
-      double convDpi   = DPI; // preferences.pngResolution;
+      double convDpi   = preferences.pngResolution;
       double mag       = convDpi / DPI;
 
       int w = lrint(r.width()  * mag);
@@ -682,7 +709,7 @@ bool ScoreView::saveFotoAs(bool printMode, const QRectF& r)
             }
       else if (ext == "svg") {
             QSvgGenerator printer;
-            printer.setResolution(int(DPI));
+            printer.setResolution(int(convDpi));
             printer.setFileName(fn);
             printer.setSize(QSize(w, h));
             printer.setViewBox(QRect(0, 0, w, h));
@@ -696,7 +723,6 @@ bool ScoreView::saveFotoAs(bool printMode, const QRectF& r)
             printer.setDotsPerMeterX(lrint(DPMM * 1000.0));
             printer.setDotsPerMeterY(lrint(DPMM * 1000.0));
             printer.fill(transparent ? 0 : 0xffffffff);
-
             QPainter p(&printer);
             paintRect(printMode, p, r, mag);
             printer.save(fn, "png");
@@ -715,8 +741,8 @@ void ScoreView::paintRect(bool printMode, QPainter& p, const QRectF& r, double m
       double x = r.x();
       double y = r.y();
 
-      p.translate(-x, -y);
       p.scale(mag, mag);
+      p.translate(-x, -y);
 
       p.setRenderHint(QPainter::Antialiasing, true);
       p.setRenderHint(QPainter::TextAntialiasing, true);
@@ -733,6 +759,7 @@ void ScoreView::paintRect(bool printMode, QPainter& p, const QRectF& r, double m
 
 void ScoreView::paint1(bool printMode, const QRectF& fr, QPainter& p)
       {
+      score()->setPrinting(printMode);
       foreach (Page* page, _score->pages()) {
             QRectF pr(page->abbox());
             if (pr.right() < fr.left())
@@ -743,6 +770,7 @@ void ScoreView::paint1(bool printMode, const QRectF& fr, QPainter& p)
             qStableSort(ell.begin(), ell.end(), elementLessThan);
             drawElements(p, ell);
             }
+      score()->setPrinting(false);
       }
 
 //---------------------------------------------------------

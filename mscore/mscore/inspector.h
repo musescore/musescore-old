@@ -46,6 +46,8 @@
 #include "ui_slursegment.h"
 #include "ui_accidental.h"
 
+#include "globals.h"
+
 class ShowElementBase;
 class Element;
 class Page;
@@ -66,32 +68,7 @@ class Inspector : public QDialog, public Ui::InspectorBase {
       QStack<Element*>backStack;
       QStack<Element*>forwardStack;
 
-      ShowElementBase* pagePanel;
-      ShowElementBase* systemPanel;
-      ShowElementBase* measurePanel;
-      ShowElementBase* chordPanel;
-      ShowElementBase* notePanel;
-      ShowElementBase* restPanel;
-      ShowElementBase* clefPanel;
-      ShowElementBase* timesigPanel;
-      ShowElementBase* keysigPanel;
-      ShowElementBase* segmentView;
-      ShowElementBase* textView;
-      ShowElementBase* elementView;
-      ShowElementBase* hairpinView;
-      ShowElementBase* barLineView;
-      ShowElementBase* dynamicView;
-      ShowElementBase* tupletView;
-      ShowElementBase* slurView;
-      ShowElementBase* tieView;
-      ShowElementBase* voltaView;
-      ShowElementBase* voltaSegmentView;
-      ShowElementBase* lyricsView;
-      ShowElementBase* beamView;
-      ShowElementBase* tremoloView;
-      ShowElementBase* ottavaView;
-      ShowElementBase* slurSegmentView;
-      ShowElementBase* accidentalView;
+      ShowElementBase* elementViews[MAXTYPE];
 
       bool searchElement(QTreeWidgetItem* pi, Element* el);
       void addSymbol(ElementItem* parent, BSymbol* bs);

@@ -434,6 +434,9 @@
           <property name="textFormat">
            <enum>Qt::PlainText</enum>
           </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
           <property name="indent">
            <number>5</number>
           </property>
@@ -634,6 +637,9 @@
           </property>
           <property name="text">
            <string notr="true">Rpos</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
           <property name="indent">
            <number>5</number>

@@ -39,12 +39,17 @@ class OmrView : public QWidget {
       QTransform _matrix, imatrix;
       int curPage;
 
+      bool   _fotoMode;
+      QRectF _foto;
+      QRectF grips[8];
+
       void zoom(int step, const QPoint& pos);
 
       virtual void mousePressEvent(QMouseEvent*);
       virtual void mouseMoveEvent(QMouseEvent*);
       virtual void wheelEvent(QWheelEvent*);
       virtual void paintEvent(QPaintEvent*);
+      virtual void contextMenuEvent(QContextMenuEvent*);
 
       qreal mag() const { return _matrix.m11(); }
       void setMag(double mag);
@@ -64,7 +69,9 @@ class OmrView : public QWidget {
    public:
       OmrView(ScoreView*, QWidget* parent = 0);
       void setOmr(Omr*);
-      Omr* omr() const { return _omr; }
+      Omr* omr() const           { return _omr;      }
+      bool fotoMode() const      { return _fotoMode; }
+      void setFotoMode(bool val) { _fotoMode = val;  }
       };
 
 
