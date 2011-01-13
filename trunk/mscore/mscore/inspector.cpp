@@ -123,93 +123,17 @@ Inspector::Inspector(QWidget* parent)
       setupUi(this);
       setWindowTitle(tr("MuseScore: Object Inspector"));
 
+      for (int i = 0; i < MAXTYPE; ++i)
+            elementViews[i] = 0;
       curElement   = 0;
-      pagePanel    = new ShowPageWidget;
-      systemPanel  = new ShowSystemWidget;
-      measurePanel = new MeasureView;
-      chordPanel   = new ShowChordWidget;
-      notePanel    = new ShowNoteWidget;
-      restPanel    = new ShowRestWidget;
-      timesigPanel = new ShowTimesigWidget;
-      keysigPanel  = new ShowKeysigWidget;
-      clefPanel    = new ShowClefWidget;
-      segmentView  = new SegmentView;
-      textView     = new TextView;
-      elementView  = new ElementView;
-      hairpinView  = new HairpinView;
-      barLineView  = new BarLineView;
-      dynamicView  = new DynamicView;
-      tupletView   = new TupletView;
-      slurView     = new SlurView;
-      tieView      = new TieView;
-      voltaView    = new VoltaView;
-      voltaSegmentView = new VoltaSegmentView;
-      lyricsView   = new LyricsView;
-      beamView     = new BeamView;
-      tremoloView  = new TremoloView;
-      ottavaView   = new OttavaView;
-      slurSegmentView = new SlurSegmentView;
-      accidentalView  = new AccidentalView;
 
-      stack->addWidget(pagePanel);
-      stack->addWidget(systemPanel);
-      stack->addWidget(measurePanel);
-      stack->addWidget(chordPanel);
-      stack->addWidget(notePanel);
-      stack->addWidget(restPanel);
-      stack->addWidget(timesigPanel);
-      stack->addWidget(keysigPanel);
-      stack->addWidget(clefPanel);
-      stack->addWidget(segmentView);
-      stack->addWidget(textView);
-      stack->addWidget(elementView);
-      stack->addWidget(hairpinView);
-      stack->addWidget(barLineView);
-      stack->addWidget(dynamicView);
-      stack->addWidget(tupletView);
-      stack->addWidget(slurView);
-      stack->addWidget(tieView);
-      stack->addWidget(voltaView);
-      stack->addWidget(voltaSegmentView);
-      stack->addWidget(lyricsView);
-      stack->addWidget(beamView);
-      stack->addWidget(tremoloView);
-      stack->addWidget(ottavaView);
-      stack->addWidget(slurSegmentView);
-      stack->addWidget(accidentalView);
-
-      connect(pagePanel,    SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
-      connect(systemPanel,  SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
-      connect(measurePanel, SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
-      connect(chordPanel,   SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
-      connect(notePanel,    SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
-      connect(restPanel,    SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
-      connect(timesigPanel, SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
-      connect(keysigPanel,  SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
-      connect(clefPanel,    SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
-      connect(segmentView,  SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
-      connect(textView,     SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
-      connect(elementView,  SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
-      connect(hairpinView,  SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
-      connect(barLineView,  SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
-      connect(dynamicView,  SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
-      connect(tupletView,   SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
-      connect(slurView,     SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
-      connect(tieView,      SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
-      connect(voltaView,    SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
-      connect(voltaSegmentView, SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
-      connect(lyricsView,   SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
-      connect(beamView,     SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
-      connect(tremoloView,  SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
-      connect(ottavaView,   SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
-      connect(slurSegmentView, SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
-      connect(accidentalView, SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
-      connect(tupletView,   SIGNAL(scoreChanged()), SLOT(layoutScore()));
-      connect(notePanel,    SIGNAL(scoreChanged()), SLOT(layoutScore()));
+//      connect(tupletView, SIGNAL(scoreChanged()), SLOT(layoutScore()));
+//      connect(notePanel,  SIGNAL(scoreChanged()), SLOT(layoutScore()));
 
       connect(list, SIGNAL(itemClicked(QTreeWidgetItem*,int)), SLOT(itemClicked(QTreeWidgetItem*,int)));
       connect(list, SIGNAL(itemExpanded(QTreeWidgetItem*)), SLOT(itemExpanded(QTreeWidgetItem*)));
       connect(list, SIGNAL(itemCollapsed(QTreeWidgetItem*)), SLOT(itemExpanded(QTreeWidgetItem*)));
+
       list->resizeColumnToContents(0);
       if (!useFactorySettings) {
             QSettings settings;
@@ -519,49 +443,55 @@ void Inspector::updateElement(Element* el)
                   }
             }
       setWindowTitle(QString("MuseScore: List Edit: ") + el->name());
-      ShowElementBase* ew = 0;
-      switch (el->type()) {
-            case PAGE:          ew = pagePanel;    break;
-            case SYSTEM:        ew = systemPanel;  break;
-            case MEASURE:       ew = measurePanel; break;
-            case CHORD:         ew = chordPanel;   break;
-            case NOTE:          ew = notePanel;    break;
-            case REST:          ew = restPanel;    break;
-            case CLEF:          ew = clefPanel;    break;
-            case TIMESIG:       ew = timesigPanel; break;
-            case KEYSIG:        ew = keysigPanel;  break;
-            case SEGMENT:       ew = segmentView;  break;
-            case HAIRPIN:       ew = hairpinView;  break;
-            case BAR_LINE:      ew = barLineView;  break;
-            case DYNAMIC:       ew = dynamicView;  break;
-            case TUPLET:        ew = tupletView;   break;
-            case SLUR:          ew = slurView;     break;
-            case TIE:           ew = tieView;      break;
-            case VOLTA:         ew = voltaView;    break;
-            case VOLTA_SEGMENT: ew = voltaSegmentView; break;
-            case LYRICS:        ew = lyricsView;   break;
-            case BEAM:          ew = beamView;     break;
-            case TREMOLO:       ew = tremoloView;  break;
-            case OTTAVA:        ew = ottavaView;   break;
-            case SLUR_SEGMENT:  ew = slurSegmentView; break;
-            case ACCIDENTAL:    ew = accidentalView; break;
-            case MARKER:
-            case JUMP:
-            case TEXT:
-                  ew = textView;
-                  break;
-            default:
-                  ew = elementView;
-                  break;
+
+      ShowElementBase* ew = elementViews[el->type()];
+      if (ew == 0) {
+            switch (el->type()) {
+                  case PAGE:          ew = new ShowPageWidget;    break;
+                  case SYSTEM:        ew = new ShowSystemWidget;  break;
+                  case MEASURE:       ew = new MeasureView;       break;
+                  case CHORD:         ew = new ShowChordWidget;   break;
+                  case NOTE:          ew = new ShowNoteWidget;    break;
+                  case REST:          ew = new ShowRestWidget;    break;
+                  case CLEF:          ew = new ShowClefWidget;    break;
+                  case TIMESIG:       ew = new ShowTimesigWidget; break;
+                  case KEYSIG:        ew = new ShowKeysigWidget;  break;
+                  case SEGMENT:       ew = new SegmentView;       break;
+                  case HAIRPIN:       ew = new HairpinView;       break;
+                  case BAR_LINE:      ew = new BarLineView;       break;
+                  case DYNAMIC:       ew = new DynamicView;       break;
+                  case TUPLET:        ew = new TupletView;        break;
+                  case SLUR:          ew = new SlurView;          break;
+                  case TIE:           ew = new TieView;           break;
+                  case VOLTA:         ew = new VoltaView;         break;
+                  case VOLTA_SEGMENT: ew = new VoltaSegmentView;  break;
+                  case LYRICS:        ew = new LyricsView;        break;
+                  case BEAM:          ew = new BeamView;          break;
+                  case TREMOLO:       ew = new TremoloView;       break;
+                  case OTTAVA:        ew = new OttavaView;        break;
+                  case SLUR_SEGMENT:  ew = new SlurSegmentView;   break;
+                  case ACCIDENTAL:    ew = new AccidentalView;    break;
+                  case MARKER:
+                  case JUMP:
+                  case TEXT:
+                        ew = new TextView;
+                        break;
+                  default:
+                        ew = new ElementView;
+                        break;
+                  }
+            stack->addWidget(ew);
+            connect(ew,  SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
+            elementViews[el->type()] = ew;
             }
       curElement = el;
       ew->setElement(el);
       stack->setCurrentWidget(ew);
       }
 
-//---------------------------------------------------------
+//-----------------------------------------
 //   ElementListWidgetItem
-//---------------------------------------------------------
+//-----------------------------------------
 
 class ElementListWidgetItem : public QListWidgetItem {
       Element* e;

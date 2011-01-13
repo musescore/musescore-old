@@ -46,7 +46,8 @@ OmrView::OmrView(ScoreView* sv, QWidget* parent)
 
       _omr   = 0;
       _scoreView = sv;
-      double m = .25;
+      double m   = .25;
+      _fotoMode  = false;
       _matrix = QTransform(m, 0.0, 0.0, m, 0.0, 0.0);
       imatrix = _matrix.inverted();
       }
@@ -175,6 +176,18 @@ void OmrView::paintEvent(QPaintEvent* event)
             foreach(const QLineF& l, page->bl()) {
                   p.drawLine(l);
                   }
+            }
+      if (fotoMode()) {
+            p.setBrush(QColor(0, 0, 50, 50));
+            QPen pen(QColor(0, 0, 255));
+            // always 2 pixel width
+            qreal w = 2.0 / p.matrix().m11();
+            pen.setWidthF(w);
+            p.setPen(pen);
+            p.drawRect(_foto);
+            // draw grips:
+            // QRectF grips[8];
+
             }
       }
 
@@ -337,5 +350,14 @@ void OmrView::setOffset(double x, double y)
 
       scroll(ox-nx, oy-ny, QRect(0, 0, width(), height()));
       update();
+      }
+
+//---------------------------------------------------------
+//   contextMenuEvent
+//---------------------------------------------------------
+
+void OmrView::contextMenuEvent(QContextMenuEvent*)
+      {
+      printf("context menu\n");
       }
 

@@ -34,6 +34,7 @@
 #include <QtGui/QSpinBox>
 #include <QtGui/QFormLayout>
 #include <QtGui/QDateTimeEdit>
+#include <QtGui/QInputDialog>
 
 #include <QtXml/QtXml>
 

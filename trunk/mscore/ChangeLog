@@ -1,3 +1,9 @@
+13.jan (ws)
+      - implement screenshot/print mode for foto mode
+      - add background and resolution to foto mode context menu
+      - foto mode: use resolution/background in preferences for output
+      - use end bar line segment for anchoring volta bracket end; this eliminates
+        empty chord/rest segments previously used for this
 12.jan (mi)
       - note minimum spacing algorithm (in Chord::layout() ) applied to tablature staves too
         (without any change to the algorithm itself)
