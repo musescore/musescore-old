@@ -88,6 +88,26 @@
 #include "diff/diff_match_patch.h"
 
 //---------------------------------------------------------
+//   readScoreError
+//---------------------------------------------------------
+
+void MuseScore::readScoreError(int rv) const
+      {
+      if (rv == 1) {
+            QMessageBox::critical(0,
+               tr("MuseScore: Load error"),
+               QString(tr("Cannot read file: file: %1").arg(strerror(errno)))
+               );
+            }
+      else {
+            QMessageBox::critical(0,
+               tr("MuseScore: Load error"),
+               tr("unsupported file extension")
+               );
+            }
+      }
+
+//---------------------------------------------------------
 //   load
 //    return true on error
 //---------------------------------------------------------
@@ -209,15 +229,14 @@ void MuseScore::loadFile()
       if (fn.isEmpty())
             return;
       Score* score = new Score(_defaultStyle);
-      if(score->read(fn)) {
+      int rv = score->readScore(fn);
+      if (rv == 0) {
             setCurrentScoreView(appendScore(score));
             lastOpenPath = score->fileInfo()->path();
             writeSessionFile(false);
             }
       else {
-            QMessageBox::critical(0,
-               tr("MuseScore: Load error"),
-               tr("Open failed: unknown file extension or broken file"));
+            readScoreError(rv);
             delete score;
             }
       }
@@ -641,11 +660,15 @@ void MuseScore::newFile()
       //  create score from template
       //
       if (newWizard->useTemplate()) {
-            if (!score->read(newWizard->templatePath())) {
+            int rv = score->readScore(newWizard->templatePath());
+            if (rv != 0) {
+                  readScoreError(rv);
+#if 0
                   QMessageBox::warning(0,
                      tr("MuseScore: failure"),
                      tr("Load template file ") + newWizard->templatePath() + tr(" failed"),
                      QString::null, QString::null, QString::null, 0, 1);
+#endif
                   delete score;
                   return;
                   }
@@ -1345,8 +1368,9 @@ bool Score::read1(QDomElement e)
                               }
                         else if (tag == "programRevision")
                               ;
-                        else if (tag == "Score")
+                        else if (tag == "Score") {
                               read(ee);
+                              }
                         else if (tag == "Revision") {
                               Revision* revision = new Revision;
                               revision->read(e);
@@ -1769,12 +1793,12 @@ void Score::printFile()
       {
       QPrinter printerDev(QPrinter::HighResolution);
 
-      if (paperSizes[pageFormat()->size].qtsize == QPrinter::Custom) {
+      if (paperSizes[pageFormat()->size].qtsize >= int(QPrinter::Custom)) {
             printerDev.setPaperSize(QSizeF(pageFormat()->_width, pageFormat()->_height),
                QPrinter::Inch);
             }
       else
-            printerDev.setPaperSize(paperSizes[pageFormat()->size].qtsize);
+            printerDev.setPaperSize(QPrinter::PageSize(paperSizes[pageFormat()->size].qtsize));
 
       printerDev.setOrientation(pageFormat()->landscape ? QPrinter::Landscape : QPrinter::Portrait);
       printerDev.setCreator("MuseScore Version: " VERSION);
@@ -1860,12 +1884,12 @@ void Score::print(QPrinter* printer)
 bool Score::savePsPdf(const QString& saveName, QPrinter::OutputFormat format)
       {
       QPrinter p(QPrinter::HighResolution);
-      if (paperSizes[pageFormat()->size].qtsize == QPrinter::Custom) {
+      if (paperSizes[pageFormat()->size].qtsize >= int(QPrinter::Custom)) {
             p.setPaperSize(QSizeF(pageFormat()->_width, pageFormat()->_height),
                QPrinter::Inch);
             }
       else
-            p.setPaperSize(paperSizes[pageFormat()->size].qtsize);
+            p.setPaperSize(QPrinter::PageSize(paperSizes[pageFormat()->size].qtsize));
 
       p.setOrientation(pageFormat()->landscape ? QPrinter::Landscape : QPrinter::Portrait);
       p.setCreator("MuseScore Version: " VERSION);

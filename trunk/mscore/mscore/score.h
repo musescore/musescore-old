@@ -541,7 +541,7 @@ class Score : public QObject {
       void appendPart(Part* p);
       void updateStaffIndex();
       void sortStaves(QList<int>& dst);
-      bool read(QString name);
+      int readScore(QString name);
 
       void setSpatium(double v);
 

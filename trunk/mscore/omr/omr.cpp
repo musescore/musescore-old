@@ -28,6 +28,8 @@
 #endif
 #include "utils.h"
 
+#ifdef OMR
+
 class ScoreView;
 
 //---------------------------------------------------------
@@ -186,4 +188,6 @@ double Omr::systemDistance() const
       {
       return pages[0]->systemDistance();
       }
+
+#endif
 

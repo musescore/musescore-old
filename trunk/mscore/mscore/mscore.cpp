@@ -1010,8 +1010,11 @@ void MuseScore::selectScore(QAction* action)
       QString a = action->data().toString();
       if (!a.isEmpty()) {
             Score* score = new Score(_defaultStyle);
-            if(score->read(a)) //! \todo add a warning dialog "file not found"
-                setCurrentScoreView(appendScore(score));
+            int rv = score->readScore(a);
+            if (rv != 0)
+                  readScoreError(rv);
+            else
+                  setCurrentScoreView(appendScore(score));
             }
       }
 
@@ -1275,7 +1278,7 @@ void MuseScore::dropEvent(QDropEvent* event)
             foreach(const QUrl& u, event->mimeData()->urls()) {
                   if (u.scheme() == "file") {
                         Score* score = new Score(_defaultStyle);
-                        if(score->read(u.toLocalFile()))
+                        if (score->readScore(u.toLocalFile()) == 0)
                               view = appendScore(score);
                         else
                               delete score;
@@ -1675,7 +1678,7 @@ static void loadScores(const QStringList& argv)
                                     QString s = settings.value(QString("score-%1").arg(i),"").toString();
                                     Score* score = new Score(mscore->defaultStyle());
                                     scoreCreated = true;
-                                    if (score->read(s)) {
+                                    if (score->readScore(s) == 0) {
                                           int view = mscore->appendScore(score);
                                           if (i == c)
                                                 currentScoreView = view;
@@ -1691,14 +1694,14 @@ static void loadScores(const QStringList& argv)
                         case SCORE_SESSION:
                               Score* score = new Score(mscore->defaultStyle());
                               scoreCreated = true;
-                              if(score->read(preferences.startScore)) {
+                              if (score->readScore(preferences.startScore) == 0) {
                                     currentScoreView = mscore->appendScore(score);
                                     }
                               else {
                                     delete score;
                                     Score* score = new Score(mscore->defaultStyle());
                                     scoreCreated = true;
-                                    if (score->read(":/data/Promenade_Example.mscx")){
+                                    if (score->readScore(":/data/Promenade_Example.mscx") == 0) {
                                           preferences.startScore = ":/data/Promenade_Example.mscx";
                                           currentScoreView = mscore->appendScore(score);
                                           }
@@ -1713,7 +1716,9 @@ static void loadScores(const QStringList& argv)
                         continue;
                   Score* score = new Score(mscore->defaultStyle());
                   scoreCreated = true;
-                  if (!score->read(name)) {
+                  int rv = score->readScore(name);
+                  if (rv != 0) {
+                        mscore->readScoreError(rv);
                         QMessageBox::warning(0,
                               QWidget::tr("MuseScore"),
                               QWidget::tr("reading file <")
@@ -2307,7 +2312,7 @@ void MuseScore::cmd(QAction* a)
                         qApp->processEvents();
                         }
                   Score* score = new Score(mscore->defaultStyle());
-                  score->read(cs->filePath());
+                  score->readScore(cs->filePath());
                   // hack: so we don't get another checkDirty in appendScore
                   cs->setDirty(false);
                   setCurrentScoreView(appendScore(score));
@@ -2932,10 +2937,9 @@ void MuseScore::handleMessage(const QString& message)
       {
       if (message.isEmpty())
             return;
-printf("handle message=========\n");
       ((QtSingleApplication*)(qApp))->activateWindow();
       Score* score = new Score(mscore->defaultStyle());
-      if (score->read(message)) {
+      if (score->readScore(message) == 0) {
             setCurrentScoreView(appendScore(score));
             lastOpenPath = score->fileInfo()->path();
             }
@@ -3184,19 +3188,15 @@ bool MuseScore::restoreSession(bool always)
                                     else if (tag == "dirty")
                                           dirty = val.toInt();
                                     else if (tag == "path") {
-printf("restore <%s>\n", qPrintable(val));
                                           Score* score = new Score(_defaultStyle);
-                                          if (!score->read(val)) {
-printf("failed to restore <%s>\n", qPrintable(val));
+                                          if (score->readScore(val) != 0) {
                                                 delete score;
                                                 f.close();
                                                 return false;
                                                 }
                                           else {
-                                                if (!name.isEmpty()) {
-printf("set name <%s>\n", qPrintable(name));
+                                                if (!name.isEmpty())
                                                       score->setName(name);
-                                                      }
                                                 if (cleanExit) {
                                                       // override if last session did a clean exit
                                                       dirty = false;

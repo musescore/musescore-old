@@ -31,6 +31,8 @@ class Ocr;
 class Score;
 class ScoreView;
 
+#ifdef OMR
+
 //---------------------------------------------------------
 //   Omr
 //---------------------------------------------------------
@@ -68,4 +70,33 @@ class Omr {
       Score* score() const                 { return _score; }
       };
 
+#else
+//---------------------------------------------------------
+//   Omr
+//---------------------------------------------------------
+
+class Omr {
+   public:
+      Omr(Score*)                          {}
+      Omr(const QString&, Score*)          {}
+      bool readPdf()                       { return false; }
+      int pagesInDocument() const          { return 0; }
+      int numPages() const                 { return 0; }
+      OmrPage* page(int)                   { return 0; }
+      OmrView* newOmrView(ScoreView*)      { return 0; }
+#ifdef OCR
+      Ocr* ocr() const                     { return 0; }
+#endif
+      void write(Xml&) const               {}
+      void read(QDomElement)               {}
+
+      double spatiumMM() const             { return 0; }
+      double spatium() const               { return 0; }
+      double dpmm() const                  { return 0; }
+      double staffDistance() const         { return 0; }
+      double systemDistance() const        { return 0; }
+      Score* score() const                 { return 0; }
+      };
+
+#endif
 #endif

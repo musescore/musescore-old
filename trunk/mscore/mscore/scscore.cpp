@@ -209,7 +209,7 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
             case 4:    // "load",
                   if (argc == 1) {
                         QString s = qscriptvalue_cast<QString>(context->argument(0));
-                        return qScriptValueFromValue(context->engine(), score->read(s));
+                        return qScriptValueFromValue(context->engine(), score->readScore(s) == 0);
                         }
                   break;
             case 5:     // "save",
