@@ -58,8 +58,10 @@ const PaperSize paperSizes[] = {
       PaperSize(QPrinter::Folio,   "Folio",     MM(210),  MM(330)),
       PaperSize(QPrinter::Ledger,  "Ledger",    MM(432),  MM(279)),
       PaperSize(QPrinter::Tabloid, "Tabloid",   MM(279),  MM(432)),
+      // PaperSize(int(QPrinter::Custom)+1, "iPad", MM(148),  MM(197)),
+      PaperSize(int(QPrinter::Custom)+1, "iPad", MM(148),  MM(193)),
       PaperSize(QPrinter::Custom,  "Custom",    MM(210),  MM(297)),
-      PaperSize(QPrinter::A4, 0, 0, 0  )
+      PaperSize(QPrinter::A4,      0, 0, 0  )
       };
 
 //---------------------------------------------------------
@@ -92,9 +94,14 @@ static double sizeError(const double si, const double sref)
       return relErr > 0 ? relErr : -relErr;
       }
 
+//---------------------------------------------------------
+//   paperSizeSizeToIndex
+//---------------------------------------------------------
+
 int paperSizeSizeToIndex(const double wi, const double hi)
       {
-      if (wi < minSize || hi < minSize) return -1;
+      if (wi < minSize || hi < minSize)
+            return -1;
       int i;
       for (i = 0;;++i) {
             if (paperSizes[i].name == 0)
@@ -379,6 +386,7 @@ void PageSettings::done(int val)
 
 void PageSettings::pageFormatSelected(int pf)
       {
+printf("page format %d\n", pf);
       preview->score()->pageFormat()->size = pf;
       preview->layout();
       setValues(preview->score());

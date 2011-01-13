@@ -49,16 +49,21 @@
         <type>0</type>
         <bracket type="0" span="2"/>
         </Staff>
+      <trackName>Voice</trackName>
       <Instrument>
+        <longName>
+          </longName>
+        <shortName>
+          </shortName>
         <trackName>Voice</trackName>
         <Channel name="normal">
-          <controller ctrl="0" value="0"/>
-          <controller ctrl="32" value="0"/>
-          <program value="0"/>
-          <controller ctrl="7" value="100"/>
-          <controller ctrl="10" value="60"/>
-          <controller ctrl="93" value="30"/>
-          <controller ctrl="91" value="30"/>
+          <controller tick="0" channel="0" ctrl="0" value="0"/>
+          <controller tick="0" channel="0" ctrl="32" value="0"/>
+          <program tick="0" channel="0" value="0"/>
+          <controller tick="0" channel="0" ctrl="7" value="100"/>
+          <controller tick="0" channel="0" ctrl="10" value="60"/>
+          <controller tick="0" channel="0" ctrl="93" value="30"/>
+          <controller tick="0" channel="0" ctrl="91" value="30"/>
           </Channel>
         </Instrument>
       </Part>
@@ -67,16 +72,21 @@
         <type>0</type>
         <bracket type="-1" span="1"/>
         </Staff>
+      <trackName>Voice</trackName>
       <Instrument>
+        <longName>
+          </longName>
+        <shortName>
+          </shortName>
         <trackName>Voice</trackName>
         <Channel name="normal">
-          <controller ctrl="0" value="0"/>
-          <controller ctrl="32" value="0"/>
-          <program value="0"/>
-          <controller ctrl="7" value="100"/>
-          <controller ctrl="10" value="60"/>
-          <controller ctrl="93" value="30"/>
-          <controller ctrl="91" value="30"/>
+          <controller tick="0" channel="0" ctrl="0" value="0"/>
+          <controller tick="0" channel="0" ctrl="32" value="0"/>
+          <program tick="0" channel="0" value="0"/>
+          <controller tick="0" channel="0" ctrl="7" value="100"/>
+          <controller tick="0" channel="0" ctrl="10" value="60"/>
+          <controller tick="0" channel="0" ctrl="93" value="30"/>
+          <controller tick="0" channel="0" ctrl="91" value="30"/>
           </Channel>
         </Instrument>
       </Part>
@@ -100,6 +110,7 @@
         </VBox>
       <Measure number="1">
         <stretch>0.9</stretch>
+        <vspacerDown>13.9935</vspacerDown>
         <Clef>
           </Clef>
         <KeySig>
@@ -682,7 +693,6 @@
           <StemDirection>down</StemDirection>
           <Note>
             <track>5</track>
-            <selected>1</selected>
             <pitch>57</pitch>
             <tpc>17</tpc>
             </Note>
@@ -737,6 +747,6 @@
           </BarLine>
         </Measure>
       </Staff>
-    <cursorTrack>5</cursorTrack>
+    <cursorTrack>0</cursorTrack>
     </Score>
   </museScore>

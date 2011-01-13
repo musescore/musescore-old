@@ -35,10 +35,12 @@ class Score;
 //---------------------------------------------------------
 
 struct PaperSize {
-      QPrinter::PageSize qtsize;
+      // QPrinter::PageSize qtsize;
+      int qtsize;
       const char* name;
       double w, h;            // size in inch
-      PaperSize(QPrinter::PageSize s, const char* n, double wi, double hi)
+//      PaperSize(QPrinter::PageSize s, const char* n, double wi, double hi)
+      PaperSize(int s, const char* n, double wi, double hi)
          : qtsize(s), name(n), w(wi), h(hi) {}
       };
 

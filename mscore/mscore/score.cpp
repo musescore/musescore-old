@@ -71,9 +71,7 @@
 #include "importgtp.h"
 #include "revisions.h"
 
-#ifdef OMR
 #include "omr/omr.h"
-#endif
 
 Score* gscore;                 ///< system score, used for palettes etc.
 
@@ -472,30 +470,27 @@ static void elementAdjustReadPos(void*, Element* e)
       }
 
 //---------------------------------------------------------
-//   read
-//    return false on error
+//   readScore
+///   Import file \a name
+//    return 0 - OK, 1 _errno, 2 - bad file type
 //---------------------------------------------------------
 
-/**
- Import file \a name.
- */
-
-bool Score::read(QString name)
+int Score::readScore(QString name)
       {
       _mscVersion = MSCVERSION;
       _saved      = false;
       info.setFile(name);
 
-      QString cs = info.suffix();
+      QString cs  = info.suffix();
       QString csl = cs.toLower();
 
       if (csl == "mscz") {
             if (!loadCompressedMsc(name))
-                  return false;
+                  return 1;
             }
       else if (csl == "msc" || csl == "mscx") {
             if (!loadMsc(name))
-                  return false;
+                  return 1;
             }
       else {
             // import
@@ -514,45 +509,45 @@ bool Score::read(QString name)
                   importCompressedMusicXml(name);
             else if (csl == "mid" || csl == "midi" || csl == "kar") {
                   if (!importMidi(name))
-                        return false;
+                        return 1;
                   }
             else if (csl == "md") {
                   if (!importMuseData(name))
-                        return false;
+                        return 1;
                   }
             else if (csl == "ly") {
                   if (!importLilypond(name))
-                        return false;
+                        return 1;
                   }
             else if (csl == "mgu" || csl == "sgu") {
                   if (!importBB(name))
-                        return false;
+                        return 1;
                   }
             else if (csl == "cap") {
                   if (!importCapella(name))
-                        return false;
+                        return 1;
                   }
             else if (csl == "ove") {
                   if (!importOve(name))
-            	      return false;
+            	      return 1;
       	      }
 #ifdef OMR
             else if (csl == "pdf") {
                   if (!importPdf(name))
-                        return false;
+                        return 1;
                   }
 #endif
             else if (csl == "bww") {
                   if (!importBww(name))
-                        return false;
+                        return 1;
                   }
             else if (csl == "gtp" || csl == "gp3" || csl == "gp4" || csl == "gp5") {
                   if (!importGTP(name))
-                        return false;
+                        return 1;
                   }
             else {
                   printf("unknown file suffix <%s>, name <%s>\n", qPrintable(cs), qPrintable(name));
-                  return false;
+                  return 2;
                   }
             }
 
@@ -607,7 +602,7 @@ bool Score::read(QString name)
             score->doLayout();
             score->scanElements(0, elementAdjustReadPos);
             }
-      return true;
+      return 0;
       }
 
 //---------------------------------------------------------
