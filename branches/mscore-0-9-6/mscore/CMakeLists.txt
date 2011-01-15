@@ -282,7 +282,7 @@ include (InstallRequiredSystemLibraries)
       # sure there is at least one set of four (4) backlasshes.
       SET(CPACK_PACKAGE_ICON "${PROJECT_SOURCE_DIR}/mscore/data\\\\installerhead.bmp")
       SET(CPACK_NSIS_INSTALLED_ICON_NAME "bin\\\\mscore.exe,0")
-      SET(CPACK_NSIS_DISPLAY_NAME "MuseScore ${Mscore_VERSION_MAJOR}.${Mscore_VERSION_MINOR}.${Mscore_VERSION_PATCH} MuseScore score typesetter")
+      SET(CPACK_NSIS_DISPLAY_NAME "MuseScore ${Mscore_VERSION_FULL} MuseScore score typesetter")
       SET(CPACK_NSIS_HELP_LINK "http://www.musescore.org/")
       SET(CPACK_NSIS_URL_INFO_ABOUT "http://www.musescore.org/")
       SET(CPACK_NSIS_CONTACT "ws@wschweer.de")

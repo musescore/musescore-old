@@ -511,7 +511,11 @@ void Chord::addLedgerLine(double x, int staffIdx, int line, int lr)
       h->setTrack(staffIdx * VOICES);
       h->setVisible(!staff()->invisible());
 
-      Spatium len(h->len());
+      // ledger lines extend less than half a space on each side
+	 	  // of the notehead:
+	 	  //
+	 	  double ll = _notes[0]->headWidth() + _spatium * .60;
+	 	  Spatium len(ll / _spatium);
 
       if (_noteType != NOTE_NORMAL)
             len *= score()->style(ST_graceNoteMag).toDouble();
@@ -975,7 +979,6 @@ LedgerLine::LedgerLine(Score* s)
    : Line(s, false)
       {
       setSelectable(false);
-      setLen(Spatium(2.0));
       }
 
 //---------------------------------------------------------
@@ -1202,50 +1205,51 @@ void Chord::layoutStem()
 void Chord::layout2()
       {
       double _spatium = spatium();
-      foreach(LedgerLine* h, _ledgerLines) {
-            //
-            // Experimental:
-            //    look for colliding ledger lines
-            //
 
-            double y = h->y();
-            double x = h->x();
-            Spatium len(h->len());
+      //
+      // Experimental:
+      //    look for colliding ledger lines
+      //
 
-            double minDist = _spatium * .2;
-            bool found = false;
-            double cx  = x + canvasPos().x();
-            Segment* s = segment()->prev();
-            if (s && s->subtype() == SegChordRest) {
-                  int strack = staffIdx() * VOICES;
-                  int etrack = strack + VOICES;
+      const double minDist = _spatium * .17;
+
+      Segment* s = segment()->prev();
+      if (s && (s->subtype() & (SegChordRest | SegGrace))) {
+            int strack = staffIdx() * VOICES;
+            int etrack = strack + VOICES;
+            foreach (LedgerLine* h, _ledgerLines) {
+                  Spatium len(h->len());
+                  double y   = h->y();
+                  double x   = h->x();
+                  bool found = false;
+                  double cx  = h->canvasPos().x();
+
                   for (int track = strack; track < etrack; ++track) {
-                        if (s->element(track)) {
-                              Element* e = s->element(track);
-                              if (e->type() == CHORD) {
-                                    Chord* ch = static_cast<Chord*>(e);
-                                    foreach(LedgerLine* ll, *ch->ledgerLines()) {
-                                          if (ll->y() == y) {
-                                                double d = cx - (ll->canvasPos().x() + ll->len().val()*_spatium) - minDist;
-                                                if (d < 0.0) {
-                                                      double shorten = -d;
-                                                      x   += shorten;
-                                                      len -= Spatium(shorten / _spatium);
-                                                      ll->setLen(ll->len() - Spatium(shorten / _spatium));
-                                                      }
-                                                found = true;
-                                                break;
-                                                }
-                                          }
+                        Element* e = s->element(track);
+                        if (!e || e->type() != CHORD)
+                              continue;
+                        foreach (LedgerLine* ll, *static_cast<Chord*>(e)->ledgerLines()) {
+                              if (ll->y() != y)
+                                    continue;
+
+                              double d = cx - ll->canvasPos().x() - (ll->len().val() * _spatium);
+                              if (d < minDist) {
+                                    //
+                                    // the ledger lines overlap
+                                    //
+                                    double shorten = (minDist - d) * .5;
+                                    x   += shorten;
+                                    len -= Spatium(shorten / _spatium);
+                                    ll->setLen(ll->len() - Spatium(shorten / _spatium));
+                                    h->setLen(len);
+                                    h->setPos(x, y);
                                     }
+                              found = true;
+                              break;
                               }
                         if (found)
                               break;
                         }
-                  }
-            if (found) {
-                  h->setLen(len);
-                  h->setPos(x, y);
                   }
             }
       }

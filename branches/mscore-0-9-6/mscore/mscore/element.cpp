@@ -885,15 +885,21 @@ void Line::layout()
 
 void Line::draw(QPainter& p) const
       {
-      double sp = spatium();
+      p.save();
+
       QPen pen(p.pen());
+      pen.setCapStyle(Qt::FlatCap);
+      double sp = spatium();
       pen.setWidthF(_width.val() * sp);
       p.setPen(pen);
-      double l  = _len.val() * sp;
+
+      double l = _len.val() * sp;
       if (vertical)
             p.drawLine(QLineF(0.0, 0.0, 0.0, l));
       else
             p.drawLine(QLineF(0.0, 0.0, l, 0.0));
+
+      p.restore();
       }
 
 //---------------------------------------------------------
