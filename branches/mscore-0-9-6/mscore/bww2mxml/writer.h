@@ -75,11 +75,13 @@ namespace Bww {
     bool endingEnd;
     bool lastOfSystem;
     bool lastOfPart;
+    bool doubleBarLine;
     MeasureEndFlags() :
         repeatEnd(false),
         endingEnd(false),
         lastOfSystem(false),
-        lastOfPart(false)
+        lastOfPart(false),
+        doubleBarLine(false)
     {}
   };
 

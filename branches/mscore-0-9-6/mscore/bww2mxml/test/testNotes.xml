@@ -155,6 +155,9 @@
         <type>quarter</type>
         <stem>down</stem>
       </note>
+      <barline location="right">
+        <bar-style>light-light</bar-style>
+      </barline>
     </measure>
     <measure number="4">
       <print new-system="yes"/>

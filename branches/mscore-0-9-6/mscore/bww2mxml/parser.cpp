@@ -591,50 +591,6 @@ namespace Bww {
   }
 
   /**
-   Transition to the "in measure" state.
-   TODO: remove
-   */
-
-  void Parser::beginMeasure(const Bww::MeasureBeginFlags /* mbf */)
-  {
-    /*
-    qDebug() << "Parser::beginMeasure("
-        << "repeatBegin:" << mbf.repeatBegin
-        << "endingFirst:" << mbf.endingFirst
-        << "endingSecond:" << mbf.endingSecond
-        << ")";
-
-    if (!inMeasure)
-    {
-      inMeasure = true;
-      ++measureNr;
-      wrt.beginMeasure(mbf);
-    }
-    */
-  }
-
-  /**
-   Transition out of the "in measure" state.
-   TODO: remove
-   */
-
-  void Parser::endMeasure(const Bww::MeasureEndFlags /* mef */)
-  {
-    /*
-    qDebug() << "Parser::endMeasure("
-        << "repeatEnd:" << mef.repeatEnd
-        << "endingEnd:" << mef.endingEnd
-        << ")";
-
-    if (inMeasure)
-    {
-      inMeasure = false;
-      wrt.endMeasure(mef);
-    }
-    */
-  }
-
-  /**
    Parse the input stream and write result.
    */
 
@@ -735,9 +691,10 @@ namespace Bww {
    Parse a bww bar symbol.
    */
 
-  void Parser::parseBar()
+  void Parser::parseBar(Bww::MeasureEndFlags& mef)
   {
     qDebug() << "Parser::parseBar() value:" << qPrintable(lex.symValue());
+    if (lex.symValue() == "!!t") mef.doubleBarLine = true;
     lex.getSym();
   }
 
@@ -944,7 +901,7 @@ namespace Bww {
       else if (lex.symType() == PART)
         parsePart(mbfl, mefl);
       else if (lex.symType() == BAR)
-        parseBar();
+        parseBar(mefl);
     }
     // First end the previous measure
     if (!measures.isEmpty())
