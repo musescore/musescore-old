@@ -595,7 +595,6 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
             _up = 1;
 
       double beamDist   = point(bd * bw + bw) * (_up ? 1.0 : -1.0);
-printf("beamDist %f  up %d\n", beamDist, _up);
       double x1, x2;
       if (isGrace)
             beamDist *= graceMag;
