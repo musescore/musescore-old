@@ -179,6 +179,7 @@ enum StyleIdx {
       ST_measureSpacing,
       ST_staffLineWidth,
       ST_ledgerLineWidth,
+      ST_ledgerLineLength,
       ST_akkoladeWidth,
       ST_accidentalDistance,
       ST_accidentalNoteDistance,
@@ -221,7 +222,7 @@ enum StyleIdx {
       ST_genCourtesyKeysig,
       ST_genCourtesyClef,
 
-      // 74
+      // 75
       ST_useGermanNoteNames,
       //
       ST_chordDescriptionFile,
@@ -233,7 +234,7 @@ enum StyleIdx {
       ST_stemDir1,
       ST_stemDir2,
 
-      // 83
+      // 84
       ST_stemDir3,
       ST_stemDir4,
       ST_gateTime,
@@ -254,7 +255,7 @@ enum StyleIdx {
       ST_EspressivoAnchor,
       ST_StaccatoAnchor,
 
-      // 101
+      // 102
       ST_UstaccatissimoAnchor,
       ST_DstaccatissimoAnchor,
       ST_TenutoAnchor,
@@ -266,7 +267,7 @@ enum StyleIdx {
       ST_PlusstopAnchor,
       ST_UpbowAnchor,
 
-      // 111
+      // 112
       ST_DownbowAnchor,
       ST_ReverseturnAnchor,
       ST_TurnAnchor,

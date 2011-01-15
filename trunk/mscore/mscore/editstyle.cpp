@@ -212,6 +212,7 @@ void EditStyle::getValues()
       lstyle.set(ST_dotNoteDistance,         Spatium(noteDotDistance->value()));
       lstyle.set(ST_dotDotDistance,          Spatium(dotDotDistance->value()));
       lstyle.set(ST_ledgerLineWidth,         Spatium(ledgerLineWidth->value()));
+      lstyle.set(ST_ledgerLineLength,        Spatium(ledgerLineLength->value()));
 
       lstyle.set(ST_propertyDistanceHead,    Spatium(propertyDistanceHead->value()));
       lstyle.set(ST_propertyDistanceStem,    Spatium(propertyDistanceStem->value()));
@@ -347,6 +348,7 @@ void EditStyle::setValues()
       noteDotDistance->setValue(lstyle.value(ST_dotNoteDistance).toSpatium().val());
       dotDotDistance->setValue(lstyle.value(ST_dotDotDistance).toSpatium().val());
       ledgerLineWidth->setValue(lstyle.value(ST_ledgerLineWidth).toSpatium().val());
+      ledgerLineLength->setValue(lstyle.value(ST_ledgerLineLength).toSpatium().val());
 
       propertyDistanceHead->setValue(lstyle.value(ST_propertyDistanceHead).toSpatium().val());
       propertyDistanceStem->setValue(lstyle.value(ST_propertyDistanceStem).toSpatium().val());

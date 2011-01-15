@@ -78,6 +78,7 @@ StyleType styleTypes[] = {
       StyleType("measureSpacing",          ST_DOUBLE),
       StyleType("staffLineWidth",          ST_SPATIUM),
       StyleType("ledgerLineWidth",         ST_SPATIUM),
+      StyleType("ledgerLineLength",        ST_SPATIUM),
       StyleType("akkoladeWidth",           ST_SPATIUM),
       StyleType("accidentalDistance",      ST_SPATIUM),
       StyleType("accidentalNoteDistance",  ST_SPATIUM),
@@ -406,6 +407,7 @@ StyleData::StyleData()
             StyleVal(ST_measureSpacing,1.2),
             StyleVal(ST_staffLineWidth,Spatium(0.08)),      // 0.09375
             StyleVal(ST_ledgerLineWidth,Spatium(0.12)),     // 0.1875
+            StyleVal(ST_ledgerLineLength, Spatium(.6)),
             StyleVal(ST_akkoladeWidth,Spatium(1.6)),
             StyleVal(ST_accidentalDistance,Spatium(0.22)),
             StyleVal(ST_accidentalNoteDistance,Spatium(0.22)),
