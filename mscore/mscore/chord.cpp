@@ -453,7 +453,7 @@ void Chord::addLedgerLine(double x, int staffIdx, int line, int lr)
       // ledger lines extend less than half a space on each side
       // of the notehead:
       //
-      double ll = _notes[0]->headWidth() + _spatium * .95;
+      double ll = _notes[0]->headWidth() + score()->styleS(ST_ledgerLineLength).val() * _spatium;
       Spatium len(ll / _spatium);
 
       if (_noteType != NOTE_NORMAL)
