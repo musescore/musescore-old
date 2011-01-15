@@ -115,6 +115,7 @@ namespace Bww {
     bool tripletStart;                  ///< Triplet start pending
     bool inTriplet;                     ///< In a triplet
     QList<MeasureDescription> measures; ///< Parsed measures
+    bool tsigFound;                     ///< A valid time signature was found
   };
 
 } // namespace Bww
