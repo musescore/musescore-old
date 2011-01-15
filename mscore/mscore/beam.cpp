@@ -589,7 +589,13 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
       Spatium bw        = score()->styleS(ST_beamWidth);
       double beamMinLen = point(score()->styleS(ST_beamMinLen));
       double graceMag   = score()->styleD(ST_graceNoteMag);
+
+      // TODO: what about undefined direction (_up = -1)?
+      if (_up == -1)
+            _up = 1;
+
       double beamDist   = point(bd * bw + bw) * (_up ? 1.0 : -1.0);
+printf("beamDist %f  up %d\n", beamDist, _up);
       double x1, x2;
       if (isGrace)
             beamDist *= graceMag;
@@ -834,7 +840,7 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                   }
             else
                   setMag(1.0);
-      }
+            }
 
       //---------------------------------------------
       //   create beam segments: COMMON TO BOTH TABLATURES AND PITCHED
@@ -962,24 +968,40 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                   }
             chord->setHook(0);
 
-            if(staff()->useTablature()) {             // TABLATURE stems have fixed len and pos
+            if (staff()->useTablature()) {
+                  //
+                  // TABLATURE stems have fixed len and pos
+                  //
                   stem->setLen(STAFFTYPE_TAB_DEFAULTSTEMLEN*_spatium);
                   stem->setPos(STAFFTYPE_TAB_DEFAULTSTEMPOSX*_spatium, STAFFTYPE_TAB_DEFAULTSTEMPOSY*_spatium);
                   }
-
-            else {                                    // PITCHED STAFF stems
-                  bool _up = chord->up();
-                  QPointF npos(chord->stemPos(_up, false));
+            else {
+                  //
+                  // PITCHED STAFF stems
+                  //
+                  bool chordUp = chord->up();
+                  QPointF npos(chord->stemPos(chordUp, false));
 
                   double x2 = npos.x();
                   double y1 = npos.y();
-                  double y  = _up ? qMin(qreal(p1dy), f->p1[idx].y()) : qMax(p1dy, f->p1[idx].y());
-                  double y2 = y + (x2 - x1) * slope + canvPos.y();
+                  double y  = chordUp ? qMin(p1dy, f->p1[idx].y()) : qMax(p1dy, f->p1[idx].y());
 
-                  double stemLen = _up ? (y1 - y2) : (y2 - y1);
+                  bool isUp = _up ? true : false;
+                  if (chordUp != isUp) {
+                        //  notes are on the wrong side of the beam
+                        //  extend stem to farest beam segment
+
+                        qreal x = x2 - parent()->canvasPos().x();
+                        foreach(QLineF* l, beamSegments) {
+                              if ((l->x1() <= x) && (l->x2() > x))
+                                    y = l->y1();
+                              }
+                        }
+                  double y2 = y + (x2 - x1) * slope + canvPos.y();
+                  double stemLen = chordUp ? (y1 - y2) : (y2 - y1);
                   stem->setLen(stemLen);
 
-                  if (_up)
+                  if (chordUp)
                         npos.ry() -= stemLen;
                   stem->setPos(npos - chord->canvasPos());
                   }
