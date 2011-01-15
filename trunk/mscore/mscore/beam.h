@@ -63,11 +63,11 @@ class Beam : public Element {
       QList<ChordRest*> _elements;
       QList<QLineF*> beamSegments;
       Direction _direction;
-      int _up;                  // -1: unknown  0: down   1: up
-      double _grow1;             // define "feather" beams
+      int _up;                // -1: unknown  0: down   1: up
+      double _grow1;          // define "feather" beams
       double _grow2;
 
-      QList<BeamFragment*> fragments;
+      QList<BeamFragment*> fragments;     // beam splits across systems
 
       bool _userModified[2];    // 0: auto/down  1: up
 
