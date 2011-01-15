@@ -30,6 +30,7 @@
 
 #include <QtCore/QStringList>
 #include <QtCore/QtDebug>
+#include <QtCore/QMap>
 
 #include "lexer.h"
 #include "parser.h"
@@ -199,6 +200,58 @@ static void calculateMeasureDurations(QList<Bww::MeasureDescription> & measures)
     qDebug() << "measureDuration:" << measureDuration;
     measures[j].duration = measureDuration;
   }
+}
+
+/**
+ Determine time signature
+ */
+
+static void determineTimesig(QList<Bww::MeasureDescription> const& measures, int & beats, int & beat)
+{
+  QMap<int, int> map;
+  for (int j = 0; j < measures.size(); ++j)
+  {
+    int dur = measures[j].duration;
+    if (map.contains(dur))
+      map[dur]++;
+    else
+      map.insert(dur, 1);
+  }
+  // determine most common duration
+  int commonDur = 0;
+  int max = 0;
+  QMap<int, int>::const_iterator i = map.constBegin();
+  while (i != map.constEnd())
+  {
+    qDebug() << "measureDurations:" << i.key() << i.value() << endl;
+    if (i.value() > max)
+    {
+      commonDur = i.key();
+      max = i.value();
+    }
+    ++i;
+  }
+  qDebug() << "measureDuration commonDur:" << commonDur << "max:" << max;
+  // determine time signature
+  beat = 4;
+  beats = 0;
+  int divisor = WHOLE_MEASURE_DURATION / 4;
+  for (; beat < 64; beat *= 2, divisor /= 2)
+  {
+    if ((commonDur % divisor) == 0)
+    {
+      beats = commonDur / divisor;
+      qDebug()
+          << "measureDuration found beat:" << beat
+          << "beats:" << beats
+          << "divisor:" << divisor
+          ;
+      return;
+    }
+  }
+  // could not determine time signature, set default
+  beat = 4;
+  beats = 4;
 }
 
 /**
@@ -437,7 +490,8 @@ namespace Bww {
     tieStart(false),
     inTie(false),
     tripletStart(false),
-    inTriplet(false)
+    inTriplet(false),
+    tsigFound(false)
   {
     qDebug() << "Parser::Parser()";
 
@@ -631,6 +685,11 @@ namespace Bww {
         ;
 
     calculateMeasureDurations(measures);
+    if (!tsigFound)
+    {
+      determineTimesig(measures, beats, beat);
+      wrt.tsig(beats, beat);
+    }
     findIrregularMeasures(measures, beats, beat);
     determineBeamStates(measures);
     setLastOfPart(measures);
@@ -1005,6 +1064,7 @@ namespace Bww {
       {
         beats = caps.at(1).toInt();
         beat  = caps.at(2).toInt();
+        tsigFound = true;
         wrt.tsig(beats, beat);
       }
     }
