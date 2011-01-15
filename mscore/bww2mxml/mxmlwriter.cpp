@@ -113,7 +113,7 @@ namespace Bww {
     if ((regularMeasureNumber + irregularMeasureNumber) == 1)
     {
       out << "      <attributes>" << endl;
-      out << "        <divisions>" << WHOLE_DUR / 4 << "</divisions>" << endl;
+      out << "        <divisions>" << wholeDur() / 4 << "</divisions>" << endl;
 //      out << "        <key print-object=\"no\">" << endl;
       out << "        <key>" << endl;
       out << "          <fifths>2</fifths>" << endl;
@@ -197,7 +197,7 @@ namespace Bww {
     }
     StepAlterOct sao = stepAlterOctMap.value(pitch);
 
-    int dur = WHOLE_DUR / type.toInt();
+    int dur = wholeDur() / type.toInt();
     if (dots == 1) dur = 3 * dur / 2;
     if (triplet != ST_NONE) dur = 2 * dur / 3;
     out << "      <note>" << endl;
@@ -309,13 +309,13 @@ namespace Bww {
     out << "  </identification>" << endl;
     out << "  <part-list>" << endl;
     out << "    <score-part id=\"P1\">" << endl;
-    out << "      <part-name>" << instrumentName << "</part-name>" << endl;
+    out << "      <part-name>" << instrumentName() << "</part-name>" << endl;
     out << "      <score-instrument id=\"P1-I1\">" << endl;
-    out << "        <instrument-name>" << instrumentName << "</instrument-name>" << endl;
+    out << "        <instrument-name>" << instrumentName() << "</instrument-name>" << endl;
     out << "      </score-instrument>" << endl;
     out << "      <midi-instrument id=\"P1-I1\">" << endl;
     out << "        <midi-channel>1</midi-channel>" << endl;
-    out << "        <midi-program>" << midiProgram << "</midi-program>" << endl;
+    out << "        <midi-program>" << midiProgram() << "</midi-program>" << endl;
     out << "      </midi-instrument>" << endl;
     out << "    </score-part>" << endl;
     out << "  </part-list>" << endl;
