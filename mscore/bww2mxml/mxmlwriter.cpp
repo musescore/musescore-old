@@ -150,12 +150,16 @@ namespace Bww {
   void MxmlWriter::endMeasure(const Bww::MeasureEndFlags mef)
   {
     // qDebug() << "MxmlWriter::endMeasure()";
-    if (mef.repeatEnd || mef.endingEnd || mef.lastOfPart)
+    if (mef.repeatEnd || mef.endingEnd || mef.lastOfPart || mef.doubleBarLine)
     {
       out << "      <barline location=\"right\">" << endl;
       if (mef.repeatEnd || mef.lastOfPart)
       {
         out << "        <bar-style>light-heavy</bar-style>" << endl;
+      }
+      else if (mef.doubleBarLine)
+      {
+        out << "        <bar-style>light-light</bar-style>" << endl;
       }
       if (mef.endingEnd)
       {

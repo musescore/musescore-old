@@ -349,6 +349,9 @@ void MsScWriter::endMeasure(const Bww::MeasureEndFlags mef)
       if (mef.lastOfPart && !mef.repeatEnd) {
             currentMeasure->setEndBarLineType(END_BAR, false, true);
             }
+      else if (mef.doubleBarLine) {
+            currentMeasure->setEndBarLineType(DOUBLE_BAR, false, true);
+            }
 
       int mTick = currentMeasure->tick();
       int measureLen = tick - mTick;

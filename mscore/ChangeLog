@@ -1,4 +1,5 @@
 15.jan (lv)
+      - feature request #8355: bww import: support double barline
       - feature request #8355: bww import: calculate time signature if necessary
 12.jan (la)
       - add SVG icons for note entry toolbar
