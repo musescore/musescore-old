@@ -484,8 +484,8 @@ void MsScWriter::note(const QString pitch, const QVector<Bww::BeamType> beamList
             score->setCopyright(footer);
 
       Part* part = score->part(0);
-      part->setLongName(Bww::instrumentName);
-      part->setMidiProgram(Bww::midiProgram - 1);
+      part->setLongName(instrumentName());
+      part->setMidiProgram(midiProgram() - 1);
   }
 
   /**
