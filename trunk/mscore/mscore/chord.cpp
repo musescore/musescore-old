@@ -1313,12 +1313,12 @@ void Chord::layout()
                   _stemSlash = 0;
             }
 
-            if(!tab->genDurations() ||          // if tab is not set for duration symbols
+            if (!tab->genDurations() ||         // if tab is not set for duration symbols
                track() % VOICES != 0) {         // or not in first voice
                   //
                   // no tab duration symbols
                   //
-                  if(_tabDur) {                 // delete an existing duration symbol
+                  if (_tabDur) {                // delete an existing duration symbol
                         delete _tabDur;
                         _tabDur = 0;
                         }
@@ -1478,7 +1478,7 @@ void Chord::layout()
       lll += _extraLeadingSpace.val() * _spatium;
 
       _space.setLw(lll);
-      _space.setRw(rrr);
+      _space.setRw(rrr + ipos().x());
 
       foreach(Element* e, _el) {
             e->layout();
