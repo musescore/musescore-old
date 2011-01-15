@@ -1,4 +1,5 @@
 15.jan (ws)
+      - added photomode icon
       - new style parameter: ledger line length
       - fix spacing for displaced note heads in multi voice context
       - fix beam layout for staff crossing beams: under some conditions
