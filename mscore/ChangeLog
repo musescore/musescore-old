@@ -1,6 +1,9 @@
 15.jan (lv)
       - feature request #8355: bww import: support double barline
       - feature request #8355: bww import: calculate time signature if necessary
+       (la)
+      - fix #3092: Cannot see 16th note (and below) ledger lines
+      - fix #6317: Ledger lines not long enough for whole notes
 12.jan (la)
       - add SVG icons for note entry toolbar
       - change toolbar icon default size
