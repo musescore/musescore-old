@@ -42,7 +42,7 @@ class Omr {
       double _spatium;
       double _dpmm;
       Pdf* _doc;
-      QList<OmrPage*> pages;
+      QList<OmrPage*> _pages;
       Ocr* _ocr;
       Score* _score;
 
@@ -53,9 +53,10 @@ class Omr {
       Omr(const QString& path, Score*);
       bool readPdf();
       int pagesInDocument() const;
-      int numPages() const                 { return pages.size();          }
-      OmrPage* page(int idx)               { return pages[idx];            }
+      int numPages() const                 { return _pages.size();          }
+      OmrPage* page(int idx)               { return _pages[idx];            }
       OmrView* newOmrView(ScoreView*);
+      const QList<OmrPage*>& pages() const { return _pages; }
 #ifdef OCR
       Ocr* ocr() const                     { return _ocr; }
 #endif
@@ -76,6 +77,8 @@ class Omr {
 //---------------------------------------------------------
 
 class Omr {
+      QList<OmrPage*> _pages;
+
    public:
       Omr(Score*)                          {}
       Omr(const QString&, Score*)          {}
@@ -83,6 +86,7 @@ class Omr {
       int pagesInDocument() const          { return 0; }
       int numPages() const                 { return 0; }
       OmrPage* page(int)                   { return 0; }
+      const QList<OmrPage*>& pages() const  { return _pages; }
       OmrView* newOmrView(ScoreView*)      { return 0; }
 #ifdef OCR
       Ocr* ocr() const                     { return 0; }

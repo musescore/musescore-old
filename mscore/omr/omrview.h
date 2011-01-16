@@ -26,6 +26,21 @@ class Page;
 class ScoreView;
 
 //---------------------------------------------------------
+//   Tile
+//---------------------------------------------------------
+
+struct Tile {
+      int no;
+      QRect r;
+      QPixmap pm;
+
+      Tile();
+      };
+
+static const int TILE_H = 512;
+static const int TILE_W = 512;
+
+//---------------------------------------------------------
 //   OmrView
 //---------------------------------------------------------
 
@@ -33,15 +48,18 @@ class OmrView : public QWidget {
       Q_OBJECT
       Omr* _omr;
       ScoreView* _scoreView;
-      QPixmap pm[4];    // tiled because of max size restrictions
+      int maxTiles;
+
+      QList<Tile*> usedTiles;
+      QStack<Tile*> freeTiles;
       QPoint startDrag;
 
-      QTransform _matrix, imatrix;
+      QTransform _matrix;
+      int xoff, yoff;
       int curPage;
 
       bool   _fotoMode;
       QRectF _foto;
-      QRectF grips[8];
 
       void zoom(int step, const QPoint& pos);
 
@@ -53,13 +71,11 @@ class OmrView : public QWidget {
 
       qreal mag() const { return _matrix.m11(); }
       void setMag(double mag);
+      void initTile(Tile* t, int pageWidth);
 
    public slots:
-      void gotoPage(int);
       void setScale(double);
       void setOffset(double, double);
-      void nextPage();
-      void previousPage();
 
    signals:
       void pageNumberChanged(int);

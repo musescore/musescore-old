@@ -74,7 +74,7 @@ void Omr::write(Xml& xml) const
       xml.tag("path", _path);
       xml.tag("spatium", _spatium);
       xml.tag("dpmm", _dpmm);
-      foreach(OmrPage* page, pages) {
+      foreach(OmrPage* page, _pages) {
             page->write(xml);
             }
       xml.etag();
@@ -102,7 +102,7 @@ void Omr::read(QDomElement e)
             else if (tag == "OmrPage") {
                   OmrPage* page = new OmrPage(this);
                   page->read(e);
-                  pages.append(page);
+                  _pages.append(page);
                   }
             else if (tag == "spatium")
                   _spatium = val.toDouble();
@@ -144,15 +144,15 @@ printf("Omr::read <%s>\n", qPrintable(_path));
             OmrPage* page = new OmrPage(this);
             QImage image = _doc->page(i);
             page->setImage(image);
-            pages.append(page);
+            _pages.append(page);
             }
       double sp = 0;
       double w  = 0;
 
       for (int i = 0; i < n; ++i) {
-            pages[i]->read(i);
-            sp += pages[i]->spatium();
-            w  += pages[i]->width();
+            _pages[i]->read(i);
+            sp += _pages[i]->spatium();
+            w  += _pages[i]->width();
             }
       _spatium = sp / n;
       w       /= n;
@@ -177,7 +177,7 @@ double Omr::spatiumMM() const
 
 double Omr::staffDistance() const
       {
-      return pages[0]->staffDistance();
+      return _pages[0]->staffDistance();
       }
 
 //---------------------------------------------------------
@@ -186,7 +186,7 @@ double Omr::staffDistance() const
 
 double Omr::systemDistance() const
       {
-      return pages[0]->systemDistance();
+      return _pages[0]->systemDistance();
       }
 
 #endif

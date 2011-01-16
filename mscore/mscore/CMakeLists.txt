@@ -554,7 +554,6 @@ endif (NOT MINGW AND NOT APPLE)
       data/icons/subscript.svg
       data/icons/superscript.svg
       data/icons/fotomode.svg
-      data/icons/camera3.svg
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}/icons/icons
       )
    install (FILES
@@ -663,7 +662,6 @@ endif (NOT MINGW AND NOT APPLE)
       data/icons-dark/subscript.svg
       data/icons-dark/superscript.svg
       data/icons-dark/fotomode.svg
-      data/icons-dark/camera3.svg
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}/icons/icons-dark
       )
 # endif (NOT EMBED_ICONS)
