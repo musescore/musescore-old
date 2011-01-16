@@ -97,7 +97,7 @@ class ExportLy {
   int curTicks;
   Direction stemDirection;
   int indx;
-  int partial; //length of pickupbar
+  bool partial; //length of pickupbar
 
   int  timedenom, z1, z2, z3, z4; //timesignatures
   int barlen, wholemeasurerest;
@@ -3900,11 +3900,11 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 
 		 if ((barlen<nombarlen) and (measurenumber==1) and (voice == 0))
 		       {
-			     pickup=true;
-			     int punkt=0;
-			     partial=getLen(barlen, &punkt);
+			     pickup = true;
+           partial = true;            
 			     indent();
-			     out << "\\partial " << partial << "\n";
+			     const AL::SigEvent ev(m->score()->sigmap()->timesig(m->tick()));
+      	   out << "\\partial " << ev.timesig().denominator() << "*" << ev.timesig().numerator() << "\n";
 		       }
 		 curTicks=-1; //we always need explicit length after timesig.
 		 indent();
@@ -4043,11 +4043,9 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
     {
       if ((pickup) and (measurenumber==1) and (voice == 0))
 	{
-	  int punkt=0;
-	  // int partial=getLen(barlen, &punkt);
-	  out << "\\partial ";
-	  writeLen(barlen);
-	  out << " \n";
+
+    const AL::SigEvent ev(m->score()->sigmap()->timesig(m->tick()));
+    out << "\\partial " << ev.timesig().denominator() << "*" << ev.timesig().numerator() << "\n";
 	  indent();
 	  writeRest(barlen,2);
 	  out << "\n";
@@ -4071,7 +4069,7 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 	 }
      }
    int mno;
-   if (partial!=0)
+   if (!partial)
      mno = measurenumber +1;
    else
      mno = measurenumber;

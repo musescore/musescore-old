@@ -6,6 +6,8 @@
        (ws)
       - implement tile cache for omr scan image; this allows to show multipage scans
         along the score
+       (la)
+      - fix #8719: Pickup measure messes up Lilypond export 
 15.jan (ws)
       - added photomode icon
       - new style parameter: ledger line length
