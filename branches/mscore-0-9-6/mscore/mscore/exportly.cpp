@@ -97,7 +97,7 @@ class ExportLy {
   int curTicks;
   Direction stemDirection;
   int indx;
-  int partial; //length of pickupbar
+  bool partial; //length of pickupbar
 
   int  timedenom, z1, z2, z3, z4; //timesignatures
   int barlen, wholemeasurerest;
@@ -3883,10 +3883,10 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 		 if ((barlen<nombarlen) and (measurenumber==1) and (voice == 0))
 		       {
 			     pickup=true;
-			     int punkt=0;
-			     partial=getLen(barlen, &punkt);
+			     partial = true;
 			     indent();
-			     out << "\\partial " << partial << "\n";
+			     const AL::SigEvent ev(m->score()->sigmap()->timesig(m->tick()));
+			     out << "\\partial " << ev.fraction().denominator() << "*" << ev.fraction().numerator() << "\n";
 		       }
 		 curTicks=-1; //we always need explicit length after timesig.
 		 indent();
@@ -4024,36 +4024,33 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
    // no stuff in this bar in this voice: fill empty bar with silent rest
     {
       if ((pickup) and (measurenumber==1) and (voice == 0))
-	{
-	  int punkt=0;
-	  // int partial=getLen(barlen, &punkt);
-	  out << "\\partial ";
-	  writeLen(barlen);
-	  out << " \n";
-	  indent();
-	  writeRest(barlen,2);
-	  out << "\n";
-	}//end if pickup
+      	{
+      	  const AL::SigEvent ev(m->score()->sigmap()->timesig(m->tick()));
+      	  out << "\\partial " << ev.fraction().denominator() << "*" << ev.fraction().numerator() << "\n";
+      	  indent();
+      	  writeRest(barlen,2);
+      	  out << "\n";
+      	}//end if pickup
       else //if not pickupbar: full measure silent bar
-	{
-	  writeRest(barlen, 2);
-	  curTicks=-1;
-	}
+      	{
+      	  writeRest(barlen, 2);
+      	  curTicks=-1;
+      	}
     }//end bar empty
    else // voice bar not empty
      {
        //we have to fill with spacer rests before and after nonsilent material
        if ((measuretick < barlen) and (measurenumber>0))
-	 {
-	   //fill rest of measure with silent rest
-	   int negative=barlen-measuretick;
-	   curTicks=-1;
-	   writeRest(negative, 2);
-	   curTicks=-1;
-	 }
+      	   {
+      	   //fill rest of measure with silent rest
+      	   int negative=barlen-measuretick;
+      	   curTicks=-1;
+      	   writeRest(negative, 2);
+      	   curTicks=-1;
+      	   }
      }
    int mno;
-   if (partial!=0)
+   if (!partial)
      mno = measurenumber +1;
    else
      mno = measurenumber;
@@ -4187,7 +4184,7 @@ void ExportLy::writeScore()
 	      prevpitch=staffpitch;
 	      relativ=staffrelativ;
 	      donefirst=false;
-	      partial=0;
+	      partial = false;
 
 	      //for all measures in this voice:
 	      for (MeasureBase* m = score->first(); m; m = m->next())

@@ -1,5 +1,7 @@
 16.jan (lv)
       - iotest updates
+       (la)
+      - fix #8719: Pickup measure messes up Lilypond export
 15.jan (lv)
       - feature request #8355: bww import: support double barline
       - feature request #8355: bww import: calculate time signature if necessary
