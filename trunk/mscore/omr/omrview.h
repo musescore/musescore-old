@@ -59,7 +59,7 @@ class OmrView : public QWidget {
 
       QTransform _matrix;
       int xoff, yoff;
-      int curPage;
+      int pageWidth;
 
       bool   _fotoMode;
       QRectF _foto;
@@ -74,7 +74,7 @@ class OmrView : public QWidget {
 
       qreal mag() const { return _matrix.m11(); }
       void setMag(double mag);
-      void initTile(Tile* t, int pageWidth);
+      void initTile(Tile* t);
 
    public slots:
       void setScale(double);
