@@ -217,6 +217,7 @@ void OmrPage::readHeader(Score* score)
                   maxIdx = slice;
                   }
             }
+#ifdef OCR
       //
       // assume that highest slice contains header text
       //
@@ -237,7 +238,7 @@ void OmrPage::readHeader(Score* score)
             }
       if (!subTitle.isEmpty())
             addText(score, TEXT_SUBTITLE, subTitle);
-
+#endif
 #if 0
       OcrImage img = OcrImage(_image.bits(), _slices[0], (_image.width() + 31)/32);
       QString s = _omr->ocr()->readLine(img).trimmed();

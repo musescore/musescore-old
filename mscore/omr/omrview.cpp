@@ -80,25 +80,19 @@ void OmrView::setOmr(Omr* s)
 void OmrView::initTile(Tile* t, int pageWidth)
       {
       int page1  = t->r.x() / pageWidth;
-      int page2  = (t->r.x() + TILE_W - 1) / pageWidth;
-      t->pm.fill(Qt::black);
-
-      int n = _omr->numPages();
-
       if (page1 < 0)
             page1 = 0;
-      if (page2 >= n)
-            page2 = n - 1;
-      if (page1 > n || page2 < 0)
+      int n = _omr->numPages();
+      if (page1 >= n)
             return;
 
-      for (int pageNo = page1; pageNo <= page2; ++pageNo) {
-            OmrPage* op     = _omr->page(pageNo);
-            const QImage& i = op->image();
-            int xoffset     = 0; // (pageWidth - i.width()) / 2;
-            int x           = t->r.x() - (pageNo * pageWidth) - xoffset;
-            t->pm           = QPixmap::fromImage(i.copy(x, t->r.y(), TILE_W, TILE_H));
-            }
+      t->page     = _omr->page(page1);
+      t->pageNo   = page1;
+
+      const QImage& i = t->page->image();
+      int xoffset     = 0; // (pageWidth - i.width()) / 2;
+      int x           = t->r.x() - (t->pageNo * pageWidth) - xoffset;
+      t->pm           = QPixmap::fromImage(i.copy(x, t->r.y(), TILE_W, TILE_H));
       }
 
 //---------------------------------------------------------
@@ -194,37 +188,45 @@ void OmrView::paintEvent(QPaintEvent* event)
                   }
             }
 
-      foreach(Tile* t, usedTiles)
+      int minPage = 9000;
+      int maxPage = 0;
+      foreach(Tile* t, usedTiles) {
             p.drawPixmap(t->r.x(), t->r.y(), t->pm);
-
-#if 0
-      OmrPage* page = _omr->page(curPage);
-
-      if (showLines) {
-            p.setPen(QPen(QColor(255, 0, 0, 80), 1.0));
-            foreach(QLine l, page->sl())
-                  p.drawLine(QLineF(l.x1()+.5, l.y1()+.5, l.x2()+.5, l.y2()+.5));
+            if (t->pageNo < minPage)
+                  minPage = t->pageNo;
+            if (t->pageNo > maxPage)
+                  maxPage = t->pageNo;
             }
-      foreach(const QRect r, page->slices())
-            p.fillRect(r, QBrush(QColor(0, 100, 100, 50)));
-
-      foreach(const OmrNote* n, page->notes()) {
-            if (n->sym == quartheadSym)
-                  p.setPen(QPen(QColor(255, 0, 0), 2.0));
-            else
-                  p.setPen(QPen(QColor(0, 0, 255), 2.0));
-            p.drawRect(n->r);
-            }
-
-      foreach(const QRectF& r, page->r())       // staves
-            p.fillRect(r, QBrush(QColor(0, 0, 100, 50)));
-      p.setPen(QPen(Qt::blue));
-      if (showBarLines) {
-            foreach(const QLineF& l, page->bl()) {
-                  p.drawLine(l);
+      for(int pageNo = minPage; pageNo <= maxPage; ++pageNo) {
+            OmrPage* page = _omr->page(pageNo);
+            p.save();
+            p.translate(w * pageNo, 0);
+            if (showLines) {
+                  p.setPen(QPen(QColor(255, 0, 0, 80), 1.0));
+                  foreach(QLine l, page->sl())
+                        p.drawLine(QLineF(l.x1()+.5, l.y1()+.5, l.x2()+.5, l.y2()+.5));
                   }
+            foreach(const QRect r, page->slices())
+                  p.fillRect(r, QBrush(QColor(0, 100, 100, 50)));
+
+            foreach(const OmrNote* n, page->notes()) {
+                  if (n->sym == quartheadSym)
+                        p.setPen(QPen(QColor(255, 0, 0), 2.0));
+                  else
+                        p.setPen(QPen(QColor(0, 0, 255), 2.0));
+                  p.drawRect(n->r);
+                  }
+
+            foreach(const QRectF& r, page->r())       // staves
+                  p.fillRect(r, QBrush(QColor(0, 0, 100, 50)));
+            p.setPen(QPen(Qt::blue));
+            if (showBarLines) {
+                  foreach(const QLineF& l, page->bl()) {
+                        p.drawLine(l);
+                        }
+                  }
+            p.restore();
             }
-#endif
 
       if (fotoMode()) {
             // TODO
