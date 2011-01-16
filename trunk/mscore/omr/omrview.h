@@ -24,6 +24,7 @@
 class Omr;
 class Page;
 class ScoreView;
+class OmrPage;
 
 //---------------------------------------------------------
 //   Tile
@@ -33,6 +34,8 @@ struct Tile {
       int no;
       QRect r;
       QPixmap pm;
+      OmrPage* page;
+      int pageNo;
 
       Tile();
       };
