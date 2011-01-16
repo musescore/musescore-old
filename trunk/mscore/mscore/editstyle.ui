@@ -392,6 +392,9 @@
             <property name="maximum">
              <double>1000.000000000000000</double>
             </property>
+            <property name="singleStep">
+             <double>0.5</double>
+            </property>            
            </widget>
           </item>
           <item row="1" column="2">
@@ -427,6 +430,9 @@
             <property name="maximum">
              <double>1000.000000000000000</double>
             </property>
+            <property name="singleStep">
+             <double>0.1</double>
+            </property>                 
            </widget>
           </item>
           <item row="2" column="0">
@@ -491,6 +497,9 @@
             <property name="decimals">
              <number>1</number>
             </property>
+            <property name="singleStep">
+             <double>0.5</double>
+            </property>             
            </widget>
           </item>
           <item row="3" column="2">
@@ -520,6 +529,9 @@
             <property name="decimals">
              <number>1</number>
             </property>
+            <property name="singleStep">
+             <double>0.5</double>
+            </property>                
            </widget>
           </item>
           <item row="4" column="0">
@@ -1411,6 +1423,9 @@ p, li { white-space: pre-wrap; }
               <property name="maximum">
                <double>1000.000000000000000</double>
               </property>
+              <property name="singleStep">
+               <double>0.1</double>
+              </property>                  
              </widget>
             </item>
             <item row="1" column="0">
@@ -1475,6 +1490,9 @@ p, li { white-space: pre-wrap; }
             <property name="minimum">
              <double>1.000000000000000</double>
             </property>
+            <property name="singleStep">
+              <double>0.1</double>
+            </property>   
            </widget>
           </item>
           <item row="1" column="0">
@@ -1495,6 +1513,9 @@ p, li { white-space: pre-wrap; }
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="singleStep">
+              <double>0.1</double>
+            </property>   
             <property name="suffix">
              <string>sp</string>
             </property>
@@ -1518,6 +1539,9 @@ p, li { white-space: pre-wrap; }
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="singleStep">
+              <double>0.1</double>
+            </property>             
             <property name="suffix">
              <string>sp</string>
             </property>
@@ -1541,6 +1565,9 @@ p, li { white-space: pre-wrap; }
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="singleStep">
+              <double>0.1</double>
+            </property>             
             <property name="suffix">
              <string>sp</string>
             </property>
@@ -1564,6 +1591,9 @@ p, li { white-space: pre-wrap; }
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="singleStep">
+              <double>0.1</double>
+            </property>             
             <property name="suffix">
              <string>sp</string>
             </property>
@@ -1587,6 +1617,9 @@ p, li { white-space: pre-wrap; }
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="singleStep">
+              <double>0.1</double>
+            </property>             
             <property name="suffix">
              <string>sp</string>
             </property>
@@ -1610,6 +1643,9 @@ p, li { white-space: pre-wrap; }
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="singleStep">
+              <double>0.1</double>
+            </property>             
             <property name="suffix">
              <string>sp</string>
             </property>
@@ -1633,6 +1669,9 @@ p, li { white-space: pre-wrap; }
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="singleStep">
+              <double>0.05</double>
+            </property>             
             <property name="suffix">
              <string>sp</string>
             </property>
@@ -1650,6 +1689,9 @@ p, li { white-space: pre-wrap; }
           </item>
           <item row="8" column="1">
            <widget class="QDoubleSpinBox" name="clefBarlineDistance">
+            <property name="singleStep">
+              <double>0.01</double>
+            </property> 
             <property name="suffix">
              <string extracomment="spatium unit">sp</string>
             </property>
@@ -1804,7 +1846,7 @@ p, li { white-space: pre-wrap; }
                   <string extracomment="space unit">sp</string>
                  </property>
                  <property name="singleStep">
-                  <double>0.125000000000000</double>
+                  <double>0.05</double>
                  </property>
                 </widget>
                </item>
@@ -1817,7 +1859,7 @@ p, li { white-space: pre-wrap; }
                   <double>1.000000000000000</double>
                  </property>
                  <property name="singleStep">
-                  <double>0.250000000000000</double>
+                  <double>0.25</double>
                  </property>
                 </widget>
                </item>
@@ -1866,6 +1908,9 @@ p, li { white-space: pre-wrap; }
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
+              <property name="singleStep">
+               <double>0.01</double>
+              </property>                 
               <property name="suffix">
                <string>sp</string>
               </property>
@@ -1886,6 +1931,9 @@ p, li { white-space: pre-wrap; }
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
+              <property name="singleStep">
+               <double>0.01</double>
+              </property>               
               <property name="suffix">
                <string>sp</string>
               </property>
@@ -1906,6 +1954,9 @@ p, li { white-space: pre-wrap; }
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
+              <property name="singleStep">
+               <double>0.1</double>
+              </property>               
               <property name="suffix">
                <string>sp</string>
               </property>
@@ -1926,6 +1977,9 @@ p, li { white-space: pre-wrap; }
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
+              <property name="singleStep">
+               <double>0.1</double>
+              </property> 
               <property name="suffix">
                <string>sp</string>
               </property>
@@ -1946,6 +2000,9 @@ p, li { white-space: pre-wrap; }
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
+              <property name="singleStep">
+               <double>0.01</double>
+              </property> 
               <property name="suffix">
                <string>sp</string>
               </property>
@@ -1966,6 +2023,9 @@ p, li { white-space: pre-wrap; }
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
+              <property name="singleStep">
+               <double>0.1</double>
+              </property> 
               <property name="suffix">
                <string>sp</string>
               </property>
@@ -2040,7 +2100,7 @@ p, li { white-space: pre-wrap; }
                <double>999999.000000000000000</double>
               </property>
               <property name="singleStep">
-               <double>0.100000000000000</double>
+               <double>0.01</double>
               </property>
              </widget>
             </item>
@@ -2103,7 +2163,11 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QDoubleSpinBox" name="beamWidth"/>
+           <widget class="QDoubleSpinBox" name="beamWidth">
+           <property name="singleStep">
+            <double>0.01</double>
+           </property>
+           </widget> 
           </item>
           <item row="0" column="2">
            <widget class="QLabel" name="label_55">
@@ -2120,7 +2184,11 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QDoubleSpinBox" name="beamDistance"/>
+           <widget class="QDoubleSpinBox" name="beamDistance">
+           <property name="singleStep">
+            <double>0.1</double>
+           </property> 
+           </widget>           
           </item>
           <item row="1" column="2">
            <widget class="QLabel" name="label_58">
@@ -2137,7 +2205,11 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="2" column="1">
-           <widget class="QDoubleSpinBox" name="beamMinLen"/>
+           <widget class="QDoubleSpinBox" name="beamMinLen">
+           <property name="singleStep">
+            <double>0.05</double>
+           </property> 
+           </widget>           
           </item>
           <item row="2" column="2">
            <widget class="QLabel" name="label_60">
@@ -2159,7 +2231,7 @@ p, li { white-space: pre-wrap; }
              <double>1.000000000000000</double>
             </property>
             <property name="singleStep">
-             <double>0.100000000000000</double>
+             <double>0.05</double>
             </property>
            </widget>
           </item>
@@ -2176,7 +2248,7 @@ p, li { white-space: pre-wrap; }
              <double>1.000000000000000</double>
             </property>
             <property name="singleStep">
-             <double>0.100000000000000</double>
+             <double>0.05</double>
             </property>
            </widget>
           </item>
@@ -2524,7 +2596,11 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QDoubleSpinBox" name="hairpinLineWidth"/>
+           <widget class="QDoubleSpinBox" name="hairpinLineWidth">
+           <property name="singleStep">
+            <double>0.01</double>
+           </property>            
+           </widget>
           </item>
           <item row="0" column="2">
            <spacer>
@@ -2547,7 +2623,11 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QDoubleSpinBox" name="hairpinHeight"/>
+           <widget class="QDoubleSpinBox" name="hairpinHeight">
+           <property name="singleStep">
+            <double>0.1</double>
+           </property> 
+           </widget>           
           </item>
           <item row="2" column="0">
            <widget class="QLabel" name="label_10">
@@ -2557,7 +2637,11 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item row="2" column="1">
-           <widget class="QDoubleSpinBox" name="hairpinContinueHeight"/>
+           <widget class="QDoubleSpinBox" name="hairpinContinueHeight">
+           <property name="singleStep">
+            <double>0.1</double>
+           </property>
+           </widget> 
           </item>
           <item row="3" column="0">
            <spacer>
@@ -2654,6 +2738,9 @@ p, li { white-space: pre-wrap; }
            <property name="suffix">
             <string comment="space unit">sp</string>
            </property>
+           <property name="singleStep">
+            <double>0.1</double>
+           </property> 
           </widget>
          </item>
          <item row="1" column="0">
@@ -2668,6 +2755,9 @@ p, li { white-space: pre-wrap; }
            <property name="suffix">
             <string comment="space unit">sp</string>
            </property>
+           <property name="singleStep">
+            <double>0.1</double>
+           </property> 
           </widget>
          </item>
          <item row="2" column="0">
@@ -2682,6 +2772,9 @@ p, li { white-space: pre-wrap; }
            <property name="suffix">
             <string comment="space unit">sp</string>
            </property>
+           <property name="singleStep">
+            <double>0.1</double>
+           </property> 
           </widget>
          </item>
         </layout>
