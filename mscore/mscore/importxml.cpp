@@ -1747,7 +1747,6 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   else dyn->setAbove(placement == "above");
                   dyn->setUserOff(QPointF(rx, ry));
                   dyn->setMxmlOff(offset);
-
                   dyn->setTrack((staff + rstaff) * VOICES);
                   Segment* s = measure->getSegment(SegChordRest, tick);
                   s->add(dyn);
@@ -2267,6 +2266,13 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       QString tremoloType;
       int headGroup = 0;
       bool noStem = false;
+      QString placement;
+      QStringList dynamics;
+      qreal rx = 0.0;
+      qreal ry = 0.0;
+      qreal yoffset = 0.0; // actually this is default-y
+      qreal xoffset = 0.0;
+      bool hasYoffset = false;
 
       QString printObject = "yes";
       if (pn.isElement() && pn.nodeName() == "note") {
@@ -2474,9 +2480,18 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                               tupletBracket   = ee.attribute("bracket");
                               }
                         else if (ee.tagName() == "dynamics") {
-                              // int rx            = ee.attribute("relative-x").toInt();
-                              QString placement = ee.attribute("placement");
-                              printf("found notations/dynamics\n");
+                              placement = ee.attribute("placement");
+                              ry        = ee.attribute(QString("relative-y"), "0").toDouble() * -.1;
+                              rx        = ee.attribute(QString("relative-x"), "0").toDouble() * .1;
+                              yoffset   = ee.attribute("default-y").toDouble(&hasYoffset) * -0.1;
+                              xoffset   = ee.attribute("default-x", "0.0").toDouble() * 0.1;
+                              QDomElement eee = ee.firstChildElement();
+                              if (!eee.isNull()) {
+                                    if (eee.tagName() == "other-dynamics")
+                                          dynamics.push_back(eee.text());
+                                    else
+                                          dynamics.push_back(eee.tagName());
+                                    }
                               }
                         else if (ee.tagName() == "articulations") {
                               for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
@@ -2800,9 +2815,14 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
 
 //            printf("staff for new note: %p (staff=%d, relStaff=%d)\n",
 //                   score->staff(staff + relStaff), staff, relStaff);
-            // LVIFIX: accidental handling is ugly, replace magic numbers by constants
-//WS-TODO            if (editorial)
-// set bracket                  note->setAccidentalType(accidental + 5);
+
+            if (editorial) {
+                  Accidental* a = new Accidental(score);
+                  a->setSubtype(accidental);
+                  a->setHasBracket(true);
+                  a->setRole(ACC_USER);
+                  note->add(a);
+                  }
 
             // LVIFIX: quarter tone accidentals support is "drawing only"
 //WS-TODO            if (accidental == 18
@@ -3062,15 +3082,20 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   printf("unknown tremolo type %d\n", tremolo);
             }
 
-      // add a pending harmony to the current track
-/*
-      if (harmony) {
-            harmony->setTrack(track);
-            Segment* s = static_cast<Segment*>(cr->parent());
-            s->add(harmony);
-            harmony = 0;
+      // more than one dynamic ???
+      // LVIFIX: check import/export of <other-dynamics>unknown_text</...>
+      // TODO remove duplicate code (see MusicXml::direction)
+      for (QStringList::Iterator it = dynamics.begin(); it != dynamics.end(); ++it ) {
+            Dynamic* dyn = new Dynamic(score);
+            dyn->setSubtype(*it);
+            if (hasYoffset) dyn->setYoff(yoffset);
+            else dyn->setAbove(placement == "above");
+            dyn->setUserOff(QPointF(rx, ry));
+            // dyn->setMxmlOff(offset);
+            dyn->setTrack(track);
+            Segment* s = measure->getSegment(SegChordRest, tick);
+            s->add(dyn);
             }
-*/
 
       if (!grace) {
             lastLen = ticks;

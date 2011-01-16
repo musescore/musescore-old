@@ -1,4 +1,9 @@
-16.jan (ws)
+16.jan (lv)
+      - fix #8419: musicxml export: stem on whole note in triplet
+      - fix #8426: courtesy accidentals do not import/export in MusicXML anymore (0.9.6 regression)
+      - fix #8546: musicxml import: dynamics in notations element are ignored
+      - sync mscore/test/iotest updates from 0.9.6 branch
+       (ws)
       - implement tile cache for omr scan image; this allows to show multipage scans
         along the score
 15.jan (ws)

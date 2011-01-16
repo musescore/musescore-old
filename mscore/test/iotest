@@ -61,12 +61,37 @@ rwtestXml() {
       testcount=$(($testcount+1))
       }
 
+rwtestXmlRef() {
+      echo -n "testing load/save $1";
+      REF=`basename $1 .xml`_ref.xml
+      $MSCORE $1 -d -o mops.xml &> /dev/null
+      if diff -q $REF mops.xml &> /dev/null; then
+            echo -e "\r\t\t\t\t\t\t...OK";
+      else
+            echo -e "\r\t\t\t\t\t\t...FAILED";
+            failures=$(($failures+1));
+            echo "+++++++++DIFF++++++++++++++"
+            diff $REF mops.xml
+            echo "+++++++++++++++++++++++++++"
+      fi
+      rm mops.xml
+      testcount=$(($testcount+1))
+      }
+
 rwtestAllBww() {
+      rwtestBww testBeams.bww
+      rwtestBww testDuration.bww
       rwtestBww testGraces.bww
       rwtestBww testHello.bww
+      rwtestBww testMidMeasureRepeat.bww
       rwtestBww testNotes.bww
+      rwtestBww testNoTimeSig1.bww
+      rwtestBww testNoTimeSig2.bww
+      rwtestBww testRepeats.bww
       rwtestBww testTempo60.bww
       rwtestBww testTempo120.bww
+      rwtestBww testTieTriplet.bww
+      rwtestBww testTriplets.bww
       }
 
 rwtestAllDemos() {
@@ -115,13 +140,14 @@ rwtestAllXml() {
       rwtestXml testDirections1.xml
       rwtestXml testDynamics1.xml
       rwtestXml testDynamics2.xml
+      rwtestXmlRef testDynamics3.xml
       rwtestXml testGrace1.xml
       rwtestXml testGrace2.xml
       rwtestXml testHarmony1.xml
       rwtestXml testHarmony2.xml
       rwtestXml testHello.xml
+      rwtestXml testImplicitMeasure1.xml
       rwtestXml testInvisibleElements.xml
-      rwtestXml testHello.xml
       rwtestXml testKeysig1.xml
       rwtestXml testLines1.xml
       rwtestXml testLines2.xml
@@ -138,7 +164,7 @@ rwtestAllXml() {
       rwtestXml testTimesig3.xml
       rwtestXml testTremolo.xml
       rwtestXml testTuplets.xml
-      rwtestXml testVoiceMapper1.xml
+      rwtestXmlRef testVoiceMapper1.xml
       rwtestXml testVoicePiano1.xml
       rwtestXml testVolta1.xml
       rwtestXml testWedge1.xml

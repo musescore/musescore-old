@@ -2190,7 +2190,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bo
             if (chord->noStem() || chord->measure()->slashStyle(chord->staffIdx())){
                   xml.tag("stem", QString("none"));
             }
-            else if (note->chord()->ticks() < 4*AL::division){
+            else if ((note->chord()->ticks() * actNotes / (nrmNotes * tremCorr)) < (4 * AL::division)) {
                   xml.tag("stem", QString(note->chord()->up() ? "up" : "down"));
             }
 
