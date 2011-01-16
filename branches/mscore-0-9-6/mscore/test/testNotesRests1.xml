@@ -258,9 +258,16 @@
     <measure number="4">
       <note>
         <rest/>
-        <duration>32</duration>
+        <duration>24</duration>
         <voice>1</voice>
-        <type>half</type>
+        <type>quarter</type>
+        <dot/>
+        </note>
+      <note>
+        <rest/>
+        <duration>8</duration>
+        <voice>1</voice>
+        <type>eighth</type>
         </note>
       <note>
         <rest/>
