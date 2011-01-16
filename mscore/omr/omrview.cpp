@@ -44,11 +44,11 @@ OmrView::OmrView(ScoreView* sv, QWidget* parent)
 //      setAttribute(Qt::WA_StaticContents);
       setMouseTracking(true);
 
-      _omr   = 0;
+      _omr       = 0;
       _scoreView = sv;
       double m   = .25;
       _fotoMode  = false;
-      _matrix = QTransform(m, 0.0, 0.0, m, 0.0, 0.0);
+      _matrix    = QTransform(m, 0.0, 0.0, m, 0.0, 0.0);
       xoff = yoff = 0;
       }
 
@@ -60,24 +60,29 @@ void OmrView::setOmr(Omr* s)
       {
       delete _omr;
       _omr    = s;
-      curPage = 0;
       if (s == 0 || s->numPages() == 0) {
             maxTiles = 0;
             return;
             }
       int n = s->numPages();
-      OmrPage* page = _omr->page(curPage);
+      OmrPage* page   = _omr->page(0);
       const QImage& i = page->image();
-      int htiles = (i.width() * n + TILE_W - 1) / TILE_W;
-      int vtiles = (i.height()    + TILE_H - 1) / TILE_H;
-      maxTiles   = htiles *  vtiles;
+      Score* score    = _scoreView->score();
+      PageFormat* pf  = score->pageFormat();
+      double mag      = _omr->spatium() / score->spatium();
+      pageWidth       = lrint(pf->width()  * mag * DPI);
+
+      int htiles      = ((pageWidth + TILE_W - 1) / TILE_W);
+      pageWidth       = htiles * TILE_W;
+      int vtiles      = (i.height() + TILE_H - 1) / TILE_H;
+      maxTiles        = n * htiles *  vtiles;
       }
 
 //---------------------------------------------------------
 //   initTile
 //---------------------------------------------------------
 
-void OmrView::initTile(Tile* t, int pageWidth)
+void OmrView::initTile(Tile* t)
       {
       int page1  = t->r.x() / pageWidth;
       if (page1 < 0)
@@ -126,10 +131,12 @@ void OmrView::paintEvent(QPaintEvent* event)
       //
       // remove unused tiles
       //
-      QRectF rr = _matrix.inverted().mapRect(QRectF(r));
+      QRect rr = _matrix.inverted().mapRect(QRectF(r)).toRect();
+      rr.adjust(-1, -1, 2, 2);
+
       QList<Tile*> nl;
       foreach(Tile* t, usedTiles) {
-            if (t->r.intersects(rr.toRect()))
+            if (t->r.intersects(rr))
                   nl.append(t);
             else
                   freeTiles.append(t);
@@ -138,19 +145,18 @@ void OmrView::paintEvent(QPaintEvent* event)
       //
       // add visible tiles
       //
-      Score* score = _scoreView->score();
-      const PageFormat* pf = score->pageFormat();
+      Score* score    = _scoreView->score();
 
       double sSpatium = score->spatium();
       double spatium  = _omr->spatium();
       double mag      = spatium / sSpatium;
 
-      int w = lrint(pf->width()  * mag * DPI);
-      w     = ((w + TILE_W - 1) / TILE_W) * TILE_W;
+      const PageFormat* pf = score->pageFormat();
+      int w = pageWidth;
       int h = lrint(pf->height() * mag * DPI);
       int n = _omr->numPages();
 
-      int nx = (w * n + TILE_W - 1) / TILE_W;
+      int nx = (w * n) / TILE_W;
       int ny = (h + TILE_H - 1) / TILE_H;
 
       int y1 = rr.y() / TILE_H;
@@ -182,7 +188,7 @@ void OmrView::paintEvent(QPaintEvent* event)
                         Tile* t = freeTiles.isEmpty() ? new Tile : freeTiles.pop();
                         t->no = no;
                         t->r  = QRect(x * TILE_W, y * TILE_H, TILE_W, TILE_H);
-                        initTile(t, w);
+                        initTile(t);
                         usedTiles.append(t);
                         }
                   }
