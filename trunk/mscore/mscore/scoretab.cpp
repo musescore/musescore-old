@@ -148,8 +148,6 @@ void ScoreTab::setCurrent(int n)
                         vs->addWidget(sv);
                         connect(v, SIGNAL(scaleChanged(double)), sv, SLOT(setScale(double)));
                         connect(v, SIGNAL(offsetChanged(double,double)), sv, SLOT(setOffset(double,double)));
-                        connect(v, SIGNAL(nextPage()), sv, SLOT(nextPage()));
-                        connect(v, SIGNAL(previousPage()), sv, SLOT(previousPage()));
                         const QTransform _matrix = v->matrix();
                         double _spatium = score->spatium();
                         double scale = _matrix.m11() * _spatium;

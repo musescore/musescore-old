@@ -1,3 +1,6 @@
+16.jan (ws)
+      - implement tile cache for omr scan image; this allows to show multipage scans
+        along the score
 15.jan (ws)
       - added photomode icon
       - new style parameter: ledger line length

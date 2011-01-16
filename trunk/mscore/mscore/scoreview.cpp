@@ -3606,7 +3606,6 @@ void ScoreView::pageNext()
       if (x < lx)
             x = lx;
       setOffset(x, 10.0);
-      emit nextPage();
       update();
       }
 
@@ -3623,7 +3622,6 @@ void ScoreView::pagePrev()
       if (x > 10.0)
             x = 10.0;
       setOffset(x, 10.0);
-      emit previousPage();
       update();
       }
 

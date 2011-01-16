@@ -57,7 +57,7 @@ endif (MINGW)
 
 if (OMR)
       set(OPENGL FALSE)
-      set(OCR    TRUE) # requires tesseract 3.0
+      set(OCR    FALSE) # requires tesseract 3.0
                        # for installation see: http://ubuntuforums.org/showthread.php?t=1647350
 else (OMR)
       set(OCR FALSE)

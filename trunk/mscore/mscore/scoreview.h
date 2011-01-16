@@ -265,8 +265,6 @@ class ScoreView : public QWidget {
       void viewRectChanged();
       void scaleChanged(double);
       void offsetChanged(double, double);
-      void nextPage();
-      void previousPage();
 
    public:
       ScoreView(QWidget* parent = 0);

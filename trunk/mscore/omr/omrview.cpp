@@ -49,25 +49,7 @@ OmrView::OmrView(ScoreView* sv, QWidget* parent)
       double m   = .25;
       _fotoMode  = false;
       _matrix = QTransform(m, 0.0, 0.0, m, 0.0, 0.0);
-      imatrix = _matrix.inverted();
-      }
-
-//---------------------------------------------------------
-//   nextPage
-//---------------------------------------------------------
-
-void OmrView::nextPage()
-      {
-      gotoPage(curPage + 2);
-      }
-
-//---------------------------------------------------------
-//   previousPage
-//---------------------------------------------------------
-
-void OmrView::previousPage()
-      {
-      gotoPage(curPage);
+      xoff = yoff = 0;
       }
 
 //---------------------------------------------------------
@@ -77,48 +59,55 @@ void OmrView::previousPage()
 void OmrView::setOmr(Omr* s)
       {
       delete _omr;
-      _omr = s;
-      curPage = -1;
-      gotoPage(1);
+      _omr    = s;
+      curPage = 0;
+      if (s == 0 || s->numPages() == 0) {
+            maxTiles = 0;
+            return;
+            }
+      int n = s->numPages();
+      OmrPage* page = _omr->page(curPage);
+      const QImage& i = page->image();
+      int htiles = (i.width() * n + TILE_W - 1) / TILE_W;
+      int vtiles = (i.height()    + TILE_H - 1) / TILE_H;
+      maxTiles   = htiles *  vtiles;
       }
 
 //---------------------------------------------------------
-//   gotoPage
-//    page number n is counting from 1
+//   initTile
 //---------------------------------------------------------
 
-void OmrView::gotoPage(int n)
+void OmrView::initTile(Tile* t, int pageWidth)
       {
-      if (n < 1)
-            n = 1;
-      if (n > _omr->numPages()) {
-            n = _omr->numPages();
-            }
-      if ((curPage + 1) == n)
+      int page1  = t->r.x() / pageWidth;
+      int page2  = (t->r.x() + TILE_W - 1) / pageWidth;
+      t->pm.fill(Qt::black);
+
+      int n = _omr->numPages();
+
+      if (page1 < 0)
+            page1 = 0;
+      if (page2 >= n)
+            page2 = n - 1;
+      if (page1 > n || page2 < 0)
             return;
-      curPage    = n - 1;
-      OmrPage* page = _omr->page(curPage);
-      const QImage& i = page->image();
-      int w = i.width();
-      int h = i.height();
-      //
-      // image size is limited in opengl renderer, so split image
-      // into four tiles:
-      //
-      //    0  1
-      //    3  2
-      //
-      pm[0] = QPixmap::fromImage(i.copy(0,   0,         w/2,     h/2));
-      pm[1] = QPixmap::fromImage(i.copy(w/2, 0,     w - w/2,     h/2));
-      pm[2] = QPixmap::fromImage(i.copy(w/2, h/2,   w - w/2, h - h/2));
-      pm[3] = QPixmap::fromImage(i.copy(0,   h/2,       w/2, h - h/2));
 
-      _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m13(), _matrix.m21(),
-         _matrix.m22(), _matrix.m23(), 0.0, 0.0, _matrix.m33());
-      imatrix = _matrix.inverted();
+      for (int pageNo = page1; pageNo <= page2; ++pageNo) {
+            OmrPage* op     = _omr->page(pageNo);
+            const QImage& i = op->image();
+            int xoffset     = 0; // (pageWidth - i.width()) / 2;
+            int x           = t->r.x() - (pageNo * pageWidth) - xoffset;
+            t->pm           = QPixmap::fromImage(i.copy(x, t->r.y(), TILE_W, TILE_H));
+            }
+      }
 
-      update();
-      emit pageNumberChanged(curPage + 1);
+//---------------------------------------------------------
+//   Tile
+//---------------------------------------------------------
+
+Tile::Tile()
+   : no(0), r(0, 0, TILE_W, TILE_H), pm(TILE_W, TILE_H)
+      {
       }
 
 //---------------------------------------------------------
@@ -138,19 +127,77 @@ void OmrView::paintEvent(QPaintEvent* event)
       p.setRenderHint(QPainter::TextAntialiasing, true);
       p.setRenderHint(QPainter::NonCosmeticDefaultPen, true);
 
-      const QVector<QRect>& vector = event->region().rects();
-      foreach(const QRect& r, vector) {
-            QRectF rr = imatrix.mapRect(QRectF(r));
-            QRectF pr(pm[0].rect());
-            if (rr.intersects(pr))
-                  p.drawPixmap(0, 0, pm[0]);
-            if (rr.intersects(pr.translated(pr.width(), 0.0)))
-                  p.drawPixmap(pr.width(), 0.0, pm[1]);
-            if (rr.intersects(pr.translated(pr.width(), pr.height())))
-                  p.drawPixmap(pr.width(), pr.height(), pm[2]);
-            if (rr.intersects(pr.translated(0.0, pr.height())))
-                  p.drawPixmap(0.0, pr.height(), pm[3]);
+      QRect r(event->rect());
+
+      //
+      // remove unused tiles
+      //
+      QRectF rr = _matrix.inverted().mapRect(QRectF(r));
+      QList<Tile*> nl;
+      foreach(Tile* t, usedTiles) {
+            if (t->r.intersects(rr.toRect()))
+                  nl.append(t);
+            else
+                  freeTiles.append(t);
             }
+      usedTiles.swap(nl);
+      //
+      // add visible tiles
+      //
+      Score* score = _scoreView->score();
+      const PageFormat* pf = score->pageFormat();
+
+      double sSpatium = score->spatium();
+      double spatium  = _omr->spatium();
+      double mag      = spatium / sSpatium;
+
+      int w = lrint(pf->width()  * mag * DPI);
+      w     = ((w + TILE_W - 1) / TILE_W) * TILE_W;
+      int h = lrint(pf->height() * mag * DPI);
+      int n = _omr->numPages();
+
+      int nx = (w * n + TILE_W - 1) / TILE_W;
+      int ny = (h + TILE_H - 1) / TILE_H;
+
+      int y1 = rr.y() / TILE_H;
+      int y2 = (rr.y() + rr.height() + TILE_H - 1) / TILE_H;
+      int x1 = rr.x() / TILE_W;
+      int x2 = (rr.x() + rr.width() + TILE_W -1) / TILE_W;
+
+      if (x1 < 0)
+            x1 = 0;
+      if (y1 < 0)
+            y1 = 0;
+      if (x2 > nx)
+            x2 = nx;
+      if (y2 > ny)
+            y2 = ny;
+
+      for (int y = y1; y < y2; ++y) {
+            for (int x = x1; x < x2; ++x) {
+                  int no = nx * y + x;
+                  if (no < 0 || no >= maxTiles)
+                        continue;
+                  int i;
+                  for (i = 0; i < usedTiles.size(); ++i) {
+                        if (usedTiles[i]->no == no)
+                              break;
+                        }
+                  if (i == usedTiles.size()) {
+                        // create new tile
+                        Tile* t = freeTiles.isEmpty() ? new Tile : freeTiles.pop();
+                        t->no = no;
+                        t->r  = QRect(x * TILE_W, y * TILE_H, TILE_W, TILE_H);
+                        initTile(t, w);
+                        usedTiles.append(t);
+                        }
+                  }
+            }
+
+      foreach(Tile* t, usedTiles)
+            p.drawPixmap(t->r.x(), t->r.y(), t->pm);
+
+#if 0
       OmrPage* page = _omr->page(curPage);
 
       if (showLines) {
@@ -177,7 +224,10 @@ void OmrView::paintEvent(QPaintEvent* event)
                   p.drawLine(l);
                   }
             }
+#endif
+
       if (fotoMode()) {
+            // TODO
             p.setBrush(QColor(0, 0, 50, 50));
             QPen pen(QColor(0, 0, 255));
             // always 2 pixel width
@@ -185,9 +235,6 @@ void OmrView::paintEvent(QPaintEvent* event)
             pen.setWidthF(w);
             p.setPen(pen);
             p.drawRect(_foto);
-            // draw grips:
-            // QRectF grips[8];
-
             }
       }
 
@@ -210,16 +257,14 @@ void OmrView::mouseMoveEvent(QMouseEvent* e)
             QPoint delta = e->pos() - startDrag;
             int dx       = delta.x();
             int dy       = delta.y();
+            xoff += dx;
+            yoff += dy;
             _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m13(), _matrix.m21(),
                _matrix.m22(), _matrix.m23(), _matrix.dx()+dx, _matrix.dy()+dy, _matrix.m33());
-            imatrix = _matrix.inverted();
 
             scroll(dx, dy, QRect(0, 0, width(), height()));
             startDrag = e->pos();
             }
-      QPoint pt = imatrix.map(QPointF(e->pos())).toPoint();
-      emit xPosChanged(pt.x());
-      emit yPosChanged(pt.y());
       }
 
 //---------------------------------------------------------
@@ -236,7 +281,6 @@ void OmrView::setMag(double nmag)
 
       _matrix.setMatrix(nmag, _matrix.m12(), _matrix.m13(), _matrix.m21(),
          nmag, _matrix.m23(), _matrix.dx()*deltamag, _matrix.dy()*deltamag, _matrix.m33());
-      imatrix = _matrix.inverted();
       }
 
 //---------------------------------------------------------
@@ -245,6 +289,7 @@ void OmrView::setMag(double nmag)
 
 void OmrView::zoom(int step, const QPoint& pos)
       {
+      QTransform imatrix(_matrix.inverted());
       QPointF p1 = imatrix.map(QPointF(pos));
       double _scale = mag();
       if (step > 0) {
@@ -268,7 +313,6 @@ void OmrView::zoom(int step, const QPoint& pos)
 
       _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m13(), _matrix.m21(),
          _matrix.m22(), _matrix.m23(), _matrix.dx()+dx, _matrix.dy()+dy, _matrix.m33());
-      imatrix = _matrix.inverted();
       scroll(dx, dy, QRect(0, 0, width(), height()));
       update();
       }
@@ -307,8 +351,6 @@ void OmrView::wheelEvent(QWheelEvent* event)
 
       _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m13(), _matrix.m21(),
          _matrix.m22(), _matrix.m23(), _matrix.dx()+dx, _matrix.dy()+dy, _matrix.m33());
-      imatrix = _matrix.inverted();
-
       scroll(dx, dy, QRect(0, 0, width(), height()));
       }
 
@@ -329,24 +371,18 @@ void OmrView::setScale(double v)
 
 void OmrView::setOffset(double x, double y)
       {
-      Score* score = _omr->score();
-      const QList<Page*>& pages = score->pages();
+      Score* score    = _omr->score();
       double sSpatium = score->spatium() * _scoreView->matrix().m11();
+      double spatium  = _omr->spatium() * _matrix.m11();
 
-      int pageNo = curPage >= pages.size() ? pages.size()-1 : curPage;
-
-      double pageX = pages[pageNo]->canvasPos().x() * _scoreView->matrix().m11();
-
-      double spatium = _omr->spatium() * _matrix.m11();
-
-      double nx = (x + pageX) / sSpatium * spatium;
-      double ny = y / sSpatium * spatium;
+      double nx = x / sSpatium * spatium + xoff;
+      double ny = y / sSpatium * spatium + yoff;
 
       double ox = _matrix.dx();
       double oy = _matrix.dy();
+
       _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m13(), _matrix.m21(),
          _matrix.m22(), _matrix.m23(), nx, ny, _matrix.m33());
-      imatrix = _matrix.inverted();
 
       scroll(ox-nx, oy-ny, QRect(0, 0, width(), height()));
       update();
