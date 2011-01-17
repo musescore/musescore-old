@@ -239,9 +239,11 @@ Element* Rest::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Eleme
                   nval.pitch = n->pitch();
                   nval.headGroup = n->headGroup();
                   Segment* seg = score()->setNoteRest(this, track(), nval, c->duration(), dir);
-                  ChordRest* cr = static_cast<ChordRest*>(seg->element(track()));
-                  if (cr)
-                        score()->nextInputPos(cr, true);
+                  if (seg) {
+                        ChordRest* cr = static_cast<ChordRest*>(seg->element(track()));
+                        if (cr)
+                              score()->nextInputPos(cr, true);
+                        }
                   delete e;
                   }
                   break;

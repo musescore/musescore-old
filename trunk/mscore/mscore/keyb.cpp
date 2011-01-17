@@ -295,7 +295,7 @@ static void enableInputToolbar(bool val)
 
 void Score::setInputState(Element* e)
       {
-printf("setInputState %s\n", e ? e->name() : "--");
+// printf("setInputState %s\n", e ? e->name() : "--");
       bool enable = e && (e->type() == NOTE || e->type() == REST);
       enableInputToolbar(enable);
       if (e == 0)

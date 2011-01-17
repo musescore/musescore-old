@@ -1784,9 +1784,11 @@ void Score::cmdEnterRest(const Duration& d)
       int track = _is.track();
       NoteVal nval;
       Segment* seg  = setNoteRest(_is.cr(), track, nval, d.fraction(), AUTO);
-      ChordRest* cr = static_cast<ChordRest*>(seg->element(track));
-      if (cr)
-            nextInputPos(cr, false);
+      if (seg) {
+            ChordRest* cr = static_cast<ChordRest*>(seg->element(track));
+            if (cr)
+                  nextInputPos(cr, false);
+            }
       _is.rest = false;  // continue with normal note entry
       endCmd();
       }
@@ -1796,6 +1798,7 @@ void Score::cmdEnterRest(const Duration& d)
 //    remove chord or rest
 //    remove associated segment if empty
 //    remove beam
+//    remove slurs
 //---------------------------------------------------------
 
 void Score::removeChordRest(ChordRest* cr, bool clearSegment)
@@ -1803,9 +1806,8 @@ void Score::removeChordRest(ChordRest* cr, bool clearSegment)
       undoRemoveElement(cr);
       if (clearSegment) {
             Segment* seg = cr->segment();
-            if (seg->isEmpty()) {
+            if (seg->isEmpty())
                   undoRemoveElement(seg);
-                  }
             }
       if (cr->beam()) {
             Beam* beam = cr->beam();
@@ -1813,9 +1815,8 @@ void Score::removeChordRest(ChordRest* cr, bool clearSegment)
                   beam->parent()->remove(beam);
                   delete beam;
                   }
-            else {
+            else
                   undoRemoveElement(beam);
-                  }
             }
       }
 

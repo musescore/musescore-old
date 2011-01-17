@@ -450,8 +450,11 @@ Note* Score::addPitch(int pitch, bool addFlag)
       nval.pitch = pitch;
       nval.headGroup = headGroup;
       Segment* seg = setNoteRest(_is.cr(), track, nval, _is.duration().fraction(), stemDirection);
-      Note* note = static_cast<Chord*>(seg->element(track))->upNote();
-      setLayout(note->chord()->measure());
+      Note* note = 0;
+      if (seg) {
+            note = static_cast<Chord*>(seg->element(track))->upNote();
+            setLayout(note->chord()->measure());
+            }
 
       if (_is.slur) {
             //

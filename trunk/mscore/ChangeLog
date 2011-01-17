@@ -1,4 +1,5 @@
 17.jan (ws)
+      - fix #8625: second note in a tie is silent when first note is deleted
       - #8701: implement full screen mode (toggled by Ctrl+U)
 16.jan (lv)
       - fix #8419: musicxml export: stem on whole note in triplet
