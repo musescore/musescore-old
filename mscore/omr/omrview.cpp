@@ -120,11 +120,11 @@ void OmrView::paintEvent(QPaintEvent* event)
 
       QPainter p(this);
       p.setTransform(_matrix);
-      p.setRenderHint(QPainter::SmoothPixmapTransform, true);
-      p.setRenderHint(QPainter::HighQualityAntialiasing, true);
-      p.setRenderHint(QPainter::Antialiasing, true);
-      p.setRenderHint(QPainter::TextAntialiasing, true);
-      p.setRenderHint(QPainter::NonCosmeticDefaultPen, true);
+//      p.setRenderHint(QPainter::SmoothPixmapTransform, true);
+//      p.setRenderHint(QPainter::HighQualityAntialiasing, true);
+//      p.setRenderHint(QPainter::Antialiasing, true);
+//      p.setRenderHint(QPainter::TextAntialiasing, true);
+//      p.setRenderHint(QPainter::NonCosmeticDefaultPen, true);
 
       QRect r(event->rect());
 
@@ -196,14 +196,14 @@ void OmrView::paintEvent(QPaintEvent* event)
 
       int minPage = 9000;
       int maxPage = 0;
-      foreach(Tile* t, usedTiles) {
-            p.drawPixmap(t->r.x(), t->r.y(), t->pm);
+      foreach(const Tile* t, usedTiles) {
+            p.drawPixmap(t->r, t->pm);
             if (t->pageNo < minPage)
                   minPage = t->pageNo;
             if (t->pageNo > maxPage)
                   maxPage = t->pageNo;
             }
-      for(int pageNo = minPage; pageNo <= maxPage; ++pageNo) {
+      for (int pageNo = minPage; pageNo <= maxPage; ++pageNo) {
             OmrPage* page = _omr->page(pageNo);
             p.save();
             p.translate(w * pageNo, 0);

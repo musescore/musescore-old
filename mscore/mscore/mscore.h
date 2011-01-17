@@ -279,6 +279,8 @@ class MuseScore : public QMainWindow {
       Style* _defaultStyle;
       Style* _baseStyle;
 
+      bool _fullscreen;
+
       //---------------------
 
       virtual void closeEvent(QCloseEvent*);

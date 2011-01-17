@@ -2373,9 +2373,18 @@ Shortcut MuseScore::sc[] = {
          "show-omr",
          QT_TRANSLATE_NOOP("action","show omr scan"),
 	   Qt::Key_O,
-         Qt::WindowShortcut,
+         Qt::ApplicationShortcut,
          QT_TRANSLATE_NOOP("action","show omr scan"),
          QT_TRANSLATE_NOOP("action","show omr scan")
+         ),
+      Shortcut(
+         STATE_ALL,
+         "fullscreen",
+         QT_TRANSLATE_NOOP("action","toggle fullscreen mode"),
+	   Qt::CTRL + Qt::Key_U,
+         Qt::ApplicationShortcut,
+         QT_TRANSLATE_NOOP("action","toggle fullscreen mode"),
+         QT_TRANSLATE_NOOP("action","toggle fullscreen mode")
          ),
       // xml==0  marks end of list
       Shortcut(0, 0, 0, QKeySequence::UnknownKey)
