@@ -1209,6 +1209,14 @@ RemoveElement::RemoveElement(Element* e)
                   score->undoRemoveElement(slur);
             if (cr->tuplet() && cr->tuplet()->elements().empty())
                   score->undoRemoveElement(cr->tuplet());
+            if (e->type() == CHORD) {
+                  Chord* chord = static_cast<Chord*>(e);
+                  foreach(Note* note, chord->notes()) {
+                        if (note->tieFor()) {
+                              note->tieFor()->endNote()->setTieBack(0);
+                              }
+                        }
+                  }
             }
       else if (element->type() == TUPLET) {
             Tuplet* tuplet = static_cast<Tuplet*>(element);
