@@ -3,6 +3,7 @@
       - #8701: implement full screen mode (toggled by Ctrl+U)
        (la)
       - fix #8750: Crashes with system containing only vertical box
+      - fix #6736: Preferences Menu disabled in non english. Avoid merging of menus.
 16.jan (lv)
       - fix #8419: musicxml export: stem on whole note in triplet
       - fix #8426: courtesy accidentals do not import/export in MusicXML anymore (0.9.6 regression)

@@ -65,6 +65,10 @@
 #include "mstyle/mstyle.h"
 #include "segment.h"
 
+#ifdef Q_WS_MAC
+void qt_mac_set_menubar_merge(bool enable);
+#endif
+
 #ifdef OSC
 #include "ofqf/qoscserver.h"
 static int oscPort = 5282;
@@ -1854,6 +1858,7 @@ int main(int argc, char* av[])
 
 #ifdef Q_WS_MAC
       MuseScoreApplication* app = new MuseScoreApplication("mscore1", argc, av);
+      qt_mac_set_menubar_merge(false);
 #else
       QtSingleApplication* app = new QtSingleApplication("mscore1", argc, av);
 #endif
