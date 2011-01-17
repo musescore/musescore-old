@@ -366,6 +366,7 @@ MuseScore::MuseScore()
       _horizontalSplit      = true;
       chordStyleEditor      = 0;
       _midiRecordId         = -1;
+      _fullscreen           = false;
       _defaultStyle         = new Style();
       setDefaultStyle(_defaultStyle);
       _baseStyle            = new Style(*_defaultStyle);
@@ -2394,6 +2395,13 @@ void MuseScore::cmd(QAction* a)
             editChordStyle();
       else if (cmd == "parts")
             startExcerptsDialog();
+      else if (cmd == "fullscreen") {
+            _fullscreen = !_fullscreen;
+            if (_fullscreen)
+                  showFullScreen();
+            else
+                  showNormal();
+            }
       else {
             if (cv) {
                   cv->setFocus();

@@ -413,19 +413,19 @@ Duration::Duration(const Fraction& _f)
             case 256:   _val = V_256TH; break;
             default:    _val = V_INVALID; break;
             }
-      
-      if(f.denominator() != 0) { 
+
+      if(f.denominator() != 0) {
             int v = f.numerator() / f.denominator();
             if(v == 4) {
                   _val = V_LONG;
                   return;
-                  } 
+                  }
             else if (v == 2) {
                   _val = V_BREVE;
                   return;
                   }
-            }            
-            
+            }
+
       if (f.numerator() != 1) {
             switch(f.numerator()) {
                   case 3:
@@ -438,7 +438,9 @@ Duration::Duration(const Fraction& _f)
                         break;
                   default:
                         printf("Duration(%d/%d): not implemented\n", f.numerator(), f.denominator());
-                        abort();
+                        _val = V_INVALID;
+                        _dots = 0;
+                        break;
                   }
             }
       }

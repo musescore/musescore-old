@@ -1,3 +1,5 @@
+17.jan (ws)
+      - #8701: implement full screen mode (toggled by Ctrl+U)
 16.jan (lv)
       - fix #8419: musicxml export: stem on whole note in triplet
       - fix #8426: courtesy accidentals do not import/export in MusicXML anymore (0.9.6 regression)
@@ -7,7 +9,7 @@
       - implement tile cache for omr scan image; this allows to show multipage scans
         along the score
        (la)
-      - fix #8719: Pickup measure messes up Lilypond export 
+      - fix #8719: Pickup measure messes up Lilypond export
 15.jan (ws)
       - added photomode icon
       - new style parameter: ledger line length
