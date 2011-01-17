@@ -1,3 +1,5 @@
+17.jan (la)
+      - fix #8750: Crashes with system containing only vertical box
 16.jan (lv)
       - iotest updates
        (la)

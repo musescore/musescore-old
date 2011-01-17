@@ -1437,7 +1437,7 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
             foreach (MeasureBase* mb, system->measures()) {
                   if (mb->type() == HBOX)
                         minWidth += point(((Box*)mb)->boxWidth());
-                  else {
+                  else if(mb->type() == MEASURE) {
                         Measure* m = (Measure*)mb;
                         if (needRelayout)
                               m->layoutX(1.0);
