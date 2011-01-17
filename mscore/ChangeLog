@@ -1,5 +1,6 @@
 17.jan (la)
       - fix #8750: Crashes with system containing only vertical box
+      - fix #6736: Preferences Menu disabled in non english. Avoid merging of menus.
 16.jan (lv)
       - iotest updates
        (la)
