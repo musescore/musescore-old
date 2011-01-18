@@ -181,11 +181,20 @@ QList<Prop> ChordRest::properties(Xml& xml, bool /*clipboardmode*/) const
             pl.append(Prop("leadingSpace", _extraLeadingSpace.val()));
       if (_extraTrailingSpace.val() != 0.0)
             pl.append(Prop("trailingSpace", _extraTrailingSpace.val()));
-      if (duration().dots())
-            pl.append(Prop("dots", duration().dots()));
       if (_staffMove)
             pl.append(Prop("move", _staffMove));
-      pl.append(Prop("durationType", duration().name()));
+      //
+      // for cut&paste we cannot handle full measure rests:
+      // convert to normal rest
+      // (BUG: this is not possible and will fail for measure durations which
+      // cannot be expressed by a single rest
+      //
+      Duration d(duration());
+      if (xml.clipboardmode && (d.type() == Duration::V_MEASURE))
+            d.setVal(ticks());
+      if (d.dots())
+            pl.append(Prop("dots", d.dots()));
+      pl.append(Prop("durationType", d.name()));
       return pl;
       }
 

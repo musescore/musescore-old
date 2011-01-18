@@ -554,12 +554,12 @@ void transposeInterval(int pitch, int tpc, int* rpitch, int* rtpc, Interval inte
       {
       *rpitch   = pitch + interval.chromatic;
       *rtpc = transposeTpc(tpc, interval, useDoubleSharpsFlats);
-      
+
       }
 
 /*!
  * Transposes a pitch spelling given an interval.
- * 
+ *
  * This function transposes a pitch spelling using first
  * a diatonic transposition and then calculating any accidentals.
  * This insures that the note is changed by the correct number of
@@ -624,7 +624,7 @@ int transposeTpc(int tpc, Interval interval, bool useDoubleSharpsFlats)
                   break;
             printf("  again alter %d steps %d, step %d\n", alter, steps, step);
             }
-      printf("  = step %d alter %d  tpc %d\n", step, alter, step2tpc(step, alter));
+//      printf("  = step %d alter %d  tpc %d\n", step, alter, step2tpc(step, alter));
       return step2tpc(step, alter);
       }
 
