@@ -1,4 +1,5 @@
 18.jan (ws)
+      - fix #8763: Tuplet number not spatium dependent
       - fix #8735: Beat corruption in copy paste of partial measure
 17.jan (la)
       - fix #8750: Crashes with system containing only vertical box
