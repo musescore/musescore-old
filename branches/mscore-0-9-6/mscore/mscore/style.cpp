@@ -272,7 +272,7 @@ const TextStyle defaultTextStyleArray[] = {
          ALIGN_HCENTER | ALIGN_TOP, 0, 6),
 
       TextStyle(QT_TRANSLATE_NOOP("MuseScore", "Tuplets"), ff,  8, false, false, false,
-         ALIGN_CENTER),
+         ALIGN_CENTER, 0.0,  0.0, OS, 0.0, 0.0, true),
 
       TextStyle(QT_TRANSLATE_NOOP("MuseScore", "System"), ff,  10, false, false, false,
          ALIGN_LEFT, 0, -4.0, OS, 0, 0, true,
