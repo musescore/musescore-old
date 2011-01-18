@@ -454,14 +454,14 @@ void MuseData::readRest(Part* part, const QString& s)
       Rest* rest = new Rest(score, d);
       rest->setDuration(d.fraction());
       chordRest  = rest;
-      rest->setTrack(staffIdx * VOICES);
+      rest->setTrack(gstaff * VOICES);
       Segment* segment = measure->getSegment(rest, tick);
 
       voice = 0;
       for (; voice < VOICES; ++voice) {
             Element* e = segment->element(gstaff * VOICES + voice);
             if (e == 0) {
-                  rest->setTrack(staffIdx * VOICES + voice);
+                  rest->setTrack(gstaff * VOICES + voice);
                   segment->add(rest);
                   break;
                   }
@@ -683,7 +683,8 @@ bool MuseData::read(const QString& name)
                               }
                         }
                   score->appendPart(mpart);
-                  mpart->setLongName(part[8]);
+                  if(part.size() > 8)
+                        mpart->setLongName(part[8]);
                   part.clear();
                   continue;
                   }
