@@ -48,7 +48,7 @@ Breath::Breath(Score* s)
 
 void Breath::layout()
       {
-      _bbox = symbols[score()->symIdx()][symList[subtype()]].bbox(mag());
+      _bbox = symbols[score()->symIdx()][symList[subtype()]].bbox(magS());
       }
 
 //---------------------------------------------------------
@@ -80,7 +80,7 @@ void Breath::read(QDomElement e)
 
 void Breath::draw(QPainter& p, ScoreView*) const
       {
-      symbols[score()->symIdx()][symList[subtype()]].draw(p, mag());
+      symbols[score()->symIdx()][symList[subtype()]].draw(p, magS());
       }
 
 //---------------------------------------------------------
