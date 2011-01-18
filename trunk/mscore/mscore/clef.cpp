@@ -79,6 +79,7 @@ Clef::Clef(Score* s)
       _small            = false;
       _clefTypes._concertClef     = CLEF_INVALID;
       _clefTypes._transposingClef = CLEF_INVALID;
+      Element::setSubtype(int(CLEF_INVALID));
       }
 
 Clef::Clef(const Clef& c)
@@ -449,31 +450,7 @@ void ClefList::read(QDomElement e, Score* cs)
             QString val(e.text());
             if (tag == "clef") {
                   int tick = e.attribute("tick", "0").toInt();
-                  int i = e.attribute("idx", "0").toInt();
-                  ClefType ct;
-                  switch (i) {
-                        default:
-                        case  0: ct = CLEF_G; break;
-                        case  1: ct = CLEF_G1; break;
-                        case  2: ct = CLEF_G2; break;
-                        case  3: ct = CLEF_G3; break;
-                        case  4: ct = CLEF_F; break;
-                        case  5: ct = CLEF_F8; break;
-                        case  6: ct = CLEF_F15; break;
-                        case  7: ct = CLEF_F_B; break;
-                        case  8: ct = CLEF_F_C; break;
-                        case  9: ct = CLEF_C1; break;
-                        case 10: ct = CLEF_C2; break;
-                        case 11: ct = CLEF_C3; break;
-                        case 12: ct = CLEF_C4; break;
-                        case 13: ct = CLEF_TAB; break;
-                        case 14: ct = CLEF_PERC; break;
-                        case 15: ct = CLEF_C5; break;
-                        case 16: ct = CLEF_G4; break;
-                        case 17: ct = CLEF_F_8VA; break;
-                        case 18: ct = CLEF_F_15MA; break;
-                        case 19: ct = CLEF_PERC2; break;
-                        }
+                  ClefType ct = Clef::clefType(e.attribute("idx", "0"));
                   (*this)[cs->fileDivision(tick)] = ClefTypeList(ct, ct);
                   }
             else
@@ -549,39 +526,8 @@ void Clef::read(QDomElement e)
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
-            if (tag == "subtype") {
-                  ClefType ct;
-                  bool ok;
-                  int i = val.toInt(&ok);
-                  if (!ok)
-                        ct = Clef::clefType(val);
-                  else {
-                        switch (i) {
-                              default:
-                              case  0: ct = CLEF_G; break;
-                              case  1: ct = CLEF_G1; break;
-                              case  2: ct = CLEF_G2; break;
-                              case  3: ct = CLEF_G3; break;
-                              case  4: ct = CLEF_F; break;
-                              case  5: ct = CLEF_F8; break;
-                              case  6: ct = CLEF_F15; break;
-                              case  7: ct = CLEF_F_B; break;
-                              case  8: ct = CLEF_F_C; break;
-                              case  9: ct = CLEF_C1; break;
-                              case 10: ct = CLEF_C2; break;
-                              case 11: ct = CLEF_C3; break;
-                              case 12: ct = CLEF_C4; break;
-                              case 13: ct = CLEF_TAB; break;
-                              case 14: ct = CLEF_PERC; break;
-                              case 15: ct = CLEF_C5; break;
-                              case 16: ct = CLEF_G4; break;
-                              case 17: ct = CLEF_F_8VA; break;
-                              case 18: ct = CLEF_F_15MA; break;
-                              case 19: ct = CLEF_PERC2; break;
-                              }
-                        }
-                  setClefType(ct);
-                  }
+            if (tag == "subtype")
+                  setClefType(clefType(val));
             else if (tag == "concertClefType")
                   _clefTypes._concertClef = Clef::clefType(val);
             else if (tag == "transposingClefType")
@@ -591,6 +537,8 @@ void Clef::read(QDomElement e)
             }
       if (score()->mscVersion() < 113)
             setUserOff(QPointF());
+      if (clefType() == CLEF_INVALID)
+            setClefType(CLEF_G);
       }
 
 //---------------------------------------------------------
@@ -646,11 +594,46 @@ void Clef::setSubtype(const QString& s)
 
 ClefType Clef::clefType(const QString& s)
       {
-      for (unsigned i = 0; i < sizeof(clefTable)/sizeof(*clefTable); ++i) {
-            if (clefTable[i].tag == s)
-                  return ClefType(i);
+      ClefType ct;
+      bool ok;
+      int i = s.toInt(&ok);
+      if (ok) {
+            //
+            // convert obsolete old coding
+            //
+            switch (i) {
+                  default:
+                  case  0: ct = CLEF_G; break;
+                  case  1: ct = CLEF_G1; break;
+                  case  2: ct = CLEF_G2; break;
+                  case  3: ct = CLEF_G3; break;
+                  case  4: ct = CLEF_F; break;
+                  case  5: ct = CLEF_F8; break;
+                  case  6: ct = CLEF_F15; break;
+                  case  7: ct = CLEF_F_B; break;
+                  case  8: ct = CLEF_F_C; break;
+                  case  9: ct = CLEF_C1; break;
+                  case 10: ct = CLEF_C2; break;
+                  case 11: ct = CLEF_C3; break;
+                  case 12: ct = CLEF_C4; break;
+                  case 13: ct = CLEF_TAB; break;
+                  case 14: ct = CLEF_PERC; break;
+                  case 15: ct = CLEF_C5; break;
+                  case 16: ct = CLEF_G4; break;
+                  case 17: ct = CLEF_F_8VA; break;
+                  case 18: ct = CLEF_F_15MA; break;
+                  case 19: ct = CLEF_PERC2; break;
+                  }
             }
-      return CLEF_INVALID;
+      else {
+            for (unsigned i = 0; i < sizeof(clefTable)/sizeof(*clefTable); ++i) {
+                  if (clefTable[i].tag == s) {
+                        ct = ClefType(i);
+                        break;
+                        }
+                  }
+            }
+      return ct;
       }
 
 //---------------------------------------------------------
