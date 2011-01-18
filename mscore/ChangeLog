@@ -1,4 +1,5 @@
 18.jan (ws)
+      - fix #8654 using a patch from Miwarre
       - fix #8763
       - for transposing instruments, different clefs for concert pitch can be set
         (#3128)
