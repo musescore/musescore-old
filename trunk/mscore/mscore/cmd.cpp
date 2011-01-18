@@ -2716,7 +2716,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                                     undoAddElement(segment);
                                     }
                               segment->add(clef);
-                              clef->staff()->setClef(segment->tick(), clef->clefType());
+                              clef->staff()->setClef(segment->tick(), clef->clefTypeList());
                               }
                         else if (tag == "Breath") {
                               Breath* breath = new Breath(this);

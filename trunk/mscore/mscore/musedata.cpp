@@ -97,7 +97,7 @@ void MuseData::musicalAttribute(QString s, Part* part)
                               break;
                         }
                   Staff* staff = part->staff(staffIdx);
-                  staff->clefList()->setClef(curTick, mscoreClef);
+                  staff->setClef(curTick, mscoreClef);
                   }
             else
                   printf("unknown $key <%s>\n", qPrintable(item));

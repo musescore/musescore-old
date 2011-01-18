@@ -201,7 +201,9 @@ Staff::~Staff()
 
 ClefType Staff::clef(int tick) const
       {
-      return _clefList->clef(tick);
+      ClefTypeList ctl = _clefList->clef(tick);
+      ClefType ct = score()->concertPitch() ? ctl._concertClef : ctl._transposingClef;
+      return ct;
       }
 
 //---------------------------------------------------------
@@ -398,9 +400,14 @@ void Staff::removeKey(int tick)
 //   setClef
 //---------------------------------------------------------
 
-void Staff::setClef(int tick, ClefType clef)
+void Staff::setClef(int tick, const ClefTypeList& cl)
       {
-      _clefList->setClef(tick, clef);
+      _clefList->setClef(tick, cl);
+      }
+
+void Staff::setClef(int tick, const ClefType& ct)
+      {
+      _clefList->setClef(tick, ClefTypeList(ct, ct));
       }
 
 //---------------------------------------------------------
@@ -547,7 +554,7 @@ void Staff::setStaffType(StaffType* st)
       //    check for right clef-type and fix
       //    if necessary
       //
-      ClefType ct = _clefList->clef(0);
+      ClefType ct = clef(0);
       StaffGroup csg = clefTable[ct].staffGroup;
 
       if (_staffType->group() != csg) {

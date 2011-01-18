@@ -1,3 +1,6 @@
+18.jan (ws)
+      - for transposing instruments, different clefs for concert pitch can be set
+        (#3128)
 17.jan (ws)
       - fix #8625: second note in a tie is silent when first note is deleted
       - #8701: implement full screen mode (toggled by Ctrl+U)

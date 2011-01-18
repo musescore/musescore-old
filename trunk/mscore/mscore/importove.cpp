@@ -835,8 +835,7 @@ void OveToMScore::convertSignatures(){
 				OVE::Track* track = ove_->getTrack(i, j);
 				ClefType clefType = OveClefToClef(track->getStartClef());
 				Measure* measure = score_->tick2measure(0);
-				ClefList* ct = staff->clefList();
-				(*ct)[0] = clefType;
+				staff->setClef(0, clefType);
 
    		        // note: also generate symbol for tick 0
 			    // was not necessary before 0.9.6
@@ -868,8 +867,7 @@ void OveToMScore::convertSignatures(){
 			            s->add(clef);
 
 						if(staff){
-							ClefList* ct = staff->clefList();
-							(*ct)[absTick] = clefType;
+                                          staff->setClef(absTick, clefType);
 						}
 					}
 				}

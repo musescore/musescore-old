@@ -840,7 +840,7 @@ void Score::convertMidi(MidiFile* mf)
             track->setStaff(s);
 
             if (track->isDrumTrack()) {
-                  s->clefList()->setClef(0, CLEF_PERC);
+                  s->setClef(0, CLEF_PERC);
                   part->instr()->setDrumset(smDrumset);
                   }
             else {
@@ -852,15 +852,16 @@ void Score::convertMidi(MidiFile* mf)
                         part->insertStaff(ss);
                         _staves.push_back(ss);
 
-                        s->clefList()->setClef(0, CLEF_G);
+                        s->setClef(0, CLEF_G);
                         s->setBracket(0, BRACKET_AKKOLADE);
                         s->setBracketSpan(0, 2);
-                        ss->clefList()->setClef(0, CLEF_F);
+                        ss->setClef(0, CLEF_F);
                         ++i;
                         tracks->at(i)->setStaff(ss);
                         }
                   else {
-                        s->clefList()->setClef(0, track->medPitch < 58 ? CLEF_F : CLEF_G);
+                        ClefType ct = track->medPitch < 58 ? CLEF_F : CLEF_G;
+                        s->setClef(0, ct);
                         }
                   }
             _parts.push_back(part);
@@ -1317,9 +1318,8 @@ printf("unmapped drum note 0x%02x %d\n", mn.pitch(), mn.pitch());
       ClefList* cl = cstaff->clefList();
       for (ciClefEvent i = cl->begin(); i != cl->end(); ++i) {
             int tick = i->first;
-            ClefType clefId  = i->second;
             Clef* clef = new Clef(this);
-            clef->setClefType(clefId);
+            clef->setClefType(i->second);
             clef->setTrack(staffIdx * VOICES);
             clef->setGenerated(false);
             clef->setMag(cstaff->mag());

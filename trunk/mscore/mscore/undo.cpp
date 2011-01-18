@@ -594,7 +594,28 @@ void Score::undoChangeClef(Staff* ostaff, int tick, ClefType st)
             Clef* clef   = static_cast<Clef*>(segment->element(track));
 
             if (clef) {
-                  score->undoChangeSubtype(clef, st);
+                  //
+                  // for transposing instruments, differentiate
+                  // clef type for concertPitch
+                  //
+                  Instrument* i = staff->part()->instr(tick);
+                  ClefType cp, tp;
+                  if (i->transpose().isZero()) {
+                        cp = st;
+                        tp = st;
+                        }
+                  else {
+                        bool concertPitch = score->concertPitch();
+                        if (concertPitch) {
+                              cp = st;
+                              tp = clef->transposingClef();
+                              }
+                        else {
+                              cp = clef->concertClef();
+                              tp = st;
+                              }
+                        }
+                  score->undo()->push(new ChangeClefType(clef, cp, tp));
                   }
             else {
                   Clef* nclef = new Clef(score);
@@ -1212,9 +1233,8 @@ RemoveElement::RemoveElement(Element* e)
             if (e->type() == CHORD) {
                   Chord* chord = static_cast<Chord*>(e);
                   foreach(Note* note, chord->notes()) {
-                        if (note->tieFor()) {
+                        if (note->tieFor())
                               note->tieFor()->endNote()->setTieBack(0);
-                              }
                         }
                   }
             }
@@ -1643,6 +1663,10 @@ void ChangeSubtype::flip()
       element->setSubtype(subtype);
       element->setGenerated(generated);
       if (element->type() == CLEF) {
+            //
+            // TODO: remove; should not be called anymore: replaced by
+            // ChangeClefType
+            //
             Clef* clef       = static_cast<Clef*>(element);
             Segment* segment = clef->segment();
             Staff* staff     = clef->staff();
@@ -3021,4 +3045,39 @@ void SwapCR::flip()
       s2->setElement(track, cr);
       cr1->score()->setLayoutAll(true);
       }
+
+//---------------------------------------------------------
+//   ChangeClefType
+//---------------------------------------------------------
+
+ChangeClefType::ChangeClefType(Clef* c, ClefType cl, ClefType tc)
+      {
+      clef            = c;
+      concertClef     = cl;
+      transposingClef = tc;
+      }
+
+//---------------------------------------------------------
+//   flip
+//---------------------------------------------------------
+
+void ChangeClefType::flip()
+      {
+      ClefType ocl = clef->concertClef();
+      ClefType otc = clef->transposingClef();
+
+      clef->setConcertClef(concertClef);
+      clef->setTransposingClef(transposingClef);
+      clef->setClefType(clef->score()->concertPitch() ? concertClef : transposingClef);
+
+      Segment* segment = clef->segment();
+      Staff* staff     = clef->staff();
+      staff->setClef(segment->tick(), clef->clefTypeList());
+      updateNoteLines(segment, clef->track());
+      clef->score()->setLayoutAll(true);
+
+      concertClef     = ocl;
+      transposingClef = otc;
+      }
+
 

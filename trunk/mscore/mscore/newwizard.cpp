@@ -694,9 +694,9 @@ QString NewWizardPage4::templatePath() const
 NewWizard::NewWizard(QWidget* parent)
    : QWizard(parent)
       {
-#if defined(Q_WS_WIN)      
+#if defined(Q_WS_WIN)
       setWizardStyle(QWizard::ClassicStyle);
-#endif   
+#endif
       setPixmap(QWizard::LogoPixmap, QPixmap(":/data/mscore.png"));
       setPixmap(QWizard::WatermarkPixmap, QPixmap(":/data/bg1.jpg"));
       setWindowTitle(tr("MuseScore: Create New Score"));

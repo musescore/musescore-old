@@ -36,50 +36,6 @@ class Segment;
 static const int NO_CLEF = -1000;
 
 //---------------------------------------------------------
-//   Clef
-///   Graphic representation of a clef.
-//---------------------------------------------------------
-
-class Clef : public Element {
-      QList<Element*> elements;
-      bool _showCourtesyClef;
-      bool _small;
-
-   public:
-      Clef(Score*);
-      Clef(const Clef&);
-      virtual Clef* clone() const      { return new Clef(*this); }
-      virtual ElementType type() const { return CLEF; }
-
-      virtual QPointF canvasPos() const;      ///< position in canvas coordinates
-      Segment* segment() const         { return (Segment*)parent(); }
-      Measure* measure() const         { return (Measure*)parent()->parent(); }
-
-      virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
-      virtual Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*);
-      virtual void layout();
-      virtual void draw(QPainter&, ScoreView*) const;
-      virtual Space space() const;
-      virtual void read(QDomElement);
-
-      void add(Element* e, double x, double y);
-      bool small() const                        { return _small; }
-      void setSmall(bool val);
-      int tick() const;
-
-      bool showCourtesyClef() const       { return _showCourtesyClef; };
-      void setShowCourtesyClef(bool v)    { _showCourtesyClef = v;    };
-      virtual bool genPropertyMenu(QMenu*) const;
-      virtual void propertyAction(ScoreView*, const QString&);
-
-      virtual const QString subtypeName() const;
-      virtual void setSubtype(const QString& s);
-      void setClefType(ClefType i)     { Element::setSubtype(int(i)); }
-      ClefType clefType() const        { return ClefType(subtype());  }
-      static ClefType clefType(const QString& s);
-      };
-
-//---------------------------------------------------------
 //   ClefInfo
 ///   Info about a clef.
 //---------------------------------------------------------
@@ -99,11 +55,25 @@ struct ClefInfo {
 extern const ClefInfo clefTable[];
 
 //---------------------------------------------------------
+//   ClefTypeList
+//---------------------------------------------------------
+
+struct ClefTypeList {
+      ClefType _concertClef;
+      ClefType _transposingClef;
+
+      ClefTypeList() {}
+      ClefTypeList(ClefType a, ClefType b) : _concertClef(a), _transposingClef(b) {}
+      bool operator==(const ClefTypeList& t) const;
+      bool operator!=(const ClefTypeList& t) const;
+      };
+
+//---------------------------------------------------------
 //   ClefList
 //---------------------------------------------------------
 
-typedef std::map<const int, ClefType>::iterator iClefEvent;
-typedef std::map<const int, ClefType>::const_iterator ciClefEvent;
+typedef std::map<const int, ClefTypeList>::iterator iClefEvent;
+typedef std::map<const int, ClefTypeList>::const_iterator ciClefEvent;
 
 /**
  List of Clefs during time.
@@ -112,14 +82,68 @@ typedef std::map<const int, ClefType>::const_iterator ciClefEvent;
  to keep track of clef changes.
 */
 
-class ClefList : public std::map<const int, ClefType> {
+class ClefList : public std::map<const int, ClefTypeList> {
    public:
       ClefList() {}
-      ClefType clef(int tick) const;
-      void setClef(int tick, ClefType idx);
+      ClefTypeList clef(int tick) const;
+      void setClef(int tick, const ClefTypeList&);
       void read(QDomElement, Score*);
       void removeTime(int, int);
       void insertTime(int, int);
+      };
+
+//---------------------------------------------------------
+//   Clef
+///   Graphic representation of a clef.
+//---------------------------------------------------------
+
+class Clef : public Element {
+      QList<Element*> elements;
+      bool _showCourtesyClef;
+      bool _small;
+
+      ClefTypeList _clefTypes;
+
+   public:
+      Clef(Score*);
+      Clef(const Clef&);
+      virtual Clef* clone() const      { return new Clef(*this); }
+      virtual ElementType type() const { return CLEF; }
+
+      virtual QPointF canvasPos() const;      ///< position in canvas coordinates
+      Segment* segment() const         { return (Segment*)parent(); }
+      Measure* measure() const         { return (Measure*)parent()->parent(); }
+
+      virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
+      virtual Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*);
+      virtual void layout();
+      virtual void draw(QPainter&, ScoreView*) const;
+      virtual Space space() const;
+      virtual void read(QDomElement);
+      virtual void write(Xml&) const;
+
+      void add(Element* e, double x, double y);
+      bool small() const                        { return _small; }
+      void setSmall(bool val);
+      int tick() const;
+
+      bool showCourtesyClef() const       { return _showCourtesyClef; };
+      void setShowCourtesyClef(bool v)    { _showCourtesyClef = v;    };
+      virtual bool genPropertyMenu(QMenu*) const;
+      virtual void propertyAction(ScoreView*, const QString&);
+
+      virtual const QString subtypeName() const;
+      virtual void setSubtype(const QString& s);
+      static ClefType clefType(const QString& s);
+
+      ClefType clefType() const             { return ClefType(subtype());         }
+      ClefTypeList clefTypeList() const     { return _clefTypes;                  }
+      ClefType concertClef() const          { return _clefTypes._concertClef;     }
+      ClefType transposingClef() const      { return _clefTypes._transposingClef; }
+      void setConcertClef(ClefType val)     { _clefTypes._concertClef = val;      }
+      void setTransposingClef(ClefType val) { _clefTypes._transposingClef = val;  }
+      void setClefType(ClefType i);
+      void setClefType(const ClefTypeList& ctl) { _clefTypes = ctl; }
       };
 
 #endif

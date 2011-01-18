@@ -453,7 +453,7 @@ void Inspector::updateElement(Element* el)
                   case CHORD:         ew = new ShowChordWidget;   break;
                   case NOTE:          ew = new ShowNoteWidget;    break;
                   case REST:          ew = new ShowRestWidget;    break;
-                  case CLEF:          ew = new ShowClefWidget;    break;
+                  case CLEF:          ew = new ClefView;          break;
                   case TIMESIG:       ew = new ShowTimesigWidget; break;
                   case KEYSIG:        ew = new ShowKeysigWidget;  break;
                   case SEGMENT:       ew = new SegmentView;       break;
@@ -1175,40 +1175,6 @@ void ShowRestWidget::beamClicked()
 void ShowRestWidget::tupletClicked()
       {
       emit elementChanged(static_cast<Rest*>(element())->tuplet());
-      }
-
-//---------------------------------------------------------
-//   ShowClefWidget
-//---------------------------------------------------------
-
-ShowClefWidget::ShowClefWidget()
-   : ShowElementBase()
-      {
-      QFrame* line = new QFrame(this);
-      line->setFrameStyle(QFrame::HLine | QFrame::Raised);
-      line->setLineWidth(1);
-      layout->addWidget(line);
-
-      QHBoxLayout* hb = new QHBoxLayout;
-      idx = new QSpinBox(this);
-      idx->setRange(0, 1000000);
-      hb->addWidget(new QLabel(tr("Clef Type:"), this));
-      hb->addWidget(idx);
-      hb->addStretch(100);
-
-      layout->addLayout(hb);
-      layout->addStretch(100);
-      }
-
-//---------------------------------------------------------
-//   setElement
-//---------------------------------------------------------
-
-void ShowClefWidget::setElement(Element* e)
-      {
-      Clef* clef = (Clef*)e;
-      ShowElementBase::setElement(e);
-      idx->setValue(clef->subtype());
       }
 
 //---------------------------------------------------------
@@ -2167,4 +2133,35 @@ void AccidentalView::setElement(Element* e)
       acc.accAuto->setChecked(s->role() == ACC_AUTO);
       acc.accUser->setChecked(s->role() == ACC_USER);
       }
+
+//---------------------------------------------------------
+//   ClefView
+//---------------------------------------------------------
+
+ClefView::ClefView()
+   : ShowElementBase()
+      {
+      QWidget* w = new QWidget;
+      clef.setupUi(w);
+      layout->addWidget(w);
+      layout->addStretch(10);
+      }
+
+//---------------------------------------------------------
+//   setElement
+//---------------------------------------------------------
+
+void ClefView::setElement(Element* e)
+      {
+      Clef* c = static_cast<Clef*>(e);
+      ShowElementBase::setElement(e);
+
+      clef.clefType->setValue(c->subtype());
+      clef.showCourtesyClef->setChecked(c->showCourtesyClef());
+      clef.small->setChecked(c->small());
+
+      clef.concertClef->setValue(int(c->concertClef()));
+      clef.transposingClef->setValue(int(c->transposingClef()));
+      }
+
 

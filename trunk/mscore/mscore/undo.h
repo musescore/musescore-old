@@ -1558,6 +1558,23 @@ class SwapCR : public UndoCommand {
       UNDO_NAME("SwapCR");
       };
 
+//---------------------------------------------------------
+//   ChangeClefType
+//---------------------------------------------------------
+
+class ChangeClefType : public UndoCommand {
+      Clef* clef;
+      ClefType concertClef;
+      ClefType transposingClef;
+      void flip();
+
+   public:
+      ChangeClefType(Clef*, ClefType cl, ClefType tc);
+      virtual void undo() { flip(); }
+      virtual void redo() { flip(); }
+      UNDO_NAME("ChangeClef");
+      };
+
 
 #endif
 

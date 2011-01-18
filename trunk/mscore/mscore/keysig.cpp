@@ -131,7 +131,7 @@ void KeySig::layout()
       int yoff = 0;
       int clef = 0;
       if (staff()) {
-            clef = staff()->clefList()->clef(tick());
+            clef = staff()->clef(tick());
             yoff = clefTable[clef].yOffset;
             }
 

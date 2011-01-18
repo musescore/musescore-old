@@ -41,6 +41,7 @@ class StaffType;
 class StaffTypeTablature;
 class Staff;
 class Tablature;
+struct ClefTypeList;
 
 //---------------------------------------------------------
 //   LinkedStaves
@@ -118,7 +119,7 @@ class Staff {
       void setRstaff(int n)          { _rstaff = n;    }
       void read(QDomElement);
       void write(Xml& xml) const;
-      Instrument* instrument() const;
+//      Instrument* instrument() const;
       Part* part() const             { return _part;        }
 
       int bracket(int idx) const;
@@ -133,7 +134,8 @@ class Staff {
       KeyList* keymap() const        { return _keymap;      }
       ClefList* clefList() const     { return _clefList;    }
       ClefType clef(int tick) const;
-      void setClef(int tick, ClefType clef);
+      void setClef(int tick, const ClefTypeList&);
+      void setClef(int tick, const ClefType&);
       KeySigEvent key(int tick) const;
       void setKey(int tick, int st);
       void setKey(int tick, const KeySigEvent& st);

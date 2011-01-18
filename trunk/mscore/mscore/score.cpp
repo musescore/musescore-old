@@ -570,7 +570,7 @@ int Score::readScore(QString name)
                               continue;
                         if ((s->subtype() == SegClef) && st->updateClefList()) {
                               Clef* clef = static_cast<Clef*>(e);
-                              st->setClef(s->tick(), clef->clefType());
+                              st->setClef(s->tick(), clef->clefTypeList());
                               }
                         else if ((s->subtype() == SegKeySig) && st->updateKeymap()) {
                               KeySig* ks = static_cast<KeySig*>(e);
@@ -986,7 +986,7 @@ MeasureBase* Score::pos2measure(const QPointF& p, int* rst, int* pitch,
                   *rst = i;
                   if (pitch) {
                         Staff* s = _staves[i];
-                        int clef = s->clefList()->clef(segment->tick());
+                        int clef = s->clef(segment->tick());
                         *pitch = y2pitch(pppp.y() - sstaff->bbox().y(), clef, s->spatium());
                         }
                   if (offset)
@@ -1660,7 +1660,7 @@ bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
             }
       else {
             int minLine = pitch2line(0);
-            int clef    = s->clefList()->clef(pos->segment->tick());
+            int clef    = s->clef(pos->segment->tick());
             minLine     = 127 - minLine - 82 + clefTable[clef].yOffset;
             int maxLine = pitch2line(127);
             maxLine     = 127 - maxLine - 82 + clefTable[clef].yOffset;
@@ -1877,7 +1877,7 @@ void Score::addElement(Element* element)
                   Clef* clef       = static_cast<Clef*>(element);
                   Segment* segment = clef->segment();
                   Staff* staff     = clef->staff();
-                  staff->setClef(segment->tick(), clef->clefType());
+                  staff->setClef(segment->tick(), clef->clefTypeList());
                   updateNoteLines(segment, clef->track());
                   }
                   break;
@@ -2428,7 +2428,7 @@ Score* Score::clone()
                               continue;
                         if ((s->subtype() == SegClef) && st->updateClefList()) {
                               Clef* clef = static_cast<Clef*>(e);
-                              st->setClef(s->tick(), clef->clefType());
+                              st->setClef(s->tick(), clef->clefTypeList());
                               }
                         else if ((s->subtype() == SegKeySig) && st->updateKeymap()) {
                               KeySig* ks = static_cast<KeySig*>(e);

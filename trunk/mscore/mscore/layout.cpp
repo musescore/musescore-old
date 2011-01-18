@@ -112,7 +112,7 @@ ChordRest* Score::searchNote(int tick, int track) const
 
 int Score::clefOffset(int tick, Staff* staff) const
       {
-      return clefTable[staff->clefList()->clef(tick)].yOffset;
+      return clefTable[staff->clef(tick)].yOffset;
       }
 
 //---------------------------------------------------------
@@ -636,7 +636,7 @@ void Score::doLayout()
                                     continue;
                               if ((s->subtype() == SegClef) && st->updateClefList()) {
                                     Clef* clef = static_cast<Clef*>(e);
-                                    st->setClef(s->tick(), clef->clefType());
+                                    st->setClef(s->tick(), clef->clefTypeList());
                                     }
                               else if ((s->subtype() == SegKeySig) && st->updateKeymap()) {
                                     KeySig* ks = static_cast<KeySig*>(e);
@@ -841,7 +841,7 @@ void Score::processSystemHeader(Measure* m, bool isFirstSystem)
                   }
             bool needClef = isFirstSystem || styleB(ST_genClef);
             if (needClef) {
-                  ClefType idx = staff->clefList()->clef(tick);
+                  ClefType idx = staff->clef(tick);
                   if (!hasClef) {
                         //
                         // create missing clef
