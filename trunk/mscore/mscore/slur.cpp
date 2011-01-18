@@ -608,7 +608,7 @@ void SlurTie::slurPos(SlurPos* sp)
       xo = hw * .5;
       yo = 0.0;
       if (isTie && ec->notes().size() > 1) {
-            xo = hw * 1.12;
+            xo = - hw * 0.12;
             yo = note2->pos().y() + hw * .3 * _up;
             }
       else {
