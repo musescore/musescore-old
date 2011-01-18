@@ -1,6 +1,8 @@
 18.jan (ws)
       - fix #8763: Tuplet number not spatium dependent
       - fix #8735: Beat corruption in copy paste of partial measure
+       (la)
+      - fix #6547: File association on Mac. Add bww, cap, sgu, mgu, mid, ove, md, and MusicXML.
 17.jan (la)
       - fix #8750: Crashes with system containing only vertical box
       - fix #6736: Preferences Menu disabled in non english. Avoid merging of menus.
