@@ -91,7 +91,7 @@ QT4_WRAP_UI (ui_headers
       harmonyedit.ui selectinstr.ui tremolo.ui fretdprops.ui stafftype.ui
       sectionbreak.ui hairpinproperties.ui spanner.ui bend.ui tremolobar.ui
       textproperties.ui editpitch.ui editstringdata.ui slursegment.ui
-      accidental.ui
+      accidental.ui clef.ui
       )
 
 QT4_WRAP_CPP (mocs

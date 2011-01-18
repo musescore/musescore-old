@@ -2704,7 +2704,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             cr->setVisible(printObject == "yes");
             if (step != "" && 0 <= octave && octave <= 9) {
                   printf("rest step=%s oct=%d", qPrintable(step), octave);
-                  int clef = cr->staff()->clefList()->clef(tick);
+                  ClefType clef = cr->staff()->clefList()->clef(tick)._transposingClef;
                   int po = clefTable[clef].pitchOffset;
                   int istep = step[0].toAscii() - 'A';
                   printf(" clef=%d po=%d istep=%d\n", clef, po, istep);
@@ -3408,8 +3408,7 @@ void MusicXml::xmlClef(QDomElement e, int staffIdx, Measure* measure)
       else
             printf("ImportMusicXML: unknown clef <sign=%s line=%d oct ch=%d>\n", qPrintable(c), line, i);
       Staff* part = score->staff(staffIdx + clefno);
-      ClefList* ct = part->clefList();
-      (*ct)[tick] = clef;
+      part->setClef(tick, clef);
       // note: also generate symbol for tick 0
       // was not necessary before 0.9.6
       Clef* clefs = new Clef(score);

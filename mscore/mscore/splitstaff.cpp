@@ -66,7 +66,7 @@ void Score::splitStaff(int staffIdx, int splitPoint)
       int rstaff = s->rstaff();
       Staff* ns = new Staff(this, p, rstaff + 1);
       ns->setRstaff(rstaff + 1);
-      ns->clefList()->setClef(0, CLEF_F);
+      ns->setClef(0, CLEF_F);
 
       undoInsertStaff(ns, staffIdx+1);
 

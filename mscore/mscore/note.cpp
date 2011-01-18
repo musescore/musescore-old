@@ -1368,7 +1368,7 @@ void Note::layout10(char* tversatz)
             //
             Staff* s = score()->staff(staffIdx() + chord()->staffMove());
             int tick = chord()->tick();
-            int clef = s->clefList()->clef(tick);
+            int clef = s->clef(tick);
             _line    = 127 - _line - 82 + clefTable[clef].yOffset;
             }
       }
@@ -1606,7 +1606,7 @@ void Note::updateAccidental(char* tversatz)
       //
       Staff* s = score()->staff(staffIdx() + chord()->staffMove());
       int tick = chord()->tick();
-      int clef = s->clefList()->clef(tick);
+      int clef = s->clef(tick);
       _line    = 127 - _line - 82 + clefTable[clef].yOffset;
       }
 
@@ -1624,7 +1624,7 @@ void Note::updateLine()
             _line -= (tpcPitch/12)*7;
       Staff* s = score()->staff(staffIdx() + chord()->staffMove());
       int tick = chord()->tick();
-      int clef = s->clefList()->clef(tick);
+      int clef = s->clef(tick);
       _line    = 127 - _line - 82 + clefTable[clef].yOffset;
       }
 

@@ -34,6 +34,7 @@
 #include "utils.h"
 #include "segment.h"
 #include "stafftype.h"
+#include "clef.h"
 
 //---------------------------------------------------------
 //   keydiff2Interval
@@ -331,6 +332,14 @@ void Score::cmdConcertPitchChanged(bool flag, bool useDoubleSharpsFlats)
             if (!flag)
                   interval.flip();
             cmdTransposeStaff(staff->idx(), interval, useDoubleSharpsFlats);
+            }
+      for (Segment* s = firstMeasure()->first(SegClef); s; s = s->next1(SegClef)) {
+            for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
+                  Clef* clef = static_cast<Clef*>(s->element(staffIdx * VOICES));
+                  if (!clef)
+                        continue;
+                  clef->setClefType(flag ? clef->concertClef() : clef->transposingClef());
+                  }
             }
       }
 

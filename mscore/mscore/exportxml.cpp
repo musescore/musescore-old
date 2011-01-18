@@ -1235,7 +1235,7 @@ void ExportMusicXml::pitch2xml(Note* note, char& c, int& alter, int& octave)
 
       int tick   = note->chord()->tick();
       Staff* i   = note->staff();
-      int clef   = i->clefList()->clef(tick);
+      ClefType clef   = i->clefList()->clef(tick)._transposingClef;
       int offset = clefTable[clef].yOffset;
 
       int step   = (note->line() - offset + 700) % 7;
@@ -1299,7 +1299,7 @@ void ExportMusicXml::unpitch2xml(Note* note, char& c, int& octave)
 
           int tick   = note->chord()->tick();
           Staff* i   = note->staff();
-          int offset = clefTable[i->clefList()->clef(tick)].yOffset;
+          int offset = clefTable[i->clefList()->clef(tick)._transposingClef].yOffset;
 
           int step   = (note->line() - offset + 700) % 7;
           c          = table1[step];
@@ -2306,7 +2306,7 @@ void ExportMusicXml::rest(Rest* rest, int staff)
       int    yOffsSt = - 2 * int(yOffsSp > 0.0 ? yOffsSp + 0.5 : yOffsSp - 0.5); // same rounded to int (positive = up)
 //      printf(" yshift=%g", yOffsSp);
 //      printf(" (up %d steps)", yOffsSt);
-      int clef = rest->staff()->clefList()->clef(rest->tick());
+      ClefType clef = rest->staff()->clefList()->clef(rest->tick())._transposingClef;
       int po = clefTable[clef].pitchOffset;
       po -= 4;          // pitch middle staff line (two lines times two steps lower than top line)
       po += yOffsSt;    // rest "pitch"

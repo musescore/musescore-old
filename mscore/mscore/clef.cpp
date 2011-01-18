@@ -76,14 +76,17 @@ Clef::Clef(Score* s)
   : Element(s)
       {
       _showCourtesyClef = true;
-      _small = false;
+      _small            = false;
+      _clefTypes._concertClef     = CLEF_INVALID;
+      _clefTypes._transposingClef = CLEF_INVALID;
       }
 
 Clef::Clef(const Clef& c)
    : Element(c)
       {
       _showCourtesyClef = c._showCourtesyClef;
-      _small = c._small;
+      _small            = c._small;
+      _clefTypes        = c._clefTypes;
       }
 
 //---------------------------------------------------------
@@ -382,16 +385,34 @@ void Clef::propertyAction(ScoreView* viewer, const QString& s)
       }
 
 //---------------------------------------------------------
+//   ClefTypeList::operator==
+//---------------------------------------------------------
+
+bool ClefTypeList::operator==(const ClefTypeList& t) const
+      {
+      return t._concertClef == _concertClef && t._transposingClef == _transposingClef;
+      }
+
+//---------------------------------------------------------
+//   ClefTypeList::operator!=
+//---------------------------------------------------------
+
+bool ClefTypeList::operator!=(const ClefTypeList& t) const
+      {
+      return t._concertClef != _concertClef || t._transposingClef != _transposingClef;
+      }
+
+//---------------------------------------------------------
 //   clef
 //---------------------------------------------------------
 
-ClefType ClefList::clef(int tick) const
+ClefTypeList ClefList::clef(int tick) const
       {
       if (empty())
-            return CLEF_G;
+            return ClefTypeList(CLEF_G, CLEF_G);
       ciClefEvent i = upper_bound(tick);
       if (i == begin())
-            return CLEF_G;
+            return ClefTypeList(CLEF_G, CLEF_G);
       --i;
       return i->second;
       }
@@ -400,9 +421,9 @@ ClefType ClefList::clef(int tick) const
 //   setClef
 //---------------------------------------------------------
 
-void ClefList::setClef(int tick, ClefType idx)
+void ClefList::setClef(int tick, const ClefTypeList& idx)
       {
-      std::pair<int, ClefType> clef(tick, idx);
+      std::pair<int, ClefTypeList> clef(tick, idx);
       std::pair<iClefEvent,bool> p = insert(clef);
       if (!p.second)
             (*this)[tick] = idx;
@@ -416,20 +437,6 @@ void ClefList::setClef(int tick, ClefType idx)
             i = ii;
             }
       }
-
-#if 0
-//---------------------------------------------------------
-//   ClefList::write
-//---------------------------------------------------------
-
-void ClefList::write(Xml& xml, const char* name) const
-      {
-      xml.stag(name);
-      for (ciClefEvent i = begin(); i != end(); ++i)
-            xml.tagE("clef tick=\"%d\" idx=\"%d\"", i->first, i->second);
-      xml.etag();
-      }
-#endif
 
 //---------------------------------------------------------
 //   ClefList::read
@@ -467,7 +474,7 @@ void ClefList::read(QDomElement e, Score* cs)
                         case 18: ct = CLEF_F_15MA; break;
                         case 19: ct = CLEF_PERC2; break;
                         }
-                  (*this)[cs->fileDivision(tick)] = ct;
+                  (*this)[cs->fileDivision(tick)] = ClefTypeList(ct, ct);
                   }
             else
                   domError(e);
@@ -575,11 +582,30 @@ void Clef::read(QDomElement e)
                         }
                   setClefType(ct);
                   }
+            else if (tag == "concertClefType")
+                  _clefTypes._concertClef = Clef::clefType(val);
+            else if (tag == "transposingClefType")
+                  _clefTypes._transposingClef = Clef::clefType(val);
             else if (!Element::readProperties(e))
                   domError(e);
             }
       if (score()->mscVersion() < 113)
             setUserOff(QPointF());
+      }
+
+//---------------------------------------------------------
+//   write
+//---------------------------------------------------------
+
+void Clef::write(Xml& xml) const
+      {
+      xml.stag(name());
+      if (_clefTypes._concertClef != _clefTypes._transposingClef) {
+            xml.tag("concertClefType", _clefTypes._concertClef);
+            xml.tag("transposingClefType", _clefTypes._transposingClef);
+            }
+      Element::writeProperties(xml);
+      xml.etag();
       }
 
 //---------------------------------------------------------
@@ -625,5 +651,18 @@ ClefType Clef::clefType(const QString& s)
                   return ClefType(i);
             }
       return CLEF_INVALID;
+      }
+
+//---------------------------------------------------------
+//   setClefType
+//---------------------------------------------------------
+
+void Clef::setClefType(ClefType i)
+      {
+      Element::setSubtype(int(i));
+      if (_clefTypes._concertClef == CLEF_INVALID)
+            _clefTypes._concertClef = i;
+      if (_clefTypes._transposingClef == CLEF_INVALID)
+            _clefTypes._transposingClef = i;
       }
 

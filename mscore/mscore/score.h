@@ -809,6 +809,7 @@ class Score : public QObject {
       QHash<int, LinkedElements*>& links();
       void appendMeasures(int, ElementType);
       MeasureBase* appendMeasure(ElementType type);
+      bool concertPitch() const { return styleB(ST_concertPitch); }
       };
 
 extern Score* gscore;

@@ -231,7 +231,7 @@ void InstrumentsDialog::genPartList()
                   if (s->useTablature())
                         sli->setClef(CLEF_TAB);
                   else
-                        sli->setClef(s->clefList()->clef(0));
+                        sli->setClef(s->clefList()->clef(0)._transposingClef);
                   const LinkedStaves* ls = s->linkedStaves();
                   sli->setLinked(ls && !ls->isEmpty());
                   sli->setVisible(s->show());
@@ -574,7 +574,7 @@ void MuseScore::editInstrList()
                         Staff* staff       = new Staff(cs, part, rstaff);
                         sli->staff         = staff;
                         staff->setRstaff(rstaff);
-                        staff->clefList()->setClef(0, sli->clef());
+                        staff->setClef(0, sli->clef());
                         staff->setLines(t->staffLines[cidx]);
                         staff->setSmall(t->smallStaff[cidx]);
                         staff->setUseTablature(t->useTablature);
@@ -636,7 +636,7 @@ void MuseScore::editInstrList()
 
                               cs->adjustBracketsIns(staffIdx, staffIdx+1);
 
-                              staff->clefList()->setClef(0, sli->clef());
+                              staff->setClef(0, sli->clef());
                               KeySigEvent nKey = part->staff(0)->key(0);
                               staff->setKey(0, nKey);
 

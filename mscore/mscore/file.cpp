@@ -1617,7 +1617,7 @@ bool Score::read(QDomElement dScore)
                   ClefList* cl = s->clefList();
                   for (ciClefEvent i = cl->begin(); i != cl->end(); ++i) {
                         int tick = i->first;
-                        ClefType clefId = i->second;
+                        ClefType clefId = i->second._concertClef;
                         Measure* m = tick2measure(tick);
                         if ((tick == m->tick()) && m->prevMeasure())
                               m = m->prevMeasure();

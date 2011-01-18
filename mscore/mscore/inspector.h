@@ -45,6 +45,7 @@
 #include "ui_spanner.h"
 #include "ui_slursegment.h"
 #include "ui_accidental.h"
+#include "ui_clef.h"
 
 #include "globals.h"
 
@@ -272,20 +273,6 @@ class ShowRestWidget : public ShowElementBase {
 
    public:
       ShowRestWidget();
-      virtual void setElement(Element*);
-      };
-
-//---------------------------------------------------------
-//   ShowClefWidget
-//---------------------------------------------------------
-
-class ShowClefWidget : public ShowElementBase {
-      Q_OBJECT;
-
-      QSpinBox* idx;
-
-   public:
-      ShowClefWidget();
       virtual void setElement(Element*);
       };
 
@@ -588,6 +575,20 @@ class AccidentalView : public ShowElementBase {
 
    public:
       AccidentalView();
+      virtual void setElement(Element*);
+      };
+
+//---------------------------------------------------------
+//   ClefView
+//---------------------------------------------------------
+
+class ClefView : public ShowElementBase {
+      Q_OBJECT;
+
+      Ui::Clef clef;
+
+   public:
+      ClefView();
       virtual void setElement(Element*);
       };
 
