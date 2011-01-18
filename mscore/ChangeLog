@@ -3,6 +3,8 @@
       - fix #8763
       - for transposing instruments, different clefs for concert pitch can be set
         (#3128)
+       (la)
+      - fix #6547: File association on Mac. Add bww, cap, sgu, mgu, mid, ove, md, and MusicXML.
 17.jan (ws)
       - fix #8625: second note in a tie is silent when first note is deleted
       - #8701: implement full screen mode (toggled by Ctrl+U)
