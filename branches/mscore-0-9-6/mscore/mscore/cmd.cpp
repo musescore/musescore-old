@@ -914,10 +914,13 @@ Fraction Score::makeGap(ChordRest* cr, const Fraction& _sd, Tuplet* tuplet)
 
 bool Score::makeGap1(int tick, int staffIdx, Fraction len)
       {
+// printf("makeGap1 tick %d staff %d  len %d/%d\n", tick, staffIdx,
+//   len.numerator(), len.denominator());
+
       ChordRest* cr = 0;
       Segment* seg = tick2segment(tick, true);
       if (!seg) {
-            printf("1:makeGap1: no segment at %d\n", tick);
+printf("1:makeGap1: no segment at %d\n", tick);
             return false;
             }
       while (seg && !(seg->subtype() & (SegChordRest | SegGrace)))
@@ -934,14 +937,20 @@ bool Score::makeGap1(int tick, int staffIdx, Fraction len)
                   cr = static_cast<ChordRest*>(seg->element(staffIdx * VOICES));
                   if (!cr) {
                         printf("makeGap1: no chord/rest at %d staff %d\n", tick, staffIdx);
-                        return false;    
+                        return false;
                         }
                   }
             }
 
       Fraction gap;
       for (;;) {
+// printf("   make gap %d/%d\n", len.numerator(), len.denominator());
+
             Fraction l = makeGap(cr, len, 0);
+// printf("   make gap %d/%d -> %d/%d\n",
+//            len.numerator() / 480, len.denominator() / 480,
+//            l.numerator(), l.denominator());
+
             if (l.isZero())
                   break;
             len -= l;
@@ -951,7 +960,7 @@ bool Score::makeGap1(int tick, int staffIdx, Fraction len)
             // go to next cr
             Measure* m = cr->measure()->nextMeasure();
             if (m == 0) {
-                  printf("EOS reached\n");
+printf("EOS reached\n");
                   appendMeasures(1, MEASURE);
                   m = cr->measure()->nextMeasure();
                   if (m == 0) {
@@ -967,6 +976,8 @@ bool Score::makeGap1(int tick, int staffIdx, Fraction len)
                   cr = static_cast<ChordRest*>(s->element(track));
                   }
             }
+
+// printf("   gap %d/%d\n", len.numerator(), len.denominator());
       return true;
       }
 
@@ -2397,14 +2408,13 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                         blackList.insert(staffIdx);
                         }
                   }
-
             for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                   if (ee.tagName() != "Staff") {
                         domError(ee);
                         continue;
                         }
                   int srcStaffIdx = ee.attribute("id", "0").toInt();
-                  if(blackList.contains(srcStaffIdx))
+                  if (blackList.contains(srcStaffIdx))
                         continue;
                   int dstStaffIdx = srcStaffIdx - srcStaffStart + dstStaffStart;
 // printf("srcStaffIDx %d  dstStaffIdx %d  staves %d\n", srcStaffIdx, dstStaffIdx, nstaves());
@@ -2478,7 +2488,6 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                                           n->setTrack(track);
                                           }
                                     }
-
                               Measure* measure = tick2measure(tick);
 
                               Segment* s;
