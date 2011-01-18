@@ -1812,8 +1812,23 @@ void Score::addArticulation(Element* el, Articulation* atr)
 
 void Score::resetUserStretch()
       {
-      Measure* m1 = _selection.startSegment()->measure();
-      Measure* m2 = _selection.endSegment()->measure();
+      Measure* m1;
+      Measure* m2;
+      // retrieve span of selection
+      Segment* s1 = _selection.startSegment();
+      Segment* s2 = _selection.endSegment();
+      // if either segment is not returned by the selection
+      // (for instance, no selection) fall back to first/last measure
+      if(!s1)
+            m1 = firstMeasure();
+      else
+            m1 = s1->measure();
+      if(!s2)
+            m2 = lastMeasure();
+      else
+            m2 = s2->measure();
+      if(!m1 || !m2)                // should not happen!
+            return;
 
       for (Measure* m = m1; m; m = m->nextMeasure()) {
             _undo->push(new ChangeStretch(m, 1.0));
