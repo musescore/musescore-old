@@ -22,59 +22,50 @@
 #include "symbol.h"
 #include "sym.h"
 #include "score.h"
-// #include "note.h"
 
 //---------------------------------------------------------
 //   Acc
 //---------------------------------------------------------
 
 struct Acc {
-      const char* tag;
-      int offset;
-      Acc(const char* t, int o) : tag(t), offset(o) {}
+      const char* tag;        // for use in xml file
+      const char* name;       // translated name
+      int offset;             // semitone offset
+      int centOffset;
+      int sym;
+      Acc(const char* t, const char* n, int o, int o2, int s)
+               : tag(t), name(n), offset(o), centOffset(o2), sym(s) {}
       };
 
 Acc accList[] = {
-      Acc(QT_TRANSLATE_NOOP("accidental", "none"),                0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "sharp"),               1),
-      Acc(QT_TRANSLATE_NOOP("accidental", "flat"),               -1),
-      Acc(QT_TRANSLATE_NOOP("accidental", "double sharp"),        2),
-      Acc(QT_TRANSLATE_NOOP("accidental", "double flat"),        -2),
-      Acc(QT_TRANSLATE_NOOP("accidental", "natural"),             0),
+      Acc("none",                QT_TRANSLATE_NOOP("accidental", "none"),                0, 0, -1),
+      Acc("sharp",               QT_TRANSLATE_NOOP("accidental", "sharp"),               1, 0, sharpSym),
+      Acc("flat",                QT_TRANSLATE_NOOP("accidental", "flat"),               -1, 0, flatSym),
+      Acc("double sharp",        QT_TRANSLATE_NOOP("accidental", "double sharp"),        2, 0, sharpsharpSym),
+      Acc("double flat",         QT_TRANSLATE_NOOP("accidental", "double flat"),        -2, 0, flatflatSym),
+      Acc("natural",             QT_TRANSLATE_NOOP("accidental", "natural"),             0, 0, naturalSym),
 
-      Acc(QT_TRANSLATE_NOOP("accidental", "(sharp)"),             1),
-      Acc(QT_TRANSLATE_NOOP("accidental", "(flat)"),             -1),
-      Acc(QT_TRANSLATE_NOOP("accidental", "(double sharp)"),      2),
-      Acc(QT_TRANSLATE_NOOP("accidental", "(double flat)"),      -2),
-      Acc(QT_TRANSLATE_NOOP("accidental", "(natural)"),           0),
+      Acc("flat-slash",          QT_TRANSLATE_NOOP("accidental", "flat-slash"),          0, 0, flatslashSym),
+      Acc("flat-slash2",         QT_TRANSLATE_NOOP("accidental", "flat-slash2"),         0, 0, flatslash2Sym),
+      Acc("mirrored-flat2",      QT_TRANSLATE_NOOP("accidental", "mirrored-flat2"),      0, 0, mirroredflat2Sym),
+      Acc("mirrored-flat",       QT_TRANSLATE_NOOP("accidental", "mirrored-flat"),       0, 0, mirroredflatSym),
+      Acc("mirrored-flat-slash", QT_TRANSLATE_NOOP("accidental", "mirrored-flat-slash"), 0, 0, mirroredflatslashSym),
+      Acc("flat-flat-slash",     QT_TRANSLATE_NOOP("accidental", "flat-flat-slash"),     0, 0, flatflatslashSym),
 
-      Acc(QT_TRANSLATE_NOOP("accidental", "[sharp]"),             1),
-      Acc(QT_TRANSLATE_NOOP("accidental", "[flat]"),             -1),
-      Acc(QT_TRANSLATE_NOOP("accidental", "[double sharp]"),      2),
-      Acc(QT_TRANSLATE_NOOP("accidental", "[double flat]"),      -2),
-      Acc(QT_TRANSLATE_NOOP("accidental", "[natural]"),           0),
+      Acc("sharp-slash",         QT_TRANSLATE_NOOP("accidental", "sharp-slash"),         0, 0, sharpslashSym),
+      Acc("sharp-slash2",        QT_TRANSLATE_NOOP("accidental", "sharp-slash2"),        0, 0, sharpslash2Sym),
+      Acc("sharp-slash3",        QT_TRANSLATE_NOOP("accidental", "sharp-slash3"),        0, 0, sharpslash3Sym),
+      Acc("sharp-slash4",        QT_TRANSLATE_NOOP("accidental", "sharp-slash4"),        0, 0, sharpslash4Sym),
 
-/*16*/Acc(QT_TRANSLATE_NOOP("accidental", "flat-slash"),          0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "flat-slash2"),         0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "mirrored-flat2"),      0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "mirrored-flat"),       0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "mirrored-flat-slash"), 0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "flat-flat-slash"),     0),
-
-/*22*/Acc(QT_TRANSLATE_NOOP("accidental", "sharp-slash"),         0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "sharp-slash2"),        0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "sharp-slash3"),        0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "sharp-slash4"),        0),
-
-/*26*/Acc(QT_TRANSLATE_NOOP("accidental", "sharp arrow up"),      0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "sharp arrow down"),    0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "sharp arrow both"),    0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "flat arrow up"),       0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "flat arrow down"),     0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "flat arrow both"),     0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "natural arrow up"),    0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "natural arrow down"),  0),
-      Acc(QT_TRANSLATE_NOOP("accidental", "natural arrow both"),  0)
+      Acc("sharp arrow up",      QT_TRANSLATE_NOOP("accidental", "sharp arrow up"),      0, 0, sharpArrowUpSym),
+      Acc("sharp arrow down",    QT_TRANSLATE_NOOP("accidental", "sharp arrow down"),    0, 0, sharpArrowDownSym),
+      Acc("sharp arrow both",    QT_TRANSLATE_NOOP("accidental", "sharp arrow both"),    0, 0, sharpArrowBothSym),
+      Acc("flat arrow up",       QT_TRANSLATE_NOOP("accidental", "flat arrow up"),       0, 0, flatArrowUpSym),
+      Acc("flat arrow down",     QT_TRANSLATE_NOOP("accidental", "flat arrow down"),     0, 0, flatArrowDownSym),
+      Acc("flat arrow both",     QT_TRANSLATE_NOOP("accidental", "flat arrow both"),     0, 0, flatArrowBothSym),
+      Acc("natural arrow up",    QT_TRANSLATE_NOOP("accidental", "natural arrow up"),    0, 0, naturalArrowUpSym),
+      Acc("natural arrow down",  QT_TRANSLATE_NOOP("accidental", "natural arrow down"),  0, 0, naturalArrowDownSym),
+      Acc("natural arrow both",  QT_TRANSLATE_NOOP("accidental", "natural arrow both"),  0, 0, naturalArrowBothSym)
       };
 
 //---------------------------------------------------------
@@ -87,12 +78,12 @@ const QString Accidental::subtypeName() const
       }
 
 //---------------------------------------------------------
-//   subTypeName
+//   subTypeUseName
 //---------------------------------------------------------
 
-const char* Accidental::subTypeName() const
+const char* Accidental::subtypeUserName() const
       {
-      return accList[subtype()].tag;
+      return accList[subtype()].name;
       }
 
 //---------------------------------------------------------
@@ -104,28 +95,11 @@ void Accidental::setSubtype(const QString& tag)
       int n = sizeof(accList)/sizeof(*accList);
       for (int i = 0; i < n; ++i) {
             if (accList[i].tag == tag) {
-                  setSubtype(i);
+                  Element::setSubtype(i);
                   return;
                   }
             }
       Element::setSubtype(0);
-      }
-
-//---------------------------------------------------------
-//   setSubtype
-//---------------------------------------------------------
-
-void Accidental::setSubtype(int i)
-      {
-      // change old coding
-      switch(i) {
-            case 6:  i = 1 + 0x8000; break;
-            case 7:  i = 2 + 0x8000; break;
-            case 8:  i = 3 + 0x8000; break;
-            case 9:  i = 4 + 0x8000; break;
-            case 10: i = 5 + 0x8000; break;
-            }
-      Element::setSubtype(i);
       }
 
 //---------------------------------------------------------
@@ -134,43 +108,7 @@ void Accidental::setSubtype(int i)
 
 int Accidental::symbol()
       {
-      int s;
-      switch (subtype() & 0x7fff) {
-            default: printf("illegal accidental %d\n", subtype() & 0x7fff); abort();
-            case  ACC_NONE:    return -1;
-            case  ACC_SHARP:   s = sharpSym;             break;
-            case  ACC_FLAT:    s = flatSym;              break;
-            case  ACC_SHARP2:  s = sharpsharpSym;        break;
-            case  ACC_FLAT2:   s = flatflatSym;          break;
-            case  ACC_NATURAL: s = naturalSym;           break;
-
-            case 11:           s = sharpSym;             break;
-            case 12:           s = flatSym;              break;
-            case 13:           s = sharpsharpSym;        break;
-            case 14:           s = flatflatSym;          break;
-            case 15:           s = naturalSym;           break;
-
-            case 16:           s = flatslashSym;         break;
-            case 17:           s = flatslash2Sym;        break;
-            case 18:           s = mirroredflat2Sym;     break;
-            case 19:           s = mirroredflatSym;      break;
-            case 20:           s = mirroredflatslashSym; break;
-            case 21:           s = flatflatslashSym;     break;
-            case 22:           s = sharpslashSym;        break;
-            case 23:           s = sharpslash2Sym;       break;
-            case 24:           s = sharpslash3Sym;       break;
-            case 25:           s = sharpslash4Sym;       break;
-            case 26:           s = sharpArrowUpSym;      break;
-            case 27:           s = sharpArrowDownSym;    break;
-            case 28:           s = sharpArrowBothSym;    break;
-            case 29:           s = flatArrowUpSym;       break;
-            case 30:           s = flatArrowDownSym;     break;
-            case 31:           s = flatArrowBothSym;     break;
-            case 32:           s = naturalArrowUpSym;    break;
-            case 33:           s = naturalArrowDownSym;  break;
-            case 34:           s = naturalArrowBothSym;  break;
-            }
-      return s;
+      return accList[subtype()].sym;
       }
 
 //---------------------------------------------------------
@@ -179,14 +117,13 @@ int Accidental::symbol()
 
 void Accidental::layout()
       {
-      int i = subtype();
       el.clear();
 
       double m = magS();
       QRectF r;
 
       QPointF pos;
-      if (i & 0x8000) {
+      if (_hasBracket) {
             SymElement e(leftparenSym, 0.0);
             el.append(e);
             r |= symbols[leftparenSym].bbox(m);
@@ -199,8 +136,8 @@ void Accidental::layout()
       r |= symbols[s].bbox(m);
       pos += symbols[s].attach(m);
 
-      if (i & 0x8000) {
-            double x = pos.x();     // symbols[s].width(m) + symbols[s].bbox(m).x();
+      if (_hasBracket) {
+            double x = pos.x();
             SymElement e(rightparenSym, x);
             el.append(e);
             r |= symbols[rightparenSym].bbox(m).translated(x, 0.0);
@@ -215,14 +152,7 @@ void Accidental::layout()
 
 int Accidental::subtype2value(int st)
       {
-      switch(st & 0xfff) {
-            case ACC_NONE:    return 0;
-            case ACC_SHARP:   return 1;
-            case ACC_SHARP2:  return 2;
-            case ACC_FLAT:    return -1;
-            case ACC_FLAT2:   return -2;
-            }
-      return 0;
+      return accList[st].offset;
       }
 
 //---------------------------------------------------------
@@ -272,7 +202,7 @@ Element* Accidental::drop(ScoreView*, const QPointF&, const QPointF&, Element* e
       {
       switch(e->type()) {
             case ACCIDENTAL_BRACKET:
-                  score()->changeAccidental(note(), subtype() | 0x8000);
+                  _hasBracket = true;     // TODO: make undoable
                   break;
 
             default:
@@ -315,3 +245,150 @@ void AccidentalBracket::setSubtype(int i)
       addElement(s2, s2->bbox().width() - s2->bbox().x(), 0.0);
       }
 
+//---------------------------------------------------------
+//   read
+//---------------------------------------------------------
+
+void Accidental::read(QDomElement e)
+      {
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            QString tag(e.tagName());
+            bool isInt;
+            int i = e.text().toInt(&isInt);
+            if (tag == "bracket") {
+                  if (i == 0 || i == 1)
+                        _hasBracket = i;
+                  }
+            else if (tag == "subtype") {
+                  if (isInt) {
+                        _hasBracket = i & 0x8000;
+                        i &= ~0x8000;
+                        switch(i) {
+                              case 0:
+                                    i = ACC_NONE;
+                                    break;
+                              case 1:
+                              case 11:
+                                    i = ACC_SHARP;
+                                    break;
+                              case 2:
+                              case 12:
+                                    i = ACC_FLAT;
+                                    break;
+                              case 3:
+                              case 13:
+                                    i = ACC_SHARP2;
+                                    break;
+                              case 4:
+                              case 14:
+                                    i = ACC_FLAT2;
+                                    break;
+                              case 5:
+                              case 15:
+                                    i = ACC_NATURAL;
+                                    break;
+                              case 6:
+                                    i = ACC_SHARP;
+                                    _hasBracket = true;
+                                    break;
+                              case 7:
+                                    i = ACC_FLAT;
+                                    _hasBracket = true;
+                                    break;
+                              case 8:
+                                    i = ACC_SHARP2;
+                                    _hasBracket = true;
+                                    break;
+                              case 9:
+                                    i = ACC_FLAT2;
+                                    _hasBracket = true;
+                                    break;
+                              case 10:
+                                    i = ACC_NATURAL;
+                                    _hasBracket = true;
+                                    break;
+                              case 16:
+                                    i = ACC_FLAT_SLASH;
+                                    break;
+                              case 17:
+                                    i = ACC_FLAT_SLASH2;
+                                    break;
+                              case 18:
+                                    i = ACC_MIRRORED_FLAT2;
+                                    break;
+                              case 19:
+                                    i = ACC_MIRRORED_FLAT;
+                                    break;
+                              case 20:
+                                    i = ACC_MIRRIRED_FLAT_SLASH;
+                                    break;
+                              case 21:
+                                    i = ACC_FLAT_FLAT_SLASH;
+                                    break;
+                              case 22:
+                                    i = ACC_SHARP_SLASH;
+                                    break;
+                              case 23:
+                                    i = ACC_SHARP_SLASH2;
+                                    break;
+                              case 24:
+                                    i = ACC_SHARP_SLASH3;
+                                    break;
+                              case 25:
+                                    i = ACC_SHARP_SLASH4;
+                                    break;
+                              case 26:
+                                    i = ACC_SHARP_ARROW_UP;
+                                    break;
+                              case 27:
+                                    i = ACC_SHARP_ARROW_DOWN;
+                                    break;
+                              case 28:
+                                    i = ACC_SHARP_ARROW_BOTH;
+                                    break;
+                              case 29:
+                                    i = ACC_FLAT_ARROW_UP;
+                                    break;
+                              case 30:
+                                    i = ACC_FLAT_ARROW_DOWN;
+                                    break;
+                              case 31:
+                                    i = ACC_FLAT_ARROW_BOTH;
+                                    break;
+                              case 32:
+                                    i = ACC_NATURAL_ARROW_UP;
+                                    break;
+                              case 33:
+                                    i = ACC_NATURAL_ARROW_DOWN;
+                                    break;
+                              case 34:
+                                    i = ACC_NATURAL_ARROW_BOTH;
+                                    break;
+                              default:
+                                    i = 0;
+                                    break;
+                              }
+                        Element::setSubtype(i);
+                        }
+                  else
+                        setSubtype(e.text());
+                  }
+            else if (Element::readProperties(e))
+                  ;
+            else
+                  domError(e);
+            }
+      }
+
+//---------------------------------------------------------
+//   write
+//---------------------------------------------------------
+
+void Accidental::write(Xml& xml) const
+      {
+      xml.stag(name());
+      if (_hasBracket)
+            xml.tag("bracket", _hasBracket);
+      Element::writeProperties(xml);
+      xml.etag();
+      }

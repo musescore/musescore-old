@@ -31,9 +31,36 @@
 class Note;
 
 // Accidental Subtype Values
+enum AccidentalType {
+      ACC_NONE,
+      ACC_SHARP,
+      ACC_FLAT,
+      ACC_SHARP2,
+      ACC_FLAT2,
+      ACC_NATURAL,
 
-enum {
-      ACC_NONE, ACC_SHARP, ACC_FLAT, ACC_SHARP2, ACC_FLAT2, ACC_NATURAL
+      ACC_FLAT_SLASH,
+      ACC_FLAT_SLASH2,
+      ACC_MIRRORED_FLAT2,
+      ACC_MIRRORED_FLAT,
+      ACC_MIRRIRED_FLAT_SLASH,
+      ACC_FLAT_FLAT_SLASH,
+
+      ACC_SHARP_SLASH,
+      ACC_SHARP_SLASH2,
+      ACC_SHARP_SLASH3,
+      ACC_SHARP_SLASH4,
+
+      ACC_SHARP_ARROW_UP,
+      ACC_SHARP_ARROW_DOWN,
+      ACC_SHARP_ARROW_BOTH,
+      ACC_FLAT_ARROW_UP,
+      ACC_FLAT_ARROW_DOWN,
+      ACC_FLAT_ARROW_BOTH,
+      ACC_NATURAL_ARROW_UP,
+      ACC_NATURAL_ARROW_DOWN,
+      ACC_NATURAL_ARROW_BOTH,
+      ACC_END
       };
 
 struct SymElement {
@@ -48,22 +75,28 @@ struct SymElement {
 
 class Accidental : public Element {
       QList<SymElement> el;
+      bool _hasBracket;
 
    public:
-      Accidental(Score* s) : Element(s) {}
+      Accidental(Score* s) : Element(s) { _hasBracket = false; }
       virtual Accidental* clone() const { return new Accidental(*this); }
       virtual ElementType type() const  { return ACCIDENTAL; }
-      virtual void setSubtype(int v);
       virtual const QString subtypeName() const;
+      const char* subtypeUserName() const;
       virtual void setSubtype(const QString& s);
+      void setSubtype(int i)            { Element::setSubtype(i); }
       virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*);
       virtual void layout();
       virtual void draw(QPainter&) const;
       int symbol();
       Note* note() const { return (Note*)parent(); }
+      bool hasBracket() const      { return _hasBracket; }
+      void setHasBracket(bool val) { _hasBracket = val;  }
 
-      const char* subTypeName() const;
+      virtual void read(QDomElement);
+      virtual void write(Xml& xml) const;
+
       static int subtype2value(int);      // return effective pitch offset
       static int value2subtype(int);
       };

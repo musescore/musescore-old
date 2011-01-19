@@ -401,15 +401,10 @@ void MuseScore::showPalette(bool visible)
             sp->setName(tr("Accidentals"));
             sp->setGrid(33, 36);
 
-            for (int i = 1; i < 6; ++i) {
+            for (int i = ACC_SHARP; i < ACC_END; ++i) {
                   Accidental* s = new Accidental(gscore);
                   s->setSubtype(i);
-                  sp->append(s, qApp->translate("accidental", s->subTypeName()));
-                  }
-            for (int i = 16; i < 26+9; ++i) {
-                  Accidental* s = new Accidental(gscore);
-                  s->setSubtype(i);
-                  sp->append(s, qApp->translate("accidental", s->subTypeName()));
+                  sp->append(s, qApp->translate("accidental", s->subtypeUserName()));
                   }
             AccidentalBracket* ab = new AccidentalBracket(gscore);
             ab->setSubtype(0);
@@ -927,22 +922,10 @@ void MuseScore::accidentalsMenu()
             accidentalsPalette->setWindowTitle(tr("MuseScore: Accidentals"));
             sp->setGrid(40, 50);
 
-#if 0
-            for (int i = 1; i < 16+6+4+9; ++i) {
+            for (int i = ACC_SHARP; i < ACC_END; ++i) {
                   Accidental* s = new Accidental(gscore);
                   s->setSubtype(i);
-                  sp->append(s, qApp->translate("accidental", s->subTypeName()));
-                  }
-#endif
-            for (int i = 1; i < 6; ++i) {
-                  Accidental* s = new Accidental(gscore);
-                  s->setSubtype(i);
-                  sp->append(s, qApp->translate("accidental", s->subTypeName()));
-                  }
-            for (int i = 16; i < 26+9; ++i) {
-                  Accidental* s = new Accidental(gscore);
-                  s->setSubtype(i);
-                  sp->append(s, qApp->translate("accidental", s->subTypeName()));
+                  sp->append(s, qApp->translate("accidental", s->subtypeUserName()));
                   }
             AccidentalBracket* ab = new AccidentalBracket(gscore);
             ab->setSubtype(0);

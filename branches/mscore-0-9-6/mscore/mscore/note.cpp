@@ -678,7 +678,7 @@ void Note::read(QDomElement e)
             else if (tag == "headType")
                   _headType = NoteHeadType(i);
             else if (tag == "userAccidental")
-                  setUserAccidental(i);
+                  setUserAccidental(i & 0x7fff);
             else if (tag == "Accidental") {
                   Accidental* a = new Accidental(score());
                   a->read(e);
@@ -758,13 +758,13 @@ void Note::endDrag()
       int clef     = staff->clef(tick);
       int key      = staff->key(tick).accidentalType();
       int npitch   = line2pitch(_line, clef, key);
-      
+
       Note* n = this;
       while (n->tieBack())
             n = n->tieBack()->startNote();
       for (; n; n = n->tieFor() ? n->tieFor()->endNote() : 0)
             score()->undoChangePitch(n, npitch, pitch2tpc(npitch, key), 0);
-        
+
       score()->select(this, SELECT_SINGLE, 0);
       }
 
