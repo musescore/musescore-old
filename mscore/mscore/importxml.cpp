@@ -18,6 +18,10 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
+// TODO LVI 2011-01-18: it seems brackets ending after the last note in a measure
+// import OK but stop is not exported OK. Find out what causes this (import, export,
+// structural issue).
+
 /**
  MusicXML import.
  */
@@ -347,6 +351,7 @@ void MusicXml::import(Score* s)
       pedal = 0;
       harmony = 0;
       tremStart = 0;
+      hairpin = 0;
 
       // TODO only if multi-measure rests used ???
       score->style()->set(ST_createMultiMeasureRests, true);
@@ -1753,15 +1758,42 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   }
             }
       else if (dirType == "wedge") {
+            printf("wedge type='%s' hairpin=%p\n", qPrintable(type), hairpin);
             bool above = (placement == "above");
-            if (type == "crescendo")
-                  addWedge(0, tick, rx, ry, above, hasYoffset, yoffset, 0);
-            else if (type == "stop")
-                  genWedge(0, tick, measure, staff+rstaff);
-            else if (type == "diminuendo")
-                  addWedge(0, tick, rx, ry, above, hasYoffset, yoffset, 1);
+            if (type == "crescendo" || type == "diminuendo") {
+                  if (hairpin) {
+                        printf("overlapping wedge not supported\n");
+                        delete hairpin;
+                        hairpin = 0;
+                        }
+                  else {
+                        hairpin = new Hairpin(score);
+                        hairpin->setSubtype(type == "crescendo" ? 0 : 1);
+                        if (hasYoffset)
+                              hairpin->setYoff(yoffset);
+                        else
+                              hairpin->setYoff(above ? -3 : 8);
+                        // hairpin->setUserOff(rx, ry));
+                        hairpin->setTrack((staff + rstaff) * VOICES);
+                        Segment* seg = measure->getSegment(SegChordRest, tick);
+                        hairpin->setStartElement(seg);
+                        seg->add(hairpin);
+                        }
+                  }
+            else if (type == "stop") {
+                  if (!hairpin) {
+                        printf("wedge stop without start\n");
+                        }
+                  else {
+                        Segment* seg = measure->getSegment(SegChordRest, tick);
+                        hairpin->setEndElement(seg);
+                        seg->addSpannerBack(hairpin);
+                        score->updateHairpin(hairpin);
+                        hairpin = 0;
+                        }
+                  }
             else
-                  printf("unknown wedge type: %s\n", type.toLatin1().data());
+                  printf("unknown wedge type: %s\n", qPrintable(type));
             }
       else if (dirType == "bracket") {
             int n = number-1;
@@ -2273,6 +2305,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       qreal yoffset = 0.0; // actually this is default-y
       qreal xoffset = 0.0;
       bool hasYoffset = false;
+      QSet<Slur *> slursStarted;
+      QSet<Slur *> slursStopped;
 
       QString printObject = "yes";
       if (pn.isElement() && pn.nodeName() == "note") {
@@ -2418,11 +2452,13 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                               int slurNo   = ee.attribute(QString("number"), "1").toInt() - 1;
                               QString slurType = ee.attribute(QString("type"));
 
-                              int trk = (staff + relStaff) * VOICES;
+                              // int trk = (staff + relStaff) * VOICES;
                               if (slurType == "start") {
                                     bool endSlur = false;
-                                    if (slur[slurNo] == 0)
+                                    if (slur[slurNo] == 0) {
                                           slur[slurNo] = new Slur(score);
+                                          slursStarted.insert(slur[slurNo]);
+                                          }
                                     else
                                           endSlur = true;
                                     QString pl = ee.attribute(QString("placement"));
@@ -2430,19 +2466,23 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                                           slur[slurNo]->setSlurDirection(UP);
                                     else if (pl == "below")
                                           slur[slurNo]->setSlurDirection(DOWN);
-                                    slur[slurNo]->setStart(tick, trk + voice);
-                                    slur[slurNo]->setTrack((staff + relStaff) * VOICES);
-                                    score->add(slur[slurNo]);
-                                    if (endSlur)
+                                    // slur[slurNo]->setStart(tick, trk + voice);
+                                    // slur[slurNo]->setTrack((staff + relStaff) * VOICES);
+                                    // score->add(slur[slurNo]);
+                                    if (endSlur) {
+                                          slursStarted.insert(slur[slurNo]);
                                           slur[slurNo] = 0;
+                                          }
                                     }
                               else if (slurType == "stop") {
                                     if (slur[slurNo] == 0) {
                                           slur[slurNo] = new Slur(score);
-                                          slur[slurNo]->setEnd(tick, trk + voice);
+                                          slursStopped.insert(slur[slurNo]);
+                                          // slur[slurNo]->setEnd(tick, trk + voice);
                                           }
                                     else {
-                                          slur[slurNo]->setEnd(tick, trk + voice);
+                                          // slur[slurNo]->setEnd(tick, trk + voice);
+                                          slursStopped.insert(slur[slurNo]);
                                           slur[slurNo] = 0;
                                           }
                                     }
@@ -2841,6 +2881,17 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
 
             note->setVisible(printObject == "yes");
             }
+
+      // complete slur handling
+      foreach(Slur * s, slursStarted) {
+            cr->addSlurFor(s);
+            s->setStartElement(cr);
+            }
+      foreach(Slur * s, slursStopped) {
+            cr->addSlurBack(s);
+            s->setEndElement(cr);
+            }
+
       if (!fermataType.isEmpty()) {
             Articulation* f = new Articulation(score);
             if (fermataType == "upright") {
