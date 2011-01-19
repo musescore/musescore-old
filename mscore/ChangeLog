@@ -1,3 +1,5 @@
+19.jan (ws)
+      - fix #8727: write accidentals with parentheses
 18.jan (ws)
       - fix #8763: Tuplet number not spatium dependent
       - fix #8735: Beat corruption in copy paste of partial measure

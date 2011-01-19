@@ -303,17 +303,11 @@ KeyEditor::KeyEditor(QWidget* parent)
 
       l->addWidget(accPalette);
       sp1->setGrid(33, 36);
-      for (int i = 1; i < 6; ++i) {
+      for (int i = ACC_SHARP; i < ACC_END; ++i) {
             Accidental* s = new Accidental(gscore);
             s->setSubtype(i);
-            sp1->append(s, qApp->translate("accidental", s->subTypeName()));
+            sp1->append(s, qApp->translate("accidental", s->subtypeUserName()));
             }
-      for (int i = 16; i < 26+9; ++i) {
-            Accidental* s = new Accidental(gscore);
-            s->setSubtype(i);
-            sp1->append(s, qApp->translate("accidental", s->subTypeName()));
-            }
-
       connect(addButton, SIGNAL(clicked()), SLOT(addClicked()));
       connect(clearButton, SIGNAL(clicked()), SLOT(clearClicked()));
 
