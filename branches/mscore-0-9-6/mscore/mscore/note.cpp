@@ -557,7 +557,7 @@ void Note::write(Xml& xml, int /*startTick*/, int endTick) const
             xml.tag("tuning", _tuning);
 
       if (userAccidental())
-            xml.tag("userAccidental", userAccidental());
+            xml.tag("userAccidental", userAccidental() & 0x7fff);
       if (_accidental &&
          (!_accidental->userOff().isNull() || !_accidental->visible())
          ) {
@@ -678,7 +678,7 @@ void Note::read(QDomElement e)
             else if (tag == "headType")
                   _headType = NoteHeadType(i);
             else if (tag == "userAccidental")
-                  setUserAccidental(i & 0x7fff);
+                  setUserAccidental(i);
             else if (tag == "Accidental") {
                   Accidental* a = new Accidental(score());
                   a->read(e);
@@ -1237,7 +1237,9 @@ void Note::layout1(char* tversatz)
       if (acci != ACC_NONE && !_tieBack && !_hidden) {
             if (!_accidental)
                   add(new Accidental(score()));
-            _accidental->setSubtype(acci);
+            _accidental->setSubtype(acci & 0x7fff);
+            if (acci & 0x8000)
+                  _accidental->setHasBracket(true);
             }
       else {
             if (_accidental) {
