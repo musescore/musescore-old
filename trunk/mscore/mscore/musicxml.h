@@ -43,6 +43,7 @@ class Volta;
 class TextLine;
 class Chord;
 class Harmony;
+class Hairpin;
 
 //---------------------------------------------------------
 //   MusicXmlWedge
@@ -165,6 +166,7 @@ class MusicXml {
       Trill* trill;      ///< Current trill
       Pedal* pedal;      ///< Current pedal
       Harmony* harmony;  ///< Current harmony
+      Hairpin* hairpin;  ///< Current hairpin (obsoletes wedgelist)
       Chord* tremStart;  ///< Starting chord for current tremolo
       BeamMode beamMode; ///< Current beam mode
 
