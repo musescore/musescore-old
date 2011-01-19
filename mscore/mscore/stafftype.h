@@ -124,6 +124,7 @@ class StaffTypeTablature : public StaffType {
       bool        _genTimesig;            // whether time signature is shown or not
       bool        _linesThrough;          // whether lines for strings and stems may pass through fret marks or not
       bool        _onLines;               // whether fret marks are drawn on the string lines or between them
+      bool        _upsideDown;            // whether lines are drwan with highest string at top (false) or at bottom (true)
       bool        _useNumbers;            // true: use numbers ('0' - ...) for frets | false: use letters ('a' - ...)
 
       // internally managed variables
@@ -176,6 +177,7 @@ const QString fretFontName() const        { return _fretFontName;     }
       bool    genTimesig() const          { return _genTimesig;       }
       bool    linesThrough() const        { return _linesThrough;     }
       bool    onLines() const             { return _onLines;          }
+      bool    upsideDown() const          { return _upsideDown;       }
       bool    useNumbers() const          { return _useNumbers;       }
       // properties setters (setting some props invalidates metrics)
       void    setDurationFontName(QString name) { _durationFontName = name;
@@ -198,6 +200,7 @@ const QString fretFontName() const        { return _fretFontName;     }
       void    setGenTimesig(bool val)     { _genTimesig = val;        }
       void    setLinesThrough(bool val)   { _linesThrough = val;      }
       void    setOnLines(bool val);
+      void    setUpsideDown(bool val)     { _upsideDown = val;        }
       void    setUseNumbers(bool val)     { _useNumbers = val; _fretMetricsValid = false; }
 
 protected:
