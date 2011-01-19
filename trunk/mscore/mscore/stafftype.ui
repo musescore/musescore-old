@@ -145,7 +145,7 @@
           <number>2</number>
          </property>
          <property name="currentIndex">
-          <number>0</number>
+          <number>1</number>
          </property>
          <widget class="QWidget" name="page">
           <layout class="QVBoxLayout" name="verticalLayout_7" stretch="0,0,0,0">
@@ -286,7 +286,14 @@
              <item row="0" column="2">
               <widget class="QCheckBox" name="genTimesigTablature">
                <property name="text">
-                <string>Show Time Signature</string>
+                <string>Show Time Sign.</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="3">
+              <widget class="QCheckBox" name="upsideDown">
+               <property name="text">
+                <string>Upside Down</string>
                </property>
               </widget>
              </item>

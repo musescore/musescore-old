@@ -98,6 +98,7 @@ void EditStaffType::saveCurrent(QListWidgetItem* o)
                || stt->genTimesig()       != genTimesigTablature->isChecked()
                || stt->linesThrough()     != linesThroughRadio->isChecked()
                || stt->onLines()          != onLinesRadio->isChecked()
+               || stt->upsideDown()       != upsideDown->isChecked()
                || stt->useNumbers()       != numbersRadio->isChecked()
                || ( noteValues0->isChecked() && (!stt->slashStyle() ||  stt->genDurations()) )
                || ( noteValues1->isChecked() && (!stt->slashStyle() || !stt->genDurations()) )
@@ -152,6 +153,7 @@ void EditStaffType::saveCurrent(QListWidgetItem* o)
                   stt->setGenTimesig(genTimesigTablature->isChecked());
                   stt->setLinesThrough(linesThroughRadio->isChecked());
                   stt->setOnLines(onLinesRadio->isChecked());
+                  stt->setUpsideDown(upsideDown->isChecked());
                   stt->setUseNumbers(numbersRadio->isChecked());
                   break;
             case PERCUSSION_STAFF:
@@ -201,6 +203,7 @@ void EditStaffType::typeChanged(QListWidgetItem* n, QListWidgetItem* o)
 //                  staffGroup->setText(tr("Tablature"));
                   tab = (StaffTypeTablature*)st;
                   genTimesigTablature->setChecked(tab->genTimesig());
+                  upsideDown->setChecked(tab->upsideDown());
                   f.setFamily(tab->fretFontName());
                   f.setPointSizeF(tab->fretFontSize());
                   fretFontName->setCurrentFont(f);

@@ -172,6 +172,7 @@ void StaffTypeTablature::init()
       setGenTimesig(false);
       setLinesThrough(false);
       setOnLines(true);
+      setUpsideDown(false);
       setUseNumbers(true);
       // internal
       _durationMetricsValid = _fretMetricsValid = false;
@@ -208,6 +209,8 @@ void StaffTypeTablature::read(QDomElement e)
                   setOnLines(v != 0);
             else if(tag == "timesig")
                   setGenTimesig(v != 0);
+            else if(tag == "upsideDown")
+                  setUpsideDown(v != 0);
             else if(tag == "useNumbers")
                   setUseNumbers(v != 0);
             else
@@ -234,6 +237,7 @@ void StaffTypeTablature::write(Xml& xml, int idx) const
       xml.tag("linesThrough",     _linesThrough);
       xml.tag("onLines",          _onLines);
       xml.tag("timesig",          _genTimesig);
+      xml.tag("upsideDown",       _upsideDown);
       xml.tag("useNumbers",       _useNumbers);
       xml.etag();
       }
