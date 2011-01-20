@@ -1,5 +1,7 @@
 20.jan (mi)
-      - support for 'upside down' tablatures (lowest string on top)
+      - support for 'upside down' tablatures (lowest string on top) (r. 3926)
+      - Score::putNote() (edit.cpp): do not accept a new note on a tablature
+        string already occupied (r. 3930)
 19.jan (lv)
       - MusicXML import fixes: slurs and wedges
 18.jan (ws)

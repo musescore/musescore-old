@@ -768,10 +768,20 @@ printf("putNote at tick %d staff %d line %d key %d clef %d\n",
                   break;
                   }
             case TAB_STAFF: {
-                  Tablature* tab = instr->tablature();
-                  nval.pitch     = tab->getPitch(line, 0);
+                  Tablature* neck = instr->tablature();
+                  StaffTypeTablature * tab = (StaffTypeTablature*)st->staffType();
+                  // if tablature is upside down, 'flip' string number
+                  int string = tab->upsideDown() ? (tab->lines() - line - 1) : line;
+                  // check the chord does not already contains a note on the same string
+                  ChordRest* cr = _is.cr();
+                  if(cr != 0 && cr->type() == CHORD)
+                        foreach(Note * note, static_cast<Chord*>(cr)->notes())
+                              if(note->string() == string)  // if line is the same
+                                    return;                 // do nothing
+                  // build a default NoteVal for that line
+                  nval.pitch     = neck->getPitch(string, 0);
                   nval.fret      = 0;
-                  nval.string    = line;
+                  nval.string    = string;
                   break;
                   }
 
