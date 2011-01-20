@@ -64,7 +64,7 @@ line break&#13;
     <name>Articulation</name>
     <message>
         <source>Articulation Properties...</source>
-        <translation>Artikulointiominaisuudet...</translation>
+        <translation>Artikulointiominaisuudet ...</translation>
     </message>
 </context>
 <context>
@@ -1524,7 +1524,7 @@ epäonnistui: </translation>
     </message>
     <message>
         <source>Change Instrument...</source>
-        <translation>Vaihda instrumenttia...</translation>
+        <translation>Vaihda instrumenttia ...</translation>
     </message>
     <message>
         <source>+octave</source>
@@ -2100,7 +2100,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>HBox Properties...</source>
-        <translation>HBox ominaisuudet...</translation>
+        <translation>Laatikon ominaisuudet ...</translation>
     </message>
 </context>
 <context>
@@ -3429,11 +3429,11 @@ Yritä sen sijaan valitsemalla "Ohje"-valikosta "Online-käsikirja".</translatio
     </message>
     <message>
         <source>Acciaccatura</source>
-        <translation>Acciaccatura</translation>
+        <translation>Lyhyt etuhele</translation>
     </message>
     <message>
         <source>Appoggiatura</source>
-        <translation>Appoggiatura</translation>
+        <translation>Pitkä etuhele</translation>
     </message>
     <message>
         <source>Quarter grace note</source>
@@ -3525,7 +3525,7 @@ Yritä sen sijaan valitsemalla "Ohje"-valikosta "Online-käsikirja".</translatio
     </message>
     <message>
         <source>Caesura</source>
-        <translation>Caesura</translation>
+        <translation>Hengitystauko</translation>
     </message>
     <message>
         <source>Articulations &amp;&amp; Ornaments</source>
@@ -4680,7 +4680,7 @@ on ristiriidassa nykyisen rajapinnan kanssa</translation>
     </message>
     <message>
         <source>Browse...</source>
-        <translation>Selaa...</translation>
+        <translation>Selaa ...</translation>
     </message>
     <message>
         <source>Color notes outside of usable pitch range</source>
@@ -4923,7 +4923,7 @@ Valitse yksi nuotti tai tauko ja yritä uudelleen
     </message>
     <message>
         <source>Rest Properties...</source>
-        <translation>Tauon ominaisuudet...</translation>
+        <translation>Tauon ominaisuudet ...</translation>
     </message>
     <message>
         <source>Tuplet...</source>
@@ -5238,11 +5238,11 @@ Yritä tallentaa eri paikkaan.</translation>
     </message>
     <message>
         <source>Edit Drumset...</source>
-        <translation>Muokkaa rumpusettiä...</translation>
+        <translation>Muokkaa rumpusettiä ...</translation>
     </message>
     <message>
         <source>Drumroll Editor...</source>
-        <translation>Drumroll editori...</translation>
+        <translation>Drumroll editori ...</translation>
     </message>
     <message>
         <source>Pianoroll Editor...</source>
@@ -5625,7 +5625,7 @@ ja tarkista, että tiedoston sijainti on oikein.</translation>
     <name>StaffText</name>
     <message>
         <source>Staff Text Properties...</source>
-        <translation>Viivaston tekstiominaisuudet...</translation>
+        <translation>Viivaston tekstiominaisuudet ...</translation>
     </message>
 </context>
 <context>
@@ -5792,14 +5792,14 @@ ja tarkista, että tiedoston sijainti on oikein.</translation>
     <name>TempoText</name>
     <message>
         <source>Tempo Properties...</source>
-        <translation>Tempon ominaisuudet...</translation>
+        <translation>Tempon ominaisuudet ...</translation>
     </message>
 </context>
 <context>
     <name>Text</name>
     <message>
         <source>Text Properties...</source>
-        <translation>Tekstin ominaisuudet...</translation>
+        <translation>Tekstin ominaisuudet ...</translation>
     </message>
     <message>
         <source>Set Invisible</source>
@@ -5871,7 +5871,7 @@ ja tarkista, että tiedoston sijainti on oikein.</translation>
     </message>
     <message>
         <source>Text Properties...</source>
-        <translation>Tekstin ominaisuudet...</translation>
+        <translation>Tekstin ominaisuudet ...</translation>
     </message>
 </context>
 <context>
@@ -6493,7 +6493,7 @@ p, li { white-space: pre-wrap; }
     <name>Tuplet</name>
     <message>
         <source>Tuplet Properties...</source>
-        <translation>Tupletin ominaisuudet...</translation>
+        <translation>Tupletin ominaisuudet ...</translation>
     </message>
 </context>
 <context>
@@ -6612,7 +6612,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>VBox Properties...</source>
-        <translation>VBox ominaisuudet...</translation>
+        <translation>Laatikon ominaisuudet ...</translation>
     </message>
 </context>
 <context>
@@ -7416,11 +7416,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>acciaccatura</source>
-        <translation>acciaccatura</translation>
+        <translation>lyhyt etuhele</translation>
     </message>
     <message>
         <source>appoggiatura</source>
-        <translation>appoggiatura</translation>
+        <translation>pitkä etuhele</translation>
     </message>
     <message>
         <source>grace-4</source>
@@ -7540,7 +7540,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Fingering...</source>
-        <translation>Sormitus...</translation>
+        <translation>Sormitus ...</translation>
     </message>
     <message>
         <source>Fingering</source>
@@ -7552,7 +7552,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tempo...</source>
-        <translation>Tempo...</translation>
+        <translation>Tempo ...</translation>
     </message>
     <message>
         <source>Tempo</source>
@@ -8364,7 +8364,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Edit Chord Style...</source>
-        <translation>Muokkaa sointutyyliä...</translation>
+        <translation>Muokkaa sointutyyliä ...</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -8566,7 +8566,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Bass clef 15mb</source>
-        <translation>Bassoavain 15mb bassa (kaksioktaavia alas)</translation>
+        <translation>Bassoavain 15mb bassa (kaksi oktaavia alas)</translation>
     </message>
     <message>
         <source>Baritone clef (C clef)</source>
@@ -9666,7 +9666,7 @@ sinun MuseScore versio on liian vanha.</translation>
     </message>
     <message>
         <source>caesura curved</source>
-        <translation>hegitystauko kaareva</translation>
+        <translation>hengitystauko kaareva</translation>
     </message>
     <message>
         <source>caesura straight</source>

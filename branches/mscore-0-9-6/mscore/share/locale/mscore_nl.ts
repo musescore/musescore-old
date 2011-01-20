@@ -2483,19 +2483,19 @@ mislukt: </translation>
     <name>KeySig</name>
     <message>
         <source>Hide courtesy signature</source>
-        <translation type="unfinished"/>
+        <translation>Verberg hulp-maatsoorten</translation>
     </message>
     <message>
         <source>Show courtesy signature</source>
-        <translation type="unfinished"/>
+        <translation>Tonen hulp-maatsoorten</translation>
     </message>
     <message>
         <source>Hide naturals</source>
-        <translation type="unfinished"/>
+        <translation>Verberg herstellingstekens</translation>
     </message>
     <message>
         <source>Show naturals</source>
-        <translation type="unfinished"/>
+        <translation>Toon herstellingstekens</translation>
     </message>
 </context>
 <context>
@@ -3957,7 +3957,7 @@ is niet compactibel met de huidige interface</translation>
     </message>
     <message>
         <source>First page no.</source>
-        <translation type="unfinished"/>
+        <translation>Eerste pagina n°</translation>
     </message>
 </context>
 <context>
@@ -4752,7 +4752,7 @@ is niet compactibel met de huidige interface</translation>
     </message>
     <message>
         <source>Character Set</source>
-        <translation type="unfinished"/>
+        <translation>Tekenset</translation>
     </message>
 </context>
 <context>

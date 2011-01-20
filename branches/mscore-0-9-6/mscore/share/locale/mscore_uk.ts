@@ -128,7 +128,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>mm</source>
-        <translation>мм</translation>
+        <translation> мм</translation>
     </message>
     <message>
         <source>right:</source>
@@ -1044,7 +1044,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>StaffMove:</source>
-        <translation type="unfinished"/>
+        <translation>До</translation>
     </message>
 </context>
 <context>
@@ -3641,12 +3641,15 @@ Restore session?</source>
         <source>Script
 %1
 is incompatible with current interface</source>
-        <translation type="unfinished"/>
+        <translation>Сценарій&#13;
+%1&#13;
+несумісний з поточним інтерфейсом</translation>
     </message>
     <message>
         <source>MuseScore is too old to run script
 %1</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore занадто старий, щоб запустити сценарій&#13;
+%1</translation>
     </message>
     <message>
         <source>Bar %1 Beat %2.%3</source>
@@ -3822,7 +3825,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>head index</source>
-        <translation type="unfinished"/>
+        <translation>індекс головки</translation>
     </message>
     <message>
         <source>note head group</source>
@@ -3904,7 +3907,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>mm</source>
-        <translation>мм</translation>
+        <translation> мм</translation>
     </message>
     <message>
         <source>inch</source>
@@ -4578,7 +4581,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>pt</source>
-        <translation>пунктів</translation>
+        <translation> пунктів</translation>
     </message>
     <message>
         <source>Text</source>
@@ -4618,7 +4621,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>ms</source>
-        <translation>мс</translation>
+        <translation> мс</translation>
     </message>
     <message>
         <source>If you use the standard input method then the created note pitch depends on the current key signature. For example pressing F in G major creates an F sharp. If the alternate input method is enabled then the current key signature is irrelevant. For example pressing F always creates an F natural.</source>
@@ -4651,7 +4654,7 @@ is incompatible with current interface</source>
     <message>
         <source>mm</source>
         <extracomment>millimeter</extracomment>
-        <translation>мм</translation>
+        <translation> мм</translation>
     </message>
     <message>
         <source>Import</source>
@@ -5815,7 +5818,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>MM</source>
-        <translation>мм</translation>
+        <translation> мм</translation>
     </message>
     <message>
         <source>Space</source>
@@ -5924,7 +5927,7 @@ and check that the file location is correct</source>
     <message>
         <source>mm</source>
         <comment>millimeter unit</comment>
-        <translation>мм</translation>
+        <translation> мм</translation>
     </message>
     <message>
         <source>sp</source>
@@ -6085,7 +6088,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>MM</source>
-        <translation>мм</translation>
+        <translation> мм</translation>
     </message>
     <message>
         <source>offset in Space units</source>
@@ -6129,7 +6132,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>mm</source>
-        <translation>мм</translation>
+        <translation> мм</translation>
     </message>
     <message>
         <source>Margin:</source>
@@ -8558,7 +8561,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Baritone clef (F clef)</source>
-        <translation>Баритоновий ключ (ключ «Фа»)</translation>
+        <translation>Баритоновий ключ (ключ „Фа“)</translation>
     </message>
     <message>
         <source>Subbass clef</source>
@@ -8590,7 +8593,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Baritone clef (C clef)</source>
-        <translation>Баритоновий ключ (ключ «До»)</translation>
+        <translation>Баритоновий ключ (ключ „До“)</translation>
     </message>
     <message>
         <source>French violin clef</source>
@@ -8865,7 +8868,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>NoteHead</source>
-        <translation type="unfinished"/>
+        <translation>ГоловкаНоти</translation>
     </message>
     <message>
         <source>Tremolo</source>
@@ -9027,7 +9030,8 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Cannot read this score:
 your version of MuseScore is too old.</source>
-        <translation type="unfinished"/>
+        <translation>Не вдається прочитати цю партитуру:&#13;
+Ваша версія MuseScore занадто давня.</translation>
     </message>
 </context>
 <context>
@@ -9238,7 +9242,7 @@ your version of MuseScore is too old.</source>
     </message>
     <message>
         <source>sharp sharp</source>
-        <translation>дієз дієз</translation>
+        <translation>дубль-дієз</translation>
     </message>
     <message>
         <source>right parenthesis</source>
@@ -9262,35 +9266,35 @@ your version of MuseScore is too old.</source>
     </message>
     <message>
         <source>brevis head</source>
-        <translation type="unfinished"/>
+        <translation>головка ноти бревіс</translation>
     </message>
     <message>
         <source>brevis double head</source>
-        <translation type="unfinished"/>
+        <translation>подвійна головка ноти бревіс</translation>
     </message>
     <message>
         <source>whole head</source>
-        <translation type="unfinished"/>
+        <translation>головка цілої ноти</translation>
     </message>
     <message>
         <source>half head</source>
-        <translation type="unfinished"/>
+        <translation>головка половинної ноти</translation>
     </message>
     <message>
         <source>quart head</source>
-        <translation type="unfinished"/>
+        <translation>головка четвертної ноти</translation>
     </message>
     <message>
         <source>whole diamond head</source>
-        <translation type="unfinished"/>
+        <translation>ромбовидна головка цілої ноти</translation>
     </message>
     <message>
         <source>half diamond head</source>
-        <translation type="unfinished"/>
+        <translation>ромбовидна головка половинної ноти</translation>
     </message>
     <message>
         <source>diamond head</source>
-        <translation type="unfinished"/>
+        <translation>ромбоподібна головка</translation>
     </message>
     <message>
         <source>whole triangle head</source>
@@ -9314,139 +9318,139 @@ your version of MuseScore is too old.</source>
     </message>
     <message>
         <source>whole slash head</source>
-        <translation type="unfinished"/>
+        <translation>перекреслена головка цілої ноти</translation>
     </message>
     <message>
         <source>half slash head</source>
-        <translation type="unfinished"/>
+        <translation>перекреслена головка половинної ноти</translation>
     </message>
     <message>
         <source>quart slash head</source>
-        <translation type="unfinished"/>
+        <translation>перекреслена головка четверної ноти</translation>
     </message>
     <message>
         <source>whole cross head</source>
-        <translation type="unfinished"/>
+        <translation>хрестовидна головка цілої ноти</translation>
     </message>
     <message>
         <source>half cross head</source>
-        <translation type="unfinished"/>
+        <translation>хрестовидна головка половинної ноти</translation>
     </message>
     <message>
         <source>cross head</source>
-        <translation type="unfinished"/>
+        <translation>хрестовидна головка</translation>
     </message>
     <message>
         <source>x circle head</source>
-        <translation type="unfinished"/>
+        <translation>головка х в колі</translation>
     </message>
     <message>
         <source>s0do head</source>
-        <translation type="unfinished"/>
+        <translation>головка „s0do“</translation>
     </message>
     <message>
         <source>d1do head</source>
-        <translation type="unfinished"/>
+        <translation>головка „d1do“</translation>
     </message>
     <message>
         <source>u1do head</source>
-        <translation type="unfinished"/>
+        <translation>головка „u1do“</translation>
     </message>
     <message>
         <source>d2do head</source>
-        <translation type="unfinished"/>
+        <translation>головка „d2do“</translation>
     </message>
     <message>
         <source>u2do head</source>
-        <translation type="unfinished"/>
+        <translation>головка „u2do“</translation>
     </message>
     <message>
         <source>s0re head</source>
-        <translation type="unfinished"/>
+        <translation>головка „s0re“</translation>
     </message>
     <message>
         <source>u1re head</source>
-        <translation type="unfinished"/>
+        <translation>головка „u1re“</translation>
     </message>
     <message>
         <source>d1re head</source>
-        <translation type="unfinished"/>
+        <translation>головка „d1re“</translation>
     </message>
     <message>
         <source>u2re head</source>
-        <translation type="unfinished"/>
+        <translation>головка „u2re“</translation>
     </message>
     <message>
         <source>d2re head</source>
-        <translation type="unfinished"/>
+        <translation>головка „d2re“</translation>
     </message>
     <message>
         <source>s0mi head</source>
-        <translation type="unfinished"/>
+        <translation>головка „s0mi“</translation>
     </message>
     <message>
         <source>s1mi head</source>
-        <translation type="unfinished"/>
+        <translation>головка „s1mi“</translation>
     </message>
     <message>
         <source>s2mi head</source>
-        <translation type="unfinished"/>
+        <translation>головка „s2mi“</translation>
     </message>
     <message>
         <source>u0fa head</source>
-        <translation type="unfinished"/>
+        <translation>головка „u0fa“</translation>
     </message>
     <message>
         <source>d0fa head</source>
-        <translation type="unfinished"/>
+        <translation>головка „d0fa“</translation>
     </message>
     <message>
         <source>u1fa head</source>
-        <translation type="unfinished"/>
+        <translation>головка „u1fa“</translation>
     </message>
     <message>
         <source>d1fa head</source>
-        <translation type="unfinished"/>
+        <translation>головка „d1fa“</translation>
     </message>
     <message>
         <source>u2fa head</source>
-        <translation type="unfinished"/>
+        <translation>головка „u2fa“</translation>
     </message>
     <message>
         <source>d2fa head</source>
-        <translation type="unfinished"/>
+        <translation>головка „d2fa“</translation>
     </message>
     <message>
         <source>s0la head</source>
-        <translation type="unfinished"/>
+        <translation>головка „s0la“</translation>
     </message>
     <message>
         <source>s1la head</source>
-        <translation type="unfinished"/>
+        <translation>головка „s1la“</translation>
     </message>
     <message>
         <source>s2la head</source>
-        <translation type="unfinished"/>
+        <translation>головка „s2la“</translation>
     </message>
     <message>
         <source>s0ti head</source>
-        <translation type="unfinished"/>
+        <translation>головка „s0ti“</translation>
     </message>
     <message>
         <source>u1ti head</source>
-        <translation type="unfinished"/>
+        <translation>головка „u1ti“</translation>
     </message>
     <message>
         <source>d1ti head</source>
-        <translation type="unfinished"/>
+        <translation>головка „d1ti“</translation>
     </message>
     <message>
         <source>u2ti head</source>
-        <translation type="unfinished"/>
+        <translation>головка „u2ti“</translation>
     </message>
     <message>
         <source>d2ti head</source>
-        <translation type="unfinished"/>
+        <translation>головка „d2ti“</translation>
     </message>
     <message>
         <source>ufermata</source>
@@ -9734,11 +9738,11 @@ your version of MuseScore is too old.</source>
     </message>
     <message>
         <source>trebleclef</source>
-        <translation type="unfinished"/>
+        <translation>Скрипковий ключ</translation>
     </message>
     <message>
         <source>ctrebleclef</source>
-        <translation type="unfinished"/>
+        <translation>Малий скрипковий ключ</translation>
     </message>
     <message>
         <source>percussion clef</source>

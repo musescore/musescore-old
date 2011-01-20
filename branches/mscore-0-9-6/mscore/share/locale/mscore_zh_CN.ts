@@ -2483,19 +2483,19 @@ failed: </translation>
     <name>KeySig</name>
     <message>
         <source>Hide courtesy signature</source>
-        <translation type="unfinished"/>
+        <translation>隐藏建议的调号</translation>
     </message>
     <message>
         <source>Show courtesy signature</source>
-        <translation type="unfinished"/>
+        <translation>显示建议的调号</translation>
     </message>
     <message>
         <source>Hide naturals</source>
-        <translation type="unfinished"/>
+        <translation>隐藏还原号</translation>
     </message>
     <message>
         <source>Show naturals</source>
-        <translation type="unfinished"/>
+        <translation>显示还原号</translation>
     </message>
 </context>
 <context>
@@ -2840,7 +2840,7 @@ failed: </translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>确定</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -3668,43 +3668,43 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</source>
-        <translation type="unfinished"/>
+        <translation>所有支持的文件 (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</translation>
     </message>
     <message>
         <source>MuseScore Files (*.mscz *.mscx *.msc);;</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore 文件 (*.mscz *.mscx *.msc)</translation>
     </message>
     <message>
         <source>MusicXML Files (*.xml *.mxl);;</source>
-        <translation type="unfinished"/>
+        <translation>MusicXML 文件 (*.xml *.mxl);;</translation>
     </message>
     <message>
         <source>MIDI Files (*.mid *.midi *.kar);;</source>
-        <translation type="unfinished"/>
+        <translation>MIDI 文件 (*.mid *.midi *.kar);;</translation>
     </message>
     <message>
         <source>Muse Data Files (*.md);;</source>
-        <translation type="unfinished"/>
+        <translation>Muse 数据文件 (*.md);;</translation>
     </message>
     <message>
         <source>Capella Files (*.cap);;</source>
-        <translation type="unfinished"/>
+        <translation>Capella 文件 (*.cap);;</translation>
     </message>
     <message>
         <source>Bagpipe Music Writer Files (*.bww);;</source>
-        <translation type="unfinished"/>
+        <translation>Bagpipe Music Writer 文件 (*.bww);;</translation>
     </message>
     <message>
         <source>BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;</source>
-        <translation type="unfinished"/>
+        <translation>BB 文件 &lt;实验性&gt; (*.mgu *.MGU *.sgu *.SGU);;</translation>
     </message>
     <message>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
-        <translation type="unfinished"/>
+        <translation>Overture 文件 &lt;实验性&gt; (*.ove);;</translation>
     </message>
     <message>
         <source>All Files (*)</source>
-        <translation type="unfinished"/>
+        <translation>所有的文件 (*)</translation>
     </message>
 </context>
 <context>
@@ -3958,7 +3958,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>First page no.</source>
-        <translation type="unfinished"/>
+        <translation>第一页页数</translation>
     </message>
 </context>
 <context>
@@ -4749,11 +4749,11 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Character Set used when import non-unicode strings. (For binary file import)</source>
-        <translation type="unfinished"/>
+        <translation>输入非unicode字符串时使用的字符集（适用二进制文件的输入）</translation>
     </message>
     <message>
         <source>Character Set</source>
-        <translation type="unfinished"/>
+        <translation>字符集</translation>
     </message>
 </context>
 <context>
@@ -5593,7 +5593,7 @@ and check that the file location is correct</source>
     <name>SlurTieBase</name>
     <message>
         <source>Form</source>
-        <translation>失败的</translation>
+        <translation>表格</translation>
     </message>
     <message>
         <source>startElement</source>
@@ -6481,12 +6481,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>firstChord</source>
         <extracomment>do not translate</extracomment>
-        <translation/>
+        <translation>第一和弦</translation>
     </message>
     <message>
         <source>secondChord</source>
         <extracomment>do not translate - only for debugging</extracomment>
-        <translation/>
+        <translation>第二和弦</translation>
     </message>
 </context>
 <context>
@@ -6749,39 +6749,39 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>sharp arrow up</source>
-        <translation type="unfinished"/>
+        <translation>升号箭头上</translation>
     </message>
     <message>
         <source>sharp arrow down</source>
-        <translation type="unfinished"/>
+        <translation>升号箭头下</translation>
     </message>
     <message>
         <source>sharp arrow both</source>
-        <translation type="unfinished"/>
+        <translation>升号箭头上下</translation>
     </message>
     <message>
         <source>flat arrow up</source>
-        <translation type="unfinished"/>
+        <translation>降号箭头上</translation>
     </message>
     <message>
         <source>flat arrow down</source>
-        <translation type="unfinished"/>
+        <translation>降号箭头下</translation>
     </message>
     <message>
         <source>flat arrow both</source>
-        <translation type="unfinished"/>
+        <translation>降号箭头上下</translation>
     </message>
     <message>
         <source>natural arrow up</source>
-        <translation type="unfinished"/>
+        <translation>还原箭头上</translation>
     </message>
     <message>
         <source>natural arrow down</source>
-        <translation type="unfinished"/>
+        <translation>还原箭头下</translation>
     </message>
     <message>
         <source>natural arrow both</source>
-        <translation type="unfinished"/>
+        <translation>还原箭头上下</translation>
     </message>
 </context>
 <context>
@@ -7412,7 +7412,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>double flat</source>
-        <translation>重降号</translation>
+        <translation>双降号</translation>
     </message>
     <message>
         <source>acciaccatura</source>
@@ -7528,7 +7528,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Zoom Canvas</source>
-        <translation>缩放谱面</translation>
+        <translation>缩放画布</translation>
     </message>
     <message>
         <source>Lyrics</source>
@@ -7916,7 +7916,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>mirror note head</source>
-        <translation type="unfinished"/>
+        <translation>反转符头</translation>
     </message>
     <message>
         <source>Edit General Style...</source>
@@ -7968,11 +7968,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>follow song</source>
-        <translation type="unfinished"/>
+        <translation>自动跟踪</translation>
     </message>
     <message>
         <source>Follow Song</source>
-        <translation type="unfinished"/>
+        <translation>自动跟踪</translation>
     </message>
     <message>
         <source>Local handbook</source>
@@ -8443,15 +8443,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>plusstop</source>
-        <translation type="unfinished"/>
+        <translation>plusstop</translation>
     </message>
     <message>
         <source>upbow</source>
-        <translation type="unfinished"/>
+        <translation>上弓</translation>
     </message>
     <message>
         <source>downbow</source>
-        <translation type="unfinished"/>
+        <translation>下弓</translation>
     </message>
     <message>
         <source>reverseturn</source>
@@ -8519,11 +8519,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>uverylongfermata</source>
-        <translation type="unfinished"/>
+        <translation>很长延长记号（上面）</translation>
     </message>
     <message>
         <source>dverylongfermata</source>
-        <translation type="unfinished"/>
+        <translation>很长延长记号（下面）</translation>
     </message>
     <message>
         <source>snappizzicato</source>
@@ -8618,7 +8618,7 @@ p, li { white-space: pre-wrap; }
     <name>drumset</name>
     <message>
         <source>Acoustic Bass Drum</source>
-        <translation type="unfinished"/>
+        <translation>传统低音大鼓</translation>
     </message>
     <message>
         <source>Bass Drum</source>
@@ -8626,67 +8626,67 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Side Stick</source>
-        <translation type="unfinished"/>
+        <translation>敲鼓边</translation>
     </message>
     <message>
         <source>Snare (Acoustic)</source>
-        <translation type="unfinished"/>
+        <translation>军鼓（传统）</translation>
     </message>
     <message>
         <source>Snare (Electric)</source>
-        <translation type="unfinished"/>
+        <translation>军鼓（电子）</translation>
     </message>
     <message>
         <source>Tom 5</source>
-        <translation type="unfinished"/>
+        <translation>桶鼓 5</translation>
     </message>
     <message>
         <source>Hi-Hat Closed</source>
-        <translation type="unfinished"/>
+        <translation>踩镲关</translation>
     </message>
     <message>
         <source>Tom 4</source>
-        <translation type="unfinished"/>
+        <translation>桶鼓 4</translation>
     </message>
     <message>
         <source>Hi-Hat Pedal</source>
-        <translation type="unfinished"/>
+        <translation>踩镲踏板</translation>
     </message>
     <message>
         <source>Tom 3</source>
-        <translation type="unfinished"/>
+        <translation>桶鼓 3</translation>
     </message>
     <message>
         <source>Hi-Hat Open</source>
-        <translation type="unfinished"/>
+        <translation>踩镲开</translation>
     </message>
     <message>
         <source>Tom 2</source>
-        <translation type="unfinished"/>
+        <translation>桶鼓 2</translation>
     </message>
     <message>
         <source>Tom 1</source>
-        <translation type="unfinished"/>
+        <translation>桶鼓 1</translation>
     </message>
     <message>
         <source>Crash 1</source>
-        <translation type="unfinished"/>
+        <translation>碎镲 1</translation>
     </message>
     <message>
         <source>Tom</source>
-        <translation type="unfinished"/>
+        <translation>桶鼓</translation>
     </message>
     <message>
         <source>Ride</source>
-        <translation type="unfinished"/>
+        <translation>点镲</translation>
     </message>
     <message>
         <source>China</source>
-        <translation>中国</translation>
+        <translation>中国镲</translation>
     </message>
     <message>
         <source>Ride (Bell)</source>
-        <translation type="unfinished"/>
+        <translation>点镲（镲帽）</translation>
     </message>
     <message>
         <source>Tambourine</source>
@@ -8694,11 +8694,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>open high conga</source>
-        <translation type="unfinished"/>
+        <translation>开高音康加鼓</translation>
     </message>
     <message>
         <source>low conga</source>
-        <translation type="unfinished"/>
+        <translation>低音康加鼓</translation>
     </message>
 </context>
 <context>
@@ -8833,7 +8833,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Volta</source>
-        <translation>数字结尾/跳房子</translation>
+        <translation>括号</translation>
     </message>
     <message>
         <source>HairpinSegment</source>
@@ -9035,7 +9035,8 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Cannot read this score:
 your version of MuseScore is too old.</source>
-        <translation type="unfinished"/>
+        <translation>无法读取这个乐谱:&#13;
+您的 MuseScore 版本太旧.</translation>
     </message>
 </context>
 <context>
@@ -9114,11 +9115,11 @@ your version of MuseScore is too old.</source>
     </message>
     <message>
         <source>outside whole rest</source>
-        <translation type="unfinished"/>
+        <translation>outside 全休止符</translation>
     </message>
     <message>
         <source>outside half rest</source>
-        <translation type="unfinished"/>
+        <translation>outside 二分休止符</translation>
     </message>
     <message>
         <source>rest M3</source>
@@ -9138,7 +9139,7 @@ your version of MuseScore is too old.</source>
     </message>
     <message>
         <source>clas quart rest</source>
-        <translation type="unfinished"/>
+        <translation>前曾用四分休止符</translation>
     </message>
     <message>
         <source>eight rest</source>
@@ -9166,27 +9167,27 @@ your version of MuseScore is too old.</source>
     </message>
     <message>
         <source>sharp arrow up</source>
-        <translation type="unfinished"/>
+        <translation>升号箭头上</translation>
     </message>
     <message>
         <source>sharp arrow both</source>
-        <translation type="unfinished"/>
+        <translation>升号箭头上下</translation>
     </message>
     <message>
         <source>sharp slash</source>
-        <translation type="unfinished"/>
+        <translation>升号斜杠</translation>
     </message>
     <message>
         <source>sharp slash2</source>
-        <translation type="unfinished"/>
+        <translation>升号斜杠2</translation>
     </message>
     <message>
         <source>sharp slash3</source>
-        <translation type="unfinished"/>
+        <translation>升号斜杠3</translation>
     </message>
     <message>
         <source>sharp slash4</source>
-        <translation type="unfinished"/>
+        <translation>升号斜杠4</translation>
     </message>
     <message>
         <source>natural</source>
@@ -9194,15 +9195,15 @@ your version of MuseScore is too old.</source>
     </message>
     <message>
         <source>natural arrow up</source>
-        <translation type="unfinished"/>
+        <translation>还原箭头上</translation>
     </message>
     <message>
         <source>natural arrow down</source>
-        <translation type="unfinished"/>
+        <translation>还原箭头下</translation>
     </message>
     <message>
         <source>natural arrow both</source>
-        <translation type="unfinished"/>
+        <translation>还原箭头上下</translation>
     </message>
     <message>
         <source>flat</source>
@@ -9210,43 +9211,43 @@ your version of MuseScore is too old.</source>
     </message>
     <message>
         <source>flat arrow up</source>
-        <translation type="unfinished"/>
+        <translation>降号箭头上</translation>
     </message>
     <message>
         <source>flat arrow both</source>
-        <translation type="unfinished"/>
+        <translation>降号箭头上下</translation>
     </message>
     <message>
         <source>flat slash</source>
-        <translation type="unfinished"/>
+        <translation>降半音斜杠</translation>
     </message>
     <message>
         <source>flat slash2</source>
-        <translation type="unfinished"/>
+        <translation>降半音斜杠2</translation>
     </message>
     <message>
         <source>mirrored flat2</source>
-        <translation type="unfinished"/>
+        <translation>反转降半音2</translation>
     </message>
     <message>
         <source>mirrored flat</source>
-        <translation type="unfinished"/>
+        <translation>反转降半音</translation>
     </message>
     <message>
         <source>mirrored flat slash</source>
-        <translation type="unfinished"/>
+        <translation>反转降半音斜杠</translation>
     </message>
     <message>
         <source>flat flat</source>
-        <translation type="unfinished"/>
+        <translation>双降半音</translation>
     </message>
     <message>
         <source>flat flat slash</source>
-        <translation type="unfinished"/>
+        <translation>双降半音斜杠</translation>
     </message>
     <message>
         <source>sharp sharp</source>
-        <translation type="unfinished"/>
+        <translation>双升半音</translation>
     </message>
     <message>
         <source>right parenthesis</source>
@@ -9254,7 +9255,7 @@ your version of MuseScore is too old.</source>
     </message>
     <message>
         <source>left parenthesis</source>
-        <translation type="unfinished"/>
+        <translation>左小括号</translation>
     </message>
     <message>
         <source>dot</source>
@@ -9262,91 +9263,91 @@ your version of MuseScore is too old.</source>
     </message>
     <message>
         <source>longa up</source>
-        <translation type="unfinished"/>
+        <translation>longa 上</translation>
     </message>
     <message>
         <source>longa down</source>
-        <translation type="unfinished"/>
+        <translation>longa 下</translation>
     </message>
     <message>
         <source>brevis head</source>
-        <translation type="unfinished"/>
+        <translation>brevis 符头</translation>
     </message>
     <message>
         <source>brevis double head</source>
-        <translation type="unfinished"/>
+        <translation>brevis 二重符头</translation>
     </message>
     <message>
         <source>whole head</source>
-        <translation type="unfinished"/>
+        <translation>全音符头</translation>
     </message>
     <message>
         <source>half head</source>
-        <translation type="unfinished"/>
+        <translation>二分音符头</translation>
     </message>
     <message>
         <source>quart head</source>
-        <translation type="unfinished"/>
+        <translation>四分音符头</translation>
     </message>
     <message>
         <source>whole diamond head</source>
-        <translation type="unfinished"/>
+        <translation>全音符 菱形符头</translation>
     </message>
     <message>
         <source>half diamond head</source>
-        <translation type="unfinished"/>
+        <translation>二分音符 菱形符头</translation>
     </message>
     <message>
         <source>diamond head</source>
-        <translation type="unfinished"/>
+        <translation>菱形符头</translation>
     </message>
     <message>
         <source>whole triangle head</source>
-        <translation type="unfinished"/>
+        <translation>全音符 三角符头</translation>
     </message>
     <message>
         <source>down half triangle head</source>
-        <translation type="unfinished"/>
+        <translation>二分音符 三角符头 下</translation>
     </message>
     <message>
         <source>up half triangle head</source>
-        <translation type="unfinished"/>
+        <translation>二分音符 三角符头 上</translation>
     </message>
     <message>
         <source>up quart triangle head</source>
-        <translation type="unfinished"/>
+        <translation>四分音符 三角符头 上</translation>
     </message>
     <message>
         <source>down quart triangle head</source>
-        <translation type="unfinished"/>
+        <translation>四分音符三角符头下</translation>
     </message>
     <message>
         <source>whole slash head</source>
-        <translation type="unfinished"/>
+        <translation>全音符斜杠符头</translation>
     </message>
     <message>
         <source>half slash head</source>
-        <translation type="unfinished"/>
+        <translation>二分音符斜杠符头</translation>
     </message>
     <message>
         <source>quart slash head</source>
-        <translation type="unfinished"/>
+        <translation>四分音符斜杠符头</translation>
     </message>
     <message>
         <source>whole cross head</source>
-        <translation type="unfinished"/>
+        <translation>全音符十字符头</translation>
     </message>
     <message>
         <source>half cross head</source>
-        <translation type="unfinished"/>
+        <translation>二分音符十字符头</translation>
     </message>
     <message>
         <source>cross head</source>
-        <translation type="unfinished"/>
+        <translation>十字符头</translation>
     </message>
     <message>
         <source>x circle head</source>
-        <translation type="unfinished"/>
+        <translation>x circle 符头</translation>
     </message>
     <message>
         <source>s0do head</source>
@@ -9354,7 +9355,7 @@ your version of MuseScore is too old.</source>
     </message>
     <message>
         <source>d1do head</source>
-        <translation type="unfinished">d2do 头 {1d?}</translation>
+        <translation>d1do 头</translation>
     </message>
     <message>
         <source>u1do head</source>
@@ -9414,11 +9415,11 @@ your version of MuseScore is too old.</source>
     </message>
     <message>
         <source>d1fa head</source>
-        <translation>d1fa head</translation>
+        <translation>d1fa 头</translation>
     </message>
     <message>
         <source>u2fa head</source>
-        <translation>u2fa head</translation>
+        <translation>u2fa 头</translation>
     </message>
     <message>
         <source>d2fa head</source>
@@ -9458,39 +9459,39 @@ your version of MuseScore is too old.</source>
     </message>
     <message>
         <source>ufermata</source>
-        <translation>延长记号（上面）ufermata</translation>
+        <translation>延长记号（向上）</translation>
     </message>
     <message>
         <source>dfermata</source>
-        <translation>延长记号（下面）</translation>
+        <translation>延长记号（向下）</translation>
     </message>
     <message>
         <source>snappizzicato</source>
-        <translation type="unfinished">单元拨奏</translation>
+        <translation>扣拨奏</translation>
     </message>
     <message>
         <source>ushortfermata</source>
-        <translation type="unfinished">短延长记号（上面）</translation>
+        <translation>延长记号向上的三角形（短）</translation>
     </message>
     <message>
         <source>dshortfermata</source>
-        <translation type="unfinished">短延长记号（下面）</translation>
+        <translation>延长记号向下的三角形（短）</translation>
     </message>
     <message>
         <source>ulongfermata</source>
-        <translation type="unfinished">长延长记号（上面）</translation>
+        <translation>延长记号向上方（长）</translation>
     </message>
     <message>
         <source>dlongfermata</source>
-        <translation type="unfinished">长延长记号（下面）</translation>
+        <translation>延长记号向下方（长）</translation>
     </message>
     <message>
         <source>uverylongfermata</source>
-        <translation type="unfinished"/>
+        <translation>延长记号（很长）的向上方</translation>
     </message>
     <message>
         <source>dverylongfermata</source>
-        <translation type="unfinished"/>
+        <translation>延长记号（很长）的向下方</translation>
     </message>
     <message>
         <source>thumb</source>
@@ -9498,7 +9499,7 @@ your version of MuseScore is too old.</source>
     </message>
     <message>
         <source>sforza to accent</source>
-        <translation type="unfinished"/>
+        <translation>强音到重音</translation>
     </message>
     <message>
         <source>espressivo</source>
@@ -9510,11 +9511,11 @@ your version of MuseScore is too old.</source>
     </message>
     <message>
         <source>ustaccatissimo</source>
-        <translation type="unfinished">大斷音記號(上)</translation>
+        <translation>短断音（向上）</translation>
     </message>
     <message>
         <source>dstaccatissimo</source>
-        <translation type="unfinished">大断音记号（下面）</translation>
+        <translation>短断音（向下）</translation>
     </message>
     <message>
         <source>tenuto</source>
@@ -9522,35 +9523,35 @@ your version of MuseScore is too old.</source>
     </message>
     <message>
         <source>uportato</source>
-        <translation type="unfinished">斷連奏(上)</translation>
+        <translation>断连奏（向上）</translation>
     </message>
     <message>
         <source>dportato</source>
-        <translation type="unfinished">斷連奏(下)</translation>
+        <translation>断连奏（向下）</translation>
     </message>
     <message>
         <source>umarcato</source>
-        <translation type="unfinished">強音記號(上)</translation>
+        <translation>加重音（向上）</translation>
     </message>
     <message>
         <source>dmarcato</source>
-        <translation>重音记号（向下）</translation>
+        <translation>加重音（向下）</translation>
     </message>
     <message>
         <source>ouvert</source>
-        <translation type="unfinished">開放音；自然泛音</translation>
+        <translation>开放音</translation>
     </message>
     <message>
         <source>plus stop</source>
-        <translation type="unfinished"/>
+        <translation>plus stop</translation>
     </message>
     <message>
         <source>up bow</source>
-        <translation type="unfinished"/>
+        <translation>上弓</translation>
     </message>
     <message>
         <source>down bow</source>
-        <translation type="unfinished"/>
+        <translation>下弓</translation>
     </message>
     <message>
         <source>reverse turn</source>
@@ -9566,23 +9567,23 @@ your version of MuseScore is too old.</source>
     </message>
     <message>
         <source>upedal heel</source>
-        <translation type="unfinished"/>
+        <translation>踏板脚跟（上）</translation>
     </message>
     <message>
         <source>dpedalheel</source>
-        <translation type="unfinished"/>
+        <translation>趾踏脚跟（下）</translation>
     </message>
     <message>
         <source>upedal toe</source>
-        <translation type="unfinished"/>
+        <translation>踏板脚趾（上）</translation>
     </message>
     <message>
         <source>dpedal toe</source>
-        <translation type="unfinished"/>
+        <translation>踏板脚趾（下）</translation>
     </message>
     <message>
         <source>flageolet</source>
-        <translation type="unfinished"/>
+        <translation>flageolet（谐波）</translation>
     </message>
     <message>
         <source>segno</source>
@@ -9598,11 +9599,11 @@ your version of MuseScore is too old.</source>
     </message>
     <message>
         <source>rcomma</source>
-        <translation>rcomma</translation>
+        <translation>右逗号</translation>
     </message>
     <message>
         <source>lcomma</source>
-        <translation>lcomma</translation>
+        <translation>左逗号</translation>
     </message>
     <message>
         <source>arpeggio</source>
@@ -9614,11 +9615,11 @@ your version of MuseScore is too old.</source>
     </message>
     <message>
         <source>arpeggio arrow down</source>
-        <translation type="unfinished"/>
+        <translation>下行琶音</translation>
     </message>
     <message>
         <source>arpeggio arrow up</source>
-        <translation type="unfinished"/>
+        <translation>上行琶音</translation>
     </message>
     <message>
         <source>trill element</source>
@@ -9670,59 +9671,59 @@ your version of MuseScore is too old.</source>
     </message>
     <message>
         <source>caesura curved</source>
-        <translation type="unfinished"/>
+        <translation>caesura 曲线</translation>
     </message>
     <message>
         <source>caesura straight</source>
-        <translation type="unfinished"/>
+        <translation>caesura 直线</translation>
     </message>
     <message>
         <source>eight flag</source>
-        <translation>8 旗标</translation>
+        <translation>8分音符旗标</translation>
     </message>
     <message>
         <source>sixteenth flag</source>
-        <translation>16 旗标</translation>
+        <translation>16分音符旗标</translation>
     </message>
     <message>
         <source>thirtysecond flag</source>
-        <translation>32 旗标</translation>
+        <translation>32分音符 旗标</translation>
     </message>
     <message>
         <source>sixtyfour flag</source>
-        <translation>64 旗标</translation>
+        <translation>64分音符 旗标</translation>
     </message>
     <message>
         <source>128flag</source>
-        <translation>128 旗标</translation>
+        <translation>128分音符 旗标</translation>
     </message>
     <message>
         <source>deight flag</source>
-        <translation>deight 旗标</translation>
+        <translation>8分音符旗标（向下）</translation>
     </message>
     <message>
         <source>grace dash</source>
-        <translation type="unfinished"/>
+        <translation>装饰音符斜线</translation>
     </message>
     <message>
         <source>dgrace dash</source>
-        <translation type="unfinished"/>
+        <translation>装饰音符斜线（向下符尾用）</translation>
     </message>
     <message>
         <source>dsixteenth flag</source>
-        <translation>dsixteenth 旗标</translation>
+        <translation>16分音符旗标（向下）</translation>
     </message>
     <message>
         <source>dthirtysecond flag</source>
-        <translation>dthirtysecond 旗标</translation>
+        <translation>32分音符旗标（向下）</translation>
     </message>
     <message>
         <source>dsixtyfourth flag</source>
-        <translation>dsixtyfourth 旗标</translation>
+        <translation>64分音符旗标（向下）</translation>
     </message>
     <message>
         <source>d128flag</source>
-        <translation>d128旗标</translation>
+        <translation>128分音符旗标（向下）</translation>
     </message>
     <message>
         <source>alto clef</source>
@@ -9794,51 +9795,51 @@ your version of MuseScore is too old.</source>
     </message>
     <message>
         <source>pedale</source>
-        <translation>踏板</translation>
+        <translation>踏板e</translation>
     </message>
     <message>
         <source>pedal ped</source>
-        <translation>踏板垫</translation>
+        <translation>踏板 ped</translation>
     </message>
     <message>
         <source>bracket tips up</source>
-        <translation type="unfinished"/>
+        <translation>附注（右上）</translation>
     </message>
     <message>
         <source>bracket tips down</source>
-        <translation type="unfinished"/>
+        <translation>附注（右下）</translation>
     </message>
     <message>
         <source>bracket tips left up</source>
-        <translation type="unfinished"/>
+        <translation>附注（左上）</translation>
     </message>
     <message>
         <source>bracket tips left down</source>
-        <translation type="unfinished"/>
+        <translation>附注（左下）</translation>
     </message>
     <message>
         <source>acc dot</source>
-        <translation type="unfinished"/>
+        <translation>acc dot</translation>
     </message>
     <message>
         <source>acc freebase</source>
-        <translation type="unfinished"/>
+        <translation>acc freebase</translation>
     </message>
     <message>
         <source>acc stdbase</source>
-        <translation type="unfinished"/>
+        <translation>acc stdbase</translation>
     </message>
     <message>
         <source>acc bayanbase</source>
-        <translation type="unfinished"/>
+        <translation>acc bayanbase</translation>
     </message>
     <message>
         <source>acc old ee</source>
-        <translation type="unfinished"/>
+        <translation>acc old ee</translation>
     </message>
     <message>
         <source>acc discant</source>
-        <translation type="unfinished"/>
+        <translation>acc discant</translation>
     </message>
     <message>
         <source>zero</source>

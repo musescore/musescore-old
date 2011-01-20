@@ -6774,7 +6774,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>file new</source>
-        <translation type="unfinished"/>
+        <translation>File new</translation>
     </message>
     <message>
         <source>New...</source>
@@ -7050,7 +7050,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>rest</source>
-        <translation type="unfinished"/>
+        <translation>Rest</translation>
     </message>
     <message>
         <source>Add More Stretch</source>
@@ -7070,7 +7070,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Reset Beam Mode</source>
-        <translation type="unfinished"/>
+        <translation>Reset beam mode</translation>
     </message>
     <message>
         <source>up+shift+ctrl</source>
@@ -7086,7 +7086,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>add previous chord to selection</source>
-        <translation type="unfinished"/>
+        <translation>Add previous chord to selection</translation>
     </message>
     <message>
         <source>left+shift</source>
@@ -7094,11 +7094,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>select to beginning of measure</source>
-        <translation type="unfinished"/>
+        <translation>Select to beginning of measure</translation>
     </message>
     <message>
         <source>add next chord to selection</source>
-        <translation type="unfinished"/>
+        <translation>Add next chord to selection</translation>
     </message>
     <message>
         <source>right+shift</source>
@@ -7106,7 +7106,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>select to end of measure</source>
-        <translation type="unfinished"/>
+        <translation>Select to end of measure</translation>
     </message>
     <message>
         <source>right+ctrl+shift</source>
@@ -7114,7 +7114,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>select to beginning of line</source>
-        <translation type="unfinished"/>
+        <translation>Select to beginning of line</translation>
     </message>
     <message>
         <source>shift+home</source>
@@ -7122,7 +7122,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>select to end of line</source>
-        <translation type="unfinished"/>
+        <translation>Select to end of line</translation>
     </message>
     <message>
         <source>shift+end</source>
@@ -7130,7 +7130,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>select to beginning of score</source>
-        <translation type="unfinished"/>
+        <translation>Select to beginning of score</translation>
     </message>
     <message>
         <source>ctrl+shift+home</source>
@@ -7138,7 +7138,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>select to end of score</source>
-        <translation type="unfinished"/>
+        <translation>Select to end of score</translation>
     </message>
     <message>
         <source>ctrl+shift+end</source>
@@ -7146,43 +7146,43 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>add staff above to selection</source>
-        <translation type="unfinished"/>
+        <translation>Add staff above to selection</translation>
     </message>
     <message>
         <source>add staff below to selection</source>
-        <translation type="unfinished"/>
+        <translation>Add staff below to selection</translation>
     </message>
     <message>
         <source>page-prev</source>
-        <translation type="unfinished"/>
+        <translation>Previous page</translation>
     </message>
     <message>
         <source>page-next</source>
-        <translation type="unfinished"/>
+        <translation>Next page</translation>
     </message>
     <message>
         <source>page-top</source>
-        <translation type="unfinished"/>
+        <translation>Top of page</translation>
     </message>
     <message>
         <source>page-end</source>
-        <translation type="unfinished"/>
+        <translation>End of page</translation>
     </message>
     <message>
         <source>add slur</source>
-        <translation type="unfinished"/>
+        <translation>Add slur</translation>
     </message>
     <message>
         <source>crescendo</source>
-        <translation type="unfinished">Crescendo</translation>
+        <translation>Crescendo</translation>
     </message>
     <message>
         <source>decrescendo</source>
-        <translation type="unfinished"/>
+        <translation>Decrescendo</translation>
     </message>
     <message>
         <source>ESCAPE</source>
-        <translation type="unfinished"/>
+        <translation>Escape</translation>
     </message>
     <message>
         <source>Delete Selected Measures</source>
@@ -7254,7 +7254,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Other Tuplets</source>
-        <translation type="unfinished"/>
+        <translation>Other tuplets</translation>
     </message>
     <message>
         <source>Other...</source>
@@ -7262,7 +7262,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>note longa</source>
-        <translation type="unfinished"/>
+        <translation>Note longa</translation>
     </message>
     <message>
         <source>Longa</source>
@@ -7270,7 +7270,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>note breve</source>
-        <translation type="unfinished"/>
+        <translation>Note breve</translation>
     </message>
     <message>
         <source>Double whole note (breve)</source>
@@ -7278,7 +7278,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>pad note 1/1</source>
-        <translation type="unfinished"/>
+        <translation>Pad note 1/1</translation>
     </message>
     <message>
         <source>Whole note (semibreve)</source>
@@ -7286,7 +7286,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>pad note 1/2</source>
-        <translation type="unfinished"/>
+        <translation>Pad note 1/2</translation>
     </message>
     <message>
         <source>Half note (minim)</source>
@@ -7294,7 +7294,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>pad note 1/4</source>
-        <translation type="unfinished"/>
+        <translation>Pad note 1/4</translation>
     </message>
     <message>
         <source>Quarter note (crochet)</source>
@@ -7302,7 +7302,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>pad note 1/8</source>
-        <translation type="unfinished"/>
+        <translation>Pad note 1/8</translation>
     </message>
     <message>
         <source>Eighth note (quaver)</source>
@@ -7310,7 +7310,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>pad note 1/16</source>
-        <translation type="unfinished"/>
+        <translation>Pad note 1/16</translation>
     </message>
     <message>
         <source>16th note (semiquaver)</source>
@@ -7318,7 +7318,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>pad note 1/32</source>
-        <translation type="unfinished"/>
+        <translation>Pad note 1/32</translation>
     </message>
     <message>
         <source>32nd note (demi-semiquaver)</source>
@@ -7326,7 +7326,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>pad note 1/64</source>
-        <translation type="unfinished"/>
+        <translation>Pad note 1/64</translation>
     </message>
     <message>
         <source>64th note (semi-demi-semiquaver)</source>
@@ -7334,7 +7334,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>pad dot</source>
-        <translation type="unfinished"/>
+        <translation>Pad dot</translation>
     </message>
     <message>
         <source>Dot</source>
@@ -7342,7 +7342,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>pad double dot</source>
-        <translation type="unfinished"/>
+        <translation>Pad double dot</translation>
     </message>
     <message>
         <source>Double dot</source>
@@ -7350,11 +7350,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>tie</source>
-        <translation type="unfinished"/>
+        <translation>Tie</translation>
     </message>
     <message>
         <source>pad rest</source>
-        <translation type="unfinished"/>
+        <translation>Pad rest</translation>
     </message>
     <message>
         <source>double sharp</source>
@@ -7394,23 +7394,23 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>voice 1</source>
-        <translation type="unfinished"/>
+        <translation>Voice 1</translation>
     </message>
     <message>
         <source>voice 2</source>
-        <translation type="unfinished"/>
+        <translation>Voice 2</translation>
     </message>
     <message>
         <source>voice 3</source>
-        <translation type="unfinished"/>
+        <translation>Voice 3</translation>
     </message>
     <message>
         <source>voice 4</source>
-        <translation type="unfinished"/>
+        <translation>Voice 4</translation>
     </message>
     <message>
         <source>midi input in</source>
-        <translation type="unfinished"/>
+        <translation>MIDI input in</translation>
     </message>
     <message>
         <source>Enable MIDI Input</source>
@@ -7418,7 +7418,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>editing sound on</source>
-        <translation type="unfinished"/>
+        <translation>Editing sound on</translation>
     </message>
     <message>
         <source>Enable sound while editing</source>
@@ -7426,7 +7426,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>beam start</source>
-        <translation type="unfinished"/>
+        <translation>Beam start</translation>
     </message>
     <message>
         <source>beam mid</source>
@@ -7438,7 +7438,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>beam 32</source>
-        <translation type="unfinished"/>
+        <translation>Beam 32</translation>
     </message>
     <message>
         <source>auto beam</source>
@@ -7450,7 +7450,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Play Panel</source>
-        <translation type="unfinished"/>
+        <translation>Play panel</translation>
     </message>
     <message>
         <source>Navigator</source>
@@ -7462,7 +7462,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Transport Toolbar</source>
-        <translation type="unfinished"/>
+        <translation>Transport toolbar</translation>
     </message>
     <message>
         <source>Transport</source>
@@ -7470,11 +7470,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Note Input Toolbar</source>
-        <translation type="unfinished"/>
+        <translation>Note input toolbar</translation>
     </message>
     <message>
         <source>Status Bar</source>
-        <translation type="unfinished"/>
+        <translation>Status bar</translation>
     </message>
     <message>
         <source>Quit</source>
@@ -7494,7 +7494,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Fingering Palette</source>
-        <translation type="unfinished"/>
+        <translation>Fingering palette</translation>
     </message>
     <message>
         <source>Fingering...</source>
@@ -7506,7 +7506,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tempo Palette</source>
-        <translation type="unfinished"/>
+        <translation>Tempo palette</translation>
     </message>
     <message>
         <source>Tempo...</source>
@@ -7522,7 +7522,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add System Text</source>
-        <translation type="unfinished"/>
+        <translation>Add system text</translation>
     </message>
     <message>
         <source>System Text</source>
@@ -7530,7 +7530,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add Staff Text</source>
-        <translation type="unfinished"/>
+        <translation>Add staff text</translation>
     </message>
     <message>
         <source>Staff Text</source>
@@ -7538,7 +7538,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add Text</source>
-        <translation type="unfinished"/>
+        <translation>Add text</translation>
     </message>
     <message>
         <source>Frame Text</source>
@@ -7546,7 +7546,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add Title</source>
-        <translation type="unfinished"/>
+        <translation>Add title</translation>
     </message>
     <message>
         <source>Title</source>
@@ -7558,7 +7558,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add Subtitle</source>
-        <translation type="unfinished"/>
+        <translation>Add subtitle</translation>
     </message>
     <message>
         <source>Subtitle</source>
@@ -7570,7 +7570,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add Composer</source>
-        <translation type="unfinished"/>
+        <translation>Add composer</translation>
     </message>
     <message>
         <source>Composer</source>
@@ -7582,7 +7582,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add Poet</source>
-        <translation type="unfinished"/>
+        <translation>Add poet</translation>
     </message>
     <message>
         <source>Poet</source>
@@ -7594,7 +7594,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add Copyright</source>
-        <translation type="unfinished"/>
+        <translation>Add copyright</translation>
     </message>
     <message>
         <source>Copyright</source>
@@ -7606,7 +7606,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add Chord Name</source>
-        <translation type="unfinished"/>
+        <translation>Add chord name</translation>
     </message>
     <message>
         <source>Chord Name</source>
@@ -7618,7 +7618,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>show harmony properties for chord</source>
-        <translation type="unfinished"/>
+        <translation>Show harmony properties for chord</translation>
     </message>
     <message>
         <source>Harmony Properties</source>

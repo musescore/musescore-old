@@ -928,19 +928,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>ontime offset type</source>
-        <translation>typ posunu přesně na čas</translation>
+        <translation>Typ posunu doby zapnutí</translation>
     </message>
     <message>
         <source>ontime offset</source>
-        <translation>posun přesně na čas</translation>
+        <translation>Posun doby zapnutí</translation>
     </message>
     <message>
         <source>offtime offset type</source>
-        <translation>typ posunu mimo čas</translation>
+        <translation>Typ posunu doby vypnutí</translation>
     </message>
     <message>
         <source>offtime</source>
-        <translation>mimo čas</translation>
+        <translation>Doba vypnutí</translation>
     </message>
     <message>
         <source> cent</source>
@@ -1456,71 +1456,71 @@ nepodařilo se: </translation>
     </message>
     <message>
         <source>Perfect Fourth</source>
-        <translation type="unfinished">Čistá kvarta</translation>
+        <translation>Čistá kvarta</translation>
     </message>
     <message>
         <source>Augmented Fourth</source>
-        <translation type="unfinished">Zvětšená kvarta</translation>
+        <translation>Zvýšená kvarta</translation>
     </message>
     <message>
         <source>Diminished Fifth</source>
-        <translation type="unfinished">Zmenšená kvinta</translation>
+        <translation>Zmenšená kvinta</translation>
     </message>
     <message>
         <source>Perfect Fifth</source>
-        <translation type="unfinished">Čistá kvinta</translation>
+        <translation>Čistá kvinta</translation>
     </message>
     <message>
         <source>Augmented Fifth</source>
-        <translation type="unfinished">Zvětšená kvinta</translation>
+        <translation>Zvětšená kvinta</translation>
     </message>
     <message>
         <source>Diminished Sixth</source>
-        <translation type="unfinished">Zmenšená sexta</translation>
+        <translation>Zmenšená sexta</translation>
     </message>
     <message>
         <source>Minor Sixth</source>
-        <translation type="unfinished">Malá sexta</translation>
+        <translation>Malá sexta</translation>
     </message>
     <message>
         <source>Major Sixth</source>
-        <translation type="unfinished">Velká sexta</translation>
+        <translation>Velká sexta</translation>
     </message>
     <message>
         <source>Augmented Sixth</source>
-        <translation type="unfinished">Zvětšená sexta</translation>
+        <translation>Zvětšená sexta</translation>
     </message>
     <message>
         <source>Diminished Seventh</source>
-        <translation type="unfinished">Zmenšená septima</translation>
+        <translation>Zmenšená septima</translation>
     </message>
     <message>
         <source>Minor Seventh</source>
-        <translation type="unfinished">Malá septima</translation>
+        <translation>Malá septima</translation>
     </message>
     <message>
         <source>Major Seventh</source>
-        <translation type="unfinished">Velká septima</translation>
+        <translation>Velká septima</translation>
     </message>
     <message>
         <source>Augmented Seventh</source>
-        <translation type="unfinished">Zvětšená septima</translation>
+        <translation>Zvětšená septima</translation>
     </message>
     <message>
         <source>Diminished Octave</source>
-        <translation type="unfinished">Zmenšená oktáva</translation>
+        <translation>Zmenšená oktáva</translation>
     </message>
     <message>
         <source>Perfect Octave</source>
-        <translation type="unfinished">Čistá oktáva</translation>
+        <translation>Čistá oktáva</translation>
     </message>
     <message>
         <source>up</source>
-        <translation type="unfinished">nahoru</translation>
+        <translation>nahoru</translation>
     </message>
     <message>
         <source>down</source>
-        <translation type="unfinished">dolů</translation>
+        <translation>dolů</translation>
     </message>
     <message>
         <source>Change Instrument...</source>
@@ -2361,7 +2361,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>show more</source>
-        <translation type="unfinished">Ukázat více</translation>
+        <translation>Ukázat více</translation>
     </message>
 </context>
 <context>
@@ -2483,19 +2483,19 @@ selhalo: </translation>
     <name>KeySig</name>
     <message>
         <source>Hide courtesy signature</source>
-        <translation type="unfinished"/>
+        <translation>Skrýt oznámení změny</translation>
     </message>
     <message>
         <source>Show courtesy signature</source>
-        <translation type="unfinished"/>
+        <translation>Ukázat oznámení změny</translation>
     </message>
     <message>
         <source>Hide naturals</source>
-        <translation type="unfinished"/>
+        <translation>Skrýt odrážky</translation>
     </message>
     <message>
         <source>Show naturals</source>
-        <translation type="unfinished"/>
+        <translation>Ukázat odrážky</translation>
     </message>
 </context>
 <context>
@@ -3665,43 +3665,43 @@ není slučitelný se současným rozhraním</translation>
     </message>
     <message>
         <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</source>
-        <translation type="unfinished"/>
+        <translation>Všechny podporované soubory (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</translation>
     </message>
     <message>
         <source>MuseScore Files (*.mscz *.mscx *.msc);;</source>
-        <translation type="unfinished"/>
+        <translation>Soubory MuseScore (*.mscz *.mscx *.msc);;</translation>
     </message>
     <message>
         <source>MusicXML Files (*.xml *.mxl);;</source>
-        <translation type="unfinished"/>
+        <translation>Soubory MusicXML (*.xml *.mxl);;</translation>
     </message>
     <message>
         <source>MIDI Files (*.mid *.midi *.kar);;</source>
-        <translation type="unfinished"/>
+        <translation>Soubory MIDI (*.mid *.midi *.kar);;</translation>
     </message>
     <message>
         <source>Muse Data Files (*.md);;</source>
-        <translation type="unfinished"/>
+        <translation>Soubory Muse Data (*.md);;</translation>
     </message>
     <message>
         <source>Capella Files (*.cap);;</source>
-        <translation type="unfinished"/>
+        <translation>Soubory Capella (*.cap);;</translation>
     </message>
     <message>
         <source>Bagpipe Music Writer Files (*.bww);;</source>
-        <translation type="unfinished"/>
+        <translation>Soubory Bagpipe Music Writer (*.bww);;</translation>
     </message>
     <message>
         <source>BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;</source>
-        <translation type="unfinished"/>
+        <translation>Soubory BB &lt;pokusně&gt; (*.mgu *.MGU *.sgu *.SGU);;</translation>
     </message>
     <message>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
-        <translation type="unfinished"/>
+        <translation>Soubory Overture &lt;pokusně&gt; (*.ove);;</translation>
     </message>
     <message>
         <source>All Files (*)</source>
-        <translation type="unfinished"/>
+        <translation>Všechny soubory (*)</translation>
     </message>
 </context>
 <context>
@@ -3849,11 +3849,11 @@ není slučitelný se současným rozhraním</translation>
     </message>
     <message>
         <source>OnTime:</source>
-        <translation type="unfinished"/>
+        <translation>Doba zapnutí:</translation>
     </message>
     <message>
         <source>OffTime:</source>
-        <translation type="unfinished"/>
+        <translation>Doba vypnutí:</translation>
     </message>
 </context>
 <context>
@@ -3955,7 +3955,7 @@ není slučitelný se současným rozhraním</translation>
     </message>
     <message>
         <source>First page no.</source>
-        <translation type="unfinished"/>
+        <translation>Číslo první strany</translation>
     </message>
 </context>
 <context>
@@ -4747,11 +4747,11 @@ v pixelech (vyšší hodnota rovná se větší poloměr)</translation>
     </message>
     <message>
         <source>Character Set used when import non-unicode strings. (For binary file import)</source>
-        <translation type="unfinished"/>
+        <translation>Znaková sada používaná při zavádění řetězců, jež nejsou unicode. (pro zavádění binárních souborů)</translation>
     </message>
     <message>
         <source>Character Set</source>
-        <translation type="unfinished"/>
+        <translation>Znaková sada</translation>
     </message>
 </context>
 <context>
@@ -5210,7 +5210,7 @@ Zkuste uložení do jiného umístění.</translation>
     </message>
     <message>
         <source>Write Style failed: </source>
-        <translation type="unfinished">Zápis stylu se nezdařil: </translation>
+        <translation>Zápis stylu se nezdařil: </translation>
     </message>
     <message>
         <source>Load failed: </source>
@@ -5368,7 +5368,7 @@ Zkuste uložení do jiného umístění.</translation>
     <name>SelectInstrument</name>
     <message>
         <source>Dialog</source>
-        <translation type="unfinished">Dialog</translation>
+        <translation>Dialog</translation>
     </message>
     <message>
         <source>0</source>
@@ -5376,7 +5376,7 @@ Zkuste uložení do jiného umístění.</translation>
     </message>
     <message>
         <source>show more</source>
-        <translation type="unfinished">Ukázat více</translation>
+        <translation>Ukázat více</translation>
     </message>
 </context>
 <context>
@@ -5504,7 +5504,7 @@ a zaškrtněte, že umístění souboru je správné</translation>
     <name>ShowRestWidget</name>
     <message>
         <source>auto</source>
-        <translation>auto</translation>
+        <translation>Automaticky</translation>
     </message>
     <message>
         <source>beam begin</source>
@@ -5512,7 +5512,7 @@ a zaškrtněte, že umístění souboru je správné</translation>
     </message>
     <message>
         <source>beam mid</source>
-        <translation>Střed trámce</translation>
+        <translation>Prostředek trámce</translation>
     </message>
     <message>
         <source>beam end</source>
@@ -5556,7 +5556,7 @@ a zaškrtněte, že umístění souboru je správné</translation>
     <message>
         <source>Tick:</source>
         <translatorcomment>Odškrtnutí:</translatorcomment>
-        <translation/>
+        <translation>Znaménko:</translation>
     </message>
 </context>
 <context>
@@ -5571,7 +5571,7 @@ a zaškrtněte, že umístění souboru je správné</translation>
     </message>
     <message>
         <source>solid</source>
-        <translation>plný</translation>
+        <translation>Plný</translation>
     </message>
     <message>
         <source>dotted</source>
@@ -5610,7 +5610,7 @@ a zaškrtněte, že umístění souboru je správné</translation>
     <name>SplitStaff</name>
     <message>
         <source>MuseScore: Edit Staff/Part Properties</source>
-        <translation>MuseScore: Upravit vlastnosti notové osnovy/hlasu</translation>
+        <translation>MuseScore: Vlastnosti osnovy/hlasu</translation>
     </message>
     <message>
         <source>Split Staff</source>
@@ -5640,7 +5640,7 @@ a zaškrtněte, že umístění souboru je správné</translation>
     </message>
     <message>
         <source>Midi Action</source>
-        <translation>Krok MIDI</translation>
+        <translation>Činnost MIDI</translation>
     </message>
 </context>
 <context>
@@ -5681,11 +5681,11 @@ a zaškrtněte, že umístění souboru je správné</translation>
     </message>
     <message>
         <source>Rev</source>
-        <translation>Ozv</translation>
+        <translation>Ozvěna</translation>
     </message>
     <message>
         <source>Cho</source>
-        <translation>Sbo</translation>
+        <translation>Sbor</translation>
     </message>
     <message>
         <source>master volume</source>
@@ -5693,7 +5693,7 @@ a zaškrtněte, že umístění souboru je správné</translation>
     </message>
     <message>
         <source>Vol</source>
-        <translation>Hla</translation>
+        <translation>Hlasitost</translation>
     </message>
     <message>
         <source>...</source>
@@ -5803,11 +5803,11 @@ a zaškrtněte, že umístění souboru je správné</translation>
     </message>
     <message>
         <source>Set Invisible</source>
-        <translation>Nastavit jako neviditelné</translation>
+        <translation>Nastavit neviditelné</translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation>Nastavit jako viditelné</translation>
+        <translation>Nastavit viditelné</translation>
     </message>
 </context>
 <context>
@@ -5863,15 +5863,15 @@ a zaškrtněte, že umístění souboru je správné</translation>
     <name>TextC</name>
     <message>
         <source>Set Invisible</source>
-        <translation type="unfinished">Nastavit jako neviditelné</translation>
+        <translation>Nastavit neviditelné</translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation type="unfinished">Nastavit jako viditelné</translation>
+        <translation>Nastavit viditelné</translation>
     </message>
     <message>
         <source>Text Properties...</source>
-        <translation type="unfinished">Vlastnosti textu...</translation>
+        <translation>Vlastnosti textu...</translation>
     </message>
 </context>
 <context>
@@ -6157,7 +6157,7 @@ a zaškrtněte, že umístění souboru je správné</translation>
     </message>
     <message>
         <source>System Flag</source>
-        <translation type="unfinished">Praporek systému</translation>
+        <translation>Systémový příznak</translation>
     </message>
 </context>
 <context>
@@ -6186,11 +6186,11 @@ a zaškrtněte, že umístění souboru je správné</translation>
     </message>
     <message>
         <source>4/4 common time</source>
-        <translation type="unfinished">4/4 čtyřčtvrťový takt/rytmus</translation>
+        <translation>4/4 čtyřčtvrťový takt/rytmus</translation>
     </message>
     <message>
         <source>2/2 alla breve</source>
-        <translation type="unfinished">2/2 alla breve</translation>
+        <translation>2/2 alla breve</translation>
     </message>
 </context>
 <context>
@@ -6476,17 +6476,17 @@ p, li { white-space: pre-wrap; }
     <name>TremoloBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished">Formulář</translation>
+        <translation>Formulář</translation>
     </message>
     <message>
         <source>firstChord</source>
         <extracomment>do not translate</extracomment>
-        <translation type="unfinished"/>
+        <translation>První akord</translation>
     </message>
     <message>
         <source>secondChord</source>
         <extracomment>do not translate - only for debugging</extracomment>
-        <translation type="unfinished"/>
+        <translation>Druhý akord</translation>
     </message>
 </context>
 <context>
@@ -6665,7 +6665,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>natural</source>
-        <translation>Bez předznamenání</translation>
+        <translation>Odrážka</translation>
     </message>
     <message>
         <source>(sharp)</source>
@@ -6773,15 +6773,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>natural arrow up</source>
-        <translation>Bez předznamenání šipka nahoru</translation>
+        <translation>Odrážka šipka nahoru</translation>
     </message>
     <message>
         <source>natural arrow down</source>
-        <translation>Bez předznamenání šipka dolů</translation>
+        <translation>Odrážka šipka dolů</translation>
     </message>
     <message>
         <source>natural arrow both</source>
-        <translation>Bez předznamenání šipka obě</translation>
+        <translation>Odrážka šipka obě</translation>
     </message>
 </context>
 <context>
@@ -7408,7 +7408,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>natural</source>
-        <translation>Bez předznamenání</translation>
+        <translation>Odrážka</translation>
     </message>
     <message>
         <source>double flat</source>
@@ -8384,7 +8384,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Parts...</source>
-        <translation type="unfinished">Hlasy...</translation>
+        <translation>Hlasy...</translation>
     </message>
 </context>
 <context>
@@ -9030,7 +9030,8 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Cannot read this score:
 your version of MuseScore is too old.</source>
-        <translation type="unfinished"/>
+        <translation>Tento notový zápis nelze přečíst:&#13;
+vaše verze MuseScore je příliš stará.</translation>
     </message>
 </context>
 <context>
@@ -9157,15 +9158,15 @@ your version of MuseScore is too old.</source>
     </message>
     <message>
         <source>sharp</source>
-        <translation type="unfinished">křížek</translation>
+        <translation>Křížek</translation>
     </message>
     <message>
         <source>sharp arrow up</source>
-        <translation type="unfinished">křížek šipka nahoru</translation>
+        <translation>Křížek šipka nahoru</translation>
     </message>
     <message>
         <source>sharp arrow both</source>
-        <translation type="unfinished">křížek šipka obě</translation>
+        <translation>Křížek šipka obojí</translation>
     </message>
     <message>
         <source>sharp slash</source>
@@ -9185,31 +9186,31 @@ your version of MuseScore is too old.</source>
     </message>
     <message>
         <source>natural</source>
-        <translation type="unfinished">bez předznamenání</translation>
+        <translation>Odrážka</translation>
     </message>
     <message>
         <source>natural arrow up</source>
-        <translation type="unfinished">bez předznamenání šipka nahoru</translation>
+        <translation>Odrážka šipka nahoru</translation>
     </message>
     <message>
         <source>natural arrow down</source>
-        <translation type="unfinished">bez předznamenání šipka dolů</translation>
+        <translation>Odrážka šipka dolů</translation>
     </message>
     <message>
         <source>natural arrow both</source>
-        <translation type="unfinished">bez předznamenání šipka obě</translation>
+        <translation>Odrážka šipka obojí</translation>
     </message>
     <message>
         <source>flat</source>
-        <translation type="unfinished">Béčko</translation>
+        <translation>Béčko</translation>
     </message>
     <message>
         <source>flat arrow up</source>
-        <translation type="unfinished">béčko šipka nahoru</translation>
+        <translation>Béčko šipka nahoru</translation>
     </message>
     <message>
         <source>flat arrow both</source>
-        <translation type="unfinished">béčko šipka obě</translation>
+        <translation>Béčko šipka obojí</translation>
     </message>
     <message>
         <source>flat slash</source>
@@ -9253,7 +9254,7 @@ your version of MuseScore is too old.</source>
     </message>
     <message>
         <source>dot</source>
-        <translation type="unfinished">tečka</translation>
+        <translation>Tečka</translation>
     </message>
     <message>
         <source>longa up</source>
@@ -9453,43 +9454,43 @@ your version of MuseScore is too old.</source>
     </message>
     <message>
         <source>ufermata</source>
-        <translation type="unfinished">Fermata nahoře</translation>
+        <translation>Horní koruna</translation>
     </message>
     <message>
         <source>dfermata</source>
-        <translation type="unfinished">Fermata dole</translation>
+        <translation>Dolní koruna</translation>
     </message>
     <message>
         <source>snappizzicato</source>
-        <translation type="unfinished">Kvapné pizzicato</translation>
+        <translation>Snappizzicato</translation>
     </message>
     <message>
         <source>ushortfermata</source>
-        <translation type="unfinished">Krátká fermata nahoře</translation>
+        <translation>Horní krátká koruna</translation>
     </message>
     <message>
         <source>dshortfermata</source>
-        <translation type="unfinished">Krátká fermata dole</translation>
+        <translation>Dolní krátká koruna</translation>
     </message>
     <message>
         <source>ulongfermata</source>
-        <translation type="unfinished">Dlouhá fermata nahoře</translation>
+        <translation>Horní dlouhá koruna</translation>
     </message>
     <message>
         <source>dlongfermata</source>
-        <translation type="unfinished">Dlouhá fermata dole</translation>
+        <translation>Dolní dlouhá koruna</translation>
     </message>
     <message>
         <source>uverylongfermata</source>
-        <translation type="unfinished">Velmi dlouhá fermata nahoře</translation>
+        <translation>Horní velmi dlouhá koruna</translation>
     </message>
     <message>
         <source>dverylongfermata</source>
-        <translation type="unfinished">Velmi dlouhá fermata dole</translation>
+        <translation>Dolní velmi dlouhá koruna</translation>
     </message>
     <message>
         <source>thumb</source>
-        <translation type="unfinished">Palec</translation>
+        <translation>Palec</translation>
     </message>
     <message>
         <source>sforza to accent</source>
@@ -9497,43 +9498,43 @@ your version of MuseScore is too old.</source>
     </message>
     <message>
         <source>espressivo</source>
-        <translation type="unfinished">Espressivo</translation>
+        <translation>Espressivo</translation>
     </message>
     <message>
         <source>staccato</source>
-        <translation type="unfinished">Staccato</translation>
+        <translation>Staccato</translation>
     </message>
     <message>
         <source>ustaccatissimo</source>
-        <translation type="unfinished">Staccatissimo nahoře</translation>
+        <translation>Staccatissimo nahoru</translation>
     </message>
     <message>
         <source>dstaccatissimo</source>
-        <translation type="unfinished">Staccatissimo dole</translation>
+        <translation>Staccatissimo dolů</translation>
     </message>
     <message>
         <source>tenuto</source>
-        <translation type="unfinished">Tenuto</translation>
+        <translation>Tenuto</translation>
     </message>
     <message>
         <source>uportato</source>
-        <translation type="unfinished">Portato nahoře</translation>
+        <translation>Portato nahoru</translation>
     </message>
     <message>
         <source>dportato</source>
-        <translation type="unfinished">Portato dole</translation>
+        <translation>Portato dolů</translation>
     </message>
     <message>
         <source>umarcato</source>
-        <translation type="unfinished">Marcato nahoře</translation>
+        <translation>Marcato nahoru</translation>
     </message>
     <message>
         <source>dmarcato</source>
-        <translation type="unfinished">Marcato dole</translation>
+        <translation>Marcato dolů</translation>
     </message>
     <message>
         <source>ouvert</source>
-        <translation type="unfinished">Předehra</translation>
+        <translation>Předehra</translation>
     </message>
     <message>
         <source>plus stop</source>
@@ -9553,11 +9554,11 @@ your version of MuseScore is too old.</source>
     </message>
     <message>
         <source>turn</source>
-        <translation type="unfinished">Obal</translation>
+        <translation>Obal</translation>
     </message>
     <message>
         <source>trill</source>
-        <translation type="unfinished">Trylek</translation>
+        <translation>Trylek</translation>
     </message>
     <message>
         <source>upedal heel</source>
@@ -9621,11 +9622,11 @@ your version of MuseScore is too old.</source>
     </message>
     <message>
         <source>prall</source>
-        <translation type="unfinished">Náraz (prall)</translation>
+        <translation>Prall</translation>
     </message>
     <message>
         <source>mordent</source>
-        <translation type="unfinished">Mordent</translation>
+        <translation>Mordent</translation>
     </message>
     <message>
         <source>prall prall</source>
@@ -9729,7 +9730,7 @@ your version of MuseScore is too old.</source>
     </message>
     <message>
         <source>bass clef</source>
-        <translation type="unfinished">Basový klíč</translation>
+        <translation>Basový klíč</translation>
     </message>
     <message>
         <source>cbass clef</source>
@@ -9813,27 +9814,27 @@ your version of MuseScore is too old.</source>
     </message>
     <message>
         <source>acc dot</source>
-        <translation type="unfinished"/>
+        <translation>Předznamenání tečka</translation>
     </message>
     <message>
         <source>acc freebase</source>
-        <translation type="unfinished"/>
+        <translation>Předznamenání freebase</translation>
     </message>
     <message>
         <source>acc stdbase</source>
-        <translation type="unfinished"/>
+        <translation>Předznamenání stdbase</translation>
     </message>
     <message>
         <source>acc bayanbase</source>
-        <translation type="unfinished"/>
+        <translation>Předznamenání bayanbase</translation>
     </message>
     <message>
         <source>acc old ee</source>
-        <translation type="unfinished"/>
+        <translation>Předznamenání old ee</translation>
     </message>
     <message>
         <source>acc discant</source>
-        <translation type="unfinished"/>
+        <translation>Předznamenání diskant</translation>
     </message>
     <message>
         <source>zero</source>

@@ -218,7 +218,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>## (double sharp)</source>
-        <translation>## podwójny krzyżyk</translation>
+        <translation>## (podwójny krzyżyk)</translation>
     </message>
     <message>
         <source>D</source>
@@ -2022,7 +2022,7 @@ space unit</extracomment>
     <name>ExcerptsDialog</name>
     <message>
         <source>MuseScore: Parts</source>
-        <translation>MuseScore: Głosy</translation>
+        <translation>MuseScore: Wyciągi głosów</translation>
     </message>
     <message>
         <source>Select Part:</source>
@@ -2054,7 +2054,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Part Title:</source>
-        <translation>Tytuł części:</translation>
+        <translation>Nazwa głosu:</translation>
     </message>
     <message>
         <source>Close</source>
@@ -3228,7 +3228,7 @@ before closing?</source>
     </message>
     <message>
         <source>Note Entry</source>
-        <translation>Wpisywanie nut</translation>
+        <translation>Zapisywanie nut</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -4366,7 +4366,7 @@ jest niekompatybilny z obecnym interfejsem.</translation>
     </message>
     <message>
         <source>Note Entry:</source>
-        <translation>Wpisywanie nut:</translation>
+        <translation>Zapisywanie nut:</translation>
     </message>
     <message>
         <source>Application Font</source>
@@ -4454,7 +4454,7 @@ jest niekompatybilny z obecnym interfejsem.</translation>
     </message>
     <message>
         <source>Note Entry</source>
-        <translation>Wpisywanie nut</translation>
+        <translation>Zapisywanie nut</translation>
     </message>
     <message>
         <source>Enable midi input</source>
@@ -5677,11 +5677,11 @@ i sprawdź czy położenie pliku jest właściwe.</translation>
     </message>
     <message>
         <source>Rev</source>
-        <translation>Po</translation>
+        <translation>Pogłos</translation>
     </message>
     <message>
         <source>Cho</source>
-        <translation>Cho</translation>
+        <translation>Chorus</translation>
     </message>
     <message>
         <source>master volume</source>
@@ -5689,7 +5689,7 @@ i sprawdź czy położenie pliku jest właściwe.</translation>
     </message>
     <message>
         <source>Vol</source>
-        <translation>Gł</translation>
+        <translation>Głośność</translation>
     </message>
     <message>
         <source>...</source>
@@ -6547,7 +6547,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>/</source>
-        <translation type="unfinished">/</translation>
+        <translation>/</translation>
     </message>
 </context>
 <context>
@@ -6860,7 +6860,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Note Input</source>
-        <translation>Wpisywanie nut</translation>
+        <translation>Zapisywanie nut</translation>
     </message>
     <message>
         <source>Pitch Spell</source>
@@ -8380,7 +8380,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Parts...</source>
-        <translation>Głosy...</translation>
+        <translation>Wyciągi głosów...</translation>
     </message>
 </context>
 <context>
@@ -8998,27 +8998,27 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Every day</source>
-        <translation>Кожен день</translation>
+        <translation>Codziennie</translation>
     </message>
     <message>
         <source>Every 3 days</source>
-        <translation>Кожні 3 дні</translation>
+        <translation>Co 3 dni</translation>
     </message>
     <message>
         <source>Every week</source>
-        <translation>Щотижня</translation>
+        <translation>Co tydzień</translation>
     </message>
     <message>
         <source>Every 2 weeks</source>
-        <translation>Кожні 2 тижні</translation>
+        <translation>Co 2 tygodnie</translation>
     </message>
     <message>
         <source>Every month</source>
-        <translation>Кожен місяць</translation>
+        <translation>Co miesiąc</translation>
     </message>
     <message>
         <source>Every 2 months</source>
-        <translation>Кожні 2 місяці</translation>
+        <translation>Co 2 miesięce</translation>
     </message>
 </context>
 <context>
