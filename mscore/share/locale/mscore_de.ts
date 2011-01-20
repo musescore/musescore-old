@@ -2986,11 +2986,11 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>note entry mode</source>
-        <translation>Noteneingabe</translation>
+        <translation>Noteneingabemodus</translation>
     </message>
     <message>
         <source>edit mode</source>
-        <translation>BEARBEITEN</translation>
+        <translation>Bearbeitungsmodus</translation>
     </message>
     <message>
         <source>Fingering</source>
@@ -3395,7 +3395,7 @@ before closing?</source>
     </message>
     <message>
         <source>Load template file </source>
-        <translation>Templatedatei laden </translation>
+        <translation>Vorlagedatei laden </translation>
     </message>
     <message>
         <source> failed</source>
@@ -3437,7 +3437,7 @@ Versuche im "Hilfe"-Menü das "Online-Handbuch" aufzurufen.</translation>
     </message>
     <message>
         <source>Quarter grace note</source>
-        <translation>Achtel-Vorschlagsnote</translation>
+        <translation>Viertel-Vorschlagsnote</translation>
     </message>
     <message>
         <source>16th grace note</source>
@@ -3615,7 +3615,9 @@ Versuche im "Hilfe"-Menü das "Online-Handbuch" aufzurufen.</translation>
         <source>The previous session quit unexpectedly.
 
 Restore session?</source>
-        <translation>Die letzte Sitzung wurde unerwartet beendet. Wiederherstellen?</translation>
+        <translation>Die letzte Sitzung wurde unerwartet beendet.&#13;
+&#13;
+Sitzung wiederherstellen?</translation>
     </message>
     <message>
         <source>Note Heads</source>
@@ -3642,12 +3644,13 @@ Restore session?</source>
 %1
 is incompatible with current interface</source>
         <translation>Skript&#13;
-%1</translation>
+%1&#13;
+inkompatibel mit derzeitiger Schnittstelle</translation>
     </message>
     <message>
         <source>MuseScore is too old to run script
 %1</source>
-        <translation>MiseScore ist zu alt um Skript&#13;
+        <translation>MuseScore ist zu alt um Skript&#13;
 %1 laufen zu lassen</translation>
     </message>
     <message>
@@ -3680,7 +3683,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Muse Data Files (*.md);;</source>
-        <translation>Muse Datendateien (*.md);;</translation>
+        <translation>Muse Data Dateien (*.md);;</translation>
     </message>
     <message>
         <source>Capella Files (*.cap);;</source>
@@ -3844,7 +3847,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Tuning</source>
-        <translation>stimmung</translation>
+        <translation>Stimmung</translation>
     </message>
     <message>
         <source>OnTime:</source>
@@ -3894,7 +3897,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>inch</source>
-        <translation>Inch</translation>
+        <translation>Zoll</translation>
     </message>
     <message>
         <source>Scaling</source>
@@ -4076,7 +4079,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Pan</source>
-        <translation>Pan</translation>
+        <translation>Bal.</translation>
     </message>
     <message>
         <source>Sound:</source>
@@ -4088,11 +4091,11 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Rev</source>
-        <translation>Rev</translation>
+        <translation>Hall</translation>
     </message>
     <message>
         <source>Cho</source>
-        <translation>Cho</translation>
+        <translation>Chor</translation>
     </message>
     <message>
         <source>Part Name</source>
@@ -4108,7 +4111,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Reverb</source>
-        <translation>Reverb</translation>
+        <translation>Hall</translation>
     </message>
     <message>
         <source>Chorus</source>
@@ -4120,7 +4123,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>drumset</source>
-        <translation>Drumset</translation>
+        <translation>Schlagzeug</translation>
     </message>
 </context>
 <context>
@@ -4265,7 +4268,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>MuseScore Files (*.mscz *.mscx *.msc);;All (*)</source>
-        <translation>MuseScore-Dateien (*.mscz *mscx *msc);;All (*)</translation>
+        <translation>MuseScore-Dateien (*.mscz *mscx *msc);;Alle (*)</translation>
     </message>
 </context>
 <context>
@@ -4597,7 +4600,7 @@ in Pixel (größerer Wert gleich größerer Radius)</translation>
     </message>
     <message>
         <source>If you use the standard input method then the created note pitch depends on the current key signature. For example pressing F in G major creates an F sharp. If the alternate input method is enabled then the current key signature is irrelevant. For example pressing F always creates an F natural.</source>
-        <translation>Bei der Standardeingabemethode hängt die Tonhöhe der eingegebenen Note von der Tonart ab. Wenn z.B. F in G-Dur eingegeben wurde, wird ein F# erzeugt. Bei der alternativen Eigabemethode ist die Tonart irrelevant. Wird F eingegeben, dann wird auch ein F-nat erzeugt.</translation>
+        <translation>Bei der Standardeingabemethode hängt die Tonhöhe der eingegebenen Note von der Tonart ab. Wenn z.B. F in G-Dur eingegeben wurde, wird ein F# erzeugt. Bei der alternativen Eingabemethode ist die Tonart irrelevant. Wird F eingegeben, dann wird auch ein F erzeugt.</translation>
     </message>
     <message>
         <source>start empty</source>
@@ -4617,23 +4620,23 @@ in Pixel (größerer Wert gleich größerer Radius)</translation>
     </message>
     <message>
         <source>Select Voice 1</source>
-        <translation>Stimme 1:</translation>
+        <translation>Stimme 1</translation>
     </message>
     <message>
         <source>Select Voice 2</source>
-        <translation>Stimme 2:</translation>
+        <translation>Stimme 2</translation>
     </message>
     <message>
         <source>Select Voice 3</source>
-        <translation>Stimme 3:</translation>
+        <translation>Stimme 3</translation>
     </message>
     <message>
         <source>Select Voice 4</source>
-        <translation>Stimme 4:</translation>
+        <translation>Stimme 4</translation>
     </message>
     <message>
         <source>Drop Target</source>
-        <translation>Ablegeziel (drop)</translation>
+        <translation>Ablageziel (drop)</translation>
     </message>
     <message>
         <source>Score</source>
@@ -4903,7 +4906,7 @@ Bitte wählen Sie eine Note oder Pause aus und wiederholen Sie den Vorgang.
     </message>
     <message>
         <source>MuseScore: register script plugin:</source>
-        <translation>Muse Score: Skript-Erweiterung registrieren</translation>
+        <translation>MuseScore: Skript-Erweiterung registrieren</translation>
     </message>
 </context>
 <context>
@@ -5178,7 +5181,7 @@ Bitte zuerst Takt wählen und dann nochmal probieren</translation>
     </message>
     <message>
         <source>Ogg Vorbis Audio (*.ogg)</source>
-        <translation>Off Vorbis Audio (*.ogg)</translation>
+        <translation>Ogg Vorbis Audio (*.ogg)</translation>
     </message>
     <message>
         <source>MuseScore: Save a Copy</source>
@@ -5235,11 +5238,11 @@ Wählen Sie bitte einen anderen Ort zum Speichern.</translation>
     </message>
     <message>
         <source>Edit Drumset...</source>
-        <translation>Drumset bearbeiten...</translation>
+        <translation>Schlagzeug bearbeiten...</translation>
     </message>
     <message>
         <source>Drumroll Editor...</source>
-        <translation>Drumroll Editor...</translation>
+        <translation>Trommelwirbel Editor...</translation>
     </message>
     <message>
         <source>Pianoroll Editor...</source>
@@ -5413,7 +5416,7 @@ abgebrochen. Abspielen nicht möglich.&#13;
     <name>ShortcutCaptureDialog</name>
     <message>
         <source>Shortcut conflicts with </source>
-        <translation>Tastaturkürzel hat Konfikt mit </translation>
+        <translation>Tastaturkürzel kollidiert mit </translation>
     </message>
     <message>
         <source>Undefined</source>
@@ -5571,7 +5574,7 @@ abgebrochen. Abspielen nicht möglich.&#13;
     </message>
     <message>
         <source>dotted</source>
-        <translation>gepunktet</translation>
+        <translation>gestrichelt</translation>
     </message>
 </context>
 <context>
@@ -5677,11 +5680,11 @@ abgebrochen. Abspielen nicht möglich.&#13;
     </message>
     <message>
         <source>Rev</source>
-        <translation>Rev</translation>
+        <translation>Hall</translation>
     </message>
     <message>
         <source>Cho</source>
-        <translation>Cho</translation>
+        <translation>Chor</translation>
     </message>
     <message>
         <source>master volume</source>
@@ -5689,7 +5692,7 @@ abgebrochen. Abspielen nicht möglich.&#13;
     </message>
     <message>
         <source>Vol</source>
-        <translation>Vol</translation>
+        <translation>Lautst.</translation>
     </message>
     <message>
         <source>...</source>
@@ -5936,7 +5939,7 @@ abgebrochen. Abspielen nicht möglich.&#13;
     <name>TextProperties</name>
     <message>
         <source>MuseScore: Text Properties</source>
-        <translation>EditMuseScore: Texteigenschaften</translation>
+        <translation>MuseScore: Texteigenschaften</translation>
     </message>
     <message>
         <source>apply to all elements of same type</source>
@@ -5975,7 +5978,7 @@ abgebrochen. Abspielen nicht möglich.&#13;
     </message>
     <message>
         <source>B</source>
-        <translation>H</translation>
+        <translation>F</translation>
     </message>
     <message>
         <source>italic</source>
@@ -5983,7 +5986,7 @@ abgebrochen. Abspielen nicht möglich.&#13;
     </message>
     <message>
         <source>I</source>
-        <translation>I</translation>
+        <translation>K</translation>
     </message>
     <message>
         <source>underline</source>
@@ -6243,7 +6246,10 @@ abgebrochen. Abspielen nicht möglich.&#13;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Hint: you can also add or remove measures after creation of the score.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;p, li { white-space: pre-wrap; }&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Hinweis: Takte können auch nach Anlegen der Partitur hinzugefügt oder entfernt werden.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;&#13;
+p, li { white-space: pre-wrap; }&#13;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Hinweis: Takte können auch nach Anlegen der Partitur hinzugefügt oder entfernt werden.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Pickup Measure</source>
@@ -8153,7 +8159,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Reset beam mode of selected measures</source>
-        <translation>Balken</translation>
+        <translation>Balkenmodus für ausgewählten Takt zurücksetzen</translation>
     </message>
     <message>
         <source>Flip direction</source>
@@ -8817,7 +8823,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Volta</source>
-        <translation>Volta (*. Haus)</translation>
+        <translation>Volta</translation>
     </message>
     <message>
         <source>HairpinSegment</source>
@@ -8969,7 +8975,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>AccidentalBracket</source>
-        <translation>vorzeichenklammer</translation>
+        <translation>Vorzeichenklammer</translation>
     </message>
 </context>
 <context>
@@ -9023,7 +9029,8 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Cannot read this score:
 your version of MuseScore is too old.</source>
-        <translation>Diese Noten können nicht gelesen werden: Du verwendest eine zu alte Programmversion.</translation>
+        <translation>Diese Noten können nicht gelesen werden:&#13;
+Du verwendest eine zu alte Programmversion.</translation>
     </message>
 </context>
 <context>
@@ -9486,7 +9493,7 @@ your version of MuseScore is too old.</source>
     </message>
     <message>
         <source>sforza to accent</source>
-        <translation type="unfinished"/>
+        <translation>Akzent</translation>
     </message>
     <message>
         <source>espressivo</source>

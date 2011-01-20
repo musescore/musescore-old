@@ -1128,7 +1128,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>system</source>
-        <translation>rendszer</translation>
+        <translation>sorcsoport</translation>
     </message>
     <message>
         <source>align left</source>
@@ -1570,7 +1570,7 @@ sikertelen: </translation>
     </message>
     <message>
         <source>System</source>
-        <translation>Rendszer</translation>
+        <translation>Sorcsoport</translation>
     </message>
     <message>
         <source>Measure</source>
@@ -1594,7 +1594,7 @@ sikertelen: </translation>
     </message>
     <message>
         <source>Hairpins</source>
-        <translation>Hajtűk</translation>
+        <translation>Villák</translation>
     </message>
     <message>
         <source>Chordnames</source>
@@ -1614,7 +1614,7 @@ sikertelen: </translation>
     </message>
     <message>
         <source>Create Multi Measure Rests</source>
-        <translation>Többütemnyi szünetek létrehozása</translation>
+        <translation>Több ütemnyi szünetek létrehozása</translation>
     </message>
     <message>
         <source>Minumum width of measure:</source>
@@ -1651,7 +1651,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Create clef for all systems</source>
-        <translation>Kulcs létrehozása minden rendszerhez</translation>
+        <translation>Kulcs létrehozása minden sorcsoporthoz</translation>
     </message>
     <message>
         <source>Create time signatures</source>
@@ -1659,11 +1659,11 @@ space unit</extracomment>
     </message>
     <message>
         <source>Create key sig for all systems</source>
-        <translation>Előjegyzés létrehozása minden rendszerhez</translation>
+        <translation>Előjegyzés létrehozása minden sorcsoporthoz</translation>
     </message>
     <message>
         <source>Create courtesy time signatures</source>
-        <translation>Figyelmeztető ütemelőjegyzés létrehozása</translation>
+        <translation>Figyelmeztető ütemmutató létrehozása</translation>
     </message>
     <message>
         <source>System Bracket Distance:</source>
@@ -1691,15 +1691,15 @@ space unit</extracomment>
     </message>
     <message>
         <source>all staffs</source>
-        <translation>az összes sor</translation>
+        <translation>minden sorban</translation>
     </message>
     <message>
         <source>every system</source>
-        <translation>minden rendszer</translation>
+        <translation>minden sorcsoport elején</translation>
     </message>
     <message>
         <source>interval</source>
-        <translation>köz</translation>
+        <translation>ennyi ütemenként</translation>
     </message>
     <message>
         <source>spaces</source>
@@ -1760,7 +1760,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Fix Number of Measures/System:</source>
-        <translation>A rendszer/ütemek rögzített száma:</translation>
+        <translation>Ütemek/sorcsoport rögzített száma:</translation>
     </message>
     <message>
         <source>Fix Measure Width</source>
@@ -1796,7 +1796,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>System distance</source>
-        <translation>Rendszerek távolsága egymástól</translation>
+        <translation>Sorcsoportok távolsága</translation>
     </message>
     <message>
         <source>Lyrics upper margin</source>
@@ -2060,7 +2060,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Part-%1</source>
-        <translation>Szólam-%1</translation>
+        <translation>Kivonat-%1</translation>
     </message>
 </context>
 <context>
@@ -2111,7 +2111,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Hairpin</source>
-        <translation>Hajtű</translation>
+        <translation>Villa</translation>
     </message>
     <message>
         <source>Tick1:</source>
@@ -2299,7 +2299,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>show more</source>
-        <translation>több</translation>
+        <translation>mutasson többet</translation>
     </message>
 </context>
 <context>
@@ -2361,7 +2361,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>show more</source>
-        <translation>több</translation>
+        <translation>mutasson többet</translation>
     </message>
 </context>
 <context>
@@ -2420,7 +2420,7 @@ sikertelen: </translation>
     </message>
     <message>
         <source>Write Style failed: </source>
-        <translation>Nem sikerült kiírni a stílust: </translation>
+        <translation>Nem sikerült írni a stílust: </translation>
     </message>
 </context>
 <context>
@@ -2483,19 +2483,19 @@ sikertelen: </translation>
     <name>KeySig</name>
     <message>
         <source>Hide courtesy signature</source>
-        <translation type="unfinished"/>
+        <translation>Figyelmeztető előjegyzés elrejtése</translation>
     </message>
     <message>
         <source>Show courtesy signature</source>
-        <translation type="unfinished"/>
+        <translation>Figyelmeztető előjegyzés megjelenítése</translation>
     </message>
     <message>
         <source>Hide naturals</source>
-        <translation type="unfinished"/>
+        <translation>Feloldójelek elrejtése</translation>
     </message>
     <message>
         <source>Show naturals</source>
-        <translation type="unfinished"/>
+        <translation>Feloldójelek megjelenítése</translation>
     </message>
 </context>
 <context>
@@ -2727,7 +2727,7 @@ sikertelen: </translation>
     </message>
     <message>
         <source>breakMultiMeasureRest</source>
-        <translation>Többütemes szünet felosztása</translation>
+        <translation>Több ütemes szünet felosztása</translation>
     </message>
 </context>
 <context>
@@ -2789,7 +2789,7 @@ sikertelen: </translation>
     </message>
     <message>
         <source>break multi measure rest</source>
-        <translation>többütemes szünet darabolása</translation>
+        <translation>több ütemes szünet darabolása</translation>
     </message>
     <message>
         <source>add to measure number</source>
@@ -2921,7 +2921,7 @@ sikertelen: </translation>
     </message>
     <message>
         <source>Concert Pitch</source>
-        <translation>Koncertmagasság</translation>
+        <translation>Hangzó magasság</translation>
     </message>
     <message>
         <source>Search</source>
@@ -3239,7 +3239,7 @@ módosításait bezárás előtt?</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>&amp;Szerkesztés</translation>
+        <translation>S&amp;zerkesztés</translation>
     </message>
     <message>
         <source>Voices</source>
@@ -3271,7 +3271,7 @@ módosításait bezárás előtt?</translation>
     </message>
     <message>
         <source>&amp;Style</source>
-        <translation>&amp;Stílus</translation>
+        <translation>S&amp;tílus</translation>
     </message>
     <message>
         <source>&amp;Display</source>
@@ -3363,7 +3363,7 @@ módosításait bezárás előtt?</translation>
     </message>
     <message>
         <source>System</source>
-        <translation>Rendszer</translation>
+        <translation>Sorcsoport</translation>
     </message>
     <message>
         <source>Staff</source>
@@ -3664,43 +3664,43 @@ szkript futtatásához</translation>
     </message>
     <message>
         <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</source>
-        <translation type="unfinished"/>
+        <translation>Minden támogatott fájl (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</translation>
     </message>
     <message>
         <source>MuseScore Files (*.mscz *.mscx *.msc);;</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore fájlok (*.mscz *.mscx *.msc);;</translation>
     </message>
     <message>
         <source>MusicXML Files (*.xml *.mxl);;</source>
-        <translation type="unfinished"/>
+        <translation>MusicXML fájlok (*.xml *.mxl);;</translation>
     </message>
     <message>
         <source>MIDI Files (*.mid *.midi *.kar);;</source>
-        <translation type="unfinished"/>
+        <translation>MIDI fájlok (*.mid *.midi *.kar);;</translation>
     </message>
     <message>
         <source>Muse Data Files (*.md);;</source>
-        <translation type="unfinished"/>
+        <translation>Muse Data fájlok (*.md);;</translation>
     </message>
     <message>
         <source>Capella Files (*.cap);;</source>
-        <translation type="unfinished"/>
+        <translation>Capella fájlok (*.cap);;</translation>
     </message>
     <message>
         <source>Bagpipe Music Writer Files (*.bww);;</source>
-        <translation type="unfinished"/>
+        <translation>Bagpipe Music Writer fájlok (*.bww);;</translation>
     </message>
     <message>
         <source>BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;</source>
-        <translation type="unfinished"/>
+        <translation>BB fájlok &lt;kísérleti&gt; (*.mgu *.MGU *.sgu *.SGU);;</translation>
     </message>
     <message>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
-        <translation type="unfinished"/>
+        <translation>Overture fájlok &lt;kísérleti&gt; (*.ove);;</translation>
     </message>
     <message>
         <source>All Files (*)</source>
-        <translation type="unfinished"/>
+        <translation>Minden fájl (*)</translation>
     </message>
 </context>
 <context>
@@ -3954,7 +3954,7 @@ szkript futtatásához</translation>
     </message>
     <message>
         <source>First page no.</source>
-        <translation type="unfinished"/>
+        <translation>Első oldal száma</translation>
     </message>
 </context>
 <context>
@@ -4745,11 +4745,11 @@ szkript futtatásához</translation>
     </message>
     <message>
         <source>Character Set used when import non-unicode strings. (For binary file import)</source>
-        <translation type="unfinished"/>
+        <translation>Nem Unicode szövegek importálásakor használt karakterkészlet (bináris fájlok importálásához).</translation>
     </message>
     <message>
         <source>Character Set</source>
-        <translation type="unfinished"/>
+        <translation>Karakterkészlet</translation>
     </message>
 </context>
 <context>
@@ -5208,7 +5208,7 @@ Próbáld más helyre menteni.</translation>
     </message>
     <message>
         <source>Write Style failed: </source>
-        <translation>Nem sikerült kiírni a stílust: </translation>
+        <translation>Nem sikerült írni a stílust: </translation>
     </message>
     <message>
         <source>Load failed: </source>
@@ -5339,7 +5339,7 @@ Próbáld más helyre menteni.</translation>
     </message>
     <message>
         <source>same system</source>
-        <translation>ugyanaz a rendszer</translation>
+        <translation>ugyanebben a sorcsoportban</translation>
     </message>
     <message>
         <source>Action</source>
@@ -5374,7 +5374,7 @@ Próbáld más helyre menteni.</translation>
     </message>
     <message>
         <source>show more</source>
-        <translation>több</translation>
+        <translation>mutasson többet</translation>
     </message>
 </context>
 <context>
@@ -5392,7 +5392,7 @@ A sequencer le lesz tiltva.</translation>
     <message>
         <source>No SoundFont configured
 Playback will be disabled.</source>
-        <translation>Nincs SoundFont konfigurálva.&#13;
+        <translation>Nincs SoundFont beállítva.&#13;
 Lejátszás letiltva.</translation>
     </message>
     <message>
@@ -6183,11 +6183,11 @@ győződj meg arról, hogy helyes-e a SoundFont fájl elérési útja.</translat
     </message>
     <message>
         <source>4/4 common time</source>
-        <translation>4/4 rövidítve</translation>
+        <translation>4/4 (common time)</translation>
     </message>
     <message>
         <source>2/2 alla breve</source>
-        <translation>2/2 rövidítve</translation>
+        <translation>2/2 alla breve</translation>
     </message>
 </context>
 <context>
@@ -7485,7 +7485,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Palette</source>
-        <translation>Eszköztár</translation>
+        <translation>Eszköztárak</translation>
     </message>
     <message>
         <source>Play Panel</source>
@@ -7561,11 +7561,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add System Text</source>
-        <translation>Rendszerszöveg hozzáadása</translation>
+        <translation>Sorcsoport szöveg hozzáadása</translation>
     </message>
     <message>
         <source>System Text</source>
-        <translation>Rendszerszöveg</translation>
+        <translation>Sorcsoport szöveg</translation>
     </message>
     <message>
         <source>Add Staff Text</source>
@@ -7749,7 +7749,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>display in concert pitch</source>
-        <translation>megjelenítés koncertmagasságban</translation>
+        <translation>megjelenítés hangzó magasságban</translation>
     </message>
     <message>
         <source>Concert Pitch</source>
@@ -7781,11 +7781,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>toggle system break</source>
-        <translation>rendszertörés ki/be</translation>
+        <translation>Sorcsoport törés ki/be</translation>
     </message>
     <message>
         <source>Toggle System Break</source>
-        <translation>Rendszertörés ki/be</translation>
+        <translation>Sorcsoport ki/be</translation>
     </message>
     <message>
         <source>toggle page break</source>
@@ -8829,7 +8829,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>HairpinSegment</source>
-        <translation>HajtűSzegmens</translation>
+        <translation>VillaSzegmens</translation>
     </message>
     <message>
         <source>OttavaSegment</source>
@@ -8901,7 +8901,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>HairPin</source>
-        <translation>Hajtű</translation>
+        <translation>Villa</translation>
     </message>
     <message>
         <source>Ottava</source>
@@ -8925,7 +8925,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>System</source>
-        <translation>Rendszer</translation>
+        <translation>Sorcsoport</translation>
     </message>
     <message>
         <source>Compound</source>
@@ -9027,7 +9027,8 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Cannot read this score:
 your version of MuseScore is too old.</source>
-        <translation type="unfinished"/>
+        <translation>Nem lehet olvasni a kottát:&#13;
+a MuseScore verziód túl régi.</translation>
     </message>
 </context>
 <context>

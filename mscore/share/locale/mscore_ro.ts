@@ -165,15 +165,15 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Arpeggio</source>
-        <translation type="unfinished">Arpegiatto</translation>
+        <translation>Arpeggio</translation>
     </message>
     <message>
         <source>Tremolo</source>
-        <translation type="unfinished">Tremolo</translation>
+        <translation>Tremolo</translation>
     </message>
     <message>
         <source>Glissando</source>
-        <translation type="unfinished">Glissando</translation>
+        <translation>Glissando</translation>
     </message>
 </context>
 <context>
@@ -2500,19 +2500,19 @@ eroare: </translation>
     <name>KeySig</name>
     <message>
         <source>Hide courtesy signature</source>
-        <translation type="unfinished"/>
+        <translation>Ascunde alterația de precauție</translation>
     </message>
     <message>
         <source>Show courtesy signature</source>
-        <translation type="unfinished"/>
+        <translation>Arată alterația de precauție</translation>
     </message>
     <message>
         <source>Hide naturals</source>
-        <translation type="unfinished"/>
+        <translation>Ascunde becarii</translation>
     </message>
     <message>
         <source>Show naturals</source>
-        <translation type="unfinished"/>
+        <translation>Arată becarii</translation>
     </message>
 </context>
 <context>
@@ -3680,43 +3680,43 @@ nu este compatibil cu interfaţa curentă</translation>
     </message>
     <message>
         <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</source>
-        <translation type="unfinished"/>
+        <translation>Toate Fișierele Suportate (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</translation>
     </message>
     <message>
         <source>MuseScore Files (*.mscz *.mscx *.msc);;</source>
-        <translation type="unfinished"/>
+        <translation>Fișiere Specifice pentru MuseScore (*.mscz *.mscx *.msc);;</translation>
     </message>
     <message>
         <source>MusicXML Files (*.xml *.mxl);;</source>
-        <translation type="unfinished"/>
+        <translation>Fișiere MusicXML (*.xml *.mxl);;</translation>
     </message>
     <message>
         <source>MIDI Files (*.mid *.midi *.kar);;</source>
-        <translation type="unfinished"/>
+        <translation>Fișiere MIDI (*.mid *.midi *.kar);;</translation>
     </message>
     <message>
         <source>Muse Data Files (*.md);;</source>
-        <translation type="unfinished"/>
+        <translation>Fișiere Muse Data (*.md);;</translation>
     </message>
     <message>
         <source>Capella Files (*.cap);;</source>
-        <translation type="unfinished"/>
+        <translation>Fișiere Capella  (*.cap);;</translation>
     </message>
     <message>
         <source>Bagpipe Music Writer Files (*.bww);;</source>
-        <translation type="unfinished"/>
+        <translation>Fișiere Bagpipe Music Writer (*.bww);;</translation>
     </message>
     <message>
         <source>BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;</source>
-        <translation type="unfinished"/>
+        <translation>Fișiere BB &lt;cu titlu de experiment&gt; (*.mgu *.MGU *.sgu *.SGU);;</translation>
     </message>
     <message>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
-        <translation type="unfinished"/>
+        <translation>Fișiere Overture &lt;cu titlu de experiment&gt; (*.ove);;</translation>
     </message>
     <message>
         <source>All Files (*)</source>
-        <translation type="unfinished"/>
+        <translation>Toate Fișierele (*)</translation>
     </message>
 </context>
 <context>
@@ -3970,7 +3970,7 @@ nu este compatibil cu interfaţa curentă</translation>
     </message>
     <message>
         <source>First page no.</source>
-        <translation type="unfinished"/>
+        <translation>Nr. primei pagini</translation>
     </message>
 </context>
 <context>
@@ -4761,11 +4761,11 @@ nu este compatibil cu interfaţa curentă</translation>
     </message>
     <message>
         <source>Character Set used when import non-unicode strings. (For binary file import)</source>
-        <translation type="unfinished"/>
+        <translation>Setul de caractere folosit când se importă conținut în format non-unicode. (Pentru import de fișiere binare)</translation>
     </message>
     <message>
         <source>Character Set</source>
-        <translation type="unfinished"/>
+        <translation>Set de Caractere</translation>
     </message>
 </context>
 <context>
@@ -6489,17 +6489,17 @@ p, li { white-space: pre-wrap; }&#13;
     <name>TremoloBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"/>
+        <translation>Formular</translation>
     </message>
     <message>
         <source>firstChord</source>
         <extracomment>do not translate</extracomment>
-        <translation type="unfinished"/>
+        <translation>firstChord</translation>
     </message>
     <message>
         <source>secondChord</source>
         <extracomment>do not translate - only for debugging</extracomment>
-        <translation type="unfinished"/>
+        <translation>secondChord</translation>
     </message>
 </context>
 <context>
@@ -8626,87 +8626,87 @@ p, li { white-space: pre-wrap; }&#13;
     <name>drumset</name>
     <message>
         <source>Acoustic Bass Drum</source>
-        <translation type="unfinished"/>
+        <translation>Tobă Mare Acustică (Acoustic Bass Drum)</translation>
     </message>
     <message>
         <source>Bass Drum</source>
-        <translation type="unfinished"/>
+        <translation>Tobă Mare (Bass Drum)</translation>
     </message>
     <message>
         <source>Side Stick</source>
-        <translation type="unfinished"/>
+        <translation>Lovit pe Margine (Side Stick)</translation>
     </message>
     <message>
         <source>Snare (Acoustic)</source>
-        <translation type="unfinished"/>
+        <translation>Tobă Militară (Snare Drum)</translation>
     </message>
     <message>
         <source>Snare (Electric)</source>
-        <translation type="unfinished"/>
+        <translation>Tobă Militară (Sintetizată) - Snare (Electric)</translation>
     </message>
     <message>
         <source>Tom 5</source>
-        <translation type="unfinished"/>
+        <translation>5 Tom-Tom</translation>
     </message>
     <message>
         <source>Hi-Hat Closed</source>
-        <translation type="unfinished"/>
+        <translation>Piatti Închis - Hi-Hat Closed</translation>
     </message>
     <message>
         <source>Tom 4</source>
-        <translation type="unfinished"/>
+        <translation>4 Tom-Tom</translation>
     </message>
     <message>
         <source>Hi-Hat Pedal</source>
-        <translation type="unfinished"/>
+        <translation>Piatti Pedală - Hi-Hat Pedal</translation>
     </message>
     <message>
         <source>Tom 3</source>
-        <translation type="unfinished"/>
+        <translation>3 Tom-Tom</translation>
     </message>
     <message>
         <source>Hi-Hat Open</source>
-        <translation type="unfinished"/>
+        <translation>Piatti Deschis- Hi-Hat Open</translation>
     </message>
     <message>
         <source>Tom 2</source>
-        <translation type="unfinished"/>
+        <translation>2 Tom-Tom</translation>
     </message>
     <message>
         <source>Tom 1</source>
-        <translation type="unfinished"/>
+        <translation>1 Tom-Tom</translation>
     </message>
     <message>
         <source>Crash 1</source>
-        <translation type="unfinished"/>
+        <translation>1 Talger - Crash 1</translation>
     </message>
     <message>
         <source>Tom</source>
-        <translation type="unfinished"/>
+        <translation>Tom - Tom</translation>
     </message>
     <message>
         <source>Ride</source>
-        <translation type="unfinished"/>
+        <translation>Piatto Sospesso - Ride Cymbal</translation>
     </message>
     <message>
         <source>China</source>
-        <translation type="unfinished"/>
+        <translation>Crotal - China Cymbal</translation>
     </message>
     <message>
         <source>Ride (Bell)</source>
-        <translation type="unfinished"/>
+        <translation>Piatto Sospesso La Centru - Ride Cymbal (Bell)</translation>
     </message>
     <message>
         <source>Tambourine</source>
-        <translation type="unfinished"/>
+        <translation>Tamburină</translation>
     </message>
     <message>
         <source>open high conga</source>
-        <translation type="unfinished"/>
+        <translation>Bongos Acut Liber - Open High Conga</translation>
     </message>
     <message>
         <source>low conga</source>
-        <translation type="unfinished"/>
+        <translation>Bongos Grav - Low Conga</translation>
     </message>
 </context>
 <context>
@@ -9043,7 +9043,8 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <source>Cannot read this score:
 your version of MuseScore is too old.</source>
-        <translation type="unfinished"/>
+        <translation>Partitura nu se poate citi:&#13;
+versiunea dumneavoastră de MuseScore este prea veche.</translation>
     </message>
 </context>
 <context>

@@ -3671,15 +3671,15 @@ no es compatible con el interfaz actual</translation>
     </message>
     <message>
         <source>Muse Data Files (*.md);;</source>
-        <translation type="unfinished"/>
+        <translation>Archivos de Datos de Muse (*.md);;</translation>
     </message>
     <message>
         <source>Capella Files (*.cap);;</source>
-        <translation type="unfinished"/>
+        <translation>Archivos de Capella (*.cap)</translation>
     </message>
     <message>
         <source>Bagpipe Music Writer Files (*.bww);;</source>
-        <translation type="unfinished"/>
+        <translation>Archivos de Bagpipe Music Writer</translation>
     </message>
     <message>
         <source>BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;</source>
@@ -3687,7 +3687,7 @@ no es compatible con el interfaz actual</translation>
     </message>
     <message>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
-        <translation type="unfinished"/>
+        <translation>Archivos de Overture &lt;experimental&gt; (*.ove);;</translation>
     </message>
     <message>
         <source>All Files (*)</source>
@@ -4736,11 +4736,11 @@ no es compatible con el interfaz actual</translation>
     </message>
     <message>
         <source>Character Set used when import non-unicode strings. (For binary file import)</source>
-        <translation type="unfinished"/>
+        <translation>Juego de caracteres empleado para importar cadenas de texto distintas al standard unicode. (Para importación de archivos binarios)</translation>
     </message>
     <message>
         <source>Character Set</source>
-        <translation type="unfinished"/>
+        <translation>Juego de Caracteres</translation>
     </message>
 </context>
 <context>
@@ -8630,7 +8630,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Hi-Hat Pedal</source>
-        <translation type="unfinished"/>
+        <translation>Pedal de Charles</translation>
     </message>
     <message>
         <source>Tom 3</source>
@@ -8666,7 +8666,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Ride (Bell)</source>
-        <translation type="unfinished"/>
+        <translation>Ride (Campana)</translation>
     </message>
     <message>
         <source>Tambourine</source>

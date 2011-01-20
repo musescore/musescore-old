@@ -2483,19 +2483,19 @@ falhou: </translation>
     <name>KeySig</name>
     <message>
         <source>Hide courtesy signature</source>
-        <translation type="unfinished"/>
+        <translation>Ocultar armadura de cortesia</translation>
     </message>
     <message>
         <source>Show courtesy signature</source>
-        <translation type="unfinished"/>
+        <translation>Exibir armadura de cortesia</translation>
     </message>
     <message>
         <source>Hide naturals</source>
-        <translation type="unfinished"/>
+        <translation>Ocultar bequadros</translation>
     </message>
     <message>
         <source>Show naturals</source>
-        <translation type="unfinished"/>
+        <translation>Exibir bequadros</translation>
     </message>
 </context>
 <context>
@@ -3667,43 +3667,43 @@ Incompatível com a atual interface</translation>
     </message>
     <message>
         <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</source>
-        <translation type="unfinished"/>
+        <translation>Todos os arquivos suportados (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</translation>
     </message>
     <message>
         <source>MuseScore Files (*.mscz *.mscx *.msc);;</source>
-        <translation type="unfinished"/>
+        <translation>Arquivos MuseScore (*.mscz *.mscx *.msc);;</translation>
     </message>
     <message>
         <source>MusicXML Files (*.xml *.mxl);;</source>
-        <translation type="unfinished"/>
+        <translation>Arquivos MusicXML (*.xml *.mxl);;</translation>
     </message>
     <message>
         <source>MIDI Files (*.mid *.midi *.kar);;</source>
-        <translation type="unfinished"/>
+        <translation>Arquivos MIDI (*.mid *.midi *.kar);;</translation>
     </message>
     <message>
         <source>Muse Data Files (*.md);;</source>
-        <translation type="unfinished"/>
+        <translation>Arquivos Muse Data (*.md);;</translation>
     </message>
     <message>
         <source>Capella Files (*.cap);;</source>
-        <translation type="unfinished"/>
+        <translation>Arquivos Capella (*.cap);;</translation>
     </message>
     <message>
         <source>Bagpipe Music Writer Files (*.bww);;</source>
-        <translation type="unfinished"/>
+        <translation>Arquivos Bagpipe Music Writer (*.bww);;</translation>
     </message>
     <message>
         <source>BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;</source>
-        <translation type="unfinished"/>
+        <translation>Arquivos BB &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;</translation>
     </message>
     <message>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
-        <translation type="unfinished"/>
+        <translation>Arquivos Overture &lt;experimental&gt; (*.ove);;</translation>
     </message>
     <message>
         <source>All Files (*)</source>
-        <translation type="unfinished"/>
+        <translation>Todos os Arquivos (*)</translation>
     </message>
 </context>
 <context>
@@ -3957,7 +3957,7 @@ Incompatível com a atual interface</translation>
     </message>
     <message>
         <source>First page no.</source>
-        <translation type="unfinished"/>
+        <translation>Primeiro n° de página</translation>
     </message>
 </context>
 <context>
@@ -4748,11 +4748,11 @@ Incompatível com a atual interface</translation>
     </message>
     <message>
         <source>Character Set used when import non-unicode strings. (For binary file import)</source>
-        <translation type="unfinished"/>
+        <translation>Conjunto de Caracteres usado ao importar linhas não-unicode. (Para importação de arquivos binários)</translation>
     </message>
     <message>
         <source>Character Set</source>
-        <translation type="unfinished"/>
+        <translation>Conjunto de Caracteres</translation>
     </message>
 </context>
 <context>
@@ -9030,7 +9030,8 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Cannot read this score:
 your version of MuseScore is too old.</source>
-        <translation type="unfinished"/>
+        <translation>Não é possível ler esta partitura:&#13;
+sua versão do MuseScore é muito antiga.</translation>
     </message>
 </context>
 <context>

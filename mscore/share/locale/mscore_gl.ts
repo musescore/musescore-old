@@ -2483,19 +2483,19 @@ fallou: </translation>
     <name>KeySig</name>
     <message>
         <source>Hide courtesy signature</source>
-        <translation type="unfinished"/>
+        <translation>Acochar a armadura de cortesía</translation>
     </message>
     <message>
         <source>Show courtesy signature</source>
-        <translation type="unfinished"/>
+        <translation>Mostrar a armadura de cortesía</translation>
     </message>
     <message>
         <source>Hide naturals</source>
-        <translation type="unfinished"/>
+        <translation>Acochar as alteracións</translation>
     </message>
     <message>
         <source>Show naturals</source>
-        <translation type="unfinished"/>
+        <translation>Mostrar as alteracións</translation>
     </message>
 </context>
 <context>
@@ -3343,15 +3343,15 @@ antes de fechar?</translation>
     </message>
     <message>
         <source>Start Repeat</source>
-        <translation>Comezar repetición</translation>
+        <translation>Inicio de repetición</translation>
     </message>
     <message>
         <source>End Repeat</source>
-        <translation>Rematar repetición</translation>
+        <translation>Final de repetición</translation>
     </message>
     <message>
         <source>End-Start Repeat</source>
-        <translation>Reptir inicio-final</translation>
+        <translation>Final e inicio de repetición</translation>
     </message>
     <message>
         <source>Bracket</source>
@@ -4311,7 +4311,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Paths</source>
-        <translation>Camiños</translation>
+        <translation>Rutas</translation>
     </message>
     <message>
         <source>Instrument List:</source>

@@ -1037,7 +1037,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>SlurFor:</source>
-        <translation>SlurFor:</translation>
+        <translation>legato avant:</translation>
     </message>
     <message>
         <source>SlurBack:</source>
@@ -1076,7 +1076,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>MuseScore: Chord Style Editor</source>
-        <translation>MuseScore: Editeur de style d'accord</translation>
+        <translation>MuseScore: Editeur de style d'accords</translation>
     </message>
 </context>
 <context>
@@ -4805,7 +4805,7 @@ Veuillez sélectionner une note ou un silence et réessayez
     <message>
         <source>Please select a single note or slur and retry operation
 </source>
-        <translation>Veuillez sélectionner une note ou une legato et réessayez
+        <translation>Veuillez sélectionner une note ou un legato et réessayez
 </translation>
     </message>
     <message>
@@ -5542,7 +5542,7 @@ et vérifier que le chemin du fichier est correct</translation>
     </message>
     <message>
         <source>Slur</source>
-        <translation>Liaison</translation>
+        <translation>Legato</translation>
     </message>
     <message>
         <source>Slur End</source>
@@ -8631,7 +8631,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Snare (Electric)</source>
-        <translation>Caisse Claire Electrique</translation>
+        <translation>Caisse claire électrique</translation>
     </message>
     <message>
         <source>Tom 5</source>

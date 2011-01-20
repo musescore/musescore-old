@@ -1036,15 +1036,15 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>SlurFor:</source>
-        <translation type="unfinished"/>
+        <translation>SlurFor:</translation>
     </message>
     <message>
         <source>SlurBack:</source>
-        <translation type="unfinished"/>
+        <translation>SlurBack:</translation>
     </message>
     <message>
         <source>StaffMove:</source>
-        <translation type="unfinished"/>
+        <translation>StaffMove:</translation>
     </message>
 </context>
 <context>
@@ -1128,7 +1128,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>part</source>
-        <translation>Oppdeling</translation>
+        <translation>Enkeltstemme</translation>
     </message>
     <message>
         <source>system</source>
@@ -1348,7 +1348,7 @@ feilet: </translation>
     <name>EditStaffBase</name>
     <message>
         <source>MuseScore: Edit Staff/Part Properties</source>
-        <translation>MuseScore: Rediger egenskaper for notesystem/oppdeling</translation>
+        <translation>MuseScore: Rediger egenskaper for notesystem/enkeltstemme</translation>
     </message>
     <message>
         <source>Staff Properties</source>
@@ -1364,7 +1364,7 @@ feilet: </translation>
     </message>
     <message>
         <source>Part Properties</source>
-        <translation>Egenskaper for oppdeling av noteark</translation>
+        <translation>Egenskaper for enkeltstemme</translation>
     </message>
     <message>
         <source>Long Instrument Name:</source>
@@ -1663,7 +1663,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Create courtesy time signatures</source>
-        <translation>Vis taktskifte i forrige notesystem</translation>
+        <translation>Opprett hjelpetaktsendring i forrige notesystem</translation>
     </message>
     <message>
         <source>System Bracket Distance:</source>
@@ -1756,7 +1756,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Create courtesy key signatures</source>
-        <translation>Vis skifte av toneart i forrige notesystem</translation>
+        <translation>Opprett hjelpeendring av toneart i forrige notesystem</translation>
     </message>
     <message>
         <source>Fix Number of Measures/System:</source>
@@ -2020,11 +2020,11 @@ space unit</extracomment>
     <name>ExcerptsDialog</name>
     <message>
         <source>MuseScore: Parts</source>
-        <translation>MuseScore: Oppdeling av noteark i instrumenter</translation>
+        <translation>MuseScore: Enkeltstemmer</translation>
     </message>
     <message>
         <source>Select Part:</source>
-        <translation>Velg oppdeling:</translation>
+        <translation>Velg enkeltstemme:</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -2036,7 +2036,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Edit Part:</source>
-        <translation>Endre oppdeling:</translation>
+        <translation>Endre enkeltstemme:</translation>
     </message>
     <message>
         <source>Instrument:</source>
@@ -2044,7 +2044,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Create Part</source>
-        <translation>Opprett oppdeling</translation>
+        <translation>Opprett enkeltstemme</translation>
     </message>
     <message>
         <source>File Name:</source>
@@ -2052,7 +2052,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Part Title:</source>
-        <translation>Oppdelingstittel:</translation>
+        <translation>Tittel på enkeltstemme:</translation>
     </message>
     <message>
         <source>Close</source>
@@ -2060,7 +2060,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Part-%1</source>
-        <translation>Oppdeling-%1</translation>
+        <translation>Enkeltstemme-%1</translation>
     </message>
 </context>
 <context>
@@ -2306,7 +2306,7 @@ space unit</extracomment>
     <name>InstrumentListEditor</name>
     <message>
         <source>MuseScore: Part List</source>
-        <translation>MuseScore: Liste over instrumenter i noteark</translation>
+        <translation>MuseScore: Liste over enkeltstemmer</translation>
     </message>
 </context>
 <context>
@@ -2483,11 +2483,11 @@ mislykket: </translation>
     <name>KeySig</name>
     <message>
         <source>Hide courtesy signature</source>
-        <translation type="unfinished"/>
+        <translation>Skjul hjelpeendring</translation>
     </message>
     <message>
         <source>Show courtesy signature</source>
-        <translation type="unfinished"/>
+        <translation>Vis hjelpeendring</translation>
     </message>
     <message>
         <source>Hide naturals</source>
@@ -2813,7 +2813,7 @@ mislykket: </translation>
     </message>
     <message>
         <source>a</source>
-        <translation type="unfinished"/>
+        <translation>a</translation>
     </message>
     <message>
         <source>visible</source>
@@ -2821,7 +2821,7 @@ mislykket: </translation>
     </message>
     <message>
         <source>c</source>
-        <translation type="unfinished"/>
+        <translation>c</translation>
     </message>
 </context>
 <context>
@@ -3953,7 +3953,7 @@ er ikke kompatibelt med nåværende grensesnitt</translation>
     </message>
     <message>
         <source>First page no.</source>
-        <translation type="unfinished"/>
+        <translation>Første tellbare side</translation>
     </message>
 </context>
 <context>
@@ -4067,7 +4067,7 @@ er ikke kompatibelt med nåværende grensesnitt</translation>
     </message>
     <message>
         <source>Part Name</source>
-        <translation>Oppdelingsnavn</translation>
+        <translation>Navn på enkeltstemme</translation>
     </message>
     <message>
         <source>Volume</source>
@@ -4119,7 +4119,7 @@ er ikke kompatibelt med nåværende grensesnitt</translation>
     </message>
     <message>
         <source>midi sound for part</source>
-        <translation>MIDI-lyd for oppdeling</translation>
+        <translation>MIDI-lyd for enkeltstemme</translation>
     </message>
 </context>
 <context>
@@ -5606,7 +5606,7 @@ og sjekk at stilen til fila er riktig</translation>
     <name>SplitStaff</name>
     <message>
         <source>MuseScore: Edit Staff/Part Properties</source>
-        <translation>MuseScore: Rediger egenskaper for notesystem/oppdeling</translation>
+        <translation>MuseScore: Rediger egenskaper for notesystem/enkeltstemme</translation>
     </message>
     <message>
         <source>Split Staff</source>
@@ -8372,7 +8372,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Timewise Delete</source>
-        <translation type="unfinished"/>
+        <translation>Fjern valgte takter</translation>
     </message>
     <message>
         <source>Delete element and duration</source>
@@ -8380,7 +8380,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Parts...</source>
-        <translation>Del opp noteark...</translation>
+        <translation>Enkeltstemmer...</translation>
     </message>
 </context>
 <context>
