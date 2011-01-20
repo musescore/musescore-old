@@ -851,15 +851,17 @@ QRectF Note::drag(const QPointF& s)
 
       double _spatium = spatium();
       bool tab = staff()->useTablature();
-      double step = tab ? _spatium * 1.5 : _spatium * .5;
+      double step = _spatium * (tab ? staff()->staffType()->lineDistance().val() : 0.5);
       _lineOffset = lrint(s.y() / step);
-      if (tab) {
-            int strings = staff()->lines();
-            if (_line + _lineOffset < 0)
-                  _lineOffset = -_line;
-            else if (_line + _lineOffset >= strings)
-                  _lineOffset = strings - _line - 1;
-            }
+//    USELESS: endDrag() will take care of string range and anyway
+//    WRONG: for tabulature notes, line is in _string not in _line
+//      if (tab) {
+//            int strings = staff()->lines();
+//            if (_line + _lineOffset < 0)
+//                  _lineOffset = -_line;
+//            else if (_line + _lineOffset >= strings)
+//                  _lineOffset = strings - _line - 1;
+//            }
       score()->setLayout(chord()->measure());
       return bb.translated(chord()->canvasPos());
       }
@@ -872,34 +874,51 @@ void Note::endDrag()
       {
       if (_lineOffset == 0)
             return;
-      int nLine    = _line + _lineOffset;
-      _lineOffset  = 0;
+      int nLine;
+//      int nLine    = _line + _lineOffset;           // not so simple!
+//      _lineOffset  = 0;
       dragMode     = false;
       int staffIdx = chord()->staffIdx() + chord()->staffMove();
       Staff* staff = score()->staff(staffIdx);
-      int npitch;
+      int nPitch;
       int tpc;
-      int nString = _string;
-      int nFret   = _fret;
+      int nString;
+      int nFret;
       if (staff->useTablature()) {
-            nString = nLine;
-            npitch = staff->part()->instr()->tablature()->getPitch(_string, _fret);
-            tpc    = pitch2tpc(npitch, 0);
+            // on TABLATURE staves, dragging a note keeps same pitch on a different string (if possible)
+            // determine new string of dragged note (if tablature is upside down, invert _lineOffset)
+            nString     = _string +
+                       (static_cast<StaffTypeTablature*>(staff->staffType())->upsideDown() ? -_lineOffset : _lineOffset);
+            _lineOffset = 0;
+            // get a fret number for same pitch on new string
+            nFret       = staff->part()->instr()->tablature()->fret(_pitch, nString);
+            if(nFret < 0)                       // no fret?
+                  return;                       // no party!
+            // these values do not change
+            nLine       = _line;
+            nPitch      = _pitch;
+            tpc         = _tpc;
             }
       else {
-            int tick = chord()->tick();
-            int clef = staff->clef(tick);
-            int key  = staff->key(tick).accidentalType();
-            npitch   = line2pitch(nLine, clef, key);
-            tpc      = pitch2tpc(npitch, key);
-            nString  = -1;
-            nFret    = -1;
+            // on PITCHED / PERCUSSION staves, dragging a note changes the note pitch
+            nLine       = _line + _lineOffset;
+            _lineOffset = 0;
+            // get note context
+            int tick    = chord()->tick();
+            int clef    = staff->clef(tick);
+            int key     = staff->key(tick).accidentalType();
+            // determine new pitch of dragged note
+            nPitch      = line2pitch(nLine, clef, key);
+            tpc         = pitch2tpc(nPitch, key);
+            // undefined for non-tablature staves
+            nString     = -1;
+            nFret       = -1;
             }
       Note* n = this;
       while (n->tieBack())
             n = n->tieBack()->startNote();
       for (; n; n = n->tieFor() ? n->tieFor()->endNote() : 0)
-            score()->undoChangePitch(n, npitch, tpc, nLine, nFret, nString);
+            score()->undoChangePitch(n, nPitch, tpc, nLine, nFret, nString);
       score()->select(this, SELECT_SINGLE, 0);
       }
 
