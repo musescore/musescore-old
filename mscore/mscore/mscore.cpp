@@ -1803,6 +1803,7 @@ int main(int argc, char* av[])
                         if (dir.exists(path)) {
                               QSettings::setPath(QSettings::IniFormat, QSettings::UserScope, path);
                               QSettings::setPath(QSettings::IniFormat, QSettings::SystemScope, path);
+                              dataPath = path;
                               }
                         }
                         break;
@@ -1838,7 +1839,8 @@ int main(int argc, char* av[])
             }
 
 /**/
-      dataPath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+      if(dataPath.isEmpty())
+            dataPath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
 
       // create local plugin directory
       // if not already there:
