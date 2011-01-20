@@ -226,7 +226,6 @@ Note::Note(const Note& n)
                   _dots[i]->setIdx(i);
                   }
             }
-
       _lineOffset = n._lineOffset;
       }
 
@@ -1290,12 +1289,12 @@ void Note::layout()
                   Measure* m = chord()->measure();
                   if (m->mstaff(staffIdx())->hasVoices) {
                         if (voice() == 0 || voice() == 2)
-                              y = -_spatium *.5;
+                              y += -.5 * _spatium;
                         else
-                              y = _spatium *.5;
+                              y += .5 * _spatium;
                         }
                   else
-                        y = -_spatium *.5;
+                        y += -.5 * _spatium;
                   }
             for (int i = 0; i < dots; ++i)
                   _dots[i]->setPos(x + d + dd * i, y);

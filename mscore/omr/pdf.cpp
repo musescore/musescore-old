@@ -151,7 +151,8 @@ printf("Image %4d %4d   at %5f %4d   mag %f %f\n",
             ny += height;
             }
       else {
-printf("Color Image ================%d %d\n", width, height);
+printf("Color Image ================%d %d - %d %d\n", width, height,
+   colorMap->getNumPixelComps(), colorMap->getBits());
 #if 0
             fprintf(f, "P6\n");
             fprintf(f, "%d %d\n", width, height);

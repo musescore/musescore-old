@@ -1953,7 +1953,7 @@ void BeamView::setElement(Element* e)
       bb.elements->clear();
       foreach (ChordRest* cr, b->elements()) {
             QTreeWidgetItem* item = new QTreeWidgetItem;
-            item->setText(0, QString("%1").arg((unsigned long)e, 8, 16));
+            item->setText(0, QString("%1").arg((unsigned long)cr, 8, 16));
             item->setData(0, Qt::UserRole, QVariant::fromValue<void*>((void*)cr));
             item->setText(1, cr->name());
             bb.elements->addTopLevelItem(item);

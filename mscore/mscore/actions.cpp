@@ -2369,7 +2369,7 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","add audio track")
          ),
       Shortcut(
-         STATE_ALL,
+         STATE_NORMAL | STATE_NOTE_ENTRY,
          "show-omr",
          QT_TRANSLATE_NOOP("action","show omr scan"),
 	   Qt::Key_O,

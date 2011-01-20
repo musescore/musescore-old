@@ -165,6 +165,7 @@ void TextProp::setTextStyle(const TextStyle& s)
       f.setUnderline(s.underline());
       f.setBold(s.bold());
       fontSelect->setCurrentFont(f);
+      sizeIsSpatiumDependent->setChecked(s.sizeIsSpatiumDependent());
 
       frameColor->setColor(s.frameColor());
       frameWidth->setValue(s.frameWidth());
@@ -203,6 +204,7 @@ TextStyle TextProp::textStyle() const
       s.setHasFrame(frame->isChecked());
       s.setSystemFlag(systemFlag->isChecked());
       s.setForegroundColor(color->color());
+      s.setSizeIsSpatiumDependent(sizeIsSpatiumDependent->isChecked());
 
 QColor c(s.foregroundColor());
 printf("Color r %d\n", c.red());

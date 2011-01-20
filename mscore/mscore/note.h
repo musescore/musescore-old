@@ -116,6 +116,7 @@ class Note : public Element {
       int _offTimeUserOffset; ///< stop note user offset
 
       DirectionH _userMirror; ///< user override of mirror
+      Direction _dotPosition; ///< dot position: above or below current staff line
 
       Accidental* _accidental;
 
@@ -223,6 +224,9 @@ class Note : public Element {
 
       DirectionH userMirror() const    { return _userMirror; }
       void setUserMirror(DirectionH d) { _userMirror = d; }
+
+      Direction dotPosition() const    { return _dotPosition; }
+      void setDotPosition(Direction d) { _dotPosition = d;    }
 
       virtual void toDefault();
       virtual void setMag(double val);

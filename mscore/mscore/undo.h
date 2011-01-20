@@ -1575,6 +1575,5 @@ class ChangeClefType : public UndoCommand {
       UNDO_NAME("ChangeClef");
       };
 
-
 #endif
 
