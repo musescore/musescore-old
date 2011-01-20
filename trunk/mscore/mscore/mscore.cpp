@@ -1853,8 +1853,9 @@ int main(int argc, char* av[])
 
 #ifdef OPENGL
       // omr display needs hardware acceleration for pixmap scaling:
-      QApplication::setGraphicsSystem(QString("opengl"));
+//      QApplication::setGraphicsSystem(QString("opengl"));
 #endif
+      QApplication::setGraphicsSystem(QString("raster"));
 
 #ifdef Q_WS_MAC
       MuseScoreApplication* app = new MuseScoreApplication("mscore1", argc, av);

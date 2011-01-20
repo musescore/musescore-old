@@ -89,10 +89,125 @@ void Accidental::read(QDomElement e)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
-            int i = e.text().toInt();
+            bool isInt;
+            int i = e.text().toInt(&isInt);
             if (tag == "bracket") {
                   if (i == 0 || i == 1)
                         _hasBracket = i;
+                  }
+            else if (tag == "subtype") {
+                  if (isInt) {
+                        _hasBracket = i & 0x8000;
+                        i &= ~0x8000;
+                        switch(i) {
+                               case 0:
+                                     i = ACC_NONE;
+                                     break;
+                               case 1:
+                               case 11:
+                                     i = ACC_SHARP;
+                                     break;
+                               case 2:
+                               case 12:
+                                     i = ACC_FLAT;
+                                     break;
+                               case 3:
+                               case 13:
+                                     i = ACC_SHARP2;
+                                     break;
+                               case 4:
+                               case 14:
+                                     i = ACC_FLAT2;
+                                     break;
+                               case 5:
+                               case 15:
+                                     i = ACC_NATURAL;
+                                     break;
+                               case 6:
+                                     i = ACC_SHARP;
+                                     _hasBracket = true;
+                                     break;
+                               case 7:
+                                     i = ACC_FLAT;
+                                     _hasBracket = true;
+                                     break;
+                               case 8:
+                                     i = ACC_SHARP2;
+                                     _hasBracket = true;
+                                     break;
+                               case 9:
+                                     i = ACC_FLAT2;
+                                     _hasBracket = true;
+                                     break;
+                               case 10:
+                                     i = ACC_NATURAL;
+                                     _hasBracket = true;
+                                     break;
+                               case 16:
+                                     i = ACC_FLAT_SLASH;
+                                     break;
+                               case 17:
+                                     i = ACC_FLAT_SLASH2;
+                                     break;
+                               case 18:
+                                     i = ACC_MIRRORED_FLAT2;
+                                     break;
+                               case 19:
+                                     i = ACC_MIRRORED_FLAT;
+                                     break;
+                               case 20:
+                                     i = ACC_MIRRIRED_FLAT_SLASH;
+                                     break;
+                               case 21:
+                                     i = ACC_FLAT_FLAT_SLASH;
+                                     break;
+                               case 22:
+                                     i = ACC_SHARP_SLASH;
+                                     break;
+                               case 23:
+                                     i = ACC_SHARP_SLASH2;
+                                     break;
+                               case 24:
+                                     i = ACC_SHARP_SLASH3;
+                                     break;
+                               case 25:
+                                     i = ACC_SHARP_SLASH4;
+                                     break;
+                               case 26:
+                                     i = ACC_SHARP_ARROW_UP;
+                                     break;
+                               case 27:
+                                     i = ACC_SHARP_ARROW_DOWN;
+                                     break;
+                               case 28:
+                                     i = ACC_SHARP_ARROW_BOTH;
+                                     break;
+                               case 29:
+                                     i = ACC_FLAT_ARROW_UP;
+                                     break;
+                               case 30:
+                                     i = ACC_FLAT_ARROW_DOWN;
+                                     break;
+                               case 31:
+                                     i = ACC_FLAT_ARROW_BOTH;
+                                     break;
+                               case 32:
+                                     i = ACC_NATURAL_ARROW_UP;
+                                     break;
+                               case 33:
+                                     i = ACC_NATURAL_ARROW_DOWN;
+                                     break;
+                               case 34:
+                                     i = ACC_NATURAL_ARROW_BOTH;
+                                     break;
+                               default:
+                                     i = 0;
+                                     break;
+                               }
+                        Element::setSubtype(i);
+                        }
+                  else
+                        setSubtype(e.text());
                   }
             else if (tag == "role") {
                   if (i == ACC_AUTO || i == ACC_USER)
@@ -130,7 +245,7 @@ const QString Accidental::subtypeName() const
       }
 
 //---------------------------------------------------------
-//   subTypeName
+//   subTypeUserName
 //---------------------------------------------------------
 
 const char* Accidental::subtypeUserName() const

@@ -3080,4 +3080,3 @@ void ChangeClefType::flip()
       transposingClef = otc;
       }
 
-
