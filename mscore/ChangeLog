@@ -5,6 +5,7 @@
       - Note::drag(): for tablatures, dragging up did not work: corrected.
       - Note::endDrag(): for tablatures, modified to keep same pitch on new
         string, if possible (also for 'upside down' tablatures) (r. 3935)
+      - Added 7 (early music) symbols from mscore-20 font to internal tables (r. 3936)
 19.jan (lv)
       - MusicXML import fixes: slurs and wedges
 18.jan (ws)
