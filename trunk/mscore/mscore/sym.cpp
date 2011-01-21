@@ -169,7 +169,7 @@ SymbolNames lilypondNames[] = {
       { turnSym,              QT_TRANSLATE_NOOP("symbol", "turn"),                 "scripts.turn"        },
       { trillSym,             QT_TRANSLATE_NOOP("symbol", "trill"),                "scripts.trill"       },
       { upedalheelSym,        QT_TRANSLATE_NOOP("symbol", "upedal heel"),          "scripts.upedalheel"  },
-      { dpedalheelSym,        QT_TRANSLATE_NOOP("symbol", "dpedalheel"),          "scripts.dpedalheel"  },
+      { dpedalheelSym,        QT_TRANSLATE_NOOP("symbol", "dpedalheel"),           "scripts.dpedalheel"  },
       { upedaltoeSym,         QT_TRANSLATE_NOOP("symbol", "upedal toe"),           "scripts.upedaltoe"   },
       { dpedaltoeSym,         QT_TRANSLATE_NOOP("symbol", "dpedal toe"),           "scripts.dpedaltoe"   },
       { flageoletSym,         QT_TRANSLATE_NOOP("symbol", "flageolet"),            "scripts.flageolet"   },
@@ -263,6 +263,13 @@ SymbolNames lilypondNames[] = {
       { letterpSym,           QT_TRANSLATE_NOOP("symbol", "p"),                    "p" },
       { lettermSym,           QT_TRANSLATE_NOOP("symbol", "m"),                    "m" },
       { letterrSym,           QT_TRANSLATE_NOOP("symbol", "r"),                    "r" },
+      { sqlongaupSym,         QT_TRANSLATE_NOOP("symbol", "sq longa up"),         "noteheads.uM2sq" },
+      { sqlongadownSym,       QT_TRANSLATE_NOOP("symbol", "sq longa down"),       "noteheads.dM2sq" },
+      { sqbrevisheadSym,      QT_TRANSLATE_NOOP("symbol", "sq brevis"),           "noteheads.sM1sq" },
+      { tempimpprolmajSym,    QT_TRANSLATE_NOOP("symbol", "tempus imperf prol maj"), "timesig.Cdot" },
+      { tempperfprolminSym,   QT_TRANSLATE_NOOP("symbol", "tempus perf prol min"),   "timesig.O"    },
+      { tempperfcutSym,       QT_TRANSLATE_NOOP("symbol", "tempus perf cut"),        "timesig.Ocut" },
+      { tempperfprolmajSym,   QT_TRANSLATE_NOOP("symbol", "tempus perf prol maj"),   "timesig.Odot" },
       { tabclef2Sym,          QT_TRANSLATE_NOOP("symbol", "tab2 clef"),            "clefs.tab2" },
       };
 
