@@ -202,7 +202,6 @@ class LoadCompressedMusicXml : public LoadFile {
 
 bool LoadCompressedMusicXml::loader(QFile* qf)
       {
-// printf("LoadCompressedMusicXml::loader(%s)\n", qPrintable(qf->fileName()));
       UnZip uz;
       UnZip::ErrorCode ec;
       ec = uz.openArchive(qf->fileName());
@@ -210,13 +209,10 @@ bool LoadCompressedMusicXml::loader(QFile* qf)
             error = "Unable to open archive(" + qf->fileName() + "):\n" + uz.formatError(ec);
             return true;
             }
-// printf("openArchive ec=%d\n", ec);
 
       QBuffer cbuf;
       cbuf.open(QIODevice::WriteOnly);
       ec = uz.extractFile("META-INF/container.xml", &cbuf);
-// printf("extractFile ec=%d, bufsize=%d\n", ec, cbuf.data().size());
-// printf("data=%s\n", cbuf.data().data());
 
       QDomDocument container;
       int line, column;
@@ -229,7 +225,6 @@ bool LoadCompressedMusicXml::loader(QFile* qf)
             printf("error: %s\n", error.toLatin1().data());
             return true;
             }
-// printf("container=%s\n", container.toString().toUtf8().data());
 
       // extract first rootfile
       QString rootfile = "";
@@ -257,14 +252,10 @@ bool LoadCompressedMusicXml::loader(QFile* qf)
             printf("can't find rootfile in: %s\n", qf->fileName().toLatin1().data());
             return true;
             }
-// else
-//   printf("rootfile=%s\n", rootfile.toUtf8().data());
 
       QBuffer dbuf;
       dbuf.open(QIODevice::WriteOnly);
       ec = uz.extractFile(rootfile, &dbuf);
-// printf("ec=%d, bufsize=%d\n", ec, dbuf.data().size());
-// printf("data=%s\n", dbuf.data().data());
 
       if (!_doc->setContent(dbuf.data(), false, &err, &line, &column)) {
             QString col, ln;
@@ -384,20 +375,20 @@ static void addText(VBox* & vbx, Score* s, QString strTxt, int sbtp, int stl)
 
 void MusicXml::doCredits()
       {
-      printf("MusicXml::doCredits()\n");
+//      printf("MusicXml::doCredits()\n");
       PageFormat* pf = score->pageFormat();
-      printf("page format w=%g h=%g spatium=%g DPMM=%g DPI=%g\n",
-             pf->width(), pf->height(), score->spatium(), DPMM, DPI);
+//      printf("page format w=%g h=%g spatium=%g DPMM=%g DPI=%g\n",
+//             pf->width(), pf->height(), score->spatium(), DPMM, DPI);
       // page width and height in tenths
       const double pw  = pf->width() * 10 * DPI / score->spatium();
       const double ph  = pf->height() * 10 * DPI / score->spatium();
       const int pw1 = (int) (pw / 3);
       const int pw2 = (int) (pw * 2 / 3);
       const int ph2 = (int) (ph / 2);
-      printf("page format w=%g h=%g\n", pw, ph);
-      printf("page format pw1=%d pw2=%d ph2=%d\n", pw1, pw2, ph2);
+//      printf("page format w=%g h=%g\n", pw, ph);
+//      printf("page format pw1=%d pw2=%d ph2=%d\n", pw1, pw2, ph2);
       // dump the credits
-/**/
+/*
       for (ciCreditWords ci = credits.begin(); ci != credits.end(); ++ci) {
             CreditWords* w = *ci;
             printf("credit-words defx=%g defy=%g just=%s hal=%s val=%s words=%s\n",
@@ -408,7 +399,7 @@ void MusicXml::doCredits()
                   w->vAlign.toUtf8().data(),
                   w->words.toUtf8().data());
             }
-/**/
+*/
       // apply simple heuristics using only default x and y
       // to recognize the meaning of credit words
       CreditWords* crwTitle = 0;
@@ -427,8 +418,8 @@ void MusicXml::doCredits()
                   if (!crwTitle || defy > crwTitle->defaultY) crwTitle = w;
                   }
             }
-            // subtitle is highest above middle of the page that is
-            // in the middle column and is not the title
+      // subtitle is highest above middle of the page that is
+      // in the middle column and is not the title
       for (ciCreditWords ci = credits.begin(); ci != credits.end(); ++ci) {
             CreditWords* w = *ci;
             double defx = w->defaultX;
@@ -455,11 +446,13 @@ void MusicXml::doCredits()
                   if (!crwCopyRight) crwCopyRight = w;
                   }
             } // end for (ciCreditWords ...
+/*
       if (crwTitle) printf("title='%s'\n", crwTitle->words.toUtf8().data());
       if (crwSubTitle) printf("subtitle='%s'\n", crwSubTitle->words.toUtf8().data());
       if (crwComposer) printf("composer='%s'\n", crwComposer->words.toUtf8().data());
       if (crwPoet) printf("poet='%s'\n", crwPoet->words.toUtf8().data());
       if (crwCopyRight) printf("copyright='%s'\n", crwCopyRight->words.toUtf8().data());
+*/
 
       if (crwTitle || crwSubTitle || crwComposer || crwPoet || crwCopyRight)
             score->setCreditsRead(true);
@@ -608,7 +601,6 @@ void MusicXml::scorePartwise(QDomElement ee)
                                 ;
                             else if (tag == "system-distance") {
                                 score->style().set(ST_systemDistance, val);
-                                printf("system distance %f\n", val.val());
                             }
                             else if (tag == "top-system-distance")
                                 ;
@@ -963,7 +955,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
       int staff = score->staffIdx(part);
 
       if (staves == 0) {
-            printf("no staves!\n");
+            printf("MusicXml::xmlMeasure no staves!\n");
             return 0;
             }
 
@@ -1268,9 +1260,9 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
 
 static void setSLinePlacement(SLine* sli, float s, const QString pl, bool hasYoff, qreal yoff)
       {
-      printf("setSLinePlacement s=%g pl='%s' hasy=%d yoff=%g\n",
-             s, qPrintable(pl), hasYoff, yoff
-            );
+//      printf("setSLinePlacement s=%g pl='%s' hasy=%d yoff=%g\n",
+//             s, qPrintable(pl), hasYoff, yoff
+//            );
       float offs = 0.0;
       if (hasYoff) offs = yoff;
       else {
@@ -1620,6 +1612,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
             }
 
       if ((dirType == "words" && txt != "") || dirType == "metronome") {
+/*
             printf("words txt='%s' metrEl='%s' tempo='%s' pl='%s' hasyoffs=%d fsz='%s' fst='%s' fw='%s'\n",
                     txt.toUtf8().data(),
                     qPrintable(metrEl.tagName()),
@@ -1630,6 +1623,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                     fontStyle.toUtf8().data(),
                     fontWeight.toUtf8().data()
                   );
+*/
             Text* t;
             if (tempo != "") {
                   t = new TempoText(score);
@@ -2201,9 +2195,11 @@ static int nrOfGraceSegsReq(QDomNode n)
       // i.e the number of notes with grace but without chord child elements
       for (; !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
-            if (tag != "note")
-                  printf("nrOfGraceSegsReq: found non-note tag '%s'\n",
-                         qPrintable(tag));
+            if (tag != "note") {
+                  ;
+//                  printf("nrOfGraceSegsReq: found non-note tag '%s'\n",
+//                         qPrintable(tag));
+                  }
             if (!hasElem(e, "grace"))
                   // non-grace note found, done
                   return nsegs;
@@ -2711,11 +2707,11 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             s->add(cr);
             cr->setVisible(printObject == "yes");
             if (step != "" && 0 <= octave && octave <= 9) {
-                  printf("rest step=%s oct=%d", qPrintable(step), octave);
+                  // printf("rest step=%s oct=%d", qPrintable(step), octave);
                   int clef = cr->staff()->clefList()->clef(tick);
                   int po = clefTable[clef].pitchOffset;
                   int istep = step[0].toAscii() - 'A';
-                  printf(" clef=%d po=%d istep=%d\n", clef, po, istep);
+                  // printf(" clef=%d po=%d istep=%d\n", clef, po, istep);
                   if (istep < 0 || istep > 6) {
                         printf("rest: illegal display-step %d, <%s>\n", istep, qPrintable(step));
                         }
@@ -2723,7 +2719,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                         //                        a  b  c  d  e  f  g
                         static int table2[7]  = { 5, 6, 0, 1, 2, 3, 4 };
                         int dp = 7 * (octave + 2) + table2[istep];
-                        printf("dp=%d\n", dp);
+                        // printf("dp=%d\n", dp);
                         cr->setUserYoffset((po - dp + 3) * score->spatium() / 2);
                         }
                   }
@@ -3036,11 +3032,11 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                                     totalDuration+=de->tickLen();
                                     }
                               }
-                        if(totalDuration && normalNotes){                              
+                        if(totalDuration && normalNotes){
                               Duration d;
-                              d.setVal(totalDuration);      
+                              d.setVal(totalDuration);
                               tuplet->setFraction(d.fraction()); 
-                              Duration d2;     
+                              Duration d2;
                               d2.setVal(totalDuration/normalNotes);
                               tuplet->setBaseLen(d2.fraction());
                               tuplet = 0;
@@ -3060,7 +3056,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             tuplet->add(cr);
             }
       if (tremolo) {
-            printf("tremolo=%d tremoloType='%s'\n", tremolo, qPrintable(tremoloType));
+            // printf("tremolo=%d tremoloType='%s'\n", tremolo, qPrintable(tremoloType));
             if (tremolo == 1 || tremolo == 2 || tremolo == 3) {
                   if (tremoloType == "" || tremoloType == "single") {
                         Tremolo * t = new Tremolo(score);

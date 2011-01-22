@@ -471,10 +471,7 @@ void PageFormat::readMusicXML(QDomElement e, double conversion)
             else
                   domError(e);
             }
-      printf("PageFormat::readMusicXML size=%d, height=%g, width=%g\n",
-      size, _height, _width);
       int match = paperSizeSizeToIndex(_width, _height);
-      printf("PageFormat::readMusicXML match=%d\n", match);
       if (match >= 0) size = match;
       }
 

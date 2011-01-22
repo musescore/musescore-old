@@ -907,16 +907,16 @@ Segment* Measure::getSegment(SegmentType st, int t, int gl)
                   return 0; // should not be reached
                   }
             else {
-printf("creating SegGrace at tick=%d and level=%d\n", t, gl);
+// printf("creating SegGrace at tick=%d and level=%d\n", t, gl);
                   Segment* prevs = 0; // last segment inserted
                   // insert the first grace segment
                   if (nGraces == 0) {
                         ++nGraces;
                         s = createSegment(SegGrace, t);
-printf("... creating SegGrace %p at tick=%d and level=%d\n", s, t, nGraces);
+// printf("... creating SegGrace %p at tick=%d and level=%d\n", s, t, nGraces);
                         add(s);
-printf("   <%d - %d - %d>\n", s->prev() ? s->prev()->tick() : -1, s->tick(),
-                   s->next() ? s->next()->tick() : -1);
+// printf("   <%d - %d - %d>\n", s->prev() ? s->prev()->tick() : -1, s->tick(),
+//                   s->next() ? s->next()->tick() : -1);
                         prevs = s;
                         // return s;
                         }
