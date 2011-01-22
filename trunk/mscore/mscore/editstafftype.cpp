@@ -50,6 +50,7 @@ EditStaffType::EditStaffType(QWidget* parent, Staff* st)
       connect(newTypeTablature,  SIGNAL(clicked()), SLOT(createNewType()));
       connect(newTypePercussion, SIGNAL(clicked()), SLOT(createNewType()));
       connect(name, SIGNAL(textEdited(const QString&)), SLOT(nameEdited(const QString&)));
+      connect(presetTablature,   SIGNAL(clicked()), SLOT(presetTablatureClicked()));
       if (ci)
             staffTypeList->setCurrentItem(ci);
       modified = false;
@@ -291,6 +292,129 @@ void EditStaffType::createNewType()
 void EditStaffType::nameEdited(const QString& s)
       {
       staffTypeList->currentItem()->setText(s);
+      }
+
+//---------------------------------------------------------
+//   presetClicked
+//---------------------------------------------------------
+
+void EditStaffType::presetTablatureClicked()
+      {
+      QFont f = QFont();
+
+      // retrieve item currently selected in preset combo
+      int idx       = presetTablatureCombo->currentIndex();
+      switch(idx)
+      {
+            case 0:                             // guitar
+                  lines->setValue(6);
+                  lineDistance->setValue(1.5);
+                  genClefTablature->setChecked(true);
+                  showBarlinesTablature->setChecked(true);
+                  genTimesigTablature->setChecked(false);
+                  upsideDown->setChecked(false);
+                  f.setFamily("MScoreTabulatureModern");
+                  f.setPointSizeF(10);
+                  fretFontName->setCurrentFont(f);
+                  fretFontSize->setValue(10);
+                  fretY->setValue(0);
+                  numbersRadio->setChecked(true);
+                  lettersRadio->setChecked(false);
+                  onLinesRadio->setChecked(true);
+                  aboveLinesRadio->setChecked(false);
+                  linesThroughRadio->setChecked(false);
+                  linesBrokenRadio->setChecked(true);
+                  f.setFamily("MScoreTabulatureModern");
+                  f.setPointSizeF(0);
+                  durFontName->setCurrentFont(f);
+                  durFontSize->setValue(15);
+                  durY->setValue(0);
+                  noteValues0->setChecked(false);
+                  noteValues1->setChecked(false);
+                  noteValues2->setChecked(true);
+                  break;
+            case 1:                             // bass
+                  lines->setValue(4);
+                  lineDistance->setValue(1.5);
+                  genClefTablature->setChecked(true);
+                  showBarlinesTablature->setChecked(true);
+                  genTimesigTablature->setChecked(false);
+                  upsideDown->setChecked(false);
+                  f.setFamily("MScoreTabulatureModern");
+                  f.setPointSizeF(10);
+                  fretFontName->setCurrentFont(f);
+                  fretFontSize->setValue(10);
+                  fretY->setValue(0);
+                  numbersRadio->setChecked(true);
+                  lettersRadio->setChecked(false);
+                  onLinesRadio->setChecked(true);
+                  aboveLinesRadio->setChecked(false);
+                  linesThroughRadio->setChecked(false);
+                  linesBrokenRadio->setChecked(true);
+                  f.setFamily("MScoreTabulatureModern");
+                  f.setPointSizeF(0);
+                  durFontName->setCurrentFont(f);
+                  durFontSize->setValue(15);
+                  durY->setValue(0);
+                  noteValues0->setChecked(false);
+                  noteValues1->setChecked(false);
+                  noteValues2->setChecked(true);
+                  break;
+            case 2:                             // Italian
+                  lines->setValue(6);
+                  lineDistance->setValue(1.5);
+                  genClefTablature->setChecked(false);
+                  showBarlinesTablature->setChecked(true);
+                  genTimesigTablature->setChecked(true);
+                  upsideDown->setChecked(true);
+                  f.setFamily("MScoreTabulatureRenaiss");
+                  f.setPointSizeF(10);
+                  fretFontName->setCurrentFont(f);
+                  fretFontSize->setValue(10);
+                  fretY->setValue(0);
+                  numbersRadio->setChecked(true);
+                  lettersRadio->setChecked(false);
+                  onLinesRadio->setChecked(true);
+                  aboveLinesRadio->setChecked(false);
+                  linesThroughRadio->setChecked(true);
+                  linesBrokenRadio->setChecked(false);
+                  f.setFamily("MScoreTabulatureRenaiss");
+                  f.setPointSizeF(15);
+                  durFontName->setCurrentFont(f);
+                  durFontSize->setValue(15);
+                  durY->setValue(0);
+                  noteValues0->setChecked(false);
+                  noteValues1->setChecked(true);
+                  noteValues2->setChecked(false);
+                  break;
+            case 3:                             // French
+                  lines->setValue(6);
+                  lineDistance->setValue(1.5);
+                  genClefTablature->setChecked(false);
+                  showBarlinesTablature->setChecked(true);
+                  genTimesigTablature->setChecked(true);
+                  upsideDown->setChecked(false);
+                  f.setFamily("MScoreTabulatureRenaiss");
+                  f.setPointSizeF(10);
+                  fretFontName->setCurrentFont(f);
+                  fretFontSize->setValue(10);
+                  fretY->setValue(0);
+                  numbersRadio->setChecked(false);
+                  lettersRadio->setChecked(true);
+                  onLinesRadio->setChecked(false);
+                  aboveLinesRadio->setChecked(true);
+                  linesThroughRadio->setChecked(true);
+                  linesBrokenRadio->setChecked(false);
+                  f.setFamily("MScoreTabulatureRenaiss");
+                  f.setPointSizeF(15);
+                  durFontName->setCurrentFont(f);
+                  durFontSize->setValue(15);
+                  durY->setValue(0);
+                  noteValues0->setChecked(false);
+                  noteValues1->setChecked(true);
+                  noteValues2->setChecked(false);
+                  break;
+            }
       }
 
 //---------------------------------------------------------
