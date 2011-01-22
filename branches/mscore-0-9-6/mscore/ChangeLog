@@ -1,3 +1,5 @@
+22.jan (lv)
+      - MusicXML import: disabled debug printfs
 19.jan (ws)
       - fix #8727: write accidentals with parentheses
 18.jan (ws)
