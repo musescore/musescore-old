@@ -912,6 +912,7 @@ void MusicXml::xmlPart(QDomElement e, QString id)
             }
       tick                  = 0;
       maxtick               = 0;
+      prevtick              = 0;
       lastMeasureLen        = 0;
       multiMeasureRestCount = 0;
       startMultiMeasureRest = false;
@@ -1402,7 +1403,7 @@ static void metronome(QDomElement e, Text* t)
 
 void MusicXml::direction(Measure* measure, int staff, QDomElement e)
       {
-//      printf("MusicXml::direction\n");
+//      printf("MusicXml::direction tick=%d\n", tick);
       QString placement = e.attribute("placement");
 
       QString dirType;
@@ -1577,59 +1578,70 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
 */
 
       if (repeat != "") {
-            Element* e = 0;
+            Jump* jp = 0;
+            Marker* m = 0;
             if (repeat == "segno") {
-                  e = new Marker(score);
-                  ((Marker*)e)->setMarkerType(MARKER_SEGNO);
+                  m = new Marker(score);
+                  // note: Marker::read() also contains code to set text style based on type
+                  // avoid duplicated code
+                  m->setTextStyle(TEXT_STYLE_REPEAT_LEFT);
+                  // apparently this MUST be after setTextStyle
+                  m->setMarkerType(MARKER_SEGNO);
                   }
             else if (repeat == "coda") {
-                  Marker* m = new Marker(score);
+                  m = new Marker(score);
+                  m->setTextStyle(TEXT_STYLE_REPEAT_LEFT);
                   m->setMarkerType(MARKER_CODA);
-                  e = m;
                   }
             else if (repeat == "fine") {
-                  Marker* m = new Marker(score);
+                  m = new Marker(score);
+                  m->setTextStyle(TEXT_STYLE_REPEAT_RIGHT);
                   m->setMarkerType(MARKER_FINE);
-                  e = m;
                   }
             else if (repeat == "toCoda") {
-                  Marker* m = new Marker(score);
+                  m = new Marker(score);
+                  m->setTextStyle(TEXT_STYLE_REPEAT_RIGHT);
                   m->setMarkerType(MARKER_TOCODA);
-                  e = m;
                   }
             else if (repeat == "daCapo") {
-                  Jump* jp = new Jump(score);
+                  jp = new Jump(score);
+                  jp->setTextStyle(TEXT_STYLE_REPEAT_RIGHT);
                   jp->setJumpType(JUMP_DC);
-                  e = jp;
                   }
             else if (repeat == "daCapoAlCoda") {
-                  Jump* jp = new Jump(score);
+                  jp = new Jump(score);
+                  jp->setTextStyle(TEXT_STYLE_REPEAT_RIGHT);
                   jp->setJumpType(JUMP_DC_AL_CODA);
-                  e = jp;
                   }
             else if (repeat == "daCapoAlFine") {
-                  Jump* jp = new Jump(score);
+                  jp = new Jump(score);
+                  jp->setTextStyle(TEXT_STYLE_REPEAT_RIGHT);
                   jp->setJumpType(JUMP_DC_AL_FINE);
-                  e = jp;
                   }
             else if (repeat == "dalSegno") {
-                  Jump* jp = new Jump(score);
+                  jp = new Jump(score);
+                  jp->setTextStyle(TEXT_STYLE_REPEAT_RIGHT);
                   jp->setJumpType(JUMP_DS);
-                  e = jp;
                   }
             else if (repeat == "dalSegnoAlCoda") {
-                  Jump* jp = new Jump(score);
+                  jp = new Jump(score);
+                  jp->setTextStyle(TEXT_STYLE_REPEAT_RIGHT);
                   jp->setJumpType(JUMP_DS_AL_CODA);
-                  e = jp;
                   }
             else if (repeat == "dalSegnoAlFine") {
-                  Jump* jp = new Jump(score);
+                  jp = new Jump(score);
+                  jp->setTextStyle(TEXT_STYLE_REPEAT_RIGHT);
                   jp->setJumpType(JUMP_DS_AL_FINE);
-                  e = jp;
                   }
-            if (e) {
-                  e->setTrack((staff + rstaff) * VOICES);
-                  measure->add(e);
+            if (jp) {
+                  jp->setTrack((staff + rstaff) * VOICES);
+                  Segment* s = measure->getSegment(SegChordRest, prevtick);
+                  s->add(jp);
+                  }
+            if (m) {
+                  m->setTrack((staff + rstaff) * VOICES);
+                  Segment* s = measure->getSegment(SegChordRest, tick);
+                  s->add(m);
                   }
             }
 
@@ -3148,6 +3160,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             s->add(dyn);
             }
 
+      prevtick = tick;
       if (!grace) {
             lastLen = ticks;
             tick += ticks;
