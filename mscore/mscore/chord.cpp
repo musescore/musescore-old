@@ -413,8 +413,8 @@ QRectF Chord::bbox() const
             _bbox |= n->bbox().translated(n->pos());
       foreach(const LedgerLine* l, _ledgerLines)
             _bbox |= l->bbox().translated(l->pos());
-      for (ciArticulation i = articulations.begin(); i != articulations.end(); ++i)
-            _bbox |= (*i)->bbox().translated((*i)->pos());
+      foreach(Articulation* a, articulations)
+            _bbox |= a->bbox().translated(a->pos());
       if (_hook)
             _bbox |= _hook->bbox().translated(_hook->pos());
       if (_stem)

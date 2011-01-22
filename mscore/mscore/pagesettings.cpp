@@ -58,8 +58,7 @@ const PaperSize paperSizes[] = {
       PaperSize(QPrinter::Folio,   "Folio",     MM(210),  MM(330)),
       PaperSize(QPrinter::Ledger,  "Ledger",    MM(432),  MM(279)),
       PaperSize(QPrinter::Tabloid, "Tabloid",   MM(279),  MM(432)),
-      // PaperSize(int(QPrinter::Custom)+1, "iPad", MM(148),  MM(197)),
-      PaperSize(int(QPrinter::Custom)+1, "iPad", MM(148),  MM(193)),
+      PaperSize(int(QPrinter::Custom)+1, "iPad", MM(148),  MM(197)),
       PaperSize(QPrinter::Custom,  "Custom",    MM(210),  MM(297)),
       PaperSize(QPrinter::A4,      0, 0, 0  )
       };

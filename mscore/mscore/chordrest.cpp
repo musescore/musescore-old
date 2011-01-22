@@ -83,12 +83,12 @@ int DurationElement::ticks() const
 //   hasArticulation
 //---------------------------------------------------------
 
-Articulation* ChordRest::hasArticulation(const Articulation* a)
+Articulation* ChordRest::hasArticulation(const Articulation* aa)
       {
-      int idx = a->subtype();
-      for (iArticulation l = articulations.begin(); l != articulations.end(); ++l) {
-            if (idx == (*l)->subtype())
-                  return *l;
+      int idx = aa->subtype();
+      foreach(Articulation* a, articulations) {
+            if (idx == a->subtype())
+                  return a;
             }
       return 0;
       }
@@ -154,10 +154,8 @@ void ChordRest::scanElements(void* data, void (*func)(void*, Element*))
       {
       foreach(Slur* slur, _slurFor)
             slur->scanElements(data, func);
-      for (ciArticulation i = articulations.begin(); i != articulations.end(); ++i) {
-            Articulation* a = *i;
+      foreach(Articulation* a, articulations)
             func(data, a);
-            }
       foreach(Lyrics* l, _lyricsList) {
             if (l)
                   l->scanElements(data, func);
@@ -239,8 +237,8 @@ void ChordRest::writeProperties(Xml& xml) const
       if (!duration().isZero() && (!durationType().fraction().isValid()
          || (durationType().fraction() != duration())))
             xml.fTag("duration", duration());
-      for (ciArticulation ia = articulations.begin(); ia != articulations.end(); ++ia)
-            (*ia)->write(xml);
+      foreach(const Articulation* a, articulations)
+            a->write(xml);
       foreach(Slur* s, _slurFor)
             xml.tagE(QString("Slur type=\"start\" number=\"%1\"").arg(s->id()+1));
       foreach(Slur* s, _slurBack)
@@ -417,15 +415,15 @@ void ChordRest::layoutArticulations()
 
       qreal x          = centerX();
 
-      double distance1 = point(score()->styleS(ST_propertyDistanceHead));
-      double distance2 = point(score()->styleS(ST_propertyDistanceStem));
+      double distance0 = score()->styleS(ST_propertyDistance).val() * _spatium;
+      double distance1 = score()->styleS(ST_propertyDistanceHead).val() * _spatium;
+      double distance2 = score()->styleS(ST_propertyDistanceStem).val() * _spatium;
 
       qreal chordTopY = upPos();
       qreal chordBotY = downPos();
 
-      qreal staffTopY = 0.0; // s->bboxStaff(idx).y() - pos().y();
-      qreal staffBotY = staffTopY + 4.0 * _spatium + distance2;
-      staffTopY      -= distance2;
+      qreal staffTopY = -distance2;
+      qreal staffBotY = staff()->height() + distance2;
 
       qreal dy = 0.0;
 
@@ -484,24 +482,20 @@ void ChordRest::layoutArticulations()
       qreal dyTop = staffTopY;
       qreal dyBot = staffBotY;
 
-      if ((upPos() - _spatium) < dyTop)
+/*      if ((upPos() - _spatium) < dyTop)
             dyTop = upPos() - _spatium;
       if ((downPos() + _spatium) > dyBot)
             dyBot = downPos() + _spatium;
-
-      for (iArticulation ia = articulations.begin(); ia != articulations.end(); ++ia) {
-            Articulation* a = *ia;
-            qreal y = 0;
+  */
+      foreach (Articulation* a, articulations) {
             ArticulationAnchor aa = a->anchor();
             if (aa == A_TOP_STAFF) {
-                  y = dyTop;
-                  a->setPos(x, y);
-                  dyTop -= point(score()->styleS(ST_propertyDistance)) + a->bbox().height();
+                  a->setPos(x, dyTop);
+                  dyTop -= distance0;
                   }
             else if (aa == A_BOTTOM_STAFF) {
-                  y = dyBot;
-                  a->setPos(x, y);
-                  dyBot += point(score()->styleS(ST_propertyDistance)) + a->bbox().height();
+                  a->setPos(x, dyBot);
+                  dyBot += distance0;
                   }
             }
       }
@@ -768,7 +762,7 @@ void ChordRest::remove(Element* e)
       switch(e->type()) {
             case ARTICULATION:
                   if (!articulations.removeOne(static_cast<Articulation*>(e)))
-                        printf("Chord::remove(): articulation not found\n");
+                        printf("ChordRest::remove(): articulation not found\n");
                   break;
             case LYRICS:
                   {
@@ -780,10 +774,11 @@ void ChordRest::remove(Element* e)
                         return;
                         }
                   }
-                  printf("Measure::remove: %s %p not found\n", e->name(), e);
+                  printf("ChordRest::remove: %s %p not found\n", e->name(), e);
                   break;
             default:
                   printf("ChordRest::remove: unknown element %s\n", e->name());
+                  break;
             }
       }
 

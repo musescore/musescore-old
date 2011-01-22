@@ -1731,12 +1731,12 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
       {
       QList<Articulation*>* na = chord->getArticulations();
       // first output the fermatas
-      for (ciArticulation ia = chord->getArticulations()->begin(); ia != chord->getArticulations()->end(); ++ia) {
-            if ((*ia)->subtype() == UfermataSym) {
+      foreach (const Articulation* a, *na) {
+            if (a->subtype() == UfermataSym) {
                   notations.tag(xml);
                   xml.tagE("fermata type=\"upright\"");
                   }
-            else if ((*ia)->subtype() == DfermataSym) {
+            else if (a->subtype() == DfermataSym) {
                   notations.tag(xml);
                   xml.tagE("fermata type=\"inverted\"");
                   }
@@ -1744,8 +1744,8 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
 
       // then the attributes whose elements are children of <articulations>
       Articulations articulations;
-      for (ciArticulation ia = na->begin(); ia != na->end(); ++ia) {
-            switch ((*ia)->subtype()) {
+      foreach (const Articulation* a, *na) {
+            switch (a->subtype()) {
                   case UfermataSym:
                   case DfermataSym:
                         // ignore, already handled
@@ -1806,7 +1806,7 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
                         // ignore, handled with technical
                         break;
                   default:
-                        printf("unknown chord attribute %s\n", (*ia)->name().toLatin1().data());
+                        printf("unknown chord attribute %s\n", qPrintable(a->subtypeUserName()));
                         break;
                   }
             }
@@ -1819,8 +1819,8 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
 
       // then the attributes whose elements are children of <ornaments>
       Ornaments ornaments;
-      for (ciArticulation ia = na->begin(); ia != na->end(); ++ia) {
-            switch ((*ia)->subtype()) {
+      foreach (const Articulation* a, *na) {
+            switch (a->subtype()) {
                   case UfermataSym:
                   case DfermataSym:
                   case SforzatoaccentSym:
@@ -1873,7 +1873,7 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
                         // ignore, handled with technical
                         break;
                   default:
-                        printf("unknown chord attribute %s\n", (*ia)->name().toLatin1().data());
+                        printf("unknown chord attribute %s\n", qPrintable(a->subtypeUserName()));
                         break;
                   }
             }
@@ -1882,8 +1882,8 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
             ornaments.etag(xml);
 
       // and finally the attributes whose elements are children of <technical>
-      for (ciArticulation ia = na->begin(); ia != na->end(); ++ia) {
-            switch ((*ia)->subtype()) {
+      foreach (const Articulation* a, *na) {
+            switch (a->subtype()) {
                   case PlusstopSym:
                         {
                         notations.tag(xml);
@@ -1907,7 +1907,7 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
                         break;
                   default:
                         // others silently ignored
-                        // printf("unknown chord attribute %s\n", (*ia)->name().toLatin1().data());
+                        // printf("unknown chord attribute %s\n", qPrintable(a->subtypeUserName()));
                         break;
                   }
             }
@@ -2171,7 +2171,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bo
                               s = "three-quarters-sharp";
                               break;
                         default:
-                              printf("unknown accidental %d\n", acc);
+                              printf("unknown accidental %d\n", acc->accidentalType());
                         }
                   if (editorial)
                         xml.tag("accidental editorial=\"yes\"", s);

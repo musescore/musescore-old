@@ -985,15 +985,14 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                   double y1 = npos.y();
                   double y  = chordUp ? qMin(p1dy, f->p1[idx].y()) : qMax(p1dy, f->p1[idx].y());
 
-                  bool isUp = _up ? true : false;
-                  if (chordUp != isUp) {
-                        //  notes are on the wrong side of the beam
-                        //  extend stem to farest beam segment
-
-                        qreal x = x2 - parent()->canvasPos().x();
-                        foreach(QLineF* l, beamSegments) {
-                              if ((l->x1() <= x) && (l->x2() > x))
-                                    y = l->y1();
+                  //  extend stem to farest beam segment
+                  qreal x = x2 - parent()->canvasPos().x();
+                  foreach(QLineF* l, beamSegments) {
+                        if ((l->x1() <= x) && (l->x2() > x)) {
+                              if (chordUp)
+                                    y = qMin(y, l->y1());
+                              else
+                                    y = qMax(y, l->y1());
                               }
                         }
                   double y2 = y + (x2 - x1) * slope + canvPos.y();

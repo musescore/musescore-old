@@ -118,7 +118,7 @@ class Articulation : public Symbol {
       virtual void setSubtype(int);
       virtual void read(QDomElement);
       virtual void write(Xml& xml) const;
-      QString name() const { return articulationList[subtype()].name; }
+      QString subtypeUserName() const { return articulationList[subtype()].name; }
       int relGateTime() const { return articulationList[subtype()].relGateTime; }
       int relVelocity() const { return articulationList[subtype()].relVelocity; }
       virtual QPointF canvasPos() const;      ///< position in canvas coordinates
@@ -158,9 +158,6 @@ class ArticulationProperties : public QDialog, public Ui::ArticulationProperties
    public:
       ArticulationProperties(Articulation*, QWidget* parent = 0);
       };
-
-typedef QList<Articulation*>::iterator iArticulation;
-typedef QList<Articulation*>::const_iterator ciArticulation;
 
 #endif
 
