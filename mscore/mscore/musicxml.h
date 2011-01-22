@@ -144,6 +144,7 @@ class MusicXml {
       QDomDocument* doc;
       int tick;         ///< Current position in MusicXML time
       int maxtick;      ///< Maxtick of a measure, used to calculate measure len
+      int prevtick;     ///< Previous notes tick (used to insert Jumps)
       int lastMeasureLen;
       unsigned int multiMeasureRestCount;       ///< Remaining measures in a multi measure rest
       bool startMultiMeasureRest;               ///< Multi measure rest started in this measure

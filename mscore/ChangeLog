@@ -1,3 +1,5 @@
+22.jan (lv)
+      - MusicXML import fixes: dalsegno and friends
 21.jan (mi)
       - Time signature layout was wrong in staves with non-standard line number or
         spacing (mostly tablature staves) (r. 3937)
