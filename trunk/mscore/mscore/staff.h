@@ -119,7 +119,6 @@ class Staff {
       void setRstaff(int n)          { _rstaff = n;    }
       void read(QDomElement);
       void write(Xml& xml) const;
-//      Instrument* instrument() const;
       Part* part() const             { return _part;        }
 
       int bracket(int idx) const;

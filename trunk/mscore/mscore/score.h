@@ -718,7 +718,7 @@ class Score : public QObject {
       Measure* searchLabel(const QString& s);
       RepeatList* repeatList() const;
       double utick2utime(int tick) const;
-      int utime2utick(double utime);
+      int utime2utick(double utime) const;
       void updateRepeatList(bool expandRepeats);
 
       void nextInputPos(ChordRest* cr, bool);

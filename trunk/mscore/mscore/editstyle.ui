@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>631</width>
-    <height>500</height>
+    <width>1099</width>
+    <height>685</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MuseScore: Edit Style</string>
   </property>
-  <layout class="QGridLayout">
+  <layout class="QGridLayout" name="gridLayout_11">
    <item row="0" column="0">
     <widget class="QListWidget" name="pageList">
      <property name="sizePolicy">
@@ -114,23 +114,6 @@
      </item>
     </widget>
    </item>
-   <item row="1" column="0" colspan="2">
-    <layout class="QHBoxLayout">
-     <property name="spacing">
-      <number>6</number>
-     </property>
-     <property name="margin">
-      <number>0</number>
-     </property>
-     <item>
-      <widget class="QDialogButtonBox" name="buttonBox">
-       <property name="standardButtons">
-        <set>QDialogButtonBox::Apply|QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
    <item row="0" column="1">
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="sizePolicy">
@@ -140,7 +123,7 @@
       </sizepolicy>
      </property>
      <property name="currentIndex">
-      <number>6</number>
+      <number>13</number>
      </property>
      <widget class="QWidget" name="Seite_5">
       <layout class="QVBoxLayout" name="verticalLayout_20">
@@ -393,8 +376,8 @@
              <double>1000.000000000000000</double>
             </property>
             <property name="singleStep">
-             <double>0.5</double>
-            </property>            
+             <double>0.500000000000000</double>
+            </property>
            </widget>
           </item>
           <item row="1" column="2">
@@ -431,8 +414,8 @@
              <double>1000.000000000000000</double>
             </property>
             <property name="singleStep">
-             <double>0.1</double>
-            </property>                 
+             <double>0.100000000000000</double>
+            </property>
            </widget>
           </item>
           <item row="2" column="0">
@@ -498,8 +481,8 @@
              <number>1</number>
             </property>
             <property name="singleStep">
-             <double>0.5</double>
-            </property>             
+             <double>0.500000000000000</double>
+            </property>
            </widget>
           </item>
           <item row="3" column="2">
@@ -530,8 +513,8 @@
              <number>1</number>
             </property>
             <property name="singleStep">
-             <double>0.5</double>
-            </property>                
+             <double>0.500000000000000</double>
+            </property>
            </widget>
           </item>
           <item row="4" column="0">
@@ -1424,8 +1407,8 @@ p, li { white-space: pre-wrap; }
                <double>1000.000000000000000</double>
               </property>
               <property name="singleStep">
-               <double>0.1</double>
-              </property>                  
+               <double>0.100000000000000</double>
+              </property>
              </widget>
             </item>
             <item row="1" column="0">
@@ -1491,8 +1474,8 @@ p, li { white-space: pre-wrap; }
              <double>1.000000000000000</double>
             </property>
             <property name="singleStep">
-              <double>0.1</double>
-            </property>   
+             <double>0.100000000000000</double>
+            </property>
            </widget>
           </item>
           <item row="1" column="0">
@@ -1513,11 +1496,11 @@ p, li { white-space: pre-wrap; }
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
-            <property name="singleStep">
-              <double>0.1</double>
-            </property>   
             <property name="suffix">
              <string>sp</string>
+            </property>
+            <property name="singleStep">
+             <double>0.100000000000000</double>
             </property>
            </widget>
           </item>
@@ -1539,11 +1522,11 @@ p, li { white-space: pre-wrap; }
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
-            <property name="singleStep">
-              <double>0.1</double>
-            </property>             
             <property name="suffix">
              <string>sp</string>
+            </property>
+            <property name="singleStep">
+             <double>0.100000000000000</double>
             </property>
            </widget>
           </item>
@@ -1565,11 +1548,11 @@ p, li { white-space: pre-wrap; }
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
-            <property name="singleStep">
-              <double>0.1</double>
-            </property>             
             <property name="suffix">
              <string>sp</string>
+            </property>
+            <property name="singleStep">
+             <double>0.100000000000000</double>
             </property>
            </widget>
           </item>
@@ -1591,11 +1574,11 @@ p, li { white-space: pre-wrap; }
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
-            <property name="singleStep">
-              <double>0.1</double>
-            </property>             
             <property name="suffix">
              <string>sp</string>
+            </property>
+            <property name="singleStep">
+             <double>0.100000000000000</double>
             </property>
            </widget>
           </item>
@@ -1617,11 +1600,11 @@ p, li { white-space: pre-wrap; }
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
-            <property name="singleStep">
-              <double>0.1</double>
-            </property>             
             <property name="suffix">
              <string>sp</string>
+            </property>
+            <property name="singleStep">
+             <double>0.100000000000000</double>
             </property>
            </widget>
           </item>
@@ -1643,11 +1626,11 @@ p, li { white-space: pre-wrap; }
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
-            <property name="singleStep">
-              <double>0.1</double>
-            </property>             
             <property name="suffix">
              <string>sp</string>
+            </property>
+            <property name="singleStep">
+             <double>0.100000000000000</double>
             </property>
            </widget>
           </item>
@@ -1669,11 +1652,11 @@ p, li { white-space: pre-wrap; }
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
-            <property name="singleStep">
-              <double>0.05</double>
-            </property>             
             <property name="suffix">
              <string>sp</string>
+            </property>
+            <property name="singleStep">
+             <double>0.050000000000000</double>
             </property>
            </widget>
           </item>
@@ -1689,11 +1672,11 @@ p, li { white-space: pre-wrap; }
           </item>
           <item row="8" column="1">
            <widget class="QDoubleSpinBox" name="clefBarlineDistance">
-            <property name="singleStep">
-              <double>0.01</double>
-            </property> 
             <property name="suffix">
              <string extracomment="spatium unit">sp</string>
+            </property>
+            <property name="singleStep">
+             <double>0.010000000000000</double>
             </property>
            </widget>
           </item>
@@ -1846,7 +1829,7 @@ p, li { white-space: pre-wrap; }
                   <string extracomment="space unit">sp</string>
                  </property>
                  <property name="singleStep">
-                  <double>0.05</double>
+                  <double>0.050000000000000</double>
                  </property>
                 </widget>
                </item>
@@ -1859,7 +1842,7 @@ p, li { white-space: pre-wrap; }
                   <double>1.000000000000000</double>
                  </property>
                  <property name="singleStep">
-                  <double>0.25</double>
+                  <double>0.250000000000000</double>
                  </property>
                 </widget>
                </item>
@@ -1908,11 +1891,11 @@ p, li { white-space: pre-wrap; }
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-              <property name="singleStep">
-               <double>0.01</double>
-              </property>                 
               <property name="suffix">
                <string>sp</string>
+              </property>
+              <property name="singleStep">
+               <double>0.010000000000000</double>
               </property>
              </widget>
             </item>
@@ -1931,11 +1914,11 @@ p, li { white-space: pre-wrap; }
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-              <property name="singleStep">
-               <double>0.01</double>
-              </property>               
               <property name="suffix">
                <string>sp</string>
+              </property>
+              <property name="singleStep">
+               <double>0.010000000000000</double>
               </property>
              </widget>
             </item>
@@ -1954,11 +1937,11 @@ p, li { white-space: pre-wrap; }
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-              <property name="singleStep">
-               <double>0.1</double>
-              </property>               
               <property name="suffix">
                <string>sp</string>
+              </property>
+              <property name="singleStep">
+               <double>0.100000000000000</double>
               </property>
              </widget>
             </item>
@@ -1977,11 +1960,11 @@ p, li { white-space: pre-wrap; }
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-              <property name="singleStep">
-               <double>0.1</double>
-              </property> 
               <property name="suffix">
                <string>sp</string>
+              </property>
+              <property name="singleStep">
+               <double>0.100000000000000</double>
               </property>
              </widget>
             </item>
@@ -2000,11 +1983,11 @@ p, li { white-space: pre-wrap; }
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-              <property name="singleStep">
-               <double>0.01</double>
-              </property> 
               <property name="suffix">
                <string>sp</string>
+              </property>
+              <property name="singleStep">
+               <double>0.010000000000000</double>
               </property>
              </widget>
             </item>
@@ -2023,11 +2006,11 @@ p, li { white-space: pre-wrap; }
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-              <property name="singleStep">
-               <double>0.1</double>
-              </property> 
               <property name="suffix">
                <string>sp</string>
+              </property>
+              <property name="singleStep">
+               <double>0.100000000000000</double>
               </property>
              </widget>
             </item>
@@ -2100,7 +2083,7 @@ p, li { white-space: pre-wrap; }
                <double>999999.000000000000000</double>
               </property>
               <property name="singleStep">
-               <double>0.01</double>
+               <double>0.010000000000000</double>
               </property>
              </widget>
             </item>
@@ -2164,10 +2147,10 @@ p, li { white-space: pre-wrap; }
           </item>
           <item row="0" column="1">
            <widget class="QDoubleSpinBox" name="beamWidth">
-           <property name="singleStep">
-            <double>0.01</double>
-           </property>
-           </widget> 
+            <property name="singleStep">
+             <double>0.010000000000000</double>
+            </property>
+           </widget>
           </item>
           <item row="0" column="2">
            <widget class="QLabel" name="label_55">
@@ -2185,10 +2168,10 @@ p, li { white-space: pre-wrap; }
           </item>
           <item row="1" column="1">
            <widget class="QDoubleSpinBox" name="beamDistance">
-           <property name="singleStep">
-            <double>0.1</double>
-           </property> 
-           </widget>           
+            <property name="singleStep">
+             <double>0.100000000000000</double>
+            </property>
+           </widget>
           </item>
           <item row="1" column="2">
            <widget class="QLabel" name="label_58">
@@ -2206,10 +2189,10 @@ p, li { white-space: pre-wrap; }
           </item>
           <item row="2" column="1">
            <widget class="QDoubleSpinBox" name="beamMinLen">
-           <property name="singleStep">
-            <double>0.05</double>
-           </property> 
-           </widget>           
+            <property name="singleStep">
+             <double>0.050000000000000</double>
+            </property>
+           </widget>
           </item>
           <item row="2" column="2">
            <widget class="QLabel" name="label_60">
@@ -2231,7 +2214,7 @@ p, li { white-space: pre-wrap; }
              <double>1.000000000000000</double>
             </property>
             <property name="singleStep">
-             <double>0.05</double>
+             <double>0.050000000000000</double>
             </property>
            </widget>
           </item>
@@ -2248,7 +2231,7 @@ p, li { white-space: pre-wrap; }
              <double>1.000000000000000</double>
             </property>
             <property name="singleStep">
-             <double>0.05</double>
+             <double>0.050000000000000</double>
             </property>
            </widget>
           </item>
@@ -2597,9 +2580,9 @@ p, li { white-space: pre-wrap; }
           </item>
           <item row="0" column="1">
            <widget class="QDoubleSpinBox" name="hairpinLineWidth">
-           <property name="singleStep">
-            <double>0.01</double>
-           </property>            
+            <property name="singleStep">
+             <double>0.010000000000000</double>
+            </property>
            </widget>
           </item>
           <item row="0" column="2">
@@ -2624,10 +2607,10 @@ p, li { white-space: pre-wrap; }
           </item>
           <item row="1" column="1">
            <widget class="QDoubleSpinBox" name="hairpinHeight">
-           <property name="singleStep">
-            <double>0.1</double>
-           </property> 
-           </widget>           
+            <property name="singleStep">
+             <double>0.100000000000000</double>
+            </property>
+           </widget>
           </item>
           <item row="2" column="0">
            <widget class="QLabel" name="label_10">
@@ -2638,10 +2621,10 @@ p, li { white-space: pre-wrap; }
           </item>
           <item row="2" column="1">
            <widget class="QDoubleSpinBox" name="hairpinContinueHeight">
-           <property name="singleStep">
-            <double>0.1</double>
-           </property>
-           </widget> 
+            <property name="singleStep">
+             <double>0.100000000000000</double>
+            </property>
+           </widget>
           </item>
           <item row="3" column="0">
            <spacer>
@@ -2723,113 +2706,122 @@ p, li { white-space: pre-wrap; }
       </layout>
      </widget>
      <widget class="QWidget" name="Seite_6">
-      <layout class="QVBoxLayout" name="verticalLayout_9">
+      <layout class="QVBoxLayout" name="verticalLayout_24">
        <item>
-        <layout class="QFormLayout" name="formLayout_5">
-         <item row="0" column="0">
-          <widget class="QLabel" name="label_35">
-           <property name="text">
-            <string>Articulation - note head distance</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QDoubleSpinBox" name="propertyDistanceHead">
-           <property name="suffix">
-            <string comment="space unit">sp</string>
-           </property>
-           <property name="singleStep">
-            <double>0.1</double>
-           </property> 
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="label_37">
-           <property name="text">
-            <string>Articulation - note stem distance</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <widget class="QDoubleSpinBox" name="propertyDistanceStem">
-           <property name="suffix">
-            <string comment="space unit">sp</string>
-           </property>
-           <property name="singleStep">
-            <double>0.1</double>
-           </property> 
-          </widget>
-         </item>
-         <item row="2" column="0">
-          <widget class="QLabel" name="label_41">
-           <property name="text">
-            <string>Articulation - articulation distance</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="QDoubleSpinBox" name="propertyDistance">
-           <property name="suffix">
-            <string comment="space unit">sp</string>
-           </property>
-           <property name="singleStep">
-            <double>0.1</double>
-           </property> 
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <widget class="QTableWidget" name="articulationTable">
-         <property name="wordWrap">
-          <bool>false</bool>
+        <widget class="QGroupBox" name="groupBox_14">
+         <property name="title">
+          <string>Articulations, Ornaments</string>
          </property>
-         <property name="cornerButtonEnabled">
-          <bool>false</bool>
-         </property>
-         <property name="rowCount">
-          <number>35</number>
-         </property>
-         <property name="columnCount">
-          <number>2</number>
-         </property>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <row/>
-         <column/>
-         <column/>
+         <layout class="QVBoxLayout" name="verticalLayout_9">
+          <item>
+           <layout class="QFormLayout" name="formLayout_5">
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_35">
+              <property name="text">
+               <string>note head distance</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QDoubleSpinBox" name="propertyDistanceHead">
+              <property name="suffix">
+               <string comment="space unit">sp</string>
+              </property>
+              <property name="singleStep">
+               <double>0.100000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QDoubleSpinBox" name="propertyDistanceStem">
+              <property name="suffix">
+               <string comment="space unit">sp</string>
+              </property>
+              <property name="singleStep">
+               <double>0.100000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_41">
+              <property name="text">
+               <string>articulation distance</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QDoubleSpinBox" name="propertyDistance">
+              <property name="suffix">
+               <string comment="space unit">sp</string>
+              </property>
+              <property name="singleStep">
+               <double>0.100000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_37">
+              <property name="text">
+               <string>staff distance</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QTableWidget" name="articulationTable">
+            <property name="wordWrap">
+             <bool>false</bool>
+            </property>
+            <property name="cornerButtonEnabled">
+             <bool>false</bool>
+            </property>
+            <property name="rowCount">
+             <number>35</number>
+            </property>
+            <property name="columnCount">
+             <number>2</number>
+            </property>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <row/>
+            <column/>
+            <column/>
+           </widget>
+          </item>
+         </layout>
         </widget>
        </item>
       </layout>
@@ -2948,6 +2940,23 @@ p, li { white-space: pre-wrap; }
       </layout>
      </widget>
     </widget>
+   </item>
+   <item row="1" column="0">
+    <layout class="QHBoxLayout">
+     <property name="spacing">
+      <number>6</number>
+     </property>
+     <property name="margin">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QDialogButtonBox" name="buttonBox">
+       <property name="standardButtons">
+        <set>QDialogButtonBox::Apply|QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>

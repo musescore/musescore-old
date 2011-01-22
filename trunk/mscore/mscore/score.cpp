@@ -2072,7 +2072,7 @@ double Score::utick2utime(int tick) const
 //   utime2utick
 //---------------------------------------------------------
 
-int Score::utime2utick(double utime)
+int Score::utime2utick(double utime) const
       {
       return repeatList()->utime2utick(utime);
       }

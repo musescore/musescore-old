@@ -448,7 +448,7 @@ void MuseScore::populatePalette()
       for (int i = 0; i < ARTICULATIONS; ++i) {
             Articulation* s = new Articulation(gscore);
             s->setSubtype(i);
-            sp->append(s, qApp->translate("articulation", qPrintable(s->subtypeName())));
+            sp->append(s, qApp->translate("articulation", qPrintable(s->subtypeUserName())));
             }
       Bend* bend = new Bend(gscore);
       bend->points().append(PitchValue(0,    0, false));
