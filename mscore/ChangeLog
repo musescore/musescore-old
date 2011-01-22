@@ -1,5 +1,8 @@
 22.jan (lv)
       - MusicXML import fixes: dalsegno and friends
+       (mi)
+      - Tablature Properties dlg box: added support for presets (with 4
+        built-in presets) (r. 3941)
 21.jan (mi)
       - Time signature layout was wrong in staves with non-standard line number or
         spacing (mostly tablature staves) (r. 3937)
