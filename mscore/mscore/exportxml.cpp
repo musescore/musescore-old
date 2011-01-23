@@ -968,11 +968,11 @@ static void addInteger(int len)
 void ExportMusicXml::calcDivMoveToTick(int t)
       {
       if (t < tick) {
-            printf("backup %d\n", tick - t);
+//            printf("backup %d\n", tick - t);
             addInteger(tick - t);
             }
       else if (t > tick) {
-            printf("forward %d\n", t - tick);
+//            printf("forward %d\n", t - tick);
             addInteger(t - tick);
             }
       tick = t;
@@ -1054,7 +1054,7 @@ void ExportMusicXml::calcDivisions()
                                           if (isTwoNoteTremolo(static_cast<Chord*>(el)))
                                                 l /= 2;
                                           }
-                                    printf("chordrest %d\n", l);
+                                    // printf("chordrest %d\n", l);
                                     addInteger(l);
                                     tick += l;
                                     }
@@ -1084,7 +1084,7 @@ void ExportMusicXml::calcDivisions()
             }
 
       div = AL::division / integers[0];
-      printf("divisions=%d div=%d\n", integers[0], div);
+      // printf("divisions=%d div=%d\n", integers[0], div);
       }
 
 //---------------------------------------------------------
@@ -1131,8 +1131,9 @@ static void creditWords(Xml& xml, double x, double y, int fs, QString just, QStr
 void ExportMusicXml::credits(Xml& xml)
       {
       // debug
-      printf("credits:\n");
+      // printf("credits:\n");
       const MeasureBase* measure = score->measures()->first();
+/*
       foreach(const Element* element, *measure->el()) {
             if (element->type() == TEXT) {
                   const Text* text = (const Text*)element;
@@ -1165,6 +1166,8 @@ void ExportMusicXml::credits(Xml& xml)
             }
       if (score->copyright()) printf("copyright '%s'\n", score->copyright()->getText().toUtf8().data());
       printf("end credits\n");
+*/
+
       // determine formatting
       PageFormat* pf = score->pageFormat();
       if (!pf) return;
@@ -1174,20 +1177,22 @@ void ExportMusicXml::credits(Xml& xml)
       const double w  = getTenthsFromInches(pf->width());
       const double lm = getTenthsFromInches(pf->oddLeftMargin);
       const double rm = getTenthsFromInches(pf->oddRightMargin);
-      const double tm = getTenthsFromInches(pf->oddTopMargin);
+//      const double tm = getTenthsFromInches(pf->oddTopMargin);
       const double bm = getTenthsFromInches(pf->oddBottomMargin);
-      printf(" h=%g w=%g lm=%g rm=%g tm=%g bm=%g\n", h, w, lm, rm, tm, bm);
-/**/
+//      printf(" h=%g w=%g lm=%g rm=%g tm=%g bm=%g\n", h, w, lm, rm, tm, bm);
+
       // write the credits
       // TODO add real font size
       foreach(const Element* element, *measure->el()) {
             if (element->type() == TEXT) {
                   const Text* text = (const Text*)element;
+/*
                   printf("x=%g, y=%g fs=%d\n",
                          text->canvasPos().x(),
                          h - text->canvasPos().y(),
                          text->defaultFont().pointSize()
                         );
+*/
                   const double ty = h - getTenthsFromDots(text->canvasPos().y());
                   const int fs = text->defaultFont().pointSize();
                   switch (text->subtype()) {
@@ -1262,8 +1267,8 @@ void ExportMusicXml::pitch2xml(Note* note, char& c, int& alter, int& octave)
             case   0: ottava =  0; break;
             case -12: ottava = -1; break;
             case -24: ottava = -2; break;
-            default:  printf("pitch2xml() tick=%d pitch()=%d ppitch()=%dd\n",
-                             tick, note->pitch(), note->ppitch());
+            default:  /* printf("pitch2xml() tick=%d pitch()=%d ppitch()=%dd\n",
+                             tick, note->pitch(), note->ppitch()) */;
             }
       octave += ottava;
 //      printf("pitch2xml() tick=%d offset=%d step=%d pitch()=%d ppitch()=%d npitch=%d alter=%d ottava=%d\n",
@@ -1441,14 +1446,14 @@ void ExportMusicXml::moveToTick(int t)
       {
 //      printf("ExportMusicXml::moveToTick(t=%d) tick=%d\n", t, tick);
       if (t < tick) {
-            printf(" -> backup");
+//            printf(" -> backup");
             attr.doAttr(xml, false);
             xml.stag("backup");
             xml.tag("duration", (tick - t) / div);
             xml.etag();
             }
       else if (t > tick) {
-            printf(" -> forward");
+//            printf(" -> forward");
             attr.doAttr(xml, false);
             xml.stag("forward");
             xml.tag("duration", (t - tick) / div);
@@ -1514,7 +1519,7 @@ void ExportMusicXml::keysig(int key, bool visible)
 
 void ExportMusicXml::clef(int staff, int clef)
       {
-      printf("ExportMusicXml::clef(staff=%d, clef=%d)\n", staff, clef);
+//      printf("ExportMusicXml::clef(staff=%d, clef=%d)\n", staff, clef);
       attr.doAttr(xml, true);
       if (staff)
             xml.stag(QString("clef number=\"%1\"").arg(staff));
@@ -1619,7 +1624,7 @@ static bool isTwoNoteTremolo(Chord* chord)
 
 static void tremoloSingleStartStop(Chord* chord, Notations& notations, Ornaments& ornaments, Xml& xml)
       {
-      printf("tremoloSingleStartStop: chord=%p trem=%p nextchord=%p\n", chord, chord->tremolo(), nextChordRest(chord));
+//      printf("tremoloSingleStartStop: chord=%p trem=%p nextchord=%p\n", chord, chord->tremolo(), nextChordRest(chord));
       ChordRest* cr = nextChordRest(chord);
       Chord* nextChord = 0;
       if (cr && cr->type() == CHORD) nextChord = static_cast<Chord*>(cr);
@@ -1958,7 +1963,7 @@ static Chord* nextChord(Chord* ch)
 
 void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool useDrumset)
       {
-      printf("ExportMusicXml::chord() oldtick=%d\n", tick);
+//      printf("ExportMusicXml::chord() oldtick=%d\n", tick);
       QList<Note*> nl = chord->notes();
       NoteType gracen = nl.front()->noteType();
       bool grace = (gracen == NOTE_ACCIACCATURA
@@ -1966,11 +1971,11 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
                  || gracen == NOTE_GRACE4
                  || gracen == NOTE_GRACE16
                  || gracen == NOTE_GRACE32);
-      printf("notetype=%d grace=%d\n", gracen, grace);
+//      printf("notetype=%d grace=%d\n", gracen, grace);
       int tremCorr = 1; // duration correction for two note tremolo
       if (isTwoNoteTremolo(chord)) tremCorr = 2;
       if (!grace) tick += chord->ticks() / tremCorr;
-      printf(" newtick=%d\n", tick);
+//      printf(" newtick=%d\n", tick);
 
       PageFormat* pf = score->pageFormat();
       const double pageHeight  = getTenthsFromInches(pf->height());
@@ -2239,7 +2244,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
 void ExportMusicXml::rest(Rest* rest, int staff)
       {
       static char table2[]  = "CDEFGAB";
-      printf("ExportMusicXml::rest() oldtick=%d", tick);
+//      printf("ExportMusicXml::rest() oldtick=%d", tick);
       attr.doAttr(xml, false);
 
       QString noteTag = QString("note");
@@ -2279,7 +2284,7 @@ void ExportMusicXml::rest(Rest* rest, int staff)
             tickLen = rest->measure()->tickLen();
             }
       tick += tickLen;
-      printf(" tickLen=%d newtick=%d\n", tickLen, tick);
+//      printf(" tickLen=%d newtick=%d\n", tickLen, tick);
 
       xml.tag("duration", tickLen / div);
 
@@ -2462,8 +2467,8 @@ static bool findUnitAndDots(QString words, QString& unit, int& dots)
       {
       unit = "";
       dots = 0;
-      printf("findUnitAndDots('%s') slen=%d", qPrintable(words), words.length());
-      if (!metro.exactMatch(words)) { printf("\n"); return false; }
+//      printf("findUnitAndDots('%s') slen=%d", qPrintable(words), words.length());
+      if (!metro.exactMatch(words)) { /* printf("\n"); */ return false; }
       switch (words.at(0).unicode()) {
             case 0xe100: unit = "breve"; break;
             case 0xe101: unit = "whole"; break;
@@ -2484,7 +2489,7 @@ static bool findUnitAndDots(QString words, QString& unit, int& dots)
                   default: printf("findUnitAndDots: unknown char '%s'(0x%0xd)\n",
                                   qPrintable(words.mid(i, 1)), words.at(i).unicode());
                   }
-      printf(" unit='%s' dots=%d\n", qPrintable(unit), dots);
+//      printf(" unit='%s' dots=%d\n", qPrintable(unit), dots);
       return true;
       }
 
@@ -2496,7 +2501,7 @@ static bool findMetronome(QString words,
                           QString& wordsRight  // words right of metronome
                          )
       {
-      printf("findMetronome('%s') slen=%d", qPrintable(words), words.length());
+//      printf("findMetronome('%s') slen=%d", qPrintable(words), words.length());
       wordsLeft  = "";
       hasParen   = false;
       metroLeft  = "";
@@ -2505,25 +2510,29 @@ static bool findMetronome(QString words,
       int pos = metroPlusEquals.indexIn(words);
       if (pos != -1) {
             int len = metroPlusEquals.matchedLength();
+/*
             printf(" mpos=%d mlen=%d\n",
                    pos, len
                   );
+*/
             if (words.length() > pos + len) {
                   QString s1 = words.mid(0, pos);    // string to the left of metronome
                   QString s2 = words.mid(pos, len);  // first note and equals sign
                   QString s3 = words.mid(pos + len); // string to the right of equals sign
+/*
                   printf("found metronome: '%s'%s'%s'",
                          qPrintable(s1),
                          qPrintable(s2),
                          qPrintable(s3)
                         );
+*/
                   // determine if metronome has parentheses
                   // left part of string must end with parenthesis plus optional spaces
                   // right part of string must have parenthesis (but not in first pos)
                   int lparen = leftParen.indexIn(s1);
                   int rparen = s3.indexOf(")");
                   hasParen = (lparen != -1 && rparen > 0);
-                  printf(" lparen=%d rparen=%d hasP=%d", lparen, rparen, hasParen);
+//                  printf(" lparen=%d rparen=%d hasP=%d", lparen, rparen, hasParen);
                   if (hasParen) wordsLeft = s1.mid(0, lparen);
                   else wordsLeft = s1;
                   int equalsPos = equals.indexIn(s2);
@@ -2536,12 +2545,14 @@ static bool findMetronome(QString words,
                   else {
                         metroRight = s3;
                         }
+/*
                   printf(" '%s'%s'%s'%s'\n",
                          qPrintable(wordsLeft),
                          qPrintable(metroLeft),
                          qPrintable(metroRight),
                          qPrintable(wordsRight)
                         );
+*/
 //                  bool res;
                   QString unit;
                   int dots;
@@ -2608,7 +2619,7 @@ static void wordsMetrome(Xml& xml, Text* text)
 
 void ExportMusicXml::tempoText(TempoText* text, int staff)
       {
-      printf("ExportMusicXml::tempoText(TempoText='%s')\n", qPrintable(text->getText()));
+//      printf("ExportMusicXml::tempoText(TempoText='%s')\n", qPrintable(text->getText()));
       attr.doAttr(xml, false);
       xml.stag(QString("direction placement=\"%1\"").arg((text->parent()->y()-text->y() < 0.0) ? "below" : "above"));
       wordsMetrome(xml, text);
@@ -2627,9 +2638,11 @@ void ExportMusicXml::tempoText(TempoText* text, int staff)
 
 void ExportMusicXml::words(Text* text, int staff)
       {
+/*
       printf("ExportMusicXml::words userOff.x=%f userOff.y=%f xoff=%g yoff=%g text='%s'\n",
              text->userOff().x(), text->userOff().y(), text->xoff(), text->yoff(),
              text->getText().toUtf8().data());
+*/
       directionTag(xml, attr, text);
       if (text->subtypeName() == "RehearsalMark") {
             xml.stag("direction-type");
@@ -3203,10 +3216,12 @@ foreach(Element* el, *(score->gel())) {
       // use meta data here instead
       xml.stag("identification");
       for (int i = 0; i < score->numberOfCreators(); ++i) {
+/*
             printf("creator type='%s' text='%s'\n",
                    score->getCreator(i)->crType().toUtf8().data(),
                    score->getCreator(i)->crText().toUtf8().data()
                   );
+*/
             const MusicXmlCreator* crt = score->getCreator(i);
             xml.tag(QString("creator type=\"%1\"").arg(crt->crType()), crt->crText());
             }
@@ -3502,7 +3517,7 @@ foreach(Element* el, *(score->gel())) {
                                           // at line beginning
                                           int ti = el->tick();
                                           int ct = ((Clef*)el)->subtype();
-                                          printf("exportxml: clef ti=%d ct=%d\n", ti, ct);
+//                                          printf("exportxml: clef ti=%d ct=%d\n", ti, ct);
                                           ClefList* cl = score->staff(st/VOICES)->clefList();
                                           ciClefEvent ci = cl->find(ti);
                                           if (ci != cl->end()) {
@@ -3679,7 +3694,7 @@ foreach(Element* el, *(score->gel())) {
                               }
                         }
                   // move to end of measure (in case of incomplete last voice)
-                  printf("end of measure\n");
+//                  printf("end of measure\n");
                   moveToTick(m->tick() + m->tickLen());
                   if (idx == 0)
                         repeatAtMeasureStop(xml, m);
