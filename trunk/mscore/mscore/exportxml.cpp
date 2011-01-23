@@ -2961,7 +2961,7 @@ void ExportMusicXml::lyrics(const QList<Lyrics*>* ll)
 
 // LVIFIX: TODO coda and segno should be numbered uniquely
 
-static void directionJump(Xml& xml, Jump* jp)
+static void directionJump(Xml& xml, const Jump* const jp)
       {
       int jtp = jp->jumpType();
       QString words = "";
@@ -3032,7 +3032,7 @@ static void directionJump(Xml& xml, Jump* jp)
 //   directionMarker -- write marker
 //---------------------------------------------------------
 
-static void directionMarker(Xml& xml, Marker* m)
+static void directionMarker(Xml& xml, const Marker* const m)
       {
       int mtp = m->markerType();
       QString words = "";
@@ -3082,46 +3082,76 @@ static void directionMarker(Xml& xml, Marker* m)
       }
 
 //---------------------------------------------------------
+//  findTrackForAnnotations
+//---------------------------------------------------------
+
+// An annotation is attched to the staff, with track set
+// to the lowest track in the staff. Find a track for it
+// (the lowest track in this staff that has a chord or rest)
+
+static int findTrackForAnnotations(int track, Segment* seg)
+      {
+//      printf("findTrackForAnnotations(track=%d seg=%p)\n", track, seg);
+      if (seg->segmentType() != SegChordRest)
+            return -1;
+      int staff = track / VOICES;
+      int strack = staff * VOICES;      // start track of staff containing track
+      int etrack = strack + VOICES;     // end track of staff containing track + 1
+//      printf("findTrackForAnnotations() strack=%d etrack=%d\n", strack, etrack);
+      for (int i = strack; i < etrack; i++) {
+            if (seg->element(i)) {
+//                  printf("findTrackForAnnotations() found element at track=%d\n", i);
+                  return i;
+                  }
+            }
+      return -1;
+      }
+
+//---------------------------------------------------------
 //  repeatAtMeasureStart -- write repeats at begin of measure
 //---------------------------------------------------------
 
-static void repeatAtMeasureStart(Xml& xml, Attributes& attr, Measure* m)
+static void repeatAtMeasureStart(Xml& xml, Attributes& attr, Measure* m, int strack, int etrack, int track)
       {
-      // loop over all measure relative elements in this measure
-      // looking for JUMPS and MARKERS
-      for (ciElement ci = m->el()->begin(); ci != m->el()->end(); ++ci) {
-            Element* dir = *ci;
-            int tp = dir->type();
-            if (tp == JUMP) {
-                  // note: all jumps are handled at measure stop
-                  /*
-                  Jump* jp = (Jump*) dir;
-                  printf("repeatAtMeasureStart: jump st=%d jumpType=%d"
-                         " getText=%s jumpTo=%s playUntil=%s continueAt=%s\n",
-                         jp->subtype(), jp->jumpType(),
-                         jp->getText().toLatin1().data(),
-                         jp->jumpTo().toLatin1().data(),
-                         jp->playUntil().toLatin1().data(),
-                         jp->continueAt().toLatin1().data());
-                  */
-                  }
-            else if (tp == MARKER) {
-                  // filter out the markers at measure start
-                  Marker* m = (Marker*) dir;
-                  int mtp = m->markerType();
-                  /*
-                  printf("repeatAtMeasureStart: marker st=%d markerType=%d"
-                         " getText=%s label=%s\n",
-                         m->subtype(), mtp,
-                         m->getText().toLatin1().data(),
-                         m->label().toLatin1().data());
-                  */
-                  if (   mtp == MARKER_SEGNO
-                      || mtp == MARKER_CODA
-                     ) {
-                        attr.doAttr(xml, false);
-                        directionMarker(xml, m);
-                        }
+      // loop over all segments
+      for (Segment* seg = m->first(); seg; seg = seg->next()) {
+            if (seg->segmentType() == SegChordRest) {
+                  foreach(const Element* e, seg->annotations()) {
+                        printf("repeatAtMeasureStart seg %p elem %p type %d (%s) track %d\n",
+                               seg, e, e->type(), qPrintable(e->subtypeName()), e->track());
+                        int wtrack = -1; // track to write jump
+                        if (strack <= e->track() && e->track() < etrack)
+                              wtrack = findTrackForAnnotations(e->track(), seg);
+                        if (track == wtrack) {
+                              switch(e->type()) {
+                                    case SYMBOL:
+                                    case TEMPO_TEXT:
+                                    case STAFF_TEXT:
+                                    case TEXT:
+                                    case DYNAMIC:
+                                    case HARMONY:
+                                    case JUMP: // note: all jumps are handled at measure stop
+                                          break;
+                                    case MARKER:
+                                          {
+                                          // filter out the markers at measure Start
+                                          const Marker* const mk = static_cast<const Marker* const>(e);
+                                          int mtp = mk->markerType();
+                                          if (   mtp == MARKER_SEGNO
+                                              || mtp == MARKER_CODA
+                                             ) {
+                                                attr.doAttr(xml, false);
+                                                directionMarker(xml, mk);
+                                                }
+                                          }
+                                          break;
+                                    default:
+                                          printf("repeatAtMeasureStart: direction type %s at tick %d not implemented\n",
+                                                  Element::name(e->type()), seg->tick());
+                                          break;
+                                    }
+                              }
+                        } // foreach
                   }
             }
       }
@@ -3130,27 +3160,47 @@ static void repeatAtMeasureStart(Xml& xml, Attributes& attr, Measure* m)
 //  repeatAtMeasureStop -- write repeats at end of measure
 //---------------------------------------------------------
 
-static void repeatAtMeasureStop(Xml& xml, Measure* m)
+static void repeatAtMeasureStop(Xml& xml, Measure* m, int strack, int etrack, int track)
       {
-      // loop over all measure relative elements in this measure
-      // looking for JUMPS and MARKERS
-      for (ciElement ci = m->el()->begin(); ci != m->el()->end(); ++ci) {
-            Element* dir = *ci;
-            int tp = dir->type();
-            if (tp == JUMP) {
-                  // all jumps are handled at measure stop
-                  Jump* jp = (Jump*) dir;
-                  directionJump(xml, jp);
-                  }
-            else if (tp == MARKER) {
-                  // filter out the markers at measure stop
-                  Marker* m = (Marker*) dir;
-                  int mtp = m->markerType();
-                  if (   mtp == MARKER_FINE
-                      || mtp == MARKER_TOCODA
-                     ) {
-                        directionMarker(xml, m);
-                        }
+      // loop over all segments
+      for (Segment* seg = m->first(); seg; seg = seg->next()) {
+            if (seg->segmentType() == SegChordRest) {
+                  foreach(const Element* e, seg->annotations()) {
+                        printf("repeatAtMeasureStop seg %p elem %p type %d (%s) track %d\n",
+                               seg, e, e->type(), qPrintable(e->subtypeName()), e->track());
+                        int wtrack = -1; // track to write jump
+                        if (strack <= e->track() && e->track() < etrack)
+                              wtrack = findTrackForAnnotations(e->track(), seg);
+                        if (track == wtrack) {
+                              switch(e->type()) {
+                                    case SYMBOL:
+                                    case TEMPO_TEXT:
+                                    case STAFF_TEXT:
+                                    case TEXT:
+                                    case DYNAMIC:
+                                    case HARMONY:
+                                    case MARKER:
+                                          {
+                                          // filter out the markers at measure stop
+                                          const Marker* const mk = static_cast<const Marker* const>(e);
+                                          int mtp = mk->markerType();
+                                          if (   mtp == MARKER_FINE
+                                              || mtp == MARKER_TOCODA
+                                             ) {
+                                                directionMarker(xml, mk);
+                                                }
+                                          }
+                                          break;
+                                    case JUMP:
+                                          directionJump(xml, static_cast<const Jump* const>(e));
+                                          break;
+                                    default:
+                                          printf("repeatAtMeasureStop: direction type %s at tick %d not implemented\n",
+                                                  Element::name(e->type()), seg->tick());
+                                          break;
+                                    }
+                              }
+                        } // foreach
                   }
             }
       }
@@ -3211,32 +3261,6 @@ static void measureStyle(Xml& xml, Attributes& attr, Measure* m)
       }
 
 //---------------------------------------------------------
-//  findTrackForAnnotations
-//---------------------------------------------------------
-
-// An annotation is attched to the staff, with track set
-// to the lowest track in the staff. Find a track for it
-// (the lowest track in this staff that has a chord or rest)
-
-static int findTrackForAnnotations(int track, Segment* seg)
-      {
-//      printf("findTrackForAnnotations(track=%d seg=%p)\n", track, seg);
-      if (seg->segmentType() != SegChordRest)
-            return -1;
-      int staff = track / VOICES;
-      int strack = staff * VOICES;      // start track of staff containing track
-      int etrack = strack + VOICES;     // end track of staff containing track + 1
-//      printf("findTrackForAnnotations() strack=%d etrack=%d\n", strack, etrack);
-      for (int i = strack; i < etrack; i++) {
-            if (seg->element(i)) {
-//                  printf("findTrackForAnnotations() found element at track=%d\n", i);
-                  return i;
-                  }
-            }
-      return -1;
-      }
-
-//---------------------------------------------------------
 //  annotations
 //---------------------------------------------------------
 
@@ -3267,6 +3291,9 @@ static void annotations(ExportMusicXml* exp, int strack, int etrack, int track, 
                                     break;
                               case HARMONY:
                                     exp->harmony((Harmony*) e /*, sstaff */);
+                                    break;
+                              case JUMP:
+                                    // ignore
                                     break;
                               default:
                                     printf("annotations: direction type %s at tick %d not implemented\n",
@@ -3760,7 +3787,7 @@ foreach(Element* el, *(score->gel())) {
                   // MuseScore limitation: repeats are always in the first part
                   // and are implicitly placed at either measure start or stop
                   if (idx == 0)
-                        repeatAtMeasureStart(xml, attr, m);
+                        repeatAtMeasureStart(xml, attr, m, strack, etrack, strack);
 
                   for (int st = strack; st < etrack; ++st) {
                         // sstaff - xml staff number, counting from 1 for this
@@ -3907,7 +3934,7 @@ foreach(Element* el, *(score->gel())) {
                                           break;
                                     }
                               dh.handleElement(this, el, sstaff, false);
-                              }
+                              } // for (Segment* seg = ...
                         attr.stop(xml);
                         if (!((st + 1) % VOICES)) {
                               // sstaff may be 0, which causes a failed assertion (and abort)
@@ -3917,12 +3944,12 @@ foreach(Element* el, *(score->gel())) {
                               // printf("st=%d sstaff=%d ssstaff=%d\n", st, sstaff, ssstaff);
                               dh.handleElements(this, part->staff(ssstaff - 1), m->tick(), m->tick() + m->ticks(), sstaff);
                               }
-                        }
+                        } // for (int st = ...
                   // move to end of measure (in case of incomplete last voice)
                   printf("end of measure\n");
                   moveToTick(m->tick() + m->ticks());
                   if (idx == 0)
-                        repeatAtMeasureStop(xml, m);
+                        repeatAtMeasureStop(xml, m, strack, etrack, strack);
                   // note: don't use "m->repeatFlags() & RepeatEnd" here, because more
                   // barline types need to be handled besides repeat end ("light-heavy")
                   barlineRight(m);
