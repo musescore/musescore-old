@@ -48,9 +48,9 @@
         <controller ctrl="32" value="0"/>
         <program value="52"/>
         <controller ctrl="7" value="100"/>
-        <controller ctrl="10" value="64"/>
+        <controller ctrl="10" value="15"/>
         <controller ctrl="93" value="30"/>
-        <controller ctrl="91" value="30"/>
+        <controller ctrl="91" value="0"/>
         </Channel>
       </Instrument>
     </Part>
@@ -81,9 +81,9 @@
         <controller ctrl="32" value="0"/>
         <program value="52"/>
         <controller ctrl="7" value="100"/>
-        <controller ctrl="10" value="64"/>
+        <controller ctrl="10" value="110"/>
         <controller ctrl="93" value="30"/>
-        <controller ctrl="91" value="30"/>
+        <controller ctrl="91" value="0"/>
         </Channel>
       </Instrument>
     </Part>
@@ -114,9 +114,9 @@
         <controller ctrl="32" value="0"/>
         <program value="52"/>
         <controller ctrl="7" value="100"/>
-        <controller ctrl="10" value="64"/>
+        <controller ctrl="10" value="85"/>
         <controller ctrl="93" value="30"/>
-        <controller ctrl="91" value="30"/>
+        <controller ctrl="91" value="0"/>
         </Channel>
       </Instrument>
     </Part>
@@ -147,9 +147,9 @@
         <controller ctrl="32" value="0"/>
         <program value="52"/>
         <controller ctrl="7" value="100"/>
-        <controller ctrl="10" value="64"/>
+        <controller ctrl="10" value="50"/>
         <controller ctrl="93" value="30"/>
-        <controller ctrl="91" value="30"/>
+        <controller ctrl="91" value="0"/>
         </Channel>
       </Instrument>
     </Part>
@@ -161,8 +161,6 @@
         <nom1>4</nom1>
         </TimeSig>
       <Rest>
-        <durationType>measure</durationType>
-        <duration z="4" n="4"/>
         </Rest>
       <BarLine>
         </BarLine>
@@ -176,8 +174,6 @@
         <nom1>4</nom1>
         </TimeSig>
       <Rest>
-        <durationType>measure</durationType>
-        <duration z="4" n="4"/>
         </Rest>
       <BarLine>
         </BarLine>
@@ -191,8 +187,6 @@
         <nom1>4</nom1>
         </TimeSig>
       <Rest>
-        <durationType>measure</durationType>
-        <duration z="4" n="4"/>
         </Rest>
       <BarLine>
         </BarLine>
@@ -206,8 +200,6 @@
         <nom1>4</nom1>
         </TimeSig>
       <Rest>
-        <durationType>measure</durationType>
-        <duration z="4" n="4"/>
         </Rest>
       <BarLine>
         </BarLine>
