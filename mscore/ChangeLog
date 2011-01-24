@@ -1,4 +1,6 @@
-24.jan (ws)
+24.jan (lv)
+      - fix MusicXML export of bracketed accidentals
+       (ws)
       - #8842: add patch from miwarre (bracketed accidentals not saved)
 23.jan (lv)
       - MusicXML export: disabled debug printfs
