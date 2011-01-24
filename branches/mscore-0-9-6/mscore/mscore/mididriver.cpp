@@ -354,7 +354,7 @@ void AlsaMidiDriver::read()
       snd_seq_event_t* ev;
       for (;;) {
             int rv = snd_seq_event_input(alsaSeq, &ev);
-            if (rv < 0)
+            if (rv < 0 || mscore == 0)
                   return;
 
             if (!mscore->midiinEnabled()) {

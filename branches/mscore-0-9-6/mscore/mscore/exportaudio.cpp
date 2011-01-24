@@ -50,26 +50,6 @@ bool Score::saveAudio(const QString& name, const QString& ext, QString soundFont
             }
       static const int sampleRate = 44100;
 
-      Synth* synth = new FluidS::Fluid();
-      synth->init(sampleRate);
-
-      if (soundFont.isEmpty()) {
-            if (!preferences.soundFont.isEmpty())
-                  soundFont = preferences.soundFont;
-            else
-                  soundFont = QString(getenv("DEFAULT_SOUNDFONT"));
-            if (soundFont.isEmpty()) {
-                  fprintf(stderr, "MuseScore: error: no soundfont configured\n");
-                  delete synth;
-                  return false;
-                  }
-            }
-      bool rv = synth->loadSoundFont(soundFont);
-      if (!rv) {
-            fprintf(stderr, "MuseScore: error: loading sound font <%s> failed\n", qPrintable(soundFont));
-            delete synth;
-            return false;
-            }
       EventMap events;
       toEList(&events);
 
@@ -90,6 +70,26 @@ bool Score::saveAudio(const QString& name, const QString& ext, QString soundFont
       double peak = 0.0;
       double gain = 1.0;
       for (int pass = 0; pass < 2; ++pass) {
+            Synth* synth = new FluidS::Fluid();
+            synth->init(sampleRate);
+
+            if (soundFont.isEmpty()) {
+                  if (!preferences.soundFont.isEmpty())
+                        soundFont = preferences.soundFont;
+                  else
+                        soundFont = QString(getenv("DEFAULT_SOUNDFONT"));
+                  if (soundFont.isEmpty()) {
+                        fprintf(stderr, "MuseScore: error: no soundfont configured\n");
+                        delete synth;
+                        return false;
+                        }
+                  }
+            bool rv = synth->loadSoundFont(soundFont);
+            if (!rv) {
+                  fprintf(stderr, "MuseScore: error: loading sound font <%s> failed\n", qPrintable(soundFont));
+                  delete synth;
+                  return false;
+                  }
             EventMap::const_iterator playPos;
             playPos = events.constBegin();
             EventMap::const_iterator endPos = events.constEnd();
@@ -165,6 +165,7 @@ bool Score::saveAudio(const QString& name, const QString& ext, QString soundFont
                   if (playTime > et)
                         break;
                   }
+            delete synth;
             gain = 0.99 / peak;
             }
 
