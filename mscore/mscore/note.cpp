@@ -559,7 +559,8 @@ void Note::write(Xml& xml, int /*startTick*/, int endTick) const
       if (userAccidental())
             xml.tag("userAccidental", userAccidental() & 0x7fff);
       if (_accidental &&
-         (!_accidental->userOff().isNull() || !_accidental->visible())
+         (!_accidental->userOff().isNull() || !_accidental->visible()
+          || _accidental->hasBracket())
          ) {
             _accidental->write(xml);
             }
