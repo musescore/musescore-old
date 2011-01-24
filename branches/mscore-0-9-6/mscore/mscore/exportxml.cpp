@@ -2092,8 +2092,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
                         acc -= 10;
                         editorial = true;
                         }
-                  else if (acc & 0x8000) {
-                        acc &= 0xFFF;
+                  if (note->accidental()->hasBracket()) {
                         editorial = true;
                         }
                   /*
