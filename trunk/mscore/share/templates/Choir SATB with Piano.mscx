@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<museScore version="1.11">
-  <MagIdx>3</MagIdx>
-  <xoff>0.423333</xoff>
-  <yoff>0.423333</yoff>
+<museScore version="1.14">
+  <programVersion>1.0.0</programVersion>
+  <programRevision>3882 
+</programRevision>
   <Spatium>1.425</Spatium>
   <Division>480</Division>
   <Style>
@@ -31,26 +31,38 @@
         </keylist>
       <bracket type="0" span="4"/>
       </Staff>
-    <trackName>Soprano</trackName>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
-      <text>Soprano</text>
+      <subtype>InstrumentLong</subtype>
+      <frame>0</frame>
+      <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:9.69449pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Soprano</p></body></html>
+        </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
-      <text>S</text>
+      <subtype>InstrumentShort</subtype>
+      <frame>0</frame>
+      <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:9.69449pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">S</p></body></html>
+        </html-data>
       </shortName>
     <Instrument>
+      <trackName>Soprano</trackName>
       <Channel>
         <controller ctrl="0" value="0"/>
         <controller ctrl="32" value="0"/>
         <program value="52"/>
         <controller ctrl="7" value="100"/>
-        <controller ctrl="10" value="64"/>
+        <controller ctrl="10" value="15"/>
         <controller ctrl="93" value="30"/>
-        <controller ctrl="91" value="30"/>
+        <controller ctrl="91" value="0"/>
         </Channel>
       </Instrument>
     </Part>
@@ -64,26 +76,38 @@
         </keylist>
       <bracket type="-1" span="4"/>
       </Staff>
-    <trackName>Alto</trackName>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
-      <text>Alto</text>
+      <subtype>InstrumentLong</subtype>
+      <frame>0</frame>
+      <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:9.69449pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Alto</p></body></html>
+        </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
-      <text>A</text>
+      <subtype>InstrumentShort</subtype>
+      <frame>0</frame>
+      <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:9.69449pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">A</p></body></html>
+        </html-data>
       </shortName>
     <Instrument>
+      <trackName>Alto</trackName>
       <Channel>
         <controller ctrl="0" value="0"/>
         <controller ctrl="32" value="0"/>
         <program value="52"/>
         <controller ctrl="7" value="100"/>
-        <controller ctrl="10" value="64"/>
+        <controller ctrl="10" value="110"/>
         <controller ctrl="93" value="30"/>
-        <controller ctrl="91" value="30"/>
+        <controller ctrl="91" value="0"/>
         </Channel>
       </Instrument>
     </Part>
@@ -97,26 +121,38 @@
         </keylist>
       <bracket type="-1" span="3"/>
       </Staff>
-    <trackName>Tenor</trackName>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
-      <text>Tenor</text>
+      <subtype>InstrumentLong</subtype>
+      <frame>0</frame>
+      <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:9.69449pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Tenor</p></body></html>
+        </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
-      <text>T</text>
+      <subtype>InstrumentShort</subtype>
+      <frame>0</frame>
+      <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:9.69449pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">T</p></body></html>
+        </html-data>
       </shortName>
     <Instrument>
+      <trackName>Tenor</trackName>
       <Channel>
         <controller ctrl="0" value="0"/>
         <controller ctrl="32" value="0"/>
         <program value="52"/>
         <controller ctrl="7" value="100"/>
-        <controller ctrl="10" value="64"/>
+        <controller ctrl="10" value="85"/>
         <controller ctrl="93" value="30"/>
-        <controller ctrl="91" value="30"/>
+        <controller ctrl="91" value="0"/>
         </Channel>
       </Instrument>
     </Part>
@@ -130,26 +166,38 @@
         </keylist>
       <bracket type="-1" span="2"/>
       </Staff>
-    <trackName>Bass</trackName>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
-      <text>Bass</text>
+      <subtype>InstrumentLong</subtype>
+      <frame>0</frame>
+      <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:9.69449pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Bass</p></body></html>
+        </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
-      <text>B</text>
+      <subtype>InstrumentShort</subtype>
+      <frame>0</frame>
+      <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:9.69449pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">B</p></body></html>
+        </html-data>
       </shortName>
     <Instrument>
+      <trackName>Bass</trackName>
       <Channel>
         <controller ctrl="0" value="0"/>
         <controller ctrl="32" value="0"/>
         <program value="52"/>
         <controller ctrl="7" value="100"/>
-        <controller ctrl="10" value="64"/>
+        <controller ctrl="10" value="50"/>
         <controller ctrl="93" value="30"/>
-        <controller ctrl="91" value="30"/>
+        <controller ctrl="91" value="0"/>
         </Channel>
       </Instrument>
     </Part>
@@ -172,26 +220,38 @@
         <key tick="0" idx="0"/>
         </keylist>
       </Staff>
-    <trackName>Piano</trackName>
     <name>
-      <subtype>InstrumentLong</subtype>
       <style>9</style>
-      <text>Piano</text>
+      <subtype>InstrumentLong</subtype>
+      <frame>0</frame>
+      <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:9.69449pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Piano</p></body></html>
+        </html-data>
       </name>
     <shortName>
-      <subtype>InstrumentShort</subtype>
       <style>10</style>
-      <text>Pno.</text>
+      <subtype>InstrumentShort</subtype>
+      <frame>0</frame>
+      <html-data>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:9.69449pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Pno.</p></body></html>
+        </html-data>
       </shortName>
     <Instrument>
+      <trackName>Piano</trackName>
       <Channel>
         <controller ctrl="0" value="0"/>
         <controller ctrl="32" value="0"/>
         <program value="0"/>
         <controller ctrl="7" value="100"/>
-        <controller ctrl="10" value="64"/>
+        <controller ctrl="10" value="30"/>
         <controller ctrl="93" value="30"/>
-        <controller ctrl="91" value="30"/>
+        <controller ctrl="91" value="0"/>
         </Channel>
       </Instrument>
     </Part>
@@ -203,6 +263,7 @@
         <nom1>4</nom1>
         </TimeSig>
       <Rest>
+        <durationType>measure</durationType>
         </Rest>
       <BarLine>
         </BarLine>
@@ -216,6 +277,7 @@
         <nom1>4</nom1>
         </TimeSig>
       <Rest>
+        <durationType>measure</durationType>
         </Rest>
       <BarLine>
         </BarLine>
@@ -229,6 +291,7 @@
         <nom1>4</nom1>
         </TimeSig>
       <Rest>
+        <durationType>measure</durationType>
         </Rest>
       <BarLine>
         </BarLine>
@@ -242,6 +305,7 @@
         <nom1>4</nom1>
         </TimeSig>
       <Rest>
+        <durationType>measure</durationType>
         </Rest>
       <BarLine>
         </BarLine>
@@ -255,6 +319,7 @@
         <nom1>4</nom1>
         </TimeSig>
       <Rest>
+        <durationType>measure</durationType>
         </Rest>
       <BarLine>
         </BarLine>
@@ -268,9 +333,8 @@
         <nom1>4</nom1>
         </TimeSig>
       <Rest>
+        <durationType>measure</durationType>
         </Rest>
-      <BarLine>
-        </BarLine>
       </Measure>
     </Staff>
   <cursorTrack>0</cursorTrack>

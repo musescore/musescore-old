@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.14">
-  <programVersion>0.9.6.3</programVersion>
-  <programRevision>3507 
+  <programVersion>1.0.0</programVersion>
+  <programRevision>3882 
 </programRevision>
   <Spatium>1.164</Spatium>
   <Division>480</Division>
@@ -63,8 +63,8 @@ p, li { white-space: pre-wrap; }
         <controller ctrl="32" value="0"/>
         <program value="73"/>
         <controller ctrl="7" value="100"/>
-        <controller ctrl="10" value="64"/>
-        <controller ctrl="93" value="30"/>
+        <controller ctrl="10" value="50"/>
+        <controller ctrl="93" value="0"/>
         <controller ctrl="91" value="30"/>
         </Channel>
       </Instrument>
@@ -112,8 +112,8 @@ p, li { white-space: pre-wrap; }
         <controller ctrl="32" value="0"/>
         <program value="73"/>
         <controller ctrl="7" value="100"/>
-        <controller ctrl="10" value="64"/>
-        <controller ctrl="93" value="30"/>
+        <controller ctrl="10" value="50"/>
+        <controller ctrl="93" value="0"/>
         <controller ctrl="91" value="30"/>
         </Channel>
       </Instrument>
@@ -162,8 +162,8 @@ p, li { white-space: pre-wrap; }
         <controller ctrl="32" value="0"/>
         <program value="68"/>
         <controller ctrl="7" value="100"/>
-        <controller ctrl="10" value="64"/>
-        <controller ctrl="93" value="30"/>
+        <controller ctrl="10" value="75"/>
+        <controller ctrl="93" value="0"/>
         <controller ctrl="91" value="30"/>
         </Channel>
       </Instrument>
@@ -211,8 +211,8 @@ p, li { white-space: pre-wrap; }
         <controller ctrl="32" value="0"/>
         <program value="68"/>
         <controller ctrl="7" value="100"/>
-        <controller ctrl="10" value="64"/>
-        <controller ctrl="93" value="30"/>
+        <controller ctrl="10" value="75"/>
+        <controller ctrl="93" value="0"/>
         <controller ctrl="91" value="30"/>
         </Channel>
       </Instrument>
@@ -263,8 +263,8 @@ p, li { white-space: pre-wrap; }
         <controller ctrl="32" value="0"/>
         <program value="71"/>
         <controller ctrl="7" value="100"/>
-        <controller ctrl="10" value="64"/>
-        <controller ctrl="93" value="30"/>
+        <controller ctrl="10" value="55"/>
+        <controller ctrl="93" value="0"/>
         <controller ctrl="91" value="30"/>
         </Channel>
       </Instrument>
@@ -314,8 +314,8 @@ p, li { white-space: pre-wrap; }
         <controller ctrl="32" value="0"/>
         <program value="71"/>
         <controller ctrl="7" value="100"/>
-        <controller ctrl="10" value="64"/>
-        <controller ctrl="93" value="30"/>
+        <controller ctrl="10" value="55"/>
+        <controller ctrl="93" value="0"/>
         <controller ctrl="91" value="30"/>
         </Channel>
       </Instrument>
@@ -364,8 +364,8 @@ p, li { white-space: pre-wrap; }
         <controller ctrl="32" value="0"/>
         <program value="70"/>
         <controller ctrl="7" value="100"/>
-        <controller ctrl="10" value="64"/>
-        <controller ctrl="93" value="30"/>
+        <controller ctrl="10" value="80"/>
+        <controller ctrl="93" value="0"/>
         <controller ctrl="91" value="30"/>
         </Channel>
       </Instrument>
@@ -413,8 +413,8 @@ p, li { white-space: pre-wrap; }
         <controller ctrl="32" value="0"/>
         <program value="70"/>
         <controller ctrl="7" value="100"/>
-        <controller ctrl="10" value="64"/>
-        <controller ctrl="93" value="30"/>
+        <controller ctrl="10" value="80"/>
+        <controller ctrl="93" value="0"/>
         <controller ctrl="91" value="30"/>
         </Channel>
       </Instrument>
@@ -466,8 +466,8 @@ p, li { white-space: pre-wrap; }
         <controller ctrl="32" value="0"/>
         <program value="60"/>
         <controller ctrl="7" value="100"/>
-        <controller ctrl="10" value="64"/>
-        <controller ctrl="93" value="30"/>
+        <controller ctrl="10" value="40"/>
+        <controller ctrl="93" value="0"/>
         <controller ctrl="91" value="30"/>
         </Channel>
       </Instrument>
@@ -517,8 +517,8 @@ p, li { white-space: pre-wrap; }
         <controller ctrl="32" value="0"/>
         <program value="60"/>
         <controller ctrl="7" value="100"/>
-        <controller ctrl="10" value="64"/>
-        <controller ctrl="93" value="30"/>
+        <controller ctrl="10" value="40"/>
+        <controller ctrl="93" value="0"/>
         <controller ctrl="91" value="30"/>
         </Channel>
       </Instrument>
@@ -569,8 +569,8 @@ p, li { white-space: pre-wrap; }
         <controller ctrl="32" value="0"/>
         <program value="56"/>
         <controller ctrl="7" value="100"/>
-        <controller ctrl="10" value="64"/>
-        <controller ctrl="93" value="30"/>
+        <controller ctrl="10" value="60"/>
+        <controller ctrl="93" value="0"/>
         <controller ctrl="91" value="30"/>
         </Channel>
       <Channel name="mute">
@@ -578,8 +578,8 @@ p, li { white-space: pre-wrap; }
         <controller ctrl="32" value="0"/>
         <program value="59"/>
         <controller ctrl="7" value="100"/>
-        <controller ctrl="10" value="64"/>
-        <controller ctrl="93" value="30"/>
+        <controller ctrl="10" value="60"/>
+        <controller ctrl="93" value="0"/>
         <controller ctrl="91" value="30"/>
         </Channel>
       </Instrument>
@@ -629,8 +629,8 @@ p, li { white-space: pre-wrap; }
         <controller ctrl="32" value="0"/>
         <program value="56"/>
         <controller ctrl="7" value="100"/>
-        <controller ctrl="10" value="64"/>
-        <controller ctrl="93" value="30"/>
+        <controller ctrl="10" value="60"/>
+        <controller ctrl="93" value="0"/>
         <controller ctrl="91" value="30"/>
         </Channel>
       <Channel name="mute">
@@ -638,8 +638,8 @@ p, li { white-space: pre-wrap; }
         <controller ctrl="32" value="0"/>
         <program value="59"/>
         <controller ctrl="7" value="100"/>
-        <controller ctrl="10" value="64"/>
-        <controller ctrl="93" value="30"/>
+        <controller ctrl="10" value="60"/>
+        <controller ctrl="93" value="0"/>
         <controller ctrl="91" value="30"/>
         </Channel>
       </Instrument>
@@ -687,8 +687,8 @@ p, li { white-space: pre-wrap; }
         <controller ctrl="32" value="0"/>
         <program value="47"/>
         <controller ctrl="7" value="100"/>
-        <controller ctrl="10" value="64"/>
-        <controller ctrl="93" value="30"/>
+        <controller ctrl="10" value="80"/>
+        <controller ctrl="93" value="0"/>
         <controller ctrl="91" value="30"/>
         </Channel>
       </Instrument>
@@ -738,8 +738,8 @@ p, li { white-space: pre-wrap; }
         <controller ctrl="32" value="0"/>
         <program value="48"/>
         <controller ctrl="7" value="100"/>
-        <controller ctrl="10" value="64"/>
-        <controller ctrl="93" value="30"/>
+        <controller ctrl="10" value="15"/>
+        <controller ctrl="93" value="0"/>
         <controller ctrl="91" value="30"/>
         </Channel>
       <Channel name="pizzicato">
@@ -747,8 +747,8 @@ p, li { white-space: pre-wrap; }
         <controller ctrl="32" value="0"/>
         <program value="45"/>
         <controller ctrl="7" value="100"/>
-        <controller ctrl="10" value="64"/>
-        <controller ctrl="93" value="30"/>
+        <controller ctrl="10" value="15"/>
+        <controller ctrl="93" value="0"/>
         <controller ctrl="91" value="30"/>
         </Channel>
       <Channel name="tremolo">
@@ -756,8 +756,8 @@ p, li { white-space: pre-wrap; }
         <controller ctrl="32" value="0"/>
         <program value="44"/>
         <controller ctrl="7" value="100"/>
-        <controller ctrl="10" value="64"/>
-        <controller ctrl="93" value="30"/>
+        <controller ctrl="10" value="15"/>
+        <controller ctrl="93" value="0"/>
         <controller ctrl="91" value="30"/>
         </Channel>
       </Instrument>
@@ -805,8 +805,8 @@ p, li { white-space: pre-wrap; }
         <controller ctrl="32" value="0"/>
         <program value="48"/>
         <controller ctrl="7" value="100"/>
-        <controller ctrl="10" value="64"/>
-        <controller ctrl="93" value="30"/>
+        <controller ctrl="10" value="40"/>
+        <controller ctrl="93" value="0"/>
         <controller ctrl="91" value="30"/>
         </Channel>
       <Channel name="pizzicato">
@@ -814,8 +814,8 @@ p, li { white-space: pre-wrap; }
         <controller ctrl="32" value="0"/>
         <program value="45"/>
         <controller ctrl="7" value="100"/>
-        <controller ctrl="10" value="64"/>
-        <controller ctrl="93" value="30"/>
+        <controller ctrl="10" value="40"/>
+        <controller ctrl="93" value="0"/>
         <controller ctrl="91" value="30"/>
         </Channel>
       <Channel name="tremolo">
@@ -823,8 +823,8 @@ p, li { white-space: pre-wrap; }
         <controller ctrl="32" value="0"/>
         <program value="44"/>
         <controller ctrl="7" value="100"/>
-        <controller ctrl="10" value="64"/>
-        <controller ctrl="93" value="30"/>
+        <controller ctrl="10" value="40"/>
+        <controller ctrl="93" value="0"/>
         <controller ctrl="91" value="30"/>
         </Channel>
       </Instrument>
@@ -872,8 +872,8 @@ p, li { white-space: pre-wrap; }
         <controller ctrl="32" value="0"/>
         <program value="48"/>
         <controller ctrl="7" value="100"/>
-        <controller ctrl="10" value="64"/>
-        <controller ctrl="93" value="30"/>
+        <controller ctrl="10" value="80"/>
+        <controller ctrl="93" value="0"/>
         <controller ctrl="91" value="30"/>
         </Channel>
       <Channel name="pizzicato">
@@ -881,8 +881,8 @@ p, li { white-space: pre-wrap; }
         <controller ctrl="32" value="0"/>
         <program value="45"/>
         <controller ctrl="7" value="100"/>
-        <controller ctrl="10" value="64"/>
-        <controller ctrl="93" value="30"/>
+        <controller ctrl="10" value="80"/>
+        <controller ctrl="93" value="0"/>
         <controller ctrl="91" value="30"/>
         </Channel>
       <Channel name="tremolo">
@@ -890,8 +890,8 @@ p, li { white-space: pre-wrap; }
         <controller ctrl="32" value="0"/>
         <program value="44"/>
         <controller ctrl="7" value="100"/>
-        <controller ctrl="10" value="64"/>
-        <controller ctrl="93" value="30"/>
+        <controller ctrl="10" value="80"/>
+        <controller ctrl="93" value="0"/>
         <controller ctrl="91" value="30"/>
         </Channel>
       </Instrument>
@@ -939,8 +939,8 @@ p, li { white-space: pre-wrap; }
         <controller ctrl="32" value="0"/>
         <program value="48"/>
         <controller ctrl="7" value="100"/>
-        <controller ctrl="10" value="64"/>
-        <controller ctrl="93" value="30"/>
+        <controller ctrl="10" value="110"/>
+        <controller ctrl="93" value="0"/>
         <controller ctrl="91" value="30"/>
         </Channel>
       <Channel name="pizzicato">
@@ -948,8 +948,8 @@ p, li { white-space: pre-wrap; }
         <controller ctrl="32" value="0"/>
         <program value="45"/>
         <controller ctrl="7" value="100"/>
-        <controller ctrl="10" value="64"/>
-        <controller ctrl="93" value="30"/>
+        <controller ctrl="10" value="110"/>
+        <controller ctrl="93" value="0"/>
         <controller ctrl="91" value="30"/>
         </Channel>
       <Channel name="tremolo">
@@ -957,8 +957,8 @@ p, li { white-space: pre-wrap; }
         <controller ctrl="32" value="0"/>
         <program value="44"/>
         <controller ctrl="7" value="100"/>
-        <controller ctrl="10" value="64"/>
-        <controller ctrl="93" value="30"/>
+        <controller ctrl="10" value="110"/>
+        <controller ctrl="93" value="0"/>
         <controller ctrl="91" value="30"/>
         </Channel>
       </Instrument>
@@ -1006,8 +1006,8 @@ p, li { white-space: pre-wrap; }
         <controller ctrl="32" value="0"/>
         <program value="48"/>
         <controller ctrl="7" value="100"/>
-        <controller ctrl="10" value="64"/>
-        <controller ctrl="93" value="30"/>
+        <controller ctrl="10" value="110"/>
+        <controller ctrl="93" value="1"/>
         <controller ctrl="91" value="30"/>
         </Channel>
       <Channel name="pizzicato">
@@ -1015,8 +1015,8 @@ p, li { white-space: pre-wrap; }
         <controller ctrl="32" value="0"/>
         <program value="45"/>
         <controller ctrl="7" value="100"/>
-        <controller ctrl="10" value="64"/>
-        <controller ctrl="93" value="30"/>
+        <controller ctrl="10" value="110"/>
+        <controller ctrl="93" value="0"/>
         <controller ctrl="91" value="30"/>
         </Channel>
       <Channel name="tremolo">
@@ -1024,8 +1024,8 @@ p, li { white-space: pre-wrap; }
         <controller ctrl="32" value="0"/>
         <program value="44"/>
         <controller ctrl="7" value="100"/>
-        <controller ctrl="10" value="64"/>
-        <controller ctrl="93" value="30"/>
+        <controller ctrl="10" value="110"/>
+        <controller ctrl="93" value="0"/>
         <controller ctrl="91" value="30"/>
         </Channel>
       </Instrument>
@@ -1038,11 +1038,8 @@ p, li { white-space: pre-wrap; }
         <nom1>4</nom1>
         </TimeSig>
       <Rest>
-        <selected>1</selected>
         <durationType>measure</durationType>
         </Rest>
-      <BarLine>
-        </BarLine>
       </Measure>
     </Staff>
   <Staff id="2">
@@ -1083,8 +1080,6 @@ p, li { white-space: pre-wrap; }
     </Staff>
   <Staff id="5">
     <Measure number="1">
-      <KeySig>
-        </KeySig>
       <TimeSig>
         <subtype>260</subtype>
         <den>4</den>
@@ -1097,8 +1092,6 @@ p, li { white-space: pre-wrap; }
     </Staff>
   <Staff id="6">
     <Measure number="1">
-      <KeySig>
-        </KeySig>
       <TimeSig>
         <subtype>260</subtype>
         <den>4</den>
@@ -1135,8 +1128,6 @@ p, li { white-space: pre-wrap; }
     </Staff>
   <Staff id="9">
     <Measure number="1">
-      <KeySig>
-        </KeySig>
       <TimeSig>
         <subtype>260</subtype>
         <den>4</den>
@@ -1145,14 +1136,10 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <durationType>measure</durationType>
         </Rest>
-      <BarLine>
-        </BarLine>
       </Measure>
     </Staff>
   <Staff id="10">
     <Measure number="1">
-      <KeySig>
-        </KeySig>
       <TimeSig>
         <subtype>260</subtype>
         <den>4</den>
@@ -1165,8 +1152,6 @@ p, li { white-space: pre-wrap; }
     </Staff>
   <Staff id="11">
     <Measure number="1">
-      <KeySig>
-        </KeySig>
       <TimeSig>
         <subtype>260</subtype>
         <den>4</den>
@@ -1179,8 +1164,6 @@ p, li { white-space: pre-wrap; }
     </Staff>
   <Staff id="12">
     <Measure number="1">
-      <KeySig>
-        </KeySig>
       <TimeSig>
         <subtype>260</subtype>
         <den>4</den>
@@ -1201,8 +1184,6 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <durationType>measure</durationType>
         </Rest>
-      <BarLine>
-        </BarLine>
       </Measure>
     </Staff>
   <Staff id="14">
@@ -1215,8 +1196,6 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <durationType>measure</durationType>
         </Rest>
-      <BarLine>
-        </BarLine>
       </Measure>
     </Staff>
   <Staff id="15">
