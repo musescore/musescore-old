@@ -30,6 +30,13 @@ win32:
 	cd win32build & $(MAKE) lrelease                             
 	cd win32build & $(MAKE)
 
+debug:
+	if not exist win32build\nul mkdir win32build
+	if not exist win32install\nul mkdir win32install
+	cd win32build & cmake -G "MinGW Makefiles" -DCMAKE_TOOLCHAIN_FILE=../mscore/cmake/mingw32.mingw.cmake -DCMAKE_INSTALL_PREFIX=../win32install -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=${MINGW_DIR}\bin\mingw32-make.exe ../mscore                                
+	cd win32build & $(MAKE) lrelease                             
+	cd win32build & $(MAKE)
+
 install:
 	cd win32build & $(MAKE) install                              
 

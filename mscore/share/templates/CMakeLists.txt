@@ -40,7 +40,7 @@ install(FILES
       Choir\ SATB\ with\ Piano.mscx
       Concert\ Band.mscx
       Hymn.mscz
-      leadsheet.mscx
+      Lead\ Sheet.mscx
       Piano.mscx
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}templates
       )
