@@ -34,7 +34,7 @@ p, li { white-space: pre-wrap; }&#13;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Sostieni MuseScore con &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;la tua donazione&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&#13;
 &#13;
 &lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2011 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;&#13;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
@@ -3465,7 +3465,7 @@ Dal menù "Aiuto" prova in alternativa a scegliere "Manuale online".</translatio
     </message>
     <message>
         <source>Normal</source>
-        <translation>Normal</translation>
+        <translation>Normale</translation>
     </message>
     <message>
         <source>Dashed</source>
@@ -3643,12 +3643,15 @@ Ripristinare la sessione?</translation>
         <source>Script
 %1
 is incompatible with current interface</source>
-        <translation type="unfinished"/>
+        <translation>Script&#13;
+%1&#13;
+è incompatibile con l'interfaccia corrente</translation>
     </message>
     <message>
         <source>MuseScore is too old to run script
 %1</source>
-        <translation type="unfinished"/>
+        <translation>La versione di Musescore è troppo vecchia per eseguire lo script&#13;
+%1</translation>
     </message>
     <message>
         <source>Bar %1 Beat %2.%3</source>
@@ -3662,43 +3665,43 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</source>
-        <translation type="unfinished"/>
+        <translation>Tutti i file supportati (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</translation>
     </message>
     <message>
         <source>MuseScore Files (*.mscz *.mscx *.msc);;</source>
-        <translation type="unfinished"/>
+        <translation>File MuseScore (*.mscz *.mscx *.msc);;</translation>
     </message>
     <message>
         <source>MusicXML Files (*.xml *.mxl);;</source>
-        <translation type="unfinished"/>
+        <translation>File MusicXML (*.xml *.mxl);;</translation>
     </message>
     <message>
         <source>MIDI Files (*.mid *.midi *.kar);;</source>
-        <translation type="unfinished"/>
+        <translation>File MIDI (*.mid *.midi *.kar);;</translation>
     </message>
     <message>
         <source>Muse Data Files (*.md);;</source>
-        <translation type="unfinished"/>
+        <translation>File Muse Data (*.md);;</translation>
     </message>
     <message>
         <source>Capella Files (*.cap);;</source>
-        <translation type="unfinished"/>
+        <translation>File Capella (*.cap);;</translation>
     </message>
     <message>
         <source>Bagpipe Music Writer Files (*.bww);;</source>
-        <translation type="unfinished"/>
+        <translation>File Bagpipe Music Writer (*.bww);;</translation>
     </message>
     <message>
         <source>BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;</source>
-        <translation type="unfinished"/>
+        <translation>File BB &lt;sperimentale&gt; (*.mgu *.MGU *.sgu *.SGU);;</translation>
     </message>
     <message>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
-        <translation type="unfinished"/>
+        <translation>File Overture &lt;sperimentale&gt; (*.ove);;</translation>
     </message>
     <message>
         <source>All Files (*)</source>
-        <translation type="unfinished"/>
+        <translation>Tutti i file (*)</translation>
     </message>
 </context>
 <context>
@@ -3952,7 +3955,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>First page no.</source>
-        <translation type="unfinished"/>
+        <translation>Prima pagina no.</translation>
     </message>
 </context>
 <context>
@@ -4739,7 +4742,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Use Current Position</source>
-        <translation>Utilizza attuale posizione</translation>
+        <translation>Utilizza l'attuate posizione</translation>
     </message>
     <message>
         <source>Character Set used when import non-unicode strings. (For binary file import)</source>
@@ -6858,7 +6861,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Note Input</source>
-        <translation>Inserimento note</translation>
+        <translation>Barra inserimento note</translation>
     </message>
     <message>
         <source>Pitch Spell</source>
@@ -7482,7 +7485,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Palette</source>
-        <translation>Mostra le tavolozze</translation>
+        <translation>Tavolozze</translation>
     </message>
     <message>
         <source>Play Panel</source>
@@ -7490,7 +7493,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Navigator</source>
-        <translation>Mostra Navigatore</translation>
+        <translation>Navigatore</translation>
     </message>
     <message>
         <source>Mixer</source>
@@ -7502,7 +7505,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Transport</source>
-        <translation>Riproduzione</translation>
+        <translation>Barra Riproduzione</translation>
     </message>
     <message>
         <source>Note Input Toolbar</source>
@@ -7954,7 +7957,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>repeat selection</source>
-        <translation type="unfinished"/>
+        <translation>copia e incolla la selezione</translation>
     </message>
     <message>
         <source>Repeat selection</source>
@@ -7962,11 +7965,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>follow song</source>
-        <translation type="unfinished"/>
+        <translation>canzone successiva</translation>
     </message>
     <message>
         <source>Follow Song</source>
-        <translation type="unfinished"/>
+        <translation>Canzone successiva</translation>
     </message>
     <message>
         <source>Local handbook</source>
@@ -9024,7 +9027,8 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <source>Cannot read this score:
 your version of MuseScore is too old.</source>
-        <translation type="unfinished"/>
+        <translation>Impossibile leggere la partitura:&#13;
+la versione di MuseScore è troppo vecchia.</translation>
     </message>
 </context>
 <context>

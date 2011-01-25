@@ -5,7 +5,7 @@
     <name>AboutBox</name>
     <message>
         <source>AboutBox</source>
-        <translation>AboutBox</translation>
+        <translation>Névjegy</translation>
     </message>
     <message>
         <source>Version: 0.9.0</source>
@@ -34,7 +34,7 @@ p, li { white-space: pre-wrap; }&#13;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Támogasd a MuseScore-t &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;adománnyal&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&#13;
 &#13;
 &lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer és mások. &lt;/span&gt;&lt;/p&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2011 Werner Schweer és mások. &lt;/span&gt;&lt;/p&gt;&#13;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;A GNU General Public License feltételeinek megfelelő kiadás&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
@@ -1856,7 +1856,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Show repeat bar tips ("winged" repeats)</source>
-        <translation>Az ismétlőjel két végén (balra vagy jobbra rajzolt) füleg megjelenítése</translation>
+        <translation>Az ismétlőjelek végein "fülek" megjelenítése</translation>
     </message>
     <message>
         <source>Progression</source>
@@ -3469,7 +3469,7 @@ A "Súgó" menüben válaszd inkább az "Online kézikönyv" pontot.</translatio
     </message>
     <message>
         <source>Slur</source>
-        <translation>Hajlítás</translation>
+        <translation>Legato</translation>
     </message>
     <message>
         <source>Crescendo</source>
@@ -4800,7 +4800,7 @@ Válassz ki egyetlen hangjegyet vagy szünetet és próbáld újra
     <message>
         <source>Please select a single note or slur and retry operation
 </source>
-        <translation>Válassz ki egyetlen hangjegyet vagy hajlítást és próbáld újra
+        <translation>Válassz ki egyetlen hangjegyet vagy legato jelet és próbáld újra
 </translation>
     </message>
     <message>
@@ -5537,11 +5537,11 @@ győződj meg arról, hogy helyes-e a SoundFont fájl elérési útja.</translat
     </message>
     <message>
         <source>Slur</source>
-        <translation>Hajlítás</translation>
+        <translation>Legato</translation>
     </message>
     <message>
         <source>Slur End</source>
-        <translation>Hajlítás vége</translation>
+        <translation>Legato vége</translation>
     </message>
     <message>
         <source>Staff:</source>
@@ -5564,7 +5564,7 @@ győződj meg arról, hogy helyes-e a SoundFont fájl elérési útja.</translat
     </message>
     <message>
         <source>Slur Properties</source>
-        <translation>Hajlítás tulajdonságai</translation>
+        <translation>Legato tulajdonságai</translation>
     </message>
     <message>
         <source>solid</source>
@@ -5583,7 +5583,7 @@ győződj meg arról, hogy helyes-e a SoundFont fájl elérési útja.</translat
     </message>
     <message>
         <source>Slur Properties...</source>
-        <translation>Hajlítás tulajdonságai...</translation>
+        <translation>Legato tulajdonságai...</translation>
     </message>
 </context>
 <context>
@@ -7209,7 +7209,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>add slur</source>
-        <translation>hajlítás hozzáadása</translation>
+        <translation>legato hozzáadása</translation>
     </message>
     <message>
         <source>crescendo</source>
@@ -8705,7 +8705,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>SlurSegment</source>
-        <translation>HajlításSzegmens</translation>
+        <translation>LegatoSzegmens</translation>
     </message>
     <message>
         <source>BarLine</source>
@@ -8937,7 +8937,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Slur</source>
-        <translation>Hajlítás</translation>
+        <translation>Legato</translation>
     </message>
     <message>
         <source>Element</source>
