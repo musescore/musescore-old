@@ -26,7 +26,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt; &lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt; p, li { white-space: pre-wrap; } &lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt; &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Visita &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; para nuevas versiones y más información &lt;/span&gt;&lt;/p&gt; &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Apoya MuseScore con &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;tu donación&lt;/span&gt;&lt;/a&gt;&lt;/p&gt; &lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt; &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer y otros. &lt;/span&gt;&lt;/p&gt; &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Publicado bajo la GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt; &lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt; p, li { white-space: pre-wrap; } &lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt; &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Visita &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; para nuevas versiones y más información &lt;/span&gt;&lt;/p&gt; &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Apoya MuseScore con &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;tu donación&lt;/span&gt;&lt;/a&gt;&lt;/p&gt; &lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt; &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2011 Werner Schweer y otros. &lt;/span&gt;&lt;/p&gt; &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Publicado bajo la GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -843,11 +843,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>small</source>
-        <translation>pequeño</translation>
+        <translation>Pequeño</translation>
     </message>
     <message>
         <source>additional leading space </source>
-        <translation>espacio previo adicional </translation>
+        <translation>Espacio previo adicional </translation>
     </message>
     <message>
         <source>sp</source>
@@ -856,7 +856,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>additional trailing space</source>
-        <translation>espacio posterior adicional</translation>
+        <translation>Espacio posterior adicional</translation>
     </message>
     <message>
         <source>Note Properties</source>
@@ -864,11 +864,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>tuning offset</source>
-        <translation>modificar la afinación en</translation>
+        <translation>Modificar la afinación en</translation>
     </message>
     <message>
         <source>stem direction</source>
-        <translation>dirección de la plica</translation>
+        <translation>Dirección de la plica</translation>
     </message>
     <message>
         <source>auto</source>
@@ -885,7 +885,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>note head positon </source>
-        <translation>posición de la cabeza de la nota </translation>
+        <translation>Posición de la cabeza de la nota </translation>
     </message>
     <message>
         <source>left of stem</source>
@@ -897,15 +897,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>stemless</source>
-        <translation>sin plica</translation>
+        <translation>Sin plica</translation>
     </message>
     <message>
         <source>velocity type</source>
-        <translation>tipo de velocidad</translation>
+        <translation>Tipo de velocidad</translation>
     </message>
     <message>
         <source>velocity (0-127)</source>
-        <translation>velocidad (0-127)</translation>
+        <translation>Velocidad (0-127)</translation>
     </message>
     <message>
         <source>user</source>
@@ -944,11 +944,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Note Head Group</source>
-        <translation>Grupo de Cabezas de Nota</translation>
+        <translation>Grupo de cabezas de nota</translation>
     </message>
     <message>
         <source>Note Head Type</source>
-        <translation>Tipo de Cabeza de Nota</translation>
+        <translation>Tipo de cabeza de nota</translation>
     </message>
     <message>
         <source>normal</source>
@@ -1000,7 +1000,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Auto</source>
-        <translation>Auto</translation>
+        <translation>auto</translation>
     </message>
     <message>
         <source>whole</source>
@@ -3393,7 +3393,7 @@ before closing?</source>
     </message>
     <message>
         <source>Go To: </source>
-        <translation>Ir A: </translation>
+        <translation>Ir a: </translation>
     </message>
     <message>
         <source>Online Handbook</source>
@@ -3945,7 +3945,7 @@ no es compatible con el interfaz actual</translation>
     </message>
     <message>
         <source>First page no.</source>
-        <translation type="unfinished"/>
+        <translation>Primer número de página</translation>
     </message>
 </context>
 <context>
@@ -4287,7 +4287,7 @@ no es compatible con el interfaz actual</translation>
     </message>
     <message>
         <source>show splash screen</source>
-        <translation>mostrar ventana de bienvenida</translation>
+        <translation>Mostrar ventana de bienvenida</translation>
     </message>
     <message>
         <source>Paths</source>
@@ -4515,7 +4515,7 @@ no es compatible con el interfaz actual</translation>
     </message>
     <message>
         <source>screen shot function</source>
-        <translation>función de volcado de pantalla</translation>
+        <translation>Función de volcado de pantalla</translation>
     </message>
     <message>
         <source>Shortcuts</source>
@@ -5929,7 +5929,7 @@ y comprueba que la ruta al archivo es correcta.</translation>
     </message>
     <message>
         <source>apply to all elements of same type</source>
-        <translation>aplicar a todos los elementos del mismo tipo</translation>
+        <translation>Aplicar a todos los elementos del mismo tipo</translation>
     </message>
 </context>
 <context>
@@ -7077,7 +7077,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>rest</source>
-        <translation>silencio</translation>
+        <translation>Silencio</translation>
     </message>
     <message>
         <source>Add More Stretch</source>
@@ -7377,7 +7377,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>tie</source>
-        <translation>ligadura</translation>
+        <translation>Ligadura</translation>
     </message>
     <message>
         <source>pad rest</source>
@@ -7421,19 +7421,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>voice 1</source>
-        <translation>voz 1</translation>
+        <translation>Voz 1</translation>
     </message>
     <message>
         <source>voice 2</source>
-        <translation>voz 2</translation>
+        <translation>Voz 2</translation>
     </message>
     <message>
         <source>voice 3</source>
-        <translation>voz 3</translation>
+        <translation>Voz 3</translation>
     </message>
     <message>
         <source>voice 4</source>
-        <translation>voz 4</translation>
+        <translation>Voz 4</translation>
     </message>
     <message>
         <source>midi input in</source>

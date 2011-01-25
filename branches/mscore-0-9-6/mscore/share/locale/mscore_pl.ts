@@ -26,15 +26,15 @@ p, li { white-space: pre-wrap; }
 &lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Odwiedź &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; gdzie znajdziesz nowe wersje i więcej informacji.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Wesprzyj MuseScore &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;spafan style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;swoją donacją&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer i inni. &lt;/span&gt;&lt;/p&gt;
+        <translation>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;&#13;
+&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;&#13;
+p, li { white-space: pre-wrap; }&#13;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Odwiedź &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; gdzie znajdziesz nowe wersje i więcej informacji.&lt;/span&gt;&lt;/p&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Wesprzyj MuseScore &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;spafan style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;swoją donacją&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&#13;
+&#13;
+&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2011 Werner Schweer i inni. &lt;/span&gt;&lt;/p&gt;&#13;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Opublikowane na licencji GNU General Public License.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
@@ -834,7 +834,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Alter</source>
-        <translation type="unfinished"/>
+        <translation>Zmiana</translation>
     </message>
 </context>
 <context>
@@ -1045,7 +1045,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>StaffMove:</source>
-        <translation/>
+        <translation>PrzesunięciePięciolinii:</translation>
     </message>
 </context>
 <context>
@@ -1064,7 +1064,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Id</source>
-        <translation/>
+        <translation>ld</translation>
     </message>
     <message>
         <source>Name</source>
@@ -2011,7 +2011,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>droptarget</source>
-        <translation/>
+        <translation>miejsceupuszczenia</translation>
     </message>
     <message>
         <source>invalid</source>
@@ -3846,11 +3846,11 @@ jest niekompatybilny z obecnym interfejsem.</translation>
     </message>
     <message>
         <source>OnTime:</source>
-        <translation type="unfinished"/>
+        <translation>OnTime:</translation>
     </message>
     <message>
         <source>OffTime:</source>
-        <translation type="unfinished"/>
+        <translation>OffTime:</translation>
     </message>
 </context>
 <context>
@@ -4062,7 +4062,7 @@ jest niekompatybilny z obecnym interfejsem.</translation>
     <name>PartEditBase</name>
     <message>
         <source>Form</source>
-        <translation>Kształt</translation>
+        <translation>Formularz</translation>
     </message>
     <message>
         <source>Part Name</source>
@@ -4965,7 +4965,7 @@ proszę zaznaczyć pojedynczą nutę lub pauzę i powtórzyć operację
     <name>SLineBase</name>
     <message>
         <source>Form</source>
-        <translation>Kształt</translation>
+        <translation>Formularz</translation>
     </message>
     <message>
         <source>SLine</source>
@@ -5267,7 +5267,7 @@ Spróbuj zapisać w innym miejscu.</translation>
     <name>SegmentBase</name>
     <message>
         <source>Form</source>
-        <translation>Kształt</translation>
+        <translation>Formularz</translation>
     </message>
     <message>
         <source>Segment</source>
@@ -5589,17 +5589,17 @@ i sprawdź czy położenie pliku jest właściwe.</translation>
     <name>SlurTieBase</name>
     <message>
         <source>Form</source>
-        <translation>Kształt</translation>
+        <translation>Formularz</translation>
     </message>
     <message>
         <source>startElement</source>
         <extracomment>do not translate</extracomment>
-        <translation/>
+        <translation>elementPoczątkowy</translation>
     </message>
     <message>
         <source>endElement</source>
         <extracomment>do not translate - only for debugging</extracomment>
-        <translation/>
+        <translation>elementKońcowy</translation>
     </message>
 </context>
 <context>
@@ -5650,7 +5650,7 @@ i sprawdź czy położenie pliku jest właściwe.</translation>
     <name>SymbolDialogBase</name>
     <message>
         <source>Form</source>
-        <translation>Kształt</translation>
+        <translation>Formularz</translation>
     </message>
     <message>
         <source>System Flag</source>
@@ -5810,7 +5810,7 @@ i sprawdź czy położenie pliku jest właściwe.</translation>
     <name>TextBase</name>
     <message>
         <source>Form</source>
-        <translation>Kształt</translation>
+        <translation>Formularz</translation>
     </message>
     <message>
         <source>Text</source>
@@ -5874,7 +5874,7 @@ i sprawdź czy położenie pliku jest właściwe.</translation>
     <name>TextLineBase</name>
     <message>
         <source>Form</source>
-        <translation>Kształt</translation>
+        <translation>Formularz</translation>
     </message>
     <message>
         <source>TextLine</source>
@@ -5947,7 +5947,7 @@ i sprawdź czy położenie pliku jest właściwe.</translation>
     <name>TextPropertiesBase</name>
     <message>
         <source>Form</source>
-        <translation>Kształt</translation>
+        <translation>Formularz</translation>
     </message>
     <message>
         <source>Font:</source>
@@ -6153,7 +6153,7 @@ i sprawdź czy położenie pliku jest właściwe.</translation>
     </message>
     <message>
         <source>System Flag</source>
-        <translation type="unfinished">Flaga Systemowa</translation>
+        <translation>Flaga Systemowa</translation>
     </message>
 </context>
 <context>
@@ -6193,7 +6193,7 @@ i sprawdź czy położenie pliku jest właściwe.</translation>
     <name>TimeDialogBase</name>
     <message>
         <source>Form</source>
-        <translation>Kształt</translation>
+        <translation>Formularz</translation>
     </message>
     <message>
         <source>+</source>
@@ -6216,7 +6216,7 @@ i sprawdź czy położenie pliku jest właściwe.</translation>
     <name>TimesigWizard</name>
     <message>
         <source>Form</source>
-        <translation>Kształt</translation>
+        <translation>Formularz</translation>
     </message>
     <message>
         <source>Enter Time Signature:</source>
@@ -6472,17 +6472,17 @@ p, li { white-space: pre-wrap; }
     <name>TremoloBase</name>
     <message>
         <source>Form</source>
-        <translation type="unfinished"/>
+        <translation>Formularz</translation>
     </message>
     <message>
         <source>firstChord</source>
         <extracomment>do not translate</extracomment>
-        <translation type="unfinished"/>
+        <translation>pierwszyAkord</translation>
     </message>
     <message>
         <source>secondChord</source>
         <extracomment>do not translate - only for debugging</extracomment>
-        <translation type="unfinished"/>
+        <translation>drugiAkord</translation>
     </message>
 </context>
 <context>
@@ -6496,7 +6496,7 @@ p, li { white-space: pre-wrap; }
     <name>TupletBase</name>
     <message>
         <source>Form</source>
-        <translation>Kształt</translation>
+        <translation>Formularz</translation>
     </message>
 </context>
 <context>
@@ -8372,7 +8372,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Timewise Delete</source>
-        <translation type="unfinished"/>
+        <translation>Usuwanie względem czasu</translation>
     </message>
     <message>
         <source>Delete element and duration</source>
@@ -8708,7 +8708,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>BarLine</source>
-        <translation>Kreska taktowa</translation>
+        <translation>KreskaTaktowa</translation>
     </message>
     <message>
         <source>StemSlash</source>
@@ -9342,7 +9342,7 @@ Twoja wersja MuseScore'a jest zbyt stara.</translation>
     </message>
     <message>
         <source>s0do head</source>
-        <translation/>
+        <translation>s0do główka</translation>
     </message>
     <message>
         <source>d1do head</source>
