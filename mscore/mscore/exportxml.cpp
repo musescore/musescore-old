@@ -3137,11 +3137,23 @@ static void repeatAtMeasureStart(Xml& xml, Attributes& attr, Measure* m, int str
                                           // filter out the markers at measure Start
                                           const Marker* const mk = static_cast<const Marker* const>(e);
                                           int mtp = mk->markerType();
+                                          printf("repeatAtMeasureStart: marker type %d", mtp);
                                           if (   mtp == MARKER_SEGNO
                                               || mtp == MARKER_CODA
                                              ) {
+                                                printf(" -> handled\n");
                                                 attr.doAttr(xml, false);
                                                 directionMarker(xml, mk);
+                                                }
+                                          else if (   mtp == MARKER_FINE
+                                                   || mtp == MARKER_TOCODA
+                                                  ) {
+                                                printf(" -> ignored\n");
+                                                // ignore
+                                                }
+                                          else {
+                                                printf(" -> not implemented\n");
+                                                printf("repeatAtMeasureStart: marker %d not implemented\n", mtp);
                                                 }
                                           }
                                           break;
@@ -3150,6 +3162,8 @@ static void repeatAtMeasureStart(Xml& xml, Attributes& attr, Measure* m, int str
                                                   Element::name(e->type()), seg->tick());
                                           break;
                                     }
+                              } else {
+                              printf("repeatAtMeasureStart: no track found\n");
                               }
                         } // foreach
                   }
@@ -3184,10 +3198,22 @@ static void repeatAtMeasureStop(Xml& xml, Measure* m, int strack, int etrack, in
                                           // filter out the markers at measure stop
                                           const Marker* const mk = static_cast<const Marker* const>(e);
                                           int mtp = mk->markerType();
+                                          printf("repeatAtMeasureStop: marker type %d", mtp);
                                           if (   mtp == MARKER_FINE
                                               || mtp == MARKER_TOCODA
                                              ) {
+                                                printf(" -> handled\n");
                                                 directionMarker(xml, mk);
+                                                }
+                                          else if (   mtp == MARKER_SEGNO
+                                                   || mtp == MARKER_CODA
+                                                  ) {
+                                                printf(" -> ignored\n");
+                                                // ignore
+                                                }
+                                          else {
+                                                printf(" -> not implemented\n");
+                                                printf("repeatAtMeasureStop: marker %d not implemented\n", mtp);
                                                 }
                                           }
                                           break;
@@ -3199,6 +3225,8 @@ static void repeatAtMeasureStop(Xml& xml, Measure* m, int strack, int etrack, in
                                                   Element::name(e->type()), seg->tick());
                                           break;
                                     }
+                              } else {
+                              printf("repeatAtMeasureStop: no track found\n");
                               }
                         } // foreach
                   }
