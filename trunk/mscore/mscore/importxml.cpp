@@ -999,7 +999,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
             measure->setTick(tick);
             measure->setNo(number);
             score->measures()->add(measure);
-      }else{
+      } else {
             // ws:
             // int pstaves = part->nstaves();
             // for (int i = 0; i < pstaves; ++i) {
@@ -1007,10 +1007,6 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
             // measure->mstaff(staff+i)->lines->setLines(reals->lines());
             // }
       }
-
-// must remember volta to handle <ending type="discontinue">
-//      Volta* lastVolta = 0;       // ws: move to global to allow for voltas spanning more
-                                    //     than one measure
 
       QString implicit = e.attribute("implicit", "no");
       if (implicit == "yes")
@@ -1173,19 +1169,22 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
                                     if (endingType == "start") {
                                           Volta* volta = new Volta(score);
                                           volta->setTrack(staff * VOICES);
-//TODO-WS                                          volta->setTick(tick);
                                           volta->setText(endingNumber);
                                           // LVIFIX TODO also support endings "1, 2" and "1 - 3"
                                           volta->endings().clear();
                                           volta->endings().append(iEendingNumber);
+                                          Segment* seg = measure->getSegment(SegChordRest, tick);
+                                          volta->setStartElement(seg);
+                                          seg->add(volta);
                                           lastVolta = volta;
                                           }
                                     else if (endingType == "stop") {
                                           if (lastVolta) {
-//TODO-WS 							lastVolta->setTick2(tick);
-								lastVolta->setSubtype(Volta::VOLTA_CLOSED);
-                                                score->add(lastVolta);
-								lastVolta = 0;
+                                                lastVolta->setSubtype(Volta::VOLTA_CLOSED);
+                                                Segment* seg = measure->getSegment(SegChordRest, tick);
+                                                lastVolta->setEndElement(seg);
+                                                seg->addSpannerBack(lastVolta);
+                                                lastVolta = 0;
                                                 }
                                           else {
                                                 printf("lastVolta == 0 on stop\n");
@@ -1193,9 +1192,10 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
                                           }
                                     else if (endingType == "discontinue") {
                                           if (lastVolta) {
-//TODO-WS                                                lastVolta->setTick2(tick);
                                                 lastVolta->setSubtype(Volta::VOLTA_OPEN);
-								score->add(lastVolta);
+                                                Segment* seg = measure->getSegment(SegChordRest, tick);
+                                                lastVolta->setEndElement(seg);
+                                                seg->addSpannerBack(lastVolta);
                                                 lastVolta = 0;
                                                 }
                                           else {
