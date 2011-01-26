@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2010 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -81,6 +81,7 @@
 #include "instrchange.h"
 #include "stafftype.h"
 #include "stem.h"
+#include "painter.h"
 
 extern bool debugMode;
 extern bool showInvisible;
@@ -772,8 +773,9 @@ QRectF StaffLines::bbox() const
 //   draw
 //---------------------------------------------------------
 
-void StaffLines::draw(QPainter& p, ScoreView*) const
+void StaffLines::draw(Painter* painter) const
       {
+      QPainter& p = *painter->painter();
       double _dist;
       int l;
       if (staff()) {
@@ -941,10 +943,9 @@ void Line::layout()
 //   draw
 //---------------------------------------------------------
 
-void Line::draw(QPainter& p, ScoreView*) const
+void Line::draw(Painter* painter) const
       {
-      p.save();
-
+      QPainter& p = *painter->painter();
       QPen pen(p.pen());
       pen.setCapStyle(Qt::FlatCap);
       double sp = spatium();
@@ -956,8 +957,6 @@ void Line::draw(QPainter& p, ScoreView*) const
             p.drawLine(QLineF(0.0, 0.0, 0.0, l));
       else
             p.drawLine(QLineF(0.0, 0.0, l, 0.0));
-
-      p.restore();
       }
 
 //---------------------------------------------------------
@@ -1013,12 +1012,13 @@ Compound::Compound(const Compound& c)
 //   draw
 //---------------------------------------------------------
 
-void Compound::draw(QPainter& p, ScoreView* v) const
+void Compound::draw(Painter* painter) const
       {
+      QPainter& p = *painter->painter();
       foreach(Element* e, elemente) {
             QPointF pt(e->pos());
             p.translate(pt);
-            e->draw(p, v);
+            e->draw(painter);
             p.translate(-pt);
             }
       }
@@ -1108,10 +1108,11 @@ void Element::dump() const
 //   RubberBand::draw
 //---------------------------------------------------------
 
-void RubberBand::draw(QPainter& p, ScoreView*) const
+void RubberBand::draw(Painter* painter) const
       {
       if (!showRubberBand)
             return;
+      QPainter& p = *painter->painter();
       p.setPen(Qt::red);
       p.drawLine(QLineF(_p1, _p2));
       }

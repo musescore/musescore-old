@@ -34,6 +34,7 @@
 //class Instrument;
 class Staff;
 class Xml;
+class Painter;
 
 //---------------------------------------------------------
 //   StaffType
@@ -244,7 +245,7 @@ public:
       TabDurationSymbol(Score* s, StaffTypeTablature * tab, Duration::DurationType type, int dots);
       TabDurationSymbol(const TabDurationSymbol&);
       virtual TabDurationSymbol* clone() const  { return new TabDurationSymbol(*this); }
-      virtual void draw(QPainter&, ScoreView*) const;
+      virtual void draw(Painter*) const;
 //      void layout();
       virtual bool isEditable() const           { return false; }
       virtual ElementType type() const          { return TAB_DURATION_SYMBOL; }

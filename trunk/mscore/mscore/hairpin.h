@@ -26,6 +26,7 @@
 
 class Score;
 class Hairpin;
+class Painter;
 
 //---------------------------------------------------------
 //   HairpinSegment
@@ -38,7 +39,7 @@ class HairpinSegment : public LineSegment {
       Hairpin* hairpin() const              { return (Hairpin*)parent(); }
       virtual HairpinSegment* clone() const { return new HairpinSegment(*this); }
       virtual ElementType type() const      { return HAIRPIN_SEGMENT; }
-      virtual void draw(QPainter&, ScoreView*) const;
+      virtual void draw(Painter*) const;
       virtual QRectF bbox() const;
       virtual bool genPropertyMenu(QMenu* popup) const;
       virtual void propertyAction(ScoreView*, const QString& s);

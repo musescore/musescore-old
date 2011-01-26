@@ -28,6 +28,7 @@
 
 class Text;
 class Slur;
+class Painter;
 
 //------------------------------------------------------------------------
 //   Tuplet
@@ -112,7 +113,7 @@ class Tuplet : public DurationElement {
 
       virtual void toDefault();
 
-      virtual void draw(QPainter&, ScoreView*) const;
+      virtual void draw(Painter*) const;
       int id() const                       { return _id;          }
       void setId(int i) const              { _id = i;             }
 

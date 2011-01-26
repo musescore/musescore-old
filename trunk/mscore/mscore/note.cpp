@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2010 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -59,6 +59,7 @@
 #include "bend.h"
 #include "bend.h"
 #include "scoreview.h"
+#include "painter.h"
 
 //---------------------------------------------------------
 //   noteHeads
@@ -499,8 +500,10 @@ double Note::stemYoff(bool upFlag) const
 //   draw
 //---------------------------------------------------------
 
-void Note::draw(QPainter& p, ScoreView* v) const
+void Note::draw(Painter* painter) const
       {
+      QPainter& p = *painter->painter();
+
       bool tablature = staff() && staff()->useTablature();
       if (!_hidden || !userOff().isNull()) {
             if (tablature) {
@@ -519,14 +522,14 @@ void Note::draw(QPainter& p, ScoreView* v) const
                           ( tab->useNumbers() ? QString::number(_fret) : QString('a' + _fret + (_fret > 8)) );
                   double d  = currSpatium * .2;
                   // draw background, if required
-                  if(!tab->linesThrough() || fretConflict()) {
+                  if (!tab->linesThrough() || fretConflict()) {
                         QRectF bb = bbox().adjusted(-d, 0.0, d, 0.0);
-                        if (v) {
-                              v->drawBackground(p, bb);
+                        if (painter->view()) {
+                              painter->view()->drawBackground(p, bb);
                               }
                         else
                               p.eraseRect(bb);
-                        if(fretConflict()) {          //on fret conflict, draw on red background
+                        if (fretConflict()) {          //on fret conflict, draw on red background
                               QPen oldPen = p.pen();
                               p.setPen(Qt::red);
                               p.setBrush(Qt::red);

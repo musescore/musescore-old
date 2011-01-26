@@ -25,6 +25,7 @@
 
 class ScoreView;
 class Segment;
+class Painter;
 
 //---------------------------------------------------------
 //   BarLine
@@ -44,7 +45,7 @@ class BarLine : public Element {
       virtual ElementType type() const { return BAR_LINE; }
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
-      virtual void draw(QPainter&, ScoreView*) const;
+      virtual void draw(Painter*) const;
       virtual Space space() const;
       virtual QPointF canvasPos() const;      ///< position in canvas coordinates
       virtual void layout();

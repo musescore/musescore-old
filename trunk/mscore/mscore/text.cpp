@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2010 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -38,6 +38,7 @@
 #include "box.h"
 #include "segment.h"
 #include "texttools.h"
+#include "painter.h"
 
 TextPalette* textPalette;
 
@@ -387,8 +388,9 @@ QRectF Text::pageRectangle() const
 //   draw
 //---------------------------------------------------------
 
-void Text::draw(QPainter& p, ScoreView*) const
+void Text::draw(Painter* painter) const
       {
+      QPainter& p = *painter->painter();
       QAbstractTextDocumentLayout::PaintContext c;
       c.cursorPosition = -1;
       if (cursor && !(score() && score()->printing())) {

@@ -39,6 +39,7 @@ class Score;
 class Sym;
 class ScoreView;
 class Bend;
+class Painter;
 
 extern const int noteHeads[2][HEAD_GROUPS][4];
 
@@ -196,7 +197,7 @@ class Note : public Element {
       Chord* chord() const            { return (Chord*)parent(); }
       void setChord(Chord* a)         { setParent((Element*)a);  }
 
-      virtual void draw(QPainter&, ScoreView*) const;
+      virtual void draw(Painter*) const;
       virtual void read(QDomElement);
       void write(Xml& xml, int start, int end) const;
       virtual void write(Xml& xml) const { write(xml, 0, 0); }

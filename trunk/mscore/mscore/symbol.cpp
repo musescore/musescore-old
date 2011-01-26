@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -28,6 +28,7 @@
 #include "score.h"
 #include "image.h"
 #include "segment.h"
+#include "painter.h"
 
 //---------------------------------------------------------
 //   BSymbol
@@ -190,10 +191,10 @@ void Symbol::layout()
 //   Symbol::draw
 //---------------------------------------------------------
 
-void Symbol::draw(QPainter& p, ScoreView*) const
+void Symbol::draw(Painter* p) const
       {
       if (type() != NOTEDOT || !staff()->useTablature())
-            symbols[score()->symIdx()][_sym].draw(p, magS());
+            symbols[score()->symIdx()][_sym].draw(*p->painter(), magS());
       }
 
 //---------------------------------------------------------

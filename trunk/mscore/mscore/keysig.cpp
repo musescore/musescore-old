@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2010 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -27,6 +27,7 @@
 #include "measure.h"
 #include "score.h"
 #include "undo.h"
+#include "painter.h"
 
 const char* keyNames[15] = {
       QT_TRANSLATE_NOOP("MuseScore", "G major, E minor"),
@@ -213,10 +214,10 @@ void KeySig::layout()
 //   set
 //---------------------------------------------------------
 
-void KeySig::draw(QPainter& p, ScoreView*) const
+void KeySig::draw(Painter* p) const
       {
       foreach(const KeySym* ks, keySymbols)
-            symbols[score()->symIdx()][ks->sym].draw(p, magS(), ks->pos.x(), ks->pos.y());
+            symbols[score()->symIdx()][ks->sym].draw(*p->painter(), magS(), ks->pos.x(), ks->pos.y());
       }
 
 //---------------------------------------------------------

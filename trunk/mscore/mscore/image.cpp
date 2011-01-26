@@ -24,6 +24,7 @@
 #include "preferences.h"
 #include "score.h"
 #include "undo.h"
+#include "painter.h"
 
 //---------------------------------------------------------
 //   Image
@@ -60,8 +61,9 @@ void Image::dereference()
 //   draw
 //---------------------------------------------------------
 
-void Image::draw(QPainter& p, ScoreView*) const
+void Image::draw(Painter* painter) const
       {
+      QPainter& p = *painter->painter();
       p.drawPixmap(0, 0, buffer);
       if (selected()) {
             p.setBrush(Qt::NoBrush);
@@ -215,7 +217,7 @@ SvgImage* SvgImage::clone() const
 //   draw
 //---------------------------------------------------------
 
-void SvgImage::draw(QPainter& p, ScoreView* v) const
+void SvgImage::draw(Painter* painter) const
       {
       if (!doc)
             return;
@@ -229,7 +231,7 @@ void SvgImage::draw(QPainter& p, ScoreView* v) const
             doc->render(&pp);
             _dirty = false;
             }
-      Image::draw(p, v);
+      Image::draw(painter);
       }
 
 //---------------------------------------------------------
@@ -277,9 +279,9 @@ RasterImage* RasterImage::clone() const
 //   draw
 //---------------------------------------------------------
 
-void RasterImage::draw(QPainter& p, ScoreView* v) const
+void RasterImage::draw(Painter* painter) const
       {
-      p.save();
+      QPainter& p = *painter->painter();
       QTransform t = p.worldTransform();
       QSize s = QSizeF(sz.width() * t.m11(), sz.height() * t.m22()).toSize();
       t.setMatrix(1.0, t.m12(), t.m13(), t.m21(), 1.0, t.m23(), t.m31(), t.m32(), t.m33());
@@ -288,8 +290,7 @@ void RasterImage::draw(QPainter& p, ScoreView* v) const
             buffer = QPixmap::fromImage(doc.scaled(s, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
             _dirty = false;
             }
-      Image::draw(p, v);
-      p.restore();
+      Image::draw(painter);
       }
 
 //---------------------------------------------------------

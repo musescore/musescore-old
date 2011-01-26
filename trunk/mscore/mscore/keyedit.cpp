@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id:$
 //
-//  Copyright (C) 2009 Werner Schweer and others
+//  Copyright (C) 2009-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -26,6 +26,7 @@
 #include "accidental.h"
 #include "keycanvas.h"
 #include "clef.h"
+#include "painter.h"
 
 extern bool useFactorySettings;
 extern Palette* newAccidentalsPalette();
@@ -91,6 +92,7 @@ void KeyCanvas::paintEvent(QPaintEvent*)
       gscore->setSpatium(spatium);
 
       QPainter p(this);
+      Painter painter(&p, 0);
       p.setRenderHint(QPainter::Antialiasing, true);
       qreal wh = double(height());
       qreal ww = double(width());
@@ -118,20 +120,20 @@ void KeyCanvas::paintEvent(QPaintEvent*)
       if (dragElement) {
             p.save();
             p.translate(dragElement->canvasPos());
-            dragElement->draw(p, 0);
+            dragElement->draw(&painter);
             p.restore();
             }
       foreach(Accidental* a, accidentals) {
             p.save();
             p.translate(a->canvasPos());
             p.setPen(QPen(a->curColor()));
-            a->draw(p, 0);
+            a->draw(&painter);
             p.restore();
             }
       clef->setPos(0.0, 0.0);
       clef->layout();
       p.translate(clef->canvasPos());
-      clef->draw(p, 0);
+      clef->draw(&painter);
       }
 
 //---------------------------------------------------------

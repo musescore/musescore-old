@@ -26,6 +26,7 @@
 
 class ScoreView;
 class Segment;
+class Painter;
 
 enum {
       TSIG_FOUR_FOUR  = 0x40000104,
@@ -62,7 +63,7 @@ class TimeSig : public Element {
       ElementType type() const { return TIMESIG; }
       QPointF canvasPos() const;      ///< position in canvas coordinates
       void setSubtype(int val);
-      void draw(QPainter&, ScoreView*) const;
+      void draw(Painter*) const;
       void write(Xml& xml) const;
       void read(QDomElement);
       void layout();

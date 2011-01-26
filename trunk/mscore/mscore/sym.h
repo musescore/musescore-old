@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -24,6 +24,10 @@
 #include "style.h"
 
 extern void initSymbols(int);
+
+#if QT_VERSION >= 0x040800
+#define USE_GLYPHS  1
+#endif
 
 enum SymbolType {
       SYMBOL_UNKNOWN,
@@ -61,6 +65,10 @@ class Sym {
       double w;
       QRectF _bbox;
       QPointF _attach;
+#ifdef USE_GLYPHS
+      QGlyphs glyphs;
+      void genGlyphs();
+#endif
 
    public:
       Sym() { _code = 0; }

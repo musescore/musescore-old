@@ -40,6 +40,7 @@ class ScoreView;
 class Segment;
 class TextStyle;
 class Element;
+class Painter;
 
 //---------------------------------------------------------
 //   ElementFlag
@@ -211,7 +212,7 @@ class Element {
                || type() == TRILL || type() == VOLTA || type() == TEXTLINE;
             }
 
-      virtual void draw(QPainter&, ScoreView*) const {}
+      virtual void draw(Painter*) const {}
 
       void writeProperties(Xml& xml, const Element* proto = 0) const;
       bool readProperties(QDomElement);
@@ -402,7 +403,7 @@ class StaffLines : public Element {
       virtual ElementType type() const     { return STAFF_LINES; }
       Measure* measure() const             { return (Measure*)parent(); }
       void setWidth(qreal v)               { _width = v;         }
-      virtual void draw(QPainter&, ScoreView*) const;
+      virtual void draw(Painter*) const;
       virtual QPointF canvasPos() const;   ///< position in canvas coordinates
       double y1() const;
       double y2() const;
@@ -429,7 +430,7 @@ class Line : public Element {
       virtual ElementType type() const { return LINE; }
       virtual void layout();
 
-      virtual void draw(QPainter&, ScoreView*) const;
+      virtual void draw(Painter*) const;
       void writeProperties(Xml& xml) const;
       bool readProperties(QDomElement);
       void dump() const;
@@ -455,7 +456,7 @@ class Compound : public Element {
       Compound(const Compound&);
       virtual ElementType type() const = 0;
 
-      virtual void draw(QPainter&, ScoreView*) const;
+      virtual void draw(Painter*) const;
       virtual void addElement(Element*, double x, double y);
       void clear();
       virtual void setSelected(bool f);
@@ -474,7 +475,7 @@ class RubberBand : public Element {
       RubberBand(Score* s) : Element(s) {}
       virtual RubberBand* clone() const { return new RubberBand(*this); }
       virtual ElementType type() const { return RUBBERBAND; }
-      virtual void draw(QPainter&, ScoreView*) const;
+      virtual void draw(Painter*) const;
 
       void set(const QPointF& p1, const QPointF& p2) { _p1 = p1; _p2 = p2; }
       QPointF p1() const { return _p1; }

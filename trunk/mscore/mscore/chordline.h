@@ -24,6 +24,7 @@
 #include "element.h"
 
 class Chord;
+class Painter;
 
 //---------------------------------------------------------
 //   ChordLine
@@ -47,7 +48,7 @@ class ChordLine : public Element {
       virtual void read(QDomElement);
       virtual void write(Xml& xml) const;
       virtual void layout();
-      virtual void draw(QPainter& p, ScoreView*) const;
+      virtual void draw(Painter*) const;
 
       virtual void editDrag(int, const QPointF&);
       virtual void updateGrips(int*, QRectF*) const;

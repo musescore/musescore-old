@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: element.h 3424 2010-08-28 14:44:18Z wschweer $
 //
-//  Copyright (C) 2002-2010 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -21,6 +21,7 @@
 #include "lasso.h"
 #include "preferences.h"
 #include "scoreview.h"
+#include "painter.h"
 
 //---------------------------------------------------------
 //   Lasso
@@ -37,8 +38,9 @@ Lasso::Lasso(Score* s)
 //   draw
 //---------------------------------------------------------
 
-void Lasso::draw(QPainter& p, ScoreView*) const
+void Lasso::draw(Painter* painter) const
       {
+      QPainter& p = *painter->painter();
       p.setBrush(QColor(0, 0, 50, 50));
       QPen pen(QColor(preferences.selectColor[0]));
       // always 2 pixel width

@@ -1,9 +1,9 @@
 //=============================================================================
 //  MuseScore
 //  Linux Music Score Editor
-//  $Id:$
+//  $Id: note.cpp 3935 2011-01-20 21:18:03Z miwarre $
 //
-//  Copyright (C) 2010 Werner Schweer and others
+//  Copyright (C) 2011 Werner Schweer
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -18,24 +18,27 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __CURSOR_H__
-#define __CURSOR_H__
-
-#include "element.h"
-
-class Painter;
+#ifndef __PAINTER_H__
+#define __PAINTER_H__
 
 //---------------------------------------------------------
-//   Cursor
+//   class Painter
 //---------------------------------------------------------
 
-class Cursor : public Element {
+class Painter {
+      QPainter*  _painter;
+      ScoreView* _view;
 
    public:
-      Cursor(Score*);
-      virtual Cursor* clone() const    { return new Cursor(*this); }
-      virtual ElementType type() const { return CURSOR; }
-      virtual void draw(Painter*) const;
+      Painter(QPainter* p, ScoreView* v) : _painter(p), _view(v) {}
+      QPainter* painter() const { return _painter; }
+      ScoreView* view() const   { return _view;    }
+
+      void translate(const QPointF& pt)                 { _painter->translate(pt); }
+      void scale(qreal v)                               { _painter->scale(v, v);   }
+      void drawText(const QPointF& p, const QString& s) { _painter->drawText(p, s); }
+      void drawText(qreal x, qreal y, const QString& s) { _painter->drawText(x, y, s); }
+      void setFont(const QFont& f)                      { _painter->setFont(f);     }
       };
 
 #endif

@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -26,6 +26,7 @@
 #include "measure.h"
 #include "staff.h"
 #include "stafftype.h"
+#include "painter.h"
 
 //---------------------------------------------------------
 //   Articulation::articulationList
@@ -328,8 +329,9 @@ QPointF Articulation::canvasPos() const
 //   Symbol::draw
 //---------------------------------------------------------
 
-void Articulation::draw(QPainter& p, ScoreView*) const
+void Articulation::draw(Painter* painter) const
       {
+      QPainter& p = *painter->painter();
       int flags = articulationList[subtype()].flags;
       if (staff()) {
             bool tab = staff()->useTablature();

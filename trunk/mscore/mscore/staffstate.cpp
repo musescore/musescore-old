@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id:$
 //
-//  Copyright (C) 2010 Werner Schweer and others
+//  Copyright (C) 2010-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -28,6 +28,7 @@
 #include "staff.h"
 #include "part.h"
 #include "seq.h"
+#include "painter.h"
 
 //---------------------------------------------------------
 //   StaffState
@@ -70,10 +71,11 @@ void StaffState::read(QDomElement e)
 //   draw
 //---------------------------------------------------------
 
-void StaffState::draw(QPainter& p, ScoreView*) const
+void StaffState::draw(Painter* painter) const
       {
       if (score()->printing())
             return;
+      QPainter& p = *painter->painter();
       QPen pen;
       if (selected())
             pen.setColor(preferences.selectColor[0]);

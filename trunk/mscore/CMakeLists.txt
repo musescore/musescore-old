@@ -91,8 +91,10 @@ SET(Mscore_VERSION_MINOR  "0")
 SET(Mscore_VERSION_PATCH  "0")
 
 SET(Mscore_VERSION       "${Mscore_VERSION_MAJOR}.${Mscore_VERSION_MINOR}")
-#SET(Mscore_VERSION_FULL  "${Mscore_VERSION}.${Mscore_VERSION_PATCH}")
-SET(Mscore_VERSION_FULL  "${Mscore_VERSION}")
+#
+# version schema x.x.x is hardcoded in source
+#
+SET(Mscore_VERSION_FULL  "${Mscore_VERSION}.${Mscore_VERSION_PATCH}")
 
 if (MINGW OR APPLE)
   if(MINGW)

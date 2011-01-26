@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2008-2010 Werner Schweer and others
+//  Copyright (C) 2008-2011 Werner Schweer and others
 //
 //  Some Code inspired by "The JAZZ++ Midi Sequencer"
 //  Copyright (C) 1994-2000 Andreas Voss and Per Sigmond, all rights reserved.
@@ -31,6 +31,7 @@
 #include "mscore.h"
 #include "scoreview.h"
 #include "segment.h"
+#include "painter.h"
 
 static const bool useJazzFont = true;     // DEBUG
 
@@ -855,15 +856,15 @@ QPainterPath Harmony::shape() const
 //   draw
 //---------------------------------------------------------
 
-void Harmony::draw(QPainter& p, ScoreView* v) const
+void Harmony::draw(Painter* painter) const
       {
       if (_editMode || textList.isEmpty()) {
-            Text::draw(p, v);
+            Text::draw(painter);
             return;
             }
       foreach(const TextSegment* ts, textList) {
-            p.setFont(ts->font);
-            p.drawText(ts->x, ts->y, ts->text);
+            painter->setFont(ts->font);
+            painter->drawText(ts->x, ts->y, ts->text);
             }
       }
 

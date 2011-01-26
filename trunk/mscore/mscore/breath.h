@@ -23,6 +23,8 @@
 
 #include "element.h"
 
+class Painter;
+
 //---------------------------------------------------------
 //   Breath
 //    subtype() is index in symList
@@ -40,7 +42,7 @@ class Breath : public Element {
       virtual ElementType type() const { return BREATH; }
       virtual Space space() const;
 
-      virtual void draw(QPainter&, ScoreView*) const;
+      virtual void draw(Painter*) const;
       virtual void layout();
       virtual void write(Xml&) const;
       virtual void read(QDomElement);

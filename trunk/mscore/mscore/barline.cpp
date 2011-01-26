@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -25,6 +25,7 @@
 #include "system.h"
 #include "measure.h"
 #include "segment.h"
+#include "painter.h"
 
 //---------------------------------------------------------
 //   barLineNames
@@ -103,12 +104,13 @@ void BarLine::getY(double* y1, double* y2) const
 //   draw
 //---------------------------------------------------------
 
-void BarLine::draw(QPainter& p, ScoreView*) const
+void BarLine::draw(Painter* painter) const
       {
       double lw = point(score()->styleS(ST_barWidth));
       double y1, y2;
       getY(&y1, &y2);
 
+      QPainter& p = *(painter->painter());
       QPen pen(p.pen());
       pen.setWidthF(lw);
       pen.setCapStyle(Qt::FlatCap);

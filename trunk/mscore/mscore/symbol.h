@@ -24,6 +24,7 @@
 #include "bsymbol.h"
 
 class Segment;
+class Painter;
 
 //---------------------------------------------------------
 //   Symbol
@@ -50,7 +51,7 @@ class Symbol : public BSymbol {
       void setSym(int s) { _sym  = s;    }
       int sym() const    { return _sym;  }
 
-      virtual void draw(QPainter&, ScoreView*) const;
+      virtual void draw(Painter*) const;
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
       virtual void layout();

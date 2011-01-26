@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -35,9 +35,9 @@
 #include "segment.h"
 #include "measure.h"
 #include "stafftype.h"
-//#include "tablature.h"
 #include "part.h"
 #include "undo.h"
+#include "painter.h"
 
 #define TR(a)  QT_TRANSLATE_NOOP("clefTable", a)
 
@@ -317,15 +317,15 @@ void Clef::layout()
 //   draw
 //---------------------------------------------------------
 
-void Clef::draw(QPainter& p, ScoreView* v) const
+void Clef::draw(Painter* painter) const
       {
-        if (staff() && staff()->useTablature() && !staff()->staffType()->genClef())
-		  return;
-	  foreach(Element* e, elements) {
+      if (staff() && staff()->useTablature() && !staff()->staffType()->genClef())
+	      return;
+      foreach(Element* e, elements) {
             QPointF pt(e->pos());
-            p.translate(pt);
-            e->draw(p, v);
-            p.translate(-pt);
+            painter->painter()->translate(pt);
+            e->draw(painter);
+            painter->painter()->translate(-pt);
             }
       }
 

@@ -32,6 +32,7 @@
 class Xml;
 class ScoreView;
 class Segment;
+class Painter;
 
 static const int NO_CLEF = -1000;
 
@@ -117,7 +118,7 @@ class Clef : public Element {
       virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*);
       virtual void layout();
-      virtual void draw(QPainter&, ScoreView*) const;
+      virtual void draw(Painter*) const;
       virtual Space space() const;
       virtual void read(QDomElement);
       virtual void write(Xml&) const;

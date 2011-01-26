@@ -24,6 +24,8 @@
 #include "element.h"
 #include "ui_sectionbreak.h"
 
+class Painter;
+
 // layout break subtypes:
 
 enum { LAYOUT_BREAK_PAGE, LAYOUT_BREAK_LINE, LAYOUT_BREAK_SECTION };
@@ -38,7 +40,7 @@ class LayoutBreak : public Element {
       QPainterPath path;
       double _pause;
 
-      virtual void draw(QPainter&, ScoreView*) const;
+      virtual void draw(Painter*) const;
       virtual void layout();
 
    public:

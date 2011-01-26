@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -31,6 +31,7 @@
 #include "measure.h"
 #include "undo.h"
 #include "stem.h"
+#include "painter.h"
 
 //---------------------------------------------------------
 //   Tuplet
@@ -437,12 +438,13 @@ QRectF Tuplet::bbox() const
 //   draw
 //---------------------------------------------------------
 
-void Tuplet::draw(QPainter& p, ScoreView* v) const
+void Tuplet::draw(Painter* painter) const
       {
+      QPainter& p = *painter->painter();
       if (_number) {
             p.save();
             p.translate(_number->pos());
-            _number->draw(p, v);
+            _number->draw(painter);
             p.restore();
             }
       if (_hasBracket) {

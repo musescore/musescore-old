@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -24,6 +24,7 @@
 #include "segment.h"
 #include "measure.h"
 #include "score.h"
+#include "painter.h"
 
 int Breath::symList[Breath::breathSymbols] = {
       rcommaSym,
@@ -78,9 +79,9 @@ void Breath::read(QDomElement e)
 //   draw
 //---------------------------------------------------------
 
-void Breath::draw(QPainter& p, ScoreView*) const
+void Breath::draw(Painter* p) const
       {
-      symbols[score()->symIdx()][symList[subtype()]].draw(p, magS());
+      symbols[score()->symIdx()][symList[subtype()]].draw(*p->painter(), magS());
       }
 
 //---------------------------------------------------------

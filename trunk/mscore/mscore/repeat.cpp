@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2010 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -26,6 +26,7 @@
 #include "system.h"
 #include "measure.h"
 #include "globals.h"
+#include "painter.h"
 
 //---------------------------------------------------------
 //   JumpProperties
@@ -88,8 +89,9 @@ RepeatMeasure::RepeatMeasure(Score* score)
 //   draw
 //---------------------------------------------------------
 
-void RepeatMeasure::draw(QPainter& p, ScoreView*) const
+void RepeatMeasure::draw(Painter* painter) const
       {
+      QPainter& p = *painter->painter();
       p.setBrush(p.pen().color());
       p.drawPath(path);
       }

@@ -23,6 +23,8 @@
 
 #include "element.h"
 
+class Painter;
+
 //---------------------------------------------------------
 //   Lasso
 //---------------------------------------------------------
@@ -35,7 +37,7 @@ class Lasso : public Element {
       Lasso(Score*);
       virtual Lasso* clone() const       { return new Lasso(*this); }
       virtual ElementType type() const   { return LASSO; }
-      virtual void draw(QPainter&, ScoreView*) const;
+      virtual void draw(Painter*) const;
       virtual bool isEditable() const     { return true; }
       virtual void editDrag(int, const QPointF&);
       virtual void updateGrips(int*, QRectF*) const;

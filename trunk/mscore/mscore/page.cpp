@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2010 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -38,6 +38,7 @@
 #include "line.h"
 #include "staff.h"
 #include "system.h"
+#include "painter.h"
 
 //---------------------------------------------------------
 //   Page
@@ -51,8 +52,6 @@ Page::Page(Score* s)
 
 Page::~Page()
       {
-//      delete _footer;
-//      delete _header;
       }
 
 //---------------------------------------------------------
@@ -146,8 +145,9 @@ void Page::layout()
 //    bounding rectange fr is relative to page QPointF
 //---------------------------------------------------------
 
-void Page::draw(QPainter& p, ScoreView*) const
+void Page::draw(Painter* painter) const
       {
+      QPainter& p = *painter->painter();
       QRectF r = bbox();
       qreal x1 = r.x();
       qreal y1 = r.y();

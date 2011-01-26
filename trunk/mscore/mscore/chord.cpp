@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -49,6 +49,7 @@
 #include "navigate.h"
 #include "stafftype.h"
 #include "stem.h"
+#include "painter.h"
 
 //---------------------------------------------------------
 //   StemSlash
@@ -63,8 +64,9 @@ StemSlash::StemSlash(Score* s)
 //   draw
 //---------------------------------------------------------
 
-void StemSlash::draw(QPainter& p, ScoreView*) const
+void StemSlash::draw(Painter* painter) const
       {
+      QPainter& p = *painter->painter();
       qreal lw = point(score()->styleS(ST_stemWidth));
       QPen pen(p.pen());
       pen.setWidthF(lw);
