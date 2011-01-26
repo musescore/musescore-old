@@ -515,7 +515,6 @@ void Instrument::setUseDrumset(bool val)
 void Instrument::setDrumset(Drumset* ds)
       {
       if (ds != _drumset) {
-            delete _drumset;
             _drumset = ds;
             }
       }

@@ -1,3 +1,5 @@
+25.jan (la)
+      - fix #8865: Crash when changing instrument on drumstaff 
 24.jan (ws)
       - applied patch from Ribet which hopefully fixes #7857
       (lv)
