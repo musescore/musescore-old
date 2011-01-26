@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id:$
 //
-//  Copyright (C) 2010 Werner Schweer and others
+//  Copyright (C) 2010-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -24,6 +24,7 @@
 #include "measure.h"
 #include "system.h"
 #include "note.h"
+#include "painter.h"
 
 //---------------------------------------------------------
 //   ChordLine
@@ -168,8 +169,9 @@ void ChordLine::write(Xml& xml) const
 //   Symbol::draw
 //---------------------------------------------------------
 
-void ChordLine::draw(QPainter& p, ScoreView*) const
+void ChordLine::draw(Painter* painter) const
       {
+      QPainter& p = *painter->painter();
       double _spatium = spatium();
       p.scale(_spatium, _spatium);
       double lw = 0.15;

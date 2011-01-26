@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id:$
 //
-//  Copyright (C) 2010 Werner Schweer and others
+//  Copyright (C) 2010-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -23,6 +23,7 @@
 #include "drumset.h"
 #include "preferences.h"
 #include "sym.h"
+#include "painter.h"
 
 //---------------------------------------------------------
 //   ShadowNote
@@ -39,11 +40,12 @@ ShadowNote::ShadowNote(Score* s)
 //   draw
 //---------------------------------------------------------
 
-void ShadowNote::draw(QPainter& p, ScoreView*) const
+void ShadowNote::draw(Painter* painter) const
       {
       if (!visible() || sym == 0)
             return;
 
+      QPainter& p = *painter->painter();
       QPointF ap(canvasPos());
       QRect r(abbox().toRect());
 

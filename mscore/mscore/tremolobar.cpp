@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id:$
 //
-//  Copyright (C) 2010 Werner Schweer and others
+//  Copyright (C) 2010-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -25,6 +25,7 @@
 #include "staff.h"
 #include "chord.h"
 #include "note.h"
+#include "painter.h"
 
 //---------------------------------------------------------
 //   TremoloBar
@@ -85,10 +86,11 @@ void TremoloBar::layout()
 //   draw
 //---------------------------------------------------------
 
-void TremoloBar::draw(QPainter& p, ScoreView*) const
+void TremoloBar::draw(Painter* painter) const
       {
       if (staff() && !staff()->useTablature())
             return;
+      QPainter& p = *painter->painter();
       QPen pen = p.pen();
       pen.setWidthF(_lw);
       pen.setCapStyle(Qt::RoundCap);

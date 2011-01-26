@@ -31,6 +31,7 @@
 class BarLine;
 class ScoreView;
 class Text;
+class Painter;
 
 //---------------------------------------------------------
 //   Box
@@ -46,7 +47,7 @@ class Box : public MeasureBase {
 
    public:
       Box(Score*);
-      virtual void draw(QPainter&, ScoreView*) const;
+      virtual void draw(Painter*) const;
       virtual bool isEditable() const { return true; }
       virtual void startEdit(ScoreView*, const QPointF&);
       virtual bool edit(ScoreView*, int grip, int key, Qt::KeyboardModifiers, const QString& s);

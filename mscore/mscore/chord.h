@@ -37,6 +37,7 @@ class Chord;
 class Glissando;
 class NoteEvent;
 class Stem;
+class Painter;
 
 enum TremoloChordType { TremoloSingle, TremoloFirstNote, TremoloSecondNote };
 
@@ -56,7 +57,7 @@ class StemSlash : public Element {
 
       virtual StemSlash* clone() const { return new StemSlash(*this); }
       virtual ElementType type() const { return STEM_SLASH; }
-      virtual void draw(QPainter&, ScoreView*) const;
+      virtual void draw(Painter*) const;
       };
 
 //---------------------------------------------------------

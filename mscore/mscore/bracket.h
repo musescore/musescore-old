@@ -25,6 +25,7 @@
 
 class ScoreView;
 class System;
+class Painter;
 
 // System Brackets
 enum { BRACKET_NORMAL, BRACKET_AKKOLADE, NO_BRACKET = -1};
@@ -56,7 +57,7 @@ class Bracket : public Element {
       virtual void setHeight(qreal);
       virtual double width() const;
 
-      virtual void draw(QPainter&, ScoreView*) const;
+      virtual void draw(Painter*) const;
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
       virtual void layout();

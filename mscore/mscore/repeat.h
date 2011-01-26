@@ -39,7 +39,7 @@ class RepeatMeasure : public Rest {
       RepeatMeasure &operator=(const RepeatMeasure&);
       virtual RepeatMeasure* clone() const  { return new RepeatMeasure(*this); }
       virtual ElementType type() const      { return REPEAT_MEASURE; }
-      virtual void draw(QPainter&, ScoreView*) const;
+      virtual void draw(Painter*) const;
       virtual void layout();
       virtual QRectF bbox() const        { return _bbox;        }
       virtual void scanElements(void* data, void (*func)(void*, Element*)) { func(data, this); }

@@ -23,6 +23,8 @@
 
 #include "element.h"
 
+class Painter;
+
 //---------------------------------------------------------
 //   ShadowNote
 //---------------------------------------------------------
@@ -43,7 +45,7 @@ class ShadowNote : public Element {
       int line() const                  { return _line;   }
       void setLine(int n)               { _line = n;      }
       virtual QRectF bbox() const;
-      virtual void draw(QPainter&, ScoreView*) const;
+      virtual void draw(Painter*) const;
       void setSym(Sym* s)               { sym = s;     }
       };
 

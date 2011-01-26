@@ -30,6 +30,7 @@ class System;
 class SlurTie;
 class Score;
 class ScoreView;
+class Painter;
 
 struct UP {
       QPointF p;            // layout position relative to pos()
@@ -60,7 +61,7 @@ class SlurSegment : public SpannerSegment {
 
       void layout(const QPointF& p1, const QPointF& p2);
       virtual QPainterPath shape() const;
-      virtual void draw(QPainter&, ScoreView*) const;
+      virtual void draw(Painter*) const;
 
       virtual bool isEditable() const { return true; }
       virtual void editDrag(int, const QPointF&);

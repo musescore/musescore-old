@@ -24,6 +24,7 @@
 #include "ui_articulation.h"
 #include "symbol.h"
 
+class Painter;
 class ChordRest;
 
 //---------------------------------------------------------
@@ -106,7 +107,7 @@ class Articulation : public Symbol {
 
       QString _channelName;
       ArticulationAnchor _anchor;
-      virtual void draw(QPainter&, ScoreView*) const;
+      virtual void draw(Painter*) const;
 
    public:
       Articulation(Score*);

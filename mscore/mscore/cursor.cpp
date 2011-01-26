@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id:$
 //
-//  Copyright (C) 2010 Werner Schweer and others
+//  Copyright (C) 2010-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -20,6 +20,7 @@
 
 #include "cursor.h"
 #include "preferences.h"
+#include "painter.h"
 
 //---------------------------------------------------------
 //   Cursor
@@ -35,13 +36,13 @@ Cursor::Cursor(Score* s)
 //   draw
 //---------------------------------------------------------
 
-void Cursor::draw(QPainter& p, ScoreView*) const
+void Cursor::draw(Painter* painter) const
       {
       if (!visible())
             return;
       int v = track() == -1 ? 0 : voice();
       QColor c(preferences.selectColor[v]);
       c.setAlpha(50);
-      p.fillRect(abbox(), QBrush(c));
+      painter->painter()->fillRect(abbox(), QBrush(c));
       }
 

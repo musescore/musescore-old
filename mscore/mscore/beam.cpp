@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2008 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  beam tables from GNU LilyPond music typesetter
 //  (c) 2000--2007 Jan Nieuwenhuizen <janneke@gnu.org>
@@ -39,6 +39,7 @@
 #include "staff.h"
 #include "stafftype.h"
 #include "stem.h"
+#include "painter.h"
 
 //---------------------------------------------------------
 //   endBeam
@@ -286,12 +287,13 @@ void Beam::remove(ChordRest* a)
 //   draw
 //---------------------------------------------------------
 
-void Beam::draw(QPainter& p, ScoreView*) const
+void Beam::draw(Painter* painter) const
       {
       if (staff()->useTablature()) {
             if (staff()->staffType()->slashStyle())
                   return;
             }
+      QPainter& p = *painter->painter();
       QColor color(p.pen().color());
       p.setPen(QPen(Qt::NoPen));
       p.setBrush(color);

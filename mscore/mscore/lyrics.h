@@ -26,6 +26,7 @@
 
 class Segment;
 class Chord;
+class Painter;
 
 //---------------------------------------------------------
 //   Lyrics
@@ -67,7 +68,7 @@ class Lyrics : public Text {
       Syllabic syllabic() const     { return _syllabic; }
       virtual void add(Element*);
       virtual void remove(Element*);
-      virtual void draw(QPainter&, ScoreView*) const;
+      virtual void draw(Painter*) const;
 
       int ticks() const             { return _ticks;    }
       void setTicks(int tick)       { _ticks = tick;    }

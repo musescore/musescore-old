@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2010 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -23,6 +23,7 @@
 #include "sym.h"
 #include "score.h"
 #include "staff.h"
+#include "painter.h"
 
 //---------------------------------------------------------
 //   Acc
@@ -368,11 +369,11 @@ AccidentalType Accidental::name2subtype(const QString& tag)
 //   draw
 //---------------------------------------------------------
 
-void Accidental::draw(QPainter& painter, ScoreView*) const
+void Accidental::draw(Painter* painter) const
       {
       double m = magS();
       foreach(const SymElement& e, el)
-            symbols[score()->symIdx()][e.sym].draw(painter, m, e.x, 0.0);
+            symbols[score()->symIdx()][e.sym].draw(*painter->painter(), m, e.x, 0.0);
       }
 
 //---------------------------------------------------------

@@ -37,6 +37,7 @@
 #include "undo.h"
 #include "stem.h"
 #include "beam.h"
+#include "painter.h"
 
 //---------------------------------------------------------
 //   SlurSegment
@@ -92,8 +93,9 @@ void SlurSegment::move(const QPointF& s)
 //   draw
 //---------------------------------------------------------
 
-void SlurSegment::draw(QPainter& p, ScoreView*) const
+void SlurSegment::draw(Painter* painter) const
       {
+      QPainter& p = *painter->painter();
       if (slurTie()->lineType() == 0) {
             p.setBrush(curColor());
             QPen pen(p.pen());
@@ -562,7 +564,7 @@ void SlurTie::slurPos(SlurPos* sp)
       else {
             yo = note1->yPos() + (hh * .5 + _spatium * .4) * _up;
             if (stem1) {
-                  bool startIsGrace = sc->noteType() != NOTE_NORMAL;
+                  // bool startIsGrace = sc->noteType() != NOTE_NORMAL;
 
                   if (beam1 && (beam1->elements().back() != sc) && (sc->up() == up)) {
                         double sh = stem1->height() + _spatium;

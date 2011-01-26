@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2008 Werner Schweer and others
+//  Copyright (C) 2008-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -25,6 +25,7 @@
 #include "style.h"
 #include "score.h"
 #include "sym.h"
+#include "painter.h"
 
 //---------------------------------------------------------
 //   Glissando
@@ -124,8 +125,9 @@ void Glissando::read(QDomElement e)
 //   draw
 //---------------------------------------------------------
 
-void Glissando::draw(QPainter& p, ScoreView*) const
+void Glissando::draw(Painter* painter) const
       {
+      QPainter& p = *painter->painter();
       double _spatium = spatium();
 
       p.save();

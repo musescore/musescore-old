@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -28,13 +28,15 @@
 #include "score.h"
 #include "accidental.h"
 #include "segment.h"
+#include "painter.h"
 
 //---------------------------------------------------------
 //   draw
 //---------------------------------------------------------
 
-void TrillSegment::draw(QPainter& p, ScoreView* v) const
+void TrillSegment::draw(Painter* painter) const
       {
+      QPainter& p = *painter->painter();
       double mag = magS();
       int idx    = score()->symIdx();
       qreal w2   = symbols[idx][trillelementSym].width(mag);
@@ -55,7 +57,7 @@ void TrillSegment::draw(QPainter& p, ScoreView* v) const
             if (trill()->accidental()) {
                   p.save();
                   p.translate(trill()->accidental()->canvasPos());
-                  trill()->accidental()->draw(p, v);
+                  trill()->accidental()->draw(painter);
                   p.restore();
                   }
             }

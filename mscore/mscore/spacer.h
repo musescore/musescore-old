@@ -23,6 +23,8 @@
 
 #include "element.h"
 
+class Painter;
+
 // spacer subtypes
 enum { SPACER_UP, SPACER_DOWN };
 
@@ -47,7 +49,7 @@ class Spacer : public Element {
       void setSpace(const Spatium& sp) { _space = sp;   }
       Spatium getSpace() const         { return _space; }
       virtual void layout();
-      virtual void draw(QPainter&, ScoreView*) const;
+      virtual void draw(Painter*) const;
       virtual bool isEditable() const { return true; }
       virtual void editDrag(int, const QPointF&);
       virtual void updateGrips(int*, QRectF*) const;

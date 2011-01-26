@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -24,6 +24,7 @@
 #include "score.h"
 #include "page.h"
 #include "preferences.h"
+#include "painter.h"
 
 //---------------------------------------------------------
 //   Navigator
@@ -153,6 +154,7 @@ void Navigator::paintEvent(QPaintEvent* ev)
             QRect rr(r.x()-dx, r.y()-dy, r.width()+2*dx, r.height()+2*dy);
 
             p.begin(&pm);
+            Painter painter(&p, 0);
             p.setRenderHint(QPainter::Antialiasing, false);
 
             p.fillRect(rr, _fgColor);
@@ -174,7 +176,7 @@ void Navigator::paintEvent(QPaintEvent* ev)
                         p.save();
                         p.translate(e->canvasPos());
                         p.setPen(QPen(e->curColor()));
-                        e->draw(p, 0);
+                        e->draw(&painter);
                         p.restore();
                         }
                   }

@@ -45,7 +45,7 @@ class Image : public BSymbol {
       virtual bool isEditable() const { return true; }
       virtual void editDrag(int, const QPointF&);
       virtual void endEdit();
-      virtual void draw(QPainter&, ScoreView*) const;
+      virtual void draw(Painter*) const;
       virtual void updateGrips(int*, QRectF*) const;
       virtual QPointF gripAnchor(int grip) const;
       virtual QSizeF imageSize() const = 0;
@@ -83,7 +83,7 @@ class RasterImage : public Image {
       RasterImage(Score*);
       ~RasterImage();
       virtual RasterImage* clone() const;
-      virtual void draw(QPainter&, ScoreView*) const;
+      virtual void draw(Painter*) const;
       virtual void setPath(const QString& s);
       virtual QSizeF imageSize() const { return doc.size(); }
       };
@@ -99,7 +99,7 @@ class SvgImage : public Image {
       SvgImage(Score*);
       ~SvgImage();
       virtual SvgImage* clone() const;
-      virtual void draw(QPainter&, ScoreView*) const;
+      virtual void draw(Painter*) const;
       virtual void setPath(const QString& s);
       virtual QSizeF imageSize() const { return doc->defaultSize(); }
       };

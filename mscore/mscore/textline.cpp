@@ -2,7 +2,7 @@
 //  MuseScore
 //  Linux Music Score Editor
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -27,6 +27,7 @@
 #include "preferences.h"
 #include "sym.h"
 #include "text.h"
+#include "painter.h"
 
 //---------------------------------------------------------
 //   TextLineSegment
@@ -66,8 +67,9 @@ void TextLineSegment::setSelected(bool f)
 //   draw
 //---------------------------------------------------------
 
-void TextLineSegment::draw(QPainter& p, ScoreView* v) const
+void TextLineSegment::draw(Painter* painter) const
       {
+      QPainter& p     = *painter->painter();
       TextLine* tl    = textLine();
       double _spatium = spatium();
 
@@ -89,7 +91,7 @@ void TextLineSegment::draw(QPainter& p, ScoreView* v) const
             p.save();
             p.translate(_text->pos());
             p.setPen(QPen(_text->curColor()));
-            _text->draw(p, v);
+            _text->draw(painter);
             p.restore();
             }
       else if (sym != -1) {

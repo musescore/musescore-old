@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2010 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -37,6 +37,7 @@
 #include "harmony.h"
 #include "lyrics.h"
 #include "segment.h"
+#include "painter.h"
 
 //---------------------------------------------------------
 //    Rest
@@ -67,10 +68,11 @@ Rest::Rest(Score* s, const Duration& d)
 //   Rest::draw
 //---------------------------------------------------------
 
-void Rest::draw(QPainter& p, ScoreView*) const
+void Rest::draw(Painter* painter) const
       {
       if (staff()->useTablature() || generated())
             return;
+      QPainter& p = *painter->painter();
       double _spatium = spatium();
 
       Measure* m = measure();

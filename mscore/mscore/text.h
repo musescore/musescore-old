@@ -144,7 +144,7 @@ class Text : public Element {
       void setBold(bool);
       void setSize(double);
 
-      virtual void draw(QPainter&, ScoreView*) const;
+      virtual void draw(Painter*) const;
 
       virtual void startEdit(ScoreView*, const QPointF&);
       virtual bool edit(ScoreView*, int grip, int key, Qt::KeyboardModifiers, const QString&);

@@ -70,6 +70,7 @@
 #include "texttools.h"
 #include "clef.h"
 #include "scoretab.h"
+#include "painter.h"
 
 //---------------------------------------------------------
 //   stateNames
@@ -1346,23 +1347,18 @@ void ScoreView::setShadowNote(const QPointF& p)
       shadowNote->setPos(pos.pos);
       }
 
-struct ViewPainter {
-      QPainter* painter;
-      ScoreView* view;
-      };
-
 //---------------------------------------------------------
 //   paintElement
 //---------------------------------------------------------
 
 static void paintElement(void* data, Element* e)
       {
-      ViewPainter* p = static_cast<ViewPainter*>(data);
-      p->painter->save();
-      p->painter->setPen(QPen(e->curColor()));
-      p->painter->translate(e->canvasPos());
-      e->draw(*p->painter, p->view);
-      p->painter->restore();
+      Painter* p = static_cast<Painter*>(data);
+      p->painter()->save();
+      p->painter()->setPen(QPen(e->curColor()));
+      p->painter()->translate(e->canvasPos());
+      e->draw(p);
+      p->painter()->restore();
       }
 
 //---------------------------------------------------------
@@ -1376,6 +1372,7 @@ void ScoreView::paintEvent(QPaintEvent* ev)
       QPainter p(this);
       p.setRenderHint(QPainter::Antialiasing, preferences.antialiasedDrawing);
       p.setRenderHint(QPainter::TextAntialiasing, true);
+      Painter vp(&p, this);
 
       QRegion region = ev->region();
 
@@ -1386,19 +1383,16 @@ void ScoreView::paintEvent(QPaintEvent* ev)
       p.setTransform(_matrix);
       p.setClipping(false);
 
-      _cursor->draw(p, this);
-      lasso->draw(p, this);
+      _cursor->draw(&vp);
+      lasso->draw(&vp);
       if (fotoMode())
-            _foto->draw(p, this);
-      shadowNote->draw(p, this);
+            _foto->draw(&vp);
+      shadowNote->draw(&vp);
       if (!dropAnchor.isNull()) {
             QPen pen(QBrush(QColor(80, 0, 0)), 2.0 / p.worldMatrix().m11(), Qt::DotLine);
             p.setPen(pen);
             p.drawLine(dropAnchor);
             }
-      ViewPainter vp;
-      vp.painter = &p;
-      vp.view    = this;
       if (dragElement)
             dragElement->scanElements(&vp, paintElement);
       }
@@ -2398,6 +2392,8 @@ Element* ScoreView::elementNear(const QPointF& p)
 
 void ScoreView::drawElements(QPainter& p,const QList<const Element*>& el)
       {
+      Painter painter(&p, this);
+
       foreach(const Element* e, el) {
             e->itemDiscovered = 0;
             if (!e->visible()) {
@@ -2407,7 +2403,7 @@ void ScoreView::drawElements(QPainter& p,const QList<const Element*>& el)
             p.save();
             p.translate(e->canvasPos());
             p.setPen(QPen(e->curColor()));
-            e->draw(p, this);
+            e->draw(&painter);
 
             if (debugMode && e->selected()) {
                   //

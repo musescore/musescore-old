@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id:$
 //
-//  Copyright (C) 2010 Werner Schweer and others
+//  Copyright (C) 2010-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -28,6 +28,7 @@
 #include "chord.h"
 #include "note.h"
 #include "segment.h"
+#include "painter.h"
 
 static const int DEFAULT_STRINGS = 6;
 static const int DEFAULT_FRETS = 5;
@@ -120,11 +121,11 @@ QLineF FretDiagram::dragAnchor() const
       double xp      = m->tick2pos(segment()->tick()) + m->canvasPos().x();
       QPointF p1(xp, yp);
 
-      double tw = width();
-      double th = height();
       double x  = 0.0;
       double y  = 0.0;
 #if 0 // TODOxx
+      double tw = width();
+      double th = height();
       if (_align & ALIGN_BOTTOM)
             y = th;
       else if (_align & ALIGN_VCENTER)
@@ -206,8 +207,9 @@ void FretDiagram::init(Tablature* tab, Chord* chord)
 //   draw
 //---------------------------------------------------------
 
-void FretDiagram::draw(QPainter& p, ScoreView*) const
+void FretDiagram::draw(Painter* painter) const
       {
+      QPainter& p = *painter->painter();
       QPen pen(p.pen());
       double _spatium = spatium();
       pen.setWidthF(lw2);

@@ -439,6 +439,29 @@ QFont fontId2font(int fontId)
       return _font;
       }
 
+#ifdef USE_GLYPHS
+//---------------------------------------------------------
+//   genGlyphs
+//---------------------------------------------------------
+
+void Sym::genGlyphs()
+      {
+      QString s(toString());
+      QTextLayout layout(s, _font);
+      layout.beginLayout();
+      QTextLine line = layout.createLine();
+      line.setPosition(QPointF());
+      layout.endLayout();
+      QList<QGlyphs> gl = layout.glyphs();
+      if (!gl.isEmpty()) {
+            glyphs = gl[0];
+            glyphs.setPositions(QVector<QPointF>(1, QPointF()));
+            }
+      else
+            printf("no glyphs for <%s> %d\n", _name, s.size());
+      }
+#endif
+
 //---------------------------------------------------------
 //   Sym
 //---------------------------------------------------------
@@ -451,15 +474,21 @@ Sym::Sym(const char* name, int c, int fid, double ax, double ay)
             printf("Sym: character 0x%x(%d) <%s> are not in font <%s>\n", c, c, _name, qPrintable(_font.family()));
       w     = fm.width(_code);
       _bbox = fm.boundingRect(_code);
+#ifdef USE_GLYPHS
+      genGlyphs();
+#endif
       }
 
 Sym::Sym(const char* name, int c, int fid, const QPointF& a, const QRectF& b)
    : _code(c), fontId(fid), _name(name), _font(fontId2font(fontId))
       {
-      double s = DPI/PPI;
-      _bbox.setRect(b.x() * s, b.y() * s, b.width() * s, b.height() * s);
-      _attach = a * s;
+      double ds = DPI/PPI;
+      _bbox.setRect(b.x() * ds, b.y() * ds, b.width() * ds, b.height() * ds);
+      _attach = a * ds;
       w = _bbox.width();
+#ifdef USE_GLYPHS
+      genGlyphs();
+#endif
       }
 
 //---------------------------------------------------------
@@ -479,6 +508,9 @@ void Sym::draw(QPainter& painter, double mag, qreal x, qreal y) const
       {
       double imag = 1.0 / mag;
       painter.scale(mag, mag);
+#ifdef USE_GLYPHS
+      painter.drawGlyphs(QPointF(x * imag, y * imag), glyphs);
+#else
       QString s;
       painter.setFont(_font);
       if (_code & 0xffff0000) {
@@ -488,6 +520,7 @@ void Sym::draw(QPainter& painter, double mag, qreal x, qreal y) const
       else
             s = QChar(_code);
       painter.drawText(x * imag, y * imag, s);
+#endif
       painter.scale(imag, imag);
       }
 

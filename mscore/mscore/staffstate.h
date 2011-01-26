@@ -26,6 +26,8 @@
 #include "instrument.h"
 // staff state change subtypes:
 
+class Painter;
+
 enum {
       STAFF_STATE_INSTRUMENT, STAFF_STATE_TYPE,
       STAFF_STATE_VISIBLE, STAFF_STATE_INVISIBLE
@@ -41,7 +43,7 @@ class StaffState : public Element {
 
       Instrument _instrument;
 
-      virtual void draw(QPainter&, ScoreView*) const;
+      virtual void draw(Painter*) const;
       virtual void layout();
 
    public:

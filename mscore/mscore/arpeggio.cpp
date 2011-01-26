@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -26,6 +26,7 @@
 #include "staff.h"
 #include "part.h"
 #include "segment.h"
+#include "painter.h"
 
 //---------------------------------------------------------
 //   Arpeggio
@@ -113,8 +114,10 @@ QRectF Arpeggio::bbox() const
 //   draw
 //---------------------------------------------------------
 
-void Arpeggio::draw(QPainter& p, ScoreView*) const
+void Arpeggio::draw(Painter* painter) const
       {
+      QPainter& p = *painter->painter();
+
       double _spatium = spatium();
 
       double y1 = _spatium - _userLen1.val() * _spatium;

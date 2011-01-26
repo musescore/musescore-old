@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -26,6 +26,7 @@
 #include "scoreview.h"
 #include "sym.h"
 #include "segment.h"
+#include "painter.h"
 
 //---------------------------------------------------------
 //   Lyrics
@@ -172,14 +173,13 @@ void Lyrics::remove(Element* el)
 //   draw
 //---------------------------------------------------------
 
-void Lyrics::draw(QPainter& p, ScoreView* v) const
+void Lyrics::draw(Painter* painter) const
       {
-      Text::draw(p, v);
+      Text::draw(painter);
       foreach(const Line* l, _separator) {
-            QPointF pt(l->pos());
-            p.translate(pt);
-            l->draw(p, v);
-            p.translate(-pt);
+            painter->translate(l->pos());
+            l->draw(painter);
+            painter->translate(-(l->pos()));
             }
       }
 
@@ -664,7 +664,7 @@ bool Lyrics::acceptDrop(ScoreView*, const QPointF&, int type, int subtype) const
 //   drop
 //---------------------------------------------------------
 
-Element* Lyrics::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Element* e)
+Element* Lyrics::drop(ScoreView*, const QPointF&, const QPointF&, Element* e)
       {
       if (!(e->type() == TEXT && e->subtype() == TEXT_LYRICS_VERSE_NUMBER))
             return 0;

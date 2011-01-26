@@ -79,6 +79,7 @@
 #include "segment.h"
 #include "tempotext.h"
 #include "sym.h"
+#include "painter.h"
 
 #ifdef OMR
 #include "omr/omr.h"
@@ -1841,6 +1842,8 @@ void Score::print(QPrinter* printer)
       {
       _printing = true;
       QPainter p(printer);
+      Painter painter(&p, 0);
+
       p.setRenderHint(QPainter::Antialiasing, true);
       p.setRenderHint(QPainter::TextAntialiasing, true);
 
@@ -1876,7 +1879,7 @@ void Score::print(QPrinter* printer)
                         p.save();
                         p.translate(e->canvasPos() - page->pos());
                         p.setPen(QPen(e->color()));
-                        e->draw(p, 0);
+                        e->draw(&painter);
                         p.restore();
                         }
                   }
@@ -1930,6 +1933,7 @@ bool Score::saveSvg(const QString& saveName)
       p.setRenderHint(QPainter::TextAntialiasing, true);
       double mag = converterDpi / DPI;
       p.scale(mag, mag);
+      Painter painter(&p, 0);
 
       QList<Element*> eel;
       foreach (Beam* b, _beams)
@@ -1953,7 +1957,7 @@ bool Score::saveSvg(const QString& saveName)
                   p.save();
                   p.translate(e->canvasPos() - page->pos());
                   p.setPen(QPen(e->color()));
-                  e->draw(p, 0);
+                  e->draw(&painter);
                   p.restore();
                   }
             foreach(const Element* e, el) {
@@ -1962,7 +1966,7 @@ bool Score::saveSvg(const QString& saveName)
                   p.save();
                   p.translate(e->canvasPos() - page->pos());
                   p.setPen(QPen(e->color()));
-                  e->draw(p, 0);
+                  e->draw(&painter);
                   p.restore();
                   }
             }
@@ -2031,6 +2035,8 @@ bool Score::savePng(const QString& name, bool screenshot, bool transparent, doub
 
             double mag = convDpi / DPI;
             QPainter p(&printer);
+            Painter painter(&p, 0);
+
             p.setRenderHint(QPainter::Antialiasing, true);
             p.setRenderHint(QPainter::TextAntialiasing, true);
             p.scale(mag, mag);
@@ -2041,7 +2047,7 @@ bool Score::savePng(const QString& name, bool screenshot, bool transparent, doub
                   QPointF ap(e->canvasPos() - page->pos());
                   p.translate(ap);
                   p.setPen(QPen(e->color()));
-                  e->draw(p, 0);
+                  e->draw(&painter);
                   p.translate(-ap);
                   }
 
@@ -2053,23 +2059,24 @@ bool Score::savePng(const QString& name, bool screenshot, bool transparent, doub
                   QPointF ap(e->canvasPos() - page->pos());
                   p.translate(ap);
                   p.setPen(QPen(e->color()));
-                  e->draw(p, 0);
+                  e->draw(&painter);
                   p.translate(-ap);
                   }
 
-            if( format == QImage::Format_Indexed8){
-              //convert to grayscale & respect alpha
-              QVector<QRgb> colorTable;
-              colorTable.push_back(QColor(0, 0, 0, 0).rgba());
-              if(!transparent){
-                for (int i = 1; i < 256; i++)
-                  colorTable.push_back(QColor(i, i, i).rgb());
-              }else{
-                for (int i = 1; i < 256; i++)
-                  colorTable.push_back(QColor(0, 0, 0, i).rgba());
-              }
-              printer = printer.convertToFormat(QImage::Format_Indexed8, colorTable);
-            }
+            if (format == QImage::Format_Indexed8) {
+                  //convert to grayscale & respect alpha
+                  QVector<QRgb> colorTable;
+                  colorTable.push_back(QColor(0, 0, 0, 0).rgba());
+                  if (!transparent) {
+                        for (int i = 1; i < 256; i++)
+                              colorTable.push_back(QColor(i, i, i).rgb());
+                        }
+                  else {
+                        for (int i = 1; i < 256; i++)
+                              colorTable.push_back(QColor(0, 0, 0, i).rgba());
+                        }
+                  printer = printer.convertToFormat(QImage::Format_Indexed8, colorTable);
+                  }
 
             QString fileName(name);
             if (fileName.endsWith(".png"))
@@ -2344,6 +2351,6 @@ QString getSoundFont(const QString& d)
 
 void Score::addAudioTrack()
       {
-
+      // TODO
       }
 

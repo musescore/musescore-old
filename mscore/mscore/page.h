@@ -29,6 +29,7 @@ class Text;
 class Measure;
 class Xml;
 class Score;
+class Painter;
 
 //---------------------------------------------------------
 //   PaperSize
@@ -112,7 +113,7 @@ class Page : public Element {
       double loWidth() const;
       double loHeight() const;
 
-      virtual void draw(QPainter&, ScoreView*) const;
+      virtual void draw(Painter*) const;
       virtual void scanElements(void* data, void (*func)(void*, Element*));
       void clear();
 

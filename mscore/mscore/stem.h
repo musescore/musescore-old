@@ -24,6 +24,7 @@
 #include "element.h"
 
 class Chord;
+class Painter;
 
 //---------------------------------------------------------
 //   Stem
@@ -44,7 +45,7 @@ class Stem : public Element {
 
       virtual Stem* clone() const      { return new Stem(*this); }
       virtual ElementType type() const { return STEM; }
-      virtual void draw(QPainter&, ScoreView*) const;
+      virtual void draw(Painter*) const;
       void setLen(double v)            { _len = v; }
       double stemLen() const           { return _len + point(_userLen); }
       virtual QRectF bbox() const;

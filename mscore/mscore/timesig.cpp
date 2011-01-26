@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -31,7 +31,7 @@
 #include "measure.h"
 #include "staff.h"
 #include "stafftype.h"
-//#include "tablature.h"
+#include "painter.h"
 
 //---------------------------------------------------------
 //   TimeSig
@@ -340,19 +340,18 @@ void TimeSig::layout()
 //   draw
 //---------------------------------------------------------
 
-void TimeSig::draw(QPainter& p, ScoreView*) const
+void TimeSig::draw(Painter* painter) const
       {
       int st = subtype();
       if (st == 0)                              // if no symbol, do nothing
             return;
 
-      p.setFont(symbols[score()->symIdx()][allabreveSym].font());
-      double m  = spatium() / (DPI * SPATIUM20);
-      double im = 1.0 / m;
-      p.scale(m, m);
-      p.drawText(pz, sz);                       // use positions and strings computed in layout()
-      p.drawText(pn, sn);
-      p.scale(im, im);
+      painter->setFont(symbols[score()->symIdx()][allabreveSym].font());
+      qreal m  = spatium() / (DPI * SPATIUM20);
+      painter->scale(m);
+      painter->drawText(pz, sz);    // use positions and strings computed in layout()
+      painter->drawText(pn, sn);
+      painter->scale(1.0 / m);
       }
 
 //---------------------------------------------------------

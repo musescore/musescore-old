@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: chord.h 3601 2010-10-22 12:46:05Z wschweer $
 //
-//  Copyright (C) 2010 Werner Schweer and others
+//  Copyright (C) 2010-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -25,6 +25,11 @@
 #include "stafftype.h"
 #include "hook.h"
 #include "tremolo.h"
+#include "painter.h"
+
+// TEMPORARY HACK!!
+#include "sym.h"
+// END OF HACK
 
 //---------------------------------------------------------
 //   Stem
@@ -42,12 +47,9 @@ Stem::Stem(Score* s)
 //   draw
 //---------------------------------------------------------
 
-// TEMPORARY HACK!!
-#include "sym.h"
-// END OF HACK
-
-void Stem::draw(QPainter& p, ScoreView*) const
+void Stem::draw(Painter* painter) const
       {
+      QPainter& p = *painter->painter();
       bool useTab = false;
       Staff* st = staff();
       if (st && st->useTablature()) {     // stems used in palette do not have a staff
@@ -63,12 +65,10 @@ void Stem::draw(QPainter& p, ScoreView*) const
       p.drawLine(QLineF(0.0, 0.0, 0.0, stemLen()) );
       // NOT THE BEST PLACE FOR THIS?
       // with tablatures, dots are not drawn near 'notes', but near stems
-      if(useTab) {
+      if (useTab) {
             int nDots = chord()->dots();
-            if(nDots > 0)
-//            for( ; nDots>0; nDots--) {
+            if (nDots > 0)
                   symbols[score()->symIdx()][dotSym].draw(p, magS(), spatium(), stemLen(), nDots);
-//                  }
             }
       }
 

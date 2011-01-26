@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -22,6 +22,7 @@
 #include "preferences.h"
 #include "score.h"
 #include "scoreview.h"
+#include "painter.h"
 
 //---------------------------------------------------------
 //   LayoutBreak
@@ -65,8 +66,9 @@ void LayoutBreak::read(QDomElement e)
 //   draw
 //---------------------------------------------------------
 
-void LayoutBreak::draw(QPainter& p, ScoreView*) const
+void LayoutBreak::draw(Painter* painter) const
       {
+      QPainter& p = *painter->painter();
       if (score()->printing())
             return;
       QPen pen;

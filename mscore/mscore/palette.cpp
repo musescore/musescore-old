@@ -37,6 +37,7 @@
 #include "seq.h"
 #include "part.h"
 #include "textline.h"
+#include "painter.h"
 
 //---------------------------------------------------------
 //   needsStaff
@@ -408,7 +409,8 @@ static void paintPaletteElement(void* data, Element* e)
       QPainter* p = static_cast<QPainter*>(data);
       p->save();
       p->translate(e->pos());
-      e->draw(*p, 0);
+      Painter painter(p, 0);
+      e->draw(&painter);
       p->restore();
       }
 

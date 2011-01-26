@@ -1,3 +1,7 @@
+26.jan (ws)
+      - use QGlyphs() from Qt4.8 for drawing symbols which should speedup drawing
+        (unfortunately this does not work (yet) for printing)
+      - encapsulate QPainter into new Painter() class
 25.jan (lv)
       - MusicXML import fixes: voltas
 23.jan (lv)
