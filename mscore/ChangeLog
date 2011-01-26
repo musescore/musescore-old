@@ -1,5 +1,6 @@
 25.jan (la)
       - fix #8865: Crash when changing instrument on drumstaff 
+      - fix regression : colision between accidental bracket and previous note
 24.jan (ws)
       - applied patch from Ribet which hopefully fixes #7857
       (lv)
