@@ -1311,7 +1311,7 @@ void Chord::layout()
 
             Accidental* accidental = note->accidental();
             if (accidental){
-                  x = accidental->x() + note->x();
+                  x = (accidental->x() + accidental->bbox().x()) * mag()+ note->x();
                   }
             
             if (x < lx)
