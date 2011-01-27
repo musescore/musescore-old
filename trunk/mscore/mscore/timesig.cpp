@@ -319,7 +319,7 @@ void TimeSig::layout()
                   // position numerator and denominator; vertical displacement:
                   // number of lines is odd: 0.0 (strings are directly above and below the middle line)
                   // number of lines even:   0.5 (strings are moved up/down to leave 1 line dist. between them)
-                  double displ = staff()->staffType()->lines() & 1 ? 0.0 : (0.5 * lineDist * _spatium);
+                  double displ = numOfLines & 1 ? 0.0 : (0.5 * lineDist * _spatium);
                   pz = QPointF(0.0, yoff - displ);
                   // denom. horiz. posit.: centred around centre of numerator
                   // vert. position:       base line is lowered by displ and by the whole height of a digit
