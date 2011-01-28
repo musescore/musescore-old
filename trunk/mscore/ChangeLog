@@ -1,3 +1,6 @@
+27.jan (mi)
+      - fix crash when opening time sig. palette (#8848)
+      - corrected wrong C and Ccut time sig. bbox
 26.jan (ws)
       - use QGlyphs() from Qt4.8 for drawing symbols which should speedup drawing
         (unfortunately this does not work (yet) for printing)

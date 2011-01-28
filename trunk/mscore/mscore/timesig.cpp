@@ -284,14 +284,14 @@ void TimeSig::layout()
 
             // C and Ccut are placed at the middle of the staff: use yoff directly
             if (st ==  TSIG_FOUR_FOUR) {
-                  bb = symbols[score()->symIdx()][fourfourmeterSym].bbox(magS());
-                  sz = symbols[score()->symIdx()][fourfourmeterSym].toString();
                   pz = QPointF(0.0, yoff);
+                  bb = symbols[score()->symIdx()][fourfourmeterSym].bbox(magS()).translated(pz);
+                  sz = symbols[score()->symIdx()][fourfourmeterSym].toString();
                    }
             else if (st == TSIG_ALLA_BREVE) {
-                  bb = symbols[score()->symIdx()][allabreveSym].bbox(magS());
-                  sz = symbols[score()->symIdx()][allabreveSym].toString();
                   pz = QPointF(0.0, yoff);
+                  bb = symbols[score()->symIdx()][allabreveSym].bbox(magS()).translated(pz);
+                  sz = symbols[score()->symIdx()][allabreveSym].toString();
                   }
             else {
                   // other time signatures are made of a numerator (z1...z4) and a denominator (n)
