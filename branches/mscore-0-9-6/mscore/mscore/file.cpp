@@ -188,7 +188,7 @@ void MuseScore::loadFile()
          tr("Bagpipe Music Writer Files (*.bww);;")+
          tr("BB Files <experimental> (*.mgu *.MGU *.sgu *.SGU);;")+
          tr("Overture Files <experimental> (*.ove);;")+
-         tr("All Files (*)")            
+         tr("All Files (*)")
          );
       if (fn.isEmpty())
             return;
@@ -411,11 +411,11 @@ bool Score::saveAs(bool saveCopy)
             mscore->lastSaveDirectory = settings.value("lastSaveDirectory", preferences.workingDirectory).toString();
       QString saveDirectory = saveCopy ?
             mscore->lastSaveCopyDirectory : mscore->lastSaveDirectory;
-      
+
       if (saveDirectory.isEmpty()) {
             saveDirectory = preferences.workingDirectory;
             }
-      
+
       QString selectedFilter;
       QString fn = QFileDialog::getSaveFileName(
                0,
@@ -1248,7 +1248,7 @@ bool Score::read(QDomElement e)
 //                                                   v1, v2, v3, rv1, rv2, rv3);
 
                                                 int currentVersion = v1 * 10000 + v2 * 100 + v3;
-                                                int readVersion = rv1 * 10000 + rv2 * 100 + v3;
+                                                int readVersion    = rv1 * 10000 + rv2 * 100 + rv3;
                                                 if (readVersion > currentVersion) {
                                                       printf("read future version\n");
                                                       }
@@ -1591,7 +1591,7 @@ void Score::print(QPrinter* printer)
                   QRectF fr = page->abbox();
                   QList<const Element*> ell = items(fr);
                   qStableSort(ell.begin(), ell.end(), elementLessThan);
-                  
+
                   foreach(const Element* e, ell) {
                         e->itemDiscovered = 0;
                         if (!e->visible())
