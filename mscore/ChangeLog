@@ -1,4 +1,5 @@
 30.jan (lv)
+      - MusicXML import fixes: direction placement (not complete yet)
       - MusicXML export fixes: direction placement
 27.jan (mi)
       - fix crash when opening time sig. palette (#8848)

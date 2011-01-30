@@ -1761,7 +1761,10 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   Dynamic* dyn = new Dynamic(score);
                   dyn->setSubtype(*it);
                   if (hasYoffset) dyn->setYoff(yoffset);
-                  else dyn->setAbove(placement == "above");
+//                  else dyn->setAbove(placement == "above");
+                  // TODO following works only for a single staff
+                  // apparently readpos is system-relative instead of staff-relative
+                  else dyn->setReadPos(QPoint(0, placement == "above" ? -3 * score->spatium() : 5 * score->spatium()));
                   dyn->setUserOff(QPointF(rx, ry));
                   dyn->setMxmlOff(offset);
                   dyn->setTrack((staff + rstaff) * VOICES);
