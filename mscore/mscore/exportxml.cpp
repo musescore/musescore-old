@@ -760,7 +760,7 @@ void DirectionsHandler::handleElements(ExportMusicXml* /*exp*/, Staff* staff, in
 //   findSpecificMatchInMeasure -- find chord or rest in measure
 //     starting or ending at tick
 //---------------------------------------------------------
-
+/*
 static DirectionsAnchor* findSpecificMatchInMeasure(int tick, Staff* stf, bool start, Measure* m, int strack, int etrack)
       {
       for (int st = strack; st < etrack; ++st) {
@@ -779,11 +779,11 @@ static DirectionsAnchor* findSpecificMatchInMeasure(int tick, Staff* stf, bool s
             }
             return 0;
       }
-
+*/
 //---------------------------------------------------------
 //   findMatchInMeasure -- find chord or rest in measure
 //---------------------------------------------------------
-
+/*
 static DirectionsAnchor* findMatchInMeasure(int tick, Staff* st, Measure* m, Part* p, int strack, int etrack)
       {
       DirectionsAnchor* da;
@@ -797,12 +797,12 @@ static DirectionsAnchor* findMatchInMeasure(int tick, Staff* st, Measure* m, Par
             return new DirectionsAnchor(tick);
       else return 0;
       }
-
+*/
 //---------------------------------------------------------
 //   findSpecificMatchInPart -- find chord or rest in part
 //     starting or ending at tick
 //---------------------------------------------------------
-
+/*
 static DirectionsAnchor* findSpecificMatchInPart(int tick, Staff* st, bool start, Score* sc, int strack, int etrack)
       {
       for (MeasureBase* mb = sc->measures()->first(); mb; mb = mb->next()) {
@@ -815,13 +815,13 @@ static DirectionsAnchor* findSpecificMatchInPart(int tick, Staff* st, bool start
             }
       return 0;
       }
-
+*/
 //---------------------------------------------------------
 //   findMatchInPart -- find chord or rest in part
 //     if start is true, try to find a match at start first
 //     if start is false, try to find a match at end first
 //---------------------------------------------------------
-
+/*
 static DirectionsAnchor* findMatchInPart(int tick, Staff* st, bool start, Score* sc, Part* p, int strack, int etrack)
       {
       DirectionsAnchor* da = 0;
@@ -838,14 +838,14 @@ static DirectionsAnchor* findMatchInPart(int tick, Staff* st, bool start, Score*
             return da;
       return (st && st->part() == p) ? new DirectionsAnchor(tick) : 0;
       }
-
+*/
 //---------------------------------------------------------
 //   buildDirectionsList -- associate directions (measure relative elements)
 //     with elements in segments to enable writing at the correct position
 //     in the output stream. Called once for every part to handle all part-level elements.
 //---------------------------------------------------------
 
-void DirectionsHandler::buildDirectionsList(Part* p, int strack, int etrack)
+void DirectionsHandler::buildDirectionsList(Part* /* p */, int /* strack */, int /* etrack */)
       {
 #if 0 // TODO-WS: implementation has changed
       // part-level elements stored in the score layout
@@ -894,11 +894,11 @@ void DirectionsHandler::buildDirectionsList(Part* p, int strack, int etrack)
 //     part-level or measure-level elements.
 //---------------------------------------------------------
 
-void DirectionsHandler::buildDirectionsList(Measure* m, bool dopart, Part* p, int strack, int etrack)
+void DirectionsHandler::buildDirectionsList(Measure* m, bool /* dopart */, Part* /* p */, int /* strack */, int /* etrack */)
       {
       // loop over all measure relative elements in this measure
       for (ciElement ci = m->el()->begin(); ci != m->el()->end(); ++ci) {
-            DirectionsAnchor* da = 0;
+//            DirectionsAnchor* da = 0;
             Element* dir = *ci;
             switch(dir->type()) {
                   case DYNAMIC:
@@ -1566,7 +1566,7 @@ static void tupletStartStop(ChordRest* cr, Notations& notations, Xml& xml)
 //   wavyLineStartStop
 //---------------------------------------------------------
 
-static void wavyLineStartStop(Chord* chord, Notations& notations, Ornaments& ornaments, Xml& xml)
+static void wavyLineStartStop(Chord* /* chord */, Notations& /* notations */, Ornaments& /* ornaments */, Xml& /* xml */)
       {
 #if 0 // TODO-WS implementation has changed
       // search for trill starting at this chord
@@ -2381,41 +2381,69 @@ static void directionTag(Xml& xml, Attributes& attr, Element* el = 0)
       QString tagname = QString("direction");
       if (el) {
 /*
-            printf("directionTag() spatium=%g\nelem tp=%d st=%d (%s,%s) x=%g y=%g w=%g h=%g userOff.y=%g\n",
+            printf("directionTag() spatium=%g nelem tp=%d st=%d (%s,%s)\ndirectionTag()  x=%g y=%g xsp,ysp=%g,%g w=%g h=%g userOff.y=%g\n",
                    el->spatium(),
                    el->type(), el->subtype(),
                    el->name(), el->subtypeName().toUtf8().data(),
                    el->x(), el->y(),
+                   el->x()/el->spatium(), el->y()/el->spatium(),
                    el->width(), el->height(),
-                   el->userOff().y());
-*/
+                   el->userOff().y()
+                  );
             if (el->type() == HAIRPIN || el->type() == OTTAVA || el->type() == TEXTLINE) {
                   SLine* sl = static_cast<const SLine*>(el);
-//                  printf("slin segsz=%d", sl->lineSegments().size());
+                  printf("directionTag()  slin segsz=%d", sl->spannerSegments().size());
                   if (sl->spannerSegments().size() > 0) {
                         LineSegment* seg = (LineSegment*)sl->spannerSegments().at(0);
-/*
                         printf(" x=%g y=%g w=%g h=%g cpx=%g cpy=%g userOff.y=%g\n",
                                seg->x(), seg->y(),
                                seg->width(), seg->height(),
                                seg->canvasPos().x(), seg->canvasPos().y(),
                                seg->userOff().y());
+                         }
+                  } // if (el->type() == ...
 */
-                        System* sys = 0;
-#if 0 //TODO-WS
-                        sl->tick2pos(0, el->tick(), el->staffIdx(), &sys);
-                        if (sys) {
-                              QRectF bb = sys->staff(el->staffIdx())->bbox();
+            Element* pel = el->parent();
+            Element* ppel = 0;
+            if (pel) ppel = pel->parent();
 /*
-                              printf("syst x=%g y=%g cpx=%g cpy=%g\n",
-                                     sys->pos().x(),  sys->pos().y(),
-                                     sys->canvasPos().x(),
-                                     sys->canvasPos().y()
-                                    );
-                              printf("staf x=%g y=%g w=%g h=%g\n",
-                                     bb.x(), bb.y(),
-                                     bb.width(), bb.height());
+            if (pel) {
+                  printf("directionTag()  prnt tp=%d st=%d (%s,%s) x=%g y=%g w=%g h=%g userOff.y=%g\n",
+                         pel->type(), pel->subtype(),
+                         pel->name(), pel->subtypeName().toUtf8().data(),
+                         pel->x(), pel->y(),
+                         pel->width(), pel->height(),
+                         pel->userOff().y());
+                  }
+            if (ppel) {
+                  printf("directionTag()  pprnt tp=%d st=%d (%s,%s) x=%g y=%g w=%g h=%g userOff.y=%g\n",
+                         ppel->type(), ppel->subtype(),
+                         ppel->name(), ppel->subtypeName().toUtf8().data(),
+                         ppel->x(), ppel->y(),
+                         ppel->width(), ppel->height(),
+                         ppel->userOff().y());
+                  }
 */
+            if (ppel && ppel->type() == MEASURE) {
+                  Measure* m = static_cast<Measure*>(ppel);
+                  System* sys = m->system();
+                  QRectF bb = sys->staff(el->staffIdx())->bbox();
+/*
+                  printf("directionTag()  syst x=%g y=%g cpx=%g cpy=%g\n",
+                         sys->pos().x(),  sys->pos().y(),
+                         sys->canvasPos().x(),
+                         sys->canvasPos().y()
+                        );
+                  printf("directionTag()  staf x=%g y=%g w=%g h=%g\n",
+                         bb.x(), bb.y(),
+                         bb.width(), bb.height());
+                  // element is above the staff if center of bbox is above center of staff
+                  printf("directionTag()  center diff=%g\n", el->y() + el->height() / 2 - bb.y() - bb.height() / 2);
+*/
+                  if (el->type() == HAIRPIN || el->type() == OTTAVA || el->type() == TEXTLINE) {
+                        SLine* sl = static_cast<const SLine*>(el);
+                        if (sl->spannerSegments().size() > 0) {
+                              LineSegment* seg = (LineSegment*)sl->spannerSegments().at(0);
                               // for the line type elements the reference point is vertically centered
                               // actual position info is in the segments
                               // compare the segment's canvas ypos with the staff's center height
@@ -2424,42 +2452,14 @@ static void directionTag(Xml& xml, Attributes& attr, Element* el = 0)
                               else
                                      tagname += " placement=\"below\"";
                               }
-#endif //TODO-WS
-                         }
-                  }
-            Element* pel = el->parent();
-            if (pel) {
-/*
-                  printf("prnt tp=%d st=%d (%s,%s) x=%g y=%g w=%g h=%g userOff.y=%g\n",
-                         pel->type(), pel->subtype(),
-                         pel->name(), pel->subtypeName().toUtf8().data(),
-                         pel->x(), pel->y(),
-                         pel->width(), pel->height(),
-                         pel->userOff().y());
-*/
-                  }
-            // printf("\n");
-            if (pel && pel->type() == MEASURE) {
-                  Measure* m = static_cast<Measure*>(pel);
-                  System* sys = m->system();
-                  QRectF bb = sys->staff(el->staffIdx())->bbox();
-/*
-                  printf("syst x=%g y=%g cpx=%g cpy=%g\n",
-                         sys->pos().x(),  sys->pos().y(),
-                         sys->canvasPos().x(),
-                         sys->canvasPos().y()
-                        );
-                  printf("staf x=%g y=%g w=%g h=%g\n",
-                         bb.x(), bb.y(),
-                         bb.width(), bb.height());
-                  // element is above the staff if center of bbox is above center of staff
-                  printf("center diff=%g\n", el->y() + el->height() / 2 - bb.y() - bb.height() / 2);
-*/
-                  if (el->y() + el->height() / 2 < bb.y() + bb.height() / 2)
-                        tagname += " placement=\"above\"";
-                  else
-                        tagname += " placement=\"below\"";
-                  }
+                        }
+                  else {
+                        if (el->y() + el->height() / 2 < bb.y() + bb.height() / 2)
+                              tagname += " placement=\"above\"";
+                        else
+                              tagname += " placement=\"below\"";
+                        }
+                  } // if (ppel && ...
 //            printf("\n");
             }
       xml.stag(tagname);

@@ -1,3 +1,5 @@
+30.jan (lv)
+      - MusicXML export fixes: direction placement
 27.jan (mi)
       - fix crash when opening time sig. palette (#8848)
       - corrected wrong C and Ccut time sig. bbox
