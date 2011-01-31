@@ -1,6 +1,8 @@
 30.jan (lv)
       - MusicXML import fixes: direction placement (not complete yet)
       - MusicXML export fixes: direction placement
+      (db)
+      - fixed vocal range for bartione and bass (in all languages)
 27.jan (mi)
       - fix crash when opening time sig. palette (#8848)
       - corrected wrong C and Ccut time sig. bbox

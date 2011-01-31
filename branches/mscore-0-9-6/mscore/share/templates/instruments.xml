@@ -4060,8 +4060,8 @@
         <name>Baritone</name>
         <short-name>Bar.</short-name>
         <clef>4</clef>
-        <aPitchRange>45-65</aPitchRange>
-        <pPitchRange>45-62</pPitchRange>
+        <aPitchRange>41-62</aPitchRange>
+        <pPitchRange>41-65</pPitchRange>
         <channel>
            <program>52</program>
            </channel>
@@ -4070,8 +4070,8 @@
         <name>Bass</name>
         <short-name>B.</short-name>
         <clef>4</clef>
-        <aPitchRange>41-62</aPitchRange>
-        <pPitchRange>41-59</pPitchRange>
+        <aPitchRange>41-59</aPitchRange>
+        <pPitchRange>40-62</pPitchRange>
         <channel>
            <program>52</program>
            </channel>
