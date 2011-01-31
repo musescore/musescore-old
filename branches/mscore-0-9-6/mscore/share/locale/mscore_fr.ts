@@ -156,7 +156,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Tremolo</source>
-        <translation>Tremolo</translation>
+        <translation>Trémolo</translation>
     </message>
     <message>
         <source>Glissando</source>
@@ -167,7 +167,7 @@ p, li { white-space: pre-wrap; }&#13;
     <name>ChordEdit</name>
     <message>
         <source>TextLabel</source>
-        <translation>Etiquette texte</translation>
+        <translation>Etiquette de texte</translation>
     </message>
     <message>
         <source>Root</source>
@@ -199,7 +199,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>(no accidental)</source>
-        <translation>(pas d'altération)</translation>
+        <translation>(sans d'altération)</translation>
     </message>
     <message>
         <source>A</source>
@@ -857,7 +857,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>additional leading space </source>
-        <translation>espace additionnel devant </translation>
+        <translation>espace additionnel avant </translation>
     </message>
     <message>
         <source>sp</source>
@@ -866,7 +866,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>additional trailing space</source>
-        <translation>espace additionnel derrière</translation>
+        <translation>espace additionnel après</translation>
     </message>
     <message>
         <source>Note Properties</source>
@@ -4750,7 +4750,7 @@ est incompatible avec l'interface actuelle</translation>
     </message>
     <message>
         <source>Character Set used when import non-unicode strings. (For binary file import)</source>
-        <translation>Jeu de caractères utilisé pour l'import de chaînes non unicode. (Pour import de fichier binaire)</translation>
+        <translation>Jeu de caractères utilisé pour l'import de chaînes non unicode. (Pour l'import de fichier binaire)</translation>
     </message>
     <message>
         <source>Character Set</source>
@@ -5569,7 +5569,7 @@ et vérifier que le chemin du fichier est correct</translation>
     </message>
     <message>
         <source>Slur Properties</source>
-        <translation>Propriétés du legato</translation>
+        <translation>Propriétés de la liaison</translation>
     </message>
     <message>
         <source>solid</source>
@@ -5588,7 +5588,7 @@ et vérifier que le chemin du fichier est correct</translation>
     </message>
     <message>
         <source>Slur Properties...</source>
-        <translation>Propriétés du legato...</translation>
+        <translation>Propriétés de la liaison...</translation>
     </message>
 </context>
 <context>
@@ -8647,7 +8647,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Hi-Hat Pedal</source>
-        <translation>Pedale du Charleston</translation>
+        <translation>Pédale du Charleston</translation>
     </message>
     <message>
         <source>Tom 3</source>
