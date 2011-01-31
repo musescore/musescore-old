@@ -6791,23 +6791,23 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Open...</source>
-        <translation>&amp;Öffnen...</translation>
+        <translation>Öffnen...</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>&amp;Speichern</translation>
+        <translation>Speichern</translation>
     </message>
     <message>
         <source>Save As...</source>
-        <translation>&amp;Speichern als...</translation>
+        <translation>Speichern als...</translation>
     </message>
     <message>
         <source>Save a Copy...</source>
-        <translation>Als &amp;Kopie speichern...</translation>
+        <translation>Als Kopie speichern...</translation>
     </message>
     <message>
         <source>Reload</source>
-        <translation>Neu &amp;laden</translation>
+        <translation>Neu laden</translation>
     </message>
     <message>
         <source>Close</source>
@@ -6819,7 +6819,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>New...</source>
-        <translation>&amp;Neu...</translation>
+        <translation>Neu...</translation>
     </message>
     <message>
         <source>Create new score</source>
@@ -6827,27 +6827,27 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Print...</source>
-        <translation>&amp;Drucken...</translation>
+        <translation>Drucken...</translation>
     </message>
     <message>
         <source>Undo</source>
-        <translation>&amp;Rückgängig</translation>
+        <translation>Rückgängig</translation>
     </message>
     <message>
         <source>Redo</source>
-        <translation>&amp;Wiederherstellen</translation>
+        <translation>Wiederherstellen</translation>
     </message>
     <message>
         <source>Cut</source>
-        <translation>&amp;Ausschneiden</translation>
+        <translation>Ausschneiden</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation>&amp;Kopieren</translation>
+        <translation>Kopieren</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation>&amp;Einfügen</translation>
+        <translation>Einfügen</translation>
     </message>
     <message>
         <source>Instruments...</source>
@@ -7519,7 +7519,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Quit</source>
-        <translation>&amp;Beenden</translation>
+        <translation>Beenden</translation>
     </message>
     <message>
         <source>Mag</source>
@@ -7699,7 +7699,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Save Style...</source>
-        <translation>Formatvorlage &amp;speichern...</translation>
+        <translation>Formatvorlage speichern...</translation>
     </message>
     <message>
         <source>Save Style</source>
@@ -7903,7 +7903,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Search</source>
-        <translation>&amp;Suche</translation>
+        <translation>Suche</translation>
     </message>
     <message>
         <source>Zoom In</source>
@@ -8383,7 +8383,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Parts...</source>
-        <translation>&amp;Einzelstimmen...</translation>
+        <translation>Einzelstimmen...</translation>
     </message>
 </context>
 <context>
