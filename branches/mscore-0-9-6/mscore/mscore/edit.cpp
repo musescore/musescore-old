@@ -1706,12 +1706,16 @@ void Score::cmdExchangeVoice(int s, int d)
 
 void Score::cmdEnterRest(const Duration& d)
       {
-      if (_is.cr() == 0) {
-            printf("cannot enter rest here\n");
+      if (_is.track == -1) {
+            printf("cmdEnterRest: track -1\n");
             return;
             }
       startCmd();
       expandVoice();
+      if (_is.cr() == 0) {
+            printf("cannot enter rest here\n");
+            return;
+            }
       int track = _is.track;
       Segment* seg  = setNoteRest(_is.cr(), track, -1, d.fraction(), 0, AUTO);
       ChordRest* cr = static_cast<ChordRest*>(seg->element(track));

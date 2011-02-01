@@ -1,3 +1,5 @@
+01.feb (la)
+      - fix #8974: Rest entry shortcut does not work in Voice 2
 30.jan (db)
       - fixed vocal range for bartione and bass (instruments.xml)
 29.jan (ws)
