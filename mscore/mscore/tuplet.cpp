@@ -757,6 +757,7 @@ void Tuplet::updateGrips(int* grips, QRectF*grip) const
 
 void Tuplet::toDefault()
       {
+      Element::toDefault();
       _userModified = false;
       _p1           = QPointF();
       _p2           = QPointF();
