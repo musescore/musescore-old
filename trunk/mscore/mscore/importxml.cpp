@@ -1379,6 +1379,27 @@ static void metronome(QDomElement e, Text* t)
 //   direction
 //---------------------------------------------------------
 
+static void addElement(Element* el, bool hasYoffset, int staff, int rstaff, Score* score, QString& placement,
+                       qreal rx, qreal ry, int offset, Measure* measure, int tick)
+      {
+                  if (hasYoffset) /* el->setYoff(yoffset) */ ; // TODO is this still necessary ? Some element types do ot support this
+                  else {
+                        double y = (staff + rstaff) * (score->styleD(ST_staffDistance) + 4); // TODO 4 = #lines/staff - 1
+                        y += (placement == "above" ? -3 : 5);
+                        y *= score->spatium();
+                        el->setReadPos(QPoint(0, y));
+                        }
+                  el->setUserOff(QPointF(rx, ry));
+                  el->setMxmlOff(offset);
+                  el->setTrack((staff + rstaff) * VOICES);
+                  Segment* s = measure->getSegment(SegChordRest, tick);
+                  s->add(el);
+      }
+
+//---------------------------------------------------------
+//   direction
+//---------------------------------------------------------
+
 /**
  Read the MusicXML direction element.
  */
@@ -1668,7 +1689,6 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   t = new Text(score);
                   t->setTextStyle(TEXT_STYLE_TECHNIK);
                   }
-            Segment* s = measure->getSegment(SegChordRest, tick);
             if (!fontSize.isEmpty() || !fontStyle.isEmpty() || !fontWeight.isEmpty()) {
                   if (!fontSize.isEmpty()) {
                         bool ok = true;
@@ -1682,11 +1702,17 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
             t->setText(txt);
             if (metrEl.tagName() != "") metronome(metrEl, t);
             if (hasYoffset) t->setYoff(yoffset);
+            addElement(t, hasYoffset, staff, rstaff, score, placement,
+                       rx, ry, offset, measure, tick);
+/*
+            if (hasYoffset) t->setYoff(yoffset);
             else t->setAbove(placement == "above");
             t->setUserOff(QPointF(rx, ry));
             t->setMxmlOff(offset);
             t->setTrack((staff + rstaff) * VOICES);
+            Segment* s = measure->getSegment(SegChordRest, tick);
             s->add(t);
+*/
             }
       else if (dirType == "rehearsal") {
             Text* t = new Text(score);
@@ -1695,11 +1721,16 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
             t->setText(rehearsal);
             if (hasYoffset) t->setYoff(yoffset);
             else t->setAbove(placement == "above");
+            if (hasYoffset) t->setYoff(yoffset);
+            addElement(t, hasYoffset, staff, rstaff, score, placement,
+                       rx, ry, offset, measure, tick);
+/*
             t->setUserOff(QPointF(rx, ry));
             t->setMxmlOff(offset);
             t->setTrack((staff + rstaff) * VOICES);
             Segment* s = measure->getSegment(SegChordRest, tick);
             s->add(t);
+*/
             }
       else if (dirType == "pedal") {
             if (pedalLine) {
@@ -1761,12 +1792,12 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   Dynamic* dyn = new Dynamic(score);
                   dyn->setSubtype(*it);
                   if (hasYoffset) dyn->setYoff(yoffset);
-//                  else dyn->setAbove(placement == "above");
-                  // TODO following works only for a single staff
-                  // apparently readpos is system-relative instead of staff-relative
+                  addElement(dyn, hasYoffset, staff, rstaff, score, placement,
+                             rx, ry, offset, measure, tick);
+/*
                   else {
                         printf("dynamicsPlacement staff=%d staffdist=%g\n", staff + rstaff, score->styleD(ST_staffDistance));
-                        double y = (staff + rstaff) * (score->styleD(ST_staffDistance) + 4); // 4 = #lines/staff - 1
+                        double y = (staff + rstaff) * (score->styleD(ST_staffDistance) + 4); // TODO 4 = #lines/staff - 1
                         y += (placement == "above" ? -3 : 5);
                         y *= score->spatium();
                         dyn->setReadPos(QPoint(0, y));
@@ -1776,6 +1807,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   dyn->setTrack((staff + rstaff) * VOICES);
                   Segment* s = measure->getSegment(SegChordRest, tick);
                   s->add(dyn);
+*/
                   }
             }
       else if (dirType == "wedge") {
@@ -1806,6 +1838,10 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                         printf("wedge stop without start\n");
                         }
                   else {
+                        // TODO following code works correctly only if the end segment will actually contain notes
+                        // if e.g. a measure ends with a hairpin stop, the hairpins endelement must be the first
+                        // SegChordRest of the NEXT measure, while measure->getSegment will return a segment in this
+                        // measure. Same goes for other SLines
                         Segment* seg = measure->getSegment(SegChordRest, tick);
                         hairpin->setEndElement(seg);
                         seg->addSpannerBack(hairpin);
@@ -3161,12 +3197,17 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             Dynamic* dyn = new Dynamic(score);
             dyn->setSubtype(*it);
             if (hasYoffset) dyn->setYoff(yoffset);
+            addElement(dyn, hasYoffset, track / VOICES /* staff */, 0 /* rstaff */, score, placement,
+                       rx, ry, 0 /*offset */, measure, tick);
+/*
+            if (hasYoffset) dyn->setYoff(yoffset);
             else dyn->setAbove(placement == "above");
             dyn->setUserOff(QPointF(rx, ry));
             // dyn->setMxmlOff(offset);
             dyn->setTrack(track);
             Segment* s = measure->getSegment(SegChordRest, tick);
             s->add(dyn);
+*/
             }
 
       prevtick = tick;
