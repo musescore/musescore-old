@@ -1,3 +1,5 @@
+02.feb (lv)
+      - MusicXML import fixes: direction placement (not complete yet)
 01.feb (la)
       - fix #9002: Reset Position doesn't affect tuplet bracket
 30.jan (lv)
