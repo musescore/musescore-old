@@ -22,6 +22,7 @@ install(FILES
       authorize_dialog.ui
       musescore_dialog.ui
       musescore_progress.ui
+      start_browser_dialog.ui
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}plugins/musescore.com/ui
       )
 
