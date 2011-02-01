@@ -151,7 +151,7 @@ Score* Score::createExcerpt(Excerpt* excerpt)
       foreach (Staff* staff, s->staves()) {
             staff->cleanupBrackets();
             }
-
+      s->style().set(ST_createMultiMeasureRests, true);
       s->renumberMeasures();
       s->setCreated(true);
       s->rebuildMidiMapping();

@@ -954,6 +954,16 @@ var consumer =
   }
 };
 
+var preferences = 
+{
+    signoutOnExit : false,
+    useProxy : false,
+    proxyIP : "",
+    proxyPort : 0,
+    proxyUsername : "",
+    proxyPassword : ""
+};
+
 var hostApi = "api.musescore.com";
 
 QByteArray.prototype.toString = function(codec)
@@ -1029,12 +1039,15 @@ var answerBuffer;
 var requestId;
 var dirSettings = QDir.homePath() + "/.musescore/plugins/musescore";
 var fileSettings = "settings.txt";
+var filePreferences = "preferences.txt";
 var http;
+var username;
 
 function run()
   {  
+    loadPreferences();
     if(loadSettings()){
-      testGet();
+      getUser();
     }else{
       requestToken();
     }
@@ -1077,6 +1090,8 @@ function requestToken(){
     answerBuffer = new QBuffer();
     answerBuffer.open(QIODevice.OpenMode(QIODevice.ReadWrite));
     http = new QHttp();
+    if(preferences.useProxy == "true")
+          http.setProxy(preferences.proxyIP, preferences.proxyPort, preferences.proxyUsername, preferences.proxyPassword );
     http.setHost(hostApi);
     http.requestFinished.connect(answerBuffer, processAnswerRequestToken);
     requestId = http.request(header, buffer, answerBuffer);
@@ -1086,33 +1101,41 @@ function processAnswerRequestToken(id ,error){
   if(form)
     form.close();
   if (id == requestId){
-    answerBuffer.seek(0);
-    var c = answerBuffer.readAll();
-    var stringResult = c.toString();
-    //print(stringResult);
-    answerBuffer.close();
     if(!error){
+        var loader = new QUiLoader(null);
+        var file   = new QFile(pluginPath + "/ui/start_browser_dialog.ui");
+        file.open(QIODevice.OpenMode(QIODevice.ReadOnly, QIODevice.Text));
+        form = loader.load(file, null);
+        form.buttonBox.accepted.connect(launchBrowser);
+        form.show();  
+    }else{
+         //message error
+        QMessageBox.critical(0, "Error", "Cannot get request token [" + http.errorString() + "]" );
+    }
+  }
+}
+
+function launchBrowser() {
+        answerBuffer.seek(0);
+        var c = answerBuffer.readAll();
+        var stringResult = c.toString();
+        answerBuffer.close();
         var results = OAuth.decodeForm(stringResult);
         consumer.token = OAuth.getParameter(results, "oauth_token");
         consumer.tokenSecret = OAuth.getParameter(results, "oauth_token_secret");
         
         var url = consumer.serviceProvider.userAuthorizationURL + "?" + "oauth_token=" + consumer.token;
     
-        // QDesktopServices.openUrl(url);    // Does not work ...
+        QDesktopServices.openUrl(new QUrl(url));
         
         var loader = new QUiLoader(null);
         var file   = new QFile(pluginPath + "/ui/authorize_dialog.ui");
         file.open(QIODevice.OpenMode(QIODevice.ReadOnly, QIODevice.Text));
         form = loader.load(file, null);
-        form.label.text = "Please <a href='"+url+"'>click here</a> to authorize MuseScore on <a href='http://musescore.com'>musescore.com</a><br/> Then press OK.";
+        form.lineEditUrl.text = url;
+        form.lineEditUrl.cursorPosition = 0;
         form.buttonBox.accepted.connect(acceptAuthorize);
         form.show();  
-      
-    }else{
-         //message error
-        QMessageBox.critical(0, "Error", "Cannot get request token [" + http.errorString() + "]" );
-    }
-  }
 }
 
 function acceptAuthorize(){
@@ -1156,6 +1179,8 @@ function getAccessToken(code){
     answerBuffer = new QBuffer();
     answerBuffer.open(QIODevice.OpenMode(QIODevice.ReadWrite));
     http = new QHttp();
+    if(preferences.useProxy == "true")
+          http.setProxy(preferences.proxyIP, preferences.proxyPort, preferences.proxyUsername, preferences.proxyPassword );
     http.setHost(hostApi);
     http.requestFinished.connect(answerBuffer, processAnswerAccessToken);
     requestId = http.request(header, buffer, answerBuffer);
@@ -1172,7 +1197,7 @@ function processAnswerAccessToken(id ,error){
         consumer.accessToken = OAuth.getParameter(results, "oauth_token");
         consumer.accessTokenSecret = OAuth.getParameter(results, "oauth_token_secret");
         saveSettings();
-        testGet();
+        getUser();
     }else{
         //message error
         QMessageBox.critical(0, "Error", "Cannot get access token [" + http.errorString()+ "]");
@@ -1195,8 +1220,27 @@ function formBeforeUpload(){
 	    form.verticalLayoutWidget.license.addItem("Creative Commons Attribution Noncommercial Non Derivate Works", "cc-by-nc-nd");
       form.verticalLayoutWidget.license.addItem("Public Domain", "publicdomain");
       form.verticalLayoutWidget.license.addItem("Creative Commons Zero", "cc-zero");
+      form.horizontalLayoutWidget.lblUsername.text = username;
       form.buttonBox.accepted.connect(saveAndUpload);
+      form.horizontalLayoutWidget.btnSignout.pressed.connect(signout);
+      form.horizontalLayoutWidget.chkSignoutOnExit.checked = (preferences.signoutOnExit == 'true');
+      form.horizontalLayoutWidget.chkSignoutOnExit.stateChanged.connect(signoutOnExit);
       form.show();  
+}
+
+function signout() {
+    //delete settings
+    deleteSettings();
+    //Start from scratch
+    requestToken();
+}
+
+function signoutOnExit(state) {
+    if(state == 2) //checked
+        preferences.signoutOnExit = true;
+    else
+        preferences.signoutOnExit = false;
+    savePreferences();
 }
 
 /****************************
@@ -1292,6 +1336,8 @@ function saveAndUpload(){
       answerBuffer = new QBuffer();
       answerBuffer.open(QIODevice.OpenMode(QIODevice.ReadWrite));
       http = new QHttp();
+      if(preferences.useProxy == "true")
+          http.setProxy(preferences.proxyIP, preferences.proxyPort, preferences.proxyUsername, preferences.proxyPassword );      
       http.setHost(hostApi);
       http.dataSendProgress.connect(answerBuffer, processDataSendProgress);
       http.requestFinished.connect(answerBuffer, processAnswerUpload);
@@ -1368,6 +1414,8 @@ function testGet(){
       answerBuffer = new QBuffer();
       answerBuffer.open(QIODevice.OpenMode(QIODevice.ReadWrite));
       http = new QHttp();
+      if(preferences.useProxy == "true")
+          http.setProxy(preferences.proxyIP, preferences.proxyPort, preferences.proxyUsername, preferences.proxyPassword );      
       http.setHost(hostApi);
       http.requestFinished.connect(answerBuffer, processTestGet);
       requestId = http.request(header, new QBuffer(), answerBuffer);      
@@ -1384,6 +1432,62 @@ function processTestGet(id ,error){
     }
   }
 }
+
+/****************************
+*   Get user functions
+*****************************/
+function getUser(){
+      var accessor = { consumerSecret: consumer.consumerSecret 
+                   , tokenSecret   : consumer.accessTokenSecret
+                   };
+                   
+      var message = { action: "http://"+hostApi+"/services/rest/me.json"
+                  , method: "GET"
+                  , parameters: []
+                  };
+
+      message.parameters.push(["oauth_consumer_key" , consumer.consumerKey]);
+      message.parameters.push(["oauth_token" , consumer.accessToken]);
+      message.parameters.push(["oauth_signature_method" , consumer.serviceProvider.signatureMethod]);
+    
+      OAuth.completeRequest(message, accessor);
+      
+      var url = OAuth.addToURL("/services/rest/me.json", message.parameters);   
+      
+      var header = new QHttpRequestHeader("GET", url);
+      header.setValue("Host", hostApi);    
+      header.setValue("Content-Type", "text/html; charset=utf-8");
+      header.setContentLength(0);
+      
+      // request
+      answerBuffer = new QBuffer();
+      answerBuffer.open(QIODevice.OpenMode(QIODevice.ReadWrite));
+      http = new QHttp();
+      if(preferences.useProxy == "true")
+          http.setProxy(preferences.proxyIP, preferences.proxyPort, preferences.proxyUsername, preferences.proxyPassword );
+      http.setHost(hostApi);
+      http.requestFinished.connect(answerBuffer, processGetUser);
+      requestId = http.request(header, new QBuffer(), answerBuffer);      
+}
+
+function processGetUser(id ,error){
+  if(form)
+    form.close();
+  if (id == requestId){
+    if(!error){
+      answerBuffer.seek(0);
+      var c = answerBuffer.readAll();
+      var stringResult = c.toString();
+      answerBuffer.close();      
+      var array = eval('(' + stringResult + ')');
+      username = array['name'];
+      formBeforeUpload();
+    }else{
+      requestToken();
+    }
+  }
+}
+
 /**********************************************************
  *  Serialize an array. Array can be read back with eval
  *********************************************************/
@@ -1445,6 +1549,66 @@ function loadSettings(){
     return false;
 }
 
+/**********************************************************
+ *  delete the settings
+ *********************************************************/
+function deleteSettings(){
+    var settingsFile = new QFile(dirSettings+ "/"+ fileSettings);
+    return settingsFile.remove()
+}
+
+/**********************************************************
+ *  Save the settings
+ *********************************************************/
+function savePreferences(){
+    var pref = serialize(preferences);
+    var dir = new QDir;
+    if(dir.mkpath(dirSettings)){
+      var preferencesFile = new QFile(dirSettings+ "/"+ filePreferences);
+      if(preferencesFile.open(QIODevice.OpenMode(QIODevice.WriteOnly))){
+        var ba = new QByteArray(pref);
+        preferencesFile.write(ba); 
+        preferencesFile.flush();
+        preferencesFile.close();
+      }else{
+        QMessageBox.critical(0, "Error", "Cannot write preferences.");
+      }
+    }else{
+      QMessageBox.critical(0, "Error", "Cannot create preferences directory.");
+    }
+}
+
+/**********************************************************
+ *  Load the preferences
+ *********************************************************/
+function loadPreferences(){
+    var preferencesFile = new QFile(dirSettings+ "/"+ filePreferences);
+    if (preferencesFile.open(QIODevice.OpenMode(QIODevice.ReadOnly))){
+      var pref = preferencesFile.readAll().toString(); 
+      preferencesFile.flush();
+      preferencesFile.close();
+      if(pref && pref != ""){
+          preferences = eval('(' + pref + ')');
+          return true;
+      }
+    }
+    return false;
+}
+
+/**********************************************************
+ *  delete the preferences
+ *********************************************************/
+function deletePreferences(){
+    var preferencesFile = new QFile(dirSettings+ "/"+ filePreferences);
+    return preferencesFile.remove()
+}
+
+function onClose(){
+    if(loadPreferences()){
+       if(preferences.signoutOnExit == 'true') 
+            deleteSettings();
+    }
+}
 
 //---------------------------------------------------------
 //    menu:  defines were the function will be placed
@@ -1454,7 +1618,8 @@ function loadSettings(){
 var mscorePlugin = {
       menu: '',
       init: init,
-      run:  run
+      run:  run,
+      onClose: onClose
       };
 
 mscorePlugin;
