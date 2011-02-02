@@ -1,5 +1,6 @@
 02.feb (la)
       - improve MusicXML import of clefs
+      - Changing velocity and on/off offsets for a group of selected notes (miwarre patch)
 01.feb (la)
       - fix #8974: Rest entry shortcut does not work in Voice 2
       - fix #9002: Reset Position doesn't affect tuplet bracket

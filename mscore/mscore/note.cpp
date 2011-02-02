@@ -1163,17 +1163,17 @@ void Note::propertyAction(ScoreView* viewer, const QString& s)
                               score()->undoChangeUserMirror(note, DirectionH(vp.getUserMirror()));
                         if (vp.getHeadType() != note->headType() || vp.getHeadGroup() != note->headGroup())
                               score()->undo()->push(new ChangeNoteHead(note, vp.getHeadGroup(), vp.getHeadType()));
-                        }
-                  if (veloType() != vp.veloType() || velocity() != vp.velo()
-                     || veloOffset() != vp.veloOffset()
-                     || onTimeType() != vp.onTimeType() || onTimeOffset() != vp.onTimeOffset()
-                     || onTimeUserOffset() != vp.onTimeUserOffset()
-                     || offTimeType() != vp.offTimeType() || offTimeOffset() != vp.offTimeOffset()
-                     || offTimeUserOffset() != vp.offTimeUserOffset()) {
-                        score()->undo()->push(new ChangeNoteProperties(this,
-                           vp.veloType(), vp.velo(), vp.veloOffset(),
-                           vp.onTimeType(), vp.onTimeOffset(), vp.onTimeUserOffset(),
-                           vp.offTimeType(), vp.offTimeOffset(), vp.offTimeUserOffset()));
+                        if (note->veloType() != vp.veloType() || note->velocity() != vp.velo()
+                         || note->veloOffset() != vp.veloOffset()
+                         || note->onTimeType() != vp.onTimeType() || note->onTimeOffset() != vp.onTimeOffset()
+                         || note->onTimeUserOffset() != vp.onTimeUserOffset()
+                         || note->offTimeType() != vp.offTimeType() || note->offTimeOffset() != vp.offTimeOffset()
+                         || note->offTimeUserOffset() != vp.offTimeUserOffset()) {
+                              score()->undo()->push(new ChangeNoteProperties(note,
+                                 vp.veloType(), vp.velo(), vp.veloOffset(),
+                                 vp.onTimeType(), vp.onTimeOffset(), vp.onTimeUserOffset(),
+                                 vp.offTimeType(), vp.offTimeOffset(), vp.offTimeUserOffset()));
+                              }
                         }
                   }
             }
