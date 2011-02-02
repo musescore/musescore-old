@@ -2103,7 +2103,7 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","follow song"),
          0,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","F"),
+         QT_TRANSLATE_NOOP("action","Follow Song"),
          QT_TRANSLATE_NOOP("action","Follow Song")
          ),
       Shortcut(
