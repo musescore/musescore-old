@@ -3353,6 +3353,17 @@ void MusicXml::xmlClef(QDomElement e, int staffIdx, Measure* measure)
             else
                   domError(ee);
             }
+      //some software (Primus) don't include line and assume some default
+      // it's permitted by MusicXML 2.0 XSD
+      if(line == -1) {
+          if(c == "G")
+                line = 2;
+          else if (c == "F")
+                line = 4;
+          else if (c == "C")
+                line = 3;
+          }
+      
       if (c == "G" && i == 0 && line == 2)
             clef = CLEF_G;
       else if (c == "G" && i == 1 && line == 2)
