@@ -1223,14 +1223,14 @@ void Note::propertyAction(ScoreView* viewer, const QString& s)
                               score()->undoChangeUserMirror(note, DirectionH(vp.getUserMirror()));
                         if (vp.getHeadType() != note->headType() || vp.getHeadGroup() != note->headGroup())
                               score()->undo()->push(new ChangeNoteHead(note, vp.getHeadGroup(), vp.getHeadType()));
-                        }
-                  if (veloType() != vp.veloType() || veloOffset() != vp.veloOffset()
-                     || onTimeUserOffset() != vp.onTimeUserOffset()
-                     || offTimeUserOffset() != vp.offTimeUserOffset()) {
-                        score()->undo()->push(new ChangeNoteProperties(this,
-                           vp.veloType(), vp.veloOffset(),
-                           vp.onTimeUserOffset(),
-                           vp.offTimeUserOffset()));
+                        if (veloType() != vp.veloType() || veloOffset() != vp.veloOffset()
+                        || onTimeUserOffset() != vp.onTimeUserOffset()
+                        || offTimeUserOffset() != vp.offTimeUserOffset()) {
+                              score()->undo()->push(new ChangeNoteProperties(this,
+                                 vp.veloType(), vp.veloOffset(),
+                                 vp.onTimeUserOffset(),
+                                 vp.offTimeUserOffset()));
+                              }
                         }
                   }
             }
