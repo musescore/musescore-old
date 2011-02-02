@@ -14,7 +14,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MuseScore needs your permission...</string>
+   <string>Ready?</string>
   </property>
   <property name="modal">
    <bool>true</bool>
