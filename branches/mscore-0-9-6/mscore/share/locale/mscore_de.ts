@@ -16,26 +16,26 @@
         <translation>Revision: 628</translation>
     </message>
     <message utf8="true">
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Visit &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; for new versions and more information.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Support MuseScore with &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/en/donate&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;your donation&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Visit &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; for new versions and more information.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Support MuseScore with &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;your donation&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Copyright &lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;©&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Besuchen Sie &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; für die neueste Version und weitere Informationen.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Unterstützen Sie MuseScore mit &lt;/span&gt;&lt;a href=&quot;http://musescore.org/de/spenden&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;Ihrer Spende&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;.
-
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Copyright &lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;©&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; 1999-2011 Werner Schweer und Andere. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Veröffentlicht unter der GNU General Public Licence (GPL)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;&#13;
+&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;&#13;
+p, li { white-space: pre-wrap; }&#13;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Besuchen Sie &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; für die neueste Version und weitere Informationen.&lt;/span&gt;&lt;/p&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Unterstützen Sie MuseScore mit &lt;/span&gt;&lt;a href="http://musescore.org/de/spenden"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;Ihrer Spende&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;.&#13;
+&#13;
+&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2011 Werner Schweer und Andere. &lt;/span&gt;&lt;/p&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Veröffentlicht unter der GNU General Public Licence (GPL)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -1856,7 +1856,7 @@ space unit</extracomment>
         <translation>Linker Rand Start Wiederholung</translation>
     </message>
     <message>
-        <source>Show repeat bar tips (&quot;winged&quot; repeats)</source>
+        <source>Show repeat bar tips ("winged" repeats)</source>
         <translation>Wiederholungstaktstriche mit Flügeln</translation>
     </message>
     <message>
@@ -3293,13 +3293,13 @@ fehlgeschlagen: </translation>
         <translation>Keine Partitur</translation>
     </message>
     <message>
-        <source>Save changes to the score &quot;%1&quot;
+        <source>Save changes to the score "%1"
 before closing?</source>
-        <translation>Änderungen der Partitur  &quot;%1&quot; speichern?</translation>
+        <translation>Änderungen der Partitur  "%1" speichern?</translation>
     </message>
     <message>
-        <source></source>
-        <translation></translation>
+        <source/>
+        <translation/>
     </message>
     <message>
         <source>Ottava</source>
@@ -3412,10 +3412,10 @@ before closing?</source>
     <message>
         <source>
 
-From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.</source>
+From the "Help" menu try choosing "Online Handbook" instead.</source>
         <translation>
 
-Versuche im &quot;Hilfe&quot;-Menü das &quot;Online-Handbuch&quot; aufzurufen.</translation>
+Versuche im "Hilfe"-Menü das "Online-Handbuch" aufzurufen.</translation>
     </message>
     <message>
         <source>MuseScore handbook not found at: 
@@ -3615,8 +3615,8 @@ Versuche im &quot;Hilfe&quot;-Menü das &quot;Online-Handbuch&quot; aufzurufen.<
         <source>The previous session quit unexpectedly.
 
 Restore session?</source>
-        <translation>Die letzte Sitzung wurde unerwartet beendet.
-
+        <translation>Die letzte Sitzung wurde unerwartet beendet.&#13;
+&#13;
 Sitzung wiederherstellen?</translation>
     </message>
     <message>
@@ -3643,14 +3643,14 @@ Sitzung wiederherstellen?</translation>
         <source>Script
 %1
 is incompatible with current interface</source>
-        <translation>Skript
-%1
+        <translation>Skript&#13;
+%1&#13;
 inkompatibel mit derzeitiger Schnittstelle</translation>
     </message>
     <message>
         <source>MuseScore is too old to run script
 %1</source>
-        <translation>MuseScore ist zu alt um Skript
+        <translation>MuseScore ist zu alt um Skript&#13;
 %1 laufen zu lassen</translation>
     </message>
     <message>
@@ -3659,10 +3659,10 @@ inkompatibel mit derzeitiger Schnittstelle</translation>
     </message>
     <message>
         <source>Error loading plugin
-&quot;%1&quot; line %2:
+"%1" line %2:
 %3</source>
-        <translation>Fehler beim Laden des Plugins
-&quot;%1&quot; Zeile %2:
+        <translation>Fehler beim Laden des Plugins&#13;
+"%1" Zeile %2:&#13;
 %3</translation>
     </message>
     <message>
@@ -4789,7 +4789,7 @@ in Pixel (größerer Wert gleich größerer Radius)</translation>
         <source>No note selected:
 Please select a single note and retry operation
 </source>
-        <translation>Es ist keine Note ausgewählt:
+        <translation>Es ist keine Note ausgewählt:&#13;
 Bitte wählen Sie eine Note aus und wiederholen die Operation.
 </translation>
     </message>
@@ -4797,7 +4797,7 @@ Bitte wählen Sie eine Note aus und wiederholen die Operation.
         <source>No note or rest selected:
 Please select a single note or rest and retry operation
 </source>
-        <translation>Es ist keine Note oder Pause ausgewählt:
+        <translation>Es ist keine Note oder Pause ausgewählt:&#13;
 Bitte wählen Sie eine Note oder Pause aus und wiederholen Sie den Vorgang.
 </translation>
     </message>
@@ -5016,7 +5016,7 @@ Bitte wählen Sie eine Note oder Pause aus und wiederholen Sie den Vorgang.
         <source>No staves found:
 please use the instruments dialog to
 first create some staves</source>
-        <translation>Keine Notenzeilen gefunden!
+        <translation>Keine Notenzeilen gefunden!&#13;
 Zum Einrichten einer Notenzeile zuerst ein Instrument (Instrumentendialog) wählen, dann mindestens einen Takt anlegen.</translation>
     </message>
     <message>
@@ -5038,7 +5038,7 @@ fehlgeschlagen: </translation>
     <message>
         <source>No Measure selected:
 please select a measure and try again</source>
-        <translation>Kein Takt ausgewählt:
+        <translation>Kein Takt ausgewählt:&#13;
 Bitte zuerst Takt wählen und dann nochmal probieren</translation>
     </message>
     <message>
@@ -5192,9 +5192,9 @@ Bitte zuerst Takt wählen und dann nochmal probieren</translation>
 %1 
 
 Try saving to a different location.</source>
-        <translation>Die folgende Datei ist gesperrt:
-%1
-
+        <translation>Die folgende Datei ist gesperrt:&#13;
+%1&#13;
+&#13;
 Wählen Sie bitte einen anderen Ort zum Speichern.</translation>
     </message>
     <message>
@@ -5385,7 +5385,7 @@ Wählen Sie bitte einen anderen Ort zum Speichern.</translation>
     <message>
         <source>Init audio driver failed.
 Sequencer will be disabled.</source>
-        <translation>Start des Audio Treibers fehlgeschlagen.
+        <translation>Start des Audio Treibers fehlgeschlagen.&#13;
 Sequenzer wird abgeschaltet.</translation>
     </message>
     <message>
@@ -5395,20 +5395,20 @@ Sequenzer wird abgeschaltet.</translation>
     <message>
         <source>No SoundFont configured
 Playback will be disabled.</source>
-        <translation>Kein Klangmuster eingerichtet
+        <translation>Kein Klangmuster eingerichtet&#13;
 Abspielen nicht möglich!</translation>
     </message>
     <message>
         <source>Loading SoundFont
-&quot;%1&quot;
+"%1"
 failed. Playback will be disabled.
 
 Go to Display &gt; Synthesizer 
 and check that the file location is correct</source>
-        <translation>Klangmuster laden
-&quot;%1&quot;
-abgebrochen. Abspielen nicht möglich.
-
+        <translation>Klangmuster laden&#13;
+"%1"&#13;
+abgebrochen. Abspielen nicht möglich.&#13;
+&#13;
 Überprüfe die Pfadeinstellungen: ANSICHT - Synthesizer!</translation>
     </message>
 </context>
@@ -6242,14 +6242,14 @@ abgebrochen. Abspielen nicht möglich.
         <translation>Takte:</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Hint: you can also add or remove measures after creation of the score.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Hinweis: Takte können auch nach Anlegen der Partitur hinzugefügt oder entfernt werden.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Hint: you can also add or remove measures after creation of the score.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;&#13;
+p, li { white-space: pre-wrap; }&#13;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Hinweis: Takte können auch nach Anlegen der Partitur hinzugefügt oder entfernt werden.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Pickup Measure</source>
@@ -6591,8 +6591,8 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>UpdateChecker</name>
     <message>
-        <source>An update for MuseScore is available: &lt;a href=&quot;%1&quot;&gt;MuseScore %2 r.%3&lt;/a&gt;</source>
-        <translation>Eine neue Version von MuseScore ist verfügbar: &lt;a href=&quot;%1&quot;&gt;MuseScore %2 r.%3&lt;/a&gt;</translation>
+        <source>An update for MuseScore is available: &lt;a href="%1"&gt;MuseScore %2 r.%3&lt;/a&gt;</source>
+        <translation>Eine neue Version von MuseScore ist verfügbar: &lt;a href="%1"&gt;MuseScore %2 r.%3&lt;/a&gt;</translation>
     </message>
     <message>
         <source>Update Available</source>
@@ -8989,7 +8989,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Cannot read this score:
 your version of MuseScore is too old.</source>
-        <translation>Diese Noten können nicht gelesen werden:
+        <translation>Diese Noten können nicht gelesen werden:&#13;
 Du verwendest eine zu alte Programmversion.</translation>
     </message>
 </context>
@@ -9100,19 +9100,19 @@ Du verwendest eine zu alte Programmversion.</translation>
         <translation>Achtelpause</translation>
     </message>
     <message>
-        <source>16&apos; rest</source>
+        <source>16' rest</source>
         <translation>16tel-Pause</translation>
     </message>
     <message>
-        <source>32&apos; rest</source>
+        <source>32' rest</source>
         <translation>32tel-Pause</translation>
     </message>
     <message>
-        <source>64&apos; rest</source>
+        <source>64' rest</source>
         <translation>64tel-Pause</translation>
     </message>
     <message>
-        <source>128&apos; rest</source>
+        <source>128' rest</source>
         <translation>128tel-Pause</translation>
     </message>
     <message>

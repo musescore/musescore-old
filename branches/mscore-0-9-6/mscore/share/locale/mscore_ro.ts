@@ -16,37 +16,37 @@
         <translation>Revizie: 628</translation>
     </message>
     <message utf8="true">
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Visit &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; for new versions and more information.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Support MuseScore with &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/en/donate&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;your donation&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Visit &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; for new versions and more information.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Support MuseScore with &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;your donation&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Copyright &lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;©&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-
-&lt;html&gt;
-&lt;head&gt;
-&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;
-&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;
-&lt;/head&gt;
-
-&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Vizitaţi &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; pentru cea mai recentă versiune şi mai multe detalii.&lt;/span&gt;&lt;/p&gt;
-
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Sprijiniţi MuseScore cu &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/en/donate&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;o donaţie&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
-
-
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
-
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Toate drepturile rezervate &lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;©&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; 1999-2011 Werner Schweer şi alţii. &lt;/span&gt;&lt;/p&gt;
-
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Publicat sub Licenţa Publică Generală GNU&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;&#13;
+&#13;
+&lt;html&gt;&#13;
+&lt;head&gt;&#13;
+&lt;meta name="qrichtext" content="1" /&gt;&#13;
+&lt;style type="text/css"&gt;&#13;
+p, li { white-space: pre-wrap; }&#13;
+&lt;/style&gt;&#13;
+&lt;/head&gt;&#13;
+&#13;
+&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Vizitaţi &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; pentru cea mai recentă versiune şi mai multe detalii.&lt;/span&gt;&lt;/p&gt;&#13;
+&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Sprijiniţi MuseScore cu &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;o donaţie&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&#13;
+&#13;
+&#13;
+&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;&#13;
+&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Toate drepturile rezervate &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2011 Werner Schweer şi alţii. &lt;/span&gt;&lt;/p&gt;&#13;
+&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Publicat sub Licenţa Publică Generală GNU&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -240,7 +240,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Extension</source>
-        <translatorcomment>didn&apos;t figure out exactly what this refers to</translatorcomment>
+        <translatorcomment>didn't figure out exactly what this refers to</translatorcomment>
         <translation>Tipul acordului (major, minor, septimă, nonă, etc.)</translation>
     </message>
     <message>
@@ -1715,7 +1715,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>interval</source>
-        <translation>arată numărul măsurii pentru fiecare al &quot;n&quot;-lea  sistem</translation>
+        <translation>arată numărul măsurii pentru fiecare al "n"-lea  sistem</translation>
     </message>
     <message>
         <source>spaces</source>
@@ -1871,7 +1871,7 @@ space unit</extracomment>
         <translation>Margine în stânga barei de repetiţie</translation>
     </message>
     <message>
-        <source>Show repeat bar tips (&quot;winged&quot; repeats)</source>
+        <source>Show repeat bar tips ("winged" repeats)</source>
         <translation>Adaugă acolade în jurul semnelor de repetiţie</translation>
     </message>
     <message>
@@ -2264,7 +2264,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>0</source>
-        <translation></translation>
+        <translation/>
     </message>
     <message>
         <source>Add</source>
@@ -2334,7 +2334,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>0</source>
-        <translation></translation>
+        <translation/>
     </message>
     <message>
         <source>Add</source>
@@ -2938,7 +2938,7 @@ eroare: </translation>
     </message>
     <message>
         <source>Concert Pitch</source>
-        <translation>Partitura în &quot;Do&quot;</translation>
+        <translation>Partitura în "Do"</translation>
     </message>
     <message>
         <source>Search</source>
@@ -2949,9 +2949,9 @@ eroare: </translation>
         <translation>MuseScore</translation>
     </message>
     <message>
-        <source>Save changes to the score &quot;%1&quot;
+        <source>Save changes to the score "%1"
 before closing?</source>
-        <translation>Salvezi modificările aduse partiturii &quot;%1&quot;
+        <translation>Salvezi modificările aduse partiturii "%1"&#13;
 înainte de închidere?</translation>
     </message>
     <message>
@@ -3308,7 +3308,7 @@ before closing?</source>
     </message>
     <message>
         <source>MuseScore: Open Help</source>
-        <translation>MuseScore: Deschidere &quot;Ghid de Utilizare&quot;</translation>
+        <translation>MuseScore: Deschidere "Ghid de Utilizare"</translation>
     </message>
     <message>
         <source>no score</source>
@@ -3416,7 +3416,7 @@ before closing?</source>
     </message>
     <message>
         <source>Ottava</source>
-        <translation>Marcaje &quot;ottava&quot; (8va, 8vb, etc.)</translation>
+        <translation>Marcaje "ottava" (8va, 8vb, etc.)</translation>
     </message>
     <message>
         <source>Online Handbook</source>
@@ -3431,10 +3431,10 @@ before closing?</source>
     <message>
         <source>
 
-From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.</source>
+From the "Help" menu try choosing "Online Handbook" instead.</source>
         <translation>
 
-Ca alternativă, încercaţi să alegeţi &quot;Ghid de Utilizare pe Internet&quot; din meniul &quot;Ajutor&quot;.</translation>
+Ca alternativă, încercaţi să alegeţi "Ghid de Utilizare pe Internet" din meniul "Ajutor".</translation>
     </message>
     <message>
         <source>Grace Notes</source>
@@ -3628,8 +3628,8 @@ Ca alternativă, încercaţi să alegeţi &quot;Ghid de Utilizare pe Internet&qu
         <source>The previous session quit unexpectedly.
 
 Restore session?</source>
-        <translation>Sesiunea anterioară a fost întreruptă în mod neaşteptat.
-
+        <translation>Sesiunea anterioară a fost întreruptă în mod neaşteptat.&#13;
+&#13;
 Restaurez sesiunea?</translation>
     </message>
     <message>
@@ -3656,14 +3656,14 @@ Restaurez sesiunea?</translation>
         <source>Script
 %1
 is incompatible with current interface</source>
-        <translation>Scriptul
-%1
+        <translation>Scriptul&#13;
+%1&#13;
 nu este compatibil cu interfaţa curentă</translation>
     </message>
     <message>
         <source>MuseScore is too old to run script
 %1</source>
-        <translation>Această versiune a programului MuseScore este prea veche pentru a rula scriptul
+        <translation>Această versiune a programului MuseScore este prea veche pentru a rula scriptul&#13;
 %1</translation>
     </message>
     <message>
@@ -3672,10 +3672,10 @@ nu este compatibil cu interfaţa curentă</translation>
     </message>
     <message>
         <source>Error loading plugin
-&quot;%1&quot; line %2:
+"%1" line %2:
 %3</source>
-        <translation>Nu s-a putut încărca modulul
-&quot;%1&quot; linia %2:
+        <translation>Nu s-a putut încărca modulul&#13;
+"%1" linia %2:&#13;
 %3</translation>
     </message>
     <message>
@@ -4496,7 +4496,7 @@ nu este compatibil cu interfaţa curentă</translation>
     </message>
     <message>
         <source>If you use the standard input method then the created note pitch depends on the current key signature. For example pressing F in G major creates an F sharp. If the alternate input method is enabled then the current key signature is irrelevant. For example pressing F always creates an F natural.</source>
-        <translation>Dacă folosiţi metoda de intrare standard, nota creată depinde de tonalitatea curentă. De exemplu, dacă tastaţi &apos;F&apos;  în Sol Major, veţi insera nota &apos;fa diez&apos;. Dacă metoda de intrare alternativă este pornită, atunci tonalitatea curentă este irelevantă. De exemplu &apos;F&apos; întotdeauna inserează nota &apos;fa natural&apos;.</translation>
+        <translation>Dacă folosiţi metoda de intrare standard, nota creată depinde de tonalitatea curentă. De exemplu, dacă tastaţi 'F'  în Sol Major, veţi insera nota 'fa diez'. Dacă metoda de intrare alternativă este pornită, atunci tonalitatea curentă este irelevantă. De exemplu 'F' întotdeauna inserează nota 'fa natural'.</translation>
     </message>
     <message>
         <source>Expand Repeats</source>
@@ -4713,7 +4713,7 @@ nu este compatibil cu interfaţa curentă</translation>
     </message>
     <message utf8="true">
         <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
-        <translation>Înlocuieşte (C) cu semnul © (va funcţiona doar pentru secţiunea &quot;drepturi de autor&quot;)</translation>
+        <translation>Înlocuieşte (C) cu semnul © (va funcţiona doar pentru secţiunea "drepturi de autor")</translation>
     </message>
     <message>
         <source>Style Used for Import</source>
@@ -4801,7 +4801,7 @@ nu este compatibil cu interfaţa curentă</translation>
         <source>No note selected:
 Please select a single note and retry operation
 </source>
-        <translation>Nicio notă selectată:
+        <translation>Nicio notă selectată:&#13;
 Selectaţi o (singură) notă şi reluaţi operaţia
 </translation>
     </message>
@@ -4809,7 +4809,7 @@ Selectaţi o (singură) notă şi reluaţi operaţia
         <source>No note or rest selected:
 Please select a single note or rest and retry operation
 </source>
-        <translation>Nicio notă/pauză selectată:
+        <translation>Nicio notă/pauză selectată:&#13;
 Selectaţi o (singură) notă sau pauză şi reluaţi operaţia
 </translation>
     </message>
@@ -5024,14 +5024,14 @@ Selectaţi o (singură) notă sau pauză şi reluaţi operaţia
         <source>No staves found:
 please use the instruments dialog to
 first create some staves</source>
-        <translation>Nu s-a găsit niciun portativ:
-vă rugăm folosiţi fereastra de dialog &quot;instrumente&quot;
+        <translation>Nu s-a găsit niciun portativ:&#13;
+vă rugăm folosiţi fereastra de dialog "instrumente"&#13;
 pentru a crea unul sau mai multe portative</translation>
     </message>
     <message>
         <source>No Measure selected:
 please select a measure and try again</source>
-        <translation>Nu este selectat nicio măsură:
+        <translation>Nu este selectat nicio măsură:&#13;
 vă rugăm selectaşi o măsură şi reluaţi operaţia</translation>
     </message>
     <message>
@@ -5205,9 +5205,9 @@ eroare: </translation>
 %1 
 
 Try saving to a different location.</source>
-        <translation>Următorul fişier este blocat pentru scriere: 
-%1 
-
+        <translation>Următorul fişier este blocat pentru scriere: &#13;
+%1 &#13;
+&#13;
 Încercaţi să salvaţi în alt fişier.</translation>
     </message>
     <message>
@@ -5398,7 +5398,7 @@ Try saving to a different location.</source>
     <message>
         <source>Init audio driver failed.
 Sequencer will be disabled.</source>
-        <translation>Nu s-a putut porni serverul audio.
+        <translation>Nu s-a putut porni serverul audio.&#13;
 Interpretarea partiturii nu va fi disponibilă.</translation>
     </message>
     <message>
@@ -5408,21 +5408,21 @@ Interpretarea partiturii nu va fi disponibilă.</translation>
     <message>
         <source>No SoundFont configured
 Playback will be disabled.</source>
-        <translation>Nu a fost configurată nicio bancă de sunete
+        <translation>Nu a fost configurată nicio bancă de sunete&#13;
 Redarea nu va fi disponibilă.</translation>
     </message>
     <message>
         <source>Loading SoundFont
-&quot;%1&quot;
+"%1"
 failed. Playback will be disabled.
 
 Go to Display &gt; Synthesizer 
 and check that the file location is correct</source>
-        <translation>Încărcarea băncii de sunete
-&quot;%1&quot;
-a eşuat. Redarea nu va fi disponibilă.
-
-Accesaţi &quot;Afişează&quot; &gt; &quot;Sintetizator&quot; din meniu
+        <translation>Încărcarea băncii de sunete&#13;
+"%1"&#13;
+a eşuat. Redarea nu va fi disponibilă.&#13;
+&#13;
+Accesaţi "Afişează" &gt; "Sintetizator" din meniu&#13;
 şi verificaţi calea către fişier, dacă este corectă.</translation>
     </message>
 </context>
@@ -6264,14 +6264,14 @@ Accesaţi &quot;Afişează&quot; &gt; &quot;Sintetizator&quot; din meniu
         <translation>Măsuri:</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Hint: you can also add or remove measures after creation of the score.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Pont: puteţi să introduceţi măsuri şi după crearea partiturii..&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Hint: you can also add or remove measures after creation of the score.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;&#13;
+p, li { white-space: pre-wrap; }&#13;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Pont: puteţi să introduceţi măsuri şi după crearea partiturii..&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -6605,8 +6605,8 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>UpdateChecker</name>
     <message>
-        <source>An update for MuseScore is available: &lt;a href=&quot;%1&quot;&gt;MuseScore %2 r.%3&lt;/a&gt;</source>
-        <translation>Este disponibilă o versiune nouă a programului  MuseScore : &lt;a href=&quot;%1&quot;&gt;MuseScore %2 r.%3&lt;/a&gt;</translation>
+        <source>An update for MuseScore is available: &lt;a href="%1"&gt;MuseScore %2 r.%3&lt;/a&gt;</source>
+        <translation>Este disponibilă o versiune nouă a programului  MuseScore : &lt;a href="%1"&gt;MuseScore %2 r.%3&lt;/a&gt;</translation>
     </message>
     <message>
         <source>Update Available</source>
@@ -9003,7 +9003,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Cannot read this score:
 your version of MuseScore is too old.</source>
-        <translation>Partitura nu se poate citi:
+        <translation>Partitura nu se poate citi:&#13;
 versiunea dumneavoastră de MuseScore este prea veche.</translation>
     </message>
 </context>
@@ -9114,19 +9114,19 @@ versiunea dumneavoastră de MuseScore este prea veche.</translation>
         <translation>pauză de optime</translation>
     </message>
     <message>
-        <source>16&apos; rest</source>
+        <source>16' rest</source>
         <translation>pauză de şaisprezecime</translation>
     </message>
     <message>
-        <source>32&apos; rest</source>
+        <source>32' rest</source>
         <translation>pauză de treizecidoime</translation>
     </message>
     <message>
-        <source>64&apos; rest</source>
+        <source>64' rest</source>
         <translation>pauză de şaizecipătrime</translation>
     </message>
     <message>
-        <source>128&apos; rest</source>
+        <source>128' rest</source>
         <translation>pauză de osutădouăzecioptime</translation>
     </message>
     <message>
