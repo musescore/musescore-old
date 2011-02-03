@@ -17,26 +17,26 @@
         <translation>Révision : 2381</translation>
     </message>
     <message utf8="true">
-        <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
+        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Visit &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; for new versions and more information.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Support MuseScore with &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;your donation&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Visit &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; for new versions and more information.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Support MuseScore with &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/en/donate&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;your donation&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;&#13;
-&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;&#13;
-p, li { white-space: pre-wrap; }&#13;
-&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Visitez &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; pour les nouvelles versions et plus d'information.&lt;/span&gt;&lt;/p&gt;&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Supportez MuseScore en faisant un &lt;/span&gt;&lt;a href="http://www.musescore.org/fr/faire-un-don"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;don&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&#13;
-&#13;
-&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2011 Werner Schweer et autres Contributeurs. &lt;/span&gt;&lt;/p&gt;&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Publié sous GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Copyright &lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;©&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Visitez &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; pour les nouvelles versions et plus d&apos;information.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Supportez MuseScore en faisant un &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/fr/faire-un-don&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;don&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Copyright &lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;©&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; 1999-2011 Werner Schweer et autres Contributeurs. &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Publié sous GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -65,14 +65,14 @@ p, li { white-space: pre-wrap; }&#13;
     <name>Articulation</name>
     <message>
         <source>Articulation Properties...</source>
-        <translation>Propriétés de l'articulation...</translation>
+        <translation>Propriétés de l&apos;articulation...</translation>
     </message>
 </context>
 <context>
     <name>ArticulationProperties</name>
     <message>
         <source>MuseScore: Articulations Properties</source>
-        <translation>MuseScore : Propriétés de l'articulation</translation>
+        <translation>MuseScore : Propriétés de l&apos;articulation</translation>
     </message>
     <message>
         <source>Channel</source>
@@ -199,7 +199,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>(no accidental)</source>
-        <translation>(sans d'altération)</translation>
+        <translation>(sans d&apos;altération)</translation>
     </message>
     <message>
         <source>A</source>
@@ -823,7 +823,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>MuseScore: Harmony Properties</source>
-        <translation>MuseScore : Propriétés de l'accord</translation>
+        <translation>MuseScore : Propriétés de l&apos;accord</translation>
     </message>
     <message>
         <source>Type</source>
@@ -842,14 +842,14 @@ p, li { white-space: pre-wrap; }&#13;
     <name>ChordList</name>
     <message>
         <source>Write Chord Description failed: </source>
-        <translation>Echec de l'écriture du fichier de description des noms d'accords : </translation>
+        <translation>Echec de l&apos;écriture du fichier de description des noms d&apos;accords : </translation>
     </message>
 </context>
 <context>
     <name>ChordPropertyBase</name>
     <message>
         <source>Chord Properties</source>
-        <translation>Propriétés de l'accord</translation>
+        <translation>Propriétés de l&apos;accord</translation>
     </message>
     <message>
         <source>small</source>
@@ -1056,7 +1056,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Chord Description File:</source>
-        <translation>Fichier de description des noms d'accords</translation>
+        <translation>Fichier de description des noms d&apos;accords</translation>
     </message>
     <message>
         <source>...</source>
@@ -1076,7 +1076,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>MuseScore: Chord Style Editor</source>
-        <translation>MuseScore: Editeur de style d'accords</translation>
+        <translation>MuseScore: Editeur de style d&apos;accords</translation>
     </message>
 </context>
 <context>
@@ -1208,7 +1208,7 @@ failed: </source>
     </message>
     <message>
         <source>Write File failed: </source>
-        <translation>Echec de l'écriture du fichier : </translation>
+        <translation>Echec de l&apos;écriture du fichier : </translation>
     </message>
 </context>
 <context>
@@ -1306,11 +1306,11 @@ failed: </source>
     <name>EditInstrumentBase</name>
     <message>
         <source>MuseScore: Edit Instrument Properties</source>
-        <translation>MuseScore : Editer les propriétés de l'instrument</translation>
+        <translation>MuseScore : Editer les propriétés de l&apos;instrument</translation>
     </message>
     <message>
         <source>Instrument Properties</source>
-        <translation>Propriétés de l'instrument</translation>
+        <translation>Propriétés de l&apos;instrument</translation>
     </message>
     <message>
         <source>Name</source>
@@ -1369,11 +1369,11 @@ failed: </source>
     </message>
     <message>
         <source>Long Instrument Name:</source>
-        <translation>Nom long de l'instrument :</translation>
+        <translation>Nom long de l&apos;instrument :</translation>
     </message>
     <message>
         <source>Short Instrument Name:</source>
-        <translation>Nom court de l'instrument :</translation>
+        <translation>Nom court de l&apos;instrument :</translation>
     </message>
     <message>
         <source>Use Drumset</source>
@@ -1525,7 +1525,7 @@ failed: </source>
     </message>
     <message>
         <source>Change Instrument...</source>
-        <translation>Changer d'instrument ...</translation>
+        <translation>Changer d&apos;instrument ...</translation>
     </message>
     <message>
         <source>+octave</source>
@@ -1540,7 +1540,7 @@ failed: </source>
     </message>
     <message>
         <source>Anchor</source>
-        <translation>Point d'ancrage</translation>
+        <translation>Point d&apos;ancrage</translation>
     </message>
     <message>
         <source>TopStaff</source>
@@ -1632,7 +1632,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Create courtesy time signatures</source>
-        <translation>Créer les rappels d'indications de mesures</translation>
+        <translation>Créer les rappels d&apos;indications de mesures</translation>
     </message>
     <message>
         <source>spaces</source>
@@ -1757,7 +1757,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Create courtesy key signatures</source>
-        <translation>Créer les rappels d'armatures</translation>
+        <translation>Créer les rappels d&apos;armatures</translation>
     </message>
     <message>
         <source>Fix Number of Measures/System:</source>
@@ -1793,7 +1793,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Akkolade distance</source>
-        <translation>Distance dans l'accolade</translation>
+        <translation>Distance dans l&apos;accolade</translation>
     </message>
     <message>
         <source>System distance</source>
@@ -1837,11 +1837,11 @@ space unit</extracomment>
     </message>
     <message>
         <source>Key sig. left margin</source>
-        <translation>Marge à gauche de l'armature</translation>
+        <translation>Marge à gauche de l&apos;armature</translation>
     </message>
     <message>
         <source>Time sig. left margin</source>
-        <translation>Marge gauche de l'indic. de mesure</translation>
+        <translation>Marge gauche de l&apos;indic. de mesure</translation>
     </message>
     <message>
         <source>Clef-key distance</source>
@@ -1856,8 +1856,8 @@ space unit</extracomment>
         <translation>Marge à gauche pour début de répétition</translation>
     </message>
     <message>
-        <source>Show repeat bar tips ("winged" repeats)</source>
-        <translation>Afficher les "ailes" des barres de répétition</translation>
+        <source>Show repeat bar tips (&quot;winged&quot; repeats)</source>
+        <translation>Afficher les &quot;ailes&quot; des barres de répétition</translation>
     </message>
     <message>
         <source>Progression</source>
@@ -1869,11 +1869,11 @@ space unit</extracomment>
     </message>
     <message>
         <source>Accidental note distance</source>
-        <translation>Distance entre la note et l'altération</translation>
+        <translation>Distance entre la note et l&apos;altération</translation>
     </message>
     <message>
         <source>Accidental distance</source>
-        <translation>Distance de l'altération</translation>
+        <translation>Distance de l&apos;altération</translation>
     </message>
     <message>
         <source>Note dot distance</source>
@@ -1945,11 +1945,11 @@ space unit</extracomment>
     </message>
     <message>
         <source>Articulation - note head distance</source>
-        <translation>Distance de la tête de note à l'articulation</translation>
+        <translation>Distance de la tête de note à l&apos;articulation</translation>
     </message>
     <message>
         <source>Articulation - note stem distance</source>
-        <translation>Distance de la hampe de note à l'articulation</translation>
+        <translation>Distance de la hampe de note à l&apos;articulation</translation>
     </message>
     <message>
         <source>Articulation - articulation distance</source>
@@ -2127,7 +2127,7 @@ space unit</extracomment>
     <name>Harmony</name>
     <message>
         <source>Harmony Properties...</source>
-        <translation>Propriétés de l'accord...</translation>
+        <translation>Propriétés de l&apos;accord...</translation>
     </message>
     <message>
         <source>Text Properties...</source>
@@ -2142,7 +2142,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Image Properties...</source>
-        <translation>Propriétés de l'image...</translation>
+        <translation>Propriétés de l&apos;image...</translation>
     </message>
 </context>
 <context>
@@ -2153,7 +2153,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Image Properties</source>
-        <translation>Propriétés de l'image</translation>
+        <translation>Propriétés de l&apos;image</translation>
     </message>
 </context>
 <context>
@@ -2164,7 +2164,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Shortest note on import:</source>
-        <translation>Note la plus courte pour l'import :</translation>
+        <translation>Note la plus courte pour l&apos;import :</translation>
     </message>
     <message>
         <source>1/4</source>
@@ -2218,7 +2218,7 @@ space unit</extracomment>
     <name>Inspector</name>
     <message>
         <source>MuseScore: Object Inspector</source>
-        <translation>MuseScore : Inspecteur d'objet</translation>
+        <translation>MuseScore : Inspecteur d&apos;objet</translation>
     </message>
 </context>
 <context>
@@ -2300,7 +2300,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>show more</source>
-        <translation>Afficher plus d'instruments</translation>
+        <translation>Afficher plus d&apos;instruments</translation>
     </message>
 </context>
 <context>
@@ -2358,11 +2358,11 @@ space unit</extracomment>
     </message>
     <message>
         <source>Instrument List</source>
-        <translation>Liste d'instrument</translation>
+        <translation>Liste d&apos;instrument</translation>
     </message>
     <message>
         <source>show more</source>
-        <translation>Afficher plus d'instruments</translation>
+        <translation>Afficher plus d&apos;instruments</translation>
     </message>
 </context>
 <context>
@@ -2386,7 +2386,7 @@ space unit</extracomment>
     <message>
         <source>Open Instruments File
 </source>
-        <translation>Ouvrir un fichier d'instruments
+        <translation>Ouvrir un fichier d&apos;instruments
 </translation>
     </message>
     <message>
@@ -2397,7 +2397,7 @@ failed: </source>
     </message>
     <message>
         <source>MuseScore: Open Instruments file</source>
-        <translation>MuseScore : Ouvrir un fichier d'instruments</translation>
+        <translation>MuseScore : Ouvrir un fichier d&apos;instruments</translation>
     </message>
     <message>
         <source>MuseScore: Write Style</source>
@@ -2405,7 +2405,7 @@ failed: </source>
     </message>
     <message>
         <source>MuseScore: Load Instrument List</source>
-        <translation>MuseScore : Charger une liste d'instruments</translation>
+        <translation>MuseScore : Charger une liste d&apos;instruments</translation>
     </message>
     <message>
         <source>MuseScore Instruments (*.xml);;All files (*)</source>
@@ -2421,7 +2421,7 @@ failed: </source>
     </message>
     <message>
         <source>Write Style failed: </source>
-        <translation>Echec de l'écriture du style : </translation>
+        <translation>Echec de l&apos;écriture du style : </translation>
     </message>
 </context>
 <context>
@@ -2443,7 +2443,7 @@ failed: </source>
     </message>
     <message>
         <source>Play until:</source>
-        <translation>Jouer jusqu'à :</translation>
+        <translation>Jouer jusqu&apos;à :</translation>
     </message>
     <message>
         <source>Continue at:</source>
@@ -2466,7 +2466,7 @@ failed: </source>
     </message>
     <message>
         <source>add time signature to palette</source>
-        <translation>ajouter l'indication de la mesure à la  palette</translation>
+        <translation>ajouter l&apos;indication de la mesure à la  palette</translation>
     </message>
     <message>
         <source>Add</source>
@@ -2484,11 +2484,11 @@ failed: </source>
     <name>KeySig</name>
     <message>
         <source>Hide courtesy signature</source>
-        <translation>Masquer l'armature de précaution</translation>
+        <translation>Masquer l&apos;armature de précaution</translation>
     </message>
     <message>
         <source>Show courtesy signature</source>
-        <translation>Afficher l'armature de précaution</translation>
+        <translation>Afficher l&apos;armature de précaution</translation>
     </message>
     <message>
         <source>Hide naturals</source>
@@ -2754,7 +2754,7 @@ failed: </source>
     </message>
     <message>
         <source>nominal</source>
-        <translation>d'origine</translation>
+        <translation>d&apos;origine</translation>
     </message>
     <message>
         <source>/</source>
@@ -2863,11 +2863,11 @@ failed: </source>
     </message>
     <message>
         <source>Work Title:</source>
-        <translation>Titre de l'oeuvre :</translation>
+        <translation>Titre de l&apos;oeuvre :</translation>
     </message>
     <message>
         <source>Work Number:</source>
-        <translation>Numéro de l'oeuvre :</translation>
+        <translation>Numéro de l&apos;oeuvre :</translation>
     </message>
     <message>
         <source>Movement Title:</source>
@@ -3070,7 +3070,7 @@ failed: </source>
     </message>
     <message>
         <source>To Coda</source>
-        <translation>Jusqu'au Coda</translation>
+        <translation>Jusqu&apos;au Coda</translation>
     </message>
     <message>
         <source>Repeats</source>
@@ -3170,7 +3170,7 @@ failed: </source>
     </message>
     <message>
         <source>MuseScore: Open Help</source>
-        <translation>MuseScore : Ouvrir l'aide</translation>
+        <translation>MuseScore : Ouvrir l&apos;aide</translation>
     </message>
     <message>
         <source>note entry mode</source>
@@ -3234,7 +3234,7 @@ failed: </source>
     </message>
     <message>
         <source>Chordname</source>
-        <translation>Nom d'accord</translation>
+        <translation>Nom d&apos;accord</translation>
     </message>
     <message>
         <source>Repeat Text</source>
@@ -3289,17 +3289,17 @@ failed: </source>
         <translation>&amp;Fichier</translation>
     </message>
     <message>
-        <source/>
-        <translation/>
+        <source></source>
+        <translation></translation>
     </message>
     <message>
         <source>no score</source>
         <translation>aucune partition</translation>
     </message>
     <message>
-        <source>Save changes to the score "%1"
+        <source>Save changes to the score &quot;%1&quot;
 before closing?</source>
-        <translation>Enregistrer la partition "%1"
+        <translation>Enregistrer la partition &quot;%1&quot;
 avant de fermer ?</translation>
     </message>
     <message>
@@ -3419,10 +3419,10 @@ avant de fermer ?</translation>
     <message>
         <source>
 
-From the "Help" menu try choosing "Online Handbook" instead.</source>
+From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.</source>
         <translation>
 
-Essayez plutôt dans le menu " Aide "  " Manuel en ligne ".</translation>
+Essayez plutôt dans le menu &quot; Aide &quot;  &quot; Manuel en ligne &quot;.</translation>
     </message>
     <message>
         <source>Grace Notes</source>
@@ -3574,15 +3574,15 @@ Essayez plutôt dans le menu " Aide "  " Manuel en ligne ".</translation>
     </message>
     <message>
         <source>Start beam</source>
-        <translation>Début d'accroche</translation>
+        <translation>Début d&apos;accroche</translation>
     </message>
     <message>
         <source>Middle of beam</source>
-        <translation>Milieu d'accroche</translation>
+        <translation>Milieu d&apos;accroche</translation>
     </message>
     <message>
         <source>No beam</source>
-        <translation>Pas d'accroche</translation>
+        <translation>Pas d&apos;accroche</translation>
     </message>
     <message>
         <source>Start subbeam</source>
@@ -3616,8 +3616,8 @@ Essayez plutôt dans le menu " Aide "  " Manuel en ligne ".</translation>
         <source>The previous session quit unexpectedly.
 
 Restore session?</source>
-        <translation>La session précédente a été interrompue.&#13;
-&#13;
+        <translation>La session précédente a été interrompue.
+
 Restaurer la session?</translation>
     </message>
     <message>
@@ -3644,14 +3644,14 @@ Restaurer la session?</translation>
         <source>Script
 %1
 is incompatible with current interface</source>
-        <translation>Le plugin&#13;
-%1&#13;
-est incompatible avec l'interface actuelle</translation>
+        <translation>Le plugin
+%1
+est incompatible avec l&apos;interface actuelle</translation>
     </message>
     <message>
         <source>MuseScore is too old to run script
 %1</source>
-        <translation>Cette version de MuseScore est trop ancienne pour executer ce plugin&#13;
+        <translation>Cette version de MuseScore est trop ancienne pour executer ce plugin
 %1</translation>
     </message>
     <message>
@@ -3660,10 +3660,10 @@ est incompatible avec l'interface actuelle</translation>
     </message>
     <message>
         <source>Error loading plugin
-"%1" line %2:
+&quot;%1&quot; line %2:
 %3</source>
-        <translation>Erreur lors du chargement du plugin&#13;
-"%1" ligne %2:&#13;
+        <translation>Erreur lors du chargement du plugin
+&quot;%1&quot; ligne %2:
 %3</translation>
     </message>
     <message>
@@ -3765,7 +3765,7 @@ est incompatible avec l'interface actuelle</translation>
     </message>
     <message>
         <source>Define a set of instruments. Each instrument is represented by one or more staves</source>
-        <translation>Définir un ensemble d'instruments. Chaque instrument est représenté par une ou plusieurs portées</translation>
+        <translation>Définir un ensemble d&apos;instruments. Chaque instrument est représenté par une ou plusieurs portées</translation>
     </message>
 </context>
 <context>
@@ -3776,7 +3776,7 @@ est incompatible avec l'interface actuelle</translation>
     </message>
     <message>
         <source>Create Time Signature</source>
-        <translation>Créer l'indication de mesure</translation>
+        <translation>Créer l&apos;indication de mesure</translation>
     </message>
 </context>
 <context>
@@ -3798,7 +3798,7 @@ est incompatible avec l'interface actuelle</translation>
     </message>
     <message>
         <source>Select Key Signature:</source>
-        <translation>Sélectionner l'armature :</translation>
+        <translation>Sélectionner l&apos;armature :</translation>
     </message>
 </context>
 <context>
@@ -4003,14 +4003,14 @@ est incompatible avec l'interface actuelle</translation>
     </message>
     <message>
         <source>Enable Editing</source>
-        <translation>Activer l'édition</translation>
+        <translation>Activer l&apos;édition</translation>
     </message>
 </context>
 <context>
     <name>PaletteCellProperties</name>
     <message>
         <source>Chord Properties</source>
-        <translation>Propriétés de l'accord</translation>
+        <translation>Propriétés de l&apos;accord</translation>
     </message>
     <message>
         <source>Palette Cell Properties</source>
@@ -4057,7 +4057,7 @@ est incompatible avec l'interface actuelle</translation>
     </message>
     <message>
         <source>Element Offset</source>
-        <translation>Décalage de l'élément</translation>
+        <translation>Décalage de l&apos;élément</translation>
     </message>
     <message>
         <source>Scale:</source>
@@ -4159,11 +4159,11 @@ est incompatible avec l'interface actuelle</translation>
     </message>
     <message>
         <source>toolbar1</source>
-        <translation>barre d'outils 1</translation>
+        <translation>barre d&apos;outils 1</translation>
     </message>
     <message>
         <source>toolbar2</source>
-        <translation>barre d'outils 2</translation>
+        <translation>barre d&apos;outils 2</translation>
     </message>
 </context>
 <context>
@@ -4246,7 +4246,7 @@ est incompatible avec l'interface actuelle</translation>
     </message>
     <message>
         <source>Choose Background Wallpaper</source>
-        <translation>Choisir l'arrière plan</translation>
+        <translation>Choisir l&apos;arrière plan</translation>
     </message>
     <message>
         <source>default</source>
@@ -4258,7 +4258,7 @@ est incompatible avec l'interface actuelle</translation>
     </message>
     <message>
         <source>Choose Instrument List</source>
-        <translation>Choisir la liste d'instruments</translation>
+        <translation>Choisir la liste d&apos;instruments</translation>
     </message>
     <message>
         <source>Choose Starting Score</source>
@@ -4266,7 +4266,7 @@ est incompatible avec l'interface actuelle</translation>
     </message>
     <message>
         <source>Instrument List (*.xml)</source>
-        <translation>Liste d'instruments (*.xml)</translation>
+        <translation>Liste d&apos;instruments (*.xml)</translation>
     </message>
     <message>
         <source>MuseScore Files (*.mscz *.mscx *.msc);;All (*)</source>
@@ -4301,7 +4301,7 @@ est incompatible avec l'interface actuelle</translation>
     </message>
     <message>
         <source>show splash screen</source>
-        <translation>Afficher l'écran de démarrage</translation>
+        <translation>Afficher l&apos;écran de démarrage</translation>
     </message>
     <message>
         <source>Paths</source>
@@ -4309,7 +4309,7 @@ est incompatible avec l'interface actuelle</translation>
     </message>
     <message>
         <source>Instrument List:</source>
-        <translation>Liste d'instruments :</translation>
+        <translation>Liste d&apos;instruments :</translation>
     </message>
     <message>
         <source>Working Directory:</source>
@@ -4361,11 +4361,11 @@ est incompatible avec l'interface actuelle</translation>
     </message>
     <message>
         <source>disable antialiased drawing</source>
-        <translation>Supprimer l'antialiasing</translation>
+        <translation>Supprimer l&apos;antialiasing</translation>
     </message>
     <message>
         <source>uncheck this to speed up drawing</source>
-        <translation>Décocher pour accélérer l'affichage</translation>
+        <translation>Décocher pour accélérer l&apos;affichage</translation>
     </message>
     <message>
         <source>Draw Antialiased</source>
@@ -4385,15 +4385,15 @@ est incompatible avec l'interface actuelle</translation>
     </message>
     <message>
         <source>Enable midi input</source>
-        <translation>Activer l'entrée midi</translation>
+        <translation>Activer l&apos;entrée midi</translation>
     </message>
     <message>
         <source>Play notes when editing</source>
-        <translation>Jouer les notes pendant l'édition</translation>
+        <translation>Jouer les notes pendant l&apos;édition</translation>
     </message>
     <message>
         <source>Alternate input method</source>
-        <translation>Méthode d'entrée alternative</translation>
+        <translation>Méthode d&apos;entrée alternative</translation>
     </message>
     <message>
         <source>Expand Repeats</source>
@@ -4529,7 +4529,7 @@ est incompatible avec l'interface actuelle</translation>
     </message>
     <message>
         <source>screen shot function</source>
-        <translation>Fonction de capture d'écran</translation>
+        <translation>Fonction de capture d&apos;écran</translation>
     </message>
     <message>
         <source>Shortcuts</source>
@@ -4593,7 +4593,7 @@ est incompatible avec l'interface actuelle</translation>
     </message>
     <message>
         <source>Application Font</source>
-        <translation>Police de l'application</translation>
+        <translation>Police de l&apos;application</translation>
     </message>
     <message>
         <source>pt</source>
@@ -4601,7 +4601,7 @@ est incompatible avec l'interface actuelle</translation>
     </message>
     <message>
         <source>If you use the standard input method then the created note pitch depends on the current key signature. For example pressing F in G major creates an F sharp. If the alternate input method is enabled then the current key signature is irrelevant. For example pressing F always creates an F natural.</source>
-        <translation>Si vous utilisez la méthode d'entrée standard, la hauteur de la note dépendra de l'armature. Par exemple, ajouter un Fa en Sol majeur créera un Fa dièse. Si vous choisissez la méthode d'entrée alternative, l'armature ne sera pas utilisée. Par exemple, ajouter un Fa créera toujours un Fa naturel.</translation>
+        <translation>Si vous utilisez la méthode d&apos;entrée standard, la hauteur de la note dépendra de l&apos;armature. Par exemple, ajouter un Fa en Sol majeur créera un Fa dièse. Si vous choisissez la méthode d&apos;entrée alternative, l&apos;armature ne sera pas utilisée. Par exemple, ajouter un Fa créera toujours un Fa naturel.</translation>
     </message>
     <message>
         <source>start empty</source>
@@ -4706,7 +4706,7 @@ est incompatible avec l'interface actuelle</translation>
     </message>
     <message>
         <source>Style Used for Import</source>
-        <translation>Style utilisé pour l'import</translation>
+        <translation>Style utilisé pour l&apos;import</translation>
     </message>
     <message>
         <source>Built in style</source>
@@ -4738,11 +4738,11 @@ est incompatible avec l'interface actuelle</translation>
     </message>
     <message>
         <source>Check for new versions of MuseScore on startup</source>
-        <translation>Vérifier la disponibilité d'une nouvelle version au démarrage</translation>
+        <translation>Vérifier la disponibilité d&apos;une nouvelle version au démarrage</translation>
     </message>
     <message>
         <source>Choose PortMidi input interface</source>
-        <translation>Choisir l'interface MIDI d'entrée</translation>
+        <translation>Choisir l&apos;interface MIDI d&apos;entrée</translation>
     </message>
     <message>
         <source>Use Current Position</source>
@@ -4750,7 +4750,7 @@ est incompatible avec l'interface actuelle</translation>
     </message>
     <message>
         <source>Character Set used when import non-unicode strings. (For binary file import)</source>
-        <translation>Jeu de caractères utilisé pour l'import de chaînes non unicode. (Pour l'import de fichier binaire)</translation>
+        <translation>Jeu de caractères utilisé pour l&apos;import de chaînes non unicode. (Pour l&apos;import de fichier binaire)</translation>
     </message>
     <message>
         <source>Character Set</source>
@@ -4871,19 +4871,19 @@ Veuillez sélectionner une note ou un silence et réessayez
     </message>
     <message>
         <source>MuseScore: Load Chord Description</source>
-        <translation>MuseScore : Ouvrir fichier de description d'accord</translation>
+        <translation>MuseScore : Ouvrir fichier de description d&apos;accord</translation>
     </message>
     <message>
         <source>MuseScore Chord Description (*.xml);;All Files (*)</source>
-        <translation>Description d'accord MuseScore (*.xml);;Tous les fichiers (*)</translation>
+        <translation>Description d&apos;accord MuseScore (*.xml);;Tous les fichiers (*)</translation>
     </message>
     <message>
         <source>MuseScore: Load chord list failed:</source>
-        <translation>MuseScore : Echec du chargement de la liste d'accords :</translation>
+        <translation>MuseScore : Echec du chargement de la liste d&apos;accords :</translation>
     </message>
     <message>
         <source>MuseScore: Open chord list failed:</source>
-        <translation>MuseScore : Echec de l'ouverture de la liste d'accords :</translation>
+        <translation>MuseScore : Echec de l&apos;ouverture de la liste d&apos;accords :</translation>
     </message>
     <message>
         <source>MuseScore: Load font symbols failed:</source>
@@ -4895,11 +4895,11 @@ Veuillez sélectionner une note ou un silence et réessayez
     </message>
     <message>
         <source>MuseScore: Load Chord Description File</source>
-        <translation>MuseScore : Charger un fichier de description des noms d'accords</translation>
+        <translation>MuseScore : Charger un fichier de description des noms d&apos;accords</translation>
     </message>
     <message>
         <source>MuseScore: Save Chord Description File</source>
-        <translation>MuseScore : Enregistrer un fichier de description des noms d'accords</translation>
+        <translation>MuseScore : Enregistrer un fichier de description des noms d&apos;accords</translation>
     </message>
     <message>
         <source>MuseScore: Load languages failed:</source>
@@ -4952,7 +4952,7 @@ Veuillez sélectionner une note ou un silence et réessayez
     </message>
     <message>
         <source>Chord Properties</source>
-        <translation>Propriétés de l'accord</translation>
+        <translation>Propriétés de l&apos;accord</translation>
     </message>
     <message>
         <source>additional leading space </source>
@@ -4992,7 +4992,7 @@ Veuillez sélectionner une note ou un silence et réessayez
     </message>
     <message>
         <source>Anchor:</source>
-        <translation>Point d'ancrage :</translation>
+        <translation>Point d&apos;ancrage :</translation>
     </message>
     <message>
         <source>SEGMENT</source>
@@ -5067,7 +5067,7 @@ failed: </source>
     </message>
     <message>
         <source>There is nothing selected. Transpose whole score?</source>
-        <translation>Il n'y a rien de sélectionné. Transposer toute la partition ?</translation>
+        <translation>Il n&apos;y a rien de sélectionné. Transposer toute la partition ?</translation>
     </message>
     <message>
         <source>MuseScore: Save As</source>
@@ -5117,11 +5117,11 @@ failed: </source>
     </message>
     <message>
         <source>MuseScore: Save File failed: </source>
-        <translation>MuseScore : Echec d'enregistrement de fichier : </translation>
+        <translation>MuseScore : Echec d&apos;enregistrement de fichier : </translation>
     </message>
     <message>
         <source>renaming old file &lt;</source>
-        <translation>renommer l'ancien fichier &lt;</translation>
+        <translation>renommer l&apos;ancien fichier &lt;</translation>
     </message>
     <message>
         <source>renaming temp. file &lt;</source>
@@ -5213,7 +5213,7 @@ Essayez de sauvegarder à un autre emplacement.</translation>
     </message>
     <message>
         <source>Write Style failed: </source>
-        <translation>Echec de l'écriture du style : </translation>
+        <translation>Echec de l&apos;écriture du style : </translation>
     </message>
     <message>
         <source>Load failed: </source>
@@ -5232,7 +5232,7 @@ Essayez de sauvegarder à un autre emplacement.</translation>
     </message>
     <message>
         <source>Object Inspector</source>
-        <translation>Inspecteur d'objets</translation>
+        <translation>Inspecteur d&apos;objets</translation>
     </message>
     <message>
         <source>Staff</source>
@@ -5309,7 +5309,7 @@ Essayez de sauvegarder à un autre emplacement.</translation>
     </message>
     <message>
         <source>Time Signature Announce</source>
-        <translation>Annonce d'indication de mesure</translation>
+        <translation>Annonce d&apos;indication de mesure</translation>
     </message>
     <message>
         <source>Lyrics:</source>
@@ -5332,7 +5332,7 @@ Essayez de sauvegarder à un autre emplacement.</translation>
     </message>
     <message>
         <source>Element Type:</source>
-        <translation>Type d'élément :</translation>
+        <translation>Type d&apos;élément :</translation>
     </message>
     <message>
         <source>same staff</source>
@@ -5379,7 +5379,7 @@ Essayez de sauvegarder à un autre emplacement.</translation>
     </message>
     <message>
         <source>show more</source>
-        <translation>Afficher plus d'instruments</translation>
+        <translation>Afficher plus d&apos;instruments</translation>
     </message>
 </context>
 <context>
@@ -5387,7 +5387,7 @@ Essayez de sauvegarder à un autre emplacement.</translation>
     <message>
         <source>Init audio driver failed.
 Sequencer will be disabled.</source>
-        <translation>Échec du lancement du pilote audio&#13;
+        <translation>Échec du lancement du pilote audio
 Le séquenceur sera inactif</translation>
     </message>
     <message>
@@ -5397,21 +5397,21 @@ Le séquenceur sera inactif</translation>
     <message>
         <source>No SoundFont configured
 Playback will be disabled.</source>
-        <translation>Soudfond non configurée&#13;
+        <translation>Soudfond non configurée
 La lecture audio sera inactive</translation>
     </message>
     <message>
         <source>Loading SoundFont
-"%1"
+&quot;%1&quot;
 failed. Playback will be disabled.
 
 Go to Display &gt; Synthesizer 
 and check that the file location is correct</source>
-        <translation>Le chargement de la SoundFont&#13;
-"%1"&#13;
-a echoué. La lecture sera inactive.&#13;
-&#13;
-Aller à Affichage &gt; Synthétiseur &#13;
+        <translation>Le chargement de la SoundFont
+&quot;%1&quot;
+a echoué. La lecture sera inactive.
+
+Aller à Affichage &gt; Synthétiseur 
 et vérifier que le chemin du fichier est correct</translation>
     </message>
 </context>
@@ -5434,7 +5434,7 @@ et vérifier que le chemin du fichier est correct</translation>
     </message>
     <message>
         <source>Press up to 4 keys to enter shortcut sequence!</source>
-        <translation>Vous pouvez utiliser jusqu'à 4 touches pour la sequence !</translation>
+        <translation>Vous pouvez utiliser jusqu&apos;à 4 touches pour la sequence !</translation>
     </message>
     <message>
         <source>Old shortcut:</source>
@@ -5511,19 +5511,19 @@ et vérifier que le chemin du fichier est correct</translation>
     </message>
     <message>
         <source>beam begin</source>
-        <translation>début d'accroche</translation>
+        <translation>début d&apos;accroche</translation>
     </message>
     <message>
         <source>beam mid</source>
-        <translation>milieu d'accroche</translation>
+        <translation>milieu d&apos;accroche</translation>
     </message>
     <message>
         <source>beam end</source>
-        <translation>fin d'accroche</translation>
+        <translation>fin d&apos;accroche</translation>
     </message>
     <message>
         <source>no beam</source>
-        <translation>pas d'accroche</translation>
+        <translation>pas d&apos;accroche</translation>
     </message>
     <message>
         <source>begin 1/32</source>
@@ -5703,7 +5703,7 @@ et vérifier que le chemin du fichier est correct</translation>
     </message>
     <message>
         <source>Master Tuning</source>
-        <translation>Fréquence d'accord de référence</translation>
+        <translation>Fréquence d&apos;accord de référence</translation>
     </message>
     <message>
         <source>Hz</source>
@@ -6207,7 +6207,7 @@ et vérifier que le chemin du fichier est correct</translation>
     </message>
     <message>
         <source>add time signature to palette</source>
-        <translation>ajouter l'indication de mesure à la palette</translation>
+        <translation>ajouter l&apos;indication de mesure à la palette</translation>
     </message>
     <message>
         <source>Add</source>
@@ -6226,7 +6226,7 @@ et vérifier que le chemin du fichier est correct</translation>
     </message>
     <message>
         <source>Enter Time Signature:</source>
-        <translation>Entrer l'indication de mesure :</translation>
+        <translation>Entrer l&apos;indication de mesure :</translation>
     </message>
     <message>
         <source>Time Signature: </source>
@@ -6253,14 +6253,14 @@ et vérifier que le chemin du fichier est correct</translation>
         <translation>Mesures :</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
+        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Hint: you can also add or remove measures after creation of the score.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Hint: you can also add or remove measures after creation of the score.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Astuce : Vous pouvez aussi ajouter ou supprimer des mesures après la création de la partition.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Astuce : Vous pouvez aussi ajouter ou supprimer des mesures après la création de la partition.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -6271,7 +6271,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Transpose chord names</source>
-        <translation>Transposer les noms d'accords</translation>
+        <translation>Transposer les noms d&apos;accords</translation>
     </message>
     <message>
         <source>MuseScore: Transpose</source>
@@ -6594,8 +6594,8 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>UpdateChecker</name>
     <message>
-        <source>An update for MuseScore is available: &lt;a href="%1"&gt;MuseScore %2 r.%3&lt;/a&gt;</source>
-        <translation>Une nouvelle version est disponible : &lt;a href="%1"&gt;MuseScore %2 r.%3&lt;/a&gt;</translation>
+        <source>An update for MuseScore is available: &lt;a href=&quot;%1&quot;&gt;MuseScore %2 r.%3&lt;/a&gt;</source>
+        <translation>Une nouvelle version est disponible : &lt;a href=&quot;%1&quot;&gt;MuseScore %2 r.%3&lt;/a&gt;</translation>
     </message>
     <message>
         <source>Update Available</source>
@@ -6668,46 +6668,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>natural</source>
         <translation>bécarre</translation>
-    </message>
-    <message>
-        <source>(sharp)</source>
-        <translation>(dièse)</translation>
-    </message>
-    <message>
-        <source>(flat)</source>
-        <translation>(bémol)</translation>
-    </message>
-    <message>
-        <source>(double sharp)</source>
-        <translation>(double dièse)</translation>
-    </message>
-    <message>
-        <source>(double flat)</source>
-        <translation>(double bémol)</translation>
-    </message>
-    <message>
-        <source>(natural)</source>
-        <translation>(bécarre)</translation>
-    </message>
-    <message>
-        <source>[sharp]</source>
-        <translation>[dièse]</translation>
-    </message>
-    <message>
-        <source>[flat]</source>
-        <translation>[bémol]</translation>
-    </message>
-    <message>
-        <source>[double sharp]</source>
-        <translation>[double dièse]</translation>
-    </message>
-    <message>
-        <source>[double flat]</source>
-        <translation>[double bémol]</translation>
-    </message>
-    <message>
-        <source>[natural]</source>
-        <translation>[bécarre]</translation>
     </message>
     <message>
         <source>flat-slash</source>
@@ -7042,7 +7002,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add note A to chord</source>
-        <translation>Ajouter un La à l'accord</translation>
+        <translation>Ajouter un La à l&apos;accord</translation>
     </message>
     <message>
         <source>Add B</source>
@@ -7050,7 +7010,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add note B to chord</source>
-        <translation>Ajouter un Si à l'accord</translation>
+        <translation>Ajouter un Si à l&apos;accord</translation>
     </message>
     <message>
         <source>Add C</source>
@@ -7058,7 +7018,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add note C to chord</source>
-        <translation>Ajouter un Do à l'accord</translation>
+        <translation>Ajouter un Do à l&apos;accord</translation>
     </message>
     <message>
         <source>Add D</source>
@@ -7066,7 +7026,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add note D to chord</source>
-        <translation>Ajouter un Ré à l'accord</translation>
+        <translation>Ajouter un Ré à l&apos;accord</translation>
     </message>
     <message>
         <source>Add E</source>
@@ -7074,7 +7034,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add note E to chord</source>
-        <translation>Ajouter un Mi à l'accord</translation>
+        <translation>Ajouter un Mi à l&apos;accord</translation>
     </message>
     <message>
         <source>Add F</source>
@@ -7082,7 +7042,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add note F to chord</source>
-        <translation>Ajouter un Fa à l'accord</translation>
+        <translation>Ajouter un Fa à l&apos;accord</translation>
     </message>
     <message>
         <source>Add G</source>
@@ -7090,7 +7050,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add note G to chord</source>
-        <translation>Ajouter un Sol à l'accord</translation>
+        <translation>Ajouter un Sol à l&apos;accord</translation>
     </message>
     <message>
         <source>rest</source>
@@ -7130,7 +7090,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>add previous chord to selection</source>
-        <translation>ajouter l'accord précédent à la sélection</translation>
+        <translation>ajouter l&apos;accord précédent à la sélection</translation>
     </message>
     <message>
         <source>left+shift</source>
@@ -7142,7 +7102,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>add next chord to selection</source>
-        <translation>ajouter l'accord suivant à la sélection</translation>
+        <translation>ajouter l&apos;accord suivant à la sélection</translation>
     </message>
     <message>
         <source>right+shift</source>
@@ -7150,7 +7110,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>select to end of measure</source>
-        <translation>Sélection jusqu'à la fin de la mesure</translation>
+        <translation>Sélection jusqu&apos;à la fin de la mesure</translation>
     </message>
     <message>
         <source>right+ctrl+shift</source>
@@ -7166,7 +7126,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>select to end of line</source>
-        <translation>Sélection jusqu'à la fin de la ligne</translation>
+        <translation>Sélection jusqu&apos;à la fin de la ligne</translation>
     </message>
     <message>
         <source>shift+end</source>
@@ -7182,7 +7142,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>select to end of score</source>
-        <translation>Sélection jusqu'à la fin de la partition</translation>
+        <translation>Sélection jusqu&apos;à la fin de la partition</translation>
     </message>
     <message>
         <source>ctrl+shift+end</source>
@@ -7458,15 +7418,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Enable MIDI Input</source>
-        <translation>Activer l'entrée MIDI</translation>
+        <translation>Activer l&apos;entrée MIDI</translation>
     </message>
     <message>
         <source>editing sound on</source>
-        <translation>Son pendant l'édition activé</translation>
+        <translation>Son pendant l&apos;édition activé</translation>
     </message>
     <message>
         <source>Enable sound while editing</source>
-        <translation>Active le son pendant l'édition</translation>
+        <translation>Active le son pendant l&apos;édition</translation>
     </message>
     <message>
         <source>beam start</source>
@@ -7474,11 +7434,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>beam mid</source>
-        <translation>milieu d'accroche</translation>
+        <translation>milieu d&apos;accroche</translation>
     </message>
     <message>
         <source>no beam</source>
-        <translation>pas d'accroche</translation>
+        <translation>pas d&apos;accroche</translation>
     </message>
     <message>
         <source>beam 32</source>
@@ -7506,7 +7466,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Transport Toolbar</source>
-        <translation>Barre d'outils du lecteur</translation>
+        <translation>Barre d&apos;outils du lecteur</translation>
     </message>
     <message>
         <source>Transport</source>
@@ -7514,11 +7474,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Note Input Toolbar</source>
-        <translation>Barre d'outils de saisie des notes</translation>
+        <translation>Barre d&apos;outils de saisie des notes</translation>
     </message>
     <message>
         <source>Status Bar</source>
-        <translation>Barre d'état</translation>
+        <translation>Barre d&apos;état</translation>
     </message>
     <message>
         <source>Quit</source>
@@ -7650,23 +7610,23 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add Chord Name</source>
-        <translation>Ajouter un nom d'accord</translation>
+        <translation>Ajouter un nom d&apos;accord</translation>
     </message>
     <message>
         <source>Chord Name</source>
-        <translation>Nom d'accord</translation>
+        <translation>Nom d&apos;accord</translation>
     </message>
     <message>
         <source>Add Chord Text</source>
-        <translation>Ajouter du texte à l'accord</translation>
+        <translation>Ajouter du texte à l&apos;accord</translation>
     </message>
     <message>
         <source>show harmony properties for chord</source>
-        <translation>afficher les propiétés de l'harmonie de l'accord</translation>
+        <translation>afficher les propiétés de l&apos;harmonie de l&apos;accord</translation>
     </message>
     <message>
         <source>Harmony Properties</source>
-        <translation>Propriétés de l'accord</translation>
+        <translation>Propriétés de l&apos;accord</translation>
     </message>
     <message>
         <source>Add Rehearsal Mark</source>
@@ -7802,11 +7762,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>edit element</source>
-        <translation>éditer l'élément</translation>
+        <translation>éditer l&apos;élément</translation>
     </message>
     <message>
         <source>Edit Element</source>
-        <translation>Editer l'élément</translation>
+        <translation>Editer l&apos;élément</translation>
     </message>
     <message>
         <source>reset positions</source>
@@ -7818,7 +7778,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>show inspector</source>
-        <translation>afficher l'inspecteur</translation>
+        <translation>afficher l&apos;inspecteur</translation>
     </message>
     <message>
         <source>Inspector</source>
@@ -7826,11 +7786,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>reset measure stretch</source>
-        <translation>restaurer l'étirement de la mesure</translation>
+        <translation>restaurer l&apos;étirement de la mesure</translation>
     </message>
     <message>
         <source>Reset Stretch</source>
-        <translation>Restaurer l'étirement</translation>
+        <translation>Restaurer l&apos;étirement</translation>
     </message>
     <message>
         <source>show invisible</source>
@@ -8182,35 +8142,35 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Pitch up octave</source>
-        <translation>Monter d'une octave</translation>
+        <translation>Monter d&apos;une octave</translation>
     </message>
     <message>
         <source>Up Octave</source>
-        <translation>Monter d'une octave</translation>
+        <translation>Monter d&apos;une octave</translation>
     </message>
     <message>
         <source>Pitch up by an octave</source>
-        <translation>Monter d'une octave</translation>
+        <translation>Monter d&apos;une octave</translation>
     </message>
     <message>
         <source>Pitch up note in chord</source>
-        <translation>Monter la note dans l'accord</translation>
+        <translation>Monter la note dans l&apos;accord</translation>
     </message>
     <message>
         <source>Up Note in Chord</source>
-        <translation>Monter la note dans l'accord</translation>
+        <translation>Monter la note dans l&apos;accord</translation>
     </message>
     <message>
         <source>Go to higher pitched note in chord</source>
-        <translation>Aller à la note la plus haute de l'accord</translation>
+        <translation>Aller à la note la plus haute de l&apos;accord</translation>
     </message>
     <message>
         <source>Go to top note in chord</source>
-        <translation>Aller à la note la plus haute de l'accord</translation>
+        <translation>Aller à la note la plus haute de l&apos;accord</translation>
     </message>
     <message>
         <source>Top Note in Chord</source>
-        <translation>Note haute de l'accord</translation>
+        <translation>Note haute de l&apos;accord</translation>
     </message>
     <message>
         <source>Move up</source>
@@ -8226,35 +8186,35 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Pitch down octave</source>
-        <translation>Descendre d'une octave</translation>
+        <translation>Descendre d&apos;une octave</translation>
     </message>
     <message>
         <source>Down octave</source>
-        <translation>Descendre d'une octave</translation>
+        <translation>Descendre d&apos;une octave</translation>
     </message>
     <message>
         <source>Pitch down by an octave</source>
-        <translation>Descendre d'une octave</translation>
+        <translation>Descendre d&apos;une octave</translation>
     </message>
     <message>
         <source>Pitch down note in chord</source>
-        <translation>Descendre la note dans l'accord</translation>
+        <translation>Descendre la note dans l&apos;accord</translation>
     </message>
     <message>
         <source>Down Note in Chord</source>
-        <translation>Descendre la note dans l'accord</translation>
+        <translation>Descendre la note dans l&apos;accord</translation>
     </message>
     <message>
         <source>Go to lower pitched note in chord</source>
-        <translation>Aller à la note la plus basse de l'accord</translation>
+        <translation>Aller à la note la plus basse de l&apos;accord</translation>
     </message>
     <message>
         <source>Go to bottom note in chord</source>
-        <translation>Aller à la note la plus basse de l'accord</translation>
+        <translation>Aller à la note la plus basse de l&apos;accord</translation>
     </message>
     <message>
         <source>Bottom Note in Chord</source>
-        <translation>Note basse de l'accord</translation>
+        <translation>Note basse de l&apos;accord</translation>
     </message>
     <message>
         <source>Move down</source>
@@ -8393,7 +8353,7 @@ p, li { white-space: pre-wrap; }
     <name>articulation</name>
     <message>
         <source>dfermata</source>
-        <translation>point d'orgue vers le bas</translation>
+        <translation>point d&apos;orgue vers le bas</translation>
     </message>
     <message>
         <source>thumb</source>
@@ -8501,31 +8461,31 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>ufermata</source>
-        <translation>point d'orgue vers le haut</translation>
+        <translation>point d&apos;orgue vers le haut</translation>
     </message>
     <message>
         <source>ushortfermata</source>
-        <translation>point d'orgue court haut</translation>
+        <translation>point d&apos;orgue court haut</translation>
     </message>
     <message>
         <source>dshortfermata</source>
-        <translation>point d'orgue court bas</translation>
+        <translation>point d&apos;orgue court bas</translation>
     </message>
     <message>
         <source>ulongfermata</source>
-        <translation>point d'orgue long haut</translation>
+        <translation>point d&apos;orgue long haut</translation>
     </message>
     <message>
         <source>dlongfermata</source>
-        <translation>point d'orgue long bas</translation>
+        <translation>point d&apos;orgue long bas</translation>
     </message>
     <message>
         <source>uverylongfermata</source>
-        <translation>point d'orgue très long haut</translation>
+        <translation>point d&apos;orgue très long haut</translation>
     </message>
     <message>
         <source>dverylongfermata</source>
-        <translation>point d'orgue très long bas</translation>
+        <translation>point d&apos;orgue très long bas</translation>
     </message>
     <message>
         <source>snappizzicato</source>
@@ -8572,7 +8532,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Baritone clef (C clef)</source>
-        <translation>Clef d'Ut 5ème ligne (Baryton)</translation>
+        <translation>Clef d&apos;Ut 5ème ligne (Baryton)</translation>
     </message>
     <message>
         <source>Subbass clef</source>
@@ -8580,19 +8540,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Soprano clef</source>
-        <translation>Clef d'Ut 1ère ligne (Soprano)</translation>
+        <translation>Clef d&apos;Ut 1ère ligne (Soprano)</translation>
     </message>
     <message>
         <source>Mezzo-soprano clef</source>
-        <translation>Clef d'Ut 2ème ligne (Mezzo-soprano)</translation>
+        <translation>Clef d&apos;Ut 2ème ligne (Mezzo-soprano)</translation>
     </message>
     <message>
         <source>Alto clef</source>
-        <translation>Clef d'Ut 3ème ligne (Alto)</translation>
+        <translation>Clef d&apos;Ut 3ème ligne (Alto)</translation>
     </message>
     <message>
         <source>Tenor clef</source>
-        <translation>Clef d'Ut 4ème ligne (Ténor)</translation>
+        <translation>Clef d&apos;Ut 4ème ligne (Ténor)</translation>
     </message>
     <message>
         <source>Baritone clef (F clef)</source>
@@ -8834,7 +8794,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>OttavaSegment</source>
-        <translation>Segment d'Octaviation</translation>
+        <translation>Segment d&apos;Octaviation</translation>
     </message>
     <message>
         <source>PedalSegment</source>
@@ -8946,7 +8906,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>ElementList</source>
-        <translation>Liste d'élément</translation>
+        <translation>Liste d&apos;élément</translation>
     </message>
     <message>
         <source>StaffList</source>
@@ -8978,7 +8938,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>AccidentalBracket</source>
-        <translation>parenthèse d'altération</translation>
+        <translation>parenthèse d&apos;altération</translation>
     </message>
 </context>
 <context>
@@ -9032,7 +8992,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Cannot read this score:
 your version of MuseScore is too old.</source>
-        <translation>Impossible d'ouvrir cette partition :&#13;
+        <translation>Impossible d&apos;ouvrir cette partition :
 votre version de MuseScore est trop ancienne.</translation>
     </message>
 </context>
@@ -9143,19 +9103,19 @@ votre version de MuseScore est trop ancienne.</translation>
         <translation>demi soupir</translation>
     </message>
     <message>
-        <source>16' rest</source>
+        <source>16&apos; rest</source>
         <translation>quart de soupir</translation>
     </message>
     <message>
-        <source>32' rest</source>
+        <source>32&apos; rest</source>
         <translation>huitième de soupir</translation>
     </message>
     <message>
-        <source>64' rest</source>
+        <source>64&apos; rest</source>
         <translation>seizième de soupir</translation>
     </message>
     <message>
-        <source>128' rest</source>
+        <source>128&apos; rest</source>
         <translation>trente deuxième de soupir</translation>
     </message>
     <message>
@@ -9456,11 +9416,11 @@ votre version de MuseScore est trop ancienne.</translation>
     </message>
     <message>
         <source>ufermata</source>
-        <translation>point d'orgue haut</translation>
+        <translation>point d&apos;orgue haut</translation>
     </message>
     <message>
         <source>dfermata</source>
-        <translation>point d'orgue bas</translation>
+        <translation>point d&apos;orgue bas</translation>
     </message>
     <message>
         <source>snappizzicato</source>
@@ -9468,27 +9428,27 @@ votre version de MuseScore est trop ancienne.</translation>
     </message>
     <message>
         <source>ushortfermata</source>
-        <translation>point d'orgue court bas</translation>
+        <translation>point d&apos;orgue court bas</translation>
     </message>
     <message>
         <source>dshortfermata</source>
-        <translation>point d'orgue court haut</translation>
+        <translation>point d&apos;orgue court haut</translation>
     </message>
     <message>
         <source>ulongfermata</source>
-        <translation>point d'orgue haut long</translation>
+        <translation>point d&apos;orgue haut long</translation>
     </message>
     <message>
         <source>dlongfermata</source>
-        <translation>point d'orgue bas long</translation>
+        <translation>point d&apos;orgue bas long</translation>
     </message>
     <message>
         <source>uverylongfermata</source>
-        <translation>point d'orgue haut trés long</translation>
+        <translation>point d&apos;orgue haut trés long</translation>
     </message>
     <message>
         <source>dverylongfermata</source>
-        <translation>point d'orgue bas trés long</translation>
+        <translation>point d&apos;orgue bas trés long</translation>
     </message>
     <message>
         <source>thumb</source>
@@ -9724,11 +9684,11 @@ votre version de MuseScore est trop ancienne.</translation>
     </message>
     <message>
         <source>alto clef</source>
-        <translation>clef d'ut</translation>
+        <translation>clef d&apos;ut</translation>
     </message>
     <message>
         <source>calto clef</source>
-        <translation>clef d'ut petite</translation>
+        <translation>clef d&apos;ut petite</translation>
     </message>
     <message>
         <source>bass clef</source>
