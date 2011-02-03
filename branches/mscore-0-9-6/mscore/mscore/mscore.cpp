@@ -69,10 +69,6 @@ Q_IMPORT_PLUGIN(com_trolltech_qt_uitools_ScriptPlugin)
 Q_IMPORT_PLUGIN(com_trolltech_qt_xml_ScriptPlugin)
 #endif
 
-#ifdef Q_WS_MAC
-void qt_mac_set_menubar_merge(bool enable);
-#endif
-
 QList<LanguageItem> languages;
 
 bool debugMode          = false;
@@ -1715,7 +1711,6 @@ int main(int argc, char* av[])
 
 #ifdef Q_WS_MAC
       MuseScoreApplication* app = new MuseScoreApplication("mscore", argc, av);
-      qt_mac_set_menubar_merge(false);
 #else
       QtSingleApplication* app = new QtSingleApplication("mscore", argc, av);
 #endif
