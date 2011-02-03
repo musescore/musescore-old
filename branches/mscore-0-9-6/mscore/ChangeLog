@@ -1,3 +1,5 @@
+03.feb (la)
+      - fix #9040: Dragging note horizontally removes accidental permanently
 02.feb (la)
       - improve MusicXML import of clefs
       - Changing velocity and on/off offsets for a group of selected notes (miwarre patch)
