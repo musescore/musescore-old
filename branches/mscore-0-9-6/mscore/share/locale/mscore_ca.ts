@@ -16,26 +16,26 @@
         <translation>Revisió: 628</translation>
     </message>
     <message utf8="true">
-        <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
+        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Visit &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; for new versions and more information.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Support MuseScore with &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;your donation&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Visit &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; for new versions and more information.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Support MuseScore with &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/en/donate&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;your donation&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;!DOCTYPE  HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;line break&#13;
-&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;line break&#13;
-p, li { white-space: pre-wrap; }line break&#13;
-&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;line break&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Visita &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; per noves versions i més informació.&lt;/span&gt;&lt;/p&gt;line break&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Ajuda a MuseScore amb &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;la teva donació&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;line break&#13;
-line break&#13;
-&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;line break&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2011 Werner Schweer  Altres. &lt;/span&gt;&lt;/p&gt;line break&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Publicat sota la llicència GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Copyright &lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;©&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;!DOCTYPE  HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;line break
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;line break
+p, li { white-space: pre-wrap; }line break
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;line break
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Visita &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; per noves versions i més informació.&lt;/span&gt;&lt;/p&gt;line break
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Ajuda a MuseScore amb &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/en/donate&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;la teva donació&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;line break
+line break
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;line break
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Copyright &lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;©&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; 1999-2011 Werner Schweer  Altres. &lt;/span&gt;&lt;/p&gt;line break
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Publicat sota la llicència GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -64,14 +64,14 @@ line break&#13;
     <name>Articulation</name>
     <message>
         <source>Articulation Properties...</source>
-        <translation>Propietats d'articulació ...</translation>
+        <translation>Propietats d&apos;articulació ...</translation>
     </message>
 </context>
 <context>
     <name>ArticulationProperties</name>
     <message>
         <source>MuseScore: Articulations Properties</source>
-        <translation>MuseScore: Propietats d'articulació</translation>
+        <translation>MuseScore: Propietats d&apos;articulació</translation>
     </message>
     <message>
         <source>Channel</source>
@@ -822,7 +822,7 @@ line break&#13;
     </message>
     <message>
         <source>MuseScore: Harmony Properties</source>
-        <translation>MuseScore: Propietats d'harmonia</translation>
+        <translation>MuseScore: Propietats d&apos;harmonia</translation>
     </message>
     <message>
         <source>Type</source>
@@ -841,14 +841,14 @@ line break&#13;
     <name>ChordList</name>
     <message>
         <source>Write Chord Description failed: </source>
-        <translation>Error escrivint el fitxer de descripció d'acords </translation>
+        <translation>Error escrivint el fitxer de descripció d&apos;acords </translation>
     </message>
 </context>
 <context>
     <name>ChordPropertyBase</name>
     <message>
         <source>Chord Properties</source>
-        <translation>Propietats d'acord</translation>
+        <translation>Propietats d&apos;acord</translation>
     </message>
     <message>
         <source>small</source>
@@ -856,7 +856,7 @@ line break&#13;
     </message>
     <message>
         <source>additional leading space </source>
-        <translation>Espai addicional a l'inici </translation>
+        <translation>Espai addicional a l&apos;inici </translation>
     </message>
     <message>
         <source>sp</source>
@@ -873,7 +873,7 @@ line break&#13;
     </message>
     <message>
         <source>tuning offset</source>
-        <translation>Desplaçament d'afinació</translation>
+        <translation>Desplaçament d&apos;afinació</translation>
     </message>
     <message>
         <source>stem direction</source>
@@ -1055,7 +1055,7 @@ line break&#13;
     </message>
     <message>
         <source>Chord Description File:</source>
-        <translation>Fitxer de descripció d'acords</translation>
+        <translation>Fitxer de descripció d&apos;acords</translation>
     </message>
     <message>
         <source>...</source>
@@ -1075,7 +1075,7 @@ line break&#13;
     </message>
     <message>
         <source>MuseScore: Chord Style Editor</source>
-        <translation>MuseScore: Editor d'estil d'acord</translation>
+        <translation>MuseScore: Editor d&apos;estil d&apos;acord</translation>
     </message>
 </context>
 <context>
@@ -1120,7 +1120,7 @@ line break&#13;
     </message>
     <message>
         <source>align left</source>
-        <translation>Alinear a l'esquerra</translation>
+        <translation>Alinear a l&apos;esquerra</translation>
     </message>
     <message>
         <source>staff</source>
@@ -1305,11 +1305,11 @@ Fallada: </translation>
     <name>EditInstrumentBase</name>
     <message>
         <source>MuseScore: Edit Instrument Properties</source>
-        <translation>MuseScore: Edita propietats d'instrument</translation>
+        <translation>MuseScore: Edita propietats d&apos;instrument</translation>
     </message>
     <message>
         <source>Instrument Properties</source>
-        <translation>Propietats d'instrument</translation>
+        <translation>Propietats d&apos;instrument</translation>
     </message>
     <message>
         <source>Name</source>
@@ -1333,7 +1333,7 @@ Fallada: </translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>D'acord</translation>
+        <translation>D&apos;acord</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -1368,11 +1368,11 @@ Fallada: </translation>
     </message>
     <message>
         <source>Long Instrument Name:</source>
-        <translation>Nom de l'instrument:</translation>
+        <translation>Nom de l&apos;instrument:</translation>
     </message>
     <message>
         <source>Short Instrument Name:</source>
-        <translation>Abreviatura de l'instrument:</translation>
+        <translation>Abreviatura de l&apos;instrument:</translation>
     </message>
     <message>
         <source>Use Drumset</source>
@@ -1590,7 +1590,7 @@ Fallada: </translation>
     </message>
     <message>
         <source>Chordnames</source>
-        <translation>Noms d'acord</translation>
+        <translation>Noms d&apos;acord</translation>
     </message>
     <message>
         <source>Display in Concert Pitch</source>
@@ -1615,7 +1615,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Last system fill threshold</source>
-        <translation>Espaiament entre l'últim sistema i el final de la pàgina</translation>
+        <translation>Espaiament entre l&apos;últim sistema i el final de la pàgina</translation>
     </message>
     <message>
         <source>Create clef for all systems</source>
@@ -1667,7 +1667,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>beam width units</source>
-        <translation>Unitats d'amplada d'agrupacions</translation>
+        <translation>Unitats d&apos;amplada d&apos;agrupacions</translation>
     </message>
     <message>
         <source>Line width</source>
@@ -1772,11 +1772,11 @@ space unit</extracomment>
     </message>
     <message>
         <source>Barline at start of single staff</source>
-        <translation>Barra de compàs a l'inici de pentagrama sol</translation>
+        <translation>Barra de compàs a l&apos;inici de pentagrama sol</translation>
     </message>
     <message>
         <source>Barline at start of multiple staves</source>
-        <translation>Barra de compàs a l'inici de múltiples pentagrames</translation>
+        <translation>Barra de compàs a l&apos;inici de múltiples pentagrames</translation>
     </message>
     <message>
         <source>Music upper margin</source>
@@ -1836,11 +1836,11 @@ space unit</extracomment>
     </message>
     <message>
         <source>Key sig. left margin</source>
-        <translation>Marge esquerra d'armadura</translation>
+        <translation>Marge esquerra d&apos;armadura</translation>
     </message>
     <message>
         <source>Time sig. left margin</source>
-        <translation>Marge esquerra d'indicació de compàs</translation>
+        <translation>Marge esquerra d&apos;indicació de compàs</translation>
     </message>
     <message>
         <source>Clef-key distance</source>
@@ -1852,10 +1852,10 @@ space unit</extracomment>
     </message>
     <message>
         <source>Begin repeat left margin</source>
-        <translation>Marge esquerra d'inici de repetició</translation>
+        <translation>Marge esquerra d&apos;inici de repetició</translation>
     </message>
     <message>
-        <source>Show repeat bar tips ("winged" repeats)</source>
+        <source>Show repeat bar tips (&quot;winged&quot; repeats)</source>
         <translation>Mostra consells de barra de repetició</translation>
     </message>
     <message>
@@ -1896,11 +1896,11 @@ space unit</extracomment>
     </message>
     <message>
         <source>Beam width</source>
-        <translation>Amplada d'agrupació</translation>
+        <translation>Amplada d&apos;agrupació</translation>
     </message>
     <message>
         <source>Beam distance</source>
-        <translation>Distància d'agrupació</translation>
+        <translation>Distància d&apos;agrupació</translation>
     </message>
     <message>
         <source>Minimum length</source>
@@ -1924,7 +1924,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Grace note size</source>
-        <translation>Dimensions d'apoïatura</translation>
+        <translation>Dimensions d&apos;apoïatura</translation>
     </message>
     <message>
         <source>Small clef size</source>
@@ -1940,7 +1940,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Chord description file</source>
-        <translation>Fitxer de descripció d'acords</translation>
+        <translation>Fitxer de descripció d&apos;acords</translation>
     </message>
     <message>
         <source>Articulation - note head distance</source>
@@ -1952,7 +1952,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Articulation - articulation distance</source>
-        <translation>Articulació - Distància d'articulació</translation>
+        <translation>Articulació - Distància d&apos;articulació</translation>
     </message>
     <message>
         <source>Stem Direction in Multi Voice Context</source>
@@ -1971,7 +1971,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>OK</source>
-        <translation>D'acord</translation>
+        <translation>D&apos;acord</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -2126,7 +2126,7 @@ space unit</extracomment>
     <name>Harmony</name>
     <message>
         <source>Harmony Properties...</source>
-        <translation>Propietats d'harmonia ...</translation>
+        <translation>Propietats d&apos;harmonia ...</translation>
     </message>
     <message>
         <source>Text Properties...</source>
@@ -2141,18 +2141,18 @@ space unit</extracomment>
     </message>
     <message>
         <source>Image Properties...</source>
-        <translation>Propietats d'imatge ...</translation>
+        <translation>Propietats d&apos;imatge ...</translation>
     </message>
 </context>
 <context>
     <name>ImageProperties</name>
     <message>
         <source>lock aspect ratio</source>
-        <translation>Bloqueja relació d'aspecte</translation>
+        <translation>Bloqueja relació d&apos;aspecte</translation>
     </message>
     <message>
         <source>Image Properties</source>
-        <translation>Propietats d'imatge</translation>
+        <translation>Propietats d&apos;imatge</translation>
     </message>
 </context>
 <context>
@@ -2206,7 +2206,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>OK</source>
-        <translation>D'acord</translation>
+        <translation>D&apos;acord</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -2217,7 +2217,7 @@ space unit</extracomment>
     <name>Inspector</name>
     <message>
         <source>MuseScore: Object Inspector</source>
-        <translation>MuseScore: Inspector d'objectes</translation>
+        <translation>MuseScore: Inspector d&apos;objectes</translation>
     </message>
 </context>
 <context>
@@ -2291,7 +2291,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>OK</source>
-        <translation>D'acord</translation>
+        <translation>D&apos;acord</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -2357,7 +2357,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Instrument List</source>
-        <translation>Llistat d'instruments</translation>
+        <translation>Llistat d&apos;instruments</translation>
     </message>
     <message>
         <source>show more</source>
@@ -2376,7 +2376,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>MuseScore: Save Instrument List</source>
-        <translation>MuseScore: Desa llistat d'instruments</translation>
+        <translation>MuseScore: Desa llistat d&apos;instruments</translation>
     </message>
     <message>
         <source>MuseScore Instruments (*.xml);;</source>
@@ -2385,7 +2385,7 @@ space unit</extracomment>
     <message>
         <source>Open Instruments File
 </source>
-        <translation>Obre fitxer d'instruments
+        <translation>Obre fitxer d&apos;instruments
 </translation>
     </message>
     <message>
@@ -2396,7 +2396,7 @@ Fallada: </translation>
     </message>
     <message>
         <source>MuseScore: Open Instruments file</source>
-        <translation>MuseScore: Obre fitxer d'instruments</translation>
+        <translation>MuseScore: Obre fitxer d&apos;instruments</translation>
     </message>
     <message>
         <source>MuseScore: Write Style</source>
@@ -2404,7 +2404,7 @@ Fallada: </translation>
     </message>
     <message>
         <source>MuseScore: Load Instrument List</source>
-        <translation>MuseScore: Carrega llistat d'instruments</translation>
+        <translation>MuseScore: Carrega llistat d&apos;instruments</translation>
     </message>
     <message>
         <source>MuseScore Instruments (*.xml);;All files (*)</source>
@@ -2416,11 +2416,11 @@ Fallada: </translation>
     </message>
     <message>
         <source>Instrument List</source>
-        <translation>Llistat d'instruments</translation>
+        <translation>Llistat d&apos;instruments</translation>
     </message>
     <message>
         <source>Write Style failed: </source>
-        <translation>Error escrivint l'estil: </translation>
+        <translation>Error escrivint l&apos;estil: </translation>
     </message>
 </context>
 <context>
@@ -2797,7 +2797,7 @@ Fallada: </translation>
     </message>
     <message>
         <source>layout stretch</source>
-        <translation>Disseny d'estirament</translation>
+        <translation>Disseny d&apos;estirament</translation>
     </message>
     <message>
         <source>repeat count:</source>
@@ -2840,7 +2840,7 @@ Fallada: </translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>D'acord</translation>
+        <translation>D&apos;acord</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -2917,7 +2917,7 @@ Fallada: </translation>
     </message>
     <message>
         <source>Rehearsal Mark</source>
-        <translation>Marca d'assaig</translation>
+        <translation>Marca d&apos;assaig</translation>
     </message>
     <message>
         <source>MuseScore</source>
@@ -3173,11 +3173,11 @@ Fallada: </translation>
     </message>
     <message>
         <source>note entry mode</source>
-        <translation>Mode d'entrada de notes</translation>
+        <translation>Mode d&apos;entrada de notes</translation>
     </message>
     <message>
         <source>edit mode</source>
-        <translation>Mode d'edició</translation>
+        <translation>Mode d&apos;edició</translation>
     </message>
     <message>
         <source>play</source>
@@ -3193,7 +3193,7 @@ Fallada: </translation>
     </message>
     <message>
         <source>InstrumentsLong</source>
-        <translation>Nom d'instrument</translation>
+        <translation>Nom d&apos;instrument</translation>
     </message>
     <message>
         <source>InstrumentsShort</source>
@@ -3201,7 +3201,7 @@ Fallada: </translation>
     </message>
     <message>
         <source>InstrumentsExcerpt</source>
-        <translation>Nom d'instrument per reducció</translation>
+        <translation>Nom d&apos;instrument per reducció</translation>
     </message>
     <message>
         <source>Technik</source>
@@ -3233,7 +3233,7 @@ Fallada: </translation>
     </message>
     <message>
         <source>Chordname</source>
-        <translation>Nom d'acord</translation>
+        <translation>Nom d&apos;acord</translation>
     </message>
     <message>
         <source>Repeat Text</source>
@@ -3272,9 +3272,9 @@ Fallada: </translation>
         <translation>Sense partitura</translation>
     </message>
     <message>
-        <source>Save changes to the score "%1"
+        <source>Save changes to the score &quot;%1&quot;
 before closing?</source>
-        <translation>Desa canvis de la partitura "%1"
+        <translation>Desa canvis de la partitura &quot;%1&quot;
 abans de tancar?</translation>
     </message>
     <message>
@@ -3298,8 +3298,8 @@ abans de tancar?</translation>
         <translation>Text</translation>
     </message>
     <message>
-        <source/>
-        <translation/>
+        <source></source>
+        <translation></translation>
     </message>
     <message>
         <source>Ottava</source>
@@ -3422,10 +3422,10 @@ abans de tancar?</translation>
     <message>
         <source>
 
-From the "Help" menu try choosing "Online Handbook" instead.</source>
+From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.</source>
         <translation>
 
-Del menú "Ajuda" prova de triar l'opció "Manual en línia".</translation>
+Del menú &quot;Ajuda&quot; prova de triar l&apos;opció &quot;Manual en línia&quot;.</translation>
     </message>
     <message>
         <source>Acciaccatura</source>
@@ -3473,7 +3473,7 @@ Del menú "Ajuda" prova de triar l'opció "Manual en línia".</translation>
     </message>
     <message>
         <source>Slur</source>
-        <translation>Lligadura d'expressió</translation>
+        <translation>Lligadura d&apos;expressió</translation>
     </message>
     <message>
         <source>Crescendo</source>
@@ -3573,11 +3573,11 @@ Del menú "Ajuda" prova de triar l'opció "Manual en línia".</translation>
     </message>
     <message>
         <source>Start beam</source>
-        <translation>Inici d'agrupació</translation>
+        <translation>Inici d&apos;agrupació</translation>
     </message>
     <message>
         <source>Middle of beam</source>
-        <translation>Meitat d'agrupació</translation>
+        <translation>Meitat d&apos;agrupació</translation>
     </message>
     <message>
         <source>No beam</source>
@@ -3615,8 +3615,8 @@ Del menú "Ajuda" prova de triar l'opció "Manual en línia".</translation>
         <source>The previous session quit unexpectedly.
 
 Restore session?</source>
-        <translation>L'anterior sessió s'ha tancat de forma inesperada.&#13;
-&#13;
+        <translation>L&apos;anterior sessió s&apos;ha tancat de forma inesperada.
+
 Restaurar sessió?</translation>
     </message>
     <message>
@@ -3643,14 +3643,14 @@ Restaurar sessió?</translation>
         <source>Script
 %1
 is incompatible with current interface</source>
-        <translation>L'script&#13;
-%1&#13;
+        <translation>L&apos;script
+%1
 és incompatible amb la interfície actual</translation>
     </message>
     <message>
         <source>MuseScore is too old to run script
 %1</source>
-        <translation>El MuseScore és massa vell per executar l'script&#13;
+        <translation>El MuseScore és massa vell per executar l&apos;script
 %1</translation>
     </message>
     <message>
@@ -3659,10 +3659,10 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Error loading plugin
-"%1" line %2:
+&quot;%1&quot; line %2:
 %3</source>
-        <translation>Error carregant plugin&#13;
-"%1" línia %2:&#13;
+        <translation>Error carregant plugin
+&quot;%1&quot; línia %2:
 %3</translation>
     </message>
     <message>
@@ -3764,7 +3764,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Define a set of instruments. Each instrument is represented by one or more staves</source>
-        <translation>Defineix un conjunt d'instruments. Cada instrument és representat per un o més pentagrames</translation>
+        <translation>Defineix un conjunt d&apos;instruments. Cada instrument és representat per un o més pentagrames</translation>
     </message>
 </context>
 <context>
@@ -3851,7 +3851,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>OnTime:</source>
-        <translation>Temps d'entrada:</translation>
+        <translation>Temps d&apos;entrada:</translation>
     </message>
     <message>
         <source>OffTime:</source>
@@ -3889,7 +3889,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>OK</source>
-        <translation>D'acord</translation>
+        <translation>D&apos;acord</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -4009,7 +4009,7 @@ is incompatible with current interface</source>
     <name>PaletteCellProperties</name>
     <message>
         <source>Chord Properties</source>
-        <translation>Propietats d'acord</translation>
+        <translation>Propietats d&apos;acord</translation>
     </message>
     <message>
         <source>Palette Cell Properties</source>
@@ -4056,7 +4056,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Element Offset</source>
-        <translation>Desplaçament d'element</translation>
+        <translation>Desplaçament d&apos;element</translation>
     </message>
     <message>
         <source>Scale:</source>
@@ -4244,7 +4244,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Choose Background Wallpaper</source>
-        <translation>MuseScore: Tria fons d'escriptori</translation>
+        <translation>MuseScore: Tria fons d&apos;escriptori</translation>
     </message>
     <message>
         <source>default</source>
@@ -4256,11 +4256,11 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Choose Instrument List</source>
-        <translation>Tria llistat d'instruments</translation>
+        <translation>Tria llistat d&apos;instruments</translation>
     </message>
     <message>
         <source>Instrument List (*.xml)</source>
-        <translation>Llistat d'instruments (*.xml)</translation>
+        <translation>Llistat d&apos;instruments (*.xml)</translation>
     </message>
     <message>
         <source>Choose Starting Score</source>
@@ -4307,7 +4307,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Instrument List:</source>
-        <translation>Llistat d'instruments:</translation>
+        <translation>Llistat d&apos;instruments:</translation>
     </message>
     <message>
         <source>Working Directory:</source>
@@ -4343,7 +4343,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Wallpaper</source>
-        <translation>Fons d'escriptori</translation>
+        <translation>Fons d&apos;escriptori</translation>
     </message>
     <message>
         <source>Color</source>
@@ -4363,7 +4363,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>uncheck this to speed up drawing</source>
-        <translation>Desactiva per accelerar el dibuix d'elements</translation>
+        <translation>Desactiva per accelerar el dibuix d&apos;elements</translation>
     </message>
     <message>
         <source>Draw Antialiased</source>
@@ -4387,11 +4387,11 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Play notes when editing</source>
-        <translation>Reprodueix notes mentre s'edita</translation>
+        <translation>Reprodueix notes mentre s&apos;edita</translation>
     </message>
     <message>
         <source>Alternate input method</source>
-        <translation>Mètode d'entrada alternatiu</translation>
+        <translation>Mètode d&apos;entrada alternatiu</translation>
     </message>
     <message>
         <source>Expand Repeats</source>
@@ -4411,7 +4411,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>JACK Audio Server</source>
-        <translation>Servidor d'audio JACK</translation>
+        <translation>Servidor d&apos;audio JACK</translation>
     </message>
     <message>
         <source>Left-Port:</source>
@@ -4595,7 +4595,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Application Font</source>
-        <translation>Font de l'aplicació</translation>
+        <translation>Font de l&apos;aplicació</translation>
     </message>
     <message>
         <source>pt</source>
@@ -4607,7 +4607,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Score element colors</source>
-        <translation>Colors d'elements de la partitura</translation>
+        <translation>Colors d&apos;elements de la partitura</translation>
     </message>
     <message>
         <source>Default foreground</source>
@@ -4635,8 +4635,8 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>If you use the standard input method then the created note pitch depends on the current key signature. For example pressing F in G major creates an F sharp. If the alternate input method is enabled then the current key signature is irrelevant. For example pressing F always creates an F natural.</source>
-        <translation>Si utilitzes el mètode d'entrada estàndard llavors la nota creada dependrà de l'armadura actual. Per exemple si prems F en Sol Major es crearà un Fa sostingut.
-Si habilites el mètode d'entrada alternatiu llavors l'armadura actual és irrellevant. Per exemple si prems F sempre es crearà un Fa natural.</translation>
+        <translation>Si utilitzes el mètode d&apos;entrada estàndard llavors la nota creada dependrà de l&apos;armadura actual. Per exemple si prems F en Sol Major es crearà un Fa sostingut.
+Si habilites el mètode d&apos;entrada alternatiu llavors l&apos;armadura actual és irrellevant. Per exemple si prems F sempre es crearà un Fa natural.</translation>
     </message>
     <message>
         <source>Score</source>
@@ -4701,7 +4701,7 @@ Si habilites el mètode d'entrada alternatiu llavors l'armadura actual és irrel
     </message>
     <message utf8="true">
         <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
-        <translation>Reemplaça (C) amb el símbol de © (només s'aplica en el text de la secció de Copyright)</translation>
+        <translation>Reemplaça (C) amb el símbol de © (només s&apos;aplica en el text de la secció de Copyright)</translation>
     </message>
     <message>
         <source>Style Used for Import</source>
@@ -4713,7 +4713,7 @@ Si habilites el mètode d'entrada alternatiu llavors l'armadura actual és irrel
     </message>
     <message>
         <source>Use style file:</source>
-        <translation>Utilitza fitxer d'estil:</translation>
+        <translation>Utilitza fitxer d&apos;estil:</translation>
     </message>
     <message>
         <source>Navigator:</source>
@@ -4725,7 +4725,7 @@ Si habilites el mètode d'entrada alternatiu llavors l'armadura actual és irrel
     </message>
     <message>
         <source>Remember last connection(s)</source>
-        <translation>Recorda l'última connexió(s)</translation>
+        <translation>Recorda l&apos;última connexió(s)</translation>
     </message>
     <message>
         <source>Update</source>
@@ -4733,15 +4733,15 @@ Si habilites el mètode d'entrada alternatiu llavors l'armadura actual és irrel
     </message>
     <message>
         <source>Automatic Update Check</source>
-        <translation>Comprovació automàtica d'actualitzacions</translation>
+        <translation>Comprovació automàtica d&apos;actualitzacions</translation>
     </message>
     <message>
         <source>Check for new versions of MuseScore on startup</source>
-        <translation>Comprova si hi han noves versions de MuseScore a l'inici</translation>
+        <translation>Comprova si hi han noves versions de MuseScore a l&apos;inici</translation>
     </message>
     <message>
         <source>Choose PortMidi input interface</source>
-        <translation>Tria interfície d'entrada PortMidi</translation>
+        <translation>Tria interfície d&apos;entrada PortMidi</translation>
     </message>
     <message>
         <source>Use Current Position</source>
@@ -4749,7 +4749,7 @@ Si habilites el mètode d'entrada alternatiu llavors l'armadura actual és irrel
     </message>
     <message>
         <source>Character Set used when import non-unicode strings. (For binary file import)</source>
-        <translation>Joc de caràcters utilitzat quan s'importin cadenes no Unicode. (Per importacions de fitxers binaris)</translation>
+        <translation>Joc de caràcters utilitzat quan s&apos;importin cadenes no Unicode. (Per importacions de fitxers binaris)</translation>
     </message>
     <message>
         <source>Character Set</source>
@@ -4830,7 +4830,7 @@ Tria una nota o silenci i torna-ho a intentar
     </message>
     <message>
         <source>MuseScore: load Style failed:</source>
-        <translation>MuseScore: Fallada en la càrrega de l'estil:</translation>
+        <translation>MuseScore: Fallada en la càrrega de l&apos;estil:</translation>
     </message>
     <message>
         <source>MuseScore: load midi</source>
@@ -4858,7 +4858,7 @@ Tria una nota o silenci i torna-ho a intentar
     </message>
     <message>
         <source>MuseScore: Load Style failed:</source>
-        <translation>MuseScore: Fallada en la càrrega de l'estil:</translation>
+        <translation>MuseScore: Fallada en la càrrega de l&apos;estil:</translation>
     </message>
     <message>
         <source>MuseScore: Import Capella</source>
@@ -4870,19 +4870,19 @@ Tria una nota o silenci i torna-ho a intentar
     </message>
     <message>
         <source>MuseScore: Load Chord Description</source>
-        <translation>MuseScore: Càrrega de descripció de l'acord</translation>
+        <translation>MuseScore: Càrrega de descripció de l&apos;acord</translation>
     </message>
     <message>
         <source>MuseScore Chord Description (*.xml);;All Files (*)</source>
-        <translation>Descripció d'acord MuseScore (*.xml);;Tots els fitxers (*)</translation>
+        <translation>Descripció d&apos;acord MuseScore (*.xml);;Tots els fitxers (*)</translation>
     </message>
     <message>
         <source>MuseScore: Load chord list failed:</source>
-        <translation>MuseScore: Fallada en la càrrega del llistat d'acords:</translation>
+        <translation>MuseScore: Fallada en la càrrega del llistat d&apos;acords:</translation>
     </message>
     <message>
         <source>MuseScore: Open chord list failed:</source>
-        <translation>MuseScore: Error en l'obertura del llistat d'acords:</translation>
+        <translation>MuseScore: Error en l&apos;obertura del llistat d&apos;acords:</translation>
     </message>
     <message>
         <source>MuseScore: Load font symbols failed:</source>
@@ -4894,11 +4894,11 @@ Tria una nota o silenci i torna-ho a intentar
     </message>
     <message>
         <source>MuseScore: Load Chord Description File</source>
-        <translation>MuseScore: Carrega fitxer de descripció d'acord</translation>
+        <translation>MuseScore: Carrega fitxer de descripció d&apos;acord</translation>
     </message>
     <message>
         <source>MuseScore: Save Chord Description File</source>
-        <translation>MuseScore: Desa fitxer de descripció d'acord</translation>
+        <translation>MuseScore: Desa fitxer de descripció d&apos;acord</translation>
     </message>
     <message>
         <source>MuseScore: Load languages failed:</source>
@@ -4951,11 +4951,11 @@ Tria una nota o silenci i torna-ho a intentar
     </message>
     <message>
         <source>Chord Properties</source>
-        <translation>Propietats d'acord</translation>
+        <translation>Propietats d&apos;acord</translation>
     </message>
     <message>
         <source>additional leading space </source>
-        <translation>Espai addicional a l'inici </translation>
+        <translation>Espai addicional a l&apos;inici </translation>
     </message>
     <message>
         <source>sp</source>
@@ -5012,8 +5012,8 @@ Tria una nota o silenci i torna-ho a intentar
         <source>No staves found:
 please use the instruments dialog to
 first create some staves</source>
-        <translation>No s'han trobat pentagrames:
-Utilitza el diàleg d'instruments per a
+        <translation>No s&apos;han trobat pentagrames:
+Utilitza el diàleg d&apos;instruments per a
 crear primer algún pentagrama</translation>
     </message>
     <message>
@@ -5045,12 +5045,12 @@ Fallada: </translation>
     <message>
         <source>Open Style File
 </source>
-        <translation>Obre fitxer d'estil
+        <translation>Obre fitxer d&apos;estil
 </translation>
     </message>
     <message>
         <source>MuseScore: Open Style file</source>
-        <translation>MuseScore: Obre fitxer d'estil</translation>
+        <translation>MuseScore: Obre fitxer d&apos;estil</translation>
     </message>
     <message>
         <source>MuseScore: Write Style</source>
@@ -5080,7 +5080,7 @@ Fallada: </translation>
     </message>
     <message>
         <source>MuseScore Style File (*.mss)</source>
-        <translation>Fitxer d'estil MuseScore (*.mss)</translation>
+        <translation>Fitxer d&apos;estil MuseScore (*.mss)</translation>
     </message>
     <message>
         <source>Compressed MuseScore File (*.mscz)</source>
@@ -5204,7 +5204,7 @@ Prova a desar-ho en una localització diferent.</translation>
     </message>
     <message>
         <source>The first time signature of a piece can not be removed.</source>
-        <translation>La primera indicació de compàs d'una partitura no es pot eliminar.</translation>
+        <translation>La primera indicació de compàs d&apos;una partitura no es pot eliminar.</translation>
     </message>
     <message>
         <source>cannot determine file type</source>
@@ -5212,7 +5212,7 @@ Prova a desar-ho en una localització diferent.</translation>
     </message>
     <message>
         <source>Write Style failed: </source>
-        <translation>Error escrivint l'estil: </translation>
+        <translation>Error escrivint l&apos;estil: </translation>
     </message>
     <message>
         <source>Load failed: </source>
@@ -5231,7 +5231,7 @@ Prova a desar-ho en una localització diferent.</translation>
     </message>
     <message>
         <source>Object Inspector</source>
-        <translation>Inspector d'objectes</translation>
+        <translation>Inspector d&apos;objectes</translation>
     </message>
     <message>
         <source>Staff</source>
@@ -5308,7 +5308,7 @@ Prova a desar-ho en una localització diferent.</translation>
     </message>
     <message>
         <source>Time Signature Announce</source>
-        <translation>Notificació d'indicació de compàs</translation>
+        <translation>Notificació d&apos;indicació de compàs</translation>
     </message>
     <message>
         <source>Lyrics:</source>
@@ -5331,7 +5331,7 @@ Prova a desar-ho en una localització diferent.</translation>
     </message>
     <message>
         <source>Element Type:</source>
-        <translation>Tipus d'element:</translation>
+        <translation>Tipus d&apos;element:</translation>
     </message>
     <message>
         <source>same staff</source>
@@ -5386,7 +5386,7 @@ Prova a desar-ho en una localització diferent.</translation>
     <message>
         <source>Init audio driver failed.
 Sequencer will be disabled.</source>
-        <translation>Error en la inicialització del driver d'audio.&#13;
+        <translation>Error en la inicialització del driver d&apos;audio.
 El seqüenciador es deshabilitarà.</translation>
     </message>
     <message>
@@ -5396,21 +5396,21 @@ El seqüenciador es deshabilitarà.</translation>
     <message>
         <source>No SoundFont configured
 Playback will be disabled.</source>
-        <translation>Cap SoundFont configurat&#13;
+        <translation>Cap SoundFont configurat
 Reproducció deshabilitada.</translation>
     </message>
     <message>
         <source>Loading SoundFont
-"%1"
+&quot;%1&quot;
 failed. Playback will be disabled.
 
 Go to Display &gt; Synthesizer 
 and check that the file location is correct</source>
-        <translation>Error carregant origen de so&#13;
-"%1"&#13;
-.La reproducció es deshabilitarà.&#13;
-&#13;
-Go to Display &gt; Synthesizer &#13;
+        <translation>Error carregant origen de so
+&quot;%1&quot;
+.La reproducció es deshabilitarà.
+
+Go to Display &gt; Synthesizer 
 and check that the file location is correct</translation>
     </message>
 </context>
@@ -5449,7 +5449,7 @@ and check that the file location is correct</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>D'acord</translation>
+        <translation>D&apos;acord</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -5464,15 +5464,15 @@ and check that the file location is correct</translation>
     </message>
     <message>
         <source>beam begin</source>
-        <translation>Inici d'agrupació</translation>
+        <translation>Inici d&apos;agrupació</translation>
     </message>
     <message>
         <source>beam mid</source>
-        <translation>Meitat d'agrupació</translation>
+        <translation>Meitat d&apos;agrupació</translation>
     </message>
     <message>
         <source>beam end</source>
-        <translation>Fi d'agrupació</translation>
+        <translation>Fi d&apos;agrupació</translation>
     </message>
     <message>
         <source>no beam</source>
@@ -5510,15 +5510,15 @@ and check that the file location is correct</translation>
     </message>
     <message>
         <source>beam begin</source>
-        <translation>Inici d'agrupació</translation>
+        <translation>Inici d&apos;agrupació</translation>
     </message>
     <message>
         <source>beam mid</source>
-        <translation>Meitat d'agrupació</translation>
+        <translation>Meitat d&apos;agrupació</translation>
     </message>
     <message>
         <source>beam end</source>
-        <translation>Fi d'agrupació</translation>
+        <translation>Fi d&apos;agrupació</translation>
     </message>
     <message>
         <source>no beam</source>
@@ -5583,7 +5583,7 @@ and check that the file location is correct</translation>
     <name>SlurSegment</name>
     <message>
         <source>Edit Mode</source>
-        <translation>Mode d'edició</translation>
+        <translation>Mode d&apos;edició</translation>
     </message>
     <message>
         <source>Slur Properties...</source>
@@ -5599,7 +5599,7 @@ and check that the file location is correct</translation>
     <message>
         <source>startElement</source>
         <extracomment>do not translate</extracomment>
-        <translation>Element d'inici</translation>
+        <translation>Element d&apos;inici</translation>
     </message>
     <message>
         <source>endElement</source>
@@ -5707,7 +5707,7 @@ and check that the file location is correct</translation>
     </message>
     <message>
         <source>Room Size:</source>
-        <translation>Dimensions d'habitació:</translation>
+        <translation>Dimensions d&apos;habitació:</translation>
     </message>
     <message>
         <source>Damp:</source>
@@ -5891,7 +5891,7 @@ and check that the file location is correct</translation>
     </message>
     <message>
         <source>BeginText</source>
-        <translation>Text d'inici</translation>
+        <translation>Text d&apos;inici</translation>
     </message>
     <message>
         <source>ContinueText</source>
@@ -6237,7 +6237,7 @@ and check that the file location is correct</translation>
     </message>
     <message>
         <source>Pickup Measure</source>
-        <translation>Compas d'anacrusa</translation>
+        <translation>Compas d&apos;anacrusa</translation>
     </message>
     <message>
         <source>Time Signature</source>
@@ -6252,14 +6252,14 @@ and check that the file location is correct</translation>
         <translation>Compassos:</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
+        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Hint: you can also add or remove measures after creation of the score.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;&#13;
-p, li { white-space: pre-wrap; }&#13;
-&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Nota: després de crear la partitura sempre podràs afegir o eliminar compassos.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Hint: you can also add or remove measures after creation of the score.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Nota: després de crear la partitura sempre podràs afegir o eliminar compassos.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -6270,7 +6270,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Transpose chord names</source>
-        <translation>Transposa noms d'acords</translation>
+        <translation>Transposa noms d&apos;acords</translation>
     </message>
     <message>
         <source>MuseScore: Transpose</source>
@@ -6593,8 +6593,8 @@ p, li { white-space: pre-wrap; }&#13;
 <context>
     <name>UpdateChecker</name>
     <message>
-        <source>An update for MuseScore is available: &lt;a href="%1"&gt;MuseScore %2 r.%3&lt;/a&gt;</source>
-        <translation>Està disponible una actualització per MuseScore: &lt;a href="%1"&gt;MuseScore %2 r.%3&lt;/a&gt;</translation>
+        <source>An update for MuseScore is available: &lt;a href=&quot;%1&quot;&gt;MuseScore %2 r.%3&lt;/a&gt;</source>
+        <translation>Està disponible una actualització per MuseScore: &lt;a href=&quot;%1&quot;&gt;MuseScore %2 r.%3&lt;/a&gt;</translation>
     </message>
     <message>
         <source>Update Available</source>
@@ -6667,46 +6667,6 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <source>natural</source>
         <translation>Natural / Becaire</translation>
-    </message>
-    <message>
-        <source>(sharp)</source>
-        <translation>(sostingut)</translation>
-    </message>
-    <message>
-        <source>(flat)</source>
-        <translation>(bemoll)</translation>
-    </message>
-    <message>
-        <source>(double sharp)</source>
-        <translation>(doble sostingut)</translation>
-    </message>
-    <message>
-        <source>(double flat)</source>
-        <translation>(doble bemoll)</translation>
-    </message>
-    <message>
-        <source>(natural)</source>
-        <translation>(natural / becaire)</translation>
-    </message>
-    <message>
-        <source>[sharp]</source>
-        <translation>[sostingut]</translation>
-    </message>
-    <message>
-        <source>[flat]</source>
-        <translation>[bemoll]</translation>
-    </message>
-    <message>
-        <source>[double sharp]</source>
-        <translation>[doble sostingut]</translation>
-    </message>
-    <message>
-        <source>[double flat]</source>
-        <translation>[doble bemoll]</translation>
-    </message>
-    <message>
-        <source>[natural]</source>
-        <translation>[natural / becaire]</translation>
     </message>
     <message>
         <source>flat-slash</source>
@@ -7041,7 +7001,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Add note A to chord</source>
-        <translation>Afegeix nota La a l'acord</translation>
+        <translation>Afegeix nota La a l&apos;acord</translation>
     </message>
     <message>
         <source>Add B</source>
@@ -7049,7 +7009,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Add note B to chord</source>
-        <translation>Afegeix nota Si a l'acord</translation>
+        <translation>Afegeix nota Si a l&apos;acord</translation>
     </message>
     <message>
         <source>Add C</source>
@@ -7057,7 +7017,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Add note C to chord</source>
-        <translation>Afegeix nota Do a l'acord</translation>
+        <translation>Afegeix nota Do a l&apos;acord</translation>
     </message>
     <message>
         <source>Add D</source>
@@ -7065,7 +7025,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Add note D to chord</source>
-        <translation>Afegeix nota Re a l'acord</translation>
+        <translation>Afegeix nota Re a l&apos;acord</translation>
     </message>
     <message>
         <source>Add E</source>
@@ -7073,7 +7033,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Add note E to chord</source>
-        <translation>Afegeix nota Mi a l'acord</translation>
+        <translation>Afegeix nota Mi a l&apos;acord</translation>
     </message>
     <message>
         <source>Add F</source>
@@ -7081,7 +7041,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Add note F to chord</source>
-        <translation>Afegeix nota Fa a l'acord</translation>
+        <translation>Afegeix nota Fa a l&apos;acord</translation>
     </message>
     <message>
         <source>Add G</source>
@@ -7089,7 +7049,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Add note G to chord</source>
-        <translation>Afegeix nota Sol a l'acord</translation>
+        <translation>Afegeix nota Sol a l&apos;acord</translation>
     </message>
     <message>
         <source>rest</source>
@@ -7113,7 +7073,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Reset Beam Mode</source>
-        <translation>Reestableix mode d'agrupacions</translation>
+        <translation>Reestableix mode d&apos;agrupacions</translation>
     </message>
     <message>
         <source>up+shift+ctrl</source>
@@ -7137,7 +7097,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>select to beginning of measure</source>
-        <translation>Selecciona l'inici de compàs</translation>
+        <translation>Selecciona l&apos;inici de compàs</translation>
     </message>
     <message>
         <source>add next chord to selection</source>
@@ -7157,7 +7117,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>select to beginning of line</source>
-        <translation>Selecciona l'inici de la línia</translation>
+        <translation>Selecciona l&apos;inici de la línia</translation>
     </message>
     <message>
         <source>shift+home</source>
@@ -7173,7 +7133,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>select to beginning of score</source>
-        <translation>Selecciona l'inici de partitura</translation>
+        <translation>Selecciona l&apos;inici de partitura</translation>
     </message>
     <message>
         <source>ctrl+shift+home</source>
@@ -7461,19 +7421,19 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>editing sound on</source>
-        <translation>So d'edició activat</translation>
+        <translation>So d&apos;edició activat</translation>
     </message>
     <message>
         <source>Enable sound while editing</source>
-        <translation>Habilita so mentres s'edita</translation>
+        <translation>Habilita so mentres s&apos;edita</translation>
     </message>
     <message>
         <source>beam start</source>
-        <translation>Inici d'agrupació</translation>
+        <translation>Inici d&apos;agrupació</translation>
     </message>
     <message>
         <source>beam mid</source>
-        <translation>Meitat d'agrupació</translation>
+        <translation>Meitat d&apos;agrupació</translation>
     </message>
     <message>
         <source>no beam</source>
@@ -7505,7 +7465,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Transport Toolbar</source>
-        <translation>Barra d'eines de transport</translation>
+        <translation>Barra d&apos;eines de transport</translation>
     </message>
     <message>
         <source>Transport</source>
@@ -7513,11 +7473,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Note Input Toolbar</source>
-        <translation>Barra d'eines d'entrada de notes</translation>
+        <translation>Barra d&apos;eines d&apos;entrada de notes</translation>
     </message>
     <message>
         <source>Status Bar</source>
-        <translation>Barra d'estat</translation>
+        <translation>Barra d&apos;estat</translation>
     </message>
     <message>
         <source>Quit</source>
@@ -7649,31 +7609,31 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Add Chord Name</source>
-        <translation>Afegeix nom d'acord</translation>
+        <translation>Afegeix nom d&apos;acord</translation>
     </message>
     <message>
         <source>Chord Name</source>
-        <translation>Nom d'acord</translation>
+        <translation>Nom d&apos;acord</translation>
     </message>
     <message>
         <source>Add Chord Text</source>
-        <translation>Afegeix text d'acord</translation>
+        <translation>Afegeix text d&apos;acord</translation>
     </message>
     <message>
         <source>show harmony properties for chord</source>
-        <translation>Mostra propietats d'harmonia de l'acord</translation>
+        <translation>Mostra propietats d&apos;harmonia de l&apos;acord</translation>
     </message>
     <message>
         <source>Harmony Properties</source>
-        <translation>Propietats d'harmonia</translation>
+        <translation>Propietats d&apos;harmonia</translation>
     </message>
     <message>
         <source>Add Rehearsal Mark</source>
-        <translation>Afegeix marca d'assaig</translation>
+        <translation>Afegeix marca d&apos;assaig</translation>
     </message>
     <message>
         <source>Rehearsal Mark</source>
-        <translation>Marca d'assaig</translation>
+        <translation>Marca d&apos;assaig</translation>
     </message>
     <message>
         <source>Play</source>
@@ -7817,11 +7777,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>show inspector</source>
-        <translation>Mostra inspector d'objectes</translation>
+        <translation>Mostra inspector d&apos;objectes</translation>
     </message>
     <message>
         <source>Inspector</source>
-        <translation>Inspector d'objectes</translation>
+        <translation>Inspector d&apos;objectes</translation>
     </message>
     <message>
         <source>reset measure stretch</source>
@@ -8049,7 +8009,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Show instruments dialog</source>
-        <translation>Mostra el diàleg d'instruments</translation>
+        <translation>Mostra el diàleg d&apos;instruments</translation>
     </message>
     <message>
         <source>Show clefs palette</source>
@@ -8061,7 +8021,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>show keys signatures palette</source>
-        <translation>Mostra paleta d'armadures</translation>
+        <translation>Mostra paleta d&apos;armadures</translation>
     </message>
     <message>
         <source>Key Signatures...</source>
@@ -8069,7 +8029,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Show key signatures palette</source>
-        <translation>Mostra paleta d'armadures</translation>
+        <translation>Mostra paleta d&apos;armadures</translation>
     </message>
     <message>
         <source>Show symbols palette</source>
@@ -8077,7 +8037,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Show time signatures palette</source>
-        <translation>Mostra paleta d'indicacions de compàs</translation>
+        <translation>Mostra paleta d&apos;indicacions de compàs</translation>
     </message>
     <message>
         <source>Time Signatures...</source>
@@ -8089,7 +8049,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Note input mode</source>
-        <translation>Mode d'entrada de notes</translation>
+        <translation>Mode d&apos;entrada de notes</translation>
     </message>
     <message>
         <source>Pitch spell</source>
@@ -8161,7 +8121,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Reset beam mode of selected measures</source>
-        <translation>Reestableix mode d'agrupacions dels compassos seleccionats</translation>
+        <translation>Reestableix mode d&apos;agrupacions dels compassos seleccionats</translation>
     </message>
     <message>
         <source>Flip direction</source>
@@ -8193,23 +8153,23 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Pitch up note in chord</source>
-        <translation>Puja una nota a l'acord</translation>
+        <translation>Puja una nota a l&apos;acord</translation>
     </message>
     <message>
         <source>Up Note in Chord</source>
-        <translation>Nota més aguda de l'acord</translation>
+        <translation>Nota més aguda de l&apos;acord</translation>
     </message>
     <message>
         <source>Go to higher pitched note in chord</source>
-        <translation>Ves a la nota més aguda de l'acord</translation>
+        <translation>Ves a la nota més aguda de l&apos;acord</translation>
     </message>
     <message>
         <source>Go to top note in chord</source>
-        <translation>Ves a la nota més alta de l'acord</translation>
+        <translation>Ves a la nota més alta de l&apos;acord</translation>
     </message>
     <message>
         <source>Top Note in Chord</source>
-        <translation>Nota superior de l'acord</translation>
+        <translation>Nota superior de l&apos;acord</translation>
     </message>
     <message>
         <source>Move up</source>
@@ -8237,23 +8197,23 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Pitch down note in chord</source>
-        <translation>Baixa una nota a l'acord</translation>
+        <translation>Baixa una nota a l&apos;acord</translation>
     </message>
     <message>
         <source>Down Note in Chord</source>
-        <translation>Nota més greu de l'acord</translation>
+        <translation>Nota més greu de l&apos;acord</translation>
     </message>
     <message>
         <source>Go to lower pitched note in chord</source>
-        <translation>Ves a la nota més greu de l'acord</translation>
+        <translation>Ves a la nota més greu de l&apos;acord</translation>
     </message>
     <message>
         <source>Go to bottom note in chord</source>
-        <translation>Ves a la nota més baixa de l'acord</translation>
+        <translation>Ves a la nota més baixa de l&apos;acord</translation>
     </message>
     <message>
         <source>Bottom Note in Chord</source>
-        <translation>Nota inferior de l'acord</translation>
+        <translation>Nota inferior de l&apos;acord</translation>
     </message>
     <message>
         <source>Move down</source>
@@ -8341,7 +8301,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Rewind to start position</source>
-        <translation>Retrocedeix a la posició d'inici</translation>
+        <translation>Retrocedeix a la posició d&apos;inici</translation>
     </message>
     <message>
         <source>Seek to end</source>
@@ -8365,7 +8325,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Edit Chord Style...</source>
-        <translation>Edita estil d'acord ...</translation>
+        <translation>Edita estil d&apos;acord ...</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -8587,7 +8547,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Alto clef</source>
-        <translation>Clau d'Alto</translation>
+        <translation>Clau d&apos;Alto</translation>
     </message>
     <message>
         <source>Tenor clef</source>
@@ -8833,7 +8793,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>OttavaSegment</source>
-        <translation>Segment d'octava</translation>
+        <translation>Segment d&apos;octava</translation>
     </message>
     <message>
         <source>PedalSegment</source>
@@ -8945,7 +8905,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>ElementList</source>
-        <translation>Llista d'elements</translation>
+        <translation>Llista d&apos;elements</translation>
     </message>
     <message>
         <source>StaffList</source>
@@ -9031,7 +8991,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <source>Cannot read this score:
 your version of MuseScore is too old.</source>
-        <translation>No es por llegir aquesta partitura:&#13;
+        <translation>No es por llegir aquesta partitura:
 La teva versió de MuseScore és massa vella.</translation>
     </message>
 </context>
@@ -9142,19 +9102,19 @@ La teva versió de MuseScore és massa vella.</translation>
         <translation>Silenci de corxera 1/8</translation>
     </message>
     <message>
-        <source>16' rest</source>
+        <source>16&apos; rest</source>
         <translation>Silenci de semicorxera 1/16</translation>
     </message>
     <message>
-        <source>32' rest</source>
+        <source>32&apos; rest</source>
         <translation>Silenci de fusa 1/32</translation>
     </message>
     <message>
-        <source>64' rest</source>
+        <source>64&apos; rest</source>
         <translation>Silenci de semifusa 1/64</translation>
     </message>
     <message>
-        <source>128' rest</source>
+        <source>128&apos; rest</source>
         <translation>Silenci de garrapatea 1/128</translation>
     </message>
     <message>
@@ -9495,7 +9455,7 @@ La teva versió de MuseScore és massa vella.</translation>
     </message>
     <message>
         <source>sforza to accent</source>
-        <translation>Sforza a l'accent</translation>
+        <translation>Sforza a l&apos;accent</translation>
     </message>
     <message>
         <source>espressivo</source>
@@ -9611,11 +9571,11 @@ La teva versió de MuseScore és massa vella.</translation>
     </message>
     <message>
         <source>arpeggio arrow down</source>
-        <translation>Fletxa d'arpegi avall</translation>
+        <translation>Fletxa d&apos;arpegi avall</translation>
     </message>
     <message>
         <source>arpeggio arrow up</source>
-        <translation>Fletxa d'arpegi amunt</translation>
+        <translation>Fletxa d&apos;arpegi amunt</translation>
     </message>
     <message>
         <source>trill element</source>
@@ -9675,7 +9635,7 @@ La teva versió de MuseScore és massa vella.</translation>
     </message>
     <message>
         <source>eight flag</source>
-        <translation>Indicador d'octava</translation>
+        <translation>Indicador d&apos;octava</translation>
     </message>
     <message>
         <source>sixteenth flag</source>
@@ -9695,7 +9655,7 @@ La teva versió de MuseScore és massa vella.</translation>
     </message>
     <message>
         <source>deight flag</source>
-        <translation>Indicador d'octava avall</translation>
+        <translation>Indicador d&apos;octava avall</translation>
     </message>
     <message>
         <source>grace dash</source>
@@ -9723,11 +9683,11 @@ La teva versió de MuseScore és massa vella.</translation>
     </message>
     <message>
         <source>alto clef</source>
-        <translation>Clau d'Alto</translation>
+        <translation>Clau d&apos;Alto</translation>
     </message>
     <message>
         <source>calto clef</source>
-        <translation>Clau d'Alto en Do</translation>
+        <translation>Clau d&apos;Alto en Do</translation>
     </message>
     <message>
         <source>bass clef</source>

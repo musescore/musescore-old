@@ -6665,46 +6665,6 @@ p, li { white-space: pre-wrap; }
         <translation>feloldott</translation>
     </message>
     <message>
-        <source>(sharp)</source>
-        <translation>(kereszt)</translation>
-    </message>
-    <message>
-        <source>(flat)</source>
-        <translation>(bé)</translation>
-    </message>
-    <message>
-        <source>(double sharp)</source>
-        <translation>(kettőskereszt)</translation>
-    </message>
-    <message>
-        <source>(double flat)</source>
-        <translation>(kettős bé)</translation>
-    </message>
-    <message>
-        <source>(natural)</source>
-        <translation>(feloldójel)</translation>
-    </message>
-    <message>
-        <source>[sharp]</source>
-        <translation>[kereszt]</translation>
-    </message>
-    <message>
-        <source>[flat]</source>
-        <translation>[bé]</translation>
-    </message>
-    <message>
-        <source>[double sharp]</source>
-        <translation>[kettőskereszt]</translation>
-    </message>
-    <message>
-        <source>[double flat]</source>
-        <translation>[kettős bé]</translation>
-    </message>
-    <message>
-        <source>[natural]</source>
-        <translation>[feloldójel]</translation>
-    </message>
-    <message>
         <source>flat-slash</source>
         <translation>bé, vessző</translation>
     </message>
