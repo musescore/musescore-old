@@ -748,11 +748,11 @@ QRectF Note::drag(const QPointF& s)
 
 void Note::endDrag()
       {
+      dragMode     = false;
       if (_lineOffset == 0)
             return;
       setLine(_line + _lineOffset);
       _lineOffset  = 0;
-      dragMode     = false;
       int staffIdx = chord()->staffIdx() + chord()->staffMove();
       Staff* staff = score()->staff(staffIdx);
       int tick     = chord()->tick();
