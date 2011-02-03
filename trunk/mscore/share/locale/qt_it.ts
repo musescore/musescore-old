@@ -2,10 +2,41 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="it">
 <context>
+    <name>MAC_APPLICATION_MENU</name>
+    <message>
+        <source>Services</source>
+        <translation>Servizi</translation>
+    </message>
+    <message>
+        <source>Hide %1</source>
+        <translation>Nascondi %1</translation>
+    </message>
+    <message>
+        <source>Hide Others</source>
+        <translation>Nascondi gli altri</translation>
+    </message>
+    <message>
+        <source>Show All</source>
+        <translation>Mostra tutto</translation>
+    </message>
+    <message>
+        <source>Preferences...</source>
+        <translation>Preferenze...</translation>
+    </message>
+    <message>
+        <source>Quit %1</source>
+        <translation>Chiudi %1</translation>
+    </message>
+    <message>
+        <source>About %1</source>
+        <translation>Informzioni su %1</translation>
+    </message>
+</context>
+<context>
     <name>AudioOutput</name>
     <message>
         <source>&lt;html&gt;The audio playback device &lt;b&gt;%1&lt;/b&gt; does not work.&lt;br/&gt;Falling back to &lt;b&gt;%2&lt;/b&gt;.&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;html&gt;Il dispositivo di riproduzione audio &lt;b&gt;%1&lt;/b&gt; non funziona.&lt;br/&gt;Ripiego su &lt;b&gt;%2&lt;/b&gt;.&lt;/html&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;Switching to the audio playback device &lt;b&gt;%1&lt;/b&gt;&lt;br/&gt;which just became available and has higher preference.&lt;/html&gt;</source>
@@ -48,12 +79,14 @@
     <message>
         <source>Warning: You do not seem to have the package gstreamer0.10-plugins-good installed.
           Some video features have been disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Avviso: sembra che il pacchetto gstreamer0.10-plugins-good non sia installato.
+          Alcune funzionalità video sono state disabilitate.</translation>
     </message>
     <message>
         <source>Warning: You do not seem to have the base GStreamer plugins installed.
           All audio and video support has been disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Avviso: sembra che il componente GStreamer di base non sia installato.
+          Tutti i supporti audio e video sono stati disabilitati</translation>
     </message>
 </context>
 <context>
@@ -68,7 +101,6 @@ have libgstreamer-plugins-base installed.</source>
     <message numerus="yes">
         <source>A required codec is missing. You need to install the following codec(s) to play this content: %0</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
             <numerusform></numerusform>
         </translation>
     </message>
@@ -150,7 +182,7 @@ have libgstreamer-plugins-base installed.</source>
     </message>
     <message>
         <source>Write: %1</source>
-        <translation>Scrittua: %1</translation>
+        <translation>Scrittura: %1</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -222,7 +254,7 @@ have libgstreamer-plugins-base installed.</source>
     </message>
     <message>
         <source>Preview File Contents</source>
-        <translation type="unfinished"></translation>
+        <translation>Anteprima del contenuto dei file</translation>
     </message>
     <message>
         <source>Read-write</source>
@@ -1880,7 +1912,7 @@ Vuoi eliminarlo comunque?</translation>
     </message>
     <message>
         <source>The plugin &apos;%1&apos; uses incompatible Qt library. Expected build key &quot;%2&quot;, got &quot;%3&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Il plugin &apos;%1&apos; utilizza librerie QT non compatibili. Versione di compilazione attesa &quot;%2&quot;, ottenuta &quot;%3&quot;</translation>
     </message>
     <message>
         <source>Unknown error</source>
@@ -1957,7 +1989,7 @@ Vuoi eliminarlo comunque?</translation>
     </message>
     <message>
         <source>%1: Remote closed</source>
-        <translation type="unfinished"></translation>
+        <translation>%1: terminazione remota</translation>
     </message>
     <message>
         <source>%1: Invalid name</source>
@@ -1985,7 +2017,7 @@ Vuoi eliminarlo comunque?</translation>
     </message>
     <message>
         <source>%1: The socket operation is not supported</source>
-        <translation type="unfinished"></translation>
+        <translation>%1: l&apos;operazione di socket non è supportata</translation>
     </message>
     <message>
         <source>%1: Unknown error %2</source>
@@ -2059,7 +2091,7 @@ Vuoi eliminarlo comunque?</translation>
     </message>
     <message>
         <source>Unable to store next result</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile memorizzare il risultato successivo</translation>
     </message>
 </context>
 <context>
@@ -2133,7 +2165,7 @@ Vuoi eliminarlo comunque?</translation>
     </message>
     <message>
         <source>Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>Ripristina</translation>
     </message>
     <message>
         <source>Help</source>
@@ -2354,11 +2386,11 @@ Vuoi eliminarlo comunque?</translation>
     </message>
     <message>
         <source>Error while downloading %1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore durante lo scaricamento di %1: %2</translation>
     </message>
     <message>
         <source>Error while uploading %1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Errore durante l&apos;invio di %1: %2</translation>
     </message>
 </context>
 <context>
@@ -2477,7 +2509,7 @@ Vuoi eliminarlo comunque?</translation>
     </message>
     <message>
         <source>Unable to fetch next</source>
-        <translation>Impossibile recuperare il prossimo</translation>
+        <translation>Impossibile recuperare il successivo</translation>
     </message>
     <message>
         <source>Unable to prepare statement</source>
@@ -2489,7 +2521,7 @@ Vuoi eliminarlo comunque?</translation>
     </message>
     <message>
         <source>Unable to fetch last</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile recuperare l&apos;ultimo</translation>
     </message>
     <message>
         <source>Unable to fetch</source>
@@ -2497,11 +2529,11 @@ Vuoi eliminarlo comunque?</translation>
     </message>
     <message>
         <source>Unable to fetch first</source>
-        <translation type="unfinished">Impossibile recuperare il primo</translation>
+        <translation>Impossibile recuperare il primo</translation>
     </message>
     <message>
         <source>Unable to fetch previous</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossibile recuperare il precedente</translation>
     </message>
 </context>
 <context>
@@ -2539,11 +2571,11 @@ Vuoi eliminarlo comunque?</translation>
     <name>QPPDOptionsModel</name>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Nome</translation>
+        <translation>Nome</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished">Valore</translation>
+        <translation>Valore</translation>
     </message>
 </context>
 <context>
@@ -2588,83 +2620,83 @@ Vuoi eliminarlo comunque?</translation>
     <name>QPageSetupWidget</name>
     <message>
         <source>Centimeters (cm)</source>
-        <translation type="unfinished"></translation>
+        <translation>Centimetri (cm)</translation>
     </message>
     <message>
         <source>Millimeters (mm)</source>
-        <translation type="unfinished"></translation>
+        <translation>Millimetri (mm)</translation>
     </message>
     <message>
         <source>Inches (in)</source>
-        <translation type="unfinished"></translation>
+        <translation>Pollici (in)</translation>
     </message>
     <message>
         <source>Points (pt)</source>
-        <translation type="unfinished"></translation>
+        <translation>Punti (pt)</translation>
     </message>
     <message>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Modulo</translation>
     </message>
     <message>
         <source>Paper</source>
-        <translation type="unfinished"></translation>
+        <translation>Carta</translation>
     </message>
     <message>
         <source>Page size:</source>
-        <translation type="unfinished">Dimensioni pagina:</translation>
+        <translation>Dimensioni pagina:</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished"></translation>
+        <translation>Larghezza:</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation type="unfinished"></translation>
+        <translation>Altezza:</translation>
     </message>
     <message>
         <source>Paper source:</source>
-        <translation type="unfinished">Origine carta:</translation>
+        <translation>Alimentazione carta:</translation>
     </message>
     <message>
         <source>Orientation</source>
-        <translation type="unfinished"></translation>
+        <translation>Orientamento</translation>
     </message>
     <message>
         <source>Portrait</source>
-        <translation type="unfinished">Verticale</translation>
+        <translation>Verticale</translation>
     </message>
     <message>
         <source>Landscape</source>
-        <translation type="unfinished">Orizzontale</translation>
+        <translation>Orizzontale</translation>
     </message>
     <message>
         <source>Reverse landscape</source>
-        <translation type="unfinished"></translation>
+        <translation>Orizzontale inverso</translation>
     </message>
     <message>
         <source>Reverse portrait</source>
-        <translation type="unfinished"></translation>
+        <translation>Verticale inverso</translation>
     </message>
     <message>
         <source>Margins</source>
-        <translation type="unfinished"></translation>
+        <translation>Margini</translation>
     </message>
     <message>
         <source>top margin</source>
-        <translation type="unfinished"></translation>
+        <translation>margine superiore</translation>
     </message>
     <message>
         <source>left margin</source>
-        <translation type="unfinished"></translation>
+        <translation>margine sinistro</translation>
     </message>
     <message>
         <source>right margin</source>
-        <translation type="unfinished"></translation>
+        <translation>margine destro</translation>
     </message>
     <message>
         <source>bottom margin</source>
-        <translation type="unfinished"></translation>
+        <translation>margine inferiore</translation>
     </message>
 </context>
 <context>
@@ -2864,50 +2896,50 @@ Scegli un nome diverso.</translation>
     </message>
     <message>
         <source>Write %1 file</source>
-        <translation type="unfinished"></translation>
+        <translation>Scrivi %1 file</translation>
     </message>
 </context>
 <context>
     <name>QPrintPreviewDialog</name>
     <message>
         <source>Page Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Impostazioni di pagina</translation>
     </message>
     <message>
         <source>Print Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Anteprima di stampa</translation>
     </message>
     <message>
         <source>Next page</source>
-        <translation type="unfinished"></translation>
+        <translation>Pagina successiva</translation>
     </message>
     <message>
         <source>Previous page</source>
-        <translation type="unfinished"></translation>
+        <translation>Pagina precedente</translation>
     </message>
     <message>
         <source>First page</source>
-        <translation type="unfinished"></translation>
+        <translation>Prima pagina</translation>
     </message>
     <message>
         <source>Last page</source>
-        <translation type="unfinished"></translation>
+        <translation>Ultima pagina</translation>
     </message>
     <message>
         <source>Fit width</source>
-        <translation type="unfinished"></translation>
+        <translation>Adatta alla larghezza</translation>
     </message>
     <message>
         <source>Fit page</source>
-        <translation type="unfinished"></translation>
+        <translation>Adatta alla pagina</translation>
     </message>
     <message>
         <source>Zoom in</source>
-        <translation type="unfinished"></translation>
+        <translation>Aumenta zoom</translation>
     </message>
     <message>
         <source>Zoom out</source>
-        <translation type="unfinished"></translation>
+        <translation>Riduci zoom</translation>
     </message>
     <message>
         <source>Portrait</source>
@@ -2923,7 +2955,7 @@ Scegli un nome diverso.</translation>
     </message>
     <message>
         <source>Show facing pages</source>
-        <translation type="unfinished">Mostra pagine</translation>
+        <translation>Mostra pagine affiancate</translation>
     </message>
     <message>
         <source>Show overview of all pages</source>
@@ -3021,7 +3053,7 @@ Scegli un nome diverso.</translation>
     </message>
     <message>
         <source>Duplex Printing</source>
-        <translation type="unfinished">Stampa fronte/retro</translation>
+        <translation>Stampa fronte/retro</translation>
     </message>
     <message>
         <source>None</source>
@@ -3212,7 +3244,7 @@ Scegli un nome diverso.</translation>
     </message>
     <message>
         <source>No query</source>
-        <translation type="unfinished"></translation>
+        <translation>Nessuna query</translation>
     </message>
 </context>
 <context>
@@ -4098,7 +4130,7 @@ Scegli un nome diverso.</translation>
     <message>
         <source>Open Frame</source>
         <comment>Open Frame in New Window context menu item</comment>
-        <translation type="unfinished"></translation>
+        <translation>Apri riquadro</translation>
     </message>
     <message>
         <source>Copy</source>
@@ -4138,7 +4170,7 @@ Scegli un nome diverso.</translation>
     <message>
         <source>No Guesses Found</source>
         <comment>No Guesses Found context menu item</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nessuna stima trovata</translation>
     </message>
     <message>
         <source>Ignore</source>
@@ -4158,7 +4190,7 @@ Scegli un nome diverso.</translation>
     <message>
         <source>Look Up In Dictionary</source>
         <comment>Look Up in Dictionary context menu item</comment>
-        <translation type="unfinished"></translation>
+        <translation>Cerca nel dizionario</translation>
     </message>
     <message>
         <source>Open Link</source>
@@ -4173,7 +4205,7 @@ Scegli un nome diverso.</translation>
     <message>
         <source>Spelling</source>
         <comment>Spelling and Grammar context sub-menu item</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ortografia</translation>
     </message>
     <message>
         <source>Show Spelling and Grammar</source>
@@ -4253,7 +4285,7 @@ Scegli un nome diverso.</translation>
     <message>
         <source>No recent searches</source>
         <comment>Label for only item in menu that appears when clicking on the search field image, when no searches have been performed</comment>
-        <translation type="unfinished"></translation>
+        <translation>Nessuna ricerca recente</translation>
     </message>
     <message>
         <source>Recent searches</source>
@@ -4263,7 +4295,7 @@ Scegli un nome diverso.</translation>
     <message>
         <source>Clear recent searches</source>
         <comment>menu item in Recent Searches menu that empties menu&apos;s contents</comment>
-        <translation type="unfinished"></translation>
+        <translation>Cancella le ricerche recenti</translation>
     </message>
     <message>
         <source>Unknown</source>
@@ -4650,7 +4682,7 @@ Scegli un nome diverso.</translation>
     </message>
     <message>
         <source>Network timeout.</source>
-        <translation type="unfinished"></translation>
+        <translation>Timeout di rete.</translation>
     </message>
     <message>
         <source>Element %1 can&apos;t be serialized because it appears outside the document element.</source>
@@ -4876,13 +4908,11 @@ Scegli un nome diverso.</translation>
         <source>%1 takes at most %n argument(s). %2 is therefore invalid.</source>
         <translation type="unfinished">
             <numerusform></numerusform>
-            <numerusform></numerusform>
         </translation>
     </message>
     <message numerus="yes">
         <source>%1 requires at least %n argument(s). %2 is therefore invalid.</source>
         <translation type="unfinished">
-            <numerusform></numerusform>
             <numerusform></numerusform>
         </translation>
     </message>
@@ -4968,7 +4998,7 @@ Scegli un nome diverso.</translation>
     </message>
     <message>
         <source>%1 cannot be retrieved</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 non può essere recuperato</translation>
     </message>
     <message>
         <source>The normalization form %1 is unsupported. The supported forms are %2, %3, %4, and %5, and none, i.e. the empty string (no normalization).</source>
@@ -5004,7 +5034,7 @@ Scegli un nome diverso.</translation>
     </message>
     <message>
         <source>No variable by name %1 exists</source>
-        <translation type="unfinished"></translation>
+        <translation>Non esiste alcuna variabile con il nome %1</translation>
     </message>
     <message>
         <source>The variable %1 is unused</source>
@@ -5116,7 +5146,7 @@ Scegli un nome diverso.</translation>
     </message>
     <message>
         <source>No function by name %1 is available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Non è disponibile alcuna variabile con il nome %1.</translation>
     </message>
     <message>
         <source>The namespace URI cannot be the empty string when binding to a prefix, %1.</source>
@@ -5238,55 +5268,55 @@ Scegli un nome diverso.</translation>
     <name>WebCore::PlatformScrollbar</name>
     <message>
         <source>Scroll here</source>
-        <translation type="unfinished">Scorri qui</translation>
+        <translation>Scorri qui</translation>
     </message>
     <message>
         <source>Left edge</source>
-        <translation type="unfinished">Bordo sinistro</translation>
+        <translation>Bordo sinistro</translation>
     </message>
     <message>
         <source>Top</source>
-        <translation type="unfinished">In alto</translation>
+        <translation>In alto</translation>
     </message>
     <message>
         <source>Right edge</source>
-        <translation type="unfinished">Bordo destro</translation>
+        <translation>Bordo destro</translation>
     </message>
     <message>
         <source>Bottom</source>
-        <translation type="unfinished">In basso</translation>
+        <translation>In basso</translation>
     </message>
     <message>
         <source>Page left</source>
-        <translation type="unfinished">Pagina sinistra</translation>
+        <translation>Pagina sinistra</translation>
     </message>
     <message>
         <source>Page up</source>
-        <translation type="unfinished">Pagina su</translation>
+        <translation>Pagina su</translation>
     </message>
     <message>
         <source>Page right</source>
-        <translation type="unfinished">Pagina destra</translation>
+        <translation>Pagina destra</translation>
     </message>
     <message>
         <source>Page down</source>
-        <translation type="unfinished">Pagina giù</translation>
+        <translation>Pagina giù</translation>
     </message>
     <message>
         <source>Scroll left</source>
-        <translation type="unfinished">Scorrimento a sinistra</translation>
+        <translation>Scorri a sinistra</translation>
     </message>
     <message>
         <source>Scroll up</source>
-        <translation type="unfinished">Scorrimento in alto</translation>
+        <translation>Scorri in alto</translation>
     </message>
     <message>
         <source>Scroll right</source>
-        <translation type="unfinished">Scorrimento a destra</translation>
+        <translation>Scorri a destra</translation>
     </message>
     <message>
         <source>Scroll down</source>
-        <translation type="unfinished">Scorrimento in basso</translation>
+        <translation>Scorri in basso</translation>
     </message>
 </context>
 </TS>

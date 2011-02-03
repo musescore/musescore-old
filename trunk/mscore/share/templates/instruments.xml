@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf8"?>
+<?xml version="1.0" encoding="ISO-8859-1"?>
 <museScore version="1.0">
 
   <Articulation>
@@ -134,7 +134,7 @@
         <extended>1</extended>
         </instrument>
      <instrument>
-        <name>Hypobass Flute</name>
+        <name>Hyperbass Flute</name>
         <short-name>Hb. Fl.</short-name>
         <clef>6</clef>
         <aPitchRange>12-48</aPitchRange>
@@ -2004,7 +2004,7 @@
         <aPitchRange>40-67</aPitchRange>
         <pPitchRange>40-70</pPitchRange>
         <channel>
-           <program>58</program>
+           <program>60</program>
            </channel>
         </instrument>
      <instrument>
@@ -2067,7 +2067,7 @@
         <aPitchRange>40-75</aPitchRange>
         <pPitchRange>40-79</pPitchRange>
         <channel>
-           <program>58</program>
+           <program>60</program>
            </channel>
         <extended>1</extended>
         </instrument>
@@ -3108,7 +3108,7 @@
            </channel>
         </instrument>
      <instrument>
-        <name>Automobile Break Drums</name>
+        <name>Automobile Brake Drums</name>
         <short-name>Aut. Brk. Dr.</short-name>
         <stafflines>1</stafflines>
         <clef>14</clef>
@@ -3142,7 +3142,7 @@
            </channel>
         </instrument>
      <instrument>
-        <name>Chaines</name>
+        <name>Chains</name>
         <short-name>Chn.</short-name>
         <stafflines>1</stafflines>
         <clef>14</clef>
@@ -3202,9 +3202,25 @@
      <instrument>
         <name>Temple Blocks</name>
         <short-name>Tmp. Bl.</short-name>
-        <stafflines>5</stafflines>
+        <stafflines>1</stafflines>
+        <clef>14</clef>
+        <drumset>1</drumset>
+        <Drum pitch="76">
+           <head>0</head>
+           <line>3</line>
+           <voice>0</voice>
+           <name>High Wood Block</name>
+           <stem>1</stem>
+           </Drum>
+        <Drum pitch="77">
+           <head>0</head>
+           <line>5</line>
+           <voice>0</voice>
+           <name>Low Wood Block</name>
+           <stem>1</stem>
+           </Drum>
         <channel>
-           <program>115</program>
+           <program>0</program>
            </channel>
         </instrument>
      <instrument>
@@ -3747,7 +3763,7 @@
         </instrument>
      </instrument-group>
 
-   <instrument-group name="Fretted Instruments">
+   <instrument-group name="Guitars">
      <instrument>
         <name>Soprano Guitar</name>
         <short-name>S. Guit.</short-name>
@@ -3773,25 +3789,11 @@
         <name>Guitar</name>
         <short-name>Guit.</short-name>
         <clef>3</clef>
-        <Tablature>
-           <frets>19</frets>
-           <string>40</string>
-           <string>45</string>
-           <string>50</string>
-           <string>55</string>
-           <string>59</string>
-           <string>64</string>
-           </Tablature>
         <aPitchRange>40-83</aPitchRange>
         <pPitchRange>40-83</pPitchRange>
         <channel>
            <program>24</program>
            </channel>
-        </instrument>
-     <instrument>
-        <init>Guitar</init>
-        <description>Guitar (Tablature)</description>
-        <stafftype>tablature</stafftype>
         </instrument>
      <instrument>
         <name>11-string Alto Guitar</name>
@@ -3865,18 +3867,6 @@
         <channel>
            <program>33</program>
            </channel>
-        <Tablature>
-           <frets>24</frets>
-           <string>28</string>
-           <string>33</string>
-           <string>38</string>
-           <string>43</string>
-           </Tablature>
-        </instrument>
-     <instrument>
-        <init>Electric Bass</init>
-        <description>Electric Bass (Tablature 4 strings)</description>
-        <stafftype>tablature</stafftype>
         </instrument>
      <instrument>
         <name>Fretless Electric Bass</name>
@@ -3887,115 +3877,6 @@
         <channel>
            <program>35</program>
            </channel>
-        </instrument>
-     <instrument>
-        <name>Lute</name>
-        <short-name>Lute</short-name>
-        <stafftype>tablature</stafftype>
-        <aPitchRange>33-79</aPitchRange>
-        <pPitchRange>33-79</pPitchRange>
-        <channel>
-           <program>25</program>
-           </channel>
-        </instrument>
-     <instrument>
-        <name>Renaissance Tenor Lute (5 course)</name>
-        <short-name>R. Lute</short-name>
-        <stafftype>tablature</stafftype>
-        <aPitchRange>48-79</aPitchRange>
-        <pPitchRange>48-79</pPitchRange>
-        <channel>
-           <program>25</program>
-           </channel>
-        <extended>1</extended>
-        </instrument>
-     <instrument>
-        <name>Renaissance Tenor Lute (6 course)</name>
-        <short-name>R. Lute</short-name>
-        <stafftype>tablature</stafftype>
-        <aPitchRange>43-79</aPitchRange>
-        <pPitchRange>43-79</pPitchRange>
-        <channel>
-           <program>25</program>
-           </channel>
-        <extended>1</extended>
-        </instrument>
-     <instrument>
-        <name>Renaissance Tenor Lute (7 course)</name>
-        <short-name>R. Lute</short-name>
-        <stafftype>tablature</stafftype>
-        <aPitchRange>38-79</aPitchRange>
-        <pPitchRange>38-79</pPitchRange>
-        <channel>
-           <program>25</program>
-           </channel>
-        <extended>1</extended>
-        </instrument>
-     <instrument>
-        <name>Renaissance Tenor Lute (8 course)</name>
-        <short-name>R. Lute.</short-name>
-        <stafftype>tablature</stafftype>
-        <aPitchRange>38-79</aPitchRange>
-        <pPitchRange>38-79</pPitchRange>
-        <channel>
-           <program>25</program>
-           </channel>
-        <extended>1</extended>
-        </instrument>
-     <instrument>
-        <name>Renaissance Tenor Lute (9 course)</name>
-        <short-name>R. Lute</short-name>
-        <stafftype>tablature</stafftype>
-        <aPitchRange>38-79</aPitchRange>
-        <pPitchRange>38-79</pPitchRange>
-        <channel>
-           <program>25</program>
-           </channel>
-        <extended>1</extended>
-        </instrument>
-     <instrument>
-        <name>Renaissance Tenor Lute (10 course)</name>
-        <short-name>R. Lute</short-name>
-        <stafftype>tablature</stafftype>
-        <aPitchRange>36-79</aPitchRange>
-        <pPitchRange>36-79</pPitchRange>
-        <channel>
-           <program>25</program>
-           </channel>
-        <extended>1</extended>
-        </instrument>
-     <instrument>
-        <name>Baroque Lute (13 course)</name>
-        <short-name>B. Lute</short-name>
-        <stafftype>tablature</stafftype>
-        <aPitchRange>33-77</aPitchRange>
-        <pPitchRange>33-77</pPitchRange>
-        <channel>
-           <program>25</program>
-           </channel>
-        <extended>1</extended>
-        </instrument>
-     <instrument>
-        <name>Archlute (14 course)</name>
-        <short-name>A. Lute</short-name>
-        <stafftype>tablature</stafftype>
-        <aPitchRange>33-77</aPitchRange>
-        <pPitchRange>33-77</pPitchRange>
-        <channel>
-           <program>25</program>
-           </channel>
-        <extended>1</extended>
-        </instrument>
-     <instrument>
-        <name>Theorbo (15 course)</name>
-        <short-name>Thb.</short-name>
-        <stafftype>tablature</stafftype>
-        <aPitchRange>33-71</aPitchRange>
-        <pPitchRange>33-71</pPitchRange>
-        <channel>
-           <program>25</program>
-           </channel>
-        <extended>1</extended>
         </instrument>
      <instrument>
         <name>Mandolin</name>
@@ -4018,7 +3899,7 @@
            </channel>
         </instrument>
      <instrument>
-        <name>Bouzouki (3 course)</name>
+        <name>Bouzouki (3-course)</name>
         <short-name>Bou.</short-name>
         <clef>3</clef>
         <aPitchRange>38-89</aPitchRange>
@@ -4029,7 +3910,7 @@
         <extended>1</extended>
         </instrument>
      <instrument>
-        <name>Bouzouki (4 course)</name>
+        <name>Bouzouki (4-course)</name>
         <short-name>Bou.</short-name>
         <clef>3</clef>
         <aPitchRange>36-89</aPitchRange>
@@ -4307,318 +4188,9 @@
         <clef staff="2">4</clef>
         <clef staff="3">4</clef>
         <bracket>1</bracket>
-        <channel name="I">
-            <descr>Division I</descr>
-            <synti>Aeolus</synti>
-            <MidiAction name="Reset">
-               <descr>Reset all stops</descr>
-               <controller ctrl="98" value="66"/>
-               </MidiAction>
-            <MidiAction name="prin8">
-               <descr>set stop Principal 8</descr>
-               <controller ctrl="98" value="98"/>
-               <controller ctrl="98" value="0"/>
-               </MidiAction>
-            <MidiAction name="prin4">
-               <descr>set stop Principal 4</descr>
-               <controller ctrl="98" value="98"/>
-               <controller ctrl="98" value="1"/>
-               </MidiAction>
-            <MidiAction name="oct2">
-               <descr>set stop Octave 2</descr>
-               <controller ctrl="98" value="98"/>
-               <controller ctrl="98" value="2"/>
-               </MidiAction>
-            <MidiAction name="oct1">
-               <descr>set stop Octave 1</descr>
-               <controller ctrl="98" value="98"/>
-               <controller ctrl="98" value="3"/>
-               </MidiAction>
-            <MidiAction name="qu513">
-               <descr>set stop Quint 5 1/3</descr>
-               <controller ctrl="98" value="98"/>
-               <controller ctrl="98" value="4"/>
-               </MidiAction>
-            <MidiAction name="qu223">
-               <descr>set stop Quint 2 2/3</descr>
-               <controller ctrl="98" value="98"/>
-               <controller ctrl="98" value="5"/>
-               </MidiAction>
-            <MidiAction name="tibia8">
-               <descr>set stop Tibia 8</descr>
-               <controller ctrl="98" value="98"/>
-               <controller ctrl="98" value="6"/>
-               </MidiAction>
-            <MidiAction name="celes8">
-               <descr>set stop Celesta 8</descr>
-               <controller ctrl="98" value="98"/>
-               <controller ctrl="98" value="7"/>
-               </MidiAction>
-            <MidiAction name="flute8">
-               <descr>set stop Flöte 8</descr>
-               <controller ctrl="98" value="98"/>
-               <controller ctrl="98" value="8"/>
-               </MidiAction>
-            <MidiAction name="flute4">
-               <descr>set stop Flöte 4</descr>
-               <controller ctrl="98" value="98"/>
-               <controller ctrl="98" value="9"/>
-               </MidiAction>
-            <MidiAction name="flute2">
-               <descr>set stop Flöte 2</descr>
-               <controller ctrl="98" value="98"/>
-               <controller ctrl="98" value="10"/>
-               </MidiAction>
-            <MidiAction name="cymb">
-               <descr>set stop Cymbel VI</descr>
-               <controller ctrl="98" value="98"/>
-               <controller ctrl="98" value="11"/>
-               </MidiAction>
-            <MidiAction name="mixt">
-               <descr>set stop Mixtur</descr>
-               <controller ctrl="98" value="98"/>
-               <controller ctrl="98" value="12"/>
-               </MidiAction>
-            <MidiAction name="trum8">
-               <descr>set stop Trumpet</descr>
-               <controller ctrl="98" value="98"/>
-               <controller ctrl="98" value="13"/>
-               </MidiAction>
-            <MidiAction name="C1+2">
-               <descr>set stop I+II</descr>
-               <controller ctrl="98" value="98"/>
-               <controller ctrl="98" value="14"/>
-               </MidiAction>
-            <MidiAction name="C1+3">
-               <descr>set stop I+III</descr>
-               <controller ctrl="98" value="98"/>
-               <controller ctrl="98" value="15"/>
-               </MidiAction>
-            </channel>
-        <channel name="II">
-            <descr>Division II</descr>
-            <synti>Aeolus</synti>
-            <MidiAction name="Reset">
-               <descr>Reset all stops</descr>
-               <controller ctrl="98" value="65"/>
-               </MidiAction>
-            <MidiAction name="rofl8">
-               <descr>set stop Rohrflöte 8</descr>
-               <controller ctrl="98" value="97"/>
-               <controller ctrl="98" value="0"/>
-               </MidiAction>
-            <MidiAction name="half8">
-               <descr>set stop Harmonic Flute 8</descr>
-               <controller ctrl="98" value="97"/>
-               <controller ctrl="98" value="1"/>
-               </MidiAction>
-            <MidiAction name="fldo4">
-               <descr>set stop Flauto Dolce 4</descr>
-               <controller ctrl="98" value="97"/>
-               <controller ctrl="98" value="2"/>
-               </MidiAction>
-            <MidiAction name="nasard">
-               <descr>set stop Nasard 2 2/3</descr>
-               <controller ctrl="98" value="97"/>
-               <controller ctrl="98" value="3"/>
-               </MidiAction>
-            <MidiAction name="otta2">
-               <descr>set stop Ottavina2</descr>
-               <controller ctrl="98" value="97"/>
-               <controller ctrl="98" value="4"/>
-               </MidiAction>
-            <MidiAction name="tertia">
-               <descr>set stop Tertia 1 3/5</descr>
-               <controller ctrl="98" value="97"/>
-               <controller ctrl="98" value="5"/>
-               </MidiAction>
-            <MidiAction name="sesqui">
-               <descr>set stop Sesquialtera</descr>
-               <controller ctrl="98" value="97"/>
-               <controller ctrl="98" value="6"/>
-               </MidiAction>
-            <MidiAction name="septim">
-               <descr>set stop Septime</descr>
-               <controller ctrl="98" value="97"/>
-               <controller ctrl="98" value="7"/>
-               </MidiAction>
-            <MidiAction name="krumh">
-               <descr>set stop Krumhorn</descr>
-               <controller ctrl="98" value="97"/>
-               <controller ctrl="98" value="9"/>
-               </MidiAction>
-            <MidiAction name="melod">
-               <descr>set stop Melodia</descr>
-               <controller ctrl="98" value="97"/>
-               <controller ctrl="98" value="10"/>
-               </MidiAction>
-            <MidiAction name="TR">
-               <descr>set stop Tremulant</descr>
-               <controller ctrl="98" value="97"/>
-               <controller ctrl="98" value="11"/>
-               </MidiAction>
-            <MidiAction name="C2+3">
-               <descr>set stop II+III</descr>
-               <controller ctrl="98" value="97"/>
-               <controller ctrl="98" value="12"/>
-               </MidiAction>
-            </channel>
-        <channel name="III">
-            <descr>Division III</descr>
-            <synti>Aeolus</synti>
-            <MidiAction name="Reset">
-               <descr>Reset all stops in group III</descr>
-               <controller ctrl="98" value="64"/>
-               </MidiAction>
-            <MidiAction name="prin8">
-               <descr>set stop Princiapl 8</descr>
-               <controller ctrl="98" value="96"/>
-               <controller ctrl="98" value="0"/>
-               </MidiAction>
-            <MidiAction name="gems8">
-               <descr>set stop Gemshorn 8</descr>
-               <controller ctrl="98" value="96"/>
-               <controller ctrl="98" value="1"/>
-               </MidiAction>
-            <MidiAction name="quna8">
-               <descr>set stop Quintadena 8</descr>
-               <controller ctrl="98" value="96"/>
-               <controller ctrl="98" value="2"/>
-               </MidiAction>
-            <MidiAction name="suab8">
-               <descr>set stop Suabile 8</descr>
-               <controller ctrl="98" value="96"/>
-               <controller ctrl="98" value="3"/>
-               </MidiAction>
-            <MidiAction name="rofl4">
-               <descr>set stop Rohrflöte 4</descr>
-               <controller ctrl="98" value="96"/>
-               <controller ctrl="98" value="4"/>
-               </MidiAction>
-            <MidiAction name="dulz4">
-               <descr>set stop Dulzflöte 4</descr>
-               <controller ctrl="98" value="96"/>
-               <controller ctrl="98" value="5"/>
-               </MidiAction>
-            <MidiAction name="fl223">
-               <descr>set stop Quintflöte 2 2/3</descr>
-               <controller ctrl="98" value="96"/>
-               <controller ctrl="98" value="6"/>
-               </MidiAction>
-            <MidiAction name="soct2">
-               <descr>set stop Superoctav2 2</descr>
-               <controller ctrl="98" value="96"/>
-               <controller ctrl="98" value="7"/>
-               </MidiAction>
-            <MidiAction name="siff1">
-               <descr>set stop Sifflet 1</descr>
-               <controller ctrl="98" value="96"/>
-               <controller ctrl="98" value="8"/>
-               </MidiAction>
-            <MidiAction name="cymb">
-               <descr>set stop Cymbel VI</descr>
-               <controller ctrl="98" value="96"/>
-               <controller ctrl="98" value="9"/>
-               </MidiAction>
-            <MidiAction name="oboe">
-               <descr>set stop Oboe</descr>
-               <controller ctrl="98" value="96"/>
-               <controller ctrl="98" value="10"/>
-               </MidiAction>
-            <MidiAction name="TR">
-               <descr>set stop Tremulant</descr>
-               <controller ctrl="98" value="96"/>
-               <controller ctrl="98" value="11"/>
-               </MidiAction>
-            </channel>
-        <channel name="P">
-            <descr>Division P (pedal)</descr>
-            <synti>Aeolus</synti>
-            <MidiAction name="Reset">
-               <descr>Reset all stops</descr>
-               <controller ctrl="98" value="67"/>
-               </MidiAction>
-            <MidiAction name="subb16">
-               <descr>set stop Subbass 16</descr>
-               <controller ctrl="98" value="99"/>
-               <controller ctrl="98" value="0"/>
-               </MidiAction>
-            <MidiAction name="prin16">
-               <descr>set stop Principal 16</descr>
-               <controller ctrl="98" value="99"/>
-               <controller ctrl="98" value="1"/>
-               </MidiAction>
-            <MidiAction name="prin8">
-               <descr>set stop Principal 8</descr>
-               <controller ctrl="98" value="99"/>
-               <controller ctrl="98" value="2"/>
-               </MidiAction>
-            <MidiAction name="prin4">
-               <descr>set stop Principal 4</descr>
-               <controller ctrl="98" value="99"/>
-               <controller ctrl="98" value="3"/>
-               </MidiAction>
-            <MidiAction name="oct2">
-               <descr>set stop Octave 2</descr>
-               <controller ctrl="98" value="99"/>
-               <controller ctrl="98" value="4"/>
-               </MidiAction>
-            <MidiAction name="oct1">
-               <descr>set stop Octave 1</descr>
-               <controller ctrl="98" value="99"/>
-               <controller ctrl="98" value="5"/>
-               </MidiAction>
-            <MidiAction name="qu513">
-               <descr>set stop Quint 5 1/3</descr>
-               <controller ctrl="98" value="99"/>
-               <controller ctrl="98" value="6"/>
-               </MidiAction>
-            <MidiAction name="qu223">
-               <descr>set stop Quint 2 2/3</descr>
-               <controller ctrl="98" value="99"/>
-               <controller ctrl="98" value="7"/>
-               </MidiAction>
-            <MidiAction name="mixt">
-               <descr>set stop Mixture</descr>
-               <controller ctrl="98" value="99"/>
-               <controller ctrl="98" value="8"/>
-               </MidiAction>
-            <MidiAction name="bass18">
-               <descr>set stop Fagott 15</descr>
-               <controller ctrl="98" value="99"/>
-               <controller ctrl="98" value="9"/>
-               </MidiAction>
-            <MidiAction name="trom16">
-               <descr>set stop Trombone 16</descr>
-               <controller ctrl="98" value="99"/>
-               <controller ctrl="98" value="10"/>
-               </MidiAction>
-            <MidiAction name="bomb32">
-               <descr>set stop Bombarde 32</descr>
-               <controller ctrl="98" value="99"/>
-               <controller ctrl="98" value="11"/>
-               </MidiAction>
-            <MidiAction name="trum8">
-               <descr>set stop Trumpet</descr>
-               <controller ctrl="98" value="99"/>
-               <controller ctrl="98" value="12"/>
-               </MidiAction>
-            <MidiAction name="CP+1">
-               <descr>set stop P+I</descr>
-               <controller ctrl="98" value="99"/>
-               <controller ctrl="98" value="13"/>
-               </MidiAction>
-            <MidiAction name="CP+2">
-               <descr>set stop P+II</descr>
-               <controller ctrl="98" value="99"/>
-               <controller ctrl="98" value="14"/>
-               </MidiAction>
-            <MidiAction name="CP+3">
-               <descr>set stop P+III</descr>
-               <controller ctrl="98" value="99"/>
-               <controller ctrl="98" value="15"/>
-               </MidiAction>
-            </channel>
+        <channel>
+           <program>19</program>
+           </channel>
         </instrument>
      <instrument>
         <name>Electronic Organ</name>
