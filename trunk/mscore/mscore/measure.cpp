@@ -2305,7 +2305,7 @@ void Measure::read(QDomElement e, int staffIdx)
                   _repeatCount = val.toInt();
                   _repeatFlags |= RepeatEnd;
                   }
-            else if (tag == "Slur") {           // obsolete
+            else if (tag == "Slur") {           // ??obsolete
                   Slur* slur = new Slur(score());
                   slur->setTrack(score()->curTrack);
                   slur->read(e);

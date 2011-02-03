@@ -1212,41 +1212,11 @@ bool Score::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
       //    hide empty staves
       //
       bool showChanged = false;
-      int staves = system->staves()->size();
-#if 0
-      int staffIdx = 0;
-      foreach (Part* p, _parts) {
-            int nstaves   = p->nstaves();
-            bool hidePart = false;
-
-            if (styleB(ST_hideEmptyStaves) && (staves > 1)) {
-                  hidePart = true;
-                  for (int i = staffIdx; i < staffIdx + nstaves; ++i) {
-                        foreach(MeasureBase* m, system->measures()) {
-                              if (m->type() != MEASURE)
-                                    continue;
-                              if (!((Measure*)m)->isMeasureRest(i)) {
-                                    hidePart = false;
-                                    break;
-                                    }
-                              }
-                        }
-                  }
-
-            for (int i = staffIdx; i < staffIdx + nstaves; ++i) {
-                  SysStaff* s  = system->staff(i);
-                  Staff* staff = Score::staff(i);
-                  bool oldShow = s->show();
-                  s->setShow(hidePart ? false : staff->show());
-                  if (oldShow != s->show()) {
-                        showChanged = true;
-                        }
-                  }
-            staffIdx += nstaves;
-            }
-#else
+      int staves = _staves.size();
       int staffIdx = 0;
       foreach (Staff* staff, _staves) {
+            SysStaff* s  = system->staff(staffIdx);
+            bool oldShow = s->show();
             if (styleB(ST_hideEmptyStaves) && (staves > 1)) {
                   bool hideStaff = true;
                   foreach(MeasureBase* m, system->measures()) {
@@ -1258,22 +1228,22 @@ bool Score::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
                               break;
                               }
                         }
-                  SysStaff* s  = system->staff(staffIdx);
-                  bool oldShow = s->show();
                   s->setShow(hideStaff ? false : staff->show());
-                  if (oldShow != s->show()) {
-                        showChanged = true;
-                        foreach(MeasureBase* m, system->measures()) {
-                              if (m->type() != MEASURE)
-                                    continue;
-                              Measure* measure = static_cast<Measure*>(m);
-                              measure->createEndBarLines();
-                              }
+                  }
+            else {
+                  s->setShow(true);
+                  }
+
+            if (oldShow != s->show()) {
+                  showChanged = true;
+                  foreach (MeasureBase* mb, system->measures()) {
+                        if (mb->type() != MEASURE)
+                              continue;
+                        static_cast<Measure*>(mb)->createEndBarLines();
                         }
                   }
             ++staffIdx;
             }
-#endif
 
 
 #if 0 // DEBUG: endless recursion can happen if number of measures change

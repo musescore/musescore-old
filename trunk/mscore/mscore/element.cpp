@@ -582,7 +582,7 @@ bool Element::readProperties(QDomElement e)
             }
       else if (tag == "tick")
             score()->curTick = score()->fileDivision(i);
-      else if (tag == "offset") {         // obsolete
+      else if (tag == "offset") {         // ??obsolete
             QPointF pt(readPoint(e) * spatium());
             setUserOff(pt);
             _readPos = QPointF();

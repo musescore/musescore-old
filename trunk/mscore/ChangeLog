@@ -1,3 +1,5 @@
+03.feb (ws)
+      - fix "hide empty staves": mscore restart was needed after unchecking
 02.feb (lv)
       - MusicXML import fixes: direction placement (not complete yet)
        (la)
