@@ -134,7 +134,7 @@
         <extended>1</extended>
         </instrument>
      <instrument>
-        <name>Hypobass Flute</name>
+        <name>Hyperbass Flute</name>
         <short-name>Hb. Fl.</short-name>
         <clef>6</clef>
         <aPitchRange>12-48</aPitchRange>
@@ -3108,7 +3108,7 @@
            </channel>
         </instrument>
      <instrument>
-        <name>Automobile Break Drums</name>
+        <name>Automobile Brake Drums</name>
         <short-name>Aut. Brk. Dr.</short-name>
         <stafflines>1</stafflines>
         <clef>14</clef>
@@ -3142,7 +3142,7 @@
            </channel>
         </instrument>
      <instrument>
-        <name>Chaines</name>
+        <name>Chains</name>
         <short-name>Chn.</short-name>
         <stafflines>1</stafflines>
         <clef>14</clef>
