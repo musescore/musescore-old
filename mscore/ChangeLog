@@ -1,5 +1,6 @@
 03.feb (ws)
       - fix "hide empty staves": mscore restart was needed after unchecking
+      - fix #9040: Dragging note horizontally removes accidental permanently
 02.feb (lv)
       - MusicXML import fixes: direction placement (not complete yet)
        (la)
