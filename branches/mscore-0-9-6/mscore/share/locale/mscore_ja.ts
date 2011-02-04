@@ -5711,7 +5711,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Damp:</source>
-        <translation>音の切れ方:</translation>
+        <translation>吸音:</translation>
     </message>
     <message>
         <source>Width:</source>
