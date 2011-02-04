@@ -4547,13 +4547,13 @@ flauto trad. delle Ande
           </channel>
         </instrument>
      <instrument>
-        <name>Viola da gamba soprano</name>
-        <short-name>S. Vla. d. g.</short-name>
+        <name>Pardessus de viole</name>
+        <short-name>Pds. v.</short-name>
         <clef>9</clef>
-        <aPitchRange>50-86</aPitchRange>
-        <pPitchRange>50-93</pPitchRange>
+        <aPitchRange>55-91</aPitchRange>
+        <pPitchRange>55-96</pPitchRange>
         <channel>
-           <program>110</program>
+           <program>40</program>
            </channel>
         <channel name="pizzicato">
           <program value="45"/>
@@ -4564,13 +4564,13 @@ flauto trad. delle Ande
         <extended>1</extended>
         </instrument>
      <instrument>
-        <name>Viola da gamba contralto</name>
-        <short-name>A. Vla. d. g.</short-name>
+        <name>Viola soprano</name>
+        <short-name>V. s.</short-name>
         <clef>11</clef>
-        <aPitchRange>45-81</aPitchRange>
-        <pPitchRange>45-88</pPitchRange>
+        <aPitchRange>50-86</aPitchRange>
+        <pPitchRange>50-91</pPitchRange>
         <channel>
-           <program>110</program>
+           <program>40</program>
            </channel>
         <channel name="pizzicato">
           <program value="45"/>
@@ -4581,13 +4581,13 @@ flauto trad. delle Ande
         <extended>1</extended>
         </instrument>
      <instrument>
-        <name>Viola da gamba tenore</name>
-        <short-name>T. Vla. d. g.</short-name>
+        <name>Viola tenore</name>
+        <short-name>V. t.</short-name>
         <clef>12</clef>
         <aPitchRange>43-79</aPitchRange>
-        <pPitchRange>43-86</pPitchRange>
+        <pPitchRange>43-84</pPitchRange>
         <channel>
-           <program>110</program>
+           <program>41</program>
            </channel>
         <channel name="pizzicato">
           <program value="45"/>
@@ -4599,12 +4599,28 @@ flauto trad. delle Ande
         </instrument>
      <instrument>
         <name>Viola da gamba</name>
-        <short-name>Vla d. g.</short-name>
+        <short-name>V. d. g.</short-name>
         <clef>4</clef>
         <aPitchRange>38-74</aPitchRange>
-        <pPitchRange>38-81</pPitchRange>
+        <pPitchRange>38-79</pPitchRange>
         <channel>
-           <program>110</program>
+           <program>42</program>
+           </channel>
+        <channel name="pizzicato">
+          <program value="45"/>
+          </channel>
+        <channel name="tremolo">
+          <program value="44"/>
+          </channel>
+        </instrument>
+     <instrument>
+        <name>Viola da gamba (7 corde)</name>
+        <short-name>V. d. g.</short-name>
+        <clef>4</clef>
+        <aPitchRange>33-74</aPitchRange>
+        <pPitchRange>33-79</pPitchRange>
+        <channel>
+           <program>42</program>
            </channel>
         <channel name="pizzicato">
           <program value="45"/>
