@@ -755,6 +755,89 @@
            <program value="44"/>
            </channel>
           </instrument>
+     <instrument>
+        <name>Pardessus de viole</name>
+        <short-name>Pds. v.</short-name>
+        <clef>9</clef>
+        <aPitchRange>55-91</aPitchRange>
+        <pPitchRange>55-96</pPitchRange>
+        <channel>
+           <program>40</program>
+           </channel>
+        <channel name="pizzicato">
+          <program value="45"/>
+          </channel>
+        <channel name="tremolo">
+          <program value="44"/>
+          </channel>
+        <extended>1</extended>
+        </instrument>
+     <instrument>
+        <name>Diskant Gambe</name>
+        <short-name>D. G.</short-name>
+        <clef>11</clef>
+        <aPitchRange>50-86</aPitchRange>
+        <pPitchRange>50-91</pPitchRange>
+        <channel>
+           <program>40</program>
+           </channel>
+        <channel name="pizzicato">
+          <program value="45"/>
+          </channel>
+        <channel name="tremolo">
+          <program value="44"/>
+          </channel>
+        <extended>1</extended>
+        </instrument>
+     <instrument>
+        <name>Tenor Gambe</name>
+        <short-name>T. G.</short-name>
+        <clef>12</clef>
+        <aPitchRange>43-79</aPitchRange>
+        <pPitchRange>43-84</pPitchRange>
+        <channel>
+           <program>41</program>
+           </channel>
+        <channel name="pizzicato">
+          <program value="45"/>
+          </channel>
+        <channel name="tremolo">
+          <program value="44"/>
+          </channel>
+        <extended>1</extended>
+        </instrument>
+     <instrument>
+        <name>Viola da gamba</name>
+        <short-name>V. d. g.</short-name>
+        <clef>4</clef>
+        <aPitchRange>38-74</aPitchRange>
+        <pPitchRange>38-79</pPitchRange>
+        <channel>
+           <program>42</program>
+           </channel>
+        <channel name="pizzicato">
+          <program value="45"/>
+          </channel>
+        <channel name="tremolo">
+          <program value="44"/>
+          </channel>
+        </instrument>
+     <instrument>
+        <name>Viola da gamba (7 saiten)</name>
+        <short-name>V. d. g.</short-name>
+        <clef>4</clef>
+        <aPitchRange>33-74</aPitchRange>
+        <pPitchRange>33-79</pPitchRange>
+        <channel>
+           <program>42</program>
+           </channel>
+        <channel name="pizzicato">
+          <program value="45"/>
+          </channel>
+        <channel name="tremolo">
+          <program value="44"/>
+          </channel>
+        </instrument>
       <instrument>
          <name>Violoncello</name>
          <short-name>Vlc.</short-name>
