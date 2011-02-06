@@ -44,6 +44,7 @@ class TextLine;
 class Chord;
 class Harmony;
 class Hairpin;
+class Spanner;
 
 //---------------------------------------------------------
 //   MusicXmlWedge
@@ -160,8 +161,9 @@ class MusicXml {
       QString translator;
       CreditWordsList credits;
 
-      std::vector<MusicXmlWedge> wedgeList;
+//      std::vector<MusicXmlWedge> wedgeList;
       std::vector<MusicXmlPartGroup*> partGroupList;
+      QMap<Spanner*, QPair<int, int> > spanners;
 
       Ottava* ottava;    ///< Current ottava
       Trill* trill;      ///< Current trill
@@ -173,8 +175,8 @@ class MusicXml {
 
       //-----------------------------
 
-      void addWedge(int no, int startPos, qreal rx, qreal ry, bool above, bool hasYoffset, qreal yoffset, int subType);
-      void genWedge(int no, int endPos, Measure*, int staff);
+//      void addWedge(int no, int startPos, qreal rx, qreal ry, bool above, bool hasYoffset, qreal yoffset, int subType);
+//      void genWedge(int no, int endPos, Measure*, int staff);
       void doCredits();
       void direction(Measure* measure, int staff, QDomElement node);
       void scorePartwise(QDomElement);

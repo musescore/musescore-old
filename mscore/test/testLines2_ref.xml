@@ -12,12 +12,6 @@
       <software>MuseScore 0.7.0</software>
       <encoding-date>2007-09-10</encoding-date>
       </encoding>
-    <miscellaneous>
-      <miscellaneous-field name="description">Expected iotest differences:
-        - part P1 measure 1 bracket stop moved to measure 2 start
-        - part P1 measure 3 bracket stop moved to measure 4 start
-        </miscellaneous-field>
-      </miscellaneous>
     </identification>
   <part-list>
     <score-part id="P1">
@@ -96,13 +90,13 @@
         <type>quarter</type>
         <stem>up</stem>
         </note>
+      </measure>
+    <measure number="2">
       <direction placement="above">
         <direction-type>
           <bracket type="stop" number="1" line-end="down" end-length="15"/>
           </direction-type>
         </direction>
-      </measure>
-    <measure number="2">
       <note>
         <pitch>
           <step>B</step>
@@ -203,13 +197,13 @@
         <type>quarter</type>
         <stem>up</stem>
         </note>
+      </measure>
+    <measure number="4">
       <direction placement="below">
         <direction-type>
           <bracket type="stop" number="1" line-end="up" end-length="15"/>
           </direction-type>
         </direction>
-      </measure>
-    <measure number="4">
       <note>
         <pitch>
           <step>B</step>

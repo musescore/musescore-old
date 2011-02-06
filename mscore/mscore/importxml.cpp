@@ -933,6 +933,40 @@ void MusicXml::xmlPart(QDomElement e, QString id)
             else
                   domError(e);
             }
+      printf("wedge list:\n");
+      QMap<Spanner*, QPair<int, int> >::const_iterator i = spanners.constBegin();
+      while (i != spanners.constEnd()) {
+            Spanner* sp = i.key();
+            int tick1 = i.value().first;
+            int tick2 = i.value().second;
+            printf("wedge %p tick1 %d tick2 %d", sp, tick1, tick2);
+            Segment* seg1 = score->tick2segment(tick1);
+            Segment* seg2 = score->tick2segment(tick2);
+            printf(" seg1 %p seg2 %p\n", seg1, seg2);
+            if (seg1 && seg2) {
+                  sp->setStartElement(seg1);
+                  seg1->add(sp);
+                  sp->setEndElement(seg2);
+                  seg2->addSpannerBack(sp);
+                  if (sp->type() == OTTAVA) {
+                        Ottava* o = static_cast<Ottava*>(sp);
+                        int shift = o->pitchShift();
+                        Staff* st = o->staff();
+                        st->pitchOffsets().setPitchOffset(tick1, shift);
+                        st->pitchOffsets().setPitchOffset(tick2, 0);
+                        }
+                  else  if (sp->type() == HAIRPIN) {
+                        Hairpin* hp = static_cast<Hairpin*>(sp);
+                        score->updateHairpin(hp);
+                        }
+                  }
+            else {
+                  printf("Can't find segments to attach spanner (wedge) to: tick1=%d tick2=%d seg1=%p seg2=%p\n",
+                         tick1, tick2, seg1, seg2);
+                  }
+            ++i;
+            }
+      spanners.clear();
       }
 
 //---------------------------------------------------------
@@ -1747,9 +1781,8 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                               setSLinePlacement(pedal,
                                           score->spatium(), placement,
                                           hasYoffset, yoffset);
-                              Segment* seg = measure->getSegment(SegChordRest, tick);
-                              pedal->setStartElement(seg);
-                              seg->add(pedal);
+                              spanners[pedal] = QPair<int, int>(tick, -1);
+                              printf("wedge pedal=%p inserted at first tick %d\n", pedal, tick);
                               }
                         }
                   else if (type == "stop") {
@@ -1757,9 +1790,8 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                               printf("pedal line stop without start\n");
                               }
                         else {
-                              Segment* seg = measure->getSegment(SegChordRest, tick);
-                              pedal->setEndElement(seg);
-                              seg->addSpannerBack(pedal);
+                              spanners[pedal].second = tick;
+                              printf("wedge pedal=%p second tick %d\n", pedal, tick);
                               pedal = 0;
                               }
                         }
@@ -1794,20 +1826,6 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   if (hasYoffset) dyn->setYoff(yoffset);
                   addElement(dyn, hasYoffset, staff, rstaff, score, placement,
                              rx, ry, offset, measure, tick);
-/*
-                  else {
-                        printf("dynamicsPlacement staff=%d staffdist=%g\n", staff + rstaff, score->styleD(ST_staffDistance));
-                        double y = (staff + rstaff) * (score->styleD(ST_staffDistance) + 4); // TODO 4 = #lines/staff - 1
-                        y += (placement == "above" ? -3 : 5);
-                        y *= score->spatium();
-                        dyn->setReadPos(QPoint(0, y));
-                        }
-                  dyn->setUserOff(QPointF(rx, ry));
-                  dyn->setMxmlOff(offset);
-                  dyn->setTrack((staff + rstaff) * VOICES);
-                  Segment* s = measure->getSegment(SegChordRest, tick);
-                  s->add(dyn);
-*/
                   }
             }
       else if (dirType == "wedge") {
@@ -1828,9 +1846,8 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                               hairpin->setYoff(above ? -3 : 8);
                         // hairpin->setUserOff(rx, ry));
                         hairpin->setTrack((staff + rstaff) * VOICES);
-                        Segment* seg = measure->getSegment(SegChordRest, tick);
-                        hairpin->setStartElement(seg);
-                        seg->add(hairpin);
+                        spanners[hairpin] = QPair<int, int>(tick, -1);
+                        printf("wedge hairpin=%p inserted at first tick %d\n", hairpin, tick);
                         }
                   }
             else if (type == "stop") {
@@ -1838,14 +1855,8 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                         printf("wedge stop without start\n");
                         }
                   else {
-                        // TODO following code works correctly only if the end segment will actually contain notes
-                        // if e.g. a measure ends with a hairpin stop, the hairpins endelement must be the first
-                        // SegChordRest of the NEXT measure, while measure->getSegment will return a segment in this
-                        // measure. Same goes for other SLines
-                        Segment* seg = measure->getSegment(SegChordRest, tick);
-                        hairpin->setEndElement(seg);
-                        seg->addSpannerBack(hairpin);
-                        score->updateHairpin(hairpin);
+                        spanners[hairpin].second = tick;
+                        printf("wedge hairpin=%p second tick %d\n", hairpin, tick);
                         hairpin = 0;
                         }
                   }
@@ -1891,9 +1902,8 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                               printf("unsupported line-type: %s\n", lineType.toLatin1().data());
 
                         b->setTrack((staff + rstaff) * VOICES);
-                        Segment* seg = measure->getSegment(SegChordRest, tick);
-                        b->setStartElement(seg);
-                        seg->add(b);
+                        spanners[b] = QPair<int, int>(tick, -1);
+                        printf("wedge bracket=%p inserted at first tick %d\n", b, tick);
                         bracket[n] = b;
                         }
                   }
@@ -1919,9 +1929,8 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                         b->setEndHook(lineEnd != "none");
                         if (lineEnd == "up")
                               b->setEndHookHeight(-1 * b->endHookHeight());
-                        Segment* seg = measure->getSegment(SegChordRest, tick);
-                        b->setEndElement(seg);
-                        seg->addSpannerBack(b);
+                        spanners[b].second = tick;
+                        printf("wedge bracket=%p second tick %d\n", b, tick);
                         bracket[n] = 0;
                         }
                   }
@@ -1950,9 +1959,8 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                               setSLinePlacement(ottava,
                                                 score->spatium(), placement,
                                                 hasYoffset, yoffset);
-                              Segment* seg = measure->getSegment(SegChordRest, tick);
-                              ottava->setStartElement(seg);
-                              seg->add(ottava);
+                              spanners[ottava] = QPair<int, int>(tick, -1);
+                              printf("wedge ottava=%p inserted at first tick %d\n", ottava, tick);
                               }
                         }
                   }
@@ -1961,14 +1969,8 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                         printf("octave-shift stop without start\n");
                         }
                   else {
-                        Segment* seg = measure->getSegment(SegChordRest, tick);
-                        ottava->setEndElement(seg);
-                        seg->addSpannerBack(ottava);
-                        int shift = ottava->pitchShift();
-                        Staff* st = ottava->staff();
-                        int tick1 = static_cast<Segment*>(ottava->startElement())->tick();
-                        st->pitchOffsets().setPitchOffset(tick1, shift);
-                        st->pitchOffsets().setPitchOffset(seg->tick(), 0);
+                        spanners[ottava].second = tick;
+                        printf("wedge ottava=%p second tick %d\n", ottava, tick);
                         ottava = 0;
                         }
                   }
@@ -3034,9 +3036,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   else {
                         trill = new Trill(score);
                         trill->setTrack((staff + relStaff) * VOICES);
-                        Segment* seg = measure->getSegment(SegChordRest, tick);
-                        trill->setStartElement(seg);
-                        seg->add(trill);
+                        spanners[trill] = QPair<int, int>(tick, -1);
+                        printf("wedge trill=%p inserted at first tick %d\n", trill, tick);
                         wavyLineStart = true;
                         }
                   }
@@ -3045,9 +3046,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                         printf("wavy-line stop without start\n");
                         }
                   else {
-                        Segment* seg = measure->getSegment(SegChordRest, tick);
-                        trill->setEndElement(seg);
-                        seg->addSpannerBack(trill);
+                        spanners[trill].second = tick;
+                        printf("wedge trill=%p second tick %d\n", trill, tick);
                         trill = 0;
                         }
                   }
@@ -3228,6 +3228,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
  Called when the wedge start is read. Stores all wedge parameters known at this time.
  */
 
+/*
 void MusicXml::addWedge(int no, int startTick, qreal rx, qreal ry, bool above, bool hasYoffset, qreal yoffset, int subType)
       {
       printf("addWedge(no %d, startTick %d, subType %d)\n", no, startTick, subType);
@@ -3246,6 +3247,7 @@ void MusicXml::addWedge(int no, int startTick, qreal rx, qreal ry, bool above, b
       else
             wedgeList.push_back(wedge);
       }
+*/
 
 //---------------------------------------------------------
 //   genWedge
@@ -3257,6 +3259,7 @@ void MusicXml::addWedge(int no, int startTick, qreal rx, qreal ry, bool above, b
  Called when the wedge stop is read. Wedge stop tick was unknown until this time.
  */
 
+/*
 void MusicXml::genWedge(int no, int endTick, Measure* measure, int staff)
       {
       printf("genWedge(no %d, endTick %d\n", no, endTick);
@@ -3280,6 +3283,7 @@ void MusicXml::genWedge(int no, int endTick, Measure* measure, int staff)
       score->updateHairpin(hp);
 // printf("gen wedge %p staff %d, tick %d-%d\n", hp, staff, hp->tick(), hp->tick2());
       }
+*/
 
 //---------------------------------------------------------
 //   xmlHarmony
