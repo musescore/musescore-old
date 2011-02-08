@@ -106,7 +106,8 @@ QT4_WRAP_CPP (mocs
       excerptsdialog.h stafftext.h image.h tuplet.h glissando.h
       script.h articulation.h metaedit.h magbox.h voiceselector.h
       text.h sccursor.h dynamics.h undo.h textproperties.h
-      slurproperties.h select.h synthcontrol.h drumroll.h pianoroll.h piano.h ruler.h
+      slurproperties.h selectdialog.h synthcontrol.h drumroll.h pianoroll.h
+      piano.h ruler.h
       pianoview.h drumview.h splitstaff.h scoretab.h keyedit.h keycanvas.h harmonyedit.h
       harmonycanvas.h updatechecker.h fret.h fretcanvas.h editstafftype.h
       prefsdialog.h layoutbreak.h hairpin.h bend.h bendcanvas.h tremolobar.h tremolobarcanvas.h

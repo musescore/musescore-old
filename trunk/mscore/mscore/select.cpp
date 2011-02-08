@@ -46,6 +46,7 @@
 #include "tuplet.h"
 #include "beam.h"
 #include "textline.h"
+#include "selectdialog.h"
 
 //---------------------------------------------------------
 //   Selection

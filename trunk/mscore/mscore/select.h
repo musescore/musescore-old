@@ -21,8 +21,6 @@
 #ifndef __SELECT_H__
 #define __SELECT_H__
 
-#include "ui_select.h"
-
 //---------------------------------------------------------
 //   SelState
 //---------------------------------------------------------
@@ -106,23 +104,6 @@ class Selection {
       void setActiveTrack(int v)        { _activeTrack = v; }
       bool canCopy() const;
       void updateSelectedElements();
-      };
-
-//---------------------------------------------------------
-//   SelectDialog
-//---------------------------------------------------------
-
-class SelectDialog : public QDialog, Ui::SelectDialog {
-      Q_OBJECT
-      const Element* e;
-
-   public:
-      SelectDialog(const Element* e, QWidget* parent);
-      void setPattern(ElementPattern* p);
-      bool doReplace() const       { return replace->isChecked();       }
-      bool doAdd() const           { return add->isChecked();           }
-      bool doSubtract() const      { return subtract->isChecked();      }
-      bool doFromSelection() const { return fromSelection->isChecked(); }
       };
 
 #endif
