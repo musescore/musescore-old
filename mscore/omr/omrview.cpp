@@ -141,7 +141,14 @@ void OmrView::paintEvent(QPaintEvent* event)
             else
                   freeTiles.append(t);
             }
+#if QT_VERSION >= 0x040800
       usedTiles.swap(nl);
+#else
+      QList<Tile*> tmp = nl;
+      nl = usedTiles;
+      usedTiles = tmp;
+#endif
+
       //
       // add visible tiles
       //
