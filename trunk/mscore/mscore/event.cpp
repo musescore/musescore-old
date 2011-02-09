@@ -228,7 +228,7 @@ void EventData::write(Xml& xml) const
             }
       }
 
-bool EventData::operator==(const EventData& e) const
+bool EventData::operator==(const EventData&) const
       {
       return false;           // TODO
       }

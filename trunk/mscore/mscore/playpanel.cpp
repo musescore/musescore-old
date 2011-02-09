@@ -179,7 +179,7 @@ void PlayPanel::swingStyleChanged(int index)
 //   heartBeat
 //---------------------------------------------------------
 
-void PlayPanel::heartBeat(int tick, int utick)
+void PlayPanel::heartBeat(int /*tick*/, int /*utick*/)
       {
 #if 0 // TODO
       if (cachedTickPosition == utick)

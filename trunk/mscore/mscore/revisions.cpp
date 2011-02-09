@@ -108,7 +108,7 @@ void Revisions::add(Revision* r)
 //   getRevision
 //---------------------------------------------------------
 
-QString Revisions::getRevision(QString id)
+QString Revisions::getRevision(QString /*id*/)
       {
       return QString();
       }

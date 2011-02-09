@@ -123,7 +123,7 @@ bool TBox::genPropertyMenu(QMenu* popup) const
 //   propertyAction
 //---------------------------------------------------------
 
-void TBox::propertyAction(ScoreView* viewer, const QString& cmd)
+void TBox::propertyAction(ScoreView* /*viewer*/, const QString& cmd)
       {
       if (cmd == "props") {
             BoxProperties vp(this, 0);

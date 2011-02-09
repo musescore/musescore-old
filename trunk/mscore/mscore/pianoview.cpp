@@ -67,7 +67,7 @@ PianoItem::PianoItem(Note* n)
 //   paint
 //---------------------------------------------------------
 
-void PianoItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* w)
+void PianoItem::paint(QPainter* painter, const QStyleOptionGraphicsItem*, QWidget*)
       {
       Chord* chord = note->chord();
       int x1       = note->onTimeOffset() + note->onTimeUserOffset();

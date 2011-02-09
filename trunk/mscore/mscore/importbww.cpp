@@ -20,9 +20,9 @@
 
 #include <stdio.h>
 
-#include "lexer.h"
-#include "writer.h"
-#include "parser.h"
+#include "bww2mxml/lexer.h"
+#include "bww2mxml/writer.h"
+#include "bww2mxml/parser.h"
 
 #include "barline.h"
 #include "box.h"

@@ -1953,7 +1953,7 @@ void ExportLy::buildInstructionList(Measure* m, int strack, int etrack)
   for (ciElement ci = m->el()->begin(); ci != m->el()->end(); ++ci)
     {
       bool found=false;
-      bool rehearsal=false;
+//      bool rehearsal=false;
 
       Element* instruction = *ci;
       switch(instruction->type())
@@ -3901,7 +3901,7 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 		 if ((barlen<nombarlen) and (measurenumber==1) and (voice == 0))
 		       {
 			     pickup = true;
-           partial = true;            
+           partial = true;
 			     indent();
 			     const AL::SigEvent ev(m->score()->sigmap()->timesig(m->tick()));
       	   out << "\\partial " << ev.timesig().denominator() << "*" << ev.timesig().numerator() << "\n";

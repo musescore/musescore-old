@@ -94,7 +94,7 @@ void Score::checkScore()
                               }
                         }
                   if (empty) {
-                        Measure* m = s->measure();
+                        // Measure* m = s->measure();
 printf("checkScore: remove empty ChordRest segment\n");
 //                        m->remove(s);
                         }

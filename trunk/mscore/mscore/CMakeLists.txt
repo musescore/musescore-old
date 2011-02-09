@@ -28,7 +28,6 @@ include_directories(
       ${PROJECT_SOURCE_DIR}/scriptdebug
       ${PROJECT_SOURCE_DIR}/osdabzip
       ${PROJECT_SOURCE_DIR}/fluid
-      ${PROJECT_SOURCE_DIR}/bww2mxml
       ${QTSINGLEAPPLICATION_INCLUDE_DIRS}
       )
 
@@ -65,7 +64,7 @@ QT4_WRAP_CPP (mocs
       transposedialog.h chordedit.h tempotext.h importmidi.h textline.h
       excerptsdialog.h stafftext.h image.h tuplet.h glissando.h
       script.h articulation.h metaedit.h magbox.h voiceselector.h
-      text.h sccursor.h dynamics.h undo.h textproperties.h
+      text.h dynamics.h undo.h textproperties.h
       slurproperties.h selectdialog.h synthcontrol.h drumroll.h pianoroll.h
       piano.h ruler.h
       pianoview.h drumview.h splitstaff.h scoretab.h keyedit.h keycanvas.h harmonyedit.h
