@@ -18,6 +18,8 @@
 #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #=============================================================================
 
+include (${PROJECT_SOURCE_DIR}/cmake/gch.cmake)
+
 QT4_WRAP_CPP (mocs
       aslider.h
       knob.h
@@ -34,34 +36,10 @@ QT4_WRAP_CPP (mocs
       denomspinbox.h
       )
 
-add_custom_command(
-   OUTPUT ${PROJECT_BINARY_DIR}/all.h
-   COMMAND ${CMAKE_COMMAND}
-   ARGS -E copy ${PROJECT_SOURCE_DIR}/all.h ${PROJECT_BINARY_DIR}/all.h
-   DEPENDS ${PROJECT_SOURCE_DIR}/all.h
-   WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
-   )
-
-add_custom_command(
-   OUTPUT ${PROJECT_BINARY_DIR}/all.h.pch
-   COMMAND ${CMAKE_CXX_COMPILER}
-     -g -Wextra -Wall
-     -I"${QT_INCLUDE_DIR}"
-     -o all.h.pch all.h
-   DEPENDS ${PROJECT_BINARY_DIR}/all.h
-   WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
-   )
-
-set_source_files_properties(
-      ${PROJECT_BINARY_DIR}/all.h
-      ${PROJECT_BINARY_DIR}/all.h.pch
-      PROPERTIES generated true
-      )
-
 add_library (
       awl STATIC
       ${PROJECT_BINARY_DIR}/all.h
-      ${PROJECT_BINARY_DIR}/all.h.pch
+      ${PROJECT_BINARY_DIR}/all.h.gch
       ${mocs}
       aslider.cpp
       knob.cpp
@@ -79,11 +57,8 @@ add_library (
       utils.cpp
       denomspinbox.cpp
       )
-
-set_target_properties( awl
-   PROPERTIES COMPILE_FLAGS
-      "-include ${PROJECT_BINARY_DIR}/all.h"
-   )
+ADD_DEPENDENCIES(awl mops1)
+ADD_DEPENDENCIES(awl mops2)
 
 if (NOT MINGW AND NOT APPLE)
 QT4_WRAP_CPP (mocs2
@@ -100,12 +75,12 @@ QT4_WRAP_CPP (mocs2
       denomspinbox.h
       pitchedit.h
       pitchlabel.h
+      awlplugin.h
       )
 
 add_library (
       awlplugin SHARED
       ${PROJECT_BINARY_DIR}/all.h
-      ${PROJECT_BINARY_DIR}/all.h.pch
       ${mocs2}
       awlplugin.cpp
       aslider.cpp
@@ -125,16 +100,19 @@ add_library (
 
 ##  "-D_GNU_SOURCE -D_REENTRANT -DHAVE_CONFIG_H -DQT_PLUGIN -DQT_SHARED -DQT_NO_DEBUG -include ${PROJECT_SOURCE_DIR}/all.h"
 
-set_target_properties( awlplugin
+#
+# we cannot use our precompiled headers because of -fPIC
+#
+set_target_properties(awlplugin
       PROPERTIES
-         COMPILE_FLAGS
-            "-D_GNU_SOURCE -D_REENTRANT -DHAVE_CONFIG_H -DQT_PLUGIN -DQT_SHARED -DQT_NO_DEBUG -include ${PROJECT_SOURCE_DIR}/all.h"
+      COMPILE_FLAGS
+         "-fPIC -D_GNU_SOURCE -D_REENTRANT -DHAVE_CONFIG_H -DQT_PLUGIN -DQT_SHARED -DQT_NO_DEBUG -include ${PROJECT_SOURCE_DIR}/all.h"
       )
 
 install( TARGETS awlplugin DESTINATION ${QT_PLUGINS_DIR}/designer/ )
 
-add_executable(ltest ltest.cpp)
-target_link_libraries (ltest awlplugin msynth al ${QT_LIBRARIES})
+#add_executable(ltest ltest.cpp)
+#target_link_libraries (ltest awlplugin msynth al ${QT_LIBRARIES})
 
 
 endif (NOT MINGW AND NOT APPLE)

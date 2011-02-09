@@ -1,9 +1,9 @@
 #=============================================================================
-#  MusE
-#  Linux Music Editor
+#  Mscore
+#  Linux Music Score Editor
 #  $Id:$
 #
-#  Copyright (C) 2002-2006 by Werner Schweer and others
+#  Copyright (C) 2011 by Werner Schweer and others
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License version 2.
@@ -18,26 +18,12 @@
 #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #=============================================================================
 
-include (${PROJECT_SOURCE_DIR}/cmake/gch.cmake)
 
-QT4_WRAP_CPP (mocs
-      omrview.h
-      )
+SET_SOURCE_FILES_PROPERTIES(
+   ${PROJECT_BINARY_DIR}/all.h.gch
+   ${PROJECT_BINARY_DIR}/all.h
+   PROPERTIES GENERATED 1
+   )
 
-if (OCR)
-      set (OCR_SRC ocr.cpp)
-endif (OCR)
 
-add_library (
-      omr STATIC
-      ${PROJECT_BINARY_DIR}/all.h.gch
-      ${mocs}
-      omrview.cpp pdf.cpp omrpage.cpp
-      skew.cpp utils.cpp
-      omr.cpp pattern.cpp
-      ${OCR_SRC}
-      )
-
-ADD_DEPENDENCIES(omr mops1)
-ADD_DEPENDENCIES(omr mops2)
 

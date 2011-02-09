@@ -74,11 +74,9 @@
 #include "omr/omr.h"
 
 Score* gscore;                 ///< system score, used for palettes etc.
-
 QPoint scorePos(0,0);
 QSize  scoreSize(950, 500);
 
-MuseScore* mscore;
 bool layoutDebug     = false;
 bool scriptDebug     = false;
 bool noSeq           = false;

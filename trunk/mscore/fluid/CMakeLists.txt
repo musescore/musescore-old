@@ -18,9 +18,7 @@
 #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #=============================================================================
 
-set(CMAKE_CXX_FLAGS         "-g -Wall -Wextra -Winvalid-pch")
-set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DQT_NO_DEBUG")
-set(CMAKE_CXX_FLAGS_DEBUG   "-DQT_DEBUG")
+include (${PROJECT_SOURCE_DIR}/cmake/gch.cmake)
 
 set(SRC
   dsp.cpp fluid.cpp voice.cpp chan.cpp sfont.cpp chorus.cpp
@@ -31,9 +29,10 @@ if (SOUNDFONT3)
       set(SRC ${SRC} sfont3.cpp)
 endif (SOUNDFONT3)
 
-add_library (fluid STATIC ${SRC})
-
-set_target_properties( fluid
-   PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h"
-   )
+add_library (fluid STATIC
+      ${PROJECT_BINARY_DIR}/all.h.gch
+      ${SRC}
+      )
+ADD_DEPENDENCIES(fluid mops1)
+ADD_DEPENDENCIES(fluid mops2)
 

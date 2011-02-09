@@ -607,7 +607,7 @@ add_library (
 set_target_properties(qtscript_gui
       PROPERTIES
       COMPILE_FLAGS
-         "-D_GNU_SOURCE -D_REENTRANT -DHAVE_CONFIG_H -DQT_PLUGIN -DQT_NO_DEBUG -include ${PROJECT_SOURCE_DIR}/all.h"
+         "-D_GNU_SOURCE -D_REENTRANT -DHAVE_CONFIG_H -DQT_PLUGIN -DQT_NO_DEBUG"
       LINK_FLAGS "-L${QT_LIBRARY_DIR}"
       )
 

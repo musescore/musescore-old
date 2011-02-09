@@ -854,9 +854,9 @@ void PreferenceDialog::updateValues(Preferences* p)
 
       language->clear();
       int curIdx = 0;
-      for(int i = 0; i < languages.size(); ++i) {
-            language->addItem(languages.at(i).name, i);
-            if (languages.at(i).key == p->language)
+      for(int i = 0; i < mscore->languages().size(); ++i) {
+            language->addItem(mscore->languages().at(i).name, i);
+            if (mscore->languages().at(i).key == p->language)
                   curIdx = i;
             }
       language->setCurrentIndex(curIdx);
@@ -1224,7 +1224,7 @@ void PreferenceDialog::apply()
                   }
             }
       int lang = language->itemData(language->currentIndex()).toInt();
-      QString l = lang == 0 ? "system" : languages.at(lang).key;
+      QString l = lang == 0 ? "system" : mscore->languages().at(lang).key;
       bool languageChanged = l != preferences.language;
       preferences.language = l;
 

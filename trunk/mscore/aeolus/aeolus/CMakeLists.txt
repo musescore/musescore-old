@@ -18,22 +18,16 @@
 #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #=============================================================================
 
-if (APPLE)
-      set(CMAKE_CXX_FLAGS "-include all.h -g -Wall -Wextra -Winvalid-pch -DVERSION=\"\\\\\"0.8.4\\\\\"\" -D_REENTRANT")
-else (APPLE)
-      set(CMAKE_CXX_FLAGS "-include all.h -g -Wall -Wextra -Winvalid-pch -DVERSION=\"\\\"0.8.4\\\"\" -D_REENTRANT")
-endif (APPLE)
-
-set(CMAKE_CXX_FLAGS_RELEASE "-DQT_NO_DEBUG")
-set(CMAKE_CXX_FLAGS_DEBUG   "-DQT_DEBUG")
+include (${PROJECT_SOURCE_DIR}/cmake/gch.cmake)
 
 add_library (aeolus STATIC
       aeolus.cpp audio.cpp model.cpp addsynth.cpp scales.cpp
-	reverb.cpp asection.cpp division.cpp rankwave.cpp rngen.cpp exp2ap.cpp
-#      tiface.cpp
-  )
+	reverb.cpp asection.cpp division.cpp rankwave.cpp
+      rngen.cpp exp2ap.cpp
+      ${PROJECT_BINARY_DIR}/all.h
+      ${PROJECT_BINARY_DIR}/all.h.gch
+      )
 
-set_target_properties( fluid
-   PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h"
-   )
+ADD_DEPENDENCIES(aeolus mops1)
+ADD_DEPENDENCIES(aeolus mops2)
 

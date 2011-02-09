@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -93,8 +93,6 @@ struct LanguageItem {
             handbook = h;
             }
       };
-
-extern QList<LanguageItem> languages;
 
 //---------------------------------------------------------
 //   AboutBoxDialog
@@ -280,6 +278,7 @@ class MuseScore : public QMainWindow {
       Style* _baseStyle;
 
       bool _fullscreen;
+      QList<LanguageItem> _languages;
 
       //---------------------
 
@@ -452,6 +451,7 @@ class MuseScore : public QMainWindow {
       ScoreTab* getTab1() const { return tab1; }
       ScoreTab* getTab2() const { return tab2; }
       void readScoreError(int rv) const;
+      QList<LanguageItem>& languages() { return _languages; }
       };
 
 extern MuseScore* mscore;
