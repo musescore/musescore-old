@@ -660,7 +660,7 @@ void Palette::dropEvent(QDropEvent* event)
                   else
                         return;
                   qreal mag = PALETTE_SPATIUM * extraMag / gscore->spatium();
-                  s->setPath(u.path());
+                  s->setPath(u.toLocalFile());
                   s->setSize(QSizeF(hgrid / mag, hgrid / mag));
                   e = s;
                   name = s->path();
