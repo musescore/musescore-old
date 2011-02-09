@@ -601,7 +601,7 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
       if (isGrace)
             beamDist *= graceMag;
 
-      if(staff()->useTablature()) {
+      if (staff()->useTablature()) {
 
             //
             // TABLATURE STAVES: SETUP
@@ -867,7 +867,6 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
             memset(hasBeamSegment1, 0, sizeof(hasBeamSegment));
 
             double dist = beamDist * beamLevel;
-            double y1   = p1dy + dist;
 
             for (int idx = 0; idx < chordRests; ++idx) {
                   ChordRest* cr = crl[idx];
@@ -882,12 +881,22 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                   if ((crLevel < beamLevel) || b32 || b64) {
                         if (cr2) {
                               // create short segment
+                              double y1;
+                              if (cr2->up())
+                                    y1 = p1dy + dist;
+                              else
+                                    y1 = p1dy - dist;
                               double x2 = cr1->stemPos(cr1->up(), false).x();
                               double x3 = cr2->stemPos(cr2->up(), false).x();
                               beamSegments.push_back(new QLineF(x2 - canvPos.x(), (x2 - x1) * slope + y1,
                                  x3 - canvPos.x(), (x3 - x1) * slope + y1));
                               }
                         else if (cr1) {
+                              double y1;
+                              if (cr1->up())
+                                    y1 = p1dy + dist;
+                              else
+                                    y1 = p1dy - dist;
                               // create broken segment
                               double len = beamMinLen;
 
@@ -929,6 +938,9 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
             memcpy(hasBeamSegment, hasBeamSegment1, sizeof(hasBeamSegment));
             if (cr2) {
                   // create segment
+                  if (!cr2->up())
+                        dist = -dist;
+
                   double x2 = cr1->stemPos(cr1->up(), false).x();
                   double x3 = cr2->stemPos(cr2->up(), false).x();
 
@@ -940,12 +952,13 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                         x2 -= stemWidth2;
                         x3 += stemWidth2;
                         }
-
                   beamSegments.push_back(new QLineF(x2 - canvPos.x(), (x2 - x1) * slope + p1dy + dist * _grow1,
                      x3 - canvPos.x(), (x3 - x1) * slope + p1dy + dist  * _grow2));
                   }
             else if (cr1) {
                   // create broken segment
+                  if (!cr1->up())
+                        dist = -dist;
                   double x3 = cr1->stemPos(cr1->up(), false).x();
                   double x2 = x3 - beamMinLen;
                   beamSegments.push_back(new QLineF(x2 - canvPos.x(), (x2 - x1) * slope + p1dy + dist,
