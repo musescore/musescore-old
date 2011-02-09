@@ -294,7 +294,7 @@ add_custom_command(
 if (${CMAKE_BUILD_TYPE} STREQUAL "DEBUG")
       set (GCH_FLAGS "-DQT_DEBUG")
 else (${CMAKE_BUILD_TYPE} STREQUAL "DEBUG")
-      set (GCH_FLAGS "-DQT_NO_DEBUG")
+      set (GCH_FLAGS -O2 -DQT_NO_DEBUG -DQT_DLL)
 endif (${CMAKE_BUILD_TYPE} STREQUAL "DEBUG")
 
 add_custom_command(
