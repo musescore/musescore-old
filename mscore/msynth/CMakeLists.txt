@@ -3,7 +3,7 @@
 #  Linux Music Editor
 #  $Id:$
 #
-#  Copyright (C) 2002-2006 by Werner Schweer and others
+#  Copyright (C) 2002-2011 by Werner Schweer and others
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License version 2.
@@ -18,38 +18,14 @@
 #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #=============================================================================
 
-add_custom_command(
-   OUTPUT ${PROJECT_BINARY_DIR}/all.h
-   COMMAND ${CMAKE_COMMAND}
-   ARGS -E copy ${PROJECT_SOURCE_DIR}/all.h ${PROJECT_BINARY_DIR}/all.h
-   DEPENDS ${PROJECT_SOURCE_DIR}/all.h
-   WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
-   )
-
-add_custom_command(
-   OUTPUT ${PROJECT_BINARY_DIR}/all.h.pch
-   COMMAND ${CMAKE_CXX_COMPILER}
-     -g -Wextra -Wall
-     -I"${QT_INCLUDE_DIR}"
-     -o all.h.pch all.h
-   DEPENDS ${PROJECT_BINARY_DIR}/all.h
-   WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
-   )
-
-set_source_files_properties(
-      ${PROJECT_BINARY_DIR}/all.h
-      ${PROJECT_BINARY_DIR}/all.h.pch
-      PROPERTIES generated true
-      )
+include (${PROJECT_SOURCE_DIR}/cmake/gch.cmake)
 
 add_library (
       msynth STATIC
       ${PROJECT_BINARY_DIR}/all.h
-      ${PROJECT_BINARY_DIR}/all.h.pch
+      ${PROJECT_BINARY_DIR}/all.h.gch
       synti.cpp sparm.cpp
       )
 
-set_target_properties(msynth
-   PROPERTIES COMPILE_FLAGS
-      "-include ${PROJECT_BINARY_DIR}/all.h"
-   )
+ADD_DEPENDENCIES(msynth mops1)
+ADD_DEPENDENCIES(msynth mops2)

@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2010 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -78,7 +78,7 @@ Q_IMPORT_PLUGIN(com_trolltech_qt_uitools_ScriptPlugin)
 Q_IMPORT_PLUGIN(com_trolltech_qt_xml_ScriptPlugin)
 #endif
 
-QList<LanguageItem> languages;
+MuseScore* mscore;
 
 bool debugMode          = false;
 bool enableExperimental = false;
@@ -86,9 +86,6 @@ bool enableExperimental = false;
 QString dataPath;
 QString iconPath, iconGroup;
 qreal PDPI, DPI, DPMM;
-
-QString mscoreGlobalShare;
-static QStringList recentScores;
 
 QMap<QString, Shortcut*> shortcuts;
 
@@ -98,14 +95,16 @@ static bool pluginMode = false;
 static bool startWithNewScore = false;
 double converterDpi = 0;
 
+QString mscoreGlobalShare;
+static QStringList recentScores;
 static QString outFileName;
 static QString pluginName;
 static QString styleFile;
 static QString localeName;
 bool useFactorySettings = false;
 QString styleName;
-
 QString revision;
+
 extern void initStaffTypes();
 
 //---------------------------------------------------------
@@ -963,24 +962,24 @@ void MuseScore::helpBrowser1()
       QString help("http://www.musescore.org/en/handbook");
       //try to find an exact match
       bool found = false;
-      for(int i = 0; i < languages.size(); ++i) {
-            if (languages.at(i).key == lang){
-                  QString handbook = languages.at(i).handbook;
-                  if(!handbook.isNull()){
-                      help = languages.at(i).handbook;
+      foreach (LanguageItem item, _languages) {
+            if (item.key == lang){
+                  QString handbook = item.handbook;
+                  if (!handbook.isNull()) {
+                      help = item.handbook;
                       found = true;
                       }
                   break;
                   }
             }
       //try a to find a match on first two letters
-      if(!found && lang.size() > 2){
+      if (!found && lang.size() > 2) {
             lang = lang.left(2);
-            for(int i = 0; i < languages.size(); ++i) {
-                  if (languages.at(i).key == lang){
-                      QString handbook = languages.at(i).handbook;
-                      if(!handbook.isNull())
-                          help = languages.at(i).handbook;
+            foreach (LanguageItem item, _languages) {
+                  if (item.key == lang){
+                      QString handbook = item.handbook;
+                      if (!handbook.isNull())
+                          help = item.handbook;
                       break;
                       }
                   }
@@ -1997,8 +1996,6 @@ int main(int argc, char* av[])
 
       setMscoreLocale(localeName);
 
-      //read languages list
-      mscore->readLanguages(mscoreGlobalShare + "locale/languages.xml");
       initShortcuts();
       if (!useFactorySettings)
             preferences.read();
@@ -2109,6 +2106,10 @@ int main(int argc, char* av[])
       initDrumset();
       mscore = new MuseScore();
       gscore = new Score(mscore->defaultStyle());
+
+      //read languages list
+      mscore->readLanguages(mscoreGlobalShare + "locale/languages.xml");
+
 #ifdef Q_WS_MAC
       QApplication::instance()->installEventFilter(mscore);
 #endif
@@ -2223,7 +2224,7 @@ void MuseScore::checkForUpdate()
 
 bool MuseScore::readLanguages(const QString& path)
       {
-      languages.append(LanguageItem("system", tr("System")));
+      _languages.append(LanguageItem("system", tr("System")));
       QFile qf(path);
       if (qf.exists()){
           QDomDocument doc;
@@ -2241,20 +2242,20 @@ bool MuseScore::readLanguages(const QString& path)
                 }
 
           for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
-                if(e.tagName() == "languages"){
+                if(e.tagName() == "languages") {
                       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-                           if (e.tagName() == "language") {
+                        if (e.tagName() == "language") {
                               QString code = e.attribute(QString("code"));
                               QString name = e.attribute(QString("name"));
                               QString handbook = e.attribute(QString("handbook"));
-                              languages.append(LanguageItem(code, name, handbook));
+                              _languages.append(LanguageItem(code, name, handbook));
                               }
                           }
                       }
                 }
-          return true;
-        }
-        return false;
+            return true;
+            }
+      return false;
       }
 
 //---------------------------------------------------------

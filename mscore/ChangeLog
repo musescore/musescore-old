@@ -1,3 +1,5 @@
+09.feb (ws)
+      - fix build with precompiled headers: build time is now 2min31sec for debug version
 06.feb (lv)
       - MusicXML import fixes: Spanners
 03.feb (ws)

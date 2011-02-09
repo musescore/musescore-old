@@ -3,7 +3,7 @@
 #  Linux Music Editor
 #  $Id:$
 #
-#  Copyright (C) 2010 by Werner Schweer and others
+#  Copyright (C) 2010-2011 by Werner Schweer and others
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License version 2.
@@ -100,7 +100,7 @@ add_library(poppler STATIC
 set_target_properties(poppler
       PROPERTIES
       COMPILE_FLAGS
-            "-Wno-write-strings -ansi -Wnon-virtual-dtor -Woverloaded-virtual"
+            "-O2 -Wno-write-strings -ansi -Wnon-virtual-dtor -Woverloaded-virtual"
       )
 
 include_directories(

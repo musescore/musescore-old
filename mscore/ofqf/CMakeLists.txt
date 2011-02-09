@@ -18,29 +18,7 @@
 #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #=============================================================================
 
-add_custom_command(
-   OUTPUT ${PROJECT_BINARY_DIR}/all.h
-   COMMAND ${CMAKE_COMMAND}
-   ARGS -E copy ${PROJECT_SOURCE_DIR}/all.h ${PROJECT_BINARY_DIR}/all.h
-   DEPENDS ${PROJECT_SOURCE_DIR}/all.h
-   WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
-   )
-
-add_custom_command(
-   OUTPUT ${PROJECT_BINARY_DIR}/all.h.pch
-   COMMAND ${CMAKE_CXX_COMPILER}
-     -g -Wextra -Wall
-     -I"${QT_INCLUDE_DIR}"
-     -o all.h.pch all.h
-   DEPENDS ${PROJECT_BINARY_DIR}/all.h
-   WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
-   )
-
-set_source_files_properties(
-      ${PROJECT_BINARY_DIR}/all.h
-      ${PROJECT_BINARY_DIR}/all.h.pch
-      PROPERTIES generated true
-      )
+include (${PROJECT_SOURCE_DIR}/cmake/gch.cmake)
 
 QT4_WRAP_CPP (mocs
       qoscclient.h
@@ -50,14 +28,11 @@ QT4_WRAP_CPP (mocs
 
 add_library(ofqf STATIC
    ${PROJECT_BINARY_DIR}/all.h
-   ${PROJECT_BINARY_DIR}/all.h.pch
+   ${PROJECT_BINARY_DIR}/all.h.gch
    ${mocs}
    qoscclient.cpp qoscserver.cpp qosctypes.cpp
    )
 
-set_source_files_properties(
-   qoscclient.cpp qoscserver.cpp qosctypes.cpp
-   ${mocs}
-   PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h"
-   )
+ADD_DEPENDENCIES(ofqt mops1)
+ADD_DEPENDENCIES(ofqf mops2)
 

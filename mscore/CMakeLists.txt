@@ -32,7 +32,7 @@ set(GCC_VISIBILITY TRUE)                  # requires gcc 4.x?
 set(HAS_AUDIOFILE TRUE)                   # requires libsndfile
 
 set(STATIC_SCRIPT_BINDINGS FALSE)
-set(BUILD_SCRIPTGEN TRUE)                 #Generate Qt script bindings. (collides with qtscriptgenerator project on several distrib)
+set(BUILD_SCRIPTGEN TRUE)                 # Generate Qt script bindings. (collides with qtscriptgenerator project on several distrib)
 set(USE_SSE     FALSE)
 set(SOUNDFONT3  TRUE)                     # enable ogg vorbis compressed fonts, require ogg & vorbis
 set(AEOLUS      TRUE)                     # pipe organ synthesizer
@@ -262,7 +262,55 @@ if (NOT MINGW AND NOT APPLE)
       install( FILES packaging/mscore.desktop DESTINATION share/applications)
 endif (NOT MINGW AND NOT APPLE)
 
-subdirs(al awl bww2mxml osdabzip rtf2html mscore share manual demos
+
+if (GCC_VISIBILITY)
+set(CMAKE_CXX_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -g -Wall -Wextra -Winvalid-pch -fvisibility=hidden -fvisibility-inlines-hidden")
+else (GCC_VISIBILITY)
+set(CMAKE_CXX_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -g -Wall -Wextra -Winvalid-pch")
+endif (GCC_VISIBILITY)
+
+if (NOT MINGW)
+#
+#     set library search path for runtime linker to load the same
+#     qt libraries as we used at compile time
+#
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wl,-rpath,${QT_LIBRARY_DIR}")
+endif (NOT MINGW)
+
+set(CMAKE_CXX_FLAGS_RELEASE "-O2 -DQT_NO_DEBUG")
+set(CMAKE_CXX_FLAGS_DEBUG   "-DQT_DEBUG")
+
+#
+#  create precompiled header file
+#
+add_custom_command(
+   OUTPUT ${PROJECT_BINARY_DIR}/all.h
+   COMMAND ${CMAKE_COMMAND}
+   ARGS -E copy ${PROJECT_SOURCE_DIR}/all.h ${PROJECT_BINARY_DIR}/all.h
+   DEPENDS ${PROJECT_SOURCE_DIR}/all.h
+   WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
+   )
+
+if (${CMAKE_BUILD_TYPE} STREQUAL "DEBUG")
+      set (GCH_FLAGS "-DQT_DEBUG")
+else (${CMAKE_BUILD_TYPE} STREQUAL "DEBUG")
+      set (GCH_FLAGS "-DQT_NO_DEBUG")
+endif (${CMAKE_BUILD_TYPE} STREQUAL "DEBUG")
+
+add_custom_command(
+   OUTPUT ${PROJECT_BINARY_DIR}/all.h.gch
+   COMMAND ${CMAKE_CXX_COMPILER}
+     -g -Wextra -Wall ${GCH_FLAGS}
+     -I"${QT_INCLUDE_DIR}"
+     -o all.h.gch all.h
+   DEPENDS ${PROJECT_BINARY_DIR}/all.h
+   WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
+   )
+
+ADD_CUSTOM_TARGET(mops1 DEPENDS ${PROJECT_BINARY_DIR}/all.h)
+ADD_CUSTOM_TARGET(mops2 DEPENDS ${PROJECT_BINARY_DIR}/all.h.gch)
+
+subdirs(mscore al awl bww2mxml osdabzip rtf2html share manual demos
       fluid msynth diff mstyle)
 
 if (BUILD_SCRIPTGEN)

@@ -18,49 +18,9 @@
 #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #=============================================================================
 
-if (GCC_VISIBILITY)
-set(CMAKE_CXX_FLAGS "-g -Wall -W -Winvalid-pch -fvisibility=hidden -fvisibility-inlines-hidden")
-else (GCC_VISIBILITY)
-set(CMAKE_CXX_FLAGS "-g -Wall -W -Winvalid-pch")
-endif (GCC_VISIBILITY)
-
-set(CMAKE_CXX_FLAGS_RELEASE "-O2 -DQT_NO_DEBUG")
-set(CMAKE_CXX_FLAGS_DEBUG   "-DQT_DEBUG")
-
-if (NOT MINGW)
-#
-#     set library search path for runtime linker to load the same
-#     qt libraries as we used at compile time
-#
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wl,-rpath,${QT_LIBRARY_DIR}")
-endif (NOT MINGW)
-
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DQT_SHARED -DQT_OPENGL_LIB -D_LARGEFILE64_SOURCE -D_LARGEFILE_SOURCE")
+include (${PROJECT_SOURCE_DIR}/cmake/gch.cmake)
 
 SET_SOURCE_FILES_PROPERTIES(revision.h PROPERTIES GENERATED TRUE)
-
-add_custom_command(
-   OUTPUT ${PROJECT_BINARY_DIR}/all.h
-   COMMAND cp ${PROJECT_SOURCE_DIR}/all.h ${PROJECT_BINARY_DIR}/all.h
-   DEPENDS ${PROJECT_SOURCE_DIR}/all.h
-   WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
-   )
-
-add_custom_command(
-   OUTPUT ${PROJECT_BINARY_DIR}/all.h.pch
-   COMMAND ${CMAKE_CXX_COMPILER}
-     -g -Wextra -Wall
-     -I"${QT_INCLUDE_DIR}"
-     -o all.h.pch all.h
-   DEPENDS ${PROJECT_BINARY_DIR}/all.h
-   WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
-   )
-
-set_source_files_properties(
-      ${PROJECT_BINARY_DIR}/all.h
-      ${PROJECT_BINARY_DIR}/all.h.pch
-      PROPERTIES generated true
-      )
 
 include_directories(
       ${CMAKE_CURRENT_BINARY_DIR}
@@ -165,7 +125,7 @@ add_executable ( ${ExecutableName}
       ${ui_headers}
       ${mocs}
       ${PROJECT_BINARY_DIR}/all.h
-      ${PROJECT_BINARY_DIR}/all.h.pch
+      ${PROJECT_BINARY_DIR}/all.h.gch
       ${resource_file}
 
       actions.cpp accidental.cpp barline.cpp beam.cpp stem.cpp
@@ -320,10 +280,10 @@ if (MINGW)
       )
 
 else (MINGW)
-   set_target_properties( mscore
-      PROPERTIES
-         COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h ${QT_DEFINITIONS}"
-      )
+#   set_target_properties( mscore
+#      PROPERTIES
+#         COMPILE_FLAGS "${QT_DEFINITIONS}"
+#      )
    target_link_libraries(mscore
       ${QT_LIBRARIES}
       ${QT_QTSCRIPT_LIBRARY_RELEASE}
@@ -399,13 +359,10 @@ if (NOT MINGW AND NOT APPLE)
 
    add_executable(
       smf2xml
-      ${ui_headers}
+#      ${ui_headers}
       smf2xml.cpp midifile.cpp event.cpp drumset.cpp xml.cpp
       )
    target_link_libraries(smf2xml al ${QT_LIBRARIES} )
-   set_target_properties( smf2xml
-      PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h"
-      )
 
 #======================================
 #     target xml2smf
@@ -413,13 +370,10 @@ if (NOT MINGW AND NOT APPLE)
 
    add_executable(
       xml2smf
-      ${ui_headers}
+#      ${ui_headers}
       xml2smf.cpp midifile.cpp event.cpp drumset.cpp
       )
    target_link_libraries(xml2smf al ${QT_LIBRARIES} )
-   set_target_properties( xml2smf
-      PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h"
-      )
 
 #======================================
 #     target genft
@@ -433,7 +387,7 @@ if (NOT MINGW AND NOT APPLE)
       )
    target_link_libraries(genft al ${QT_LIBRARIES} -lfreetype )
    set_target_properties(genft
-      PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -I/usr/include/freetype2"
+      PROPERTIES COMPILE_FLAGS "-I/usr/include/freetype2"
       )
 endif (NOT MINGW AND NOT APPLE)
 
@@ -666,3 +620,7 @@ endif (NOT MINGW AND NOT APPLE)
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}/icons/icons-dark
       )
 # endif (NOT EMBED_ICONS)
+
+ADD_DEPENDENCIES(${ExecutableName} mops1)
+ADD_DEPENDENCIES(${ExecutableName} mops2)
+
