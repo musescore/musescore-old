@@ -143,6 +143,7 @@ void Part::write(Xml& xml) const
 //   parseInstrName
 //---------------------------------------------------------
 
+#if 0
 static QTextDocumentFragment parseInstrName(const QString& name)
       {
       if (name.isEmpty())
@@ -186,6 +187,7 @@ static QTextDocumentFragment parseInstrName(const QString& name)
             }
       return QTextDocumentFragment(&doc);
       }
+#endif
 
 //---------------------------------------------------------
 //   setLongName

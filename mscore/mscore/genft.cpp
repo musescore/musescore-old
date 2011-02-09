@@ -179,7 +179,7 @@ int main(int, char* argv[])
             namemap[name] = gindex;
             }
 
-      char* p = getTable("LILC", face);
+      char* p = getTable((char*)"LILC", face);
       parseLILC(p);
       // p = getTable("LILY", face);      // global values, not used now
       // p = getTable("LILF", face);      // subfont table, not used now

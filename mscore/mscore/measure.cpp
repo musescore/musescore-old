@@ -3292,6 +3292,8 @@ void Measure::updateAccidentals(Segment* segment, int staffIdx, char* tversatz)
                                     }
                               }
                               break;
+                        case TAB_STAFF:   // to avoid compiler warning
+                              break;
                         }
                   }
             }

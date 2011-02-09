@@ -101,7 +101,7 @@ void StaffState::layout()
       lw        = _spatium * 0.3;
       double h  = _spatium * 4;
       double w  = _spatium * 2.5;
-      double w1 = w * .6;
+//      double w1 = w * .6;
 
       switch(subtype()) {
             case STAFF_STATE_INSTRUMENT:
@@ -186,7 +186,7 @@ const QString StaffState::subtypeName() const
 //   acceptDrop
 //---------------------------------------------------------
 
-bool StaffState::acceptDrop(ScoreView*, const QPointF&, int type, int st) const
+bool StaffState::acceptDrop(ScoreView*, const QPointF&, int /*type*/, int /*st*/) const
       {
       return false;
       }

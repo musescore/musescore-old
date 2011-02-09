@@ -70,9 +70,9 @@ DrumItem::DrumItem(Note* n)
 //   paint
 //---------------------------------------------------------
 
-void DrumItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* w)
+void DrumItem::paint(QPainter* painter, const QStyleOptionGraphicsItem*, QWidget*)
       {
-      Chord* chord = note->chord();
+//      Chord* chord = note->chord();
       int x1       = note->onTimeOffset() + note->onTimeUserOffset();
       painter->setPen(pen());
       painter->setBrush(isSelected() ? Qt::yellow : Qt::blue);
