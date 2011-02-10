@@ -27,9 +27,9 @@
 #include "scoreview.h"
 #include "sym.h"
 
-static bool showLines = false;
-static bool showStaffLines = true;
-static bool showBarLines = false;
+static bool showLines      = false;
+// static bool showStaffLines = true;
+static bool showBarLines   = true;
 
 //---------------------------------------------------------
 //   OmrView
@@ -222,20 +222,21 @@ void OmrView::paintEvent(QPaintEvent* event)
             foreach(const QRect r, page->slices())
                   p.fillRect(r, QBrush(QColor(0, 100, 100, 50)));
 
-            foreach(const OmrNote* n, page->notes()) {
-                  if (n->sym == quartheadSym)
-                        p.setPen(QPen(QColor(255, 0, 0), 2.0));
-                  else
-                        p.setPen(QPen(QColor(0, 0, 255), 2.0));
-                  p.drawRect(n->r);
-                  }
-
             foreach(const QRectF& r, page->r())       // staves
                   p.fillRect(r, QBrush(QColor(0, 0, 100, 50)));
-            p.setPen(QPen(Qt::blue));
-            if (showBarLines) {
-                  foreach(const QLineF& l, page->bl()) {
-                        p.drawLine(l);
+
+            foreach(const OmrSystem& system, page->systems()) {
+                  if (showBarLines) {
+                        p.setPen(QPen(Qt::blue, 3.0));
+                        foreach(const QLineF& l, system.barLines)
+                              p.drawLine(l);
+                        }
+                  foreach(const OmrNote* n, system.notes()) {
+                        if (n->sym == quartheadSym)
+                              p.setPen(QPen(QColor(255, 0, 0), 2.0));
+                        else
+                              p.setPen(QPen(QColor(0, 0, 255), 2.0));
+                        p.drawRect(n->r);
                         }
                   }
             p.restore();
