@@ -347,6 +347,7 @@ void BarLine::draw(Painter* painter) const
 void BarLine::write(Xml& xml) const
       {
       xml.stag("BarLine");
+      xml.tag("span", _span);
       Element::writeProperties(xml);
       xml.etag();
       }
@@ -380,6 +381,8 @@ void BarLine::read(QDomElement e)
                         }
                   setBarLineType(ct);
                   }
+            else if (tag == "span")
+                  _span = val.toInt();
             else if (!Element::readProperties(e))
                   AL::domError(e);
             }
