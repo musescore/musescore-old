@@ -3,7 +3,7 @@
 //  Music Score Reader
 //  $Id$
 //
-//  Copyright (C) 2010 Werner Schweer
+//  Copyright (C) 2010-2011 Werner Schweer
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -18,6 +18,8 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
+#include <QtConcurrentMap>
+
 #include "omrpage.h"
 #include "image.h"
 #include "utils.h"
@@ -31,6 +33,11 @@
 #include "box.h"
 #include "sym.h"
 #include "pattern.h"
+
+//---------------------------------------------------------
+//   Lv
+//    line + value
+//---------------------------------------------------------
 
 struct Lv {
       int line;
@@ -65,7 +72,7 @@ bool OmrPage::dot(int x, int y) const
 //   read
 //---------------------------------------------------------
 
-void OmrPage::read(int pageNo)
+void OmrPage::read(int /*pageNo*/)
       {
       crop();
       slice();
@@ -74,75 +81,99 @@ void OmrPage::read(int pageNo)
       slice();
       getStaffLines();
 
+      //--------------------------------------------------
+      //    create systems
+      //--------------------------------------------------
+
       int numStaves = staves.size();
-printf("===numStaves: %d\n", numStaves);
+      int stavesSystem = 2;
+      int systems      = numStaves / stavesSystem;
+      for (int system = 0; system < systems; ++system) {
+            OmrSystem omrSystem(this);
+            for (int i = 0; i < stavesSystem; ++i) {
+                  omrSystem.staves.append(staves[system * stavesSystem + i]);
+                  }
+            _systems.append(omrSystem);
+            }
 
       //--------------------------------------------------
       //    search bar lines
       //--------------------------------------------------
 
-      int stavesSystem = 2;
-      int systems = numStaves / stavesSystem;
+      QFuture<void> bl = QtConcurrent::map(_systems, &OmrSystem::searchBarLines);
+      bl.waitForFinished();
+      }
 
-      for (int system = 0; system < systems; ++system) {
-            int idx = system * stavesSystem;
-            int x1  = staves[idx].x();
-            int x2  = x1 + staves[idx].width();
-            int y1  = staves[idx].y();
-            int y2  = staves[idx+1].y() + staves[idx+1].height();
-            int h   = y2 - y1 + 1;
-            int th  = h * 4 / 5;     // 4/5 threshold
-            int xx  = -1;
-            int w   = 0;
-            bool firstBarLine = true;
-            for (int x = x1; x < x2; ++x) {
-                  int dots = 0;
-                  for (int y = y1; y < y2; ++y) {
-                        if (dot(x, y) || dot(x-1, y) || dot(x+1, y))
-                              ++dots;
-                        }
-                  if (dots >= th) {
-                        if (x > xx+1) {
-                              if (w) {
-                                    double dx = double(xx) - (w * .5);
-                                    barlines.append(QLineF(dx, y1, dx, y1 + h));
-                                    if (firstBarLine) {
-                                          firstBarLine = false;
-                                          staves[idx].setX(dx);
-                                          staves[idx + 1].setX(dx);
-                                          }
-                                    else {
-                                          staves[idx].setWidth(dx - staves[idx].x());
-                                          staves[idx+1].setWidth(dx - staves[idx+1].x());
-                                          }
-                                    w = 1;
-                                    }
-                              else
-                                    ++w;
-                              }
-                        xx = x;
-                        }
+//---------------------------------------------------------
+//   searchBarLines
+//---------------------------------------------------------
+
+void OmrSystem::searchBarLines()
+      {
+      QRectF& r1 = staves[0];
+      QRectF& r2 = staves[1];
+
+      int x1  = r1.x();
+      int x2  = x1 + r1.width();
+      int y1  = r1.y();
+      int y2  = r2.y() + r2.height();
+      int h   = y2 - y1 + 1;
+      int th  = h * 4 / 5;     // 4/5 threshold
+      int xx  = -1;
+      int w   = 0;
+      bool firstBarLine = true;
+      for (int x = x1; x < x2; ++x) {
+            int dots = 0;
+            //
+            // compute vertical projection
+            //
+            for (int y = y1; y < y2; ++y) {
+                  if (_page->dot(x, y) || _page->dot(x-1, y) || _page->dot(x+1, y))
+                        ++dots;
                   }
-            if (w) {
-                  double dx = double(xx) - (w * .5);
-                  barlines.append(QLineF(dx, y1, dx, y1 + h));
-                  staves[idx].setWidth(dx - staves[idx].x());
-                  staves[idx+1].setWidth(dx - staves[idx+1].x());
+            if (dots >= th) {
+                  if (x > xx+1) {
+                        if (w) {
+                              double dx = double(xx) - (w * .5);
+                              barLines.append(QLineF(dx, y1, dx, y1 + h));
+                              if (firstBarLine) {
+                                    firstBarLine = false;
+                                    staves[0].setX(dx);
+                                    staves[1].setX(dx);
+                                    }
+                              else {
+                                    staves[0].setWidth(dx - staves[1].x());
+                                    staves[1].setWidth(dx - staves[1].x());
+                                    }
+                              w = 1;
+                              }
+                        else
+                              ++w;
+                        }
+                  xx = x;
                   }
             }
-      //
-      //    search note heads
-      //
+      if (w) {
+            double dx = double(xx) - (w * .5);
+            barLines.append(QLineF(dx, y1, dx, y1 + h));
+            staves[0].setWidth(dx - staves[0].x());
+            staves[1].setWidth(dx - staves[1].x());
+            }
       searchNotes(quartheadSym);
       searchNotes(halfheadSym);
+
+      QList<QLineF> nbl;
+      foreach(const QLineF& l, barLines) {
+            }
       }
 
 //---------------------------------------------------------
 //   searchNotes
 //---------------------------------------------------------
 
-void OmrPage::searchNotes(int sym)
+void OmrSystem::searchNotes(int sym)
       {
+      double _spatium = _page->spatium();
       Pattern* pattern = new Pattern(&symbols[0][sym], _spatium);
 
       QList<OmrNote*> nl1;
@@ -173,6 +204,7 @@ void OmrPage::searchNotes(int sym)
 //   addText
 //---------------------------------------------------------
 
+#ifdef OCR
 static void addText(Score* score, int subtype, const QString& s)
       {
       MeasureBase* measure = score->first();
@@ -193,12 +225,13 @@ static void addText(Score* score, int subtype, const QString& s)
       text->setText(s);
       measure->add(text);
       }
+#endif
 
 //---------------------------------------------------------
 //   readHeader
 //---------------------------------------------------------
 
-void OmrPage::readHeader(Score* score)
+void OmrPage::readHeader(Score* /*score*/)
       {
       if (_slices.isEmpty())
             return;
@@ -673,13 +706,13 @@ struct Peak {
 //   searchNotes
 //---------------------------------------------------------
 
-void OmrPage::searchNotes(QList<OmrNote*>* noteList, Pattern* pattern,
+void OmrSystem::searchNotes(QList<OmrNote*>* noteList, Pattern* pattern,
    int x1, int x2, int y, int sym)
       {
       y -= 4;                 // MAGIC
 
       // look for note heads
-      double w2 = _spatium * .5;
+//      double w2 = _spatium * .5;
       int hh = pattern->h();
       int hw = pattern->w();
       x2 -= hw;
@@ -689,7 +722,7 @@ void OmrPage::searchNotes(QList<OmrNote*>* noteList, Pattern* pattern,
       double val;
 
       for (int x = x1; x < x2; ++x) {
-            Pattern p(&_image, x, y - hh/2, hw, hh);
+            Pattern p(&_page->image(), x, y - hh/2, hw, hh);
             double val1 = p.match(pattern);
             if (x > (xx1 + hw)) {
                   if (xx1 >= 0) {

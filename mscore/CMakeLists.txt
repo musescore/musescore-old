@@ -40,15 +40,14 @@ set(EMBED_ICONS FALSE)                    # do not load icons from share/icons
 set(OSC        FALSE)                     # osc remote control
 
 #OMR - optical music recognition
+set(OMR TRUE)
 
 if (APPLE OR MINGW)
       set(GCC_VISIBILITY FALSE)           # warnings if not, with gcc4.4 from qt
       set(SF_COMPRESSOR FALSE)
       set(AEOLUS TRUE)
-      set(OMR FALSE)
 else (APPLE OR MINGW)
       set(SF_COMPRESSOR TRUE)             # build sfconvert, require ogg, vorbis, vorbisenc
-      set(OMR TRUE)
 endif (APPLE OR MINGW)
 
 if (MINGW)
@@ -58,7 +57,7 @@ endif (MINGW)
 if (OMR)
       set(OPENGL FALSE)
       set(OCR    FALSE) # requires tesseract 3.0
-                       # for installation see: http://ubuntuforums.org/showthread.php?t=1647350
+                        # for installation see: http://ubuntuforums.org/showthread.php?t=1647350
 else (OMR)
       set(OCR FALSE)
       set(OPENGL FALSE)

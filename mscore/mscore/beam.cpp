@@ -596,10 +596,11 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
       if (_up == -1)
             _up = 1;
 
-      double beamDist   = point(bd * bw + bw) * (_up ? 1.0 : -1.0);
-      double x1, x2;
+      // double beamDist = point(bd * bw + bw) * (_up ? 1.0 : -1.0);
+      double beamDist = point(bd * bw + bw);
       if (isGrace)
             beamDist *= graceMag;
+      double x1, x2;
 
       if (staff()->useTablature()) {
 
@@ -844,7 +845,8 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
             }
 
       //---------------------------------------------
-      //   create beam segments: COMMON TO BOTH TABLATURES AND PITCHED
+      //   create beam segments:
+      //   COMMON TO BOTH TABLATURES AND PITCHED
       //---------------------------------------------
 
       qreal stemWidth2 = point(score()->styleS(ST_stemWidth)) * .5;

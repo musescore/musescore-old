@@ -42,10 +42,34 @@ struct HLine {
 //   OmrNote
 //---------------------------------------------------------
 
-struct OmrNote {
+class OmrNote {
+   public:
       int sym;
       QRect r;
       double prob;      // probability
+      };
+
+class OmrPage;
+
+//---------------------------------------------------------
+//   OmrSystem
+//---------------------------------------------------------
+
+class OmrSystem {
+      OmrPage* _page;
+
+      void searchNotes(QList<OmrNote*>*, Pattern*, int x1, int x2, int y, int sym);
+
+   public:
+      OmrSystem(OmrPage* p) { _page = p;  }
+      QList<QRectF> staves;
+      QList<QLineF> barLines;
+      QList<OmrNote*> _notes;
+
+      const QList<OmrNote*>& notes() const  { return _notes;   }
+      QList<OmrNote*>& notes()              { return _notes;   }
+      void searchBarLines();
+      void searchNotes(int sym);
       };
 
 //---------------------------------------------------------
@@ -65,10 +89,10 @@ class OmrPage {
       QList<HLine> slines;
 
       QList<QLine>  lines;
-      QList<QLineF> barlines;
-      QList<OmrNote*> _notes;
+//      QList<OmrNote*> _notes;
 
-      bool dot(int x, int y) const;
+      QList<OmrSystem> _systems;
+
       void crop();
       void slice();
       double skew(const QRect&);
@@ -77,13 +101,12 @@ class OmrPage {
       double xproject2(int y);
       int xproject(const uint* p, int wl);
       void radonTransform(ulong* projection, int w, int n, const QRect&);
-      void searchNotes(int sym);
-      void searchNotes(QList<OmrNote*>*, Pattern*, int x1, int x2, int y, int sym);
 
    public:
       OmrPage(Omr* _parent);
       void setImage(const QImage& i)     { _image = i; }
       const QImage& image() const        { return _image; }
+      QImage& image()                    { return _image; }
       void read(int);
       int width() const                  { return _image.width(); }
       int height() const                 { return _image.height(); }
@@ -94,17 +117,19 @@ class OmrPage {
       const QList<QLine>& sl()           { return lines;    }
       const QList<HLine>& l()            { return slines;   }
       const QList<QRectF>& r()           { return staves;   }
-      const QList<QLineF>& bl()          { return barlines; }
 
       const QList<QRect>& slices() const { return _slices;  }
-      const QList<OmrNote*>& notes() const  { return _notes;   }
       double spatium() const             { return _spatium; }
       double staffDistance() const;
       double systemDistance() const;
       void readHeader(Score* score);
 
+      const QList<OmrSystem>& systems() const { return _systems; }
+
+
       void write(Xml&) const;
       void read(QDomElement e);
+      bool dot(int x, int y) const;
       };
 
 #endif
