@@ -3148,7 +3148,11 @@ void ScoreView::search(const QString& s)
       int n = s.toInt(&ok);
       if (!ok || n <= 0)
             return;
-
+      search(n);
+      }
+      
+void ScoreView::search(int n)
+      {
       int i = 0;
       for (Measure* measure = _score->firstMeasure(); measure; measure = measure->nextMeasure()) {
             if (++i < n)

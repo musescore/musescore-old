@@ -3380,9 +3380,10 @@ void MuseScore::initOsc()
 
 void MuseScore::initOsc()
       {
+      printf("initOSC 1 \n");
       if (!preferences.useOsc)
             return;
-
+printf("initOSC 2 \n");
       int port;
       if (oscPort)
             port = oscPort;
@@ -3401,6 +3402,10 @@ void MuseScore::initOsc()
       QObject::connect(oo, SIGNAL(data(int)), SLOT(oscVolume(int)));
       oo = new PathObject( "/next", QVariant::Int, osc);
       QObject::connect(oo, SIGNAL(data(int)), SLOT(oscNext()));
+      oo = new PathObject( "/next-measure", QVariant::Int, osc);
+      QObject::connect(oo, SIGNAL(data(int)), SLOT(oscNextMeasure()));
+      oo = new PathObject( "/goto", QVariant::Int, osc);
+      QObject::connect(oo, SIGNAL(data(int)), SLOT(oscGoto(int)));
       }
 
 //---------------------------------------------------------
@@ -3431,8 +3436,23 @@ void MuseScore::oscStop()
 
 void MuseScore::oscNext()
       {
+      printf("next\n");
       QAction* a = getAction("next-chord");
       a->trigger();
+      }
+
+void MuseScore::oscNextMeasure() 
+      {
+      QAction* a = getAction("next-measure");
+      a->trigger();
+      }
+      
+void MuseScore::oscGoto(int m) 
+      {
+      printf("GOTO %d\n", m);
+      if (cv == 0)
+            return;
+      cv->search(m);
       }
 
 //---------------------------------------------------------

@@ -342,6 +342,7 @@ class ScoreView : public QWidget {
       QRect toPhysical(const QRectF& r) const { return _matrix.mapRect(r).toRect(); }
 
       void search(const QString& s);
+      void search(int i);
       void postCmd(const char* cmd)   { sm->postEvent(new CommandEvent(cmd));  }
       void setFocusRect();
       Element* getDragElement() const { return dragElement; }
