@@ -33,6 +33,6 @@ add_library(ofqf STATIC
    qoscclient.cpp qoscserver.cpp qosctypes.cpp
    )
 
-ADD_DEPENDENCIES(ofqt mops1)
+ADD_DEPENDENCIES(ofqf mops1)
 ADD_DEPENDENCIES(ofqf mops2)
 
