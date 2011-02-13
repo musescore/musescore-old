@@ -364,6 +364,9 @@ MuseScore::MuseScore()
       _splitScreen          = false;
       _horizontalSplit      = true;
       chordStyleEditor      = 0;
+      loadScoreDialog       = 0;
+      saveScoreDialog       = 0;
+
       _midiRecordId         = -1;
       _fullscreen           = false;
       _defaultStyle         = new Style();
@@ -2675,6 +2678,10 @@ void MuseScore::writeSettings()
             keyEditor->save();
       if (chordStyleEditor)
             chordStyleEditor->save();
+      if (loadScoreDialog)
+            settings.setValue("loadScoreDialog", loadScoreDialog->saveState());
+      if (saveScoreDialog)
+            settings.setValue("saveScoreDialog", saveScoreDialog->saveState());
       }
 
 //---------------------------------------------------------
@@ -3447,13 +3454,13 @@ void MuseScore::oscNext()
       a->trigger();
       }
 
-void MuseScore::oscNextMeasure() 
+void MuseScore::oscNextMeasure()
       {
       QAction* a = getAction("next-measure");
       a->trigger();
       }
-      
-void MuseScore::oscGoto(int m) 
+
+void MuseScore::oscGoto(int m)
       {
       printf("GOTO %d\n", m);
       if (cv == 0)

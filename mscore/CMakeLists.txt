@@ -3,7 +3,7 @@
 #  Linux Music Score Editor
 #  $Id:$
 #
-#  Copyright (C) 2002-2009 by Werner Schweer and others
+#  Copyright (C) 2002-2011 by Werner Schweer and others
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License version 2.
@@ -26,28 +26,27 @@ cmake_policy(SET CMP0003 NEW)
 # for debugging the make system uncomment next line:
 # set(CMAKE_VERBOSE_MAKEFILE ON)
 
-set(MSCORE_UNSTABLE  TRUE)                # mark as unstable
+set(MSCORE_UNSTABLE  TRUE)          # mark as unstable
 
-set(GCC_VISIBILITY TRUE)                  # requires gcc 4.x?
-set(HAS_AUDIOFILE TRUE)                   # requires libsndfile
+set(GCC_VISIBILITY TRUE)            # requires gcc 4.x?
+set(HAS_AUDIOFILE TRUE)             # requires libsndfile
 
 set(STATIC_SCRIPT_BINDINGS FALSE)
-set(BUILD_SCRIPTGEN TRUE)                 # Generate Qt script bindings. (collides with qtscriptgenerator project on several distrib)
-set(USE_SSE     FALSE)
-set(SOUNDFONT3  TRUE)                     # enable ogg vorbis compressed fonts, require ogg & vorbis
-set(AEOLUS      TRUE)                     # pipe organ synthesizer
-set(EMBED_ICONS FALSE)                    # do not load icons from share/icons
-set(OSC        TRUE)                     # osc remote control
-
-#OMR - optical music recognition
-set(OMR TRUE)
+set(BUILD_SCRIPTGEN   TRUE)         # Generate Qt script bindings. (collides with qtscriptgenerator project on several distrib)
+set(USE_SSE           FALSE)
+set(SOUNDFONT3        TRUE)         # enable ogg vorbis compressed fonts, require ogg & vorbis
+set(AEOLUS            TRUE)         # pipe organ synthesizer
+set(EMBED_ICONS       FALSE)        # do not load icons from share/icons
+set(OSC               TRUE)         # osc remote control
+set(NATIVE_FILEDIALOG FALSE)        # use the operating system native file dialog widget
+set(OMR TRUE)                       # OMR - optical music recognition
 
 if (APPLE OR MINGW)
-      set(GCC_VISIBILITY FALSE)           # warnings if not, with gcc4.4 from qt
+      set(GCC_VISIBILITY FALSE)     # warnings if not, with gcc4.4 from qt
       set(SF_COMPRESSOR FALSE)
       set(AEOLUS TRUE)
 else (APPLE OR MINGW)
-      set(SF_COMPRESSOR TRUE)             # build sfconvert, require ogg, vorbis, vorbisenc
+      set(SF_COMPRESSOR TRUE)       # build sfconvert, require ogg, vorbis, vorbisenc
 endif (APPLE OR MINGW)
 
 if (MINGW)
