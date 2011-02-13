@@ -1,6 +1,8 @@
 13.feb (ws)
       - add native (qt) file dialogs for score load/save; can be enabled/disabled
         with cmake option NATIVE_FILEDIALOG in toplevel CMakeLists.txt
+      (db)
+      - copy editing for demo scores (usuariomuse)
 09.feb (ws)
       - fix build with precompiled headers: build time is now 2min31sec for debug version
 06.feb (lv)
