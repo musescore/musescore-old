@@ -97,11 +97,11 @@ add_library(poppler STATIC
       fofi/FoFiType1.cc
       fofi/FoFiType1C.cc
    )
-set_target_properties(poppler
-      PROPERTIES
-      COMPILE_FLAGS
-            "-O2 -Wno-write-strings -ansi -Wnon-virtual-dtor -Woverloaded-virtual"
-      )
+#set_target_properties(poppler
+#      PROPERTIES
+#      COMPILE_FLAGS
+#            "-O2 -Wno-write-strings -ansi -Wnon-virtual-dtor -Woverloaded-virtual"
+#      )
 
 include_directories(
       ${PROJECT_SOURCE_DIR}/poppler/goo

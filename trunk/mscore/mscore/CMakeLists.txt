@@ -104,7 +104,7 @@ endif (USE_JACK)
 if (APPLE)
 	set (ExecutableName mscore MACOSX_BUNDLE)
 	set (MACOSX_BUNDLE_INFO_STRING MuseScore prerelease for Mac OSX)
-	set (MACOSX_BUNDLE_ICON_FILE mscore.icns)
+	set (MACOSX_BUNDLE_ICON_FILE      mscore.icns)
 	set (MACOSX_BUNDLE_GUI_IDENTIFIER net.sourceforge.mscore)
 	set (MACOSX_BUNDLE_LONG_VERSION_STRING ${Mscore_VERSION_FULL})
 	set (MACOSX_BUNDLE_BUNDLE_NAME MuseScore)
@@ -619,6 +619,22 @@ endif (NOT MINGW AND NOT APPLE)
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}/icons/icons-dark
       )
 # endif (NOT EMBED_ICONS)
+
+if (APPLE)
+     install (FILES
+      fonts/gonville-20.otf
+      fonts/mscore-20.otf
+      fonts/mscore1-20.ttf
+      fonts/MuseJazz.ttf
+      fonts/FreeSerif.ttf
+      fonts/FreeSans.ttf
+      fonts/mscore_tab_baroque.ttf
+      fonts/mscore_tab_modern.ttf
+      fonts/mscore_tab_renaiss.ttf
+      fonts/mscore_tab_renaiss2.ttf
+     DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}fonts
+     )
+endif (APPLE)
 
 ADD_DEPENDENCIES(${ExecutableName} mops1)
 ADD_DEPENDENCIES(${ExecutableName} mops2)

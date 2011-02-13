@@ -107,7 +107,7 @@ public:
         assert(displayFontTT == kind);
         tt.fileName = fileNameA;
     }
-  }  
+  }
   virtual ~DisplayFontParam();
 };
 
@@ -352,7 +352,7 @@ private:
   CharCodeToUnicodeCache *unicodeToUnicodeCache;
   UnicodeMapCache *unicodeMapCache;
   CMapCache *cMapCache;
-  
+
 #ifdef ENABLE_PLUGINS
   GList *plugins;		// list of plugins [Plugin]
   GList *securityHandlers;	// list of loaded security handlers
