@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<museScore version="1.12">
+<museScore version="1.14">
+  <programVersion>1.0</programVersion>
+  <programRevision>3996 
+</programRevision>
   <Spatium>1.76389</Spatium>
   <Division>480</Division>
   <Style>
-    <akkoladeDistance>5.5</akkoladeDistance>
+    <staffLowerBorder>1</staffLowerBorder>
+    <akkoladeDistance>6</akkoladeDistance>
     <systemDistance>7.2</systemDistance>
     <lyricsDistance>6.5</lyricsDistance>
     <frameSystemDistance>0</frameSystemDistance>
@@ -13,11 +17,7 @@
     <ledgerLineWidth>0.08</ledgerLineWidth>
     <beamMinSlope>0.1</beamMinSlope>
     <dotNoteDistance>0.5</dotNoteDistance>
-    <pageFillLimit>0.7</pageFillLimit>
     <lastSystemFillLimit>0.5</lastSystemFillLimit>
-    <smallNoteMag>0.7</smallNoteMag>
-    <graceNoteMag>0.7</graceNoteMag>
-    <smallStaffMag>0.7</smallStaffMag>
     <stemDir2>1</stemDir2>
     <stemDir4>1</stemDir4>
     <gateTime>85</gateTime>
@@ -32,6 +32,7 @@
       <top-margin>56.6929</top-margin>
       <bottom-margin>113.386</bottom-margin>
       </page-margins>
+    <page-offset>0</page-offset>
     </page-layout>
   <siglist>
     <sig tick="0">
@@ -62,19 +63,8 @@
         </keylist>
       <barLineSpan>0</barLineSpan>
       </Staff>
-    <trackName>Piano</trackName>
-    <name>
-      <subtype>InstrumentLong</subtype>
-      <style>9</style>
-      <frame>0</frame>
-      <html-data>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'MS Shell Dlg 2'; font-size:8pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">          </p></body></html>
-        </html-data>
-      </name>
     <Instrument>
+      <trackName>Piano</trackName>
       <Channel name="normal">
         <controller ctrl="0" value="0"/>
         <controller ctrl="32" value="0"/>
@@ -94,8 +84,8 @@ p, li { white-space: pre-wrap; }
       <topMargin>5</topMargin>
       <bottomMargin>5</bottomMargin>
       <Text>
-        <subtype>Title</subtype>
         <style>2</style>
+        <subtype>Title</subtype>
         <frame>0</frame>
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -105,8 +95,8 @@ p, li { white-space: pre-wrap; }
           </html-data>
         </Text>
       <Text>
-        <subtype>Composer</subtype>
         <style>4</style>
+        <subtype>Composer</subtype>
         <frame>0</frame>
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
@@ -119,17 +109,22 @@ p, li { white-space: pre-wrap; }
     <Measure number="1">
       <Tempo>
         <tempo>1.33333</tempo>
+        <style>14</style>
         <subtype>Tempo</subtype>
         <systemFlag>1</systemFlag>
-        <style>14</style>
         <frame>0</frame>
         <html-data>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:600; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Allegro</p></body></html>
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-size:12pt;">Allegro</span></p></body></html>
           </html-data>
         </Tempo>
+      <TimeSig>
+        <subtype>260</subtype>
+        <den>4</den>
+        <nom1>4</nom1>
+        </TimeSig>
       <Rest>
         <durationType>16th</durationType>
         </Rest>
@@ -182,8 +177,8 @@ p, li { white-space: pre-wrap; }
         <durationType>16th</durationType>
         <Beam>1</Beam>
         <Note>
-          <pitch>69</pitch>
-          <tpc>17</tpc>
+          <pitch>71</pitch>
+          <tpc>19</tpc>
           </Note>
         </Chord>
       <Chord>
@@ -328,8 +323,8 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="3">
       <Text>
-        <subtype>MeasureNumber</subtype>
         <style>17</style>
+        <subtype>MeasureNumber</subtype>
         </Text>
       <Rest>
         <durationType>16th</durationType>
@@ -549,8 +544,8 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="5">
       <Text>
-        <subtype>MeasureNumber</subtype>
         <style>17</style>
+        <subtype>MeasureNumber</subtype>
         </Text>
       <Beam id="15">
         </Beam>
@@ -735,8 +730,8 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="7">
       <Text>
-        <subtype>MeasureNumber</subtype>
         <style>17</style>
+        <subtype>MeasureNumber</subtype>
         </Text>
       <Rest>
         <durationType>16th</durationType>
@@ -842,8 +837,8 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="8">
       <Beam id="25">
-        <y1>508.343</y1>
-        <y2>423.837</y2>
+        <y1>6.10011</y1>
+        <y2>5.08604</y2>
         </Beam>
       <Chord>
         <durationType>16th</durationType>
@@ -951,8 +946,8 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="9">
       <Text>
-        <subtype>MeasureNumber</subtype>
         <style>17</style>
+        <subtype>MeasureNumber</subtype>
         </Text>
       <Beam id="29">
         </Beam>
@@ -989,8 +984,8 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Beam id="30">
-        <y1>446.649</y1>
-        <y2>446.649</y2>
+        <y1>5.35978</y1>
+        <y2>5.35978</y2>
         </Beam>
       <Chord>
         <durationType>16th</durationType>
@@ -1061,6 +1056,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="10">
+      <vspacer>7.8</vspacer>
       <Beam id="32">
         </Beam>
       <Chord>
@@ -1167,8 +1163,8 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="11">
       <Text>
-        <subtype>MeasureNumber</subtype>
         <style>17</style>
+        <subtype>MeasureNumber</subtype>
         </Text>
       <Beam id="35">
         </Beam>
@@ -1296,6 +1292,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="12">
+      <vspacer>6.9</vspacer>
       <Beam id="39">
         </Beam>
       <Chord>
@@ -1410,8 +1407,8 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="13">
       <Text>
-        <subtype>MeasureNumber</subtype>
         <style>17</style>
+        <subtype>MeasureNumber</subtype>
         </Text>
       <Beam id="43">
         </Beam>
@@ -1610,8 +1607,8 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="15">
       <Text>
-        <subtype>MeasureNumber</subtype>
         <style>17</style>
+        <subtype>MeasureNumber</subtype>
         </Text>
       <Rest>
         <durationType>16th</durationType>
@@ -1631,8 +1628,8 @@ p, li { white-space: pre-wrap; }
         <durationType>16th</durationType>
         <Beam>48</Beam>
         <Note>
-          <pitch>81</pitch>
-          <tpc>17</tpc>
+          <pitch>80</pitch>
+          <tpc>10</tpc>
           </Note>
         </Chord>
       <Chord>
@@ -1840,8 +1837,8 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="17">
       <Text>
-        <subtype>MeasureNumber</subtype>
         <style>17</style>
+        <subtype>MeasureNumber</subtype>
         </Text>
       <Rest>
         <durationType>16th</durationType>
@@ -1855,6 +1852,7 @@ p, li { white-space: pre-wrap; }
         <Note>
           <pitch>74</pitch>
           <tpc>16</tpc>
+          <userAccidental>5</userAccidental>
           </Note>
         </Chord>
       <Chord>
@@ -1929,8 +1927,8 @@ p, li { white-space: pre-wrap; }
         <durationType>16th</durationType>
         <Beam>56</Beam>
         <Note>
-          <pitch>67</pitch>
-          <tpc>15</tpc>
+          <pitch>68</pitch>
+          <tpc>22</tpc>
           </Note>
         </Chord>
       <Chord>
@@ -2008,8 +2006,8 @@ p, li { white-space: pre-wrap; }
         <durationType>16th</durationType>
         <Beam>58</Beam>
         <Note>
-          <pitch>69</pitch>
-          <tpc>17</tpc>
+          <pitch>71</pitch>
+          <tpc>19</tpc>
           </Note>
         </Chord>
       <Chord>
@@ -2046,7 +2044,7 @@ p, li { white-space: pre-wrap; }
         <Beam>60</Beam>
         <Note>
           <pitch>68</pitch>
-          <tpc>10</tpc>
+          <tpc>22</tpc>
           </Note>
         </Chord>
       <Chord>
@@ -2060,12 +2058,12 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="19">
       <Text>
-        <subtype>MeasureNumber</subtype>
         <style>17</style>
+        <subtype>MeasureNumber</subtype>
         </Text>
       <Beam id="61">
-        <y1>430.545</y1>
-        <y2>346.075</y2>
+        <y1>5.16654</y1>
+        <y2>4.1529</y2>
         </Beam>
       <Chord>
         <durationType>16th</durationType>
@@ -2269,6 +2267,7 @@ p, li { white-space: pre-wrap; }
         <Note>
           <pitch>65</pitch>
           <tpc>13</tpc>
+          <userAccidental>5</userAccidental>
           </Note>
         </Chord>
       <Beam id="67">
@@ -2277,8 +2276,8 @@ p, li { white-space: pre-wrap; }
         <durationType>16th</durationType>
         <Beam>67</Beam>
         <Note>
-          <pitch>67</pitch>
-          <tpc>15</tpc>
+          <pitch>68</pitch>
+          <tpc>22</tpc>
           </Note>
         </Chord>
       <Chord>
@@ -2342,8 +2341,8 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="21">
       <Text>
-        <subtype>MeasureNumber</subtype>
         <style>17</style>
+        <subtype>MeasureNumber</subtype>
         </Text>
       <Beam id="69">
         </Beam>
@@ -2589,8 +2588,8 @@ p, li { white-space: pre-wrap; }
     <Measure number="23">
       <stretch>0.8</stretch>
       <Text>
-        <subtype>MeasureNumber</subtype>
         <style>17</style>
+        <subtype>MeasureNumber</subtype>
         </Text>
       <Beam id="77">
         </Beam>
@@ -2918,8 +2917,8 @@ p, li { white-space: pre-wrap; }
         <durationType>16th</durationType>
         <Beam>86</Beam>
         <Note>
-          <pitch>71</pitch>
-          <tpc>19</tpc>
+          <pitch>69</pitch>
+          <tpc>17</tpc>
           </Note>
         </Chord>
       <Chord>
@@ -2988,6 +2987,11 @@ p, li { white-space: pre-wrap; }
     </Staff>
   <Staff id="2">
     <Measure number="1">
+      <TimeSig>
+        <subtype>260</subtype>
+        <den>4</den>
+        <nom1>4</nom1>
+        </TimeSig>
       <Chord>
         <durationType>eighth</durationType>
         <Note>
@@ -4438,7 +4442,7 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Note>
           <pitch>49</pitch>
-          <tpc>9</tpc>
+          <tpc>21</tpc>
           </Note>
         </Chord>
       <Rest>
@@ -4674,7 +4678,7 @@ p, li { white-space: pre-wrap; }
         <durationType>eighth</durationType>
         <Note>
           <pitch>44</pitch>
-          <tpc>10</tpc>
+          <tpc>22</tpc>
           </Note>
         </Chord>
       <Rest>
@@ -4738,7 +4742,7 @@ p, li { white-space: pre-wrap; }
         <Beam>146</Beam>
         <Note>
           <pitch>56</pitch>
-          <tpc>10</tpc>
+          <tpc>22</tpc>
           </Note>
         </Chord>
       <Chord>
@@ -5019,7 +5023,7 @@ p, li { white-space: pre-wrap; }
         <Beam>155</Beam>
         <Note>
           <pitch>44</pitch>
-          <tpc>10</tpc>
+          <tpc>22</tpc>
           </Note>
         </Chord>
       <Chord>
@@ -5191,7 +5195,7 @@ p, li { white-space: pre-wrap; }
         <Beam>161</Beam>
         <Note>
           <pitch>44</pitch>
-          <tpc>10</tpc>
+          <tpc>22</tpc>
           </Note>
         </Chord>
       <Chord>
@@ -5403,7 +5407,7 @@ p, li { white-space: pre-wrap; }
         <durationType>half</durationType>
         <Articulation>
           <subtype>dfermata</subtype>
-          <offset x="-0.15" y="-10.65"/>
+          <offset x="0" y="1.2"/>
           </Articulation>
         <Note>
           <pitch>45</pitch>
