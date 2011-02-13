@@ -2040,6 +2040,11 @@ int main(int argc, char* av[])
             }
 
       //
+      // do not load application specific fonts
+      // for MAC, they are in Resources/fonts
+      //
+#ifndef Q_WS_MAC
+      //
       //  load internal fonts
       //
       static const char* fonts[] = {
@@ -2056,6 +2061,7 @@ int main(int argc, char* av[])
                         }
                   }
             }
+#endif
 /*      if (converterMode) {
             noSeq = true;
             seq = 0;

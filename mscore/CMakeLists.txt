@@ -37,7 +37,7 @@ set(USE_SSE     FALSE)
 set(SOUNDFONT3  TRUE)                     # enable ogg vorbis compressed fonts, require ogg & vorbis
 set(AEOLUS      TRUE)                     # pipe organ synthesizer
 set(EMBED_ICONS FALSE)                    # do not load icons from share/icons
-set(OSC        FALSE)                     # osc remote control
+set(OSC        TRUE)                     # osc remote control
 
 #OMR - optical music recognition
 set(OMR TRUE)
