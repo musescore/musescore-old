@@ -227,7 +227,7 @@
 		</dict>
 	</array>
       <key>ATSApplicationFontsPath</key>
-      <string>Resources/fonts</string>
+      <string>fonts</string>
 
 	<key>CFBundleExecutable</key>
 	<string>${MACOSX_BUNDLE_EXECUTABLE_NAME}</string>
