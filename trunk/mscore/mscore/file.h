@@ -26,7 +26,6 @@
 //---------------------------------------------------------
 
 class LoadFile {
-      bool popenFlag;
       QString _name;
 
    protected:
@@ -36,8 +35,6 @@ class LoadFile {
       LoadFile() {}
       virtual ~LoadFile() {}
       virtual bool loader(QFile* f) = 0;
-      bool load(QWidget* parent, const QString& base, const QString& ext,
-         const QString& caption);
       bool load(const QString& name);
       QString name() const { return _name; }
       };

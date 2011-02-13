@@ -280,6 +280,10 @@ class MuseScore : public QMainWindow {
       bool _fullscreen;
       QList<LanguageItem> _languages;
 
+      QFileDialog* loadScoreDialog;
+      QFileDialog* saveScoreDialog;
+
+
       //---------------------
 
       virtual void closeEvent(QCloseEvent*);
@@ -454,6 +458,11 @@ class MuseScore : public QMainWindow {
       ScoreTab* getTab2() const { return tab2; }
       void readScoreError(int rv) const;
       QList<LanguageItem>& languages() { return _languages; }
+
+      QString getOpenScoreName(QString& dir, const QString& filter);
+      QString getSaveScoreName(const QString& title,
+         QString& dir, const QString& filter, QString* selectedFilter);
+      QString getStyleFilename(bool open);
       };
 
 extern MuseScore* mscore;
