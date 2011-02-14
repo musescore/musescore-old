@@ -65,7 +65,7 @@ endif (OMR)
 
 if (APPLE)
       set(HAS_AUDIOFILE TRUE)            # requires libsndfile
-      set(STATIC_SCRIPT_BINDINGS TRUE)
+      set(STATIC_SCRIPT_BINDINGS FALSE)
       set(CMAKE_OSX_ARCHITECTURES x86_64)
       set(CMAKE_OSX_SYSROOT /Developer/SDKs/MacOSX10.6.sdk)
       set(CMAKE_OSX_DEPLOYMENT_TARGET 10.4) #min version required

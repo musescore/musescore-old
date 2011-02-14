@@ -1,4 +1,6 @@
 14.feb (ws)
+      - remove QSessionManager from script bindings as its not compatible with
+        newest qt
       - new preference settings: MyScoresPath, MyStylesPath, MyTemplatesPath,
         MyPluginsPath, MySoundFontsPath
         used in qt file dialogs

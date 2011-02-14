@@ -18,7 +18,7 @@
 #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #=============================================================================
 
-set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DQT_NO_DEBUG")
+set(CMAKE_CXX_FLAGS_RELEASE "-Os -DQT_NO_DEBUG")
 set(CMAKE_CXX_FLAGS_DEBUG   "-DQT_DEBUG")
 
 if (STATIC_SCRIPT_BINDINGS)
@@ -228,7 +228,7 @@ add_library (
       qtscript_QRubberBand.cpp
       qtscript_QScrollArea.cpp
       qtscript_QScrollBar.cpp
-      qtscript_QSessionManager.cpp
+#      qtscript_QSessionManager.cpp  # does not work with qt4.8
       qtscript_QShortcut.cpp
       qtscript_QShortcutEvent.cpp
       qtscript_QShowEvent.cpp
