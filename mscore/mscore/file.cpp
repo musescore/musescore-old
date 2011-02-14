@@ -2289,21 +2289,6 @@ void Score::writeSegments(Xml& xml, const Measure* m, int strack, int etrack, Se
       }
 
 //---------------------------------------------------------
-//   getSoundFont
-//---------------------------------------------------------
-
-QString getSoundFont(const QString& d)
-      {
-      QString s = QFileDialog::getOpenFileName(
-         mscore,
-         MuseScore::tr("Choose Synthesizer SoundFont"),
-         d,
-         MuseScore::tr("SoundFont Files (*.sf2 *.SF2);;All (*)")
-         );
-      return s;
-      }
-
-//---------------------------------------------------------
 //   addAudioTrack
 //---------------------------------------------------------
 
@@ -2313,6 +2298,21 @@ void Score::addAudioTrack()
       }
 
 #if NATIVE_FILEDIALOG
+
+//---------------------------------------------------------
+//   getSoundFont
+//---------------------------------------------------------
+
+QString MuseScore::getSoundFont(const QString& d)
+      {
+      QString s = QFileDialog::getOpenFileName(
+         mscore,
+         MuseScore::tr("Choose Synthesizer SoundFont"),
+         d,
+         MuseScore::tr("SoundFont Files (*.sf2 *.SF2);;All (*)")
+         );
+      return s;
+      }
 
 //---------------------------------------------------------
 //   getOpenScoreName
@@ -2495,6 +2495,46 @@ QString MuseScore::getStyleFilename(bool open)
             }
       if (dialog->exec()) {
             QStringList result = dialog->selectedFiles();
+            return result.front();
+            }
+      return QString();
+      }
+
+//---------------------------------------------------------
+//   getSoundFont
+//---------------------------------------------------------
+
+QString MuseScore::getSoundFont(const QString& d)
+      {
+      if (loadSoundFontDialog == 0) {
+            loadSoundFontDialog = new QFileDialog(this);
+            loadSoundFontDialog->setFileMode(QFileDialog::ExistingFile);
+            loadSoundFontDialog->setOption(QFileDialog::DontUseNativeDialog, true);
+            loadSoundFontDialog->setWindowTitle(tr("MuseScore: Choose Synthesizer SoundFont"));
+            loadSoundFontDialog->setNameFilter(tr("SoundFont Files (*.sf2 *.SF2);;All (*)"));
+            loadSoundFontDialog->setDirectory(d);
+
+            QSettings settings;
+            loadSoundFontDialog->restoreState(settings.value("mySoundFonts").toByteArray());
+            }
+
+      //
+      // setup side bar urls
+      //
+      QFileInfo mySoundFonts(preferences.mySoundFontsPath);
+      if (mySoundFonts.isRelative())
+            mySoundFonts.setFile(QDir::home(), preferences.mySoundFontsPath);
+
+      QList<QUrl> urls;
+      QString home = QDir::homePath();
+      urls.append(QUrl::fromLocalFile(home));
+      urls.append(QUrl::fromLocalFile(mySoundFonts.absoluteFilePath()));
+      urls.append(QUrl::fromLocalFile(QDir::currentPath()));
+      urls.append(QUrl::fromLocalFile(mscoreGlobalShare+"/sound"));
+      loadSoundFontDialog->setSidebarUrls(urls);
+
+      if (loadSoundFontDialog->exec()) {
+            QStringList result = loadSoundFontDialog->selectedFiles();
             return result.front();
             }
       return QString();

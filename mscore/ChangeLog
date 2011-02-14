@@ -1,5 +1,6 @@
-14.feg (ws)
-      - new preference settings: MyScoresPath MyStylesPath MyTemplatesPath MyPluginsPath
+14.feb (ws)
+      - new preference settings: MyScoresPath, MyStylesPath, MyTemplatesPath,
+        MyPluginsPath, MySoundFontsPath
         used in qt file dialogs
 13.feb (ws)
       - add qt file dialogs for score load/save; can be enabled/disabled

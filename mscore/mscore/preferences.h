@@ -151,6 +151,7 @@ struct Preferences {
       QString myStylesPath;
       QString myTemplatesPath;
       QString myPluginsPath;
+      QString mySoundFontsPath;
 
       bool dirty;
 

@@ -241,7 +241,7 @@ void SynthControl::updatePreferences()
 
 void SynthControl::selectSoundFont()
       {
-      QString s = ::getSoundFont(soundFont->text());
+      QString s = mscore->getSoundFont(soundFont->text());
       if (!s.isEmpty()) {
             soundFont->setText(s);
             soundFontAdd->setEnabled(true);
