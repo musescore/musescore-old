@@ -484,7 +484,7 @@ QScriptValue qtscript_create_QStylePlugin_class(QScriptEngine *engine);
 QScriptValue qtscript_create_QAccessibleInterface_class(QScriptEngine *engine);
 QScriptValue qtscript_create_QWhatsThisClickedEvent_class(QScriptEngine *engine);
 QScriptValue qtscript_create_QDrag_class(QScriptEngine *engine);
-QScriptValue qtscript_create_QSessionManager_class(QScriptEngine *engine);
+// QScriptValue qtscript_create_QSessionManager_class(QScriptEngine *engine);
 QScriptValue qtscript_create_QUndoGroup_class(QScriptEngine *engine);
 QScriptValue qtscript_create_QCompleter_class(QScriptEngine *engine);
 QScriptValue qtscript_create_QFileOpenEvent_class(QScriptEngine *engine);
@@ -804,7 +804,7 @@ static const char * const qtscript_com_trolltech_qt_gui_class_names[] = {
     , "QAccessibleInterface"
     , "QWhatsThisClickedEvent"
     , "QDrag"
-    , "QSessionManager"
+//    , "QSessionManager"
     , "QUndoGroup"
     , "QCompleter"
     , "QFileOpenEvent"
@@ -1126,7 +1126,7 @@ static const QtBindingCreator qtscript_com_trolltech_qt_gui_class_functions[] = 
     , qtscript_create_QAccessibleInterface_class
     , qtscript_create_QWhatsThisClickedEvent_class
     , qtscript_create_QDrag_class
-    , qtscript_create_QSessionManager_class
+//    , qtscript_create_QSessionManager_class
     , qtscript_create_QUndoGroup_class
     , qtscript_create_QCompleter_class
     , qtscript_create_QFileOpenEvent_class
@@ -1304,7 +1304,8 @@ void com_trolltech_qt_gui_ScriptPlugin::initialize(const QString &key, QScriptEn
     if (key == QLatin1String("qt")) {
     } else if (key == QLatin1String("qt.gui")) {
         QScriptValue extensionObject = engine->globalObject();
-        for (int i = 0; i < 318; ++i) {
+//        for (int i = 0; i < 318; ++i) {
+        for (int i = 0; i < 317; ++i) {
             extensionObject.setProperty(qtscript_com_trolltech_qt_gui_class_names[i],
                 qtscript_com_trolltech_qt_gui_class_functions[i](engine),
                 QScriptValue::SkipInEnumeration);

@@ -313,6 +313,11 @@ bool MuseScore::loadPlugin(const QString& filename)
 ScriptEngine::ScriptEngine()
    : QScriptEngine()
       {
+#if 0
+      QStringList sl = availableExtensions();
+      foreach(QString s, sl)
+            printf("available script extension: <%s>\n", qPrintable(s));
+#endif
       static const char* xts[] = {
             "qt.core", "qt.gui", "qt.xml", "qt.network", "qt.uitools"
             };
@@ -320,7 +325,8 @@ ScriptEngine::ScriptEngine()
             importExtension(xts[i]);
             if (hasUncaughtException()) {
                   QScriptValue val = uncaughtException();
-                  printf("%s\n", qPrintable(val.toString()));
+                  printf("Error loading Script extension <%s>: %s\n",
+                     xts[i], qPrintable(val.toString()));
                   }
             }
 
