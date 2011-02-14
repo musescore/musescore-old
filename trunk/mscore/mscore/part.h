@@ -72,7 +72,7 @@ class Part {
       int chorus() const;
       int pan() const;
       int midiProgram() const;
-      void setMidiProgram(int);
+      void setMidiProgram(int, int bank = 0);
 
       int midiChannel() const;
       void setMidiChannel(int) const;
