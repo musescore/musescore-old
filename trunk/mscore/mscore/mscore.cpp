@@ -368,6 +368,7 @@ MuseScore::MuseScore()
       saveScoreDialog       = 0;
       loadStyleDialog       = 0;
       saveStyleDialog       = 0;
+      loadSoundFontDialog   = 0;
 
       _midiRecordId         = -1;
       _fullscreen           = false;

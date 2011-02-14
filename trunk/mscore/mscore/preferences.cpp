@@ -205,6 +205,7 @@ void Preferences::init()
       myStylesPath            = "MuseScore/MyStyles";
       myTemplatesPath         = "MuseScore/MyTemplates";
       myPluginsPath           = "MuseScore/MyPlugins";
+      mySoundFontsPath        = "MuseScore/MySoundFonts";
       };
 
 //---------------------------------------------------------
@@ -310,6 +311,7 @@ void Preferences::write()
       s.setValue("myStylesPath", myStylesPath);
       s.setValue("myTemplatesPath", myTemplatesPath);
       s.setValue("myPluginsPath", myPluginsPath);
+      s.setValue("mySoundFontsPath", mySoundFontsPath);
 
       //update
       s.setValue("checkUpdateStartup", checkUpdateStartup);
@@ -450,6 +452,7 @@ void Preferences::read()
       myStylesPath    = s.value("myStylesPath", "MuseScore/MyStyles").toString();
       myTemplatesPath = s.value("myTemplatesPath", "MuseScore/MyTemplates").toString();
       myPluginsPath   = s.value("myPluginsPath", "MuseScore/MyPlugins").toString();
+      mySoundFontsPath = s.value("mySoundFontsPath", "MuseScore/MySoundFonts").toString();
 
       checkUpdateStartup = s.value("checkUpdateStartup", UpdateChecker::defaultPeriod()).toInt();
       if (checkUpdateStartup == 0) {
@@ -563,6 +566,7 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       connect(myStylesButton, SIGNAL(clicked()), SLOT(selectStylesDirectory()));
       connect(myTemplatesButton, SIGNAL(clicked()), SLOT(selectTemplatesDirectory()));
       connect(myPluginsButton, SIGNAL(clicked()), SLOT(selectPluginsDirectory()));
+      connect(mySoundFontsButton, SIGNAL(clicked()), SLOT(selectSoundFontsDirectory()));
 
       connect(defaultStyleButton,     SIGNAL(clicked()), SLOT(selectDefaultStyle()));
       connect(instrumentListButton,   SIGNAL(clicked()), SLOT(selectInstrumentList()));
@@ -893,6 +897,7 @@ void PreferenceDialog::updateValues(Preferences* p)
       myStyles->setText(p->myStylesPath);
       myTemplates->setText(p->myTemplatesPath);
       myPlugins->setText(p->myPluginsPath);
+      mySoundFonts->setText(p->mySoundFontsPath);
 
       sfChanged = false;
       }
@@ -1231,6 +1236,7 @@ void PreferenceDialog::apply()
       preferences.myStylesPath       = myStyles->text();
       preferences.myTemplatesPath    = myTemplates->text();
       preferences.myPluginsPath      = myPlugins->text();
+      preferences.mySoundFontsPath   = mySoundFonts->text();
 
       preferences.showSplashScreen   = showSplashScreen->isChecked();
       preferences.midiExpandRepeats  = expandRepeats->isChecked();
@@ -1552,7 +1558,7 @@ void PreferenceDialog::midiRemoteControlClearClicked()
 
 void PreferenceDialog::selectSoundFont()
       {
-      QString s = ::getSoundFont(soundFont->text());
+      QString s = mscore->getSoundFont(soundFont->text());
       soundFont->setText(s);
       }
 
@@ -1614,6 +1620,21 @@ void PreferenceDialog::selectPluginsDirectory()
          );
       if (!s.isNull())
             myPlugins->setText(s);
+      }
+
+//---------------------------------------------------------
+//   selectSoundFontsDirectory
+//---------------------------------------------------------
+
+void PreferenceDialog::selectSoundFontsDirectory()
+      {
+      QString s = QFileDialog::getExistingDirectory(
+         this,
+         tr("Choose MySoundFonts Directory"),
+         mySoundFonts->text()
+         );
+      if (!s.isNull())
+            mySoundFonts->setText(s);
       }
 
 

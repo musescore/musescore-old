@@ -1987,9 +1987,6 @@ void Measure::write(Xml& xml) const
 
 void Measure::read(QDomElement e, int staffIdx)
       {
-// printf("---Measure read tick: %d(beat %d) staffIdx: %d  %s %s\n",
-//      tick(), tick()/480, staffIdx, qPrintable(timesig().print()), qPrintable(len().print()));
-
       if (staffIdx == 0)
             _len = Fraction(0, 1);
       for (int n = staves.size(); n <= staffIdx; ++n) {
@@ -2011,13 +2008,13 @@ void Measure::read(QDomElement e, int staffIdx)
       else
             setTick(score()->curTick);
       score()->curTick = tick();
-
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
 
-            if (tag == "tick")
+            if (tag == "tick") {
                   score()->curTick = val.toInt();
+                  }
             else if (tag == "BarLine") {
                   BarLine* barLine = new BarLine(score());
                   barLine->setTrack(score()->curTrack);

@@ -74,8 +74,9 @@ DurationElement::DurationElement(const DurationElement& e)
 int DurationElement::ticks() const
       {
       int ticks = duration().ticks();
-      for (Tuplet* t = tuplet(); t; t = t->tuplet())
+      for (Tuplet* t = tuplet(); t; t = t->tuplet()) {
             ticks = ticks * t->ratio().denominator() / t->ratio().numerator();
+            }
       return ticks;
       }
 
