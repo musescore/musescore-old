@@ -366,6 +366,8 @@ MuseScore::MuseScore()
       chordStyleEditor      = 0;
       loadScoreDialog       = 0;
       saveScoreDialog       = 0;
+      loadStyleDialog       = 0;
+      saveStyleDialog       = 0;
 
       _midiRecordId         = -1;
       _fullscreen           = false;
@@ -2682,6 +2684,10 @@ void MuseScore::writeSettings()
             settings.setValue("loadScoreDialog", loadScoreDialog->saveState());
       if (saveScoreDialog)
             settings.setValue("saveScoreDialog", saveScoreDialog->saveState());
+      if (loadStyleDialog)
+            settings.setValue("loadStyleDialog", loadStyleDialog->saveState());
+      if (saveStyleDialog)
+            settings.setValue("saveStyleDialog", saveStyleDialog->saveState());
       }
 
 //---------------------------------------------------------

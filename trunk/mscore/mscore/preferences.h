@@ -147,6 +147,11 @@ struct Preferences {
       QString styleName;
       int globalStyle;        // 0 - dark, 1 - light
 
+      QString myScoresPath;
+      QString myStylesPath;
+      QString myTemplatesPath;
+      QString myPluginsPath;
+
       bool dirty;
 
       Preferences();

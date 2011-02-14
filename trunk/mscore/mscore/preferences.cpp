@@ -199,8 +199,12 @@ void Preferences::init()
       useOsc                  = false;
       oscPort                 = 5282;
       appStyleFile            = ":/data/appstyle-dark.css";
-
       singlePalette           = false;
+
+      myScoresPath            = "MyScores";
+      myStylesPath            = "MuseScore/MyStyles";
+      myTemplatesPath         = "MuseScore/MyTemplates";
+      myPluginsPath           = "MuseScore/MyPlugins";
       };
 
 //---------------------------------------------------------
@@ -301,6 +305,11 @@ void Preferences::write()
       s.setValue("oscPort", oscPort);
       s.setValue("style", styleName);
       s.setValue("singlePalette", singlePalette);
+
+      s.setValue("myScoresPath", myScoresPath);
+      s.setValue("myStylesPath", myStylesPath);
+      s.setValue("myTemplatesPath", myTemplatesPath);
+      s.setValue("myPluginsPath", myPluginsPath);
 
       //update
       s.setValue("checkUpdateStartup", checkUpdateStartup);
@@ -436,7 +445,11 @@ void Preferences::read()
             appStyleFile = ":/data/appstyle-dark.css";
             globalStyle  = 0;
             }
-      singlePalette          = s.value("singlePalette", false).toBool();
+      singlePalette   = s.value("singlePalette", false).toBool();
+      myScoresPath    = s.value("myScoresPath", "MyScores").toString();
+      myStylesPath    = s.value("myStylesPath", "MuseScore/MyStyles").toString();
+      myTemplatesPath = s.value("myTemplatesPath", "MuseScore/MyTemplates").toString();
+      myPluginsPath   = s.value("myPluginsPath", "MuseScore/MyPlugins").toString();
 
       checkUpdateStartup = s.value("checkUpdateStartup", UpdateChecker::defaultPeriod()).toInt();
       if (checkUpdateStartup == 0) {
@@ -505,6 +518,11 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       instrumentListButton->setIcon(*icons[fileOpen_ICON]);
       defaultStyleButton->setIcon(*icons[fileOpen_ICON]);
       workingDirectoryButton->setIcon(*icons[fileOpen_ICON]);
+      myScoresButton->setIcon(*icons[fileOpen_ICON]);
+      myStylesButton->setIcon(*icons[fileOpen_ICON]);
+      myTemplatesButton->setIcon(*icons[fileOpen_ICON]);
+      myPluginsButton->setIcon(*icons[fileOpen_ICON]);
+
       bgWallpaperSelect->setIcon(*icons[fileOpen_ICON]);
       fgWallpaperSelect->setIcon(*icons[fileOpen_ICON]);
       sfOpenButton->setIcon(*icons[fileOpen_ICON]);
@@ -541,6 +559,11 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       connect(fgWallpaperSelect,  SIGNAL(clicked()), SLOT(selectFgWallpaper()));
       connect(bgWallpaperSelect,  SIGNAL(clicked()), SLOT(selectBgWallpaper()));
       connect(workingDirectoryButton, SIGNAL(clicked()), SLOT(selectWorkingDirectory()));
+      connect(myScoresButton, SIGNAL(clicked()), SLOT(selectScoresDirectory()));
+      connect(myStylesButton, SIGNAL(clicked()), SLOT(selectStylesDirectory()));
+      connect(myTemplatesButton, SIGNAL(clicked()), SLOT(selectTemplatesDirectory()));
+      connect(myPluginsButton, SIGNAL(clicked()), SLOT(selectPluginsDirectory()));
+
       connect(defaultStyleButton,     SIGNAL(clicked()), SLOT(selectDefaultStyle()));
       connect(instrumentListButton,   SIGNAL(clicked()), SLOT(selectInstrumentList()));
       connect(startWithButton,        SIGNAL(clicked()), SLOT(selectStartWith()));
@@ -865,6 +888,11 @@ void PreferenceDialog::updateValues(Preferences* p)
       oscPort->setValue(p->oscPort);
 
       styleName->setCurrentIndex(p->globalStyle);
+
+      myScores->setText(p->myScoresPath);
+      myStyles->setText(p->myStylesPath);
+      myTemplates->setText(p->myTemplatesPath);
+      myPlugins->setText(p->myPluginsPath);
 
       sfChanged = false;
       }
@@ -1199,6 +1227,11 @@ void PreferenceDialog::apply()
             preferences.sessionStart = EMPTY_SESSION;
       preferences.startScore         = sessionScore->text();
       preferences.workingDirectory   = workingDirectory->text();
+      preferences.myScoresPath       = myScores->text();
+      preferences.myStylesPath       = myStyles->text();
+      preferences.myTemplatesPath    = myTemplates->text();
+      preferences.myPluginsPath      = myPlugins->text();
+
       preferences.showSplashScreen   = showSplashScreen->isChecked();
       preferences.midiExpandRepeats  = expandRepeats->isChecked();
       preferences.instrumentList     = instrumentList->text();
@@ -1496,13 +1529,7 @@ void PreferenceDialog::pageFormatSelected(int pf)
 
 void PreferenceDialog::styleFileButtonClicked()
       {
-      QString fn = QFileDialog::getOpenFileName(
-         0, QWidget::tr("MuseScore: Load Style"),
-         QString("."),
-            QWidget::tr("MuseScore Styles (*.mss);;"
-            "All Files (*)"
-            )
-         );
+      QString fn = mscore->getStyleFilename(true);
       if (fn.isEmpty())
             return;
       importStyleFile->setText(fn);
@@ -1528,4 +1555,65 @@ void PreferenceDialog::selectSoundFont()
       QString s = ::getSoundFont(soundFont->text());
       soundFont->setText(s);
       }
+
+//---------------------------------------------------------
+//   selectScoresDirectory
+//---------------------------------------------------------
+
+void PreferenceDialog::selectScoresDirectory()
+      {
+      QString s = QFileDialog::getExistingDirectory(
+         this,
+         tr("Choose MyScores Directory"),
+         myScores->text()
+         );
+      if (!s.isNull())
+            myScores->setText(s);
+      }
+
+//---------------------------------------------------------
+//   selectStylesDirectory
+//---------------------------------------------------------
+
+void PreferenceDialog::selectStylesDirectory()
+      {
+      QString s = QFileDialog::getExistingDirectory(
+         this,
+         tr("Choose MyStyles Directory"),
+         myStyles->text()
+         );
+      if (!s.isNull())
+            myStyles->setText(s);
+      }
+
+//---------------------------------------------------------
+//   selectTemplatesDirectory
+//---------------------------------------------------------
+
+void PreferenceDialog::selectTemplatesDirectory()
+      {
+      QString s = QFileDialog::getExistingDirectory(
+         this,
+         tr("Choose MyTemplates Directory"),
+         myTemplates->text()
+         );
+      if (!s.isNull())
+            myTemplates->setText(s);
+      }
+
+//---------------------------------------------------------
+//   selectPluginsDirectory
+//---------------------------------------------------------
+
+void PreferenceDialog::selectPluginsDirectory()
+      {
+      QString s = QFileDialog::getExistingDirectory(
+         this,
+         tr("Choose MyPlugins Directory"),
+         myPlugins->text()
+         );
+      if (!s.isNull())
+            myPlugins->setText(s);
+      }
+
 

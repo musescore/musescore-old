@@ -1,5 +1,8 @@
+14.feg (ws)
+      - new preference settings: MyScoresPath MyStylesPath MyTemplatesPath MyPluginsPath
+        used in qt file dialogs
 13.feb (ws)
-      - add native (qt) file dialogs for score load/save; can be enabled/disabled
+      - add qt file dialogs for score load/save; can be enabled/disabled
         with cmake option NATIVE_FILEDIALOG in toplevel CMakeLists.txt
       (db)
       - copy editing for demo scores (usuariomuse)

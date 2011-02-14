@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2010 Werner Schweer et al.
+//  Copyright (C) 2002-2011 Werner Schweer et al.
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -2373,16 +2373,20 @@ QString MuseScore::getStyleFilename(bool open)
 
 QString MuseScore::getOpenScoreName(QString& dir, const QString& filter)
       {
+      QFileInfo myScores(preferences.myScoresPath);
+      if (myScores.isRelative())
+            myScores.setFile(QDir::home(), preferences.myScoresPath);
       if (loadScoreDialog == 0) {
-            loadScoreDialog = new QFileDialog(this, tr("MuseScore: Load Score"), dir, filter);
+            loadScoreDialog = new QFileDialog(this);
             loadScoreDialog->setFileMode(QFileDialog::ExistingFile);
             loadScoreDialog->setOption(QFileDialog::DontUseNativeDialog, true);
+            loadScoreDialog->setWindowTitle(tr("MuseScore: Load Score"));
 
             // setup side bar urls
             QList<QUrl> urls;
             QString home = QDir::homePath();
             urls.append(QUrl::fromLocalFile(home));
-            urls.append(QUrl::fromLocalFile(home+"/MyScores"));
+            urls.append(QUrl::fromLocalFile(myScores.absoluteFilePath()));
             urls.append(QUrl::fromLocalFile(QDir::currentPath()));
             urls.append(QUrl::fromLocalFile(mscoreGlobalShare+"/demos"));
             loadScoreDialog->setSidebarUrls(urls);
@@ -2407,6 +2411,9 @@ QString MuseScore::getOpenScoreName(QString& dir, const QString& filter)
 QString MuseScore::getSaveScoreName(const QString& title,
    QString& dir, const QString& filter, QString* selectedFilter)
       {
+      QFileInfo myScores(preferences.myScoresPath);
+      if (myScores.isRelative())
+            myScores.setFile(QDir::home(), preferences.myScoresPath);
       if (saveScoreDialog == 0) {
             saveScoreDialog = new QFileDialog(this);
             saveScoreDialog->setFileMode(QFileDialog::AnyFile);
@@ -2417,7 +2424,7 @@ QString MuseScore::getSaveScoreName(const QString& title,
             QList<QUrl> urls;
             QString home = QDir::homePath();
             urls.append(QUrl::fromLocalFile(home));
-            urls.append(QUrl::fromLocalFile(home+"/MyScores"));
+            urls.append(QUrl::fromLocalFile(myScores.absoluteFilePath()));
             urls.append(QUrl::fromLocalFile(QDir::currentPath()));
             saveScoreDialog->setSidebarUrls(urls);
             QSettings settings;
@@ -2441,24 +2448,57 @@ QString MuseScore::getSaveScoreName(const QString& title,
 
 QString MuseScore::getStyleFilename(bool open)
       {
-      QString fn;
+      QFileInfo myStyles(preferences.myStylesPath);
+      if (myStyles.isRelative())
+            myStyles.setFile(QDir::home(), preferences.myStylesPath);
+      QFileDialog* dialog;
+      QList<QUrl> urls;
+      QString home = QDir::homePath();
+      urls.append(QUrl::fromLocalFile(home));
+      urls.append(QUrl::fromLocalFile(myStyles.absoluteFilePath()));
+      urls.append(QUrl::fromLocalFile(QDir::currentPath()));
+
       if (open) {
-            fn = QFileDialog::getOpenFileName(
-               this, tr("MuseScore: Load Style"),
-               QString("."),
-               tr("MuseScore Styles (*.mss);;" "All Files (*)")
-               );
+            if (loadStyleDialog == 0) {
+                  loadStyleDialog = new QFileDialog(this);
+                  loadStyleDialog->setFileMode(QFileDialog::ExistingFile);
+                  loadStyleDialog->setOption(QFileDialog::DontUseNativeDialog, true);
+                  loadStyleDialog->setWindowTitle(tr("MuseScore: Load Style"));
+                  loadStyleDialog->setNameFilter(tr("MuseScore Style File (*.mss)"));
+                  loadStyleDialog->setDirectory(".");
+
+                  // setup side bar urls
+                  urls.append(QUrl::fromLocalFile(mscoreGlobalShare+"/styles"));
+                  loadStyleDialog->setSidebarUrls(urls);
+                  QSettings settings;
+                  loadStyleDialog->restoreState(settings.value("loadStyleDialog").toByteArray());
+                  }
+            dialog = loadStyleDialog;
             }
       else {
-            fn = QFileDialog::getSaveFileName(
-               this, tr("MuseScore: Save Style"),
-               QString("."),
-               tr("MuseScore Style File (*.mss)")
-               );
-            }
-      return fn;
-      }
+            if (saveStyleDialog == 0) {
+                  saveStyleDialog = new QFileDialog(this);
+                  saveStyleDialog->setFileMode(QFileDialog::AnyFile);
+                  saveStyleDialog->setOption(QFileDialog::DontConfirmOverwrite, false);
+                  saveStyleDialog->setOption(QFileDialog::DontUseNativeDialog, true);
+                  saveStyleDialog->setLabelText(QFileDialog::Accept, tr("Save"));
+                  saveStyleDialog->setWindowTitle(tr("MuseScore: Save Style"));
+                  saveStyleDialog->setNameFilter(tr("MuseScore Style File (*.mss)"));
+                  saveStyleDialog->setDirectory(".");
 
+                  // setup side bar urls
+                  saveStyleDialog->setSidebarUrls(urls);
+                  QSettings settings;
+                  saveStyleDialog->restoreState(settings.value("saveStyleDialog").toByteArray());
+                  }
+            dialog = saveStyleDialog;
+            }
+      if (dialog->exec()) {
+            QStringList result = dialog->selectedFiles();
+            return result.front();
+            }
+      return QString();
+      }
 
 #endif  // NATIVE_FILEDIALOG
 
