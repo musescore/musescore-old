@@ -228,7 +228,7 @@ add_library (
       qtscript_QRubberBand.cpp
       qtscript_QScrollArea.cpp
       qtscript_QScrollBar.cpp
-#      qtscript_QSessionManager.cpp
+      qtscript_QSessionManager.cpp
       qtscript_QShortcut.cpp
       qtscript_QShortcutEvent.cpp
       qtscript_QShowEvent.cpp
