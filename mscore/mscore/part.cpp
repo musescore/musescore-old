@@ -273,14 +273,13 @@ void Part::setShow(bool val)
 //    TODO
 //---------------------------------------------------------
 
-void Part::setMidiProgram(int p)
+void Part::setMidiProgram(int program, int bank)
       {
-      // LVIFIX: check if this is correct
-      // at least it fixes the MIDI program handling in the MusicXML regression test
       Channel c = instr(0)->channel(0);
-      c.program = p;
+      c.program = program;
+      c.bank    = bank;
       c.updateInitList();
-//TODOxx      instr(0)->setChannel(0, c);
+      instr(0)->setChannel(0, c);
       }
 
 int Part::volume() const

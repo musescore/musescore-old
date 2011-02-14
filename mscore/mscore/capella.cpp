@@ -1915,7 +1915,9 @@ void Score::convertCapella(Capella* cap)
             printf("System:\n");
             foreach(CapStaff* cstaff, csys->staves) {
                   CapStaffLayout* cl = cap->staffLayout(cstaff->iLayout);
-                  printf("  Staff layout %d  barline %d-%d mode %d\n",
+                  printf("  Staff layout <%s><%s><%s><%s><%s> %d  barline %d-%d mode %d\n",
+                     cl->descr, cl->name, cl->abbrev, cl->intermediateName,
+                     cl->intermediateAbbrev,
                      cstaff->iLayout, cl->barlineFrom, cl->barlineTo, cl->barlineMode);
                   }
             }
@@ -1941,15 +1943,23 @@ void Score::convertCapella(Capella* cap)
       if (cs->log2Denom <= 7)
             sigmap()->add(0, Fraction(cs->numerator, 1 << cs->log2Denom));
 
-      Part* part = new Part(this);
       Staff* bstaff = 0;
       int span;
       for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
             CapStaffLayout* cl = cap->staffLayout(staffIdx);
-            Staff* s = new Staff(this, part, staffIdx);
+            Part* part         = new Part(this);
+            Staff* s           = new Staff(this, part, staffIdx);
+printf("Midi staff %d program %d\n", staffIdx, cl->sound);
+            if (cl->bPercussion)
+                  part->setMidiProgram(0, 128);
+            else
+                  part->setMidiProgram(cl->sound, 0);
+            part->setTrackName(QString::fromLatin1(cl->descr));
+            part->setLongName(QString::fromLatin1(cl->name));
+            part->setShortName(QString::fromLatin1(cl->abbrev));
+
             ClefType clefType = CapClef::clefType(cl->form, cl->line, cl->oct);
             s->setClef(0, clefType);
-printf("Staff %d defaultClef %d\n", staffIdx, int(clefType));
             s->setBarLineSpan(0);
             if (bstaff == 0) {
                   bstaff = s;
@@ -1963,6 +1973,7 @@ printf("Staff %d defaultClef %d\n", staffIdx, int(clefType));
             s->setSmall(cl->bSmall);
             part->insertStaff(s);
             _staves.push_back(s);
+            _parts.push_back(part);
             }
       if (bstaff)
             bstaff->setBarLineSpan(span);
@@ -2019,12 +2030,13 @@ printf("Staff %d defaultClef %d\n", staffIdx, int(clefType));
       int systemTick = 0;
       foreach(CapSystem* csys, cap->systems) {
 printf("readCapSystem\n");
-            if (csys->explLeftIndent > 0) {
+/*            if (csys->explLeftIndent > 0) {
                   HBox* mb = new HBox(this);
                   mb->setTick(systemTick);
                   mb->setBoxWidth(Spatium(csys->explLeftIndent));
                   addMeasure(mb);
                   }
+*/
             int mtick = 0;
             foreach(CapStaff* cstaff, csys->staves) {
                   //
@@ -2079,7 +2091,6 @@ printf("  ReadCapStaff %d/%d\n", cstaff->numerator, 1 << cstaff->log2Denom);
                         }
                   }
             }
-      _parts.push_back(part);
       connectTies();
       connectSlurs();
       rebuildMidiMapping();

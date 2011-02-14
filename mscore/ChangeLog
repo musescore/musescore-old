@@ -1,4 +1,5 @@
 14.feb (ws)
+      - capella import: instrument names, midi instruments
       - remove QSessionManager from script bindings as its not compatible with
         newest qt
       - new preference settings: MyScoresPath, MyStylesPath, MyTemplatesPath,

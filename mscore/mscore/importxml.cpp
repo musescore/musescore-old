@@ -2556,6 +2556,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                                           }
                                     else {
                                           tie = new Tie(score);
+printf("new Tie %p\n", tie);
                                           }
                                     QString tiedOrientation = e.attribute("orientation", "auto");
                                     if (tiedOrientation == "over")
@@ -2851,6 +2852,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   }
 
             if (tie) {
+printf("use Tie %p\n", tie);
                   note->setTieFor(tie);
                   tie->setStartNote(note);
                   tie->setTrack(track);
@@ -3485,7 +3487,7 @@ void MusicXml::xmlClef(QDomElement e, int staffIdx, Measure* measure)
             else
                   domError(ee);
             }
-      
+
       //some software (Primus) don't include line and assume some default
       // it's permitted by MusicXML 2.0 XSD
       if(line == -1) {
@@ -3495,8 +3497,8 @@ void MusicXml::xmlClef(QDomElement e, int staffIdx, Measure* measure)
                 line = 4;
           else if (c == "C")
                 line = 3;
-          }      
-            
+          }
+
       if (c == "G" && i == 0 && line == 2)
             clef = CLEF_G;
       else if (c == "G" && i == 1 && line == 2)
