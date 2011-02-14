@@ -66,6 +66,10 @@ class PreferenceDialog : public QDialog, private Ui::PrefsDialogBase {
       void recordButtonClicked(int);
       void midiRemoteControlClearClicked();
       void selectSoundFont();
+      void selectScoresDirectory();
+      void selectStylesDirectory();
+      void selectTemplatesDirectory();
+      void selectPluginsDirectory();
 
    signals:
       void preferencesChanged();

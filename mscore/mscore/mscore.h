@@ -282,6 +282,8 @@ class MuseScore : public QMainWindow {
 
       QFileDialog* loadScoreDialog;
       QFileDialog* saveScoreDialog;
+      QFileDialog* loadStyleDialog;
+      QFileDialog* saveStyleDialog;
 
 
       //---------------------
