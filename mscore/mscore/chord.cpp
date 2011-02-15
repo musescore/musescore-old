@@ -1359,6 +1359,10 @@ void Chord::layout()
             //
             // NON-TABLATURE STAVES
             //
+            if(_tabDur) {           // no TAB? no duration symbol! (may happen when converting a TAB into PITCHED)
+                  delete _tabDur;
+                  _tabDur = 0;
+                  }
             if (!segment()) {
                   //
                   // hack for use in palette

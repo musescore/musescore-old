@@ -1,3 +1,5 @@
+15.feb (mi)
+      - improved tab<->pitched staff type conversion (to be completed) (r.4017)
 14.feb (ws)
       - capella import: instrument names, midi instruments
       - remove QSessionManager from script bindings as its not compatible with
