@@ -174,10 +174,6 @@ void EditStaff::apply()
             interval.flip();
       instrument.setTranspose(interval);
 
-//      instrument.setMinPitchA(aPitchMin->value());
-//      instrument.setMaxPitchA(aPitchMax->value());
-//      instrument.setMinPitchP(pPitchMin->value());
-//      instrument.setMaxPitchP(pPitchMax->value());
       instrument.setMinPitchA(_minPitchA);
       instrument.setMaxPitchA(_maxPitchA);
       instrument.setMinPitchP(_minPitchP);
@@ -190,16 +186,17 @@ void EditStaff::apply()
       StaffType* st = score->staffTypes()[staffType->currentIndex()];
       bool updateNeeded = false;
       // before changing instrument, check if notes need to be updated
-      // true if new staff is type TAB and old staff was not TAB or had a different TAB
-      if(st->group() == TAB_STAFF &&
-         (staff->staffType()->group() != TAB_STAFF || instrument.tablature() != part->instr()->tablature()) )
+      // true if changing into or away from TAB or from one TAB type to another
+      if(   (st->group() == TAB_STAFF && staff->staffType()->group() != TAB_STAFF) ||
+            (st->group() != TAB_STAFF && staff->staffType()->group() == TAB_STAFF) ||
+            (st->group() == TAB_STAFF && staff->staffType()->group() == TAB_STAFF &&
+                        instrument.tablature() != part->instr()->tablature()) )
             updateNeeded = true;
 
       if (!(instrument == *part->instr())) {
 printf("instrument changed <%s>\n", qPrintable(instrument.longName().toPlainText()));
             score->undo()->push(new ChangePart(part, instrument));
             }
-
 
       if (
          s != staff->small()
@@ -236,10 +233,6 @@ void EditStaff::showInstrumentDialog()
             const InstrumentTemplate* t = si.instrTemplate();
             // setMidiProgram(t->midiProgram);
 
-//            aPitchMin->setValue(t->minPitchA);
-//            aPitchMax->setValue(t->maxPitchA);
-//            pPitchMin->setValue(t->minPitchP);
-//            pPitchMax->setValue(t->maxPitchP);
             _minPitchA = t->minPitchA;
             _maxPitchA = t->maxPitchA;
             _minPitchP = t->minPitchP;

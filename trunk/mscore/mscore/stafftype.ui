@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>540</height>
+    <height>549</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -250,7 +250,7 @@
           </layout>
          </widget>
          <widget class="QWidget" name="page_2">
-          <layout class="QVBoxLayout" name="verticalLayout_6" stretch="0,0,0,0,0,0,0">
+          <layout class="QVBoxLayout" name="verticalLayout_6" stretch="0,0,0,0,0,0,0,0">
            <item>
             <widget class="QLabel" name="tablatureGroupName">
              <property name="font">
@@ -264,6 +264,82 @@
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="presetGroup">
+             <property name="title">
+              <string>Presets</string>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_16">
+              <item>
+               <widget class="QLabel" name="presetLabel">
+                <property name="text">
+                 <string>Select:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QComboBox" name="presetTablatureCombo">
+                <property name="currentIndex">
+                 <number>0</number>
+                </property>
+                <property name="maxCount">
+                 <number>10</number>
+                </property>
+                <item>
+                 <property name="text">
+                  <string comment="tablatture type">Guitar (modern)</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string comment="tablature type">Bass (modern)</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string comment="tablature type">Italian (historic)</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string comment="tablature type">French (historic)</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="presetTablature">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="text">
+                 <string>Set</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_8">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="Line" name="line">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
              </property>
             </widget>
            </item>
@@ -673,75 +749,6 @@
             </widget>
            </item>
            <item>
-            <widget class="QGroupBox" name="presetGroup">
-             <property name="title">
-              <string>Presets</string>
-             </property>
-             <layout class="QHBoxLayout" name="horizontalLayout_16">
-              <item>
-               <widget class="QLabel" name="presetLabel">
-                <property name="text">
-                 <string>Select:</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QComboBox" name="presetTablatureCombo">
-                <property name="currentIndex">
-                 <number>0</number>
-                </property>
-                <property name="maxCount">
-                 <number>10</number>
-                </property>
-                <item>
-                 <property name="text">
-                  <string comment="tablatture type">Guitar (modern)</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string comment="tablature type">Bass (modern)</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string comment="tablature type">Italian (historic)</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string comment="tablature type">French (historic)</string>
-                 </property>
-                </item>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="presetTablature">
-                <property name="enabled">
-                 <bool>true</bool>
-                </property>
-                <property name="text">
-                 <string>Set</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <spacer name="horizontalSpacer_8">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>40</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-             </layout>
-            </widget>
-           </item>
-           <item>
             <spacer name="verticalSpacer">
              <property name="orientation">
               <enum>Qt::Vertical</enum>
@@ -900,6 +907,7 @@
   </layout>
  </widget>
  <tabstops>
+  <tabstop>staffTypeList</tabstop>
   <tabstop>name</tabstop>
   <tabstop>lines</tabstop>
   <tabstop>lineDistance</tabstop>
@@ -908,9 +916,13 @@
   <tabstop>showBarlinesPitched</tabstop>
   <tabstop>genKeysigPitched</tabstop>
   <tabstop>showLedgerLinesPitched</tabstop>
+  <tabstop>newTypePitched</tabstop>
+  <tabstop>presetTablatureCombo</tabstop>
+  <tabstop>presetTablature</tabstop>
   <tabstop>genClefTablature</tabstop>
   <tabstop>showBarlinesTablature</tabstop>
   <tabstop>genTimesigTablature</tabstop>
+  <tabstop>upsideDown</tabstop>
   <tabstop>fretFontName</tabstop>
   <tabstop>fretFontSize</tabstop>
   <tabstop>fretY</tabstop>
@@ -920,12 +932,15 @@
   <tabstop>aboveLinesRadio</tabstop>
   <tabstop>linesThroughRadio</tabstop>
   <tabstop>linesBrokenRadio</tabstop>
+  <tabstop>noteValues0</tabstop>
+  <tabstop>noteValues1</tabstop>
+  <tabstop>noteValues2</tabstop>
   <tabstop>durFontName</tabstop>
   <tabstop>durFontSize</tabstop>
   <tabstop>durY</tabstop>
+  <tabstop>newTypeTablature</tabstop>
   <tabstop>genClefPercussion</tabstop>
-  <tabstop>newTypePitched</tabstop>
-  <tabstop>staffTypeList</tabstop>
+  <tabstop>newTypePercussion</tabstop>
   <tabstop>save</tabstop>
   <tabstop>load</tabstop>
   <tabstop>buttonBox</tabstop>
