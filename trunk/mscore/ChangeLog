@@ -1,4 +1,6 @@
-15.feb (mi)
+15.feb (ws)
+      - fix: when removing a measure, dont remove following vbox
+      (mi)
       - improved tab<->pitched staff type conversion (to be completed) (r.4017)
 14.feb (ws)
       - capella import: instrument names, midi instruments
