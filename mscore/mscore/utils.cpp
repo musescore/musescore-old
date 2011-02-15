@@ -30,6 +30,7 @@
 #include "system.h"
 #include "measure.h"
 #include "pitchspelling.h"
+#include "chordrest.h"
 
 //---------------------------------------------------------
 //   RecordButton
@@ -154,6 +155,49 @@ Segment* Score::tick2segment(int tick, bool first, SegmentTypes st) const
             if (((tick == t1) && first) || ((tick == t1) && (tick < t2)))
                   return segment;
             segment = nsegment;
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
+//   tick2segmentEnd
+//---------------------------------------------------------
+
+/**
+ Find a segment containing a note or rest in \a track ending at \a tick
+ Return the segment or null
+ */
+
+Segment* Score::tick2segmentEnd(int track, int tick) const
+      {
+      // loop over all measures
+      for (MeasureBase* mb = first(); mb; mb = mb->next()) {
+            if (mb->type() != MEASURE)
+                  continue;
+            Measure* m = static_cast<Measure*>(mb);
+            int st = m->tick();
+            int l  = m->ticks();
+            if (tick > st && tick <= (st+l)) {
+                  // loop over all segments
+                  for (Segment* segment = m->first(); segment; segment = segment->next()) {
+                        Element* el = segment->element(track);
+                        if (!el)
+                              continue;
+                        if (!el->isChordRest())
+                              continue;
+                        ChordRest* cr = static_cast<ChordRest*>(el);
+                        // TODO: check if following is correct, see exceptions in
+                        // ExportMusicXml::chord() and ExportMusicXml::rest()
+                        int endTick = cr->tick() + cr->ticks();
+                        if (endTick < tick)
+                              continue; // not found yet
+                        else if (endTick == tick)
+                              return segment; // found it
+                        else
+                              // endTick > tick (beyond the tick we are looking for)
+                              return 0;
+                        }
+                  }
             }
       return 0;
       }

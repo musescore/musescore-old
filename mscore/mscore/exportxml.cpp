@@ -1566,7 +1566,7 @@ static void tupletStartStop(ChordRest* cr, Notations& notations, Xml& xml)
 //   wavyLineStartStop
 //---------------------------------------------------------
 
-static void wavyLineStartStop(Chord* /* chord */, Notations& /* notations */, Ornaments& /* ornaments */, Xml& /* xml */)
+static void wavyLineStartStop(Chord* chord, Notations& /* notations */, Ornaments& /* ornaments */, Xml& /* xml */)
       {
 #if 0 // TODO-WS implementation has changed
       // search for trill starting at this chord
@@ -1590,6 +1590,26 @@ static void wavyLineStartStop(Chord* /* chord */, Notations& /* notations */, Or
                   }
             }
 #endif
+      Element* par = chord->parent();
+      printf("wavyLineStartStop(chord=%p)\n", chord);
+      Segment* seg = static_cast<Segment*>(par);
+      if (seg->segmentType() == SegChordRest) {
+            foreach(const Element* e, seg->spannerFor()) {
+                  const Spanner* sp = static_cast<const Spanner*>(e);
+                  printf("wavyLineStartStop seg %p elem %p type %d (%s) track %d endElem %p",
+                         seg, e, e->type(), qPrintable(e->subtypeName()), e->track(), sp->endElement());
+                  if (e->type() == TRILL) {
+                        printf(" trill forward");
+                        printf("\nwavyLineStartStop start tick %d end tick %d chord track %d trill track %d",
+                                seg->tick(), (static_cast<Segment*>(sp->endElement()))->tick(),
+                                chord->track(), e->track());
+                        // a trill is found starting in this segment, trill end time is known
+                        // TODO:
+                        // determine notes to write trill start and stop
+                        }
+                  printf("\n");
+                  }
+            }
       }
 
 //---------------------------------------------------------
@@ -3372,6 +3392,9 @@ static void spannerStart(ExportMusicXml* exp, int strack, int etrack, int track,
                               case TEXTLINE:
                                     exp->textLine((TextLine*) e, sstaff, seg->tick());
                                     break;
+                              case TRILL:
+                                    // ignore (written as <note><notations><ornaments><wavy-line>
+                                    break;
                               default:
                                     printf("spannerStart: direction type %s at tick %d not implemented\n",
                                             Element::name(e->type()), seg->tick());
@@ -3413,6 +3436,9 @@ static void spannerStop(ExportMusicXml* exp, int strack, int etrack, int track, 
                                     break;
                               case TEXTLINE:
                                     exp->textLine((TextLine*) e, sstaff, -1);
+                                    break;
+                              case TRILL:
+                                    // ignore (written as <note><notations><ornaments><wavy-line>
                                     break;
                               default:
                                     printf("spannerStop: direction type %s at tick %d not implemented\n",
