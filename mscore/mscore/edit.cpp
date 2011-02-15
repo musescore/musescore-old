@@ -1269,6 +1269,8 @@ void Score::cmdDeleteSelectedMeasures()
       if (is->next()) {
             Segment* seg = selection().endSegment();
             MeasureBase* ie = seg ? seg->measure() : lastMeasure();
+//printf("cmdDEleteSelectedMeasures %p - %p\n", is, ie);
+//printf("  seg %s\n", seg->subTypeName());
             if (ie) {
                   if ((seg == 0) || (ie->tick() < selection().tickEnd())) {
                         // if last measure is selected

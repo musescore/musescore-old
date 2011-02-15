@@ -379,8 +379,10 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                   if (_selection.state() == SEL_NONE) {
                         _selection.setStaffStart(staffIdx);
                         _selection.setStaffEnd(staffIdx + 1);
-                        _selection.setStartSegment(m->tick2segment(tick, true));
-                        _selection.setEndSegment(tick2segment(etick, true));
+                        //_selection.setStartSegment(m->tick2segment(tick, true));
+                        _selection.setStartSegment(m->first());
+                        // _selection.setEndSegment(tick2segment(etick, true));
+                        _selection.setEndSegment(m->last());
                         }
                   else if (_selection.state() == SEL_RANGE) {
                         if (staffIdx < _selection.staffStart())
