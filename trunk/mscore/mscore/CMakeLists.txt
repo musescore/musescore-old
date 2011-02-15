@@ -279,15 +279,11 @@ if (MINGW)
       )
 
 else (MINGW)
-#   set_target_properties( mscore
-#      PROPERTIES
-#         COMPILE_FLAGS "${QT_DEFINITIONS}"
-#      )
    target_link_libraries(mscore
+      ${ALSA_LIB}
       ${QT_LIBRARIES}
       ${QT_QTSCRIPT_LIBRARY_RELEASE}
       ${QT_QTSCRIPT_TOOLS_LIBRARY_RELEASE}
-      ${ALSA_LIB}
       ${PORTAUDIO_LIB}
       diff_match_patch
       al
@@ -301,11 +297,8 @@ else (MINGW)
       fluid
       z
       dl
+      pthread
       )
-
-   if (NOT APPLE)
-       target_link_libraries(mscore rt)
-   endif (NOT APPLE)
 
    if (HAS_AUDIOFILE)
        target_link_libraries(mscore sndfile)
@@ -320,7 +313,7 @@ else (MINGW)
    endif (AEOLUS)
 
    if (OMR)
-      target_link_libraries(mscore omr poppler)
+      target_link_libraries(mscore omr poppler fontconfig freetype)
       if (OCR)
             target_link_libraries(mscore tesseract_api)
       endif (OCR)
@@ -331,6 +324,8 @@ else (MINGW)
        target_link_libraries(mscore portmidi)
      endif (USE_PORTMIDI)
      target_link_libraries(mscore ${OsxFrameworks})
+   else (APPLE)
+       target_link_libraries(mscore rt)
    endif (APPLE)
 
    if (QT45)

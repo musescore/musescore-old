@@ -309,8 +309,18 @@ void System::layout2()
       for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
             Staff* staff = score()->staff(staffIdx);
             SysStaff* s  = _staves[staffIdx];
-            if ((staffIdx + 1) == nstaves)
-                  s->setDistanceDown(score()->styleS(ST_systemDistance));
+            if ((staffIdx + 1) == nstaves) {
+                  MeasureBase* mb = ml.last();
+                  bool nextMeasureIsVBOX = false;
+                  if (mb->next()) {
+                        int type = mb->next()->type();
+                        if (type == VBOX || type == TBOX || type == FBOX)
+                              nextMeasureIsVBOX = true;
+                        }
+                  s->setDistanceDown(score()->styleS(
+                     nextMeasureIsVBOX ? ST_systemFrameDistance : ST_systemDistance
+                     ));
+                  }
             else if (staff->rstaff() < (staff->part()->staves()->size()-1))
                   s->setDistanceDown(score()->styleS(ST_akkoladeDistance));
             else

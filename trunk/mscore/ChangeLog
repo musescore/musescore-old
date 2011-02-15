@@ -1,4 +1,5 @@
 15.feb (ws)
+      - implement ST_systemFrameDistance style parameter
       - fix: when removing a measure, dont remove following vbox
       (mi)
       - improved tab<->pitched staff type conversion (to be completed) (r.4017)
