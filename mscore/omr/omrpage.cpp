@@ -97,7 +97,7 @@ void OmrPage::read(int /*pageNo*/)
       //--------------------------------------------------
       //    search bar lines
       //--------------------------------------------------
-  
+
       QFuture<void> bl = QtConcurrent::map(_systems, &OmrSystem::searchBarLines);
       bl.waitForFinished();
 
@@ -424,7 +424,7 @@ void OmrPage::deSkew()
             QTransform t;
             t.rotate(rot);
             QTransform tt = QImage::trueMatrix(t, width(), r.height());
-            
+
 
             double m11 = tt.m11();
             double m12 = tt.m12();
@@ -437,10 +437,10 @@ void OmrPage::deSkew()
             double m22y = r.y() * m22;
             int y2 = r.y() + r.height();
 
-            for (int y = r.y(); y < y2; ++y) {                                  
-                  
+            for (int y = r.y(); y < y2; ++y) {
+
                   const uint* s = scanLine(y);
-                  
+
                   m21y += m21;
                   m22y += m22;
                   for (int x = 0; x < wl; ++x) {
@@ -453,10 +453,12 @@ void OmrPage::deSkew()
                                     int xs  = x * 32 + xx;
                                     int xd  = lrint(m11 * xs + m21y + dx);
                                     int yd  = lrint(m22y + m12 * xs + dy);
-                                    
-                                    uint* d = db + wl * yd + (xd / 32);
-                                    if( d < db + wl * h) //check that we are in the bounds.
-                                          *d |= (0x1 << (xd % 32));                                    
+
+                                    int wxd = xd / 32;
+                                    if ((xd >= 0) && (wxd < wl) && (yd >= 0) && (yd < h)) {
+                                          uint* d = db + wl * yd + wxd;
+                                          *d |= (0x1 << (xd % 32));
+                                          }
                                     }
                               mask <<= 1;
                               }
@@ -528,11 +530,10 @@ double OmrPage::xproject2(int y1)
                   y = 0;
             int err     = ddx / 2;
             for (int x = x1; x < x2;) {
-                  const uint* d  = db + wl * y + (x / 32);   
-                  if( d < db + wl * height()) { //check that we are in the bounds.
-                        ++x;
-                        continue;
-                        }               
+                  const uint* d  = db + wl * y + (x / 32);
+                  if( d >= db + wl * height()) { //check that we are in the bounds.
+                        break;
+                        }
                   bool bit = ((*d) & (0x1 << (x % 32)));
                   bit = bit || ((*(d+wl)) & (0x1 << (x % 32)));
                   bit = bit || ((*(d-wl)) & (0x1 << (x % 32)));
