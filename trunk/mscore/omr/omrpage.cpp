@@ -97,10 +97,10 @@ void OmrPage::read(int /*pageNo*/)
       //--------------------------------------------------
       //    search bar lines
       //--------------------------------------------------
-#if not defined (Q_WS_WIN)  
+  
       QFuture<void> bl = QtConcurrent::map(_systems, &OmrSystem::searchBarLines);
       bl.waitForFinished();
-#endif
+
       }
 
 //---------------------------------------------------------
