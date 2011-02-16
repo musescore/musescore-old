@@ -221,6 +221,8 @@ class GlissandoHandler {
 //   ExportMusicXml
 //---------------------------------------------------------
 
+typedef QHash<const Chord*, const Trill*> TrillHash;
+
 class ExportMusicXml {
       Score* score;
       Xml xml;
@@ -232,6 +234,8 @@ class ExportMusicXml {
       int div;
       double millimeters;
       int tenths;
+      TrillHash trillStart;
+      TrillHash trillStop;
 
       int findBracket(const TextLine* tl) const;
       void chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bool useDrumset);
@@ -931,7 +935,112 @@ void DirectionsHandler::buildDirectionsList(Measure* m, bool /* dopart */, Part*
             }
       }
 
+//---------------------------------------------------------
+// trill hadling
+//---------------------------------------------------------
+
+// Find chords to attach trills to. This is necessary because in MuseScore 
+// trills are spanners (thus attached to segments), while in MusicXML trills
+// are attached to notes.
+// TBD: must trill end be in the same staff as trill started ?
+// if so, no need to pass in strack and etrack (trill has a track)
+
+static void findTrillAnchors(const Trill* trill, const Segment* seg, Chord* & startChord, Chord* & stopChord)
+      {
+      printf("findTrillAnchors(trill=%p)", trill);
+      const int startTick = seg->tick();
+      const int endTick = (static_cast<Segment*>(trill->endElement()))->tick();
+      const int strack = trill->track();
+      printf(" startTick %d endTick %d strack %d\n", startTick, endTick, strack);
+      // try to find chords in the same track:
+      // find a track with suitable chords both for start and stop
+      for (int i = 0; i < VOICES; ++i) {
+            Element* el = seg->element(strack + i);
+            if (!el)
+                  continue;
+            if (el->type() != CHORD)
+                  continue;
+            startChord = static_cast<Chord*>(el);
+            Segment* s = trill->score()->tick2segmentEnd(strack + i, endTick);
+            printf("\n");
+            if (!s)
+                  continue;
+            el = s->element(strack + i);
+            if (!el)
+                  continue;
+            if (el->type() != CHORD)
+                  continue;
+            stopChord = static_cast<Chord*>(el);
+            printf("findTrillAnchors startChord %p track %d stopChord %p track %d\n",
+                   startChord, startChord->track(), stopChord, stopChord->track());
+            return;
+            }
+      // try to find start/stop chords in different tracks
+      for (int i = 0; i < VOICES; ++i) {
+            Element* el = seg->element(strack + i);
+            if (!el)
+                  continue;
+            if (el->type() != CHORD)
+                  continue;
+            startChord = static_cast<Chord*>(el);
+            break;      // first chord found is OK
+            }
+      for (int i = 0; i < VOICES; ++i) {
+            Segment* s = trill->score()->tick2segmentEnd(strack + i, endTick);
+            printf("\n");
+            if (!s)
+                  continue;
+            Element* el = s->element(strack + i);
+            if (!el)
+                  continue;
+            if (el->type() != CHORD)
+                  continue;
+            stopChord = static_cast<Chord*>(el);
+            break;      // first chord found is OK
+            }
+            if (startChord && stopChord)
+                  printf("findTrillAnchors startChord %p track %d stopChord %p track %d\n",
+                         startChord, startChord->track(), stopChord, stopChord->track());
+      }
+
+// find all trills in this measure and this part
+
+static void findTrills(Measure* measure, int strack, int etrack, TrillHash& trillStart, TrillHash& trillStop)
+      {
+      printf("findTrills(measure=%p, strack=%d, etrack=%d)\n", measure, strack, etrack);
+      // loop over all segments in this measure
+      for (Segment* seg = measure->first(); seg; seg = seg->next()) {
+            // loop over all spanners in this segment
+            foreach(const Element* e, seg->spannerFor()) {
+                  const Spanner* sp = static_cast<const Spanner*>(e);
+                  printf("findTrills seg %p elem %p type %d (%s) track %d endElem %p",
+                         seg, e, e->type(), qPrintable(e->subtypeName()), e->track(), sp->endElement());
+                  if (e->type() == TRILL && strack <= e->track() && e->track() < etrack) {
+                        printf(" trill forward");
+                        printf("\n findTrills start tick %d end tick %d trill track %d",
+                               seg->tick(), (static_cast<Segment*>(sp->endElement()))->tick(), e->track());
+                        // a trill is found starting in this segment, trill end time is known
+                        printf("\n");
+                        // determine notes to write trill start and stop
+                        const Trill* tr = static_cast<const Trill*>(e);
+                        Chord* startChord = 0;  // chord where trill starts
+                        Chord* stopChord = 0;   // chord where trill stops
+                        findTrillAnchors(tr, seg, startChord, stopChord);
+                        if (startChord && stopChord) {
+                              printf(" findTrills startChord %p track %d stopChord %p track %d\n",
+                                     startChord, startChord->track(), stopChord, stopChord->track());
+                              trillStart.insert(startChord, tr);
+                              trillStop.insert(stopChord, tr);
+                              }
+                        }
+                  printf("\n");
+                  } // foreach
+            }
+      }
+
+//---------------------------------------------------------
 // helpers for ::calcDivisions
+//---------------------------------------------------------
 
 typedef QList<int> IntVector;
 static IntVector integers;
@@ -1566,7 +1675,8 @@ static void tupletStartStop(ChordRest* cr, Notations& notations, Xml& xml)
 //   wavyLineStartStop
 //---------------------------------------------------------
 
-static void wavyLineStartStop(Chord* chord, Notations& /* notations */, Ornaments& /* ornaments */, Xml& /* xml */)
+static void wavyLineStartStop(Chord* chord, Notations& notations, Ornaments& ornaments, Xml& xml,
+                              TrillHash& trillStart, TrillHash& trillStop)
       {
 #if 0 // TODO-WS implementation has changed
       // search for trill starting at this chord
@@ -1590,25 +1700,21 @@ static void wavyLineStartStop(Chord* chord, Notations& /* notations */, Ornament
                   }
             }
 #endif
-      Element* par = chord->parent();
+      // TODO LVI this does not support overlapping trills
       printf("wavyLineStartStop(chord=%p)\n", chord);
-      Segment* seg = static_cast<Segment*>(par);
-      if (seg->segmentType() == SegChordRest) {
-            foreach(const Element* e, seg->spannerFor()) {
-                  const Spanner* sp = static_cast<const Spanner*>(e);
-                  printf("wavyLineStartStop seg %p elem %p type %d (%s) track %d endElem %p",
-                         seg, e, e->type(), qPrintable(e->subtypeName()), e->track(), sp->endElement());
-                  if (e->type() == TRILL) {
-                        printf(" trill forward");
-                        printf("\nwavyLineStartStop start tick %d end tick %d chord track %d trill track %d",
-                                seg->tick(), (static_cast<Segment*>(sp->endElement()))->tick(),
-                                chord->track(), e->track());
-                        // a trill is found starting in this segment, trill end time is known
-                        // TODO:
-                        // determine notes to write trill start and stop
-                        }
-                  printf("\n");
-                  }
+      if (trillStop.contains(chord)) {
+            notations.tag(xml);
+            ornaments.tag(xml);
+            xml.tagE("wavy-line type=\"stop\"");
+            trillStop.remove(chord);
+            }
+      if (trillStart.contains(chord)) {
+            notations.tag(xml);
+            ornaments.tag(xml);
+            // mscore only supports wavy-line with trill-mark
+            xml.tagE("trill-mark");
+            xml.tagE("wavy-line type=\"start\"");
+            trillStart.remove(chord);
             }
       }
 
@@ -1747,7 +1853,8 @@ static void tremoloSingleStartStop(Chord* chord, Notations& notations, Ornaments
 //   chordAttributes
 //---------------------------------------------------------
 
-static void chordAttributes(Chord* chord, Notations& notations, Technical& technical, Xml& xml)
+static void chordAttributes(Chord* chord, Notations& notations, Technical& technical, Xml& xml,
+                            TrillHash& trillStart, TrillHash& trillStop)
       {
       QList<Articulation*>* na = chord->getArticulations();
       // first output the fermatas
@@ -1898,7 +2005,7 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
                   }
             }
             tremoloSingleStartStop(chord, notations, ornaments, xml);
-            wavyLineStartStop(chord, notations, ornaments, xml);
+            wavyLineStartStop(chord, notations, ornaments, xml, trillStart, trillStop);
             ornaments.etag(xml);
 
       // and finally the attributes whose elements are children of <technical>
@@ -2255,7 +2362,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bo
                   tupletStartStop(chord, notations, xml);
                   sh.doSlurStop(chord, notations, xml);
                   sh.doSlurStart(chord, notations, xml);
-                  chordAttributes(chord, notations, technical, xml);
+                  chordAttributes(chord, notations, technical, xml, trillStart, trillStop);
                   }
             foreach (const Element* e, *note->el()) {
                   if (e->type() == TEXT
@@ -3627,6 +3734,8 @@ foreach(Element* el, *(score->gel())) {
 
             DirectionsHandler dh(score);
             dh.buildDirectionsList(part, strack, etrack);
+            trillStart.clear();
+            trillStop.clear();
 
             int measureNo = 1;          // number of next regular measure
             int irregularMeasureNo = 1; // number of next irregular measure
@@ -3635,7 +3744,7 @@ foreach(Element* el, *(score->gel())) {
             for (MeasureBase* mb = score->measures()->first(); mb; mb = mb->next()) {
                   if (mb->type() != MEASURE)
                         continue;
-                  Measure* m = (Measure*)mb;
+                  Measure* m = static_cast<Measure*>(mb);
                   PageFormat* pf = score->pageFormat();
 
 
@@ -3727,6 +3836,7 @@ foreach(Element* el, *(score->gel())) {
 
                   attr.start();
                   dh.buildDirectionsList(m, false, part, strack, etrack);
+                  findTrills(m, strack, etrack, trillStart, trillStop);
 
                   // barline left must be the first element in a measure
                   barlineLeft(m);
