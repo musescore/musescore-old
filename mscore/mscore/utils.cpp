@@ -170,6 +170,7 @@ Segment* Score::tick2segment(int tick, bool first, SegmentTypes st) const
 
 Segment* Score::tick2segmentEnd(int track, int tick) const
       {
+//      printf("tick2segmentEnd(track=%d, tick=%d)", track, tick);
       // loop over all measures
       for (MeasureBase* mb = first(); mb; mb = mb->next()) {
             if (mb->type() != MEASURE)
@@ -186,19 +187,24 @@ Segment* Score::tick2segmentEnd(int track, int tick) const
                         if (!el->isChordRest())
                               continue;
                         ChordRest* cr = static_cast<ChordRest*>(el);
-                        // TODO: check if following is correct, see exceptions in
+                        // TODO LVI: check if following is correct, see exceptions in
                         // ExportMusicXml::chord() and ExportMusicXml::rest()
                         int endTick = cr->tick() + cr->ticks();
                         if (endTick < tick)
                               continue; // not found yet
-                        else if (endTick == tick)
+                        else if (endTick == tick) {
+//                              printf(" found seg=%p at tick=%d\n", segment, cr->tick());
                               return segment; // found it
-                        else
+                              }
+                        else {
                               // endTick > tick (beyond the tick we are looking for)
+//                              printf("\n");
                               return 0;
+                              }
                         }
                   }
             }
+//      printf("\n");
       return 0;
       }
 
