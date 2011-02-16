@@ -31,6 +31,10 @@
 #include <stdlib.h>
 #include <stddef.h>
 
+#if defined(_WIN32)
+#include <windows.h>
+#endif
+
 extern "C" {
 #include <dirent.h>
 }

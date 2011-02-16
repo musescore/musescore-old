@@ -17,9 +17,15 @@ description for all fonts available in Windows. That's how MuPDF works.
 #endif
 
 #include <windows.h>
-#if !(_WIN32_IE >= 0x0500)
-#error "_WIN32_IE must be defined >= 0x0500 for SHGFP_TYPE_CURRENT from shlobj.h"
+//#if !(_WIN32_IE >= 0x0500)
+//#error "_WIN32_IE must be defined >= 0x0500 for SHGFP_TYPE_CURRENT from shlobj.h"
+//#endif
+
+// Needed for MinGW:
+#ifndef SHGFP_TYPE_CURRENT
+#define SHGFP_TYPE_CURRENT 0
 #endif
+
 #include <shlobj.h>
 #include <string.h>
 #include <stdio.h>
