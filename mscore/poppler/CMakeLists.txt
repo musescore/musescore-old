@@ -97,6 +97,7 @@ add_library(poppler STATIC
       fofi/FoFiType1.cc
       fofi/FoFiType1C.cc
    )
+
 #set_target_properties(poppler
 #      PROPERTIES
 #      COMPILE_FLAGS

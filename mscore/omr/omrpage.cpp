@@ -18,8 +18,6 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include <QtConcurrentMap>
-
 #include "omrpage.h"
 #include "image.h"
 #include "utils.h"
@@ -99,9 +97,10 @@ void OmrPage::read(int /*pageNo*/)
       //--------------------------------------------------
       //    search bar lines
       //--------------------------------------------------
-
+#if not defined (Q_WS_WIN)  
       QFuture<void> bl = QtConcurrent::map(_systems, &OmrSystem::searchBarLines);
       bl.waitForFinished();
+#endif
       }
 
 //---------------------------------------------------------

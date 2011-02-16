@@ -189,6 +189,7 @@ if (OSC)
 endif (OSC)
 
 if (MINGW)
+
    add_custom_command(
       OUTPUT ${PROJECT_BINARY_DIR}/resfile.o
       COMMAND wrc -i mscore.rc -o ${PROJECT_BINARY_DIR}/mscore.res
@@ -226,7 +227,6 @@ if (MINGW)
       rtf2html
       ${QTSINGLEAPPLICATION_LIBRARIES}
       fluid
-      ${QT_mingw_LIBRARIES}
       portaudio
       portmidi
       winmm
@@ -243,13 +243,15 @@ if (MINGW)
    if (AEOLUS)
       target_link_libraries(mscore aeolus)
    endif (AEOLUS)
-
-   if (OMR)
+   
+	if (OMR)
       target_link_libraries(mscore omr poppler)
       if (OCR)
             target_link_libraries(mscore tesseract_api)
       endif (OCR)
    endif (OMR)
+
+   target_link_libraries(mscore ${QT_mingw_LIBRARIES})
 
    install( TARGETS mscore RUNTIME DESTINATION bin )
 

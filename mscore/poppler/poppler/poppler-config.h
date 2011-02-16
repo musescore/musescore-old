@@ -35,14 +35,19 @@
 #define TEXTOUT_WORD_LIST 1
 #endif
 
-/* Use fontconfig font configuration backend */
-#ifndef WITH_FONTCONFIGURATION_FONTCONFIG
-#define WITH_FONTCONFIGURATION_FONTCONFIG 1
-#endif
-
-/* Use win32 font configuration backend */
-#ifndef WITH_FONTCONFIGURATION_WIN32
-/* #undef WITH_FONTCONFIGURATION_WIN32 */
+#if defined(_WIN32)
+  #define WITH_FONTCONFIGURATION_FONTCONFIG 0
+  #define WITH_FONTCONFIGURATION_WIN32 1
+#else
+  /* Use fontconfig font configuration backend */
+  #ifndef WITH_FONTCONFIGURATION_FONTCONFIG
+  #define WITH_FONTCONFIGURATION_FONTCONFIG 1
+  #endif
+  
+  /* Use win32 font configuration backend */
+  #ifndef WITH_FONTCONFIGURATION_WIN32
+  /* #undef WITH_FONTCONFIGURATION_WIN32 */
+  #endif
 #endif
 
 /* Support for curl is compiled in. */
