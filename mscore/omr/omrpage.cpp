@@ -158,8 +158,8 @@ void OmrSystem::searchBarLines()
             staves[0].setWidth(dx - staves[0].x());
             staves[1].setWidth(dx - staves[1].x());
             }
-      searchNotes(quartheadSym);
-      searchNotes(halfheadSym);
+      //searchNotes(quartheadSym);
+      //searchNotes(halfheadSym);
 
       QList<QLineF> nbl;
       foreach(const QLineF& l, barLines) {
@@ -424,6 +424,7 @@ void OmrPage::deSkew()
             QTransform t;
             t.rotate(rot);
             QTransform tt = QImage::trueMatrix(t, width(), r.height());
+            
 
             double m11 = tt.m11();
             double m12 = tt.m12();
@@ -435,8 +436,11 @@ void OmrPage::deSkew()
             double m21y = r.y() * m21;
             double m22y = r.y() * m22;
             int y2 = r.y() + r.height();
-            for (int y = r.y(); y < y2; ++y) {
+
+            for (int y = r.y(); y < y2; ++y) {                                  
+                  
                   const uint* s = scanLine(y);
+                  
                   m21y += m21;
                   m22y += m22;
                   for (int x = 0; x < wl; ++x) {
@@ -449,8 +453,10 @@ void OmrPage::deSkew()
                                     int xs  = x * 32 + xx;
                                     int xd  = lrint(m11 * xs + m21y + dx);
                                     int yd  = lrint(m22y + m12 * xs + dy);
+                                    
                                     uint* d = db + wl * yd + (xd / 32);
-                                    *d |= (0x1 << (xd % 32));
+                                    if( d < db + wl * h) //check that we are in the bounds.
+                                          *d |= (0x1 << (xd % 32));                                    
                                     }
                               mask <<= 1;
                               }
@@ -458,7 +464,7 @@ void OmrPage::deSkew()
                   }
             }
       memcpy(_image.bits(), db, wl * h * sizeof(uint));
-//??crash      delete[] db;
+      delete[] db;
       }
 
 struct ScanLine {
@@ -522,7 +528,11 @@ double OmrPage::xproject2(int y1)
                   y = 0;
             int err     = ddx / 2;
             for (int x = x1; x < x2;) {
-                  const uint* d  = db + wl * y + (x / 32);
+                  const uint* d  = db + wl * y + (x / 32);   
+                  if( d < db + wl * height()) { //check that we are in the bounds.
+                        ++x;
+                        continue;
+                        }               
                   bool bit = ((*d) & (0x1 << (x % 32)));
                   bit = bit || ((*(d+wl)) & (0x1 << (x % 32)));
                   bit = bit || ((*(d-wl)) & (0x1 << (x % 32)));
@@ -608,7 +618,6 @@ printf("  getStaffLines %d-%d, wl %d\n", y1, y2, wl);
 // printf("y1 %d y2 %d  h %d\n", y1, y2, h);
       for (int y = y1; y < y2; ++y)
             projection[y] = xproject2(y);
-
       int autoTableSize = (wl * 32) / 10;       // 1/10 page width
       if (autoTableSize > y2-y1)
             autoTableSize = y2 - y1;
@@ -618,6 +627,7 @@ printf("   autoTableSize %d\n", autoTableSize);
       for (int i = 0; i < autoTableSize; ++i) {
             autoTable[i] = covariance(projection+y1, projection+i+y1, y2-y1-i);
             }
+
       //
       // search for first maximum in covariance starting at 10 to skip
       // line width. Staff line distance (spatium) must be at least 10 dots

@@ -103,6 +103,10 @@ void QImageOutputDev::drawImage(GfxState* state, Object*, Stream* str,
             double xoff = (ctm[2]+ctm[4]) * xmag;
             int ph      = state->getPageHeight() * ymag;
             int yoff    = int(ph - (ctm[3]+ctm[5]) * ymag);
+            
+            //yoff needs to be > 0
+            if(yoff < 0)
+  			      yoff = 0;
 
 printf("Image %4d %4d   at %5f %4d   mag %f %f\n",
    width, height, xoff, yoff, xmag, ymag);
@@ -134,6 +138,7 @@ printf("Image %4d %4d   at %5f %4d   mag %f %f\n",
             uchar mask  = 0xff << (stride * 8 - width);
             int qstride = image->bytesPerLine();
             uchar* p    = image->bits();
+
             for (int y = 0; y < height; ++y) {
                   p = image->scanLine(y + yoff);
                   for (int x = 0; x < stride; ++x) {
