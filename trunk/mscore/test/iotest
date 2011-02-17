@@ -149,7 +149,7 @@ rwtestAllXml() {
       rwtestXml testImplicitMeasure1.xml
       rwtestXml testInvisibleElements.xml
       rwtestXml testKeysig1.xml
-      rwtestXml testLines1.xml
+      rwtestXmlRef testLines1.xml
       rwtestXmlRef testLines2.xml
       rwtestXml testMetaData.xml
       rwtestXml testMultiMeasureRest.xml
