@@ -641,6 +641,8 @@ void Page::rebuildBspTree()
 //    $p          - page number
 //    $$          - $
 //    $n          - number of pages
+//    $f          - file name
+//    $F          - file path+name
 //    $:tag:      - meta data tag
 //       already defined tags:
 //       movementNumber
@@ -666,6 +668,12 @@ QString Page::replaceTextMacros(const QString& s) const
                               break;
                         case 'n':
                               d += QString("%1").arg(_score->pages().size());
+                              break;
+                        case 'f':
+                              d += _score->name();
+                              break;
+                        case 'F':
+                              d += _score->absoluteFilePath();
                               break;
                         case '$':
                               d += '$';

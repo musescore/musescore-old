@@ -1,3 +1,8 @@
+17.feb (ws)
+      - new meta for footer/header text:
+            $f    is replaced by score name
+            $F    is replaced by absolute score file path + name
+      - add default filename for qt save file dialog
 15.feb (ws)
       - implement ST_systemFrameDistance style parameter
       - fix: when removing a measure, dont remove following vbox

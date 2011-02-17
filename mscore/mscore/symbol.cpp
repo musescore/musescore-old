@@ -306,10 +306,8 @@ QLineF Symbol::dragAnchor() const
 
 bool Symbol::genPropertyMenu(QMenu* popup) const
       {
-      QAction* a = popup->addAction(tr("small"));
-      a->setCheckable(true);
-//      a->setChecked(small());
-      a->setData("small");
+      QAction* a = popup->addAction(tr("symbol editor"));
+      a->setData("edit");
       return true;
       }
 
@@ -319,9 +317,8 @@ bool Symbol::genPropertyMenu(QMenu* popup) const
 
 void Symbol::propertyAction(ScoreView* viewer, const QString& s)
       {
-      if (s == "small") {
-//            setSmall(!small());
-//            setMag(small() ? score()->styleD(ST_smallNoteMag) : 1.0);
+      if (s == "edit") {
+printf("not implemented: symbol editor\n");
             }
       else
             Element::propertyAction(viewer, s);
