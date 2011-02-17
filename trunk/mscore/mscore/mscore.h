@@ -463,7 +463,7 @@ class MuseScore : public QMainWindow {
 
       QString getOpenScoreName(QString& dir, const QString& filter);
       QString getSaveScoreName(const QString& title,
-         QString& dir, const QString& filter, QString* selectedFilter);
+         QString& name, const QString& filter, QString* selectedFilter);
       QString getStyleFilename(bool open);
       QString getSoundFont(const QString&);
       };

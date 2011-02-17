@@ -97,7 +97,7 @@ void OmrPage::read(int /*pageNo*/)
       //--------------------------------------------------
       //    search bar lines
       //--------------------------------------------------
-  
+
       QFuture<void> bl = QtConcurrent::map(_systems, &OmrSystem::searchBarLines);
       bl.waitForFinished();
 
@@ -158,9 +158,15 @@ void OmrSystem::searchBarLines()
             staves[0].setWidth(dx - staves[0].x());
             staves[1].setWidth(dx - staves[1].x());
             }
-      //searchNotes(quartheadSym);
-      //searchNotes(halfheadSym);
+      searchNotes(quartheadSym);
+      searchNotes(halfheadSym);
 
+      //
+      // remove false positive barlines:
+      //    - two barlines too narrow (repeat-/end-barlines
+      //      are detected as two barlines
+      //    - barlines which are really note stems
+      //
       QList<QLineF> nbl;
       foreach(const QLineF& l, barLines) {
             }
@@ -424,7 +430,7 @@ void OmrPage::deSkew()
             QTransform t;
             t.rotate(rot);
             QTransform tt = QImage::trueMatrix(t, width(), r.height());
-            
+
 
             double m11 = tt.m11();
             double m12 = tt.m12();
@@ -437,10 +443,10 @@ void OmrPage::deSkew()
             double m22y = r.y() * m22;
             int y2 = r.y() + r.height();
 
-            for (int y = r.y(); y < y2; ++y) {                                  
-                  
+            for (int y = r.y(); y < y2; ++y) {
+
                   const uint* s = scanLine(y);
-                  
+
                   m21y += m21;
                   m22y += m22;
                   for (int x = 0; x < wl; ++x) {
@@ -531,11 +537,11 @@ double OmrPage::xproject2(int y1)
                   y = 0;
             int err     = ddx / 2;
             for (int x = x1; x < x2;) {
-                  const uint* d  = db + wl * y + (x / 32);   
+                  const uint* d  = db + wl * y + (x / 32);
                   if (d < db + wl)
                         break;
                   if (d >= db + (wl-1) * height()) //check that we are in the bounds.
-                        break;                
+                        break;
                   bool bit = ((*d) & (0x1 << (x % 32)));
                   bit = bit || ((*(d+wl)) & (0x1 << (x % 32)));
                   bit = bit || ((*(d-wl)) & (0x1 << (x % 32)));

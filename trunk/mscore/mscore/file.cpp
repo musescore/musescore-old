@@ -291,11 +291,11 @@ bool Score::saveFile(bool autosave)
             QString f1 = tr("Compressed MuseScore File (*.mscz)");
             QString f2 = tr("MuseScore File (*.mscx)");
 
-            QString dir = QString("%1/%2.mscz").arg(preferences.workingDirectory).arg(name);
+            QString fname   = QString("%1.mscz").arg(name);
             QString filter = f1 + ";;" + f2;
-            QString fn = mscore->getSaveScoreName(
+            QString fn     = mscore->getSaveScoreName(
                tr("MuseScore: Save Score"),
-               dir,
+               fname,
                filter,
                &selectedFilter
                );
@@ -466,10 +466,10 @@ bool Score::saveAs(bool saveCopy)
             }
 
       QString selectedFilter;
-      QString dir    = QString("%1/%2.mscz").arg(saveDirectory).arg(info.baseName());
+      QString name    = QString("%1.mscz").arg(info.baseName());
       QString filter = fl.join(";;");
       QString fn = mscore->getSaveScoreName(
-         saveDialogTitle, dir, filter, &selectedFilter);
+         saveDialogTitle, name, filter, &selectedFilter);
       if (fn.isEmpty())
             return false;
 
@@ -2329,12 +2329,12 @@ QString MuseScore::getOpenScoreName(QString& dir, const QString& filter)
 //---------------------------------------------------------
 
 QString MuseScore::getSaveScoreName(const QString& title,
-   QString& dir, const QString& filter, QString* selectedFilter)
+   QString& name, const QString& filter, QString* selectedFilter)
       {
       QString selectedFilter;
       QString fn = QFileDialog::getSaveFileName(this,
                title,
-               dir,
+               name,
                filter,
                selectedFilter
                );
@@ -2409,7 +2409,7 @@ QString MuseScore::getOpenScoreName(QString& dir, const QString& filter)
 //---------------------------------------------------------
 
 QString MuseScore::getSaveScoreName(const QString& title,
-   QString& dir, const QString& filter, QString* selectedFilter)
+   QString& name, const QString& filter, QString* selectedFilter)
       {
       QFileInfo myScores(preferences.myScoresPath);
       if (myScores.isRelative())
@@ -2432,7 +2432,8 @@ QString MuseScore::getSaveScoreName(const QString& title,
             }
       saveScoreDialog->setWindowTitle(title);
       saveScoreDialog->setNameFilter(filter);
-      saveScoreDialog->setDirectory(dir);
+      // saveScoreDialog->setDirectory(name);
+      saveScoreDialog->selectFile(name);
       QStringList result;
       if (saveScoreDialog->exec()) {
             result = saveScoreDialog->selectedFiles();

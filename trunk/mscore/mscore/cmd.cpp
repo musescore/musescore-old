@@ -275,8 +275,7 @@ void Score::cmdAddSpanner(Spanner* spanner, const QPointF& pos, const QPointF& /
 
 void ScoreView::cmdInsertNote(int note)
       {
-      printf("cmdInsertNote %d\n", note);
-
+      printf("not implemented: cmdInsertNote %d\n", note);
       }
 
 //---------------------------------------------------------
@@ -447,10 +446,10 @@ Note* Score::addPitch(int pitch, bool addFlag)
       if(!_is.cr())
             return 0;
       NoteVal nval;
-      nval.pitch = pitch;
+      nval.pitch     = pitch;
       nval.headGroup = headGroup;
-      Segment* seg = setNoteRest(_is.cr(), track, nval, _is.duration().fraction(), stemDirection);
-      Note* note = 0;
+      Segment* seg   = setNoteRest(_is.cr(), track, nval, _is.duration().fraction(), stemDirection);
+      Note* note     = 0;
       if (seg) {
             note = static_cast<Chord*>(seg->element(track))->upNote();
             setLayout(note->chord()->measure());
@@ -687,11 +686,17 @@ printf("makeGap %s at %d track %d\n", qPrintable(_sd.print()), cr->tick(), track
       Fraction akkumulated;
       Fraction sd = _sd;
 
-      for (Segment* seg = cr->segment(); seg; seg = seg->next()) {
+      //
+      // remember first segment which should
+      // not be deleted (it may contain other elements we want to preserve)
+      //
+      Segment* firstSegment = cr->segment();
+
+      for (Segment* seg = firstSegment; seg; seg = seg->next()) {
             if (seg->subtype() == SegGrace) {
                   if (seg->element(track)) {
                         undoRemoveElement(seg->element(track));
-                        if (seg->isEmpty())
+                        if (seg->isEmpty() && seg != firstSegment)
                               undoRemoveElement(seg);
                         }
                   continue;
@@ -740,9 +745,9 @@ printf("remove %s %s at tick %d track %d\n",
             else {
 //                  printf("  makeGap: remove %d/%d at %d\n", td.numerator(), td.denominator(), cr->tick());
                   undoRemoveElement(cr);
-                  if (seg->isEmpty())
+                  if (seg->isEmpty() && seg != firstSegment)
                         undoRemoveElement(seg);
-                  else {
+                  else if (seg != firstSegment) {     // keep _all_ annotations on first segment?
                         foreach(Element* e, seg->annotations()) {
                               if (e->track() == cr->track())
                                     undoRemoveElement(e);
@@ -3150,7 +3155,7 @@ void ScoreView::search(const QString& s)
             return;
       search(n);
       }
-      
+
 void ScoreView::search(int n)
       {
       int i = 0;

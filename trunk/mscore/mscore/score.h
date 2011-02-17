@@ -606,6 +606,7 @@ class Score : public QObject {
       bool saveFile(bool autosave);
 
       QString filePath() const       { return info.filePath(); }
+      QString absoluteFilePath() const { return info.absoluteFilePath(); }
       QFileInfo* fileInfo()          { return &info; }
 
       QString name() const           { return info.completeBaseName(); }

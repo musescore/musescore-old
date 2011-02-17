@@ -778,8 +778,8 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                               }
                         double my  = _spatium * 2.0 + canvPos.y();
 
-                        double min        =  1000.0;
-                        double max        = -1000.0;
+                        double min        =  1000000.0;
+                        double max        = -1000000.0;
                         bool toMiddleLine = true;
                         double minStemLen = 3.0 * _spatium;
                         if (isGrace)
@@ -820,11 +820,12 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                         else {
                               // adjust beam position
                               double n = 3.0;
-                              if (fabs(max-min) > (_spatium * 2.0))
-                                    n = 2.0;    // reduce minimum stem len (heuristic)
+//                              if (fabs(max-min) > (_spatium * 2.0))
+//                                    n = 2.0;    // reduce minimum stem len (heuristic)
                               if (isGrace)
                                     n *= graceMag;
                               double diff = n * _spatium - min;
+// printf("Beam: up %d diff %f %f\n", _up, diff, diff / _spatium);
                               if (_up)
                                     diff = -diff;
                               f->p1[idx].ry() += diff;
