@@ -3048,7 +3048,7 @@ printf("use Tie %p\n", tie);
                         printf("wavy-line stop without start\n");
                         }
                   else {
-                        spanners[trill].second = tick;
+                        spanners[trill].second = tick + ticks;
                         printf("wedge trill=%p second tick %d\n", trill, tick);
                         trill = 0;
                         }
