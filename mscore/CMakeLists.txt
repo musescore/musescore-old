@@ -38,7 +38,6 @@ set(SOUNDFONT3        TRUE)         # enable ogg vorbis compressed fonts, requir
 set(AEOLUS            TRUE)         # pipe organ synthesizer
 set(EMBED_ICONS       FALSE)        # do not load icons from share/icons
 set(OSC               TRUE)         # osc remote control
-set(NATIVE_FILEDIALOG FALSE)        # use the operating system native file dialog widget
 set(OMR TRUE)                       # OMR - optical music recognition
 
 if (APPLE OR MINGW)

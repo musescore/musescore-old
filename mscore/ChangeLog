@@ -1,4 +1,5 @@
 18.feb (ws)
+      - make "use native file dialogs" a runtime option selectable in preferences
       - implement simple raster
 17.feb (ws)
       - allow drop of Articulations (Fermata) to (end) barlines

@@ -209,6 +209,7 @@ void Preferences::init()
 
       hRaster                 = 2;
       vRaster                 = 2;
+      nativeDialogs           = false;    // use system native file dialogs
       };
 
 //---------------------------------------------------------
@@ -318,6 +319,7 @@ void Preferences::write()
 
       s.setValue("hraster", hRaster);
       s.setValue("vraster", vRaster);
+      s.setValue("nativeDialogs", nativeDialogs);
 
       //update
       s.setValue("checkUpdateStartup", checkUpdateStartup);
@@ -462,6 +464,8 @@ void Preferences::read()
 
       hRaster          = s.value("hraster", "2").toInt();
       vRaster          = s.value("vraster", "2").toInt();
+
+      nativeDialogs    = s.value("nativeDialogs", false).toBool();
 
       checkUpdateStartup = s.value("checkUpdateStartup", UpdateChecker::defaultPeriod()).toInt();
       if (checkUpdateStartup == 0) {
@@ -908,6 +912,8 @@ void PreferenceDialog::updateValues(Preferences* p)
       myPlugins->setText(p->myPluginsPath);
       mySoundFonts->setText(p->mySoundFontsPath);
 
+      nativeDialogs->setChecked(p->nativeDialogs);
+
       sfChanged = false;
       }
 
@@ -1246,6 +1252,8 @@ void PreferenceDialog::apply()
       preferences.myTemplatesPath    = myTemplates->text();
       preferences.myPluginsPath      = myPlugins->text();
       preferences.mySoundFontsPath   = mySoundFonts->text();
+
+      preferences.nativeDialogs      = nativeDialogs->isChecked();
 
       preferences.showSplashScreen   = showSplashScreen->isChecked();
       preferences.midiExpandRepeats  = expandRepeats->isChecked();

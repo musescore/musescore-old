@@ -40,5 +40,4 @@
 #cmakedefine OSC
 #cmakedefine OPENGL
 #cmakedefine SOUNDFONT3
-#cmakedefine NATIVE_FILEDIALOG
 

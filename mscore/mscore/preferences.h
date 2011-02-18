@@ -154,6 +154,7 @@ struct Preferences {
       QString mySoundFontsPath;
 
       int hRaster, vRaster;
+      bool nativeDialogs;
 
       bool dirty;
 
