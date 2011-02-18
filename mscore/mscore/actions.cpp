@@ -2380,11 +2380,11 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          STATE_ALL,
          "fullscreen",
-         QT_TRANSLATE_NOOP("action","toggle fullscreen mode"),
+         QT_TRANSLATE_NOOP("action","fullscreen mode"),
 	   Qt::CTRL + Qt::Key_U,
          Qt::ApplicationShortcut,
-         QT_TRANSLATE_NOOP("action","toggle fullscreen mode"),
-         QT_TRANSLATE_NOOP("action","toggle fullscreen mode")
+         QT_TRANSLATE_NOOP("action","fullscreen mode"),
+         QT_TRANSLATE_NOOP("action","fullscreen mode")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
