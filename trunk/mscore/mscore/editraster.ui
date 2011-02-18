@@ -108,7 +108,7 @@
          </layout>
         </widget>
        </item>
-       <item alignment="Qt::AlignHCenter">
+       <item>
         <spacer name="verticalSpacer">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
