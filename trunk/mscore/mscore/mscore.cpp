@@ -858,6 +858,11 @@ MuseScore::MuseScore()
       menuDisplay->addSeparator();
       menuDisplay->addAction(getAction("show-invisible"));
       menuDisplay->addAction(getAction("show-frames"));
+      menuDisplay->addSeparator();
+      a = getAction("fullscreen");
+      a->setCheckable(true);
+      a->setChecked(false);
+      menuDisplay->addAction(a);
 
       //---------------------
       //    Menu Help
@@ -2432,7 +2437,7 @@ void MuseScore::cmd(QAction* a)
       else if (cmd == "parts")
             startExcerptsDialog();
       else if (cmd == "fullscreen") {
-            _fullscreen = !_fullscreen;
+            _fullscreen = a->isChecked();
             if (_fullscreen)
                   showFullScreen();
             else
