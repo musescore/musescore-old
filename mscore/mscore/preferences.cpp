@@ -206,6 +206,9 @@ void Preferences::init()
       myTemplatesPath         = "MuseScore/MyTemplates";
       myPluginsPath           = "MuseScore/MyPlugins";
       mySoundFontsPath        = "MuseScore/MySoundFonts";
+
+      hRaster                 = 2;
+      vRaster                 = 2;
       };
 
 //---------------------------------------------------------
@@ -312,6 +315,9 @@ void Preferences::write()
       s.setValue("myTemplatesPath", myTemplatesPath);
       s.setValue("myPluginsPath", myPluginsPath);
       s.setValue("mySoundFontsPath", mySoundFontsPath);
+
+      s.setValue("hraster", hRaster);
+      s.setValue("vraster", vRaster);
 
       //update
       s.setValue("checkUpdateStartup", checkUpdateStartup);
@@ -447,12 +453,15 @@ void Preferences::read()
             appStyleFile = ":/data/appstyle-dark.css";
             globalStyle  = 0;
             }
-      singlePalette   = s.value("singlePalette", false).toBool();
-      myScoresPath    = s.value("myScoresPath", "MyScores").toString();
-      myStylesPath    = s.value("myStylesPath", "MuseScore/MyStyles").toString();
-      myTemplatesPath = s.value("myTemplatesPath", "MuseScore/MyTemplates").toString();
-      myPluginsPath   = s.value("myPluginsPath", "MuseScore/MyPlugins").toString();
+      singlePalette    = s.value("singlePalette", false).toBool();
+      myScoresPath     = s.value("myScoresPath", "MyScores").toString();
+      myStylesPath     = s.value("myStylesPath", "MuseScore/MyStyles").toString();
+      myTemplatesPath  = s.value("myTemplatesPath", "MuseScore/MyTemplates").toString();
+      myPluginsPath    = s.value("myPluginsPath", "MuseScore/MyPlugins").toString();
       mySoundFontsPath = s.value("mySoundFontsPath", "MuseScore/MySoundFonts").toString();
+
+      hRaster          = s.value("hraster", "2").toInt();
+      vRaster          = s.value("vraster", "2").toInt();
 
       checkUpdateStartup = s.value("checkUpdateStartup", UpdateChecker::defaultPeriod()).toInt();
       if (checkUpdateStartup == 0) {

@@ -2386,6 +2386,35 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","toggle fullscreen mode"),
          QT_TRANSLATE_NOOP("action","toggle fullscreen mode")
          ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "hraster",
+         QT_TRANSLATE_NOOP("action","enable horizontal raster"),
+	   0,
+         Qt::ApplicationShortcut,
+         QT_TRANSLATE_NOOP("action","enable horizontal raster"),
+         QT_TRANSLATE_NOOP("action","enable horizontal raster"),
+         hraster_ICON
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "vraster",
+         QT_TRANSLATE_NOOP("action","enable vertical raster"),
+	   0,
+         Qt::ApplicationShortcut,
+         QT_TRANSLATE_NOOP("action","enable vertical raster"),
+         QT_TRANSLATE_NOOP("action","enable vertical raster"),
+         vraster_ICON
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "config-raster",
+         QT_TRANSLATE_NOOP("action","config raster"),
+	   0,
+         Qt::ApplicationShortcut,
+         QT_TRANSLATE_NOOP("action","config raster"),
+         QT_TRANSLATE_NOOP("action","config raster")
+         ),
       // xml==0  marks end of list
       Shortcut(0, 0, 0, QKeySequence::UnknownKey)
       };

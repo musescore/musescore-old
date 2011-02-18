@@ -1040,7 +1040,8 @@ void Score::cmdFlip()
                               a->setAnchor(A_TOP_CHORD);
                         else if (a->anchor() == A_CHORD) {
                               ChordRest* cr = a->chordRest();
-                              a->setAnchor(cr->up() ? A_TOP_CHORD : A_BOTTOM_CHORD);
+                              if (cr)
+                                    a->setAnchor(cr->up() ? A_TOP_CHORD : A_BOTTOM_CHORD);
                               }
                         }
                   if (newSubtype != -1)

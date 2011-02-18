@@ -444,7 +444,23 @@ QColor Element::curColor() const
 QRectF Element::drag(const QPointF& pos)
       {
       QRectF r(abbox());
-      setUserOff(pos);
+
+      qreal x = pos.x();
+      qreal y = pos.y();
+
+      qreal _spatium = spatium();
+      if (mscore->hRaster()) {
+            qreal hRaster = _spatium / preferences.hRaster;
+            int n = lrint(x / hRaster);
+            x = hRaster * n;
+            }
+      if (mscore->vRaster()) {
+            qreal vRaster = _spatium / preferences.vRaster;
+            int n = lrint(y / vRaster);
+            y = vRaster * n;
+            }
+
+      setUserOff(QPointF(x, y));
       return abbox() | r;
       }
 

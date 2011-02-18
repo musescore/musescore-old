@@ -1684,7 +1684,10 @@ Element* Chord::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Elem
 
                   if (atr->subtype() == MordentSym) {
                         QList<NoteEvent*> events;
-                        int pitch = upNote()->ppitch();
+                        //
+                        // create default playback for Mordent
+                        //
+                        int pitch  = upNote()->ppitch();
                         int pitch2 = diatonicUpDown(clef, pitch, -1);
                         events.append(new NoteEvent(0, 0, 128));
                         events.append(new NoteEvent(pitch2 - pitch, 128, 128));
@@ -1693,7 +1696,10 @@ Element* Chord::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Elem
                         }
                   else if (atr->subtype() == PrallSym) {
                         QList<NoteEvent*> events;
-                        int pitch = upNote()->ppitch();
+                        //
+                        // create default playback events for PrallSym
+                        //
+                        int pitch  = upNote()->ppitch();
                         int pitch2 = diatonicUpDown(clef, pitch, 1);
                         events.append(new NoteEvent(0, 0, 128));
                         events.append(new NoteEvent(pitch2 - pitch, 128, 128));

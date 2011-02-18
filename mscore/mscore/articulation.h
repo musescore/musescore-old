@@ -124,7 +124,7 @@ class Articulation : public Symbol {
       int relVelocity() const { return articulationList[subtype()].relVelocity; }
       virtual QPointF canvasPos() const;      ///< position in canvas coordinates
 
-      ChordRest* chordRest() const { return (ChordRest*)(parent()); }
+      ChordRest* chordRest() const;
 
       static ArticulationInfo articulationList[];
 
