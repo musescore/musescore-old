@@ -692,8 +692,9 @@ void BarLine::add(Element* e)
       switch(e->type()) {
             case ARTICULATION:
                   _el.append(e);
-printf("BarLine<%p>: add articulation %d\n", this, _el.size());
                   setGenerated(false);
+                  if (measure())
+                        measure()->setEndBarLineGenerated(false);
                   break;
             default:
                   printf("BarLine::add() not impl. %s\n", e->name());

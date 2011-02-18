@@ -1966,6 +1966,8 @@ void Measure::write(Xml& xml) const
                               xml.tag("tick", segment->tick());
                               xml.curTick = segment->tick();
                               }
+                        // write all (not generated) bar lines
+#if 0
                         if (segment->subtype() == SegEndBarLine && _multiMeasure > 0) {
                               xml.stag("BarLine");
                               xml.tag("subtype", _endBarLineType);
@@ -1973,6 +1975,7 @@ void Measure::write(Xml& xml) const
                               xml.etag();
                               }
                         else
+#endif
                               e->write(xml);
                         }
                   }
@@ -2348,8 +2351,8 @@ void Measure::read(QDomElement e, int staffIdx)
             if (s && s->subtype() == SegBarLine) {
                   BarLine* b = static_cast<BarLine*>(s->element(0));
                   setEndBarLineType(b->barLineType(), false, b->visible(), b->color());
-                  s->remove(b);
-                  delete b;
+                  // s->remove(b);
+                  // delete b;
                   }
             }
       }
@@ -2533,7 +2536,7 @@ bool Measure::createEndBarLines()
                         bl->setTrack(track);
                         bl->setVisible(_endBarLineVisible);
                         bl->setColor(_endBarLineColor);
-                        bl->setGenerated(_endBarLineGenerated);
+                        bl->setGenerated(bl->el()->isEmpty() && _endBarLineGenerated);
                         BarLineType et = _multiMeasure > 0 ? _mmEndBarLineType : _endBarLineType;
                         if (bl->subtype() != et) {
                               bl->setBarLineType(et);
