@@ -933,18 +933,28 @@ void Score::undoAddElement(Element* element)
                   Articulation* a  = static_cast<Articulation*>(element);
                   Segment* segment;
                   SegmentType st;
+                  Measure* m;
+                  int tick;
                   if (a->parent()->isChordRest()) {
                         ChordRest* cr = a->chordRest();
-                        segment = cr->segment();
-                        st = SegChordRest;
+                        segment       = cr->segment();
+                        st            = SegChordRest;
+                        tick          = segment->tick();
+                        m             = score->tick2measure(tick);
                         }
                   else {
-                        segment = static_cast<Segment*>(a->parent()->parent());
-                        st = SegEndBarLine;
+                        segment  = static_cast<Segment*>(a->parent()->parent());
+                        st       = SegEndBarLine;
+                        tick     = segment->tick();
+                        m        = score->tick2measure(tick);
+                        if (m->tick() == tick)
+                              m = m->prevMeasure();
                         }
-                  int tick         = segment->tick();
-                  Measure* m       = score->tick2measure(tick);
-                  Segment* seg     = m->findSegment(st, tick);
+                  Segment* seg = m->findSegment(st, tick);
+                  if (seg == 0) {
+                        printf("undoAddSegment: segment not found\n");
+                        break;
+                        }
                   Articulation* na = static_cast<Articulation*>(ne);
                   int ntrack       = staffIdx * VOICES + a->voice();
                   na->setTrack(ntrack);

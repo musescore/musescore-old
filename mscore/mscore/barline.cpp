@@ -349,6 +349,8 @@ void BarLine::write(Xml& xml) const
       {
       xml.stag("BarLine");
       xml.tag("span", _span);
+      foreach(const Element* e, _el)
+            e->write(xml);
       Element::writeProperties(xml);
       xml.etag();
       }
@@ -384,6 +386,11 @@ void BarLine::read(QDomElement e)
                   }
             else if (tag == "span")
                   _span = val.toInt();
+            else if (tag == "Articulation") {
+                  Articulation* a = new Articulation(score());
+                  a->read(e);
+                  add(a);
+                  }
             else if (!Element::readProperties(e))
                   AL::domError(e);
             }
@@ -611,8 +618,8 @@ void BarLine::layout()
                   Articulation* a       = static_cast<Articulation*>(e);
                   ArticulationAnchor aa = a->anchor();
                   double distance       = score()->styleS(ST_propertyDistanceStem).val() * _spatium;
-                  qreal topY            = -distance;
-                  qreal botY            = height() + distance;
+                  qreal topY            = y1 - distance;
+                  qreal botY            = y2 + distance;
                   qreal x               = 0.0;
 
                   if (aa == A_TOP_STAFF)
@@ -685,6 +692,7 @@ void BarLine::add(Element* e)
       switch(e->type()) {
             case ARTICULATION:
                   _el.append(e);
+printf("BarLine<%p>: add articulation %d\n", this, _el.size());
                   setGenerated(false);
                   break;
             default:

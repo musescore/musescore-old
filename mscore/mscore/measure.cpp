@@ -2031,7 +2031,10 @@ void Measure::read(QDomElement e, int staffIdx)
                         }
                   else {
                         setEndBarLineType(barLine->barLineType(), false, barLine->visible(), barLine->color());
-                        delete barLine;
+                        Staff* staff = score()->staff(staffIdx);
+                        barLine->setSpan(staff->barLineSpan());
+                        Segment* s = getSegment(SegEndBarLine, score()->curTick);
+                        s->add(barLine);
                         }
                   }
             else if (tag == "Chord") {
@@ -2504,10 +2507,10 @@ bool Measure::createEndBarLines()
       int nstaves  = score()->nstaves();
       Segment* seg = getSegment(SegEndBarLine, tick() + ticks());
 
-      for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
+      for (int staffIdx = 0; staffIdx < nstaves;) {
             Staff* staff = score()->staff(staffIdx);
-            int span = staff->barLineSpan();
-            BarLine* bl = 0;
+            int span     = staff->barLineSpan();
+            BarLine* bl  = 0;
             int aspan;
             for (int i = 0; i < span; ++i) {
                   int track = (staffIdx + i) * VOICES;
@@ -2551,6 +2554,7 @@ bool Measure::createEndBarLines()
                   }
             if (bl)
                   bl->setSpan(aspan);
+            staffIdx += span;
             }
 
       return changed;
