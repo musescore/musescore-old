@@ -2297,82 +2297,16 @@ void Score::addAudioTrack()
       // TODO
       }
 
-#if NATIVE_FILEDIALOG
-
-//---------------------------------------------------------
-//   getSoundFont
-//---------------------------------------------------------
-
-QString MuseScore::getSoundFont(const QString& d)
-      {
-      QString s = QFileDialog::getOpenFileName(
-         mscore,
-         MuseScore::tr("Choose Synthesizer SoundFont"),
-         d,
-         MuseScore::tr("SoundFont Files (*.sf2 *.SF2);;All (*)")
-         );
-      return s;
-      }
-
-//---------------------------------------------------------
-//   getOpenScoreName
-//---------------------------------------------------------
-
-QString MuseScore::getOpenScoreName(QString& dir, const QString& filter)
-      {
-      return QFileDialog::getOpenFileName(this,
-         tr("MuseScore: Load Score"), dir, filter);
-      }
-
-//---------------------------------------------------------
-//   getSaveScoreName
-//---------------------------------------------------------
-
-QString MuseScore::getSaveScoreName(const QString& title,
-   QString& name, const QString& filter, QString* selectedFilter)
-      {
-      QString selectedFilter;
-      QString fn = QFileDialog::getSaveFileName(this,
-               title,
-               name,
-               filter,
-               selectedFilter
-               );
-      return fn;
-      }
-
-//---------------------------------------------------------
-//   getStyleFilename
-//---------------------------------------------------------
-
-QString MuseScore::getStyleFilename(bool open)
-      {
-      QString fn;
-      if (open) {
-            fn = QFileDialog::getOpenFileName(
-               this, tr("MuseScore: Load Style"),
-               QString("."),
-               tr("MuseScore Styles (*.mss);;" "All Files (*)")
-               );
-            }
-      else {
-            fn = QFileDialog::getSaveFileName(
-               this, tr("MuseScore: Save Style"),
-               QString("."),
-               tr("MuseScore Style File (*.mss)")
-               );
-            }
-      return fn;
-      }
-
-#else // NATIVE_FILEDIALOG
-
 //---------------------------------------------------------
 //   getOpenFileName
 //---------------------------------------------------------
 
 QString MuseScore::getOpenScoreName(QString& dir, const QString& filter)
       {
+      if (preferences.nativeDialogs) {
+            return QFileDialog::getOpenFileName(this,
+               tr("MuseScore: Load Score"), dir, filter);
+            }
       QFileInfo myScores(preferences.myScoresPath);
       if (myScores.isRelative())
             myScores.setFile(QDir::home(), preferences.myScoresPath);
@@ -2411,6 +2345,16 @@ QString MuseScore::getOpenScoreName(QString& dir, const QString& filter)
 QString MuseScore::getSaveScoreName(const QString& title,
    QString& name, const QString& filter, QString* selectedFilter)
       {
+      if (preferences.nativeDialogs) {
+            QString fn = QFileDialog::getSaveFileName(this,
+               title,
+               name,
+               filter,
+               selectedFilter
+               );
+            return fn;
+            }
+
       QFileInfo myScores(preferences.myScoresPath);
       if (myScores.isRelative())
             myScores.setFile(QDir::home(), preferences.myScoresPath);
@@ -2449,6 +2393,25 @@ QString MuseScore::getSaveScoreName(const QString& title,
 
 QString MuseScore::getStyleFilename(bool open)
       {
+      if (preferences.nativeDialogs) {
+            QString fn;
+            if (open) {
+                  fn = QFileDialog::getOpenFileName(
+                     this, tr("MuseScore: Load Style"),
+                     QString("."),
+                     tr("MuseScore Styles (*.mss);;" "All Files (*)")
+                     );
+                  }
+            else {
+                  fn = QFileDialog::getSaveFileName(
+                     this, tr("MuseScore: Save Style"),
+                     QString("."),
+                     tr("MuseScore Style File (*.mss)")
+                     );
+                  }
+            return fn;
+            }
+
       QFileInfo myStyles(preferences.myStylesPath);
       if (myStyles.isRelative())
             myStyles.setFile(QDir::home(), preferences.myStylesPath);
@@ -2507,6 +2470,16 @@ QString MuseScore::getStyleFilename(bool open)
 
 QString MuseScore::getSoundFont(const QString& d)
       {
+      if (preferences.nativeDialogs) {
+            QString s = QFileDialog::getOpenFileName(
+               mscore,
+               MuseScore::tr("Choose Synthesizer SoundFont"),
+               d,
+               MuseScore::tr("SoundFont Files (*.sf2 *.SF2);;All (*)")
+               );
+            return s;
+            }
+
       if (loadSoundFontDialog == 0) {
             loadSoundFontDialog = new QFileDialog(this);
             loadSoundFontDialog->setFileMode(QFileDialog::ExistingFile);
@@ -2540,6 +2513,3 @@ QString MuseScore::getSoundFont(const QString& d)
             }
       return QString();
       }
-
-#endif  // NATIVE_FILEDIALOG
-
