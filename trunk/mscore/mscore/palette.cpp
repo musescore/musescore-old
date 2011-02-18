@@ -1145,8 +1145,6 @@ PaletteBox::PaletteBox(QWidget* parent)
 void PaletteBox::contextMenu(const QPoint& pt)
       {
       QMenu menu(this);
-      menu.setObjectName("PaletteContext");
-
       menu.setSeparatorsCollapsible(false);
       QAction* titel = menu.addSeparator();
       titel->setText(tr("Palette Operations"));

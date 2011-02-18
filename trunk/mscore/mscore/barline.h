@@ -36,6 +36,7 @@ class BarLine : public Element {
       qreal yoff;       // used during drag edit to extend y2
 
       void getY(double*, double*) const;
+      ElementList _el;        ///< fermata or other articulations
 
    public:
       BarLine(Score*);
@@ -49,6 +50,9 @@ class BarLine : public Element {
       virtual Space space() const;
       virtual QPointF canvasPos() const;      ///< position in canvas coordinates
       virtual void layout();
+      virtual void scanElements(void* data, void (*func)(void*, Element*));
+      virtual void add(Element*);
+      virtual void remove(Element*);
 
       virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*);
@@ -68,7 +72,11 @@ class BarLine : public Element {
       virtual void setSubtype(const QString& s);
       void setBarLineType(BarLineType i)  { Element::setSubtype(int(i));    }
       BarLineType barLineType() const     { return BarLineType(subtype());  }
+
       static BarLineType barLineType(const QString& s);
+
+      ElementList* el()                { return &_el; }
+      const ElementList* el() const    { return &_el; }
       };
 
 #endif

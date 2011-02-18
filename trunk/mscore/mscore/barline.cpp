@@ -26,6 +26,7 @@
 #include "measure.h"
 #include "segment.h"
 #include "painter.h"
+#include "articulation.h"
 
 //---------------------------------------------------------
 //   barLineNames
@@ -403,7 +404,9 @@ Space BarLine::space() const
 
 bool BarLine::acceptDrop(ScoreView*, const QPointF&, int type, int) const
       {
-      return type == BAR_LINE;
+      return type == BAR_LINE
+         || (type == ARTICULATION && segment() && segment()->subtype() == SegEndBarLine)
+         ;
       }
 
 //---------------------------------------------------------
@@ -414,19 +417,28 @@ Element* BarLine::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, El
       {
       int type = e->type();
       int st   = e->subtype();
-      if (type != BAR_LINE || st == subtype()) {
-            delete e;
-            return 0;
-            }
-      Measure* m = segment()->measure();
-      if (st == START_REPEAT) {
-            m = m->nextMeasure();
-            if (m == 0) {
+      if (type == BAR_LINE) {
+            if (st == subtype()) {
                   delete e;
                   return 0;
                   }
+            Measure* m = segment()->measure();
+            if (st == START_REPEAT) {
+                  m = m->nextMeasure();
+                  if (m == 0) {
+                        delete e;
+                        return 0;
+                        }
+                  }
+            m->drop(view, p1, p2, e);
             }
-      m->drop(view, p1, p2, e);
+      else if (type == ARTICULATION) {
+            Articulation* atr = static_cast<Articulation*>(e);
+            atr->setParent(this);
+            atr->setTrack(track());
+            score()->select(atr, SELECT_SINGLE, 0);
+            score()->undoAddElement(atr);
+            }
       return 0;
       }
 
@@ -592,6 +604,23 @@ void BarLine::layout()
                         break;
                   }
             }
+      qreal _spatium = spatium();
+      foreach(Element* e, _el) {
+            e->layout();
+            if (e->type() == ARTICULATION) {
+                  Articulation* a       = static_cast<Articulation*>(e);
+                  ArticulationAnchor aa = a->anchor();
+                  double distance       = score()->styleS(ST_propertyDistanceStem).val() * _spatium;
+                  qreal topY            = -distance;
+                  qreal botY            = height() + distance;
+                  qreal x               = 0.0;
+
+                  if (aa == A_TOP_STAFF)
+                        a->setPos(x, topY);
+                  else if (aa == A_BOTTOM_STAFF)
+                        a->setPos(x, botY);
+                  }
+            }
       setbbox(r);
       }
 
@@ -633,6 +662,52 @@ BarLineType BarLine::barLineType(const QString& s)
                   return BarLineType(i);
             }
       return NORMAL_BAR;
+      }
+
+//---------------------------------------------------------
+//   scanElements
+//---------------------------------------------------------
+
+void BarLine::scanElements(void* data, void (*func)(void*, Element*))
+      {
+      func(data, this);
+      foreach(Element* e, _el)
+            e->scanElements(data, func);
+      }
+
+//---------------------------------------------------------
+//   add
+//---------------------------------------------------------
+
+void BarLine::add(Element* e)
+      {
+	e->setParent(this);
+      switch(e->type()) {
+            case ARTICULATION:
+                  _el.append(e);
+                  setGenerated(false);
+                  break;
+            default:
+                  printf("BarLine::add() not impl. %s\n", e->name());
+                  break;
+            }
+      }
+
+//---------------------------------------------------------
+//   remove
+//---------------------------------------------------------
+
+void BarLine::remove(Element* e)
+      {
+      switch(e->type()) {
+            case ARTICULATION:
+                  if (!_el.remove(e))
+                        printf("BarLine::remove(): cannot find %s\n", e->name());
+                  break;
+            default:
+                  printf("BarLine::remove() not impl. %s\n", e->name());
+                  break;
+            }
       }
 
 

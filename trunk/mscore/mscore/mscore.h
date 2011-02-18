@@ -286,6 +286,10 @@ class MuseScore : public QMainWindow {
       QFileDialog* saveStyleDialog;
       QFileDialog* loadSoundFontDialog;
 
+      QDialog* editRasterDialog;
+      QAction* hRasterAction;
+      QAction* vRasterAction;
+
       //---------------------
 
       virtual void closeEvent(QCloseEvent*);
@@ -324,6 +328,7 @@ class MuseScore : public QMainWindow {
       void editChordStyle();
       void startExcerptsDialog();
       void initOsc();
+      void editRaster();
 
    private slots:
       void autoSaveTimerTimeout();
@@ -466,6 +471,8 @@ class MuseScore : public QMainWindow {
          QString& name, const QString& filter, QString* selectedFilter);
       QString getStyleFilename(bool open);
       QString getSoundFont(const QString&);
+      bool hRaster() const { return hRasterAction->isChecked(); }
+      bool vRaster() const { return vRasterAction->isChecked(); }
       };
 
 extern MuseScore* mscore;

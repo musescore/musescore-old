@@ -311,18 +311,21 @@ QPointF Articulation::canvasPos() const
       {
       if (parent() == 0 || parent()->parent() == 0)
             return pos();
-      double xp = x();
-      for (Element* e = parent(); e; e = e->parent())
-            xp += e->x();
-      ChordRest* cr = chordRest();
-      Measure* m = cr->measure();
-      if (m == 0)
-            return pos();
-      System* system = m->system();
-      if (system == 0)
-            return pos();
-      double yp = y() + system->staff(staffIdx() + cr->staffMove())->y() + system->y();
-      return QPointF(xp, yp);
+      if (parent()->isChordRest()) {
+            double xp = x();
+            for (Element* e = parent(); e; e = e->parent())
+                  xp += e->x();
+            ChordRest* cr = static_cast<ChordRest*>(parent());
+            Measure* m = cr->measure();
+            if (m == 0)
+                  return pos();
+            System* system = m->system();
+            if (system == 0)
+                  return pos();
+            double yp = y() + system->staff(staffIdx() + cr->staffMove())->y() + system->y();
+            return QPointF(xp, yp);
+            }
+      return Element::canvasPos();
       }
 
 //---------------------------------------------------------
@@ -347,4 +350,14 @@ void Articulation::draw(Painter* painter) const
       symbols[score()->symIdx()][_sym].draw(p, magS());
       }
 
+//---------------------------------------------------------
+//   chordRest
+//---------------------------------------------------------
+
+ChordRest* Articulation::chordRest() const
+      {
+      if (parent() && parent()->isChordRest())
+            return static_cast<ChordRest*>(parent());
+      return 0;
+      }
 

@@ -64,6 +64,7 @@
 #include "chord.h"
 #include "mstyle/mstyle.h"
 #include "segment.h"
+#include "editraster.h"
 
 #ifdef OSC
 #include "ofqf/qoscserver.h"
@@ -369,6 +370,7 @@ MuseScore::MuseScore()
       loadStyleDialog       = 0;
       saveStyleDialog       = 0;
       loadSoundFontDialog   = 0;
+      editRasterDialog    = 0;
 
       _midiRecordId         = -1;
       _fullscreen           = false;
@@ -400,8 +402,26 @@ MuseScore::MuseScore()
 //      p.setColor(QPalette::Window, QColor(176, 190, 242));
 //      _modeText->setPalette(p);
       _statusBar = new QStatusBar;
+
+      QToolButton* hraster = new QToolButton(this);
+      QToolButton* vraster = new QToolButton(this);
+      hRasterAction = getAction("hraster");
+      hRasterAction->setCheckable(true);
+      hraster->setDefaultAction(hRasterAction);
+      hraster->setContextMenuPolicy(Qt::ActionsContextMenu);
+      hraster->addAction(getAction("config-raster"));
+      vRasterAction = getAction("vraster");
+      vRasterAction->setCheckable(true);
+      vraster->setDefaultAction(vRasterAction);
+      vraster->setContextMenuPolicy(Qt::ActionsContextMenu);
+      vraster->addAction(getAction("config-raster"));
+
+      _statusBar->addPermanentWidget(hraster, 0);
+      _statusBar->addPermanentWidget(vraster, 0);
+      _statusBar->addPermanentWidget(new QWidget(this), 100);
       _statusBar->addPermanentWidget(_modeText, 0);
       _statusBar->addPermanentWidget(_positionLabel, 0);
+
       setStatusBar(_statusBar);
 
       _progressBar = 0;
@@ -2418,6 +2438,10 @@ void MuseScore::cmd(QAction* a)
             else
                   showNormal();
             }
+      else if (cmd == "config-raster")
+            editRaster();
+      else if (cmd == "hraster" || cmd == "vraster")  // value in [hv]RasterAction already set
+            ;
       else {
             if (cv) {
                   cv->setFocus();
@@ -3502,6 +3526,20 @@ void MuseScore::oscVolume(int val)
       if (seq)
             seq->setGain(v);
       }
-
 #endif // #ifndef OSC
+
+
+//---------------------------------------------------------
+//   editRaster
+//---------------------------------------------------------
+
+void MuseScore::editRaster()
+      {
+      if (editRasterDialog == 0) {
+            editRasterDialog = new EditRaster(this);
+            }
+      if (editRasterDialog->exec()) {
+            printf("=====accept config raster\n");
+            }
+      }
 

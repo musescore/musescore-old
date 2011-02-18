@@ -103,6 +103,8 @@ static const char* iconNames[] = {
       "superscript.svg",
       "subscript.svg",
       "fotomode.svg",
+      "hraster.svg",
+      "vraster.svg",
       };
 
 void genIcons()

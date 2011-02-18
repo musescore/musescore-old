@@ -1,4 +1,7 @@
+18.feb (ws)
+      - implement simple raster
 17.feb (ws)
+      - allow drop of Articulations (Fermata) to (end) barlines
       - new meta for footer/header text:
             $f    is replaced by score name
             $F    is replaced by absolute score file path + name

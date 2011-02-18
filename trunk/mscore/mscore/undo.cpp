@@ -931,16 +931,31 @@ void Score::undoAddElement(Element* element)
                   }
             if (element->type() == ARTICULATION) {
                   Articulation* a  = static_cast<Articulation*>(element);
-                  ChordRest* cr    = static_cast<ChordRest*>(a->parent());
-                  Segment* segment = cr->segment();
+                  Segment* segment;
+                  SegmentType st;
+                  if (a->parent()->isChordRest()) {
+                        ChordRest* cr = a->chordRest();
+                        segment = cr->segment();
+                        st = SegChordRest;
+                        }
+                  else {
+                        segment = static_cast<Segment*>(a->parent()->parent());
+                        st = SegEndBarLine;
+                        }
                   int tick         = segment->tick();
                   Measure* m       = score->tick2measure(tick);
-                  Segment* seg     = m->findSegment(SegChordRest, tick);
+                  Segment* seg     = m->findSegment(st, tick);
                   Articulation* na = static_cast<Articulation*>(ne);
                   int ntrack       = staffIdx * VOICES + a->voice();
                   na->setTrack(ntrack);
-                  ChordRest* ncr   = static_cast<ChordRest*>(seg->element(ntrack));
-                  na->setParent(ncr);
+                  if (a->parent()->isChordRest()) {
+                        ChordRest* ncr = static_cast<ChordRest*>(seg->element(ntrack));
+                        na->setParent(ncr);
+                        }
+                  else {
+                        BarLine* bl = static_cast<BarLine*>(seg->element(ntrack));
+                        na->setParent(bl);
+                        }
                   undo()->push(new AddElement(na));
                   }
             else if (element->type() == DYNAMIC) {

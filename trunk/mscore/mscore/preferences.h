@@ -153,6 +153,8 @@ struct Preferences {
       QString myPluginsPath;
       QString mySoundFontsPath;
 
+      int hRaster, vRaster;
+
       bool dirty;
 
       Preferences();

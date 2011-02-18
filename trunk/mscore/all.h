@@ -129,6 +129,7 @@
 #include <QtGui/QDial>
 #include <QtGui/QTextEdit>
 #include <QtGui/QMdiSubWindow>
+#include <QtGui/QSpacerItem>
 
 #include <QtSvg/QSvgRenderer>
 #include <QtSvg/QSvgGenerator>
