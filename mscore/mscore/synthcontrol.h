@@ -41,6 +41,7 @@ class SynthControl : public QWidget, Ui::SynthControl {
 
       virtual void closeEvent(QCloseEvent*);
       void updateSyntiValues();
+      void updateUpDownButtons();
 
    private slots:
       void selectSoundFont();

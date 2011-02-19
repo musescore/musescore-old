@@ -156,6 +156,7 @@ void SynthControl::setScore(Score* cs)
       if (sy)
             soundFonts->addItems(sy->soundFonts());
       updateSyntiValues();
+      updateUpDownButtons();
       }
 
 //---------------------------------------------------------
@@ -272,6 +273,7 @@ void SynthControl::sfDeleteClicked()
                   sy->removeSoundFont(s);
             delete soundFonts->takeItem(row);
             }
+      updateUpDownButtons();
       }
 
 //---------------------------------------------------------
@@ -303,13 +305,12 @@ void SynthControl::sfAddClicked()
                                  tr("cannot load soundfont"));
                               }
                         else {
-                              soundFonts->addItem(s);
+                              soundFonts->insertItem(0, s);
                               }
-                        // QListWidgetItem* item = soundFonts->item(soundFonts->count()-1);
-                        // item->setCheckState(loaded ? Qt::Checked : Qt::Unchecked);
                         }
                   }
             }
+      updateUpDownButtons();
       }
 
 //---------------------------------------------------------
@@ -383,10 +384,7 @@ void SynthControl::setAeolusValue(double val, int idx)
 
 void SynthControl::currentSoundFontChanged(int row)
       {
-      int rows = soundFonts->count();
-      soundFontUp->setEnabled(row > 0);
-      soundFontDown->setEnabled(row < rows);
-      soundFontDelete->setEnabled(row >= 0);
+      updateUpDownButtons();
       }
 
 //---------------------------------------------------------
@@ -403,8 +401,10 @@ void SynthControl::sfUpClicked()
             QStringList sfonts = sy->soundFonts();
             sfonts.swap(row, row-1);
             sy->loadSoundFonts(sfonts);
+sfonts = sy->soundFonts();
             soundFonts->clear();
             soundFonts->addItems(sfonts);
+            soundFonts->setCurrentRow(row-1);
             }
       }
 
@@ -424,9 +424,23 @@ void SynthControl::sfDownClicked()
             QStringList sfonts = sy->soundFonts();
             sfonts.swap(row, row+1);
             sy->loadSoundFonts(sfonts);
+sfonts = sy->soundFonts();
             soundFonts->clear();
             soundFonts->addItems(sfonts);
+            soundFonts->setCurrentRow(row+1);
             }
       }
 
+//---------------------------------------------------------
+//   updateUpDownButtons
+//---------------------------------------------------------
+
+void SynthControl::updateUpDownButtons()
+      {
+      int rows = soundFonts->count();
+      int row = soundFonts->currentRow();
+      soundFontUp->setEnabled(row > 0);
+      soundFontDown->setEnabled((row != -1) && (row < (rows-1)));
+      soundFontDelete->setEnabled(row != -1);
+      }
 

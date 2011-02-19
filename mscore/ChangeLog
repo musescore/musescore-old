@@ -1,4 +1,7 @@
 19.feb (ws)
+      - "add soundfont" must be prepended in the synthesizer font list
+      - load soundfont list in the proper order
+      - fix #9263: down button in synthesizer causes crash
       - move note heads in edit mode is now undoable
       - fix #9316: double-clicking tied note removes tie
       - fix #9253: line text properties cannot be edited until the text is created
