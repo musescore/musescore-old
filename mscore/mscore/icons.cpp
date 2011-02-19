@@ -105,6 +105,7 @@ static const char* iconNames[] = {
       "fotomode.svg",
       "hraster.svg",
       "vraster.svg",
+      "repitch.svg",
       };
 
 void genIcons()

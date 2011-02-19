@@ -149,6 +149,7 @@
       <file>data/icons/mscore.xpm</file>
       <file>data/icons/hraster.svg</file>
       <file>data/icons/vraster.svg</file>
+      <file>data/icons/repitch.svg</file>
 
       <file>data/icons-dark/minus.svg</file>
       <file>data/icons-dark/flip.svg</file>
@@ -258,5 +259,6 @@
       <file>data/icons-dark/mscore.xpm</file>
       <file>data/icons-dark/hraster.svg</file>
       <file>data/icons-dark/vraster.svg</file>
+      <file>data/icons-dark/repitch.svg</file>
    </qresource>
 </RCC>

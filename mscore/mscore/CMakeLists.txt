@@ -506,6 +506,9 @@ endif (NOT MINGW AND NOT APPLE)
       data/icons/subscript.svg
       data/icons/superscript.svg
       data/icons/fotomode.svg
+      data/icons/hraster.svg
+      data/icons/vraster.svg
+      data/icons/repitch.svg
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}/icons/icons
       )
    install (FILES
@@ -614,6 +617,9 @@ endif (NOT MINGW AND NOT APPLE)
       data/icons-dark/subscript.svg
       data/icons-dark/superscript.svg
       data/icons-dark/fotomode.svg
+      data/icons-dark/hraster.svg
+      data/icons-dark/vraster.svg
+      data/icons-dark/repitch.svg
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}/icons/icons-dark
       )
 # endif (NOT EMBED_ICONS)

@@ -101,7 +101,8 @@ InputState::InputState() :
    noteType(NOTE_NORMAL),
    beamMode(BEAM_AUTO),
    noteEntryMode(false),
-   slur(0)
+   slur(0),
+   _repitchMode(false)
       {
       }
 

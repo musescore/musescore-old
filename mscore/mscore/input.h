@@ -39,6 +39,7 @@ class InputState {
       Drumset* _drumset;
       int _track;
       Segment* _segment;
+      bool _repitchMode;
 
    public:
       bool rest;
@@ -70,6 +71,9 @@ class InputState {
       int voice() const                   { return _track % VOICES; }
       int track() const                   { return _track;          }
       void setTrack(int v)                { _track = v;             }
+
+      bool repitchMode() const            { return _repitchMode;    }
+      void setRepitchMode(bool val)       { _repitchMode = val;     }
       };
 
 #endif

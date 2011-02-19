@@ -2415,6 +2415,16 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","config raster"),
          QT_TRANSLATE_NOOP("action","config raster")
          ),
+      Shortcut(
+         STATE_NOTE_ENTRY,
+         "repitch",
+         QT_TRANSLATE_NOOP("action","repitch mode"),
+	   Qt::CTRL + Qt::SHIFT + Qt::Key_I,
+         Qt::ApplicationShortcut,
+         QT_TRANSLATE_NOOP("action","repitch mode"),
+         QT_TRANSLATE_NOOP("action","repitch mode"),
+         repitch_ICON
+         ),
       // xml==0  marks end of list
       Shortcut(0, 0, 0, QKeySequence::UnknownKey)
       };
