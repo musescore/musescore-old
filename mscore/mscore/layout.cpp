@@ -1217,7 +1217,10 @@ bool Score::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
       foreach (Staff* staff, _staves) {
             SysStaff* s  = system->staff(staffIdx);
             bool oldShow = s->show();
-            if (styleB(ST_hideEmptyStaves) && (staves > 1)) {
+            if (styleB(ST_hideEmptyStaves)
+               && (staves > 1)
+               && !(isFirstSystem && styleB(ST_dontHideStavesInFirstSystem))
+               ) {
                   bool hideStaff = true;
                   foreach(MeasureBase* m, system->measures()) {
                         if (m->type() != MEASURE)

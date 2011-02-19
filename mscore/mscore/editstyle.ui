@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1099</width>
-    <height>685</height>
+    <width>732</width>
+    <height>500</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -123,7 +123,7 @@
       </sizepolicy>
      </property>
      <property name="currentIndex">
-      <number>13</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="Seite_5">
       <layout class="QVBoxLayout" name="verticalLayout_20">
@@ -240,6 +240,13 @@
            <widget class="QCheckBox" name="hideEmptyStaves">
             <property name="text">
              <string>Hide Empty Staves</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="dontHideStavesInFirstSystem">
+            <property name="text">
+             <string>Don't hide empty staves in first system</string>
             </property>
            </widget>
           </item>

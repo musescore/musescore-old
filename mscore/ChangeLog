@@ -1,6 +1,7 @@
 19.feb (lv)
       - MusicXML import fixes: Jumps and Markers
        (ws)
+      - new style element: ST_dontHideStavesInFirstSystem
       - implementation of "repitch" mode for note entry
       - "add soundfont" must be prepended in the synthesizer font list
       - load soundfont list in the proper order

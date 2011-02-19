@@ -231,6 +231,7 @@ enum StyleIdx {
       ST_minEmptyMeasures,
       ST_minMMRestWidth,
       ST_hideEmptyStaves,
+      ST_dontHideStavesInFirstSystem,
       ST_stemDir1,
       ST_stemDir2,
 
