@@ -1,4 +1,6 @@
 19.feb (ws)
+      - move note heads in edit mode is now undoable
+      - fix #9316: double-clicking tied note removes tie
       - fix #9253: line text properties cannot be edited until the text is created
 18.feb (ws)
       - make "use native file dialogs" a runtime option selectable in preferences
