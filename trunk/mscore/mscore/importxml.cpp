@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -698,6 +698,22 @@ void MusicXml::scorePartwise(QDomElement ee)
             il->at(pg->start)->staff(0)->addBracket(BracketItem(pg->type, stavesSpan));
                   if(pg->barlineSpan)
                 	  il->at(pg->start)->staff(0)->setBarLineSpan(pg->span);
+            }
+
+      // having read all parts (meaning all segments have been created),
+      // now attach all jumps and markers to segments
+      // simply use the first SegChordRest in the measure
+      for (int i = 0; i < jumpsMarkers.size(); i++) {
+            Segment* seg = jumpsMarkers.at(i).meas()->first(SegChordRest);
+            printf("jumpsMarkers jm %p meas %p ",
+                   jumpsMarkers.at(i).el(), jumpsMarkers.at(i).meas());
+            if (seg) {
+                  printf("attach to seg %p\n", seg);
+                  seg->add(jumpsMarkers.at(i).el());
+                  }
+            else {
+                  printf("no segment found");
+                  }
             }
       }
 
@@ -1690,13 +1706,13 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   }
             if (jp) {
                   jp->setTrack((staff + rstaff) * VOICES);
-                  Segment* s = measure->getSegment(SegChordRest, prevtick);
-                  s->add(jp);
+                  printf("jumpsMarkers adding jm %p meas %p\n",jp, measure);
+                  jumpsMarkers.append(JumpMarkerDesc(jp, measure));
                   }
             if (m) {
                   m->setTrack((staff + rstaff) * VOICES);
-                  Segment* s = measure->getSegment(SegChordRest, tick);
-                  s->add(m);
+                  printf("jumpsMarkers adding jm %p meas %p\n",m, measure);
+                  jumpsMarkers.append(JumpMarkerDesc(m, measure));
                   }
             }
 

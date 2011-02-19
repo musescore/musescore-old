@@ -1,4 +1,6 @@
-19.feb (ws)
+19.feb (lv)
+      - MusicXML import fixes: Jumps and Markers
+       (ws)
       - "add soundfont" must be prepended in the synthesizer font list
       - load soundfont list in the proper order
       - fix #9263: down button in synthesizer causes crash

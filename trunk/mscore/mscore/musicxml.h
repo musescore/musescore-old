@@ -104,7 +104,7 @@ typedef  CreditWordsList::iterator iCreditWords;
 typedef  CreditWordsList::const_iterator ciCreditWords;
 
 //---------------------------------------------------------
-//   MusicXml
+//   MusicXmlCreator
 //---------------------------------------------------------
 
 /**
@@ -120,6 +120,26 @@ class MusicXmlCreator {
       QString crType() const                     { return _type; }
       QString crText() const                     { return _text; }
       };
+
+//---------------------------------------------------------
+//   JumpMarkerDesc
+//---------------------------------------------------------
+
+/**
+ The description of Jumps and Markers to be added later
+*/
+
+class JumpMarkerDesc {
+      Element* _el;
+      const Measure* _meas;
+
+   public:
+      JumpMarkerDesc(Element* el, const Measure* meas) : _el(el), _meas(meas) {}
+      Element* el() const         { return _el; }
+      const Measure* meas() const { return _meas; }
+      };
+
+typedef QList<JumpMarkerDesc> JumpMarkerDescList;
 
 //---------------------------------------------------------
 //   MusicXml
@@ -160,6 +180,7 @@ class MusicXml {
       QString poet;
       QString translator;
       CreditWordsList credits;
+      JumpMarkerDescList jumpsMarkers;
 
 //      std::vector<MusicXmlWedge> wedgeList;
       std::vector<MusicXmlPartGroup*> partGroupList;
