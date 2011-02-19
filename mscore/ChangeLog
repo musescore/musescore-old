@@ -1,3 +1,5 @@
+19.feb (ws)
+      - fix #9253: line text properties cannot be edited until the text is created
 18.feb (ws)
       - make "use native file dialogs" a runtime option selectable in preferences
       - implement simple raster

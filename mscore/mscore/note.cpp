@@ -215,8 +215,12 @@ Note::Note(const Note& n)
       foreach(Element* e, n._el)
             add(e->clone());
 
-      _tieFor            = 0;
-      _tieBack           = 0;
+//      _tieFor            = 0;
+//      _tieBack           = 0;
+
+      _tieFor   = n._tieFor;
+      _tieBack  = n._tieBack;
+
       _bend              = 0;
       if (n._bend)
             add(new Bend(*n._bend));
