@@ -405,5 +405,6 @@ void Score::updateInputState()
       getAction("no-beam")->setChecked(_is.beamMode    == BEAM_NO);
       getAction("beam32")->setChecked(_is.beamMode     == BEAM_BEGIN32);
       getAction("auto-beam")->setChecked(_is.beamMode  == BEAM_AUTO);
+      getAction("repitch")->setChecked(_is.repitchMode());
       }
 

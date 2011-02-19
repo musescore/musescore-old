@@ -443,12 +443,17 @@ Note* Score::addPitch(int pitch, bool addFlag)
             _is.setTrack(track);
             expandVoice();
             }
-      if(!_is.cr())
+      if (!_is.cr())
             return 0;
       NoteVal nval;
       nval.pitch     = pitch;
       nval.headGroup = headGroup;
-      Segment* seg   = setNoteRest(_is.cr(), track, nval, _is.duration().fraction(), stemDirection);
+      Fraction duration;
+      if (_is.repitchMode())
+            duration = _is.cr()->duration();
+      else
+            duration = _is.duration().fraction();
+      Segment* seg   = setNoteRest(_is.cr(), track, nval, duration, stemDirection);
       Note* note     = 0;
       if (seg) {
             note = static_cast<Chord*>(seg->element(track))->upNote();
@@ -2172,6 +2177,8 @@ void Score::cmd(const QAction* a)
                   changeAccidental(ACC_FLAT);
             else if (cmd == "flat2")
                   changeAccidental(ACC_FLAT2);
+            else if (cmd == "repitch")
+                  _is.setRepitchMode(a->isChecked());
             else if (cmd == "flip")
                   cmdFlip();
             else if (cmd == "stretch+")
