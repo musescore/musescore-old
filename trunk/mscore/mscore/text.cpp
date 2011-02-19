@@ -1635,7 +1635,11 @@ void TextProperties::accept()
 
       QDialog::accept();
       if (tp->isStyled() != text->styled()) {
-            text->setTextStyle(tp->textStyleType());  // this sets styled = true
+            // text->setTextStyle(tp->textStyleType());  // this sets styled = true
+
+            text->_textStyle = tp->textStyleType();
+            text->setText(text->getText());      // init style
+
             text->setStyled(tp->isStyled());
             text->styleChanged();
             }

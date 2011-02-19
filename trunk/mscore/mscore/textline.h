@@ -160,6 +160,8 @@ class LineProperties : public QDialog, public Ui::LinePropertiesDialog {
       Q_OBJECT
 
       TextLine* tl;
+      Text* _beginText;
+      Text* _continueText;
 
    private slots:
       virtual void accept();

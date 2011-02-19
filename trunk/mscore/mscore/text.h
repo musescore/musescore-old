@@ -201,6 +201,7 @@ class Text : public Element {
       QRectF pageRectangle() const;
       virtual void styleChanged();
       virtual void setScore(Score* s);
+      friend class TextProperties;
       };
 
 //---------------------------------------------------------

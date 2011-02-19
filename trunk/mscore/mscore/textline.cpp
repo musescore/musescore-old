@@ -597,6 +597,15 @@ LineProperties::LineProperties(TextLine* l, QWidget* parent)
       lineStyle->setCurrentIndex(int(tl->lineStyle() - 1));
       linecolor->setColor(tl->lineColor());
 
+      if (tl->beginText())
+            _beginText = new Text(*tl->beginText());
+      else
+            _beginText = 0;
+      if (tl->continueText())
+            _continueText = new Text(*tl->continueText());
+      else
+            _continueText = 0;
+
       beginTextRb->setChecked(tl->beginText());
       continueTextRb->setChecked(tl->continueText());
       beginSymbolRb->setChecked(tl->beginSymbol() != -1);
@@ -674,13 +683,26 @@ void LineProperties::accept()
       tl->setBeginHookType(beginHookType90->isChecked() ? HOOK_90 : HOOK_45);
       tl->setEndHookType(endHookType90->isChecked() ? HOOK_90 : HOOK_45);
 
-      if (beginTextRb->isChecked())
-            tl->setBeginText(beginText->text());
+      if (beginTextRb->isChecked()) {
+            if (_beginText) {
+                  _beginText->setText(beginText->text());
+                  tl->setBeginText(_beginText);
+                  }
+            else
+                  tl->setBeginText(beginText->text());
+            }
       else
             tl->setBeginText(0);
 
-      if (continueTextRb->isChecked())
-            tl->setContinueText(continueText->text());
+      if (continueTextRb->isChecked()) {
+            if (_continueText) {
+                  _continueText->setText(continueText->text());
+                  tl->setContinueText(_continueText);
+                  }
+            else {
+                  tl->setContinueText(continueText->text());
+                  }
+            }
       else
             tl->setContinueText(0);
 
@@ -762,10 +784,15 @@ void LineProperties::continueSymbolToggled(bool val)
 
 void LineProperties::beginTextProperties()
       {
-      if (!tl->beginText())
-            return;
-      TextProperties t(tl->beginText(), this);
+      if (!_beginText) {
+            _beginText = new Text(tl->score());
+            _beginText->setSubtype(TEXT_TEXTLINE);
+            _beginText->setTextStyle(TEXT_STYLE_TEXTLINE);
+            }
+      _beginText->setText(beginText->text());
+      TextProperties t(_beginText, this);
       if (t.exec()) {
+            // TODO: delay to ok
             foreach(SpannerSegment* ls, tl->spannerSegments()) {
                   if (ls->spannerSegmentType() != SEGMENT_SINGLE && ls->spannerSegmentType() != SEGMENT_BEGIN)
                         continue;
@@ -784,10 +811,15 @@ void LineProperties::beginTextProperties()
 
 void LineProperties::continueTextProperties()
       {
-      if (!tl->continueText())
-            return;
-      TextProperties t(tl->continueText(), this);
+      if (!_continueText) {
+            _continueText = new Text(tl->score());
+            _continueText->setSubtype(TEXT_TEXTLINE);
+            _continueText->setTextStyle(TEXT_STYLE_TEXTLINE);
+            }
+      _continueText->setText(continueText->text());
+      TextProperties t(_continueText, this);
       if (t.exec()) {
+            // TODO: delay to ok
             foreach(SpannerSegment* ls, tl->spannerSegments()) {
                   if (ls->spannerSegmentType() != SEGMENT_MIDDLE)
                         continue;
