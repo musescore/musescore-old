@@ -1575,7 +1575,8 @@ void Note::endEdit()
       {
       Chord* ch = chord();
       if (ch->notes().size() == 1) {
-            ch->setUserOff(userOff());
+            score()->undoChangeUserOffset(ch, userOff());
+            // ch->setUserOff(userOff());
             setUserOff(QPointF());
             }
       }
