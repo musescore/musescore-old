@@ -128,6 +128,7 @@ StyleType styleTypes[] = {
       StyleType("minEmptyMeasures",        ST_INT),         // minimum number of empty measures for multi measure rest
       StyleType("minMMRestWidth",          ST_SPATIUM),       // minimum width of multi measure rest
       StyleType("hideEmptyStaves",         ST_BOOL),
+      StyleType("dontHidStavesInFirstSystm", ST_BOOL),
 
       StyleType("stemDir1",                ST_DIRECTION),
       StyleType("stemDir2",                ST_DIRECTION),
@@ -457,6 +458,7 @@ StyleData::StyleData()
             StyleVal(ST_minEmptyMeasures, 2),
             StyleVal(ST_minMMRestWidth, Spatium(4)),
             StyleVal(ST_hideEmptyStaves, false),
+            StyleVal(ST_dontHideStavesInFirstSystem, true),
             StyleVal(ST_stemDir1, UP),
             StyleVal(ST_stemDir2, DOWN),
             StyleVal(ST_stemDir3, UP),
