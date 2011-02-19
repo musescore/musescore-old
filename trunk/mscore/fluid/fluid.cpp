@@ -710,10 +710,11 @@ QStringList Fluid::soundFonts() const
 bool Fluid::loadSoundFonts(const QStringList& sl)
       {
       QStringList ol = soundFonts();
-      if (ol == sl)
+      if (ol == sl) {
+            printf("Fluid:loadSoundFonts: already loaded\n");
             return true;
+            }
       mutex.lock();
-
       foreach(Voice* v, activeVoices)
             v->off();
       foreach(Channel* c, channel)
@@ -721,8 +722,9 @@ bool Fluid::loadSoundFonts(const QStringList& sl)
       foreach (SFont* sf, sfonts)
             sfunload(sf->id(), true);
       bool ok = true;
-      foreach (QString s, sl) {
-            if (sfload(s, true) == -1)
+
+      for (int i = sl.size() - 1; i >= 0; --i) {
+            if (sfload(sl[i], true) == -1)
                   ok = false;
             }
       mutex.unlock();
