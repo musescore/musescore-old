@@ -1091,11 +1091,13 @@ bool ChordList::read(const QString& name)
             return false;
       QFile f(path);
       if (!f.open(QIODevice::ReadOnly)) {
-            QString error = QString("cannot open chord description: %1\n").arg(f.fileName());
-            QMessageBox::warning(0,
-               QWidget::tr("MuseScore: Open chord list failed:"),
-               error,
-               QString::null, QString::null, QString::null, 0, 1);
+            if(!noGui) {
+                  QString error = QString("cannot open chord description: %1\n").arg(f.fileName());
+                  QMessageBox::warning(0,
+                     QWidget::tr("MuseScore: Open chord list failed:"),
+                     error,
+                     QString::null, QString::null, QString::null, 0, 1);
+                  }
             return false;
             }
       QDomDocument doc;
