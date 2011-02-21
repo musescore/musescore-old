@@ -2989,8 +2989,13 @@ void ScoreView::startDrag()
 
 void ScoreView::drag(const QPointF& delta)
       {
+      QPointF pt(delta);
+      if (qApp->keyboardModifiers() == Qt::ShiftModifier)
+            pt.setX(0.0);
+      else if (qApp->keyboardModifiers() == Qt::ControlModifier)
+            pt.setY(0.0);
       foreach(Element* e, _score->selection().elements())
-            _score->addRefresh(e->drag(delta));
+            _score->addRefresh(e->drag(pt));
       _score->end();
       }
 

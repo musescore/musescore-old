@@ -1,4 +1,7 @@
 21.feb (ws)
+      - new functionality for drag:
+            - control+drag restricts to horizontal movement
+            - shift+drag   restricts to vertical movement
       - more functionality for chord style editor:
         its now possible to drag new elements from font table to chord symbol
 19.feb (lv)
