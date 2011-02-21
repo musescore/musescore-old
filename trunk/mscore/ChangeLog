@@ -1,5 +1,8 @@
 21.feb (ws)
-      - new functionality for drag:
+      - new drop functions:
+            - control + drop key signature drops ks to all staves
+            (this functionality should also be added to other element types).
+      - new drag functions:
             - control+drag restricts to horizontal movement
             - shift+drag   restricts to vertical movement
       - more functionality for chord style editor:
