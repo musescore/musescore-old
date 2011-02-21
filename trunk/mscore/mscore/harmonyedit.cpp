@@ -246,6 +246,9 @@ HarmonyCanvas::HarmonyCanvas(QWidget* parent)
       chordDescription = 0;
       chordList = 0;
       moveElement = 0;
+      QAction* a = getAction("delete");
+      addAction(a);
+      connect(a, SIGNAL(triggered()), SLOT(deleteAction()));
       }
 
 //---------------------------------------------------------
@@ -562,4 +565,16 @@ void HarmonyCanvas::dragMoveEvent(QDragMoveEvent* event)
             }
       }
 
+//---------------------------------------------------------
+//   deleteAction
+//---------------------------------------------------------
+
+void HarmonyCanvas::deleteAction()
+      {
+      printf("delete Action\n");
+      if (moveElement) {
+            textList.removeOne(moveElement);
+            update();
+            }
+      }
 

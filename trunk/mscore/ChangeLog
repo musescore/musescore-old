@@ -6,7 +6,8 @@
             - control+drag restricts to horizontal movement
             - shift+drag   restricts to vertical movement
       - more functionality for chord style editor:
-        its now possible to drag new elements from font table to chord symbol
+            - its now possible to drag new elements from font table to chord symbol
+            - delete selected element
 19.feb (lv)
       - MusicXML import fixes: Jumps and Markers
        (ws)

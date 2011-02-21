@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2010 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -2798,7 +2798,7 @@ void Score::moveInputPos(Segment* s)
             return;
       _is.setSegment(s);
       emit posChanged(s->tick());
-#if 0 // TODO-S
+#if 0
       Element* el;
       if (s->element(_is.track()))
             el = s->element(_is.track());

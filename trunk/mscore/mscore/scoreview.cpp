@@ -3163,6 +3163,9 @@ void ScoreView::noteEntryButton(QMouseEvent* ev)
       _score->startCmd();
       _score->putNote(p, ev->modifiers() & Qt::ShiftModifier);
       _score->endCmd();
+      ChordRest* cr = _score->inputState().cr();
+      if (cr)
+            adjustCanvasPosition(cr, false);
       }
 
 //---------------------------------------------------------
