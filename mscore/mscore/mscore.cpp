@@ -91,6 +91,7 @@ Shortcut* midiActionMap[128];
 QMap<QString, Shortcut*> shortcuts;
 
 bool converterMode = false;
+bool noGui = false;
 static bool pluginMode = false;
 static bool startWithNewScore = false;
 double converterDpi = 300;
@@ -1759,12 +1760,14 @@ int main(int argc, char* av[])
                         break;
                   case 'o':
                         converterMode = true;
+                        noGui = true;
                         if (argv.size() - i < 2)
                               usage();
                         outFileName = argv.takeAt(i + 1);
                         break;
                   case 'p':
                         pluginMode = true;
+                        noGui = true;
                         if (argv.size() - i < 2)
                               usage();
                         pluginName = argv.takeAt(i + 1);
@@ -1869,7 +1872,7 @@ int main(int argc, char* av[])
             }
 
       QSplashScreen* sc = 0;
-      if (!converterMode && !pluginMode && preferences.showSplashScreen) {
+      if (!noGui && preferences.showSplashScreen) {
             QPixmap pm(":/data/splash.jpg");
             sc = new QSplashScreen(pm);
             sc->setWindowTitle(QString("MuseScore Startup"));
@@ -1968,7 +1971,7 @@ int main(int argc, char* av[])
 #endif
       mscore->setRevision(revision);
 
-      if (!(converterMode || pluginMode)) {
+      if (!noGui) {
             mscore->readSettings();
             QObject::connect(qApp, SIGNAL(messageReceived(const QString&)),
                mscore, SLOT(handleMessage(const QString&)));

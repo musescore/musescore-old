@@ -1405,17 +1405,19 @@ bool Score::importMidi(const QString& name)
             mf.read(&fp);
             }
       catch(QString errorText) {
-            QMessageBox::warning(0,
-               QWidget::tr("MuseScore: load midi"),
-               tr("Load failed: ") + errorText,
-               QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
+            if (!noGui) {
+                  QMessageBox::warning(0,
+                       QWidget::tr("MuseScore: load midi"),
+                       tr("Load failed: ") + errorText,
+                       QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
+                  }
             fp.close();
             return false;
             }
       fp.close();
 
       int shortestNote = AL::division / 16;
-      if (!converterMode) {
+      if (!noGui) {
             ImportMidiDialog id(0);
             id.setShortestNote(shortestNote);
             id.exec();
