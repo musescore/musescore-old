@@ -1638,7 +1638,13 @@ printf("drop staffList\n");
                       }
                   else
                         delete ks;
-                  score()->undoChangeKeySig(staff, tick(), k);
+                  if (data.modifiers & Qt::ControlModifier) {
+                        // apply to all staves:
+                        foreach(Staff* s, score()->staves())
+                              score()->undoChangeKeySig(s, tick(), k);
+                        }
+                  else
+                        score()->undoChangeKeySig(staff, tick(), k);
                   break;
                   }
 
