@@ -246,11 +246,17 @@ Element* KeySig::drop(const DropData& data)
                   else
                         delete ks;
                   }
-            else {
+            else
                   delete ks;
+            if (data.modifiers & Qt::ControlModifier) {
+                  // apply to all staves:
+                  foreach(Staff* s, score()->staves())
+                        score()->undoChangeKeySig(s, tick(), k);
                   }
-            if (k != keySigEvent())
-                  score()->undoChangeKeySig(staff(), tick(), k);
+            else {
+                  if (k != keySigEvent())
+                        score()->undoChangeKeySig(staff(), tick(), k);
+                  }
             return this;
             }
       delete e;
