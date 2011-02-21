@@ -40,7 +40,7 @@ class TrillSegment : public LineSegment {
       virtual TrillSegment* clone() const { return new TrillSegment(*this); }
       virtual void draw(Painter*) const;
       virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
-      virtual Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*);
+      virtual Element* drop(const DropData&);
       virtual void layout();
       };
 

@@ -1,3 +1,6 @@
+21.feb (ws)
+      - more functionality for chord style editor:
+        its now possible to drag new elements from font table to chord symbol
 19.feb (lv)
       - MusicXML import fixes: Jumps and Markers
        (ws)

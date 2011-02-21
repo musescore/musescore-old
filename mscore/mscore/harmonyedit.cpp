@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id:$
 //
-//  Copyright (C) 2009 Werner Schweer and others
+//  Copyright (C) 2009-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -26,6 +26,7 @@
 #include "score.h"
 #include "icons.h"
 #include "pitchspelling.h"
+#include "symbol.h"
 
 extern bool useFactorySettings;
 
@@ -40,55 +41,15 @@ ChordStyleEditor::ChordStyleEditor(QWidget* parent)
       setWindowTitle(tr("MuseScore: Chord Style Editor"));
       fileButton->setIcon(*icons[fileOpen_ICON]);
       chordList = 0;
+//      paletteTab->clear();
 
-      // create symbol palette
-      QLayout* l = new QVBoxLayout();
-      l->setContentsMargins(0, 0, 0, 0);
-      paletteFrame->setLayout(l);
-      sp1 = new Palette();
-      PaletteScrollArea* accPalette = new PaletteScrollArea(sp1);
-      QSizePolicy policy1(QSizePolicy::Expanding, QSizePolicy::Expanding);
-      accPalette->setSizePolicy(policy1);
-      accPalette->setRestrictHeight(false);
-
-      l->addWidget(accPalette);
-      sp1->setGrid(33, 36);
-
-#if 0
-      for (int i = 16; i < 26+9; ++i) {
-            Accidental* s = new Accidental(gscore);
-            s->setSubtype(i);
-            sp1->append(s, qApp->translate("Accidental", s->subTypeName()));
-            }
-#endif
-
-#if 0
-      if (!useFactorySettings) {
-            QFile f(dataPath + "/" + "keysigs.xml");
-            if (f.exists() && sp->read(&f))
-                  return;
-            }
-      //
-      // create default palette
-      //
-      for (int i = 0; i < 7; ++i) {
-            KeySig* k = new KeySig(gscore);
-            k->setSubtype(i+1);
-            sp->append(k, qApp->translate("MuseScore", keyNames[i*2]));
-            }
-      for (int i = -7; i < 0; ++i) {
-            KeySig* k = new KeySig(gscore);
-            k->setSubtype(i & 0xff);
-            sp->append(k, qApp->translate("MuseScore", keyNames[(7 + i) * 2 + 1]));
-            }
-      KeySig* k = new KeySig(gscore);
-      k->setSubtype(0);
-      sp->append(k, qApp->translate("MuseScore", keyNames[14]));
-#endif
       connect(fileButton, SIGNAL(clicked()), SLOT(fileButtonClicked()));
       connect(saveButton, SIGNAL(clicked()), SLOT(saveButtonClicked()));
       connect(harmonyList, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),
          SLOT(harmonyChanged(QTreeWidgetItem*,QTreeWidgetItem*)));
+
+      // for debugging:
+      loadChordDescriptionFile("/usr/local/share/mscore-2.0/styles/jazzchords.xml");
       }
 
 //---------------------------------------------------------
@@ -112,14 +73,7 @@ void MuseScore::editChordStyle()
 
 void ChordStyleEditor::fileButtonClicked()
       {
-      QString path = QString("%1styles/").arg(mscoreGlobalShare);
-      QString fn = QFileDialog::getOpenFileName(
-         0, QWidget::tr("MuseScore: Load Chord Description File"),
-         path,
-            QWidget::tr("MuseScore Chord Description (*.xml);;"
-            "All Files (*)"
-            )
-         );
+      QString fn = mscore->getChordStyleFilename(true);
       if (fn.isEmpty())
             return;
       loadChordDescriptionFile(fn);
@@ -136,14 +90,7 @@ void ChordStyleEditor::saveButtonClicked()
       ChordDescription* d = canvas->getChordDescription();
       updateChordDescription(d);
 
-      QString path = QString("%1styles/").arg(mscoreGlobalShare);
-      QString fn = QFileDialog::getSaveFileName(
-         0, QWidget::tr("MuseScore: Save Chord Description File"),
-         path,
-            QWidget::tr("MuseScore Chord Description (*.xml);;"
-            "All Files (*)"
-            )
-         );
+      QString fn = mscore->getChordStyleFilename(false);
       if (fn.isEmpty())
             return;
       chordList->write(fn);
@@ -178,6 +125,33 @@ void ChordStyleEditor::loadChordDescriptionFile(const QString& s)
             delete chordList;
       chordList = cl;
       canvas->setChordDescription(0, 0);
+
+      paletteTab->clear();
+      foreach(const ChordFont& f, chordList->fonts) {
+            // create symbol palette
+            Palette* p = new Palette();
+            PaletteScrollArea* accPalette = new PaletteScrollArea(p);
+            QSizePolicy policy1(QSizePolicy::Expanding, QSizePolicy::Expanding);
+            accPalette->setSizePolicy(policy1);
+            accPalette->setRestrictHeight(false);
+            p->setGrid(50, 50);
+            paletteTab->addTab(accPalette, f.family);
+            QFont qf(f.family);
+            qf.setStyleStrategy(QFont::NoFontMerging);
+            int size = lrint(20.0 * DPI / PPI);
+            qf.setPixelSize(size);
+
+            QFontMetricsF fi(qf);
+            for (int i = 0; i < 255; ++i) {
+                  if (fi.inFont(QChar(i))) {
+                        FSymbol* s = new FSymbol(gscore);
+                        s->setFont(qf);
+                        s->setCode(i);
+                        p->append(s, "??");
+                        }
+                  }
+            }
+      raise();
       }
 
 //---------------------------------------------------------
@@ -284,6 +258,7 @@ void HarmonyCanvas::paintEvent(QPaintEvent* event)
       if (!chordDescription)
             return;
 
+      double oldSpatium = gscore->spatium();
       double spatium = 2.0 * PALETTE_SPATIUM / extraMag;
       gscore->setSpatium(spatium);
 
@@ -310,6 +285,29 @@ void HarmonyCanvas::paintEvent(QPaintEvent* event)
             p.setPen(pen);
             p.drawText(ts->x, ts->y, ts->text);
             }
+
+      if (dragElement && dragElement->type() == FSYMBOL) {
+            FSymbol* sb = static_cast<FSymbol*>(dragElement);
+            double _spatium = 2.0 * PALETTE_SPATIUM / extraMag;
+
+            const TextStyle* st = &gscore->textStyle(TEXT_STYLE_HARMONY);
+            QFont ff(st->fontPx(_spatium));
+            ff.setFamily(sb->font().family());
+
+            QString s;
+            int code = sb->code();
+            if (code & 0xffff0000) {
+                  s = QChar(QChar::highSurrogate(code));
+                  s += QChar(QChar::lowSurrogate(code));
+                  }
+            else
+                  s = QChar(code);
+            p.setFont(ff);
+            QPen pen(Qt::yellow);
+            p.setPen(pen);
+            p.drawText(dragElement->pos(), s);
+            }
+      gscore->setSpatium(oldSpatium);
       }
 
 //---------------------------------------------------------
@@ -470,4 +468,98 @@ void HarmonyCanvas::setChordDescription(ChordDescription* sd, ChordList* sl)
       moveElement = 0;
       update();
       }
+
+//---------------------------------------------------------
+//   dropEvent
+//---------------------------------------------------------
+
+void HarmonyCanvas::dropEvent(QDropEvent* event)
+      {
+      if (dragElement && dragElement->type() == FSYMBOL) {
+            FSymbol* sb = static_cast<FSymbol*>(dragElement);
+            double _spatium = 2.0 * PALETTE_SPATIUM / extraMag;
+
+            const TextStyle* st = &gscore->textStyle(TEXT_STYLE_HARMONY);
+            QFont ff(st->fontPx(_spatium));
+            ff.setFamily(sb->font().family());
+
+//            printf("drop %s\n", dragElement->name());
+
+            QString s;
+            int code = sb->code();
+            if (code & 0xffff0000) {
+                  s = QChar(QChar::highSurrogate(code));
+                  s += QChar(QChar::lowSurrogate(code));
+                  }
+            else
+                  s = QChar(code);
+
+            QPointF pt = imatrix.map(event->pos());
+
+            TextSegment* ts = new TextSegment(s, ff, pt.x(), pt.y());
+            textList.append(ts);
+            delete dragElement;
+            dragElement = 0;
+            update();
+            }
+      }
+
+//---------------------------------------------------------
+//   dragEnterEvent
+//---------------------------------------------------------
+
+void HarmonyCanvas::dragEnterEvent(QDragEnterEvent* event)
+      {
+      const QMimeData* data = event->mimeData();
+      if (data->hasFormat(mimeSymbolFormat)) {
+            QByteArray a = data->data(mimeSymbolFormat);
+
+//          printf("ScoreView::dragEnterEvent: <%s>\n", a.data());
+
+            QDomDocument doc;
+            int line, column;
+            QString err;
+            if (!doc.setContent(a, &err, &line, &column)) {
+                  printf("error reading drag data at %d/%d: %s\n<%s>\n",
+                     line, column, err.toLatin1().data(), a.data());
+                  return;
+                  }
+            docName = "--";
+            QDomElement e = doc.documentElement();
+
+            QPointF dragOffset;
+            ElementType type = Element::readType(e, &dragOffset);
+            if (type == FSYMBOL) {
+                  event->acceptProposedAction();
+                  dragElement = Element::create(type, gscore);
+                  dragElement->read(e);
+                  dragElement->layout();
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   dragLeaveEvent
+//---------------------------------------------------------
+
+void HarmonyCanvas::dragLeaveEvent(QDragLeaveEvent*)
+      {
+      delete dragElement;
+      dragElement = 0;
+      update();
+      }
+
+//---------------------------------------------------------
+//   dragMoveEvent
+//---------------------------------------------------------
+
+void HarmonyCanvas::dragMoveEvent(QDragMoveEvent* event)
+      {
+      event->acceptProposedAction();
+      if (dragElement && dragElement->type() == FSYMBOL) {
+            dragElement->setPos(imatrix.map(event->pos()));
+            update();
+            }
+      }
+
 

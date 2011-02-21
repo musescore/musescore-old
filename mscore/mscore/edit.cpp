@@ -1689,9 +1689,8 @@ void ScoreView::changeVoice(int voice)
 void Score::toggleInvisible(Element* e)
       {
       undoToggleInvisible(e);
-
       e->setGenerated(false);
-      refresh |= e->abbox();
+#if 0       // TODOxx
       if (e->type() == BAR_LINE) {
             Element* pe = e->parent();
             if (pe->type() == SEGMENT && pe->subtype() == SegEndBarLine) {
@@ -1700,7 +1699,6 @@ void Score::toggleInvisible(Element* e)
                   m->setEndBarLineType(bl->barLineType(), false, e->visible(), e->color());
                   }
             }
-#if 0       // TODOxx
       else if (e->type() == TEXT && e->subtype() == TEXT_INSTRUMENT_SHORT) {
             Part* part = e->staff()->part();
             part->shortName()->setVisible(e->visible());

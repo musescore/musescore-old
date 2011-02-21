@@ -104,7 +104,7 @@ enum ElementType {
       MEASURE, STAFF_LINES,
       CURSOR, SELECTION, LASSO, SHADOW_NOTE, RUBBERBAND,
       TAB_DURATION_SYMBOL,
-
+      FSYMBOL,
       PAGE,
 
       // not drawable elements:

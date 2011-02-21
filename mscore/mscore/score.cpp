@@ -95,14 +95,14 @@ InputState::InputState() :
    _drumset(0),
    _track(0),
    _segment(0),
+   _repitchMode(false),
    rest(false),
    pad(0),
    pitch(72),
    noteType(NOTE_NORMAL),
    beamMode(BEAM_AUTO),
    noteEntryMode(false),
-   slur(0),
-   _repitchMode(false)
+   slur(0)
       {
       }
 

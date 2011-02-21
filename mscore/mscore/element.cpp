@@ -148,6 +148,7 @@ static const char* elementNames[] = {
       QT_TRANSLATE_NOOP("elementName", "ShadowNote"),
       QT_TRANSLATE_NOOP("elementName", "RubberBand"),
       QT_TRANSLATE_NOOP("elementName", "TabDurationSymbol"),
+      QT_TRANSLATE_NOOP("elementName", "FSymbol"),
       QT_TRANSLATE_NOOP("elementName", "Page"),
       QT_TRANSLATE_NOOP("elementName", "HairPin"),
       QT_TRANSLATE_NOOP("elementName", "Ottava"),
@@ -659,7 +660,7 @@ void Element::read(QDomElement e)
 bool Element::genPropertyMenu(QMenu* popup) const
       {
       QAction* a;
-      if (!_generated && (type() != LAYOUT_BREAK)) {
+      if ((!_generated || type() == BAR_LINE) && (type() != LAYOUT_BREAK)) {
             if (visible())
                   a = popup->addAction(tr("Set Invisible"));
             else
@@ -679,9 +680,10 @@ void Element::propertyAction(ScoreView*, const QString& s)
       {
       foreach(Element* e, score()->selection().elements()) {
             if (e->type() == type()) {
-                  if (s == "invisible")
+                  if (s == "invisible") {
                         score()->toggleInvisible(e);
-                  else if (s == "color"){
+                        }
+                  else if (s == "color") {
                         score()->colorItem(e);
                         break;
                         }
@@ -1281,6 +1283,7 @@ Element* Element::create(ElementType type, Score* score)
             case ICON:              return new Icon(score);
             case NOTE:              return new Note(score);
             case SYMBOL:            return new Symbol(score);
+            case FSYMBOL:           return new FSymbol(score);
             case CHORD:             return new Chord(score);
             case REST:              return new Rest(score);
             case SPACER:            return new Spacer(score);
@@ -1346,6 +1349,7 @@ const char* Element::name(ElementType type)
       {
       switch(type) {
             case SYMBOL:            return "Symbol";
+            case FSYMBOL:           return "FSymbol";
             case TEXT:              return "Text";
             case SLUR_SEGMENT:      return "SlurSegment";
             case BAR_LINE:          return "BarLine";

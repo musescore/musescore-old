@@ -168,8 +168,35 @@ void OmrSystem::searchBarLines()
       //    - barlines which are really note stems
       //
       QList<QLineF> nbl;
-      foreach(const QLineF& l, barLines) {
+      double x = -10000.0;
+      double spatium = _page->spatium();
+      int nbar = 0;
+      int i = 0;
+      int n = barLines.size();
+      for (int i = 0; i < n; ++i) {
+            const QLineF& l = barLines[i];
+            double nx = l.x1();
+            if ((nx - x) > spatium) {
+                  //
+                  // check for start repeat:
+                  //
+                  if ((nbar == 1)
+                     && ((nx-x)/spatium < 8.0)   // at begin of system?
+//                     && (i < (n-1))
+//                     && ((barLines[i+1].x1() - x) < spatium)    // double bar line?
+                                                 // missing: check fo note heads
+                                                 // up to here
+                     ) {
+printf("2-SKIP REPEAT?\n");
+                        x = nx;
+                        continue;
+                        }
+                  nbl.append(l);
+                  x = nx;
+                  ++nbar;
+                  }
             }
+      barLines = nbl;
       }
 
 //---------------------------------------------------------

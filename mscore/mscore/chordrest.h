@@ -66,7 +66,7 @@ class ChordRest : public DurationElement {
       ~ChordRest();
       virtual ElementType type() const = 0;
       virtual QPointF canvasPos() const;      ///< position in canvas coordinates
-      virtual Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*);
+      virtual Element* drop(const DropData&);
 
       Segment* segment() const                   { return (Segment*)parent(); }
       virtual Measure* measure() const           { return (Measure*)(parent()->parent()); }

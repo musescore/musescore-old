@@ -1560,15 +1560,16 @@ bool Measure::acceptDrop(ScoreView* viewer, const QPointF& p, int type, int) con
 ///   element \a type and \a subtype.
 //---------------------------------------------------------
 
-Element* Measure::drop(ScoreView*, const QPointF& p, const QPointF& dragOffset, Element* e)
+Element* Measure::drop(const DropData& data)
       {
+      Element* e = data.element;
       int staffIdx;
       Segment* seg;
-      _score->pos2measure(p, &staffIdx, 0, &seg, 0);
+      _score->pos2measure(data.pos, &staffIdx, 0, &seg, 0);
 
       if (e->systemFlag())
             staffIdx = 0;
-      QPointF mrp(p - canvasPos());
+      QPointF mrp(data.pos - canvasPos());
 //      double mrpx  = mrp.x();
       Staff* staff = score()->staff(staffIdx);
 
@@ -1603,7 +1604,7 @@ printf("drop staffList\n");
                   e->setTrack(staffIdx * VOICES);
                   e->layout();
                   {
-                  QPointF uo(p - e->canvasPos() - dragOffset);
+                  QPointF uo(data.pos - e->canvasPos() - data.dragOffset);
                   e->setUserOff(uo);
                   }
                   score()->undoAddElement(e);
@@ -2033,7 +2034,8 @@ void Measure::read(QDomElement e, int staffIdx)
                         s->add(barLine);
                         }
                   else {
-                        setEndBarLineType(barLine->barLineType(), false, barLine->visible(), barLine->color());
+                        // setEndBarLineType(barLine->barLineType(), false, barLine->visible(), barLine->color());
+                        setEndBarLineType(barLine->barLineType(), false, true, Qt::black);
                         Staff* staff = score()->staff(staffIdx);
                         barLine->setSpan(staff->barLineSpan());
                         Segment* s = getSegment(SegEndBarLine, score()->curTick);
@@ -2531,12 +2533,12 @@ bool Measure::createEndBarLines()
                         bl = static_cast<BarLine*>(seg->element(track));
                         if (bl == 0) {
                               bl = new BarLine(score());
+                              bl->setVisible(_endBarLineVisible);
+                              bl->setColor(_endBarLineColor);
+                              bl->setGenerated(bl->el()->isEmpty() && _endBarLineGenerated);
                               changed = true;
                               }
                         bl->setTrack(track);
-                        bl->setVisible(_endBarLineVisible);
-                        bl->setColor(_endBarLineColor);
-                        bl->setGenerated(bl->el()->isEmpty() && _endBarLineGenerated);
                         BarLineType et = _multiMeasure > 0 ? _mmEndBarLineType : _endBarLineType;
                         if (bl->subtype() != et) {
                               bl->setBarLineType(et);

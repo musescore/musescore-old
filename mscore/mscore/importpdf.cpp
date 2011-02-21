@@ -49,8 +49,16 @@ bool Score::importPdf(const QString& path)
       style()->set(StyleVal(ST_pageFillLimit, 1.0));
       style()->set(StyleVal(ST_lastSystemFillLimit, 0.0));
       style()->set(StyleVal(ST_staffLowerBorder, 0.0));
-      _pageFormat->evenBottomMargin = 10.0 * DPMM / DPI;
-      _pageFormat->oddBottomMargin  = 10.0 * DPMM / DPI;
+      style()->set(StyleVal(ST_measureSpacing, 1.0));
+
+      _pageFormat->evenLeftMargin   = 5.0 * DPMM / DPI;
+      _pageFormat->evenRightMargin  = 5.0 * DPMM / DPI;
+      _pageFormat->evenTopMargin    = 0;
+      _pageFormat->evenBottomMargin = 0;
+      _pageFormat->oddLeftMargin    = 5.0 * DPMM / DPI;
+      _pageFormat->oddRightMargin   = 5.0 * DPMM / DPI;
+      _pageFormat->oddTopMargin     = 0;
+      _pageFormat->oddBottomMargin  = 0;
 
       style()->set(StyleVal(ST_systemDistance,   Spatium(_omr->systemDistance())));
       style()->set(StyleVal(ST_akkoladeDistance, Spatium(_omr->staffDistance())));

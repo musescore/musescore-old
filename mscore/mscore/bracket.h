@@ -72,7 +72,7 @@ class Bracket : public Element {
       virtual QPointF gripAnchor(int grip) const;
 
       virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
-      virtual Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*);
+      virtual Element* drop(const DropData&);
       };
 
 #endif

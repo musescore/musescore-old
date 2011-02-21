@@ -357,8 +357,9 @@ bool Box::acceptDrop(ScoreView*, const QPointF&, int type, int) const
 //   drop
 //---------------------------------------------------------
 
-Element* Box::drop(ScoreView*, const QPointF&, const QPointF&, Element* e)
+Element* Box::drop(const DropData& data)
       {
+      Element* e = data.element;
       switch(e->type()) {
             case LAYOUT_BREAK:
                   {

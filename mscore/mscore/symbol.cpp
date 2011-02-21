@@ -96,8 +96,9 @@ bool BSymbol::acceptDrop(ScoreView*, const QPointF&, int type, int) const
 //   drop
 //---------------------------------------------------------
 
-Element* BSymbol::drop(ScoreView*, const QPointF&, const QPointF&, Element* el)
+Element* BSymbol::drop(const DropData& data)
       {
+      Element* el = data.element;
       if (el->type() == SYMBOL || el->type() == IMAGE) {
             el->setParent(this);
             score()->undoAddElement(el);
@@ -342,3 +343,120 @@ QPointF BSymbol::canvasPos() const
       else
             return Element::canvasPos();
       }
+
+//---------------------------------------------------------
+//   FSymbol
+//---------------------------------------------------------
+
+FSymbol::FSymbol(Score* s)
+  : Element(s)
+      {
+      _font.setStyleStrategy(QFont::NoFontMerging);
+      }
+
+FSymbol::FSymbol(const FSymbol& s)
+  : Element(s)
+      {
+      _font = s._font;
+      _code = s._code;
+      }
+
+//---------------------------------------------------------
+//   draw
+//---------------------------------------------------------
+
+void FSymbol::draw(Painter* painter) const
+      {
+      QString s;
+      painter->setFont(_font);
+      if (_code & 0xffff0000) {
+            s = QChar(QChar::highSurrogate(_code));
+            s += QChar(QChar::lowSurrogate(_code));
+            }
+      else
+            s = QChar(_code);
+      painter->drawText(0, 0, s);
+      }
+
+//---------------------------------------------------------
+//   write
+//---------------------------------------------------------
+
+void FSymbol::write(Xml& xml) const
+      {
+      xml.stag(name());
+      xml.tag("font", _font.family());
+      xml.tag("fontsize", _font.pixelSize());
+      xml.tag("code", _code);
+      Element::writeProperties(xml);
+      xml.etag();
+      }
+
+//---------------------------------------------------------
+//   read
+//---------------------------------------------------------
+
+void FSymbol::read(QDomElement e)
+      {
+      QPointF pos;
+      int s = -1;
+
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            QString tag(e.tagName());
+            QString val(e.text());
+            if (tag == "font")
+                  _font.setFamily(val);
+            else if (tag == "fontsize")
+                  _font.setPixelSize(val.toInt());
+            else if (tag == "code")
+                  _code = val.toInt();
+            else if (!Element::readProperties(e))
+                  domError(e);
+            }
+      setPos(pos);
+      }
+
+//---------------------------------------------------------
+//   layout
+//---------------------------------------------------------
+
+void FSymbol::layout()
+      {
+      QString s;
+      if (_code & 0xffff0000) {
+            s = QChar(QChar::highSurrogate(_code));
+            s += QChar(QChar::lowSurrogate(_code));
+            }
+      else
+            s = QChar(_code);
+      QFontMetricsF fm(_font);
+      setbbox(fm.boundingRect(s));
+      }
+
+//---------------------------------------------------------
+//   genPropertyMenu
+//---------------------------------------------------------
+
+bool FSymbol::genPropertyMenu(QMenu*) const
+      {
+      return false;
+      }
+
+//---------------------------------------------------------
+//   propertyAction
+//---------------------------------------------------------
+
+void FSymbol::propertyAction(ScoreView*, const QString&)
+      {
+      }
+
+//---------------------------------------------------------
+//   setFont
+//---------------------------------------------------------
+
+void FSymbol::setFont(const QFont& f)
+      {
+      _font = f;
+      _font.setStyleStrategy(QFont::NoFontMerging);
+      }
+

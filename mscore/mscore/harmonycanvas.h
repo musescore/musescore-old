@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id:$
 //
-//  Copyright (C) 2009 Werner Schweer and others
+//  Copyright (C) 2009-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -42,10 +42,17 @@ class HarmonyCanvas : public QFrame {
       QPointF startMove;
       TextSegment* moveElement;
 
+      Element* dragElement;
+
       virtual void paintEvent(QPaintEvent*);
       virtual void mousePressEvent(QMouseEvent*);
       virtual void mouseMoveEvent(QMouseEvent*);
       virtual void mouseReleaseEvent(QMouseEvent*);
+      virtual void dropEvent(QDropEvent*);
+      virtual void dragEnterEvent(QDragEnterEvent*);
+      virtual void dragLeaveEvent(QDragLeaveEvent*);
+      virtual void dragMoveEvent(QDragMoveEvent*);
+
       void render(const QList<RenderAction>&, double& x, double& y, int tpc);
 
    public:

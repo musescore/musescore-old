@@ -382,7 +382,7 @@ void SynthControl::setAeolusValue(double val, int idx)
 //   currentSoundFontChanged
 //---------------------------------------------------------
 
-void SynthControl::currentSoundFontChanged(int row)
+void SynthControl::currentSoundFontChanged(int /*row*/)
       {
       updateUpDownButtons();
       }

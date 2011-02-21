@@ -420,8 +420,9 @@ bool BarLine::acceptDrop(ScoreView*, const QPointF&, int type, int) const
 //   drop
 //---------------------------------------------------------
 
-Element* BarLine::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Element* e)
+Element* BarLine::drop(const DropData& data)
       {
+      Element* e = data.element;
       int type = e->type();
       int st   = e->subtype();
       if (type == BAR_LINE) {
@@ -437,7 +438,7 @@ Element* BarLine::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, El
                         return 0;
                         }
                   }
-            m->drop(view, p1, p2, e);
+            m->drop(data);
             }
       else if (type == ARTICULATION) {
             Articulation* atr = static_cast<Articulation*>(e);

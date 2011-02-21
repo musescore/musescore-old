@@ -116,7 +116,7 @@ class Clef : public Element {
       Measure* measure() const         { return (Measure*)parent()->parent(); }
 
       virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
-      virtual Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*);
+      virtual Element* drop(const DropData&);
       virtual void layout();
       virtual void draw(Painter*) const;
       virtual Space space() const;

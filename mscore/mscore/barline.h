@@ -55,7 +55,7 @@ class BarLine : public Element {
       virtual void remove(Element*);
 
       virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
-      virtual Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*);
+      virtual Element* drop(const DropData&);
       void setSpan(int val)    { _span = val;  }
       int span() const         { return _span; }
       Segment* segment() const { return (Segment*)parent(); }

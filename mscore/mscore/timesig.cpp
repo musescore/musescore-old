@@ -128,8 +128,9 @@ bool TimeSig::acceptDrop(ScoreView*, const QPointF&, int type, int) const
 //   drop
 //---------------------------------------------------------
 
-Element* TimeSig::drop(ScoreView*, const QPointF&, const QPointF&, Element* e)
+Element* TimeSig::drop(const DropData& data)
       {
+      Element* e = data.element;
       if (e->type() == TIMESIG) {
             // change timesig applies to all staves, can't simply set subtype
             // for this one only
