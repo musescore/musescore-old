@@ -55,6 +55,9 @@ class HarmonyCanvas : public QFrame {
 
       void render(const QList<RenderAction>&, double& x, double& y, int tpc);
 
+   private slots:
+      void deleteAction();
+
    public:
       HarmonyCanvas(QWidget* parent = 0);
       void setChordDescription(ChordDescription* sd, ChordList* cl);

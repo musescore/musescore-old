@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2010 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -145,7 +145,6 @@ int Score::pos()
 
 Rest* Score::addRest(int tick, int track, Duration d, Tuplet* tuplet)
       {
-printf("addRest1 %d\n", track);
       Measure* measure = tick2measure(tick);
       Rest* rest       = new Rest(this, d);
       rest->setDuration(d.type() == Duration::V_MEASURE ? measure->len() : d.fraction());
@@ -161,7 +160,6 @@ printf("addRest1 %d\n", track);
 
 Rest* Score::addRest(Segment* s, int track, Duration d, Tuplet* tuplet)
       {
-printf("addRest2 %d\n", track);
       Rest* rest = new Rest(this, d);
       rest->setDuration(d.type() == Duration::V_MEASURE ? s->measure()->len() : d.fraction());
       rest->setTrack(track);
