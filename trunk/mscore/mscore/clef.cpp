@@ -342,8 +342,9 @@ bool Clef::acceptDrop(ScoreView*, const QPointF&, int type, int) const
 //   drop
 //---------------------------------------------------------
 
-Element* Clef::drop(ScoreView*, const QPointF&, const QPointF&, Element* e)
+Element* Clef::drop(const DropData& data)
       {
+      Element* e = data.element;
       Element* clef = 0;
       if (e->type() == CLEF) {
             int stype  = e->subtype();

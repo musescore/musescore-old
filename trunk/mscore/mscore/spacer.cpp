@@ -112,9 +112,9 @@ bool Spacer::acceptDrop(ScoreView*, const QPointF&, int, int) const
 //   drop
 //---------------------------------------------------------
 
-Element* Spacer::drop(ScoreView*, const QPointF&, const QPointF&, Element* e)
+Element* Spacer::drop(const DropData& data)
       {
-      return e;
+      return data.element;
       }
 
 //---------------------------------------------------------

@@ -93,6 +93,18 @@ class LinkedElements : public QList<Element*> {
       };
 
 //---------------------------------------------------------
+//   DropData
+//---------------------------------------------------------
+
+struct DropData {
+      ScoreView* view;
+      QPointF pos;
+      QPointF dragOffset;
+      Element* element;
+      Qt::KeyboardModifiers modifiers;
+      };
+
+//---------------------------------------------------------
 ///   \brief base class of score layout elements
 ///
 ///   The Element class is the virtual base class of all
@@ -277,7 +289,7 @@ class Element {
 
  Reimplemented by elements that accept drops.
 */
-      virtual Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*) { return 0;}
+      virtual Element* drop(const DropData&) { return 0;}
 
 /**
  Return a name for a \a subtype. Used for outputting xml data.

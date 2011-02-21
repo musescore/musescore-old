@@ -35,7 +35,6 @@ class Symbol : public BSymbol {
 
    protected:
       int _sym;
-//      bool _small;
 
    public:
       Symbol(Score* s);
@@ -58,11 +57,40 @@ class Symbol : public BSymbol {
       void setAbove(bool);
 
       virtual qreal baseLine() const { return 0.0; }
-      Segment* segment() const { return (Segment*)parent(); }
-//      bool small() const       { return _small; }
-//      void setSmall(bool val)  { _small = val; }
+      Segment* segment() const       { return (Segment*)parent(); }
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(ScoreView*, const QString&);
+      };
+
+//---------------------------------------------------------
+//   FSymbol
+//    score symbol
+//---------------------------------------------------------
+
+class FSymbol : public Element {
+      QFont _font;
+      int _code;
+
+   public:
+      FSymbol(Score* s);
+      FSymbol(const FSymbol&);
+
+      virtual FSymbol* clone() const    { return new FSymbol(*this); }
+      virtual ElementType type() const  { return FSYMBOL; }
+
+      virtual void draw(Painter*) const;
+      virtual void write(Xml& xml) const;
+      virtual void read(QDomElement);
+      virtual void layout();
+
+      virtual qreal baseLine() const { return 0.0; }
+      Segment* segment() const       { return (Segment*)parent(); }
+      virtual bool genPropertyMenu(QMenu*) const;
+      virtual void propertyAction(ScoreView*, const QString&);
+      QFont font() const           { return _font; }
+      int code() const             { return _code; }
+      void setFont(const QFont& f);
+      void setCode(int val)        { _code = val; }
       };
 
 #endif

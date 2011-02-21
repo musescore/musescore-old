@@ -1660,8 +1660,9 @@ void Chord::pitchChanged()
 //   drop
 //---------------------------------------------------------
 
-Element* Chord::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Element* e)
+Element* Chord::drop(const DropData& data)
       {
+      Element* e = data.element;
       switch (e->type()) {
             case ARTICULATION:
                   {
@@ -1713,7 +1714,7 @@ Element* Chord::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Elem
                   score()->undoAddElement(e);
                   break;
             default:
-                  return ChordRest::drop(view, p1, p2, e);
+                  return ChordRest::drop(data);
             }
       return 0;
       }

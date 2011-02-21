@@ -43,6 +43,8 @@ EditStyle::EditStyle(Score* s, QWidget* parent)
       setModal(true);
       setupUi(this);
 
+      chordDescriptionFileButton->setIcon(*icons[fileOpen_ICON]);
+
       stemGroups[0] = new QButtonGroup(this);
       stemGroups[0]->addButton(voice1Up);
       stemGroups[0]->addButton(voice1Down);
@@ -426,12 +428,7 @@ void EditStyle::setValues()
 
 void EditStyle::selectChordDescriptionFile()
       {
-      QString path = QString("%1styles/%2").arg(mscoreGlobalShare).arg(chordDescriptionFile->text());
-      QString fn = QFileDialog::getOpenFileName(
-         0, QWidget::tr("MuseScore: Load Chord Description"),
-         path,
-         QWidget::tr("MuseScore Chord Description (*.xml);;All Files (*)")
-         );
+      QString fn = mscore->getChordStyleFilename(true);
       if (fn.isEmpty())
             return;
       QFileInfo fi(fn);

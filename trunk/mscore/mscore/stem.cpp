@@ -172,8 +172,9 @@ bool Stem::acceptDrop(ScoreView*, const QPointF&, int type, int subtype) const
 //   drop
 //---------------------------------------------------------
 
-Element* Stem::drop(ScoreView*, const QPointF&, const QPointF&, Element* e)
+Element* Stem::drop(const DropData& data)
       {
+      Element* e = data.element;
       Chord* ch = chord();
       switch(e->type()) {
             case TREMOLO:

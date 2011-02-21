@@ -2379,7 +2379,13 @@ void Score::cmdPaste(ScoreView* view)
                                     }
                               }
 #endif
-                        selection().element()->drop(view, QPointF(), QPointF(), el);
+                        DropData ddata;
+                        ddata.view       = view;
+                        ddata.pos        = QPointF();
+                        ddata.dragOffset = QPointF();
+                        ddata.element    = el;
+                        ddata.modifiers  = 0;
+                        selection().element()->drop(ddata);
                         if (selection().element())
                               addRefresh(selection().element()->abbox());
                         }

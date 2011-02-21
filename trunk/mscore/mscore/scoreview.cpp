@@ -1941,6 +1941,13 @@ void ScoreView::dropEvent(QDropEvent* event)
       {
       QPointF pos(imatrix.map(QPointF(event->pos())));
 
+      DropData dropData;
+      dropData.view       = this;
+      dropData.pos        = pos;
+      dropData.dragOffset = dragOffset;
+      dropData.element    = dragElement;
+      dropData.modifiers  = event->keyboardModifiers();
+
       if (dragElement) {
             _score->startCmd();
             dragElement->setScore(_score);      // CHECK: should already be ok
@@ -1978,7 +1985,8 @@ void ScoreView::dropEvent(QDropEvent* event)
                              }
                         _score->addRefresh(el->abbox());
                         _score->addRefresh(dragElement->abbox());
-                        Element* dropElement = el->drop(this, pos, dragOffset, dragElement);
+
+                        Element* dropElement = el->drop(dropData);
                         _score->addRefresh(el->abbox());
                         if (dropElement) {
                               _score->select(dropElement, SELECT_SINGLE, 0);
@@ -2032,7 +2040,7 @@ void ScoreView::dropEvent(QDropEvent* event)
                               }
                         _score->addRefresh(el->abbox());
                         _score->addRefresh(dragElement->abbox());
-                        Element* dropElement = el->drop(this, pos, dragOffset, dragElement);
+                        Element* dropElement = el->drop(dropData);
                         _score->addRefresh(el->abbox());
                         if (dropElement) {
                               if (!_score->noteEntryMode())

@@ -198,8 +198,9 @@ bool Rest::acceptDrop(ScoreView*, const QPointF&, int type, int subtype) const
 //   drop
 //---------------------------------------------------------
 
-Element* Rest::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Element* e)
+Element* Rest::drop(const DropData& data)
       {
+      Element* e = data.element;
       switch (e->type()) {
             case ARTICULATION:
                   if (e->subtype() == UfermataSym || e->subtype() == DfermataSym)
@@ -250,7 +251,7 @@ Element* Rest::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Eleme
                   }
                   break;
             default:
-                  return ChordRest::drop(view, p1, p2, e);
+                  return ChordRest::drop(data);
             }
       return 0;
       }

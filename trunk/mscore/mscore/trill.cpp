@@ -103,8 +103,9 @@ bool TrillSegment::acceptDrop(ScoreView*, const QPointF&, int type, int /*subtyp
 //   drop
 //---------------------------------------------------------
 
-Element* TrillSegment::drop(ScoreView*, const QPointF&, const QPointF&, Element* e)
+Element* TrillSegment::drop(const DropData& data)
       {
+      Element* e = data.element;
       switch(e->type()) {
             case ACCIDENTAL:
                   e->setParent(trill());

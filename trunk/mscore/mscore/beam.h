@@ -126,7 +126,7 @@ class Beam : public Element {
       virtual QPainterPath shape() const;
       virtual bool contains(const QPointF& p) const;
       virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
-      virtual Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*);
+      virtual Element* drop(const DropData&);
 
       double grow1() const      { return _grow1; }
       double grow2() const      { return _grow2; }

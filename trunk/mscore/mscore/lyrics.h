@@ -52,7 +52,7 @@ class Lyrics : public Text {
       virtual QPointF canvasPos() const;
       virtual void scanElements(void* data, void (*func)(void*, Element*));
       virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
-      virtual Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*);
+      virtual Element* drop(const DropData&);
 
       Segment* segment() const { return (Segment*)parent()->parent(); }
       Measure* measure() const { return (Measure*)parent()->parent()->parent(); }

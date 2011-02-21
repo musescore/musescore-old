@@ -284,6 +284,8 @@ class MuseScore : public QMainWindow {
       QFileDialog* saveScoreDialog;
       QFileDialog* loadStyleDialog;
       QFileDialog* saveStyleDialog;
+      QFileDialog* loadChordStyleDialog;
+      QFileDialog* saveChordStyleDialog;
       QFileDialog* loadSoundFontDialog;
 
       QDialog* editRasterDialog;
@@ -470,7 +472,9 @@ class MuseScore : public QMainWindow {
       QString getSaveScoreName(const QString& title,
          QString& name, const QString& filter, QString* selectedFilter);
       QString getStyleFilename(bool open);
+      QString getChordStyleFilename(bool open);
       QString getSoundFont(const QString&);
+
       bool hRaster() const { return hRasterAction->isChecked(); }
       bool vRaster() const { return vRasterAction->isChecked(); }
       };

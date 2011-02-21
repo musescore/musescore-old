@@ -195,8 +195,9 @@ bool StaffState::acceptDrop(ScoreView*, const QPointF&, int /*type*/, int /*st*/
 //   drop
 //---------------------------------------------------------
 
-Element* StaffState::drop(ScoreView*, const QPointF& /*p1*/, const QPointF& /*p2*/, Element* e)
+Element* StaffState::drop(const DropData& data)
       {
+      Element* e = data.element;
       score()->undoChangeElement(this, e);
       return e;
       }

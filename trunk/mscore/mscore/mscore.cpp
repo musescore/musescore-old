@@ -365,12 +365,15 @@ MuseScore::MuseScore()
       _splitScreen          = false;
       _horizontalSplit      = true;
       chordStyleEditor      = 0;
+
       loadScoreDialog       = 0;
       saveScoreDialog       = 0;
       loadStyleDialog       = 0;
       saveStyleDialog       = 0;
       loadSoundFontDialog   = 0;
-      editRasterDialog    = 0;
+      loadChordStyleDialog  = 0;
+      saveChordStyleDialog  = 0;
+      editRasterDialog      = 0;
 
       _midiRecordId         = -1;
       _fullscreen           = false;
@@ -2718,6 +2721,12 @@ void MuseScore::writeSettings()
             settings.setValue("loadStyleDialog", loadStyleDialog->saveState());
       if (saveStyleDialog)
             settings.setValue("saveStyleDialog", saveStyleDialog->saveState());
+      if (loadChordStyleDialog)
+            settings.setValue("loadChordStyleDialog", loadChordStyleDialog->saveState());
+      if (saveChordStyleDialog)
+            settings.setValue("saveChordStyleDialog", saveChordStyleDialog->saveState());
+      if (loadSoundFontDialog)
+            settings.setValue("loadSoundFontDialog", loadSoundFontDialog->saveState());
       }
 
 //---------------------------------------------------------

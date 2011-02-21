@@ -133,7 +133,7 @@ class Chord : public ChordRest {
       virtual void read(QDomElement);
       virtual void setSelected(bool f);
       virtual void dump() const;
-      virtual Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*);
+      virtual Element* drop(const DropData&);
 
       virtual QRectF bbox() const;
       void setStemDirection(Direction d)     { _stemDirection = d; }

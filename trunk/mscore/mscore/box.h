@@ -60,7 +60,7 @@ class Box : public MeasureBase {
       virtual void write(Xml& xml, int, bool) const { write(xml); }
       virtual void read(QDomElement);
       virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
-      virtual Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*);
+      virtual Element* drop(const DropData&);
       virtual void add(Element* e);
 
       Spatium boxWidth() const         { return _boxWidth;     }

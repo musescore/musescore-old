@@ -2470,12 +2470,14 @@ QString MuseScore::getStyleFilename(bool open)
 
 QString MuseScore::getSoundFont(const QString& d)
       {
+      QString filter = tr("SoundFont Files (*.sf2 *.SF2);;All (*)");
+
       if (preferences.nativeDialogs) {
             QString s = QFileDialog::getOpenFileName(
                mscore,
                MuseScore::tr("Choose Synthesizer SoundFont"),
                d,
-               MuseScore::tr("SoundFont Files (*.sf2 *.SF2);;All (*)")
+               filter
                );
             return s;
             }
@@ -2485,11 +2487,11 @@ QString MuseScore::getSoundFont(const QString& d)
             loadSoundFontDialog->setFileMode(QFileDialog::ExistingFile);
             loadSoundFontDialog->setOption(QFileDialog::DontUseNativeDialog, true);
             loadSoundFontDialog->setWindowTitle(tr("MuseScore: Choose Synthesizer SoundFont"));
-            loadSoundFontDialog->setNameFilter(tr("SoundFont Files (*.sf2 *.SF2);;All (*)"));
+            loadSoundFontDialog->setNameFilter(filter);
             loadSoundFontDialog->setDirectory(d);
 
             QSettings settings;
-            loadSoundFontDialog->restoreState(settings.value("mySoundFonts").toByteArray());
+            loadSoundFontDialog->restoreState(settings.value("loadSoundFontDialog").toByteArray());
             }
 
       //
@@ -2513,3 +2515,86 @@ QString MuseScore::getSoundFont(const QString& d)
             }
       return QString();
       }
+
+//---------------------------------------------------------
+//   getChordStyleFilename
+//---------------------------------------------------------
+
+QString MuseScore::getChordStyleFilename(bool open)
+      {
+      QString filter = tr("MuseScore Chord Style File (*.xml)");
+      if (open)
+            filter.append(tr(";;All Files (*)"));
+
+      if (preferences.nativeDialogs) {
+            QString fn;
+            if (open) {
+                  fn = QFileDialog::getOpenFileName(
+                     this, tr("MuseScore: Load Chord Style"),
+                     QString("."),
+                     filter
+                     );
+                  }
+            else {
+                  fn = QFileDialog::getSaveFileName(
+                     this, tr("MuseScore: Save Chord Style"),
+                     QString("."),
+                     filter
+                     );
+                  }
+            return fn;
+            }
+
+      QFileInfo myStyles(preferences.myStylesPath);
+      if (myStyles.isRelative())
+            myStyles.setFile(QDir::home(), preferences.myStylesPath);
+      QFileDialog* dialog;
+      QList<QUrl> urls;
+      QString home = QDir::homePath();
+      urls.append(QUrl::fromLocalFile(home));
+      urls.append(QUrl::fromLocalFile(myStyles.absoluteFilePath()));
+      urls.append(QUrl::fromLocalFile(QDir::currentPath()));
+
+      if (open) {
+            if (loadStyleDialog == 0) {
+                  loadStyleDialog = new QFileDialog(this);
+                  loadStyleDialog->setFileMode(QFileDialog::ExistingFile);
+                  loadStyleDialog->setOption(QFileDialog::DontUseNativeDialog, true);
+                  loadStyleDialog->setWindowTitle(tr("MuseScore: Load Chord Style"));
+                  loadStyleDialog->setNameFilter(filter);
+                  loadStyleDialog->setDirectory(".");
+
+                  // setup side bar urls
+                  urls.append(QUrl::fromLocalFile(mscoreGlobalShare+"/styles"));
+                  loadStyleDialog->setSidebarUrls(urls);
+                  QSettings settings;
+                  loadStyleDialog->restoreState(settings.value("loadStyleDialog").toByteArray());
+                  }
+            dialog = loadStyleDialog;
+            }
+      else {
+            if (saveStyleDialog == 0) {
+                  saveStyleDialog = new QFileDialog(this);
+                  saveStyleDialog->setFileMode(QFileDialog::AnyFile);
+                  saveStyleDialog->setOption(QFileDialog::DontConfirmOverwrite, false);
+                  saveStyleDialog->setOption(QFileDialog::DontUseNativeDialog, true);
+                  saveStyleDialog->setLabelText(QFileDialog::Accept, tr("Save"));
+                  saveStyleDialog->setWindowTitle(tr("MuseScore: Save Style"));
+                  saveStyleDialog->setNameFilter(filter);
+                  saveStyleDialog->setDirectory(".");
+
+                  // setup side bar urls
+                  saveStyleDialog->setSidebarUrls(urls);
+                  QSettings settings;
+                  saveStyleDialog->restoreState(settings.value("saveStyleDialog").toByteArray());
+                  }
+            dialog = saveStyleDialog;
+            }
+      if (dialog->exec()) {
+            QStringList result = dialog->selectedFiles();
+            return result.front();
+            }
+      return QString();
+      }
+
+

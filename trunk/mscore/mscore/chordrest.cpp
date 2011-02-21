@@ -565,8 +565,9 @@ void ChordRest::removeSlurBack(Slur* s)
 //   drop
 //---------------------------------------------------------
 
-Element* ChordRest::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Element* e)
+Element* ChordRest::drop(const DropData& data)
       {
+      Element* e = data.element;
       Measure* m  = measure();
       switch (e->type()) {
             case BREATH:
@@ -592,7 +593,7 @@ Element* ChordRest::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, 
                   bl->setTrack(staffIdx() * VOICES);
 
                   if ((bl->tick() == m->tick()) || (bl->tick() == m->tick() + m->ticks())) {
-                        return m->drop(view, p1, p2, e);
+                        return m->drop(data);
                         }
 
                   Segment* seg = m->findSegment(SegBarLine, tick());

@@ -1217,8 +1217,9 @@ bool Beam::acceptDrop(ScoreView*, const QPointF&, int type, int subtype) const
 //   drop
 //---------------------------------------------------------
 
-Element* Beam::drop(ScoreView*, const QPointF&, const QPointF&, Element* e)
+Element* Beam::drop(const DropData& data)
       {
+      Element* e = data.element;
       double g1;
       double g2;
       if (e->subtype() == ICON_FBEAM1) {

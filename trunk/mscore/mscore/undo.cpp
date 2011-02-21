@@ -1536,6 +1536,7 @@ ToggleInvisible::ToggleInvisible(Element* e)
 void ToggleInvisible::flip()
       {
       element->setVisible(!element->visible());
+      element->score()->addRefresh(element->abbox());
       }
 
 //---------------------------------------------------------

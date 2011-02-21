@@ -54,7 +54,7 @@ class StaffState : public Element {
       virtual void setSubtype(int st)    { Element::setSubtype(st); }
       virtual const QString subtypeName() const;
       virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
-      virtual Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*);
+      virtual Element* drop(const DropData&);
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(ScoreView*, const QString&);
       virtual void write(Xml&) const;

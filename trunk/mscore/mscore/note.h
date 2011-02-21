@@ -207,7 +207,7 @@ class Note : public Element {
       qreal yPos() const;
 
       virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
-      virtual Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*);
+      virtual Element* drop(const DropData&);
 
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(ScoreView*, const QString&);

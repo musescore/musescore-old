@@ -664,8 +664,9 @@ bool Lyrics::acceptDrop(ScoreView*, const QPointF&, int type, int subtype) const
 //   drop
 //---------------------------------------------------------
 
-Element* Lyrics::drop(ScoreView*, const QPointF&, const QPointF&, Element* e)
+Element* Lyrics::drop(const DropData& data)
       {
+      Element* e = data.element;
       if (!(e->type() == TEXT && e->subtype() == TEXT_LYRICS_VERSE_NUMBER))
             return 0;
       e->setParent(this);

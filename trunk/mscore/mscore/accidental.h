@@ -70,7 +70,7 @@ class Accidental : public Element {
       void setSubtype(AccidentalType t)     { Element::setSubtype(int(t)); }
       AccidentalType accidentalType() const { return AccidentalType(subtype()); }
       virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
-      virtual Element* drop(ScoreView*, const QPointF&, const QPointF&, Element*);
+      virtual Element* drop(const DropData&);
       virtual void layout();
       virtual void draw(Painter*) const;
       virtual bool isEditable() const                    { return true; }

@@ -389,8 +389,9 @@ bool Accidental::acceptDrop(ScoreView*, const QPointF&, int type, int /*subtype*
 //   drop
 //---------------------------------------------------------
 
-Element* Accidental::drop(ScoreView*, const QPointF&, const QPointF&, Element* e)
+Element* Accidental::drop(const DropData& data)
       {
+      Element* e = data.element;
       switch(e->type()) {
             case ACCIDENTAL_BRACKET:
                   _hasBracket = true;     // TODO: make undoable
