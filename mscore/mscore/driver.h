@@ -22,7 +22,7 @@
 #define __DRIVER_H__
 
 class Seq;
-class MidiPatch;
+struct MidiPatch;
 class Synth;
 class Event;
 

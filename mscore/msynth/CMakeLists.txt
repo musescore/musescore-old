@@ -23,8 +23,14 @@ include (${PROJECT_SOURCE_DIR}/cmake/gch.cmake)
 add_library (
       msynth STATIC
       ${PROJECT_BINARY_DIR}/all.h
-      ${PROJECT_BINARY_DIR}/all.h.gch
+      ${PCH}
       synti.cpp sparm.cpp
+      )
+
+set_target_properties (
+      msynth
+      PROPERTIES
+         COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -g -Wall -Wextra -Winvalid-pch"
       )
 
 ADD_DEPENDENCIES(msynth mops1)

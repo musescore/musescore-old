@@ -23,11 +23,16 @@ include (${PROJECT_SOURCE_DIR}/cmake/gch.cmake)
 add_library (
   osdabzip STATIC
   ${PROJECT_BINARY_DIR}/all.h
-  ${PROJECT_BINARY_DIR}/all.h.gch
+  ${PCH}
   zip.cpp
   unzip.cpp
   )
 
+set_target_properties (
+      osdabzip
+      PROPERTIES
+         COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -g -Wall -Wextra -Winvalid-pch"
+      )
 ADD_DEPENDENCIES(osdabzip mops1)
 ADD_DEPENDENCIES(osdabzip mops2)
 

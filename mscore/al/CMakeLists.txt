@@ -36,9 +36,15 @@ endif (USE_SSE)
 
 add_library(al STATIC
    ${PROJECT_BINARY_DIR}/all.h
-   ${PROJECT_BINARY_DIR}/all.h.gch
+   ${PCH}
    ${al_src}
    )
+
+set_target_properties (
+      al
+      PROPERTIES
+         COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -g -Wall -Wextra -Winvalid-pch"
+      )
 
 set_source_files_properties(dspSSE.cpp
    PROPERTIES COMPILE_FLAGS "-msse -x assembler"

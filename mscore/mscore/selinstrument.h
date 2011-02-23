@@ -24,7 +24,7 @@
 #include "ui_selectinstr.h"
 
 class Instrument;
-class InstrumentTemplate;
+struct InstrumentTemplate;
 
 //---------------------------------------------------------
 //   SelectInstrument

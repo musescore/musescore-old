@@ -26,7 +26,7 @@
 #include "instrument.h"
 
 class Staff;
-class InstrumentTemplate;
+struct InstrumentTemplate;
 
 //---------------------------------------------------------
 //   EditStaff

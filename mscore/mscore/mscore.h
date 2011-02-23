@@ -67,7 +67,6 @@ class KeyEditor;
 class ChordStyleEditor;
 class UndoGroup;
 class Navigator;
-class LanguageItem;
 class Style;
 
 extern QString mscoreGlobalShare;

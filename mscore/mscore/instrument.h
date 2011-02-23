@@ -25,7 +25,7 @@
 #include "event.h"
 #include "interval.h"
 
-class InstrumentTemplate;
+struct InstrumentTemplate;
 class Xml;
 class Drumset;
 class Tablature;

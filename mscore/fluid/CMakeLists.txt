@@ -30,9 +30,16 @@ if (SOUNDFONT3)
 endif (SOUNDFONT3)
 
 add_library (fluid STATIC
-      ${PROJECT_BINARY_DIR}/all.h.gch
+      ${PROJECT_BINARY_DIR}/all.h
+      ${PCH}
       ${SRC}
       )
+set_target_properties (
+      fluid
+      PROPERTIES
+         COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -g -Wall -Wextra -Winvalid-pch"
+      )
+
 ADD_DEPENDENCIES(fluid mops1)
 ADD_DEPENDENCIES(fluid mops2)
 

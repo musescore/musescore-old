@@ -28,7 +28,7 @@
 #include "elementlayout.h"
 
 class Xml;
-class ChordDescription;
+struct ChordDescription;
 class ChordList;
 
 //---------------------------------------------------------

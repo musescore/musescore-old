@@ -939,7 +939,7 @@ void DirectionsHandler::buildDirectionsList(Measure* m, bool /* dopart */, Part*
 // trill hadling
 //---------------------------------------------------------
 
-// Find chords to attach trills to. This is necessary because in MuseScore 
+// Find chords to attach trills to. This is necessary because in MuseScore
 // trills are spanners (thus attached to segments), while in MusicXML trills
 // are attached to notes.
 // TBD: must trill end be in the same staff as trill started ?
@@ -2568,7 +2568,7 @@ static void directionTag(Xml& xml, Attributes& attr, Element* el = 0)
                   printf("directionTag()  center diff=%g\n", el->y() + el->height() / 2 - bb.y() - bb.height() / 2);
 */
                   if (el->type() == HAIRPIN || el->type() == OTTAVA || el->type() == TEXTLINE) {
-                        SLine* sl = static_cast<const SLine*>(el);
+                        SLine* sl = static_cast<SLine*>(el);
                         if (sl->spannerSegments().size() > 0) {
                               LineSegment* seg = (LineSegment*)sl->spannerSegments().at(0);
                               // for the line type elements the reference point is vertically centered

@@ -2145,10 +2145,10 @@ QByteArray Score::readToBuffer()
             }
       if (cs.toLower() == "msc" || cs.toLower() == "mscx") {
             QFile f(filePath());
-            if (!f.open(QIODevice::ReadOnly))
-                  return false;
-            ba = f.readAll();
-            f.close();
+            if (f.open(QIODevice::ReadOnly)) {
+                  ba = f.readAll();
+                  f.close();
+                  }
             }
       return ba;
       }

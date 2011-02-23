@@ -25,7 +25,13 @@ add_library (aeolus STATIC
 	reverb.cpp asection.cpp division.cpp rankwave.cpp
       rngen.cpp exp2ap.cpp
       ${PROJECT_BINARY_DIR}/all.h
-      ${PROJECT_BINARY_DIR}/all.h.gch
+      ${PCH}
+      )
+
+set_target_properties (
+      aeolus
+      PROPERTIES
+         COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -g -Wall -Wextra -Winvalid-pch"
       )
 
 ADD_DEPENDENCIES(aeolus mops1)

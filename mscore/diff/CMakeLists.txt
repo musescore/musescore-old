@@ -23,8 +23,15 @@ include (${PROJECT_SOURCE_DIR}/cmake/gch.cmake)
 add_library(diff_match_patch STATIC
    diff_match_patch.cpp
    ${PROJECT_BINARY_DIR}/all.h
-   ${PROJECT_BINARY_DIR}/all.h.gch
+   ${PCH}
    )
+
+set_target_properties (
+      diff_match_patch
+      PROPERTIES
+         COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -g -Wall -Wextra -Winvalid-pch"
+      )
+
 ADD_DEPENDENCIES(diff_match_patch mops1)
 ADD_DEPENDENCIES(diff_match_patch mops2)
 

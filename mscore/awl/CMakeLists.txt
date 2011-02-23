@@ -39,7 +39,7 @@ QT4_WRAP_CPP (mocs
 add_library (
       awl STATIC
       ${PROJECT_BINARY_DIR}/all.h
-      ${PROJECT_BINARY_DIR}/all.h.gch
+      ${PCH}
       ${mocs}
       aslider.cpp
       knob.cpp
@@ -57,6 +57,12 @@ add_library (
       utils.cpp
       denomspinbox.cpp
       )
+set_target_properties (
+      awl
+      PROPERTIES
+         COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -g -Wall -Wextra -Winvalid-pch"
+      )
+
 ADD_DEPENDENCIES(awl mops1)
 ADD_DEPENDENCIES(awl mops2)
 

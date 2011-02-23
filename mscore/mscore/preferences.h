@@ -23,8 +23,6 @@
 
 #include "globals.h"
 
-struct Shortcut;
-
 enum SessionStart {
       EMPTY_SESSION, LAST_SESSION, NEW_SESSION, SCORE_SESSION
       };

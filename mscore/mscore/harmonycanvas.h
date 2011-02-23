@@ -23,8 +23,8 @@
 
 #include "harmony.h"
 
-class TextSegment;
-class ChordDescription;
+struct TextSegment;
+struct ChordDescription;
 class ChordList;
 
 //---------------------------------------------------------

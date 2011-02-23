@@ -30,12 +30,19 @@ endif (OCR)
 
 add_library (
       omr STATIC
-      ${PROJECT_BINARY_DIR}/all.h.gch
+      ${PROJECT_BINARY_DIR}/all.h
+      ${PCH}
       ${mocs}
       omrview.cpp pdf.cpp omrpage.cpp
       skew.cpp utils.cpp
       omr.cpp pattern.cpp
       ${OCR_SRC}
+      )
+
+set_target_properties (
+      omr
+      PROPERTIES
+         COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -g -Wall -Wextra -Winvalid-pch"
       )
 
 ADD_DEPENDENCIES(omr mops1)

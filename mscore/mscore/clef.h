@@ -122,8 +122,8 @@ class Clef : public Element {
       virtual Space space() const;
       virtual void read(QDomElement);
       virtual void write(Xml&) const;
+      virtual void add(Element* e, double x, double y);
 
-      void add(Element* e, double x, double y);
       bool small() const                        { return _small; }
       void setSmall(bool val);
       int tick() const;

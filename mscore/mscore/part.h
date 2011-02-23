@@ -28,7 +28,7 @@
 class Xml;
 class Staff;
 class Score;
-class InstrumentTemplate;
+struct InstrumentTemplate;
 
 //---------------------------------------------------------
 //   Part

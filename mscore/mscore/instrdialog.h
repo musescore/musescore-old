@@ -24,7 +24,7 @@
 #include "ui_instrdialog.h"
 #include "globals.h"
 
-class InstrumentTemplate;
+struct InstrumentTemplate;
 class Instrument;
 class Part;
 class Staff;
