@@ -32,7 +32,7 @@ class SFont;
 class Preset;
 class Sample;
 class Channel;
-class Mod;
+struct Mod;
 class Reverb;
 class Chorus;
 class Fluid;

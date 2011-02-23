@@ -23,7 +23,7 @@ include (${PROJECT_SOURCE_DIR}/cmake/gch.cmake)
 add_executable(sfconvert
    sfconvert.cpp sfont.cpp
    ${PROJECT_BINARY_DIR}/all.h
-   ${PROJECT_BINARY_DIR}/all.h.gch
+   ${PCH}
    )
 
 target_link_libraries(sfconvert
@@ -34,6 +34,12 @@ target_link_libraries(sfconvert
    ogg
    sndfile
    )
+
+set_target_properties (
+      sfconvert
+      PROPERTIES
+         COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -g -Wall -Wextra -Winvalid-pch"
+      )
 
 ADD_DEPENDENCIES(sfconvert mops1)
 ADD_DEPENDENCIES(sfconvert mops2)

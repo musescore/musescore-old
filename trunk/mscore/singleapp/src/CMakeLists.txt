@@ -27,7 +27,8 @@ QT4_WRAP_CPP (mocs
 
 add_library (
   qtsingleapp STATIC
-  ${PROJECT_BINARY_DIR}/all.h.gch
+  ${PROJECT_BINARY_DIR}/all.h
+  ${PCH}
   ${mocs}
   qtsingleapplication.cpp
   qtlocalpeer.cpp

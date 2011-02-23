@@ -27,6 +27,7 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <math.h>
 
 #include <QtGui/QItemDelegate>
 #include <QtCore/QModelIndex>

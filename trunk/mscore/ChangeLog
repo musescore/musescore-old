@@ -1,3 +1,5 @@
+22.feb (ws)
+      - build system updates for Clang c++ compiler
 21.feb (ws)
       - new drop functions:
             - control + drop key signature drops ks to all staves

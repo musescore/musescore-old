@@ -24,7 +24,7 @@
 #include "ui_prefsdialog.h"
 
 class Shortcut;
-class Preferences;
+struct Preferences;
 
 //---------------------------------------------------------
 //   PreferenceDialog

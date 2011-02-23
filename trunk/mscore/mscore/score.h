@@ -40,14 +40,14 @@
 namespace AL {
       class TempoMap;
       struct TEvent;
-      struct SigEvent;
+      class SigEvent;
       class TimeSigMap;
       };
 
 class System;
 class TextStyle;
 class Page;
-class PageFormat;
+struct PageFormat;
 class ElementList;
 class Selection;
 class Segment;
@@ -77,7 +77,7 @@ class Harmony;
 struct Channel;
 class Tuplet;
 class Capella;
-class CapVoice;
+struct CapVoice;
 class Dynamic;
 class Measure;
 class MeasureBase;

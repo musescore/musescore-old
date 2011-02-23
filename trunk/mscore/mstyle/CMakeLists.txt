@@ -37,7 +37,8 @@ QT4_WRAP_CPP (mocs
 
 add_library (
       mstyle STATIC
-      ${PROJECT_BINARY_DIR}/all.h.gch
+      ${PROJECT_BINARY_DIR}/all.h
+      ${PCH}
       ${mocs}
       mstyle.cpp colorscheme.cpp colorutils.cpp tileset.cpp stylehelper.cpp frameshadow.cpp
       animations.cpp animationdata.cpp dockseparatordata.cpp
@@ -53,10 +54,11 @@ add_library (
       transitions.cpp transitionwidget.cpp windowmanager.cpp
       )
 
-set_target_properties( mstyle
-   PROPERTIES COMPILE_FLAGS
-      "-include ${PROJECT_BINARY_DIR}/all.h"
-   )
+set_target_properties (
+      mstyle
+      PROPERTIES
+         COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -g -Wall -Wextra -Winvalid-pch"
+      )
 
 ADD_DEPENDENCIES(mstyle mops1)
 ADD_DEPENDENCIES(mstyle mops2)

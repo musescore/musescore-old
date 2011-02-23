@@ -1486,7 +1486,8 @@ void ScoreView::paint(const QRect& rr, QPainter& p)
                   return;
             p.setBrush(Qt::NoBrush);
 
-            QPen pen(QColor(Qt::blue));
+            QPen pen;
+            pen.setColor(Qt::blue);
             pen.setWidthF(2.0 / p.matrix().m11());
 
             pen.setStyle(Qt::SolidLine);
@@ -3352,7 +3353,7 @@ void ScoreView::onEditPasteTransition(QMouseEvent* ev)
       {
       startMove = imatrix.map(QPointF(ev->pos()));
       Element* e = elementNear(startMove);
-      if ((e == editObject)) {
+      if (e == editObject) {
             if (editObject->mousePress(startMove, ev)) {
                   _score->addRefresh(editObject->abbox());
                   _score->end();

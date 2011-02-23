@@ -300,8 +300,8 @@ class TieMap : public ElementMap {
 void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
       {
       int tracks = score->nstaves() * VOICES;
-      SlurMap slurMap[tracks];
-      TieMap tieMap[tracks];
+      SlurMap* slurMap = new SlurMap[tracks];
+      TieMap*  tieMap  = new TieMap[tracks];
 
       MeasureBaseList* nmbl = score->measures();
       for(MeasureBase* mb = oscore->measures()->first(); mb; mb = mb->next()) {
@@ -444,6 +444,8 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
       //DEBUG:
       for (int track = 0; track < tracks; ++track)
             slurMap[track].check();
+      delete[] slurMap;
+      delete[] tieMap;
       }
 
 //---------------------------------------------------------
@@ -456,8 +458,8 @@ void cloneStaff(Staff* srcStaff, Staff* dstStaff)
       dstStaff->linkTo(srcStaff);
 
       int tracks = score->nstaves() * VOICES;
-      SlurMap slurMap[tracks];
-      TieMap tieMap[tracks];
+      SlurMap* slurMap = new SlurMap[tracks];
+      TieMap* tieMap   = new TieMap[tracks];
       int srcStaffIdx = score->staffIdx(srcStaff);
       int dstStaffIdx = score->staffIdx(dstStaff);
 
@@ -547,5 +549,7 @@ void cloneStaff(Staff* srcStaff, Staff* dstStaff)
                         }
                   }
             }
+      delete[] slurMap;
+      delete[] tieMap;
       }
 

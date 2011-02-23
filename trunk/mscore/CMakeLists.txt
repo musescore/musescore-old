@@ -23,6 +23,8 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.6.0)
 
 cmake_policy(SET CMP0003 NEW)
 
+# set (CMAKE_CXX_COMPILER   clang++)
+
 # for debugging the make system uncomment next line:
 # set(CMAKE_VERBOSE_MAKEFILE ON)
 
@@ -31,7 +33,7 @@ set(MSCORE_UNSTABLE  TRUE)          # mark as unstable
 set(GCC_VISIBILITY TRUE)            # requires gcc 4.x?
 set(HAS_AUDIOFILE TRUE)             # requires libsndfile
 
-set(STATIC_SCRIPT_BINDINGS FALSE)
+set(STATIC_SCRIPT_BINDINGS TRUE)
 set(BUILD_SCRIPTGEN   TRUE)         # Generate Qt script bindings. (collides with qtscriptgenerator project on several distrib)
 set(USE_SSE           FALSE)
 set(SOUNDFONT3        TRUE)         # enable ogg vorbis compressed fonts, require ogg & vorbis
@@ -261,22 +263,19 @@ if (NOT MINGW AND NOT APPLE)
 endif (NOT MINGW AND NOT APPLE)
 
 
-if (GCC_VISIBILITY)
-set(CMAKE_CXX_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -g -Wall -Wextra -Winvalid-pch -fvisibility=hidden -fvisibility-inlines-hidden")
-else (GCC_VISIBILITY)
-set(CMAKE_CXX_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -g -Wall -Wextra -Winvalid-pch")
-endif (GCC_VISIBILITY)
+#if (GCC_VISIBILITY)
+#      set(CMAKE_CXX_FLAGS "-x c++ -include ${PROJECT_BINARY_DIR}/all.h -g -Wall -Wextra -Winvalid-pch -fvisibility=hidden -fvisibility-inlines-hidden")
+#else (GCC_VISIBILITY)
+#      set(CMAKE_CXX_FLAGS "-x c++ -include ${PROJECT_BINARY_DIR}/all.h -g -Wall -Wextra -Winvalid-pch")
+#endif (GCC_VISIBILITY)
 
 if (NOT MINGW)
 #
 #     set library search path for runtime linker to load the same
 #     qt libraries as we used at compile time
 #
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wl,-rpath,${QT_LIBRARY_DIR}")
+set (CMAKE_EXE_LINKER_FLAGS "-Wl,-rpath,${QT_LIBRARY_DIR}")
 endif (NOT MINGW)
-
-set(CMAKE_CXX_FLAGS_RELEASE "-O2 -DQT_NO_DEBUG")
-set(CMAKE_CXX_FLAGS_DEBUG   "-DQT_DEBUG")
 
 #
 #  create precompiled header file
@@ -289,24 +288,42 @@ add_custom_command(
    WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
    )
 
-if (${CMAKE_BUILD_TYPE} STREQUAL "DEBUG")
-      set (GCH_FLAGS "-DQT_DEBUG")
-else (${CMAKE_BUILD_TYPE} STREQUAL "DEBUG")
-      set (GCH_FLAGS -O2 -DQT_NO_DEBUG -DQT_DLL)
-endif (${CMAKE_BUILD_TYPE} STREQUAL "DEBUG")
+set(CMAKE_CXX_FLAGS_DEBUG   "")
+set(CMAKE_CXX_FLAGS_RELEASE -O2 -DNDEBUG)
 
-add_custom_command(
-   OUTPUT ${PROJECT_BINARY_DIR}/all.h.gch
-   COMMAND ${CMAKE_CXX_COMPILER}
-     -g -Wextra -Wall ${GCH_FLAGS}
-     -I"${QT_INCLUDE_DIR}"
-     -o all.h.gch all.h
-   DEPENDS ${PROJECT_BINARY_DIR}/all.h
-   WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
-   )
+if (CMAKE_BUILD_TYPE STREQUAL "DEBUG")
+      set (FLAGS -DQT_DEBUG ${CMAKE_CXX_FLAGS_DEBUG})
+else (CMAKE_BUILD_TYPE STREQUAL "DEBUG")
+      set (FLAGS -DQT_NO_DEBUG ${CMAKE_CXX_FLAGS_RELEASE})
+endif (CMAKE_BUILD_TYPE STREQUAL "DEBUG")
+
+if (${CMAKE_CXX_COMPILER_ID} EQUAL "Clang")
+      add_custom_command(
+         OUTPUT ${PROJECT_BINARY_DIR}/all.h.pch
+         COMMAND ${CMAKE_CXX_COMPILER}
+           -x c++-header -g ${FLAGS}
+           -I"${QT_INCLUDE_DIR}"
+           -o all.h.pch all.h
+         DEPENDS ${PROJECT_BINARY_DIR}/all.h
+         WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
+         )
+      set (PCH ${PROJECT_BINARY_DIR}/all.h.gch)
+else (${CMAKE_CXX_COMPILER_ID} EQUAL "Clang")
+      add_custom_command(
+         OUTPUT ${PROJECT_BINARY_DIR}/all.h.gch
+         COMMAND ${CMAKE_CXX_COMPILER}
+           -x c++-header -g  ${FLAGS}
+           -I"${QT_INCLUDE_DIR}"
+           -o all.h.gch all.h
+         DEPENDS ${PROJECT_BINARY_DIR}/all.h
+         WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
+         )
+      set (PCH ${PROJECT_BINARY_DIR}/all.h.gch)
+endif(${CMAKE_CXX_COMPILER_ID} EQUAL "Clang")
+
 
 ADD_CUSTOM_TARGET(mops1 DEPENDS ${PROJECT_BINARY_DIR}/all.h)
-ADD_CUSTOM_TARGET(mops2 DEPENDS ${PROJECT_BINARY_DIR}/all.h.gch)
+ADD_CUSTOM_TARGET(mops2 DEPENDS ${PCH})
 
 subdirs(mscore al awl bww2mxml osdabzip rtf2html share manual demos
       fluid msynth diff mstyle)
@@ -315,7 +332,7 @@ if (BUILD_SCRIPTGEN)
       subdirs (scriptgen)
 endif (BUILD_SCRIPTGEN)
 
-if(USE_SYSTEM_QTSINGLEAPPLICATION)
+if (USE_SYSTEM_QTSINGLEAPPLICATION)
       find_path(QTSINGLEAPPLICATION_INCLUDE_DIRS qtsingleapplication.h PATH_SUFFIXES QtSolutions)
       find_library(QTSINGLEAPPLICATION_LIBRARIES QtSolutions_SingleApplication-2.6)
 else(USE_SYSTEM_QTSINGLEAPPLICATION)

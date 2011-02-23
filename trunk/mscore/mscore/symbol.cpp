@@ -399,7 +399,7 @@ void FSymbol::write(Xml& xml) const
 void FSymbol::read(QDomElement e)
       {
       QPointF pos;
-      int s = -1;
+//      int s = -1;
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());

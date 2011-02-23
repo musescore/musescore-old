@@ -24,7 +24,7 @@
 #include "ui_select.h"
 
 class Element;
-class ElementPattern;
+struct ElementPattern;
 
 //---------------------------------------------------------
 //   SelectDialog

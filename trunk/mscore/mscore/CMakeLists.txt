@@ -125,7 +125,7 @@ add_executable ( ${ExecutableName}
       ${ui_headers}
       ${mocs}
       ${PROJECT_BINARY_DIR}/all.h
-      ${PROJECT_BINARY_DIR}/all.h.gch
+      ${PCH}
       ${resource_file}
 
       actions.cpp accidental.cpp barline.cpp beam.cpp stem.cpp
@@ -303,6 +303,11 @@ else (MINGW)
       pthread
       )
 
+   set_target_properties (
+      mscore
+      PROPERTIES
+         COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -g -Wall -Wno-overloaded-virtual -Winvalid-pch"
+      )
    if (HAS_AUDIOFILE)
        target_link_libraries(mscore sndfile)
    endif (HAS_AUDIOFILE)
@@ -360,6 +365,11 @@ if (NOT MINGW AND NOT APPLE)
       smf2xml.cpp midifile.cpp event.cpp drumset.cpp xml.cpp
       )
    target_link_libraries(smf2xml al ${QT_LIBRARIES} )
+   set_target_properties (
+      smf2xml
+      PROPERTIES
+         COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -g -Wall -Wextra -Winvalid-pch"
+      )
 
 #======================================
 #     target xml2smf
@@ -371,6 +381,11 @@ if (NOT MINGW AND NOT APPLE)
       xml2smf.cpp midifile.cpp event.cpp drumset.cpp
       )
    target_link_libraries(xml2smf al ${QT_LIBRARIES} )
+   set_target_properties (
+      xml2smf
+      PROPERTIES
+         COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -g -Wall -Wextra -Winvalid-pch"
+      )
 
 #======================================
 #     target genft
@@ -382,10 +397,10 @@ if (NOT MINGW AND NOT APPLE)
       ${ui_headers}
       genft.cpp
       )
-   target_link_libraries(genft al ${QT_LIBRARIES} -lfreetype )
-   set_target_properties(genft
-      PROPERTIES COMPILE_FLAGS "-I/usr/include/freetype2"
-      )
+
+   target_link_libraries(genft al ${QT_LIBRARIES} -lfreetype)
+   set_target_properties(genft PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -I/usr/include/freetype2 -g -Wall -Wextra -Winvalid-pch")
+
 endif (NOT MINGW AND NOT APPLE)
 
 #======================================

@@ -28,10 +28,16 @@ QT4_WRAP_CPP (mocs
 
 add_library(ofqf STATIC
    ${PROJECT_BINARY_DIR}/all.h
-   ${PROJECT_BINARY_DIR}/all.h.gch
+   ${PCH}
    ${mocs}
    qoscclient.cpp qoscserver.cpp qosctypes.cpp
    )
+
+set_target_properties (
+      ofqf
+      PROPERTIES
+         COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -g -Wall -Wextra -Winvalid-pch"
+      )
 
 ADD_DEPENDENCIES(ofqf mops1)
 ADD_DEPENDENCIES(ofqf mops2)
