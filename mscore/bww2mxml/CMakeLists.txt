@@ -35,13 +35,14 @@ add_executable(bww2mxml
    symbols.cpp
    writer.cpp
    )
-endif (NOT MINGW)
+
 
 set_target_properties (
       bww2mxml
       PROPERTIES
          COMPILE_FLAGS "-x c++ -include ${PROJECT_BINARY_DIR}/all.h -g -Wall -Wextra -Winvalid-pch"
       )
+endif (NOT MINGW)
 
 target_link_libraries(bww2mxml
    ${QT_LIBRARIES}
