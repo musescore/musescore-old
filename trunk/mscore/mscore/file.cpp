@@ -2364,16 +2364,17 @@ QString MuseScore::getSaveScoreName(const QString& title,
             saveScoreDialog->setOption(QFileDialog::DontConfirmOverwrite, false);
             saveScoreDialog->setOption(QFileDialog::DontUseNativeDialog, true);
             saveScoreDialog->setLabelText(QFileDialog::Accept, tr("Save"));
-            // setup side bar urls
-            QList<QUrl> urls;
-            QString home = QDir::homePath();
-            urls.append(QUrl::fromLocalFile(home));
-            urls.append(QUrl::fromLocalFile(myScores.absoluteFilePath()));
-            urls.append(QUrl::fromLocalFile(QDir::currentPath()));
-            saveScoreDialog->setSidebarUrls(urls);
             QSettings settings;
             saveScoreDialog->restoreState(settings.value("saveScoreDialog").toByteArray());
             }
+      // setup side bar urls
+      QList<QUrl> urls;
+      QString home = QDir::homePath();
+      urls.append(QUrl::fromLocalFile(home));
+      urls.append(QUrl::fromLocalFile(myScores.absoluteFilePath()));
+      urls.append(QUrl::fromLocalFile(QDir::currentPath()));
+      saveScoreDialog->setSidebarUrls(urls);
+
       saveScoreDialog->setWindowTitle(title);
       saveScoreDialog->setNameFilter(filter);
       // saveScoreDialog->setDirectory(name);
