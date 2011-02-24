@@ -472,12 +472,22 @@ void Rest::propertyAction(ScoreView* viewer, const QString& s)
             RestProperties vp(&r);
             int rv = vp.exec();
             if (rv) {
-                  if (r.small() != small())
-                        score()->undoChangeChordRestSize(this, r.small());
-                  if (r.extraLeadingSpace() != extraLeadingSpace()
-                     || r.extraTrailingSpace() != extraTrailingSpace()) {
-                        score()->undoChangeChordRestSpace(this, r.extraLeadingSpace(),
-                           r.extraTrailingSpace());
+                  bool sizeChanged  = r.small() != small();
+                  bool spaceChanged = r.extraLeadingSpace() != extraLeadingSpace()
+                     || r.extraTrailingSpace() != extraTrailingSpace();
+
+                  foreach(Element* e, score()->selection().elements()) {
+                        if (e->type() != REST)
+                              continue;
+                        Rest* rest = static_cast<Rest*>(e);
+
+                        if (sizeChanged)
+                              score()->undoChangeChordRestSize(rest, r.small());
+
+                        if (spaceChanged) {
+                              score()->undoChangeChordRestSpace(rest, r.extraLeadingSpace(),
+                                 r.extraTrailingSpace());
+                              }
                         }
                   }
             }

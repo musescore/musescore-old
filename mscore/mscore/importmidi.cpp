@@ -1079,19 +1079,21 @@ void Score::convertTrack(MidiTrack* midiTrack)
                         if (len <= 0)
                               break;
                   	foreach (MNote* n, notes) {
-                        	if (n->mc.duration() < len)
+                        	if ((n->mc.duration() < len) && (n->mc.duration() != 0))
                                     len = n->mc.duration();
                               }
             		Measure* measure = tick2measure(tick);
                         // split notes on measure boundary
                         if ((tick + len) > measure->tick() + measure->ticks())
                               len = measure->tick() + measure->ticks() - tick;
-                        Chord* chord = new Chord(this);
-                        chord->setTrack(staffIdx * VOICES + voice);
                         QList<Duration> dl = toDurationList(Fraction::fromTicks(len), false);
+                        if (dl.isEmpty())
+                              break;
                         Duration d = dl[0];
                         len = d.ticks();
 
+                        Chord* chord = new Chord(this);
+                        chord->setTrack(staffIdx * VOICES + voice);
                         chord->setDurationType(d);
                         Segment* s = measure->getSegment(chord, tick);
                         s->add(chord);
@@ -1150,6 +1152,7 @@ printf("unmapped drum note 0x%02x %d\n", mn.pitch(), mn.pitch());
                   int restLen = i->ontime() - ctick;
                   if (voice == 0) {
                         while (restLen > 0) {
+printf("restLen %d\n", restLen);
                               int len = restLen;
                   		Measure* measure = tick2measure(ctick);
                               // split rest on measure boundary

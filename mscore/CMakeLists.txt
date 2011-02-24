@@ -45,8 +45,6 @@ set(OMR TRUE)                       # OMR - optical music recognition
 if (APPLE OR MINGW)
       set(GCC_VISIBILITY FALSE)     # warnings if not, with gcc4.4 from qt
       set(SF_COMPRESSOR FALSE)
-      set(AEOLUS TRUE)
-      set(OMR TRUE)
 else (APPLE OR MINGW)
       set(SF_COMPRESSOR TRUE)       # build sfconvert, require ogg, vorbis, vorbisenc
 endif (APPLE OR MINGW)
@@ -292,12 +290,13 @@ set(CMAKE_CXX_FLAGS_DEBUG   "")
 set(CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG")
 
 if (CMAKE_BUILD_TYPE STREQUAL "DEBUG")
-      set (FLAGS -DQT_DEBUG "${CMAKE_CXX_FLAGS_DEBUG}")
+      set (FLAGS -DQT_DEBUG)
 else (CMAKE_BUILD_TYPE STREQUAL "DEBUG")
-      set (FLAGS -DQT_NO_DEBUG "${CMAKE_CXX_FLAGS_RELEASE}")
-      if(MINGW)
-          set (FLAGS -O2 -DNDEBUG -DQT_DLL -DQT_NO_DEBUG)
-      endif(MINGW)
+      if (MINGW)
+            set(FLAGS -O2 -DNDEBUG -DQT_DLL -DQT_NO_DEBUG)
+      else (MINGW)
+            set(FLAGS -O2 -DNDEBUG -DQT_NO_DEBUG)
+      endif (MINGW)
 endif (CMAKE_BUILD_TYPE STREQUAL "DEBUG")
 
 if (${CMAKE_CXX_COMPILER_ID} EQUAL "Clang")
