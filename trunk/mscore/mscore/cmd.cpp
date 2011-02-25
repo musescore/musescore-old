@@ -1950,15 +1950,6 @@ void Score::cmdResetBeamMode()
       }
 
 //---------------------------------------------------------
-//   cmdMove
-//---------------------------------------------------------
-
-void Score::cmdMove(Element* e, QPointF delta)
-      {
-      undoMove(e, e->userOff() + delta);
-      }
-
-//---------------------------------------------------------
 //   cmd
 //---------------------------------------------------------
 
@@ -2017,8 +2008,8 @@ void Score::cmd(const QAction* a)
             //
             Element* el = selection().element();
             if (cmd == "pitch-up") {
-                  if (el && el->type() == ARTICULATION)
-                        cmdMove(el, QPointF(0.0, -.25));
+                  if (el && (el->type() == ARTICULATION || el->type() == FINGERING))
+                        undoMove(el, el->userOff() + QPointF(0.0, -preferences.nudgeStep * el->spatium()));
                   else if (el && el->type() == REST)
                         cmdMoveRest(static_cast<Rest*>(el), UP);
                   else if (el && el->type() == LYRICS)
@@ -2027,8 +2018,8 @@ void Score::cmd(const QAction* a)
                         upDown(true, UP_DOWN_CHROMATIC);
                   }
             else if (cmd == "pitch-down") {
-                  if (el && el->type() == ARTICULATION)
-                        cmdMove(el, QPointF(0.0, .25));
+                  if (el && (el->type() == ARTICULATION || el->type() == FINGERING))
+                        undoMove(el, el->userOff() + QPointF(0.0, preferences.nudgeStep * el->spatium()));
                   else if (el && el->type() == REST)
                         cmdMoveRest(static_cast<Rest*>(el), DOWN);
                   else if (el && el->type() == LYRICS)

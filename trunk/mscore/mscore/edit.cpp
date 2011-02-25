@@ -1101,18 +1101,14 @@ void Score::deleteItem(Element* el)
       {
       switch(el->type()) {
             case TEXT:
-#if 0
-            // problem: instrument name cannot be selected
-
                   if (el->subtype() == TEXT_INSTRUMENT_LONG) {
-                        undo()->push(new ChangeInstrumentLong(el->staff()->part(), ""));
+                        undo()->push(new ChangeInstrumentLong(0, el->staff()->part(), QTextDocumentFragment()));
                         break;
                         }
                   else if (el->subtype() == TEXT_INSTRUMENT_SHORT) {
-                        undo()->push(new ChangeInstrumentShort(el->staff()->part(), ""));
+                        undo()->push(new ChangeInstrumentShort(0, el->staff()->part(), QTextDocumentFragment()));
                         break;
                         }
-#endif
                   undoRemoveElement(el);
                   break;
 

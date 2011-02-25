@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -37,6 +37,7 @@
 #include "staff.h"
 #include "part.h"
 #include "drumtools.h"
+#include "preferences.h"
 
 #ifdef Q_WS_MAC
 #define CONTROL_MODIFIER Qt::AltModifier
@@ -129,11 +130,12 @@ void ScoreView::editKey(QKeyEvent* ev)
                   }
             }
       QPointF delta;
-      qreal val = 10.0;
+      qreal _spatium = editObject->spatium();
+      qreal val      = preferences.nudgeStep * _spatium;
       if (modifiers & Qt::ControlModifier)
-            val = 1.0;
+            val = preferences.nudgeStep10 * _spatium;
       else if (modifiers & Qt::AltModifier)
-            val = 0.1;
+            val = preferences.nudgeStep50 * _spatium;
       switch (ev->key()) {
             case Qt::Key_Left:
                   delta = QPointF(-val, 0);

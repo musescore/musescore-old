@@ -338,7 +338,6 @@ class Score : public QObject {
       void cmdExchangeVoice(int, int);
 
       void removeChordRest(ChordRest* cr, bool clearSegment);
-      void cmdMove(Element* e, QPointF delta);
       void cmdMoveRest(Rest*, Direction);
       void cmdMoveLyrics(Lyrics*, Direction);
 
@@ -588,6 +587,7 @@ class Score : public QObject {
 
       Element* getSelectedElement() const   { return _selection.element(); }
       const Selection& selection() const    { return _selection; }
+      Selection& selection()                { return _selection; }
       void setSelection(const Selection& s);
 
       int pos();

@@ -151,6 +151,10 @@ struct Preferences {
       QString myPluginsPath;
       QString mySoundFontsPath;
 
+      double nudgeStep;       // in spatium units (default 0.1)
+      double nudgeStep10;     // Ctrl + cursor key (default 1.0)
+      double nudgeStep50;     // Alt  + cursor key (default 5.0)
+
       int hRaster, vRaster;
       bool nativeDialogs;
 

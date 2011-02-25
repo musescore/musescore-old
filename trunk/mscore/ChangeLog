@@ -1,4 +1,7 @@
-25.feb (tb)
+25.feb (ws)
+      - instrument names are selectable again. Also "delete" works again. Edit mode
+        is not possible. Right click shows context menu with "Staff Properties".
+      (tb)
       - adding Lithuanian (mscore_lt.ts) language
 24.feb (ws)
       - rest property changes are applied to all selected rests.
