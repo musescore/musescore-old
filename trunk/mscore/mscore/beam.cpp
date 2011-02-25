@@ -824,8 +824,10 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
 //                                    n = 2.0;    // reduce minimum stem len (heuristic)
                               if (isGrace)
                                     n *= graceMag;
+                              if (!_up)
+                                    min = -min;
                               double diff = n * _spatium - min;
-// printf("Beam: up %d diff %f %f\n", _up, diff, diff / _spatium);
+//printf("Beam: up %d diff %f %f\n", _up, diff, diff / _spatium);
                               if (_up)
                                     diff = -diff;
                               f->p1[idx].ry() += diff;
@@ -1003,6 +1005,7 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                   double y1 = npos.y();
                   double y  = chordUp ? qMin(p1dy, f->p1[idx].y()) : qMax(p1dy, f->p1[idx].y());
 
+// printf("chordUp %d y %f\n", chordUp, y);
                   //  extend stem to farest beam segment
                   qreal x = x2 - parent()->canvasPos().x();
                   foreach(QLineF* l, beamSegments) {
@@ -1011,10 +1014,13 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                                     y = qMin(y, l->y1());
                               else
                                     y = qMax(y, l->y1());
+// printf("    y %f y1 %f\n", y, l->y1());
                               }
                         }
                   double y2 = y + (x2 - x1) * slope + canvPos.y();
                   double stemLen = chordUp ? (y1 - y2) : (y2 - y1);
+// printf("len %f  (%f %f) slope %f\n", stemLen, y1, y2, slope);
+
                   stem->setLen(stemLen);
 
                   if (chordUp)
