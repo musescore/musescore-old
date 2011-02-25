@@ -785,13 +785,13 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                         if (isGrace)
                               minStemLen *= graceMag;
 
+// printf("Beam===%f\n", minStemLen);
+                        int beams = 0;
                         foreach(ChordRest* cr, crl) {
                               if (cr->type() != CHORD)
                                     continue;
                               Chord* chord  = static_cast<Chord*>(cr);
                               QPointF npos(chord->stemPos(_up, true));
-                              // grow beams with factor 0.5
-                              double bd = (chord->beams() - 1) * beamDist * .5 * (_up ? 1.0 : -1.0);
                               double y1 = npos.y();
                               double y2 = f->p1[idx].y() + (npos.x() - x1) * slope;
                               double stemLen;
@@ -805,9 +805,12 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                                           toMiddleLine = false;
                                     stemLen = y2 - y1;
                                     }
-                              stemLen -= bd;
-                              if (stemLen < min)
+
+// printf("   min %f len %f max %f\n", min, stemLen, max);
+                              if (stemLen < min) {
                                     min = stemLen;
+                                    beams = chord->beams() -1;
+                                    }
                               if (stemLen > max)
                                     max = stemLen;
                               }
@@ -822,14 +825,22 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                               double n = 3.0;
 //                              if (fabs(max-min) > (_spatium * 2.0))
 //                                    n = 2.0;    // reduce minimum stem len (heuristic)
+// printf("   min %f max %f\n", min, max);
                               if (isGrace)
                                     n *= graceMag;
-                              if (!_up)
-                                    min = -min;
-                              double diff = n * _spatium - min;
-//printf("Beam: up %d diff %f %f\n", _up, diff, diff / _spatium);
-                              if (_up)
-                                    diff = -diff;
+                              double diff;
+                              // reduce minimal stem lenght with increasing beam number:
+                              // (* .5)
+                              double beamsHeight = beams * beamDist * .5;
+                              if (_up) {
+                                    diff = -(n * _spatium - min);
+                                    diff -= beamsHeight;
+                                    }
+                              else {
+                                    diff = n * _spatium - min;
+                                    diff += beamsHeight;
+                                    }
+// printf("   Beam: up %d diff %f (in spatium %f)\n", _up, diff, diff / _spatium);
                               f->p1[idx].ry() += diff;
                               f->p2[idx].ry() += diff;
                               }

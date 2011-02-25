@@ -2316,17 +2316,18 @@ QString MuseScore::getOpenScoreName(QString& dir, const QString& filter)
             loadScoreDialog->setOption(QFileDialog::DontUseNativeDialog, true);
             loadScoreDialog->setWindowTitle(tr("MuseScore: Load Score"));
 
-            // setup side bar urls
-            QList<QUrl> urls;
-            QString home = QDir::homePath();
-            urls.append(QUrl::fromLocalFile(home));
-            urls.append(QUrl::fromLocalFile(myScores.absoluteFilePath()));
-            urls.append(QUrl::fromLocalFile(QDir::currentPath()));
-            urls.append(QUrl::fromLocalFile(mscoreGlobalShare+"/demos"));
-            loadScoreDialog->setSidebarUrls(urls);
             QSettings settings;
             loadScoreDialog->restoreState(settings.value("loadScoreDialog").toByteArray());
             }
+      // setup side bar urls
+      QList<QUrl> urls;
+      QString home = QDir::homePath();
+      urls.append(QUrl::fromLocalFile(home));
+      urls.append(QUrl::fromLocalFile(myScores.absoluteFilePath()));
+      urls.append(QUrl::fromLocalFile(QDir::currentPath()));
+      urls.append(QUrl::fromLocalFile(mscoreGlobalShare+"/demos"));
+      loadScoreDialog->setSidebarUrls(urls);
+
       loadScoreDialog->setNameFilter(filter);
       loadScoreDialog->setDirectory(dir);
 
