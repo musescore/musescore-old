@@ -26,6 +26,7 @@ echo       %1/share/locale/mscore_id.ts \
 echo       %1/share/locale/mscore_it.ts \
 echo       %1/share/locale/mscore_ja.ts \
 echo       %1/share/locale/mscore_ko.ts \
+echo       %1/share/locale/mscore_lt.ts \
 echo       %1/share/locale/mscore_nb.ts \
 echo       %1/share/locale/mscore_nl.ts \
 echo       %1/share/locale/mscore_pl.ts \

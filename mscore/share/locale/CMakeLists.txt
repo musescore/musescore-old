@@ -42,6 +42,7 @@ install(FILES
       mscore_it.qm
       mscore_ja.qm
       mscore_ko.qm
+      mscore_lt.qm
       mscore_nl.qm
       mscore_nb.qm
       mscore_pl.qm
@@ -72,6 +73,7 @@ install(FILES
       qt_it.qm
       qt_ja.qm
       qt_ko.qm
+      qt_lt.qm
       qt_nl.qm
       qt_pl.qm
       qt_pt.qm
