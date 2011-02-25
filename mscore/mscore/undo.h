@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -829,11 +829,12 @@ class ExchangeVoice : public UndoCommand {
 
 class ChangeInstrumentShort : public UndoCommand {
       Part* part;
-      QString text;
+      int tick;
+      QTextDocumentFragment text;
       void flip();
 
    public:
-      ChangeInstrumentShort(Part*, const QString&);
+      ChangeInstrumentShort(int, Part*, const QTextDocumentFragment&);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       UNDO_NAME("ChangeInstrumentShort");
@@ -845,11 +846,12 @@ class ChangeInstrumentShort : public UndoCommand {
 
 class ChangeInstrumentLong : public UndoCommand {
       Part* part;
-      QString text;
+      int tick;
+      QTextDocumentFragment text;
       void flip();
 
    public:
-      ChangeInstrumentLong(Part*, const QString&);
+      ChangeInstrumentLong(int, Part*, const QTextDocumentFragment&);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       UNDO_NAME("ChangeInstrumentLong");
@@ -1529,8 +1531,8 @@ extern void updateNoteLines(Segment* segment, int track);
 class ChangeBoxProperties : public UndoCommand {
       Box* _box;
 
-      double      _marginLeft, _marginTop, _marginRight, _marginBottom;
-      double      _height, _width;
+      double _marginLeft, _marginTop, _marginRight, _marginBottom;
+      double _height, _width;
 
       void flip();
 

@@ -45,6 +45,7 @@
 #include "system.h"
 #include "box.h"
 #include "chordrest.h"
+#include "iname.h"
 
 //---------------------------------------------------------
 //   SysStaff
@@ -480,8 +481,9 @@ void System::setInstrumentName(int staffIdx, bool longName)
       Part* part = s->part();
 
       if (!iname) {
-            iname = new Text(score());
-            iname->setSelectable(false);
+            iname = new InstrumentName(score());
+            iname->setGenerated(true);
+//            iname->setSelectable(false);
             if (longName) {
                   iname->setSubtype(TEXT_INSTRUMENT_LONG);
                   iname->setTextStyle(TEXT_STYLE_INSTRUMENT_LONG);

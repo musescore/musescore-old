@@ -207,6 +207,10 @@ void Preferences::init()
       myPluginsPath           = "MuseScore/MyPlugins";
       mySoundFontsPath        = "MuseScore/MySoundFonts";
 
+      nudgeStep               = .1;       // in spatium units (default 0.1)
+      nudgeStep10             = 1.0;      // Ctrl + cursor key (default 1.0)
+      nudgeStep50             = 5.0;      // Alt  + cursor key (default 5.0)
+
       hRaster                 = 2;
       vRaster                 = 2;
       nativeDialogs           = false;    // use system native file dialogs

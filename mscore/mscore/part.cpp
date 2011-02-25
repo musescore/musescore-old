@@ -193,14 +193,14 @@ static QTextDocumentFragment parseInstrName(const QString& name)
 //   setLongName
 //---------------------------------------------------------
 
-void Part::setLongName(const QString& name)
+void Part::setLongName(const QTextDocumentFragment& name, int tick)
       {
-      instr(0)->longName() = QTextDocumentFragment::fromPlainText(name);
+      instr(tick)->longName() = name;
       }
 
-void Part::setShortName(const QString& s)
+void Part::setShortName(const QTextDocumentFragment& name, int tick)
       {
-      instr(0)->shortName() = QTextDocumentFragment::fromPlainText(s);
+      instr(tick)->shortName() = name;
       }
 
 //---------------------------------------------------------

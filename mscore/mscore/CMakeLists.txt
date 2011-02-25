@@ -165,7 +165,7 @@ add_executable ( ${ExecutableName}
       noteevent.cpp chordline.cpp lasso.cpp fotomode.cpp drumtools.cpp
       elementlayout.cpp selinstrument.cpp instrchange.cpp texteditor.cpp
       cursor.cpp textframe.cpp editstafftype.cpp texttools.cpp editpitch.cpp
-      editstringdata.cpp editraster.cpp
+      editstringdata.cpp editraster.cpp iname.cpp
       ${OMR_FILES}
       ${AUDIO}
       )

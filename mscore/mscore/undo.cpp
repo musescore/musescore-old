@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2010 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -422,6 +422,7 @@ void SaveState::undo()
       redoSelection  = score->selection();
       score->setInputState(undoInputState);
       score->setSelection(undoSelection);
+      score->selection().reconstructElementList();
       }
 
 void SaveState::redo()
@@ -430,6 +431,7 @@ void SaveState::redo()
       undoSelection  = score->selection();
       score->setInputState(redoInputState);
       score->setSelection(redoSelection);
+      score->selection().reconstructElementList();
       }
 
 //---------------------------------------------------------
@@ -2148,38 +2150,38 @@ void ExchangeVoice::redo()
 //   ChangeInstrumentShort
 //---------------------------------------------------------
 
-ChangeInstrumentShort::ChangeInstrumentShort(Part* p, const QString& t)
+ChangeInstrumentShort::ChangeInstrumentShort(int _tick, Part* p, const QTextDocumentFragment& t)
       {
+      tick = _tick;
       part = p;
       text = t;
       }
 
 void ChangeInstrumentShort::flip()
       {
-#if 0 // TODOxx
-      QString s = part->shortNameHtml();
-      part->setShortNameHtml(text);
+      QTextDocumentFragment s = part->shortName(tick);
+      part->setShortName(text, tick);
       text = s;
-#endif
+      part->score()->setLayoutAll(true);
       }
 
 //---------------------------------------------------------
 //   ChangeInstrumentLong
 //---------------------------------------------------------
 
-ChangeInstrumentLong::ChangeInstrumentLong(Part* p, const QString& t)
+ChangeInstrumentLong::ChangeInstrumentLong(int _tick, Part* p, const QTextDocumentFragment& t)
       {
+      tick = _tick;
       part = p;
       text = t;
       }
 
 void ChangeInstrumentLong::flip()
       {
-#if 0 // TODOxx
-      QString s = part->longNameHtml();
-      part->setLongNameHtml(text);
+      QTextDocumentFragment s = part->longName(tick);
+      part->setLongName(text, tick);
       text = s;
-#endif
+      part->score()->setLayoutAll(true);
       }
 
 //---------------------------------------------------------

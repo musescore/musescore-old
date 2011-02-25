@@ -59,11 +59,12 @@ class Part {
 
       const QTextDocumentFragment& longName(int tick = 0) const  { return instr(tick)->longName();  }
       const QTextDocumentFragment& shortName(int tick = 0) const { return instr(tick)->shortName(); }
-      QTextDocumentFragment& longName(int tick = 0)              { return instr(tick)->longName();  }
-      QTextDocumentFragment& shortName(int tick = 0)             { return instr(tick)->shortName(); }
 
-      void setLongName(const QString& s);
-      void setShortName(const QString& s);
+      void setLongName(const QTextDocumentFragment& s, int tick = 0);
+      void setShortName(const QTextDocumentFragment& s, int tick = 0);
+
+      void setLongName(const QString& s)  { setLongName(QTextDocumentFragment::fromPlainText(s)); }
+      void setShortName(const QString& s) { setShortName(QTextDocumentFragment::fromPlainText(s)); }
 
       void setStaves(int);
 

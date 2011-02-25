@@ -92,6 +92,7 @@ extern bool showInvisible;
 static const char* elementNames[] = {
       QT_TRANSLATE_NOOP("elementName", "Symbol"),
       QT_TRANSLATE_NOOP("elementName", "Text"),
+      QT_TRANSLATE_NOOP("elementName", "InstrumentName"),
       QT_TRANSLATE_NOOP("elementName", "SlurSegment"),
       QT_TRANSLATE_NOOP("elementName", "BarLine"),
       QT_TRANSLATE_NOOP("elementName", "StemSlash"),
@@ -1351,6 +1352,7 @@ const char* Element::name(ElementType type)
             case SYMBOL:            return "Symbol";
             case FSYMBOL:           return "FSymbol";
             case TEXT:              return "Text";
+            case INSTRUMENT_NAME:   return "InstrumentName";
             case SLUR_SEGMENT:      return "SlurSegment";
             case BAR_LINE:          return "BarLine";
             case STEM_SLASH:        return "StemSlash";
