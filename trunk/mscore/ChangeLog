@@ -1,4 +1,5 @@
 26.feb (ws)
+      - regression fix: crash if double click on palette item
       - fix crash in harmony style editor
 25.feb (ws)
       - instrument names are selectable again. Also "delete" works again. Edit mode

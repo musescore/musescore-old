@@ -189,6 +189,7 @@ static void applyDrop(Score* score, ScoreView* viewer, Element* target, Element*
             dropData.pos  = pt;
             dropData.dragOffset = pt;
             dropData.modifiers = 0;
+            dropData.element = e;
             ne = target->drop(dropData);
             if (ne)
                   score->select(ne, SELECT_SINGLE, 0);
