@@ -539,9 +539,8 @@ void System::add(Element* el)
       {
       el->setParent(this);
       ElementType et = el->type();
-      if (et == TEXT && (el->subtype() == TEXT_INSTRUMENT_LONG || el->subtype() == TEXT_INSTRUMENT_SHORT)) {
+      if (et == INSTRUMENT_NAME)
             _staves[el->staffIdx()]->instrumentName = static_cast<Text*>(el);
-            }
       else if (et == BEAM)
             score()->add(el);
       else if (et == BRACKET) {
@@ -579,9 +578,8 @@ void System::add(Element* el)
 void System::remove(Element* el)
       {
       ElementType et = el->type();
-      if (et == TEXT && (el->subtype() == TEXT_INSTRUMENT_LONG || el->subtype() == TEXT_INSTRUMENT_SHORT)) {
+      if (et == INSTRUMENT_NAME)
             _staves[el->staffIdx()]->instrumentName = 0;
-            }
       else if (et == BEAM)
             score()->remove(el);
       else if (et == BRACKET) {

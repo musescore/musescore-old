@@ -1100,16 +1100,11 @@ void Score::cmdAddBSymbol(BSymbol* s, const QPointF& pos, const QPointF& off)
 void Score::deleteItem(Element* el)
       {
       switch(el->type()) {
-            case TEXT:
-                  if (el->subtype() == TEXT_INSTRUMENT_LONG) {
+            case INSTRUMENT_NAME:
+                  if (el->subtype() == TEXT_INSTRUMENT_LONG)
                         undo()->push(new ChangeInstrumentLong(0, el->staff()->part(), QTextDocumentFragment()));
-                        break;
-                        }
-                  else if (el->subtype() == TEXT_INSTRUMENT_SHORT) {
+                  else if (el->subtype() == TEXT_INSTRUMENT_SHORT)
                         undo()->push(new ChangeInstrumentShort(0, el->staff()->part(), QTextDocumentFragment()));
-                        break;
-                        }
-                  undoRemoveElement(el);
                   break;
 
             case TIMESIG:
