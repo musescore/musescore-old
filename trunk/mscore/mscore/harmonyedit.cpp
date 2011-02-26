@@ -469,6 +469,7 @@ void HarmonyCanvas::setChordDescription(ChordDescription* sd, ChordList* sl)
             render(chordDescription->renderList, x, y, tpc);
             }
       moveElement = 0;
+      dragElement = 0;
       update();
       }
 
