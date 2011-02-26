@@ -74,7 +74,7 @@ bool Score::importPdf(const QString& path)
       insertPart(part, 0);
 
       Duration d(Duration::V_MEASURE);
-      Measure* measure;
+      Measure* measure = 0;
       int tick = 0;
       foreach(const OmrPage* omrPage, _omr->pages()) {
             int nsystems = omrPage->systems().size();
@@ -108,9 +108,11 @@ bool Score::importPdf(const QString& path)
                         measure->add(b);
                         }
                   }
-            LayoutBreak* b = new LayoutBreak(this);
-            b->setSubtype(LAYOUT_BREAK_PAGE);
-            measure->add(b);
+            if (measure) {
+                  LayoutBreak* b = new LayoutBreak(this);
+                  b->setSubtype(LAYOUT_BREAK_PAGE);
+                  measure->add(b);
+                  }
             }
 
       //---create bracket
