@@ -2433,12 +2433,10 @@ QString MuseScore::getStyleFilename(bool open)
                   loadStyleDialog->setNameFilter(tr("MuseScore Style File (*.mss)"));
                   loadStyleDialog->setDirectory(".");
 
-                  // setup side bar urls
-                  urls.append(QUrl::fromLocalFile(mscoreGlobalShare+"/styles"));
-                  loadStyleDialog->setSidebarUrls(urls);
                   QSettings settings;
                   loadStyleDialog->restoreState(settings.value("loadStyleDialog").toByteArray());
                   }
+            urls.append(QUrl::fromLocalFile(mscoreGlobalShare+"/styles"));
             dialog = loadStyleDialog;
             }
       else {
@@ -2452,13 +2450,14 @@ QString MuseScore::getStyleFilename(bool open)
                   saveStyleDialog->setNameFilter(tr("MuseScore Style File (*.mss)"));
                   saveStyleDialog->setDirectory(".");
 
-                  // setup side bar urls
-                  saveStyleDialog->setSidebarUrls(urls);
                   QSettings settings;
                   saveStyleDialog->restoreState(settings.value("saveStyleDialog").toByteArray());
                   }
             dialog = saveStyleDialog;
             }
+      // setup side bar urls
+      saveStyleDialog->setSidebarUrls(urls);
+
       if (dialog->exec()) {
             QStringList result = dialog->selectedFiles();
             return result.front();
@@ -2598,5 +2597,4 @@ QString MuseScore::getChordStyleFilename(bool open)
             }
       return QString();
       }
-
 

@@ -1,3 +1,5 @@
+26.feb (ws)
+      - fix crash in harmony style editor
 25.feb (ws)
       - instrument names are selectable again. Also "delete" works again. Edit mode
         is not possible. Right click shows context menu with "Staff Properties".
