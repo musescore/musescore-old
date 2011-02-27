@@ -158,6 +158,12 @@ void EditStyle::getValues()
       lstyle.set(ST_systemFrameDistance,     Spatium(systemFrameDistance->value()));
       lstyle.set(ST_frameSystemDistance,     Spatium(frameSystemDistance->value()));
 
+      lstyle.set(ST_barWidth,                Spatium(barWidth->value()));
+      lstyle.set(ST_endBarWidth,             Spatium(endBarWidth->value()));
+      lstyle.set(ST_endBarDistance,          Spatium(endBarDistance->value()));
+      lstyle.set(ST_doubleBarWidth,          Spatium(doubleBarWidth->value()));
+      lstyle.set(ST_doubleBarDistance,       Spatium(doubleBarDistance->value()));
+
       lstyle.set(ST_repeatBarTips,           showRepeatBarTips->isChecked());
       lstyle.set(ST_startBarlineSingle,      showStartBarlineSingle->isChecked());
       lstyle.set(ST_startBarlineMultiple,    showStartBarlineMultiple->isChecked());
@@ -285,6 +291,12 @@ void EditStyle::setValues()
       lyricsMinBottomDistance->setValue(lstyle.value(ST_lyricsMinBottomDistance).toSpatium().val());
       systemFrameDistance->setValue(lstyle.value(ST_systemFrameDistance).toSpatium().val());
       frameSystemDistance->setValue(lstyle.value(ST_frameSystemDistance).toSpatium().val());
+
+      barWidth->setValue(lstyle.value(ST_barWidth).toSpatium().val());
+      endBarWidth->setValue(lstyle.value(ST_endBarWidth).toSpatium().val());
+      endBarDistance->setValue(lstyle.value(ST_endBarDistance).toSpatium().val());
+      doubleBarWidth->setValue(lstyle.value(ST_doubleBarWidth).toSpatium().val());
+      doubleBarDistance->setValue(lstyle.value(ST_doubleBarDistance).toSpatium().val());
 
       showRepeatBarTips->setChecked(lstyle.value(ST_repeatBarTips).toBool());
       showStartBarlineSingle->setChecked(lstyle.value(ST_startBarlineSingle).toBool());

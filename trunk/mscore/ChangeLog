@@ -1,4 +1,10 @@
 27.feb (ws)
+      - expose more bar line style parameters in edit style:
+         - ST_barWidth
+         - ST_endBarWidth
+         - ST_endBarDistance
+         - ST_doubleBarWidth
+         - ST_doubleBarDistance
       - use raster when dragging symbols
       - fix dragging a symbol onto a symbol creating a "compound" symbol
         (try dragging a "acc dot" onto an "acc discant")
