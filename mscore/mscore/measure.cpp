@@ -2632,6 +2632,8 @@ void Measure::exchangeVoice(int v1, int v2, int staffIdx1, int staffIdx2)
                   int dtrack = staffIdx * VOICES + v2;
                   s->swapElements(strack, dtrack);
                   }
+            MStaff* ms = mstaff(staffIdx);
+            ms->hasVoices = true;
             }
       }
 

@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2010 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -579,7 +579,6 @@ ScoreView::ScoreView(QWidget* parent)
       imatrix     = _matrix.inverted();
       _magIdx     = preferences.mag == 1.0 ? MAG_100 : MAG_FREE;
       focusFrame  = 0;
-      level       = 0;
       dragElement = 0;
       curElement  = 0;
       _bgColor    = Qt::darkBlue;
@@ -883,6 +882,9 @@ void ScoreView::objectPopup(const QPoint& pos, Element* obj)
       a = selMenu->addAction(tr("More..."));
       a->setData("select-dialog");
       popup->addSeparator();
+      a = getAction("edit-element");
+      popup->addAction(a);
+      a->setEnabled(obj->isEditable());
       obj->genPropertyMenu(popup);
       popup->addSeparator();
       a = popup->addAction(tr("Object Inspector"));
@@ -2293,7 +2295,7 @@ static bool elementLower(const Element* e1, const Element* e2)
       {
       if (!e1->selectable())
             return false;
-      return e1->type() < e2->type();
+      return e1->z() < e2->z();
       }
 
 //---------------------------------------------------------
@@ -2384,10 +2386,11 @@ Element* ScoreView::elementNear(const QPointF& p)
       qSort(ll.begin(), ll.end(), elementLower);
 
 #if 0
+      printf("elementNear\n");
       foreach(const Element* e, ll)
-            printf("  %s %d\n", e->name(), e->selected());
+            printf("  %s selected %d z %d\n", e->name(), e->selected(), e->z());
 #endif
-      Element* e = const_cast<Element*>(ll.at(level % ll.size()));
+      Element* e = const_cast<Element*>(ll.at(0));
       return e;
       }
 

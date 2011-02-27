@@ -126,7 +126,6 @@ class ScoreView : public QWidget {
       bool addSelect;
 
       QFocusFrame* focusFrame;
-      int level;
 
       Element* dragElement;   // valid in state DRAG_OBJECT
 

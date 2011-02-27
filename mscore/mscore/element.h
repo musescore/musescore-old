@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2010 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -247,8 +247,11 @@ class Element {
 
       int track() const                       { return _track; }
       virtual void setTrack(int val)          { _track = val;  }
-      int staffIdx() const                    { return _track / VOICES; }
-      int voice() const                       { return _track % VOICES; }
+
+      virtual int z() const                   { return type() * 100; }  // stacking order
+
+      int staffIdx() const                    { return _track / VOICES;         }
+      int voice() const                       { return _track % VOICES;         }
       void setVoice(int v)                    { _track = (_track / VOICES) + v; }
       Staff* staff() const;
 

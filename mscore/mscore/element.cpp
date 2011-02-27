@@ -82,6 +82,7 @@
 #include "stafftype.h"
 #include "stem.h"
 #include "painter.h"
+#include "iname.h"
 
 extern bool debugMode;
 extern bool showInvisible;
@@ -90,6 +91,7 @@ extern bool showInvisible;
 // list has to synchronized with ElementType enum
 //
 static const char* elementNames[] = {
+      QT_TRANSLATE_NOOP("elementName", "invalid"),
       QT_TRANSLATE_NOOP("elementName", "Symbol"),
       QT_TRANSLATE_NOOP("elementName", "Text"),
       QT_TRANSLATE_NOOP("elementName", "InstrumentName"),
@@ -1182,7 +1184,9 @@ ElementType Element::readType(QDomElement& e, QPointF* dragOffset)
 
 void Element::editDrag(int, const QPointF& delta)
       {
+      score()->addRefresh(abbox());
       setUserOff(userOff() + delta);
+      score()->addRefresh(abbox());
       }
 
 //---------------------------------------------------------
@@ -1272,6 +1276,7 @@ Element* Element::create(ElementType type, Score* score)
             case ACCIDENTAL:        return new Accidental(score);
             case DYNAMIC:           return new Dynamic(score);
             case TEXT:              return new Text(score);
+            case INSTRUMENT_NAME:   return new InstrumentName(score);
             case STAFF_TEXT:        return new StaffText(score);
             case INSTRUMENT_CHANGE: return new InstrumentChange(score);
             case NOTEHEAD:          return new NoteHead(score);
@@ -1479,7 +1484,8 @@ void collectElements(void* data, Element* e)
 
 bool elementLessThan(const Element* const e1, const Element* const e2)
       {
-      return e1->type() > e2->type();
+//      return e1->type() > e2->type();
+      return e1->z() > e2->z();
       }
 #if 0
 //---------------------------------------------------------
