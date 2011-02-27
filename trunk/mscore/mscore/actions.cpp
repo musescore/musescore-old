@@ -2425,6 +2425,15 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","repitch mode"),
          repitch_ICON
          ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "stack-down",
+         QT_TRANSLATE_NOOP("action","stack down"),
+         Qt::SHIFT + Qt::Key_Z,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","stack down"),
+         QT_TRANSLATE_NOOP("action","stack down")
+         ),
       // xml==0  marks end of list
       Shortcut(0, 0, 0, QKeySequence::UnknownKey)
       };

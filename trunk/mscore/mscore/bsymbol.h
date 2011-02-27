@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -31,6 +31,9 @@
 
 class BSymbol : public Element, public ElementLayout {
       QList<Element*> _leafs;
+      int _z;                     ///< stacking order when drawing or selecting;
+                                  ///< elements are drawn from high number to low number;
+                                  ///< default is type() * 100;
 
    public:
       BSymbol(Score* s) : Element(s) { setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE); }
@@ -50,6 +53,8 @@ class BSymbol : public Element, public ElementLayout {
       QList<Element*>& leafs()             { return _leafs; }
       virtual QPointF canvasPos() const;
       Segment* segment() const            { return (Segment*)parent(); }
+      virtual int z() const               { return _z; }
+      void setZ(int val)                  { _z = val;  }
       };
 
 #endif

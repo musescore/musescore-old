@@ -1,3 +1,9 @@
+27.feb (ws)
+      - use raster when dragging symbols
+      - fix dragging a symbol onto a symbol creating a "compound" symbol
+        (try dragging a "acc dot" onto an "acc discant")
+      - add z-axis to element coordinates
+      - add Ctrl+L (edit element) to element context menu
 26.feb (ws)
       - regression fix: crash if double click on palette item
       - fix crash in harmony style editor

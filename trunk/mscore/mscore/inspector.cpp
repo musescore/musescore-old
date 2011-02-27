@@ -211,6 +211,17 @@ void Inspector::showEvent(QShowEvent*)
       }
 
 //---------------------------------------------------------
+//   addBSymbol
+//---------------------------------------------------------
+
+static void addBSymbol(ElementItem* item, BSymbol* e)
+      {
+      ElementItem* si = new ElementItem(item, e);
+      foreach(Element* ee, e->leafs())
+            addBSymbol(si, static_cast<BSymbol*>(ee));
+      }
+
+//---------------------------------------------------------
 //   updateList
 //---------------------------------------------------------
 
@@ -325,8 +336,12 @@ void Inspector::updateList(Score* s)
                                     foreach(Element* ls, sl->spannerSegments())
                                           new ElementItem(si, ls);
                                     }
-                              foreach(Element* s, segment->annotations())
-                                    new ElementItem(segItem, s);
+                              foreach(Element* s, segment->annotations()) {
+                                    if (s->type() == SYMBOL || s->type() == IMAGE)
+                                          addBSymbol(segItem, static_cast<BSymbol*>(s));
+                                    else
+                                          new ElementItem(segItem, s);
+                                    }
 #if 0 // TODO
                               for (int i = 0; i < staves; ++i) {
                                     foreach(Lyrics* l, *(segment->lyricsList(i))) {
@@ -1504,6 +1519,7 @@ void ShowElementBase::setElement(Element* e)
       eb.generated->setChecked(e->generated());
       eb.visible->setChecked(e->visible());
       eb.track->setValue(e->track());
+      eb.z->setValue(e->z());
       eb.posx->setValue(e->ipos().x());
       eb.posy->setValue(e->ipos().y());
       eb.cposx->setValue(e->canvasPos().x());

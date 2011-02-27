@@ -29,6 +29,8 @@
 #include "image.h"
 #include "segment.h"
 #include "painter.h"
+#include "mscore.h"
+#include "preferences.h"
 
 //---------------------------------------------------------
 //   BSymbol
@@ -53,6 +55,7 @@ void BSymbol::add(Element* e)
       if (e->type() == SYMBOL || e->type() == IMAGE) {
             e->setParent(this);
             _leafs.append(e);
+            static_cast<BSymbol*>(e)->setZ(z() - 1);    // draw on top of parent
             }
       else
             printf("BSymbol::add: unsupported type %s\n", e->name());
@@ -101,6 +104,8 @@ Element* BSymbol::drop(const DropData& data)
       Element* el = data.element;
       if (el->type() == SYMBOL || el->type() == IMAGE) {
             el->setParent(this);
+            QPointF p = data.pos - canvasPos() - data.dragOffset;
+            el->setUserOff(p);
             score()->undoAddElement(el);
             return el;
             }
@@ -128,7 +133,23 @@ QRectF BSymbol::drag(const QPointF& pos)
       QRectF r(abbox());
       foreach(const Element* e, _leafs)
             r |= e->abbox();
-      setUserOff(pos);
+
+      qreal x = pos.x();
+      qreal y = pos.y();
+
+      qreal _spatium = spatium();
+      if (mscore->hRaster()) {
+            qreal hRaster = _spatium / preferences.hRaster;
+            int n = lrint(x / hRaster);
+            x = hRaster * n;
+            }
+      if (mscore->vRaster()) {
+            qreal vRaster = _spatium / preferences.vRaster;
+            int n = lrint(y / vRaster);
+            y = vRaster * n;
+            }
+      setUserOff(QPointF(x, y));
+
       r |= abbox();
       foreach(const Element* e, _leafs)
             r |= e->abbox();
@@ -143,21 +164,21 @@ Symbol::Symbol(Score* s)
    : BSymbol(s)
       {
       _sym = 0;
-//      _small = false;
+      setZ(SYMBOL * 100);
       }
 
 Symbol::Symbol(Score* s, int sy)
    : BSymbol(s)
       {
       _sym = sy;
-//      _small = false;
+      setZ(SYMBOL * 100);
       }
 
 Symbol::Symbol(const Symbol& s)
    : BSymbol(s)
       {
       _sym   = s._sym;
-//      _small = s._small;
+      setZ(SYMBOL * 100);
       }
 
 //---------------------------------------------------------

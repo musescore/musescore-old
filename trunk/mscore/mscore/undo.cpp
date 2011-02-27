@@ -2043,7 +2043,9 @@ ChangeUserOffset::ChangeUserOffset(Element* e, const QPointF& o)
 void ChangeUserOffset::flip()
       {
       QPointF p = element->userOff();
+      element->score()->addRefresh(element->abbox());
       element->setUserOff(offset);
+      element->score()->addRefresh(element->abbox());
       offset = p;
       }
 

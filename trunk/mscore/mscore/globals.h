@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -77,8 +77,8 @@ extern qreal DPMM;      // logical dots/mm
 //---------------------------------------------------------
 
 enum ElementType {
-      INVALID = -1,
-      SYMBOL  = 0,
+      INVALID = 0,
+      SYMBOL  = 1,
       TEXT,
       INSTRUMENT_NAME,
       SLUR_SEGMENT,
