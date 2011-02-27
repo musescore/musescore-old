@@ -133,7 +133,7 @@ if (NOT QT4_FOUND)
       message(FATAL_ERROR "Fatal error: QT (version >= 4.6.0) required."
          " Cmake tries to detect QT4 by searching for 'qmake' in your PATH."
          "If you have QT4 installed, make sure qmake is found in your PATH. "
-         "If you compiled QT4 yourself make sure your new qmake ist found"
+         "If you compiled QT4 yourself make sure your new qmake is found"
          " _first_ in your PATH."
          )
 else (NOT QT4_FOUND)
