@@ -21,7 +21,6 @@
 install(FILES
       abc_import.js
       test.js
-      test2.js
       createscore.js
       notenames.js
       colornotes.js

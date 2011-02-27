@@ -10,6 +10,12 @@
         (try dragging a "acc dot" onto an "acc discant")
       - add z-axis to element coordinates
       - add Ctrl+L (edit element) to element context menu
+      (db)
+      - Use Ctrl+Shift+[Number] for switching voices
+      - Standardize naming for text symbols per http://musescore.org/en/node/9515
+      - fix #9544: Remove "Create > test" plugin
+      - fix #8669: Shortcut menu inconsistent capitalization (etc.)
+      - Add a few Alt-keys to menu items
 26.feb (ws)
       - regression fix: crash if double click on palette item
       - fix crash in harmony style editor
