@@ -1704,13 +1704,15 @@ printf("incomplete Slur\n");
             // create excerpts
             foreach(Excerpt* excerpt, _excerpts) {
                   Score* nscore = ::createExcerpt(*excerpt->parts());
-                  nscore->setParentScore(this);
-                  nscore->setName(excerpt->title());
-                  nscore->rebuildMidiMapping();
-                  nscore->updateChannel();
-                  nscore->addLayoutFlags(LAYOUT_FIX_PITCH_VELO);
-                  nscore->doLayout();
-                  excerpt->setScore(nscore);
+                  if (nscore) {
+                        nscore->setParentScore(this);
+                        nscore->setName(excerpt->title());
+                        nscore->rebuildMidiMapping();
+                        nscore->updateChannel();
+                        nscore->addLayoutFlags(LAYOUT_FIX_PITCH_VELO);
+                        nscore->doLayout();
+                        excerpt->setScore(nscore);
+                        }
                   }
             }
       renumberMeasures();
