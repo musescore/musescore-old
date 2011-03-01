@@ -35,7 +35,6 @@ TextTools* MuseScore::textTools()
       {
       if (!_textTools) {
             _textTools = new TextTools(this);
-            // addDockWidget(Qt::TopDockWidgetArea, _textTools);
             addDockWidget(Qt::BottomDockWidgetArea, _textTools);
             }
       setFocusPolicy(Qt::NoFocus);

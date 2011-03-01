@@ -1065,7 +1065,7 @@ void Chord::layoutStem1()
 
 void Chord::layoutStem()
       {
-      if(staff() && staff()->useTablature()) {
+      if (staff() && staff()->useTablature()) {
             // tablatures require stems only is not stemless
             if(!staff()->staffType()->slashStyle() && _stem) {   // if tab uses stems and this chord has one
                   // in tablatures, stem/hook setup is fixed: a simple 'comb' above the staff

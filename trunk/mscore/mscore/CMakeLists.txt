@@ -70,7 +70,7 @@ QT4_WRAP_CPP (mocs
       pianoview.h drumview.h splitstaff.h scoretab.h keyedit.h keycanvas.h harmonyedit.h
       harmonycanvas.h updatechecker.h fret.h fretcanvas.h editstafftype.h
       prefsdialog.h layoutbreak.h hairpin.h bend.h bendcanvas.h tremolobar.h tremolobarcanvas.h
-      drumtools.h texteditor.h texttools.h editpitch.h  editstringdata.h
+      drumtools.h texteditor.h texttools.h pianotools.h editpitch.h  editstringdata.h
       editraster.h
       )
 
@@ -165,7 +165,7 @@ add_executable ( ${ExecutableName}
       noteevent.cpp chordline.cpp lasso.cpp fotomode.cpp drumtools.cpp
       elementlayout.cpp selinstrument.cpp instrchange.cpp texteditor.cpp
       cursor.cpp textframe.cpp editstafftype.cpp texttools.cpp editpitch.cpp
-      editstringdata.cpp editraster.cpp iname.cpp
+      editstringdata.cpp editraster.cpp iname.cpp pianotools.cpp
       ${OMR_FILES}
       ${AUDIO}
       )

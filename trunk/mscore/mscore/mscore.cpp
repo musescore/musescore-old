@@ -65,6 +65,7 @@
 #include "mstyle/mstyle.h"
 #include "segment.h"
 #include "editraster.h"
+#include "pianotools.h"
 
 #ifdef OSC
 #include "ofqf/qoscserver.h"
@@ -360,6 +361,7 @@ MuseScore::MuseScore()
       newWizard             = 0;
       lastOpenPath          = preferences.workingDirectory;
       _textTools            = 0;
+      _pianoTools           = 0;
       _drumTools            = 0;
       pianorollEditor       = 0;
       drumrollEditor        = 0;
@@ -389,22 +391,13 @@ MuseScore::MuseScore()
                   }
             }
 
-      // TODO: read default style from file
-
       _positionLabel = new QLabel;
       _positionLabel->setObjectName("decoration widget");  // this prevents animations
 
       _positionLabel->setText("001:01:000");
-//      _positionLabel->setAutoFillBackground(true);
-//      QPalette p(_positionLabel->palette());
-//      p.setColor(QPalette::Window, QColor(176, 190, 242));
-//      _positionLabel->setPalette(p);
 
       _modeText = new QLabel;
       _modeText->setAutoFillBackground(true);
-//      QPalette p(_positionLabel->palette());
-//      p.setColor(QPalette::Window, QColor(176, 190, 242));
-//      _modeText->setPalette(p);
       _statusBar = new QStatusBar;
 
       QToolButton* hraster = new QToolButton(this);
@@ -420,8 +413,15 @@ MuseScore::MuseScore()
       vraster->setContextMenuPolicy(Qt::ActionsContextMenu);
       vraster->addAction(getAction("config-raster"));
 
+      QToolButton* piano = new QToolButton(this);
+      pianoAction = getAction("piano");
+      pianoAction->setCheckable(true);
+      piano->setDefaultAction(pianoAction);
+
       _statusBar->addPermanentWidget(hraster, 0);
       _statusBar->addPermanentWidget(vraster, 0);
+      _statusBar->addPermanentWidget(new QWidget(this), 2);
+      _statusBar->addPermanentWidget(piano, 0);
       _statusBar->addPermanentWidget(new QWidget(this), 100);
       _statusBar->addPermanentWidget(_modeText, 0);
       _statusBar->addPermanentWidget(_positionLabel, 0);
@@ -2453,6 +2453,8 @@ void MuseScore::cmd(QAction* a)
             editRaster();
       else if (cmd == "hraster" || cmd == "vraster")  // value in [hv]RasterAction already set
             ;
+      else if (cmd == "piano")
+            showPianoKeyboard();
       else {
             if (cv) {
                   cv->setFocus();
@@ -3559,4 +3561,26 @@ void MuseScore::editRaster()
             printf("=====accept config raster\n");
             }
       }
+
+//---------------------------------------------------------
+//   showPianoKeyboard
+//---------------------------------------------------------
+
+void MuseScore::showPianoKeyboard()
+      {
+      bool on = pianoAction->isChecked();
+      if (on) {
+            if (_pianoTools == 0) {
+                  _pianoTools = new PianoTools(this);
+                  addDockWidget(Qt::BottomDockWidgetArea, _pianoTools);
+                  connect(_pianoTools, SIGNAL(keyPressed(int, bool)), SLOT(midiNoteReceived(int, bool)));
+                  }
+            _pianoTools->show();
+            }
+      else {
+            if (_pianoTools)
+                  _pianoTools->hide();
+            }
+      }
+
 

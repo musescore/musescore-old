@@ -85,15 +85,19 @@ static BeamHint endBeamList[] = {
 
       BeamHint(0,  0,  3, 4,  1, 4 ),
       BeamHint(0,  0,  3, 4,  1, 2 ),
-
       BeamHint(1, 16,  3, 4,  1, 4 ),
       BeamHint(1, 16,  3, 4,  1, 2 ),
-
       BeamHint(1, 32,  3, 4,  1, 8 ),
       BeamHint(1, 32,  3, 4,  1, 4 ),
       BeamHint(1, 32,  3, 4,  3, 8 ),
       BeamHint(1, 32,  3, 4,  1, 2 ),
       BeamHint(1, 32,  3, 4,  5, 8 ),
+
+      BeamHint(0, 0,   12, 16,  3, 8 ),
+      BeamHint(1, 16,  12, 16,  3, 16 ),
+      BeamHint(1,  8,  12, 16,  6, 16 ),
+      BeamHint(1,  8,  12, 16,  9, 16 ),
+      BeamHint(1, 16,  12, 16,  9, 16 ),
 
       // in common time:
       //   end beams each 1 2 note
@@ -843,6 +847,38 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
 // printf("   Beam: up %d diff %f (in spatium %f)\n", _up, diff, diff / _spatium);
                               f->p1[idx].ry() += diff;
                               f->p2[idx].ry() += diff;
+
+                              bool shortenStem = score()->styleB(ST_shortenStem);
+                              if (shortenStem) {
+                                    Spatium progression(score()->styleS(ST_shortStemProgression));
+                                    Spatium shortest(score()->styleS(ST_shortestStem));
+                                    qreal ty = c1->measure()->system()->staffY(c1->staffIdx());
+                                    qreal by = ty + _spatium * 4;
+                                    if (_up) {
+                                          qreal y = qMax(f->p1[idx].y(), f->p2[idx].y());
+                                          qreal aboveTop = (ty - y) / _spatium;
+                                          if (aboveTop > 2.0) {
+                                                qreal diff = aboveTop * .25;
+                                                if (diff > (3.0 - shortest.val()))
+                                                      diff = 3.0 - shortest.val();
+                                                diff *= _spatium;
+                                                f->p1[idx].ry() += diff;
+                                                f->p2[idx].ry() += diff;
+                                                }
+                                          }
+                                    else {
+                                          qreal y = qMin(f->p1[idx].y(), f->p2[idx].y());
+                                          qreal belowBottom = (y - by) / _spatium;
+                                          if (belowBottom > 2.0) {
+                                                qreal diff = belowBottom * .25;
+                                                if (diff > (3.0 - shortest.val()))
+                                                      diff = 3.0 - shortest.val();
+                                                diff *= -_spatium;
+                                                f->p1[idx].ry() += diff;
+                                                f->p2[idx].ry() += diff;
+                                                }
+                                          }
+                                    }
                               }
                         }
                   }

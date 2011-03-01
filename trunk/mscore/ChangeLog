@@ -1,3 +1,7 @@
+1.mar (ws)
+      - new virtual piano for note input
+28.feb (ws)
+      - add beaming rules for 12/16 time signature as seen in bach's goldberg variation #11
 27.feb (ws)
       - expose more bar line style parameters in edit style:
          - ST_barWidth

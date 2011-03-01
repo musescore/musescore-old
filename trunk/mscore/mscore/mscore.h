@@ -68,6 +68,7 @@ class ChordStyleEditor;
 class UndoGroup;
 class Navigator;
 class Style;
+class PianoTools;
 
 extern QString mscoreGlobalShare;
 static const int PROJECT_LIST_LEN = 6;
@@ -209,6 +210,7 @@ class MuseScore : public QMainWindow {
       QToolBar* transportTools;
       QToolBar* entryTools;
       TextTools* _textTools;
+      PianoTools* _pianoTools;
       DrumTools* _drumTools;
       QToolBar* voiceTools;
       InstrumentsDialog* instrList;
@@ -290,6 +292,7 @@ class MuseScore : public QMainWindow {
       QDialog* editRasterDialog;
       QAction* hRasterAction;
       QAction* vRasterAction;
+      QAction* pianoAction;
 
       //---------------------
 
@@ -330,6 +333,7 @@ class MuseScore : public QMainWindow {
       void startExcerptsDialog();
       void initOsc();
       void editRaster();
+      void showPianoKeyboard();
 
    private slots:
       void autoSaveTimerTimeout();
@@ -389,6 +393,7 @@ class MuseScore : public QMainWindow {
       void checkForUpdate();
       void registerPlugin(QAction*);
       QMenu* fileMenu() const  { return _fileMenu; }
+      void midiNoteReceived(int pitch, bool chord);
 
    public:
       MuseScore();
@@ -397,7 +402,6 @@ class MuseScore : public QMainWindow {
       PlayPanel* getPlayPanel() const { return playPanel; }
       QMenu* genCreateMenu(QWidget* parent = 0);
       int appendScore(Score*);
-      void midiNoteReceived(int pitch, bool chord);
       void midiCtrlReceived(int controller, int value);
       void showElementContext(Element* el);
 	    void cmdAppendMeasures(int);
