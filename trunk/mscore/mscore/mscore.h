@@ -69,6 +69,7 @@ class UndoGroup;
 class Navigator;
 class Style;
 class PianoTools;
+class MediaDialog;
 
 extern QString mscoreGlobalShare;
 static const int PROJECT_LIST_LEN = 6;
@@ -211,6 +212,7 @@ class MuseScore : public QMainWindow {
       QToolBar* entryTools;
       TextTools* _textTools;
       PianoTools* _pianoTools;
+      MediaDialog* _mediaDialog;
       DrumTools* _drumTools;
       QToolBar* voiceTools;
       InstrumentsDialog* instrList;
@@ -288,6 +290,8 @@ class MuseScore : public QMainWindow {
       QFileDialog* loadChordStyleDialog;
       QFileDialog* saveChordStyleDialog;
       QFileDialog* loadSoundFontDialog;
+      QFileDialog* loadScanDialog;
+      QFileDialog* loadAudioDialog;
 
       QDialog* editRasterDialog;
       QAction* hRasterAction;
@@ -334,6 +338,7 @@ class MuseScore : public QMainWindow {
       void initOsc();
       void editRaster();
       void showPianoKeyboard();
+      void showMediaDialog();
 
    private slots:
       void autoSaveTimerTimeout();
@@ -477,6 +482,8 @@ class MuseScore : public QMainWindow {
       QString getStyleFilename(bool open);
       QString getChordStyleFilename(bool open);
       QString getSoundFont(const QString&);
+      QString getScanFile(const QString&);
+      QString getAudioFile(const QString&);
 
       bool hRaster() const { return hRasterAction->isChecked(); }
       bool vRaster() const { return vRasterAction->isChecked(); }

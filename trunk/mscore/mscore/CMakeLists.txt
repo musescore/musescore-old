@@ -50,7 +50,7 @@ QT4_WRAP_UI (ui_headers
       harmonyedit.ui selectinstr.ui tremolo.ui fretdprops.ui stafftype.ui
       sectionbreak.ui hairpinproperties.ui spanner.ui bend.ui tremolobar.ui
       textproperties.ui editpitch.ui editstringdata.ui slursegment.ui
-      accidental.ui clef.ui editraster.ui
+      accidental.ui clef.ui editraster.ui mediadialog.ui
       )
 
 QT4_WRAP_CPP (mocs
@@ -71,7 +71,7 @@ QT4_WRAP_CPP (mocs
       harmonycanvas.h updatechecker.h fret.h fretcanvas.h editstafftype.h
       prefsdialog.h layoutbreak.h hairpin.h bend.h bendcanvas.h tremolobar.h tremolobarcanvas.h
       drumtools.h texteditor.h texttools.h pianotools.h editpitch.h  editstringdata.h
-      editraster.h
+      editraster.h mediadialog.h
       )
 
 if (APPLE)
@@ -165,7 +165,7 @@ add_executable ( ${ExecutableName}
       noteevent.cpp chordline.cpp lasso.cpp fotomode.cpp drumtools.cpp
       elementlayout.cpp selinstrument.cpp instrchange.cpp texteditor.cpp
       cursor.cpp textframe.cpp editstafftype.cpp texttools.cpp editpitch.cpp
-      editstringdata.cpp editraster.cpp iname.cpp pianotools.cpp
+      editstringdata.cpp editraster.cpp iname.cpp pianotools.cpp mediadialog.cpp
       ${OMR_FILES}
       ${AUDIO}
       )

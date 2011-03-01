@@ -2600,3 +2600,96 @@ QString MuseScore::getChordStyleFilename(bool open)
       return QString();
       }
 
+//---------------------------------------------------------
+//   getScanFile
+//---------------------------------------------------------
+
+QString MuseScore::getScanFile(const QString& d)
+      {
+      QString filter = tr("PDF Scan File (*.pdf);;All (*)");
+
+      if (preferences.nativeDialogs) {
+            QString s = QFileDialog::getOpenFileName(
+               mscore,
+               MuseScore::tr("Choose PDF Scan"),
+               d,
+               filter
+               );
+            return s;
+            }
+
+      if (loadScanDialog == 0) {
+            loadScanDialog = new QFileDialog(this);
+            loadScanDialog->setFileMode(QFileDialog::ExistingFile);
+            loadScanDialog->setOption(QFileDialog::DontUseNativeDialog, true);
+            loadScanDialog->setWindowTitle(tr("MuseScore: Choose PDF Scan"));
+            loadScanDialog->setNameFilter(filter);
+            loadScanDialog->setDirectory(d);
+
+            QSettings settings;
+            loadScanDialog->restoreState(settings.value("loadScanDialog").toByteArray());
+            }
+
+      //
+      // setup side bar urls
+      //
+      QList<QUrl> urls;
+      QString home = QDir::homePath();
+      urls.append(QUrl::fromLocalFile(home));
+      urls.append(QUrl::fromLocalFile(QDir::currentPath()));
+      loadScanDialog->setSidebarUrls(urls);
+
+      if (loadScanDialog->exec()) {
+            QStringList result = loadScanDialog->selectedFiles();
+            return result.front();
+            }
+      return QString();
+      }
+
+//---------------------------------------------------------
+//   getAudioFile
+//---------------------------------------------------------
+
+QString MuseScore::getAudioFile(const QString& d)
+      {
+      QString filter = tr("OGG Audio File (*.ogg);;All (*)");
+
+      if (preferences.nativeDialogs) {
+            QString s = QFileDialog::getOpenFileName(
+               mscore,
+               MuseScore::tr("Choose Audio File"),
+               d,
+               filter
+               );
+            return s;
+            }
+
+      if (loadAudioDialog == 0) {
+            loadAudioDialog = new QFileDialog(this);
+            loadAudioDialog->setFileMode(QFileDialog::ExistingFile);
+            loadAudioDialog->setOption(QFileDialog::DontUseNativeDialog, true);
+            loadAudioDialog->setWindowTitle(tr("MuseScore: Choose OGG Audio File"));
+            loadAudioDialog->setNameFilter(filter);
+            loadAudioDialog->setDirectory(d);
+
+            QSettings settings;
+            loadAudioDialog->restoreState(settings.value("loadAudioDialog").toByteArray());
+            }
+
+      //
+      // setup side bar urls
+      //
+      QList<QUrl> urls;
+      QString home = QDir::homePath();
+      urls.append(QUrl::fromLocalFile(home));
+      urls.append(QUrl::fromLocalFile(QDir::currentPath()));
+      loadAudioDialog->setSidebarUrls(urls);
+
+      if (loadAudioDialog->exec()) {
+            QStringList result = loadAudioDialog->selectedFiles();
+            return result.front();
+            }
+      return QString();
+      }
+
+

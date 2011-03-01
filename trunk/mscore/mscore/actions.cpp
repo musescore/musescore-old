@@ -2443,6 +2443,15 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","P"),
          QT_TRANSLATE_NOOP("action","Show piano keyboard")
          ),
+      Shortcut(
+         STATE_ALL,
+         "media",
+         QT_TRANSLATE_NOOP("action","Show media dialog"),
+         0,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","Additional Media"),
+         QT_TRANSLATE_NOOP("action","Show media dialog")
+         ),
       // xml==0  marks end of list
       Shortcut(0, 0, 0, QKeySequence::UnknownKey)
       };

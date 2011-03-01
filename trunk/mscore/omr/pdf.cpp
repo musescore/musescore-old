@@ -103,7 +103,7 @@ void QImageOutputDev::drawImage(GfxState* state, Object*, Stream* str,
             double xoff = (ctm[2]+ctm[4]) * xmag;
             int ph      = state->getPageHeight() * ymag;
             int yoff    = int(ph - (ctm[3]+ctm[5]) * ymag);
-            
+
             //yoff needs to be > 0
             if(yoff < 0)
   			      yoff = 0;
@@ -114,10 +114,15 @@ printf("Image %4d %4d   at %5f %4d   mag %f %f\n",
             bool invertBits = colorMap->getDecodeLow(0) == 0.0;
 
             if (image->isNull()) {
+#if 0
                   int pw = state->getPageWidth() * xmag;
                   pw     = ((pw+31)/32) * 32;
                   int ph = state->getPageHeight() * ymag;
-                  // *image = QImage(pw, ph+32, QImage::Format_MonoLSB);
+#endif
+                  int pw = width;
+                  int ph = height;
+                  pw     = ((pw+31)/32) * 32;
+
                   *image = QImage(pw, ph, QImage::Format_MonoLSB);
                   QVector<QRgb> ct(2);
                   ct[0] = qRgb(255, 255, 255);
@@ -125,6 +130,7 @@ printf("Image %4d %4d   at %5f %4d   mag %f %f\n",
                   image->setColorTable(ct);
                   image->fill(0);
                   ny = yoff;
+printf("  bytes %d\n", (pw * ph) / 8);
                   }
 
             // copy the stream
@@ -139,6 +145,9 @@ printf("Image %4d %4d   at %5f %4d   mag %f %f\n",
             int qstride = image->bytesPerLine();
             uchar* p    = image->bits();
 
+printf("Image stride %d qstride %d yoff %d  bytes %d\n",
+   stride, qstride, yoff, height * stride);
+
             for (int y = 0; y < height; ++y) {
                   p = image->scanLine(y + yoff);
                   for (int x = 0; x < stride; ++x) {
@@ -150,7 +159,7 @@ printf("Image %4d %4d   at %5f %4d   mag %f %f\n",
                               c = ~c;
                         *p++ = (invert[c & 15] << 4) | invert[(c >> 4) & 15];
                         }
-                  p[-1] &= ~mask;
+//TODO                  p[-1] &= ~mask;
                   }
             str->close();
             ny += height;

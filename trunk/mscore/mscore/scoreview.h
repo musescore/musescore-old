@@ -365,6 +365,7 @@ class ScoreView : public QWidget {
 
       ScoreState mscoreState() const;
       void setCursorVisible(bool v);
+      void showOmr(bool flag);
       };
 
 //---------------------------------------------------------
