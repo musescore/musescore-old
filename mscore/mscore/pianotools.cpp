@@ -221,7 +221,7 @@ void PianoKeyItem::mousePressEvent(QGraphicsSceneMouseEvent*)
       pressed = true;
       update();
       bool ctrl = qApp->keyboardModifiers() & Qt::ControlModifier;
-      emit piano->keyPressed(pitch, false);
+      emit piano->keyPressed(pitch, ctrl);
       }
 
 //---------------------------------------------------------

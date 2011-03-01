@@ -4010,6 +4010,7 @@ void ScoreView::cmdAddSlur(Note* firstNote, Note* lastNote)
 
 void ScoreView::cmdChangeEnharmonic(bool up)
       {
+      _score->startCmd();
       QList<Note*> nl = _score->selection().noteList();
       foreach(Note* n, nl) {
             Staff* staff = n->staff();
@@ -4019,15 +4020,58 @@ void ScoreView::cmdChangeEnharmonic(bool up)
                   int string = n->line() + (up ? 1 : -1);
                   int fret = staff->part()->instr()->tablature()->fret(n->pitch(), string);
                   if (fret != -1) {
-                        _score->startCmd();
                         _score->undoChangePitch(n, n->pitch(), n->tpc(), n->line(), fret, string);
-                        _score->endCmd();
                         }
                   }
             else {
-                  // TODO
+                  static const int tab[36] = {
+                        26, 14,  2,  // 60  B#   C   Dbb
+                        21, 21,  9,  // 61  C#   C#  Db
+                        28, 16,  4,  // 62  C##  D   Ebb
+                        23, 23, 11,  // 63  D#   D#  Eb
+                        30, 18,  6,  // 64  D##  E   Fb
+                        25, 13,  1,  // 65  E#   F   Gbb
+                        20, 20,  8,  // 66  F#   F#  Gb
+                        27, 15,  3,  // 67  F##  G   Abb
+                        22, 22, 10,  // 68  G#   G#  Ab
+                        29, 17,  5,  // 69  G##  A   Bbb
+                        24, 24, 12,  // 70  A#   A#  Bb
+                        31, 19,  7,  // 71  A##  B   Cb
+                        };
+                  int tpc  = n->tpc();
+                  int line = n->line();
+                  int i;
+                  for (i = 0; i < 36; ++i) {
+                        if (tab[i] == tpc) {
+                              int k = i % 3;
+                              i-= k;
+                              if ((k < 2) && tab[i] == tab[i+1])
+                                    ++k;
+                              if (k < 2) {
+                                    ++k;
+                                    tpc = tab[i + k];
+                                    ++line;
+                                    }
+                              else {
+                                    if (tab[i + 2] != tab[i + 1])
+                                          --line;
+                                    --k;
+                                    if (tab[i + 1] != tab[i])
+                                          --line;
+                                    --k;
+                                    tpc = tab[i];
+                                    }
+                              break;
+                              }
+                        }
+                  if (i == 36)
+                        printf("tpc %d not found\n", tpc);
+                  else if (tpc != n->tpc()) {
+                        _score->undoChangePitch(n, n->pitch(), tpc, line, n->fret(), n->string());
+                        }
                   }
             }
+      _score->endCmd();
       }
 
 //---------------------------------------------------------
