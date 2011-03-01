@@ -739,7 +739,6 @@ class Score : public QObject {
       Segment* firstSegment(SegmentTypes s = SegAll) const;
       Segment* lastSegment() const;
 
-//      void setInstrumentNames();
       void connectTies();
 
       virtual void add(Element*);

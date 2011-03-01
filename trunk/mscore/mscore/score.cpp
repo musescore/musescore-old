@@ -2353,7 +2353,6 @@ void Score::updateNotes()
 
 void Score::cmdUpdateNotes()
       {
-printf("cmdUpdateNotes\n");
       for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
             for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx)
                   updateAccidentals(m, staffIdx);

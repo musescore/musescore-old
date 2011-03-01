@@ -1,4 +1,6 @@
 1.mar (ws)
+      - use Ctrl+Click to enter chords with virtual piano
+      - implement "respell" command ("J")
       - new media dialog (to add/remove pdf scans for side by side display)
         (audio not implemented)
       - new virtual piano for note input
