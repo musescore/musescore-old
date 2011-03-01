@@ -2477,3 +2477,14 @@ void Score::setLayoutAll(bool val)
       score->layoutAll = val;
       }
 
+//---------------------------------------------------------
+//   removeOmr
+//---------------------------------------------------------
+
+void Score::removeOmr()
+      {
+      _showOmr = false;
+      delete _omr;
+      _omr = 0;
+      }
+

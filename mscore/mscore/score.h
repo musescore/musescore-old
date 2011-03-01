@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2010 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -774,6 +774,8 @@ class Score : public QObject {
       void cmdAddInterval(int, const QList<Note*>&);
       void cmdCreateTuplet(ChordRest*, Tuplet*);
       Omr* omr() const                         { return _omr;     }
+      void setOmr(Omr* o)                      { _omr = o;        }
+      void removeOmr();
       bool showOmr() const                     { return _showOmr; }
       void setShowOmr(bool v)                  { _showOmr = v;    }
       void enqueueMidiEvent(MidiInputEvent ev) { midiInputQueue.enqueue(ev); }

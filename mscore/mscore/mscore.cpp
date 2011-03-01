@@ -66,6 +66,7 @@
 #include "segment.h"
 #include "editraster.h"
 #include "pianotools.h"
+#include "mediadialog.h"
 
 #ifdef OSC
 #include "ofqf/qoscserver.h"
@@ -362,6 +363,7 @@ MuseScore::MuseScore()
       lastOpenPath          = preferences.workingDirectory;
       _textTools            = 0;
       _pianoTools           = 0;
+      _mediaDialog          = 0;
       _drumTools            = 0;
       pianorollEditor       = 0;
       drumrollEditor        = 0;
@@ -374,6 +376,8 @@ MuseScore::MuseScore()
       loadStyleDialog       = 0;
       saveStyleDialog       = 0;
       loadSoundFontDialog   = 0;
+      loadScanDialog        = 0;
+      loadAudioDialog       = 0;
       loadChordStyleDialog  = 0;
       saveChordStyleDialog  = 0;
       editRasterDialog      = 0;
@@ -698,6 +702,7 @@ MuseScore::MuseScore()
 
       menuEdit->addSeparator();
       menuEdit->addAction(getAction("edit-meta"));
+      menuEdit->addAction(getAction("media"));
       menuEdit->addAction(getAction("inspector"));
       menuEdit->addSeparator();
       menuEdit->addAction(tr("Preferences..."), this, SLOT(startPreferenceDialog()));
@@ -2455,6 +2460,8 @@ void MuseScore::cmd(QAction* a)
             ;
       else if (cmd == "piano")
             showPianoKeyboard();
+      else if (cmd == "media")
+            showMediaDialog();
       else {
             if (cv) {
                   cv->setFocus();
@@ -2732,6 +2739,10 @@ void MuseScore::writeSettings()
             settings.setValue("saveChordStyleDialog", saveChordStyleDialog->saveState());
       if (loadSoundFontDialog)
             settings.setValue("loadSoundFontDialog", loadSoundFontDialog->saveState());
+      if (loadScanDialog)
+            settings.setValue("loadScanDialog", loadScanDialog->saveState());
+      if (loadAudioDialog)
+            settings.setValue("loadAudioDialog", loadAudioDialog->saveState());
       }
 
 //---------------------------------------------------------
@@ -3581,6 +3592,18 @@ void MuseScore::showPianoKeyboard()
             if (_pianoTools)
                   _pianoTools->hide();
             }
+      }
+
+//---------------------------------------------------------
+//   showMediaDialog
+//---------------------------------------------------------
+
+void MuseScore::showMediaDialog()
+      {
+      if (_mediaDialog == 0)
+            _mediaDialog = new MediaDialog(this);
+      _mediaDialog->setScore(cs);
+      _mediaDialog->exec();
       }
 
 

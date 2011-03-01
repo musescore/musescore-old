@@ -2905,21 +2905,28 @@ void ScoreView::cmd(const QAction* a)
             _score->setLayoutAll(true);
             }
       else if (cmd == "show-omr") {
-            if (_score->omr()) {
-                  bool showOmr = _score->showOmr();
-                  _score->setShowOmr(!showOmr);
-                  ScoreTab* t = mscore->getTab1();
-                  if (t->view() != this)
-                        t = mscore->getTab2();
-                  if (t->view() == this)
-                        t->setCurrent(t->currentIndex());
-                  else
-                        printf("view not found\n");
-                  }
+            if (_score->omr())
+                  showOmr(!_score->showOmr());
             }
       else
             _score->cmd(a);
       _score->processMidiInput();
+      }
+
+//---------------------------------------------------------
+//   showOmr
+//---------------------------------------------------------
+
+void ScoreView::showOmr(bool flag)
+      {
+      _score->setShowOmr(flag);
+      ScoreTab* t = mscore->getTab1();
+      if (t->view() != this)
+            t = mscore->getTab2();
+      if (t->view() == this)
+            t->setCurrent(t->currentIndex());
+      else
+            printf("view not found\n");
       }
 
 //---------------------------------------------------------
