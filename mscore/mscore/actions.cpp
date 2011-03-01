@@ -2434,6 +2434,15 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Stack down"),
          QT_TRANSLATE_NOOP("action","Stack down")
          ),
+      Shortcut(
+         STATE_ALL,
+         "piano",
+         QT_TRANSLATE_NOOP("action","Show piano keyboard"),
+         0,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","P"),
+         QT_TRANSLATE_NOOP("action","Show piano keyboard")
+         ),
       // xml==0  marks end of list
       Shortcut(0, 0, 0, QKeySequence::UnknownKey)
       };
