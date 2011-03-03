@@ -101,6 +101,7 @@ class Omr {
       double staffDistance() const         { return 0; }
       double systemDistance() const        { return 0; }
       Score* score() const                 { return 0; }
+      const QString& path() const          { return QString(); }
       };
 
 #endif
