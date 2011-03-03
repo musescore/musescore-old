@@ -19,6 +19,8 @@
 #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #=============================================================================
 
+include (${PROJECT_SOURCE_DIR}/cmake/gch.cmake)
+
 add_library(bww STATIC
    lexer.cpp
    parser.cpp
@@ -47,3 +49,7 @@ endif (NOT MINGW)
 target_link_libraries(bww2mxml
    ${QT_LIBRARIES}
    )
+
+ADD_DEPENDENCIES(al mops1)
+ADD_DEPENDENCIES(al mops2)
+
