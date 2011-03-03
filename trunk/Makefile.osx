@@ -36,7 +36,7 @@ release:
             cmake -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
             	   ../mscore -G Xcode; 			       \
             xcodebuild -project mscore.xcodeproj -target lrelease;                             \
-	    xcodebuild -project mscore.xcodeproj -configuration Release -target ALL_BUILD;                            \
+	      xcodebuild -project mscore.xcodeproj -configuration Release -target ALL_BUILD;                            \
          else                                          \
             echo "build directory does already exist, please remove first with 'make clean'"; \
          fi;
@@ -75,7 +75,7 @@ version: revision
 	@echo ${VERSION}
 
 install:
-	cd build;xcodebuild -project mscore.xcodeproj -configuration Release -target install;
+	cd build;xcodebuild -project mscore.xcodeproj -configuration Debug -target install;
 
 package:
 	mscore/packaging/package_mac;

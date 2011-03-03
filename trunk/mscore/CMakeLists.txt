@@ -64,16 +64,16 @@ endif (OMR)
 
 if (APPLE)
       set(HAS_AUDIOFILE TRUE)            # requires libsndfile
-      set(STATIC_SCRIPT_BINDINGS FALSE)
+      set(STATIC_SCRIPT_BINDINGS TRUE)
       set(CMAKE_OSX_ARCHITECTURES x86_64)
       set(CMAKE_OSX_SYSROOT /Developer/SDKs/MacOSX10.6.sdk)
-      set(CMAKE_OSX_DEPLOYMENT_TARGET 10.4) #min version required
-      find_library(AudioToolboxFW NAMES AudioToolbox)
-      find_library(AudioUnitFW NAMES AudioUnit)
-      find_library(CoreAudioFW NAMES CoreAudio)
-      find_library(CoreMidiFW NAMES CoreMIDI)
+      set(CMAKE_OSX_DEPLOYMENT_TARGET 10.5)      #min version required
+      find_library(AudioToolboxFW        NAMES AudioToolbox)
+      find_library(AudioUnitFW           NAMES AudioUnit)
+      find_library(CoreAudioFW           NAMES CoreAudio)
+      find_library(CoreMidiFW            NAMES CoreMIDI)
       find_library(SystemConfigurationFW NAMES SystemConfiguration)
-      find_library(CoreServicesFW NAMES CoreServices)
+      find_library(CoreServicesFW        NAMES CoreServices)
       set(OsxFrameworks ${AudioToolboxFW} ${AudioUnitFW} ${CoreAudioFW} ${CoreMidiFW} ${SystemConfigurationFW} ${CoreServicesFW})
 endif (APPLE)
 
