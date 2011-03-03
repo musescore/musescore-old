@@ -37,6 +37,7 @@
 
 extern "C" {
 #include <dirent.h>
+#include <time.h>
 }
 #include "gtypes.h"
 
