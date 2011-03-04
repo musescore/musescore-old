@@ -116,6 +116,10 @@
     <render>m Maj 7</render>
     </chord>
   <chord id="19">
+    <name>mi7</name>
+    <name>-7</name>
+    <name>min7</name>
+    <xml>minor-seventh</xml>
     <render>m7</render>
     </chord>
   <chord id="20">

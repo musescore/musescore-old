@@ -33,8 +33,6 @@
 #include "segment.h"
 #include "painter.h"
 
-static const bool useJazzFont = true;     // DEBUG
-
 //---------------------------------------------------------
 //   HChord
 //---------------------------------------------------------
@@ -305,14 +303,14 @@ QString Harmony::harmonyName() const
             const ChordDescription* newExtension = 0;
             ChordList* cl = score()->style()->chordList();
             foreach(const ChordDescription* cd, *cl) {
-                  if (cd->chord == hc && !cd->name.isEmpty()) {
+                  if (cd->chord == hc && !cd->names.isEmpty()) {
                         newExtension = cd;
                         break;
                         }
                   }
             // now determine the chord name
             if (newExtension)
-                  s = tpc2name(_rootTpc, germanNames) + newExtension->name;
+                  s = tpc2name(_rootTpc, germanNames) + newExtension->names.front();
             else
                   // not in table, fallback to using HChord.name()
                   s = hc.name(_rootTpc);
@@ -322,7 +320,7 @@ QString Harmony::harmonyName() const
             s = tpc2name(_rootTpc, germanNames);
             if (descr()) {
                   //s += " ";
-                  s += descr()->name;
+                  s += descr()->names.front();
                   }
             }
       if (_baseTpc != INVALID_TPC) {
@@ -354,8 +352,8 @@ void Harmony::resolveDegreeList()
       // try to find the chord in chordList
       ChordList* cl = score()->style()->chordList();
       foreach(const ChordDescription* cd, *cl) {
-            if ((cd->chord == hc) && !cd->name.isEmpty()) {
-printf("ResolveDegreeList: found in table as %s\n", qPrintable(cd->name));
+            if ((cd->chord == hc) && !cd->names.isEmpty()) {
+printf("ResolveDegreeList: found in table as %s\n", qPrintable(cd->names.front()));
                   _id = cd->id;
                   _degreeList.clear();
                   return;
@@ -624,19 +622,19 @@ static int convertRoot(const QString& s, bool germanNames)
 //    return ChordDescription
 //---------------------------------------------------------
 
-void Harmony::parseHarmony(const QString& ss, int* root, int* base)
+bool Harmony::parseHarmony(const QString& ss, int* root, int* base)
       {
       _id = -1;
       QString s = ss.simplified();
       _userName = s;
       int n = s.size();
       if (n < 1)
-            return;
+            return false;
       bool germanNames = score()->styleB(ST_useGermanNoteNames);
       int r = convertRoot(s, germanNames);
       if (r == INVALID_TPC) {
             printf("1:parseHarmony failed <%s>\n", qPrintable(ss));
-            return;
+            return false;
             }
       *root = r;
       int idx = ((n > 1) && ((s[1] == 'b') || (s[1] == '#'))) ? 2 : 1;
@@ -650,15 +648,17 @@ void Harmony::parseHarmony(const QString& ss, int* root, int* base)
       else
             s = s.mid(idx).simplified();
       s = s.toLower();
-      ChordList* cl = score()->style()->chordList();
-      foreach(const ChordDescription* cd, *cl) {
-            if (cd->name.toLower() == s) {
-                  _id = cd->id;
-                  return;
+      foreach(const ChordDescription* cd, *score()->style()->chordList()) {
+            foreach(QString ss, cd->names) {
+                  if (s == ss) {
+                        _id = cd->id;
+                        return true;
+                        }
                   }
             }
       _userName = s;
       printf("2:parseHarmony failed <%s><%s>\n", qPrintable(ss), qPrintable(s));
+      return false;
       }
 
 //---------------------------------------------------------
@@ -675,6 +675,34 @@ void Harmony::startEdit(ScoreView* view, const QPointF& p)
       }
 
 //---------------------------------------------------------
+//   edit
+//---------------------------------------------------------
+
+bool Harmony::edit(ScoreView* view, int grip, int key, Qt::KeyboardModifiers mod, const QString& s)
+      {
+      bool rv = Text::edit(view, grip, key, mod, s);
+      QString str = getText();
+      int root, base;
+      if (!str.isEmpty() && !parseHarmony(str, &root, &base)) {
+            QTextCharFormat tf;
+            tf.setUnderlineStyle(QTextCharFormat::SpellCheckUnderline);
+            tf.setUnderlineColor(Qt::red);
+            QTextCursor c(doc());
+            c.movePosition(QTextCursor::Start, QTextCursor::MoveAnchor);
+            c.movePosition(QTextCursor::End, QTextCursor::KeepAnchor);
+            c.setCharFormat(tf);
+            }
+      else {
+            QTextCharFormat tf;
+            QTextCursor c(doc());
+            c.movePosition(QTextCursor::Start, QTextCursor::MoveAnchor);
+            c.movePosition(QTextCursor::End, QTextCursor::KeepAnchor);
+            c.setCharFormat(tf);
+            }
+      return rv;
+      }
+
+//---------------------------------------------------------
 //   endEdit
 //---------------------------------------------------------
 
@@ -683,6 +711,7 @@ void Harmony::endEdit()
       Text::endEdit();
       setHarmony(getText());
       }
+
 //---------------------------------------------------------
 //   setHarmony
 //---------------------------------------------------------
@@ -997,7 +1026,7 @@ void ChordDescription::read(QDomElement e)
             QString tag(e.tagName());
             QString val(e.text());
             if (tag == "name")
-                  name = val;
+                  names.append(val);
             else if (tag == "xml")
                   xmlKind = val;
             else if (tag == "degree")

@@ -133,7 +133,6 @@
     </chord>
   <chord id="19">
     <name>m7</name>
-    <xml>minor-seventh</xml>
     <voicing>C Eb G Bb</voicing>
     </chord>
   <chord id="20">
