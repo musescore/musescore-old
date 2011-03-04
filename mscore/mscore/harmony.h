@@ -113,7 +113,8 @@ struct RenderAction {
 
 struct ChordDescription {
       int id;                 // Chord id number (Band In A Box Chord Number)
-      QString name;           // chord name as entered from the keyboard (without root/base)
+      QStringList names;      // list of alternative chord names
+                              // that will by recognized from keyboard entry (without root/base)
       QString xmlKind;        // MusicXml description: kind
       QStringList xmlDegrees; // MusicXml description: list of degrees (if any)
       HChord chord;           // C based chord
@@ -166,8 +167,8 @@ class ChordList : public QMap<int, ChordDescription*> {
       ChordSymbol symbol(const QString& s) const { return symbols.value(s); }
       };
 
-typedef QMap<int, ChordDescription*>::iterator iChordDescription;
-typedef QMap<int, ChordDescription*>::const_iterator ciChordDescription;
+// typedef QMap<int, ChordDescription*>::iterator iChordDescription;
+// typedef QMap<int, ChordDescription*>::const_iterator ciChordDescription;
 
 //---------------------------------------------------------
 //   TextSegment
@@ -240,6 +241,7 @@ class Harmony : public Text {
 
       virtual bool isEditable() const { return true; }
       virtual void startEdit(ScoreView*, const QPointF&);
+      virtual bool edit(ScoreView*, int grip, int key, Qt::KeyboardModifiers, const QString& s);
       virtual void endEdit();
 
       int baseTpc() const                      { return _baseTpc;      }
@@ -257,9 +259,11 @@ class Harmony : public Text {
       QString harmonyName() const;
       void render(const TextStyle* ts = 0);
 
-      void parseHarmony(const QString& s, int* root, int* base);
+      bool parseHarmony(const QString& s, int* root, int* base);
 
-      QString extensionName() const    { return _id != -1 ? descr()->name       : _userName;     }
+      // extension name is used by MusicXml export as <kind text="name">xmlKind</>
+
+      QString extensionName() const    { return _id != -1 ? descr()->names.front() : _userName;  }
       QString xmlKind() const          { return _id != -1 ? descr()->xmlKind    : QString();     }
       QStringList xmlDegrees() const   { return _id != -1 ? descr()->xmlDegrees : QStringList(); }
 

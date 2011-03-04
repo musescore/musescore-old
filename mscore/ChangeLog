@@ -1,3 +1,9 @@
+4.mar (ws)
+      - chords(harmony) can have more than one name by adding more <name> tags to
+        chords.xml or stdchords.xml/jazzchords.xml.
+      - unrecognized harmony names are marked with a wavy underline during entry
+2.mar (ws)
+      - mark middle c in virtual piano
 1.mar (ws)
       - use Ctrl+Click to enter chords with virtual piano
       - implement "respell" command ("J")

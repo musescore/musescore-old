@@ -32,14 +32,19 @@ static const qreal BKEY_HEIGHT = 25.0;
 HPiano::HPiano(QWidget* parent)
    : QGraphicsView(parent)
       {
+      setLineWidth(0);
+      setMidLineWidth(0);
+
       setScene(new QGraphicsScene);
       setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
       setResizeAnchor(QGraphicsView::AnchorUnderMouse);
       setMouseTracking(true);
       setRubberBandSelectionMode(Qt::IntersectsItemBoundingRect);
       setDragMode(QGraphicsView::RubberBandDrag);
+      setMaximumSize(QSize(KEY_WIDTH * 52+8, KEY_HEIGHT+8+80));
+      setMinimumSize(QSize(100, KEY_HEIGHT+8));
 
-      scene()->setSceneRect(0.0, 0.0, double(KEY_WIDTH * 52), KEY_HEIGHT);
+      scene()->setSceneRect(0.0, 0.0, KEY_WIDTH * 52, KEY_HEIGHT);
 
       _firstKey   = 21;
       _lastKey    = 108;   // 88 key piano
@@ -97,6 +102,15 @@ HPiano::HPiano(QWidget* parent)
             keys.append(k);
             scene()->addItem(k);
             }
+      }
+
+//---------------------------------------------------------
+//   sizeHint
+//---------------------------------------------------------
+
+QSize HPiano::sizeHint() const
+      {
+      return QSize(KEY_WIDTH * 52 + 1, KEY_HEIGHT+1);
       }
 
 //---------------------------------------------------------
@@ -243,10 +257,16 @@ void PianoKeyItem::paint(QPainter* p, const QStyleOptionGraphicsItem* o, QWidget
       p->setRenderHint(QPainter::Antialiasing, true);
       p->setPen(QPen(Qt::black, .8));
       if (pressed)
-            p->setBrush(Qt::blue);
+            p->setBrush(QColor(255, 255, 128));
       else
             p->setBrush(type >= 7 ? Qt::black : Qt::white);
       p->drawPath(path());
+      if (pitch == 60) {
+            QFont f("FreeSerif", 8);
+            p->setFont(f);
+            p->drawText(QRectF(KEY_WIDTH / 2, KEY_HEIGHT - 8, 0, 0),
+               Qt::AlignCenter | Qt::TextDontClip, "c'");
+            }
       }
 
 //---------------------------------------------------------

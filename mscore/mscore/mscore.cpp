@@ -2525,12 +2525,6 @@ void MuseScore::changeState(ScoreState val)
             else {
                   bool enable = s->state & val;
                   s->action->setEnabled(enable);
-                  if (debugMode) {
-                        if (enable)
-                              printf("MuseScore::enable: %s\n", s->xml);
-                        else
-                              printf("MuseScore::disable: %s\n", s->xml);
-                        }
                   }
             }
       if (val != STATE_SEARCH && searchDialog)

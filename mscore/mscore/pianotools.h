@@ -59,6 +59,7 @@ class HPiano : public QGraphicsView {
    public:
       HPiano(QWidget* parent = 0);
       friend class PianoKeyItem;
+      virtual QSize sizeHint() const;
       };
 
 //---------------------------------------------------------
