@@ -2558,6 +2558,7 @@ QString MuseScore::getChordStyleFilename(bool open)
       urls.append(QUrl::fromLocalFile(myStyles.absoluteFilePath()));
       urls.append(QUrl::fromLocalFile(QDir::currentPath()));
 
+      QSettings settings;
       if (open) {
             if (loadStyleDialog == 0) {
                   loadStyleDialog = new QFileDialog(this);
@@ -2567,12 +2568,10 @@ QString MuseScore::getChordStyleFilename(bool open)
                   loadStyleDialog->setNameFilter(filter);
                   loadStyleDialog->setDirectory(".");
 
-                  // setup side bar urls
-                  urls.append(QUrl::fromLocalFile(mscoreGlobalShare+"/styles"));
-                  loadStyleDialog->setSidebarUrls(urls);
-                  QSettings settings;
                   loadStyleDialog->restoreState(settings.value("loadStyleDialog").toByteArray());
                   }
+            // setup side bar urls
+            urls.append(QUrl::fromLocalFile(mscoreGlobalShare+"/styles"));
             dialog = loadStyleDialog;
             }
       else {
@@ -2586,13 +2585,12 @@ QString MuseScore::getChordStyleFilename(bool open)
                   saveStyleDialog->setNameFilter(filter);
                   saveStyleDialog->setDirectory(".");
 
-                  // setup side bar urls
-                  saveStyleDialog->setSidebarUrls(urls);
-                  QSettings settings;
                   saveStyleDialog->restoreState(settings.value("saveStyleDialog").toByteArray());
                   }
             dialog = saveStyleDialog;
             }
+      // setup side bar urls
+      dialog->setSidebarUrls(urls);
       if (dialog->exec()) {
             QStringList result = dialog->selectedFiles();
             return result.front();

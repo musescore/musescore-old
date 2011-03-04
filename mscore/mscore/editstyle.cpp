@@ -28,6 +28,8 @@
 #include "mscore.h"
 #include "undo.h"
 #include "texteditor.h"
+#include "harmony.h"
+#include "chordlist.h"
 
 extern QString iconPath, iconGroup;
 
@@ -207,7 +209,14 @@ void EditStyle::getValues()
       lstyle.set(ST_genCourtesyClef,         genCourtesyClef->isChecked());
 
       lstyle.set(ST_useGermanNoteNames,      useGermanNoteNames->isChecked());
-      lstyle.set(ST_chordDescriptionFile,    chordDescriptionFile->text());
+
+      if (lstyle.valueSt(ST_chordDescriptionFile) != chordDescriptionFile->text()) {
+            ChordList* cl = new ChordList();
+            cl->read("chords.xml");
+            cl->read(chordDescriptionFile->text());
+            lstyle.setChordList(cl);
+            lstyle.set(ST_chordDescriptionFile, chordDescriptionFile->text());
+            }
 
       lstyle.set(ST_concertPitch,            concertPitch->isChecked());
       lstyle.set(ST_createMultiMeasureRests, multiMeasureRests->isChecked());
@@ -443,8 +452,7 @@ void EditStyle::selectChordDescriptionFile()
       QString fn = mscore->getChordStyleFilename(true);
       if (fn.isEmpty())
             return;
-      QFileInfo fi(fn);
-      chordDescriptionFile->setText(fi.fileName());
+      chordDescriptionFile->setText(fn);
       }
 
 //---------------------------------------------------------

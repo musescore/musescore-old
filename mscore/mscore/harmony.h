@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2008-2009 Werner Schweer and others
+//  Copyright (C) 2008-2011 Werner Schweer and others
 //
 //  Some Code inspired by "The JAZZ++ Midi Sequencer"
 //  Copyright (C) 1994-2000 Andreas Voss and Per Sigmond, all rights reserved.
@@ -26,149 +26,7 @@
 
 #include "text.h"
 
-//---------------------------------------------------------
-//   class HDegree
-//---------------------------------------------------------
-
-enum HDegreeType {
-      UNDEF, ADD, ALTER, SUBTRACT
-      };
-
-class HDegree {
-      int _value;
-      int _alter;       // -1, 0, 1  (b - - #)
-      int _type;
-
-   public:
-      HDegree() { _value = 0; _alter = 0; _type = UNDEF; }
-      HDegree(int v, int a, int t) { _value = v; _alter = a; _type = t; }
-      int value() const { return _value; }
-      int alter() const { return _alter; }
-      int type() const  { return _type; }
-      QString text() const;
-      };
-
-//---------------------------------------------------------
-//   HChord
-//---------------------------------------------------------
-
-class HChord {
-      QString str;
-
-   protected:
-      int keys;
-
-   public:
-      HChord()      { keys = 0; }
-      HChord(int k) { keys = k; }
-      HChord(int a, int b, int c=-1, int d=-1, int e=-1, int f=-1, int g=-1,
-            int h=-1, int i=-1, int k=-1, int l=-1);
-      HChord(const QString&);
-
-      void rotate(int semiTones);
-
-      bool contains(int key) const {       // key in chord?
-            return (1 << (key % 12)) & keys;
-            }
-      HChord& operator+= (int key) {
-            keys |= (1 << (key % 12));
-            return *this;
-            }
-      HChord& operator-= (int key) {
-            keys &= ~(1 << (key % 12));
-            return *this;
-            }
-      bool operator==(const HChord& o) const { return (keys == o.keys); }
-      bool operator!=(const HChord& o) const { return (keys != o.keys); }
-
-      int getKeys() const { return keys; }
-      void print() const;
-
-      QString name(int tpc);
-      void add(const QList<HDegree>& degreeList);
-      };
-
-
-//---------------------------------------------------------
-//   RenderAction
-//---------------------------------------------------------
-
-struct RenderAction {
-      enum RenderActionType {
-            RENDER_SET, RENDER_MOVE, RENDER_PUSH, RENDER_POP,
-            RENDER_NOTE, RENDER_ACCIDENTAL
-            };
-
-      RenderActionType type;
-      double movex, movey;          // RENDER_MOVE
-      QString text;                 // RENDER_SET
-
-      RenderAction() {}
-      RenderAction(RenderActionType t) : type(t) {}
-      };
-
-//---------------------------------------------------------
-//   ChordDescription
-//---------------------------------------------------------
-
-struct ChordDescription {
-      int id;                 // Chord id number (Band In A Box Chord Number)
-      QStringList names;      // list of alternative chord names
-                              // that will by recognized from keyboard entry (without root/base)
-      QString xmlKind;        // MusicXml description: kind
-      QStringList xmlDegrees; // MusicXml description: list of degrees (if any)
-      HChord chord;           // C based chord
-      QList<RenderAction> renderList;
-
-   public:
-      void read(QDomElement);
-      void write(Xml&);
-      };
-
-//---------------------------------------------------------
-//   ChordSymbol
-//---------------------------------------------------------
-
-struct ChordSymbol {
-      int fontIdx;
-      QString name;
-      QChar code;
-
-      ChordSymbol() { fontIdx = -1; }
-      bool isValid() const { return fontIdx != -1; }
-      };
-
-//---------------------------------------------------------
-//   ChordFont
-//---------------------------------------------------------
-
-struct ChordFont {
-      QString family;
-      double mag;
-      };
-
-//---------------------------------------------------------
-//   ChordList
-//---------------------------------------------------------
-
-class ChordList : public QMap<int, ChordDescription*> {
-      QHash<QString, ChordSymbol> symbols;
-
-   public:
-      QList<ChordFont> fonts;
-      QList<RenderAction> renderListRoot;
-      QList<RenderAction> renderListBase;
-
-      ChordList() {}
-      virtual ~ChordList();
-      bool write(const QString& path);
-      bool read(const QString& path);
-      void read(QDomElement);
-      ChordSymbol symbol(const QString& s) const { return symbols.value(s); }
-      };
-
-// typedef QMap<int, ChordDescription*>::iterator iChordDescription;
-// typedef QMap<int, ChordDescription*>::const_iterator ciChordDescription;
+struct ChordDescription;
 
 //---------------------------------------------------------
 //   TextSegment
@@ -205,6 +63,9 @@ struct TextSegment {
 //            3, 10, 17, 24, 31,  // A
 //            5, 12, 19, 26, 33,  // B
 //---------------------------------------------------------
+
+struct RenderAction;
+class HDegree;
 
 class Harmony : public Text {
       Q_DECLARE_TR_FUNCTIONS(Harmony)
@@ -248,11 +109,11 @@ class Harmony : public Text {
       void setBaseTpc(int val)                 { _baseTpc = val;       }
       int rootTpc() const                      { return _rootTpc;      }
       void setRootTpc(int val)                 { _rootTpc = val;       }
-      void addDegree(const HDegree& d)         { _degreeList << d;            }
-      int numberOfDegrees() const              { return _degreeList.size();   }
-      HDegree degree(int i) const              { return _degreeList.value(i); }
-      void clearDegrees()                      { _degreeList.clear();         }
-      const QList<HDegree>& degreeList() const { return _degreeList;          }
+      void addDegree(const HDegree& d);
+      int numberOfDegrees() const;
+      HDegree degree(int i) const;
+      void clearDegrees();
+      const QList<HDegree>& degreeList() const;
 
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
@@ -263,9 +124,9 @@ class Harmony : public Text {
 
       // extension name is used by MusicXml export as <kind text="name">xmlKind</>
 
-      QString extensionName() const    { return _id != -1 ? descr()->names.front() : _userName;  }
-      QString xmlKind() const          { return _id != -1 ? descr()->xmlKind    : QString();     }
-      QStringList xmlDegrees() const   { return _id != -1 ? descr()->xmlDegrees : QStringList(); }
+      QString extensionName() const;
+      QString xmlKind() const;
+      QStringList xmlDegrees() const;
 
       void resolveDegreeList();
 

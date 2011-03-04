@@ -379,6 +379,7 @@ class Style {
       bool isDefault(StyleIdx idx) const;
       const ChordDescription* chordDescription(int id) const;
       ChordList* chordList() const;
+      void setChordList(ChordList*);      // Style gets ownership of ChordList
 
       const TextStyle& textStyle(TextStyleType idx) const;
       const TextStyle& textStyle(const QString& name) const;

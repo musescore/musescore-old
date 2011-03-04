@@ -58,6 +58,7 @@
 #include "tuplet.h"
 #include "tremolo.h"
 #include "volta.h"
+#include "chordlist.h"
 
 class MeasureToTick {
 public:
