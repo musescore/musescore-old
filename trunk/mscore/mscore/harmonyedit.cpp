@@ -27,6 +27,7 @@
 #include "icons.h"
 #include "pitchspelling.h"
 #include "symbol.h"
+#include "chordlist.h"
 
 extern bool useFactorySettings;
 
@@ -35,21 +36,28 @@ extern bool useFactorySettings;
 //---------------------------------------------------------
 
 ChordStyleEditor::ChordStyleEditor(QWidget* parent)
-   : QWidget(parent, Qt::Dialog | Qt::Window)
+   : QDialog(parent)
       {
       setupUi(this);
       setWindowTitle(tr("MuseScore: Chord Style Editor"));
       fileButton->setIcon(*icons[fileOpen_ICON]);
       chordList = 0;
-//      paletteTab->clear();
+      score = 0;
 
       connect(fileButton, SIGNAL(clicked()), SLOT(fileButtonClicked()));
       connect(saveButton, SIGNAL(clicked()), SLOT(saveButtonClicked()));
       connect(harmonyList, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),
          SLOT(harmonyChanged(QTreeWidgetItem*,QTreeWidgetItem*)));
+      }
 
-      // for debugging:
-      loadChordDescriptionFile("/usr/local/share/mscore-2.0/styles/jazzchords.xml");
+//---------------------------------------------------------
+//   setScore
+//---------------------------------------------------------
+
+void ChordStyleEditor::setScore(Score* s)
+      {
+      score = s;
+      setChordList(s->style()->chordList());
       }
 
 //---------------------------------------------------------
@@ -62,7 +70,7 @@ void MuseScore::editChordStyle()
             chordStyleEditor = new ChordStyleEditor(0);
             chordStyleEditor->restore();
             }
-
+      chordStyleEditor->setScore(cs);
       chordStyleEditor->show();
       chordStyleEditor->raise();
       }
@@ -87,8 +95,7 @@ void ChordStyleEditor::saveButtonClicked()
       {
       if (!chordList)
             return;
-      ChordDescription* d = canvas->getChordDescription();
-      updateChordDescription(d);
+      canvas->updateChordDescription();
 
       QString fn = mscore->getChordStyleFilename(false);
       if (fn.isEmpty())
@@ -111,18 +118,26 @@ void ChordStyleEditor::loadChordDescriptionFile(const QString& s)
             printf("cannot read <%s>\n", qPrintable(s));
             return;
             }
-      descriptionFile->setText(s);  // set text in text entry widget
+      setChordList(cl);
+      }
+
+//---------------------------------------------------------
+//   setChordList
+//---------------------------------------------------------
+
+void ChordStyleEditor::setChordList(ChordList* cl)
+      {
       harmonyList->clear();
       foreach (ChordDescription* d, *cl) {
             QTreeWidgetItem* item = new QTreeWidgetItem;
             item->setData(0, Qt::UserRole, QVariant::fromValue<void*>(d));
             item->setText(0, QString("%1").arg(d->id));
-            item->setText(1, QString("%1").arg(d->names.front()));
+            if (!d->names.isEmpty())
+                  item->setText(1, QString("%1").arg(d->names.front()));
             harmonyList->addTopLevelItem(item);
             }
-      if (chordList)
-            delete chordList;
-      chordList = cl;
+      delete chordList;
+      chordList = new ChordList(*cl);
       canvas->setChordDescription(0, 0);
 
       paletteTab->clear();
@@ -154,47 +169,14 @@ void ChordStyleEditor::loadChordDescriptionFile(const QString& s)
       }
 
 //---------------------------------------------------------
-//   updateCurrentChordDescription
-//---------------------------------------------------------
-
-void ChordStyleEditor::updateChordDescription(ChordDescription* d)
-      {
-      double extraMag     = 3.0;
-      double _spatium     = 2.0 * PALETTE_SPATIUM / extraMag;
-      double mag          = PALETTE_SPATIUM * extraMag / _spatium;
-      d->renderList.clear();
-      QList<TextSegment*> tl = canvas->getTextList();
-      int idx = 0;
-      double x  = 0, y = 0;
-      foreach(const TextSegment* ts, tl) {
-            ++idx;
-            if (idx == 1) {     // dont save base
-                  x = ts->x + ts->width();
-                  y = ts->y;
-                  continue;
-                  }
-            RenderAction ra(RenderAction::RENDER_MOVE);
-            ra.movex = (ts->x - x) / mag;
-            ra.movey = (ts->y - y) / mag;
-            d->renderList.append(ra);
-
-            ra.type  = RenderAction::RENDER_SET;
-            ra.text  = ts->text;
-            d->renderList.append(ra);
-            x = ts->x + ts->width();
-            y = ts->y;
-            }
-      }
-
-//---------------------------------------------------------
 //   harmonyChanged
 //---------------------------------------------------------
 
 void ChordStyleEditor::harmonyChanged(QTreeWidgetItem* current, QTreeWidgetItem* previous)
       {
       if (previous) {
-            ChordDescription* d = static_cast<ChordDescription*>(previous->data(0, Qt::UserRole).value<void*>());
-            updateChordDescription(d);
+            // ChordDescription* d = static_cast<ChordDescription*>(previous->data(0, Qt::UserRole).value<void*>());
+            canvas->updateChordDescription();
             }
       if (current) {
             ChordDescription* d = static_cast<ChordDescription*>(current->data(0, Qt::UserRole).value<void*>());
@@ -260,9 +242,9 @@ void HarmonyCanvas::paintEvent(QPaintEvent* event)
       if (!chordDescription)
             return;
 
-      double oldSpatium = gscore->spatium();
-      double spatium = 2.0 * PALETTE_SPATIUM / extraMag;
-      gscore->setSpatium(spatium);
+      qreal spatium = gscore->spatium();
+      qreal mag = PALETTE_SPATIUM * extraMag / spatium;
+      spatium = SPATIUM20 * DPI;
 
       QPainter p(this);
 
@@ -270,9 +252,8 @@ void HarmonyCanvas::paintEvent(QPaintEvent* event)
       qreal wh = double(height());
       qreal ww = double(width());
 
-      qreal mag  = PALETTE_SPATIUM * extraMag / spatium;
-      _matrix    = QTransform(mag, 0.0, 0.0, mag, ww*.1, wh*.8);
-      imatrix    = _matrix.inverted();
+      _matrix   = QTransform(mag, 0.0, 0.0, mag, ww*.1, wh*.8);
+      imatrix   = _matrix.inverted();
 
       p.setWorldTransform(_matrix);
       QRectF f = imatrix.mapRect(QRectF(0.0, 0.0, ww, wh));
@@ -290,8 +271,8 @@ void HarmonyCanvas::paintEvent(QPaintEvent* event)
 
       if (dragElement && dragElement->type() == FSYMBOL) {
             FSymbol* sb = static_cast<FSymbol*>(dragElement);
-            double _spatium = 2.0 * PALETTE_SPATIUM / extraMag;
 
+            double _spatium = 2.0 * PALETTE_SPATIUM / extraMag;
             const TextStyle* st = &gscore->textStyle(TEXT_STYLE_HARMONY);
             QFont ff(st->fontPx(_spatium));
             ff.setFamily(sb->font().family());
@@ -309,7 +290,6 @@ void HarmonyCanvas::paintEvent(QPaintEvent* event)
             p.setPen(pen);
             p.drawText(dragElement->pos(), s);
             }
-      gscore->setSpatium(oldSpatium);
       }
 
 //---------------------------------------------------------
@@ -352,8 +332,8 @@ void HarmonyCanvas::render(const QList<RenderAction>& renderList, double& x, dou
                   x += ts->width();
                   }
             else if (a.type == RenderAction::RENDER_MOVE) {
-                  x += a.movex * mag;
-                  y += a.movey * mag;
+                  x += a.movex;//  * mag;
+                  y += a.movey; //  * mag;
                   }
             else if (a.type == RenderAction::RENDER_PUSH)
                   stack.push(QPointF(x,y));
@@ -480,8 +460,8 @@ void HarmonyCanvas::dropEvent(QDropEvent* event)
       {
       if (dragElement && dragElement->type() == FSYMBOL) {
             FSymbol* sb = static_cast<FSymbol*>(dragElement);
-            double _spatium = 2.0 * PALETTE_SPATIUM / extraMag;
 
+            double _spatium = 2.0 * PALETTE_SPATIUM / extraMag;
             const TextStyle* st = &gscore->textStyle(TEXT_STYLE_HARMONY);
             QFont ff(st->fontPx(_spatium));
             ff.setFamily(sb->font().family());
@@ -516,8 +496,6 @@ void HarmonyCanvas::dragEnterEvent(QDragEnterEvent* event)
       const QMimeData* data = event->mimeData();
       if (data->hasFormat(mimeSymbolFormat)) {
             QByteArray a = data->data(mimeSymbolFormat);
-
-//          printf("ScoreView::dragEnterEvent: <%s>\n", a.data());
 
             QDomDocument doc;
             int line, column;
@@ -571,10 +549,64 @@ void HarmonyCanvas::dragMoveEvent(QDragMoveEvent* event)
 
 void HarmonyCanvas::deleteAction()
       {
-      printf("delete Action\n");
       if (moveElement) {
             textList.removeOne(moveElement);
             update();
             }
       }
 
+//---------------------------------------------------------
+//   updateHarmony
+//---------------------------------------------------------
+
+static void updateHarmony(void*, Element* e)
+      {
+      if (e->type() == HARMONY)
+            static_cast<Harmony*>(e)->render();
+      }
+
+//---------------------------------------------------------
+//   accept
+//---------------------------------------------------------
+
+void ChordStyleEditor::accept()
+      {
+      canvas->updateChordDescription();
+      score->style()->setChordList(chordList);
+      chordList = 0;
+
+      score->scanElements(0, updateHarmony);
+
+      QDialog::accept();
+      }
+
+//---------------------------------------------------------
+//   updateCurrentChordDescription
+//---------------------------------------------------------
+
+void HarmonyCanvas::updateChordDescription()
+      {
+      chordDescription->renderList.clear();
+
+      int idx = 0;
+      double x  = 0, y = 0;
+      foreach(const TextSegment* ts, textList) {
+            ++idx;
+            if (idx == 1) {     // dont save base
+                  x = ts->x + ts->width();
+                  y = ts->y;
+                  continue;
+                  }
+            if (ts->x != x || ts->y != y) {
+                  RenderAction ra(RenderAction::RENDER_MOVE);
+                  ra.movex = ts->x - x;
+                  ra.movey = ts->y - y;
+                  chordDescription->renderList.append(ra);
+                  }
+            RenderAction ra(RenderAction::RENDER_SET);
+            ra.text  = ts->text;
+            chordDescription->renderList.append(ra);
+            x = ts->x + ts->width();
+            y = ts->y;
+            }
+      }

@@ -149,7 +149,7 @@ add_executable ( ${ExecutableName}
       glissando.cpp lilypond.cpp exportly.cpp box.cpp measurebase.cpp
       editdrumset.cpp editstaff.cpp drumset.cpp tremolo.cpp repeat.cpp
       voltaproperties.cpp chordproperties.cpp restproperties.cpp
-      newwizard.cpp transposedialog.cpp bb.cpp
+      newwizard.cpp transposedialog.cpp bb.cpp chordlist.cpp
       harmony.cpp chordedit.cpp plugins.cpp tempotext.cpp
       excerptsdialog.cpp excerpt.cpp stafftext.cpp instrument.cpp durationtype.cpp
       event.cpp rendermidi.cpp articulation.cpp metaedit.cpp

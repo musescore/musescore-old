@@ -2491,9 +2491,13 @@ ChangeStyle::ChangeStyle(Score* s, const Style& st)
 static void updateTextStyle2(void*, Element* e)
       {
       if (e->isText()) {
-            Text* text = static_cast<Text*>(e);
-            if (text->styled())
-                  text->setText(text->getText());     // destroy formatting
+            if (e->type() == HARMONY)
+                  static_cast<Harmony*>(e)->render();
+            else {
+                  Text* text = static_cast<Text*>(e);
+                  if (text->styled())
+                        text->setText(text->getText());     // destroy formatting
+                  }
             }
       }
 

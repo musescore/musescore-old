@@ -91,6 +91,8 @@ class StyleData : public QSharedData {
       mutable ChordList* _chordList;
       QList<TextStyle> _textStyles;
 
+      bool _customChordList;        // if true, chordlist will be saved as part of score
+
       void set(const StyleVal& v)                         { _values[v.getIdx()] = v; }
       StyleVal value(StyleIdx idx) const                  { return _values[idx];     }
       const TextStyle& textStyle(TextStyleType idx) const { return _textStyles[idx]; }
@@ -110,7 +112,9 @@ class StyleData : public QSharedData {
 
       const ChordDescription* chordDescription(int id) const;
       ChordList* chordList() const;
+      void setChordList(ChordList*);      // Style gets ownership of ChordList
       friend class Style;
       };
 
 #endif
+

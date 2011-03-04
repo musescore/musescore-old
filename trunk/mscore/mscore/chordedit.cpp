@@ -24,6 +24,7 @@
 #include "harmony.h"
 #include "pitchspelling.h"
 #include "score.h"
+#include "chordlist.h"
 
 //---------------------------------------------------------
 //   ChordEdit
@@ -82,7 +83,11 @@ ChordEdit::ChordEdit(Score* s, QWidget* parent)
       extOtherCombo->clear();
       ChordList* cl = score->style()->chordList();
       foreach (const ChordDescription* cd, *cl) {
-            QString p(cd->names.front());
+            QString p;
+            if (cd->names.isEmpty())
+                  p = "?";
+            else
+                  p = cd->names.front();
             extOtherCombo->addItem(p, cd->id);
             }
       connect(rootGroup, SIGNAL(buttonClicked(int)), SLOT(chordChanged()));

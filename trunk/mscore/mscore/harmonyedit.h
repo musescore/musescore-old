@@ -30,23 +30,28 @@ class ChordList;
 //    ChordStyleEditor
 //---------------------------------------------------------
 
-class ChordStyleEditor : public QWidget, Ui::ChordStyleEditor {
+class ChordStyleEditor : public QDialog, Ui::ChordStyleEditor {
       Q_OBJECT
 
       bool _dirty;
       Palette* sp1;
+      Score* score;
       ChordList* chordList;
 
       void loadChordDescriptionFile(const QString&);
-      void updateChordDescription(ChordDescription*);
+      void setChordList(ChordList* cl);
 
    private slots:
       void fileButtonClicked();
       void saveButtonClicked();
       void harmonyChanged(QTreeWidgetItem*, QTreeWidgetItem*);
 
+   public slots:
+      virtual void accept();
+
    public:
       ChordStyleEditor(QWidget* parent = 0);
+      void setScore(Score*);
       bool dirty() const { return _dirty; }
       void save();
       void restore();

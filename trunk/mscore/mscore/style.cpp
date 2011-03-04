@@ -27,6 +27,7 @@
 #include "articulation.h"
 #include "harmony.h"
 #include "preferences.h"
+#include "chordlist.h"
 
 Style* style;
 //  20 points        font design size
@@ -366,6 +367,7 @@ void setDefaultStyle(Style* s)
 StyleData::StyleData()
    : _values(ST_STYLES)
       {
+      _customChordList = false;
       static const StyleVal values[ST_STYLES] = {
             StyleVal(ST_staffUpperBorder, Spatium(7.0)),
             StyleVal(ST_staffLowerBorder, Spatium(7.0)),
@@ -903,6 +905,12 @@ void StyleData::load(QDomElement e)
             else if (tag == "displayInConcertPitch") {
                   set(StyleVal(ST_concertPitch, bool(val.toInt())));
                   }
+            else if (tag == "ChordList") {
+                  delete _chordList;
+                  _chordList = new ChordList;
+                  _chordList->read(e);
+                  _customChordList = true;
+                  }
             else {
                   if (tag == "stemDir") {
                         int voice = e.attribute("voice", "1").toInt() - 1;
@@ -997,6 +1005,11 @@ void StyleData::save(Xml& xml, bool optimize) const
             if (!optimize || _textStyles[i] != mscore->defaultStyle()->textStyle(TextStyleType(i)))
                   _textStyles[i].write(xml);
             }
+      if (_customChordList && _chordList) {
+            xml.stag("ChordList");
+            _chordList->write(xml);
+            xml.etag();
+            }
       xml.etag();
       }
 
@@ -1021,6 +1034,17 @@ ChordList* StyleData::chordList()  const
             _chordList->read(value(ST_chordDescriptionFile).toString());
             }
       return _chordList;
+      }
+
+//---------------------------------------------------------
+//   setChordList
+//---------------------------------------------------------
+
+void StyleData::setChordList(ChordList* cl)
+      {
+      delete _chordList;
+      _chordList = cl;
+      _customChordList = true;      // TODO: check
       }
 
 StyleVal::StyleVal(StyleIdx t, Spatium val)
@@ -1124,6 +1148,11 @@ const ChordDescription* Style::chordDescription(int id) const
 ChordList* Style::chordList() const
       {
       return d->chordList();
+      }
+
+void Style::setChordList(ChordList* cl)
+      {
+      d->setChordList(cl);
       }
 
 //---------------------------------------------------------

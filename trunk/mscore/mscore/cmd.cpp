@@ -84,6 +84,7 @@
 #include "tablature.h"
 #include "stafftype.h"
 #include "segment.h"
+#include "chordlist.h"
 
 //---------------------------------------------------------
 //   startCmd

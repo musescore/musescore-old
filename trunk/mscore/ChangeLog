@@ -1,4 +1,5 @@
 4.mar (ws)
+      - fixes for harmony-editor
       - chords(harmony) can have more than one name by adding more <name> tags to
         chords.xml or stdchords.xml/jazzchords.xml.
       - unrecognized harmony names are marked with a wavy underline during entry
