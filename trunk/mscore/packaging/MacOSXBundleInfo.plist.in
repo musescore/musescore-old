@@ -257,5 +257,7 @@
 	<true/>
 	<key>NSHumanReadableCopyright</key>
 	<string>${MACOSX_BUNDLE_COPYRIGHT}</string>
+	<key>ATSApplicationFontsPath</key>
+	<string>fonts/</string>
 </dict>
 </plist>
