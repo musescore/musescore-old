@@ -2191,8 +2191,12 @@ void Measure::read(QDomElement e, int staffIdx)
                               segment = first();
                         else {
                               Segment* nextSegment = segment ? segment->next() : 0;
-                              segment = new Segment(this, SegClef, score()->curTick);
-                              insert(segment, nextSegment);
+                              if (nextSegment && nextSegment->tick() != score()->curTick)
+                                    segment = getSegment(SegClef, score()->curTick);
+                              else {
+                                    segment = new Segment(this, SegClef, score()->curTick);
+                                    insert(segment, nextSegment);
+                                    }
                               }
                         }
                   else
