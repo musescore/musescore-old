@@ -69,30 +69,30 @@
      transform="translate(1.294365,-6.112279)">
     <path
        d="m 12.071526,17.712542 c 0.139771,0.882334 -0.466673,1.733335 -1.4,2.52 -0.9333379,0.786667 -1.9333369,1.18 -3.0000003,1.18 -0.6533349,0 -1.180001,-0.166667 -1.58,-0.5 -0.4000002,-0.333333 -0.6,-0.773332 -0.6,-1.32 0,-0.893331 0.4666662,-1.73333 1.4,-2.52 0.933331,-0.786662 1.93333,-1.179995 3,-1.18 0.6133283,5e-6 1.1339253,0.110536 1.5400003,0.46 0.379756,0.326814 0.561611,0.865149 0.64,1.36 z"
-       style="fill:#ffffff;fill-opacity:1"
+       style="fill:#000000;fill-opacity:1"
        id="path2815"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="sssssscas" />
   </g>
   <path
-     style="fill:none;stroke:#ffffff;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
      d="m 10,2 0,7"
      id="path2986"
      inkscape:connector-curvature="0" />
   <path
-     style="fill:none;stroke:#ffffff;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
      d="m 10,16 0,6"
      id="path2988"
      inkscape:connector-curvature="0"
      sodipodi:nodetypes="cc" />
   <path
-     style="fill:none;stroke:#ffffff;stroke-width:1px;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+     style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
      d="m 7,4 3,-2 3,2"
      id="path2994"
      inkscape:connector-curvature="0"
      sodipodi:nodetypes="ccc" />
   <path
-     style="fill:none;stroke:#ffffff;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
      d="M 13,20 10,22 7,20"
      id="path2996"
      inkscape:connector-curvature="0" />

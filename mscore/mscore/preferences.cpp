@@ -454,10 +454,15 @@ void Preferences::read()
             appStyleFile = ":/data/appstyle.css";
             globalStyle  = 1;
             }
-      else {
+      else if (styleName == "dark") {
             iconGroup = "icons-dark/";
             appStyleFile = ":/data/appstyle-dark.css";
             globalStyle  = 0;
+            }
+      else {
+            iconGroup = "icons/";
+            appStyleFile = ":/data/appstyle.css";
+            globalStyle  = 2;
             }
       singlePalette    = s.value("singlePalette", false).toBool();
       myScoresPath     = s.value("myScoresPath", "MyScores").toString();
@@ -1324,11 +1329,17 @@ void PreferenceDialog::apply()
             preferences.styleName = "dark";
             preferences.globalStyle = 0;
             }
-      else {
+      else if (styleName->currentIndex() == 1){
             iconGroup = "icons/";
             appStyleFile = ":/data/appstyle.css";
             preferences.styleName = "light";
             preferences.globalStyle = 1;
+            }
+      else {
+            iconGroup = "icons/";
+            appStyleFile = ":/data/appstyle.css";
+            preferences.styleName = "native";
+            preferences.globalStyle = 2;
             }
 
       if (languageChanged) {
