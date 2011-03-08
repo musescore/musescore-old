@@ -384,7 +384,7 @@ StyleData::StyleData()
             StyleVal(ST_doubleBarWidth, Spatium(0.16)),
             StyleVal(ST_endBarWidth, Spatium(0.3)),         // 0.5
             StyleVal(ST_doubleBarDistance, Spatium(0.30)),
-            StyleVal(ST_endBarDistance, Spatium(0.30)),
+            StyleVal(ST_endBarDistance, Spatium(0.40)),     // 0.3
             StyleVal(ST_repeatBarTips, false),
             StyleVal(ST_startBarlineSingle, false),
             StyleVal(ST_startBarlineMultiple, true),
@@ -403,7 +403,7 @@ StyleData::StyleData()
             StyleVal(ST_shortStemProgression, Spatium(0.25)),
             StyleVal(ST_shortestStem, Spatium(2.25)),
             StyleVal(ST_beginRepeatLeftMargin,Spatium(1.0)),
-            StyleVal(ST_minNoteDistance,Spatium(0.4)),
+            StyleVal(ST_minNoteDistance,Spatium(0.25)),           // 0.4
             StyleVal(ST_barNoteDistance,Spatium(1.2)),
             StyleVal(ST_noteBarDistance,Spatium(1.0)),
 

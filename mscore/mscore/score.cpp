@@ -554,8 +554,6 @@ int Score::readScore(QString name)
 
       int staffIdx = 0;
       foreach(Staff* st, _staves) {
-            if (st->updateClefList())
-                  st->clefList()->clear();
             if (st->updateKeymap())
                   st->keymap()->clear();
             int track = staffIdx * VOICES;
@@ -567,11 +565,11 @@ int Score::readScore(QString name)
                         Element* e = s->element(track);
                         if (e->generated())
                               continue;
-                        if ((s->subtype() == SegClef) && st->updateClefList()) {
-                              Clef* clef = static_cast<Clef*>(e);
-                              st->setClef(s->tick(), clef->clefTypeList());
-                              }
-                        else if ((s->subtype() == SegKeySig) && st->updateKeymap()) {
+                        //if ((s->subtype() == SegClef) && st->updateClefList()) {
+                        //      Clef* clef = static_cast<Clef*>(e);
+                        //      st->setClef(s->tick(), clef->clefTypeList());
+                        //      }
+                        if ((s->subtype() == SegKeySig) && st->updateKeymap()) {
                               KeySig* ks = static_cast<KeySig*>(e);
                               int naturals = key1 ? key1->keySigEvent().accidentalType() : 0;
                               ks->setOldSig(naturals);
@@ -714,60 +712,16 @@ void Score::insertTime(int tick, int len)
             //
             len = -len;
             tempomap()->removeTime(tick, len);
-            foreach(Staff* staff, _staves) {
-                  staff->clefList()->removeTime(tick, len);
+            foreach(Staff* staff, _staves)
                   staff->keymap()->removeTime(tick, len);
-                  }
-#if 0  // WS1
-            foreach(Element* el, _gel) {
-                  if (el->type() == SLUR) {
-                        Slur* s = static_cast<Slur*>(el);
-                        if (s->tick() >= tick + len) {
-                              s->setTick(s->tick() - len);
-                              }
-                        if (s->tick2() >= tick + len) {
-                              s->setTick2(s->tick2() - len);
-                              }
-                        }
-                  else if (el->isSLine()) {
-                        SLine* s = static_cast<SLine*>(el);
-                        if (s->tick() >= tick + len)
-                              s->setTick(s->tick() - len);
-                        if (s->tick2() >= tick + len)
-                              s->setTick2(s->tick2() - len);
-                        }
-                  }
-#endif
             }
       else {
             //
             // insert time
             //
             tempomap()->insertTime(tick, len);
-            foreach(Staff* staff, _staves) {
-                  staff->clefList()->insertTime(tick, len);
+            foreach(Staff* staff, _staves)
                   staff->keymap()->insertTime(tick, len);
-                  }
-#if 0 // WS1
-            foreach(Element* el, _gel) {
-                  if (el->type() == SLUR) {
-                        Slur* s = static_cast<Slur*>(el);
-                        if (s->tick() >= tick) {
-                              s->setTick(s->tick() + len);
-                              }
-                        if (s->tick2() >= tick) {
-                              s->setTick2(s->tick2() + len);
-                              }
-                        }
-                  else if (el->isSLine()) {
-                        SLine* s = static_cast<SLine*>(el);
-                        if (s->tick() >= tick)
-                              s->setTick(s->tick() + len);
-                        if (s->tick2() >= tick)
-                              s->setTick2(s->tick2() + len);
-                        }
-                  }
-#endif
             }
       addLayoutFlags(LAYOUT_FIX_TICKS);
       }
@@ -1875,8 +1829,8 @@ void Score::addElement(Element* element)
                   {
                   Clef* clef       = static_cast<Clef*>(element);
                   Segment* segment = clef->segment();
-                  Staff* staff     = clef->staff();
-                  staff->setClef(segment->tick(), clef->clefTypeList());
+                  // Staff* staff     = clef->staff();
+                  // staff->setClef(segment->tick(), clef->clefTypeList());
                   updateNoteLines(segment, clef->track());
                   }
                   break;
@@ -1984,8 +1938,8 @@ void Score::removeElement(Element* element)
                   {
                   Clef* clef       = static_cast<Clef*>(element);
                   Segment* segment = clef->segment();
-                  Staff* staff     = clef->staff();
-                  staff->clefList()->erase(segment->tick());
+//                  Staff* staff     = clef->staff();
+//                  staff->clefList()->remove(segment->tick());
                   updateNoteLines(segment, clef->track());
                   }
                   break;
@@ -2411,8 +2365,6 @@ Score* Score::clone()
 
       int staffIdx = 0;
       foreach(Staff* st, score->staves()) {
-            if (st->updateClefList())
-                  st->clefList()->clear();
             if (st->updateKeymap())
                   st->keymap()->clear();
             int track = staffIdx * VOICES;
@@ -2424,11 +2376,11 @@ Score* Score::clone()
                         Element* e = s->element(track);
                         if (e->generated())
                               continue;
-                        if ((s->subtype() == SegClef) && st->updateClefList()) {
-                              Clef* clef = static_cast<Clef*>(e);
-                              st->setClef(s->tick(), clef->clefTypeList());
-                              }
-                        else if ((s->subtype() == SegKeySig) && st->updateKeymap()) {
+//                        if ((s->subtype() == SegClef) && st->updateClefList()) {
+//                              Clef* clef = static_cast<Clef*>(e);
+//                              st->setClef(s->tick(), clef->clefTypeList());
+//                              }
+                        if ((s->subtype() == SegKeySig) && st->updateKeymap()) {
                               KeySig* ks = static_cast<KeySig*>(e);
                               int naturals = key1 ? key1->keySigEvent().accidentalType() : 0;
                               ks->setOldSig(naturals);

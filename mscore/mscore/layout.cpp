@@ -613,7 +613,6 @@ void Score::doLayout()
       bool updateStaffLists = true;
       foreach(Staff* st, _staves) {
             if (st->updateClefList()) {
-                  st->clefList()->clear();
                   updateStaffLists = true;
                   }
             if (st->updateKeymap()) {
@@ -629,16 +628,12 @@ void Score::doLayout()
                   KeySig* key1 = 0;
                   for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
                         for (Segment* s = m->first(); s; s = s->next()) {
-                              if (!s->element(track))
-                                    continue;
+                              if (s == s->next())
+                                    abort();
                               Element* e = s->element(track);
-                              if (e->generated())
+                              if (e == 0 || e->generated())
                                     continue;
-                              if ((s->subtype() == SegClef) && st->updateClefList()) {
-                                    Clef* clef = static_cast<Clef*>(e);
-                                    st->setClef(s->tick(), clef->clefTypeList());
-                                    }
-                              else if ((s->subtype() == SegKeySig) && st->updateKeymap()) {
+                              if ((s->subtype() == SegKeySig) && st->updateKeymap()) {
                                     KeySig* ks = static_cast<KeySig*>(e);
                                     int naturals = key1 ? key1->keySigEvent().accidentalType() : 0;
                                     ks->setOldSig(naturals);
@@ -841,7 +836,6 @@ void Score::processSystemHeader(Measure* m, bool isFirstSystem)
                   }
             bool needClef = isFirstSystem || styleB(ST_genClef);
             if (needClef) {
-                  ClefType idx = staff->clef(tick);
                   if (!hasClef) {
                         //
                         // create missing clef
@@ -855,14 +849,18 @@ void Score::processSystemHeader(Measure* m, bool isFirstSystem)
                         s->add(hasClef);
                         m->setDirty();
                         }
-                  hasClef->setClefType(idx);
+                  if (hasClef->generated()) {
+                        ClefTypeList ctl = staff->clefTypeList(tick);
+                        hasClef->setClefType(ctl);
+                        }
                   }
             else {
-                  if (hasClef) {
+                  if (hasClef && hasClef->generated()) {
                         int track = hasClef->track();
                         Segment* seg = hasClef->segment();
-                        seg->setElement(track, 0);    // TODO: delete element
+                        seg->setElement(track, 0);
                         m->setDirty();
+                        delete hasClef;
                         }
                   }
             ++i;

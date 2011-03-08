@@ -1344,7 +1344,7 @@ void ExportMusicXml::pitch2xml(Note* note, char& c, int& alter, int& octave)
 
       int tick   = note->chord()->tick();
       Staff* i   = note->staff();
-      ClefType clef   = i->clefList()->clef(tick)._transposingClef;
+      ClefType clef   = i->clef(tick);
       int offset = clefTable[clef].yOffset;
 
       int step   = (note->line() - offset + 700) % 7;
@@ -1408,7 +1408,7 @@ void ExportMusicXml::unpitch2xml(Note* note, char& c, int& octave)
 
           int tick   = note->chord()->tick();
           Staff* i   = note->staff();
-          int offset = clefTable[i->clefList()->clef(tick)._transposingClef].yOffset;
+          int offset = clefTable[i->clef(tick)].yOffset;
 
           int step   = (note->line() - offset + 700) % 7;
           c          = table1[step];
@@ -2433,7 +2433,7 @@ void ExportMusicXml::rest(Rest* rest, int staff)
       int    yOffsSt = - 2 * int(yOffsSp > 0.0 ? yOffsSp + 0.5 : yOffsSp - 0.5); // same rounded to int (positive = up)
 //      printf(" yshift=%g", yOffsSp);
 //      printf(" (up %d steps)", yOffsSt);
-      ClefType clef = rest->staff()->clefList()->clef(rest->tick())._transposingClef;
+      ClefType clef = rest->staff()->clef(rest->tick());
       int po = clefTable[clef].pitchOffset;
       po -= 4;          // pitch middle staff line (two lines times two steps lower than top line)
       po += yOffsSt;    // rest "pitch"
@@ -3912,14 +3912,10 @@ foreach(Element* el, *(score->gel())) {
                                           int ti = cle->segment()->tick();
                                           int ct = cle->subtype();
                                           printf("exportxml: clef at start measure ti=%d ct=%d gen=%d\n", ti, ct, el->generated());
-                                          ClefList* cl = score->staff(st/VOICES)->clefList();
-                                          ciClefEvent ci = cl->find(ti);
-                                          if (ci != cl->end()) {
+                                          if (!cle->generated())
                                                 clef(sstaff, ct);
-                                                }
-                                          else {
+                                          else
                                                 printf("exportxml: clef not exported\n");
-                                                }
                                           }
                                     }
                         }
@@ -4030,9 +4026,7 @@ foreach(Element* el, *(score->gel())) {
                                                 printf("exportxml: generated clef not exported\n");
                                                 break;
                                                 }
-                                          ClefList* cl = score->staff(st/VOICES)->clefList();
-                                          ciClefEvent ci = cl->find(ti);
-                                          if (ci != cl->end() && seg->tick() != m->tick()) {
+                                          if (!el->generated() && seg->tick() != m->tick()) {
                                                 clef(sstaff, ct);
                                                 }
                                           else {

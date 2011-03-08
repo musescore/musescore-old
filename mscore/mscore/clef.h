@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -37,6 +37,20 @@ class Painter;
 static const int NO_CLEF = -1000;
 
 //---------------------------------------------------------
+//   ClefTypeList
+//---------------------------------------------------------
+
+struct ClefTypeList {
+      ClefType _concertClef;
+      ClefType _transposingClef;
+
+      ClefTypeList() {}
+      ClefTypeList(ClefType a, ClefType b) : _concertClef(a), _transposingClef(b) {}
+      bool operator==(const ClefTypeList& t) const;
+      bool operator!=(const ClefTypeList& t) const;
+      };
+
+//---------------------------------------------------------
 //   ClefInfo
 ///   Info about a clef.
 //---------------------------------------------------------
@@ -56,44 +70,6 @@ struct ClefInfo {
 extern const ClefInfo clefTable[];
 
 //---------------------------------------------------------
-//   ClefTypeList
-//---------------------------------------------------------
-
-struct ClefTypeList {
-      ClefType _concertClef;
-      ClefType _transposingClef;
-
-      ClefTypeList() {}
-      ClefTypeList(ClefType a, ClefType b) : _concertClef(a), _transposingClef(b) {}
-      bool operator==(const ClefTypeList& t) const;
-      bool operator!=(const ClefTypeList& t) const;
-      };
-
-//---------------------------------------------------------
-//   ClefList
-//---------------------------------------------------------
-
-typedef std::map<const int, ClefTypeList>::iterator iClefEvent;
-typedef std::map<const int, ClefTypeList>::const_iterator ciClefEvent;
-
-/**
- List of Clefs during time.
-
- This list is instantiated for every Instrument
- to keep track of clef changes.
-*/
-
-class ClefList : public std::map<const int, ClefTypeList> {
-   public:
-      ClefList() {}
-      ClefTypeList clef(int tick) const;
-      void setClef(int tick, const ClefTypeList&);
-      void read(QDomElement, Score*);
-      void removeTime(int, int);
-      void insertTime(int, int);
-      };
-
-//---------------------------------------------------------
 //   Clef
 ///   Graphic representation of a clef.
 //---------------------------------------------------------
@@ -101,6 +77,9 @@ class ClefList : public std::map<const int, ClefTypeList> {
 class Clef : public Element {
       QList<Element*> elements;
       bool _showCourtesyClef;
+      bool _showPreviousClef;       // show clef type at position tick-1
+                                    // used for first clef on staff immediatly followed
+                                    // by a different clef at same tick position
       bool _small;
 
       ClefTypeList _clefTypes;
@@ -137,7 +116,7 @@ class Clef : public Element {
       virtual void setSubtype(const QString& s);
       static ClefType clefType(const QString& s);
 
-      ClefType clefType() const             { return ClefType(subtype());         }
+      ClefType clefType() const;
       ClefTypeList clefTypeList() const     { return _clefTypes;                  }
       ClefType concertClef() const          { return _clefTypes._concertClef;     }
       ClefType transposingClef() const      { return _clefTypes._transposingClef; }

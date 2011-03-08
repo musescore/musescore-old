@@ -32,6 +32,7 @@
 #include "tablature.h"
 #include "stafftype.h"
 #include "undo.h"
+#include "cleflist.h"
 
 //---------------------------------------------------------
 //   idx
@@ -165,7 +166,6 @@ Staff::Staff(Score* s, Part* p, int rs)
       _score          = s;
       _rstaff         = rs;
       _part           = p;
-      _clefList       = new ClefList;
       _keymap         = new KeyList;
       (*_keymap)[0]   = KeySigEvent(0);                  // default to C major
       _staffType      = _score->staffTypes()[PITCHED_STAFF_TYPE];
@@ -189,10 +189,8 @@ Staff::~Staff()
             if (_linkedStaves->isEmpty())
                   delete _linkedStaves;
             }
-      delete _clefList;
       delete _keymap;
       _keymap   = 0;      // DEBUG
-      _clefList = 0;
       }
 
 //---------------------------------------------------------
@@ -201,9 +199,44 @@ Staff::~Staff()
 
 ClefType Staff::clef(int tick) const
       {
-      ClefTypeList ctl = _clefList->clef(tick);
+      ClefTypeList ctl = clefTypeList(tick);
       ClefType ct = score()->concertPitch() ? ctl._concertClef : ctl._transposingClef;
       return ct;
+      }
+
+ClefType Staff::clef(Segment* segment) const
+      {
+      ClefType ct = CLEF_G;
+      int track = idx() * VOICES;
+      for (;;) {
+            segment = segment->prev1(SegClef);
+            if (segment == 0)
+                  break;
+            if (segment->element(track)) {
+                  ct = static_cast<Clef*>(segment->element(track))->clefType();
+                  break;
+                  }
+            }
+      return ct;
+      }
+
+//---------------------------------------------------------
+//   Staff::clefTypeList
+//---------------------------------------------------------
+
+ClefTypeList Staff::clefTypeList(int tick) const
+      {
+      ClefTypeList ctl(CLEF_G, CLEF_G);
+      int track  = idx() * VOICES;
+      for (Segment* s = score()->firstSegment(); s; s = s->next1()) {
+            if (s->tick() > tick)
+                  break;
+            if (s->subtype() != SegClef)
+                  continue;
+            if (s->element(track) && !s->element(track)->generated())
+                  ctl = static_cast<Clef*>(s->element(track))->clefTypeList();
+            }
+      return ctl;
       }
 
 //---------------------------------------------------------
@@ -267,8 +300,8 @@ void Staff::read(QDomElement e)
                   setInvisible(v);
             else if (tag == "slashStyle")
                   ;                       // obsolete: setSlashStyle(v);
-            else if (tag == "cleflist")
-                  _clefList->read(e, _score);
+//            else if (tag == "cleflist")
+//                  _clefList->read(e, _score);
             else if (tag == "keylist")
                   _keymap->read(e, _score);
             else if (tag == "bracket") {
@@ -299,11 +332,12 @@ void Staff::read(QDomElement e)
       //
       // for compatibility with old scores:
       //
-      if (!_clefList->empty()) {
+/*      if (!_clefList->empty()) {
             ClefType ct = clef(0);
             if (ct == CLEF_PERC2 || ct == CLEF_PERC)
                   _staffType = staffTypes[PERCUSSION_STAFF_TYPE];
             }
+*/
       }
 
 #if 0
@@ -394,20 +428,6 @@ void Staff::setKey(int tick, const KeySigEvent& st)
 void Staff::removeKey(int tick)
       {
       _keymap->erase(tick);
-      }
-
-//---------------------------------------------------------
-//   setClef
-//---------------------------------------------------------
-
-void Staff::setClef(int tick, const ClefTypeList& cl)
-      {
-      _clefList->setClef(tick, cl);
-      }
-
-void Staff::setClef(int tick, const ClefType& ct)
-      {
-      _clefList->setClef(tick, ClefTypeList(ct, ct));
       }
 
 //---------------------------------------------------------
@@ -558,7 +578,7 @@ void Staff::setStaffType(StaffType* st)
       StaffGroup csg = clefTable[ct].staffGroup;
 
       if (_staffType->group() != csg) {
-            _clefList->clear();
+//            _clefList->clear();
             switch(_staffType->group()) {
                   case TAB_STAFF:        ct = CLEF_TAB2; break;
                   case PITCHED_STAFF:    ct = CLEF_G; break;      // TODO: use preferred clef for instrument

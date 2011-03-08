@@ -1,3 +1,7 @@
+8.mar (ws)
+      - allow more than one clef at the same tick position. Example is a piano score
+        were the top staff starts with a G clef and switches immediately to an F clef
+        without any notes in between.
 4.mar (ws)
       - fixes for harmony-editor
       - chords(harmony) can have more than one name by adding more <name> tags to

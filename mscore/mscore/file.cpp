@@ -1575,14 +1575,15 @@ bool Score::read(QDomElement dScore)
             connectSlurs();
 
       if (_mscVersion < 115) {
+#if 0   // TODO!
             for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
                   Staff* s = _staves[staffIdx];
                   int track = staffIdx * VOICES;
 
                   ClefList* cl = s->clefList();
-                  for (ciClefEvent i = cl->begin(); i != cl->end(); ++i) {
-                        int tick = i->first;
-                        ClefType clefId = i->second._concertClef;
+                  for (ciClefEvent i = cl->constBegin(); i != cl->constEnd(); ++i) {
+                        int tick = i.key();
+                        ClefType clefId = i.value()._concertClef;
                         Measure* m = tick2measure(tick);
                         if ((tick == m->tick()) && m->prevMeasure())
                               m = m->prevMeasure();
@@ -1616,6 +1617,7 @@ bool Score::read(QDomElement dScore)
                               }
                         }
                   }
+#endif
             }
       if (_mscVersion < 116) {
             //
