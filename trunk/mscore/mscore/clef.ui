@@ -71,7 +71,13 @@
            <bool>true</bool>
           </property>
           <property name="buttonSymbols">
-           <enum>QAbstractSpinBox::UpDownArrows</enum>
+           <enum>QAbstractSpinBox::NoButtons</enum>
+          </property>
+          <property name="specialValueText">
+           <string notr="true">invalid</string>
+          </property>
+          <property name="minimum">
+           <number>-1</number>
           </property>
           <property name="maximum">
            <number>999999</number>
@@ -105,6 +111,12 @@
           <property name="buttonSymbols">
            <enum>QAbstractSpinBox::NoButtons</enum>
           </property>
+          <property name="specialValueText">
+           <string notr="true">invalid</string>
+          </property>
+          <property name="minimum">
+           <number>-1</number>
+          </property>
           <property name="maximum">
            <number>999999</number>
           </property>
@@ -133,6 +145,15 @@
           </property>
           <property name="buttonSymbols">
            <enum>QAbstractSpinBox::NoButtons</enum>
+          </property>
+          <property name="specialValueText">
+           <string notr="true">invalid</string>
+          </property>
+          <property name="minimum">
+           <number>-1</number>
+          </property>
+          <property name="maximum">
+           <number>99999</number>
           </property>
          </widget>
         </item>

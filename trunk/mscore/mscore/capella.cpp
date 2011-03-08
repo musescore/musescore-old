@@ -1703,7 +1703,7 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                         ClefType nclef = o->clef();
                         if (nclef == CLEF_INVALID)
                               break;
-                        staff(staffIdx)->setClef(tick, nclef);
+                        // staff(staffIdx)->setClef(tick, nclef);
                         Clef* clef = new Clef(this);
                         clef->setClefType(nclef);
                         clef->setTrack(staffIdx * VOICES);
@@ -1958,8 +1958,8 @@ printf("Midi staff %d program %d\n", staffIdx, cl->sound);
             part->setLongName(QString::fromLatin1(cl->name));
             part->setShortName(QString::fromLatin1(cl->abbrev));
 
-            ClefType clefType = CapClef::clefType(cl->form, cl->line, cl->oct);
-            s->setClef(0, clefType);
+//            ClefType clefType = CapClef::clefType(cl->form, cl->line, cl->oct);
+//            s->setClef(0, clefType);
             s->setBarLineSpan(0);
             if (bstaff == 0) {
                   bstaff = s;

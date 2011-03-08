@@ -607,7 +607,8 @@ Element* ChordRest::drop(const DropData& data)
                   break;
 
             case CLEF:
-                  score()->undoChangeClef(staff(), tick(), ClefType(e->subtype()));
+                  score()->undo()->push(new AddClef(staffIdx() * VOICES,
+                     segment(), static_cast<Clef*>(e)->clefType()));
                   break;
 
             case TEMPO_TEXT:
@@ -620,13 +621,10 @@ Element* ChordRest::drop(const DropData& data)
                   break;
 
             case DYNAMIC:
-                  {
-                  Dynamic* d = static_cast<Dynamic*>(e);
-                  d->setTrack(track());
-                  d->setParent(segment());
+                  e->setTrack(track());
+                  e->setParent(segment());
                   score()->undoAddElement(e);
-                  }
-                  break;
+                  return e;
 
             case NOTE:
                   {

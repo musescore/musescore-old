@@ -1339,23 +1339,6 @@ class InsertMeasures : public UndoCommand {
       };
 
 //---------------------------------------------------------
-//   ChangeClef
-//---------------------------------------------------------
-
-class ChangeClef : public UndoCommand {
-      Clef* clef;
-      bool showCourtesy;
-
-      void flip();
-
-   public:
-      ChangeClef(Clef* _clef, bool sc) : clef(_clef), showCourtesy(sc) {}
-      virtual void undo() { flip(); }
-      virtual void redo() { flip(); }
-      UNDO_NAME("ChangeClef");
-      };
-
-//---------------------------------------------------------
 //   ChangeImage
 //---------------------------------------------------------
 
@@ -1575,6 +1558,40 @@ class ChangeClefType : public UndoCommand {
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       UNDO_NAME("ChangeClef");
+      };
+
+//---------------------------------------------------------
+//   ChangeClef
+//---------------------------------------------------------
+
+class ChangeClef : public UndoCommand {
+      Clef* clef;
+      bool showCourtesy;
+
+      void flip();
+
+   public:
+      ChangeClef(Clef* _clef, bool sc) : clef(_clef), showCourtesy(sc) {}
+      virtual void undo() { flip(); }
+      virtual void redo() { flip(); }
+      UNDO_NAME("ChangeClef");
+      };
+
+//---------------------------------------------------------
+//   AddClef
+//---------------------------------------------------------
+
+class AddClef : public UndoCommand {
+      int track;
+      Segment* nextSeg;
+      ClefType type;
+      Clef* clef;
+
+   public:
+      AddClef(int tr, Segment* s, ClefType(t));
+      virtual void undo();
+      virtual void redo();
+      UNDO_NAME("AddClef");
       };
 
 #endif

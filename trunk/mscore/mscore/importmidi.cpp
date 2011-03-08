@@ -840,7 +840,7 @@ void Score::convertMidi(MidiFile* mf)
             track->setStaff(s);
 
             if (track->isDrumTrack()) {
-                  s->setClef(0, CLEF_PERC);
+                  // s->setClef(0, CLEF_PERC);
                   part->instr()->setDrumset(smDrumset);
                   }
             else {
@@ -852,16 +852,16 @@ void Score::convertMidi(MidiFile* mf)
                         part->insertStaff(ss);
                         _staves.push_back(ss);
 
-                        s->setClef(0, CLEF_G);
+                        // s->setClef(0, CLEF_G);
                         s->setBracket(0, BRACKET_AKKOLADE);
                         s->setBracketSpan(0, 2);
-                        ss->setClef(0, CLEF_F);
+                        // ss->setClef(0, CLEF_F);
                         ++i;
                         tracks->at(i)->setStaff(ss);
                         }
                   else {
                         ClefType ct = track->medPitch < 58 ? CLEF_F : CLEF_G;
-                        s->setClef(0, ct);
+                        // s->setClef(0, ct);
                         }
                   }
             _parts.push_back(part);
@@ -1318,11 +1318,12 @@ printf("restLen %d\n", restLen);
             Segment* seg = m->getSegment(ks, tick);
             seg->add(ks);
             }
+#if 0  // TODO
       ClefList* cl = cstaff->clefList();
       for (ciClefEvent i = cl->begin(); i != cl->end(); ++i) {
-            int tick = i->first;
+            int tick = i.key();
             Clef* clef = new Clef(this);
-            clef->setClefType(i->second);
+            clef->setClefType(i.value());
             clef->setTrack(staffIdx * VOICES);
             clef->setGenerated(false);
             clef->setMag(cstaff->mag());
@@ -1330,6 +1331,7 @@ printf("restLen %d\n", restLen);
             Segment* seg = m->getSegment(clef, tick);
             seg->add(clef);
             }
+#endif
       }
 
 //---------------------------------------------------------

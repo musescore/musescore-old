@@ -130,7 +130,7 @@ void Clef::layout()
       double yoff     = 0.0;
       elements.clear();
 
-      int st = subtype();
+      ClefType st = clefType();
       if (staff() && staff()->useTablature()) {
             if (!staff()->staffType()->genClef())
 		      return;
@@ -302,6 +302,9 @@ void Clef::layout()
                   add(number, .8 * msp, -1.5 * msp + yoff * _spatium);
                   }
                   break;
+            case CLEF_INVALID:
+            case CLEF_MAX:
+                  return;
             }
       symbol->setMag(smag * mag());
       symbol->layout();
@@ -347,9 +350,9 @@ Element* Clef::drop(const DropData& data)
       Element* e = data.element;
       Element* clef = 0;
       if (e->type() == CLEF) {
-            int stype  = e->subtype();
-            if (subtype() != stype) {
-                  score()->undoChangeClef(staff(), segment()->tick(), ClefType(stype));
+            ClefType stype  = static_cast<Clef*>(e)->clefType();
+            if (clefType() != stype) {
+                  score()->undoChangeClef(staff(), segment()->tick(), stype);
                   clef = this;
                   }
             }
@@ -384,117 +387,6 @@ void Clef::propertyAction(ScoreView* viewer, const QString& s)
             score()->undo()->push(new ChangeClef(this, !_showCourtesyClef));
       else
             Element::propertyAction(viewer, s);
-      }
-
-//---------------------------------------------------------
-//   ClefTypeList::operator==
-//---------------------------------------------------------
-
-bool ClefTypeList::operator==(const ClefTypeList& t) const
-      {
-      return t._concertClef == _concertClef && t._transposingClef == _transposingClef;
-      }
-
-//---------------------------------------------------------
-//   ClefTypeList::operator!=
-//---------------------------------------------------------
-
-bool ClefTypeList::operator!=(const ClefTypeList& t) const
-      {
-      return t._concertClef != _concertClef || t._transposingClef != _transposingClef;
-      }
-
-//---------------------------------------------------------
-//   clef
-//---------------------------------------------------------
-
-ClefTypeList ClefList::clef(int tick) const
-      {
-      if (empty())
-            return ClefTypeList(CLEF_G, CLEF_G);
-      ciClefEvent i = upper_bound(tick);
-      if (i == begin())
-            return ClefTypeList(CLEF_G, CLEF_G);
-      --i;
-      return i->second;
-      }
-
-//---------------------------------------------------------
-//   setClef
-//---------------------------------------------------------
-
-void ClefList::setClef(int tick, const ClefTypeList& idx)
-      {
-      std::pair<int, ClefTypeList> clef(tick, idx);
-      std::pair<iClefEvent,bool> p = insert(clef);
-      if (!p.second)
-            (*this)[tick] = idx;
-      iClefEvent i = p.first;
-      for (++i; i != end();) {
-            if (i->second != idx)
-                  break;
-            iClefEvent ii = i;
-            ++ii;
-            erase(i);
-            i = ii;
-            }
-      }
-
-//---------------------------------------------------------
-//   ClefList::read
-//---------------------------------------------------------
-
-void ClefList::read(QDomElement e, Score* cs)
-      {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            QString val(e.text());
-            if (tag == "clef") {
-                  int tick = e.attribute("tick", "0").toInt();
-                  ClefType ct = Clef::clefType(e.attribute("idx", "0"));
-                  (*this)[cs->fileDivision(tick)] = ClefTypeList(ct, ct);
-                  }
-            else
-                  domError(e);
-            }
-      }
-
-//---------------------------------------------------------
-//   removeTime
-//---------------------------------------------------------
-
-void ClefList::removeTime(int tick, int len)
-      {
-      ClefList tmp;
-      for (ciClefEvent i = begin(); i != end(); ++i) {
-            if ((i->first >= tick) && (tick != 0)) {
-                  if (i->first >= tick + len)
-                        tmp[i->first - len] = i->second;
-                  else
-                        printf("remove clef event\n");
-                  }
-            else
-                  tmp[i->first] = i->second;
-            }
-      clear();
-      insert(tmp.begin(), tmp.end());
-      }
-
-//---------------------------------------------------------
-//   insertTime
-//---------------------------------------------------------
-
-void ClefList::insertTime(int tick, int len)
-      {
-      ClefList tmp;
-      for (ciClefEvent i = begin(); i != end(); ++i) {
-            if ((i->first >= tick) && (tick != 0))
-                  tmp[i->first + len] = i->second;
-            else
-                  tmp[i->first] = i->second;
-            }
-      clear();
-      insert(tmp.begin(), tmp.end());
       }
 
 //---------------------------------------------------------
@@ -572,7 +464,7 @@ int Clef::tick() const
 
 const QString Clef::subtypeName() const
       {
-      return QString(clefTable[subtype()].tag);
+      return QString(clefTable[int(clefType())].tag);
       }
 
 //---------------------------------------------------------
@@ -643,10 +535,28 @@ ClefType Clef::clefType(const QString& s)
 
 void Clef::setClefType(ClefType i)
       {
-      Element::setSubtype(int(i));
-      if (_clefTypes._concertClef == CLEF_INVALID)
+      if (score()->concertPitch()) {
             _clefTypes._concertClef = i;
-      if (_clefTypes._transposingClef == CLEF_INVALID)
+            if (_clefTypes._transposingClef == CLEF_INVALID)
+                  _clefTypes._transposingClef = i;
+
+            }
+      else {
             _clefTypes._transposingClef = i;
+            if (_clefTypes._concertClef == CLEF_INVALID)
+                  _clefTypes._concertClef = i;
+            }
+      }
+
+//---------------------------------------------------------
+//   clefType
+//---------------------------------------------------------
+
+ClefType Clef::clefType() const
+      {
+      if (score()->concertPitch())
+            return _clefTypes._concertClef;
+      else
+            return _clefTypes._transposingClef;
       }
 

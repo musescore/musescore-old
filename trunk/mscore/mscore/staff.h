@@ -32,7 +32,6 @@
 #include "pitch.h"
 
 class Instrument;
-class ClefList;
 class Xml;
 class Part;
 class Score;
@@ -41,7 +40,9 @@ class StaffType;
 class StaffTypeTablature;
 class Staff;
 class Tablature;
+class ClefList;
 struct ClefTypeList;
+class Segment;
 
 //---------------------------------------------------------
 //   LinkedStaves
@@ -89,7 +90,6 @@ class Staff {
       Score* _score;
       Part* _part;
       int _rstaff;            ///< Index in Part.
-      ClefList* _clefList;
       KeyList* _keymap;
       QList <BracketItem> _brackets;
       int _barLineSpan;       ///< 0 - no bar line, 1 - span this staff, ...
@@ -131,10 +131,9 @@ class Staff {
       void cleanupBrackets();
 
       KeyList* keymap() const        { return _keymap;      }
-      ClefList* clefList() const     { return _clefList;    }
       ClefType clef(int tick) const;
-      void setClef(int tick, const ClefTypeList&);
-      void setClef(int tick, const ClefType&);
+      ClefType clef(Segment*) const;
+      ClefTypeList clefTypeList(int tick) const;
       KeySigEvent key(int tick) const;
       void setKey(int tick, int st);
       void setKey(int tick, const KeySigEvent& st);

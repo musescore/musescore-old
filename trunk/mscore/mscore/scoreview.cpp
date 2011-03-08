@@ -72,6 +72,22 @@
 #include "scoretab.h"
 #include "painter.h"
 
+
+static const QEvent::Type CloneDrag = QEvent::Type(QEvent::User + 1);
+
+//---------------------------------------------------------
+//   CloneEvent
+//---------------------------------------------------------
+
+class CloneEvent : public QEvent {
+      Element* _element;
+
+   public:
+      CloneEvent(Element* e) : QEvent(CloneDrag) { _element = e->clone(); }
+      ~CloneEvent() { delete _element; }
+      Element* element() const { return _element; }
+      };
+
 //---------------------------------------------------------
 //   stateNames
 //---------------------------------------------------------
@@ -2042,13 +2058,21 @@ void ScoreView::dropEvent(QDropEvent* event)
                               break;
                               }
                         _score->addRefresh(el->abbox());
-                        _score->addRefresh(dragElement->abbox());
                         Element* dropElement = el->drop(dropData);
                         _score->addRefresh(el->abbox());
                         if (dropElement) {
                               if (!_score->noteEntryMode())
                                     _score->select(dropElement, SELECT_SINGLE, 0);
                               _score->addRefresh(dropElement->abbox());
+
+                              Qt::KeyboardModifiers keyState = event->keyboardModifiers();
+                              if (keyState == (Qt::ShiftModifier | Qt::ControlModifier)) {
+                                    //
+                                    // continue drag with a cloned element
+                                    //
+                                    CloneEvent* ce = new CloneEvent(dropElement);
+                                    QCoreApplication::postEvent(this, ce);
+                                    }
                               }
                         event->acceptProposedAction();
                         }
@@ -3883,6 +3907,11 @@ bool ScoreView::event(QEvent* event)
                   if (rv)
                         return true;
                   }
+            }
+      else if (event->type() == CloneDrag) {
+            printf("clone drag\n");
+            Element* e = static_cast<CloneEvent*>(event)->element();
+            cloneElement(e);
             }
       return QWidget::event(event);
       }

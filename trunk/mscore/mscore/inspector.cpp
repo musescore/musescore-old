@@ -2172,7 +2172,7 @@ void ClefView::setElement(Element* e)
       Clef* c = static_cast<Clef*>(e);
       ShowElementBase::setElement(e);
 
-      clef.clefType->setValue(c->subtype());
+      clef.clefType->setValue(c->clefType());
       clef.showCourtesyClef->setChecked(c->showCourtesyClef());
       clef.small->setChecked(c->small());
 

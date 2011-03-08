@@ -1875,8 +1875,10 @@ void Score::moveDown(Chord* chord)
       int rstaves   = part->nstaves();
       int staffMove = chord->staffMove();
 
-      if ((staffMove == 1) || (rstaff + staffMove >= rstaves - 1))
+      if ((staffMove == 1) || (rstaff + staffMove >= rstaves - 1)) {
+printf("moveDown staffMove==%d  rstaff %d rstaves %d\n", staffMove, rstaff, rstaves);
             return;
+            }
       undo()->push(new ChangeChordStaffMove(chord, staffMove + 1));
       layoutAll = true;
       }
@@ -2741,7 +2743,6 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                                     undoAddElement(segment);
                                     }
                               segment->add(clef);
-                              clef->staff()->setClef(segment->tick(), clef->clefTypeList());
                               }
                         else if (tag == "Breath") {
                               Breath* breath = new Breath(this);

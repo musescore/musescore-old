@@ -275,7 +275,7 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                   int n = score->nstaves();
                   for (int i = 0; i < t->staves; ++i) {
                         Staff* staff = new Staff(score, part, i);
-                        staff->setClef(0, t->clefIdx[i]);
+                        // staff->setClef(0, t->clefIdx[i]);
                         staff->setLines(t->staffLines[i]);
                         staff->setSmall(t->smallStaff[i]);
                         if (i == 0) {

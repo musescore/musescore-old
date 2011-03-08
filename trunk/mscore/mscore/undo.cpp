@@ -1697,8 +1697,8 @@ void ChangeSubtype::flip()
             //
             Clef* clef       = static_cast<Clef*>(element);
             Segment* segment = clef->segment();
-            Staff* staff     = clef->staff();
-            staff->setClef(segment->tick(), ClefType(subtype));
+            // Staff* staff     = clef->staff();
+            // staff->setClef(segment->tick(), ClefType(subtype));
             updateNoteLines(segment, clef->track());
             clef->score()->setLayoutAll(true);
             }
@@ -3105,12 +3105,62 @@ void ChangeClefType::flip()
       clef->setClefType(clef->score()->concertPitch() ? concertClef : transposingClef);
 
       Segment* segment = clef->segment();
-      Staff* staff     = clef->staff();
-      staff->setClef(segment->tick(), clef->clefTypeList());
+//      Staff* staff     = clef->staff();
+//      staff->setClef(segment->tick(), clef->clefTypeList());
       updateNoteLines(segment, clef->track());
       clef->score()->setLayoutAll(true);
 
       concertClef     = ocl;
       transposingClef = otc;
+      }
+
+//---------------------------------------------------------
+//   AddClef
+//---------------------------------------------------------
+
+AddClef::AddClef(int tr, Segment* s, ClefType t)
+      {
+      track    = tr;
+      nextSeg  = s;
+      type     = t;
+printf("add clef %d\n", int(type));
+      clef     = 0;
+      }
+
+//---------------------------------------------------------
+//   AddClef::redo
+//---------------------------------------------------------
+
+void AddClef::redo()
+      {
+      Measure* measure = nextSeg->measure();
+      Segment* seg;
+      if (nextSeg->prev() && nextSeg->prev()->segmentType() == SegClef) {
+printf("found SegClef <%s>\n", nextSeg->subTypeName());
+            seg = nextSeg->prev();
+            }
+      else {
+            seg = new Segment(measure, SegClef, nextSeg->tick());
+printf("insert SegClef\n");
+            measure->insert(seg, nextSeg);
+            }
+
+      clef = new Clef(nextSeg->score());
+      clef->setClefType(type);
+      clef->setTrack(track);
+      seg->add(clef);
+
+      updateNoteLines(seg, clef->track());
+      clef->score()->setLayoutAll(true);
+      }
+
+//---------------------------------------------------------
+//   AddClef::redo
+//---------------------------------------------------------
+
+void AddClef::undo()
+      {
+      nextSeg->score()->removeElement(clef);
+      // TODO: remove segment if empty
       }
 

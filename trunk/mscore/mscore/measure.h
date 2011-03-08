@@ -195,7 +195,7 @@ class Measure : public MeasureBase {
       void removeMStaff(MStaff* staff, int idx);
 
       virtual void moveTicks(int diff);
-      void insert(Segment* ns, Segment* s);
+      void insert(Segment* s, Segment* ns);  // insert Segment s before Segment ns
 
       void cmdRemoveStaves(int s, int e);
       void cmdAddStaves(int s, int e, bool createRest);

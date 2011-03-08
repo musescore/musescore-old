@@ -352,13 +352,13 @@ void InstrumentWizard::createInstruments(Score* cs)
                   staff->setRstaff(rstaff);
                   ++rstaff;
 
-                  staff->setClef(0, sli->clef());
+                  // staff->setClef(0, sli->clef());
                   staff->setUseTablature(t->useTablature && t->tablature);
 
-                  if (staff->useTablature())
-                        staff->setClef(0, CLEF_TAB);
-                  else
-                        staff->setClef(0, sli->clef());
+                  // if (staff->useTablature())
+                  //      staff->setClef(0, CLEF_TAB);
+                  // else
+                  //      staff->setClef(0, sli->clef());
 
                   if (cidx > MAX_STAVES) {
                         staff->setLines(5);
