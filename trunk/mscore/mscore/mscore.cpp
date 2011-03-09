@@ -375,6 +375,7 @@ MuseScore::MuseScore()
       saveScoreDialog       = 0;
       loadStyleDialog       = 0;
       saveStyleDialog       = 0;
+      saveImageDialog       = 0;
       loadSoundFontDialog   = 0;
       loadScanDialog        = 0;
       loadAudioDialog       = 0;
@@ -2731,6 +2732,8 @@ void MuseScore::writeSettings()
             settings.setValue("loadStyleDialog", loadStyleDialog->saveState());
       if (saveStyleDialog)
             settings.setValue("saveStyleDialog", saveStyleDialog->saveState());
+      if (saveImageDialog)
+            settings.setValue("saveImageDialog", saveImageDialog->saveState());
       if (loadChordStyleDialog)
             settings.setValue("loadChordStyleDialog", loadChordStyleDialog->saveState());
       if (saveChordStyleDialog)

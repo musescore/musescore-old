@@ -632,50 +632,19 @@ bool ScoreView::fotoRectHit(const QPoint& pos)
 
 bool ScoreView::saveFotoAs(bool printMode, const QRectF& r)
       {
-      QStringList fl;
-      fl.append(tr("PNG Bitmap Graphic (*.png)"));
-      fl.append(tr("PDF File (*.pdf)"));
-      fl.append(tr("Encapsulated PostScript File (*.eps)"));
-      fl.append(tr("Scalable Vector Graphic (*.svg)"));
+      QString fn = mscore->getFotoFilename();
 
-      QString saveDialogTitle = tr("MuseScore: Save As");
-
-      QSettings settings;
-      if (mscore->lastSaveDirectory.isEmpty())
-            mscore->lastSaveDirectory = settings.value("lastSaveDirectory", ".").toString();
-      QString saveDirectory = mscore->lastSaveDirectory;
-
-      QString selectedFilter;
-      QString fn = QFileDialog::getSaveFileName(
-               0,
-               saveDialogTitle,
-               "",
-               fl.join(";;"),
-               &selectedFilter
-               );
       if (fn.isEmpty())
             return false;
 
       QFileInfo fi(fn);
       mscore->lastSaveDirectory = fi.absolutePath();
 
-      QString ext;
-      if (selectedFilter.isEmpty())
-            ext = fi.suffix();
-      else {
-            int idx = fl.indexOf(selectedFilter);
-            if (idx != -1) {
-                  static const char* extensions[] = { "png", "pdf", "eps", "svg" };
-                  ext = extensions[idx];
-                  }
-            }
+      QString ext = fi.suffix();
       if (ext.isEmpty()) {
             QMessageBox::critical(mscore, tr("MuseScore: Save As"), tr("cannot determine file type"));
             return false;
             }
-      if (fi.suffix() != ext)
-            fn += "." + ext;
-
       bool transparent = preferences.pngTransparent;
       double convDpi   = preferences.pngResolution;
       double mag       = convDpi / DPI;

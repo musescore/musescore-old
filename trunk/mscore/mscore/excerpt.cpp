@@ -109,7 +109,6 @@ Score* createExcerpt(const QList<Part*>& parts)
             int idx = 0;
             foreach(Staff* staff, *part->staves()) {
                   Staff* s = new Staff(score, p, idx);
-                  s->setUpdateClefList(true);
                   s->setUpdateKeymap(true);
                   StaffType* st = staff->staffType();
                   if (st->modified())

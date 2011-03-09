@@ -1652,19 +1652,49 @@ printf("tuplet note duration %s  actualNotes %d  ticks %d\n",
 void ScoreView::changeVoice(int voice)
       {
       InputState* is = &score()->inputState();
-      if ((is->track() % VOICES) == voice)
-            return;
-
       int track = (is->track() / VOICES) * VOICES + voice;
       is->setTrack(track);
       //
       // in note entry mode search for a valid input
       // position
       //
-      if (!is->noteEntryMode || is->cr())
+      if (!is->noteEntryMode || is->cr()) {
+            score()->startCmd();
+            QList<Element*> el;
+            foreach(Element* e, score()->selection().elements()) {
+                  if (e->type() == NOTE) {
+                        Note* note = static_cast<Note*>(e);
+                        Chord* chord = note->chord();
+                        if (chord->voice() != voice) {
+                              int notes = note->chord()->notes().size();
+                              if (notes > 1) {
+                                    //
+                                    // TODO: check destination voice content
+                                    //
+                                    Note* newNote   = new Note(*note);
+                                    Chord* newChord = new Chord(score());
+                                    newNote->setSelected(false);
+                                    el.append(newNote);
+                                    int track = chord->staffIdx() * VOICES + voice;
+                                    newChord->setTrack(track);
+                                    newChord->setDurationType(chord->durationType());
+                                    newChord->setDuration(chord->duration());
+                                    newChord->setParent(chord->parent());
+                                    newChord->add(newNote);
+                                    score()->undoRemoveElement(note);
+                                    score()->undoAddElement(newChord);
+                                    }
+                              }
+                        }
+                  }
+            score()->selection().clear();
+            foreach(Element* e, el)
+                  score()->select(e, SELECT_ADD, -1);
+            score()->setLayoutAll(true);
+            score()->endCmd();
             return;
+            }
 
-//      Segment* segment = is->segment()->measure()->firstCRSegment();
       is->setSegment(is->segment()->measure()->firstCRSegment());
       score()->setUpdateAll(true);
       score()->end();
