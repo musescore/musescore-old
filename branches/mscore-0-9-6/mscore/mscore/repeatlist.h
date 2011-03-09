@@ -51,6 +51,7 @@ class RepeatList: public QList<RepeatSegment*>
       RepeatList(Score* s);
       void unwind();
       int utick2tick(int tick) const;
+      int tick2utick(int tick) const;
       void dump() const;
       int utime2utick(double) const;
       double utick2utime(int) const;
