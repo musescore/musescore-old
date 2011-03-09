@@ -1737,9 +1737,7 @@ void ChangeElement::flip()
             oldElement->parent()->change(oldElement, newElement);
             }
       qSwap(oldElement, newElement);
-      if (newElement->type() == CLEF)
-            newElement->staff()->setUpdateClefList(true);
-      else if (newElement->type() == KEYSIG)
+      if (newElement->type() == KEYSIG)
             newElement->staff()->setUpdateKeymap(true);
       else if (newElement->type() == DYNAMIC)
             newElement->score()->addLayoutFlags(LAYOUT_FIX_PITCH_VELO);

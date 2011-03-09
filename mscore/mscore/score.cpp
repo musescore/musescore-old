@@ -580,7 +580,6 @@ int Score::readScore(QString name)
                   if (m->sectionBreak())
                         key1 = 0;
                   }
-            st->setUpdateClefList(false);
             st->setUpdateKeymap(false);
             ++staffIdx;
             }
@@ -2391,7 +2390,6 @@ Score* Score::clone()
                   if (m->sectionBreak())
                         key1 = 0;
                   }
-            st->setUpdateClefList(false);
             st->setUpdateKeymap(false);
             ++staffIdx;
             }

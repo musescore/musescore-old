@@ -2692,4 +2692,61 @@ QString MuseScore::getAudioFile(const QString& d)
       return QString();
       }
 
+//---------------------------------------------------------
+//   getFotoFilename
+//---------------------------------------------------------
+
+QString MuseScore::getFotoFilename()
+      {
+      QString filter =
+         tr("PNG Bitmap Graphic (*.png)")+
+         tr("PDF File (*.pdf)")+
+         tr("Encapsulated PostScript File (*.eps)")+
+         tr("Scalable Vector Graphic (*.svg)");
+
+      QString title = tr("MuseScore: Save Image");
+      if (preferences.nativeDialogs) {
+            QString fn;
+            fn = QFileDialog::getSaveFileName(
+               this,
+               title,
+               QString("."),
+               filter
+               );
+            return fn;
+            }
+
+      QFileInfo myImages(preferences.myImagesPath);
+      if (myImages.isRelative())
+            myImages.setFile(QDir::home(), preferences.myImagesPath);
+      QList<QUrl> urls;
+      QString home = QDir::homePath();
+      urls.append(QUrl::fromLocalFile(home));
+      urls.append(QUrl::fromLocalFile(myImages.absoluteFilePath()));
+      urls.append(QUrl::fromLocalFile(QDir::currentPath()));
+
+      if (saveImageDialog == 0) {
+            saveImageDialog = new QFileDialog(this);
+            saveImageDialog->setFileMode(QFileDialog::AnyFile);
+            saveImageDialog->setOption(QFileDialog::DontConfirmOverwrite, false);
+            saveImageDialog->setOption(QFileDialog::DontUseNativeDialog, true);
+            saveImageDialog->setLabelText(QFileDialog::Accept, tr("Save"));
+            saveImageDialog->setWindowTitle(title);
+            saveImageDialog->setNameFilter(tr("MuseScore Style File (*.mss)"));
+            saveImageDialog->setDirectory(".");
+
+            QSettings settings;
+            saveImageDialog->restoreState(settings.value("saveImageDialog").toByteArray());
+            }
+
+      // setup side bar urls
+      saveStyleDialog->setSidebarUrls(urls);
+
+      if (saveImageDialog->exec()) {
+            QStringList result = saveImageDialog->selectedFiles();
+            return result.front();
+            }
+      return QString();
+      }
+
 

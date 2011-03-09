@@ -2744,7 +2744,6 @@ bool Score::importGTP(const QString& name)
             Staff* staff = part->staves()->front();
 
             Staff* s = new Staff(score, p, 0);
-            s->setUpdateClefList(true);
             s->setUpdateKeymap(true);
             StaffType* st = staff->staffType();
             if (st->modified())
@@ -2759,7 +2758,6 @@ bool Score::importGTP(const QString& name)
             stavesMap.append(staffIdx(staff));
             if (part->staves()->front()->staffType()->group() == PITCHED_STAFF) {
                   s = new Staff(score, p, 1);
-                  s->setUpdateClefList(true);
                   s->setUpdateKeymap(true);
                   StaffType* st = score->staffTypes().at(TAB_STAFF_TYPE);
                   s->setStaffType(st);

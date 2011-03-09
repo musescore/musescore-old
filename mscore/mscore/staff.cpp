@@ -173,7 +173,6 @@ Staff::Staff(Score* s, Part* p, int rs)
       _small          = false;
       _invisible      = false;
       _barLineSpan    = 1;
-      _updateClefList = true;
       _updateKeymap   = true;
       _linkedStaves   = 0;
       }

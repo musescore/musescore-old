@@ -206,8 +206,6 @@ void Measure::remove(Segment* el)
       for (int track = 0; track < tracks; track += VOICES) {
             if (!el->element(track))
                   continue;
-            if (el->subtype() == SegClef)
-                  score()->staff(track/VOICES)->setUpdateClefList(true);
             if (el->subtype() == SegKeySig)
                   score()->staff(track/VOICES)->setUpdateKeymap(true);
             }
@@ -1001,8 +999,6 @@ void Measure::add(Element* el)
                   for (int track = 0; track < tracks; track += VOICES) {
                         if (!seg->element(track))
                               continue;
-                        if (seg->subtype() == SegClef)
-                              score()->staff(track/VOICES)->setUpdateClefList(true);
                         if (seg->subtype() == SegKeySig)
                               score()->staff(track/VOICES)->setUpdateKeymap(true);
                         }

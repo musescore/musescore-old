@@ -97,7 +97,6 @@ class Staff {
       bool _small;
       bool _invisible;
 
-      bool _updateClefList;
       bool _updateKeymap;
 
       StaffType* _staffType;
@@ -162,9 +161,7 @@ class Staff {
       void setStaffType(StaffType* st);
       bool useTablature() const;
       void setUseTablature(bool val);
-      bool updateClefList() const      { return _updateClefList; }
       bool updateKeymap() const        { return _updateKeymap;   }
-      void setUpdateClefList(bool v)   { _updateClefList = v;    }
       void setUpdateKeymap(bool v)     { _updateKeymap = v;      }
       VeloList& velocities()           { return _velocities;     }
       PitchList& pitchOffsets()        { return _pitchOffsets;   }

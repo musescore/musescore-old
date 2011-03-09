@@ -1,3 +1,5 @@
+9.mar (ws)
+      - allow changing voices for simple cases
 8.mar (ws)
       - allow more than one clef at the same tick position. Example is a piano score
         were the top staff starts with a G clef and switches immediately to an F clef

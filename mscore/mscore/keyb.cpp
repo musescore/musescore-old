@@ -281,7 +281,7 @@ static void enableInputToolbar(bool val)
             "pad-rest", "pad-dot", "pad-dotdot", "note-longa",
             "note-breve", "pad-note-1", "pad-note-2", "pad-note-4",
             "pad-note-8", "pad-note-16", "pad-note-32", "pad-note-64",
-            "voice-1", "voice-2", "voice-3", "voice-4",
+//            "voice-1", "voice-2", "voice-3", "voice-4",
             "acciaccatura", "appoggiatura", "grace4", "grace16",
             "grace32", "beam-start", "beam-mid", "no-beam", "beam32",
             "auto-beam"
@@ -390,7 +390,8 @@ void Score::updateInputState()
       getAction("pad-note-32")->setChecked(_is.duration() == Duration::V_32ND);
       getAction("pad-note-64")->setChecked(_is.duration() == Duration::V_64TH);
 
-      int voice = _is.voice();
+      // uncheck all voices if multi-selection
+      int voice = selection().isSingle() ? _is.voice() : -1;
       getAction("voice-1")->setChecked(voice == 0);
       getAction("voice-2")->setChecked(voice == 1);
       getAction("voice-3")->setChecked(voice == 2);

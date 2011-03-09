@@ -147,6 +147,7 @@ struct Preferences {
 
       QString myScoresPath;
       QString myStylesPath;
+      QString myImagesPath;
       QString myTemplatesPath;
       QString myPluginsPath;
       QString mySoundFontsPath;

@@ -203,6 +203,7 @@ void Preferences::init()
 
       myScoresPath            = "MyScores";
       myStylesPath            = "MuseScore/MyStyles";
+      myImagesPath            = "MuseScore/MyImages";
       myTemplatesPath         = "MuseScore/MyTemplates";
       myPluginsPath           = "MuseScore/MyPlugins";
       mySoundFontsPath        = "MuseScore/MySoundFonts";
@@ -317,6 +318,7 @@ void Preferences::write()
 
       s.setValue("myScoresPath", myScoresPath);
       s.setValue("myStylesPath", myStylesPath);
+      s.setValue("myImagesPath", myImagesPath);
       s.setValue("myTemplatesPath", myTemplatesPath);
       s.setValue("myPluginsPath", myPluginsPath);
       s.setValue("mySoundFontsPath", mySoundFontsPath);
@@ -467,6 +469,7 @@ void Preferences::read()
       singlePalette    = s.value("singlePalette", false).toBool();
       myScoresPath     = s.value("myScoresPath", "MyScores").toString();
       myStylesPath     = s.value("myStylesPath", "MuseScore/MyStyles").toString();
+      myImagesPath     = s.value("myImagesPath", "MuseScore/MyImages").toString();
       myTemplatesPath  = s.value("myTemplatesPath", "MuseScore/MyTemplates").toString();
       myPluginsPath    = s.value("myPluginsPath", "MuseScore/MyPlugins").toString();
       mySoundFontsPath = s.value("mySoundFontsPath", "MuseScore/MySoundFonts").toString();
@@ -917,6 +920,7 @@ void PreferenceDialog::updateValues(Preferences* p)
 
       myScores->setText(p->myScoresPath);
       myStyles->setText(p->myStylesPath);
+      myImages->setText(p->myImagesPath);
       myTemplates->setText(p->myTemplatesPath);
       myPlugins->setText(p->myPluginsPath);
       mySoundFonts->setText(p->mySoundFontsPath);
@@ -1258,6 +1262,7 @@ void PreferenceDialog::apply()
       preferences.workingDirectory   = workingDirectory->text();
       preferences.myScoresPath       = myScores->text();
       preferences.myStylesPath       = myStyles->text();
+      preferences.myImagesPath       = myImages->text();
       preferences.myTemplatesPath    = myTemplates->text();
       preferences.myPluginsPath      = myPlugins->text();
       preferences.mySoundFontsPath   = mySoundFonts->text();

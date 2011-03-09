@@ -612,9 +612,6 @@ void Score::doLayout()
 
       bool updateStaffLists = true;
       foreach(Staff* st, _staves) {
-            if (st->updateClefList()) {
-                  updateStaffLists = true;
-                  }
             if (st->updateKeymap()) {
                   st->keymap()->clear();
                   updateStaffLists = true;
@@ -645,10 +642,8 @@ void Score::doLayout()
                               key1 = 0;
                         }
                   }
-            foreach(Staff* st, _staves) {
-                  st->setUpdateClefList(false);
+            foreach(Staff* st, _staves)
                   st->setUpdateKeymap(false);
-                  }
             }
 
 #if 0 // DEBUG
