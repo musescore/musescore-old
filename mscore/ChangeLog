@@ -1,3 +1,5 @@
+09.mar (la)
+      - fix playback start position when repeat in the score
 25.feb (tb)
       - adding Lithuanian (mscore_lt.ts) language
 19.feb (db)

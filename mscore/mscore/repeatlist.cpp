@@ -118,6 +118,19 @@ int RepeatList::utick2tick(int tick) const
       }
 
 //---------------------------------------------------------
+//   tick2utick
+//---------------------------------------------------------
+
+int RepeatList::tick2utick(int tick) const
+      {
+      foreach (const RepeatSegment* s, *this) {
+            if (tick >= s->tick && tick < (s->tick + s->len))
+                  return s->utick + (tick - s->tick);
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
 //   utick2utime
 //---------------------------------------------------------
 

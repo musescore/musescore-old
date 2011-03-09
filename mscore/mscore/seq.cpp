@@ -828,6 +828,8 @@ void Seq::seek(int tick)
       cs->setPlayPos(tick);
       cs->end();
 
+      tick = cs->repeatList()->tick2utick(tick);
+
       SeqMsg msg;
       msg.data = tick;
       msg.id   = SEQ_SEEK;
