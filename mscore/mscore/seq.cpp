@@ -231,12 +231,19 @@ bool Seq::init()
                         printf("load soundfont <%s>\n", qPrintable(p));
                   bool rv = synth->loadSoundFont(p);
                   if (!rv) {
-                        QString s = tr("Loading SoundFont\n"
-                           "\"%1\"\n"
-                           "failed. Playback will be disabled.\n\n"
-                           "Go to Display > Synthesizer \n"
-                           "and check that the file location is correct").arg(p);
-                        QMessageBox::critical(0, tr("MuseScore: Load SoundFont"), s);
+                        //try to load the default soundfont, it should be there
+                        p = preferences.defaultSoundfont;
+                        rv = synth->loadSoundFont(p);
+                        if (!rv) {
+                              QString s = tr("Loading SoundFont\n"
+                                 "\"%1\"\n"
+                                 "failed. Playback will be disabled.\n\n"
+                                 "Go to Display > Synthesizer \n"
+                                 "and check that the file location is correct").arg(p);
+                              QMessageBox::critical(0, tr("MuseScore: Load SoundFont"), s);
+                        }else {
+                              preferences.soundFont = preferences.defaultSoundfont;
+                              }
                         }
                   }
             synth->setMasterTuning(preferences.tuning);

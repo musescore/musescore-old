@@ -1,3 +1,5 @@
+10.mar (la)
+      - fallback to default soundfont if can't load the preferences one
 09.mar (la)
       - fix playback start position when repeat in the score
 25.feb (tb)
