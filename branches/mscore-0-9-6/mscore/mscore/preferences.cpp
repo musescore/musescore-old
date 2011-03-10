@@ -111,7 +111,7 @@ Preferences::Preferences()
 void Preferences::init()
       {
       // set fallback defaults:
-
+      
       bgUseColor         = true;
       fgUseColor         = false;
       bgWallpaper        = QString();
@@ -360,11 +360,11 @@ void Preferences::read()
       playNotes       = s.value("playNotes", true).toBool();
       lPort           = s.value("lPort").toString();
       rPort           = s.value("rPort").toString();
-
-      soundFont       = s.value("soundFont", mscoreGlobalShare+"/sound/TimGM6mb.sf2").toString();
+      defaultSoundfont = mscoreGlobalShare+"/sound/TimGM6mb.sf2";
+      soundFont       = s.value("soundFont", defaultSoundfont).toString();
       if (soundFont == ":/data/piano1.sf2") {
             // silently change to new default sound font
-            soundFont = mscoreGlobalShare + "/sound/TimGM6mb.sf2";
+            soundFont = defaultSoundfont;
             }
       showNavigator   = s.value("showNavigator", true).toBool();
       showStatusBar   = s.value("showStatusBar", true).toBool();

@@ -55,10 +55,11 @@ struct Preferences {
       QColor defaultColor;
       QColor dropColor;
       bool enableMidiInput;
-      bool playNotes;         // play notes on click
-      QString soundFont;      // sound font used by synthesizer
-      QString lPort;          // audio port left
-      QString rPort;          // audio port right
+      bool playNotes;           // play notes on click
+      QString defaultSoundfont; // store the default soundfont for fallback
+      QString soundFont;        // sound font used by synthesizer
+      QString lPort;            // audio port left
+      QString rPort;            // audio port right
       bool showNavigator;
       bool showPlayPanel;
       bool showStatusBar;
