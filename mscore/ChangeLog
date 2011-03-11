@@ -1,3 +1,8 @@
+11.mar (ws)
+      - palette customization: resize palette after adding/removing elements
+      - set invisible now works for all selected elements
+      - rework auto beamer
+      - fix regressions for clef
 9.mar (ws)
       - allow changing voices for simple cases
 8.mar (ws)
