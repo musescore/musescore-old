@@ -227,7 +227,7 @@ class Score : public QObject {
       QList<MidiMapping> _midiMapping;
 
       MeasureBaseList _measures;          // here are the notes
-      QList<Beam*>    _beams;
+//      QList<Beam*>    _beams;
 
       RepeatList* _repeatList;
       AL::TimeSigMap* _sigmap;
@@ -389,6 +389,7 @@ class Score : public QObject {
       int curTick;                  // for read optimizations
       int curTrack;
       QList<Slur*> slurs;
+      QList<Beam*> beams;
 
       void rebuildBspTree();
       bool noStaves() const         { return _staves.empty(); }
@@ -460,14 +461,14 @@ class Score : public QObject {
       void undoRemoveStaff(Staff* staff, int idx);
       void undoInsertStaff(Staff* staff, int idx);
       void undoInsertMeasure(MeasureBase*);
-      void undoToggleInvisible(Element*);
+      void undoChangeInvisible(Element*, bool);
       void undoMove(Element* e, const QPointF& pt);
       void undoChangeBracketSpan(Staff* staff, int column, int span);
       void undoChangeTuning(Note*, double);
       void undoChangePageFormat(PageFormat*, double spatium);
       void undoChangeUserMirror(Note*, DirectionH);
       void undoChangeKeySig(Staff* ostaff, int tick, KeySigEvent st);
-      void undoChangeClef(Staff* ostaff, int tick, ClefType st);
+      void undoChangeClef(Staff* ostaff, Segment*, ClefType st);
       void undoChangeBarLine(Measure* m, BarLineType);
       void undoSwapCR(ChordRest* cr1, ChordRest* cr2);
 
@@ -514,7 +515,6 @@ class Score : public QObject {
       void deleteItem(Element*);
       void cmdDeleteSelectedMeasures();
       void cmdDeleteSelection();
-      void toggleInvisible(Element* obj);
 
       void putNote(const QPointF& pos, bool replace);
       void updateInputState();
@@ -753,9 +753,9 @@ class Score : public QObject {
       void splitStaff(int staffIdx, int splitPoint);
       QString tmpName() const           { return _tmpName;      }
       void setTmpName(const QString& s) { _tmpName = s;         }
-      QList<Beam*> beams() const        { return _beams; }
-      QList<Beam*>& beams()             { return _beams; }
-      Beam* beam(int id) const;
+//      QList<Beam*> beams() const        { return _beams; }
+//      QList<Beam*>& beams()             { return _beams; }
+//      Beam* beam(int id) const;
       void processMidiInput();
       Lyrics* addLyrics();
       void expandVoice(Segment* s, int track);

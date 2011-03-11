@@ -193,14 +193,37 @@ Staff::~Staff()
       }
 
 //---------------------------------------------------------
+//   Staff::clefTypeList
+//---------------------------------------------------------
+
+ClefTypeList Staff::clefTypeList(int tick) const
+      {
+      ClefTypeList ctl(CLEF_G, CLEF_G);
+      int track  = idx() * VOICES;
+      for (Segment* s = score()->firstSegment(); s; s = s->next1()) {
+            if (s->tick() > tick)
+                  break;
+            if (s->subtype() != SegClef)
+                  continue;
+            if (s->element(track) && !s->element(track)->generated())
+                  ctl = static_cast<Clef*>(s->element(track))->clefTypeList();
+            }
+      return ctl;
+      }
+
+//---------------------------------------------------------
 //   Staff::clef
 //---------------------------------------------------------
 
 ClefType Staff::clef(int tick) const
       {
-      ClefTypeList ctl = clefTypeList(tick);
-      ClefType ct = score()->concertPitch() ? ctl._concertClef : ctl._transposingClef;
-      return ct;
+      Clef* clef = 0;
+      foreach(Clef* c, clefs) {
+            if (c->segment()->tick() > tick)
+                  break;
+            clef = c;
+            }
+      return clef == 0 ? CLEF_G : clef->clefType();
       }
 
 ClefType Staff::clef(Segment* segment) const
@@ -220,22 +243,37 @@ ClefType Staff::clef(Segment* segment) const
       }
 
 //---------------------------------------------------------
-//   Staff::clefTypeList
+//   addClef
 //---------------------------------------------------------
 
-ClefTypeList Staff::clefTypeList(int tick) const
+static bool clefsGreater(const Clef* a, const Clef* b)
       {
-      ClefTypeList ctl(CLEF_G, CLEF_G);
-      int track  = idx() * VOICES;
-      for (Segment* s = score()->firstSegment(); s; s = s->next1()) {
-            if (s->tick() > tick)
-                  break;
-            if (s->subtype() != SegClef)
-                  continue;
-            if (s->element(track) && !s->element(track)->generated())
-                  ctl = static_cast<Clef*>(s->element(track))->clefTypeList();
-            }
-      return ctl;
+      return a->segment()->tick() < b->segment()->tick();
+      }
+
+void Staff::addClef(Clef* clef)
+      {
+      if (clef->generated())
+            return;
+      int tick = 0;
+      if (!clefs.isEmpty())
+            tick = clefs.back() ->segment()->tick();
+      clefs.append(clef);
+      if (clef->segment()->tick() < tick)
+            qSort(clefs.begin(), clefs.end(), clefsGreater);
+
+//      printf("addClef idx %d clef %d\n", idx(), clef->segment()->tick());
+//      foreach(Clef* c, clefs)
+//            printf("  clef %d\n", c->segment()->tick());
+      }
+
+//---------------------------------------------------------
+//   removeClef
+//---------------------------------------------------------
+
+void Staff::removeClef(Clef* clef)
+      {
+      clefs.removeOne(clef);
       }
 
 //---------------------------------------------------------

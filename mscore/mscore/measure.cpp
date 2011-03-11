@@ -1614,7 +1614,7 @@ printf("drop staffList\n");
                   break;
 
             case CLEF:
-                  score()->undoChangeClef(staff, seg->tick(), ClefType(e->subtype()));
+                  score()->undoChangeClef(staff, first(), ClefType(e->subtype()));
                   delete e;
                   break;
 
@@ -2182,21 +2182,17 @@ void Measure::read(QDomElement e, int staffIdx)
                   clef->read(e);
                   clef->setGenerated(false);
                   ClefTypeList tl = clef->clefTypeList();
-                  if (segment == 0 || segment->next() == 0 || segment->next()->subtype() != SegClef) {
-                        if (score()->curTick == tick() && segment == 0 && first() && first()->subtype() == SegClef)
-                              segment = first();
-                        else {
-                              Segment* nextSegment = segment ? segment->next() : 0;
-                              if (nextSegment && nextSegment->tick() != score()->curTick)
-                                    segment = getSegment(SegClef, score()->curTick);
-                              else {
-                                    segment = new Segment(this, SegClef, score()->curTick);
-                                    insert(segment, nextSegment);
-                                    }
-                              }
-                        }
-                  else
+                  if (segment && segment->next() && segment->next()->subtype() == SegClef) {
                         segment = segment->next();
+                        }
+                  else if (segment && segment != first()) {
+                        Segment* ns = segment->next();
+                        segment = new Segment(this, SegClef, score()->curTick);
+                        insert(segment, ns);
+                        }
+                  else {
+                        segment = getSegment(SegClef, score()->curTick);
+                        }
                   segment->add(clef);
                   }
             else if (tag == "TimeSig") {
@@ -2347,7 +2343,7 @@ void Measure::read(QDomElement e, int staffIdx)
                   beam->setTrack(score()->curTrack);
                   beam->read(e);
                   beam->setParent(0);
-                  score()->beams().append(beam);
+                  score()->beams.prepend(beam);
                   }
             else
                   domError(e);

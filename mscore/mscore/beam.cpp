@@ -275,7 +275,8 @@ QPointF Beam::canvasPos() const
 void Beam::add(ChordRest* a)
       {
       a->setBeam(this);
-      _elements.append(a);
+      if (!_elements.contains(a))
+            _elements.append(a);
       }
 
 //---------------------------------------------------------
@@ -285,6 +286,7 @@ void Beam::add(ChordRest* a)
 void Beam::remove(ChordRest* a)
       {
       _elements.removeOne(a);
+      a->setBeam(0);
       }
 
 //---------------------------------------------------------

@@ -79,7 +79,6 @@ Clef::Clef(Score* s)
       _small            = false;
       _clefTypes._concertClef     = CLEF_INVALID;
       _clefTypes._transposingClef = CLEF_INVALID;
-      Element::setSubtype(int(CLEF_INVALID));
       }
 
 Clef::Clef(const Clef& c)
@@ -352,7 +351,7 @@ Element* Clef::drop(const DropData& data)
       if (e->type() == CLEF) {
             ClefType stype  = static_cast<Clef*>(e)->clefType();
             if (clefType() != stype) {
-                  score()->undoChangeClef(staff(), segment()->tick(), stype);
+                  score()->undoChangeClef(staff(), segment(), stype);
                   clef = this;
                   }
             }
@@ -441,10 +440,8 @@ void Clef::read(QDomElement e)
 void Clef::write(Xml& xml) const
       {
       xml.stag(name());
-      if (_clefTypes._concertClef != _clefTypes._transposingClef) {
-            xml.tag("concertClefType", _clefTypes._concertClef);
-            xml.tag("transposingClefType", _clefTypes._transposingClef);
-            }
+      xml.tag("concertClefType", _clefTypes._concertClef);
+      xml.tag("transposingClefType", _clefTypes._transposingClef);
       Element::writeProperties(xml);
       xml.etag();
       }

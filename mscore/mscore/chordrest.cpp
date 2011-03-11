@@ -153,6 +153,8 @@ ChordRest::~ChordRest()
 
 void ChordRest::scanElements(void* data, void (*func)(void*, Element*))
       {
+      if (_beam && (_beam->elements().front() == this))
+            _beam->scanElements(data, func);
       foreach(Slur* slur, _slurFor)
             slur->scanElements(data, func);
       foreach(Articulation* a, articulations)
@@ -161,7 +163,7 @@ void ChordRest::scanElements(void* data, void (*func)(void*, Element*))
             if (l)
                   l->scanElements(data, func);
             }
-      if(_tabDur)
+      if (_tabDur)
             func(data, _tabDur);
       }
 
@@ -244,7 +246,7 @@ void ChordRest::writeProperties(Xml& xml) const
             xml.tagE(QString("Slur type=\"start\" number=\"%1\"").arg(s->id()+1));
       foreach(Slur* s, _slurBack)
             xml.tagE(QString("Slur type=\"stop\" number=\"%1\"").arg(s->id()+1));
-      if (!xml.clipboardmode && _beam)
+      if (!xml.clipboardmode && _beam && !_beam->generated())
             xml.tag("Beam", _beam->id());
       foreach(Lyrics* lyrics, _lyricsList) {
             if (lyrics)
@@ -306,11 +308,15 @@ bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets, con
       else if (tag == "trailingSpace")
             _extraTrailingSpace = Spatium(val.toDouble());
       else if (tag == "Beam") {
-            Beam* b = score()->beam(i);
-            if (b) {
-                  setBeam(b);
-                  b->add(this);
+            Beam* beam = 0;
+            foreach(Beam* b, score()->beams) {
+                  if (b->id() == i) {
+                        beam = b;
+                        break;
+                        }
                   }
+            if (beam)
+                  beam->add(this);        // also calls this->setBeam(beam)
             else
                   printf("Beam id %d not found\n", i);
             }
@@ -607,8 +613,7 @@ Element* ChordRest::drop(const DropData& data)
                   break;
 
             case CLEF:
-                  score()->undo()->push(new AddClef(staffIdx() * VOICES,
-                     segment(), static_cast<Clef*>(e)->clefType()));
+                  score()->undoChangeClef(staff(), segment(), static_cast<Clef*>(e)->clefType());
                   break;
 
             case TEMPO_TEXT:
@@ -779,6 +784,22 @@ void ChordRest::remove(Element* e)
             default:
                   printf("ChordRest::remove: unknown element %s\n", e->name());
                   break;
+            }
+      }
+
+//---------------------------------------------------------
+//   removeDeleteBeam
+//    remove ChordRest from beam
+//    delete beam if empty
+//---------------------------------------------------------
+
+void ChordRest::removeDeleteBeam()
+      {
+      if (_beam) {
+            Beam* b = _beam;
+            b->remove(this);  // this sets _beam to zero
+            if (b->isEmpty())
+                  delete b;
             }
       }
 

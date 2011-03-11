@@ -43,6 +43,7 @@ class Tablature;
 class ClefList;
 struct ClefTypeList;
 class Segment;
+class Clef;
 
 //---------------------------------------------------------
 //   LinkedStaves
@@ -90,6 +91,7 @@ class Staff {
       Score* _score;
       Part* _part;
       int _rstaff;            ///< Index in Part.
+      QList<Clef*> clefs;
       KeyList* _keymap;
       QList <BracketItem> _brackets;
       int _barLineSpan;       ///< 0 - no bar line, 1 - span this staff, ...
@@ -130,8 +132,12 @@ class Staff {
       void cleanupBrackets();
 
       KeyList* keymap() const        { return _keymap;      }
+
       ClefType clef(int tick) const;
       ClefType clef(Segment*) const;
+      void addClef(Clef*);
+      void removeClef(Clef*);
+
       ClefTypeList clefTypeList(int tick) const;
       KeySigEvent key(int tick) const;
       void setKey(int tick, int st);

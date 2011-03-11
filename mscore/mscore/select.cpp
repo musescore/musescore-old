@@ -778,9 +778,6 @@ QByteArray Selection::staffMimeData() const
       xml.header();
       xml.clipboardmode = true;
 
-      int beamId = 0;
-      foreach(Beam* beam, _score->beams())
-            beam->setId(beamId++);
       for (Measure* m = _score->firstMeasure(); m; m = m->nextMeasure()) {
             foreach(Tuplet* tuplet, *m->tuplets())
                   tuplet->setId(-1);

@@ -40,6 +40,7 @@
 #include "al/sig.h"
 #include "staffstate.h"
 #include "instrchange.h"
+#include "clef.h"
 
 //---------------------------------------------------------
 //   subTypeName
@@ -412,6 +413,12 @@ void Segment::add(Element* el)
                   break;
                   }
 
+            case CLEF:
+                  _elist[track] = el;
+                  el->staff()->addClef(static_cast<Clef*>(el));
+                  empty = false;
+                  break;
+
             case CHORD:
             case REST:
                   {
@@ -429,10 +436,8 @@ void Segment::add(Element* el)
                         measure()->mstaff(staffIdx)->hasVoices = true;
 
             default:
-                  if(track < _elist.size()) {
-                        _elist[track] = el;
-                        empty = false;
-                        }
+                  _elist[track] = el;
+                  empty = false;
                   break;
             }
       }
@@ -524,6 +529,11 @@ void Segment::remove(Element* el)
                   part->removeInstrument(tick());
                   }
                   _annotations.removeOne(el);
+                  break;
+
+            case CLEF:
+                  _elist[track] = 0;
+                  el->staff()->removeClef(static_cast<Clef*>(el));
                   break;
 
             default:
