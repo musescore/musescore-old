@@ -560,7 +560,7 @@ void Score::undoChangeKeySig(Staff* ostaff, int tick, KeySigEvent st)
 //   undoChangeClef
 //---------------------------------------------------------
 
-void Score::undoChangeClef(Staff* ostaff, int tick, ClefType st)
+void Score::undoChangeClef(Staff* ostaff, Segment* seg, ClefType st)
       {
       QList<Staff*> staffList;
       LinkedStaves* linkedStaves = ostaff->linkedStaves();
@@ -568,6 +568,9 @@ void Score::undoChangeClef(Staff* ostaff, int tick, ClefType st)
             staffList = linkedStaves->staves();
       else
             staffList.append(ostaff);
+
+      bool firstSeg = seg->measure()->first() == seg;
+
       foreach(Staff* staff, staffList) {
             Score* score = staff->score();
             if (staff->staffType()->group() != clefTable[st].staffGroup) {
@@ -575,20 +578,32 @@ void Score::undoChangeClef(Staff* ostaff, int tick, ClefType st)
                      st, clefTable[st].staffGroup, staff->staffType()->group());
                   continue;
                   }
-            else
-                  printf("Staff::changeClef\n");
-            Measure* measure = score->tick2measure(tick);
+            Measure* measure = score->tick2measure(seg->tick());
             if (!measure) {
-                  printf("measure for tick %d not found!\n", tick);
+                  printf("measure for tick %d not found!\n", seg->tick());
                   continue;
                   }
-            if (measure->tick() == tick) {
-                  if (measure->prevMeasure())
-                        measure = measure->prevMeasure();
+            if (firstSeg && measure->prevMeasure())   // move clef to last segment of prev measure
+                  measure = measure->prevMeasure();
+
+            int tick = seg->tick();
+            Segment* segment = measure->findSegment(seg->segmentType(), seg->tick());
+            if (segment) {
+                  if (segment->segmentType() != SegClef) {
+                        if (segment->prev() && segment->prev()->segmentType() == SegClef) {
+                              segment = segment->prev();
+                             }
+                        else {
+                              Segment* s = new Segment(measure, SegClef, seg->tick());
+                              s->setNext(segment);
+                              s->setPrev(segment->prev());
+                              score->undoAddElement(s);
+                              segment = s;
+                              }
+                        }
                   }
-            Segment* segment = measure->findSegment(SegClef, tick);
-            if (!segment) {
-                  segment = new Segment(measure, SegClef, tick);
+            else {
+                  segment = new Segment(measure, SegClef, seg->tick());
                   score->undoAddElement(segment);
                   }
             int staffIdx = staff->idx();
@@ -620,11 +635,12 @@ void Score::undoChangeClef(Staff* ostaff, int tick, ClefType st)
                   score->undo()->push(new ChangeClefType(clef, cp, tp));
                   }
             else {
-                  Clef* nclef = new Clef(score);
-                  nclef->setTrack(track);
-                  nclef->setClefType(st);
-                  nclef->setParent(segment);
-                  score->undo()->push(new AddElement(nclef));
+                  clef = new Clef(score);
+                  clef->setTrack(track);
+                  clef->setClefType(st);
+                  clef->setParent(segment);
+printf("   add Clef\n");
+                  score->undo()->push(new AddElement(clef));
                   }
             score->cmdUpdateNotes();
             }
@@ -878,12 +894,13 @@ void Score::undoChangeBracketSpan(Staff* staff, int column, int span)
       }
 
 //---------------------------------------------------------
-//   undoToggleInvisible
+//   undoChangeInvisible
 //---------------------------------------------------------
 
-void Score::undoToggleInvisible(Element* e)
+void Score::undoChangeInvisible(Element* e, bool v)
       {
-      undo()->push(new ToggleInvisible(e));
+      undo()->push(new ChangeInvisible(e, v));
+      e->setGenerated(false);
       }
 
 //---------------------------------------------------------
@@ -1527,17 +1544,14 @@ void SortStaves::undo()
       }
 
 //---------------------------------------------------------
-//   ToggleInvisible
+//   ChangeInvisible
 //---------------------------------------------------------
 
-ToggleInvisible::ToggleInvisible(Element* e)
+void ChangeInvisible::flip()
       {
-      element = e;
-      }
-
-void ToggleInvisible::flip()
-      {
-      element->setVisible(!element->visible());
+      bool oval = element->visible();
+      element->setVisible(invisible);
+      invisible = oval;
       element->score()->addRefresh(element->abbox());
       }
 
@@ -3111,54 +3125,3 @@ void ChangeClefType::flip()
       concertClef     = ocl;
       transposingClef = otc;
       }
-
-//---------------------------------------------------------
-//   AddClef
-//---------------------------------------------------------
-
-AddClef::AddClef(int tr, Segment* s, ClefType t)
-      {
-      track    = tr;
-      nextSeg  = s;
-      type     = t;
-printf("add clef %d\n", int(type));
-      clef     = 0;
-      }
-
-//---------------------------------------------------------
-//   AddClef::redo
-//---------------------------------------------------------
-
-void AddClef::redo()
-      {
-      Measure* measure = nextSeg->measure();
-      Segment* seg;
-      if (nextSeg->prev() && nextSeg->prev()->segmentType() == SegClef) {
-printf("found SegClef <%s>\n", nextSeg->subTypeName());
-            seg = nextSeg->prev();
-            }
-      else {
-            seg = new Segment(measure, SegClef, nextSeg->tick());
-printf("insert SegClef\n");
-            measure->insert(seg, nextSeg);
-            }
-
-      clef = new Clef(nextSeg->score());
-      clef->setClefType(type);
-      clef->setTrack(track);
-      seg->add(clef);
-
-      updateNoteLines(seg, clef->track());
-      clef->score()->setLayoutAll(true);
-      }
-
-//---------------------------------------------------------
-//   AddClef::redo
-//---------------------------------------------------------
-
-void AddClef::undo()
-      {
-      nextSeg->score()->removeElement(clef);
-      // TODO: remove segment if empty
-      }
-

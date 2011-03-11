@@ -542,8 +542,6 @@ void SlurTie::slurPos(SlurPos* sp)
 
       Stem* stem1 = sc->stem();
       Stem* stem2 = ec->stem();
-      Beam* beam1 = sc->beam();
-      Beam* beam2 = ec->beam();
 
       //
       // default position:
@@ -566,6 +564,7 @@ void SlurTie::slurPos(SlurPos* sp)
             if (stem1) {
                   // bool startIsGrace = sc->noteType() != NOTE_NORMAL;
 
+                  Beam* beam1 = sc->beam();
                   if (beam1 && (beam1->elements().back() != sc) && (sc->up() == up)) {
                         double sh = stem1->height() + _spatium;
                         if (up)
@@ -616,7 +615,9 @@ void SlurTie::slurPos(SlurPos* sp)
       else {
             yo = note2->yPos() + (hh * .5 + _spatium * .4) * _up;
             if (stem2) {
+                  Beam* beam2 = ec->beam();
                   if (beam2
+                     && (!beam2->elements().isEmpty())
                      && (beam2->elements().front() != ec)
                      && (ec->up() == up)
                      && (sc->noteType() == NOTE_NORMAL)

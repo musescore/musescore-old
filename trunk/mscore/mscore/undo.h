@@ -343,18 +343,19 @@ class SortStaves : public UndoCommand {
       };
 
 //---------------------------------------------------------
-//   ToggleInvisible
+//   ChangeInvisible
 //---------------------------------------------------------
 
-class ToggleInvisible : public UndoCommand {
+class ChangeInvisible : public UndoCommand {
       Element* element;
+      bool invisible;
       void flip();
 
    public:
-      ToggleInvisible(Element*);
+      ChangeInvisible(Element* e, bool v) : element(e), invisible(v) {}
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
-      UNDO_NAME("ToggleInvisible");
+      UNDO_NAME("ChangeInvisible");
       };
 
 //---------------------------------------------------------
@@ -1575,23 +1576,6 @@ class ChangeClef : public UndoCommand {
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       UNDO_NAME("ChangeClef");
-      };
-
-//---------------------------------------------------------
-//   AddClef
-//---------------------------------------------------------
-
-class AddClef : public UndoCommand {
-      int track;
-      Segment* nextSeg;
-      ClefType type;
-      Clef* clef;
-
-   public:
-      AddClef(int tr, Segment* s, ClefType(t));
-      virtual void undo();
-      virtual void redo();
-      UNDO_NAME("AddClef");
       };
 
 #endif

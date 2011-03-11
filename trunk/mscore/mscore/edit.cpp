@@ -150,6 +150,7 @@ Rest* Score::addRest(int tick, int track, Duration d, Tuplet* tuplet)
       rest->setDuration(d.type() == Duration::V_MEASURE ? measure->len() : d.fraction());
       rest->setTrack(track);
       rest->setTuplet(tuplet);
+printf("addRest at %d/%d len %s\n", tick, track, qPrintable(d.name()));
       undoAddCR(rest, measure, tick);
       return rest;
       }
@@ -261,7 +262,7 @@ Rest* Score::setRest(int tick, int track, Fraction l, bool useDots, Tuplet* tupl
             if (f > l)
                   f = l;
 
-            if ((track % VOICES) && !measure->hasVoice(track)) {
+            if ((track % VOICES) && !measure->hasVoice(track) && (tick == measure->tick())) {
                   l -= f;
                   measure = measure->nextMeasure();
                   if (!measure)
@@ -283,7 +284,6 @@ Rest* Score::setRest(int tick, int track, Fraction l, bool useDots, Tuplet* tupl
                   //
                   // compute list of durations which will fit l
                   //
-
                   QList<Duration> dList = toDurationList(f, useDots);
                   if (dList.isEmpty())
                         return 0;
@@ -542,6 +542,7 @@ bool Score::rewriteMeasures(Measure* fm, Measure* lm, const Fraction& ns)
                         continue;
                   ChordRest* cr = static_cast<ChordRest*>(s->element(track));
                   ChordRest* ncr = static_cast<ChordRest*>(cr->clone());
+
                   ncr->setSlurFor(cr->slurFor());
                   ncr->setSlurBack(cr->slurBack());
 
@@ -615,7 +616,6 @@ void Score::rewriteMeasures(Measure* fm, const Fraction& ns)
                   while (m->type() != MEASURE)
                         m = m->next();
                   fm1 = static_cast<Measure*>(m);
-//                  if (fm1 == 0 || lm->first(SegTimeSig))
                   if (fm1 == 0)
                         break;
                   }
@@ -1234,7 +1234,7 @@ void Score::deleteItem(Element* el)
 
 void Score::cmdRemoveTime(int tick, int len)
       {
-      int etick = tick + len;
+/*      int etick = tick + len;
       foreach (Beam* b, _beams) {
             ChordRest* e1 = b->elements().front();
             ChordRest* e2 = b->elements().back();
@@ -1243,6 +1243,7 @@ void Score::cmdRemoveTime(int tick, int len)
                   undoRemoveElement(b);
                   }
             }
+      */
       undoInsertTime(tick, -len);
       }
 
@@ -1702,34 +1703,6 @@ void ScoreView::changeVoice(int voice)
       }
 
 //---------------------------------------------------------
-//   toggleInvisible
-//---------------------------------------------------------
-
-void Score::toggleInvisible(Element* e)
-      {
-      undoToggleInvisible(e);
-      e->setGenerated(false);
-#if 0       // TODOxx
-      if (e->type() == BAR_LINE) {
-            Element* pe = e->parent();
-            if (pe->type() == SEGMENT && pe->subtype() == SegEndBarLine) {
-                  Measure* m = static_cast<Segment*>(pe)->measure();
-                  BarLine* bl = static_cast<BarLine*>(e);
-                  m->setEndBarLineType(bl->barLineType(), false, e->visible(), e->color());
-                  }
-            }
-      else if (e->type() == TEXT && e->subtype() == TEXT_INSTRUMENT_SHORT) {
-            Part* part = e->staff()->part();
-            part->shortName()->setVisible(e->visible());
-            }
-      else if (e->type() == TEXT && e->subtype() == TEXT_INSTRUMENT_LONG) {
-            Part* part = e->staff()->part();
-            part->longName()->setVisible(e->visible());
-            }
-#endif
-      }
-
-//---------------------------------------------------------
 //   colorItem
 //---------------------------------------------------------
 
@@ -1753,16 +1726,6 @@ void Score::colorItem(Element* element)
                               m->setEndBarLineType(bl->barLineType(), false, e->visible(), e->color());
                               }
                         }
-#if 0 // TODOxx
-                  else if (e->type() == TEXT && e->subtype() == TEXT_INSTRUMENT_SHORT) {
-                        Part* part = e->staff()->part();
-                        part->shortName()->setColor(e->color());
-                        }
-                  else if (e->type() == TEXT && e->subtype() == TEXT_INSTRUMENT_LONG) {
-                        Part* part = e->staff()->part();
-                        part->longName()->setColor(e->color());
-                        }
-#endif
                   }
             }
       _selection.deselectAll();

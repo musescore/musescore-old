@@ -543,7 +543,7 @@ void TextLineSegment::propertyAction(ScoreView* viewer, const QString& s)
                   delete nTl;
             }
       else if (s == "invisible")
-            score()->toggleInvisible(this);
+            score()->undoChangeInvisible(this, !visible());
       else
             Element::propertyAction(viewer, s);
       }

@@ -419,8 +419,6 @@ Score::~Score()
             delete m;
             m = nm;
             }
-      /*foreach(Beam* b, _beams)
-            delete b;*/
       foreach(Part* p, _parts)
             delete p;
       foreach(Staff* staff, _staves)
@@ -649,8 +647,6 @@ void Score::write(Xml& xml, bool /*autosave*/)
                   tuplet->setId(xml.tupletId++);
             }
       xml.curTrack = 0;
-      foreach(Beam* beam, _beams)
-            beam->setId(xml.beamId++);
       for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
             xml.stag(QString("Staff id=\"%1\"").arg(staffIdx + 1));
             xml.curTick  = 0;
@@ -2045,25 +2041,10 @@ int Score::inputPos() const
 
 void Score::scanElements(void* data, void (*func)(void*, Element*))
       {
-      foreach(Beam* b, _beams)
-            func(data, b);
       for(MeasureBase* m = first(); m; m = m->next())
             m->scanElements(data, func);
       foreach(Page* page, pages())
             page->scanElements(data, func);
-      }
-
-//---------------------------------------------------------
-//   beam
-//---------------------------------------------------------
-
-Beam* Score::beam(int id) const
-      {
-      foreach(Beam* b, _beams) {
-            if (b->id() == id)
-                  return b;
-            }
-      return 0;
       }
 
 //---------------------------------------------------------

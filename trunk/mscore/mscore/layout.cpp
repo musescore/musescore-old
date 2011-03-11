@@ -390,13 +390,9 @@ void Score::layoutStage2()
       {
       int tracks = nstaves() * VOICES;
 
-      QList<Beam*> usedBeams;
-      foreach(Beam* beam, _beams)
-            beam->clear();
-
       for (int track = 0; track < tracks; ++track) {
             ChordRest* a1    = 0;      // start of (potential) beam
-            Beam* beam       = 0;
+            Beam* beam       = 0;      // current beam
             Measure* measure = 0;
 
             BeamMode bm = BEAM_AUTO;
@@ -414,7 +410,7 @@ void Score::layoutStage2()
                                     beam = 0;
                                     }
                               else if (a1) {
-                                    a1->setBeam(0);
+                                    a1->removeDeleteBeam();
                                     a1->layoutStem1();
                                     a1 = 0;
                                     }
@@ -433,13 +429,13 @@ void Score::layoutStage2()
                            && static_cast<ChordRest*>(nseg->element(track))->durationType().hooks())
                               {
                               Beam* b = cr->beam();
-                              if (b == 0) {
+                              if (b == 0 || b->elements().front() != cr) {
                                     b = new Beam(this);
                                     b->setTrack(track);
                                     b->setGenerated(true);
-                                    add(b);
+                                    cr->removeDeleteBeam();
+                                    b->add(cr);
                                     }
-                              b->add(cr);
                               Segment* s = nseg;
                               for (;;) {
                                     nseg = s;
@@ -453,24 +449,22 @@ void Score::layoutStage2()
                               segment = nseg;
                               }
                         else {
-                              cr->setBeam(0);
+                              cr->removeDeleteBeam();
                               cr->layoutStem1();
                               }
                         continue;
                         }
-                  int len = cr->durationType().ticks();
-
-                  if ((len >= AL::division) || (bm == BEAM_NO)) {
+                  if ((cr->durationType().type() <= Duration::V_QUARTER) || (bm == BEAM_NO)) {
                         if (beam) {
                               beam->layout1();
                               beam = 0;
                               }
                         if (a1) {
-                              a1->setBeam(0);
+                              a1->removeDeleteBeam();
                               a1->layoutStem1();
                               a1 = 0;
                               }
-                        cr->setBeam(0);
+                        cr->removeDeleteBeam();
                         cr->layoutStem1();
                         continue;
                         }
@@ -483,12 +477,15 @@ void Score::layoutStage2()
                         else if (bm != BEAM_MID) {
                               if (endBeam(measure->timesig(), cr, cr->tick() - measure->tick()))
                                     beamEnd = true;
+                              if (le->tick() + le->ticks() < cr->tick())
+                                    beamEnd = true;
                               }
                         if (beamEnd) {
                               beam->layout1();
                               beam = 0;
                               }
                         else {
+                              cr->removeDeleteBeam();
                               beam->add(cr);
                               cr = 0;
 
@@ -503,20 +500,19 @@ void Score::layoutStage2()
                         if (beam) {
                               beam->layout1();
                               beam = 0;
-
-                              cr->setBeam(0);
+                              cr->removeDeleteBeam();
                               cr->layoutStem1();
                               }
                         else if (a1) {
                               beam = a1->beam();
-                              if (beam == 0 || usedBeams.contains(beam)) {
+                              if (beam == 0 || beam->elements().front() != a1) {
                                     beam = new Beam(this);
                                     beam->setTrack(track);
                                     beam->setGenerated(true);
-                                    add(beam);
+                                    a1->removeDeleteBeam();
+                                    beam->add(a1);
                                     }
-                              usedBeams.prepend(beam);
-                              beam->add(a1);
+                              cr->removeDeleteBeam();
                               beam->add(cr);
                               a1 = 0;
                               beam->layout1();
@@ -536,22 +532,23 @@ void Score::layoutStage2()
                                    (endBeam(measure->timesig(), cr, cr->tick() - measure->tick())
                                    || bm == BEAM_BEGIN
                                    || (a1->segment()->subtype() != cr->segment()->subtype())
+                                   || (a1->tick() + a1->ticks() < cr->tick())
                                    )
                                  ) {
-                                    a1->setBeam(0);
+                                    a1->removeDeleteBeam();
                                     a1->layoutStem1();      //?
                                     a1 = cr;
                                     }
                               else {
                                     beam = a1->beam();
-                                    if (beam == 0 || usedBeams.contains(beam)) {
+                                    if (beam == 0 || beam->elements().front() != a1) {
                                           beam = new Beam(this);
                                           beam->setGenerated(true);
                                           beam->setTrack(track);
-                                          add(beam);
+                                          a1->removeDeleteBeam();
+                                          beam->add(a1);
                                           }
-                                    usedBeams.append(beam);
-                                    beam->add(a1);
+                                    cr->removeDeleteBeam();
                                     beam->add(cr);
                                     a1 = 0;
                                     }
@@ -561,14 +558,8 @@ void Score::layoutStage2()
             if (beam)
                   beam->layout1();
             else if (a1) {
-                  a1->setBeam(0);
+                  a1->removeDeleteBeam();
                   a1->layoutStem1();
-                  }
-            }
-      foreach (Beam* beam, _beams) {
-            if (beam->elements().isEmpty()) {
-                  remove(beam);
-                  delete beam;
                   }
             }
       }
@@ -695,8 +686,8 @@ void Score::doLayout()
       //   place Spanner & beams
       //---------------------------------------------------
 
-      foreach(Beam* beam, _beams)
-            beam->layout();
+//      foreach(Beam* beam, _beams)
+//            beam->layout();
 
       int tracks = nstaves() * VOICES;
       for (int track = 0; track < tracks; ++track) {
@@ -704,6 +695,9 @@ void Score::doLayout()
                   Element* e = segment->element(track);
                   if (e && e->isChordRest()) {
                         ChordRest* cr = static_cast<ChordRest*>(e);
+                        if (cr->beam() && cr->beam()->elements().front() == cr)
+                              cr->beam()->layout();
+
                         cr->layoutArticulations();    // DEBUG
                         if (cr->type() == CHORD) {
                               Chord* c = static_cast<Chord*>(cr);
@@ -1675,7 +1669,6 @@ void Score::add(Element* el)
             case BEAM:
                   {
                   Beam* b = static_cast<Beam*>(el);
-                  _beams.append(b);
                   foreach(ChordRest* cr, b->elements())
                         cr->setBeam(b);
                   }
@@ -1706,12 +1699,8 @@ void Score::remove(Element* el)
             case BEAM:
                   {
                   Beam* b = static_cast<Beam*>(el);
-                  if (_beams.removeOne(b)) {
-                        foreach(ChordRest* cr, b->elements())
-                              cr->setBeam(0);
-                        }
-                  else
-                        printf("Score::remove(): cannot find Beam\n");
+                  foreach(ChordRest* cr, b->elements())
+                        cr->setBeam(0);
                   }
                   break;
             case SLUR:

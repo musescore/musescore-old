@@ -393,16 +393,28 @@ void Score::expandVoice(Segment* s, int track)
                   return;
                   }
             }
+      //
+      // fill upto s->tick() with rests
+      //
+      Measure* m = s->measure();
+      int stick  = ps ?  ps->tick() : m->tick();
+      int ticks  = s->tick() - stick;
+      if (ticks)
+            setRest(stick, track, Fraction::fromTicks(ticks), false, 0);
+
+      //
+      // fill from s->tick() until next chord/rest
+      //
       Segment* ns;
       for (ns = s->next(SegChordRest); ns; ns = ns->next(SegChordRest)) {
             if (ns->element(track))
                   break;
             }
-      Measure* m = s->measure();
-      int ticks  = ns ? (ns->tick() - s->tick()) : (m->ticks() - s->rtick());
-      Duration d = ticks == m->ticks() ? Duration(Duration::V_MEASURE) : Duration(Fraction::fromTicks(ticks));
-
-      addRest(s, track, d, 0);
+      ticks  = ns ? (ns->tick() - s->tick()) : (m->ticks() - s->rtick());
+      if (ticks == m->ticks())
+            addRest(s, track, Duration(Duration::V_MEASURE), 0);
+      else
+            setRest(s->tick(), track, Fraction::fromTicks(ticks), false, 0);
       }
 
 void Score::expandVoice()
@@ -1913,7 +1925,7 @@ void Score::cmdInsertClef(ClefType type)
       {
       if (!noteEntryMode())
             return;
-      undoChangeClef(staff(inputTrack()/VOICES), inputPos(), type);
+      undoChangeClef(staff(inputTrack()/VOICES), inputState().segment(), type);
       }
 
 //---------------------------------------------------------
@@ -2439,8 +2451,9 @@ printf("paste <%s>\n", data.data());
 
 void Score::pasteStaff(QDomElement e, ChordRest* dst)
       {
-      foreach(Beam* beam, _beams)
-            beam->setId(-1);
+      beams.clear();
+      slurs.clear();
+
       for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
             foreach(Tuplet* tuplet, *m->tuplets())
                   tuplet->setId(-1);

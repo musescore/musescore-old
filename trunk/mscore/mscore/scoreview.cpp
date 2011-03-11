@@ -1004,8 +1004,6 @@ void ScoreView::measurePopup(const QPoint& gpos, Measure* obj)
       _score->startCmd();
       if (cmd == "list")
             mscore->showElementContext(obj);
-      else if (cmd == "invisible")
-            _score->toggleInvisible(obj);
       else if (cmd == "color")
             _score->colorItem(obj);
       else if (cmd == "edit") {
@@ -4115,6 +4113,7 @@ void ScoreView::cloneElement(Element* e)
       QMimeData* mimeData = new QMimeData;
       mimeData->setData(mimeSymbolFormat, e->mimeData(QPointF()));
       drag->setMimeData(mimeData);
+      drag->setPixmap(QPixmap());
       drag->start(Qt::CopyAction);
       }
 

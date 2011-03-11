@@ -137,6 +137,7 @@ class ChordRest : public DurationElement {
       Lyrics* lyrics(int no)                   { return _lyricsList.value(no); }
       virtual void add(Element*);
       virtual void remove(Element*);
+      void removeDeleteBeam();
       };
 
 #endif

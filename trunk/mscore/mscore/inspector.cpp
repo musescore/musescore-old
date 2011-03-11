@@ -242,8 +242,8 @@ void Inspector::updateList(Score* s)
       QTreeWidgetItem* li = new QTreeWidgetItem(list, INVALID);
       li->setText(0, "Global");
 
-      foreach(Beam* beam, cs->beams())
-	      new ElementItem(li, beam);
+//      foreach(Beam* beam, cs->beams())
+//	      new ElementItem(li, beam);
 
       int staves = cs->nstaves();
       int tracks = staves * VOICES;

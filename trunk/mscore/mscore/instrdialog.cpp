@@ -613,11 +613,12 @@ void MuseScore::editInstrList()
                                     Measure* m = (Measure*)mb;
                                     m->cmdRemoveStaves(sidx, eidx);
                                     }
-                              foreach(Beam* e, cs->beams()) {
+/*                              foreach(Beam* e, cs->beams()) {
                                     int staffIdx = e->staffIdx();
                                     if (staffIdx >= sidx && staffIdx < eidx)
                                           cs->undoRemoveElement(e);
                                     }
+ */
                               cs->cmdRemoveStaff(sidx);
                               }
                         else if (sli->op == ITEM_ADD) {
@@ -801,11 +802,13 @@ void Score::insertStaff(Staff* staff, int idx)
       _staves.insert(idx, staff);
 
       staff->part()->insertStaff(staff);
+#if 0
       int track = idx * VOICES;
       foreach (Beam* b, _beams) {
             if (b->track() >= track)
                   b->setTrack(b->track() + VOICES);
             }
+#endif
       }
 
 //---------------------------------------------------------
@@ -878,10 +881,11 @@ void Score::removeStaff(Staff* staff)
       _staves.removeAll(staff);
       staff->part()->removeStaff(staff);
       int track = idx * VOICES;
-      foreach(Beam* e, beams()) {
+/*      foreach(Beam* e, beams()) {
             if (e->track() > track)
                   e->setTrack(e->track() - VOICES);
             }
+ */
       }
 
 //---------------------------------------------------------
@@ -913,15 +917,13 @@ void Score::sortStaves(QList<int>& dst)
             m->sortStaves(dst);
             }
 
-printf("sortStaves\n");
-      foreach(Beam* beam, _beams) {
+/*      foreach(Beam* beam, _beams) {
             int staffIdx = beam->staffIdx();
             int voice    = beam->voice();
             int idx      = dst.indexOf(staffIdx);
-printf("  beam set track %d %d\n", beam->track(), idx * VOICES + voice);
             beam->setTrack(idx * VOICES + voice);
             }
-
+*/
 #if 0 // imlementation changed
       foreach(Element* e, _gel) {
             switch(e->type()) {

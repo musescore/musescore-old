@@ -494,13 +494,13 @@ void cloneStaff(Staff* srcStaff, Staff* dstStaff)
                                           }
                                     ncr->setTuplet(nt);
                                     }
-                              foreach(Slur* s, ocr->slurFor()) {
+                              foreach (Slur* s, ocr->slurFor()) {
                                     Slur* slur = new Slur(score);
                                     slur->setStartElement(ncr);
                                     ncr->addSlurFor(slur);
                                     slurMap[dstTrack].add(s, slur);
                                     }
-                              foreach(Slur* s, ocr->slurBack()) {
+                              foreach (Slur* s, ocr->slurBack()) {
                                     Slur* slur = slurMap[dstTrack].findNew(s);
                                     if (slur) {
                                           slur->setEndElement(ncr);
@@ -510,7 +510,7 @@ void cloneStaff(Staff* srcStaff, Staff* dstStaff)
                                           printf("cloneStave: cannot find slur\n");
                                           }
                                     }
-                              foreach(Element* e, seg->annotations()) {
+                              foreach (Element* e, seg->annotations()) {
                                     if (e->generated() || e->systemFlag())
                                           continue;
                                     if (e->track() != srcTrack)

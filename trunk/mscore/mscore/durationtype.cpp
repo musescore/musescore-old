@@ -414,7 +414,7 @@ Duration::Duration(const Fraction& _f)
             default:    _val = V_INVALID; break;
             }
 
-      if(f.denominator() != 0) {
+      if (f.denominator() != 0) {
             int v = f.numerator() / f.denominator();
             if(v == 4) {
                   _val = V_LONG;
@@ -438,6 +438,7 @@ Duration::Duration(const Fraction& _f)
                         break;
                   default:
                         printf("Duration(%d/%d): not implemented\n", f.numerator(), f.denominator());
+// abort();
                         _val = V_INVALID;
                         _dots = 0;
                         break;
