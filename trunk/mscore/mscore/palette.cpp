@@ -122,10 +122,7 @@ void Palette::contextMenuEvent(QContextMenuEvent* event)
             if (cell)
                   delete cell->element;
             delete cell;
-            if (cells.size() == i+1)
-                  cells.removeAt(i);
-            else
-                  cells[i] = 0;
+            cells[i] = 0;
             update();
             emit changed();
             }
@@ -140,6 +137,19 @@ void Palette::contextMenuEvent(QContextMenuEvent* event)
                   update();
                   emit changed();
                   }
+            }
+      bool sizeChanged = false;
+      while (cells.size() > 1) {
+            if (cells.back() == 0) {
+                  cells.removeLast();
+                  sizeChanged = true;
+                  }
+            else
+                  break;
+            }
+      if (sizeChanged) {
+            updateGeometry();
+            update();         // necessary?
             }
       }
 
@@ -710,34 +720,35 @@ void Palette::dropEvent(QDropEvent* event)
                         }
                   }
             }
-      if (e) {
-            e->setSelected(false);
-            bool ok = false;
-            if (event->source() == this) {
-                  int i = idx(event->pos());
-                  if (i == -1) {
-                        cells.append(cells[dragSrcIdx]);
-                        cells[dragSrcIdx] = 0;
-                        ok = true;
-                        }
-                  else if (dragSrcIdx != i) {
-                        PaletteCell* c = cells[dragSrcIdx];
-                        cells[dragSrcIdx] = cells[i];
-                        cells[i] = c;
-                        delete e;
-                        ok = true;
-                        }
-                  event->setDropAction(Qt::MoveAction);
-                  }
-            else {
-                  append(e, name);
+      if (e == 0)
+            return;
+      e->setSelected(false);
+      bool ok = false;
+      if (event->source() == this) {
+            int i = idx(event->pos());
+            if (i == -1) {
+                  cells.append(cells[dragSrcIdx]);
+                  cells[dragSrcIdx] = 0;
                   ok = true;
                   }
-            if (ok) {
-                  event->acceptProposedAction();
-                  update();
-                  emit changed();
+            else if (dragSrcIdx != i) {
+                  PaletteCell* c = cells[dragSrcIdx];
+                  cells[dragSrcIdx] = cells[i];
+                  cells[i] = c;
+                  delete e;
+                  ok = true;
                   }
+            event->setDropAction(Qt::MoveAction);
+            }
+      else {
+            append(e, name);
+            ok = true;
+            }
+      if (ok) {
+            event->acceptProposedAction();
+            updateGeometry();
+            update();
+            emit changed();
             }
       }
 
@@ -1120,6 +1131,7 @@ void PaletteScrollArea::resizeEvent(QResizeEvent* re)
       if (_restrictHeight)
             // setMaximumHeight(h+8);
             setMaximumHeight(h+6);
+
       QScrollArea::resizeEvent(re);
       }
 
