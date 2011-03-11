@@ -66,10 +66,14 @@ enum ArticulationIdx {
       DownPrallSym,
       UpMordentSym,
       DownMordentSym,
+      PrallDownSym,
+      PrallUpSym,
+      LinePrallSym,
       SnappizzicatoSym,
       Tapping,
       Slapping,
       Popping,
+
       ARTICULATIONS
       };
 

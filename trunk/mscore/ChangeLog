@@ -1,4 +1,5 @@
 11.mar (ws)
+      - more articulations: pralldown, prallup, lineprall
       - palette customization: resize palette after adding/removing elements
       - set invisible now works for all selected elements
       - rework auto beamer
