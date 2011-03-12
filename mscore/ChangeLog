@@ -4,6 +4,8 @@
       - set invisible now works for all selected elements
       - rework auto beamer
       - fix regressions for clef
+      (db)
+      - voice shortcuts now: Ctrl+Alt+[number]
 9.mar (ws)
       - allow changing voices for simple cases
 8.mar (ws)
