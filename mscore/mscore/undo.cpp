@@ -632,6 +632,7 @@ void Score::undoChangeClef(Staff* ostaff, Segment* seg, ClefType st)
                               tp = st;
                               }
                         }
+                  clef->setGenerated(false);
                   score->undo()->push(new ChangeClefType(clef, cp, tp));
                   }
             else {
@@ -639,7 +640,6 @@ void Score::undoChangeClef(Staff* ostaff, Segment* seg, ClefType st)
                   clef->setTrack(track);
                   clef->setClefType(st);
                   clef->setParent(segment);
-printf("   add Clef\n");
                   score->undo()->push(new AddElement(clef));
                   }
             score->cmdUpdateNotes();
