@@ -99,6 +99,7 @@ class Revisions;
 class Spanner;
 class ScoreView;
 class LinkedElements;
+class Fingering;
 
 extern bool showRubberBand;
 
@@ -813,6 +814,7 @@ class Score : public QObject {
       void appendMeasures(int, ElementType);
       MeasureBase* appendMeasure(ElementType type);
       bool concertPitch() const { return styleB(ST_concertPitch); }
+      void layoutFingering(Fingering*);
       };
 
 extern Score* gscore;

@@ -59,7 +59,7 @@ ClefTypeList ClefList::clef(int tick) const
 //   setClef
 //---------------------------------------------------------
 
-void ClefList::setClef(int tick, const ClefTypeList& idx)
+void ClefList::setClef(int tick, ClefTypeList idx)
       {
 printf("setClef...\n");
       replace(tick, idx);
@@ -83,42 +83,4 @@ void ClefList::read(QDomElement e, Score* cs)
                   domError(e);
             }
       }
-
-//---------------------------------------------------------
-//   removeTime
-//---------------------------------------------------------
-
-void ClefList::removeTime(int tick, int len)
-      {
-      ClefList tmp;
-      for (ciClefEvent i = begin(); i != end(); ++i) {
-            if ((i.key() >= tick) && (tick != 0)) {
-                  if (i.key() >= tick + len)
-                        tmp.insert(i.key() - len, i.value());
-                  else
-                        printf("remove clef event\n");
-                  }
-            else
-                  tmp.insert(i.key(), i.value());
-            }
-      *this = tmp;
-      }
-
-//---------------------------------------------------------
-//   insertTime
-//---------------------------------------------------------
-
-void ClefList::insertTime(int tick, int len)
-      {
-      ClefList tmp;
-      for (ciClefEvent i = begin(); i != end(); ++i) {
-            if ((i.key() >= tick) && (tick != 0))
-                  tmp.insert(i.key() + len, i.value());
-            else
-                  tmp.insert(i.key(), i.value());
-            }
-      *this = tmp;
-      }
-
-
 

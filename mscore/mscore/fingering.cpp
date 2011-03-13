@@ -19,6 +19,8 @@
 //=============================================================================
 
 #include "fingering.h"
+#include "score.h"
+#include "undo.h"
 
 //---------------------------------------------------------
 //   Fingering
@@ -62,5 +64,18 @@ void Fingering::read(QDomElement e)
             if (!Text::readProperties(e))
                   domError(e);
             }
+      }
+
+//---------------------------------------------------------
+//   toDefault
+//---------------------------------------------------------
+
+void Fingering::toDefault()
+      {
+      QPointF o(userOff());
+      score()->layoutFingering(this);
+      QPointF no(userOff());
+      setUserOff(o);
+      score()->undo()->push(new ChangeUserOffset(this, no));
       }
 

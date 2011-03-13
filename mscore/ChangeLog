@@ -1,3 +1,5 @@
+13.mar (ws)
+      - #9731: fix backward compatibility for latest changes in clef handling
 11.mar (ws)
       - more articulations: pralldown, prallup, lineprall
       - palette customization: resize palette after adding/removing elements

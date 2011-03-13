@@ -707,10 +707,65 @@ int updateVersion()
 //---------------------------------------------------------
 //   diatonicUpDown
 //    used to find the second note of a trill, mordent etc.
+//    key  -7 ... +7
 //---------------------------------------------------------
 
-int diatonicUpDown(int /*clef*/, int pitch, int steps)
+int diatonicUpDown(int key, int pitch, int steps)
       {
-      return pitch + steps * 2;     // TODO: dummy
+      static int ptab[15][7] = {
+//             c  c#   d  d#    e   f  f#   g  g#  a  a#   b
+            { -1,      1,       3,  5,      6,     8,      10 },     // Ces
+            { -1,      1,       3,  5,      6,     8,      10 },     // Ges
+            {  0,      1,       3,  5,      6,     8,      10 },     // Des
+            {  0,      1,       3,  5,      7,     8,      10 },     // As
+            {  0,      2,       3,  5,      7,     8,      10 },     // Es
+            {  0,      2,       3,  5,      7,     9,      10 },     // B
+            {  0,      2,       4,  5,      7,     9,      10 },     // F
+
+            {  0,      2,       4,  5,      7,     9,      11 },     // C
+
+            {  0,      2,       4,  6,      7,     9,      11 },     // G
+            {  1,      2,       4,  6,      7,     9,      11 },     // D
+            {  1,      2,       4,  6,      8,     9,      11 },     // A
+            {  1,      3,       4,  6,      8,     9,      11 },     // E
+            {  1,      3,       4,  6,      8,    10,      11 },     // H
+            {  1,      3,       5,  6,      8,    10,      11 },     // Fis
+            {  1,      3,       5,  6,      8,    10,      12 },     // Cis
+            };
+
+      key += 7;
+      int step   = pitch % 12;
+      int octave = pitch / 12;
+
+      for (int i = 0; i < 7; ++i) {
+            if (ptab[key][i] == step) {
+                  if (steps > 0) {
+                        while (steps--) {
+                              ++i;
+                              if (i == 7) {
+                                    ++octave;
+                                    i = 0;
+                                    }
+                              }
+                        }
+                  else {
+                        while (++steps != 0) {
+                              --i;
+                              if (i < 0) {
+                                    i = 6;
+                                    --octave;
+                                    }
+                              }
+                        }
+                  step = ptab[key][i];
+                  break;
+                  }
+            }
+      pitch = octave  * 12 + step;
+      if (pitch < 0)
+            pitch = 0;
+      if (pitch > 127)
+            pitch = 128;
+      return pitch;
       }
 

@@ -21,40 +21,25 @@
 #ifndef __CLEFLIST_H__
 #define __CLEFLIST_H__
 
-#if 0
 #include "globals.h"
+#include "clef.h"
 
 class Score;
 
 //---------------------------------------------------------
-//   ClefTypeList
-//---------------------------------------------------------
-
-struct ClefTypeList {
-      ClefType _concertClef;
-      ClefType _transposingClef;
-
-      ClefTypeList() {}
-      ClefTypeList(ClefType a, ClefType b) : _concertClef(a), _transposingClef(b) {}
-      bool operator==(const ClefTypeList& t) const;
-      bool operator!=(const ClefTypeList& t) const;
-      };
-
-//---------------------------------------------------------
 //   ClefList
-//    This list is instantiated for every Instrument
-//    to keep track of clef changes.
 //---------------------------------------------------------
 
-class ClefList : public QList<Clef*> {
+class ClefList : public QMultiMap<int, ClefTypeList> {
    public:
-      ClefList() : QList<Clef*>() {}
+      ClefList() {}
       ClefTypeList clef(int tick) const;
-      void addClef(Clef*);
-      void removeTime(int, int) {}
-      void insertTime(int, int) {}
+      void setClef(int tick, ClefTypeList);
+      void read(QDomElement, Score*);
       };
 
-#endif
+typedef QMultiMap<int, ClefTypeList>::iterator iClefEvent;
+typedef QMultiMap<int, ClefTypeList>::const_iterator ciClefEvent;
+
 #endif
 

@@ -1681,32 +1681,7 @@ Element* Chord::drop(const DropData& data)
                         score()->select(atr, SELECT_SINGLE, 0);
                         score()->undoAddElement(atr);
                         }
-                  int clef = staff()->clef(segment()->tick());
-
-                  if (atr->subtype() == MordentSym) {
-                        QList<NoteEvent*> events;
-                        //
-                        // create default playback for Mordent
-                        //
-                        int pitch  = upNote()->ppitch();
-                        int pitch2 = diatonicUpDown(clef, pitch, -1);
-                        events.append(new NoteEvent(0, 0, 128));
-                        events.append(new NoteEvent(pitch2 - pitch, 128, 128));
-                        events.append(new NoteEvent(0, 256, 744));
-                        score()->undo()->push(new ChangeNoteEvents(this, events));
-                        }
-                  else if (atr->subtype() == PrallSym) {
-                        QList<NoteEvent*> events;
-                        //
-                        // create default playback events for PrallSym
-                        //
-                        int pitch  = upNote()->ppitch();
-                        int pitch2 = diatonicUpDown(clef, pitch, 1);
-                        events.append(new NoteEvent(0, 0, 128));
-                        events.append(new NoteEvent(pitch2 - pitch, 128, 128));
-                        events.append(new NoteEvent(0, 256, 744));
-                        score()->undo()->push(new ChangeNoteEvents(this, events));
-                        }
+                  renderArticulation(atr->articulationType());
                   return atr;
                   }
             case CHORDLINE:
@@ -1717,5 +1692,40 @@ Element* Chord::drop(const DropData& data)
                   return ChordRest::drop(data);
             }
       return 0;
+      }
+
+//---------------------------------------------------------
+//   renderArticulation
+//---------------------------------------------------------
+
+void Chord::renderArticulation(ArticulationType type)
+      {
+      int key  = staff()->key(segment()->tick()).accidentalType();
+      QList<NoteEvent*> events;
+      int pitch     = upNote()->ppitch();
+      int pitchDown = diatonicUpDown(key, pitch, -1);
+      int pitchUp   = diatonicUpDown(key, pitch, 1);
+      switch (type) {
+            case MordentSym:
+                  //
+                  // create default playback for Mordent
+                  //
+                  events.append(new NoteEvent(0, 0, 125));
+                  events.append(new NoteEvent(pitchUp - pitch, 125, 125));
+                  events.append(new NoteEvent(0, 250, 750));
+                  break;
+            case PrallSym:
+                  //
+                  // create default playback events for PrallSym
+                  //
+                  events.append(new NoteEvent(0, 0, 125));
+                  events.append(new NoteEvent(pitchDown - pitch, 125, 125));
+                  events.append(new NoteEvent(0, 250, 750));
+                  break;
+            default:
+                  return;
+            }
+      if (!events.isEmpty())
+            score()->undo()->push(new ChangeNoteEvents(this, events));
       }
 
