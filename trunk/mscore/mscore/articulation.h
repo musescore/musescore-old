@@ -28,56 +28,6 @@ class Painter;
 class ChordRest;
 
 //---------------------------------------------------------
-//   ArticulationIdx
-//---------------------------------------------------------
-
-enum ArticulationIdx {
-      UfermataSym,
-      DfermataSym,
-      UshortfermataSym,
-      DshortfermataSym,
-      UlongfermataSym,
-      DlongfermataSym,
-      UverylongfermataSym,
-      DverylongfermataSym,
-      ThumbSym,
-      SforzatoaccentSym,
-      EspressivoSym,
-      StaccatoSym,
-      UstaccatissimoSym,
-      DstaccatissimoSym,
-      TenutoSym,
-      UportatoSym,
-      DportatoSym,
-      UmarcatoSym,
-      DmarcatoSym,
-      OuvertSym,
-      PlusstopSym,
-      UpbowSym,
-      DownbowSym,
-      ReverseturnSym,
-      TurnSym,
-      TrillSym,
-      PrallSym,
-      MordentSym,
-      PrallPrallSym,
-      PrallMordentSym,
-      UpPrallSym,
-      DownPrallSym,
-      UpMordentSym,
-      DownMordentSym,
-      PrallDownSym,
-      PrallUpSym,
-      LinePrallSym,
-      SnappizzicatoSym,
-      Tapping,
-      Slapping,
-      Popping,
-
-      ARTICULATIONS
-      };
-
-//---------------------------------------------------------
 //   ArticulationInfo
 //    gives infos about note attributes
 //---------------------------------------------------------
@@ -123,6 +73,7 @@ class Articulation : public Symbol {
       virtual void setSubtype(int);
       virtual void read(QDomElement);
       virtual void write(Xml& xml) const;
+      ArticulationType articulationType() const { return ArticulationType(subtype()); }
       QString subtypeUserName() const { return articulationList[subtype()].name; }
       int relGateTime() const { return articulationList[subtype()].relGateTime; }
       int relVelocity() const { return articulationList[subtype()].relVelocity; }

@@ -23,6 +23,8 @@
 
 #include "text.h"
 
+class Note;
+
 //---------------------------------------------------------
 //   Fingering
 //---------------------------------------------------------
@@ -34,9 +36,12 @@ class Fingering : public Text {
       virtual Fingering* clone() const { return new Fingering(*this); }
       virtual ElementType type() const { return FINGERING; }
 
+      Note* note() const { return (Note*)parent(); }
+
       virtual void layout();
       virtual void write(Xml&) const;
       virtual void read(QDomElement);
+      virtual void toDefault();
       };
 
 #endif

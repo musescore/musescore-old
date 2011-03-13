@@ -2785,10 +2785,22 @@ void ScoreView::cmd(const QAction* a)
          || cmd == "prev-chord"
          || cmd == "next-measure"
          || cmd == "prev-measure") {
-            Element* el = _score->move(cmd);
-            if (el)
-                  adjustCanvasPosition(el, false);
-            updateAll();
+            Element* el = score()->selection().element();
+            if (el && (el->type() == FINGERING)) {
+                  score()->startCmd();
+                  QPointF pt(preferences.nudgeStep * el->spatium(), 0.0);
+                  if (cmd == "prev-chord")
+                        score()->undoMove(el, el->userOff() - pt);
+                  else if (cmd == "next-chord")
+                        score()->undoMove(el, el->userOff() + pt);
+                  score()->endCmd();
+                  }
+            else {
+                  Element* el = _score->move(cmd);
+                  if (el)
+                        adjustCanvasPosition(el, false);
+                  updateAll();
+                  }
             }
       else if (cmd == "rest")
             cmdEnterRest();

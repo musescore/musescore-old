@@ -166,6 +166,7 @@ add_executable ( ${ExecutableName}
       elementlayout.cpp selinstrument.cpp instrchange.cpp texteditor.cpp
       cursor.cpp textframe.cpp editstafftype.cpp texttools.cpp editpitch.cpp
       editstringdata.cpp editraster.cpp iname.cpp pianotools.cpp mediadialog.cpp
+      cleflist.cpp
       ${OMR_FILES}
       ${AUDIO}
       )

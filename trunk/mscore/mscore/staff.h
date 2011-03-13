@@ -30,6 +30,7 @@
 #include "key.h"
 #include "velo.h"
 #include "pitch.h"
+#include "cleflist.h"
 
 class Instrument;
 class Xml;
@@ -91,6 +92,10 @@ class Staff {
       Score* _score;
       Part* _part;
       int _rstaff;            ///< Index in Part.
+
+      ClefList _clefList;           // for backward compatibility
+      ClefTypeList _initialClef;    // used by new score wizard
+
       QList<Clef*> clefs;
       KeyList* _keymap;
       QList <BracketItem> _brackets;
@@ -137,6 +142,9 @@ class Staff {
       ClefType clef(Segment*) const;
       void addClef(Clef*);
       void removeClef(Clef*);
+      void setInitialClef(const ClefTypeList& cl) { _initialClef = cl; }
+      void setInitialClef(ClefType ct)            { _initialClef = ClefTypeList(ct, ct); }
+      ClefTypeList initialClef() const            { return _initialClef; }
 
       ClefTypeList clefTypeList(int tick) const;
       KeySigEvent key(int tick) const;
@@ -176,6 +184,7 @@ class Staff {
       void setLinkedStaves(LinkedStaves* l) { _linkedStaves = l;    }
       void linkTo(Staff* staff);
       bool primaryStaff() const;
+      ClefList* clefList()          { return &_clefList; }   // for backward compatibility
       };
 #endif
 

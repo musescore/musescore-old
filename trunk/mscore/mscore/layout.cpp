@@ -47,6 +47,8 @@
 #include "beam.h"
 #include "tuplet.h"
 #include "sym.h"
+#include "fingering.h"
+#include "stem.h"
 
 //---------------------------------------------------------
 //   rebuildBspTree
@@ -1827,4 +1829,55 @@ bool Score::doReLayout()
       rebuildBspTree();
       return true;
       }
+
+//---------------------------------------------------------
+//   layoutFingering
+//    - place numbers above a note execpt for the last
+//      staff in a multi stave part (piano)
+//    - does not handle chords
+//---------------------------------------------------------
+
+void Score::layoutFingering(Fingering* f)
+      {
+      if (f == 0)
+            return;
+      Note* note   = f->note();
+      Chord* chord = note->chord();
+      Staff* staff = chord->staff();
+      Part* part   = staff->part();
+      int n        = part->nstaves();
+      bool below   = (n > 1) && (staff->rstaff() == n-1);
+
+      f->layout();
+      QRectF r = f->abbox();
+      qreal x = 0.0;
+      qreal y = 0.0;
+      qreal headWidth = note->headWidth();
+      qreal headHeight = note->headHeight();
+      qreal fh = headHeight;        // TODO: fingering number height
+
+      if (chord->notes().size() == 1) {
+            x = headWidth * .5;
+            if (below) {
+                  // place fingering below note
+                  y = fh + _spatium * .4;
+                  if (chord->stem() && !chord->up()) {
+                        // on stem side
+                        y += chord->stem()->height();
+                        x -= _spatium * .4;
+                        }
+                  }
+            else {
+                  // place fingering above note
+                  y = -headHeight - _spatium * .4;
+                  if (chord->stem() && chord->up()) {
+                        // on stem side
+                        y -= chord->stem()->height();
+                        x += _spatium * .4;
+                        }
+                  }
+            }
+      f->setUserOff(QPointF(x, y));
+      }
+
 

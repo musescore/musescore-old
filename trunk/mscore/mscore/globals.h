@@ -21,9 +21,9 @@
 #ifndef __GLOBALS_H__
 #define __GLOBALS_H__
 
-#define MSC_VERSION     "1.18"
+#define MSC_VERSION     "1.21"
 
-static const int MSCVERSION = 118;
+static const int MSCVERSION = 121;
 
 // History:
 //    1.3   added staff->_barLineSpan
@@ -45,6 +45,7 @@ static const int MSCVERSION = 118;
 //    1.19  replace text style numbers by text style names; box margins are now
 //          used
 //    1.20  instrument names are saved as html again
+//    1.21  no cleflist anymore
 
 extern bool debugMode;
 extern bool enableExperimental;
@@ -166,6 +167,56 @@ enum ElementType {
       ICON,
       ACCIDENTAL_BRACKET,
       MAXTYPE
+      };
+
+//---------------------------------------------------------
+//   ArticulationType
+//---------------------------------------------------------
+
+enum ArticulationType {
+      UfermataSym,
+      DfermataSym,
+      UshortfermataSym,
+      DshortfermataSym,
+      UlongfermataSym,
+      DlongfermataSym,
+      UverylongfermataSym,
+      DverylongfermataSym,
+      ThumbSym,
+      SforzatoaccentSym,
+      EspressivoSym,
+      StaccatoSym,
+      UstaccatissimoSym,
+      DstaccatissimoSym,
+      TenutoSym,
+      UportatoSym,
+      DportatoSym,
+      UmarcatoSym,
+      DmarcatoSym,
+      OuvertSym,
+      PlusstopSym,
+      UpbowSym,
+      DownbowSym,
+      ReverseturnSym,
+      TurnSym,
+      TrillSym,
+      PrallSym,
+      MordentSym,
+      PrallPrallSym,
+      PrallMordentSym,
+      UpPrallSym,
+      DownPrallSym,
+      UpMordentSym,
+      DownMordentSym,
+      PrallDownSym,
+      PrallUpSym,
+      LinePrallSym,
+      SnappizzicatoSym,
+      Tapping,
+      Slapping,
+      Popping,
+
+      ARTICULATIONS
       };
 
 //---------------------------------------------------------

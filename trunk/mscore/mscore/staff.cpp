@@ -175,6 +175,7 @@ Staff::Staff(Score* s, Part* p, int rs)
       _barLineSpan    = 1;
       _updateKeymap   = true;
       _linkedStaves   = 0;
+      _initialClef    = ClefTypeList(CLEF_G, CLEF_G);
       }
 
 //---------------------------------------------------------
@@ -337,8 +338,8 @@ void Staff::read(QDomElement e)
                   setInvisible(v);
             else if (tag == "slashStyle")
                   ;                       // obsolete: setSlashStyle(v);
-//            else if (tag == "cleflist")
-//                  _clefList->read(e, _score);
+            else if (tag == "cleflist")
+                  _clefList.read(e, _score);
             else if (tag == "keylist")
                   _keymap->read(e, _score);
             else if (tag == "bracket") {

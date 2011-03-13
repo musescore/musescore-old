@@ -258,8 +258,8 @@ void Score::cmdAddSpanner(Spanner* spanner, const QPointF& pos, const QPointF& /
                   int n = e.numerator() / e.denominator();
                   QList<NoteEvent*> events;
                   int pitch  = chord->upNote()->ppitch();
-                  int clef   = chord->staff()->clef(segment->tick());
-                  int pitch2 = diatonicUpDown(clef, pitch, 1);
+                  int key    = chord->staff()->key(segment->tick()).accidentalType();
+                  int pitch2 = diatonicUpDown(key, pitch, 1);
                   int dpitch = pitch2 - pitch;
                   for (int i = 0; i < n; i += 2) {
                         events.append(new NoteEvent(0,      i * 1000 / n,    1000/n));

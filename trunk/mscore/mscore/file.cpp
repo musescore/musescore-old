@@ -758,7 +758,7 @@ void MuseScore::newFile()
                                     }
                               }
                         Clef* clef = new Clef(score);
-                        clef->setClefType(staff->clef(0));
+                        clef->setClefType(staff->initialClef());
                         clef->setTrack(staffIdx * VOICES);
                         Segment* segment = measure->getSegment(SegClef, 0);
                         segment->add(clef);
@@ -1574,8 +1574,7 @@ bool Score::read(QDomElement dScore)
       if (_mscVersion < 108)
             connectSlurs();
 
-      if (_mscVersion < 115) {
-#if 0   // TODO!
+      if (_mscVersion < 121) {            // 115
             for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
                   Staff* s = _staves[staffIdx];
                   int track = staffIdx * VOICES;
@@ -1617,7 +1616,7 @@ bool Score::read(QDomElement dScore)
                               }
                         }
                   }
-#endif
+            // TODO: free cleflist
             }
       if (_mscVersion < 116) {
             //
