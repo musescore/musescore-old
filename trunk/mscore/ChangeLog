@@ -1,4 +1,5 @@
 14.mar (ws)
+      - fix crash when inserting vertical frame (#9765)
       - add preference value for audio export sample rate
       - fix audio export
 13.mar (ws)

@@ -908,6 +908,8 @@ void Slur::layout()
 
       unsigned nsegs = 1;
       for (iSystem iis = is; iis != sl->end(); ++iis) {
+            if ((*iis)->isVbox())
+                  continue;
             if (*iis == sPos.system2)
                   break;
             ++nsegs;
@@ -935,6 +937,10 @@ void Slur::layout()
 
       for (int i = 0; is != sl->end(); ++i, ++is) {
             System* system  = *is;
+            if (system->isVbox()) {
+                  --i;
+                  continue;
+                  }
             SlurSegment* segment = segmentAt(i);
             segment->setSystem(system);
             ChordRest* cr1 = (ChordRest*)startElement();
