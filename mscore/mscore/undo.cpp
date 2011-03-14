@@ -1062,8 +1062,8 @@ void Score::undoAddElement(Element* element)
                   Measure* nm2   = score->tick2measure(s2->tick());
                   Segment* ns1   = nm1->findSegment(s1->segmentType(), s1->tick());
                   Segment* ns2   = nm2->findSegment(s2->segmentType(), s2->tick());
-                  Chord* c1      = static_cast<Chord*>(ns1->element(staffIdx * VOICES + cr1->voice()));
-                  Chord* c2      = static_cast<Chord*>(ns2->element(staffIdx * VOICES + cr2->voice()));
+                  Chord* c1      = static_cast<Chord*>(ns1->element((staffIdx - cr1->staffMove()) * VOICES + cr1->voice()));
+                  Chord* c2      = static_cast<Chord*>(ns2->element((staffIdx - cr2->staffMove()) * VOICES + cr2->voice()));
                   Note* nn1      = c1->findNote(n1->pitch());
                   Note* nn2      = c2->findNote(n2->pitch());
                   Tie* ntie      = static_cast<Tie*>(ne);
