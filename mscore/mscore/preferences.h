@@ -159,6 +159,8 @@ struct Preferences {
       int hRaster, vRaster;
       bool nativeDialogs;
 
+      int exportAudioSampleRate;
+
       bool dirty;
 
       Preferences();
