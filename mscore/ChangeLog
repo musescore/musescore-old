@@ -1,3 +1,5 @@
+14.mar (la)
+      - fix crash when inserting vertical frame (#9765)
 10.mar (la)
       - fallback to default soundfont if can't load the preferences one
 09.mar (la)

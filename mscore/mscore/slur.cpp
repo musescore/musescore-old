@@ -947,6 +947,8 @@ void Slur::layout()
 
       unsigned nsegs = 1;
       for (iSystem iis = is; iis != sl->end(); ++iis) {
+            if ((*iis)->isVbox())
+                  continue;
             if (*iis == s2)
                   break;
             ++nsegs;
@@ -975,6 +977,10 @@ void Slur::layout()
       qreal bow = up ? 2.0 * -_spatium : 2.0 * _spatium;
       for (int i = 0; is != sl->end(); ++i, ++is) {
             System* system  = *is;
+            if (system->isVbox()) {
+                  --i;
+                  continue;
+                  }
             SlurSegment* segment = segments[i];
             segment->setSystem(system);
             ChordRest* cr1 = (ChordRest*)startElement();
