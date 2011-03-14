@@ -49,7 +49,7 @@ bool Score::saveAudio(const QString& name, const QString& ext, QString soundFont
             fprintf(stderr, "unknown audio file type <%s>\n", qPrintable(ext));
             return false;
             }
-      static const int sampleRate = 44100;
+      int sampleRate = preferences.exportAudioSampleRate;
 
       if (soundFont.isEmpty()) {
             if (!preferences.soundFont.isEmpty())
@@ -62,13 +62,9 @@ bool Score::saveAudio(const QString& name, const QString& ext, QString soundFont
                   }
             }
       MasterSynth* synti = new MasterSynth();
-/*      bool rv = synti->loadSoundFont(soundFont);
-      if (!rv) {
-            fprintf(stderr, "MuseScore: error: loading sound font <%s> failed\n", qPrintable(soundFont));
-            delete synti;
-            return false;
-            }
-      */
+      synti->init(sampleRate);
+      synti->setState(syntiState());
+
       EventMap events;
       toEList(&events);
 
@@ -108,22 +104,24 @@ bool Score::saveAudio(const QString& name, const QString& ext, QString soundFont
                               if (e.type() == ME_INVALID)
                                     continue;
                               e.setChannel(a.channel);
-                              seq->putEvent(e);
+                              int syntiIdx= _midiMapping[a.channel].articulation->synti;
+                              synti->play(e, syntiIdx);
                               }
                         }
                   }
 
-            static const unsigned int FRAMES = 512;
+            static const unsigned FRAMES = 512;
             float buffer[FRAMES * 2];
             int stride      = 2;
             double playTime = 0.0;
             synti->setGain(gain);
 
             for (;;) {
-                  unsigned int frames = FRAMES;
+                  unsigned frames = FRAMES;
                   //
                   // collect events for one segment
                   //
+                  memset(buffer, 0, sizeof(float) * FRAMES * 2);
                   double endTime = playTime + double(frames)/double(sampleRate);
                   float* l = buffer;
                   float* r = buffer + 1;
@@ -142,8 +140,9 @@ bool Score::saveAudio(const QString& name, const QString& ext, QString soundFont
                         if (e.isChannelEvent()) {
                               int channelIdx = e.channel();
                               Channel* c = _midiMapping[channelIdx].articulation;
-                              if (!c->mute)
-                                    seq->putEvent(e);
+                              if (!c->mute) {
+                                    synti->play(e, c->synti);
+                                    }
                               }
                         }
                   if (frames) {

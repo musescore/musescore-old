@@ -59,6 +59,8 @@ void MasterSynth::init(int sampleRate)
       bool useAlsaFlag      = preferences.useAlsaAudio;
       bool usePortaudioFlag = preferences.usePortaudioAudio;
 
+printf("MasterSynth::init\n");
+
       if (useJackFlag || useAlsaFlag || usePortaudioFlag) {
             syntis.append(new FluidS::Fluid());
 #ifdef AEOLUS

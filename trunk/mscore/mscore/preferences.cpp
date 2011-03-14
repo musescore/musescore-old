@@ -48,6 +48,7 @@ extern bool externalStyle;
 extern QString iconGroup;
 
 static const char* appStyleFile;
+static int exportAudioSampleRates[2] = { 44100, 48000 };
 
 //---------------------------------------------------------
 //   PeriodItem
@@ -215,6 +216,8 @@ void Preferences::init()
       hRaster                 = 2;
       vRaster                 = 2;
       nativeDialogs           = false;    // use system native file dialogs
+
+      exportAudioSampleRate   = exportAudioSampleRates[0];
       };
 
 //---------------------------------------------------------
@@ -326,6 +329,7 @@ void Preferences::write()
       s.setValue("hraster", hRaster);
       s.setValue("vraster", vRaster);
       s.setValue("nativeDialogs", nativeDialogs);
+      s.setValue("exportAudioSampleRate", exportAudioSampleRate);
 
       //update
       s.setValue("checkUpdateStartup", checkUpdateStartup);
@@ -478,6 +482,7 @@ void Preferences::read()
       vRaster          = s.value("vraster", "2").toInt();
 
       nativeDialogs    = s.value("nativeDialogs", false).toBool();
+      exportAudioSampleRate = s.value("exportAudioSampleRate", exportAudioSampleRates[0]).toInt();
 
       checkUpdateStartup = s.value("checkUpdateStartup", UpdateChecker::defaultPeriod()).toInt();
       if (checkUpdateStartup == 0) {
@@ -626,6 +631,11 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       recordButtons->addButton(rcr11,        RMIDI_DOTDOT);
       recordButtons->addButton(rcr12,        RMIDI_TIE);
       recordButtons->addButton(recordEditMode, RMIDI_NOTE_EDIT_MODE);
+
+      int n = sizeof(exportAudioSampleRates)/sizeof(*exportAudioSampleRates);
+      exportAudioSampleRate->clear();
+      for (int idx = 0; idx < n; ++idx)
+            exportAudioSampleRate->addItem(QString("%1").arg(exportAudioSampleRates[idx]));
 
       connect(recordButtons,          SIGNAL(buttonClicked(int)), SLOT(recordButtonClicked(int)));
       connect(midiRemoteControlClear, SIGNAL(clicked()), SLOT(midiRemoteControlClearClicked()));
@@ -926,6 +936,15 @@ void PreferenceDialog::updateValues(Preferences* p)
       mySoundFonts->setText(p->mySoundFontsPath);
 
       nativeDialogs->setChecked(p->nativeDialogs);
+      idx = 0;
+      int n = sizeof(exportAudioSampleRates)/sizeof(*exportAudioSampleRates);
+      for (;idx < n; ++idx) {
+            if (exportAudioSampleRates[idx] == p->exportAudioSampleRate)
+                  break;
+            }
+      if (idx == n)     // if not found in table
+            idx = 0;
+      exportAudioSampleRate->setCurrentIndex(idx);
 
       sfChanged = false;
       }
@@ -1268,6 +1287,8 @@ void PreferenceDialog::apply()
       preferences.mySoundFontsPath   = mySoundFonts->text();
 
       preferences.nativeDialogs      = nativeDialogs->isChecked();
+      int idx = exportAudioSampleRate->currentIndex();
+      preferences.exportAudioSampleRate = exportAudioSampleRates[idx];
 
       preferences.showSplashScreen   = showSplashScreen->isChecked();
       preferences.midiExpandRepeats  = expandRepeats->isChecked();
