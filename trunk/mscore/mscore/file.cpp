@@ -2766,7 +2766,7 @@ QString MuseScore::getFotoFilename()
             }
 
       // setup side bar urls
-      saveChordStyleDialog->setSidebarUrls(urls);
+      saveImageDialog->setSidebarUrls(urls);
 
       if (saveImageDialog->exec()) {
             QStringList result = saveImageDialog->selectedFiles();

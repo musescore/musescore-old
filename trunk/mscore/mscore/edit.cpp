@@ -150,7 +150,7 @@ Rest* Score::addRest(int tick, int track, Duration d, Tuplet* tuplet)
       rest->setDuration(d.type() == Duration::V_MEASURE ? measure->len() : d.fraction());
       rest->setTrack(track);
       rest->setTuplet(tuplet);
-printf("addRest at %d/%d len %s\n", tick, track, qPrintable(d.name()));
+// printf("addRest at %d/%d len %s\n", tick, track, qPrintable(d.name()));
       undoAddCR(rest, measure, tick);
       return rest;
       }
@@ -211,7 +211,7 @@ Chord* Score::addChord(int tick, Duration d, Chord* oc, bool genTie, Tuplet* tup
 
 ChordRest* Score::addClone(ChordRest* cr, int tick, const Duration& d)
       {
-printf("addClone %s at %d %s\n", cr->name(), tick, qPrintable(d.fraction().print()));
+// printf("addClone %s at %d %s\n", cr->name(), tick, qPrintable(d.fraction().print()));
       ChordRest* newcr;
       // change a RepeatMeasure() into an Rest()
       if (cr->type() == REPEAT_MEASURE)
@@ -744,8 +744,8 @@ void Score::putNote(const QPointF& pos, bool replace)
       KeySigEvent key = st->keymap()->key(tick);
       int clef        = st->clef(tick);
 
-printf("putNote at tick %d staff %d line %d key %d clef %d\n",
-   tick, staffIdx, line, key.accidentalType(), clef);
+// printf("putNote at tick %d staff %d line %d key %d clef %d\n",
+//   tick, staffIdx, line, key.accidentalType(), clef);
 
       _is.setTrack(staffIdx * VOICES + _is.voice());
       _is.setSegment(s);
@@ -918,18 +918,30 @@ void Score::cmdAddTie()
             endCmd();
             return;
             }
-      ChordRest* el = nextChordRest(chord);
-      if (el == 0 || el->type() != CHORD) {
-            if (debugMode)
-                  printf("addTie: no next chord found\n");
-            return;
-            }
       Note* note2 = 0;
-      foreach(Note* n, static_cast<Chord*>(el)->notes()) {
-            if (n->pitch() == note->pitch()) {
-                  note2 = n;
-                  break;
+      Part* part = chord->staff()->part();
+      int strack = part->staves()->front()->idx() * VOICES;
+      int etrack = strack + part->staves()->size() * VOICES;
+      for (Segment* seg = chord->segment()->next1(SegChordRest); seg; seg = seg->next1(SegChordRest)) {
+            bool noteFound = false;
+            for (int track = strack; track < etrack; ++track) {
+                  ChordRest* cr = static_cast<ChordRest*>(seg->element(track));
+                  if (cr == 0 || cr->type() != CHORD)
+                        continue;
+                  int staffIdx = cr->staffIdx() + cr->staffMove();
+                  if (staffIdx != chord->staffIdx())
+                        continue;
+                  foreach(Note* n, static_cast<Chord*>(cr)->notes()) {
+                        if (n->pitch() == note->pitch()) {
+                              if (note2 == 0 || note->chord()->track() == chord->track())
+                                    note2 = n;
+                              }
+                        else if (cr->track() == chord->track())
+                              noteFound = true;
+                        }
                   }
+            if (noteFound || note2)
+                  break;
             }
       if (note2 == 0) {
             if (debugMode)
