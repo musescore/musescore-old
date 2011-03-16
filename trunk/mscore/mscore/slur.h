@@ -31,6 +31,7 @@ class SlurTie;
 class Score;
 class ScoreView;
 class Painter;
+class ChordRest;
 
 struct UP {
       QPointF p;            // layout position relative to pos()
@@ -39,6 +40,7 @@ struct UP {
 
 //---------------------------------------------------------
 //   SlurSegment
+//    also used for Tie
 //---------------------------------------------------------
 
 class SlurSegment : public SpannerSegment {
@@ -46,10 +48,10 @@ class SlurSegment : public SpannerSegment {
 
       struct UP ups[4];
       QPainterPath path;
-      System* _system;
 
       void computeBezier();
       void updatePath();
+      void changeAnchor(ScoreView*, int curGrip, ChordRest*);
 
    public:
       SlurSegment(Score*);
@@ -64,7 +66,7 @@ class SlurSegment : public SpannerSegment {
       virtual void draw(Painter*) const;
 
       virtual bool isEditable() const { return true; }
-      virtual void editDrag(int, const QPointF&);
+      virtual void editDrag(const EditData&);
       virtual bool edit(ScoreView*, int grip, int key, Qt::KeyboardModifiers, const QString& s);
       virtual void updateGrips(int*, QRectF*) const;
       virtual QPointF gripAnchor(int grip) const;
@@ -80,7 +82,6 @@ class SlurSegment : public SpannerSegment {
       void write(Xml& xml, int no) const;
       void read(QDomElement);
       void dump() const;
-      void setSystem(System* s)                     { _system = s;       }
       virtual void toDefault();
       void setSlurOffset(int i, const QPointF& val) { ups[i].off = val;  }
       QPointF slurOffset(int i) const               { return ups[i].off; }

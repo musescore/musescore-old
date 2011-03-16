@@ -1,3 +1,8 @@
+16.mar (ws)
+      - slur edit mode: dragging the first or last grip on a note
+        moves the anchor to this chord. This allows to connect notes in different
+        voices or staves. Its also possible to anchor the start and end of
+        a slur to one note.
 14.mar (ws)
       - allow ties between notes with different voice (and same pitch)
       - fix crash when inserting vertical frame (#9765)

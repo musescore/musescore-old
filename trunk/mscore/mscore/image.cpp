@@ -146,16 +146,16 @@ QRectF Image::bbox() const
 //   editDrag
 //---------------------------------------------------------
 
-void Image::editDrag(int curGrip, const QPointF& d)
+void Image::editDrag(const EditData& ed)
       {
       double ratio = sz.width() / sz.height();
-      if (curGrip == 0) {
-            sz.setWidth(sz.width() + d.x());
+      if (ed.curGrip == 0) {
+            sz.setWidth(sz.width() + ed.delta.x());
             if (_lockAspectRatio)
                   sz.setHeight(sz.width() / ratio);
             }
       else {
-            sz.setHeight(sz.height() + d.y());
+            sz.setHeight(sz.height() + ed.delta.y());
             if (_lockAspectRatio)
                   sz.setWidth(sz.height() * ratio);
             }

@@ -138,12 +138,12 @@ void Stem::updateGrips(int* grips, QRectF* grip) const
 //   editDrag
 //---------------------------------------------------------
 
-void Stem::editDrag(int, const QPointF& delta)
+void Stem::editDrag(const EditData& ed)
       {
-      _userLen += Spatium(delta.y() / spatium());
+      _userLen += Spatium(ed.delta.y() / spatium());
       Chord* c = static_cast<Chord*>(parent());
       if (c->hook())
-            c->hook()->move(0.0, delta.y());
+            c->hook()->move(0.0, ed.delta.y());
       }
 
 //---------------------------------------------------------

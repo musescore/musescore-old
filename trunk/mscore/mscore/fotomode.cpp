@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: scoreview.cpp 3446 2010-09-10 20:18:16Z wschweer $
 //
-//  Copyright (C) 2002-2010 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -425,7 +425,11 @@ void ScoreView::doFotoDragEdit(QMouseEvent* ev)
       QPointF delta = p - startMove;
       _score->setLayoutAll(false);
       score()->addRefresh(_foto->abbox());
-      _foto->editDrag(curGrip, delta);
+      EditData ed;
+      ed.curGrip = curGrip;
+      ed.delta   = delta;
+      ed.view    = 0;
+      _foto->editDrag(ed);
       updateGrips();
       startMove = p;
       _score->end();

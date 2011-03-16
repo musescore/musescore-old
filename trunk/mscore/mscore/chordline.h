@@ -50,7 +50,7 @@ class ChordLine : public Element {
       virtual void layout();
       virtual void draw(Painter*) const;
 
-      virtual void editDrag(int, const QPointF&);
+      virtual void editDrag(const EditData&);
       virtual void updateGrips(int*, QRectF*) const;
       };
 

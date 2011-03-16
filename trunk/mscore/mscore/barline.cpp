@@ -492,10 +492,9 @@ void BarLine::endEdit()
 //   editDrag
 //---------------------------------------------------------
 
-void BarLine::editDrag(int, const QPointF& delta)
+void BarLine::editDrag(const EditData& ed)
       {
-      double dy = delta.y();
-      yoff += dy;
+      yoff += ed.delta.y();
       }
 
 //---------------------------------------------------------

@@ -818,12 +818,12 @@ bool Tuplet::isEditable() const
 //   editDrag
 //---------------------------------------------------------
 
-void Tuplet::editDrag(int grip, const QPointF& d)
+void Tuplet::editDrag(const EditData& ed)
       {
-      if (grip == 0)
-            _p1 += d;
+      if (ed.curGrip == 0)
+            _p1 += ed.delta;
       else
-            _p2 += d;
+            _p2 += ed.delta;
       _userModified = true;
       setGenerated(false);
       layout();

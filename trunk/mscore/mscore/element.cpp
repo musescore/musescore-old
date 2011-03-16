@@ -1182,10 +1182,10 @@ ElementType Element::readType(QDomElement& e, QPointF* dragOffset)
 //   editDrag
 //---------------------------------------------------------
 
-void Element::editDrag(int, const QPointF& delta)
+void Element::editDrag(const EditData& ed)
       {
       score()->addRefresh(abbox());
-      setUserOff(userOff() + delta);
+      setUserOff(userOff() + ed.delta);
       score()->addRefresh(abbox());
       }
 

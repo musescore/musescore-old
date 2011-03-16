@@ -152,7 +152,6 @@ bool SlurSegment::edit(ScoreView* viewer, int curGrip, int key, Qt::KeyboardModi
             )))
             return false;
 
-      int segments  = sl->spannerSegments().size();
       ChordRest* cr = 0;
       Element* e    = curGrip == 0 ? sl->startElement() : sl->endElement();
       Element* e1   = curGrip == 0 ? sl->endElement() : sl->startElement();
@@ -164,6 +163,17 @@ bool SlurSegment::edit(ScoreView* viewer, int curGrip, int key, Qt::KeyboardModi
 
       if (cr == 0 || cr == (ChordRest*)e1)
             return true;
+      changeAnchor(viewer, curGrip, cr);
+      return true;
+      }
+
+//---------------------------------------------------------
+//   changeAnchor
+//---------------------------------------------------------
+
+void SlurSegment::changeAnchor(ScoreView* viewer, int curGrip, ChordRest* cr)
+      {
+      Slur* sl = static_cast<Slur*>(slurTie());
       if (curGrip == 0) {
             ((ChordRest*)sl->startElement())->removeSlurFor(sl);
             sl->setStartElement(cr);
@@ -175,6 +185,7 @@ bool SlurSegment::edit(ScoreView* viewer, int curGrip, int key, Qt::KeyboardModi
             cr->addSlurBack(sl);
             }
 
+      int segments  = sl->spannerSegments().size();
       ups[curGrip].off = QPointF();
       sl->layout();
       if (sl->spannerSegments().size() != segments) {
@@ -184,7 +195,6 @@ bool SlurSegment::edit(ScoreView* viewer, int curGrip, int key, Qt::KeyboardModi
             viewer->startEdit(newSegment, curGrip);
             score()->setLayoutAll(true);
             }
-      return true;
       }
 
 //---------------------------------------------------------
@@ -232,11 +242,33 @@ QPointF SlurSegment::gripAnchor(int grip) const
 //   editDrag
 //---------------------------------------------------------
 
-void SlurSegment::editDrag(int curGrip, const QPointF& delta)
+void SlurSegment::editDrag(const EditData& ed)
       {
-      ups[curGrip].off += (delta / spatium());
-      if (curGrip == 0 || curGrip == 3)
+      ups[ed.curGrip].off += (ed.delta / spatium());
+      if (ed.curGrip == 0 || ed.curGrip == 3) {
             computeBezier();
+            //
+            // move anchor for slurs
+            //
+            Slur* slur = static_cast<Slur*>(slurTie());
+            if ((slur->type() == SLUR)
+               && (
+                  (ed.curGrip == 0 && (spannerSegmentType() == SEGMENT_SINGLE || spannerSegmentType() == SEGMENT_BEGIN))
+                  || (ed.curGrip == 3 && (spannerSegmentType() == SEGMENT_SINGLE || spannerSegmentType() == SEGMENT_END))
+                  )
+               ) {
+                  QPointF p(ups[ed.curGrip].p + ups[ed.curGrip].off * spatium() + canvasPos());
+                  Element* e = ed.view->elementNear(p);
+                  if (e && e->type() == NOTE) {
+                        Chord* chord = static_cast<Note*>(e)->chord();
+                        if ((ed.curGrip == 3 && chord != slur->endElement())
+                           || (ed.curGrip == 0 && chord != slur->startElement())) {
+                              changeAnchor(ed.view, ed.curGrip, chord);
+                              return;
+                              }
+                        }
+                  }
+            }
       updatePath();
       }
 
@@ -333,8 +365,8 @@ void SlurSegment::computeBezier()
       qreal y3   = p2.y() + ups[3].off.y() * _spatium;
 
       qreal dx = x3 - x0;
-      if (dx == 0.0 || (x0 > x3)) {
-            printf("illegal slurSegment\n");
+      if (dx <= 0.0 || (x0 > x3)) {
+            printf("illegal slurSegment dx %f ---  x0 %f > x3 %f\n", dx, x0, x3);
             return;
             }
       if (bow > (dx * .2))       // limit bow for small slurs

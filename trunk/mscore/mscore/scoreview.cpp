@@ -1054,6 +1054,7 @@ void ScoreView::resizeEvent(QResizeEvent* /*ev*/)
 
 //---------------------------------------------------------
 //   updateGrips
+//    if (curGrip == -1) then initialize to grips-1
 //---------------------------------------------------------
 
 void ScoreView::updateGrips()
@@ -1078,6 +1079,8 @@ void ScoreView::updateGrips()
       for (int i = 0; i < grips; ++i)
             score()->addRefresh(grip[i].adjusted(-dx, -dy, dx, dy));
 
+      if (curGrip == -1)
+            curGrip = grips-1;
       QPointF anchor = editObject->gripAnchor(curGrip);
       if (!anchor.isNull())
             setDropAnchor(QLineF(anchor, grip[curGrip].center()));
@@ -1223,13 +1226,8 @@ void ScoreView::startEdit()
                   }
             editObject->startEdit(this, startMove);
             }
-      qreal w = 8.0 / _matrix.m11();
-      qreal h = 8.0 / _matrix.m22();
-      QRectF r(-w*.5, -h*.5, w, h);
-      for (int i = 0; i < MAX_GRIPS; ++i)
-            grip[i] = r;
-      editObject->updateGrips(&grips, grip);
-      curGrip = grips-1;
+      curGrip = -1;
+      updateGrips();
       _score->setLayoutAll(true);
       score()->end();
       }
@@ -3334,7 +3332,7 @@ void ScoreView::endDragEdit()
       _score->addRefresh(editObject->abbox());
       editObject->endEditDrag();
       updateGrips();
-      setDropTarget(0); // this also resets dropRectangle and dropAnchor
+      // setDropTarget(0); // this also resets dropRectangle and dropAnchor
       _score->addRefresh(editObject->abbox());
       _score->end();
       }
@@ -3354,7 +3352,11 @@ void ScoreView::doDragEdit(QMouseEvent* ev)
             text->dragTo(p);
             }
       else {
-            editObject->editDrag(curGrip, delta);
+            EditData ed;
+            ed.view    = this;
+            ed.curGrip = curGrip;
+            ed.delta   = delta;
+            editObject->editDrag(ed);
             updateGrips();
             startMove = p;
             }

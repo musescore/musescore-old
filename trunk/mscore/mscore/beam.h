@@ -98,7 +98,7 @@ class Beam : public Element {
 
       virtual bool isEditable() const { return true; }
       virtual void startEdit(ScoreView*, const QPointF&);
-      virtual void editDrag(int, const QPointF&);
+      virtual void editDrag(const EditData&);
       virtual void updateGrips(int*, QRectF*) const;
 
       virtual void write(Xml& xml) const;

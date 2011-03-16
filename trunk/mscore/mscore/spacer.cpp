@@ -121,9 +121,9 @@ Element* Spacer::drop(const DropData& data)
 //   editDrag
 //---------------------------------------------------------
 
-void Spacer::editDrag(int, const QPointF& delta)
+void Spacer::editDrag(const EditData& ed)
       {
-      Spatium s(delta.y() / spatium());
+      Spatium s(ed.delta.y() / spatium());
       if (subtype() == SPACER_DOWN)
             _space += s;
       else if (subtype() == SPACER_UP)
