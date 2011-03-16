@@ -3,6 +3,7 @@
         moves the anchor to this chord. This allows to connect notes in different
         voices or staves. Its also possible to anchor the start and end of
         a slur to one note.
+      - fix #9608: even lyrics style is not applied
 14.mar (ws)
       - allow ties between notes with different voice (and same pitch)
       - fix crash when inserting vertical frame (#9765)

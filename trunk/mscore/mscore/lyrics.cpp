@@ -46,6 +46,7 @@ Lyrics::Lyrics(const Lyrics& l)
    : Text(l)
       {
       _no  = l._no;
+      setTextStyle((_no % 2) ? TEXT_STYLE_LYRIC2 : TEXT_STYLE_LYRIC1);
       _ticks = l._ticks;
       _syllabic = l._syllabic;
       if (l._verseNumber)
