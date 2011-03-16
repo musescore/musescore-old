@@ -659,8 +659,8 @@ MuseScore::MuseScore()
       if (enableInspector)
             menuEdit->addAction(getAction("inspector"));
       menuEdit->addSeparator();
-      menuEdit->addAction(tr("Preferences..."), this, SLOT(startPreferenceDialog()));
-
+      QAction* pref = menuEdit->addAction(tr("Preferences..."), this, SLOT(startPreferenceDialog()));
+      pref->setMenuRole(QAction::PreferencesRole);
       //---------------------
       //    Menu Create
       //---------------------
@@ -1487,7 +1487,7 @@ void setMscoreLocale(QString localeName)
             }
 
       QString resourceDir;
-#ifdef __MINGW32__
+#if defined(Q_WS_MAC) || defined(Q_WS_WIN)
       resourceDir = mscoreGlobalShare + "locale/";
 #else
       resourceDir = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
