@@ -39,7 +39,7 @@ class Lasso : public Element {
       virtual ElementType type() const   { return LASSO; }
       virtual void draw(Painter*) const;
       virtual bool isEditable() const     { return true; }
-      virtual void editDrag(int, const QPointF&);
+      virtual void editDrag(const EditData&);
       virtual void updateGrips(int*, QRectF*) const;
       QRectF rect() const                 { return _rect; }
       void setRect(const QRectF& r)       { _rect = r;    }

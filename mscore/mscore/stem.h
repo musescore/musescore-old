@@ -51,7 +51,7 @@ class Stem : public Element {
       virtual QRectF bbox() const;
       virtual bool isEditable() const { return true; }
 
-      virtual void editDrag(int, const QPointF&);
+      virtual void editDrag(const EditData&);
       virtual void updateGrips(int*, QRectF*) const;
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement e);

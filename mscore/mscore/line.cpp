@@ -245,17 +245,17 @@ bool LineSegment::edit(ScoreView* sv, int curGrip, int key, Qt::KeyboardModifier
 //   editDrag
 //---------------------------------------------------------
 
-void LineSegment::editDrag(int curGrip, const QPointF& d)
+void LineSegment::editDrag(const EditData& ed)
       {
-      QPointF delta(d.x(), 0);
+      QPointF delta(ed.delta.x(), 0);
 
       if (line()->type() == TEXTLINE) {
             TextLine* tl = static_cast<TextLine*>(line());
             if (tl->diagonal())
-                  delta.setY(d.y());
+                  delta.setY(ed.delta.y());
             }
 
-      if (curGrip == 0) {
+      if (ed.curGrip == 0) {
             setUserOff(userOff() + delta);
             _userOff2 -= delta;
             }

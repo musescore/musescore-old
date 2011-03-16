@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -219,11 +219,9 @@ QRectF Bracket::bbox() const
 //   editDrag
 //---------------------------------------------------------
 
-void Bracket::editDrag(int, const QPointF& delta)
+void Bracket::editDrag(const EditData& ed)
       {
-      qreal dy = delta.y();
-      yoff += dy;
-
+      yoff += ed.delta.y();
       layout();
       }
 

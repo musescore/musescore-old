@@ -66,7 +66,7 @@ class Bracket : public Element {
       virtual void startEdit(ScoreView*, const QPointF&);
       virtual bool edit(ScoreView*, int, int, Qt::KeyboardModifiers, const QString&);
       virtual void endEdit();
-      virtual void editDrag(int, const QPointF&);
+      virtual void editDrag(const EditData&);
       virtual void endEditDrag();
       virtual void updateGrips(int*, QRectF*) const;
       virtual QPointF gripAnchor(int grip) const;

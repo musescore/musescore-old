@@ -188,18 +188,18 @@ void ChordLine::draw(Painter* painter) const
 //   editDrag
 //---------------------------------------------------------
 
-void ChordLine::editDrag(int grip, const QPointF& delta)
+void ChordLine::editDrag(const EditData& ed)
       {
       int n = path.elementCount();
       QPainterPath p;
       double sp = spatium();
-      double dx = delta.x() / sp;
-      double dy = delta.y() / sp;
+      double dx = ed.delta.x() / sp;
+      double dy = ed.delta.y() / sp;
       for (int i = 0; i < n; ++i) {
             const QPainterPath::Element& e = path.elementAt(i);
             double x = e.x;
             double y = e.y;
-            if (grip == i) {
+            if (ed.curGrip == i) {
                   x += dx;
                   y += dy;
                   }
@@ -218,11 +218,11 @@ void ChordLine::editDrag(int grip, const QPointF& delta)
                         double y2 = path.elementAt(i+1).y;
                         double x3 = path.elementAt(i+2).x;
                         double y3 = path.elementAt(i+2).y;
-                        if (i + 1 == grip) {
+                        if (i + 1 == ed.curGrip) {
                               x2 += dx;
                               y2 += dy;
                               }
-                        else if (i + 2 == grip) {
+                        else if (i + 2 == ed.curGrip) {
                               x3 += dx;
                               y3 += dy;
                               }

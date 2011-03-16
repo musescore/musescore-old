@@ -51,7 +51,7 @@ class Box : public MeasureBase {
       virtual bool isEditable() const { return true; }
       virtual void startEdit(ScoreView*, const QPointF&);
       virtual bool edit(ScoreView*, int grip, int key, Qt::KeyboardModifiers, const QString& s);
-      virtual void editDrag(int, const QPointF&);
+      virtual void editDrag(const EditData&);
       virtual void endEditDrag();
       virtual void endEdit();
       virtual void updateGrips(int* grips, QRectF*) const;

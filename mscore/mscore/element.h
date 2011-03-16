@@ -105,6 +105,17 @@ struct DropData {
       };
 
 //---------------------------------------------------------
+//   EditData
+//    used in editDrag
+//---------------------------------------------------------
+
+struct EditData {
+      ScoreView* view;
+      int curGrip;
+      QPointF delta;
+      };
+
+//---------------------------------------------------------
 ///   \brief base class of score layout elements
 ///
 ///   The Element class is the virtual base class of all
@@ -239,7 +250,7 @@ class Element {
       virtual bool isEditable() const         { return !_generated; }
       virtual void startEdit(ScoreView*, const QPointF&) {}
       virtual bool edit(ScoreView*, int grip, int key, Qt::KeyboardModifiers, const QString& s);
-      virtual void editDrag(int, const QPointF&);
+      virtual void editDrag(const EditData&);
       virtual void endEditDrag()                               {}
       virtual void endEdit()                                   {}
       virtual void updateGrips(int* grips, QRectF*) const      { *grips = 0;       }

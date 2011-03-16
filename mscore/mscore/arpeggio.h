@@ -50,7 +50,7 @@ class Arpeggio : public Element {
       virtual QRectF bbox() const;
       virtual void draw(Painter*) const;
       virtual bool isEditable() const { return true; }
-      virtual void editDrag(int, const QPointF&);
+      virtual void editDrag(const EditData&);
       virtual void updateGrips(int*, QRectF*) const;
       virtual bool edit(ScoreView*, int curGrip, int key, Qt::KeyboardModifiers modifiers, const QString&);
 

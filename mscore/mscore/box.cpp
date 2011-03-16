@@ -108,12 +108,12 @@ bool Box::edit(ScoreView*, int /*grip*/, int /*key*/, Qt::KeyboardModifiers, con
 //   editDrag
 //---------------------------------------------------------
 
-void Box::editDrag(int, const QPointF& d)
+void Box::editDrag(const EditData& ed)
       {
       if (type() == VBOX)
-            _boxHeight += Spatium(d.y() / spatium());
+            _boxHeight += Spatium(ed.delta.y() / spatium());
       else {
-            _boxWidth += Spatium(d.x() / spatium());
+            _boxWidth += Spatium(ed.delta.x() / spatium());
             foreach(Element* e, _el) {
                   if (e->type() == TEXT) {
                         static_cast<Text*>(e)->setModified(true);  // force relayout

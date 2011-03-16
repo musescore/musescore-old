@@ -180,12 +180,12 @@ void Arpeggio::updateGrips(int* grips, QRectF* grip) const
 //   editDrag
 //---------------------------------------------------------
 
-void Arpeggio::editDrag(int n, const QPointF& delta)
+void Arpeggio::editDrag(const EditData& ed)
       {
-      Spatium d(delta.y() / spatium());
-      if (n == 0)
+      Spatium d(ed.delta.y() / spatium());
+      if (ed.curGrip == 0)
             _userLen1 -= d;
-      else if (n == 1)
+      else if (ed.curGrip == 1)
             _userLen2 += d;
       }
 

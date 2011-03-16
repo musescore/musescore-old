@@ -43,7 +43,7 @@ class Image : public BSymbol {
       mutable bool _dirty;
 
       virtual bool isEditable() const { return true; }
-      virtual void editDrag(int, const QPointF&);
+      virtual void editDrag(const EditData&);
       virtual void endEdit();
       virtual void draw(Painter*) const;
       virtual void updateGrips(int*, QRectF*) const;

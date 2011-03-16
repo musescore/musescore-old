@@ -54,41 +54,41 @@ void Lasso::draw(Painter* painter) const
 //   editDrag
 //---------------------------------------------------------
 
-void Lasso::editDrag(int curGrip, const QPointF& delta)
+void Lasso::editDrag(const EditData& ed)
       {
       Qt::CursorShape cursorShape = view->cursor().shape();
-      switch(curGrip) {
+      switch(ed.curGrip) {
             case 0:
                   cursorShape = Qt::SizeFDiagCursor;
-                  _rect.setTopLeft(_rect.topLeft() + delta);
+                  _rect.setTopLeft(_rect.topLeft() + ed.delta);
                   break;
             case 1:
                   cursorShape = Qt::SizeBDiagCursor;
-                  _rect.setTopRight(_rect.topRight() + delta);
+                  _rect.setTopRight(_rect.topRight() + ed.delta);
                   break;
             case 2:
                   cursorShape = Qt::SizeFDiagCursor;
-                  _rect.setBottomRight(_rect.bottomRight() + delta);
+                  _rect.setBottomRight(_rect.bottomRight() + ed.delta);
                   break;
             case 3:
                   cursorShape = Qt::SizeBDiagCursor;
-                  _rect.setBottomLeft(_rect.bottomLeft() + delta);
+                  _rect.setBottomLeft(_rect.bottomLeft() + ed.delta);
                   break;
             case 4:
                   cursorShape = Qt::SizeVerCursor;
-                  _rect.setTop(_rect.top() + delta.y());
+                  _rect.setTop(_rect.top() + ed.delta.y());
                   break;
             case 5:
                   cursorShape = Qt::SizeHorCursor;
-                  _rect.setRight(_rect.right() + delta.x());
+                  _rect.setRight(_rect.right() + ed.delta.x());
                   break;
             case 6:
                   cursorShape = Qt::SizeVerCursor;
-                  _rect.setBottom(_rect.bottom() + delta.y());
+                  _rect.setBottom(_rect.bottom() + ed.delta.y());
                   break;
             case 7:
                   cursorShape = Qt::SizeHorCursor;
-                  _rect.setLeft(_rect.left() + delta.x());
+                  _rect.setLeft(_rect.left() + ed.delta.x());
                   break;
             }
       view->setCursor(cursorShape);

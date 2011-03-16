@@ -153,7 +153,11 @@ void ScoreView::editKey(QKeyEvent* ev)
                   ev->ignore();
                   return;
             }
-      editObject->editDrag(curGrip, delta);
+      EditData ed;
+      ed.curGrip = curGrip;
+      ed.delta   = delta;
+      ed.view    = this;
+      editObject->editDrag(ed);
       updateGrips();
       _score->end();
       ev->accept();

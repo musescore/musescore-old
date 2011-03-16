@@ -1187,12 +1187,12 @@ void Beam::read(QDomElement e)
 //   editDrag
 //---------------------------------------------------------
 
-void Beam::editDrag(int grip, const QPointF& delta)
+void Beam::editDrag(const EditData& ed)
       {
       int idx = (_direction == AUTO || _direction == DOWN) ? 0 : 1;
-      QPointF d(0.0, delta.y());
+      QPointF d(0.0, ed.delta.y());
       BeamFragment* f = fragments[editFragment];
-      if (grip == 0)
+      if (ed.curGrip == 0)
             f->p1[idx] += d;
       f->p2[idx] += d;
       _userModified[idx] = true;
