@@ -4005,15 +4005,19 @@ void ScoreView::cmdAddSlur(Note* firstNote, Note* lastNote)
       ChordRest* cr1 = firstNote->chord();
       ChordRest* cr2 = lastNote ? lastNote->chord() : nextChordRest(cr1);
 
-      if (cr2 == 0) {
-            printf("cannot create slur: at end\n");
-            return;
-            }
+      if (cr2 == 0)
+            cr2 = cr1;
 
       Slur* slur = new Slur(_score);
       slur->setStartElement(cr1);
       slur->setEndElement(cr2);
       slur->setParent(0);
+      if (cr1 == cr2) {
+            printf("startnote == endnote\n");
+            slur->layout();
+            SlurSegment* ss = slur->frontSegment();
+            ss->setSlurOffset(3, QPointF(3.0, 0.0));
+            }
       _score->undoAddElement(slur);
 
       slur->layout();
