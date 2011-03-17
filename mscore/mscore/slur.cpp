@@ -257,13 +257,14 @@ void SlurSegment::editDrag(const EditData& ed)
                   || (ed.curGrip == 3 && (spannerSegmentType() == SEGMENT_SINGLE || spannerSegmentType() == SEGMENT_END))
                   )
                ) {
-                  QPointF p(ups[ed.curGrip].p + ups[ed.curGrip].off * spatium() + canvasPos());
-                  Element* e = ed.view->elementNear(p);
+                  Element* e = ed.view->elementNear(ed.pos);
                   if (e && e->type() == NOTE) {
                         Chord* chord = static_cast<Note*>(e)->chord();
                         if ((ed.curGrip == 3 && chord != slur->endElement())
                            || (ed.curGrip == 0 && chord != slur->startElement())) {
                               changeAnchor(ed.view, ed.curGrip, chord);
+                              QPointF p1 = ed.pos - ups[ed.curGrip].p + canvasPos();
+                              ups[ed.curGrip].off = p1 / spatium();
                               return;
                               }
                         }

@@ -3356,6 +3356,7 @@ void ScoreView::doDragEdit(QMouseEvent* ev)
             ed.view    = this;
             ed.curGrip = curGrip;
             ed.delta   = delta;
+            ed.pos     = p;
             editObject->editDrag(ed);
             updateGrips();
             startMove = p;

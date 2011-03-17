@@ -113,6 +113,7 @@ struct EditData {
       ScoreView* view;
       int curGrip;
       QPointF delta;
+      QPointF pos;
       };
 
 //---------------------------------------------------------
