@@ -367,7 +367,8 @@ void SlurSegment::computeBezier()
 
       qreal dx = x3 - x0;
       if (dx <= 0.0 || (x0 > x3)) {
-            printf("illegal slurSegment dx %f ---  x0 %f > x3 %f\n", dx, x0, x3);
+            if (debugMode)
+                  printf("illegal slurSegment dx %f ---  x0 %f > x3 %f\n", dx, x0, x3);
             return;
             }
       if (bow > (dx * .2))       // limit bow for small slurs
@@ -557,8 +558,12 @@ void SlurTie::slurPos(SlurPos* sp)
             }
       else {
             if ((e1->type() != CHORD) || (e2->type() != CHORD)) {
-                  sp->p1 = QPointF(e1->canvasPos().x() + e1->width(), 0.0);
-                  sp->p2 = QPointF(e2->canvasPos().x() + e2->width(), 0.0);
+                  sp->p1 = e1->canvasPos();
+                  sp->p2 = e2->canvasPos();
+                  sp->p1.rx() += e1->width();
+                  sp->p2.rx() += e2->width();
+                  sp->system1 = static_cast<ChordRest*>(e1)->measure()->system();
+                  sp->system2 = static_cast<ChordRest*>(e2)->measure()->system();
                   return;
                   }
             sc    = static_cast<Chord*>(e1);
@@ -932,6 +937,8 @@ void Slur::layout()
                   break;
             ++is;
             }
+      if (is == sl->end())
+            printf("Slur::layout  first system not found\n");
       setPos(0, 0);
 
       //---------------------------------------------------------
@@ -955,8 +962,9 @@ void Slur::layout()
                   if (!delSegments.isEmpty()) {
                         s = delSegments.dequeue();
                         }
-                  else
+                  else {
                         s = new SlurSegment(score());
+                        }
                   s->setTrack(track());
                   add(s);
                   }
