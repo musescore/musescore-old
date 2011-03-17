@@ -4012,17 +4012,14 @@ void ScoreView::cmdAddSlur(Note* firstNote, Note* lastNote)
       slur->setStartElement(cr1);
       slur->setEndElement(cr2);
       slur->setParent(0);
-      if (cr1 == cr2) {
-            printf("startnote == endnote\n");
-            slur->layout();
-            SlurSegment* ss = slur->frontSegment();
-            ss->setSlurOffset(3, QPointF(3.0, 0.0));
-            }
       _score->undoAddElement(slur);
 
       slur->layout();
+      if (cr1 == cr2) {
+            SlurSegment* ss = slur->frontSegment();
+            ss->setSlurOffset(3, QPointF(3.0, 0.0));
+            }
       const QList<SpannerSegment*>& el = slur->spannerSegments();
-
       if (noteEntryMode()) {
             _score->inputState().slur = slur;
             if (!el.isEmpty())
