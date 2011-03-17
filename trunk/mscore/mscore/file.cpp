@@ -1897,8 +1897,6 @@ bool Score::saveSvg(const QString& saveName)
       Painter painter(&p, 0);
 
       QList<Element*> eel;
-//      foreach (Beam* b, _beams)
-//            b->scanElements(&eel, collectElements);
       for (MeasureBase* m = _measures.first(); m; m = m->next()) {
             // skip multi measure rests
             if (m->type() == MEASURE) {
@@ -2724,10 +2722,10 @@ QString MuseScore::getAudioFile(const QString& d)
 QString MuseScore::getFotoFilename()
       {
       QString filter =
-         tr("PNG Bitmap Graphic (*.png)")+
-         tr("PDF File (*.pdf)")+
-         tr("Encapsulated PostScript File (*.eps)")+
-         tr("Scalable Vector Graphic (*.svg)");
+         tr("PNG Bitmap Graphic (*.png);;")+
+         tr("PDF File (*.pdf);;")+
+         tr("Encapsulated PostScript File (*.eps);;")+
+         tr("Scalable Vector Graphic (*.svg);;");
 
       QString title = tr("MuseScore: Save Image");
       if (preferences.nativeDialogs) {
@@ -2758,7 +2756,7 @@ QString MuseScore::getFotoFilename()
             saveImageDialog->setOption(QFileDialog::DontUseNativeDialog, true);
             saveImageDialog->setLabelText(QFileDialog::Accept, tr("Save"));
             saveImageDialog->setWindowTitle(title);
-            saveImageDialog->setNameFilter(tr("MuseScore Style File (*.mss)"));
+            saveImageDialog->setNameFilter(filter);
             saveImageDialog->setDirectory(".");
 
             QSettings settings;

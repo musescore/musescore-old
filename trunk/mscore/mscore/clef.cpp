@@ -389,16 +389,6 @@ void Clef::propertyAction(ScoreView* viewer, const QString& s)
       }
 
 //---------------------------------------------------------
-//   space
-//---------------------------------------------------------
-
-Space Clef::space() const
-      {
-//      return Space(point(score()->styleS(ST_clefLeftMargin)), width());
-      return Space(0.0, width());
-      }
-
-//---------------------------------------------------------
 //   setSmall
 //---------------------------------------------------------
 

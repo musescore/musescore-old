@@ -25,6 +25,7 @@
 #include "icons.h"
 #include "page.h"
 #include "preferences.h"
+#include "image.h"
 
 //---------------------------------------------------------
 //   FotoScoreViewDragTransition
@@ -788,6 +789,7 @@ void ScoreView::fotoDragDrop(QMouseEvent*)
       }
 #endif
 
+#if 1
 void ScoreView::fotoDragDrop(QMouseEvent*)
       {
       bool printMode   = true;
@@ -827,4 +829,35 @@ void ScoreView::fotoDragDrop(QMouseEvent*)
       drag->setMimeData(mimeData);
       drag->start(Qt::CopyAction);
       }
+#else
+
+void ScoreView::fotoDragDrop(QMouseEvent*)
+      {
+      bool printMode   = true;
+      double convDpi   = DPI; // preferences.pngResolution;
+      double mag       = convDpi / DPI;
+      QRectF r(_foto->abbox());
+      int w            = lrint(r.width()  * mag);
+      int h            = lrint(r.height() * mag);
+
+      QTemporaryFile tf(QDir::tempPath() + QString("/imgXXXXXX.svg"));
+      tf.setAutoRemove(false);
+      tf.open();
+      tf.close();
+
+      QString fn = tf.fileName();
+
+      QSvgGenerator printer;
+      printer.setResolution(int(DPI));
+      printer.setFileName(fn);
+
+      QPainter p(&printer);
+      paintRect(printMode, p, r, mag);
+
+      SvgImage* image = new SvgImage(gscore);
+      image->setPath(fn);
+
+      cloneElement(image);
+      }
+#endif
 

@@ -583,7 +583,13 @@ void Score::undoChangeClef(Staff* ostaff, Segment* seg, ClefType st)
                   printf("measure for tick %d not found!\n", seg->tick());
                   continue;
                   }
-            if (firstSeg && measure->prevMeasure())   // move clef to last segment of prev measure
+
+            // move clef to last segment of prev measure?
+            //    TODO: section break?
+            if (firstSeg
+               && measure->prevMeasure()
+               && !(measure->prevMeasure()->repeatFlags() & RepeatEnd)
+               )   // move clef to last segment of prev measure
                   measure = measure->prevMeasure();
 
             int tick = seg->tick();

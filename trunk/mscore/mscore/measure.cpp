@@ -2853,7 +2853,10 @@ static double sff(double x, double xMin, SpringMap& springs)
       return f;
       }
 
+#define T(...) if (_no == 1) printf(__VA_ARGS__);
+
 //-----------------------------------------------------------------------------
+//    layoutX
 ///   \brief main layout routine for note spacing
 ///   Return width of measure (in MeasureWidth), taking into account \a stretch.
 ///   In the layout process this method is called twice, first with stretch==1
@@ -2864,8 +2867,14 @@ void Measure::layoutX(double stretch)
       {
       if (!_dirty && (stretch == 1.0))
             return;
-      int nstaves     = _score->nstaves();
-      int segs        = _size;
+      int nstaves = _score->nstaves();
+
+      int segs = 0;
+      for (const Segment* s = first(); s; s = s->next()) {
+            if (s->subtype() == SegClef && (s != first()))
+                  continue;
+            ++segs;
+            }
 
       if (nstaves == 0 || segs == 0) {
             _mw = MeasureWidth(1.0, 0.0);
@@ -2884,7 +2893,7 @@ void Measure::layoutX(double stretch)
       memset(ticksList, 0, segs * sizeof(int));
 
       double xpos[segs+1];
-      int types[segs];
+      SegmentType types[segs];
       double width[segs];
 
       int segmentIdx  = 0;
@@ -2892,14 +2901,29 @@ void Measure::layoutX(double stretch)
       int minTick     = 100000;
       int ntick       = tick() + ticks();   // position of next measure
 
+      double clefWidth[nstaves];
+      memset(clefWidth, 0, nstaves * sizeof(double));
+
       for (const Segment* s = first(); s; s = s->next(), ++segmentIdx) {
-            types[segmentIdx] = s->subtype();
+            if ((s->subtype() == SegClef) && (s != first())) {
+                  --segmentIdx;
+                  for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
+                        int track  = staffIdx * VOICES;
+                        Element* e = s->element(track);
+                        if (e) {
+                              e->layout();
+                              clefWidth[staffIdx] = e->width() + _spatium;
+                              }
+                        }
+                  continue;
+                  }
             bool rest2[nstaves+1];
+            SegmentType segType    = s->segmentType();
+            types[segmentIdx]      = segType;
             double segmentWidth    = 0.0;
             double minDistance     = 0.0;
             double stretchDistance = 0.0;
             Segment* pSeg          = s->prev();
-            SegmentTypes segType   = s->segmentType();
 
             for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
                   Space space;
@@ -2924,8 +2948,9 @@ void Measure::layoutX(double stretch)
                                     if (! (pt & (SegChordRest | SegGrace))) {
                                           // if (pt & (SegKeySig | SegClef))
                                           bool firstClef = (segmentIdx == 1) && (pt == SegClef);
-                                          if ((pt & (SegKeySig | SegTimeSig)) || firstClef)
+                                          if ((pt & (SegKeySig | SegTimeSig)) || firstClef) {
                                                 minDistance = clefKeyRightMargin;
+                                                }
                                           else
                                                 minDistance = 0.0;
                                           }
@@ -2963,14 +2988,14 @@ void Measure::layoutX(double stretch)
                   else {
                         Element* e = s->element(track);
                         if ((segType == SegClef) && (segmentIdx == 0 || (s->prev()->subtype() != SegChordRest)))
-                              minDistance = score()->styleS(ST_clefLeftMargin).val() * _spatium;
+                              minDistance = score()->styleP(ST_clefLeftMargin);
                         else if (segType == SegStartRepeatBarLine)
                               minDistance = .5 * _spatium;
                         else if ((segType == SegEndBarLine) && segmentIdx) {
                               if (pSeg->subtype() == SegClef)
-                                    minDistance = score()->styleS(ST_clefBarlineDistance).val() * _spatium;
+                                    minDistance = score()->styleP(ST_clefBarlineDistance);
                               else
-                                    stretchDistance = score()->styleS(ST_noteBarDistance).val() * _spatium;
+                                    stretchDistance = score()->styleP(ST_noteBarDistance);
                               if (e == 0) {
                                     // look for barline
                                     for (int i = track - VOICES; i >= 0; i -= VOICES) {
@@ -2988,6 +3013,8 @@ void Measure::layoutX(double stretch)
                               }
                         }
                   if (found) {
+                        // if (pSeg && (pSeg->segmentType() == SegClef) && pSeg->element(track))
+                        space.rLw() += clefWidth[staffIdx];
                         double sp = minDistance + rest[staffIdx] + stretchDistance;
                         if (space.lw() > stretchDistance)
                               sp += (space.lw() - stretchDistance);
@@ -2997,6 +3024,7 @@ void Measure::layoutX(double stretch)
                         }
                   else
                         rest2[staffIdx] = true;
+                  clefWidth[staffIdx] = 0.0;
                   }
             x += segmentWidth;
             xpos[segmentIdx]  = x;
@@ -3037,9 +3065,8 @@ void Measure::layoutX(double stretch)
 
       for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
             double distAbove;
-//            StaffTypeTablature * tab;
             Staff * staff = _score->staff(staffIdx);
-            if(staff->useTablature()) {
+            if (staff->useTablature()) {
                   distAbove = -((StaffTypeTablature*)(staff->staffType()))->durationBoxY();
                   if (distAbove > staves[staffIdx]->distanceUp)
                      staves[staffIdx]->distanceUp = distAbove;
@@ -3059,7 +3086,7 @@ void Measure::layoutX(double stretch)
             }
 
       //---------------------------------------------------
-      // compute stretches:
+      // compute stretches
       //---------------------------------------------------
 
       SpringMap springs;
@@ -3077,20 +3104,16 @@ void Measure::layoutX(double stretch)
             if (t) {
                   if (minTick > 0)
                         str += .6 * log2(double(t) / double(minTick));
-                  stretchList[i] = str;
                   d = w / str;
+                  stretchSum += str;
                   }
             else {
-                  if (ticksList[i]) {
-                        printf("zero segment %d\n", i);
-                        w = 0.0;
-                        }
-                  stretchList[i] = 0.0;   // dont stretch timeSig and key
-                  d = 100000000.0;        // CHECK
+                  str = 0.0;              // dont stretch timeSig and key
+                  d   = 100000000.0;      // CHECK
                   }
-            stretchSum += stretchList[i];
-            minimum    += w;
-            springs.insert(std::pair<double, Spring>(d, Spring(i, stretchList[i], w)));
+            stretchList[i] = str;
+            springs.insert(std::pair<double, Spring>(d, Spring(i, str, w)));
+            minimum += w;
             }
 
       //---------------------------------------------------
@@ -3117,6 +3140,26 @@ void Measure::layoutX(double stretch)
 
       int seg = 0;
       for (Segment* s = first(); s; s = s->next(), ++seg) {
+            if ((s->subtype() == SegClef) && (s != first())) {
+                  s->setPos(xpos[seg], 0.0);
+                  for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
+                        int track  = staffIdx * VOICES;
+                        Element* e = s->element(track);
+                        qreal lm = 0.0;
+                        if (s->next()) {
+                              for (int track = staffIdx * VOICES; track < staffIdx*VOICES+VOICES; ++track) {
+                                    if (s->next()->element(track)) {
+                                          qreal clm = s->next()->element(track)->space().lw();
+                                          lm = qMax(lm, clm);
+                                          }
+                                    }
+                              }
+                        if (e)
+                              e->setPos(-e->width() - lm - _spatium*.5, 0.0);
+                        }
+                  --seg;
+                  continue;
+                  }
             s->setPos(xpos[seg], 0.0);
             for (int track = 0; track < tracks; ++track) {
                   Element* e = s->element(track);

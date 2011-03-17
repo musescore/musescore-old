@@ -1373,8 +1373,11 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                                     }
                               }
                         }
+
                   // courtesy clefs
-                  if (styleB(ST_genCourtesyClef)) {
+                  // no courtesy clef if this measure is the end of a repeat
+
+                  if (styleB(ST_genCourtesyClef) && !(m->repeatFlags() & RepeatEnd)) {
                         Clef* c;
                         int n = _staves.size();
                         for (int staffIdx = 0; staffIdx < n; ++staffIdx) {
