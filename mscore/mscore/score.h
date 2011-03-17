@@ -637,6 +637,7 @@ class Score : public QObject {
 
       StyleVal style(StyleIdx idx) const       { return _style.value(idx);   }
       Spatium styleS(StyleIdx idx) const       { return _style.valueS(idx);  }
+      qreal   styleP(StyleIdx idx) const       { return _style.valueS(idx).val() * _spatium;  }
       QString styleSt(StyleIdx idx) const      { return _style.valueSt(idx); }
       bool    styleB(StyleIdx idx) const       { return _style.valueB(idx);  }
       double  styleD(StyleIdx idx) const       { return _style.valueD(idx);  }

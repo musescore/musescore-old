@@ -1,3 +1,5 @@
+17.mar (ws)
+      - enhanced clef layout
 16.mar (ws)
       - slur edit mode: dragging the first or last grip on a note
         moves the anchor to this chord. This allows to connect notes in different

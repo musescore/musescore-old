@@ -554,23 +554,6 @@ void SLine::setLen(double l)
       s->setPos2(QPointF(l, 0));
       }
 
-#if 0
-//---------------------------------------------------------
-//   change
-//---------------------------------------------------------
-
-void SLine::change(Element* o, Element* n)
-      {
-      int idx = segments.indexOf((LineSegment*)o);
-      if (idx == -1) {
-            printf("SLine: cannot change %p\n", o);
-            return;
-            }
-      n->setParent(this);
-      segments[idx] = (LineSegment*)n;
-      }
-#endif
-
 //---------------------------------------------------------
 //   bbox
 //    used by palette: only one segment
