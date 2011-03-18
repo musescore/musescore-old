@@ -2374,6 +2374,8 @@ void Score::cmdPaste(ScoreView* view)
 
 void Score::pasteStaff(QDomElement e, ChordRest* dst)
       {
+      QTextStream out(stdout);
+      out << e;
       foreach(Element* el, _gel) {
             if (el->type() == SLUR)
                   static_cast<Slur*>(el)->setId(0);
@@ -2637,6 +2639,16 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                               Measure* m = tick2measure(tick);
                               harmony->setParent(m);
                               undoAddElement(harmony);
+                              }
+                        else if (tag == "KeySig") { //read key and clef to maintain curtick right
+                              KeySig* keysig = new KeySig(this);
+                              keysig->read(eee);
+                              delete keysig;
+                              }
+                        else if (tag == "Clef") {
+                              Clef* clef = new Clef(this);
+                              clef->read(eee);
+                              delete clef;
                               }
                         else {
                               domError(eee);

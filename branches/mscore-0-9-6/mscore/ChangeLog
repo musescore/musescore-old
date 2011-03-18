@@ -1,5 +1,6 @@
 18.mar (la)
       - fix #9792: Clef not displayed after changing clefs in previous measures
+      - fix #9790: Pasting notes featuring key signature change and lyrics corrupts following bar
 14.mar (la)
       - fix crash when inserting vertical frame (#9765)
 10.mar (la)
