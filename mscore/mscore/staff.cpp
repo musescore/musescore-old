@@ -399,6 +399,8 @@ void Staff::changeClef(int tick, int st)
                         break;
                         }
                   if (!e->generated()) {
+                        oval = _clefList->clef(etick);
+                        _score->undoChangeClef(this, etick, oval, NO_CLEF);
                         _score->undoRemoveElement(e);
                         m->cmdRemoveEmptySegment(segment);
                         }
