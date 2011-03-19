@@ -2374,8 +2374,6 @@ void Score::cmdPaste(ScoreView* view)
 
 void Score::pasteStaff(QDomElement e, ChordRest* dst)
       {
-      QTextStream out(stdout);
-      out << e;
       foreach(Element* el, _gel) {
             if (el->type() == SLUR)
                   static_cast<Slur*>(el)->setId(0);
