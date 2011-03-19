@@ -80,6 +80,7 @@
 #include "element.h"
 #include "glissando.h"
 #include "navigate.h"
+#include "drumset.h"
 
 static bool isTwoNoteTremolo(Chord* chord);
 
@@ -2043,7 +2044,9 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
             // duration
             if (!grace)
                   xml.tag("duration", note->chord()->tickLen() / (div * tremCorr));
-
+            //instrument for unpitched
+            if (useDrumset)            
+                  xml.tagE(QString("instrument id=\"P%1-I%2\"").arg(score->parts()->indexOf(note->staff()->part()) + 1).arg(note->pitch() + 1));
             if (note->tieBack())
                   xml.tagE("tie type=\"stop\"");
             if (note->tieFor())
@@ -3305,16 +3308,38 @@ foreach(Element* el, *(score->gel())) {
             xml.tag("part-name", part->longName()->getText());
             if(part->shortName() && ! part->shortName()->getText().isEmpty ())
                 xml.tag("part-abbreviation", part->shortName()->getText());
-
-            xml.stag(QString("score-instrument id=\"P%1-I%2\"").arg(idx+1).arg(3));
-            xml.tag("instrument-name", part->longName()->getText());
-            xml.etag();
-
-            xml.stag(QString("midi-instrument id=\"P%1-I%2\"").arg(idx+1).arg(3));
-            xml.tag("midi-channel", part->midiChannel() + 1);
-            xml.tag("midi-program", part->midiProgram() + 1);
-            xml.etag();
-
+            
+            if (part->useDrumset()) {
+                  Drumset* drumset = part->drumset();
+                  for (int i = 0; i < 128; ++i) {
+                        DrumInstrument di = drumset->drum(i);
+                        if (di.notehead >= 0) {
+                              xml.stag(QString("score-instrument id=\"P%1-I%2\"").arg(idx+1).arg(i + 1));
+                              xml.tag("instrument-name", di.name);
+                              xml.etag();
+                              }
+                        }
+                  for (int i = 0; i < 128; ++i) {
+                        DrumInstrument di = drumset->drum(i);
+                        if (di.notehead >= 0) {
+                              xml.stag(QString("midi-instrument id=\"P%1-I%2\"").arg(idx+1).arg(i + 1));
+                              xml.tag("midi-channel", part->midiChannel() + 1);
+                              xml.tag("midi-program", part->midiProgram() + 1);
+                              xml.tag("midi-unpitched", i + 1);
+                              xml.etag();
+                              }
+                        }
+                  }
+            else {
+                  xml.stag(QString("score-instrument id=\"P%1-I%2\"").arg(idx+1).arg(3));
+                  xml.tag("instrument-name", part->longName()->getText());
+                  xml.etag();
+      
+                  xml.stag(QString("midi-instrument id=\"P%1-I%2\"").arg(idx+1).arg(3));
+                  xml.tag("midi-channel", part->midiChannel() + 1);
+                  xml.tag("midi-program", part->midiProgram() + 1);
+                  xml.etag();
+                  }
             xml.etag();
             staffCount += part->nstaves();
             for (int i = MAX_PART_GROUPS - 1; i >= 0; i--) {

@@ -1,3 +1,5 @@
+19.mar (la)
+      - fix #9830: Percussion sounds not exported correctly in MusicXML
 18.mar (la)
       - fix #9792: Clef not displayed after changing clefs in previous measures
       - fix #9790: Pasting notes featuring key signature change and lyrics corrupts following bar
