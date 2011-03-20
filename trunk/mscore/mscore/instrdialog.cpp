@@ -877,10 +877,10 @@ void Score::cmdRemoveStaff(int staffIdx)
 
 void Score::removeStaff(Staff* staff)
       {
-      int idx = staff->idx();
+//      int idx = staff->idx();
       _staves.removeAll(staff);
       staff->part()->removeStaff(staff);
-      int track = idx * VOICES;
+      // int track = idx * VOICES;
 /*      foreach(Beam* e, beams()) {
             if (e->track() > track)
                   e->setTrack(e->track() - VOICES);

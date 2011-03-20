@@ -860,7 +860,7 @@ void Score::convertMidi(MidiFile* mf)
                         tracks->at(i)->setStaff(ss);
                         }
                   else {
-                        ClefType ct = track->medPitch < 58 ? CLEF_F : CLEF_G;
+                        // ClefType ct = track->medPitch < 58 ? CLEF_F : CLEF_G;
                         // s->setClef(0, ct);
                         }
                   }
