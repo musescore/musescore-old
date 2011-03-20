@@ -108,8 +108,8 @@ void Palette::setReadOnly(bool val)
 
 void Palette::contextMenuEvent(QContextMenuEvent* event)
       {
-      if (_readOnly)
-            return;
+//      if (_readOnly)
+//            return;
       int i = idx(event->pos());
       if (i == -1)
             return;
@@ -149,7 +149,7 @@ void Palette::contextMenuEvent(QContextMenuEvent* event)
             }
       if (sizeChanged) {
             updateGeometry();
-            update();         // necessary?
+            static_cast<QWidget*>(parent())->updateGeometry();
             }
       }
 
@@ -747,6 +747,7 @@ void Palette::dropEvent(QDropEvent* event)
       if (ok) {
             event->acceptProposedAction();
             updateGeometry();
+//            static_cast<QWidget*>(parent())->updateGeometry();
             update();
             emit changed();
             }
@@ -1020,7 +1021,8 @@ PaletteBoxButton::PaletteBoxButton(PaletteScrollArea* sa, Palette* p, QWidget* p
       setCheckable(true);
       setFocusPolicy(Qt::NoFocus);
       connect(this, SIGNAL(clicked(bool)), this, SLOT(showPalette(bool)));
-      setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+//      setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+      setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
       QMenu* menu = new QMenu;
       connect(menu, SIGNAL(aboutToShow()), SLOT(beforePulldown()));
       setArrowType(Qt::RightArrow);
@@ -1145,7 +1147,9 @@ PaletteBox::PaletteBox(QWidget* parent)
       setObjectName("palette-box");
       setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
       QWidget* mainWidget = new QWidget;
+      mainWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding); //??
       vbox = new QVBoxLayout;
+      vbox->setSizeConstraint(QLayout::SetNoConstraint);
       vbox->setMargin(0);
       vbox->setSpacing(1);    // 2
       vbox->addStretch();

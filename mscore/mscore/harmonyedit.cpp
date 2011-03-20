@@ -301,7 +301,7 @@ void HarmonyCanvas::render(const QList<RenderAction>& renderList, double& x, dou
       QStack<QPointF> stack;
       int fontIdx = 0;
       double _spatium = 2.0 * PALETTE_SPATIUM / extraMag;
-      qreal mag  = PALETTE_SPATIUM * extraMag / _spatium;
+//      qreal mag  = PALETTE_SPATIUM * extraMag / _spatium;
 
       QList<QFont> fontList;              // temp values used in render()
       const TextStyle* st = &gscore->textStyle(TEXT_STYLE_HARMONY);
