@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2010 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -217,6 +217,8 @@ void Preferences::init()
       vRaster                 = 2;
       nativeDialogs           = false;    // use system native file dialogs
 
+      profile                 = "default";
+
       exportAudioSampleRate   = exportAudioSampleRates[0];
       };
 
@@ -330,6 +332,8 @@ void Preferences::write()
       s.setValue("vraster", vRaster);
       s.setValue("nativeDialogs", nativeDialogs);
       s.setValue("exportAudioSampleRate", exportAudioSampleRate);
+
+      s.setValue("profile", profile);
 
       //update
       s.setValue("checkUpdateStartup", checkUpdateStartup);
@@ -483,6 +487,8 @@ void Preferences::read()
 
       nativeDialogs    = s.value("nativeDialogs", false).toBool();
       exportAudioSampleRate = s.value("exportAudioSampleRate", exportAudioSampleRates[0]).toInt();
+
+      profile          = s.value("profile", "default").toString();
 
       checkUpdateStartup = s.value("checkUpdateStartup", UpdateChecker::defaultPeriod()).toInt();
       if (checkUpdateStartup == 0) {

@@ -1,3 +1,7 @@
+20.mar (ws)
+      - first implementation of "profiles"; palette changes are recorded in current
+        profile; "default" profile is read only
+      - allow creation of new text styles
 19.mar (la)
       - fix #9830: Percussion sounds not exported correctly in MusicXML
 17.mar (ws)

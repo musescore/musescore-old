@@ -67,6 +67,7 @@
 #include "editraster.h"
 #include "pianotools.h"
 #include "mediadialog.h"
+#include "profile.h"
 
 #ifdef OSC
 #include "ofqf/qoscserver.h"
@@ -382,6 +383,8 @@ MuseScore::MuseScore()
       loadChordStyleDialog  = 0;
       saveChordStyleDialog  = 0;
       editRasterDialog      = 0;
+
+      profiles              = 0;
 
       _midiRecordId         = -1;
       _fullscreen           = false;
@@ -706,6 +709,11 @@ MuseScore::MuseScore()
       menuEdit->addAction(getAction("media"));
       menuEdit->addAction(getAction("inspector"));
       menuEdit->addSeparator();
+
+      menuProfiles = new QMenu(tr("Profiles"));
+      connect(menuProfiles, SIGNAL(aboutToShow()), SLOT(showProfileMenu()));
+      menuEdit->addMenu(menuProfiles);
+
       QAction* pref = menuEdit->addAction(tr("Preferences..."), this, SLOT(startPreferenceDialog()));
       pref->setMenuRole(QAction::PreferencesRole);
 
@@ -2061,7 +2069,7 @@ int main(int argc, char* av[])
             }
 
       if (!useFactorySettings && !converterMode) {
-           
+
             switch(preferences.globalStyle) {
                   case STYLE_DARK: {
                          QApplication::setStyle(new MStyle);
@@ -2158,6 +2166,7 @@ int main(int argc, char* av[])
       if (!converterMode)
             qApp->setWindowIcon(*icons[window_ICON]);
       initDrumset();
+      initProfile();
       mscore = new MuseScore();
       gscore = new Score(mscore->defaultStyle());
 
@@ -2714,11 +2723,7 @@ void MuseScore::writeSettings()
             settings.setValue("splitter", splitter->saveState());
 //            }
       settings.endGroup();
-      if (paletteBox && paletteBox->dirty()) {
-            QDir dir;
-            dir.mkpath(dataPath);
-            paletteBox->write(dataPath + "/mscore-palette.xml");
-            }
+      profile->save();
       if (timePalette && timePalette->dirty())
             timePalette->save();
       if (keyEditor && keyEditor->dirty())
@@ -3608,4 +3613,136 @@ void MuseScore::showMediaDialog()
       _mediaDialog->exec();
       }
 
+//---------------------------------------------------------
+//   showProfileMenu
+//---------------------------------------------------------
+
+void MuseScore::showProfileMenu()
+      {
+      if (profiles == 0) {
+            profiles = new QActionGroup(this);
+            profiles->setExclusive(true);
+            connect(profiles, SIGNAL(triggered(QAction*)), SLOT(changeProfile(QAction*)));
+            const QList<Profile*> pl = Profile::profiles();
+            foreach (Profile* p, pl) {
+                  QAction* a = profiles->addAction(p->name());
+                  a->setCheckable(true);
+                  a->setData(p->path());
+                  menuProfiles->addAction(a);
+                  }
+            menuProfiles->addSeparator();
+            QAction* a = new QAction(tr("new Profile"), this);
+            connect(a, SIGNAL(triggered()), SLOT(createNewProfile()));
+            menuProfiles->addAction(a);
+            deleteProfileAction = new QAction(tr("delete Profile"), this);
+            connect(deleteProfileAction, SIGNAL(triggered()), SLOT(deleteProfile()));
+            menuProfiles->addAction(deleteProfileAction);
+            }
+      foreach(QAction* a, profiles->actions()) {
+            if (a->text() == preferences.profile) {
+                  a->setChecked(true);
+                  // default profile cannot be deleted
+                  deleteProfileAction->setEnabled(a->text() != "default");
+                  break;
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   createNewProfile
+//---------------------------------------------------------
+
+void MuseScore::createNewProfile()
+      {
+      QString s = QInputDialog::getText(this, tr("MuseScore: Read Profile Name"),
+         tr("Profile Name:"));
+      if (s.isEmpty())
+            return;
+      for (;;) {
+            bool notFound = true;
+            foreach(Profile* p, Profile::profiles()) {
+                  if (p->name() == s) {
+                        notFound = false;
+                        break;
+                        }
+                  }
+            if (!notFound) {
+                  s = QInputDialog::getText(this,
+                     tr("MuseScore: Read Profile Name"),
+                     QString(tr("'%1' does already exist,\nplease choose a different name:")).arg(s)
+                     );
+                  if (s.isEmpty())
+                        return;
+                  }
+            else
+                  break;
+            }
+      profile->save();
+      profile = Profile::createNewProfile(s);
+      }
+
+//---------------------------------------------------------
+//   deleteProfile
+//---------------------------------------------------------
+
+void MuseScore::deleteProfile()
+      {
+printf("delete profile\n");
+      }
+
+//---------------------------------------------------------
+//   changeProfile
+//---------------------------------------------------------
+
+void MuseScore::changeProfile(QAction* a)
+      {
+      printf("changeProfile <%s> requested\n", qPrintable(a->text()));
+
+      preferences.profile = a->text();
+      preferences.dirty = true;
+      foreach(Profile* p, Profile::profiles()) {
+            if (p->name() == a->text()) {
+                  changeProfile(p);
+                  return;
+                  }
+            }
+      printf("   profile not found\n");
+      }
+
+//---------------------------------------------------------
+//   changeProfile
+//---------------------------------------------------------
+
+void MuseScore::changeProfile(Profile* p)
+      {
+      profile->save();
+      p->read();
+      profile = p;
+      }
+
+//---------------------------------------------------------
+//   getPaletteBox
+//---------------------------------------------------------
+
+PaletteBox* MuseScore::getPaletteBox()
+      {
+      if (paletteBox == 0) {
+            paletteBox = new PaletteBox(this);
+            QAction* a = getAction("toggle-palette");
+            connect(paletteBox, SIGNAL(paletteVisible(bool)), a, SLOT(setChecked(bool)));
+            addDockWidget(Qt::LeftDockWidgetArea, paletteBox);
+
+#if 0
+            if (!useFactorySettings) {
+                  QFile f(dataPath + "/" + "mscore-palette.xml");
+                  if (f.exists()) {
+                        if (paletteBox->read(&f))
+                              return paletteBox;
+                        }
+                  }
+#endif
+            populatePalette();
+            }
+      return paletteBox;
+      }
 

@@ -234,7 +234,7 @@ static const QString ff("FreeSerif");
 #define OA     OFFSET_ABS
 #define OS     OFFSET_SPATIUM
 #define TR(x)  QT_TRANSLATE_NOOP("MuseScore", x)
-#define AS(x)  s->appendTextStyle(x)
+#define AS(x)  s->addTextStyle(x)
 
 //---------------------------------------------------------
 //   setDefaultStyle
@@ -1005,6 +1005,8 @@ void StyleData::save(Xml& xml, bool optimize) const
             if (!optimize || _textStyles[i] != mscore->defaultStyle()->textStyle(TextStyleType(i)))
                   _textStyles[i].write(xml);
             }
+      for (int i = TEXT_STYLES; i < _textStyles.size(); ++i)
+            _textStyles[i].write(xml);
       if (_customChordList && _chordList) {
             xml.stag("ChordList");
             _chordList->write(xml);
@@ -1337,12 +1339,21 @@ void Style::setTextStyle(const TextStyle& ts)
       }
 
 //---------------------------------------------------------
-//   appendTextStyle
+//   addTextStyle
 //---------------------------------------------------------
 
-void Style::appendTextStyle(const TextStyle& ts)
+void Style::addTextStyle(const TextStyle& ts)
       {
       d->_textStyles.append(ts);
+      }
+
+//---------------------------------------------------------
+//   removeTextStyle
+//---------------------------------------------------------
+
+void Style::removeTextStyle(const TextStyle& ts)
+      {
+      // TODO: d->_textStyles.append(ts);
       }
 
 //---------------------------------------------------------

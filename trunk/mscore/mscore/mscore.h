@@ -70,6 +70,7 @@ class Navigator;
 class Style;
 class PianoTools;
 class MediaDialog;
+class Profile;
 
 extern QString mscoreGlobalShare;
 static const int PROJECT_LIST_LEN = 6;
@@ -299,6 +300,10 @@ class MuseScore : public QMainWindow {
       QAction* vRasterAction;
       QAction* pianoAction;
 
+      QMenu* menuProfiles;
+      QActionGroup* profiles;
+      QAction* deleteProfileAction;
+
       //---------------------
 
       virtual void closeEvent(QCloseEvent*);
@@ -382,6 +387,11 @@ class MuseScore : public QMainWindow {
       void oscNextMeasure();
       void oscGoto(int m);
 #endif
+      void createNewProfile();
+      void deleteProfile();
+      void showProfileMenu();
+      void changeProfile(QAction*);
+      void changeProfile(Profile* p);
 
    public slots:
       void dirtyChanged(Score*);
@@ -490,6 +500,8 @@ class MuseScore : public QMainWindow {
 
       bool hRaster() const { return hRasterAction->isChecked(); }
       bool vRaster() const { return vRasterAction->isChecked(); }
+
+      PaletteBox* getPaletteBox();
       };
 
 extern MuseScore* mscore;

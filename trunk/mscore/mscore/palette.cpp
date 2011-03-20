@@ -1181,20 +1181,29 @@ void PaletteBox::contextMenu(const QPoint& pt)
       if (a == ra) {
             if (f.exists())
                   QFile::remove(s);
-            int n = vbox->count() - 1;    // do not delete last spacer item
-            while (n--) {
-                  QLayoutItem* item = vbox->takeAt(0);
-                  if (item->widget())
-                        item->widget()->hide();
-                  delete item;
-                  }
-            vbox->invalidate();
+            clear();
             mscore->populatePalette();      // hack
             }
       else if (b == ra) {
             preferences.singlePalette = b->isChecked();
             preferences.dirty = true;
             }
+      }
+
+//---------------------------------------------------------
+//   clear
+//---------------------------------------------------------
+
+void PaletteBox::clear()
+      {
+      int n = vbox->count() - 1;    // do not delete last spacer item
+      while (n--) {
+            QLayoutItem* item = vbox->takeAt(0);
+            if (item->widget())
+                  item->widget()->hide();
+            delete item;
+            }
+      vbox->invalidate();
       }
 
 //---------------------------------------------------------
@@ -1335,16 +1344,9 @@ void PaletteBox::closeAll()
 //   write
 //---------------------------------------------------------
 
-void PaletteBox::write(const QString& path)
+void PaletteBox::write(Xml& xml)
       {
-      QFile f(path);
-      if (!f.open(QIODevice::WriteOnly)) {
-            printf("cannot write modified palettes\n");
-            return;
-            }
-      Xml xml(&f);
-      xml.header();
-      xml.stag("museScore version=\"" MSC_VERSION "\"");
+      xml.stag("PaletteBox");
       for (int i = 0; i < (vbox->count() - 1); i += 2) {
             PaletteBoxButton* b = static_cast<PaletteBoxButton*>(vbox->itemAt(i)->widget());
             PaletteScrollArea* sa = static_cast<PaletteScrollArea*>(vbox->itemAt(i + 1)->widget());
@@ -1352,7 +1354,6 @@ void PaletteBox::write(const QString& path)
             p->write(xml, b->text());
             }
       xml.etag();
-      f.close();
       }
 
 //---------------------------------------------------------
@@ -1360,42 +1361,19 @@ void PaletteBox::write(const QString& path)
 //    return false on error
 //---------------------------------------------------------
 
-bool PaletteBox::read(QFile* qf)
+bool PaletteBox::read(QDomElement e)
       {
-      QDomDocument doc;
-      int line, column;
-      QString err;
-      if (!doc.setContent(qf, false, &err, &line, &column)) {
-            QString error;
-            error.sprintf("error reading palettes file %s at line %d column %d: %s\n",
-               qf->fileName().toLatin1().data(), line, column, err.toLatin1().data());
-            QMessageBox::warning(0,
-               QWidget::tr("MuseScore: Load Palettes failed:"),
-               error,
-               QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
-            return false;
-            }
-      docName = qf->fileName();
-      for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            if (e.tagName() == "museScore") {
-                  QString version = e.attribute(QString("version"));
-                  QStringList sl = version.split('.');
-                  int versionId = sl[0].toInt() * 100 + sl[1].toInt();
-                  gscore->setMscVersion(versionId);
-
-                  for (QDomElement ee = e.firstChildElement(); !ee.isNull();  ee = ee.nextSiblingElement()) {
-                        QString tag(ee.tagName());
-                        if (tag == "Palette") {
-                              Palette* p = new Palette();
-                              QString name = ee.attribute("name", "");
-                              p->setName(name);
-                              p->read(ee);
-                              addPalette(p);
-                              }
-                        else
-                              domError(ee);
-                        }
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            QString tag(e.tagName());
+            if (tag == "Palette") {
+                  Palette* p = new Palette();
+                  QString name = e.attribute("name", "");
+                  p->setName(name);
+                  p->read(e);
+                  addPalette(p);
                   }
+            else
+                  domError(e);
             }
       return true;
       }
