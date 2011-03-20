@@ -1,3 +1,5 @@
+20.mar (la)
+      - fix #9852: Measure number hidden by horizontal frame
 19.mar (la)
       - fix #9830: Percussion sounds not exported correctly in MusicXML
 18.mar (la)
