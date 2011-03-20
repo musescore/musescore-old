@@ -636,7 +636,7 @@ void Measure::layout2()
          && !_irregular
          && (pn || score()->styleB(ST_showMeasureNumberOne))) {
             if (score()->styleB(ST_measureNumberSystem)) {
-                  if (system() && !system()->measures().empty() && system()->measures().front() == this)
+                  if (system() && !system()->measures().empty() && system()->firstMeasure() == this)
                         ns = s;
                   }
             else if ((pn % score()->style(ST_measureNumberInterval).toInt()) == 0)
