@@ -21,6 +21,7 @@
 #ifndef __TEXTSTYLE_H__
 #define __TEXTSTYLE_H__
 
+#include "ui_textstyle.h"
 #include "style.h"
 
 class Score;
@@ -30,14 +31,11 @@ class TextProp;
 //   TextStyleDialog
 //---------------------------------------------------------
 
-class TextStyleDialog : public QDialog {
+class TextStyleDialog : public QDialog, Ui::TextStyleDialog {
       Q_OBJECT
-      TextProp* tp;
       QList<TextStyle> styles;   // local copy of text style
       Score* cs;
-      QListWidget* textNames;
       int current;
-      QDialogButtonBox* bb;
 
       void saveStyle(int);
       void apply();
@@ -45,11 +43,12 @@ class TextStyleDialog : public QDialog {
    private slots:
       void nameSelected(int);
       void buttonClicked(QAbstractButton*);
+      void newClicked();
 
    signals:
 
    public:
-      TextStyleDialog(QWidget* parent, Score* );
+      TextStyleDialog(QWidget* parent, Score*);
       ~TextStyleDialog();
       };
 

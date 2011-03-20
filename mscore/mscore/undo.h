@@ -1114,6 +1114,21 @@ class ChangeTextStyle : public UndoCommand {
       };
 
 //---------------------------------------------------------
+//   AddTextStyle
+//---------------------------------------------------------
+
+class AddTextStyle : public UndoCommand {
+      Score* score;
+      TextStyle style;
+
+   public:
+      AddTextStyle(Score* s, const TextStyle& st) : score(s), style(st) {}
+      virtual void undo();
+      virtual void redo();
+      UNDO_NAME("AddTextStyle");
+      };
+
+//---------------------------------------------------------
 //   ChangeStretch
 //---------------------------------------------------------
 

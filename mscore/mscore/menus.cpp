@@ -66,6 +66,7 @@
 #include "chordline.h"
 #include "stafftext.h"
 #include "instrchange.h"
+#include "profile.h"
 
 extern bool useFactorySettings;
 
@@ -126,6 +127,9 @@ void MuseScore::showPalette(bool visible)
       {
       QAction* a = getAction("toggle-palette");
       if (paletteBox == 0) {
+            profile->read();
+#if 0
+
             paletteBox = new PaletteBox(this);
 
             connect(paletteBox, SIGNAL(paletteVisible(bool)), a, SLOT(setChecked(bool)));
@@ -142,6 +146,7 @@ void MuseScore::showPalette(bool visible)
                         }
                   }
             populatePalette();
+#endif
             }
       paletteBox->setShown(visible);
       a->setChecked(visible);

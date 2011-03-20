@@ -1,9 +1,9 @@
 //=============================================================================
-//  MusE Score
+//  MuseScore
 //  Linux Music Score Editor
-//  $Id$
+//  $Id:$
 //
-//  Copyright (C) 2009 Werner Schweer and others
+//  Copyright (C) 2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -18,40 +18,36 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __TEXTPROPERTIES_H__
-#define __TEXTPROPERTIES_H__
-
-#include "ui_textproperties.h"
-#include "style.h"
-
-class Text;
-class Score;
+#ifndef __PROFILE_H__
+#define __PROFILE_H__
 
 //---------------------------------------------------------
-//   TextProp
+//   Profile
 //---------------------------------------------------------
 
-class TextProp : public QWidget, public Ui::TextProperties {
-      Q_OBJECT
-
-      int curUnit;
-      bool onlyStyle;
-
-   private slots:
-      void mmToggled(bool);
-      void styledToggled(bool);
-      void unstyledToggled(bool);
+class Profile {
+      QString _name;
+      QString _path;
+      bool _dirty;
 
    public:
-      TextProp(QWidget* parent = 0);
-      void setScore(bool _onlyStyle, Score*);
-      void setTextStyle(const TextStyle&);
-      TextStyle textStyle() const;
-      bool isStyled() const;
-      void setStyled(bool val);
-      void setTextStyleType(TextStyleType);
-      TextStyleType textStyleType() const;
+      Profile();
+      QString path() const           { return _path;  }
+      void setPath(const QString& s) { _path = s;     }
+      QString name() const           { return _name;  }
+      void setName(const QString& s) { _name = s;     }
+      bool dirty() const             { return _dirty; }
+      void setDirty(bool v)          { _dirty = v;    }
+
+      void save();
+      void write();
+      void read(QDomElement);
+      void read();
+
+      static const QList<Profile*>& profiles();
+      static Profile* createNewProfile(const QString& name);
       };
 
+extern Profile* profile;
+extern void initProfile();
 #endif
-

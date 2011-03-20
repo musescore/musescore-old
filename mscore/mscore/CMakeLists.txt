@@ -50,7 +50,7 @@ QT4_WRAP_UI (ui_headers
       harmonyedit.ui selectinstr.ui tremolo.ui fretdprops.ui stafftype.ui
       sectionbreak.ui hairpinproperties.ui spanner.ui bend.ui tremolobar.ui
       textproperties.ui editpitch.ui editstringdata.ui slursegment.ui
-      accidental.ui clef.ui editraster.ui mediadialog.ui
+      accidental.ui clef.ui editraster.ui mediadialog.ui textstyle.ui
       )
 
 QT4_WRAP_CPP (mocs
@@ -166,7 +166,7 @@ add_executable ( ${ExecutableName}
       elementlayout.cpp selinstrument.cpp instrchange.cpp texteditor.cpp
       cursor.cpp textframe.cpp editstafftype.cpp texttools.cpp editpitch.cpp
       editstringdata.cpp editraster.cpp iname.cpp pianotools.cpp mediadialog.cpp
-      cleflist.cpp
+      cleflist.cpp profile.cpp
       ${OMR_FILES}
       ${AUDIO}
       )

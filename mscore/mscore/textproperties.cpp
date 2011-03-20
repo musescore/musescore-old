@@ -26,22 +26,10 @@
 //   TextProp
 //---------------------------------------------------------
 
-TextProp::TextProp(bool os, Score* score, QWidget* parent)
+TextProp::TextProp(QWidget* parent)
    : QWidget(parent)
       {
-      onlyStyle = os;
       setupUi(this);
-
-      if (onlyStyle) {
-            styledGroup->setVisible(false);
-            unstyledGroup->setCheckable(false);
-            unstyledGroup->setTitle(tr("Text Style"));
-            }
-      else {
-            styles->clear();
-            foreach(const TextStyle& st, score->style()->textStyles())
-                  styles->addItem(st.name());
-            }
 
       QButtonGroup* g1 = new QButtonGroup(this);
       g1->addButton(alignLeft);
@@ -61,6 +49,26 @@ TextProp::TextProp(bool os, Score* score, QWidget* parent)
       connect(mmUnit, SIGNAL(toggled(bool)), SLOT(mmToggled(bool)));
       connect(styledGroup, SIGNAL(toggled(bool)), SLOT(styledToggled(bool)));
       connect(unstyledGroup, SIGNAL(toggled(bool)), SLOT(unstyledToggled(bool)));
+      }
+
+//---------------------------------------------------------
+//   setScore
+//---------------------------------------------------------
+
+void TextProp::setScore(bool os, Score* score)
+      {
+      onlyStyle = os;
+
+      if (onlyStyle) {
+            styledGroup->setVisible(false);
+            unstyledGroup->setCheckable(false);
+            unstyledGroup->setTitle(tr("Text Style"));
+            }
+      else {
+            styles->clear();
+            foreach(const TextStyle& st, score->style()->textStyles())
+                  styles->addItem(st.name());
+            }
       }
 
 //---------------------------------------------------------

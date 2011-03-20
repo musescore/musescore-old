@@ -385,7 +385,8 @@ class Style {
       const TextStyle& textStyle(const QString& name) const;
       TextStyleType textStyleType(const QString& name) const;
       void setTextStyle(const TextStyle& ts);
-      void appendTextStyle(const TextStyle& ts);
+      void addTextStyle(const TextStyle& ts);
+      void removeTextStyle(const TextStyle& ts);
       const QList<TextStyle>& textStyles() const;
       void set(StyleIdx t, Spatium val);
       void set(StyleIdx t, const QString& val);

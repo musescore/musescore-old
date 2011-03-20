@@ -33,22 +33,12 @@
 TextStyleDialog::TextStyleDialog(QWidget* parent, Score* score)
    : QDialog(parent)
       {
-      setWindowTitle(tr("MuseScore: Edit Text Styles"));
-      QGridLayout* layout = new QGridLayout;
-      tp = new TextProp(true, score);
-      layout->addWidget(tp, 0, 1);
-      textNames = new QListWidget;
-      layout->addWidget(textNames, 0, 0);
-      bb = new QDialogButtonBox(
-         QDialogButtonBox::Ok | QDialogButtonBox::Apply | QDialogButtonBox::Cancel
-         );
-      layout->addWidget(bb, 1, 0, 1, 2);
-      setLayout(layout);
+      setupUi(this);
 
       cs     = score;
       styles = cs->style()->textStyles();
+      tp->setScore(true, cs);
 
-      textNames->setSelectionMode(QListWidget::SingleSelection);
       textNames->clear();
       for (int i = 0; i < styles.size(); ++i) {
             const TextStyle& s = styles.at(i);
@@ -57,6 +47,7 @@ TextStyleDialog::TextStyleDialog(QWidget* parent, Score* score)
 
       connect(bb, SIGNAL(clicked(QAbstractButton*)), SLOT(buttonClicked(QAbstractButton*)));
       connect(textNames, SIGNAL(currentRowChanged(int)), SLOT(nameSelected(int)));
+      connect(newButton, SIGNAL(clicked()), SLOT(newClicked()));
 
       current   = -1;
       textNames->setCurrentItem(textNames->item(0));
@@ -132,6 +123,44 @@ void TextStyleDialog::apply()
             if (os != ns)
                   cs->undo()->push(new ChangeTextStyle(cs, ns));
             }
+      for (int i = n; i < styles.size(); ++i)
+            cs->undo()->push(new AddTextStyle(cs, styles[i]));
       cs->end();
+      }
+
+//---------------------------------------------------------
+//   newClicked
+//---------------------------------------------------------
+
+void TextStyleDialog::newClicked()
+      {
+      QString s = QInputDialog::getText(this, tr("MuseScore: Read Style Name"),
+         tr("Text Style Name:"));
+      if (s.isEmpty())
+            return;
+      for (;;) {
+            bool notFound = true;
+            for (int i = 0; i < styles.size(); ++i) {
+                  const TextStyle& style = styles.at(i);
+                  if (style.name() == s) {
+                        notFound = false;
+                        break;
+                        }
+                  }
+            if (!notFound) {
+                  s = QInputDialog::getText(this,
+                     tr("MuseScore: Read Style Name"),
+                     QString(tr("'%1' does already exist,\nplease choose a different name:")).arg(s)
+                     );
+                  if (s.isEmpty())
+                        return;
+                  }
+            else
+                  break;
+            }
+      textNames->addItem(s);
+      TextStyle newStyle;
+      newStyle.setName(s);
+      styles.append(newStyle);
       }
 

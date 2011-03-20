@@ -2475,6 +2475,28 @@ void ChangeTextStyle::flip()
       score->scanElements(&ts, updateTextStyle);
       score->setLayoutAll(true);
       }
+#if 0
+      Score* score;
+      TextStyle style;
+#endif
+
+//---------------------------------------------------------
+//   AddTextStyle::undo
+//---------------------------------------------------------
+
+void AddTextStyle::undo()
+      {
+      score->style()->removeTextStyle(style);
+      }
+
+//---------------------------------------------------------
+//   AddTextStyle::redo
+//---------------------------------------------------------
+
+void AddTextStyle::redo()
+      {
+      score->style()->addTextStyle(style);
+      }
 
 //---------------------------------------------------------
 //   ChangeStretch

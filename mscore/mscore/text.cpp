@@ -1598,7 +1598,8 @@ TextProperties::TextProperties(Text* t, QWidget* parent)
       setWindowTitle(tr("MuseScore: Text Properties"));
       QGridLayout* layout = new QGridLayout;
 
-      tp = new TextProp(false, t->score());
+      tp = new TextProp;
+      tp->setScore(false, t->score());
 
       layout->addWidget(tp, 0, 1);
       QLabel* l = new QLabel;

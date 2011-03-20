@@ -138,8 +138,9 @@ class PaletteBox : public QDockWidget {
       PaletteBox(QWidget* parent = 0);
       void addPalette(Palette*);
       bool dirty() const      { return _dirty; }
-      void write(const QString& path);
-      bool read(QFile*);
+      void write(Xml&);
+      bool read(QDomElement);
+      void clear();
       };
 
 //---------------------------------------------------------
