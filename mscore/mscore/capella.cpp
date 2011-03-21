@@ -1945,11 +1945,17 @@ void Score::convertCapella(Capella* cap)
 
       Staff* bstaff = 0;
       int span;
+      int midiPatch = -1;
+      Part* part = 0;
       for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
             CapStaffLayout* cl = cap->staffLayout(staffIdx);
-            Part* part         = new Part(this);
-            Staff* s           = new Staff(this, part, staffIdx);
-printf("Midi staff %d program %d\n", staffIdx, cl->sound);
+// printf("Midi staff %d program %d\n", staffIdx, cl->sound);
+            if (midiPatch != cl->sound || part == 0) {
+                  part = new Part(this);
+                  midiPatch = cl->sound;
+                  _parts.push_back(part);
+                  }
+            Staff* s = new Staff(this, part, staffIdx);
             if (cl->bPercussion)
                   part->setMidiProgram(0, 128);
             else
@@ -1973,7 +1979,7 @@ printf("Midi staff %d program %d\n", staffIdx, cl->sound);
             s->setSmall(cl->bSmall);
             part->insertStaff(s);
             _staves.push_back(s);
-            _parts.push_back(part);
+            // _parts.push_back(part);
             }
       if (bstaff)
             bstaff->setBarLineSpan(span);

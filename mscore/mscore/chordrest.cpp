@@ -718,6 +718,8 @@ void ChordRest::setTrack(int val)
             foreach(Note* n, static_cast<Chord*>(this)->notes())
                   n->setTrack(val);
             }
+      if (_beam)
+            _beam->setTrack(val);
       }
 
 //---------------------------------------------------------
