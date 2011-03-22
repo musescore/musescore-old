@@ -1487,6 +1487,8 @@ bool Score::read(QDomElement dScore)
                   _fileDivision = i;
             else if (tag == "showInvisible")
                   _showInvisible = i;
+            else if (tag == "showUnprintable")
+                  _showUnprintable = i;
             else if (tag == "showFrames")
                   _showFrames = i;
             else if (tag == "Style")
@@ -1524,10 +1526,6 @@ bool Score::read(QDomElement dScore)
                   part->read(ee);
                   _parts.push_back(part);
                   }
-            else if (tag == "showInvisible")
-                  _showInvisible = i;
-            else if (tag == "showFrames")
-                  _showFrames = i;
             else if (tag == "Symbols")    // obsolete
                   ;
             else if (tag == "cursorTrack") {

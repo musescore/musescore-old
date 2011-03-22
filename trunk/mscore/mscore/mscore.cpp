@@ -620,7 +620,7 @@ MuseScore::MuseScore()
       sl1.clear();
       sl1 << "appoggiatura" << "acciaccatura" << "grace4" <<"grace16" << "grace32"
           << "beam-start" << "beam-mid" << "no-beam" << "beam32" << "auto-beam"
-          << "show-invisible" << "show-frames";
+          << "show-invisible" << "show-unprintable" << "show-frames";
 
       foreach(const QString& s, sl1) {
             QAction* a = getAction(s.toLatin1().data());
@@ -876,6 +876,7 @@ MuseScore::MuseScore()
 
       menuDisplay->addSeparator();
       menuDisplay->addAction(getAction("show-invisible"));
+      menuDisplay->addAction(getAction("show-unprintable"));
       menuDisplay->addAction(getAction("show-frames"));
       menuDisplay->addSeparator();
       a = getAction("fullscreen");
@@ -1278,6 +1279,7 @@ void MuseScore::setCurrentScoreView(ScoreView* view)
 
       getAction("file-save")->setEnabled(cs->isSavable());
       getAction("show-invisible")->setChecked(cs->showInvisible());
+      getAction("show-unprintable")->setChecked(cs->showUnprintable());
       getAction("show-frames")->setChecked(cs->showFrames());
       if (view->magIdx() == MAG_FREE)
             mag->setMag(view->mag());

@@ -68,9 +68,9 @@ void LayoutBreak::read(QDomElement e)
 
 void LayoutBreak::draw(Painter* painter) const
       {
-      QPainter& p = *painter->painter();
-      if (score()->printing())
+      if (score()->printing() || !score()->showUnprintable())
             return;
+      QPainter& p = *painter->painter();
       QPen pen;
       if (selected())
             pen.setColor(preferences.selectColor[0]);

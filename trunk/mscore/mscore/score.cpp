@@ -334,6 +334,7 @@ Score::Score(const Style* s)
       layoutFlags     = 0;
       keyState        = 0;
       _showInvisible  = true;
+      _showUnprintable = true;
       _showFrames     = true;
       editTempo       = 0;
       _printing       = false;
@@ -387,6 +388,7 @@ Score::Score(Score* parent)
       layoutFlags     = 0;
       keyState        = 0;
       _showInvisible  = true;
+      _showUnprintable  = true;
       _showFrames     = true;
       editTempo       = 0;
       _printing       = false;
@@ -627,6 +629,7 @@ void Score::write(Xml& xml, bool /*autosave*/)
             ++idx;
             }
       xml.tag("showInvisible", _showInvisible);
+      xml.tag("showUnprintable", _showUnprintable);
       xml.tag("showFrames", _showFrames);
       pageFormat()->write(xml);
 
@@ -1108,6 +1111,17 @@ void Score::setShowInvisible(bool v)
       {
       _showInvisible = v;
       _updateAll     = true;
+      end();
+      }
+
+//---------------------------------------------------------
+//   setShowUnprintable
+//---------------------------------------------------------
+
+void Score::setShowUnprintable(bool v)
+      {
+      _showUnprintable = v;
+      _updateAll      = true;
       end();
       }
 
