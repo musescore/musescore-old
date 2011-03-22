@@ -449,7 +449,7 @@ bool Score::saveAs(bool saveCopy)
       fl.append(tr("Flac Audio (*.flac)"));
       fl.append(tr("Ogg Vorbis Audio (*.ogg)"));
 #endif
-
+      fl.append(tr("MP3 Audio (*.mp3)"));
       QString saveDialogTitle = saveCopy ? tr("MuseScore: Save a Copy") :
                                            tr("MuseScore: Save As");
 
@@ -490,6 +490,7 @@ bool Score::saveAs(bool saveCopy)
 #ifdef HAS_AUDIOFILE
                         "wav", "flac", "ogg"
 #endif
+                        , "mp3"
                         };
                   ext = extensions[idx];
                   }
@@ -575,6 +576,9 @@ bool Score::saveAs(bool saveCopy, const QString& path, const QString& ext)
       else if (ext == "wav" || ext == "flac" || ext == "ogg")
             rv = saveAudio(fn, ext);
 #endif
+      else if (ext == "mp3") {
+            rv = saveMp3(fn);
+            }
       else {
             fprintf(stderr, "internal error: unsupported extension <%s>\n",
                qPrintable(ext));
@@ -1474,8 +1478,9 @@ bool Score::read(QDomElement dScore)
                   bool hasSoundfont = false;
                   foreach(const SyntiParameter& sp, _syntiState) {
                         if (sp.name() == "soundfont") {
-                              hasSoundfont = true;
-                              break;
+                              QFileInfo fi(sp.sval());
+                              if(fi.exists())
+                                    hasSoundfont = true;
                               }
                         }
                   if (!hasSoundfont)

@@ -586,6 +586,7 @@ class Score : public QObject {
 #ifdef HAS_AUDIOFILE
       bool saveAudio(const QString& name, const QString& ext, QString soundFont = QString());
 #endif
+      bool saveMp3(const QString& name, QString soundFont = QString());
       ChordRest* getSelectedChordRest() const;
       void getSelectedChordRest2(ChordRest** cr1, ChordRest** cr2) const;
 
