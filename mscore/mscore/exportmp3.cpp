@@ -57,7 +57,7 @@ MP3Exporter::~MP3Exporter()
 //   findLibrary
 //---------------------------------------------------------
 
-bool MP3Exporter::findLibrary(QWidget *parent)
+bool MP3Exporter::findLibrary()
       {
       QString path;
       QString name;
@@ -76,7 +76,7 @@ bool MP3Exporter::findLibrary(QWidget *parent)
             return false;
 
       QString libPath = QFileDialog::getOpenFileName(
-           parent, tr("Where is %1 ?").arg(getLibraryName()),
+           0, mscore->tr("Where is %1 ?").arg(getLibraryName()),
            path,
            getLibraryTypeString());
 
@@ -99,7 +99,7 @@ bool MP3Exporter::findLibrary(QWidget *parent)
 //   loadLibrary
 //---------------------------------------------------------
 
-bool MP3Exporter::loadLibrary(QWidget *parent, AskUser askuser)
+bool MP3Exporter::loadLibrary(AskUser askuser)
       {
       if (validLibraryLoaded()) {
             freeLibrary();
@@ -130,14 +130,14 @@ bool MP3Exporter::loadLibrary(QWidget *parent, AskUser askuser)
       // If not successful, must ask the user
       if (!validLibraryLoaded()) {
             printf("(Maybe) ask user for library\n");
-            int ret = QMessageBox::question(0, tr("Save as MP3"),
-                  tr("MuseScore does not export MP3 files directly, but instead uses \n"
+            int ret = QMessageBox::question(0, mscore->tr("Save as MP3"),
+                  mscore->tr("MuseScore does not export MP3 files directly, but instead uses \n"
                    "the freely available LAME library.  You must obtain %1 \n"
                    "separately, and then locate the file for MuseScore.\n"
                    "You only need to do this once.\n\n"
                    "Would you like to locate %2 now?").arg(getLibraryName()).arg(getLibraryName()),
                    QMessageBox::Yes|QMessageBox::No, QMessageBox::NoButton);
-            if (ret == QMessageBox::Yes && askuser == MP3Exporter::Maybe && findLibrary(parent)) {
+            if (ret == QMessageBox::Yes && askuser == MP3Exporter::Maybe && findLibrary()) {
                   mLibraryLoaded = initLibrary(mLibPath);
                   }
             }
@@ -624,7 +624,7 @@ bool Score::saveMp3(const QString& name, QString soundFont)
             }
 
       MP3Exporter exporter;
-      if (!exporter.loadLibrary(mscore, MP3Exporter::Maybe)) {
+      if (!exporter.loadLibrary(MP3Exporter::Maybe)) {
             QSettings settings;
             settings.setValue("/Export/lameMP3LibPath", "");
             if(!noGui)
@@ -649,13 +649,13 @@ bool Score::saveMp3(const QString& name, QString soundFont)
             }
 
       // Retrieve preferences
-      int highrate = 48000;
-      int lowrate = 8000;
+//      int highrate = 48000;
+//      int lowrate = 8000;
       int bitrate = 0;
-      int brate = 128;
-      int rmode = MODE_CBR;
-      int vmode = ROUTINE_FAST;
-      int cmode = CHANNEL_STEREO;
+//      int brate = 128;
+//      int rmode = MODE_CBR;
+//      int vmode = ROUTINE_FAST;
+//      int cmode = CHANNEL_STEREO;
 
       int channels = 2;
 
@@ -797,7 +797,7 @@ bool Score::saveMp3(const QString& name, QString soundFont)
                                     out << bufferOut[j];
                         }
                   else {
-                        for (unsigned i = 0; i < FRAMES; ++i) {
+                        for (int i = 0; i < FRAMES; ++i) {
                               if (qAbs(bufferL[i]) > peak)
                                     peak = qAbs(bufferL[i]);
                               if (qAbs(bufferR[i]) > peak)

@@ -150,8 +150,8 @@ class MP3Exporter {
       MP3Exporter();
       virtual ~MP3Exporter();
 
-      bool findLibrary(QWidget *parent);
-      bool loadLibrary(QWidget *parent, AskUser askuser);
+      bool findLibrary();
+      bool loadLibrary(AskUser askuser);
       bool validLibraryLoaded();
 
       /* These global settings keep state over the life of the object */
