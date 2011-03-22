@@ -162,11 +162,11 @@ include(${QT_USE_FILE})
 ## alsa >= 1.0.0
 ##
 
-if (NOT LINUX)
+if (APPLE OR MINGW)
 	message("Disabling ALSA support due to OS X or MINGW build.")
       set (USE_ALSA 0)
       set (HAS_MIDI 1)
-else (NOT LINUX)
+else (APPLE OR MINGW)
       PKGCONFIG (alsa 1.0.0 ALSA_INCDIR ALSA_LIBDIR ALSA_LIB ALSA_CPP )
       if (NOT ALSA_INCDIR)
             message(FATAL_ERROR "Fatal error: ALSA >= 1.0.0 required")
@@ -175,7 +175,7 @@ else (NOT LINUX)
             set (USE_ALSA 1)
             set (HAS_MIDI 1)
       endif (NOT ALSA_INCDIR)
-endif (NOT LINUX)
+endif (APPLE OR MINGW)
 
 
 ##

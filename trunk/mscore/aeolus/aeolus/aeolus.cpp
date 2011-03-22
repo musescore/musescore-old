@@ -40,7 +40,7 @@ void Aeolus::init(int samplerate)
       strcpy(stopsPath, qPrintable(stops));
 
       QDir dir;
-      QString waves = dataPath + "/aeolus/waves";
+      QString waves = dataPath + QString("/aeolus/waves%1").arg(samplerate);
       dir.mkpath(waves);
       n = strlen(qPrintable(waves));
       char* wavesPath = new char[n+1];

@@ -175,6 +175,8 @@ bool Seq::init()
       bool usePortaudioFlag = preferences.usePortaudioAudio;
 
 #ifdef USE_JACK
+      if (debugMode)
+            printf("useJackFlag %d\n", useJackFlag);
       if (useJackFlag) {
             useAlsaFlag      = false;
             usePortaudioFlag = false;
@@ -189,6 +191,8 @@ bool Seq::init()
             }
 #endif
 #ifdef USE_ALSA
+      if (debugMode)
+            printf("useAlsaFlag %d\n", useAlsaFlag);
       if (driver == 0 && useAlsaFlag) {
             driver = new AlsaAudio(this);
             if (!driver->init()) {
@@ -202,6 +206,8 @@ bool Seq::init()
             }
 #endif
 #ifdef USE_PORTAUDIO
+      if (debugMode)
+            printf("usePortaudioFlag %d\n", usePortaudioFlag);
       if (usePortaudioFlag) {
             driver = new Portaudio(this);
             if (!driver->init()) {

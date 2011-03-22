@@ -71,7 +71,7 @@ QT4_WRAP_CPP (mocs
       harmonycanvas.h updatechecker.h fret.h fretcanvas.h editstafftype.h
       prefsdialog.h layoutbreak.h hairpin.h bend.h bendcanvas.h tremolobar.h tremolobarcanvas.h
       drumtools.h texteditor.h texttools.h pianotools.h editpitch.h  editstringdata.h
-      editraster.h mediadialog.h exportmp3.h
+      editraster.h mediadialog.h
       )
 
 if (APPLE)
@@ -168,7 +168,7 @@ add_executable ( ${ExecutableName}
       editstringdata.cpp editraster.cpp iname.cpp pianotools.cpp mediadialog.cpp
       cleflist.cpp profile.cpp exportmp3.cpp
       ${OMR_FILES}
-      ${AUDIO} 
+      ${AUDIO}
       )
 
 if (STATIC_SCRIPT_BINDINGS)
