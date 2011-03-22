@@ -382,6 +382,20 @@ void InstrumentsDialog::on_upButton_clicked()
                   parent->insertChild(idx-1, item);
                   partiturList->setItemSelected(item, true);
                   }
+            else {
+                  int parentIdx = partiturList->indexOfTopLevelItem(parent);
+                  if (parentIdx) {
+                        partiturList->selectionModel()->clear();
+                        QTreeWidgetItem* item = parent->takeChild(idx);
+                        QTreeWidgetItem* prevParent = partiturList->topLevelItem(parentIdx - 1);
+                        prevParent->addChild(item);
+                        partiturList->setItemSelected(item, true);
+                        PartListItem* pli = static_cast<PartListItem*>(prevParent);
+                        StaffListItem* sli = static_cast<StaffListItem*>(item);
+                        int idx = pli->part->nstaves();
+                        cs->undo()->push(new MoveStaff(sli->staff, pli->part, idx));
+                        }
+                  }
             }
       }
 
@@ -417,6 +431,20 @@ void InstrumentsDialog::on_downButton_clicked()
                   QTreeWidgetItem* item = parent->takeChild(idx);
                   parent->insertChild(idx+1, item);
                   partiturList->setItemSelected(item, true);
+                  }
+            else {
+                  int parentIdx = partiturList->indexOfTopLevelItem(parent);
+                  int n = partiturList->topLevelItemCount();
+                  if (parentIdx < (n-1)) {
+                        partiturList->selectionModel()->clear();
+                        QTreeWidgetItem* item = parent->takeChild(idx);
+                        QTreeWidgetItem* nextParent = partiturList->topLevelItem(parentIdx - 1);
+                        nextParent->addChild(item);
+                        partiturList->setItemSelected(item, true);
+                        PartListItem* pli = static_cast<PartListItem*>(nextParent);
+                        StaffListItem* sli = static_cast<StaffListItem*>(item);
+                        cs->undo()->push(new MoveStaff(sli->staff, pli->part, 0));
+                        }
                   }
             }
       }
@@ -520,18 +548,25 @@ void MuseScore::editInstrList()
             return;
       if (!instrList)
             instrList = new InstrumentsDialog(this);
+      else if (instrList->isVisible()) {
+            instrList->done(0);
+            return;
+            }
+
       instrList->setScore(cs);
       instrList->genPartList();
+      cs->startCmd();
+  	cs->deselectAll();
       int rv = instrList->exec();
-      if (rv == 0)
+
+      if (rv == 0) {
+            cs->endCmd();
             return;
+            }
   	cs->inputState().setTrack(-1);
       //
       // process modified partitur list
       //
-      cs->startCmd();
-  	  //TODO check if current selection is in a removed staff?
-  	  cs->deselectAll();
 
       QTreeWidget* pl = instrList->partiturList;
       Part* part   = 0;
@@ -558,9 +593,8 @@ void MuseScore::editInstrList()
       for (int idx = 0; (item = pl->topLevelItem(idx)); ++idx) {
             rstaff = 0;
             PartListItem* pli = static_cast<PartListItem*>(item);
-            if (pli->op == ITEM_DELETE) {
+            if (pli->op == ITEM_DELETE)
                   cs->cmdRemovePart(pli->part);
-                  }
             else if (pli->op == ITEM_ADD) {
                   const InstrumentTemplate* t = ((PartListItem*)item)->it;
                   part = new Part(cs);
@@ -696,7 +730,7 @@ void MuseScore::editInstrList()
                   }
             }
 
-      if (sort)
+//      if (sort)
             cs->undo()->push(new SortStaves(cs, dl));
 
       //

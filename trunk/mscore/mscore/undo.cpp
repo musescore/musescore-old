@@ -3132,7 +3132,7 @@ ChangeClefType::ChangeClefType(Clef* c, ClefType cl, ClefType tc)
       }
 
 //---------------------------------------------------------
-//   flip
+//   ChangeClefType::flip
 //---------------------------------------------------------
 
 void ChangeClefType::flip()
@@ -3152,4 +3152,20 @@ void ChangeClefType::flip()
 
       concertClef     = ocl;
       transposingClef = otc;
+      }
+
+//---------------------------------------------------------
+//   flip
+//---------------------------------------------------------
+
+void MoveStaff::flip()
+      {
+      Part* oldPart = staff->part();
+      int idx = staff->rstaff();
+      oldPart->removeStaff(staff);
+      staff->setRstaff(rstaff);
+      part->insertStaff(staff);
+      part = oldPart;
+      rstaff = idx;
+      staff->score()->setLayoutAll(true);
       }

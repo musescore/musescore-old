@@ -1,3 +1,7 @@
+22.mar (ws)
+      - avoid recursive call of instrument dialog when pressing "i" again when
+        dialog is active
+      - instrument dialog: allow staff to move to previous or next part with up/down
 20.mar (ws)
       - first implementation of "profiles"; palette changes are recorded in current
         profile; "default" profile is read only

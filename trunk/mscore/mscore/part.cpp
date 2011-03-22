@@ -240,6 +240,7 @@ void Part::insertStaff(Staff* staff)
             idx = _staves.size();
       _staves.insert(idx, staff);
       staff->setShow(_show);
+      staff->setPart(this);
       idx = 0;
       foreach(Staff* staff, _staves)
             staff->setRstaff(idx++);
@@ -251,7 +252,10 @@ void Part::insertStaff(Staff* staff)
 
 void Part::removeStaff(Staff* staff)
       {
-      _staves.removeAll(staff);
+      if (!_staves.removeOne(staff)) {
+            printf("Part::removeStaff: not found %p\n", staff);
+            return;
+            }
       int idx = 0;
       foreach(Staff* staff, _staves)
             staff->setRstaff(idx++);

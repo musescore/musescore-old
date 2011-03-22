@@ -126,6 +126,7 @@ class Staff {
       void read(QDomElement);
       void write(Xml& xml) const;
       Part* part() const             { return _part;        }
+      void setPart(Part* p)          { _part = p;           }
 
       int bracket(int idx) const;
       int bracketSpan(int idx) const;
