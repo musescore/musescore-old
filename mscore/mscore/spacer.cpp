@@ -47,7 +47,7 @@ Spacer::Spacer(const Spacer& s)
 
 void Spacer::draw(Painter* painter) const
       {
-      if (score()->printing())
+      if (score()->printing() || !score()->showUnprintable())
             return;
       QPainter& p = *painter->painter();
       QPen pen;

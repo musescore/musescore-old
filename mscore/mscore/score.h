@@ -257,6 +257,7 @@ class Score : public QObject {
       Qt::KeyboardModifiers keyState;
 
       bool _showInvisible;
+      bool _showUnprintable;
       bool _showFrames;
 
       EditTempo* editTempo;
@@ -545,9 +546,11 @@ class Score : public QObject {
 
       void setSpatium(double v);
 
-      bool showInvisible() const { return _showInvisible; }
-      bool showFrames() const { return _showFrames; }
+      bool showInvisible() const   { return _showInvisible; }
+      bool showUnprintable() const { return _showUnprintable; }
+      bool showFrames() const      { return _showFrames; }
       void setShowInvisible(bool v);
+      void setShowUnprintable(bool v);
       void setShowFrames(bool v);
 
       bool loadMsc(QString name);

@@ -1,4 +1,5 @@
 22.mar (ws)
+      - new display option: "show unprintable" allows to hide spacer and layout-breaks
       - avoid recursive call of instrument dialog when pressing "i" again when
         dialog is active
       - instrument dialog: allow staff to move to previous or next part with up/down

@@ -2002,7 +2002,12 @@ void Score::cmd(const QAction* a)
             med.exec();
             }
       else if (cmd == "show-invisible") {
-            setShowInvisible(getAction(cmd.toLatin1().data())->isChecked());
+            setShowInvisible(a->isChecked());
+            _updateAll = true;
+            end();
+            }
+      else if (cmd == "show-unprintable") {
+            setShowUnprintable(a->isChecked());
             _updateAll = true;
             end();
             }

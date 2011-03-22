@@ -2077,6 +2077,15 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         "show-unprintable",
+         QT_TRANSLATE_NOOP("action","Show unprintable"),
+         0,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","Show unprintable"),
+         QT_TRANSLATE_NOOP("action","Show unprintable")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
          "show-frames",
          QT_TRANSLATE_NOOP("action","Show frames"),
          0,
