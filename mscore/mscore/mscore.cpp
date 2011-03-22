@@ -1879,6 +1879,8 @@ static bool processNonGui()
             if (fn.endsWith(".flac"))
                   return cs->saveAudio(fn, "flac");
 #endif
+            if (fn.endsWith(".mp3"))
+                  return cs->saveMp3(fn);
             else {
                   fprintf(stderr, "dont know how to convert to %s\n", qPrintable(outFileName));
                   return false;

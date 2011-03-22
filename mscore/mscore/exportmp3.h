@@ -1,10 +1,28 @@
-
+//=============================================================================
+//  MuseScore
+//  Linux Music Score Editor
+//  $Id:$
+//
+//  Copyright (C) 2011 Werner Schweer and others
+//
+//  This program is free software; you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License version 2.
+//
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with this program; if not, write to the Free Software
+//  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+//=============================================================================
 
 #ifndef __EXPORTMP3_H__
 #define __EXPORTMP3_H__
 
 #include "globals.h"
-#include "lame.h"
+#include "lame/lame.h"
 #if defined(Q_WS_WIN)
 #include "windows.h"
 #endif
@@ -92,147 +110,145 @@ typedef unsigned long beWriteInfoTag_t(lame_global_flags *, char *);
 typedef struct  {
 
       // BladeEnc DLL Version number
-      
+
       BYTE    byDLLMajorVersion;
       BYTE    byDLLMinorVersion;
-      
+
       // BladeEnc Engine Version Number
-      
+
       BYTE    byMajorVersion;
       BYTE    byMinorVersion;
-      
+
       // DLL Release date
-      
+
       BYTE    byDay;
       BYTE    byMonth;
       WORD    wYear;
-      
+
       // BladeEnc     Homepage URL
-      
-      CHAR    zHomepage[129]; 
-      
+
+      CHAR    zHomepage[129];
+
       BYTE    byAlphaLevel;
       BYTE    byBetaLevel;
       BYTE    byMMXEnabled;
-      
+
       BYTE    btReserved[125];
 } be_version;
 typedef void beVersion_t(be_version *);
 #endif
 
-class MP3Exporter : public QObject {
+//---------------------------------------------------------
+//   MP3Exporter
+//---------------------------------------------------------
 
-public:
-   enum AskUser
-   {
-      No,
-      Maybe,
-      Yes
-   };
+class MP3Exporter {
 
-   MP3Exporter();
-   virtual ~MP3Exporter();
+   public:
+      enum AskUser { No, Maybe, Yes };
 
-   bool findLibrary(QWidget *parent);
-   bool loadLibrary(QWidget *parent, AskUser askuser);
-   bool validLibraryLoaded();
+      MP3Exporter();
+      virtual ~MP3Exporter();
 
-   /* These global settings keep state over the life of the object */
-   void setMode(int mode);
-   void setBitrate(int rate);
-   void setQuality(int q, int r);
-   void setChannel(int mode);
+      bool findLibrary(QWidget *parent);
+      bool loadLibrary(QWidget *parent, AskUser askuser);
+      bool validLibraryLoaded();
 
-   /* Virtual methods that must be supplied by library interfaces */
+      /* These global settings keep state over the life of the object */
+      void setMode(int mode);
+      void setBitrate(int rate);
+      void setQuality(int q, int r);
+      void setChannel(int mode);
 
-   /* initialize the library interface */
-   bool initLibrary(QString libpath);
-   void freeLibrary();
+      /* Virtual methods that must be supplied by library interfaces */
 
-   /* get library info */
-   QString getLibraryVersion();
-   QString getLibraryName();
-   QString getLibraryPath();
-   QString getLibraryTypeString();
+      /* initialize the library interface */
+      bool initLibrary(QString libpath);
+      void freeLibrary();
 
-   /* returns the number of samples PER CHANNEL to send for each call to EncodeBuffer */
-   int initializeStream(int channels, int sampleRate);
+      /* get library info */
+      QString getLibraryVersion();
+      QString getLibraryName();
+      QString getLibraryPath();
+      QString getLibraryTypeString();
 
-   /* In bytes. must be called AFTER InitializeStream */
-   int getOutBufferSize();
+      /* returns the number of samples PER CHANNEL to send for each call to EncodeBuffer */
+      int initializeStream(int channels, int sampleRate);
 
- /* returns the number of bytes written. input is separate per channel */
-   void bufferPreamp(float buffer[], int nSamples);
-   int encodeBuffer(float inbufferL[], float inbufferR[], unsigned char outbuffer[]);
-   int encodeRemainder(float inbufferL[], float inbufferR[], int nSamples,
-                       unsigned char outbuffer[]);
+      /* In bytes. must be called AFTER InitializeStream */
+      int getOutBufferSize();
 
-   int encodeBufferMono(float inbuffer[], unsigned char outbuffer[]);
-   int encodeRemainderMono(float inbuffer[], int nSamples,
+      /* returns the number of bytes written. input is separate per channel */
+      void bufferPreamp(float buffer[], int nSamples);
+      int encodeBuffer(float inbufferL[], float inbufferR[], unsigned char outbuffer[]);
+      int encodeRemainder(float inbufferL[], float inbufferR[], int nSamples,
+         unsigned char outbuffer[]);
+
+      int encodeBufferMono(float inbuffer[], unsigned char outbuffer[]);
+      int encodeRemainderMono(float inbuffer[], int nSamples,
                            unsigned char outbuffer[]);
 
-   int finishStream(unsigned char outbuffer[]);
-   void cancelEncoding();
+      int finishStream(unsigned char outbuffer[]);
+      void cancelEncoding();
 
 //   void PutInfoTag(QFile f, qint64 off);
 
-private:
-
-   QString mLibPath;
-   QLibrary* lame_lib;
-   bool mLibraryLoaded;
+   private:
+      QString mLibPath;
+      QLibrary* lame_lib;
+      bool mLibraryLoaded;
 
 #if defined(Q_WS_WIN)
-   QString mBladeVersion;
+      QString mBladeVersion;
 #endif
 
-   bool mEncoding;
-   int mMode;
-   int mBitrate;
-   int mQuality;
-   int mRoutine;
-   int mChannel;
+      bool mEncoding;
+      int mMode;
+      int mBitrate;
+      int mQuality;
+      int mRoutine;
+      int mChannel;
 
-   /* function pointers to the symbols we get from the library */
-   lame_init_t* lame_init;
-   lame_init_params_t* lame_init_params;
-   lame_encode_buffer_float_t* lame_encode_buffer_float;
-   lame_encode_flush_t* lame_encode_flush;
-   lame_close_t* lame_close;
-   get_lame_version_t* get_lame_version;
-   
-   lame_set_in_samplerate_t* lame_set_in_samplerate;
-   lame_set_out_samplerate_t* lame_set_out_samplerate;
-   lame_set_num_channels_t* lame_set_num_channels;
-   lame_set_quality_t* lame_set_quality;
-   lame_set_brate_t* lame_set_brate;
-   lame_set_VBR_t* lame_set_VBR;
-   lame_set_VBR_q_t* lame_set_VBR_q;
-   lame_set_VBR_min_bitrate_kbps_t* lame_set_VBR_min_bitrate_kbps;
-   lame_set_mode_t* lame_set_mode;
-   lame_set_preset_t* lame_set_preset;
-   lame_set_error_protection_t* lame_set_error_protection;
-   lame_set_disable_reservoir_t *lame_set_disable_reservoir;
-   lame_set_padding_type_t *lame_set_padding_type;
-   lame_set_bWriteVbrTag_t *lame_set_bWriteVbrTag;
-   lame_get_lametag_frame_t *lame_get_lametag_frame;
-   lame_mp3_tags_fid_t *lame_mp3_tags_fid;
+      /* function pointers to the symbols we get from the library */
+      lame_init_t* lame_init;
+      lame_init_params_t* lame_init_params;
+      lame_encode_buffer_float_t* lame_encode_buffer_float;
+      lame_encode_flush_t* lame_encode_flush;
+      lame_close_t* lame_close;
+      get_lame_version_t* get_lame_version;
+
+      lame_set_in_samplerate_t* lame_set_in_samplerate;
+      lame_set_out_samplerate_t* lame_set_out_samplerate;
+      lame_set_num_channels_t* lame_set_num_channels;
+      lame_set_quality_t* lame_set_quality;
+      lame_set_brate_t* lame_set_brate;
+      lame_set_VBR_t* lame_set_VBR;
+      lame_set_VBR_q_t* lame_set_VBR_q;
+      lame_set_VBR_min_bitrate_kbps_t* lame_set_VBR_min_bitrate_kbps;
+      lame_set_mode_t* lame_set_mode;
+      lame_set_preset_t* lame_set_preset;
+      lame_set_error_protection_t* lame_set_error_protection;
+      lame_set_disable_reservoir_t *lame_set_disable_reservoir;
+      lame_set_padding_type_t *lame_set_padding_type;
+      lame_set_bWriteVbrTag_t *lame_set_bWriteVbrTag;
+      lame_get_lametag_frame_t *lame_get_lametag_frame;
+      lame_mp3_tags_fid_t *lame_mp3_tags_fid;
 #if defined(Q_WS_WIN)
-   beWriteInfoTag_t *beWriteInfoTag;
-   beVersion_t *beVersion;
+      beWriteInfoTag_t *beWriteInfoTag;
+      beVersion_t *beVersion;
 #endif
 
-   lame_global_flags *mGF;
+      lame_global_flags *mGF;
 
-   static const int mSamplesPerChunk = 220500;
-   // See lame.h/lame_encode_buffer() for further explanation
-   // As coded here, this should be the worst case.
-   static const int mOutBufferSize = 
-      mSamplesPerChunk * (320 / 8) / 8 + 4 * 1152 * (320 / 8) / 8 + 512;
+      static const int mSamplesPerChunk = 220500;
+      // See lame.h/lame_encode_buffer() for further explanation
+      // As coded here, this should be the worst case.
+      static const int mOutBufferSize =
+         mSamplesPerChunk * (320 / 8) / 8 + 4 * 1152 * (320 / 8) / 8 + 512;
 
-   // See MAXFRAMESIZE in libmp3lame/VbrTag.c for explanation of 2880.
-   unsigned char mInfoTagBuf[2880];
-   size_t mInfoTagLen;
-};
+      // See MAXFRAMESIZE in libmp3lame/VbrTag.c for explanation of 2880.
+      unsigned char mInfoTagBuf[2880];
+      size_t mInfoTagLen;
+      };
 
 #endif //__EXPORTMP3_H__
