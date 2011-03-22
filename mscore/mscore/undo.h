@@ -1593,5 +1593,23 @@ class ChangeClef : public UndoCommand {
       UNDO_NAME("ChangeClef");
       };
 
+//---------------------------------------------------------
+//   MoveStaff
+//---------------------------------------------------------
+
+class MoveStaff : public UndoCommand {
+      Staff* staff;
+      Part* part;
+      int rstaff;
+
+      void flip();
+
+   public:
+      MoveStaff(Staff* s, Part* p, int idx) : staff(s), part(p), rstaff(idx) {}
+      virtual void undo() { flip(); }
+      virtual void redo() { flip(); }
+      UNDO_NAME("MoveStaff");
+      };
+
 #endif
 
