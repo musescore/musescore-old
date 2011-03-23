@@ -692,7 +692,12 @@ MuseScore::MuseScore()
       menuEdit->addAction(getAction("find"));
       menuEdit->addSeparator();
 
-      menuEdit->addAction(getAction("delete-measures"));
+      QMenu* menuMeasure = new QMenu(tr("Measure"));
+      menuMeasure->addAction(getAction("delete-measures"));
+      menuMeasure->addAction(getAction("split-measure"));
+      menuMeasure->addAction(getAction("join-measure"));
+      menuEdit->addMenu(menuMeasure);
+
       menuEdit->addSeparator();
 
       QMenu* menuVoices = new QMenu(tr("Voices"));

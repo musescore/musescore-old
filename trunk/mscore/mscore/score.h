@@ -820,6 +820,8 @@ class Score : public QObject {
       MeasureBase* appendMeasure(ElementType type);
       bool concertPitch() const { return styleB(ST_concertPitch); }
       void layoutFingering(Fingering*);
+      void cmdSplitMeasure();
+      void cmdJoinMeasure();
       };
 
 extern Score* gscore;

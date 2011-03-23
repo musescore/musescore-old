@@ -117,6 +117,8 @@ void Aeolus::play(const Event& event)
       int ch   = event.channel();
       int type = event.type();
       int m    = _midimap [ch] & 127;        // Keyboard and hold bits
+// printf("Aeolus::play %d %d %d\n", ch, type, m);
+
 //      int f    = (_midimap [ch] >> 12) & 7;  // Control enabled if (f & 4)
       if (type == ME_NOTEON) {
             int n = event.dataA();

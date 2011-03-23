@@ -2461,6 +2461,24 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Additional Media"),
          QT_TRANSLATE_NOOP("action","Show media dialog")
          ),
+      Shortcut(
+         STATE_NORMAL,
+         "split-measure",
+         QT_TRANSLATE_NOOP("action","Split Measure"),
+         0,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","Split Measure"),
+         QT_TRANSLATE_NOOP("action","Split Measure")
+         ),
+      Shortcut(
+         STATE_NORMAL,
+         "join-measure",
+         QT_TRANSLATE_NOOP("action","Join Measure"),
+         0,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","Join Measure"),
+         QT_TRANSLATE_NOOP("action","Join Measure")
+         ),
       // xml==0  marks end of list
       Shortcut(0, 0, 0, QKeySequence::UnknownKey)
       };

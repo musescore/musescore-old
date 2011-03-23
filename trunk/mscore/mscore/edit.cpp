@@ -52,6 +52,9 @@
 #include "undo.h"
 #include "tablature.h"
 #include "stafftype.h"
+#include "tupletmap.h"
+#include "slurmap.h"
+#include "tiemap.h"
 
 //---------------------------------------------------------
 //   getSelectedNote
@@ -376,6 +379,7 @@ static bool addCR(int tick, ChordRest* cr, Measure* ml)
             tuplet = tuplet->tuplet();
       if (tuplet && (tick + tuplet->ticks() > etick))
             return false;
+
       if (tick + cr->ticks() > etick) {
             //
             // split cr
@@ -1873,5 +1877,192 @@ void Score::nextInputPos(ChordRest* cr, bool doSelect)
             select(ncr, SELECT_SINGLE, 0);
       if (ncr)
             emit posChanged(ncr->tick());
+      }
+
+//---------------------------------------------------------
+//   cmdSplitMeasure
+//---------------------------------------------------------
+
+void Score::cmdSplitMeasure()
+      {
+      Element* e = _selection.element();
+      if (!(e && (e->type() == NOTE || e->type() == REST))) {
+		QMessageBox::warning(0, "MuseScore",
+			tr("No chord/rest selected:\n"
+			"please select a chord/rest and try again"));
+            return;
+            }
+      if (e->type() == NOTE)
+            e = static_cast<Note*>(e)->chord();
+      ChordRest* cr = static_cast<ChordRest*>(e);
+      Segment* segment = cr->segment();
+      Measure* measure = segment->measure();
+
+      //TODO: check for split in tuplet
+      if (cr->segment()->tick() == measure->tick()) {
+            printf("cannot split here\n");
+            return;
+            }
+      startCmd();
+      deleteItem(measure);
+      Measure* m1 = new Measure(this);
+      Measure* m2 = new Measure(this);
+      int tick = segment->tick();
+      m1->setTick(measure->tick());
+      m2->setTick(tick);
+      int ticks1 = segment->tick() - measure->tick();
+      int ticks2 = measure->ticks() - segment->tick() - measure->tick();
+      m1->setTimesig(measure->timesig());
+      m2->setTimesig(measure->timesig());
+      m1->setLen(Fraction::fromTicks(ticks1));
+      m2->setLen(Fraction::fromTicks(ticks2));
+      int tracks = nstaves() * VOICES;
+
+      m1->setNext(m2);
+      m2->setNext(measure->next());
+      undoInsertMeasure(m2);
+      undoInsertMeasure(m1);
+
+      for (Segment* s = measure->first(); s; s = s->next()) {
+            SegmentType st   = s->segmentType();
+            Segment* segment = ((s->tick() < tick) ? m1 : m2)->getSegment(st, s->tick());
+            for (int track = 0; track < tracks; ++track) {
+                  if (s->element(track)) {
+                        Element* e = s->element(track);
+                        if (st == SegChordRest) {
+                              ChordRest* cr = static_cast<ChordRest*>(e);
+                              if (s->tick() < tick && (s->tick() + cr->ticks()) > tick) {
+                                    ChordRest* cr1 = (ChordRest*)(cr->clone());
+                                    addCR(s->tick(), cr1, m1);
+                                    }
+                              else {
+                                    segment->add(cr->clone());
+                                    }
+                              }
+                        else {
+                              segment->add(e->clone());
+                              }
+                        }
+                  }
+            }
+      endCmd();
+      }
+
+//---------------------------------------------------------
+//   cmdJoinMeasure
+//---------------------------------------------------------
+
+void Score::cmdJoinMeasure()
+      {
+      Measure* m1 = _selection.startSegment()->measure();
+      Measure* m2 = _selection.endSegment()->measure();
+      if (_selection.state() != SEL_RANGE || (m1 == m2)) {
+		QMessageBox::warning(0, "MuseScore",
+			tr("No measures selected:\n"
+			"please select range of measures to join and try again"));
+            return;
+            }
+      Measure* m = new Measure(this);
+      m->setTick(m1->tick());
+      m->setNext(m2);
+      m->setTimesig(m1->timesig());
+      Fraction f;
+      for (Measure* mm = m1; mm && mm != m2; mm = mm->nextMeasure())
+            f += mm->len();
+      m->setLen(f);
+
+      startCmd();
+      undo()->push(new RemoveMeasures(m1, m2->prevMeasure()));
+      undoInsertMeasure(m);
+
+      int tracks       = nstaves() * VOICES;
+      SlurMap* slurMap = new SlurMap[tracks];
+      TieMap* tieMap   = new TieMap[tracks];
+
+      for (int track = 0; track < tracks; ++track) {
+            TupletMap tupletMap;
+            for (Segment* s = m1->first(); s; s = s->next1()) {
+                  if (s->measure() == m2)
+                        break;
+                  Element* oe = s->element(track);
+                  if (oe == 0)
+                        continue;
+
+                  SegmentType st = s->segmentType();
+
+                  // do not copy barlines except last
+                  if ((st == SegEndBarLine) && (s->tick() < (m2->tick() + m2->ticks())))
+                        continue;
+
+                  Element* ne = oe->clone();
+                  Segment* seg = m->getSegment(st, s->tick());
+                  seg->add(ne);
+                  if (oe->isChordRest()) {
+                        ChordRest* ocr = static_cast<ChordRest*>(oe);
+                        ChordRest* ncr = static_cast<ChordRest*>(ne);
+                        Tuplet* ot     = ocr->tuplet();
+                        if (ot) {
+                              Tuplet* nt = tupletMap.findNew(ot);
+                              if (nt == 0) {
+                                    nt = new Tuplet(*ot);
+                                    nt->clear();
+                                    m->add(nt);
+                                    tupletMap.add(ot, nt);
+                                    }
+                              ncr->setTuplet(nt);
+                              }
+                        foreach (Slur* s, ocr->slurFor()) {
+                              Slur* slur = new Slur(this);
+                              slur->setStartElement(ncr);
+                              ncr->addSlurFor(slur);
+                              slurMap[track].add(s, slur);
+                              }
+                        foreach (Slur* s, ocr->slurBack()) {
+                              Slur* slur = slurMap[track].findNew(s);
+                              if (slur) {
+                                    slur->setEndElement(ncr);
+                                    ncr->addSlurBack(slur);
+                                    }
+                              else {
+                                    printf("cloneStave: cannot find slur\n");
+                                    }
+                              }
+                        foreach (Element* e, seg->annotations()) {
+                              if (e->generated() || e->systemFlag())
+                                    continue;
+                              Element* ne = e->clone();
+                              seg->add(ne);
+                              }
+                        if (oe->type() == CHORD) {
+                              Chord* och = static_cast<Chord*>(ocr);
+                              Chord* nch = static_cast<Chord*>(ncr);
+                              int n = och->notes().size();
+                              for (int i = 0; i < n; ++i) {
+                                    Note* on = och->notes().at(i);
+                                    Note* nn = nch->notes().at(i);
+                                    if (on->tieFor()) {
+                                          Tie* tie = new Tie(this);
+                                          nn->setTieFor(tie);
+                                          tie->setStartNote(nn);
+                                          tieMap[track].add(on->tieFor(), tie);
+                                          }
+                                    if (on->tieBack()) {
+                                          Tie* tie = tieMap[track].findNew(on->tieBack());
+                                          if (tie) {
+                                                nn->setTieBack(tie);
+                                                tie->setEndNote(nn);
+                                                }
+                                          else {
+                                                printf("cloneStave: cannot find tie\n");
+                                                }
+                                          }
+                                    }
+                              }
+                        }
+                  }
+            }
+      delete[] slurMap;
+      delete[] tieMap;
+      endCmd();
       }
 

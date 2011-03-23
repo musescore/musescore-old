@@ -1,3 +1,5 @@
+23.mar (ws)
+      - new commands: "split measure" and "join measure"
 22.mar (ws)
       - new display option: "show unprintable" allows to hide spacer and layout-breaks
       - avoid recursive call of instrument dialog when pressing "i" again when
