@@ -1,3 +1,5 @@
+23.mar (la)
+      - fix #9883: Insert vertical frame between two parts of the same line (volta, cresc) causes crash
 22.mar (la)
       - fix #9842: Tempo value not exported in Lilypond
 20.mar (la)

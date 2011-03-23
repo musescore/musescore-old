@@ -369,7 +369,12 @@ void SLine::layout()
       QList<System*>* systems = score()->systems();
       int sysIdx1        = systems->indexOf(s1);
       int sysIdx2        = systems->indexOf(s2);
-      int segmentsNeeded = sysIdx2 - sysIdx1 + 1;
+      int segmentsNeeded = 0;
+      for (int i = sysIdx1; i < sysIdx2+1;  ++i) {
+            if ((*systems)[i]->isVbox())
+                  continue;
+            ++segmentsNeeded;
+            }
 
       int segCount       = segments.size();
       if (segmentsNeeded != segCount) {
@@ -400,9 +405,11 @@ void SLine::layout()
             segCount = segmentsNeeded;
             }
       int segIdx = 0;
-      for (int i = sysIdx1; i <= sysIdx2; ++i, ++segIdx) {
+      for (int i = sysIdx1; i <= sysIdx2; ++i) {
             System* system   = (*systems)[i];
-            LineSegment* seg = segments[segIdx];
+            if (system->isVbox())
+                  continue;
+            LineSegment* seg = segments[segIdx++];
             seg->setSystem(system);
 
             if (sysIdx1 == sysIdx2) {
