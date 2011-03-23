@@ -2940,6 +2940,12 @@ void ScoreView::cmd(const QAction* a)
             if (_score->omr())
                   showOmr(!_score->showOmr());
             }
+      else if (cmd == "split-measure") {
+            _score->cmdSplitMeasure();
+            }
+      else if (cmd == "join-measure") {
+            _score->cmdJoinMeasure();
+            }
       else
             _score->cmd(a);
       _score->processMidiInput();

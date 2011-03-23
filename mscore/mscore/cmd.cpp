@@ -1493,7 +1493,6 @@ void Score::appendMeasures(int n, ElementType type)
 
 void ScoreView::cmdInsertMeasures(int n, ElementType type)
       {
-printf("cmdInsertMeasures %d\n", n);
       _score->startCmd();
       insertMeasures(n, type);
       _score->endCmd();

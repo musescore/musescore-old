@@ -800,7 +800,7 @@ void ShowChordWidget::setElement(Element* e)
       crb.beamMode->setCurrentIndex(int(chord->beamMode()));
       crb.dots->setValue(chord->dots());
       crb.ticks->setValue(chord->ticks());
-      crb.durationType->setValue(int(chord->durationType().type()));
+      crb.durationType->setText(chord->durationType().name());
       crb.duration->setText(chord->duration().print());
       crb.move->setValue(chord->staffMove());
       crb.spaceL->setValue(chord->space().lw());
@@ -1132,7 +1132,7 @@ void ShowRestWidget::setElement(Element* e)
       crb.attributes->clear();
       crb.dots->setValue(rest->dots());
       crb.ticks->setValue(rest->ticks());
-      crb.durationType->setValue(int(rest->durationType().type()));
+      crb.durationType->setText(rest->durationType().name());
       crb.duration->setText(rest->duration().print());
       crb.move->setValue(rest->staffMove());
 

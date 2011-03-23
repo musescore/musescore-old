@@ -39,6 +39,9 @@
 #include "note.h"
 #include "lyrics.h"
 #include "segment.h"
+#include "tupletmap.h"
+#include "slurmap.h"
+#include "tiemap.h"
 
 //---------------------------------------------------------
 //   read
@@ -157,29 +160,6 @@ Score* createExcerpt(const QList<Part*>& parts)
       }
 
 //---------------------------------------------------------
-//   Tuplet2
-//---------------------------------------------------------
-
-struct Tuplet2 {
-      Tuplet* o;
-      Tuplet* n;
-      Tuplet2(Tuplet* _o, Tuplet* _n) : o(_o), n(_n) {}
-      };
-
-//---------------------------------------------------------
-//   TupletMap
-//---------------------------------------------------------
-
-class TupletMap {
-      QList<Tuplet2> map;
-
-   public:
-      TupletMap() {}
-      Tuplet* findNew(Tuplet* o);
-      void add(Tuplet* _o, Tuplet* _n) { map.append(Tuplet2(_o, _n)); }
-      };
-
-//---------------------------------------------------------
 //   findNew
 //---------------------------------------------------------
 
@@ -191,30 +171,6 @@ Tuplet* TupletMap::findNew(Tuplet* o)
             }
       return 0;
       }
-
-//---------------------------------------------------------
-//   Slur2
-//---------------------------------------------------------
-
-struct Slur2 {
-      Slur* o;
-      Slur* n;
-      Slur2(Slur* _o, Slur* _n) : o(_o), n(_n) {}
-      };
-
-//---------------------------------------------------------
-//   SlurMap
-//---------------------------------------------------------
-
-class SlurMap {
-      QList<Slur2> map;
-
-   public:
-      SlurMap() {}
-      Slur* findNew(Slur* o);
-      void add(Slur* _o, Slur* _n) { map.append(Slur2(_o, _n)); }
-      void check();
-      };
 
 //---------------------------------------------------------
 //   findNew
@@ -246,29 +202,6 @@ void SlurMap::check()
       }
 
 //---------------------------------------------------------
-//   Element2
-//---------------------------------------------------------
-
-struct Element2 {
-      Element* o;
-      Element* n;
-      Element2(Element* _o, Element* _n) : o(_o), n(_n) {}
-      };
-
-//---------------------------------------------------------
-//   ElementMap
-//---------------------------------------------------------
-
-class ElementMap {
-      QList<Element2> map;
-
-   public:
-      ElementMap() {}
-      Element* findNew(Element* o) const;
-      void add(Element* _o, Element* _n) { map.append(Element2(_o, _n)); }
-      };
-
-//---------------------------------------------------------
 //   findNew
 //---------------------------------------------------------
 
@@ -280,17 +213,6 @@ Element* ElementMap::findNew(Element* o) const
             }
       return 0;
       }
-
-//---------------------------------------------------------
-//   TieMap
-//---------------------------------------------------------
-
-class TieMap : public ElementMap {
-   public:
-      TieMap() {}
-      Tie* findNew(Tie* o) const { return static_cast<Tie*>(ElementMap::findNew(o)); }
-      void add(Tie* _o, Tie* _n) { ElementMap::add(_o, _n); }
-      };
 
 //---------------------------------------------------------
 //   cloneStaves
