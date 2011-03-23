@@ -577,11 +577,11 @@ printf("   %s  dots %d, %d/%d\n", qPrintable(d.name()), d.dots(), _ratio.numerat
 
 void Tuplet::add(Element* e)
       {
-      foreach(DurationElement* el, _elements) {
+/*      foreach(DurationElement* el, _elements) {
             if (el == e)
                   printf("Tuplet::add: %p %s already there\n", e, e->name());
             }
-
+*/
       switch(e->type()) {
             case TEXT:
                   _number = static_cast<Text*>(e);

@@ -1911,7 +1911,7 @@ void Score::cmdSplitMeasure()
       m1->setTick(measure->tick());
       m2->setTick(tick);
       int ticks1 = segment->tick() - measure->tick();
-      int ticks2 = measure->ticks() - segment->tick() - measure->tick();
+      int ticks2 = measure->ticks() - ticks1;
       m1->setTimesig(measure->timesig());
       m2->setTimesig(measure->timesig());
       m1->setLen(Fraction::fromTicks(ticks1));
@@ -1923,28 +1923,96 @@ void Score::cmdSplitMeasure()
       undoInsertMeasure(m2);
       undoInsertMeasure(m1);
 
-      for (Segment* s = measure->first(); s; s = s->next()) {
-            SegmentType st   = s->segmentType();
-            Segment* segment = ((s->tick() < tick) ? m1 : m2)->getSegment(st, s->tick());
-            for (int track = 0; track < tracks; ++track) {
-                  if (s->element(track)) {
-                        Element* e = s->element(track);
-                        if (st == SegChordRest) {
-                              ChordRest* cr = static_cast<ChordRest*>(e);
-                              if (s->tick() < tick && (s->tick() + cr->ticks()) > tick) {
-                                    ChordRest* cr1 = (ChordRest*)(cr->clone());
-                                    addCR(s->tick(), cr1, m1);
+      SlurMap* slurMap = new SlurMap[tracks];
+      TieMap* tieMap   = new TieMap[tracks];
+
+      for (int track = 0; track < tracks; ++track) {
+            TupletMap tupletMap;
+            for (Segment* s = measure->first(); s; s = s->next()) {
+                  Element* oe = s->element(track);
+                  if (oe == 0)
+                        continue;
+                  SegmentType st = s->segmentType();
+                  Measure* m     = (s->tick() < tick) ? m1 : m2;
+                  Segment* seg   = m->getSegment(st, s->tick());
+                  Element* ne    = oe->clone();
+                  if (st != SegChordRest) {
+                        seg->add(ne);
+                        continue;
+                        }
+
+                  ChordRest* ocr = static_cast<ChordRest*>(oe);
+                  ChordRest* ncr = static_cast<ChordRest*>(ne);
+                  if (s->tick() < tick && (s->tick() + ocr->ticks()) > tick) {
+                        addCR(s->tick(), ncr, m1);
+                        }
+                  else {
+                        Tuplet* ot = ocr->tuplet();
+                        if (ot) {
+                              Tuplet* nt = tupletMap.findNew(ot);
+                              if (nt == 0) {
+                                    nt = new Tuplet(*ot);
+                                    nt->clear();
+                                    m->add(nt);
+                                    tupletMap.add(ot, nt);
                                     }
-                              else {
-                                    segment->add(cr->clone());
-                                    }
+                              ncr->setTuplet(nt);
+                              }
+                        seg->add(ncr);
+                        }
+#if 0
+                  foreach (Slur* s, ocr->slurFor()) {
+                        Slur* slur = new Slur(this);
+                        slur->setStartElement(ncr);
+                        ncr->addSlurFor(slur);
+                        slurMap[track].add(s, slur);
+                        }
+                  foreach (Slur* s, ocr->slurBack()) {
+                        Slur* slur = slurMap[track].findNew(s);
+                        if (slur) {
+                              slur->setEndElement(ncr);
+                              ncr->addSlurBack(slur);
                               }
                         else {
-                              segment->add(e->clone());
+                              printf("cloneStave: cannot find slur\n");
                               }
                         }
+                  foreach (Element* e, seg->annotations()) {
+                        if (e->generated() || e->systemFlag())
+                              continue;
+                        Element* ne = e->clone();
+                        seg->add(ne);
+                        }
+                  if (oe->type() == CHORD) {
+                        Chord* och = static_cast<Chord*>(ocr);
+                        Chord* nch = static_cast<Chord*>(ncr);
+                        int n = och->notes().size();
+                        for (int i = 0; i < n; ++i) {
+                              Note* on = och->notes().at(i);
+                              Note* nn = nch->notes().at(i);
+                              if (on->tieFor()) {
+                                    Tie* tie = new Tie(this);
+                                    nn->setTieFor(tie);
+                                    tie->setStartNote(nn);
+                                    tieMap[track].add(on->tieFor(), tie);
+                                    }
+                              if (on->tieBack()) {
+                                    Tie* tie = tieMap[track].findNew(on->tieBack());
+                                    if (tie) {
+                                          nn->setTieBack(tie);
+                                          tie->setEndNote(nn);
+                                          }
+                                    else {
+                                          printf("cloneStave: cannot find tie\n");
+                                          }
+                                    }
+                              }
+                        }
+#endif
                   }
             }
+      delete[] slurMap;
+      delete[] tieMap;
       endCmd();
       }
 
@@ -2010,6 +2078,7 @@ void Score::cmdJoinMeasure()
                                     tupletMap.add(ot, nt);
                                     }
                               ncr->setTuplet(nt);
+                              nt->add(ncr);
                               }
                         foreach (Slur* s, ocr->slurFor()) {
                               Slur* slur = new Slur(this);

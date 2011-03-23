@@ -157,7 +157,8 @@ static BeamHint endBeamList[] = {
 
 bool endBeam(const Fraction& ts, ChordRest* cr, int p)
       {
-      if (cr->tuplet()) {
+//      if (cr->tuplet()) {
+      if (cr->tuplet() && !cr->tuplet()->elements().isEmpty()) {
             if (cr->tuplet()->elements().front() == cr)     // end beam at tuplet
                   return true;
             return false;
