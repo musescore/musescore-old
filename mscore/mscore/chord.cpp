@@ -1286,6 +1286,7 @@ void Chord::layout()
       double lx         = 0.0;
       Note*  upnote     = upNote();
       double headWidth  = upnote->headWidth();
+      qreal minNoteDistance = score()->styleS(ST_minNoteDistance).val() * _spatium;
 
       if (staff() && staff()->useTablature()) {
             //
@@ -1299,32 +1300,23 @@ void Chord::layout()
                   }
             // if tab type is stemless or duration longer than crochet
             // remove stems
-            if(tab->slashStyle() || durationType().type() < Duration::V_QUARTER) {
-                  if(_stem) {
-                        delete _stem;
-                        _stem = 0;
-                        }
-                  if(_hook) {
-                        delete _hook;
-                        _hook = 0;
-                        }
+            if (tab->slashStyle() || durationType().type() < Duration::V_QUARTER) {
+                  delete _stem;
+                  delete _hook;
+                  _stem = 0;
+                  _hook = 0;
                   }
             // unconditionally delete grace slashes
-            if(_stemSlash) {
-                  delete _stemSlash;
-                  _stemSlash = 0;
-            }
+            delete _stemSlash;
+            _stemSlash = 0;
 
-            if (!tab->genDurations() ||         // if tab is not set for duration symbols
-               track() % VOICES != 0) {         // or not in first voice
+            if (!tab->genDurations()            // if tab is not set for duration symbols
+               || (track() % VOICES)) {         // or not in first voice
                   //
                   // no tab duration symbols
                   //
-                  if (_tabDur) {                // delete an existing duration symbol
-                        delete _tabDur;
-                        _tabDur = 0;
-                        }
-//                  return;                       // and ignore duration symbols
+                  delete _tabDur;   // delete an existing duration symbol
+                  _tabDur = 0;
                   }
             else {
                   //
@@ -1335,34 +1327,30 @@ void Chord::layout()
                   // if no previous CR or duration type and/or number of dots is different from current CR
                   // set a duration symbol (trying to re-use existing symbols where existing to minimize
                   // symbol creation and deletion)
-                  if(prevCR == 0 || prevCR->durationType().type() != durationType().type()
-                              || prevCR->dots() != dots()) {
+                  if (prevCR == 0 || prevCR->durationType().type() != durationType().type()
+                     || prevCR->dots() != dots()) {
                         // symbol needed; if not exist, create
-                        if(!_tabDur) {
-                              _tabDur = new TabDurationSymbol(score(), tab, durationType().type(), dots());
-                              }
                         // if exists, update duration
+                        if (!_tabDur)
+                              _tabDur = new TabDurationSymbol(score(), tab, durationType().type(), dots());
                         else
                               _tabDur->setDuration(durationType().type(), dots());
                         _tabDur->setParent(this);
       // needed?        _tabDur->setTrack(track());
                         }
-                  else                    // symbol not needed: if exists, delete
-                        if(_tabDur) {
-                              delete _tabDur;
-                              _tabDur = 0;
-                              }
+                  else {                    // symbol not needed: if exists, delete
+                        delete _tabDur;
+                        _tabDur = 0;
+                        }
                   }                 // end of if(duration_symbols)
-//            return;
             }                       // end of if(useTablature)
       else {
             //
             // NON-TABLATURE STAVES
             //
-            if(_tabDur) {           // no TAB? no duration symbol! (may happen when converting a TAB into PITCHED)
-                  delete _tabDur;
-                  _tabDur = 0;
-                  }
+            delete _tabDur;   // no TAB? no duration symbol! (may happen when converting a TAB into PITCHED)
+            _tabDur = 0;
+
             if (!segment()) {
                   //
                   // hack for use in palette
@@ -1376,15 +1364,11 @@ void Chord::layout()
                   return;
                   }
 
-//            Note* upnote     = upNote();
-//            double headWidth = upnote->headWidth();
-
             //-----------------------------------------
             //  process notes
             //    - position
             //-----------------------------------------
 
-//            double lx = 0.0;
             double stepDistance = _spatium * .5;
 
             foreach(Note* note, _notes) {
@@ -1405,7 +1389,7 @@ void Chord::layout()
 
                   Accidental* accidental = note->accidental();
                   if (accidental)
-                        x = accidental->x() + note->x();
+                        x = accidental->x() + note->x() - minNoteDistance;
                   if (x < lx)
                         lx = x;
                   }
@@ -1424,7 +1408,7 @@ void Chord::layout()
 
             foreach(LedgerLine* l, _ledgerLines)
                   l->layout();
-      }
+            }
 
       //
       // COMMON TO ALL STAVES
@@ -1479,7 +1463,7 @@ void Chord::layout()
       if (_hook) {
             _hook->layout();
             if (up())
-                  rrr += _hook->width();
+                  rrr += _hook->width() + minNoteDistance;
             }
       lll += _extraLeadingSpace.val() * _spatium;
 

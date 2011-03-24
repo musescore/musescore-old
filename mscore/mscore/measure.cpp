@@ -2901,6 +2901,8 @@ void Measure::layoutX(double stretch)
       int minTick     = 100000;
       int ntick       = tick() + ticks();   // position of next measure
 
+      qreal minNoteDistance = score()->styleS(ST_minNoteDistance).val() * _spatium;
+
       double clefWidth[nstaves];
       memset(clefWidth, 0, nstaves * sizeof(double));
 
@@ -2921,11 +2923,11 @@ void Measure::layoutX(double stretch)
             SegmentType segType    = s->segmentType();
             types[segmentIdx]      = segType;
             double segmentWidth    = 0.0;
-            double minDistance     = 0.0;
             double stretchDistance = 0.0;
             Segment* pSeg          = s->prev();
 
             for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
+                  double minDistance = 0.0;
                   Space space;
                   int track  = staffIdx * VOICES;
                   bool found = false;
@@ -2940,7 +2942,7 @@ void Measure::layoutX(double stretch)
                               found = true;
                               if (!pSeg || (pSeg->subtype() == SegStartRepeatBarLine)) {
                                     double sp       = score()->styleS(ST_barNoteDistance).val() * _spatium;
-                                    minDistance     = sp * .3;
+                                    minDistance     = qMax(minDistance, sp * .3);
                                     stretchDistance = sp * .7;
                                     }
                               else {
@@ -2949,15 +2951,16 @@ void Measure::layoutX(double stretch)
                                           // if (pt & (SegKeySig | SegClef))
                                           bool firstClef = (segmentIdx == 1) && (pt == SegClef);
                                           if ((pt & (SegKeySig | SegTimeSig)) || firstClef) {
-                                                minDistance = clefKeyRightMargin;
+                                                minDistance = qMax(minDistance, clefKeyRightMargin);
                                                 }
-                                          else
-                                                minDistance = 0.0;
+                                          // else
+                                          //      minDistance = 0.0;
                                           }
                                     else {
-                                          minDistance = score()->styleS(ST_minNoteDistance).val() * _spatium;
+                                          qreal d = minNoteDistance;
                                           if (s->subtype() == SegGrace)
-                                                minDistance *= score()->styleD(ST_graceNoteMag);
+                                                d *= score()->styleD(ST_graceNoteMag);
+                                          minDistance = qMax(minDistance, d);
                                           }
                                     }
                               cr->layout();
@@ -3013,9 +3016,8 @@ void Measure::layoutX(double stretch)
                               }
                         }
                   if (found) {
-                        // if (pSeg && (pSeg->segmentType() == SegClef) && pSeg->element(track))
                         space.rLw() += clefWidth[staffIdx];
-                        double sp = minDistance + rest[staffIdx] + stretchDistance;
+                        double sp  = minDistance + rest[staffIdx] + stretchDistance;
                         if (space.lw() > stretchDistance)
                               sp += (space.lw() - stretchDistance);
                         rest[staffIdx]  = space.rw();
