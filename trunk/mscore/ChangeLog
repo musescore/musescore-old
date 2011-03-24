@@ -1,4 +1,5 @@
 24.mar (ws)
+      - draw gips in edit mode always on top of all other elements
       - fix initialization of split-window action
 23.mar (ws)
       - new commands: "split measure" and "join measure"
