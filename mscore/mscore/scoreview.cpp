@@ -1409,6 +1409,17 @@ void ScoreView::paintEvent(QPaintEvent* ev)
             }
       if (dragElement)
             dragElement->scanElements(&vp, paintElement);
+      if (grips) {
+            qreal lw = 2.0/p.matrix().m11();
+            // QPen pen(Qt::blue);
+            QPen pen(preferences.defaultColor);
+            pen.setWidthF(lw);
+            p.setPen(pen);
+            for (int i = 0; i < grips; ++i) {
+                  p.setBrush(((i == curGrip) && hasFocus()) ? QBrush(Qt::blue) : Qt::NoBrush);
+                  p.drawRect(grip[i]);
+                  }
+            }
       }
 
 //---------------------------------------------------------
@@ -1479,7 +1490,7 @@ void ScoreView::paint(const QRect& rr, QPainter& p)
             p.setBrush(QBrush(Qt::NoBrush));
             p.drawRect(r);
             }
-
+#if 0
       if (grips) {
             qreal lw = 2.0/p.matrix().m11();
             // QPen pen(Qt::blue);
@@ -1491,7 +1502,7 @@ void ScoreView::paint(const QRect& rr, QPainter& p)
                   p.drawRect(grip[i]);
                   }
             }
-
+#endif
       const Selection& sel = _score->selection();
       if (sel.state() == SEL_RANGE) {
             Segment* ss = sel.startSegment();
