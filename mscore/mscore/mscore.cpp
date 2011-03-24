@@ -2785,14 +2785,16 @@ void MuseScore::readSettings()
       mscore->showPalette(settings.value("showPanel", "0").toBool());
       restoreState(settings.value("state").toByteArray());
       _horizontalSplit = settings.value("split", true).toBool();
-      if (settings.value("splitScreen", false).toBool())
+      bool splitScreen = settings.value("splitScreen", false).toBool();
+      if (splitScreen) {
             splitWindow(_horizontalSplit);
+            QAction* a = getAction(_horizontalSplit ? "split-h" : "split-v");
+            a->setChecked(true);
+            }
       splitter->restoreState(settings.value("splitter").toByteArray());
-      QAction* a = getAction(_horizontalSplit ? "split-h" : "split-v");
-      a->setChecked(true);
       settings.endGroup();
 
-      a = getAction("toggle-transport");
+      QAction* a = getAction("toggle-transport");
       a->setChecked(!transportTools->isHidden());
       a = getAction("toggle-noteinput");
       a->setChecked(!entryTools->isHidden());
