@@ -32,9 +32,42 @@
 MeasureProperties::MeasureProperties(Measure* _m, QWidget* parent)
    : QDialog(parent)
       {
-      m = _m;
       setupUi(this);
+      setMeasure(_m);
+      staves->verticalHeader()->hide();
+      connect(buttonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(bboxClicked(QAbstractButton*)));
+      connect(nextButton, SIGNAL(clicked()), SLOT(gotoNextMeasure()));
+      connect(previousButton, SIGNAL(clicked()), SLOT(gotoPreviousMeasure()));
+      }
 
+//---------------------------------------------------------
+//   gotoNextMeasure
+//---------------------------------------------------------
+
+void MeasureProperties::gotoNextMeasure()
+      {
+      if (m->nextMeasure())
+            setMeasure(m->nextMeasure());
+      }
+
+//---------------------------------------------------------
+//   gotoPreviousMeasure
+//---------------------------------------------------------
+
+void MeasureProperties::gotoPreviousMeasure()
+      {
+      if (m->prevMeasure())
+            setMeasure(m->prevMeasure());
+      }
+
+//---------------------------------------------------------
+//   setMeasure
+//---------------------------------------------------------
+
+void MeasureProperties::setMeasure(Measure* _m)
+      {
+      m = _m;
+      setWindowTitle(QString(tr("MuseScore: Measure Properties for Measure %1")).arg(m->no()));
       actualZ->setValue(m->len().numerator());
       actualN->setValue(m->len().denominator());
       nominalZ->setNum(m->timesig().numerator());
@@ -70,8 +103,6 @@ MeasureProperties::MeasureProperties(Measure* _m, QWidget* parent)
             item->setCheckState(ms->_slashStyle ? Qt::Checked : Qt::Unchecked);
             staves->setItem(staffIdx, 2, item);
             }
-      staves->verticalHeader()->hide();
-      connect(buttonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(bboxClicked(QAbstractButton*)));
       }
 
 //---------------------------------------------------------

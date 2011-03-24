@@ -40,9 +40,12 @@ class MeasureProperties : public QDialog, private Ui::MeasurePropertiesBase {
       int repeatCount() const;
       bool visible(int staffIdx);
       bool slashStyle(int staffIdx);
+      void setMeasure(Measure* _m);
 
    private slots:
       void bboxClicked(QAbstractButton* button);
+      void gotoNextMeasure();
+      void gotoPreviousMeasure();
 
    public:
       MeasureProperties(Measure*, QWidget* parent = 0);
