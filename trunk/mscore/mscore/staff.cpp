@@ -190,7 +190,6 @@ Staff::~Staff()
                   delete _linkedStaves;
             }
       delete _keymap;
-      _keymap   = 0;      // DEBUG
       }
 
 //---------------------------------------------------------

@@ -3939,7 +3939,6 @@ bool ScoreView::event(QEvent* event)
                   }
             }
       else if (event->type() == CloneDrag) {
-            printf("clone drag\n");
             Element* e = static_cast<CloneEvent*>(event)->element();
             cloneElement(e);
             }

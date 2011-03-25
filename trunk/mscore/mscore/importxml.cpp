@@ -157,7 +157,7 @@ class LoadMusicXml : public LoadFile {
 //---------------------------------------------------------
 
 /**
- Load MusicXML file \a qf, return false if OK and true on error.
+ Load MusicXML file \a qf, return true if OK and false on error.
  */
 
 bool LoadMusicXml::loader(QFile* qf)
@@ -169,10 +169,10 @@ bool LoadMusicXml::loader(QFile* qf)
             col.setNum(column);
             ln.setNum(line);
             error = err + "\n at line " + ln + " column " + col;
-            return true;
+            return false;
             }
       docName = qf->fileName();
-      return false;
+      return true;
       }
 
 //---------------------------------------------------------
@@ -285,16 +285,18 @@ bool LoadCompressedMusicXml::loader(QFile* qf)
 
 //---------------------------------------------------------
 //   importMusicXml
+//    return false on error
 //---------------------------------------------------------
 
 /**
  Import MusicXML file \a name into the Score.
  */
 
-void Score::importMusicXml(const QString& name)
+bool Score::importMusicXml(const QString& name)
       {
       LoadMusicXml lx;
-      lx.load(name);
+      if (!lx.load(name))
+            return false;
       setSaved(false);
       MusicXml musicxml(lx.doc());
       musicxml.import(this);
@@ -302,20 +304,23 @@ void Score::importMusicXml(const QString& name)
       rebuildMidiMapping();
       layoutAll = true;
       _created = false;
+      return true;
       }
 
 //---------------------------------------------------------
 //   importCompressedMusicXml
+//    return false on error
 //---------------------------------------------------------
 
 /**
  Import compressed MusicXML file \a name into the Score.
  */
 
-void Score::importCompressedMusicXml(const QString& name)
+bool Score::importCompressedMusicXml(const QString& name)
       {
       LoadCompressedMusicXml lx;
-      lx.load(name);
+      if (!lx.load(name))
+            return false;
       setSaved(false);
       MusicXml musicxml(lx.doc());
       musicxml.import(this);
@@ -323,6 +328,7 @@ void Score::importCompressedMusicXml(const QString& name)
       rebuildMidiMapping();
       layoutAll = true;
       _created = false;
+      return true;
       }
 
 //---------------------------------------------------------
