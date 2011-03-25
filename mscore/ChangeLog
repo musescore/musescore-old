@@ -1,4 +1,8 @@
+25.mar (ws)
+      - do not show nonexistant files in "open recent"
+      - fix #9919: error on open/read musicxml was not handled
 24.mar (ws)
+      - add previous/next button to measure properties dialog
       - draw grips in edit mode always on top of all other elements
       - fix initialization of split-window action
 23.mar (ws)

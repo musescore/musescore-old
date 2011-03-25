@@ -67,7 +67,7 @@ void MeasureProperties::gotoPreviousMeasure()
 void MeasureProperties::setMeasure(Measure* _m)
       {
       m = _m;
-      setWindowTitle(QString(tr("MuseScore: Measure Properties for Measure %1")).arg(m->no()));
+      setWindowTitle(QString(tr("MuseScore: Measure Properties for Measure %1")).arg(m->no()+1));
       actualZ->setValue(m->len().numerator());
       actualN->setValue(m->len().denominator());
       nominalZ->setNum(m->timesig().numerator());

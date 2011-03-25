@@ -501,11 +501,14 @@ int Score::readScore(QString name)
                   }
 
             if (csl == "xml") {
-                  importMusicXml(name);
+                  if (!importMusicXml(name))
+                        return 1;
                   connectSlurs();
                   }
-            else if (csl == "mxl")
-                  importCompressedMusicXml(name);
+            else if (csl == "mxl") {
+                  if (!importCompressedMusicXml(name))
+                        return 1;
+                  }
             else if (csl == "mid" || csl == "midi" || csl == "kar") {
                   if (!importMidi(name))
                         return 1;
