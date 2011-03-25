@@ -2280,15 +2280,13 @@ void EditText::redo()
 void ChangePatch::flip()
       {
       MidiPatch op;
-      op.prog     = channel->program;
-      op.bank     = channel->bank;
-      op.synti    = channel->synti;
+      op.prog          = channel->program;
+      op.bank          = channel->bank;
+      op.synti         = channel->synti;
 
       channel->program = patch.prog;
       channel->bank    = patch.bank;
       channel->synti   = patch.synti;
-
-      patch = op;
 
       Event event(ME_CONTROLLER);
       event.setChannel(channel->channel);
@@ -2306,7 +2304,10 @@ void ChangePatch::flip()
 
       event.setController(CTRL_PROGRAM);
       event.setValue(patch.prog);
+
       seq->sendEvent(event);
+
+      patch = op;
       }
 
 //---------------------------------------------------------

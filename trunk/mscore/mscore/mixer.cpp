@@ -136,7 +136,7 @@ void InstrumentListEditor::updateAll(Score* score)
 
 void InstrumentListEditor::patchListChanged()
       {
-      if(!cs)
+      if (!cs)
             return;
       QString s;
       int idx = 0;
