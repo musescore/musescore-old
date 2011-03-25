@@ -202,6 +202,8 @@ class Text : public Element {
       virtual void styleChanged();
       virtual void setScore(Score* s);
       friend class TextProperties;
+
+      virtual void textChanged()          {}
       };
 
 //---------------------------------------------------------

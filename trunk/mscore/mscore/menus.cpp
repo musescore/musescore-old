@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2010 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -151,6 +151,17 @@ void MuseScore::showPalette(bool visible)
       paletteBox->setShown(visible);
       a->setChecked(visible);
       }
+
+//---------------------------------------------------------
+//   TempoPattern
+//---------------------------------------------------------
+
+struct TempoPattern {
+      QString pattern;
+      double f;
+
+      TempoPattern(const QString& s, double v) : pattern(s), f(v) {}
+      };
 
 //---------------------------------------------------------
 //   populatePalette
@@ -697,14 +708,22 @@ void MuseScore::populatePalette()
       text->setSystemFlag(true);
       sp->append(text, tr("Lyrics Verse Number"));
 
-      TempoText* tt = new TempoText(gscore);
-      tt->setTrack(0);
-      tt->setTempo(80.0/60.0);
-      int uc = 0x1d15f;
-      QChar h(QChar::highSurrogate(uc));
-      QChar l(QChar::lowSurrogate(uc));
-      tt->setText(QString("%1%2 = 80 ").arg(h).arg(l));
-      sp->append(tt, tr("Tempo Text"));
+      static const TempoPattern tp[] = {
+            TempoPattern(QString("%1%2 = 80").  arg(QChar(0xd834)).arg(QChar(0xdd5f)), 80.0/60.0),      // 1/4
+            TempoPattern(QString("%1%2 = 80").  arg(QChar(0xd834)).arg(QChar(0xdd5e)), 80.0/30.0),      // 1/2
+            TempoPattern(QString("%1%2 = 80").  arg(QChar(0xd834)).arg(QChar(0xdd60)), 80.0/120.0),     // 1/8
+            TempoPattern(QString("%1%2%3%4 = 80").arg(QChar(0xd834)).arg(QChar(0xdd5f)).arg(QChar(0xd834)).arg(QChar(0xdd6d)), 120.0/60.0),  // dotted 1/4
+            TempoPattern(QString("%1%2%3%4 = 80").arg(QChar(0xd834)).arg(QChar(0xdd5e)).arg(QChar(0xd834)).arg(QChar(0xdd6d)), 120/30.0),    // dotted 1/2
+            TempoPattern(QString("%1%2%3%4 = 80").arg(QChar(0xd834)).arg(QChar(0xdd60)).arg(QChar(0xd834)).arg(QChar(0xdd6d)), 120/120.0)    // dotted 1/8
+            };
+      for (unsigned i = 0; i < sizeof(tp)/sizeof(*tp); ++i) {
+            TempoText* tt = new TempoText(gscore);
+            tt->setFollowText(true);
+            tt->setTrack(0);
+            tt->setTempo(tp[i].f);
+            tt->setText(tp[i].pattern);
+            sp->append(tt, tr("Tempo Text"));
+            }
 
       paletteBox->addPalette(sp);
 
