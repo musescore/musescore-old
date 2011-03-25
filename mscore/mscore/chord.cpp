@@ -626,7 +626,7 @@ Note* Chord::selectedNote() const
 //   Chord::write
 //---------------------------------------------------------
 
-void Chord::write(Xml& xml, int startTick, int endTick) const
+void Chord::write(Xml& xml) const
       {
       xml.stag("Chord");
       ChordRest::writeProperties(xml);
@@ -665,7 +665,7 @@ void Chord::write(Xml& xml, int startTick, int endTick) const
             case AUTO: break;
             }
       foreach (const Note* n, _notes)
-            n->write(xml, startTick, endTick);
+            n->write(xml);
       if (_arpeggio)
             _arpeggio->write(xml);
       if (_glissando)
