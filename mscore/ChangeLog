@@ -1,4 +1,5 @@
 25.mar (ws)
+      - fix #9901: changing sound in mixer doesn't update properly
       - fix #9916: ties don't copy
       - do not show nonexistant files in "open recent"
       - fix #9919: error on open/read musicxml was not handled
