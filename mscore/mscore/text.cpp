@@ -118,6 +118,7 @@ void Text::setText(const QString& s)
       tf.setFont(font);
       cursor.setBlockCharFormat(tf);
       cursor.insertText(s);
+      textChanged();
       }
 
 void Text::setText(const QTextDocumentFragment& f)
@@ -133,6 +134,7 @@ void Text::setHtml(const QString& s)
       {
       _doc->clear();
       _doc->setHtml(s);
+      textChanged();
       }
 
 //---------------------------------------------------------
@@ -934,6 +936,7 @@ void Text::endEdit()
       delete cursor;
       cursor = 0;
       _editMode = false;
+      textChanged();
       }
 
 //---------------------------------------------------------

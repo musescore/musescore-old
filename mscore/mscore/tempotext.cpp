@@ -34,6 +34,7 @@ TempoText::TempoText(Score* s)
       setSubtype(TEXT_TEMPO);
       setTextStyle(TEXT_STYLE_TEMPO);
       _tempo = 2.0;
+      _followText = false;
       }
 
 //---------------------------------------------------------
@@ -44,6 +45,8 @@ void TempoText::write(Xml& xml) const
       {
       xml.stag("Tempo");
       xml.tag("tempo", _tempo);
+      if (_followText)
+            xml.tag("followText", _followText);
       Text::writeProperties(xml);
       xml.etag();
       }
@@ -60,6 +63,8 @@ void TempoText::read(QDomElement e)
                   _tempo = e.text().toDouble();
                   //Don't need to add to tempo since tempo map is read at the beginning of the file.
                   }
+            else if (tag == "followText")
+                  _followText = e.text().toInt();
             else if (!Text::readProperties(e))
                   domError(e);
             }
@@ -122,6 +127,7 @@ TempoProperties::TempoProperties(TempoText* tt, QWidget* parent)
       setupUi(this);
       tempoText = tt;
       tempo->setValue(tempoText->tempo() * 60.0);
+      followText->setChecked(tempoText->followText());
       connect(this, SIGNAL(accepted()), SLOT(saveValues()));
       }
 
@@ -133,10 +139,53 @@ void TempoProperties::saveValues()
       {
       Score* score    = tempoText->score();
       double newTempo = tempo->value() / 60.0;
-      if (newTempo == tempoText->tempo())
+      if ((newTempo != tempoText->tempo()) || (followText->isChecked() != tempoText->followText())) {
+            TempoText* ntt = new TempoText(*tempoText);
+            ntt->setTempo(newTempo);
+            ntt->setFollowText(followText->isChecked());
+            score->undoChangeElement(tempoText, ntt);
+            }
+      }
+
+//---------------------------------------------------------
+//   TempoPattern
+//---------------------------------------------------------
+
+struct TempoPattern {
+      const char* pattern;
+      double f;
+      TempoPattern(const char* s, double v) : pattern(s), f(v) {}
+      };
+
+//---------------------------------------------------------
+//   textChanged
+//    text may have changed
+//---------------------------------------------------------
+
+void TempoText::textChanged()
+      {
+      if (!_followText)
             return;
-      TempoText* ntt = new TempoText(*tempoText);
-      ntt->setTempo(newTempo);
-      score->undoChangeElement(tempoText, ntt);
+      QString s = getText();
+
+      static const TempoPattern tp[] = {
+            TempoPattern("\\xd834\\xdd5f = (\\d+)", 1.0/60.0),      // 1/4
+            TempoPattern("\\xd834\\xdd5e = (\\d+)", 1.0/30.0),      // 1/2
+            TempoPattern("\\xd834\\xdd60 = (\\d+)", 1.0/120.0),     // 1/8
+            TempoPattern("\\xd834\\xdd5f\\xd834\\xdd6d = (\\d+)", 1.5/60.0),   // dotted 1/4
+            TempoPattern("\\xd834\\xdd5e\\xd834\\xdd6d = (\\d+)", 1.5/30.0),   // dotted 1/2
+            TempoPattern("\\xd834\\xdd60\\xd834\\xdd6d = (\\d+)", 1.5/120.0),  // dotted 1/8
+            };
+
+      for (unsigned i = 0; i < sizeof(tp)/sizeof(*tp); ++i) {
+            QRegExp re(tp[i].pattern);      // 1/4
+            if (re.indexIn(s) != -1) {
+                  QStringList sl = re.capturedTexts();
+                  if (sl.size() == 2) {
+                        _tempo = double(sl[1].toInt()) * tp[i].f;
+                        break;
+                        }
+                  }
+            }
       }
 

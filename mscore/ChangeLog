@@ -1,4 +1,7 @@
 25.mar (ws)
+      - new tempo text palette entries
+      - new tempo text property: "follow text", tempotext is parsed to determine
+        actual tempo.
       - better backward compatibility for copyright text (#9886)
       - fix #9901: changing sound in mixer doesn't update properly
       - fix #9916: ties don't copy
