@@ -573,7 +573,7 @@ void Note::draw(Painter* painter) const
 //   Note::write
 //---------------------------------------------------------
 
-void Note::write(Xml& xml, int /*startTick*/, int endTick) const
+void Note::write(Xml& xml) const
       {
       xml.stag("Note");
       QList<Prop> pl = Element::properties(xml);
@@ -618,11 +618,8 @@ void Note::write(Xml& xml, int /*startTick*/, int endTick) const
                   _dots[i]->write(xml);
             }
 
-      if (_tieFor) {
-            // in clipboardmode write tie only if the next note is < endTick
-            if (!xml.clipboardmode || _tieFor->endNote()->chord()->tick() < endTick)
-                  _tieFor->write(xml);
-            }
+      if (_tieFor)
+            _tieFor->write(xml);
       if (_headGroup != 0)
             xml.tag("head", _headGroup);
       if (_headType != HEAD_AUTO)

@@ -199,8 +199,7 @@ class Note : public Element {
 
       virtual void draw(Painter*) const;
       virtual void read(QDomElement);
-      void write(Xml& xml, int start, int end) const;
-      virtual void write(Xml& xml) const { write(xml, 0, 0); }
+      virtual void write(Xml& xml) const;
 
       QPointF stemPos(bool upFlag) const;    ///< Point to connect stem.
       double stemYoff(bool upFlag) const;

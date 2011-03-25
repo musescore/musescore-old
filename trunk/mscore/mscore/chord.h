@@ -128,8 +128,7 @@ class Chord : public ChordRest {
       virtual void setScore(Score* s);
       virtual ElementType type() const { return CHORD; }
 
-      void write(Xml& xml, int start, int end) const;
-      virtual void write(Xml& xml) const { write(xml, 0, 0); }
+      virtual void write(Xml& xml) const;
       void read(QDomElement, const QList<Tuplet*>&, const QList<Slur*>&);
       virtual void read(QDomElement);
       virtual void setSelected(bool f);
