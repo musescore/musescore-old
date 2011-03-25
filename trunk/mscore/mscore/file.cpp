@@ -1515,8 +1515,12 @@ bool Score::read(QDomElement dScore)
                   }
             else if (tag == "page-layout")
                   pageFormat()->read(ee);
-            else if (tag == "copyright" || tag == "rights")
-                  setMetaTag("copyright", val);
+            else if (tag == "copyright" || tag == "rights") {
+                  Text* text = new Text(this);
+                  text->read(ee);
+                  setMetaTag("copyright", text->getText());
+                  delete text;
+                  }
             else if (tag == "movement-number")
                   setMetaTag("movementNumber", val);
             else if (tag == "movement-title")

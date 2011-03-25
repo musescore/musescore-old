@@ -1,4 +1,5 @@
 25.mar (ws)
+      - better backward compatibility for copyright text (#9886)
       - fix #9901: changing sound in mixer doesn't update properly
       - fix #9916: ties don't copy
       - do not show nonexistant files in "open recent"
