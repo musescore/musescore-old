@@ -1055,21 +1055,26 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                   double y1 = npos.y();
                   double y  = chordUp ? qMin(p1dy, f->p1[idx].y()) : qMax(p1dy, f->p1[idx].y());
 
-// printf("chordUp %d y %f\n", chordUp, y);
                   //  extend stem to farest beam segment
                   qreal x = x2 - parent()->canvasPos().x();
                   foreach(QLineF* l, beamSegments) {
                         if ((l->x1() <= x) && (l->x2() > x)) {
-                              if (chordUp)
-                                    y = qMin(y, l->y1());
-                              else
-                                    y = qMax(y, l->y1());
-// printf("    y %f y1 %f\n", y, l->y1());
+                              if (chordUp) {
+                                    if (l->y1() < y) {
+                                          y  = l->y1();
+                                          x1 = l->x1();
+                                          }
+                                    }
+                              else {
+                                    if (l->y1() > y) {
+                                          y = l->y1();
+                                          x1 = l->x1();
+                                          }
+                                    }
                               }
                         }
                   double y2 = y + (x2 - x1) * slope + canvPos.y();
                   double stemLen = chordUp ? (y1 - y2) : (y2 - y1);
-// printf("len %f  (%f %f) slope %f\n", stemLen, y1, y2, slope);
 
                   stem->setLen(stemLen);
 

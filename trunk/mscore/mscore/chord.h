@@ -35,7 +35,6 @@ class Arpeggio;
 class Tremolo;
 class Chord;
 class Glissando;
-class NoteEvent;
 class Stem;
 class Painter;
 
@@ -102,7 +101,6 @@ class Chord : public ChordRest {
       Tremolo*   _tremolo;
       TremoloChordType _tremoloChordType;
       Glissando* _glissando;
-      QList<NoteEvent*> _playEvents;
       ElementList _el;        ///< chordline
 
       NoteType   _noteType;         ///< mark grace notes: acciaccatura and appoggiatura
@@ -190,9 +188,6 @@ class Chord : public ChordRest {
       virtual void setMag(double val);
       void pitchChanged();
       void renderPlayback();
-      QList<NoteEvent*>& playEvents()                { return _playEvents; }
-      const QList<NoteEvent*>& playEvents() const    { return _playEvents; }
-      void setPlayEvents(const QList<NoteEvent*>& v) { _playEvents = v;    }
       TremoloChordType tremoloChordType() const      { return _tremoloChordType; }
       void setTremoloChordType(TremoloChordType t)   { _tremoloChordType = t; }
 

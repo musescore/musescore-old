@@ -1,6 +1,6 @@
 //=============================================================================
-//  MusE Score
-//  Linux Music Score Editor
+//  MuseScore
+//  Music Composition & Notation
 //  $Id$
 //
 //  Copyright (C) 2002-2011 Werner Schweer and others

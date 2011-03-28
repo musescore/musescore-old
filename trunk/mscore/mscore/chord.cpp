@@ -42,7 +42,6 @@
 #include "utils.h"
 #include "articulation.h"
 #include "preferences.h"
-#include "noteevent.h"
 #include "undo.h"
 #include "chordline.h"
 #include "lyrics.h"
@@ -672,12 +671,6 @@ void Chord::write(Xml& xml) const
             _glissando->write(xml);
       if (_tremolo)
             _tremolo->write(xml);
-      if (!_playEvents.isEmpty()) {
-            xml.stag("Events");
-            foreach(const NoteEvent* e, _playEvents)
-                  e->write(xml);
-            xml.etag();
-            }
       foreach(Element* e, _el)
             e->write(xml);
       xml.etag();
@@ -821,18 +814,6 @@ void Chord::read(QDomElement e, const QList<Tuplet*>& tuplets, const QList<Slur*
                   _stem = new Stem(score());
                   _stem->read(e);
                   add(_stem);
-                  }
-            else if (tag == "Events") {
-                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
-                        QString tag(ee.tagName());
-                        if (tag == "Event") {
-                              NoteEvent* ne = new NoteEvent;
-                              ne->read(ee);
-                              _playEvents.append(ne);
-                              }
-                        else
-                              domError(ee);
-                        }
                   }
             else if (tag == "ChordLine") {
                   ChordLine* cl = new ChordLine(score());
@@ -1684,6 +1665,8 @@ Element* Chord::drop(const DropData& data)
 
 void Chord::renderArticulation(ArticulationType type)
       {
+      printf("TODO: renderArticulation\n");
+#if 0
       int key  = staff()->key(segment()->tick()).accidentalType();
       QList<NoteEvent*> events;
       int pitch     = upNote()->ppitch();
@@ -1711,5 +1694,6 @@ void Chord::renderArticulation(ArticulationType type)
             }
       if (!events.isEmpty())
             score()->undo()->push(new ChangeNoteEvents(this, events));
+#endif
       }
 

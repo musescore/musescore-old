@@ -34,6 +34,7 @@
 
 class Tie;
 class Chord;
+class NoteEvent;
 class Text;
 class Score;
 class Sym;
@@ -127,6 +128,8 @@ class Note : public Element {
       Bend* _bend;
 
       NoteDot* _dots[3];
+
+      QList<NoteEvent*> _playEvents;
 
       int _lineOffset;        ///< Used during mouse dragging.
 
@@ -253,6 +256,9 @@ class Note : public Element {
       void updateAccidental(char* tversatz);
       void updateLine();
       void setNval(NoteVal);
+      QList<NoteEvent*>& playEvents()                { return _playEvents; }
+      const QList<NoteEvent*>& playEvents() const    { return _playEvents; }
+      void setPlayEvents(const QList<NoteEvent*>& v) { _playEvents = v;    }
       };
 
 extern Sym* noteHeadSym(bool up, int group, int n);

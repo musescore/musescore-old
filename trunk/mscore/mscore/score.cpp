@@ -1948,11 +1948,8 @@ void Score::removeElement(Element* element)
                   break;
             case CLEF:
                   {
-                  Clef* clef       = static_cast<Clef*>(element);
-                  Segment* segment = clef->segment();
-//                  Staff* staff     = clef->staff();
-//                  staff->clefList()->remove(segment->tick());
-                  updateNoteLines(segment, clef->track());
+                  Clef* clef = static_cast<Clef*>(element);
+                  updateNoteLines(clef->segment(), clef->track());
                   }
                   break;
             case KEYSIG:

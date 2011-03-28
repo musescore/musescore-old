@@ -1189,12 +1189,8 @@ void Score::deleteItem(Element* el)
                   Rest* rest = static_cast<Rest*>(el);
                   if (rest->tuplet() && rest->tuplet()->elements().empty())
                         undoRemoveElement(rest->tuplet());
-                  if (el->voice() != 0) {
+                  if (el->voice() != 0)
                         undoRemoveElement(el);
-                        Segment* seg = rest->segment();
-                        if (seg->isEmpty())
-                              undoRemoveElement(seg);
-                        }
                   }
                   break;
 
@@ -1217,11 +1213,8 @@ void Score::deleteItem(Element* el)
                   Measure* m   = seg->measure();
                   if (seg->subtype() == SegStartRepeatBarLine)
                         undoChangeRepeatFlags(m, m->repeatFlags() & ~RepeatStart);
-                  else if (seg->subtype() == SegBarLine) {
+                  else if (seg->subtype() == SegBarLine)
                         undoRemoveElement(el);
-                        if (seg->isEmpty())
-                              undoRemoveElement(seg);
-                        }
                   else if (seg->subtype() == SegEndBarLine) {
                         if (m->endBarLineType() != NORMAL_BAR) {
                               undoChangeRepeatFlags(m, m->repeatFlags() & ~RepeatEnd);
@@ -1607,11 +1600,8 @@ printf("createTuplet at %d <%s> duration <%s> ratio <%s> baseLen <%s>\n",
       int track        = ocr->track();
       Measure* measure = ocr->measure();
       int tick         = ocr->tick();
-      Segment* segment = ocr->segment();
 
       undoRemoveElement(ocr);
-      if (segment->isEmpty())
-            undoRemoveElement(segment);
       undoAddElement(tuplet);
 
       ChordRest* cr;

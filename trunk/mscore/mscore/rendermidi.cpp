@@ -140,9 +140,9 @@ static void collectNote(EventMap* events, int channel, const Note* note, int vel
       int onTime  = tick + note->onTimeOffset() + note->onTimeUserOffset();
       int offTime = tick + note->playTicks() + note->offTimeOffset() + note->offTimeUserOffset() - 1;
 
-      if (!note->chord()->playEvents().isEmpty()) {
+      if (!note->playEvents().isEmpty()) {
             int ticks = note->playTicks();
-            foreach(NoteEvent* e, note->chord()->playEvents()) {
+            foreach(NoteEvent* e, note->playEvents()) {
                   int p = pitch + e->pitch();
                   if (p < 0)
                         p = 0;
@@ -155,6 +155,7 @@ static void collectNote(EventMap* events, int channel, const Note* note, int vel
             }
       else
             playNote(events, note, channel, pitch, velo, onTime, offTime);
+#if 0
       if (note->bend()) {
             Bend* bend = note->bend();
             int ticks = note->playTicks();
@@ -206,6 +207,7 @@ static void collectNote(EventMap* events, int channel, const Note* note, int vel
             ev.setValue(0);
             events->insertMulti(tick + ticks, ev);
             }
+#endif
       }
 
 //---------------------------------------------------------
