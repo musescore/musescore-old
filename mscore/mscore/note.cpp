@@ -60,6 +60,8 @@
 #include "bend.h"
 #include "scoreview.h"
 #include "painter.h"
+#include "chordeditor.h"
+#include "noteevent.h"
 
 //---------------------------------------------------------
 //   noteHeads
@@ -630,6 +632,12 @@ void Note::write(Xml& xml) const
             xml.valueTypeTag("veloType", _veloType);
             xml.tag("velocity", _veloOffset);
             }
+      if (!_playEvents.isEmpty()) {
+            xml.stag("Events");
+            foreach(const NoteEvent* e, _playEvents)
+                  e->write(xml);
+            xml.etag();
+            }
       if (_onTimeUserOffset)
             xml.tag("onTimeOffset", _onTimeUserOffset);
       if (_offTimeUserOffset)
@@ -820,6 +828,18 @@ void Note::read(QDomElement e)
                   if (dot) {
                         printf("too many dots\n");
                         delete dot;
+                        }
+                  }
+            else if (tag == "Events") {
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        QString tag(ee.tagName());
+                        if (tag == "Event") {
+                              NoteEvent* ne = new NoteEvent;
+                              ne->read(ee);
+                              _playEvents.append(ne);
+                              }
+                        else
+                              domError(ee);
                         }
                   }
             else if (tag == "onTimeType")                   // obsolete
@@ -1195,6 +1215,8 @@ bool Note::genPropertyMenu(QMenu* popup) const
             a = menuTuplet->addAction(tr("Delete Tuplet"));
             a->setData("tupletDelete");
             }
+      a = popup->addAction(tr("Chord Articulation..."));
+      a->setData("articulation");
       return true;
       }
 
@@ -1246,6 +1268,12 @@ void Note::propertyAction(ScoreView* viewer, const QString& s)
                   int numberType  = vp.numberType();
                   if ((bracketType != tuplet->bracketType()) || (numberType != tuplet->numberType()))
                         score()->undo()->push(new ChangeTupletProperties(tuplet, numberType, bracketType));
+                  }
+            }
+      else if (s == "articulation") {
+            ChordEditor ce(chord());
+            if (ce.exec()) {
+                  printf("chord articulation\n");
                   }
             }
       else if (s == "tupletDelete")

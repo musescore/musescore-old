@@ -1,9 +1,9 @@
 //=============================================================================
-//  MusE Score
-//  Linux Music Score Editor
+//  MuseScore
+//  Music Composition & Notation
 //  $Id:$
 //
-//  Copyright (C) 2009 Werner Schweer and others
+//  Copyright (C) 2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -18,8 +18,8 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __PIANOVIEW_H__
-#define __PIANOVIEW_H__
+#ifndef __CHORDVIEW_H__
+#define __CHORDVIEW_H__
 
 #include "al/pos.h"
 
@@ -29,23 +29,23 @@ class Note;
 class NoteEvent;
 
 //---------------------------------------------------------
-//   PianoItem
+//   ChordItem
 //---------------------------------------------------------
 
-class PianoItem : public QGraphicsRectItem {
+class ChordItem : public QGraphicsRectItem {
       Note*      note;
       NoteEvent* event;
       virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = 0);
 
    public:
-      PianoItem(Note*, NoteEvent*);
+      ChordItem(Note*, NoteEvent*);
       };
 
 //---------------------------------------------------------
-//   PianoView
+//   ChordView
 //---------------------------------------------------------
 
-class PianoView : public QGraphicsView {
+class ChordView : public QGraphicsView {
       Q_OBJECT
 
       Staff* staff;
@@ -78,8 +78,7 @@ class PianoView : public QGraphicsView {
       void moveLocator(int);
 
    public:
-      PianoView();
-      void setStaff(Staff*, AL::Pos* locator);
+      ChordView();
       void setChord(Chord*, AL::Pos* locator);
       void ensureVisible(int tick);
       QList<QGraphicsItem*> items() { return scene()->selectedItems(); }

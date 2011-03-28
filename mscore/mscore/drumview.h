@@ -18,8 +18,8 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __PIANOSCENE_H__
-#define __PIANOSCENE_H__
+#ifndef __DRUMVIEW_H__
+#define __DRUMVIEW_H__
 
 #include "al/pos.h"
 

@@ -614,6 +614,7 @@ Element* ChordRest::drop(const DropData& data)
 
             case CLEF:
                   score()->undoChangeClef(staff(), segment(), static_cast<Clef*>(e)->clefType());
+                  delete e;
                   break;
 
             case TEMPO_TEXT:

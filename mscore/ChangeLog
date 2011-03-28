@@ -1,3 +1,5 @@
+28.mar (ws)
+      - #8993: regression fix for beam layout
 25.mar (ws)
       - new tempo text palette entries
       - new tempo text property: "follow text", tempotext is parsed to determine

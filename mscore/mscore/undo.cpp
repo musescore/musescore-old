@@ -589,8 +589,9 @@ void Score::undoChangeClef(Staff* ostaff, Segment* seg, ClefType st)
             if (firstSeg
                && measure->prevMeasure()
                && !(measure->prevMeasure()->repeatFlags() & RepeatEnd)
-               )   // move clef to last segment of prev measure
+               ) {
                   measure = measure->prevMeasure();
+                  }
 
             int tick = seg->tick();
             Segment* segment = measure->findSegment(seg->segmentType(), seg->tick());
@@ -1191,10 +1192,20 @@ void Score::undoRemoveElement(Element* element)
       else
             elements.append(element);
 
+      QList<Segment*> segments;
       foreach(Element* e, elements) {
             undo()->push(new RemoveElement(e));
-            if (e->type() == KEYSIG)
+            if (e->type() == KEYSIG)                  // TODO: should be done in undo()/redo()
                   e->score()->cmdUpdateNotes();
+            if (!e->isChordRest() && (e->parent()->type() == SEGMENT)) {
+                  Segment* s = static_cast<Segment*>(e->parent());
+                  if (!segments.contains(s))
+                        segments.append(s);
+                  }
+            }
+      foreach(Segment* s, segments) {
+            if (s->isEmpty())
+                  undo()->push(new RemoveElement(s));
             }
       }
 
@@ -2964,9 +2975,10 @@ void ChangeTremoloBar::flip()
 
 void ChangeNoteEvents::flip()
       {
-      QList<NoteEvent*> e = chord->playEvents();
+/*TODO:      QList<NoteEvent*> e = chord->playEvents();
       chord->setPlayEvents(events);
       events = e;
+      */
       }
 
 //---------------------------------------------------------
