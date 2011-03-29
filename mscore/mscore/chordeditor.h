@@ -25,7 +25,7 @@
 
 class ChordView;
 class Chord;
-class Ruler;
+class ChordRuler;
 
 //---------------------------------------------------------
 //   ChordEditor
@@ -36,14 +36,13 @@ class ChordEditor : public QDialog {
 
       ChordView* pianoroll;
       Chord* _chord;
-      Ruler* ruler;
-      AL::Pos locator[3];
 
    private slots:
 //      void keyPressed(int);
 //      void keyReleased(int);
 //      void moveLocator(int);
 //      void cmd(QAction*);
+      virtual void accept();
 
    public slots:
 

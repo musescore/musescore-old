@@ -27,6 +27,28 @@ class Staff;
 class Chord;
 class Note;
 class NoteEvent;
+class ChordItem;
+
+enum { GripTypeItem = QGraphicsItem::UserType, ChordTypeItem };
+
+//---------------------------------------------------------
+//   GripItem
+//---------------------------------------------------------
+
+class GripItem : public QGraphicsRectItem {
+      ChordItem* _event;
+      int _gripType;          // 0 - start grip   1 - end grip
+      virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = 0);
+
+   protected:
+      virtual void mouseMoveEvent(QGraphicsSceneMouseEvent*);
+
+   public:
+      GripItem(int gripType);
+      virtual int type() const    { return GripTypeItem; }
+      ChordItem* event() const    { return _event; }
+      void setEvent(ChordItem* e) { _event = e; }
+      };
 
 //---------------------------------------------------------
 //   ChordItem
@@ -34,11 +56,16 @@ class NoteEvent;
 
 class ChordItem : public QGraphicsRectItem {
       Note*      note;
-      NoteEvent* event;
+      NoteEvent* _event;
+      bool       _current;
       virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = 0);
 
    public:
       ChordItem(Note*, NoteEvent*);
+      virtual int type() const { return ChordTypeItem; }
+      NoteEvent* event()       { return _event; }
+      bool current() const     { return _current; }
+      void setCurrent(bool v);
       };
 
 //---------------------------------------------------------
@@ -48,20 +75,21 @@ class ChordItem : public QGraphicsRectItem {
 class ChordView : public QGraphicsView {
       Q_OBJECT
 
-      Staff* staff;
       Chord* chord;
-      AL::Pos pos;
-      AL::Pos* _locator;
-      QGraphicsLineItem* locatorLines[3];
+      int _locator;
+      int _pos;
+      QGraphicsLineItem* locatorLine;
       int ticks;
-      AL::TType _timeType;
       int magStep;
+      GripItem* lg;
+      GripItem* rg;
+      ChordItem* curEvent;
+
+      bool _evenGrid;
 
       virtual void drawBackground(QPainter* painter, const QRectF& rect);
 
       int y2pitch(int y) const;
-      AL::Pos pix2pos(int x) const;
-      int pos2pix(const AL::Pos& p) const;
 
    protected:
       virtual void wheelEvent(QWheelEvent* event);
@@ -72,17 +100,21 @@ class ChordView : public QGraphicsView {
       void magChanged(double, double);
       void xposChanged(int);
       void pitchChanged(int);
-      void posChanged(const AL::Pos&);
+      void posChanged(int);
 
    public slots:
-      void moveLocator(int);
+      void moveLocator();
+      void selectionChanged();
 
    public:
       ChordView();
-      void setChord(Chord*, AL::Pos* locator);
+      void setChord(Chord*);
       void ensureVisible(int tick);
       QList<QGraphicsItem*> items() { return scene()->selectedItems(); }
+      bool evenGrid() const         { return _evenGrid; }
+      void setEvenGrid(bool val)    { _evenGrid = val;  }
+      static int pos2pix(int pos);
+      static int pix2pos(int pix);
       };
-
 
 #endif

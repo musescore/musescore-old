@@ -131,6 +131,7 @@
 #include <QtGui/QTextEdit>
 #include <QtGui/QMdiSubWindow>
 #include <QtGui/QSpacerItem>
+#include <QtGui/QGraphicsSceneMouseEvent>
 
 #include <QtSvg/QSvgRenderer>
 #include <QtSvg/QSvgGenerator>

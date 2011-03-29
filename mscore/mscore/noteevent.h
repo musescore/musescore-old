@@ -39,12 +39,12 @@ class NoteEvent {
       void read(QDomElement);
       void write(Xml& xml) const;
 
-      char pitch() const    { return _pitch; }
-      int ontime() const    { return _ontime; }
-      int len() const       { return _len; }
-      void setPitch(int v)  { _pitch = v; }
-      void setOntime(int v) { _ontime = v; }
-      void setLen(int v)    { _len = v;    }
+      char pitch() const     { return _pitch; }
+      int ontime() const     { return _ontime; }
+      int len() const        { return _len; }
+      void setPitch(int v)   { _pitch = v; }
+      void setOntime(int v)  { _ontime = v; }
+      void setLen(int v)     { _len = v;    }
       };
 
 
