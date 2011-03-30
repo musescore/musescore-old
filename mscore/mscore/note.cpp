@@ -1280,10 +1280,8 @@ void Note::propertyAction(ScoreView* viewer, const QString& s)
             Chord* nc = new Chord(*chord());
             ChordEditor ce(nc);
             mscore->disableCommands(true);
-            if (ce.exec()) {
+            if (ce.exec())
                   score()->undoChangeElement(chord(), nc);
-                  printf("chord articulation\n");
-                  }
             else
                   delete nc;
             mscore->disableCommands(false);

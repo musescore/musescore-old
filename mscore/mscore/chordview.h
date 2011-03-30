@@ -129,6 +129,7 @@ class ChordView : public QGraphicsView {
       static int pos2pix(int pos);
       static int pix2pos(int pix);
       static int y2pitch(int pix);
+      static int pitch2y(int pitch);
       };
 
 #endif

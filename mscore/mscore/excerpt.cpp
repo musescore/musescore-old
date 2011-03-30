@@ -250,7 +250,7 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
                      m->endBarLineVisible(),
                      m->endBarLineColor());
 
-                  Fraction ts = nm->len();
+                  // Fraction ts = nm->len();
                   for (int track = 0; track < tracks; ++track) {
                         TupletMap tupletMap;    // tuplets cannot cross measure boundaries
                         int srcTrack = map[track/VOICES] * VOICES + (track % VOICES);

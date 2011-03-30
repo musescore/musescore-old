@@ -1307,6 +1307,15 @@ void ScoreView::moveCursor(Segment* segment, int track)
       }
 
 //---------------------------------------------------------
+//   cursorTick
+//---------------------------------------------------------
+
+int ScoreView::cursorTick() const
+      {
+      return cursorSegment ? cursorSegment->tick() : 0;
+      }
+
+//---------------------------------------------------------
 //   setCursorOn
 //---------------------------------------------------------
 
@@ -1464,7 +1473,7 @@ void ScoreView::paint(const QRect& rr, QPainter& p)
                   //
                   // show page margins
                   //
-                  QRectF bpr = pr.adjusted(page->lm(), page->tm(), -page->rm(), -page->bm());
+//                  QRectF bpr = pr.adjusted(page->lm(), page->tm(), -page->rm(), -page->bm());
                   p.setPen(QPen(Qt::gray));
             //      p.drawRect(bpr);
                   p.drawRect(fr);

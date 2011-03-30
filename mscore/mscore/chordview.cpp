@@ -30,15 +30,6 @@ static const int CHORD_MAP_OFFSET = 50;
 static const int grip = 7;
 
 //---------------------------------------------------------
-//   pitch2y
-//---------------------------------------------------------
-
-static int pitch2y(int pitch)
-      {
-      return keyHeight * (128 + pitch);
-      }
-
-//---------------------------------------------------------
 //   GripItem
 //---------------------------------------------------------
 
@@ -111,7 +102,7 @@ ChordItem::ChordItem(Note* n, NoteEvent* e)
       setSelected(n->selected());
       setData(0, QVariant::fromValue<void*>(n));
 
-      setPos(ChordView::pos2pix(e->ontime()), pitch2y(pitch) + keyHeight / 4);
+      setPos(ChordView::pos2pix(e->ontime()), ChordView::pitch2y(pitch) + keyHeight / 4);
       }
 
 //---------------------------------------------------------
@@ -122,7 +113,7 @@ void ChordItem::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
       {
       QPointF np = mapToScene(event->pos());
       int pitch  = ChordView::y2pitch(np.y());
-      int y = pitch2y(pitch);
+      int y = ChordView::pitch2y(pitch);
       setPos(pos().x(), y + keyHeight / 4);
       _event->setPitch(pitch);
       }
@@ -436,7 +427,16 @@ void ChordView::wheelEvent(QWheelEvent* event)
 
 int ChordView::y2pitch(int y)
       {
-      return (y / keyHeight) - 128;
+      return 128 - (y / keyHeight);
+      }
+
+//---------------------------------------------------------
+//   pitch2y
+//---------------------------------------------------------
+
+int ChordView::pitch2y(int pitch)
+      {
+      return keyHeight * (128 - pitch);
       }
 
 //---------------------------------------------------------
@@ -541,7 +541,6 @@ int ChordView::pix2pos(int pix)
 void ChordView::selectionChanged()
       {
       QList<QGraphicsItem*> items = scene()->selectedItems();
-printf("selectionChanged %d\n", items.size());
       if (items.isEmpty())
             setCurItem(0);
       else {

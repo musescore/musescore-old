@@ -1,4 +1,5 @@
 30.mar (ws)
+      - fix: dont jump cursor back during playback
       - first code for chord articulation editor
 28.mar (ws)
       - #8993: regression fix for beam layout
