@@ -1,3 +1,5 @@
+30.mar (la)
+      - fix #9919: error on open/read musicxml was not handled
 23.mar (la)
       - fix #9883: Insert vertical frame between two parts of the same line (volta, cresc) causes crash
 22.mar (la)

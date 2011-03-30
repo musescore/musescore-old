@@ -35,10 +35,10 @@ class LoadFile {
    public:
       LoadFile() {}
       virtual ~LoadFile() {}
-      virtual bool loader(QFile* f) = 0;
+      virtual bool loader(QFile* f) = 0;    // return false on error
       bool load(QWidget* parent, const QString& base, const QString& ext,
-         const QString& caption);
-      bool load(const QString& name);
+         const QString& caption);         // return false on error
+      bool load(const QString& name);     // return false on error
       QString name() const { return _name; }
       };
 

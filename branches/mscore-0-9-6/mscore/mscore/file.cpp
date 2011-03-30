@@ -83,7 +83,7 @@
  working directory \a base
  and filter \a ext.
  If a file is selected, load it.
- Return false if OK and true on error.
+ Return true if OK and false on error.
  */
 
 bool LoadFile::load(QWidget* parent, const QString& base, const QString& ext,
@@ -93,7 +93,7 @@ bool LoadFile::load(QWidget* parent, const QString& base, const QString& ext,
       _name = QFileDialog::getOpenFileName(parent, caption, base, ext);
 
       if (_name.isEmpty())
-            return true;
+            return false;
       QFileInfo info(_name);
 
       if (info.suffix().isEmpty()) {
@@ -106,13 +106,13 @@ bool LoadFile::load(QWidget* parent, const QString& base, const QString& ext,
 /**
  Load file \a name.
  Display message box with error if loading fails.
- Return false if OK and true on error.
+ Return true if OK and false on error.
  */
 
 bool LoadFile::load(const QString& name)
       {
       if (name.isEmpty())
-            return true;
+            return false;
 
       QFile fp(name);
       if (!fp.open(QIODevice::ReadOnly)) {
@@ -120,16 +120,18 @@ bool LoadFile::load(const QString& name)
                QWidget::tr("MuseScore: file not found:"),
                name,
                QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
-            return true;
+            return false;
             }
-      if (loader(&fp)) {
+      if (!loader(&fp)) {
             QMessageBox::warning(0,
                QWidget::tr("MuseScore: load failed:"),
                error,
                QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
+               fp.close();
+               return false;
             }
       fp.close();
-      return false;
+      return true;
       }
 
 //---------------------------------------------------------
@@ -1190,7 +1192,7 @@ bool Score::loadMsc(QString name)
 
 //---------------------------------------------------------
 //   read
-//    return false on error
+//    return false on error, return true on success
 //---------------------------------------------------------
 
 bool Score::read(QDomElement e)

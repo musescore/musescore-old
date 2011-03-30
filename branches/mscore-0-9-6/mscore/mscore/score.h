@@ -544,8 +544,8 @@ class Score : public QObject {
 
       bool loadMsc(QString name);
       bool loadCompressedMsc(QString name);
-      void importMusicXml(const QString&);
-      void importCompressedMusicXml(const QString&);
+      bool importMusicXml(const QString&);
+      bool importCompressedMusicXml(const QString&);
       bool importMidi(const QString& name);
       bool importMuseData(const QString& name);
       bool importLilypond(const QString& name);
