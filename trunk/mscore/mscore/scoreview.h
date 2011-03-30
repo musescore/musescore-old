@@ -273,6 +273,7 @@ class ScoreView : public QWidget {
       void startEdit(Element*);
 
       void moveCursor(Segment*, int staffIdx);
+      int cursorTick() const;
       void setCursorOn(bool);
       void setBackground(QPixmap*);
       void setBackground(const QColor&);

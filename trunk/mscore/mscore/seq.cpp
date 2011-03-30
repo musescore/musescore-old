@@ -740,13 +740,16 @@ void Seq::heartBeat()
                   }
             }
       if (note) {
-            mscore->currentScoreView()->moveCursor(note->chord()->segment(), -1);
-            cv->adjustCanvasPosition(note, true);
-            curTick  = note->chord()->tick();
-            curUtick = guiPos.key();
-            if (pp)
-                  pp->heartBeat(curTick, curUtick);
-            mscore->setPos(curTick);
+            curTick = note->chord()->tick();
+            ScoreView* sv = mscore->currentScoreView();
+            if (curTick > sv->cursorTick()) {
+                  sv->moveCursor(note->chord()->segment(), -1);
+                  cv->adjustCanvasPosition(note, true);
+                  curUtick = guiPos.key();
+                  if (pp)
+                        pp->heartBeat(curTick, curUtick);
+                  mscore->setPos(curTick);
+                  }
             }
       PianorollEditor* pre = mscore->getPianorollEditor();
       if (pre && pre->isVisible())
