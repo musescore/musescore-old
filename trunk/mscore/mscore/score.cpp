@@ -508,6 +508,7 @@ int Score::readScore(QString name)
             else if (csl == "mxl") {
                   if (!importCompressedMusicXml(name))
                         return 1;
+                  connectSlurs();
                   }
             else if (csl == "mid" || csl == "midi" || csl == "kar") {
                   if (!importMidi(name))

@@ -365,6 +365,8 @@ void EditStaff::editStringDataClicked()
       if (esd->exec()) {
             Tablature * tab = new Tablature(frets, stringList);
             instrument.setTablature(tab);
+            int numStr = tab ? tab->strings() : 0;
+            numOfStrings->setText(QString::number(numStr));
             }
       }
 

@@ -88,7 +88,7 @@ void EditStringData::deleteStringClicked()
 
       // remove item from local string list and from dlg list control
       _stringsLoc.removeAt(i);
-      stringList->removeItemWidget(stringList->item(i));
+      stringList->model()->removeRow(i);
       // if no more items, disable buttons acting on individual string
       if (stringList->count() == 0) {
             editString->setEnabled(false);
