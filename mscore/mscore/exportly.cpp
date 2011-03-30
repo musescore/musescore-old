@@ -945,7 +945,7 @@ void ExportLy::tempoText(TempoText* text)
 	QString temptekst = text->getText();
 	double met = text->tempo();
 	int metronome;
-	metronome = (int) met * 60;
+	metronome = (int) (met * 60);
 	out << "\\tempo \""  << text->getText() << "\" " <<  timedenom << " = " << metronome << "  ";
       }
 
