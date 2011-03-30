@@ -62,6 +62,7 @@
 #include "painter.h"
 #include "chordeditor.h"
 #include "noteevent.h"
+#include "mscore.h"
 
 //---------------------------------------------------------
 //   noteHeads
@@ -178,6 +179,8 @@ Note::~Note()
       delete _accidental;
       foreach(Element* e, _el)
             delete e;
+      foreach(NoteEvent* e, _playEvents)
+            delete e;
       delete _tieFor;
       delete _bend;
       delete _dots[0];
@@ -216,6 +219,9 @@ Note::Note(const Note& n)
 
       foreach(Element* e, n._el)
             add(e->clone());
+      _playEvents.clear();
+      foreach(NoteEvent* e, n._playEvents)
+            _playEvents.append(new NoteEvent(*e));
 
 //      _tieFor            = 0;
 //      _tieBack           = 0;
@@ -1271,10 +1277,16 @@ void Note::propertyAction(ScoreView* viewer, const QString& s)
                   }
             }
       else if (s == "articulation") {
-            ChordEditor ce(chord());
+            Chord* nc = new Chord(*chord());
+            ChordEditor ce(nc);
+            mscore->disableCommands(true);
             if (ce.exec()) {
+                  score()->undoChangeElement(chord(), nc);
                   printf("chord articulation\n");
                   }
+            else
+                  delete nc;
+            mscore->disableCommands(false);
             }
       else if (s == "tupletDelete")
             score()->cmdDeleteTuplet(chord()->tuplet(), true);

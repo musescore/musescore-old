@@ -24,6 +24,7 @@
 #include "note.h"
 #include "noteevent.h"
 #include "preferences.h"
+#include "mscore.h"
 
 static const int CHORD_MAP_OFFSET = 50;
 static const int grip = 7;
@@ -41,12 +42,13 @@ static int pitch2y(int pitch)
 //   GripItem
 //---------------------------------------------------------
 
-GripItem::GripItem(int type)
+GripItem::GripItem(int type, ChordView* v)
    : QGraphicsRectItem()
       {
       _gripType = type;
-      setFlags(flags() | QGraphicsItem::ItemIsSelectable | QGraphicsItem::ItemIsFocusable
-         | QGraphicsItem::ItemIgnoresTransformations | QGraphicsItem::ItemIsMovable);
+      _view     = v;
+      setFlags(flags() | ItemIsSelectable | ItemIsFocusable
+         | ItemIgnoresTransformations | ItemIsMovable);
       setRect(-grip, -grip, grip*2, grip*2);
       setPos(0, 0);
       _event = 0;
@@ -72,20 +74,22 @@ void GripItem::paint(QPainter* p, const QStyleOptionGraphicsItem*, QWidget*)
 void GripItem::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
       {
       QPointF np = mapToScene(event->pos());
-      qreal x = np.x();
-      setPos(x, pos().y());
       if (_event) {
-            x = ChordView::pix2pos(x);
             NoteEvent* ne = _event->event();
             if (_gripType == 0) {
-                  int x2 = ne->ontime() + ne->len();
+                  qreal x = ChordView::pix2pos(np.x());
+                  int x2  = ne->ontime() + ne->len();
                   ne->setOntime(x);
                   ne->setLen(x2 - x);
                   _event->setPos(ChordView::pos2pix(x), _event->pos().y());
+                  setPos(0.0, pos().y());
+                  GripItem* rg = _view->rightGrip();
+                  rg->setPos(x2-x, rg->pos().y());
                   }
             else {
-                  int len = x - ne->ontime();
-                  _event->event()->setLen(len);
+                  qreal x = np.x() - _event->pos().x();
+                  setPos(x, pos().y());
+                  _event->event()->setLen(x);
                   }
             _event->update();
             }
@@ -96,12 +100,11 @@ void GripItem::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
 //---------------------------------------------------------
 
 ChordItem::ChordItem(Note* n, NoteEvent* e)
-   : QGraphicsRectItem(), note(n), _event(e)
+   : QGraphicsRectItem(), _note(n), _event(e)
       {
-      setFlags(flags() | QGraphicsItem::ItemIsSelectable);
+      setFlags(flags() | ItemIsSelectable | ItemIsMovable);
       _current  = false;
       int pitch = _event->pitch();
-      int x1    = 0;
       int len   = _event->len();
       setRect(0, 0, len, keyHeight/2);
       setBrush(QBrush());
@@ -109,6 +112,19 @@ ChordItem::ChordItem(Note* n, NoteEvent* e)
       setData(0, QVariant::fromValue<void*>(n));
 
       setPos(ChordView::pos2pix(e->ontime()), pitch2y(pitch) + keyHeight / 4);
+      }
+
+//---------------------------------------------------------
+//   mouseMoveEvent
+//---------------------------------------------------------
+
+void ChordItem::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
+      {
+      QPointF np = mapToScene(event->pos());
+      int pitch  = ChordView::y2pitch(np.y());
+      int y = pitch2y(pitch);
+      setPos(pos().x(), y + keyHeight / 4);
+      _event->setPitch(pitch);
       }
 
 //---------------------------------------------------------
@@ -143,17 +159,22 @@ ChordView::ChordView()
       setScene(new QGraphicsScene);
       setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
       setResizeAnchor(QGraphicsView::AnchorUnderMouse);
-      setMouseTracking(true);
+      // setMouseTracking(true);
       setRubberBandSelectionMode(Qt::IntersectsItemBoundingRect);
       setDragMode(QGraphicsView::RubberBandDrag);
       magStep   = 2;
       chord     = 0;
+      curNote   = 0;
       _evenGrid = true;
       lg        = 0;
       rg        = 0;
       curEvent  = 0;
+      ticks     = 1000;
 
       scale(6.0, 1.0);
+      QAction* a = getAction("delete");
+      addAction(a);
+      connect(a, SIGNAL(activated()), SLOT(deleteItem()));
       connect(scene(), SIGNAL(selectionChanged()), SLOT(selectionChanged()));
       }
 
@@ -165,17 +186,23 @@ void ChordView::drawBackground(QPainter* p, const QRectF& r)
       {
       if (chord == 0)
             return;
-      QRectF r1;
-      r1.setCoords(-1000000.0, 0.0, CHORD_MAP_OFFSET, 1000000.0);
-      QRectF r2;
-      r2.setCoords(ticks + CHORD_MAP_OFFSET, 0.0, 1000000.0, 1000000.0);
+      QRectF r1(-1000000.0,               0.0, 1000000.0+CHORD_MAP_OFFSET, 1000000.0);
+      QRectF r2(ticks + CHORD_MAP_OFFSET, 0.0, 1000000.0, 1000000.0);
+      QRectF r3(-1000000.0,     128*keyHeight, 1000000.0+CHORD_MAP_OFFSET, keyHeight);
+      QRectF r4(ticks + CHORD_MAP_OFFSET,  128*keyHeight, 1000000.0,        keyHeight);
+
       QColor bg(0x71, 0x8d, 0xbe);
+      QColor bg1 = bg.darker(150);
+      QColor bg2 = bg.lighter(150);
+      QColor bg3 = bg.darker(75);
 
       p->fillRect(r, bg);
-      if (r.intersects(r1))
-            p->fillRect(r.intersected(r1), bg.darker(150));
-      if (r.intersects(r2))
-            p->fillRect(r.intersected(r2), bg.darker(150));
+      p->fillRect(r.intersected(r1), bg1);
+      p->fillRect(r.intersected(r2), bg1);
+
+      p->fillRect(QRect(CHORD_MAP_OFFSET, 128*keyHeight, 1000, keyHeight), bg2);
+      p->fillRect(r.intersected(r3), bg3);
+      p->fillRect(r.intersected(r4), bg3);
 
       //---------------------------------------------------
       // draw horizontal grid lines
@@ -265,22 +292,21 @@ void ChordView::setChord(Chord* c)
                   scene()->addItem(item);
                   }
             }
-      lg = new GripItem(0);
-      rg = new GripItem(1);
+      curNote = c->notes().front();
+      lg = new GripItem(0, this);
+      rg = new GripItem(1, this);
+      lg->setZValue(100);
+      rg->setZValue(101);
       lg->setVisible(false);
       rg->setVisible(false);
       scene()->addItem(lg);
       scene()->addItem(rg);
 
       scene()->blockSignals(false);
-      if (curEvent) {
-            curEvent->setSelected(true);
-            curEvent->setCurrent(true);
-            }
-      selectionChanged();
+      setCurItem(curEvent);
+      // selectionChanged();
 
 
-      ticks = 1000;
       scene()->setSceneRect(0.0, 0.0, double(ticks + CHORD_MAP_OFFSET * 2), keyHeight * 256);
 
       moveLocator();
@@ -408,9 +434,43 @@ void ChordView::wheelEvent(QWheelEvent* event)
 //   y2pitch
 //---------------------------------------------------------
 
-int ChordView::y2pitch(int y) const
+int ChordView::y2pitch(int y)
       {
       return (y / keyHeight) - 128;
+      }
+
+//---------------------------------------------------------
+//   mousePressEvent
+//---------------------------------------------------------
+
+void ChordView::mousePressEvent(QMouseEvent* event)
+      {
+      if (event->modifiers() & Qt::ControlModifier) {
+            QPointF p(mapToScene(event->pos()));
+            int pitch = y2pitch(int(p.y()));
+            int tick  = int(p.x()) - CHORD_MAP_OFFSET;
+            int ticks = 1000 - tick;
+            foreach(NoteEvent* e, curNote->playEvents()) {
+                  if (e->pitch() != pitch)
+                        continue;
+                  if (tick >= e->ontime() && tick < e->offtime()) {
+                        return;     // cannot place an event here
+                        }
+                  int nticks = e->ontime() - tick;
+                  if (nticks > 0)
+                        ticks = qMin(ticks, nticks);
+                  }
+
+            NoteEvent* ne = new NoteEvent;
+            ne->setPitch(pitch);
+            ne->setOntime(tick);
+            ne->setLen(ticks);
+            curNote->playEvents().append(ne);
+            ChordItem* item = new ChordItem(curNote, ne);
+            scene()->addItem(item);
+            setCurItem(item);
+            }
+      QGraphicsView::mousePressEvent(event);
       }
 
 //---------------------------------------------------------
@@ -481,39 +541,59 @@ int ChordView::pix2pos(int pix)
 void ChordView::selectionChanged()
       {
       QList<QGraphicsItem*> items = scene()->selectedItems();
-      if (items.isEmpty()) {
-            if (curEvent) {
-                  curEvent->setCurrent(false);
-                  curEvent = 0;
-                  }
-            lg->setVisible(false);
-            rg->setVisible(false);
-            lg->setEvent(0);
-            rg->setEvent(0);
-            }
+printf("selectionChanged %d\n", items.size());
+      if (items.isEmpty())
+            setCurItem(0);
       else {
             QGraphicsItem* item = items[0];
             if (item->type() == ChordTypeItem) {
                   ChordItem* ci = static_cast<ChordItem*>(item);
-                  if (curEvent)
-                        curEvent->setCurrent(false);
-                  curEvent = ci;
-                  curEvent->setCurrent(true);
-                  NoteEvent* event = ci->event();
-                  int len = event->len();
-                  int x1  = event->ontime();
-                  int x2  = x1 + len;
-                  int y   = pitch2y(event->pitch()) + keyHeight / 2;
-
-                  lg->setEvent(curEvent);
-                  rg->setEvent(curEvent);
-
-                  lg->setPos(ChordView::pos2pix(x1), y);
-                  rg->setPos(ChordView::pos2pix(x2), y);
-
-                  lg->setVisible(true);
-                  rg->setVisible(true);
+                  setCurItem(ci);
                   }
+            }
+      }
+
+//---------------------------------------------------------
+//   deleteItem
+//---------------------------------------------------------
+
+void ChordView::deleteItem()
+      {
+      QList<QGraphicsItem*> items = scene()->selectedItems();
+      foreach(QGraphicsItem* item, items) {
+            if (item->type() == ChordTypeItem) {
+                  ChordItem* ci = static_cast<ChordItem*>(item);
+                  if (curEvent == ci)
+                        setCurItem(0);
+                  NoteEvent* event = ci->event();
+                  ci->note()->playEvents().removeOne(event);
+
+                  scene()->removeItem(item);
+                  delete item;
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   setCurItem
+//---------------------------------------------------------
+
+void ChordView::setCurItem(ChordItem* item)
+      {
+      if (curEvent)
+            curEvent->setCurrent(false);
+      curEvent = item;
+      bool visible = item != 0;
+      lg->setVisible(visible);
+      rg->setVisible(visible);
+      lg->setEvent(item);
+      rg->setEvent(item);
+      lg->setParentItem(item);
+      rg->setParentItem(item);
+      if (visible) {
+            lg->setPos(0,   keyHeight / 4);
+            rg->setPos(item->event()->len(), keyHeight / 4);
+            item->setCurrent(true);
             }
       }
 

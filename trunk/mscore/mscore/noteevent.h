@@ -41,6 +41,7 @@ class NoteEvent {
 
       char pitch() const     { return _pitch; }
       int ontime() const     { return _ontime; }
+      int offtime() const    { return _ontime + _len; }
       int len() const        { return _len; }
       void setPitch(int v)   { _pitch = v; }
       void setOntime(int v)  { _ontime = v; }
