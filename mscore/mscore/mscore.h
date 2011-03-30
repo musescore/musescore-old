@@ -304,6 +304,8 @@ class MuseScore : public QMainWindow {
       QActionGroup* profiles;
       QAction* deleteProfileAction;
 
+      bool inChordEditor;
+
       //---------------------
 
       virtual void closeEvent(QCloseEvent*);
@@ -502,6 +504,7 @@ class MuseScore : public QMainWindow {
       bool vRaster() const { return vRasterAction->isChecked(); }
 
       PaletteBox* getPaletteBox();
+      void disableCommands(bool val) { inChordEditor = val; }
       };
 
 extern MuseScore* mscore;

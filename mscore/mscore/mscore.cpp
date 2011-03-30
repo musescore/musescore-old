@@ -383,6 +383,7 @@ MuseScore::MuseScore()
       loadChordStyleDialog  = 0;
       saveChordStyleDialog  = 0;
       editRasterDialog      = 0;
+      inChordEditor         = false;
 
       profiles              = 0;
 
@@ -2336,6 +2337,8 @@ bool MuseScore::readLanguages(const QString& path)
 
 void MuseScore::cmd(QAction* a)
       {
+      if (inChordEditor)      // HACK
+            return;
       static QAction* lastCmd;
 
       QString cmd(a->data().toString());
