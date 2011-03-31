@@ -1331,7 +1331,7 @@ void ScoreView::chordTab(bool back)
       measure         = segment->measure();
       ElementList* el = measure->el();
       foreach(Element* e, *el) {
-            if (e->type() == HARMONY && e->tick() == segment->tick()) {
+            if (e->type() == HARMONY && e->tick() == segment->tick() && e->track() == track) {
                   cn = static_cast<Harmony*>(e);
                   break;
                   }

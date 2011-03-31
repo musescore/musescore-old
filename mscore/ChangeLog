@@ -1,3 +1,5 @@
+31.mar (la)
+      - fix #9996: Chord navigation does not work on multistaff
 30.mar (la)
       - fix #9919: error on open/read musicxml was not handled
 23.mar (la)
