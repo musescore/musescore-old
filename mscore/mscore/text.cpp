@@ -336,10 +336,10 @@ void Text::layout(double layoutWidth, double x, double y)
             double w = (paddingWidth() + frameWidth() * .5) * DPMM;
             frame.adjust(-w, -w, w, w);
             w = frameWidth() * DPMM;
-            _bbox = frame.adjusted(-w, -w, w, w);
+            setbbox(frame.adjusted(-w, -w, w, w));
             }
       else {
-            _bbox = QRectF(QPointF(0.0, 0.0), _doc->size());
+            setbbox(QRectF(QPointF(0.0, 0.0), _doc->size()));
             }
       _doc->setModified(false);
       style().layout(this);      // process alignment

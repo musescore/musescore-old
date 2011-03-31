@@ -474,8 +474,8 @@ QPointF Note::stemPos(bool upFlag) const
 
       double sw   = point(score()->styleS(ST_stemWidth)) * .5;
       if (chord() && chord()->staff() && chord()->staff()->useTablature()) {
-            double xoffset = (sw + _bbox.width() + _bbox.x()) * .5;
-            pt += QPointF(xoffset, (_bbox.height() * .5 + spatium() * .5) * (upFlag ? -1.0 : 1.0));
+            double xoffset = (sw + bbox().width() + bbox().x()) * .5;
+            pt += QPointF(xoffset, (bbox().height() * .5 + spatium() * .5) * (upFlag ? -1.0 : 1.0));
             }
       else {
             QPointF off = symbols[score()->symIdx()][noteHead()].attach(magS());
@@ -549,7 +549,7 @@ void Note::draw(Painter* painter) const
                               p.setPen(oldPen);
                               }
                         }
-                  p.drawText(_bbox.x(), tab->fretFontYOffset() * mag, s);
+                  p.drawText(bbox().x(), tab->fretFontYOffset() * mag, s);
                   p.scale(imag, imag);
                   }
             else {                        // if not tablature
@@ -1310,10 +1310,10 @@ void Note::layout()
             QString s = _ghost ? "X" :
                         ( tab->useNumbers() ? QString::number(_fret) : QString('a' + _fret + (_fret > 8)) );
             double w = fm.width(s) * mags;
-            _bbox = QRectF(0.0, tab->fretBoxY() * mags, w, tab->fretBoxH() * mags);
+            setbbox(QRectF(0.0, tab->fretBoxY() * mags, w, tab->fretBoxH() * mags));
             }
       else
-            _bbox = symbols[score()->symIdx()][noteHead()].bbox(magS());
+            setbbox(symbols[score()->symIdx()][noteHead()].bbox(magS()));
       if (parent() == 0)
             return;
       foreach (Element* e, _el) {

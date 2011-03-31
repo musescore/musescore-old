@@ -115,12 +115,12 @@ void KeySig::addLayout(int sym, double x, int line)
 void KeySig::layout()
       {
       double _spatium = spatium();
-      _bbox           = QRectF(0, 0, 0, 0);
+      setbbox(QRectF());
 
       if (isCustom()) {
             foreach(KeySym* ks, keySymbols) {
                   ks->pos = ks->spos * _spatium;
-                  _bbox |= symbols[score()->symIdx()][ks->sym].bbox(magS()).translated(ks->pos);
+                  addbbox(symbols[score()->symIdx()][ks->sym].bbox(magS()).translated(ks->pos));
                   }
             return;
             }
@@ -206,7 +206,7 @@ void KeySig::layout()
             }
       foreach(KeySym* ks, keySymbols) {
             ks->pos = ks->spos * _spatium;
-            _bbox |= symbols[score()->symIdx()][ks->sym].bbox(magS()).translated(ks->pos);
+            addbbox(symbols[score()->symIdx()][ks->sym].bbox(magS()).translated(ks->pos));
             }
       }
 

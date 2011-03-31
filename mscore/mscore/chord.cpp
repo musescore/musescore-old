@@ -81,7 +81,7 @@ void StemSlash::setLine(const QLineF& l)
       {
       line = l;
       double w = point(score()->styleS(ST_stemWidth)) * .5;
-      _bbox = QRectF(line.p1(), line.p2()).normalized().adjusted(-w, w, 2.0*w, 2.0*w);
+      setbbox(QRectF(line.p1(), line.p2()).normalized().adjusted(-w, w, 2.0*w, 2.0*w));
       }
 
 //---------------------------------------------------------

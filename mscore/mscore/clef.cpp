@@ -308,10 +308,10 @@ void Clef::layout()
       symbol->setMag(smag * mag());
       symbol->layout();
       add(symbol, .0, yoff * _spatium);
-      _bbox = QRectF();
+      setbbox(QRectF());
       for (iElement i = elements.begin(); i != elements.end(); ++i) {
             Element* e = *i;
-            _bbox |= e->bbox().translated(e->pos());
+            addbbox(e->bbox().translated(e->pos()));
             }
       }
 

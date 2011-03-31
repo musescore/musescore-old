@@ -1065,11 +1065,11 @@ void Compound::addElement(Element* e, double x, double y)
 
 void Compound::layout()
       {
-      _bbox = QRectF();
+      setbbox(QRectF());
       for (iElement i = elemente.begin(); i != elemente.end(); ++i) {
             Element* e = *i;
             e->layout();
-            _bbox |= e->bbox().translated(e->pos());
+            addbbox(e->bbox().translated(e->pos()));
             }
       }
 

@@ -206,7 +206,7 @@ void Symbol::layout()
             e->layout();
       ElementLayout::layout(this);
       BSymbol::layout();
-      _bbox = symbols[score()->symIdx()][_sym].bbox(magS());
+      setbbox(symbols[score()->symIdx()][_sym].bbox(magS()));
       }
 
 //---------------------------------------------------------

@@ -440,9 +440,9 @@ int Measure::findAccidental(Note* note) const
                         continue;
                   Chord* chord = static_cast<Chord*>(e);
 
-                  Drumset* drumset = 0;
-                  if (chord->staff()->part()->instr()->useDrumset())
-                        drumset = chord->staff()->part()->instr()->drumset();
+//                  Drumset* drumset = 0;
+//                  if (chord->staff()->part()->instr()->useDrumset())
+//                        drumset = chord->staff()->part()->instr()->drumset();
 
                   foreach(Note* note1, chord->notes()) {
                         if (note1->tieBack())
@@ -508,9 +508,9 @@ int Measure::findAccidental2(Note* note) const
                         continue;
                   Chord* chord = static_cast<Chord*>(e);
 
-                  Drumset* drumset = 0;
-                  if (chord->staff()->part()->instr()->useDrumset())
-                        drumset = chord->staff()->part()->instr()->drumset();
+//                  Drumset* drumset = 0;
+//                  if (chord->staff()->part()->instr()->useDrumset())
+//                        drumset = chord->staff()->part()->instr()->drumset();
 
                   foreach(Note* note1, chord->notes()) {
                         if (note1->tieBack())
@@ -2181,7 +2181,7 @@ void Measure::read(QDomElement e, int staffIdx)
                   clef->setTrack(score()->curTrack);
                   clef->read(e);
                   clef->setGenerated(false);
-                  ClefTypeList tl = clef->clefTypeList();
+//                  ClefTypeList tl = clef->clefTypeList();
                   if (segment && segment->next() && segment->next()->subtype() == SegClef) {
                         segment = segment->next();
                         }
@@ -2388,7 +2388,6 @@ bool Measure::slashStyle(int staffIdx) const
 void Measure::scanElements(void* data, void (*func)(void*, Element*))
       {
       MeasureBase::scanElements(data, func);
-      func(data, this);                         // to make measure clickable
 
       int nstaves = score()->nstaves();
       for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
@@ -3092,9 +3091,9 @@ void Measure::layoutX(double stretch)
       //---------------------------------------------------
 
       SpringMap springs;
-      double stretchList[segs];
+//      double stretchList[segs];
       double stretchSum = 0.0;
-      stretchList[0]    = 0.0;
+//      stretchList[0]    = 0.0;
 
       double minimum = xpos[0];
       for (int i = 0; i < segs; ++i) {
@@ -3113,7 +3112,7 @@ void Measure::layoutX(double stretch)
                   str = 0.0;              // dont stretch timeSig and key
                   d   = 100000000.0;      // CHECK
                   }
-            stretchList[i] = str;
+//            stretchList[i] = str;
             springs.insert(std::pair<double, Spring>(d, Spring(i, str, w)));
             minimum += w;
             }
@@ -3229,7 +3228,7 @@ void Measure::layoutStage1()
       {
       setDirty();
       for (int staffIdx = 0; staffIdx < score()->nstaves(); ++staffIdx) {
-            KeySigEvent key = score()->staff(staffIdx)->keymap()->key(tick());
+//            KeySigEvent key = score()->staff(staffIdx)->keymap()->key(tick());
 
             setBreakMMRest(false);
             if (score()->styleB(ST_createMultiMeasureRests)) {
