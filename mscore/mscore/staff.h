@@ -162,7 +162,7 @@ class Staff {
       void setInvisible(bool val)    { _invisible = val;    }
       void setSlashStyle(bool val);
       int lines() const;
-      void setLines(int val);
+      void setLines(int);
       int barLineSpan() const        { return _barLineSpan; }
       void setBarLineSpan(int val)   { _barLineSpan = val;  }
       Score* score() const           { return _score;       }
@@ -174,8 +174,8 @@ class Staff {
 
       StaffType* staffType() const     { return _staffType;      }
       void setStaffType(StaffType* st);
+
       bool useTablature() const;
-      void setUseTablature(bool val);
       bool updateKeymap() const        { return _updateKeymap;   }
       void setUpdateKeymap(bool v)     { _updateKeymap = v;      }
       VeloList& velocities()           { return _velocities;     }

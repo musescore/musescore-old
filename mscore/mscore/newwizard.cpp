@@ -30,6 +30,7 @@
 #include "keysig.h"
 #include "measure.h"
 #include "tablature.h"
+#include "stafftype.h"
 
 extern Palette* newKeySigPalette();
 
@@ -352,14 +353,21 @@ void InstrumentWizard::createInstruments(Score* cs)
                   staff->setRstaff(rstaff);
                   ++rstaff;
 
-                  staff->setUseTablature(t->useTablature && t->tablature);
+                  StaffType* st;
+                  if (t->useTablature && t->tablature)
+                        st = cs->staffTypes().at(TAB_STAFF_TYPE);
+                  else if (t->useDrumset)
+                        st = cs->staffTypes().at(PERCUSSION_STAFF_TYPE);
+                  else
+                        st = cs->staffTypes().at(PITCHED_STAFF_TYPE);
+                  staff->setStaffType(st);
 
                   staff->setInitialClef(staff->useTablature() ? CLEF_TAB : sli->clef());
 
                   if (cidx > MAX_STAVES) {
                         staff->setLines(5);
                         staff->setSmall(false);
-                        staff->setUseTablature(false);
+                        // staff->setUseTablature(false);
                         }
                   else {
                         if (staff->useTablature())

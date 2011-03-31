@@ -87,7 +87,8 @@ class StaffType {
 // first three staff types in staffTypes[] are build in:
 
 enum {
-      PITCHED_STAFF_TYPE, TAB_STAFF_TYPE, PERCUSSION_STAFF_TYPE
+      PITCHED_STAFF_TYPE, TAB_STAFF_TYPE, PERCUSSION_STAFF_TYPE,
+      STAFF_TYPES
       };
 
 //---------------------------------------------------------
@@ -234,25 +235,19 @@ class ScoreView;
 //---------------------------------------------------------
 
 class TabDurationSymbol : public Element {
-
-      StaffTypeTablature *    _tab;
-      QString                 _text;
+      StaffTypeTablature* _tab;
+      QString             _text;
 
       void buildText(Duration::DurationType type, int dots);
 
-public:
+   public:
       TabDurationSymbol(Score* s);
       TabDurationSymbol(Score* s, StaffTypeTablature * tab, Duration::DurationType type, int dots);
       TabDurationSymbol(const TabDurationSymbol&);
       virtual TabDurationSymbol* clone() const  { return new TabDurationSymbol(*this); }
       virtual void draw(Painter*) const;
-//      void layout();
       virtual bool isEditable() const           { return false; }
       virtual ElementType type() const          { return TAB_DURATION_SYMBOL; }
-
-//      virtual QPointF canvasPos() const;  ///< position in canvas coordinates
-//      virtual void write(Xml& xml) const;
-//      virtual void read(QDomElement);
 
       void setDuration(Duration::DurationType type, int dots) { buildText(type, dots); }
       void setTablature(StaffTypeTablature * tab)             { _tab = tab; }

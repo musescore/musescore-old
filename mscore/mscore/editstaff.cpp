@@ -270,7 +270,7 @@ void EditStaff::showEditStaffType()
       if (est->exec() && est->isModified()) {
             QList<StaffType*> tl = est->getStaffTypes();
             Score* score = staff->score();
-            score->setStaffTypeList(tl);
+            score->setStaffTypes(tl);
             int curIdx   = 0;
             staffType->clear();
             int idx = 0;

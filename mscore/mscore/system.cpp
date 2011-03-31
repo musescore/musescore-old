@@ -359,9 +359,9 @@ void System::layout2()
                   static_cast<HBox*>(m)->layout2();
             }
 
-      double staffY[nstaves];
-      for (int i = 0; i < nstaves; ++i)
-            staffY[i] = staff(i)->bbox().y();
+//      double staffY[nstaves];
+//      for (int i = 0; i < nstaves; ++i)
+//            staffY[i] = staff(i)->bbox().y();
 
       if (barLine) {
             Spatium lw = score()->styleS(ST_barWidth);
