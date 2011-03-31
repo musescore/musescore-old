@@ -1,3 +1,5 @@
+31.mar (ws)
+      - applied patches from miwarre to enhance backward compatibility (#8403/#8405)
 30.mar (ws)
       - fix: dont jump cursor back during playback
       - first code for chord articulation editor
