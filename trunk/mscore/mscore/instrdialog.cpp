@@ -39,6 +39,7 @@
 #include "line.h"
 #include "beam.h"
 #include "excerpt.h"
+#include "stafftype.h"
 
 //---------------------------------------------------------
 //   StaffListItem
@@ -608,9 +609,18 @@ void MuseScore::editInstrList()
                         Staff* staff       = new Staff(cs, part, rstaff);
                         sli->staff         = staff;
                         staff->setRstaff(rstaff);
-                        staff->setLines(t->staffLines[cidx]);
+                        StaffType* st;
+                        if (t->useTablature)
+                              st = cs->staffTypes().at(TAB_STAFF_TYPE);
+                        else
+                              st = cs->staffTypes().at(PITCHED_STAFF_TYPE);
+                        if (t->staffLines[cidx] != st->lines()) {
+                              st = st->clone();
+                              st->setLines(t->staffLines[cidx]);
+                              cs->staffTypes().append(st);
+                              }
+
                         staff->setSmall(t->smallStaff[cidx]);
-                        staff->setUseTablature(t->useTablature);
 
                         // TODO: find out the right key signature
                         // staff->setKey(0, nKey);
@@ -722,13 +732,13 @@ void MuseScore::editInstrList()
                   dl.push_back(idx);
             }
 
-      bool sort = false;
-      for (int i = 0; i < dl.size(); ++i) {
-            if (dl[i] != i) {
-                  sort = true;
-                  break;
-                  }
-            }
+//      bool sort = false;
+//      for (int i = 0; i < dl.size(); ++i) {
+//            if (dl[i] != i) {
+//                  sort = true;
+//                  break;
+//                  }
+//            }
 
 //      if (sort)
             cs->undo()->push(new SortStaves(cs, dl));

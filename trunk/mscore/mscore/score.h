@@ -228,7 +228,6 @@ class Score : public QObject {
       QList<MidiMapping> _midiMapping;
 
       MeasureBaseList _measures;          // here are the notes
-//      QList<Beam*>    _beams;
 
       RepeatList* _repeatList;
       AL::TimeSigMap* _sigmap;
@@ -759,9 +758,6 @@ class Score : public QObject {
       void splitStaff(int staffIdx, int splitPoint);
       QString tmpName() const           { return _tmpName;      }
       void setTmpName(const QString& s) { _tmpName = s;         }
-//      QList<Beam*> beams() const        { return _beams; }
-//      QList<Beam*>& beams()             { return _beams; }
-//      Beam* beam(int id) const;
       void processMidiInput();
       Lyrics* addLyrics();
       void expandVoice(Segment* s, int track);
@@ -789,9 +785,11 @@ class Score : public QObject {
       void emitSelectionChanged(int val)                 { emit selectionChanged(val); }
       SyntiState& syntiState()                           { return _syntiState;         }
       void setSyntiState(const SyntiState& s);
-      const QList<StaffType*>& staffTypes() const        { return _staffTypes; }
-      QList<StaffType*>& staffTypes()                    { return _staffTypes; }
-      void setStaffTypeList(const QList<StaffType*>& tl) { _staffTypes = tl;   }
+
+      const QList<StaffType*>& staffTypes() const;
+      QList<StaffType*>& staffTypes();
+      void setStaffTypes(const QList<StaffType*>& tl);
+
       void addLayoutFlags(LayoutFlags val)               { layoutFlags |= val; }
       int symIdx() const                                 { return _symIdx; }
       void addImage(Element*);

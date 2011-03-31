@@ -488,9 +488,26 @@ int Staff::channel(int tick,  int voice) const
 
 int Staff::lines() const
       {
-      if (useTablature())
-            return part()->instr()->tablature()->strings();
+//      if (useTablature())
+//            return part()->instr()->tablature()->strings();
       return _staffType->lines();
+      }
+
+//---------------------------------------------------------
+//   setLines
+//---------------------------------------------------------
+
+void Staff::setLines(int val)
+      {
+      if (val == lines())
+            return;
+      //
+      // create new staff type
+      //
+      StaffType* st = _staffType->clone();
+      st->setLines(val);
+      _staffType = st;
+      score()->staffTypes().append(st);
       }
 
 //---------------------------------------------------------
@@ -512,15 +529,6 @@ void Staff::setSlashStyle(bool val)
       }
 
 //---------------------------------------------------------
-//   setLines
-//---------------------------------------------------------
-
-void Staff::setLines(int val)
-      {
-      _staffType->setLines(val);
-      }
-
-//---------------------------------------------------------
 //   useTablature
 //---------------------------------------------------------
 
@@ -533,10 +541,12 @@ bool Staff::useTablature() const
 //   setUseTablature
 //---------------------------------------------------------
 
+#if 0
 void Staff::setUseTablature(bool val)
       {
       _staffType = score()->staffTypes()[val ? TAB_STAFF_TYPE : PITCHED_STAFF_TYPE];
       }
+#endif
 
 //---------------------------------------------------------
 //   linkTo

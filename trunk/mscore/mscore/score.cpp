@@ -324,7 +324,8 @@ Score::Score(const Style* s)
       _undo           = new UndoStack();
       _repeatList     = new RepeatList(this);
       _style          = *s;
-      _staffTypes     = ::staffTypes;     // init with buildin types
+      foreach(StaffType* st, ::staffTypes)
+            _staffTypes.append(st->clone());
       _swingRatio     = 0.0;
 
       _mscVersion     = MSCVERSION;
@@ -364,6 +365,7 @@ Score::Score(const Style* s)
 //    _tempomap
 //    _repeatList
 //    _links
+//    _staffTypes
 //
 Score::Score(Score* parent)
    : _selection(this)
@@ -378,7 +380,6 @@ Score::Score(Score* parent)
       _undo           = 0;
       _repeatList     = 0;
       _style          = *parent->style();
-      _staffTypes     = ::staffTypes;     // init with buildin types
       _swingRatio     = 0.0;
 
       _mscVersion     = MSCVERSION;
@@ -437,6 +438,8 @@ Score::~Score()
       delete _tempomap;
       delete _sigmap;
       delete _repeatList;
+      foreach(StaffType* st, _staffTypes)
+            delete st;
       }
 
 //---------------------------------------------------------
@@ -626,11 +629,13 @@ void Score::write(Xml& xml, bool /*autosave*/)
 
       _style.save(xml, true);      // save only differences to buildin style
 
-      int idx = 0;
-      foreach(StaffType* st, _staffTypes) {
-            if (st->modified())
-                  st->write(xml, idx);
-            ++idx;
+      if (!parentScore()) {
+            int idx = 0;
+            foreach(StaffType* st, _staffTypes) {
+                  if ((idx >= STAFF_TYPES) || st->modified())
+                        st->write(xml, idx);
+                  ++idx;
+                  }
             }
       xml.tag("showInvisible", _showInvisible);
       xml.tag("showUnprintable", _showUnprintable);
@@ -880,7 +885,7 @@ MeasureBase* Score::pos2measure(const QPointF& p, int* rst, int* pitch,
             return 0;
 
       System* s = m->system();
-      double sy1 = 0;
+//      double sy1 = 0;
       double y   = p.y() - s->canvasPos().y();
 
       int i;
@@ -906,7 +911,7 @@ MeasureBase* Score::pos2measure(const QPointF& p, int* rst, int* pitch,
             else
                   sy2 = s->page()->height() - s->pos().y();   // s->height();
             if (y > sy2) {
-                  sy1 = sy2;
+//                  sy1 = sy2;
                   i   = ni;
                   continue;
                   }
@@ -1540,7 +1545,7 @@ bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
       //
       //    search staff
       //
-      double sy1         = 0;
+//      double sy1         = 0;
       pos->staffIdx      = 0;
       SysStaff* sstaff   = 0;
       System* system     = pos->measure->system();
@@ -1559,7 +1564,7 @@ bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
                   sstaff = ss;
                   break;
                   }
-            sy1 = sy2;
+//            sy1 = sy2;
             }
       if (sstaff == 0)
             return false;
@@ -1583,16 +1588,16 @@ bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
 
             double x1 = segment->x();
             double x2;
-            int ntick;
+//            int ntick;
             double d;
             if (ns) {
                   x2    = ns->x();
-                  ntick = ns->tick();
+//                  ntick = ns->tick();
                   d     = x2 - x1;
                   }
             else {
                   x2    = pos->measure->bbox().width();
-                  ntick = pos->measure->tick() + pos->measure->ticks();
+//                  ntick = pos->measure->tick() + pos->measure->ticks();
                   d     = (x2 - x1) * 2.0;
                   x     = x1;
                   pos->segment = segment;
@@ -2209,6 +2214,39 @@ AL::TimeSigMap* Score::sigmap() const
       while (score->parentScore())
             score = parentScore();
       return score->_sigmap;
+      }
+
+//---------------------------------------------------------
+//   staffTypes
+//---------------------------------------------------------
+
+const QList<StaffType*>& Score::staffTypes() const
+      {
+      const Score* score = this;
+      while (score->parentScore())
+            score = parentScore();
+      return score->_staffTypes;
+      }
+
+QList<StaffType*>& Score::staffTypes()
+      {
+      Score* score = this;
+      while (score->parentScore())
+            score = parentScore();
+      return score->_staffTypes;
+      }
+
+//---------------------------------------------------------
+//   setStaffTypes
+//---------------------------------------------------------
+
+void Score::setStaffTypes(const QList<StaffType*>& tl)
+      {
+      Score* score = this;
+      while (score->parentScore())
+            score = parentScore();
+      foreach(StaffType* st, tl)
+            score->_staffTypes.append(st->clone());
       }
 
 //---------------------------------------------------------

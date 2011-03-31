@@ -2135,11 +2135,9 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                       int staves = score->part(staff)->nstaves();
                       for (int i = 0; i < staves; ++i) {
                            score->staff(staffIdx+i)->setLines(stafflines);
-                      // ws      measure->mstaff(staffIdx+i)->lines->setLines(stafflines);
                       }
                   }else{
                       score->staff(staffIdx)->setLines(stafflines);
-                      // measure->mstaff(staffIdx)->lines->setLines(stafflines);
                   }
             }
             else if (e.tagName() == "instruments")

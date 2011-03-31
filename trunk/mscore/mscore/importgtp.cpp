@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id:$
 //
-//  Copyright (C) 2010 Werner Schweer
+//  Copyright (C) 2011 Werner Schweer
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -540,11 +540,11 @@ void GuitarPro1::read(QFile* fp)
                   int tick  = measure->tick();
                   int beats = readInt();
                   for (int beat = 0; beat < beats; ++beat) {
-                        int pause = 0;
+//                        int pause = 0;
                         uchar beatBits = readUChar();
                         bool dotted = beatBits & 0x1;
                         if (beatBits & 0x40)
-                              pause = readUChar();
+                              /*pause =*/ readUChar();
                         int len = readChar();
                         int tuple = 0;
                         if (beatBits & 0x20)
@@ -835,11 +835,11 @@ printf("BeginRepeat=============================================\n");
                   int tick  = measure->tick();
                   int beats = readInt();
                   for (int beat = 0; beat < beats; ++beat) {
-                        int pause = 0;
+//                        int pause = 0;
                         uchar beatBits = readUChar();
                         bool dotted = beatBits & 0x1;
                         if (beatBits & 0x40)
-                              pause = readUChar();
+                              /*pause =*/ readUChar();
                         int len = readChar();
                         int tuple = 0;
                         if (beatBits & 0x20)
@@ -1313,11 +1313,11 @@ printf("BeginRepeat=============================================\n");
                   int tick  = measure->tick();
                   int beats = readInt();
                   for (int beat = 0; beat < beats; ++beat) {
-                        int pause = 0;
+//                        int pause = 0;
                         uchar beatBits = readUChar();
                         bool dotted = beatBits & 0x1;
                         if (beatBits & 0x40)
-                              pause = readUChar();
+                              /*pause =*/ readUChar();
 
                         int len = readChar();
                         int tuple = 0;
