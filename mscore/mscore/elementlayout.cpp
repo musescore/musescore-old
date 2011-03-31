@@ -178,7 +178,9 @@ bool ElementLayout::readProperties(QDomElement e)
       else if (tag == "ryoffset")
             setRyoff(val.toDouble());
       else if (tag == "offsetType") {
-            OffsetType ot = (OffsetType)i;
+            OffsetType ot = OFFSET_ABS;
+            if (val == "spatium" || val == "1")
+                  ot = OFFSET_SPATIUM;
             if (ot != offsetType()) {
                   setOffsetType(ot);
                   if (ot == OFFSET_ABS) {
