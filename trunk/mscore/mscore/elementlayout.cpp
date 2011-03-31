@@ -135,7 +135,7 @@ bool ElementLayout::readProperties(QDomElement e)
       {
       QString tag(e.tagName());
       QString val(e.text());
-      int i = val.toInt();
+//      int i = val.toInt();
 
       if (tag == "halign") {
             _align &= ~(ALIGN_HCENTER | ALIGN_RIGHT);

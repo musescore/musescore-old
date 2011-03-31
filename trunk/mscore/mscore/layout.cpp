@@ -1200,7 +1200,7 @@ bool Score::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
       //
       //    hide empty staves
       //
-      bool showChanged = false;
+//      bool showChanged = false;
       int staves = _staves.size();
       int staffIdx = 0;
       foreach (Staff* staff, _staves) {
@@ -1227,7 +1227,7 @@ bool Score::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
                   }
 
             if (oldShow != s->show()) {
-                  showChanged = true;
+//                  showChanged = true;
                   foreach (MeasureBase* mb, system->measures()) {
                         if (mb->type() != MEASURE)
                               continue;
@@ -1852,7 +1852,7 @@ void Score::layoutFingering(Fingering* f)
       bool below   = (n > 1) && (staff->rstaff() == n-1);
 
       f->layout();
-      QRectF r = f->abbox();
+//      QRectF r = f->abbox();
       qreal x = 0.0;
       qreal y = 0.0;
       qreal headWidth = note->headWidth();

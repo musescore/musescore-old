@@ -149,14 +149,14 @@ class Element {
                                   ///< depends on Spatium ("space") units!
       QPointF _readPos;
 
+      mutable QRectF _bbox;       ///< Bounding box relative to _pos + _userOff
+                                  ///< valid after call to layout()
+
    protected:
       Score* _score;
 
       int _mxmlOff;               ///< MusicXML offset in ticks.
                                   ///< Note: interacts with userXoffset.
-
-      mutable QRectF _bbox;       ///< Bounding box relative to _pos + _userOff
-                                  ///< valid after call to layout()
 
       QPointF _startDragPosition;   ///< used during drag
 
@@ -221,6 +221,7 @@ class Element {
       virtual void setWidth(qreal v)          { _bbox.setWidth(v);         }
       QRectF abbox() const;
       virtual void setbbox(const QRectF& r) const   { _bbox = r;           }
+      virtual void addbbox(const QRectF& r) const   { _bbox |= r;          }
       virtual bool contains(const QPointF& p) const;
       bool intersects(const QRectF& r) const;
       virtual QPainterPath shape() const;

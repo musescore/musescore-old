@@ -216,7 +216,9 @@ int getStaff(System* system, const QPointF& p)
       {
       QPointF pp = p - system->page()->pos() - system->pos();
       for (int i = 0; i < system->page()->score()->nstaves(); ++i) {
-            if (system->bboxStaff(i).contains(pp))
+            qreal sp = system->spatium();
+            QRectF r = system->bboxStaff(i).adjusted(0.0, -sp, 0.0, sp);
+            if (r.contains(pp))
                   return i;
             }
       return -1;

@@ -294,7 +294,7 @@ void PianoView::setChord(Chord* c, AL::Pos* l)
 
       foreach(Note* note, c->notes()) {
             if (!note->playEvents().isEmpty()) {
-                  int ticks = note->playTicks();
+//                  int ticks = note->playTicks();
                   foreach(NoteEvent* e, note->playEvents())
                         scene()->addItem(new PianoItem(note, e));
                   }
@@ -304,7 +304,7 @@ void PianoView::setChord(Chord* c, AL::Pos* l)
 
       scene()->blockSignals(false);
 
-      Measure* lm = staff->score()->lastMeasure();
+//      Measure* lm = staff->score()->lastMeasure();
       ticks       = chord->tick() + chord->ticks();
       scene()->setSceneRect(0.0, 0.0, double(ticks + 960), keyHeight * 75);
 

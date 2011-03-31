@@ -807,7 +807,7 @@ QFont Capella::readFont()
             /*uchar lfClipPrecision  =*/ readByte();
             /*uchar lfQuality        =*/ readByte();
             /*uchar lfPitchAndFamily =*/ readByte();
-            QColor color           = readColor();
+            /*QColor color           =*/ readColor();
             char* face             = readString();
 
 printf("Font <%s> size %d, weight %d\n", face, lfHeight, lfWeight);

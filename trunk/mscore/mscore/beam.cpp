@@ -530,7 +530,7 @@ void Beam::layout()
             layout2(crl, st, n);
             }
 
-      _bbox = QRectF();
+      setbbox(QRectF());
       qreal lw2 = point(score()->styleS(ST_beamWidth)) * .5 * mag();
       foreach(const QLineF* bs, beamSegments) {
             QPolygonF a(4);
@@ -538,7 +538,7 @@ void Beam::layout()
             a[1] = QPointF(bs->x2(), bs->y2()-lw2);
             a[2] = QPointF(bs->x2(), bs->y2()+lw2);
             a[3] = QPointF(bs->x1(), bs->y1()+lw2);
-            _bbox |= a.boundingRect();
+            addbbox(a.boundingRect());
             }
       }
 

@@ -623,13 +623,6 @@ void Page::rebuildBspTree()
             }
       scanElements(&el, collectElements);
 
-      // TODO: optimize away:
-//      QRectF bb(abbox());
-//      foreach(Beam* b, score()->beams()) {
-//            if (b->abbox().intersects(bb))
-//                  el.append(b);
-//            }
-
       int n = el.size();
       bspTree.initialize(abbox(), n);
       for (int i = 0; i < n; ++i)

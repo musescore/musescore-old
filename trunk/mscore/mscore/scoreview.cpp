@@ -3318,12 +3318,13 @@ bool ScoreView::mousePress(QMouseEvent* ev)
       startMoveI = ev->pos();
       startMove  = imatrix.map(QPointF(startMoveI));
       curElement = elementNear(startMove);
-      if (curElement && curElement->type() == MEASURE) {
+/*      if (curElement && curElement->type() == MEASURE) {
             System* dragSystem = (System*)(curElement->parent());
             int dragStaff  = getStaff(dragSystem, startMove);
             if (dragStaff < 0)
                   curElement = 0;
             }
+*/
       return curElement != 0;
       }
 
