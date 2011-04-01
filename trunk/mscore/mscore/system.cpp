@@ -352,7 +352,6 @@ void System::layout2()
             }
       qreal systemHeight = staff(lastStaffIdx)->bbox().bottom();
       setHeight(systemHeight);
-printf("set bbox\n");
       foreach(MeasureBase* m, ml) {
             if (m->type() == MEASURE || m->type() == HBOX) {
                   m->setbbox(QRectF(0.0, -_spatium, m->width(), systemHeight + 2 * _spatium));

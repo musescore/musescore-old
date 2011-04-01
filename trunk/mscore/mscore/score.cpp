@@ -631,6 +631,7 @@ void Score::write(Xml& xml, bool /*autosave*/)
 
       if (!parentScore()) {
             int idx = 0;
+printf("Score::write: %d staffTypes\n", _staffTypes.size());
             foreach(StaffType* st, _staffTypes) {
                   if ((idx >= STAFF_TYPES) || st->modified())
                         st->write(xml, idx);

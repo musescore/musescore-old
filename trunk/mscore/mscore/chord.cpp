@@ -1005,10 +1005,10 @@ void Chord::layoutStem1()
       if (hasStem) {
             if (!_stem)
                   setStem(new Stem(score()));
-            if (staff()->useTablature()) {                  // in tab, all stems are up (if present)
+//            if (staff()->useTablature()) {                  // in tab, all stems are up (if present)
 //                  setStemDirection(UP);
 //                  setUp(true);
-                  }
+//                  }
             }
       else
             setStem(0);
@@ -1047,7 +1047,7 @@ void Chord::layoutStem1()
 void Chord::layoutStem()
       {
       if (staff() && staff()->useTablature()) {
-            // tablatures require stems only is not stemless
+            // tablatures require stems only if not stemless
             if(!staff()->staffType()->slashStyle() && _stem) {   // if tab uses stems and this chord has one
                   // in tablatures, stem/hook setup is fixed: a simple 'comb' above the staff
                   double sp = spatium();
@@ -1071,7 +1071,6 @@ void Chord::layoutStem()
 
       if (_stem) {
             Spatium stemLen;
-
             int hookIdx      = durationType().hooks();
             Note* upnote     = upNote();
             Note* downnote   = downNote();
@@ -1351,6 +1350,7 @@ void Chord::layout()
             //-----------------------------------------
 
             double stepDistance = _spatium * .5;
+            int stepOffset      = staff()->staffType()->stepOffset();
 
             foreach(Note* note, _notes) {
                   note->layout();
@@ -1365,7 +1365,7 @@ void Chord::layout()
                   if (note->mirror())
                         x += stemUp ? headWidth : - headWidth;
 
-                  note->setPos(x, note->line() * stepDistance);
+                  note->setPos(x, (note->line() + stepOffset) * stepDistance);
                   note->adjustReadPos();
 
                   Accidental* accidental = note->accidental();

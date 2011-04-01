@@ -256,85 +256,86 @@ void TimeSig::read(QDomElement e)
 void TimeSig::layout()
       {
       double _spatium = spatium();
-      QRectF bb;
 
-      bb = QRectF(0, 0, 0, 0);                  // prepare for an empty time signature
+      setbbox(QRectF());                          // prepare for an empty time signature
       sz = QString();
       sn = QString();
       pz = QPointF(0.0, 0.0);
       pn = QPointF(0.0, 0.0);
 
-      int st = subtype();
-      // if tablature, but without time sig, set empty symbol
-      if (staff() && staff()->useTablature() &&
-                  !((StaffTypeTablature*)staff()->staffType())->genTimesig())
-            st = 0;
+      int st            = subtype();
+      double lineDist   = 1.0;            // assume dimensions a standard staff
+      int    numOfLines = 5;
+      if (staff()) {
+            StaffType* staffType = staff()->staffType();
+            numOfLines  = staff()->staffType()->lines();
+            lineDist    = staff()->staffType()->lineDistance().val();
+
+            // if tablature, but without time sig, set empty symbol
+            if ((staffType->group() == TAB_STAFF) &&
+               !(static_cast<StaffTypeTablature*>(staffType)->genTimesig())) {
+                  st = 0;
+                  }
+            }
+
       if (st == 0)                              // no symbol: nothing to do
             return;
-      else {                                    // if some symbol
-            // compute vert. displacement to center in the staff height
-            double yoff;
-            double lineDist   = 1.0;            // assume dimensions a standard staff
-            int    numOfLines = 5;
-            if (staff()) {                      // if some staff, adjust to actual staff dimensions
-                  numOfLines  = staff()->staffType()->lines();
-                  lineDist    = staff()->staffType()->lineDistance().val();
-                  }
-            yoff = (numOfLines-1) / 2.0 * lineDist;         // determine middle staff position
-            yoff *= _spatium;
 
-            // C and Ccut are placed at the middle of the staff: use yoff directly
-            if (st ==  TSIG_FOUR_FOUR) {
-                  pz = QPointF(0.0, yoff);
-                  bb = symbols[score()->symIdx()][fourfourmeterSym].bbox(magS()).translated(pz);
-                  sz = symbols[score()->symIdx()][fourfourmeterSym].toString();
-                   }
-            else if (st == TSIG_ALLA_BREVE) {
-                  pz = QPointF(0.0, yoff);
-                  bb = symbols[score()->symIdx()][allabreveSym].bbox(magS()).translated(pz);
-                  sz = symbols[score()->symIdx()][allabreveSym].toString();
-                  }
-            else {
-                  // other time signatures are made of a numerator (z1...z4) and a denominator (n)
-                  int n, z1, z2, z3, z4;
-                  getSig(&n, &z1, &z2, &z3, &z4);
-                  sz = QString("%1").arg(z1);               // build numerator string
-                  if (z2)
-                        sz += QString("+%1").arg(z2);
-                  if (z3)
-                        sz += QString("+%1").arg(z3);
-                  if (z4)
-                        sz += QString("+%1").arg(z4);
-                  sn = QString("%1").arg(n);                // build denominator string
-
-                  QFontMetricsF fm(fontId2font(0));
-                  QRectF rz = fm.tightBoundingRect(sz);     // get 'tight' bounding boxes for strings
-                  QRectF rn = fm.tightBoundingRect(sn);
-
-                  double m  = magS();
-
-                  // scale bounding boxes to mag
-                  rz = QRectF(rz.x() * m, rz.y() * m, rz.width() * m, rz.height() * m);
-                  rn = QRectF(rn.x() * m, rn.y() * m, rn.width() * m, rn.height() * m);
-
-                  // position numerator and denominator; vertical displacement:
-                  // number of lines is odd: 0.0 (strings are directly above and below the middle line)
-                  // number of lines even:   0.5 (strings are moved up/down to leave 1 line dist. between them)
-                  double displ = numOfLines & 1 ? 0.0 : (0.5 * lineDist * _spatium);
-                  pz = QPointF(0.0, yoff - displ);
-                  // denom. horiz. posit.: centred around centre of numerator
-                  // vert. position:       base line is lowered by displ and by the whole height of a digit
-                  pn = QPointF((rz.width() - rn.width())*.5, yoff + displ + _spatium*2.0);
-                  bb |= rz.translated(pz);                  // translate bounding boxes to actual string positions
-                  bb |= rn.translated(pn);
-                  }
-
-            double im = (DPI * SPATIUM20) / _spatium;
-
-            pz *= im;                           // convert positions to raster units
-            pn *= im;
+      // if some symbol
+      // compute vert. displacement to center in the staff height
+      // determine middle staff position:
+      double yoff = _spatium * (numOfLines-1) / 2.0 * lineDist;
+      double mag  = magS();
+      // C and Ccut are placed at the middle of the staff: use yoff directly
+      if (st ==  TSIG_FOUR_FOUR) {
+            pz = QPointF(0.0, yoff);
+            Sym& sym = symbols[score()->symIdx()][fourfourmeterSym];
+            setbbox(sym.bbox(mag).translated(pz));
+            sz = sym.toString();
             }
-      setbbox(bb);
+      else if (st == TSIG_ALLA_BREVE) {
+            pz = QPointF(0.0, yoff);
+            Sym& sym = symbols[score()->symIdx()][allabreveSym];
+            setbbox(sym.bbox(mag).translated(pz));
+            sz = sym.toString();
+            }
+      else {
+            // other time signatures are made of a numerator (z1...z4) and a denominator (n)
+            int n, z1, z2, z3, z4;
+            getSig(&n, &z1, &z2, &z3, &z4);
+            sz = QString("%1").arg(z1);               // build numerator string
+            if (z2)
+                  sz += QString("+%1").arg(z2);
+            if (z3)
+                  sz += QString("+%1").arg(z3);
+            if (z4)
+                  sz += QString("+%1").arg(z4);
+            sn = QString("%1").arg(n);                // build denominator string
+
+            QFontMetricsF fm(fontId2font(0));
+            QRectF rz = fm.tightBoundingRect(sz);     // get 'tight' bounding boxes for strings
+            QRectF rn = fm.tightBoundingRect(sn);
+
+            // scale bounding boxes to mag
+            rz = QRectF(rz.x() * mag, rz.y() * mag, rz.width() * mag, rz.height() * mag);
+            rn = QRectF(rn.x() * mag, rn.y() * mag, rn.width() * mag, rn.height() * mag);
+
+            // position numerator and denominator; vertical displacement:
+            // number of lines is odd: 0.0 (strings are directly above and below the middle line)
+            // number of lines even:   0.5 (strings are moved up/down to leave 1 line dist. between them)
+            double displ = numOfLines & 1 ? 0.0 : (0.5 * lineDist * _spatium);
+            pz = QPointF(0.0, yoff - displ);
+            // denom. horiz. posit.: centred around centre of numerator
+            // vert. position:       base line is lowered by displ and by the whole height of a digit
+            pn = QPointF((rz.width() - rn.width())*.5, yoff + displ + _spatium*2.0);
+            setbbox(rz.translated(pz));   // translate bounding boxes to actual string positions
+            addbbox(rn.translated(pn));
+            }
+
+      double im = (DPI * SPATIUM20) / _spatium;
+
+      pz *= im;                           // convert positions to raster units
+      pn *= im;
       }
 
 //---------------------------------------------------------

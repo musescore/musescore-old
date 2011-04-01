@@ -336,7 +336,7 @@ void Rest::layout()
                   break;
             }
       double _spatium = spatium();
-      int line       = lrint(userOff().y() / _spatium);
+      int line       = lrint(userOff().y() / _spatium); //  + ((staff()->lines()-1) * 2);
       int lineOffset = 0;
       if (measure()->mstaff(staffIdx())->hasVoices) {
             // move rests in a multi voice context
