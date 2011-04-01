@@ -47,12 +47,13 @@ class StaffType {
                               // otherwise it is a global build in
       QString _name;
       uchar _lines;
+      char  _stepOffset;
       Spatium _lineDistance;
+
       bool _genClef;          // create clef at beginning of system
-      bool _genKeysig;        // create key signature at beginning of system
-      bool _slashStyle;       // do not show stems
       bool _showBarlines;
-      bool _showLedgerLines;
+      bool _slashStyle;       // do not show stems
+      bool _genTimesig;       // whether time signature is shown or not
 
    public:
       StaffType();
@@ -62,26 +63,26 @@ class StaffType {
       virtual StaffGroup group() const = 0;
       virtual StaffType* clone() const = 0;
       virtual const char* groupName() const = 0;
-      void setLines(int val)                   { _lines = val;            }
+      void setLines(int val);
       int lines() const                        { return _lines;           }
+      void setStepOffset(int v)                { _stepOffset = v;         }
+      int stepOffset() const                   { return _stepOffset;      }
       void setLineDistance(const Spatium& val) { _lineDistance = val;     }
       Spatium lineDistance() const             { return _lineDistance;    }
       void setGenClef(bool val)                { _genClef = val;          }
       bool genClef() const                     { return _genClef;         }
-      void setGenKeysig(bool val)              { _genKeysig = val;        }
-      bool genKeysig() const                   { return _genKeysig;       }
-      void setSlashStyle(bool val)             { _slashStyle = val;       }
-      bool slashStyle() const                  { return _slashStyle;      }
       void setShowBarlines(bool val)           { _showBarlines = val;     }
       bool showBarlines() const                { return _showBarlines;    }
-      void setShowLedgerLines(bool val)        { _showLedgerLines = val;  }
-      bool showLedgerLines() const             { return _showLedgerLines; }
       bool modified() const                    { return _modified;        }
       void setModified(bool val)               { _modified = val;         }
       virtual void write(Xml& xml, int) const;
       void writeProperties(Xml& xml) const;
       virtual void read(QDomElement);
       bool readProperties(QDomElement e);
+      void setSlashStyle(bool val)             { _slashStyle = val;       }
+      bool slashStyle() const                  { return _slashStyle;      }
+      bool genTimesig() const                  { return _genTimesig;       }
+      void setGenTimesig(bool val)             { _genTimesig = val;        }
       };
 
 // first three staff types in staffTypes[] are build in:
@@ -96,13 +97,47 @@ enum {
 //---------------------------------------------------------
 
 class StaffTypePitched : public StaffType {
+      bool _genKeysig;        // create key signature at beginning of system
+      bool _showLedgerLines;
 
    public:
-      StaffTypePitched() : StaffType() {}
+      StaffTypePitched();
       StaffTypePitched(const QString& s) : StaffType(s) {}
       virtual StaffGroup group() const        { return PITCHED_STAFF; }
       virtual StaffTypePitched* clone() const { return new StaffTypePitched(*this); }
       virtual const char* groupName() const   { return "pitched"; }
+
+      virtual void read(QDomElement);
+      virtual void write(Xml& xml, int) const;
+
+      void setGenKeysig(bool val)              { _genKeysig = val;        }
+      bool genKeysig() const                   { return _genKeysig;       }
+      void setShowLedgerLines(bool val)        { _showLedgerLines = val;  }
+      bool showLedgerLines() const             { return _showLedgerLines; }
+      };
+
+//---------------------------------------------------------
+//   StaffTypePercussion
+//---------------------------------------------------------
+
+class StaffTypePercussion : public StaffType {
+      bool _genKeysig;        // create key signature at beginning of system
+      bool _showLedgerLines;
+
+   public:
+      StaffTypePercussion();
+      StaffTypePercussion(const QString& s) : StaffType(s) {}
+      virtual StaffGroup group() const           { return PERCUSSION_STAFF; }
+      virtual StaffTypePercussion* clone() const { return new StaffTypePercussion(*this); }
+      virtual const char* groupName() const      { return "percussion"; }
+
+      virtual void read(QDomElement);
+      virtual void write(Xml& xml, int) const;
+
+      void setGenKeysig(bool val)                { _genKeysig = val;        }
+      bool genKeysig() const                     { return _genKeysig;       }
+      void setShowLedgerLines(bool val)          { _showLedgerLines = val;  }
+      bool showLedgerLines() const               { return _showLedgerLines; }
       };
 
 //---------------------------------------------------------
@@ -123,7 +158,6 @@ class StaffTypeTablature : public StaffType {
       double      _fretFontUserY;         // additional vert. offset of fret marks with respect to
                                           // the string line (spatium unit); user configurable
       bool        _genDurations;          // whether duration symbols are drawn or not
-      bool        _genTimesig;            // whether time signature is shown or not
       bool        _linesThrough;          // whether lines for strings and stems may pass through fret marks or not
       bool        _onLines;               // whether fret marks are drawn on the string lines or between them
       bool        _upsideDown;            // whether lines are drwan with highest string at top (false) or at bottom (true)
@@ -176,7 +210,6 @@ const QString fretFontName() const        { return _fretFontName;     }
       double  fretFontUserY() const       { return _fretFontUserY;    }
       double  fretFontYOffset()           { setFretMetrics(); return _fretYOffset + _fretFontUserY; }
       bool    genDurations() const        { return _genDurations;     }
-      bool    genTimesig() const          { return _genTimesig;       }
       bool    linesThrough() const        { return _linesThrough;     }
       bool    onLines() const             { return _onLines;          }
       bool    upsideDown() const          { return _upsideDown;       }
@@ -199,7 +232,6 @@ const QString fretFontName() const        { return _fretFontName;     }
                                                   _fretMetricsValid = false; }
       void    setFretFontUserY(double val){ _fretFontUserY = val;     }
       void    setGenDurations(bool val)   { _genDurations = val;      }
-      void    setGenTimesig(bool val)     { _genTimesig = val;        }
       void    setLinesThrough(bool val)   { _linesThrough = val;      }
       void    setOnLines(bool val);
       void    setUpsideDown(bool val)     { _upsideDown = val;        }
@@ -210,19 +242,6 @@ protected:
       void    setFretMetrics();
       };
 
-//---------------------------------------------------------
-//   StaffTypePercussion
-//---------------------------------------------------------
-
-class StaffTypePercussion : public StaffType {
-
-   public:
-      StaffTypePercussion() : StaffType() {}
-      StaffTypePercussion(const QString& s) : StaffType(s) {}
-      virtual StaffGroup group() const           { return PERCUSSION_STAFF; }
-      virtual StaffTypePercussion* clone() const { return new StaffTypePercussion(*this); }
-      virtual const char* groupName() const      { return "percussion"; }
-      };
 
 extern void initStaffTypes();
 extern QList<StaffType*> staffTypes;

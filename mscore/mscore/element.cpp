@@ -743,7 +743,7 @@ void ElementList::write(Xml& xml) const
 StaffLines::StaffLines(Score* s)
    : Element(s)
       {
-      _width = 1.0;      // dummy
+      setWidth(1.0);      // dummy
       setSelectable(false);
       }
 
@@ -759,34 +759,40 @@ QPointF StaffLines::canvasPos() const
       }
 
 //---------------------------------------------------------
-//   bbox
+//   layout
 //---------------------------------------------------------
 
-QRectF StaffLines::bbox() const
+void StaffLines::layout()
       {
-      double _dist;
-      int l;
-      if (staff()) {
-            _dist = staff()->useTablature() ? 1.5 : 1.0;
-            l     = staff()->lines();
+      StaffType* st = staff() ? staff()->staffType() : 0;
+      qreal _spatium = spatium();
+      if (st) {
+            dist  = st->lineDistance().val() * _spatium;
+            lines = st->lines();
             }
       else {
-            _dist = 1.0;
-            l     = 5;
+            dist  = _spatium;
+            lines = 5;
             }
 
-      double d = _dist * spatium();
-      qreal lw = point(score()->styleS(ST_staffLineWidth));
+//      printf("StaffLines::layout:: dist %f st %p\n", dist, st);
 
-      switch (l) {
+      lw = score()->styleS(ST_staffLineWidth).val() * _spatium;
+
+      qreal w = width();
+      switch (lines) {
             case 0:
-                  return QRectF(0.0, - 2.0 * d - lw*.5, _width, 4 * d + lw);
+                  setbbox(QRectF(0.0, - 2.0 * dist - lw*.5, w, 4 * dist + lw));
+                  break;
             case 1:
-                  return QRectF(0.0,  -lw*.5, _width, 4 * d + lw);
+                  setbbox(QRectF(0.0,  -lw*.5, w, lw));
+                  break;
             case 2:
-                  return QRectF(0.0, -lw*.5, _width, l * d * 2.0 + lw);
+                  setbbox(QRectF(0.0, -lw*.5, w, lines * dist + lw));
+                  break;
             default:
-                  return QRectF(0.0, -lw*.5, _width, l * d + lw);
+                  setbbox(QRectF(0.0, -lw*.5, w, lines * dist + lw));
+                  break;
             }
       }
 
@@ -797,29 +803,25 @@ QRectF StaffLines::bbox() const
 void StaffLines::draw(Painter* painter) const
       {
       QPainter& p = *painter->painter();
-      double _dist;
-      int l;
-      if (staff()) {
-            _dist = staff()->useTablature() ? 1.5 : 1.0;
-            l     = staff()->lines();
-            }
-      else {
-            _dist = 1.0;
-            l     = 5;
-            }
+
       QPointF _pos(0.0, 0.0);
-      double d = _dist * spatium();
 
       QPen pen(p.pen());
-      pen.setWidthF(point(score()->styleS(ST_staffLineWidth)));
-      if (pen.widthF() * p.worldMatrix().m11() < 1.0)
-            pen.setWidth(0);
+      pen.setWidthF(lw);
+      // if (pen.widthF() * p.worldMatrix().m11() < 1.0)
+      //      pen.setWidth(0);
       pen.setCapStyle(Qt::FlatCap);
       p.setPen(pen);
 
       qreal x1 = _pos.x();
       qreal x2 = x1 + width();
 
+// printf("StaffLines::draw(): lines %d x1 %f x2 %f, lw %f dist %f\n", lines, x1, x2, lw, dist);
+      for (int i = 0; i < lines; ++i) {
+            qreal y = _pos.y() + i * dist;
+            p.drawLine(QLineF(x1, y, x2, y));
+            }
+#if 0
       switch(l) {
             case 1:
                   {
@@ -849,6 +851,7 @@ void StaffLines::draw(Painter* painter) const
                         }
                   break;
             }
+#endif
       }
 
 //---------------------------------------------------------
@@ -861,16 +864,12 @@ double StaffLines::y1() const
      if (system == 0)
            return 0.0;
       double _spatium = spatium();
-      double y = system->staff(staffIdx())->y();
-      int l = staff() ? staff()->lines() : 5;
-      switch (l) {
+      double y = system->staff(staffIdx())->y() + ipos().y();
+      switch (lines) {
             case 1:
-                  return y + ipos().y() + _spatium;
-            case 2:
-                  return y + ipos().y() + _spatium;
-            case 3:
+                  return y - _spatium;
             default:
-                  return y + ipos().y();
+                  return y;
             }
       }
 
@@ -880,30 +879,18 @@ double StaffLines::y1() const
 
 double StaffLines::y2() const
       {
-      double _dist;
-      int l;
-      if (staff()) {
-            _dist = staff()->useTablature() ? 1.5 : 1.0;
-            l     = staff()->lines();
-            }
-      else {
-            _dist = 1.0;
-            l     = 5;
-            }
       System* system = measure()->system();
       if (system == 0)
             return 0.0;
-      double y = system->staff(staffIdx())->y();
-      double d = _dist * spatium();
 
-      switch (l) {
+      QPointF _pos(0.0, 0.0);
+      double y = system->staff(staffIdx())->y() + ipos().y();
+
+      switch (lines) {
             case 1:
-                  return y + ipos().y() + 3 * d;
-            case 2:
-                  return y + ipos().y() + 3 * d;
-            case 3:
+                  return y + spatium();
             default:
-                  return y + ipos().y() + (l - 1) * d;
+                  return y + (lines - 1) * dist;
             }
       }
 

@@ -272,7 +272,7 @@ void Clef::layout()
             case CLEF_PERC:
             case CLEF_PERC2:
                   symbol->setSym(percussionclefSym);
-                  yoff = 2.0;   //(staff()->lines() - 1) * 0.5;
+                  yoff = (staff()->lines() - 1) * 0.5;      // was 2.0
                   break;
             case CLEF_G4:
                   symbol->setSym(trebleclefSym);

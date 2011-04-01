@@ -33,7 +33,7 @@
       </widget>
      </item>
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0">
+      <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0,0">
        <property name="spacing">
         <number>5</number>
        </property>
@@ -134,6 +134,44 @@
         </layout>
        </item>
        <item>
+        <layout class="QGridLayout" name="gridLayout_4">
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <item row="0" column="0">
+          <widget class="QCheckBox" name="genClef">
+           <property name="toolTip">
+            <string/>
+           </property>
+           <property name="text">
+            <string>Show Clef</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QCheckBox" name="showBarlines">
+           <property name="text">
+            <string>Show Barlines</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QCheckBox" name="genTimesig">
+           <property name="text">
+            <string>Show Time Sign.</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QCheckBox" name="stemless">
+           <property name="text">
+            <string>Stemless</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
         <widget class="QStackedWidget" name="stack">
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
@@ -145,7 +183,7 @@
           <number>2</number>
          </property>
          <property name="currentIndex">
-          <number>0</number>
+          <number>2</number>
          </property>
          <widget class="QWidget" name="page">
           <layout class="QVBoxLayout" name="verticalLayout_7" stretch="0,0,0,0">
@@ -167,38 +205,14 @@
            </item>
            <item>
             <layout class="QGridLayout" name="gridLayout">
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="genClefPitched">
-               <property name="toolTip">
-                <string/>
-               </property>
-               <property name="text">
-                <string>Clef</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QCheckBox" name="stemlessPitched">
-               <property name="text">
-                <string>Stemless</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QCheckBox" name="showBarlinesPitched">
-               <property name="text">
-                <string>Barlines</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
+             <item row="2" column="1">
               <widget class="QCheckBox" name="genKeysigPitched">
                <property name="text">
                 <string>Key Signature</string>
                </property>
               </widget>
              </item>
-             <item row="1" column="1">
+             <item row="2" column="0">
               <widget class="QCheckBox" name="showLedgerLinesPitched">
                <property name="text">
                 <string>Ledger Lines</string>
@@ -345,28 +359,7 @@
            </item>
            <item>
             <layout class="QGridLayout" name="gridLayout_2">
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="genClefTablature">
-               <property name="text">
-                <string>Show Clef</string>
-               </property>
-              </widget>
-             </item>
              <item row="0" column="1">
-              <widget class="QCheckBox" name="showBarlinesTablature">
-               <property name="text">
-                <string>Show Barlines</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="2">
-              <widget class="QCheckBox" name="genTimesigTablature">
-               <property name="text">
-                <string>Show Time Sign.</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="3">
               <widget class="QCheckBox" name="upsideDown">
                <property name="text">
                 <string>Upside Down</string>
@@ -806,11 +799,25 @@
             </widget>
            </item>
            <item>
-            <widget class="QCheckBox" name="genClefPercussion">
-             <property name="text">
-              <string>Clef</string>
+            <layout class="QGridLayout" name="gridLayout_3">
+             <property name="topMargin">
+              <number>0</number>
              </property>
-            </widget>
+             <item row="1" column="1">
+              <widget class="QCheckBox" name="genKeysigPercussion">
+               <property name="text">
+                <string>Key Signature</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="showLedgerLinesPercussion">
+               <property name="text">
+                <string>Ledger Lines</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </item>
            <item>
             <spacer name="verticalSpacer_3">
@@ -911,17 +918,9 @@
   <tabstop>name</tabstop>
   <tabstop>lines</tabstop>
   <tabstop>lineDistance</tabstop>
-  <tabstop>genClefPitched</tabstop>
-  <tabstop>stemlessPitched</tabstop>
-  <tabstop>showBarlinesPitched</tabstop>
-  <tabstop>genKeysigPitched</tabstop>
-  <tabstop>showLedgerLinesPitched</tabstop>
   <tabstop>newTypePitched</tabstop>
   <tabstop>presetTablatureCombo</tabstop>
   <tabstop>presetTablature</tabstop>
-  <tabstop>genClefTablature</tabstop>
-  <tabstop>showBarlinesTablature</tabstop>
-  <tabstop>genTimesigTablature</tabstop>
   <tabstop>upsideDown</tabstop>
   <tabstop>fretFontName</tabstop>
   <tabstop>fretFontSize</tabstop>
@@ -939,7 +938,6 @@
   <tabstop>durFontSize</tabstop>
   <tabstop>durY</tabstop>
   <tabstop>newTypeTablature</tabstop>
-  <tabstop>genClefPercussion</tabstop>
   <tabstop>newTypePercussion</tabstop>
   <tabstop>save</tabstop>
   <tabstop>load</tabstop>

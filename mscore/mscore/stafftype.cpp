@@ -31,7 +31,7 @@ QList<StaffType*> staffTypes;
 
 void initStaffTypes()
       {
-      StaffType* st = new StaffTypePitched("Pitched 5 lines");
+      StaffTypePitched* st = new StaffTypePitched("Pitched 5 lines");
       st->setLines(5);
       st->setLineDistance(Spatium(1.0));
       st->setGenClef(true);
@@ -41,18 +41,18 @@ void initStaffTypes()
       st->setShowLedgerLines(true);
       staffTypes.append(st);
 
-      st = new StaffTypeTablature("Tab");
-      staffTypes.append(st);
+      StaffTypeTablature* stab = new StaffTypeTablature("Tab");
+      staffTypes.append(stab);
 
-      st = new StaffTypePercussion("Percussion 5 lines");
-      st->setLines(5);
-      st->setLineDistance(Spatium(1.0));
-      st->setGenClef(true);
-      st->setGenKeysig(false);
-      st->setSlashStyle(false);
-      st->setShowBarlines(true);
-      st->setShowLedgerLines(true);
-      staffTypes.append(st);
+      StaffTypePercussion* sp = new StaffTypePercussion("Percussion 5 lines");
+      sp->setLines(5);
+      sp->setLineDistance(Spatium(1.0));
+      sp->setGenClef(true);
+      sp->setGenKeysig(false);
+      sp->setSlashStyle(false);
+      sp->setShowBarlines(true);
+      sp->setShowLedgerLines(true);
+      staffTypes.append(sp);
       }
 
 //---------------------------------------------------------
@@ -61,13 +61,42 @@ void initStaffTypes()
 
 StaffType::StaffType()
       {
-      _modified = false;
+      _modified        = false;
+      _stepOffset      = 0;
+
+      _genClef         = true;      // create clef at beginning of system
+      _showBarlines    = true;
+      _slashStyle      = false;     // do not show stems
+      _genTimesig      = true;      // whether time signature is shown or not
       }
 
 StaffType::StaffType(const QString& s)
       {
-      _name = s;
-      _modified = false;
+      _name            = s;
+      _modified        = false;
+      _stepOffset      = 0;
+
+      _genClef         = true;      // create clef at beginning of system
+      _showBarlines    = true;
+      _slashStyle      = false;     // do not show stems
+      _genTimesig      = true;      // whether time signature is shown or not
+      }
+
+//---------------------------------------------------------
+//   setLines
+//---------------------------------------------------------
+
+void StaffType::setLines(int val)
+      {
+      _lines = val;
+      switch(_lines) {
+            case 1:
+                  _stepOffset = -4;
+                  break;
+            default:
+                  _stepOffset = 0;
+                  break;
+            }
       }
 
 //---------------------------------------------------------
@@ -94,14 +123,10 @@ void StaffType::writeProperties(Xml& xml) const
             xml.tag("lineDistance", lineDistance().val());
       if (!genClef())
             xml.tag("clef", genClef());
-      if (!genKeysig())
-            xml.tag("keysig", genKeysig());
       if (slashStyle())
             xml.tag("slashStyle", slashStyle());
       if (!showBarlines())
             xml.tag("barlines", showBarlines());
-      if (!showLedgerLines())
-            xml.tag("ledgerlines", showLedgerLines());
       }
 
 //---------------------------------------------------------
@@ -132,17 +157,107 @@ bool StaffType::readProperties(QDomElement e)
             setLineDistance(Spatium(e.text().toDouble()));
       else if (tag == "clef")
             setGenClef(v);
-      else if (tag == "keysig")
-            setGenKeysig(v);
       else if (tag == "slashStyle")
             setSlashStyle(v);
       else if (tag == "barlines")
             setShowBarlines(v);
-      else if (tag == "ledgerlines")
-            setShowLedgerLines(v);
       else
             return false;
       return true;
+      }
+
+//---------------------------------------------------------
+//   StaffTypePitched
+//---------------------------------------------------------
+
+StaffTypePitched::StaffTypePitched()
+   : StaffType()
+      {
+      _genKeysig       = true;      // create key signature at beginning of system
+      _showLedgerLines = true;
+      }
+
+//---------------------------------------------------------
+//   write
+//---------------------------------------------------------
+
+void StaffTypePitched::write(Xml& xml, int idx) const
+      {
+      xml.stag(QString("StaffType idx=\"%1\" group=\"%2\"").arg(idx).arg(groupName()));
+      StaffType::writeProperties(xml);
+
+      if (!genKeysig())
+            xml.tag("keysig", genKeysig());
+      if (!showLedgerLines())
+            xml.tag("ledgerlines", showLedgerLines());
+      xml.etag();
+      }
+
+//---------------------------------------------------------
+//   read
+//---------------------------------------------------------
+
+void StaffTypePitched::read(QDomElement e)
+      {
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            QString tag(e.tagName());
+            int v = e.text().toInt();
+            if (tag == "keysig")
+                  setGenKeysig(v);
+            else if (tag == "ledgerlines")
+                  setShowLedgerLines(v);
+            else {
+                  if (!StaffType::readProperties(e))
+                        domError(e);
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   StaffTypePercussion
+//---------------------------------------------------------
+
+StaffTypePercussion::StaffTypePercussion()
+   : StaffType()
+      {
+      _genKeysig       = true;      // create key signature at beginning of system
+      _showLedgerLines = true;
+      }
+
+//---------------------------------------------------------
+//   write
+//---------------------------------------------------------
+
+void StaffTypePercussion::write(Xml& xml, int idx) const
+      {
+      xml.stag(QString("StaffType idx=\"%1\" group=\"%2\"").arg(idx).arg(groupName()));
+      StaffType::writeProperties(xml);
+
+      if (!genKeysig())
+            xml.tag("keysig", genKeysig());
+      if (!showLedgerLines())
+            xml.tag("ledgerlines", showLedgerLines());
+      xml.etag();
+      }
+
+//---------------------------------------------------------
+//   read
+//---------------------------------------------------------
+
+void StaffTypePercussion::read(QDomElement e)
+      {
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            QString tag(e.tagName());
+            int v = e.text().toInt();
+            if (tag == "keysig")
+                  setGenKeysig(v);
+            else if (tag == "ledgerlines")
+                  setShowLedgerLines(v);
+            else {
+                  if (!StaffType::readProperties(e))
+                        domError(e);
+                  }
+            }
       }
 
 //---------------------------------------------------------
@@ -158,10 +273,10 @@ void StaffTypeTablature::init()
       setLines(6);
       setLineDistance(Spatium(TAB_DEFAULT_LINE_SP));
       setGenClef(true);
-      setGenKeysig(false);
+//      setGenKeysig(false);
       setSlashStyle(false);
       setShowBarlines(true);
-      setShowLedgerLines(false);
+//      setShowLedgerLines(false);
       // for specific members
       setDurationFontName("MScoreTabulatureModern");
       setDurationFontSize(15.0);
@@ -248,10 +363,10 @@ void StaffTypeTablature::write(Xml& xml, int idx) const
 //---------------------------------------------------------
 
 void StaffTypeTablature::setOnLines(bool val)
-{
+      {
       _onLines = val;
       _durationMetricsValid = _fretMetricsValid = false;
-}
+      }
 
 //---------------------------------------------------------
 //   set metrics
@@ -394,3 +509,4 @@ void TabDurationSymbol::buildText(Duration::DurationType type, int dots)
       for(int count=0; count < dots; count++)
             _text.append(g_cDurationChars[STAFFTYPETAB_IDXOFDOTCHAR]);
       }
+

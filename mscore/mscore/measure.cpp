@@ -559,6 +559,7 @@ void Measure::layout(double width)
             StaffLines* sl = staves[staffIdx]->lines;
             if (sl)
                   sl->setMag(score()->staff(staffIdx)->mag());
+            staves[staffIdx]->lines->layout();
             }
 
       // height of boundingRect will be set in system->layout2()

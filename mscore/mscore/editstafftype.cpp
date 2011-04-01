@@ -65,101 +65,112 @@ void EditStaffType::saveCurrent(QListWidgetItem* o)
       bool        modif = false;                            // assume no modifications
       int         idx   = o->data(Qt::UserRole).toInt();
       StaffType*  st    = staffTypes[idx];
-      StaffTypeTablature*  stt;
 
       // if any of the common properties is modified
       if (name->text()              != st->name()
          || st->lines()             != lines->value()
          || st->lineDistance().val()!= lineDistance->value()
-         )
+         || st->genClef()           != genClef->isChecked()
+         || st->showBarlines()      != showBarlines->isChecked()
+         || st->slashStyle()        != stemless->isChecked()
+         || st->genTimesig()        != genTimesig->isChecked()
+         ) {
             modif = true;
-      // or if any of the props specific to each group is modified
-      switch(st->group()) {
-      case PITCHED_STAFF:
-            if(st->genClef() != genClefPitched->isChecked()
-               || st->showBarlines()      != showBarlinesPitched->isChecked()
-               || st->slashStyle()        != stemlessPitched->isChecked()
-               || st->genKeysig()         != genKeysigPitched->isChecked()
-               || st->showLedgerLines()   != showLedgerLinesPitched->isChecked()
-               )
-                  modif = true;
-            break;
-      case TAB_STAFF:
-            if(st->genClef()              != genClefTablature->isChecked()
-               || st->showBarlines()      != showBarlinesTablature->isChecked()
-               )
-                  modif = true;
-            stt = (StaffTypeTablature*)st;
-            if(stt->durationFontName()    != durFontName->currentFont().family()
-               || stt->durationFontSize() != durFontSize->value()
-               || stt->durationFontUserY()!= durY->value()
-               || stt->fretFontName()     != fretFontName->currentFont().family()
-               || stt->fretFontSize()     != fretFontSize->value()
-               || stt->fretFontUserY()    != fretY->value()
-               || stt->genTimesig()       != genTimesigTablature->isChecked()
-               || stt->linesThrough()     != linesThroughRadio->isChecked()
-               || stt->onLines()          != onLinesRadio->isChecked()
-               || stt->upsideDown()       != upsideDown->isChecked()
-               || stt->useNumbers()       != numbersRadio->isChecked()
-               || ( noteValues0->isChecked() && (!stt->slashStyle() ||  stt->genDurations()) )
-               || ( noteValues1->isChecked() && (!stt->slashStyle() || !stt->genDurations()) )
-               || ( noteValues2->isChecked() && ( stt->slashStyle() ||  stt->genDurations()) )
-               )
-                  modif = true;
-            break;
-      case PERCUSSION_STAFF:
-            if(st->genClef() != genClefPercussion->isChecked())
-                  modif = true;
-            break;
             }
 
-#if 0
-            if (!st->modified()) {
-                  StaffType* nst = new StaffType(*st);
-                  nst->setModified(true);
-                  staffTypes[idx] = nst;
-                  st = nst;
+      // or if any of the props specific to each group is modified
+      switch(st->group()) {
+            case PITCHED_STAFF:
+                  {
+                  StaffTypePitched* sp = static_cast<StaffTypePitched*>(st);
+                  if (sp->genKeysig()         != genKeysigPitched->isChecked()
+                     || sp->showLedgerLines() != showLedgerLinesPitched->isChecked()
+                     ) {
+                        modif = true;
+                        }
                   }
-#endif
-      if(modif) {
+                  break;
+
+            case TAB_STAFF:
+                  {
+                  StaffTypeTablature*  stt = static_cast<StaffTypeTablature*>(st);
+                  if (stt->durationFontName()    != durFontName->currentFont().family()
+                     || stt->durationFontSize() != durFontSize->value()
+                     || stt->durationFontUserY()!= durY->value()
+                     || stt->fretFontName()     != fretFontName->currentFont().family()
+                     || stt->fretFontSize()     != fretFontSize->value()
+                     || stt->fretFontUserY()    != fretY->value()
+                     || stt->linesThrough()     != linesThroughRadio->isChecked()
+                     || stt->onLines()          != onLinesRadio->isChecked()
+                     || stt->upsideDown()       != upsideDown->isChecked()
+                     || stt->useNumbers()       != numbersRadio->isChecked()
+                     || ( noteValues0->isChecked() && (!stt->slashStyle() ||  stt->genDurations()) )
+                     || ( noteValues1->isChecked() && (!stt->slashStyle() || !stt->genDurations()) )
+                     || ( noteValues2->isChecked() && ( stt->slashStyle() ||  stt->genDurations()) )
+                     ) {
+                        modif = true;
+                        }
+                  }
+                  break;
+
+            case PERCUSSION_STAFF:
+                  {
+                  StaffTypePercussion* sp = static_cast<StaffTypePercussion*>(st);
+                  if (sp->genKeysig() != genKeysigPercussion->isChecked()
+                     || sp->showLedgerLines() != showLedgerLinesPercussion->isChecked()
+                     ) {
+                        modif = true;
+                        }
+                  }
+                  break;
+            }
+
+      if (modif) {
             // save common properties
             st->setName(o->text());
             st->setLines(lines->value());
             st->setLineDistance(Spatium(lineDistance->value()));
+            st->setSlashStyle(stemless->isChecked());
+            st->setShowBarlines(showBarlines->isChecked());
+            st->setGenClef(genClef->isChecked());
+            st->setGenTimesig(genTimesig->isChecked());
             // save-group specific properties
             switch(st->group()) {
-            case PITCHED_STAFF:
-                  st->setGenClef(genClefPitched->isChecked());
-                  st->setSlashStyle(stemlessPitched->isChecked());
-                  st->setShowBarlines(showBarlinesPitched->isChecked());
-                  st->setGenKeysig(genKeysigPitched->isChecked());
-                  st->setShowLedgerLines(showLedgerLinesPitched->isChecked());
-                  break;
-            case TAB_STAFF:
-                  stt = (StaffTypeTablature*)st;
-                  st->setSlashStyle(true);                 // assume no note values
-                  stt->setGenDurations(false);
-                  if(noteValues1->isChecked())
-                        stt->setGenDurations(true);
-                  if(noteValues2->isChecked())
-                        st->setSlashStyle(false);
-                  st->setGenClef(genClefTablature->isChecked());
-                  st->setShowBarlines(showBarlinesTablature->isChecked());
-                  stt->setDurationFontName(durFontName->currentText());
-                  stt->setDurationFontSize(durFontSize->value());
-                  stt->setDurationFontUserY(durY->value());
-                  stt->setFretFontName(fretFontName->currentText());
-                  stt->setFretFontSize(fretFontSize->value());
-                  stt->setFretFontUserY(fretY->value());
-                  stt->setGenTimesig(genTimesigTablature->isChecked());
-                  stt->setLinesThrough(linesThroughRadio->isChecked());
-                  stt->setOnLines(onLinesRadio->isChecked());
-                  stt->setUpsideDown(upsideDown->isChecked());
-                  stt->setUseNumbers(numbersRadio->isChecked());
-                  break;
-            case PERCUSSION_STAFF:
-                  st->setGenClef(genClefPercussion->isChecked());
-                  break;
+                  case PITCHED_STAFF:
+                        {
+                        StaffTypePitched* sp = static_cast<StaffTypePitched*>(st);
+                        sp->setGenKeysig(genKeysigPitched->isChecked());
+                        sp->setShowLedgerLines(showLedgerLinesPitched->isChecked());
+                        }
+                        break;
+                  case TAB_STAFF:
+                        {
+                        StaffTypeTablature*  stt = static_cast<StaffTypeTablature*>(st);
+                        stt->setSlashStyle(true);                 // assume no note values
+                        stt->setGenDurations(false);
+                        if (noteValues1->isChecked())
+                              stt->setGenDurations(true);
+                        if (noteValues2->isChecked())
+                              stt->setSlashStyle(false);
+                        stt->setDurationFontName(durFontName->currentText());
+                        stt->setDurationFontSize(durFontSize->value());
+                        stt->setDurationFontUserY(durY->value());
+                        stt->setFretFontName(fretFontName->currentText());
+                        stt->setFretFontSize(fretFontSize->value());
+                        stt->setFretFontUserY(fretY->value());
+                        stt->setLinesThrough(linesThroughRadio->isChecked());
+                        stt->setOnLines(onLinesRadio->isChecked());
+                        stt->setUpsideDown(upsideDown->isChecked());
+                        stt->setUseNumbers(numbersRadio->isChecked());
+                        }
+                        break;
+                  case PERCUSSION_STAFF:
+                        {
+                        StaffTypePercussion* sp = static_cast<StaffTypePercussion*>(st);
+                        sp->setGenKeysig(genKeysigPercussion->isChecked());
+                        sp->setShowLedgerLines(showLedgerLinesPercussion->isChecked());
+                        }
+                        break;
                   }
             modified = true;
             }
@@ -171,8 +182,6 @@ void EditStaffType::saveCurrent(QListWidgetItem* o)
 
 void EditStaffType::typeChanged(QListWidgetItem* n, QListWidgetItem* o)
       {
-      StaffTypeTablature * tab;
-
       if (n == 0)
             return;
       if (o)
@@ -184,26 +193,29 @@ void EditStaffType::typeChanged(QListWidgetItem* n, QListWidgetItem* o)
       name->setText(st->name());
       lines->setValue(st->lines());
       lineDistance->setValue(st->lineDistance().val());
-      genClefPitched->setChecked(st->genClef());
-      genClefTablature->setChecked(st->genClef());
-      genClefPercussion->setChecked(st->genClef());
-      genKeysigPitched->setChecked(st->genKeysig());
-      stemlessPitched->setChecked(st->slashStyle());
-      showBarlinesPitched->setChecked(st->showBarlines());
-      showBarlinesTablature->setChecked(st->showBarlines());
+      genClef->setChecked(st->genClef());
+      stemless->setChecked(st->slashStyle());
+      showBarlines->setChecked(st->showBarlines());
+      genTimesig->setChecked(st->genTimesig());
+
       // switch to stack page and set props specific to each staff group
       QFont f = QFont();
+
       switch(st->group()) {
             case PITCHED_STAFF:
+                  {
+                  StaffTypePitched* ps = static_cast<StaffTypePitched*>(st);
+
                   stack->setCurrentIndex(0);
-                  genKeysigPitched->setChecked(st->genKeysig());
-                  showLedgerLinesPitched->setChecked(st->showLedgerLines());
+                  genKeysigPitched->setChecked(ps->genKeysig());
+                  showLedgerLinesPitched->setChecked(ps->showLedgerLines());
+                  }
                   break;
+
             case TAB_STAFF:
+                  {
+                  StaffTypeTablature* tab = static_cast<StaffTypeTablature*>(st);
                   stack->setCurrentIndex(1);
-//                  staffGroup->setText(tr("Tablature"));
-                  tab = (StaffTypeTablature*)st;
-                  genTimesigTablature->setChecked(tab->genTimesig());
                   upsideDown->setChecked(tab->upsideDown());
                   f.setFamily(tab->fretFontName());
                   f.setPointSizeF(tab->fretFontSize());
@@ -240,10 +252,16 @@ void EditStaffType::typeChanged(QListWidgetItem* n, QListWidgetItem* o)
                               noteValues2->setChecked(true);
                               }
                         }
+                  }
                   break;
+
             case PERCUSSION_STAFF:
+                  {
+                  StaffTypePercussion* ps = static_cast<StaffTypePercussion*>(st);
+                  genKeysigPercussion->setChecked(ps->genKeysig());
+                  showLedgerLinesPercussion->setChecked(ps->showLedgerLines());
                   stack->setCurrentIndex(2);
-//                  staffGroup->setText(tr("Percussion"));
+                  }
                   break;
             }
       }
@@ -309,9 +327,9 @@ void EditStaffType::presetTablatureClicked()
             case 0:                             // guitar
                   lines->setValue(6);
                   lineDistance->setValue(1.5);
-                  genClefTablature->setChecked(true);
-                  showBarlinesTablature->setChecked(true);
-                  genTimesigTablature->setChecked(false);
+                  genClef->setChecked(true);
+                  showBarlines->setChecked(true);
+                  genTimesig->setChecked(false);
                   upsideDown->setChecked(false);
                   f.setFamily("MScoreTabulatureModern");
                   f.setPointSizeF(10);
@@ -336,9 +354,9 @@ void EditStaffType::presetTablatureClicked()
             case 1:                             // bass
                   lines->setValue(4);
                   lineDistance->setValue(1.5);
-                  genClefTablature->setChecked(true);
-                  showBarlinesTablature->setChecked(true);
-                  genTimesigTablature->setChecked(false);
+                  genClef->setChecked(true);
+                  showBarlines->setChecked(true);
+                  genTimesig->setChecked(false);
                   upsideDown->setChecked(false);
                   f.setFamily("MScoreTabulatureModern");
                   f.setPointSizeF(10);
@@ -363,9 +381,9 @@ void EditStaffType::presetTablatureClicked()
             case 2:                             // Italian
                   lines->setValue(6);
                   lineDistance->setValue(1.5);
-                  genClefTablature->setChecked(false);
-                  showBarlinesTablature->setChecked(true);
-                  genTimesigTablature->setChecked(true);
+                  genClef->setChecked(false);
+                  showBarlines->setChecked(true);
+                  genTimesig->setChecked(true);
                   upsideDown->setChecked(true);
                   f.setFamily("MScoreTabulatureRenaiss");
                   f.setPointSizeF(10);
@@ -390,9 +408,9 @@ void EditStaffType::presetTablatureClicked()
             case 3:                             // French
                   lines->setValue(6);
                   lineDistance->setValue(1.5);
-                  genClefTablature->setChecked(false);
-                  showBarlinesTablature->setChecked(true);
-                  genTimesigTablature->setChecked(true);
+                  genClef->setChecked(false);
+                  showBarlines->setChecked(true);
+                  genTimesig->setChecked(true);
                   upsideDown->setChecked(false);
                   f.setFamily("MScoreTabulatureRenaiss");
                   f.setPointSizeF(10);

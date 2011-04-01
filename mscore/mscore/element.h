@@ -421,21 +421,21 @@ typedef ElementList::const_iterator ciElement;
 */
 
 class StaffLines : public Element {
-      // Spatium lineWidth;
-      qreal _width;
-      qreal _dist;
+      qreal dist;
+      qreal lw;
+      int lines;
 
    public:
       StaffLines(Score*);
       virtual StaffLines* clone() const    { return new StaffLines(*this); }
       virtual ElementType type() const     { return STAFF_LINES; }
+      virtual void layout();
+
       Measure* measure() const             { return (Measure*)parent(); }
-      void setWidth(qreal v)               { _width = v;         }
       virtual void draw(Painter*) const;
       virtual QPointF canvasPos() const;   ///< position in canvas coordinates
       double y1() const;
       double y2() const;
-      virtual QRectF bbox() const;
       };
 
 //---------------------------------------------------------
