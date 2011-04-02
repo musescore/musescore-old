@@ -78,13 +78,13 @@ void MuseData::musicalAttribute(QString s, Part* part)
                   ;
             else if (item[0] == 'C') {
                   int staffIdx = 1;
-                  int col = 2;
+//                  int col = 2;
                   if (item[1].isDigit()) {
                         staffIdx = item.mid(1,1).toInt();
-                        col = 3;
+//                        col = 3;
                         }
                   staffIdx -= 1;
-                  int clef = item.mid(col).toInt();
+/*                  int clef = item.mid(col).toInt();
                   ClefType mscoreClef = CLEF_G;
                   switch(clef) {
                         case 4:  mscoreClef = CLEF_G; break;
@@ -96,6 +96,7 @@ void MuseData::musicalAttribute(QString s, Part* part)
                               printf("unknown clef %d\n", clef);
                               break;
                         }
+                  */
 //                  Staff* staff = part->staff(staffIdx);
 //                  staff->setClef(curTick, mscoreClef);
                   }

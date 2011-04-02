@@ -631,9 +631,8 @@ void Score::write(Xml& xml, bool /*autosave*/)
 
       if (!parentScore()) {
             int idx = 0;
-printf("Score::write: %d staffTypes\n", _staffTypes.size());
             foreach(StaffType* st, _staffTypes) {
-                  if ((idx >= STAFF_TYPES) || st->modified())
+                  if ((idx >= STAFF_TYPES) || !st->isEqual(*::staffTypes[idx]))
                         st->write(xml, idx);
                   ++idx;
                   }
@@ -2158,15 +2157,32 @@ Text* Score::getText(int subtype)
       }
 
 //---------------------------------------------------------
+//   rootScore
+//---------------------------------------------------------
+
+Score* Score::rootScore()
+      {
+      Score* score = this;
+      while (score->parentScore())
+            score = parentScore();
+      return score;
+      }
+
+const Score* Score::rootScore() const
+      {
+      const Score* score = this;
+      while (score->parentScore())
+            score = parentScore();
+      return score;
+      }
+
+//---------------------------------------------------------
 //   undo
 //---------------------------------------------------------
 
 UndoStack* Score::undo() const
       {
-      const Score* score = this;
-      while (score->parentScore())
-            score = parentScore();
-      return score->_undo;
+      return rootScore()->_undo;
       }
 
 //---------------------------------------------------------
@@ -2175,10 +2191,7 @@ UndoStack* Score::undo() const
 
 RepeatList* Score::repeatList()  const
       {
-      const Score* score = this;
-      while (score->parentScore())
-            score = parentScore();
-      return score->_repeatList;
+      return rootScore()->_repeatList;
       }
 
 //---------------------------------------------------------
@@ -2187,10 +2200,7 @@ RepeatList* Score::repeatList()  const
 
 QHash<int, LinkedElements*>& Score::links()
       {
-      Score* score = this;
-      while (score->parentScore())
-            score = parentScore();
-      return score->_elinks;
+      return rootScore()->_elinks;
       }
 
 //---------------------------------------------------------
@@ -2199,10 +2209,7 @@ QHash<int, LinkedElements*>& Score::links()
 
 AL::TempoMap* Score::tempomap() const
       {
-      const Score* score = this;
-      while (score->parentScore())
-            score = parentScore();
-      return score->_tempomap;
+      return rootScore()->_tempomap;
       }
 
 //---------------------------------------------------------
@@ -2211,10 +2218,7 @@ AL::TempoMap* Score::tempomap() const
 
 AL::TimeSigMap* Score::sigmap() const
       {
-      const Score* score = this;
-      while (score->parentScore())
-            score = parentScore();
-      return score->_sigmap;
+      return rootScore()->_sigmap;
       }
 
 //---------------------------------------------------------
@@ -2223,31 +2227,32 @@ AL::TimeSigMap* Score::sigmap() const
 
 const QList<StaffType*>& Score::staffTypes() const
       {
-      const Score* score = this;
-      while (score->parentScore())
-            score = parentScore();
-      return score->_staffTypes;
+      return rootScore()->_staffTypes;
       }
 
 QList<StaffType*>& Score::staffTypes()
       {
-      Score* score = this;
-      while (score->parentScore())
-            score = parentScore();
-      return score->_staffTypes;
+      return rootScore()->_staffTypes;
       }
 
 //---------------------------------------------------------
 //   setStaffTypes
 //---------------------------------------------------------
 
-void Score::setStaffTypes(const QList<StaffType*>& tl)
+void Score::addStaffTypes(const QList<StaffType*>& tl)
       {
-      Score* score = this;
-      while (score->parentScore())
-            score = parentScore();
+      Score* score = rootScore();
       foreach(StaffType* st, tl)
             score->_staffTypes.append(st->clone());
+      }
+
+//---------------------------------------------------------
+//   replaceStaffTypes
+//---------------------------------------------------------
+
+void Score::replaceStaffTypes(const QList<StaffType*>& tl)
+      {
+      rootScore()->_staffTypes = tl;
       }
 
 //---------------------------------------------------------

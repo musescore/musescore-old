@@ -171,7 +171,7 @@ void OmrSystem::searchBarLines()
       double x = -10000.0;
       double spatium = _page->spatium();
       int nbar = 0;
-      int i = 0;
+//      int i = 0;
       int n = barLines.size();
       for (int i = 0; i < n; ++i) {
             const QLineF& l = barLines[i];
@@ -271,7 +271,7 @@ void OmrPage::readHeader(Score* /*score*/)
 
       int slice = 0;
       double maxH = 0.0;
-      int maxIdx;
+//      int maxIdx;
       for (;slice < _slices.size(); ++slice) {
             double h = _slices[slice].height();
 
@@ -279,7 +279,7 @@ void OmrPage::readHeader(Score* /*score*/)
                   break;
             if (h > maxH) {
                   maxH = h;
-                  maxIdx = slice;
+//                  maxIdx = slice;
                   }
             }
 #ifdef OCR

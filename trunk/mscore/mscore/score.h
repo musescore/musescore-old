@@ -787,7 +787,8 @@ class Score : public QObject {
 
       const QList<StaffType*>& staffTypes() const;
       QList<StaffType*>& staffTypes();
-      void setStaffTypes(const QList<StaffType*>& tl);
+      void addStaffTypes(const QList<StaffType*>& tl);
+      void replaceStaffTypes(const QList<StaffType*>&);
 
       void addLayoutFlags(LayoutFlags val)               { layoutFlags |= val; }
       int symIdx() const                                 { return _symIdx; }
@@ -797,6 +798,8 @@ class Score : public QObject {
       Volta* searchVolta(int tick) const;
       Score* parentScore() const    { return _parentScore; }
       void setParentScore(Score* s) { _parentScore = s;    }
+      const Score* rootScore() const;
+      Score* rootScore();
       void addExcerpt(Score*);
       void removeExcerpt(Score*);
       void createRevision();

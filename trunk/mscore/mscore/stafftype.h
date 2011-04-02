@@ -43,8 +43,6 @@ class Painter;
 class StaffType {
 
    protected:
-      bool _modified;         // if true, this StaffType belongs to Score(),
-                              // otherwise it is a global build in
       QString _name;
       uchar _lines;
       char  _stepOffset;
@@ -63,6 +61,7 @@ class StaffType {
       virtual StaffGroup group() const = 0;
       virtual StaffType* clone() const = 0;
       virtual const char* groupName() const = 0;
+      virtual bool isEqual(const StaffType&) const;
       void setLines(int val);
       int lines() const                        { return _lines;           }
       void setStepOffset(int v)                { _stepOffset = v;         }
@@ -73,8 +72,6 @@ class StaffType {
       bool genClef() const                     { return _genClef;         }
       void setShowBarlines(bool val)           { _showBarlines = val;     }
       bool showBarlines() const                { return _showBarlines;    }
-      bool modified() const                    { return _modified;        }
-      void setModified(bool val)               { _modified = val;         }
       virtual void write(Xml& xml, int) const;
       void writeProperties(Xml& xml) const;
       virtual void read(QDomElement);
@@ -106,6 +103,7 @@ class StaffTypePitched : public StaffType {
       virtual StaffGroup group() const        { return PITCHED_STAFF; }
       virtual StaffTypePitched* clone() const { return new StaffTypePitched(*this); }
       virtual const char* groupName() const   { return "pitched"; }
+      virtual bool isEqual(const StaffType&) const;
 
       virtual void read(QDomElement);
       virtual void write(Xml& xml, int) const;
@@ -123,6 +121,7 @@ class StaffTypePitched : public StaffType {
 class StaffTypePercussion : public StaffType {
       bool _genKeysig;        // create key signature at beginning of system
       bool _showLedgerLines;
+      virtual bool isEqual(const StaffType&) const;
 
    public:
       StaffTypePercussion();
@@ -191,6 +190,7 @@ class StaffTypeTablature : public StaffType {
       virtual const char* groupName() const     { return "tablature"; }
       virtual void read(QDomElement e);
       virtual void write(Xml& xml, int) const;
+      virtual bool isEqual(const StaffType&) const;
 
       // properties getters (some getters require updated metrics)
       double  durationBoxH()              { if(!_genDurations && !_slashStyle) return 0.0;
