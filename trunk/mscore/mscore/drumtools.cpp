@@ -80,23 +80,20 @@ DrumTools::DrumTools(QWidget* parent)
 //   drumTools
 //---------------------------------------------------------
 
-DrumTools* MuseScore::drumTools()
+void MuseScore::showDrumTools(Drumset* drumset, Staff* staff)
       {
-      if (!_drumTools) {
-            _drumTools = new DrumTools(this);
-            addDockWidget(Qt::BottomDockWidgetArea, _drumTools);
+      if (drumset) {
+            if (!_drumTools) {
+                  _drumTools = new DrumTools(this);
+                  addDockWidget(Qt::BottomDockWidgetArea, _drumTools);
+                  }
+            _drumTools->setDrumset(cs, staff, drumset);
+            _drumTools->show();
             }
-      return _drumTools;
-      }
-
-//---------------------------------------------------------
-//   hideDrumTools
-//---------------------------------------------------------
-
-void MuseScore::hideDrumTools()
-      {
-      if (_drumTools)
-            _drumTools->hide();
+      else {
+            if (_drumTools)
+                  _drumTools->hide();
+            }
       }
 
 //---------------------------------------------------------

@@ -177,7 +177,7 @@ void Score::end1()
       _updateAll  = false;
       startLayout = 0;
       if (!noteEntryMode())
-            updateInputState();
+            mscore->updateInputState(this);
       else
             emit inputCursorChanged();
       }
@@ -3065,7 +3065,7 @@ void Score::cmdHalfDuration()
       else
             changeCRlen(cr, d);
       _is.setDuration(d);
-      updateInputState();
+      mscore->updateInputState(this);
       nextInputPos(cr, false);
       }
 
@@ -3096,7 +3096,7 @@ void Score::cmdDoubleDuration()
       else
             changeCRlen(cr, d);
       _is.setDuration(d);
-      updateInputState();
+      mscore->updateInputState(this);
       nextInputPos(cr, false);
       }
 

@@ -1579,7 +1579,7 @@ void ScoreView::cmdTuplet(int n, ChordRest* cr)
                   qApp->processEvents();
                   }
             _score->inputState().setDuration(baseLen);
-            _score->updateInputState();
+            mscore->updateInputState(_score);
             }
       }
 

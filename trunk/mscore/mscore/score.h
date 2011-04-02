@@ -518,7 +518,6 @@ class Score : public QObject {
       void cmdDeleteSelection();
 
       void putNote(const QPointF& pos, bool replace);
-      void updateInputState();
       void setInputState(Element* obj);
 
       void startCmd();        // start undoable command

@@ -3124,7 +3124,7 @@ void ScoreView::startNoteEntry()
 
       _score->select(el, SELECT_SINGLE, 0);
       _score->inputState().noteEntryMode = true;
-      _score->updateInputState();
+      mscore->updateInputState(_score);
       setCursorOn(true);
       _score->inputState().rest = false;
       getAction("pad-rest")->setChecked(false);
@@ -3985,7 +3985,7 @@ void ScoreView::endUndoRedo()
             }
       _score->updateSelection();
       _score->setLayoutAll(true);
-      _score->updateInputState();
+      mscore->updateInputState(_score);
       _score->end();
       }
 
