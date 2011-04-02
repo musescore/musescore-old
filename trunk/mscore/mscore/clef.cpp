@@ -129,12 +129,20 @@ void Clef::layout()
       double yoff     = 0.0;
       elements.clear();
 
-      ClefType st = clefType();
-      if (staff() && staff()->useTablature()) {
-            if (!staff()->staffType()->genClef())
-		      return;
-            if (clefTable[st].staffGroup != TAB_STAFF)
-                  st = CLEF_TAB;
+      ClefType st    = clefType();
+      int lines      = 5;
+      qreal lineDist = 1.0;
+      if (staff() && staff()->staffType()) {
+            StaffType* staffType = staff()->staffType();
+
+            if (staffType->group() == TAB_STAFF) {
+                  if (!staffType->genClef())
+                        return;
+                  if (clefTable[st].staffGroup != TAB_STAFF)
+                        st = CLEF_TAB;
+	            }
+            lines = staffType->lines();
+            lineDist = staffType->lineDistance().val();
 	      }
       Symbol* symbol = new Symbol(score());
 
@@ -232,47 +240,19 @@ void Clef::layout()
                   yoff = 0.0;
                   break;
             case CLEF_TAB:
-                  {
                   symbol->setSym(tabclefSym);
-                  Staff* st = staff();
-                  if (st) {               // clefs in palette do not have a staff
-                        int numOfLines  = st->staffType()->lines();
-                        double lineDist = st->staffType()->lineDistance().val();
-//                        switch(numOfLines) {
-//                              default:
-//                              case 6: yoff = 2.5 * 1.5; break;
-//                              case 4: yoff = 1.5 * 1.5; break;
-//                              }
-                        // on tablature, position clef at half the number of spaces * line distance
-                        yoff = lineDist * (numOfLines-1) / 2.0;
-                        }
-                  else
-                        yoff = 2.0;
-                  }
+                  // on tablature, position clef at half the number of spaces * line distance
+                  yoff = lineDist * (lines - 1) / 2.0;
                   break;
             case CLEF_TAB2:
-                  {
                   symbol->setSym(tabclef2Sym);
-                  Staff* st = staff();
-                  if (st) {
-                        int numOfLines  = st->staffType()->lines();
-                        double lineDist = st->staffType()->lineDistance().val();
-//                        switch(numOfLines) {
-//                              default:
-//                              case 6: yoff = 2.5 * 1.5; break;
-//                              case 4: yoff = 1.5 * 1.5; break;
-//                              }
-                        // on tablature, position clef at half the number of spaces * line distance
-                        yoff = lineDist * (numOfLines-1) / 2.0;
-                        }
-                  else
-                        yoff = 2.0;
-                  }
+                  // on tablature, position clef at half the number of spaces * line distance
+                  yoff = lineDist * (lines-1) / 2.0;
                   break;
             case CLEF_PERC:
             case CLEF_PERC2:
                   symbol->setSym(percussionclefSym);
-                  yoff = (staff()->lines() - 1) * 0.5;      // was 2.0
+                  yoff = (lines - 1) * 0.5;      // was 2.0
                   break;
             case CLEF_G4:
                   symbol->setSym(trebleclefSym);
