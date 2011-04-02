@@ -277,7 +277,6 @@ void EditStaffType::createNewType()
       //
       int idx       = staffTypeList->currentItem()->data(Qt::UserRole).toInt();
       StaffType* ns = staffTypes[idx]->clone();
-      ns->setModified(true);
 
       //
       // create unique new name for StaffType

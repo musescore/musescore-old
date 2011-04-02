@@ -61,7 +61,6 @@ void initStaffTypes()
 
 StaffType::StaffType()
       {
-      _modified        = false;
       _stepOffset      = 0;
 
       _genClef         = true;      // create clef at beginning of system
@@ -73,13 +72,28 @@ StaffType::StaffType()
 StaffType::StaffType(const QString& s)
       {
       _name            = s;
-      _modified        = false;
       _stepOffset      = 0;
 
       _genClef         = true;      // create clef at beginning of system
       _showBarlines    = true;
       _slashStyle      = false;     // do not show stems
       _genTimesig      = true;      // whether time signature is shown or not
+      }
+
+//---------------------------------------------------------
+//   isEqual
+//---------------------------------------------------------
+
+bool StaffType::isEqual(const StaffType& st) const
+      {
+      return st.group() == group()
+         && st._name         == _name
+         && st._stepOffset   == _stepOffset
+         && st._genClef      == _genClef
+         && st._showBarlines == _showBarlines
+         && st._slashStyle   == _slashStyle
+         && st._genTimesig   == _genTimesig
+         ;
       }
 
 //---------------------------------------------------------
@@ -178,6 +192,18 @@ StaffTypePitched::StaffTypePitched()
       }
 
 //---------------------------------------------------------
+//   isEqual
+//---------------------------------------------------------
+
+bool StaffTypePitched::isEqual(const StaffType& st) const
+      {
+      return StaffType::isEqual(st)
+         && static_cast<const StaffTypePitched&>(st)._genKeysig       == _genKeysig
+         && static_cast<const StaffTypePitched&>(st)._showLedgerLines == _showLedgerLines
+         ;
+      }
+
+//---------------------------------------------------------
 //   write
 //---------------------------------------------------------
 
@@ -222,6 +248,18 @@ StaffTypePercussion::StaffTypePercussion()
       {
       _genKeysig       = true;      // create key signature at beginning of system
       _showLedgerLines = true;
+      }
+
+//---------------------------------------------------------
+//   isEqual
+//---------------------------------------------------------
+
+bool StaffTypePercussion::isEqual(const StaffType& st) const
+      {
+      return StaffType::isEqual(st)
+         && static_cast<const StaffTypePercussion&>(st)._genKeysig       == _genKeysig
+         && static_cast<const StaffTypePercussion&>(st)._showLedgerLines == _showLedgerLines
+         ;
       }
 
 //---------------------------------------------------------
@@ -293,6 +331,27 @@ void StaffTypeTablature::init()
       // internal
       _durationMetricsValid = _fretMetricsValid = false;
       _durationBoxH = _durationBoxY = _durationYOffset = _fretBoxH = _fretBoxY = _fretYOffset = _refDPI = 0.0;
+      }
+
+//---------------------------------------------------------
+//   isEqual
+//---------------------------------------------------------
+
+bool StaffTypeTablature::isEqual(const StaffType& st) const
+      {
+      return StaffType::isEqual(st)
+         && static_cast<const StaffTypeTablature&>(st)._durationFontName   == _durationFontName
+         && static_cast<const StaffTypeTablature&>(st)._durationFontSize   == _durationFontSize
+         && static_cast<const StaffTypeTablature&>(st)._durationFontUserY  == _durationFontUserY
+         && static_cast<const StaffTypeTablature&>(st)._fretFontName       == _fretFontName
+         && static_cast<const StaffTypeTablature&>(st)._fretFontSize       == _fretFontSize
+         && static_cast<const StaffTypeTablature&>(st)._fretFontUserY      == _fretFontUserY
+         && static_cast<const StaffTypeTablature&>(st)._genDurations       == _genDurations
+         && static_cast<const StaffTypeTablature&>(st)._linesThrough       == _linesThrough
+         && static_cast<const StaffTypeTablature&>(st)._onLines            == _onLines
+         && static_cast<const StaffTypeTablature&>(st)._upsideDown         == _upsideDown
+         && static_cast<const StaffTypeTablature&>(st)._useNumbers         == _useNumbers
+         ;
       }
 
 //---------------------------------------------------------

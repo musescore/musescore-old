@@ -67,10 +67,6 @@ EditStaff::EditStaff(Staff* s, QWidget* parent)
       longName->setHtml(part->instr(0)->longName().toHtml());
       invisible->setChecked(staff->invisible());
 
-//      aPitchMin->setValue(instrument.minPitchA());
-//      aPitchMax->setValue(instrument.maxPitchA());
-//      pPitchMin->setValue(instrument.minPitchP());
-//      pPitchMax->setValue(instrument.maxPitchP());
       _minPitchA = instrument.minPitchA();
       _maxPitchA = instrument.maxPitchA();
       _minPitchP = instrument.minPitchP();
@@ -166,7 +162,7 @@ void EditStaff::apply()
       int intervalIdx = iList->currentIndex();
       bool upFlag     = up->isChecked();
 
-      Interval interval = intervalList[intervalIdx];
+      Interval interval  = intervalList[intervalIdx];
       interval.diatonic  += octave->value() * 7;
       interval.chromatic += octave->value() * 12;
 
@@ -184,28 +180,25 @@ void EditStaff::apply()
       bool s   = small->isChecked();
       bool inv = invisible->isChecked();
       StaffType* st = score->staffTypes()[staffType->currentIndex()];
-      bool updateNeeded = false;
+
       // before changing instrument, check if notes need to be updated
       // true if changing into or away from TAB or from one TAB type to another
-      if(   (st->group() == TAB_STAFF && staff->staffType()->group() != TAB_STAFF) ||
-            (st->group() != TAB_STAFF && staff->staffType()->group() == TAB_STAFF) ||
-            (st->group() == TAB_STAFF && staff->staffType()->group() == TAB_STAFF &&
-                        instrument.tablature() != part->instr()->tablature()) )
-            updateNeeded = true;
 
-      if (!(instrument == *part->instr())) {
-printf("instrument changed <%s>\n", qPrintable(instrument.longName().toPlainText()));
+      StaffGroup ng = st->group();                          // new staff group
+      StaffGroup og = staff->staffType()->group();          // old staff group
+
+      bool updateNeeded = (ng == TAB_STAFF && og != TAB_STAFF) ||
+                          (ng != TAB_STAFF && og == TAB_STAFF) ||
+                          (ng == TAB_STAFF && og == TAB_STAFF
+                             && instrument.tablature() != part->instr()->tablature());
+
+      if (!(instrument == *part->instr()))
             score->undo()->push(new ChangePart(part, instrument));
-            }
 
-      if (
-         s != staff->small()
-         || inv != staff->invisible()
-         || st  != staff->staffType()
-           )
+      if (s != staff->small() || inv != staff->invisible() || st  != staff->staffType())
             score->undo()->push(new ChangeStaff(staff, s, inv, staff->show(), st));
 
-      if(updateNeeded)
+      if (updateNeeded)
             score->cmdUpdateNotes();
 
       score->setLayoutAll(true);
@@ -270,7 +263,9 @@ void EditStaff::showEditStaffType()
       if (est->exec() && est->isModified()) {
             QList<StaffType*> tl = est->getStaffTypes();
             Score* score = staff->score();
-            score->setStaffTypes(tl);
+            score->replaceStaffTypes(tl);
+
+            //-- update combo box
             int curIdx   = 0;
             staffType->clear();
             int idx = 0;

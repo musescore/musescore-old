@@ -1398,7 +1398,7 @@ bool Score::read(QDomElement dScore)
                   StaffType* ost = _staffTypes.value(idx);
                   StaffType* st;
                   if (ost)
-                        st = ost->clone();
+                        st = ost;
                   else {
                         QString group  = ee.attribute("group", "pitched");
                         if (group == "percussion")
@@ -1409,14 +1409,10 @@ bool Score::read(QDomElement dScore)
                               st  = new StaffTypePitched();
                         }
                   st->read(ee);
-                  if (ost) {            // if there is already a stafftype
-                        if (ost->modified())  // if it belongs to Score()
-                              delete ost;
+                  if (idx < _staffTypes.size())
                         _staffTypes[idx] = st;
-                        }
                   else
                         _staffTypes.append(st);
-                  st->setModified(true);
                   }
             else if (tag == "siglist")
                   _sigmap->read(ee, _fileDivision);

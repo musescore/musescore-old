@@ -129,11 +129,11 @@ void KeySig::layout()
             delete ks;
       keySymbols.clear();
 
-      int yoff = 0;
+//      int yoff = 0;
       int clef = 0;
       if (staff()) {
             clef = staff()->clef(segment());
-            yoff = clefTable[clef].yOffset;
+//            yoff = clefTable[clef].yOffset;
             }
 
       char t1  = _sig.accidentalType();
