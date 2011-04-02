@@ -674,8 +674,8 @@ SegmentView::SegmentView()
       sb.segmentType->addItem("SegEndBarLine",         0x100);
       sb.segmentType->addItem("SegTimeSigAnnounce",    0x200);
       sb.segmentType->addItem("SegKeySigAnnounce",     0x400);
-      connect(sb.lyrics, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
-      connect(sb.spannerFor, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
+      connect(sb.lyrics, SIGNAL(itemClicked(QListWidgetItem*)),      SLOT(gotoElement(QListWidgetItem*)));
+      connect(sb.spannerFor, SIGNAL(itemClicked(QListWidgetItem*)),  SLOT(gotoElement(QListWidgetItem*)));
       connect(sb.spannerBack, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
       connect(sb.annotations, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
       }
@@ -720,19 +720,22 @@ void SegmentView::setElement(Element* e)
       foreach(Spanner* sp, s->spannerFor()) {
             QString s;
             s.setNum(long(sp), 16);
-            QListWidgetItem* item = new QListWidgetItem(s, 0, long(sp));
+            QListWidgetItem* item = new QListWidgetItem(s);
+            item->setData(Qt::UserRole, QVariant::fromValue<void*>((void*)sp));
             sb.spannerFor->addItem(item);
             }
       foreach(Spanner* sp, s->spannerBack()) {
             QString s;
             s.setNum(long(sp), 16);
-            QListWidgetItem* item = new QListWidgetItem(s, 0, long(sp));
+            QListWidgetItem* item = new QListWidgetItem(s);
+            item->setData(Qt::UserRole, QVariant::fromValue<void*>((void*)sp));
             sb.spannerBack->addItem(item);
             }
       foreach(Element* sp, s->annotations()) {
             QString s;
             s.setNum(long(sp), 16);
-            QListWidgetItem* item = new QListWidgetItem(s, 0, long(sp));
+            QListWidgetItem* item = new QListWidgetItem(s);
+            item->setData(Qt::UserRole, QVariant::fromValue<void*>((void*)sp));
             sb.annotations->addItem(item);
             }
       }
@@ -820,21 +823,24 @@ void ShowChordWidget::setElement(Element* e)
       foreach(Articulation* a, *chord->getArticulations()) {
             QString s;
             s.setNum(long(a), 16);
-            QListWidgetItem* item = new QListWidgetItem(s, 0, long(a));
+            QListWidgetItem* item = new QListWidgetItem(s);
+            item->setData(Qt::UserRole, QVariant::fromValue<void*>((void*)a));
             crb.attributes->addItem(item);
             }
       crb.slurFor->clear();
       foreach(Slur* slur, chord->slurFor()) {
             QString s;
             s.setNum(long(slur), 16);
-            QListWidgetItem* item = new QListWidgetItem(s, 0, long(slur));
+            QListWidgetItem* item = new QListWidgetItem(s);
+            item->setData(Qt::UserRole, QVariant::fromValue<void*>((void*)slur));
             crb.slurFor->addItem(item);
             }
       crb.slurBack->clear();
       foreach(Slur* slur, chord->slurBack()) {
             QString s;
             s.setNum(long(slur), 16);
-            QListWidgetItem* item = new QListWidgetItem(s, 0, long(slur));
+            QListWidgetItem* item = new QListWidgetItem(s);
+            item->setData(Qt::UserRole, QVariant::fromValue<void*>((void*)slur));
             crb.slurBack->addItem(item);
             }
 
@@ -842,14 +848,16 @@ void ShowChordWidget::setElement(Element* e)
       foreach(LedgerLine* h, *chord->ledgerLines()) {
             QString s;
             s.setNum(long(h), 16);
-            QListWidgetItem* item = new QListWidgetItem(s, 0, long(h));
+            QListWidgetItem* item = new QListWidgetItem(s);
+            item->setData(Qt::UserRole, QVariant::fromValue<void*>((void*)h));
             cb.helplineList->addItem(item);
             }
       cb.notes->clear();
       foreach(Note* n, chord->notes()) {
             QString s;
             s.setNum(long(n), 16);
-            QListWidgetItem* item = new QListWidgetItem(s, 0, long(n));
+            QListWidgetItem* item = new QListWidgetItem(s);
+            item->setData(Qt::UserRole, QVariant::fromValue<void*>((void*)n));
             cb.notes->addItem(item);
             }
       }
@@ -998,7 +1006,8 @@ void ShowNoteWidget::setElement(Element* e)
       foreach(Element* text, *note->el()) {
             QString s;
             s.setNum(long(text), 16);
-            QListWidgetItem* item = new QListWidgetItem(s, 0, long(text));
+            QListWidgetItem* item = new QListWidgetItem(s);
+            item->setData(Qt::UserRole, QVariant::fromValue<void*>((void*)text));
             nb.fingering->addItem(item);
             }
       }
@@ -1140,21 +1149,24 @@ void ShowRestWidget::setElement(Element* e)
       foreach(Slur* slur, rest->slurFor()) {
             QString s;
             s.setNum(long(slur), 16);
-            QListWidgetItem* item = new QListWidgetItem(s, 0, long(slur));
+            QListWidgetItem* item = new QListWidgetItem(s);
+            item->setData(Qt::UserRole, QVariant::fromValue<void*>((void*)slur));
             crb.slurFor->addItem(item);
             }
       crb.slurBack->clear();
       foreach(Slur* slur, rest->slurBack()) {
             QString s;
             s.setNum(long(slur), 16);
-            QListWidgetItem* item = new QListWidgetItem(s, 0, long(slur));
+            QListWidgetItem* item = new QListWidgetItem(s);
+            item->setData(Qt::UserRole, QVariant::fromValue<void*>((void*)slur));
             crb.slurBack->addItem(item);
             }
 
       foreach(Articulation* a, *rest->getArticulations()) {
             QString s;
             s.setNum(long(a), 16);
-            QListWidgetItem* item = new QListWidgetItem(s, 0, long(a));
+            QListWidgetItem* item = new QListWidgetItem(s);
+            item->setData(Qt::UserRole, QVariant::fromValue<void*>((void*)a));
             crb.attributes->addItem(item);
             }
 
@@ -1495,9 +1507,9 @@ ShowElementBase::ShowElementBase()
 //   gotoElement
 //---------------------------------------------------------
 
-void ShowElementBase::gotoElement(QListWidgetItem* ai)
+void ShowElementBase::gotoElement(QListWidgetItem* item)
       {
-      Element* e = (Element*)(ai->type());
+      Element* e = (Element*)item->data(Qt::UserRole).value<void*>();
       emit elementChanged(e);
       }
 
