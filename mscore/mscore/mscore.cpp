@@ -1255,6 +1255,7 @@ void MuseScore::setCurrentScoreView(ScoreView* view)
                   //   initialize synthesizer with new score
                   //    settings
                   synti->setState(cv->score()->syntiState());
+                  updateInputState(cv->score());
                   }
             cs = cv->score();
             view->setFocusRect();

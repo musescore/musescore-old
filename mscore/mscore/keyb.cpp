@@ -227,7 +227,7 @@ void Score::padToggle(int n)
                   cmdSetBeamMode(BEAM_BEGIN32);
                   break;
             }
-      updateInputState();
+      mscore->updateInputState(this);
       if (n < PAD_NOTE00 || n > PAD_DOTDOT)
             return;
 
@@ -242,7 +242,7 @@ void Score::padToggle(int n)
             }
 
       if (noteEntryMode() || !selection().isSingle()) {
-            updateInputState();    // updates dot state
+            mscore->updateInputState(this);    // updates dot state
             return;
             }
 
@@ -253,7 +253,7 @@ void Score::padToggle(int n)
             Duration d = r->durationType();
             if (d.type() == Duration::V_MEASURE) {
                   _is.setDots(0);
-                  updateInputState();    // updates dot state
+                  mscore->updateInputState(this);    // updates dot state
                   // return;
                   }
             }
@@ -304,12 +304,13 @@ void Score::setInputState(Element* e)
 // printf("setInputState %s\n", e ? e->name() : "--");
       bool enable = e && (e->type() == NOTE || e->type() == REST);
       enableInputToolbar(enable);
-      if (e == 0)
+      if (e == 0) {
+            mscore->showDrumTools(0, 0);
             return;
+            }
 
       _is.setDrumNote(-1);
-
-      Drumset* drumset = 0;
+      _is.setDrumset(0);
       if (e->type() == NOTE) {
             Note* note    = static_cast<Note*>(e);
             Chord* chord  = note->chord();
@@ -347,60 +348,53 @@ void Score::setInputState(Element* e)
                         _is.setDrumNote(static_cast<Note*>(e)->pitch());
                   else
                         _is.setDrumNote(-1);
-                  drumset = instr->drumset();
+                  _is.setDrumset(instr->drumset());
                   }
             }
-
-      if (drumset) {
-            DrumTools* dt = mscore->drumTools();
-            dt->show();
-            dt->setDrumset(this, e->staff(), drumset);
-            }
-      else {
-            mscore->hideDrumTools();
-            }
-      _is.setDrumset(drumset);
-      updateInputState();
+      mscore->updateInputState(this);
       }
 
 //---------------------------------------------------------
 //   updateInputState
 //---------------------------------------------------------
 
-void Score::updateInputState()
+void MuseScore::updateInputState(Score* score)
       {
-      getAction("pad-rest")->setChecked(_is.rest);
-      getAction("pad-dot")->setChecked(_is.duration().dots() == 1);
-      getAction("pad-dotdot")->setChecked(_is.duration().dots() == 2);
+      InputState& is = score->inputState();
+      showDrumTools(is.drumset(), score->staff(is.track() / VOICES));
 
-      getAction("note-longa")->setChecked(_is.duration()  == Duration::V_LONG);
-      getAction("note-breve")->setChecked(_is.duration()  == Duration::V_BREVE);
-      getAction("pad-note-1")->setChecked(_is.duration()  == Duration::V_WHOLE);
-      getAction("pad-note-2")->setChecked(_is.duration()  == Duration::V_HALF);
-      getAction("pad-note-4")->setChecked(_is.duration()  == Duration::V_QUARTER);
-      getAction("pad-note-8")->setChecked(_is.duration()  == Duration::V_EIGHT);
-      getAction("pad-note-16")->setChecked(_is.duration() == Duration::V_16TH);
-      getAction("pad-note-32")->setChecked(_is.duration() == Duration::V_32ND);
-      getAction("pad-note-64")->setChecked(_is.duration() == Duration::V_64TH);
+      getAction("pad-rest")->setChecked(is.rest);
+      getAction("pad-dot")->setChecked(is.duration().dots() == 1);
+      getAction("pad-dotdot")->setChecked(is.duration().dots() == 2);
+
+      getAction("note-longa")->setChecked(is.duration()  == Duration::V_LONG);
+      getAction("note-breve")->setChecked(is.duration()  == Duration::V_BREVE);
+      getAction("pad-note-1")->setChecked(is.duration()  == Duration::V_WHOLE);
+      getAction("pad-note-2")->setChecked(is.duration()  == Duration::V_HALF);
+      getAction("pad-note-4")->setChecked(is.duration()  == Duration::V_QUARTER);
+      getAction("pad-note-8")->setChecked(is.duration()  == Duration::V_EIGHT);
+      getAction("pad-note-16")->setChecked(is.duration() == Duration::V_16TH);
+      getAction("pad-note-32")->setChecked(is.duration() == Duration::V_32ND);
+      getAction("pad-note-64")->setChecked(is.duration() == Duration::V_64TH);
 
       // uncheck all voices if multi-selection
-      int voice = selection().isSingle() ? _is.voice() : -1;
+      int voice = score->selection().isSingle() ? is.voice() : -1;
       getAction("voice-1")->setChecked(voice == 0);
       getAction("voice-2")->setChecked(voice == 1);
       getAction("voice-3")->setChecked(voice == 2);
       getAction("voice-4")->setChecked(voice == 3);
 
-      getAction("acciaccatura")->setChecked(_is.noteType == NOTE_ACCIACCATURA);
-      getAction("appoggiatura")->setChecked(_is.noteType == NOTE_APPOGGIATURA);
-      getAction("grace4")->setChecked(_is.noteType  == NOTE_GRACE4);
-      getAction("grace16")->setChecked(_is.noteType == NOTE_GRACE16);
-      getAction("grace32")->setChecked(_is.noteType == NOTE_GRACE32);
+      getAction("acciaccatura")->setChecked(is.noteType == NOTE_ACCIACCATURA);
+      getAction("appoggiatura")->setChecked(is.noteType == NOTE_APPOGGIATURA);
+      getAction("grace4")->setChecked(is.noteType  == NOTE_GRACE4);
+      getAction("grace16")->setChecked(is.noteType == NOTE_GRACE16);
+      getAction("grace32")->setChecked(is.noteType == NOTE_GRACE32);
 
-      getAction("beam-start")->setChecked(_is.beamMode == BEAM_BEGIN);
-      getAction("beam-mid")->setChecked(_is.beamMode   == BEAM_MID);
-      getAction("no-beam")->setChecked(_is.beamMode    == BEAM_NO);
-      getAction("beam32")->setChecked(_is.beamMode     == BEAM_BEGIN32);
-      getAction("auto-beam")->setChecked(_is.beamMode  == BEAM_AUTO);
-      getAction("repitch")->setChecked(_is.repitchMode());
+      getAction("beam-start")->setChecked(is.beamMode == BEAM_BEGIN);
+      getAction("beam-mid")->setChecked(is.beamMode   == BEAM_MID);
+      getAction("no-beam")->setChecked(is.beamMode    == BEAM_NO);
+      getAction("beam32")->setChecked(is.beamMode     == BEAM_BEGIN32);
+      getAction("auto-beam")->setChecked(is.beamMode  == BEAM_AUTO);
+      getAction("repitch")->setChecked(is.repitchMode());
       }
 

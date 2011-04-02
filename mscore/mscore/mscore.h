@@ -446,8 +446,7 @@ class MuseScore : public QMainWindow {
       bool noScore() const { return scoreList.isEmpty(); }
 
       TextTools* textTools();
-      DrumTools* drumTools();
-      void hideDrumTools();
+      void showDrumTools(Drumset*, Staff*);
 
       void updateTabNames();
       QProgressBar* showProgressBar();
@@ -505,6 +504,8 @@ class MuseScore : public QMainWindow {
 
       PaletteBox* getPaletteBox();
       void disableCommands(bool val) { inChordEditor = val; }
+
+      void updateInputState(Score*);
       };
 
 extern MuseScore* mscore;
