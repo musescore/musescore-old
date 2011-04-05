@@ -1,3 +1,6 @@
+05.apr (la)
+      - update for Jack 1.9.7 on windows, lower jack version should be ok 
+      on linux and mac
 31.mar (ws)
       - applied patches from miwarre to enhance backward compatibility (#8403/#8405)
 30.mar (ws)
