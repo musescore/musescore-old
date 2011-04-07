@@ -185,9 +185,8 @@ int Portaudio::deviceIndex(int apiIdx, int apiDevIdx)
 //   registerPort
 //---------------------------------------------------------
 
-int Portaudio::registerPort(const QString&, bool, bool)
+void Portaudio::registerPort(const QString&, bool, bool)
       {
-      return -1;
       }
 
 //---------------------------------------------------------

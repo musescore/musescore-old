@@ -42,7 +42,9 @@ class MasterSynth;
 //    message format for gui -> sequencer messages
 //---------------------------------------------------------
 
-enum { SEQ_NO_MESSAGE, SEQ_TEMPO_CHANGE, SEQ_PLAY, SEQ_SEEK };
+enum { SEQ_NO_MESSAGE, SEQ_TEMPO_CHANGE, SEQ_PLAY, SEQ_SEEK,
+       SEQ_MIDI_INPUT_EVENT
+      };
 
 struct SeqMsg {
       int id;
@@ -81,6 +83,7 @@ class Seq : public QObject {
       bool playlistChanged;
 
       SeqMsgFifo toSeq;
+      SeqMsgFifo fromSeq;
       Driver* driver;
 
       double meterValue[2];
@@ -135,7 +138,9 @@ class Seq : public QObject {
       void gainChanged(float);
 
    public:
-      enum { STOP, PLAY, START_PLAY };
+      // this are also the jack audio transport states:
+      enum { TRANSPORT_STOP=0, TRANSPORT_PLAY=1, TRANSPORT_STARTING=3,
+           TRANSPORT_NET_STARTING=4 };
 
       Seq();
       ~Seq();
@@ -153,8 +158,8 @@ class Seq : public QObject {
       bool init();
       void exit();
       bool isRunning() const    { return running; }
-      bool isPlaying() const    { return state == PLAY; }
-      bool isStopped() const    { return state == STOP; }
+      bool isPlaying() const    { return state == TRANSPORT_PLAY; }
+      bool isStopped() const    { return state == TRANSPORT_STOP; }
 
       void processMessages();
       void process(unsigned, float*, float*, int stride);
@@ -183,6 +188,8 @@ class Seq : public QObject {
       void putEvent(const Event&);
       void startNoteTimer(int duration);
       void startNote(const Channel&, int, int, double nt);
+      void eventToGui(Event);
+      void processToGuiMessages();
       };
 
 extern Seq* seq;

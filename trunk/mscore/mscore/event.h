@@ -46,6 +46,7 @@ enum {
       ME_START      = 0xfa,
       ME_CONTINUE   = 0xfb,
       ME_STOP       = 0xfc,
+      ME_SENSE      = 0xfe,   // active sense (used by yamaha)
 
       ME_NOTE       = 0x100,
       ME_CHORD      = 0x101,
@@ -145,7 +146,6 @@ class Event {
 
       void write(MidiFile*) const;
       void write(Xml&) const;
-//      void read(QDomElement);
 
       bool isChannelEvent() const;
 

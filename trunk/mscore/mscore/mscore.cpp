@@ -1534,8 +1534,18 @@ bool MuseScore::processMidiRemote(MidiRemoteType type, int data)
 //   midiNoteReceived
 //---------------------------------------------------------
 
-void MuseScore::midiNoteReceived(int pitch, bool chord)
+void MuseScore::midiNoteReceived(int channel, int pitch, int velo)
       {
+      static const int THRESHOLD = 3; // iterations required before consecutive drum notes
+                                     // are not considered part of a chord
+      static int active = 0;
+      static int iter = 0;
+
+      if (!midiinEnabled())
+            return;
+
+// printf("midiNoteReceived %d %d %d\n", channel, pitch, velo);
+
       if (_midiRecordId != -1) {
             preferences.midiRemote[_midiRecordId].type = MIDI_REMOTE_TYPE_NOTEON;
             preferences.midiRemote[_midiRecordId].data = pitch;
@@ -1544,11 +1554,39 @@ void MuseScore::midiNoteReceived(int pitch, bool chord)
                   preferenceDialog->updateRemote();
             return;
             }
-      if (processMidiRemote(MIDI_REMOTE_TYPE_NOTEON, pitch))
+      if (processMidiRemote(MIDI_REMOTE_TYPE_NOTEON, pitch)) {
+            active = 0;
             return;
+            }
       QWidget* w = QApplication::activeModalWidget();
-      if (cv && w == 0)
-            cv->midiNoteReceived(pitch, chord);
+      if (!cv || w) {
+            active = 0;
+            return;
+            }
+      if (velo) {
+             /*
+             * Since some drum modules do not overlap note on / off messages
+             * we need to take a bit of a different tactic to allow chords
+             * to be entered.
+             *
+             * Rather than decrement active for drums (midi on ch10),
+             * we'll just assume that if read() has been called a couple
+             * times in a row without a drum note, that this note is not
+             * part of a cord.
+             */
+            if (channel == 0x09) {
+                  if (iter >= THRESHOLD)
+                        active = 0;
+                  iter = 0;
+                  }
+// printf("    midiNoteReceived %d active %d\n", pitch, active);
+            cv->midiNoteReceived(pitch, active);
+            ++active;
+            }
+      else {
+            if (channel != 0x09)
+                  --active;
+            }
       }
 
 //---------------------------------------------------------
@@ -1557,6 +1595,8 @@ void MuseScore::midiNoteReceived(int pitch, bool chord)
 
 void MuseScore::midiCtrlReceived(int controller, int /*value*/)
       {
+      if (!midiinEnabled())
+            return;
       if (_midiRecordId != -1) {
             preferences.midiRemote[_midiRecordId].type = MIDI_REMOTE_TYPE_CTRL;
             preferences.midiRemote[_midiRecordId].data = controller;
@@ -3511,7 +3551,7 @@ printf("initOSC 2 \n");
 void MuseScore::oscIntMessage(int val)
       {
       if (val < 128)
-            midiNoteReceived(val, false);
+            midiNoteReceived(0, val, false);
       else
             midiCtrlReceived(val-128, 22);
       }
