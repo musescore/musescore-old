@@ -53,7 +53,7 @@ class Portaudio : public Driver {
       virtual void stopTransport();
       virtual int getState();
       virtual int sampleRate() const { return _sampleRate; }
-      virtual int registerPort(const QString& name, bool input, bool midi);
+      virtual void registerPort(const QString& name, bool input, bool midi);
       virtual void unregisterPort(int);
       virtual void midiRead();
 

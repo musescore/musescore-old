@@ -349,8 +349,6 @@ void AlsaMidiDriver::getOutputPollFd(struct pollfd** p, int* n)
 
 void AlsaMidiDriver::read()
       {
-      static int active = 0;
-
       snd_seq_event_t* ev;
       for (;;) {
             int rv = snd_seq_event_input(alsaSeq, &ev);
@@ -359,22 +357,18 @@ void AlsaMidiDriver::read()
 
             if (!mscore || !mscore->midiinEnabled()) {
                   snd_seq_free_event(ev);
-                  active = 0;
                   return;
                   }
 
             if (ev->type == SND_SEQ_EVENT_NOTEON) {
-                  int pitch   = ev->data.note.note;
-                  int velo    = ev->data.note.velocity;
-                  if (velo) {
-                        mscore->midiNoteReceived(pitch, active);
-                        ++active;
-                        }
-                  else
-                        --active;
+                  int pitch = ev->data.note.note;
+                  int velo  = ev->data.note.velocity;
+                  mscore->midiNoteReceived(ev->data.note.channel, pitch, velo);
                   }
-            else if (ev->type == SND_SEQ_EVENT_NOTEOFF)     // "Virtual Keyboard" sends this
-                  --active;
+            else if (ev->type == SND_SEQ_EVENT_NOTEOFF) {    // "Virtual Keyboard" sends this
+                  int pitch = ev->data.note.note;
+                  mscore->midiNoteReceived(ev->data.note.channel, pitch, 0);
+                  }
             else if (ev->type == SND_SEQ_EVENT_CONTROLLER) {
                   mscore->midiCtrlReceived(ev->data.control.param,
                      ev->data.control.value);

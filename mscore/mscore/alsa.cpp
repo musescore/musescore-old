@@ -591,7 +591,7 @@ AlsaAudio::AlsaAudio(Seq* s)
    : Driver(s)
       {
       alsa       = 0;
-      state      = Seq::STOP;
+      state      = Seq::TRANSPORT_STOP;
       seekflag   = false;
       startTime  = curTime();
       midiDriver = 0;
@@ -719,9 +719,8 @@ bool AlsaAudio::stop()
 //   registerPort
 //---------------------------------------------------------
 
-int AlsaAudio::registerPort(const QString&, bool, bool)
+void AlsaAudio::registerPort(const QString&, bool, bool)
       {
-      return -1;
       }
 
 //---------------------------------------------------------
@@ -756,7 +755,7 @@ void AlsaAudio::disconnect(void* /*src*/, void* /*dst*/)
 
 void AlsaAudio::startTransport()
       {
-      state = Seq::PLAY;
+      state = Seq::TRANSPORT_PLAY;
       }
 
 //---------------------------------------------------------
@@ -765,7 +764,7 @@ void AlsaAudio::startTransport()
 
 void AlsaAudio::stopTransport()
       {
-      state = Seq::STOP;
+      state = Seq::TRANSPORT_STOP;
       }
 
 //---------------------------------------------------------

@@ -77,7 +77,7 @@ Seq::Seq()
       cv              = 0;
 
       endTick  = 0;
-      state    = STOP;
+      state    = TRANSPORT_STOP;
       driver   = 0;
       playPos  = events.constBegin();
 
@@ -128,7 +128,7 @@ void Seq::setScoreView(ScoreView* v)
             stop();
             cs = v ? v->score() : 0;
 #ifndef __MINGW32__
-            while (state != STOP)
+            while (state != TRANSPORT_STOP)
                   usleep(100000);
 #endif
             }
@@ -154,7 +154,7 @@ void Seq::selectionChanged(int mode)
       if (tick == -1)
             return;
 
-      if ((mode != SEL_LIST) || (state == STOP))
+      if ((mode != SEL_LIST) || (state == TRANSPORT_STOP))
             cs->setPlayPos(tick);
       else {
             seek(tick);
@@ -249,6 +249,10 @@ void Seq::exit()
             if (debugMode)
                   printf("Stop I/O\n");
             driver->stop();
+#ifndef __MINGW32__
+            while(!seq->isStopped())
+                  usleep(50000);
+#endif
             delete driver;
             driver = 0;
             }
@@ -309,7 +313,7 @@ void Seq::start()
 
 void Seq::stop()
       {
-      if (state == STOP)
+      if (state == TRANSPORT_STOP)
             return;
       if (!driver)
             return;
@@ -418,6 +422,8 @@ void Seq::seqMessage(int msg)
 
 void Seq::stopTransport()
       {
+      if (cs == 0)
+            return;
       // send note off events
       foreach(Event e, activeNotes) {
             if (e.type() != ME_NOTEON)
@@ -434,7 +440,7 @@ void Seq::stopTransport()
 
       activeNotes.clear();
       emit toGui('0');
-      state = STOP;
+      state = TRANSPORT_STOP;
       }
 
 //---------------------------------------------------------
@@ -447,7 +453,7 @@ void Seq::startTransport()
       {
       emit toGui('1');
       startTime  = curTime() - playTime;
-      state      = PLAY;
+      state      = TRANSPORT_PLAY;
       }
 
 //---------------------------------------------------------
@@ -536,9 +542,9 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer, int stride)
       int driverState = driver->getState();
 
       if (driverState != state) {
-            if ((state == STOP || state == START_PLAY) && driverState == PLAY)
+            if (state == TRANSPORT_STOP && driverState == TRANSPORT_PLAY)
                   startTransport();
-            else if ((state == PLAY || state == START_PLAY) && driverState == STOP)
+            else if (state == TRANSPORT_PLAY && driverState == TRANSPORT_STOP)
                   stopTransport();
             else if (state != driverState)
                   printf("Seq: state transition %d -> %d ?\n",
@@ -558,7 +564,7 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer, int stride)
 
       processMessages();
 
-      if (state == PLAY) {
+      if (state == TRANSPORT_PLAY) {
             //
             // play events for one segment
             //
@@ -705,7 +711,8 @@ void Seq::heartBeat()
                   meterPeakValue[1] *= .7f;
             sc->setMeter(meterValue[0], meterValue[1], meterPeakValue[0], meterPeakValue[1]);
             }
-      if (state != PLAY)
+      processToGuiMessages();
+      if (state != TRANSPORT_PLAY)
             return;
       PlayPanel* pp = mscore->getPlayPanel();
       double endTime = curTime() - startTime;
@@ -755,6 +762,30 @@ void Seq::heartBeat()
       if (pre && pre->isVisible())
             pre->heartBeat(this);
       cs->end();
+      }
+
+//---------------------------------------------------------
+//   processToGuiMessages
+//    process messages from sequencer to gui
+//    in gui context
+//---------------------------------------------------------
+
+void Seq::processToGuiMessages()
+      {
+      for (;;) {
+            if (fromSeq.isEmpty())
+                  break;
+            SeqMsg msg = fromSeq.dequeue();
+            if (msg.id == SEQ_MIDI_INPUT_EVENT) {
+                  int type = msg.event.type();
+                  if (type == ME_NOTEON)
+                        mscore->midiNoteReceived(msg.event.channel(), msg.event.pitch(), msg.event.velo());
+                  else if (type == ME_NOTEOFF)
+                        mscore->midiNoteReceived(msg.event.channel(), msg.event.pitch(), 0);
+                  else if (type == ME_CONTROLLER)
+                        mscore->midiCtrlReceived(msg.event.controller(), msg.event.value());
+                  }
+            }
       }
 
 //---------------------------------------------------------
@@ -835,7 +866,7 @@ void Seq::seek(int tick)
 
 void Seq::startNote(const Channel& a, int pitch, int velo, double nt)
       {
-      if (state != STOP)
+      if (state != TRANSPORT_STOP)
             return;
 
       bool active = false;
@@ -1063,6 +1094,18 @@ void Seq::guiToSeq(const SeqMsg& msg)
       if (!driver || !running)
             return;
       toSeq.enqueue(msg);
+      }
+
+//---------------------------------------------------------
+//   eventToGui
+//---------------------------------------------------------
+
+void Seq::eventToGui(Event e)
+      {
+      SeqMsg msg;
+      msg.event = e;
+      msg.id    = SEQ_MIDI_INPUT_EVENT;
+      fromSeq.enqueue(msg);
       }
 
 //---------------------------------------------------------

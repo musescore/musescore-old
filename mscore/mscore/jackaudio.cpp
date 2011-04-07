@@ -56,23 +56,24 @@ JackAudio::~JackAudio()
 //   registerPort
 //---------------------------------------------------------
 
-int JackAudio::registerPort(const QString& name, bool input, bool midi)
+void JackAudio::registerPort(const QString& name, bool input, bool midi)
       {
       int portFlag         = input ? JackPortIsInput : JackPortIsOutput;
       const char* portType = midi ? JACK_DEFAULT_MIDI_TYPE : JACK_DEFAULT_AUDIO_TYPE;
+
       jack_port_t* port = jack_port_register(client, qPrintable(name), portType, portFlag, 0);
       if (port == 0) {
             printf("JackAudio:registerPort(%s) failed\n", qPrintable(name));
-            return -1;
+            return;
             }
       if (midi) {
-            midiPorts.append(port);
-            return midiPorts.size() - 1;
+            if (input)
+                  midiInputPorts.append(port);
+            else
+                  midiOutputPorts.append(port);
             }
-      else {
+      else
             ports.append(port);
-            return ports.size() - 1;
-            }
       }
 
 //---------------------------------------------------------
@@ -182,10 +183,10 @@ bool JackAudio::start()
             }
       if (preferences.useJackMidi && preferences.rememberLastMidiConnections) {
             QSettings settings;
-            int nPorts = midiPorts.size(); // settings.value("midiPorts", 0).toInt();
+            int nPorts = midiOutputPorts.size(); // settings.value("midiPorts", 0).toInt();
             for (int i = 0; i < nPorts; ++i) {
                   int n = settings.value(QString("midi-%1-connections").arg(i), 0).toInt();
-                  const char* src = jack_port_name(midiPorts[i]);
+                  const char* src = jack_port_name(midiOutputPorts[i]);
                   for (int k = 0; k < n; ++k) {
                         QString dst = settings.value(QString("midi-%1-%2").arg(i).arg(k), "").toString();
                         if (!dst.isEmpty()) {
@@ -210,9 +211,9 @@ bool JackAudio::stop()
       {
       if (preferences.useJackMidi && preferences.rememberLastMidiConnections) {
             QSettings settings;
-            settings.setValue("midiPorts", midiPorts.size());
+            settings.setValue("midiPorts", midiOutputPorts.size());
             int port = 0;
-            foreach(jack_port_t* mp, midiPorts) {
+            foreach(jack_port_t* mp, midiOutputPorts) {
                   const char** cc = jack_port_get_connections(mp);
                   const char** c = cc;
                   int idx = 0;
@@ -299,9 +300,39 @@ int JackAudio::processAudio(jack_nframes_t frames, void* p)
             r = 0;
             }
       if (preferences.useJackMidi) {
-            foreach(jack_port_t* port, audio->midiPorts) {
+            foreach(jack_port_t* port, audio->midiOutputPorts) {
                   void* portBuffer = jack_port_get_buffer(port, frames);
                   jack_midi_clear_buffer(portBuffer);
+                  }
+            foreach(jack_port_t* port, audio->midiInputPorts) {
+                  void* portBuffer = jack_port_get_buffer(port, frames);
+                  if (portBuffer) {
+                        jack_nframes_t n = jack_midi_get_event_count(portBuffer);
+                        for (jack_nframes_t i = 0; i < n; ++i) {
+                              jack_midi_event_t event;
+                              int r = jack_midi_event_get(&event, portBuffer, i);
+                              if (r != 0)
+                                    continue;
+                              int nn = event.size;
+                              int type = event.buffer[0];
+                              if (nn && (type == ME_CLOCK || type == ME_SENSE))
+                                    continue;
+                              Event e;
+                              e.setType(type);
+                              e.setChannel(type & 0xf);
+                              type &= 0xf0;
+                              if (type == ME_NOTEON || type == ME_NOTEOFF) {
+                                    e.setPitch(event.buffer[1]);
+                                    e.setVelo(event.buffer[2]);
+                                    audio->seq->eventToGui(e);
+                                    }
+                              else if (type == ME_CONTROLLER) {
+                                    e.setController(event.buffer[1]);
+                                    e.setValue(event.buffer[2]);
+                                    audio->seq->eventToGui(e);
+                                    }
+                              }
+                        }
                   }
             }
       audio->seq->process((unsigned)frames, l, r, 1);
@@ -335,17 +366,16 @@ bool JackAudio::init()
       jack_set_error_function(noJackError);
 
       client = 0;
-      int i  = 0;
-      for (i = 0; i < 5; ++i) {
-            sprintf(_jackName, "mscore-%d", i+1);
-            client = jack_client_new(_jackName);
-            if (client)
-                  break;
-            }
+      strcpy(_jackName, "mscore");
+
+      jack_options_t options = (jack_options_t)0;
+      jack_status_t status;
+      client = jack_client_open(_jackName, options, &status);
       if (client == 0) {
-            printf("JackAudio()::init(): failed\n");
+            printf("JackAudio()::init(): failed, status 0x%0x\n", status);
             return false;
             }
+
       jack_set_error_function(jackError);
       jack_set_process_callback(client, processAudio, this);
       //jack_on_shutdown(client, processShutdown, this);
@@ -392,6 +422,7 @@ bool JackAudio::init()
       if (preferences.useJackMidi) {
             for (int i = 0; i < preferences.midiPorts; ++i)
                   registerPort(QString("mscore-midi-%1").arg(i+1), false, true);
+            registerPort(QString("mscore-midi-in"), true, true);
             }
       return true;
       }
@@ -423,12 +454,11 @@ int JackAudio::getState()
       jack_position_t pos;
       int transportState = jack_transport_query(client, &pos);
       switch (transportState) {
-            case JackTransportStopped:  return Seq::STOP;
+            case JackTransportStopped:  return Seq::TRANSPORT_STOP;
             case JackTransportLooping:
-            case JackTransportRolling:  return Seq::PLAY;
-            case JackTransportStarting: return Seq::START_PLAY;
+            case JackTransportRolling:  return Seq::TRANSPORT_PLAY;
             default:
-                  return Seq::STOP;
+                  return Seq::TRANSPORT_STOP;
             }
       }
 
@@ -438,8 +468,6 @@ int JackAudio::getState()
 
 void JackAudio::putEvent(const Event& e, unsigned framePos)
       {
-//      if (preferences.useJackAudio)
-//            synth->play(e);
       if (!preferences.useJackMidi)
             return;
 
@@ -448,11 +476,11 @@ void JackAudio::putEvent(const Event& e, unsigned framePos)
 
 // printf("JackAudio::putEvent %d:%d  pos %d(%d)\n", portIdx, chan, framePos, _segmentSize);
 
-      if (portIdx < 0 || portIdx >= midiPorts.size()) {
+      if (portIdx < 0 || portIdx >= midiOutputPorts.size()) {
             printf("JackAudio::putEvent: invalid port %d\n", portIdx);
             return;
             }
-      jack_port_t* port = midiPorts[portIdx];
+      jack_port_t* port = midiOutputPorts[portIdx];
       if (midiOutputTrace) {
             const char* portName = jack_port_name(port);
             printf("MidiOut<%s>: jackMidi: ", portName);
