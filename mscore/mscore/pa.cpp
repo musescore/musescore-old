@@ -57,7 +57,7 @@ Portaudio::Portaudio(Seq* s)
       {
       _sampleRate = 48000;
       initialized = false;
-      state       = Seq::STOP;
+      state       = Seq::TRANSPORT_STOP;
       seekflag    = false;
       midiDriver  = 0;
       }
@@ -266,7 +266,7 @@ int Portaudio::framePos() const
 
 void Portaudio::startTransport()
       {
-      state = Seq::PLAY;
+      state = Seq::TRANSPORT_PLAY;
       }
 
 //---------------------------------------------------------
@@ -275,7 +275,7 @@ void Portaudio::startTransport()
 
 void Portaudio::stopTransport()
       {
-      state = Seq::STOP;
+      state = Seq::TRANSPORT_STOP;
       }
 
 //---------------------------------------------------------

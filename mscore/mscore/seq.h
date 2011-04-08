@@ -79,7 +79,8 @@ class Seq : public QObject {
       Score* cs;
       ScoreView* cv;
       bool running;                       // true if sequencer is available
-      int state;                          // STOP, PLAY, START_PLAY
+      int state;                          // TRANSPORT_STOP, TRANSPORT_PLAY, TRANSPORT_STARTING=3
+
       bool playlistChanged;
 
       SeqMsgFifo toSeq;
