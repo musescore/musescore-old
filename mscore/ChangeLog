@@ -1,4 +1,5 @@
 8.apr (ws)
+      - allow quit in foto-mode (#10028)
       - fix #7740: drag and delete + undo causes crash
       - fix #10110: invisible text is not 'grayed'
       - fix #10117: rehearsal mark text missing

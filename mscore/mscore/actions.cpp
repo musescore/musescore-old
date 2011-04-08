@@ -1625,7 +1625,7 @@ Shortcut MuseScore::sc[] = {
          ),
 
       Shortcut(
-         STATE_DISABLED | STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
+         STATE_DISABLED | STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY | STATE_FOTO,
          "quit",
          QT_TRANSLATE_NOOP("action","Quit"),
          Qt::CTRL + Qt::Key_Q,
