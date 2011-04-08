@@ -1,4 +1,5 @@
 8.apr (ws)
+      - fix #10117: rehearsal mark text missing
       - autoconnect feature for JACK midi input
 7.apr (ws)
       - implemented JACK midi input
