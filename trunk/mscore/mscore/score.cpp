@@ -426,10 +426,10 @@ Score::~Score()
             delete p;
       foreach(Staff* staff, _staves)
             delete staff;
-      foreach(Page* page, _pages)
-            delete page;
       foreach(System* s, _systems)
             delete s;
+      foreach(Page* page, _pages)
+            delete page;
       foreach(Excerpt* e, _excerpts)
             delete e;
       delete _revisions;
