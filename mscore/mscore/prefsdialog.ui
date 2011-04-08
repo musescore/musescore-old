@@ -1802,7 +1802,7 @@
           </sizepolicy>
          </property>
          <property name="title">
-          <string>Use JACK MIDI output</string>
+          <string>Use JACK MIDI</string>
          </property>
          <property name="flat">
           <bool>false</bool>
