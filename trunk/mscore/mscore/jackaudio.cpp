@@ -183,7 +183,7 @@ bool JackAudio::start()
             }
       if (preferences.useJackMidi && preferences.rememberLastMidiConnections) {
             QSettings settings;
-            int nPorts = midiOutputPorts.size(); // settings.value("midiPorts", 0).toInt();
+            int nPorts = midiOutputPorts.size();
             for (int i = 0; i < nPorts; ++i) {
                   int n = settings.value(QString("midi-%1-connections").arg(i), 0).toInt();
                   const char* src = jack_port_name(midiOutputPorts[i]);
@@ -192,8 +192,23 @@ bool JackAudio::start()
                         if (!dst.isEmpty()) {
                               int rv = jack_connect(client, src, qPrintable(dst));
                               if (rv) {
-                                    fprintf(stderr, "jack connect <%s> - <%s> failed: %d\n",
+                                    fprintf(stderr, "jack connect midi output <%s> - <%s> failed: %d\n",
                                        src, qPrintable(dst), rv);
+                                    }
+                              }
+                        }
+                  }
+            nPorts = midiInputPorts.size();
+            for (int i = 0; i < nPorts; ++i) {
+                  int n = settings.value(QString("midiin-%1-connections").arg(i), 0).toInt();
+                  const char* dst = jack_port_name(midiInputPorts[i]);
+                  for (int k = 0; k < n; ++k) {
+                        QString src = settings.value(QString("midiin-%1-%2").arg(k).arg(i), "").toString();
+                        if (!src.isEmpty()) {
+                              int rv = jack_connect(client, qPrintable(src), dst);
+                              if (rv) {
+                                    fprintf(stderr, "jack connect midi input <%s> - <%s> failed: %d\n",
+                                       qPrintable(src), dst, rv);
                                     }
                               }
                         }
@@ -228,9 +243,24 @@ bool JackAudio::stop()
                   free((void*)cc);
                   ++port;
                   }
+            settings.setValue("midiInputPorts", midiInputPorts.size());
+            port = 0;
+            foreach(jack_port_t* mp, midiInputPorts) {
+                  const char** cc = jack_port_get_connections(mp);
+                  const char** c = cc;
+                  int idx = 0;
+                  while (c) {
+                        const char* p = *c++;
+                        if (p == 0)
+                              break;
+                        settings.setValue(QString("midiin-%1-%2").arg(idx).arg(port), p);
+                        ++idx;
+                        }
+                  settings.setValue(QString("midiin-%1-connections").arg(port), idx);
+                  free((void*)cc);
+                  ++port;
+                  }
             }
-
-//      jack_client_close(client);
 
       if (jack_deactivate(client)) {
             fprintf (stderr, "cannot deactivate client");
@@ -422,7 +452,7 @@ bool JackAudio::init()
       if (preferences.useJackMidi) {
             for (int i = 0; i < preferences.midiPorts; ++i)
                   registerPort(QString("mscore-midi-%1").arg(i+1), false, true);
-            registerPort(QString("mscore-midi-in"), true, true);
+            registerPort(QString("mscore-midiin-1"), true, true);
             }
       return true;
       }
