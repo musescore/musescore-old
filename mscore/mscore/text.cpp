@@ -409,6 +409,8 @@ void Text::draw(Painter* painter) const
             (selected() && !(score() && score()->printing()))
             ? preferences.selectColor[0] : style().foregroundColor()
             );
+      if (!visible())
+            color = Qt::gray;
       c.palette.setColor(QPalette::Text, color);
 
       _doc->documentLayout()->draw(&p, c);
