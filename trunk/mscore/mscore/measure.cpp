@@ -2228,6 +2228,8 @@ void Measure::read(QDomElement e, int staffIdx)
                   Text* t = new Text(score());
                   t->setTrack(score()->curTrack);
                   t->read(e);
+                  segment = getSegment(SegChordRest, score()->curTick);
+                  segment->add(t);
                   }
 
             //----------------------------------------------------
