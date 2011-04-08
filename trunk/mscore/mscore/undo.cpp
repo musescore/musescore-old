@@ -421,8 +421,8 @@ void SaveState::undo()
       redoInputState = score->inputState();
       redoSelection  = score->selection();
       score->setInputState(undoInputState);
+      undoSelection.reconstructElementList();
       score->setSelection(undoSelection);
-      score->selection().reconstructElementList();
       }
 
 void SaveState::redo()

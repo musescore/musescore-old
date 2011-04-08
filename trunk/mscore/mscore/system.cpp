@@ -91,8 +91,11 @@ System::System(Score* s)
 System::~System()
       {
       delete barLine;
-      foreach(SysStaff* s, _staves)
+      foreach(SysStaff* s, _staves) {
+            if (s->instrumentName)
+                  score()->deselect(s->instrumentName);
             delete s;
+            }
       }
 
 //---------------------------------------------------------
@@ -107,7 +110,6 @@ SysStaff* System::insertStaff(int idx)
             staff->rbb().setY(_staves[idx-1]->y() + 6 * spatium());
             }
       _staves.insert(idx, staff);
-//      setInstrumentName(idx);
       return staff;
       }
 
@@ -470,8 +472,12 @@ void System::setInstrumentName(int staffIdx, bool longName)
       SysStaff* staff = _staves[staffIdx];
       Staff* s = score()->staff(staffIdx);
       if (!s->isTop()) {
-            delete staff->instrumentName;
-            staff->instrumentName = 0;
+            if (staff->instrumentName) {
+                  if (staff->instrumentName->selected())
+                        score()->deselect(staff->instrumentName);
+                  delete staff->instrumentName;
+                  staff->instrumentName = 0;
+                  }
             return;
             }
 
@@ -484,7 +490,6 @@ void System::setInstrumentName(int staffIdx, bool longName)
       if (!iname) {
             iname = new InstrumentName(score());
             iname->setGenerated(true);
-//            iname->setSelectable(false);
             if (longName) {
                   iname->setSubtype(TEXT_INSTRUMENT_LONG);
                   iname->setTextStyle(TEXT_STYLE_INSTRUMENT_LONG);
