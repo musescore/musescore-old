@@ -300,18 +300,24 @@ void Note::setTpc(int v)
 
 int Note::noteHead() const
       {
+      int hg = 1;
+      int ht = 2;       // default quarter head
+      if (chord()) {
+            hg = chord()->up();
+            ht = chord()->durationType().headType();
+            }
       switch(_headType) {
             default:
             case HEAD_AUTO:
-                  return noteHeads[chord()->up()][int(_headGroup)][chord()->durationType().headType()];
+                  return noteHeads[hg][int(_headGroup)][ht];
             case HEAD_WHOLE:
-                  return noteHeads[chord()->up()][int(_headGroup)][0];
+                  return noteHeads[hg][int(_headGroup)][0];
             case HEAD_HALF:
-                  return noteHeads[chord()->up()][int(_headGroup)][1];
+                  return noteHeads[hg][int(_headGroup)][1];
             case HEAD_QUARTER:
-                  return noteHeads[chord()->up()][int(_headGroup)][2];
+                  return noteHeads[hg][int(_headGroup)][2];
             case HEAD_BREVIS:
-                  return noteHeads[chord()->up()][int(_headGroup)][3];
+                  return noteHeads[hg][int(_headGroup)][3];
             }
       }
 
@@ -1484,9 +1490,11 @@ void Note::scanElements(void* data, void (*func)(void*, Element*))
             func(data, _accidental);
       if (_bend)
             func(data, _bend);
-      for (int i = 0; i < chord()->dots(); ++i) {
-            if (_dots[i])
-                  func(data, _dots[i]);
+      if (chord()) {
+            for (int i = 0; i < chord()->dots(); ++i) {
+                  if (_dots[i])
+                        func(data, _dots[i]);
+                  }
             }
       }
 
