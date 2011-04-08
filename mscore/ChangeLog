@@ -1,4 +1,5 @@
 8.apr (ws)
+      - fix #10105: Apple+Shift+Click on note causes crash
       - allow quit in foto-mode (#10028)
       - fix #7740: drag and delete + undo causes crash
       - fix #10110: invisible text is not 'grayed'
