@@ -1145,7 +1145,7 @@ void SeqMsgFifo::enqueue(const SeqMsg& msg)
       {
       int i = 0;
       int n = 50;
-      
+
       QMutex mutex;
       QWaitCondition qwc;
       mutex.lock();
@@ -1198,6 +1198,8 @@ float Seq::gain() const
 
 void Seq::putEvent(const Event& event)
       {
+      if (!cs)
+            return;
       int channel = event.channel();
       int syntiIdx= cs->midiMapping(channel)->articulation->synti;
       synti->play(event, syntiIdx);
