@@ -71,6 +71,7 @@ class PreferenceDialog : public QDialog, private Ui::PrefsDialogBase {
       void selectTemplatesDirectory();
       void selectPluginsDirectory();
       void selectSoundFontsDirectory();
+      void selectImagesDirectory();
 
    signals:
       void preferencesChanged();

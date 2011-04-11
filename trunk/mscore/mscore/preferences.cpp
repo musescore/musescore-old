@@ -605,6 +605,7 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       connect(myTemplatesButton, SIGNAL(clicked()), SLOT(selectTemplatesDirectory()));
       connect(myPluginsButton, SIGNAL(clicked()), SLOT(selectPluginsDirectory()));
       connect(mySoundFontsButton, SIGNAL(clicked()), SLOT(selectSoundFontsDirectory()));
+      connect(myImagesButton, SIGNAL(clicked()), SLOT(selectImagesDirectory()));
 
       connect(defaultStyleButton,     SIGNAL(clicked()), SLOT(selectDefaultStyle()));
       connect(instrumentListButton,   SIGNAL(clicked()), SLOT(selectInstrumentList()));
@@ -1696,6 +1697,21 @@ void PreferenceDialog::selectSoundFontsDirectory()
          );
       if (!s.isNull())
             mySoundFonts->setText(s);
+      }
+
+//---------------------------------------------------------
+//   selectImagesDirectory
+//---------------------------------------------------------
+
+void PreferenceDialog::selectImagesDirectory()
+      {
+      QString s = QFileDialog::getExistingDirectory(
+         this,
+         tr("Choose MyImages Directory"),
+         myImages->text()
+         );
+      if (!s.isNull())
+            myImages->setText(s);
       }
 
 
