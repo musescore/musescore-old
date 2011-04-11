@@ -1,4 +1,5 @@
 11.apr (la)
+      - fix #10158: no icons for MySoundFonts/MyImagesDirectory
       - fix #10175: patch from Miwarre
       - another fix for #7740
       - fix #7944: Instrument limit (again)
