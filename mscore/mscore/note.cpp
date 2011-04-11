@@ -671,6 +671,7 @@ void Note::read(QDomElement e)
             _ppitch = ptch;
             }
       int tpcVal = e.attribute("tpc", "-100").toInt();
+      bool hasAccidental = false;                     // used for userAccidental backward compatibility
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
@@ -754,8 +755,14 @@ void Note::read(QDomElement e)
                   bool ok;
                   int k = val.toInt(&ok);
                   if (ok) {
-                        _accidental = new Accidental(score());
-                        _accidental->setParent(this);
+                        // on older scores, a note could have both a <userAccidental> tag and an <Accidental> tag
+                        // if a userAccidental has some other property set (like for instance offset)
+                        // only costruct a new accidental, if the other tag has not been read yet
+                        // (<userAccidental> tag is only used in older scores: no need to check the score mscVersion)
+                        if (!hasAccidental) {
+                              _accidental = new Accidental(score());
+                              _accidental->setParent(this);
+                              }
                         // TODO: for backward compatibility
                         bool bracket = k & 0x8000;
                         k &= 0xfff;
@@ -804,12 +811,25 @@ void Note::read(QDomElement e)
                         _accidental->setSubtype(at);
                         _accidental->setHasBracket(bracket);
                         _accidental->setRole(ACC_USER);
+                        hasAccidental = true;   // we now have an accidental
                         }
                   }
             else if (tag == "Accidental") {
-                  Accidental* a = new Accidental(score());
+//                  Accidental* a = new Accidental(score());
+//                  a->read(e);
+//                  add(a);
+                  // on older scores, a note could have both a <userAccidental> tag and an <Accidental> tag
+                  // if a userAccidental has some other property set (like for instance offset)
+                  Accidental* a;
+                  if (hasAccidental)            // if the other tag has already been read,
+                        a = _accidental;        // re-use the accidental it constructed
+                  else
+                        a = new Accidental(score());
                   a->read(e);
-                  add(a);
+                  if (!hasAccidental)           // only the new accidental, if it has been added previously
+                        add(a);
+                  if (score()->mscVersion() < 117)
+                        hasAccidental = true;   // we now have an accidental
                   }
             else if (tag == "move")             // obsolete
                   chord()->setStaffMove(i);

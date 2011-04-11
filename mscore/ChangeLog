@@ -1,10 +1,12 @@
-11.apr (la)
+11.apr (ws)
+      - fix #10142: 'nudged' UserAccidental lost when loading with trunk (patch from Miwarre)
       - fix #10148: cannot drag between staves
       - fix #10156: Deleting from the third note onward in a beam causes crash
       - fix #10157: MyImages Directory button inactive
       - fix #10158: no icons for MySoundFonts/MyImagesDirectory
       - fix #10175: patch from Miwarre
       - another fix for #7740
+      (la)
       - fix #7944: Instrument limit (again)
 8.apr (ws)
       - fix #10105: Apple+Shift+Click on note causes crash
