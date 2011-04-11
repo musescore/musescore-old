@@ -675,7 +675,8 @@ void Measure::layout2()
                   smn = fm == this;
                   }
             else {
-                  smn = (_no % score()->style(ST_measureNumberInterval).toInt()) == 0;
+                  smn = (_no == 0 && score()->styleB(ST_showMeasureNumberOne)) ||
+                        ( ((_no+1) % score()->style(ST_measureNumberInterval).toInt()) == 0 );
                   }
             if (smn) {
                   QString s(QString("%1").arg(_no + 1));
