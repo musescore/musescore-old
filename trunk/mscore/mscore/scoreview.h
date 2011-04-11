@@ -367,6 +367,7 @@ class ScoreView : public QWidget {
       ScoreState mscoreState() const;
       void setCursorVisible(bool v);
       void showOmr(bool flag);
+      Element* getCurElement() const { return curElement; }   // current item at mouse press
       };
 
 //---------------------------------------------------------
