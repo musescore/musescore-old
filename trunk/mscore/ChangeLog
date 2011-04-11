@@ -1,3 +1,5 @@
+11.apr (la)
+      - fix #7944: Instrument limit (again)
 8.apr (ws)
       - fix #10105: Apple+Shift+Click on note causes crash
       - allow quit in foto-mode (#10028)
