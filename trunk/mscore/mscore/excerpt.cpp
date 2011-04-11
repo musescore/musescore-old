@@ -99,6 +99,8 @@ static void localSetScore(void* score, Element* element)
 
 Score* createExcerpt(const QList<Part*>& parts)
       {
+printf("createExcerpt\n");
+
       if (parts.isEmpty())
             return 0;
       QList<int> srcStaves;
@@ -301,20 +303,6 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
                                           Element* ne = e->clone();
                                           ne->setTrack(track);
                                           s->add(ne);
-                                          }
-                                    if ((track % VOICES) == 0) {
-                                          int ostaffIdx = srcTrack / VOICES;
-                                          Staff* nstaff = score->staff(track/VOICES);
-                                          if (!nstaff->useTablature()) {
-                                                const QList<Lyrics*>* ll = oseg->lyricsList(ostaffIdx);
-                                                if (ll) {
-                                                      foreach(Lyrics* ly, *ll) {
-                                                            Lyrics* l = ly->clone();
-                                                            l->setTrack(track);
-                                                            s->add(l);
-                                                            }
-                                                      }
-                                                }
                                           }
 
                                     if (oe->type() == CHORD) {

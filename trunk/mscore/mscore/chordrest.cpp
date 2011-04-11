@@ -131,8 +131,12 @@ ChordRest::ChordRest(const ChordRest& cr)
       _extraTrailingSpace = cr.extraTrailingSpace();
       _space              = cr._space;
 
-      foreach(Lyrics* l, cr._lyricsList)        // make deep copy
-            _lyricsList.append(new Lyrics(*l));
+      foreach(Lyrics* l, cr._lyricsList) {        // make deep copy
+            Lyrics* nl = new Lyrics(*l);
+            nl->setParent(this);
+            nl->setTrack(track());
+            _lyricsList.append(nl);
+            }
       }
 
 //---------------------------------------------------------
@@ -721,6 +725,8 @@ void ChordRest::setTrack(int val)
             }
       if (_beam)
             _beam->setTrack(val);
+      foreach(Lyrics* l, _lyricsList)
+            l->setTrack(val);
       }
 
 //---------------------------------------------------------

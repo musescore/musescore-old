@@ -597,8 +597,7 @@ void Lyrics::layout()
       double lh             = lineSpacing();
       double noteHeadWidth2 = symbols[score()->symIdx()][quartheadSym].width(magS()) * .5;
 
-      Segment* seg   = segment();
-      System* sys    = seg->measure()->system();
+      System* sys = measure()->system();
       const QList<Lyrics*>* ll = &(chordRest()->lyricsList());
 
       int line       = ll->indexOf(this);
