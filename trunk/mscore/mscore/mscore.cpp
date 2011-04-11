@@ -1244,9 +1244,8 @@ void MuseScore::setCurrentScoreView(ScoreView* view)
       //
       // save current synthesizer setting to score
       //
-      if (cs) {
+      if (cs)
             cs->setSyntiState(synti->state());
-            }
 
       cv = view;
       if (cv) {
