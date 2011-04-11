@@ -642,7 +642,6 @@ ScoreView::ScoreView(QWidget* parent)
       s->addTransition(new DeSelectTransition(this));                         // deselect
       connect(s, SIGNAL(entered()), mscore, SLOT(setNormalState()));
       s->addTransition(new ScoreViewDragTransition(this, states[DRAG]));      // ->stateDrag
-      s->addTransition(ct);
       s->addTransition(new ScoreViewLassoTransition(this, states[LASSO]));    // ->stateLasso
       s->addTransition(new ElementDragTransition(this, states[DRAG_OBJECT])); // ->stateDragObject
       s->addTransition(new CommandTransition("note-input", states[NOTE_ENTRY])); // ->noteEntry
