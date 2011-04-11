@@ -1,4 +1,5 @@
 11.apr (la)
+      - fix #10148: cannot drag between staves
       - fix #10156: Deleting from the third note onward in a beam causes crash
       - fix #10157: MyImages Directory button inactive
       - fix #10158: no icons for MySoundFonts/MyImagesDirectory
