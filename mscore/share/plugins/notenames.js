@@ -54,6 +54,7 @@ function run()
             if (cursor.isChord()) {
                   var text  = new Text(curScore);
                   text.text = cursor.chord().topNote().name;
+                  text.yOffset = -5;
                   cursor.putStaffText(text);
                   }
             cursor.next();
