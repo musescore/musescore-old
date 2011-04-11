@@ -1026,7 +1026,9 @@ void Score::changeCRlen(ChordRest* cr, const Duration& d)
             Measure* m1 = m->nextMeasure();
             if (m1 == 0)
                   break;
-            cr1 = static_cast<ChordRest*>(m1->firstCRSegment()->element(track));
+            Segment* s = m1->firstCRSegment();
+            expandVoice(s, track);
+            cr1 = static_cast<ChordRest*>(s->element(track));
             }
       connectTies();
       }

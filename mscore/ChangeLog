@@ -1,4 +1,5 @@
 11.apr (ws)
+      - fix #8996: Not possible to change va value beyond bar in multi-voice
       - fix #10142: 'nudged' UserAccidental lost when loading with trunk (patch from Miwarre)
       - fix #10148: cannot drag between staves
       - fix #10156: Deleting from the third note onward in a beam causes crash
