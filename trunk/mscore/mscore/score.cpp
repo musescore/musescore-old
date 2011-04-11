@@ -1942,7 +1942,9 @@ void Score::removeElement(Element* element)
             case REST:
                   {
                   ChordRest* cr = static_cast<ChordRest*>(element);
-                  cr->setBeam(0);
+                  if (cr->beam())
+                        cr->beam()->remove(cr);
+                  // cr->setBeam(0);
                   }
                   break;
             case SLUR:
