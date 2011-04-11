@@ -1113,17 +1113,15 @@ SeqMsgFifo::SeqMsgFifo()
 void SeqMsgFifo::enqueue(const SeqMsg& msg)
       {
       int i = 0;
-#ifdef __MINGW32__
-      int n = 500000;
-#else
       int n = 50;
-#endif
+
+      QMutex mutex;
+      QWaitCondition qwc;
+      mutex.lock();
       for (; i < n; ++i) {
             if (!isFull())
                   break;
-#ifndef __MINGW32__
-            usleep(100000);
-#endif
+            qwc.wait(&mutex,100); //wait 100ms
             }
       if (i == n) {
             printf("===SeqMsgFifo: overflow\n");
