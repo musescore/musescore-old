@@ -2370,7 +2370,7 @@ void Measure::read(QDomElement e, int staffIdx)
 
 bool Measure::visible(int staffIdx) const
       {
-      if (system() && !system()->staff(staffIdx)->show())
+      if (system() && (system()->staves()->isEmpty() || !system()->staff(staffIdx)->show()))
             return false;
       return score()->staff(staffIdx)->show() && staves[staffIdx]->_visible;
       }

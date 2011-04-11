@@ -1,4 +1,5 @@
 11.apr (la)
+      - another fix for #7740
       - fix #7944: Instrument limit (again)
 8.apr (ws)
       - fix #10105: Apple+Shift+Click on note causes crash
