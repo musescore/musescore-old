@@ -119,7 +119,7 @@ bool LoadFile::load(const QString& name)
             QMessageBox::warning(0,
                QWidget::tr("MuseScore: file not found:"),
                name,
-               QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
+               QString::null, QString::null, QString::null, 0, 1);
             return false;
             }
       if (!loader(&fp)) {
