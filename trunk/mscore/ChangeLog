@@ -1,4 +1,5 @@
 11.apr (ws)
+      - fix #7814:  error with single-line-staff percussion notation
       - fix #10050: Closing a score with part opened causes crash
       - fix #10062: Part with multiple instruments messes lyric position
       - fix #10109: Crash on loading 1.0 score with BOTH lyrics AND parts
