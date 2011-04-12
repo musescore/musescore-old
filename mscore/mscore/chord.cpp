@@ -1056,7 +1056,7 @@ void Chord::layoutStem()
                   _stem->setPos(STAFFTYPE_TAB_DEFAULTSTEMPOSX*sp, STAFFTYPE_TAB_DEFAULTSTEMPOSY*sp);
                   // process hook
                   int hookIdx = durationType().hooks();
-                  if(hookIdx != 0) {
+                  if (hookIdx != 0) {
                         _hook->setSubtype(hookIdx);
                         _hook->setPos(STAFFTYPE_TAB_DEFAULTSTEMPOSX*sp, STAFFTYPE_TAB_DEFAULTSTEMPOSY*sp);
                         _hook->setMag(mag()*score()->styleD(ST_smallNoteMag));

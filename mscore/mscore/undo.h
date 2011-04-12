@@ -76,6 +76,7 @@ class NoteEvent;
 class SlurSegment;
 class InstrumentChange;
 class Box;
+class Accidental;
 
 // #define DEBUG_UNDO
 
@@ -1609,6 +1610,23 @@ class MoveStaff : public UndoCommand {
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       UNDO_NAME("MoveStaff");
+      };
+
+//---------------------------------------------------------
+//   ChangeAccidental
+//---------------------------------------------------------
+
+class ChangeAccidental : public UndoCommand {
+      Accidental* a;
+      bool small;
+
+      void flip();
+
+   public:
+      ChangeAccidental(Accidental* _a, bool s) : a(_a), small(s) {}
+      virtual void undo() { flip(); }
+      virtual void redo() { flip(); }
+      UNDO_NAME("ChangeAccidental");
       };
 
 #endif
