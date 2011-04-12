@@ -50,6 +50,7 @@
 #include "box.h"
 #include "importmidi.h"
 #include "keysig.h"
+#include "pitchspelling.h"
 
 static unsigned const char gmOnMsg[] = { 0x7e, 0x7f, 0x09, 0x01 };
 static unsigned const char gsOnMsg[] = { 0x41, 0x10, 0x42, 0x12, 0x40, 0x00, 0x7f, 0x00, 0x41 };
@@ -1103,7 +1104,8 @@ void Score::convertTrack(MidiTrack* midiTrack)
                               for (int i = 0; i < nl.size(); ++i) {
                                     Event mn = nl[i];
                         		Note* note = new Note(this);
-                                    note->setPitch(mn.pitch(), mn.tpc());
+                                    // note->setPitch(mn.pitch(), mn.tpc());
+                                    note->setPitch(mn.pitch(), pitch2tpc(mn.pitch()));
                   	      	chord->add(note);
                                     note->setOnTimeUserOffset(mn.noquantOntime() - tick);
                                     int ot = (mn.noquantOntime() + mn.noquantDuration()) - (tick + chord->ticks());
