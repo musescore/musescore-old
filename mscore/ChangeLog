@@ -3,6 +3,8 @@
       - fix layout of mid measure barlines
       - add "style" to note context menu (test for #2217)
       - implemented "small" attribute for accidentals
+       (la)
+      - don't print blue frame around selected image
 11.apr (ws)
       - fix #7814:  error with single-line-staff percussion notation
       - fix #10050: Closing a score with part opened causes crash
