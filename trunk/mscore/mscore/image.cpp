@@ -66,7 +66,7 @@ void Image::draw(Painter* painter) const
       {
       QPainter& p = *painter->painter();
       p.drawPixmap(0, 0, buffer);
-      if (selected()) {
+      if (selected() && !(score() && score()->printing())) {
             p.setBrush(Qt::NoBrush);
             p.setPen(QPen(Qt::blue, 0, Qt::SolidLine));
             p.drawRect(QRect(QPoint(), buffer.size()));
