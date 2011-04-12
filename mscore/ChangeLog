@@ -1,5 +1,6 @@
 12.apr (la)
       - fix #7814:  error with single-line-staff percussion notation
+      - don't print blue frame around selected image
 11.apr (la)
       - fix #7944: Instrument limit (again)
 31.mar (la)
