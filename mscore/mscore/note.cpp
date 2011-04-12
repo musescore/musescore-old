@@ -806,7 +806,7 @@ void ShadowNote::draw(QPainter& p) const
       qreal lw = point(score()->styleS(ST_ledgerLineWidth));
       InputState ps = score()->inputState();
       int voice;
-      if (ps.drumNote() != -1 && ps.drumset())
+      if (ps.drumNote() != -1 && ps.drumset() && ps.drumset()->isValid(ps.drumNote()))
             voice = ps.drumset()->voice(ps.drumNote());
       else
             voice = ps.voice();
