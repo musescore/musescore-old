@@ -3182,3 +3182,18 @@ void MoveStaff::flip()
       rstaff = idx;
       staff->score()->setLayoutAll(true);
       }
+
+//---------------------------------------------------------
+//   ChangeAccidental::flip
+//---------------------------------------------------------
+
+void ChangeAccidental::flip()
+      {
+      a->score()->addRefresh(a->abbox());
+      bool s = a->small();
+      a->setSmall(small);
+      small = s;
+      a->score()->addRefresh(a->abbox());
+      }
+
+

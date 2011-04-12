@@ -1,3 +1,5 @@
+12.apr (ws)
+      - implemented "small" attribute for accidentals
 11.apr (ws)
       - fix #7814:  error with single-line-staff percussion notation
       - fix #10050: Closing a score with part opened causes crash

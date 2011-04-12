@@ -24,6 +24,7 @@
 #include "score.h"
 #include "staff.h"
 #include "painter.h"
+#include "undo.h"
 
 //---------------------------------------------------------
 //   Acc
@@ -80,6 +81,7 @@ Accidental::Accidental(Score* s)
       setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
       _hasBracket = false;
       _role       = ACC_AUTO;
+      _small      = false;
       }
 
 //---------------------------------------------------------
@@ -214,6 +216,8 @@ void Accidental::read(QDomElement e)
                   if (i == ACC_AUTO || i == ACC_USER)
                         _role = AccidentalRole(i);
                   }
+            else if (tag == "small")
+                  _small = i;
             else if (Element::readProperties(e))
                   ;
             else
@@ -232,6 +236,8 @@ void Accidental::write(Xml& xml) const
             xml.tag("bracket", _hasBracket);
       if (_role != ACC_AUTO)
             xml.tag("role", _role);
+      if (_small)
+            xml.tag("small", _small);
       Element::writeProperties(xml);
       xml.etag();
       }
@@ -372,6 +378,8 @@ AccidentalType Accidental::name2subtype(const QString& tag)
 void Accidental::draw(Painter* painter) const
       {
       double m = magS();
+      if (_small)
+            m *= score()->styleD(ST_smallNoteMag);
       foreach(const SymElement& e, el)
             symbols[score()->symIdx()][e.sym].draw(*painter->painter(), m, e.x, 0.0);
       }
@@ -437,3 +445,30 @@ void AccidentalBracket::setSubtype(int i)
       addElement(s1, -s1->bbox().x(), 0.0);
       addElement(s2, s2->bbox().width() - s2->bbox().x(), 0.0);
       }
+
+//---------------------------------------------------------
+//   genPropertyMenu
+//---------------------------------------------------------
+
+bool Accidental::genPropertyMenu(QMenu* popup) const
+      {
+      Element::genPropertyMenu(popup);
+      QAction* a = popup->addAction(QT_TRANSLATE_NOOP("Accidental", "small"));
+      a->setCheckable(true);
+      a->setChecked(_small);
+      a->setData("small");
+      return true;
+      }
+
+//---------------------------------------------------------
+//   propertyAction
+//---------------------------------------------------------
+
+void Accidental::propertyAction(ScoreView* viewer, const QString& s)
+      {
+      if (s == "small")
+            score()->undo()->push(new ChangeAccidental(this, !_small));
+      else
+            Element::propertyAction(viewer, s);
+      }
+

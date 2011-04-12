@@ -59,6 +59,7 @@ class Accidental : public Element {
       QList<SymElement> el;
       bool _hasBracket;
       AccidentalRole _role;
+      bool _small;
 
    public:
       Accidental(Score* s);
@@ -82,9 +83,13 @@ class Accidental : public Element {
       void setHasBracket(bool val)        { _hasBracket = val;      }
       AccidentalRole role() const         { return _role;           }
       void setRole(AccidentalRole r)      { _role = r;              }
+      bool small() const                  { return _small;          }
+      void setSmall(bool val)             { _small = val;           }
 
       virtual void read(QDomElement);
       virtual void write(Xml& xml) const;
+      virtual bool genPropertyMenu(QMenu*) const;
+      virtual void propertyAction(ScoreView*, const QString&);
 
       static int subtype2value(AccidentalType);             // return effective pitch offset
       static const char* subtype2name(AccidentalType);      // return effective pitch offset
