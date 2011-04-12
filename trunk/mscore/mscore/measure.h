@@ -261,6 +261,7 @@ class Measure : public MeasureBase {
       void layoutStage1();
       int playbackCount() const      { return _playbackCount; }
       void setPlaybackCount(int val) { _playbackCount = val; }
+      QRectF staffabbox(int staffIdx) const;
       };
 
 extern void initLineList(char* ll, int key);

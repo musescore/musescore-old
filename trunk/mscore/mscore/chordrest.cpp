@@ -602,7 +602,10 @@ Element* ChordRest::drop(const DropData& data)
                   BarLine* bl = static_cast<BarLine*>(e);
                   bl->setTrack(staffIdx() * VOICES);
 
-                  if ((bl->tick() == m->tick()) || (bl->tick() == m->tick() + m->ticks())) {
+//??                  if ((bl->tick() == m->tick()) || (bl->tick() == m->tick() + m->ticks())) {
+//                        return m->drop(data);
+//                        }
+                  if (tick() == m->tick()) {
                         return m->drop(data);
                         }
 

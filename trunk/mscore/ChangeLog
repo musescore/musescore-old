@@ -1,4 +1,6 @@
 12.apr (ws)
+      - fix #2299: Bar line appears on every note of selected measure
+      - fix layout of mid measure barlines
       - add "style" to note context menu (test for #2217)
       - implemented "small" attribute for accidentals
 11.apr (ws)
