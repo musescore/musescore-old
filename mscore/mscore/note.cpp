@@ -63,6 +63,7 @@
 #include "chordeditor.h"
 #include "noteevent.h"
 #include "mscore.h"
+#include "editstyle.h"
 
 //---------------------------------------------------------
 //   noteHeads
@@ -1240,6 +1241,10 @@ bool Note::genPropertyMenu(QMenu* popup) const
       Element::genPropertyMenu(popup);
       QAction* a = popup->addAction(tr("Note Properties..."));
       a->setData("props");
+
+      a = popup->addAction(tr("Style..."));
+      a->setData("style");
+
       if (chord()->tuplet()) {
             QMenu* menuTuplet = popup->addMenu(tr("Tuplet..."));
             a = menuTuplet->addAction(tr("Tuplet Properties..."));
@@ -1314,6 +1319,11 @@ void Note::propertyAction(ScoreView* viewer, const QString& s)
             }
       else if (s == "tupletDelete")
             score()->cmdDeleteTuplet(chord()->tuplet(), true);
+      else if (s == "style") {
+            EditStyle es(score(), 0);
+            es.setPage(EditStyle::PAGE_NOTE);
+            es.exec();
+            }
       else
             Element::propertyAction(viewer, s);
       }

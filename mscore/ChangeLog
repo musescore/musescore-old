@@ -1,4 +1,5 @@
 12.apr (ws)
+      - add "style" to note context menu (test for #2217)
       - implemented "small" attribute for accidentals
 11.apr (ws)
       - fix #7814:  error with single-line-staff percussion notation

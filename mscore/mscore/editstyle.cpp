@@ -480,3 +480,12 @@ void EditStyle::editTextClicked(int id)
       e->setHtml(editText(e->toHtml()));
       }
 
+//---------------------------------------------------------
+//   setPage
+//---------------------------------------------------------
+
+void EditStyle::setPage(int row)
+      {
+      pageList->setCurrentRow(row);
+      }
+

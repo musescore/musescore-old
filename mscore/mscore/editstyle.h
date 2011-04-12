@@ -51,7 +51,9 @@ class EditStyle : public QDialog, private Ui::EditStyleBase {
       void editTextClicked(int id);
 
    public:
+      enum { PAGE_NOTE = 6 };
       EditStyle(Score*, QWidget*);
+      void setPage(int no);
       };
 
 #endif
