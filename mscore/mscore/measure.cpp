@@ -1453,6 +1453,20 @@ void Measure::insertStaff(Staff* staff, int staffIdx)
       }
 
 //---------------------------------------------------------
+//   staffabbox
+//---------------------------------------------------------
+
+QRectF Measure::staffabbox(int staffIdx) const
+      {
+      System* s = system();
+      QRectF sb(s->staff(staffIdx)->bbox());
+      QRectF rrr(sb.translated(s->canvasPos()));
+      QRectF rr(abbox());
+      QRectF r(rr.x(), rrr.y(), rr.width(), rrr.height());
+      return r;
+      }
+
+//---------------------------------------------------------
 //   acceptDrop
 //---------------------------------------------------------
 
@@ -1561,6 +1575,7 @@ bool Measure::acceptDrop(ScoreView* viewer, const QPointF& p, int type, int) con
 Element* Measure::drop(const DropData& data)
       {
       Element* e = data.element;
+printf("Measure drop %s\n", e->name());
       int staffIdx;
       Segment* seg;
       _score->pos2measure(data.pos, &staffIdx, 0, &seg, 0);
@@ -2943,13 +2958,13 @@ void Measure::layoutX(double stretch)
                               if (!cr)
                                     continue;
                               found = true;
-                              if (!pSeg || (pSeg->subtype() == SegStartRepeatBarLine)) {
+                              int pt = pSeg ? pSeg->subtype() : SegChordRest;
+                              if (!pSeg || (pt & (SegStartRepeatBarLine | SegBarLine))) {
                                     double sp       = score()->styleS(ST_barNoteDistance).val() * _spatium;
                                     minDistance     = qMax(minDistance, sp * .3);
                                     stretchDistance = sp * .7;
                                     }
                               else {
-                                    int pt = pSeg->subtype();
                                     if (! (pt & (SegChordRest | SegGrace))) {
                                           // if (pt & (SegKeySig | SegClef))
                                           bool firstClef = (segmentIdx == 1) && (pt == SegClef);

@@ -38,6 +38,7 @@
 #include "part.h"
 #include "textline.h"
 #include "painter.h"
+#include "measure.h"
 
 //---------------------------------------------------------
 //   needsStaff
@@ -188,9 +189,8 @@ void Palette::mousePressEvent(QMouseEvent* ev)
 //   applyDrop
 //---------------------------------------------------------
 
-static void applyDrop(Score* score, ScoreView* viewer, Element* target, Element* e)
+static void applyDrop(Score* score, ScoreView* viewer, Element* target, Element* e, QPointF pt = QPointF())
       {
-      QPointF pt;
       if (target->acceptDrop(viewer, pt, e->type(), e->subtype())) {
             Element* ne = e->clone();
             ne->setScore(score);
@@ -233,24 +233,36 @@ void Palette::mouseDoubleClickEvent(QMouseEvent* ev)
 
       score->startCmd();
       if (sel.state() == SEL_LIST) {
+printf("sel list\n");
             foreach(Element* e, sel.elements())
                   applyDrop(score, viewer, e, element);
             }
       else if (sel.state() == SEL_RANGE) {
-            int track1 = sel.staffStart() * VOICES;
-            int track2 = sel.staffEnd() * VOICES;
-            for (Segment* s = sel.startSegment(); s && s != sel.endSegment(); s = s->next1()) {
-                  for (int track = track1; track < track2; ++track) {
-                        Element* e = s->element(track);
-                        if (e == 0)
-                              continue;
-                        if (e->type() == CHORD) {
-                              Chord* chord = static_cast<Chord*>(e);
-                              foreach(Note* n, chord->notes())
-                                    applyDrop(score, viewer, n, element);
+printf("sel range\n");
+            // TODO: check for other element types:
+            if (element->type() == BAR_LINE) {
+                  // TODO: apply to multiple measures
+                  Measure* m = sel.startSegment()->measure();
+                  QRectF r = m->staffabbox(sel.staffStart());
+                  QPointF pt(r.x() + r.width() * .5, r.y() + r.height() * .5);
+                  applyDrop(score, viewer, m, element, pt);
+                  }
+            else {
+                  int track1 = sel.staffStart() * VOICES;
+                  int track2 = sel.staffEnd() * VOICES;
+                  for (Segment* s = sel.startSegment(); s && s != sel.endSegment(); s = s->next1()) {
+                        for (int track = track1; track < track2; ++track) {
+                              Element* e = s->element(track);
+                              if (e == 0)
+                                    continue;
+                              if (e->type() == CHORD) {
+                                    Chord* chord = static_cast<Chord*>(e);
+                                    foreach(Note* n, chord->notes())
+                                          applyDrop(score, viewer, n, element);
+                                    }
+                              else
+                                    applyDrop(score, viewer, e, element);
                               }
-                        else
-                              applyDrop(score, viewer, e, element);
                         }
                   }
             }
