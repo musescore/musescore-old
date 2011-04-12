@@ -61,7 +61,7 @@ void Image::dereference()
 void Image::draw(QPainter& p) const
       {
       p.drawPixmap(0, 0, buffer);
-      if (selected()) {
+      if (selected() && !(score() && score()->printing())) {
             p.setBrush(Qt::NoBrush);
             p.setPen(QPen(Qt::blue, 0, Qt::SolidLine));
             p.drawRect(QRect(QPoint(), buffer.size()));
