@@ -29,6 +29,8 @@
 #include <math.h>
 #ifndef WIN32
 #include <dlfcn.h>
+//for backward compatibility of Jack headers. Might not be necessary.
+typedef pthread_t jack_native_thread_t;
 #endif
 #include <stdlib.h>
 #include <iostream>
