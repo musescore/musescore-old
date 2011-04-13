@@ -802,7 +802,7 @@ void ShowChordWidget::setElement(Element* e)
       crb.upFlag->setChecked(chord->up());
       crb.beamMode->setCurrentIndex(int(chord->beamMode()));
       crb.dots->setValue(chord->dots());
-      crb.ticks->setValue(chord->ticks());
+      crb.ticks->setValue(chord->actualTicks());
       crb.durationType->setText(chord->durationType().name());
       crb.duration->setText(chord->duration().print());
       crb.move->setValue(chord->staffMove());
@@ -1140,7 +1140,7 @@ void ShowRestWidget::setElement(Element* e)
       crb.beamMode->setCurrentIndex(int(rest->beamMode()));
       crb.attributes->clear();
       crb.dots->setValue(rest->dots());
-      crb.ticks->setValue(rest->ticks());
+      crb.ticks->setValue(rest->actualTicks());
       crb.durationType->setText(rest->durationType().name());
       crb.duration->setText(rest->duration().print());
       crb.move->setValue(rest->staffMove());
@@ -1440,7 +1440,7 @@ void TupletView::setElement(Element* e)
             QTreeWidgetItem* item = new QTreeWidgetItem;
             item->setText(0, e->name());
             item->setText(1, QString("%1").arg(e->tick()));
-            item->setText(2, QString("%1").arg(e->ticks()));
+            item->setText(2, QString("%1").arg(e->actualTicks()));
             void* p = (void*) e;
             item->setData(0, Qt::UserRole, QVariant::fromValue<void*>(p));
             tb.elements->addTopLevelItem(item);

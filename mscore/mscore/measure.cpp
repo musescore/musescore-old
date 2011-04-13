@@ -1662,8 +1662,7 @@ printf("drop staffList\n");
                   }
 
             case TIMESIG:
-                  score()->cmdAddTimeSig(this, e->subtype());
-                  delete e;
+                  score()->cmdAddTimeSig(this, static_cast<TimeSig*>(e));
                   break;
 
             case LAYOUT_BREAK:
@@ -1849,7 +1848,7 @@ void Measure::adjustToLen(int ol, int nl)
                                           if (cr->durationType() == Duration::V_MEASURE)
                                                 n = nl;
                                           else
-                                                n += cr->ticks();
+                                                n += cr->actualTicks();
                                           score()->undoRemoveElement(e);
                                           if (segment->isEmpty())
                                                 score()->undoRemoveElement(segment);
@@ -2011,6 +2010,7 @@ void Measure::write(Xml& xml) const
 void Measure::read(QDomElement e, int staffIdx)
       {
       Segment* segment = 0;
+      Fraction measureDuration(0,1);
 
       if (staffIdx == 0)
             _len = Fraction(0, 1);
@@ -2033,12 +2033,18 @@ void Measure::read(QDomElement e, int staffIdx)
       else
             setTick(score()->curTick);
       score()->curTick = tick();
+
+      Staff* staff = score()->staff(staffIdx);
+      Fraction timeStretch(staff->timeStretch(score()->curTick));
+
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
 
-            if (tag == "tick")
+            if (tag == "tick") {
                   score()->curTick = val.toInt();
+                  measureDuration = Fraction::fromTicks(score()->curTick - tick());
+                  }
             else if (tag == "BarLine") {
                   BarLine* barLine = new BarLine(score());
                   barLine->setTrack(score()->curTrack);
@@ -2080,6 +2086,9 @@ void Measure::read(QDomElement e, int staffIdx)
 
                   segment = getSegment(chord, score()->curTick);
 
+                  Fraction ts(timeStretch * chord->globalDuration());
+                  int crticks = ts.ticks();
+
                   if (chord->tremolo() && chord->tremolo()->subtype() < 6) {
                         //
                         // old style tremolo found
@@ -2104,28 +2113,37 @@ void Measure::read(QDomElement e, int staffIdx)
                               else {
                                     printf("tremolo: first note not found\n");
                                     }
-                              score()->curTick += chord->ticks() / 2;
+                              score()->curTick += crticks / 2;
                               }
                         else {
                               tremolo->setParent(chord);
-                              score()->curTick += chord->ticks();
+                              score()->curTick += crticks;
                               }
                         }
                   else {
-                        score()->curTick += chord->ticks();
+                        score()->curTick += crticks;
                         }
                   segment->add(chord);
 
-                  Fraction nl(Fraction::fromTicks(score()->curTick - tick()));
-                  if (nl > _len)
-                        _len = nl;
+                  measureDuration += ts;
+                  if (measureDuration > _len)
+                        _len = measureDuration;
                   }
-            else if (tag == "Breath") {
-                  Breath* breath = new Breath(score());
-                  breath->setTrack(score()->curTrack);
-                  breath->read(e);
-                  segment = getSegment(SegBreath, score()->curTick);
-                  segment->add(breath);
+            else if (tag == "Rest") {
+                  Rest* rest = new Rest(score());
+                  rest->setDurationType(Duration::V_MEASURE);
+                  rest->setDuration(timesig()/timeStretch);
+                  rest->setTrack(score()->curTrack);
+                  rest->read(e, _tuplets, score()->slurs);
+                  segment = getSegment(rest, score()->curTick);
+                  segment->add(rest);
+
+                  Fraction ts(timeStretch * rest->globalDuration());
+
+                  score()->curTick += ts.ticks();
+                  measureDuration += ts;
+                  if (measureDuration > _len)
+                        _len = measureDuration;
                   }
             else if (tag == "Note") {
                   Chord* chord = new Chord(score());
@@ -2133,20 +2151,19 @@ void Measure::read(QDomElement e, int staffIdx)
                   chord->readNote(e, _tuplets, score()->slurs);
                   segment = getSegment(chord, score()->curTick);
                   segment->add(chord);
-                  score()->curTick += chord->ticks();
+
+                  Fraction ts(timeStretch * chord->globalDuration());
+                  score()->curTick += ts.ticks();
+                  measureDuration += ts;
+                  if (measureDuration > _len)
+                        _len = measureDuration;
                   }
-            else if (tag == "Rest") {
-                  Rest* rest = new Rest(score());
-                  rest->setDurationType(Duration::V_MEASURE);
-                  rest->setDuration(timesig());
-                  rest->setTrack(score()->curTrack);
-                  rest->read(e, _tuplets, score()->slurs);
-                  segment = getSegment(rest, score()->curTick);
-                  segment->add(rest);
-                  score()->curTick += rest->ticks();
-                  Fraction nl(Fraction::fromTicks(score()->curTick - tick()));
-                  if (nl > _len)
-                        _len = nl;
+            else if (tag == "Breath") {
+                  Breath* breath = new Breath(score());
+                  breath->setTrack(score()->curTrack);
+                  breath->read(e);
+                  segment = getSegment(SegBreath, score()->curTick);
+                  segment->add(breath);
                   }
             else if (tag == "endSpanner") {
                   int id = e.attribute("id").toInt();
@@ -2220,7 +2237,8 @@ void Measure::read(QDomElement e, int staffIdx)
                   ts->read(e);
                   segment = getSegment(SegTimeSig, score()->curTick);
                   segment->add(ts);
-                  _timesig = ts->getSig();
+                  _timesig    = ts->sig();
+                  timeStretch = ts->stretch();
                   }
             else if (tag == "KeySig") {
                   KeySig* ks = new KeySig(score());
@@ -2378,6 +2396,7 @@ void Measure::read(QDomElement e, int staffIdx)
                   // delete b;
                   }
             }
+      _len.reduce();
       }
 
 //---------------------------------------------------------

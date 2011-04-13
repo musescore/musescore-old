@@ -245,7 +245,7 @@ Rest* Score::setRest(int tick, int track, Fraction l, bool useDots, Tuplet* tupl
             //
             Fraction f;
             if (tuplet) {
-                  int ticks = (tuplet->tick() + tuplet->ticks()) - tick;
+                  int ticks = (tuplet->tick() + tuplet->actualTicks()) - tick;
 
                   f = Fraction::fromTicks(ticks);
                   for (Tuplet* t = tuplet; t; t = t->tuplet())
@@ -278,7 +278,7 @@ Rest* Score::setRest(int tick, int track, Fraction l, bool useDots, Tuplet* tupl
                && (measure->timesig() == f)
                && (f < Duration(Duration::V_BREVE).fraction())) {
                   Rest* rest = addRest(tick, track, Duration(Duration::V_MEASURE), tuplet);
-                  tick += rest->ticks();
+                  tick += rest->actualTicks();
                   if (r == 0)
                         r = rest;
                   }
@@ -296,7 +296,7 @@ Rest* Score::setRest(int tick, int track, Fraction l, bool useDots, Tuplet* tupl
                               rest = addRest(tick, track, d, tuplet);
                               if (r == 0)
                                     r = rest;
-                              tick += rest->ticks();
+                              tick += rest->actualTicks();
                               }
                         }
                   else {
@@ -304,7 +304,7 @@ Rest* Score::setRest(int tick, int track, Fraction l, bool useDots, Tuplet* tupl
                               rest = addRest(tick, track, dList[i], tuplet);
                               if (r == 0)
                                     r = rest;
-                              tick += rest->ticks();
+                              tick += rest->actualTicks();
                               }
                         }
                   }
@@ -376,10 +376,10 @@ static bool addCR(int tick, ChordRest* cr, Measure* ml)
       Tuplet* tuplet = cr->tuplet();
       while (tuplet && tuplet->tuplet())
             tuplet = tuplet->tuplet();
-      if (tuplet && (tick + tuplet->ticks() > etick))
+      if (tuplet && (tick + tuplet->actualTicks() > etick))
             return false;
 
-      if (tick + cr->ticks() > etick) {
+      if (tick + cr->actualTicks() > etick) {
             //
             // split cr
             //
@@ -430,7 +430,7 @@ static bool addCR(int tick, ChordRest* cr, Measure* ml)
                               c->setDuration(d.fraction());
                               Segment* s = m->getSegment(SegChordRest, tick);
                               s->add(c);
-                              tick += c->ticks();
+                              tick += c->actualTicks();
                               }
                         len -= rest;
                         m = m->nextMeasure();
@@ -452,7 +452,7 @@ static bool addCR(int tick, ChordRest* cr, Measure* ml)
                               cr1->setDuration(d.fraction());
                               Segment* s = m->getSegment(SegChordRest, tick);
                               s->add(cr1);
-                              tick += cr1->ticks();
+                              tick += cr1->actualTicks();
                               }
                         len -= rest;
                         m = m->nextMeasure();
@@ -550,7 +550,7 @@ bool Score::rewriteMeasures(Measure* fm, Measure* lm, const Fraction& ns)
                   ncr->setSlurBack(cr->slurBack());
 
                   tick = s->tick() - stick;
-                  int ticks = ncr->ticks();
+                  int ticks = ncr->actualTicks();
                   if (!addCR(tick, ncr, nfm)) {
                         undo()->pop();
                         // TODO: unwind creation of measures
@@ -633,24 +633,27 @@ void Score::rewriteMeasures(Measure* fm, const Fraction& ns)
 //    to gui command (drop timesig on measure or timesig)
 //---------------------------------------------------------
 
-void Score::cmdAddTimeSig(Measure* fm, int timeSigSubtype)
+void Score::cmdAddTimeSig(Measure* fm, TimeSig* ts)
       {
-      Fraction ns(TimeSig::getSig(timeSigSubtype));
+#if 0 // TODO TS
+      Fraction ns = ts->sig();
 
       int tick = fm->tick();
       Segment* seg = fm->first(SegTimeSig);
       if (seg && seg->element(0)) {
             TimeSig* ots = static_cast<TimeSig*>(seg->element(0));
             if ((ots->subtype() == timeSigSubtype)
-               && (ns == fm->timesig())
+               && (ns == fm->sig())
                && (ns == fm->len())) {
                   printf("time sig aready there\n");
-                  return;
+                  return ts;
                   }
             }
       int n = addRemoveTimeSigDialog();
-      if (n == -1)
+      if (n == -1) {
+            delete ts;
             return;
+            }
       if (seg)
             undoRemoveElement(seg);
 
@@ -686,6 +689,8 @@ void Score::cmdAddTimeSig(Measure* fm, int timeSigSubtype)
                   }
             nfm->add(seg);
             }
+#endif
+      delete ts;
       }
 
 //---------------------------------------------------------
@@ -1347,7 +1352,7 @@ void Score::cmdDeleteSelection()
                                     f      = Fraction();
                                     }
                               tuplet = cr->tuplet();
-                              if (tuplet && (tuplet->tick() == tick) && (tuplet->lastTick() < tick2) ) {
+                              if (tuplet && (tuplet->tick() == tick) && ((tuplet->tick() + tuplet->actualTicks()) < tick2) ) {
                                     // remove complete top level tuplet
 
                                     Tuplet* t = cr->tuplet();
@@ -1360,10 +1365,10 @@ void Score::cmdDeleteSelection()
                                     }
                               }
                         if (tuplet != cr->tuplet()) {
-                              if (cr->tuplet() && (cr->tuplet()->lastTick() < tick2)) {
+                              Tuplet* t = cr->tuplet();
+                              if (t && ((t->tick() + t->actualTicks()) < tick2)) {
                                     // remove complete top level tuplet
 
-                                    Tuplet* t = cr->tuplet();
                                     while (t->tuplet())
                                           t = t->tuplet();
                                     cmdDeleteTuplet(t, false);
@@ -1624,11 +1629,11 @@ printf("createTuplet at %d <%s> duration <%s> ratio <%s> baseLen <%s>\n",
       cr->setDuration(tuplet->baseLen().fraction());
 
 printf("tuplet note duration %s  actualNotes %d  ticks %d\n",
-      qPrintable(tuplet->baseLen().name()), actualNotes, cr->ticks());
+      qPrintable(tuplet->baseLen().name()), actualNotes, cr->actualTicks());
 
       undoAddCR(cr, measure, tick);
 
-      int ticks = cr->ticks();
+      int ticks = cr->actualTicks();
 
       for (int i = 0; i < (actualNotes-1); ++i) {
             tick += ticks;
@@ -1857,7 +1862,7 @@ void Score::nextInputPos(ChordRest* cr, bool doSelect)
       {
       ChordRest* ncr = nextChordRest(cr);
       if ((ncr == 0) && (_is.track() % VOICES)) {
-            Segment* s = tick2segment(cr->tick() + cr->ticks());
+            Segment* s = tick2segment(cr->tick() + cr->actualTicks());
             int track = (cr->track() / VOICES) * VOICES;
             ncr = s ? static_cast<ChordRest*>(s->element(track)) : 0;
             }
@@ -1932,7 +1937,7 @@ void Score::cmdSplitMeasure()
 
                   ChordRest* ocr = static_cast<ChordRest*>(oe);
                   ChordRest* ncr = static_cast<ChordRest*>(ne);
-                  if (s->tick() < tick && (s->tick() + ocr->ticks()) > tick) {
+                  if (s->tick() < tick && (s->tick() + ocr->actualTicks()) > tick) {
                         addCR(s->tick(), ncr, m1);
                         }
                   else {

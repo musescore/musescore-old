@@ -244,7 +244,11 @@ void MuseScore::populatePalette()
       sp->setMag(.8);
       sp->setGrid(42, 38);
 
-      sp->append(new TimeSig(gscore, 2, 2), "2/2");
+      TimeSig* ts;
+      ts = new TimeSig(gscore);
+      ts->setSig(2, 2);
+      sp->append(ts, "2/2");
+
       sp->append(new TimeSig(gscore, 4, 2), "2/4");
       sp->append(new TimeSig(gscore, 4, 3), "3/4");
       sp->append(new TimeSig(gscore, 4, 4), "4/4");
@@ -254,7 +258,8 @@ void MuseScore::populatePalette()
       sp->append(new TimeSig(gscore, 8, 6), "6/8");
       sp->append(new TimeSig(gscore, 8, 9), "9/8");
       sp->append(new TimeSig(gscore, 8, 12), "12/8");
-      sp->append(new TimeSig(gscore, TSIG_FOUR_FOUR), tr("4/4 common time"));
+
+      sp->append(new TimeSig(gscore, TSIG_FOUR_FOUR),  tr("4/4 common time"));
       sp->append(new TimeSig(gscore, TSIG_ALLA_BREVE), tr("2/2 alla breve"));
       paletteBox->addPalette(sp);
 

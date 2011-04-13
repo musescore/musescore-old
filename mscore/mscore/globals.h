@@ -23,7 +23,7 @@
 
 #define MSC_VERSION     "1.21"
 
-static const int MSCVERSION = 121;
+static const int MSCVERSION = 122;
 
 // History:
 //    1.3   added staff->_barLineSpan
@@ -46,6 +46,7 @@ static const int MSCVERSION = 121;
 //          used
 //    1.20  instrument names are saved as html again
 //    1.21  no cleflist anymore
+//    1.22  timesig changed
 
 extern bool debugMode;
 extern bool enableExperimental;

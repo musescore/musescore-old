@@ -838,7 +838,7 @@ void Score::fixTicks()
                                     double otempo = tempomap()->tempo(cr->tick());
                                     double ntempo = otempo / stretch;
                                     tempomap()->addTempo(cr->tick(), ntempo);
-                                    tempomap()->addTempo(cr->tick() + cr->ticks(), otempo);
+                                    tempomap()->addTempo(cr->tick() + cr->actualTicks(), otempo);
                                     break;      // do not consider more staves/voices
                                     }
                               }
@@ -1511,7 +1511,7 @@ static Segment* getNextValidInputSegment(Segment* s, int track, int voice)
                         if (cr) {
                               if (ns)
                                     return s1;
-                              ntick = s1->tick() + cr->ticks();
+                              ntick = s1->tick() + cr->actualTicks();
                               skipChord = true;
                               }
                         if (s1 == s)

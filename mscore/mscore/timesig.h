@@ -28,9 +28,12 @@ class ScoreView;
 class Segment;
 class Painter;
 
+// subtypes:
+
 enum {
-      TSIG_FOUR_FOUR  = 0x40000104,
-      TSIG_ALLA_BREVE = 0x40002084
+      TSIG_NORMAL,            // use sz/sn text
+      TSIG_FOUR_FOUR,
+      TSIG_ALLA_BREVE
       };
 
 //---------------------------------------------------------
@@ -38,29 +41,22 @@ enum {
 //    Time Signature
 //---------------------------------------------------------
 
-/**
- \a subtype() is coded as:
-      bit 0-5     denominator (n)
-      bit 6-11    nominator1 (z1)
-      bit 12-17   nominator2
-      bit 18-23   nominator3
-      bit 24-29   nominator4
-      bit 30      variation (alla breve etc.)
-*/
 class TimeSig : public Element {
-
       bool	_showCourtesySig;
-      QString sz, sn;   // cached values, set in layout()
+      QString sz, sn;         // calculated from actualSig() if !customText
       QPointF pz, pn;
+      Fraction _nominal;
+      Fraction _stretch;      // _nominal / aktualSig()
+      bool customText;        // if false, sz and sn are calculated from actualSig()
 
    public:
       TimeSig(Score*);
-      TimeSig(Score*, int st);
-      TimeSig(Score*, int n, int z1, int z2=0, int z3=0, int z4=0);
-      TimeSig(Score*, const Fraction&);
+      TimeSig(Score* s, int st);
+      TimeSig(Score* s, int z, int n);
+      TimeSig(Score* s, const Fraction& f);
 
-      TimeSig* clone() const   { return new TimeSig(*this); }
-      ElementType type() const { return TIMESIG; }
+      TimeSig* clone() const             { return new TimeSig(*this); }
+      ElementType type() const           { return TIMESIG; }
       QPointF canvasPos() const;      ///< position in canvas coordinates
       void setSubtype(int val);
       void draw(Painter*) const;
@@ -69,31 +65,30 @@ class TimeSig : public Element {
       void layout();
       Space space() const;
 
-      Fraction getSig() const { return getSig(subtype()); }
-      static Fraction getSig(int st) {
-            return Fraction(
-                  ((st>>24)& 0x3f)
-                  + ((st>>18)& 0x3f)
-                  + ((st>>12)& 0x3f)
-                  + ((st>>6) & 0x3f), st & 0x3f);
-            }
-      void getSig(int* n, int* z1, int* z2, int*z3=0, int*z4=0) const;
-      void setSig(int n, int z1, int z2=0, int z3=0, int z4=0);
-      void setSig(const Fraction& f)     { setSig(f.denominator(), f.numerator(), 0, 0, 0); }
-      void setSig(const AL::SigEvent& e) { setSig(e.timesig()); }
+      Fraction sig() const               { return _nominal; }
+      void setSig(const Fraction& f)     { _nominal = f;    }
+      void setSig(int a, int b)          { setSig(Fraction(a,b)); }
+
+      Fraction stretch() const           { return _stretch;  }
+      void setStretch(const Fraction& f) { _stretch = f;    }
+      Fraction actualSig() const         { return _nominal / _stretch; }
+      void setActualSig(const Fraction& f);
 
       bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
       Element* drop(const DropData&);
-      static int sigtype(int n, int z1, int z2 = 0, int z3 = 0, int z4 = 0) {
-            return (z4 << 24) + (z3 << 18) + (z2 << 12) + (z1 << 6) + n;
-            }
+
       Segment* segment() const { return (Segment*)parent(); }
       Measure* measure() const { return (Measure*)parent()->parent(); }
 
       bool showCourtesySig() const        { return _showCourtesySig; };
       void setShowCourtesySig(bool v)     { _showCourtesySig = v;    };
+
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(ScoreView*, const QString&);
+
+      QString zText() const { return sz; }
+      QString nText() const { return sn; }
+      void setText(const QString&, const QString&);
       };
 
 #endif

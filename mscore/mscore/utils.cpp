@@ -189,7 +189,7 @@ Segment* Score::tick2segmentEnd(int track, int tick) const
                         ChordRest* cr = static_cast<ChordRest*>(el);
                         // TODO LVI: check if following is correct, see exceptions in
                         // ExportMusicXml::chord() and ExportMusicXml::rest()
-                        int endTick = cr->tick() + cr->ticks();
+                        int endTick = cr->tick() + cr->actualTicks();
                         if (endTick < tick)
                               continue; // not found yet
                         else if (endTick == tick) {

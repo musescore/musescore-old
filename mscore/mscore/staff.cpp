@@ -33,6 +33,7 @@
 #include "stafftype.h"
 #include "undo.h"
 #include "cleflist.h"
+#include "timesig.h"
 
 //---------------------------------------------------------
 //   idx
@@ -243,13 +244,32 @@ ClefType Staff::clef(Segment* segment) const
       }
 
 //---------------------------------------------------------
-//   addClef
+//   timeStretch
+//---------------------------------------------------------
+
+Fraction Staff::timeStretch(int tick) const
+      {
+      TimeSig* timesig = 0;
+      foreach(TimeSig* ts, timesigs) {
+            if (ts->segment()->tick() > tick)
+                  break;
+            timesig = ts;
+            }
+      return timesig == 0 ? Fraction(1,1) : timesig->stretch();
+      }
+
+//---------------------------------------------------------
+//   clefsGreater
 //---------------------------------------------------------
 
 static bool clefsGreater(const Clef* a, const Clef* b)
       {
       return a->segment()->tick() < b->segment()->tick();
       }
+
+//---------------------------------------------------------
+//   addClef
+//---------------------------------------------------------
 
 void Staff::addClef(Clef* clef)
       {
@@ -261,10 +281,29 @@ void Staff::addClef(Clef* clef)
       clefs.append(clef);
       if (clef->segment()->tick() < tick)
             qSort(clefs.begin(), clefs.end(), clefsGreater);
+      }
 
-//      printf("addClef idx %d clef %d\n", idx(), clef->segment()->tick());
-//      foreach(Clef* c, clefs)
-//            printf("  clef %d\n", c->segment()->tick());
+//---------------------------------------------------------
+//   timesigsGreater
+//---------------------------------------------------------
+
+static bool timesigsGreater(const TimeSig* a, const TimeSig* b)
+      {
+      return a->segment()->tick() < b->segment()->tick();
+      }
+
+//---------------------------------------------------------
+//   addTimeSig
+//---------------------------------------------------------
+
+void Staff::addTimeSig(TimeSig* timesig)
+      {
+      int tick = 0;
+      if (!timesigs.isEmpty())
+            tick = timesigs.back()->segment()->tick();
+      timesigs.append(timesig);
+      if (timesig->segment()->tick() < tick)
+            qSort(timesigs.begin(), timesigs.end(), timesigsGreater);
       }
 
 //---------------------------------------------------------
@@ -274,6 +313,15 @@ void Staff::addClef(Clef* clef)
 void Staff::removeClef(Clef* clef)
       {
       clefs.removeOne(clef);
+      }
+
+//---------------------------------------------------------
+//   removeTimeSig
+//---------------------------------------------------------
+
+void Staff::removeTimeSig(TimeSig* timesig)
+      {
+      timesigs.removeOne(timesig);
       }
 
 //---------------------------------------------------------

@@ -77,7 +77,7 @@ void PianoItem::paint(QPainter* painter, const QStyleOptionGraphicsItem*, QWidge
       painter->setBrush(isSelected() ? Qt::yellow : Qt::blue);
       painter->drawRect(x1, 0.0, x2-x1, keyHeight / 2);
 
-      int len = chord->ticks();
+      int len = chord->actualTicks();
 
       if (x1 > 0 || x2 < len) {
             painter->setBrush(Qt::gray);
@@ -305,7 +305,7 @@ void PianoView::setChord(Chord* c, AL::Pos* l)
       scene()->blockSignals(false);
 
 //      Measure* lm = staff->score()->lastMeasure();
-      ticks       = chord->tick() + chord->ticks();
+      ticks       = chord->tick() + chord->actualTicks();
       scene()->setSceneRect(0.0, 0.0, double(ticks + 960), keyHeight * 75);
 
       for (int i = 0; i < 3; ++i)

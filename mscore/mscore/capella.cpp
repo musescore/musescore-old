@@ -1684,7 +1684,7 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
 
                         if (tuplet) {
                               if (++nTuplet >= tupletCount) {
-                                    tick = tupletTick + tuplet->ticks();
+                                    tick = tupletTick + tuplet->actualTicks();
                                     tuplet = 0;
                                     }
                               else {

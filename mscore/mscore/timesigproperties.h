@@ -1,9 +1,9 @@
 //=============================================================================
 //  MusE Score
 //  Linux Music Score Editor
-//  $Id$
+//  $Id: restproperties.h 1840 2009-05-20 11:57:51Z wschweer $
 //
-//  Copyright (C) 2008-2009 Werner Schweer and others
+//  Copyright (C) 2002-2009 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -18,39 +18,27 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __DURATION_H__
-#define __DURATION_H__
+#ifndef __TIMESIGPROPERTIES_H__
+#define __TIMESIGPROPERTIES_H__
 
-#include "element.h"
-#include "durationtype.h"
+#include "ui_timesigproperties.h"
 
-class Tuplet;
-class Beam;
+class TimeSig;
 
 //---------------------------------------------------------
-//   DurationElement
+//   TimeSigProperties
 //---------------------------------------------------------
 
-class DurationElement : public Element {
-      Fraction _duration;
-      Tuplet* _tuplet;
+class TimeSigProperties : public QDialog, public Ui::TimeSigProperties {
+      Q_OBJECT
+
+      TimeSig* timesig;
+
+   public slots:
+      virtual void accept();
 
    public:
-      DurationElement(Score* s);
-      DurationElement(const DurationElement& e);
-
-      virtual Measure* measure() const               { return (Measure*)(parent()); }
-      void setTuplet(Tuplet* t)                      { _tuplet = t;      }
-      Tuplet* tuplet() const                         { return _tuplet;   }
-      virtual Beam* beam() const                     { return 0;         }
-//      int ticks() const;
-      virtual int tick() const = 0;
-      int actualTicks() const;
-
-      Fraction duration() const           { return _duration; }
-      Fraction globalDuration() const;
-      void setDuration(const Fraction& f) { _duration = f;    }
+      TimeSigProperties(TimeSig*, QWidget* parent = 0);
       };
 
 #endif
-

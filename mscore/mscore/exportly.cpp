@@ -2073,13 +2073,13 @@ void ExportLy::findTuplets(ChordRest* cr)
             if (tupletcount == 0) {
                   int actNotes   = t->ratio().numerator();
                   int nrmNotes   = t->ratio().denominator();
-                  int baselength = t->ticks() / nrmNotes;
-                  int thislength = cr->ticks();
+                  int baselength = t->duration().ticks() / nrmNotes;
+                  int thislength = cr->duration().ticks();
 		  tupletcount    = nrmNotes * baselength - thislength;
                   out << "\\times " <<  nrmNotes << "/" << actNotes << "{" ;
                   }
             else if (tupletcount > 1) {
-                  int thislength = cr->ticks();
+                  int thislength = cr->duration().ticks();
                   tupletcount    = tupletcount - thislength;
                   if (tupletcount == 0)
                         tupletcount = -1;
@@ -2341,7 +2341,10 @@ void ExportLy::writeClef(int clef)
 void ExportLy::writeTimeSig(TimeSig* sig)
 {
   int st = sig->subtype();
-  sig->getSig(&timedenom, &z1, &z2, &z3, &z4);
+  Fraction f = sig->sig();
+  timedenom = f.denominator();
+  z1        = f.numerator();
+
   //lilypond writes 4/4 as C by default, so only check for cut.
   if (st == TSIG_ALLA_BREVE)
     {
@@ -3040,7 +3043,7 @@ void ExportLy::writeChord(Chord* c, bool nextisrest)
        ix++;
      }
 
-  writeLen(c->ticks());
+  writeLen(c->actualTicks());
 
   if ((symb) and (nl.size() == 1))
     writeSymbol(symbolname);
@@ -3959,8 +3962,8 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 		 measuretick=measuretick+ntick;
 		 checkIfNextIsRest(mb, s, nextisrest, track);
 		 writeChord((Chord*)e, nextisrest);
-		 tick += ((Chord*)e)->ticks();
-		 measuretick=measuretick+((Chord*)e)->ticks();
+		 tick += ((Chord*)e)->actualTicks();
+		 measuretick=measuretick+((Chord*)e)->actualTicks();
 		 break;
 	     }
 	 case REST:
@@ -3975,7 +3978,7 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 
 	     if (!(a.isEmpty()) ) articul = true;
 
-	     int l = ((Rest*)e)->ticks();
+	     int l = ((Rest*)e)->actualTicks();
 	     int mlen=((Rest*)e)->segment()->measure()->ticks();
 
 	     int nombarl=z1*AL::division;

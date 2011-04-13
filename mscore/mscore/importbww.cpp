@@ -208,10 +208,9 @@ namespace Bww {
       ++measureNumber;
 
       // create a new measure
-      TimeSig ts = TimeSig(score, beat, beats);
       currentMeasure  = new Measure(score);
       currentMeasure->setTick(tick);
-      currentMeasure->setTimesig(ts.getSig());
+      currentMeasure->setTimesig(Fraction(beats, beat));
       currentMeasure->setNo(measureNumber);
       score->measures()->add(currentMeasure);
 
@@ -248,15 +247,11 @@ namespace Bww {
             Segment* s = currentMeasure->getSegment(keysig, tick);
             s->add(keysig);
             // timesig
-            TimeSig ts = TimeSig(score, beat, beats);
-            int st = ts.subtype();
-            if (st) {
-                  TimeSig* timesig = new TimeSig(score);
-                  timesig->setSubtype(st);
-                  timesig->setTrack(0);
-                  s = currentMeasure->getSegment(timesig, tick);
-                  s->add(timesig);
-                  }
+            TimeSig* timesig = new TimeSig(score);
+            timesig->setSig(Fraction(beats, beat));
+            timesig->setTrack(0);
+            s = currentMeasure->getSegment(timesig, tick);
+            s->add(timesig);
             }
   }
 

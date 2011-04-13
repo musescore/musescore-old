@@ -188,7 +188,7 @@ void Score::layoutChords1(Segment* segment, int staffIdx)
             Chord* chord = note->chord();
             int move     = chord->staffMove();
             int line     = note->line();
-            int ticks    = chord->ticks();
+            int ticks    = chord->actualTicks();
             int head     = note->noteHead();      // symbol number or note head
 
             bool conflict = (qAbs(ll - line) < 2) && (move1 == move);
@@ -204,7 +204,7 @@ void Score::layoutChords1(Segment* segment, int staffIdx)
                   if (sameHead) {
                         Note* pnote = notes[idx-1];
                         if (note->userOff().isNull() && pnote->userOff().isNull()) {
-                              if (ticks > pnote->chord()->ticks()) {
+                              if (ticks > pnote->chord()->actualTicks()) {
                                     pnote->setHidden(true);
                                     // TODO: pnote->setAccidentalType(ACC_NONE);
                                     note->setHidden(false);
@@ -479,7 +479,7 @@ void Score::layoutStage2()
                         else if (bm != BEAM_MID) {
                               if (endBeam(measure->timesig(), cr, cr->tick() - measure->tick()))
                                     beamEnd = true;
-                              if (le->tick() + le->ticks() < cr->tick())
+                              if (le->tick() + le->actualTicks() < cr->tick())
                                     beamEnd = true;
                               }
                         if (beamEnd) {
@@ -534,7 +534,7 @@ void Score::layoutStage2()
                                    (endBeam(measure->timesig(), cr, cr->tick() - measure->tick())
                                    || bm == BEAM_BEGIN
                                    || (a1->segment()->subtype() != cr->segment()->subtype())
-                                   || (a1->tick() + a1->ticks() < cr->tick())
+                                   || (a1->tick() + a1->actualTicks() < cr->tick())
                                    )
                                  ) {
                                     a1->removeDeleteBeam();
@@ -1325,7 +1325,8 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                         for (int track = 0; track < nstaves * VOICES; track += VOICES) {
                               if (s->element(track))
                                     continue;
-                              ts = new TimeSig(this, sig2);
+                              ts = new TimeSig(this);
+                              ts->setSig(sig2);
                               tss = nm->findSegment(SegTimeSig, tick);
                               if (tss) {
                                     TimeSig* nts = (TimeSig*)tss->element(0);

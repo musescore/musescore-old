@@ -45,6 +45,7 @@ class ClefList;
 struct ClefTypeList;
 class Segment;
 class Clef;
+class TimeSig;
 
 //---------------------------------------------------------
 //   LinkedStaves
@@ -97,6 +98,8 @@ class Staff {
       ClefTypeList _initialClef;    // used by new score wizard
 
       QList<Clef*> clefs;
+      QList<TimeSig*> timesigs;
+
       KeyList* _keymap;
       QList <BracketItem> _brackets;
       int _barLineSpan;       ///< 0 - no bar line, 1 - span this staff, ...
@@ -146,6 +149,10 @@ class Staff {
       void setInitialClef(const ClefTypeList& cl) { _initialClef = cl; }
       void setInitialClef(ClefType ct)            { _initialClef = ClefTypeList(ct, ct); }
       ClefTypeList initialClef() const            { return _initialClef; }
+
+      void addTimeSig(TimeSig*);
+      void removeTimeSig(TimeSig*);
+      Fraction timeStretch(int tick) const;
 
       ClefTypeList clefTypeList(int tick) const;
       KeySigEvent key(int tick) const;

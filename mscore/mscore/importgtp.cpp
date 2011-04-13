@@ -604,7 +604,7 @@ void GuitarPro1::read(QFile* fp)
                                     note->setTpcFromPitch();
                                     }
                               }
-                        tick += cr->ticks();
+                        tick += cr->actualTicks();
                         }
                   }
             }
@@ -899,7 +899,7 @@ printf("BeginRepeat=============================================\n");
                                     note->setTpcFromPitch();
                                     }
                               }
-                        tick += cr->ticks();
+                        tick += cr->actualTicks();
                         }
                   }
             }
@@ -1397,7 +1397,7 @@ printf("BeginRepeat=============================================\n");
                                     note->setTpcFromPitch();
                                     }
                               }
-                        tick += cr->ticks();
+                        tick += cr->actualTicks();
                         }
                   }
             }
@@ -1926,7 +1926,7 @@ void GuitarPro4::read(QFile* fp)
                               }
                         else if (slurs[staffIdx] && hasSlur) {
                               }
-                        tick += cr->ticks();
+                        tick += cr->actualTicks();
                         }
                   }
             }
@@ -2325,7 +2325,7 @@ int GuitarPro5::readBeat(int tick, int voice, Measure* measure, int staffIdx, Tu
             int rrr = readChar();
 printf("  3beat read 0x%02x\n", rrr);
             }
-      return cr ? cr->ticks() : measure->ticks();
+      return cr ? cr->actualTicks() : measure->ticks();
       }
 
 //---------------------------------------------------------

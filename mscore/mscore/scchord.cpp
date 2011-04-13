@@ -75,7 +75,7 @@ static QScriptValue prototype_Chord_call(QScriptContext* context, QScriptEngine*
       switch(_id) {
             case 0:
                   if (context->argumentCount() == 0)
-                        return qScriptValueFromValue(context->engine(), chord->ticks());
+                        return qScriptValueFromValue(context->engine(), chord->actualTicks());
                   else if (context->argumentCount() == 1) {
                         int ticks = context->argument(0).toInt32();
                         if (ticks < 1)

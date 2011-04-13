@@ -163,7 +163,7 @@ bool endBeam(const Fraction& ts, ChordRest* cr, int p)
                   return true;
             return false;
             }
-      int l = cr->ticks();
+      int l = cr->duration().ticks();
       for (unsigned i = 0; i < sizeof(endBeamList)/sizeof(*endBeamList); ++i) {
             const BeamHint& h = endBeamList[i];
             if (!h.timeSig.isZero() && (!h.timeSig.identical(ts)))

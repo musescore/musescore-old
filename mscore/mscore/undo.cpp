@@ -771,7 +771,7 @@ void Score::undoExchangeVoice(Measure* measure, int v1, int v2, int staff1, int 
                               int ticks = s->tick() - ctick;
                               setRest(ctick, track, Fraction::fromTicks(ticks), false, 0);
                               }
-                        ctick = s->tick() + cr->ticks();
+                        ctick = s->tick() + cr->actualTicks();
                         }
                   int etick = measure->tick() + measure->ticks();
                   if (ctick < etick) {
@@ -2794,10 +2794,15 @@ void ChangeMeasureTimesig::flip()
 //   ChangeTimesig
 //---------------------------------------------------------
 
-ChangeTimesig::ChangeTimesig(TimeSig* _timesig, bool sc)
+ChangeTimesig::ChangeTimesig(TimeSig * _timesig, bool sc, const Fraction& f1,
+   const Fraction& f2, const QString& s1, const QString& s2)
       {
       timesig = _timesig;
       showCourtesy = sc;
+      actual       = f1;
+      stretch      = f2;
+      sz           = s1;
+      sn           = s2;
       };
 
 //---------------------------------------------------------
@@ -2807,8 +2812,19 @@ ChangeTimesig::ChangeTimesig(TimeSig* _timesig, bool sc)
 void ChangeTimesig::flip()
       {
       bool sc        = timesig->showCourtesySig();
+      Fraction f1    = timesig->sig();
+      Fraction f2    = timesig->stretch();
+      QString  s1    = timesig->zText();
+      QString  s2    = timesig->nText();
       timesig->setShowCourtesySig(showCourtesy);
+      timesig->setSig(actual);
+      timesig->setStretch(stretch);
+      timesig->setText(sz, sn);
       showCourtesy = sc;
+      actual       = f1;
+      stretch      = f2;
+      sz           = s1;
+      sn           = s2;
       }
 
 //---------------------------------------------------------

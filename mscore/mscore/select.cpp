@@ -410,7 +410,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                         bool reverse = false;
                         int ticks    = 0;
                         if (oe->isChordRest())
-                              ticks = static_cast<ChordRest*>(oe)->ticks();
+                              ticks = static_cast<ChordRest*>(oe)->actualTicks();
                         int oetick = 0;
                         if (oe->parent()->type() == SEGMENT)
                               oetick = static_cast<Segment*>(oe->parent())->tick();

@@ -1164,7 +1164,7 @@ void ExportMusicXml::calcDivisions()
                                     calcDivMoveToTick(seg->tick());
                                     }
                               if (el->isChordRest()) {
-                                    int l = static_cast<ChordRest*>(el)->ticks();
+                                    int l = static_cast<ChordRest*>(el)->actualTicks();
                                     if (el->type() == CHORD) {
                                           if (isTwoNoteTremolo(static_cast<Chord*>(el)))
                                                 l /= 2;
@@ -1584,17 +1584,14 @@ void ExportMusicXml::moveToTick(int t)
 
 void ExportMusicXml::timesig(TimeSig* tsig)
       {
-      int n  = 0;
       int st = tsig->subtype();
-      int z1 = 0;
-      int z2 = 0;
-      int z3 = 0;
-      int z4 = 0;
-      tsig->getSig(&n, &z1, &z2, &z3, &z4);
+      Fraction ts = tsig->sig();
+      int z1 = ts.numerator();
+      int n  = ts.denominator();
       if (st == TSIG_ALLA_BREVE) {
             // MuseScore calls this 2+2/4, MusicXML 2/2
-            n = 2;
-            z2 = 0;
+            n  = 2;
+            //z2 = 0;
             }
       attr.doAttr(xml, true);
       if (st == TSIG_FOUR_FOUR)
@@ -1604,9 +1601,9 @@ void ExportMusicXml::timesig(TimeSig* tsig)
       else
             xml.stag("time");
       QString z = QString("%1").arg(z1);
-      if (z2) z += QString("+%1").arg(z2);
-      if (z3) z += QString("+%1").arg(z3);
-      if (z4) z += QString("+%1").arg(z4);
+//      if (z2) z += QString("+%1").arg(z2);    // TODO TS
+//      if (z3) z += QString("+%1").arg(z3);
+//      if (z4) z += QString("+%1").arg(z4);
       xml.tag("beats", z);
       xml.tag("beat-type", n);
       xml.etag();
@@ -2127,7 +2124,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bo
       printf("notetype=%d grace=%d\n", gracen, grace);
       int tremCorr = 1; // duration correction for two note tremolo
       if (isTwoNoteTremolo(chord)) tremCorr = 2;
-      if (!grace) tick += chord->ticks() / tremCorr;
+      if (!grace) tick += chord->actualTicks() / tremCorr;
       printf(" newtick=%d\n", tick);
 
       PageFormat* pf = score->pageFormat();
@@ -2195,10 +2192,10 @@ void ExportMusicXml::chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bo
 
             // duration
             if (!grace)
-                  xml.tag("duration", note->chord()->ticks() / (div * tremCorr));
-                  
+                  xml.tag("duration", note->chord()->actualTicks() / (div * tremCorr));
+
             //instrument for unpitched
-            if (useDrumset)            
+            if (useDrumset)
                   xml.tagE(QString("instrument id=\"P%1-I%2\"").arg(score->parts()->indexOf(note->staff()->part()) + 1).arg(note->pitch() + 1));
 
             if (note->tieBack())
@@ -2225,10 +2222,10 @@ void ExportMusicXml::chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bo
                   nrmNotes = t->ratio().denominator();
                   }
 
-            QString s = tick2xml(note->chord()->ticks() * actNotes / (nrmNotes * tremCorr), &dots);
+            QString s = tick2xml(note->chord()->actualTicks() * actNotes / (nrmNotes * tremCorr), &dots);
             if (s.isEmpty()) {
                   printf("no note type found for ticks %d\n",
-                     note->chord()->ticks());
+                     note->chord()->actualTicks());
                   }
             xml.tag("type", s);
             for (int ni = dots; ni > 0; ni--)
@@ -2322,7 +2319,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bo
             if (chord->noStem() || chord->measure()->slashStyle(chord->staffIdx())){
                   xml.tag("stem", QString("none"));
             }
-            else if ((note->chord()->ticks() * actNotes / (nrmNotes * tremCorr)) < (4 * AL::division)) {
+            else if ((note->chord()->actualTicks() * actNotes / (nrmNotes * tremCorr)) < (4 * AL::division)) {
                   xml.tag("stem", QString(note->chord()->up() ? "up" : "down"));
             }
 
@@ -2459,7 +2456,7 @@ void ExportMusicXml::rest(Rest* rest, int staff)
             }
 
       Duration d = rest->durationType();
-      int tickLen = rest->ticks();
+      int tickLen = rest->actualTicks();
       if (d.type() == Duration::V_MEASURE){
             // to avoid forward since rest->ticklen=0 in this case.
             tickLen = rest->measure()->ticks();
@@ -3727,7 +3724,7 @@ foreach(Element* el, *(score->gel())) {
                   xml.stag(QString("score-instrument id=\"P%1-I%2\"").arg(idx+1).arg(3));
                   xml.tag("instrument-name", part->longName().toPlainText());
                   xml.etag();
-      
+
                   xml.stag(QString("midi-instrument id=\"P%1-I%2\"").arg(idx+1).arg(3));
                   xml.tag("midi-channel", part->midiChannel() + 1);
                   xml.tag("midi-program", part->midiProgram() + 1);

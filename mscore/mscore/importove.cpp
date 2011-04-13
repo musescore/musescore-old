@@ -748,20 +748,15 @@ void OveToMScore::convertSignatures(){
 					subtype = TSIG_FOUR_FOUR;
 				} else if(tt.numerator_ == 2 && tt.denominator_ == 2 && tt.isSymbol_ ){
 					subtype = TSIG_ALLA_BREVE;
-				} else {
-                    TimeSig ts1 = TimeSig(score_, tt.denominator_, tt.numerator_, 0, 0, 0);
-                    subtype = ts1.subtype();
 				}
 
-				if(subtype > 0) {
 					TimeSig* ts = new TimeSig(score_);
-					//ts->setSig(tt.denominator_, tt.numerator_);
+					ts->setSig(Fraction(tt.numerator_, tt.denominator_));
 					ts->setTrack(staffIdx * VOICES);
 					ts->setSubtype(subtype);
 
 					Segment* seg = measure->getSegment(ts, tt.tick_);
 					seg->add(ts);
-				}
 			}
 		}
 	}

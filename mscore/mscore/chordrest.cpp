@@ -68,16 +68,42 @@ DurationElement::DurationElement(const DurationElement& e)
       }
 
 //---------------------------------------------------------
+//   globalDuration
+//---------------------------------------------------------
+
+Fraction DurationElement::globalDuration() const
+      {
+      Fraction f(_duration);
+      for (Tuplet* t = tuplet(); t; t = t->tuplet())
+            f /= t->ratio();
+      return f;
+      }
+
+#if 0
+//---------------------------------------------------------
 //   ticks
 //---------------------------------------------------------
 
 int DurationElement::ticks() const
       {
+      return globalDuration().ticks();
+#if 0
       int ticks = duration().ticks();
       for (Tuplet* t = tuplet(); t; t = t->tuplet()) {
             ticks = ticks * t->ratio().denominator() / t->ratio().numerator();
             }
       return ticks;
+#endif
+      }
+#endif
+
+//---------------------------------------------------------
+//  actualTicks
+//---------------------------------------------------------
+
+int DurationElement::actualTicks() const
+      {
+      return Fraction(staff()->timeStretch(tick()) * globalDuration()).ticks();
       }
 
 //---------------------------------------------------------
@@ -256,7 +282,8 @@ void ChordRest::writeProperties(Xml& xml) const
             if (lyrics)
                   lyrics->write(xml);
             }
-      xml.curTick += ticks();
+      Fraction t(staff()->timeStretch(xml.curTick) * globalDuration());
+      xml.curTick += t.ticks();
       }
 
 //---------------------------------------------------------

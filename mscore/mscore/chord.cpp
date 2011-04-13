@@ -826,15 +826,6 @@ void Chord::read(QDomElement e, const QList<Tuplet*>& tuplets, const QList<Slur*
       }
 
 //---------------------------------------------------------
-//   dump
-//---------------------------------------------------------
-
-void Chord::dump() const
-      {
-      printf("Chord tick %d  len %d\n", tick(), ticks());
-      }
-
-//---------------------------------------------------------
 //   upPos
 //---------------------------------------------------------
 
@@ -1564,20 +1555,21 @@ void Chord::renderPlayback()
                   if (cr && cr->type() == CHORD)
                         gl.prepend(static_cast<Chord*>(cr));
                   }
+
             if (!gl.isEmpty()) {
                   int nticks = 0;
                   foreach(Chord* c, gl)
-                        nticks += c->ticks();
+                        nticks += c->actualTicks();
                   int t = nticks;
                   if (gl.front()->noteType() == NOTE_ACCIACCATURA)
                         t /= 2;
-                  if (t >= (ticks() / 2))
-                        t = ticks() / 2;
+                  if (t >= (actualTicks() / 2))
+                        t = actualTicks() / 2;
 
                   int rt = 0;
                   foreach(Chord* c, gl) {
-                        int len   = c->ticks() * t / nticks;
-                        int etick = rt + len - c->ticks();
+                        int len   = c->actualTicks() * t / nticks;
+                        int etick = rt + len - c->actualTicks();
                         foreach(Note* n, c->notes()) {
                               n->setOnTimeOffset(rt);
                               n->setOffTimeOffset(etick);

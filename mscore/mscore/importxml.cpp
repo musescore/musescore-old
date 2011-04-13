@@ -2175,14 +2175,18 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
             }
       if (beats != "" && beatType != "") {
             // determine if timesig is valid
-            int st = 0;  // timesig subtype calculated
-            int bts[4];  // the beats (max 4 separated by "+") as integer
+            int st  = TSIG_NORMAL;
+            int bts = 0; // the beats (max 4 separated by "+") as integer
             int btp = 0; // beat-type as integer
             if (beats == "2" && beatType == "2" && timeSymbol == "cut") {
                   st = TSIG_ALLA_BREVE;
+                  bts = 2;
+                  btp = 2;
                   }
             else if (beats == "4" && beatType == "4" && timeSymbol == "common") {
                   st = TSIG_FOUR_FOUR;
+                  bts = 4;
+                  btp = 4;
                   }
             else  {
                   if (!timeSymbol.isEmpty()) {
@@ -2192,7 +2196,9 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
 
                   btp = beatType.toInt();
                   QStringList list = beats.split("+");
-                  for (int i = 0; i < 4; i++) bts[i] = 0;
+#if 0 // TODO TS
+                  for (int i = 0; i < 4; i++)
+                        bts[i] = 0;
                   for (int i = 0; i < list.size() && i < 4; i++) {
                         bts[i] = list.at(i).toInt();
                         }
@@ -2201,8 +2207,12 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                         TimeSig ts = TimeSig(score, btp, bts[0], bts[1], bts[2], bts[3]);
                         st = ts.subtype();
                         }
+#endif
+                  for (int i = 0; i < list.size() && i < 4; i++)
+                        bts += list.at(i).toInt();
                   }
-            if (st) {
+//            if (st) {
+            if (btp) {
                   // add timesig to all staves
                   //ws score->sigmap()->add(tick, TimeSig::getSig(st));
                   Part* part = score->part(staff);
@@ -2210,6 +2220,7 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                   for (int i = 0; i < staves; ++i) {
                         TimeSig* timesig = new TimeSig(score);
                         timesig->setSubtype(st);
+                        timesig->setSig(Fraction(bts, btp));
                         timesig->setTrack((staff + i) * VOICES);
                         Segment* s = measure->getSegment(timesig, tick);
                         s->add(timesig);

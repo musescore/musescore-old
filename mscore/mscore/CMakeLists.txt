@@ -38,7 +38,7 @@ QT4_WRAP_UI (ui_headers
       measureproperties.ui segment.ui text.ui textpalette.ui timedialog.ui
       symboldialog.ui dynamic.ui tuplet.ui shortcutcapturedialog.ui slurtie.ui
       slur.ui editdrumset.ui editstaff.ui line.ui linesegment.ui
-      voltaproperties.ui chordproperties.ui restproperties.ui
+      voltaproperties.ui chordproperties.ui restproperties.ui timesigproperties.ui
       jumpproperties.ui markerproperties.ui boxproperties.ui
       instrwizard.ui timesigwizard.ui newwizard.ui aboutbox.ui
       chordedit.ui transposedialog.ui tempoproperties.ui importmidi.ui
@@ -59,7 +59,7 @@ QT4_WRAP_CPP (mocs
       measureproperties.h preview.h score.h seq.h textpalette.h textstyle.h
       timedialog.h symboldialog.h shortcutcapturedialog.h simplebutton.h
       greendotbutton.h recordbutton.h editdrumset.h editstaff.h selinstrument.h
-      voltaproperties.h chordproperties.h restproperties.h
+      voltaproperties.h chordproperties.h restproperties.h timesigproperties.h
       jumpproperties.h markerproperties.h boxproperties.h newwizard.h
       transposedialog.h chordedit.h tempotext.h importmidi.h textline.h
       excerptsdialog.h stafftext.h image.h tuplet.h glissando.h
@@ -148,7 +148,7 @@ add_executable ( ${ExecutableName}
       pitchspelling.cpp musedata.cpp keysig.cpp arpeggio.cpp breath.cpp
       glissando.cpp lilypond.cpp exportly.cpp box.cpp measurebase.cpp
       editdrumset.cpp editstaff.cpp drumset.cpp tremolo.cpp repeat.cpp
-      voltaproperties.cpp chordproperties.cpp restproperties.cpp
+      voltaproperties.cpp chordproperties.cpp restproperties.cpp timesigproperties.cpp
       newwizard.cpp transposedialog.cpp bb.cpp chordlist.cpp
       harmony.cpp chordedit.cpp plugins.cpp tempotext.cpp
       excerptsdialog.cpp excerpt.cpp stafftext.cpp instrument.cpp durationtype.cpp
