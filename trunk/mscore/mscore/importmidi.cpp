@@ -1021,7 +1021,7 @@ fixTicks();
                   continue;
             for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
                   TimeSig* ts = new TimeSig(this);
-                  ts->setSig(se);
+                  ts->setSig(se.timesig());
                   ts->setTrack(staffIdx * VOICES);
                   Segment* seg = m->getSegment(ts, tick);
                   seg->add(ts);
@@ -1108,7 +1108,7 @@ void Score::convertTrack(MidiTrack* midiTrack)
                                     note->setPitch(mn.pitch(), pitch2tpc(mn.pitch()));
                   	      	chord->add(note);
                                     note->setOnTimeUserOffset(mn.noquantOntime() - tick);
-                                    int ot = (mn.noquantOntime() + mn.noquantDuration()) - (tick + chord->ticks());
+                                    int ot = (mn.noquantOntime() + mn.noquantDuration()) - (tick + chord->actualTicks());
                                     note->setOffTimeUserOffset(ot);
                                     note->setVeloType(USER_VAL);
                                     note->setVeloOffset(mn.velo());
@@ -1254,7 +1254,7 @@ printf("restLen %d\n", restLen);
                               note->setPitch(mn.pitch(), mn.tpc());
             	      	chord->add(note);
                               note->setOnTimeUserOffset(mn.noquantOntime() - tick);
-                              int ot = (mn.noquantOntime() + mn.noquantDuration()) - (tick + chord->ticks());
+                              int ot = (mn.noquantOntime() + mn.noquantDuration()) - (tick + chord->actualTicks());
                               note->setOffTimeUserOffset(ot);
                               note->setVeloType(USER_VAL);
                               note->setVeloOffset(mn.velo());

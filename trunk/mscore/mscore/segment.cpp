@@ -41,6 +41,7 @@
 #include "staffstate.h"
 #include "instrchange.h"
 #include "clef.h"
+#include "timesig.h"
 
 //---------------------------------------------------------
 //   subTypeName
@@ -419,6 +420,12 @@ void Segment::add(Element* el)
                   empty = false;
                   break;
 
+            case TIMESIG:
+                  _elist[track] = el;
+                  el->staff()->addTimeSig(static_cast<TimeSig*>(el));
+                  empty = false;
+                  break;
+
             case CHORD:
             case REST:
                   {
@@ -534,6 +541,11 @@ void Segment::remove(Element* el)
             case CLEF:
                   _elist[track] = 0;
                   el->staff()->removeClef(static_cast<Clef*>(el));
+                  break;
+
+            case TIMESIG:
+                  _elist[track] = 0;
+                  el->staff()->removeTimeSig(static_cast<TimeSig*>(el));
                   break;
 
             default:

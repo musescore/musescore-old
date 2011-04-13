@@ -739,7 +739,8 @@ void MuseScore::newFile()
                   Staff* staff = score->staff(staffIdx);
                   if (tick == 0) {
                         if (!staff->useTablature()) {
-                              TimeSig* ts = new TimeSig(score, timesig);
+                              TimeSig* ts = new TimeSig(score);
+                              ts->setSig(timesig);
                               ts->setTrack(staffIdx * VOICES);
                               Segment* s = measure->getSegment(ts, 0);
                               s->add(ts);
@@ -780,7 +781,7 @@ void MuseScore::newFile()
             	                        rest->setTrack(staffIdx * VOICES);
 	            	                  Segment* s = measure->getSegment(rest, tick);
 		                              s->add(rest);
-                                          tick += rest->ticks();
+                                          tick += rest->actualTicks();
                                           }
                                     }
                               }

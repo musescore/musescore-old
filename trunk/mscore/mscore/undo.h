@@ -1315,11 +1315,16 @@ class ChangeMeasureTimesig : public UndoCommand {
 class ChangeTimesig : public UndoCommand {
       TimeSig* timesig;
       bool showCourtesy;
+      Fraction actual;
+      Fraction stretch;
+      QString sz;
+      QString sn;
 
       void flip();
 
    public:
-      ChangeTimesig(TimeSig * _timesig, bool sc);
+      ChangeTimesig(TimeSig * _timesig, bool sc, const Fraction&,
+         const Fraction&, const QString&, const QString&);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       UNDO_NAME("ChangeTimesig");

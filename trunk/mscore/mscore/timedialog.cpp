@@ -40,7 +40,7 @@ TimeDialog::TimeDialog(QWidget* parent)
       sp = new Palette();
       sp->setReadOnly(false);
       connect(sp, SIGNAL(changed()), SLOT(setDirty()));
-      
+
       PaletteScrollArea* timePalette = new PaletteScrollArea(sp);
       QSizePolicy policy(QSizePolicy::Expanding, QSizePolicy::Expanding);
       timePalette->setSizePolicy(policy);
@@ -80,9 +80,10 @@ TimeDialog::TimeDialog(QWidget* parent)
 
 void TimeDialog::addClicked()
       {
-      TimeSig* ts = new TimeSig(gscore, n->value(), z1->value(), z2->value(), z3->value(), z4->value());
+      //TODO TS
+//      TimeSig* ts = new TimeSig(gscore, n->value(), z1->value(), z2->value(), z3->value(), z4->value());
       // extend palette:
-      sp->append(ts, "");
+//      sp->append(ts, "");
       _dirty = true;
       }
 

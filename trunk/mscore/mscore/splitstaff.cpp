@@ -150,7 +150,7 @@ void Score::splitStaff(int staffIdx, int splitPoint)
                               }
                         setRest(ctick, dtrack, Fraction::fromTicks(rest), false, 0);
                         }
-                  ctick = s->tick() + cr->ticks();
+                  ctick = s->tick() + cr->actualTicks();
                   }
             int rest = m->tick() + m->ticks() - ctick;
             if (rest) {
@@ -177,7 +177,7 @@ void Score::splitStaff(int staffIdx, int splitPoint)
                               }
                         setRest(ctick, strack, Fraction::fromTicks(rest), false, 0);
                         }
-                  ctick = s->tick() + cr->ticks();
+                  ctick = s->tick() + cr->actualTicks();
                   }
             int rest = m->tick() + m->ticks() - ctick;
             if (rest) {

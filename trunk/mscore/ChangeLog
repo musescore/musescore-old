@@ -1,3 +1,5 @@
+13.apr (ws)
+      - allow for different time signatures for every staff
 12.apr (ws)
       - fix #2299: Bar line appears on every note of selected measure
       - fix layout of mid measure barlines

@@ -355,10 +355,10 @@ int Note::playTicks() const
             note = note->tieBack()->startNote();
       int len = 0;
       while (note->tieFor() && note->tieFor()->endNote()) {
-            len += note->chord()->ticks();
+            len += note->chord()->actualTicks();
             note = note->tieFor()->endNote();
             }
-      len += note->chord()->ticks();
+      len += note->chord()->actualTicks();
       return len;
       }
 
@@ -1239,7 +1239,9 @@ Element* Note::drop(const DropData& data)
 bool Note::genPropertyMenu(QMenu* popup) const
       {
       Element::genPropertyMenu(popup);
-      QAction* a = popup->addAction(tr("Note Properties..."));
+      QAction* a = popup->addSeparator();
+
+      a = popup->addAction(tr("Note Properties..."));
       a->setData("props");
 
       a = popup->addAction(tr("Style..."));

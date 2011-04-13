@@ -32,6 +32,7 @@
 #include "staff.h"
 #include "stafftype.h"
 #include "painter.h"
+#include "timesigproperties.h"
 
 //---------------------------------------------------------
 //   TimeSig
@@ -41,6 +42,8 @@ TimeSig::TimeSig(Score* s)
   : Element(s)
       {
       _showCourtesySig = true;
+      customText = false;
+      _stretch.set(1, 1);
       }
 
 TimeSig::TimeSig(Score* s, int st)
@@ -48,20 +51,28 @@ TimeSig::TimeSig(Score* s, int st)
       {
       _showCourtesySig = true;
       setSubtype(st);
+      customText = false;
+      _stretch.set(1, 1);
       }
 
-TimeSig::TimeSig(Score* s, int n, int z1, int z2, int z3, int z4)
+TimeSig::TimeSig(Score* s, int z, int n)
   : Element(s)
       {
       _showCourtesySig = true;
-      setSig(n, z1, z2, z3, z4);
+      setSig(Fraction(z, n));
+      setSubtype(TSIG_NORMAL);
+      customText = false;
+      _stretch.set(1, 1);
       }
 
 TimeSig::TimeSig(Score* s, const Fraction& f)
    : Element(s)
       {
       _showCourtesySig = true;
-      setSig(f.denominator(), f.numerator(), 0, 0, 0);
+      setSig(f);
+      setSubtype(TSIG_NORMAL);
+      customText = false;
+      _stretch.set(1, 1);
       }
 
 //---------------------------------------------------------
@@ -84,35 +95,22 @@ QPointF TimeSig::canvasPos() const
 //   setSubtype
 //---------------------------------------------------------
 
-void TimeSig::setSubtype(int val)
+void TimeSig::setSubtype(int st)
       {
-      Element::setSubtype(val);
-      }
-
-//---------------------------------------------------------
-//   setSig
-//---------------------------------------------------------
-
-void TimeSig::setSig(int n, int z1, int z2, int z3, int z4)
-      {
-      setSubtype(sigtype(n, z1, z2, z3, z4));
-      }
-
-//---------------------------------------------------------
-//   getSig
-//---------------------------------------------------------
-
-void TimeSig::getSig(int* n, int* z1, int* z2, int* z3, int* z4) const
-      {
-      int st = subtype();
-      *n = st & 0x3f;
-      if (z4)
-            *z4 = (st>>24)& 0x3f;
-      if (z3)
-            *z3 = (st>>18)& 0x3f;
-      if (z2)
-            *z2 = (st>>12)& 0x3f;
-      *z1 = (st>>6) & 0x3f;
+      switch(st) {
+            case TSIG_NORMAL:
+                  break;
+            case TSIG_FOUR_FOUR:
+                  setSig(Fraction(4, 4));
+                  break;
+            case TSIG_ALLA_BREVE:
+                  setSig(Fraction(2, 2));
+                  break;
+            default:
+                  printf("illegal TimeSig subtype 0x%x\n", st);
+                  abort();
+            }
+      Element::setSubtype(st);
       }
 
 //---------------------------------------------------------
@@ -134,9 +132,10 @@ Element* TimeSig::drop(const DropData& data)
       if (e->type() == TIMESIG) {
             // change timesig applies to all staves, can't simply set subtype
             // for this one only
-            score()->cmdAddTimeSig(measure(), e->subtype());
+            score()->cmdAddTimeSig(measure(), static_cast<TimeSig*>(e));
             }
-      delete e;
+      else
+            delete e;
       return 0;
       }
 
@@ -150,12 +149,16 @@ bool TimeSig::genPropertyMenu(QMenu* popup) const
       int _track = track();
       // if the time sig. is not generated (= not courtesy) and is in track 0
       // add the specific menu item
+      QAction* a;
       if (!generated() && !_track) {
-            QAction* a = popup->addAction(_showCourtesySig
+            a = popup->addAction(_showCourtesySig
                ? QT_TRANSLATE_NOOP("TimeSig", "Hide Courtesy Time Signature")
                : QT_TRANSLATE_NOOP("TimeSig", "Show Courtesy Time Signature") );
             a->setData("courtesy");
             }
+      a = popup->addSeparator();
+      a = popup->addAction(tr("Time Signature Properties..."));
+      a->setData("props");
       return true;
       }
 
@@ -166,9 +169,43 @@ bool TimeSig::genPropertyMenu(QMenu* popup) const
 void TimeSig::propertyAction(ScoreView* viewer, const QString& s)
       {
       if (s == "courtesy")
-            score()->undo()->push(new ChangeTimesig(this, !_showCourtesySig));
+            score()->undo()->push(new ChangeTimesig(this,
+               !_showCourtesySig, sig(), stretch(), sz, sn));
+      else if (s == "props") {
+            TimeSig r(*this);
+            TimeSigProperties vp(&r);
+            int rv = vp.exec();
+            if (rv) {
+                  bool changed = false;
+                  if (r.zText() != sz || r.nText() != sn || r.sig() != _nominal
+                     || r.stretch() != _stretch) {
+                        score()->undo()->push(new ChangeTimesig(this,
+                           r.showCourtesySig(), r.sig(), r.stretch(), r.zText(), r.nText()));
+                        }
+                  }
+            }
       else
             Element::propertyAction(viewer, s);
+      }
+
+//---------------------------------------------------------
+//   setText
+//---------------------------------------------------------
+
+void TimeSig::setText(const QString& a, const QString& b)
+      {
+      sz = a;
+      sn = b;
+      customText = true;
+      }
+
+//---------------------------------------------------------
+//   setActualSig
+//---------------------------------------------------------
+
+void TimeSig::setActualSig(const Fraction& f)
+      {
+      _stretch = _nominal * f;
       }
 
 //---------------------------------------------------------
@@ -179,18 +216,16 @@ void TimeSig::write(Xml& xml) const
       {
       xml.stag("TimeSig");
       Element::writeProperties(xml);
-      int n, z1, z2, z3, z4;
-      getSig(&n, &z1, &z2, &z3, &z4);
 
-      xml.tag("den", n);
-      xml.tag("nom1", z1);
-      if (z2) {
-            xml.tag("nom2", z2);
-            if (z3) {
-                  xml.tag("nom3", z3);
-                  if (z4)
-                        xml.tag("nom4", z4);
-                  }
+      xml.tag("sigN",   _nominal.numerator());
+      xml.tag("sigD",  _nominal.denominator());
+      if (_stretch != Fraction(1,1)) {
+            xml.tag("stretchN", _stretch.numerator());
+            xml.tag("stretchD", _stretch.denominator());
+            }
+      if (customText) {
+            xml.tag("textN", sz);
+            xml.tag("textD", sn);
             }
       xml.tag("showCourtesySig", _showCourtesySig);
       xml.etag();
@@ -202,50 +237,77 @@ void TimeSig::write(Xml& xml) const
 
 void TimeSig::read(QDomElement e)
       {
-      setSubtype(-1);
+//      setSubtype(-1);
       int n=0, z1=0, z2=0, z3=0, z4=0;
+
+      customText = false;
+      _stretch.set(1, 1);
+      bool old;
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             int val = e.text().toInt();
-            if (tag == "den")
+            if (tag == "den") {
+                  old = true;
                   n = val;
-            else if (tag == "nom1")
+                  }
+            else if (tag == "nom1") {
+                  old = true;
                   z1 = val;
-            else if (tag == "nom2")
+                  }
+            else if (tag == "nom2") {
+                  old = true;
                   z2 = val;
-            else if (tag == "nom3")
+                  }
+            else if (tag == "nom3") {
+                  old = true;
                   z3 = val;
-            else if (tag == "nom4")
+                  }
+            else if (tag == "nom4") {
+                  old = true;
                   z4 = val;
+                  }
+            else if (tag == "subtype") {
+                  if (score()->mscVersion() < 122) {
+                        setSig(Fraction(
+                           ((val>>24)& 0x3f)
+                           + ((val>>18)& 0x3f)
+                           + ((val>>12)& 0x3f)
+                           + ((val>>6) & 0x3f), val & 0x3f));
+                        val = TSIG_NORMAL;
+                        }
+                  setSubtype(val);
+                  }
             else if (tag == "showCourtesySig")
                   _showCourtesySig = e.text().toInt();
+            else if (tag == "sigN")
+                  _nominal.setNumerator(val);
+            else if (tag == "sigD")
+                  _nominal.setDenominator(val);
+            else if (tag == "stretchN")
+                  _stretch.setNumerator(val);
+            else if (tag == "stretchD")
+                  _stretch.setDenominator(val);
+            else if (tag == "textN") {
+                  customText = true;
+                  sz = e.text();
+                  }
+            else if (tag == "textD") {
+                  customText = true;
+                  sn = e.text();
+                  }
             else if (!Element::readProperties(e))
                   domError(e);
             }
-      //
-      // silently accept old values:
-      //
-      switch(subtype()) {
-            case 0:   setSig(2, 2); break;
-            case 1:   setSig(4, 2); break;
-            case 2:   setSig(4, 3); break;
-            case 3:   setSig(4, 4); break;
-            case 4:   setSig(4, 5); break;
-            case 5:   setSig(4, 6); break;
-            case 6:   setSig(8, 3); break;
-            case 7:   setSig(8, 6); break;
-            case 8:   setSig(8, 12); break;
-            case 9:   setSubtype(TSIG_FOUR_FOUR); break;
-            case 10:  setSubtype(TSIG_ALLA_BREVE); break;
-            case 11:  setSig(8, 9); break;
-
-            case TSIG_FOUR_FOUR:    // special cases
-            case TSIG_ALLA_BREVE:
-                  break;
-            default:
-                  setSig(n, z1, z2, z3, z4);
-                  break;
+      if (old) {
+            _nominal.set(z1+z2+z3+z4, n);
+            customText = false;
+            if (subtype() == 0x40000104)
+                  setSubtype(TSIG_FOUR_FOUR);
+            else if (subtype() == 0x40002084)
+                  setSubtype(TSIG_ALLA_BREVE);
+            else
+                  setSubtype(TSIG_NORMAL);
             }
       }
 
@@ -258,8 +320,6 @@ void TimeSig::layout()
       double _spatium = spatium();
 
       setbbox(QRectF());                          // prepare for an empty time signature
-      sz = QString();
-      sn = QString();
       pz = QPointF(0.0, 0.0);
       pn = QPointF(0.0, 0.0);
 
@@ -277,9 +337,6 @@ void TimeSig::layout()
                   st = 0;
                   }
             }
-
-      if (st == 0)                              // no symbol: nothing to do
-            return;
 
       // if some symbol
       // compute vert. displacement to center in the staff height
@@ -300,18 +357,11 @@ void TimeSig::layout()
             sz = sym.toString();
             }
       else {
-            // other time signatures are made of a numerator (z1...z4) and a denominator (n)
-            int n, z1, z2, z3, z4;
-            getSig(&n, &z1, &z2, &z3, &z4);
-            sz = QString("%1").arg(z1);               // build numerator string
-            if (z2)
-                  sz += QString("+%1").arg(z2);
-            if (z3)
-                  sz += QString("+%1").arg(z3);
-            if (z4)
-                  sz += QString("+%1").arg(z4);
-            sn = QString("%1").arg(n);                // build denominator string
-
+            if (!customText) {
+                  Fraction f(actualSig());
+                  sz = QString("%1").arg(f.numerator());   // build numerator string
+                  sn = QString("%1").arg(f.denominator()); // build denominator string
+                  }
             QFontMetricsF fm(fontId2font(0));
             QRectF rz = fm.tightBoundingRect(sz);     // get 'tight' bounding boxes for strings
             QRectF rn = fm.tightBoundingRect(sn);
@@ -344,10 +394,6 @@ void TimeSig::layout()
 
 void TimeSig::draw(Painter* painter) const
       {
-      int st = subtype();
-      if (st == 0)                              // if no symbol, do nothing
-            return;
-
       painter->setFont(symbols[score()->symIdx()][allabreveSym].font());
       qreal m  = spatium() / (DPI * SPATIUM20);
       painter->scale(m);
@@ -364,5 +410,4 @@ Space TimeSig::space() const
       {
       return Space(point(score()->styleS(ST_timesigLeftMargin)), width());
       }
-
 

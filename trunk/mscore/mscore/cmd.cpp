@@ -388,7 +388,7 @@ void Score::expandVoice(Segment* s, int track)
             }
       if (ps) {
             ChordRest* cr = static_cast<ChordRest*>(ps->element(track));
-            if (cr->tick() + cr->ticks() > s->tick()) {
+            if (cr->tick() + cr->actualTicks() > s->tick()) {
                   printf("expandVoice: cannot insert element here\n");
                   return;
                   }
@@ -644,7 +644,7 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, NoteVal nval, Fraction sd,
                         mscore->play(ncr);
                         }
                   seg = ncr->segment();
-                  tick += ncr->ticks();
+                  tick += ncr->actualTicks();
                   }
 
             sd -= dd;
@@ -785,21 +785,21 @@ printf("  makeGap: %d/%d removed %d/%d too much\n", sd.numerator(), sd.denominat
                   QList<Duration> dList = toDurationList(rd, false);
                   if (dList.isEmpty())
                         return akkumulated;
-                  int ticks = sd.ticks();
-// printf("   gap ticks %d+%d\n", cr->tick(), ticks);
+                  Fraction f(cr->staff()->timeStretch(cr->tick()) * sd);
                   for (Tuplet* t = tuplet; t; t = t->tuplet())
-                        ticks = ticks * t->ratio().denominator() / t->ratio().numerator();
-                  int tick = cr->tick() + ticks;
+                        f /= t->ratio();
+                  int tick  = cr->tick() + f.ticks();
+printf("   gap at tick %d+%d\n", cr->tick(), f.ticks());
 
                   if ((tuplet == 0) && (((measure->tick() - tick) % dList[0].ticks()) == 0)) {
                         foreach(Duration d, dList) {
 //                              printf("   addClone %d\n", tick);
-                              tick += addClone(cr, tick, d)->ticks();
+                              tick += addClone(cr, tick, d)->actualTicks();
                               }
                         }
                   else {
                         for (int i = dList.size() - 1; i >= 0; --i)
-                              tick += addClone(cr, tick, dList[i])->ticks();
+                              tick += addClone(cr, tick, dList[i])->actualTicks();
                         }
 // printf("  return %d/%d\n", akkumulated.numerator(), akkumulated.denominator());
                   return akkumulated;
@@ -908,7 +908,7 @@ void Score::changeCRlen(ChordRest* cr, const Duration& d)
                         }
                   }
             undoChangeChordRestLen(cr, Duration(dstF));
-            setRest(cr->tick() + cr->ticks(), cr->track(), srcF - dstF, false, tuplet);
+            setRest(cr->tick() + cr->actualTicks(), cr->track(), srcF - dstF, false, tuplet);
             select(cr, SELECT_SINGLE, 0);
             return;
             }
@@ -998,7 +998,7 @@ void Score::changeCRlen(ChordRest* cr, const Duration& d)
                                     select(oc, SELECT_SINGLE, 0);
                                     first = false;
                                     }
-                              tick += oc->ticks();
+                              tick += oc->actualTicks();
                               }
                         }
                   else {
@@ -1018,7 +1018,7 @@ void Score::changeCRlen(ChordRest* cr, const Duration& d)
                                     select(oc, SELECT_SINGLE, 0);
                                     first = false;
                                     }
-                              tick += oc->ticks();
+                              tick += oc->actualTicks();
                               }
                         }
                   }
@@ -2562,11 +2562,11 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                               Measure* measure = tick2measure(tick);
                               bool isGrace = (cr->type() == CHORD) && (((Chord*)cr)->noteType() != NOTE_NORMAL);
                               int measureEnd = measure->tick() + measure->ticks();
-                              if (!isGrace && (cr->tick() + cr->ticks() > measureEnd)) {
+                              if (!isGrace && (cr->tick() + cr->actualTicks() > measureEnd)) {
                                     if (cr->type() == CHORD) {
                                           // split Chord
                                           Chord* c = static_cast<Chord*>(cr);
-                                          int rest = c->ticks();
+                                          int rest = c->actualTicks();
                                           int len  = measureEnd - c->tick();
                                           rest    -= len;
                                           Duration d;
@@ -2574,7 +2574,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                                           c->setDurationType(d);
                                           undoAddCR(c, measure, tick);
                                           while (rest) {
-                                                int tick = c->tick() + c->ticks();
+                                                int tick = c->tick() + c->actualTicks();
                                                 measure = tick2measure(tick);
                                                 if (measure->tick() != tick)  // last measure
                                                       break;
@@ -2608,7 +2608,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                                     else {
                                           // split Rest
                                           Rest* r  = static_cast<Rest*>(cr);
-                                          int rest = r->ticks();
+                                          int rest = r->actualTicks();
                                           int len  = measureEnd - r->tick();
                                           rest    -= len;
                                           Duration d;
@@ -2617,7 +2617,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                                           undoAddCR(r, measure, tick);
                                           while (rest) {
                                                 Rest* r2 = static_cast<Rest*>(r->clone());
-                                                int tick = r->tick() + r->ticks();
+                                                int tick = r->tick() + r->actualTicks();
                                                 measure = tick2measure(tick);
                                                 len = measure->ticks() > rest ? rest : measure->ticks();
                                                 Duration d;
@@ -2632,7 +2632,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                               else {
                                     undoAddCR(cr, measure, tick);
                                     }
-                              curTick += cr->ticks();
+                              curTick += cr->actualTicks();
                               }
                         else if (tag == "HairPin"
                            || tag == "Pedal"

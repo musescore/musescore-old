@@ -130,7 +130,6 @@ class Chord : public ChordRest {
       void read(QDomElement, const QList<Tuplet*>&, const QList<Slur*>&);
       virtual void read(QDomElement);
       virtual void setSelected(bool f);
-      virtual void dump() const;
       virtual Element* drop(const DropData&);
 
       virtual QRectF bbox() const;
