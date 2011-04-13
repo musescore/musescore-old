@@ -77,7 +77,7 @@
         <item>
          <widget class="QRadioButton" name="fourfourButton">
           <property name="text">
-           <string>4/4 Symbol</string>
+           <string>Common Time Symbol</string>
           </property>
          </widget>
         </item>
