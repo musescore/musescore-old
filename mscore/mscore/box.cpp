@@ -307,7 +307,7 @@ void Box::add(Element* e)
                         _lineBreak = true;
                         break;
                   case LAYOUT_BREAK_SECTION:
-                        _sectionBreak = true;
+                        _sectionBreak = static_cast<LayoutBreak*>(e);
                         break;
                   }
             }

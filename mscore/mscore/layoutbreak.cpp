@@ -32,6 +32,7 @@ LayoutBreak::LayoutBreak(Score* score)
    : Element(score)
       {
       _pause = score->styleD(ST_SectionPause);
+      _startWithLongNames = true;
       }
 
 //---------------------------------------------------------
@@ -44,6 +45,8 @@ void LayoutBreak::write(Xml& xml) const
       Element::writeProperties(xml);
       if (score()->styleD(ST_SectionPause) != _pause)
             xml.tag("pause", _pause);
+      if (!_startWithLongNames)
+            xml.tag("startWithLongNames", _startWithLongNames);
       xml.etag();
       }
 
@@ -57,6 +60,8 @@ void LayoutBreak::read(QDomElement e)
             QString tag(e.tagName());
             if (tag == "pause")
                   _pause = e.text().toDouble();
+            else if (tag == "startWithLongNames")
+                  _startWithLongNames = e.text().toInt();
             else if (!Element::readProperties(e))
                   domError(e);
             }
@@ -228,10 +233,11 @@ void LayoutBreak::propertyAction(ScoreView* viewer, const QString& s)
       if (s == "props") {
             SectionBreakProperties sbp(this, 0);
             if (sbp.exec()) {
-                  if (pause() != sbp.pause()) {
+                  if (pause() != sbp.pause() || startWithLongNames() != sbp.startWithLongNames()) {
                         LayoutBreak* nlb = new LayoutBreak(*this);
                         nlb->setParent(parent());
                         nlb->setPause(sbp.pause());
+                        nlb->setStartWithLongNames(sbp.startWithLongNames());
                         score()->undoChangeElement(this, nlb);
                         }
                   }
@@ -249,6 +255,7 @@ SectionBreakProperties::SectionBreakProperties(LayoutBreak* lb, QWidget* parent)
       {
       setupUi(this);
       _pause->setValue(lb->pause());
+      _startWithLongNames->setChecked(lb->startWithLongNames());
       }
 
 //---------------------------------------------------------
@@ -259,4 +266,14 @@ double SectionBreakProperties::pause() const
       {
       return _pause->value();
       }
+
+//---------------------------------------------------------
+//   startWithLongNames
+//---------------------------------------------------------
+
+bool SectionBreakProperties::startWithLongNames() const
+      {
+      return _startWithLongNames->isChecked();
+      }
+
 

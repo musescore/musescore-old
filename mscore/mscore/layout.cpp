@@ -49,6 +49,7 @@
 #include "sym.h"
 #include "fingering.h"
 #include "stem.h"
+#include "layoutbreak.h"
 
 //---------------------------------------------------------
 //   rebuildBspTree
@@ -670,9 +671,10 @@ void Score::doLayout()
       //    layout measures into systems and pages
       //-----------------------------------------------------------------------
 
-      curMeasure  = first();
-      curSystem   = 0;
-      firstSystem = true;
+      curMeasure   = first();
+      curSystem    = 0;
+      firstSystem  = true;
+      startWithLongNames = true;
       for (curPage = 0; curMeasure; curPage++) {
             getCurPage();
             MeasureBase* om = curMeasure;
@@ -966,7 +968,7 @@ bool Score::layoutPage()
                         y += sub;
                   int cs          = curSystem;
                   MeasureBase* cm = curMeasure;
-                  sl = layoutSystemRow(x, y, w, firstSystem, &h);
+                  sl = layoutSystemRow(x, y, w, firstSystem, startWithLongNames, &h);
                   if (sl.isEmpty()) {
                         printf("layoutSystemRow returns zero systems\n");
                         abort();
@@ -1006,8 +1008,9 @@ bool Score::layoutPage()
                         page->appendSystem(system);
                         system->rypos() = y;
                         }
-                  firstSystem = !sl.isEmpty() && sl.back()->lastMeasure()
+                  firstSystem  = !sl.isEmpty() && sl.back()->lastMeasure()
                      && sl.back()->lastMeasure()->sectionBreak();
+                  startWithLongNames = firstSystem && sl.back()->lastMeasure()->sectionBreak()->startWithLongNames();
                   firstSystemOnPage = false;
                   y += h;
                   }
@@ -1084,7 +1087,7 @@ Measure* Score::skipEmptyMeasures(Measure* m, System* system)
 //    return true on line break
 //---------------------------------------------------------
 
-bool Score::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
+bool Score::layoutSystem1(double& minWidth, double w, bool isFirstSystem, bool longName)
       {
       System* system = getNextSystem(isFirstSystem, false);
 
@@ -1092,7 +1095,6 @@ bool Score::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
       if (curMeasure->type() == HBOX)
             xo = point(static_cast<Box*>(curMeasure)->boxWidth());
 
-      bool longName = isFirstSystem;
       system->setInstrumentNames(longName);
       system->layout(xo);
 
@@ -1238,17 +1240,6 @@ bool Score::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
                   }
             ++staffIdx;
             }
-
-
-#if 0 // DEBUG: endless recursion can happen if number of measures change
-      // relayout if stave's show status has changed
-      if (showChanged) {
-            minWidth = 0;
-            curMeasure = firstMeasure;
-            bool val = layoutSystem1(minWidth, w, isFirstSystem);
-            return val;
-            }
-#endif
       return continueFlag && curMeasure;
       }
 
@@ -1258,7 +1249,7 @@ bool Score::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
 //---------------------------------------------------------
 
 QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
-   bool isFirstSystem, double* h)
+   bool isFirstSystem, bool useLongName, double* h)
       {
       bool raggedRight = layoutDebug;
 
@@ -1268,7 +1259,7 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
       double ww = rowWidth;
       double minWidth;
       for (bool a = true; a;) {
-            a = layoutSystem1(minWidth, ww, isFirstSystem);
+            a = layoutSystem1(minWidth, ww, isFirstSystem, useLongName);
             sl.append(_systems[curSystem]);
             ++curSystem;
             ww -= minWidth;
