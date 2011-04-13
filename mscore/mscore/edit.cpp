@@ -633,20 +633,50 @@ void Score::rewriteMeasures(Measure* fm, const Fraction& ns)
 //    to gui command (drop timesig on measure or timesig)
 //---------------------------------------------------------
 
-void Score::cmdAddTimeSig(Measure* fm, TimeSig* ts)
+void Score::cmdAddTimeSig(Measure* fm, int staffIdx, TimeSig* ts)
       {
-#if 0 // TODO TS
-      Fraction ns = ts->sig();
+printf("cmdAddTimeSig\n");
 
-      int tick = fm->tick();
-      Segment* seg = fm->first(SegTimeSig);
-      if (seg && seg->element(0)) {
-            TimeSig* ots = static_cast<TimeSig*>(seg->element(0));
-            if ((ots->subtype() == timeSigSubtype)
-               && (ns == fm->sig())
-               && (ns == fm->len())) {
-                  printf("time sig aready there\n");
-                  return ts;
+      Fraction ns  = ts->sig();
+      int tick     = fm->tick();
+      TimeSig* lts = staff(staffIdx)->timeSig(tick);
+      Fraction stretch, lsig;
+      if (lts) {
+            stretch = lts->stretch();
+            lsig    = lts->sig();
+            }
+      else {
+            stretch.set(1,1);
+            lsig.set(4,4);
+            }
+
+      int track    = staffIdx * VOICES;
+      Segment* seg = fm->getSegment(SegTimeSig, tick);
+      TimeSig* ots = static_cast<TimeSig*>(seg->element(track));
+      if (ots) {
+            //
+            //  ignore if there is already a timesig
+            //  with same values
+            //
+            if ((ots->subtype() == ts->subtype())
+               && (ots->sig()   == ts->sig())
+               && (ots->stretch() == ots->stretch())) {
+                  delete ts;
+                  return;
+                  }
+            }
+      else {
+            //
+            //  check for local timesig (only staff value changes)
+            //  or redundant time signature
+            //
+            if (lsig == ts->sig()) {
+printf("  global sig does not change\n");
+                  ts->setParent(seg);
+                  ts->setTrack(track);
+                  undoAddElement(ts);
+                  timesigStretchChanged(ts, fm, staffIdx);
+                  return;
                   }
             }
       int n = addRemoveTimeSigDialog();
@@ -664,7 +694,9 @@ void Score::cmdAddTimeSig(Measure* fm, TimeSig* ts)
             //
             seg = new Segment(fm, SegTimeSig, tick);
             for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
-                  TimeSig* nsig = new TimeSig(this, timeSigSubtype);
+                  TimeSig* nsig = new TimeSig(this);
+                  nsig->setSubtype(ts->subtype());
+                  nsig->setSig(ts->sig());
                   nsig->setTrack(staffIdx * VOICES);
                   seg->add(nsig);
                   }
@@ -683,14 +715,41 @@ void Score::cmdAddTimeSig(Measure* fm, TimeSig* ts)
             Measure* nfm = fm->prev() ? fm->prev()->nextMeasure() : firstMeasure();
             Segment* seg = new Segment(nfm, SegTimeSig, nfm->tick());
             for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
-                  TimeSig* nsig = new TimeSig(this, timeSigSubtype);
+                  TimeSig* nsig = new TimeSig(this);
+                  nsig->setSubtype(ts->subtype());
+                  nsig->setSig(ts->sig());
                   nsig->setTrack(staffIdx * VOICES);
                   seg->add(nsig);
                   }
             nfm->add(seg);
             }
-#endif
       delete ts;
+      }
+
+//---------------------------------------------------------
+//   timesigStretchChanged
+//---------------------------------------------------------
+
+void Score::timesigStretchChanged(TimeSig* ts, Measure* fm, int staffIdx)
+      {
+      for (Measure* m = fm; m; m = m->nextMeasure()) {
+            if ((m != fm) && m->first(SegTimeSig))
+                  break;
+            int strack = staffIdx * VOICES;
+            int etrack = strack + VOICES;
+            for (Segment* s = m->first(SegChordRest); s; s = s->next(SegChordRest)) {
+                  for (int track = strack; track < etrack; ++track) {
+                        ChordRest* cr = static_cast<ChordRest*>(s->element(track));
+                        if (!cr)
+                              continue;
+                        if (cr->type() == REST && cr->durationType() == Duration::V_MEASURE) {
+                              cr->setDuration(ts->actualSig());
+                              }
+                        else
+                              printf("timeSigChanged: not implemented: chord/rest does not fit\n");
+                        }
+                  }
+            }
       }
 
 //---------------------------------------------------------

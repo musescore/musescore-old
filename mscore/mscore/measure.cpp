@@ -1660,7 +1660,7 @@ printf("drop staffList\n");
                   }
 
             case TIMESIG:
-                  score()->cmdAddTimeSig(this, static_cast<TimeSig*>(e));
+                  score()->cmdAddTimeSig(this, staffIdx, static_cast<TimeSig*>(e));
                   break;
 
             case LAYOUT_BREAK:

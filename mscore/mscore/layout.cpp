@@ -1294,40 +1294,35 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
             Segment* s;
 
             if (m && nm && !m->sectionBreak()) {
-                  int tick        = m->tick() + m->ticks();
-                  Fraction sig2   = m->timesig();
-                  Fraction sig1   = nm->timesig();
+                  int tick = m->tick() + m->ticks();
 
                   // locate a time sig. in the next measure and, if found,
                   // check if it has cout. sig. turned off
                   TimeSig* ts;
                   Segment* tss = nm->findSegment(SegTimeSig, tick);
-                  bool showCourtesySig = true;              // assume this time time change has court. sig turned on
-                  if (tss) {
+                  bool showCourtesySig = tss && styleB(ST_genCourtesyTimesig);
+                  if (showCourtesySig) {
                         ts = static_cast<TimeSig*>(tss->element(0));
                         if (ts && !ts->showCourtesySig())
                               showCourtesySig = false;     // this key change has court. sig turned off
                         }
-
-                  // if due, create a new courtesy time signature for each staff
-                  if (styleB(ST_genCourtesyTimesig) && !sig1.identical(sig2) && showCourtesySig) {
+                  if (showCourtesySig) {
+                        // if due, create a new courtesy time signature for each staff
                         s  = m->getSegment(SegTimeSigAnnounce, tick);
                         int nstaves = Score::nstaves();
                         for (int track = 0; track < nstaves * VOICES; track += VOICES) {
-                              if (s->element(track))
+                              TimeSig* nts = static_cast<TimeSig*>(tss->element(track));
+                              if (!nts)
                                     continue;
-                              ts = new TimeSig(this);
-                              ts->setSig(sig2);
-                              tss = nm->findSegment(SegTimeSig, tick);
-                              if (tss) {
-                                    TimeSig* nts = (TimeSig*)tss->element(0);
-                                    if (nts)
-                                          ts->setSubtype(nts->subtype());
+                              ts = static_cast<TimeSig*>(s->element(track));
+                              if (ts == 0) {
+                                    ts = new TimeSig(this);
+                                    ts->setTrack(track);
+                                    ts->setGenerated(true);
+                                    ts->setMag(ts->staff()->mag());
+                                    s->add(ts);
                                     }
-                              ts->setTrack(track);
-                              ts->setGenerated(true);
-                              ts->setMag(ts->staff()->mag());
-                              s->add(ts);
+                              ts->setFrom(nts);
                               needRelayout = true;
                               }
                         }

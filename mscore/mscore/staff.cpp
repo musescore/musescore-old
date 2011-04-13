@@ -249,13 +249,23 @@ ClefType Staff::clef(Segment* segment) const
 
 Fraction Staff::timeStretch(int tick) const
       {
+      TimeSig* timesig = timeSig(tick);
+      return timesig == 0 ? Fraction(1,1) : timesig->stretch();
+      }
+
+//---------------------------------------------------------
+//   timeSig
+//---------------------------------------------------------
+
+TimeSig* Staff::timeSig(int tick) const
+      {
       TimeSig* timesig = 0;
       foreach(TimeSig* ts, timesigs) {
             if (ts->segment()->tick() > tick)
                   break;
             timesig = ts;
             }
-      return timesig == 0 ? Fraction(1,1) : timesig->stretch();
+      return timesig;
       }
 
 //---------------------------------------------------------

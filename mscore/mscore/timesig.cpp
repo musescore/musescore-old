@@ -132,7 +132,7 @@ Element* TimeSig::drop(const DropData& data)
       if (e->type() == TIMESIG) {
             // change timesig applies to all staves, can't simply set subtype
             // for this one only
-            score()->cmdAddTimeSig(measure(), static_cast<TimeSig*>(e));
+            score()->cmdAddTimeSig(measure(), staffIdx(), static_cast<TimeSig*>(e));
             }
       else
             delete e;
@@ -176,11 +176,13 @@ void TimeSig::propertyAction(ScoreView* viewer, const QString& s)
             TimeSigProperties vp(&r);
             int rv = vp.exec();
             if (rv) {
-                  bool changed = false;
+                  bool stretchChanged = r.stretch() != _stretch;
                   if (r.zText() != sz || r.nText() != sn || r.sig() != _nominal
-                     || r.stretch() != _stretch) {
+                     || stretchChanged) {
                         score()->undo()->push(new ChangeTimesig(this,
                            r.showCourtesySig(), r.sig(), r.stretch(), r.zText(), r.nText()));
+                        if (stretchChanged)
+                              score()->timesigStretchChanged(this, measure(), staffIdx());
                         }
                   }
             }
@@ -203,9 +205,12 @@ void TimeSig::setText(const QString& a, const QString& b)
 //   setActualSig
 //---------------------------------------------------------
 
-void TimeSig::setActualSig(const Fraction& f)
+void TimeSig::setActualSig(const Fraction& actual)
       {
-      _stretch = _nominal * f;
+      _stretch = (_nominal / actual).reduced();
+      printf("setActual %d/%d  stretch %d/%d\n",
+        actual.numerator(), actual.denominator(),
+        _stretch.numerator(), _stretch.denominator());
       }
 
 //---------------------------------------------------------
@@ -411,3 +416,16 @@ Space TimeSig::space() const
       return Space(point(score()->styleS(ST_timesigLeftMargin)), width());
       }
 
+//---------------------------------------------------------
+//   setFrom
+//---------------------------------------------------------
+
+void TimeSig::setFrom(const TimeSig* ts)
+      {
+      Element::setSubtype(ts->subtype());
+      sz         = ts->sz;
+      sn         = ts->sn;
+      _nominal   = ts->_nominal;
+      _stretch   = ts->_stretch;
+      customText = ts->customText;
+      }
