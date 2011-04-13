@@ -219,6 +219,7 @@ class Score : public QObject {
       int curPage;
       int curSystem;
       bool firstSystem;
+      bool startWithLongNames;            // long instrument names
       MeasureBase* curMeasure;
 
       UndoStack* _undo;
@@ -349,8 +350,8 @@ class Score : public QObject {
 
       Page* addPage();
       bool layoutPage();
-      bool layoutSystem1(double& minWidth, double w, bool);
-      QList<System*> layoutSystemRow(qreal x, qreal y, qreal w, bool, double*);
+      bool layoutSystem1(double& minWidth, double w, bool, bool);
+      QList<System*> layoutSystemRow(qreal x, qreal y, qreal w, bool, bool, double*);
       void processSystemHeader(Measure* m, bool);
       System* getNextSystem(bool, bool);
       void getCurPage();

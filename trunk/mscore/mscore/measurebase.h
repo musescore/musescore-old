@@ -31,6 +31,7 @@
 class Score;
 class System;
 class Measure;
+class LayoutBreak;
 
 //---------------------------------------------------------
 //   MeasureWidth
@@ -72,8 +73,7 @@ class MeasureBase : public Element {
       bool _dirty;
       bool _lineBreak;        ///< Forced line break
       bool _pageBreak;        ///< Forced page break
-      bool _sectionBreak;
-      double _pause;          ///< section break playback rest (sec)
+      LayoutBreak* _sectionBreak;
 
    public:
       MeasureBase(Score* score);
@@ -101,10 +101,10 @@ class MeasureBase : public Element {
 
       bool lineBreak() const                 { return _lineBreak; }
       bool pageBreak() const                 { return _pageBreak; }
-      bool sectionBreak() const              { return _sectionBreak; }
+      LayoutBreak* sectionBreak() const      { return _sectionBreak; }
       void setLineBreak(bool v)              { _lineBreak = v;    }
       void setPageBreak(bool v)              { _pageBreak = v;    }
-      void setSectionBreak(bool v)           { _sectionBreak = v; }
+      void setSectionBreak(LayoutBreak* v)   { _sectionBreak = v; }
 
       virtual void moveTicks(int diff)       { setTick(tick() + diff); }
 
@@ -121,8 +121,7 @@ class MeasureBase : public Element {
       int tick() const                       { return _tick;         }
       void setTick(int t)                    { _tick = t;            }
 
-      double pause() const                   { return _pause;        }
-      void setPause(double v)                { _pause = v;           }
+      double pause() const;
       };
 
 #endif

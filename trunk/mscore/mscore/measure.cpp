@@ -1102,8 +1102,7 @@ void Measure::add(Element* el)
                               _lineBreak = true;
                               break;
                         case LAYOUT_BREAK_SECTION:
-                              _sectionBreak = true;
-                              _pause = static_cast<LayoutBreak*>(el)->pause();
+                              _sectionBreak = static_cast<LayoutBreak*>(el);
                               break;
                         }
                   _el.push_back(el);
@@ -1170,8 +1169,7 @@ void Measure::remove(Element* el)
                               _lineBreak = false;
                               break;
                         case LAYOUT_BREAK_SECTION:
-                              _sectionBreak = false;
-                              _pause = 0.0;
+                              _sectionBreak = 0;
                               break;
                         }
                   if (!_el.remove(el))

@@ -40,8 +40,7 @@ MeasureBase::MeasureBase(Score* score)
       _next = 0;
       _lineBreak    = false;
       _pageBreak    = false;
-      _sectionBreak = false;
-      _pause        = 0.0;
+      _sectionBreak = 0;
       _dirty        = true;
       }
 
@@ -55,7 +54,6 @@ MeasureBase::MeasureBase(const MeasureBase& m)
       _lineBreak    = m._lineBreak;
       _pageBreak    = m._pageBreak;
       _sectionBreak = m._sectionBreak;
-      _pause        = m._pause;
 
       foreach(Element* e, m._el)
             add(e->clone());
@@ -117,7 +115,7 @@ void MeasureBase::add(Element* e)
                         _lineBreak = true;
                         break;
                   case LAYOUT_BREAK_SECTION:
-                        _sectionBreak = true;
+                        _sectionBreak = static_cast<LayoutBreak*>(e);
                         break;
                   }
             }
@@ -145,7 +143,7 @@ void MeasureBase::remove(Element* el)
                         _lineBreak = false;
                         break;
                   case LAYOUT_BREAK_SECTION:
-                        _sectionBreak = false;
+                        _sectionBreak = 0;
                         break;
                   }
             }
@@ -223,4 +221,12 @@ void MeasureBase::spatiumChanged(double oldValue, double newValue)
             }
       }
 
+//---------------------------------------------------------
+//   pause
+//---------------------------------------------------------
+
+double MeasureBase::pause() const
+      {
+      return _sectionBreak ? _sectionBreak->pause() : 0.0;
+      }
 
