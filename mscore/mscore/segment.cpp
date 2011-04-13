@@ -126,8 +126,12 @@ Segment::Segment(Measure* m, SegmentType st, int t)
 
 Segment::~Segment()
       {
-      foreach(Element* e, _elist)
-            delete e;
+      foreach(Element* e, _elist) {
+            if (e) {
+                  remove(e);
+                  delete e;
+                  }
+            }
       }
 
 //---------------------------------------------------------
