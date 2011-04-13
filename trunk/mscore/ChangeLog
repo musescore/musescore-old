@@ -1,4 +1,5 @@
 13.apr (ws)
+      - fix crash when creating new score from template
       - new section break property: "start new section with long instrument names"
       - allow for different time signatures for every staff
 12.apr (ws)
