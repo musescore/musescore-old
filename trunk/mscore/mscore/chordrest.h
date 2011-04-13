@@ -120,7 +120,7 @@ class ChordRest : public DurationElement {
       void setExtraTrailingSpace(Spatium v)     { _extraTrailingSpace = v;    }
       virtual void toDefault();
 
-      const Duration& durationType() const               { return _durationType;        }
+      const Duration& durationType() const      { return _durationType;        }
       void setDurationType(Duration::DurationType t);
       void setDurationType(const QString& s);
       void setDurationType(int ticks);

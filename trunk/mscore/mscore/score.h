@@ -527,7 +527,7 @@ class Score : public QObject {
       void end1();
 
       void cmdRemoveTimeSig(TimeSig*);
-      void cmdAddTimeSig(Measure*, TimeSig*);
+      void cmdAddTimeSig(Measure*, int staffIdx, TimeSig*);
 
       void setUpdateAll(bool v = true) { _updateAll = v;   }
       void setLayoutAll(bool val);
@@ -823,6 +823,7 @@ class Score : public QObject {
       void layoutFingering(Fingering*);
       void cmdSplitMeasure();
       void cmdJoinMeasure();
+      void timesigStretchChanged(TimeSig* ts, Measure* fm, int staffIdx);
       };
 
 extern Score* gscore;

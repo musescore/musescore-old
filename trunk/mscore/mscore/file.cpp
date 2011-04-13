@@ -470,8 +470,7 @@ bool Score::saveAs(bool saveCopy)
       QString selectedFilter;
       QString name    = QString("%1.mscz").arg(info.baseName());
       QString filter = fl.join(";;");
-      QString fn = mscore->getSaveScoreName(
-         saveDialogTitle, name, filter, &selectedFilter);
+      QString fn = mscore->getSaveScoreName(saveDialogTitle, name, filter, &selectedFilter);
       if (fn.isEmpty())
             return false;
 
@@ -2373,12 +2372,14 @@ QString MuseScore::getSaveScoreName(const QString& title,
             myScores.setFile(QDir::home(), preferences.myScoresPath);
       if (saveScoreDialog == 0) {
             saveScoreDialog = new QFileDialog(this);
+            saveScoreDialog->setLabelText(QFileDialog::Accept, tr("Save"));
+            QSettings settings;
+            saveScoreDialog->restoreState(settings.value("saveScoreDialog").toByteArray());
             saveScoreDialog->setFileMode(QFileDialog::AnyFile);
             saveScoreDialog->setOption(QFileDialog::DontConfirmOverwrite, false);
             saveScoreDialog->setOption(QFileDialog::DontUseNativeDialog, true);
             saveScoreDialog->setLabelText(QFileDialog::Accept, tr("Save"));
-            QSettings settings;
-            saveScoreDialog->restoreState(settings.value("saveScoreDialog").toByteArray());
+printf("getSave score name\n");
             }
       // setup side bar urls
       QList<QUrl> urls;

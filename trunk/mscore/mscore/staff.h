@@ -153,6 +153,7 @@ class Staff {
       void addTimeSig(TimeSig*);
       void removeTimeSig(TimeSig*);
       Fraction timeStretch(int tick) const;
+      TimeSig* timeSig(int tick) const;
 
       ClefTypeList clefTypeList(int tick) const;
       KeySigEvent key(int tick) const;
