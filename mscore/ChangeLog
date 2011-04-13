@@ -1,4 +1,5 @@
 13.apr (ws)
+      - new section break property: "start new section with long instrument names"
       - allow for different time signatures for every staff
 12.apr (ws)
       - fix #2299: Bar line appears on every note of selected measure
