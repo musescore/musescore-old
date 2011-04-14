@@ -213,8 +213,11 @@ void MuseScore::registerPlugin(const QString& pluginPath)
                         else {
                               a = cm->addAction(m);
                               }
+                        registerPlugin(a);
+#if 0
                         connect(a, SIGNAL(triggered()), pluginMapper, SLOT(map()));
                         pluginMapper->setMapping(a, pluginIdx);
+#endif
                         if (debugMode)
                               printf("add action <%s>\n", qPrintable(m));
                         }
@@ -237,10 +240,11 @@ void MuseScore::registerPlugin(QAction* a)
             printf("registerPlugin: no pluginMapper\n");
             return;
             }
+      a->setEnabled(_sstate != STATE_DISABLED);
+      pluginActions.append(a);
       int pluginIdx = plugins.size() - 1; // plugin is already appended
       connect(a, SIGNAL(triggered()), pluginMapper, SLOT(map()));
       pluginMapper->setMapping(a, pluginIdx);
-printf("registerPlugin: add action idx %d\n", pluginIdx);
       }
 
 //---------------------------------------------------------

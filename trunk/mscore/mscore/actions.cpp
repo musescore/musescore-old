@@ -2453,7 +2453,7 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Show piano keyboard")
          ),
       Shortcut(
-         STATE_ALL,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY | STATE_FOTO,
          "media",
          QT_TRANSLATE_NOOP("action","Show media dialog"),
          0,
@@ -2478,6 +2478,15 @@ Shortcut MuseScore::sc[] = {
          Qt::WindowShortcut,
          QT_TRANSLATE_NOOP("action","Join Measure"),
          QT_TRANSLATE_NOOP("action","Join Measure")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY | STATE_FOTO,
+         "page-settings",
+         QT_TRANSLATE_NOOP("action","Page Settings"),
+         0,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","Page Settings..."),
+         QT_TRANSLATE_NOOP("action","Page Settings")
          ),
       // xml==0  marks end of list
       Shortcut(0, 0, 0, QKeySequence::UnknownKey)

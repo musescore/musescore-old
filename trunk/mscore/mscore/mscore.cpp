@@ -799,7 +799,7 @@ MuseScore::MuseScore()
       menuLayout = mb->addMenu(tr("&Layout"));
       menuLayout->setObjectName("Layout");
 
-      menuLayout->addAction(tr("Page Settings..."), this, SLOT(showPageSettings()));
+      menuLayout->addAction(getAction("page-settings"));
 
       menuLayout->addAction(getAction("reset-positions"));
       menuLayout->addAction(getAction("stretch+"));
@@ -2598,6 +2598,10 @@ void MuseScore::changeState(ScoreState val)
             searchDialog->hide();
 
       bool enable = val != STATE_DISABLED;
+#if 1
+      // disabling top level menu entries does not
+      // work for MAC
+
       QList<QObject*> ol = menuBar()->children();
       foreach(QObject* o, ol) {
             QMenu* menu = qobject_cast<QMenu*>(o);
@@ -2608,6 +2612,11 @@ void MuseScore::changeState(ScoreState val)
                   continue;
             menu->setEnabled(enable);
             }
+#endif
+      menuProfiles->setEnabled(enable);
+      foreach(QAction* a, pluginActions)
+            a->setEnabled(enable);
+
       if (paletteBox)
             paletteBox->setEnabled(enable);
       transportTools->setEnabled(enable && !noSeq);
