@@ -82,7 +82,9 @@ void TextStyleDialog::saveStyle(int n)
       TextStyle st = tp->textStyle();
       // set data members not set by TextProp::textStyle()
       st.setName(styles[n].name());
-      st.setSizeIsSpatiumDependent(styles[n].sizeIsSpatiumDependent());
+// TextProp::textStyle() now deals with sizeIsSpatiumDependent
+// Following statement defeats additions to TextProp::textStyle()
+//      st.setSizeIsSpatiumDependent(styles[n].sizeIsSpatiumDependent());
       styles[n] = st;
       }
 

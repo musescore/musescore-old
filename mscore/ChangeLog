@@ -1,4 +1,6 @@
 14.apr (ws)
+      - fix #10244: EditTextStyles dlg does not keep "Size follows space unit"
+        setting (patch from Miwarre)
       - fix #10245: Right-click Text Properties dlg box does not keep "Size follows
         space unit" setting (patch from Miwarre)
 13.apr (ws)
