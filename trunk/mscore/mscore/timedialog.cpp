@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -39,12 +39,13 @@ TimeDialog::TimeDialog(QWidget* parent)
       frame->setLayout(l);
       sp = new Palette();
       sp->setReadOnly(false);
-      connect(sp, SIGNAL(changed()), SLOT(setDirty()));
+
+      connect(zNominal, SIGNAL(valueChanged(int)), SLOT(zChanged(int)));
+      connect(nNominal, SIGNAL(valueChanged(int)), SLOT(nChanged(int)));
 
       PaletteScrollArea* timePalette = new PaletteScrollArea(sp);
       QSizePolicy policy(QSizePolicy::Expanding, QSizePolicy::Expanding);
       timePalette->setSizePolicy(policy);
-      timePalette->setRestrictHeight(false);
 
       l->addWidget(timePalette);
       sp->setGrid(60, 60);
@@ -60,16 +61,16 @@ TimeDialog::TimeDialog(QWidget* parent)
       //
       // create default palette
       //
-	sp->append(new TimeSig(gscore, 2, 2), "2/2");
-	sp->append(new TimeSig(gscore, 4, 2), "2/4");
-	sp->append(new TimeSig(gscore, 4, 3), "3/4");
-	sp->append(new TimeSig(gscore, 4, 4), "4/4");
-	sp->append(new TimeSig(gscore, 4, 5), "5/4");
-	sp->append(new TimeSig(gscore, 4, 6), "6/4");
-	sp->append(new TimeSig(gscore, 8, 3), "3/8");
-	sp->append(new TimeSig(gscore, 8, 6), "6/8");
-	sp->append(new TimeSig(gscore, 8, 9), "9/8");
-	sp->append(new TimeSig(gscore, 8, 12), "12/8");
+	sp->append(new TimeSig(gscore,  2, 2), "2/2");
+	sp->append(new TimeSig(gscore,  2, 4), "2/4");
+	sp->append(new TimeSig(gscore,  3, 4), "3/4");
+	sp->append(new TimeSig(gscore,  4, 4), "4/4");
+	sp->append(new TimeSig(gscore,  5, 4), "5/4");
+	sp->append(new TimeSig(gscore,  6, 4), "6/4");
+	sp->append(new TimeSig(gscore,  3, 8), "3/8");
+	sp->append(new TimeSig(gscore,  6, 8), "6/8");
+	sp->append(new TimeSig(gscore,  9, 8), "9/8");
+	sp->append(new TimeSig(gscore, 12, 8), "12/8");
 	sp->append(new TimeSig(gscore, TSIG_FOUR_FOUR), tr("4/4 common time"));
 	sp->append(new TimeSig(gscore, TSIG_ALLA_BREVE), tr("2/2 alla breve"));
       }
@@ -80,11 +81,18 @@ TimeDialog::TimeDialog(QWidget* parent)
 
 void TimeDialog::addClicked()
       {
-      //TODO TS
-//      TimeSig* ts = new TimeSig(gscore, n->value(), z1->value(), z2->value(), z3->value(), z4->value());
+      TimeSig* ts = new TimeSig(gscore);
+      ts->setSig(Fraction(zNominal->value(), nNominal->value()));
+
+      // check for special text
+      if ((QString("%1").arg(zNominal->value()) != zText->text())
+         || (QString("%1").arg(nNominal->value()) != nText->text())) {
+            ts->setText(zText->text(), nText->text());
+            }
       // extend palette:
-//      sp->append(ts, "");
+      sp->append(ts, "");
       _dirty = true;
+      sp->updateGeometry();
       }
 
 //---------------------------------------------------------
@@ -96,5 +104,23 @@ void TimeDialog::save()
       QDir dir;
       dir.mkpath(dataPath);
       sp->write(dataPath + "/" + "timesigs.xml");
+      }
+
+//---------------------------------------------------------
+//   zChanged
+//---------------------------------------------------------
+
+void TimeDialog::zChanged(int val)
+      {
+      zText->setText(QString("%1").arg(val));
+      }
+
+//---------------------------------------------------------
+//   nChanged
+//---------------------------------------------------------
+
+void TimeDialog::nChanged(int val)
+      {
+      nText->setText(QString("%1").arg(val));
       }
 
