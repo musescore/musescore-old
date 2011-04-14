@@ -132,11 +132,13 @@ Chorus::Chorus(float sr)
 void Chorus::reset()
       {
       memset(chorusbuf, 0, MAX_SAMPLES * sizeof(*chorusbuf));
+      number_blocks     = 0;
       new_number_blocks = FLUID_CHORUS_DEFAULT_N;
       new_level         = FLUID_CHORUS_DEFAULT_LEVEL;
       new_speed_Hz      = FLUID_CHORUS_DEFAULT_SPEED;
       new_depth_ms      = FLUID_CHORUS_DEFAULT_DEPTH;
       new_type          = FLUID_CHORUS_MOD_SINE;
+
       update();
       }
 

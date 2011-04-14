@@ -82,10 +82,10 @@ Asection::~Asection()
 void Asection::set_size (float time)
 {
     int   i, d;
-    float r;
 
-    r = (time * _fsam);
-    if (r > N - PERIOD) r = N - PERIOD;
+    float r = (time * _fsam);
+    if (r > N - PERIOD)
+            r = N - PERIOD;
     for (i = 0; i < 16; i++)
     {
 	d = (int)(r * _refl [i]);

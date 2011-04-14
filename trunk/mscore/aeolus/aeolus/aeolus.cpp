@@ -79,6 +79,7 @@ Aeolus::Aeolus()
       _ifc_init = 0;
       for (int i = 0; i < NGROUP; i++)
             _ifelms [i] = 0;
+      memset(_keymap, 0, sizeof(_keymap));
       }
 
 Aeolus::~Aeolus()
