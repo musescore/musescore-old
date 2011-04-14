@@ -2579,6 +2579,7 @@ bool Measure::createEndBarLines()
                         BarLineType et = _multiMeasure > 0 ? _mmEndBarLineType : _endBarLineType;
                         if (bl->subtype() != et) {
                               bl->setBarLineType(et);
+                              bl->setGenerated(bl->el()->isEmpty() && _endBarLineGenerated);
                               changed = true;
                               }
                         aspan = 0;
