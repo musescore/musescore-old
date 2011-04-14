@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2010 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -359,6 +359,7 @@ void MuseScore::seqStopped()
 
 void Seq::guiStop()
       {
+printf("gui stop\n");
       QAction* a = getAction("play");
       a->setChecked(false);
 
@@ -422,6 +423,7 @@ void Seq::seqMessage(int msg)
 
 void Seq::stopTransport()
       {
+      state = TRANSPORT_STOP;
       if (cs == 0)
             return;
       // send note off events
@@ -440,7 +442,6 @@ void Seq::stopTransport()
 
       activeNotes.clear();
       emit toGui('0');
-      state = TRANSPORT_STOP;
       }
 
 //---------------------------------------------------------
