@@ -2529,6 +2529,8 @@ void MuseScore::cmd(QAction* a)
             showPianoKeyboard();
       else if (cmd == "media")
             showMediaDialog();
+      else if (cmd == "page-settings")
+            showPageSettings();
       else {
             if (cv) {
                   cv->setFocus();
