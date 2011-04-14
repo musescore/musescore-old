@@ -128,7 +128,10 @@ Segment::~Segment()
       {
       foreach(Element* e, _elist) {
             if (e) {
-                  remove(e);
+                  if (e->type() == CLEF)
+                        e->staff()->removeClef(static_cast<Clef*>(e));
+                  else if (e->type() == TIMESIG)
+                        e->staff()->removeTimeSig(static_cast<TimeSig*>(e));
                   delete e;
                   }
             }
