@@ -649,7 +649,10 @@ void MStyle::polish(QWidget* widget)
 
             case Qt::ToolTip:
                   if(!widget->autoFillBackground() ) {
+#ifndef Q_WS_MAC
                         widget->setAttribute(Qt::WA_TranslucentBackground);
+#endif
+
 #ifdef Q_WS_WIN
                         //FramelessWindowHint is needed on windows to make WA_TranslucentBackground work properly
                         widget->setWindowFlags(widget->windowFlags() | Qt::FramelessWindowHint);
@@ -723,7 +726,9 @@ void MStyle::polish(QWidget* widget)
             }
       else if (qobject_cast<QToolBar*>(widget)) {
             widget->setBackgroundRole(QPalette::NoRole);
+#ifndef Q_WS_MAC
             widget->setAttribute(Qt::WA_TranslucentBackground);
+#endif
             widget->installEventFilter(this);
 #ifdef Q_WS_WIN
             //FramelessWindowHint is needed on windows to make WA_TranslucentBackground work properly
@@ -735,7 +740,9 @@ void MStyle::polish(QWidget* widget)
             }
       else if( widget->inherits( "QTipLabel" ) ) {
             widget->setBackgroundRole(QPalette::NoRole);
+#ifndef Q_WS_MAC
             widget->setAttribute(Qt::WA_TranslucentBackground);
+#endif
 
 #ifdef Q_WS_WIN
             //FramelessWindowHint is needed on windows to make WA_TranslucentBackground work properly
@@ -752,7 +759,9 @@ void MStyle::polish(QWidget* widget)
             }
       else if( qobject_cast<QDockWidget*>(widget)) {
             widget->setBackgroundRole(QPalette::NoRole);
+#ifndef Q_WS_MAC
             widget->setAttribute(Qt::WA_TranslucentBackground);
+#endif
             widget->setContentsMargins(3,3,3,3);
             widget->installEventFilter(this);
             }
@@ -772,7 +781,10 @@ void MStyle::polish(QWidget* widget)
             widget->parentWidget()->setAutoFillBackground(false);
             }
       else if( qobject_cast<QMenu*>(widget) ) {
+#ifndef Q_WS_MAC
+            // does not work on MAC
             widget->setAttribute(Qt::WA_TranslucentBackground);
+#endif
 #ifdef Q_WS_WIN
             //FramelessWindowHint is needed on windows to make WA_TranslucentBackground work properly
             widget->setWindowFlags(widget->windowFlags() | Qt::FramelessWindowHint);
@@ -780,12 +792,15 @@ void MStyle::polish(QWidget* widget)
             }
       else if( widget->inherits("QComboBoxPrivateContainer")) {
             widget->installEventFilter(this);
+#ifndef Q_WS_MAC
             widget->setAttribute(Qt::WA_TranslucentBackground);
+#endif
 #ifdef Q_WS_WIN
             //FramelessWindowHint is needed on windows to make WA_TranslucentBackground work properly
             widget->setWindowFlags(widget->windowFlags() | Qt::FramelessWindowHint);
 #endif
             }
+#if 0
       else if( widget->inherits( "KWin::GeometryTip" ) ) {
             // special handling of kwin geometry tip widget
             widget->installEventFilter(this);
@@ -795,11 +810,11 @@ void MStyle::polish(QWidget* widget)
                   label->setFrameStyle( QFrame::NoFrame );
                   label->setMargin(5);
                   }
-
 #ifdef Q_WS_WIN
             widget->setWindowFlags(widget->windowFlags() | Qt::FramelessWindowHint);
 #endif
             }
+#endif
       else if( qobject_cast<QFrame*>( widget ) && widget->parent() && widget->parent()->inherits( "KTitleWidget" ) ) {
             widget->setAutoFillBackground( false );
             widget->setBackgroundRole( QPalette::Window );
@@ -2001,39 +2016,40 @@ bool MStyle::drawPanelLineEditPrimitive( const QStyleOption* option, QPainter* p
 
           }
 
+//---------------------------------------------------------
+//   drawPanelMenuPrimitive
+//---------------------------------------------------------
+
 bool MStyle::drawPanelMenuPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget) const
       {
       // do nothing if menu is embedded in another widget
       // this corresponds to having a transparent background
-      if( widget && !widget->isWindow() )
+      if (widget && !widget->isWindow())
             return true;
 
-              const QStyleOptionMenuItem* mOpt( qstyleoption_cast<const QStyleOptionMenuItem*>(option) );
-              if( !( mOpt && widget ) ) return true;
-                    const QRect& r = mOpt->rect;
-              const QColor color = mOpt->palette.color( widget->window()->backgroundRole() );
+      const QStyleOptionMenuItem* mOpt( qstyleoption_cast<const QStyleOptionMenuItem*>(option) );
+      if( !( mOpt && widget ) )
+            return true;
+      const QRect& r = mOpt->rect;
+      const QColor color = mOpt->palette.color( widget->window()->backgroundRole() );
 
-              const bool hasAlpha( _helper.hasAlphaChannel( widget ) );
-              if( hasAlpha )
-                    {
+      const bool hasAlpha( _helper.hasAlphaChannel( widget ) );
+      if( hasAlpha ) {
+            painter->setCompositionMode(QPainter::CompositionMode_Source );
+            TileSet *tileSet( _helper.roundCorner(color) );
+            tileSet->render( r, painter );
 
-                        painter->setCompositionMode(QPainter::CompositionMode_Source );
-                        TileSet *tileSet( _helper.roundCorner(color) );
-                        tileSet->render( r, painter );
+            painter->setCompositionMode(QPainter::CompositionMode_SourceOver );
+            painter->setClipRegion( _helper.roundedMask( r.adjusted( 1, 1, -1, -1 ) ), Qt::IntersectClip );
+            }
 
-                        painter->setCompositionMode(QPainter::CompositionMode_SourceOver );
-                        painter->setClipRegion( _helper.roundedMask( r.adjusted( 1, 1, -1, -1 ) ), Qt::IntersectClip );
+      _helper.renderMenuBackground( painter, r, widget, mOpt->palette );
 
-                    }
-
-              _helper.renderMenuBackground( painter, r, widget, mOpt->palette );
-
-              if( hasAlpha ) painter->setClipping( false );
-                    _helper.drawFloatFrame( painter, r, color, !hasAlpha );
-
-              return true;
-
-          }
+      if( hasAlpha )
+            painter->setClipping( false );
+      _helper.drawFloatFrame( painter, r, color, !hasAlpha );
+      return true;
+      }
 
 bool MStyle::drawPanelScrollAreaCornerPrimitive( const QStyleOption*, QPainter*, const QWidget* widget) const
       {
