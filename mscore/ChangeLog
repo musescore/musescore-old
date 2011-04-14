@@ -1,3 +1,6 @@
+14.apr (ws)
+      - fix #10245: Right-click Text Properties dlg box does not keep "Size follows
+        space unit" setting (patch from Miwarre)
 13.apr (ws)
       - fix crash when creating new score from template
       - new section break property: "start new section with long instrument names"

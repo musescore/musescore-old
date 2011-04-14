@@ -1201,6 +1201,8 @@ void Text::propertyAction(ScoreView* viewer, const QString& s)
                                     tt->setReloff(nText->reloff());
                               if (nText->offsetType() != offsetType())
                                     tt->setOffsetType(nText->offsetType());
+                              if(nText->sizeIsSpatiumDependent() != sizeIsSpatiumDependent())
+                                    tt->setSizeIsSpatiumDependent(nText->sizeIsSpatiumDependent());
                               }
 
                         tt->doc()->setModified(true);

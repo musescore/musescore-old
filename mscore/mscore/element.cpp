@@ -744,6 +744,7 @@ StaffLines::StaffLines(Score* s)
    : Element(s)
       {
       setWidth(1.0);      // dummy
+      lines = 5;
       setSelectable(false);
       }
 

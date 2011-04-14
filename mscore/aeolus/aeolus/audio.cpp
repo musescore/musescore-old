@@ -147,7 +147,7 @@ void Aeolus::proc_queue (uint32_t k)
 void Aeolus::process(unsigned nframes, float* lout, float* rout, int stride, float gain)
       {
       for (int n = 0; n < NNOTES; n++) {
-            int m = _keymap [n];
+            int m = _keymap[n];
             if (m & 128) {
                   m &= 127;
                   _keymap [n] = m;
