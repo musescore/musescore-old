@@ -1,4 +1,5 @@
 14.apr (ws)
+      - fix #10048: Opening Page Settings causes crash
       - fix #10247: Closing score after playback causes crash
       - fix #10244: EditTextStyles dlg does not keep "Size follows space unit"
         setting (patch from Miwarre)

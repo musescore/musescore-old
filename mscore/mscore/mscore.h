@@ -267,6 +267,7 @@ class MuseScore : public QMainWindow {
       QScriptEngineDebugger* debugger;
 
       QTimer* autoSaveTimer;
+      QList<QAction*> pluginActions;
       QSignalMapper* pluginMapper;
 
       PianorollEditor* pianorollEditor;
