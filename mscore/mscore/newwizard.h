@@ -146,7 +146,7 @@ class NewWizardPage3 : public QWizardPage {
 class NewWizardPage4 : public QWizardPage {
       Q_OBJECT
 
-      QDirModel* model;
+      QFileSystemModel* model;
       QTreeView* tree;
 
    private slots:
