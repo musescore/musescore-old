@@ -31,6 +31,15 @@
 #include "sparm_p.h"
 
 //---------------------------------------------------------
+//   reset
+//---------------------------------------------------------
+
+void Synth::reset()
+      {
+      _active = false;
+      }
+
+//---------------------------------------------------------
 //   MasterSynth
 //---------------------------------------------------------
 
@@ -88,8 +97,20 @@ printf("MasterSynth::init\n");
 
 void MasterSynth::process(unsigned n, float* l, float* r, int stride)
       {
+      foreach(Synth* s, syntis) {
+            if (s->active())
+                  s->process(n, l, r, stride, _gain);
+            }
+      }
+
+//---------------------------------------------------------
+//   reset
+//---------------------------------------------------------
+
+void MasterSynth::reset()
+      {
       foreach(Synth* s, syntis)
-            s->process(n, l, r, stride, _gain);
+            s->reset();
       }
 
 //---------------------------------------------------------
@@ -99,6 +120,7 @@ void MasterSynth::process(unsigned n, float* l, float* r, int stride)
 void MasterSynth::play(const Event& event, int syntiIdx)
       {
 //      printf("play synti %d ch %d type 0x%02x\n", syntiIdx, event.channel(), event.type());
+      syntis[syntiIdx]->setActive(true);
       syntis[syntiIdx]->play(event);
       }
 

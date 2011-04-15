@@ -1,4 +1,5 @@
 15.apr (ws)
+      - switch off unused synthesizers (reducing cpu load)
       - enable edit mode for time signatures ("nudging")
 14.apr (ws)
       - fix #10241: Inserted barline is missing

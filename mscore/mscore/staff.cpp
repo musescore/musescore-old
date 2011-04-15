@@ -289,7 +289,6 @@ void Staff::addClef(Clef* clef)
             abort();
       int tick = 0;
       if (!clefs.isEmpty()) {
-            Clef* c = clefs.back();
             tick = clefs.back()->segment()->tick();
             }
       clefs.append(clef);
