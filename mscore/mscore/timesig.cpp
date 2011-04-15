@@ -41,6 +41,7 @@
 TimeSig::TimeSig(Score* s)
   : Element(s)
       {
+      setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
       _showCourtesySig = true;
       customText = false;
       _stretch.set(1, 1);
@@ -49,30 +50,33 @@ TimeSig::TimeSig(Score* s)
 TimeSig::TimeSig(Score* s, int st)
   : Element(s)
       {
+      setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
       _showCourtesySig = true;
-      setSubtype(st);
       customText = false;
       _stretch.set(1, 1);
+      setSubtype(st);
       }
 
 TimeSig::TimeSig(Score* s, int z, int n)
   : Element(s)
       {
+      setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
       _showCourtesySig = true;
-      setSig(Fraction(z, n));
-      setSubtype(TSIG_NORMAL);
       customText = false;
       _stretch.set(1, 1);
+      setSig(Fraction(z, n));
+      setSubtype(TSIG_NORMAL);
       }
 
 TimeSig::TimeSig(Score* s, const Fraction& f)
    : Element(s)
       {
+      setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
       _showCourtesySig = true;
-      setSig(f);
-      setSubtype(TSIG_NORMAL);
       customText = false;
       _stretch.set(1, 1);
+      setSig(f);
+      setSubtype(TSIG_NORMAL);
       }
 
 //---------------------------------------------------------
@@ -102,9 +106,11 @@ void TimeSig::setSubtype(int st)
                   break;
             case TSIG_FOUR_FOUR:
                   setSig(Fraction(4, 4));
+                  customText = false;
                   break;
             case TSIG_ALLA_BREVE:
                   setSig(Fraction(2, 2));
+                  customText = false;
                   break;
             default:
                   printf("illegal TimeSig subtype 0x%x\n", st);
@@ -170,7 +176,7 @@ void TimeSig::propertyAction(ScoreView* viewer, const QString& s)
       {
       if (s == "courtesy")
             score()->undo()->push(new ChangeTimesig(this,
-               !_showCourtesySig, sig(), stretch(), sz, sn));
+               !_showCourtesySig, sig(), stretch(), subtype(), sz, sn));
       else if (s == "props") {
             TimeSig r(*this);
             TimeSigProperties vp(&r);
@@ -178,9 +184,9 @@ void TimeSig::propertyAction(ScoreView* viewer, const QString& s)
             if (rv) {
                   bool stretchChanged = r.stretch() != _stretch;
                   if (r.zText() != sz || r.nText() != sn || r.sig() != _nominal
-                     || stretchChanged) {
+                     || stretchChanged || r.subtype() != subtype()) {
                         score()->undo()->push(new ChangeTimesig(this,
-                           r.showCourtesySig(), r.sig(), r.stretch(), r.zText(), r.nText()));
+                           r.showCourtesySig(), r.sig(), r.stretch(), r.subtype(), r.zText(), r.nText()));
                         if (stretchChanged)
                               score()->timesigStretchChanged(this, measure(), staffIdx());
                         }
@@ -242,12 +248,11 @@ void TimeSig::write(Xml& xml) const
 
 void TimeSig::read(QDomElement e)
       {
-//      setSubtype(-1);
       int n=0, z1=0, z2=0, z3=0, z4=0;
+      bool old = false;
 
       customText = false;
       _stretch.set(1, 1);
-      bool old;
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
@@ -354,12 +359,14 @@ void TimeSig::layout()
             Sym& sym = symbols[score()->symIdx()][fourfourmeterSym];
             setbbox(sym.bbox(mag).translated(pz));
             sz = sym.toString();
+            sn.clear();
             }
       else if (st == TSIG_ALLA_BREVE) {
             pz = QPointF(0.0, yoff);
             Sym& sym = symbols[score()->symIdx()][allabreveSym];
             setbbox(sym.bbox(mag).translated(pz));
             sz = sym.toString();
+            sn.clear();
             }
       else {
             if (!customText) {

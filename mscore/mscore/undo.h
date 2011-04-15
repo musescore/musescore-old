@@ -1319,12 +1319,13 @@ class ChangeTimesig : public UndoCommand {
       Fraction stretch;
       QString sz;
       QString sn;
+      int subtype;
 
       void flip();
 
    public:
       ChangeTimesig(TimeSig * _timesig, bool sc, const Fraction&,
-         const Fraction&, const QString&, const QString&);
+         const Fraction&, int subtype, const QString&, const QString&);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       UNDO_NAME("ChangeTimesig");
