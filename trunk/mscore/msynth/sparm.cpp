@@ -69,6 +69,7 @@ SyntiParameterData::SyntiParameterData(int i, const QString& name, const QString
       }
 
 SyntiParameterData::SyntiParameterData(const SyntiParameterData& pd)
+   : QSharedData(pd)
       {
       _id   = pd._id;
       _name = pd._name;

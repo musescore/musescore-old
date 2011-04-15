@@ -43,11 +43,12 @@ struct MidiPatch {
 //---------------------------------------------------------
 
 class Synth {
+      bool _active;
 
    protected:
 
    public:
-      Synth() {}
+      Synth() : _active(false) {}
       virtual ~Synth() {}
       virtual void init(int sampleRate) = 0;
 
@@ -75,6 +76,9 @@ class Synth {
       // get/set synthesizer state
       virtual SyntiState state() const = 0;
       virtual void setState(SyntiState&) {}
+      void reset();
+      bool active() const             { return _active; }
+      void setActive(bool val = true) { _active = val;  }
       };
 
 //---------------------------------------------------------
@@ -113,6 +117,7 @@ class MasterSynth {
       void setState(SyntiState&);
 
       Synth* synth(const QString& name);
+      void reset();
       };
 
 #endif
