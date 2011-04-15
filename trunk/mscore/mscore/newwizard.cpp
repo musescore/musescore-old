@@ -561,7 +561,8 @@ NewWizardPage4::NewWizardPage4(QWidget* parent)
       nameFilter.append("*.mscz");
       nameFilter.append("*.mscx");
 
-      model = new QDirModel;
+      model = new QFileSystemModel(this);
+      model->setFilter(QDir::Files);
       model->setNameFilters(nameFilter);
 
       tree  = new QTreeView;
@@ -588,7 +589,7 @@ NewWizardPage4::NewWizardPage4(QWidget* parent)
 
 void NewWizardPage4::initializePage()
       {
-      model->refresh();
+//      model->refresh();
       QString path(mscoreGlobalShare);
       path += "/templates";
       tree->setRootIndex(model->index(path));

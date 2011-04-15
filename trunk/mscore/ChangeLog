@@ -1,4 +1,5 @@
 15.apr (ws)
+      - replace obsolete QDirModel with QFileSstemModel
       - switch off unused synthesizers (reducing cpu load)
       - enable edit mode for time signatures ("nudging")
 14.apr (ws)

@@ -111,7 +111,7 @@
 #include <QtGui/QStyleFactory>
 #include <QtGui/QWizard>
 #include <QtGui/QRadioButton>
-#include <QtGui/QDirModel>
+#include <QtGui/QFileSystemModel>
 #include <QtGui/QHeaderView>
 #include <QtGui/QUndoGroup>
 #include <QtGui/QUndoStack>
