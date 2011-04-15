@@ -658,9 +658,10 @@ printf("cmdAddTimeSig\n");
             //  ignore if there is already a timesig
             //  with same values
             //
-            if ((ots->subtype() == ts->subtype())
-               && (ots->sig()   == ts->sig())
-               && (ots->stretch() == ots->stretch())) {
+            if ((ots->subtype()   == ts->subtype())
+               && (ots->sig()     == ts->sig())
+               && (ots->stretch() == ts->stretch())) {
+printf("  already there %d %d\n", ots->subtype(), ts->subtype());
                   delete ts;
                   return;
                   }
@@ -679,13 +680,20 @@ printf("  global sig does not change\n");
                   return;
                   }
             }
-      int n = addRemoveTimeSigDialog();
+      if (seg)
+            undoRemoveElement(seg);
+printf("   cmdAddTimeSig1\n");
+      int n;
+      if (ots->sig() == ts->sig() && ots->stretch() == ts->stretch()) {
+            // only symbol changes
+            n = 0;
+            }
+      else
+            n = addRemoveTimeSigDialog();
       if (n == -1) {
             delete ts;
             return;
             }
-      if (seg)
-            undoRemoveElement(seg);
 
       if (n == 0) {
             //

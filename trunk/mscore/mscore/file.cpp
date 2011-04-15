@@ -1264,7 +1264,6 @@ bool Score::loadMsc(QString name)
             }
       QFile f(name);
       if (!f.open(QIODevice::ReadOnly)) {
-printf("loadMsc: open failed\n");
             return false;
             }
 
@@ -1365,6 +1364,7 @@ bool Score::read1(QDomElement e)
       foreach(LinkedElements* le, _elinks)
             le->setLid(id++);
       _elinks.clear();
+      _mscVersion = MSCVERSION;     // for later drag & drop usage
       return true;
       }
 

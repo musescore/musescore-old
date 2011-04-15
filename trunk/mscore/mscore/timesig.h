@@ -57,7 +57,7 @@ class TimeSig : public Element {
 
       TimeSig* clone() const             { return new TimeSig(*this); }
       ElementType type() const           { return TIMESIG; }
-      QPointF canvasPos() const;      ///< position in canvas coordinates
+      virtual QPointF canvasPos() const;      ///< position in canvas coordinates
       void setSubtype(int val);
       void draw(Painter*) const;
       void write(Xml& xml) const;
@@ -67,7 +67,7 @@ class TimeSig : public Element {
 
       Fraction sig() const               { return _nominal; }
       void setSig(const Fraction& f)     { _nominal = f;    }
-      void setSig(int a, int b)          { setSig(Fraction(a,b)); }
+      void setSig(int a, int b)          { _nominal.set(a,b); }
 
       Fraction stretch() const           { return _stretch;  }
       void setStretch(const Fraction& f) { _stretch = f;    }
@@ -80,14 +80,14 @@ class TimeSig : public Element {
       Segment* segment() const { return (Segment*)parent(); }
       Measure* measure() const { return (Measure*)parent()->parent(); }
 
-      bool showCourtesySig() const        { return _showCourtesySig; };
-      void setShowCourtesySig(bool v)     { _showCourtesySig = v;    };
+      bool showCourtesySig() const       { return _showCourtesySig; };
+      void setShowCourtesySig(bool v)    { _showCourtesySig = v;    };
 
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(ScoreView*, const QString&);
 
-      QString zText() const { return sz; }
-      QString nText() const { return sn; }
+      QString zText() const              { return sz; }
+      QString nText() const              { return sn; }
       void setText(const QString&, const QString&);
       void setFrom(const TimeSig*);
       };

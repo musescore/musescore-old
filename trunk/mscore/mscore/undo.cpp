@@ -2795,7 +2795,7 @@ void ChangeMeasureTimesig::flip()
 //---------------------------------------------------------
 
 ChangeTimesig::ChangeTimesig(TimeSig * _timesig, bool sc, const Fraction& f1,
-   const Fraction& f2, const QString& s1, const QString& s2)
+   const Fraction& f2, int st, const QString& s1, const QString& s2)
       {
       timesig = _timesig;
       showCourtesy = sc;
@@ -2803,6 +2803,7 @@ ChangeTimesig::ChangeTimesig(TimeSig * _timesig, bool sc, const Fraction& f1,
       stretch      = f2;
       sz           = s1;
       sn           = s2;
+      subtype      = st;
       };
 
 //---------------------------------------------------------
@@ -2816,15 +2817,18 @@ void ChangeTimesig::flip()
       Fraction f2    = timesig->stretch();
       QString  s1    = timesig->zText();
       QString  s2    = timesig->nText();
+      int      st    = timesig->subtype();
       timesig->setShowCourtesySig(showCourtesy);
       timesig->setSig(actual);
       timesig->setStretch(stretch);
       timesig->setText(sz, sn);
+      timesig->setSubtype(subtype);
       showCourtesy = sc;
       actual       = f1;
       stretch      = f2;
       sz           = s1;
       sn           = s2;
+      subtype      = st;
       }
 
 //---------------------------------------------------------

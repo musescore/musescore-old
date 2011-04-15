@@ -126,7 +126,7 @@ void MuseScore::registerPlugin(const QString& pluginPath)
                   }
             }
 
-      int pluginIdx = plugins.size();
+      // int pluginIdx = plugins.size();
       plugins.append(pluginPath);
 
       //give access to pluginPath in init

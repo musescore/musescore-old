@@ -59,6 +59,16 @@ void TimeSigProperties::accept()
             timesig->setText(zText->text(), nText->text());
       timesig->setSig(Fraction(zNominal->value(), nNominal->value()));
       timesig->setActualSig(Fraction(zActual->value(), nActual->value()));
+      if (textButton->isChecked())
+            timesig->setSubtype(TSIG_NORMAL);
+      else if (fourfourButton->isChecked()) {
+            printf("fourfour\n");
+            timesig->setSubtype(TSIG_FOUR_FOUR);
+            }
+      else if (allaBreveButton->isChecked()) {
+            timesig->setSubtype(TSIG_ALLA_BREVE);
+            printf("alla breve\n");
+            }
       QDialog::accept();
       }
 
