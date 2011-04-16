@@ -363,7 +363,7 @@ bool Score::saveFile(bool autosave)
             }
       try {
             if (suffix == "msc" || suffix == "mscx")
-                  saveFile(&temp, autosave);
+                  saveFile(&temp, false, autosave);
             else
                   saveCompressedFile(&temp, info, autosave);
             }
@@ -1008,7 +1008,7 @@ void Score::saveCompressedFile(QIODevice* f, QFileInfo& info, bool autosave)
 
       QBuffer dbuf;
       dbuf.open(QIODevice::ReadWrite);
-      saveFile(&dbuf, autosave);
+      saveFile(&dbuf, true, autosave);
       dbuf.seek(0);
       ec = uz.createEntry(fn, dbuf, dt);
       if (ec != Zip::Ok)
@@ -1035,7 +1035,7 @@ void Score::saveFile(QFileInfo& info, bool autosave)
                + QString(strerror(errno));
             throw(s);
             }
-      saveFile(&fp, autosave);
+      saveFile(&fp, false, autosave);
       fp.close();
       }
 
@@ -1105,9 +1105,10 @@ void Score::saveStyle()
 
 extern QString revision;
 
-void Score::saveFile(QIODevice* f, bool autosave)
+void Score::saveFile(QIODevice* f, bool msczFormat, bool autosave)
       {
       Xml xml(f);
+      xml.writeOmr = msczFormat;
       xml.header();
       xml.stag("museScore version=\"" MSC_VERSION "\"");
       xml.tag("programVersion", VERSION);
@@ -2171,7 +2172,7 @@ void Score::createRevision()
 printf("createRevision\n");
       QBuffer dbuf;
       dbuf.open(QIODevice::ReadWrite);
-      saveFile(&dbuf, false);
+      saveFile(&dbuf, false, false);
       dbuf.close();
 
       QByteArray ba1 = readToBuffer();

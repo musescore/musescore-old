@@ -461,18 +461,18 @@ void Preferences::read()
       styleName              = s.value("style", "dark").toString();
       if (styleName == "light") {
             iconGroup = "icons/";
-            appStyleFile = ":/data/appstyle.css";
-            globalStyle  = 1;
+            appStyleFile = ":/data/appstyle-light.css";
+            globalStyle  = STYLE_LIGHT;
             }
       else if (styleName == "dark") {
             iconGroup = "icons-dark/";
             appStyleFile = ":/data/appstyle-dark.css";
-            globalStyle  = 0;
+            globalStyle  = STYLE_DARK;
             }
       else {
             iconGroup = "icons/";
             appStyleFile = ":/data/appstyle.css";
-            globalStyle  = 2;
+            globalStyle  = STYLE_NATIVE;
             }
       singlePalette    = s.value("singlePalette", false).toBool();
       myScoresPath     = s.value("myScoresPath", "MyScores").toString();
@@ -1353,23 +1353,23 @@ void PreferenceDialog::apply()
 
       preferences.useOsc  = oscServer->isChecked();
       preferences.oscPort = oscPort->value();
-      if (styleName->currentIndex() == 0) {
+      if (styleName->currentIndex() == STYLE_DARK) {
             iconGroup = "icons-dark/";
             appStyleFile = ":/data/appstyle-dark.css";
             preferences.styleName = "dark";
-            preferences.globalStyle = 0;
+            preferences.globalStyle = STYLE_DARK;
             }
-      else if (styleName->currentIndex() == 1){
+      else if (styleName->currentIndex() == STYLE_LIGHT) {
             iconGroup = "icons/";
-            appStyleFile = ":/data/appstyle.css";
+            appStyleFile = ":/data/appstyle-light.css";
             preferences.styleName = "light";
-            preferences.globalStyle = 1;
+            preferences.globalStyle = STYLE_LIGHT;
             }
       else {
             iconGroup = "icons/";
             appStyleFile = ":/data/appstyle.css";
             preferences.styleName = "native";
-            preferences.globalStyle = 2;
+            preferences.globalStyle = STYLE_NATIVE;
             }
 
       if (languageChanged) {

@@ -38,6 +38,7 @@ Xml::Xml()
       beamId        = 1;
       spannerId     = 0;
       slurId        = 1;
+      writeOmr      = true;
       }
 
 Xml::Xml(QIODevice* device)
@@ -52,6 +53,7 @@ Xml::Xml(QIODevice* device)
       beamId        = 1;
       spannerId     = 0;
       slurId        = 1;
+      writeOmr      = true;
       }
 
 //---------------------------------------------------------

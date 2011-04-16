@@ -29,7 +29,7 @@ install(FILES
       inv13.mscx
       praeludium1.mscx
       prelude.mscx
-      promenade.mscx
+      promenade.mscz
       scales.mscx
       sonata16.mscx
       italian-1.mscz
