@@ -567,7 +567,7 @@ class Score : public QObject {
       bool importGTP(const QString& name);
 
       void saveFile(QFileInfo& info, bool autosave);
-      void saveFile(QIODevice* f, bool autosave);
+      void saveFile(QIODevice* f, bool msczFormat, bool autosave);
       void saveCompressedFile(QFileInfo&, bool autosave);
       void saveCompressedFile(QIODevice*, QFileInfo&, bool autosave);
       bool saveAs(bool saveCopy = false);

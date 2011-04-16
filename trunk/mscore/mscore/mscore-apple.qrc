@@ -26,7 +26,7 @@
       <file>fonts/mscore_tab_renaiss2.ttf</file>
       <file alias="data/instruments.xml">../share/templates/instruments.xml</file>
       <file>data/splash.jpg</file>
-      <file alias="data/Promenade_Example.mscx">../demos/promenade.mscx</file>
+      <file alias="data/Promenade_Example.mscz">../demos/promenade.mscz</file>
       <file>data/style.qss</file>
 
       <file>data/mscore.png</file>

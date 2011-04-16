@@ -26,7 +26,7 @@
       <file>fonts/mscore_tab_renaiss2.ttf</file>
       <file alias="data/instruments.xml">../share/templates/instruments.xml</file>
       <file>data/splash.jpg</file>
-      <file alias="data/Promenade_Example.mscx">../demos/promenade.mscx</file>
+      <file alias="data/Promenade_Example.mscz">../demos/promenade.mscz</file>
       <file>data/style.qss</file>
 
       <file>data/mscore.png</file>
@@ -35,6 +35,8 @@
       <file>revision.h</file>
       <file>data/musescore_logo_full.png</file>
       <file alias="data/appstyle-dark.css">../share/styles/appstyle-dark.css</file>
+      <file alias="data/appstyle-light.css">../share/styles/appstyle-light.css</file>
+      <file alias="data/appstyle.css">../share/styles/appstyle.css</file>
 
       <file>data/greendot.svg</file>
       <file>data/darkgreendot.svg</file>

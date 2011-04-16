@@ -1,3 +1,5 @@
+16.apr (ws)
+      - dont save omr information in *.mscx file type
 15.apr (ws)
       - replace obsolete QDirModel with QFileSstemModel
       - switch off unused synthesizers (reducing cpu load)

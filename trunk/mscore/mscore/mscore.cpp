@@ -2119,10 +2119,9 @@ int main(int argc, char* av[])
             }
 
       if (!useFactorySettings && !converterMode) {
-
             switch(preferences.globalStyle) {
                   case STYLE_DARK: {
-                         QApplication::setStyle(new MStyle);
+                        QApplication::setStyle(new MStyle);
                         qApp->setStyleSheet(appStyleSheet());
                         QPalette p(QApplication::palette());
                         p.setColor(QPalette::Window,        QColor(0x52, 0x52, 0x52));
@@ -2136,10 +2135,21 @@ int main(int argc, char* av[])
                         QApplication::setPalette(p);
                         break;
                         }
-                  case STYLE_LIGHT:
+                  case STYLE_LIGHT: {
                         QApplication::setStyle(new MStyle);
                         qApp->setStyleSheet(appStyleSheet());
+                        QPalette p(QApplication::palette());
+                        p.setColor(QPalette::Window,        QColor(0xdc, 0xdc, 0xdc));
+                        p.setColor(QPalette::WindowText,    Qt::black);
+                        p.setColor(QPalette::Base,          QColor(0x82, 0x82, 0x82));
+                        p.setColor(QPalette::AlternateBase, QColor(0xa2, 0xa2, 0xa2));
+                        p.setColor(QPalette::Text,          Qt::black);
+                        p.setColor(QPalette::Button,        QColor(0xdc, 0xdc, 0xdc));
+                        p.setColor(QPalette::ButtonText,    Qt::black);
+                        p.setColor(QPalette::BrightText,    Qt::black);  //??
+                        QApplication::setPalette(p);
                         break;
+                        }
                   case STYLE_NATIVE:
                         break;
                   }

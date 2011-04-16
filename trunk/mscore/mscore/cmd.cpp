@@ -761,7 +761,7 @@ printf("remove %s %s at tick %d track %d\n",
                   tuplet = 0;
                   }
             else {
-//                  printf("  makeGap: remove %d/%d at %d\n", td.numerator(), td.denominator(), cr->tick());
+printf("  makeGap: remove %d/%d at %d\n", td.numerator(), td.denominator(), cr->tick());
                   undoRemoveElement(cr);
                   if (seg->isEmpty() && seg != firstSegment)
                         undoRemoveElement(seg);
@@ -874,7 +874,8 @@ bool Score::makeGap1(int tick, int staffIdx, Fraction len)
             int track  = cr->track();
             cr = static_cast<ChordRest*>(s->element(track));
             if (cr == 0) {
-                  addRest(s->tick(), track, Duration(Duration::V_MEASURE), 0);
+                  // addRest(s->tick(), track, Duration(Duration::V_MEASURE), 0);
+                  addRest(s, track, Duration(Duration::V_MEASURE), 0);
                   cr = static_cast<ChordRest*>(s->element(track));
                   }
             }

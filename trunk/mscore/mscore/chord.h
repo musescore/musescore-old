@@ -77,6 +77,7 @@ class LedgerLine : public Line {
       virtual QPointF canvasPos() const;      ///< position in canvas coordinates
       Chord* chord() const { return (Chord*)parent(); }
       virtual void layout();
+      double measureXPos() const;
       };
 
 //---------------------------------------------------------

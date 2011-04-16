@@ -590,7 +590,6 @@ NewWizardPage4::NewWizardPage4(QWidget* parent)
 
 void NewWizardPage4::initializePage()
       {
-//      model->refresh();
       QString path(mscoreGlobalShare);
       path += "/templates";
       QDir dir(path);

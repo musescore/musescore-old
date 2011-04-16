@@ -150,7 +150,12 @@ Rest* Score::addRest(int tick, int track, Duration d, Tuplet* tuplet)
       {
       Measure* measure = tick2measure(tick);
       Rest* rest       = new Rest(this, d);
-      rest->setDuration(d.type() == Duration::V_MEASURE ? measure->len() : d.fraction());
+      if (d.type() == Duration::V_MEASURE) {
+            Fraction timeStretch = staff(track/VOICES)->timeStretch(tick);
+            rest->setDuration(measure->len() / timeStretch);
+            }
+      else
+            rest->setDuration(d.fraction());
       rest->setTrack(track);
       rest->setTuplet(tuplet);
 // printf("addRest at %d/%d len %s\n", tick, track, qPrintable(d.name()));
@@ -165,7 +170,12 @@ Rest* Score::addRest(int tick, int track, Duration d, Tuplet* tuplet)
 Rest* Score::addRest(Segment* s, int track, Duration d, Tuplet* tuplet)
       {
       Rest* rest = new Rest(this, d);
-      rest->setDuration(d.type() == Duration::V_MEASURE ? s->measure()->len() : d.fraction());
+      if (d.type() == Duration::V_MEASURE) {
+            Fraction timeStretch = staff(track/VOICES)->timeStretch(s->tick());
+            rest->setDuration(s->measure()->len() / timeStretch);
+            }
+      else
+            rest->setDuration(d.fraction());
       rest->setTrack(track);
       rest->setParent(s);
       rest->setTuplet(tuplet);
@@ -273,9 +283,11 @@ Rest* Score::setRest(int tick, int track, Fraction l, bool useDots, Tuplet* tupl
                   continue;
                   }
 
+            Fraction timeStretch = staff(track/VOICES)->timeStretch(tick);
+
             if ((measure->timesig() == measure->len())   // not in pickup measure
                && (measure->tick() == tick)
-               && (measure->timesig() == f)
+               && ((measure->timesig() / timeStretch) == f)
                && (f < Duration(Duration::V_BREVE).fraction())) {
                   Rest* rest = addRest(tick, track, Duration(Duration::V_MEASURE), tuplet);
                   tick += rest->actualTicks();

@@ -616,9 +616,9 @@ void Score::write(Xml& xml, bool /*autosave*/)
       {
       xml.stag("Score");
 
-      if (_omr)
+      if (_omr && xml.writeOmr)
             _omr->write(xml);
-      if (_showOmr)
+      if (_showOmr && xml.writeOmr)
             xml.tag("showOmr", _showOmr);
 
       _syntiState.write(xml);

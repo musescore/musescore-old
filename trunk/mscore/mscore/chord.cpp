@@ -448,6 +448,7 @@ void Chord::addLedgerLine(double x, int staffIdx, int line, int lr)
       double y = line * _spatium * .5;
 
       LedgerLine* h   = new LedgerLine(score());
+      h->setParent(this);
       h->setTrack(staffIdx * VOICES);
       h->setVisible(!staff()->invisible());
 
@@ -464,9 +465,6 @@ void Chord::addLedgerLine(double x, int staffIdx, int line, int lr)
       x += (lr & 1) ? -hw2 : hw2;
       if (lr == 3)
             len += Spatium(hw / spatium());
-
-      h->setParent(this);
-      h->setTrack(staffIdx * VOICES);
 
       //
       // Experimental:
@@ -939,6 +937,18 @@ QPointF LedgerLine::canvasPos() const
       }
 
 //---------------------------------------------------------
+//   measureXPos
+//---------------------------------------------------------
+
+double LedgerLine::measureXPos() const
+      {
+      double xp = x();                   // chord relative
+      xp += chord()->x();                // segment relative
+      xp += chord()->segment()->x();     // measure relative
+      return xp;
+      }
+
+//---------------------------------------------------------
 //   layout
 //---------------------------------------------------------
 
@@ -1182,7 +1192,7 @@ void Chord::layout2()
                   double y   = h->y();
                   double x   = h->x();
                   bool found = false;
-                  double cx  = h->canvasPos().x();
+                  double cx  = h->measureXPos();
 
                   for (int track = strack; track < etrack; ++track) {
                         Element* e = s->element(track);
@@ -1192,7 +1202,7 @@ void Chord::layout2()
                               if (ll->y() != y)
                                     continue;
 
-                              double d = cx - ll->canvasPos().x() - (ll->len().val() * _spatium);
+                              double d = cx - ll->measureXPos() - (ll->len().val() * _spatium);
                               if (d < minDist) {
                                     //
                                     // the ledger lines overlap
