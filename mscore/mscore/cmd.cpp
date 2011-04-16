@@ -288,6 +288,8 @@ void ScoreView::cmdInsertNote(int note)
 void ScoreView::cmdAddPitch(int note, bool addFlag)
       {
       InputState& is = _score->inputState();
+      if (is.track() == -1)          // invalid state
+            return;
       Drumset* ds    = is.drumset();
       int pitch;
       if (ds) {

@@ -1,4 +1,5 @@
 16.apr (ws)
+      - fix #10264: Select a flag and enter a note causes crash
       - dont save omr information in *.mscx file type
 15.apr (ws)
       - replace obsolete QDirModel with QFileSstemModel
