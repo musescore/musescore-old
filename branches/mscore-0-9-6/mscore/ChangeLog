@@ -1,3 +1,5 @@
+18.apr (la)
+      - fix #10264: Select a flag and enter a note causes crash
 12.apr (la)
       - fix #7814:  error with single-line-staff percussion notation
       - don't print blue frame around selected image
