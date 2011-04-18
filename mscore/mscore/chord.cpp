@@ -209,21 +209,6 @@ Chord::~Chord()
       }
 
 //---------------------------------------------------------
-//   setHook
-//---------------------------------------------------------
-
-void Chord::setHook(Hook* f)
-      {
-      delete _hook;
-      _hook = f;
-      if (_hook) {
-            _hook->setParent(this);
-            if (_stem)        // should always be true
-                  _hook->setVisible(_stem->visible());
-            }
-      }
-
-//---------------------------------------------------------
 //   setStem
 //---------------------------------------------------------
 
@@ -329,6 +314,8 @@ void Chord::add(Element* e)
                   break;
             case HOOK:
                   _hook = static_cast<Hook*>(e);
+                  if (_stem)        // should always be true
+                        _hook->setVisible(_stem->visible());
                   break;
             case CHORDLINE:
                   _el.append(e);
@@ -1031,13 +1018,16 @@ void Chord::layoutStem1()
       if (hookIdx) {
             if (!up())
                   hookIdx = -hookIdx;
-            if (!_hook)
-                  setHook(new Hook(score()));
+            if (!_hook) {
+                  Hook* hook = new Hook(score());
+                  hook->setParent(this);
+                  score()->undoAddElement(hook);
+                  }
             _hook->setMag(mag());
             _hook->setSubtype(hookIdx);
             }
-      else
-            setHook(0);
+      else if (_hook)
+            score()->undoRemoveElement(_hook);
       }
 
 //---------------------------------------------------------
@@ -1150,11 +1140,14 @@ void Chord::layoutStem()
                   QPointF p = npos + QPointF(lw, _stem->stemLen());
                   _hook->setPos(p - canvasPos());
                   }
-            else
-                  setHook(0);
+            else {
+                  if (_hook)
+                        score()->undoRemoveElement(_hook);
+                  }
             }
-      else
-            setHook(0);
+      else if (_hook)
+            score()->undoRemoveElement(_hook);
+
 
       //-----------------------------------------
       //    process tremolo

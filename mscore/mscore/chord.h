@@ -160,7 +160,6 @@ class Chord : public ChordRest {
       virtual QPointF stemPos(bool, bool) const;
 
       Hook* hook() const                     { return _hook; }
-      void setHook(Hook* f);
 
       virtual void add(Element*);
       virtual void remove(Element*);

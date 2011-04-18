@@ -276,8 +276,9 @@ Element::~Element()
             foreach(Element* e, score()->selection().elements()) {
                   if (e == this) {
 //                        if (debugMode)
-                              printf("======~Element: %p still in selection!\n", this);
-//                        if (debugMode)
+                              printf("======~Element: %p still in selection! generated %d\n",
+                                 this, generated());
+                        if (debugMode)
                               abort();
                         score()->deselect(this);
                         }
