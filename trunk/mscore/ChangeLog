@@ -1,3 +1,5 @@
+18.apr (ws)
+      - fix #10282: Undo Beam Properties change causes crash
 16.apr (ws)
       - fix #10264: Select a flag and enter a note causes crash
       - dont save omr information in *.mscx file type

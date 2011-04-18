@@ -40,6 +40,7 @@
 #include "stafftype.h"
 #include "stem.h"
 #include "painter.h"
+#include "hook.h"
 
 //---------------------------------------------------------
 //   endBeam
@@ -1035,7 +1036,8 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                   stem = new Stem(score());
                   chord->setStem(stem);
                   }
-            chord->setHook(0);
+            if (chord->hook())
+                  score()->undoRemoveElement(chord->hook());
 
             if (staff()->useTablature()) {
                   //
