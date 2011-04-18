@@ -26,7 +26,7 @@
 extern void initSymbols(int);
 
 #if QT_VERSION >= 0x040800
-// #define USE_GLYPHS  1            // does not work for printing
+#define USE_GLYPHS  1            // does not work for printing
 #endif
 
 enum SymbolType {

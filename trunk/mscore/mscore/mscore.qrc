@@ -99,6 +99,7 @@
       <file>data/icons/note32.svg</file>
       <file>data/icons/note4.svg</file>
       <file>data/icons/note64.svg</file>
+      <file>data/icons/note128.svg</file>
       <file>data/icons/note8.svg</file>
       <file>data/icons/note.svg</file>
       <file>data/icons/ouvert.svg</file>
@@ -209,6 +210,7 @@
       <file>data/icons-dark/note32.svg</file>
       <file>data/icons-dark/note4.svg</file>
       <file>data/icons-dark/note64.svg</file>
+      <file>data/icons-dark/note128.svg</file>
       <file>data/icons-dark/note8.svg</file>
       <file>data/icons-dark/note.svg</file>
       <file>data/icons-dark/ouvert.svg</file>

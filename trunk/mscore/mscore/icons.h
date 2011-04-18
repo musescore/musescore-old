@@ -30,7 +30,8 @@ enum {
 extern void genIcons();
 
 enum { longaUp_ICON, brevis_ICON, note_ICON, note2_ICON, note4_ICON, note8_ICON, note16_ICON,
-      note32_ICON, note64_ICON, natural_ICON, sharp_ICON, sharpsharp_ICON, flat_ICON, flatflat_ICON,
+      note32_ICON, note64_ICON, note128_ICON,
+      natural_ICON, sharp_ICON, sharpsharp_ICON, flat_ICON, flatflat_ICON,
       staccato_ICON, quartrest_ICON, dot_ICON, dotdot_ICON, sforzatoaccent_ICON,
       tenuto_ICON, plus_ICON, flip_ICON,
       undo_ICON, redo_ICON, cut_ICON, copy_ICON, paste_ICON, print_ICON, clef_ICON,

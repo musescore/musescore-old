@@ -593,6 +593,9 @@ void SlurTie::slurPos(SlurPos* sp)
       //------p1
       xo = hw * .5;
       yo = 0.0;
+
+      bool stemPos = false;   // p1 starts at chord stem side
+
       if (isTie && sc->notes().size() > 1) {
             xo = hw * 1.12;
             yo = note1->pos().y() + hw * .3 * _up;
@@ -610,6 +613,7 @@ void SlurTie::slurPos(SlurPos* sp)
                         else
                               yo = sc->upNote()->yPos() + sh;
                         xo = stem1->pos().x();
+                        stemPos = true;
                         }
                   else {
                         if (sc->up() && up)
@@ -624,15 +628,16 @@ void SlurTie::slurPos(SlurPos* sp)
                               Note* n2  = ec->up() ? ec->downNote() : ec->upNote();
                               double yd = n2->yPos() - n1->yPos();
 
-                              double mh = stem1->height();    // limit y move
+                              double sh = stem1->height();    // limit y move
                               if (yd > 0.0) {
-                                    if (yd > mh)
-                                          yd = mh;
+                                    if (yd > sh)
+                                          yd = sh;
                                     }
                               else {
-                                    if (yd < - mh)
-                                          yd = -mh;
+                                    if (yd < - sh)
+                                          yd = -sh;
                                     }
+                              stemPos = true;
                               if ((up && (yd < -_spatium)) || (!up && (yd > _spatium)))
                                     yo += yd;
                               }
@@ -654,11 +659,13 @@ void SlurTie::slurPos(SlurPos* sp)
             yo = note2->yPos() + (hh * .5 + _spatium * .4) * _up;
             if (stem2) {
                   Beam* beam2 = ec->beam();
-                  if (beam2
-                     && (!beam2->elements().isEmpty())
-                     && (beam2->elements().front() != ec)
-                     && (ec->up() == up)
-                     && (sc->noteType() == NOTE_NORMAL)
+                  if (stemPos
+                     || (beam2
+                       && (!beam2->elements().isEmpty())
+                       && (beam2->elements().front() != ec)
+                       && (ec->up() == up)
+                       && (sc->noteType() == NOTE_NORMAL)
+                       )
                         ) {
                         double sh = stem2->height() + _spatium;
                         if (up)

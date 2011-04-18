@@ -53,7 +53,7 @@
       <file>data/icons/mbeam.svg</file>
       <file>data/icons/nbeam.svg</file>
       <file>data/icons/beam32.svg</file>
-      <file>data/icons/beam64.svg</file>
+      <file>data/icons/beam128.svg</file>
       <file>data/icons/abeam.svg</file>
       <file>data/icons/fbeam1.svg</file>
       <file>data/icons/fbeam2.svg</file>
@@ -97,6 +97,7 @@
       <file>data/icons/note32.svg</file>
       <file>data/icons/note4.svg</file>
       <file>data/icons/note64.svg</file>
+      <file>data/icons/note128.svg</file>
       <file>data/icons/note8.svg</file>
       <file>data/icons/note.svg</file>
       <file>data/icons/ouvert.svg</file>
@@ -207,6 +208,7 @@
       <file>data/icons-dark/note32.svg</file>
       <file>data/icons-dark/note4.svg</file>
       <file>data/icons-dark/note64.svg</file>
+      <file>data/icons-dark/note128.svg</file>
       <file>data/icons-dark/note8.svg</file>
       <file>data/icons-dark/note.svg</file>
       <file>data/icons-dark/ouvert.svg</file>

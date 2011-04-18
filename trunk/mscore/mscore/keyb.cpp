@@ -199,6 +199,9 @@ void Score::padToggle(int n)
             case PAD_NOTE64:
                   _is.setDuration(Duration::V_64TH);
                   break;
+            case PAD_NOTE128:
+                  _is.setDuration(Duration::V_128TH);
+                  break;
             case PAD_REST:
                   _is.rest = !_is.rest;
                   break;
@@ -231,7 +234,7 @@ void Score::padToggle(int n)
       if (n < PAD_NOTE00 || n > PAD_DOTDOT)
             return;
 
-      if (n >= PAD_NOTE00 && n <= PAD_NOTE64) {
+      if (n >= PAD_NOTE00 && n <= PAD_NOTE128) {
             _is.setDots(0);
             //
             // if in "note enter" mode, reset
@@ -285,6 +288,7 @@ static void enableInputToolbar(bool val)
             "pad-rest", "pad-dot", "pad-dotdot", "note-longa",
             "note-breve", "pad-note-1", "pad-note-2", "pad-note-4",
             "pad-note-8", "pad-note-16", "pad-note-32", "pad-note-64",
+            "pad-note-128",
 //            "voice-1", "voice-2", "voice-3", "voice-4",
             "acciaccatura", "appoggiatura", "grace4", "grace16",
             "grace32", "beam-start", "beam-mid", "no-beam", "beam32",
@@ -376,6 +380,7 @@ void MuseScore::updateInputState(Score* score)
       getAction("pad-note-16")->setChecked(is.duration() == Duration::V_16TH);
       getAction("pad-note-32")->setChecked(is.duration() == Duration::V_32ND);
       getAction("pad-note-64")->setChecked(is.duration() == Duration::V_64TH);
+      getAction("pad-note-128")->setChecked(is.duration() == Duration::V_128TH);
 
       // uncheck all voices if multi-selection
       int voice = score->selection().isSingle() ? is.voice() : -1;

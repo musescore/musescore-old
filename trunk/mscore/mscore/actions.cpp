@@ -1257,6 +1257,16 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         "pad-note-128",
+         QT_TRANSLATE_NOOP("action","Note duration: 128th"),
+         0,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","128th note"),
+         QT_TRANSLATE_NOOP("action","128th note"),
+          note128_ICON
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
          "pad-dot",
          QT_TRANSLATE_NOOP("action","Note duration: augmentation dot"),
          Qt::Key_Period,

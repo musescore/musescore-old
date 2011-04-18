@@ -1412,7 +1412,7 @@ void Score::cmdDeleteSelection()
             Segment* s2 = selection().endSegment();
 
             bool fullMeasure = (s1->measure()->first(SegChordRest) == s1)
-                               && (s2->segmentType() == SegEndBarLine);
+                               && (s2 == 0 || (s2->segmentType() == SegEndBarLine));
 
             int tick2   = s2 ? s2->tick() : INT_MAX;
             int track1  = selection().staffStart() * VOICES;
@@ -1485,7 +1485,7 @@ void Score::cmdDeleteSelection()
                               // fix broken measures:
                               for (Measure* m = s1->measure(); m; m = m->nextMeasure()) {
                                     setRest(m->tick(), track, Fraction(m->len()), false, 0);
-                                    if (m == s2->measure())
+                                    if (s2 && (m == s2->measure()))
                                           break;
                                     }
                               }
