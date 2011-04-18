@@ -751,7 +751,8 @@ void Seq::heartBeat()
       if (note) {
             curTick = note->chord()->tick();
             ScoreView* sv = mscore->currentScoreView();
-            if (curTick > sv->cursorTick()) {
+            int td = curTick - sv->cursorTick();
+            if (td > 0 || td < 480 * 2) {       // heuristic
                   sv->moveCursor(note->chord()->segment(), -1);
                   cv->adjustCanvasPosition(note, true);
                   curUtick = guiPos.key();
