@@ -3393,3 +3393,12 @@ void Measure::updateAccidentals(Segment* segment, int staffIdx, char* tversatz)
             }
       }
 
+//---------------------------------------------------------
+//   stretchedLen
+//---------------------------------------------------------
+
+Fraction Measure::stretchedLen(Staff* staff) const
+      {
+      return len() / staff->timeStretch(tick());
+      }
+

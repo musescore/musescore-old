@@ -221,8 +221,8 @@ void UndoStack::endMacro(bool rollback)
 void UndoStack::push(UndoCommand* cmd)
       {
       if (!curCmd) {
-            printf("UndoStack:push(): no active command, UndoStack %p\n", this);
-// abort();
+            // this can happen for layout() outside of a command (load)
+//            printf("UndoStack:push(): no active command, UndoStack %p\n", this);
             cmd->redo();
             delete cmd;
             return;
@@ -1197,7 +1197,7 @@ void Score::undoRemoveElement(Element* element)
             undo()->push(new RemoveElement(e));
             if (e->type() == KEYSIG)                  // TODO: should be done in undo()/redo()
                   e->score()->cmdUpdateNotes();
-            if (!e->isChordRest() && (e->parent()->type() == SEGMENT)) {
+            if (!e->isChordRest() && e->parent() && (e->parent()->type() == SEGMENT)) {
                   Segment* s = static_cast<Segment*>(e->parent());
                   if (!segments.contains(s))
                         segments.append(s);

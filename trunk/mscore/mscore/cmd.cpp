@@ -891,7 +891,11 @@ bool Score::makeGap1(int tick, int staffIdx, Fraction len)
 void Score::changeCRlen(ChordRest* cr, const Duration& d)
       {
       Fraction srcF(cr->duration());
-      Fraction dstF = d.type() == Duration::V_MEASURE ? cr->measure()->timesig() : d.fraction();
+      Fraction dstF;
+      if (d.type() == Duration::V_MEASURE)
+            dstF = cr->measure()->stretchedLen(cr->staff());
+      else
+            dstF = d.fraction();
 
       if (srcF == dstF)
             return;
@@ -934,8 +938,8 @@ void Score::changeCRlen(ChordRest* cr, const Duration& d)
             }
 
       while (f > Fraction(0)) {
-            while (s && ((s->element(track) == 0) || (s->subtype() != SegChordRest)))
-                  s = s->next1();
+            while (s && !s->element(track))
+                  s = s->next1(SegChordRest);
             if (s == 0)
                   break;
             if ((f1 > Fraction(0)) && (s->tick() == s->measure()->tick())) {
@@ -944,19 +948,23 @@ void Score::changeCRlen(ChordRest* cr, const Duration& d)
                   }
             ChordRest* cr = static_cast<ChordRest*>(s->element(track));
             Duration d(cr->durationType());
-            Fraction f2 = (d.type() == Duration::V_MEASURE) ? cr->measure()->timesig() : d.fraction();
+            Fraction f2;
+            if (d.type() == Duration::V_MEASURE)
+                  f2 = cr->measure()->stretchedLen(cr->staff());
+            else
+                  f2 = d.fraction();
             if (f2 > f)
                   f2 = f;
             f1 += f2;
             f  -= f2;
-            s = s->next1();
+            s = s->next1(SegChordRest);
             }
       if (f1 > Fraction(0))
             flist.append(f1);
 
-// printf("List:\n");
-//      foreach (Fraction f, flist)
-//            printf("  %d/%d\n", f.numerator(), f.denominator());
+printf("ChangeCRLen::List:\n");
+      foreach (Fraction f, flist)
+            printf("  %d/%d\n", f.numerator(), f.denominator());
 
       int tick       = cr->tick();
       f              = dstF;
@@ -969,13 +977,15 @@ void Score::changeCRlen(ChordRest* cr, const Duration& d)
             makeGap(cr1, f2, tuplet);
 
             if (cr->type() == REST) {
-
-                  Rest* r = setRest(tick, track, f2, (d.dots() > 0), tuplet);
+printf("  +ChangeCRLen::setRest %d/%d\n", f2.numerator(), f2.denominator());
+                  Fraction timeStretch = cr1->staff()->timeStretch(cr1->tick());
+                  Rest* r = setRest(tick, track, f2 * timeStretch, (d.dots() > 0), tuplet);
                   if (first) {
                         select(r, SELECT_SINGLE, 0);
                         first = false;
                         }
-                  tick += f2.ticks();
+printf("  ChangeCRLen:: %d += %d(actual=%d)\n", tick, f2.ticks(), f2.ticks() * timeStretch.numerator() / timeStretch.denominator());
+                  tick += f2.ticks() * timeStretch.numerator() / timeStretch.denominator();
                   }
             else {
                   QList<Duration> dList = toDurationList(f2, true);
