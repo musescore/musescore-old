@@ -1075,7 +1075,7 @@ void Chord::layoutStem()
             switch(hookIdx) {
                   case 3: normalStemLen += small() ? .5  : 0.75; break; //32nd notes
                   case 4: normalStemLen += small() ? 1.0 : 1.5;  break; //64th notes
-                  //case 5: normalStemLen += small() ? 1.5 : 2.25; break; //128th notes not yet supported in MuseScore
+                  case 5: normalStemLen += small() ? 1.5 : 2.25; break; //128th notes
                   }
 
             if (_noteType != NOTE_NORMAL) {

@@ -1,4 +1,5 @@
 18.apr (ws)
+      - enable 128th note entry
       - fix #10261: playback cursor does not follow repeat
       - fix #10282: Undo Beam Properties change causes crash
 16.apr (ws)

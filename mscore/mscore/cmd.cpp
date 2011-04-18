@@ -2178,6 +2178,8 @@ void Score::cmd(const QAction* a)
                   padToggle(PAD_NOTE32);
             else if (cmd == "pad-note-64")
                   padToggle(PAD_NOTE64);
+            else if (cmd == "pad-note-128")
+                  padToggle(PAD_NOTE128);
             else if (cmd == "pad-rest")
                   padToggle(PAD_REST);
             else if (cmd == "pad-dot")

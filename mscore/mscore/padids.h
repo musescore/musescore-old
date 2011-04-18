@@ -28,6 +28,7 @@ enum {
       PAD_NOTE16,
       PAD_NOTE32,
       PAD_NOTE64,
+      PAD_NOTE128,
       //--------------------
       PAD_REST,
       PAD_DOT,
