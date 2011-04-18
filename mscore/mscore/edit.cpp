@@ -150,10 +150,8 @@ Rest* Score::addRest(int tick, int track, Duration d, Tuplet* tuplet)
       {
       Measure* measure = tick2measure(tick);
       Rest* rest       = new Rest(this, d);
-      if (d.type() == Duration::V_MEASURE) {
-            Fraction timeStretch = staff(track/VOICES)->timeStretch(tick);
-            rest->setDuration(measure->len() / timeStretch);
-            }
+      if (d.type() == Duration::V_MEASURE)
+            rest->setDuration(measure->stretchedLen(staff(track/VOICES)));
       else
             rest->setDuration(d.fraction());
       rest->setTrack(track);
@@ -170,10 +168,8 @@ Rest* Score::addRest(int tick, int track, Duration d, Tuplet* tuplet)
 Rest* Score::addRest(Segment* s, int track, Duration d, Tuplet* tuplet)
       {
       Rest* rest = new Rest(this, d);
-      if (d.type() == Duration::V_MEASURE) {
-            Fraction timeStretch = staff(track/VOICES)->timeStretch(s->tick());
-            rest->setDuration(s->measure()->len() / timeStretch);
-            }
+      if (d.type() == Duration::V_MEASURE)
+            rest->setDuration(s->measure()->stretchedLen(staff(track/VOICES)));
       else
             rest->setDuration(d.fraction());
       rest->setTrack(track);
@@ -249,6 +245,8 @@ Rest* Score::setRest(int tick, int track, Fraction l, bool useDots, Tuplet* tupl
       Measure* measure = tick2measure(tick);
       Rest* r = 0;
 
+printf("setRest() %d/%d\n", l.numerator(), l.denominator());
+
       while (!l.isZero()) {
             //
             // divide into measures
@@ -283,14 +281,18 @@ Rest* Score::setRest(int tick, int track, Fraction l, bool useDots, Tuplet* tupl
                   continue;
                   }
 
-            Fraction timeStretch = staff(track/VOICES)->timeStretch(tick);
+            printf("set rest %d/%d  -> measure %d/%d\n",
+               f.numerator(), f.denominator(),
+               measure->timesig().numerator(), measure->timesig().denominator()
+               );
 
             if ((measure->timesig() == measure->len())   // not in pickup measure
                && (measure->tick() == tick)
-               && ((measure->timesig() / timeStretch) == f)
+               // && ((measure->timesig() / timeStretch) == f)
+               && (measure->timesig() == f)
                && (f < Duration(Duration::V_BREVE).fraction())) {
                   Rest* rest = addRest(tick, track, Duration(Duration::V_MEASURE), tuplet);
-                  tick += rest->actualTicks();
+                  tick += measure->timesig().ticks();
                   if (r == 0)
                         r = rest;
                   }
@@ -298,9 +300,15 @@ Rest* Score::setRest(int tick, int track, Fraction l, bool useDots, Tuplet* tupl
                   //
                   // compute list of durations which will fit l
                   //
-                  QList<Duration> dList = toDurationList(f, useDots);
+
+                  Fraction ff = f / staff(track/VOICES)->timeStretch(tick);
+printf(" create duration list from %d/%d\n", ff.numerator(), ff.denominator());
+                  QList<Duration> dList = toDurationList(ff, useDots);
                   if (dList.isEmpty())
                         return 0;
+                  foreach(Duration d, dList) {
+                        printf("    duration %d/%d\n", d.fraction().numerator(), d.fraction().denominator());
+                        }
 
                   Rest* rest = 0;
                   if (((tick - measure->tick()) % dList[0].ticks()) == 0) {
@@ -1402,6 +1410,10 @@ void Score::cmdDeleteSelection()
       if (selection().state() == SEL_RANGE) {
             Segment* s1 = selection().startSegment();
             Segment* s2 = selection().endSegment();
+
+            bool fullMeasure = (s1->measure()->first(SegChordRest) == s1)
+                               && (s2->segmentType() == SegEndBarLine);
+
             int tick2   = s2 ? s2->tick() : INT_MAX;
             int track1  = selection().staffStart() * VOICES;
             int track2  = selection().staffEnd() * VOICES;
@@ -1467,8 +1479,20 @@ void Score::cmdDeleteSelection()
                               f += cr->duration();
                               }
                         }
-                  if (f.isValid() && !f.isZero())
-                        setRest(tick, track, f, false, tuplet);
+                  if (f.isValid() && !f.isZero()) {
+                        if (fullMeasure) {
+                              // handle this as special case to be able to
+                              // fix broken measures:
+                              for (Measure* m = s1->measure(); m; m = m->nextMeasure()) {
+                                    setRest(m->tick(), track, Fraction(m->len()), false, 0);
+                                    if (m == s2->measure())
+                                          break;
+                                    }
+                              }
+                        else {
+                              setRest(tick, track, f, false, tuplet);
+                              }
+                        }
                   }
             }
       else {

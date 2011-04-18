@@ -168,6 +168,7 @@ class Measure : public MeasureBase {
       Fraction timesig() const             { return _timesig;     }
       void setTimesig(const Fraction& f)   { _timesig = f;        }
       Fraction len() const                 { return _len;         }
+      Fraction stretchedLen(Staff*) const;
       void setLen(const Fraction& f)       { _len = f;            }
       virtual int ticks() const            { return _len.ticks(); }
 

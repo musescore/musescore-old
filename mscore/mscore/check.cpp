@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id:$
 //
-//  Copyright (C) 2010 Werner Schweer and others
+//  Copyright (C) 2010-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -25,6 +25,7 @@
 #include "chordrest.h"
 #include "rest.h"
 #include "segment.h"
+#include "staff.h"
 
 //---------------------------------------------------------
 //   checkSlurs
@@ -101,62 +102,62 @@ printf("checkScore: remove empty ChordRest segment\n");
                   }
             s = ns;
             }
-#if 0
+
       checkSlurs();
       checkTuplets();
 
       for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
             int track = staffIdx * VOICES;
-            int tick = 0;
-            for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
-                  for (Segment* s = m->first(SegChordRest); s; s = s->next(SegChordRest)) {
-                        if (!s->element(track))
-                              continue;
-                        ChordRest* cr = static_cast<ChordRest*>(s->element(track));
-                        if (s->tick() != tick) {
-                              printf("Chord/Rest at tick %d(%d) staff %d is missing (len = %d)\n",
-                                 tick, s->tick(), staffIdx, cr->tick() - tick);
-                              if (cr->tick() > tick) {
-                                    int ttick = tick;
-                                    int ticks = cr->tick() - tick;
-                                    while (ticks > 0) {
-                                          Measure* m = tick2measure(ttick);
-                                          int len = ticks;
-                                          // split notes on measure boundary
-                                          if ((ttick + len) > m->tick() + m->ticks())
-                                                len = m->tick() + m->ticks() - ttick;
-                                          QList<Duration> dl = toDurationList(Fraction::fromTicks(len), true);
-                                          foreach(Duration d, dl) {
-                                                Rest* rest = new Rest(this);
-                                                rest->setDurationType(d);
-                                                rest->setDuration(d.fraction());
-                                                rest->setTrack(track);
-                                                Segment* s = m->getSegment(rest, ttick);
-                                                s->add(rest);
-                                                ttick += rest->ticks();
-                                                }
-                                          ticks -= len;
+            int tick  = 0;
+            Staff* st = staff(staffIdx);
+            for (Segment* s = firstMeasure()->first(SegChordRest); s; s = s->next1(SegChordRest)) {
+                  ChordRest* cr = static_cast<ChordRest*>(s->element(track));
+                  if (!cr)
+                        continue;
+                  if (s->tick() != tick) {
+                        printf("Chord/Rest at tick %d(%d) staff %d is missing (len = %d)\n",
+                           tick, s->tick(), staffIdx, cr->tick() - tick);
+                        if (cr->tick() > tick) {
+                              int ttick = tick;
+                              int ticks = cr->tick() - tick;
+
+                              Fraction f = Fraction::fromTicks(ticks) / st->timeStretch(ttick);
+                              printf("  insert %d/%d\n", f.numerator(), f.denominator());
+
+                              while (ticks > 0) {
+                                    Measure* m = tick2measure(ttick);
+                                    int len    = ticks;
+                                    // split notes on measure boundary
+                                    if ((ttick + len) > m->tick() + m->ticks())
+                                          len = m->tick() + m->ticks() - ttick;
+                                    Fraction timeStretch = st->timeStretch(ttick);
+                                    Fraction ff          = Fraction::fromTicks(len);
+printf("    - insert %d/%d\n", ff.numerator(), ff.denominator());
+                                    if (ff.numerator() == 0)
+                                          break;
+                                    Fraction fff = ff / timeStretch;
+
+                                    QList<Duration> dl = toDurationList(fff, true);
+                                    foreach(Duration d, dl) {
+                                          Rest* rest = new Rest(this);
+                                          rest->setDurationType(d);
+                                          rest->setDuration(d.fraction());
+                                          rest->setColor(Qt::red);
+printf("    -   Rest %d/%d\n", d.fraction().numerator(), d.fraction().denominator());
+                                          rest->setTrack(track);
+                                          Segment* s = m->getSegment(rest, ttick);
+                                          s->add(rest);
+                                          ttick += (d.fraction() * timeStretch).ticks();
                                           }
+                                    ticks -= len;
                                     }
-                              tick = s->tick();
                               }
-                        Tuplet* t = cr->tuplet();
-                        int ticks;
-                        if (t) {
-                              while (t->tuplet())
-                                    t = t->tuplet();
-                              ticks = t->ticks();
-                              DurationElement* de = t->elements().back();
-                              while (de->type() == TUPLET)
-                                    de = static_cast<Tuplet*>(de)->elements().back();
-                              s = static_cast<ChordRest*>(de)->segment();
-                              }
-                        else
-                              ticks = cr->ticks();
-                        tick += ticks;
+                        tick = s->tick();
                         }
+                  Fraction timeStretch = staff(staffIdx)->timeStretch(tick);
+                  Fraction f = cr->globalDuration() * timeStretch;
+                  tick += f.ticks();
                   }
             }
-#endif
       }
 
