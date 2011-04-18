@@ -1059,26 +1059,23 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
 
                   //  extend stem to farest beam segment
                   qreal x = x2 - parent()->canvasPos().x();
-                  QLineF* bs = 0;
                   foreach(QLineF* l, beamSegments) {
                         if ((l->x1() <= x) && (l->x2() > x)) {
+                              double dx = x - l->x1();
+                              double dy = dx * slope;
+                              double yy = l->y1() + dy;
+
                               if (chordUp) {
-                                    if (l->y1() < y) {
-                                          bs = l;
-                                          y  = l->y1();
-                                          }
+                                    if (yy < y)
+                                          y  = yy;
                                     }
                               else {
-                                    if (l->y1() > y) {
-                                          bs = l;
-                                          y = l->y1();
-                                          }
+                                    if (yy > y)
+                                          y = yy;
                                     }
                               }
                         }
-                  double dx = x2 - parent()->canvasPos().x() - bs->x1();
-                  double dy = dx * slope;
-                  double y2 = bs->y1() + dy + canvPos.y();
+                  double y2 = y + canvPos.y();
                   double stemLen = chordUp ? (y1 - y2) : (y2 - y1);
 
                   stem->setLen(stemLen);
