@@ -621,16 +621,19 @@ void Note::write(Xml& xml) const
             _accidental->write(xml);
       _el.write(xml);
       int dots = chord()->dots();
-      bool hasUserModifiedDots = false;
-      for (int i = 0; i < dots; ++i) {
-            if (!_dots[i]->userOff().isNull()) {
-                  hasUserModifiedDots = true;
-                  break;
+      if (dots) {
+            bool hasUserModifiedDots = false;
+            for (int i = 0; i < dots; ++i) {
+                  if (!_dots[i]->userOff().isNull() || !_dots[i]->visible()
+                     || _dots[i]->color() != Qt::black) {
+                        hasUserModifiedDots = true;
+                        break;
+                        }
                   }
-            }
-      if (hasUserModifiedDots) {
-            for (int i = 0; i < dots; ++i)
-                  _dots[i]->write(xml);
+            if (hasUserModifiedDots) {
+                  for (int i = 0; i < dots; ++i)
+                        _dots[i]->write(xml);
+                  }
             }
 
       if (_tieFor)

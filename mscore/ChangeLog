@@ -1,4 +1,5 @@
 19.apr (ws)
+      - fix #10310: Dot of dotted note cannot be made invisible
       - fixes for pre 2.0 score compatibility
 18.apr (ws)
       - enable 128th note entry

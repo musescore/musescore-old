@@ -328,6 +328,7 @@ QLineF Symbol::dragAnchor() const
 
 bool Symbol::genPropertyMenu(QMenu* popup) const
       {
+      Element::genPropertyMenu(popup);
       QAction* a = popup->addAction(tr("symbol editor"));
       a->setData("edit");
       return true;
