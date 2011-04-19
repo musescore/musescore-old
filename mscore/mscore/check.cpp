@@ -106,6 +106,7 @@ printf("checkScore: remove empty ChordRest segment\n");
       checkSlurs();
       checkTuplets();
 
+      ChordRest* lcr;
       for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
             int track = staffIdx * VOICES;
             int tick  = 0;
@@ -115,8 +116,21 @@ printf("checkScore: remove empty ChordRest segment\n");
                   if (!cr)
                         continue;
                   if (s->tick() != tick) {
-                        printf("Chord/Rest at tick %d(%d) staff %d is missing (len = %d)\n",
-                           tick, s->tick(), staffIdx, cr->tick() - tick);
+                        if (lcr) {
+                              Fraction timeStretch = st->timeStretch(lcr->tick());
+                              Fraction f = cr->globalDuration() * timeStretch;
+                              printf("Chord/Rest gap at tick %d(%s+%d)-%d(%s) staffIdx %d measure %d (len = %d)\n",
+                                 tick, lcr->name(), f.ticks(),
+                                 s->tick(), cr->name(), staffIdx, cr->measure()->no(),
+                                 cr->tick() - tick);
+                              }
+                        else {
+                              printf("Chord/Rest gap at tick %d-%d(%s) staffIdx %d measure %d (len = %d)\n",
+                                 tick,
+                                 s->tick(), cr->name(), staffIdx, cr->measure()->no(),
+                                 cr->tick() - tick);
+                              }
+#if 0
                         if (cr->tick() > tick) {
                               int ttick = tick;
                               int ticks = cr->tick() - tick;
@@ -152,11 +166,14 @@ printf("    -   Rest %d/%d\n", d.fraction().numerator(), d.fraction().denominato
                                     ticks -= len;
                                     }
                               }
+#endif
                         tick = s->tick();
                         }
-                  Fraction timeStretch = staff(staffIdx)->timeStretch(tick);
+                  Fraction timeStretch = st->timeStretch(tick);
                   Fraction f = cr->globalDuration() * timeStretch;
-                  tick += f.ticks();
+//                  printf("%s %d + %d = %d\n", cr->name(), tick, f.ticks(), tick + f.ticks());
+                  tick      += f.ticks();
+                  lcr        = cr;
                   }
             }
       }

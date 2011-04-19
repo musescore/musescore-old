@@ -1455,10 +1455,10 @@ void ExportLy::handlePreInstruction(Element * el)
 		    tekst = (Text*) instruction;
 		    if (wholemeasurerest >=1) writeMeasuRestNum();
 		    bool ok = false;
-		    int dec=0;
+		    // int dec=0;
 		    QString c;
 		    c=tekst->getText();
-		    dec = c.toInt(&ok, 10);
+		    // dec = c.toInt(&ok, 10);
 		    if (ok) rehearsalnumbers=true;
 		    Element* elm = 0;
     		    foundJoM = checkJumpOrMarker(measurenumber, true, elm); //true means at the start of measure.
@@ -1773,8 +1773,8 @@ void ExportLy::jumpAtMeasureStop(Measure* m)
 	  {
 	    Element* dir = *ci;
 	    int tp = dir->type();
-	    bool end, start;
-	    start=true;
+	    bool end; // start;
+	    // start=true;
 	    end=false;
 
 	    if (tp == JUMP)
@@ -3936,7 +3936,7 @@ void ExportLy::writeVoiceMeasure(MeasureBase* mb, Staff* staff, int staffInd, in
 		 cout << "at tick: " << keytick << "\n";
 		 KeyList* kl = score->staff(staffInd)-> keymap();
 		 KeySigEvent key = kl->key(keytick);
-		 ciKeyList ci = kl->find(keytick);
+//		 ciKeyList ci = kl->find(keytick);
 		 //
 		 //		 if (ci != kl->end())
 		 //     {
