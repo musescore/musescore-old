@@ -1,3 +1,5 @@
+19.apr (ws)
+      - fixes for pre 2.0 score compatibility
 18.apr (ws)
       - enable 128th note entry
       - fix #10261: playback cursor does not follow repeat

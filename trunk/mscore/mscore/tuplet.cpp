@@ -564,8 +564,8 @@ void Tuplet::read(QDomElement e, const QList<Tuplet*>& tuplets, const QList<Slur
             Duration d;
             d.setVal(bl);
             _baseLen = d;
-printf("Tuplet base len %d/%d\n", d.fraction().numerator(), d.fraction().denominator());
-printf("   %s  dots %d, %d/%d\n", qPrintable(d.name()), d.dots(), _ratio.numerator(), _ratio.denominator());
+// printf("Tuplet base len %d/%d\n", d.fraction().numerator(), d.fraction().denominator());
+// printf("   %s  dots %d, %d/%d\n", qPrintable(d.name()), d.dots(), _ratio.numerator(), _ratio.denominator());
             d.setVal(bl * _ratio.denominator());
             setDuration(d.fraction());
             }

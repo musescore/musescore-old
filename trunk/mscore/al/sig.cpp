@@ -251,31 +251,31 @@ int SigEvent::read(QDomElement e, int fileDivision)
       int tick  = e.attribute("tick", "0").toInt();
       tick      = tick * AL::division / fileDivision;
 
-      int nominator;
+      int numerator;
       int denominator;
       int denominator2 = -1;
-      int nominator2   = -1;
+      int numerator2   = -1;
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             int i = e.text().toInt();
 
             if (tag == "nom")
-                  nominator = i;
+                  numerator = i;
             else if (tag == "denom")
                   denominator = i;
             else if (tag == "nom2")
-                  nominator2 = i;
+                  numerator2 = i;
             else if (tag == "denom2")
                   denominator2 = i;
             else
                   domError(e);
             }
-      if ((nominator2 == -1) || (denominator2 == -1)) {
-            nominator2   = nominator;
+      if ((numerator2 == -1) || (denominator2 == -1)) {
+            numerator2   = numerator;
             denominator2 = denominator;
             }
-      _timesig = Fraction(nominator, denominator);
-      _nominal = Fraction(nominator2, denominator2);
+      _timesig = Fraction(numerator, denominator);
+      _nominal = Fraction(numerator2, denominator2);
       return tick;
       }
 

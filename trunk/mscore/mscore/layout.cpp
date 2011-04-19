@@ -1299,7 +1299,7 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                   // locate a time sig. in the next measure and, if found,
                   // check if it has cout. sig. turned off
                   TimeSig* ts;
-                  Segment* tss = nm->findSegment(SegTimeSig, tick);
+                  Segment* tss         = nm->findSegment(SegTimeSig, tick);
                   bool showCourtesySig = tss && styleB(ST_genCourtesyTimesig);
                   if (showCourtesySig) {
                         ts = static_cast<TimeSig*>(tss->element(0));

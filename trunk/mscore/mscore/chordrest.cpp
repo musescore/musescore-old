@@ -382,7 +382,12 @@ bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets, con
       else if (tag == "durationType") {
             setDurationType(val);
             if (durationType().type() != Duration::V_MEASURE) {
-                  setDuration(durationType().fraction());
+                  if ((type() == REST) && (durationType()==Duration::V_WHOLE && duration() != Fraction(4.4))) {
+                        // old pre 2.0 scores:
+                        setDurationType(Duration::V_MEASURE);
+                        }
+                  else
+                        setDuration(durationType().fraction());
                   }
             else {
                   if (score()->mscVersion() < 115) {
@@ -397,6 +402,7 @@ bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets, con
             int mticks = score()->sigmap()->timesig(score()->curTick).timesig().ticks();
             if (i == 0)
                   i = mticks;
+            // if ((type() == REST) && (mticks == i || (durationType()==Duration::V_WHOLE && mticks != 1920))) {
             if ((type() == REST) && (mticks == i)) {
                   setDurationType(Duration::V_MEASURE);
                   setDuration(Fraction::fromTicks(i));
