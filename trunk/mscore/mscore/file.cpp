@@ -489,9 +489,9 @@ bool Score::saveAs(bool saveCopy)
                   static const char* extensions[] = {
                         "mscz", "mscx", "xml", "mxl", "mid", "pdf", "ps", "png", "svg", "ly",
 #ifdef HAS_AUDIOFILE
-                        "wav", "flac", "ogg"
+                        "wav", "flac", "ogg",
 #endif
-                        , "mp3"
+                        "mp3"
                         };
                   ext = extensions[idx];
                   }
