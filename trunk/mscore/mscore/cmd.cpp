@@ -701,6 +701,9 @@ Fraction Score::makeGap(ChordRest* cr, const Fraction& _sd, Tuplet* tuplet)
       {
       int track        = cr->track();
 printf("makeGap %s at %d track %d\n", qPrintable(_sd.print()), cr->tick(), track);
+      if (_sd.numerator() == 0)
+            abort();
+
       Measure* measure = cr->measure();
       setLayout(measure);
       Fraction akkumulated;

@@ -34,6 +34,7 @@
 #include "undo.h"
 #include "cleflist.h"
 #include "timesig.h"
+#include "instrtemplate.h"
 
 //---------------------------------------------------------
 //   idx
@@ -199,7 +200,7 @@ Staff::~Staff()
 
 ClefTypeList Staff::clefTypeList(int tick) const
       {
-      ClefTypeList ctl(CLEF_G, CLEF_G);
+      ClefTypeList ctl = _initialClef;
       int track  = idx() * VOICES;
       for (Segment* s = score()->firstSegment(); s; s = s->next1()) {
             if (s->tick() > tick)
@@ -693,5 +694,46 @@ void Staff::setStaffType(StaffType* st)
                   case PERCUSSION_STAFF: ct = CLEF_PERC; break;
                   }
             }
+      }
+
+//---------------------------------------------------------
+//   init
+//---------------------------------------------------------
+
+void Staff::init(const InstrumentTemplate* t, int cidx)
+      {
+      if (cidx > MAX_STAVES) {
+            setLines(5);
+            setSmall(false);
+            setInitialClef(t->clefIdx[0]);
+            }
+      else {
+            if (useTablature())
+                  setLines(t->tablature->strings());
+            else
+                  setLines(t->staffLines[cidx]);
+            setSmall(t->smallStaff[cidx]);
+            setInitialClef(t->clefIdx[cidx]);
+            }
+
+      StaffType* st;
+      if (t->useTablature && t->tablature)
+            st = score()->staffTypes().at(TAB_STAFF_TYPE);
+      else if (t->useDrumset)
+            st = score()->staffTypes().at(PERCUSSION_STAFF_TYPE);
+      else
+            st = score()->staffTypes().at(PITCHED_STAFF_TYPE);
+
+      if (cidx == 0) {
+            setBracket(0, t->bracket);
+            setBracketSpan(0, t->staves);
+            }
+      if (t->staffLines[cidx] != st->lines()) {
+            // create new staff type:
+            st = st->clone();
+            st->setLines(t->staffLines[cidx]);
+            score()->staffTypes().append(st);
+            }
+      setStaffType(st);
       }
 

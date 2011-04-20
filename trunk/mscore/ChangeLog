@@ -1,4 +1,5 @@
 20.apr (ws)
+      - fix #7883: Double click on drum palette causes crash
       - fix: Some issues with time sigs (patch from Miwarre)
 19.apr (ws)
       - delay update of bsp tree

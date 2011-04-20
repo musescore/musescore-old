@@ -241,11 +241,14 @@ Element* Rest::drop(const DropData& data)
                   NoteVal nval;
                   nval.pitch = n->pitch();
                   nval.headGroup = n->headGroup();
-                  Segment* seg = score()->setNoteRest(this, track(), nval, c->duration(), dir);
-                  if (seg) {
-                        ChordRest* cr = static_cast<ChordRest*>(seg->element(track()));
-                        if (cr)
-                              score()->nextInputPos(cr, true);
+                  Fraction d = score()->inputState().duration().fraction();
+                  if (!d.isZero()) {
+                        Segment* seg = score()->setNoteRest(this, track(), nval, d, dir);
+                        if (seg) {
+                              ChordRest* cr = static_cast<ChordRest*>(seg->element(track()));
+                              if (cr)
+                                    score()->nextInputPos(cr, true);
+                              }
                         }
                   delete e;
                   }

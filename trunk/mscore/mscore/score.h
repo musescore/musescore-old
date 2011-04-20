@@ -372,6 +372,7 @@ class Score : public QObject {
       void updateVelo();
       QString createDefaultFileName();
       void addAudioTrack();
+      void parseVersion(const QString&);
 
    signals:
       void selectionChanged(int);

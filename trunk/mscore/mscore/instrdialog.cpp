@@ -609,26 +609,9 @@ void MuseScore::editInstrList()
                         Staff* staff       = new Staff(cs, part, rstaff);
                         sli->staff         = staff;
                         staff->setRstaff(rstaff);
-                        StaffType* st;
-                        if (t->useTablature)
-                              st = cs->staffTypes().at(TAB_STAFF_TYPE);
-                        else
-                              st = cs->staffTypes().at(PITCHED_STAFF_TYPE);
-                        if (t->staffLines[cidx] != st->lines()) {
-                              st = st->clone();
-                              st->setLines(t->staffLines[cidx]);
-                              cs->staffTypes().append(st);
-                              }
 
-                        staff->setSmall(t->smallStaff[cidx]);
+                        staff->init(t, cidx);
 
-                        // TODO: find out the right key signature
-                        // staff->setKey(0, nKey);
-
-                        if (cidx == 0) {
-                              staff->setBracket(0, t->bracket);
-                              staff->setBracketSpan(0, t->staves);
-                              }
                         cs->undoInsertStaff(staff, staffIdx + rstaff);
                         if (sli->linked()) {
                               // TODO: link staff
