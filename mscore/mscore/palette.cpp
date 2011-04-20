@@ -482,14 +482,6 @@ void Palette::paintEvent(QPaintEvent* event)
       p.fillRect(event->rect(), p.background().color());
       for (int idx = 0; idx < cells.size(); ++idx) {
             QRect r = idxRect(idx);
-            if (!cells[idx]->tag.isEmpty()) {
-                  p.setPen(Qt::blue);
-                  QFont f(p.font());
-                  f.setPointSize(12);
-                  p.setFont(f);
-                  p.drawText(r, Qt::AlignLeft | Qt::AlignTop, cells[idx]->tag);
-                  }
-
             p.setPen(pen);
             if (idx == selectedIdx)
                   p.fillRect(r, palette().color(QPalette::Normal, QPalette::Highlight));
@@ -497,6 +489,17 @@ void Palette::paintEvent(QPaintEvent* event)
                   p.fillRect(r, p.background().color().light(118));
             if (cells.isEmpty() || cells[idx] == 0)
                   continue;
+
+            if (!cells[idx]->tag.isEmpty()) {
+                  p.setPen(Qt::darkGray);
+                  QFont f(p.font());
+                  f.setPointSize(12);
+                  p.setFont(f);
+                  p.drawText(r, Qt::AlignLeft | Qt::AlignTop, cells[idx]->tag);
+                  }
+
+            p.setPen(pen);
+
             Element* el = cells[idx]->element;
             if (el == 0)
                   continue;
@@ -542,8 +545,20 @@ void Palette::paintEvent(QPaintEvent* event)
                   cells[idx]->x = sx;
                   cells[idx]->y = sy;
 
-                  p.setPen(QPen(palette().color(QPalette::Normal,
-                     (idx == selectedIdx) ? QPalette::HighlightedText : QPalette::Text)));
+                  QColor color;
+                  if (idx != selectedIdx) {
+                        // show voice colors for notes
+                        if (el->type() == CHORD) {
+                              el->setSelected(true);
+                              color = el->curColor();
+                              }
+                        else
+                              color = palette().color(QPalette::Normal, QPalette::Text);
+                        }
+                  else
+                        color = palette().color(QPalette::Normal, QPalette::HighlightedText);
+
+                  p.setPen(QPen(color));
                   el->scanElements(&p, paintPaletteElement);
                   p.restore();
                   }

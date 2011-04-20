@@ -724,6 +724,8 @@ void Staff::init(const InstrumentTemplate* t, int cidx)
       else
             st = score()->staffTypes().at(PITCHED_STAFF_TYPE);
 
+printf("init %d %d\n", _initialClef._concertClef, _initialClef._transposingClef);
+
       if (cidx == 0) {
             setBracket(0, t->bracket);
             setBracketSpan(0, t->staves);
