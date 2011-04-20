@@ -1,3 +1,5 @@
+20.apr (la)
+      - fix #10335: importCharsetList does not appear
 18.apr (la)
       - fix #10264: Select a flag and enter a note causes crash
 12.apr (la)

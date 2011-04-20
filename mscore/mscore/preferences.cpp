@@ -481,8 +481,6 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
    : QDialog(parent)
       {
       setupUi(this);
-      characterSetGroupBox->setVisible(false);
-
       shortcutsChanged        = false;
 
 #ifndef USE_JACK
