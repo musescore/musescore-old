@@ -836,18 +836,19 @@ void Score::processSystemHeader(Measure* m, bool isFirstSystem)
                         // create missing clef
                         //
                         hasClef = new Clef(this);
+                        hasClef->setClefType(staff->clefTypeList(tick));
                         hasClef->setTrack(i * VOICES);
-                        hasClef->setGenerated(true);
+                        // set first clef as "not generated" so it will be
+                        // saved in score file
+                        hasClef->setGenerated(tick != 0);
                         hasClef->setSmall(false);
                         hasClef->setMag(staff->mag());
                         Segment* s = m->getSegment(hasClef, tick);
                         s->add(hasClef);
                         m->setDirty();
                         }
-                  if (hasClef->generated()) {
-                        ClefTypeList ctl = staff->clefTypeList(tick);
-                        hasClef->setClefType(ctl);
-                        }
+                  if (hasClef->generated())
+                        hasClef->setClefType(staff->clefTypeList(tick));
                   }
             else {
                   if (hasClef && hasClef->generated()) {

@@ -37,6 +37,7 @@ class PaletteScrollArea;
 struct PaletteCell {
       Element* element;
       QString name;
+      QString tag;
       bool drawStaff;
       double x, y;
       int xoffset, yoffset;
@@ -167,6 +168,7 @@ class Palette : public QWidget {
       Q_OBJECT
 
       QString _name;
+      QString _tag;
       QList<PaletteCell*> cells;
 
       int hgrid, vgrid;
@@ -211,8 +213,8 @@ class Palette : public QWidget {
       Palette(QWidget* parent = 0);
       ~Palette();
 
-      void append(Element*, const QString& name);
-      void add(int idx, Element*, const QString& name);
+      void append(Element*, const QString& name, QString tag = QString());
+      void add(int idx, Element*, const QString& name, const QString tag = QString());
       void append(int sym);
 
       void setGrid(int, int);

@@ -295,6 +295,8 @@ class MuseScore : public QMainWindow {
       QFileDialog* loadSoundFontDialog;
       QFileDialog* loadScanDialog;
       QFileDialog* loadAudioDialog;
+      QFileDialog* loadDrumsetDialog;
+      QFileDialog* saveDrumsetDialog;
 
       QDialog* editRasterDialog;
       QAction* hRasterAction;
@@ -499,6 +501,7 @@ class MuseScore : public QMainWindow {
       QString getSoundFont(const QString&);
       QString getScanFile(const QString&);
       QString getAudioFile(const QString&);
+      QString getDrumsetFilename(bool open);
 
       bool hRaster() const { return hRasterAction->isChecked(); }
       bool vRaster() const { return vRasterAction->isChecked(); }
