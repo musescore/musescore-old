@@ -147,7 +147,8 @@ void DrumTools::setDrumset(Score* s, Staff* st, Drumset* ds)
             stem->setLen((up ? -3.0 : 3.0) * _spatium);
             chord->setStem(stem);
             stem->setPos(note->stemPos(up));
-            drumPalette->append(chord, qApp->translate("drumset", qPrintable(drumset->name(pitch))));
+            QString shortcut = QChar(drumset->shortcut(pitch));
+            drumPalette->append(chord, qApp->translate("drumset", qPrintable(drumset->name(pitch))), shortcut);
             ++i;
             }
       }

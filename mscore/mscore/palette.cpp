@@ -374,13 +374,14 @@ void Palette::leaveEvent(QEvent*)
 //    append element to palette
 //---------------------------------------------------------
 
-void Palette::append(Element* s, const QString& name)
+void Palette::append(Element* s, const QString& name, QString tag)
       {
       PaletteCell* cell = new PaletteCell;
 
       cells.append(cell);
       cell->element   = s;
       cell->name      = name;
+      cell->tag       = tag;
       cell->drawStaff = needsStaff(s);
       cell->xoffset   = 0;
       cell->yoffset   = 0;
@@ -404,7 +405,7 @@ void Palette::append(int symIdx)
 //   add
 //---------------------------------------------------------
 
-void Palette::add(int idx, Element* s, const QString& name)
+void Palette::add(int idx, Element* s, const QString& name, QString tag)
       {
       PaletteCell* cell = new PaletteCell;
 
@@ -418,6 +419,7 @@ void Palette::add(int idx, Element* s, const QString& name)
       cells[idx]      = cell;
       cell->element   = s;
       cell->name      = name;
+      cell->tag       = tag;
       cell->drawStaff = needsStaff(s);
       cell->xoffset   = 0;
       cell->yoffset   = 0;
@@ -480,6 +482,14 @@ void Palette::paintEvent(QPaintEvent* event)
       p.fillRect(event->rect(), p.background().color());
       for (int idx = 0; idx < cells.size(); ++idx) {
             QRect r = idxRect(idx);
+            if (!cells[idx]->tag.isEmpty()) {
+                  p.setPen(Qt::blue);
+                  QFont f(p.font());
+                  f.setPointSize(12);
+                  p.setFont(f);
+                  p.drawText(r, Qt::AlignLeft | Qt::AlignTop, cells[idx]->tag);
+                  }
+
             p.setPen(pen);
             if (idx == selectedIdx)
                   p.fillRect(r, palette().color(QPalette::Normal, QPalette::Highlight));
@@ -797,6 +807,8 @@ void Palette::write(Xml& xml, const QString& name) const
                   xml.tag("xoffset", cells[i]->xoffset);
             if (cells[i]->yoffset)
                   xml.tag("yoffset", cells[i]->yoffset);
+            if (!cells[i]->tag.isEmpty())
+                  xml.tag("tag", cells[i]->tag);
             cells[i]->element->write(xml);
             xml.etag();
             }
@@ -903,6 +915,8 @@ void Palette::read(QDomElement e)
                                     xoffset = ee.text().toInt();
                               else if (tag == "yoffset")
                                     yoffset = ee.text().toInt();
+                              else if (tag == "tag")
+                                    tag = ee.text();
                               else if (tag == "Image") {
                                     // look ahead for image type
                                     QString path;

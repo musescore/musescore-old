@@ -2480,7 +2480,7 @@ QString MuseScore::getStyleFilename(bool open)
             dialog = saveStyleDialog;
             }
       // setup side bar urls
-      saveStyleDialog->setSidebarUrls(urls);
+      dialog->setSidebarUrls(urls);
 
       if (dialog->exec()) {
             QStringList result = dialog->selectedFiles();
@@ -2770,6 +2770,84 @@ QString MuseScore::getFotoFilename()
 
       if (saveImageDialog->exec()) {
             QStringList result = saveImageDialog->selectedFiles();
+            return result.front();
+            }
+      return QString();
+      }
+
+//---------------------------------------------------------
+//   getDrumsetFilename
+//---------------------------------------------------------
+
+QString MuseScore::getDrumsetFilename(bool open)
+      {
+      QString title;
+      QString filter;
+      if (open) {
+            title  = tr("MuseScore: Load Drumset");
+            filter = tr("MuseScore Drumset (*.drm);;All Files (*)");
+            }
+      else {
+            title  = tr("MuseScore: Save Drumset");
+            filter = tr("MuseScore Drumset File (*.drm)");
+            }
+
+      if (preferences.nativeDialogs) {
+            QString fn;
+            if (open)
+                  fn = QFileDialog::getOpenFileName(this, title, QString("."), filter);
+            else
+                  fn = QFileDialog::getSaveFileName(this, title, QString("."), filter);
+            return fn;
+            }
+
+      QFileInfo myStyles(preferences.myStylesPath);
+      if (myStyles.isRelative())
+            myStyles.setFile(QDir::home(), preferences.myStylesPath);
+      QFileDialog* dialog;
+      QList<QUrl> urls;
+      QString home = QDir::homePath();
+      urls.append(QUrl::fromLocalFile(home));
+      urls.append(QUrl::fromLocalFile(myStyles.absoluteFilePath()));
+      urls.append(QUrl::fromLocalFile(QDir::currentPath()));
+
+      if (open) {
+            if (loadDrumsetDialog == 0) {
+                  loadDrumsetDialog = new QFileDialog(this);
+                  loadDrumsetDialog->setAcceptMode(QFileDialog::AcceptOpen);
+                  loadDrumsetDialog->setFileMode(QFileDialog::ExistingFile);
+                  loadDrumsetDialog->setOption(QFileDialog::DontUseNativeDialog, true);
+                  loadDrumsetDialog->setDirectory(".");
+
+                  QSettings settings;
+                  loadDrumsetDialog->restoreState(settings.value("loadDrumsetDialog").toByteArray());
+                  }
+            urls.append(QUrl::fromLocalFile(mscoreGlobalShare+"/styles"));
+            dialog = loadDrumsetDialog;
+            }
+      else {
+            if (saveDrumsetDialog == 0) {
+                  saveDrumsetDialog = new QFileDialog(this);
+                  saveDrumsetDialog->setAcceptMode(QFileDialog::AcceptSave);
+                  saveDrumsetDialog->setFileMode(QFileDialog::AnyFile);
+                  saveDrumsetDialog->setOption(QFileDialog::DontConfirmOverwrite, false);
+                  saveDrumsetDialog->setOption(QFileDialog::DontUseNativeDialog, true);
+                  saveDrumsetDialog->setLabelText(QFileDialog::Accept, tr("Save"));
+                  saveDrumsetDialog->setDirectory(".");
+
+                  QSettings settings;
+                  saveDrumsetDialog->restoreState(settings.value("saveDrumsetDialog").toByteArray());
+                  }
+            dialog = saveDrumsetDialog;
+            }
+      dialog->setWindowTitle(title);
+      dialog->setNameFilter(filter);
+
+      // setup side bar urls
+      dialog->setSidebarUrls(urls);
+
+      if (dialog->exec()) {
+            QStringList result = dialog->selectedFiles();
             return result.front();
             }
       return QString();

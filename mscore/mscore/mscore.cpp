@@ -382,6 +382,9 @@ MuseScore::MuseScore()
       loadAudioDialog       = 0;
       loadChordStyleDialog  = 0;
       saveChordStyleDialog  = 0;
+      loadDrumsetDialog     = 0;
+      saveDrumsetDialog     = 0;
+
       editRasterDialog      = 0;
       inChordEditor         = false;
 
@@ -2824,6 +2827,10 @@ void MuseScore::writeSettings()
             settings.setValue("loadScanDialog", loadScanDialog->saveState());
       if (loadAudioDialog)
             settings.setValue("loadAudioDialog", loadAudioDialog->saveState());
+      if (loadDrumsetDialog)
+            settings.setValue("loadDrumsetDialog", loadDrumsetDialog->saveState());
+      if (saveDrumsetDialog)
+            settings.setValue("saveDrumsetDialog", saveDrumsetDialog->saveState());
       }
 
 //---------------------------------------------------------

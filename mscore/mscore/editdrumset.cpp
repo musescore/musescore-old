@@ -319,11 +319,7 @@ void EditDrumset::updateExample()
 
 void EditDrumset::load()
       {
-      QString name = QFileDialog::getOpenFileName(
-         this, tr("MuseScore: Load Drumset"),
-         ".",
-         tr("MuseScore drumset (*.drm)")
-         );
+      QString name = mscore->getDrumsetFilename(true);
       if (name.isEmpty())
             return;
 
@@ -364,11 +360,7 @@ void EditDrumset::load()
 
 void EditDrumset::save()
       {
-      QString name = QFileDialog::getSaveFileName(
-         this, tr("MuseScore: Save Drumset"),
-         ".",
-         tr("MuseScore drumset (*.drm)")
-         );
+      QString name = mscore->getDrumsetFilename(false);
       if (name.isEmpty())
             return;
 
