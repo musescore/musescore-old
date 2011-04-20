@@ -2818,11 +2818,13 @@ void ChangeTimesig::flip()
       QString  s1    = timesig->zText();
       QString  s2    = timesig->nText();
       int      st    = timesig->subtype();
+      // setSubType() must come first, as it also calls setSig() with its own parameters
+      timesig->setSubtype(subtype);
       timesig->setShowCourtesySig(showCourtesy);
       timesig->setSig(actual);
       timesig->setStretch(stretch);
       timesig->setText(sz, sn);
-      timesig->setSubtype(subtype);
+//      timesig->setSubtype(subtype);
       showCourtesy = sc;
       actual       = f1;
       stretch      = f2;
