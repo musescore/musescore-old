@@ -38,12 +38,24 @@
 #include "part.h"
 #include "drumtools.h"
 #include "preferences.h"
+#include "segment.h"
 
 #ifdef Q_WS_MAC
 #define CONTROL_MODIFIER Qt::AltModifier
 #else
 #define CONTROL_MODIFIER Qt::ControlModifier
 #endif
+
+//---------------------------------------------------------
+//   drumset
+//---------------------------------------------------------
+
+Drumset* InputState::drumset() const
+      {
+      if (_segment == 0)
+            return 0;
+      return _segment->score()->staff(_track/VOICES)->part()->instr(_segment->tick())->drumset();
+      }
 
 //---------------------------------------------------------
 //   Canvas::editKey
@@ -314,7 +326,7 @@ void Score::setInputState(Element* e)
             }
 
       _is.setDrumNote(-1);
-      _is.setDrumset(0);
+//      _is.setDrumset(0);
       if (e->type() == NOTE) {
             Note* note    = static_cast<Note*>(e);
             Chord* chord  = note->chord();
@@ -352,7 +364,7 @@ void Score::setInputState(Element* e)
                         _is.setDrumNote(static_cast<Note*>(e)->pitch());
                   else
                         _is.setDrumNote(-1);
-                  _is.setDrumset(instr->drumset());
+//                  _is.setDrumset(instr->drumset());
                   }
             }
       mscore->updateInputState(this);

@@ -157,6 +157,8 @@ void initDrumset()
             smDrumset->drum(i).notehead = -1;   // invalid entry
             smDrumset->drum(i).line     = 0;
             smDrumset->drum(i).shortcut = 0;
+            smDrumset->drum(i).voice    = 0;
+            smDrumset->drum(i).stemDirection = UP;
             }
       smDrumset->drum(35) = DrumInstrument(QT_TRANSLATE_NOOP("drumset", "Acoustic Bass Drum"), HEAD_NORMAL,   7, DOWN, 1);
       smDrumset->drum(36) = DrumInstrument(QT_TRANSLATE_NOOP("drumset", "Bass Drum"),          HEAD_NORMAL,   7, DOWN, 1, Qt::Key_C);

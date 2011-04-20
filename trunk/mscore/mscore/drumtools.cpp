@@ -102,6 +102,8 @@ void MuseScore::showDrumTools(Drumset* drumset, Staff* staff)
 
 void DrumTools::setDrumset(Score* s, Staff* st, Drumset* ds)
       {
+      if (s == _score && staff == st && drumset == ds)
+            return;
       _score  = s;
       staff   = st;
       drumset = ds;
@@ -147,7 +149,10 @@ void DrumTools::setDrumset(Score* s, Staff* st, Drumset* ds)
             stem->setLen((up ? -3.0 : 3.0) * _spatium);
             chord->setStem(stem);
             stem->setPos(note->stemPos(up));
-            QString shortcut = QChar(drumset->shortcut(pitch));
+            int sc = drumset->shortcut(pitch);
+            QString shortcut;
+            if (sc)
+                  shortcut = QChar(sc);
             drumPalette->append(chord, qApp->translate("drumset", qPrintable(drumset->name(pitch))), shortcut);
             ++i;
             }
