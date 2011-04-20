@@ -79,24 +79,6 @@ Fraction DurationElement::globalDuration() const
       return f;
       }
 
-#if 0
-//---------------------------------------------------------
-//   ticks
-//---------------------------------------------------------
-
-int DurationElement::ticks() const
-      {
-      return globalDuration().ticks();
-#if 0
-      int ticks = duration().ticks();
-      for (Tuplet* t = tuplet(); t; t = t->tuplet()) {
-            ticks = ticks * t->ratio().denominator() / t->ratio().numerator();
-            }
-      return ticks;
-#endif
-      }
-#endif
-
 //---------------------------------------------------------
 //  actualTicks
 //---------------------------------------------------------
@@ -282,7 +264,9 @@ void ChordRest::writeProperties(Xml& xml) const
             if (lyrics)
                   lyrics->write(xml);
             }
-      Fraction t(staff()->timeStretch(xml.curTick) * globalDuration());
+      Fraction t(globalDuration());
+      if (staff())
+            t *= staff()->timeStretch(xml.curTick);
       xml.curTick += t.ticks();
       }
 

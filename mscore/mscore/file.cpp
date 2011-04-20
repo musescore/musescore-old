@@ -763,11 +763,6 @@ void MuseScore::newFile()
                                     s->add(keysig);
                                     }
                               }
-                        Clef* clef = new Clef(score);
-                        clef->setClefType(staff->initialClef());
-                        clef->setTrack(staffIdx * VOICES);
-                        Segment* segment = measure->getSegment(SegClef, 0);
-                        segment->add(clef);
                         }
                   if (staff->primaryStaff()) {
                         if (measure->timesig() != measure->len()) {
@@ -1285,6 +1280,58 @@ bool Score::loadMsc(QString name)
       }
 
 //---------------------------------------------------------
+//   parseVersion
+//---------------------------------------------------------
+
+void Score::parseVersion(const QString& val)
+      {
+      QRegExp re("(\\d+)\\.(\\d+)\\.(\\d+)");
+      int v1, v2, v3, rv1, rv2, rv3;
+      if (re.indexIn(VERSION) != -1) {
+            QStringList sl = re.capturedTexts();
+            if (sl.size() == 4) {
+                  v1 = sl[1].toInt();
+                  v2 = sl[2].toInt();
+                  v3 = sl[3].toInt();
+                  if (re.indexIn(val) != -1) {
+                        sl = re.capturedTexts();
+                        if (sl.size() == 4) {
+                              rv1 = sl[1].toInt();
+                              rv2 = sl[2].toInt();
+                              rv3 = sl[3].toInt();
+
+                              int currentVersion = v1 * 10000 + v2 * 100 + v3;
+                              int readVersion = rv1 * 10000 + rv2 * 100 + rv3;
+                              if (readVersion > currentVersion) {
+                                    printf("read future version\n");
+                                    }
+                              }
+                        }
+                  else {
+                        QRegExp re1("(\\d+)\\.(\\d+)");
+                        if (re1.indexIn(val) != -1) {
+                              sl = re.capturedTexts();
+                              if (sl.size() == 3) {
+                                    rv1 = sl[1].toInt();
+                                    rv2 = sl[2].toInt();
+
+                                    int currentVersion = v1 * 10000 + v2 * 100 + v3;
+                                    int readVersion = rv1 * 10000 + rv2 * 100;
+                                    if (readVersion > currentVersion) {
+                                          printf("read future version\n");
+                                          }
+                                    }
+                              }
+                        else
+                              printf("1cannot parse <%s>\n", qPrintable(val));
+                        }
+                  }
+            }
+      else
+            printf("2cannot parse <%s>\n", VERSION);
+      }
+
+//---------------------------------------------------------
 //   read1
 //    return true on success
 //---------------------------------------------------------
@@ -1314,36 +1361,8 @@ bool Score::read1(QDomElement e)
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         QString tag(ee.tagName());
                         QString val(ee.text());
-                        if (tag == "programVersion") {
-                              QRegExp re("(\\d+)\\.(\\d+)\\.(\\d+)");
-                              int v1, v2, v3, rv1, rv2, rv3;
-                              if (re.indexIn(VERSION) != -1) {
-                                    QStringList sl = re.capturedTexts();
-                                    if (sl.size() == 4) {
-                                          v1 = sl[1].toInt();
-                                          v2 = sl[2].toInt();
-                                          v3 = sl[3].toInt();
-                                          if (re.indexIn(val) != -1) {
-                                                sl = re.capturedTexts();
-                                                if (sl.size() == 4) {
-                                                      rv1 = sl[1].toInt();
-                                                      rv2 = sl[2].toInt();
-                                                      rv3 = sl[3].toInt();
-
-                                                      int currentVersion = v1 * 10000 + v2 * 100 + v3;
-                                                      int readVersion = rv1 * 10000 + rv2 * 100 + rv3;
-                                                      if (readVersion > currentVersion) {
-                                                            printf("read future version\n");
-                                                            }
-                                                      }
-                                                }
-                                          else
-                                                printf("1cannot parse <%s>\n", qPrintable(val));
-                                          }
-                                    }
-                              else
-                                    printf("2cannot parse <%s>\n", VERSION);
-                              }
+                        if (tag == "programVersion")
+                              parseVersion(val);
                         else if (tag == "programRevision")
                               ;
                         else if (tag == "Score") {
@@ -1419,36 +1438,8 @@ bool Score::read(QDomElement dScore)
                   _sigmap->read(ee, _fileDivision);
             else if (tag == "tempolist")        // obsolete
                   ;           // tempomap()->read(ee, _fileDivision);
-            else if (tag == "programVersion") {
-                  QRegExp re("(\\d+)\\.(\\d+)\\.(\\d+)");
-                  int v1, v2, v3, rv1, rv2, rv3;
-                  if (re.indexIn(VERSION) != -1) {
-                        QStringList sl = re.capturedTexts();
-                        if (sl.size() == 4) {
-                              v1 = sl[1].toInt();
-                              v2 = sl[2].toInt();
-                              v3 = sl[3].toInt();
-                              if (re.indexIn(val) != -1) {
-                                    sl = re.capturedTexts();
-                                    if (sl.size() == 4) {
-                                          rv1 = sl[1].toInt();
-                                          rv2 = sl[2].toInt();
-                                          rv3 = sl[3].toInt();
-
-                                          int currentVersion = v1 * 10000 + v2 * 100 + v3;
-                                          int readVersion    = rv1 * 10000 + rv2 * 100 + rv3;
-                                          if (readVersion > currentVersion) {
-                                                printf("read future version\n");
-                                                }
-                                          }
-                                    }
-                              else
-                                    printf("1cannot parse <%s>\n", qPrintable(val));
-                              }
-                        }
-                  else
-                        printf("2cannot parse <%s>\n", VERSION);
-                  }
+            else if (tag == "programVersion")
+                  parseVersion(val);
             else if (tag == "programRevision")
                   ;
             else if (tag == "Mag" || tag == "MagIdx" || tag == "xoff" || tag == "yoff") {

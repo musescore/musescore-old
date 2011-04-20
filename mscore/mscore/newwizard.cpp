@@ -353,33 +353,8 @@ void InstrumentWizard::createInstruments(Score* cs)
                   staff->setRstaff(rstaff);
                   ++rstaff;
 
-                  StaffType* st;
-                  if (t->useTablature && t->tablature)
-                        st = cs->staffTypes().at(TAB_STAFF_TYPE);
-                  else if (t->useDrumset)
-                        st = cs->staffTypes().at(PERCUSSION_STAFF_TYPE);
-                  else
-                        st = cs->staffTypes().at(PITCHED_STAFF_TYPE);
-                  staff->setStaffType(st);
+                  staff->init(t, cidx);
 
-                  staff->setInitialClef(staff->useTablature() ? CLEF_TAB : sli->clef());
-
-                  if (cidx > MAX_STAVES) {
-                        staff->setLines(5);
-                        staff->setSmall(false);
-                        // staff->setUseTablature(false);
-                        }
-                  else {
-                        if (staff->useTablature())
-                              staff->setLines(t->tablature->strings());
-                        else
-                              staff->setLines(t->staffLines[cidx]);
-                        staff->setSmall(t->smallStaff[cidx]);
-                        }
-                  if (cidx == 0) {
-                        staff->setBracket(0, t->bracket);
-                        staff->setBracketSpan(0, t->staves);
-                        }
                   part->staves()->push_back(staff);
                   cs->staves().insert(staffIdx + rstaff, staff);
                   }

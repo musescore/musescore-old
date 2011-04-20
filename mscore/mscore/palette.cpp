@@ -224,12 +224,12 @@ void Palette::mouseDoubleClickEvent(QMouseEvent* ev)
       if (sel.state() == SEL_NONE)
             return;
 
-      QMimeData* mimeData = new QMimeData;
+//      QMimeData* mimeData = new QMimeData;
       Element* element    = cells[i]->element;
       if (element == 0)
             return;
       ScoreView* viewer = mscore->currentScoreView();
-      mimeData->setData(mimeSymbolFormat, element->mimeData(QPointF()));
+//      mimeData->setData(mimeSymbolFormat, element->mimeData(QPointF()));
 
       score->startCmd();
       if (sel.state() == SEL_LIST) {

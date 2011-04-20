@@ -33,6 +33,7 @@
 #include "cleflist.h"
 
 class Instrument;
+class InstrumentTemplate;
 class Xml;
 class Part;
 class Score;
@@ -121,6 +122,8 @@ class Staff {
    public:
       Staff(Score*, Part*, int);
       ~Staff();
+      void init(const InstrumentTemplate*, int);
+
       bool isTop() const             { return _rstaff == 0; }
       QString trackName() const;
       int rstaff() const             { return _rstaff; }
