@@ -48,10 +48,29 @@ Page::Page(Score* s)
    : Element(s),
    _no(0)
       {
+      bspTreeValid = false;
       }
 
 Page::~Page()
       {
+      }
+
+//---------------------------------------------------------
+//   items
+//---------------------------------------------------------
+
+QList<const Element*> Page::items(const QRectF& r)
+      {
+      if (!bspTreeValid)
+            doRebuildBspTree();
+      return bspTree.items(r);
+      }
+
+QList<const Element*> Page::items(const QPointF& p)
+      {
+      if (!bspTreeValid)
+            doRebuildBspTree();
+      return bspTree.items(p);
       }
 
 //---------------------------------------------------------
@@ -611,10 +630,10 @@ void Page::clear()
       }
 
 //---------------------------------------------------------
-//   rebuildBspTree
+//   doRebuildBspTree
 //---------------------------------------------------------
 
-void Page::rebuildBspTree()
+void Page::doRebuildBspTree()
       {
       QList<Element*> el;
       foreach(System* s, _systems)

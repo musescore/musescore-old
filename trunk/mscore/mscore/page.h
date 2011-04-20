@@ -36,11 +36,9 @@ class Painter;
 //---------------------------------------------------------
 
 struct PaperSize {
-      // QPrinter::PageSize qtsize;
       int qtsize;
       const char* name;
       double w, h;            // size in inch
-//      PaperSize(QPrinter::PageSize s, const char* n, double wi, double hi)
       PaperSize(int s, const char* n, double wi, double hi)
          : qtsize(s), name(n), w(wi), h(hi) {}
       };
@@ -84,11 +82,11 @@ struct PageFormat {
 class Page : public Element {
       QList<System*> _systems;
       int _no;                      // page number
-//      Text* _footer;
-//      Text* _header;
       BspTree bspTree;
+      bool bspTreeValid;
 
       QString replaceTextMacros(const QString&) const;
+      void doRebuildBspTree();
 
    public:
       Page(Score*);
@@ -117,11 +115,9 @@ class Page : public Element {
       virtual void scanElements(void* data, void (*func)(void*, Element*));
       void clear();
 
-      QList<const Element*> items(const QRectF& r)  { return bspTree.items(r); }
-      QList<const Element*> items(const QPointF& p) { return bspTree.items(p); }
-      void insertBsp(Element* e)                    { bspTree.insert(e);       }
-      void removeBsp(Element* e)                    { bspTree.remove(e);       }
-      void rebuildBspTree();
+      QList<const Element*> items(const QRectF& r);
+      QList<const Element*> items(const QPointF& p);
+      void rebuildBspTree() { bspTreeValid = false; }
       };
 
 extern const PaperSize paperSizes[];
