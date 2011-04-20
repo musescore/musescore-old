@@ -61,13 +61,12 @@ class Rest : public ChordRest {
       virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(const DropData&);
       virtual void layout();
-      virtual QRectF bbox() const;
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(ScoreView*, const QString&);
 
       void setMMWidth(double val)   { _mmWidth = val; }
       double mmWidth() const        { return _mmWidth; }
-      static int getSymbol(Duration::DurationType type, int line, int* yoffset);
+      static int getSymbol(Duration::DurationType type, int line, int lines,  int* yoffset);
 
       void setYoff(double d) { _yoffset = d;        }
       double yoff() const    { return _yoffset;     }

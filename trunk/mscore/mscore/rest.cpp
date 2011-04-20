@@ -38,6 +38,7 @@
 #include "lyrics.h"
 #include "segment.h"
 #include "painter.h"
+#include "stafftype.h"
 
 //---------------------------------------------------------
 //    Rest
@@ -159,6 +160,7 @@ QRectF Rest::drag(const QPointF& s)
       if (s.x() < 0)
             xoff *= -1;
       setUserOffset(xoff, s.y());
+      layout();
       return abbox() | r;
       }
 
@@ -288,7 +290,7 @@ void Rest::read(QDomElement e, const QList<Tuplet*>& tuplets, const QList<Slur*>
 //   getSymbol
 //---------------------------------------------------------
 
-int Rest::getSymbol(Duration::DurationType type, int line, int* yoffset)
+int Rest::getSymbol(Duration::DurationType type, int line, int lines, int* yoffset)
       {
       *yoffset = 2;
       switch(type) {
@@ -299,9 +301,9 @@ int Rest::getSymbol(Duration::DurationType type, int line, int* yoffset)
             case Duration::V_MEASURE:
             case Duration::V_WHOLE:
                   *yoffset = 1;
-                  return (line <= -2 || line >= 4) ? outsidewholerestSym : wholerestSym;
+                  return (line <= -2 || line >= (lines - 1)) ? outsidewholerestSym : wholerestSym;
             case Duration::V_HALF:
-                  return (line <= -3 || line >= 3) ? outsidehalfrestSym : halfrestSym;
+                  return (line <= -3 || line >= (lines - 2)) ? outsidehalfrestSym : halfrestSym;
             case Duration::V_EIGHT:
                   return rest8Sym;
             case Duration::V_16TH:
@@ -310,9 +312,10 @@ int Rest::getSymbol(Duration::DurationType type, int line, int* yoffset)
                   return rest32Sym;
             case Duration::V_64TH:
                   return rest64Sym;
+            case Duration::V_128TH:
+                  return rest128Sym;
             case Duration::V_256TH:
 printf("Rest: no symbol for 1/256\n");
-            case Duration::V_128TH:
                   return rest128Sym;
             default:
                   return rest4Sym;
@@ -325,6 +328,8 @@ printf("Rest: no symbol for 1/256\n");
 
 void Rest::layout()
       {
+      int lines = staff()->lines();
+
       switch(durationType().type()) {
             case Duration::V_64TH:
             case Duration::V_32ND:
@@ -339,8 +344,9 @@ void Rest::layout()
                   break;
             }
       double _spatium = spatium();
-      int line       = lrint(userOff().y() / _spatium); //  + ((staff()->lines()-1) * 2);
-      int lineOffset = 0;
+      int line        = lrint(userOff().y() / _spatium); //  + ((staff()->lines()-1) * 2);
+      int lineOffset  = 0;
+
       if (measure()->mstaff(staffIdx())->hasVoices) {
             // move rests in a multi voice context
             bool up = (voice() == 0) || (voice() == 2);       // TODO: use style values
@@ -352,8 +358,6 @@ void Rest::layout()
                         lineOffset = up ? -3 : 5;
                         break;
                   case Duration::V_MEASURE:
-                        lineOffset = up ? -4 : 6;
-                        break;
                   case Duration::V_WHOLE:
                         lineOffset = up ? -4 : 6;
                         break;
@@ -385,8 +389,33 @@ void Rest::layout()
                         break;
                   }
             }
+      else {
+            switch(durationType().type()) {
+                  case Duration::V_LONG:
+                  case Duration::V_BREVE:
+                  case Duration::V_MEASURE:
+                  case Duration::V_WHOLE:
+                        if (lines == 1)
+                              lineOffset = -2;
+                        break;
+                  case Duration::V_HALF:
+                  case Duration::V_QUARTER:
+                  case Duration::V_EIGHT:
+                  case Duration::V_16TH:
+                  case Duration::V_32ND:
+                  case Duration::V_64TH:
+                  case Duration::V_128TH:
+                  case Duration::V_256TH:             // not available
+                        if (lines == 1)
+                              lineOffset = -4;
+                        break;
+                  default:
+                        break;
+                  }
+            }
+
       int yo;
-      _sym = getSymbol(durationType().type(), line + lineOffset/2, &yo);
+      _sym = getSymbol(durationType().type(), line + lineOffset/2, lines, &yo);
       setYoff(double(yo) + double(lineOffset) * .5);
       layoutArticulations();
       setPos(0.0, yoff() * _spatium);
@@ -398,22 +427,15 @@ void Rest::layout()
             }
       _space.setLw(point(_extraLeadingSpace));
       _space.setRw(width() + point(_extraTrailingSpace + rs));
-      }
-
-//---------------------------------------------------------
-//   bbox
-//---------------------------------------------------------
-
-QRectF Rest::bbox() const
-      {
       Segment* s = segment();
       if (s && s->measure() && s->measure()->multiMeasure()) {
             double _spatium = spatium();
             double h = _spatium * 6.5;
             double w = point(score()->styleS(ST_minMMRestWidth));
-            return QRectF(-w * .5, -h + 2 * _spatium, w, h);
+            setbbox(QRectF(-w * .5, -h + 2 * _spatium, w, h));
             }
-      return symbols[score()->symIdx()][_sym].bbox(magS());
+      else
+            setbbox(symbols[score()->symIdx()][_sym].bbox(magS()));
       }
 
 //---------------------------------------------------------
