@@ -2360,6 +2360,7 @@ void Score::cmdUpdateNotes()
 
 void Score::updateAccidentals(Measure* m, int staffIdx)
       {
+// printf("updateAccidentals measure %d staff %d\n", m->no(), staffIdx);
       Staff* st = staff(staffIdx);
       KeySigEvent key = st->keymap()->key(m->tick());
 

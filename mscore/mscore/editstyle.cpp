@@ -157,6 +157,7 @@ void EditStyle::getValues()
       lstyle.set(ST_systemDistance,          Spatium(systemDistance->value()));
       lstyle.set(ST_lyricsDistance,          Spatium(lyricsDistance->value()));
       lstyle.set(ST_lyricsMinBottomDistance, Spatium(lyricsMinBottomDistance->value()));
+      lstyle.set(ST_lyricsLineHeight,        Spatium(lyricsLineHeight->value() * .01));
       lstyle.set(ST_systemFrameDistance,     Spatium(systemFrameDistance->value()));
       lstyle.set(ST_frameSystemDistance,     Spatium(frameSystemDistance->value()));
 
@@ -298,6 +299,7 @@ void EditStyle::setValues()
       systemDistance->setValue(lstyle.value(ST_systemDistance).toSpatium().val());
       lyricsDistance->setValue(lstyle.value(ST_lyricsDistance).toSpatium().val());
       lyricsMinBottomDistance->setValue(lstyle.value(ST_lyricsMinBottomDistance).toSpatium().val());
+      lyricsLineHeight->setValue(lstyle.value(ST_lyricsLineHeight).toDouble() * 100.0);
       systemFrameDistance->setValue(lstyle.value(ST_systemFrameDistance).toSpatium().val());
       frameSystemDistance->setValue(lstyle.value(ST_frameSystemDistance).toSpatium().val());
 

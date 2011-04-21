@@ -1313,6 +1313,13 @@ RemoveElement::RemoveElement(Element* e)
 void RemoveElement::undo()
       {
       element->score()->addElement(element);
+      if (element->type() == CHORD) {
+            Chord* chord = static_cast<Chord*>(element);
+            foreach(Note* note, chord->notes()) {
+                  if (note->tieBack())
+                        note->tieBack()->setEndNote(note);
+                  }
+            }
       }
 
 //---------------------------------------------------------

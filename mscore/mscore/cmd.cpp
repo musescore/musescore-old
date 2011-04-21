@@ -888,6 +888,44 @@ bool Score::makeGap1(int tick, int staffIdx, Fraction len)
       }
 
 //---------------------------------------------------------
+//   splitGapToMeasureBoundaries
+//    cr  - start of gap
+//    gap - gap len
+//---------------------------------------------------------
+
+QList<Fraction> Score::splitGapToMeasureBoundaries(ChordRest* cr, Fraction gap)
+      {
+      QList<Fraction> flist;
+
+      Tuplet* tuplet = cr->tuplet();
+      if (tuplet) {
+            Fraction rest(tuplet->duration());
+            if (rest < gap)
+                  printf("does not fit in tuplet\n");
+            else
+                  flist.append(rest);
+            return flist;
+            }
+
+      Segment* s = cr->segment();
+      while (gap > Fraction(0)) {
+            Measure* m    = s->measure();
+            Fraction rest = Fraction::fromTicks(m->ticks() - s->rtick());
+            if (rest >= gap) {
+                  flist.append(gap);
+                  return flist;
+                  }
+            flist.append(rest);
+            gap -= rest;
+            m = m->nextMeasure();
+            if (m == 0)
+                  return flist;
+            s = m->first(SegChordRest);
+            }
+      return flist;
+      }
+
+//---------------------------------------------------------
 //   changeCRlen
 //---------------------------------------------------------
 
@@ -900,8 +938,12 @@ void Score::changeCRlen(ChordRest* cr, const Duration& d)
       else
             dstF = d.fraction();
 
+printf("changeCRlen: %d/%d -> %d/%d\n", srcF.numerator(), srcF.denominator(),
+      dstF.numerator(), dstF.denominator());
+
       if (srcF == dstF)
             return;
+      int track = cr->track();
       Tuplet* tuplet = cr->tuplet();
       if (srcF > dstF) {
             //
@@ -918,7 +960,7 @@ void Score::changeCRlen(ChordRest* cr, const Duration& d)
                         }
                   }
             undoChangeChordRestLen(cr, Duration(dstF));
-            setRest(cr->tick() + cr->actualTicks(), cr->track(), srcF - dstF, false, tuplet);
+            setRest(cr->tick() + cr->actualTicks(), track, srcF - dstF, false, tuplet);
             select(cr, SELECT_SINGLE, 0);
             return;
             }
@@ -926,51 +968,17 @@ void Score::changeCRlen(ChordRest* cr, const Duration& d)
       //
       // make longer
       //
-
       // split required len into Measures
-      QList<Fraction> flist;
-
-      Fraction f = dstF;
-      Fraction f1;
-      Segment* s = cr->segment();
-      int track  = cr->track();
-
-      if (tuplet && tuplet->duration() < dstF) {
-            printf("does not fit in tuplet\n");
+      QList<Fraction> flist = splitGapToMeasureBoundaries(cr, dstF);
+      if (flist.isEmpty())
             return;
-            }
-
-      while (f > Fraction(0)) {
-            while (s && !s->element(track))
-                  s = s->next1(SegChordRest);
-            if (s == 0)
-                  break;
-            if ((f1 > Fraction(0)) && (s->tick() == s->measure()->tick())) {
-                  flist.append(f1);
-                  f1 = Fraction(0);
-                  }
-            ChordRest* cr = static_cast<ChordRest*>(s->element(track));
-            Duration d(cr->durationType());
-            Fraction f2;
-            if (d.type() == Duration::V_MEASURE)
-                  f2 = cr->measure()->stretchedLen(cr->staff());
-            else
-                  f2 = d.fraction();
-            if (f2 > f)
-                  f2 = f;
-            f1 += f2;
-            f  -= f2;
-            s = s->next1(SegChordRest);
-            }
-      if (f1 > Fraction(0))
-            flist.append(f1);
 
 printf("ChangeCRLen::List:\n");
       foreach (Fraction f, flist)
             printf("  %d/%d\n", f.numerator(), f.denominator());
 
       int tick       = cr->tick();
-      f              = dstF;
+      Fraction f     = dstF;
       ChordRest* cr1 = cr;
       Chord* oc      = 0;
 

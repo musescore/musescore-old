@@ -440,6 +440,8 @@ class TieView : public ShowElementBase {
 
    private slots:
       void segmentClicked(QTreeWidgetItem* item);
+      void startClicked();
+      void endClicked();
 
    public:
       TieView();
