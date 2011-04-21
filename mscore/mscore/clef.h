@@ -102,7 +102,9 @@ class Clef : public Element {
       virtual void write(Xml&) const;
       virtual void add(Element* e, double x, double y);
 
-      bool small() const                        { return _small; }
+      virtual Space space() const      { return Space(0.0, bbox().x() * 2.0 + width()); }
+
+      bool small() const               { return _small; }
       void setSmall(bool val);
       int tick() const;
 
