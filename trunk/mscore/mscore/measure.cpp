@@ -3031,6 +3031,9 @@ void Measure::layoutX(double stretch)
                         Element* e = s->element(track);
                         if ((segType == SegClef) && (segmentIdx == 0 || (s->prev()->subtype() != SegChordRest)))
                               minDistance = score()->styleP(ST_clefLeftMargin);
+/*                        else if (segType == SegTimeSig)
+                              minDistance = score()->styleP(ST_clefLeftMargin);
+ */
                         else if (segType == SegStartRepeatBarLine)
                               minDistance = .5 * _spatium;
                         else if ((segType == SegEndBarLine) && segmentIdx) {
@@ -3050,8 +3053,7 @@ void Measure::layoutX(double stretch)
                         if (e) {
                               found = true;
                               e->layout();
-                              Space sp(e->space());
-                              space.max(sp);
+                              space.max(e->space());
                               }
                         }
                   if (found) {

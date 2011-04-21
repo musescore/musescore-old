@@ -188,7 +188,7 @@ static const int RECENT_LIST_SIZE = 10;
 void MuseScore::closeEvent(QCloseEvent* ev)
       {
       if (cs)
-            cs->setSyntiState(synti->state());
+            cs->setSyntiState();
       unloadPlugins();
       QList<Score*> removeList;
       foreach(Score* score, scoreList) {
@@ -200,7 +200,7 @@ void MuseScore::closeEvent(QCloseEvent* ev)
                         return;
                         }
                   //
-                  // if score is still dirty, the the user has discarded the
+                  // if score is still dirty, then the user has discarded the
                   // score and we can remove it from the list
                   //
                   if (score->created() && score->dirty())
@@ -1249,7 +1249,7 @@ void MuseScore::setCurrentScoreView(ScoreView* view)
       // save current synthesizer setting to score
       //
       if (cs)
-            cs->setSyntiState(synti->state());
+            cs->setSyntiState();
 
       cv = view;
       if (cv) {
@@ -2456,13 +2456,13 @@ void MuseScore::cmd(QAction* a)
             removeTab(scoreList.indexOf(cs));
       else if (cmd == "file-save-as") {
             if (cs) {
-                  cs->setSyntiState(synti->state());
+                  cs->setSyntiState();
                   cs->saveAs(false);
                   }
             }
       else if (cmd == "file-save-a-copy") {
             if (cs) {
-                  cs->setSyntiState(synti->state());
+                  cs->setSyntiState();
                   cs->saveAs(true);
                   }
             }

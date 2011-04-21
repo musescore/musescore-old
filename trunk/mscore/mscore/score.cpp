@@ -351,10 +351,6 @@ Score::Score(const Style* s)
       _showOmr        = false;
       _sigmap         = new AL::TimeSigMap();
       _tempomap       = new AL::TempoMap;
-
-      // set default soundfont
-      _syntiState.append(SyntiParameter("soundfont", preferences.soundFont));
-
       connect(_undo, SIGNAL(cleanChanged(bool)), SLOT(setClean(bool)));
       }
 
@@ -375,7 +371,6 @@ Score::Score(Score* parent)
       _symIdx         = 0;
       _spatium        = preferences.spatium * DPI;
       _pageFormat     = new PageFormat;
-//      _needLayout     = false;
       startLayout     = 0;
       _undo           = 0;
       _repeatList     = 0;
@@ -405,9 +400,6 @@ Score::Score(Score* parent)
       _showOmr        = false;
       _sigmap         = 0;
       _tempomap       = 0;
-
-      // set default soundfont
-      _syntiState.append(SyntiParameter("soundfont", preferences.soundFont));
       }
 
 //---------------------------------------------------------
@@ -605,6 +597,17 @@ int Score::readScore(QString name)
             score->doLayout();
             score->scanElements(0, elementAdjustReadPos);
             }
+      //
+      // check if any soundfont is configured
+      //
+      bool hasSoundFont = false;
+      for (int i = 0; i < _syntiState.size(); ++i) {
+            const SyntiParameter& p = _syntiState.at(i);
+            if (p.name() == "soundfont")
+                  hasSoundFont = true;
+            }
+      if (!hasSoundFont)
+            _syntiState.prepend(SyntiParameter("soundfont", preferences.soundFont));
       return 0;
       }
 
@@ -2447,8 +2450,9 @@ Score* Score::clone()
 //   setSyntiSettings
 //---------------------------------------------------------
 
-void Score::setSyntiState(const SyntiState& s)
+void Score::setSyntiState()
       {
+      const SyntiState& s = synti->state();
       if (!(_syntiState == s)) {
             _dirty = true;
             _syntiState = s;
