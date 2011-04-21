@@ -3336,20 +3336,20 @@ void Measure::updateAccidentals(Segment* segment, int staffIdx, char* tversatz)
       Tablature* tab;
       const Instrument* instrument = staff->part()->instr();
 
-      if(staffGroup == TAB_STAFF)
-            tab    = instrument->tablature();
+      if (staffGroup == TAB_STAFF)
+            tab = instrument->tablature();
 
       for (int track = startTrack; track < endTrack; ++track) {
-            Element* e = segment->element(track);
-            if (!e || e->type() != CHORD)
+            Chord* chord = static_cast<Chord*>(segment->element(track));
+            if (!chord || chord->type() != CHORD)
                  continue;
-            Chord* chord = static_cast<Chord*>(e);
 
-            // TAB_STAFF is different, as each note has to be fretted in the context of the whole chord
+            // TAB_STAFF is different, as each note has to be fretted
+            // in the context of the whole chord
 
-            if(staffGroup == TAB_STAFF) {
+            if (staffGroup == TAB_STAFF) {
                   tab->fretChord(chord);
-                  continue;                                 // skip other staff type cases
+                  continue;               // skip other staff type cases
                   }
 
             // PITCHED_ and PERCUSSION_STAFF can go note by note
@@ -3360,20 +3360,14 @@ void Measure::updateAccidentals(Segment* segment, int staffIdx, char* tversatz)
                               if (note->tieBack()) {
                                     int line = note->tieBack()->startNote()->line();
                                     note->setLine(line);
-
-                                    int tpc = note->tpc();
-                                    line = tpc2step(tpc) + (note->pitch()/12) * 7;
-                                    int tpcPitch   = tpc2pitch(tpc);
-                                    if (tpcPitch < 0)
-                                          line += 7;
-                                    else
-                                          line -= (tpcPitch/12)*7;
-                                    // no!?: tversatz[line] = tpc2alter(tpc);
-                                    if (note->accidental())
+                                    if (note->accidental()) {
+                                          // TODO: remove accidental only if note is not
+                                          // on new system
                                           score()->undoRemoveElement(note->accidental());
-                                    continue;
+                                          }
                                     }
-                              note->updateAccidental(tversatz);
+                              else
+                                    note->updateAccidental(tversatz);
                               break;
                         case PERCUSSION_STAFF:
                               {

@@ -1,4 +1,7 @@
+21.apr (ws)
+      - fix #9877: Corruption with tied note in multi-voice
 20.apr (ws)
+      - added new style parameter: lyrics line height
       - fix placement of rests on one line staff
       - add keyboard shortcut to drum palette entries
       - fix #7883: Double click on drum palette causes crash

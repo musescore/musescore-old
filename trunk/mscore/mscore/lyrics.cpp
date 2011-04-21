@@ -594,7 +594,7 @@ void Lyrics::layout()
       if (!styled())
             _textStyle = (_no % 2) ? TEXT_STYLE_LYRIC2 : TEXT_STYLE_LYRIC1;
       Text::layout();
-      double lh             = lineSpacing();
+      double lh             = lineSpacing() * score()->styleD(ST_lyricsLineHeight);
       double noteHeadWidth2 = symbols[score()->symIdx()][quartheadSym].width(magS()) * .5;
 
       System* sys = measure()->system();

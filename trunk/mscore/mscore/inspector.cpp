@@ -1656,7 +1656,7 @@ SlurView::SlurView()
       layout->addStretch(10);
       connect(st.segments, SIGNAL(itemClicked(QTreeWidgetItem*,int)), SLOT(segmentClicked(QTreeWidgetItem*)));
       connect(st.startElement,   SIGNAL(clicked()), SLOT(startClicked()));
-      connect(st.endElement,   SIGNAL(clicked()), SLOT(endClicked()));
+      connect(st.endElement,     SIGNAL(clicked()), SLOT(endClicked()));
       }
 
 //---------------------------------------------------------
@@ -1736,6 +1736,26 @@ TieView::TieView()
       layout->addWidget(tie);
       layout->addStretch(10);
       connect(st.segments, SIGNAL(itemClicked(QTreeWidgetItem*,int)), SLOT(segmentClicked(QTreeWidgetItem*)));
+      connect(st.startElement,   SIGNAL(clicked()), SLOT(startClicked()));
+      connect(st.endElement,     SIGNAL(clicked()), SLOT(endClicked()));
+      }
+
+//---------------------------------------------------------
+//   startClicked
+//---------------------------------------------------------
+
+void TieView::startClicked()
+      {
+      emit elementChanged(static_cast<SlurTie*>(element())->startElement());
+      }
+
+//---------------------------------------------------------
+//   endClicked
+//---------------------------------------------------------
+
+void TieView::endClicked()
+      {
+      emit elementChanged(static_cast<SlurTie*>(element())->endElement());
       }
 
 //---------------------------------------------------------

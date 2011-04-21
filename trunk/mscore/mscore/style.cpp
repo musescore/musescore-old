@@ -47,6 +47,7 @@ StyleType styleTypes[] = {
       StyleType("systemDistance",          ST_SPATIUM),
       StyleType("lyricsDistance",          ST_SPATIUM),
       StyleType("lyricsMinBottomDistance", ST_SPATIUM),
+      StyleType("lyricsLineHeight",        ST_DOUBLE),      // in % of normal height (default: 1.0)
       StyleType("systemFrameDistance",     ST_SPATIUM),     // dist. between staff and vertical box
       StyleType("frameSystemDistance",     ST_SPATIUM),     // dist. between vertical box and next system
       StyleType("minMeasureWidth",         ST_SPATIUM),
@@ -376,6 +377,7 @@ StyleData::StyleData()
             StyleVal(ST_systemDistance, Spatium(9.25)),
             StyleVal(ST_lyricsDistance, Spatium(2)),
             StyleVal(ST_lyricsMinBottomDistance, Spatium(2)),
+            StyleVal(ST_lyricsLineHeight, 1.0),
             StyleVal(ST_systemFrameDistance, Spatium(7.0)),
             StyleVal(ST_frameSystemDistance, Spatium(1.0)),
             StyleVal(ST_minMeasureWidth, Spatium(4.0)),

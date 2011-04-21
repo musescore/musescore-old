@@ -146,6 +146,7 @@ enum StyleIdx {
       ST_systemDistance,
       ST_lyricsDistance,
       ST_lyricsMinBottomDistance,
+      ST_lyricsLineHeight,
       ST_systemFrameDistance,
       ST_frameSystemDistance,
       ST_minMeasureWidth,
