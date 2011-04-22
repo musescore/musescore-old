@@ -30,6 +30,7 @@
 Hook::Hook(Score* s)
   : Symbol(s)
       {
+      setFlag(ELEMENT_MOVABLE, false);
       }
 
 //---------------------------------------------------------

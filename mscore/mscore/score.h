@@ -574,6 +574,7 @@ class Score : public QObject {
       void saveCompressedFile(QIODevice*, QFileInfo&, bool autosave);
       bool saveAs(bool saveCopy = false);
       bool saveAs(bool saveCopy, const QString& name, const QString& ext);
+      bool exportFile();
 
       void print(QPrinter* printer);
       bool saveXml(const QString& name);

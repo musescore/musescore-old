@@ -1,3 +1,6 @@
+22.apr (ws)
+      - multi measure rest layout fixes
+      - note hooks are not draggable anymore
 21.apr (ws)
       - fix #9877: Corruption with tied note in multi-voice
 20.apr (ws)

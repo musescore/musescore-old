@@ -167,7 +167,7 @@ void Navigator::paintEvent(QPaintEvent* ev)
                   r1 -= matrix.mapRect(pbbox).toRect();
 
                   QList<const Element*> ell = page->items(fr);
-                  qStableSort(ell.begin(), ell.end(), elementLessThan);
+                  // qStableSort(ell.begin(), ell.end(), elementLessThan);
 
                   foreach(const Element* e, ell) {
                         e->itemDiscovered = 0;

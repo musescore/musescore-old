@@ -129,6 +129,7 @@ void NoteHead::write(Xml& xml) const
 NoteDot::NoteDot(Score* s)
    : Symbol(s, dotSym)
       {
+      setFlag(ELEMENT_MOVABLE, false);
       }
 
 //---------------------------------------------------------
