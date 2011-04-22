@@ -2460,8 +2460,9 @@ void ScoreView::drawElements(QPainter& p,const QList<const Element*>& el)
                   //  selected Elements
                   //
                   p.setBrush(Qt::NoBrush);
-                  p.setPen(QPen(Qt::blue, 0, Qt::SolidLine));
-                  p.drawPath(e->shape());
+
+                  // p.setPen(QPen(Qt::blue, 0, Qt::SolidLine));
+                  // p.drawPath(e->shape());
 
                   p.setPen(QPen(Qt::red, 0, Qt::SolidLine));
                   p.drawRect(e->bbox());

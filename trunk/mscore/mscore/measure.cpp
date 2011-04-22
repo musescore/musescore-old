@@ -2563,8 +2563,9 @@ bool Measure::createEndBarLines()
                   if (!s->show()) {
                         BarLine* bl1 = static_cast<BarLine*>(seg->element(track));
                         if (bl1) {
-                              seg->setElement(track, 0);
-                              delete bl1;
+                              score()->undoRemoveElement(bl1);
+                              // seg->setElement(track, 0);
+                              // delete bl1;
                               changed = true;
                               }
                         continue;
@@ -2576,23 +2577,26 @@ bool Measure::createEndBarLines()
                               bl->setVisible(_endBarLineVisible);
                               bl->setColor(_endBarLineColor);
                               bl->setGenerated(bl->el()->isEmpty() && _endBarLineGenerated);
+                              bl->setParent(seg);
+                              bl->setTrack(track);
+                              score()->undoAddElement(bl);
                               changed = true;
                               }
-                        bl->setTrack(track);
                         BarLineType et = _multiMeasure > 0 ? _mmEndBarLineType : _endBarLineType;
                         if (bl->subtype() != et) {
-                              bl->setBarLineType(et);
+                              score()->undoChangeSubtype(bl, et);
+                              // bl->setBarLineType(et);
                               bl->setGenerated(bl->el()->isEmpty() && _endBarLineGenerated);
                               changed = true;
                               }
                         aspan = 0;
-                        seg->add(bl);
                         }
                   else {
                         BarLine* bl1 = static_cast<BarLine*>(seg->element(track));
                         if (bl1) {
-                              seg->setElement(track, 0);
-                              delete bl1;
+                              score()->undoRemoveElement(bl1);
+                              // seg->setElement(track, 0);
+                              // delete bl1;
                               changed = true;
                               }
                         }

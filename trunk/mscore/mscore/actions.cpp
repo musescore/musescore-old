@@ -77,6 +77,16 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
+         "file-export",
+         QT_TRANSLATE_NOOP("action","Export Score"),
+         0,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","Export Score..."),
+         QT_TRANSLATE_NOOP("action","Save a copy of the score in various formats"),
+          fileSave_ICON
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "file-reload",
          QT_TRANSLATE_NOOP("action","File reload"),
          0,                         // no shortcut, its an destructive non undoable operation

@@ -425,8 +425,6 @@ void Rest::layout()
             rs = Spatium(score()->styleS(ST_dotNoteDistance)
                + dots() * score()->styleS(ST_dotDotDistance));
             }
-      _space.setLw(point(_extraLeadingSpace));
-      _space.setRw(width() + point(_extraTrailingSpace + rs));
       Segment* s = segment();
       if (s && s->measure() && s->measure()->multiMeasure()) {
             double _spatium = spatium();
@@ -434,8 +432,15 @@ void Rest::layout()
             double w = point(score()->styleS(ST_minMMRestWidth));
             setbbox(QRectF(-w * .5, -h + 2 * _spatium, w, h));
             }
-      else
+      else {
+            if (dots()) {
+                  rs = Spatium(score()->styleS(ST_dotNoteDistance)
+                     + dots() * score()->styleS(ST_dotDotDistance));
+                  }
             setbbox(symbols[score()->symIdx()][_sym].bbox(magS()));
+            }
+      _space.setLw(point(_extraLeadingSpace));
+      _space.setRw(width() + point(_extraTrailingSpace + rs));
       }
 
 //---------------------------------------------------------
@@ -556,4 +561,20 @@ void Rest::scanElements(void* data, void (*func)(void*, Element*))
       ChordRest::scanElements(data, func);
       }
 
+//---------------------------------------------------------
+//   setMMWidth
+//---------------------------------------------------------
+
+void Rest::setMMWidth(double val)
+      {
+      _mmWidth = val;
+      Segment* s = segment();
+      if (s && s->measure() && s->measure()->multiMeasure()) {
+            double _spatium = spatium();
+            double h = _spatium * 6.5;
+            double w = _mmWidth;
+            // setbbox(QRectF(-w * .5, -h + 2 * _spatium, w, h));
+            setbbox(QRectF(0.0, -h + 2 * _spatium, w, h));
+            }
+      }
 

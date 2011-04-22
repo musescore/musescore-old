@@ -437,7 +437,66 @@ bool Score::saveAs(bool saveCopy)
       {
       QStringList fl;
       fl.append(tr("Compressed MuseScore Format (*.mscz)"));
-      fl.append(tr("MuseScore Format (*.mscx)"));
+      QString saveDialogTitle = saveCopy ? tr("MuseScore: Save a Copy") :
+                                           tr("MuseScore: Save As");
+
+      QSettings settings;
+      if (mscore->lastSaveCopyDirectory.isEmpty())
+            mscore->lastSaveCopyDirectory = settings.value("lastSaveCopyDirectory", preferences.workingDirectory).toString();
+      if (mscore->lastSaveDirectory.isEmpty())
+            mscore->lastSaveDirectory = settings.value("lastSaveDirectory", preferences.workingDirectory).toString();
+      QString saveDirectory = saveCopy ?
+            mscore->lastSaveCopyDirectory : mscore->lastSaveDirectory;
+
+      if (saveDirectory.isEmpty()) {
+            saveDirectory = preferences.workingDirectory;
+            }
+
+      QString selectedFilter;
+      QString name    = QString("%1.mscz").arg(info.baseName());
+      QString filter = fl.join(";;");
+      QString fn = mscore->getSaveScoreName(saveDialogTitle, name, filter, &selectedFilter);
+      if (fn.isEmpty())
+            return false;
+
+      QFileInfo fi(fn);
+      if (saveCopy)
+            mscore->lastSaveCopyDirectory = fi.absolutePath();
+      else
+            mscore->lastSaveDirectory = fi.absolutePath();
+
+      QString ext;
+      if (selectedFilter.isEmpty())
+            ext = fi.suffix();
+      else {
+            int idx = fl.indexOf(selectedFilter);
+            if (idx != -1) {
+                  static const char* extensions[] = {
+                        "mscz"
+                        };
+                  ext = extensions[idx];
+                  }
+            }
+      if (ext.isEmpty()) {
+            QMessageBox::critical(mscore, tr("MuseScore: Save As"), tr("cannot determine file type"));
+            return false;
+            }
+
+      if (fi.suffix() != ext)
+            fn += "." + ext;
+      return saveAs(saveCopy, fn, ext);
+      }
+
+//---------------------------------------------------------
+//   saveAs
+//    return true on success
+//---------------------------------------------------------
+
+bool Score::exportFile()
+      {
+      bool saveCopy = true;
+      QStringList fl;
+      fl.append(tr("Uncompressed MuseScore Format (*.mscx)"));
       fl.append(tr("MusicXML Format (*.xml)"));
       fl.append(tr("Compressed MusicXML Format (*.mxl)"));
       fl.append(tr("Standard MIDI File (*.mid)"));
@@ -487,7 +546,7 @@ bool Score::saveAs(bool saveCopy)
             int idx = fl.indexOf(selectedFilter);
             if (idx != -1) {
                   static const char* extensions[] = {
-                        "mscz", "mscx", "xml", "mxl", "mid", "pdf", "ps", "png", "svg", "ly",
+                        "mscx", "xml", "mxl", "mid", "pdf", "ps", "png", "svg", "ly",
 #ifdef HAS_AUDIOFILE
                         "wav", "flac", "ogg",
 #endif

@@ -40,7 +40,7 @@ Stem::Stem(Score* s)
    : Element(s)
       {
       _len = 0.0;
-      setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
+      setFlags(ELEMENT_SELECTABLE);
       }
 
 //---------------------------------------------------------

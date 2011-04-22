@@ -662,6 +662,7 @@ MuseScore::MuseScore()
       _fileMenu->addAction(getAction("file-save"));
       _fileMenu->addAction(getAction("file-save-as"));
       _fileMenu->addAction(getAction("file-save-a-copy"));
+      _fileMenu->addAction(getAction("file-export"));
       _fileMenu->addSeparator();
       _fileMenu->addAction(getAction("file-reload"));
       _fileMenu->addSeparator();
@@ -2439,6 +2440,10 @@ void MuseScore::cmd(QAction* a)
             loadFile();
       else if (cmd == "file-save")
             saveFile();
+      else if (cmd == "file-export") {
+            if (cs)
+                  cs->exportFile();
+            }
       else if (cmd == "file-reload") {
             if (cs && !cs->created() && !checkDirty(cs)) {
                   if (cv->editMode()) {

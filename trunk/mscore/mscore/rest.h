@@ -64,7 +64,7 @@ class Rest : public ChordRest {
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(ScoreView*, const QString&);
 
-      void setMMWidth(double val)   { _mmWidth = val; }
+      void setMMWidth(double val);
       double mmWidth() const        { return _mmWidth; }
       static int getSymbol(Duration::DurationType type, int line, int lines,  int* yoffset);
 
