@@ -1641,8 +1641,8 @@ Element* Chord::drop(const DropData& data)
                         atr->setTrack(track());
                         score()->select(atr, SELECT_SINGLE, 0);
                         score()->undoAddElement(atr);
+                        renderArticulation(atr->articulationType());
                         }
-                  renderArticulation(atr->articulationType());
                   return atr;
                   }
             case CHORDLINE:
