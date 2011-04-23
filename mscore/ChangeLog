@@ -1,4 +1,6 @@
 23.apr (ws)
+      - fix #10370: Shortcuts cannot be cleared
+      - implement "reset to defaults" in preferences-shortcuts dialog
       - fix #3459: Beaming of sixteenth and eight note sequences in 4/4
       - fix #10365: Whole rests corrupt measure on re-loading scores with time
         longer than 4/4 (patch from Miwarre)
