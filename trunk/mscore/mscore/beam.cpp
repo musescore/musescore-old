@@ -162,30 +162,18 @@ bool endBeam(const Fraction& ts, ChordRest* cr, ChordRest* prevCr)
             }
       Fraction l  = cr->duration();
       Fraction pl = prevCr ? prevCr->duration() : Fraction(0,1);
-      bool debug = false;
       for (unsigned i = 0; i < sizeof(endBeamList)/sizeof(*endBeamList); ++i) {
             const BeamHint& h = endBeamList[i];
             if (!h.timeSig.isZero() && (!h.timeSig.identical(ts)))
                   continue;
             if (!h.noteLen.isZero() && (h.noteLen != l))
                   continue;
-
-            if (!h.prevNoteLen.isZero()) {
-                  debug = true;
-                  }
-            if (!h.prevNoteLen.isZero() && (h.prevNoteLen != pl)) {
-                  printf("debug: %d/%d != %d/%d\n",
-                     h.prevNoteLen.numerator(), h.prevNoteLen.denominator(),
-                     pl.numerator(), pl.denominator());
+            if (!h.prevNoteLen.isZero() && (h.prevNoteLen != pl))
                   continue;
-                  }
             if (!h.pos.isZero()) {
                   int pos = h.pos.ticks();
-                  if (pos != p) {
-                        if (debug)
-                              printf("   ticks %d != %d\n", pos, p);
+                  if (pos != p)
                         continue;
-                        }
                   }
             else {            // if (h.pos.numerator() == 0) {   // stop on every beat
                   int len = (4 * AL::division) / h.timeSig.denominator();
