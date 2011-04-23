@@ -665,8 +665,8 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                   }
             else if (cross) {
                   double beamY   = 0.0;  // y position of main beam start
-                  double y1   = -100000;
-                  double y2   = 100000;
+                  double y1   = -200000;
+                  double y2   = 200000;
                   foreach(ChordRest* cr, crl) {
                         if (cr->type() != CHORD)
                               continue;
@@ -754,8 +754,8 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                   // compute final y position of 1/8 beam
                   //
                   if (cross) {
-                        double yDownMax = -100000;
-                        double yUpMin   = 100000;
+                        double yDownMax = -300000;
+                        double yUpMin   = 300000;
                         foreach(ChordRest* cr, crl) {
                               if (cr->type() != CHORD)
                                     continue;

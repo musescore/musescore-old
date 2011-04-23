@@ -1,3 +1,5 @@
+23.apr (ws)
+      - fix #10366: Oddity and possible crash with score excerpts
 22.apr (ws)
       - multi measure rest layout fixes
       - note hooks are not draggable anymore

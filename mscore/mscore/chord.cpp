@@ -1115,7 +1115,8 @@ void Chord::layoutStem()
 
             QPointF npos(stemPos(_up, false));
 
-            _stem->setLen(point(stemLen));
+            double sl = point(stemLen);
+            _stem->setLen(sl);
             _stem->setPos(npos - canvasPos());
 
             if (_stemSlash) {
