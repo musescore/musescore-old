@@ -49,106 +49,102 @@
 static BeamHint endBeamList[] = {
       // in 2 2 time
       //  end beams each 1 2 note
-      BeamHint(0,  0,  2,  2, 1, 2 ),
+
+      BeamHint(Fraction(2,2), Fraction(1,2), Fraction(0,0), Fraction(0,0)),
 
       // in 3 2 time:
       //   end beams each 1 2 note
       //   end beams with 16th notes each 1 4 note
       //   end beams with 32th notes each 1 8 note
 
-      //       note   timesig  position
+      //       noteLen   timesig  position
 
-      BeamHint(0,  0, 3, 2,  1, 2 ),
-      BeamHint(0,  0, 3, 2,  2, 2 ),
+      BeamHint(Fraction(3,2), Fraction(1,2), Fraction(0,0), Fraction(0,0)),
+      BeamHint(Fraction(3,2), Fraction(2,2), Fraction(0,0), Fraction(0,0)),
 
-      BeamHint(1, 16, 3, 2,  1, 4 ),
-      BeamHint(1, 16, 3, 2,  1, 2 ),
-      BeamHint(1, 16, 3, 2,  3, 4 ),
-      BeamHint(1, 16, 3, 2,  1, 1 ),
-      BeamHint(1, 16, 3, 2,  5, 4 ),
+      BeamHint(Fraction(3,2), Fraction(1,4), Fraction(1,16), Fraction(0,0)),
+      BeamHint(Fraction(3,2), Fraction(1,2), Fraction(1,16), Fraction(0,0)),
+      BeamHint(Fraction(3,2), Fraction(3,4), Fraction(1,16), Fraction(0,0)),
+      BeamHint(Fraction(3,2), Fraction(1,1), Fraction(1,16), Fraction(0,0)),
+      BeamHint(Fraction(3,2), Fraction(5,4), Fraction(1,16), Fraction(0,0)),
 
-      BeamHint(1, 32, 3, 2,  1, 8 ),
-      BeamHint(1, 32, 3, 2,  1, 4 ),
-      BeamHint(1, 32, 3, 2,  3, 8 ),
-      BeamHint(1, 32, 3, 2,  1, 2 ),
-      BeamHint(1, 32, 3, 2,  5, 8 ),
-      BeamHint(1, 32, 3, 2,  3, 4 ),
-      BeamHint(1, 32, 3, 2,  7, 8 ),
-      BeamHint(1, 32, 3, 2,  1, 1 ),
-      BeamHint(1, 32, 3, 2,  9, 8 ),
-      BeamHint(1, 32, 3, 2,  5, 4 ),
-      BeamHint(1, 32, 3, 2, 11, 8 ),
+      BeamHint(Fraction(3,2), Fraction(1,8), Fraction(1,32), Fraction(0,0)),
+      BeamHint(Fraction(3,2), Fraction(1,4), Fraction(1,32), Fraction(0,0)),
+      BeamHint(Fraction(3,2), Fraction(3,8), Fraction(1,32), Fraction(0,0)),
+      BeamHint(Fraction(3,2), Fraction(1,2), Fraction(1,32), Fraction(0,0)),
+      BeamHint(Fraction(3,2), Fraction(5,8), Fraction(1,32), Fraction(0,0)),
+      BeamHint(Fraction(3,2), Fraction(3,4), Fraction(1,32), Fraction(0,0)),
+      BeamHint(Fraction(3,2), Fraction(7,8), Fraction(1,32), Fraction(0,0)),
+      BeamHint(Fraction(3,2), Fraction(1,1), Fraction(1,32), Fraction(0,0)),
+      BeamHint(Fraction(3,2), Fraction(9,8), Fraction(1,32), Fraction(0,0)),
+      BeamHint(Fraction(3,2), Fraction(5,4), Fraction(1,32), Fraction(0,0)),
+      BeamHint(Fraction(3,2), Fraction(11,8),Fraction(1,32), Fraction(0,0)),
 
-      BeamHint(0,  0,  2,  4, 0, 0 ),  // switch-off at-any-beat feature
-      BeamHint(0,  0,  2,  4, 1, 4 ),
-      BeamHint(1, 32,  2,  4, 1, 8 ),
-      BeamHint(1, 32,  2,  4, 3, 8 ),
+      BeamHint(Fraction(2,4), Fraction(0,0), Fraction(0,0),  Fraction(0,0)),
+      BeamHint(Fraction(2,4), Fraction(1,4), Fraction(0,0),  Fraction(0,0)),
+      BeamHint(Fraction(2,4), Fraction(1,9), Fraction(1,32), Fraction(0,0)),
+      BeamHint(Fraction(2,4), Fraction(3,8), Fraction(1,32), Fraction(0,0)),
 
-      BeamHint(0,  0,  3, 4,  1, 4 ),
-      BeamHint(0,  0,  3, 4,  1, 2 ),
-      BeamHint(1, 16,  3, 4,  1, 4 ),
-      BeamHint(1, 16,  3, 4,  1, 2 ),
-      BeamHint(1, 32,  3, 4,  1, 8 ),
-      BeamHint(1, 32,  3, 4,  1, 4 ),
-      BeamHint(1, 32,  3, 4,  3, 8 ),
-      BeamHint(1, 32,  3, 4,  1, 2 ),
-      BeamHint(1, 32,  3, 4,  5, 8 ),
+      BeamHint(Fraction(3,4), Fraction(1,4), Fraction(0,0),  Fraction(0,0)),
+      BeamHint(Fraction(3,4), Fraction(1,2), Fraction(0,0),  Fraction(0,0)),
+      BeamHint(Fraction(3,4), Fraction(1,4), Fraction(1,16),  Fraction(0,0)),
+      BeamHint(Fraction(3,4), Fraction(1,2), Fraction(1,16),  Fraction(0,0)),
+      BeamHint(Fraction(3,4), Fraction(1,8), Fraction(1,32),  Fraction(0,0)),
+      BeamHint(Fraction(3,4), Fraction(1,4), Fraction(1,32),  Fraction(0,0)),
+      BeamHint(Fraction(3,4), Fraction(3,8), Fraction(1,32),  Fraction(0,0)),
+      BeamHint(Fraction(3,4), Fraction(1,2), Fraction(1,32),  Fraction(0,0)),
+      BeamHint(Fraction(3,4), Fraction(5,8), Fraction(1,32),  Fraction(0,0)),
 
-      BeamHint(0, 0,   12, 16,  3, 8 ),
-      BeamHint(1, 16,  12, 16,  3, 16 ),
-      BeamHint(1,  8,  12, 16,  6, 16 ),
-      BeamHint(1,  8,  12, 16,  9, 16 ),
-      BeamHint(1, 16,  12, 16,  9, 16 ),
+      BeamHint(Fraction(12,16), Fraction(3,8),  Fraction(0, 0), Fraction(0,0)),
+      BeamHint(Fraction(12,16), Fraction(3,16), Fraction(1,16), Fraction(0,0)),
+      BeamHint(Fraction(12,16), Fraction(6,16), Fraction(1,8),  Fraction(0,0)),
+      BeamHint(Fraction(12,16), Fraction(9,16), Fraction(1,8),  Fraction(0,0)),
+      BeamHint(Fraction(12,16), Fraction(9,16), Fraction(1,16), Fraction(0,0)),
 
-      // in common time:
-      //   end beams each 1 2 note
-      //   end beams with 32th notes each 1 8 note
-      //   end beams with 1 8 triplets each 1 4 note
+      BeamHint(Fraction(4,4), Fraction(1,2), Fraction(0,0),   Fraction(0,0)),
+      BeamHint(Fraction(4,4), Fraction(1,4), Fraction(1,12),  Fraction(0,0)),
+      BeamHint(Fraction(4,4), Fraction(3,4), Fraction(1,12),  Fraction(0,0)),
 
-      BeamHint(0,  0,  4,  4, 1, 2 ),
-      BeamHint(1, 12,  4,  4, 1, 4 ),
-      BeamHint(1, 12,  4,  4, 3, 4 ),
+      BeamHint(Fraction(4,4), Fraction(1,4), Fraction(1,8),  Fraction(1,16)),  // ws
+      BeamHint(Fraction(4,4), Fraction(2,4), Fraction(1,8),  Fraction(1,16)),  // ws
+      BeamHint(Fraction(4,4), Fraction(3,4), Fraction(1,8),  Fraction(1,16)),  // ws
 
-      BeamHint(1, 16,  4,  4, 1, 4 ),
-      BeamHint(1, 16,  4,  4, 3, 4 ),
+      BeamHint(Fraction(4,4), Fraction(1,4), Fraction(1,16),  Fraction(0,0)),
+      BeamHint(Fraction(4,4), Fraction(3,4), Fraction(1,16),  Fraction(0,0)),
+      BeamHint(Fraction(4,4), Fraction(1,8), Fraction(1,32),  Fraction(0,0)),
+      BeamHint(Fraction(4,4), Fraction(1,4), Fraction(1,32),  Fraction(0,0)),
+      BeamHint(Fraction(4,4), Fraction(3,8), Fraction(1,32),  Fraction(0,0)),
+      BeamHint(Fraction(4,4), Fraction(5,8), Fraction(1,32),  Fraction(0,0)),
+      BeamHint(Fraction(4,4), Fraction(3,4), Fraction(1,32),  Fraction(0,0)),
+      BeamHint(Fraction(4,4), Fraction(7,8), Fraction(1,32),  Fraction(0,0)),
 
-      BeamHint(1, 32,  4,  4, 1, 8 ),
-      BeamHint(1, 32,  4,  4, 1, 4 ),
-      BeamHint(1, 32,  4,  4, 3, 8 ),
-      BeamHint(1, 32,  4,  4, 5, 8 ),
-      BeamHint(1, 32,  4,  4, 3, 4 ),
-      BeamHint(1, 32,  4,  4, 7, 8 ),
+      BeamHint(Fraction(5,4), Fraction(3,4), Fraction(0,0),  Fraction(0,0)),
 
-      BeamHint(0,  0,  5,  4, 3, 4 ),
+      BeamHint(Fraction(6,4), Fraction(3,4), Fraction(0,0),  Fraction(0,0)),
 
-      BeamHint(0,  0,  6,  4, 3, 4 ),
-      //BeamHint(1,  8,  6,  4, 1, 4 ),     // for promenade demo (ws)    //Moved custom beaming to promenade file (db)
+      BeamHint(Fraction(3,8), Fraction(3,8), Fraction(0,0),  Fraction(0,0)),
 
-      BeamHint(0,  0,  3,  8, 3, 8 ),
+      BeamHint(Fraction(4,8), Fraction(0,0), Fraction(0,0),   Fraction(0,0)),
+      BeamHint(Fraction(4,8), Fraction(1,4), Fraction(0,0),   Fraction(0,0)),
+      BeamHint(Fraction(4,8), Fraction(1,8), Fraction(1,32),  Fraction(0,0)),
+      BeamHint(Fraction(4,8), Fraction(3,8), Fraction(1,32),  Fraction(0,0)),
 
-      BeamHint(0,  0,  4,  8, 0, 0 ), // switch-off at-any-beat feature
-      BeamHint(0,  0,  4,  8, 1, 4 ),
-      BeamHint(1, 32,  4,  8, 1, 8 ),
-      BeamHint(1, 32,  4,  8, 3, 8 ),
+      BeamHint(Fraction(6,8), Fraction(3,8), Fraction(0,0),  Fraction(0,0)),
 
-    //BeamHint(0,  0,  6, 8,  0, 0 ), // switch-off at-any-beat feature    //Feature does not work when beam is every three notes instead of every two. (db)
-      BeamHint(0,  0,  6, 8,  3, 8 ),
+      BeamHint(Fraction(9,8), Fraction(3,8), Fraction(0,0),  Fraction(0,0)),
+      BeamHint(Fraction(9,8), Fraction(3,4), Fraction(0,0),  Fraction(0,0)),
 
-      BeamHint(0,  0,  9, 8,  3, 8 ),
-      BeamHint(0,  0,  9, 8,  3, 4 ),
+      BeamHint(Fraction(12,8), Fraction(3,8), Fraction(0,0),  Fraction(0,0)),
+      BeamHint(Fraction(12,8), Fraction(3,4), Fraction(0,0),  Fraction(0,0)),
+      BeamHint(Fraction(12,8), Fraction(9,8), Fraction(0,0),  Fraction(0,0)),
 
-      BeamHint(0,  0, 12, 8,  3, 8 ),
-      BeamHint(0,  0, 12, 8,  3, 4 ),
-      BeamHint(0,  0, 12, 8,  9, 8 ),
+      BeamHint(Fraction(15,8), Fraction(3,8), Fraction(0,0),  Fraction(0,0)),
+      BeamHint(Fraction(15,8), Fraction(3,4), Fraction(0,0),  Fraction(0,0)),
+      BeamHint(Fraction(15,8), Fraction(9,8), Fraction(0,0),  Fraction(0,0)),
+      BeamHint(Fraction(15,8), Fraction(6,8), Fraction(0,0),  Fraction(0,0)),
 
-      BeamHint(0,  0, 15, 8,  3, 8 ),
-      BeamHint(0,  0, 15, 8,  3, 4 ),
-      BeamHint(0,  0, 15, 8,  9, 8 ),
-      BeamHint(0,  0, 15, 8,  6, 4 ),
-
-      BeamHint(0,  0,  4, 16, 0, 0 ), // switch-off at-any-beat feature
-      BeamHint(0,  0,  4, 16, 1, 8 ),
-
+      BeamHint(Fraction(4,16), Fraction(0,0), Fraction(0,0),  Fraction(0,0)),
+      BeamHint(Fraction(4,16), Fraction(1,8), Fraction(0,0),  Fraction(0,0))
       };
 
 //---------------------------------------------------------
@@ -156,28 +152,38 @@ static BeamHint endBeamList[] = {
 //    return true if beam should be ended
 //---------------------------------------------------------
 
-bool endBeam(const Fraction& ts, ChordRest* cr, int p)
+bool endBeam(const Fraction& ts, ChordRest* cr, ChordRest* prevCr)
       {
-//      if (cr->tuplet()) {
+      int p = cr->tick() - cr->measure()->tick();
       if (cr->tuplet() && !cr->tuplet()->elements().isEmpty()) {
             if (cr->tuplet()->elements().front() == cr)     // end beam at tuplet
                   return true;
             return false;
             }
-      int l = cr->duration().ticks();
+      Fraction l  = cr->duration();
+      Fraction pl = prevCr ? prevCr->duration() : Fraction(0,1);
+      bool debug = false;
       for (unsigned i = 0; i < sizeof(endBeamList)/sizeof(*endBeamList); ++i) {
             const BeamHint& h = endBeamList[i];
             if (!h.timeSig.isZero() && (!h.timeSig.identical(ts)))
                   continue;
-            if (h.noteLen.numerator()) {
-                  int len = h.noteLen.ticks();
-                  if (len != l) {
-                        continue;
-                        }
+            if (!h.noteLen.isZero() && (h.noteLen != l))
+                  continue;
+
+            if (!h.prevNoteLen.isZero()) {
+                  debug = true;
+                  }
+            if (!h.prevNoteLen.isZero() && (h.prevNoteLen != pl)) {
+                  printf("debug: %d/%d != %d/%d\n",
+                     h.prevNoteLen.numerator(), h.prevNoteLen.denominator(),
+                     pl.numerator(), pl.denominator());
+                  continue;
                   }
             if (!h.pos.isZero()) {
                   int pos = h.pos.ticks();
                   if (pos != p) {
+                        if (debug)
+                              printf("   ticks %d != %d\n", pos, p);
                         continue;
                         }
                   }

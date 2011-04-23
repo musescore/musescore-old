@@ -33,18 +33,16 @@ class Painter;
 //---------------------------------------------------------
 //   BeamHint
 //    beam hint for autobeamer
-//
-//    used for "start beam hints" list and "end beam hints"
-//    list
 //---------------------------------------------------------
 
 struct BeamHint {
       Fraction noteLen;
+      Fraction prevNoteLen; // zero = all notes
       Fraction timeSig;     // valid for this timesig; zero = valid for all
       Fraction pos;
 
-      BeamHint(int a, int b, int c, int d, int e, int f)
-         : noteLen(a, b), timeSig(c, d), pos(e, f) {}
+      BeamHint(Fraction sig, Fraction p, Fraction len, Fraction prevLen)
+         : noteLen(len), prevNoteLen(prevLen), timeSig(sig), pos(p) {}
       };
 
 //
@@ -135,6 +133,6 @@ class Beam : public Element {
       void setGrow2(double val) { _grow2 = val; }
       };
 
-extern bool endBeam(const Fraction&, ChordRest* cr, int p);
+extern bool endBeam(const Fraction&, ChordRest* cr, ChordRest* prevCr);
 #endif
 
