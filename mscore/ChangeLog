@@ -1,3 +1,6 @@
+23.apr (la)
+      - fix #10370: Shortcuts cannot be cleared
+        implement "reset to defaults" in preferences-shortcuts dialog
 20.apr (la)
       - fix #10335: importCharsetList does not appear
 18.apr (la)
