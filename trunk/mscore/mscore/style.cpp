@@ -622,7 +622,8 @@ StyleData::StyleData(const StyleData& s)
             _chordList = new ChordList(*(s._chordList));
       else
             _chordList = 0;
-      _textStyles = s._textStyles;
+      _customChordList = s._customChordList;
+      _textStyles      = s._textStyles;
       }
 
 //---------------------------------------------------------

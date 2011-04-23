@@ -44,9 +44,11 @@ struct TabScoreView {
 class ScoreTab : public QWidget {
       Q_OBJECT
       QList<Score*>* scoreList;
-      QTabBar* tab;
-      QTabBar* tab2;
+      QTabBar* tab;                 // list of scores
+      QTabBar* tab2;                // list of excerpts for current score
       QStackedLayout* stack;
+
+      void clearTab2();
 
    signals:
       void currentScoreViewChanged(ScoreView*);
@@ -64,7 +66,7 @@ class ScoreTab : public QWidget {
       int currentIndex() const;
       void setCurrentIndex(int);
       void removeTab(int);
-      int count() const { return scoreList->size(); }
+      int count() const       { return scoreList->size(); }
       ScoreView* view(int) const;
       QSplitter* viewSplitter(int n) const;
 

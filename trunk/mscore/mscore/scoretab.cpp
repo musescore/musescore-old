@@ -111,13 +111,28 @@ QSplitter* ScoreTab::viewSplitter(int n) const
       }
 
 //---------------------------------------------------------
+//   clearTab2
+//---------------------------------------------------------
+
+void ScoreTab::clearTab2()
+      {
+      tab2->blockSignals(true);
+      int n = tab2->count();
+      for (int i = 0; i < n; ++i)
+            tab2->removeTab(0);
+      tab2->blockSignals(false);
+      }
+
+//---------------------------------------------------------
 //   setCurrent
 //---------------------------------------------------------
 
 void ScoreTab::setCurrent(int n)
       {
       if (n == -1) {
+            clearTab2();
             tab2->setVisible(false);
+            clearTab2();
             emit currentScoreViewChanged(0);
             return;
             }
@@ -167,20 +182,21 @@ void ScoreTab::setCurrent(int n)
             }
 #endif
       stack->setCurrentWidget(vs);
-      tab2->blockSignals(true);
-      for (int i = 0; i < tab2->count(); ++i)
-            tab2->removeTab(0);
+      clearTab2();
       if (v) {
             Score* score = v->score();
             if (score->parentScore())
                   score = score->parentScore();
             QList<Excerpt*>* excerpts = score->excerpts();
             if (excerpts && !excerpts->isEmpty()) {
+                  tab2->blockSignals(true);
                   tab2->addTab(score->name());
-                  foreach(Excerpt* excerpt, *excerpts)
+                  foreach(Excerpt* excerpt, *excerpts) {
                         tab2->addTab(excerpt->score()->name());
-                  tab2->setVisible(true);
+                        }
                   tab2->setCurrentIndex(tsv->part);
+                  tab2->blockSignals(false);
+                  tab2->setVisible(true);
                   }
             else {
                   tab2->setVisible(false);
@@ -189,7 +205,6 @@ void ScoreTab::setCurrent(int n)
       else {
             tab2->setVisible(false);
             }
-      tab2->blockSignals(false);
       emit currentScoreViewChanged(v);
       }
 
@@ -205,21 +220,19 @@ void ScoreTab::updateExcerpts()
             return;
       ScoreView* v = view(idx);
       Score* score = v->score();
-      int n = tab2->count();
-      tab2->blockSignals(true);
-      for (int i = 0; i < n; ++i)
-            tab2->removeTab(0);
+      clearTab2();
       QList<Excerpt*>* excerpts = score->excerpts();
       if (v && excerpts && !excerpts->isEmpty()) {
+            tab2->blockSignals(true);
             tab2->addTab(score->name());
             foreach(Excerpt* excerpt, *excerpts)
                   tab2->addTab(excerpt->score()->name());
+            tab2->blockSignals(true);
             tab2->setVisible(true);
             }
       else {
             tab2->setVisible(false);
             }
-      tab2->blockSignals(false);
       }
 
 //---------------------------------------------------------
