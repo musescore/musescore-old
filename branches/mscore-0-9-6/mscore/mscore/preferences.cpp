@@ -837,7 +837,22 @@ void PreferenceDialog::updateSCListView()
 
 void PreferenceDialog::resetShortcutClicked()
       {
-      printf("resetShortcutClicked\n");
+      QTreeWidgetItem* active = shortcutList->currentItem();
+      if (!active)
+            return;
+      QString str = active->data(0, Qt::UserRole).toString();
+      if (str.isEmpty())
+            return;
+      Shortcut* shortcut = localShortcuts[str];
+
+      for (unsigned i = 0;; ++i) {
+            if (MuseScore::sc[i].xml == shortcut->xml) {
+                  shortcut->key = MuseScore::sc[i].key;
+                  active->setText(1, shortcut->key.toString(QKeySequence::NativeText));
+                  shortcutsChanged = true;
+                  break;
+                  }
+            }
       }
 
 //---------------------------------------------------------
