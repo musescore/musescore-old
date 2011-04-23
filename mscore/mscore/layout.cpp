@@ -399,13 +399,12 @@ void Score::layoutStage2()
             Measure* measure = 0;
 
             BeamMode bm = BEAM_AUTO;
-            for (Segment* segment = firstSegment(); segment; segment = segment->next1()) {
-                  Element* e = segment->element(track);
-                  if (((segment->subtype() != SegChordRest) && (segment->subtype() != SegGrace))
-                     || e == 0 || !e->isChordRest())
+            SegmentTypes st = SegGrace | SegChordRest;
+            for (Segment* segment = firstSegment(st); segment; segment = segment->next1(st)) {
+                  ChordRest* cr = static_cast<ChordRest*>(segment->element(track));
+                  if (cr == 0)
                         continue;
-                  ChordRest* cr = static_cast<ChordRest*>(e);
-                  bm            = cr->beamMode();
+                  bm = cr->beamMode();
                   if (cr->measure() != measure) {
                         if (measure && (bm != BEAM_MID)) {
                               if (beam) {
@@ -478,7 +477,7 @@ void Score::layoutStage2()
                               beamEnd = true;
                               }
                         else if (bm != BEAM_MID) {
-                              if (endBeam(measure->timesig(), cr, cr->tick() - measure->tick()))
+                              if (endBeam(measure->timesig(), cr, le))
                                     beamEnd = true;
                               if (le->tick() + le->actualTicks() < cr->tick())
                                     beamEnd = true;
@@ -532,7 +531,7 @@ void Score::layoutStage2()
                         else {
                               if (bm != BEAM_MID
                                    &&
-                                   (endBeam(measure->timesig(), cr, cr->tick() - measure->tick())
+                                   (endBeam(measure->timesig(), cr, a1)
                                    || bm == BEAM_BEGIN
                                    || (a1->segment()->subtype() != cr->segment()->subtype())
                                    || (a1->tick() + a1->actualTicks() < cr->tick())

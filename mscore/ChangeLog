@@ -1,4 +1,5 @@
 23.apr (ws)
+      - fix #3459: Beaming of sixteenth and eight note sequences in 4/4
       - fix #10365: Whole rests corrupt measure on re-loading scores with time
         longer than 4/4 (patch from Miwarre)
       - fix #10366: Oddity and possible crash with score excerpts
