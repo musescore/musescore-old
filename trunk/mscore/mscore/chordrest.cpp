@@ -366,8 +366,12 @@ bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets, con
       else if (tag == "durationType") {
             setDurationType(val);
             if (durationType().type() != Duration::V_MEASURE) {
-                  if ((type() == REST) && (durationType()==Duration::V_WHOLE && duration() != Fraction(4.4))) {
+//                  if ((type() == REST) && (durationType()==Duration::V_WHOLE && duration() != Fraction(4.4))) {
+                  // rest durations are initialized to whole measure duration when
+                  // created upon reading the <Rest> tag (see Measure::read() )
+                  if ((type() == REST) && (durationType()==Duration::V_WHOLE && duration() <= Fraction(4, 4))) {
                         // old pre 2.0 scores:
+                        // 4/4 of rest in a measure of 4/4 or less => whole MEASURE rest
                         setDurationType(Duration::V_MEASURE);
                         }
                   else
