@@ -38,9 +38,6 @@
 #include "page.h"
 #include "file.h"
 
-extern void writeShortcuts();
-extern void readShortcuts();
-
 bool useALSA = false, useJACK = false, usePortaudio = false;
 
 extern bool useFactorySettings;
@@ -72,6 +69,56 @@ static PeriodItem updatePeriods[] = {
       PeriodItem(2*30*24, QT_TRANSLATE_NOOP("preferences","Every 2 months")),
       PeriodItem(-1,      QT_TRANSLATE_NOOP("preferences","Never")),
       };
+
+//---------------------------------------------------------
+//   writeShortcuts
+//---------------------------------------------------------
+
+static void writeShortcuts()
+      {
+      QSettings s;
+      s.beginGroup("Shortcuts");
+
+      int n = 0;
+      foreach(Shortcut* shortcut, shortcuts) {
+            for (unsigned i = 0;; ++i) {
+                  if (MuseScore::sc[i].xml == shortcut->xml) {
+                        if (MuseScore::sc[i].key != shortcut->key) {
+                              s.setValue(QString("sc[%1]").arg(n),  shortcut->xml);
+                              s.setValue(QString("seq[%1]").arg(n), shortcut->key.toString(QKeySequence::PortableText));
+                              ++n;
+                              }
+                        break;
+                        }
+                  }
+            }
+      s.setValue("n", n);
+      s.endGroup();
+      }
+
+//---------------------------------------------------------
+//   readShortcuts
+//---------------------------------------------------------
+
+static void readShortcuts()
+      {
+      if (useFactorySettings)
+            return;
+      QSettings s;
+      s.beginGroup("Shortcuts");
+      int n = s.value("n", 0).toInt();
+
+      for (int i = 0; i < n; ++i) {
+            QString name = s.value(QString("sc[%1]").arg(i)).toString();
+            QString seq  = s.value(QString("seq[%1]").arg(i)).toString();
+            Shortcut* sc = shortcuts.value(name);
+            if (sc)
+                  sc->key = QKeySequence::fromString(seq, QKeySequence::PortableText);
+            else
+                  printf("MuseScore:readShortCuts: unknown tag <%s>\n", qPrintable(name));
+            }
+      s.endGroup();
+      }
 
 //---------------------------------------------------------
 //   appStyleSheet
@@ -1020,7 +1067,22 @@ void PreferenceDialog::updateSCListView()
 
 void PreferenceDialog::resetShortcutClicked()
       {
-      printf("resetShortcutClicked\n");
+      QTreeWidgetItem* active = shortcutList->currentItem();
+      if (!active)
+            return;
+      QString str = active->data(0, Qt::UserRole).toString();
+      if (str.isEmpty())
+            return;
+      Shortcut* shortcut = localShortcuts[str];
+
+      for (unsigned i = 0;; ++i) {
+            if (MuseScore::sc[i].xml == shortcut->xml) {
+                  shortcut->key = MuseScore::sc[i].key;
+                  active->setText(1, shortcut->key.toString(QKeySequence::NativeText));
+                  shortcutsChanged = true;
+                  break;
+                  }
+            }
       }
 
 //---------------------------------------------------------
@@ -1036,6 +1098,7 @@ void PreferenceDialog::clearShortcutClicked()
                   Shortcut* s = localShortcuts[str];
                   s->key = 0;
                   active->setText(1, s->key.toString(QKeySequence::NativeText));
+                  shortcutsChanged = true;
                   }
             }
       }
@@ -1397,60 +1460,6 @@ void PreferenceDialog::playPanelCurClicked()
       QPoint s(w->pos());
       playPanelX->setValue(s.x());
       playPanelY->setValue(s.y());
-      }
-
-//---------------------------------------------------------
-//   writeShortcuts
-//---------------------------------------------------------
-
-void writeShortcuts()
-      {
-      QSettings s;
-      s.beginGroup("Shortcuts");
-
-      int n = 0;
-      foreach(Shortcut* shortcut, shortcuts) {
-            for (unsigned i = 0;; ++i) {
-                  if (MuseScore::sc[i].xml == shortcut->xml) {
-                        if (MuseScore::sc[i].key != shortcut->key) {
-                              QString tag("sc[%1]");
-                              s.setValue(tag.arg(n), shortcut->xml);
-                              tag = "seq[%1]";
-                              s.setValue(tag.arg(n), shortcut->key.toString(QKeySequence::PortableText));
-                              ++n;
-                              }
-                        break;
-                        }
-                  }
-            }
-      s.setValue("n", n);
-      s.endGroup();
-      }
-
-//---------------------------------------------------------
-//   readShortcuts
-//---------------------------------------------------------
-
-void readShortcuts()
-      {
-      if (useFactorySettings)
-            return;
-      QSettings s;
-      s.beginGroup("Shortcuts");
-      int n = s.value("n", 0).toInt();
-
-      for (int i = 0; i < n; ++i) {
-            QString tag("sc[%1]");
-            QString name = s.value(tag.arg(i)).toString();
-            tag = "seq[%1]";
-            QString seq = s.value(tag.arg(i)).toString();
-            Shortcut* s = shortcuts.value(name);
-            if (s)
-                  s->key = QKeySequence::fromString(seq, QKeySequence::PortableText);
-            else
-                  printf("MuseScore:readShortCuts: unknown tag <%s>\n", qPrintable(name));
-            }
-      s.endGroup();
       }
 
 //---------------------------------------------------------
