@@ -50,6 +50,7 @@ install(FILES
       mscore_pt_BR.qm
       mscore_ro.qm
       mscore_ru.qm
+      mscore_sk.qm
       mscore_sl.qm
       mscore_sv.qm
       mscore_th.qm
