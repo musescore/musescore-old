@@ -82,6 +82,7 @@ void Album::print()
             Score* score = item->score;
             if (score == 0)
                   continue;
+            score->setPrinting(true);
             //
             // here we ignore the configured page offset
             //
