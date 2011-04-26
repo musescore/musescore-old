@@ -1,3 +1,6 @@
+26.apr (ws)
+      - implement #10228: Move "Save as..." formats such as .pdf to dedicated
+        "Export" menu item
 25.apr (ws)
       - implement Album manager
 23.apr (ws)
