@@ -26,6 +26,7 @@
 
 class Xml;
 struct ChordDescription;
+struct PageFormat;
 class ChordList;
 class Element;
 
@@ -407,6 +408,10 @@ class Style {
       bool load(QFile* qf);
       void load(QDomElement e);
       void save(Xml& xml, bool optimize);
+      PageFormat* pageFormat() const;
+      void setPageFormat(const PageFormat& pf);
+      double spatium() const;
+      void setSpatium(double v);
       };
 
 extern QVector<TextStyle> defaultTextStyles;

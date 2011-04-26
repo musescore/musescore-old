@@ -1049,11 +1049,12 @@ class ChangePageFormat : public UndoCommand {
       Score* score;
       PageFormat* pf;
       double spatium;
+      int pageOffset;
 
       void flip();
 
    public:
-      ChangePageFormat(Score*, PageFormat*, double sp);
+      ChangePageFormat(Score*, PageFormat*, double sp, int po);
       ~ChangePageFormat();
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }

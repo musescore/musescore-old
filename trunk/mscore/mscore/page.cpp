@@ -250,7 +250,7 @@ void Page::draw(Painter* painter) const
       //
 
       QTextDocument d;
-      int n = no() + 1 + _score->pageFormat()->_pageOffset;
+      int n = no() + 1 + _score->pageNumberOffset();
       d.setTextWidth(loWidth() - lm() - rm());
 
       QAbstractTextDocumentLayout::PaintContext c;
@@ -352,8 +352,7 @@ PageFormat::PageFormat()
    oddTopMargin(10.0 / INCH),
    oddBottomMargin(20.0 / INCH),
    landscape(preferences.landscape),
-   twosided(preferences.twosided),
-   _pageOffset(0)
+   twosided(preferences.twosided)
       {
       }
 
@@ -408,7 +407,7 @@ double PageFormat::height() const
 //    sizes are given in units of 1/10 spatium;
 //---------------------------------------------------------
 
-void PageFormat::read(QDomElement e)
+void PageFormat::read(QDomElement e, Score* score)
       {
       landscape = false;      // for compatibility with old versions
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
@@ -460,8 +459,8 @@ void PageFormat::read(QDomElement e)
                   size = paperSizeNameToIndex("Custom");
                   _width = val.toDouble() * .5 / PPI;
                   }
-            else if (tag == "page-offset")
-                  _pageOffset = val.toInt();
+            else if (tag == "page-offset")            // obsolete, moved to Score
+                  score->setPageNumberOffset(val.toInt());
             else
                   domError(e);
             }
@@ -581,9 +580,6 @@ void PageFormat::write(Xml& xml)
       xml.tag("bottom-margin", oddBottomMargin * t);
       xml.etag();
 
-      if (_pageOffset)
-            xml.tag("page-offset", _pageOffset);
-
       xml.etag();
       }
 
@@ -667,7 +663,7 @@ void Page::doRebuildBspTree()
 
 QString Page::replaceTextMacros(const QString& s) const
       {
-      int pageno = no() + 1 + _score->pageFormat()->_pageOffset;
+      int pageno = no() + 1 + _score->pageNumberOffset();
       QString d;
       int n = s.size();
       for (int i = 0; i < n; ++i) {
@@ -724,6 +720,6 @@ QString Page::replaceTextMacros(const QString& s) const
 
 bool Page::isOdd() const
       {
-      return (_no + 1 + score()->pageFormat()->pageOffset()) & 1;
+      return (_no + 1 + score()->pageNumberOffset()) & 1;
       }
 

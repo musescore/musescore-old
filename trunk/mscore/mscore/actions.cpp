@@ -2508,6 +2508,15 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Page Settings..."),
          QT_TRANSLATE_NOOP("action","Page Settings")
          ),
+      Shortcut(
+         STATE_NORMAL,
+         "album",
+         QT_TRANSLATE_NOOP("action","Album"),
+         0,
+         Qt::ApplicationShortcut,
+         QT_TRANSLATE_NOOP("action","Album Manager..."),
+         QT_TRANSLATE_NOOP("action","Album Manager")
+         ),
       // xml==0  marks end of list
       Shortcut(0, 0, 0, QKeySequence::UnknownKey)
       };

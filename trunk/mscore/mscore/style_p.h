@@ -90,6 +90,8 @@ class StyleData : public QSharedData {
       QVector<StyleVal> _values;
       mutable ChordList* _chordList;
       QList<TextStyle> _textStyles;
+      PageFormat* _pageFormat;
+      double _spatium;
 
       bool _customChordList;        // if true, chordlist will be saved as part of score
 
@@ -113,7 +115,11 @@ class StyleData : public QSharedData {
       const ChordDescription* chordDescription(int id) const;
       ChordList* chordList() const;
       void setChordList(ChordList*);      // Style gets ownership of ChordList
+      PageFormat* pageFormat() const           { return _pageFormat; }
+      void setPageFormat(const PageFormat& pf);
       friend class Style;
+      double spatium() const    { return _spatium; }
+      void setSpatium(double v) { _spatium = v; }
       };
 
 #endif

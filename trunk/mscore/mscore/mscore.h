@@ -71,6 +71,7 @@ class Style;
 class PianoTools;
 class MediaDialog;
 class Profile;
+class AlbumManager;
 
 extern QString mscoreGlobalShare;
 static const int PROJECT_LIST_LEN = 6;
@@ -224,6 +225,7 @@ class MuseScore : public QMainWindow {
       QMenu* menuNotes;
       QMenu* menuLayout;
       QMenu* menuStyle;
+      AlbumManager* albumManager;
 
       QWidget* searchDialog;
       QComboBox* searchCombo;
@@ -350,6 +352,7 @@ class MuseScore : public QMainWindow {
       void editRaster();
       void showPianoKeyboard();
       void showMediaDialog();
+      void showAlbumManager();
 
    private slots:
       void autoSaveTimerTimeout();

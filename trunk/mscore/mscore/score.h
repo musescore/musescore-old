@@ -205,8 +205,7 @@ class Score : public QObject {
       Revisions* _revisions;
       QList<Excerpt*> _excerpts;
 
-      double _spatium;
-      PageFormat* _pageFormat;
+      int _pageNumberOffset;        ///< Offset for page numbers.
 
       //
       // generated objects during layout:
@@ -469,7 +468,7 @@ class Score : public QObject {
       void undoMove(Element* e, const QPointF& pt);
       void undoChangeBracketSpan(Staff* staff, int column, int span);
       void undoChangeTuning(Note*, double);
-      void undoChangePageFormat(PageFormat*, double spatium);
+      void undoChangePageFormat(PageFormat*, double spatium, int);
       void undoChangeUserMirror(Note*, DirectionH);
       void undoChangeKeySig(Staff* ostaff, int tick, KeySigEvent st);
       void undoChangeClef(Staff* ostaff, Segment*, ClefType st);
@@ -544,8 +543,6 @@ class Score : public QObject {
       void updateStaffIndex();
       void sortStaves(QList<int>& dst);
       int readScore(QString name);
-
-      void setSpatium(double v);
 
       bool showInvisible() const   { return _showInvisible; }
       bool showUnprintable() const { return _showUnprintable; }
@@ -643,7 +640,7 @@ class Score : public QObject {
 
       StyleVal style(StyleIdx idx) const       { return _style.value(idx);   }
       Spatium styleS(StyleIdx idx) const       { return _style.valueS(idx);  }
-      qreal   styleP(StyleIdx idx) const       { return _style.valueS(idx).val() * _spatium;  }
+      qreal   styleP(StyleIdx idx) const       { return _style.valueS(idx).val() * spatium();  }
       QString styleSt(StyleIdx idx) const      { return _style.valueSt(idx); }
       bool    styleB(StyleIdx idx) const       { return _style.valueB(idx);  }
       double  styleD(StyleIdx idx) const       { return _style.valueD(idx);  }
@@ -734,11 +731,12 @@ class Score : public QObject {
       void nextInputPos(ChordRest* cr, bool);
       void cmdMirrorNoteHead();
 
-      double spatium() const                  { return _spatium; }
-      PageFormat* pageFormat() const          { return _pageFormat; }
-      void setPageFormat(const PageFormat& pf);
-      const QList<Page*>& pages() const       { return _pages; }
-      QList<System*>* systems()               { return &_systems; }
+      double spatium() const                   { return style()->spatium();    }
+      void setSpatium(double v)                { style()->setSpatium(v);       }
+      PageFormat* pageFormat() const           { return style()->pageFormat(); }
+      void setPageFormat(const PageFormat& pf) { style()->setPageFormat(pf);   }
+      const QList<Page*>& pages() const        { return _pages;                }
+      QList<System*>* systems()                { return &_systems;             }
 
       MeasureBase* first() const;
       MeasureBase* last()  const;
@@ -751,7 +749,7 @@ class Score : public QObject {
 
       virtual void add(Element*);
       virtual void remove(Element*);
-      double point(const Spatium sp) const { return sp.val() * _spatium; }
+      double point(const Spatium sp) const { return sp.val() * spatium(); }
 
       void scanElements(void* data, void (*func)(void*, Element*));
       void selectSimilar(Element*, bool);
@@ -827,6 +825,8 @@ class Score : public QObject {
       void cmdSplitMeasure();
       void cmdJoinMeasure();
       void timesigStretchChanged(TimeSig* ts, Measure* fm, int staffIdx);
+      int pageNumberOffset() const          { return _pageNumberOffset; }
+      void setPageNumberOffset(int v)       { _pageNumberOffset = v; }
       };
 
 extern Score* gscore;

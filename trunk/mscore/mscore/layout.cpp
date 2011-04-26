@@ -980,11 +980,11 @@ bool Score::layoutPage()
                         if (ps->staves()->isEmpty())
                               b1 = 0.0;
                         else
-                              b1 = ps->distanceDown(ps->staves()->size() - 1).val() * _spatium;
+                              b1 = ps->distanceDown(ps->staves()->size() - 1).val() * spatium();
                         double b2  = 0.0;
                         foreach(System* s, sl) {
-                              if (s->distanceUp(0).val() * _spatium > b2)
-                                    b2 = s->distanceUp(0).val() * _spatium;
+                              if (s->distanceUp(0).val() * spatium() > b2)
+                                    b2 = s->distanceUp(0).val() * spatium();
                               }
                         if (b2 > b1)
                               moveY = b2 - b1;
@@ -1571,27 +1571,6 @@ Page* Score::addPage()
       }
 
 //---------------------------------------------------------
-//   setPageFormat
-//---------------------------------------------------------
-
-void Score::setPageFormat(const PageFormat& pf)
-      {
-      *_pageFormat = pf;
-      }
-
-//---------------------------------------------------------
-//   setInstrumentNames
-//---------------------------------------------------------
-
-#if 0
-void Score::setInstrumentNames()
-      {
-      for (iSystem is = systems()->begin(); is != systems()->end(); ++is)
-            (*is)->setInstrumentNames();
-      }
-#endif
-
-//---------------------------------------------------------
 //   searchTieNote
 //---------------------------------------------------------
 
@@ -1852,20 +1831,20 @@ void Score::layoutFingering(Fingering* f)
             x = headWidth * .5;
             if (below) {
                   // place fingering below note
-                  y = fh + _spatium * .4;
+                  y = fh + spatium() * .4;
                   if (chord->stem() && !chord->up()) {
                         // on stem side
                         y += chord->stem()->height();
-                        x -= _spatium * .4;
+                        x -= spatium() * .4;
                         }
                   }
             else {
                   // place fingering above note
-                  y = -headHeight - _spatium * .4;
+                  y = -headHeight - spatium() * .4;
                   if (chord->stem() && chord->up()) {
                         // on stem side
                         y -= chord->stem()->height();
-                        x += _spatium * .4;
+                        x += spatium() * .4;
                         }
                   }
             }

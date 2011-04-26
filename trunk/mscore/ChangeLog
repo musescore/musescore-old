@@ -1,4 +1,8 @@
+25.apr (ws)
+      - implement Album manager
 23.apr (ws)
+      - move pageOffset from PageSettings() to Score
+      - move PageSettings() to Style()
       - fix #10370: Shortcuts cannot be cleared
       - implement "reset to defaults" in preferences-shortcuts dialog
       - fix #3459: Beaming of sixteenth and eight note sequences in 4/4
