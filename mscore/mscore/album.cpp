@@ -481,6 +481,7 @@ void AlbumManager::setAlbum(Album* a)
       scoreName->setText("");
       add->setEnabled(false);
       albumName->setEnabled(true);
+      print->setEnabled(true);
       }
 
 //---------------------------------------------------------
