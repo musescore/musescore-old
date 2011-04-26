@@ -304,18 +304,18 @@ if (${CMAKE_CXX_COMPILER_ID} EQUAL "Clang")
          OUTPUT ${PROJECT_BINARY_DIR}/all.h.pch
          COMMAND ${CMAKE_CXX_COMPILER}
            -x c++-header -g ${FLAGS}
-           -I"${QT_INCLUDE_DIR}"
+           -I${QT_INCLUDE_DIR}
            -o all.h.pch all.h
          DEPENDS ${PROJECT_BINARY_DIR}/all.h
          WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
          )
-      set (PCH ${PROJECT_BINARY_DIR}/all.h.gch)
+      set (PCH ${PROJECT_BINARY_DIR}/all.h.pch)
 else (${CMAKE_CXX_COMPILER_ID} EQUAL "Clang")
       add_custom_command(
          OUTPUT ${PROJECT_BINARY_DIR}/all.h.gch
          COMMAND ${CMAKE_CXX_COMPILER}
            -x c++-header -g  ${FLAGS}
-           -I"${QT_INCLUDE_DIR}"
+           -I${QT_HEADERS_DIR}
            -o all.h.gch all.h
          DEPENDS ${PROJECT_BINARY_DIR}/all.h
          WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
