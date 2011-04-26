@@ -528,7 +528,7 @@ bool Score::exportFile()
             }
 
       QString selectedFilter;
-      QString name    = QString("%1.mscz").arg(info.baseName());
+      QString name   = QString("%1.mscx").arg(info.baseName());
       QString filter = fl.join(";;");
       QString fn = mscore->getSaveScoreName(saveDialogTitle, name, filter, &selectedFilter);
       if (fn.isEmpty())
