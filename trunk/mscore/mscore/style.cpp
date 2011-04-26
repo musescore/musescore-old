@@ -1195,7 +1195,7 @@ TextStyleType StyleData::textStyleType(const QString& name) const
                   return TextStyleType(idx);
             ++idx;
             }
-printf("TextStyle <%s> not found\n", qPrintable(name));
+// printf("TextStyle <%s> not found\n", qPrintable(name));
       return TEXT_STYLE_INVALID;
       }
 

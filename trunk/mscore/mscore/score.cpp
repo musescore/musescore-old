@@ -1144,7 +1144,6 @@ void Score::setShowFrames(bool v)
 void Score::setClean(bool val)
       {
       val = !val;
-printf("score setDirty %d\n", val);
 
       if (_dirty != val) {
             _dirty         = val;

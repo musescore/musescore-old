@@ -83,6 +83,7 @@ class Text : public Element {
 
       TextStyle  _localStyle;       // use this properties if _styled is false
       TextStyleType _textStyle;     // text style to use if _styled is true
+      QString _styleName;           // style name of _localStyle (or "")
       bool _layoutToParentWidth;
 
    public:
@@ -177,6 +178,7 @@ class Text : public Element {
       QTextCursor* getCursor() const { return cursor; }
 
       virtual void spatiumChanged(double oldValue, double newValue);
+
       virtual void setTextStyle(TextStyleType);
       TextStyleType textStyle() const        { return _textStyle; }
       const TextStyle& style() const;
@@ -204,6 +206,8 @@ class Text : public Element {
       friend class TextProperties;
 
       virtual void textChanged()          {}
+      QString styleName() const           { return _styleName; }
+      void setStyleName(const QString& v) { _styleName = v;    }
       };
 
 //---------------------------------------------------------

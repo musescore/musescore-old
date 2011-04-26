@@ -489,6 +489,7 @@ void Inspector::updateElement(Element* el)
                   case MARKER:
                   case JUMP:
                   case TEXT:
+                  case STAFF_TEXT:
                         ew = new TextView;
                         break;
                   default:
