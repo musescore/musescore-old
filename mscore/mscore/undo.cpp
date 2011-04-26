@@ -1227,9 +1227,9 @@ void Score::undoChangeUserMirror(Note* n, DirectionH d)
 //   undoChangePageFormat
 //---------------------------------------------------------
 
-void Score::undoChangePageFormat(PageFormat* p, double v)
+void Score::undoChangePageFormat(PageFormat* p, double v, int pageOffset)
       {
-      undo()->push(new ChangePageFormat(this, p, v));
+      undo()->push(new ChangePageFormat(this, p, v, pageOffset));
       }
 
 //---------------------------------------------------------
@@ -2354,11 +2354,12 @@ void ChangeUserMirror::flip()
 //   ChangePageFormat
 //---------------------------------------------------------
 
-ChangePageFormat::ChangePageFormat(Score* cs, PageFormat* p, double s)
+ChangePageFormat::ChangePageFormat(Score* cs, PageFormat* p, double s, int po)
       {
       score   = cs;
       pf      = new PageFormat(*p);
       spatium = s;
+      pageOffset = po;
       }
 
 ChangePageFormat::~ChangePageFormat()
@@ -2374,13 +2375,16 @@ void ChangePageFormat::flip()
       {
       PageFormat f = *(score->pageFormat());
       double os    = score->spatium();
+      int po       = score->pageNumberOffset();
 
       *(score->pageFormat()) = *pf;
       score->setSpatium(spatium);
       score->spatiumChanged(os, spatium);
+      score->setPageNumberOffset(pageOffset);
 
       *pf     = f;
       spatium = os;
+      pageOffset = po;
       }
 
 //---------------------------------------------------------

@@ -371,6 +371,7 @@ MuseScore::MuseScore()
       _splitScreen          = false;
       _horizontalSplit      = true;
       chordStyleEditor      = 0;
+      albumManager          = 0;
 
       loadScoreDialog       = 0;
       saveScoreDialog       = 0;
@@ -670,6 +671,7 @@ MuseScore::MuseScore()
 
       _fileMenu->addSeparator();
       _fileMenu->addAction(getAction("parts"));
+      _fileMenu->addAction(getAction("album"));
       if (enableExperimental)
             _fileMenu->addAction(getAction("add-audio"));
       _fileMenu->addAction(getAction("print"));
@@ -2488,6 +2490,8 @@ void MuseScore::cmd(QAction* a)
             cmdInsertMeasures();
       else if (cmd == "inspector")
             startInspector();
+      else if (cmd == "album")
+            showAlbumManager();
       else if (cmd == "script-debug") {
             scriptDebug = a->isChecked();
             }

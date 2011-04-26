@@ -266,7 +266,7 @@ void PageSettings::setValues(Score* sc)
       landscape->setChecked(pf->landscape);
       twosided->setChecked(pf->twosided);
 
-	pageOffsetEntry->setValue(pf->_pageOffset + 1);
+	pageOffsetEntry->setValue(sc->pageNumberOffset() + 1);
 
       pageWidth->blockSignals(false);
       pageHeight->blockSignals(false);
@@ -348,13 +348,11 @@ void PageSettings::apply()
       pf.oddRightMargin   = oddPageRightMargin->value() * f;
       pf.landscape        = landscape->isChecked();
       pf.twosided         = twosided->isChecked();
-      pf._pageOffset      = pageOffsetEntry->value() - 1;
 
       double sp = spatiumEntry->value() * f1;
 
       cs->startCmd();
-
-      cs->undoChangePageFormat(&pf, sp);
+      cs->undoChangePageFormat(&pf, sp, pageOffsetEntry->value()-1);
       cs->setLayoutAll(true);
       cs->endCmd();
       }
@@ -504,8 +502,7 @@ void PageSettings::spatiumChanged(double val)
 
 void PageSettings::pageOffsetChanged(int val)
       {
-      PageFormat* f = preview->score()->pageFormat();
-	f->_pageOffset = val - 1;
+      preview->score()->setPageNumberOffset(val);
       preview->layout();
       }
 

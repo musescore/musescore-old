@@ -300,15 +300,6 @@ void MeasureBaseList::change(MeasureBase* ob, MeasureBase* nb)
       }
 
 //---------------------------------------------------------
-//   setSpatium
-//---------------------------------------------------------
-
-void Score::setSpatium(double v)
-      {
-      _spatium = v;
-      }
-
-//---------------------------------------------------------
 //   Score
 //---------------------------------------------------------
 
@@ -318,8 +309,7 @@ Score::Score(const Style* s)
       _parentScore    = 0;
       _revisions      = new Revisions;
       _symIdx         = 0;
-      _spatium        = preferences.spatium * DPI;
-      _pageFormat     = new PageFormat;
+      _pageNumberOffset = 0;
       startLayout     = 0;
       _undo           = new UndoStack();
       _repeatList     = new RepeatList(this);
@@ -369,8 +359,7 @@ Score::Score(Score* parent)
       _parentScore    = parent;
       _revisions      = 0;
       _symIdx         = 0;
-      _spatium        = preferences.spatium * DPI;
-      _pageFormat     = new PageFormat;
+      _pageNumberOffset = 0;
       startLayout     = 0;
       _undo           = 0;
       _repeatList     = 0;
@@ -425,7 +414,6 @@ Score::~Score()
       foreach(Excerpt* e, _excerpts)
             delete e;
       delete _revisions;
-      delete _pageFormat;
       delete _undo;           // this also removes _undoStack from Mscore::_undoGroup
       delete _tempomap;
       delete _sigmap;
@@ -626,7 +614,8 @@ void Score::write(Xml& xml, bool /*autosave*/)
 
       _syntiState.write(xml);
 
-      xml.tag("Spatium", _spatium / DPMM);
+      if (pageNumberOffset())
+            xml.tag("page-offset", pageNumberOffset());
       xml.tag("Division", AL::division);
       xml.curTrack = -1;
 
@@ -1155,6 +1144,8 @@ void Score::setShowFrames(bool v)
 void Score::setClean(bool val)
       {
       val = !val;
+printf("score setDirty %d\n", val);
+
       if (_dirty != val) {
             _dirty         = val;
             _playlistDirty = true;
@@ -1621,7 +1612,7 @@ bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
       //
       Staff* s    = staff(pos->staffIdx);
       double mag = staff(pos->staffIdx)->mag();
-      double lineDist = (s->useTablature() ? 1.5 * _spatium : _spatium * .5) * mag;
+      double lineDist = (s->useTablature() ? 1.5 * spatium() : spatium() * .5) * mag;
 
       pos->line  = lrint((pppp.y() - sstaff->bbox().y()) / lineDist);
       if (s->useTablature()) {
@@ -2454,7 +2445,7 @@ void Score::setSyntiState()
       {
       const SyntiState& s = synti->state();
       if (!(_syntiState == s)) {
-            _dirty = true;
+            // _dirty = true;       // DEBUG: conflicts with setting of default sound font
             _syntiState = s;
             }
       }

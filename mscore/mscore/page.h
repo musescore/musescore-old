@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2010 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -61,18 +61,16 @@ struct PageFormat {
       double oddBottomMargin;
       bool landscape;
       bool twosided;
-      int _pageOffset;              ///< Offset for page numbers.
 
    public:
       PageFormat();
       double width() const;         // return width in inch
       double height() const;        // height in inch
       QString name() const;
-      void read(QDomElement);
+      void read(QDomElement,  Score*);
       void readMusicXML(QDomElement, double);
       void write(Xml&);
       void writeMusicXML(Xml&, double);
-      int pageOffset() const { return _pageOffset; }
       };
 
 //---------------------------------------------------------

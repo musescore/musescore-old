@@ -147,6 +147,7 @@ bool LoadFile::load(const QString& name)
 
 bool MuseScore::checkDirty(Score* s)
       {
+printf("checkDirty %d %s\n", s->dirty(), qPrintable(s->name()));
       if (s->dirty()) {
             QMessageBox::StandardButton n = QMessageBox::warning(this, tr("MuseScore"),
                tr("Save changes to the score \"%1\"\n"
@@ -1539,7 +1540,9 @@ bool Score::read(QDomElement dScore)
                         _syntiState.append(SyntiParameter("soundfont", preferences.soundFont));
                   }
             else if (tag == "Spatium")
-                  setSpatium (val.toDouble() * DPMM);
+                  _style.setSpatium (val.toDouble() * DPMM); // obsolete, moved to Style
+            else if (tag == "page-offset")            // obsolete, moved to Score
+                  setPageNumberOffset(i);
             else if (tag == "Division")
                   _fileDivision = i;
             else if (tag == "showInvisible")
@@ -1561,7 +1564,7 @@ bool Score::read(QDomElement dScore)
                   _style.setTextStyle(s);
                   }
             else if (tag == "page-layout")
-                  pageFormat()->read(ee);
+                  pageFormat()->read(ee, this);
             else if (tag == "copyright" || tag == "rights") {
                   Text* text = new Text(this);
                   text->read(ee);
@@ -1874,7 +1877,7 @@ void Score::print(QPrinter* printer)
             const QList<Page*> pl = pages();
             int pages = pl.size();
 
-            int offset = pageFormat()->pageOffset();
+            int offset   = pageNumberOffset();
             int fromPage = printer->fromPage() - 1 - offset;
             int toPage   = printer->toPage() - 1 - offset;
             if (fromPage < 0)

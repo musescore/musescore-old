@@ -166,7 +166,7 @@ void Score::end1()
             emit updateAll();
       else {
             // update a little more:
-            double d = _spatium * .5;
+            double d = spatium() * .5;
             refresh.adjust(-d, -d, 2 * d, 2 * d);
             emit dataChanged(refresh);
             }

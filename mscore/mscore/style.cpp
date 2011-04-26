@@ -28,6 +28,7 @@
 #include "harmony.h"
 #include "preferences.h"
 #include "chordlist.h"
+#include "page.h"
 
 Style* style;
 //  20 points        font design size
@@ -612,6 +613,8 @@ StyleData::StyleData()
 
 // _textStyles.append(TextStyle(defaultTextStyles[i]));
       _chordList = 0;
+      _pageFormat = new PageFormat;
+      _spatium = preferences.spatium * DPI;
       };
 
 StyleData::StyleData(const StyleData& s)
@@ -624,6 +627,8 @@ StyleData::StyleData(const StyleData& s)
             _chordList = 0;
       _customChordList = s._customChordList;
       _textStyles      = s._textStyles;
+      _pageFormat      = new PageFormat(*(s._pageFormat));
+      _spatium         = s._spatium;
       }
 
 //---------------------------------------------------------
@@ -633,6 +638,7 @@ StyleData::StyleData(const StyleData& s)
 StyleData::~StyleData()
       {
       delete _chordList;
+      delete _pageFormat;
       }
 
 //---------------------------------------------------------
@@ -905,6 +911,8 @@ void StyleData::load(QDomElement e)
                   s.read(e);
                   setTextStyle(s);
                   }
+            else if (tag == "Spatium")
+                  setSpatium (val.toDouble() * DPMM);
             else if (tag == "displayInConcertPitch") {
                   set(StyleVal(ST_concertPitch, bool(val.toInt())));
                   }
@@ -1015,6 +1023,7 @@ void StyleData::save(Xml& xml, bool optimize) const
             _chordList->write(xml);
             xml.etag();
             }
+      xml.tag("Spatium", _spatium / DPMM);
       xml.etag();
       }
 
@@ -1282,7 +1291,7 @@ void TextStyle::setFont(const QFont&)
 
 Style::Style()
       {
-      d = new StyleData;
+      d        = new StyleData;
       }
 
 Style::Style(const Style& s)
@@ -1296,7 +1305,7 @@ Style::~Style()
 
 Style& Style::operator=(const Style& s)
       {
-      d = s.d;
+      d        = s.d;
       return *this;
       }
 
@@ -1509,4 +1518,36 @@ bool StyleData::load(QFile* qf)
       return true;
       }
 
+//---------------------------------------------------------
+//   pageFormat
+//---------------------------------------------------------
+
+PageFormat* Style::pageFormat() const
+      {
+      return d->pageFormat();
+      }
+
+//---------------------------------------------------------
+//   setPageFormat
+//---------------------------------------------------------
+
+void Style::setPageFormat(const PageFormat& pf)
+      {
+      d->setPageFormat(pf);
+      }
+
+void StyleData::setPageFormat(const PageFormat& pf)
+      {
+      *_pageFormat = pf;
+      }
+
+double Style::spatium() const
+      {
+      return d->spatium();
+      }
+
+void Style::setSpatium(double v)
+      {
+      d->setSpatium(v);
+      }
 
