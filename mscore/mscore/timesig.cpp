@@ -114,7 +114,7 @@ void TimeSig::setSubtype(int st)
                   break;
             default:
                   printf("illegal TimeSig subtype 0x%x\n", st);
-                  abort();
+                  break;
             }
       Element::setSubtype(st);
       }

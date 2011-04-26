@@ -78,10 +78,10 @@ Text::Text(const Text& e)
       _styled               = e._styled;
       _localStyle           = e._localStyle;
       _editMode             = e._editMode;
+      cursor                = 0;
       cursorPos             = e.cursorPos;
       _textStyle            = e._textStyle;
       _layoutToParentWidth  = e._layoutToParentWidth;
-      cursor                = 0;
       }
 
 Text::~Text()
@@ -521,6 +521,8 @@ void Text::writeProperties(Xml& xml, bool writeText) const
       Element::writeProperties(xml);
       if (!_styled)
             _localStyle.writeProperties(xml);
+      if (!_styleName.isEmpty())
+            xml.tag("styleName", _styleName);
       if (writeText) {
             if (_styled)
                   xml.tag("text", getText());
@@ -529,30 +531,6 @@ void Text::writeProperties(Xml& xml, bool writeText) const
                   xml.writeHtml(_doc->toHtml("utf-8"));
                   xml.etag();
                   }
-            }
-      }
-
-//---------------------------------------------------------
-//   spatiumChanged
-//---------------------------------------------------------
-
-void Text::spatiumChanged(double oldVal, double newVal)
-      {
-      Element::spatiumChanged(oldVal, newVal);
-      if (!sizeIsSpatiumDependent())
-            return;
-      double v = newVal / oldVal;
-      QTextCursor cursor(_doc);
-      cursor.movePosition(QTextCursor::Start);
-      for (;;) {
-            cursor.select(QTextCursor::BlockUnderCursor);
-            QTextCharFormat cf = cursor.charFormat();
-            QFont font = cf.font();
-            font.setPointSizeF(font.pointSizeF() * v);
-            cf.setFont(font);
-            cursor.setCharFormat(cf);
-            if (!cursor.movePosition(QTextCursor::NextBlock))
-                  break;
             }
       }
 
@@ -614,11 +592,20 @@ bool Text::readProperties(QDomElement e)
                         }
                   setTextStyle(TextStyleType(i));
                   }
-            else
-                  setTextStyle(score()->style()->textStyleType(val));
-            if (textStyle() != TEXT_STYLE_INVALID)
-                  _styled = true;
+            else {
+                  TextStyleType st = score()->style()->textStyleType(val);
+                  if (st != TEXT_STYLE_INVALID) {
+                        setTextStyle(st);
+                        _styled = true;
+                        }
+                  else {
+                        _styleName = val;       // name of local style
+                        _styled = false;
+                        }
+                  }
             }
+      else if (tag == "styleName")
+            _styleName = val;
       else if (tag == "align") {            // obsolete
             _localStyle.setAlign(Align(val.toInt()));
             _styled = false;
@@ -669,6 +656,30 @@ bool Text::readProperties(QDomElement e)
       else if (!Element::readProperties(e))
             return false;
       return true;
+      }
+
+//---------------------------------------------------------
+//   spatiumChanged
+//---------------------------------------------------------
+
+void Text::spatiumChanged(double oldVal, double newVal)
+      {
+      Element::spatiumChanged(oldVal, newVal);
+      if (!sizeIsSpatiumDependent())
+            return;
+      double v = newVal / oldVal;
+      QTextCursor cursor(_doc);
+      cursor.movePosition(QTextCursor::Start);
+      for (;;) {
+            cursor.select(QTextCursor::BlockUnderCursor);
+            QTextCharFormat cf = cursor.charFormat();
+            QFont font = cf.font();
+            font.setPointSizeF(font.pointSizeF() * v);
+            cf.setFont(font);
+            cursor.setCharFormat(cf);
+            if (!cursor.movePosition(QTextCursor::NextBlock))
+                  break;
+            }
       }
 
 //---------------------------------------------------------
@@ -1161,8 +1172,11 @@ void Text::propertyAction(ScoreView* viewer, const QString& s)
 
                         if (nText->_styled != _styled)
                               tt->_styled = nText->_styled;
-                        if (nText->_textStyle != _textStyle)
+                        if (nText->_textStyle != _textStyle) {
                               tt->_textStyle = nText->_textStyle;
+                              tt->styleChanged();
+                              }
+
                         if (!nText->_styled) {
                               if (nText->hasFrame() != hasFrame())
                                     tt->setHasFrame(nText->hasFrame());
@@ -1573,6 +1587,7 @@ void Text::styleChanged()
       if (_styled) {
             setText(getText());     // destroy formatting
             score()->setLayoutAll(true);
+printf("Text::styleChanged\n");
             }
       }
 
@@ -1642,12 +1657,10 @@ void TextProperties::accept()
       text->setLocalStyle(tp->textStyle());
 
       QDialog::accept();
-      if (tp->isStyled() != text->styled()) {
+      if (tp->isStyled() != text->styled() || tp->isStyled()) {
             // text->setTextStyle(tp->textStyleType());  // this sets styled = true
 
             text->_textStyle = tp->textStyleType();
-            text->setText(text->getText());      // init style
-
             text->setStyled(tp->isStyled());
             text->styleChanged();
             }

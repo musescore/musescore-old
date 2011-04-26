@@ -343,8 +343,8 @@ class Element {
       double magS() const;
       virtual void setMag(double val)           { _mag = val;    }
 
-      bool isText() { return
-                  type()  == TEXT
+      bool isText() const {
+              return type()  == TEXT
                 || type() == LYRICS
                 || type() == DYNAMIC
                 || type() == HARMONY

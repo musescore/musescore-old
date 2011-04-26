@@ -407,10 +407,11 @@ Staff* Element::staff() const
       if (_track == -1)
             return 0;
       Staff* st = score()->staff(staffIdx());
-      if (debugMode && st == 0) {
+/*      if (debugMode && st == 0) {
             printf("no staff: <%s> track %d staffIdx %d, staves %d\n",
                name(), track(), track()/VOICES, score()->staves().size());
             }
+      */
       return st;
       }
 
@@ -1133,15 +1134,29 @@ void RubberBand::draw(Painter* painter) const
 
 QByteArray Element::mimeData(const QPointF& dragOffset) const
       {
+      const Element* e = this;
+      const Element* ee = 0;
+      if (isText()) {
+            const Text* text = static_cast<const Text*>(this);
+            if (text->styled() && text->textStyle() >= TEXT_STYLES) {
+                  // this is a user defined style
+                  Text* ntext = static_cast<Text*>(clone());
+                  ntext->setStyled(false);
+                  ntext->setStyleName(name());
+                  ntext->setLocalStyle(text->style());
+                  ee = e = ntext;
+                  }
+            }
       QBuffer buffer;
       buffer.open(QIODevice::WriteOnly);
       Xml xml(&buffer);
       xml.stag("Element");
       if (!dragOffset.isNull())
             xml.tag("dragOffset", dragOffset);
-      write(xml);
+      e->write(xml);
       xml.etag();
       buffer.close();
+      delete ee;
       return buffer.buffer();
       }
 

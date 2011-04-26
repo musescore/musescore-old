@@ -1694,82 +1694,47 @@ void ScoreView::dragEnterEvent(QDragEnterEvent* event)
             ElementType type = Element::readType(e, &dragOffset);
 
             Element* el = 0;
-            switch(type) {
-                  case IMAGE:
-                        {
-                        // look ahead for image type
-                        QString path;
-                        for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
-                              QString tag(ee.tagName());
-                              if (tag == "path") {
-                                    path = ee.text();
-                                    break;
-                                    }
+            if (type == IMAGE) {
+                  // look ahead for image type
+                  QString path;
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        QString tag(ee.tagName());
+                        if (tag == "path") {
+                              path = ee.text();
+                              break;
                               }
-                        Image* image = 0;
-                        QString lp(path.toLower());
-
-                        if (lp.endsWith(".svg"))
-                              image = new SvgImage(score());
-                        else if (lp.endsWith(".jpg")
-                           || lp.endsWith(".png")
-                           || lp.endsWith(".gif")
-                           || lp.endsWith(".xpm")
-                              )
-                              image = new RasterImage(score());
-                        else {
-                              printf("unknown image format <%s>\n", path.toLatin1().data());
-                              }
-                        el = image;
                         }
-                        break;
-                  case SLUR:
-                  case VOLTA:
-                  case OTTAVA:
-                  case TRILL:
-                  case PEDAL:
-                  case HAIRPIN:
-                  case TEXTLINE:
-                  case KEYSIG:
-                  case CLEF:
-                  case TIMESIG:
-                  case BREATH:
-                  case GLISSANDO:
-                  case ARTICULATION:
-                  case CHORDLINE:
-                  case BEND:
-                  case ACCIDENTAL:
-                  case DYNAMIC:
-                  case TEXT:
-                  case FINGERING:
-                  case TEMPO_TEXT:
-                  case STAFF_TEXT:
-                  case NOTEHEAD:
-                  case TREMOLO:
-                  case LAYOUT_BREAK:
-                  case FRET_DIAGRAM:
-                  case MARKER:
-                  case STAFF_STATE:
-                  case INSTRUMENT_CHANGE:
-                  case JUMP:
-                  case REPEAT_MEASURE:
-                  case ICON:
-                  case NOTE:
-                  case SYMBOL:
-                  case CHORD:
-                  case SPACER:
-                  case ACCIDENTAL_BRACKET:
-                        el = Element::create(type, score());
-                        break;
-                  case BAR_LINE:
-                  case ARPEGGIO:
-                  case BRACKET:
-                        el = Element::create(type, score());
+                  Image* image = 0;
+                  QString lp(path.toLower());
+
+                  if (lp.endsWith(".svg"))
+                        image = new SvgImage(score());
+                  else if (lp.endsWith(".jpg")
+                     || lp.endsWith(".png")
+                     || lp.endsWith(".gif")
+                     || lp.endsWith(".xpm")
+                        )
+                        image = new RasterImage(score());
+                  else {
+                        printf("unknown image format <%s>\n", path.toLatin1().data());
+                        }
+                  el = image;
+                  }
+            else {
+                  el = Element::create(type, score());
+                  if (type == BAR_LINE || type == ARPEGGIO || type == BRACKET)
                         el->setHeight(_spatium * 5);
-                        break;
-                  default:
-                        printf("-dragEnter %s\n", Element::name(type));
-                        break;
+                  else if (el->isText()) {
+                        Text* text = static_cast<Text*>(el);
+                        QString sname = text->styleName();
+                        if (!text->styled() && !sname.isEmpty()) {
+                              // check if we can transform text into styled text
+                              Style* s = score()->style();
+                              TextStyleType st = s->textStyleType(sname);
+                              if (st != TEXT_STYLE_INVALID)
+                                    text->setTextStyle(st);
+                              }
+                        }
                   }
             if (el) {
                   dragElement = el;
