@@ -659,7 +659,7 @@ void SlurTie::slurPos(SlurPos* sp)
             yo = note2->yPos() + (hh * .5 + _spatium * .4) * _up;
             if (stem2) {
                   Beam* beam2 = ec->beam();
-                  if (stemPos
+                  if ((stemPos && (sc->up() == ec->up()))
                      || (beam2
                        && (!beam2->elements().isEmpty())
                        && (beam2->elements().front() != ec)
