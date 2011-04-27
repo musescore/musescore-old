@@ -1,5 +1,8 @@
 27.apr (ws)
-      - fix #10440: Another crash on time signature change
+      - fix #10416: Page settings crash for empty tab
+      - closed #10165: measure nu,. every n shows number (every n)+1
+        (patch from Miwarre)
+      - fix #10440: Another crash on time signature change (patch from Miwarre)
       - fix #10432: "Parts is broken"
 26.apr (ws)
       - implement #10228: Move "Save as..." formats such as .pdf to dedicated
