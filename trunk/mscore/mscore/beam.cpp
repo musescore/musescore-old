@@ -193,7 +193,8 @@ bool endBeam(const Fraction& ts, ChordRest* cr, ChordRest* prevCr)
 Beam::Beam(Score* s)
    : Element(s)
       {
-      setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
+//      setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
+      setFlags(ELEMENT_SELECTABLE);
       _direction       = AUTO;
       _up              = -1;
       _userModified[0] = false;
