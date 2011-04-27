@@ -83,6 +83,8 @@ printf("empty tuplet: removing\n");
 
 void Score::checkScore()
       {
+      if (!firstMeasure())
+            return;
       for (Segment* s = firstMeasure()->first(); s;) {
             Segment* ns = s->next1();
 

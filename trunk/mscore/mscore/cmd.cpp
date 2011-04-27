@@ -1404,7 +1404,7 @@ MeasureBase* Score::appendMeasure(ElementType type)
       mb->setTick(tick);
 
       if (type == MEASURE) {
-            Fraction ts(lastMeasure()->timesig());
+            Fraction ts(lastMeasure() ? lastMeasure()->timesig() : Fraction(4,4));
             Measure* measure = static_cast<Measure*>(mb);
             measure->setTimesig(ts);
             measure->setLen(ts);
