@@ -1,4 +1,5 @@
 27.apr (ws)
+      - fix #10440: Another crash on time signature change
       - fix #10432: "Parts is broken"
 26.apr (ws)
       - implement #10228: Move "Save as..." formats such as .pdf to dedicated
