@@ -227,7 +227,7 @@ void ScoreTab::updateExcerpts()
             tab2->addTab(score->name());
             foreach(Excerpt* excerpt, *excerpts)
                   tab2->addTab(excerpt->score()->name());
-            tab2->blockSignals(true);
+            tab2->blockSignals(false);
             tab2->setVisible(true);
             }
       else {

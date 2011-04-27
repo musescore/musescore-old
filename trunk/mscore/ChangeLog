@@ -1,3 +1,5 @@
+27.apr (ws)
+      - fix #10432: "Parts is broken"
 26.apr (ws)
       - implement #10228: Move "Save as..." formats such as .pdf to dedicated
         "Export" menu item
