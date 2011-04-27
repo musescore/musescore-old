@@ -1248,6 +1248,8 @@ void MuseScore::dropEvent(QDropEvent* event)
 
 void MuseScore::showPageSettings()
       {
+      if(!cs)
+            return;
       if (pageSettings == 0)
             pageSettings = new PageSettings();
       pageSettings->setScore(cs);
