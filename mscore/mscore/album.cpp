@@ -413,7 +413,7 @@ void AlbumManager::upClicked()
       QListWidgetItem* item = scoreList->takeItem(idx);
       scoreList->insertItem(idx-1, item);
       album->swap(idx, idx - 1);
-      currentScoreChanged(idx-1);
+      scoreList->setCurrentRow(idx-1);
       }
 
 //---------------------------------------------------------
@@ -429,7 +429,7 @@ void AlbumManager::downClicked()
       QListWidgetItem* item = scoreList->takeItem(idx+1);
       scoreList->insertItem(idx, item);
       album->swap(idx, idx+1);
-      currentScoreChanged(idx+1);
+      scoreList->setCurrentRow(idx+1);
       }
 
 //---------------------------------------------------------
