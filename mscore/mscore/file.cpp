@@ -437,7 +437,8 @@ bool Score::saveFile(bool autosave)
 bool Score::saveAs(bool saveCopy)
       {
       QStringList fl;
-      fl.append(tr("Compressed MuseScore Format (*.mscz)"));
+      fl.append(tr("MuseScore Format (*.mscz)"));
+      fl.append(tr("All Files (*)"));
       QString saveDialogTitle = saveCopy ? tr("MuseScore: Save a Copy") :
                                            tr("MuseScore: Save As");
 
@@ -2433,7 +2434,6 @@ QString MuseScore::getSaveScoreName(const QString& title,
             saveScoreDialog->setOption(QFileDialog::DontConfirmOverwrite, false);
             saveScoreDialog->setOption(QFileDialog::DontUseNativeDialog, true);
             saveScoreDialog->setLabelText(QFileDialog::Accept, tr("Save"));
-printf("getSave score name\n");
             }
       // setup side bar urls
       QList<QUrl> urls;
