@@ -1,3 +1,5 @@
+27.apr (la)
+      - fix #10048: Opening Page Settings causes crash
 23.apr (la)
       - fix #10370: Shortcuts cannot be cleared
         implement "reset to defaults" in preferences-shortcuts dialog
