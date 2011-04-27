@@ -1,4 +1,5 @@
 27.apr (ws)
+      - fix #35214: make beams not movable
       - fix #10416: Page settings crash for empty tab
       - closed #10165: measure nu,. every n shows number (every n)+1
         (patch from Miwarre)
