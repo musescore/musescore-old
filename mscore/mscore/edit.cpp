@@ -704,7 +704,7 @@ printf("  global sig does not change\n");
             undoRemoveElement(seg);
 printf("   cmdAddTimeSig1\n");
       int n;
-      if (ots->sig() == ts->sig() && ots->stretch() == ts->stretch()) {
+      if (ots && ots->sig() == ts->sig() && ots->stretch() == ts->stretch()) {
             // only symbol changes
             n = 0;
             }
