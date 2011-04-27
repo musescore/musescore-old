@@ -2968,6 +2968,7 @@ void Measure::layoutX(double stretch)
             double segmentWidth    = 0.0;
             double stretchDistance = 0.0;
             Segment* pSeg          = s->prev();
+            int pt                 = pSeg ? pSeg->subtype() : SegBarLine;
 
             for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
                   double minDistance = 0.0;
@@ -2983,10 +2984,9 @@ void Measure::layoutX(double stretch)
                               if (!cr)
                                     continue;
                               found = true;
-                              int pt = pSeg ? pSeg->subtype() : SegChordRest;
-                              if (!pSeg || (pt & (SegStartRepeatBarLine | SegBarLine))) {
+                              if (pt & (SegStartRepeatBarLine | SegBarLine)) {
                                     double sp       = score()->styleS(ST_barNoteDistance).val() * _spatium;
-                                    minDistance     = qMax(minDistance, sp * .3);
+                                    minDistance     = qMax(minDistance, sp);
                                     stretchDistance = sp * .7;
                                     }
                               else {
@@ -3033,7 +3033,7 @@ void Measure::layoutX(double stretch)
                         }
                   else {
                         Element* e = s->element(track);
-                        if ((segType == SegClef) && (segmentIdx == 0 || (s->prev()->subtype() != SegChordRest)))
+                        if ((segType == SegClef) && (pt != SegChordRest))
                               minDistance = score()->styleP(ST_clefLeftMargin);
 /*                        else if (segType == SegTimeSig)
                               minDistance = score()->styleP(ST_clefLeftMargin);

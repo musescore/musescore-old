@@ -147,7 +147,6 @@ bool LoadFile::load(const QString& name)
 
 bool MuseScore::checkDirty(Score* s)
       {
-printf("checkDirty %d %s\n", s->dirty(), qPrintable(s->name()));
       if (s->dirty()) {
             QMessageBox::StandardButton n = QMessageBox::warning(this, tr("MuseScore"),
                tr("Save changes to the score \"%1\"\n"
