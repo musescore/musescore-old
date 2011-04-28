@@ -196,6 +196,7 @@ Chord* Score::addChord(int tick, Duration d, Chord* oc, bool genTie, Tuplet* tup
       chord->setTrack(oc->track());
       chord->setDurationType(d);
       chord->setDuration(d.fraction());
+      undoAddCR(chord, measure, tick);
 
       foreach(Note* n, oc->notes()) {
             Note* nn = new Note(this);
@@ -209,7 +210,7 @@ Chord* Score::addChord(int tick, Duration d, Chord* oc, bool genTie, Tuplet* tup
                   undoAddElement(tie);
                   }
             }
-      undoAddCR(chord, measure, tick);
+//      undoAddCR(chord, measure, tick);
       return chord;
       }
 
