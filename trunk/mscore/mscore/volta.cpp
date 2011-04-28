@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -33,16 +33,17 @@
 Volta::Volta(Score* s)
    : TextLine(s)
       {
-      setLineWidth(Spatium(.18));
+      setLineWidth(s->styleS(ST_voltaLineWidth));
       setBeginText("1.", TEXT_STYLE_VOLTA);
 
       setBeginTextPlace(PLACE_BELOW);
       setContinueTextPlace(PLACE_BELOW);
 
       setBeginHook(true);
-      setBeginHookHeight(Spatium(1.9));
-      setYoff(-4.0);
-      setEndHookHeight(Spatium(1.9));
+      Spatium hook(s->styleS(ST_voltaHook));
+      setBeginHookHeight(hook);
+      setYoff(s->styleS(ST_voltaY).val());
+      setEndHookHeight(hook);
       setAnchor(ANCHOR_MEASURE);
       }
 
@@ -70,7 +71,10 @@ void Volta::setSubtype(int val)
 
 void Volta::layout()
       {
-      setPos(0.0, yoff() * spatium());
+      Spatium hook(score()->styleS(ST_voltaHook));
+      setBeginHookHeight(hook);
+      setYoff(score()->styleS(ST_voltaY).val());
+      setEndHookHeight(hook);
       TextLine::layout();
       }
 
@@ -118,8 +122,6 @@ void Volta::read(QDomElement e)
             else if (!TextLine::readProperties(e))
                   domError(e);
             }
-//      setSubtype(subtype());
-//      printf("readVolta: subtype %d\n", subtype());
       }
 
 //---------------------------------------------------------

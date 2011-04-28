@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2010 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -65,7 +65,7 @@ void LineSegment::updateGrips(int* grips, QRectF* grip) const
 
 QPointF LineSegment::canvasPos() const
       {
-      return pos();
+      return pos() + parent()->pos();
       }
 
 //---------------------------------------------------------
@@ -442,7 +442,7 @@ void SLine::layout()
                   seg->setPos2(QPointF(p2.x() - x1, 0.0));
                   }
             seg->layout();
-            seg->move(ipos());
+            seg->move(QPointF(0.0, _yoffset * spatium()));
             }
       }
 

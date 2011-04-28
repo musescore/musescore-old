@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2010 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -227,7 +227,11 @@ StyleType styleTypes[] = {
       StyleType("evenFooterR",             ST_STRING),
       StyleType("oddFooterL",              ST_STRING),
       StyleType("oddFooterC",              ST_STRING),
-      StyleType("oddFooterR",              ST_STRING)
+      StyleType("oddFooterR",              ST_STRING),
+
+      StyleType("voltaY",                  ST_SPATIUM),
+      StyleType("voltaHook",               ST_SPATIUM),
+      StyleType("voltaLineWidth",          ST_SPATIUM),
       };
 
 static const QString ff("FreeSerif");
@@ -606,6 +610,9 @@ StyleData::StyleData()
                      "</p>"
                    "</body>"
                  "</html>")),
+            StyleVal(ST_voltaY, Spatium(-3.0)),
+            StyleVal(ST_voltaHook, Spatium(1.9)),
+            StyleVal(ST_voltaLineWidth, Spatium(.1))
             };
 
       for (int idx = 0; idx < ST_STYLES; ++idx)

@@ -327,9 +327,9 @@ void TextLine::setBeginText(const QString& s, TextStyleType textStyle)
       {
       if (!_beginText) {
             _beginText = new Text(score());
+            _beginText->setParent(this);
             _beginText->setSubtype(TEXT_TEXTLINE);
             _beginText->setTextStyle(textStyle);
-            _beginText->setParent(this);
             }
       _beginText->setText(s);
       }
@@ -342,9 +342,9 @@ void TextLine::setContinueText(const QString& s, TextStyleType textStyle)
       {
       if (!_continueText) {
             _continueText = new Text(score());
+            _continueText->setParent(this);
             _continueText->setSubtype(TEXT_TEXTLINE);
             _continueText->setTextStyle(textStyle);
-            _continueText->setParent(this);
             }
       _continueText->setText(s);
       }
@@ -383,6 +383,7 @@ void TextLine::read(QDomElement e)
 
 void TextLine::writeProperties(Xml& xml, const TextLine* proto) const
       {
+// printf("  TextLine: begin text <%s> styled %d\n", qPrintable(_beginText->getText()), _beginText->styled());
       if (_beginHook) {
             if (proto == 0 || proto->beginHookHeight() != _beginHookHeight)
                   xml.tag("beginHookHeight", _beginHookHeight.val());
@@ -859,7 +860,7 @@ void TextLine::setContinueText(Text* v)
 
 void TextLine::layout()
       {
-      setPos(0.0, yoff() * spatium());
+      setPos(0.0, 0.0);
       SLine::layout();
       }
 

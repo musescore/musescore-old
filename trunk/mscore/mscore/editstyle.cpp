@@ -284,6 +284,8 @@ void EditStyle::getValues()
             lstyle.set(StyleIdx(ST_UfermataAnchor + i), cb->itemData(cb->currentIndex()).toInt());
             }
 //      lstyle.set(ST_warnPitchRange,  warnPitchRange->isChecked());
+      lstyle.set(ST_voltaY,                  Spatium(voltaY->value()));
+      lstyle.set(ST_voltaHook,               Spatium(voltaHook->value()));
       }
 
 //---------------------------------------------------------
@@ -421,7 +423,6 @@ void EditStyle::setValues()
       slurMidLineWidth->setValue(lstyle.value(ST_SlurMidWidth).toSpatium().val());
       slurDottedLineWidth->setValue(lstyle.value(ST_SlurDottedWidth).toSpatium().val());
       slurBow->setValue(lstyle.value(ST_SlurBow).toSpatium().val());
-//      ST_SectionPause,
       musicalSymbolFont->setCurrentIndex(lstyle.value(ST_MusicalSymbolFont).toString() == "Emmentaler" ? 0 : 1);
 
       showHeader->setChecked(lstyle.value(ST_showHeader).toBool());
@@ -443,6 +444,9 @@ void EditStyle::setValues()
       oddFooterL->setHtml(lstyle.value(ST_oddFooterL).toString());
       oddFooterC->setHtml(lstyle.value(ST_oddFooterC).toString());
       oddFooterR->setHtml(lstyle.value(ST_oddFooterR).toString());
+
+      voltaY->setValue(lstyle.value(ST_voltaY).toSpatium().val());
+      voltaHook->setValue(lstyle.value(ST_voltaHook).toSpatium().val());
       }
 
 //---------------------------------------------------------

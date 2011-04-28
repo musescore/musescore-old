@@ -3553,10 +3553,8 @@ void MuseScore::initOsc()
 
 void MuseScore::initOsc()
       {
-      printf("initOSC 1 \n");
       if (!preferences.useOsc)
             return;
-printf("initOSC 2 \n");
       int port;
       if (oscPort)
             port = oscPort;
@@ -3779,7 +3777,7 @@ void MuseScore::createNewProfile()
 
 void MuseScore::deleteProfile()
       {
-printf("delete profile\n");
+printf("TODO: delete profile\n");
       }
 
 //---------------------------------------------------------

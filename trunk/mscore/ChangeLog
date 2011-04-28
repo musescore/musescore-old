@@ -1,4 +1,5 @@
 28.apr (ws)
+      - style additions for volta
       - fix #8996: crash when extending note length across bar line
 27.apr (ws)
       - fix #9920: make beams not movable
