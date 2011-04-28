@@ -233,12 +233,10 @@ void Palette::mouseDoubleClickEvent(QMouseEvent* ev)
 
       score->startCmd();
       if (sel.state() == SEL_LIST) {
-printf("sel list\n");
             foreach(Element* e, sel.elements())
                   applyDrop(score, viewer, e, element);
             }
       else if (sel.state() == SEL_RANGE) {
-printf("sel range\n");
             // TODO: check for other element types:
             if (element->type() == BAR_LINE) {
                   // TODO: apply to multiple measures
@@ -316,9 +314,9 @@ void Palette::mouseMoveEvent(QMouseEvent* ev)
       {
       if ((currentIdx != -1) && (ev->buttons() & Qt::LeftButton)
          && (ev->pos() - dragStartPosition).manhattanLength() > QApplication::startDragDistance()) {
-            QDrag* drag = new QDrag(this);
-            QMimeData* mimeData = new QMimeData;
             if (cells[currentIdx]) {
+                  QDrag* drag = new QDrag(this);
+                  QMimeData* mimeData = new QMimeData;
                   Element* el  = cells[currentIdx]->element;
                   // QRect ir     = idxRect(currentIdx);
                   qreal mag    = PALETTE_SPATIUM * extraMag / gscore->spatium();
@@ -327,7 +325,6 @@ void Palette::mouseMoveEvent(QMouseEvent* ev)
 
                   // DEBUG:
                   spos.setX(0.0);
-
                   mimeData->setData(mimeSymbolFormat, el->mimeData(spos));
                   drag->setMimeData(mimeData);
 
@@ -614,10 +611,11 @@ void Palette::dragEnterEvent(QDragEnterEvent* event)
       if (data->hasUrls()) {
             QList<QUrl>ul = event->mimeData()->urls();
             QUrl u = ul.front();
-            if (debugMode)
+            if (debugMode) {
                   printf("drag Url: %s\n", u.toString().toLatin1().data());
-            printf("scheme <%s> path <%s>\n", u.scheme().toLatin1().data(),
-               u.path().toLatin1().data());
+                  printf("scheme <%s> path <%s>\n", u.scheme().toLatin1().data(),
+                     u.path().toLatin1().data());
+                  }
             if (u.scheme() == "file") {
                   QFileInfo fi(u.path());
                   QString suffix(fi.suffix().toLower());
@@ -1217,17 +1215,19 @@ void PaletteBox::contextMenu(const QPoint& pt)
       b->setChecked(preferences.singlePalette);
 
       QAction* a = menu.addAction(tr("Reset to factory defaults"));
-      QString s(dataPath + "/" + "mscore-palette.xml");
-      QFile f(s);
-      if (!f.exists() && !_dirty)
-            a->setEnabled(false);
+// obsoleted by profile:
+//      QString s(dataPath + "/" + "mscore-palette.xml");
+//      QFile f(s);
+//      if (!f.exists() && !_dirty)
+//            a->setEnabled(false);
 
       QAction* ra = menu.exec(mapToGlobal(pt));
       if (a == ra) {
-            if (f.exists())
-                  QFile::remove(s);
+//            if (f.exists())
+//                  QFile::remove(s);
             clear();
             mscore->populatePalette();      // hack
+            _dirty = true;                  // save profile
             }
       else if (b == ra) {
             preferences.singlePalette = b->isChecked();

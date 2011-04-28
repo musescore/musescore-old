@@ -1419,6 +1419,7 @@ void ScoreView::paintEvent(QPaintEvent* ev)
             }
       if (dragElement)
             dragElement->scanElements(&vp, paintElement);
+
       if (grips) {
             qreal lw = 2.0/p.matrix().m11();
             // QPen pen(Qt::blue);
@@ -1874,7 +1875,8 @@ void ScoreView::dragMoveEvent(QDragMoveEvent* event)
                         break;
                   }
             score()->addRefresh(dragElement->abbox());
-            dragElement->setPos(pos - dragOffset);
+//            dragElement->setPos(pos - dragOffset);
+            dragElement->setPos(pos);
             score()->addRefresh(dragElement->abbox());
             _score->end();
             return;

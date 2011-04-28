@@ -70,7 +70,6 @@ void Profile::write()
             dir.mkpath(_path);
             _path += "/" + _name + ext;
             }
-printf("Profile::write %s\n", qPrintable(_path));
       QFile f(_path);
       if (!f.open(QIODevice::WriteOnly)) {
             QString s = mscore->tr("Open Profile File\n") + f.fileName() + mscore->tr("\nfailed: ")
@@ -99,7 +98,6 @@ printf("Profile::write %s\n", qPrintable(_path));
 
 void Profile::read()
       {
-printf("Profile::read %s\n", qPrintable(_path));
       if (_name == "default") {
             PaletteBox* paletteBox = mscore->getPaletteBox();
             paletteBox->clear();

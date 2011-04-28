@@ -442,15 +442,13 @@ void Text::draw(Painter* painter) const
 void Text::setTextStyle(TextStyleType idx)
       {
       _textStyle = idx;
-      bool isStyled;
       if (_textStyle != TEXT_STYLE_INVALID) {
-            isStyled = true;
             _localStyle = score()->textStyle(_textStyle);
             setText(getText());      // init style
+            _styled = true;
             }
       else
-            isStyled = false;
-      setStyled(isStyled);
+            _styled = false;
       }
 
 //---------------------------------------------------------
@@ -1587,7 +1585,6 @@ void Text::styleChanged()
       if (_styled) {
             setText(getText());     // destroy formatting
             score()->setLayoutAll(true);
-printf("Text::styleChanged\n");
             }
       }
 

@@ -148,7 +148,8 @@ void MuseScore::showPalette(bool visible)
             populatePalette();
 #endif
             }
-      paletteBox->setShown(visible);
+      if (paletteBox)   // read failed?
+            paletteBox->setShown(visible);
       a->setChecked(visible);
       }
 

@@ -123,9 +123,10 @@ void Album::print()
 //    return true on success
 //---------------------------------------------------------
 
-bool Album::read(const QString& path)
+bool Album::read(const QString& p)
       {
-      QFile f(path);
+      _path = p;
+      QFile f(_path);
       if (!f.open(QIODevice::ReadOnly)) {
             QMessageBox::warning(0,
                QWidget::tr("MuseScore: Open Album failed:"),
@@ -139,7 +140,7 @@ bool Album::read(const QString& path)
       QString err;
       if (!doc.setContent(&f, false, &err, &line, &column)) {
             QString error = QString("error reading style file %1 at line %2 column %3: %4\n")
-               .arg(path).arg(line).arg(column).arg(err);
+               .arg(_path).arg(line).arg(column).arg(err);
             QMessageBox::warning(0,
                QWidget::tr("MuseScore: Load Album failed:"),
                error,
