@@ -1454,6 +1454,11 @@ void Chord::layout()
                         _space.setRw(x);
                   }
             }
+      if (_noteType != NOTE_NORMAL) {
+            double m = score()->styleD(ST_graceNoteMag);
+            _space.rLw() *= m;
+            _space.rRw() *= m;
+            }
       }
 
 //---------------------------------------------------------
