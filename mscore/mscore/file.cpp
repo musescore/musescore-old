@@ -1725,6 +1725,16 @@ bool Score::read(QDomElement dScore)
                                           seg->setUserYoffset(seg->userOff().y() + 0.5 * spatium());
                                     }
                               }
+                        else if (s->type() == OTTAVA) {
+                              // fix volta position
+                              Ottava* volta = static_cast<Ottava*>(s);
+                              int n = volta->spannerSegments().size();
+                              for (int i = 0; i < n; ++i) {
+                                    LineSegment* seg = volta->segmentAt(i);
+                                    if (!seg->userOff().isNull())
+                                          seg->setUserYoffset(seg->userOff().y() - styleP(ST_ottavaY));
+                                    }
+                              }
                         }
                   }
             }

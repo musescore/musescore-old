@@ -232,6 +232,10 @@ StyleType styleTypes[] = {
       StyleType("voltaY",                  ST_SPATIUM),
       StyleType("voltaHook",               ST_SPATIUM),
       StyleType("voltaLineWidth",          ST_SPATIUM),
+
+      StyleType("ottavaY",                 ST_SPATIUM),
+      StyleType("ottavaHook",              ST_SPATIUM),
+      StyleType("ottavaLineWidth",         ST_SPATIUM),
       };
 
 static const QString ff("FreeSerif");
@@ -610,9 +614,14 @@ StyleData::StyleData()
                      "</p>"
                    "</body>"
                  "</html>")),
+
             StyleVal(ST_voltaY, Spatium(-3.0)),
             StyleVal(ST_voltaHook, Spatium(1.9)),
-            StyleVal(ST_voltaLineWidth, Spatium(.1))
+            StyleVal(ST_voltaLineWidth, Spatium(.1)),
+
+            StyleVal(ST_ottavaY, Spatium(-3.0)),
+            StyleVal(ST_ottavaHook, Spatium(1.9)),
+            StyleVal(ST_ottavaLineWidth, Spatium(.1))
             };
 
       for (int idx = 0; idx < ST_STYLES; ++idx)

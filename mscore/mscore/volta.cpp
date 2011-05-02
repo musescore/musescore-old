@@ -33,7 +33,6 @@
 Volta::Volta(Score* s)
    : TextLine(s)
       {
-      setLineWidth(s->styleS(ST_voltaLineWidth));
       setBeginText("1.", TEXT_STYLE_VOLTA);
 
       setBeginTextPlace(PLACE_BELOW);
@@ -71,6 +70,7 @@ void Volta::setSubtype(int val)
 
 void Volta::layout()
       {
+      setLineWidth(score()->styleS(ST_voltaLineWidth));
       Spatium hook(score()->styleS(ST_voltaHook));
       setBeginHookHeight(hook);
       setYoff(score()->styleS(ST_voltaY).val());
