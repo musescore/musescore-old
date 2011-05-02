@@ -225,14 +225,10 @@ Segment* Segment::prev1() const
       {
       if (prev())
             return prev();
-      MeasureBase* m = measure();
-      for (;;) {
-            m = m->prev();
-            if (m == 0)
-                  return 0;
-            if (m->type() == MEASURE)
-                  return static_cast<Measure*>(m)->last();
-            }
+      Measure* m = measure()->prevMeasure();
+      if (m == 0)
+            return 0;
+      return m->last();
       }
 
 Segment* Segment::prev1(SegmentTypes types) const

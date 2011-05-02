@@ -486,7 +486,7 @@ void SLine::writeProperties(Xml& xml, const SLine* proto) const
       for (int i = 0; i < n; ++i) {
             const LineSegment* seg = segmentAt(i);
             xml.stag("Segment");
-            xml.tag("off1", seg->userOff() / spatium());
+//            xml.tag("off1", seg->userOff() / spatium());   // is saved as "offset"
             xml.tag("off2", seg->userOff2() / spatium());
             seg->Element::writeProperties(xml);
             xml.etag();
