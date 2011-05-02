@@ -51,6 +51,101 @@ p, li { white-space: pre-wrap; }
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>small</source>
+        <translation type="unfinished">klein</translation>
+    </message>
+</context>
+<context>
+    <name>AlbumManager</name>
+    <message>
+        <source>MuseScore: Album Manager</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Album Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>album name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>remove current score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove Score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>score list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>move current score down in list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Down</source>
+        <translation type="unfinished">Omlaag</translation>
+    </message>
+    <message>
+        <source>move current score up in list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Up</source>
+        <translation type="unfinished">Omhoog</translation>
+    </message>
+    <message>
+        <source>Add Score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>path to new score you want to add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>open file manager</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
+    <message>
+        <source>create new album</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation type="unfinished">Nieuw</translation>
+    </message>
+    <message>
+        <source>load an existing album</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load</source>
+        <translation type="unfinished">Laden</translation>
+    </message>
+    <message>
+        <source>Print Album</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore Album Files (*.album);;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All Files (*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore Files (*.mscz *.mscx *.msc);;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Articulation</name>
@@ -859,10 +954,6 @@ p, li { white-space: pre-wrap; }
         <translation>7susb13</translation>
     </message>
     <message>
-        <source>TextLabel</source>
-        <translation>TekstLabel</translation>
-    </message>
-    <message>
         <source># (sharp)</source>
         <translation># (kruis)</translation>
     </message>
@@ -1076,14 +1167,6 @@ p, li { white-space: pre-wrap; }
         <translation>Vorm</translation>
     </message>
     <message>
-        <source>Chord Description File:</source>
-        <translation>Akkoordbeschrijvingsbestand:</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation>...</translation>
-    </message>
-    <message>
         <source>Id</source>
         <translation>Id</translation>
     </message>
@@ -1106,6 +1189,10 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Tab 2</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load</source>
+        <translation type="unfinished">Laden</translation>
     </message>
 </context>
 <context>
@@ -1267,18 +1354,6 @@ p, li { white-space: pre-wrap; }
         <translation>ongeldig</translation>
     </message>
     <message>
-        <source>MuseScore drumset (*.drm)</source>
-        <translation>MuseScore drumset (*.drm)</translation>
-    </message>
-    <message>
-        <source>MuseScore: Load Drumset</source>
-        <translation>MuseScore: Laad Drumset</translation>
-    </message>
-    <message>
-        <source>MuseScore: Save Drumset</source>
-        <translation>MuseScore: Opslaan Drumset</translation>
-    </message>
-    <message>
         <source>
 failed: </source>
         <translation>
@@ -1381,11 +1456,11 @@ mislukt: </translation>
     </message>
     <message>
         <source>Load</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Laden</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Opslaan</translation>
     </message>
     <message>
         <source>No.</source>
@@ -2255,16 +2330,8 @@ mislukt: </translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Clef</source>
-        <translation type="unfinished">Sleutel</translation>
-    </message>
-    <message>
         <source>Stemless</source>
         <translation type="unfinished">Zonder stok</translation>
-    </message>
-    <message>
-        <source>Barlines</source>
-        <translation type="unfinished">Maatstrepen</translation>
     </message>
     <message>
         <source>Key Signature</source>
@@ -2424,11 +2491,11 @@ mislukt: </translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Opslaan</translation>
     </message>
     <message>
         <source>Load</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Laden</translation>
     </message>
 </context>
 <context>
@@ -2495,7 +2562,9 @@ spatium unit
 ----------
 space unit
 ----------
-space unit</extracomment>
+space unit
+----------
+spatium unit</extracomment>
         <translation>sp</translation>
     </message>
     <message>
@@ -2505,10 +2574,6 @@ space unit</extracomment>
     <message>
         <source>Page</source>
         <translation>Pagina</translation>
-    </message>
-    <message>
-        <source>Line break height</source>
-        <translation>Hoogte regeleinde</translation>
     </message>
     <message>
         <source>Display in Concert Pitch</source>
@@ -2599,20 +2664,12 @@ space unit</extracomment>
         <translation>Bevestig Maat Breedte</translation>
     </message>
     <message>
-        <source>Right margin</source>
-        <translation>Marge rechts</translation>
-    </message>
-    <message>
         <source>Spacing (1=tight)</source>
         <translation>Tussenruimte (1 = vast)</translation>
     </message>
     <message>
         <source>Use German names</source>
         <translation>Gebruik Duitse namen</translation>
-    </message>
-    <message>
-        <source>Height</source>
-        <translation>Hoogte</translation>
     </message>
     <message>
         <source>Clef-key distance</source>
@@ -2689,10 +2746,6 @@ space unit</extracomment>
     <message>
         <source>Hook length</source>
         <translation>Lengte haak</translation>
-    </message>
-    <message>
-        <source>Left margin</source>
-        <translation>Marge links</translation>
     </message>
     <message>
         <source>Line width</source>
@@ -3021,6 +3074,46 @@ p, li { white-space: pre-wrap; }
         <source>down</source>
         <translation type="unfinished">omlaag</translation>
     </message>
+    <message>
+        <source>Hairpins, Volta</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lyrics line height</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Barline-note margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note-barline margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line width:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line break height:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Volta</source>
+        <translation type="unfinished">Volta</translation>
+    </message>
+    <message>
+        <source>default Y-position:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hook height:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditTempoBase</name>
@@ -3114,11 +3207,11 @@ p, li { white-space: pre-wrap; }
     <name>FretDiagram</name>
     <message>
         <source>Set Invisible</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Maak Onzichtbaar</translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Maak Zichtbaar</translation>
     </message>
     <message>
         <source>Color...</source>
@@ -3250,11 +3343,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Set Invisible</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Maak Onzichtbaar</translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Maak Zichtbaar</translation>
     </message>
     <message>
         <source>MIDI Properties...</source>
@@ -3816,6 +3909,26 @@ mislukt: </translation>
     </message>
 </context>
 <context>
+    <name>MP3Exporter</name>
+    <message>
+        <source>Where is %1 ?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save as MP3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore does not export MP3 files directly, but instead uses 
+the freely available LAME library.  You must obtain %1 
+separately, and then locate the file for MuseScore.
+You only need to do this once.
+
+Would you like to locate %2 now?</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MagBox</name>
     <message>
         <source>Zoom</source>
@@ -3879,6 +3992,10 @@ mislukt: </translation>
     <message>
         <source>visible</source>
         <translation>zichtbaar</translation>
+    </message>
+    <message>
+        <source>MuseScore: Measure Properties for Measure %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3961,6 +4078,22 @@ mislukt: </translation>
     </message>
     <message>
         <source>Exclude from measure count</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>goto previous measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;-</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>goto next measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>-&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4449,10 +4582,6 @@ voordat u afsluit?</translation>
         <translation>Herhalingstekens</translation>
     </message>
     <message>
-        <source>Page Settings...</source>
-        <translation>Pagina-instellingen...</translation>
-    </message>
-    <message>
         <source>Double Bar</source>
         <translation>Dubbele maatstreep</translation>
     </message>
@@ -4766,7 +4895,7 @@ is niet compactibel met de huidige interface</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Opslaan</translation>
     </message>
     <message>
         <source>MuseScore: Load Style</source>
@@ -4996,6 +5125,71 @@ is niet compactibel met de huidige interface</translation>
         <source>foto mode</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>PNG Bitmap Graphic (*.png);;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PDF File (*.pdf);;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Encapsulated PostScript File (*.eps);;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scalable Vector Graphic (*.svg);;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Save Image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Load Drumset</source>
+        <translation type="unfinished">MuseScore: Laad Drumset</translation>
+    </message>
+    <message>
+        <source>MuseScore Drumset (*.drm);;All Files (*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Save Drumset</source>
+        <translation type="unfinished">MuseScore: Opslaan Drumset</translation>
+    </message>
+    <message>
+        <source>MuseScore Drumset File (*.drm)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measure</source>
+        <translation type="unfinished">Maat</translation>
+    </message>
+    <message>
+        <source>Profiles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>new Profile</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>delete Profile</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Read Profile Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Profile Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&apos;%1&apos; does already exist,
+please choose a different name:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -5120,6 +5314,14 @@ is niet compactibel met de huidige interface</translation>
     <message>
         <source>Delete Tuplet</source>
         <translation>Verwijder Tuplet</translation>
+    </message>
+    <message>
+        <source>Style...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chord Articulation...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5495,10 +5697,12 @@ is niet compactibel met de huidige interface</translation>
     <name>PlayPanelBase</name>
     <message>
         <source>Tmp</source>
+        <extracomment>short text for tempo slider</extracomment>
         <translation>Tmp</translation>
     </message>
     <message>
         <source>Vol</source>
+        <extracomment>short text for volume slider</extracomment>
         <translation>Vol</translation>
     </message>
     <message>
@@ -5557,6 +5761,10 @@ is niet compactibel met de huidige interface</translation>
         <source>measure.beat</source>
         <translation>maat.tel</translation>
     </message>
+    <message>
+        <source>master volume</source>
+        <translation type="unfinished">hoofdvolume</translation>
+    </message>
 </context>
 <context>
     <name>PreferenceDialog</name>
@@ -5614,6 +5822,10 @@ is niet compactibel met de huidige interface</translation>
     </message>
     <message>
         <source>Choose MySoundFonts Directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose MyImages Directory</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5755,10 +5967,6 @@ is niet compactibel met de huidige interface</translation>
     <message>
         <source>Sample Rate:</source>
         <translation>Samplefrequentie:</translation>
-    </message>
-    <message>
-        <source>Use JACK MIDI output</source>
-        <translation>Gebruik JACK MIDI-uitgang</translation>
     </message>
     <message>
         <source>Period Size:</source>
@@ -6192,6 +6400,48 @@ is niet compactibel met de huidige interface</translation>
         <source>Expand repeats</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>MyImages Directory:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>native</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use JACK MIDI</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Audio</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Profile</name>
+    <message>
+        <source>Open Profile File
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>
+failed: </source>
+        <translation type="unfinished">
+mislukt: </translation>
+    </message>
+    <message>
+        <source>MuseScore: Open Profile file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Write Profile failed: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Write Style</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QComboBox</name>
@@ -6276,10 +6526,6 @@ Please select a single note or lyrics and retry operation
         <translation>MuseScore: laad midi</translation>
     </message>
     <message>
-        <source>MuseScore: Load Palettes failed:</source>
-        <translation>MuseScore: Laden Paletten mislukt:</translation>
-    </message>
-    <message>
         <source>MuseScore: load Style failed:</source>
         <translation>MuseScore: Stijl laden mislukt:</translation>
     </message>
@@ -6329,6 +6575,49 @@ Please select a single note or lyrics and retry operation
     </message>
     <message>
         <source>MuseScore: Import GuitarPro</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Open Album failed:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Load Album failed:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Save Album</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore Files (*.album);;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Album File
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>
+failed: </source>
+        <translation type="unfinished">
+mislukt: </translation>
+    </message>
+    <message>
+        <source>MuseScore: Open Album file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Write Album failed: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Write Album</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Load Profile failed:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6404,10 +6693,6 @@ Please select a single note or lyrics and retry operation
 </source>
         <translation>Open Bestand
 </translation>
-    </message>
-    <message>
-        <source>Compressed MuseScore Format (*.mscz)</source>
-        <translation>Gecomprimeerd MuseScore Formaat (*.mscz)</translation>
     </message>
     <message>
         <source>MuseScore: Save a Copy</source>
@@ -6518,10 +6803,6 @@ mislukt: </translation>
 </translation>
     </message>
     <message>
-        <source>MuseScore Format (*.mscx)</source>
-        <translation>MuseScore Formaat (*.mscx)</translation>
-    </message>
-    <message>
         <source>MuseScore: Save File</source>
         <translation>Musescore: Bestand opslaan</translation>
     </message>
@@ -6585,6 +6866,60 @@ mislukt: </translation>
     </message>
     <message>
         <source>All Supported Files (*.svg *.jpg *.png *.xpm);;Scalable vector graphics (*.svg);;JPEG (*.jpg);;PNG (*.png);;XPM (*.xpm);;All Files (*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No chord/rest selected:
+please select a chord/rest and try again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No measures selected:
+please select range of measures to join and try again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error opening lame library</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not open MP3 encoding library!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not a valid or supported MP3 encoding library!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Encoding error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to initialize MP3 stream</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to open target file for writing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error %1 returned from MP3 encoder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore Format (*.mscz)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All Files (*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Uncompressed MuseScore Format (*.mscx)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MP3 Audio (*.mp3)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6674,22 +7009,6 @@ selecteer eerst een maat en probeer het dan opnieuw</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>PNG Bitmap Graphic (*.png)</source>
-        <translation type="unfinished">PNG Bitmap Grafisch (*.png)</translation>
-    </message>
-    <message>
-        <source>PDF File (*.pdf)</source>
-        <translation type="unfinished">PDF Bestand (*.pdf)</translation>
-    </message>
-    <message>
-        <source>Encapsulated PostScript File (*.eps)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Scalable Vector Graphic (*.svg)</source>
-        <translation type="unfinished">Scalable Vector Graphic (*.svg)</translation>
-    </message>
-    <message>
         <source>MuseScore: Save As</source>
         <translation type="unfinished">Musescore: Opslaan Als</translation>
     </message>
@@ -6710,6 +7029,10 @@ selecteer eerst een maat en probeer het dan opnieuw</translation>
     </message>
     <message>
         <source>sec</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>start new section with long instrument names</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6844,10 +7167,6 @@ selecteer eerst een maat en probeer het dan opnieuw</translation>
     <message>
         <source>Current Instrument:</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>TextLabel</source>
-        <translation type="unfinished">TekstLabel</translation>
     </message>
 </context>
 <context>
@@ -7653,6 +7972,10 @@ altera</source>
         <source>MuseScore: Tempo Text Properties</source>
         <translation>MuseScore: Tempotekst-eigenschappen</translation>
     </message>
+    <message>
+        <source>determine tempo from text</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TempoText</name>
@@ -8081,6 +8404,23 @@ altera</source>
         <source>MuseScore: Edit Text Styles</source>
         <translation>MuseScore: Bewerk Tekststijlen</translation>
     </message>
+    <message>
+        <source>New</source>
+        <translation type="unfinished">Nieuw</translation>
+    </message>
+    <message>
+        <source>MuseScore: Read Style Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text Style Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&apos;%1&apos; does already exist,
+please choose a different name:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TextTools</name>
@@ -8155,10 +8495,6 @@ altera</source>
 <context>
     <name>TimeDialogBase</name>
     <message>
-        <source>+</source>
-        <translation>+</translation>
-    </message>
-    <message>
         <source>Add</source>
         <translation>Voeg toe</translation>
     </message>
@@ -8174,6 +8510,22 @@ altera</source>
         <source>add time signature to palette</source>
         <translation>voeg maatsoort toe aan palet</translation>
     </message>
+    <message>
+        <source>/</source>
+        <translation type="unfinished">/</translation>
+    </message>
+    <message>
+        <source>4</source>
+        <translation type="unfinished">4</translation>
+    </message>
+    <message>
+        <source>Value:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TimeSig</name>
@@ -8183,6 +8535,41 @@ altera</source>
     </message>
     <message>
         <source>Show Courtesy Time Signature</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time Signature Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TimeSigProperties</name>
+    <message>
+        <source>Time Signature Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>/</source>
+        <translation type="unfinished">/</translation>
+    </message>
+    <message>
+        <source>Common Time Symbol</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alla Breve Symbol</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Global Value:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Actual Value:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10685,6 +11072,58 @@ p, li { white-space: pre-wrap; }
         <source>Additional Media</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Export Score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export Score...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save a copy of the score in various formats</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note duration: 128th</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>128th note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show unprintable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Split Measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Join Measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page Settings...</source>
+        <translation type="unfinished">Pagina-instellingen...</translation>
+    </message>
+    <message>
+        <source>Album</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Album Manager...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Album Manager</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>addRemoveTimeSig</name>
@@ -10863,6 +11302,18 @@ tuplet would cross measure</source>
     </message>
     <message>
         <source>Tremolo Bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pralldown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>prallup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>lineprall</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

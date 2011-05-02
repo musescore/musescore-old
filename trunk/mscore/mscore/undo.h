@@ -1388,12 +1388,13 @@ class ChangeHairpin : public UndoCommand {
       Hairpin* hairpin;
       int veloChange;
       DynamicType dynType;
+      bool diagonal;
 
       void flip();
 
    public:
-      ChangeHairpin(Hairpin* h, int c, DynamicType t)
-         : hairpin(h), veloChange(c), dynType(t) {}
+      ChangeHairpin(Hairpin* h, int c, DynamicType t, bool dg)
+         : hairpin(h), veloChange(c), dynType(t), diagonal(dg) {}
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       UNDO_NAME("ChangeHairpin");
