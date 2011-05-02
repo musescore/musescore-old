@@ -1,4 +1,5 @@
 2.may (ws)
+      - fix backward compatibility for voltas
       - allow diagonal hairpins (enable in hairpin property menu)
 28.apr (ws)
       - style additions for volta

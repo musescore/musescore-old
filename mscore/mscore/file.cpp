@@ -1684,6 +1684,7 @@ bool Score::read(QDomElement dScore)
             //
             // scan spanner in a II. pass
             //
+
             for (QDomElement ee = dScore; !ee.isNull(); ee = ee.nextSiblingElement()) {
                   QString tag(ee.tagName());
                   QString val(ee.text());
@@ -1696,16 +1697,33 @@ bool Score::read(QDomElement dScore)
                         Spanner* s = static_cast<Spanner*>(Element::name2Element(tag, this));
                         s->setTrack(0);
                         s->read(ee);
+                        int tick2 = s->__tick2();
                         Segment* s1 = tick2segment(curTick);
-                        Segment* s2 = tick2segment(s->__tick2());
+                        Segment* s2 = tick2segment(tick2);
                         if (s1 == 0 || s2 == 0) {
                               printf("cannot place %s at tick %d - %d\n",
-                                 s->name(), s->__tick1(), s->__tick2());
+                                 s->name(), s->__tick1(), tick2);
                               }
                         else {
                               s->setStartElement(s1);
+                              Measure* m = s2->measure();
+                              if (s->anchor() == ANCHOR_MEASURE && tick2 == m->tick()) {
+                                    // anchor to EndBarLine segment of previous measure:
+                                    m  = m->prevMeasure();
+                                    s2 = m->getSegment(SegEndBarLine, tick2);
+                                    }
                               s->setEndElement(s2);
                               s1->add(s);
+                              }
+                        if (s->type() == VOLTA) {
+                              // fix volta position
+                              Volta* volta = static_cast<Volta*>(s);
+                              int n = volta->spannerSegments().size();
+                              for (int i = 0; i < n; ++i) {
+                                    LineSegment* seg = volta->segmentAt(i);
+                                    if (!seg->userOff().isNull())
+                                          seg->setUserYoffset(seg->userOff().y() + 0.5 * spatium());
+                                    }
                               }
                         }
                   }
