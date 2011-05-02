@@ -284,9 +284,14 @@ void EditStyle::getValues()
             lstyle.set(StyleIdx(ST_UfermataAnchor + i), cb->itemData(cb->currentIndex()).toInt());
             }
 //      lstyle.set(ST_warnPitchRange,  warnPitchRange->isChecked());
+
       lstyle.set(ST_voltaY,                  Spatium(voltaY->value()));
       lstyle.set(ST_voltaHook,               Spatium(voltaHook->value()));
       lstyle.set(ST_voltaLineWidth,          Spatium(voltaLineWidth->value()));
+
+      lstyle.set(ST_ottavaY,                 Spatium(ottavaY->value()));
+      lstyle.set(ST_ottavaHook,              Spatium(ottavaHook->value()));
+      lstyle.set(ST_ottavaLineWidth,         Spatium(ottavaLineWidth->value()));
       }
 
 //---------------------------------------------------------
@@ -449,6 +454,10 @@ void EditStyle::setValues()
       voltaY->setValue(lstyle.value(ST_voltaY).toSpatium().val());
       voltaHook->setValue(lstyle.value(ST_voltaHook).toSpatium().val());
       voltaLineWidth->setValue(lstyle.value(ST_voltaLineWidth).toSpatium().val());
+
+      ottavaY->setValue(lstyle.value(ST_ottavaY).toSpatium().val());
+      ottavaHook->setValue(lstyle.value(ST_ottavaHook).toSpatium().val());
+      ottavaLineWidth->setValue(lstyle.value(ST_ottavaLineWidth).toSpatium().val());
       }
 
 //---------------------------------------------------------

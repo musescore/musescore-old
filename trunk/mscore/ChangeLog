@@ -1,4 +1,6 @@
 2.may (ws)
+      - ottava style additions similar to volta
+      - ottava backward compatibility
       - fix backward compatibility for voltas
       - allow diagonal hairpins (enable in hairpin property menu)
 28.apr (ws)

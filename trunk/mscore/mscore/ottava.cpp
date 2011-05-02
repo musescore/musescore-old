@@ -37,7 +37,7 @@ Ottava::Ottava(Score* s)
    : TextLine(s)
       {
       setSubtype(0);
-      setYoff(-3.5);    // default position
+      setYoff(s->styleS(ST_ottavaY).val());
       }
 
 //---------------------------------------------------------
@@ -46,7 +46,8 @@ Ottava::Ottava(Score* s)
 
 void Ottava::layout()
       {
-      setPos(0.0, yoff() * spatium());
+      setPos(0.0, 0.0);
+      setLineWidth(score()->styleS(ST_ottavaLineWidth));
       SLine::layout();
       }
 
@@ -58,29 +59,29 @@ void Ottava::setSubtype(int val)
       {
       setEndHook(true);
       Element::setSubtype(val);
+
+      Spatium hook(score()->styleS(ST_ottavaHook));
+      setEndHookHeight(hook);
+
       switch(val) {
             case 0:
                   setBeginText("8va", TEXT_STYLE_OTTAVA);
                   setContinueText("(8va)", TEXT_STYLE_OTTAVA);
-                  setEndHookHeight(Spatium(1.5));
                   _pitchShift = 12;
                   break;
             case 1:
                   setBeginText("15ma", TEXT_STYLE_OTTAVA);
                   setContinueText("(15ma)", TEXT_STYLE_OTTAVA);
-                  setEndHookHeight(Spatium(1.5));
                   _pitchShift = 24;
                   break;
             case 2:
                   setBeginText("8vb", TEXT_STYLE_OTTAVA);
                   setContinueText("(8vb)", TEXT_STYLE_OTTAVA);
-                  setEndHookHeight(Spatium(-1.5));
                   _pitchShift = -12;
                   break;
             case 3:
                   setBeginText("15mb", TEXT_STYLE_OTTAVA);
                   setContinueText("(15mb)", TEXT_STYLE_OTTAVA);
-                  setEndHookHeight(Spatium(-1.5));
                   _pitchShift = -24;
                   break;
             }
