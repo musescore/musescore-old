@@ -1,3 +1,5 @@
+2.may (ws)
+      - allow diagonal hairpins (enable in hairpin property menu)
 28.apr (ws)
       - style additions for volta
       - fix #8996: crash when extending note length across bar line

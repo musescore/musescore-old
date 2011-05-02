@@ -23,7 +23,7 @@
    <item>
     <widget class="QGroupBox" name="groupBox">
      <property name="title">
-      <string>Hairpin</string>
+      <string notr="true">Hairpin</string>
      </property>
      <property name="flat">
       <bool>false</bool>
@@ -46,7 +46,7 @@
         <item>
          <widget class="QLabel" name="label">
           <property name="text">
-           <string>Tick1:</string>
+           <string notr="true">Tick1:</string>
           </property>
           <property name="textFormat">
            <enum>Qt::PlainText</enum>
@@ -58,6 +58,12 @@
         </item>
         <item>
          <widget class="QSpinBox" name="tick1">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+          <property name="buttonSymbols">
+           <enum>QAbstractSpinBox::NoButtons</enum>
+          </property>
           <property name="maximum">
            <number>999999</number>
           </property>
@@ -66,7 +72,7 @@
         <item>
          <widget class="QLabel" name="label_2">
           <property name="text">
-           <string>Tick2:</string>
+           <string notr="true">Tick2:</string>
           </property>
           <property name="textFormat">
            <enum>Qt::PlainText</enum>
@@ -78,6 +84,12 @@
         </item>
         <item>
          <widget class="QSpinBox" name="tick2">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+          <property name="buttonSymbols">
+           <enum>QAbstractSpinBox::NoButtons</enum>
+          </property>
           <property name="maximum">
            <number>999999</number>
           </property>

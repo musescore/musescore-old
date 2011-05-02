@@ -32,63 +32,76 @@
 #include "painter.h"
 
 //---------------------------------------------------------
+//   layout
+//---------------------------------------------------------
+
+void HairpinSegment::layout()
+      {
+      QTransform t;
+      double _spatium = spatium();
+      double h1 = score()->styleS(ST_hairpinHeight).val() * _spatium * .5;
+      double h2 = score()->styleS(ST_hairpinContHeight).val() * _spatium * .5;
+
+      double len;
+      qreal x = pos2().x();
+      if (x < _spatium)             // minimum size of hairpin
+            x = _spatium;
+      qreal y = pos2().y();
+      len     = sqrt(x * x + y * y);
+      t.rotateRadians(asin(y/len));
+
+      if (hairpin()->subtype() == 0) {
+            // crescendo
+            switch(spannerSegmentType()) {
+                  case SEGMENT_SINGLE:
+                  case SEGMENT_BEGIN:
+                        l1 = QLineF(.0, .0, len, h1);
+                        l2 = QLineF(.0, .0, len, - h1);
+                        break;
+                  case SEGMENT_MIDDLE:
+                  case SEGMENT_END:
+                        l1 = QLineF(.0,  h2, len, h1);
+                        l2 = QLineF(.0, -h2, len, - h1);
+                        break;
+                  }
+            }
+      else {
+            // decrescendo
+            switch(spannerSegmentType()) {
+                  case SEGMENT_SINGLE:
+                  case SEGMENT_END:
+                        l1 = QLineF(.0,  h1, len, 0.0);
+                        l2 = QLineF(.0, -h1, len, 0.0);
+                        break;
+                  case SEGMENT_BEGIN:
+                  case SEGMENT_MIDDLE:
+                        l1 = QLineF(.0,  h1, len, + h2);
+                        l2 = QLineF(.0, -h1, len, - h2);
+                        break;
+                  }
+            }
+      l1 = t.map(l1);
+      l2 = t.map(l2);
+
+      QRectF r = QRectF(l1.p1(), l1.p2()).normalized() | QRectF(l2.p1(), l2.p2()).normalized();
+      double w = point(score()->styleS(ST_hairpinWidth));
+      setbbox(r.adjusted(-w*.5, -w*.5, w, w));
+      }
+
+//---------------------------------------------------------
 //   draw
 //---------------------------------------------------------
 
 void HairpinSegment::draw(Painter* painter) const
       {
       QPainter& p = *painter->painter();
-      double h1 = point(score()->styleS(ST_hairpinHeight)) * .5;
-      double h2 = point(score()->styleS(ST_hairpinContHeight)) * .5;
 
       QPen pen(p.pen());
       pen.setWidthF(point(score()->styleS(ST_hairpinWidth)));
       p.setPen(pen);
 
-      qreal x = pos2().x();
-      qreal y = pos2().y();
-
-      if (hairpin()->subtype() == 0) {
-            switch(spannerSegmentType()) {
-                  case SEGMENT_SINGLE:
-                  case SEGMENT_BEGIN:
-                        p.drawLine(QLineF(.0, .0, x, y + h1));
-                        p.drawLine(QLineF(.0, .0, x, y - h1));
-                        break;
-                  case SEGMENT_MIDDLE:
-                  case SEGMENT_END:
-                        p.drawLine(QLineF(.0,  h2, x, y + h1));
-                        p.drawLine(QLineF(.0, -h2, x, y - h1));
-                        break;
-                  }
-            }
-      else {
-            switch(spannerSegmentType()) {
-                  case SEGMENT_SINGLE:
-                  case SEGMENT_END:
-                        p.drawLine(QLineF(.0,  h1, x, y));
-                        p.drawLine(QLineF(.0, -h1, x, y));
-                        break;
-                  case SEGMENT_BEGIN:
-                  case SEGMENT_MIDDLE:
-                        p.drawLine(QLineF(.0,  h1, x, y + h2));
-                        p.drawLine(QLineF(.0, -h1, x, y - h2));
-                        break;
-                  }
-            }
-      }
-
-//---------------------------------------------------------
-//   bbox
-//---------------------------------------------------------
-
-QRectF HairpinSegment::bbox() const
-      {
-      double h = point(score()->styleS(ST_hairpinHeight));
-      QRectF r(0.0, -h * .5, pos2().x(), h);
-      double w = point(score()->styleS(ST_hairpinWidth));
-      r.adjust(-w*.5, -w*.5, w, w);
-      return r;
+      p.drawLine(l1);
+      p.drawLine(l2);
       }
 
 //---------------------------------------------------------
@@ -105,7 +118,7 @@ bool HairpinSegment::genPropertyMenu(QMenu* popup) const
             a = popup->addAction(tr("Set Visible"));
       a->setData("invisible");
 
-      a = popup->addAction(tr("MIDI Properties..."));
+      a = popup->addAction(tr("Hairpin Properties..."));
       a->setData("dynamics");
 
       return true;
@@ -124,8 +137,12 @@ void HairpinSegment::propertyAction(ScoreView* viewer, const QString& s)
 
             int vo = dp.changeVelo();
             DynamicType dt = dp.dynamicType();
-            if (rv && ((vo != hp->veloChange()) || (dt != hp->dynType()))) {
-                  score()->undo()->push(new ChangeHairpin(hp, vo, dt));
+            if (rv && (
+               (vo != hp->veloChange())
+               || (dt != hp->dynType())
+               || (dp.allowDiagonal() != hp->diagonal())
+               )) {
+                  score()->undo()->push(new ChangeHairpin(hp, vo, dt, dp.allowDiagonal()));
                   }
             }
       else
@@ -214,7 +231,8 @@ HairpinProperties::HairpinProperties(Hairpin* h, QWidget* parent)
       veloChange->setValue(hairpin->veloChange());
       int tick1 = static_cast<Segment*>(hairpin->startElement())->tick();
       int velo = hairpin->staff()->velocities().velo(tick1);
-      beginVelocity->setNum(velo);
+      beginVelocity->setValue(velo);
+      diagonal->setChecked(h->diagonal());
       }
 
 //---------------------------------------------------------

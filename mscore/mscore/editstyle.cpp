@@ -286,6 +286,7 @@ void EditStyle::getValues()
 //      lstyle.set(ST_warnPitchRange,  warnPitchRange->isChecked());
       lstyle.set(ST_voltaY,                  Spatium(voltaY->value()));
       lstyle.set(ST_voltaHook,               Spatium(voltaHook->value()));
+      lstyle.set(ST_voltaLineWidth,          Spatium(voltaLineWidth->value()));
       }
 
 //---------------------------------------------------------
@@ -447,6 +448,7 @@ void EditStyle::setValues()
 
       voltaY->setValue(lstyle.value(ST_voltaY).toSpatium().val());
       voltaHook->setValue(lstyle.value(ST_voltaHook).toSpatium().val());
+      voltaLineWidth->setValue(lstyle.value(ST_voltaLineWidth).toSpatium().val());
       }
 
 //---------------------------------------------------------

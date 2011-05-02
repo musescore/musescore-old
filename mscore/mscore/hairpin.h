@@ -33,6 +33,8 @@ class Painter;
 //---------------------------------------------------------
 
 class HairpinSegment : public LineSegment {
+      QLineF l1, l2;
+
    protected:
    public:
       HairpinSegment(Score* s) : LineSegment(s) {}
@@ -40,9 +42,9 @@ class HairpinSegment : public LineSegment {
       virtual HairpinSegment* clone() const { return new HairpinSegment(*this); }
       virtual ElementType type() const      { return HAIRPIN_SEGMENT; }
       virtual void draw(Painter*) const;
-      virtual QRectF bbox() const;
       virtual bool genPropertyMenu(QMenu* popup) const;
       virtual void propertyAction(ScoreView*, const QString& s);
+      virtual void layout();
       };
 
 //---------------------------------------------------------
@@ -82,6 +84,7 @@ class HairpinProperties : public QDialog, public Ui::HairpinProperties {
       HairpinProperties(Hairpin*, QWidget* parent = 0);
       int changeVelo() const { return veloChange->value(); }
       DynamicType dynamicType() const;
+      bool allowDiagonal() const { return diagonal->isChecked(); }
       };
 
 #define __HAIRPIN_H__

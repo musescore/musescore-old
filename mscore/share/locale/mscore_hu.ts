@@ -51,6 +51,101 @@ line break
         <source>Form</source>
         <translation type="unfinished">Ablak</translation>
     </message>
+    <message>
+        <source>small</source>
+        <translation type="unfinished">kicsi</translation>
+    </message>
+</context>
+<context>
+    <name>AlbumManager</name>
+    <message>
+        <source>MuseScore: Album Manager</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Album Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>album name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>remove current score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove Score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>score list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>move current score down in list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Down</source>
+        <translation type="unfinished">Le</translation>
+    </message>
+    <message>
+        <source>move current score up in list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Up</source>
+        <translation type="unfinished">Fel</translation>
+    </message>
+    <message>
+        <source>Add Score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>path to new score you want to add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>open file manager</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
+    <message>
+        <source>create new album</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation type="unfinished">Új</translation>
+    </message>
+    <message>
+        <source>load an existing album</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load</source>
+        <translation type="unfinished">Betöltés</translation>
+    </message>
+    <message>
+        <source>Print Album</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore Album Files (*.album);;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All Files (*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore Files (*.mscz *.mscx *.msc);;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Articulation</name>
@@ -209,10 +304,6 @@ line break
     <message>
         <source>MuseScore: Harmony Properties</source>
         <translation>MuseScore: Harmónia tulajdonságai</translation>
-    </message>
-    <message>
-        <source>TextLabel</source>
-        <translation>SzövegCímke</translation>
     </message>
     <message>
         <source>Root</source>
@@ -1076,14 +1167,6 @@ line break
         <translation>Ablak</translation>
     </message>
     <message>
-        <source>Chord Description File:</source>
-        <translation>Akkordleíró fájl:</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation>...</translation>
-    </message>
-    <message>
         <source>Id</source>
         <translation>Azonosító</translation>
     </message>
@@ -1106,6 +1189,10 @@ line break
     <message>
         <source>Tab 2</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load</source>
+        <translation type="unfinished">Betöltés</translation>
     </message>
 </context>
 <context>
@@ -1255,18 +1342,6 @@ line break
     <message>
         <source>invalid</source>
         <translation>érvénytelen</translation>
-    </message>
-    <message>
-        <source>MuseScore: Load Drumset</source>
-        <translation>MuseScore: Dobkészlet betöltése</translation>
-    </message>
-    <message>
-        <source>MuseScore drumset (*.drm)</source>
-        <translation>MuseScore dobkészlet (*.drm)</translation>
-    </message>
-    <message>
-        <source>MuseScore: Save Drumset</source>
-        <translation>MuseScore: Dobkészlet mentése</translation>
     </message>
     <message>
         <source>Open File
@@ -1531,7 +1606,7 @@ sikertelen: </translation>
     </message>
     <message>
         <source>B</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">H</translation>
     </message>
     <message>
         <source>C 8</source>
@@ -2255,16 +2330,8 @@ sikertelen: </translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Clef</source>
-        <translation type="unfinished">Kulcs</translation>
-    </message>
-    <message>
         <source>Stemless</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Barlines</source>
-        <translation type="unfinished">Ütemvonalak</translation>
+        <translation type="unfinished">Nincs szára</translation>
     </message>
     <message>
         <source>Key Signature</source>
@@ -2551,7 +2618,9 @@ spatium unit
 ----------
 space unit
 ----------
-space unit</extracomment>
+space unit
+----------
+spatium unit</extracomment>
         <translation>sp</translation>
     </message>
     <message>
@@ -2629,10 +2698,6 @@ space unit</extracomment>
     <message>
         <source>Line width</source>
         <translation>Vonalvastagság</translation>
-    </message>
-    <message>
-        <source>Height</source>
-        <translation>Magasság</translation>
     </message>
     <message>
         <source>sp</source>
@@ -2722,14 +2787,6 @@ space unit</extracomment>
     <message>
         <source>Spacing (1=tight)</source>
         <translation>Térköz (1=szoros)</translation>
-    </message>
-    <message>
-        <source>Left margin</source>
-        <translation>Bal margó</translation>
-    </message>
-    <message>
-        <source>Right margin</source>
-        <translation>Jobb margó</translation>
     </message>
     <message>
         <source>Min. note distance</source>
@@ -2834,10 +2891,6 @@ space unit</extracomment>
     <message>
         <source>Small clef size</source>
         <translation>Kis kulcsok mérete</translation>
-    </message>
-    <message>
-        <source>Line break height</source>
-        <translation>Új &apos;bekezdés&apos; utáni üres rész magassága</translation>
     </message>
     <message>
         <source>Use German names</source>
@@ -3020,6 +3073,46 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>down</source>
         <translation type="unfinished">le</translation>
+    </message>
+    <message>
+        <source>Hairpins, Volta</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lyrics line height</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Barline-note margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note-barline margin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line width:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line break height:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Volta</source>
+        <translation type="unfinished">Prima volta...</translation>
+    </message>
+    <message>
+        <source>default Y-position:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hook height:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3421,7 +3514,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Instrument List</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Hangszerlista</translation>
     </message>
     <message>
         <source>Add Staff</source>
@@ -3816,6 +3909,26 @@ sikertelen: </translation>
     </message>
 </context>
 <context>
+    <name>MP3Exporter</name>
+    <message>
+        <source>Where is %1 ?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save as MP3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore does not export MP3 files directly, but instead uses 
+the freely available LAME library.  You must obtain %1 
+separately, and then locate the file for MuseScore.
+You only need to do this once.
+
+Would you like to locate %2 now?</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MagBox</name>
     <message>
         <source>Zoom</source>
@@ -3879,6 +3992,10 @@ sikertelen: </translation>
     <message>
         <source>stemless</source>
         <translation>nincs szára</translation>
+    </message>
+    <message>
+        <source>MuseScore: Measure Properties for Measure %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3961,6 +4078,22 @@ sikertelen: </translation>
     </message>
     <message>
         <source>Exclude from measure count</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>goto previous measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;-</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>goto next measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>-&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4383,10 +4516,6 @@ módosításait bezárás előtt?</translation>
     <message>
         <source>&amp;Layout</source>
         <translation>&amp;Elrendezés</translation>
-    </message>
-    <message>
-        <source>Page Settings...</source>
-        <translation>Oldalbeállítás...</translation>
     </message>
     <message>
         <source>&amp;Style</source>
@@ -4993,6 +5122,71 @@ szkript futtatásához</translation>
         <source>foto mode</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>PNG Bitmap Graphic (*.png);;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PDF File (*.pdf);;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Encapsulated PostScript File (*.eps);;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scalable Vector Graphic (*.svg);;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Save Image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Load Drumset</source>
+        <translation type="unfinished">MuseScore: Dobkészlet betöltése</translation>
+    </message>
+    <message>
+        <source>MuseScore Drumset (*.drm);;All Files (*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Save Drumset</source>
+        <translation type="unfinished">MuseScore: Dobkészlet mentése</translation>
+    </message>
+    <message>
+        <source>MuseScore Drumset File (*.drm)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measure</source>
+        <translation type="unfinished">Ütem</translation>
+    </message>
+    <message>
+        <source>Profiles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>new Profile</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>delete Profile</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Read Profile Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Profile Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&apos;%1&apos; does already exist,
+please choose a different name:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -5117,6 +5311,14 @@ szkript futtatásához</translation>
     <message>
         <source>Delete Tuplet</source>
         <translation>Hangjegycsoport törlése</translation>
+    </message>
+    <message>
+        <source>Style...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chord Articulation...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5536,10 +5738,12 @@ szkript futtatásához</translation>
     </message>
     <message>
         <source>Vol</source>
+        <extracomment>short text for volume slider</extracomment>
         <translation>Vol</translation>
     </message>
     <message>
         <source>Tmp</source>
+        <extracomment>short text for tempo slider</extracomment>
         <translation>Tmp</translation>
     </message>
     <message>
@@ -5553,6 +5757,10 @@ szkript futtatásához</translation>
     <message>
         <source>Shuffle</source>
         <translation>Inga</translation>
+    </message>
+    <message>
+        <source>master volume</source>
+        <translation type="unfinished">rendszer hangerő</translation>
     </message>
 </context>
 <context>
@@ -5611,6 +5819,10 @@ szkript futtatásához</translation>
     </message>
     <message>
         <source>Choose MySoundFonts Directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose MyImages Directory</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5978,10 +6190,6 @@ szkript futtatásához</translation>
         <translation>Navigátor:</translation>
     </message>
     <message>
-        <source>Use JACK MIDI output</source>
-        <translation>JACK MIDI kimenet használata</translation>
-    </message>
-    <message>
         <source>Remember last connection(s)</source>
         <translation>Legutóbbi kapcsolatok megjegyzése</translation>
     </message>
@@ -6189,6 +6397,48 @@ szkript futtatásához</translation>
         <source>Expand repeats</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>MyImages Directory:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>native</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use JACK MIDI</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Audio</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Profile</name>
+    <message>
+        <source>Open Profile File
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>
+failed: </source>
+        <translation type="unfinished">
+sikertelen: </translation>
+    </message>
+    <message>
+        <source>MuseScore: Open Profile file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Write Profile failed: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Write Style</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QComboBox</name>
@@ -6297,10 +6547,6 @@ Please select a single note or lyrics and retry operation
         <translation>MuseScore: érvénytelen parancs</translation>
     </message>
     <message>
-        <source>MuseScore: Load Palettes failed:</source>
-        <translation>MuseScore: az eszköztárak betöltése sikertelen:</translation>
-    </message>
-    <message>
         <source>MuseScore: Load chord list failed:</source>
         <translation>MuseScore: az akkordlista betöltése sikertelen:</translation>
     </message>
@@ -6326,6 +6572,49 @@ Please select a single note or lyrics and retry operation
     </message>
     <message>
         <source>MuseScore: Import GuitarPro</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Open Album failed:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Load Album failed:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Save Album</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore Files (*.album);;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Album File
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>
+failed: </source>
+        <translation type="unfinished">
+sikertelen: </translation>
+    </message>
+    <message>
+        <source>MuseScore: Open Album file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Write Album failed: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Write Album</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Load Profile failed:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6495,14 +6784,6 @@ sikertelen: </translation>
 </translation>
     </message>
     <message>
-        <source>Compressed MuseScore Format (*.mscz)</source>
-        <translation>Tömörített MuseScore formátum (*.mscz)</translation>
-    </message>
-    <message>
-        <source>MuseScore Format (*.mscx)</source>
-        <translation>MuseScore formátum (*.mscx)</translation>
-    </message>
-    <message>
         <source>MusicXML Format (*.xml)</source>
         <translation>MusicXML formátum (*.xml)</translation>
     </message>
@@ -6582,6 +6863,60 @@ Próbáld más helyre menteni.</translation>
     </message>
     <message>
         <source>All Supported Files (*.svg *.jpg *.png *.xpm);;Scalable vector graphics (*.svg);;JPEG (*.jpg);;PNG (*.png);;XPM (*.xpm);;All Files (*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No chord/rest selected:
+please select a chord/rest and try again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No measures selected:
+please select range of measures to join and try again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error opening lame library</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not open MP3 encoding library!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not a valid or supported MP3 encoding library!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Encoding error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to initialize MP3 stream</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to open target file for writing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error %1 returned from MP3 encoder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore Format (*.mscz)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All Files (*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Uncompressed MuseScore Format (*.mscx)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MP3 Audio (*.mp3)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6670,22 +7005,6 @@ válassz ki egy ütemet és próbáld újra</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>PNG Bitmap Graphic (*.png)</source>
-        <translation type="unfinished">PNG grafika fájl (*.png)</translation>
-    </message>
-    <message>
-        <source>PDF File (*.pdf)</source>
-        <translation type="unfinished">PDF fájl (*.pdf)</translation>
-    </message>
-    <message>
-        <source>Encapsulated PostScript File (*.eps)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Scalable Vector Graphic (*.svg)</source>
-        <translation type="unfinished">Scalable Vector Graphic (*.svg)</translation>
-    </message>
-    <message>
         <source>MuseScore: Save As</source>
         <translation type="unfinished">MuseScore: Mentés másként</translation>
     </message>
@@ -6706,6 +7025,10 @@ válassz ki egy ütemet és próbáld újra</translation>
     </message>
     <message>
         <source>sec</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>start new section with long instrument names</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6840,10 +7163,6 @@ válassz ki egy ütemet és próbáld újra</translation>
     <message>
         <source>Current Instrument:</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>TextLabel</source>
-        <translation type="unfinished">SzövegCímke</translation>
     </message>
 </context>
 <context>
@@ -7648,6 +7967,10 @@ altera</source>
         <source>BPM</source>
         <translation>BPM</translation>
     </message>
+    <message>
+        <source>determine tempo from text</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TempoText</name>
@@ -7885,7 +8208,7 @@ altera</source>
     </message>
     <message>
         <source>B</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">H</translation>
     </message>
     <message>
         <source>italic</source>
@@ -7949,7 +8272,7 @@ altera</source>
     </message>
     <message>
         <source>System Flag</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Rendszer jelzés</translation>
     </message>
     <message>
         <source>Offset</source>
@@ -8076,6 +8399,23 @@ altera</source>
         <source>MuseScore: Edit Text Styles</source>
         <translation>MuseScore: Szövegstílusok szerkesztése</translation>
     </message>
+    <message>
+        <source>New</source>
+        <translation type="unfinished">Új</translation>
+    </message>
+    <message>
+        <source>MuseScore: Read Style Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text Style Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&apos;%1&apos; does already exist,
+please choose a different name:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TextTools</name>
@@ -8154,10 +8494,6 @@ altera</source>
         <translation>Ablak</translation>
     </message>
     <message>
-        <source>+</source>
-        <translation>+</translation>
-    </message>
-    <message>
         <source>add time signature to palette</source>
         <translation>ütemmutató hozzáadása az eszköztárhoz</translation>
     </message>
@@ -8169,6 +8505,22 @@ altera</source>
         <source>Create Time Signature</source>
         <translation>Ütemmutató létrehozása</translation>
     </message>
+    <message>
+        <source>/</source>
+        <translation type="unfinished">/</translation>
+    </message>
+    <message>
+        <source>4</source>
+        <translation type="unfinished">4</translation>
+    </message>
+    <message>
+        <source>Value:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text:</source>
+        <translation type="unfinished">Szöveg:</translation>
+    </message>
 </context>
 <context>
     <name>TimeSig</name>
@@ -8178,6 +8530,41 @@ altera</source>
     </message>
     <message>
         <source>Show Courtesy Time Signature</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time Signature Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TimeSigProperties</name>
+    <message>
+        <source>Time Signature Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text:</source>
+        <translation type="unfinished">Szöveg:</translation>
+    </message>
+    <message>
+        <source>/</source>
+        <translation type="unfinished">/</translation>
+    </message>
+    <message>
+        <source>Common Time Symbol</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alla Breve Symbol</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Global Value:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Actual Value:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10680,6 +11067,58 @@ p, li { white-space: pre-wrap; }
         <source>Additional Media</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Export Score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Export Score...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save a copy of the score in various formats</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note duration: 128th</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>128th note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show unprintable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Split Measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Join Measure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page Settings...</source>
+        <translation type="unfinished">Oldalbeállítás...</translation>
+    </message>
+    <message>
+        <source>Album</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Album Manager...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Album Manager</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>addRemoveTimeSig</name>
@@ -10858,6 +11297,18 @@ tuplet would cross measure</source>
     </message>
     <message>
         <source>Tremolo Bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pralldown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>prallup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>lineprall</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

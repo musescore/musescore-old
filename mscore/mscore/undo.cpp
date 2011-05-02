@@ -2926,10 +2926,13 @@ void ChangeHairpin::flip()
       {
       int vc        = hairpin->veloChange();
       DynamicType t = hairpin->dynType();
+      bool dg       = hairpin->diagonal();
       hairpin->setVeloChange(veloChange);
       hairpin->setDynType(dynType);
+      hairpin->setDiagonal(diagonal);
       veloChange = vc;
       dynType    = t;
+      diagonal   = dg;
       hairpin->score()->updateHairpin(hairpin);
       }
 
