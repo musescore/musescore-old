@@ -1081,12 +1081,66 @@ void ScoreView::updateGrips()
 
       if (curGrip == -1)
             curGrip = grips-1;
+
+      double x, y;
+      if (grips) {
+            x = grip[curGrip].center().x() - editObject->gripAnchor(curGrip).x();
+            y = grip[curGrip].center().y() - editObject->gripAnchor(curGrip).y();
+            }
+      else {
+            x = editObject->userOff().x();
+            y = editObject->userOff().y();
+            }
+      double _spatium = score()->spatium();
+      mscore->setEditX(x / _spatium);
+      mscore->setEditY(y / _spatium);
+
       QPointF anchor = editObject->gripAnchor(curGrip);
       if (!anchor.isNull())
             setDropAnchor(QLineF(anchor, grip[curGrip].center()));
       else
             setDropTarget(0); // this also resets dropAnchor
       score()->addRefresh(editObject->abbox());
+      }
+
+//---------------------------------------------------------
+//   setEditX
+//---------------------------------------------------------
+
+void ScoreView::setEditX(double val)
+      {
+      score()->addRefresh(editObject->abbox());
+      double _spatium = score()->spatium();
+      if (grips) {
+            double x = (val + editObject->gripAnchor(curGrip).x()) * _spatium;
+            x *= _spatium;
+            // TODO
+            }
+      else {
+            editObject->setUserXoffset(val * _spatium);
+            }
+      score()->addRefresh(editObject->abbox());
+      _score->end();
+      }
+
+//---------------------------------------------------------
+//   setEditY
+//---------------------------------------------------------
+
+void ScoreView::setEditY(double val)
+      {
+      score()->addRefresh(editObject->abbox());
+      double _spatium = score()->spatium();
+      if (grips) {
+            double y = (val + editObject->gripAnchor(curGrip).y()) * _spatium;
+            y *= _spatium;
+            // TODO
+            }
+      else {
+            editObject->setUserYoffset(val * _spatium);
+            }
+      score()->addRefresh(editObject->abbox());
+      _score->end();
       }
 
 //---------------------------------------------------------
