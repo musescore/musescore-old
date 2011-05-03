@@ -3919,8 +3919,11 @@ void MuseScore::editYChanged(double val)
 
 void MuseScore::setEditX(double x)
       {
-      if (_editX)
+      if (_editX) {
+            _editX->blockSignals(true);
             _editX->setValue(x);
+            _editX->blockSignals(false);
+            }
       }
 
 //---------------------------------------------------------
@@ -3929,8 +3932,11 @@ void MuseScore::setEditX(double x)
 
 void MuseScore::setEditY(double y)
       {
-      if (_editY)
+      if (_editY) {
+            _editY->blockSignals(true);
             _editY->setValue(y);
+            _editY->blockSignals(false);
+            }
       }
 
 

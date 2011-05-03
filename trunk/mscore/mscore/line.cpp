@@ -59,6 +59,20 @@ void LineSegment::updateGrips(int* grips, QRectF* grip) const
       }
 
 //---------------------------------------------------------
+//   setGrip
+//---------------------------------------------------------
+
+void LineSegment::setGrip(int grip, const QPointF& p)
+      {
+      if (grip == 0) {
+            setUserOff(p);
+            }
+      else {
+            setUserOff2(p);
+            }
+      }
+
+//---------------------------------------------------------
 //   canvasPos
 //    return position in canvas coordinates
 //---------------------------------------------------------
