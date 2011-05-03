@@ -170,7 +170,7 @@ Hairpin::Hairpin(Score* s)
 
 void Hairpin::layout()
       {
-      setPos(0.0, spatium() * _yoffset);
+      setPos(0.0, 0.0);
       SLine::layout();
       }
 

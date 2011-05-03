@@ -1114,7 +1114,8 @@ void ScoreView::setEditX(double val)
       if (grips) {
             double x = (val + editObject->gripAnchor(curGrip).x()) * _spatium;
             x *= _spatium;
-            // TODO
+            double y = grip[curGrip].center().y() - editObject->gripAnchor(curGrip).y();
+            editObject->setGrip(curGrip, QPointF(x, y));
             }
       else {
             editObject->setUserXoffset(val * _spatium);
@@ -1134,7 +1135,8 @@ void ScoreView::setEditY(double val)
       if (grips) {
             double y = (val + editObject->gripAnchor(curGrip).y()) * _spatium;
             y *= _spatium;
-            // TODO
+            double x = grip[curGrip].center().x() - editObject->gripAnchor(curGrip).x();
+            editObject->setGrip(curGrip, QPointF(x, y));
             }
       else {
             editObject->setUserYoffset(val * _spatium);

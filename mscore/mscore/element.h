@@ -257,6 +257,7 @@ class Element {
       virtual void endEdit()                                   {}
       virtual void updateGrips(int* grips, QRectF*) const      { *grips = 0;       }
       virtual QPointF gripAnchor(int) const   { return QPointF(); }
+      virtual void setGrip(int, const QPointF&)    {}
 
       int track() const                       { return _track; }
       virtual void setTrack(int val)          { _track = val;  }

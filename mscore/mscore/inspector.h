@@ -328,6 +328,12 @@ class HairpinView : public ShowElementBase {
       Q_OBJECT;
 
       Ui::HairpinBase hp;
+      Ui::SLineBase sl;
+      Ui::SpannerBase sp;
+
+   private slots:
+      void startClicked();
+      void endClicked();
 
    public:
       HairpinView();

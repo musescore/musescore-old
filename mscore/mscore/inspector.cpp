@@ -1306,10 +1306,21 @@ void TextView::setElement(Element* e)
 HairpinView::HairpinView()
    : ShowElementBase()
       {
+      QWidget* spanner = new QWidget;
+      sp.setupUi(spanner);
+      layout->addWidget(spanner);
+
+      QWidget* line = new QWidget;
+      sl.setupUi(line);
+      layout->addWidget(line);
+
       QWidget* hairpin = new QWidget;
       hp.setupUi(hairpin);
       layout->addWidget(hairpin);
+
       layout->addStretch(10);
+      connect(sp.startElement,   SIGNAL(clicked()), SLOT(startClicked()));
+      connect(sp.endElement,     SIGNAL(clicked()), SLOT(endClicked()));
       }
 
 //---------------------------------------------------------
@@ -1318,10 +1329,30 @@ HairpinView::HairpinView()
 
 void HairpinView::setElement(Element* e)
       {
-//      Hairpin* hairpin = (Hairpin*)e;
+      Hairpin* hairpin = (Hairpin*)e;
       ShowElementBase::setElement(e);
-//      hp.tick1->setValue(hairpin->tick());
-//      hp.tick2->setValue(hairpin->tick2());
+      sl.diagonal->setChecked(hairpin->diagonal());
+      sp.startElement->setEnabled(hairpin->startElement() != 0);
+      sp.endElement->setEnabled(hairpin->endElement() != 0);
+      hp.veloChange->setValue(hairpin->veloChange());
+      }
+
+//---------------------------------------------------------
+//   startClicked
+//---------------------------------------------------------
+
+void HairpinView::startClicked()
+      {
+      emit elementChanged(static_cast<Spanner*>(element())->startElement());
+      }
+
+//---------------------------------------------------------
+//   endClicked
+//---------------------------------------------------------
+
+void HairpinView::endClicked()
+      {
+      emit elementChanged(static_cast<Spanner*>(element())->endElement());
       }
 
 //---------------------------------------------------------
@@ -1827,11 +1858,11 @@ VoltaView::VoltaView()
       layout->addWidget(w);
 
       layout->addStretch(10);
-      connect(lb.segments, SIGNAL(itemClicked(QTreeWidgetItem*,int)), SLOT(segmentClicked(QTreeWidgetItem*)));
+//      connect(lb.segments, SIGNAL(itemClicked(QTreeWidgetItem*,int)), SLOT(segmentClicked(QTreeWidgetItem*)));
       connect(tlb.beginText, SIGNAL(clicked()), SLOT(beginTextClicked()));
       connect(tlb.continueText, SIGNAL(clicked()), SLOT(continueTextClicked()));
-      connect(lb.leftElement, SIGNAL(clicked()), SLOT(leftElementClicked()));
-      connect(lb.rightElement, SIGNAL(clicked()), SLOT(rightElementClicked()));
+//      connect(lb.leftElement, SIGNAL(clicked()), SLOT(leftElementClicked()));
+//      connect(lb.rightElement, SIGNAL(clicked()), SLOT(rightElementClicked()));
       }
 
 //---------------------------------------------------------
@@ -1844,12 +1875,12 @@ void VoltaView::setElement(Element* e)
       ShowElementBase::setElement(e);
 
       tlb.lineWidth->setValue(volta->lineWidth().val());
-      lb.anchor->setCurrentIndex(int(volta->anchor()));
+//      lb.anchor->setCurrentIndex(int(volta->anchor()));
       lb.diagonal->setChecked(volta->diagonal());
-      lb.leftElement->setText(QString("%1").arg((unsigned long)volta->startElement(), 8, 16));
-      lb.rightElement->setText(QString("%1").arg((unsigned long)volta->endElement(), 8, 16));
+//      lb.leftElement->setText(QString("%1").arg((unsigned long)volta->startElement(), 8, 16));
+//      lb.rightElement->setText(QString("%1").arg((unsigned long)volta->endElement(), 8, 16));
 
-      lb.segments->clear();
+/*      lb.segments->clear();
       const QList<SpannerSegment*>& el = volta->spannerSegments();
       foreach(const SpannerSegment* e, el) {
             QTreeWidgetItem* item = new QTreeWidgetItem;
@@ -1857,6 +1888,8 @@ void VoltaView::setElement(Element* e)
             item->setData(0, Qt::UserRole, QVariant::fromValue<void*>((void*)e));
             lb.segments->addTopLevelItem(item);
             }
+      */
+
       tlb.beginText->setEnabled(volta->beginText());
       tlb.continueText->setEnabled(volta->continueText());
       }
