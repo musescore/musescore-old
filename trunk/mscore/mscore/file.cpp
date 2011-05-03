@@ -1684,7 +1684,6 @@ bool Score::read(QDomElement dScore)
             //
             // scan spanner in a II. pass
             //
-
             for (QDomElement ee = dScore; !ee.isNull(); ee = ee.nextSiblingElement()) {
                   QString tag(ee.tagName());
                   QString val(ee.text());
@@ -1726,7 +1725,7 @@ bool Score::read(QDomElement dScore)
                                     }
                               }
                         else if (s->type() == OTTAVA) {
-                              // fix volta position
+                              // fix ottava position
                               Ottava* volta = static_cast<Ottava*>(s);
                               int n = volta->spannerSegments().size();
                               for (int i = 0; i < n; ++i) {
@@ -1742,7 +1741,7 @@ bool Score::read(QDomElement dScore)
       // check slurs
       foreach(Slur* slur, slurs) {
             if (!slur->startElement() || !slur->endElement()) {
-printf("incomplete Slur\n");
+                  printf("incomplete Slur\n");
                   if (slur->startElement()) {
                         printf("  front %d\n", static_cast<ChordRest*>(slur->startElement())->tick());
                         static_cast<ChordRest*>(slur->startElement())->removeSlurFor(slur);
@@ -1750,6 +1749,28 @@ printf("incomplete Slur\n");
                   if (slur->endElement()) {
                         printf("  back %d\n", static_cast<ChordRest*>(slur->endElement())->tick());
                         static_cast<ChordRest*>(slur->endElement())->removeSlurBack(slur);
+                        }
+                  }
+            else {
+                  ChordRest* cr1 = (ChordRest*)(slur->startElement());
+                  ChordRest* cr2 = (ChordRest*)(slur->endElement());
+                  if (cr1->tick() >= cr2->tick()) {
+                        printf("Slur invalid start-end tick %d-%d\n", cr1->tick(), cr2->tick());
+                        slur->setStartElement(cr2);
+                        slur->setEndElement(cr1);
+                        }
+                  int n1 = 0;
+                  int n2 = 0;
+                  foreach(Slur* s, cr1->slurFor()) {
+                        if (s == slur)
+                              ++n1;
+                        }
+                  foreach(Slur* s, cr2->slurBack()) {
+                        if (s == slur)
+                              ++n2;
+                        }
+                  if (n1 != 1 || n2 != 1) {
+                        printf("Slur references bad: %d %d\n", n1, n2);
                         }
                   }
             }
@@ -2332,23 +2353,6 @@ void Score::writeSegments(Xml& xml, const Measure* m, int strack, int etrack, Se
                               xml.tagE(QString("endSpanner id=\"%1\"").arg(e->id()));
                               }
                         }
-                  //
-                  // write new slurs for all voices
-                  // (this allows for slurs crossing voices)
-                  //
-                  if (((track % VOICES) == 0)
-                     && (segment->subtype() & (SegChordRest | SegGrace))) {
-                        for (int i = 0; i < VOICES; ++i) {
-                              Element* e = segment->element(track + i);
-                              if (e) {
-                                    ChordRest* cr = static_cast<ChordRest*>(e);
-                                    foreach(Slur* slur, cr->slurFor()) {
-                                          slur->setId(xml.slurId++);
-                                          slur->write(xml);
-                                          }
-                                    }
-                              }
-                        }
                   if (e && !e->generated()) {
                         if (needTick) {
                               xml.tag("tick", segment->tick());
@@ -2366,6 +2370,34 @@ void Score::writeSegments(Xml& xml, const Measure* m, int strack, int etrack, Se
                               if (tuplet && tuplet->elements().front() == cr) {
                                     tuplet->setId(xml.tupletId++);
                                     tuplet->write(xml);
+                                    }
+                              foreach(Slur* slur, cr->slurFor()) {
+                                    bool found = false;
+                                    foreach(Slur* slur1, slurs) {
+                                          if (slur1 == slur) {
+                                                found = true;
+                                                break;
+                                                }
+                                          }
+                                    if (!found) {
+                                          slur->setId(xml.slurId++);
+                                          slurs.append(slur);
+                                          slur->write(xml);
+                                          }
+                                    }
+                              foreach(Slur* slur, cr->slurBack()) {
+                                    bool found = false;
+                                    foreach(Slur* slur1, slurs) {
+                                          if (slur1 == slur) {
+                                                found = true;
+                                                break;
+                                                }
+                                          }
+                                    if (!found) {
+                                          slur->setId(xml.slurId++);
+                                          slurs.append(slur);
+                                          slur->write(xml);
+                                          }
                                     }
                               }
                         if ((segment->subtype() == SegEndBarLine) && m && (m->multiMeasure() > 0)) {
