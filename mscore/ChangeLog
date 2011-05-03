@@ -1,3 +1,5 @@
+3.may (ws)
+      - fix for slurs starting at staff n+1 and ending at staff n
 2.may (ws)
       - ottava style additions similar to volta
       - ottava backward compatibility
