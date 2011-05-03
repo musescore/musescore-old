@@ -3836,3 +3836,13 @@ PaletteBox* MuseScore::getPaletteBox()
       return paletteBox;
       }
 
+//---------------------------------------------------------
+//   midiNoteReceived
+//---------------------------------------------------------
+
+void MuseScore::midiNoteReceived(int pitch, bool ctrl)
+      {
+      cv->midiNoteReceived(pitch, ctrl);
+      }
+
+

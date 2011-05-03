@@ -72,7 +72,7 @@ class PianoTools : public QDockWidget {
    private slots:
 
    signals:
-      void keyPressed(int pitch, bool chord);
+      void keyPressed(int pitch, bool ctrl);
 
    public:
       PianoTools(QWidget* parent = 0);
