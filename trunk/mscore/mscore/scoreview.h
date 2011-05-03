@@ -346,7 +346,6 @@ class ScoreView : public QWidget {
       void postCmd(const char* cmd)   { sm->postEvent(new CommandEvent(cmd));  }
       void setFocusRect();
       Element* getDragElement() const { return dragElement; }
-      void midiNoteReceived(int pitch, bool);
       void changeVoice(int voice);
       void drawBackground(QPainter& p, QRectF r);
       bool fotoScoreViewDragTest(QMouseEvent*);
@@ -368,6 +367,7 @@ class ScoreView : public QWidget {
       void setCursorVisible(bool v);
       void showOmr(bool flag);
       Element* getCurElement() const { return curElement; }   // current item at mouse press
+      void midiNoteReceived(int pitch, bool);
       };
 
 //---------------------------------------------------------

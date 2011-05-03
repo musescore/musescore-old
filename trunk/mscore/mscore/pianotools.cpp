@@ -283,9 +283,9 @@ PianoTools::PianoTools(QWidget* parent)
       HPiano* piano = new HPiano;
       setWidget(piano);
 
-      QWidget* w = new QWidget(this);
-      setTitleBarWidget(w);
-      titleBarWidget()->hide();
+//      QWidget* w = new QWidget(this);
+//      setTitleBarWidget(w);
+//      titleBarWidget()->hide();
       connect(piano, SIGNAL(keyPressed(int, bool)), SIGNAL(keyPressed(int, bool)));
       }
 

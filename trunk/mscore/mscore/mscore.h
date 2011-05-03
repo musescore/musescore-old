@@ -419,6 +419,7 @@ class MuseScore : public QMainWindow {
       void registerPlugin(QAction*);
       QMenu* fileMenu() const  { return _fileMenu; }
       void midiNoteReceived(int channel, int pitch, int velo);
+      void midiNoteReceived(int pitch, bool ctrl);
 
    public:
       MuseScore();
