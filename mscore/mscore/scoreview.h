@@ -368,6 +368,8 @@ class ScoreView : public QWidget {
       void showOmr(bool flag);
       Element* getCurElement() const { return curElement; }   // current item at mouse press
       void midiNoteReceived(int pitch, bool);
+      void setEditX(double);
+      void setEditY(double);
       };
 
 //---------------------------------------------------------

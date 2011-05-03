@@ -310,6 +310,10 @@ class MuseScore : public QMainWindow {
       QAction* deleteProfileAction;
 
       bool inChordEditor;
+      QDoubleSpinBox* _editX;
+      QDoubleSpinBox* _editY;
+      QLabel* xLabel;
+      QLabel* yLabel;
 
       //---------------------
 
@@ -353,6 +357,7 @@ class MuseScore : public QMainWindow {
       void showPianoKeyboard();
       void showMediaDialog();
       void showAlbumManager();
+      void enableEditMode(bool);
 
    private slots:
       void autoSaveTimerTimeout();
@@ -400,6 +405,8 @@ class MuseScore : public QMainWindow {
       void showProfileMenu();
       void changeProfile(QAction*);
       void changeProfile(Profile* p);
+      void editXChanged(double);
+      void editYChanged(double);
 
    public slots:
       void dirtyChanged(Score*);
@@ -514,6 +521,8 @@ class MuseScore : public QMainWindow {
       void disableCommands(bool val) { inChordEditor = val; }
 
       void updateInputState(Score*);
+      void setEditX(double);
+      void setEditY(double);
       };
 
 extern MuseScore* mscore;

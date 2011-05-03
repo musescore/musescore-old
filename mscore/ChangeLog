@@ -1,4 +1,5 @@
 3.may (ws)
+      - add x/y spin box to move position in edit mode
       - fix for slurs starting at staff n+1 and ending at staff n
 2.may (ws)
       - ottava style additions similar to volta
