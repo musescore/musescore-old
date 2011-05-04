@@ -728,7 +728,7 @@ void MuseScore::populatePalette()
             tt->setTrack(0);
             tt->setTempo(tp[i].f);
             tt->setText(tp[i].pattern);
-            sp->append(tt, tr("Tempo Text"));
+            sp->append(tt, tr("Tempo Text"), QString(), 1.5);
             }
 
       paletteBox->addPalette(sp);

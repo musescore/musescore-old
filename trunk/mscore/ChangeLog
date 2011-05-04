@@ -1,4 +1,6 @@
-4.may (la)
+4.may (ws)
+      - implemented "delete profile"
+      (la)
       - fix #9342 : repeat entry doesn't scroll display
 3.may (ws)
       - raster for vertical frames

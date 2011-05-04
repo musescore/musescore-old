@@ -3721,29 +3721,34 @@ void MuseScore::showProfileMenu()
             profiles = new QActionGroup(this);
             profiles->setExclusive(true);
             connect(profiles, SIGNAL(triggered(QAction*)), SLOT(changeProfile(QAction*)));
-            const QList<Profile*> pl = Profile::profiles();
-            foreach (Profile* p, pl) {
-                  QAction* a = profiles->addAction(p->name());
-                  a->setCheckable(true);
-                  a->setData(p->path());
-                  menuProfiles->addAction(a);
-                  }
-            menuProfiles->addSeparator();
-            QAction* a = new QAction(tr("new Profile"), this);
-            connect(a, SIGNAL(triggered()), SLOT(createNewProfile()));
-            menuProfiles->addAction(a);
-            deleteProfileAction = new QAction(tr("delete Profile"), this);
-            connect(deleteProfileAction, SIGNAL(triggered()), SLOT(deleteProfile()));
-            menuProfiles->addAction(deleteProfileAction);
             }
-      foreach(QAction* a, profiles->actions()) {
+      else {
+            foreach(QAction* a, profiles->actions())
+                  profiles->removeAction(a);
+            }
+      menuProfiles->clear();
+
+      const QList<Profile*> pl = Profile::profiles();
+      QAction* active = 0;
+      foreach (Profile* p, pl) {
+            QAction* a = profiles->addAction(p->name());
+            a->setCheckable(true);
+            a->setData(p->path());
             if (a->text() == preferences.profile) {
+                  active = a;
                   a->setChecked(true);
-                  // default profile cannot be deleted
-                  deleteProfileAction->setEnabled(a->text() != "default");
-                  break;
                   }
+            menuProfiles->addAction(a);
             }
+      menuProfiles->addSeparator();
+      QAction* a = new QAction(tr("new Profile"), this);
+      connect(a, SIGNAL(triggered()), SLOT(createNewProfile()));
+      menuProfiles->addAction(a);
+      deleteProfileAction = new QAction(tr("delete Profile"), this);
+      connect(deleteProfileAction, SIGNAL(triggered()), SLOT(deleteProfile()));
+      menuProfiles->addAction(deleteProfileAction);
+      // default profile cannot be deleted
+      deleteProfileAction->setEnabled(active && (active->text() != "default"));
       }
 
 //---------------------------------------------------------
@@ -3777,6 +3782,7 @@ void MuseScore::createNewProfile()
             }
       profile->save();
       profile = Profile::createNewProfile(s);
+      preferences.profile = profile->name();
       }
 
 //---------------------------------------------------------
@@ -3785,7 +3791,29 @@ void MuseScore::createNewProfile()
 
 void MuseScore::deleteProfile()
       {
-printf("TODO: delete profile\n");
+      if (!profiles)
+            return;
+      QAction* a = profiles->checkedAction();
+      if (!a)
+            return;
+      preferences.dirty = true;
+      Profile* profile = 0;
+      foreach(Profile* p, Profile::profiles()) {
+            if (p->name() == a->text()) {
+                  profile = p;
+                  break;
+                  }
+            }
+      if (!profile)
+            return;
+      Profile::profiles().removeOne(profile);
+      QFile f(profile->path());
+printf("remove <%s>\n", qPrintable(profile->name()));
+      f.remove();
+//??      delete profile;
+      profile             = Profile::profiles().first();
+printf("  change to <%s>\n", qPrintable(profile->name()));
+      preferences.profile = profile->name();
       }
 
 //---------------------------------------------------------
@@ -3794,8 +3822,6 @@ printf("TODO: delete profile\n");
 
 void MuseScore::changeProfile(QAction* a)
       {
-      printf("changeProfile <%s> requested\n", qPrintable(a->text()));
-
       preferences.profile = a->text();
       preferences.dirty = true;
       foreach(Profile* p, Profile::profiles()) {

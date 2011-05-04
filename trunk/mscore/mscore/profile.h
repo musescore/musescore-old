@@ -44,7 +44,7 @@ class Profile {
       void read(QDomElement);
       void read();
 
-      static const QList<Profile*>& profiles();
+      static QList<Profile*>& profiles();
       static Profile* createNewProfile(const QString& name);
       };
 
