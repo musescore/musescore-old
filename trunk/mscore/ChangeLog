@@ -1,3 +1,5 @@
+4.may (la)
+      - fix #9342 : repeat entry doesn't scroll display
 3.may (ws)
       - raster for vertical frames
       - add x/y spin box to move position in edit mode
