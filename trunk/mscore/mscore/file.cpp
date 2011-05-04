@@ -1754,7 +1754,7 @@ bool Score::read(QDomElement dScore)
             else {
                   ChordRest* cr1 = (ChordRest*)(slur->startElement());
                   ChordRest* cr2 = (ChordRest*)(slur->endElement());
-                  if (cr1->tick() >= cr2->tick()) {
+                  if (cr1->tick() > cr2->tick()) {
                         printf("Slur invalid start-end tick %d-%d\n", cr1->tick(), cr2->tick());
                         slur->setStartElement(cr2);
                         slur->setEndElement(cr1);
