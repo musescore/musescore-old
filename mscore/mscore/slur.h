@@ -70,6 +70,8 @@ class SlurSegment : public SpannerSegment {
       virtual bool edit(ScoreView*, int grip, int key, Qt::KeyboardModifiers, const QString& s);
       virtual void updateGrips(int*, QRectF*) const;
       virtual QPointF gripAnchor(int grip) const;
+      virtual QPointF getGrip(int) const;
+      virtual void setGrip(int, const QPointF&);
 
       virtual void move(qreal xd, qreal yd) { move(QPointF(xd, yd)); }
       virtual void move(const QPointF& s);

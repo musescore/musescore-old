@@ -684,7 +684,7 @@ ScoreView::ScoreView(QWidget* parent)
       //----- setup edit state
       s = states[EDIT];
       s->assignProperty(this, "cursor", QCursor(Qt::ArrowCursor));
-      connect(s, SIGNAL(entered()), mscore, SLOT(setEditState()));
+//      connect(s, SIGNAL(entered()), mscore, SLOT(setEditState()));
       ct = new CommandTransition("escape", states[NORMAL]);                   // ->normal
       connect(ct, SIGNAL(triggered()), SLOT(endEdit()));
       s->addTransition(ct);
@@ -1082,6 +1082,9 @@ void ScoreView::updateGrips()
       if (curGrip == -1)
             curGrip = grips-1;
 
+      QPointF pt(editObject->getGrip(curGrip));
+      mscore->setEditPos(pt);
+#if 0
       double x, y;
       if (grips) {
             x = grip[curGrip].center().x() - editObject->gripAnchor(curGrip).x();
@@ -1094,6 +1097,7 @@ void ScoreView::updateGrips()
       double _spatium = score()->spatium();
       mscore->setEditX(x / _spatium);
       mscore->setEditY(y / _spatium);
+#endif
 
       QPointF anchor = editObject->gripAnchor(curGrip);
       if (!anchor.isNull())
@@ -1104,44 +1108,13 @@ void ScoreView::updateGrips()
       }
 
 //---------------------------------------------------------
-//   setEditX
+//   setEditPos
 //---------------------------------------------------------
 
-void ScoreView::setEditX(double val)
+void ScoreView::setEditPos(const QPointF& pt)
       {
-      score()->addRefresh(editObject->abbox());
-      double _spatium = score()->spatium();
-      if (grips) {
-            double x = (val + editObject->gripAnchor(curGrip).x()) * _spatium;
-            x *= _spatium;
-            double y = grip[curGrip].center().y() - editObject->gripAnchor(curGrip).y();
-            editObject->setGrip(curGrip, QPointF(x, y));
-            }
-      else {
-            editObject->setUserXoffset(val * _spatium);
-            }
-      score()->addRefresh(editObject->abbox());
-      _score->end();
-      }
-
-//---------------------------------------------------------
-//   setEditY
-//---------------------------------------------------------
-
-void ScoreView::setEditY(double val)
-      {
-      score()->addRefresh(editObject->abbox());
-      double _spatium = score()->spatium();
-      if (grips) {
-            double y = (val + editObject->gripAnchor(curGrip).y()) * _spatium;
-            y *= _spatium;
-            double x = grip[curGrip].center().x() - editObject->gripAnchor(curGrip).x();
-            editObject->setGrip(curGrip, QPointF(x, y));
-            }
-      else {
-            editObject->setUserYoffset(val * _spatium);
-            }
-      score()->addRefresh(editObject->abbox());
+      editObject->setGrip(curGrip, pt);
+      updateGrips();
       _score->end();
       }
 
@@ -1221,6 +1194,7 @@ void ScoreView::startEdit(Element* element, int startGrip)
 
 void ScoreView::startEdit()
       {
+      mscore->setEditState();
       if (!score()->undo()->active())
             score()->startCmd();
       score()->setLayoutAll(false);

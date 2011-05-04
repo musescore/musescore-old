@@ -2416,7 +2416,7 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","F&ull screen")
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "hraster",
          QT_TRANSLATE_NOOP("action","Enable horizontal raster"),
 	   0,
@@ -2426,7 +2426,7 @@ Shortcut MuseScore::sc[] = {
          hraster_ICON
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "vraster",
          QT_TRANSLATE_NOOP("action","Enable vertical raster"),
 	   0,
@@ -2436,7 +2436,7 @@ Shortcut MuseScore::sc[] = {
          vraster_ICON
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "config-raster",
          QT_TRANSLATE_NOOP("action","Configure raster"),
 	   0,

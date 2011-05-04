@@ -665,7 +665,7 @@ void Chord::write(Xml& xml) const
 //   Chord::readNote
 //---------------------------------------------------------
 
-void Chord::readNote(QDomElement e, const QList<Tuplet*>& tuplets, const QList<Slur*>& slurs)
+void Chord::readNote(QDomElement e, const QList<Tuplet*>& tuplets, QList<Slur*>* slurs)
       {
       Note* note = new Note(score());
       int ptch   = e.attribute("pitch", "-1").toInt();
@@ -735,14 +735,14 @@ void Chord::read(QDomElement e)
       {
       QList<Tuplet*> tl;
       QList<Slur*> sl;
-      read(e, tl, sl);
+      read(e, tl, &sl);
       }
 
 //---------------------------------------------------------
 //   Chord::read
 //---------------------------------------------------------
 
-void Chord::read(QDomElement e, const QList<Tuplet*>& tuplets, const QList<Slur*>& slurs)
+void Chord::read(QDomElement e, const QList<Tuplet*>& tuplets, QList<Slur*>* slurs)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());

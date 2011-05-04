@@ -116,6 +116,8 @@ class VBox : public Box {
 
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(ScoreView*, const QString&);
+      virtual QPointF getGrip(int) const;
+      virtual void setGrip(int, const QPointF&);
       };
 
 //---------------------------------------------------------

@@ -1502,3 +1502,23 @@ void Element::setAlign(Align val)
       }
 #endif
 
+//---------------------------------------------------------
+//   getGrip
+//---------------------------------------------------------
+
+QPointF Element::getGrip(int) const
+      {
+      double _spatium = score()->spatium();
+      return QPointF(userOff().x() / _spatium, userOff().y() / _spatium);
+      }
+
+//---------------------------------------------------------
+//   setGrip
+//---------------------------------------------------------
+
+void Element::setGrip(int, const QPointF& pt)
+      {
+      double _spatium = score()->spatium();
+      setUserOff(QPointF(pt.x() * _spatium, pt.y() * _spatium));
+      }
+

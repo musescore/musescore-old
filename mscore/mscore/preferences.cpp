@@ -260,7 +260,7 @@ void Preferences::init()
       nudgeStep10             = 1.0;      // Ctrl + cursor key (default 1.0)
       nudgeStep50             = 5.0;      // Alt  + cursor key (default 5.0)
 
-      hRaster                 = 2;
+      hRaster                 = 2;        // _spatium / value
       vRaster                 = 2;
       nativeDialogs           = false;    // use system native file dialogs
 

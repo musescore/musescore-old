@@ -33,6 +33,7 @@
 #include "layoutbreak.h"
 #include "fret.h"
 #include "painter.h"
+#include "preferences.h"
 
 static const double BOX_MARGIN = 0.0;
 
@@ -110,16 +111,29 @@ bool Box::edit(ScoreView*, int /*grip*/, int /*key*/, Qt::KeyboardModifiers, con
 
 void Box::editDrag(const EditData& ed)
       {
-      if (type() == VBOX)
-            _boxHeight += Spatium(ed.delta.y() / spatium());
+      if (type() == VBOX) {
+            _boxHeight = Spatium((ed.pos.y() - abbox().y()) / spatium());
+            if (mscore->vRaster()) {
+                  qreal vRaster = 1.0 / qreal(preferences.vRaster);
+                  int n = lrint(_boxHeight.val() / vRaster);
+                  _boxHeight = Spatium(vRaster * n);
+                  }
+            }
       else {
             _boxWidth += Spatium(ed.delta.x() / spatium());
+            if (mscore->hRaster()) {
+                  qreal hRaster = 1.0 / qreal(preferences.hRaster);
+                  int n = lrint(_boxWidth.val() / hRaster);
+                  _boxWidth = Spatium(hRaster * n);
+                  }
+
             foreach(Element* e, _el) {
                   if (e->type() == TEXT) {
                         static_cast<Text*>(e)->setModified(true);  // force relayout
                         }
                   }
             }
+      layout();   //??
       score()->setLayoutAll(true);
       }
 
@@ -149,9 +163,9 @@ void Box::updateGrips(int* grips, QRectF* grip) const
       *grips = 1;
       QRectF r(abbox());
       if (type() == HBOX)
-            grip[0].translate(QPointF(r.x() + r.width(), r.y() + r.height() * .5));
+            grip[0].translate(QPointF(r.right(), r.bottom() * .5));
       else if (type() == VBOX)
-            grip[0].translate(QPointF(r.x() + r.width() * .5, r.y() + r.height()));
+            grip[0].translate(QPointF(r.right() * .5, r.bottom()));
       }
 
 //---------------------------------------------------------
@@ -571,6 +585,26 @@ void VBox::layout()
       setPos(QPointF());      // !?
       setbbox(QRectF(0.0, 0.0, system()->width(), point(boxHeight())));
       Box::layout();
+      }
+
+//---------------------------------------------------------
+//   getGrip
+//---------------------------------------------------------
+
+QPointF VBox::getGrip(int) const
+      {
+      return QPointF(0.0, boxHeight().val());
+      }
+
+//---------------------------------------------------------
+//   setGrip
+//---------------------------------------------------------
+
+void VBox::setGrip(int, const QPointF& pt)
+      {
+//      printf("VBox::setGrip %f\n", pt.y());
+      setBoxHeight(Spatium(pt.y()));
+      layout();
       }
 
 //---------------------------------------------------------

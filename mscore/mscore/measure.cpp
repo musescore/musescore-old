@@ -2064,7 +2064,7 @@ void Measure::read(QDomElement e, int staffIdx)
             else if (tag == "Chord") {
                   Chord* chord = new Chord(score());
                   chord->setTrack(score()->curTrack);
-                  chord->read(e, _tuplets, score()->slurs);
+                  chord->read(e, _tuplets, &score()->slurs);
 
                   int track = chord->track();
                   Segment* ss = 0;
@@ -2133,7 +2133,7 @@ void Measure::read(QDomElement e, int staffIdx)
                   Fraction timeStretch(staff->timeStretch(score()->curTick));
                   rest->setDuration(timesig()/timeStretch);
                   rest->setTrack(score()->curTrack);
-                  rest->read(e, _tuplets, score()->slurs);
+                  rest->read(e, _tuplets, &score()->slurs);
 
                   segment = getSegment(rest, score()->curTick);
                   segment->add(rest);
@@ -2148,7 +2148,7 @@ void Measure::read(QDomElement e, int staffIdx)
             else if (tag == "Note") {
                   Chord* chord = new Chord(score());
                   chord->setTrack(score()->curTrack);
-                  chord->readNote(e, _tuplets, score()->slurs);
+                  chord->readNote(e, _tuplets, &score()->slurs);
                   segment = getSegment(chord, score()->curTick);
                   segment->add(chord);
 
@@ -2206,7 +2206,7 @@ void Measure::read(QDomElement e, int staffIdx)
             else if (tag == "RepeatMeasure") {
                   RepeatMeasure* rm = new RepeatMeasure(score());
                   rm->setTrack(score()->curTrack);
-                  rm->read(e, _tuplets, score()->slurs);
+                  rm->read(e, _tuplets, &score()->slurs);
                   segment = getSegment(SegChordRest, score()->curTick);
                   segment->add(rm);
                   score()->curTick += ticks();

@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -71,9 +71,9 @@ class ChordRest : public DurationElement {
       Segment* segment() const                   { return (Segment*)parent(); }
       virtual Measure* measure() const           { return (Measure*)(parent()->parent()); }
 
-      virtual void read(QDomElement, const QList<Tuplet*>&, const QList<Slur*>&) = 0;
+      virtual void read(QDomElement, const QList<Tuplet*>&, QList<Slur*>*) = 0;
       void writeProperties(Xml& xml) const;
-      bool readProperties(QDomElement e, const QList<Tuplet*>&, const QList<Slur*>&);
+      bool readProperties(QDomElement e, const QList<Tuplet*>&, QList<Slur*>*);
       QList<Prop> properties(Xml&, bool clipboardmode) const;
       virtual QList<Prop> properties(Xml& xml) const { return properties(xml, false); }
       virtual void scanElements(void* data, void (*func)(void*, Element*));
