@@ -274,7 +274,7 @@ void ChordRest::writeProperties(Xml& xml) const
 //   readProperties
 //---------------------------------------------------------
 
-bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets, const QList<Slur*>& slurs)
+bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets, QList<Slur*>* slurs)
       {
       if (Element::readProperties(e))
             return true;
@@ -341,32 +341,32 @@ bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets, con
             int id = e.attribute("number").toInt();
             QString type = e.attribute("type");
             Slur* slur = 0;
-            foreach(Slur* s, slurs) {
+            foreach(Slur* s, *slurs) {
                   if (s->id() == id) {
                         slur = s;
                         break;
                         }
                   }
-            if (slur) {
-                  if (type == "start") {
-                        slur->setStartElement(this);
-                        _slurFor.append(slur);
-                        }
-                  else if (type == "stop") {
-                        slur->setEndElement(this);
-                        _slurBack.append(slur);
-                        }
-                  else
-                        printf("ChordRest::read(): unknown Slur type <%s>\n", qPrintable(type));
-                  }
-            else {
+            if (!slur) {
                   printf("ChordRest::read(): Slur id %d not found\n", id);
+                  slur = new Slur(score());
+                  slur->setId(id);
+                  slurs->append(slur);
                   }
+            if (type == "start") {
+                  slur->setStartElement(this);
+                  _slurFor.append(slur);
+                  }
+            else if (type == "stop") {
+                  slur->setEndElement(this);
+                  _slurBack.append(slur);
+                  }
+            else
+                  printf("ChordRest::read(): unknown Slur type <%s>\n", qPrintable(type));
             }
       else if (tag == "durationType") {
             setDurationType(val);
             if (durationType().type() != Duration::V_MEASURE) {
-//                  if ((type() == REST) && (durationType()==Duration::V_WHOLE && duration() != Fraction(4.4))) {
                   // rest durations are initialized to whole measure duration when
                   // created upon reading the <Rest> tag (see Measure::read() )
                   if ((type() == REST) && (durationType()==Duration::V_WHOLE && duration() <= Fraction(4, 4))) {

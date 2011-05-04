@@ -64,12 +64,31 @@ void LineSegment::updateGrips(int* grips, QRectF* grip) const
 
 void LineSegment::setGrip(int grip, const QPointF& p)
       {
+      QPointF pt(p * spatium());
+
       if (grip == 0) {
-            setUserOff(p);
+            QPointF delta = pt - (canvasPos() - gripAnchor(grip));
+            setUserOff(userOff() + delta);
+            _userOff2 -= delta;
             }
       else {
-            setUserOff2(p);
+            setUserOff2(pt - canvasPos() - _p2 + gripAnchor(grip));
             }
+      layout();
+      }
+
+//---------------------------------------------------------
+//   getGrip
+//---------------------------------------------------------
+
+QPointF LineSegment::getGrip(int grip) const
+      {
+      QPointF pt;
+      if (grip == 0)
+            pt = canvasPos() - gripAnchor(grip);
+      else
+            pt = _p2 + _userOff2 + canvasPos() - gripAnchor(grip);
+      return pt / spatium();
       }
 
 //---------------------------------------------------------

@@ -3900,7 +3900,7 @@ void MuseScore::enableEditMode(bool enable)
 void MuseScore::editXChanged(double val)
       {
       if (cv)
-            cv->setEditX(val);
+            cv->setEditPos(QPointF(val, _editY->value()));
       }
 
 //---------------------------------------------------------
@@ -3910,33 +3910,22 @@ void MuseScore::editXChanged(double val)
 void MuseScore::editYChanged(double val)
       {
       if (cv)
-            cv->setEditY(val);
+            cv->setEditPos(QPointF(_editX->value(), val));
       }
 
 //---------------------------------------------------------
 //   setEditX
 //---------------------------------------------------------
 
-void MuseScore::setEditX(double x)
+void MuseScore::setEditPos(const QPointF& pt)
       {
       if (_editX) {
             _editX->blockSignals(true);
-            _editX->setValue(x);
-            _editX->blockSignals(false);
-            }
-      }
-
-//---------------------------------------------------------
-//   setEditY
-//---------------------------------------------------------
-
-void MuseScore::setEditY(double y)
-      {
-      if (_editY) {
             _editY->blockSignals(true);
-            _editY->setValue(y);
+            _editX->setValue(pt.x());
+            _editY->setValue(pt.y());
+            _editX->blockSignals(false);
             _editY->blockSignals(false);
             }
       }
-
 

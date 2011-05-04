@@ -2554,7 +2554,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                         else if (tag == "Chord" || tag == "Rest" || tag == "RepeatMeasure") {
                               ChordRest* cr = static_cast<ChordRest*>(Element::name2Element(tag, this));
                               cr->setTrack(curTrack);
-                              cr->read(eee, tuplets, slurs);
+                              cr->read(eee, tuplets, &slurs);
                               cr->setSelected(false);
                               int voice = cr->voice();
                               int track = dstStaffIdx * VOICES + voice;

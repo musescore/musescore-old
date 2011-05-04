@@ -143,23 +143,38 @@ void ScoreView::editKey(QKeyEvent* ev)
             }
       QPointF delta;
       qreal _spatium = editObject->spatium();
-      qreal val      = preferences.nudgeStep * _spatium;
+      qreal xval     = preferences.nudgeStep * _spatium;
+
       if (modifiers & Qt::ControlModifier)
-            val = preferences.nudgeStep10 * _spatium;
+            xval = preferences.nudgeStep10 * _spatium;
       else if (modifiers & Qt::AltModifier)
-            val = preferences.nudgeStep50 * _spatium;
+            xval = preferences.nudgeStep50 * _spatium;
+      qreal yval = xval;
+
+      if (mscore->vRaster()) {
+            qreal vRaster = _spatium / preferences.vRaster;
+            if (yval < vRaster)
+                  yval = vRaster;
+            }
+      if (mscore->hRaster()) {
+            qreal hRaster = _spatium / preferences.hRaster;
+            if (xval < hRaster)
+                  xval = hRaster;
+            }
+      // TODO: if raster, then xval/yval should be multiple of raster
+
       switch (ev->key()) {
             case Qt::Key_Left:
-                  delta = QPointF(-val, 0);
+                  delta = QPointF(-xval, 0);
                   break;
             case Qt::Key_Right:
-                  delta = QPointF(val, 0);
+                  delta = QPointF(xval, 0);
                   break;
             case Qt::Key_Up:
-                  delta = QPointF(0, -val);
+                  delta = QPointF(0, -yval);
                   break;
             case Qt::Key_Down:
-                  delta = QPointF(0, val);
+                  delta = QPointF(0, yval);
                   break;
             default:
                   ev->ignore();
@@ -169,6 +184,8 @@ void ScoreView::editKey(QKeyEvent* ev)
       ed.curGrip = curGrip;
       ed.delta   = delta;
       ed.view    = this;
+      if (curGrip >= 0)
+            ed.pos = grip[curGrip].center() + delta;
       editObject->editDrag(ed);
       updateGrips();
       _score->end();

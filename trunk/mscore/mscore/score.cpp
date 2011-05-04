@@ -605,6 +605,7 @@ int Score::readScore(QString name)
 
 void Score::write(Xml& xml, bool /*autosave*/)
       {
+      slurs.clear();
       xml.stag("Score");
 
       if (_omr && xml.writeOmr)

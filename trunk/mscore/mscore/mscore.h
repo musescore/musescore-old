@@ -521,8 +521,7 @@ class MuseScore : public QMainWindow {
       void disableCommands(bool val) { inChordEditor = val; }
 
       void updateInputState(Score*);
-      void setEditX(double);
-      void setEditY(double);
+      void setEditPos(const QPointF&);
       };
 
 extern MuseScore* mscore;

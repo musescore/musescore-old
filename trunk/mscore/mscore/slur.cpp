@@ -239,6 +239,39 @@ QPointF SlurSegment::gripAnchor(int grip) const
       }
 
 //---------------------------------------------------------
+//   getGrip
+//---------------------------------------------------------
+
+QPointF SlurSegment::getGrip(int n) const
+      {
+      switch(n) {
+            case 0:
+            case 3:
+                  return (ups[n].p - gripAnchor(n)) / spatium() + ups[n].off;
+            default:
+                  return ups[n].off;
+            }
+      }
+
+//---------------------------------------------------------
+//   setGrip
+//---------------------------------------------------------
+
+void SlurSegment::setGrip(int n, const QPointF& pt)
+      {
+      switch(n) {
+            case 0:
+            case 3:
+                  ups[n].off = ((pt * spatium()) - (ups[n].p - gripAnchor(n))) / spatium();
+                  break;
+            default:
+                  ups[n].off = pt;
+                  break;
+            }
+      slurTie()->layout();
+      }
+
+//---------------------------------------------------------
 //   editDrag
 //---------------------------------------------------------
 
