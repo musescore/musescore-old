@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -41,6 +41,7 @@ struct PaletteCell {
       bool drawStaff;
       double x, y;
       int xoffset, yoffset;
+      qreal mag;
       };
 
 //---------------------------------------------------------
@@ -213,7 +214,7 @@ class Palette : public QWidget {
       Palette(QWidget* parent = 0);
       ~Palette();
 
-      void append(Element*, const QString& name, QString tag = QString());
+      void append(Element*, const QString& name, QString tag = QString(), qreal mag = 1.0);
       void add(int idx, Element*, const QString& name, const QString tag = QString());
       void append(int sym);
 

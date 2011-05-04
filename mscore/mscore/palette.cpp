@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2008 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -371,7 +371,7 @@ void Palette::leaveEvent(QEvent*)
 //    append element to palette
 //---------------------------------------------------------
 
-void Palette::append(Element* s, const QString& name, QString tag)
+void Palette::append(Element* s, const QString& name, QString tag, qreal mag)
       {
       PaletteCell* cell = new PaletteCell;
 
@@ -382,6 +382,7 @@ void Palette::append(Element* s, const QString& name, QString tag)
       cell->drawStaff = needsStaff(s);
       cell->xoffset   = 0;
       cell->yoffset   = 0;
+      cell->mag       = mag;
       update();
       if (s && s->type() == ICON) {
             Icon* icon = static_cast<Icon*>(s);
@@ -420,6 +421,7 @@ void Palette::add(int idx, Element* s, const QString& name, QString tag)
       cell->drawStaff = needsStaff(s);
       cell->xoffset   = 0;
       cell->yoffset   = 0;
+      cell->mag       = 1.0;
       update();
       if (s && s->type() == ICON) {
             Icon* icon = static_cast<Icon*>(s);
@@ -518,12 +520,13 @@ void Palette::paintEvent(QPaintEvent* event)
                               }
                         }
                   p.save();
-                  p.scale(mag, mag);
+                  qreal cellMag = cells[idx]->mag * mag;
+                  p.scale(cellMag, cellMag);
 
-                  double gw = hgrid / mag;
-                  double gh = vgrid / mag;
-                  double gx = column * gw + cells[idx]->xoffset / mag;
-                  double gy = row    * gh + cells[idx]->yoffset / mag;
+                  double gw = hgrid / cellMag;
+                  double gh = vgrid / cellMag;
+                  double gx = column * gw + cells[idx]->xoffset / cellMag;
+                  double gy = row    * gh + cells[idx]->yoffset / cellMag;
 
                   double sw = el->width();
                   double sh = el->height();
@@ -535,7 +538,7 @@ void Palette::paintEvent(QPaintEvent* event)
                         sy  = gy + (gh - sh) * .5 - el->bbox().y();
                   double sx  = gx + (gw - sw) * .5 - el->bbox().x();
 
-                  sy += _yOffset / mag;
+                  sy += _yOffset / cellMag;
 
                   p.translate(QPointF(sx, sy));
                   // el->setPos(sx, sy);
@@ -822,6 +825,8 @@ void Palette::write(Xml& xml, const QString& name) const
                   xml.tag("yoffset", cells[i]->yoffset);
             if (!cells[i]->tag.isEmpty())
                   xml.tag("tag", cells[i]->tag);
+            if (cells[i]->mag != 1.0)
+                  xml.tag("mag", cells[i]->mag);
             cells[i]->element->write(xml);
             xml.etag();
             }
@@ -920,6 +925,7 @@ void Palette::read(QDomElement e)
                         bool drawStaff = false;
                         int xoffset = 0;
                         int yoffset = 0;
+                        qreal mag   = 1.0;
                         for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                               QString tag(ee.tagName());
                               if (tag == "staff")
@@ -928,6 +934,8 @@ void Palette::read(QDomElement e)
                                     xoffset = ee.text().toInt();
                               else if (tag == "yoffset")
                                     yoffset = ee.text().toInt();
+                              else if (tag == "mag")
+                                    mag = ee.text().toDouble();
                               else if (tag == "tag")
                                     tag = ee.text();
                               else if (tag == "Image") {
@@ -972,6 +980,7 @@ void Palette::read(QDomElement e)
                         cells.back()->drawStaff = drawStaff;
                         cells.back()->xoffset   = xoffset;
                         cells.back()->yoffset   = yoffset;
+                        cells.back()->mag       = mag;
                         }
                   }
             else

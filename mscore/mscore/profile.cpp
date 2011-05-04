@@ -177,7 +177,7 @@ void Profile::save()
 //   profiles
 //---------------------------------------------------------
 
-const QList<Profile*>& Profile::profiles()
+QList<Profile*>& Profile::profiles()
       {
       if (!profilesRead) {
             QString s = dataPath + "/profiles";
@@ -204,7 +204,6 @@ const QList<Profile*>& Profile::profiles()
 
 Profile* Profile::createNewProfile(const QString& name)
       {
-      profile->save();
       Profile* p = new Profile(*profile);
       p->setName(name);
       p->setPath("");
