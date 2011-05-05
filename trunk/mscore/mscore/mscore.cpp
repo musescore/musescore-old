@@ -3810,7 +3810,7 @@ void MuseScore::deleteProfile()
       QFile f(profile->path());
 printf("remove <%s>\n", qPrintable(profile->name()));
       f.remove();
-//??      delete profile;
+//TODO:??      delete profile;
       profile             = Profile::profiles().first();
 printf("  change to <%s>\n", qPrintable(profile->name()));
       preferences.profile = profile->name();

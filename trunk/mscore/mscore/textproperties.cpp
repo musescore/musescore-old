@@ -214,9 +214,6 @@ TextStyle TextProp::textStyle() const
       s.setForegroundColor(color->color());
       s.setSizeIsSpatiumDependent(sizeIsSpatiumDependent->isChecked());
 
-QColor c(s.foregroundColor());
-printf("Color r %d\n", c.red());
-
       Align a = 0;
       if (alignHCenter->isChecked())
             a |= ALIGN_HCENTER;
