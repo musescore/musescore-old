@@ -449,14 +449,13 @@ bool Score::saveAs(bool saveCopy)
       QString saveDirectory = saveCopy ?
             mscore->lastSaveCopyDirectory : mscore->lastSaveDirectory;
 
-      if (saveDirectory.isEmpty()) {
+      if (saveDirectory.isEmpty())
             saveDirectory = preferences.workingDirectory;
-            }
 
       QString selectedFilter;
-      QString name    = QString("%1.mscz").arg(info.baseName());
+      QString name   = QString("%1.mscz").arg(info.baseName());
       QString filter = fl.join(";;");
-      QString fn = mscore->getSaveScoreName(saveDialogTitle, name, filter, &selectedFilter);
+      QString fn     = mscore->getSaveScoreName(saveDialogTitle, name, filter, &selectedFilter);
       if (fn.isEmpty())
             return false;
 
@@ -2443,6 +2442,7 @@ QString MuseScore::getOpenScoreName(QString& dir, const QString& filter)
 
             QSettings settings;
             loadScoreDialog->restoreState(settings.value("loadScoreDialog").toByteArray());
+            saveScoreDialog->setAcceptMode(QFileDialog::AcceptOpen);
             }
       // setup side bar urls
       QList<QUrl> urls;
@@ -2486,13 +2486,12 @@ QString MuseScore::getSaveScoreName(const QString& title,
             myScores.setFile(QDir::home(), preferences.myScoresPath);
       if (saveScoreDialog == 0) {
             saveScoreDialog = new QFileDialog(this);
-            saveScoreDialog->setLabelText(QFileDialog::Accept, tr("Save"));
             QSettings settings;
             saveScoreDialog->restoreState(settings.value("saveScoreDialog").toByteArray());
             saveScoreDialog->setFileMode(QFileDialog::AnyFile);
             saveScoreDialog->setOption(QFileDialog::DontConfirmOverwrite, false);
             saveScoreDialog->setOption(QFileDialog::DontUseNativeDialog, true);
-            saveScoreDialog->setLabelText(QFileDialog::Accept, tr("Save"));
+            saveScoreDialog->setAcceptMode(QFileDialog::AcceptSave);
             }
       // setup side bar urls
       QList<QUrl> urls;
@@ -2580,6 +2579,7 @@ QString MuseScore::getStyleFilename(bool open)
 
                   QSettings settings;
                   loadStyleDialog->restoreState(settings.value("loadStyleDialog").toByteArray());
+                  loadStyleDialog->setAcceptMode(QFileDialog::AcceptOpen);
                   }
             urls.append(QUrl::fromLocalFile(mscoreGlobalShare+"/styles"));
             dialog = loadStyleDialog;
@@ -2591,13 +2591,13 @@ QString MuseScore::getStyleFilename(bool open)
                   saveStyleDialog->setFileMode(QFileDialog::AnyFile);
                   saveStyleDialog->setOption(QFileDialog::DontConfirmOverwrite, false);
                   saveStyleDialog->setOption(QFileDialog::DontUseNativeDialog, true);
-                  saveStyleDialog->setLabelText(QFileDialog::Accept, tr("Save"));
                   saveStyleDialog->setWindowTitle(tr("MuseScore: Save Style"));
                   saveStyleDialog->setNameFilter(tr("MuseScore Style File (*.mss)"));
                   saveStyleDialog->setDirectory(currentPath);
 
                   QSettings settings;
                   saveStyleDialog->restoreState(settings.value("saveStyleDialog").toByteArray());
+                  saveStyleDialog->setAcceptMode(QFileDialog::AcceptSave);
                   }
             dialog = saveStyleDialog;
             }
@@ -2640,6 +2640,7 @@ QString MuseScore::getSoundFont(const QString& d)
 
             QSettings settings;
             loadSoundFontDialog->restoreState(settings.value("loadSoundFontDialog").toByteArray());
+            loadSoundFontDialog->setAcceptMode(QFileDialog::AcceptOpen);
             }
 
       //
@@ -2716,6 +2717,7 @@ QString MuseScore::getChordStyleFilename(bool open)
                   loadChordStyleDialog->setDirectory(currentPath);
 
                   loadChordStyleDialog->restoreState(settings.value("loadChordStyleDialog").toByteArray());
+                  loadChordStyleDialog->setAcceptMode(QFileDialog::AcceptOpen);
                   }
             // setup side bar urls
             urls.append(QUrl::fromLocalFile(mscoreGlobalShare+"/styles"));
@@ -2728,12 +2730,12 @@ QString MuseScore::getChordStyleFilename(bool open)
                   saveChordStyleDialog->setFileMode(QFileDialog::AnyFile);
                   saveChordStyleDialog->setOption(QFileDialog::DontConfirmOverwrite, false);
                   saveChordStyleDialog->setOption(QFileDialog::DontUseNativeDialog, true);
-                  saveChordStyleDialog->setLabelText(QFileDialog::Accept, tr("Save"));
                   saveChordStyleDialog->setWindowTitle(tr("MuseScore: Save Style"));
                   saveChordStyleDialog->setNameFilter(filter);
                   saveChordStyleDialog->setDirectory(currentPath);
 
                   saveChordStyleDialog->restoreState(settings.value("saveChordStyleDialog").toByteArray());
+                  saveChordStyleDialog->setAcceptMode(QFileDialog::AcceptSave);
                   }
             dialog = saveChordStyleDialog;
             }
@@ -2775,6 +2777,7 @@ QString MuseScore::getScanFile(const QString& d)
 
             QSettings settings;
             loadScanDialog->restoreState(settings.value("loadScanDialog").toByteArray());
+            loadScanDialog->setAcceptMode(QFileDialog::AcceptOpen);
             }
 
       //
@@ -2822,6 +2825,7 @@ QString MuseScore::getAudioFile(const QString& d)
 
             QSettings settings;
             loadAudioDialog->restoreState(settings.value("loadAudioDialog").toByteArray());
+            loadAudioDialog->setAcceptMode(QFileDialog::AcceptOpen);
             }
 
       //
@@ -2880,13 +2884,13 @@ QString MuseScore::getFotoFilename()
             saveImageDialog->setAcceptMode(QFileDialog::AcceptSave);
             saveImageDialog->setOption(QFileDialog::DontConfirmOverwrite, false);
             saveImageDialog->setOption(QFileDialog::DontUseNativeDialog, true);
-            saveImageDialog->setLabelText(QFileDialog::Accept, tr("Save"));
             saveImageDialog->setWindowTitle(title);
             saveImageDialog->setNameFilter(filter);
             saveImageDialog->setDirectory(currentPath);
 
             QSettings settings;
             saveImageDialog->restoreState(settings.value("saveImageDialog").toByteArray());
+            saveImageDialog->setAcceptMode(QFileDialog::AcceptSave);
             }
 
       // setup side bar urls
@@ -2946,6 +2950,7 @@ QString MuseScore::getDrumsetFilename(bool open)
 
                   QSettings settings;
                   loadDrumsetDialog->restoreState(settings.value("loadDrumsetDialog").toByteArray());
+                  loadDrumsetDialog->setAcceptMode(QFileDialog::AcceptOpen);
                   }
             urls.append(QUrl::fromLocalFile(mscoreGlobalShare+"/styles"));
             dialog = loadDrumsetDialog;
@@ -2957,11 +2962,11 @@ QString MuseScore::getDrumsetFilename(bool open)
                   saveDrumsetDialog->setFileMode(QFileDialog::AnyFile);
                   saveDrumsetDialog->setOption(QFileDialog::DontConfirmOverwrite, false);
                   saveDrumsetDialog->setOption(QFileDialog::DontUseNativeDialog, true);
-                  saveDrumsetDialog->setLabelText(QFileDialog::Accept, tr("Save"));
                   saveDrumsetDialog->setDirectory(currentPath);
 
                   QSettings settings;
                   saveDrumsetDialog->restoreState(settings.value("saveDrumsetDialog").toByteArray());
+                  saveDrumsetDialog->setAcceptMode(QFileDialog::AcceptSave);
                   }
             dialog = saveDrumsetDialog;
             }
