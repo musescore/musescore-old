@@ -193,7 +193,6 @@ bool endBeam(const Fraction& ts, ChordRest* cr, ChordRest* prevCr)
 Beam::Beam(Score* s)
    : Element(s)
       {
-//      setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
       setFlags(ELEMENT_SELECTABLE);
       _direction       = AUTO;
       _up              = -1;
@@ -698,19 +697,26 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                   //    compute concave flag
                   //
                   bool concave = false;
-                  for (int i = 0; i < crl.size() - 2; ++i) {
-                        if (crl[i]->type() != CHORD)
-                              continue;
-                        int s1 = crl[i+1]->line(_up) - crl[i+0]->line(_up);
-                        int s2 = crl[i+2]->line(_up) - crl[i+1]->line(_up);
-                        concave = s1 && s2 && ((s1>0) ^ (s2>0));
-                        if (concave)
-                              break;
+                  int l1 = c1->line(_up);
+                  int l2 = c2->line(_up);
+
+                  for (int i = 1; i < crl.size()-1; ++i) {
+                        int l3 = crl[i]->line(_up);
+                        if (_up) {
+                              if (l3 < l1 && l3 < l2) {
+                                    concave = true;
+                                    break;
+                                    }
+                              }
+                        else {
+                              if (l3 > l1 && l3 > l2) {
+                                    concave = true;
+                                    break;
+                                    }
+                              }
                         }
 
                   if (!concave) {
-                        int l1    = c1->line(_up);
-                        int l2    = c2->line(_up);
                         double dx = c2->canvasPos().x() - c1->canvasPos().x();
                         if (dx) {
                               double maxSlope = score()->style(ST_beamMaxSlope).toDouble();
@@ -729,6 +735,8 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                                     }
                               }
                         }
+                  else
+                        slope = 0.0;
                   cut *= (_up ? 1 : -1);
                   }
 
@@ -1223,8 +1231,10 @@ void Beam::updateGrips(int* grips, QRectF* grip) const
 void Beam::setBeamDirection(Direction d)
       {
       _direction = d;
-      if (d != AUTO)
+      if (d != AUTO) {
             _up = d == UP;
+            setGenerated(false);
+            }
       }
 
 //---------------------------------------------------------
