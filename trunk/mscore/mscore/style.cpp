@@ -238,7 +238,7 @@ StyleType styleTypes[] = {
       StyleType("ottavaLineWidth",         ST_SPATIUM),
       };
 
-static const QString ff("FreeSerif");
+static const QString ff("FreeSerifMscore");
 
 #define MM(x) ((x)/INCH)
 #define OA     OFFSET_ABS
@@ -289,12 +289,15 @@ void setDefaultStyle(Style* s)
       AS(TextStyle(TR( "Technik"), ff, 12, false, true, false,
          ALIGN_LEFT | ALIGN_BASELINE, 0.0, -2.0, OS));
 
-//      AS(TextStyle(TR( "Tempo"), ff, 12, true, false, false,
+#if 0
 // (temporarly) switch bold off as Qt cannot show bold glyphs with codepoint > 16bit
 // (used for musical symbols)
       AS(TextStyle(TR( "Tempo"), ff, 12, false, false, false,
          ALIGN_LEFT | ALIGN_BASELINE, 0, -4.0, OS, 0, 0, true, .0, .0, 0, Qt::black, false, true));
-
+#else
+      AS(TextStyle(TR( "Tempo"), ff, 12, false, false, false,
+         ALIGN_LEFT | ALIGN_BASELINE, 0, -4.0, OS, 0, 0, true, .0, .0, 0, Qt::black, false, true));
+#endif
       AS(TextStyle(TR( "Metronome"), ff, 12, true, false, false, ALIGN_LEFT));
 
       AS(TextStyle(TR( "Measure Number"), ff, 8, false, false, false,
@@ -425,8 +428,8 @@ StyleData::StyleData()
             StyleVal(ST_akkoladeWidth,Spatium(1.6)),
             StyleVal(ST_accidentalDistance,Spatium(0.22)),
             StyleVal(ST_accidentalNoteDistance,Spatium(0.22)),
-            StyleVal(ST_beamWidth,Spatium(0.48)),
-            StyleVal(ST_beamDistance,0.5),
+            StyleVal(ST_beamWidth,Spatium(0.5)),            // was 0.48
+            StyleVal(ST_beamDistance, 0.5),
             StyleVal(ST_beamMinLen,Spatium(1.25)),
             StyleVal(ST_beamMinSlope,0.05),
 

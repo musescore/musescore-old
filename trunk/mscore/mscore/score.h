@@ -202,6 +202,8 @@ class Score : public QObject {
       Q_OBJECT
 
       Score* _parentScore;          // set if score is an excerpt (part)
+      QDate _creationDate;
+
       Revisions* _revisions;
       QList<Excerpt*> _excerpts;
 
@@ -827,6 +829,7 @@ class Score : public QObject {
       void timesigStretchChanged(TimeSig* ts, Measure* fm, int staffIdx);
       int pageNumberOffset() const          { return _pageNumberOffset; }
       void setPageNumberOffset(int v)       { _pageNumberOffset = v; }
+      const QDate& creationDate() const     { return _creationDate;  }
       };
 
 extern Score* gscore;

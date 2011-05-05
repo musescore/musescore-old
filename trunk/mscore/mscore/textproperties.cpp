@@ -65,6 +65,7 @@ void TextProp::setScore(bool os, Score* score)
             unstyledGroup->setTitle(tr("Text Style"));
             }
       else {
+            textGroup->setVisible(false);
             styles->clear();
             foreach(const TextStyle& st, score->style()->textStyles())
                   styles->addItem(st.name());
@@ -181,6 +182,7 @@ void TextProp::setTextStyle(const TextStyle& s)
       paddingWidth->setValue(s.paddingWidth());
       frameRound->setValue(s.frameRound());
       circleButton->setChecked(s.circle());
+      boxButton->setChecked(!s.circle());
       }
 
 //---------------------------------------------------------

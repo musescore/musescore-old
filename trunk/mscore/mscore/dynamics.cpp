@@ -165,7 +165,6 @@ void Dynamic::setSubtype(int idx)
             font.setStyleStrategy(QFont::NoFontMerging);
             tf.setFont(font);
             tf.setProperty(QTextFormat::FontKerning, true);
-            // tf.setProperty(QTextFormat::FontLetterSpacing, 100);
             cursor.setBlockCharFormat(tf);
             cursor.insertText(dynList[idx].tag);
             }

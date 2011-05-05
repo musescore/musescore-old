@@ -2175,7 +2175,8 @@ int main(int argc, char* av[])
       //  load internal fonts
       //
       static const char* fonts[] = {
-            "mscore-20", "mscore1-20", "MuseJazz", "FreeSans", "FreeSerif",
+            "mscore-20", "mscore1-20", "MuseJazz",
+            "FreeSans", "FreeSerifMscore", "FreeSerifBold",
             "gonville-20",
             "mscore_tab_baroque", "mscore_tab_modern", "mscore_tab_renaiss", "mscore_tab_renaiss2"
             };
@@ -2204,6 +2205,7 @@ int main(int argc, char* av[])
                         }
                   }
 //            }
+#if 0
       //
       // avoid font problems by overriding the environment
       //    fall back to "C" locale
@@ -2213,6 +2215,7 @@ int main(int argc, char* av[])
       setenv("LANG", "C", 1);
 #endif
       QLocale::setDefault(QLocale(QLocale::C));
+#endif
 
       QWidget wi(0);
 

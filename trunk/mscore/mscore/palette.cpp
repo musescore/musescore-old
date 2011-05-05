@@ -1139,6 +1139,7 @@ void PaletteBoxButton::showPalette(bool visible)
             emit closeAll();
             }
       scrollArea->setVisible(visible);
+//      palette->updateGeometry();
       setArrowType(visible ? Qt::DownArrow : Qt::RightArrow );
       }
 
@@ -1168,6 +1169,8 @@ PaletteScrollArea::PaletteScrollArea(QWidget* w, QWidget* parent)
       setWidget(w);
       setWidgetResizable(true);
       _restrictHeight = true;
+      setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+      //setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
       }
 
 //---------------------------------------------------------
@@ -1474,6 +1477,7 @@ PaletteCellProperties::PaletteCellProperties(PaletteCell* p, QWidget* parent)
       setupUi(this);
       xoffset->setValue(cell->xoffset);
       yoffset->setValue(cell->yoffset);
+      scale->setValue(cell->mag);
       }
 
 //---------------------------------------------------------
@@ -1484,5 +1488,6 @@ void PaletteCellProperties::accept()
       {
       cell->xoffset = xoffset->value();
       cell->yoffset = yoffset->value();
+      cell->mag     = scale->value();
       QDialog::accept();
       }
