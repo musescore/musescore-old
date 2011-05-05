@@ -699,19 +699,39 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                   bool concave = false;
                   int l1 = c1->line(_up);
                   int l2 = c2->line(_up);
+                  bool sameLine = true;
 
-                  for (int i = 1; i < crl.size()-1; ++i) {
-                        int l3 = crl[i]->line(_up);
-                        if (_up) {
-                              if (l3 < l1 && l3 < l2) {
-                                    concave = true;
-                                    break;
+                  if (crl.size() >= 3) {
+                        int l4 = crl[1]->line(_up);
+                        for (int i = 1; i < crl.size()-1; ++i) {
+                              int l3 = crl[i]->line(_up);
+                              if (l3 != l4)
+                                    sameLine = false;
+                              if (_up) {
+                                    if (l3 < l1 && l3 < l2) {
+                                          concave = true;
+                                          break;
+                                          }
+                                    }
+                              else {
+                                    if (l3 > l1 && l3 > l2) {
+                                          concave = true;
+                                          break;
+                                          }
                                     }
                               }
-                        else {
-                              if (l3 > l1 && l3 > l2) {
-                                    concave = true;
-                                    break;
+                        if (sameLine && (l1 == l4 || l2 == l4)) {
+                              if (_up) {
+                                    if (l1 == l4 && l1 < l2)
+                                          concave = true;
+                                    else if (l2 == l4 && l2 < l1)
+                                          concave = true;
+                                    }
+                              else {
+                                    if (l1 == l4 && l1 > l2)
+                                          concave = true;
+                                    else if (l2 == l4 && l2 > l1)
+                                          concave = true;
                                     }
                               }
                         }
