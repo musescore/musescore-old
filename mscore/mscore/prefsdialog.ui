@@ -129,11 +129,7 @@
           <item row="0" column="2">
            <widget class="QToolButton" name="workingDirectoryButton">
             <property name="text">
-             <string>Browse...</string>
-            </property>
-            <property name="icon">
-             <iconset>
-              <normaloff>:/data/fileopen.svg</normaloff>:/data/fileopen.svg</iconset>
+             <string/>
             </property>
            </widget>
           </item>
@@ -169,14 +165,14 @@
           <item row="1" column="2">
            <widget class="QToolButton" name="myScoresButton">
             <property name="text">
-             <string>...</string>
+             <string/>
             </property>
            </widget>
           </item>
           <item row="2" column="2">
            <widget class="QToolButton" name="myStylesButton">
             <property name="text">
-             <string>...</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -201,13 +197,6 @@
           </item>
           <item row="4" column="1">
            <widget class="QLineEdit" name="myPlugins"/>
-          </item>
-          <item row="3" column="2">
-           <widget class="QToolButton" name="myTemplatesButton">
-            <property name="text">
-             <string>...</string>
-            </property>
-           </widget>
           </item>
           <item row="4" column="2">
            <widget class="QToolButton" name="myPluginsButton">
@@ -257,6 +246,13 @@
           </item>
           <item row="6" column="2">
            <widget class="QToolButton" name="myImagesButton">
+            <property name="text">
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="2">
+           <widget class="QToolButton" name="myTemplatesButton">
             <property name="text">
              <string>...</string>
             </property>
@@ -393,11 +389,7 @@
                <string/>
               </property>
               <property name="text">
-               <string>Browse...</string>
-              </property>
-              <property name="icon">
-               <iconset>
-                <normaloff>:/data/fileopen.svg</normaloff>:/data/fileopen.svg</iconset>
+               <string/>
               </property>
              </widget>
             </item>
@@ -686,11 +678,7 @@
             <item>
              <widget class="QToolButton" name="bgWallpaperSelect">
               <property name="text">
-               <string>Browse...</string>
-              </property>
-              <property name="icon">
-               <iconset>
-                <normaloff>:/data/fileopen.svg</normaloff>:/data/fileopen.svg</iconset>
+               <string/>
               </property>
              </widget>
             </item>
@@ -741,11 +729,7 @@
             <item>
              <widget class="QToolButton" name="fgWallpaperSelect">
               <property name="text">
-               <string>Browse...</string>
-              </property>
-              <property name="icon">
-               <iconset>
-                <normaloff>:/data/fileopen.svg</normaloff>:/data/fileopen.svg</iconset>
+               <string/>
               </property>
              </widget>
             </item>
@@ -1551,8 +1535,6 @@
              <string>Browse...</string>
             </property>
             <property name="icon">
-             <iconset>
-              <normaloff>:/data/fileopen.svg</normaloff>:/data/fileopen.svg</iconset>
             </property>
            </widget>
           </item>
@@ -2217,10 +2199,6 @@
             <property name="text">
              <string>...</string>
             </property>
-            <property name="icon">
-             <iconset>
-              <normaloff>:/data/fileopen.svg</normaloff>:/data/fileopen.svg</iconset>
-            </property>
            </widget>
           </item>
          </layout>
@@ -2380,8 +2358,6 @@
                <string>Browse...</string>
               </property>
               <property name="icon">
-               <iconset>
-                <normaloff>:/data/fileopen.svg</normaloff>:/data/fileopen.svg</iconset>
               </property>
              </widget>
             </item>

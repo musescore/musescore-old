@@ -325,11 +325,6 @@ void Page::draw(Painter* painter) const
 
 void Page::scanElements(void* data, void (*func)(void*, Element*))
       {
-/*      if (_header)
-            func(data, _header);
-      if (_footer)
-            func(data, _footer);
-      */
       foreach(System* s, _systems)
             s->scanElements(data, func);
       func(data, this);
@@ -651,6 +646,8 @@ void Page::doRebuildBspTree()
 //    $n          - number of pages
 //    $f          - file name
 //    $F          - file path+name
+//    $d          - current date
+//    $D          - creation date
 //    $:tag:      - meta data tag
 //       already defined tags:
 //       movementNumber
@@ -682,6 +679,12 @@ QString Page::replaceTextMacros(const QString& s) const
                               break;
                         case 'F':
                               d += _score->absoluteFilePath();
+                              break;
+                        case 'd':
+                              d += QDate::currentDate().toString(Qt::DefaultLocaleShortDate);
+                              break;
+                        case 'D':
+                              d += _score->creationDate().toString(Qt::DefaultLocaleShortDate);
                               break;
                         case '$':
                               d += '$';

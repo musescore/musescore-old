@@ -2558,8 +2558,20 @@ static void updateTextStyle2(void*, Element* e)
                   static_cast<Harmony*>(e)->render();
             else {
                   Text* text = static_cast<Text*>(e);
-                  if (text->styled())
-                        text->setText(text->getText());     // destroy formatting
+                  if (text->styled()) {
+                        QString sn = text->styleName();
+                        TextStyleType st = text->score()->style()->textStyleType(sn);
+                        if (st == TEXT_STYLE_INVALID) {
+                              //
+                              // this was probably a user defined text style
+                              // which is not part of the new style file
+                              //
+                              text->setStyled(false);
+                              }
+                        else {
+                              text->setText(text->getText());     // destroy formatting
+                              }
+                        }
                   }
             }
       }

@@ -307,6 +307,7 @@ Score::Score(const Style* s)
    : _selection(this)
       {
       _parentScore    = 0;
+      _creationDate   = QDate::currentDate();
       _revisions      = new Revisions;
       _symIdx         = 0;
       _pageNumberOffset = 0;
@@ -356,6 +357,7 @@ Score::Score(const Style* s)
 Score::Score(Score* parent)
    : _selection(this)
       {
+      _creationDate   = QDate::currentDate();
       _parentScore    = parent;
       _revisions      = 0;
       _symIdx         = 0;
