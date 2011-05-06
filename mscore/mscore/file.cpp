@@ -2442,7 +2442,7 @@ QString MuseScore::getOpenScoreName(QString& dir, const QString& filter)
 
             QSettings settings;
             loadScoreDialog->restoreState(settings.value("loadScoreDialog").toByteArray());
-            saveScoreDialog->setAcceptMode(QFileDialog::AcceptOpen);
+            loadScoreDialog->setAcceptMode(QFileDialog::AcceptOpen);
             }
       // setup side bar urls
       QList<QUrl> urls;
@@ -2570,7 +2570,6 @@ QString MuseScore::getStyleFilename(bool open)
       if (open) {
             if (loadStyleDialog == 0) {
                   loadStyleDialog = new QFileDialog(this);
-                  loadStyleDialog->setAcceptMode(QFileDialog::AcceptOpen);
                   loadStyleDialog->setFileMode(QFileDialog::ExistingFile);
                   loadStyleDialog->setOption(QFileDialog::DontUseNativeDialog, true);
                   loadStyleDialog->setWindowTitle(tr("MuseScore: Load Style"));
@@ -2631,7 +2630,6 @@ QString MuseScore::getSoundFont(const QString& d)
 
       if (loadSoundFontDialog == 0) {
             loadSoundFontDialog = new QFileDialog(this);
-            loadSoundFontDialog->setAcceptMode(QFileDialog::AcceptOpen);
             loadSoundFontDialog->setFileMode(QFileDialog::ExistingFile);
             loadSoundFontDialog->setOption(QFileDialog::DontUseNativeDialog, true);
             loadSoundFontDialog->setWindowTitle(tr("MuseScore: Choose Synthesizer SoundFont"));
@@ -2709,7 +2707,6 @@ QString MuseScore::getChordStyleFilename(bool open)
       if (open) {
             if (loadChordStyleDialog == 0) {
                   loadChordStyleDialog = new QFileDialog(this);
-                  loadChordStyleDialog->setAcceptMode(QFileDialog::AcceptOpen);
                   loadChordStyleDialog->setFileMode(QFileDialog::ExistingFile);
                   loadChordStyleDialog->setOption(QFileDialog::DontUseNativeDialog, true);
                   loadChordStyleDialog->setWindowTitle(tr("MuseScore: Load Chord Style"));
@@ -2768,7 +2765,6 @@ QString MuseScore::getScanFile(const QString& d)
 
       if (loadScanDialog == 0) {
             loadScanDialog = new QFileDialog(this);
-            loadScanDialog->setAcceptMode(QFileDialog::AcceptOpen);
             loadScanDialog->setFileMode(QFileDialog::ExistingFile);
             loadScanDialog->setOption(QFileDialog::DontUseNativeDialog, true);
             loadScanDialog->setWindowTitle(tr("MuseScore: Choose PDF Scan"));
@@ -2816,7 +2812,6 @@ QString MuseScore::getAudioFile(const QString& d)
 
       if (loadAudioDialog == 0) {
             loadAudioDialog = new QFileDialog(this);
-            loadAudioDialog->setAcceptMode(QFileDialog::AcceptOpen);
             loadAudioDialog->setFileMode(QFileDialog::ExistingFile);
             loadAudioDialog->setOption(QFileDialog::DontUseNativeDialog, true);
             loadAudioDialog->setWindowTitle(tr("MuseScore: Choose OGG Audio File"));
@@ -2943,7 +2938,6 @@ QString MuseScore::getDrumsetFilename(bool open)
       if (open) {
             if (loadDrumsetDialog == 0) {
                   loadDrumsetDialog = new QFileDialog(this);
-                  loadDrumsetDialog->setAcceptMode(QFileDialog::AcceptOpen);
                   loadDrumsetDialog->setFileMode(QFileDialog::ExistingFile);
                   loadDrumsetDialog->setOption(QFileDialog::DontUseNativeDialog, true);
                   saveDrumsetDialog->setDirectory(currentPath);
