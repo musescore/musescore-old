@@ -174,7 +174,18 @@ static QScriptValue prototype_Note_call(QScriptContext* context, QScriptEngine*)
 			  break;
 		case 10:     // "noteHead"
 				  if (context->argumentCount() == 0)
-					  return qScriptValueFromValue(context->engine(), note->noteHead());
+                return qScriptValueFromValue(context->engine(), note->noteHead());
+					else if (context->argumentCount() == 1) {
+                int v = context->argument(0).toInt32();
+                if(v < HEAD_GROUPS) {
+                      Score* score = note->score();
+                      if (score)
+                            score->undo()->push(new ChangeNoteHead(note, v, note->headType())); 
+                      else 
+                            note->setHeadGroup(v);
+                      }
+                return context->engine()->undefinedValue();
+                }
 				  break;
             }
       return context->throwError(QScriptContext::TypeError,

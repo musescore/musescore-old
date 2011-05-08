@@ -2,6 +2,8 @@
       - modified musical symbols in FreeSerif font (adjust baseline so that
         tempo markings look better) and rename it to FreeSerifMscore so that
         qt loads this modified font and not the system font with same name.
+      (la)
+      - set notehead shape from plugin framework
 4.may (ws)
       - implemented "delete profile"
       (la)
