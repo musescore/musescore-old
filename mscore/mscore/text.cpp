@@ -279,6 +279,7 @@ void Text::resetMode()
 
 void Text::layout()
       {
+      _doc->setDefaultFont(style().font(score()->spatium()));
       double w = -1.0;
       double x = 0.0;
       double y = 0.0;
@@ -405,12 +406,11 @@ void Text::draw(Painter* painter) const
                   }
             c.cursorPosition = cursor->position();
             }
-      QColor color(
-            (selected() && !(score() && score()->printing()))
-            ? preferences.selectColor[0] : style().foregroundColor()
-            );
-      if (!visible())
-            color = Qt::gray;
+//      QColor color(
+//            (selected() && !(score() && score()->printing()))
+//            ? preferences.selectColor[0] : style().foregroundColor()
+//            );
+      QColor color(visible() ? style().foregroundColor() : Qt::gray);
       c.palette.setColor(QPalette::Text, color);
 
       _doc->documentLayout()->draw(&p, c);
@@ -420,8 +420,8 @@ void Text::draw(Painter* painter) const
             QColor color(frameColor());
             if (!visible())
                   color = Qt::gray;
-            else if (selected())
-                  color = preferences.selectColor[track() == -1 ? 0 : voice()];
+            // else if (selected())
+            //       color = preferences.selectColor[track() == -1 ? 0 : voice()];
             p.setPen(QPen(QBrush(color), frameWidth() * DPMM));
             p.setBrush(QBrush(Qt::NoBrush));
             if (circle())
@@ -737,7 +737,6 @@ bool Text::edit(ScoreView* view, int /*grip*/, int key, Qt::KeyboardModifiers mo
                         {
                         QTextCharFormat f = cursor->charFormat();
                         f.setFontWeight(f.fontWeight() == QFont::Bold ? QFont::Normal : QFont::Bold);
-                        mscore->textTools()->setCharFormat(f);
                         cursor->setCharFormat(f);
                         }
                         break;
@@ -745,7 +744,6 @@ bool Text::edit(ScoreView* view, int /*grip*/, int key, Qt::KeyboardModifiers mo
                         {
                         QTextCharFormat f = cursor->charFormat();
                         f.setFontItalic(!f.fontItalic());
-                        mscore->textTools()->setCharFormat(f);
                         cursor->setCharFormat(f);
                         }
                         break;
@@ -753,7 +751,6 @@ bool Text::edit(ScoreView* view, int /*grip*/, int key, Qt::KeyboardModifiers mo
                         {
                         QTextCharFormat f = cursor->charFormat();
                         f.setFontUnderline(!f.fontUnderline());
-                        mscore->textTools()->setCharFormat(f);
                         cursor->setCharFormat(f);
                         }
                         break;
@@ -779,6 +776,7 @@ bool Text::edit(ScoreView* view, int /*grip*/, int key, Qt::KeyboardModifiers mo
                         }
                         break;
                   }
+            mscore->textTools()->updateTools();
 #ifndef Q_WS_MAC
             if (key != Qt::Key_Space && key != Qt::Key_Minus)
                   return true;
@@ -838,17 +836,7 @@ bool Text::edit(ScoreView* view, int /*grip*/, int key, Qt::KeyboardModifiers mo
             case Qt::Key_Minus:
                   cursor->insertText("-");
                   break;
-#if 0
-            case Qt::Key_Shift:
-            case Qt::Key_Control:
-            case Qt::Key_Meta:
-            case Qt::Key_Alt:
-            case Qt::Key_AltGr:
-            case Qt::Key_CapsLock:
-            case Qt::Key_NumLock:
-            case Qt::Key_ScrollLock:
-                  break;
-#endif
+
             default:
                   if (!s.isEmpty())
                         cursor->insertText(s);
@@ -857,8 +845,7 @@ bool Text::edit(ScoreView* view, int /*grip*/, int key, Qt::KeyboardModifiers mo
       if (key == Qt::Key_Return || key == Qt::Key_Space || key == Qt::Key_Tab) {
             replaceSpecialChars();
             }
-      mscore->textTools()->setCharFormat(cursor->charFormat());
-      mscore->textTools()->setBlockFormat(cursor->blockFormat());
+      mscore->textTools()->updateTools();
 
       layout();
       if (parent() && parent()->type() == TBOX) {
@@ -1050,17 +1037,6 @@ void Text::addChar(int code, QTextCursor* cur)
       cur->insertText(ss);
       score()->setLayoutAll(true);
       score()->end();
-      }
-
-//---------------------------------------------------------
-//   setCharFormat
-//---------------------------------------------------------
-
-void Text::setCharFormat(const QTextCharFormat& f)
-      {
-      if (!cursor)
-            return;
-      cursor->setCharFormat(f);
       }
 
 //---------------------------------------------------------

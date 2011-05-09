@@ -101,6 +101,7 @@
 #include <QtGui/QToolBox>
 #include <QtGui/QToolButton>
 #include <QtGui/QTextBlock>
+#include <QtGui/QTextList>
 #include <QtGui/QTextFrameFormat>
 #include <QtGui/QClipboard>
 #include <QtGui/QStatusBar>

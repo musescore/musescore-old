@@ -32,8 +32,7 @@ class TextTools : public QDockWidget {
       Q_OBJECT
 
       Text* _textElement;
-      QTextCharFormat format;
-      QTextBlockFormat bformat;
+
       QDoubleSpinBox* typefaceSize;
       QFontComboBox* typefaceFamily;
       QAction* typefaceBold;
@@ -49,8 +48,14 @@ class TextTools : public QDockWidget {
       QAction* typefaceSuperscript;
       QAction* showKeyboard;
       QAction* toggleStyled;
+      QAction* unorderedList;
+      QAction* orderedList;
+      QAction* indentMore;
+      QAction* indentLess;
 
       void blockAllSignals(bool val);
+      void updateText();
+      QTextCursor* cursor();
 
    private slots:
       void sizeChanged(double value);
@@ -68,12 +73,15 @@ class TextTools : public QDockWidget {
       void setVCenterAlign();
       void showKeyboardClicked(bool);
       void styledChanged(bool);
+      void unorderedListClicked();
+      void orderedListClicked();
+      void indentMoreClicked();
+      void indentLessClicked();
 
    public:
       TextTools(QWidget* parent = 0);
       void setText(Text* te);
-      void setCharFormat(const QTextCharFormat&);
-      void setBlockFormat(const QTextBlockFormat&);
+      void updateTools();
       QAction* kbAction() const { return showKeyboard; }
       };
 

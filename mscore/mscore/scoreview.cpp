@@ -1206,8 +1206,7 @@ void ScoreView::startEdit()
             Text* t = static_cast<Text*>(editObject);
             _editText = t;
             mscore->textTools()->setText(t);
-            mscore->textTools()->setCharFormat(t->getCursor()->charFormat());
-            mscore->textTools()->setBlockFormat(t->getCursor()->blockFormat());
+            mscore->textTools()->updateTools();
             textUndoLevel = 0;
             connect(t->doc(), SIGNAL(undoCommandAdded()), SLOT(textUndoLevelAdded()));
             }

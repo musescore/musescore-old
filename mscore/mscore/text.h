@@ -152,7 +152,6 @@ class Text : public Element {
       virtual void endEdit();
       void addSymbol(const SymCode&, QTextCursor* c = 0);
       void addChar(int code, QTextCursor* cur = 0);
-      void setCharFormat(const QTextCharFormat&);
       void setBlockFormat(const QTextBlockFormat&);
       virtual void write(Xml& xml) const;
       virtual void write(Xml& xml, const char*) const;

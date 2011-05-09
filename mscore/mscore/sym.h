@@ -212,6 +212,10 @@ enum {
       u2tiHeadSym,
       d2tiHeadSym,
 
+      s0solHeadSym,
+      s1solHeadSym,
+      s2solHeadSym,
+
       ufermataSym,
       dfermataSym,
 
@@ -235,6 +239,7 @@ enum {
       umarcatoSym,
       dmarcatoSym,
       ouvertSym,
+      halfopenSym,
       plusstopSym,
       upbowSym,
       downbowSym,
@@ -248,6 +253,7 @@ enum {
       dpedaltoeSym,
       flageoletSym,
       segnoSym,
+      varsegnoSym,
       codaSym,
 
       rcommaSym,
@@ -311,6 +317,8 @@ enum {
       accStdbaseSym,
       accBayanbaseSym,
       accOldEESym,
+      accpushSym,
+      accpullSym,
 
       letterfSym,
       lettermSym,
@@ -345,6 +353,7 @@ enum {
       tempperfprolmajSym,
 
       tabclef2Sym,
+
 
       lastSym
       };
