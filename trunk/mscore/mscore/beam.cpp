@@ -695,6 +695,7 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
             else {
                   //
                   //    compute concave flag
+                  //    concave beams have a slope of 0.0
                   //
                   bool concave = false;
                   int l1 = c1->line(_up);

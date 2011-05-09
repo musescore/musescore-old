@@ -140,14 +140,14 @@
       <file>data/icons/editcopy.svg</file>
       <file>data/icons/editpaste.svg</file>
       <file>data/icons/fileprint.svg</file>
-      <file>data/icons/text_bold.svg</file>
-      <file>data/icons/text_italic.svg</file>
-      <file>data/icons/text_under.svg</file>
+      <file>data/icons/format_text_bold.svgz</file>
+      <file>data/icons/format_text_italic.svgz</file>
+      <file>data/icons/format_text_underline.svgz</file>
       <file>data/icons/text_left.svg</file>
       <file>data/icons/text_center.svg</file>
       <file>data/icons/text_right.svg</file>
-      <file>data/icons/subscript.svg</file>
-      <file>data/icons/superscript.svg</file>
+      <file>data/icons/format_text_subscript.svgz</file>
+      <file>data/icons/format_text_superscript.svgz</file>
       <file>data/icons/fotomode.svg</file>
       <file>data/icons/text_top.svg</file>
       <file>data/icons/text_bottom.svg</file>
@@ -156,6 +156,10 @@
       <file>data/icons/hraster.svg</file>
       <file>data/icons/vraster.svg</file>
       <file>data/icons/repitch.svg</file>
+      <file>data/icons/format_list_unordered.svgz</file>
+      <file>data/icons/format_list_ordered.svgz</file>
+      <file>data/icons/format_indent_more.svgz</file>
+      <file>data/icons/format_indent_less.svgz</file>
 
       <file>data/icons-dark/minus.svg</file>
       <file>data/icons-dark/flip.svg</file>
@@ -251,14 +255,14 @@
       <file>data/icons-dark/editcopy.svg</file>
       <file>data/icons-dark/editpaste.svg</file>
       <file>data/icons-dark/fileprint.svg</file>
-      <file>data/icons-dark/text_bold.svg</file>
-      <file>data/icons-dark/text_italic.svg</file>
-      <file>data/icons-dark/text_under.svg</file>
+      <file>data/icons-dark/format_text_bold.svgz</file>
+      <file>data/icons-dark/format_text_italic.svgz</file>
+      <file>data/icons-dark/format_text_underline.svgz</file>
       <file>data/icons-dark/text_left.svg</file>
       <file>data/icons-dark/text_center.svg</file>
       <file>data/icons-dark/text_right.svg</file>
-      <file>data/icons-dark/subscript.svg</file>
-      <file>data/icons-dark/superscript.svg</file>
+      <file>data/icons-dark/format_text_subscript.svgz</file>
+      <file>data/icons-dark/format_text_superscript.svgz</file>
       <file>data/icons-dark/fotomode.svg</file>
       <file>data/icons-dark/text_top.svg</file>
       <file>data/icons-dark/text_bottom.svg</file>
@@ -267,5 +271,9 @@
       <file>data/icons-dark/hraster.svg</file>
       <file>data/icons-dark/vraster.svg</file>
       <file>data/icons-dark/repitch.svg</file>
+      <file>data/icons-dark/format_list_unordered.svgz</file>
+      <file>data/icons-dark/format_list_ordered.svgz</file>
+      <file>data/icons-dark/format_indent_more.svgz</file>
+      <file>data/icons-dark/format_indent_less.svgz</file>
    </qresource>
 </RCC>

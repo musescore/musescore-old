@@ -148,6 +148,11 @@ void Marker::setMarkerType(MarkerType t)
                   setLabel("segno");
                   break;
 
+            case MARKER_VARSEGNO:
+                  setHtml(symToHtml(symbols[score()->symIdx()][varsegnoSym], 8));
+                  setLabel("varsegno");
+                  break;
+
             case MARKER_CODA:
                   setHtml(symToHtml(symbols[score()->symIdx()][codaSym], 8));
                   setLabel("codab");
@@ -219,6 +224,8 @@ MarkerType Marker::markerType(const QString& s) const
       {
       if (s == "segno")
             return MARKER_SEGNO;
+      else if (s == "varsegno")
+            return MARKER_VARSEGNO;
       else if (s == "codab")
             return MARKER_CODA;
       else if (s == "varcoda")
@@ -251,6 +258,7 @@ void Marker::read(QDomElement e)
             }
       switch(mt) {
             case MARKER_SEGNO:
+            case MARKER_VARSEGNO:
             case MARKER_CODA:
             case MARKER_VARCODA:
             case MARKER_CODETTA:

@@ -46,6 +46,7 @@ class RepeatMeasure : public Rest {
 
 enum MarkerType {
       MARKER_SEGNO,
+      MARKER_VARSEGNO,
       MARKER_CODA,
       MARKER_VARCODA,
       MARKER_CODETTA,

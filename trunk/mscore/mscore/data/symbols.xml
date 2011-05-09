@@ -1350,5 +1350,46 @@
     <attach x="13" y="0"/>
     <bbox x="0.0" y="-16.35" w="10.67" h="32.7"/>
     </Glyph>
-
+  <Glyph>
+    <name>noteheads.s0sol</name>
+    <code>0xe1cc</code>
+    <attach x="6.94992" y="-1.30693"/>
+    <bbox x="0" y="-2.75003" w="6.94992" h="5.50006"/>
+    </Glyph>
+  <Glyph>
+    <name>noteheads.s1sol</name>
+    <code>0xe1cd</code>
+    <attach x="6.94992" y="-1.30693"/>
+    <bbox x="0" y="-2.75003" w="6.94992" h="5.50006"/>
+    </Glyph>
+  <Glyph>
+    <name>noteheads.s2sol</name>
+    <code>0xe1ce</code>
+    <attach x="6.94992" y="-1.30693"/>
+    <bbox x="0" y="-2.75003" w="6.94992" h="5.50006"/>
+    </Glyph>
+  <Glyph>
+    <name>scripts.varsegno</name>
+    <code>0xe1cf</code>
+    <attach x="6.25" y="0"/>
+    <bbox x="-6.25" y="-20" w="12.5" h="40"/>
+    </Glyph>
+  <Glyph>
+    <name>accordion.push</name>
+    <code>0xe1d0</code>
+    <attach x="0" y="0"/>
+    <bbox x="-4.59999" y="-11.5001" w="4.59999" h="11.5001"/>
+    </Glyph>
+  <Glyph>
+    <name>accordion.pull</name>
+    <code>0xe1d1</code>
+    <attach x="0.75006" y="0"/>
+    <bbox x="-3.84993" y="-11.5001" w="4.59999" h="11.5001"/>
+    </Glyph>
+  <Glyph>
+    <name>scripts.halfopen</name>
+    <code>0xe1d2</code>
+    <attach x="2" y="0"/>
+    <bbox x="-2" y="-2.5" w="4" h="5"/>
+    </Glyph>
   </museScore>

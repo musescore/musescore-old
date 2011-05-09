@@ -104,12 +104,23 @@ TextTools::TextTools(QWidget* parent)
 
       typefaceSubscript   = tb->addAction(*icons[textSub_ICON], "");
       typefaceSubscript->setToolTip(tr("subscript"));
+      typefaceSubscript->setCheckable(true);
 
       typefaceSuperscript = tb->addAction(*icons[textSuper_ICON], "");
       typefaceSuperscript->setToolTip(tr("superscript"));
-
-      typefaceSubscript->setCheckable(true);
       typefaceSuperscript->setCheckable(true);
+
+      unorderedList = tb->addAction(*icons[formatListUnordered_ICON], "");
+      unorderedList->setToolTip(tr("unordered list"));
+
+      orderedList = tb->addAction(*icons[formatListOrdered_ICON], "");
+      orderedList->setToolTip(tr("ordered list"));
+
+      indentMore = tb->addAction(*icons[formatIndentMore_ICON], "");
+      indentMore->setToolTip(tr("indent more"));
+
+      indentLess = tb->addAction(*icons[formatIndentLess_ICON], "");
+      indentLess->setToolTip(tr("indent less"));
 
       tb->addSeparator();
 
@@ -139,6 +150,10 @@ TextTools::TextTools(QWidget* parent)
       connect(vcenterAlign,        SIGNAL(triggered()), SLOT(setVCenterAlign()));
       connect(showKeyboard,        SIGNAL(triggered(bool)), SLOT(showKeyboardClicked(bool)));
       connect(toggleStyled,        SIGNAL(triggered(bool)), SLOT(styledChanged(bool)));
+      connect(unorderedList,       SIGNAL(triggered()),     SLOT(unorderedListClicked()));
+      connect(orderedList,         SIGNAL(triggered()),     SLOT(orderedListClicked()));
+      connect(indentLess,          SIGNAL(triggered()),     SLOT(indentLessClicked()));
+      connect(indentMore,          SIGNAL(triggered()),     SLOT(indentMoreClicked()));
       }
 
 //---------------------------------------------------------
@@ -176,40 +191,32 @@ void TextTools::blockAllSignals(bool val)
       }
 
 //---------------------------------------------------------
-//   setCharFormat
+//   updateTools
 //---------------------------------------------------------
 
-void TextTools::setCharFormat(const QTextCharFormat& cf)
+void TextTools::updateTools()
       {
       blockAllSignals(true);
+      QTextCursor* cursor = _textElement->getCursor();
 
-      format = cf;
-      QFont f(cf.font());
+      QTextCharFormat format = cursor->charFormat();
+      QTextBlockFormat bformat = cursor->blockFormat();
+
+      QFont f(format.font());
       typefaceFamily->setCurrentFont(f);
       double ps = f.pointSizeF();
       if (ps == -1.0)
             ps = f.pixelSize() * PPI / DPI;
       typefaceSize->setValue(ps);
-      typefaceItalic->setChecked(cf.fontItalic());
-      typefaceBold->setChecked(cf.fontWeight() == QFont::Bold);
-      typefaceUnderline->setChecked(cf.fontUnderline());
-      typefaceSubscript->setChecked(cf.verticalAlignment() == QTextCharFormat::AlignSubScript);
-      typefaceSuperscript->setChecked(cf.verticalAlignment() == QTextCharFormat::AlignSuperScript);
+      typefaceItalic->setChecked(format.fontItalic());
+      typefaceBold->setChecked(format.fontWeight() == QFont::Bold);
+      typefaceUnderline->setChecked(format.fontUnderline());
+      typefaceSubscript->setChecked(format.verticalAlignment() == QTextCharFormat::AlignSubScript);
+      typefaceSuperscript->setChecked(format.verticalAlignment() == QTextCharFormat::AlignSuperScript);
 
-      blockAllSignals(false);
-      }
-
-//---------------------------------------------------------
-//   setBlockFormat
-//---------------------------------------------------------
-
-void TextTools::setBlockFormat(const QTextBlockFormat& bf)
-      {
-      blockAllSignals(true);
-      bformat = bf;
-      centerAlign->setChecked(bf.alignment() & Qt::AlignHCenter);
-      leftAlign->setChecked  (bf.alignment() & Qt::AlignLeft);
-      rightAlign->setChecked (bf.alignment() & Qt::AlignRight);
+      centerAlign->setChecked(bformat.alignment() & Qt::AlignHCenter);
+      leftAlign->setChecked  (bformat.alignment() & Qt::AlignLeft);
+      rightAlign->setChecked (bformat.alignment() & Qt::AlignRight);
       Align align = _textElement->align();
       if (align & ALIGN_BOTTOM) {
             topAlign->setChecked(false);
@@ -230,14 +237,34 @@ void TextTools::setBlockFormat(const QTextBlockFormat& bf)
       }
 
 //---------------------------------------------------------
+//   updateText
+//---------------------------------------------------------
+
+void TextTools::updateText()
+      {
+      _textElement->score()->setLayoutAll(true);
+      _textElement->score()->end();
+      }
+
+//---------------------------------------------------------
+//   cursor
+//---------------------------------------------------------
+
+QTextCursor* TextTools::cursor()
+      {
+      return _textElement->getCursor();
+      }
+
+//---------------------------------------------------------
 //   sizeChanged
 //---------------------------------------------------------
 
 void TextTools::sizeChanged(double value)
       {
+      QTextCharFormat format;
       format.setFontPointSize(value);
-      _textElement->setCharFormat(format);
-      _textElement->score()->setLayoutAll(true);
+      cursor()->mergeCharFormat(format);
+      updateText();
       }
 
 //---------------------------------------------------------
@@ -246,10 +273,10 @@ void TextTools::sizeChanged(double value)
 
 void TextTools::fontChanged(const QFont& f)
       {
+      QTextCharFormat format;
       format.setFontFamily(f.family());
-      _textElement->setCharFormat(format);
-      _textElement->score()->setLayoutAll(true);
-      _textElement->score()->end();
+      cursor()->mergeCharFormat(format);
+      updateText();
       }
 
 //---------------------------------------------------------
@@ -258,10 +285,10 @@ void TextTools::fontChanged(const QFont& f)
 
 void TextTools::boldClicked(bool val)
       {
+      QTextCharFormat format;
       format.setFontWeight(val ? QFont::Bold : QFont::Normal);
-      _textElement->setCharFormat(format);
-      _textElement->score()->setLayoutAll(true);
-      _textElement->score()->end();
+      cursor()->mergeCharFormat(format);
+      updateText();
       }
 
 //---------------------------------------------------------
@@ -270,10 +297,10 @@ void TextTools::boldClicked(bool val)
 
 void TextTools::underlineClicked(bool val)
       {
+      QTextCharFormat format;
       format.setFontUnderline(val);
-      _textElement->setCharFormat(format);
-      _textElement->score()->setLayoutAll(true);
-      _textElement->score()->end();
+      cursor()->mergeCharFormat(format);
+      updateText();
       }
 
 //---------------------------------------------------------
@@ -282,10 +309,98 @@ void TextTools::underlineClicked(bool val)
 
 void TextTools::italicClicked(bool val)
       {
+      QTextCharFormat format;
       format.setFontItalic(val);
-      _textElement->setCharFormat(format);
-      _textElement->score()->setLayoutAll(true);
-      _textElement->score()->end();
+      cursor()->mergeCharFormat(format);
+      updateText();
+      }
+
+//---------------------------------------------------------
+//   unorderedListClicked
+//---------------------------------------------------------
+
+void TextTools::unorderedListClicked()
+      {
+      QTextCharFormat format = cursor()->charFormat();
+      QTextListFormat listFormat;
+      QTextList* list = cursor()->currentList();
+      if (list) {
+            listFormat = list->format();
+            int indent = listFormat.indent();
+            listFormat.setIndent(indent + 1);
+            }
+      listFormat.setStyle(QTextListFormat::ListDisc);
+      cursor()->insertList(listFormat);
+      cursor()->setCharFormat(format);
+      updateText();
+      }
+
+//---------------------------------------------------------
+//   orderedListClicked
+//---------------------------------------------------------
+
+void TextTools::orderedListClicked()
+      {
+      QTextCharFormat format = cursor()->charFormat();
+      QTextListFormat listFormat;
+      QTextList* list = cursor()->currentList();
+      if (list) {
+            listFormat = list->format();
+            int indent = listFormat.indent();
+            listFormat.setIndent(indent + 1);
+            }
+      listFormat.setStyle(QTextListFormat::ListDecimal);
+      cursor()->insertList(listFormat);
+      cursor()->setCharFormat(format);
+      updateText();
+      }
+
+//---------------------------------------------------------
+//   indentMoreClicked
+//---------------------------------------------------------
+
+void TextTools::indentMoreClicked()
+      {
+      QTextList* list = cursor()->currentList();
+      if (list == 0) {
+            QTextBlockFormat format = cursor()->blockFormat();
+            format.setIndent(format.indent() + 1);
+            cursor()->insertBlock(format);
+            updateText();
+            return;
+            }
+      unorderedListClicked();
+      }
+
+//---------------------------------------------------------
+//   indentLessClicked
+//---------------------------------------------------------
+
+void TextTools::indentLessClicked()
+      {
+      QTextList* list = cursor()->currentList();
+      if (list == 0) {
+            QTextBlockFormat format = cursor()->blockFormat();
+            int indent = format.indent();
+            if (indent) {
+                  indent--;
+                  format.setIndent(indent);
+                  cursor()->insertBlock(format);
+                  updateText();
+                  }
+            return;
+            }
+      QTextCharFormat format = cursor()->blockCharFormat();
+      QTextListFormat listFormat = list->format();
+      QTextBlock block = cursor()->block();
+      if (block.next().isValid())
+            block = block.next();
+      else {
+            block = QTextBlock();
+            }
+      cursor()->insertBlock(block.blockFormat());
+      cursor()->setCharFormat(block.charFormat());
+      updateText();
       }
 
 //---------------------------------------------------------
@@ -294,9 +409,10 @@ void TextTools::italicClicked(bool val)
 
 void TextTools::setHCenterAlign()
       {
+      QTextBlockFormat bformat;
       bformat.setAlignment((bformat.alignment() & ~Qt::AlignHorizontal_Mask) | Qt::AlignHCenter);
-      _textElement->setBlockFormat(bformat);
-      setBlockFormat(bformat);
+      cursor()->mergeBlockFormat(bformat);
+      updateTools();
       }
 
 //---------------------------------------------------------
@@ -305,9 +421,10 @@ void TextTools::setHCenterAlign()
 
 void TextTools::setLeftAlign()
       {
+      QTextBlockFormat bformat;
       bformat.setAlignment((bformat.alignment() & ~Qt::AlignHorizontal_Mask) | Qt::AlignLeft);
-      _textElement->setBlockFormat(bformat);
-      setBlockFormat(bformat);
+      cursor()->mergeBlockFormat(bformat);
+      updateTools();
       }
 
 //---------------------------------------------------------
@@ -316,9 +433,10 @@ void TextTools::setLeftAlign()
 
 void TextTools::setRightAlign()
       {
+      QTextBlockFormat bformat;
       bformat.setAlignment((bformat.alignment() & ~Qt::AlignHorizontal_Mask) | Qt::AlignRight);
-      _textElement->setBlockFormat(bformat);
-      setBlockFormat(bformat);
+      cursor()->mergeBlockFormat(bformat);
+      updateTools();
       }
 
 //---------------------------------------------------------
@@ -329,7 +447,7 @@ void TextTools::setTopAlign()
       {
       Align align = (_textElement->align() & ~ALIGN_HMASK) | ALIGN_TOP;
       _textElement->setAlign(align);
-      setBlockFormat(bformat);
+      updateTools();
       }
 
 //---------------------------------------------------------
@@ -340,7 +458,7 @@ void TextTools::setBottomAlign()
       {
       Align align = (_textElement->align() & ~ALIGN_HMASK) | ALIGN_BOTTOM;
       _textElement->setAlign(align);
-      setBlockFormat(bformat);
+      updateTools();
       }
 
 //---------------------------------------------------------
@@ -351,7 +469,7 @@ void TextTools::setVCenterAlign()
       {
       Align align = (_textElement->align() & ~ALIGN_HMASK) | ALIGN_VCENTER;
       _textElement->setAlign(align);
-      setBlockFormat(bformat);
+      updateTools();
       }
 
 //---------------------------------------------------------
@@ -363,8 +481,10 @@ void TextTools::subscriptClicked(bool val)
       typefaceSuperscript->blockSignals(true);
       typefaceSuperscript->setChecked(false);
       typefaceSuperscript->blockSignals(false);
+
+      QTextCharFormat format;
       format.setVerticalAlignment(val ? QTextCharFormat::AlignSubScript : QTextCharFormat::AlignNormal);
-      _textElement->setCharFormat(format);
+      cursor()->mergeCharFormat(format);
       }
 
 //---------------------------------------------------------
@@ -376,8 +496,10 @@ void TextTools::superscriptClicked(bool val)
       typefaceSubscript->blockSignals(true);
       typefaceSubscript->setChecked(false);
       typefaceSubscript->blockSignals(false);
+
+      QTextCharFormat format;
       format.setVerticalAlignment(val ? QTextCharFormat::AlignSuperScript : QTextCharFormat::AlignNormal);
-      _textElement->setCharFormat(format);
+      cursor()->mergeCharFormat(format);
       }
 
 //---------------------------------------------------------

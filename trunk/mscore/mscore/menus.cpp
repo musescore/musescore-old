@@ -625,6 +625,10 @@ void MuseScore::populatePalette()
       sp->append(mk, tr("Segno"));
 
       mk = new Marker(gscore);
+      mk->setMarkerType(MARKER_VARSEGNO);
+      sp->append(mk, tr("Segno Variation"));
+
+      mk = new Marker(gscore);
       mk->setMarkerType(MARKER_CODA);
       sp->append(mk, tr("Coda"));
 
@@ -863,6 +867,8 @@ void MuseScore::populatePalette()
       sp->append(accStdbaseSym);
       sp->append(accBayanbaseSym);
       sp->append(accOldEESym);
+      sp->append(accpushSym);
+      sp->append(accpullSym);
 
       FretDiagram* fret = new FretDiagram(gscore);
       fret->setDot(5, 1);
