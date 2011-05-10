@@ -755,6 +755,8 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                                     cut = -1;
                                     }
                               }
+                        else
+                              slope = 0.0;
                         }
                   else
                         slope = 0.0;
@@ -941,8 +943,8 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
             }
 
       for (int beamLevel = 0; beamLevel < beamLevels; ++beamLevel) {
-            Chord* cr1 = 0;
-            Chord* cr2 = 0;
+            ChordRest* cr1 = 0;
+            ChordRest* cr2 = 0;
             bool hasBeamSegment1[chordRests];
             memset(hasBeamSegment1, 0, sizeof(hasBeamSegment));
 
@@ -950,14 +952,13 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
 
             for (int idx = 0; idx < chordRests; ++idx) {
                   ChordRest* cr = crl[idx];
-                  if (cr->type() != CHORD)
-                        continue;
-                  Chord* chord = static_cast<Chord*>(cr);
-                  bool b32 = (beamLevel >= 1) && (chord->beamMode() == BEAM_BEGIN32);
-                  bool b64 = (beamLevel >= 2) && (chord->beamMode() == BEAM_BEGIN64);
+                  // if (cr->type() != CHORD)
+                  //      continue;
+                  bool b32 = (beamLevel >= 1) && (cr->beamMode() == BEAM_BEGIN32);
+                  bool b64 = (beamLevel >= 2) && (cr->beamMode() == BEAM_BEGIN64);
 
                   // end current beam level?
-                  int crLevel = chord->durationType().hooks() - 1;
+                  int crLevel = cr->durationType().hooks() - 1;
                   if ((crLevel < beamLevel) || b32 || b64) {
                         if (cr2) {
                               // create short segment
@@ -1001,7 +1002,7 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                               hasBeamSegment1[idx-1] = false;
                               }
                         if (crLevel >= beamLevel) {
-                              cr1 = chord;
+                              cr1 = cr;
                               hasBeamSegment1[idx] = true;
                               cr2 = 0;
                               }
@@ -1011,7 +1012,7 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                               }
                         }
                   else {
-                        (cr1 ? cr2 : cr1) = chord;
+                        (cr1 ? cr2 : cr1) = cr;
                         hasBeamSegment1[idx] = (cr2 == 0);
                         }
                   }
