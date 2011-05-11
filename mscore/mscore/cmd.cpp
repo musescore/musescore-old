@@ -2562,7 +2562,6 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                               cr->setTrack(track);
                               int tick = curTick - tickStart + dstTick;
 
-                              printf("+++addCR: tuplet %p\n", cr->tuplet());
                               //
                               // check for tuplet
                               //
@@ -2760,14 +2759,13 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
 
       foreach(Tuplet* t, invalidTuplets) {
             t->measure()->remove(t);
-//            printf("...delete invalid tuplet\n");
             delete t;
             }
 
       connectTies();
-      updateNotes();    // TODO: undoable version needed
+//      updateNotes();    // TODO: undoable version needed
 
-      layoutFlags |= LAYOUT_FIX_PITCH_VELO;
+//      layoutFlags |= LAYOUT_FIX_PITCH_VELO;
       }
 
 //---------------------------------------------------------
@@ -2781,23 +2779,23 @@ void Score::pasteChordRest(ChordRest* cr, int tick)
             // check if staffMove moves a note to a
             // nonexistant staff
             //
-            int track     = cr->track();
-            Chord* c      = static_cast<Chord*>(cr);
-            Part* part    = cr->staff()->part();
-            int nn = (track / VOICES) + c->staffMove();
+            int track  = cr->track();
+            Chord* c   = static_cast<Chord*>(cr);
+            Part* part = cr->staff()->part();
+            int nn     = (track / VOICES) + c->staffMove();
             if (nn < 0 || nn >= nstaves())
                   c->setStaffMove(0);
-            foreach(Note* n, c->notes()) {
-                  if (!styleB(ST_concertPitch) && part->instr()->transpose().chromatic) {
-                        int npitch;
-                        int ntpc;
-                        Interval interval = part->instr()->transpose();
+            if (!styleB(ST_concertPitch) && part->instr()->transpose().chromatic) {
+                  Interval interval = part->instr()->transpose();
+                  if (!interval.isZero()) {
                         interval.flip();
-                        transposeInterval(n->pitch(), n->tpc(), &npitch, &ntpc,
-                           interval, true);
-                        n->setPitch(npitch, ntpc);
+                        foreach(Note* n, c->notes()) {
+                              int npitch;
+                              int ntpc;
+                              transposeInterval(n->pitch(), n->tpc(), &npitch, &ntpc, interval, true);
+                              n->setPitch(npitch, ntpc);
+                              }
                         }
-                  n->setTrack(track);
                   }
             }
 
