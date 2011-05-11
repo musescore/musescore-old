@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -794,8 +794,7 @@ void Score::convertMidi(MidiFile* mf)
             track->medPitch = 0;
             track->setProgram(0);
 		int events      = 0;
-            const EventList el = track->events();
-            foreach (Event e, track->events()) {
+            foreach (const Event& e, track->events()) {
                   if (e.type() == ME_NOTE) {
                         ++events;
                         int pitch = e.pitch();
@@ -823,9 +822,9 @@ void Score::convertMidi(MidiFile* mf)
       //  create instruments
       //---------------------------------------------------
 
+      int i = 0;
       int ntracks = tracks->size();
-      for (int i = 0; i < ntracks; ++i) {
-            MidiTrack* track = tracks->at(i);
+      foreach(MidiTrack* track, *tracks) {
             int staffIdx = track->staffIdx();
             if (staffIdx == -1) {
                   track->setStaff(0);
@@ -866,6 +865,7 @@ void Score::convertMidi(MidiFile* mf)
                         }
                   }
             _parts.push_back(part);
+            ++i;
             }
 
       int lastTick = 0;
@@ -956,7 +956,7 @@ void Score::convertMidi(MidiFile* mf)
 
       	add(measure);
             }
-fixTicks();
+      fixTicks();
 
 	foreach (MidiTrack* midiTrack, *tracks) {
             if (midiTrack->staffIdx() == -1)
@@ -970,7 +970,7 @@ fixTicks();
 
       foreach (MidiTrack* track, *tracks) {
             foreach (Event e, track->events()) {
-                  if (e.type() == ME_META && e.metaType()!=META_LYRIC)
+                  if ((e.type() == ME_META) && (e.metaType() != META_LYRIC))
                         mf->processMeta(this, track, e);
                   }
             if (debugMode) {
@@ -1005,7 +1005,7 @@ fixTicks();
             //      convertTrack(track);
 
             foreach (Event e, track->events()) {
-                  if (e.type() == ME_META && e.metaType()==META_LYRIC)
+                  if ((e.type() == ME_META) && (e.metaType() == META_LYRIC))
                         mf->processMeta(this, track, e);
                   }
             if (track->staffIdx() != -1)
