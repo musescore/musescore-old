@@ -73,6 +73,7 @@ enum {
       META_TRACK_COMMENT   = 0xf,
       META_PORT_CHANGE     = 0x21,
       META_CHANNEL_PREFIX  = 0x22,
+      META_EOT             = 0x2f,  // end of track
       META_TEMPO           = 0x51,
       META_TIME_SIGNATURE  = 0x58,
       META_KEY_SIGNATURE   = 0x59,

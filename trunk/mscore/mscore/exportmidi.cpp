@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2002-20011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -65,6 +65,8 @@ bool Score::saveMidi(const QString& name)
 
 void ExportMidi::writeHeader()
       {
+      if (mf.tracks()->isEmpty())
+            return;
       MidiTrack* track  = mf.tracks()->front();
       MeasureBase* measure  = cs->first();
 
@@ -111,7 +113,6 @@ void ExportMidi::writeHeader()
       //    write time signature
       //--------------------------------------------
 
-#if 0 // TODO
       AL::TimeSigMap* sigmap = cs->sigmap();
       foreach(const RepeatSegment* rs, *cs->repeatList()) {
             int startTick  = rs->tick;
@@ -124,9 +125,10 @@ void ExportMidi::writeHeader()
             for (AL::iSigEvent is = bs; is != es; ++is) {
                   AL::SigEvent se   = is->second;
                   unsigned char* data = new unsigned char[4];
-                  data[0] = se.fraction().numerator();
+                  Fraction ts(se.timesig());
+                  data[0] = ts.numerator();
                   int n;
-                  switch (se.fraction().denominator()) {
+                  switch (ts.denominator()) {
                         case 1:  n = 0; break;
                         case 2:  n = 1; break;
                         case 4:  n = 2; break;
@@ -136,33 +138,30 @@ void ExportMidi::writeHeader()
                         default:
                               n = 2;
                               printf("ExportMidi: unknown time signature %s\n",
-                                 qPrintable(se.fraction().print()));
+                                 qPrintable(ts.print()));
                               break;
                         }
                   data[1] = n;
                   data[2] = 24;
                   data[3] = 8;
 
-                  Event* ev = new Event(ME_META);
-                  ev->setMetaType(META_TIME_SIGNATURE);
-                  ev->setData(data);
-                  ev->setLen(4);
-                  ev->setOntime(is->first + tickOffset);
+                  Event ev(ME_META);
+                  ev.setMetaType(META_TIME_SIGNATURE);
+                  ev.setData(data);
+                  ev.setLen(4);
+                  ev.setOntime(is->first + tickOffset);
                   track->insert(ev);
                   }
             }
-#endif
 
       //---------------------------------------------------
       //    write key signatures
       //    assume every staff corresponds to a midi track
       //---------------------------------------------------
 
-      QList<MidiTrack*>* tl = mf.tracks();
-      for (int i = 0; i < tl->size(); ++i) {
-            MidiTrack* track  = tl->at(i);
-
-            KeyList* keymap = cs->staff(i)->keymap();
+      foreach(MidiTrack* track, *mf.tracks()) {
+            Staff* staff      = track->staff();
+            KeyList* keymap   = staff->keymap();
 
             foreach(const RepeatSegment* rs, *cs->repeatList()) {
                   int startTick  = rs->tick;
@@ -172,10 +171,24 @@ void ExportMidi::writeHeader()
                   iKeyList sk = keymap->lower_bound(startTick);
                   iKeyList ek = keymap->lower_bound(endTick);
 
+                  bool keysigFound = false;
                   for (iKeyList ik = sk; ik != ek; ++ik) {
+                        keysigFound = true;
                         Event ev(ME_META);
                         ev.setOntime(ik->first + tickOffset);
                         int key       = ik->second.accidentalType();   // -7 -- +7
+                        ev.setMetaType(META_KEY_SIGNATURE);
+                        ev.setLen(2);
+                        unsigned char* data = new unsigned char[2];
+                        data[0]   = key;
+                        data[1]   = 0;  // major
+                        ev.setData(data);
+                        track->insert(ev);
+                        }
+                  if (!keysigFound) {
+                        Event ev(ME_META);
+                        ev.setOntime(0);
+                        int key = 0;
                         ev.setMetaType(META_KEY_SIGNATURE);
                         ev.setLen(2);
                         unsigned char* data = new unsigned char[2];
@@ -234,11 +247,10 @@ bool ExportMidi::write(const QString& name)
       mf.setDivision(AL::division);
       mf.setFormat(1);
       QList<MidiTrack*>* tracks = mf.tracks();
-//      int nstaves = cs->nstaves();
 
       foreach(Staff* staff, cs->staves()) {
-            if (staff->primaryStaff())
-                  continue;
+            // if (!staff->primaryStaff())
+            // continue;
             MidiTrack* t= new MidiTrack(&mf);
             t->setStaff(staff);
             tracks->append(t);
@@ -248,11 +260,9 @@ bool ExportMidi::write(const QString& name)
       writeHeader();
 
       foreach (MidiTrack* track, *tracks) {
-            Staff* staff     = track->staff();
-//            if (staff == 0)
-//                  continue;
-            Part* part       = staff->part();
-            int channel      = part->midiChannel();
+            Staff* staff = track->staff();
+            Part* part   = staff->part();
+            int channel  = part->midiChannel();
             track->setOutPort(0);
             track->setOutChannel(channel);
 

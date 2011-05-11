@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2007 Werner Schweer and others
+//  Copyright (C) 2007-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -96,12 +96,12 @@ QString midiMetaName(int meta)
             case 0x20:  s = "Channel Prefix"; break;
             case 0x21:  s = "Port Change"; break;
             case 0x2f:  s = "End of Track"; break;
-            case 0x51:  s = "Tempo"; break;
+            case META_TEMPO:  s = "Tempo"; break;
             case 0x54:  s = "SMPTE Offset"; break;
-            case 0x58:  s = "Time Signature"; break;
-            case 0x59:  s = "Key Signature"; break;
-            case 0x74:  s = "Sequencer-Specific1"; break;
-            case 0x7f:  s = "Sequencer-Specific2"; break;
+            case META_TIME_SIGNATURE:  s = "Time Signature"; break;
+            case META_KEY_SIGNATURE:   s = "Key Signature"; break;
+            case 0x74:                 s = "Sequencer-Specific1"; break;
+            case 0x7f:                 s = "Sequencer-Specific2"; break;
             default:
                   break;
             }
@@ -275,11 +275,8 @@ bool MidiFile::readTrack()
                   return true;
 
             // check for end of track:
-            if ((event.type() == ME_META)) {
-                  int mt = event.metaType();
-                  if (mt == 0x2f)         // end of track
-                        break;
-                  }
+            if ((event.type() == ME_META) && (event.metaType() == META_EOT))
+                  break;
             track->append(event);
             }
       if (curPos != endPos) {
@@ -655,7 +652,7 @@ void MidiTrack::mergeNoteOnOff()
 
       int n = _events.size();
       for (int i = 0; i < n; ++i) {
-            Event& ev = _events[i];
+            Event ev = _events[i];
             if (ev.type() == ME_INVALID)
                   continue;
             if ((ev.type() != ME_NOTEON) && (ev.type() != ME_NOTEOFF)) {
@@ -800,6 +797,10 @@ void MidiTrack::mergeNoteOnOff()
                                     }
                               }
                         }
+                  if (ev.type() == ME_META) {
+                        printf("merge process meta %x\n", ev.metaType());
+                        }
+
                   el.insert(ev);
                   _events[i].setType(ME_INVALID);
                   continue;
@@ -875,7 +876,7 @@ void MidiTrack::extractTimeSig(AL::TimeSigMap* sigmap)
       EventList el;
 
       foreach (Event e, _events) {
-            if (e.type() == ME_META && e.metaType() == META_TIME_SIGNATURE) {
+            if ((e.type() == ME_META) && (e.metaType() == META_TIME_SIGNATURE)) {
                   const unsigned char* data = e.data();
                   int z  = data[0];
                   int nn = data[1];
@@ -1054,6 +1055,8 @@ void MidiTrack::changeDivision(int newDivision)
             if (e.type() == ME_NOTE)
                   e.setDuration((e.duration() * newDivision + division/2) / division);
 		dl.insert(e);
+            if (e.type() == ME_META)
+                  printf("changeDivision meta === %x\n", e.metaType());
             }
       _events = dl;
       }
