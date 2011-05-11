@@ -567,6 +567,24 @@ bool Beam::contains(const QPointF& p) const
       }
 
 //---------------------------------------------------------
+//   alignBeam
+//---------------------------------------------------------
+
+static double alignBeam(int line, double y, double _spatium, bool _up)
+      {
+      double _spatium2 = _spatium * .5;
+      double _spatium4 = _spatium * .25;
+      if (_up)
+            _spatium4 = -_spatium4;
+      int n = lrint(y / _spatium2);
+      if (line % 2)
+            y = _spatium2 * n - _spatium4;
+      else
+            y = _spatium2 * n - 2*_spatium4;
+      return y;
+      }
+
+//---------------------------------------------------------
 //   layout2
 //---------------------------------------------------------
 
@@ -741,12 +759,37 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                         double dx = c2->canvasPos().x() - c1->canvasPos().x();
                         if (dx) {
                               double maxSlope = score()->style(ST_beamMaxSlope).toDouble();
-                              slope           = (l2 - l1) * _spatium * .5 / dx;
-                              if (fabs(slope) < score()->style(ST_beamMinSlope).toDouble()) {
-                                    cut = slope > 0.0 ? 0 : -1;
-                                    slope = 0;
+                              if (crl.size() <= 3) {
+                                    double lslope = l2 - l1;
+                                    //
+                                    // if notes are spaced very close together (<= 3.0 spaces)
+                                    // use only a small slope
+                                    //
+                                    if (dx / _spatium <= 3.0) {
+                                          lslope *= .25;
+                                          if (lslope > .5)
+                                                lslope = .5;
+                                          else if (lslope < -.5)
+                                                lslope = -.5;
+                                          }
+                                    else {
+                                          lslope *= .5;
+                                          if (lslope > 1.0)
+                                                lslope = 1.0;
+                                          else if (lslope < -1.0)
+                                                lslope = -1.0;
+                                          }
+                                    slope = lslope * _spatium / dx;
                                     }
-                              else if (slope > maxSlope) {
+                              else {
+                                    slope = (l2 - l1) * _spatium * .5 / dx;
+                                    }
+                              //if (fabs(slope) < score()->style(ST_beamMinSlope).toDouble()) {
+                              //      cut = slope > 0.0 ? 0 : -1;
+                              //      slope = 0;
+                              //      }
+                              //else
+                              if (slope > maxSlope) {
                                     slope = maxSlope;
                                     cut = 1;
                                     }
@@ -815,7 +858,7 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                         double min        =  1000000.0;
                         double max        = -1000000.0;
                         bool toMiddleLine = true;
-                        double minStemLen = 3.0 * _spatium;
+                        double minStemLen = 3.0 * _spatium; // - bw.val() * _spatium * .5;
                         if (isGrace)
                               minStemLen *= graceMag;
 
@@ -856,10 +899,7 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                               }
                         else {
                               // adjust beam position
-                              double n = 3.0;
-//                              if (fabs(max-min) > (_spatium * 2.0))
-//                                    n = 2.0;    // reduce minimum stem len (heuristic)
-// printf("   min %f max %f\n", min, max);
+                              double n = 3.0 * _spatium;
                               if (isGrace)
                                     n *= graceMag;
                               double diff;
@@ -867,14 +907,11 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                               // (* .5)
                               double beamsHeight = beams * beamDist * .5;
                               if (_up) {
-                                    diff = -(n * _spatium - min);
-                                    diff -= beamsHeight;
+                                    diff =  min - n - beamsHeight;
                                     }
                               else {
-                                    diff = n * _spatium - min;
-                                    diff += beamsHeight;
+                                    diff =  n - min + beamsHeight;
                                     }
-// printf("   Beam: up %d diff %f (in spatium %f)\n", _up, diff, diff / _spatium);
                               f->p1[idx].ry() += diff;
                               f->p2[idx].ry() += diff;
 
@@ -909,6 +946,9 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                                                 }
                                           }
                                     }
+                              double yy  = system()->staffY(c1->staffIdx());
+                              f->p1[idx].ry() = alignBeam(c1->line(_up), f->p1[idx].y() - yy, _spatium, _up) + yy;
+                              f->p2[idx].ry() = alignBeam(c2->line(_up), f->p2[idx].y() - yy, _spatium, _up) + yy;
                               }
                         }
                   }

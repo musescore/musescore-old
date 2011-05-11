@@ -2485,7 +2485,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
       {
       beams.clear();
       slurs.clear();
-
+printf("pasteStaff\n");
       for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
             foreach(Tuplet* tuplet, *m->tuplets())
                   tuplet->setId(-1);
@@ -2588,22 +2588,25 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                               Measure* measure = tick2measure(tick);
                               bool isGrace = (cr->type() == CHORD) && (((Chord*)cr)->noteType() != NOTE_NORMAL);
                               int measureEnd = measure->tick() + measure->ticks();
-                              if (!isGrace && (cr->tick() + cr->actualTicks() > measureEnd)) {
+                              if (!isGrace && (tick + cr->actualTicks() > measureEnd)) {
                                     if (cr->type() == CHORD) {
                                           // split Chord
                                           Chord* c = static_cast<Chord*>(cr);
                                           int rest = c->actualTicks();
-                                          int len  = measureEnd - c->tick();
+                                          int len  = measureEnd - tick;
                                           rest    -= len;
                                           Duration d;
                                           d.setVal(len);
                                           c->setDurationType(d);
+                                          c->setDuration(d.fraction());
                                           undoAddCR(c, measure, tick);
                                           while (rest) {
-                                                int tick = c->tick() + c->actualTicks();
+                                                tick += c->actualTicks();
                                                 measure = tick2measure(tick);
-                                                if (measure->tick() != tick)  // last measure
+                                                if (measure->tick() != tick) {  // last measure
+                                                      printf("==last measure %d != %d\n", measure->tick(), tick);
                                                       break;
+                                                      }
                                                 Chord* c2 = static_cast<Chord*>(c->clone());
                                                 len = measure->ticks() > rest ? rest : measure->ticks();
                                                 Duration d;
