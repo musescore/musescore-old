@@ -157,7 +157,7 @@ Note::Note(Score* s)
       _lineOffset        = 0;
       _tieFor            = 0;
       _tieBack           = 0;
-      _tpc               = -1;
+      _tpc               = INVALID_TPC;
       _headGroup         = 0;
       _headType          = HEAD_AUTO;
 
@@ -226,9 +226,6 @@ Note::Note(const Note& n)
       _playEvents.clear();
       foreach(NoteEvent* e, n._playEvents)
             _playEvents.append(new NoteEvent(*e));
-
-//      _tieFor            = 0;
-//      _tieBack           = 0;
 
       _tieFor   = n._tieFor;
       _tieBack  = n._tieBack;

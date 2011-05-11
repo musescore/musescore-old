@@ -1155,8 +1155,10 @@ void Score::undoAddCR(ChordRest* cr, Measure* measure, int tick)
             if (newcr->type() == CHORD) {
                   Chord* chord = static_cast<Chord*>(newcr);
                   // setTpcFromPitch needs to know the note tick position
-                  foreach(Note* note, chord->notes())
-                        note->setTpcFromPitch();
+                  foreach(Note* note, chord->notes()) {
+                        if (note->tpc() == INVALID_TPC)
+                              note->setTpcFromPitch();
+                        }
                   }
             if (cr->tuplet()) {
                   int tick = cr->tuplet()->tick();
