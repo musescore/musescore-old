@@ -2485,7 +2485,8 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
       {
       beams.clear();
       slurs.clear();
-printf("pasteStaff\n");
+      QList<Tuplet*> invalidTuplets;
+
       for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
             foreach(Tuplet* tuplet, *m->tuplets())
                   tuplet->setId(-1);
@@ -2561,107 +2562,39 @@ printf("pasteStaff\n");
                               cr->setTrack(track);
                               int tick = curTick - tickStart + dstTick;
 
-                              if (cr->type() == CHORD) {
-                                    // set note track
-                                    // check if staffMove moves a note to a
-                                    // nonexistant staff
-                                    //
-                                    Chord* c      = static_cast<Chord*>(cr);
-                                    Part* part    = cr->staff()->part();
-                                    int nn = (track / VOICES) + c->staffMove();
-                                    if (nn < 0 || nn >= nstaves())
-                                          c->setStaffMove(0);
-                                    foreach(Note* n, c->notes()) {
-                                          if (!styleB(ST_concertPitch) && part->instr()->transpose().chromatic) {
-                                                int npitch;
-                                                int ntpc;
-                                                Interval interval = part->instr()->transpose();
-                                                interval.flip();
-                                                transposeInterval(n->pitch(), n->tpc(), &npitch, &ntpc,
-                                                   interval, true);
-                                                n->setPitch(npitch, ntpc);
-                                                }
-                                          n->setTrack(track);
-                                          }
-                                    }
-
-                              Measure* measure = tick2measure(tick);
-                              bool isGrace = (cr->type() == CHORD) && (((Chord*)cr)->noteType() != NOTE_NORMAL);
-                              int measureEnd = measure->tick() + measure->ticks();
-                              if (!isGrace && (tick + cr->actualTicks() > measureEnd)) {
-                                    if (cr->type() == CHORD) {
-                                          // split Chord
-                                          Chord* c = static_cast<Chord*>(cr);
-                                          int rest = c->actualTicks();
-                                          int len  = measureEnd - tick;
-                                          rest    -= len;
-                                          Duration d;
-                                          d.setVal(len);
-                                          c->setDurationType(d);
-                                          c->setDuration(d.fraction());
-                                          undoAddCR(c, measure, tick);
-                                          while (rest) {
-                                                tick += c->actualTicks();
-                                                measure = tick2measure(tick);
-                                                if (measure->tick() != tick) {  // last measure
-                                                      printf("==last measure %d != %d\n", measure->tick(), tick);
-                                                      break;
-                                                      }
-                                                Chord* c2 = static_cast<Chord*>(c->clone());
-                                                len = measure->ticks() > rest ? rest : measure->ticks();
-                                                Duration d;
-                                                d.setVal(len);
-                                                c2->setDurationType(d);
-                                                rest -= len;
-                                                undoAddCR(c2, measure, tick);
-
-                                                QList<Note*> nl1 = c->notes();
-                                                QList<Note*> nl2 = c2->notes();
-
-                                                for (int i = 0; i < nl1.size(); ++i) {
-                                                      Tie* tie = new Tie(this);
-                                                      tie->setStartNote(nl1[i]);
-                                                      tie->setEndNote(nl2[i]);
-                                                      tie->setTrack(c->track());
-                                                      Tie* tie2 = nl1[i]->tieFor();
-                                                      if (tie2) {
-                                                            nl2[i]->setTieFor(nl1[i]->tieFor());
-                                                            tie2->setStartNote(nl2[i]);
-                                                            }
-                                                      nl1[i]->setTieFor(tie);
-                                                      nl2[i]->setTieBack(tie);
-                                                      }
-                                                c = c2;
+                              printf("+++addCR: tuplet %p\n", cr->tuplet());
+                              //
+                              // check for tuplet
+                              //
+                              if (cr->tuplet()) {
+                                    Tuplet* tuplet = cr->tuplet();
+                                    if (tuplet->elements().isEmpty()) {
+                                          Measure* measure = tick2measure(tick);
+                                          int measureEnd = measure->tick() + measure->ticks();
+                                          if (tick + tuplet->actualTicks() > measureEnd) {
+                                                invalidTuplets.append(tuplet);
+                                                cr->setDuration(tuplet->duration());
+                                                cr->setDurationType(cr->duration());
+                                                cr->setTuplet(0);
+                                                tuplet->add(cr);
+                                                printf("cannot paste tuplet across bar line\n");
                                                 }
                                           }
                                     else {
-                                          // split Rest
-                                          Rest* r  = static_cast<Rest*>(cr);
-                                          int rest = r->actualTicks();
-                                          int len  = measureEnd - r->tick();
-                                          rest    -= len;
-                                          Duration d;
-                                          d.setVal(len);
-                                          r->setDurationType(d);
-                                          undoAddCR(r, measure, tick);
-                                          while (rest) {
-                                                Rest* r2 = static_cast<Rest*>(r->clone());
-                                                int tick = r->tick() + r->actualTicks();
-                                                measure = tick2measure(tick);
-                                                len = measure->ticks() > rest ? rest : measure->ticks();
-                                                Duration d;
-                                                d.setVal(len);
-                                                r2->setDurationType(d);
-								rest -= len;
-                                                undoAddCR(r2, measure, tick);
-                                                r = r2;
+                                          foreach(Tuplet* t, invalidTuplets) {
+                                                if (tuplet == t) {
+// printf("remove tuplet note %d %d\n", cr->tick(), cr->actualTicks());
+                                                      delete cr;
+                                                      cr = 0;
+                                                      break;
+                                                      }
                                                 }
                                           }
                                     }
-                              else {
-                                    undoAddCR(cr, measure, tick);
-                                    }
+                              if (cr == 0)
+                                    continue;
                               curTick += cr->actualTicks();
+                              pasteChordRest(cr, tick);
                               }
                         else if (tag == "HairPin"
                            || tag == "Pedal"
@@ -2824,10 +2757,127 @@ printf("pasteStaff\n");
             if (selection().state() != SEL_RANGE)
                   _selection.setState(SEL_RANGE);
             }
+
+      foreach(Tuplet* t, invalidTuplets) {
+            t->measure()->remove(t);
+//            printf("...delete invalid tuplet\n");
+            delete t;
+            }
+
       connectTies();
       updateNotes();    // TODO: undoable version needed
 
       layoutFlags |= LAYOUT_FIX_PITCH_VELO;
+      }
+
+//---------------------------------------------------------
+//   pasteChordRest
+//---------------------------------------------------------
+
+void Score::pasteChordRest(ChordRest* cr, int tick)
+      {
+      if (cr->type() == CHORD) {
+            // set note track
+            // check if staffMove moves a note to a
+            // nonexistant staff
+            //
+            int track     = cr->track();
+            Chord* c      = static_cast<Chord*>(cr);
+            Part* part    = cr->staff()->part();
+            int nn = (track / VOICES) + c->staffMove();
+            if (nn < 0 || nn >= nstaves())
+                  c->setStaffMove(0);
+            foreach(Note* n, c->notes()) {
+                  if (!styleB(ST_concertPitch) && part->instr()->transpose().chromatic) {
+                        int npitch;
+                        int ntpc;
+                        Interval interval = part->instr()->transpose();
+                        interval.flip();
+                        transposeInterval(n->pitch(), n->tpc(), &npitch, &ntpc,
+                           interval, true);
+                        n->setPitch(npitch, ntpc);
+                        }
+                  n->setTrack(track);
+                  }
+            }
+
+      Measure* measure = tick2measure(tick);
+      bool isGrace = (cr->type() == CHORD) && (((Chord*)cr)->noteType() != NOTE_NORMAL);
+      int measureEnd = measure->tick() + measure->ticks();
+
+      if (!isGrace && (tick + cr->actualTicks() > measureEnd)) {
+            if (cr->type() == CHORD) {
+                  // split Chord
+                  Chord* c = static_cast<Chord*>(cr);
+                  int rest = c->actualTicks();
+                  int len  = measureEnd - tick;
+                  rest    -= len;
+                  Duration d;
+                  d.setVal(len);
+                  c->setDurationType(d);
+                  c->setDuration(d.fraction());
+                  undoAddCR(c, measure, tick);
+                  while (rest) {
+                        tick += c->actualTicks();
+                        measure = tick2measure(tick);
+                        if (measure->tick() != tick) {  // last measure
+                              printf("==last measure %d != %d\n", measure->tick(), tick);
+                              break;
+                              }
+                        Chord* c2 = static_cast<Chord*>(c->clone());
+                        len = measure->ticks() > rest ? rest : measure->ticks();
+                        Duration d;
+                        d.setVal(len);
+                        c2->setDurationType(d);
+                        rest -= len;
+                        undoAddCR(c2, measure, tick);
+
+                        QList<Note*> nl1 = c->notes();
+                        QList<Note*> nl2 = c2->notes();
+
+                        for (int i = 0; i < nl1.size(); ++i) {
+                              Tie* tie = new Tie(this);
+                              tie->setStartNote(nl1[i]);
+                              tie->setEndNote(nl2[i]);
+                              tie->setTrack(c->track());
+                              Tie* tie2 = nl1[i]->tieFor();
+                              if (tie2) {
+                                    nl2[i]->setTieFor(nl1[i]->tieFor());
+                                    tie2->setStartNote(nl2[i]);
+                                    }
+                              nl1[i]->setTieFor(tie);
+                              nl2[i]->setTieBack(tie);
+                              }
+                        c = c2;
+                        }
+                  }
+            else {
+                  // split Rest
+                  Rest* r  = static_cast<Rest*>(cr);
+                  int rest = r->actualTicks();
+                  int len  = measureEnd - r->tick();
+                  rest    -= len;
+                  Duration d;
+                  d.setVal(len);
+                  r->setDurationType(d);
+                  undoAddCR(r, measure, tick);
+                  while (rest) {
+                        Rest* r2 = static_cast<Rest*>(r->clone());
+                        int tick = r->tick() + r->actualTicks();
+                        measure = tick2measure(tick);
+                        len = measure->ticks() > rest ? rest : measure->ticks();
+                        Duration d;
+                        d.setVal(len);
+                        r2->setDurationType(d);
+				rest -= len;
+                        undoAddCR(r2, measure, tick);
+                        r = r2;
+                        }
+                  }
+            }
+      else {
+            undoAddCR(cr, measure, tick);
+            }
       }
 
 //---------------------------------------------------------

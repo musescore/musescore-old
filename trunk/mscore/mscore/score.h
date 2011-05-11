@@ -375,6 +375,7 @@ class Score : public QObject {
       void addAudioTrack();
       void parseVersion(const QString&);
       QList<Fraction> splitGapToMeasureBoundaries(ChordRest*, Fraction);
+      void pasteChordRest(ChordRest* cr, int tick);
 
    signals:
       void selectionChanged(int);

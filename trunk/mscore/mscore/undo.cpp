@@ -1170,7 +1170,7 @@ void Score::undoAddCR(ChordRest* cr, Measure* measure, int tick)
                   if (nt)
                         newcr->setTuplet(nt);
                   else
-                        printf("Tuplet not found\n");
+                        printf("undoAddCR: Tuplet not found\n");
                   }
             undo()->push(new AddElement(newcr));
             score->updateAccidentals(m, staffIdx);
