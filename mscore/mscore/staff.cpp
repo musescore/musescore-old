@@ -714,6 +714,9 @@ void Staff::init(const InstrumentTemplate* t, int cidx)
                   setLines(t->staffLines[cidx]);
             setSmall(t->smallStaff[cidx]);
             setInitialClef(t->clefIdx[cidx]);
+            setBracket(0, t->bracket[cidx]);
+            setBracketSpan(0, t->bracketSpan[cidx]);
+            setBarLineSpan(t->barlineSpan[cidx]);
             }
 
       StaffType* st;
@@ -724,12 +727,8 @@ void Staff::init(const InstrumentTemplate* t, int cidx)
       else
             st = score()->staffTypes().at(PITCHED_STAFF_TYPE);
 
-printf("init %d %d\n", _initialClef._concertClef, _initialClef._transposingClef);
+// printf("init %d %d\n", _initialClef._concertClef, _initialClef._transposingClef);
 
-      if (cidx == 0) {
-            setBracket(0, t->bracket);
-            setBracketSpan(0, t->staves);
-            }
       if (t->staffLines[cidx] != st->lines()) {
             // create new staff type:
             st = st->clone();

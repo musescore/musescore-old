@@ -358,7 +358,8 @@ void InstrumentWizard::createInstruments(Score* cs)
                   part->staves()->push_back(staff);
                   cs->staves().insert(staffIdx + rstaff, staff);
                   }
-            part->staves()->front()->setBarLineSpan(part->nstaves());
+
+//            part->staves()->front()->setBarLineSpan(part->nstaves());
 
             // insert part
             cs->insertPart(part, staffIdx);

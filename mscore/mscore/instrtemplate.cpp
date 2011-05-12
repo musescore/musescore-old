@@ -41,7 +41,9 @@ InstrumentTemplate::InstrumentTemplate()
       clefIdx[0]         = CLEF_G;
       staffLines[0]      = 5;
       smallStaff[0]      = false;
-      bracket            = NO_BRACKET;
+      bracket[0]         = NO_BRACKET;
+      bracketSpan[0]     = 1;
+      barlineSpan[0]     = 1;
       minPitchA          = 0;
       maxPitchA          = 127;
       minPitchP          = 0;
@@ -71,11 +73,13 @@ void InstrumentTemplate::init(const InstrumentTemplate& t)
       extended   = t.extended;
 
       for (int i = 0; i < MAX_STAVES; ++i) {
-            clefIdx[i]    = t.clefIdx[i];
-            staffLines[i] = t.staffLines[i];
-            smallStaff[i] = t.smallStaff[i];
+            clefIdx[i]     = t.clefIdx[i];
+            staffLines[i]  = t.staffLines[i];
+            smallStaff[i]  = t.smallStaff[i];
+            bracket[i]     = t.bracket[i];
+            bracketSpan[i] = t.bracketSpan[i];
+            barlineSpan[i] = t.barlineSpan[i];
             }
-      bracket    = t.bracket;
       minPitchA  = t.minPitchA;
       maxPitchA  = t.maxPitchA;
       minPitchP  = t.minPitchP;
@@ -123,13 +127,15 @@ void InstrumentTemplate::write(Xml& xml) const
             xml.tag("staves", staves);
             for (int i = 0; i < staves; ++i) {
                   xml.tag(QString("clef staff=\"%1\"").arg(i), clefTable[clefIdx[i]].tag);
-                  if (staffLines[0] != 5)
+                  if (staffLines[i] != 5)
                         xml.tag(QString("stafflines staff=\"%1\"").arg(i), staffLines[i]);
-                  if (smallStaff[0])
+                  if (smallStaff[i])
                         xml.tag(QString("smallStaff staff=\"%1\"").arg(i), smallStaff[i]);
+                  xml.tag(QString("bracket staff=\"%1\"").arg(i), bracket[i]);
+                  xml.tag(QString("bracketSpan staff=\"%1\"").arg(i), bracketSpan[i]);
+                  xml.tag(QString("barlineSpan staff=\"%1\"").arg(i), barlineSpan[i]);
                   }
             }
-      xml.tag("bracket", bracket);
       if (minPitchA != 0 || maxPitchA != 127)
             xml.tag("aPitchRange", QString("%1-%2").arg(minPitchA).arg(maxPitchA));
       if (minPitchP != 0 || maxPitchP != 127)
@@ -205,6 +211,18 @@ static QString parseInstrName(const QString& name)
       }
 
 //---------------------------------------------------------
+//   readStaffIdx
+//---------------------------------------------------------
+
+static int readStaffIdx(QDomElement e)
+      {
+      int idx = e.attribute("staff", "1").toInt() - 1;
+      if (idx >= MAX_STAVES)
+            idx = MAX_STAVES-1;
+      return idx;
+      }
+
+//---------------------------------------------------------
 //   read
 //---------------------------------------------------------
 
@@ -213,11 +231,13 @@ void InstrumentTemplate::read(QDomElement e)
       bool customDrumset = false;
       staves = 1;
       for (int i = 0; i < MAX_STAVES; ++i) {
-            clefIdx[i]    = CLEF_INVALID;
-            staffLines[i] = -1;
-            smallStaff[i] = false;
+            clefIdx[i]     = CLEF_INVALID;
+            staffLines[i]  = -1;
+            smallStaff[i]  = false;
+            bracket[i]     = NO_BRACKET;
+            bracketSpan[i] = 0;
+            barlineSpan[i] = 0;
             }
-      bracket    = -1;
       minPitchA  = 0;
       maxPitchA  = 127;
       minPitchP  = 0;
@@ -239,12 +259,13 @@ void InstrumentTemplate::read(QDomElement e)
                   trackName = val;
             else if (tag == "extended")
                   extended = true;
-            else if (tag == "staves")
+            else if (tag == "staves") {
                   staves = i;
+                  bracketSpan[0] = staves;
+                  barlineSpan[0] = staves;
+                  }
             else if (tag == "clef") {
-                  int idx = e.attribute("staff", "1").toInt() - 1;
-                  if (idx >= MAX_STAVES)
-                        idx = MAX_STAVES-1;
+                  int idx = readStaffIdx(e);
                   bool ok;
                   int i = val.toInt(&ok);
                   if (!ok) {
@@ -255,23 +276,29 @@ void InstrumentTemplate::read(QDomElement e)
                         clefIdx[idx] = ClefType(i);
                   }
             else if (tag == "stafflines") {
-                  int idx = e.attribute("staff", "1").toInt() - 1;
-                  if (idx >= MAX_STAVES)
-                        idx = MAX_STAVES-1;
+                  int idx = readStaffIdx(e);
                   staffLines[idx] = i;
                   }
             else if (tag == "smallStaff") {
-                  int idx = e.attribute("staff", "1").toInt() - 1;
-                  if (idx >= MAX_STAVES)
-                        idx = MAX_STAVES-1;
+                  int idx = readStaffIdx(e);
                   smallStaff[idx] = i;
+                  }
+            else if (tag == "bracket") {
+                  int idx = readStaffIdx(e);
+                  bracket[idx] = i;
+                  }
+            else if (tag == "bracketSpan") {
+                  int idx = readStaffIdx(e);
+                  bracketSpan[idx] = i;
+                  }
+            else if (tag == "barlineSpan") {
+                  int idx = readStaffIdx(e);
+                  barlineSpan[idx] = i;
                   }
             else if (tag == "Tablature") {
                   tablature = new Tablature;
                   tablature->read(e);
                   }
-            else if (tag == "bracket")
-                  bracket = i;
             else if (tag == "aPitchRange")
                   setPitchRange(val, &minPitchA, &maxPitchA);
             else if (tag == "pPitchRange")
@@ -331,6 +358,25 @@ void InstrumentTemplate::read(QDomElement e)
                   }
             else
                   domError(e);
+            }
+      //
+      // check bar line spans
+      //
+      int barLine = 0;
+      for (int i = 0; i < staves; ++i) {
+            int bls = barlineSpan[i];
+            if (barLine) {
+                  if (bls)
+                        barlineSpan[i] = 0;
+                  }
+            else {
+                  if (bls == 0) {
+                        bls = 1;
+                        barlineSpan[i] = 1;
+                        }
+                  barLine = bls;
+                  }
+            --barLine;
             }
       for (int i = 0; i < MAX_STAVES; ++i) {
             if (clefIdx[i] == CLEF_INVALID)
