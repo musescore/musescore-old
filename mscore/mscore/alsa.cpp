@@ -705,7 +705,6 @@ bool AlsaAudio::start()
 
 bool AlsaAudio::stop()
       {
-printf("AlsaAudio::stop\n");
       if (runAlsa == 2) {
             runAlsa = 1;
             while (runAlsa != 0)
