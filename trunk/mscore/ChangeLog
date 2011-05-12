@@ -1,3 +1,5 @@
+12.may (ws)
+      - fix #10642: Playback position not held after changing score
 11.may (ws)
       - fix #8998: Exporting MIDI causes crash
       - fix #10620: Copy&Paste of notes changes flats to sharps

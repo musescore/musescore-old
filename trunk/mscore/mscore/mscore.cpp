@@ -248,11 +248,7 @@ void MuseScore::closeEvent(QCloseEvent* ev)
       if (inspector)
             inspector->writeSettings();
 
-      seq->stop();
-#ifndef __MINGW32__
-      while(!seq->isStopped())
-            usleep(50000);
-#endif
+      seq->stopWait();
       seq->exit();
       ev->accept();
       if (preferences.dirty)
