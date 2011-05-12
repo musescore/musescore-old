@@ -160,6 +160,8 @@ void Preferences::init()
       fgWallpaper        = ":/data/paper5.png";
       fgColor.setRgb(255, 255, 255);
       bgColor.setRgb(0x76, 0x76, 0x6e);
+      iconHeight         = 25;
+      iconWidth          = 20;
 
       selectColor[0].setRgb(0, 0, 255);     //blue
       selectColor[1].setRgb(0, 150, 0);     //green
@@ -284,6 +286,8 @@ void Preferences::write()
       s.setValue("fgWallpaper",        fgWallpaper);
       s.setValue("fgColor",            fgColor);
       s.setValue("bgColor",            bgColor);
+      s.setValue("iconHeight",         iconHeight);
+      s.setValue("iconWidth",          iconWidth);
 
       s.setValue("selectColor1",       selectColor[0]);
       s.setValue("selectColor2",       selectColor[1]);
@@ -419,6 +423,8 @@ void Preferences::read()
       fgWallpaper     = s.value("fgWallpaper", ":/data/paper5.png").toString();
       fgColor         = s.value("fgColor", QColor(255, 255, 255)).value<QColor>();
       bgColor         = s.value("bgColor", QColor(0x76, 0x76, 0x6e)).value<QColor>();
+      iconHeight      = s.value("iconHeight").toInt();
+      iconWidth       = s.value("iconWidth").toInt();
 
       selectColor[0]  = s.value("selectColor1", QColor(Qt::blue)).value<QColor>();     //blue
       selectColor[1]  = s.value("selectColor2", QColor(0, 150, 0)).value<QColor>();    //green
@@ -783,6 +789,9 @@ void PreferenceDialog::updateValues(Preferences* p)
       else {
             fgColorLabel->setPixmap(new QPixmap(fgWallpaper->text()));
             }
+
+      iconWidth->setValue(p->iconWidth);
+      iconHeight->setValue(p->iconHeight);
 
       replaceFractions->setChecked(p->replaceFractions);
       replaceCopyrightSymbol->setChecked(p->replaceCopyrightSymbol);
@@ -1286,6 +1295,9 @@ void PreferenceDialog::apply()
       preferences.fgColor        = fgColorLabel->color();
       preferences.bgColor        = bgColorLabel->color();
 
+      preferences.iconWidth      = iconWidth->value();
+      preferences.iconHeight     = iconHeight->value();
+
       preferences.bgUseColor     = bgColorButton->isChecked();
       preferences.fgUseColor     = fgColorButton->isChecked();
       preferences.enableMidiInput = enableMidiInput->isChecked();
@@ -1442,6 +1454,8 @@ void PreferenceDialog::apply()
 
       qApp->setStyleSheet(appStyleSheet());
       genIcons();
+
+      mscore->setIconSize(QSize(preferences.iconWidth, preferences.iconHeight));
 
       emit preferencesChanged();
       preferences.write();

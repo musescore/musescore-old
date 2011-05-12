@@ -320,6 +320,7 @@ MuseScore::MuseScore()
       {
       _sstate = STATE_INIT;
       setWindowTitle(QString("MuseScore"));
+      setIconSize(QSize(preferences.iconWidth, preferences.iconHeight));
 
       ucheck                = new UpdateChecker();
 
