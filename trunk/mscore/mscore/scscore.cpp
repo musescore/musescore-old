@@ -279,7 +279,7 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                         staff->setLines(t->staffLines[i]);
                         staff->setSmall(t->smallStaff[i]);
                         if (i == 0) {
-                              staff->setBracket(0, t->bracket);
+                              staff->setBracket(0, t->bracket[0]);
                               staff->setBracketSpan(0, t->staves);
                               }
                         score->undoInsertStaff(staff, n + i);

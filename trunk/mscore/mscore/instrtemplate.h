@@ -58,7 +58,9 @@ struct InstrumentTemplate {
       int staffLines[MAX_STAVES];
       bool useTablature;
       Tablature* tablature;
-      int bracket;            // bracket type (NO_BRACKET)
+      int bracket[MAX_STAVES];            // bracket type (NO_BRACKET)
+      int bracketSpan[MAX_STAVES];
+      int barlineSpan[MAX_STAVES];
       bool smallStaff[MAX_STAVES];
 
       bool extended;          // belongs to extended instrument set if true

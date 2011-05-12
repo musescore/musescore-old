@@ -71,6 +71,8 @@ static const int peakHold     = (peakHoldTime * guiRefresh) / 1000;
 
 Seq::Seq()
       {
+      printf("Seq::Seq %p\n", mscore);
+
       running         = false;
       playlistChanged = false;
       cs              = 0;
@@ -95,8 +97,7 @@ Seq::Seq()
 
       heartBeatTimer = new QTimer(this);
       connect(heartBeatTimer, SIGNAL(timeout()), this, SLOT(heartBeat()));
-      heartBeatTimer->start(1000/guiRefresh);
-//      heartBeatTimer->stop();
+//      heartBeatTimer->start(1000/guiRefresh);
 
       noteTimer = new QTimer(this);
       noteTimer->setSingleShot(true);
@@ -145,6 +146,10 @@ void Seq::setScoreView(ScoreView* v)
             }
       cv = v;
       cs = cv ? cv->score() : 0;
+
+      if (!heartBeatTimer->isActive())
+            heartBeatTimer->start(1000/guiRefresh);
+
       playlistChanged = true;
       synti->reset();
       if (cs) {

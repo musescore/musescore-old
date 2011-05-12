@@ -4267,7 +4267,9 @@
         <clef staff="1">0</clef>
         <clef staff="2">4</clef>
         <clef staff="3">4</clef>
-        <bracket>1</bracket>
+        <bracket staff="1">1</bracket>
+        <bracketSpan staff="1">2</bracketSpan>
+        <barlineSpan staff="1">2</barlineSpan>
         <channel>
            <program>19</program>
            </channel>
@@ -4279,7 +4281,9 @@
         <clef staff="1">0</clef>
         <clef staff="2">4</clef>
         <clef staff="3">4</clef>
-        <bracket>1</bracket>
+        <bracket staff="1">1</bracket>
+        <bracketSpan staff="1">2</bracketSpan>
+        <barlineSpan staff="1">2</barlineSpan>
         <channel name="I">
             <descr>Division I</descr>
             <synti>Aeolus</synti>
@@ -4601,7 +4605,9 @@
         <clef staff="1">0</clef>
         <clef staff="2">4</clef>
         <clef staff="3">4</clef>
-        <bracket>1</bracket>
+        <bracket staff="1">1</bracket>
+        <bracketSpan staff="1">2</bracketSpan>
+        <barlineSpan staff="1">2</barlineSpan>
         <channel>
            <program>18</program>
            </channel>

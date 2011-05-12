@@ -1,4 +1,5 @@
 12.may (ws)
+      - better organ template in instruments.xml
       - add icon size to preferences
       - fix #10634: create barLineSpan and system brackets for parts
       - fix #10631: Dots out of place in Part
