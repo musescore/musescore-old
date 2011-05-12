@@ -355,14 +355,14 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
 
 void cloneStaff(Staff* srcStaff, Staff* dstStaff)
       {
-      Score* score  = srcStaff->score();
+      Score* score = srcStaff->score();
       dstStaff->linkTo(srcStaff);
 
-      int tracks = score->nstaves() * VOICES;
+      int tracks       = score->nstaves() * VOICES;
       SlurMap* slurMap = new SlurMap[tracks];
       TieMap* tieMap   = new TieMap[tracks];
-      int srcStaffIdx = score->staffIdx(srcStaff);
-      int dstStaffIdx = score->staffIdx(dstStaff);
+      int srcStaffIdx  = score->staffIdx(srcStaff);
+      int dstStaffIdx  = score->staffIdx(dstStaff);
 
       for (Measure* m = score->firstMeasure(); m; m = m->nextMeasure()) {
             int sTrack = srcStaffIdx * VOICES;

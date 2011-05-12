@@ -1,4 +1,5 @@
 12.may (ws)
+      - fix #10631: Dots out of place in Part
       - fix #10642: Playback position not held after changing score
 11.may (ws)
       - fix #8998: Exporting MIDI causes crash

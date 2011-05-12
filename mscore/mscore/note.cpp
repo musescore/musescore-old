@@ -235,10 +235,8 @@ Note::Note(const Note& n)
             add(new Bend(*n._bend));
       for (int i = 0; i < 3; ++i) {
             _dots[i] = 0;
-            if (n._dots[i]) {
-                  _dots[i] = new NoteDot(*n._dots[i]);
-                  _dots[i]->setIdx(i);
-                  }
+            if (n._dots[i])
+                  add(new NoteDot(*n._dots[i]));
             }
       _lineOffset = n._lineOffset;
       }
