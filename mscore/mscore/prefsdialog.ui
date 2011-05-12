@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>683</width>
-    <height>538</height>
+    <width>706</width>
+    <height>553</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -589,8 +589,8 @@
          <property name="title">
           <string>Style</string>
          </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_10">
-          <item>
+         <layout class="QGridLayout" name="gridLayout_9">
+          <item row="0" column="0">
            <widget class="QComboBox" name="styleName">
             <item>
              <property name="text">
@@ -609,7 +609,34 @@
             </item>
            </widget>
           </item>
-          <item>
+          <item row="2" column="2">
+           <widget class="QSpinBox" name="iconHeight">
+            <property name="minimum">
+             <number>5</number>
+            </property>
+            <property name="value">
+             <number>20</number>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_26">
+            <property name="text">
+             <string>Icon size:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QSpinBox" name="iconWidth">
+            <property name="minimum">
+             <number>5</number>
+            </property>
+            <property name="value">
+             <number>20</number>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1" colspan="2">
            <widget class="QCheckBox" name="nativeDialogs">
             <property name="text">
              <string>use native file dialogs</string>
@@ -1534,8 +1561,6 @@
             <property name="text">
              <string>Browse...</string>
             </property>
-            <property name="icon">
-            </property>
            </widget>
           </item>
           <item row="1" column="0">
@@ -2356,8 +2381,6 @@
              <widget class="QToolButton" name="styleFileButton">
               <property name="text">
                <string>Browse...</string>
-              </property>
-              <property name="icon">
               </property>
              </widget>
             </item>

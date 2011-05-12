@@ -65,6 +65,7 @@ struct Preferences {
       QString fgWallpaper;
       QColor fgColor;
       QColor bgColor;
+      int iconHeight, iconWidth;
       QColor selectColor[VOICES];
       QColor defaultColor;
       QColor dropColor;

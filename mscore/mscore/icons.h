@@ -54,9 +54,5 @@ enum { longaUp_ICON, brevis_ICON, note_ICON, note2_ICON, note4_ICON, note8_ICON,
 extern QIcon* icons[ICONS];
 
 class Sym;
-
-static const int ICON_HEIGHT = 24;
-static const int ICON_WIDTH  = 20;
-
 #endif
 
