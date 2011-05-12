@@ -214,12 +214,13 @@ Element* ElementMap::findNew(Element* o) const
 
 void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
       {
+printf("cloneStaves\n");
       int tracks = score->nstaves() * VOICES;
       SlurMap* slurMap = new SlurMap[tracks];
       TieMap*  tieMap  = new TieMap[tracks];
 
       MeasureBaseList* nmbl = score->measures();
-      for(MeasureBase* mb = oscore->measures()->first(); mb; mb = mb->next()) {
+      for (MeasureBase* mb = oscore->measures()->first(); mb; mb = mb->next()) {
             MeasureBase* nmb = 0;
             if (mb->type() == HBOX)
                   nmb = new HBox(score);
@@ -347,6 +348,20 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
             slurMap[track].check();
       delete[] slurMap;
       delete[] tieMap;
+
+      int n = map.size();
+      for (int dstStaffIdx = 0; dstStaffIdx < n; ++dstStaffIdx) {
+            Staff* srcStaff = oscore->staff(map[dstStaffIdx]);
+            Staff* dstStaff = score->staff(dstStaffIdx);
+            if (srcStaff->primaryStaff()) {
+                  dstStaff->setBarLineSpan(srcStaff->barLineSpan());
+                  int idx = 0;
+                  foreach(BracketItem bi, srcStaff->brackets()) {
+                        dstStaff->setBracket(idx, bi._bracket);
+                        dstStaff->setBracketSpan(idx, bi._bracketSpan);
+                        }
+                  }
+            }
       }
 
 //---------------------------------------------------------
@@ -355,6 +370,8 @@ void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
 
 void cloneStaff(Staff* srcStaff, Staff* dstStaff)
       {
+printf("cloneStaff\n");
+
       Score* score = srcStaff->score();
       dstStaff->linkTo(srcStaff);
 
