@@ -117,6 +117,22 @@ Seq::~Seq()
       }
 
 //---------------------------------------------------------
+//   stopWait
+//---------------------------------------------------------
+
+void Seq::stopWait()
+      {
+      stop();
+      QMutex mutex;
+      QWaitCondition sleep;
+      while (state != TRANSPORT_STOP) {
+            mutex.lock();
+            sleep.wait(&mutex, 100);
+            mutex.unlock();
+            }
+      }
+
+//---------------------------------------------------------
 //   setScoreView
 //---------------------------------------------------------
 
@@ -125,12 +141,7 @@ void Seq::setScoreView(ScoreView* v)
       if (cv !=v && cs) {
             disconnect(cs, SIGNAL(selectionChanged(int)), this, SLOT(selectionChanged(int)));
             markedNotes.clear();
-            stop();
-            cs = v ? v->score() : 0;
-#ifndef __MINGW32__
-            while (state != TRANSPORT_STOP)
-                  usleep(100000);
-#endif
+            stopWait();
             }
       cv = v;
       cs = cv ? cv->score() : 0;
@@ -249,11 +260,7 @@ void Seq::exit()
       if (driver) {
             if (debugMode)
                   printf("Stop I/O\n");
-            driver->stop();
-#ifndef __MINGW32__
-            while(!seq->isStopped())
-                  usleep(50000);
-#endif
+            stopWait();
             delete driver;
             driver = 0;
             }
@@ -322,6 +329,7 @@ void Seq::stop()
       if (cv)
             cv->setCursorOn(false);
       if (cs) {
+            cs->setPlayPos(playPos.key());
             cs->setLayoutAll(false);
             cs->setUpdateAll();
             cs->end();
@@ -360,7 +368,6 @@ void MuseScore::seqStopped()
 
 void Seq::guiStop()
       {
-printf("gui stop\n");
       QAction* a = getAction("play");
       a->setChecked(false);
 

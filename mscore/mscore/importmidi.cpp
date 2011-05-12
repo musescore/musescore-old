@@ -641,7 +641,7 @@ static QString instrName(int type, int hbank, int lbank, int program)
 //   addLyrics
 //---------------------------------------------------------
 
-void Score::addLyrics(int tick, int /*staffIdx*/, const QString& txt)
+void Score::addLyrics(int tick, int staffIdx, const QString& txt)
       {
       if (txt.trimmed().isEmpty())
             return;
@@ -652,14 +652,18 @@ void Score::addLyrics(int tick, int /*staffIdx*/, const QString& txt)
                qPrintable(txt), tick);
             return;
             }
-#if 0 //TODOzz
-      Lyrics* l = new Lyrics(this);
-      l->setText(txt);
-      l->setTrack(staffIdx * VOICES);
-      if (debugMode)
-            printf("Meta Lyric <%s>\n", qPrintable(txt));
-      seg->add(l);
-#endif
+      int track = staffIdx * VOICES;
+      ChordRest* cr = static_cast<ChordRest*>(seg->element(track));
+      if (cr) {
+            Lyrics* l = new Lyrics(this);
+            l->setText(txt);
+            l->setTrack(staffIdx * VOICES);
+            cr->add(l);
+            }
+      else {
+            printf("no chord/rest for lyrics<%s> at tick %d\n",
+               qPrintable(txt), tick);
+            }
       }
 
 //---------------------------------------------------------

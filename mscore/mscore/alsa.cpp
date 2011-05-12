@@ -167,7 +167,6 @@ bool AlsaDriver::pcmStart()
 int AlsaDriver::pcmStop()
       {
       int err;
-
       if (_play_handle && ((err = snd_pcm_drop (_play_handle)) < 0)) {
             fprintf (stderr, "Alsa_driver: pcm_drop(play): %s\n", snd_strerror (err));
             return -1;
@@ -615,6 +614,7 @@ int AlsaAudio::sampleRate() const
 
 AlsaAudio::~AlsaAudio()
       {
+      stop();
       delete alsa;
       }
 
@@ -705,6 +705,7 @@ bool AlsaAudio::start()
 
 bool AlsaAudio::stop()
       {
+printf("AlsaAudio::stop\n");
       if (runAlsa == 2) {
             runAlsa = 1;
             while (runAlsa != 0)

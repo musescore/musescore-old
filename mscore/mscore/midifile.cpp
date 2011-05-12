@@ -797,10 +797,6 @@ void MidiTrack::mergeNoteOnOff()
                                     }
                               }
                         }
-                  if (ev.type() == ME_META) {
-                        printf("merge process meta %x\n", ev.metaType());
-                        }
-
                   el.insert(ev);
                   _events[i].setType(ME_INVALID);
                   continue;
