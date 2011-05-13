@@ -29,6 +29,7 @@
 InstrumentName::InstrumentName(Score* s)
    : Text(s)
       {
+      _layoutPos = 0;
       }
 
 //---------------------------------------------------------

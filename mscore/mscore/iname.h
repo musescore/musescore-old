@@ -28,6 +28,7 @@
 //---------------------------------------------------------
 
 class InstrumentName : public Text  {
+      int _layoutPos;
 
    public:
       InstrumentName(Score*);
@@ -35,6 +36,8 @@ class InstrumentName : public Text  {
       virtual ElementType type() const { return INSTRUMENT_NAME; }
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(ScoreView*, const QString&);
+      int layoutPos() const      { return _layoutPos; }
+      void setLayoutPos(int val) { _layoutPos = val;  }
       };
 
 #endif

@@ -36,8 +36,8 @@ class Tablature;
 
 struct InstrumentTemplate {
       QString trackName;
-      QString longName;      ///< shown on first system
-      QString shortName;     ///< shown on followup systems
+      QList<StaffName> longNames;      ///< shown on first system
+      QList<StaffName> shortNames;     ///< shown on followup systems
 
       char minPitchA;         // pitch range playable by an amateur
       char maxPitchA;

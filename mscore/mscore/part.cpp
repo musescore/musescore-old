@@ -84,32 +84,32 @@ void Part::read(QDomElement e)
                   }
             else if (tag == "name") {
                   if (_score->mscVersion() <= 101)
-                        instr(0)->longName() = QTextDocumentFragment::fromHtml(val);
+                        instr(0)->setLongName(QTextDocumentFragment::fromHtml(val));
                   else if (_score->mscVersion() <= 110)
-                        instr(0)->longName() = QTextDocumentFragment::fromHtml(Xml::htmlToString(e.firstChildElement()));
+                        instr(0)->setLongName(QTextDocumentFragment::fromHtml(Xml::htmlToString(e.firstChildElement())));
                   else if (_score->mscVersion() < 120) {
                         Text* t = new Text(score());
                         t->read(e);
-                        instr(0)->longName() = t->getFragment();
+                        instr(0)->setLongName(t->getFragment());
                         delete t;
                         }
                   else {
-                        instr(0)->longName() = QTextDocumentFragment::fromHtml(val);
+                        instr(0)->setLongName(QTextDocumentFragment::fromHtml(val));
                         }
                   }
             else if (tag == "shortName") {
                   if (_score->mscVersion() <= 101)
-                        instr(0)->shortName() = QTextDocumentFragment::fromHtml(val);
+                        instr(0)->setShortName(QTextDocumentFragment::fromHtml(val));
                   else if (_score->mscVersion() <= 110)
-                        instr(0)->shortName() = QTextDocumentFragment::fromHtml(Xml::htmlToString(e.firstChildElement()));
+                        instr(0)->setShortName(QTextDocumentFragment::fromHtml(Xml::htmlToString(e.firstChildElement())));
                   else if (_score->mscVersion() < 120) {
                         Text* t = new Text(score());
                         t->read(e);
-                        instr(0)->shortName() = t->getFragment();
+                        instr(0)->setShortName(t->getFragment());
                         delete t;
                         }
                   else {
-                        instr(0)->shortName() = QTextDocumentFragment::fromHtml(val);
+                        instr(0)->setShortName(QTextDocumentFragment::fromHtml(val));
                         }
                   }
             else if (tag == "trackName")
@@ -195,12 +195,12 @@ static QTextDocumentFragment parseInstrName(const QString& name)
 
 void Part::setLongName(const QTextDocumentFragment& name, int tick)
       {
-      instr(tick)->longName() = name;
+      //TODO instr(tick)->longName() = name;
       }
 
 void Part::setShortName(const QTextDocumentFragment& name, int tick)
       {
-      instr(tick)->shortName() = name;
+      //TODO instr(tick)->shortName() = name;
       }
 
 //---------------------------------------------------------
@@ -382,3 +382,22 @@ const Instrument* Part::instr(int tick) const
       return &_instrList.instrument(tick);
       }
 
+//---------------------------------------------------------
+//   longName
+//---------------------------------------------------------
+
+QTextDocumentFragment Part::longName(int tick) const
+      {
+      const QList<StaffNameDoc>& nl = longNames(tick);
+      return nl.isEmpty() ? QTextDocumentFragment() : nl[0].name;
+      }
+
+//---------------------------------------------------------
+//   shortName
+//---------------------------------------------------------
+
+QTextDocumentFragment Part::shortName(int tick) const
+      {
+      const QList<StaffNameDoc>& nl = shortNames(tick);
+      return nl.isEmpty() ? QTextDocumentFragment() : nl[0].name;
+      }

@@ -4275,8 +4275,11 @@
            </channel>
         </instrument>
      <instrument>
-        <name>Pipe-Organ</name>
-        <short-name>Org.</short-name>
+        <description>Pipe-Organ</description>
+        <longName  pos="2">Man.</longName>
+        <longName  pos="5">Ped.</longName>
+        <shortName pos="2">Man.</shortName>
+        <shortName pos="5">Ped.</shortName>
         <staves>3</staves>
         <clef staff="1">0</clef>
         <clef staff="2">4</clef>

@@ -67,8 +67,8 @@ InstrumentTemplate::InstrumentTemplate(const InstrumentTemplate& t)
 void InstrumentTemplate::init(const InstrumentTemplate& t)
       {
       trackName  = t.trackName;
-      longName   = t.longName;
-      shortName  = t.shortName;
+      longNames  = t.longNames;
+      shortNames = t.shortNames;
       staves     = t.staves;
       extended   = t.extended;
 
@@ -110,8 +110,10 @@ InstrumentTemplate::~InstrumentTemplate()
 void InstrumentTemplate::write(Xml& xml) const
       {
       xml.stag("Instrument");
-      xml.tag("longName", longName);
-      xml.tag("shortName",  shortName);
+      foreach(StaffName sn, longNames)
+            xml.tag(QString("longName pos=\"%1\"").arg(sn.pos), sn.name);
+      foreach(StaffName sn, shortNames)
+            xml.tag(QString("shortName pos=\"%1\"").arg(sn.pos), sn.name);
       xml.tag("description", trackName);
       xml.tag("extended", extended);
       if (tablature)
@@ -251,10 +253,16 @@ void InstrumentTemplate::read(QDomElement e)
             QString val(e.text());
             int i = val.toInt();
 
-            if (tag == "name" || tag == "longName")               // "name" is obsolete
-                  longName = Xml::htmlToString(e);
-            else if (tag == "short-name" || tag == "shortName")   // "short-name" is obsolete
-                  shortName = Xml::htmlToString(e);
+            if (tag == "name" || tag == "longName") {               // "name" is obsolete
+                  int pos = e.attribute("pos", "0").toInt();
+                  QString longName = Xml::htmlToString(e);
+                  longNames.append(StaffName(longName, pos));
+                  }
+            else if (tag == "short-name" || tag == "shortName") {   // "short-name" is obsolete
+                  int pos = e.attribute("pos", "0").toInt();
+                  QString shortName = Xml::htmlToString(e);
+                  shortNames.append(StaffName(shortName, pos));
+                  }
             else if (tag == "description")
                   trackName = val;
             else if (tag == "extended")
@@ -400,8 +408,8 @@ void InstrumentTemplate::read(QDomElement e)
                   channel[0].bank = 128;
             channel[0].updateInitList();
             }
-      if (trackName.isEmpty())
-            trackName = parseInstrName(longName);
+      if (trackName.isEmpty() && !longNames.isEmpty())
+            trackName = parseInstrName(longNames[0].name);
       }
 
 //---------------------------------------------------------

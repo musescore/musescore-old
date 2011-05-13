@@ -63,8 +63,8 @@ EditStaff::EditStaff(Staff* s, QWidget* parent)
 
       small->setChecked(staff->small());
       setInterval(instrument.transpose());
-      shortName->setHtml(part->instr(0)->shortName().toHtml());
-      longName->setHtml(part->instr(0)->longName().toHtml());
+      shortName->setHtml(part->shortName().toHtml());
+      longName->setHtml(part->longName().toHtml());
       invisible->setChecked(staff->invisible());
 
       _minPitchA = instrument.minPitchA();
@@ -235,9 +235,11 @@ void EditStaff::showInstrumentDialog()
             minPitchP->setText(midiCodeToStr(_minPitchP));
             maxPitchP->setText(midiCodeToStr(_maxPitchP));
 
-            shortName->setHtml(t->shortName);
-            longName->setHtml(t->longName);
-//TODOxx            trackName = t->trackName;
+            if (!t->shortNames.isEmpty())
+                  shortName->setHtml(t->shortNames[0].name);
+            if (!t->longNames.isEmpty())
+                  longName->setHtml(t->longNames[0].name);
+            // trackName = t->trackName;
 
             setInterval(t->transpose);
 

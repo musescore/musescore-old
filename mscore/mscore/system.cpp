@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -54,7 +54,6 @@
 SysStaff::SysStaff()
       {
       idx             = 0;
-      instrumentName  = 0;
       _show           = true;
       }
 
@@ -67,7 +66,7 @@ SysStaff::~SysStaff()
       foreach(Bracket* b, brackets)
             delete b;
       brackets.clear();
-      delete instrumentName;
+      qDeleteAll(instrumentNames);
       }
 
 //---------------------------------------------------------
@@ -91,11 +90,7 @@ System::System(Score* s)
 System::~System()
       {
       delete barLine;
-      foreach(SysStaff* s, _staves) {
-            if (s->instrumentName)
-                  score()->deselect(s->instrumentName);
-            delete s;
-            }
+      qDeleteAll(_staves);
       }
 
 //---------------------------------------------------------
@@ -193,9 +188,9 @@ void System::layout(double xo1)
                               bracketWidth[i] = w;
                         }
                   }
-            if (ss->instrumentName && !ss->instrumentName->isEmpty()) {
-                  ss->instrumentName->layout();
-                  double w = ss->instrumentName->width() + point(instrumentNameOffset);
+            foreach(InstrumentName* t, ss->instrumentNames) {
+                  t->layout();
+                  double w = t->width() + point(instrumentNameOffset);
                   if (w > xoff2)
                         xoff2 = w;
                   }
@@ -285,9 +280,9 @@ void System::layout(double xo1)
       foreach (Part* p, *score()->parts()) {
             SysStaff* s = staff(idx);
             int nstaves = p->nstaves();
-            if (s->instrumentName && !s->instrumentName->isEmpty()) {
-                  double d  = point(instrumentNameOffset) + s->instrumentName->bbox().width();
-                  s->instrumentName->rxpos() = xoff2 - d + xo1;
+            foreach(InstrumentName* t, s->instrumentNames) {
+                  double d  = point(instrumentNameOffset) + t->bbox().width();
+                  t->rxpos() = xoff2 - d + xo1;
                   }
             idx += nstaves;
             }
@@ -408,14 +403,40 @@ void System::layout2()
       foreach(Part* p, *score()->parts()) {
             SysStaff* s = staff(staffIdx);
             int nstaves = p->nstaves();
-            if (s->instrumentName && !s->instrumentName->isEmpty()) {
+            foreach(InstrumentName* t, s->instrumentNames) {
                   //
                   // override Text->layout()
                   //
-                  double y1 = s->bbox().top();
-                  double y2 = staff(staffIdx + nstaves - 1)->bbox().bottom();
-                  double y  = y1 + (y2 - y1) * .5 - s->instrumentName->bbox().height() * .5;
-                  s->instrumentName->rypos() = y;
+                  double y1, y2;
+                  switch(t->layoutPos()) {
+                        default:
+                        case 0:           // center at part
+                              y1 = s->bbox().top();
+                              y2 = staff(staffIdx + nstaves - 1)->bbox().bottom();
+                              break;
+                        case 1:           // center at first staff
+                              y1 = s->bbox().top();
+                              y2 = s->bbox().bottom();
+                              break;
+                        case 2:           // center between first and second staff
+                              y1 = s->bbox().top();
+                              y2 = staff(staffIdx + 1)->bbox().bottom();
+                              break;
+                        case 3:           // center at second staff
+                              y1 = staff(staffIdx + 1)->bbox().top();
+                              y2 = staff(staffIdx + 1)->bbox().bottom();
+                              break;
+                        case 4:           // center between first and second staff
+                              y1 = staff(staffIdx + 1)->bbox().top();
+                              y2 = staff(staffIdx + 2)->bbox().bottom();
+                              break;
+                        case 5:           // center at third staff
+                              y1 = staff(staffIdx + 2)->bbox().top();
+                              y2 = staff(staffIdx + 2)->bbox().bottom();
+                              break;
+                        }
+                  double y  = y1 + (y2 - y1) * .5 - t->bbox().height() * .5;
+                  t->rypos() = y;
                   }
             staffIdx += nstaves;
             }
@@ -430,8 +451,8 @@ void SysStaff::move(double x, double y)
       _bbox.translate(x, y);
       foreach(Bracket* b, brackets)
             b->move(x, y);
-      if (instrumentName)
-            instrumentName->move(x, y);
+      foreach(InstrumentName* t, instrumentNames)
+            t->move(x, y);
       }
 
 //---------------------------------------------------------
@@ -456,56 +477,45 @@ void System::clear()
 
 void System::setInstrumentNames(bool longName)
       {
-      for (int staff = 0; staff < score()->nstaves(); ++staff)
-            setInstrumentName(staff, longName);
-      }
-
-//---------------------------------------------------------
-//   setInstrumentName
-//---------------------------------------------------------
-
-void System::setInstrumentName(int staffIdx, bool longName)
-      {
       if (isVbox())                 // ignore vbox
             return;
-
-      SysStaff* staff = _staves[staffIdx];
-      Staff* s = score()->staff(staffIdx);
-      if (!s->isTop()) {
-            if (staff->instrumentName) {
-                  if (staff->instrumentName->selected())
-                        score()->deselect(staff->instrumentName);
-                  delete staff->instrumentName;
-                  staff->instrumentName = 0;
-                  }
-            return;
-            }
-
-      //
-      // instrument name can change after inserting/deleting parts
-      //
-      Text* iname = staff->instrumentName;
-      Part* part = s->part();
-
-      if (!iname) {
-            iname = new InstrumentName(score());
-            iname->setGenerated(true);
-            if (longName) {
-                  iname->setSubtype(TEXT_INSTRUMENT_LONG);
-                  iname->setTextStyle(TEXT_STYLE_INSTRUMENT_LONG);
-                  }
-            else {
-                  iname->setSubtype(TEXT_INSTRUMENT_SHORT);
-                  iname->setTextStyle(TEXT_STYLE_INSTRUMENT_SHORT);
-                  }
-            staff->instrumentName = iname;
-            }
       int tick = ml.isEmpty() ? 0 : ml.front()->tick();
-      QTextDocumentFragment frag = longName ? part->longName(tick) : part->shortName(tick);
+      for (int staffIdx = 0; staffIdx < score()->nstaves(); ++staffIdx) {
+            SysStaff* staff = _staves[staffIdx];
+            Staff* s        = score()->staff(staffIdx);
+            if (!s->isTop()) {
+                  foreach(InstrumentName* t, staff->instrumentNames)
+                        score()->undoRemoveElement(t);
+                  continue;
+                  }
 
-      iname->setText(frag);
-      iname->setParent(this);
-      iname->setTrack(staffIdx * VOICES);
+            Part* part = s->part();
+            const QList<StaffNameDoc>& names = longName? part->longNames(tick) : part->shortNames(tick);
+
+            int idx = 0;
+            foreach(StaffNameDoc sn, names) {
+                  InstrumentName* iname = staff->instrumentNames.value(idx);
+
+                  if (!iname) {
+                        iname = new InstrumentName(score());
+                        iname->setGenerated(true);
+                        iname->setParent(this);
+                        iname->setTrack(staffIdx * VOICES);
+                        if (longName) {
+                              iname->setSubtype(TEXT_INSTRUMENT_LONG);
+                              iname->setTextStyle(TEXT_STYLE_INSTRUMENT_LONG);
+                              }
+                        else {
+                              iname->setSubtype(TEXT_INSTRUMENT_SHORT);
+                              iname->setTextStyle(TEXT_STYLE_INSTRUMENT_SHORT);
+                              }
+                        staff->instrumentNames.append(iname);
+                        }
+                  iname->setText(sn.name);
+                  iname->setLayoutPos(sn.pos);
+                  ++idx;
+                  }
+            }
       }
 
 //---------------------------------------------------------
@@ -544,37 +554,48 @@ int System::y2staff(qreal y) const
 void System::add(Element* el)
       {
       el->setParent(this);
-      ElementType et = el->type();
-      if (et == INSTRUMENT_NAME)
-            _staves[el->staffIdx()]->instrumentName = static_cast<Text*>(el);
-      else if (et == BEAM)
-            score()->add(el);
-      else if (et == BRACKET) {
-            SysStaff* ss = _staves[el->staffIdx()];
-            Bracket* b   = static_cast<Bracket*>(el);
-            int level    = b->level();
-            if (level == -1) {
-                  level = ss->brackets.size() - 1;
-                  if (level >= 0 && ss->brackets.last() == 0) {
-                        ss->brackets[level] = b;
+      switch(el->type()) {
+            case INSTRUMENT_NAME:
+                  _staves[el->staffIdx()]->instrumentNames.append(static_cast<InstrumentName*>(el));
+                  break;
+            case BEAM:
+                  score()->add(el);
+                  break;
+            case BRACKET:
+                  {
+                  SysStaff* ss = _staves[el->staffIdx()];
+                  Bracket* b   = static_cast<Bracket*>(el);
+                  int level    = b->level();
+                  if (level == -1) {
+                        level = ss->brackets.size() - 1;
+                        if (level >= 0 && ss->brackets.last() == 0) {
+                              ss->brackets[level] = b;
+                              }
+                        else {
+                              ss->brackets.append(b);
+                              level = ss->brackets.size() - 1;
+                              }
                         }
                   else {
-                        ss->brackets.append(b);
-                        level = ss->brackets.size() - 1;
+                        while (level >= ss->brackets.size())
+                              ss->brackets.append(0);
+                        ss->brackets[level] = b;
                         }
+                  b->staff()->setBracket(level,   b->subtype());
+                  b->staff()->setBracketSpan(level, b->span());
                   }
-            else {
-                  while (level >= ss->brackets.size())
-                        ss->brackets.append(0);
-                  ss->brackets[level] = b;
-                  }
-            b->staff()->setBracket(level,   b->subtype());
-            b->staff()->setBracketSpan(level, b->span());
+                  break;
+            case MEASURE:
+            case HBOX:
+            case VBOX:
+            case TBOX:
+            case FBOX:
+                  score()->addMeasure(static_cast<MeasureBase*>(el));
+                  break;
+            default:
+                  printf("System::add(%s) not implemented\n", el->name());
+                  break;
             }
-      else if (et == MEASURE || et == HBOX || et == VBOX || et == TBOX || et == FBOX)
-            score()->addMeasure((MeasureBase*)el);
-      else
-            printf("System::add(%s) not implemented\n", el->name());
       }
 
 //---------------------------------------------------------
@@ -583,26 +604,38 @@ void System::add(Element* el)
 
 void System::remove(Element* el)
       {
-      ElementType et = el->type();
-      if (et == INSTRUMENT_NAME)
-            _staves[el->staffIdx()]->instrumentName = 0;
-      else if (et == BEAM)
-            score()->remove(el);
-      else if (et == BRACKET) {
-            SysStaff* staff = _staves[el->staffIdx()];
-            for (int i = 0; i < staff->brackets.size(); ++i) {
-                  if (staff->brackets[i] == el) {
-                        staff->brackets[i] = 0;
-                        el->staff()->setBracket(i, NO_BRACKET);
-                        return;
+      switch (el->type()) {
+            case INSTRUMENT_NAME:
+                  _staves[el->staffIdx()]->instrumentNames.removeOne(static_cast<InstrumentName*>(el));
+                  break;
+            case BEAM:
+                  score()->remove(el);
+                  break;
+            case BRACKET:
+                  {
+                  SysStaff* staff = _staves[el->staffIdx()];
+                  for (int i = 0; i < staff->brackets.size(); ++i) {
+                        if (staff->brackets[i] == el) {
+                              staff->brackets[i] = 0;
+                              el->staff()->setBracket(i, NO_BRACKET);
+                              return;
+                              }
                         }
+                  printf("internal error: bracket not found\n");
                   }
-            printf("internal error: bracket not found\n");
+                  break;
+
+            case MEASURE:
+            case HBOX:
+            case VBOX:
+            case TBOX:
+            case FBOX:
+                  score()->remove(el);
+                  break;
+            default:
+                  printf("System::remove(%s) not implemented\n", el->name());
+                  break;
             }
-      else if (et == MEASURE || et == HBOX || et == VBOX || et == TBOX || et == FBOX)
-            score()->remove(el);
-      else
-            printf("System::remove(%s) not implemented\n", el->name());
       }
 
 //---------------------------------------------------------
@@ -707,7 +740,6 @@ MeasureBase* System::nextMeasure(const MeasureBase* m) const
 
 void System::layoutLyrics(Lyrics* l, Segment* s, int staffIdx)
       {
-//      if ((l->syllabic() == Lyrics::SINGLE || l->syllabic() == Lyrics::END) && (l->endTick() == 0)) {
       if ((l->syllabic() == Lyrics::SINGLE || l->syllabic() == Lyrics::END) && (l->ticks() == 0)) {
             l->clearSeparator();
             return;
@@ -854,8 +886,8 @@ void System::scanElements(void* data, void (*func)(void*, Element*))
                   if (b)
                         func(data, b);
                   }
-            if (st->instrumentName)
-                  func(data, st->instrumentName);
+            foreach(InstrumentName* t, st->instrumentNames)
+                  func(data, t);
             }
       }
 

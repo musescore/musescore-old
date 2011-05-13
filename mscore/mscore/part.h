@@ -57,8 +57,11 @@ class Part {
       void setId(const QString& s)              { _id = s; }
       QString id() const                        { return _id; }
 
-      const QTextDocumentFragment& longName(int tick = 0) const  { return instr(tick)->longName();  }
-      const QTextDocumentFragment& shortName(int tick = 0) const { return instr(tick)->shortName(); }
+      QTextDocumentFragment longName(int tick = 0) const;
+      QTextDocumentFragment shortName(int tick = 0) const;
+
+      const QList<StaffNameDoc>& longNames(int tick = 0) const  { return instr(tick)->longNames();  }
+      const QList<StaffNameDoc>& shortNames(int tick = 0) const { return instr(tick)->shortNames(); }
 
       void setLongName(const QTextDocumentFragment& s, int tick = 0);
       void setShortName(const QTextDocumentFragment& s, int tick = 0);
