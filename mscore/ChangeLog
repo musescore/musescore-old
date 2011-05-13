@@ -1,4 +1,5 @@
 13.may (ws)
+      - fix #10659: no sound in part
       - fix #10660: continue last session & panel enabled
       - more flexible instrument names
 12.may (ws)
