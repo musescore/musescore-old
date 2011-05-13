@@ -52,6 +52,7 @@
 #include "bend.h"
 #include "stem.h"
 #include "icons.h"
+#include "iname.h"
 
 extern bool useFactorySettings;
 
@@ -256,7 +257,11 @@ void Inspector::updateList(Score* s)
                   if (system->getBarLine())
                         new ElementItem(si, system->getBarLine());
 
-                  // SysStaffList* staffList = system->staves();
+
+                  foreach(SysStaff* ss, *system->staves()) {
+                        foreach(InstrumentName* in, ss->instrumentNames)
+                              new ElementItem(si, in);
+                        }
 
                   foreach (MeasureBase* mb, system->measures()) {
                         ElementItem* mi = new ElementItem(si, mb);

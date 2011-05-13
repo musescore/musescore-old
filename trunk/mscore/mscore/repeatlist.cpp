@@ -249,10 +249,14 @@ void RepeatList::unwind()
       int repeatCount    = 0;
       bool isGoto        = false;
 
-      for (Measure* m = _score->firstMeasure(); m; m = m->nextMeasure())
+      Measure* fm = _score->firstMeasure();
+      if (!fm)
+            return;
+
+      for (Measure* m = fm; m; m = m->nextMeasure())
             m->setPlaybackCount(0);
 
-      for (Measure* m = _score->firstMeasure(); m;) {
+      for (Measure* m = fm; m;) {
             m->setPlaybackCount(m->playbackCount() + 1);
             int flags = m->repeatFlags();
 

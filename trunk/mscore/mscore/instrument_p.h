@@ -28,8 +28,8 @@
 //---------------------------------------------------------
 
 class InstrumentData : public QSharedData {
-      QTextDocumentFragment _longName;
-      QTextDocumentFragment _shortName;
+      QList<StaffNameDoc> _longNames;
+      QList<StaffNameDoc> _shortNames;
       QString _trackName;
 
       char _minPitchA, _maxPitchA, _minPitchP, _maxPitchP;
@@ -82,6 +82,13 @@ class InstrumentData : public QSharedData {
       void setChannel(int i, const Channel& c)               { _channel[i] = c;   }
       Tablature* tablature() const;
       void setTablature(Tablature* t);    // move ownership of tablature to Instrument
+
+      void setLongName(const QTextDocumentFragment& f);
+      void setShortName(const QTextDocumentFragment& f);
+
+      void addLongName(const StaffNameDoc& f);
+      void addShortName(const StaffNameDoc& f);
+
 
       friend class Instrument;
       };

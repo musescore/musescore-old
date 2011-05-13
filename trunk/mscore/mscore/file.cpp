@@ -1775,7 +1775,6 @@ bool Score::read(QDomElement dScore)
             }
       slurs.clear();
       connectTies();
-//      setInstrumentNames();
 
       searchSelectedElements();
 

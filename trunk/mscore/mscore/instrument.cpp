@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2008-2010 Werner Schweer and others
+//  Copyright (C) 2008-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -150,8 +150,8 @@ InstrumentData::InstrumentData()
 InstrumentData::InstrumentData(const InstrumentData& i)
    : QSharedData(i)
       {
-      _longName     = i._longName;
-      _shortName    = i._shortName;
+      _longNames    = i._longNames;
+      _shortNames   = i._shortNames;
       _trackName    = i._trackName;
       _minPitchA    = i._minPitchA;
       _maxPitchA    = i._maxPitchA;
@@ -196,12 +196,16 @@ Tablature* InstrumentData::tablature() const
 void InstrumentData::write(Xml& xml) const
       {
       xml.stag("Instrument");
-      xml.stag("longName");
-      xml.writeHtml(_longName.toHtml());
-      xml.etag();
-      xml.stag("shortName");
-      xml.writeHtml(_shortName.toHtml());
-      xml.etag();
+      foreach(const StaffNameDoc& doc, _longNames) {
+            xml.stag(QString("longName pos=\"%1\"").arg(doc.pos));
+            xml.writeHtml(doc.name.toHtml());
+            xml.etag();
+            }
+      foreach(const StaffNameDoc& doc, _shortNames) {
+            xml.stag(QString("shortName pos=\"%1\"").arg(doc.pos));
+            xml.writeHtml(doc.name.toHtml());
+            xml.etag();
+            }
       xml.tag("trackName", _trackName);
       if (_minPitchP > 0)
             xml.tag("minPitchP", _minPitchP);
@@ -250,10 +254,16 @@ void InstrumentData::read(QDomElement e)
             QString val(e.text());
             int i = val.toInt();
 
-            if (tag == "longName")
-                  _longName = QTextDocumentFragment::fromHtml(Xml::htmlToString(e));
-            else if (tag == "shortName")
-                  _shortName = QTextDocumentFragment::fromHtml(Xml::htmlToString(e));
+            if (tag == "longName") {
+                  int pos = e.attribute("pos", "0").toInt();
+                  QTextDocumentFragment longName = QTextDocumentFragment::fromHtml(Xml::htmlToString(e));
+                  _longNames.append(StaffNameDoc(longName, pos));
+                  }
+            else if (tag == "shortName") {
+                  int pos = e.attribute("pos", "0").toInt();
+                  QTextDocumentFragment shortName = QTextDocumentFragment::fromHtml(Xml::htmlToString(e));
+                  _shortNames.append(StaffNameDoc(shortName, pos));
+                  }
             else if (tag == "trackName")
                   _trackName = val;
             else if (tag == "minPitch") {      // obsolete
@@ -624,6 +634,20 @@ void InstrumentData::updateVelocity(int* velocity, int channelIdx, const QString
 
 bool InstrumentData::operator==(const InstrumentData& i) const
       {
+      int n = _longNames.size();
+      if (i._longNames.size() != n)
+            return false;
+      for (int k = 0; k < n; ++k) {
+            if (!(i._longNames[k] == _longNames[k]))
+                  return false;
+            }
+      n = _shortNames.size();
+      if (i._shortNames.size() != n)
+            return false;
+      for (int k = 0; k < n; ++k) {
+            if (!(i._shortNames[k] == _shortNames[k].name))
+                  return false;
+            }
       return i._minPitchA == _minPitchA
          &&  i._maxPitchA == _maxPitchA
          &&  i._minPitchP == _minPitchP
@@ -634,11 +658,18 @@ bool InstrumentData::operator==(const InstrumentData& i) const
          &&  i._articulation == _articulation
          &&  i._transpose.diatonic == _transpose.diatonic
          &&  i._transpose.chromatic == _transpose.chromatic
-         &&  i._longName.toHtml() == _longName.toHtml()
-         &&  i._shortName.toHtml() == _shortName.toHtml()
          &&  i._trackName == _trackName
          &&  i.tablature() == tablature();
          ;
+      }
+
+//---------------------------------------------------------
+//   operator==
+//---------------------------------------------------------
+
+bool StaffNameDoc::operator==(const StaffNameDoc& i) const
+      {
+      return (i.pos == pos) && (i.name.toHtml() == name.toHtml());
       }
 
 //---------------------------------------------------------
@@ -677,6 +708,44 @@ void InstrumentData::setTablature(Tablature* t)
             _tablature = new Tablature(*t);
       else
             _tablature = 0;
+      }
+
+//---------------------------------------------------------
+//   setLongName
+//---------------------------------------------------------
+
+void InstrumentData::setLongName(const QTextDocumentFragment& f)
+      {
+      _longNames.clear();
+      _longNames.append(StaffNameDoc(f, 0));
+      }
+
+//---------------------------------------------------------
+//   setShortName
+//---------------------------------------------------------
+
+void InstrumentData::setShortName(const QTextDocumentFragment& f)
+      {
+      _shortNames.clear();
+      _shortNames.append(StaffNameDoc(f, 0));
+      }
+
+//---------------------------------------------------------
+//   addLongName
+//---------------------------------------------------------
+
+void InstrumentData::addLongName(const StaffNameDoc& f)
+      {
+      _longNames.append(f);
+      }
+
+//---------------------------------------------------------
+//   addShortName
+//---------------------------------------------------------
+
+void InstrumentData::addShortName(const StaffNameDoc& f)
+      {
+      _shortNames.append(f);
       }
 
 //---------------------------------------------------------
@@ -1050,27 +1119,27 @@ void InstrumentList::setInstrument(const Instrument& instr, int tick)
 //   longName
 //---------------------------------------------------------
 
-const QTextDocumentFragment& Instrument::longName() const
+const QList<StaffNameDoc>& Instrument::longNames() const
       {
-      return d->_longName;
+      return d->_longNames;
       }
 
 //---------------------------------------------------------
 //   shortName
 //---------------------------------------------------------
 
-const QTextDocumentFragment& Instrument::shortName() const
+const QList<StaffNameDoc>& Instrument::shortNames() const
       {
-      return d->_shortName;
+      return d->_shortNames;
       }
 
 //---------------------------------------------------------
 //   longName
 //---------------------------------------------------------
 
-QTextDocumentFragment& Instrument::longName()
+QList<StaffNameDoc>& Instrument::longNames()
       {
-      return d->_longName;
+      return d->_longNames;
       }
 
 //---------------------------------------------------------
@@ -1079,7 +1148,25 @@ QTextDocumentFragment& Instrument::longName()
 
 void Instrument::setLongName(const QTextDocumentFragment& f)
       {
-      d->_longName = f;
+      d->setLongName(f);
+      }
+
+//---------------------------------------------------------
+//   addLongName
+//---------------------------------------------------------
+
+void Instrument::addLongName(const StaffNameDoc& f)
+      {
+      d->addLongName(f);
+      }
+
+//---------------------------------------------------------
+//   addShortName
+//---------------------------------------------------------
+
+void Instrument::addShortName(const StaffNameDoc& f)
+      {
+      d->addShortName(f);
       }
 
 //---------------------------------------------------------
@@ -1088,16 +1175,16 @@ void Instrument::setLongName(const QTextDocumentFragment& f)
 
 void Instrument::setShortName(const QTextDocumentFragment& f)
       {
-      d->_shortName = f;
+      d->setShortName(f);
       }
 
 //---------------------------------------------------------
 //   shortName
 //---------------------------------------------------------
 
-QTextDocumentFragment& Instrument::shortName()
+QList<StaffNameDoc>& Instrument::shortNames()
       {
-      return d->_shortName;
+      return d->_shortNames;
       }
 
 //---------------------------------------------------------
@@ -1123,8 +1210,10 @@ Instrument Instrument::fromTemplate(const InstrumentTemplate* t)
       Instrument instr;
       instr.setAmateurPitchRange(t->minPitchA, t->maxPitchA);
       instr.setProfessionalPitchRange(t->minPitchP, t->maxPitchP);
-      instr.longName() = parseInstrName(t->longName);
-      instr.shortName() = parseInstrName(t->shortName);
+      foreach(StaffName sn, t->longNames)
+            instr.addLongName(StaffNameDoc(parseInstrName(sn.name), sn.pos));
+      foreach(StaffName sn, t->shortNames)
+            instr.addShortName(StaffNameDoc(parseInstrName(sn.name), sn.pos));
       instr.setTrackName(t->trackName);
       instr.setTranspose(t->transpose);
       if (t->useDrumset) {

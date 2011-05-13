@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -38,6 +38,7 @@ class Lyrics;
 class Segment;
 class MeasureBase;
 class Text;
+class InstrumentName;
 
 //---------------------------------------------------------
 //   SysStaff
@@ -56,7 +57,7 @@ class SysStaff {
    public:
       int idx;
       QList<Bracket*> brackets;
-      Text* instrumentName;
+      QList<InstrumentName*> instrumentNames;
 
       const QRectF& bbox() const     { return _bbox; }
       QRectF& rbb()                  { return _bbox; }
@@ -97,7 +98,6 @@ class System : public Element {
 
       bool _vbox;             ///< contains only one VBox in ml
 
-      void setInstrumentName(int staff, bool longName);
       void setDistanceUp(int n, Spatium v)   { _staves[n]->setDistanceUp(v); }
       void setDistanceDown(int n, Spatium v) { _staves[n]->setDistanceDown(v); }
 

@@ -31,6 +31,29 @@ class Drumset;
 class Tablature;
 
 //---------------------------------------------------------
+//   StaffName
+//---------------------------------------------------------
+
+struct StaffName {
+      QString name;
+      int pos;          // even number -> between staves
+
+      StaffName(const QString& s, int p=0) : name(s), pos(p) {}
+      };
+
+//---------------------------------------------------------
+//   StaffNameDoc
+//---------------------------------------------------------
+
+struct StaffNameDoc {
+      QTextDocumentFragment name;
+      int pos;          // even number -> between staves
+
+      StaffNameDoc(const QTextDocumentFragment& s, int p=0) : name(s), pos(p) {}
+      bool operator==(const StaffNameDoc&) const;
+      };
+
+//---------------------------------------------------------
 //   NamedEventList
 //---------------------------------------------------------
 
@@ -154,12 +177,14 @@ class Instrument {
       void setTablature(Tablature* t);
       static Instrument fromTemplate(const InstrumentTemplate*);
 
-      const QTextDocumentFragment& longName() const;
-      const QTextDocumentFragment& shortName() const;
-      QTextDocumentFragment& longName();
-      QTextDocumentFragment& shortName();
+      const QList<StaffNameDoc>& longNames() const;
+      const QList<StaffNameDoc>& shortNames() const;
+      QList<StaffNameDoc>& longNames();
+      QList<StaffNameDoc>& shortNames();
       void setLongName(const QTextDocumentFragment&);
       void setShortName(const QTextDocumentFragment&);
+      void addLongName(const StaffNameDoc& f);
+      void addShortName(const StaffNameDoc& f);
 
       QString trackName() const;
       void setTrackName(const QString&);
