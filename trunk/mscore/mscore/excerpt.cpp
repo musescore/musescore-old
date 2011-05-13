@@ -99,15 +99,12 @@ static void localSetScore(void* score, Element* element)
 
 Score* createExcerpt(const QList<Part*>& parts)
       {
-printf("createExcerpt\n");
-
       if (parts.isEmpty())
             return 0;
       QList<int> srcStaves;
 
       Score* oscore = parts.front()->score();
-      Score* score = new Score(oscore->style());
-      score->setParentScore(oscore);
+      Score* score = new Score(oscore);
       foreach (Part* part, parts) {
             Part* p = new Part(score);
             p->setInstrument(*part->instr());

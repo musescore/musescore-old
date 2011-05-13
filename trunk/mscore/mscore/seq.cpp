@@ -97,7 +97,6 @@ Seq::Seq()
 
       heartBeatTimer = new QTimer(this);
       connect(heartBeatTimer, SIGNAL(timeout()), this, SLOT(heartBeat()));
-//      heartBeatTimer->start(1000/guiRefresh);
 
       noteTimer = new QTimer(this);
       noteTimer->setSingleShot(true);
@@ -140,6 +139,7 @@ void Seq::stopWait()
 void Seq::setScoreView(ScoreView* v)
       {
       if (cv !=v && cs) {
+            cs->setSyntiState();
             disconnect(cs, SIGNAL(selectionChanged(int)), this, SLOT(selectionChanged(int)));
             markedNotes.clear();
             stopWait();
@@ -153,8 +153,11 @@ void Seq::setScoreView(ScoreView* v)
       playlistChanged = true;
       synti->reset();
       if (cs) {
+printf("setScore %p\n", cs);
             connect(cs, SIGNAL(selectionChanged(int)), SLOT(selectionChanged(int)));
+            synti->setState(cs->syntiState());
             initInstruments();
+            seek(cs->playPos());
             }
       }
 
@@ -732,6 +735,7 @@ void Seq::heartBeat()
       double endTime = curTime() - startTime;
       if (pp)
             pp->heartBeat2(lrint(endTime));
+
       const Note* note = 0;
       for (; guiPos != events.constEnd(); ++guiPos) {
             double f = cs->utick2utime(guiPos.key());

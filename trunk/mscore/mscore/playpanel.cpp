@@ -89,16 +89,19 @@ void PlayPanel::setScore(Score* s)
             Measure* m = cs->lastMeasure();
             if (m)
                   setEndpos(m ? m->tick() + m->ticks() : 0);
+            int tick = cs->playPos();
+            heartBeat(tick, tick);
             }
       else {
             setTempo(120.0);
             setRelTempo(100);
             setEndpos(0);
+            heartBeat(0, 0);
             }
-      heartBeat2(seq->getCurTime());
-      int tick, utick;
-      seq->getCurTick(&tick, &utick);
-      heartBeat(tick, utick);
+//      heartBeat2(seq->getCurTime());
+//      int tick, utick;
+//      seq->getCurTick(&tick, &utick);
+//      heartBeat(tick, utick);
       update();
       }
 

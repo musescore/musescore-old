@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2010 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -391,6 +391,7 @@ Score::Score(Score* parent)
       _showOmr        = false;
       _sigmap         = 0;
       _tempomap       = 0;
+      _syntiState     = parent->_syntiState;
       }
 
 //---------------------------------------------------------
