@@ -58,6 +58,7 @@ void Hook::setSubtype(int i)
             }
       }
 
+#if 0
 //---------------------------------------------------------
 //   setVisible
 //---------------------------------------------------------
@@ -69,3 +70,5 @@ void Hook::setVisible(bool f)
       if (chord && chord->stem() && chord->stem()->visible() != f)
             chord->stem()->setVisible(f);
       }
+#endif
+

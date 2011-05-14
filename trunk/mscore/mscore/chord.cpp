@@ -314,8 +314,6 @@ void Chord::add(Element* e)
                   break;
             case HOOK:
                   _hook = static_cast<Hook*>(e);
-                  if (_stem)        // should always be true
-                        _hook->setVisible(_stem->visible());
                   break;
             case CHORDLINE:
                   _el.append(e);
@@ -638,11 +636,10 @@ void Chord::write(Xml& xml) const
             }
       if (_noStem)
             xml.tag("noStem", _noStem);
-      else if (_stem) {
-
-            if (!_stem->userOff().isNull() || (_stem->userLen().val() != 0.0) || !_stem->visible() || (_stem->color() != preferences.defaultColor))
-                  _stem->write(xml);
-            }
+      else if (_stem && (!_stem->userOff().isNull() || (_stem->userLen().val() != 0.0) || !_stem->visible() || (_stem->color() != preferences.defaultColor)))
+            _stem->write(xml);
+      if (_hook && (!_hook->visible() || !_hook->userOff().isNull() || (_hook->color() != preferences.defaultColor)))
+            _hook->write(xml);
       switch(_stemDirection) {
             case UP:   xml.tag("StemDirection", QVariant("up")); break;
             case DOWN: xml.tag("StemDirection", QVariant("down")); break;
@@ -799,6 +796,11 @@ void Chord::read(QDomElement e, const QList<Tuplet*>& tuplets, QList<Slur*>* slu
                   _stem = new Stem(score());
                   _stem->read(e);
                   add(_stem);
+                  }
+            else if (tag == "Hook") {
+                  _hook = new Hook(score());
+                  _hook->read(e);
+                  add(_hook);
                   }
             else if (tag == "ChordLine") {
                   ChordLine* cl = new ChordLine(score());
