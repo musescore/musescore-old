@@ -100,6 +100,7 @@ void Stem::read(QDomElement e)
             }
       }
 
+#if 0
 //---------------------------------------------------------
 //   setVisible
 //---------------------------------------------------------
@@ -111,6 +112,7 @@ void Stem::setVisible(bool f)
       if (chord && chord->hook() && chord->hook()->visible() != f)
             chord->hook()->setVisible(f);
       }
+#endif
 
 //---------------------------------------------------------
 //   bbox

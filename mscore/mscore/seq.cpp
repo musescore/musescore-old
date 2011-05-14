@@ -153,7 +153,6 @@ void Seq::setScoreView(ScoreView* v)
       playlistChanged = true;
       synti->reset();
       if (cs) {
-printf("setScore %p\n", cs);
             connect(cs, SIGNAL(selectionChanged(int)), SLOT(selectionChanged(int)));
             synti->setState(cs->syntiState());
             initInstruments();
