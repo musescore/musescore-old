@@ -1,4 +1,6 @@
 14.may (ws)
+      - change tuplet numbers to italic and increase size from 8pt to 10pt to distinguish
+        them better from fingering numbers
       - fix #8698: unable to make invisible flag without making also stem invisible
       - fix #7460: Soundfont disabled when resetting preferences
       - more beam tweaking

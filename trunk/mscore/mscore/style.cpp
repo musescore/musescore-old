@@ -306,7 +306,7 @@ void setDefaultStyle(Style* s)
       AS(TextStyle(TR( "Translator"), ff, 11, false, false, false,
          ALIGN_HCENTER | ALIGN_TOP, 0, 6));
 
-      AS(TextStyle(TR( "Tuplets"), ff,  8, false, false, false,
+      AS(TextStyle(TR( "Tuplets"), ff,  10, false, true, false,
          ALIGN_CENTER, 0.0, 0.0, OA, 0.0, 0.0, true));
 
       AS(TextStyle(TR( "System"), ff,  10, false, false, false,
