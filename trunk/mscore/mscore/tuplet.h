@@ -73,7 +73,6 @@ class Tuplet : public DurationElement {
 
       virtual bool genPropertyMenu(QMenu* menu) const;
       virtual void propertyAction(ScoreView*, const QString&);
-      virtual void setSelected(bool f);
 
    public:
       Tuplet(Score*);
@@ -89,6 +88,8 @@ class Tuplet : public DurationElement {
       virtual bool isEditable() const;
       virtual void editDrag(const EditData&);
       virtual void updateGrips(int*, QRectF*) const;
+
+      virtual void setSelected(bool f);
 
       virtual Measure* measure() const { return (Measure*)parent(); }
 

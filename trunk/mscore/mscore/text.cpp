@@ -49,6 +49,7 @@ TextPalette* textPalette;
 Text::Text(Score* s)
    : Element(s)
       {
+      _useSelectionColor = false;
       _doc = new QTextDocument(0);
       _doc->setDocumentMargin(1.0);
       _doc->setUseDesignMetrics(true);
@@ -73,6 +74,7 @@ Text::Text(Score* s)
 Text::Text(const Text& e)
    : Element(e)
       {
+      _useSelectionColor    = e._useSelectionColor;
       _doc                  = e._doc->clone();
       frame                 = e.frame;
       _styled               = e._styled;
@@ -406,11 +408,14 @@ void Text::draw(Painter* painter) const
                   }
             c.cursorPosition = cursor->position();
             }
-//      QColor color(
-//            (selected() && !(score() && score()->printing()))
-//            ? preferences.selectColor[0] : style().foregroundColor()
-//            );
-      QColor color(visible() ? style().foregroundColor() : Qt::gray);
+      QColor color;
+      if (_useSelectionColor && !(score() && score()->printing())) {
+            color = QColor(
+               (selected() && !(score() && score()->printing()))
+               ? preferences.selectColor[0] : style().foregroundColor());
+            }
+      else
+            color = QColor(visible() ? style().foregroundColor() : Qt::gray);
       c.palette.setColor(QPalette::Text, color);
 
       _doc->documentLayout()->draw(&p, c);

@@ -88,6 +88,7 @@ void Tuplet::layout()
       if (_numberType != NO_TEXT) {
             if (_number == 0) {
                   _number = new Text(score());
+                  _number->setUseSelectionColor(true);
                   _number->setSubtype(TEXT_TUPLET);
                   _number->setTextStyle(TEXT_STYLE_TUPLET);
                   _number->setParent(this);
@@ -524,6 +525,7 @@ void Tuplet::read(QDomElement e, const QList<Tuplet*>& tuplets, const QList<Slur
                   _ratio.setNumerator(i);
             else if (tag == "Number") {
                   _number = new Text(score());
+                  _number->setUseSelectionColor(true);
                   _number->setParent(this);
                   _number->read(e);
                   _number->setSubtype(TEXT_TUPLET);   // override read
