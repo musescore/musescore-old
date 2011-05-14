@@ -568,9 +568,17 @@ void Sym::draw(QPainter& painter, double mag, qreal x, qreal y, int n) const
 //    for QDocument->setHtml()
 //---------------------------------------------------------
 
-QString symToHtml(const Sym& s, int leftMargin)
+QString symToHtml(const Sym& s, int leftMargin, const TextStyle* ts, double _spatium)
       {
-      double size    = s.font().pixelSize() * 72.0 / DPI;
+      double size;
+      if (ts) {
+            size = ts->fontPx(_spatium).pixelSize();
+            }
+      else {
+            size = s.font().pixelSize();
+            }
+      size = size * 72.0 / DPI;
+
       QString family = s.font().family();
       return QString(
       "<data>"
