@@ -143,7 +143,6 @@ Preferences preferences;
 
 Preferences::Preferences()
       {
-      init();
       }
 
 //---------------------------------------------------------
@@ -172,6 +171,9 @@ void Preferences::init()
 
       enableMidiInput    = true;
       playNotes          = true;
+      soundFont          = mscoreGlobalShare + "sound/TimGM6mb.sf2";
+      lPort              = "";
+      rPort              = "";
 
       showNavigator      = true;
       showPlayPanel      = false;
@@ -189,19 +191,23 @@ void Preferences::init()
       usePortaudioAudio  = false;
       useJackMidi        = false;
 #endif
+
+      midiPorts          = 2;
+      rememberLastMidiConnections = true;
+
       alsaDevice         = "default";
       alsaSampleRate     = 48000;
       alsaPeriodSize     = 1024;
       alsaFragments      = 3;
       portaudioDevice    = -1;
-      midiPorts          = 2;
-      rememberLastMidiConnections = true;
+      portMidiInput      = "";
 
       layoutBreakColor         = Qt::green;
       antialiasedDrawing       = true;
       sessionStart             = SCORE_SESSION;
       startScore               = ":/data/Promenade_Example.mscx";
       workingDirectory         = QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation);
+      defaultStyle             = "";
       showSplashScreen         = true;
 
       useMidiRemote      = false;
@@ -220,8 +226,8 @@ void Preferences::init()
       pngTransparent           = true;
       language                 = "system";
 
-      replaceCopyrightSymbol  = true;
       replaceFractions        = true;
+      replaceCopyrightSymbol  = true;
 
       paperSize               = QPrinter::A4;     // default paper size
       paperWidth              = 1.0;
@@ -230,6 +236,9 @@ void Preferences::init()
       twosided                = true;
       spatium                 = SPATIUM20;
       mag                     = 1.0;
+
+      checkUpdateStartup      = 0;
+
       tuning                  = 440.0f;
       masterGain              = 0.2;
       chorusGain              = 0.5;
@@ -242,14 +251,15 @@ void Preferences::init()
       warnPitchRange          = true;
       followSong              = true;
       importCharset           = "GBK";
-
-      //update
-      checkUpdateStartup      = 0;
+      importStyleFile         = "";
 
       useOsc                  = false;
       oscPort                 = 5282;
       appStyleFile            = ":/data/appstyle-dark.css";
       singlePalette           = false;
+
+      styleName               = "dark";   // ??
+      globalStyle             = STYLE_DARK;
 
       myScoresPath            = "MyScores";
       myStylesPath            = "MuseScore/MyStyles";
@@ -265,10 +275,9 @@ void Preferences::init()
       hRaster                 = 2;        // _spatium / value
       vRaster                 = 2;
       nativeDialogs           = false;    // use system native file dialogs
+      exportAudioSampleRate   = exportAudioSampleRates[0];
 
       profile                 = "default";
-
-      exportAudioSampleRate   = exportAudioSampleRates[0];
       };
 
 //---------------------------------------------------------
@@ -415,103 +424,97 @@ void Preferences::write()
 
 void Preferences::read()
       {
+      init();
       QSettings s;
 
-      bgUseColor      = s.value("bgUseColor", true).toBool();
-      fgUseColor      = s.value("fgUseColor", false).toBool();
-      bgWallpaper     = s.value("bgWallpaper").toString();
-      fgWallpaper     = s.value("fgWallpaper", ":/data/paper5.png").toString();
-      fgColor         = s.value("fgColor", QColor(255, 255, 255)).value<QColor>();
-      bgColor         = s.value("bgColor", QColor(0x76, 0x76, 0x6e)).value<QColor>();
-      iconHeight      = s.value("iconHeight").toInt();
-      iconWidth       = s.value("iconWidth").toInt();
+      bgUseColor      = s.value("bgUseColor", bgUseColor).toBool();
+      fgUseColor      = s.value("fgUseColor", fgUseColor).toBool();
+      bgWallpaper     = s.value("bgWallpaper", bgWallpaper).toString();
+      fgWallpaper     = s.value("fgWallpaper", fgWallpaper).toString();
+      fgColor         = s.value("fgColor", fgColor).value<QColor>();
+      bgColor         = s.value("bgColor", bgColor).value<QColor>();
+      iconHeight      = s.value("iconHeight", iconHeight).toInt();
+      iconWidth       = s.value("iconWidth", iconWidth).toInt();
 
-      selectColor[0]  = s.value("selectColor1", QColor(Qt::blue)).value<QColor>();     //blue
-      selectColor[1]  = s.value("selectColor2", QColor(0, 150, 0)).value<QColor>();    //green
-      selectColor[2]  = s.value("selectColor3", QColor(230, 180, 50)).value<QColor>(); //yellow
-      selectColor[3]  = s.value("selectColor4", QColor(200, 0, 200)).value<QColor>();  //purple
+      selectColor[0]  = s.value("selectColor1", selectColor[0]).value<QColor>();
+      selectColor[1]  = s.value("selectColor2", selectColor[1]).value<QColor>();
+      selectColor[2]  = s.value("selectColor3", selectColor[2]).value<QColor>();
+      selectColor[3]  = s.value("selectColor4", selectColor[3]).value<QColor>();
 
-      defaultColor    = s.value("defaultColor", QColor(Qt::black)).value<QColor>();
-      dropColor       = s.value("dropColor",    QColor(Qt::red)).value<QColor>();
+      defaultColor    = s.value("defaultColor", defaultColor).value<QColor>();
+      dropColor       = s.value("dropColor",    dropColor).value<QColor>();
 
-      enableMidiInput = s.value("enableMidiInput", true).toBool();
-      playNotes       = s.value("playNotes", true).toBool();
-      lPort           = s.value("lPort").toString();
-      rPort           = s.value("rPort").toString();
+      enableMidiInput = s.value("enableMidiInput", enableMidiInput).toBool();
+      playNotes       = s.value("playNotes", playNotes).toBool();
+      lPort           = s.value("lPort", lPort).toString();
+      rPort           = s.value("rPort", rPort).toString();
 
-      soundFont       = s.value("soundFont", mscoreGlobalShare+"/sound/TimGM6mb.sf2").toString();
+      soundFont       = s.value("soundFont", soundFont).toString();
       if (soundFont == ":/data/piano1.sf2") {
             // silently change to new default sound font
-            soundFont = mscoreGlobalShare + "/sound/TimGM6mb.sf2";
+            soundFont = mscoreGlobalShare + "sound/TimGM6mb.sf2";
             }
-      showNavigator   = s.value("showNavigator", true).toBool();
-      showStatusBar   = s.value("showStatusBar", true).toBool();
-      showPlayPanel   = s.value("showPlayPanel", false).toBool();
+      showNavigator   = s.value("showNavigator", showNavigator).toBool();
+      showStatusBar   = s.value("showStatusBar", showStatusBar).toBool();
+      showPlayPanel   = s.value("showPlayPanel", showPlayPanel).toBool();
 
-#if defined(Q_WS_MAC) || defined(__MINGW32__)
-      useAlsaAudio       = s.value("useAlsaAudio", false).toBool();
-      useJackAudio       = s.value("useJackAudio", false).toBool();
-      useJackMidi        = s.value("useJackMidi",  false).toBool();
-      usePortaudioAudio  = s.value("usePortaudioAudio", true).toBool();
-#else
-      useAlsaAudio       = s.value("useAlsaAudio", true).toBool();
-      useJackAudio       = s.value("useJackAudio", false).toBool();
-      useJackMidi        = s.value("useJackMidi",  false).toBool();
-      usePortaudioAudio  = s.value("usePortaudioAudio", false).toBool();
-#endif
+      useAlsaAudio       = s.value("useAlsaAudio", useAlsaAudio).toBool();
+      useJackAudio       = s.value("useJackAudio", useJackAudio).toBool();
+      useJackMidi        = s.value("useJackMidi",  useJackMidi).toBool();
+      usePortaudioAudio  = s.value("usePortaudioAudio", usePortaudioAudio).toBool();
 
-      alsaDevice         = s.value("alsaDevice", "default").toString();
-      alsaSampleRate     = s.value("alsaSampleRate", 48000).toInt();
-      alsaPeriodSize     = s.value("alsaPeriodSize", 1024).toInt();
-      alsaFragments      = s.value("alsaFragments", 3).toInt();
-      portaudioDevice    = s.value("portaudioDevice", -1).toInt();
-      portMidiInput      = s.value("portMidiInput", "").toString();
-      layoutBreakColor   = s.value("layoutBreakColor", QColor(Qt::green)).value<QColor>();
-      antialiasedDrawing = s.value("antialiasedDrawing", true).toBool();
+      alsaDevice         = s.value("alsaDevice", alsaDevice).toString();
+      alsaSampleRate     = s.value("alsaSampleRate", alsaSampleRate).toInt();
+      alsaPeriodSize     = s.value("alsaPeriodSize", alsaPeriodSize).toInt();
+      alsaFragments      = s.value("alsaFragments", alsaFragments).toInt();
+      portaudioDevice    = s.value("portaudioDevice", portaudioDevice).toInt();
+      portMidiInput      = s.value("portMidiInput", portMidiInput).toString();
+      layoutBreakColor   = s.value("layoutBreakColor", layoutBreakColor).value<QColor>();
+      antialiasedDrawing = s.value("antialiasedDrawing", antialiasedDrawing).toBool();
 
-      QString path = QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation);
-      workingDirectory   = s.value("workingDirectory", path).toString();
-      defaultStyle       = s.value("defaultStyle").toString();
+      workingDirectory   = s.value("workingDirectory", workingDirectory).toString();
+      defaultStyle       = s.value("defaultStyle", defaultStyle).toString();
 
-      showSplashScreen         = s.value("showSplashScreen", true).toBool();
-      midiExpandRepeats        = s.value("midiExpandRepeats", true).toBool();
-      playRepeats              = s.value("playRepeats", true).toBool();
-      alternateNoteEntryMethod = s.value("alternateNoteEntry", false).toBool();
-      midiPorts                = s.value("midiPorts", 2).toInt();
-      rememberLastMidiConnections = s.value("rememberLastMidiConnections", true).toBool();
-      proximity                = s.value("proximity", 6).toInt();
-      autoSave                 = s.value("autoSave", true).toBool();
-      autoSaveTime             = s.value("autoSaveTime", 2).toInt();
-      pngResolution            = s.value("pngResolution", 300.0).toDouble();
-      pngTransparent           = s.value("pngTransparent", true).toBool();
-      language                 = s.value("language", "system").toString();
+      showSplashScreen         = s.value("showSplashScreen", showSplashScreen).toBool();
+      midiExpandRepeats        = s.value("midiExpandRepeats", midiExpandRepeats).toBool();
+      playRepeats              = s.value("playRepeats", playRepeats).toBool();
+      alternateNoteEntryMethod = s.value("alternateNoteEntry", alternateNoteEntryMethod).toBool();
+      midiPorts                = s.value("midiPorts", midiPorts).toInt();
+      rememberLastMidiConnections = s.value("rememberLastMidiConnections", rememberLastMidiConnections).toBool();
+      proximity                = s.value("proximity", proximity).toInt();
+      autoSave                 = s.value("autoSave", autoSave).toBool();
+      autoSaveTime             = s.value("autoSaveTime", autoSaveTime).toInt();
+      pngResolution            = s.value("pngResolution", pngResolution).toDouble();
+      pngTransparent           = s.value("pngTransparent", pngTransparent).toBool();
+      language                 = s.value("language", language).toString();
 
-      replaceFractions = s.value("replaceFractions", true).toBool();
-      replaceCopyrightSymbol = s.value("replaceCopyrightSymbol", true).toBool();
-      paperSize              = QPrinter::PageSize(s.value("paperSize", QPrinter::A4).toInt());
-      paperWidth             = s.value("paperWidth", 1.0).toDouble();
-      paperHeight            = s.value("paperHeight", 1.0).toDouble();
-      landscape              = s.value("landscape", false).toBool();
-      twosided               = s.value("twosided", true).toBool();
-      spatium                = s.value("spatium", SPATIUM20).toDouble();
-      mag                    = s.value("mag", 1.0).toDouble();
-      tuning                 = s.value("tuning", 440.0).toDouble();
-      masterGain             = s.value("masterGain", 0.2).toDouble();
-      chorusGain             = s.value("chorusGain", 0.5).toDouble();
-      reverbGain             = s.value("reverbGain", 0.5).toDouble();
-      reverbRoomSize         = s.value("reverbRoomSize", 0.5).toDouble();
-      reverbDamp             = s.value("reverbDamp", 0.5).toDouble();
-      reverbWidth            = s.value("reverbWidth", 1.0).toDouble();
+      replaceFractions = s.value("replaceFractions", replaceFractions).toBool();
+      replaceCopyrightSymbol = s.value("replaceCopyrightSymbol", replaceCopyrightSymbol).toBool();
+      paperSize              = QPrinter::PageSize(s.value("paperSize", paperSize).toInt());
+      paperWidth             = s.value("paperWidth", paperWidth).toDouble();
+      paperHeight            = s.value("paperHeight", paperWidth).toDouble();
+      landscape              = s.value("landscape", landscape).toBool();
+      twosided               = s.value("twosided", twosided).toBool();
+      spatium                = s.value("spatium", spatium).toDouble();
+      mag                    = s.value("mag", mag).toDouble();
 
-      defaultPlayDuration    = s.value("defaultPlayDuration", 300).toInt();
-      importStyleFile        = s.value("importStyleFile", "").toString();
-      importCharset          = s.value("importCharset", "GBK").toString();
-      warnPitchRange         = s.value("warnPitchRange", true).toBool();
-      followSong             = s.value("followSong", true).toBool();
+      tuning                 = s.value("tuning", tuning).toDouble();
+      masterGain             = s.value("masterGain",     masterGain).toDouble();
+      chorusGain             = s.value("chorusGain",     chorusGain).toDouble();
+      reverbGain             = s.value("reverbGain",     reverbGain).toDouble();
+      reverbRoomSize         = s.value("reverbRoomSize", reverbRoomSize).toDouble();
+      reverbDamp             = s.value("reverbDamp",     reverbDamp).toDouble();
+      reverbWidth            = s.value("reverbWidth",    reverbWidth).toDouble();
 
-      useOsc                 = s.value("useOsc", false).toBool();
-      oscPort                = s.value("oscPort", 5282).toInt();
-      styleName              = s.value("style", "dark").toString();
+      defaultPlayDuration    = s.value("defaultPlayDuration", defaultPlayDuration).toInt();
+      importStyleFile        = s.value("importStyleFile", importStyleFile).toString();
+      importCharset          = s.value("importCharset", importCharset).toString();
+      warnPitchRange         = s.value("warnPitchRange", warnPitchRange).toBool();
+      followSong             = s.value("followSong", followSong).toBool();
+
+      useOsc                 = s.value("useOsc", useOsc).toBool();
+      oscPort                = s.value("oscPort", oscPort).toInt();
+      styleName              = s.value("style", styleName).toString();
       if (styleName == "light") {
             iconGroup = "icons/";
             appStyleFile = ":/data/appstyle-light.css";
@@ -527,26 +530,25 @@ void Preferences::read()
             appStyleFile = ":/data/appstyle.css";
             globalStyle  = STYLE_NATIVE;
             }
-      singlePalette    = s.value("singlePalette", false).toBool();
-      myScoresPath     = s.value("myScoresPath", "MyScores").toString();
-      myStylesPath     = s.value("myStylesPath", "MuseScore/MyStyles").toString();
-      myImagesPath     = s.value("myImagesPath", "MuseScore/MyImages").toString();
-      myTemplatesPath  = s.value("myTemplatesPath", "MuseScore/MyTemplates").toString();
-      myPluginsPath    = s.value("myPluginsPath", "MuseScore/MyPlugins").toString();
-      mySoundFontsPath = s.value("mySoundFontsPath", "MuseScore/MySoundFonts").toString();
+      singlePalette    = s.value("singlePalette",    singlePalette).toBool();
+      myScoresPath     = s.value("myScoresPath",     myScoresPath).toString();
+      myStylesPath     = s.value("myStylesPath",     myStylesPath).toString();
+      myImagesPath     = s.value("myImagesPath",     myImagesPath).toString();
+      myTemplatesPath  = s.value("myTemplatesPath",  myTemplatesPath).toString();
+      myPluginsPath    = s.value("myPluginsPath",    myPluginsPath).toString();
+      mySoundFontsPath = s.value("mySoundFontsPath", mySoundFontsPath).toString();
 
-      hRaster          = s.value("hraster", "2").toInt();
-      vRaster          = s.value("vraster", "2").toInt();
+      hRaster          = s.value("hraster", hRaster).toInt();
+      vRaster          = s.value("vraster", vRaster).toInt();
 
-      nativeDialogs    = s.value("nativeDialogs", false).toBool();
-      exportAudioSampleRate = s.value("exportAudioSampleRate", exportAudioSampleRates[0]).toInt();
+      nativeDialogs    = s.value("nativeDialogs", nativeDialogs).toBool();
+      exportAudioSampleRate = s.value("exportAudioSampleRate", exportAudioSampleRate).toInt();
 
-      profile          = s.value("profile", "default").toString();
+      profile          = s.value("profile", profile).toString();
 
-      checkUpdateStartup = s.value("checkUpdateStartup", UpdateChecker::defaultPeriod()).toInt();
-      if (checkUpdateStartup == 0) {
+      checkUpdateStartup = s.value("checkUpdateStartup", checkUpdateStartup).toInt();
+      if (checkUpdateStartup == 0)
             checkUpdateStartup = UpdateChecker::defaultPeriod();
-            }
 
       QString ss(s.value("sessionStart", "score").toString());
       if (ss == "last")
@@ -558,10 +560,10 @@ void Preferences::read()
       else if (ss == "empty")
             sessionStart = EMPTY_SESSION;
 
-      startScore     = s.value("startScore", ":/data/Promenade_Example.mscx").toString();
-      instrumentList = s.value("instrumentList", ":/data/instruments.xml").toString();
+      startScore     = s.value("startScore", startScore).toString();
+      instrumentList = s.value("instrumentList", instrumentList).toString();
 
-      useMidiRemote  = s.value("useMidiRemote", false).toBool();
+      useMidiRemote  = s.value("useMidiRemote", useMidiRemote).toBool();
       for (int i = 0; i < MIDI_REMOTES; ++i) {
             QString data = s.value(QString("remote%1").arg(i)).toString();
             if (data.isEmpty())
@@ -578,7 +580,7 @@ void Preferences::read()
             }
 
       s.beginGroup("PlayPanel");
-      playPanelPos = s.value("pos", QPoint(100, 300)).toPoint();
+      playPanelPos = s.value("pos", playPanelPos).toPoint();
       s.endGroup();
 
       readShortcuts();
@@ -1555,6 +1557,8 @@ QAction* getAction(Shortcut* s)
 void PreferenceDialog::resetAllValues()
       {
       Preferences prefs;
+      prefs.init();
+
       updateValues(&prefs);
 
       shortcutsChanged = true;

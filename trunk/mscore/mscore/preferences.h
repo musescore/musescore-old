@@ -105,9 +105,9 @@ struct Preferences {
       MidiRemote midiRemote[MIDI_REMOTES];
 
       bool midiExpandRepeats;
-
       bool playRepeats;
       QString instrumentList; // file path of instrument templates
+
       bool alternateNoteEntryMethod;
       int proximity;          // proximity for selecting elements on canvas
       bool autoSave;
@@ -115,6 +115,7 @@ struct Preferences {
       double pngResolution;
       bool pngTransparent;
       QString language;
+
       bool replaceFractions;
       bool replaceCopyrightSymbol;
       QPrinter::PageSize paperSize;
@@ -136,10 +137,11 @@ struct Preferences {
       float reverbWidth;
 
       int defaultPlayDuration;      // len of note play during note entry
-      QString importStyleFile;
-      QString importCharset;
       bool warnPitchRange;
       bool followSong;
+      QString importCharset;
+      QString importStyleFile;
+
       bool useOsc;
       int oscPort;
       bool singlePalette;
