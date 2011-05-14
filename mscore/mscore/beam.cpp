@@ -967,11 +967,10 @@ toMiddleLine = false;   // DEBUG
                               // f->p2[idx].ry() = alignBeam(l2, f->p2[idx].y() - yy, _spatium, _up) + yy;
                               }
                         }
+                  double yy       = system()->staffY(c1->staffIdx());
+                  f->p1[idx].ry() = alignBeam(l1, f->p1[idx].y() - yy, _spatium, _up) + yy;
+                  f->p2[idx].ry() = alignBeam(l2, f->p2[idx].y() - yy, _spatium, _up) + yy;
                   }
-            double yy       = system()->staffY(c1->staffIdx());
-            f->p1[idx].ry() = alignBeam(l1, f->p1[idx].y() - yy, _spatium, _up) + yy;
-            f->p2[idx].ry() = alignBeam(l2, f->p2[idx].y() - yy, _spatium, _up) + yy;
-
             f->p1[idx] -= canvPos;
             f->p2[idx] -= canvPos;
 
