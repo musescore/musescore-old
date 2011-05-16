@@ -66,7 +66,7 @@ void PlayPanel::closeEvent(QCloseEvent* ev)
 
 void PlayPanel::setScore(Score* s)
       {
-      if (cs == s)
+      if (cs != 0 && cs == s)
             return;
       if (cs)
             disconnect(cs, SIGNAL(posChanged(int)), this, SLOT(setPos(int)));
