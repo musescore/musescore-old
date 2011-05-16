@@ -639,7 +639,8 @@ void Measure::layout2()
                   if (system() && !system()->measures().empty() && system()->firstMeasure() == this)
                         ns = s;
                   }
-            else if ((pn % score()->style(ST_measureNumberInterval).toInt()) == 0)
+            else if ( (!pn && score()->styleB(ST_showMeasureNumberOne) ) ||
+                     ( (pn+1) % score()->style(ST_measureNumberInterval).toInt()) == 0)
                   ns = s;
             }
       if (!ns.isEmpty()) {

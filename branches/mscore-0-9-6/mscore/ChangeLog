@@ -1,5 +1,11 @@
 16.may (la)
       - fix #10660: Continue last session & play panel enabled
+      - fix #5900: Courtesy accidentals lost in transposition
+      - fix #9332: Unable to create slash-headed notes on drum staff
+      - fix #10165: Measure num. every n shows number (every n) + 1 (patch by Miwarre)
+      - import part name from MusicXML
+      - Add support for notehead color in MusicXML export and import
+      - Add shape notehead support in MusicXML export and import
 8.may (la)
       - set notehead shape from plugin framework
 4.may (la)
