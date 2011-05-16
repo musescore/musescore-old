@@ -351,7 +351,15 @@ void Score::transpose(Note* n, Interval interval, bool useDoubleSharpsFlats)
       int ntpc;
       transposeInterval(n->pitch(), n->tpc(), &npitch, &ntpc, interval,
         useDoubleSharpsFlats);
-      undoChangePitch(n, npitch, ntpc, 0);
+      int userAccidental = ACC_NONE;
+      if(n->userAccidental() != ACC_NONE) {
+          int accVal = ((ntpc + 1) / 7) - 2;
+          userAccidental = Accidental::value2subtype(accVal);
+          if (userAccidental == ACC_NONE)
+                userAccidental = ACC_NATURAL;
+          }
+      
+      undoChangePitch(n, npitch, ntpc, userAccidental);
       }
 
 //---------------------------------------------------------

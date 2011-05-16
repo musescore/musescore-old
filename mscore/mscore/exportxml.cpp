@@ -81,6 +81,7 @@
 #include "glissando.h"
 #include "navigate.h"
 #include "drumset.h"
+#include "preferences.h"
 
 static bool isTwoNoteTremolo(Chord* chord);
 
@@ -2147,16 +2148,34 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
                   xml.tag("stem", QString(note->chord()->up() ? "up" : "down"));
             }
 
-            if (note->headGroup()==5){
-                  xml.tag("notehead", "slash");
-            } else if (note->headGroup()==3){
-                  xml.tag("notehead", "triangle");
-            } else if(note->headGroup()==4){
-                  xml.tag("notehead", "diamond");
-            } else if(note->headGroup()==1){
-                  xml.tag("notehead", "x");
-            } else if(note->headGroup()==6){
-                  xml.tag("notehead", "circle-x");
+            QString noteheadTagname = QString("notehead");
+            QColor noteheadColor = note->color();
+            if(noteheadColor != preferences.defaultColor)
+                  noteheadTagname += " color=\"" + noteheadColor.name() + "\"";
+            if (note->headGroup() == 5) {
+                  xml.tag(noteheadTagname, "slash");
+            } else if (note->headGroup() == 3) {
+                  xml.tag(noteheadTagname, "triangle");
+            } else if(note->headGroup() == 2) {
+                  xml.tag(noteheadTagname, "diamond");
+            } else if(note->headGroup() == 1) {
+                  xml.tag(noteheadTagname, "x");
+            } else if(note->headGroup() == 6) {
+                  xml.tag(noteheadTagname, "circle-x");
+            } else if(note->headGroup() == 7) {
+                  xml.tag(noteheadTagname, "do");
+            } else if(note->headGroup() == 8) {
+                  xml.tag(noteheadTagname, "re");
+            } else if(note->headGroup() == 4) {
+                  xml.tag(noteheadTagname, "mi");
+            } else if(note->headGroup() == 9) {
+                  xml.tag(noteheadTagname, "fa");
+            } else if(note->headGroup() == 10) {
+                  xml.tag(noteheadTagname, "la");
+            } else if(note->headGroup() == 11) {
+                  xml.tag(noteheadTagname, "ti");
+            } else if (noteheadColor != preferences.defaultColor) {
+                  xml.tag(noteheadTagname, "normal");
             }
 
             // LVIFIX: check move() handling

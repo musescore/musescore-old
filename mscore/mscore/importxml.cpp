@@ -842,7 +842,7 @@ void MusicXml::xmlScorePart(QDomElement e, QString id)
             if (e.tagName() == "part-name") {
                   // OK? (ws) Yes it should be ok.part-name is display in front of staff in finale. (la)
                   part->setLongName(e.text());
-                  // part->setTrackName(e.text());
+                  part->setTrackName(e.text());
                   }
             else if (e.tagName() == "part-abbreviation") {
             	  part->setShortName(e.text());
@@ -2284,6 +2284,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       qreal yoffset = 0.0; // actually this is default-y
       qreal xoffset = 0.0;
       bool hasYoffset = false;
+      QColor noteheadColor = QColor::Invalid;
 
       QString printObject = "yes";
       if (pn.isElement() && pn.nodeName() == "note") {
@@ -2622,15 +2623,30 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   else if (s == "triangle")
                         headGroup = 3;
                   else if (s == "diamond")
-                        headGroup = 4;
+                        headGroup = 2;
                   else if (s == "x")
                         headGroup = 1;
                   else if (s == "circle-x")
                         headGroup = 6;
+                  else if (s == "do")
+                        headGroup = 7;
+                  else if (s == "re")
+                        headGroup = 8;
+                  else if (s == "mi")
+                        headGroup = 4;
+                  else if (s == "fa")
+                        headGroup = 9;
+                  else if (s == "la")
+                        headGroup = 10;
+                  else if (s == "ti")
+                        headGroup = 11;
                   else if (s == "normal")
                         ;
                   else
                         printf("unknown notehead %s\n", qPrintable(s));
+                  QString color = e.attribute(QString("color"), 0);
+                  if (color != 0)
+                        noteheadColor = QColor(color);
                   }
             else if (tag == "instrument")
                   domNotImplemented(e);
@@ -2735,6 +2751,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             Note* note = new Note(score);
             note->setHeadGroup(headGroup);
             note->setTrack(track);
+            note->setColor(noteheadColor);
             // note->setStaffMove(move);
 
             if (!fingering.isEmpty()) {
