@@ -350,7 +350,7 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                         for (Measure* m = score->firstMeasure(); m; m = m->nextMeasure()) {
                               for (Segment* seg = m->first(); seg; seg = seg->next()) {
                                     for (int i = 0; i < score->nstaves(); ++i) {
-                                          if (seg->lyricsList(i)->size() > 0)
+                                          if (seg->lyricsList(i) && seg->lyricsList(i)->size() > 0)
                                                 return qScriptValueFromValue(context->engine(), true);
                                           }
                                     }
