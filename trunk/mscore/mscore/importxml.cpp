@@ -2398,6 +2398,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       bool hasYoffset = false;
       QSet<Slur *> slursStarted;
       QSet<Slur *> slursStopped;
+      QColor noteheadColor = QColor::Invalid;
 
       QString printObject = "yes";
       if (pn.isElement() && pn.nodeName() == "note") {
@@ -2743,15 +2744,32 @@ printf("new Tie %p\n", tie);
                   else if (s == "triangle")
                         headGroup = 3;
                   else if (s == "diamond")
-                        headGroup = 4;
+                        headGroup = 2;
                   else if (s == "x")
                         headGroup = 1;
                   else if (s == "circle-x")
                         headGroup = 6;
+                  else if (s == "do")
+                        headGroup = 7;
+                  else if (s == "re")
+                        headGroup = 8;
+                  else if (s == "mi")
+                        headGroup = 4;
+                  else if (s == "fa")
+                        headGroup = 9;
+                  else if (s == "so")
+                        headGroup = 12;
+                  else if (s == "la")
+                        headGroup = 10;
+                  else if (s == "ti")
+                        headGroup = 11;
                   else if (s == "normal")
                         ;
                   else
                         printf("unknown notehead %s\n", qPrintable(s));
+                  QString color = e.attribute(QString("color"), 0);
+                  if (color != 0)
+                        noteheadColor = QColor(color);
                   }
             else if (tag == "instrument")
                   domNotImplemented(e);
@@ -2858,6 +2876,7 @@ printf("new Tie %p\n", tie);
             note->setHeadGroup(headGroup);
             // note->setTrack(track);
             // note->setStaffMove(move);
+            note->setColor(noteheadColor);
 
             if (!fingering.isEmpty()) {
                   Text* f = new Text(score);

@@ -1,3 +1,6 @@
+16.may (la)
+      - Add support for notehead color in MusicXML export and import
+      - Add shape notehead support in MusicXML export and import
 14.may (ws)
       - change tuplet numbers to italic and increase size from 8pt to 10pt to distinguish
         them better from fingering numbers
