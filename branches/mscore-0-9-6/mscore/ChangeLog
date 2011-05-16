@@ -1,7 +1,9 @@
+16.may (la)
+      - fix #10660: Continue last session & play panel enabled
 8.may (la)
       - set notehead shape from plugin framework
 4.may (la)
-      - fix #9342 : repeat entry doesn't scroll display
+      - fix #9342: repeat entry doesn't scroll display
 27.apr (la)
       - fix #10048: Opening Page Settings causes crash
 23.apr (la)

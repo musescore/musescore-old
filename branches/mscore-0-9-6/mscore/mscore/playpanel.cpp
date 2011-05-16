@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -37,6 +37,7 @@ PlayPanel::PlayPanel(QWidget* parent)
       {
       cachedTickPosition = -1;
       cachedTimePosition = -1;
+      cs                 = 0;
       setupUi(this);
       setScore(0);
 
@@ -44,7 +45,7 @@ PlayPanel::PlayPanel(QWidget* parent)
       rewindButton->setDefaultAction(getAction("rewind"));
 
       connect(volumeSlider, SIGNAL(valueChanged(double,int)), SLOT(volumeChanged(double,int)));
-      connect(posSlider,    SIGNAL(sliderMoved(int)),         SLOT(posChanged(int)));
+      connect(posSlider,    SIGNAL(sliderMoved(int)),         SLOT(setPos(int)));
       connect(tempoSlider,  SIGNAL(valueChanged(double,int)), SIGNAL(relTempoChanged(double,int)));
       connect(swingStyle,   SIGNAL(currentIndexChanged(int)), SLOT(swingStyleChanged(int)));
       }
@@ -65,22 +66,35 @@ void PlayPanel::closeEvent(QCloseEvent* ev)
 
 void PlayPanel::setScore(Score* s)
       {
+      if (cs != 0 && cs == s)
+            return;
+      if (cs)
+            disconnect(cs, SIGNAL(posChanged(int)), this, SLOT(setPos(int)));
       cs = s;
+      if (cs)
+            connect(cs, SIGNAL(posChanged(int)), this, SLOT(setPos(int)));
       if (cs) {
             MeasureBase* lm = cs->last();
             if (lm)
                   setEndpos(lm->tick() + lm->tickLen());
             }
-      volumeSlider->setEnabled(cs != 0);
-      posSlider->setEnabled(cs != 0);
-      tempoSlider->setEnabled(cs != 0);
-      swingStyle->setEnabled(cs != 0);
-      setTempo(cs ? cs->tempomap()->tempo(0) : 120.0);
-      setRelTempo(cs ? cs->tempomap()->relTempo() : 100);
-      if (cs)
-            setEndpos(cs->lastMeasure()->tick() + cs->lastMeasure()->tickLen());
-      else
+      bool enable = (cs != 0);
+      volumeSlider->setEnabled(enable);
+      posSlider->setEnabled(enable);
+      tempoSlider->setEnabled(enable);
+      swingStyle->setEnabled(enable);
+      if (cs) {
+            setTempo(cs->tempomap()->tempo(0));
+            setRelTempo(cs->tempomap()->relTempo());
+            Measure* m = cs->lastMeasure();
+            if (m)      
+                  setEndpos(m ? m->tick() + m->tickLen() : 0);
+            }
+      else {
+            setTempo(120.0);
+            setRelTempo(100);
             setEndpos(0);
+            }
       heartBeat2(seq->getCurTime());
       int tick, utick;
       seq->getCurTick(&tick, &utick);
@@ -136,12 +150,13 @@ void PlayPanel::volumeChanged(double val, int)
       }
 
 //---------------------------------------------------------
-//   posChanged
+//   setPos
 //---------------------------------------------------------
 
-void PlayPanel::posChanged(int tick)
+void PlayPanel::setPos(int tick)
       {
-      emit posChange(tick);
+      if (cachedTickPosition != tick)
+            emit posChange(tick);
       heartBeat(tick, tick);
       }
 

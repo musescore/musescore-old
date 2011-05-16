@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2009 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -39,7 +39,6 @@ class PlayPanel : public QWidget, private Ui::PlayPanelBase {
 
    private slots:
       void volumeChanged(double,int);
-      void posChanged(int);
       void swingStyleChanged(int);
 
    signals:
@@ -50,6 +49,7 @@ class PlayPanel : public QWidget, private Ui::PlayPanelBase {
 
    public slots:
       void setVolume(float);
+      void setPos(int);
 
    public:
       PlayPanel(QWidget* parent = 0);
