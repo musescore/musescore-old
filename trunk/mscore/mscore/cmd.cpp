@@ -23,6 +23,8 @@
  Handling of several GUI commands.
 */
 
+#include <assert.h>
+
 #include "globals.h"
 #include "score.h"
 #include "utils.h"
@@ -390,7 +392,10 @@ void Score::expandVoice(Segment* s, int track)
             }
       if (ps) {
             ChordRest* cr = static_cast<ChordRest*>(ps->element(track));
-            if (cr->tick() + cr->actualTicks() > s->tick()) {
+            int tick = cr->tick() + cr->actualTicks();
+            if (tick == s->tick())
+                  return;
+            if (tick > s->tick()) {
                   printf("expandVoice: cannot insert element here\n");
                   return;
                   }
@@ -468,7 +473,7 @@ Note* Score::addPitch(int pitch, bool addFlag)
             duration = _is.cr()->duration();
       else
             duration = _is.duration().fraction();
-      Segment* seg   = setNoteRest(_is.cr(), track, nval, duration, stemDirection);
+      Segment* seg   = setNoteRest(_is.segment(), track, nval, duration, stemDirection);
       Note* note     = 0;
       if (seg) {
             note = static_cast<Chord*>(seg->element(track))->upNote();
@@ -576,21 +581,23 @@ void Score::setGraceNote(Chord* ch, int pitch, NoteType type, int len)
 //    return segment of last created note/rest
 //---------------------------------------------------------
 
-Segment* Score::setNoteRest(ChordRest* cr, int track, NoteVal nval, Fraction sd,
+Segment* Score::setNoteRest(Segment* segment, int track, NoteVal nval, Fraction sd,
    Direction stemDirection)
       {
-      int tick      = cr->tick();
+      assert(segment->subtype() == SegChordRest);
+
+      int tick      = segment->tick();
       Element* nr   = 0;
       Tie* tie      = 0;
+      ChordRest* cr = static_cast<ChordRest*>(segment->element(track));
 
-      Segment* seg     = 0;
       Measure* measure = 0;
       for (;;) {
             if (track % VOICES)
-                  expandVoice(cr->segment(), track);
+                  expandVoice(segment, track);
 
             // the returned gap ends at the measure boundary or at tuplet end
-            Fraction dd = makeGap(cr, sd, cr->tuplet());
+            Fraction dd = makeGap(segment, track, sd, cr ? cr->tuplet() : 0);
 
             if (dd.isZero()) {
                   printf("cannot get gap at %d type: %d/%d\n", tick, sd.numerator(),
@@ -599,17 +606,11 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, NoteVal nval, Fraction sd,
                   }
             QList<Duration> dl = toDurationList(dd, true);
 
-            measure = cr->measure();
+            measure = segment->measure();
             int n = dl.size();
             for (int i = 0; i < n; ++i) {
                   Duration d = dl[i];
 
-                  //SegmentType st = SegChordRest;
-                  //seg = measure->findSegment(st, tick);
-                  //if (seg == 0) {
-                  //      seg = new Segment(measure, st, tick);
-                  //      undoAddElement(seg);
-                  //      }
                   ChordRest* ncr;
                   Note* note = 0;
                   if (nval.pitch == -1) {
@@ -640,12 +641,12 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, NoteVal nval, Fraction sd,
                               note->setTieFor(tie);
                               }
                         }
-                  ncr->setTuplet(cr->tuplet());
+                  ncr->setTuplet(cr ? cr->tuplet() : 0);
                   undoAddCR(ncr, measure, tick);
                   if (ncr->type() == CHORD) {
                         mscore->play(ncr);
                         }
-                  seg = ncr->segment();
+                  segment = ncr->segment();
                   tick += ncr->actualTicks();
                   }
 
@@ -658,13 +659,13 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, NoteVal nval, Fraction sd,
                   printf("reached end of score\n");
                   break;
                   }
-            seg = nseg;
+            segment = nseg;
 
-            cr = static_cast<ChordRest*>(seg->element(track));
+            cr = static_cast<ChordRest*>(segment->element(track));
 
             if (cr == 0) {
                   if (track % VOICES)
-                        cr = addRest(seg, track, Duration(Duration::V_MEASURE), 0);
+                        cr = addRest(segment, track, Duration(Duration::V_MEASURE), 0);
                   else {
                         printf("no rest in voice 0\n");
                         break;
@@ -684,7 +685,7 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, NoteVal nval, Fraction sd,
             connectTies();
       if (nr)
             select(nr, SELECT_SINGLE, 0);
-      return seg;
+      return segment;
       }
 
 //---------------------------------------------------------
@@ -697,14 +698,12 @@ Segment* Score::setNoteRest(ChordRest* cr, int track, NoteVal nval, Fraction sd,
 //    return size of actual gap
 //---------------------------------------------------------
 
-Fraction Score::makeGap(ChordRest* cr, const Fraction& _sd, Tuplet* tuplet)
+Fraction Score::makeGap(Segment* segment, int track, const Fraction& _sd, Tuplet* tuplet)
       {
-      int track        = cr->track();
-printf("makeGap %s at %d track %d\n", qPrintable(_sd.print()), cr->tick(), track);
-      if (_sd.numerator() == 0)
-            abort();
+printf("makeGap %s at %d track %d\n", qPrintable(_sd.print()), segment->tick(), track);
+      assert(_sd.numerator());
 
-      Measure* measure = cr->measure();
+      Measure* measure = segment->measure();
       setLayout(measure);
       Fraction akkumulated;
       Fraction sd = _sd;
@@ -713,9 +712,9 @@ printf("makeGap %s at %d track %d\n", qPrintable(_sd.print()), cr->tick(), track
       // remember first segment which should
       // not be deleted (it may contain other elements we want to preserve)
       //
-      Segment* firstSegment = cr->segment();
+      Segment* firstSegment = segment;
 
-      for (Segment* seg = firstSegment; seg; seg = seg->next()) {
+      for (Segment* seg = firstSegment; seg; seg = seg->next(SegChordRest | SegGrace)) {
             if (seg->subtype() == SegGrace) {
                   if (seg->element(track)) {
                         undoRemoveElement(seg->element(track));
@@ -724,9 +723,23 @@ printf("makeGap %s at %d track %d\n", qPrintable(_sd.print()), cr->tick(), track
                         }
                   continue;
                   }
-            cr = static_cast<ChordRest*>(seg->element(track));
-            if (!cr || !cr->isChordRest())
+            //
+            // voices != 0 may have gaps:
+            //
+            ChordRest* cr = static_cast<ChordRest*>(seg->element(track));
+            if (!cr) {
+                  Segment* seg1 = seg->next(SegChordRest);
+                  int tick2 = seg1 ? seg1->tick() : seg->measure()->tick() + seg->measure()->ticks();
+                  Fraction td(Fraction::fromTicks(tick2 - seg->tick()));
+                  segment = seg;
+                  if (td > sd)
+                        td = sd;
+                  akkumulated += td;
+                  sd -= td;
+                  if (sd.isZero())
+                        return akkumulated;
                   continue;
+                  }
             //
             // limit to tuplet level
             //
@@ -742,7 +755,7 @@ printf("makeGap %s at %d track %d\n", qPrintable(_sd.print()), cr->tick(), track
                         }
                   if (tupletEnd) {
 //                        printf("makeGap: end of tuplet reached\n");
-                        break;
+                        return akkumulated;
                         }
                   }
             Fraction td(cr->duration());
@@ -812,9 +825,14 @@ printf("   gap at tick %d+%d\n", cr->tick(), f.ticks());
             akkumulated += td;
 // printf("  akkumulated %d/%d\n", akkumulated.numerator(), akkumulated.denominator());
             sd          -= td;
-            if (sd.numerator() == 0)
-                  break;
+            if (sd.isZero())
+                  return akkumulated;
             }
+      int ticks = measure->tick() + measure->ticks() - segment->tick();
+      Fraction td = Fraction::fromTicks(ticks);
+      if (td > sd)
+            td = sd;
+      akkumulated += td;
       return akkumulated;
       }
 
@@ -857,7 +875,7 @@ bool Score::makeGap1(int tick, int staffIdx, Fraction len)
 
       Fraction gap;
       for (;;) {
-            Fraction l = makeGap(cr, len, 0);
+            Fraction l = makeGap(cr->segment(), cr->track(), len, 0);
             if (l.isZero())
                   break;
             len -= l;
@@ -985,7 +1003,7 @@ printf("ChangeCRLen::List:\n");
       bool first = true;
       foreach (Fraction f2, flist) {
             f  -= f2;
-            makeGap(cr1, f2, tuplet);
+            makeGap(cr1->segment(), cr1->track(), f2, tuplet);
 
             if (cr->type() == REST) {
 printf("  +ChangeCRLen::setRest %d/%d\n", f2.numerator(), f2.denominator());

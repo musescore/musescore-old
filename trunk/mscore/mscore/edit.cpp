@@ -840,8 +840,8 @@ void Score::putNote(const QPointF& pos, bool replace)
       KeySigEvent key = st->keymap()->key(tick);
       int clef        = st->clef(tick);
 
-// printf("putNote at tick %d staff %d line %d key %d clef %d\n",
-//   tick, staffIdx, line, key.accidentalType(), clef);
+printf("putNote at tick %d staff %d line %d key %d clef %d\n",
+   tick, staffIdx, line, key.accidentalType(), clef);
 
       _is.setTrack(staffIdx * VOICES + _is.voice());
       _is.setSegment(s);
@@ -887,43 +887,42 @@ void Score::putNote(const QPointF& pos, bool replace)
       _is.pitch = nval.pitch;
       expandVoice();
       ChordRest* cr = _is.cr();
-      if (cr == 0)
-            return;
-
       bool addToChord = false;
 
-      Duration d = cr->durationType();
-      Note* note = 0;
-      if (cr->type() == CHORD) {
-            Fraction f = cr->duration();
-            note = static_cast<Chord*>(cr)->upNote();
-            if (note) {
-                  Note* note2 = note;
-                  while (note2->tieFor()) {
-                        note2 = note2->tieFor()->endNote();
-                        f += note2->chord()->duration();
+      if (cr) {
+            Duration d = cr->durationType();
+            Note* note = 0;
+            if (cr->type() == CHORD) {
+                  Fraction f = cr->duration();
+                  note = static_cast<Chord*>(cr)->upNote();
+                  if (note) {
+                        Note* note2 = note;
+                        while (note2->tieFor()) {
+                              note2 = note2->tieFor()->endNote();
+                              f += note2->chord()->duration();
+                              }
+                        Duration dd(f);
+                        if (dd.isValid())
+                              d = dd;
                         }
-                  Duration dd(f);
-                  if (dd.isValid())
-                        d = dd;
+                  else
+                        printf("note not found: %d!\n", nval.pitch);
                   }
-            else
-                  printf("note not found: %d!\n", nval.pitch);
-            }
-      if (!replace
-         && (d == _is.duration())
-         && (cr->type() == CHORD)
-         && !_is.rest)
-            {
-            Chord* chord = static_cast<Chord*>(cr);
-            note = chord->findNote(nval.pitch);
-            if (note) {
-                  // remove note from chord
-                  if (chord->notes().size() > 1)
-                        undoRemoveElement(note);
-                  return;
+            if (!replace
+               && (d == _is.duration())
+               && (cr->type() == CHORD)
+               && !_is.rest)
+                  {
+                  Chord* chord = static_cast<Chord*>(cr);
+                  note = chord->findNote(nval.pitch);
+                  if (note) {
+                        // remove note from chord
+                        if (chord->notes().size() > 1)
+                              undoRemoveElement(note);
+                        return;
+                        }
+                  addToChord = true;
                   }
-            addToChord = true;
             }
       if (addToChord && cr->type() == CHORD)
             addNote(static_cast<Chord*>(cr), nval.pitch);
@@ -931,7 +930,7 @@ void Score::putNote(const QPointF& pos, bool replace)
             // replace chord
             if (_is.rest)
                   nval.pitch = -1;
-            setNoteRest(cr, _is.track(), nval, _is.duration().fraction(), stemDirection);
+            setNoteRest(_is.segment(), _is.track(), nval, _is.duration().fraction(), stemDirection);
             }
       moveToNextInputPos();
       }
@@ -1898,7 +1897,7 @@ void Score::cmdEnterRest(const Duration& d)
 
       int track = _is.track();
       NoteVal nval;
-      Segment* seg  = setNoteRest(_is.cr(), track, nval, d.fraction(), AUTO);
+      Segment* seg  = setNoteRest(_is.segment(), track, nval, d.fraction(), AUTO);
       if (seg) {
             ChordRest* cr = static_cast<ChordRest*>(seg->element(track));
             if (cr)

@@ -1218,7 +1218,7 @@ Element* Note::drop(const DropData& data)
                   NoteVal nval;
                   nval.pitch = n->pitch();
                   nval.headGroup = n->headGroup();
-                  Segment* seg = score()->setNoteRest(chord(), t, nval,
+                  Segment* seg = score()->setNoteRest(chord()->segment(), t, nval,
                      score()->inputState().duration().fraction(), dir);
                   ChordRest* cr = static_cast<ChordRest*>(seg->element(t));
                   if (cr)

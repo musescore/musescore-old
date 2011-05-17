@@ -1,3 +1,5 @@
+17.may (ws)
+      - slightly more flexible way to enter notes/rests in voice != 0
 16.may (la)
       - Add support for notehead color in MusicXML export and import
       - Add shape notehead support in MusicXML export and import
