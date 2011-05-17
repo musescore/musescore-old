@@ -491,7 +491,8 @@ void SCursor::add(ChordRest* c)
       int tick = chordRest->tick();
       Fraction len(c->durationType().fraction());
 
-      Fraction gap    = score()->makeGap(chordRest, len, chordRest->tuplet());
+      Fraction gap    = score()->makeGap(chordRest->segment(), chordRest->track(),
+         len, chordRest->tuplet());
       if (gap < len) {
             printf("cannot make gap\n");
             return;

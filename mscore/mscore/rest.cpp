@@ -245,7 +245,7 @@ Element* Rest::drop(const DropData& data)
                   nval.headGroup = n->headGroup();
                   Fraction d = score()->inputState().duration().fraction();
                   if (!d.isZero()) {
-                        Segment* seg = score()->setNoteRest(this, track(), nval, d, dir);
+                        Segment* seg = score()->setNoteRest(segment(), track(), nval, d, dir);
                         if (seg) {
                               ChordRest* cr = static_cast<ChordRest*>(seg->element(track()));
                               if (cr)

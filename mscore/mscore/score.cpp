@@ -23,6 +23,7 @@
  Implementation of class Score (partial).
 */
 
+#include <assert.h>
 #include "score.h"
 #include "key.h"
 #include "al/sig.h"
@@ -1490,10 +1491,25 @@ Measure* Score::searchMeasure(const QPointF& p) const
 
 static Segment* getNextValidInputSegment(Segment* s, int track, int voice)
       {
+      if (s == 0)
+            return 0;
+      assert(s->subtype() == SegChordRest);
+      Segment* s1 = s;
+      ChordRest* cr1;
+      for (Segment* s1 = s; s1; s1 = s1->prev(SegChordRest)) {
+            cr1 = static_cast<ChordRest*>(s1->element(track + voice));
+            if (cr1)
+                  break;
+            }
+      int nextTick = (cr1 == 0) ? s->measure()->tick() : cr1->tick() + cr1->actualTicks();
+
       static const SegmentTypes st = SegChordRest;
       while (s) {
             if (s->element(track + voice))
                   break;
+            if (voice && s->tick() == nextTick)
+                  return s;
+#if 0
             int v;
             for (v = 0; v < VOICES; ++v) {
                   if (s->element(track + v))
@@ -1523,6 +1539,7 @@ static Segment* getNextValidInputSegment(Segment* s, int track, int voice)
                   if (!skipChord)
                         return s;
                   }
+#endif
             s = s->next(st);
             }
       return s;

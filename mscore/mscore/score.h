@@ -481,10 +481,10 @@ class Score : public QObject {
       void setGraceNote(Chord*,  int pitch, NoteType type, int len);
       int clefOffset(int tick, Staff*) const;
 
-      Segment* setNoteRest(ChordRest*, int track, NoteVal nval, Fraction, Direction stemDirection = AUTO);
+      Segment* setNoteRest(Segment*, int track, NoteVal nval, Fraction, Direction stemDirection = AUTO);
       void changeCRlen(ChordRest* cr, const Duration&);
 
-      Fraction makeGap(ChordRest*, const Fraction&, Tuplet*);
+      Fraction makeGap(Segment*, int track, const Fraction&, Tuplet*);
       bool makeGap1(int tick, int staffIdx, Fraction len);
 
       Rest* addRest(int tick, int track, Duration, Tuplet*);
