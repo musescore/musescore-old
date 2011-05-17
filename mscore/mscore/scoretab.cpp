@@ -156,7 +156,13 @@ void ScoreTab::initScoreView(int idx, double mag, int magIdx, double xoffset, do
       ScoreView* v = view(idx);
       if (!v)  {
             v = new ScoreView;
-            v->setScore(scoreList->value(idx));
+            Score* sc = scoreList->value(idx);
+            if( sc != 0 )
+                  v->setScore(sc);
+            else {
+                  delete v;
+                  return;
+                  }
             stack->addWidget(v);
             }
       v->setMag(magIdx, mag);

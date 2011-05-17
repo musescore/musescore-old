@@ -1,3 +1,5 @@
+17.may (la)
+      - fix #1722: Continue last session tries to open discarded score
 16.may (la)
       - fix #10660: Continue last session & play panel enabled
       - fix #5900: Courtesy accidentals lost in transposition
