@@ -3380,7 +3380,7 @@ bool MuseScore::restoreSession(bool always)
                                           if (score->readScore(val) != 0) {
                                                 delete score;
                                                 f.close();
-                                                return false;
+                                                continue;
                                                 }
                                           else {
                                                 if (!name.isEmpty())
