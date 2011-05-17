@@ -1095,7 +1095,7 @@ void ScoreView::cmdAddChordName()
       _score->setLayoutAll(true);
 
       _score->select(s, SELECT_SINGLE, 0);
-      adjustCanvasPosition(s, false);
+      // adjustCanvasPosition(s, false);
       startEdit(s);
       }
 
