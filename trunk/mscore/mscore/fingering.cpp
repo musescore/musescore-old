@@ -30,6 +30,7 @@ Fingering::Fingering(Score* s)
   : Text(s)
       {
       setTextStyle(TEXT_STYLE_FINGERING);
+      setUseSelectionColor(true);
       }
 
 //---------------------------------------------------------
@@ -110,7 +111,12 @@ void Fingering::propertyAction(ScoreView* viewer, const QString& s)
       {
       if (s.startsWith("layer-")) {
             int n = s.mid(6).toInt();
-            setLayer(1 << n);
+            uint mask = 1 << n;
+            foreach(Element* e, score()->selection().elements()) {
+                  if (e->type() != FINGERING)
+                        continue;
+                  e->setLayer(mask);
+                  }
             }
       else
             Element::propertyAction(viewer, s);
