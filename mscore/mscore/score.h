@@ -853,6 +853,7 @@ class Score : public QObject {
       QString* layerTags()                  { return _layerTags;    }
       QString* layerTagComments()           { return _layerTagComments;    }
       QList<Layer>* layer()                 { return &_layer;       }
+      bool tagIsValid(uint tag) const       { return tag & _layer[_currentLayer].tags; }
       };
 
 extern Score* gscore;

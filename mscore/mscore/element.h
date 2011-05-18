@@ -51,7 +51,8 @@ enum ElementFlag {
       ELEMENT_DROP_TARGET = 0x2,
       ELEMENT_SELECTABLE  = 0x4,
       ELEMENT_MOVABLE     = 0x8,
-      ELEMENT_SEGMENT     = 0x10
+      ELEMENT_SEGMENT     = 0x10,
+      ELEMENT_HAS_TAG     = 0x20
       };
 
 typedef QFlags<ElementFlag> ElementFlags;
@@ -151,7 +152,7 @@ class Element {
 
       mutable QRectF _bbox;       ///< Bounding box relative to _pos + _userOff
                                   ///< valid after call to layout()
-      uint _layer;
+      uint _tag;                  ///< tag bitmask
 
    protected:
       Score* _score;
@@ -395,8 +396,8 @@ class Element {
             }
       virtual bool isMovable() const   { return flag(ELEMENT_MOVABLE);     }
       bool isSegment() const           { return flag(ELEMENT_SEGMENT);     }
-      uint layer() const               { return _layer;                    }
-      void setLayer(unsigned val)      { _layer = val;                     }
+      uint tag() const                 { return _tag;                      }
+      void setTag(unsigned val)        { _tag = val;                       }
       };
 
 //---------------------------------------------------------

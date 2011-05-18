@@ -301,7 +301,7 @@ Element::Element(Score* s) :
    _track(-1),
    _color(preferences.defaultColor),
    _mag(1.0),
-   _layer(1),
+   _tag(1),
    _score(s),
    _mxmlOff(0),
    itemDiscovered(0)
@@ -326,7 +326,7 @@ Element::Element(const Element& e)
       _score      = e._score;
       _mxmlOff    = e._mxmlOff;
       _bbox       = e._bbox;
-      _layer      = e._layer;
+      _tag        = e._tag;
       itemDiscovered = 0;
       }
 
@@ -568,8 +568,14 @@ QList<Prop> Element::properties(Xml& xml, const Element* proto) const
             pl.append(Prop("color", _color));
       if (flag(ELEMENT_SYSTEM_FLAG) && (proto == 0 || proto->systemFlag() != flag(ELEMENT_SYSTEM_FLAG)))
             pl.append(Prop("systemFlag", flag(ELEMENT_SYSTEM_FLAG)));
-      if (_layer != 0xffffffff)
-            pl.append(Prop("layer", QVariant(_layer)));
+      if (_tag != 0x1) {
+            for (int i = 1; i < MAX_TAGS; i++) {
+                  if (_tag == (1 << i)) {
+                        pl.append(Prop("tag", score()->layerTags()[i]));
+                        break;
+                        }
+                  }
+            }
       return pl;
       }
 
@@ -632,8 +638,14 @@ bool Element::readProperties(QDomElement e)
             if (i)
                   _track = 0;
             }
-      else if (tag == "layer")
-            _layer = val.toUInt();
+      else if (tag == "tag") {
+            for (int i = 1; i < MAX_TAGS; i++) {
+                  if (score()->layerTags()[i] == val) {
+                        _tag = 1 << i;
+                        break;
+                        }
+                  }
+            }
       else
             return false;
       return true;
@@ -679,6 +691,21 @@ bool Element::genPropertyMenu(QMenu* popup) const
             a->setData("invisible");
             a = popup->addAction(tr("Color..."));
             a->setData("color");
+            if (flag(ELEMENT_HAS_TAG)) {
+                  a = popup->addSeparator();
+
+                  QMenu* menuLayer = new QMenu(tr("Layer"));
+                  for (int i = 0; i < MAX_TAGS; ++i) {
+                        QString tagName = score()->layerTags()[i];
+                        if (!tagName.isEmpty()) {
+                              a = menuLayer->addAction(tagName);
+                              a->setData(QString("layer-%1").arg(i));
+                              a->setCheckable(true);
+                              a->setChecked(tag() & (1 << i));
+                              }
+                        }
+                  popup->addMenu(menuLayer);
+                  }
             }
       return true;
       }
@@ -691,13 +718,18 @@ void Element::propertyAction(ScoreView*, const QString& s)
       {
       bool val = !visible();
       foreach(Element* e, score()->selection().elements()) {
-            if (e->type() == type()) {
-                  if (s == "invisible")
-                        score()->undoChangeInvisible(e, val);
-                  else if (s == "color") {
-                        score()->colorItem(e);
-                        break;
-                        }
+            if (e->type() != type())
+                  continue;
+            if (s.startsWith("layer-")) {
+                  int n = s.mid(6).toInt();
+                  uint mask = 1 << n;
+                  e->setTag(mask);
+                  }
+            else if (s == "invisible")
+                  score()->undoChangeInvisible(e, val);
+            else if (s == "color") {
+                  score()->colorItem(e);
+                  break;
                   }
             }
       }

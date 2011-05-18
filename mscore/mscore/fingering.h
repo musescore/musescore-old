@@ -42,8 +42,6 @@ class Fingering : public Text {
       virtual void write(Xml&) const;
       virtual void read(QDomElement);
       virtual void toDefault();
-      virtual bool genPropertyMenu(QMenu*) const;
-      virtual void propertyAction(ScoreView*, const QString&);
       };
 
 #endif
