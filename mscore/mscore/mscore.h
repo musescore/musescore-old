@@ -315,6 +315,8 @@ class MuseScore : public QMainWindow {
       QLabel* xLabel;
       QLabel* yLabel;
 
+      QComboBox* layerSwitch;
+
       //---------------------
 
       virtual void closeEvent(QCloseEvent*);
@@ -357,6 +359,7 @@ class MuseScore : public QMainWindow {
       void showPianoKeyboard();
       void showMediaDialog();
       void showAlbumManager();
+      void showLayerManager();
       void enableEditMode(bool);
 
    private slots:
@@ -407,6 +410,7 @@ class MuseScore : public QMainWindow {
       void changeProfile(Profile* p);
       void editXChanged(double);
       void editYChanged(double);
+      void switchLayer(const QString&);
 
    public slots:
       void dirtyChanged(Score*);

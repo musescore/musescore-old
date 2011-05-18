@@ -194,6 +194,16 @@ enum LayoutFlag {
 typedef QFlags<LayoutFlag> LayoutFlags;
 Q_DECLARE_OPERATORS_FOR_FLAGS(LayoutFlags)
 
+
+//---------------------------------------------------------
+//   Layer
+//---------------------------------------------------------
+
+struct Layer {
+      QString name;
+      uint tags;
+      };
+
 //---------------------------------------------------------
 //   Score
 //---------------------------------------------------------
@@ -206,6 +216,11 @@ class Score : public QObject {
 
       Revisions* _revisions;
       QList<Excerpt*> _excerpts;
+
+      QString _layerTags[32];
+      QString _layerTagComments[32];
+      QList<Layer> _layer;
+      int _currentLayer;
 
       int _pageNumberOffset;        ///< Offset for page numbers.
 
@@ -831,6 +846,12 @@ class Score : public QObject {
       int pageNumberOffset() const          { return _pageNumberOffset; }
       void setPageNumberOffset(int v)       { _pageNumberOffset = v; }
       const QDate& creationDate() const     { return _creationDate;  }
+      uint currentLayerMask() const         { return _layer[_currentLayer].tags; }
+      void setCurrentLayer(int val)         { _currentLayer = val;  }
+      int currentLayer() const              { return _currentLayer; }
+      QString* layerTags()                  { return _layerTags;    }
+      QString* layerTagComments()           { return _layerTagComments;    }
+      QList<Layer>* layer()                 { return &_layer;       }
       };
 
 extern Score* gscore;

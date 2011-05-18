@@ -308,6 +308,14 @@ Score::Score(const Style* s)
    : _selection(this)
       {
       _parentScore    = 0;
+
+      _currentLayer   = 0;
+      Layer l;
+      l.name          = "default";
+      l.tags          = 1;
+      _layer.append(l);
+      _layerTags[0]   = "default";
+
       _creationDate   = QDate::currentDate();
       _revisions      = new Revisions;
       _symIdx         = 0;
@@ -360,6 +368,14 @@ Score::Score(Score* parent)
       {
       _creationDate   = QDate::currentDate();
       _parentScore    = parent;
+
+      _currentLayer   = 0;
+      Layer l;
+      l.name = "default";
+      l.tags = 1;
+      _layer.append(l);
+      _layerTags[0] = "default";
+
       _revisions      = 0;
       _symIdx         = 0;
       _pageNumberOffset = 0;
@@ -616,6 +632,19 @@ void Score::write(Xml& xml, bool /*autosave*/)
             _omr->write(xml);
       if (_showOmr && xml.writeOmr)
             xml.tag("showOmr", _showOmr);
+
+      for (int i = 0; i < 32; ++i) {
+            if (!_layerTags[i].isEmpty()) {
+                  xml.tag(QString("LayerTag id=\"%1\" tag=\"%2\"").arg(i).arg(_layerTags[i]),
+                     _layerTagComments[i]);
+                  }
+            }
+      int n = _layer.size();
+      for (int i = 1; i < n; ++i) {       // dont save default variant
+            const Layer& l = _layer[i];
+            xml.tagE(QString("Layer name=\"%1\" mask=\"%2\"").arg(l.name).arg(l.tags));
+            }
+      xml.tag("currentLayer", _currentLayer);
 
       _syntiState.write(xml);
 
@@ -1494,7 +1523,7 @@ static Segment* getNextValidInputSegment(Segment* s, int track, int voice)
       if (s == 0)
             return 0;
       assert(s->subtype() == SegChordRest);
-      Segment* s1 = s;
+      // Segment* s1 = s;
       ChordRest* cr1;
       for (Segment* s1 = s; s1; s1 = s1->prev(SegChordRest)) {
             cr1 = static_cast<ChordRest*>(s1->element(track + voice));

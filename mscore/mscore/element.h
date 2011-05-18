@@ -151,6 +151,7 @@ class Element {
 
       mutable QRectF _bbox;       ///< Bounding box relative to _pos + _userOff
                                   ///< valid after call to layout()
+      uint _layer;
 
    protected:
       Score* _score;
@@ -394,6 +395,8 @@ class Element {
             }
       virtual bool isMovable() const   { return flag(ELEMENT_MOVABLE);     }
       bool isSegment() const           { return flag(ELEMENT_SEGMENT);     }
+      uint layer() const               { return _layer;                    }
+      void setLayer(unsigned val)      { _layer = val;                     }
       };
 
 //---------------------------------------------------------
