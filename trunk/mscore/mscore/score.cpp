@@ -590,20 +590,13 @@ int Score::readScore(QString name)
             st->setUpdateKeymap(false);
             ++staffIdx;
             }
-      updateNotes();
-      addLayoutFlags(LAYOUT_FIX_TICKS | LAYOUT_FIX_PITCH_VELO);
-      doLayout();
-      // adjust readPos
-      scanElements(0, elementAdjustReadPos);
+      adjustReadPos();
+
       rebuildBspTree();
 
       foreach(Excerpt* e, _excerpts) {
             Score* score = e->score();
-            score->updateNotes();
-            score->addLayoutFlags(LAYOUT_FIX_TICKS | LAYOUT_FIX_PITCH_VELO);
-            score->setLayoutAll(true);
-            score->doLayout();
-            score->scanElements(0, elementAdjustReadPos);
+            score->adjustReadPos();
             }
       //
       // check if any soundfont is configured
@@ -617,6 +610,25 @@ int Score::readScore(QString name)
       if (!hasSoundFont)
             _syntiState.prepend(SyntiParameter("soundfont", preferences.soundFont));
       return 0;
+      }
+
+//---------------------------------------------------------
+//   adjustReadPos
+//---------------------------------------------------------
+
+void Score::adjustReadPos()
+      {
+      uint layerBits = _layer[_currentLayer].tags;
+      _layer[_currentLayer].tags = 0xffffffff;         // process all elements
+
+      updateNotes();
+      addLayoutFlags(LAYOUT_FIX_TICKS | LAYOUT_FIX_PITCH_VELO);
+      setLayoutAll(true);
+      doLayout();
+
+      // adjust readPos
+      scanElements(0, elementAdjustReadPos);
+      _layer[_currentLayer].tags = layerBits;
       }
 
 //---------------------------------------------------------
