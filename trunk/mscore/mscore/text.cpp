@@ -1125,6 +1125,21 @@ bool Text::genPropertyMenu(QMenu* popup) const
       else
             a = popup->addAction(tr("Set Visible"));
       a->setData("invisible");
+      if (flag(ELEMENT_HAS_TAG)) {
+            a = popup->addSeparator();
+
+            QMenu* menuLayer = new QMenu(tr("Layer"));
+            for (int i = 0; i < MAX_TAGS; ++i) {
+                  QString tagName = score()->layerTags()[i];
+                  if (!tagName.isEmpty()) {
+                        a = menuLayer->addAction(tagName);
+                        a->setData(QString("layer-%1").arg(i));
+                        a->setCheckable(true);
+                        a->setChecked(tag() & (1 << i));
+                        }
+                  }
+            popup->addMenu(menuLayer);
+            }
       a = popup->addAction(tr("Text Properties..."));
       a->setData("props");
       return true;

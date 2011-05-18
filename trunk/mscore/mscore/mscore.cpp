@@ -3976,6 +3976,7 @@ void MuseScore::switchLayer(const QString& s)
       foreach(const Layer& l, *cs->layer()) {
             if (s == l.name) {
                   cs->setCurrentLayer(layer);
+                  cs->setDirty(true);
                   cs->setLayoutAll(true);
                   cs->end();
                   return;

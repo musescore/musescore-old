@@ -579,5 +579,7 @@ static const int MAX_STAVES = 4;
 static const qreal DPMM_DISPLAY = 4;   // 100 DPI
 static const qreal PALETTE_SPATIUM = 1.9 * DPMM_DISPLAY;
 
+static const int MAX_TAGS = 32;
+
 extern QPaintDevice* pdev;
 #endif

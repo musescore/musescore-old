@@ -1349,7 +1349,7 @@ void Note::layout()
       if (parent() == 0)
             return;
       foreach (Element* e, _el) {
-            if (!(e->layer() & score()->currentLayerMask()))
+            if (!score()->tagIsValid(e->tag()))
                   continue;
             e->setMag(mag());
             e->layout();
@@ -1513,7 +1513,7 @@ void Note::scanElements(void* data, void (*func)(void*, Element*))
       if (_tieFor && !staff()->useTablature())  // no ties in tablature
             _tieFor->scanElements(data, func);
       foreach(Element* e, _el) {
-            if (e->layer() & score()->currentLayerMask())
+            if (score()->tagIsValid(e->tag()))
                   e->scanElements(data, func);
             }
       if (!dragMode && _accidental)
