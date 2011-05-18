@@ -1534,8 +1534,7 @@ bool Score::read(QDomElement dScore)
                   _layer.append(layer);
                   }
             else if (tag == "currentLayer")
-                  _currentLayer = val.toUInt();
-
+                  _currentLayer = val.toInt();
             else if (tag == "SyntiSettings") {
                   _syntiState.clear();
                   _syntiState.read(ee);

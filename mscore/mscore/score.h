@@ -391,6 +391,7 @@ class Score : public QObject {
       void parseVersion(const QString&);
       QList<Fraction> splitGapToMeasureBoundaries(ChordRest*, Fraction);
       void pasteChordRest(ChordRest* cr, int tick);
+      void adjustReadPos();
 
    signals:
       void selectionChanged(int);
