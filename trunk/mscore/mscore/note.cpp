@@ -573,13 +573,6 @@ void Note::draw(Painter* painter) const
                   symbols[score()->symIdx()][noteHead()].draw(p, magS());
                   }
             }
-
-/*      if (chord() && !tablature) {
-            int dots = chord()->dots();
-            for (int i = 0; i < dots; ++i)
-                  _dots[i]->draw(p, v);
-            }
-      */
       }
 
 //--------------------------------------------------
@@ -1356,6 +1349,8 @@ void Note::layout()
       if (parent() == 0)
             return;
       foreach (Element* e, _el) {
+            if (!(e->layer() & score()->currentLayerMask()))
+                  continue;
             e->setMag(mag());
             e->layout();
             if (e->type() == SYMBOL && static_cast<Symbol*>(e)->sym() == rightparenSym)
@@ -1517,8 +1512,10 @@ void Note::scanElements(void* data, void (*func)(void*, Element*))
       func(data, this);
       if (_tieFor && !staff()->useTablature())  // no ties in tablature
             _tieFor->scanElements(data, func);
-      foreach(Element* e, _el)
-            e->scanElements(data, func);
+      foreach(Element* e, _el) {
+            if (e->layer() & score()->currentLayerMask())
+                  e->scanElements(data, func);
+            }
       if (!dragMode && _accidental)
             func(data, _accidental);
       if (_bend)

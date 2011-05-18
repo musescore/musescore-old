@@ -1519,6 +1519,23 @@ bool Score::read(QDomElement dScore)
 #endif
             else if (tag == "showOmr")
                   _showOmr = i;
+            else if (tag == "LayerTag") {
+                  int id = ee.attribute("id").toInt();
+                  QString tag = ee.attribute("tag");
+                  if (id >= 0 && id < 32) {
+                        _layerTags[id] = tag;
+                        _layerTagComments[id] = val;
+                        }
+                  }
+            else if (tag == "Layer") {
+                  Layer layer;
+                  layer.name = ee.attribute("name");
+                  layer.tags = ee.attribute("mask").toUInt();
+                  _layer.append(layer);
+                  }
+            else if (tag == "currentLayer")
+                  _currentLayer = val.toUInt();
+
             else if (tag == "SyntiSettings") {
                   _syntiState.clear();
                   _syntiState.read(ee);

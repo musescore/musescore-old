@@ -301,6 +301,7 @@ Element::Element(Score* s) :
    _track(-1),
    _color(preferences.defaultColor),
    _mag(1.0),
+   _layer(1),
    _score(s),
    _mxmlOff(0),
    itemDiscovered(0)
@@ -325,6 +326,7 @@ Element::Element(const Element& e)
       _score      = e._score;
       _mxmlOff    = e._mxmlOff;
       _bbox       = e._bbox;
+      _layer      = e._layer;
       itemDiscovered = 0;
       }
 
@@ -566,6 +568,8 @@ QList<Prop> Element::properties(Xml& xml, const Element* proto) const
             pl.append(Prop("color", _color));
       if (flag(ELEMENT_SYSTEM_FLAG) && (proto == 0 || proto->systemFlag() != flag(ELEMENT_SYSTEM_FLAG)))
             pl.append(Prop("systemFlag", flag(ELEMENT_SYSTEM_FLAG)));
+      if (_layer != 0xffffffff)
+            pl.append(Prop("layer", QVariant(_layer)));
       return pl;
       }
 
@@ -628,6 +632,8 @@ bool Element::readProperties(QDomElement e)
             if (i)
                   _track = 0;
             }
+      else if (tag == "layer")
+            _layer = val.toUInt();
       else
             return false;
       return true;

@@ -1,9 +1,9 @@
 //=============================================================================
-//  MusE Score
-//  Linux Music Score Editor
-//  $Id: trill.h 3229 2010-06-27 14:55:28Z wschweer $
+//  MuseScore
+//  Music Composition & Notation
+//  $Id: mscore.cpp 4220 2011-04-22 10:31:26Z wschweer $
 //
-//  Copyright (C) 2010 Werner Schweer and others
+//  Copyright (C) 2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -18,32 +18,31 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __FINGERING_H__
-#define __FINGERING_H__
+#ifndef __LAYER_H__
+#define __LAYER_H__
 
-#include "text.h"
+#include "ui_layer.h"
 
-class Note;
+class Score;
 
 //---------------------------------------------------------
-//   Fingering
+//   LayerManager
 //---------------------------------------------------------
 
-class Fingering : public Text {
+class LayerManager : public QDialog, public Ui::LayerManager {
+      Q_OBJECT
+
+      Score* score;
+
+   private slots:
+      void createClicked();
+      void deleteClicked();
+      void addTagClicked();
+      void deleteTagClicked();
+      virtual void accept();
 
    public:
-      Fingering(Score* s);
-      virtual Fingering* clone() const { return new Fingering(*this); }
-      virtual ElementType type() const { return FINGERING; }
-
-      Note* note() const { return (Note*)parent(); }
-
-      virtual void layout();
-      virtual void write(Xml&) const;
-      virtual void read(QDomElement);
-      virtual void toDefault();
-      virtual bool genPropertyMenu(QMenu*) const;
-      virtual void propertyAction(ScoreView*, const QString&);
+      LayerManager(Score*, QWidget* parent = 0);
       };
 
 #endif

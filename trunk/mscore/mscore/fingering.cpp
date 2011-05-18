@@ -79,3 +79,41 @@ void Fingering::toDefault()
       score()->undo()->push(new ChangeUserOffset(this, no));
       }
 
+//---------------------------------------------------------
+//   genPropertyMenu
+//---------------------------------------------------------
+
+bool Fingering::genPropertyMenu(QMenu* popup) const
+      {
+      Element::genPropertyMenu(popup);
+      QAction* a = popup->addSeparator();
+
+      QMenu* menuLayer = new QMenu(tr("Layer"));
+      for (int i = 0; i < 32; ++i) {
+            QString tag = score()->layerTags()[i];
+            if (!tag.isEmpty()) {
+                  a = menuLayer->addAction(tag);
+                  a->setData(QString("layer-%1").arg(i));
+                  a->setCheckable(true);
+                  a->setChecked(layer() & (1 << i));
+                  }
+            }
+      popup->addMenu(menuLayer);
+      return true;
+      }
+
+//---------------------------------------------------------
+//   propertyAction
+//---------------------------------------------------------
+
+void Fingering::propertyAction(ScoreView* viewer, const QString& s)
+      {
+      if (s.startsWith("layer-")) {
+            int n = s.mid(6).toInt();
+            setLayer(1 << n);
+            }
+      else
+            Element::propertyAction(viewer, s);
+      }
+
+

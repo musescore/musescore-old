@@ -2517,6 +2517,15 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Album Manager..."),
          QT_TRANSLATE_NOOP("action","Album Manager")
          ),
+      Shortcut(
+         STATE_NORMAL,
+         "layer",
+         QT_TRANSLATE_NOOP("action","Layer"),
+         0,
+         Qt::ApplicationShortcut,
+         QT_TRANSLATE_NOOP("action","Layer Manager..."),
+         QT_TRANSLATE_NOOP("action","Layer Manager")
+         ),
       // xml==0  marks end of list
       Shortcut(0, 0, 0, QKeySequence::UnknownKey)
       };

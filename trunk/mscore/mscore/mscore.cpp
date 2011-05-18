@@ -438,6 +438,11 @@ MuseScore::MuseScore()
       _statusBar->addPermanentWidget(piano, 0);
       _statusBar->addPermanentWidget(new QWidget(this), 100);
       _statusBar->addPermanentWidget(_modeText, 0);
+      layerSwitch = new QComboBox(this);
+      layerSwitch->setToolTip(tr("switch layer"));
+      connect(layerSwitch, SIGNAL(activated(const QString&)), SLOT(switchLayer(const QString&)));
+
+      _statusBar->addPermanentWidget(layerSwitch);
       _statusBar->addPermanentWidget(_positionLabel, 0);
 
       setStatusBar(_statusBar);
@@ -673,6 +678,7 @@ MuseScore::MuseScore()
       _fileMenu->addSeparator();
       _fileMenu->addAction(getAction("parts"));
       _fileMenu->addAction(getAction("album"));
+      _fileMenu->addAction(getAction("layer"));
       if (enableExperimental)
             _fileMenu->addAction(getAction("add-audio"));
       _fileMenu->addAction(getAction("print"));
@@ -1264,7 +1270,15 @@ void MuseScore::setCurrentScoreView(ScoreView* view)
             }
       else
             cs = 0;
-      bool enable = cs != 0;
+      layerSwitch->clear();
+      bool enable = false;
+      if (cs) {
+            enable = true;
+            foreach(const Layer& l, *cs->layer())
+                  layerSwitch->addItem(l.name);
+            layerSwitch->setCurrentIndex(cs->currentLayer());
+            }
+      layerSwitch->setEnabled(enable);
       if (seq)
             seq->setScoreView(cv);
       if (playPanel)
@@ -2491,6 +2505,8 @@ void MuseScore::cmd(QAction* a)
             startInspector();
       else if (cmd == "album")
             showAlbumManager();
+      else if (cmd == "layer")
+            showLayerManager();
       else if (cmd == "script-debug") {
             scriptDebug = a->isChecked();
             }
@@ -3947,6 +3963,24 @@ void MuseScore::setEditPos(const QPointF& pt)
             _editY->setValue(pt.y());
             _editX->blockSignals(false);
             _editY->blockSignals(false);
+            }
+      }
+
+//---------------------------------------------------------
+//   switchLayer
+//---------------------------------------------------------
+
+void MuseScore::switchLayer(const QString& s)
+      {
+      int layer = 0;
+      foreach(const Layer& l, *cs->layer()) {
+            if (s == l.name) {
+                  cs->setCurrentLayer(layer);
+                  cs->setLayoutAll(true);
+                  cs->end();
+                  return;
+                  }
+            ++layer;
             }
       }
 
