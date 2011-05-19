@@ -18,8 +18,11 @@
       <file>fonts/mscore-20.otf</file>
       <file>fonts/mscore1-20.ttf</file>
       <file>fonts/MuseJazz.ttf</file>
+      
       <file>fonts/FreeSerifMscore.ttf</file>
+      <file>fonts/FreeSerifBold.ttf</file>
       <file>fonts/FreeSans.ttf</file>
+      
       <file>fonts/mscore_tab_baroque.ttf</file>
       <file>fonts/mscore_tab_modern.ttf</file>
       <file>fonts/mscore_tab_renaiss.ttf</file>
@@ -250,9 +253,9 @@
       <file>data/icons-dark/editcopy.svg</file>
       <file>data/icons-dark/editpaste.svg</file>
       <file>data/icons-dark/fileprint.svg</file>
-      <file>data/icons-dark/format_text_bold.svg</file>
-      <file>data/icons-dark/format_text_italic.svg</file>
-      <file>data/icons-dark/format_text_underline.svg</file>
+      <file>data/icons-dark/format_text_bold.svgz</file>
+      <file>data/icons-dark/format_text_italic.svgz</file>
+      <file>data/icons-dark/format_text_underline.svgz</file>
       <file>data/icons-dark/text_left.svg</file>
       <file>data/icons-dark/text_center.svg</file>
       <file>data/icons-dark/text_right.svg</file>
