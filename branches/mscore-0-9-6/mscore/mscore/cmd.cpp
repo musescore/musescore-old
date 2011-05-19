@@ -521,6 +521,7 @@ void Score::expandVoice()
                   }
             if (emptyVoice)
 #endif
+            if(_is._segment != 0)
                   addRest(_is._segment, _is.track, Duration(Duration::V_MEASURE), 0);
             }
       }

@@ -3438,8 +3438,10 @@ void ScoreView::cmdEnterRest(const Duration& d)
       {
       if (debugMode)
             printf("cmdEnterRest %s\n", qPrintable(d.name()));
-      if (!noteEntryMode())
+      if (!noteEntryMode()) {
             sm->postEvent(new CommandEvent("note-input"));
+            qApp->processEvents();
+            }
       _score->cmdEnterRest(d);
 #if 0
       expandVoice();
