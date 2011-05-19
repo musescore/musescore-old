@@ -648,7 +648,7 @@ if (APPLE)
       fonts/mscore-20.otf
       fonts/mscore1-20.ttf
       fonts/MuseJazz.ttf
-      fonts/FreeSerif.ttf
+      fonts/FreeSerifMscore.ttf
       fonts/FreeSans.ttf
       fonts/mscore_tab_baroque.ttf
       fonts/mscore_tab_modern.ttf
