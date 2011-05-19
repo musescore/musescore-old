@@ -51,6 +51,7 @@ class PreferenceDialog : public QDialog, private Ui::PrefsDialogBase {
       void selectBgWallpaper();
       void selectWorkingDirectory();
       void selectDefaultStyle();
+      void selectPartStyle();
       void selectInstrumentList();
       void selectStartWith();
       void playPanelCurClicked();

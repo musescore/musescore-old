@@ -382,7 +382,13 @@ Score::Score(Score* parent)
       startLayout     = 0;
       _undo           = 0;
       _repeatList     = 0;
-      _style          = *parent->style();
+
+      _style = *parent->style();
+      if (!preferences.partStyle.isEmpty()) {
+            QFile f(preferences.partStyle);
+            if (f.open(QIODevice::ReadOnly))
+                  _style.load(&f);
+            }
       _swingRatio     = 0.0;
 
       _mscVersion     = MSCVERSION;

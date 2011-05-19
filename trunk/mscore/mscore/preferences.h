@@ -99,6 +99,7 @@ struct Preferences {
       QString startScore;
       QString workingDirectory;
       QString defaultStyle;
+      QString partStyle;
       bool showSplashScreen;
 
       bool useMidiRemote;
