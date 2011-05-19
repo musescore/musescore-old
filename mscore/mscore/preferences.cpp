@@ -208,6 +208,7 @@ void Preferences::init()
       startScore               = ":/data/Promenade_Example.mscx";
       workingDirectory         = QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation);
       defaultStyle             = "";
+      partStyle                = "";
       showSplashScreen         = true;
 
       useMidiRemote      = false;
@@ -339,6 +340,7 @@ void Preferences::write()
       s.setValue("startScore",         startScore);
       s.setValue("workingDirectory",   workingDirectory);
       s.setValue("defaultStyle",       defaultStyle);
+      s.setValue("partStyle",          partStyle);
       s.setValue("showSplashScreen",   showSplashScreen);
 
       s.setValue("midiExpandRepeats",  midiExpandRepeats);
@@ -424,7 +426,6 @@ void Preferences::write()
 
 void Preferences::read()
       {
-      init();
       QSettings s;
 
       bgUseColor      = s.value("bgUseColor", bgUseColor).toBool();
@@ -474,6 +475,7 @@ void Preferences::read()
 
       workingDirectory   = s.value("workingDirectory", workingDirectory).toString();
       defaultStyle       = s.value("defaultStyle", defaultStyle).toString();
+      partStyle          = s.value("partStyle", partStyle).toString();
 
       showSplashScreen         = s.value("showSplashScreen", showSplashScreen).toBool();
       midiExpandRepeats        = s.value("midiExpandRepeats", midiExpandRepeats).toBool();
@@ -611,6 +613,7 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       startWithButton->setIcon(*icons[fileOpen_ICON]);
       instrumentListButton->setIcon(*icons[fileOpen_ICON]);
       defaultStyleButton->setIcon(*icons[fileOpen_ICON]);
+      partStyleButton->setIcon(*icons[fileOpen_ICON]);
       workingDirectoryButton->setIcon(*icons[fileOpen_ICON]);
       myScoresButton->setIcon(*icons[fileOpen_ICON]);
       myStylesButton->setIcon(*icons[fileOpen_ICON]);
@@ -663,6 +666,7 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       connect(myImagesButton, SIGNAL(clicked()), SLOT(selectImagesDirectory()));
 
       connect(defaultStyleButton,     SIGNAL(clicked()), SLOT(selectDefaultStyle()));
+      connect(partStyleButton,        SIGNAL(clicked()), SLOT(selectPartStyle()));
       connect(instrumentListButton,   SIGNAL(clicked()), SLOT(selectInstrumentList()));
       connect(startWithButton,        SIGNAL(clicked()), SLOT(selectStartWith()));
       connect(playPanelCur,   SIGNAL(clicked()), SLOT(playPanelCurClicked()));
@@ -1196,6 +1200,21 @@ void PreferenceDialog::selectDefaultStyle()
          );
       if (!s.isNull())
             defaultStyle->setText(s);
+      }
+
+//---------------------------------------------------------
+//   selectPartStyle
+//---------------------------------------------------------
+
+void PreferenceDialog::selectPartStyle()
+      {
+      QString s = QFileDialog::getExistingDirectory(
+         this,
+         tr("Choose Default Style for Parts"),
+         partStyle->text()
+         );
+      if (!s.isNull())
+            partStyle->setText(s);
       }
 
 //---------------------------------------------------------

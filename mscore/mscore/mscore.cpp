@@ -2116,11 +2116,10 @@ int main(int argc, char* av[])
       setMscoreLocale(localeName);
 
       initShortcuts();
+      preferences.init();
       if (!useFactorySettings)
             preferences.read();
-      else {
-            preferences.soundFont = mscoreGlobalShare + "/sound/TimGM6mb.sf2";
-            }
+
       if (converterDpi == 0) {
             converterDpi = preferences.pngResolution;
             }
@@ -2135,7 +2134,7 @@ int main(int argc, char* av[])
             qApp->processEvents();
             }
 
-      if (!useFactorySettings && !converterMode) {
+      if (!converterMode) {
             switch(preferences.globalStyle) {
                   case STYLE_DARK: {
                         QApplication::setStyle(new MStyle);
@@ -2872,6 +2871,7 @@ void MuseScore::readSettings()
             QList<int> sizes;
             sizes << 500 << 100;
             mainWindow->setSizes(sizes);
+            mscore->showPalette(true);
             return;
             }
       QSettings settings;
