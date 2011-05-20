@@ -1415,6 +1415,11 @@ void ScoreView::cmdTuplet(int n)
       {
       _score->startCmd();
       if (noteEntryMode()) {
+            //stop creating tuplets
+            if(_score->inputState().cr()->fraction() <= Fraction(1,128)) {
+                  _score->endCmd();
+                  return; 
+                  }
             _score->expandVoice();
             _score->changeCRlen(_score->inputState().cr(), _score->inputState().duration());
             if (_score->inputState().cr())
@@ -1433,7 +1438,7 @@ void ScoreView::cmdTuplet(int n)
                         }
                   if (e->isChordRest()) {
                         ChordRest* cr = static_cast<ChordRest*>(e);
-                        if(!set.contains(cr)) {
+                        if(!set.contains(cr) && cr->fraction() > Fraction(1,128)) {
                               cmdTuplet(n, cr);
                               set.insert(cr);
                               }
