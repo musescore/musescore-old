@@ -185,9 +185,9 @@ void MuseScore::loadFile()
       QString fn = getOpenScoreName(
          lastOpenPath,
 #ifdef OMR
-         tr("All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.pdf *.ove *.bww *.GTP *.GP3 *.GP4);;")+
+         tr("All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.pdf *.ove *.scw *.bww *.GTP *.GP3 *.GP4);;")+
 #else
-         tr("All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww *.GTP *.GP3 *.GP4);;")+
+         tr("All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.scw *.bww *.GTP *.GP3 *.GP4);;")+
 #endif
          tr("MuseScore Files (*.mscz *.mscx *.msc);;")+
          tr("MusicXML Files (*.xml *.mxl);;")+
@@ -198,7 +198,7 @@ void MuseScore::loadFile()
 #ifdef OMR
          tr("PDF Files <experimental omr> (*.pdf);;")+
 #endif
-         tr("Overture Files <experimental> (*.ove);;")+
+         tr("Overture / Score Writer Files <experimental> (*.ove *.scw);;")+
          tr("Bagpipe Music Writer Files <experimental> (*.bww);;")+
          tr("Guitar Pro (*.GTP *.GP3 *.GP4 *.GP5);;")+
          tr("All Files (*)")
