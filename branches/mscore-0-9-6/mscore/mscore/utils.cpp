@@ -640,7 +640,7 @@ static int _majorVersion, _minorVersion, _updateVersion;
 
 int version()
       {
-      QRegExp re("(\\d+)\\.(\\d+)\\.(\\d+)");
+      QRegExp re("(\\d+)\\.(\\d+)\\.?(\\d?)");
       if (re.indexIn(VERSION) != -1) {
             QStringList sl = re.capturedTexts();
             if (sl.size() == 4) {
