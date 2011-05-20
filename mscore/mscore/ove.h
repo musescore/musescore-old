@@ -1188,8 +1188,8 @@ public:
 	void setIsRest(bool rest);
 	bool getIsRest() const;
 
-	void setNote(int note);
-	int getNote() const;
+	void setNote(unsigned int note);
+	unsigned int getNote() const;
 
 	void setAccidental(int type);		//AccidentalType
 	AccidentalType getAccidental() const;
@@ -1220,7 +1220,7 @@ public:
 
 private:
 	bool rest_;
-	int note_;
+	unsigned int note_;
 	AccidentalType accidental_;
 	bool showAccidental_;
 	unsigned int onVelocity_;
@@ -2258,7 +2258,7 @@ public:
 
 	const unsigned char* data() const;
 	unsigned char* data();
-	unsigned int size() const;
+	int size() const;
 
 	bool operator ==(const Block& block) const;
 	bool operator !=(const Block& block) const;
@@ -2397,7 +2397,7 @@ public:
 	virtual bool parse();
 
 protected:
-	bool readBuffer(Block& placeHolder, unsigned int size);
+	bool readBuffer(Block& placeHolder, int size);
 	bool jump(int offset);
 
 	void messageOut(const QString& str);

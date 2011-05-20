@@ -539,7 +539,7 @@ int Score::readScore(QString name)
                   if (!importCapella(name))
                         return 1;
                   }
-            else if (csl == "ove") {
+            else if (csl == "ove" || csl == "scw") {
                   if (!importOve(name))
             	      return 1;
       	      }
