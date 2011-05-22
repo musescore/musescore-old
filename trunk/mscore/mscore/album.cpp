@@ -24,6 +24,7 @@
 #include "page.h"
 #include "painter.h"
 #include "mscore.h"
+#include "icons.h"
 
 //---------------------------------------------------------
 //   Album
@@ -119,6 +120,56 @@ void Album::print()
       }
 
 //---------------------------------------------------------
+//   createScore
+//---------------------------------------------------------
+
+void Album::createScore()
+      {
+      if (_scores.isEmpty())
+            return;
+      QString selectedFilter;
+      QString filter = QWidget::tr("Compressed MuseScore File (*.mscz);;");
+      QString fname  = QString("%1.mscz").arg(_name);
+      QString fn     = mscore->getSaveScoreName(
+         QWidget::tr("MuseScore: Save Album into Score"),
+         fname,
+         filter,
+         &selectedFilter
+         );
+      if (fn.isEmpty())
+            return;
+
+      loadScores();
+
+      Score* firstScore = 0;
+      foreach(AlbumItem* item, _scores) {
+            firstScore = item->score;
+            if (firstScore)
+                  break;
+            }
+      if (!firstScore)
+            return;
+      Score* score = firstScore->clone();
+      foreach(AlbumItem* item, _scores) {
+            if (item->score == 0 || item->score == firstScore)
+                  continue;
+            if (!score->appendScore(item->score)) {
+                  printf("cannot append score\n");
+                  delete score;
+                  return;
+                  }
+            }
+      score->fileInfo()->setFile(fn);
+      printf("Album::createScore: save file\n");
+      try {
+            score->saveCompressedFile(*score->fileInfo(), false);
+            }
+      catch (QString s) {
+            QMessageBox::critical(mscore, QWidget::tr("MuseScore: Save File"), s);
+            }
+      }
+
+//---------------------------------------------------------
 //   read
 //    return true on success
 //---------------------------------------------------------
@@ -208,7 +259,7 @@ void Album::loadScores()
             item->score = new Score(mscore->defaultStyle());
             int rv = item->score->readScore(item->path);
             if (rv != 0) {
-                  mscore->readScoreError(rv);
+                  mscore->readScoreError(rv, item->path);
                   delete item->score;
                   item->score = 0;
                   }
@@ -337,21 +388,23 @@ AlbumManager::AlbumManager(QWidget* parent)
    : QDialog(parent)
       {
       setupUi(this);
+      load->setIcon(*icons[fileOpen_ICON]);
 
       album = 0;
-      connect(add,        SIGNAL(clicked()), SLOT(addClicked()));
-      connect(load,       SIGNAL(clicked()), SLOT(loadClicked()));
-      connect(print,      SIGNAL(clicked()), SLOT(printClicked()));
-      connect(up,         SIGNAL(clicked()), SLOT(upClicked()));
-      connect(down,       SIGNAL(clicked()), SLOT(downClicked()));
-      connect(remove,     SIGNAL(clicked()), SLOT(removeClicked()));
-      connect(fileDialog, SIGNAL(clicked()), SLOT(fileDialogClicked()));
-      connect(createNew,  SIGNAL(clicked()), SLOT(createNewClicked()));
-      connect(scoreName,  SIGNAL(textChanged(const QString&)), SLOT(scoreNameChanged(const QString&)));
-      connect(albumName,  SIGNAL(textChanged(const QString&)), SLOT(albumNameChanged(const QString&)));
-      connect(scoreList,  SIGNAL(currentRowChanged(int)), SLOT(currentScoreChanged(int)));
-      connect(scoreList,  SIGNAL(itemChanged(QListWidgetItem*)), SLOT(itemChanged(QListWidgetItem*)));
-      connect(buttonBox,  SIGNAL(clicked(QAbstractButton*)), SLOT(buttonBoxClicked(QAbstractButton*)));
+      connect(add,         SIGNAL(clicked()), SLOT(addClicked()));
+      connect(load,        SIGNAL(clicked()), SLOT(loadClicked()));
+      connect(print,       SIGNAL(clicked()), SLOT(printClicked()));
+      connect(createScore, SIGNAL(clicked()), SLOT(createScoreClicked()));
+      connect(up,          SIGNAL(clicked()), SLOT(upClicked()));
+      connect(down,        SIGNAL(clicked()), SLOT(downClicked()));
+      connect(remove,      SIGNAL(clicked()), SLOT(removeClicked()));
+      connect(fileDialog,  SIGNAL(clicked()), SLOT(fileDialogClicked()));
+      connect(createNew,   SIGNAL(clicked()), SLOT(createNewClicked()));
+      connect(scoreName,   SIGNAL(textChanged(const QString&)), SLOT(scoreNameChanged(const QString&)));
+      connect(albumName,   SIGNAL(textChanged(const QString&)), SLOT(albumNameChanged(const QString&)));
+      connect(scoreList,   SIGNAL(currentRowChanged(int)), SLOT(currentScoreChanged(int)));
+      connect(scoreList,   SIGNAL(itemChanged(QListWidgetItem*)), SLOT(itemChanged(QListWidgetItem*)));
+      connect(buttonBox,   SIGNAL(clicked(QAbstractButton*)), SLOT(buttonBoxClicked(QAbstractButton*)));
       currentScoreChanged(-1);
       add->setEnabled(false);
       print->setEnabled(false);
@@ -400,6 +453,15 @@ void AlbumManager::loadClicked()
 void AlbumManager::printClicked()
       {
       album->print();
+      }
+
+//---------------------------------------------------------
+//   createScore
+//---------------------------------------------------------
+
+void AlbumManager::createScoreClicked()
+      {
+      album->createScore();
       }
 
 //---------------------------------------------------------

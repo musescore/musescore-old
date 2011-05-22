@@ -436,6 +436,7 @@ class Score : public QObject {
       ~Score();
 
       Score* clone();
+      bool appendScore(Score*);
 
       void write(Xml&, bool autosave);
       bool read(QDomElement);

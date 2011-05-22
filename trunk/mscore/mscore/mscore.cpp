@@ -1083,7 +1083,7 @@ void MuseScore::selectScore(QAction* action)
             Score* score = new Score(_defaultStyle);
             int rv = score->readScore(a);
             if (rv != 0)
-                  readScoreError(rv);
+                  readScoreError(rv, a);
             else
                   setCurrentScoreView(appendScore(score));
             }
@@ -1833,7 +1833,7 @@ static void loadScores(const QStringList& argv)
                   scoreCreated = true;
                   int rv = score->readScore(name);
                   if (rv != 0) {
-                        mscore->readScoreError(rv);
+                        mscore->readScoreError(rv, name);
                         QMessageBox::warning(0,
                               QWidget::tr("MuseScore"),
                               QWidget::tr("reading file <")

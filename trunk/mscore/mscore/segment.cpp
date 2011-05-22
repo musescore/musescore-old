@@ -124,6 +124,54 @@ Segment::Segment(Measure* m, SegmentType st, int t)
       empty = true;
       }
 
+//---------------------------------------------------------
+//   Segment
+//---------------------------------------------------------
+
+Segment::Segment(const Segment& s)
+   : Element(s)
+      {
+      _next = 0;
+      _prev = 0;
+
+      empty = s.empty;           // cached value
+      _tick = s._tick;
+
+//      QList<Spanner*> _spannerFor;
+//      QList<Spanner*> _spannerBack;
+
+      foreach(Element* e, s._annotations) {
+            Element* ne = e->clone();
+            add(ne);
+            }
+
+      foreach(Element* e, s._elist) {
+            Element* ne = 0;
+            if (e) {
+                  ne = e->clone();
+                  ne->setParent(this);
+                  }
+            _elist.append(ne);
+            }
+      }
+
+//---------------------------------------------------------
+//   setScore
+//---------------------------------------------------------
+
+void Segment::setScore(Score* score)
+      {
+      Element::setScore(score);
+      foreach(Element* e, _elist) {
+            if (e)
+                  e->setScore(score);
+            }
+      foreach(Spanner* s, _spannerFor)
+            s->setScore(score);
+      foreach(Element* e, _annotations)
+            e->setScore(score);
+      }
+
 Segment::~Segment()
       {
       foreach(Element* e, _elist) {
