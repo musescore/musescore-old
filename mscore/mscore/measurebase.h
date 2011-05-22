@@ -80,6 +80,7 @@ class MeasureBase : public Element {
       ~MeasureBase();
       MeasureBase(const MeasureBase&);
       virtual MeasureBase* clone() const = 0;
+      virtual void setScore(Score* s);
 
       MeasureBase* next() const              { return _next;   }
       void setNext(MeasureBase* e)           { _next = e;      }
@@ -94,6 +95,7 @@ class MeasureBase : public Element {
 
       virtual void scanElements(void* data, void (*func)(void*, Element*));
       MeasureWidth& layoutWidth()            { return _mw;        }
+      void setLayoutWidth(const MeasureWidth& w) { _mw = w; }
       ElementList* el()                      { return &_el; }
       const ElementList* el() const          { return &_el; }
       System* system() const                 { return (System*)parent(); }
@@ -115,7 +117,8 @@ class MeasureBase : public Element {
 
       virtual void add(Element*);
       virtual void remove(Element*);
-      void setDirty()                        { _dirty = true; }
+      void setDirty(bool val = true)              { _dirty = val; }
+      bool dirty() const                          { return _dirty; }
       virtual void spatiumChanged(double oldValue, double newValue);
 
       int tick() const                       { return _tick;         }

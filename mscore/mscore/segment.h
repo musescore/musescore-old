@@ -79,10 +79,12 @@ class Segment : public Element {
    public:
       Segment(Measure*);
       Segment(Measure*, SegmentType, int tick);
+      Segment(const Segment&);
       ~Segment();
 
       virtual Segment* clone() const    { return new Segment(*this); }
       virtual ElementType type() const  { return SEGMENT; }
+      virtual void setScore(Score*);
 
       Segment* next() const             { return _next;   }
       Segment* next(SegmentTypes) const;
@@ -131,7 +133,8 @@ class Segment : public Element {
       bool isGrace() const               { return subtype() == SegGrace; }
       void setTick(int);
       int tick() const;
-      int rtick() const { return _tick; } // tickposition relative to measure start
+      int rtick() const       { return _tick; } // tickposition relative to measure start
+      void setRtick(int val)  { _tick = val; }
 
       QList<Spanner*> spannerFor() const { return _spannerFor;  }
       QList<Spanner*> spannerBack() const { return _spannerBack;       }

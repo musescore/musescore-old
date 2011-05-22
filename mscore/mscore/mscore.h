@@ -504,7 +504,7 @@ class MuseScore : public QMainWindow {
       Style* baseStyle() const { return _baseStyle; }
       ScoreTab* getTab1() const { return tab1; }
       ScoreTab* getTab2() const { return tab2; }
-      void readScoreError(int rv) const;
+      void readScoreError(int rv, const QString&) const;
       QList<LanguageItem>& languages() { return _languages; }
 
       QString getOpenScoreName(QString& dir, const QString& filter);

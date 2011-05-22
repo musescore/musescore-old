@@ -42,6 +42,8 @@ class ScoreView;
 class System;
 class Note;
 class Spacer;
+class SlurMap;
+class TieMap;
 
 //---------------------------------------------------------
 //   MStaff
@@ -68,6 +70,7 @@ struct MStaff {
       void setVisible(bool val)    { _visible = val;     }
       bool slashStyle() const      { return _slashStyle; }
       void setSlashStyle(bool val) { _slashStyle = val;  }
+      void setScore(Score*);
       };
 
 enum {
@@ -130,9 +133,12 @@ class Measure : public MeasureBase {
 
    public:
       Measure(Score*);
+      Measure(const Measure&);
       ~Measure();
       virtual Measure* clone() const   { return new Measure(*this); }
       virtual ElementType type() const { return MEASURE; }
+      virtual void setScore(Score* s);
+      Measure* cloneMeasure(Score*, SlurMap*, TieMap*);
 
       virtual void read(QDomElement, int idx);
       virtual void write(Xml&, int, bool writeSystemElements) const;

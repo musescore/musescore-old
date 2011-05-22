@@ -49,14 +49,28 @@ MeasureBase::MeasureBase(const MeasureBase& m)
       {
       _next         = m._next;
       _prev         = m._prev;
+      _tick         = m._tick;
       _mw           = m._mw;
       _dirty        = m._dirty;
       _lineBreak    = m._lineBreak;
       _pageBreak    = m._pageBreak;
-      _sectionBreak = m._sectionBreak;
+      _sectionBreak = m._sectionBreak ? new LayoutBreak(*m._sectionBreak) : 0;
 
       foreach(Element* e, m._el)
             add(e->clone());
+      }
+
+//---------------------------------------------------------
+//   setScore
+//---------------------------------------------------------
+
+void MeasureBase::setScore(Score* score)
+      {
+      Element::setScore(score);
+      if (_sectionBreak)
+            _sectionBreak->setScore(score);
+      foreach(Element* e, _el)
+            e->setScore(score);
       }
 
 //---------------------------------------------------------

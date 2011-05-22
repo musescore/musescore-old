@@ -92,12 +92,12 @@
 //   readScoreError
 //---------------------------------------------------------
 
-void MuseScore::readScoreError(int rv) const
+void MuseScore::readScoreError(int rv, const QString& name) const
       {
       if (rv == 1) {
             QMessageBox::critical(0,
                tr("MuseScore: Load error"),
-               QString(tr("Cannot read file: file: %1").arg(strerror(errno)))
+               QString(tr("Cannot read file: %1 error: %2").arg(name).arg(strerror(errno)))
                );
             }
       else {
@@ -213,7 +213,7 @@ void MuseScore::loadFile()
             writeSessionFile(false);
             }
       else {
-            readScoreError(rv);
+            readScoreError(rv, fn);
             delete score;
             }
       }
@@ -705,7 +705,7 @@ void MuseScore::newFile()
       if (newWizard->useTemplate()) {
             int rv = score->readScore(newWizard->templatePath());
             if (rv != 0) {
-                  readScoreError(rv);
+                  readScoreError(rv, newWizard->templatePath());
 #if 0
                   QMessageBox::warning(0,
                      tr("MuseScore: failure"),
@@ -946,10 +946,8 @@ void MuseScore::newFile()
 
 void Score::saveCompressedFile(QFileInfo& info, bool autosave)
       {
-      QString ext(".mscz");
-
       if (info.suffix().isEmpty())
-            info.setFile(info.filePath() + ext);
+            info.setFile(info.filePath() + ".mscz");
 
       QFile fp(info.filePath());
       if (!fp.open(QIODevice::WriteOnly)) {
@@ -1043,6 +1041,8 @@ void Score::saveCompressedFile(QIODevice* f, QFileInfo& info, bool autosave)
       //
       if (_omr) {
             int n = _omr->numPages();
+if (n)
+      printf("save OMR-pages %d\n", n);
             for (int i = 0; i < n; ++i) {
                   QString path = QString("OmrPages/page%1.png").arg(i+1);
                   QBuffer cbuf;
@@ -1079,10 +1079,8 @@ void Score::saveCompressedFile(QIODevice* f, QFileInfo& info, bool autosave)
 
 void Score::saveFile(QFileInfo& info, bool autosave)
       {
-      QString ext(".mscx");
-
       if (info.suffix().isEmpty())
-            info.setFile(info.filePath() + ext);
+            info.setFile(info.filePath() + ".mscx");
       QFile fp(info.filePath());
       if (!fp.open(QIODevice::WriteOnly)) {
             QString s = tr("Open File\n") + info.filePath() + tr("\nfailed: ")
@@ -2991,5 +2989,3 @@ QString MuseScore::getDrumsetFilename(bool open)
             }
       return QString();
       }
-
-

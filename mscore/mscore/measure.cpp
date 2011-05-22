@@ -79,6 +79,9 @@
 #include "fret.h"
 #include "stafftype.h"
 #include "tablature.h"
+#include "slurmap.h"
+#include "tiemap.h"
+#include "tupletmap.h"
 
 //---------------------------------------------------------
 //   MStaff
@@ -137,6 +140,73 @@ Measure::Measure(Score* s)
       _endBarLineType        = NORMAL_BAR;
       _mmEndBarLineType      = NORMAL_BAR;
       _multiMeasure          = 0;
+      }
+
+//---------------------------------------------------------
+//   measure
+//---------------------------------------------------------
+
+Measure::Measure(const Measure& m)
+   : MeasureBase(m)
+      {
+      _first = 0;
+      _last  = 0;
+      Segment* s = m._first;
+      for (int i = 0; i < m._size; ++i) {
+            Segment* ns = s->clone();
+            push_back(ns);
+            s = s->next();
+            }
+      _size                  = m._size;
+      _timesig               = m._timesig;
+      _len                   = m._len;
+      _repeatCount           = m._repeatCount;
+      _repeatFlags           = m._repeatFlags;
+
+      foreach(MStaff* ms, m.staves)
+            staves.append(new MStaff(*ms));
+
+      _no                    = m._no;
+      _noOffset              = m._noOffset;
+      _noText                = 0;
+      _userStretch           = m._userStretch;
+      _irregular             = m._irregular;
+      _breakMultiMeasureRest = m._breakMultiMeasureRest;
+      _breakMMRest           = m._breakMMRest;
+      _endBarLineGenerated   = m._endBarLineGenerated;
+      _endBarLineVisible     = m._endBarLineVisible;
+      _endBarLineType        = m._endBarLineType;
+      _mmEndBarLineType      = m._mmEndBarLineType;
+      _multiMeasure          = m._multiMeasure;
+      _playbackCount         = m._playbackCount;
+      _endBarLineColor       = m._endBarLineColor;
+      }
+
+//---------------------------------------------------------
+//   setScore
+//---------------------------------------------------------
+
+void Measure::setScore(Score* score)
+      {
+      MeasureBase::setScore(score);
+      for (Segment* s = _first; s; s = s->next())
+            s->setScore(score);
+      foreach(Tuplet* t, _tuplets)
+            t->setScore(score);
+      }
+
+//---------------------------------------------------------
+//   MStaff::setScore
+//---------------------------------------------------------
+
+void MStaff::setScore(Score* score)
+      {
+      if (lines)
+            lines->setScore(score);
+      if (_vspacerUp)
+            _vspacerUp->setScore(score);
+      if (_vspacerDown)
+            _vspacerDown->setScore(score);
       }
 
 //---------------------------------------------------------
@@ -1221,8 +1291,6 @@ void Measure::remove(Element* el)
 
 void Measure::moveTicks(int diff)
       {
-//TODOxx      foreach(Element* e, _el)
-//            e->setTick(e->tick() + diff);
       setTick(tick() + diff);
       for (Segment* segment = first(); segment; segment = segment->next()) {
             if (segment->subtype() & (SegEndBarLine | SegTimeSigAnnounce))
@@ -3403,5 +3471,136 @@ void Measure::updateAccidentals(Segment* segment, int staffIdx, char* tversatz)
 Fraction Measure::stretchedLen(Staff* staff) const
       {
       return len() / staff->timeStretch(tick());
+      }
+
+//---------------------------------------------------------
+//   cloneMeasure
+//---------------------------------------------------------
+
+Measure* Measure::cloneMeasure(Score* sc, SlurMap* slurMap, TieMap* tieMap)
+      {
+      Measure* m      = new Measure(sc);
+      m->_first       = 0;
+      m->_last        = 0;
+      m->_size        = _size;
+      m->_timesig     = _timesig;
+      m->_len         = _len;
+      m->_repeatCount = _repeatCount;
+      m->_repeatFlags = _repeatFlags;
+
+      foreach(MStaff* ms, staves)
+            m->staves.append(new MStaff(*ms));
+
+      m->_no                    = _no;
+      m->_noOffset              = _noOffset;
+      m->_noText                = 0;
+      m->_userStretch           = _userStretch;
+      m->_irregular             = _irregular;
+      m->_breakMultiMeasureRest = _breakMultiMeasureRest;
+      m->_breakMMRest           = _breakMMRest;
+      m->_endBarLineGenerated   = _endBarLineGenerated;
+      m->_endBarLineVisible     = _endBarLineVisible;
+      m->_endBarLineType        = _endBarLineType;
+      m->_mmEndBarLineType      = _mmEndBarLineType;
+      m->_multiMeasure          = _multiMeasure;
+      m->_playbackCount         = _playbackCount;
+      m->_endBarLineColor       = _endBarLineColor;
+
+      m->setTick(tick());
+      m->setLayoutWidth(layoutWidth());
+      m->setDirty(dirty());
+      m->setLineBreak(lineBreak());
+      m->setPageBreak(pageBreak());
+      m->setSectionBreak(sectionBreak() ? new LayoutBreak(*sectionBreak()) : 0);
+
+      int tracks = sc->nstaves() * VOICES;
+      TupletMap tupletMap[tracks];
+
+      for (Segment* oseg = first(); oseg; oseg = oseg->next()) {
+            Segment* s = new Segment(m);
+            s->setSubtype(oseg->subtype());
+            s->setRtick(oseg->rtick());
+            m->push_back(s);
+            for (int track = 0; track < tracks; ++track) {
+                  Element* oe = oseg->element(track);
+                  if (oe == 0)
+                        continue;
+                  Element* ne = oe->clone();
+                  if (oe->isChordRest()) {
+                        ChordRest* ocr = static_cast<ChordRest*>(oe);
+                        ChordRest* ncr = static_cast<ChordRest*>(ne);
+                        Tuplet* ot     = ocr->tuplet();
+                        if (ot) {
+                              Tuplet* nt = tupletMap[track].findNew(ot);
+                              if (nt == 0) {
+                                    nt = new Tuplet(*ot);
+                                    nt->clear();
+                                    nt->setTrack(track);
+                                    nt->setScore(sc);
+                                    m->add(nt);
+                                    tupletMap[track].add(ot, nt);
+                                    }
+                              ncr->setTuplet(nt);
+                              }
+                        foreach(Slur* s, ocr->slurFor()) {
+                              Slur* slur = new Slur(sc);
+                              slur->setStartElement(ncr);
+                              ncr->addSlurFor(slur);
+                              slurMap[track].add(s, slur);
+                              }
+                        foreach(Slur* s, ocr->slurBack()) {
+                              Slur* slur = slurMap[track].findNew(s);
+                              if (slur) {
+                                    slur->setEndElement(ncr);
+                                    ncr->addSlurBack(slur);
+                                    }
+                              else {
+                                    printf("cloneStave: cannot find slur\n");
+                                    }
+                              }
+                        if (oe->type() == CHORD) {
+                              Chord* och = static_cast<Chord*>(ocr);
+                              Chord* nch = static_cast<Chord*>(ncr);
+                              int n = och->notes().size();
+                              for (int i = 0; i < n; ++i) {
+                                    Note* on = och->notes().at(i);
+                                    Note* nn = nch->notes().at(i);
+                                    if (on->tieFor()) {
+                                          Tie* tie = new Tie(sc);
+                                          nn->setTieFor(tie);
+                                          tie->setStartNote(nn);
+                                          tieMap[track].add(on->tieFor(), tie);
+                                          }
+                                    if (on->tieBack()) {
+                                          Tie* tie = tieMap[track].findNew(on->tieBack());
+                                          if (tie) {
+                                                nn->setTieBack(tie);
+                                                tie->setEndNote(nn);
+                                                }
+                                          else {
+                                                printf("cloneStave: cannot find tie\n");
+                                                }
+                                          }
+                                    }
+                              }
+                        }
+                  s->add(ne);
+                  foreach(Element* e, oseg->annotations()) {
+                        if (e->generated())
+                              continue;
+                        if (e->track() != track)
+                              continue;
+                        Element* ne = e->clone();
+                        ne->setTrack(track);
+                        s->add(ne);
+                        }
+                  }
+            }
+      foreach(Element* e, *el()) {
+            Element* ne = e->clone();
+            ne->setScore(sc);
+            m->add(ne);
+            }
+      return m;
       }
 

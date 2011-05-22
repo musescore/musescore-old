@@ -71,6 +71,8 @@
 #include "articulation.h"
 #include "importgtp.h"
 #include "revisions.h"
+#include "slurmap.h"
+#include "tiemap.h"
 
 #include "omr/omr.h"
 
@@ -2479,10 +2481,6 @@ Score* Score::clone()
                         Element* e = s->element(track);
                         if (e->generated())
                               continue;
-//                        if ((s->subtype() == SegClef) && st->updateClefList()) {
-//                              Clef* clef = static_cast<Clef*>(e);
-//                              st->setClef(s->tick(), clef->clefTypeList());
-//                              }
                         if ((s->subtype() == SegKeySig) && st->updateKeymap()) {
                               KeySig* ks = static_cast<KeySig*>(e);
                               int naturals = key1 ? key1->keySigEvent().accidentalType() : 0;
@@ -2540,5 +2538,34 @@ void Score::removeOmr()
       _showOmr = false;
       delete _omr;
       _omr = 0;
+      }
+
+//---------------------------------------------------------
+//   appendScore
+//---------------------------------------------------------
+
+bool Score::appendScore(Score* score)
+      {
+      int tracks       = score->nstaves() * VOICES;
+      SlurMap* slurMap = new SlurMap[tracks];
+      TieMap*  tieMap  = new TieMap[tracks];
+
+      MeasureBaseList* ml = &score->_measures;
+      for (MeasureBase* mb = ml->first(); mb; mb = mb->next()) {
+            MeasureBase* nmb;
+            if (mb->type() == MEASURE)
+                  nmb = static_cast<Measure*>(mb)->cloneMeasure(this, slurMap, tieMap);
+            else
+                  nmb = mb->clone();
+            nmb->setNext(0);
+            nmb->setPrev(0);
+            nmb->setScore(this);
+            _measures.add(nmb);
+            }
+      fixTicks();
+      renumberMeasures();
+      delete[] slurMap;
+      delete[] tieMap;
+      return true;
       }
 

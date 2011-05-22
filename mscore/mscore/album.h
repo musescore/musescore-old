@@ -53,6 +53,7 @@ class Album {
    public:
       Album();
       void print();
+      void createScore();
       bool read(const QString& path);
       void write();
       bool dirty() const             { return _dirty; }
@@ -83,6 +84,7 @@ class AlbumManager : public QDialog, public Ui::AlbumManager {
       void addClicked();
       void loadClicked();
       void printClicked();
+      void createScoreClicked();
       void upClicked();
       void downClicked();
       void removeClicked();

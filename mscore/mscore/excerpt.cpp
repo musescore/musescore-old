@@ -211,7 +211,6 @@ Element* ElementMap::findNew(Element* o) const
 
 void cloneStaves(Score* oscore, Score* score, const QList<int>& map)
       {
-printf("cloneStaves\n");
       int tracks = score->nstaves() * VOICES;
       SlurMap* slurMap = new SlurMap[tracks];
       TieMap*  tieMap  = new TieMap[tracks];
@@ -367,8 +366,6 @@ printf("cloneStaves\n");
 
 void cloneStaff(Staff* srcStaff, Staff* dstStaff)
       {
-printf("cloneStaff\n");
-
       Score* score = srcStaff->score();
       dstStaff->linkTo(srcStaff);
 
