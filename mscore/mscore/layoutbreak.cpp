@@ -33,6 +33,7 @@ LayoutBreak::LayoutBreak(Score* score)
       {
       _pause = score->styleD(ST_SectionPause);
       _startWithLongNames = true;
+      _startWithMeasureOne = true;
       }
 
 //---------------------------------------------------------
@@ -47,6 +48,8 @@ void LayoutBreak::write(Xml& xml) const
             xml.tag("pause", _pause);
       if (!_startWithLongNames)
             xml.tag("startWithLongNames", _startWithLongNames);
+      if (!_startWithMeasureOne)
+            xml.tag("startWithMeasureOne", _startWithMeasureOne);
       xml.etag();
       }
 
@@ -62,6 +65,8 @@ void LayoutBreak::read(QDomElement e)
                   _pause = e.text().toDouble();
             else if (tag == "startWithLongNames")
                   _startWithLongNames = e.text().toInt();
+            else if (tag == "startWithMeasureOne")
+                  _startWithMeasureOne = e.text().toInt();
             else if (!Element::readProperties(e))
                   domError(e);
             }
@@ -233,11 +238,14 @@ void LayoutBreak::propertyAction(ScoreView* viewer, const QString& s)
       if (s == "props") {
             SectionBreakProperties sbp(this, 0);
             if (sbp.exec()) {
-                  if (pause() != sbp.pause() || startWithLongNames() != sbp.startWithLongNames()) {
+                  if (pause() != sbp.pause()
+                     || startWithLongNames() != sbp.startWithLongNames()
+                     || startWithMeasureOne() != sbp.startWithMeasureOne()) {
                         LayoutBreak* nlb = new LayoutBreak(*this);
                         nlb->setParent(parent());
                         nlb->setPause(sbp.pause());
                         nlb->setStartWithLongNames(sbp.startWithLongNames());
+                        nlb->setStartWithMeasureOne(sbp.startWithMeasureOne());
                         score()->undoChangeElement(this, nlb);
                         }
                   }
@@ -256,6 +264,7 @@ SectionBreakProperties::SectionBreakProperties(LayoutBreak* lb, QWidget* parent)
       setupUi(this);
       _pause->setValue(lb->pause());
       _startWithLongNames->setChecked(lb->startWithLongNames());
+      _startWithMeasureOne->setChecked(lb->startWithMeasureOne());
       }
 
 //---------------------------------------------------------
@@ -274,6 +283,15 @@ double SectionBreakProperties::pause() const
 bool SectionBreakProperties::startWithLongNames() const
       {
       return _startWithLongNames->isChecked();
+      }
+
+//---------------------------------------------------------
+//   startWithMeasureOne
+//---------------------------------------------------------
+
+bool SectionBreakProperties::startWithMeasureOne() const
+      {
+      return _startWithMeasureOne->isChecked();
       }
 
 

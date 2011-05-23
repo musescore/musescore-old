@@ -1,3 +1,7 @@
+23.may (ws)
+      - selecting a chord stem and press "add tie +" ties the whole chord
+      - add tie "+" can be applied to several selected notes at once
+      - fix #4526: Adding ties to chords
 22.may (ws)
       - add "join score" function to album
 20.may (la)

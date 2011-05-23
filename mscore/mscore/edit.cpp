@@ -55,6 +55,7 @@
 #include "tupletmap.h"
 #include "slurmap.h"
 #include "tiemap.h"
+#include "stem.h"
 
 //---------------------------------------------------------
 //   getSelectedNote
@@ -981,75 +982,86 @@ void ScoreView::modifyElement(Element* el)
 
 void Score::cmdAddTie()
       {
-      Note* note = getSelectedNote();
-      if (!note || note->tieFor()) {
-            if (!note)
-                  printf("cmdAddTie: no note selected\n");
-            else
-                  printf("cmdAddTie: has already tie? noteFor: %p\n", note->tieFor());
+      QList<Note*> noteList;
+      Element* el = selection().element();
+      if (el && el->type() == NOTE)
+            noteList.append(static_cast<Note*>(el));
+      else if (el && el->type() == STEM) {
+            Chord* chord = static_cast<Stem*>(el)->chord();
+            noteList = chord->notes();
+            }
+      else
+            noteList = selection().noteList();
+      if (noteList.isEmpty()) {
+            printf("no notes selected\n");
             return;
             }
-      Chord* chord  = note->chord();
-      if (noteEntryMode()) {
-            if (_is.cr() == 0) {
-                  if(debugMode)
-                        printf("cmdAddTie: no pos\n");
-                  expandVoice();
-                  }
-            startCmd();
-            Note* n = addPitch(note->pitch(), false);
-            if (n) {
-                  n->setLine(note->line());
-                  n->setTpc(note->tpc());
-                  Tie* tie = new Tie(this);
-                  tie->setStartNote(note);
-                  tie->setEndNote(n);
-                  tie->setTrack(note->track());
-                  note->setTieFor(tie);
-                  n->setTieBack(tie);
-                  undoAddElement(tie);
-                  nextInputPos(n->chord(), false);
-                  }
-            endCmd();
-            return;
-            }
-      Note* note2 = 0;
-      Part* part = chord->staff()->part();
-      int strack = part->staves()->front()->idx() * VOICES;
-      int etrack = strack + part->staves()->size() * VOICES;
-      for (Segment* seg = chord->segment()->next1(SegChordRest); seg; seg = seg->next1(SegChordRest)) {
-            bool noteFound = false;
-            for (int track = strack; track < etrack; ++track) {
-                  ChordRest* cr = static_cast<ChordRest*>(seg->element(track));
-                  if (cr == 0 || cr->type() != CHORD)
-                        continue;
-                  int staffIdx = cr->staffIdx() + cr->staffMove();
-                  if (staffIdx != chord->staffIdx())
-                        continue;
-                  foreach(Note* n, static_cast<Chord*>(cr)->notes()) {
-                        if (n->pitch() == note->pitch()) {
-                              if (note2 == 0 || note->chord()->track() == chord->track())
-                                    note2 = n;
-                              }
-                        else if (cr->track() == chord->track())
-                              noteFound = true;
-                        }
-                  }
-            if (noteFound || note2)
-                  break;
-            }
-      if (note2 == 0) {
-            if (debugMode)
-                  printf("addTie: next note for tie not found\n");
-            return;
-            }
+
       startCmd();
-      Tie* tie = new Tie(this);
-      tie->setStartNote(note);
-      tie->setEndNote(note2);
-      tie->setTrack(note->track());
-      undoAddElement(tie);
-      select(note2, SELECT_SINGLE, 0);
+      foreach (Note* note, noteList) {
+            if (note->tieFor()) {
+                  printf("cmdAddTie: has already tie? noteFor: %p\n", note->tieFor());
+                  continue;
+                  }
+            Chord* chord  = note->chord();
+            if (noteEntryMode()) {
+                  if (_is.cr() == 0) {
+                        if (debugMode)
+                              printf("cmdAddTie: no pos\n");
+                        expandVoice();
+                        }
+                  Note* n = addPitch(note->pitch(), true);
+                  if (n) {
+                        n->setLine(note->line());
+                        n->setTpc(note->tpc());
+                        Tie* tie = new Tie(this);
+                        tie->setStartNote(note);
+                        tie->setEndNote(n);
+                        tie->setTrack(note->track());
+                        note->setTieFor(tie);
+                        n->setTieBack(tie);
+                        undoAddElement(tie);
+                        nextInputPos(n->chord(), false);
+                        }
+                  continue;
+                  }
+            Note* note2 = 0;
+            Part* part = chord->staff()->part();
+            int strack = part->staves()->front()->idx() * VOICES;
+            int etrack = strack + part->staves()->size() * VOICES;
+            for (Segment* seg = chord->segment()->next1(SegChordRest); seg; seg = seg->next1(SegChordRest)) {
+                  bool noteFound = false;
+                  for (int track = strack; track < etrack; ++track) {
+                        ChordRest* cr = static_cast<ChordRest*>(seg->element(track));
+                        if (cr == 0 || cr->type() != CHORD)
+                              continue;
+                        int staffIdx = cr->staffIdx() + cr->staffMove();
+                        if (staffIdx != chord->staffIdx())
+                              continue;
+                        foreach(Note* n, static_cast<Chord*>(cr)->notes()) {
+                              if (n->pitch() == note->pitch()) {
+                                    if (note2 == 0 || note->chord()->track() == chord->track())
+                                          note2 = n;
+                                    }
+                              else if (cr->track() == chord->track())
+                                    noteFound = true;
+                              }
+                        }
+                  if (noteFound || note2)
+                        break;
+                  }
+            if (note2 == 0) {
+                  if (debugMode)
+                        printf("addTie: next note for tie not found\n");
+                  continue;
+                  }
+            Tie* tie = new Tie(this);
+            tie->setStartNote(note);
+            tie->setEndNote(note2);
+            tie->setTrack(note->track());
+            undoAddElement(tie);
+            select(note2, SELECT_SINGLE, 0);
+            }
       endCmd();
       }
 

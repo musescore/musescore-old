@@ -73,6 +73,7 @@
 #include "revisions.h"
 #include "slurmap.h"
 #include "tiemap.h"
+#include "layoutbreak.h"
 
 #include "omr/omr.h"
 
@@ -460,7 +461,7 @@ void Score::renumberMeasures()
       for (Measure* measure = firstMeasure(); measure; measure = measure->nextMeasure()) {
             measureNo += measure->noOffset();
             measure->setNo(measureNo);
-            if (measure->sectionBreak())
+            if (measure->sectionBreak() && measure->sectionBreak()->startWithMeasureOne())
                   measureNo = 0;
             else if (measure->irregular())      // dont count measure
                   ;

@@ -40,6 +40,7 @@ class LayoutBreak : public Element {
       QPainterPath path;
       double _pause;
       bool _startWithLongNames;
+      bool _startWithMeasureOne;
 
       virtual void draw(Painter*) const;
       virtual void layout();
@@ -57,10 +58,12 @@ class LayoutBreak : public Element {
       virtual void propertyAction(ScoreView*, const QString&);
       virtual void write(Xml&) const;
       virtual void read(QDomElement);
-      double pause() const               { return _pause; }
-      void setPause(double v)            { _pause = v; }
-      bool startWithLongNames() const    { return _startWithLongNames; }
-      void setStartWithLongNames(bool v) { _startWithLongNames = v; }
+      double pause() const                { return _pause; }
+      void setPause(double v)             { _pause = v; }
+      bool startWithLongNames() const     { return _startWithLongNames; }
+      void setStartWithLongNames(bool v)  { _startWithLongNames = v; }
+      bool startWithMeasureOne() const    { return _startWithMeasureOne; }
+      void setStartWithMeasureOne(bool v) { _startWithMeasureOne = v; }
       };
 
 //---------------------------------------------------------
@@ -74,6 +77,7 @@ class SectionBreakProperties : public QDialog, public Ui::SectionBreakProperties
       SectionBreakProperties(LayoutBreak*, QWidget* parent = 0);
       double pause() const;
       bool startWithLongNames() const;
+      bool startWithMeasureOne() const;
       };
 
 #endif

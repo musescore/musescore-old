@@ -439,14 +439,14 @@ Note* Score::addPitch(int pitch, bool addFlag)
       {
       if (addFlag) {
             // add note to chord
-            Note* on = getSelectedNote();
-            if (on == 0)
-                  return 0;
-            Note* n = addNote(on->chord(), pitch);
-            setLayoutAll(false);
-            setLayout(on->chord()->measure());
-            moveToNextInputPos();
-            return n;
+            Chord* chord = static_cast<Chord*>(_is.cr());
+            if (chord->type() == CHORD) {
+                  Note* n = addNote(chord, pitch);
+                  setLayoutAll(false);
+                  setLayout(chord->measure());
+                  moveToNextInputPos();
+                  return n;
+                  }
             }
       expandVoice();
 
