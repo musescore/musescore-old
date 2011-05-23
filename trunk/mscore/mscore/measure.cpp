@@ -3532,8 +3532,10 @@ Measure* Measure::cloneMeasure(Score* sc, SlurMap* slurMap, TieMap* tieMap)
                         Tuplet* ot     = ocr->tuplet();
                         if (ot) {
                               Tuplet* nt = tupletMap[track].findNew(ot);
+printf("Tuplet %p %p\n", nt, ot);
                               if (nt == 0) {
                                     nt = new Tuplet(*ot);
+printf("  create %p\n", nt);
                                     nt->clear();
                                     nt->setTrack(track);
                                     nt->setScore(sc);

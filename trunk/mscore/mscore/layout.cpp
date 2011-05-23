@@ -689,9 +689,6 @@ void Score::doLayout()
       //   place Spanner & beams
       //---------------------------------------------------
 
-//      foreach(Beam* beam, _beams)
-//            beam->layout();
-
       int tracks = nstaves() * VOICES;
       for (int track = 0; track < tracks; ++track) {
             for (Segment* segment = firstSegment(); segment; segment = segment->next1()) {
@@ -900,7 +897,8 @@ void Score::getCurPage()
       page->setNo(curPage);
       page->layout();
       double x = (curPage == 0) ? 0.0 : _pages[curPage - 1]->pos().x()
-         + page->width() + ((curPage & 1) ? 1.0 : 50.0);
+//         + page->width() + ((curPage & 1) ? 1.0 : 50.0);
+         + page->width() + ((curPage & 1) ? 50.0 : 1.0);
       page->setPos(x, 0.0);
       }
 

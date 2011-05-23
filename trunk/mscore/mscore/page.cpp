@@ -185,7 +185,7 @@ void Page::draw(Painter* painter) const
             c2.getHsv(&h1, &s1, &v1);
             c1.getHsv(&h2, &s2, &v2);
 
-            if ((no() & 1) == 0) {
+            if (no() & 1) {
                   int bbw = bw/2-1;
                   bbw = bbw >= 1 ? bbw : 1;
                   for (int i = 0; i < bw/2; ++i) {
