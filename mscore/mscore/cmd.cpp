@@ -2454,6 +2454,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                                    cr = new Rest(this);
                               else
                                     cr = new RepeatMeasure(this);
+                              
                               cr->setTrack(curTrack);
                               cr->setTick(curTick);         // set default tick position
                               cr->read(eee, tuplets);
@@ -2467,6 +2468,17 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                               curTick  = cr->tick();
                               int tick = cr->tick() - tickStart + dstTick;
                               cr->setTick(tick);
+                              // when multiple voices involved,
+                              // notes can exceed the length of the selection
+                              // if this is the case, shorten them
+                              // tickStart + tickLen = end of selection
+                              // curTick + cr->tickLen() = note position + duration
+                              if (cr->tickLen() + curTick > tickStart + tickLen) {
+                                    int len  = tickStart + tickLen - curTick;
+                                    Duration d;
+                                    d.setVal(len);
+                                    cr->setDuration(d.fraction());
+                              }
 
                               if (cr->type() == CHORD) {
                                     // set note track

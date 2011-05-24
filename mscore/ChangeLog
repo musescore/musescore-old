@@ -1,3 +1,7 @@
+24.may (la)
+      - fix #4526: Adding ties to chords
+      - fix #9805: Second Voice can end up broken (patch by fnbecker)
+      - Never create empty score on startup
 20.may (la)
       - accommodate two digit version X.X
       - fix #9307: Nested tuplets causes crash
