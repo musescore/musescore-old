@@ -73,6 +73,7 @@
 #include "revisions.h"
 #include "slurmap.h"
 #include "tiemap.h"
+#include "spannermap.h"
 #include "layoutbreak.h"
 
 #include "omr/omr.h"
@@ -2550,12 +2551,13 @@ bool Score::appendScore(Score* score)
       int tracks       = score->nstaves() * VOICES;
       SlurMap* slurMap = new SlurMap[tracks];
       TieMap*  tieMap  = new TieMap[tracks];
+      SpannerMap spannerMap;
 
       MeasureBaseList* ml = &score->_measures;
       for (MeasureBase* mb = ml->first(); mb; mb = mb->next()) {
             MeasureBase* nmb;
             if (mb->type() == MEASURE)
-                  nmb = static_cast<Measure*>(mb)->cloneMeasure(this, slurMap, tieMap);
+                  nmb = static_cast<Measure*>(mb)->cloneMeasure(this, slurMap, tieMap, &spannerMap);
             else
                   nmb = mb->clone();
             nmb->setNext(0);

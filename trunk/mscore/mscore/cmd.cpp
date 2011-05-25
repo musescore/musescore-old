@@ -713,6 +713,7 @@ printf("makeGap %s at %d track %d\n", qPrintable(_sd.print()), segment->tick(), 
       // not be deleted (it may contain other elements we want to preserve)
       //
       Segment* firstSegment = segment;
+      int nextTick = segment->tick();
 
       for (Segment* seg = firstSegment; seg; seg = seg->next(SegChordRest | SegGrace)) {
             if (seg->subtype() == SegGrace) {
@@ -728,6 +729,8 @@ printf("makeGap %s at %d track %d\n", qPrintable(_sd.print()), segment->tick(), 
             //
             ChordRest* cr = static_cast<ChordRest*>(seg->element(track));
             if (!cr) {
+                  if (seg->tick() < nextTick)
+                        continue;
                   Segment* seg1 = seg->next(SegChordRest);
                   int tick2 = seg1 ? seg1->tick() : seg->measure()->tick() + seg->measure()->ticks();
                   Fraction td(Fraction::fromTicks(tick2 - seg->tick()));
@@ -738,6 +741,7 @@ printf("makeGap %s at %d track %d\n", qPrintable(_sd.print()), segment->tick(), 
                   sd -= td;
                   if (sd.isZero())
                         return akkumulated;
+                  nextTick = seg1->tick();
                   continue;
                   }
             //
@@ -790,7 +794,7 @@ printf("  makeGap: remove %d/%d at %d\n", td.numerator(), td.denominator(), cr->
                               }
                         }
                   }
-
+            nextTick += td.ticks();
             if (sd < td) {
                   //
                   // we removed too much
@@ -823,8 +827,10 @@ printf("   gap at tick %d+%d\n", cr->tick(), f.ticks());
                   return akkumulated;
                   }
             akkumulated += td;
-// printf("  akkumulated %d/%d\n", akkumulated.numerator(), akkumulated.denominator());
             sd          -= td;
+printf("  akkumulated %d/%d rest %d/%d (-%d/%d)\n",
+   akkumulated.numerator(), akkumulated.denominator(), sd.numerator(), sd.denominator(),
+   td.numerator(), td.denominator());
             if (sd.isZero())
                   return akkumulated;
             }
@@ -949,6 +955,7 @@ QList<Fraction> Score::splitGapToMeasureBoundaries(ChordRest* cr, Fraction gap)
 
 void Score::changeCRlen(ChordRest* cr, const Duration& d)
       {
+      deselectAll();
       Fraction srcF(cr->duration());
       Fraction dstF;
       if (d.type() == Duration::V_MEASURE)
@@ -1018,10 +1025,6 @@ printf("  ChangeCRLen:: %d += %d(actual=%d)\n", tick, f2.ticks(), f2.ticks() * t
                   }
             else {
                   QList<Duration> dList = toDurationList(f2, true);
-//printf("   sublist:\n");
-//      foreach (Duration d, dList)
-//            printf("      %d/%d\n", d.fraction().numerator(), d.fraction().denominator());
-
                   Measure* measure = tick2measure(tick);
                   if (((tick - measure->tick()) % dList[0].ticks()) == 0) {
                         foreach(Duration d, dList) {

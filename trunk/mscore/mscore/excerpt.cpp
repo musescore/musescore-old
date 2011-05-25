@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2009-2010 Werner Schweer et al.
+//  Copyright (C) 2009-2011 Werner Schweer et al.
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -42,6 +42,7 @@
 #include "tupletmap.h"
 #include "slurmap.h"
 #include "tiemap.h"
+#include "spannermap.h"
 
 //---------------------------------------------------------
 //   read
@@ -372,6 +373,7 @@ void cloneStaff(Staff* srcStaff, Staff* dstStaff)
       int tracks       = score->nstaves() * VOICES;
       SlurMap* slurMap = new SlurMap[tracks];
       TieMap* tieMap   = new TieMap[tracks];
+
       int srcStaffIdx  = score->staffIdx(srcStaff);
       int dstStaffIdx  = score->staffIdx(dstStaff);
 
