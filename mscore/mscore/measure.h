@@ -44,6 +44,7 @@ class Note;
 class Spacer;
 class SlurMap;
 class TieMap;
+class SpannerMap;
 
 //---------------------------------------------------------
 //   MStaff
@@ -138,7 +139,7 @@ class Measure : public MeasureBase {
       virtual Measure* clone() const   { return new Measure(*this); }
       virtual ElementType type() const { return MEASURE; }
       virtual void setScore(Score* s);
-      Measure* cloneMeasure(Score*, SlurMap*, TieMap*);
+      Measure* cloneMeasure(Score*, SlurMap*, TieMap*, SpannerMap*);
 
       virtual void read(QDomElement, int idx);
       virtual void write(Xml&, int, bool writeSystemElements) const;

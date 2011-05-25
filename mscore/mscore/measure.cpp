@@ -82,6 +82,7 @@
 #include "slurmap.h"
 #include "tiemap.h"
 #include "tupletmap.h"
+#include "spannermap.h"
 
 //---------------------------------------------------------
 //   MStaff
@@ -3477,7 +3478,7 @@ Fraction Measure::stretchedLen(Staff* staff) const
 //   cloneMeasure
 //---------------------------------------------------------
 
-Measure* Measure::cloneMeasure(Score* sc, SlurMap* slurMap, TieMap* tieMap)
+Measure* Measure::cloneMeasure(Score* sc, SlurMap* slurMap, TieMap* tieMap, SpannerMap* spannerMap)
       {
       Measure* m      = new Measure(sc);
       m->_first       = 0;
@@ -3532,10 +3533,8 @@ Measure* Measure::cloneMeasure(Score* sc, SlurMap* slurMap, TieMap* tieMap)
                         Tuplet* ot     = ocr->tuplet();
                         if (ot) {
                               Tuplet* nt = tupletMap[track].findNew(ot);
-printf("Tuplet %p %p\n", nt, ot);
                               if (nt == 0) {
                                     nt = new Tuplet(*ot);
-printf("  create %p\n", nt);
                                     nt->clear();
                                     nt->setTrack(track);
                                     nt->setScore(sc);
@@ -3557,7 +3556,7 @@ printf("  create %p\n", nt);
                                     ncr->addSlurBack(slur);
                                     }
                               else {
-                                    printf("cloneStave: cannot find slur\n");
+                                    printf("cloneMeasure: cannot find slur\n");
                                     }
                               }
                         if (oe->type() == CHORD) {
@@ -3580,7 +3579,7 @@ printf("  create %p\n", nt);
                                                 tie->setEndNote(nn);
                                                 }
                                           else {
-                                                printf("cloneStave: cannot find tie\n");
+                                                printf("cloneMeasure: cannot find tie\n");
                                                 }
                                           }
                                     }
@@ -3595,6 +3594,22 @@ printf("  create %p\n", nt);
                         Element* ne = e->clone();
                         ne->setTrack(track);
                         s->add(ne);
+                        }
+                  foreach(Spanner* spanner, oseg->spannerFor()) {
+                        Spanner* nsp = static_cast<Spanner*>(spanner->clone());
+                        nsp->setScore(sc);
+                        s->addSpannerFor(nsp);
+                        spannerMap->add(spanner, nsp);
+                        nsp->setStartElement(s);
+                        }
+                  foreach(Spanner* osp, oseg->spannerBack()) {
+                        Spanner* spanner = spannerMap->findNew(osp);
+                        if (spanner) {
+                              s->addSpannerBack(spanner);
+                              spanner->setEndElement(s);
+                              }
+                        else
+                              printf("cloneMeasure: cannot find spanner %p\n", osp);
                         }
                   }
             }

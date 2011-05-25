@@ -1,3 +1,5 @@
+25.may (ws)
+      - fix #10805: Extra rests in measure when entering (some) notes
 23.may (ws)
       - selecting a chord stem and press "add tie +" ties the whole chord
       - add tie "+" can be applied to several selected notes at once

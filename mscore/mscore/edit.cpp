@@ -211,7 +211,7 @@ Chord* Score::addChord(int tick, Duration d, Chord* oc, bool genTie, Tuplet* tup
                   undoAddElement(tie);
                   }
             }
-//      undoAddCR(chord, measure, tick);
+      updateAccidentals(measure, chord->staffIdx());
       return chord;
       }
 
