@@ -511,11 +511,6 @@ class Score : public QObject {
       ChordRest* addClone(ChordRest* cr, int tick, const Duration& d);
       Rest* setRest(int tick,  int track, Fraction, bool useDots, Tuplet* tuplet);
 
-      void select(Element* obj, SelectType = SELECT_SINGLE, int staff = 0);
-      void deselect(Element* obj);
-      void deselectAll()     { _selection.deselectAll(); }
-      void updateSelection() { _selection.update(); }
-
       void searchSelectedElements();
 
       void upDown(bool up, UpDownMode);
@@ -609,6 +604,10 @@ class Score : public QObject {
       ChordRest* getSelectedChordRest() const;
       void getSelectedChordRest2(ChordRest** cr1, ChordRest** cr2) const;
 
+      void select(Element* obj, SelectType = SELECT_SINGLE, int staff = 0);
+      void deselect(Element* obj);
+      void deselectAll()                    { _selection.deselectAll(); }
+      void updateSelection()                { _selection.update(); }
       Element* getSelectedElement() const   { return _selection.element(); }
       const Selection& selection() const    { return _selection; }
       Selection& selection()                { return _selection; }

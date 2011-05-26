@@ -292,7 +292,7 @@ void ScoreView::cmdAddPitch(int note, bool addFlag)
       InputState& is = _score->inputState();
       if (is.track() == -1)          // invalid state
             return;
-      Drumset* ds    = is.drumset();
+      Drumset* ds = is.drumset();
       int pitch;
       if (ds) {
             char note1 = "CDEFGAB"[note];
@@ -332,6 +332,15 @@ void ScoreView::cmdAddPitch(int note, bool addFlag)
       }
 
 //---------------------------------------------------------
+//   wrongPosition
+//---------------------------------------------------------
+
+static void wrongPosition()
+      {
+      printf("cannot enter notes here (no chord rest at current position)\n");
+      }
+
+//---------------------------------------------------------
 //   cmdAddPitch1
 //---------------------------------------------------------
 
@@ -340,13 +349,13 @@ void ScoreView::cmdAddPitch1(int pitch, bool addFlag)
       InputState& is = _score->inputState();
 
       if (is.segment() == 0) {
-            printf("cannot enter notes here (no chord rest at current position)\n");
+            wrongPosition();
             return;
             }
       _score->startCmd();
       _score->expandVoice();
       if (is.cr() == 0) {
-            printf("cannot enter notes here (no chord rest at current position)\n");
+            wrongPosition();
             return;
             }
       if (!noteEntryMode()) {
@@ -438,12 +447,12 @@ void Score::expandVoice()
 Note* Score::addPitch(int pitch, bool addFlag)
       {
       if (addFlag) {
-            // add note to chord
-            Chord* chord = static_cast<Chord*>(_is.cr());
-            if (chord->type() == CHORD) {
-                  Note* n = addNote(chord, pitch);
+            // add note to selected chord
+            Note* note = static_cast<Note*>(selection().element());
+            if (note->type() == NOTE) {
+                  Note* n = addNote(note->chord(), pitch);
                   setLayoutAll(false);
-                  setLayout(chord->measure());
+                  setLayout(note->chord()->measure());
                   moveToNextInputPos();
                   return n;
                   }
