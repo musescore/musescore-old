@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: allqt.h,v 1.24 2006/03/02 17:08:30 wschweer Exp $
 //
-//  Copyright (C) 2004-2006 Werner Schweer (ws@seh.de)
+//  Copyright (C) 2004-2011 Werner Schweer (ws@seh.de)
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -36,6 +36,9 @@
 #include <QtGui/QFormLayout>
 #include <QtGui/QDateTimeEdit>
 #include <QtGui/QInputDialog>
+
+#include <QtWebKit/QWebView>
+#include <QtWebKit/QWebFrame>
 
 #include <QtXml/QtXml>
 
