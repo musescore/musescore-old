@@ -68,6 +68,7 @@
 #include "pianotools.h"
 #include "mediadialog.h"
 #include "profile.h"
+#include "webpage.h"
 
 #ifdef OSC
 #include "ofqf/qoscserver.h"
@@ -361,6 +362,7 @@ MuseScore::MuseScore()
       lastOpenPath          = preferences.workingDirectory;
       _textTools            = 0;
       _pianoTools           = 0;
+      _webPage              = 0;
       _mediaDialog          = 0;
       _drumTools            = 0;
       pianorollEditor       = 0;
@@ -444,6 +446,12 @@ MuseScore::MuseScore()
 
       _statusBar->addPermanentWidget(layerSwitch);
       _statusBar->addPermanentWidget(_positionLabel, 0);
+
+      QToolButton* web = new QToolButton(this);
+      webAction = getAction("web");
+      webAction->setCheckable(true);
+      web->setDefaultAction(webAction);
+      _statusBar->addPermanentWidget(web, 0);
 
       setStatusBar(_statusBar);
 
@@ -2564,6 +2572,8 @@ void MuseScore::cmd(QAction* a)
             ;
       else if (cmd == "piano")
             showPianoKeyboard();
+      else if (cmd == "web")
+            showWeb();
       else if (cmd == "media")
             showMediaDialog();
       else if (cmd == "page-settings")
@@ -3711,6 +3721,26 @@ void MuseScore::showPianoKeyboard()
       }
 
 //---------------------------------------------------------
+//   showWeb
+//---------------------------------------------------------
+
+void MuseScore::showWeb()
+      {
+      bool on = webAction->isChecked();
+      if (on) {
+            if (_webPage == 0) {
+                  _webPage = new WebPage(this, this);
+                  addDockWidget(Qt::RightDockWidgetArea, _webPage);
+                  }
+            _webPage->show();
+            }
+      else {
+            if (_webPage)
+                  _webPage->hide();
+            }
+      }
+
+//---------------------------------------------------------
 //   showMediaDialog
 //---------------------------------------------------------
 
@@ -3983,5 +4013,14 @@ void MuseScore::switchLayer(const QString& s)
                   }
             ++layer;
             }
+      }
+
+//---------------------------------------------------------
+//   loadFile
+//---------------------------------------------------------
+
+void MuseScore::loadFile(const QString& url)
+      {
+
       }
 

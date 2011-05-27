@@ -72,7 +72,7 @@ QT4_WRAP_CPP (mocs
       harmonycanvas.h updatechecker.h fret.h fretcanvas.h editstafftype.h
       prefsdialog.h layoutbreak.h hairpin.h bend.h bendcanvas.h tremolobar.h tremolobarcanvas.h
       drumtools.h texteditor.h texttools.h pianotools.h editpitch.h  editstringdata.h
-      editraster.h mediadialog.h chordeditor.h chordview.h album.h layer.h
+      editraster.h mediadialog.h chordeditor.h chordview.h album.h layer.h webpage.h
       )
 
 if (APPLE)
@@ -168,7 +168,7 @@ add_executable ( ${ExecutableName}
       cursor.cpp textframe.cpp editstafftype.cpp texttools.cpp editpitch.cpp
       editstringdata.cpp editraster.cpp iname.cpp pianotools.cpp mediadialog.cpp
       cleflist.cpp profile.cpp exportmp3.cpp chordeditor.cpp chordview.cpp
-      album.cpp layer.cpp
+      album.cpp layer.cpp webpage.cpp
       ${OMR_FILES}
       ${AUDIO}
       )

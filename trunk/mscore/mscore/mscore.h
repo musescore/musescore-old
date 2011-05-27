@@ -72,6 +72,7 @@ class PianoTools;
 class MediaDialog;
 class Profile;
 class AlbumManager;
+class WebPage;
 
 extern QString mscoreGlobalShare;
 static const int PROJECT_LIST_LEN = 6;
@@ -214,6 +215,7 @@ class MuseScore : public QMainWindow {
       QToolBar* entryTools;
       TextTools* _textTools;
       PianoTools* _pianoTools;
+      WebPage* _webPage;
       MediaDialog* _mediaDialog;
       DrumTools* _drumTools;
       QToolBar* voiceTools;
@@ -304,6 +306,7 @@ class MuseScore : public QMainWindow {
       QAction* hRasterAction;
       QAction* vRasterAction;
       QAction* pianoAction;
+      QAction* webAction;
 
       QMenu* menuProfiles;
       QActionGroup* profiles;
@@ -357,6 +360,7 @@ class MuseScore : public QMainWindow {
       void initOsc();
       void editRaster();
       void showPianoKeyboard();
+      void showWeb();
       void showMediaDialog();
       void showAlbumManager();
       void showLayerManager();
@@ -490,8 +494,9 @@ class MuseScore : public QMainWindow {
       void changeState(ScoreState);
       bool readLanguages(const QString& path);
       void setRevision(QString& r){rev = r;}
-      QString revision(){return rev;}
-      void newFile();
+      QString revision() {return rev;}
+      Q_INVOKABLE void newFile();
+      Q_INVOKABLE void loadFile(const QString& url);
       bool hasToCheckForUpdate();
       static bool unstable();
       bool eventFilter(QObject *, QEvent *);
