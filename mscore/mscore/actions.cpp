@@ -2526,6 +2526,15 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Layer..."),
          QT_TRANSLATE_NOOP("action","Layer")
          ),
+      Shortcut(
+         STATE_NORMAL,
+         "web",
+         QT_TRANSLATE_NOOP("action","Web"),
+         0,
+         Qt::ApplicationShortcut,
+         QT_TRANSLATE_NOOP("action","W"),
+         QT_TRANSLATE_NOOP("action","WEB")
+         ),
       // xml==0  marks end of list
       Shortcut(0, 0, 0, QKeySequence::UnknownKey)
       };
