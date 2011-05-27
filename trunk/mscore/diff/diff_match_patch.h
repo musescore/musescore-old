@@ -31,12 +31,17 @@
  *
  * Qt/C++ port by mikeslemmer@gmail.com (Mike Slemmer):
  *
- * Code compiles and runs with Qt 4.3.3.
+ * Code known to compile and run with Qt 4.3 through Qt 4.7.
  *
- * Here is a trivial sample program which works properly when linked with this library:
+ * Here is a trivial sample program which works properly when linked with this
+ * library:
  *
 
  #include <QtCore>
+ #include <QString>
+ #include <QList>
+ #include <QMap>
+ #include <QVariant>
  #include "diff_match_patch.h"
  int main(int argc, char **argv) {
    diff_match_patch dmp;
@@ -44,7 +49,8 @@
    QString str2 = QString("Second string in diff");
 
    QString strPatch = dmp.patch_toText(dmp.patch_make(str1, str2));
-   QPair<QString, QVector<bool> > out = dmp.patch_apply(dmp.patch_fromText(strPatch), str1);
+   QPair<QString, QVector<bool> > out
+       = dmp.patch_apply(dmp.patch_fromText(strPatch), str1);
    QString strResult = out.first;
 
    // here, strResult will equal str2 above.
@@ -127,9 +133,6 @@ class diff_match_patch {
   float Diff_Timeout;
   // Cost of an empty edit operation in terms of edit characters.
   short Diff_EditCost;
-  // The size beyond which the double-ended diff activates.
-  // Double-ending is twice as fast, but less accurate.
-  short Diff_DualThreshold;
   // At what point is no match declared (0.0 = perfection, 1.0 = very loose).
   float Match_Threshold;
   // How far to search for a match (0 = exact location, 1000+ = broad match).
@@ -145,7 +148,7 @@ class diff_match_patch {
   short Patch_Margin;
 
   // The number of bits in an int.
-  int Match_MaxBits;
+  short Match_MaxBits;
 
 
  public:
@@ -157,7 +160,7 @@ class diff_match_patch {
 
   /**
    * Find the differences between two texts.
-   * Run a faster slightly less optimal diff
+   * Run a faster slightly less optimal diff.
    * This method allows the 'checklines' of diff_main() to be optional.
    * Most of the time checklines is wanted, so default to true.
    * @param text1 Old string to be diffed.
@@ -167,16 +170,30 @@ class diff_match_patch {
   QList<Diff> diff_main(const QString &text1, const QString &text2);
 
   /**
+   * Find the differences between two texts.
+   * @param text1 Old string to be diffed.
+   * @param text2 New string to be diffed.
+   * @param checklines Speedup flag.  If false, then don't run a
+   *     line-level diff first to identify the changed areas.
+   *     If true, then run a faster slightly less optimal diff.
+   * @return Linked List of Diff objects.
+   */
+  QList<Diff> diff_main(const QString &text1, const QString &text2, bool checklines);
+
+  /**
    * Find the differences between two texts.  Simplifies the problem by
    * stripping any common prefix or suffix off the texts before diffing.
    * @param text1 Old string to be diffed.
    * @param text2 New string to be diffed.
    * @param checklines Speedup flag.  If false, then don't run a
    *     line-level diff first to identify the changed areas.
-   *     If true, then run a faster slightly less optimal diff
+   *     If true, then run a faster slightly less optimal diff.
+   * @param deadline Time when the diff should be complete by.  Used
+   *     internally for recursive calls.  Users should set DiffTimeout instead.
    * @return Linked List of Diff objects.
    */
-  QList<Diff> diff_main(const QString &text1, const QString &text2, bool checklines);
+ private:
+  QList<Diff> diff_main(const QString &text1, const QString &text2, bool checklines, clock_t deadline);
 
   /**
    * Find the differences between two texts.  Assumes that the texts do not
@@ -185,11 +202,48 @@ class diff_match_patch {
    * @param text2 New string to be diffed.
    * @param checklines Speedup flag.  If false, then don't run a
    *     line-level diff first to identify the changed areas.
-   *     If true, then run a faster slightly less optimal diff
+   *     If true, then run a faster slightly less optimal diff.
+   * @param deadline Time when the diff should be complete by.
+   * @return Linked List of Diff objects.
+   */
+ private:
+  QList<Diff> diff_compute(QString text1, QString text2, bool checklines, clock_t deadline);
+
+  /**
+   * Do a quick line-level diff on both strings, then rediff the parts for
+   * greater accuracy.
+   * This speedup can produce non-minimal diffs.
+   * @param text1 Old string to be diffed.
+   * @param text2 New string to be diffed.
+   * @param deadline Time when the diff should be complete by.
+   * @return Linked List of Diff objects.
+   */
+ private:
+  QList<Diff> diff_lineMode(QString text1, QString text2, clock_t deadline);
+
+  /**
+   * Find the 'middle snake' of a diff, split the problem in two
+   * and return the recursively constructed diff.
+   * See Myers 1986 paper: An O(ND) Difference Algorithm and Its Variations.
+   * @param text1 Old string to be diffed.
+   * @param text2 New string to be diffed.
    * @return Linked List of Diff objects.
    */
  protected:
-  QList<Diff> diff_compute(QString text1, QString text2, bool checklines);
+  QList<Diff> diff_bisect(const QString &text1, const QString &text2, clock_t deadline);
+
+  /**
+   * Given the location of the 'middle snake', split the diff in two parts
+   * and recurse.
+   * @param text1 Old string to be diffed.
+   * @param text2 New string to be diffed.
+   * @param x Index of split point in text1.
+   * @param y Index of split point in text2.
+   * @param deadline Time at which to bail if not yet complete.
+   * @return LinkedList of Diff objects.
+   */
+ private:
+  QList<Diff> diff_bisectSplit(const QString &text1, const QString &text2, int x, int y, clock_t deadline);
 
   /**
    * Split two texts into a list of strings.  Reduce the texts to a string of
@@ -225,38 +279,7 @@ class diff_match_patch {
   void diff_charsToLines(QList<Diff> &diffs, const QStringList &lineArray);
 
   /**
-   * Explore the intersection points between the two texts.
-   * @param text1 Old string to be diffed.
-   * @param text2 New string to be diffed.
-   * @return LinkedList of Diff objects or null if no diff available.
-   */
- protected:
-  QList<Diff> diff_map(const QString &text1, const QString &text2);
-
-  /**
-   * Work from the middle back to the start to determine the path.
-   * @param v_map List of path sets.
-   * @param text1 Old string fragment to be diffed.
-   * @param text2 New string fragment to be diffed.
-   * @return LinkedList of Diff objects.
-   */
- protected:
-  QList<Diff> diff_path1(const QList<QSet<QPair<int, int> > > &v_map,
-                         const QString &text1, const QString &text2);
-
-  /**
-   * Work from the middle back to the end to determine the path.
-   * @param v_map List of path sets.
-   * @param text1 Old string fragment to be diffed.
-   * @param text2 New string fragment to be diffed.
-   * @return LinkedList of Diff objects.
-   */
- protected:
-  QList<Diff> diff_path2(const QList<QSet<QPair<int, int> > > &v_map,
-                         const QString &text1, const QString &text2);
-
-  /**
-   * Determine the common prefix of two strings
+   * Determine the common prefix of two strings.
    * @param text1 First string.
    * @param text2 Second string.
    * @return The number of characters common to the start of each string.
@@ -265,7 +288,7 @@ class diff_match_patch {
   int diff_commonPrefix(const QString &text1, const QString &text2);
 
   /**
-   * Determine the common suffix of two strings
+   * Determine the common suffix of two strings.
    * @param text1 First string.
    * @param text2 Second string.
    * @return The number of characters common to the end of each string.
@@ -274,8 +297,19 @@ class diff_match_patch {
   int diff_commonSuffix(const QString &text1, const QString &text2);
 
   /**
+   * Determine if the suffix of one string is the prefix of another.
+   * @param text1 First string.
+   * @param text2 Second string.
+   * @return The number of characters common to the end of the first
+   *     string and the start of the second string.
+   */
+ protected:
+  int diff_commonOverlap(const QString &text1, const QString &text2);
+
+  /**
    * Do the two texts share a substring which is at least half the length of
    * the longer text?
+   * This speedup can produce non-minimal diffs.
    * @param text1 First string.
    * @param text2 Second string.
    * @return Five element String array, containing the prefix of text1, the
@@ -536,6 +570,7 @@ class diff_match_patch {
   /**
    * Look through the patches and break up any which are longer than the
    * maximum limit of the match algorithm.
+   * Intended to be called only from within patch_apply.
    * @param patches LinkedList of Patch objects.
    */
  public:
@@ -558,6 +593,31 @@ class diff_match_patch {
    */
  public:
   QList<Patch> patch_fromText(const QString &textline);
+
+  /**
+   * A safer version of QString.mid(pos).  This one returns "" instead of
+   * null when the postion equals the string length.
+   * @param str String to take a substring from.
+   * @param pos Position to start the substring from.
+   * @return Substring.
+   */
+ private:
+  static inline QString safeMid(const QString &str, int pos) {
+    return (pos == str.length()) ? QString("") : str.mid(pos);
+  }
+
+  /**
+   * A safer version of QString.mid(pos, len).  This one returns "" instead of
+   * null when the postion equals the string length.
+   * @param str String to take a substring from.
+   * @param pos Position to start the substring from.
+   * @param len Length of substring.
+   * @return Substring.
+   */
+ private:
+  static inline QString safeMid(const QString &str, int pos, int len) {
+    return (pos == str.length()) ? QString("") : str.mid(pos, len);
+  }
 };
 
 #endif // DIFF_MATCH_PATCH_H

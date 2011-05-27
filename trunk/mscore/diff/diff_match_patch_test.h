@@ -30,6 +30,7 @@ class diff_match_patch_test {
   //  DIFF TEST FUNCTIONS
   void testDiffCommonPrefix();
   void testDiffCommonSuffix();
+  void testDiffCommonOverlap();
   void testDiffHalfmatch();
   void testDiffLinesToChars();
   void testDiffCharsToLines();
@@ -42,7 +43,7 @@ class diff_match_patch_test {
   void testDiffDelta();
   void testDiffXIndex();
   void testDiffLevenshtein();
-  void testDiffPath();
+  void testDiffBisect();
   void testDiffMain();
 
   //  MATCH TEST FUNCTIONS
@@ -74,8 +75,7 @@ class diff_match_patch_test {
   void assertEquals(const QString &strCase, const QStringList &list1, const QStringList &list2);
   void assertTrue(const QString &strCase, bool value);
   void assertFalse(const QString &strCase, bool value);
-  void assertNull(const QString &strCase, const QStringList &list);
-  void assertNull(const QString &strCase, const QList<Diff> &list);
+  void assertEmpty(const QString &strCase, const QStringList &list);
 
   // Construct the two texts which made up the diff originally.
   QStringList diff_rebuildtexts(QList<Diff> diffs);

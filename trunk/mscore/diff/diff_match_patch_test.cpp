@@ -19,7 +19,7 @@
  * http://code.google.com/p/google-diff-match-patch/
  */
 
-// Code known to compile and run with Qt 4.3.3 and Qt 4.4.0.
+// Code known to compile and run with Qt 4.3 through Qt 4.7.
 #include <QtCore>
 #include "diff_match_patch.h"
 #include "diff_match_patch_test.h"
@@ -44,6 +44,7 @@ void diff_match_patch_test::run_all_tests() {
   try {
     testDiffCommonPrefix();
     testDiffCommonSuffix();
+    testDiffCommonOverlap();
     testDiffHalfmatch();
     testDiffLinesToChars();
     testDiffCharsToLines();
@@ -55,11 +56,14 @@ void diff_match_patch_test::run_all_tests() {
     testDiffText();
     testDiffDelta();
     testDiffXIndex();
-    testDiffPath();
+    testDiffLevenshtein();
+    testDiffBisect();
     testDiffMain();
+
     testMatchAlphabet();
     testMatchBitap();
     testMatchMain();
+
     testPatchObj();
     testPatchFromText();
     testPatchToText();
@@ -70,7 +74,7 @@ void diff_match_patch_test::run_all_tests() {
     testPatchApply();
     qDebug("All tests passed.");
   } catch (QString strCase) {
-    qDebug(qPrintable(QString("Test failed: %1").arg(strCase)));
+    qDebug("Test failed: %s", qPrintable(strCase));
   }
   qDebug("Total time: %d ms", t.elapsed());
 }
@@ -78,7 +82,7 @@ void diff_match_patch_test::run_all_tests() {
 //  DIFF TEST FUNCTIONS
 
 void diff_match_patch_test::testDiffCommonPrefix() {
-  // Detect and remove any common prefix.
+  // Detect any common prefix.
   assertEquals("diff_commonPrefix: Null case.", 0, dmp.diff_commonPrefix("abc", "xyz"));
 
   assertEquals("diff_commonPrefix: Non-null case.", 4, dmp.diff_commonPrefix("1234abcdef", "1234xyz"));
@@ -87,7 +91,7 @@ void diff_match_patch_test::testDiffCommonPrefix() {
 }
 
 void diff_match_patch_test::testDiffCommonSuffix() {
-  // Detect and remove any common suffix.
+  // Detect any common suffix.
   assertEquals("diff_commonSuffix: Null case.", 0, dmp.diff_commonSuffix("abc", "xyz"));
 
   assertEquals("diff_commonSuffix: Non-null case.", 4, dmp.diff_commonSuffix("abcdef1234", "xyz1234"));
@@ -95,19 +99,43 @@ void diff_match_patch_test::testDiffCommonSuffix() {
   assertEquals("diff_commonSuffix: Whole case.", 4, dmp.diff_commonSuffix("1234", "xyz1234"));
 }
 
+void diff_match_patch_test::testDiffCommonOverlap() {
+  // Detect any suffix/prefix overlap.
+  assertEquals("diff_commonOverlap: Null case.", 0, dmp.diff_commonOverlap("", "abcd"));
+
+  assertEquals("diff_commonOverlap: Whole case.", 3, dmp.diff_commonOverlap("abc", "abcd"));
+
+  assertEquals("diff_commonOverlap: No overlap.", 0, dmp.diff_commonOverlap("123456", "abcd"));
+
+  assertEquals("diff_commonOverlap: Overlap.", 3, dmp.diff_commonOverlap("123456xxx", "xxxabcd"));
+}
+
 void diff_match_patch_test::testDiffHalfmatch() {
   // Detect a halfmatch.
-  assertNull("diff_halfMatch: No match.", dmp.diff_halfMatch("1234567890", "abcdef"));
+  dmp.Diff_Timeout = 1;
+  assertEmpty("diff_halfMatch: No match #1.", dmp.diff_halfMatch("1234567890", "abcdef"));
+
+  assertEmpty("diff_halfMatch: No match #2.", dmp.diff_halfMatch("12345", "23"));
 
   assertEquals("diff_halfMatch: Single Match #1.", QString("12,90,a,z,345678").split(","), dmp.diff_halfMatch("1234567890", "a345678z"));
 
   assertEquals("diff_halfMatch: Single Match #2.", QString("a,z,12,90,345678").split(","), dmp.diff_halfMatch("a345678z", "1234567890"));
+
+  assertEquals("diff_halfMatch: Single Match #3.", QString("abc,z,1234,0,56789").split(","), dmp.diff_halfMatch("abc56789z", "1234567890"));
+
+  assertEquals("diff_halfMatch: Single Match #4.", QString("a,xyz,1,7890,23456").split(","), dmp.diff_halfMatch("a23456xyz", "1234567890"));
 
   assertEquals("diff_halfMatch: Multiple Matches #1.", QString("12123,123121,a,z,1234123451234").split(","), dmp.diff_halfMatch("121231234123451234123121", "a1234123451234z"));
 
   assertEquals("diff_halfMatch: Multiple Matches #2.", QString(",-=-=-=-=-=,x,,x-=-=-=-=-=-=-=").split(","), dmp.diff_halfMatch("x-=-=-=-=-=-=-=-=-=-=-=-=", "xx-=-=-=-=-=-=-="));
 
   assertEquals("diff_halfMatch: Multiple Matches #3.", QString("-=-=-=-=-=,,,y,-=-=-=-=-=-=-=y").split(","), dmp.diff_halfMatch("-=-=-=-=-=-=-=-=-=-=-=-=y", "-=-=-=-=-=-=-=yy"));
+
+  // Optimal diff would be -q+x=H-i+e=lloHe+Hu=llo-Hew+y not -qHillo+x=HelloHe-w+Hulloy
+  assertEquals("diff_halfMatch: Non-optimal halfmatch.", QString("qHillo,w,x,Hulloy,HelloHe").split(","), dmp.diff_halfMatch("qHilloHelloHew", "xHelloHeHulloy"));
+
+  dmp.Diff_Timeout = 0;
+  assertEmpty("diff_halfMatch: Optimal no halfmatch.", dmp.diff_halfMatch("qHilloHelloHew", "xHelloHeHulloy"));
 }
 
 void diff_match_patch_test::testDiffLinesToChars() {
@@ -229,6 +257,10 @@ void diff_match_patch_test::testDiffCleanupMerge() {
   dmp.diff_cleanupMerge(diffs);
   assertEquals("diff_cleanupMerge: Prefix and suffix detection.", diffList(Diff(EQUAL, "a"), Diff(DELETE, "d"), Diff(INSERT, "b"), Diff(EQUAL, "c")), diffs);
 
+  diffs = diffList(Diff(EQUAL, "x"), Diff(DELETE, "a"), Diff(INSERT, "abc"), Diff(DELETE, "dc"), Diff(EQUAL, "y"));
+  dmp.diff_cleanupMerge(diffs);
+  assertEquals("diff_cleanupMerge: Prefix and suffix detection with equalities.", diffList(Diff(EQUAL, "xa"), Diff(DELETE, "d"), Diff(INSERT, "b"), Diff(EQUAL, "cy")), diffs);
+
   diffs = diffList(Diff(EQUAL, "a"), Diff(INSERT, "ba"), Diff(EQUAL, "c"));
   dmp.diff_cleanupMerge(diffs);
   assertEquals("diff_cleanupMerge: Slide edit left.", diffList(Diff(INSERT, "ab"), Diff(EQUAL, "ac")), diffs);
@@ -283,9 +315,13 @@ void diff_match_patch_test::testDiffCleanupSemantic() {
   dmp.diff_cleanupSemantic(diffs);
   assertEquals("diff_cleanupSemantic: Null case.", diffList(), diffs);
 
-  diffs = diffList(Diff(DELETE, "a"), Diff(INSERT, "b"), Diff(EQUAL, "cd"), Diff(DELETE, "e"));
+  diffs = diffList(Diff(DELETE, "ab"), Diff(INSERT, "cd"), Diff(EQUAL, "12"), Diff(DELETE, "e"));
   dmp.diff_cleanupSemantic(diffs);
-  assertEquals("diff_cleanupSemantic: No elimination.", diffList(Diff(DELETE, "a"), Diff(INSERT, "b"), Diff(EQUAL, "cd"), Diff(DELETE, "e")), diffs);
+  assertEquals("diff_cleanupSemantic: No elimination #1.", diffList(Diff(DELETE, "ab"), Diff(INSERT, "cd"), Diff(EQUAL, "12"), Diff(DELETE, "e")), diffs);
+
+  diffs = diffList(Diff(DELETE, "abc"), Diff(INSERT, "ABC"), Diff(EQUAL, "1234"), Diff(DELETE, "wxyz"));
+  dmp.diff_cleanupSemantic(diffs);
+  assertEquals("diff_cleanupSemantic: No elimination #2.", diffList(Diff(DELETE, "abc"), Diff(INSERT, "ABC"), Diff(EQUAL, "1234"), Diff(DELETE, "wxyz")), diffs);
 
   diffs = diffList(Diff(DELETE, "a"), Diff(EQUAL, "b"), Diff(DELETE, "c"));
   dmp.diff_cleanupSemantic(diffs);
@@ -302,6 +338,14 @@ void diff_match_patch_test::testDiffCleanupSemantic() {
   diffs = diffList(Diff(EQUAL, "The c"), Diff(DELETE, "ow and the c"), Diff(EQUAL, "at."));
   dmp.diff_cleanupSemantic(diffs);
   assertEquals("diff_cleanupSemantic: Word boundaries.", diffList(Diff(EQUAL, "The "), Diff(DELETE, "cow and the "), Diff(EQUAL, "cat.")), diffs);
+
+  diffs = diffList(Diff(DELETE, "abcxx"), Diff(INSERT, "xxdef"));
+  dmp.diff_cleanupSemantic(diffs);
+  assertEquals("diff_cleanupSemantic: Overlap elimination #1.", diffList(Diff(DELETE, "abc"), Diff(EQUAL, "xx"), Diff(INSERT, "def")), diffs);
+
+  diffs = diffList(Diff(DELETE, "abcxx"), Diff(INSERT, "xxdef"), Diff(DELETE, "ABCXX"), Diff(INSERT, "XXDEF"));
+  dmp.diff_cleanupSemantic(diffs);
+  assertEquals("diff_cleanupSemantic: Overlap elimination #2.", diffList(Diff(DELETE, "abc"), Diff(EQUAL, "xx"), Diff(INSERT, "def"), Diff(DELETE, "ABC"), Diff(EQUAL, "XX"), Diff(INSERT, "DEF")), diffs);
 }
 
 void diff_match_patch_test::testDiffCleanupEfficiency() {
@@ -337,7 +381,7 @@ void diff_match_patch_test::testDiffCleanupEfficiency() {
 void diff_match_patch_test::testDiffPrettyHtml() {
   // Pretty print.
   QList<Diff> diffs = diffList(Diff(EQUAL, "a\n"), Diff(DELETE, "<B>b</B>"), Diff(INSERT, "c&d"));
-  assertEquals("diff_prettyHtml:", "<SPAN TITLE=\"i=0\">a&para;<BR></SPAN><DEL STYLE=\"background:#FFE6E6;\" TITLE=\"i=2\">&lt;B&gt;b&lt;/B&gt;</DEL><INS STYLE=\"background:#E6FFE6;\" TITLE=\"i=2\">c&amp;d</INS>", dmp.diff_prettyHtml(diffs));
+  assertEquals("diff_prettyHtml:", "<span>a&para;<br></span><del style=\"background:#ffe6e6;\">&lt;B&gt;b&lt;/B&gt;</del><ins style=\"background:#e6ffe6;\">c&amp;d</ins>", dmp.diff_prettyHtml(diffs));
 }
 
 void diff_match_patch_test::testDiffText() {
@@ -418,138 +462,37 @@ void diff_match_patch_test::testDiffXIndex() {
 
 void diff_match_patch_test::testDiffLevenshtein() {
   QList<Diff> diffs = diffList(Diff(DELETE, "abc"), Diff(INSERT, "1234"), Diff(EQUAL, "xyz"));
-  assertEquals("Levenshtein with trailing equality.", 4, dmp.diff_levenshtein(diffs));
+  assertEquals("diff_levenshtein: Trailing equality.", 4, dmp.diff_levenshtein(diffs));
 
   diffs = diffList(Diff(EQUAL, "xyz"), Diff(DELETE, "abc"), Diff(INSERT, "1234"));
-  assertEquals("Levenshtein with leading equality.", 4, dmp.diff_levenshtein(diffs));
+  assertEquals("diff_levenshtein: Leading equality.", 4, dmp.diff_levenshtein(diffs));
 
   diffs = diffList(Diff(DELETE, "abc"), Diff(EQUAL, "xyz"), Diff(INSERT, "1234"));
-  assertEquals("Levenshtein with middle equality.", 7, dmp.diff_levenshtein(diffs));
+  assertEquals("diff_levenshtein: Middle equality.", 7, dmp.diff_levenshtein(diffs));
 }
 
-void diff_match_patch_test::testDiffPath() {
-  // Single letters.
-  // Trace a path from back to front.
-  QList<QSet<QPair<int, int> > > v_map;
-  QSet<QPair<int, int> > row_set;
-  {
-    row_set = QSet<QPair<int, int> >();
-    row_set.insert(QPair<int, int>(0, 0));
-    v_map.append(row_set);
-    row_set = QSet<QPair<int, int> >();
-    row_set.insert(QPair<int, int>(0, 1));
-    row_set.insert(QPair<int, int>(1, 0));
-    v_map.append(row_set);
-    row_set = QSet<QPair<int, int> >();
-    row_set.insert(QPair<int, int>(0, 2));
-    row_set.insert(QPair<int, int>(2, 0));
-    row_set.insert(QPair<int, int>(2, 2));
-    v_map.append(row_set);
-    row_set = QSet<QPair<int, int> >();
-    row_set.insert(QPair<int, int>(0, 3));
-    row_set.insert(QPair<int, int>(2, 3));
-    row_set.insert(QPair<int, int>(3, 0));
-    row_set.insert(QPair<int, int>(4, 3));
-    v_map.append(row_set);
-    row_set = QSet<QPair<int, int> >();
-    row_set.insert(QPair<int, int>(0, 4));
-    row_set.insert(QPair<int, int>(2, 4));
-    row_set.insert(QPair<int, int>(4, 0));
-    row_set.insert(QPair<int, int>(4, 4));
-    row_set.insert(QPair<int, int>(5, 3));
-    v_map.append(row_set);
-    row_set = QSet<QPair<int, int> >();
-    row_set.insert(QPair<int, int>(0, 5));
-    row_set.insert(QPair<int, int>(2, 5));
-    row_set.insert(QPair<int, int>(4, 5));
-    row_set.insert(QPair<int, int>(5, 0));
-    row_set.insert(QPair<int, int>(6, 3));
-    row_set.insert(QPair<int, int>(6, 5));
-    v_map.append(row_set);
-    row_set = QSet<QPair<int, int> >();
-    row_set.insert(QPair<int, int>(0, 6));
-    row_set.insert(QPair<int, int>(2, 6));
-    row_set.insert(QPair<int, int>(4, 6));
-    row_set.insert(QPair<int, int>(6, 6));
-    row_set.insert(QPair<int, int>(7, 5));
-    v_map.append(row_set);
-  }
-  QList<Diff> diffs = diffList(Diff(INSERT, "W"), Diff(DELETE, "A"), Diff(EQUAL, "1"), Diff(DELETE, "B"), Diff(EQUAL, "2"), Diff(INSERT, "X"), Diff(DELETE, "C"), Diff(EQUAL, "3"), Diff(DELETE, "D"));
-  assertEquals("diff_path1: Single letters.", diffs, dmp.diff_path1(v_map, "A1B2C3D", "W12X3"));
+void diff_match_patch_test::testDiffBisect() {
+  // Normal.
+  QString a = "cat";
+  QString b = "map";
+  // Since the resulting diff hasn't been normalized, it would be ok if
+  // the insertion and deletion pairs are swapped.
+  // If the order changes, tweak this test as required.
+  QList<Diff> diffs = diffList(Diff(DELETE, "c"), Diff(INSERT, "m"), Diff(EQUAL, "a"), Diff(DELETE, "t"), Diff(INSERT, "p"));
+  assertEquals("diff_bisect: Normal.", diffs, dmp.diff_bisect(a, b, std::numeric_limits<clock_t>::max()));
 
-  // Trace a path from front to back.
-  v_map.removeAt(v_map.size() - 1);
-  diffs = diffList(Diff(EQUAL, "4"), Diff(DELETE, "E"), Diff(INSERT, "Y"), Diff(EQUAL, "5"), Diff(DELETE, "F"), Diff(EQUAL, "6"), Diff(DELETE, "G"), Diff(INSERT, "Z"));
-  assertEquals("diff_path2: Single letters.", diffs, dmp.diff_path2(v_map, "4E5F6G", "4Y56Z"));
-
-  // Double letters.
-  // Trace a path from back to front.
-  v_map = QList<QSet<QPair<int, int> > >();
-  {
-    row_set = QSet<QPair<int, int> >();
-    row_set.insert(QPair<int, int>(0, 0));
-    v_map.append(row_set);
-    row_set = QSet<QPair<int, int> >();
-    row_set.insert(QPair<int, int>(0, 1));
-    row_set.insert(QPair<int, int>(1, 0));
-    v_map.append(row_set);
-    row_set = QSet<QPair<int, int> >();
-    row_set.insert(QPair<int, int>(0, 2));
-    row_set.insert(QPair<int, int>(1, 1));
-    row_set.insert(QPair<int, int>(2, 0));
-    v_map.append(row_set);
-    row_set = QSet<QPair<int, int> >();
-    row_set.insert(QPair<int, int>(0, 3));
-    row_set.insert(QPair<int, int>(1, 2));
-    row_set.insert(QPair<int, int>(2, 1));
-    row_set.insert(QPair<int, int>(3, 0));
-    v_map.append(row_set);
-    row_set = QSet<QPair<int, int> >();
-    row_set.insert(QPair<int, int>(0, 4));
-    row_set.insert(QPair<int, int>(1, 3));
-    row_set.insert(QPair<int, int>(3, 1));
-    row_set.insert(QPair<int, int>(4, 0));
-    row_set.insert(QPair<int, int>(4, 4));
-    v_map.append(row_set);
-  }
-  diffs = diffList(Diff(INSERT, "WX"), Diff(DELETE, "AB"), Diff(EQUAL, "12"));
-  assertEquals("diff_path1: Double letters.", diffs, dmp.diff_path1(v_map, "AB12", "WX12"));
-
-  // Trace a path from front to back.
-  v_map = QList<QSet<QPair<int, int> > >();
-  {
-    row_set = QSet<QPair<int, int> >();
-    row_set.insert(QPair<int, int>(0, 0));
-    v_map.append(row_set);
-    row_set = QSet<QPair<int, int> >();
-    row_set.insert(QPair<int, int>(0, 1));
-    row_set.insert(QPair<int, int>(1, 0));
-    v_map.append(row_set);
-    row_set = QSet<QPair<int, int> >();
-    row_set.insert(QPair<int, int>(1, 1));
-    row_set.insert(QPair<int, int>(2, 0));
-    row_set.insert(QPair<int, int>(2, 4));
-    v_map.append(row_set);
-    row_set = QSet<QPair<int, int> >();
-    row_set.insert(QPair<int, int>(2, 1));
-    row_set.insert(QPair<int, int>(2, 5));
-    row_set.insert(QPair<int, int>(3, 0));
-    row_set.insert(QPair<int, int>(3, 4));
-    v_map.append(row_set);
-    row_set = QSet<QPair<int, int> >();
-    row_set.insert(QPair<int, int>(2, 6));
-    row_set.insert(QPair<int, int>(3, 5));
-    row_set.insert(QPair<int, int>(4, 4));
-    v_map.append(row_set);
-  }
-  diffs = diffList(Diff(DELETE, "CD"), Diff(EQUAL, "34"), Diff(INSERT, "YZ"));
-  assertEquals("diff_path2: Double letters.", diffs, dmp.diff_path2(v_map, "CD34", "34YZ"));
+  // Timeout.
+  diffs = diffList(Diff(DELETE, "cat"), Diff(INSERT, "map"));
+  assertEquals("diff_bisect: Timeout.", diffs, dmp.diff_bisect(a, b, 0));
 }
 
 void diff_match_patch_test::testDiffMain() {
   // Perform a trivial diff.
-  QList<Diff> diffs = diffList(Diff(EQUAL, "abc"));
-  assertEquals("diff_main: Null case.", diffs, dmp.diff_main("abc", "abc", false));
+  QList<Diff> diffs = diffList();
+  assertEquals("diff_main: Null case.", diffs, dmp.diff_main("", "", false));
+
+  diffs = diffList(Diff(EQUAL, "abc"));
+  assertEquals("diff_main: Equality.", diffs, dmp.diff_main("abc", "abc", false));
 
   diffs = diffList(Diff(EQUAL, "ab"), Diff(INSERT, "123"), Diff(EQUAL, "c"));
   assertEquals("diff_main: Simple insertion.", diffs, dmp.diff_main("abc", "ab123c", false));
@@ -566,7 +509,6 @@ void diff_match_patch_test::testDiffMain() {
   // Perform a real diff.
   // Switch off the timeout.
   dmp.Diff_Timeout = 0;
-  dmp.Diff_DualThreshold = 32;
   diffs = diffList(Diff(DELETE, "a"), Diff(INSERT, "b"));
   assertEquals("diff_main: Simple case #1.", diffs, dmp.diff_main("a", "b", false));
 
@@ -582,13 +524,13 @@ void diff_match_patch_test::testDiffMain() {
   diffs = diffList(Diff(INSERT, "xaxcx"), Diff(EQUAL, "abc"), Diff(DELETE, "y"));
   assertEquals("diff_main: Overlap #2.", diffs, dmp.diff_main("abcy", "xaxcxabc", false));
 
-  // Sub-optimal double-ended diff.
-  dmp.Diff_DualThreshold = 2;
-  diffs = diffList(Diff(INSERT, "x"), Diff(EQUAL, "a"), Diff(DELETE, "b"), Diff(INSERT, "x"), Diff(EQUAL, "c"), Diff(DELETE, "y"), Diff(INSERT, "xabc"));
-  assertEquals("diff_main: Overlap #3.", diffs, dmp.diff_main("abcy", "xaxcxabc", false));
-  dmp.Diff_DualThreshold = 32;
+  diffs = diffList(Diff(DELETE, "ABCD"), Diff(EQUAL, "a"), Diff(DELETE, "="), Diff(INSERT, "-"), Diff(EQUAL, "bcd"), Diff(DELETE, "="), Diff(INSERT, "-"), Diff(EQUAL, "efghijklmnopqrs"), Diff(DELETE, "EFGHIJKLMNOefg"));
+  assertEquals("diff_main: Overlap #3.", diffs, dmp.diff_main("ABCDa=bcd=efghijklmnopqrsEFGHIJKLMNOefg", "a-bcd-efghijklmnopqrs", false));
 
-  dmp.Diff_Timeout = 0.001f;  // 1ms
+  diffs = diffList(Diff(INSERT, " "), Diff(EQUAL, "a"), Diff(INSERT, "nd"), Diff(EQUAL, " [[Pennsylvania]]"), Diff(DELETE, " and [[New"));
+  assertEquals("diff_main: Large equality.", diffs, dmp.diff_main("a [[Pennsylvania]] and [[New", " and [[Pennsylvania]]", false));
+
+  dmp.Diff_Timeout = 0.1f;  // 100ms
   // This test may 'fail' on extremely fast computers.  If so, just increase the text lengths.
   QString a = "`Twas brillig, and the slithy toves\nDid gyre and gimble in the wabe:\nAll mimsy were the borogoves,\nAnd the mome raths outgrabe.\n";
   QString b = "I am the very model of a modern major general,\nI've information vegetable, animal, and mineral,\nI know the kings of England, and I quote the fights historical,\nFrom Marathon to Waterloo, in order categorical.\n";
@@ -597,20 +539,34 @@ void diff_match_patch_test::testDiffMain() {
     a = a + a;
     b = b + b;
   }
-  assertNull("diff_main: Timeout.", dmp.diff_map(a, b));
+  clock_t startTime = clock();
+  dmp.diff_main(a, b);
+  clock_t endTime = clock();
+  // Test that we took at least the timeout period.
+  assertTrue("diff_main: Timeout min.", dmp.Diff_Timeout * CLOCKS_PER_SEC <= endTime - startTime);
+  // Test that we didn't take forever (be forgiving).
+  // Theoretically this test could fail very occasionally if the
+  // OS task swaps or locks up for a second at the wrong moment.
+  // Java seems to overrun by ~80% (compared with 10% for other languages).
+  // Therefore use an upper limit of 0.5s instead of 0.2s.
+  assertTrue("diff_main: Timeout max.", dmp.Diff_Timeout * CLOCKS_PER_SEC * 2 > endTime - startTime);
   dmp.Diff_Timeout = 0;
 
   // Test the linemode speedup.
-  // Must be long to pass the 200 char cutoff.
+  // Must be long to pass the 100 char cutoff.
   a = "1234567890\n1234567890\n1234567890\n1234567890\n1234567890\n1234567890\n1234567890\n1234567890\n1234567890\n1234567890\n1234567890\n1234567890\n1234567890\n";
   b = "abcdefghij\nabcdefghij\nabcdefghij\nabcdefghij\nabcdefghij\nabcdefghij\nabcdefghij\nabcdefghij\nabcdefghij\nabcdefghij\nabcdefghij\nabcdefghij\nabcdefghij\n";
-  assertEquals("diff_main: Simple.", dmp.diff_main(a, b, true), dmp.diff_main(a, b, false));
+  assertEquals("diff_main: Simple line-mode.", dmp.diff_main(a, b, true), dmp.diff_main(a, b, false));
+
+  a = "1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890";
+  b = "abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij";
+  assertEquals("diff_main: Single line-mode.", dmp.diff_main(a, b, true), dmp.diff_main(a, b, false));
 
   a = "1234567890\n1234567890\n1234567890\n1234567890\n1234567890\n1234567890\n1234567890\n1234567890\n1234567890\n1234567890\n1234567890\n1234567890\n1234567890\n";
   b = "abcdefghij\n1234567890\n1234567890\n1234567890\nabcdefghij\n1234567890\n1234567890\n1234567890\nabcdefghij\n1234567890\n1234567890\n1234567890\nabcdefghij\n";
   QStringList texts_linemode = diff_rebuildtexts(dmp.diff_main(a, b, true));
   QStringList texts_textmode = diff_rebuildtexts(dmp.diff_main(a, b, false));
-  assertEquals("diff_main: Overlap.", texts_textmode, texts_linemode);
+  assertEquals("diff_main: Overlap line-mode.", texts_textmode, texts_linemode);
 
   // Test null inputs.
   try {
@@ -778,6 +734,9 @@ void diff_match_patch_test::testPatchAddContext() {
 
 void diff_match_patch_test::testPatchMake() {
   QList<Patch> patches;
+  patches = dmp.patch_make("", "");
+  assertEquals("patch_make: Null case", "", dmp.patch_toText(patches));
+
   QString text1 = "The quick brown fox jumps over the lazy dog.";
   QString text2 = "That quick brown fox jumped over a lazy dog.";
   QString expectedPatch = "@@ -1,8 +1,7 @@\n Th\n-at\n+e\n  qui\n@@ -21,17 +21,18 @@\n jump\n-ed\n+s\n  over \n-a\n+the\n  laz\n";
@@ -867,10 +826,17 @@ void diff_match_patch_test::testPatchApply() {
   dmp.Match_Threshold = 0.5f;
   dmp.Patch_DeleteThreshold = 0.5f;
   QList<Patch> patches;
-  patches = dmp.patch_make("The quick brown fox jumps over the lazy dog.", "That quick brown fox jumped over a lazy dog.");
-  QPair<QString, QVector<bool> > results = dmp.patch_apply(patches, "The quick brown fox jumps over the lazy dog.");
+  patches = dmp.patch_make("", "");
+  QPair<QString, QVector<bool> > results = dmp.patch_apply(patches, "Hello world.");
   QVector<bool> boolArray = results.second;
-  QString resultStr = results.first + "\t" + (boolArray[0] ? "true" : "false") + "\t" + (boolArray[1] ? "true" : "false");
+
+  QString resultStr = QString("%1\t%2").arg(results.first).arg(boolArray.count());
+  assertEquals("patch_apply: Null case.", "Hello world.\t0", resultStr);
+
+  patches = dmp.patch_make("The quick brown fox jumps over the lazy dog.", "That quick brown fox jumped over a lazy dog.");
+  results = dmp.patch_apply(patches, "The quick brown fox jumps over the lazy dog.");
+  boolArray = results.second;
+  resultStr = results.first + "\t" + (boolArray[0] ? "true" : "false") + "\t" + (boolArray[1] ? "true" : "false");
   assertEquals("patch_apply: Exact match.", "That quick brown fox jumped over a lazy dog.\ttrue\ttrue", resultStr);
 
   results = dmp.patch_apply(patches, "The quick red rabbit jumps over the tired tiger.");
@@ -909,7 +875,7 @@ void diff_match_patch_test::testPatchApply() {
   results = dmp.patch_apply(patches, "ABCDEFGHIJKLMNOPQRSTUVWXYZ--------------------1234567890");
   boolArray = results.second;
   resultStr = results.first + "\t" + (boolArray[0] ? "true" : "false") + "\t" + (boolArray[1] ? "true" : "false");
-  assertEquals("Compensate for failed patch.", "ABCDEFGHIJKLMNOPQRSTUVWXYZ--------------------1234567YYYYYYYYYY890\tfalse\ttrue", resultStr);
+  assertEquals("patch_apply: Compensate for failed patch.", "ABCDEFGHIJKLMNOPQRSTUVWXYZ--------------------1234567YYYYYYYYYY890\tfalse\ttrue", resultStr);
   dmp.Match_Threshold = 0.5f;
   dmp.Match_Distance = 1000;
 
@@ -945,29 +911,28 @@ void diff_match_patch_test::testPatchApply() {
 
 void diff_match_patch_test::assertEquals(const QString &strCase, int n1, int n2) {
   if (n1 != n2) {
-    qDebug(qPrintable(QString("%1 FAIL\nExpected: %2\nActual: %3")
-        .arg(strCase, QString::number(n1), QString::number(n2))));
+    qDebug("%s FAIL\nExpected: %d\nActual: %d", qPrintable(strCase), n1, n2);
     throw strCase;
   }
-  qDebug(qPrintable(QString("%1 OK").arg(strCase)));
+  qDebug("%s OK", qPrintable(strCase));
 }
 
 void diff_match_patch_test::assertEquals(const QString &strCase, const QString &s1, const QString &s2) {
   if (s1 != s2) {
-    qDebug(qPrintable(QString("%1 FAIL\nExpected: %2\nActual: %3")
-        .arg(strCase, s1, s2)));
+    qDebug("%s FAIL\nExpected: %s\nActual: %s",
+           qPrintable(strCase), qPrintable(s1), qPrintable(s2));
     throw strCase;
   }
-  qDebug(qPrintable(QString("%1 OK").arg(strCase)));
+  qDebug("%s OK", qPrintable(strCase));
 }
 
 void diff_match_patch_test::assertEquals(const QString &strCase, const Diff &d1, const Diff &d2) {
   if (d1 != d2) {
-    qDebug(qPrintable(QString("%1 FAIL\nExpected: %2\nActual: %3")
-        .arg(strCase, d1.toString(), d2.toString())));
+    qDebug("%s FAIL\nExpected: %s\nActual: %s", qPrintable(strCase),
+        qPrintable(d1.toString()), qPrintable(d2.toString()));
     throw strCase;
   }
-  qDebug(qPrintable(QString("%1 OK").arg(strCase)));
+  qDebug("%s OK", qPrintable(strCase));
 }
 
 void diff_match_patch_test::assertEquals(const QString &strCase, const QList<Diff> &list1, const QList<Diff> &list2) {
@@ -1008,11 +973,11 @@ void diff_match_patch_test::assertEquals(const QString &strCase, const QList<Dif
       first = false;
     }
     listString2 += ")";
-    qDebug(qPrintable(QString("%1 FAIL\nExpected: %2\nActual: %3")
-        .arg(strCase, listString1, listString2)));
+    qDebug("%s FAIL\nExpected: %s\nActual: %s",
+        qPrintable(strCase), qPrintable(listString1), qPrintable(listString2));
     throw strCase;
   }
-  qDebug(qPrintable(QString("%1 OK").arg(strCase)));
+  qDebug("%s OK", qPrintable(strCase));
 }
 
 void diff_match_patch_test::assertEquals(const QString &strCase, const QList<QVariant> &list1, const QList<QVariant> &list2) {
@@ -1053,20 +1018,20 @@ void diff_match_patch_test::assertEquals(const QString &strCase, const QList<QVa
       first = false;
     }
     listString2 += ")";
-    qDebug(qPrintable(QString("%1 FAIL\nExpected: %2\nActual: %3")
-        .arg(strCase, listString1, listString2)));
+    qDebug("%s FAIL\nExpected: %s\nActual: %s",
+        qPrintable(strCase), qPrintable(listString1), qPrintable(listString2));
     throw strCase;
   }
-  qDebug(qPrintable(QString("%1 OK").arg(strCase)));
+  qDebug("%s OK", qPrintable(strCase));
 }
 
 void diff_match_patch_test::assertEquals(const QString &strCase, const QVariant &var1, const QVariant &var2) {
   if (var1 != var2) {
-    qDebug(qPrintable(QString("%1 FAIL\nExpected: %2\nActual: %3")
-        .arg(strCase, var1.toString(), var2.toString())));
+    qDebug("%s FAIL\nExpected: %s\nActual: %s", qPrintable(strCase),
+        qPrintable(var1.toString()), qPrintable(var2.toString()));
     throw strCase;
   }
-  qDebug(qPrintable(QString("%1 OK").arg(strCase)));
+  qDebug("%s OK", qPrintable(strCase));
 }
 
 void diff_match_patch_test::assertEquals(const QString &strCase, const QMap<QChar, int> &m1, const QMap<QChar, int> &m2) {
@@ -1076,52 +1041,50 @@ void diff_match_patch_test::assertEquals(const QString &strCase, const QMap<QCha
     i1.next();
     i2.next();
     if (i1.key() != i2.key() || i1.value() != i2.value()) {
-      qDebug(qPrintable(QString("%1 FAIL\nExpected: (%2, %3)\nActual: (%4, %5)")
-          .arg(strCase, QString(i1.key()), QString::number(i1.value()), QString(i2.key()), QString::number(i2.value()))));
+      qDebug("%s FAIL\nExpected: (%c, %d)\nActual: (%c, %d)", qPrintable(strCase),
+          i1.key().toAscii(), i1.value(), i2.key().toAscii(), i2.value());
       throw strCase;
     }
   }
 
   if (i1.hasNext()) {
     i1.next();
-    qDebug(qPrintable(QString("%1 FAIL\nExpected: (%2, %3)\nActual: none")
-        .arg(strCase, QString(i1.key()), QString::number(i1.value()))));
+    qDebug("%s FAIL\nExpected: (%c, %d)\nActual: none",
+        qPrintable(strCase), i1.key().toAscii(), i1.value());
     throw strCase;
   }
   if (i2.hasNext()) {
     i2.next();
-    qDebug(qPrintable(QString("%1 FAIL\nExpected: none\nActual: (%2, %3)")
-        .arg(strCase, QString(i2.key()), QString::number(i2.value()))));
+    qDebug("%s FAIL\nExpected: none\nActual: (%c, %d)",
+        qPrintable(strCase), i2.key().toAscii(), i2.value());
     throw strCase;
   }
-  qDebug(qPrintable(QString("%1 OK").arg(strCase)));
+  qDebug("%s OK", qPrintable(strCase));
 }
 
 void diff_match_patch_test::assertEquals(const QString &strCase, const QStringList &list1, const QStringList &list2) {
   if (list1 != list2) {
-    qDebug(qPrintable(QString("%1 FAIL\nExpected: %2\nActual: %3")
-        .arg(strCase, list1.join(","), list2.join(","))));
+    qDebug("%s FAIL\nExpected: %s\nActual: %s", qPrintable(strCase),
+        qPrintable(list1.join(",")), qPrintable(list2.join(",")));
     throw strCase;
   }
-  qDebug(qPrintable(QString("%1 OK").arg(strCase)));
+  qDebug("%s OK", qPrintable(strCase));
 }
 
 void diff_match_patch_test::assertTrue(const QString &strCase, bool value) {
   if (!value) {
-    qDebug(qPrintable(QString("%1 FAIL\nExpected: %2\nActual: %3")
-        .arg(strCase, "true", "false")));
+    qDebug("%s FAIL\nExpected: true\nActual: false", qPrintable(strCase));
     throw strCase;
   }
-  qDebug(qPrintable(QString("%1 OK").arg(strCase)));
+  qDebug("%s OK", qPrintable(strCase));
 }
 
 void diff_match_patch_test::assertFalse(const QString &strCase, bool value) {
   if (value) {
-    qDebug(qPrintable(QString("%1 FAIL\nExpected: %2\nActual: %3")
-        .arg(strCase, "false", "true")));
+    qDebug("%s FAIL\nExpected: false\nActual: true", qPrintable(strCase));
     throw strCase;
   }
-  qDebug(qPrintable(QString("%1 OK").arg(strCase)));
+  qDebug("%s OK", qPrintable(strCase));
 }
 
 
@@ -1140,13 +1103,7 @@ QStringList diff_match_patch_test::diff_rebuildtexts(QList<Diff> diffs) {
   return text;
 }
 
-void diff_match_patch_test::assertNull(const QString &strCase, const QStringList &list) {
-  if (!list.isEmpty()) {
-    throw strCase;
-  }
-}
-
-void diff_match_patch_test::assertNull(const QString &strCase, const QList<Diff> &list) {
+void diff_match_patch_test::assertEmpty(const QString &strCase, const QStringList &list) {
   if (!list.isEmpty()) {
     throw strCase;
   }
@@ -1219,4 +1176,9 @@ qmake
 mingw32-make
 g++ -o diff_match_patch_test debug\diff_match_patch_test.o debug\diff_match_patch.o \qt4\lib\libQtCore4.a
 diff_match_patch_test.exe
+
+Compile insructions for OS X:
+qmake -spec macx-g++
+make
+./diff_match_patch
 */
