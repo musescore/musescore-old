@@ -1855,14 +1855,6 @@ static void loadScores(const QStringList& argv)
                   }
             }
 
-      if (!scoreCreated && preferences.sessionStart != EMPTY_SESSION
-         && preferences.sessionStart != NEW_SESSION) {
-            // start with empty score:
-            Score* score = new Score(mscore->defaultStyle());
-            score->fileInfo()->setFile(mscore->createDefaultName());
-            score->setCreated(true);
-            mscore->appendScore(score);
-            }
       if (mscore->noScore())
             currentScoreView = -1;
       mscore->setCurrentView(0, currentScoreView);
