@@ -49,6 +49,7 @@ set (QT_mingw_LIBRARIES
     QtXml4
     QtNetwork4
     QtScriptTools4
+    QtWebKit4
     )
 
 #    Qt3Support4
