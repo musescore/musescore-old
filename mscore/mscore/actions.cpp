@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2010 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -2534,6 +2534,24 @@ Shortcut MuseScore::sc[] = {
          Qt::ApplicationShortcut,
          QT_TRANSLATE_NOOP("action","W"),
          QT_TRANSLATE_NOOP("action","WEB")
+         ),
+      Shortcut(
+         STATE_NORMAL,
+         "next-score",
+         QT_TRANSLATE_NOOP("action","next score"),
+         Qt::CTRL+Qt::Key_F6,
+         Qt::ApplicationShortcut,
+         QT_TRANSLATE_NOOP("action","next score"),
+         QT_TRANSLATE_NOOP("action","next score")
+         ),
+      Shortcut(
+         STATE_NORMAL,
+         "previous-score",
+         QT_TRANSLATE_NOOP("action","previous score"),
+         Qt::CTRL+Qt::Key_F5,
+         Qt::ApplicationShortcut,
+         QT_TRANSLATE_NOOP("action","previous score"),
+         QT_TRANSLATE_NOOP("action","previous score")
          ),
       // xml==0  marks end of list
       Shortcut(0, 0, 0, QKeySequence::UnknownKey)

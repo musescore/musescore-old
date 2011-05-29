@@ -72,7 +72,8 @@ QT4_WRAP_CPP (mocs
       harmonycanvas.h updatechecker.h fret.h fretcanvas.h editstafftype.h
       prefsdialog.h layoutbreak.h hairpin.h bend.h bendcanvas.h tremolobar.h tremolobarcanvas.h
       drumtools.h texteditor.h texttools.h pianotools.h editpitch.h  editstringdata.h
-      editraster.h mediadialog.h chordeditor.h chordview.h album.h layer.h webpage.h
+      editraster.h mediadialog.h chordeditor.h chordview.h album.h layer.h
+      webpage.h
       )
 
 if (APPLE)

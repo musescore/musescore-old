@@ -511,6 +511,7 @@ UnZip::ErrorCode UnzipPrivate::openArchive(QIODevice* dev)
 		delete device;
 		device = 0;
 
+            printf("openArchive: unable to open device for reading\n");
 		qDebug() << "Unable to open device for reading";
 		return UnZip::OpenFailed;
 	}

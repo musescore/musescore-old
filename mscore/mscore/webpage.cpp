@@ -20,6 +20,86 @@
 
 #include "webpage.h"
 #include "mscore.h"
+#include "score.h"
+
+//---------------------------------------------------------
+//   MyWebPage
+//---------------------------------------------------------
+
+MyWebPage::MyWebPage(QObject *parent)
+   : QWebPage(parent)
+      {
+      // Enable plugin support
+      settings()->setAttribute(QWebSettings::PluginsEnabled, true);
+      }
+
+//---------------------------------------------------------
+//   createPlugin
+//---------------------------------------------------------
+
+QObject* MyWebPage::createPlugin(
+   const QString &classid,
+   const QUrl &url,
+   const QStringList &paramNames,
+   const QStringList &paramValues)
+      {
+      // Create the widget using QUiLoader.
+      // This means that the widgets don't need to be registered
+      // with the meta object system.
+      // On the other hand, non-gui objects can't be created this
+      // way. When we'd like to create non-visual objects in
+      // Html to use them via JavaScript, we'd use a different
+      // mechanism than this.
+
+      if (classid == "WebScoreView") {
+            WebScoreView* sv = new WebScoreView(view());
+            int idx = paramNames.indexOf("score");
+            if (idx != -1) {
+                  QString score = paramValues[idx];
+                  sv->setScore(paramValues[idx]);
+                  }
+            else {
+                  printf("create WebScoreView: property score not found(%d)\n",
+                     paramNames.size());
+                  }
+            return sv;
+            }
+      QUiLoader loader;
+      return loader.createWidget(classid, view());
+      }
+
+//---------------------------------------------------------
+//   MyWebView
+//---------------------------------------------------------
+
+MyWebView::MyWebView(QWidget *parent):
+   QWebView(parent),
+   m_page(this)
+      {
+      // Set the page of our own PageView class, MyPageView,
+      // because only objects of this class will handle
+      // object-tags correctly.
+
+      m_page.setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
+      QWebFrame* frame = m_page.mainFrame();
+      frame->addToJavaScriptWindowObject("mscore", mscore);
+      setPage(&m_page);
+      connect(this, SIGNAL(linkClicked(const QUrl&)), SLOT(link(const QUrl&)));
+      }
+
+//---------------------------------------------------------
+//   link
+//---------------------------------------------------------
+
+void MyWebView::link(const QUrl& url)
+      {
+      QString path(url.path());
+      QFileInfo fi(path);
+      if (fi.suffix() == "mscz")
+            mscore->loadFile(url);
+      else
+            load(url);
+      }
 
 //---------------------------------------------------------
 //   WebPage
@@ -28,18 +108,101 @@
 WebPage::WebPage(MuseScore* mscore, QWidget* parent)
    : QDockWidget(parent)
       {
-      setObjectName("webpage");
-      setWindowTitle(tr("WebView"));
-      setAllowedAreas(Qt::RightDockWidgetArea | Qt::LeftDockWidgetArea);
+      QWidget* mainWidget = new QWidget(this);
+      tab   = new QTabBar(mainWidget);
+      stack = new QStackedWidget(mainWidget);
+      QVBoxLayout* layout = new QVBoxLayout;
+      layout->addWidget(tab);
+      layout->addWidget(stack);
+      mainWidget->setLayout(layout);
 
-      QWebView* web = new QWebView(this);
-      QWebPage* wp  = web->page();
-      QWebFrame* frame = wp->mainFrame();
-      frame->addToJavaScriptWindowObject("mscore", mscore);
-      QWebSettings* s = wp->settings();
-      s->setAttribute(QWebSettings::PluginsEnabled, true);
-//      web->load(QUrl("http://s.musescore.org/tutorials.html"));
-      web->load(QUrl("http://s.musescore.org/newscore.html"));
-      setWidget(web);
+      setObjectName("webpage");
+      setWindowTitle(tr("Web"));
+      setAllowedAreas(Qt::RightDockWidgetArea | Qt::LeftDockWidgetArea);
+      connect(tab, SIGNAL(currentChanged(int)), stack, SLOT(setCurrentIndex(int)));
+
+      tab->addTab("View");
+      MyWebView* web1 = new MyWebView;
+      web1->load(QUrl("http://s.musescore.org/scoreview.html"));
+      stack->addWidget(web1);
+
+      tab->addTab("Tutorials");
+      MyWebView* web2 = new MyWebView;
+      web2->load(QUrl("http://s.musescore.org/tutorials.html"));
+      stack->addWidget(web2);
+
+      tab->addTab("News");
+      MyWebView* web3 = new MyWebView;
+      web3->load(QUrl("http://s.musescore.org/news.html"));
+      stack->addWidget(web3);
+
+      setWidget(mainWidget);
       }
+
+//---------------------------------------------------------
+//   WebScoreView
+//---------------------------------------------------------
+
+WebScoreView::WebScoreView(QWidget* parent)
+   : ScoreView(parent)
+      {
+      networkManager = 0;
+      }
+
+WebScoreView::WebScoreView(const WebScoreView& wsv)
+   : ScoreView((QWidget*)(wsv.parent()))
+      {
+      networkManager = 0;
+      }
+
+//---------------------------------------------------------
+//   setScore
+//---------------------------------------------------------
+
+void WebScoreView::setScore(const QString& url)
+      {
+      if (!networkManager) {
+            networkManager = new QNetworkAccessManager(this);
+            connect(networkManager, SIGNAL(finished(QNetworkReply*)),
+               SLOT(networkFinished(QNetworkReply*)));
+            }
+      networkManager->get(QNetworkRequest(QUrl(url)));
+      }
+
+//---------------------------------------------------------
+//   networkFinished
+//---------------------------------------------------------
+
+void WebScoreView::networkFinished(QNetworkReply* reply)
+      {
+      if (reply->error() != QNetworkReply::NoError) {
+            printf("Error while checking update [%s]\n", qPrintable(reply->errorString()));
+            return;
+            }
+      QByteArray ha = reply->rawHeader("Content-Disposition");
+      QString s(ha);
+      QString name;
+      QRegExp re(".*filename=\"(.*)\"");
+      if (s.isEmpty() || re.indexIn(s) == -1)
+            name = "unknown.mscz";
+      else
+            name = re.cap(1);
+
+      QByteArray data = reply->readAll();
+      QString tmpName = "/tmp/" + name;
+      QFile f(tmpName);
+      f.open(QIODevice::WriteOnly);
+      f.write(data);
+      f.close();
+
+      Score* score = new Score(mscore->defaultStyle());
+      if (score->readScore(tmpName) != 0) {
+            printf("readScore failed\n");
+            delete score;
+            return;
+            }
+      ScoreView::setScore(score);
+      update();
+      }
+
 

@@ -391,6 +391,7 @@ MuseScore::MuseScore()
       _editY                = 0;
       xLabel                = 0;
       yLabel                = 0;
+      networkManager        = 0;
 
       profiles              = 0;
 
@@ -2570,6 +2571,10 @@ void MuseScore::cmd(QAction* a)
             showMediaDialog();
       else if (cmd == "page-settings")
             showPageSettings();
+      else if (cmd == "next-score")
+            gotoNextScore();
+      else if (cmd == "previous-score")
+            gotoPreviousScore();
       else {
             if (cv) {
                   cv->setFocus();
@@ -4008,11 +4013,95 @@ void MuseScore::switchLayer(const QString& s)
       }
 
 //---------------------------------------------------------
-//   loadFile
+//   networkFinished
 //---------------------------------------------------------
 
-void MuseScore::loadFile(const QString& url)
+void MuseScore::networkFinished(QNetworkReply* reply)
       {
+      if (reply->error() != QNetworkReply::NoError) {
+            printf("Error while checking update [%s]\n", qPrintable(reply->errorString()));
+            return;
+            }
+      QByteArray ha = reply->rawHeader("Content-Disposition");
+      QString s(ha);
+      QString name;
+      QRegExp re(".*filename=\"(.*)\"");
+      if (s.isEmpty() || re.indexIn(s) == -1)
+            name = "unknown.mscz";
+      else
+            name = re.cap(1);
 
+      // attachment; filename="Bilder_einer_Ausstellung.mscz"
+
+      printf("header <%s>\n", qPrintable(s));
+      printf("name <%s>\n", qPrintable(name));
+
+      QByteArray data = reply->readAll();
+      QString tmpName = "/tmp/" + name;
+      QFile f(tmpName);
+      f.open(QIODevice::WriteOnly);
+      f.write(data);
+      f.close();
+
+      Score* score = new Score(_defaultStyle);
+      if (score->readScore(tmpName) != 0) {
+            printf("readScore failed\n");
+            delete score;
+            return;
+            }
+      score->setCreated(true);
+      score->setDirty(true);
+      setCurrentScoreView(appendScore(score));
+      lastOpenPath = score->fileInfo()->path();
+      writeSessionFile(false);
+      }
+
+//---------------------------------------------------------
+//   loadFile
+//    load file from url
+//---------------------------------------------------------
+
+void MuseScore::loadFile(const QString& s)
+      {
+      loadFile(QUrl(s));
+      }
+
+void MuseScore::loadFile(const QUrl& url)
+      {
+      if (!networkManager) {
+            networkManager = new QNetworkAccessManager(this);
+            connect(networkManager, SIGNAL(finished(QNetworkReply*)),
+               SLOT(networkFinished(QNetworkReply*)));
+            }
+      networkManager->get(QNetworkRequest(url));
+      }
+
+//---------------------------------------------------------
+//   gotoNextScore
+//---------------------------------------------------------
+
+void MuseScore::gotoNextScore()
+      {
+      int idx = tab1->currentIndex();
+      int n   = tab1->count();
+      if (idx >= (n-1))
+            idx = 0;
+      else
+            ++idx;
+      tab1->setCurrentIndex(idx);
+      }
+
+//---------------------------------------------------------
+//   gotoPreviousScore
+//---------------------------------------------------------
+
+void MuseScore::gotoPreviousScore()
+      {
+      int idx = tab1->currentIndex();
+      if (idx == 0)
+            idx = tab1->count() -1;
+      else
+            --idx;
+      tab1->setCurrentIndex(idx);
       }
 
