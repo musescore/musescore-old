@@ -78,6 +78,8 @@ extern QString mscoreGlobalShare;
 static const int PROJECT_LIST_LEN = 6;
 extern bool playRepeats;
 
+enum { WEB_TUTORIALS, WEB_NEWS, WEB_SCORELIB };
+
 //---------------------------------------------------------
 //   LanguageItem
 //---------------------------------------------------------
@@ -361,7 +363,7 @@ class MuseScore : public QMainWindow {
       void initOsc();
       void editRaster();
       void showPianoKeyboard();
-      void showWeb();
+      void showWeb(int page, bool on);
       void showMediaDialog();
       void showAlbumManager();
       void showLayerManager();
