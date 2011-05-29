@@ -1,3 +1,6 @@
+29.may (lv)
+      - fix #10849: musicxml exports lyrics only with notes in voice 1
+        note: file attached to http://musescore.org/en/node/10168 not handled yet
 24.may (la)
       - fix #4526: Adding ties to chords
       - fix #9805: Second Voice can end up broken (patch by fnbecker)
