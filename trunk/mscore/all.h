@@ -39,7 +39,6 @@
 
 #include <QtWebKit/QWebView>
 #include <QtWebKit/QWebFrame>
-#include <QtUiTools/QUiLoader>
 
 #include <QtXml/QtXml>
 
