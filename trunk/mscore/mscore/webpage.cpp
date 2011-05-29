@@ -85,6 +85,28 @@ MyWebView::MyWebView(QWidget *parent):
       frame->addToJavaScriptWindowObject("mscore", mscore);
       setPage(&m_page);
       connect(this, SIGNAL(linkClicked(const QUrl&)), SLOT(link(const QUrl&)));
+      connect(this, SIGNAL(loadFinished(bool)), SLOT(stopBusy(bool)));
+      }
+
+//---------------------------------------------------------
+//   stopBusy
+//---------------------------------------------------------
+
+void MyWebView::stopBusy(bool val)
+      {
+      if (!val)
+            setHtml(tr("<html><body><h2>no internet connection?</h2>"
+               "</body></html>"));
+      setCursor(Qt::ArrowCursor);
+      }
+
+//---------------------------------------------------------
+//   setBusy
+//---------------------------------------------------------
+
+void MyWebView::setBusy()
+      {
+      setCursor(Qt::WaitCursor);
       }
 
 //---------------------------------------------------------
@@ -108,6 +130,10 @@ void MyWebView::link(const QUrl& url)
 WebPage::WebPage(MuseScore* mscore, QWidget* parent)
    : QDockWidget(parent)
       {
+      QWidget* w = new QWidget(this);
+      setTitleBarWidget(w);
+      titleBarWidget()->hide();
+
       QWidget* mainWidget = new QWidget(this);
       tab   = new QTabBar(mainWidget);
       stack = new QStackedWidget(mainWidget);
@@ -116,27 +142,50 @@ WebPage::WebPage(MuseScore* mscore, QWidget* parent)
       layout->addWidget(stack);
       mainWidget->setLayout(layout);
 
+enum { WEB_TUTORIALS, WEB_NEWS, WEB_SCORELIB };
+
       setObjectName("webpage");
       setWindowTitle(tr("Web"));
       setAllowedAreas(Qt::RightDockWidgetArea | Qt::LeftDockWidgetArea);
-      connect(tab, SIGNAL(currentChanged(int)), stack, SLOT(setCurrentIndex(int)));
 
-      tab->addTab("View");
-      MyWebView* web1 = new MyWebView;
-      web1->load(QUrl("http://s.musescore.org/scoreview.html"));
+      tab->addTab(tr("Tutorials"));
+      web1 = new MyWebView;
       stack->addWidget(web1);
 
-      tab->addTab("Tutorials");
-      MyWebView* web2 = new MyWebView;
-      web2->load(QUrl("http://s.musescore.org/tutorials.html"));
+      tab->addTab(tr("News"));
+      web2 = new MyWebView;
       stack->addWidget(web2);
 
-      tab->addTab("News");
-      MyWebView* web3 = new MyWebView;
-      web3->load(QUrl("http://s.musescore.org/news.html"));
+      tab->addTab(tr("Score Library"));
+      web3 = new MyWebView;
       stack->addWidget(web3);
 
       setWidget(mainWidget);
+
+      connect(tab, SIGNAL(currentChanged(int)), stack, SLOT(setCurrentIndex(int)));
+      connect(tab, SIGNAL(currentChanged(int)), SLOT(tabChanged(int)));
+      }
+
+//---------------------------------------------------------
+//   tabChanged
+//---------------------------------------------------------
+
+void WebPage::tabChanged(int n)
+      {
+      switch (n) {
+            case WEB_SCORELIB:
+                  web1->load(QUrl("http://s.musescore.org/scoreview.html"));
+                  web1->setBusy();
+                  break;
+            case WEB_TUTORIALS:
+                  web2->load(QUrl("http://musescore.org/musescore-panel/tutorials"));
+                  web2->setBusy();
+                  break;
+            case WEB_NEWS:
+                  web3->load(QUrl("http://s.musescore.org/news.html"));
+                  web3->setBusy();
+                  break;
+            }
       }
 
 //---------------------------------------------------------

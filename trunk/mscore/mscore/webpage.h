@@ -62,8 +62,10 @@ class MyWebView: public QWebView
 
       MyWebPage m_page;
 
-   private slots:
+   public slots:
       void link(const QUrl& url);
+      void stopBusy(bool);
+      void setBusy();
 
    public:
       MyWebView(QWidget *parent = 0);
@@ -78,8 +80,12 @@ class WebPage : public QDockWidget {
 
       QTabBar* tab;
       QStackedWidget* stack;
+      MyWebView* web1;
+      MyWebView* web2;
+      MyWebView* web3;
 
-   signals:
+   public slots:
+      void tabChanged(int);
 
    public:
       WebPage(MuseScore* mscore, QWidget* parent = 0);

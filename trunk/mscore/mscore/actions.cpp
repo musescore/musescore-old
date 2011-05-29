@@ -2539,7 +2539,7 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL,
          "next-score",
          QT_TRANSLATE_NOOP("action","next score"),
-         Qt::CTRL+Qt::Key_F6,
+         QKeySequence::NextChild,
          Qt::ApplicationShortcut,
          QT_TRANSLATE_NOOP("action","next score"),
          QT_TRANSLATE_NOOP("action","next score")
@@ -2548,10 +2548,37 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL,
          "previous-score",
          QT_TRANSLATE_NOOP("action","previous score"),
-         Qt::CTRL+Qt::Key_F5,
+         QKeySequence::PreviousChild,
          Qt::ApplicationShortcut,
          QT_TRANSLATE_NOOP("action","previous score"),
          QT_TRANSLATE_NOOP("action","previous score")
+         ),
+      Shortcut(
+         STATE_NORMAL,
+         "web-tutorials",
+         QT_TRANSLATE_NOOP("action","web tutorials"),
+         0,
+         Qt::ApplicationShortcut,
+         QT_TRANSLATE_NOOP("action","web tutorials"),
+         QT_TRANSLATE_NOOP("action","web turorials")
+         ),
+      Shortcut(
+         STATE_NORMAL,
+         "web-news",
+         QT_TRANSLATE_NOOP("action","web news"),
+         0,
+         Qt::ApplicationShortcut,
+         QT_TRANSLATE_NOOP("action","web news"),
+         QT_TRANSLATE_NOOP("action","web news")
+         ),
+      Shortcut(
+         STATE_NORMAL,
+         "web-scorelib",
+         QT_TRANSLATE_NOOP("action","web score library"),
+         0,
+         Qt::ApplicationShortcut,
+         QT_TRANSLATE_NOOP("action","web score library"),
+         QT_TRANSLATE_NOOP("action","web score library")
          ),
       // xml==0  marks end of list
       Shortcut(0, 0, 0, QKeySequence::UnknownKey)

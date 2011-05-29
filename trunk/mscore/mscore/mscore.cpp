@@ -518,7 +518,7 @@ MuseScore::MuseScore()
 
       searchDialog = 0;
 
-      QAction* whatsThis = QWhatsThis::createAction(this);
+//      QAction* whatsThis = QWhatsThis::createAction(this);
 
       //---------------------------------------------------
       //    Transport Action
@@ -555,7 +555,7 @@ MuseScore::MuseScore()
       fileTools->addAction(getAction("file-open"));
       fileTools->addAction(getAction("file-save"));
       fileTools->addAction(getAction("print"));
-      fileTools->addAction(whatsThis);
+//      fileTools->addAction(whatsThis);
       fileTools->addSeparator();
 
       a = getAction("undo");
@@ -923,6 +923,9 @@ MuseScore::MuseScore()
 
       menuHelp->addAction(getAction("local-help"));
       menuHelp->addAction(tr("Online Handbook"), this, SLOT(helpBrowser1()));
+      menuHelp->addAction(getAction("web-tutorials"));
+      menuHelp->addAction(getAction("web-news"));
+      menuHelp->addAction(getAction("web-scorelib"));
       menuHelp->addSeparator();
       menuHelp->addAction(tr("&About"),   this, SLOT(about()));
       menuHelp->addAction(tr("About&Qt"), this, SLOT(aboutQt()));
@@ -937,7 +940,7 @@ MuseScore::MuseScore()
       menuHelp->addAction(a);
       a->setEnabled(false);
 
-      menuHelp->addAction(whatsThis);
+      // menuHelp->addAction(whatsThis);
 
       setCentralWidget(mainWindow);
 
@@ -2566,7 +2569,7 @@ void MuseScore::cmd(QAction* a)
       else if (cmd == "piano")
             showPianoKeyboard();
       else if (cmd == "web")
-            showWeb();
+            showWeb(WEB_TUTORIALS, webAction->isChecked());
       else if (cmd == "media")
             showMediaDialog();
       else if (cmd == "page-settings")
@@ -2575,6 +2578,12 @@ void MuseScore::cmd(QAction* a)
             gotoNextScore();
       else if (cmd == "previous-score")
             gotoPreviousScore();
+      else if (cmd == "web-tutorials")
+            showWeb(WEB_TUTORIALS, true);
+      else if (cmd == "web-news")
+            showWeb(WEB_NEWS, true);
+      else if (cmd == "web-scorelib")
+            showWeb(WEB_SCORELIB, true);
       else {
             if (cv) {
                   cv->setFocus();
@@ -3721,14 +3730,15 @@ void MuseScore::showPianoKeyboard()
 //   showWeb
 //---------------------------------------------------------
 
-void MuseScore::showWeb()
+void MuseScore::showWeb(int page, bool on)
       {
-      bool on = webAction->isChecked();
+//      bool on = webAction->isChecked();
       if (on) {
             if (_webPage == 0) {
                   _webPage = new WebPage(this, this);
                   addDockWidget(Qt::RightDockWidgetArea, _webPage);
                   }
+            _webPage->tabChanged(page);
             _webPage->show();
             }
       else {
