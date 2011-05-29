@@ -2123,8 +2123,9 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
 //   xmlLyric
 //---------------------------------------------------------
 
-void MusicXml::xmlLyric(Measure* measure, int staff, QDomElement e)
+void MusicXml::xmlLyric(Measure* measure, int trk, QDomElement e)
       {
+//      printf("xmlLyric track %d\n", trk);
       int lyricNo = e.attribute(QString("number"), "1").toInt() - 1;
       if (lyricNo > MAX_LYRICS)
             printf("too much lyrics (>%d)\n", MAX_LYRICS);
@@ -2162,7 +2163,7 @@ void MusicXml::xmlLyric(Measure* measure, int staff, QDomElement e)
             else
                   domError(e);
             }
-      l->setTrack(staff * VOICES);
+      l->setTrack(trk);
       Segment* segment = measure->getSegment(l);
       segment->add(l);
       }
@@ -2286,6 +2287,60 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       bool hasYoffset = false;
       QColor noteheadColor = QColor::Invalid;
 
+      // first read voice and staff and do voice mapping
+      QDomElement e2 = e;
+      for (; !e2.isNull(); e2 = e2.nextSiblingElement()) {
+            QString tag(e2.tagName());
+            QString s(e2.text());
+            if (tag == "voice")
+                  voice = s.toInt() - 1;
+            else if (tag == "staff")
+                  relStaff = s.toInt() - 1;
+            // silently ignore others
+            }
+
+      // Musicxml voices are counted for all staffs of an
+      // instrument. They are not limited. In mscore voices are associated
+      // with a staff. Every staff can have at most VOICES voices.
+      // The following lines map musicXml voices to mscore voices.
+      // If a voice crosses two staffs, this is expressed with the
+      // "move" parameter in mscore.
+
+      // Musicxml voices are unique within a part, but not across parts.
+      // LVIFIX: check: Thus the search for a given MusicXML voice number should be restricted
+      // the the staves of the part it belongs to.
+
+//      printf("voice mapper before: relStaff=%d voice=%d", relStaff, voice);
+      int found = false;
+      for (int s = 0; s < MAX_STAVES; ++s) {
+            int v = 0;
+            for (std::vector<int>::iterator i = voicelist[s].begin(); i != voicelist[s].end(); ++i, ++v) {
+                  if (*i == voice) {
+                        int d = relStaff - s;
+                        relStaff = s;
+                        move += d;
+                        voice = v;
+//                        printf(" -> found at s=%d\n", s);
+                        found = true;
+                        break;
+                        }
+                  }
+            } // for (int s ...
+      if (!found) {
+            if (voicelist[relStaff].size() >= unsigned(VOICES))
+                  printf("ImportMusicXml: too many voices (staff %d, relStaff %d, %d >= %d)\n",
+                         staff, relStaff, voicelist[relStaff].size(), VOICES);
+            else {
+                  voicelist[relStaff].push_back(voice);
+//                  printf(" -> append %d to voicelist[%d]\n", voice, relStaff);
+                  voice = voicelist[relStaff].size() -1;
+                  }
+            }
+//      printf("after: relStaff=%d move=%d voice=%d\n", relStaff, move, voice);
+
+      // trk is first track of staff
+      int trk = (staff + relStaff) * VOICES;
+
       QString printObject = "yes";
       if (pn.isElement() && pn.nodeName() == "note") {
             QDomElement pne = pn.toElement();
@@ -2346,8 +2401,6 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   if (!grace)
                         tick -= lastLen;
                   }
-            else if (tag == "voice")
-                  voice = s.toInt() - 1;
             else if (tag == "stem") {
                   if (s == "up")
                         sd = UP;
@@ -2360,8 +2413,6 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   else
                         printf("unknown stem direction %s\n", e.text().toLatin1().data());
                   }
-            else if (tag == "staff")
-                  relStaff = s.toInt() - 1;
             else if (tag == "beam") {
                   int beamNo = e.attribute(QString("number"), "1").toInt();
                   if (beamNo == 1) {
@@ -2391,7 +2442,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                         }
                   }
             else if (tag == "lyric")
-                  xmlLyric(measure, relStaff + staff, e);
+                  xmlLyric(measure, trk + voice, e);
             else if (tag == "dot")
                   ++dots;
             else if (tag == "accidental") {
@@ -2430,7 +2481,6 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                               int slurNo   = ee.attribute(QString("number"), "1").toInt() - 1;
                               QString slurType = ee.attribute(QString("type"));
 
-                              int trk = (staff + relStaff) * VOICES;
                               if (slurType == "start") {
                                     bool endSlur = false;
                                     if (slur[slurNo] == 0)
@@ -2443,7 +2493,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                                     else if (pl == "below")
                                           slur[slurNo]->setSlurDirection(DOWN);
                                     slur[slurNo]->setStart(tick, trk + voice);
-                                    slur[slurNo]->setTrack((staff + relStaff) * VOICES);
+                                    slur[slurNo]->setTrack(trk);
                                     score->add(slur[slurNo]);
                                     if (endSlur)
                                           slur[slurNo] = 0;
@@ -2656,48 +2706,9 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   domError(e);
             }
 
-      // Musicxml voices are counted for all staffs of an
-      // instrument. They are not limited. In mscore voices are associated
-      // with a staff. Every staff can have at most VOICES voices.
-      // The following lines map musicXml voices to mscore voices.
-      // If a voice crosses two staffs, this is expressed with the
-      // "move" parameter in mscore.
-
-      // Musicxml voices are unique within a part, but not across parts.
-      // LVIFIX: check: Thus the search for a given MusicXML voice number should be restricted
-      // the the staves of the part it belongs to.
-
-//      printf("voice mapper before: relStaff=%d voice=%d", relStaff, voice);
-      int found = false;
-      for (int s = 0; s < MAX_STAVES; ++s) {
-            int v = 0;
-            for (std::vector<int>::iterator i = voicelist[s].begin(); i != voicelist[s].end(); ++i, ++v) {
-                  if (*i == voice) {
-                        int d = relStaff - s;
-                        relStaff = s;
-                        move += d;
-                        voice = v;
-//                        printf(" -> found at s=%d\n", s);
-                        found = true;
-                        break;
-                        }
-                  }
-            } // for (int s ...
-      if (!found) {
-            if (voicelist[relStaff].size() >= unsigned(VOICES))
-                  printf("ImportMusicXml: too many voices (staff %d, relStaff %d, %d >= %d)\n",
-                         staff, relStaff, voicelist[relStaff].size(), VOICES);
-            else {
-                  voicelist[relStaff].push_back(voice);
-//                  printf(" -> append %d to voicelist[%d]\n", voice, relStaff);
-                  voice = voicelist[relStaff].size() -1;
-                  }
-            }
-//      printf("after: relStaff=%d move=%d voice=%d\n", relStaff, move, voice);
-
-      int track = (staff + relStaff) * VOICES + voice;
-//      printf("staff=%d relStaff=%d VOICES=%d voice=%d track=%d\n",
-//             staff, relStaff, VOICES, voice, track);
+      int track = trk + voice;
+      printf("staff=%d relStaff=%d VOICES=%d voice=%d track=%d\n",
+             staff, relStaff, VOICES, voice, track);
 
       int ticks = (AL::division * duration) / divisions;
 
@@ -2947,7 +2958,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                         }
                   else {
                         trill = new Trill(score);
-                        trill->setTrack((staff + relStaff) * VOICES);
+                        trill->setTrack(trk);
                         trill->setTick(tick);
                         wavyLineStart = true;
                         }
@@ -3030,14 +3041,14 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       if (breathmark) {
             Breath* b = new Breath(score);
             b->setTick(tick);
-            b->setTrack((staff + relStaff) * VOICES + voice);
+            b->setTrack(trk + voice);
             Segment* seg = measure->getSegment(SegBreath, tick);
             seg->add(b);
             }
       if (!tupletType.isEmpty()) {
             if (tupletType == "start") {
                   tuplet = new Tuplet(score);
-                  tuplet->setTrack((staff + relStaff) * VOICES);
+                  tuplet->setTrack(trk);
                   tuplet->setRatio(Fraction(actualNotes, normalNotes));
                   tuplet->setTick(tick);
 
