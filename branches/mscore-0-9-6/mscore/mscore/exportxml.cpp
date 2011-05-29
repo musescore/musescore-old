@@ -244,7 +244,7 @@ class ExportMusicXml {
       void barlineRight(Measure* m);
       void pitch2xml(Note* note, char& c, int& alter, int& octave);
       void unpitch2xml(Note* note, char& c, int& octave);
-      void lyrics(const LyricsList* ll);
+      void lyrics(const LyricsList* ll, const int trk);
       void work(const MeasureBase* measure);
       void calcDivMoveToTick(int t);
       void calcDivisions();
@@ -2245,9 +2245,10 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
                   gh.doGlissandoStop(chord, notations, xml);
                   }
             notations.etag(xml);
+//            printf("chord %p track %d\n", chord, chord->track());
             // write lyrics (only for first note)
             if ((note == nl.front()) && ll)
-                  lyrics(ll);
+                  lyrics(ll, chord->track());
             xml.etag();
             }
       }
@@ -2909,26 +2910,29 @@ void ExportMusicXml::symbol(Symbol* sym, int staff)
 //   lyrics
 //---------------------------------------------------------
 
-void ExportMusicXml::lyrics(const LyricsList* ll)
+void ExportMusicXml::lyrics(const LyricsList* ll, const int trk)
       {
       for (ciLyrics i = ll->begin(); i != ll->end(); ++i) {
             if (*i) {
-                  xml.stag(QString("lyric number=\"%1\"").arg((*i)->no() + 1));
-                  int syl   = (*i)->syllabic();
-                  QString s = "";
-                  switch(syl) {
-                        case Lyrics::SINGLE: s = "single"; break;
-                        case Lyrics::BEGIN:  s = "begin";  break;
-                        case Lyrics::END:    s = "end";    break;
-                        case Lyrics::MIDDLE: s = "middle"; break;
-                        default:
-                              printf("unknown syllabic %d\n", syl);
+//                  printf("lyric trk %d\n", (*i)->track());
+                  if ((*i)->track() == trk) {
+                        xml.stag(QString("lyric number=\"%1\"").arg((*i)->no() + 1));
+                        int syl   = (*i)->syllabic();
+                        QString s = "";
+                        switch(syl) {
+                              case Lyrics::SINGLE: s = "single"; break;
+                              case Lyrics::BEGIN:  s = "begin";  break;
+                              case Lyrics::END:    s = "end";    break;
+                              case Lyrics::MIDDLE: s = "middle"; break;
+                              default:
+                                    printf("unknown syllabic %d\n", syl);
+                              }
+                        xml.tag("syllabic", s);
+                        xml.tag("text", (*i)->getText());
+                        if((*i)->endTick() > 0)
+                              xml.tagE("extend");
+                        xml.etag();
                         }
-                  xml.tag("syllabic", s);
-                  xml.tag("text", (*i)->getText());
-                  if((*i)->endTick() > 0)
-                	  xml.tagE("extend");
-                  xml.etag();
                   }
             }
       }
@@ -3699,7 +3703,7 @@ foreach(Element* el, *(score->gel())) {
                                           // MusicXML associates lyrics with notes in a specific voice
                                           // (too) simple solution: output lyrics only for the first voice
                                           const LyricsList* ll = 0;
-                                          if ((st % VOICES) == 0) ll = seg->lyricsList(st / VOICES);
+                                          /* if ((st % VOICES) == 0) */ ll = seg->lyricsList(st / VOICES);
                                           chord((Chord*)el, sstaff, ll, part->useDrumset());
                                           break;
                                           }
