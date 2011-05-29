@@ -151,6 +151,8 @@ rwtestAllXml() {
       rwtestXml testKeysig1.xml
       rwtestXml testLines1.xml
       rwtestXml testLines2.xml
+      rwtestXml testLyricsVoice2a.xml
+      rwtestXmlRef testLyricsVoice2b.xml
       rwtestXml testMetaData.xml
       rwtestXml testMultiMeasureRest.xml
       rwtestXml testNoteAttributes1.xml
