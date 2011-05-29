@@ -64,8 +64,8 @@ QObject* MyWebPage::createPlugin(
                   }
             return sv;
             }
-      QUiLoader loader;
-      return loader.createWidget(classid, view());
+      /*QUiLoader loader;
+      return loader.createWidget(classid, view());*/
       }
 
 //---------------------------------------------------------

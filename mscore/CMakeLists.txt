@@ -23,7 +23,7 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.6.0)
 
 cmake_policy(SET CMP0003 NEW)
 
-# set (CMAKE_CXX_COMPILER   clang++)
+#set (CMAKE_CXX_COMPILER   clang++)
 
 # for debugging the make system uncomment next line:
 # set(CMAKE_VERBOSE_MAKEFILE ON)
@@ -45,6 +45,10 @@ set(OMR TRUE)                       # OMR - optical music recognition
 if (APPLE OR MINGW)
       set(GCC_VISIBILITY FALSE)     # warnings if not, with gcc4.4 from qt
       set(SF_COMPRESSOR FALSE)
+      set(AEOLUS TRUE)
+      if(APPLE)
+            set(OMR FALSE) # needs work to get ride of fontconfig dependency
+      endif(APPLE)      
 else (APPLE OR MINGW)
       set(SF_COMPRESSOR TRUE)       # build sfconvert, require ogg, vorbis, vorbisenc
 endif (APPLE OR MINGW)
@@ -65,9 +69,9 @@ endif (OMR)
 if (APPLE)
       set(HAS_AUDIOFILE TRUE)            # requires libsndfile
       set(STATIC_SCRIPT_BINDINGS TRUE)
-      set(CMAKE_OSX_ARCHITECTURES x86_64)
-      set(CMAKE_OSX_SYSROOT /Developer/SDKs/MacOSX10.6.sdk)
-      set(CMAKE_OSX_DEPLOYMENT_TARGET 10.5)      #min version required
+      set(CMAKE_OSX_ARCHITECTURES i386)
+      set(CMAKE_OSX_SYSROOT /Developer/SDKs/MacOSX10.4u.sdk)
+      set(CMAKE_OSX_DEPLOYMENT_TARGET 10.4)      #min version required
       find_library(AudioToolboxFW        NAMES AudioToolbox)
       find_library(AudioUnitFW           NAMES AudioUnit)
       find_library(CoreAudioFW           NAMES CoreAudio)
@@ -268,13 +272,13 @@ endif (NOT MINGW AND NOT APPLE)
 #      set(CMAKE_CXX_FLAGS "-x c++ -include ${PROJECT_BINARY_DIR}/all.h -g -Wall -Wextra -Winvalid-pch")
 #endif (GCC_VISIBILITY)
 
-if (NOT MINGW)
+if (NOT MINGW AND NOT APPLE)
 #
 #     set library search path for runtime linker to load the same
 #     qt libraries as we used at compile time
 #
 set (CMAKE_EXE_LINKER_FLAGS "-Wl,-rpath,${QT_LIBRARY_DIR}")
-endif (NOT MINGW)
+endif (NOT MINGW AND NOT APPLE) 
 
 #
 #  create precompiled header file
@@ -356,9 +360,9 @@ if (AEOLUS)
       subdirs (aeolus)
 endif (AEOLUS)
 
-# if (OMR)
+if (OMR)
       subdirs (poppler omr)
-# endif (OMR)
+endif (OMR)
 
 if (OSC)
       subdirs (ofqf)
