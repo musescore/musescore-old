@@ -356,9 +356,9 @@ if (AEOLUS)
       subdirs (aeolus)
 endif (AEOLUS)
 
-if (OMR)
+# if (OMR)
       subdirs (poppler omr)
-endif (OMR)
+# endif (OMR)
 
 if (OSC)
       subdirs (ofqf)

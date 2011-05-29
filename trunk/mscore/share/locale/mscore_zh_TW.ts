@@ -118,10 +118,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Load</source>
-        <translation type="unfinished">載入</translation>
-    </message>
-    <message>
         <source>Print Album</source>
         <translation type="unfinished"></translation>
     </message>
@@ -135,6 +131,10 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>MuseScore Files (*.mscz *.mscx *.msc);;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Join Scores</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2595,6 +2595,12 @@ space unit
 ----------
 space unit
 ----------
+spatium unit
+----------
+spatium unit
+----------
+spatium unit
+----------
 spatium unit</extracomment>
         <translation></translation>
     </message>
@@ -3066,10 +3072,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">向下</translation>
     </message>
     <message>
-        <source>Hairpins, Volta</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Lyrics line height</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3104,6 +3106,14 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Hook height:</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hairpins, Volta, Ottava</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ottava</source>
+        <translation type="unfinished">八度記號</translation>
     </message>
 </context>
 <context>
@@ -3142,6 +3152,10 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Color...</source>
         <translation>顏色...</translation>
+    </message>
+    <message>
+        <source>Layer</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3274,18 +3288,6 @@ p, li { white-space: pre-wrap; }
         <source>Form</source>
         <translation>表單</translation>
     </message>
-    <message>
-        <source>Hairpin</source>
-        <translation>音量變化記號</translation>
-    </message>
-    <message>
-        <source>Tick1:</source>
-        <translation>勾線 1：</translation>
-    </message>
-    <message>
-        <source>Tick2:</source>
-        <translation>勾線 2：</translation>
-    </message>
 </context>
 <context>
     <name>HairpinProperties</name>
@@ -3294,16 +3296,8 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Midi Playback Parameter</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Begin Velocity:</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>TextLabel</source>
-        <translation type="unfinished">文字標記</translation>
     </message>
     <message>
         <source>Velocity Change:</source>
@@ -3325,6 +3319,18 @@ p, li { white-space: pre-wrap; }
         <source>system</source>
         <translation type="unfinished">系統</translation>
     </message>
+    <message>
+        <source>Hairpin</source>
+        <translation type="unfinished">音量變化記號</translation>
+    </message>
+    <message>
+        <source>allow diagonal hairpin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hairpin Midi Playback</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>HairpinSegment</name>
@@ -3341,7 +3347,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">取消隱藏</translation>
     </message>
     <message>
-        <source>MIDI Properties...</source>
+        <source>Hairpin Properties...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3728,6 +3734,177 @@ failed: </source>
     </message>
     <message>
         <source>Show Naturals</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>LayerManager</name>
+    <message>
+        <source>MuseScore: Layer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Layer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">刪除</translation>
+    </message>
+    <message>
+        <source>Tags</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add Tag</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Tag</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1</source>
+        <translation type="unfinished">1</translation>
+    </message>
+    <message>
+        <source>2</source>
+        <translation type="unfinished">2</translation>
+    </message>
+    <message>
+        <source>3</source>
+        <translation type="unfinished">3</translation>
+    </message>
+    <message>
+        <source>4</source>
+        <translation type="unfinished">4</translation>
+    </message>
+    <message>
+        <source>5</source>
+        <translation type="unfinished">5</translation>
+    </message>
+    <message>
+        <source>6</source>
+        <translation type="unfinished">6</translation>
+    </message>
+    <message>
+        <source>7</source>
+        <translation type="unfinished">7</translation>
+    </message>
+    <message>
+        <source>8</source>
+        <translation type="unfinished">8</translation>
+    </message>
+    <message>
+        <source>9</source>
+        <translation type="unfinished">9</translation>
+    </message>
+    <message>
+        <source>10</source>
+        <translation type="unfinished">10</translation>
+    </message>
+    <message>
+        <source>11</source>
+        <translation type="unfinished">11</translation>
+    </message>
+    <message>
+        <source>12</source>
+        <translation type="unfinished">12</translation>
+    </message>
+    <message>
+        <source>13</source>
+        <translation type="unfinished">13</translation>
+    </message>
+    <message>
+        <source>14</source>
+        <translation type="unfinished">14</translation>
+    </message>
+    <message>
+        <source>15</source>
+        <translation type="unfinished">15</translation>
+    </message>
+    <message>
+        <source>16</source>
+        <translation type="unfinished">16</translation>
+    </message>
+    <message>
+        <source>17</source>
+        <translation type="unfinished">17</translation>
+    </message>
+    <message>
+        <source>18</source>
+        <translation type="unfinished">18</translation>
+    </message>
+    <message>
+        <source>19</source>
+        <translation type="unfinished">19</translation>
+    </message>
+    <message>
+        <source>20</source>
+        <translation type="unfinished">20</translation>
+    </message>
+    <message>
+        <source>21</source>
+        <translation type="unfinished">21</translation>
+    </message>
+    <message>
+        <source>22</source>
+        <translation type="unfinished">22</translation>
+    </message>
+    <message>
+        <source>23</source>
+        <translation type="unfinished">23</translation>
+    </message>
+    <message>
+        <source>24</source>
+        <translation type="unfinished">24</translation>
+    </message>
+    <message>
+        <source>25</source>
+        <translation type="unfinished">25</translation>
+    </message>
+    <message>
+        <source>26</source>
+        <translation type="unfinished">26</translation>
+    </message>
+    <message>
+        <source>27</source>
+        <translation type="unfinished">27</translation>
+    </message>
+    <message>
+        <source>28</source>
+        <translation type="unfinished">28</translation>
+    </message>
+    <message>
+        <source>29</source>
+        <translation type="unfinished">29</translation>
+    </message>
+    <message>
+        <source>30</source>
+        <translation type="unfinished">30</translation>
+    </message>
+    <message>
+        <source>31</source>
+        <translation type="unfinished">31</translation>
+    </message>
+    <message>
+        <source>Tag</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Description</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: select layer tag</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>layer tag</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4816,19 +4993,7 @@ is incompatible with current interface</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot read file: file: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>unsupported file extension</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.pdf *.ove *.bww *.GTP *.GP3 *.GP4);;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww *.GTP *.GP3 *.GP4);;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4860,10 +5025,6 @@ is incompatible with current interface</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Bagpipe Music Writer Files &lt;experimental&gt; (*.bww);;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4874,10 +5035,6 @@ is incompatible with current interface</source>
     <message>
         <source>All Files (*)</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation type="unfinished">儲存</translation>
     </message>
     <message>
         <source>MuseScore: Load Style</source>
@@ -5171,6 +5328,42 @@ is incompatible with current interface</source>
         <source>&apos;%1&apos; does already exist,
 please choose a different name:</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot read file: %1 error: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.pdf *.ove *.scw *.bww *.GTP *.GP3 *.GP4);;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.scw *.bww *.GTP *.GP3 *.GP4);;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Overture / Score Writer Files &lt;experimental&gt; (*.ove *.scw);;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Segno Variation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>switch layer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>sp</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>x:</source>
+        <translation type="unfinished">x:</translation>
+    </message>
+    <message>
+        <source>y:</source>
+        <translation type="unfinished">y:</translation>
     </message>
 </context>
 <context>
@@ -5530,6 +5723,10 @@ please choose a different name:</source>
         <source>y:</source>
         <translation type="unfinished">y:</translation>
     </message>
+    <message>
+        <source>Content scale</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PaletteProperties</name>
@@ -5808,6 +6005,10 @@ please choose a different name:</source>
     </message>
     <message>
         <source>Choose MyImages Directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose Default Style for Parts</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6398,6 +6599,14 @@ please choose a different name:</source>
         <source>Audio</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Icon size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Style for Part:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Profile</name>
@@ -6602,6 +6811,18 @@ failed: </source>
         <source>MuseScore: Load Profile failed:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Compressed MuseScore File (*.mscz);;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Save Album into Score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Save File</source>
+        <translation type="unfinished">MuseScore：儲存檔案</translation>
+    </message>
 </context>
 <context>
     <name>RecordButton</name>
@@ -6658,10 +6879,6 @@ failed: </source>
     <message>
         <source>Form</source>
         <translation>表單</translation>
-    </message>
-    <message>
-        <source>1</source>
-        <translation>1</translation>
     </message>
 </context>
 <context>
@@ -7010,6 +7227,10 @@ please select a measure and try again</source>
     </message>
     <message>
         <source>start new section with long instrument names</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>start new section with measure number one</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7978,6 +8199,10 @@ altera</source>
         <source>Text Properties...</source>
         <translation>文字屬性...</translation>
     </message>
+    <message>
+        <source>Layer</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TextBase</name>
@@ -8373,6 +8598,10 @@ altera</source>
         <source>frame color</source>
         <translation type="unfinished">外框顏色</translation>
     </message>
+    <message>
+        <source>Text</source>
+        <translation type="unfinished">文字</translation>
+    </message>
 </context>
 <context>
     <name>TextStyleDialog</name>
@@ -8450,6 +8679,22 @@ please choose a different name:</source>
     </message>
     <message>
         <source>superscript</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>unordered list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ordered list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>indent more</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>indent less</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9033,6 +9278,13 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Line Properties...</source>
         <translation type="unfinished">線型記號屬性...</translation>
+    </message>
+</context>
+<context>
+    <name>WebPage</name>
+    <message>
+        <source>WebView</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -11093,11 +11345,27 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Album Manager...</source>
+        <source>Album...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Album Manager</source>
+        <source>Layer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Layer...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Web</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>W</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>WEB</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -12561,30 +12829,6 @@ your version of MuseScore is too old.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>acc dot</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>acc freebase</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>acc stdbase</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>acc bayanbase</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>acc old ee</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>acc discant</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>zero</source>
         <translation type="unfinished"></translation>
     </message>
@@ -12658,6 +12902,58 @@ your version of MuseScore is too old.</source>
     </message>
     <message>
         <source>tab2 clef</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>s0sol head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>s1sol head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>s2sol head</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>halfopen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>var segno</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>accordeon dot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>accordeon freebase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>accordeon stdbase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>accordeon bayanbase</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>accordeon old ee</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>accordeon discant</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>accordeon push</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>accordeon pull</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

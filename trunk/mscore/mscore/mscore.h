@@ -319,6 +319,7 @@ class MuseScore : public QMainWindow {
       QLabel* yLabel;
 
       QComboBox* layerSwitch;
+      QNetworkAccessManager* networkManager;
 
       //---------------------
 
@@ -365,6 +366,8 @@ class MuseScore : public QMainWindow {
       void showAlbumManager();
       void showLayerManager();
       void enableEditMode(bool);
+      void gotoNextScore();
+      void gotoPreviousScore();
 
    private slots:
       void autoSaveTimerTimeout();
@@ -415,6 +418,7 @@ class MuseScore : public QMainWindow {
       void editXChanged(double);
       void editYChanged(double);
       void switchLayer(const QString&);
+      void networkFinished(QNetworkReply*);
 
    public slots:
       void dirtyChanged(Score*);
@@ -497,6 +501,7 @@ class MuseScore : public QMainWindow {
       QString revision() {return rev;}
       Q_INVOKABLE void newFile();
       Q_INVOKABLE void loadFile(const QString& url);
+      void loadFile(const QUrl&);
       bool hasToCheckForUpdate();
       static bool unstable();
       bool eventFilter(QObject *, QEvent *);
