@@ -64,6 +64,8 @@ QObject* MyWebPage::createPlugin(
                   }
             return sv;
             }
+      return 0;
+
       /*QUiLoader loader;
       return loader.createWidget(classid, view());*/
       }
@@ -130,6 +132,12 @@ void MyWebView::link(const QUrl& url)
 WebPage::WebPage(MuseScore* mscore, QWidget* parent)
    : QDockWidget(parent)
       {
+      QString tabPages[WEB_PAGECOUNT];
+
+      tabPages[WEB_TUTORIALS] = tr("Tutorials");
+      tabPages[WEB_NEWS]      = tr("News");
+      tabPages[WEB_SCORELIB]  = tr("Scores");
+
       QWidget* w = new QWidget(this);
       setTitleBarWidget(w);
       titleBarWidget()->hide();
@@ -142,23 +150,15 @@ WebPage::WebPage(MuseScore* mscore, QWidget* parent)
       layout->addWidget(stack);
       mainWidget->setLayout(layout);
 
-enum { WEB_TUTORIALS, WEB_NEWS, WEB_SCORELIB };
-
       setObjectName("webpage");
       setWindowTitle(tr("Web"));
       setAllowedAreas(Qt::RightDockWidgetArea | Qt::LeftDockWidgetArea);
 
-      tab->addTab(tr("Tutorials"));
-      web1 = new MyWebView;
-      stack->addWidget(web1);
-
-      tab->addTab(tr("News"));
-      web2 = new MyWebView;
-      stack->addWidget(web2);
-
-      tab->addTab(tr("Score Library"));
-      web3 = new MyWebView;
-      stack->addWidget(web3);
+      for (int i = 0; i < WEB_PAGECOUNT; ++i) {
+            tab->addTab(tabPages[i]);
+            web[i] = new MyWebView;
+            stack->addWidget(web[i]);
+            }
 
       setWidget(mainWidget);
 
@@ -167,25 +167,32 @@ enum { WEB_TUTORIALS, WEB_NEWS, WEB_SCORELIB };
       }
 
 //---------------------------------------------------------
+//   setTab
+//---------------------------------------------------------
+
+void WebPage::setTab(int n)
+      {
+      if (tab->currentIndex() != n)
+            tab->setCurrentIndex(n);
+      else
+            tabChanged(n);
+      }
+
+//---------------------------------------------------------
 //   tabChanged
 //---------------------------------------------------------
 
 void WebPage::tabChanged(int n)
       {
-      switch (n) {
-            case WEB_SCORELIB:
-                  web1->load(QUrl("http://s.musescore.org/scoreview.html"));
-                  web1->setBusy();
-                  break;
-            case WEB_TUTORIALS:
-                  web2->load(QUrl("http://musescore.org/musescore-panel/tutorials"));
-                  web2->setBusy();
-                  break;
-            case WEB_NEWS:
-                  web3->load(QUrl("http://s.musescore.org/news.html"));
-                  web3->setBusy();
-                  break;
-            }
+printf("tabChanged %d\n", n);
+      static const char* urls[WEB_PAGECOUNT];
+
+      urls[WEB_SCORELIB]  = "http://musescore.com/sheetmusic";
+      urls[WEB_TUTORIALS] = "http://musescore.org/musescore-panel/tutorials";
+      urls[WEB_NEWS]      = "http://s.musescore.org/news.html";
+
+      web[n]->load(QUrl(urls[n]));
+      web[n]->setBusy();
       }
 
 //---------------------------------------------------------

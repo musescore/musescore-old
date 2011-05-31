@@ -3732,13 +3732,12 @@ void MuseScore::showPianoKeyboard()
 
 void MuseScore::showWeb(int page, bool on)
       {
-//      bool on = webAction->isChecked();
       if (on) {
             if (_webPage == 0) {
                   _webPage = new WebPage(this, this);
                   addDockWidget(Qt::RightDockWidgetArea, _webPage);
                   }
-            _webPage->tabChanged(page);
+            _webPage->setTab(page);
             _webPage->show();
             }
       else {
