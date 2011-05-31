@@ -39,6 +39,7 @@ class Measure;
 class Segment;
 class System;
 class Element;
+class Note;
 
 extern QRectF drawHandle(QPainter& p, const QPointF& pos, bool active);
 extern QRectF handleRect(const QPointF& pos);
@@ -71,6 +72,8 @@ extern int updateVersion();
 
 extern Segment* nextSeg1(Segment* s, int& track);
 extern Segment* prevSeg1(Segment* seg, int& track);
+
+extern Note* searchTieNote(Note* note);
 
 #endif
 

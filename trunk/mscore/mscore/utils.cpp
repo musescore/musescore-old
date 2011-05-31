@@ -31,6 +31,10 @@
 #include "measure.h"
 #include "pitchspelling.h"
 #include "chordrest.h"
+#include "part.h"
+#include "staff.h"
+#include "note.h"
+#include "chord.h"
 
 //---------------------------------------------------------
 //   RecordButton
@@ -770,4 +774,43 @@ int diatonicUpDown(int key, int pitch, int steps)
             pitch = 128;
       return pitch;
       }
+
+//---------------------------------------------------------
+//   searchTieNote
+//    search Note to tie to "note"
+//---------------------------------------------------------
+
+Note* searchTieNote(Note* note)
+      {
+      Note* note2  = 0;
+      Chord* chord = note->chord();
+      Segment* seg = chord->segment();
+      Part* part   = chord->staff()->part();
+      int strack   = part->staves()->front()->idx() * VOICES;
+      int etrack   = strack + part->staves()->size() * VOICES;
+
+      while ((seg = seg->next1(SegChordRest))) {
+            bool noteFound = false;
+            for (int track = strack; track < etrack; ++track) {
+                  ChordRest* cr = static_cast<ChordRest*>(seg->element(track));
+                  if (cr == 0 || cr->type() != CHORD)
+                        continue;
+                  int staffIdx = cr->staffIdx() + cr->staffMove();
+                  if (staffIdx != chord->staffIdx())
+                        continue;
+                  foreach(Note* n, static_cast<Chord*>(cr)->notes()) {
+                        if (n->pitch() == note->pitch()) {
+                              if (note2 == 0 || note->chord()->track() == chord->track())
+                                    note2 = n;
+                              }
+                        else if (cr->track() == chord->track())
+                              noteFound = true;
+                        }
+                  }
+            if (noteFound || note2)
+                  break;
+            }
+      return note2;
+      }
+
 

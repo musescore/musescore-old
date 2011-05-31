@@ -1569,25 +1569,6 @@ Page* Score::addPage()
       }
 
 //---------------------------------------------------------
-//   searchTieNote
-//---------------------------------------------------------
-
-static Note* searchTieNote(Note* note, Segment* segment, int track)
-      {
-      int pitch = note->pitch();
-
-      while ((segment = segment->next1())) {
-            Element* element = segment->element(track);
-            if (element == 0 || element->type() != CHORD)
-                  continue;
-            Note* n = static_cast<Chord*>(element)->findNote(pitch);
-            if (n)
-                  return n;
-            }
-      return 0;
-      }
-
-//---------------------------------------------------------
 //   connectTies
 ///   Rebuild tie connections.
 //---------------------------------------------------------
@@ -1607,7 +1588,7 @@ void Score::connectTies()
                         Tie* tie = n->tieFor();
                         if (!tie)
                               continue;
-                        Note* nnote = searchTieNote(n, s, i);
+                        Note* nnote = searchTieNote(n);
                         if (nnote == 0) {
                               printf("next note at %d voice %d for tie not found; delete tie\n",
                                  s->tick(), i );

@@ -1025,10 +1025,11 @@ void Score::cmdAddTie()
                         }
                   continue;
                   }
-            Note* note2 = 0;
+            Note* note2 = searchTieNote(note);
             Part* part = chord->staff()->part();
             int strack = part->staves()->front()->idx() * VOICES;
             int etrack = strack + part->staves()->size() * VOICES;
+
             for (Segment* seg = chord->segment()->next1(SegChordRest); seg; seg = seg->next1(SegChordRest)) {
                   bool noteFound = false;
                   for (int track = strack; track < etrack; ++track) {
