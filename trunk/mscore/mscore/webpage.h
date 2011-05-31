@@ -21,6 +21,7 @@
 #ifndef __WEBPAGE_H__
 #define __WEBPAGE_H__
 
+#include "mscore.h"
 #include "scoreview.h"
 
 class MuseScore;
@@ -80,15 +81,14 @@ class WebPage : public QDockWidget {
 
       QTabBar* tab;
       QStackedWidget* stack;
-      MyWebView* web1;
-      MyWebView* web2;
-      MyWebView* web3;
+      MyWebView* web[WEB_PAGECOUNT];
 
-   public slots:
+   private slots:
       void tabChanged(int);
 
    public:
       WebPage(MuseScore* mscore, QWidget* parent = 0);
+      void setTab(int n);
       };
 
 //---------------------------------------------------------
