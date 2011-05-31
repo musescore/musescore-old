@@ -1,4 +1,5 @@
 31.may (ws)
+      - don't shorten stem len if chord has hooks
       - fix for ties between notes of different voice
       - added "Schleifer" articulation
 29.may (ws)
