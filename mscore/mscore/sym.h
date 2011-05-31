@@ -276,6 +276,7 @@ enum {
       lineprallSym,
       pralldownSym,
       prallupSym,
+      schleiferSym,
 
       caesuraCurvedSym,
       caesuraStraight,

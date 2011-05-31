@@ -266,7 +266,7 @@ QString Zip::password() const
 	already exist it will be overwritten.
 	Any open archive will be closed.
  */
-Zip::ErrorCode Zip::createArchive(const QString& filename, bool overwrite)
+Zip::ErrorCode Zip::createArchive(const QString& filename, bool  overwrite)
 {
 	QFile* file = new QFile(filename);
 

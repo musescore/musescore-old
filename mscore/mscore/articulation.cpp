@@ -107,6 +107,8 @@ ArticulationInfo Articulation::articulationList[ARTICULATIONS] = {
             100, 100, ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE  },
 	{ lineprallSym,      QT_TRANSLATE_NOOP("articulation", "lineprall"),
             100, 100, ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE  },
+	{ schleiferSym, QT_TRANSLATE_NOOP("articulation", "schleifer"),
+            100, 100, ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE  },
       { snappizzicatoSym,    QT_TRANSLATE_NOOP("articulation", "snappizzicato"),
             100, 100, ARTICULATION_SHOW_IN_PITCHED_STAFF | ARTICULATION_SHOW_IN_TABLATURE  },
       { letterTSym,    QT_TRANSLATE_NOOP("articulation", "tapping"),
