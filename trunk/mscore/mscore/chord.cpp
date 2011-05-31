@@ -1070,6 +1070,10 @@ void Chord::layoutStem()
             double ul        = upnote->line() * .5;
             double dl        = downnote->line() * .5;
             bool shortenStem = score()->styleB(ST_shortenStem);
+
+            if (_hook && hookIdx >= 2)
+                  shortenStem = false;
+
             Spatium progression(score()->styleS(ST_shortStemProgression));
             Spatium shortest(score()->styleS(ST_shortestStem));
 
