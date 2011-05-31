@@ -86,6 +86,7 @@ MyWebView::MyWebView(QWidget *parent):
       QWebFrame* frame = m_page.mainFrame();
       frame->addToJavaScriptWindowObject("mscore", mscore);
       setPage(&m_page);
+      progressBar = 0;
       connect(this, SIGNAL(linkClicked(const QUrl&)), SLOT(link(const QUrl&)));
       connect(this, SIGNAL(loadFinished(bool)), SLOT(stopBusy(bool)));
       }
@@ -99,6 +100,8 @@ void MyWebView::stopBusy(bool val)
       if (!val)
             setHtml(tr("<html><body><h2>no internet connection?</h2>"
                "</body></html>"));
+      disconnect(this, SIGNAL(loadProgress(int)), progressBar, SLOT(setValue(int)));
+      mscore->hideProgressBar();
       setCursor(Qt::ArrowCursor);
       }
 
@@ -108,6 +111,10 @@ void MyWebView::stopBusy(bool val)
 
 void MyWebView::setBusy()
       {
+      progressBar = mscore->showProgressBar();
+      progressBar->setRange(0, 100);
+      progressBar->setValue(0);
+      connect(this, SIGNAL(loadProgress(int)), progressBar, SLOT(setValue(int)));
       setCursor(Qt::WaitCursor);
       }
 
