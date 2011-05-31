@@ -202,6 +202,8 @@ SymbolNames lilypondNames[] = {
       { downprallSym,         QT_TRANSLATE_NOOP("symbol", "down prall"),           "scripts.downprall" },
       { downmordentSym,       QT_TRANSLATE_NOOP("symbol", "down mordent"),         "scripts.downmordent" },
       { prallupSym,           QT_TRANSLATE_NOOP("symbol", "prall up"),             "scripts.prallup" },
+      { schleiferSym,         QT_TRANSLATE_NOOP("symbol", "schleifer"),            "scripts.schleifer" },
+
       { lineprallSym,         QT_TRANSLATE_NOOP("symbol", "line prall"),           "scripts.lineprall" },
       { caesuraCurvedSym,     QT_TRANSLATE_NOOP("symbol", "caesura curved"),       "scripts.caesura.curved" },
       { caesuraStraight,      QT_TRANSLATE_NOOP("symbol", "caesura straight"),     "scripts.caesura.straight" },

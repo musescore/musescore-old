@@ -1392,4 +1392,10 @@
     <attach x="2" y="0"/>
     <bbox x="-2" y="-2.5" w="4" h="5"/>
     </Glyph>
+  <Glyph>
+    <name>scripts.schleifer</name>
+    <code>0xe1d3</code>
+    <attach x="4.2" y="0"/>
+    <bbox x="-4.2" y="-12.5" w="15" h="15"/>
+    </Glyph>
   </museScore>

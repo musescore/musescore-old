@@ -213,6 +213,7 @@ enum ArticulationType {
       PrallDownSym,
       PrallUpSym,
       LinePrallSym,
+      SchleiferSym,
       SnappizzicatoSym,
       Tapping,
       Slapping,
