@@ -2548,7 +2548,12 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL,
          "previous-score",
          QT_TRANSLATE_NOOP("action","previous score"),
+#if defined(Q_WS_WIN)
+          // Qt bug on windows : http://bugreports.qt.nokia.com/browse/QTBUG-15746
+         Qt::CTRL+Qt::SHIFT+Qt::Key_Tab,
+#else         
          QKeySequence::PreviousChild,
+#endif
          Qt::ApplicationShortcut,
          QT_TRANSLATE_NOOP("action","previous score"),
          QT_TRANSLATE_NOOP("action","previous score")

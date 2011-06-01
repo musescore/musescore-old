@@ -1,3 +1,6 @@
+01.jun (la)
+      - fix shortcut for navigating score on windows because of
+        http://bugreports.qt.nokia.com/browse/QTBUG-15746
 31.may (ws)
       - don't shorten stem len if chord has hooks
       - fix for ties between notes of different voice
