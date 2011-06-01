@@ -1,3 +1,6 @@
+01.jun (la)
+      - add shortcut for navigating between score tab
+      - more page format option accessible via plugins
 29.may (lv)
       - fix #10849: musicxml exports lyrics only with notes in voice 1
         note: file attached to http://musescore.org/en/node/10168 not handled yet
@@ -66,6 +69,9 @@
       - copy editing for demo scores (usuariomuse)
 13.feb (db)
       - copy editing for demo scores (usuariomuse)
+      
+======== MuseScore 1.0 released ==============      
+
 03.feb (la)
       - fix #9040: Dragging note horizontally removes accidental permanently
 02.feb (la)
