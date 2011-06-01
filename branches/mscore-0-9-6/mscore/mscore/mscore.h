@@ -317,6 +317,8 @@ class MuseScore : public QMainWindow {
       void removeSessionFile();
       void editChordStyle();
       void startExcerptsDialog();
+      void gotoNextScore();
+      void gotoPreviousScore();
 
    private slots:
       void autoSaveTimerTimeout();

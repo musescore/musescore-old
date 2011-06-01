@@ -2248,6 +2248,10 @@ void MuseScore::cmd(QAction* a)
             editChordStyle();
       else if (cmd == "parts")
             startExcerptsDialog();
+      else if (cmd == "next-score")
+            gotoNextScore();
+      else if (cmd == "previous-score")
+            gotoPreviousScore();
       else {
             if (cv) {
                   cv->setFocus();
@@ -3125,3 +3129,31 @@ const char* stateName(ScoreState s)
             }
       }
 
+//---------------------------------------------------------
+//   gotoNextScore
+//---------------------------------------------------------
+
+void MuseScore::gotoNextScore()
+      {
+      int idx = tab1->currentIndex();
+      int n   = tab1->count();
+      if (idx >= (n-1))
+            idx = 0;
+      else
+            ++idx;
+      tab1->setCurrentIndex(idx);
+      }
+
+//---------------------------------------------------------
+//   gotoPreviousScore
+//---------------------------------------------------------
+
+void MuseScore::gotoPreviousScore()
+      {
+      int idx = tab1->currentIndex();
+      if (idx == 0)
+            idx = tab1->count() -1;
+      else
+            --idx;
+      tab1->setCurrentIndex(idx);
+      }

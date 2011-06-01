@@ -27,16 +27,17 @@ Q_DECLARE_METATYPE(PageFormat*);
 Q_DECLARE_METATYPE(Score*);
 
 static const char* const function_names_pageFormat[] = {
-      "landscape", "twosided", "width", "height"
+      "landscape", "twosided", "width", "height", "size"
       };
 static const int function_lengths_pageFormat[] = {
-      0, 0, 0, 0,
+      0, 0, 1, 1, 1
       };
 static const QScriptValue::PropertyFlags flags_pageFormat[] = {
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
-      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
-      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
       };
 
 ScriptInterface pageFormatInterface = {
@@ -50,7 +51,7 @@ ScriptInterface pageFormatInterface = {
 //   prototype_PageFormat_call
 //---------------------------------------------------------
 
-static QScriptValue prototype_PageFormat_call(QScriptContext* context, QScriptEngine*)
+static QScriptValue prototype_PageFormat_call(QScriptContext* context, QScriptEngine* se)
       {
       Q_ASSERT(context->callee().isFunction());
       uint _id = context->callee().data().toUInt32();
@@ -75,10 +76,54 @@ static QScriptValue prototype_PageFormat_call(QScriptContext* context, QScriptEn
             case 2:     // "width",
                   if (context->argumentCount() == 0)
                         return qScriptValueFromValue(context->engine(), pageFormat->width() * INCH );
+                  else if (context->argumentCount() == 1) {
+                        int v = context->argument(0).toInt32();
+                        const PageFormat& pfo = *pageFormat;
+                        PageFormat pf(pfo);
+                        pf._width = v / INCH;
+                        pf.size = paperSizeNameToIndex("Custom");
+
+                        Score* cs = qscriptvalue_cast<Score*>(se->globalObject().property("curScore"));
+                        
+                        cs->undoChangePageFormat(&pf, cs->spatium());
+                        cs->setLayoutAll(true);
+                        
+                        return context->engine()->undefinedValue();
+                        }
                   break;
             case 3:     // "height",
                   if (context->argumentCount() == 0)
                         return qScriptValueFromValue(context->engine(), pageFormat->height() * INCH );
+                  else if (context->argumentCount() == 1) {
+                        int v = context->argument(0).toInt32();
+                        const PageFormat& pfo = *pageFormat;
+                        PageFormat pf(pfo);
+                        pf._height = v / INCH;
+                        pf.size = paperSizeNameToIndex("Custom");
+
+                        Score* cs = qscriptvalue_cast<Score*>(se->globalObject().property("curScore"));
+                        
+                        cs->undoChangePageFormat(&pf, cs->spatium());
+                        cs->setLayoutAll(true);
+                        
+                        return context->engine()->undefinedValue();
+                        }
+                  break;
+            case 4:     // "size",
+                  if (context->argumentCount() == 0)
+                        return qScriptValueFromValue(context->engine(), pageFormat->size);
+                  else if (context->argumentCount() == 1) {
+                        int v = context->argument(0).toInt32();
+                        const PageFormat& pfo = *pageFormat;
+                        PageFormat pf(pfo);
+                        pf.size = v;
+                        Score* cs = qscriptvalue_cast<Score*>(se->globalObject().property("curScore"));
+                        
+                        cs->undoChangePageFormat(&pf, cs->spatium());
+                        cs->setLayoutAll(true);
+                        
+                        return context->engine()->undefinedValue();
+                        }
                   break;
             }
       return context->throwError(QScriptContext::TypeError,

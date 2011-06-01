@@ -2133,6 +2133,29 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Parts..."),
          QT_TRANSLATE_NOOP("action","Parts...")
          ),
+      Shortcut(
+         STATE_NORMAL,
+         "next-score",
+         QT_TRANSLATE_NOOP("action","next score"),
+         QKeySequence::NextChild,
+         Qt::ApplicationShortcut,
+         QT_TRANSLATE_NOOP("action","next score"),
+         QT_TRANSLATE_NOOP("action","next score")
+         ),
+      Shortcut(
+         STATE_NORMAL,
+         "previous-score",
+         QT_TRANSLATE_NOOP("action","previous score"),
+#if defined(Q_WS_WIN)
+          // Qt bug on windows : http://bugreports.qt.nokia.com/browse/QTBUG-15746
+         Qt::CTRL+Qt::SHIFT+Qt::Key_Tab,
+#else         
+         QKeySequence::PreviousChild,
+#endif
+         Qt::ApplicationShortcut,
+         QT_TRANSLATE_NOOP("action","previous score"),
+         QT_TRANSLATE_NOOP("action","previous score")
+         ),
       // xml==0  marks end of list
       Shortcut(0, 0, 0, QKeySequence::UnknownKey),
       };
