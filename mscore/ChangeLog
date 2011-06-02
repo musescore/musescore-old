@@ -1,3 +1,5 @@
+02.jun (la)
+      - fix #10915: Rename WRC to WRC.BAT in CMakeList.txt
 01.jun (la)
       - add shortcut for navigating between score tab
       - more page format option accessible via plugins

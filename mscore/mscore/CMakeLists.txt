@@ -203,8 +203,8 @@ endif(APPLE)
 if (MINGW)
    add_custom_command(
       OUTPUT ${PROJECT_BINARY_DIR}/resfile.o
-      COMMAND wrc -i mscore.rc -o ${PROJECT_BINARY_DIR}/mscore.res
-      COMMAND wine /home/ws/.wine/drive_c/MingW/bin/windres.exe ${PROJECT_BINARY_DIR}/mscore.res -o ${PROJECT_BINARY_DIR}/resfile.o
+      COMMAND ${QT_WRC_EXECUTABLE} -i mscore.rc -o ${PROJECT_BINARY_DIR}/mscore.res
+      COMMAND ${QT_WINE_EXECUTABLE} /home/ws/.wine/drive_c/MingW/bin/windres.exe ${PROJECT_BINARY_DIR}/mscore.res -o ${PROJECT_BINARY_DIR}/resfile.o
       DEPENDS ${PROJECT_SOURCE_DIR}/mscore/data/mscore.rc
       WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/mscore/data
       )
