@@ -1,3 +1,5 @@
+02.jun (la)
+      - fix #10915: Rename WRC to WRC.BAT in CMakeList.txt
 01.jun (la)
       - fix shortcut for navigating score on windows because of
         http://bugreports.qt.nokia.com/browse/QTBUG-15746
