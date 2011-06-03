@@ -68,7 +68,7 @@
 #include "repeat.h"
 #include "tremolo.h"
 #include "trill.h"
-#include "zip.h"
+#include "zarchive.h"
 #include "harmony.h"
 #include "tempotext.h"
 #include "sym.h"
@@ -4211,14 +4211,12 @@ bool Score::saveMxl(const QString& name)
       {
 //      printf("Score::saveMxl(%s)\n", name.toUtf8().data());
 
-      Zip::ErrorCode ec;
       Zip uz;
-
-      ec = uz.createArchive(name);
-      if (ec != Zip::Ok) {
-            printf("Cannot create zipfile '%s'\n", name.toUtf8().data());
+      if (!uz.createArchive(name)) {
+            printf("Cannot create zipfile %s\n", qPrintable(name + ": " + uz.errorString()));
             return false;
             }
+
       QFileInfo fi(name);
       QDateTime dt;
       if (debugMode)
@@ -4241,9 +4239,8 @@ bool Score::saveMxl(const QString& name)
 //      printf("bufsize=%d\n", cbuf.data().size());
 //      printf("data=%s\n", cbuf.data().data());
       cbuf.seek(0);
-      ec = uz.createEntry("META-INF/container.xml", cbuf, dt);
-      if (ec != Zip::Ok) {
-            printf("Cannot add container.xml to zipfile '%s'\n", name.toUtf8().data());
+      if (!uz.createEntry("META-INF/container.xml", cbuf, dt)) {
+            printf("Cannot add container.xml to zipfile '%s'\n", qPrintable(name + ": " + uz.errorString()));
             return false;
             }
 
@@ -4254,18 +4251,15 @@ bool Score::saveMxl(const QString& name)
 //      printf("bufsize=%d\n", dbuf.data().size());
 //      printf("data=%s\n", dbuf.data().data());
       dbuf.seek(0);
-      ec = uz.createEntry(fn, dbuf, dt);
-      if (ec != Zip::Ok) {
-            printf("Cannot add %s to zipfile '%s'\n", fn.toUtf8().data(), name.toUtf8().data());
+      if (!uz.createEntry(fn, dbuf, dt)) {
+            printf("Cannot add %s to zipfile '%s'\n", qPrintable(fn), qPrintable(name));
             return false;
             }
 
-      ec = uz.closeArchive();
-      if (ec != Zip::Ok) {
-            printf("Cannot close zipfile '%s'\n", name.toUtf8().data());
+      if (!uz.closeArchive()) {
+            printf("Cannot close zipfile '%s'\n", qPrintable(name));
             return false;
             }
-
       return true;
       }
 

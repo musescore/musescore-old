@@ -64,8 +64,7 @@
 #include "system.h"
 #include "tuplet.h"
 #include "keysig.h"
-#include "zip.h"
-#include "unzip.h"
+#include "zarchive.h"
 #include "magbox.h"
 #include "measure.h"
 #include "undo.h"
@@ -967,9 +966,8 @@ void Score::saveCompressedFile(QFileInfo& info, bool autosave)
 void Score::saveCompressedFile(QIODevice* f, QFileInfo& info, bool autosave)
       {
       Zip uz;
-      Zip::ErrorCode ec = uz.createArchive(f);
-      if (ec != Zip::Ok)
-            throw (QString("Cannot create compressed musescore file"));
+      if (!uz.createArchive(f))
+            throw (QString("Cannot create compressed musescore file: " + uz.errorString()));
 
       QDateTime dt;
       if (debugMode)
@@ -1002,9 +1000,9 @@ void Score::saveCompressedFile(QIODevice* f, QFileInfo& info, bool autosave)
       xml.etag();
       xml.etag();
       cbuf.seek(0);
-      ec = uz.createEntry("META-INF/container.xml", cbuf, dt);
-      if (ec != Zip::Ok)
-            throw(QString("Cannot add container.xml to zipfile '%1'\n").arg(info.filePath()));
+      if (!uz.createEntry("META-INF/container.xml", cbuf, dt))
+            throw(QString("Cannot add container.xml to zipfile '%1': ").arg(info.filePath())
+               + uz.errorString());
 
       // save images
       idx = 1;
@@ -1028,8 +1026,7 @@ void Score::saveCompressedFile(QIODevice* f, QFileInfo& info, bool autosave)
             cbuf.setBuffer(&(ip->buffer().buffer()));
             if (!cbuf.open(QIODevice::ReadOnly))
                   throw(QString("cannot open buffer cbuf"));
-            ec = uz.createEntry(dstPath, cbuf, dt);
-            if (ec != Zip::Ok)
+            if (!uz.createEntry(dstPath, cbuf, dt, false, false, 0))
                   throw(QString("Cannot add <%1> to zipfile as <%1>\n").arg(srcPath).arg(dstPath));
             cbuf.close();
             ip->setPath(dstPath);   // image now has local path
@@ -1052,8 +1049,7 @@ if (n)
                         throw(QString("cannot create image"));
                   if (!cbuf.open(QIODevice::ReadOnly))
                         throw(QString("cannot open buffer cbuf"));
-                  ec = uz.createEntry(path, cbuf, dt);
-                  if (ec != Zip::Ok)
+                  if (!uz.createEntry(path, cbuf, dt, false, true, 0))
                         throw(QString("Cannot add <%1> to zipfile\n").arg(path));
                   cbuf.close();
                   }
@@ -1064,11 +1060,9 @@ if (n)
       dbuf.open(QIODevice::ReadWrite);
       saveFile(&dbuf, true, autosave);
       dbuf.seek(0);
-      ec = uz.createEntry(fn, dbuf, dt);
-      if (ec != Zip::Ok)
+      if (!uz.createEntry(fn, dbuf, dt))
             throw(QString("Cannot add %1 to zipfile '%2'").arg(fn).arg(info.filePath()));
-      ec = uz.closeArchive();
-      if (ec != Zip::Ok)
+      if (!uz.closeArchive())
             throw(QString("Cannot close zipfile '%1'").arg(info.filePath()));
       }
 
@@ -1186,14 +1180,13 @@ bool Score::loadCompressedMsc(QString name)
             info.setFile(name);
             }
 
-      UnZip uz;
-      UnZip::ErrorCode ec = uz.openArchive(name);
-      if (ec != UnZip::Ok)
+      Unzip uz;
+      if (!uz.openArchive(name))
             return false;
 
       QBuffer cbuf;
       cbuf.open(QIODevice::WriteOnly);
-      ec = uz.extractFile("META-INF/container.xml", &cbuf);
+      uz.extractFile("META-INF/container.xml", &cbuf);
 
       QDomDocument container;
       int line, column;
@@ -1242,10 +1235,8 @@ bool Score::loadCompressedMsc(QString name)
       foreach(ImagePath* ip, imagePathList) {
             QBuffer& dbuf = ip->buffer();
             dbuf.open(QIODevice::WriteOnly);
-            ec = uz.extractFile(ip->path(), &dbuf);
-            if (ec != UnZip::Ok) {
+            if (!uz.extractFile(ip->path(), &dbuf))
                   printf("Cannot read <%s> from zipfile\n", qPrintable(ip->path()));
-                  }
             else
                   ip->setLoaded(true);
             }
@@ -1256,7 +1247,7 @@ bool Score::loadCompressedMsc(QString name)
 
       QBuffer dbuf;
       dbuf.open(QIODevice::WriteOnly);
-      ec = uz.extractFile(rootfile, &dbuf);
+      uz.extractFile(rootfile, &dbuf);
 
       QDomDocument doc;
       if (!doc.setContent(dbuf.data(), false, &err, &line, &column)) {
@@ -1281,10 +1272,8 @@ bool Score::loadCompressedMsc(QString name)
                   QBuffer dbuf;
                   dbuf.open(QIODevice::WriteOnly);
                   QString path = QString("OmrPages/page%1.png").arg(i+1);
-                  ec = uz.extractFile(path, &dbuf);
-                  if (ec != UnZip::Ok) {
+                  if (!uz.extractFile(path, &dbuf))
                         printf("Cannot read <%s> from zipfile\n", qPrintable(path));
-                        }
                   else  {
                         OmrPage* page = _omr->page(i);
                         QImage image;
@@ -2180,13 +2169,12 @@ bool Score::savePng(const QString& name, bool screenshot, bool transparent, doub
 QByteArray Score::readCompressedToBuffer()
       {
       QBuffer cbuf;
-      UnZip uz;
-      UnZip::ErrorCode ec = uz.openArchive(filePath());
-      if (ec != UnZip::Ok)
+      Unzip uz;
+      if (!uz.openArchive(filePath()))
             return QByteArray();
 
       cbuf.open(QIODevice::WriteOnly);
-      ec = uz.extractFile("META-INF/container.xml", &cbuf);
+      uz.extractFile("META-INF/container.xml", &cbuf);
 
       QDomDocument container;
       int line, column;
@@ -2235,10 +2223,8 @@ QByteArray Score::readCompressedToBuffer()
       foreach(ImagePath* ip, imagePathList) {
             QBuffer& dbuf = ip->buffer();
             dbuf.open(QIODevice::WriteOnly);
-            ec = uz.extractFile(ip->path(), &dbuf);
-            if (ec != UnZip::Ok) {
+            if (!uz.extractFile(ip->path(), &dbuf))
                   printf("Cannot read <%s> from zipfile\n", qPrintable(ip->path()));
-                  }
             else
                   ip->setLoaded(true);
             }
@@ -2250,7 +2236,7 @@ QByteArray Score::readCompressedToBuffer()
 
       QBuffer dbuf;
       dbuf.open(QIODevice::WriteOnly);
-      ec = uz.extractFile(rootfile, &dbuf);
+      uz.extractFile(rootfile, &dbuf);
       dbuf.close();
       return dbuf.data();
       }

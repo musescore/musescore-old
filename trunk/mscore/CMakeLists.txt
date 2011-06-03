@@ -48,7 +48,7 @@ if (APPLE OR MINGW)
       set(AEOLUS TRUE)
       if(APPLE)
             set(OMR FALSE) # needs work to get ride of fontconfig dependency
-      endif(APPLE)      
+      endif(APPLE)
 else (APPLE OR MINGW)
       set(SF_COMPRESSOR TRUE)       # build sfconvert, require ogg, vorbis, vorbisenc
 endif (APPLE OR MINGW)
@@ -278,7 +278,7 @@ if (NOT MINGW AND NOT APPLE)
 #     qt libraries as we used at compile time
 #
 set (CMAKE_EXE_LINKER_FLAGS "-Wl,-rpath,${QT_LIBRARY_DIR}")
-endif (NOT MINGW AND NOT APPLE) 
+endif (NOT MINGW AND NOT APPLE)
 
 #
 #  create precompiled header file
@@ -332,7 +332,7 @@ endif(${CMAKE_CXX_COMPILER_ID} EQUAL "Clang")
 ADD_CUSTOM_TARGET(mops1 DEPENDS ${PROJECT_BINARY_DIR}/all.h)
 ADD_CUSTOM_TARGET(mops2 DEPENDS ${PCH})
 
-subdirs(mscore al awl bww2mxml osdabzip rtf2html share manual demos
+subdirs(mscore al awl bww2mxml zarchive rtf2html share manual demos
       fluid msynth diff mstyle)
 
 if (BUILD_SCRIPTGEN)

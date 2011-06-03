@@ -829,6 +829,7 @@ void ChordRest::remove(Element* e)
 void ChordRest::removeDeleteBeam()
       {
       if (_beam) {
+            score()->deselect(_beam);
             Beam* b = _beam;
             b->remove(this);  // this sets _beam to zero
             if (b->isEmpty())
