@@ -1,3 +1,5 @@
+3.jun (ws)
+      - fix #10937
 02.jun (la)
       - fix #10915: Rename WRC to WRC.BAT in CMakeList.txt
 01.jun (la)
