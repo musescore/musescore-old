@@ -1,3 +1,5 @@
+03.jun (la)
+      - fix #10934: double error message on opening a 2.0 score
 02.jun (la)
       - fix #10915: Rename WRC to WRC.BAT in CMakeList.txt
 01.jun (la)

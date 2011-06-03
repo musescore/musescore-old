@@ -1590,12 +1590,13 @@ static void loadScores(const QStringList& argv)
                   Score* score = new Score(defaultStyle);
                   scoreCreated = true;
                   if (!score->read(name)) {
-                        QMessageBox::warning(0,
-                              QWidget::tr("MuseScore"),
-                              QWidget::tr("reading file <")
-                                 + name + "> failed: " +
-                              QString(strerror(errno)),
-                              QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
+                        if(errno != 0 && !noGui) // display an error if it's worth
+                              QMessageBox::warning(0,
+                                    QWidget::tr("MuseScore"),
+                                    QWidget::tr("reading file <")
+                                       + name + "> failed: " +
+                                    QString(strerror(errno)),
+                                    QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
                         }
                   else {
                         mscore->appendScore(score);
