@@ -26,7 +26,7 @@ include_directories(
       ${CMAKE_CURRENT_BINARY_DIR}
       ${PROJECT_SOURCE_DIR}
       ${PROJECT_SOURCE_DIR}/scriptdebug
-      ${PROJECT_SOURCE_DIR}/osdabzip
+      ${PROJECT_SOURCE_DIR}/zarchive
       ${PROJECT_SOURCE_DIR}/fluid
       ${QTSINGLEAPPLICATION_INCLUDE_DIRS}
       )
@@ -228,7 +228,7 @@ if (MINGW)
       diff_match_patch
       msynth
       bww
-      osdabzip
+      zarchive
       rtf2html
       ${QTSINGLEAPPLICATION_LIBRARIES}
       fluid
@@ -300,7 +300,7 @@ else (MINGW)
       mstyle
       msynth
       bww
-      osdabzip
+      zarchive
       rtf2html
       ${QTSINGLEAPPLICATION_LIBRARIES}
       fluid

@@ -1436,9 +1436,11 @@ void Chord::layout()
             if (xx > _dotPosX)
                   _dotPosX = xx;
             }
-      double rs = _dotPosX;
-      if (dots())
-            rs += point(score()->styleS(ST_dotNoteDistance)) + dots() * point(score()->styleS(ST_dotDotDistance));
+      if (dots()) {
+            if (_dotPosX > rrr)
+                  rrr = _dotPosX;
+            rrr += point(score()->styleS(ST_dotNoteDistance)) + dots() * point(score()->styleS(ST_dotDotDistance));
+            }
 
       rrr += _extraTrailingSpace.val() * _spatium;
 

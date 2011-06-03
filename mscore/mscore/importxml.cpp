@@ -65,7 +65,7 @@
 #include "ottava.h"
 #include "trill.h"
 #include "pedal.h"
-#include "unzip.h"
+#include "zarchive.h"
 #include "harmony.h"
 #include "tempotext.h"
 #include "articulation.h"
@@ -208,18 +208,16 @@ class LoadCompressedMusicXml : public LoadFile {
 bool LoadCompressedMusicXml::loader(QFile* qf)
       {
 // printf("LoadCompressedMusicXml::loader(%s)\n", qPrintable(qf->fileName()));
-      UnZip uz;
-      UnZip::ErrorCode ec;
-      ec = uz.openArchive(qf->fileName());
-      if (ec != UnZip::Ok) {
-            error = "Unable to open archive(" + qf->fileName() + "):\n" + uz.formatError(ec);
+      Unzip uz;
+      if (!uz.openArchive(qf->fileName())) {
+            error = "Unable to open archive(" + qf->fileName() + "):\n" + uz.errorString();
             return true;
             }
 // printf("openArchive ec=%d\n", ec);
 
       QBuffer cbuf;
       cbuf.open(QIODevice::WriteOnly);
-      ec = uz.extractFile("META-INF/container.xml", &cbuf);
+      uz.extractFile("META-INF/container.xml", &cbuf);
 // printf("extractFile ec=%d, bufsize=%d\n", ec, cbuf.data().size());
 // printf("data=%s\n", cbuf.data().data());
 
@@ -267,7 +265,7 @@ bool LoadCompressedMusicXml::loader(QFile* qf)
 
       QBuffer dbuf;
       dbuf.open(QIODevice::WriteOnly);
-      ec = uz.extractFile(rootfile, &dbuf);
+      uz.extractFile(rootfile, &dbuf);
 // printf("ec=%d, bufsize=%d\n", ec, dbuf.data().size());
 // printf("data=%s\n", dbuf.data().data());
 
