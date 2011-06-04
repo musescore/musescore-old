@@ -190,17 +190,17 @@ static QTextDocumentFragment parseInstrName(const QString& name)
 #endif
 
 //---------------------------------------------------------
-//   setLongName
+//   setLongNames
 //---------------------------------------------------------
 
-void Part::setLongName(const QTextDocumentFragment& name, int tick)
+void Part::setLongNames(QList<StaffNameDoc>& name, int tick)
       {
-      //TODO instr(tick)->longName() = name;
+      instr(tick)->longNames() = name;
       }
 
-void Part::setShortName(const QTextDocumentFragment& name, int tick)
+void Part::setShortNames(QList<StaffNameDoc>& name, int tick)
       {
-      //TODO instr(tick)->shortName() = name;
+      instr(tick)->shortNames() = name;
       }
 
 //---------------------------------------------------------
@@ -401,3 +401,14 @@ QTextDocumentFragment Part::shortName(int tick) const
       const QList<StaffNameDoc>& nl = shortNames(tick);
       return nl.isEmpty() ? QTextDocumentFragment() : nl[0].name;
       }
+
+void Part::setLongName(const QString& s)
+      {
+//      setLongName(QTextDocumentFragment::fromPlainText(s));
+      }
+
+void Part::setShortName(const QString& s)
+      {
+//      setShortName(QTextDocumentFragment::fromPlainText(s));
+      }
+

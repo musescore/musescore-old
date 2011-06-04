@@ -31,8 +31,6 @@ Fingering::Fingering(Score* s)
       {
       setTextStyle(TEXT_STYLE_FINGERING);
       setFlag(ELEMENT_HAS_TAG, true);
-
-      setUseSelectionColor(true);
       }
 
 //---------------------------------------------------------

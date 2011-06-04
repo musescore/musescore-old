@@ -1071,8 +1071,6 @@ void Chord::layoutStem()
             double dl        = downnote->line() * .5;
             bool shortenStem = score()->styleB(ST_shortenStem);
 
-            if (_hook && hookIdx >= 2)
-                  shortenStem = false;
 
             Spatium progression(score()->styleS(ST_shortStemProgression));
             Spatium shortest(score()->styleS(ST_shortestStem));
@@ -1082,6 +1080,18 @@ void Chord::layoutStem()
                   case 3: normalStemLen += small() ? .5  : 0.75; break; //32nd notes
                   case 4: normalStemLen += small() ? 1.0 : 1.5;  break; //64th notes
                   case 5: normalStemLen += small() ? 1.5 : 2.25; break; //128th notes
+                  }
+            if (_hook) {
+                  if (up() && durationType().dots()) {
+                        //
+                        // avoid collision of dot with hook
+                        //
+                        if (!(upnote->line() & 1))
+                              normalStemLen += .5;
+                        shortenStem = false;
+                        }
+                  if (hookIdx >= 2)
+                        shortenStem = false;
                   }
 
             if (_noteType != NOTE_NORMAL) {

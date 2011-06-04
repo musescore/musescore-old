@@ -78,7 +78,7 @@ class InstrumentChange;
 class Box;
 class Accidental;
 
-#define DEBUG_UNDO
+// #define DEBUG_UNDO
 
 #ifdef DEBUG_UNDO
 #define UNDO_NAME(a)  virtual const char* name() const { return a; }
@@ -832,11 +832,11 @@ class ExchangeVoice : public UndoCommand {
 class ChangeInstrumentShort : public UndoCommand {
       Part* part;
       int tick;
-      QTextDocumentFragment text;
+      QList<StaffNameDoc> text;
       void flip();
 
    public:
-      ChangeInstrumentShort(int, Part*, const QTextDocumentFragment&);
+      ChangeInstrumentShort(int, Part*, QList<StaffNameDoc>);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       UNDO_NAME("ChangeInstrumentShort");
@@ -849,11 +849,12 @@ class ChangeInstrumentShort : public UndoCommand {
 class ChangeInstrumentLong : public UndoCommand {
       Part* part;
       int tick;
-      QTextDocumentFragment text;
+      QList<StaffNameDoc> text;
       void flip();
 
    public:
-      ChangeInstrumentLong(int, Part*, const QTextDocumentFragment&);
+      const QList<StaffNameDoc>& longNames() const;
+      ChangeInstrumentLong(int, Part*, QList<StaffNameDoc>);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       UNDO_NAME("ChangeInstrumentLong");

@@ -496,7 +496,7 @@ void System::setInstrumentNames(bool longName)
             foreach(StaffNameDoc sn, names) {
                   InstrumentName* iname = staff->instrumentNames.value(idx);
 
-                  if (!iname) {
+                  if (iname == 0) {
                         iname = new InstrumentName(score());
                         iname->setGenerated(true);
                         iname->setParent(this);
@@ -509,12 +509,14 @@ void System::setInstrumentNames(bool longName)
                               iname->setSubtype(TEXT_INSTRUMENT_SHORT);
                               iname->setTextStyle(TEXT_STYLE_INSTRUMENT_SHORT);
                               }
-                        staff->instrumentNames.append(iname);
+                        score()->undoAddElement(iname);
                         }
                   iname->setText(sn.name);
                   iname->setLayoutPos(sn.pos);
                   ++idx;
                   }
+            for (; idx < staff->instrumentNames.size(); ++idx)
+                  score()->undoRemoveElement(staff->instrumentNames[idx]);
             }
       }
 

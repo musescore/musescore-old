@@ -117,8 +117,9 @@ void UndoCommand::undo()
       {
       int n = childList.size();
       for (int i = n-1; i >= 0; --i) {
-            if (debugMode)
-                  printf("   undo<%s>\n", childList[i]->name());
+#ifdef DEBUG_UNDO
+            printf("   undo<%s>\n", childList[i]->name());
+#endif
             childList[i]->undo();
             }
       }
@@ -131,8 +132,9 @@ void UndoCommand::redo()
       {
       int n = childList.size();
       for (int i = 0; i < n; ++i) {
-            if (debugMode)
-                  printf("   redo<%s>\n", childList[i]->name());
+#ifdef DEBUG_UNDO
+            printf("   redo<%s>\n", childList[i]->name());
+#endif
             childList[i]->redo();
             }
       }
@@ -2196,7 +2198,7 @@ void ExchangeVoice::redo()
 //   ChangeInstrumentShort
 //---------------------------------------------------------
 
-ChangeInstrumentShort::ChangeInstrumentShort(int _tick, Part* p, const QTextDocumentFragment& t)
+ChangeInstrumentShort::ChangeInstrumentShort(int _tick, Part* p, QList<StaffNameDoc> t)
       {
       tick = _tick;
       part = p;
@@ -2205,8 +2207,8 @@ ChangeInstrumentShort::ChangeInstrumentShort(int _tick, Part* p, const QTextDocu
 
 void ChangeInstrumentShort::flip()
       {
-      QTextDocumentFragment s = part->shortName(tick);
-      part->setShortName(text, tick);
+      QList<StaffNameDoc> s = part->shortNames(tick);
+      part->setShortNames(text, tick);
       text = s;
       part->score()->setLayoutAll(true);
       }
@@ -2215,7 +2217,7 @@ void ChangeInstrumentShort::flip()
 //   ChangeInstrumentLong
 //---------------------------------------------------------
 
-ChangeInstrumentLong::ChangeInstrumentLong(int _tick, Part* p, const QTextDocumentFragment& t)
+ChangeInstrumentLong::ChangeInstrumentLong(int _tick, Part* p, QList<StaffNameDoc> t)
       {
       tick = _tick;
       part = p;
@@ -2224,8 +2226,8 @@ ChangeInstrumentLong::ChangeInstrumentLong(int _tick, Part* p, const QTextDocume
 
 void ChangeInstrumentLong::flip()
       {
-      QTextDocumentFragment s = part->longName(tick);
-      part->setLongName(text, tick);
+      QList<StaffNameDoc> s = part->longNames(tick);
+      part->setLongNames(text, tick);
       text = s;
       part->score()->setLayoutAll(true);
       }
