@@ -72,7 +72,6 @@ class Text : public Element {
       QTextDocument* _doc;
       QRectF frame;           // set by layout()
       bool _styled;
-      bool _useSelectionColor;
 
       Q_DECLARE_TR_FUNCTIONS(Text)
 
@@ -208,8 +207,6 @@ class Text : public Element {
       virtual void textChanged()          {}
       QString styleName() const           { return _styleName; }
       void setStyleName(const QString& v) { _styleName = v;    }
-      bool useSelectionColor() const      { return _useSelectionColor; }
-      void setUseSelectionColor(bool val) { _useSelectionColor = val; }
       };
 
 //---------------------------------------------------------

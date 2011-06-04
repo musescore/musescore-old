@@ -1,4 +1,6 @@
 4.jun (ws)
+      - chord layout: avoid collision between hook and augmentation dot
+      - fix regression: delete instrument name
       - added code from mobile development: libmscore qt mxml
 3.jun (ws)
       - fix #10937
