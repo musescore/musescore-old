@@ -360,7 +360,7 @@ void Preferences::read()
       playNotes       = s.value("playNotes", true).toBool();
       lPort           = s.value("lPort").toString();
       rPort           = s.value("rPort").toString();
-      defaultSoundfont = mscoreGlobalShare+"/sound/TimGM6mb.sf2";
+      defaultSoundfont = mscoreGlobalShare+"sound/TimGM6mb.sf2";
       soundFont       = s.value("soundFont", defaultSoundfont).toString();
       if (soundFont == ":/data/piano1.sf2") {
             // silently change to new default sound font

@@ -1590,13 +1590,15 @@ static void loadScores(const QStringList& argv)
                   Score* score = new Score(defaultStyle);
                   scoreCreated = true;
                   if (!score->read(name)) {
-                        if(errno != 0 && !noGui) // display an error if it's worth
+                        if(errno != 0 && errno != ERANGE && !noGui) {// display an error if it's worth
+                              printf("errno %d\n", errno);
                               QMessageBox::warning(0,
                                     QWidget::tr("MuseScore"),
                                     QWidget::tr("reading file <")
                                        + name + "> failed: " +
                                     QString(strerror(errno)),
                                     QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
+                              }
                         }
                   else {
                         mscore->appendScore(score);
@@ -1866,7 +1868,7 @@ int main(int argc, char* av[])
       if (!useFactorySettings)
             preferences.read();
       else {
-            preferences.soundFont = mscoreGlobalShare+"/sound/TimGM6mb.sf2";
+            preferences.soundFont = mscoreGlobalShare+"sound/TimGM6mb.sf2";
             }
 
       QSplashScreen* sc = 0;
