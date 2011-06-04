@@ -116,8 +116,11 @@ UndoCommand::~UndoCommand()
 void UndoCommand::undo()
       {
       int n = childList.size();
-      for (int i = n-1; i >= 0; --i)
+      for (int i = n-1; i >= 0; --i) {
+            if (debugMode)
+                  printf("   undo<%s>\n", childList[i]->name());
             childList[i]->undo();
+            }
       }
 
 //---------------------------------------------------------
@@ -127,8 +130,11 @@ void UndoCommand::undo()
 void UndoCommand::redo()
       {
       int n = childList.size();
-      for (int i = 0; i < n; ++i)
+      for (int i = 0; i < n; ++i) {
+            if (debugMode)
+                  printf("   redo<%s>\n", childList[i]->name());
             childList[i]->redo();
+            }
       }
 
 //---------------------------------------------------------

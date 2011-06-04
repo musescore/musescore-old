@@ -119,7 +119,7 @@ class System : public Element {
       void layout2();         ///< Called after Measure layout.
       void clear();                       ///< Clear measure list.
 
-      QList<MeasureBase*>& measures()      { return ml; }
+      QList<MeasureBase*>& measures()        { return ml; }
 
       QRectF bboxStaff(int staff) const      { return _staves[staff]->bbox(); }
       QList<SysStaff*>* staves()             { return &_staves;   }

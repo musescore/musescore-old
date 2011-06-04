@@ -1329,7 +1329,7 @@ void Measure::removeStaves(int sStaff, int eStaff)
                   }
             }
       for (int i = 0; i < staves.size(); ++i)
-            staves[i]->lines->setTrack(i * VOICES);
+            staves[i]->setTrack(i * VOICES);
       }
 
 //---------------------------------------------------------
@@ -1348,16 +1348,6 @@ void Measure::insertStaves(int sStaff, int eStaff)
                   e->setTrack(staffIdx * VOICES + voice);
                   }
             }
-#if 0
-      foreach(Beam* e, _beams) {
-            int staffIdx = e->staffIdx();
-            if (staffIdx >= sStaff) {
-                  int voice    = e->voice();
-                  staffIdx += eStaff - sStaff;
-                  e->setTrack(staffIdx * VOICES + voice);
-                  }
-            }
-#endif
       foreach(Tuplet* e, _tuplets) {
             int staffIdx = e->staffIdx();
             if (staffIdx >= sStaff) {
@@ -1372,7 +1362,7 @@ void Measure::insertStaves(int sStaff, int eStaff)
                   }
             }
       for (int i = 0; i < staves.size(); ++i)
-            staves[i]->lines->setTrack(i * VOICES);
+            staves[i]->setTrack(i * VOICES);
       }
 
 //---------------------------------------------------------
@@ -1475,16 +1465,30 @@ void Measure::cmdAddStaves(int sStaff, int eStaff, bool createRest)
       }
 
 //---------------------------------------------------------
+//   setTrack
+//---------------------------------------------------------
+
+void MStaff::setTrack(int track)
+      {
+      if (lines)
+            lines->setTrack(track);
+      if (_vspacerUp)
+            _vspacerUp->setTrack(track);
+      if (_vspacerDown)
+            _vspacerDown->setTrack(track);
+      }
+
+//---------------------------------------------------------
 //   insertMStaff
 //---------------------------------------------------------
 
 void Measure::insertMStaff(MStaff* staff, int idx)
       {
       staves.insert(idx, staff);
-      for (int staffIdx = 0; staffIdx < staves.size(); ++staffIdx) {
-            if (staves[staffIdx]->lines)
-                  staves[staffIdx]->lines->setTrack(staffIdx * VOICES);
-            }
+      for (int staffIdx = 0; staffIdx < staves.size(); ++staffIdx)
+            staves[staffIdx]->setTrack(staffIdx * VOICES);
+      if (debugMode)
+            printf("     Measure::insertMStaff %d -> n:%d\n", idx, staves.size());
       }
 
 //---------------------------------------------------------
@@ -1493,11 +1497,12 @@ void Measure::insertMStaff(MStaff* staff, int idx)
 
 void Measure::removeMStaff(MStaff* /*staff*/, int idx)
       {
+      if (debugMode)
+            printf("     Measure::removeMStaff %d\n", idx);
+
       staves.removeAt(idx);
-      for (int staffIdx = 0; staffIdx < staves.size(); ++staffIdx) {
-            if (staves[staffIdx]->lines)
-                  staves[staffIdx]->lines->setTrack(staffIdx * VOICES);
-            }
+      for (int staffIdx = 0; staffIdx < staves.size(); ++staffIdx)
+            staves[staffIdx]->setTrack(staffIdx * VOICES);
       }
 
 //---------------------------------------------------------
@@ -1506,6 +1511,7 @@ void Measure::removeMStaff(MStaff* /*staff*/, int idx)
 
 void Measure::insertStaff(Staff* staff, int staffIdx)
       {
+printf("Measure::insertStaff: %d\n", staffIdx);
       for (Segment* s = _first; s; s = s->next())
             s->insertStaff(staffIdx);
 
@@ -2499,8 +2505,8 @@ void Measure::scanElements(void* data, void (*func)(void*, Element*))
 
       int nstaves = score()->nstaves();
       for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
-            if (!visible(staffIdx))
-                  continue;
+//TODO            if (!visible(staffIdx))
+//                  continue;
             MStaff* ms = staves[staffIdx];
             if (ms->lines)
                   func(data, ms->lines);
@@ -2513,14 +2519,14 @@ void Measure::scanElements(void* data, void (*func)(void*, Element*))
       int tracks = nstaves * VOICES;
       for (Segment* s = first(); s; s = s->next()) {
             for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
-                  if (!visible(staffIdx))
-                        continue;
+//TODO                  if (!visible(staffIdx))
+//                        continue;
                   }
             for (int track = 0; track < tracks; ++track) {
-                  if (!visible(track/VOICES)) {
-                        track += VOICES - 1;
-                        continue;
-                        }
+//TODO                  if (!visible(track/VOICES)) {
+//                        track += VOICES - 1;
+//                        continue;
+//                        }
                   Element* e = s->element(track);
                   if (e == 0)
                         continue;
