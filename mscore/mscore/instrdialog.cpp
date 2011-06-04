@@ -827,15 +827,7 @@ void Score::removePart(Part* part)
 void Score::insertStaff(Staff* staff, int idx)
       {
       _staves.insert(idx, staff);
-
       staff->part()->insertStaff(staff);
-#if 0
-      int track = idx * VOICES;
-      foreach (Beam* b, _beams) {
-            if (b->track() >= track)
-                  b->setTrack(b->track() + VOICES);
-            }
-#endif
       }
 
 //---------------------------------------------------------
@@ -904,15 +896,8 @@ void Score::cmdRemoveStaff(int staffIdx)
 
 void Score::removeStaff(Staff* staff)
       {
-//      int idx = staff->idx();
       _staves.removeAll(staff);
       staff->part()->removeStaff(staff);
-      // int track = idx * VOICES;
-/*      foreach(Beam* e, beams()) {
-            if (e->track() > track)
-                  e->setTrack(e->track() - VOICES);
-            }
- */
       }
 
 //---------------------------------------------------------

@@ -1,7 +1,0 @@
-This directory contains OSDaB ZIP 2007-02-01, as available on
-http://osdab.42cows.org/snippets/zip.php.
-Only minor changes were made to fit it into the MuseScore framework.
-
-To support Unicode, several toAscii() and fromAscii() functions were
-replaced by toUtf8() and fromUtf8() in filename and comment handling.
-It is not clear if this change must be applied to password handling too.

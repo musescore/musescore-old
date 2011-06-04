@@ -72,6 +72,7 @@ struct MStaff {
       bool slashStyle() const      { return _slashStyle; }
       void setSlashStyle(bool val) { _slashStyle = val;  }
       void setScore(Score*);
+      void setTrack(int);
       };
 
 enum {
