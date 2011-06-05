@@ -407,7 +407,7 @@ void Text::draw(Painter* painter) const
             c.cursorPosition = cursor->position();
             }
       QColor color;
-      if (!painter->view()->editMode() && !(score() && score()->printing())) {
+      if (painter->view() && !painter->view()->editMode() && !(score() && score()->printing())) {
             color = QColor(
                (selected() && !(score() && score()->printing()))
                ? preferences.selectColor[0] : style().foregroundColor());
