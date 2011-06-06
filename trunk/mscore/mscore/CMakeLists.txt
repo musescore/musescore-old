@@ -37,7 +37,7 @@ QT4_WRAP_UI (ui_headers
       note.ui page.ui pagesettings.ui mixer.ui playpanel.ui prefsdialog.ui
       measureproperties.ui segment.ui text.ui textpalette.ui timedialog.ui
       symboldialog.ui dynamic.ui tuplet.ui shortcutcapturedialog.ui slurtie.ui
-      slur.ui editdrumset.ui editstaff.ui line.ui linesegment.ui spanner.ui
+      slur.ui editdrumset.ui editstaff.ui line.ui linesegment.ui
       voltaproperties.ui chordproperties.ui restproperties.ui timesigproperties.ui
       jumpproperties.ui markerproperties.ui boxproperties.ui
       instrwizard.ui timesigwizard.ui newwizard.ui aboutbox.ui
