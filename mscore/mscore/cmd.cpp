@@ -2270,8 +2270,15 @@ void Score::cmd(const QAction* a)
                         int tick = mb->tick();
                         if (mb->type() == MEASURE)
                               tick += static_cast<Measure*>(mb)->ticks();
-                        _selection.setRange(tick2segment(0), tick2segment(tick), 0, nstaves());
+                        Segment* s1 = tick2segment(0);
+                        Segment* s2 = tick2segment(tick);
+                        _selection.setRange(s1, s2, 0, nstaves());
+                        _selection.updateSelectedElements();
+                        setUpdateAll(true);
+                        end();
                         }
+                  else
+                        printf("no measures?\n");
                   }
             else if (cmd == "transpose")
                   transpose();
@@ -2781,7 +2788,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                   foreach(Slur* slur, slurs)
                         undoAddElement(slur);
                   }
-            
+
             if(pasted) { //select only if we pasted something
                   Segment* s1 = tick2segment(dstTick);
                   Segment* s2 = tick2segment(dstTick + tickLen);
