@@ -676,11 +676,11 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "pitch-up-diatonic",
-         QT_TRANSLATE_NOOP("action","diatonic pitch up"),
+         QT_TRANSLATE_NOOP("action","Diatonic pitch up"),
          Qt::SHIFT+Qt::Key_Up,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","diatonic up"),
-         QT_TRANSLATE_NOOP("action","diatonic pitch up")
+         QT_TRANSLATE_NOOP("action","Diatonic up"),
+         QT_TRANSLATE_NOOP("action","Diatonic pitch up")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
