@@ -37,9 +37,7 @@ class SymbolDialog : public QWidget, Ui::SymbolDialogBase {
       void createSymbolPalette();
 
    private slots:
-      void setDirty();
-      void startDragElement(Element*);
-      void deleteElement();
+      void systemFlagChanged(int state);
 
    public:
       SymbolDialog(QWidget* parent = 0);

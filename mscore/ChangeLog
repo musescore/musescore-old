@@ -1,3 +1,6 @@
+6.jun (la)
+      - fix #9107: Pasting multiple multi-voice notes causes crash
+      - remove delete button in symboldialog, fix system flag
 4.jun (ws)
       - chord layout: avoid collision between hook and augmentation dot
       - fix regression: delete instrument name
