@@ -54,13 +54,13 @@ SymbolDialog::SymbolDialog(QWidget* parent)
 
       createSymbolPalette();
 
-      sp->setAcceptDrops(true);
+      sp->setAcceptDrops(false);
       sp->setDrawGrid(true);
       sp->setSelectable(true);
 
-      connect(sp, SIGNAL(changed()), SLOT(setDirty()));
-      connect(sp, SIGNAL(startDragElement(Element*)), SLOT(startDragElement(Element*)));
-      connect(deleteButton, SIGNAL(clicked()), SLOT(deleteElement()));
+      connect(sp, SIGNAL(changed()), SLOT(setDirty()));      
+      connect(systemFlag, SIGNAL(stateChanged(int)), SLOT(systemFlagChanged(int)));
+
       sa->setWidget(sp);
       }
 
@@ -74,24 +74,18 @@ void SymbolDialog::setDirty()
       }
 
 //---------------------------------------------------------
-//   deleteElement
+//   systemFlagChanged
 //---------------------------------------------------------
 
-void SymbolDialog::deleteElement()
+void SymbolDialog::systemFlagChanged(int state)
       {
-      int idx = sp->getSelectedIdx();
-      if (idx == -1)
-            return;
-      sp->add(idx, 0, QString());
-      preferences.dirty = true;
-      }
-
-//---------------------------------------------------------
-//   startDragElement
-//---------------------------------------------------------
-
-void SymbolDialog::startDragElement(Element* el)
-      {
-      el->setSystemFlag(systemFlag->isChecked());
+      bool sysFlag = false;
+      if(state == Qt::Checked)
+            sysFlag = true;
+      for (int i = 0; i < sp->size(); ++i) {
+            Element* e = sp->element(i);
+            if(e)
+                  e->setSystemFlag(sysFlag);
+            } 
       }
 

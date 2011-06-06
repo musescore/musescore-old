@@ -1,6 +1,10 @@
+06.jun (la)
+      - fix #10564: Selecting voice before enabling Note Entry and entering notes causes crash
+      - fix #9107: Pasting multiple multi-voice notes causes crash
+      - remove delete button in symboldialog, fix system flag
+      - fix crash on WAV export in fluid
 04.jun (la)
       - fix #10935: fix Soundfont path //
-      - 
 03.jun (la)
       - fix #10934: double error message on opening a 2.0 score
 02.jun (la)

@@ -1052,7 +1052,7 @@ void InstrumentsDialog::on_loadButton_clicked()
       {
       QString fn = QFileDialog::getOpenFileName(
          this, tr("MuseScore: Load Instrument List"),
-          mscoreGlobalShare + "/templates",
+          mscoreGlobalShare + "templates",
          tr("MuseScore Instruments (*.xml);;"
             "All files (*)"
             )

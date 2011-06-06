@@ -229,6 +229,7 @@ class Palette : public QWidget {
       qreal yOffset() const          { return _yOffset;        }
       int columns() const            { return width() / hgrid; }
       int rows() const;
+      int size() const               { return cells.size(); }
       int resizeWidth(int);
       bool drumPalette() const       { return _drumPalette; }
       void setDrumPalette(bool val)  { _drumPalette = val;  }
