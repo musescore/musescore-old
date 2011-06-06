@@ -367,14 +367,21 @@ bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets, QLi
       else if (tag == "durationType") {
             setDurationType(val);
             if (durationType().type() != Duration::V_MEASURE) {
-                  // rest durations are initialized to whole measure duration when
-                  // created upon reading the <Rest> tag (see Measure::read() )
-                  if ((type() == REST) && (durationType()==Duration::V_WHOLE && duration() <= Fraction(4, 4))) {
-                        // old pre 2.0 scores:
-                        // 4/4 of rest in a measure of 4/4 or less => whole MEASURE rest
+                  if ((type() == REST) &&
+                              // for backward compatibility, convert V_WHOLE rests to V_MEASURE
+                              // if long enough to fill a measure.
+                              // OTOH, freshly created (un-initialized) rests have numerator == 0 (< 4/4)
+                              // (see Fraction() constructor in fraction.h; this happens for instance
+                              // when pasting selection from clipboard): they should not be converted
+                              duration().numerator() != 0 &&
+                              // rest durations are initialized to full measure duration when
+                              // created upon reading the <Rest> tag (see Measure::read() )
+                              // so a V_WHOLE rest in a measure of 4/4 or less => V_MEASURE
+                              (durationType()==Duration::V_WHOLE && duration() <= Fraction(4, 4)) ) {
+                        // old pre 2.0 scores: convert
                         setDurationType(Duration::V_MEASURE);
                         }
-                  else
+                  else  // not from old score: set duration fraction from duration type
                         setDuration(durationType().fraction());
                   }
             else {

@@ -1,4 +1,6 @@
 6.jun (ws)
+      - fix #10607: Copy n' Paste of notes 'forgets' some rests
+        (patch from Miwarre)
       - fix #10979: invisible text has wrong colour (patch from Miwarre)
       - fix #10970: Select All non-functional
       (la)
