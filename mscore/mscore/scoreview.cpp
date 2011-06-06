@@ -2693,27 +2693,28 @@ void ScoreView::textUndoLevelAdded()
 void ScoreView::startNoteEntry()
       {
       _score->inputState()._segment = 0;
+
+      Duration d(_score->inputState().duration());
+      if (!d.isValid() || d.isZero() || d.type() == Duration::V_MEASURE)
+            _score->inputState().setDuration(Duration(Duration::V_QUARTER));
+
       Note* note  = 0;
       Element* el = _score->selection().activeCR() ? _score->selection().activeCR() : _score->selection().element();
       if (el == 0 || (el->type() != CHORD && el->type() != REST && el->type() != NOTE)) {
             int track = _score->inputState().track == -1 ? 0 : _score->inputState().track;
             el = static_cast<ChordRest*>(_score->searchNote(0, track));
-            if (el == 0) {
-                  return;
+            }
+      if(el) {      
+            if (el->type() == CHORD) {
+                  Chord* c = static_cast<Chord*>(el);
+                  note = c->selectedNote();
+                  if (note == 0)
+                        note = c->upNote();
+                  el = note;
                   }
+            _score->select(el, SELECT_SINGLE, 0);
             }
-      if (el->type() == CHORD) {
-            Chord* c = static_cast<Chord*>(el);
-            note = c->selectedNote();
-            if (note == 0)
-                  note = c->upNote();
-            el = note;
-            }
-      Duration d(_score->inputState().duration());
-      if (!d.isValid() || d.isZero() || d.type() == Duration::V_MEASURE)
-            _score->inputState().setDuration(Duration(Duration::V_QUARTER));
-
-      _score->select(el, SELECT_SINGLE, 0);
+            
       _score->inputState().noteEntryMode = true;
       _score->setPadState();
       setCursorOn(true);

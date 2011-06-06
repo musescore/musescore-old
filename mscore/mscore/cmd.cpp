@@ -948,7 +948,8 @@ printf("1:makeGap1: no segment at %d\n", tick);
       Fraction gap;
       for (;;) {
 // printf("   make gap %d/%d\n", len.numerator(), len.denominator());
-
+            if(!cr)
+                return false;
             Fraction l = makeGap(cr, len, 0);
 // printf("   make gap %d/%d -> %d/%d\n",
 //            len.numerator() / 480, len.denominator() / 480,
@@ -2411,6 +2412,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                         blackList.insert(staffIdx);
                         }
                   }
+            bool pasted = false;
             for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                   if (ee.tagName() != "Staff") {
                         domError(ee);
@@ -2425,6 +2427,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                         break;
                   QList<Tuplet*> tuplets;
                   for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
+                        pasted = true;
                         const QString& tag(eee.tagName());
                         if (tag == "Tuplet") {
                               Tuplet* tuplet = new Tuplet(this);
@@ -2669,14 +2672,16 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                               }
                         }
                   }
-            Segment* s1 = tick2segment(dstTick);
-            Segment* s2 = tick2segment(dstTick + tickLen);
-            _selection.setRange(s1, s2, dstStaffStart, dstStaffStart+staves);
-            updateSelectedElements();
-            mscore->currentScoreView()->adjustCanvasPosition(s1, false);
-            if (selection().state() != SEL_RANGE) {
-                  _selection.setState(SEL_RANGE);
-                  emit selectionChanged(int(selection().state()));
+            if(pasted) {      
+                  Segment* s1 = tick2segment(dstTick);
+                  Segment* s2 = tick2segment(dstTick + tickLen);
+                  _selection.setRange(s1, s2, dstStaffStart, dstStaffStart+staves);
+                  updateSelectedElements();
+                  mscore->currentScoreView()->adjustCanvasPosition(s1, false);
+                  if (selection().state() != SEL_RANGE) {
+                        _selection.setState(SEL_RANGE);
+                        emit selectionChanged(int(selection().state()));
+                        }
                   }
             }
       connectTies();

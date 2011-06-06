@@ -494,7 +494,8 @@ void Fluid::set_chorus(int nr, double level, double speed, double depth_ms, int 
 void Fluid::process(unsigned len, float* lout, float* rout, int stride)
       {
       const int byte_size = len * sizeof(float);
-
+      if (byte_size <=0)
+            return;
       /* clean the audio buffers */
       memset(left_buf,  0, byte_size);
       memset(right_buf, 0, byte_size);
