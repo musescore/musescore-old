@@ -407,13 +407,26 @@ void Text::draw(Painter* painter) const
             c.cursorPosition = cursor->position();
             }
       QColor color;
-      if (painter->view() && !painter->view()->editMode() && !(score() && score()->printing())) {
-            color = QColor(
-               (selected() && !(score() && score()->printing()))
-               ? preferences.selectColor[0] : style().foregroundColor());
+
+      // if printing, use own color if visible, do nothing if invisible
+      if (score() && score()->printing()) {
+            if (!visible())
+                  return;
+            color = style().foregroundColor();
+            }
+      else if (painter->view() && painter->view()->editMode())
+            // if editing, use own color
+            color = style().foregroundColor();
+      else if (selected())
+            color = preferences.selectColor[0];
+      else if (!visible()) {
+            if (!score()->showInvisible())
+                  return;
+            color = Qt::gray;
             }
       else
-            color = QColor(visible() ? style().foregroundColor() : Qt::gray);
+            color = style().foregroundColor();
+
       c.palette.setColor(QPalette::Text, color);
 
       _doc->documentLayout()->draw(&p, c);
