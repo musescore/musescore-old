@@ -239,6 +239,7 @@ class Palette : public QWidget {
       qreal yOffset() const          { return _yOffset;        }
       int columns() const            { return width() / hgrid; }
       int rows() const;
+      int size() const               { return cells.size(); }
       int heightForWidth(int) const;
       QString name() const           { return _name;        }
       void setName(const QString& s) { _name = s;           }

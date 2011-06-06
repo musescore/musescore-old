@@ -890,6 +890,8 @@ bool Score::makeGap1(int tick, int staffIdx, Fraction len)
 
       Fraction gap;
       for (;;) {
+            if(!cr)
+                  return false;
             Fraction l = makeGap(cr->segment(), cr->track(), len, 0);
             if (l.isZero())
                   break;
@@ -2547,7 +2549,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                   if (!makeGap1(dst->tick(), staffIdx, Fraction::fromTicks(tickLen)))
                         blackList.insert(staffIdx);
                   }
-
+            bool pasted = false;
             for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                   if (ee.tagName() != "Staff") {
                         domError(ee);
@@ -2562,6 +2564,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                   QList<Tuplet*> tuplets;
                   QList<Slur*> slurs;
                   for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
+                        pasted = true;
                         const QString& tag(eee.tagName());
                         if (tag == "tick")
                               curTick = eee.text().toInt();
@@ -2778,13 +2781,16 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                   foreach(Slur* slur, slurs)
                         undoAddElement(slur);
                   }
-            Segment* s1 = tick2segment(dstTick);
-            Segment* s2 = tick2segment(dstTick + tickLen);
-            _selection.setRange(s1, s2, dstStaffStart, dstStaffStart+staves);
-            _selection.updateSelectedElements();
-            mscore->currentScoreView()->adjustCanvasPosition(s1, false);
-            if (selection().state() != SEL_RANGE)
-                  _selection.setState(SEL_RANGE);
+            
+            if(pasted) { //select only if we pasted something
+                  Segment* s1 = tick2segment(dstTick);
+                  Segment* s2 = tick2segment(dstTick + tickLen);
+                  _selection.setRange(s1, s2, dstStaffStart, dstStaffStart+staves);
+                  _selection.updateSelectedElements();
+                  mscore->currentScoreView()->adjustCanvasPosition(s1, false);
+                  if (selection().state() != SEL_RANGE)
+                        _selection.setState(SEL_RANGE);
+                  }
             }
 
       foreach(Tuplet* t, invalidTuplets) {

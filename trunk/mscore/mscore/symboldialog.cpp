@@ -53,44 +53,29 @@ SymbolDialog::SymbolDialog(QWidget* parent)
       QScrollArea* sa = new PaletteScrollArea(sp);
       l->addWidget(sa);
 
-      sp->setAcceptDrops(true);
+      sp->setAcceptDrops(false);
       sp->setDrawGrid(true);
       sp->setSelectable(true);
 
-      connect(sp, SIGNAL(changed()), SLOT(setDirty()));
-      connect(sp, SIGNAL(startDragElement(Element*)), SLOT(startDragElement(Element*)));
-      connect(deleteButton, SIGNAL(clicked()), SLOT(deleteElement()));
+      connect(systemFlag, SIGNAL(stateChanged(int)), SLOT(systemFlagChanged(int)));
+      
       sa->setWidget(sp);
       }
 
 //---------------------------------------------------------
-//   setDirty
+//   systemFlagChanged
 //---------------------------------------------------------
 
-void SymbolDialog::setDirty()
+void SymbolDialog::systemFlagChanged(int state)
       {
-      preferences.dirty = true;
+      bool sysFlag = false;
+      if(state == Qt::Checked)
+            sysFlag = true;
+      for (int i = 0; i < sp->size(); ++i) {
+            Element* e = sp->element(i);
+            if(e)
+                  e->setSystemFlag(sysFlag);
+            } 
       }
 
-//---------------------------------------------------------
-//   deleteElement
-//---------------------------------------------------------
-
-void SymbolDialog::deleteElement()
-      {
-      int idx = sp->getSelectedIdx();
-      if (idx == -1)
-            return;
-      sp->add(idx, 0, QString());
-      preferences.dirty = true;
-      }
-
-//---------------------------------------------------------
-//   startDragElement
-//---------------------------------------------------------
-
-void SymbolDialog::startDragElement(Element* el)
-      {
-      el->setSystemFlag(systemFlag->isChecked());
-      }
 
