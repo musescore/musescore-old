@@ -587,6 +587,7 @@ void Selection::setRange(Segment* a, Segment* b, int c, int d)
       _activeSegment = b;
       _staffStart    = c;
       _staffEnd      = d;
+      _state         = SEL_RANGE;
       }
 
 //---------------------------------------------------------
