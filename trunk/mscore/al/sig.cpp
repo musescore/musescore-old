@@ -80,6 +80,7 @@ void TimeSigMap::add(int tick, const Fraction& f)
 void TimeSigMap::add(int tick, const SigEvent& ev)
       {
       (*this)[tick] = ev;
+      normalize();
       }
 
 //---------------------------------------------------------
@@ -135,7 +136,7 @@ const SigEvent& TimeSigMap::timesig(int tick) const
 void TimeSigMap::tickValues(int t, int* bar, int* beat, int* tick) const
       {
       if (empty()) {
-            *bar = 0;
+            *bar  = 0;
             *beat = 0;
             *tick = 0;
             return;
@@ -151,7 +152,7 @@ void TimeSigMap::tickValues(int t, int* bar, int* beat, int* tick) const
       int ticksM = ticksB * e->second.timesig().numerator();
       if (ticksM == 0) {
             printf("TimeSigMap::tickValues: at %d %s\n", t, qPrintable(e->second.timesig().print()));
-            *bar = 0;
+            *bar  = 0;
             *beat = 0;
             *tick = 0;
             return;

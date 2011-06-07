@@ -1051,8 +1051,6 @@ void MidiTrack::changeDivision(int newDivision)
             if (e.type() == ME_NOTE)
                   e.setDuration((e.duration() * newDivision + division/2) / division);
 		dl.insert(e);
-            if (e.type() == ME_META)
-                  printf("changeDivision meta === %x\n", e.metaType());
             }
       _events = dl;
       }
