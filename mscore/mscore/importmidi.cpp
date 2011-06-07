@@ -661,8 +661,8 @@ void Score::addLyrics(int tick, int staffIdx, const QString& txt)
             cr->add(l);
             }
       else {
-            printf("no chord/rest for lyrics<%s> at tick %d\n",
-               qPrintable(txt), tick);
+            printf("no chord/rest for lyrics<%s> at tick %d, staff %d\n",
+               qPrintable(txt), tick, staffIdx);
             }
       }
 
@@ -672,10 +672,10 @@ void Score::addLyrics(int tick, int staffIdx, const QString& txt)
 
 void MidiFile::processMeta(Score* cs, MidiTrack* track, const Event& mm)
       {
-      int tick = mm.ontime();
-      Staff* staff = track->staff();
-      const unsigned char* data = (unsigned char*)mm.data();
-      int staffIdx = staff ? cs->staffIdx(staff) : -1;
+      int tick          = mm.ontime();
+      Staff* staff      = track->staff();
+      const uchar* data = (uchar*)mm.data();
+      int staffIdx      = track->staffIdx();
 
       switch (mm.metaType()) {
             case META_TEXT:
@@ -826,12 +826,13 @@ void Score::convertMidi(MidiFile* mf)
       //  create instruments
       //---------------------------------------------------
 
-      int i = 0;
       int ntracks = tracks->size();
+      int idx = 0;
       foreach(MidiTrack* track, *tracks) {
             int staffIdx = track->staffIdx();
             if (staffIdx == -1) {
                   track->setStaff(0);
+                  ++idx;
                   continue;
                   }
             int program  = track->getInitProgram();
@@ -848,8 +849,8 @@ void Score::convertMidi(MidiFile* mf)
                   part->instr()->setDrumset(smDrumset);
                   }
             else {
-                  if ((i < (ntracks-1)) && (tracks->at(i+1)->outChannel() == track->outChannel()
-                     && ((program & 0xff) == 0) && tracks->at(i+1)->staffIdx() != -1)) {
+                  if ((idx < (ntracks-1)) && (tracks->at(idx+1)->outChannel() == track->outChannel()
+                     && ((program & 0xff) == 0) && tracks->at(idx+1)->staffIdx() != -1)) {
                         // assume that the current track and the next track
                         // form a piano part
                         Staff* ss = new Staff(this, part, 1);
@@ -860,8 +861,8 @@ void Score::convertMidi(MidiFile* mf)
                         s->setBracket(0, BRACKET_AKKOLADE);
                         s->setBracketSpan(0, 2);
                         // ss->setClef(0, CLEF_F);
-                        ++i;
-                        tracks->at(i)->setStaff(ss);
+                        ++idx;
+                        tracks->at(idx)->setStaff(ss);
                         }
                   else {
                         // ClefType ct = track->medPitch < 58 ? CLEF_F : CLEF_G;
@@ -869,7 +870,7 @@ void Score::convertMidi(MidiFile* mf)
                         }
                   }
             _parts.push_back(part);
-            ++i;
+            ++idx;
             }
 
       int lastTick = 0;
@@ -927,9 +928,11 @@ void Score::convertMidi(MidiFile* mf)
       //---------------------------------------------------
 
       lastTick = 0;
+      int xx = 0;
       foreach (MidiTrack* midiTrack, *tracks) {
             if (midiTrack->staffIdx() == -1)
                   continue;
+            ++xx;
             const EventList el = midiTrack->events();
             for (ciEvent ie = el.begin(); ie != el.end(); ++ie) {
                   if (ie->type() != ME_NOTE)
@@ -939,11 +942,11 @@ void Score::convertMidi(MidiFile* mf)
                         lastTick = tick;
                   }
             }
+      printf("=====tracks %d\n", xx);
       int bars;
       sigmap()->tickValues(lastTick, &bars, &beat, &tick);
       if (beat > 0 || tick > 0)
             ++bars;
-      ++bars;     //DEBUG
 
       //---------------------------------------------------
       //  create measures
@@ -954,7 +957,6 @@ void Score::convertMidi(MidiFile* mf)
             int tick = sigmap()->bar2tick(i, 0, 0);
             measure->setTick(tick);
             Fraction ts(sigmap()->timesig(tick).timesig());
-// printf("Measure %d tick %d\n", i, tick);
             measure->setTimesig(ts);
             measure->setLen(ts);
 
@@ -1005,16 +1007,13 @@ void Score::convertMidi(MidiFile* mf)
                   part->setMidiChannel(track->outChannel());
                   part->setMidiProgram(track->program() & 0x7f);  // only GM
                   }
-            //if (track->staffIdx() != -1)
-            //      convertTrack(track);
+            if (track->staffIdx() != -1)
+                  convertTrack(track);
 
             foreach (Event e, track->events()) {
                   if ((e.type() == ME_META) && (e.metaType() == META_LYRIC))
                         mf->processMeta(this, track, e);
                   }
-            if (track->staffIdx() != -1)
-                  convertTrack(track);
-
             }
 
       for (AL::iSigEvent is = sigmap()->begin(); is != sigmap()->end(); ++is) {
@@ -1158,13 +1157,19 @@ printf("unmapped drum note 0x%02x %d\n", mn.pitch(), mn.pitch());
                   int restLen = i->ontime() - ctick;
                   if (voice == 0) {
                         while (restLen > 0) {
-printf("restLen %d\n", restLen);
                               int len = restLen;
                   		Measure* measure = tick2measure(ctick);
+                              if (ctick >= measure->tick() + measure->ticks()) {
+                                    printf("tick2measure: %d end of score?\n", ctick);
+                                    ctick += restLen;
+                                    restLen = 0;
+                                    break;
+                                    }
                               // split rest on measure boundary
                               if ((ctick + len) > measure->tick() + measure->ticks())
                                     len = measure->tick() + measure->ticks() - ctick;
-                              if (len == measure->ticks()) {
+                              if (len >= measure->ticks()) {
+                                    len = measure->ticks();
                                     Duration d(Duration::V_MEASURE);
                                     Rest* rest = new Rest(this, d);
                                     rest->setDuration(d.fraction());
@@ -1176,6 +1181,11 @@ printf("restLen %d\n", restLen);
                                     }
                               else {
                                     QList<Duration> dl = toDurationList(Fraction::fromTicks(len), false);
+                                    if (dl.size() == 0) {
+                                          printf("cannot create duration list for len %d\n", len);
+                                          restLen = 0;      // fake
+                                          break;
+                                          }
                                     foreach (Duration d, dl) {
                                           Rest* rest = new Rest(this, d);
                                           rest->setDuration(d.fraction());
