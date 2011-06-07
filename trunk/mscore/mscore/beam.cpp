@@ -933,38 +933,28 @@ toMiddleLine = false;   // DEBUG
 
                               bool shortenStem = score()->styleB(ST_shortenStem);
                               if (shortenStem) {
-                                    Spatium progression(score()->styleS(ST_shortStemProgression));
+                                    qreal progression(score()->styleS(ST_shortStemProgression).val());
                                     Spatium shortest(score()->styleS(ST_shortestStem));
-                                    qreal ty = c1->measure()->system()->staffY(c1->staffIdx());
-                                    qreal by = ty + _spatium * 4;
+                                    qreal ty   = c1->measure()->system()->staffY(c1->staffIdx());
+                                    qreal diff = 0.0;
                                     if (_up) {
                                           qreal y = qMax(f->p1[idx].y(), f->p2[idx].y());
-                                          qreal aboveTop = (ty - y) / _spatium;
-                                          if (aboveTop > 2.0) {
-                                                qreal diff = aboveTop * .25;
-                                                if (diff > (3.0 - shortest.val()))
-                                                      diff = 3.0 - shortest.val();
-                                                diff *= _spatium;
-                                                f->p1[idx].ry() += diff;
-                                                f->p2[idx].ry() += diff;
-                                                }
+                                          diff = (ty - y) / _spatium;
                                           }
                                     else {
+                                          qreal by = ty + _spatium * 4;
                                           qreal y = qMin(f->p1[idx].y(), f->p2[idx].y());
-                                          qreal belowBottom = (y - by) / _spatium;
-                                          if (belowBottom > 2.0) {
-                                                qreal diff = belowBottom * .25;
-                                                if (diff > (3.0 - shortest.val()))
-                                                      diff = 3.0 - shortest.val();
-                                                diff *= -_spatium;
-                                                f->p1[idx].ry() += diff;
-                                                f->p2[idx].ry() += diff;
-                                                }
+                                          diff = (y - by) / _spatium;
+                                          }
+                                    if (diff > 2.0) {
+                                          diff *= progression;
+                                          if (diff > (3.0 - shortest.val()))
+                                                diff = 3.0 - shortest.val();
+                                          diff            *= _up ? _spatium : -_spatium;
+                                          f->p1[idx].ry() += diff;
+                                          f->p2[idx].ry() += diff;
                                           }
                                     }
-                              // double yy       = system()->staffY(c1->staffIdx());
-                              // f->p1[idx].ry() = alignBeam(l1, f->p1[idx].y() - yy, _spatium, _up) + yy;
-                              // f->p2[idx].ry() = alignBeam(l2, f->p2[idx].y() - yy, _spatium, _up) + yy;
                               }
                         }
                   double yy       = system()->staffY(c1->staffIdx());

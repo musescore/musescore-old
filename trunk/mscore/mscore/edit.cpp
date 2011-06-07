@@ -681,7 +681,7 @@ printf("cmdAddTimeSig\n");
             //  with same values
             //
             if ((ots->subtype()   == ts->subtype())
-               && (ots->sig()     == ts->sig())
+               && (ots->sig().identical(ts->sig()))
                && (ots->stretch() == ts->stretch())) {
 printf("  already there %d %d\n", ots->subtype(), ts->subtype());
                   delete ts;
