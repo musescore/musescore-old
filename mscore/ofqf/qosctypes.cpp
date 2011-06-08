@@ -150,12 +150,12 @@ void PathObject::send( double d ) { send( QVariant( d ) ); }
 void PathObject::send() { send( QVariant() ); }
 
 void PathObject::signalData( QVariant v ) {
-	if ( v.type() == _type ) {
+	if ( v.type() == _type || (v.type() == QMetaType::Float && _type == QVariant::Double) ) {
 		if ( _type == QVariant::Invalid )
 			emit data();
 		if ( _type == QVariant::Int )
 			emit data( v.toInt() );
-		if ( _type == QVariant::Double )
+		if ( _type == QVariant::Double)
 			emit data( v.toDouble() );
 		if ( _type == QVariant::String )
 			emit data( v.toString() );

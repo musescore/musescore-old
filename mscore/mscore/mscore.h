@@ -411,6 +411,9 @@ class MuseScore : public QMainWindow {
       void oscNext();
       void oscNextMeasure();
       void oscGoto(int m);
+      void oscVolChannel(double val);
+      void oscPanChannel(double val);
+      void oscMuteChannel(double val);
 #endif
       void createNewProfile();
       void deleteProfile();

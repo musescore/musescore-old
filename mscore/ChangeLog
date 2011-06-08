@@ -1,5 +1,9 @@
 7.jun (ws)
       - fix #10988: Cannot change 4/4 to 2/2
+      (la)
+      - add support for OSC #bundle
+      - fix support for float in OSC
+      - add oscChannelVolume, pan and mute
 6.jun (ws)
       - fix #10607: Copy n' Paste of notes 'forgets' some rests
         (patch from Miwarre)

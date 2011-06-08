@@ -82,6 +82,7 @@ class InstrumentListEditor : public QScrollArea
    public:
       InstrumentListEditor(QWidget* parent);
       void updateAll(Score*);
+      PartEdit* partEdit(int index);
       };
 
 #endif

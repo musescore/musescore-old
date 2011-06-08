@@ -3612,6 +3612,22 @@ void MuseScore::initOsc()
       QObject::connect(oo, SIGNAL(data(int)), SLOT(oscNextMeasure()));
       oo = new PathObject( "/goto", QVariant::Int, osc);
       QObject::connect(oo, SIGNAL(data(int)), SLOT(oscGoto(int)));
+      for(int i=1; i <=12; i++ ) {
+            oo = new PathObject( QString("/vol%1").arg(i), QVariant::Double, osc);
+            QObject::connect(oo, SIGNAL(data(double)), SLOT(oscVolChannel(double)));
+            }
+      for(int i=1; i <=12; i++ ) {
+            oo = new PathObject( QString("/pan%1").arg(i), QVariant::Double, osc);
+            QObject::connect(oo, SIGNAL(data(double)), SLOT(oscPanChannel(double)));
+            }
+      for(int i=1; i <=12; i++ ) {
+            oo = new PathObject( QString("/mute%1").arg(i), QVariant::Double, osc);
+            QObject::connect(oo, SIGNAL(data(double)), SLOT(oscMuteChannel(double)));
+            }
+      for(int i=1; i <=12; i++ ) {
+            oo = new PathObject( QString("/solo%1").arg(i), QVariant::Double, osc);
+            QObject::connect(oo, SIGNAL(data(double)), SLOT(oscSoloChannel(double)));
+            }
       }
 
 //---------------------------------------------------------
@@ -3687,6 +3703,73 @@ void MuseScore::oscVolume(int val)
       double v = val / 128.0;
       if (seq)
             seq->setGain(v);
+      }
+      
+//---------------------------------------------------------
+//   oscVolChannel
+//---------------------------------------------------------
+
+void MuseScore::oscVolChannel(double val)
+      {
+      if(!cs)
+            return;
+      PathObject* po = (PathObject*) sender();
+       
+      int i = po->path().mid(4).toInt() - 1;
+      QList<MidiMapping>* mms = cs->midiMapping();
+      if( i >= 0 && i < mms->size()) {
+            MidiMapping mm = mms->at(i);
+            Channel* channel = mm.articulation;
+            int iv = lrint(val*127);
+            seq->setController(channel->channel, CTRL_VOLUME, iv);
+            channel->volume = iv;
+            if (iledit)
+                  iledit->partEdit(i)->volume->setValue(iv);
+            }
+      }
+
+//---------------------------------------------------------
+//   oscPanChannel
+//---------------------------------------------------------
+
+void MuseScore::oscPanChannel(double val)
+      {
+      if(!cs)
+            return;
+      PathObject* po = (PathObject*) sender();
+       
+      int i = po->path().mid(4).toInt() - 1;
+      QList<MidiMapping>* mms = cs->midiMapping();
+      if( i >= 0 && i < mms->size()) {
+            MidiMapping mm = mms->at(i);
+            Channel* channel = mm.articulation;
+            int iv = lrint((val + 1) * 64);
+            seq->setController(channel->channel, CTRL_PANPOT, iv);
+            channel->volume = iv;
+            if (iledit)
+                  iledit->partEdit(i)->pan->setValue(iv);
+            }
+      }
+
+//---------------------------------------------------------
+//   oscMuteChannel
+//---------------------------------------------------------
+
+void MuseScore::oscMuteChannel(double val)
+      {
+      if(!cs)
+            return;
+      PathObject* po = (PathObject*) sender();
+       
+      int i = po->path().mid(5).toInt() - 1;
+      QList<MidiMapping>* mms = cs->midiMapping();
+      if( i >= 0 && i < mms->size()) {
+            MidiMapping mm = mms->at(i);
+            Channel* channel = mm.articulation;
+            channel->mute = (val==0.0f ? false : true);
+            if (iledit)
+                  iledit->partEdit(i)->mute->setCheckState(val==0.0f ? Qt::Unchecked:Qt::Checked);
+            }
       }
 #endif // #ifndef OSC
 

@@ -69,6 +69,7 @@ class PathObject : public QObject
 		PathObject( QString path, QVariant::Type type, QOscClient* parent );
 		PathObject( QString path, QVariant::Type type, QOscServer* parent );
 		~PathObject();
+		QString path()      { return _path; }
 
 	public slots:
 		/**
