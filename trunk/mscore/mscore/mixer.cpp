@@ -130,6 +130,15 @@ void InstrumentListEditor::updateAll(Score* score)
       patchListChanged();
       }
 
+PartEdit* InstrumentListEditor::partEdit(int index)
+      {
+      if(index < vb->count()) {
+            QWidgetItem* wi = (QWidgetItem*)(vb->itemAt(index));
+            return (PartEdit*) wi->widget();
+            }
+      return 0;      
+      }
+
 //---------------------------------------------------------
 //   patchListChanged
 //---------------------------------------------------------
