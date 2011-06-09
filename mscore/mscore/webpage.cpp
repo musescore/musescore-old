@@ -129,14 +129,14 @@ void MyWebView::link(const QUrl& url)
       if (fi.suffix() == "mscz")
             mscore->loadFile(url);
       else
-            load(url);
+            QDesktopServices::openUrl(url);
       }
 
 //---------------------------------------------------------
 //   WebPage
 //---------------------------------------------------------
 
-WebPage::WebPage(MuseScore* mscore, QWidget* parent)
+WebPageDockWidget::WebPageDockWidget(MuseScore* mscore, QWidget* parent)
    : QDockWidget(parent)
       {
       QString tabPages[WEB_PAGECOUNT];
@@ -148,6 +148,7 @@ WebPage::WebPage(MuseScore* mscore, QWidget* parent)
       QWidget* w = new QWidget(this);
       setTitleBarWidget(w);
       titleBarWidget()->hide();
+      setFloating(false);
 
       QWidget* mainWidget = new QWidget(this);
       tab   = new QTabBar(mainWidget);
@@ -158,8 +159,7 @@ WebPage::WebPage(MuseScore* mscore, QWidget* parent)
       mainWidget->setLayout(layout);
 
       setObjectName("webpage");
-      setWindowTitle(tr("Web"));
-      setAllowedAreas(Qt::RightDockWidgetArea | Qt::LeftDockWidgetArea);
+      setAllowedAreas(Qt::LeftDockWidgetArea);
 
       for (int i = 0; i < WEB_PAGECOUNT; ++i) {
             tab->addTab(tabPages[i]);
@@ -177,7 +177,7 @@ WebPage::WebPage(MuseScore* mscore, QWidget* parent)
 //   setTab
 //---------------------------------------------------------
 
-void WebPage::setTab(int n)
+void WebPageDockWidget::setTab(int n)
       {
       if (tab->currentIndex() != n)
             tab->setCurrentIndex(n);
@@ -189,7 +189,7 @@ void WebPage::setTab(int n)
 //   tabChanged
 //---------------------------------------------------------
 
-void WebPage::tabChanged(int n)
+void WebPageDockWidget::tabChanged(int n)
       {
 printf("tabChanged %d\n", n);
       static const char* urls[WEB_PAGECOUNT];

@@ -2465,12 +2465,12 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_ALL,
-         "piano",
-         QT_TRANSLATE_NOOP("action","Show piano keyboard"),
-         0,
+         "toogle-piano",
+         QT_TRANSLATE_NOOP("action","Piano keyboard"),
+         Qt::Key_P,
          Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","P"),
-         QT_TRANSLATE_NOOP("action","Show piano keyboard")
+         QT_TRANSLATE_NOOP("action","piano keyboard"),
+         QT_TRANSLATE_NOOP("action","piano keyboard")
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY | STATE_FOTO,
@@ -2528,15 +2528,6 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL,
-         "web",
-         QT_TRANSLATE_NOOP("action","Web"),
-         0,
-         Qt::ApplicationShortcut,
-         QT_TRANSLATE_NOOP("action","W"),
-         QT_TRANSLATE_NOOP("action","WEB")
-         ),
-      Shortcut(
-         STATE_NORMAL,
          "next-score",
          QT_TRANSLATE_NOOP("action","next score"),
          QKeySequence::NextChild,
@@ -2560,30 +2551,12 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL,
-         "web-tutorials",
-         QT_TRANSLATE_NOOP("action","web tutorials"),
-         0,
+         "online-resources",
+         QT_TRANSLATE_NOOP("action","Online Resources"),
+         Qt::Key_F7,
          Qt::ApplicationShortcut,
-         QT_TRANSLATE_NOOP("action","web tutorials"),
-         QT_TRANSLATE_NOOP("action","web turorials")
-         ),
-      Shortcut(
-         STATE_NORMAL,
-         "web-news",
-         QT_TRANSLATE_NOOP("action","web news"),
-         0,
-         Qt::ApplicationShortcut,
-         QT_TRANSLATE_NOOP("action","web news"),
-         QT_TRANSLATE_NOOP("action","web news")
-         ),
-      Shortcut(
-         STATE_NORMAL,
-         "web-scorelib",
-         QT_TRANSLATE_NOOP("action","web score library"),
-         0,
-         Qt::ApplicationShortcut,
-         QT_TRANSLATE_NOOP("action","web score library"),
-         QT_TRANSLATE_NOOP("action","web score library")
+         QT_TRANSLATE_NOOP("action","Online resources"),
+         QT_TRANSLATE_NOOP("action","Online resources")
          ),
       // xml==0  marks end of list
       Shortcut(0, 0, 0, QKeySequence::UnknownKey)
