@@ -77,7 +77,7 @@ class MyWebView: public QWebView
 //   WebPage
 //---------------------------------------------------------
 
-class WebPage : public QDockWidget {
+class WebPageDockWidget : public QDockWidget {
       Q_OBJECT
 
       QTabBar* tab;
@@ -88,7 +88,7 @@ class WebPage : public QDockWidget {
       void tabChanged(int);
 
    public:
-      WebPage(MuseScore* mscore, QWidget* parent = 0);
+      WebPageDockWidget(MuseScore* mscore, QWidget* parent = 0);
       void setTab(int n);
       };
 

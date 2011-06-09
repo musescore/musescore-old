@@ -430,15 +430,9 @@ MuseScore::MuseScore()
       vraster->setContextMenuPolicy(Qt::ActionsContextMenu);
       vraster->addAction(getAction("config-raster"));
 
-      QToolButton* piano = new QToolButton(this);
-      pianoAction = getAction("piano");
-      pianoAction->setCheckable(true);
-      piano->setDefaultAction(pianoAction);
-
       _statusBar->addPermanentWidget(hraster, 0);
       _statusBar->addPermanentWidget(vraster, 0);
       _statusBar->addPermanentWidget(new QWidget(this), 2);
-      _statusBar->addPermanentWidget(piano, 0);
       _statusBar->addPermanentWidget(new QWidget(this), 100);
       _statusBar->addPermanentWidget(_modeText, 0);
       layerSwitch = new QComboBox(this);
@@ -447,12 +441,6 @@ MuseScore::MuseScore()
 
       _statusBar->addPermanentWidget(layerSwitch);
       _statusBar->addPermanentWidget(_positionLabel, 0);
-
-      QToolButton* web = new QToolButton(this);
-      webAction = getAction("web");
-      webAction->setCheckable(true);
-      web->setDefaultAction(webAction);
-      _statusBar->addPermanentWidget(web, 0);
 
       setStatusBar(_statusBar);
 
@@ -872,6 +860,10 @@ MuseScore::MuseScore()
       a = getAction("synth-control");
       a->setCheckable(true);
       menuDisplay->addAction(a);
+      
+      a = getAction("toogle-piano");
+      a->setCheckable(true);
+      menuDisplay->addAction(a);
 
       menuDisplay->addSeparator();
       menuDisplay->addAction(getAction("zoomin"));
@@ -923,9 +915,11 @@ MuseScore::MuseScore()
 
       menuHelp->addAction(getAction("local-help"));
       menuHelp->addAction(tr("Online Handbook"), this, SLOT(helpBrowser1()));
-      menuHelp->addAction(getAction("web-tutorials"));
-      menuHelp->addAction(getAction("web-news"));
-      menuHelp->addAction(getAction("web-scorelib"));
+            
+      a = getAction("online-resources");
+      a->setCheckable(true);
+      menuHelp->addAction(a);
+      
       menuHelp->addSeparator();
       menuHelp->addAction(tr("&About"),   this, SLOT(about()));
       menuHelp->addAction(tr("About&Qt"), this, SLOT(aboutQt()));
@@ -2566,10 +2560,10 @@ void MuseScore::cmd(QAction* a)
             editRaster();
       else if (cmd == "hraster" || cmd == "vraster")  // value in [hv]RasterAction already set
             ;
-      else if (cmd == "piano")
-            showPianoKeyboard();
-      else if (cmd == "web")
-            showWeb(WEB_TUTORIALS, webAction->isChecked());
+      else if (cmd == "toogle-piano")
+            showPianoKeyboard(a->isChecked());
+      else if (cmd == "online-resources")
+            showWeb(WEB_TUTORIALS, a->isChecked());
       else if (cmd == "media")
             showMediaDialog();
       else if (cmd == "page-settings")
@@ -3624,10 +3618,6 @@ void MuseScore::initOsc()
             oo = new PathObject( QString("/mute%1").arg(i), QVariant::Double, osc);
             QObject::connect(oo, SIGNAL(data(double)), SLOT(oscMuteChannel(double)));
             }
-      for(int i=1; i <=12; i++ ) {
-            oo = new PathObject( QString("/solo%1").arg(i), QVariant::Double, osc);
-            QObject::connect(oo, SIGNAL(data(double)), SLOT(oscSoloChannel(double)));
-            }
       }
 
 //---------------------------------------------------------
@@ -3792,9 +3782,8 @@ void MuseScore::editRaster()
 //   showPianoKeyboard
 //---------------------------------------------------------
 
-void MuseScore::showPianoKeyboard()
+void MuseScore::showPianoKeyboard(bool on)
       {
-      bool on = pianoAction->isChecked();
       if (on) {
             if (_pianoTools == 0) {
                   _pianoTools = new PianoTools(this);
@@ -3817,7 +3806,7 @@ void MuseScore::showWeb(int page, bool on)
       {
       if (on) {
             if (_webPage == 0) {
-                  _webPage = new WebPage(this, this);
+                  _webPage = new WebPageDockWidget(this, this);
                   addDockWidget(Qt::RightDockWidgetArea, _webPage);
                   }
             _webPage->setTab(page);

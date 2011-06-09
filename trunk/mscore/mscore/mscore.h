@@ -72,7 +72,7 @@ class PianoTools;
 class MediaDialog;
 class Profile;
 class AlbumManager;
-class WebPage;
+class WebPageDockWidget;
 
 extern QString mscoreGlobalShare;
 static const int PROJECT_LIST_LEN = 6;
@@ -217,7 +217,7 @@ class MuseScore : public QMainWindow {
       QToolBar* entryTools;
       TextTools* _textTools;
       PianoTools* _pianoTools;
-      WebPage* _webPage;
+      WebPageDockWidget* _webPage;
       MediaDialog* _mediaDialog;
       DrumTools* _drumTools;
       QToolBar* voiceTools;
@@ -307,8 +307,6 @@ class MuseScore : public QMainWindow {
       QDialog* editRasterDialog;
       QAction* hRasterAction;
       QAction* vRasterAction;
-      QAction* pianoAction;
-      QAction* webAction;
 
       QMenu* menuProfiles;
       QActionGroup* profiles;
@@ -362,7 +360,7 @@ class MuseScore : public QMainWindow {
       void startExcerptsDialog();
       void initOsc();
       void editRaster();
-      void showPianoKeyboard();
+      void showPianoKeyboard(bool);
       void showWeb(int page, bool on);
       void showMediaDialog();
       void showAlbumManager();
