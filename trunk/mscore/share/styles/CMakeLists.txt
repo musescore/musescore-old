@@ -23,6 +23,7 @@ install(FILES
       chords.xml
       stdchords.xml
       jazzchords.xml
+      customchords.xml
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}styles
       )
 

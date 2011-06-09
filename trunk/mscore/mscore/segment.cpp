@@ -111,7 +111,8 @@ Segment::Segment(Measure* m)
       {
       setParent(m);
       init();
-      empty = true;
+      empty    = true;
+      _dotPosX = 0.0;
       }
 
 Segment::Segment(Measure* m, SegmentType st, int t)
@@ -121,7 +122,8 @@ Segment::Segment(Measure* m, SegmentType st, int t)
       setSubtype(st);
       setTick(t);
       init();
-      empty = true;
+      empty    = true;
+      _dotPosX = 0.0;
       }
 
 //---------------------------------------------------------
@@ -137,9 +139,6 @@ Segment::Segment(const Segment& s)
       empty = s.empty;           // cached value
       _tick = s._tick;
 
-//      QList<Spanner*> _spannerFor;
-//      QList<Spanner*> _spannerBack;
-
       foreach(Element* e, s._annotations) {
             Element* ne = e->clone();
             add(ne);
@@ -153,6 +152,7 @@ Segment::Segment(const Segment& s)
                   }
             _elist.append(ne);
             }
+      _dotPosX = s._dotPosX;
       }
 
 //---------------------------------------------------------
@@ -746,4 +746,5 @@ void Segment::swapElements(int i1, int i2)
       if (_elist[i2])
             _elist[i2]->setTrack(i2);
       }
+
 

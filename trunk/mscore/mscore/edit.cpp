@@ -1167,6 +1167,8 @@ void Score::cmdFlip()
                   }
             else if (e->type() == TUPLET)
                   undo()->push(new FlipTupletDirection(static_cast<Tuplet*>(e)));
+            else if (e->type() == NOTEDOT)
+                  undo()->push(new FlipNoteDotDirection(static_cast<Note*>(e->parent())));
             }
       layoutAll = true;
       }

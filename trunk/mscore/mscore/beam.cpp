@@ -867,7 +867,7 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                         double min        =  1000000.0;
                         double max        = -1000000.0;
                         bool toMiddleLine = true;
-                        double minStemLen = 3.0 * _spatium; // - bw.val() * _spatium * .5;
+                        double minStemLen = 3.0 * _spatium;
                         if (isGrace)
                               minStemLen *= graceMag;
 
@@ -887,7 +887,7 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                                     stemLen = y1 - y2;
                                     }
                               else {
-                                    if ((my-y1) < my)
+                                    if ((my-y1) < minStemLen)
                                           toMiddleLine = false;
                                     stemLen = y2 - y1;
                                     }
@@ -900,12 +900,11 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                               if (stemLen > max)
                                     max = stemLen;
                               }
-toMiddleLine = false;   // DEBUG
                         if (toMiddleLine) {
                               // extend stems to middle staff line
                               f->p1[idx].ry() = my;
                               f->p2[idx].ry() = my;
-                              slope = 0.0;
+                              slope           = 0.0;
                               }
                         else {
                               // adjust beam position

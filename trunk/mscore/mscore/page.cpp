@@ -629,7 +629,7 @@ void Page::doRebuildBspTree()
       QList<Element*> el;
       foreach(System* s, _systems)
             foreach(MeasureBase* m, s->measures()) {
-                  m->scanElements(&el, collectElements);
+                  m->scanVisibleElements(&el, collectElements, true);
             }
       scanElements(&el, collectElements);
 

@@ -1425,7 +1425,6 @@ void Chord::layout()
       if (_glissando)
             lll += _spatium * .5;
 
-      _dotPosX   = 0.0;
       double rrr = 0.0;
       foreach(const Note* note, _notes) {
             double lhw = note->headWidth();
@@ -1443,12 +1442,12 @@ void Chord::layout()
             if (rr > rrr)
                   rrr = rr;
             double xx = note->pos().x() + headWidth;
-            if (xx > _dotPosX)
-                  _dotPosX = xx;
+            if (xx > dotPosX())
+                  setDotPosX(xx);
             }
       if (dots()) {
-            if (_dotPosX > rrr)
-                  rrr = _dotPosX;
+            if (dotPosX() > rrr)
+                  rrr = dotPosX();
             rrr += point(score()->styleS(ST_dotNoteDistance)) + dots() * point(score()->styleS(ST_dotDotDistance));
             }
 
@@ -1714,5 +1713,23 @@ void Chord::renderArticulation(ArticulationType type)
       if (!events.isEmpty())
             score()->undo()->push(new ChangeNoteEvents(this, events));
 #endif
+      }
+
+//---------------------------------------------------------
+//   dotPosX
+//---------------------------------------------------------
+
+double Chord::dotPosX() const
+      {
+      return segment()->dotPosX();
+      }
+
+//---------------------------------------------------------
+//   setDotPosX
+//---------------------------------------------------------
+
+void Chord::setDotPosX(double val)
+      {
+      segment()->setDotPosX(val);
       }
 

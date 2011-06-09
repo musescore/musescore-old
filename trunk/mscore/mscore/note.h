@@ -230,6 +230,7 @@ class Note : public Element {
 
       Direction dotPosition() const    { return _dotPosition; }
       void setDotPosition(Direction d) { _dotPosition = d;    }
+      bool dotIsUp() const;               // actual dot position
 
       virtual void toDefault();
       virtual void setMag(double val);

@@ -625,6 +625,11 @@ void Note::write(Xml& xml) const
                   for (int i = 0; i < dots; ++i)
                         _dots[i]->write(xml);
                   }
+            switch(_dotPosition) {
+                  case UP:   xml.tag("dotPosition", QVariant("up")); break;
+                  case DOWN: xml.tag("dotPosition", QVariant("down")); break;
+                  case AUTO: break;
+                  }
             }
 
       if (_tieFor)
@@ -856,6 +861,14 @@ void Note::read(QDomElement e)
                         printf("too many dots\n");
                         delete dot;
                         }
+                  }
+            else if (tag == "dotPosition") {
+                  if (val == "up")
+                        _dotPosition = UP;
+                  else if (val == "down")
+                        _dotPosition = DOWN;
+                  else
+                        _dotPosition = AUTO;
                   }
             else if (tag == "Events") {
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
@@ -1358,45 +1371,57 @@ void Note::layout()
             }
       if (_bend)
             _bend->layout();
-      int dots = chord()->dots();
-      for (int i = 0; i < 3; ++i) {
-            if (i < dots) {
-                  if (_dots[i] == 0) {
-                        _dots[i] = new NoteDot(score());
-                        _dots[i]->setIdx(i);
-                        _dots[i]->setParent(this);
-                        _dots[i]->setTrack(track());  // needed to know the staff it belongs to (and detect tablature)
-                        }
-                  _dots[i]->layout();
-                  }
-            else {
-                  delete _dots[i];
-                  _dots[i] = 0;
-                  }
-            }
-      // with tablature, dots are hidden: do not spend time positioning them!
-      if (dots && !useTablature) {
-            double _spatium = spatium();
-            double d  = point(score()->styleS(ST_dotNoteDistance));
-            double dd = point(score()->styleS(ST_dotDotDistance));
-            double y  = 0;
-            double x  = chord()->dotPosX() - pos().x();
 
-            // do not draw dots on staff line
-            if ((_line & 1) == 0) {
-                  Measure* m = chord()->measure();
-                  if (m->mstaff(staffIdx())->hasVoices) {
-                        if (voice() == 0 || voice() == 2)
-                              y += -.5 * _spatium;
-                        else
-                              y += .5 * _spatium;
+      // for tablature, dots are hidden: do not spend time with them!
+      if (!useTablature) {
+            int dots = chord()->dots();
+            for (int i = 0; i < 3; ++i) {
+                  if (i < dots) {
+                        if (_dots[i] == 0) {
+                              NoteDot* dot = new NoteDot(score());
+                              dot->setIdx(i);
+                              dot->setParent(this);
+                              dot->setTrack(track());  // needed to know the staff it belongs to (and detect tablature)
+                              score()->undoAddElement(dot); // move dot to _dots[i]
+                              }
+                        _dots[i]->layout();
                         }
-                  else
-                        y += -.5 * _spatium;
+                  else if (_dots[i])
+                        score()->undoRemoveElement(_dots[i]);
                   }
-            for (int i = 0; i < dots; ++i)
-                  _dots[i]->setPos(x + d + dd * i, y);
+            if (dots) {
+                  double _spatium = spatium();
+                  double d  = point(score()->styleS(ST_dotNoteDistance));
+                  double dd = point(score()->styleS(ST_dotDotDistance));
+                  double y  = 0.0;
+                  double x  = chord()->dotPosX() - pos().x() - chord()->pos().x();
+
+                  // do not draw dots on staff line
+                  if ((_line & 1) == 0) {
+                        double up;
+                        if (_dotPosition == AUTO)
+                              up = (voice() == 0 || voice() == 2) ? -1.0 : 1.0;
+                        else if (_dotPosition == UP)
+                              up = -1.0;
+                        else
+                              up = 1.0;
+                        y += .5 * _spatium * up;
+                        }
+                  for (int i = 0; i < dots; ++i)
+                        _dots[i]->setPos(x + d + dd * i, y);
+                  }
             }
+      }
+
+//---------------------------------------------------------
+//   dotIsUp
+//---------------------------------------------------------
+
+bool Note::dotIsUp() const
+      {
+      if (_dots[0] == 0)
+            return true;
+      return _dots[0]->y() < spatium() * .1;
       }
 
 //---------------------------------------------------------

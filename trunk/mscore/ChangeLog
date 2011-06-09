@@ -1,4 +1,7 @@
 7.jun (ws)
+      - "x" (flip) flips the up/down position of a note augmentation dot
+        (if note y position is on a staff line)
+      - align augmentation dots vertically also for different voices
       - fix #10988: Cannot change 4/4 to 2/2
       (la)
       - add support for OSC #bundle
