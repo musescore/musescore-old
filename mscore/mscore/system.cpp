@@ -881,7 +881,7 @@ void System::scanElements(void* data, void (*func)(void*, Element*))
             return;
       if (barLine)
             func(data, barLine);
-      foreach(SysStaff* st, _staves) {
+      foreach (SysStaff* st, _staves) {
             if (!st->show())
                   continue;
             foreach(Bracket* b, st->brackets) {

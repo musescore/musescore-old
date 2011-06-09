@@ -2845,6 +2845,8 @@ void Score::pasteChordRest(ChordRest* cr, int tick)
       Measure* measure = tick2measure(tick);
       bool isGrace = (cr->type() == CHORD) && (((Chord*)cr)->noteType() != NOTE_NORMAL);
       int measureEnd = measure->tick() + measure->ticks();
+      if (tick >= measureEnd)       // end of score
+            return;
 
       if (!isGrace && (tick + cr->actualTicks() > measureEnd)) {
             if (cr->type() == CHORD) {

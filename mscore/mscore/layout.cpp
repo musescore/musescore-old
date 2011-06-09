@@ -272,12 +272,13 @@ void Score::layoutChords1(Segment* segment, int staffIdx)
             if (xx > dotPosX)
                   dotPosX = xx;
             }
-      for (int track = startTrack; track < endTrack; ++track) {
+      segment->setDotPosX(dotPosX);
+/*      for (int track = startTrack; track < endTrack; ++track) {
             Element* e = segment->element(track);
             if (e && e->type() == CHORD)
                   static_cast<Chord*>(e)->setDotPosX(dotPosX - e->pos().x());
             }
-
+  */
       int nAcc = aclist.size();
       if (nAcc == 0)
             return;

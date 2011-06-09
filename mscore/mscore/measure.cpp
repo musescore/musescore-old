@@ -2501,12 +2501,21 @@ bool Measure::slashStyle(int staffIdx) const
 
 void Measure::scanElements(void* data, void (*func)(void*, Element*))
       {
+      scanVisibleElements(data, func, false);
+      }
+
+//---------------------------------------------------------
+//   scanVisibleElements
+//---------------------------------------------------------
+
+void Measure::scanVisibleElements(void* data, void (*func)(void*, Element*), bool onlyVisible)
+      {
       MeasureBase::scanElements(data, func);
 
       int nstaves = score()->nstaves();
       for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
-//TODO            if (!visible(staffIdx))
-//                  continue;
+            if (onlyVisible && !visible(staffIdx))
+                  continue;
             MStaff* ms = staves[staffIdx];
             if (ms->lines)
                   func(data, ms->lines);
@@ -2519,14 +2528,14 @@ void Measure::scanElements(void* data, void (*func)(void*, Element*))
       int tracks = nstaves * VOICES;
       for (Segment* s = first(); s; s = s->next()) {
             for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
-//TODO                  if (!visible(staffIdx))
-//                        continue;
+                  if (onlyVisible && !visible(staffIdx))
+                        continue;
                   }
             for (int track = 0; track < tracks; ++track) {
-//TODO                  if (!visible(track/VOICES)) {
-//                        track += VOICES - 1;
-//                        continue;
-//                        }
+                  if (onlyVisible && !visible(track/VOICES)) {
+                        track += VOICES - 1;
+                        continue;
+                        }
                   Element* e = s->element(track);
                   if (e == 0)
                         continue;
@@ -3076,8 +3085,8 @@ void Measure::layoutX(double stretch)
                                           }
                                     else {
                                           qreal d = minNoteDistance;
-                                          if (s->subtype() == SegGrace)
-                                                d *= score()->styleD(ST_graceNoteMag);
+//                                          if (s->subtype() == SegGrace)
+//                                                d *= score()->styleD(ST_graceNoteMag);
                                           minDistance = qMax(minDistance, d);
                                           }
                                     }

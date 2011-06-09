@@ -102,6 +102,11 @@ void MeasureBase::scanElements(void* data, void (*func)(void*, Element*))
       func(data, this);
       }
 
+void MeasureBase::scanVisibleElements(void* data, void (*func)(void*, Element*), bool)
+      {
+      scanElements(data, func);
+      }
+
 //---------------------------------------------------------
 //   add
 //---------------------------------------------------------

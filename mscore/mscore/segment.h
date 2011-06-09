@@ -64,6 +64,7 @@ class Segment : public Element {
 
       mutable bool empty;           // cached value
       int _tick;
+      double     _dotPosX;
 
       QList<Spanner*> _spannerFor;
       QList<Spanner*> _spannerBack;
@@ -145,6 +146,9 @@ class Segment : public Element {
 
       const QList<Element*>& annotations() const  { return _annotations;  }
       void removeAnnotation(Element* e)           { _annotations.removeOne(e); }
+
+      double dotPosX() const              { return _dotPosX; }
+      void setDotPosX(double val)         { _dotPosX = val;  }
       };
 
 #endif

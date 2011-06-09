@@ -502,10 +502,25 @@ class FlipTupletDirection : public UndoCommand {
       void flip();
 
    public:
-      FlipTupletDirection(Tuplet*);
+      FlipTupletDirection(Tuplet* t) : tuplet(t) {}
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       UNDO_NAME("FlipTupletDirection");
+      };
+
+//---------------------------------------------------------
+//   FlipNoteDotDirection
+//---------------------------------------------------------
+
+class FlipNoteDotDirection : public UndoCommand {
+      Note* note;
+      void flip();
+
+   public:
+      FlipNoteDotDirection(Note* n) : note(n) {}
+      virtual void undo() { flip(); }
+      virtual void redo() { flip(); }
+      UNDO_NAME("FlipNoteDotDirection");
       };
 
 //---------------------------------------------------------

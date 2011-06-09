@@ -106,7 +106,6 @@ class Chord : public ChordRest {
 
       NoteType   _noteType;         ///< mark grace notes: acciaccatura and appoggiatura
       bool       _noStem;
-      double     _dotPosX;
 
       virtual qreal upPos()   const;
       virtual qreal downPos() const;
@@ -180,8 +179,8 @@ class Chord : public ChordRest {
       virtual void setTrack(int val);
 
       void computeUp();
-      double dotPosX() const              { return _dotPosX; }
-      void setDotPosX(double val)         { _dotPosX = val;  }
+      double dotPosX() const;
+      void setDotPosX(double val);
       bool noStem() const                 { return _noStem;  }
       void setNoStem(bool val)            { _noStem = val;   }
       virtual void setMag(double val);
