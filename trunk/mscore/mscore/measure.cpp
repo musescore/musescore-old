@@ -2590,36 +2590,47 @@ void Measure::createVoice(int track)
 bool Measure::setStartRepeatBarLine(bool val)
       {
       bool changed = false;
-      const QList<Part*>* pl = score()->parts();
+      Segment* s = first(SegStartRepeatBarLine);
+      if (s == 0) {
+            s = getSegment(SegStartRepeatBarLine, tick());
+            score()->undoAddElement(s);
+            changed = true;
+            }
 
-      foreach(const Part* part, *pl) {
-            BarLine* bl  = 0;
-            Staff* staff = part->staff(0);
-            int track    = staff->idx() * VOICES;
-            bool found   = false;
-            for (Segment* s = first(); s; s = s->next()) {
-                  if (s->subtype() != SegStartRepeatBarLine)
-                        continue;
-                  if (s->element(track)) {
-                        found = true;
-                        if (!val) {
-                              delete s->element(track);
-                              s->setElement(track, 0);
-                              changed = true;
-                              break;
-                              }
-                        else
-                              bl = (BarLine*)s->element(track);
-                        }
-                  }
-            if (!found && val) {
+      for (int staffIdx = 0; staffIdx < score()->nstaves();) {
+            int track    = staffIdx * VOICES;
+            Staff* staff = score()->staff(staffIdx);
+            BarLine* bl  = static_cast<BarLine*>(s->element(track));
+            int span     = staff->barLineSpan();
+
+            if (span && val && (bl == 0)) {
+                  // no barline were we need one:
                   bl = new BarLine(score());
                   bl->setTrack(track);
                   bl->setBarLineType(START_REPEAT);
-                  // bl->setGenerated(true);
-                  Segment* seg = getSegment(SegStartRepeatBarLine, tick());
-                  seg->add(bl);
+                  bl->setParent(s);
+                  score()->undoAddElement(bl);
                   changed = true;
+                  }
+            else if (bl && !val) {
+                  // barline were we do not need one:
+                  score()->undoRemoveElement(bl);
+                  changed = true;
+                  }
+            if (val)
+                  bl->setSpan(span);
+
+            ++staffIdx;
+            //
+            // remove any unwanted barlines:
+            //
+            for (int i = 1; i < span; ++i) {
+                  BarLine* bl  = static_cast<BarLine*>(s->element(staffIdx * VOICES));
+                  if (bl) {
+                        score()->undoRemoveElement(bl);
+                        changed = true;
+                        }
+                  ++staffIdx;
                   }
             }
       return changed;
@@ -3178,8 +3189,8 @@ void Measure::layoutX(double stretch)
                   int nticks = (nseg ? nseg->tick() : ntick) - s->tick();
                   if (nticks == 0) {
                         // this happens for tremolo notes
-                        printf("layoutX: empty segment(%p): measure: tick %d ticks %d\n",
-                           s, tick(), ticks());
+                        printf("layoutX: empty segment(%p)%s: measure: tick %d ticks %d\n",
+                           s, s->subTypeName(), tick(), ticks());
                         printf("         nticks==0 segmente %d, segmentIdx: %d, segTick: %d nsegTick(%p) %d\n",
                            size(), segmentIdx-1, s->tick(), nseg, ntick
                            );
