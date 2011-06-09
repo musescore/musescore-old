@@ -1,7 +1,6 @@
 9.jun (ws)
       - fixed regression for "hide empty staves"
       - fixed start repeat barline
-      - added customchords.xml + styles + demo from Marc Sabatella
 7.jun (ws)
       - "x" (flip) flips the up/down position of a note augmentation dot
         (if note y position is on a staff line)
