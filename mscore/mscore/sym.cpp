@@ -459,6 +459,10 @@ void Sym::genGlyphs()
       {
       QString s(toString());
       QTextLayout layout(s, _font);
+      QTextOption to = layout.textOption();
+      to.setUseDesignMetrics(true);
+      to.setWrapMode(QTextOption::NoWrap);
+      layout.setTextOption(to);
       layout.beginLayout();
       QTextLine line = layout.createLine();
       line.setPosition(QPointF());
