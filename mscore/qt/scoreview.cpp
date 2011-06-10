@@ -24,7 +24,7 @@
 #include <QtGui/QPainter>
 #include <QtGui/QWheelEvent>
 
-#include "libmscore/scoreproxy.h"
+#include "m-libmscore/scoreproxy.h"
 #include "scoreview.h"
 
 //---------------------------------------------------------

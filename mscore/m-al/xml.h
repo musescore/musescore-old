@@ -23,7 +23,7 @@
 
 #include <QtCore/QString>
 #include "mxml/xmlreader.h"
-#include "libmscore/globals.h"
+#include "m-libmscore/globals.h"
 
 class Color;
 class QPointF;
