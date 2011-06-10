@@ -1210,6 +1210,7 @@ function formBeforeUpload(){
       var file   = new QFile(pluginPath + "/ui/musescore_dialog.ui");
       file.open(QIODevice.OpenMode(QIODevice.ReadOnly, QIODevice.Text));
       form = loader.load(file, null);
+      form.setWindowFlags(Qt.WindowSystemMenuHint); //remove the what's this button
       form.verticalLayoutWidget.title.text = curScore.title;
       form.verticalLayoutWidget.license.addItem("All Rights reserved", "all-rights-reserved");
       form.verticalLayoutWidget.license.addItem("Creative Commons Attribution", "cc-by");
