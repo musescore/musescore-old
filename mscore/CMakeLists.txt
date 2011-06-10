@@ -333,7 +333,9 @@ ADD_CUSTOM_TARGET(mops1 DEPENDS ${PROJECT_BINARY_DIR}/all.h)
 ADD_CUSTOM_TARGET(mops2 DEPENDS ${PCH})
 
 subdirs(mscore al awl bww2mxml zarchive rtf2html share manual demos
-      fluid msynth diff mstyle m-libmscore m-al m-msynth qt)
+      fluid msynth diff mstyle)
+
+# subdirs(m-libmscore m-al m-msynth qt)
 
 if (BUILD_SCRIPTGEN)
       subdirs (scriptgen)
