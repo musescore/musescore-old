@@ -1,3 +1,6 @@
+10.jun (la)
+      - update musescore.com plugin
+      - remove "what's this" in toolbar and help menu
 06.jun (la)
       - fix #10564: Selecting voice before enabling Note Entry and entering notes causes crash
       - fix #9107: Pasting multiple multi-voice notes causes crash

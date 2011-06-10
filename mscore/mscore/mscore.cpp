@@ -453,8 +453,6 @@ MuseScore::MuseScore()
 
       searchDialog = 0;
 
-      QAction* whatsThis = QWhatsThis::createAction(this);
-
       //---------------------------------------------------
       //    Transport Action
       //---------------------------------------------------
@@ -492,7 +490,6 @@ MuseScore::MuseScore()
       fileTools->addAction(getAction("file-save"));
 
       fileTools->addAction(getAction("print"));
-      fileTools->addAction(whatsThis);
       fileTools->addSeparator();
 
       a = getAction("undo");
@@ -846,8 +843,6 @@ MuseScore::MuseScore()
       a->setChecked(scriptDebug);
       menuHelp->addAction(a);
       a->setEnabled(false);
-
-      menuHelp->addAction(whatsThis);
 
       setCentralWidget(mainWindow);
 
