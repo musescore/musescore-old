@@ -438,9 +438,8 @@ QFont fontId2font(int fontId)
             // _font.setStyleStrategy(QFont::NoFontMerging);
             size = lrint(8 * DPI / PPI);
             }
-      else if (fontId == 3) {
+      else if (fontId == 3)
             _font.setFamily("Gonville-20");
-            }
       else {
             printf("illegal font id %d\n", fontId);
             abort();
@@ -467,7 +466,7 @@ void Sym::genGlyphs()
       QTextLine line = layout.createLine();
       line.setPosition(QPointF());
       layout.endLayout();
-      QList<QGlyphs> gl = layout.glyphs();
+      QList<QGlyphRun> gl = layout.glyphRuns();
       if (!gl.isEmpty()) {
             glyphs = gl[0];
             glyphs.setPositions(QVector<QPointF>(1, QPointF()));
@@ -524,17 +523,10 @@ void Sym::draw(QPainter& painter, double mag, qreal x, qreal y) const
       double imag = 1.0 / mag;
       painter.scale(mag, mag);
 #ifdef USE_GLYPHS
-      painter.drawGlyphs(QPointF(x * imag, y * imag), glyphs);
+      painter.drawGlyphRun(QPointF(x * imag, y * imag), glyphs);
 #else
-      QString s;
       painter.setFont(_font);
-      if (_code & 0xffff0000) {
-            s = QChar(QChar::highSurrogate(_code));
-            s += QChar(QChar::lowSurrogate(_code));
-            }
-      else
-            s = QChar(_code);
-      painter.drawText(x * imag, y * imag, s);
+      painter.drawText(x * imag, y * imag, toString());
 #endif
       painter.scale(imag, imag);
       }

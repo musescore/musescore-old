@@ -519,10 +519,9 @@ double Note::stemYoff(bool upFlag) const
 
 void Note::draw(Painter* painter) const
       {
-      QPainter& p = *painter->painter();
-
-      bool tablature = staff() && staff()->useTablature();
       if (!_hidden || !userOff().isNull()) {
+            QPainter& p = *painter->painter();
+            bool tablature = staff() && staff()->useTablature();
             if (tablature) {
                   if (tieBack())
                         return;

@@ -66,7 +66,7 @@ class Sym {
       QRectF _bbox;
       QPointF _attach;
 #ifdef USE_GLYPHS
-      QGlyphs glyphs;
+      QGlyphRun glyphs;
       void genGlyphs();
 #endif
 
