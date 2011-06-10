@@ -111,7 +111,7 @@ void Painter::drawSymbol(qreal x, qreal y, int idx)
       {
       QPainter* p = (QPainter*)_context;
       QGlyphs glyphs;
-      QRawFont f(QString("Mscore"), lrint(20.0 * DPI/PPI));
+      QRawFont f(QString(":/fonts/mscore-20.ttf"), lrint(20.0 * DPI/PPI));
       glyphs.setFont(f);
       glyphs.setGlyphIndexes(QVector<quint32>(1, idx));
       glyphs.setPositions(QVector<QPointF>(1, QPointF()));

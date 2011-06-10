@@ -43,7 +43,7 @@ int main(int argc, char* argv[])
       //  load internal fonts
       //
       static const char* fonts[] = {
-            "mscore-20", "mscore1-20", "MuseJazz", "FreeSans", "FreeSerif",
+            "mscore-20", "mscore1-20", "MuseJazz", "FreeSans", "FreeSerifMscore",
             "gonville-20",
             };
       for (unsigned i = 0; i < sizeof(fonts)/sizeof(*fonts); ++i) {

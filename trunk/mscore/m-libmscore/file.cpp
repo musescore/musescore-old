@@ -168,7 +168,7 @@ bool Score::checkProgramVersion(const QString& version)
       _mscVersion = sl[0].toInt() * 100 + sl[1].toInt();
       if (_mscVersion > MSCVERSION) {
             // incompatible version
-            printf("incompatible version\n");
+            printf("incompatible version %d > %d\n", _mscVersion, MSCVERSION);
             return false;
             }
       printf("version %d\n", _mscVersion);
