@@ -19,12 +19,13 @@
 
 #include <stdio.h>
 #include <math.h>
+#include <QtGui/QRawFont>
 #include <QtGui/QPainter>
 #include <QtGui/QGlyphs>
 
 #include "m-al/color.h"
-#include "libmscore/painter.h"
-#include "libmscore/globals.h"
+#include "m-libmscore/painter.h"
+#include "m-libmscore/globals.h"
 
 void Painter::setBrush(const Color&) {}
 
@@ -110,8 +111,7 @@ void Painter::drawSymbol(qreal x, qreal y, int idx)
       {
       QPainter* p = (QPainter*)_context;
       QGlyphs glyphs;
-      QFont f("Mscore");
-      f.setPixelSize(lrint(20.0 * DPI/PPI));
+      QRawFont f(QString("Mscore"), lrint(20.0 * DPI/PPI));
       glyphs.setFont(f);
       glyphs.setGlyphIndexes(QVector<quint32>(1, idx));
       glyphs.setPositions(QVector<QPointF>(1, QPointF()));

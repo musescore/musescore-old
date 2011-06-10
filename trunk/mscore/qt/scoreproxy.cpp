@@ -18,10 +18,10 @@
 //=============================================================================
 
 #include <QtCore/QRectF>
-#include "libmscore/scoreproxy.h"
-#include "libmscore/painter.h"
-#include "libmscore/score.h"
-#include "libmscore/page.h"
+#include "m-libmscore/scoreproxy.h"
+#include "m-libmscore/painter.h"
+#include "m-libmscore/score.h"
+#include "m-libmscore/page.h"
 
 //---------------------------------------------------------
 //   expose
