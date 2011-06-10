@@ -22,7 +22,7 @@
 #include <QtGui/QPainter>
 #include <QtGui/QGlyphs>
 
-#include "al/color.h"
+#include "m-al/color.h"
 #include "libmscore/painter.h"
 #include "libmscore/globals.h"
 
