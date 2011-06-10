@@ -99,12 +99,12 @@ add_executable(mscoreplay
 target_link_libraries(mscoreplay
       ${QT_LIBRARIES}
       ${ALSA_LIBRARY}
-      mscore
-      al
-      osdabzip
-      msynth
+      libmscore
+      m-al
+      zarchive
+      m-msynth
       mxml
       )
 
-subdirs(../libmscore ../al ../osdabzip ../msynth ../mxml)
+subdirs(../mxml)
 
