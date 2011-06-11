@@ -619,6 +619,7 @@ int Score::readScore(QString name)
             }
       if (!hasSoundFont)
             _syntiState.prepend(SyntiParameter("soundfont", preferences.soundFont));
+      checkScore();
       return 0;
       }
 
@@ -1092,28 +1093,6 @@ void Score::readStaff(QDomElement e)
       }
 
 //---------------------------------------------------------
-//   pos2sel
-//---------------------------------------------------------
-
-int Measure::snap(int tick, const QPointF p) const
-      {
-      Segment* s = _first;
-      for (; s->next(); s = s->next()) {
-            double x  = s->x();
-            double dx = s->next()->x() - x;
-            if (s->tick() == tick)
-                  x += dx / 3.0 * 2.0;
-            else  if (s->next()->tick() == tick)
-                  x += dx / 3.0;
-            else
-                  x += dx * .5;
-            if (p.x() < x)
-                  break;
-            }
-      return s->tick();
-      }
-
-//---------------------------------------------------------
 //   textUndoLevelAdded
 //---------------------------------------------------------
 
@@ -1136,28 +1115,6 @@ printf("midiNoteReceived %d chord %d\n", pitch, chord);
       score()->enqueueMidiEvent(ev);
       if (!score()->undo()->active())
             cmd(0);
-      }
-
-//---------------------------------------------------------
-//   snapNote
-//---------------------------------------------------------
-
-int Measure::snapNote(int /*tick*/, const QPointF p, int staff) const
-      {
-      Segment* s = _first;
-      for (;;) {
-            Segment* ns = s->next();
-            while (ns && ns->element(staff) == 0)
-                  ns = ns->next();
-            if (ns == 0)
-                  break;
-            double x  = s->x();
-            double nx = x + (ns->x() - x) * .5;
-            if (p.x() < nx)
-                  break;
-            s = ns;
-            }
-      return s->tick();
       }
 
 //---------------------------------------------------------

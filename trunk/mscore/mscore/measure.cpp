@@ -112,7 +112,7 @@ MStaff::~MStaff()
 //---------------------------------------------------------
 
 Measure::Measure(Score* s)
-   : MeasureBase(s), _first(0), _last(0), _size(0),
+   : MeasureBase(s),
      _timesig(4,4), _len(4,4)
       {
       _repeatCount           = 2;
@@ -150,15 +150,7 @@ Measure::Measure(Score* s)
 Measure::Measure(const Measure& m)
    : MeasureBase(m)
       {
-      _first = 0;
-      _last  = 0;
-      Segment* s = m._first;
-      for (int i = 0; i < m._size; ++i) {
-            Segment* ns = s->clone();
-            push_back(ns);
-            s = s->next();
-            }
-      _size                  = m._size;
+      _segments              = m._segments.clone();
       _timesig               = m._timesig;
       _len                   = m._len;
       _repeatCount           = m._repeatCount;
@@ -190,7 +182,7 @@ Measure::Measure(const Measure& m)
 void Measure::setScore(Score* score)
       {
       MeasureBase::setScore(score);
-      for (Segment* s = _first; s; s = s->next())
+      for (Segment* s = first(); s; s = s->next())
             s->setScore(score);
       foreach(Tuplet* t, _tuplets)
             t->setScore(score);
@@ -229,32 +221,6 @@ Measure::~Measure()
       }
 
 //---------------------------------------------------------
-//   insert
-//---------------------------------------------------------
-
-/**
- Insert Segment \a e before Segment \a el.
-*/
-
-void Measure::insert(Segment* e, Segment* el)
-      {
-      if (el == 0) {
-            push_back(e);
-            return;
-            }
-      if (el == _first) {
-            push_front(e);
-            return;
-            }
-      e->setParent(this);
-      ++_size;
-      e->setNext(el);
-      e->setPrev(el->prev());
-      el->prev()->setNext(e);
-      el->setPrev(e);
-      }
-
-//---------------------------------------------------------
 //   dump
 //---------------------------------------------------------
 
@@ -280,78 +246,7 @@ void Measure::remove(Segment* el)
             if (el->subtype() == SegKeySig)
                   score()->staff(track/VOICES)->setUpdateKeymap(true);
             }
-
-      // debug:
-      bool found = false;
-      for (Segment* s = _first; s; s = s->next()) {
-            if (el == s) {
-                  found = true;
-                  break;
-                  }
-            }
-      if (!found) {
-            printf("Measure::remove segment: not found %p\n", el);
-            abort();
-            }
-      --_size;
-      if (el == _first) {
-            _first = _first->next();
-            if (_first)
-                  _first->setPrev(0);
-            if (el == _last)
-                  _last = 0;
-            return;
-            }
-      if (el == _last) {
-            _last = _last->prev();
-            if (_last)
-                  _last->setNext(0);
-            return;
-            }
-      el->prev()->setNext(el->next());
-      el->next()->setPrev(el->prev());
-      }
-
-//---------------------------------------------------------
-//   push_back
-//---------------------------------------------------------
-
-void Measure::push_back(Segment* e)
-      {
-      ++_size;
-      e->setParent(this);
-      if (_last) {
-            _last->setNext(e);
-            e->setPrev(_last);
-            e->setNext(0);
-            }
-      else {
-            _first = e;
-            e->setPrev(0);
-            e->setNext(0);
-            }
-      _last = e;
-      }
-
-//---------------------------------------------------------
-//   push_front
-//---------------------------------------------------------
-
-void Measure::push_front(Segment* e)
-      {
-      ++_size;
-      e->setParent(this);
-      if (_first) {
-            _first->setPrev(e);
-            e->setNext(_first);
-            e->setPrev(0);
-            }
-      else {
-            _last = e;
-            e->setPrev(0);
-            e->setNext(0);
-            }
-      _first = e;
+      _segments.remove(el);
       }
 
 //---------------------------------------------------------
@@ -651,7 +546,7 @@ double Measure::tick2pos(int tck) const
       double x2 = 0;
       int tick1 = tick();
       int tick2 = tick1;
-      for (s = _first; s; s = s->next()) {
+      for (s = first(); s; s = s->next()) {
             if (s->subtype() != SegChordRest)
                   continue;
             x2 = s->x();
@@ -830,7 +725,7 @@ Chord* Measure::findChord(int tick, int track, int gl)
 
 ChordRest* Measure::findChordRest(int tick, int track)
       {
-      for (Segment* seg = _first; seg; seg = seg->next()) {
+      for (Segment* seg = first(); seg; seg = seg->next()) {
             if (seg->tick() > tick)
                   return 0;
             if (seg->tick() == tick) {
@@ -1026,7 +921,7 @@ Segment* Measure::getSegment(SegmentType st, int t, int gl)
                         ++nGraces;
                         s = new Segment(this, SegGrace, t);
 //                        printf("... creating SegGrace %p at tick=%d and level=%d\n", s, t, nGraces);
-                        insert(s, prevs);
+                        _segments.insert(s, prevs);
                         prevs = s;
                         }
                   return s;
@@ -1075,29 +970,22 @@ void Measure::add(Element* el)
                         if (seg->subtype() == SegKeySig)
                               score()->staff(track/VOICES)->setUpdateKeymap(true);
                         }
-                  int t = seg->tick();
+                  int t  = seg->tick();
                   int st = el->subtype();
-                  Segment* s;
                   if (seg->prev() || seg->next()) {
                         //
                         // undo operation
                         //
-                        if (seg->prev())
-                              seg->prev()->setNext(seg);
-                        else
-                              _first = seg;
-                        if (seg->next())
-                              seg->next()->setPrev(seg);
-                        else
-                              _last = seg;
-                        ++_size;
+                        _segments.insert(seg);
                         }
                   else {
+                        Segment* s;
                         if (st == SegGrace) {
                               for (s = first(); s && s->tick() < t; s = s->next())
                                     ;
                               if (s && (s->tick() > t)) {
-                                    insert(seg, s);
+                                    seg->setParent(this);
+                                    _segments.insert(seg, s);
                                     break;
                                     }
                               if (s && s->subtype() != SegChordRest) {
@@ -1131,7 +1019,8 @@ void Measure::add(Element* el)
                                           }
                                     }
                               }
-                        insert(seg, s);
+                        seg->setParent(this);
+                        _segments.insert(seg, s);
                         }
                   if ((seg->subtype() == SegTimeSig) && seg->element(0)) {
 #if 0
@@ -1305,7 +1194,7 @@ void Measure::moveTicks(int diff)
 
 void Measure::removeStaves(int sStaff, int eStaff)
       {
-      for (Segment* s = _first; s; s = s->next()) {
+      for (Segment* s = first(); s; s = s->next()) {
             for (int staff = eStaff-1; staff >= sStaff; --staff) {
                   s->removeStaff(staff);
                   }
@@ -1356,7 +1245,7 @@ void Measure::insertStaves(int sStaff, int eStaff)
                   e->setTrack(staffIdx * VOICES + voice);
                   }
             }
-      for (Segment* s = _first; s; s = s->next()) {
+      for (Segment* s = first(); s; s = s->next()) {
             for (int staff = sStaff; staff < eStaff; ++staff) {
                   s->insertStaff(staff);
                   }
@@ -1373,7 +1262,7 @@ void Measure::cmdRemoveStaves(int sStaff, int eStaff)
       {
       int sTrack = sStaff * VOICES;
       int eTrack = eStaff * VOICES;
-      for (Segment* s = _first; s; s = s->next()) {
+      for (Segment* s = first(); s; s = s->next()) {
             for (int track = eTrack - 1; track >= sTrack; --track) {
                   Element* el = s->element(track);
                   if (el && !el->generated())
@@ -1512,7 +1401,7 @@ void Measure::removeMStaff(MStaff* /*staff*/, int idx)
 void Measure::insertStaff(Staff* staff, int staffIdx)
       {
 printf("Measure::insertStaff: %d\n", staffIdx);
-      for (Segment* s = _first; s; s = s->next())
+      for (Segment* s = first(); s; s = s->next())
             s->insertStaff(staffIdx);
 
       MStaff* ms = new MStaff;
@@ -1605,7 +1494,7 @@ bool Measure::acceptDrop(ScoreView* viewer, const QPointF& p, int type, int) con
                         return false;
                   viewer->setDropRectangle(r);
                   // search segment list backwards for segchordrest
-                  for (Segment* seg = _last; seg; seg = seg->prev()) {
+                  for (Segment* seg = last(); seg; seg = seg->prev()) {
                         if (seg->subtype() != SegChordRest)
                               continue;
                         // SegChordRest found, check if it contains anything in this staff
@@ -1625,7 +1514,7 @@ bool Measure::acceptDrop(ScoreView* viewer, const QPointF& p, int type, int) con
                   if (mrpy < t || mrpy > b)
                         return false;
                   viewer->setDropRectangle(r);
-                  for (Segment* seg = _first; seg; seg = seg->next()) {
+                  for (Segment* seg = first(); seg; seg = seg->next()) {
                         if (seg->subtype() == SegChordRest) {
                               if (mrpx < seg->pos().x())
                                     return true;
@@ -2300,7 +2189,7 @@ void Measure::read(QDomElement e, int staffIdx)
                         while (ns && ns->tick() < score()->curTick)
                               ns = ns->next();
                         segment = new Segment(this, SegClef, score()->curTick);
-                        insert(segment, ns);
+                        _segments.insert(segment, ns);
                         }
                   else {
                         segment = getSegment(SegClef, score()->curTick);
@@ -2590,9 +2479,9 @@ void Measure::createVoice(int track)
 bool Measure::setStartRepeatBarLine(bool val)
       {
       bool changed = false;
-      Segment* s = first(SegStartRepeatBarLine);
+      Segment* s = findSegment(SegStartRepeatBarLine, tick());
       if (s == 0) {
-            s = getSegment(SegStartRepeatBarLine, tick());
+            s = new Segment(this, SegStartRepeatBarLine, tick());
             score()->undoAddElement(s);
             changed = true;
             }
@@ -2898,46 +2787,20 @@ bool Measure::isEmpty() const
       if (_irregular)
             return false;
       int n = 0;
-      const Segment* s = _first;
-      for (int i = 0; i < _size; ++i) {
+      for (const Segment* s = first(); s; s = s->next()) {
             if (s->subtype() == SegChordRest) {
-                  for (int track = 0; track < staves.size()*VOICES; ++track) {
+                  int tracks = staves.size() * VOICES;
+                  for (int track = 0; track < tracks; ++track) {
                         if (s->element(track) && s->element(track)->type() != REST)
                               return false;
                         }
+                  // measure is not empty if there is more than one rest
                   if (n > 0)
                         return false;
                   ++n;
                   }
-            s = s->next();
             }
       return true;
-      }
-
-//---------------------------------------------------------
-//   firstCRSegment
-//---------------------------------------------------------
-
-Segment* Measure::firstCRSegment() const
-      {
-      for (Segment* s = first(); s; s = s->next()) {
-            if (s->subtype() == SegChordRest)
-                  return s;
-            }
-      return 0;
-      }
-
-//---------------------------------------------------------
-//   first
-//---------------------------------------------------------
-
-Segment* Measure::first(SegmentTypes types) const
-      {
-      for (Segment* s = first(); s; s = s->next()) {
-            if (s->subtype() & types)
-                  return s;
-            }
-      return 0;
       }
 
 //---------------------------------------------------------
@@ -3507,9 +3370,6 @@ Fraction Measure::stretchedLen(Staff* staff) const
 Measure* Measure::cloneMeasure(Score* sc, SlurMap* slurMap, TieMap* tieMap, SpannerMap* spannerMap)
       {
       Measure* m      = new Measure(sc);
-      m->_first       = 0;
-      m->_last        = 0;
-      m->_size        = _size;
       m->_timesig     = _timesig;
       m->_len         = _len;
       m->_repeatCount = _repeatCount;
@@ -3547,7 +3407,7 @@ Measure* Measure::cloneMeasure(Score* sc, SlurMap* slurMap, TieMap* tieMap, Span
             Segment* s = new Segment(m);
             s->setSubtype(oseg->subtype());
             s->setRtick(oseg->rtick());
-            m->push_back(s);
+            m->_segments.push_back(s);
             for (int track = 0; track < tracks; ++track) {
                   Element* oe = oseg->element(track);
                   if (oe == 0)
@@ -3646,4 +3506,50 @@ Measure* Measure::cloneMeasure(Score* sc, SlurMap* slurMap, TieMap* tieMap, Span
             }
       return m;
       }
+
+//---------------------------------------------------------
+//   pos2sel
+//---------------------------------------------------------
+
+int Measure::snap(int tick, const QPointF p) const
+      {
+      Segment* s = first();
+      for (; s->next(); s = s->next()) {
+            double x  = s->x();
+            double dx = s->next()->x() - x;
+            if (s->tick() == tick)
+                  x += dx / 3.0 * 2.0;
+            else  if (s->next()->tick() == tick)
+                  x += dx / 3.0;
+            else
+                  x += dx * .5;
+            if (p.x() < x)
+                  break;
+            }
+      return s->tick();
+      }
+
+//---------------------------------------------------------
+//   snapNote
+//---------------------------------------------------------
+
+int Measure::snapNote(int /*tick*/, const QPointF p, int staff) const
+      {
+      Segment* s = first();
+      for (;;) {
+            Segment* ns = s->next();
+            while (ns && ns->element(staff) == 0)
+                  ns = ns->next();
+            if (ns == 0)
+                  break;
+            double x  = s->x();
+            double nx = x + (ns->x() - x) * .5;
+            if (p.x() < nx)
+                  break;
+            s = ns;
+            }
+      return s->tick();
+      }
+
+
 

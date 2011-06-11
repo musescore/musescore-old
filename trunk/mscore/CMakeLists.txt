@@ -333,7 +333,7 @@ ADD_CUSTOM_TARGET(mops1 DEPENDS ${PROJECT_BINARY_DIR}/all.h)
 ADD_CUSTOM_TARGET(mops2 DEPENDS ${PCH})
 
 subdirs(mscore al awl bww2mxml zarchive rtf2html share manual demos
-      fluid msynth diff mstyle)
+      fluid msynth diff mstyle libmscore)
 
 # subdirs(m-libmscore m-al m-msynth qt)
 
@@ -393,8 +393,8 @@ include (InstallRequiredSystemLibraries)
 
   SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "MuseScore is a full featured WYSIWYG score editor")
   SET(CPACK_PACKAGE_VENDOR "Werner Schweer and Others")
-  SET(CPACK_PACKAGE_DESCRIPTION_FILE "${PROJECT_SOURCE_DIR}/COPYING")
-  SET(CPACK_RESOURCE_FILE_LICENSE    "${PROJECT_SOURCE_DIR}/COPYING")
+  SET(CPACK_PACKAGE_DESCRIPTION_FILE "${PROJECT_SOURCE_DIR}/LICENSE.GPL")
+  SET(CPACK_RESOURCE_FILE_LICENSE    "${PROJECT_SOURCE_DIR}/LICENSE.GPL")
 
   SET(CPACK_PACKAGE_VERSION_MAJOR "${Mscore_VERSION_MAJOR}")
   SET(CPACK_PACKAGE_VERSION_MINOR "${Mscore_VERSION_MINOR}")

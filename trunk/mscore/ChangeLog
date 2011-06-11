@@ -1,3 +1,6 @@
+11.jun (ws)
+      - fix corruption of segmentList (loading of guitar pro files crashed)
+      - created "libmscore" which will contain gui independent code
 9.jun (ws)
       - fixed regression for "hide empty staves"
       - fixed start repeat barline

@@ -26,9 +26,9 @@
  Definition of classes MStaff, Measure and MeasureList.
 */
 
-// #include "segment.h"
 #include "measurebase.h"
 #include "al/fraction.h"
+#include "libmscore/segmentlist.h"
 
 class Xml;
 class Beam;
@@ -82,17 +82,15 @@ enum {
       RepeatJump        = 8
       };
 
-
-/**
-      One measure in a system.
-*/
+//---------------------------------------------------------
+//   Measure
+//    one measure in a system
+//---------------------------------------------------------
 
 class Measure : public MeasureBase {
       Q_DECLARE_TR_FUNCTIONS(Measure)
 
-      Segment* _first;        ///< First item of segment list
-      Segment* _last;         ///< Last item of segment list
-      int _size;              ///< Number of items in segment list
+      SegmentList _segments;
 
       Fraction _timesig;
       Fraction _len;          ///< actual length of measure
@@ -171,8 +169,6 @@ class Measure : public MeasureBase {
       virtual Spatium userDistanceUp(int i) const;
       virtual Spatium userDistanceDown(int i) const;
 
-      int size() const                     { return _size;        }
-
       Fraction timesig() const             { return _timesig;     }
       void setTimesig(const Fraction& f)   { _timesig = f;        }
       Fraction len() const                 { return _len;         }
@@ -180,12 +176,14 @@ class Measure : public MeasureBase {
       void setLen(const Fraction& f)       { _len = f;            }
       virtual int ticks() const            { return _len.ticks(); }
 
-      Segment* first() const               { return _first;       }
-      Segment* first(SegmentTypes) const;
+      int size() const                     { return _segments.size();        }
+      Segment* first() const               { return _segments.first();       }
+      Segment* first(SegmentTypes t) const { return _segments.first(t);      }
 
-      Segment* last() const                { return _last;        }
-      Segment* firstCRSegment() const;
-      void remove(Segment*);
+      Segment* last() const                { return _segments.last();        }
+      Segment* firstCRSegment() const      { return _segments.firstCRSegment(); }
+      void remove(Segment* s);
+      SegmentList* segments()              { return &_segments; }
 
       double userStretch() const           { return _userStretch; }
       void setUserStretch(double v)        { _userStretch = v;    }
@@ -204,7 +202,6 @@ class Measure : public MeasureBase {
       void removeMStaff(MStaff* staff, int idx);
 
       virtual void moveTicks(int diff);
-      void insert(Segment* s, Segment* ns);  // insert Segment s before Segment ns
 
       void cmdRemoveStaves(int s, int e);
       void cmdAddStaves(int s, int e, bool createRest);
