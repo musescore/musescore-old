@@ -39,6 +39,7 @@ install(FILES
       wtc1fuga5.mscz
       schnee.mscz
       sarabande-gfh.mscz
+      All_Dudes.mscz
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}demos
       )
 

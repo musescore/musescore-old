@@ -23,6 +23,10 @@ install(FILES
       chords.xml
       stdchords.xml
       jazzchords.xml
+      cchords_muse.xml
+      cchords_nrb.xml
+      cchords_rb.xml
+      cchords_sym.xml
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}styles
       )
 

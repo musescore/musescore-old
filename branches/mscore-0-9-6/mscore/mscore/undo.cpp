@@ -2120,8 +2120,22 @@ void ChangeStyle::flip()
 
       if (score->styleB(ST_concertPitch) != style[ST_concertPitch].toBool())
             score->cmdConcertPitchChanged(style[ST_concertPitch].toBool(), true);
-
+      bool chordChanged = false;
+      if (score->style(ST_chordDescriptionFile).toString() != style[ST_chordDescriptionFile].toString())
+            chordChanged = true;
+            
       score->setStyle(style);
+      
+      if (chordChanged) {
+            for (Measure* m = score->firstMeasure(); m; m = m->nextMeasure()) {
+                  foreach(Element* element, *m->el()) {
+                        if (element->type() == HARMONY) {
+                              Harmony* h = static_cast<Harmony*>(element);
+                              h->endEdit();
+                              }
+                        }
+                  }
+            }
       style = tmp;
       }
 

@@ -376,6 +376,11 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
                         int len     = note->chord()->tickLen();
                         bool tiedNote = false;
                         int lastNoteLen = len;
+                        //swing
+                        if (swing)
+                            len *= (1-swingCoeff);
+                        if (swingBeat)
+                            len *= (1+swingCoeff);
                         if (note->tieFor()) {
                               Note* n = note;
                               tiedNote = true;
@@ -391,13 +396,6 @@ void Score::collectMeasureEvents(EventMap* events, Measure* m, int staffIdx, int
                               len = len - lastNoteLen + ((lastNoteLen * gateTime) / 100 - 1);
                         else
                               len = (len * gateTime) / 100 - 1;
-
-                        //swing
-
-                        if (swing)
-                            len *= (1-swingCoeff);
-                        if (swingBeat)
-                            len *= (1+swingCoeff);
 
                         int noteLen;
                         if (note->offTimeType() == AUTO_VAL) {
