@@ -22,7 +22,7 @@
 #include "score.h"
 #include "page.h"
 #include "globals.h"
-#include "painter.h"
+#include "painterqt.h"
 
 //---------------------------------------------------------
 //   PagePreview
@@ -117,7 +117,7 @@ void PagePreview::paintEvent(QPaintEvent* ev)
 
       QRectF fr(matrix.inverted().mapRect(QRectF(rr)));
       QList<const Element*> el = page->items(fr);
-      Painter painter(&p, 0);
+      PainterQt painter(&p, 0);
       foreach(const Element* e, el) {
             e->itemDiscovered = 0;
 

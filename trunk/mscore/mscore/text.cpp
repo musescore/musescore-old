@@ -38,7 +38,7 @@
 #include "box.h"
 #include "segment.h"
 #include "texttools.h"
-#include "painter.h"
+#include "libmscore/painter.h"
 
 TextPalette* textPalette;
 
@@ -393,7 +393,6 @@ QRectF Text::pageRectangle() const
 
 void Text::draw(Painter* painter) const
       {
-      QPainter& p = *painter->painter();
       QAbstractTextDocumentLayout::PaintContext c;
       c.cursorPosition = -1;
       if (cursor && !(score() && score()->printing())) {
@@ -406,6 +405,7 @@ void Text::draw(Painter* painter) const
                   }
             c.cursorPosition = cursor->position();
             }
+
       QColor color;
 
       // if printing, use own color if visible, do nothing if invisible
@@ -414,7 +414,7 @@ void Text::draw(Painter* painter) const
                   return;
             color = style().foregroundColor();
             }
-      else if (painter->view() && painter->view()->editMode())
+      else if (painter->editMode())
             // if editing, use own color
             color = style().foregroundColor();
       else if (selected())
@@ -429,7 +429,7 @@ void Text::draw(Painter* painter) const
 
       c.palette.setColor(QPalette::Text, color);
 
-      _doc->documentLayout()->draw(&p, c);
+      painter->drawText(_doc, color, c.cursorPosition);
 
       // draw frame
       if (hasFrame()) {
@@ -438,15 +438,16 @@ void Text::draw(Painter* painter) const
                   color = Qt::gray;
             // else if (selected())
             //       color = preferences.selectColor[track() == -1 ? 0 : voice()];
-            p.setPen(QPen(QBrush(color), frameWidth() * DPMM));
-            p.setBrush(QBrush(Qt::NoBrush));
+            painter->setPenColor(color);
+            painter->setLineWidth(frameWidth() * DPMM);
+            painter->setNoBrush(true);
             if (circle())
-                  p.drawArc(frame, 0, 5760);
+                  painter->drawArc(frame, 0, 5760);
             else {
                   int r2 = frameRound() * lrint((frame.width() / frame.height()));
                   if (r2 > 99)
                         r2 = 99;
-                  p.drawRoundRect(frame, frameRound(), r2);
+                  painter->drawRoundRect(frame, frameRound(), r2);
                   }
             }
       }

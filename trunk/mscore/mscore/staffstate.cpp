@@ -28,7 +28,7 @@
 #include "staff.h"
 #include "part.h"
 #include "seq.h"
-#include "painter.h"
+#include "libmscore/painter.h"
 
 //---------------------------------------------------------
 //   StaffState
@@ -75,19 +75,17 @@ void StaffState::draw(Painter* painter) const
       {
       if (score()->printing())
             return;
-      QPainter& p = *painter->painter();
       QPen pen;
       if (selected())
-            pen.setColor(preferences.selectColor[0]);
+            painter->setPenColor(preferences.selectColor[0]);
       else
-            pen.setColor(preferences.layoutBreakColor);
+            painter->setPenColor(preferences.layoutBreakColor);
 
-      pen.setWidthF(lw);
-      pen.setCapStyle(Qt::RoundCap);
-      pen.setJoinStyle(Qt::RoundJoin);
-      p.setPen(pen);
-      p.setBrush(Qt::NoBrush);
-      p.drawPath(path);
+      painter->setLineWidth(lw);
+      painter->setCapStyle(Qt::RoundCap);
+      painter->setJoinStyle(Qt::RoundJoin);
+      painter->setNoBrush(true);
+      painter->drawPath(path);
       }
 
 //---------------------------------------------------------

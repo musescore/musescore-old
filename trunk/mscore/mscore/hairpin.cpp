@@ -29,7 +29,7 @@
 #include "system.h"
 #include "undo.h"
 #include "staff.h"
-#include "painter.h"
+#include "libmscore/painter.h"
 
 //---------------------------------------------------------
 //   layout
@@ -94,14 +94,9 @@ void HairpinSegment::layout()
 
 void HairpinSegment::draw(Painter* painter) const
       {
-      QPainter& p = *painter->painter();
-
-      QPen pen(p.pen());
-      pen.setWidthF(point(score()->styleS(ST_hairpinWidth)));
-      p.setPen(pen);
-
-      p.drawLine(l1);
-      p.drawLine(l2);
+      painter->setLineWidth(point(score()->styleS(ST_hairpinWidth)));
+      painter->drawLine(l1.x1(), l1.y1(), l1.x2(), l1.y2());
+      painter->drawLine(l2.x1(), l2.y1(), l2.x2(), l2.y2());
       }
 
 //---------------------------------------------------------

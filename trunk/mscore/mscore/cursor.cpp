@@ -20,7 +20,7 @@
 
 #include "cursor.h"
 #include "preferences.h"
-#include "painter.h"
+#include "libmscore/painter.h"
 
 //---------------------------------------------------------
 //   Cursor
@@ -43,6 +43,8 @@ void Cursor::draw(Painter* painter) const
       int v = track() == -1 ? 0 : voice();
       QColor c(preferences.selectColor[v]);
       c.setAlpha(50);
-      painter->painter()->fillRect(abbox(), QBrush(c));
+      painter->setBrushColor(c);
+      QRectF r(abbox());
+      painter->fillRect(r.x(), r.y(), r.width(), r.height());
       }
 

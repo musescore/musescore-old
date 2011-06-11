@@ -26,7 +26,7 @@
 #include "measure.h"
 #include "staff.h"
 #include "stafftype.h"
-#include "painter.h"
+#include "libmscore/painter.h"
 
 //---------------------------------------------------------
 //   Articulation::articulationList
@@ -342,7 +342,6 @@ QPointF Articulation::canvasPos() const
 
 void Articulation::draw(Painter* painter) const
       {
-      QPainter& p = *painter->painter();
       int flags = articulationList[subtype()].flags;
       if (staff()) {
             bool tab = staff()->useTablature();
@@ -355,7 +354,7 @@ void Articulation::draw(Painter* painter) const
                         return;
                   }
             }
-      symbols[score()->symIdx()][_sym].draw(p, magS());
+      symbols[score()->symIdx()][_sym].draw(painter, magS());
       }
 
 //---------------------------------------------------------

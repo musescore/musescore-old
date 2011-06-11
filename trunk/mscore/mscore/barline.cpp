@@ -25,7 +25,7 @@
 #include "system.h"
 #include "measure.h"
 #include "segment.h"
-#include "painter.h"
+#include "libmscore/painter.h"
 #include "articulation.h"
 
 //---------------------------------------------------------
@@ -111,25 +111,18 @@ void BarLine::draw(Painter* painter) const
       double y1, y2;
       getY(&y1, &y2);
 
-      QPainter& p = *(painter->painter());
-      QPen pen(p.pen());
-      pen.setWidthF(lw);
-      pen.setCapStyle(Qt::FlatCap);
-      p.setPen(pen);
+      painter->setLineWidth(lw);
+      painter->setCapStyle(Qt::FlatCap);
 
       double mags = magS();
       double ld   = spatium();       // actual line distance
 
       switch(subtype()) {
             case BROKEN_BAR:
-                  {
-                  QPen pen(p.pen());
-                  pen.setStyle(Qt::DashLine);
-                  p.setPen(pen);
-                  }
+                  painter->setLineStyle(Qt::DashLine);
 
             case NORMAL_BAR:
-                  p.drawLine(QLineF(lw * .5, y1, lw * .5, y2));
+                  painter->drawLine(lw * .5, y1, lw * .5, y2);
                   break;
 
             case END_BAR:
@@ -137,11 +130,10 @@ void BarLine::draw(Painter* painter) const
                   double lw2 = point(score()->styleS(ST_endBarWidth));
                   double d   = point(score()->styleS(ST_endBarDistance));
 
-                  p.drawLine(QLineF(lw * .5, y1, lw * .5, y2));
-                  pen.setWidthF(lw2);
-                  p.setPen(pen);
+                  painter->drawLine(lw * .5, y1, lw * .5, y2);
+                  painter->setLineWidth(lw2);
                   double x = d + lw2 * .5 + lw;
-                  p.drawLine(QLineF(x, y1, x, y2));
+                  painter->drawLine(x, y1, x, y2);
                   }
                   break;
 
@@ -150,19 +142,18 @@ void BarLine::draw(Painter* painter) const
                   lw      = point(score()->styleS(ST_doubleBarWidth));
                   double d = point(score()->styleS(ST_doubleBarDistance));
 
-                  pen.setWidthF(lw);
-                  p.setPen(pen);
+                  painter->setLineWidth(lw);
                   double x = lw * .5;
-                  p.drawLine(QLineF(x, y1, x, y2));
+                  painter->drawLine(x, y1, x, y2);
                   x += d + lw;
-                  p.drawLine(QLineF(x, y1, x, y2));
+                  painter->drawLine(x, y1, x, y2);
                   }
                   break;
 
             case START_REPEAT:
                   {
-                  double lw2  = point(score()->styleS(ST_endBarWidth));
-                  double d1   = point(score()->styleS(ST_endBarDistance));
+                  double lw2 = point(score()->styleS(ST_endBarWidth));
+                  double d1  = point(score()->styleS(ST_endBarDistance));
 
                   const Sym& dotsym = symbols[score()->symIdx()][dotSym];
 
@@ -171,8 +162,8 @@ void BarLine::draw(Painter* painter) const
                   double x0   =  lw2 + d1 + lw + d1;                     // dot position
 
                   if (parent() == 0) {    // for use in palette
-                        dotsym.draw(p, mags, x0, 1.5 * ld);
-                        dotsym.draw(p, mags, x0, 2.5 * ld);
+                        dotsym.draw(painter, mags, x0, 1.5 * ld);
+                        dotsym.draw(painter, mags, x0, 2.5 * ld);
                         }
                   else {
                         double doty1, doty2;
@@ -201,20 +192,19 @@ void BarLine::draw(Painter* painter) const
                               StaffLines* l2 = measure->staffLines(staffIdx() + i);
                               double yy = l2->y2() - yp;
 
-                              dotsym.draw(p, mags, x0, yy - doty1 * ld);
-                              dotsym.draw(p, mags, x0, yy - doty2 * ld);
+                              dotsym.draw(painter, mags, x0, yy - doty1 * ld);
+                              dotsym.draw(painter, mags, x0, yy - doty2 * ld);
                               }
                         }
 
-                  p.drawLine(QLineF(x1, y1, x1, y2));
+                  painter->drawLine(x1, y1, x1, y2);
 
-                  pen.setWidthF(lw2);
-                  p.setPen(pen);
-                  p.drawLine(QLineF(x2, y1, x2, y2));
+                  painter->setLineWidth(lw2);
+                  painter->drawLine(x2, y1, x2, y2);
 
                   if (score()->styleB(ST_repeatBarTips)) {
-                        symbols[score()->symIdx()][brackettipsRightUp].draw(p, mags, 0.0, y1);
-                        symbols[score()->symIdx()][brackettipsRightDown].draw(p, mags, 0.0, y2);
+                        symbols[score()->symIdx()][brackettipsRightUp].draw(painter, mags, 0.0, y1);
+                        symbols[score()->symIdx()][brackettipsRightDown].draw(painter, mags, 0.0, y2);
                         }
                   }
                   break;
@@ -229,8 +219,8 @@ void BarLine::draw(Painter* painter) const
                   double x2   =  dotw + d1 + lw + d1 + lw2 * .5;
 
                   if (parent() == 0) {    // for use in palette
-                        dotsym.draw(p, mags, 0.0, 1.5 * ld);
-                        dotsym.draw(p, mags, 0.0, 2.5 * ld);
+                        dotsym.draw(painter, mags, 0.0, 1.5 * ld);
+                        dotsym.draw(painter, mags, 0.0, 2.5 * ld);
                         }
                   else {
                         double doty1, doty2;
@@ -258,19 +248,18 @@ void BarLine::draw(Painter* painter) const
                         for (int i = 0; i < _span; ++i) {
                               StaffLines* l2 = measure->staffLines(staffIdx() + i);
                               double yy = l2->y2() - yp;
-                              dotsym.draw(p, mags, 0.0, yy - doty1 * ld);
-                              dotsym.draw(p, mags, 0.0, yy - doty2 * ld);
+                              dotsym.draw(painter, mags, 0.0, yy - doty1 * ld);
+                              dotsym.draw(painter, mags, 0.0, yy - doty2 * ld);
                               }
                         }
 
-                  p.drawLine(QLineF(x1, y1, x1, y2));
-                  pen.setWidthF(lw2);
-                  p.setPen(pen);
-                  p.drawLine(QLineF(x2, y1, x2, y2));
+                  painter->drawLine(x1, y1, x1, y2);
+                  painter->setLineWidth(lw2);
+                  painter->drawLine(x2, y1, x2, y2);
                   if (score()->styleB(ST_repeatBarTips)) {
                         double x = x2 + lw2 * .5;
-                        symbols[score()->symIdx()][brackettipsLeftUp].draw(p, mags, x, y1);
-                        symbols[score()->symIdx()][brackettipsLeftDown].draw(p, mags, x, y2);
+                        symbols[score()->symIdx()][brackettipsLeftUp].draw(painter, mags, x, y1);
+                        symbols[score()->symIdx()][brackettipsLeftDown].draw(painter, mags, x, y2);
                         }
                   }
                   break;
@@ -288,10 +277,10 @@ void BarLine::draw(Painter* painter) const
                   double x4   =  dotw + d1 + lw + d1 + lw2 + d1 + lw + d1;           // dot position
 
                   if (parent() == 0) {    // for use in palette
-                        dotsym.draw(p, mags, .0, 1.5 * ld);
-                        dotsym.draw(p, mags, .0, 2.5 * ld);
-                        dotsym.draw(p, mags, x4, 1.5 * ld);
-                        dotsym.draw(p, mags, x4, 2.5 * ld);
+                        dotsym.draw(painter, mags, .0, 1.5 * ld);
+                        dotsym.draw(painter, mags, .0, 2.5 * ld);
+                        dotsym.draw(painter, mags, x4, 1.5 * ld);
+                        dotsym.draw(painter, mags, x4, 2.5 * ld);
                         }
                   else {
                         double doty1, doty2;
@@ -320,22 +309,20 @@ void BarLine::draw(Painter* painter) const
                               StaffLines* l2 = measure->staffLines(staffIdx() + i);
                               double yy = l2->y2() - yp;
 
-                              dotsym.draw(p, mags, 0.0, yy - doty1 * ld);
-                              dotsym.draw(p, mags, 0.0, yy - doty2 * ld);
-                              dotsym.draw(p, mags, x4, yy - doty1 * ld);
-                              dotsym.draw(p, mags, x4, yy - doty2 * ld);
+                              dotsym.draw(painter, mags, 0.0, yy - doty1 * ld);
+                              dotsym.draw(painter, mags, 0.0, yy - doty2 * ld);
+                              dotsym.draw(painter, mags, x4, yy - doty1 * ld);
+                              dotsym.draw(painter, mags, x4, yy - doty2 * ld);
                               }
                         }
 
-                  p.drawLine(QLineF(x1, y1, x1, y2));
+                  painter->drawLine(x1, y1, x1, y2);
 
-                  pen.setWidthF(lw2);
-                  p.setPen(pen);
-                  p.drawLine(QLineF(x2, y1, x2, y2));
+                  painter->setLineWidth(lw2);
+                  painter->drawLine(x2, y1, x2, y2);
 
-                  pen.setWidthF(lw);
-                  p.setPen(pen);
-                  p.drawLine(QLineF(x3, y1, x3, y2));
+                  painter->setLineWidth(lw);
+                  painter->drawLine(x3, y1, x3, y2);
                   }
                   break;
             }

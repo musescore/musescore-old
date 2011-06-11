@@ -28,7 +28,7 @@
 #include "chord.h"
 #include "note.h"
 #include "segment.h"
-#include "painter.h"
+#include "libmscore/painter.h"
 
 static const int DEFAULT_STRINGS = 6;
 static const int DEFAULT_FRETS = 5;
@@ -209,26 +209,22 @@ void FretDiagram::init(Tablature* tab, Chord* chord)
 
 void FretDiagram::draw(Painter* painter) const
       {
-      QPainter& p = *painter->painter();
-      QPen pen(p.pen());
       double _spatium = spatium();
-      pen.setWidthF(lw2);
-      pen.setCapStyle(Qt::FlatCap);
-      p.setPen(pen);
-      p.setBrush(pen.color());
+      painter->setLineWidth(lw2);
+      painter->setCapStyle(Qt::FlatCap);
+      painter->setBrushColor(painter->penColor());
       double x2 = (_strings-1) * stringDist;
-      p.drawLine(QLineF(-lw1*.5, 0.0, x2+lw1*.5, 0.0));
+      painter->drawLine(-lw1*.5, 0.0, x2+lw1*.5, 0.0);
 
-      pen.setWidthF(lw1);
-      p.setPen(pen);
+      painter->setLineWidth(lw1);
       double y2 = (_frets+1) * fretDist - fretDist*.5;
       for (int i = 0; i < _strings; ++i) {
             double x = stringDist * i;
-            p.drawLine(QLineF(x, _fretOffset ? -_spatium*.2 : 0.0, x, y2));
+            painter->drawLine(x, _fretOffset ? -_spatium*.2 : 0.0, x, y2);
             }
       for (int i = 1; i <= _frets; ++i) {
             double y = fretDist * i;
-            p.drawLine(QLineF(0.0, y, x2, y));
+            painter->drawLine(0.0, y, x2, y);
             }
       for (int i = 0; i < _strings; ++i) {
             if (_dots && _dots[i]) {
@@ -236,21 +232,25 @@ void FretDiagram::draw(Painter* painter) const
                   int fret = _dots[i] - 1;
                   double x = stringDist * i - dotd * .5;
                   double y = fretDist * fret + fretDist * .5 - dotd * .5;
-                  p.drawEllipse(QRectF(x, y, dotd, dotd));
+                  painter->drawEllipse(QRectF(x, y, dotd, dotd));
                   }
             if (_marker && _marker[i]) {
-                  p.setFont(font);
+                  painter->setFont(font);
+#if 0 // TODO-LIB
                   double x = stringDist * i;
                   double y = -fretDist * .1;
-                  p.drawText(QRectF(x, y, 0.0, 0.0),
+                  painter->drawText(QRectF(x, y, 0.0, 0.0),
                      Qt::AlignHCenter | Qt::AlignBottom | Qt::TextDontClip, QChar(_marker[i]));
+#endif
                   }
             }
+#if 0 // TODO-LIB
       if (_fretOffset > 0) {
             p.drawText(QRectF(-stringDist * .4, 0.0, 0.0, fretDist),
                Qt::AlignVCenter|Qt::AlignRight|Qt::TextDontClip,
                QString("%1").arg(_fretOffset+1));
             }
+#endif
       }
 
 //---------------------------------------------------------

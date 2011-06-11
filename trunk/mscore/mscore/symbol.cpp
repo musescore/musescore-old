@@ -28,7 +28,7 @@
 #include "score.h"
 #include "image.h"
 #include "segment.h"
-#include "painter.h"
+#include "libmscore/painter.h"
 #include "mscore.h"
 #include "preferences.h"
 
@@ -216,7 +216,7 @@ void Symbol::layout()
 void Symbol::draw(Painter* p) const
       {
       if (type() != NOTEDOT || !staff()->useTablature())
-            symbols[score()->symIdx()][_sym].draw(*p->painter(), magS());
+            symbols[score()->symIdx()][_sym].draw(p, magS());
       }
 
 //---------------------------------------------------------

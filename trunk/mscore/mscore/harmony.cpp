@@ -31,7 +31,7 @@
 #include "mscore.h"
 #include "scoreview.h"
 #include "segment.h"
-#include "painter.h"
+#include "libmscore/painter.h"
 #include "chordlist.h"
 
 //---------------------------------------------------------

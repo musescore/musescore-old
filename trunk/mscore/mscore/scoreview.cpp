@@ -70,7 +70,7 @@
 #include "texttools.h"
 #include "clef.h"
 #include "scoretab.h"
-#include "painter.h"
+#include "painterqt.h"
 
 
 static const QEvent::Type CloneDrag = QEvent::Type(QEvent::User + 1);
@@ -1406,7 +1406,7 @@ void ScoreView::setShadowNote(const QPointF& p)
 
 static void paintElement(void* data, Element* e)
       {
-      Painter* p = static_cast<Painter*>(data);
+      PainterQt* p = static_cast<PainterQt*>(data);
       p->painter()->save();
       p->painter()->setPen(QPen(e->curColor()));
       p->painter()->translate(e->canvasPos());
@@ -1427,7 +1427,7 @@ void ScoreView::paintEvent(QPaintEvent* ev)
       QPainter p(this);
       p.setRenderHint(QPainter::Antialiasing, preferences.antialiasedDrawing);
       p.setRenderHint(QPainter::TextAntialiasing, true);
-      Painter vp(&p, this);
+      PainterQt vp(&p, this);
 
       QRegion region = ev->region();
 
@@ -2439,7 +2439,7 @@ Element* ScoreView::elementNear(const QPointF& p)
 
 void ScoreView::drawElements(QPainter& p,const QList<const Element*>& el)
       {
-      Painter painter(&p, this);
+      PainterQt painter(&p, this);
 
       foreach(const Element* e, el) {
             e->itemDiscovered = 0;

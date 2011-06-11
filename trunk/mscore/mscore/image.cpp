@@ -24,7 +24,7 @@
 #include "preferences.h"
 #include "score.h"
 #include "undo.h"
-#include "painter.h"
+#include "libmscore/painter.h"
 
 //---------------------------------------------------------
 //   Image
@@ -64,12 +64,20 @@ void Image::dereference()
 
 void Image::draw(Painter* painter) const
       {
-      QPainter& p = *painter->painter();
-      p.drawPixmap(0, 0, buffer);
+      painter->drawPixmap(0, 0, buffer);
       if (selected() && !(score() && score()->printing())) {
-            p.setBrush(Qt::NoBrush);
-            p.setPen(QPen(Qt::blue, 0, Qt::SolidLine));
-            p.drawRect(QRect(QPoint(), buffer.size()));
+            painter->setNoBrush(true);
+            painter->setPenColor(Qt::blue);   // , 0, Qt::SolidLine));
+
+            QPointF p[5];
+            qreal w = buffer.size().width();
+            qreal h = buffer.size().height();
+            p[0] = QPointF(0.0, 0.0);
+            p[1] = QPointF(w,   0.0);
+            p[2] = QPointF(w,   h);
+            p[3] = QPointF(0.0, h);
+            p[4] = QPointF(0.0, 0.0);
+            painter->drawPolyline(p, 5);
             }
       }
 
@@ -282,11 +290,10 @@ RasterImage* RasterImage::clone() const
 
 void RasterImage::draw(Painter* painter) const
       {
-      QPainter& p = *painter->painter();
-      QTransform t = p.worldTransform();
+      QTransform t = painter->transform();
       QSize s = QSizeF(sz.width() * t.m11(), sz.height() * t.m22()).toSize();
       t.setMatrix(1.0, t.m12(), t.m13(), t.m21(), 1.0, t.m23(), t.m31(), t.m32(), t.m33());
-      p.setWorldTransform(t);
+      painter->setTransform(t);
       if (buffer.size() != s || _dirty) {
             buffer = QPixmap::fromImage(doc.scaled(s, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
             _dirty = false;

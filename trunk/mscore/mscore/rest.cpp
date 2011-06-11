@@ -37,7 +37,7 @@
 #include "harmony.h"
 #include "lyrics.h"
 #include "segment.h"
-#include "painter.h"
+#include "libmscore/painter.h"
 #include "stafftype.h"
 
 //---------------------------------------------------------
@@ -73,50 +73,44 @@ void Rest::draw(Painter* painter) const
       {
       if (staff()->useTablature() || generated())
             return;
-      QPainter& p = *painter->painter();
       double _spatium = spatium();
 
       Measure* m = measure();
       double mag = magS();
       if (m && m->multiMeasure()) {
-            int n = m->multiMeasure();
-
-            QPen pen(p.pen());
+            int n     = m->multiMeasure();
             double pw = _spatium * .7;
-            pen.setWidthF(pw);
-            p.setPen(pen);
+            painter->setLineWidth(pw);
 
             double w  = _mmWidth;
             double y  = _spatium;
             double x1 = 0.0;
             double x2 =  w;
             pw *= .5;
-            p.drawLine(x1 + pw, y, x2 - pw, y);
+            painter->drawLine(x1 + pw, y, x2 - pw, y);
 
-            pen.setWidthF(_spatium * .2);
-            p.setPen(pen);
-            p.drawLine(QLineF(x1, y-_spatium, x1, y+_spatium));
-            p.drawLine(QLineF(x2, y-_spatium, x2, y+_spatium));
+            painter->setLineWidth(_spatium * .2);
+            painter->drawLine(x1, y-_spatium, x1, y+_spatium);
+            painter->drawLine(x2, y-_spatium, x2, y+_spatium);
 
-            p.setFont(symbols[score()->symIdx()][allabreveSym].font());
-            p.scale(mag, mag);
+            painter->setFont(symbols[score()->symIdx()][allabreveSym].font());
+            painter->scale(mag);
             double imag = 1.0 / mag;
 
             y = -_spatium * 6.75 * imag;
             x1 = x1 + (x2 - x1) * .5 * imag;
-            p.drawText(QRectF(x1, y, 0.0, 0.0), Qt::AlignHCenter|Qt::TextDontClip,
-               QString("%1").arg(n));
-            p.scale(imag, imag);
+            painter->drawTextHCentered(x1, y, QString("%1").arg(n));
+            painter->scale(imag);
             }
       else {
-            symbols[score()->symIdx()][_sym].draw(p, mag);
+            symbols[score()->symIdx()][_sym].draw(painter, mag);
             int dots = durationType().dots();
             if (dots) {
                   double y = dotline * _spatium * .5;
                   for (int i = 1; i <= dots; ++i) {
                         double x = symbols[score()->symIdx()][_sym].width(magS())
                                    + point(score()->styleS(ST_dotNoteDistance)) * i;
-                        symbols[score()->symIdx()][dotSym].draw(p, magS(), x, y);
+                        symbols[score()->symIdx()][dotSym].draw(painter, magS(), x, y);
                         }
                   }
             }

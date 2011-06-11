@@ -37,7 +37,7 @@
 #include "stafftype.h"
 #include "part.h"
 #include "undo.h"
-#include "painter.h"
+#include "libmscore/painter.h"
 
 #define TR(a)  QT_TRANSLATE_NOOP("clefTable", a)
 
@@ -305,9 +305,9 @@ void Clef::draw(Painter* painter) const
 	      return;
       foreach(Element* e, elements) {
             QPointF pt(e->pos());
-            painter->painter()->translate(pt);
+            painter->translate(pt);
             e->draw(painter);
-            painter->painter()->translate(-pt);
+            painter->translate(-pt);
             }
       }
 

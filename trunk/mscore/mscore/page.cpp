@@ -38,7 +38,7 @@
 #include "line.h"
 #include "staff.h"
 #include "system.h"
-#include "painter.h"
+#include "libmscore/painter.h"
 
 //---------------------------------------------------------
 //   Page
@@ -166,7 +166,6 @@ void Page::layout()
 
 void Page::draw(Painter* painter) const
       {
-      QPainter& p = *painter->painter();
       QRectF r = bbox();
       qreal x1 = r.x();
       qreal y1 = r.y();
@@ -193,14 +192,15 @@ void Page::draw(Painter* painter) const
                         c.setHsv(h1+((h2-h1)*i)/bbw,
                            s1+((s2-s1)*i)/bbw,
                            v1+((v2-v1)*i)/bbw);
-                        p.setPen(c);
-                        p.drawLine(QLineF(x1+i, y1, x1+i, y2));
+                        painter->setPenColor(c);
+                        painter->drawLine(x1+i, y1, x1+i, y2);
                         }
                   c1.getHsv(&h1, &s1, &v1);
                   c2.getHsv(&h2, &s2, &v2);
 
-                  p.fillRect(QRectF(x2-bw, y1, bw, bw), preferences.bgColor);
-                  p.fillRect(QRectF(x2-bw, y2-bw, bw, bw), preferences.bgColor);
+                  painter->setBrushColor(preferences.bgColor);
+                  painter->fillRect(x2-bw, y1, bw, bw);
+                  painter->fillRect(x2-bw, y2-bw, bw, bw);
 
                   bbw = bw-1;
                   bbw = bbw >= 1 ? bbw : 1;
@@ -209,16 +209,17 @@ void Page::draw(Painter* painter) const
                         c.setHsv(h1+((h2-h1)*i)/bbw,
                            s1+((s2-s1)*i)/bbw,
                            v1+((v2-v1)*i)/bbw);
-                        p.setPen(c);
-                        p.drawLine(QLineF(x2-bw+i, y1+i+1, x2-bw+i, y2-i-1));
+                        painter->setPenColor(c);
+                        painter->drawLine(x2-bw+i, y1+i+1, x2-bw+i, y2-i-1);
                         }
                   }
             else {
                   c2.getHsv(&h1, &s1, &v1);
                   c1.getHsv(&h2, &s2, &v2);
 
-                  p.fillRect(QRectF(x1, y1, bw, bw), preferences.bgColor);
-                  p.fillRect(QRectF(x1, y2-bw, bw, bw), preferences.bgColor);
+                  painter->setBrushColor(preferences.bgColor);
+                  painter->fillRect(x1, y1, bw, bw);
+                  painter->fillRect(x1, y2-bw, bw, bw);
                   int bbw = bw-1;
                   bbw = bbw >= 1 ? bbw : 1;
                   for (int i = 0; i < bw; ++i) {
@@ -226,8 +227,8 @@ void Page::draw(Painter* painter) const
                         c.setHsv(h1+((h2-h1)*i)/bbw,
                            s1+((s2-s1)*i)/bbw,
                            v1+((v2-v1)*i)/bbw);
-                        p.setPen(c);
-                        p.drawLine(QLineF(x1+i, y1+(bw-i), x1+i, y2-(bw-i)-1));
+                        painter->setPenColor(c);
+                        painter->drawLine(x1+i, y1+(bw-i), x1+i, y2-(bw-i)-1);
                         }
                   c1.getHsv(&h1, &s1, &v1);
                   c2.getHsv(&h2, &s2, &v2);
@@ -240,8 +241,8 @@ void Page::draw(Painter* painter) const
                            c.setHsv(h1+((h2-h1)*i)/bbw,
                            s1+((s2-s1)*i)/bbw,
                            v1+((v2-v1)*i)/bbw);
-                        p.setPen(c);
-                        p.drawLine(QLineF(x2-bw+i, y1, x2-bw+i, y2));
+                        painter->setPenColor(c);
+                        painter->drawLine(x2-bw+i, y1, x2-bw+i, y2);
                         }
                   }
             }
@@ -253,68 +254,64 @@ void Page::draw(Painter* painter) const
       int n = no() + 1 + _score->pageNumberOffset();
       d.setTextWidth(loWidth() - lm() - rm());
 
-      QAbstractTextDocumentLayout::PaintContext c;
-      c.cursorPosition = -1;
-      p.translate(lm(), 0.0);
+      painter->translate(QPointF(lm(), 0.0));
 
       if (_score->styleB(ST_showHeader) && (n || _score->styleB(ST_headerFirstPage))) {
             TextStyle ts = score()->textStyle(TEXT_STYLE_HEADER);
-            c.palette.setColor(QPalette::Text, ts.foregroundColor());
 
             QPointF o(ts.xoff(), ts.yoff());
             if (ts.offsetType() == OFFSET_SPATIUM)
                   o *= spatium();
             else
                   o *= DPI;
-            p.translate(o);
+            painter->translate(o);
             d.setTextWidth(loWidth() - lm() - rm() - (2.0 * o.x()));
 
             bool odd = (n & 1) && _score->styleB(ST_headerOddEven);
             QString s = _score->styleSt(odd ? ST_oddHeaderL : ST_evenHeaderL);
             if (!s.isEmpty()) {
                   d.setHtml(replaceTextMacros(s));
-                  d.documentLayout()->draw(&p, c);
+                  painter->drawText(&d, ts.foregroundColor(), -1);
                   }
             s = _score->styleSt(odd ? ST_oddHeaderC : ST_evenHeaderC);
             if (!s.isEmpty()) {
                   d.setHtml(replaceTextMacros(s));
-                  d.documentLayout()->draw(&p, c);
+                  painter->drawText(&d, ts.foregroundColor(), -1);
                   }
             s = _score->styleSt(odd ? ST_oddHeaderR : ST_evenHeaderR);
             if (!s.isEmpty()) {
                   d.setHtml(replaceTextMacros(s));
-                  d.documentLayout()->draw(&p, c);
+                  painter->drawText(&d, ts.foregroundColor(), -1);
                   }
-            p.translate(-o);
+            painter->translate(-o);
             }
       if (_score->styleB(ST_showFooter) && (n || _score->styleB(ST_footerFirstPage))) {
             TextStyle ts = score()->textStyle(TEXT_STYLE_FOOTER);
-            c.palette.setColor(QPalette::Text, ts.foregroundColor());
 
             QPointF o(ts.xoff(), ts.yoff());
             if (ts.offsetType() == OFFSET_SPATIUM)
                   o *= spatium();
             else
                   o *= DPI;
-            p.translate(o);
+            painter->translate(o);
             d.setTextWidth(loWidth() - lm() - rm() - (2.0 * o.x()));
 
             bool odd = (n & 1) && _score->styleB(ST_footerOddEven);
             QString s = _score->styleSt(odd ? ST_oddFooterL : ST_evenFooterL);
-            p.translate(0.0, loHeight() - (tm()+bm()));
+            painter->translate(QPointF(0.0, loHeight() - (tm()+bm())));
             if (!s.isEmpty()) {
                   d.setHtml(replaceTextMacros(s));
-                  d.documentLayout()->draw(&p, c);
+                  painter->drawText(&d, ts.foregroundColor(), -1);
                   }
             s = _score->styleSt(odd ? ST_oddFooterC : ST_evenFooterC);
             if (!s.isEmpty()) {
                   d.setHtml(replaceTextMacros(s));
-                  d.documentLayout()->draw(&p, c);
+                  painter->drawText(&d, ts.foregroundColor(), -1);
                   }
             s = _score->styleSt(odd ? ST_oddFooterR : ST_evenFooterR);
             if (!s.isEmpty()) {
                   d.setHtml(replaceTextMacros(s));
-                  d.documentLayout()->draw(&p, c);
+                  painter->drawText(&d, ts.foregroundColor(), -1);
                   }
             }
       }

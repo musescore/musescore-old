@@ -39,7 +39,7 @@
 #include "staff.h"
 #include "stafftype.h"
 #include "stem.h"
-#include "painter.h"
+#include "libmscore/painter.h"
 #include "hook.h"
 
 //---------------------------------------------------------
@@ -295,18 +295,15 @@ void Beam::draw(Painter* painter) const
             if (staff()->staffType()->slashStyle())
                   return;
             }
-      QPainter& p = *painter->painter();
-      QColor color(p.pen().color());
-      p.setPen(QPen(Qt::NoPen));
-      p.setBrush(color);
+      painter->setBrushColor(painter->penColor());
+      painter->setNoPen(true);
       qreal lw2 = point(score()->styleS(ST_beamWidth)) * .5 * mag();
       foreach (const QLineF* bs, beamSegments) {
-            QPolygonF a(4);
-            a[0] = QPointF(bs->x1(), bs->y1()-lw2);
-            a[1] = QPointF(bs->x2(), bs->y2()-lw2);
-            a[2] = QPointF(bs->x2(), bs->y2()+lw2);
-            a[3] = QPointF(bs->x1(), bs->y1()+lw2);
-            p.drawPolygon(a);
+            painter->fillRect(
+               bs->x1(), bs->y1()-lw2,
+               bs->x2(), bs->y2()-lw2,
+               bs->x2(), bs->y2()+lw2,
+               bs->x1(), bs->y1()+lw2);
             }
       }
 

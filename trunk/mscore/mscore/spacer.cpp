@@ -22,7 +22,7 @@
 #include "preferences.h"
 #include "score.h"
 #include "scoreview.h"
-#include "painter.h"
+#include "libmscore/painter.h"
 
 //---------------------------------------------------------
 //   LayoutBreak
@@ -49,17 +49,15 @@ void Spacer::draw(Painter* painter) const
       {
       if (score()->printing() || !score()->showUnprintable())
             return;
-      QPainter& p = *painter->painter();
       QPen pen;
       if (selected())
-            pen.setColor(preferences.selectColor[0]);
+            painter->setPenColor(preferences.selectColor[0]);
       else
-            pen.setColor(preferences.layoutBreakColor);
+            painter->setPenColor(preferences.layoutBreakColor);
 
-      pen.setWidthF(spatium() * 0.4);
-      p.setPen(pen);
-      p.setBrush(Qt::NoBrush);
-      p.drawPath(path);
+      painter->setLineWidth(spatium() * 0.4);
+      painter->setNoBrush(true);
+      painter->drawPath(path);
       }
 
 //---------------------------------------------------------

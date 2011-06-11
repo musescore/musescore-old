@@ -26,7 +26,7 @@
 #include "staff.h"
 #include "part.h"
 #include "segment.h"
-#include "painter.h"
+#include "libmscore/painter.h"
 
 //---------------------------------------------------------
 //   Arpeggio
@@ -114,10 +114,8 @@ QRectF Arpeggio::bbox() const
 //   draw
 //---------------------------------------------------------
 
-void Arpeggio::draw(Painter* painter) const
+void Arpeggio::draw(Painter* p) const
       {
-      QPainter& p = *painter->painter();
-
       double _spatium = spatium();
 
       double y1 = _spatium - _userLen1.val() * _spatium;
@@ -144,19 +142,16 @@ void Arpeggio::draw(Painter* painter) const
                   {
                   y1 = - _userLen1.val() * _spatium;
                   y2 = _height + _userLen2.val() * _spatium;
-                  p.save();
+                  p->save();
 
-                  QPen pen(p.pen());
-                  pen.setWidthF(score()->styleS(ST_ArpeggioLineWidth).val() * _spatium);
-                  pen.setCapStyle(Qt::RoundCap);
-                  p.setPen(pen);
+                  p->setLineWidth(score()->styleS(ST_ArpeggioLineWidth).val() * _spatium);
+                  p->setCapStyle(Qt::RoundCap);
 
                   double w = score()->styleS(ST_ArpeggioHookLen).val() * _spatium;
-                  p.drawLine(QLineF(0.0, y1, 0.0, y2));
-                  p.drawLine(QLineF(0.0, y1, w, y1));
-                  p.drawLine(QLineF(0.0, y2, w, y2));
-
-                  p.restore();
+                  p->drawLine(0.0, y1, 0.0, y2);
+                  p->drawLine(0.0, y1, w, y1);
+                  p->drawLine(0.0, y2, w, y2);
+                  p->restore();
                   }
                   break;
             }

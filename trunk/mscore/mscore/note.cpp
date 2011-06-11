@@ -59,7 +59,7 @@
 #include "bend.h"
 #include "bend.h"
 #include "scoreview.h"
-#include "painter.h"
+#include "libmscore/painter.h"
 #include "chordeditor.h"
 #include "noteevent.h"
 #include "mscore.h"
@@ -520,7 +520,6 @@ double Note::stemYoff(bool upFlag) const
 void Note::draw(Painter* painter) const
       {
       if (!_hidden || !userOff().isNull()) {
-            QPainter& p = *painter->painter();
             bool tablature = staff() && staff()->useTablature();
             if (tablature) {
                   if (tieBack())
@@ -528,33 +527,29 @@ void Note::draw(Painter* painter) const
                   StaffTypeTablature* tab = (StaffTypeTablature*)staff()->staffType();
                   double mag = magS();
                   double imag = 1.0 / mag;
-                  double currSpatium = spatium();
 
-                  p.scale(mag, mag);
-                  p.setFont(tab->fretFont());
+                  painter->scale(mag);
+                  painter->setFont(tab->fretFont());
 
                   // when using letters, "+(_fret > 8)" skips 'j'
                   QString s = _ghost ? "X" :
                           ( tab->useNumbers() ? QString::number(_fret) : QString('a' + _fret + (_fret > 8)) );
-                  double d  = currSpatium * .2;
                   // draw background, if required
                   if (!tab->linesThrough() || fretConflict()) {
+                        double currSpatium = spatium();
+                        double d  = currSpatium * .2;
                         QRectF bb = bbox().adjusted(-d, 0.0, d, 0.0);
-                        if (painter->view()) {
-                              painter->view()->drawBackground(p, bb);
-                              }
-                        else
-                              p.eraseRect(bb);
+                        painter->drawBackground(bb);
                         if (fretConflict()) {          //on fret conflict, draw on red background
-                              QPen oldPen = p.pen();
-                              p.setPen(Qt::red);
-                              p.setBrush(Qt::red);
-                              p.drawRect(bb);
-                              p.setPen(oldPen);
+                              painter->save();
+                              painter->setPenColor(Qt::red);
+                              painter->setBrushColor(Qt::red);
+                              painter->drawRect(bb);
+                              painter->restore();
                               }
                         }
-                  p.drawText(bbox().x(), tab->fretFontYOffset() * mag, s);
-                  p.scale(imag, imag);
+                  painter->drawText(bbox().x(), tab->fretFontYOffset() * mag, s);
+                  painter->scale(imag);
                   }
             else {                        // if not tablature
                   //
@@ -565,11 +560,11 @@ void Note::draw(Painter* painter) const
                         const Instrument* in = staff()->part()->instr();
                         int i = ppitch();
                         if (i < in->minPitchP() || i > in->maxPitchP())
-                              p.setPen(Qt::red);
+                              painter->setPenColor(Qt::red);
                         else if (i < in->minPitchA() || i > in->maxPitchA())
-                              p.setPen(Qt::darkYellow);
+                              painter->setPenColor(Qt::darkYellow);
                         }
-                  symbols[score()->symIdx()][noteHead()].draw(p, magS());
+                  symbols[score()->symIdx()][noteHead()].draw(painter, magS());
                   }
             }
       }

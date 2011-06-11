@@ -25,7 +25,7 @@
 #include "style.h"
 #include "score.h"
 #include "sym.h"
-#include "painter.h"
+#include "libmscore/painter.h"
 
 //---------------------------------------------------------
 //   Glissando
@@ -127,32 +127,29 @@ void Glissando::read(QDomElement e)
 
 void Glissando::draw(Painter* painter) const
       {
-      QPainter& p = *painter->painter();
       double _spatium = spatium();
 
-      p.save();
-      QPen pen(p.pen());
-      pen.setWidthF(_spatium * .15);
-      pen.setCapStyle(Qt::RoundCap);
-      p.setPen(pen);
+      painter->save();
+      painter->setLineWidth(_spatium * .15);
+      painter->setCapStyle(Qt::RoundCap);
 
       double w = line.dx();
       double h = line.dy();
 
       double l = sqrt(w * w + h * h);
-      p.translate(line.p1());
+      painter->translate(line.p1());
       double wi = asin(-h / l) * 180.0 / M_PI;
-      p.rotate(-wi);
+      painter->rotate(-wi);
 
       if (subtype() == 0) {
-            p.drawLine(QLineF(0.0, 0.0, l, 0.0));
+            painter->drawLine(0.0, 0.0, l, 0.0);
             }
       else if (subtype() == 1) {
             double mags = magS();
             QRectF b = symbols[score()->symIdx()][trillelementSym].bbox(mags);
             qreal w  = symbols[score()->symIdx()][trillelementSym].width(mags);
             int n    = lrint(l / w);
-            symbols[score()->symIdx()][trillelementSym].draw(p, mags, 0.0, b.height()*.5, n);
+            symbols[score()->symIdx()][trillelementSym].draw(painter, mags, 0.0, b.height()*.5, n);
             }
       if (_showText) {
             const TextStyle& st = score()->textStyle(TEXT_STYLE_GLISSANDO);
@@ -160,12 +157,12 @@ void Glissando::draw(Painter* painter) const
             QRectF r = QFontMetricsF(f).boundingRect(_text);
             if (r.width() < l) {
                   QFont f = st.fontPx(_spatium);
-                  p.setFont(f);
+                  painter->setFont(f);
                   double x = (l - r.width()) * .5;
-                  p.drawText(x, -_spatium * .5, _text);
+                  painter->drawText(x, -_spatium * .5, _text);
                   }
             }
-      p.restore();
+      painter->restore();
       }
 
 //---------------------------------------------------------

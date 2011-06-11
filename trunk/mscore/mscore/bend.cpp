@@ -25,7 +25,7 @@
 #include "staff.h"
 #include "chord.h"
 #include "note.h"
-#include "painter.h"
+#include "libmscore/painter.h"
 
 //---------------------------------------------------------
 //   label
@@ -165,18 +165,15 @@ void Bend::draw(Painter* painter) const
       {
       if (staff() && !staff()->useTablature())
             return;
-      QPainter& p = *painter->painter();
-      QPen pen = p.pen();
-      pen.setWidthF(_lw);
-      pen.setCapStyle(Qt::RoundCap);
-      pen.setJoinStyle(Qt::RoundJoin);
-      p.setPen(pen);
-      p.setBrush(Qt::black);
+      painter->setLineWidth(_lw);
+      painter->setCapStyle(Qt::RoundCap);
+      painter->setJoinStyle(Qt::RoundJoin);
+      painter->setBrushColor(Qt::black);
 
       double _spatium = spatium();
       const TextStyle* st = &score()->textStyle(TEXT_STYLE_BENCH);
       QFont f = st->fontPx(_spatium);
-      p.setFont(f);
+      painter->setFont(f);
 
       int n    = _points.size();
 //      int pt   = 0;
@@ -197,19 +194,20 @@ void Bend::draw(Painter* painter) const
             if (pt == 0 && pitch) {
                   y2 = -notePos.y() -_spatium * 2;
                   x2 = x;
-                  p.drawLine(x, y, x2, y2);
+                  painter->drawLine(x, y, x2, y2);
 
-                  p.setBrush(Qt::black);
-                  p.drawPolygon(arrowUp.translated(x2, y2 + _spatium * .2));
-
+                  painter->setBrushColor(Qt::black);
+//                  painter->drawPolygon(arrowUp.translated(x2, y2 + _spatium * .2));
+#if 0 // TODO-LIB
                   int idx = (pitch + 12)/25;
                   const char* l = label[idx];
                   QRectF r;
-                  p.drawText(QRectF(x2, y2, 0, 0),
+                  painter->drawText(QRectF(x2, y2, 0, 0),
                      Qt::AlignHCenter | Qt::AlignBottom | Qt::TextDontClip,
                      QString(l),
                      &r
                      );
+#endif
                   y = y2;
                   }
             if (pitch == _points[pt+1].pitch) {
@@ -217,7 +215,7 @@ void Bend::draw(Painter* painter) const
                         break;
                   x2 = x + _spatium;
                   y2 = y;
-                  p.drawLine(x, y, x2, y2);
+                  painter->drawLine(x, y, x2, y2);
                   }
             else if (pitch < _points[pt+1].pitch) {
                   // up
@@ -229,20 +227,22 @@ void Bend::draw(Painter* painter) const
                   QPainterPath path;
                   path.moveTo(x, y);
                   path.cubicTo(x+dx/2, y, x2, y+dy/4, x2, y2);
-                  p.setBrush(Qt::NoBrush);
-                  p.drawPath(path);
+                  painter->setNoBrush(true);
+                  painter->drawPath(path);
 
-                  p.setBrush(Qt::black);
-                  p.drawPolygon(arrowUp.translated(x2, y2 + _spatium * .2));
+                  painter->setBrushColor(Qt::black);
+//                  painter->drawPolygon(arrowUp.translated(x2, y2 + _spatium * .2));
 
+#if 0 // TODO-LIB
                   int idx = (_points[pt+1].pitch + 12)/25;
                   const char* l = label[idx];
                   QRectF r;
-                  p.drawText(QRectF(x2, y2, 0, 0),
+                  painter->drawText(QRectF(x2, y2, 0, 0),
                      Qt::AlignHCenter | Qt::AlignBottom | Qt::TextDontClip,
                      QString(l),
                      &r
                      );
+#endif
                   }
             else {
                   // down
@@ -254,11 +254,11 @@ void Bend::draw(Painter* painter) const
                   QPainterPath path;
                   path.moveTo(x, y);
                   path.cubicTo(x+dx/2, y, x2, y+dy/4, x2, y2);
-                  p.setBrush(Qt::NoBrush);
-                  p.drawPath(path);
+                  painter->setNoBrush(true);
+                  painter->drawPath(path);
 
-                  p.setBrush(Qt::black);
-                  p.drawPolygon(arrowDown.translated(x2, y2 - _spatium * .2));
+                  painter->setBrushColor(Qt::black);
+//                  painter->drawPolygon(arrowDown.translated(x2, y2 - _spatium * .2));
                   }
             x = x2;
             y = y2;

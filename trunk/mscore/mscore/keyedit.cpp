@@ -26,7 +26,7 @@
 #include "accidental.h"
 #include "keycanvas.h"
 #include "clef.h"
-#include "painter.h"
+#include "painterqt.h"
 
 extern bool useFactorySettings;
 extern Palette* newAccidentalsPalette();
@@ -92,7 +92,7 @@ void KeyCanvas::paintEvent(QPaintEvent*)
       gscore->setSpatium(spatium);
 
       QPainter p(this);
-      Painter painter(&p, 0);
+      PainterQt painter(&p, 0);
       p.setRenderHint(QPainter::Antialiasing, true);
       qreal wh = double(height());
       qreal ww = double(width());
