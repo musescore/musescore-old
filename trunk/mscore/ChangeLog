@@ -1,6 +1,8 @@
 11.jun (ws)
       - fix corruption of segmentList (loading of guitar pro files crashed)
       - created "libmscore" which will contain gui independent code
+       (la)
+      - fix #11019: new files: jazz templates, demo & chord styles by Marc Sabatella
 9.jun (ws)
       - fixed regression for "hide empty staves"
       - fixed start repeat barline
