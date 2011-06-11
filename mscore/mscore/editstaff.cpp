@@ -61,6 +61,14 @@ EditStaff::EditStaff(Staff* s, QWidget* parent)
       pPitchMin->setValue(instrument.minPitchP());
       pPitchMax->setValue(instrument.maxPitchP());
 
+      Score* score  = staff->score();
+      TextStyle* ts = score->textStyle(TEXT_STYLE_INSTRUMENT_SHORT);
+      shortName->setCurrentFont(ts->font(score->spatium()));
+      shortName->document()->setDefaultFont(ts->font(score->spatium()));
+      ts = score->textStyle(TEXT_STYLE_INSTRUMENT_LONG);
+      longName->setCurrentFont(ts->font(score->spatium()));
+      longName->document()->setDefaultFont(ts->font(score->spatium()));
+
       connect(buttonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(bboxClicked(QAbstractButton*)));
       connect(editDrumset, SIGNAL(clicked()), SLOT(editDrumsetClicked()));
       connect(changeInstrument, SIGNAL(clicked()), SLOT(showInstrumentDialog()));
@@ -202,9 +210,11 @@ void EditStaff::showInstrumentDialog()
             longName->setHtml(t->longName);
             
             Score* score  = staff->score();
-            TextStyle* s = score->textStyle(TEXT_STYLE_INSTRUMENT_SHORT);
+            TextStyle* ts = score->textStyle(TEXT_STYLE_INSTRUMENT_SHORT);
+            shortName->setCurrentFont(ts->font(score->spatium()));
             shortName->document()->setDefaultFont(s->font(score->spatium()));
-            s = score->textStyle(TEXT_STYLE_INSTRUMENT_LONG);
+            ts = score->textStyle(TEXT_STYLE_INSTRUMENT_LONG);
+            longName->setCurrentFont(ts->font(score->spatium()));
             longName->document()->setDefaultFont(s->font(score->spatium()));
             
             instrument.setTrackName(t->trackName);
