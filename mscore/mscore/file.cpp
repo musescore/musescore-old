@@ -78,7 +78,7 @@
 #include "segment.h"
 #include "tempotext.h"
 #include "sym.h"
-#include "painter.h"
+#include "painterqt.h"
 
 #ifdef OMR
 #include "omr/omr.h"
@@ -1914,7 +1914,7 @@ void Score::print(QPrinter* printer)
       {
       _printing = true;
       QPainter p(printer);
-      Painter painter(&p, 0);
+      PainterQt painter(&p, 0);
 
       p.setRenderHint(QPainter::Antialiasing, true);
       p.setRenderHint(QPainter::TextAntialiasing, true);
@@ -2005,7 +2005,7 @@ bool Score::saveSvg(const QString& saveName)
       p.setRenderHint(QPainter::TextAntialiasing, true);
       double mag = converterDpi / DPI;
       p.scale(mag, mag);
-      Painter painter(&p, 0);
+      PainterQt painter(&p, 0);
 
       QList<Element*> eel;
       for (MeasureBase* m = _measures.first(); m; m = m->next()) {
@@ -2105,7 +2105,7 @@ bool Score::savePng(const QString& name, bool screenshot, bool transparent, doub
 
             double mag = convDpi / DPI;
             QPainter p(&printer);
-            Painter painter(&p, 0);
+            PainterQt painter(&p, 0);
 
             p.setRenderHint(QPainter::Antialiasing, true);
             p.setRenderHint(QPainter::TextAntialiasing, true);

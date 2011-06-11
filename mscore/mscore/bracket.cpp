@@ -27,7 +27,7 @@
 #include "score.h"
 #include "system.h"
 #include "sym.h"
-#include "painter.h"
+#include "libmscore/painter.h"
 
 //---------------------------------------------------------
 //   Bracket
@@ -119,9 +119,8 @@ void Bracket::layout()
 
 void Bracket::draw(Painter* painter) const
       {
-      QPainter& p = *painter->painter();
-      p.setBrush(p.pen().color());
-      p.drawPath(path);
+      painter->setBrushColor(painter->penColor());
+      painter->drawPath(path);
       }
 
 //---------------------------------------------------------

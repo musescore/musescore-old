@@ -23,7 +23,7 @@
 #include "sym.h"
 #include "score.h"
 #include "staff.h"
-#include "painter.h"
+#include "libmscore/painter.h"
 #include "undo.h"
 
 //---------------------------------------------------------
@@ -381,7 +381,7 @@ void Accidental::draw(Painter* painter) const
       if (_small)
             m *= score()->styleD(ST_smallNoteMag);
       foreach(const SymElement& e, el)
-            symbols[score()->symIdx()][e.sym].draw(*painter->painter(), m, e.x, 0.0);
+            symbols[score()->symIdx()][e.sym].draw(painter, m, e.x, 0.0);
       }
 
 //---------------------------------------------------------

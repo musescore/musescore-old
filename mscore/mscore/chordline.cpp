@@ -24,7 +24,7 @@
 #include "measure.h"
 #include "system.h"
 #include "note.h"
-#include "painter.h"
+#include "libmscore/painter.h"
 
 //---------------------------------------------------------
 //   ChordLine
@@ -171,17 +171,14 @@ void ChordLine::write(Xml& xml) const
 
 void ChordLine::draw(Painter* painter) const
       {
-      QPainter& p = *painter->painter();
       double _spatium = spatium();
-      p.scale(_spatium, _spatium);
+      painter->scale(_spatium);
       double lw = 0.15;
-      QPen pen(p.pen());
-      pen.setWidthF(lw);
-      pen.setCapStyle(Qt::RoundCap);
-      pen.setJoinStyle(Qt::RoundJoin);
-      p.setPen(pen);
-      p.setBrush(Qt::NoBrush);
-      p.drawPath(path);
+      painter->setLineWidth(lw);
+      painter->setCapStyle(Qt::RoundCap);
+      painter->setJoinStyle(Qt::RoundJoin);
+      painter->setNoBrush(true);
+      painter->drawPath(path);
       }
 
 //---------------------------------------------------------

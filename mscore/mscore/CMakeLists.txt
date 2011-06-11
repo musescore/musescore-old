@@ -169,7 +169,7 @@ add_executable ( ${ExecutableName}
       cursor.cpp textframe.cpp editstafftype.cpp texttools.cpp editpitch.cpp
       editstringdata.cpp editraster.cpp iname.cpp pianotools.cpp mediadialog.cpp
       cleflist.cpp profile.cpp exportmp3.cpp chordeditor.cpp chordview.cpp
-      album.cpp layer.cpp webpage.cpp
+      album.cpp layer.cpp webpage.cpp painterqt.cpp
       ${OMR_FILES}
       ${AUDIO}
       )

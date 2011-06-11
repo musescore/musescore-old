@@ -23,7 +23,7 @@
 #include "drumset.h"
 #include "preferences.h"
 #include "sym.h"
-#include "painter.h"
+#include "libmscore/painter.h"
 
 //---------------------------------------------------------
 //   ShadowNote
@@ -45,11 +45,10 @@ void ShadowNote::draw(Painter* painter) const
       if (!visible() || sym == 0)
             return;
 
-      QPainter& p = *painter->painter();
       QPointF ap(canvasPos());
       QRect r(abbox().toRect());
 
-      p.translate(ap);
+      painter->translate(ap);
       qreal lw = point(score()->styleS(ST_ledgerLineWidth));
       InputState ps = score()->inputState();
       int voice;
@@ -58,11 +57,10 @@ void ShadowNote::draw(Painter* painter) const
       else
             voice = ps.voice();
 
-      QPen pen(preferences.selectColor[voice].light(140));  // was 160
-      pen.setWidthF(lw);
-      p.setPen(pen);
+      painter->setPenColor(preferences.selectColor[voice].light(140));  // was 160
+      painter->setLineWidth(lw);
 
-      sym->draw(p, magS());
+      sym->draw(painter, magS());
 
       double ms = spatium();
 
@@ -73,14 +71,14 @@ void ShadowNote::draw(Painter* painter) const
       if (_line < 100 && _line > -100) {
             for (int i = -2; i >= _line; i -= 2) {
                   double y = ms * (i - _line);
-                  p.drawLine(QLineF(x1, y, x2, y));
+                  painter->drawLine(x1, y, x2, y);
                   }
             for (int i = 10; i <= _line; i += 2) {
                   double y = ms * (i - _line);
-                  p.drawLine(QLineF(x1, y, x2, y));
+                  painter->drawLine(x1, y, x2, y);
                   }
             }
-      p.translate(-ap);
+      painter->translate(-ap);
       }
 
 //---------------------------------------------------------

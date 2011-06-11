@@ -32,7 +32,7 @@
 #include "image.h"
 #include "layoutbreak.h"
 #include "fret.h"
-#include "painter.h"
+#include "libmscore/painter.h"
 #include "preferences.h"
 
 static const double BOX_MARGIN = 0.0;
@@ -69,21 +69,18 @@ void Box::layout()
 
 void Box::draw(Painter* painter) const
       {
-      QPainter& p = *painter->painter();
       if (score() && score()->printing())
             return;
       if (selected() || editMode || dropTarget() || score()->showFrames()) {
-            QPen pen;
             if (selected() || editMode || dropTarget())
-                  pen = QPen(QColor(Qt::blue));
+                  painter->setPenColor(Qt::blue);
             else
-                  pen = QPen(QColor(Qt::gray));
-            double w = 2.0 / p.matrix().m11();
-            pen.setWidthF(w);
-            p.setPen(pen);
-            p.setBrush(QBrush());
+                  painter->setPenColor(Qt::gray);
+            double w = 2.0 / painter->transform().m11();
+            painter->setLineWidth(w);
+            painter->setNoBrush(true);
             w *= .5;
-            p.drawRect(bbox().adjusted(w, w, -w, -w));
+            painter->drawRect(bbox().adjusted(w, w, -w, -w));
             }
       }
 

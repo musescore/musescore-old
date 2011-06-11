@@ -31,7 +31,7 @@
 #include "measure.h"
 #include "staff.h"
 #include "stafftype.h"
-#include "painter.h"
+#include "libmscore/painter.h"
 #include "timesigproperties.h"
 
 //---------------------------------------------------------

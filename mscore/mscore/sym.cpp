@@ -25,6 +25,7 @@
 #include "mscore.h"
 #include "score.h"
 #include "xml.h"
+#include "painterqt.h"
 
 QVector<Sym> symbols[2];
 static bool symbolsInitialized[2] = { false, false };
@@ -520,17 +521,18 @@ const QRectF Sym::bbox(double mag) const
 //   draw
 //---------------------------------------------------------
 
-void Sym::draw(QPainter& painter, double mag, qreal x, qreal y) const
+void Sym::draw(Painter* painter, double mag, qreal x, qreal y) const
       {
       double imag = 1.0 / mag;
-      painter.scale(mag, mag);
+      QPainter* p = static_cast<PainterQt*>(painter)->painter();
+      p->scale(mag, mag);
 #ifdef USE_GLYPHS
-      painter.drawGlyphRun(QPointF(x * imag, y * imag), glyphs);
+      p->drawGlyphRun(QPointF(x * imag, y * imag), glyphs);
 #else
-      painter.setFont(_font);
-      painter.drawText(x * imag, y * imag, toString());
+      p->setFont(_font);
+      p->drawText(x * imag, y * imag, toString());
 #endif
-      painter.scale(imag, imag);
+      p->scale(imag, imag);
       }
 
 //---------------------------------------------------------
@@ -553,13 +555,15 @@ QString Sym::toString() const
 //   draw
 //---------------------------------------------------------
 
-void Sym::draw(QPainter& painter, double mag, qreal x, qreal y, int n) const
+void Sym::draw(Painter* painter, double mag, qreal x, qreal y, int n) const
       {
+      QPainter* p = static_cast<PainterQt*>(painter)->painter();
+
       double imag = 1.0 / mag;
-      painter.scale(mag, mag);
-      painter.setFont(_font);
-      painter.drawText(x * imag, y * imag, QString(n, _code));
-      painter.scale(imag, imag);
+      p->scale(mag, mag);
+      p->setFont(_font);
+      p->drawText(x * imag, y * imag, QString(n, _code));
+      p->scale(imag, imag);
       }
 
 //---------------------------------------------------------

@@ -21,7 +21,7 @@
 #include "lasso.h"
 #include "preferences.h"
 #include "scoreview.h"
-#include "painter.h"
+#include "libmscore/painter.h"
 
 //---------------------------------------------------------
 //   Lasso
@@ -40,14 +40,12 @@ Lasso::Lasso(Score* s)
 
 void Lasso::draw(Painter* painter) const
       {
-      QPainter& p = *painter->painter();
-      p.setBrush(QColor(0, 0, 50, 50));
+      painter->setBrushColor(QColor(0, 0, 50, 50));
       QPen pen(QColor(preferences.selectColor[0]));
       // always 2 pixel width
-      qreal w = 2.0 / p.matrix().m11();
-      pen.setWidthF(w);
-      p.setPen(pen);
-      p.drawRect(_rect);
+      qreal w = 2.0 / painter->transform().m11();
+      painter->setLineWidth(w);
+      painter->drawRect(_rect);
       }
 
 //---------------------------------------------------------

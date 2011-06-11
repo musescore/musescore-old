@@ -22,7 +22,7 @@
 #include "globals.h"
 #include "score.h"
 #include "page.h"
-#include "painter.h"
+#include "painterqt.h"
 #include "mscore.h"
 #include "icons.h"
 
@@ -58,7 +58,7 @@ void Album::print()
             return;
 
       QPainter p(&printer);
-      Painter painter(&p, 0);
+      PainterQt painter(&p, 0);
       p.setRenderHint(QPainter::Antialiasing, true);
       p.setRenderHint(QPainter::TextAntialiasing, true);
       double mag = printer.logicalDpiX() / DPI;

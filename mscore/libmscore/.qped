@@ -1,24 +1,15 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <Ped version="1.0">
   <Status>
-    <geometry x="850" y="0" w="800" h="1000" />
+    <geometry x="55" y="0" w="800" h="1000" />
     <Editor1>
       <KontextList>
         <Kontext>
-          <path>/home/ws/mscore/mscore/trunk/mscore/libmscore/segmentlist.h</path>
+          <path>/home/ws/mscore/mscore/trunk/mscore/libmscore/painter.h</path>
           <column>0</column>
-          <line>31</line>
+          <line>53</line>
           <xoff>0</xoff>
-          <yoff>25</yoff>
-          </Kontext>
-        </KontextList>
-      <KontextList>
-        <Kontext>
-          <path>/home/ws/mscore/mscore/trunk/mscore/libmscore/segmentlist.cpp</path>
-          <column>0</column>
-          <line>38</line>
-          <xoff>0</xoff>
-          <yoff>1</yoff>
+          <yoff>15</yoff>
           </Kontext>
         <cur>1</cur>
         </KontextList>

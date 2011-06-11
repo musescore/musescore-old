@@ -37,7 +37,7 @@
 #include "seq.h"
 #include "part.h"
 #include "textline.h"
-#include "painter.h"
+#include "painterqt.h"
 #include "measure.h"
 
 //---------------------------------------------------------
@@ -438,7 +438,7 @@ static void paintPaletteElement(void* data, Element* e)
       QPainter* p = static_cast<QPainter*>(data);
       p->save();
       p->translate(e->pos());
-      Painter painter(p, 0);
+      PainterQt painter(p, 0);
       e->draw(&painter);
       p->restore();
       }

@@ -81,7 +81,7 @@
 #include "instrchange.h"
 #include "stafftype.h"
 #include "stem.h"
-#include "painter.h"
+#include "libmscore/painter.h"
 #include "iname.h"
 
 extern bool debugMode;
@@ -843,56 +843,18 @@ void StaffLines::layout()
 
 void StaffLines::draw(Painter* painter) const
       {
-      QPainter& p = *painter->painter();
-
       QPointF _pos(0.0, 0.0);
 
-      QPen pen(p.pen());
-      pen.setWidthF(lw);
-      // if (pen.widthF() * p.worldMatrix().m11() < 1.0)
-      //      pen.setWidth(0);
-      pen.setCapStyle(Qt::FlatCap);
-      p.setPen(pen);
+      painter->setLineWidth(lw);
+      painter->setCapStyle(Qt::FlatCap);
 
       qreal x1 = _pos.x();
       qreal x2 = x1 + width();
 
-// printf("StaffLines::draw(): lines %d x1 %f x2 %f, lw %f dist %f\n", lines, x1, x2, lw, dist);
       for (int i = 0; i < lines; ++i) {
             qreal y = _pos.y() + i * dist;
-            p.drawLine(QLineF(x1, y, x2, y));
+            painter->drawLine(x1, y, x2, y);
             }
-#if 0
-      switch(l) {
-            case 1:
-                  {
-                  qreal y = _pos.y() + 2 * d;
-                  p.drawLine(QLineF(x1, y, x2, y));
-                  }
-                  break;
-            case 2:
-                  {
-                  qreal y = _pos.y() + 1 * d;
-                  p.drawLine(QLineF(x1, y, x2, y));
-                  y += 2 * d;
-                  p.drawLine(QLineF(x1, y, x2, y));
-                  }
-                  break;
-            case 3:
-                  for (int i = 0; i < l; ++i) {
-                        qreal y = _pos.y() + i * d * 2.0;
-                        p.drawLine(QLineF(x1, y, x2, y));
-                        }
-                  break;
-
-            default:
-                  for (int i = 0; i < l; ++i) {
-                        qreal y = _pos.y() + i * d;
-                        p.drawLine(QLineF(x1, y, x2, y));
-                        }
-                  break;
-            }
-#endif
       }
 
 //---------------------------------------------------------
@@ -994,18 +956,15 @@ void Line::layout()
 
 void Line::draw(Painter* painter) const
       {
-      QPainter& p = *painter->painter();
-      QPen pen(p.pen());
-      pen.setCapStyle(Qt::FlatCap);
+      painter->setCapStyle(Qt::FlatCap);
       double sp = spatium();
-      pen.setWidthF(_width.val() * sp);
-      p.setPen(pen);
+      painter->setLineWidth(_width.val() * sp);
 
       double l = _len.val() * sp;
       if (vertical)
-            p.drawLine(QLineF(0.0, 0.0, 0.0, l));
+            painter->drawLine(0.0, 0.0, 0.0, l);
       else
-            p.drawLine(QLineF(0.0, 0.0, l, 0.0));
+            painter->drawLine(0.0, 0.0, l, 0.0);
       }
 
 //---------------------------------------------------------
@@ -1063,12 +1022,11 @@ Compound::Compound(const Compound& c)
 
 void Compound::draw(Painter* painter) const
       {
-      QPainter& p = *painter->painter();
       foreach(Element* e, elemente) {
             QPointF pt(e->pos());
-            p.translate(pt);
+            painter->translate(pt);
             e->draw(painter);
-            p.translate(-pt);
+            painter->translate(-pt);
             }
       }
 
@@ -1161,9 +1119,8 @@ void RubberBand::draw(Painter* painter) const
       {
       if (!showRubberBand)
             return;
-      QPainter& p = *painter->painter();
-      p.setPen(Qt::red);
-      p.drawLine(QLineF(_p1, _p2));
+      painter->setPenColor(Qt::red);
+      painter->drawLine(_p1.x(), _p1.y(), _p2.x(), _p2.y());
       }
 
 //---------------------------------------------------------

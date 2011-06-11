@@ -31,7 +31,7 @@
 #include "measure.h"
 #include "undo.h"
 #include "stem.h"
-#include "painter.h"
+#include "libmscore/painter.h"
 
 //---------------------------------------------------------
 //   Tuplet
@@ -440,22 +440,19 @@ QRectF Tuplet::bbox() const
 
 void Tuplet::draw(Painter* painter) const
       {
-      QPainter& p = *painter->painter();
       if (_number) {
-            p.save();
-            p.translate(_number->pos());
+            painter->save();
+            painter->translate(_number->pos());
             _number->draw(painter);
-            p.restore();
+            painter->restore();
             }
       if (_hasBracket) {
-            QPen pen(p.pen());
-            pen.setWidthF(spatium() * 0.1);
-            p.setPen(pen);
+            painter->setLineWidth(spatium() * 0.1);
             if (!_number)
-                  p.drawPolyline(bracketL, 4);
+                  painter->drawPolyline(bracketL, 4);
             else {
-                  p.drawPolyline(bracketL, 3);
-                  p.drawPolyline(bracketR, 3);
+                  painter->drawPolyline(bracketL, 3);
+                  painter->drawPolyline(bracketR, 3);
                   }
             }
       }

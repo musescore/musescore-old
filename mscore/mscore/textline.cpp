@@ -27,7 +27,7 @@
 #include "preferences.h"
 #include "sym.h"
 #include "text.h"
-#include "painter.h"
+#include "libmscore/painter.h"
 
 //---------------------------------------------------------
 //   TextLineSegment
@@ -69,7 +69,6 @@ void TextLineSegment::setSelected(bool f)
 
 void TextLineSegment::draw(Painter* painter) const
       {
-      QPainter& p     = *painter->painter();
       TextLine* tl    = textLine();
       double _spatium = spatium();
 
@@ -88,17 +87,17 @@ void TextLineSegment::draw(Painter* painter) const
                   QRectF bb(_text->bbox());
                   l = _text->pos().x() + bb.width() + textlineTextDistance;
                   }
-            p.save();
-            p.translate(_text->pos());
-            p.setPen(QPen(_text->curColor()));
+            painter->save();
+            painter->translate(_text->pos());
+            painter->setPenColor(_text->curColor());
             _text->draw(painter);
-            p.restore();
+            painter->restore();
             }
       else if (sym != -1) {
             const QRectF& bb = symbols[score()->symIdx()][sym].bbox(magS());
             qreal h = bb.height() * .5;
             QPointF o = tl->beginSymbolOffset() * _spatium;
-            symbols[score()->symIdx()][sym].draw(p, 1.0, o.x(), h + o.y());
+            symbols[score()->symIdx()][sym].draw(painter, 1.0, o.x(), h + o.y());
             l = bb.width() + textlineTextDistance;
             }
       if (spannerSegmentType() == SEGMENT_SINGLE || spannerSegmentType() == SEGMENT_END) {
@@ -108,47 +107,44 @@ void TextLineSegment::draw(Painter* painter) const
                   qreal h = bb.height() * .5;
                   QPointF o = tl->endSymbolOffset() * _spatium;
                   pp2.setX(pp2.x() - bb.width() + textlineTextDistance);
-                  symbols[score()->symIdx()][sym].draw(p, 1.0, pp2.x() + textlineTextDistance + o.x(), h + o.y());
+                  symbols[score()->symIdx()][sym].draw(painter, 1.0, pp2.x() + textlineTextDistance + o.x(), h + o.y());
                   }
             }
 
       QPointF pp1(l, 0.0);
 
-      QPen pen(p.pen());
-      pen.setWidthF(textlineLineWidth);
-      pen.setStyle(tl->lineStyle());
+      painter->setLineWidth(textlineLineWidth);
+      painter->setLineStyle(tl->lineStyle());
 
       if (selected() && !(score() && score()->printing()))
-            pen.setColor(preferences.selectColor[0]);
+            painter->setPenColor(preferences.selectColor[0]);
       else if (!visible())
-            pen.setColor(Qt::gray);
+            painter->setPenColor(Qt::gray);
       else
-            pen.setColor(tl->lineColor());
-
-      p.setPen(pen);
+            painter->setPenColor(tl->lineColor());
 
       if (tl->beginHook() && tl->beginHookType() == HOOK_45)
             pp1.rx() += fabs(tl->beginHookHeight().val() * _spatium * .4);
       if (tl->endHook() && tl->endHookType() == HOOK_45)
             pp2.rx() -= fabs(tl->endHookHeight().val() * _spatium * .4);
-      p.drawLine(QLineF(pp1, pp2));
+      painter->drawLine(pp1.x(), pp1.y(), pp2.x(), pp2.y());
 
       if (tl->beginHook()) {
             double hh = tl->beginHookHeight().val() * _spatium;
             if (spannerSegmentType() == SEGMENT_SINGLE || spannerSegmentType() == SEGMENT_BEGIN) {
                   if (tl->beginHookType() == HOOK_45)
-                        p.drawLine(QLineF(pp1, QPointF(pp1.x() - fabs(hh * .4), pp1.y() + hh)));
+                        painter->drawLine(pp1.x(), pp1.y(), pp1.x() - fabs(hh * .4), pp1.y() + hh);
                   else
-                        p.drawLine(QLineF(pp1, QPointF(pp1.x(), pp1.y() + hh)));
+                        painter->drawLine(pp1.x(), pp1.y(), pp1.x(), pp1.y() + hh);
                   }
             }
       if (tl->endHook()) {
             double hh = tl->endHookHeight().val() * _spatium;
             if (spannerSegmentType() == SEGMENT_SINGLE || spannerSegmentType() == SEGMENT_END) {
                   if (tl->endHookType() == HOOK_45)
-                        p.drawLine(QLineF(pp2, QPointF(pp2.x() + fabs(hh * .4), pp2.y() + hh)));
+                        painter->drawLine(pp2.x(), pp2.y(), pp2.x() + fabs(hh * .4), pp2.y() + hh);
                   else
-                        p.drawLine(QLineF(pp2, QPointF(pp2.x(), pp2.y() + hh)));
+                        painter->drawLine(pp2.x(), pp2.y(), pp2.x(), pp2.y() + hh);
                   }
             }
       }

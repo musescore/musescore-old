@@ -26,7 +26,7 @@
 #include "system.h"
 #include "measure.h"
 #include "globals.h"
-#include "painter.h"
+#include "libmscore/painter.h"
 
 //---------------------------------------------------------
 //   JumpProperties
@@ -91,9 +91,8 @@ RepeatMeasure::RepeatMeasure(Score* score)
 
 void RepeatMeasure::draw(Painter* painter) const
       {
-      QPainter& p = *painter->painter();
-      p.setBrush(p.pen().color());
-      p.drawPath(path);
+      painter->setBrushColor(painter->penColor());
+      painter->drawPath(path);
       }
 
 //---------------------------------------------------------

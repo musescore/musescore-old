@@ -25,7 +25,7 @@
 #include "stafftype.h"
 #include "hook.h"
 #include "tremolo.h"
-#include "painter.h"
+#include "libmscore/painter.h"
 
 // TEMPORARY HACK!!
 #include "sym.h"
@@ -49,7 +49,6 @@ Stem::Stem(Score* s)
 
 void Stem::draw(Painter* painter) const
       {
-      QPainter& p = *painter->painter();
       bool useTab = false;
       Staff* st = staff();
       if (st && st->useTablature()) {     // stems used in palette do not have a staff
@@ -58,17 +57,15 @@ void Stem::draw(Painter* painter) const
                   return;
             }
       qreal lw = point(score()->styleS(ST_stemWidth));
-      QPen pen(p.pen());
-      pen.setWidthF(lw);
-      pen.setCapStyle(Qt::RoundCap);
-      p.setPen(pen);
-      p.drawLine(QLineF(0.0, 0.0, 0.0, stemLen()) );
+      painter->setLineWidth(lw);
+      painter->setCapStyle(Qt::RoundCap);
+      painter->drawLine(0.0, 0.0, 0.0, stemLen());
       // NOT THE BEST PLACE FOR THIS?
       // with tablatures, dots are not drawn near 'notes', but near stems
       if (useTab) {
             int nDots = chord()->dots();
             if (nDots > 0)
-                  symbols[score()->symIdx()][dotSym].draw(p, magS(), spatium(), stemLen(), nDots);
+                  symbols[score()->symIdx()][dotSym].draw(painter, magS(), spatium(), stemLen(), nDots);
             }
       }
 

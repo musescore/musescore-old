@@ -37,7 +37,7 @@
 #include "undo.h"
 #include "stem.h"
 #include "beam.h"
-#include "painter.h"
+#include "libmscore/painter.h"
 
 //---------------------------------------------------------
 //   SlurSegment
@@ -95,25 +95,20 @@ void SlurSegment::move(const QPointF& s)
 
 void SlurSegment::draw(Painter* painter) const
       {
-      QPainter& p = *painter->painter();
       if (slurTie()->lineType() == 0) {
-            p.setBrush(curColor());
-            QPen pen(p.pen());
-            pen.setCapStyle(Qt::RoundCap);
-            pen.setJoinStyle(Qt::RoundJoin);
+            painter->setBrushColor(curColor());
+            painter->setCapStyle(Qt::RoundCap);
+            painter->setJoinStyle(Qt::RoundJoin);
             qreal lw = point(score()->styleS(ST_SlurEndWidth));
-            pen.setWidthF(lw);
-            p.setPen(pen);
+            painter->setLineWidth(lw);
             }
       else {
-            p.setBrush(QBrush());
-            QPen pen(p.pen());
+            painter->setNoBrush(true);
             qreal lw = point(score()->styleS(ST_SlurDottedWidth));
-            pen.setWidthF(lw);
-            pen.setStyle(Qt::DotLine);
-            p.setPen(pen);
+            painter->setLineWidth(lw);
+            painter->setLineStyle(Qt::DotLine);
             }
-      p.drawPath(path);
+      painter->drawPath(path);
       }
 
 //---------------------------------------------------------

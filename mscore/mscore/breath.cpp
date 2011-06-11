@@ -24,7 +24,7 @@
 #include "segment.h"
 #include "measure.h"
 #include "score.h"
-#include "painter.h"
+#include "libmscore/painter.h"
 
 int Breath::symList[Breath::breathSymbols] = {
       rcommaSym,
@@ -81,7 +81,7 @@ void Breath::read(QDomElement e)
 
 void Breath::draw(Painter* p) const
       {
-      symbols[score()->symIdx()][symList[subtype()]].draw(*p->painter(), magS());
+      symbols[score()->symIdx()][symList[subtype()]].draw(p, magS());
       }
 
 //---------------------------------------------------------

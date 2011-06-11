@@ -25,7 +25,7 @@
 #include "staff.h"
 #include "chord.h"
 #include "note.h"
-#include "painter.h"
+#include "libmscore/painter.h"
 
 //---------------------------------------------------------
 //   TremoloBar
@@ -90,18 +90,15 @@ void TremoloBar::draw(Painter* painter) const
       {
       if (staff() && !staff()->useTablature())
             return;
-      QPainter& p = *painter->painter();
-      QPen pen = p.pen();
-      pen.setWidthF(_lw);
-      pen.setCapStyle(Qt::RoundCap);
-      pen.setJoinStyle(Qt::RoundJoin);
-      p.setPen(pen);
-      p.setBrush(Qt::black);
+      painter->setLineWidth(_lw);
+      painter->setCapStyle(Qt::RoundCap);
+      painter->setJoinStyle(Qt::RoundJoin);
+      painter->setBrushColor(Qt::black);
 
       double _spatium = spatium();
       const TextStyle* st = &score()->textStyle(TEXT_STYLE_BENCH);
       QFont f = st->fontPx(_spatium);
-      p.setFont(f);
+      painter->setFont(f);
 
       int n    = _points.size();
 //      int pt   = 0;
@@ -115,8 +112,8 @@ void TremoloBar::draw(Painter* painter) const
 //            int pitch = _points[pt].pitch;
             }
       //debug:
-      p.drawLine(0.0, 0.0, _spatium*1.5, _spatium*3);
-      p.drawLine(_spatium*1.5, _spatium*3, _spatium*3, 0.0);
+      painter->drawLine(0.0, 0.0, _spatium*1.5, _spatium*3);
+      painter->drawLine(_spatium*1.5, _spatium*3, _spatium*3, 0.0);
       }
 
 //---------------------------------------------------------

@@ -28,7 +28,7 @@
 #include "score.h"
 #include "accidental.h"
 #include "segment.h"
-#include "painter.h"
+#include "libmscore/painter.h"
 
 //---------------------------------------------------------
 //   draw
@@ -36,7 +36,6 @@
 
 void TrillSegment::draw(Painter* painter) const
       {
-      QPainter& p = *painter->painter();
       double mag = magS();
       int idx    = score()->symIdx();
       qreal w2   = symbols[idx][trillelementSym].width(mag);
@@ -51,21 +50,21 @@ void TrillSegment::draw(Painter* painter) const
             qreal x2   = pos2().x();
             int n      = int(floor((x2-x1) / w2));
 
-            symbols[idx][trillSym].draw(p, mag, x0, 0.0);
-            symbols[idx][trillelementSym].draw(p, mag,  x1, b2.y() * .9, n);
+            symbols[idx][trillSym].draw(painter, mag, x0, 0.0);
+            symbols[idx][trillelementSym].draw(painter, mag,  x1, b2.y() * .9, n);
 
             if (trill()->accidental()) {
-                  p.save();
-                  p.translate(trill()->accidental()->canvasPos());
+                  painter->save();
+                  painter->translate(trill()->accidental()->canvasPos());
                   trill()->accidental()->draw(painter);
-                  p.restore();
+                  painter->restore();
                   }
             }
       else {
             qreal x1 = 0.0;
             qreal x2 = pos2().x();
             int n = int(floor((x2-x1) / w2));
-            symbols[idx][trillelementSym].draw(p, mag,  x1, b2.y() * .9, n);
+            symbols[idx][trillelementSym].draw(painter, mag,  x1, b2.y() * .9, n);
             }
       }
 
