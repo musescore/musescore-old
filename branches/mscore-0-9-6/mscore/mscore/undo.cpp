@@ -2131,7 +2131,7 @@ void ChangeStyle::flip()
                   foreach(Element* element, *m->el()) {
                         if (element->type() == HARMONY) {
                               Harmony* h = static_cast<Harmony*>(element);
-                              h->endEdit();
+                              h->render();
                               }
                         }
                   }
