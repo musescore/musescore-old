@@ -222,6 +222,7 @@ if (MINGW)
    endif(CMAKE_BUILD_TYPE MATCHES "Debug")
 
    target_link_libraries(mscore
+      libmscore
       al
       awl
       mstyle
@@ -295,6 +296,7 @@ else (MINGW)
       ${QT_QTSCRIPT_TOOLS_LIBRARY_RELEASE}
       ${PORTAUDIO_LIB}
       diff_match_patch
+      libmscore
       al
       awl
       mstyle

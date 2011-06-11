@@ -29,6 +29,10 @@
 QVector<Sym> symbols[2];
 static bool symbolsInitialized[2] = { false, false };
 
+#ifdef USE_GLYPHS
+static bool fontsInitialized = false;
+#endif
+
 QMap<const char*, SymCode*> charReplaceMap;
 
 extern void dumpTable();
@@ -429,13 +433,11 @@ QFont fontId2font(int fontId)
       int size = lrint(20.0 * DPI / PPI);
       if (fontId == 0) {
             _font.setFamily("MScore");
-            // _font.setStyleStrategy(QFont::NoFontMerging);
             }
       else if (fontId == 1)
             _font.setFamily("MScore1");
       else if (fontId == 2) {
             _font.setFamily("FreeSerif");
-            // _font.setStyleStrategy(QFont::NoFontMerging);
             size = lrint(8 * DPI / PPI);
             }
       else if (fontId == 3)
@@ -628,6 +630,11 @@ QString symToHtml(const Sym& s1, const Sym& s2, int leftMargin)
 
 void initSymbols(int idx)
       {
+#ifdef USE_GLYPHS
+      if (!fontsInitialized) {
+            // rawFonts[0] = new QRawFont(
+            }
+#endif
       if (symbolsInitialized[idx])
             return;
       symbolsInitialized[idx] = true;
@@ -738,272 +745,4 @@ void initSymbols(int idx)
                   charReplaceMap.insert(pSymbols[i].text, &pSymbols[i]);
                   }
             }
-//      dumpTable();
       }
-
-#if 0
-
-static char* nameList[] = {
-".notdef",
-".null",
-"nonmarkingreturn",
-"space",
-"plus",
-"comma",
-"hyphen",
-"period",
-"zero",
-"one",
-"two",
-"three",
-"four",
-"five",
-"six",
-"seven",
-"eight",
-"nine",
-"f",
-"m",
-"p",
-"r",
-"s",
-"z",
-"rests.0",
-"rests.1",
-"rests.0o",
-"rests.1o",
-"rests.M3",
-"rests.M2",
-"rests.M1",
-"rests.2",
-"rests.2classical",
-"rests.3",
-"rests.4",
-"rests.5",
-"rests.6",
-"rests.7",
-"accidentals.sharp",
-"accidentals.sharp.slashslash.stem",
-"accidentals.sharp.slashslashslash.stemstem",
-"accidentals.sharp.slashslashslash.stem",
-"accidentals.sharp.slashslash.stemstemstem",
-"accidentals.natural",
-"accidentals.flat",
-"accidentals.flat.slash",
-"accidentals.flat.slashslash",
-"accidentals.mirroredflat.flat",
-"accidentals.mirroredflat",
-"accidentals.mirroredflat.backslash",
-"accidentals.flatflat",
-"accidentals.flatflat.slash",
-"accidentals.doublesharp",
-"accidentals.rightparen",
-"accidentals.leftparen",
-"arrowheads.open.01",
-"arrowheads.open.0M1",
-"arrowheads.open.11",
-"arrowheads.open.1M1",
-"arrowheads.close.01",
-"arrowheads.close.0M1",
-"arrowheads.close.11",
-"arrowheads.close.1M1",
-"dots.dot",
-"noteheads.uM2",
-"noteheads.dM2",
-"noteheads.sM1",
-"noteheads.s0",
-"noteheads.s1",
-"noteheads.s2",
-"noteheads.s0diamond",
-"noteheads.s1diamond",
-"noteheads.s2diamond",
-"noteheads.s0triangle",
-"noteheads.d1triangle",
-"noteheads.u1triangle",
-"noteheads.u2triangle",
-"noteheads.d2triangle",
-"noteheads.s0slash",
-"noteheads.s1slash",
-"noteheads.s2slash",
-"noteheads.s0cross",
-"noteheads.s1cross",
-"noteheads.s2cross",
-"noteheads.s2xcircle",
-"noteheads.s0do",
-"noteheads.d1do",
-"noteheads.u1do",
-"noteheads.d2do",
-"noteheads.u2do",
-"noteheads.s0re",
-"noteheads.u1re",
-"noteheads.d1re",
-"noteheads.u2re",
-"noteheads.d2re",
-"noteheads.s0mi",
-"noteheads.s1mi",
-"noteheads.s2mi",
-"noteheads.u0fa",
-"noteheads.d0fa",
-"noteheads.u1fa",
-"noteheads.d1fa",
-"noteheads.u2fa",
-"noteheads.d2fa",
-"noteheads.s0la",
-"noteheads.s1la",
-"noteheads.s2la",
-"noteheads.s0ti",
-"noteheads.u1ti",
-"noteheads.d1ti",
-"noteheads.u2ti",
-"noteheads.d2ti",
-"scripts.ufermata",
-"scripts.dfermata",
-"scripts.ushortfermata",
-"scripts.dshortfermata",
-"scripts.ulongfermata",
-"scripts.dlongfermata",
-"scripts.uverylongfermata",
-"scripts.dverylongfermata",
-"scripts.thumb",
-"scripts.sforzato",
-"scripts.espr",
-"scripts.staccato",
-"scripts.ustaccatissimo",
-"scripts.dstaccatissimo",
-"scripts.tenuto",
-"scripts.uportato",
-"scripts.dportato",
-"scripts.umarcato",
-"scripts.dmarcato",
-"scripts.open",
-"scripts.stopped",
-"scripts.upbow",
-"scripts.downbow",
-"scripts.reverseturn",
-"scripts.turn",
-"scripts.trill",
-"scripts.upedalheel",
-"scripts.dpedalheel",
-"scripts.upedaltoe",
-"scripts.dpedaltoe",
-"scripts.flageolet",
-"scripts.segno",
-"scripts.coda",
-"scripts.varcoda",
-"scripts.rcomma",
-"scripts.lcomma",
-"scripts.rvarcomma",
-"scripts.lvarcomma",
-"scripts.arpeggio",
-"scripts.trill_element",
-"scripts.arpeggio.arrow.M1",
-"scripts.arpeggio.arrow.1",
-"scripts.trilelement",
-"scripts.prall",
-"scripts.mordent",
-"scripts.prallprall",
-"scripts.prallmordent",
-"scripts.upprall",
-"scripts.upmordent",
-"scripts.pralldown",
-"scripts.downprall",
-"scripts.downmordent",
-"scripts.prallup",
-"scripts.lineprall",
-"scripts.caesura.curved",
-"scripts.caesura.straight",
-"flags.u3",
-"flags.u4",
-"flags.u5",
-"flags.u6",
-"flags.d3",
-"flags.ugrace",
-"flags.dgrace",
-"flags.d4",
-"flags.d5",
-"flags.d6",
-"clefs.C",
-"clefs.C_change",
-"clefs.F",
-"clefs.F_change",
-"clefs.G",
-"clefs.G_change",
-"clefs.percussion",
-"clefs.percussion_change",
-"clefs.tab",
-"clefs.tab_change",
-"timesig.C44",
-"timesig.C22",
-"pedal.*",
-"pedal.M",
-"pedal..",
-"pedal.P",
-"pedal.d",
-"pedal.e",
-"pedal.Ped",
-"brackettips.uright",
-"brackettips.dright",
-"accordion.accDiscant",
-"accordion.accDot",
-"accordion.accFreebase",
-"accordion.accStdbase",
-"accordion.accBayanbase",
-"accordion.accOldEE",
-"brackettips.uleft",
-"brackettips.dleft",
-"flags.d7",
-"flags.u7",
-"scripts.snappizzicato",
-"noteheads.sM1double",
-"accidentals.flat.arrowup",
-"accidentals.flat.arrowdown",
-"accidentals.flat.arrowboth",
-"accidentals.natural.arrowup",
-"accidentals.natural.arrowdown",
-"accidentals.natural.arrowboth",
-"accidentals.sharp.arrowup",
-"accidentals.sharp.arrowdown",
-"accidentals.sharp.arrowboth",
-"noteheads.uM2classical",
-"noteheads.dM2classical",
-"noteheads.sM1classical",
-"timesig.Cdot",
-"timesig.O",
-"timesig.Ocut",
-"timesig.Odot",
-"uniE1CB"
-            };
-
-//---------------------------------------------------------
-//   dumpTable
-//    for debugging
-//---------------------------------------------------------
-
-void dumpTable()
-      {
-      for (int i = 0; i < lastSym; ++i) {
-            Sym s     = symbols[0][i];
-            QRectF r  = s.getBbox();
-            QPointF p = s.getAttach();
-
-            int idx = 0;
-            for (int k = 0; k < sizeof(lilypondNames)/sizeof(*lilypondNames); ++k) {
-                  if (lilypondNames[k].msIndex == i) {
-                        for (int l = 0; l < sizeof(nameList)/sizeof(*nameList); ++l) {
-                              if (strcmp(nameList[l], lilypondNames[k].name) == 0) {
-                                    idx = l;
-                                    break;
-                                    }
-                              }
-                        }
-                  }
-
-            printf("   Sym(\"%s\", %d, %d, QPointF(%f,%f), QRectF(%f,%f,%f,%f)),\n",
-               s.name(), s.code(), idx, p.x(), p.y(), r.x(), r.y(), r.width(), r.height()
-               );
-            }
-      }
-
-#endif
-
-

@@ -1829,7 +1829,6 @@ bool Score::read(QDomElement dScore)
                   }
             }
       renumberMeasures();
-      checkScore();
       rebuildMidiMapping();
       updateChannel();
       return true;

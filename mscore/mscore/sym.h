@@ -68,6 +68,7 @@ class Sym {
 #ifdef USE_GLYPHS
       QGlyphRun glyphs;
       void genGlyphs();
+      static QRawFont* rawFonts[2];
 #endif
 
    public:

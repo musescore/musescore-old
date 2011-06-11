@@ -85,6 +85,10 @@ void Score::checkScore()
       {
       if (!firstMeasure())
             return;
+#if 0
+      for (Measure* m = firstMeasure(); m; m = m->nextMeasure())
+            m->segments()->check();
+#endif
       for (Segment* s = firstMeasure()->first(); s;) {
             Segment* ns = s->next1();
 
