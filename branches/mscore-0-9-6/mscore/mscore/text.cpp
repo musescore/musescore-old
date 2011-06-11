@@ -35,6 +35,7 @@
 #include "system.h"
 #include "measure.h"
 #include "textproperties.h"
+#include "editstaff.h"
 
 TextPalette* textPalette;
 
@@ -938,7 +939,12 @@ void TextB::startEdit(ScoreView* view, const QPointF& p)
 
 bool TextB::isEditable()
       {
-      return !((type() == TEXT) && ((subtype() == TEXT_MEASURE_NUMBER) || (subtype() == TEXT_PAGE_NUMBER_ODD) || (subtype() == TEXT_PAGE_NUMBER_EVEN)));
+      return !((type() == TEXT) && 
+      ((subtype() == TEXT_MEASURE_NUMBER) || 
+      (subtype() == TEXT_PAGE_NUMBER_ODD) || 
+      (subtype() == TEXT_PAGE_NUMBER_EVEN)||
+      (subtype() == TEXT_INSTRUMENT_LONG)||
+      (subtype() == TEXT_INSTRUMENT_SHORT)));
       }
 
 //---------------------------------------------------------
@@ -1516,7 +1522,7 @@ void TextB::dragTo(const QPointF& p)
       score()->setUpdateAll();
       score()->end();
       }
-#if 0
+//#if 0
 //---------------------------------------------------------
 //   genPropertyMenu
 //---------------------------------------------------------
@@ -1529,8 +1535,14 @@ bool TextC::genPropertyMenu(QMenu* popup) const
       else
             a = popup->addAction(tr("Set Visible"));
       a->setData("invisible");
-      a = popup->addAction(tr("Text Properties..."));
-      a->setData("props");
+      
+      //a = popup->addAction(tr("Text Properties..."));
+      //a->setData("props");
+      
+      if((subtype() == TEXT_INSTRUMENT_LONG)|| (subtype() == TEXT_INSTRUMENT_SHORT)) {
+            QAction* a = popup->addAction(tr("Staff Properties..."));
+            a->setData("sprops");
+            }
       return true;
       }
 
@@ -1613,9 +1625,13 @@ void TextC::propertyAction(ScoreView* viewer, const QString& s)
             delete nText;
             score()->setLayoutAll(true);
             }
+      else if (s == "sprops") {
+            EditStaff editStaff(staff(), 0);
+            editStaff.exec();
+            }
       else
             Element::propertyAction(viewer, s);
       }
 
-#endif
+//#endif
 

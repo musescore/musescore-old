@@ -509,7 +509,7 @@ bool Element::readProperties(QDomElement e)
             setTrack((_track/VOICES)*VOICES + i);
       else if (tag == "track")
             setTrack(i);
-      else if (tag == "selected")
+      else if (tag == "selected" && isEditable())
             setSelected(i);
       else if (tag == "color")
             _color = readColor(e);

@@ -244,6 +244,8 @@ class TextC : public TextB {
       virtual TextBase* textBase() const { return _tb; }
       void baseChanged();
       void changeBase(TextBase* b);
+      virtual bool genPropertyMenu(QMenu* popup) const;
+      virtual void propertyAction(ScoreView*, const QString& s);
       };
 
 //---------------------------------------------------------
