@@ -212,10 +212,10 @@ void EditStaff::showInstrumentDialog()
             Score* score  = staff->score();
             TextStyle* ts = score->textStyle(TEXT_STYLE_INSTRUMENT_SHORT);
             shortName->setCurrentFont(ts->font(score->spatium()));
-            shortName->document()->setDefaultFont(s->font(score->spatium()));
+            shortName->document()->setDefaultFont(ts->font(score->spatium()));
             ts = score->textStyle(TEXT_STYLE_INSTRUMENT_LONG);
             longName->setCurrentFont(ts->font(score->spatium()));
-            longName->document()->setDefaultFont(s->font(score->spatium()));
+            longName->document()->setDefaultFont(ts->font(score->spatium()));
             
             instrument.setTrackName(t->trackName);
 
