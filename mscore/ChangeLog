@@ -1,6 +1,9 @@
 11.jun (la)
       - Restore ability to delete instrument name in place
       - Right click on instrument name for staff properties
+      - fix #11019: new files: jazz templates, demo & chord styles by Marc Sabatella
+      - new chordstyle is apply now immediatly
+      - fix #5142: Notes do not release together in Swing or Shuffle mode
 10.jun (la)
       - update musescore.com plugin
       - remove "what's this" in toolbar and help menu

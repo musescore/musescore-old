@@ -1108,5 +1108,89 @@
     <degree>alt#5</degree>
     <voicing>C E G# Bb D A</voicing>
     </chord>
+  <chord id="210">
+    <name>Maj7#11</name>
+    <xml>major-seventh</xml>
+    <degree>add#11</degree>
+    <voicing>C E G B F#</voicing>
+    </chord>
+  <chord id="211">
+    <name>Maj9#5</name>
+    <xml>major-ninth</xml>
+    <degree>alt#5</degree>
+    <voicing>C E G# B D</voicing>
+    </chord>
+  <chord id="212">
+    <name>Maj7#9</name>
+    <xml>major-seventh</xml>
+    <degree>add#9</degree>
+    <voicing>C E G B D#</voicing>
+    </chord>
+  <chord id="213">
+    <name>add2</name>
+    <xml>major</xml>
+    <degree>add9</degree>
+    <voicing>C D E G</voicing>
+    </chord>
+  <chord id="214">
+    <name>add9</name>
+    <xml>major</xml>
+    <degree>add9</degree>
+    <voicing>C D E G</voicing>
+    </chord>
+  <chord id="215">
+    <!-- must enter "sus" before "b9" or else it would be parsed Cb 9sus rather than C b9 sus -->
+    <!-- alternative would be to enter (b9)sus; you may edit this entry by hand if you prefer that -->
+    <name>susb9</name>
+    <xml>suspended-fourth</xml>
+    <degree>addb9</degree>
+    <voicing>C Db F G</voicing>
+    </chord>
+  <chord id="216">
+    <name>ma7sus</name>
+    <xml>major-seventh</xml>
+    <degree>sub3</degree>
+    <degree>add4</degree>
+    <voicing>C F G B</voicing>
+    </chord>
+  <chord id="217">
+    <name>ma9sus</name>
+    <xml>major-ninth</xml>
+    <degree>sub3</degree>
+    <degree>add4</degree>
+    <voicing>C F G B D</voicing>
+    </chord>
+  <chord id="220">
+    <name>m7b9</name>
+    <xml>minor-seventh</xml>
+    <degree>addb9</degree>
+    <voicing>C Eb G Bb Db</voicing>
+    </chord>
+  <chord id="221">
+    <name>m7b13</name>
+    <xml>minor-seventh</xml>
+    <degree>addb13</degree>
+    <voicing>C Eb G Bb Ab</voicing>
+    </chord>
+  <chord id="222">
+    <name>Phryg</name>
+    <xml>minor-seventh</xml>
+    <degree>addb9</degree>
+    <degree>add4</degree>
+    <voicing>C Db Eb F G Bb</voicing>
+    </chord>
+  <chord id="223">
+    <name>madd2</name>
+    <xml>minor</xml>
+    <degree>add9</degree>
+    <voicing>C D Eb G</voicing>
+    <render>&display_minor; &d_alp; &add; &stwo; &d_arp;</render>
+    </chord>
+  <chord id="230">
+    <name>7b9#9</name>
+    <xml>dominant</xml>
+    <degree>addb9</degree>
+    <degree>add#9</degree>
+    <voicing>C E G Bb Db D#</voicing>
+    </chord>
   </museScore>
-
