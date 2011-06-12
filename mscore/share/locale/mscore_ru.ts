@@ -953,11 +953,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Note Head Group</source>
-        <translation type="unfinished"/>
+        <translation>Группа нотных головок</translation>
     </message>
     <message>
         <source>Note Head Type</source>
-        <translation type="unfinished"/>
+        <translation>Тип нотных головок</translation>
     </message>
     <message>
         <source>normal</source>
@@ -965,47 +965,47 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>cross</source>
-        <translation type="unfinished"/>
+        <translation>Перекрестье</translation>
     </message>
     <message>
         <source>diamond</source>
-        <translation type="unfinished"/>
+        <translation>Ромбовидные</translation>
     </message>
     <message>
         <source>triangle</source>
-        <translation type="unfinished"/>
+        <translation>Треугольные</translation>
     </message>
     <message>
         <source>slash</source>
-        <translation type="unfinished"/>
+        <translation>Черта</translation>
     </message>
     <message>
         <source>xcircle</source>
-        <translation type="unfinished"/>
+        <translation>Круг с перекрестьем</translation>
     </message>
     <message>
         <source>do</source>
-        <translation type="unfinished"/>
+        <translation>До</translation>
     </message>
     <message>
         <source>re</source>
-        <translation type="unfinished"/>
+        <translation>Ре</translation>
     </message>
     <message>
         <source>mi</source>
-        <translation type="unfinished"/>
+        <translation>Ми</translation>
     </message>
     <message>
         <source>fa</source>
-        <translation type="unfinished"/>
+        <translation>Фа</translation>
     </message>
     <message>
         <source>la</source>
-        <translation type="unfinished"/>
+        <translation>Ля</translation>
     </message>
     <message>
         <source>ti</source>
-        <translation type="unfinished"/>
+        <translation>Си</translation>
     </message>
     <message>
         <source>Auto</source>
@@ -2797,7 +2797,7 @@ failed: </source>
     </message>
     <message>
         <source>layout stretch</source>
-        <translation type="unfinished"/>
+        <translation>Растягивание:</translation>
     </message>
     <message>
         <source>repeat count:</source>
@@ -3201,7 +3201,7 @@ failed: </source>
     </message>
     <message>
         <source>Technik</source>
-        <translation type="unfinished"/>
+        <translation>Техника</translation>
     </message>
     <message>
         <source>Measure Number</source>
@@ -3233,7 +3233,7 @@ failed: </source>
     </message>
     <message>
         <source>Repeat Text</source>
-        <translation type="unfinished"/>
+        <translation>Текст повтора</translation>
     </message>
     <message>
         <source>Volta</source>
@@ -5988,7 +5988,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>align left edge of text to reference point</source>
-        <translation type="unfinished"/>
+        <translation>Выровнять левый край текста по точке отсчёта</translation>
     </message>
     <message>
         <source>...</source>
@@ -5996,23 +5996,23 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>center text on reference point</source>
-        <translation type="unfinished"/>
+        <translation>Центрировать текст по точке отсчёта</translation>
     </message>
     <message>
         <source>align right edge of text to reference point</source>
-        <translation type="unfinished"/>
+        <translation>Выровнять правый край текста по точке отсчёта</translation>
     </message>
     <message>
         <source>align top edge of text to reference point</source>
-        <translation type="unfinished"/>
+        <translation>Выровнять верхний край текста по точке отсчёта</translation>
     </message>
     <message>
         <source>center text vertical to reference point</source>
-        <translation type="unfinished"/>
+        <translation>Выровнять текста по вертикали по точке отсчёта</translation>
     </message>
     <message>
         <source>align bottom edge of text to reference point</source>
-        <translation type="unfinished"/>
+        <translation>Выровнять нижний край текста по точке отсчёта</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -8630,7 +8630,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tambourine</source>
-        <translation type="unfinished"/>
+        <translation>Тамбурин</translation>
     </message>
     <message>
         <source>open high conga</source>
