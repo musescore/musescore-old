@@ -1,9 +1,9 @@
 //=============================================================================
-//  MusE Score
+//  MuseScore
 //  Linux Music Score Editor
-//  $Id$
+//  $Id: text.cpp -1   $
 //
-//  Copyright (C) 2009 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -18,235 +18,81 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "textproperties.h"
+#include "globals.h"
 #include "text.h"
+#include "xml.h"
+#include "style.h"
+#include "mscore.h"
+#include "scoreview.h"
 #include "score.h"
+#include "utils.h"
+#include "page.h"
+#include "textpalette.h"
+#include "sym.h"
+#include "symbol.h"
+#include "textline.h"
+#include "preferences.h"
+#include "system.h"
+#include "measure.h"
+#include "textproperties.h"
+#include "textprop.h"
+#include "box.h"
+#include "segment.h"
+#include "texttools.h"
 
 //---------------------------------------------------------
-//   TextProp
+//   TextProperties
 //---------------------------------------------------------
 
-TextProp::TextProp(QWidget* parent)
-   : QWidget(parent)
+TextProperties::TextProperties(Text* t, QWidget* parent)
+   : QDialog(parent)
       {
-      setupUi(this);
+      setWindowTitle(tr("MuseScore: Text Properties"));
+      QGridLayout* layout = new QGridLayout;
 
-      QButtonGroup* g1 = new QButtonGroup(this);
-      g1->addButton(alignLeft);
-      g1->addButton(alignHCenter);
-      g1->addButton(alignRight);
+      tp = new TextProp;
+      tp->setScore(false, t->score());
 
-      QButtonGroup* g2 = new QButtonGroup(this);
-      g2->addButton(alignTop);
-      g2->addButton(alignVCenter);
-      g2->addButton(alignBaseline);
-      g2->addButton(alignBottom);
+      layout->addWidget(tp, 0, 1);
+      QLabel* l = new QLabel;
+      l->setPixmap(QPixmap(":/data/bg1.jpg"));
+      l->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Ignored);
 
-      QButtonGroup* g3 = new QButtonGroup(this);
-      g3->addButton(circleButton);
-      g3->addButton(boxButton);
+      layout->addWidget(l, 0, 0, 2, 1);
+      QHBoxLayout* hb = new QHBoxLayout;
+      QDialogButtonBox* bb = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
+      hb->addWidget(bb);
+      layout->addLayout(hb, 1, 1);
+      setLayout(layout);
 
-      connect(mmUnit, SIGNAL(toggled(bool)), SLOT(mmToggled(bool)));
-      connect(styledGroup, SIGNAL(toggled(bool)), SLOT(styledToggled(bool)));
-      connect(unstyledGroup, SIGNAL(toggled(bool)), SLOT(unstyledToggled(bool)));
-      }
-
-//---------------------------------------------------------
-//   setScore
-//---------------------------------------------------------
-
-void TextProp::setScore(bool os, Score* score)
-      {
-      onlyStyle = os;
-
-      if (onlyStyle) {
-            styledGroup->setVisible(false);
-            unstyledGroup->setCheckable(false);
-            unstyledGroup->setTitle(tr("Text Style"));
+      text = t;
+      if (t->styled()) {
+            text->setLocalStyle(text->score()->textStyle(text->textStyle()));
             }
-      else {
-            textGroup->setVisible(false);
-            styles->clear();
-            foreach(const TextStyle& st, score->style()->textStyles())
-                  styles->addItem(st.name());
+
+      tp->setTextStyle(text->localStyle());
+      tp->setStyled(t->styled());
+      tp->setTextStyleType(t->textStyle());
+
+      connect(bb, SIGNAL(accepted()), SLOT(accept()));
+      connect(bb, SIGNAL(rejected()), SLOT(reject()));
+      }
+
+//---------------------------------------------------------
+//   accept
+//---------------------------------------------------------
+
+void TextProperties::accept()
+      {
+      text->setLocalStyle(tp->textStyle());
+
+      QDialog::accept();
+      if (tp->isStyled() != text->styled() || tp->isStyled()) {
+            // text->setTextStyle(tp->textStyleType());  // this sets styled = true
+
+            text->_textStyle = tp->textStyleType();
+            text->setStyled(tp->isStyled());
+            text->styleChanged();
             }
-      }
-
-//---------------------------------------------------------
-//   mmToggled
-//---------------------------------------------------------
-
-void TextProp::mmToggled(bool val)
-      {
-      QString unit(val ? tr("mm", "millimeter unit") : tr("sp", "spatium unit"));
-      xOffset->setSuffix(unit);
-      yOffset->setSuffix(unit);
-      }
-
-//---------------------------------------------------------
-//   setStyled
-//---------------------------------------------------------
-
-void TextProp::setStyled(bool val)
-      {
-      styledGroup->setChecked(val);
-      unstyledGroup->setChecked(!val);
-      }
-
-//---------------------------------------------------------
-//   setTextStyleType
-//---------------------------------------------------------
-
-void TextProp::setTextStyleType(TextStyleType st)
-      {
-      if (st == TEXT_STYLE_INVALID)
-            st = TEXT_STYLE_TITLE;
-      styles->setCurrentIndex(st);
-      }
-
-//---------------------------------------------------------
-//   textStyleType
-//---------------------------------------------------------
-
-TextStyleType TextProp::textStyleType() const
-      {
-      return TextStyleType(styles->currentIndex());
-      }
-
-//---------------------------------------------------------
-//   isStyled
-//---------------------------------------------------------
-
-bool TextProp::isStyled() const
-      {
-      return styledGroup->isChecked();
-      }
-
-//---------------------------------------------------------
-//   set
-//---------------------------------------------------------
-
-void TextProp::setTextStyle(const TextStyle& s)
-      {
-      fontBold->setChecked(s.bold());
-      fontItalic->setChecked(s.italic());
-      fontUnderline->setChecked(s.underline());
-      fontSize->setValue(s.size());
-      color->setColor(s.foregroundColor());
-
-      systemFlag->setChecked(s.systemFlag());
-      int a = s.align();
-      if (a & ALIGN_HCENTER)
-            alignHCenter->setChecked(true);
-      else if (a & ALIGN_RIGHT)
-            alignRight->setChecked(true);
-      else
-            alignLeft->setChecked(true);
-
-      if (a & ALIGN_VCENTER)
-            alignVCenter->setChecked(true);
-      else if (a & ALIGN_BOTTOM)
-            alignBottom->setChecked(true);
-      else if (a & ALIGN_BASELINE)
-            alignBaseline->setChecked(true);
-      else
-            alignTop->setChecked(true);
-
-      QString str;
-      if (s.offsetType() == OFFSET_ABS) {
-            xOffset->setValue(s.xoff() * INCH);
-            yOffset->setValue(s.yoff() * INCH);
-            mmUnit->setChecked(true);
-            curUnit = 0;
-            }
-      else if (s.offsetType() == OFFSET_SPATIUM) {
-            xOffset->setValue(s.xoff());
-            yOffset->setValue(s.yoff());
-            spatiumUnit->setChecked(true);
-            curUnit = 1;
-            }
-      rxOffset->setValue(s.rxoff());
-      ryOffset->setValue(s.ryoff());
-
-      QFont f(s.family());
-      f.setPixelSize(lrint(s.size()));
-      f.setItalic(s.italic());
-      f.setUnderline(s.underline());
-      f.setBold(s.bold());
-      fontSelect->setCurrentFont(f);
-      sizeIsSpatiumDependent->setChecked(s.sizeIsSpatiumDependent());
-
-      frameColor->setColor(s.frameColor());
-      frameWidth->setValue(s.frameWidth());
-      frame->setChecked(s.hasFrame());
-      paddingWidth->setValue(s.paddingWidth());
-      frameRound->setValue(s.frameRound());
-      circleButton->setChecked(s.circle());
-      boxButton->setChecked(!s.circle());
-      }
-
-//---------------------------------------------------------
-//   textStyle
-//---------------------------------------------------------
-
-TextStyle TextProp::textStyle() const
-      {
-      TextStyle s;
-      if (curUnit == 0)
-            s.setOffsetType(OFFSET_ABS);
-      else if (curUnit == 1)
-            s.setOffsetType(OFFSET_SPATIUM);
-      s.setBold(fontBold->isChecked());
-      s.setItalic(fontItalic->isChecked());
-      s.setUnderline(fontUnderline->isChecked());
-      s.setSize(fontSize->value());
-      QFont f = fontSelect->currentFont();
-      s.setFamily(f.family());
-      s.setXoff(xOffset->value() / ((s.offsetType() == OFFSET_ABS) ? INCH : 1.0));
-      s.setYoff(yOffset->value() / ((s.offsetType() == OFFSET_ABS) ? INCH : 1.0));
-      s.setRxoff(rxOffset->value());
-      s.setRyoff(ryOffset->value());
-      s.setFrameColor(frameColor->color());
-      s.setFrameWidth(frameWidth->value());
-      s.setPaddingWidth(paddingWidth->value());
-      s.setCircle(circleButton->isChecked());
-      s.setFrameRound(frameRound->value());
-      s.setHasFrame(frame->isChecked());
-      s.setSystemFlag(systemFlag->isChecked());
-      s.setForegroundColor(color->color());
-      s.setSizeIsSpatiumDependent(sizeIsSpatiumDependent->isChecked());
-
-      Align a = 0;
-      if (alignHCenter->isChecked())
-            a |= ALIGN_HCENTER;
-      else if (alignRight->isChecked())
-            a |= ALIGN_RIGHT;
-
-      if (alignVCenter->isChecked())
-            a |= ALIGN_VCENTER;
-      else if (alignBottom->isChecked())
-            a |= ALIGN_BOTTOM;
-      else if (alignBaseline->isChecked())
-            a |= ALIGN_BASELINE;
-      s.setAlign(a);
-      return s;
-      }
-
-//---------------------------------------------------------
-//   styledToggled
-//---------------------------------------------------------
-
-void TextProp::styledToggled(bool val)
-      {
-      unstyledGroup->setChecked(!val);
-      }
-
-//---------------------------------------------------------
-//   unstyledToggled
-//---------------------------------------------------------
-
-void TextProp::unstyledToggled(bool val)
-      {
-      styledGroup->setChecked(!val);
       }
 

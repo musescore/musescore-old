@@ -18,7 +18,7 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "xml.h"
+#include "libmscore/xml.h"
 #include "sparm_p.h"
 #include "synti.h"
 #include "mscore/seq.h"       // HACK

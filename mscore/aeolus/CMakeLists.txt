@@ -18,6 +18,11 @@
 #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #=============================================================================
 
+include_directories(
+      ${PROJECT_SOURCE_DIR}
+      ${PROJECT_SOURCE_DIR}/libmscore
+      )
+
 subdirs(aeolus)
 
 install(DIRECTORY

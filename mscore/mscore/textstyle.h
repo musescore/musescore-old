@@ -21,11 +21,10 @@
 #ifndef __TEXTSTYLE_H__
 #define __TEXTSTYLE_H__
 
-#include "ui_textstyle.h"
 #include "style.h"
+#include "ui_textstyle.h"
 
 class Score;
-class TextProp;
 
 //---------------------------------------------------------
 //   TextStyleDialog

@@ -32,7 +32,7 @@
 #include "bracket.h"
 #include "tuplet.h"
 #include "slur.h"
-#include "dynamics.h"
+#include "dynamic.h"
 #include "lyrics.h"
 #include "articulation.h"
 #include "al/sig.h"

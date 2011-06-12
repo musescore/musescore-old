@@ -20,14 +20,14 @@
 
 #include "config.h"
 #include "preferences.h"
-#include "event.h"
-#include "instrument.h"
+#include "libmscore/event.h"
+#include "libmscore/instrument.h"
 #include "synti.h"
 #include "fluid/fluid.h"
 #ifdef AEOLUS
 #include "aeolus/aeolus/aeolus.h"
 #endif
-#include "xml.h"
+#include "libmscore/xml.h"
 #include "sparm_p.h"
 
 //---------------------------------------------------------

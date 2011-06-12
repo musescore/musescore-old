@@ -1,3 +1,5 @@
+12.jun (ws)
+      - work in progress: moving gui independent code into libmscore
 11.jun (ws)
       - fix corruption of segmentList (loading of guitar pro files crashed)
       - created "libmscore" which will contain gui independent code

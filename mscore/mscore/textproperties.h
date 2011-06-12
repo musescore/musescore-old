@@ -1,9 +1,9 @@
 //=============================================================================
 //  MusE Score
 //  Linux Music Score Editor
-//  $Id$
+//  $Id: text.h -1   $
 //
-//  Copyright (C) 2009 Werner Schweer and others
+//  Copyright (C) 2002-2010 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -21,37 +21,25 @@
 #ifndef __TEXTPROPERTIES_H__
 #define __TEXTPROPERTIES_H__
 
-#include "ui_textproperties.h"
-#include "style.h"
-
+class TextProp;
 class Text;
-class Score;
 
 //---------------------------------------------------------
-//   TextProp
+//   TextProperties
 //---------------------------------------------------------
 
-class TextProp : public QWidget, public Ui::TextProperties {
+class TextProperties : public QDialog {
       Q_OBJECT
-
-      int curUnit;
-      bool onlyStyle;
+      TextProp* tp;
+      Text* text;
+      QCheckBox* cb;
 
    private slots:
-      void mmToggled(bool);
-      void styledToggled(bool);
-      void unstyledToggled(bool);
+      virtual void accept();
 
    public:
-      TextProp(QWidget* parent = 0);
-      void setScore(bool _onlyStyle, Score*);
-      void setTextStyle(const TextStyle&);
-      TextStyle textStyle() const;
-      bool isStyled() const;
-      void setStyled(bool val);
-      void setTextStyleType(TextStyleType);
-      TextStyleType textStyleType() const;
+      TextProperties(Text*, QWidget* parent = 0);
+      bool applyToAll() const { return cb->isChecked(); }
       };
 
 #endif
-

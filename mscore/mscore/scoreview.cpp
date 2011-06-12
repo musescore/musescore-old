@@ -38,7 +38,7 @@
 #include "xml.h"
 #include "text.h"
 #include "note.h"
-#include "dynamics.h"
+#include "dynamic.h"
 #include "pedal.h"
 #include "volta.h"
 #include "ottava.h"
@@ -71,6 +71,12 @@
 #include "clef.h"
 #include "scoretab.h"
 #include "painterqt.h"
+#include "libmscore/articulation.h"
+#include "libmscore/bend.h"
+
+#include "articulationprop.h"
+#include "bendproperties.h"
+#include "boxproperties.h"
 
 
 static const QEvent::Type CloneDrag = QEvent::Type(QEvent::User + 1);
@@ -901,7 +907,37 @@ void ScoreView::objectPopup(const QPoint& pos, Element* obj)
       a = getAction("edit-element");
       popup->addAction(a);
       a->setEnabled(obj->isEditable());
-      obj->genPropertyMenu(popup);
+
+      if (obj->type() == ARTICULATION) {
+            obj->Element::genPropertyMenu(popup);
+            a = popup->addAction(tr("Articulation Properties..."));
+            a->setData("a-props");
+            }
+      else if (obj->type() == BEND) {
+            obj->Element::genPropertyMenu(popup);
+            a = popup->addAction(tr("Bend Properties..."));
+            a->setData("b-props");
+            }
+      else if (obj->type() == HBOX) {
+            QMenu* textMenu = popup->addMenu(tr("Add"));
+            textMenu->addAction(getAction("frame-text"));
+            textMenu->addAction(getAction("picture"));
+            popup->addAction(tr("Frame Properties..."))->setData("f-props");
+            }
+      else if (obj->type() == VBOX) {
+            QMenu* textMenu = popup->addMenu(tr("Add"));
+            textMenu->addAction(getAction("frame-text"));
+            textMenu->addAction(getAction("title-text"));
+            textMenu->addAction(getAction("subtitle-text"));
+            textMenu->addAction(getAction("composer-text"));
+            textMenu->addAction(getAction("poet-text"));
+            textMenu->addAction(getAction("insert-hbox"));
+            textMenu->addAction(getAction("picture"));
+            popup->addAction(tr("Frame Properties..."))->setData("f-props");
+            }
+      else
+            obj->genPropertyMenu(popup);
+
       popup->addSeparator();
       a = popup->addAction(tr("Object Inspector"));
       a->setData("list");
@@ -929,7 +965,91 @@ void ScoreView::objectPopup(const QPoint& pos, Element* obj)
             score()->selectElementDialog(obj);
       else {
             _score->startCmd();
-            obj->propertyAction(this, cmd);
+            if (cmd == "a-props") {
+                  ArticulationProperties rp(static_cast<Articulation*>(obj));
+                  rp.exec();
+                  }
+            else if (cmd == "b-props") {
+                  Bend* bend = static_cast<Bend*>(obj);
+                  BendProperties bp(bend, 0);
+                  if (bp.exec())
+                        score()->undo()->push(new ChangeBend(bend, bp.points()));
+                  }
+            else if (cmd == "f-props") {
+                  BoxProperties vp(static_cast<Box*>(obj), 0);
+                  vp.exec();
+                  }
+            else if (cmd == "frame-text") {
+                  Text* s = new Text(score());
+                  s->setSubtype(TEXT_FRAME);
+                  s->setTextStyle(TEXT_STYLE_FRAME);
+                  s->setParent(obj);
+                  score()->undoAddElement(s);
+                  score()->select(s, SELECT_SINGLE, 0);
+                  startEdit(s);
+                  score()->setLayoutAll(true);
+                  }
+            else if (cmd == "picture") {
+                  score()->addImage(static_cast<HBox*>(obj));
+                  }
+            else if (cmd == "frame-text") {
+                  Text* t = new Text(score());
+                  t->setSubtype(TEXT_FRAME);
+                  t->setTextStyle(TEXT_STYLE_FRAME);
+                  t->setParent(obj);
+                  score()->undoAddElement(t);
+                  score()->select(t, SELECT_SINGLE, 0);
+                  startEdit(t);
+                  }
+            else if (cmd == "title-text") {
+                  Text* t = new Text(score());
+                  t->setSubtype(TEXT_TITLE);
+                  t->setTextStyle(TEXT_STYLE_TITLE);
+                  t->setParent(obj);
+                  score()->undoAddElement(t);
+                  score()->select(t, SELECT_SINGLE, 0);
+                  startEdit(t);
+                  }
+            else if (cmd == "subtitle-text") {
+                  Text* t = new Text(score());
+                  t->setSubtype(TEXT_SUBTITLE);
+                  t->setTextStyle(TEXT_STYLE_SUBTITLE);
+                  t->setParent(obj);
+                  score()->undoAddElement(t);
+                  score()->select(t, SELECT_SINGLE, 0);
+                  startEdit(t);
+                  }
+            else if (cmd == "composer-text") {
+                  Text* t = new Text(score());
+                  t->setSubtype(TEXT_COMPOSER);
+                  t->setTextStyle(TEXT_STYLE_COMPOSER);
+                  t->setParent(obj);
+                  score()->undoAddElement(t);
+                  score()->select(t, SELECT_SINGLE, 0);
+                  startEdit(t);
+                  }
+            else if (cmd == "poet-text") {
+                  Text* t = new Text(score());
+                  t->setSubtype(TEXT_POET);
+                  t->setTextStyle(TEXT_STYLE_POET);
+                  t->setParent(obj);
+                  score()->undoAddElement(t);
+                  score()->select(t, SELECT_SINGLE, 0);
+                  startEdit(t);
+                  }
+            else if (cmd == "insert-hbox") {
+                  HBox* s = new HBox(score());
+                  double w = width() - s->leftMargin() * DPMM - s->rightMargin() * DPMM;
+                  s->setBoxWidth(Spatium(w / s->spatium()));
+                  s->setParent(obj);
+                  score()->undoAddElement(s);
+                  score()->select(s, SELECT_SINGLE, 0);
+                  startEdit(s);
+                  }
+            else if (cmd == "picture")
+                  score()->addImage(obj);
+            else
+                  obj->Element::propertyAction(this, cmd);
             _score->endCmd();
             }
       }

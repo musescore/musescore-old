@@ -53,7 +53,7 @@
 #include "musicxml.h"
 #include "slur.h"
 #include "hairpin.h"
-#include "dynamics.h"
+#include "dynamic.h"
 #include "barline.h"
 #include "timesig.h"
 #include "ottava.h"

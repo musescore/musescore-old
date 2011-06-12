@@ -37,7 +37,7 @@
 #include "clef.h"
 #include "barline.h"
 #include "hook.h"
-#include "dynamics.h"
+#include "dynamic.h"
 #include "slur.h"
 #include "lyrics.h"
 #include "volta.h"

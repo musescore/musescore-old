@@ -23,7 +23,7 @@
 #include "globals.h"
 #include "score.h"
 #include "scoreview.h"
-#include "textproperties.h"
+#include "textprop.h"
 #include "undo.h"
 
 //---------------------------------------------------------

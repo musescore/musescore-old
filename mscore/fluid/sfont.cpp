@@ -27,7 +27,7 @@
 
 // #define DEBUG_SFONT
 
-#include "xml.h"
+#include "libmscore/xml.h"
 
 extern bool debugMode;
 

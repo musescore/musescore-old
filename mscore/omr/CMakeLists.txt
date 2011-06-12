@@ -20,6 +20,11 @@
 
 include (${PROJECT_SOURCE_DIR}/cmake/gch.cmake)
 
+include_directories(
+      ${PROJECT_SOURCE_DIR}
+      ${PROJECT_SOURCE_DIR}/libmscore
+      )
+
 QT4_WRAP_CPP (mocs
       omrview.h
       )

@@ -18,7 +18,7 @@
  * 02111-1307, USA
  */
 
-#include "event.h"
+#include "libmscore/event.h"
 #include "fluid.h"
 #include "sfont.h"
 #include "conv.h"

@@ -25,7 +25,7 @@
 #include "score.h"
 #include "textpalette.h"
 
-extern TextPalette* textPalette;
+TextPalette* textPalette;
 
 //---------------------------------------------------------
 //   textTools
