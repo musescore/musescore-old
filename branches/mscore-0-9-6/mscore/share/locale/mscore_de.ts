@@ -3262,7 +3262,7 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>Untitled</source>
-        <translation>ohneName</translation>
+        <translation>Unbenannt</translation>
     </message>
     <message>
         <source>Drums</source>
@@ -4668,7 +4668,7 @@ in Pixel (größerer Wert gleich größerer Radius)</translation>
     </message>
     <message>
         <source>Space</source>
-        <translation>Leertaste</translation>
+        <translation>Spatium</translation>
     </message>
     <message>
         <source>mm</source>
@@ -5825,7 +5825,7 @@ abgebrochen. Abspielen nicht möglich.&#13;
     </message>
     <message>
         <source>Space</source>
-        <translation>Leertaste</translation>
+        <translation>Spatium</translation>
     </message>
     <message>
         <source>Text</source>
@@ -6096,7 +6096,7 @@ abgebrochen. Abspielen nicht möglich.&#13;
     </message>
     <message>
         <source>Space</source>
-        <translation>Leertaste</translation>
+        <translation>Spatium</translation>
     </message>
     <message>
         <source>enable text frame</source>
