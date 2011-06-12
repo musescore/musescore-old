@@ -56,7 +56,7 @@
 #include "textline.h"
 #include "keysig.h"
 #include "volta.h"
-#include "dynamics.h"
+#include "dynamic.h"
 #include "box.h"
 #include "harmony.h"
 #include "system.h"

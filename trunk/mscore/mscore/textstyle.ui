@@ -64,7 +64,7 @@
   <customwidget>
    <class>TextProp</class>
    <extends>QWidget</extends>
-   <header>textproperties.h</header>
+   <header>textprop.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

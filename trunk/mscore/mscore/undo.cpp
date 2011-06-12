@@ -54,7 +54,7 @@
 #include "pitchspelling.h"
 #include "part.h"
 #include "beam.h"
-#include "dynamics.h"
+#include "dynamic.h"
 #include "seq.h"
 #include "page.h"
 #include "keysig.h"

@@ -32,7 +32,7 @@
 #include "chord.h"
 #include "clef.h"
 #include "drumset.h"
-#include "dynamics.h"
+#include "dynamic.h"
 #include "hairpin.h"
 #include "harmony.h"
 #include "glissando.h"

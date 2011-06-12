@@ -42,7 +42,7 @@
 #include "chord.h"
 #include "clef.h"
 #include "config.h"
-#include "dynamics.h"
+#include "dynamic.h"
 #include "element.h"
 #include <fstream>
 #include "glissando.h"

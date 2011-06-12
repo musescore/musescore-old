@@ -25,6 +25,7 @@ SET_SOURCE_FILES_PROPERTIES(revision.h PROPERTIES GENERATED TRUE)
 include_directories(
       ${CMAKE_CURRENT_BINARY_DIR}
       ${PROJECT_SOURCE_DIR}
+      ${PROJECT_SOURCE_DIR}/libmscore
       ${PROJECT_SOURCE_DIR}/scriptdebug
       ${PROJECT_SOURCE_DIR}/zarchive
       ${PROJECT_SOURCE_DIR}/fluid
@@ -62,15 +63,16 @@ QT4_WRAP_CPP (mocs
       greendotbutton.h recordbutton.h editdrumset.h editstaff.h selinstrument.h
       voltaproperties.h chordproperties.h restproperties.h timesigproperties.h
       jumpproperties.h markerproperties.h boxproperties.h newwizard.h
-      transposedialog.h chordedit.h tempotext.h importmidi.h textline.h
-      excerptsdialog.h stafftext.h image.h tuplet.h glissando.h
-      script.h articulation.h metaedit.h magbox.h voiceselector.h
-      text.h dynamics.h undo.h textproperties.h
+      transposedialog.h chordedit.h tempoproperties.h importmidi.h lineproperties.h
+      excerptsdialog.h stafftextproperties.h imageproperties.h glissandoproperties.h
+      script.h articulationprop.h metaedit.h magbox.h voiceselector.h
+      textprop.h dynamicprop.h undo.h textproperties.h tupletdialog.h tupletproperties.h
       slurproperties.h selectdialog.h synthcontrol.h drumroll.h pianoroll.h
       piano.h ruler.h
       pianoview.h drumview.h splitstaff.h scoretab.h keyedit.h keycanvas.h harmonyedit.h
-      harmonycanvas.h updatechecker.h fret.h fretcanvas.h editstafftype.h
-      prefsdialog.h layoutbreak.h hairpin.h bend.h bendcanvas.h tremolobar.h tremolobarcanvas.h
+      harmonycanvas.h updatechecker.h fretproperties.h fretcanvas.h editstafftype.h
+      prefsdialog.h sectionbreakprop.h hairpinprop.h bendproperties.h
+      bendcanvas.h tremolobarprop.h tremolobarcanvas.h
       drumtools.h texteditor.h texttools.h pianotools.h editpitch.h  editstringdata.h
       editraster.h mediadialog.h chordeditor.h chordview.h album.h layer.h
       webpage.h
@@ -130,46 +132,35 @@ add_executable ( ${ExecutableName}
       ${PCH}
       ${resource_file}
 
-      actions.cpp accidental.cpp barline.cpp beam.cpp stem.cpp
-      bracket.cpp scoreview.cpp chord.cpp chordrest.cpp clef.cpp
-      cmd.cpp dynamics.cpp edit.cpp editinstrument.cpp editstyle.cpp
-      edittempo.cpp element.cpp exportxml.cpp file.cpp
-      hairpin.cpp icons.cpp importbww.cpp importxml.cpp instrdialog.cpp
-      key.cpp keyb.cpp layout.cpp layoutbreak.cpp line.cpp inspector.cpp
-      measure.cpp menus.cpp midifile.cpp importmidi.cpp mscore.cpp
-      navigate.cpp navigator.cpp note.cpp ottava.cpp
-      page.cpp pagesettings.cpp palette.cpp part.cpp
-      mixer.cpp pedal.cpp playpanel.cpp preferences.cpp measureproperties.cpp
-      preview.cpp rest.cpp score.cpp segment.cpp select.cpp
-      seq.cpp slur.cpp staff.cpp style.cpp instrtemplate.cpp boxproperties.cpp
-      sym.cpp sym.h symbol.cpp symbol.h hook.cpp hook.h
-      system.cpp text.cpp textline.cpp textpalette.cpp textstyle.cpp
-      timedialog.cpp symboldialog.cpp trill.cpp tuplet.cpp shortcutcapturedialog.cpp
-      undo.cpp utils.cpp xml.cpp timesig.cpp lyrics.cpp bsp.cpp
-      volta.cpp simplebutton.cpp image.cpp keyfinder.cpp
-      pitchspelling.cpp musedata.cpp keysig.cpp arpeggio.cpp breath.cpp
-      glissando.cpp lilypond.cpp exportly.cpp box.cpp measurebase.cpp
-      editdrumset.cpp editstaff.cpp drumset.cpp tremolo.cpp repeat.cpp
-      voltaproperties.cpp chordproperties.cpp restproperties.cpp timesigproperties.cpp
-      newwizard.cpp transposedialog.cpp bb.cpp chordlist.cpp
-      harmony.cpp chordedit.cpp plugins.cpp tempotext.cpp
-      excerptsdialog.cpp excerpt.cpp stafftext.cpp instrument.cpp durationtype.cpp
-      event.cpp rendermidi.cpp articulation.cpp metaedit.cpp
-      fifo.cpp spacer.cpp magbox.cpp voiceselector.cpp capella.cpp
-      scscore.cpp sccursor.cpp scchord.cpp scnote.cpp scpart.cpp sctext.cpp scmeasure.cpp scpageformat.cpp
-      exportaudio.cpp repeatlist.cpp velo.cpp exportmidi.cpp textproperties.cpp
-      screst.cpp scharmony.cpp slurproperties.cpp synthcontrol.cpp
-      canonical.cpp drumroll.cpp pianoroll.cpp piano.cpp ruler.cpp pianoview.cpp drumview.cpp
-      splitstaff.cpp scoretab.cpp keyedit.cpp harmonyedit.cpp updatechecker.cpp
-      importove.cpp ove.cpp interval.cpp check.cpp tablature.cpp
-      fret.cpp stafftype.cpp staffstate.cpp spanner.cpp fingering.cpp
-      shadownote.cpp pitch.cpp importgtp.cpp revisions.cpp bend.cpp tremolobar.cpp
-      noteevent.cpp chordline.cpp lasso.cpp fotomode.cpp drumtools.cpp
-      elementlayout.cpp selinstrument.cpp instrchange.cpp texteditor.cpp
-      cursor.cpp textframe.cpp editstafftype.cpp texttools.cpp editpitch.cpp
-      editstringdata.cpp editraster.cpp iname.cpp pianotools.cpp mediadialog.cpp
-      cleflist.cpp profile.cpp exportmp3.cpp chordeditor.cpp chordview.cpp
-      album.cpp layer.cpp webpage.cpp painterqt.cpp
+      actions.cpp scoreview.cpp cmd.cpp editinstrument.cpp editstyle.cpp
+      edittempo.cpp exportxml.cpp icons.cpp importbww.cpp importxml.cpp
+      instrdialog.cpp inspector.cpp menus.cpp midifile.cpp importmidi.cpp
+      mscore.cpp navigator.cpp pagesettings.cpp palette.cpp
+      mixer.cpp playpanel.cpp preferences.cpp measureproperties.cpp
+      preview.cpp seq.cpp boxproperties.cpp textpalette.cpp
+      timedialog.cpp symboldialog.cpp shortcutcapturedialog.cpp
+      simplebutton.cpp musedata.cpp lilypond.cpp exportly.cpp
+      editdrumset.cpp editstaff.cpp voltaproperties.cpp chordproperties.cpp
+      restproperties.cpp timesigproperties.cpp newwizard.cpp transposedialog.cpp
+      bb.cpp chordedit.cpp plugins.cpp excerptsdialog.cpp
+      metaedit.cpp magbox.cpp voiceselector.cpp capella.cpp
+      scscore.cpp sccursor.cpp scchord.cpp scnote.cpp scpart.cpp sctext.cpp
+      scmeasure.cpp scpageformat.cpp exportaudio.cpp exportmidi.cpp
+      textproperties.cpp screst.cpp scharmony.cpp slurproperties.cpp
+      synthcontrol.cpp canonical.cpp drumroll.cpp pianoroll.cpp piano.cpp
+      pianoview.cpp drumview.cpp scoretab.cpp keyedit.cpp harmonyedit.cpp
+      updatechecker.cpp importove.cpp ove.cpp check.cpp ruler.cpp
+      importgtp.cpp revisions.cpp fotomode.cpp drumtools.cpp
+      selinstrument.cpp texteditor.cpp editstafftype.cpp texttools.cpp editpitch.cpp
+      editstringdata.cpp editraster.cpp pianotools.cpp mediadialog.cpp
+      profile.cpp exportmp3.cpp chordeditor.cpp chordview.cpp
+      album.cpp webpage.cpp painterqt.cpp textstyle.cpp tempoproperties.cpp
+      lineproperties.cpp stafftextproperties.cpp splitstaff.cpp
+      tupletdialog.cpp tupletproperties.cpp glissandoproperties.cpp
+      articulationprop.cpp textprop.cpp dynamicprop.cpp
+      fretproperties.cpp sectionbreakprop.cpp hairpinprop.cpp
+      bendproperties.cpp tremolobarprop.cpp file.cpp keyb.cpp
+      layer.cpp jumpproperties.cpp selectdialog.cpp undo.cpp
       ${OMR_FILES}
       ${AUDIO}
       )
@@ -360,56 +351,56 @@ else (MINGW)
    endif (APPLE)
 endif (MINGW)
 
-if (NOT MINGW AND NOT APPLE)
+#if (NOT MINGW AND NOT APPLE)
 # command line utilities are not build for windows/apple
 #
 #======================================
 #     target smf2xml
 #======================================
-
-   add_executable(
-      smf2xml
+#
+#   add_executable(
+#      smf2xml
 #      ${ui_headers}
-      smf2xml.cpp midifile.cpp event.cpp drumset.cpp xml.cpp
-      )
-   target_link_libraries(smf2xml al ${QT_LIBRARIES} )
-   set_target_properties (
-      smf2xml
-      PROPERTIES
-         COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -g -Wall -Wextra -Winvalid-pch"
-      )
+#      smf2xml.cpp midifile.cpp drumset.cpp xml.cpp
+#      )
+#   target_link_libraries(smf2xml al ${QT_LIBRARIES} )
+#   set_target_properties (
+#      smf2xml
+#      PROPERTIES
+#         COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -g -Wall -Wextra -Winvalid-pch"
+#      )
 
 #======================================
 #     target xml2smf
 #======================================
 
-   add_executable(
-      xml2smf
+#   add_executable(
+#      xml2smf
 #      ${ui_headers}
-      xml2smf.cpp midifile.cpp event.cpp drumset.cpp
-      )
-   target_link_libraries(xml2smf al ${QT_LIBRARIES} )
-   set_target_properties (
-      xml2smf
-      PROPERTIES
-         COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -g -Wall -Wextra -Winvalid-pch"
-      )
+#      xml2smf.cpp midifile.cpp drumset.cpp
+#      )
+#   target_link_libraries(xml2smf al ${QT_LIBRARIES} )
+#   set_target_properties (
+#      xml2smf
+#      PROPERTIES
+#         COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -g -Wall -Wextra -Winvalid-pch"
+#      )
 
 #======================================
 #     target genft
 #     create font table
 #======================================
 
-   add_executable(
-      genft
-      ${ui_headers}
-      genft.cpp
-      )
+#   add_executable(
+#      genft
+#      ${ui_headers}
+#      genft.cpp
+#      )
 
-   target_link_libraries(genft al ${QT_LIBRARIES} -lfreetype)
-   set_target_properties(genft PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -I/usr/include/freetype2 -g -Wall -Wextra -Winvalid-pch")
+#   target_link_libraries(genft al ${QT_LIBRARIES} -lfreetype)
+#   set_target_properties(genft PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h -I/usr/include/freetype2 -g -Wall -Wextra -Winvalid-pch")
 
-endif (NOT MINGW AND NOT APPLE)
+# endif (NOT MINGW AND NOT APPLE)
 
 #======================================
 #     install icons if not embedded

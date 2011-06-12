@@ -42,7 +42,7 @@
 #include "tuplet.h"
 #include "segment.h"
 #include "layoutbreak.h"
-#include "dynamics.h"
+#include "dynamic.h"
 #include "barline.h"
 
 //---------------------------------------------------------

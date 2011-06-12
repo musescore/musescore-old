@@ -36,7 +36,7 @@
 #include "instrdialog.h"
 #include "score.h"
 #include "page.h"
-#include "dynamics.h"
+#include "dynamic.h"
 #include "file.h"
 #include "style.h"
 #include "al/tempo.h"

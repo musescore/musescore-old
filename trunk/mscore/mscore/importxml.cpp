@@ -43,7 +43,7 @@
 #include "hairpin.h"
 #include "tuplet.h"
 #include "segment.h"
-#include "dynamics.h"
+#include "dynamic.h"
 #include "page.h"
 #include "staff.h"
 #include "part.h"

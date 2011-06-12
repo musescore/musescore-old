@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <Ped version="1.0">
   <Status>
-    <geometry x="55" y="0" w="800" h="1000" />
+    <geometry x="731" y="0" w="800" h="1000" />
     <Editor1>
       <KontextList>
         <Kontext>
-          <path>/home/ws/mscore/mscore/trunk/mscore/libmscore/painter.h</path>
-          <column>0</column>
-          <line>53</line>
+          <path>/home/ws/mscore/mscore/trunk/mscore/libmscore/hairpin.h</path>
+          <column>6</column>
+          <line>74</line>
           <xoff>0</xoff>
-          <yoff>15</yoff>
+          <yoff>40</yoff>
           </Kontext>
         <cur>1</cur>
         </KontextList>
       </Editor1>
-    <search></search>
+    <search>textPalette</search>
     <colorify>0</colorify>
     <brackets>1</brackets>
     </Status>
