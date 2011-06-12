@@ -7039,7 +7039,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Reset Beam Mode</source>
-        <translation>Reset beam mode</translation>
+        <translation>Reset Beam Mode</translation>
     </message>
     <message>
         <source>up+shift+ctrl</source>
@@ -7419,7 +7419,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Play Panel</source>
-        <translation>Play panel</translation>
+        <translation>Play Panel</translation>
     </message>
     <message>
         <source>Navigator</source>

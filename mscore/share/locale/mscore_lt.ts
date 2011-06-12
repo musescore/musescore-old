@@ -6,17 +6,17 @@
     <message>
         <location filename="../../mscore/aboutbox.ui" line="489"/>
         <source>AboutBox</source>
-        <translation type="unfinished"/>
+        <translation>Apie programą</translation>
     </message>
     <message>
         <location filename="../../mscore/aboutbox.ui" line="574"/>
         <source>Version: 0.9.0</source>
-        <translation type="unfinished"/>
+        <translation>1.0 laida</translation>
     </message>
     <message>
         <location filename="../../mscore/aboutbox.ui" line="581"/>
         <source>Revision: 628</source>
-        <translation type="unfinished"/>
+        <translation>3996 pataisa</translation>
     </message>
     <message utf8="true">
         <location filename="../../mscore/aboutbox.ui" line="594"/>
@@ -34,12 +34,12 @@ p, li { white-space: pre-wrap; }
 &lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;&#13;
 p, li { white-space: pre-wrap; }&#13;
 &lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Visit &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; for new versions and more information.&lt;/span&gt;&lt;/p&gt;&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Support MuseScore with &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;your donation&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Daugiau sužinokite svetainėje &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;.&lt;/span&gt;&lt;/p&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Prisidėkite prie  MuseScore vystymo &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;asmenine parama&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;&#13;
 &#13;
 &lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2011 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer ir kiti. &lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Visos teisės priklauso autoriams. &lt;/span&gt;&lt;/p&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Leidžiama GNU Bendrosios viešosios licencijos sąlygomis&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -47,17 +47,17 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/mscore.cpp" line="2591"/>
         <source>Unstable Prerelease for Version: </source>
-        <translation type="unfinished"/>
+        <translation>Nestabilioji išankstinė %1 laidos versija </translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="2593"/>
         <source>Version: </source>
-        <translation type="unfinished"/>
+        <translation>%1 versija </translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="2595"/>
         <source>Revision: %1</source>
-        <translation type="unfinished"/>
+        <translation>Pataisa: %1</translation>
     </message>
 </context>
 <context>
@@ -66,7 +66,7 @@ p, li { white-space: pre-wrap; }&#13;
         <location filename="../../mscore/menus.cpp" line="411"/>
         <location filename="../../mscore/menus.cpp" line="932"/>
         <source>round bracket</source>
-        <translation type="unfinished"/>
+        <translation>skliaustai</translation>
     </message>
 </context>
 <context>
@@ -74,7 +74,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/articulation.cpp" line="157"/>
         <source>Articulation Properties...</source>
-        <translation type="unfinished"/>
+        <translation>Artikuliacijos ženklo savybės...</translation>
     </message>
 </context>
 <context>
@@ -82,17 +82,17 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/articulation.ui" line="13"/>
         <source>MuseScore: Articulations Properties</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: artikuliacijos savybės</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.ui" line="39"/>
         <source>Channel</source>
-        <translation type="unfinished"/>
+        <translation>Kanalas</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.ui" line="57"/>
         <source>Midi Action</source>
-        <translation type="unfinished"/>
+        <translation>MIDI veiksmas</translation>
     </message>
 </context>
 <context>
@@ -100,17 +100,17 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/barline.ui" line="16"/>
         <source>Form</source>
-        <translation type="unfinished"/>
+        <translation>Nuo</translation>
     </message>
     <message>
         <location filename="../../mscore/barline.ui" line="28"/>
         <source>BarLine</source>
-        <translation type="unfinished"/>
+        <translation>Takto brūkšnys</translation>
     </message>
     <message>
         <location filename="../../mscore/barline.ui" line="51"/>
         <source>SubType:</source>
-        <translation type="unfinished"/>
+        <translation>Potipis:</translation>
     </message>
 </context>
 <context>
@@ -118,17 +118,17 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/beam.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"/>
+        <translation>Forma</translation>
     </message>
     <message>
         <location filename="../../mscore/beam.ui" line="44"/>
         <source>up:</source>
-        <translation type="unfinished"/>
+        <translation>aukštyn</translation>
     </message>
     <message>
         <location filename="../../mscore/beam.ui" line="62"/>
         <source>Chord/Rest</source>
-        <translation type="unfinished"/>
+        <translation>Akordas/pauzė</translation>
     </message>
 </context>
 <context>
@@ -136,17 +136,17 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/boxproperties.ui" line="16"/>
         <source>MuseScore: Frame Properties</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: rėmelio savybės</translation>
     </message>
     <message>
         <location filename="../../mscore/boxproperties.ui" line="42"/>
         <source>Margins</source>
-        <translation type="unfinished"/>
+        <translation>Paraštės</translation>
     </message>
     <message>
         <location filename="../../mscore/boxproperties.ui" line="57"/>
         <source>left:</source>
-        <translation type="unfinished"/>
+        <translation>kairė:</translation>
     </message>
     <message>
         <location filename="../../mscore/boxproperties.ui" line="70"/>
@@ -154,22 +154,22 @@ p, li { white-space: pre-wrap; }&#13;
         <location filename="../../mscore/boxproperties.ui" line="102"/>
         <location filename="../../mscore/boxproperties.ui" line="131"/>
         <source>mm</source>
-        <translation type="unfinished"/>
+        <translation>mm</translation>
     </message>
     <message>
         <location filename="../../mscore/boxproperties.ui" line="118"/>
         <source>right:</source>
-        <translation type="unfinished"/>
+        <translation>dešinė:</translation>
     </message>
     <message>
         <location filename="../../mscore/boxproperties.ui" line="147"/>
         <source>bottom:</source>
-        <translation type="unfinished"/>
+        <translation>apatinė:</translation>
     </message>
     <message>
         <location filename="../../mscore/boxproperties.ui" line="160"/>
         <source>top:</source>
-        <translation type="unfinished"/>
+        <translation>viršutinė:</translation>
     </message>
 </context>
 <context>
@@ -177,7 +177,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/chord.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"/>
+        <translation>Forma</translation>
     </message>
     <message>
         <location filename="../../mscore/chord.ui" line="76"/>
@@ -200,67 +200,67 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/chordedit.ui" line="13"/>
         <source>MuseScore: Harmony Properties</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: harmonijos savybės</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="26"/>
         <source>TextLabel</source>
-        <translation type="unfinished"/>
+        <translation>Užrašas</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="33"/>
         <source>Root</source>
-        <translation type="unfinished"/>
+        <translation>Pagrindinis tonas</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="51"/>
         <source>C</source>
-        <translation type="unfinished"/>
+        <translation>C</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="61"/>
         <source>E</source>
-        <translation type="unfinished"/>
+        <translation>E</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="68"/>
         <source>bb (double flat)</source>
-        <translation type="unfinished"/>
+        <translation>bb (dvigubas bemolis)</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="75"/>
         <source>F</source>
-        <translation type="unfinished"/>
+        <translation>F</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="82"/>
         <source>b (flat)</source>
-        <translation type="unfinished"/>
+        <translation>b (bemolis)</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="89"/>
         <source>G</source>
-        <translation type="unfinished"/>
+        <translation>G</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="96"/>
         <source>(no accidental)</source>
-        <translation type="unfinished"/>
+        <translation>(be alteracijos ženklo)</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="103"/>
         <source>A</source>
-        <translation type="unfinished"/>
+        <translation>A</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="110"/>
         <source># (sharp)</source>
-        <translation type="unfinished"/>
+        <translation># (diezas)</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="117"/>
         <source>B</source>
-        <translation type="unfinished"/>
+        <translation>H</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="124"/>
@@ -394,7 +394,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/chordedit.ui" line="299"/>
         <source>Other:</source>
-        <translation type="unfinished"/>
+        <translation>Kita:</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="312"/>
@@ -955,7 +955,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/chordedit.ui" line="993"/>
         <source>Degrees</source>
-        <translation type="unfinished"/>
+        <translation>Laipsniai(-ių)</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="1008"/>
@@ -965,12 +965,12 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/chordedit.ui" line="1015"/>
         <source>Delete</source>
-        <translation type="unfinished"/>
+        <translation>Pašalinti</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="1025"/>
         <source>Bass Note / Inversion</source>
-        <translation type="unfinished"/>
+        <translation>Pagrindinis tonas / apvertimas</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="1035"/>
@@ -1078,17 +1078,17 @@ p, li { white-space: pre-wrap; }&#13;
         <location filename="../../mscore/chordproperties.ui" line="14"/>
         <location filename="../../mscore/chordproperties.ui" line="50"/>
         <source>Chord Properties</source>
-        <translation type="unfinished"/>
+        <translation>Akordo ypatybės</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="61"/>
         <source>small</source>
-        <translation type="unfinished"/>
+        <translation>mažoji</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="68"/>
         <source>stemless</source>
-        <translation type="unfinished"/>
+        <translation>be kotelio</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="82"/>
@@ -1110,7 +1110,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/chordproperties.ui" line="122"/>
         <source>stem direction</source>
-        <translation type="unfinished"/>
+        <translation>kotelio kryptis</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="136"/>
@@ -1125,28 +1125,28 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/chordproperties.ui" line="141"/>
         <source>up</source>
-        <translation type="unfinished"/>
+        <translation>aukštyn</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="146"/>
         <source>down</source>
-        <translation type="unfinished"/>
+        <translation>žemyn</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="165"/>
         <source>Note Properties</source>
-        <translation type="unfinished"/>
+        <translation>natos ypatybės</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="185"/>
         <source>tuning offset</source>
-        <translation type="unfinished"/>
+        <translation>derinimo poslinkis</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="198"/>
         <source> cent</source>
         <extracomment>100 cent = 1 semitone intervall</extracomment>
-        <translation type="unfinished"/>
+        <translation> centas</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="310"/>
@@ -1259,7 +1259,7 @@ p, li { white-space: pre-wrap; }&#13;
         <location filename="../../mscore/chordproperties.ui" line="516"/>
         <source>user</source>
         <extracomment>velocity type</extracomment>
-        <translation type="unfinished"/>
+        <translation>naudotojas</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="254"/>
@@ -1267,22 +1267,22 @@ p, li { white-space: pre-wrap; }&#13;
         <location filename="../../mscore/chordproperties.ui" line="521"/>
         <source>offset</source>
         <extracomment>velocity type</extracomment>
-        <translation type="unfinished"/>
+        <translation>poslinkis</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="278"/>
         <source>note head positon </source>
-        <translation type="unfinished"/>
+        <translation>natos galvutės padėtis </translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="297"/>
         <source>left of stem</source>
-        <translation type="unfinished"/>
+        <translation>kotelio kairėje</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="302"/>
         <source>right of stem</source>
-        <translation type="unfinished"/>
+        <translation>kotelio dešinėje</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="439"/>

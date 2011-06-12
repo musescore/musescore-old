@@ -3651,7 +3651,7 @@ er ikke kompatibelt med nåværende grensesnitt</translation>
     </message>
     <message>
         <source>Bar %1 Beat %2.%3</source>
-        <translation>Taktstrek %1 Slag %2.%3</translation>
+        <translation>Takt %1 Slag %2.%3</translation>
     </message>
     <message>
         <source>Error loading plugin

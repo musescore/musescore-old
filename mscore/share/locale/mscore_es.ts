@@ -1347,7 +1347,7 @@ error: </translation>
     </message>
     <message>
         <source>Lines:</source>
-        <translation>Barras:</translation>
+        <translation>Líneas:</translation>
     </message>
     <message>
         <source>Small</source>

@@ -132,7 +132,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>MuseScore: Frame Properties</source>
-        <translation>MuseScore: Venstereigenschappen</translation>
+        <translation>MuseScore: Kader eigenschappen</translation>
     </message>
     <message>
         <source>right:</source>
@@ -882,7 +882,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>additional trailing space</source>
-        <translation>extra ruimte achteraan</translation>
+        <translation>extra ruimte erna</translation>
     </message>
     <message>
         <source>offtime</source>
@@ -931,7 +931,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>additional leading space </source>
-        <translation>extra ruimte vooraan </translation>
+        <translation>extra ruimte ervoor </translation>
     </message>
     <message>
         <source>note head positon </source>
@@ -949,7 +949,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source> ticks</source>
-        <translation> tiks</translation>
+        <translation> tikken</translation>
     </message>
     <message>
         <source>Note Head Group</source>
@@ -1647,7 +1647,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>V-frame lower margin</source>
-        <translation>V-kader ondergrens</translation>
+        <translation>V-kader ondermarge</translation>
     </message>
     <message>
         <source>Small note size</source>
@@ -1667,7 +1667,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>V-frame upper margin</source>
-        <translation>V-kader bovengrens</translation>
+        <translation>V-kader bovenmarge</translation>
     </message>
     <message>
         <source>Music lower margin</source>
@@ -1675,7 +1675,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Shortest stem</source>
-        <translation>Verkorte stok</translation>
+        <translation>Kortste stoklengte</translation>
     </message>
     <message>
         <source>Small clef size</source>
@@ -1687,19 +1687,19 @@ space unit</extracomment>
     </message>
     <message>
         <source>Begin repeat left margin</source>
-        <translation>Begin herhalen linkermarge</translation>
+        <translation>Begin herhalen linker marge</translation>
     </message>
     <message>
         <source>Fix Measure Width</source>
-        <translation>Bevestig Maat Breedte</translation>
+        <translation>Vaste breedte per maat</translation>
     </message>
     <message>
         <source>Right margin</source>
-        <translation>Marge rechts</translation>
+        <translation>Rechter marge</translation>
     </message>
     <message>
         <source>Spacing (1=tight)</source>
-        <translation>Tussenruimte (1 = vast)</translation>
+        <translation>Tussenruimte (1=krap)</translation>
     </message>
     <message>
         <source>Use German names</source>
@@ -1719,7 +1719,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Create key sig for all systems</source>
-        <translation>Creëer voortekening voor alle systemen</translation>
+        <translation>Creëer toonsoort voor alle systemen</translation>
     </message>
     <message>
         <source>interval</source>
@@ -1755,7 +1755,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Time sig. left margin</source>
-        <translation>Marge maattekens links</translation>
+        <translation>Maatsoort linker marge</translation>
     </message>
     <message>
         <source>Barline at start of single staff</source>
@@ -1763,7 +1763,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Fix Number of Measures/System:</source>
-        <translation>Zet het aantal maatsystemen vast</translation>
+        <translation>Vast aantal maten per systeem</translation>
     </message>
     <message>
         <source>Arpeggios</source>
@@ -1791,7 +1791,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Left margin</source>
-        <translation>Marge links</translation>
+        <translation>Linker marge</translation>
     </message>
     <message>
         <source>Line width</source>
@@ -1839,7 +1839,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Progression</source>
-        <translation>Vooruitgang</translation>
+        <translation>Stapgrootte</translation>
     </message>
     <message>
         <source>Chordnames</source>
@@ -1899,15 +1899,15 @@ space unit</extracomment>
     </message>
     <message>
         <source>Minimum slope</source>
-        <translation>Minimum schuinte</translation>
+        <translation>Minimum helling</translation>
     </message>
     <message>
         <source>Key sig. left margin</source>
-        <translation>Marge voortekens links</translation>
+        <translation>Toonsoort linker marge</translation>
     </message>
     <message>
         <source>Maximum slope</source>
-        <translation>Maximum schuinte</translation>
+        <translation>Maximum helling</translation>
     </message>
     <message>
         <source>Measure Numbers</source>
@@ -1948,7 +1948,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Clef left margin</source>
-        <translation>Marge sleutel links</translation>
+        <translation>Sleutel linker marge</translation>
     </message>
     <message>
         <source>Create time signatures</source>
@@ -1967,7 +1967,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>BPM:</source>
-        <translation>BPM:</translation>
+        <translation>M.M.:</translation>
     </message>
     <message>
         <source>Text:</source>
@@ -2465,7 +2465,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>Create Key Signature</source>
-        <translation>Kies Maatsoort</translation>
+        <translation>Creëer Toonsoort</translation>
     </message>
     <message>
         <source>add time signature to palette</source>
@@ -2989,7 +2989,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>Drums</source>
-        <translation>Drums</translation>
+        <translation>Slagwerk</translation>
     </message>
     <message>
         <source>&amp;Lines...</source>
@@ -3069,7 +3069,7 @@ mislukt: </translation>
     </message>
     <message>
         <source>Beam Properties</source>
-        <translation>Eigenschappen Waardestreep</translation>
+        <translation>Waardestreep eigenschappen</translation>
     </message>
     <message>
         <source>Bb major, G minor</source>
@@ -3111,7 +3111,7 @@ voordat u afsluit?</translation>
     </message>
     <message>
         <source>Staff spacer</source>
-        <translation>Notenbalk lege ruimte</translation>
+        <translation>Notenbalk afstandhouder</translation>
     </message>
     <message>
         <source>Akkolade</source>
@@ -3179,7 +3179,7 @@ voordat u afsluit?</translation>
     </message>
     <message>
         <source>4/4 common time</source>
-        <translation>4/4 gewone maat</translation>
+        <translation>Gewone vierkwartsmaat (C)</translation>
     </message>
     <message>
         <source>Breath</source>
@@ -3187,7 +3187,7 @@ voordat u afsluit?</translation>
     </message>
     <message>
         <source>Arpeggio &amp;&amp; Glissando</source>
-        <translation>Gebroken akkoord &amp;en glissando</translation>
+        <translation>Arpeggio &amp;&amp; glissando</translation>
     </message>
     <message>
         <source>Dashed</source>
@@ -3279,7 +3279,7 @@ voordat u afsluit?</translation>
     </message>
     <message>
         <source>Seconda volta 2</source>
-        <translation>Seconda volta</translation>
+        <translation>Seconda volta 2</translation>
     </message>
     <message>
         <source>Note Heads</source>
@@ -3295,11 +3295,11 @@ voordat u afsluit?</translation>
     </message>
     <message>
         <source>Line break</source>
-        <translation>Lijn afbreken</translation>
+        <translation>Regel-einde</translation>
     </message>
     <message>
         <source>Page break</source>
-        <translation>Pagina afbreken</translation>
+        <translation>Pagina-einde</translation>
     </message>
     <message>
         <source>Repeat measure sign</source>
@@ -3327,7 +3327,7 @@ voordat u afsluit?</translation>
     </message>
     <message>
         <source>Repeat Text</source>
-        <translation>Herhaal tekst</translation>
+        <translation>Herhaling tekst</translation>
     </message>
     <message>
         <source>Key Signatures</source>
@@ -3375,11 +3375,11 @@ voordat u afsluit?</translation>
     </message>
     <message>
         <source>Arpeggio</source>
-        <translation>Gebroken akkoord</translation>
+        <translation>Arpeggio</translation>
     </message>
     <message>
         <source>About&amp;Qt</source>
-        <translation>Over&amp; Qt</translation>
+        <translation>Over &amp;Qt</translation>
     </message>
     <message>
         <source>Caesura</source>
@@ -3465,7 +3465,7 @@ Sessie herstellen?</translation>
     </message>
     <message>
         <source>MuseScore: Breaks &amp; Spacer</source>
-        <translation>Onderbrekingen en spaties</translation>
+        <translation>Musescore: Pagina-opmaak</translation>
     </message>
     <message>
         <source>MuseScore: Barlines</source>
@@ -3473,7 +3473,7 @@ Sessie herstellen?</translation>
     </message>
     <message>
         <source>File Operations</source>
-        <translation>Bestand Verrichtingen</translation>
+        <translation>Bestand acties</translation>
     </message>
     <message>
         <source>Accidentals</source>
@@ -3497,7 +3497,7 @@ Sessie herstellen?</translation>
     </message>
     <message>
         <source>Auto beam</source>
-        <translation>Automatisch paatsen van waardestrepen</translation>
+        <translation>Automatische waardestrepen</translation>
     </message>
     <message>
         <source>&amp;Layout</source>
@@ -3561,7 +3561,7 @@ Probeer "Online handboek" in het menu "Help".</translation>
     </message>
     <message>
         <source>MuseScore: Accidentals</source>
-        <translation>MuseScore: Toevallige Voortekens</translation>
+        <translation>MuseScore: Voortekens</translation>
     </message>
     <message>
         <source>D major, B minor</source>
@@ -3617,7 +3617,7 @@ Probeer "Online handboek" in het menu "Help".</translation>
     </message>
     <message>
         <source>Open &amp;Recent</source>
-        <translation>Open recent</translation>
+        <translation>Open &amp;Recent</translation>
     </message>
     <message>
         <source>InstrumentsLong</source>
@@ -3726,7 +3726,7 @@ is niet compactibel met de huidige interface</translation>
     </message>
     <message>
         <source>Create new score from scratch</source>
-        <translation>Creëer een nieuwe partituur vanaf nul</translation>
+        <translation>Creëer een lege partituur</translation>
     </message>
     <message>
         <source>Composer:</source>
@@ -3753,14 +3753,14 @@ is niet compactibel met de huidige interface</translation>
     </message>
     <message>
         <source>This wizard creates a new score</source>
-        <translation>Met deze wizard kan je een nieuwe partituur creëeren</translation>
+        <translation>Met deze wizard maak je een nieuwe partituur</translation>
     </message>
 </context>
 <context>
     <name>NewWizardPage2</name>
     <message>
         <source>Define a set of instruments. Each instrument is represented by one or more staves</source>
-        <translation>Kies een of meerdere instrumenten. Elk instrument wordt vertegenwoordigd door één of meerdere notenbalken</translation>
+        <translation>Kies een of meerdere instrumenten. Elk instrument komt terecht op één of meer notenbalken</translation>
     </message>
     <message>
         <source>Create New Score</source>
@@ -4748,7 +4748,7 @@ is niet compactibel met de huidige interface</translation>
     </message>
     <message>
         <source>Character Set used when import non-unicode strings. (For binary file import)</source>
-        <translation type="unfinished"/>
+        <translation>Karakterset voor import van non-unicode tekst. (import van binaire bestanden)</translation>
     </message>
     <message>
         <source>Character Set</source>

@@ -9726,7 +9726,7 @@ sua versão do MuseScore é muito antiga.</translation>
     </message>
     <message>
         <source>allabreve</source>
-        <translation>compasso meio comum</translation>
+        <translation>meio compasso comum</translation>
     </message>
     <message>
         <source>pedalasterisk</source>

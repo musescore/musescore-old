@@ -1484,7 +1484,7 @@ epäonnistui: </translation>
     </message>
     <message>
         <source>Major Sixth</source>
-        <translation>Suuri sekti</translation>
+        <translation>Suuri seksti</translation>
     </message>
     <message>
         <source>Augmented Sixth</source>
@@ -2141,7 +2141,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Image Properties...</source>
-        <translation>Kuvan omainaisuudet ...</translation>
+        <translation>Kuvan ominaisuudet ...</translation>
     </message>
 </context>
 <context>
@@ -2228,11 +2228,11 @@ space unit</extracomment>
     </message>
     <message>
         <source>Back</source>
-        <translation>Taksepäin</translation>
+        <translation>Taaksepäin</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation>Eteepäin</translation>
+        <translation>Eteenpäin</translation>
     </message>
     <message>
         <source>...</source>
@@ -2271,11 +2271,11 @@ space unit</extracomment>
     </message>
     <message>
         <source>Add Above</source>
-        <translation>Lisää alapuolelle</translation>
+        <translation>Lisää yläpuolelle</translation>
     </message>
     <message>
         <source>Add Below</source>
-        <translation>Lisää yläpuolelle</translation>
+        <translation>Lisää alapuolelle</translation>
     </message>
     <message>
         <source>1</source>

@@ -66,7 +66,7 @@ p, li { white-space: pre-wrap; }&#13;
         <location filename="../../mscore/menus.cpp" line="411"/>
         <location filename="../../mscore/menus.cpp" line="932"/>
         <source>round bracket</source>
-        <translation type="unfinished"/>
+        <translation>parentesiak</translation>
     </message>
 </context>
 <context>
@@ -1725,7 +1725,7 @@ errorea: </translation>
     <message>
         <location filename="../../mscore/editstaff.ui" line="124"/>
         <source>Small</source>
-        <translation type="unfinished"/>
+        <translation>Txikia</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="111"/>
@@ -2759,12 +2759,12 @@ space unit</extracomment>
     <message>
         <location filename="../../mscore/importmidi.ui" line="13"/>
         <source>MuseScore: Midi Import</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: Midi Inportatu</translation>
     </message>
     <message>
         <location filename="../../mscore/importmidi.ui" line="34"/>
         <source>Shortest note on import:</source>
-        <translation type="unfinished"/>
+        <translation>Inportatzeko notarik motzena</translation>
     </message>
     <message>
         <location filename="../../mscore/importmidi.ui" line="42"/>
@@ -2843,12 +2843,12 @@ space unit</extracomment>
     <message>
         <location filename="../../mscore/inspector.ui" line="29"/>
         <source>Back</source>
-        <translation type="unfinished"/>
+        <translation>Atzera</translation>
     </message>
     <message>
         <location filename="../../mscore/inspector.ui" line="40"/>
         <source>Forward</source>
-        <translation type="unfinished"/>
+        <translation>Aurrera</translation>
     </message>
     <message>
         <location filename="../../mscore/inspector.ui" line="51"/>
@@ -3654,12 +3654,12 @@ errorea: </translation>
     <message>
         <location filename="../../mscore/metaedit.ui" line="39"/>
         <source>Movement Title:</source>
-        <translation type="unfinished"/>
+        <translation>Mugimenduaren Izenburua:</translation>
     </message>
     <message>
         <location filename="../../mscore/metaedit.ui" line="49"/>
         <source>Movement Number:</source>
-        <translation type="unfinished"/>
+        <translation>Mugimendu Zenbakia:</translation>
     </message>
     <message>
         <location filename="../../mscore/metaedit.ui" line="59"/>
@@ -3695,27 +3695,27 @@ itxi aurretik?</translation>
     <message>
         <location filename="../../mscore/file.cpp" line="183"/>
         <source>MuseScore Files (*.mscz *.mscx *.msc);;</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore Fitxategiak (*.mscz *.mscx *.msc);;</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="184"/>
         <source>MusicXML Files (*.xml *.mxl);;</source>
-        <translation type="unfinished"/>
+        <translation>MusicXML Fitxategiak (*.xml *.mxl);;</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="185"/>
         <source>MIDI Files (*.mid *.midi *.kar);;</source>
-        <translation type="unfinished"/>
+        <translation>MIDI Fitxategiak (*.mid *.midi *.kar);;</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="186"/>
         <source>Muse Data Files (*.md);;</source>
-        <translation type="unfinished"/>
+        <translation>Muse Data Fitxategiak (*.md);;</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="187"/>
         <source>Capella Files (*.cap);;</source>
-        <translation type="unfinished"/>
+        <translation>Capella Fitxategiak (*.cap);;</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="188"/>
@@ -3735,7 +3735,7 @@ itxi aurretik?</translation>
     <message>
         <location filename="../../mscore/file.cpp" line="191"/>
         <source>All Files (*)</source>
-        <translation type="unfinished"/>
+        <translation>Fitxategi Guztiak (*)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="546"/>
@@ -6008,7 +6008,7 @@ is incompatible with current interface</source>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="2083"/>
         <source>Clear</source>
-        <translation type="unfinished">Garbitu</translation>
+        <translation>Garbitu</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="2090"/>
@@ -6074,14 +6074,18 @@ is incompatible with current interface</source>
         <source>No note selected:
 Please select a single note and retry operation
 </source>
-        <translation type="unfinished"/>
+        <translation>Ez duzu notarik aukeratu:&#13;
+Aukeratu nota bat eta berriro saiatu
+</translation>
     </message>
     <message>
         <location filename="../../mscore/utils.cpp" line="384"/>
         <source>No note or rest selected:
 Please select a single note or rest and retry operation
 </source>
-        <translation type="unfinished"/>
+        <translation>Ez duzu notarik edo isilunerik aukeratu:&#13;
+Aukeratu nota edo isilune bat eta berriro saiatu
+</translation>
     </message>
     <message>
         <location filename="../../mscore/utils.cpp" line="393"/>
@@ -6502,12 +6506,12 @@ errorea: </translation>
     <message>
         <location filename="../../mscore/file.cpp" line="395"/>
         <source>PNG Bitmap Graphic (*.png)</source>
-        <translation type="unfinished"/>
+        <translation>PNG Bitmap Graphic (*.png)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="396"/>
         <source>Scalable Vector Graphic (*.svg)</source>
-        <translation type="unfinished"/>
+        <translation>Scalable Vector Graphic (*.svg)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="397"/>
@@ -6527,7 +6531,7 @@ errorea: </translation>
     <message>
         <location filename="../../mscore/file.cpp" line="401"/>
         <source>Ogg Vorbis Audio (*.ogg)</source>
-        <translation type="unfinished"/>
+        <translation>Ogg Vorbis Audio (*.ogg)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="404"/>
@@ -6933,17 +6937,17 @@ and check that the file location is correct</source>
     <message>
         <location filename="../../mscore/inspector.cpp" line="806"/>
         <source>Auto</source>
-        <translation type="unfinished">Auto</translation>
+        <translation>Automatikoa</translation>
     </message>
     <message>
         <location filename="../../mscore/inspector.cpp" line="807"/>
         <source>Up</source>
-        <translation type="unfinished">Gora</translation>
+        <translation>Gora</translation>
     </message>
     <message>
         <location filename="../../mscore/inspector.cpp" line="808"/>
         <source>Down</source>
-        <translation type="unfinished">Behera</translation>
+        <translation>Behera</translation>
     </message>
 </context>
 <context>
@@ -8600,7 +8604,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/actions.cpp" line="94"/>
         <source>Close current score</source>
-        <translation type="unfinished"/>
+        <translation>Uneko partitura itxi</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="99"/>
@@ -11536,7 +11540,8 @@ p, li { white-space: pre-wrap; }&#13;
         <location filename="../../mscore/file.cpp" line="1209"/>
         <source>Cannot read this score:
 your version of MuseScore is too old.</source>
-        <translation type="unfinished"/>
+        <translation>Ezin da partitura hau irakurri:&#13;
+MuseScore bertsio hau zaharregia da.</translation>
     </message>
 </context>
 <context>

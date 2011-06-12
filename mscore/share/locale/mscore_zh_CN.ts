@@ -3656,7 +3656,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Bar %1 Beat %2.%3</source>
-        <translation>小节r %1 拍 %2.%3</translation>
+        <translation>第%1小节，第%2.%3拍</translation>
     </message>
     <message>
         <source>Error loading plugin

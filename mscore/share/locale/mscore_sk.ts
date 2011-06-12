@@ -6,56 +6,65 @@
     <message>
         <location filename="../../mscore/aboutbox.ui" line="489"/>
         <source>AboutBox</source>
-        <translation type="unfinished"></translation>
+        <translation>O MuseScore</translation>
     </message>
     <message>
         <location filename="../../mscore/aboutbox.ui" line="574"/>
         <source>Version: 0.9.0</source>
-        <translation type="unfinished"></translation>
+        <translation>Verzia: 0.9.0</translation>
     </message>
     <message>
         <location filename="../../mscore/aboutbox.ui" line="581"/>
         <source>Revision: 628</source>
-        <translation type="unfinished"></translation>
+        <translation>Úprava: 628</translation>
     </message>
     <message utf8="true">
         <location filename="../../mscore/aboutbox.ui" line="594"/>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Visit &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; for new versions and more information.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Support MuseScore with &lt;/span&gt;&lt;a href=&quot;http://www.musescore.org/en/donate&quot;&gt;&lt;span style=&quot; font-size:10pt; text-decoration: underline; color:#0000ff;&quot;&gt;your donation&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Visit &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; for new versions and more information.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Support MuseScore with &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;your donation&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Copyright &lt;/span&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;©&lt;/span&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;&#13;
+&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;&#13;
+p, li { white-space: pre-wrap; }&#13;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Navštívte &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;a získajte nové verzie a viac informácií.&lt;/span&gt;&lt;/p&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Podporte MuseScore&lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;svojím príspevkom&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&#13;
+&#13;
+&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Autorské práva &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer a ďalší. &lt;/span&gt;&lt;/p&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Publikované s licenciou GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../mscore/welcome.ui" line="489"/>
         <source>Welcome to MuseScore</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../mscore/welcome.ui" line="554"/>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;MS Shell Dlg 2&apos;; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Welcome to MuseScore&lt;/span&gt;&lt;/p&gt;
-&lt;ul style=&quot;margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;&quot;&gt;&lt;li style=&quot; font-size:10pt;&quot; style=&quot; margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;http://musescore.org/en/forum&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Forum&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li style=&quot; font-size:10pt;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;http://musescore.org/en/handbook&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Handbook&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li style=&quot; font-size:10pt;&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Videos&lt;/li&gt;&lt;/ul&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:10pt;&quot;&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Share your scores : http://musescore.com&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Mobile : http://musescore.com/app&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-size:10pt;"&gt;Welcome to MuseScore&lt;/span&gt;&lt;/p&gt;
+&lt;ul style="margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; -qt-list-indent: 1;"&gt;&lt;li style=" font-size:10pt;" style=" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;a href="http://musescore.org/en/forum"&gt;&lt;span style=" text-decoration: underline; color:#0000ff;"&gt;Forum&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li style=" font-size:10pt;" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;a href="http://musescore.org/en/handbook"&gt;&lt;span style=" text-decoration: underline; color:#0000ff;"&gt;Handbook&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li style=" font-size:10pt;" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Videos&lt;/li&gt;&lt;/ul&gt;
+&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:10pt;"&gt;&lt;/p&gt;
+&lt;p style=" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-size:10pt;"&gt;Share your scores : http://musescore.com&lt;/span&gt;&lt;/p&gt;
+&lt;p style=" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-size:10pt;"&gt;Mobile : http://musescore.com/app&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../mscore/welcome.ui" line="583"/>
-        <source>Don&apos;t show this again on startup</source>
-        <translation type="unfinished"></translation>
+        <source>Don't show this again on startup</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -63,17 +72,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/mscore.cpp" line="2589"/>
         <source>Unstable Prerelease for Version: </source>
-        <translation type="unfinished"></translation>
+        <translation>Nestabilné predvydanie pre verziu: </translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="2591"/>
         <source>Version: </source>
-        <translation type="unfinished"></translation>
+        <translation>Verzia: </translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="2593"/>
         <source>Revision: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Úprava: %1</translation>
     </message>
 </context>
 <context>
@@ -82,7 +91,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../../mscore/menus.cpp" line="411"/>
         <location filename="../../mscore/menus.cpp" line="932"/>
         <source>round bracket</source>
-        <translation type="unfinished"></translation>
+        <translation>okrúhla zátvorka</translation>
     </message>
 </context>
 <context>
@@ -90,7 +99,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/articulation.cpp" line="157"/>
         <source>Articulation Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnosti artikulácie...</translation>
     </message>
 </context>
 <context>
@@ -98,17 +107,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/articulation.ui" line="13"/>
         <source>MuseScore: Articulations Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Vlastnosti artikulácie</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.ui" line="39"/>
         <source>Channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Kanál</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.ui" line="57"/>
         <source>Midi Action</source>
-        <translation type="unfinished"></translation>
+        <translation>Činnosť MIDI</translation>
     </message>
 </context>
 <context>
@@ -116,17 +125,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/barline.ui" line="16"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulár</translation>
     </message>
     <message>
         <location filename="../../mscore/barline.ui" line="28"/>
         <source>BarLine</source>
-        <translation type="unfinished"></translation>
+        <translation>Taktová čiara</translation>
     </message>
     <message>
         <location filename="../../mscore/barline.ui" line="51"/>
         <source>SubType:</source>
-        <translation type="unfinished"></translation>
+        <translation>Podtyp:</translation>
     </message>
 </context>
 <context>
@@ -134,17 +143,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/beam.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulár</translation>
     </message>
     <message>
         <location filename="../../mscore/beam.ui" line="44"/>
         <source>up:</source>
-        <translation type="unfinished"></translation>
+        <translation>nahor:</translation>
     </message>
     <message>
         <location filename="../../mscore/beam.ui" line="62"/>
         <source>Chord/Rest</source>
-        <translation type="unfinished"></translation>
+        <translation>Akord/pomlčka</translation>
     </message>
 </context>
 <context>
@@ -152,17 +161,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/boxproperties.ui" line="16"/>
         <source>MuseScore: Frame Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Vlastnosti rámu</translation>
     </message>
     <message>
         <location filename="../../mscore/boxproperties.ui" line="42"/>
         <source>Margins</source>
-        <translation type="unfinished"></translation>
+        <translation>Okraje</translation>
     </message>
     <message>
         <location filename="../../mscore/boxproperties.ui" line="57"/>
         <source>left:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zľava:</translation>
     </message>
     <message>
         <location filename="../../mscore/boxproperties.ui" line="70"/>
@@ -170,22 +179,22 @@ p, li { white-space: pre-wrap; }
         <location filename="../../mscore/boxproperties.ui" line="102"/>
         <location filename="../../mscore/boxproperties.ui" line="131"/>
         <source>mm</source>
-        <translation type="unfinished"></translation>
+        <translation>mm</translation>
     </message>
     <message>
         <location filename="../../mscore/boxproperties.ui" line="118"/>
         <source>right:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sprava:</translation>
     </message>
     <message>
         <location filename="../../mscore/boxproperties.ui" line="147"/>
         <source>bottom:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zdola:</translation>
     </message>
     <message>
         <location filename="../../mscore/boxproperties.ui" line="160"/>
         <source>top:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zhora:</translation>
     </message>
 </context>
 <context>
@@ -193,22 +202,22 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/chord.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulár</translation>
     </message>
     <message>
         <location filename="../../mscore/chord.ui" line="76"/>
         <source>Arpeggio</source>
-        <translation type="unfinished"></translation>
+        <translation>Arpeggio</translation>
     </message>
     <message>
         <location filename="../../mscore/chord.ui" line="83"/>
         <source>Tremolo</source>
-        <translation type="unfinished"></translation>
+        <translation>Tremolo</translation>
     </message>
     <message>
         <location filename="../../mscore/chord.ui" line="90"/>
         <source>Glissando</source>
-        <translation type="unfinished"></translation>
+        <translation>Glissando</translation>
     </message>
 </context>
 <context>
@@ -216,868 +225,868 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/chordedit.ui" line="13"/>
         <source>MuseScore: Harmony Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Vlastnosti harmónie</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="26"/>
         <source>TextLabel</source>
-        <translation type="unfinished"></translation>
+        <translation>Textový popis</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="33"/>
         <source>Root</source>
-        <translation type="unfinished"></translation>
+        <translation>Základný tón akordu</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="51"/>
         <source>C</source>
-        <translation type="unfinished"></translation>
+        <translation>C</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="61"/>
         <source>E</source>
-        <translation type="unfinished"></translation>
+        <translation>E</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="68"/>
         <source>bb (double flat)</source>
-        <translation type="unfinished"></translation>
+        <translation>bb (dvojité béčko)</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="75"/>
         <source>F</source>
-        <translation type="unfinished"></translation>
+        <translation>F</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="82"/>
         <source>b (flat)</source>
-        <translation type="unfinished"></translation>
+        <translation>b (béčko)</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="89"/>
         <source>G</source>
-        <translation type="unfinished"></translation>
+        <translation>G</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="96"/>
         <source>(no accidental)</source>
-        <translation type="unfinished"></translation>
+        <translation>(bez predznamenania)</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="103"/>
         <source>A</source>
-        <translation type="unfinished"></translation>
+        <translation>A</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="110"/>
         <source># (sharp)</source>
-        <translation type="unfinished"></translation>
+        <translation># (krížik)</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="117"/>
         <source>B</source>
-        <translation type="unfinished"></translation>
+        <translation>H</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="124"/>
         <source>## (double sharp)</source>
-        <translation type="unfinished"></translation>
+        <translation>## (dvojitý krížik)</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="131"/>
         <source>D</source>
-        <translation type="unfinished"></translation>
+        <translation>D</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="151"/>
         <source>Extension</source>
-        <translation type="unfinished"></translation>
+        <translation>Zväčšenie</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="166"/>
         <location filename="../../mscore/chordedit.ui" line="307"/>
         <source>Maj</source>
-        <translation type="unfinished"></translation>
+        <translation>Dur</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="173"/>
         <location filename="../../mscore/chordedit.ui" line="367"/>
         <location filename="../../mscore/chordedit.ui" line="1117"/>
         <source>2</source>
-        <translation type="unfinished"></translation>
+        <translation>2</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="180"/>
         <location filename="../../mscore/chordedit.ui" line="327"/>
         <source>Maj7</source>
-        <translation type="unfinished"></translation>
+        <translation>Dur7</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="187"/>
         <location filename="../../mscore/chordedit.ui" line="332"/>
         <source>Maj9</source>
-        <translation type="unfinished"></translation>
+        <translation>Dur9</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="194"/>
         <location filename="../../mscore/chordedit.ui" line="322"/>
         <source>6</source>
-        <translation type="unfinished"></translation>
+        <translation>6</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="201"/>
         <location filename="../../mscore/chordedit.ui" line="362"/>
         <source>69</source>
-        <translation type="unfinished"></translation>
+        <translation>69</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="208"/>
         <location filename="../../mscore/chordedit.ui" line="372"/>
         <source>m</source>
-        <translation type="unfinished"></translation>
+        <translation>m</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="215"/>
         <location filename="../../mscore/chordedit.ui" line="387"/>
         <source>m7</source>
-        <translation type="unfinished"></translation>
+        <translation>m7</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="222"/>
         <location filename="../../mscore/chordedit.ui" line="437"/>
         <source>m7b5</source>
-        <translation type="unfinished"></translation>
+        <translation>m7b5</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="229"/>
         <location filename="../../mscore/chordedit.ui" line="482"/>
         <source>7</source>
-        <translation type="unfinished"></translation>
+        <translation>7</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="236"/>
         <location filename="../../mscore/chordedit.ui" line="972"/>
         <source>sus</source>
-        <translation type="unfinished"></translation>
+        <translation>sus</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="243"/>
         <source>7Sus</source>
-        <translation type="unfinished"></translation>
+        <translation>7Sus</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="250"/>
         <location filename="../../mscore/chordedit.ui" line="407"/>
         <source>m6</source>
-        <translation type="unfinished"></translation>
+        <translation>m6</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="257"/>
         <location filename="../../mscore/chordedit.ui" line="392"/>
         <source>m9</source>
-        <translation type="unfinished"></translation>
+        <translation>m9</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="264"/>
         <location filename="../../mscore/chordedit.ui" line="382"/>
         <source>mMaj7</source>
-        <translation type="unfinished"></translation>
+        <translation>mDur7</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="271"/>
         <location filename="../../mscore/chordedit.ui" line="442"/>
         <source>dim</source>
-        <translation type="unfinished"></translation>
+        <translation>dim</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="278"/>
         <location filename="../../mscore/chordedit.ui" line="512"/>
         <source>9</source>
-        <translation type="unfinished"></translation>
+        <translation>9</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="285"/>
         <location filename="../../mscore/chordedit.ui" line="487"/>
         <source>13</source>
-        <translation type="unfinished"></translation>
+        <translation>13</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="292"/>
         <location filename="../../mscore/chordedit.ui" line="537"/>
         <source>7b9</source>
-        <translation type="unfinished"></translation>
+        <translation>7b9</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="299"/>
         <source>Other:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ďalšie</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="312"/>
         <source>5b</source>
-        <translation type="unfinished"></translation>
+        <translation>5b</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="317"/>
         <source>aug</source>
-        <translation type="unfinished"></translation>
+        <translation>aug</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="337"/>
         <source>Maj9#11</source>
-        <translation type="unfinished"></translation>
+        <translation>Dur9#11</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="342"/>
         <source>Maj13#11</source>
-        <translation type="unfinished"></translation>
+        <translation>Dur13#11</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="347"/>
         <source>Maj13</source>
-        <translation type="unfinished"></translation>
+        <translation>Dur13</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="352"/>
         <source>+</source>
-        <translation type="unfinished"></translation>
+        <translation>+</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="357"/>
         <source>Maj7#5</source>
-        <translation type="unfinished"></translation>
+        <translation>Dur7#5</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="377"/>
         <source>maug</source>
-        <translation type="unfinished"></translation>
+        <translation>maug</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="397"/>
         <source>m11</source>
-        <translation type="unfinished"></translation>
+        <translation>m11</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="402"/>
         <source>m13</source>
-        <translation type="unfinished"></translation>
+        <translation>m13</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="412"/>
         <source>m#5</source>
-        <translation type="unfinished"></translation>
+        <translation>m#5</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="417"/>
         <source>m7#5</source>
-        <translation type="unfinished"></translation>
+        <translation>m7#5</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="422"/>
         <source>m69</source>
-        <translation type="unfinished"></translation>
+        <translation>m69</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="427"/>
         <source>Maj7Lyd</source>
-        <translation type="unfinished"></translation>
+        <translation>Dur7Lyd</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="432"/>
         <source>Maj7b5</source>
-        <translation type="unfinished"></translation>
+        <translation>Dur7b5</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="447"/>
         <source>m9b5</source>
-        <translation type="unfinished"></translation>
+        <translation>m9b5</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="452"/>
         <source>5</source>
-        <translation type="unfinished"></translation>
+        <translation>5</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="457"/>
         <source>7+</source>
-        <translation type="unfinished"></translation>
+        <translation>7+</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="462"/>
         <source>9+</source>
-        <translation type="unfinished"></translation>
+        <translation>9+</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="467"/>
         <source>13+</source>
-        <translation type="unfinished"></translation>
+        <translation>13+</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="472"/>
         <source>(blues)</source>
-        <translation type="unfinished"></translation>
+        <translation>(blues)</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="477"/>
         <source>7(Blues)</source>
-        <translation type="unfinished"></translation>
+        <translation>7(Blues)</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="492"/>
         <source>7b13</source>
-        <translation type="unfinished"></translation>
+        <translation>7b13</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="497"/>
         <source>7#11</source>
-        <translation type="unfinished"></translation>
+        <translation>7#11</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="502"/>
         <location filename="../../mscore/chordedit.ui" line="527"/>
         <source>13#11</source>
-        <translation type="unfinished"></translation>
+        <translation>13#11</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="507"/>
         <source>7#11b13</source>
-        <translation type="unfinished"></translation>
+        <translation>7#11b13</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="517"/>
         <source>9b13</source>
-        <translation type="unfinished"></translation>
+        <translation>9b13</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="522"/>
         <location filename="../../mscore/chordedit.ui" line="582"/>
         <source>9#11</source>
-        <translation type="unfinished"></translation>
+        <translation>9#11</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="532"/>
         <source>9#11b13</source>
-        <translation type="unfinished"></translation>
+        <translation>9#11b13</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="542"/>
         <source>13b9</source>
-        <translation type="unfinished"></translation>
+        <translation>13b9</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="547"/>
         <source>7b9b13</source>
-        <translation type="unfinished"></translation>
+        <translation>7b9b13</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="552"/>
         <source>7b9#11</source>
-        <translation type="unfinished"></translation>
+        <translation>7b9#11</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="557"/>
         <source>13b9#11</source>
-        <translation type="unfinished"></translation>
+        <translation>13b9#11</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="562"/>
         <source>7b9#11b13</source>
-        <translation type="unfinished"></translation>
+        <translation>7b9#11b13</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="567"/>
         <source>7#9</source>
-        <translation type="unfinished"></translation>
+        <translation>7#9</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="572"/>
         <source>13#9</source>
-        <translation type="unfinished"></translation>
+        <translation>13#9</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="577"/>
         <source>7#9b13</source>
-        <translation type="unfinished"></translation>
+        <translation>7#9b13</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="587"/>
         <source>13#9#11</source>
-        <translation type="unfinished"></translation>
+        <translation>13#9#11</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="592"/>
         <source>7#9#11b13</source>
-        <translation type="unfinished"></translation>
+        <translation>7#9#11b13</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="597"/>
         <source>7b5</source>
-        <translation type="unfinished"></translation>
+        <translation>7b5</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="602"/>
         <source>13b5</source>
-        <translation type="unfinished"></translation>
+        <translation>13b5</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="607"/>
         <source>7b5b13</source>
-        <translation type="unfinished"></translation>
+        <translation>7b5b13</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="612"/>
         <source>9b5</source>
-        <translation type="unfinished"></translation>
+        <translation>9b5</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="617"/>
         <source>9b5b13</source>
-        <translation type="unfinished"></translation>
+        <translation>9b5b13</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="622"/>
         <source>7b5b9</source>
-        <translation type="unfinished"></translation>
+        <translation>7b5b9</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="627"/>
         <source>13b5b9</source>
-        <translation type="unfinished"></translation>
+        <translation>13b5b9</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="632"/>
         <source>7b5b9b13</source>
-        <translation type="unfinished"></translation>
+        <translation>7b5b9b13</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="637"/>
         <source>7b5#9</source>
-        <translation type="unfinished"></translation>
+        <translation>7b5#9</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="642"/>
         <source>13b5#9</source>
-        <translation type="unfinished"></translation>
+        <translation>13b5#9</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="647"/>
         <source>7b5#9b13</source>
-        <translation type="unfinished"></translation>
+        <translation>7b5#9b13</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="652"/>
         <source>7#5</source>
-        <translation type="unfinished"></translation>
+        <translation>7#5</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="657"/>
         <source>13#5</source>
-        <translation type="unfinished"></translation>
+        <translation>13#5</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="662"/>
         <source>7#5#11</source>
-        <translation type="unfinished"></translation>
+        <translation>7#5#11</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="667"/>
         <source>13#5#11</source>
-        <translation type="unfinished"></translation>
+        <translation>13#5#11</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="672"/>
         <source>9#5</source>
-        <translation type="unfinished"></translation>
+        <translation>9#5</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="677"/>
         <source>9#5#11</source>
-        <translation type="unfinished"></translation>
+        <translation>9#5#11</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="682"/>
         <source>7#5b9</source>
-        <translation type="unfinished"></translation>
+        <translation>7#5b9</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="687"/>
         <source>13#5b9</source>
-        <translation type="unfinished"></translation>
+        <translation>13#5b9</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="692"/>
         <source>7#5b9#11</source>
-        <translation type="unfinished"></translation>
+        <translation>7#5b9#11</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="697"/>
         <source>13#5b9#11</source>
-        <translation type="unfinished"></translation>
+        <translation>13#5b9#11</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="702"/>
         <source>7#5#9</source>
-        <translation type="unfinished"></translation>
+        <translation>7#5#9</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="707"/>
         <location filename="../../mscore/chordedit.ui" line="717"/>
         <source>13#5#9#11</source>
-        <translation type="unfinished"></translation>
+        <translation>13#5#9#11</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="712"/>
         <source>7#5#9#11</source>
-        <translation type="unfinished"></translation>
+        <translation>7#5#9#11</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="722"/>
         <source>7alt</source>
-        <translation type="unfinished"></translation>
+        <translation>7alt</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="727"/>
         <source>7sus</source>
-        <translation type="unfinished"></translation>
+        <translation>7sus</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="732"/>
         <source>13sus</source>
-        <translation type="unfinished"></translation>
+        <translation>13sus</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="737"/>
         <source>7susb13</source>
-        <translation type="unfinished"></translation>
+        <translation>7susb13</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="742"/>
         <source>7sus#11</source>
-        <translation type="unfinished"></translation>
+        <translation>7sus#11</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="747"/>
         <location filename="../../mscore/chordedit.ui" line="772"/>
         <source>13sus#11</source>
-        <translation type="unfinished"></translation>
+        <translation>13sus#11</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="752"/>
         <source>7sus#11b13</source>
-        <translation type="unfinished"></translation>
+        <translation>7sus#11b13</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="757"/>
         <source>9sus</source>
-        <translation type="unfinished"></translation>
+        <translation>9sus</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="762"/>
         <source>9susb13</source>
-        <translation type="unfinished"></translation>
+        <translation>9susb13</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="767"/>
         <location filename="../../mscore/chordedit.ui" line="827"/>
         <source>9sus#11</source>
-        <translation type="unfinished"></translation>
+        <translation>9sus#11</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="777"/>
         <source>9sus#11b13</source>
-        <translation type="unfinished"></translation>
+        <translation>9sus#11b13</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="782"/>
         <source>7susb9</source>
-        <translation type="unfinished"></translation>
+        <translation>7susb9</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="787"/>
         <source>13susb9</source>
-        <translation type="unfinished"></translation>
+        <translation>13susb9</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="792"/>
         <source>7susb9b13</source>
-        <translation type="unfinished"></translation>
+        <translation>7susb9b13</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="797"/>
         <source>7susb9#11</source>
-        <translation type="unfinished"></translation>
+        <translation>7susb9#11</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="802"/>
         <source>13susb9#11</source>
-        <translation type="unfinished"></translation>
+        <translation>13susb9#11</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="807"/>
         <source>7susb9#11b13</source>
-        <translation type="unfinished"></translation>
+        <translation>7susb9#11b13</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="812"/>
         <source>7sus#9</source>
-        <translation type="unfinished"></translation>
+        <translation>7sus#9</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="817"/>
         <source>13sus#9</source>
-        <translation type="unfinished"></translation>
+        <translation>13sus#9</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="822"/>
         <source>7sus#9b13</source>
-        <translation type="unfinished"></translation>
+        <translation>7sus#9b13</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="832"/>
         <source>13sus#9#11</source>
-        <translation type="unfinished"></translation>
+        <translation>13sus#9#11</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="837"/>
         <source>7sus#9#11b13</source>
-        <translation type="unfinished"></translation>
+        <translation>7sus#9#11b13</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="842"/>
         <source>7susb5</source>
-        <translation type="unfinished"></translation>
+        <translation>7susb5</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="847"/>
         <source>13susb5</source>
-        <translation type="unfinished"></translation>
+        <translation>13susb5</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="852"/>
         <source>7susb5b13</source>
-        <translation type="unfinished"></translation>
+        <translation>7susb5b13</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="857"/>
         <source>9susb5</source>
-        <translation type="unfinished"></translation>
+        <translation>9susb5</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="862"/>
         <source>9susb5b13</source>
-        <translation type="unfinished"></translation>
+        <translation>9susb5b13</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="867"/>
         <source>7susb5b9</source>
-        <translation type="unfinished"></translation>
+        <translation>7susb5b9</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="872"/>
         <source>13susb5b9</source>
-        <translation type="unfinished"></translation>
+        <translation>13susb5b9</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="877"/>
         <source>7susb5b9b13</source>
-        <translation type="unfinished"></translation>
+        <translation>7susb5b9b13</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="882"/>
         <source>7susb5#9</source>
-        <translation type="unfinished"></translation>
+        <translation>7susb5#9</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="887"/>
         <source>13susb5#9</source>
-        <translation type="unfinished"></translation>
+        <translation>13susb5#9</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="892"/>
         <source>7susb5#9b13</source>
-        <translation type="unfinished"></translation>
+        <translation>7susb5#9b13</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="897"/>
         <source>7sus#5</source>
-        <translation type="unfinished"></translation>
+        <translation>7sus#5</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="902"/>
         <source>13sus#5</source>
-        <translation type="unfinished"></translation>
+        <translation>13sus#5</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="907"/>
         <source>7sus#5#11</source>
-        <translation type="unfinished"></translation>
+        <translation>7sus#5#11</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="912"/>
         <source>13sus#5#11</source>
-        <translation type="unfinished"></translation>
+        <translation>13sus#5#11</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="917"/>
         <source>9sus#5</source>
-        <translation type="unfinished"></translation>
+        <translation>9sus#5</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="922"/>
         <source>9sus#5#11</source>
-        <translation type="unfinished"></translation>
+        <translation>9sus#5#11</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="927"/>
         <source>7sus#5b9</source>
-        <translation type="unfinished"></translation>
+        <translation>7sus#5b9</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="932"/>
         <source>13sus#5b9</source>
-        <translation type="unfinished"></translation>
+        <translation>13sus#5b9</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="937"/>
         <source>7sus#5b9#11</source>
-        <translation type="unfinished"></translation>
+        <translation>7sus#5b9#11</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="942"/>
         <source>13sus#5b9#11</source>
-        <translation type="unfinished"></translation>
+        <translation>13sus#5b9#11</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="947"/>
         <source>7sus#5#9</source>
-        <translation type="unfinished"></translation>
+        <translation>7sus#5#9</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="952"/>
         <location filename="../../mscore/chordedit.ui" line="962"/>
         <source>13sus#5#9#11</source>
-        <translation type="unfinished"></translation>
+        <translation>13sus#5#9#11</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="957"/>
         <source>7sus#5#9#11</source>
-        <translation type="unfinished"></translation>
+        <translation>7sus#5#9#11</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="967"/>
         <source>4</source>
-        <translation type="unfinished"></translation>
+        <translation>4</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="993"/>
         <source>Degrees</source>
-        <translation type="unfinished"></translation>
+        <translation>Stupne</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="1008"/>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="1015"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstrániť</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="1025"/>
         <source>Bass Note / Inversion</source>
-        <translation type="unfinished"></translation>
+        <translation>Basová nota/Obrat</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="1035"/>
         <location filename="../../mscore/chordedit.ui" line="1107"/>
         <source>none</source>
-        <translation type="unfinished"></translation>
+        <translation>žiadne</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="1040"/>
         <source>/C</source>
-        <translation type="unfinished"></translation>
+        <translation>/C</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="1045"/>
         <source>/Db</source>
-        <translation type="unfinished"></translation>
+        <translation>/Db</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="1050"/>
         <source>/D</source>
-        <translation type="unfinished"></translation>
+        <translation>/D</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="1055"/>
         <source>/Eb</source>
-        <translation type="unfinished"></translation>
+        <translation>/Eb</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="1060"/>
         <source>/E</source>
-        <translation type="unfinished"></translation>
+        <translation>/E</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="1065"/>
         <source>/F</source>
-        <translation type="unfinished"></translation>
+        <translation>/F</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="1070"/>
         <source>/F#</source>
-        <translation type="unfinished"></translation>
+        <translation>/F#</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="1075"/>
         <source>/G</source>
-        <translation type="unfinished"></translation>
+        <translation>/G</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="1080"/>
         <source>/Ab</source>
-        <translation type="unfinished"></translation>
+        <translation>/Ab</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="1085"/>
         <source>/A</source>
-        <translation type="unfinished"></translation>
+        <translation>/A</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="1090"/>
         <source>/Bb</source>
-        <translation type="unfinished"></translation>
+        <translation>/Bb</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="1095"/>
         <source>/B</source>
-        <translation type="unfinished"></translation>
+        <translation>/B</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="1112"/>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation>1</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.ui" line="1122"/>
         <source>3</source>
-        <translation type="unfinished"></translation>
+        <translation>3</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.cpp" line="100"/>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.cpp" line="101"/>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Hodnota</translation>
     </message>
     <message>
         <location filename="../../mscore/chordedit.cpp" line="102"/>
         <source>Alter</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmeniť</translation>
     </message>
 </context>
 <context>
@@ -1085,7 +1094,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/harmony.cpp" line="1173"/>
         <source>Write Chord Description failed: </source>
-        <translation type="unfinished"></translation>
+        <translation>Zápis popisu akordu sa nepodaril: </translation>
     </message>
 </context>
 <context>
@@ -1094,39 +1103,39 @@ p, li { white-space: pre-wrap; }
         <location filename="../../mscore/chordproperties.ui" line="14"/>
         <location filename="../../mscore/chordproperties.ui" line="50"/>
         <source>Chord Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnosti akoru</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="61"/>
         <source>small</source>
-        <translation type="unfinished"></translation>
+        <translation>malé</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="68"/>
         <source>stemless</source>
-        <translation type="unfinished"></translation>
+        <translation>bez nožičky</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="82"/>
         <source>additional leading space </source>
-        <translation type="unfinished"></translation>
+        <translation>dodatočný vodiaci znak </translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="89"/>
         <location filename="../../mscore/chordproperties.ui" line="109"/>
         <source>sp</source>
         <comment>spatium unit</comment>
-        <translation type="unfinished"></translation>
+        <translation>sp</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="102"/>
         <source>additional trailing space</source>
-        <translation type="unfinished"></translation>
+        <translation>dodatočná koncová medzera</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="122"/>
         <source>stem direction</source>
-        <translation type="unfinished"></translation>
+        <translation>Smer nožičky</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="136"/>
@@ -1136,43 +1145,43 @@ p, li { white-space: pre-wrap; }
         <location filename="../../mscore/chordproperties.ui" line="511"/>
         <source>auto</source>
         <extracomment>velocity type</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>automaticky</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="141"/>
         <source>up</source>
-        <translation type="unfinished"></translation>
+        <translation>nahor</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="146"/>
         <source>down</source>
-        <translation type="unfinished"></translation>
+        <translation>nadol</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="165"/>
         <source>Note Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnosti nôt</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="185"/>
         <source>tuning offset</source>
-        <translation type="unfinished"></translation>
+        <translation>Ladenie</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="198"/>
         <source> cent</source>
         <extracomment>100 cent = 1 semitone intervall</extracomment>
-        <translation type="unfinished"></translation>
+        <translation> cent</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="223"/>
         <source>velocity type</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ rýchlosti</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="230"/>
         <source>velocity (0-127)</source>
-        <translation type="unfinished"></translation>
+        <translation>rýchlosť (0 – 127)</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="249"/>
@@ -1180,7 +1189,7 @@ p, li { white-space: pre-wrap; }
         <location filename="../../mscore/chordproperties.ui" line="516"/>
         <source>user</source>
         <extracomment>velocity type</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>používateľ</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="254"/>
@@ -1188,143 +1197,143 @@ p, li { white-space: pre-wrap; }
         <location filename="../../mscore/chordproperties.ui" line="521"/>
         <source>offset</source>
         <extracomment>velocity type</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Posun</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="278"/>
         <source>note head positon </source>
-        <translation type="unfinished"></translation>
+        <translation>umiestnenie notovej hlavičky </translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="297"/>
         <source>left of stem</source>
-        <translation type="unfinished"></translation>
+        <translation>naľavo od nožičky</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="302"/>
         <source>right of stem</source>
-        <translation type="unfinished"></translation>
+        <translation>napravo od nožičky</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="310"/>
         <source>Note Head Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Skupina notových hlavičiek</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="317"/>
         <source>Note Head Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ notovej hlavičky</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="331"/>
         <source>normal</source>
-        <translation type="unfinished"></translation>
+        <translation>normálna</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="336"/>
         <source>cross</source>
-        <translation type="unfinished"></translation>
+        <translation>krížik</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="341"/>
         <source>diamond</source>
-        <translation type="unfinished"></translation>
+        <translation>kosoštvorec</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="346"/>
         <source>triangle</source>
-        <translation type="unfinished"></translation>
+        <translation>trojuholník</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="351"/>
         <source>slash</source>
-        <translation type="unfinished"></translation>
+        <translation>lomka</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="356"/>
         <source>xcircle</source>
-        <translation type="unfinished"></translation>
+        <translation>xkruh</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="361"/>
         <source>do</source>
-        <translation type="unfinished"></translation>
+        <translation>do</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="366"/>
         <source>re</source>
-        <translation type="unfinished"></translation>
+        <translation>re</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="371"/>
         <source>mi</source>
-        <translation type="unfinished"></translation>
+        <translation>mi</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="376"/>
         <source>fa</source>
-        <translation type="unfinished"></translation>
+        <translation>fa</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="381"/>
         <source>la</source>
-        <translation type="unfinished"></translation>
+        <translation>la</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="386"/>
         <source>ti</source>
-        <translation type="unfinished"></translation>
+        <translation>si</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="401"/>
         <source>Auto</source>
-        <translation type="unfinished"></translation>
+        <translation>Automaticky</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="406"/>
         <source>whole</source>
-        <translation type="unfinished"></translation>
+        <translation>Celá</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="411"/>
         <source>half</source>
-        <translation type="unfinished"></translation>
+        <translation>Pólová</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="416"/>
         <source>quarter</source>
-        <translation type="unfinished"></translation>
+        <translation>Štvrťová</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="421"/>
         <source>breve</source>
-        <translation type="unfinished"></translation>
+        <translation>Breve</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="439"/>
         <source>ontime offset type</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ posunu času zapnutia</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="471"/>
         <source>ontime offset</source>
-        <translation type="unfinished"></translation>
+        <translation>Posun času zapnutia</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="484"/>
         <location filename="../../mscore/chordproperties.ui" line="542"/>
         <source> ticks</source>
-        <translation type="unfinished"></translation>
+        <translation> fajky</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="497"/>
         <source>offtime offset type</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ posunu času vypnutia</translation>
     </message>
     <message>
         <location filename="../../mscore/chordproperties.ui" line="529"/>
         <source>offtime</source>
-        <translation type="unfinished"></translation>
+        <translation>Čas vypnutia</translation>
     </message>
 </context>
 <context>
@@ -1332,22 +1341,22 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/chordrest.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulár</translation>
     </message>
     <message>
         <location filename="../../mscore/chordrest.ui" line="85"/>
         <source>SlurFor:</source>
-        <translation type="unfinished"></translation>
+        <translation>Legatový oblúčik dopredu:</translation>
     </message>
     <message>
         <location filename="../../mscore/chordrest.ui" line="98"/>
         <source>SlurBack:</source>
-        <translation type="unfinished"></translation>
+        <translation>Legatový oblúčik dozadu:</translation>
     </message>
     <message>
         <location filename="../../mscore/chordrest.ui" line="182"/>
         <source>StaffMove:</source>
-        <translation type="unfinished"></translation>
+        <translation>Posun notovej osnovy:</translation>
     </message>
 </context>
 <context>
@@ -1355,37 +1364,37 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/harmonyedit.ui" line="78"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulár</translation>
     </message>
     <message>
         <location filename="../../mscore/harmonyedit.ui" line="86"/>
         <source>Chord Description File:</source>
-        <translation type="unfinished"></translation>
+        <translation>Súbor popisu akordu:</translation>
     </message>
     <message>
         <location filename="../../mscore/harmonyedit.ui" line="96"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../../mscore/harmonyedit.ui" line="128"/>
         <source>Id</source>
-        <translation type="unfinished"></translation>
+        <translation>Id</translation>
     </message>
     <message>
         <location filename="../../mscore/harmonyedit.ui" line="133"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Názov</translation>
     </message>
     <message>
         <location filename="../../mscore/harmonyedit.ui" line="177"/>
         <source>Save As</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložiť ako</translation>
     </message>
     <message>
         <location filename="../../mscore/harmonyedit.cpp" line="40"/>
         <source>MuseScore: Chord Style Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Editor štýlu akordu</translation>
     </message>
 </context>
 <context>
@@ -1393,133 +1402,133 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../plugins/break/break.ui" line="14"/>
         <source>Choose number of measures</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../plugins/break/break.ui" line="22"/>
         <source>Number of measures</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../plugins/musescore.com/ui/authorize_dialog.ui" line="17"/>
         <source>Ready?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../plugins/musescore.com/ui/authorize_dialog.ui" line="51"/>
-        <source>When you&apos;ve given MuseScore permission to connect to musescore.com, click the OK button!</source>
-        <translation type="unfinished"></translation>
+        <source>When you've given MuseScore permission to connect to musescore.com, click the OK button!</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../plugins/musescore.com/ui/authorize_dialog.ui" line="76"/>
-        <source>If your browser didn&apos;t open automatically, you can visit this URL, then come back and press the OK button.</source>
-        <translation type="unfinished"></translation>
+        <source>If your browser didn't open automatically, you can visit this URL, then come back and press the OK button.</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../plugins/musescore.com/ui/musescore_dialog.ui" line="14"/>
         <source>Score Information</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../plugins/musescore.com/ui/musescore_dialog.ui" line="51"/>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../plugins/musescore.com/ui/musescore_dialog.ui" line="65"/>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../plugins/musescore.com/ui/musescore_dialog.ui" line="93"/>
         <source>Public</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../plugins/musescore.com/ui/musescore_dialog.ui" line="103"/>
         <source>Private</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../plugins/musescore.com/ui/musescore_dialog.ui" line="135"/>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../plugins/musescore.com/ui/musescore_dialog.ui" line="161"/>
         <source>Tags</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../plugins/musescore.com/ui/musescore_dialog.ui" line="176"/>
         <source>Use a comma to separate the tags</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../plugins/musescore.com/ui/musescore_dialog.ui" line="197"/>
-        <source>You&apos;re logged in as</source>
-        <translation type="unfinished"></translation>
+        <source>You're logged in as</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../plugins/musescore.com/ui/musescore_dialog.ui" line="210"/>
         <source>USERNAME</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../plugins/musescore.com/ui/musescore_dialog.ui" line="217"/>
         <source>Sign out</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../plugins/musescore.com/ui/musescore_dialog.ui" line="224"/>
         <source>Sign out on exit</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../plugins/musescore.com/ui/musescore_progress.ui" line="17"/>
         <source>Uploading...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../plugins/musescore.com/ui/musescore_progress.ui" line="26"/>
         <source>Uploading. Please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../plugins/musescore.com/ui/start_browser_dialog.ui" line="17"/>
         <location filename="../plugins/musescore.com/ui/start_browser_dialog.ui" line="56"/>
         <source>MuseScore needs your permission...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../plugins/musescore.com/ui/start_browser_dialog.ui" line="74"/>
-        <source>MuseScore requires permission to connect to your MuseScore.com account. This permission is granted on the &lt;a href=&apos;http://musescore.com&apos;&gt;musescore.com&lt;/a&gt; website so click OK to get started.</source>
-        <translation type="unfinished"></translation>
+        <source>MuseScore requires permission to connect to your MuseScore.com account. This permission is granted on the &lt;a href='http://musescore.com'&gt;musescore.com&lt;/a&gt; website so click OK to get started.</source>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../plugins/removenotes.ui" line="13"/>
         <source>Dialog</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../plugins/removenotes.ui" line="37"/>
         <source>Look for three note chords and</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../plugins/removenotes.ui" line="63"/>
         <source>remove  bottom note</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../plugins/removenotes.ui" line="73"/>
         <source>remove middle note</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../plugins/removenotes.ui" line="80"/>
         <source>remove top note</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -1527,27 +1536,27 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/dynamics.cpp" line="264"/>
         <source>Dynamics</source>
-        <translation type="unfinished"></translation>
+        <translation>Dynamika</translation>
     </message>
     <message>
         <location filename="../../mscore/dynamics.cpp" line="266"/>
         <source>Set Invisible</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastaviť ako neviditeľné</translation>
     </message>
     <message>
         <location filename="../../mscore/dynamics.cpp" line="268"/>
         <source>Set Visible</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastaviť ako viditeľné</translation>
     </message>
     <message>
         <location filename="../../mscore/dynamics.cpp" line="270"/>
         <source>MIDI Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnosti MIDI...</translation>
     </message>
     <message>
         <location filename="../../mscore/dynamics.cpp" line="272"/>
         <source>Text Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnosti textu...</translation>
     </message>
 </context>
 <context>
@@ -1555,7 +1564,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/dynamic.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulár</translation>
     </message>
 </context>
 <context>
@@ -1563,42 +1572,42 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/dynamicproperties.ui" line="14"/>
         <source>MuseScore: Text Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Vlastnosti textu</translation>
     </message>
     <message>
         <location filename="../../mscore/dynamicproperties.ui" line="39"/>
         <source>MIDI Values</source>
-        <translation type="unfinished"></translation>
+        <translation>Hodnoty MIDI</translation>
     </message>
     <message>
         <location filename="../../mscore/dynamicproperties.ui" line="50"/>
         <source>Velocity:</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlasitosť:</translation>
     </message>
     <message>
         <location filename="../../mscore/dynamicproperties.ui" line="69"/>
         <source>Apply to:</source>
-        <translation type="unfinished"></translation>
+        <translation>Použiť na</translation>
     </message>
     <message>
         <location filename="../../mscore/dynamicproperties.ui" line="78"/>
         <source>staff</source>
-        <translation type="unfinished"></translation>
+        <translation>Notová osnova</translation>
     </message>
     <message>
         <location filename="../../mscore/dynamicproperties.ui" line="85"/>
         <source>part</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlas</translation>
     </message>
     <message>
         <location filename="../../mscore/dynamicproperties.ui" line="95"/>
         <source>system</source>
-        <translation type="unfinished"></translation>
+        <translation>Osnova</translation>
     </message>
     <message>
         <location filename="../../mscore/dynamicproperties.ui" line="107"/>
         <source>align left</source>
-        <translation type="unfinished"></translation>
+        <translation>Zarovnať doľava</translation>
     </message>
 </context>
 <context>
@@ -1606,80 +1615,82 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="57"/>
         <source>invalid</source>
-        <translation type="unfinished"></translation>
+        <translation>Neplatný</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="58"/>
         <source>Normal Head</source>
-        <translation type="unfinished"></translation>
+        <translation>Bežná hlavička</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="59"/>
         <source>Cross Head</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavička v tvare kríža</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="60"/>
         <source>Diamond Head</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavička v tvare kosoštvorca</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="61"/>
         <source>Triangle Head</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavička v tvare trojuholníka</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="63"/>
         <source>Load</source>
-        <translation type="unfinished"></translation>
+        <translation>Načítať</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="64"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložiť</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="326"/>
         <source>MuseScore: Load Drumset</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Načítanie bicích</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="328"/>
         <location filename="../../mscore/editdrumset.cpp" line="373"/>
         <source>MuseScore drumset (*.drm)</source>
-        <translation type="unfinished"></translation>
+        <translation>Bicie MuseScore (*.drm)</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="371"/>
         <source>MuseScore: Save Drumset</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Uložiť bicie</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="380"/>
         <source>Open File
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Otvoriť súbor
+</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="380"/>
         <source>
 failed: </source>
-        <translation type="unfinished"></translation>
+        <translation>
+nepodarilo sa: </translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="382"/>
         <source>MuseScore: Open File</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Otvorenie súboru</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="392"/>
         <source>Write File failed: </source>
-        <translation type="unfinished"></translation>
+        <translation>Zápis súboru sa nepodaril: </translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="393"/>
         <source>MuseScore: Write Drumset</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Zapísať bicie</translation>
     </message>
 </context>
 <context>
@@ -1687,112 +1698,112 @@ failed: </source>
     <message>
         <location filename="../../mscore/editdrumset.ui" line="14"/>
         <source>MuseScore: Edit Drumset</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Upraviť bicie</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.ui" line="33"/>
         <source>Pitch</source>
-        <translation type="unfinished"></translation>
+        <translation>Výška hlasu</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.ui" line="38"/>
         <source>Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Nota</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.ui" line="43"/>
         <source>Shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>Skratka</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.ui" line="48"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Názov</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.ui" line="72"/>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Názov:</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.ui" line="85"/>
         <source>Note Head:</source>
-        <translation type="unfinished"></translation>
+        <translation>Notová hlavička:</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.ui" line="102"/>
         <source>Staff Line:</source>
-        <translation type="unfinished"></translation>
+        <translation>Notová čiara:</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.ui" line="119"/>
         <source>Stem Direction:</source>
-        <translation type="unfinished"></translation>
+        <translation>Smer nožičky:</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.ui" line="130"/>
         <source>Auto</source>
-        <translation type="unfinished"></translation>
+        <translation>Automaticky</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.ui" line="135"/>
         <source>Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahor</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.ui" line="140"/>
         <source>Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Nadol</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.ui" line="148"/>
         <source>Default Voice:</source>
-        <translation type="unfinished"></translation>
+        <translation>Predvolený hlas</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.ui" line="168"/>
         <source>Shortcut:</source>
-        <translation type="unfinished"></translation>
+        <translation>Skratka:</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.ui" line="179"/>
         <source>A</source>
-        <translation type="unfinished"></translation>
+        <translation>A</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.ui" line="184"/>
         <source>B</source>
-        <translation type="unfinished"></translation>
+        <translation>H</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.ui" line="189"/>
         <source>C</source>
-        <translation type="unfinished"></translation>
+        <translation>C</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.ui" line="194"/>
         <source>D</source>
-        <translation type="unfinished"></translation>
+        <translation>D</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.ui" line="199"/>
         <source>E</source>
-        <translation type="unfinished"></translation>
+        <translation>E</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.ui" line="204"/>
         <source>F</source>
-        <translation type="unfinished"></translation>
+        <translation>F</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.ui" line="209"/>
         <source>G</source>
-        <translation type="unfinished"></translation>
+        <translation>G</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.ui" line="214"/>
         <source>--</source>
-        <translation type="unfinished"></translation>
+        <translation>--</translation>
     </message>
 </context>
 <context>
@@ -1800,52 +1811,52 @@ failed: </source>
     <message>
         <location filename="../../mscore/editinstrument.ui" line="14"/>
         <source>MuseScore: Edit Instrument Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Úprava vlastností hudobného nástroja</translation>
     </message>
     <message>
         <location filename="../../mscore/editinstrument.ui" line="20"/>
         <source>Instrument Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnosti hudobného nástroja</translation>
     </message>
     <message>
         <location filename="../../mscore/editinstrument.ui" line="26"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Názov</translation>
     </message>
     <message>
         <location filename="../../mscore/editinstrument.ui" line="46"/>
         <source>Short Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Krátky názov</translation>
     </message>
     <message>
         <location filename="../../mscore/editinstrument.ui" line="66"/>
         <source>Pitch</source>
-        <translation type="unfinished"></translation>
+        <translation>Výška tónu</translation>
     </message>
     <message>
         <location filename="../../mscore/editinstrument.ui" line="89"/>
         <source>Transpose</source>
-        <translation type="unfinished"></translation>
+        <translation>Previesť</translation>
     </message>
     <message>
         <location filename="../../mscore/editinstrument.ui" line="112"/>
         <source>Midi Program</source>
-        <translation type="unfinished"></translation>
+        <translation>Program na Midi</translation>
     </message>
     <message>
         <location filename="../../mscore/editinstrument.ui" line="135"/>
         <source>Staves</source>
-        <translation type="unfinished"></translation>
+        <translation>Notové osnovy</translation>
     </message>
     <message>
         <location filename="../../mscore/editinstrument.ui" line="215"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../../mscore/editinstrument.ui" line="222"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Zrušiť</translation>
     </message>
 </context>
 <context>
@@ -1853,233 +1864,233 @@ failed: </source>
     <message>
         <location filename="../../mscore/editstaff.ui" line="20"/>
         <source>MuseScore: Edit Staff/Part Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Úprava vlastností notovej osnovy/hlasu</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="53"/>
         <source>Staff Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnosti hlasu</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="73"/>
         <source>Lines:</source>
-        <translation type="unfinished"></translation>
+        <translation>Čiary:</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="104"/>
         <source>Stemless</source>
-        <translation type="unfinished"></translation>
+        <translation>Bez nožičky</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="111"/>
         <source>Invisible</source>
-        <translation type="unfinished"></translation>
+        <translation>Neviditeľný</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="124"/>
         <source>Small</source>
-        <translation type="unfinished"></translation>
+        <translation>Malá</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="134"/>
         <source>Part Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnosti hlasu</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="143"/>
         <source>Change Instrument...</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmeniť hudobný nástroj...</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="152"/>
         <source>Long Instrument Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Dlhý názov hudobného nástroja:</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="159"/>
         <source>Short Instrument Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Krátky názov hudobného nástroja:</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="200"/>
         <source>Usable Pitch Range:</source>
-        <translation type="unfinished"></translation>
+        <translation>Použiteľný rozsah výšky tónu:</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="209"/>
         <source>Amateur:</source>
-        <translation type="unfinished"></translation>
+        <translation>Amatér:</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="223"/>
         <location filename="../../mscore/editstaff.ui" line="251"/>
         <source>-</source>
-        <translation type="unfinished"></translation>
+        <translation>–</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="237"/>
         <source>Professional:</source>
-        <translation type="unfinished"></translation>
+        <translation>Profesionál</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="269"/>
         <source>Play Transposition:</source>
-        <translation type="unfinished"></translation>
+        <translation>Prehrať prevod:</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="277"/>
         <source>Perfect Unison</source>
-        <translation type="unfinished"></translation>
+        <translation>Čistá prima</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="282"/>
         <source>Augmented Unison</source>
-        <translation type="unfinished"></translation>
+        <translation>Zväčšená prima</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="287"/>
         <source>Diminished Second</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmenšená sekunda</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="292"/>
         <source>Minor Second</source>
-        <translation type="unfinished"></translation>
+        <translation>Malá sekunda</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="297"/>
         <source>Major Second</source>
-        <translation type="unfinished"></translation>
+        <translation>Veľká sekunda</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="302"/>
         <source>Augmented Second</source>
-        <translation type="unfinished"></translation>
+        <translation>Zväčšená sekunda</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="307"/>
         <source>Diminished Third</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmenšená tercia</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="312"/>
         <source>Minor Third</source>
-        <translation type="unfinished"></translation>
+        <translation>Malá tercia</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="317"/>
         <source>Major Third</source>
-        <translation type="unfinished"></translation>
+        <translation>Veľká tercia</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="322"/>
         <source>Augmented Third</source>
-        <translation type="unfinished"></translation>
+        <translation>Zväčšená tercia</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="327"/>
         <source>Diminished Fourth</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmenšená kvarta</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="332"/>
         <source>Perfect Fourth</source>
-        <translation type="unfinished"></translation>
+        <translation>Čistá kvarta</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="337"/>
         <source>Augmented Fourth</source>
-        <translation type="unfinished"></translation>
+        <translation>Zväčšená kvarta</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="342"/>
         <source>Diminished Fifth</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmenšená kvinta</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="347"/>
         <source>Perfect Fifth</source>
-        <translation type="unfinished"></translation>
+        <translation>Čistá kvinta</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="352"/>
         <source>Augmented Fifth</source>
-        <translation type="unfinished"></translation>
+        <translation>Zväčšená kvinta</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="357"/>
         <source>Diminished Sixth</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmenšená sexta</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="362"/>
         <source>Minor Sixth</source>
-        <translation type="unfinished"></translation>
+        <translation>Malá sexta</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="367"/>
         <source>Major Sixth</source>
-        <translation type="unfinished"></translation>
+        <translation>Veľká sexta</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="372"/>
         <source>Augmented Sixth</source>
-        <translation type="unfinished"></translation>
+        <translation>Zväčšená sexta</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="377"/>
         <source>Diminished Seventh</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmenšená septima</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="382"/>
         <source>Minor Seventh</source>
-        <translation type="unfinished"></translation>
+        <translation>Malá septima</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="387"/>
         <source>Major Seventh</source>
-        <translation type="unfinished"></translation>
+        <translation>Veľká septima</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="392"/>
         <source>Augmented Seventh</source>
-        <translation type="unfinished"></translation>
+        <translation>Zväčšená septima</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="397"/>
         <source>Diminished Octave</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmenšená oktáva</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="402"/>
         <source>Perfect Octave</source>
-        <translation type="unfinished"></translation>
+        <translation>Čistá oktáva</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="410"/>
         <source>+octave</source>
-        <translation type="unfinished"></translation>
+        <translation>+oktáva</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="424"/>
         <source>up</source>
-        <translation type="unfinished"></translation>
+        <translation>nahor</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="431"/>
         <source>down</source>
-        <translation type="unfinished"></translation>
+        <translation>nadol</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="455"/>
         <source>Use Drumset</source>
-        <translation type="unfinished"></translation>
+        <translation>Použiť bicie</translation>
     </message>
     <message>
         <location filename="../../mscore/editstaff.ui" line="468"/>
         <source>Edit Drumset...</source>
-        <translation type="unfinished"></translation>
+        <translation>Upraviť bicie...</translation>
     </message>
 </context>
 <context>
@@ -2087,27 +2098,27 @@ failed: </source>
     <message>
         <location filename="../../mscore/editstyle.cpp" line="62"/>
         <source>Symbol</source>
-        <translation type="unfinished"></translation>
+        <translation>Symbol</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.cpp" line="62"/>
         <source>Anchor</source>
-        <translation type="unfinished"></translation>
+        <translation>Kotva</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.cpp" line="76"/>
         <source>TopStaff</source>
-        <translation type="unfinished"></translation>
+        <translation>Horná osnova</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.cpp" line="77"/>
         <source>BottomStaff</source>
-        <translation type="unfinished"></translation>
+        <translation>Dolná osnova</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.cpp" line="78"/>
         <source>Chord</source>
-        <translation type="unfinished"></translation>
+        <translation>Akord</translation>
     </message>
 </context>
 <context>
@@ -2115,99 +2126,99 @@ failed: </source>
     <message>
         <location filename="../../mscore/editstyle.ui" line="14"/>
         <source>MuseScore: Edit Style</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Úprava štýlu</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="42"/>
         <source>Score</source>
-        <translation type="unfinished"></translation>
+        <translation>Notový zápis</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="47"/>
         <source>Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Strana</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="52"/>
         <location filename="../../mscore/editstyle.ui" line="686"/>
         <source>System</source>
-        <translation type="unfinished"></translation>
+        <translation>Systém</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="57"/>
         <location filename="../../mscore/editstyle.ui" line="758"/>
         <source>Measure</source>
-        <translation type="unfinished"></translation>
+        <translation>Takt</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="62"/>
         <location filename="../../mscore/editstyle.ui" line="1032"/>
         <source>Barlines</source>
-        <translation type="unfinished"></translation>
+        <translation>Taktové čiary</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="67"/>
         <location filename="../../mscore/editstyle.ui" line="1069"/>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Noty</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="72"/>
         <location filename="../../mscore/editstyle.ui" line="1292"/>
         <source>Arpeggios</source>
-        <translation type="unfinished"></translation>
+        <translation>Arpeggia</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="77"/>
         <source>Numbers</source>
-        <translation type="unfinished"></translation>
+        <translation>Čísla</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="82"/>
         <location filename="../../mscore/editstyle.ui" line="1496"/>
         <source>Beams</source>
-        <translation type="unfinished"></translation>
+        <translation>Zástavky</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="87"/>
         <source>Sizes</source>
-        <translation type="unfinished"></translation>
+        <translation>Veľkosti</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="92"/>
         <source>Hairpins</source>
-        <translation type="unfinished"></translation>
+        <translation>Spony na (de)crescendo</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="97"/>
         <location filename="../../mscore/editstyle.ui" line="1857"/>
         <source>Chordnames</source>
-        <translation type="unfinished"></translation>
+        <translation>Názvy akordov</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="102"/>
         <source>Articulations, Ornaments</source>
-        <translation type="unfinished"></translation>
+        <translation>Artikulácia, ozdoby</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="107"/>
         <source>Voices</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlasy</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="145"/>
         <source>Display in Concert Pitch</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobraziť v koncertnom ladení</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="152"/>
         <source>Create Multi Measure Rests</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvoriť viactaktové pomlčky</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="169"/>
         <source>Minumum width of measure:</source>
-        <translation type="unfinished"></translation>
+        <translation>Minimálna šírka taktu:</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="176"/>
@@ -2246,67 +2257,67 @@ failed: </source>
 space unit
 ----------
 space unit</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>sp</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="189"/>
         <source>Minimum Number of empty measures:</source>
-        <translation type="unfinished"></translation>
+        <translation>Minimálny počet prázdnych taktov</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="204"/>
         <source>Hide Empty Staves</source>
-        <translation type="unfinished"></translation>
+        <translation>Skryť prázdne notové osnovy</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="234"/>
         <source>Music upper margin</source>
-        <translation type="unfinished"></translation>
+        <translation>Horný okraj nôt</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="269"/>
         <source>Music lower margin</source>
-        <translation type="unfinished"></translation>
+        <translation>Dolný okraj nôt</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="304"/>
         <source>Staff distance</source>
-        <translation type="unfinished"></translation>
+        <translation>Vzdialenosť notovej osnovy</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="342"/>
         <source>Akkolade distance</source>
-        <translation type="unfinished"></translation>
+        <translation>Vzdialenosť akolády</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="380"/>
         <source>System distance</source>
-        <translation type="unfinished"></translation>
+        <translation>Vzdialenosť osnovy</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="415"/>
         <source>Lyrics upper margin</source>
-        <translation type="unfinished"></translation>
+        <translation>Horný okraj textu piesne</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="447"/>
         <source>Lyrics lower margin</source>
-        <translation type="unfinished"></translation>
+        <translation>Dolný okraj textu piesne</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="460"/>
         <source>V-frame upper margin</source>
-        <translation type="unfinished"></translation>
+        <translation>Horný okraj rámčeka V</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="492"/>
         <source>V-frame lower margin</source>
-        <translation type="unfinished"></translation>
+        <translation>Dolný okraj rámčeka V</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="524"/>
         <source>Page fill threshold:</source>
-        <translation type="unfinished"></translation>
+        <translation>Hranica naplnenia strany:</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="537"/>
@@ -2316,295 +2327,295 @@ space unit</extracomment>
         <location filename="../../mscore/editstyle.ui" line="1714"/>
         <location filename="../../mscore/editstyle.ui" line="1752"/>
         <source>%</source>
-        <translation type="unfinished"></translation>
+        <translation>%</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="562"/>
         <source>Last system fill threshold</source>
-        <translation type="unfinished"></translation>
+        <translation>Limit naplnenia poslednej osnovy</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="597"/>
         <source>Create clef for all systems</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvoriť kľúč pre všetky osnovy</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="610"/>
         <source>Create key sig for all systems</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvoriť označenia taktov pre všetky osnovy</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="636"/>
         <source>Create time signatures</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvoriť označenia taktov</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="649"/>
         <source>Create courtesy time signatures</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvoriťkonvenčné označenia taktov</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="656"/>
         <source>Create courtesy key signatures</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvoriť konvenčné tóniny</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="700"/>
         <source>System Bracket Distance:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vzdialenosť zátvoriek osnovy:</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="732"/>
         <source>Fix Number of Measures/System:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pevný počet taktov/osnov</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="739"/>
         <source>Fix Measure Width</source>
-        <translation type="unfinished"></translation>
+        <translation>Pevná šírka taktu</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="769"/>
         <source>Spacing (1=tight)</source>
-        <translation type="unfinished"></translation>
+        <translation>Riadkovanie (1 = tesné)</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="798"/>
         <source>Left margin</source>
-        <translation type="unfinished"></translation>
+        <translation>Ľavý okraj</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="824"/>
         <source>Right margin</source>
-        <translation type="unfinished"></translation>
+        <translation>Pravý okraj</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="850"/>
         <source>Min. note distance</source>
-        <translation type="unfinished"></translation>
+        <translation>Min. vzdialenosť medzi notami</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="876"/>
         <source>Clef left margin</source>
-        <translation type="unfinished"></translation>
+        <translation>Ľavý okraj kľúča</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="902"/>
         <source>Key sig. left margin</source>
-        <translation type="unfinished"></translation>
+        <translation>Ľavý okraj označenia tóniny</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="928"/>
         <source>Time sig. left margin</source>
-        <translation type="unfinished"></translation>
+        <translation>Ľavý okraj označenia taktu</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="954"/>
         <source>Clef-key distance</source>
-        <translation type="unfinished"></translation>
+        <translation>Vzdialenosť kľúča od tóniny</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="980"/>
         <source>Clef-barline distance</source>
-        <translation type="unfinished"></translation>
+        <translation>Vzdialenosť kľúča od taktovej čiary</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="1000"/>
         <source>Begin repeat left margin</source>
-        <translation type="unfinished"></translation>
+        <translation>Ľavý okraj začiatku opakovania</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="1038"/>
-        <source>Show repeat bar tips (&quot;winged&quot; repeats)</source>
-        <translation type="unfinished"></translation>
+        <source>Show repeat bar tips ("winged" repeats)</source>
+        <translation>Zobrazovať konce opakovacích taktových čiar s krídlami</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="1045"/>
         <source>Barline at start of single staff</source>
-        <translation type="unfinished"></translation>
+        <translation>Taktová čiara na začiatku jednoduchej notovej osnovy</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="1052"/>
         <source>Barline at start of multiple staves</source>
-        <translation type="unfinished"></translation>
+        <translation>Taktová čiara na začiatku viacerých notových osnov</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="1078"/>
         <source>shorten stems</source>
-        <translation type="unfinished"></translation>
+        <translation>Skrátiť nožičky</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="1095"/>
         <source>Progression</source>
-        <translation type="unfinished"></translation>
+        <translation>Prechod</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="1125"/>
         <source>Shortest stem</source>
-        <translation type="unfinished"></translation>
+        <translation>Najkratšia notová nožička</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="1155"/>
         <source>Accidental note distance</source>
-        <translation type="unfinished"></translation>
+        <translation>Vzdialenosť noty od predznamenávania</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="1178"/>
         <source>Accidental distance</source>
-        <translation type="unfinished"></translation>
+        <translation>Vzdialenosť predznamenávania</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="1201"/>
         <source>Note dot distance</source>
-        <translation type="unfinished"></translation>
+        <translation>Vzdialenosť noty od bodky</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="1224"/>
         <source>Dot dot distance</source>
-        <translation type="unfinished"></translation>
+        <translation>Vzdialenosť bodiek</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="1247"/>
         <source>Ledger line width</source>
-        <translation type="unfinished"></translation>
+        <translation>Šírka notovej čiary</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="1303"/>
         <source>Distance to note</source>
-        <translation type="unfinished"></translation>
+        <translation>Vzdialenosť od noty</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="1323"/>
         <location filename="../../mscore/editstyle.ui" line="1785"/>
         <source>Line width</source>
-        <translation type="unfinished"></translation>
+        <translation>Šírka čiary</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="1343"/>
         <source>Hook length</source>
-        <translation type="unfinished"></translation>
+        <translation>Dĺžka háčika</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="1391"/>
         <source>Page Numbers</source>
-        <translation type="unfinished"></translation>
+        <translation>Číslovanie strán</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="1403"/>
         <location filename="../../mscore/editstyle.ui" line="1448"/>
         <source>show first</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobraziť ako prvé</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="1410"/>
         <source>odd/even</source>
-        <translation type="unfinished"></translation>
+        <translation>nepárne/párne</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="1433"/>
         <source>Measure Numbers</source>
-        <translation type="unfinished"></translation>
+        <translation>Čísla taktov</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="1455"/>
         <source>all staffs</source>
-        <translation type="unfinished"></translation>
+        <translation>Všetky notové osnovy</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="1462"/>
         <source>every system</source>
-        <translation type="unfinished"></translation>
+        <translation>Každá osnova</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="1469"/>
         <source>interval</source>
-        <translation type="unfinished"></translation>
+        <translation>interval</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="1505"/>
         <source>Beam width</source>
-        <translation type="unfinished"></translation>
+        <translation>Šírka zástavky</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="1519"/>
         <location filename="../../mscore/editstyle.ui" line="1561"/>
         <source>spaces</source>
-        <translation type="unfinished"></translation>
+        <translation>Medzery</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="1526"/>
         <source>Beam distance</source>
-        <translation type="unfinished"></translation>
+        <translation>Vzdialenosť zástavky</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="1540"/>
         <source>beam width units</source>
-        <translation type="unfinished"></translation>
+        <translation>Jednotky šírky zástavok</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="1547"/>
         <source>Minimum length</source>
-        <translation type="unfinished"></translation>
+        <translation>Minimálna dĺžka</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="1568"/>
         <source>Minimum slope</source>
-        <translation type="unfinished"></translation>
+        <translation>Minimálne stúpanie</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="1585"/>
         <source>Maximum slope</source>
-        <translation type="unfinished"></translation>
+        <translation>Maximálne stúpanie</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="1628"/>
         <source>Small staff size</source>
-        <translation type="unfinished"></translation>
+        <translation>Veľkosť malej notovej osnovy</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="1666"/>
         <source>Small note size</source>
-        <translation type="unfinished"></translation>
+        <translation>Veľkosť malej noty</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="1701"/>
         <source>Grace note size</source>
-        <translation type="unfinished"></translation>
+        <translation>Veľkosť ozdoby</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="1739"/>
         <source>Small clef size</source>
-        <translation type="unfinished"></translation>
+        <translation>Veľkosť malého kľúča</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="1812"/>
         <source>Height</source>
-        <translation type="unfinished"></translation>
+        <translation>Výška</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="1826"/>
         <source>Line break height</source>
-        <translation type="unfinished"></translation>
+        <translation>Výška zlomu riadka</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="1866"/>
         <source>Use German names</source>
-        <translation type="unfinished"></translation>
+        <translation>Používať nemecké názvy nôt</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="1875"/>
         <source>Chord description file</source>
-        <translation type="unfinished"></translation>
+        <translation>Súbor popisu akordu</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="1885"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="1920"/>
         <source>Articulation - note head distance</source>
-        <translation type="unfinished"></translation>
+        <translation>Artikulácia – vzdialenosť notovej hlavičky</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="1927"/>
@@ -2612,27 +2623,27 @@ space unit</extracomment>
         <location filename="../../mscore/editstyle.ui" line="1961"/>
         <source>sp</source>
         <comment>space unit</comment>
-        <translation type="unfinished"></translation>
+        <translation>sp</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="1937"/>
         <source>Articulation - note stem distance</source>
-        <translation type="unfinished"></translation>
+        <translation>Artikulácia – vzdialenosť notovej nožičky</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="1954"/>
         <source>Articulation - articulation distance</source>
-        <translation type="unfinished"></translation>
+        <translation>Artikulácia – vzdialenosť artikulácie</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="2030"/>
         <source>Stem Direction in Multi Voice Context</source>
-        <translation type="unfinished"></translation>
+        <translation>Smer nožičky pri viachlase</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="2039"/>
         <source>Voice 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlas 1</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="2046"/>
@@ -2640,7 +2651,7 @@ space unit</extracomment>
         <location filename="../../mscore/editstyle.ui" line="2088"/>
         <location filename="../../mscore/editstyle.ui" line="2109"/>
         <source>Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahor</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="2053"/>
@@ -2648,22 +2659,22 @@ space unit</extracomment>
         <location filename="../../mscore/editstyle.ui" line="2095"/>
         <location filename="../../mscore/editstyle.ui" line="2116"/>
         <source>Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Nadol</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="2060"/>
         <source>Voice 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlas 2</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="2081"/>
         <source>Voice 3</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlas 3</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="2102"/>
         <source>Voice 4</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlas 4</translation>
     </message>
 </context>
 <context>
@@ -2671,27 +2682,27 @@ space unit</extracomment>
     <message>
         <location filename="../../mscore/edittempo.ui" line="14"/>
         <source>MuseScore: Tempo Text</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Text tempa</translation>
     </message>
     <message>
         <location filename="../../mscore/edittempo.ui" line="55"/>
         <source>BPM:</source>
-        <translation type="unfinished"></translation>
+        <translation>Úderov/min.:</translation>
     </message>
     <message>
         <location filename="../../mscore/edittempo.ui" line="65"/>
         <source>Text:</source>
-        <translation type="unfinished"></translation>
+        <translation>Text:</translation>
     </message>
     <message>
         <location filename="../../mscore/edittempo.ui" line="99"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../../mscore/edittempo.ui" line="109"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Zrušiť</translation>
     </message>
 </context>
 <context>
@@ -2699,17 +2710,17 @@ space unit</extracomment>
     <message>
         <location filename="../../mscore/element.cpp" line="559"/>
         <source>Set Invisible</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastaviť ako neviditeľné</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="561"/>
         <source>Set Visible</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastaviť ako viditeľné</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="563"/>
         <source>Color...</source>
-        <translation type="unfinished"></translation>
+        <translation>Farba...</translation>
     </message>
 </context>
 <context>
@@ -2717,22 +2728,22 @@ space unit</extracomment>
     <message>
         <location filename="../../mscore/element.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulár</translation>
     </message>
     <message>
         <location filename="../../mscore/element.ui" line="142"/>
         <source>selectable</source>
-        <translation type="unfinished"></translation>
+        <translation>voliteľný</translation>
     </message>
     <message>
         <location filename="../../mscore/element.ui" line="149"/>
         <source>droptarget</source>
-        <translation type="unfinished"></translation>
+        <translation>Pustiť cieľ</translation>
     </message>
     <message>
         <location filename="../../mscore/element.ui" line="256"/>
         <source>invalid</source>
-        <translation type="unfinished"></translation>
+        <translation>neplatný</translation>
     </message>
 </context>
 <context>
@@ -2740,57 +2751,57 @@ space unit</extracomment>
     <message>
         <location filename="../../mscore/excerptsdialog.ui" line="13"/>
         <source>MuseScore: Parts</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Hlasy</translation>
     </message>
     <message>
         <location filename="../../mscore/excerptsdialog.ui" line="19"/>
         <source>Select Part:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte hlas</translation>
     </message>
     <message>
         <location filename="../../mscore/excerptsdialog.ui" line="37"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstrániť</translation>
     </message>
     <message>
         <location filename="../../mscore/excerptsdialog.ui" line="57"/>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nový</translation>
     </message>
     <message>
         <location filename="../../mscore/excerptsdialog.ui" line="69"/>
         <source>Edit Part:</source>
-        <translation type="unfinished"></translation>
+        <translation>Upraviť hlas:</translation>
     </message>
     <message>
         <location filename="../../mscore/excerptsdialog.ui" line="78"/>
         <source>File Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Názov súboru</translation>
     </message>
     <message>
         <location filename="../../mscore/excerptsdialog.ui" line="88"/>
         <source>Part Title:</source>
-        <translation type="unfinished"></translation>
+        <translation>Názov hlasu:</translation>
     </message>
     <message>
         <location filename="../../mscore/excerptsdialog.ui" line="98"/>
         <source>Instrument:</source>
-        <translation type="unfinished"></translation>
+        <translation>Hudobný nástroj:</translation>
     </message>
     <message>
         <location filename="../../mscore/excerptsdialog.ui" line="113"/>
         <source>Create Part</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvoriť hlas</translation>
     </message>
     <message>
         <location filename="../../mscore/excerptsdialog.ui" line="133"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Zatvoriť</translation>
     </message>
     <message>
         <location filename="../../mscore/excerptsdialog.cpp" line="167"/>
         <source>Part-%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlas – %1</translation>
     </message>
 </context>
 <context>
@@ -2798,7 +2809,7 @@ space unit</extracomment>
     <message>
         <location filename="../../mscore/glissando.cpp" line="203"/>
         <source>Glissando Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnosti glissanda</translation>
     </message>
 </context>
 <context>
@@ -2806,17 +2817,17 @@ space unit</extracomment>
     <message>
         <location filename="../../mscore/glissandoprop.ui" line="13"/>
         <source>MuseScore: Glissando Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Vlastnosti glissanda</translation>
     </message>
     <message>
         <location filename="../../mscore/glissandoprop.ui" line="43"/>
         <source>Show Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobraziť text</translation>
     </message>
     <message>
         <location filename="../../mscore/glissandoprop.ui" line="58"/>
         <source>Text:</source>
-        <translation type="unfinished"></translation>
+        <translation>Text:</translation>
     </message>
 </context>
 <context>
@@ -2824,7 +2835,7 @@ space unit</extracomment>
     <message>
         <location filename="../../mscore/utils.cpp" line="53"/>
         <source>record</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahrať</translation>
     </message>
 </context>
 <context>
@@ -2832,12 +2843,12 @@ space unit</extracomment>
     <message>
         <location filename="../../mscore/box.cpp" line="367"/>
         <source>Add Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať text</translation>
     </message>
     <message>
         <location filename="../../mscore/box.cpp" line="370"/>
         <source>HBox Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnosti HBoxu...</translation>
     </message>
 </context>
 <context>
@@ -2845,22 +2856,22 @@ space unit</extracomment>
     <message>
         <location filename="../../mscore/hairpin.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulár</translation>
     </message>
     <message>
         <location filename="../../mscore/hairpin.ui" line="26"/>
         <source>Hairpin</source>
-        <translation type="unfinished"></translation>
+        <translation>Spona pre (de)crescscendo</translation>
     </message>
     <message>
         <location filename="../../mscore/hairpin.ui" line="49"/>
         <source>Tick1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Fajka 1:</translation>
     </message>
     <message>
         <location filename="../../mscore/hairpin.ui" line="69"/>
         <source>Tick2:</source>
-        <translation type="unfinished"></translation>
+        <translation>Fajka 2:</translation>
     </message>
 </context>
 <context>
@@ -2868,12 +2879,12 @@ space unit</extracomment>
     <message>
         <location filename="../../mscore/harmony.cpp" line="407"/>
         <source>Harmony Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnosti harmónie...</translation>
     </message>
     <message>
         <location filename="../../mscore/harmony.cpp" line="409"/>
         <source>Text Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnosti textu...</translation>
     </message>
 </context>
 <context>
@@ -2881,12 +2892,12 @@ space unit</extracomment>
     <message>
         <location filename="../../mscore/image.cpp" line="313"/>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Obrázok</translation>
     </message>
     <message>
         <location filename="../../mscore/image.cpp" line="314"/>
         <source>Image Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnosti obrázka...</translation>
     </message>
 </context>
 <context>
@@ -2894,12 +2905,12 @@ space unit</extracomment>
     <message>
         <location filename="../../mscore/imageproperties.ui" line="13"/>
         <source>Image Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnosti obrázka</translation>
     </message>
     <message>
         <location filename="../../mscore/imageproperties.ui" line="19"/>
         <source>lock aspect ratio</source>
-        <translation type="unfinished"></translation>
+        <translation>zamknúť pomer strán</translation>
     </message>
 </context>
 <context>
@@ -2907,42 +2918,42 @@ space unit</extracomment>
     <message>
         <location filename="../../mscore/importmidi.ui" line="13"/>
         <source>MuseScore: Midi Import</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Nahratie Midi</translation>
     </message>
     <message>
         <location filename="../../mscore/importmidi.ui" line="34"/>
         <source>Shortest note on import:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nakratšia nota pri nahrávaní</translation>
     </message>
     <message>
         <location filename="../../mscore/importmidi.ui" line="42"/>
         <source>1/4</source>
-        <translation type="unfinished"></translation>
+        <translation>1/4</translation>
     </message>
     <message>
         <location filename="../../mscore/importmidi.ui" line="47"/>
         <source>1/8</source>
-        <translation type="unfinished"></translation>
+        <translation>1/8</translation>
     </message>
     <message>
         <location filename="../../mscore/importmidi.ui" line="52"/>
         <source>1/16</source>
-        <translation type="unfinished"></translation>
+        <translation>1/16</translation>
     </message>
     <message>
         <location filename="../../mscore/importmidi.ui" line="57"/>
         <source>1/32</source>
-        <translation type="unfinished"></translation>
+        <translation>1/32</translation>
     </message>
     <message>
         <location filename="../../mscore/importmidi.ui" line="62"/>
         <source>1/64</source>
-        <translation type="unfinished"></translation>
+        <translation>1/64</translation>
     </message>
     <message>
         <location filename="../../mscore/importmidi.ui" line="67"/>
         <source>1/128</source>
-        <translation type="unfinished"></translation>
+        <translation>1/128</translation>
     </message>
 </context>
 <context>
@@ -2950,27 +2961,27 @@ space unit</extracomment>
     <message>
         <location filename="../../mscore/insertmeasuresdialog.ui" line="13"/>
         <source>Mscore: Insert Measures</source>
-        <translation type="unfinished"></translation>
+        <translation>Mscore: Vloženie taktov</translation>
     </message>
     <message>
         <location filename="../../mscore/insertmeasuresdialog.ui" line="52"/>
         <source>Insert empty measures:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vložiť prázdne takty</translation>
     </message>
     <message>
         <location filename="../../mscore/insertmeasuresdialog.ui" line="77"/>
         <source>Number of measures to insert</source>
-        <translation type="unfinished"></translation>
+        <translation>Počet taktov, ktoré treba vložiť</translation>
     </message>
     <message>
         <location filename="../../mscore/insertmeasuresdialog.ui" line="120"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../../mscore/insertmeasuresdialog.ui" line="127"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Zrušiť</translation>
     </message>
 </context>
 <context>
@@ -2978,7 +2989,7 @@ space unit</extracomment>
     <message>
         <location filename="../../mscore/inspector.cpp" line="120"/>
         <source>MuseScore: Object Inspector</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Kontrola objektov</translation>
     </message>
 </context>
 <context>
@@ -2986,22 +2997,22 @@ space unit</extracomment>
     <message>
         <location filename="../../mscore/inspector.ui" line="15"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulár</translation>
     </message>
     <message>
         <location filename="../../mscore/inspector.ui" line="29"/>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation>Dozadu</translation>
     </message>
     <message>
         <location filename="../../mscore/inspector.ui" line="40"/>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Dopredu</translation>
     </message>
     <message>
         <location filename="../../mscore/inspector.ui" line="51"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
 </context>
 <context>
@@ -3009,78 +3020,78 @@ space unit</extracomment>
     <message>
         <location filename="../../mscore/instrdialog.ui" line="14"/>
         <source>MuseScore: Create Instruments</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Vytvorenie hudobných nástrojov</translation>
     </message>
     <message>
         <location filename="../../mscore/instrdialog.ui" line="37"/>
         <location filename="../../mscore/instrdialog.ui" line="233"/>
         <source>0</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../mscore/instrdialog.ui" line="45"/>
         <source>show more</source>
-        <translation type="unfinished"></translation>
+        <translation>Viac</translation>
     </message>
     <message>
         <location filename="../../mscore/instrdialog.ui" line="81"/>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať</translation>
     </message>
     <message>
         <location filename="../../mscore/instrdialog.ui" line="94"/>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstrániť</translation>
     </message>
     <message>
         <location filename="../../mscore/instrdialog.ui" line="120"/>
         <source>Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahor</translation>
     </message>
     <message>
         <location filename="../../mscore/instrdialog.ui" line="133"/>
         <source>Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Nadol</translation>
     </message>
     <message>
         <location filename="../../mscore/instrdialog.ui" line="162"/>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Upraviť</translation>
     </message>
     <message>
         <location filename="../../mscore/instrdialog.ui" line="188"/>
         <source>Add Above</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať nad</translation>
     </message>
     <message>
         <location filename="../../mscore/instrdialog.ui" line="201"/>
         <source>Add Below</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať pod</translation>
     </message>
     <message>
         <location filename="../../mscore/instrdialog.ui" line="238"/>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation>1</translation>
     </message>
     <message>
         <location filename="../../mscore/instrdialog.ui" line="256"/>
         <source>Load</source>
-        <translation type="unfinished"></translation>
+        <translation>Načítať</translation>
     </message>
     <message>
         <location filename="../../mscore/instrdialog.ui" line="263"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložiť</translation>
     </message>
     <message>
         <location filename="../../mscore/instrdialog.ui" line="283"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../../mscore/instrdialog.ui" line="290"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Zrušiť</translation>
     </message>
 </context>
 <context>
@@ -3088,7 +3099,7 @@ space unit</extracomment>
     <message>
         <location filename="../../mscore/partedit.cpp" line="77"/>
         <source>MuseScore: Part List</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Zoznam hlasov</translation>
     </message>
 </context>
 <context>
@@ -3096,68 +3107,68 @@ space unit</extracomment>
     <message>
         <location filename="../../mscore/instrwizard.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulár</translation>
     </message>
     <message>
         <location filename="../../mscore/instrwizard.ui" line="35"/>
         <location filename="../../mscore/instrwizard.ui" line="196"/>
         <source>0</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../mscore/instrwizard.ui" line="43"/>
         <source>show more</source>
-        <translation type="unfinished"></translation>
+        <translation>Viac</translation>
     </message>
     <message>
         <location filename="../../mscore/instrwizard.ui" line="73"/>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať</translation>
     </message>
     <message>
         <location filename="../../mscore/instrwizard.ui" line="86"/>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstrániť</translation>
     </message>
     <message>
         <location filename="../../mscore/instrwizard.ui" line="112"/>
         <source>Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahor</translation>
     </message>
     <message>
         <location filename="../../mscore/instrwizard.ui" line="125"/>
         <source>Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Nadol</translation>
     </message>
     <message>
         <location filename="../../mscore/instrwizard.ui" line="151"/>
         <source>Add Above</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať nad</translation>
     </message>
     <message>
         <location filename="../../mscore/instrwizard.ui" line="164"/>
         <source>Add Below</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať pod</translation>
     </message>
     <message>
         <location filename="../../mscore/instrwizard.ui" line="201"/>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation>1</translation>
     </message>
     <message>
         <location filename="../../mscore/newwizard.cpp" line="44"/>
         <source>Instrument List</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoznam hudobných nástrojov</translation>
     </message>
     <message>
         <location filename="../../mscore/newwizard.cpp" line="45"/>
         <source>Staves</source>
-        <translation type="unfinished"></translation>
+        <translation>Osnovy</translation>
     </message>
     <message>
         <location filename="../../mscore/newwizard.cpp" line="45"/>
         <source>Clef</source>
-        <translation type="unfinished"></translation>
+        <translation>Kľúč</translation>
     </message>
 </context>
 <context>
@@ -3165,69 +3176,71 @@ space unit</extracomment>
     <message>
         <location filename="../../mscore/instrdialog.cpp" line="73"/>
         <source>Staff %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Notová osnova %1</translation>
     </message>
     <message>
         <location filename="../../mscore/instrdialog.cpp" line="160"/>
         <source>Instrument List</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoznam hudobných nástrojov</translation>
     </message>
     <message>
         <location filename="../../mscore/instrdialog.cpp" line="161"/>
         <source>Staves</source>
-        <translation type="unfinished"></translation>
+        <translation>Osnovy</translation>
     </message>
     <message>
         <location filename="../../mscore/instrdialog.cpp" line="161"/>
         <source>Clef</source>
-        <translation type="unfinished"></translation>
+        <translation>Kľúč</translation>
     </message>
     <message>
         <location filename="../../mscore/instrdialog.cpp" line="1012"/>
         <source>MuseScore: Save Instrument List</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Uložiť zoznam hudobných nástrojov</translation>
     </message>
     <message>
         <location filename="../../mscore/instrdialog.cpp" line="1014"/>
         <source>MuseScore Instruments (*.xml);;</source>
-        <translation type="unfinished"></translation>
+        <translation>Hudobné nástroje MuseScore (*.xml);;</translation>
     </message>
     <message>
         <location filename="../../mscore/instrdialog.cpp" line="1025"/>
         <source>Open Instruments File
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Otvoriť súbor s hudobnými nástrojmi
+</translation>
     </message>
     <message>
         <location filename="../../mscore/instrdialog.cpp" line="1025"/>
         <source>
 failed: </source>
-        <translation type="unfinished"></translation>
+        <translation>
+nepodarilo sa: </translation>
     </message>
     <message>
         <location filename="../../mscore/instrdialog.cpp" line="1027"/>
         <source>MuseScore: Open Instruments file</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Otvorenie súboru s hudobnými nástrojmi</translation>
     </message>
     <message>
         <location filename="../../mscore/instrdialog.cpp" line="1042"/>
         <source>Write Style failed: </source>
-        <translation type="unfinished"></translation>
+        <translation>Zapís štýlu sa nepodaril: </translation>
     </message>
     <message>
         <location filename="../../mscore/instrdialog.cpp" line="1043"/>
         <source>MuseScore: Write Style</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Zápis štýlu</translation>
     </message>
     <message>
         <location filename="../../mscore/instrdialog.cpp" line="1054"/>
         <source>MuseScore: Load Instrument List</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Načítanie zoznamu hudobných nástrojov</translation>
     </message>
     <message>
         <location filename="../../mscore/instrdialog.cpp" line="1056"/>
         <source>MuseScore Instruments (*.xml);;All files (*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Hudobné nástroje MuseScore (*.xml);;Všetky súbory (*)</translation>
     </message>
 </context>
 <context>
@@ -3235,7 +3248,7 @@ failed: </source>
     <message>
         <location filename="../../mscore/repeat.cpp" line="389"/>
         <source>Jump Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnosti preskočenia...</translation>
     </message>
 </context>
 <context>
@@ -3243,22 +3256,22 @@ failed: </source>
     <message>
         <location filename="../../mscore/jumpproperties.ui" line="13"/>
         <source>Jump Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnosti preskočenia</translation>
     </message>
     <message>
         <location filename="../../mscore/jumpproperties.ui" line="19"/>
         <source>Jump to:</source>
-        <translation type="unfinished"></translation>
+        <translation>Preskočiť na:</translation>
     </message>
     <message>
         <location filename="../../mscore/jumpproperties.ui" line="29"/>
         <source>Play until:</source>
-        <translation type="unfinished"></translation>
+        <translation>Prehrať po:</translation>
     </message>
     <message>
         <location filename="../../mscore/jumpproperties.ui" line="62"/>
         <source>Continue at:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokračovať od:</translation>
     </message>
 </context>
 <context>
@@ -3266,27 +3279,27 @@ failed: </source>
     <message>
         <location filename="../../mscore/keyedit.ui" line="78"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulár</translation>
     </message>
     <message>
         <location filename="../../mscore/keyedit.ui" line="179"/>
         <source>Create Key Signature</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvoriť označenie tóniny</translation>
     </message>
     <message>
         <location filename="../../mscore/keyedit.ui" line="228"/>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyčistiť</translation>
     </message>
     <message>
         <location filename="../../mscore/keyedit.ui" line="248"/>
         <source>add time signature to palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať označenie taktu na paletu</translation>
     </message>
     <message>
         <location filename="../../mscore/keyedit.ui" line="251"/>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať</translation>
     </message>
 </context>
 <context>
@@ -3294,7 +3307,7 @@ failed: </source>
     <message>
         <location filename="../../mscore/keyedit.cpp" line="273"/>
         <source>MuseScore: Key Signatures</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Označenie tóniny</translation>
     </message>
 </context>
 <context>
@@ -3302,22 +3315,22 @@ failed: </source>
     <message>
         <location filename="../../mscore/keysig.cpp" line="262"/>
         <source>Hide courtesy signature</source>
-        <translation type="unfinished"></translation>
+        <translation>Schovať oznamenie zmeny</translation>
     </message>
     <message>
         <location filename="../../mscore/keysig.cpp" line="263"/>
         <source>Show courtesy signature</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobraziť oznamenie zmeny</translation>
     </message>
     <message>
         <location filename="../../mscore/keysig.cpp" line="266"/>
         <source>Hide naturals</source>
-        <translation type="unfinished"></translation>
+        <translation>Skryť odrážky</translation>
     </message>
     <message>
         <location filename="../../mscore/keysig.cpp" line="267"/>
         <source>Show naturals</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobraziť odrážky</translation>
     </message>
 </context>
 <context>
@@ -3325,17 +3338,17 @@ failed: </source>
     <message>
         <location filename="../../mscore/lineproperties.ui" line="13"/>
         <source>MuseScore: Line Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Vlastnosti čiary</translation>
     </message>
     <message>
         <location filename="../../mscore/lineproperties.ui" line="22"/>
         <source>Line</source>
-        <translation type="unfinished"></translation>
+        <translation>Čiara</translation>
     </message>
     <message>
         <location filename="../../mscore/lineproperties.ui" line="31"/>
         <source>Width:</source>
-        <translation type="unfinished"></translation>
+        <translation>Šírka:</translation>
     </message>
     <message>
         <location filename="../../mscore/lineproperties.ui" line="41"/>
@@ -3348,132 +3361,132 @@ failed: </source>
         <location filename="../../mscore/lineproperties.ui" line="704"/>
         <location filename="../../mscore/lineproperties.ui" line="740"/>
         <source>sp</source>
-        <translation type="unfinished"></translation>
+        <translation>sp</translation>
     </message>
     <message>
         <location filename="../../mscore/lineproperties.ui" line="51"/>
         <source>Line style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Štýl čiary:</translation>
     </message>
     <message>
         <location filename="../../mscore/lineproperties.ui" line="62"/>
         <source>solid</source>
-        <translation type="unfinished"></translation>
+        <translation>plná</translation>
     </message>
     <message>
         <location filename="../../mscore/lineproperties.ui" line="67"/>
         <source>dash</source>
-        <translation type="unfinished"></translation>
+        <translation>čiarkovaná</translation>
     </message>
     <message>
         <location filename="../../mscore/lineproperties.ui" line="72"/>
         <source>dot</source>
-        <translation type="unfinished"></translation>
+        <translation>bodkovaná</translation>
     </message>
     <message>
         <location filename="../../mscore/lineproperties.ui" line="77"/>
         <source>dash dot</source>
-        <translation type="unfinished"></translation>
+        <translation>bodkočiarkovaná</translation>
     </message>
     <message>
         <location filename="../../mscore/lineproperties.ui" line="82"/>
         <source>dash dot dot</source>
-        <translation type="unfinished"></translation>
+        <translation>bodkočiarkovaná s 2 bodkami</translation>
     </message>
     <message>
         <location filename="../../mscore/lineproperties.ui" line="96"/>
         <source>Color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Farba:</translation>
     </message>
     <message>
         <location filename="../../mscore/lineproperties.ui" line="135"/>
         <source>diagonally</source>
-        <translation type="unfinished"></translation>
+        <translation>šikmo</translation>
     </message>
     <message>
         <location filename="../../mscore/lineproperties.ui" line="153"/>
         <source>Begin</source>
-        <translation type="unfinished"></translation>
+        <translation>Začiatok</translation>
     </message>
     <message>
         <location filename="../../mscore/lineproperties.ui" line="159"/>
         <location filename="../../mscore/lineproperties.ui" line="404"/>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Text</translation>
     </message>
     <message>
         <location filename="../../mscore/lineproperties.ui" line="172"/>
         <location filename="../../mscore/lineproperties.ui" line="417"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../../mscore/lineproperties.ui" line="194"/>
         <location filename="../../mscore/lineproperties.ui" line="439"/>
         <source>place:</source>
-        <translation type="unfinished"></translation>
+        <translation>Umiestnenie:</translation>
     </message>
     <message>
         <location filename="../../mscore/lineproperties.ui" line="202"/>
         <location filename="../../mscore/lineproperties.ui" line="447"/>
         <source>Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Vľavo</translation>
     </message>
     <message>
         <location filename="../../mscore/lineproperties.ui" line="207"/>
         <location filename="../../mscore/lineproperties.ui" line="452"/>
         <source>Above</source>
-        <translation type="unfinished"></translation>
+        <translation>Nad</translation>
     </message>
     <message>
         <location filename="../../mscore/lineproperties.ui" line="223"/>
         <location filename="../../mscore/lineproperties.ui" line="468"/>
         <location filename="../../mscore/lineproperties.ui" line="609"/>
         <source>Symb.</source>
-        <translation type="unfinished"></translation>
+        <translation>Symb.</translation>
     </message>
     <message>
         <location filename="../../mscore/lineproperties.ui" line="234"/>
         <location filename="../../mscore/lineproperties.ui" line="479"/>
         <location filename="../../mscore/lineproperties.ui" line="617"/>
         <source>Ped (Pedal)</source>
-        <translation type="unfinished"></translation>
+        <translation>Pedál (zadržaný bas)</translation>
     </message>
     <message>
         <location filename="../../mscore/lineproperties.ui" line="276"/>
         <location filename="../../mscore/lineproperties.ui" line="521"/>
         <location filename="../../mscore/lineproperties.ui" line="659"/>
         <source>x:</source>
-        <translation type="unfinished"></translation>
+        <translation>x:</translation>
     </message>
     <message>
         <location filename="../../mscore/lineproperties.ui" line="308"/>
         <location filename="../../mscore/lineproperties.ui" line="553"/>
         <location filename="../../mscore/lineproperties.ui" line="691"/>
         <source>y:</source>
-        <translation type="unfinished"></translation>
+        <translation>y:</translation>
     </message>
     <message>
         <location filename="../../mscore/lineproperties.ui" line="336"/>
         <location filename="../../mscore/lineproperties.ui" line="725"/>
         <source>Hook</source>
-        <translation type="unfinished"></translation>
+        <translation>Háčik</translation>
     </message>
     <message>
         <location filename="../../mscore/lineproperties.ui" line="361"/>
         <location filename="../../mscore/lineproperties.ui" line="762"/>
         <source>Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahor</translation>
     </message>
     <message>
         <location filename="../../mscore/lineproperties.ui" line="392"/>
         <source>Continue</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokračovať</translation>
     </message>
     <message>
         <location filename="../../mscore/lineproperties.ui" line="597"/>
         <source>End</source>
-        <translation type="unfinished"></translation>
+        <translation>Koniec</translation>
     </message>
 </context>
 <context>
@@ -3481,47 +3494,47 @@ failed: </source>
     <message>
         <location filename="../../mscore/linesegment.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulár</translation>
     </message>
     <message>
         <location filename="../../mscore/linesegment.ui" line="20"/>
         <source>LineSegment</source>
-        <translation type="unfinished"></translation>
+        <translation>Časť čiar</translation>
     </message>
     <message>
         <location filename="../../mscore/linesegment.ui" line="31"/>
         <source>SegmentType:</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ časti:</translation>
     </message>
     <message>
         <location filename="../../mscore/linesegment.ui" line="39"/>
         <source>SINGLE</source>
-        <translation type="unfinished"></translation>
+        <translation>JEDNODUCHÝ</translation>
     </message>
     <message>
         <location filename="../../mscore/linesegment.ui" line="44"/>
         <source>BEGIN</source>
-        <translation type="unfinished"></translation>
+        <translation>ZAČIATOK</translation>
     </message>
     <message>
         <location filename="../../mscore/linesegment.ui" line="49"/>
         <source>MIDDLE</source>
-        <translation type="unfinished"></translation>
+        <translation>STRED</translation>
     </message>
     <message>
         <location filename="../../mscore/linesegment.ui" line="54"/>
         <source>END</source>
-        <translation type="unfinished"></translation>
+        <translation>KONIEC</translation>
     </message>
     <message>
         <location filename="../../mscore/linesegment.ui" line="79"/>
         <source>Pos2</source>
-        <translation type="unfinished"></translation>
+        <translation>Umiest 2</translation>
     </message>
     <message>
         <location filename="../../mscore/linesegment.ui" line="95"/>
         <source>Offset2</source>
-        <translation type="unfinished"></translation>
+        <translation>Posun 2</translation>
     </message>
 </context>
 <context>
@@ -3529,47 +3542,47 @@ failed: </source>
     <message>
         <location filename="../../mscore/lyrics.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulár</translation>
     </message>
     <message>
         <location filename="../../mscore/lyrics.ui" line="20"/>
         <source>Lyrics</source>
-        <translation type="unfinished"></translation>
+        <translation>Text piesne</translation>
     </message>
     <message>
         <location filename="../../mscore/lyrics.ui" line="29"/>
         <source>Syllabic:</source>
-        <translation type="unfinished"></translation>
+        <translation>Slabiky:</translation>
     </message>
     <message>
         <location filename="../../mscore/lyrics.ui" line="43"/>
         <source>Single</source>
-        <translation type="unfinished"></translation>
+        <translation>Jednoduchý</translation>
     </message>
     <message>
         <location filename="../../mscore/lyrics.ui" line="48"/>
         <source>Begin</source>
-        <translation type="unfinished"></translation>
+        <translation>Začiatok</translation>
     </message>
     <message>
         <location filename="../../mscore/lyrics.ui" line="53"/>
         <source>End</source>
-        <translation type="unfinished"></translation>
+        <translation>Koniec</translation>
     </message>
     <message>
         <location filename="../../mscore/lyrics.ui" line="58"/>
         <source>Middle</source>
-        <translation type="unfinished"></translation>
+        <translation>Stred</translation>
     </message>
     <message>
         <location filename="../../mscore/lyrics.ui" line="66"/>
         <source>Row:</source>
-        <translation type="unfinished"></translation>
+        <translation>Riadok:</translation>
     </message>
     <message>
         <location filename="../../mscore/lyrics.ui" line="83"/>
         <source>End Tick:</source>
-        <translation type="unfinished"></translation>
+        <translation>Posledná nota:</translation>
     </message>
 </context>
 <context>
@@ -3577,12 +3590,12 @@ failed: </source>
     <message>
         <location filename="../../mscore/magbox.cpp" line="52"/>
         <source>Magnification</source>
-        <translation type="unfinished"></translation>
+        <translation>Zväčšenie</translation>
     </message>
     <message>
         <location filename="../../mscore/magbox.cpp" line="53"/>
         <source>Zoom Canvas</source>
-        <translation type="unfinished"></translation>
+        <translation>Zväčšiť/zmenšiť plátno</translation>
     </message>
 </context>
 <context>
@@ -3590,7 +3603,7 @@ failed: </source>
     <message>
         <location filename="../../mscore/repeat.cpp" line="243"/>
         <source>Marker Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnosti zvýraznenia...</translation>
     </message>
 </context>
 <context>
@@ -3598,12 +3611,12 @@ failed: </source>
     <message>
         <location filename="../../mscore/markerproperties.ui" line="13"/>
         <source>Marker Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnosti zvýraznenia</translation>
     </message>
     <message>
         <location filename="../../mscore/markerproperties.ui" line="41"/>
         <source>Label:</source>
-        <translation type="unfinished"></translation>
+        <translation>Označenie:</translation>
     </message>
 </context>
 <context>
@@ -3611,7 +3624,7 @@ failed: </source>
     <message>
         <location filename="../../mscore/measure.cpp" line="1787"/>
         <source>Measure Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnosti taktu...</translation>
     </message>
 </context>
 <context>
@@ -3619,12 +3632,12 @@ failed: </source>
     <message>
         <location filename="../../mscore/measure.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulár</translation>
     </message>
     <message>
         <location filename="../../mscore/measure.ui" line="83"/>
         <source>breakMultiMeasureRest</source>
-        <translation type="unfinished"></translation>
+        <translation>Zlom viactaktovej pomlčky</translation>
     </message>
 </context>
 <context>
@@ -3632,12 +3645,12 @@ failed: </source>
     <message>
         <location filename="../../mscore/measureproperties.cpp" line="62"/>
         <source>visible</source>
-        <translation type="unfinished"></translation>
+        <translation>viditeľný</translation>
     </message>
     <message>
         <location filename="../../mscore/measureproperties.cpp" line="69"/>
         <source>stemless</source>
-        <translation type="unfinished"></translation>
+        <translation>bez nožičiek</translation>
     </message>
 </context>
 <context>
@@ -3645,103 +3658,103 @@ failed: </source>
     <message>
         <location filename="../../mscore/measureproperties.ui" line="17"/>
         <source>MuseScore: Measure Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Vlastnosti taktu</translation>
     </message>
     <message>
         <location filename="../../mscore/measureproperties.ui" line="46"/>
         <source>Staves</source>
-        <translation type="unfinished"></translation>
+        <translation>Osnovy</translation>
     </message>
     <message>
         <location filename="../../mscore/measureproperties.ui" line="71"/>
         <source>New Row</source>
-        <translation type="unfinished"></translation>
+        <translation>Nový riadok</translation>
     </message>
     <message>
         <location filename="../../mscore/measureproperties.ui" line="76"/>
         <source>Staff</source>
-        <translation type="unfinished"></translation>
+        <translation>Notová osnova</translation>
     </message>
     <message>
         <location filename="../../mscore/measureproperties.ui" line="81"/>
         <source>Visible</source>
-        <translation type="unfinished"></translation>
+        <translation>Viditeľná</translation>
     </message>
     <message>
         <location filename="../../mscore/measureproperties.ui" line="86"/>
         <source>Stemless</source>
-        <translation type="unfinished"></translation>
+        <translation>Bez nožičiek</translation>
     </message>
     <message>
         <location filename="../../mscore/measureproperties.ui" line="91"/>
         <source>a</source>
-        <translation type="unfinished"></translation>
+        <translation>a</translation>
     </message>
     <message>
         <location filename="../../mscore/measureproperties.ui" line="102"/>
         <source>visible</source>
-        <translation type="unfinished"></translation>
+        <translation>viditeľné</translation>
     </message>
     <message>
         <location filename="../../mscore/measureproperties.ui" line="110"/>
         <source>c</source>
-        <translation type="unfinished"></translation>
+        <translation>c</translation>
     </message>
     <message>
         <location filename="../../mscore/measureproperties.ui" line="124"/>
         <source>Measure Duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Dĺžka taktu</translation>
     </message>
     <message>
         <location filename="../../mscore/measureproperties.ui" line="142"/>
         <source>nominal</source>
-        <translation type="unfinished"></translation>
+        <translation>predpísaná</translation>
     </message>
     <message>
         <location filename="../../mscore/measureproperties.ui" line="162"/>
         <location filename="../../mscore/measureproperties.ui" line="195"/>
         <source>/</source>
-        <translation type="unfinished"></translation>
+        <translation>/</translation>
     </message>
     <message>
         <location filename="../../mscore/measureproperties.ui" line="178"/>
         <source>actual</source>
-        <translation type="unfinished"></translation>
+        <translation>skutočná</translation>
     </message>
     <message>
         <location filename="../../mscore/measureproperties.ui" line="256"/>
         <source>Other</source>
-        <translation type="unfinished"></translation>
+        <translation>Iné</translation>
     </message>
     <message>
         <location filename="../../mscore/measureproperties.ui" line="265"/>
         <source>do not count</source>
-        <translation type="unfinished"></translation>
+        <translation>nepočítať</translation>
     </message>
     <message>
         <location filename="../../mscore/measureproperties.ui" line="268"/>
         <source>irregular</source>
-        <translation type="unfinished"></translation>
+        <translation>nepravidelná</translation>
     </message>
     <message>
         <location filename="../../mscore/measureproperties.ui" line="275"/>
         <source>break multi measure rest</source>
-        <translation type="unfinished"></translation>
+        <translation>Zlom viactaktovej pomlčky</translation>
     </message>
     <message>
         <location filename="../../mscore/measureproperties.ui" line="296"/>
         <source>add to measure number</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať k číslu taktu</translation>
     </message>
     <message>
         <location filename="../../mscore/measureproperties.ui" line="319"/>
         <source>layout stretch</source>
-        <translation type="unfinished"></translation>
+        <translation>Roztiahnuť rozmiestnenie</translation>
     </message>
     <message>
         <location filename="../../mscore/measureproperties.ui" line="342"/>
         <source>repeat count:</source>
-        <translation type="unfinished"></translation>
+        <translation>Počet opakovaní:</translation>
     </message>
 </context>
 <context>
@@ -3749,27 +3762,27 @@ failed: </source>
     <message>
         <location filename="../../mscore/measuresdialog.ui" line="13"/>
         <source>Mscore: Append Measures</source>
-        <translation type="unfinished"></translation>
+        <translation>Mscore: Pripojiť takty</translation>
     </message>
     <message>
         <location filename="../../mscore/measuresdialog.ui" line="38"/>
         <source>Append empty measures:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pripojiť prázdne takty</translation>
     </message>
     <message>
         <location filename="../../mscore/measuresdialog.ui" line="53"/>
         <source>Number of measures to append</source>
-        <translation type="unfinished"></translation>
+        <translation>Počet taktov, ktoré treba pripojiť</translation>
     </message>
     <message>
         <location filename="../../mscore/measuresdialog.ui" line="106"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../../mscore/measuresdialog.ui" line="113"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Zrušiť</translation>
     </message>
 </context>
 <context>
@@ -3777,7 +3790,7 @@ failed: </source>
     <message>
         <location filename="../../mscore/mscore.cpp" line="676"/>
         <source>&amp;Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Noty</translation>
     </message>
 </context>
 <context>
@@ -3785,32 +3798,32 @@ failed: </source>
     <message>
         <location filename="../../mscore/metaedit.ui" line="13"/>
         <source>Dialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Dialógové okno</translation>
     </message>
     <message>
         <location filename="../../mscore/metaedit.ui" line="19"/>
         <source>Work Title:</source>
-        <translation type="unfinished"></translation>
+        <translation>Názov diela:</translation>
     </message>
     <message>
         <location filename="../../mscore/metaedit.ui" line="29"/>
         <source>Work Number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Číslo diela:</translation>
     </message>
     <message>
         <location filename="../../mscore/metaedit.ui" line="39"/>
         <source>Movement Title:</source>
-        <translation type="unfinished"></translation>
+        <translation>Názov skladby:</translation>
     </message>
     <message>
         <location filename="../../mscore/metaedit.ui" line="49"/>
         <source>Movement Number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Číslo skladby:</translation>
     </message>
     <message>
         <location filename="../../mscore/metaedit.ui" line="59"/>
         <source>Source:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zdroj:</translation>
     </message>
 </context>
 <context>
@@ -3819,1041 +3832,1052 @@ failed: </source>
         <location filename="../../mscore/file.cpp" line="146"/>
         <location filename="../../mscore/mscore.cpp" line="2977"/>
         <source>MuseScore</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="147"/>
-        <source>Save changes to the score &quot;%1&quot;
+        <source>Save changes to the score "%1"
 before closing?</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložiť pred zatvorením zmeny &#13;
+do notového zápisu „%1“?</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="182"/>
         <source>MuseScore: Load Score</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Načítanie notového zápisu</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="184"/>
         <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</source>
-        <translation type="unfinished"></translation>
+        <translation>Všetky podporované súbory (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="185"/>
         <source>MuseScore Files (*.mscz *.mscx *.msc);;</source>
-        <translation type="unfinished"></translation>
+        <translation>Súbory MuseScore (*.mscz *.mscx *.msc);;</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="186"/>
         <source>MusicXML Files (*.xml *.mxl);;</source>
-        <translation type="unfinished"></translation>
+        <translation>Súbory MusicXML (*.xml *.mxl);;</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="187"/>
         <source>MIDI Files (*.mid *.midi *.kar);;</source>
-        <translation type="unfinished"></translation>
+        <translation>Súbory MIDI (*.mid *.midi *.kar);;</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="188"/>
         <source>Muse Data Files (*.md);;</source>
-        <translation type="unfinished"></translation>
+        <translation>Súbory Muse Data (*.md);;</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="189"/>
         <source>Capella Files (*.cap);;</source>
-        <translation type="unfinished"></translation>
+        <translation>Súbory Capella (*.cap);;</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="190"/>
         <source>Bagpipe Music Writer Files (*.bww);;</source>
-        <translation type="unfinished"></translation>
+        <translation>Súbory Bagpipe Music Writer (*.bww);;</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="191"/>
         <source>BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;</source>
-        <translation type="unfinished"></translation>
+        <translation>Súbory BB &lt;experimentálne&gt; (*.mgu *.MGU *.sgu *.SGU);;</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="192"/>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
-        <translation type="unfinished"></translation>
+        <translation>Súbory Overture &lt;experimentálne&gt; (*.ove);;</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="193"/>
         <source>All Files (*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Všetky súbory</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="548"/>
         <source>Untitled</source>
-        <translation type="unfinished"></translation>
+        <translation>Bez názvu</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="602"/>
         <source>MuseScore: failure</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: zlyhanie</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="603"/>
         <source>Load template file </source>
-        <translation type="unfinished"></translation>
+        <translation>Načítať súbor šablóny </translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="603"/>
         <source> failed</source>
-        <translation type="unfinished"></translation>
+        <translation> nepodarilo sa</translation>
     </message>
     <message>
         <location filename="../../mscore/keysig.cpp" line="32"/>
         <source>G major, E minor</source>
-        <translation type="unfinished"></translation>
+        <translation>G dur, E mol</translation>
     </message>
     <message>
         <location filename="../../mscore/keysig.cpp" line="32"/>
         <source>Cb major, Ab minor</source>
-        <translation type="unfinished"></translation>
+        <translation>Ces dur, As mol</translation>
     </message>
     <message>
         <location filename="../../mscore/keysig.cpp" line="33"/>
         <source>D major, B minor</source>
-        <translation type="unfinished"></translation>
+        <translation>D dur, B mol</translation>
     </message>
     <message>
         <location filename="../../mscore/keysig.cpp" line="33"/>
         <source>Gb major, Eb minor</source>
-        <translation type="unfinished"></translation>
+        <translation>Ges dur, Es mol</translation>
     </message>
     <message>
         <location filename="../../mscore/keysig.cpp" line="34"/>
         <source>A major, F# minor</source>
-        <translation type="unfinished"></translation>
+        <translation>A dur, Fis mol</translation>
     </message>
     <message>
         <location filename="../../mscore/keysig.cpp" line="34"/>
         <source>Db major, Bb minor</source>
-        <translation type="unfinished"></translation>
+        <translation>Dis dur, Bes mol</translation>
     </message>
     <message>
         <location filename="../../mscore/keysig.cpp" line="35"/>
         <source>E major, C# minor</source>
-        <translation type="unfinished"></translation>
+        <translation>E dur, Cis mol</translation>
     </message>
     <message>
         <location filename="../../mscore/keysig.cpp" line="35"/>
         <source>Ab major, F minor</source>
-        <translation type="unfinished"></translation>
+        <translation>As dur, F mol</translation>
     </message>
     <message>
         <location filename="../../mscore/keysig.cpp" line="36"/>
         <source>B major, G# minor</source>
-        <translation type="unfinished"></translation>
+        <translation>B dur, Gis mol</translation>
     </message>
     <message>
         <location filename="../../mscore/keysig.cpp" line="36"/>
         <source>Eb major, C minor</source>
-        <translation type="unfinished"></translation>
+        <translation>Es dur, C mol</translation>
     </message>
     <message>
         <location filename="../../mscore/keysig.cpp" line="37"/>
         <source>F# major, D# minor</source>
-        <translation type="unfinished"></translation>
+        <translation>Fis dur, Dis mol</translation>
     </message>
     <message>
         <location filename="../../mscore/keysig.cpp" line="37"/>
         <source>Bb major, G minor</source>
-        <translation type="unfinished"></translation>
+        <translation>B dur, G mol</translation>
     </message>
     <message>
         <location filename="../../mscore/keysig.cpp" line="38"/>
         <source>C# major, A# minor</source>
-        <translation type="unfinished"></translation>
+        <translation>Cis dur, Ais mol</translation>
     </message>
     <message>
         <location filename="../../mscore/keysig.cpp" line="38"/>
         <source>F major,  D minor</source>
-        <translation type="unfinished"></translation>
+        <translation>F dur,  D mol</translation>
     </message>
     <message>
         <location filename="../../mscore/keysig.cpp" line="39"/>
         <source>C major, A minor</source>
-        <translation type="unfinished"></translation>
+        <translation>C dur, A mol</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="93"/>
         <source>Grace Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Noty ozdôb</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="100"/>
         <source>Acciaccatura</source>
-        <translation type="unfinished"></translation>
+        <translation>Acciaccatura</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="105"/>
         <source>Appoggiatura</source>
-        <translation type="unfinished"></translation>
+        <translation>Appoggiatura</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="110"/>
         <source>Quarter grace note</source>
-        <translation type="unfinished"></translation>
+        <translation>Štvrťová nota ozdoby</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="115"/>
         <source>16th grace note</source>
-        <translation type="unfinished"></translation>
+        <translation>16-tinová nota ozdoby</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="120"/>
         <source>32nd grace note</source>
-        <translation type="unfinished"></translation>
+        <translation>32-tinová nota ozdoby</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="129"/>
         <source>Drums</source>
-        <translation type="unfinished"></translation>
+        <translation>Bicie</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="142"/>
         <source>Clefs</source>
-        <translation type="unfinished"></translation>
+        <translation>Kľúče</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="162"/>
         <source>Key Signatures</source>
-        <translation type="unfinished"></translation>
+        <translation>Označenia tóniny</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="187"/>
         <source>Time Signatures</source>
-        <translation type="unfinished"></translation>
+        <translation>Označenia taktov</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="201"/>
         <source>4/4 common time</source>
-        <translation type="unfinished"></translation>
+        <translation>4/4 štvorštvrťový takt</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="202"/>
         <source>2/2 alla breve</source>
-        <translation type="unfinished"></translation>
+        <translation>2/2 alla breve</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="210"/>
         <source>Barlines</source>
-        <translation type="unfinished"></translation>
+        <translation>Taktové čiary</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="218"/>
         <location filename="../../mscore/menus.cpp" line="990"/>
         <source>Normal</source>
-        <translation type="unfinished"></translation>
+        <translation>Normálne</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="219"/>
         <location filename="../../mscore/menus.cpp" line="991"/>
         <source>Dashed</source>
-        <translation type="unfinished"></translation>
+        <translation>Čiarkované</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="220"/>
         <location filename="../../mscore/menus.cpp" line="992"/>
         <source>End Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Koncová taktová čiara</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="221"/>
         <location filename="../../mscore/menus.cpp" line="993"/>
         <source>Double Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Dvojitá taktová čiara</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="222"/>
         <location filename="../../mscore/menus.cpp" line="994"/>
         <source>Start Repeat</source>
-        <translation type="unfinished"></translation>
+        <translation>Začať opakovanie</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="223"/>
         <location filename="../../mscore/menus.cpp" line="995"/>
         <source>End Repeat</source>
-        <translation type="unfinished"></translation>
+        <translation>Skončiť opakovanie</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="224"/>
         <location filename="../../mscore/menus.cpp" line="996"/>
         <source>End-Start Repeat</source>
-        <translation type="unfinished"></translation>
+        <translation>Skončiť-Začať Opakovanie</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="238"/>
         <source>Lines</source>
-        <translation type="unfinished"></translation>
+        <translation>Čiary</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="244"/>
         <source>Slur</source>
-        <translation type="unfinished"></translation>
+        <translation>Legátový oblúčik</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="248"/>
         <location filename="../../mscore/menus.cpp" line="766"/>
         <source>Crescendo</source>
-        <translation type="unfinished"></translation>
+        <translation>Crescendo</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="252"/>
         <location filename="../../mscore/menus.cpp" line="771"/>
         <source>Diminuendo</source>
-        <translation type="unfinished"></translation>
+        <translation>Diminuendo</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="260"/>
         <location filename="../../mscore/menus.cpp" line="782"/>
         <source>Prima volta</source>
-        <translation type="unfinished"></translation>
+        <translation>Prima volta</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="268"/>
         <location filename="../../mscore/menus.cpp" line="791"/>
         <location filename="../../mscore/menus.cpp" line="809"/>
         <source>Seconda volta</source>
-        <translation type="unfinished"></translation>
+        <translation>Seconda volta</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="276"/>
         <location filename="../../mscore/menus.cpp" line="800"/>
         <source>Terza volta</source>
-        <translation type="unfinished"></translation>
+        <translation>Terza volta</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="284"/>
         <source>Seconda volta 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Seconda volta 2</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="288"/>
         <location filename="../../mscore/menus.cpp" line="816"/>
         <source>8va</source>
-        <translation type="unfinished"></translation>
+        <translation>8va</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="292"/>
         <location filename="../../mscore/menus.cpp" line="821"/>
         <source>15ma</source>
-        <translation type="unfinished"></translation>
+        <translation>15ma</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="296"/>
         <location filename="../../mscore/menus.cpp" line="826"/>
         <source>8vb</source>
-        <translation type="unfinished"></translation>
+        <translation>8vb</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="300"/>
         <location filename="../../mscore/menus.cpp" line="831"/>
         <source>15mb</source>
-        <translation type="unfinished"></translation>
+        <translation>15mb</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="303"/>
         <source>pedal</source>
-        <translation type="unfinished"></translation>
+        <translation>pedál (zadržaný bas)</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="306"/>
         <location filename="../../mscore/menus.cpp" line="841"/>
         <source>Trill line</source>
-        <translation type="unfinished"></translation>
+        <translation>Riadok s trilkami</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="312"/>
         <location filename="../../mscore/menus.cpp" line="845"/>
         <source>Text line</source>
-        <translation type="unfinished"></translation>
+        <translation>Riadok s textom</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="316"/>
         <location filename="../../mscore/menus.cpp" line="851"/>
         <source>Line</source>
-        <translation type="unfinished"></translation>
+        <translation>Riadok</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="325"/>
         <source>Arpeggio &amp;&amp; Glissando</source>
-        <translation type="unfinished"></translation>
+        <translation>Arpeggio a &amp;glissando</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="331"/>
         <source>Arpeggio</source>
-        <translation type="unfinished"></translation>
+        <translation>Arpeggio</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="336"/>
         <location filename="../../mscore/style.cpp" line="304"/>
         <source>Glissando</source>
-        <translation type="unfinished"></translation>
+        <translation>Glissando</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="345"/>
         <source>Breath &amp;&amp; Pauses</source>
-        <translation type="unfinished"></translation>
+        <translation>Dýchanie a &amp;pauzy</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="352"/>
         <source>Breath</source>
-        <translation type="unfinished"></translation>
+        <translation>Dýchanie</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="354"/>
         <source>Caesura</source>
-        <translation type="unfinished"></translation>
+        <translation>Cezúra</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="364"/>
         <source>Brackets</source>
-        <translation type="unfinished"></translation>
+        <translation>Zátvorky</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="375"/>
         <location filename="../../mscore/menus.cpp" line="878"/>
         <source>Bracket</source>
-        <translation type="unfinished"></translation>
+        <translation>Zátvorka</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="376"/>
         <location filename="../../mscore/menus.cpp" line="879"/>
         <source>Akkolade</source>
-        <translation type="unfinished"></translation>
+        <translation>Akoláda</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="386"/>
         <source>Articulations &amp;&amp; Ornaments</source>
-        <translation type="unfinished"></translation>
+        <translation>Artikulácia a melodické ozdoby</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="401"/>
         <source>Accidentals</source>
-        <translation type="unfinished"></translation>
+        <translation>Predznamenávania</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="419"/>
         <location filename="../../mscore/style.cpp" line="246"/>
         <source>Dynamics</source>
-        <translation type="unfinished"></translation>
+        <translation>Dynamika</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="439"/>
         <location filename="../../mscore/style.cpp" line="234"/>
         <source>Fingering</source>
-        <translation type="unfinished"></translation>
+        <translation>Prstoklad</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="450"/>
         <location filename="../../mscore/menus.cpp" line="1032"/>
         <source>Fingering %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Prstoklad %1</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="458"/>
         <location filename="../../mscore/menus.cpp" line="1040"/>
         <source>String number %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Struna číslo %1</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="468"/>
         <source>Note Heads</source>
-        <translation type="unfinished"></translation>
+        <translation>Notové hlavičky</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="486"/>
         <source>Tremolo</source>
-        <translation type="unfinished"></translation>
+        <translation>Tremolo</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="490"/>
         <source>1 through stem</source>
-        <translation type="unfinished"></translation>
+        <translation>1 cez nožičku</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="491"/>
         <source>2 through stem</source>
-        <translation type="unfinished"></translation>
+        <translation>2 cez nožičku</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="492"/>
         <source>3 through stem</source>
-        <translation type="unfinished"></translation>
+        <translation>3 cez nožičku</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="493"/>
         <source>1 between notes</source>
-        <translation type="unfinished"></translation>
+        <translation>1 medzi noty</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="494"/>
         <source>2 between notes</source>
-        <translation type="unfinished"></translation>
+        <translation>2 medzi noty</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="495"/>
         <source>3 between notes</source>
-        <translation type="unfinished"></translation>
+        <translation>3 medzi noty</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="510"/>
         <source>Repeats</source>
-        <translation type="unfinished"></translation>
+        <translation>Opakovania</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="516"/>
         <source>Repeat measure sign</source>
-        <translation type="unfinished"></translation>
+        <translation>Značka opakovania taktu</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="520"/>
         <source>Segno</source>
-        <translation type="unfinished"></translation>
+        <translation>Segno</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="524"/>
         <source>Coda</source>
-        <translation type="unfinished"></translation>
+        <translation>Koda</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="528"/>
         <source>Varied coda</source>
-        <translation type="unfinished"></translation>
+        <translation>Rôzna koda</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="532"/>
         <source>Codetta</source>
-        <translation type="unfinished"></translation>
+        <translation>Codetta</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="536"/>
         <source>Fine</source>
-        <translation type="unfinished"></translation>
+        <translation>Fine</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="540"/>
         <source>Da Capo</source>
-        <translation type="unfinished"></translation>
+        <translation>Da Capo</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="544"/>
         <source>Da Capo al Fine</source>
-        <translation type="unfinished"></translation>
+        <translation>Da Capo al Fine</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="548"/>
         <source>Da Capo al Coda</source>
-        <translation type="unfinished"></translation>
+        <translation>Da Capo al Coda</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="552"/>
         <source>D.S al Coda</source>
-        <translation type="unfinished"></translation>
+        <translation>D.S al Coda</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="556"/>
         <source>D.S al Fine</source>
-        <translation type="unfinished"></translation>
+        <translation>D.S al Fine</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="560"/>
         <source>D.S</source>
-        <translation type="unfinished"></translation>
+        <translation>D.S</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="564"/>
         <source>To Coda</source>
-        <translation type="unfinished"></translation>
+        <translation>do kody</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="573"/>
         <source>Breaks &amp;&amp; Spacer</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Zlomy a odsadenie</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="580"/>
         <location filename="../../mscore/menus.cpp" line="1099"/>
         <source>Line break</source>
-        <translation type="unfinished"></translation>
+        <translation>Zlom riadka</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="584"/>
         <location filename="../../mscore/menus.cpp" line="1102"/>
         <source>Page break</source>
-        <translation type="unfinished"></translation>
+        <translation>Zlom strany</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="588"/>
         <location filename="../../mscore/menus.cpp" line="1105"/>
         <source>Staff spacer</source>
-        <translation type="unfinished"></translation>
+        <translation>Zlom riadka</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="597"/>
         <source>Beam Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnosti zástavok</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="604"/>
         <source>Start beam</source>
-        <translation type="unfinished"></translation>
+        <translation>Začiatok zástavky</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="609"/>
         <source>Middle of beam</source>
-        <translation type="unfinished"></translation>
+        <translation>Stred zástavky</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="614"/>
         <source>No beam</source>
-        <translation type="unfinished"></translation>
+        <translation>Žiadna zástavka</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="619"/>
         <source>Start subbeam</source>
-        <translation type="unfinished"></translation>
+        <translation>Začiatok podzástavky</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="624"/>
         <source>Auto beam</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatická zástavka</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="633"/>
         <source>Symbols</source>
-        <translation type="unfinished"></translation>
+        <translation>Symboly</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="656"/>
         <source>&amp;Create</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Vložiť</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="661"/>
         <source>Measures</source>
-        <translation type="unfinished"></translation>
+        <translation>Takty</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="671"/>
         <source>Barlines...</source>
-        <translation type="unfinished"></translation>
+        <translation>Taktové čiary...</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="675"/>
         <source>&amp;Lines...</source>
-        <translation type="unfinished"></translation>
+        <translation>Č&amp;iary...</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="676"/>
         <source>Brackets...</source>
-        <translation type="unfinished"></translation>
+        <translation>Zátvorky...</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="677"/>
         <source>Articulations &amp;&amp; Ornaments...</source>
-        <translation type="unfinished"></translation>
+        <translation>Artikulácia a melodické ozdoby...</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="678"/>
         <source>Accidentals...</source>
-        <translation type="unfinished"></translation>
+        <translation>Predznamenávania...</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="680"/>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Text</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="725"/>
         <source>MuseScore: Clefs</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Kľúče</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="758"/>
         <source>MuseScore: Lines</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Čiary</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="837"/>
         <source>Pedal</source>
-        <translation type="unfinished"></translation>
+        <translation>Pedál (zadržaný bas</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="867"/>
         <source>MuseScore: Brackets</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Zátvorky</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="897"/>
         <source>MuseScore: Articulations &amp; Ornaments</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Artikulácia a melodické ozdoby</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="922"/>
         <source>MuseScore: Accidentals</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Predznámenavania</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="948"/>
         <source>MuseScore: Dynamics</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Dynamika</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="983"/>
         <source>MuseScore: Barlines</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Taktové čiary</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="1021"/>
         <source>MuseScore: Fingering</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Prstoklad</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="1094"/>
         <source>MuseScore: Breaks &amp; Spacer</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Zlomy a odsadenie</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="488"/>
         <source>File Operations</source>
-        <translation type="unfinished"></translation>
+        <translation>Operácie so súbormi</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="510"/>
         <source>Transport Tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Nástroje na prevod na zvuk</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="531"/>
         <source>Concert Pitch</source>
-        <translation type="unfinished"></translation>
+        <translation>Koncertné ladenie</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="539"/>
         <source>Note Entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Vloženie noty</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="600"/>
         <source>&amp;File</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Súbor</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="605"/>
         <source>Open &amp;Recent</source>
-        <translation type="unfinished"></translation>
+        <translation>Otvoriť &amp;naposledy používané súbory</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="627"/>
         <source>&amp;Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Upraviť</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="648"/>
         <source>Voices</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlasy</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="662"/>
         <source>Preferences...</source>
-        <translation type="unfinished"></translation>
+        <translation>Predvoľby...</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="683"/>
         <source>Add Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať notu</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="699"/>
         <source>Add Interval</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať interval</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="715"/>
         <location filename="../../mscore/style.cpp" line="274"/>
         <source>Tuplets</source>
-        <translation type="unfinished"></translation>
+        <translation>Rytmické skupiny</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="737"/>
         <source>&amp;Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozmiestnenie</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="740"/>
         <source>Page Settings...</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavenia strany...</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="748"/>
         <source>Breaks &amp;&amp; Spacer...</source>
-        <translation type="unfinished"></translation>
+        <translation>Zlomy a &amp;odsadenie...</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="754"/>
         <source>&amp;Style</source>
-        <translation type="unfinished"></translation>
+        <translation>Š&amp;týl</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="768"/>
         <source>&amp;Display</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Zobraziť</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="831"/>
         <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Pomocník</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="835"/>
         <source>Online Handbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Online príručka</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="837"/>
         <source>&amp;About</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;O programe</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="838"/>
         <source>About&amp;Qt</source>
-        <translation type="unfinished"></translation>
+        <translation>O &amp;Qt</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="840"/>
         <source>Check for Update</source>
-        <translation type="unfinished"></translation>
+        <translation>Skontrolovať aktualizácie</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="912"/>
         <source>MuseScore handbook not found at: 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Príručka MuseScore sa nenašla na: 
+</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="914"/>
         <source>
 
-From the &quot;Help&quot; menu try choosing &quot;Online Handbook&quot; instead.</source>
-        <translation type="unfinished"></translation>
+From the "Help" menu try choosing "Online Handbook" instead.</source>
+        <translation>
+
+Z ponuky „Pomocník“ sa pokúste namiesto toho vybrať položku  „Online príručka“.</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="915"/>
         <source>MuseScore: Open Help</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Otvorenie pomocníka</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="2083"/>
         <location filename="../../mscore/style.cpp" line="277"/>
         <source>System</source>
-        <translation type="unfinished"></translation>
+        <translation>Systém</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="2343"/>
         <source>no score</source>
-        <translation type="unfinished"></translation>
+        <translation>žiaden notový zápis</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="2354"/>
         <source>note entry mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Režim vkladania nôt</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="2358"/>
         <source>edit mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Režim úprav</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="2362"/>
         <source>play</source>
-        <translation type="unfinished"></translation>
+        <translation>Prehrať</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="2378"/>
         <source>Go To: </source>
-        <translation type="unfinished"></translation>
+        <translation>Prejsť na: </translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="2395"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Hľadať</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="2685"/>
         <source>Bar %1 Beat %2.%3</source>
-        <translation type="unfinished"></translation>
+        <translation>Takt %1 Doba %2.%3</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="2978"/>
         <source>The previous session quit unexpectedly.
 
 Restore session?</source>
-        <translation type="unfinished"></translation>
+        <translation>Predchádzajúca práca bola skončená neočakávane.&#13;
+&#13;
+Obnoviť prácu?</translation>
     </message>
     <message>
         <location filename="../../mscore/plugins.cpp" line="88"/>
         <location filename="../../mscore/plugins.cpp" line="421"/>
         <source>Error loading plugin
-&quot;%1&quot; line %2:
+"%1" line %2:
 %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba pri spúšťaní zásuvného modulu&#13;
+"%1" riadok %2:&#13;
+%3</translation>
     </message>
     <message>
         <location filename="../../mscore/plugins.cpp" line="112"/>
         <source>Script
 %1
 is incompatible with current interface</source>
-        <translation type="unfinished"></translation>
+        <translation>Skript&#13;
+%1&#13;
+nie je kompatibilný so súčasným používateľským rozhraním</translation>
     </message>
     <message>
         <location filename="../../mscore/plugins.cpp" line="121"/>
         <source>MuseScore is too old to run script
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore je príliš zastaralý, aby spustil skript&#13;
+%1</translation>
     </message>
     <message>
         <location filename="../../mscore/style.cpp" line="210"/>
         <source>Symbols1</source>
-        <translation type="unfinished"></translation>
+        <translation>Symboly1</translation>
     </message>
     <message>
         <location filename="../../mscore/style.cpp" line="213"/>
         <source>Symbols3</source>
-        <translation type="unfinished"></translation>
+        <translation>Symboly 3</translation>
     </message>
     <message>
         <location filename="../../mscore/style.cpp" line="216"/>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Názov</translation>
     </message>
     <message>
         <location filename="../../mscore/style.cpp" line="219"/>
         <source>Subtitle</source>
-        <translation type="unfinished"></translation>
+        <translation>Podnázov</translation>
     </message>
     <message>
         <location filename="../../mscore/style.cpp" line="222"/>
         <source>Composer</source>
-        <translation type="unfinished"></translation>
+        <translation>Hudba</translation>
     </message>
     <message>
         <location filename="../../mscore/style.cpp" line="225"/>
         <source>Poet</source>
-        <translation type="unfinished"></translation>
+        <translation>Text</translation>
     </message>
     <message>
         <location filename="../../mscore/style.cpp" line="228"/>
         <source>Lyrics odd lines</source>
-        <translation type="unfinished"></translation>
+        <translation>Text piesne na nepárnych riadkoch</translation>
     </message>
     <message>
         <location filename="../../mscore/style.cpp" line="231"/>
         <source>Lyrics even lines</source>
-        <translation type="unfinished"></translation>
+        <translation>Text piesne na párnych riadkoch</translation>
     </message>
     <message>
         <location filename="../../mscore/style.cpp" line="237"/>
         <source>InstrumentsLong</source>
-        <translation type="unfinished"></translation>
+        <translation>Dlhý názov h. nástroja</translation>
     </message>
     <message>
         <location filename="../../mscore/style.cpp" line="240"/>
         <source>InstrumentsShort</source>
-        <translation type="unfinished"></translation>
+        <translation>Krátky názov h. nástroja</translation>
     </message>
     <message>
         <location filename="../../mscore/style.cpp" line="243"/>
         <source>InstrumentsExcerpt</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukážka nástroja</translation>
     </message>
     <message>
         <location filename="../../mscore/style.cpp" line="249"/>
         <source>Technik</source>
-        <translation type="unfinished"></translation>
+        <translation>Technika</translation>
     </message>
     <message>
         <location filename="../../mscore/style.cpp" line="253"/>
         <source>Tempo</source>
-        <translation type="unfinished"></translation>
+        <translation>Tempo</translation>
     </message>
     <message>
         <location filename="../../mscore/style.cpp" line="256"/>
         <source>Metronome</source>
-        <translation type="unfinished"></translation>
+        <translation>Metronóm</translation>
     </message>
     <message>
         <location filename="../../mscore/style.cpp" line="259"/>
         <source>Copyright</source>
-        <translation type="unfinished"></translation>
+        <translation>Autorské práva</translation>
     </message>
     <message>
         <location filename="../../mscore/style.cpp" line="262"/>
         <source>Measure Number</source>
-        <translation type="unfinished"></translation>
+        <translation>Číslo taktu</translation>
     </message>
     <message>
         <location filename="../../mscore/style.cpp" line="265"/>
         <source>Page Number Odd</source>
-        <translation type="unfinished"></translation>
+        <translation>Číslo nepárnej strany</translation>
     </message>
     <message>
         <location filename="../../mscore/style.cpp" line="268"/>
         <source>Page Number Even</source>
-        <translation type="unfinished"></translation>
+        <translation>Číslo párnej strany</translation>
     </message>
     <message>
         <location filename="../../mscore/style.cpp" line="271"/>
         <source>Translator</source>
-        <translation type="unfinished"></translation>
+        <translation>Prekladateľ</translation>
     </message>
     <message>
         <location filename="../../mscore/style.cpp" line="281"/>
         <source>Staff</source>
-        <translation type="unfinished"></translation>
+        <translation>Osnova</translation>
     </message>
     <message>
         <location filename="../../mscore/style.cpp" line="284"/>
         <source>Chordname</source>
-        <translation type="unfinished"></translation>
+        <translation>Názov akordu</translation>
     </message>
     <message>
         <location filename="../../mscore/style.cpp" line="287"/>
         <source>Rehearsal Mark</source>
-        <translation type="unfinished"></translation>
+        <translation>Značka opakovania</translation>
     </message>
     <message>
         <location filename="../../mscore/style.cpp" line="291"/>
         <source>Repeat Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Text refrénu</translation>
     </message>
     <message>
         <location filename="../../mscore/style.cpp" line="295"/>
         <source>Volta</source>
-        <translation type="unfinished"></translation>
+        <translation>Volta</translation>
     </message>
     <message>
         <location filename="../../mscore/style.cpp" line="298"/>
         <source>Frame</source>
-        <translation type="unfinished"></translation>
+        <translation>Rám</translation>
     </message>
     <message>
         <location filename="../../mscore/style.cpp" line="301"/>
         <source>TextLine</source>
-        <translation type="unfinished"></translation>
+        <translation>Riadok textu</translation>
     </message>
     <message>
         <location filename="../../mscore/style.cpp" line="307"/>
         <source>String Number</source>
-        <translation type="unfinished"></translation>
+        <translation>Číslo struny</translation>
     </message>
     <message>
         <location filename="../../mscore/style.cpp" line="310"/>
         <source>Ottava</source>
-        <translation type="unfinished"></translation>
+        <translation>Oktáva</translation>
     </message>
 </context>
 <context>
@@ -4861,47 +4885,47 @@ is incompatible with current interface</source>
     <message>
         <location filename="../../mscore/newwizard.ui" line="13"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulár</translation>
     </message>
     <message>
         <location filename="../../mscore/newwizard.ui" line="19"/>
         <source>Title:</source>
-        <translation type="unfinished"></translation>
+        <translation>Názov:</translation>
     </message>
     <message>
         <location filename="../../mscore/newwizard.ui" line="29"/>
         <source>Subtitle:</source>
-        <translation type="unfinished"></translation>
+        <translation>Podnázov:</translation>
     </message>
     <message>
         <location filename="../../mscore/newwizard.ui" line="39"/>
         <source>Composer:</source>
-        <translation type="unfinished"></translation>
+        <translation>Autor hudby:</translation>
     </message>
     <message>
         <location filename="../../mscore/newwizard.ui" line="49"/>
         <source>Poet:</source>
-        <translation type="unfinished"></translation>
+        <translation>Autor textu:</translation>
     </message>
     <message>
         <location filename="../../mscore/newwizard.ui" line="59"/>
         <source>Copyright:</source>
-        <translation type="unfinished"></translation>
+        <translation>Autorské práva:</translation>
     </message>
     <message>
         <location filename="../../mscore/newwizard.ui" line="69"/>
         <source>Create new score from template</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvoriť nový notový zápis podľa šablóny</translation>
     </message>
     <message>
         <location filename="../../mscore/newwizard.ui" line="76"/>
         <source>Create new score from scratch</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvoriť úplne nový notový zápis</translation>
     </message>
     <message>
         <location filename="../../mscore/newwizard.cpp" line="682"/>
         <source>MuseScore: Create New Score</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Vytvorenie nového notového zápisu</translation>
     </message>
 </context>
 <context>
@@ -4909,12 +4933,12 @@ is incompatible with current interface</source>
     <message>
         <location filename="../../mscore/newwizard.cpp" line="455"/>
         <source>Create New Score</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvoriť nový notový zápis</translation>
     </message>
     <message>
         <location filename="../../mscore/newwizard.cpp" line="456"/>
         <source>This wizard creates a new score</source>
-        <translation type="unfinished"></translation>
+        <translation>Tento sprievodca vytvorí nový notový zápis</translation>
     </message>
 </context>
 <context>
@@ -4922,12 +4946,12 @@ is incompatible with current interface</source>
     <message>
         <location filename="../../mscore/newwizard.cpp" line="486"/>
         <source>Create New Score</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvoriť nový notový zápis</translation>
     </message>
     <message>
         <location filename="../../mscore/newwizard.cpp" line="487"/>
         <source>Define a set of instruments. Each instrument is represented by one or more staves</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte skupinu hudobných nástrojov. Každý nástroj sa zapisuje jednou alebo viacerými notovými osnovami.</translation>
     </message>
 </context>
 <context>
@@ -4935,12 +4959,12 @@ is incompatible with current interface</source>
     <message>
         <location filename="../../mscore/newwizard.cpp" line="526"/>
         <source>Create New Score</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvoriť nový notový zápis</translation>
     </message>
     <message>
         <location filename="../../mscore/newwizard.cpp" line="527"/>
         <source>Create Time Signature</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvoriť označenie taktu</translation>
     </message>
 </context>
 <context>
@@ -4948,12 +4972,12 @@ is incompatible with current interface</source>
     <message>
         <location filename="../../mscore/newwizard.cpp" line="541"/>
         <source>Create New Score</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvoriť nový notový zápis</translation>
     </message>
     <message>
         <location filename="../../mscore/newwizard.cpp" line="542"/>
         <source>Select Template File:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte súbor šablóny</translation>
     </message>
 </context>
 <context>
@@ -4961,12 +4985,12 @@ is incompatible with current interface</source>
     <message>
         <location filename="../../mscore/newwizard.cpp" line="588"/>
         <source>Create New Score</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvoriť nový notový zápis</translation>
     </message>
     <message>
         <location filename="../../mscore/newwizard.cpp" line="589"/>
         <source>Select Key Signature:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte označenie tóniny:</translation>
     </message>
 </context>
 <context>
@@ -4974,22 +4998,22 @@ is incompatible with current interface</source>
     <message>
         <location filename="../../mscore/note.cpp" line="1125"/>
         <source>Note Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnosti noty...</translation>
     </message>
     <message>
         <location filename="../../mscore/note.cpp" line="1128"/>
         <source>Tuplet...</source>
-        <translation type="unfinished"></translation>
+        <translation>Tuplet...</translation>
     </message>
     <message>
         <location filename="../../mscore/note.cpp" line="1129"/>
         <source>Tuplet Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnosti tupletov...</translation>
     </message>
     <message>
         <location filename="../../mscore/note.cpp" line="1131"/>
         <source>Delete Tuplet</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstrániť tuplet</translation>
     </message>
 </context>
 <context>
@@ -4997,50 +5021,50 @@ is incompatible with current interface</source>
     <message>
         <location filename="../../mscore/note.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulár</translation>
     </message>
     <message>
         <location filename="../../mscore/note.ui" line="77"/>
         <source>head index</source>
-        <translation type="unfinished"></translation>
+        <translation>Register hlavičiek</translation>
     </message>
     <message>
         <location filename="../../mscore/note.ui" line="111"/>
         <source>note head group</source>
-        <translation type="unfinished"></translation>
+        <translation>Skupina notových hlavičiek</translation>
     </message>
     <message>
         <location filename="../../mscore/note.ui" line="249"/>
         <source>OnTime:</source>
-        <translation type="unfinished"></translation>
+        <translation>Čas zapnutia:</translation>
     </message>
     <message>
         <location filename="../../mscore/note.ui" line="263"/>
         <location filename="../../mscore/note.ui" line="327"/>
         <source>Auto</source>
-        <translation type="unfinished"></translation>
+        <translation>Automaticky</translation>
     </message>
     <message>
         <location filename="../../mscore/note.ui" line="268"/>
         <location filename="../../mscore/note.ui" line="332"/>
         <source>User</source>
-        <translation type="unfinished"></translation>
+        <translation>Používateľ</translation>
     </message>
     <message>
         <location filename="../../mscore/note.ui" line="273"/>
         <location filename="../../mscore/note.ui" line="337"/>
         <source>Offset</source>
-        <translation type="unfinished"></translation>
+        <translation>Posun</translation>
     </message>
     <message>
         <location filename="../../mscore/note.ui" line="313"/>
         <source>OffTime:</source>
-        <translation type="unfinished"></translation>
+        <translation>Čas vypnutia:</translation>
     </message>
     <message>
         <location filename="../../mscore/note.ui" line="429"/>
         <source>Tuning</source>
-        <translation type="unfinished"></translation>
+        <translation>Ladenie</translation>
     </message>
 </context>
 <context>
@@ -5048,17 +5072,17 @@ is incompatible with current interface</source>
     <message>
         <location filename="../../mscore/page.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulár</translation>
     </message>
     <message>
         <location filename="../../mscore/page.ui" line="26"/>
         <source>Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Strana</translation>
     </message>
     <message>
         <location filename="../../mscore/page.ui" line="61"/>
         <source>Page No.:</source>
-        <translation type="unfinished"></translation>
+        <translation>Č. strany:</translation>
     </message>
 </context>
 <context>
@@ -5067,97 +5091,97 @@ is incompatible with current interface</source>
         <location filename="../../mscore/pagesettings.ui" line="14"/>
         <location filename="../../mscore/pagesettings2.ui" line="14"/>
         <source>MuseScore: Page Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Nastavenia strany</translation>
     </message>
     <message>
         <location filename="../../mscore/pagesettings.ui" line="32"/>
         <location filename="../../mscore/pagesettings2.ui" line="32"/>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukážka</translation>
     </message>
     <message>
         <location filename="../../mscore/pagesettings.ui" line="60"/>
         <location filename="../../mscore/pagesettings2.ui" line="60"/>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Použiť</translation>
     </message>
     <message>
         <location filename="../../mscore/pagesettings.ui" line="67"/>
         <location filename="../../mscore/pagesettings2.ui" line="67"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../../mscore/pagesettings.ui" line="74"/>
         <location filename="../../mscore/pagesettings2.ui" line="74"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Zrušiť</translation>
     </message>
     <message>
         <location filename="../../mscore/pagesettings.ui" line="91"/>
         <location filename="../../mscore/pagesettings2.ui" line="91"/>
         <source>Page Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Veľkosť strany</translation>
     </message>
     <message>
         <location filename="../../mscore/pagesettings.ui" line="129"/>
         <location filename="../../mscore/pagesettings2.ui" line="129"/>
         <source>Two Sided</source>
-        <translation type="unfinished"></translation>
+        <translation>Dvojstrana</translation>
     </message>
     <message>
         <location filename="../../mscore/pagesettings.ui" line="136"/>
         <location filename="../../mscore/pagesettings2.ui" line="136"/>
         <source>Landscape</source>
-        <translation type="unfinished"></translation>
+        <translation>Na šírku</translation>
     </message>
     <message>
         <location filename="../../mscore/pagesettings.ui" line="143"/>
         <location filename="../../mscore/pagesettings2.ui" line="143"/>
         <source>Height</source>
-        <translation type="unfinished"></translation>
+        <translation>Výška</translation>
     </message>
     <message>
         <location filename="../../mscore/pagesettings.ui" line="156"/>
         <location filename="../../mscore/pagesettings2.ui" line="156"/>
         <source>Width</source>
-        <translation type="unfinished"></translation>
+        <translation>Šírka</translation>
     </message>
     <message>
         <location filename="../../mscore/pagesettings.ui" line="175"/>
         <location filename="../../mscore/pagesettings2.ui" line="175"/>
         <source>Scaling</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavenie mierky</translation>
     </message>
     <message>
         <location filename="../../mscore/pagesettings.ui" line="187"/>
         <location filename="../../mscore/pagesettings2.ui" line="187"/>
         <source>Space</source>
-        <translation type="unfinished"></translation>
+        <translation>Medzera</translation>
     </message>
     <message>
         <location filename="../../mscore/pagesettings.ui" line="230"/>
         <location filename="../../mscore/pagesettings2.ui" line="230"/>
         <source>First page no.</source>
-        <translation type="unfinished"></translation>
+        <translation>Č. prvej strany</translation>
     </message>
     <message>
         <location filename="../../mscore/pagesettings.ui" line="263"/>
         <location filename="../../mscore/pagesettings2.ui" line="263"/>
         <source>mm</source>
-        <translation type="unfinished"></translation>
+        <translation>mm</translation>
     </message>
     <message>
         <location filename="../../mscore/pagesettings.ui" line="270"/>
         <location filename="../../mscore/pagesettings2.ui" line="270"/>
         <source>inch</source>
-        <translation type="unfinished"></translation>
+        <translation>palce</translation>
     </message>
     <message>
         <location filename="../../mscore/pagesettings.ui" line="302"/>
         <location filename="../../mscore/pagesettings2.ui" line="302"/>
         <source>Even Page Margins</source>
-        <translation type="unfinished"></translation>
+        <translation>Okraje pánych strán</translation>
     </message>
     <message>
         <location filename="../../mscore/pagesettings.ui" line="366"/>
@@ -5165,7 +5189,7 @@ is incompatible with current interface</source>
         <location filename="../../mscore/pagesettings2.ui" line="366"/>
         <location filename="../../mscore/pagesettings2.ui" line="485"/>
         <source>Bottom Margin</source>
-        <translation type="unfinished"></translation>
+        <translation>Dolný okraj</translation>
     </message>
     <message>
         <location filename="../../mscore/pagesettings.ui" line="379"/>
@@ -5173,7 +5197,7 @@ is incompatible with current interface</source>
         <location filename="../../mscore/pagesettings2.ui" line="379"/>
         <location filename="../../mscore/pagesettings2.ui" line="498"/>
         <source>Top Margin</source>
-        <translation type="unfinished"></translation>
+        <translation>Horný okraj</translation>
     </message>
     <message>
         <location filename="../../mscore/pagesettings.ui" line="392"/>
@@ -5181,7 +5205,7 @@ is incompatible with current interface</source>
         <location filename="../../mscore/pagesettings2.ui" line="392"/>
         <location filename="../../mscore/pagesettings2.ui" line="511"/>
         <source>Right Margin</source>
-        <translation type="unfinished"></translation>
+        <translation>Pravý okraj</translation>
     </message>
     <message>
         <location filename="../../mscore/pagesettings.ui" line="405"/>
@@ -5189,13 +5213,13 @@ is incompatible with current interface</source>
         <location filename="../../mscore/pagesettings2.ui" line="405"/>
         <location filename="../../mscore/pagesettings2.ui" line="524"/>
         <source>Left Margin</source>
-        <translation type="unfinished"></translation>
+        <translation>Ľavý okraj</translation>
     </message>
     <message>
         <location filename="../../mscore/pagesettings.ui" line="421"/>
         <location filename="../../mscore/pagesettings2.ui" line="421"/>
         <source>Odd Page Margins</source>
-        <translation type="unfinished"></translation>
+        <translation>Okraje nepárnych strán</translation>
     </message>
 </context>
 <context>
@@ -5203,12 +5227,12 @@ is incompatible with current interface</source>
     <message>
         <location filename="../../mscore/palette.cpp" line="118"/>
         <source>Delete Contents</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstrániť obsah</translation>
     </message>
     <message>
         <location filename="../../mscore/palette.cpp" line="119"/>
         <source>Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnosti...</translation>
     </message>
 </context>
 <context>
@@ -5216,7 +5240,7 @@ is incompatible with current interface</source>
     <message>
         <location filename="../../mscore/palette.cpp" line="1120"/>
         <source>Palettes</source>
-        <translation type="unfinished"></translation>
+        <translation>Palety</translation>
     </message>
 </context>
 <context>
@@ -5224,32 +5248,32 @@ is incompatible with current interface</source>
     <message>
         <location filename="../../mscore/palette.cpp" line="1028"/>
         <source>Palette Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnosti palety</translation>
     </message>
     <message>
         <location filename="../../mscore/palette.cpp" line="1031"/>
         <source>Insert new Palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Vložiť novú paletu</translation>
     </message>
     <message>
         <location filename="../../mscore/palette.cpp" line="1034"/>
         <source>Move Palette Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Posunúť paletu nahor</translation>
     </message>
     <message>
         <location filename="../../mscore/palette.cpp" line="1037"/>
         <source>Move Palette Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Posunúť paletu nadol</translation>
     </message>
     <message>
         <location filename="../../mscore/palette.cpp" line="1040"/>
         <source>Enable Editing</source>
-        <translation type="unfinished"></translation>
+        <translation>Umožniť upravovanie</translation>
     </message>
     <message>
         <location filename="../../mscore/palette.cpp" line="1045"/>
         <source>Delete Palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstrániť paletu</translation>
     </message>
 </context>
 <context>
@@ -5257,27 +5281,27 @@ is incompatible with current interface</source>
     <message>
         <location filename="../../mscore/cellproperties.ui" line="14"/>
         <source>Chord Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnosti akordu</translation>
     </message>
     <message>
         <location filename="../../mscore/cellproperties.ui" line="47"/>
         <source>Palette Cell Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnosti bunky palety</translation>
     </message>
     <message>
         <location filename="../../mscore/cellproperties.ui" line="58"/>
         <source>Content Offset</source>
-        <translation type="unfinished"></translation>
+        <translation>Posun obsahu</translation>
     </message>
     <message>
         <location filename="../../mscore/cellproperties.ui" line="65"/>
         <source>x:</source>
-        <translation type="unfinished"></translation>
+        <translation>x:</translation>
     </message>
     <message>
         <location filename="../../mscore/cellproperties.ui" line="85"/>
         <source>y:</source>
-        <translation type="unfinished"></translation>
+        <translation>y:</translation>
     </message>
 </context>
 <context>
@@ -5285,42 +5309,42 @@ is incompatible with current interface</source>
     <message>
         <location filename="../../mscore/palette.ui" line="14"/>
         <source>MuseScore: Palette Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Vlastnosti palety</translation>
     </message>
     <message>
         <location filename="../../mscore/palette.ui" line="22"/>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Názov:</translation>
     </message>
     <message>
         <location filename="../../mscore/palette.ui" line="36"/>
         <source>Cell Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Veľkosť bunky:</translation>
     </message>
     <message>
         <location filename="../../mscore/palette.ui" line="45"/>
         <source>w:</source>
-        <translation type="unfinished"></translation>
+        <translation>š:</translation>
     </message>
     <message>
         <location filename="../../mscore/palette.ui" line="66"/>
         <source>h:</source>
-        <translation type="unfinished"></translation>
+        <translation>v:</translation>
     </message>
     <message>
         <location filename="../../mscore/palette.ui" line="87"/>
         <source>Show Grid</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobraziť mriežku</translation>
     </message>
     <message>
         <location filename="../../mscore/palette.ui" line="104"/>
         <source>Element Offset</source>
-        <translation type="unfinished"></translation>
+        <translation>Posun prvku</translation>
     </message>
     <message>
         <location filename="../../mscore/palette.ui" line="115"/>
         <source>Scale:</source>
-        <translation type="unfinished"></translation>
+        <translation>Mierka:</translation>
     </message>
 </context>
 <context>
@@ -5328,77 +5352,77 @@ is incompatible with current interface</source>
     <message>
         <location filename="../../mscore/partedit.ui" line="19"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulár</translation>
     </message>
     <message>
         <location filename="../../mscore/partedit.ui" line="52"/>
         <source>Part Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Názov hlasu</translation>
     </message>
     <message>
         <location filename="../../mscore/partedit.ui" line="88"/>
         <source>Volume</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlasitosť</translation>
     </message>
     <message>
         <location filename="../../mscore/partedit.ui" line="135"/>
         <source>Panorama Position</source>
-        <translation type="unfinished"></translation>
+        <translation>Umiestnenie vyrovnania</translation>
     </message>
     <message>
         <location filename="../../mscore/partedit.ui" line="163"/>
         <source>Reverb</source>
-        <translation type="unfinished"></translation>
+        <translation>Ozvena</translation>
     </message>
     <message>
         <location filename="../../mscore/partedit.ui" line="200"/>
         <source>Chorus</source>
-        <translation type="unfinished"></translation>
+        <translation>Zbor</translation>
     </message>
     <message>
         <location filename="../../mscore/partedit.ui" line="237"/>
         <source>Vol</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlasit.</translation>
     </message>
     <message>
         <location filename="../../mscore/partedit.ui" line="265"/>
         <source>Pan</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyrovnáv.</translation>
     </message>
     <message>
         <location filename="../../mscore/partedit.ui" line="293"/>
         <source>Rev</source>
-        <translation type="unfinished"></translation>
+        <translation>Ozvena</translation>
     </message>
     <message>
         <location filename="../../mscore/partedit.ui" line="321"/>
         <source>Cho</source>
-        <translation type="unfinished"></translation>
+        <translation>Zbor</translation>
     </message>
     <message>
         <location filename="../../mscore/partedit.ui" line="335"/>
         <source>Mute</source>
-        <translation type="unfinished"></translation>
+        <translation>Stlmiť</translation>
     </message>
     <message>
         <location filename="../../mscore/partedit.ui" line="342"/>
         <source>Solo</source>
-        <translation type="unfinished"></translation>
+        <translation>Sólo</translation>
     </message>
     <message>
         <location filename="../../mscore/partedit.ui" line="349"/>
         <source>drumset</source>
-        <translation type="unfinished"></translation>
+        <translation>Bicie</translation>
     </message>
     <message>
         <location filename="../../mscore/partedit.ui" line="366"/>
         <source>Sound:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvuk</translation>
     </message>
     <message>
         <location filename="../../mscore/partedit.ui" line="376"/>
         <source>midi sound for part</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvukové pásmo midi hlasu/nástroja</translation>
     </message>
 </context>
 <context>
@@ -5406,47 +5430,47 @@ is incompatible with current interface</source>
     <message>
         <location filename="../../mscore/pianoroll.cpp" line="57"/>
         <source>toolbar1</source>
-        <translation type="unfinished"></translation>
+        <translation>Panel s nástrojmi 1</translation>
     </message>
     <message>
         <location filename="../../mscore/pianoroll.cpp" line="77"/>
         <source>toolbar2</source>
-        <translation type="unfinished"></translation>
+        <translation>Panel s nástrojmi 2</translation>
     </message>
     <message>
         <location filename="../../mscore/pianoroll.cpp" line="83"/>
         <source>Cursor:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukazovadlo:</translation>
     </message>
     <message>
         <location filename="../../mscore/pianoroll.cpp" line="90"/>
         <source>Velocity:</source>
-        <translation type="unfinished"></translation>
+        <translation>Rýchlosť:</translation>
     </message>
     <message>
         <location filename="../../mscore/pianoroll.cpp" line="92"/>
         <source>auto</source>
-        <translation type="unfinished"></translation>
+        <translation>automaticky</translation>
     </message>
     <message>
         <location filename="../../mscore/pianoroll.cpp" line="93"/>
         <source>user</source>
-        <translation type="unfinished"></translation>
+        <translation>používateľ</translation>
     </message>
     <message>
         <location filename="../../mscore/pianoroll.cpp" line="94"/>
         <source>offset</source>
-        <translation type="unfinished"></translation>
+        <translation>posun</translation>
     </message>
     <message>
         <location filename="../../mscore/pianoroll.cpp" line="103"/>
         <source>Pitch:</source>
-        <translation type="unfinished"></translation>
+        <translation>Výška tónu:</translation>
     </message>
     <message>
         <location filename="../../mscore/pianoroll.cpp" line="163"/>
         <source>MuseScore: &lt;%1&gt; Staff: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: &lt;%1&gt; Notová osnova: %2</translation>
     </message>
 </context>
 <context>
@@ -5454,82 +5478,82 @@ is incompatible with current interface</source>
     <message>
         <location filename="../../mscore/playpanel.ui" line="489"/>
         <source>MuseScore: Play Panel</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Prehrávací panel</translation>
     </message>
     <message>
         <location filename="../../mscore/playpanel.ui" line="1014"/>
         <source>measure.beat</source>
-        <translation type="unfinished"></translation>
+        <translation>takt.doba</translation>
     </message>
     <message>
         <location filename="../../mscore/playpanel.ui" line="1020"/>
         <source>001.01</source>
-        <translation type="unfinished"></translation>
+        <translation>001.01</translation>
     </message>
     <message>
         <location filename="../../mscore/playpanel.ui" line="1523"/>
         <source>h:mm:s</source>
-        <translation type="unfinished"></translation>
+        <translation>h:mm:s</translation>
     </message>
     <message>
         <location filename="../../mscore/playpanel.ui" line="1529"/>
         <source>0:00:00</source>
-        <translation type="unfinished"></translation>
+        <translation>0:00:00</translation>
     </message>
     <message>
         <location filename="../../mscore/playpanel.ui" line="2033"/>
         <source>actual tempo</source>
-        <translation type="unfinished"></translation>
+        <translation>Skutočné tempo</translation>
     </message>
     <message>
         <location filename="../../mscore/playpanel.ui" line="2048"/>
         <source>120bpm</source>
-        <translation type="unfinished"></translation>
+        <translation>120 ú/m</translation>
     </message>
     <message>
         <location filename="../../mscore/playpanel.ui" line="2548"/>
         <source>relative tempo</source>
-        <translation type="unfinished"></translation>
+        <translation>Pomerné tempo</translation>
     </message>
     <message>
         <location filename="../../mscore/playpanel.ui" line="2554"/>
         <source>100%</source>
-        <translation type="unfinished"></translation>
+        <translation>100 %</translation>
     </message>
     <message>
         <location filename="../../mscore/playpanel.ui" line="2623"/>
         <source>Straight</source>
-        <translation type="unfinished"></translation>
+        <translation>Priamo</translation>
     </message>
     <message>
         <location filename="../../mscore/playpanel.ui" line="2628"/>
         <source>Swing</source>
-        <translation type="unfinished"></translation>
+        <translation>Swing</translation>
     </message>
     <message>
         <location filename="../../mscore/playpanel.ui" line="2633"/>
         <source>Shuffle</source>
-        <translation type="unfinished"></translation>
+        <translation>Mix</translation>
     </message>
     <message>
         <location filename="../../mscore/playpanel.ui" line="2654"/>
         <source>Rewind</source>
-        <translation type="unfinished"></translation>
+        <translation>Pretočiť</translation>
     </message>
     <message>
         <location filename="../../mscore/playpanel.ui" line="2661"/>
         <source>Play</source>
-        <translation type="unfinished"></translation>
+        <translation>Prehrať</translation>
     </message>
     <message>
         <location filename="../../mscore/playpanel.ui" line="2693"/>
         <source>Vol</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlasitosť</translation>
     </message>
     <message>
         <location filename="../../mscore/playpanel.ui" line="2728"/>
         <source>Tmp</source>
-        <translation type="unfinished"></translation>
+        <translation>Tempo</translation>
     </message>
 </context>
 <context>
@@ -5537,48 +5561,48 @@ is incompatible with current interface</source>
     <message>
         <location filename="../../mscore/preferences.cpp" line="659"/>
         <source>default</source>
-        <translation type="unfinished"></translation>
+        <translation>Predvolený</translation>
     </message>
     <message>
         <location filename="../../mscore/preferences.cpp" line="905"/>
         <source>Choose Notepaper</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrať notový papier</translation>
     </message>
     <message>
         <location filename="../../mscore/preferences.cpp" line="907"/>
         <location filename="../../mscore/preferences.cpp" line="923"/>
         <source>Images (*.jpg *.gif *.png)</source>
-        <translation type="unfinished"></translation>
+        <translation>Obrázky (*.jpg *.gif *.png)</translation>
     </message>
     <message>
         <location filename="../../mscore/preferences.cpp" line="921"/>
         <source>Choose Background Wallpaper</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrať obrázok pozadia</translation>
     </message>
     <message>
         <location filename="../../mscore/preferences.cpp" line="937"/>
         <source>Choose Working Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrať pracovný priečinok</translation>
     </message>
     <message>
         <location filename="../../mscore/preferences.cpp" line="952"/>
         <source>Choose Instrument List</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrať zoznam hudobných nástrojov</translation>
     </message>
     <message>
         <location filename="../../mscore/preferences.cpp" line="954"/>
         <source>Instrument List (*.xml)</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoznam hud. nástrojov (*.xml)</translation>
     </message>
     <message>
         <location filename="../../mscore/preferences.cpp" line="968"/>
         <source>Choose Starting Score</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrať začiatočný notový zápis</translation>
     </message>
     <message>
         <location filename="../../mscore/preferences.cpp" line="970"/>
         <source>MuseScore Files (*.mscz *.mscx *.msc);;All (*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Súbory MuseScore (*.mscz *.mscx *.msc);;Všetky (*)</translation>
     </message>
 </context>
 <context>
@@ -5586,42 +5610,42 @@ is incompatible with current interface</source>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="14"/>
         <source>MuseScore: Preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Predvoľby</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="17"/>
         <source>MuseScore Preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>Predvoľby MuseScore</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="39"/>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>Všeobecné</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="45"/>
         <source>Program Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Spustenie programu</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="54"/>
         <source>start empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Spustiť prázdny</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="61"/>
         <source>continue last session</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokračovať v predchádzajúcej práci</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="71"/>
         <source>start with new score</source>
-        <translation type="unfinished"></translation>
+        <translation>Začať s novým notovým zápisom</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="83"/>
         <source>start with score:</source>
-        <translation type="unfinished"></translation>
+        <translation>Začať s notovým zápisom:</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="96"/>
@@ -5631,572 +5655,572 @@ is incompatible with current interface</source>
         <location filename="../../mscore/prefsdialog.ui" line="700"/>
         <location filename="../../mscore/prefsdialog.ui" line="1889"/>
         <source>Browse...</source>
-        <translation type="unfinished"></translation>
+        <translation>Prehliadať...</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="109"/>
         <source>show splash screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobraziť úvodnú obrazovku</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="132"/>
         <source>Language</source>
-        <translation type="unfinished"></translation>
+        <translation>Jazyk</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="190"/>
         <source>Attention: changing the language requires a restart of MuseScore.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pozor: zmena jazyka si vyžaduje opätovné spustenie MuseScore.</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="206"/>
         <source>Paths</source>
-        <translation type="unfinished"></translation>
+        <translation>Umiestnenia</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="224"/>
         <source>Instrument List:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoznam hudobných nástrojov:</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="245"/>
         <source>Working Directory:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pracovný priečinok:</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="269"/>
         <source>Windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Okná</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="284"/>
         <source>Play Panel:</source>
-        <translation type="unfinished"></translation>
+        <translation>Prehrávací panel:</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="294"/>
         <location filename="../../mscore/prefsdialog.ui" line="332"/>
         <source>show</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobraziť</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="315"/>
         <source>Use Current Position</source>
-        <translation type="unfinished"></translation>
+        <translation>Použiť súčasné umiestnenie</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="322"/>
         <source>Navigator:</source>
-        <translation type="unfinished"></translation>
+        <translation>Navigátor:</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="342"/>
         <source>Style</source>
-        <translation type="unfinished"></translation>
+        <translation>Štýl</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="354"/>
         <source>Auto Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatické ukladanie</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="372"/>
         <source>Save every</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložiť každých</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="389"/>
         <source>minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>min.</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="412"/>
         <source>Icons</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikony</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="427"/>
         <source>General:</source>
-        <translation type="unfinished"></translation>
+        <translation>Všeobecné:</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="436"/>
         <location filename="../../mscore/prefsdialog.ui" line="500"/>
         <location filename="../../mscore/prefsdialog.ui" line="1217"/>
         <source>Width</source>
-        <translation type="unfinished"></translation>
+        <translation>Šírka</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="466"/>
         <location filename="../../mscore/prefsdialog.ui" line="543"/>
         <location filename="../../mscore/prefsdialog.ui" line="1204"/>
         <source>Height</source>
-        <translation type="unfinished"></translation>
+        <translation>Výška</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="491"/>
         <source>Note Entry:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadanie noty:</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="558"/>
         <source>Application Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Písmo aplikácie</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="570"/>
         <source>pt</source>
-        <translation type="unfinished"></translation>
+        <translation>pt</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="593"/>
         <source>Canvas</source>
-        <translation type="unfinished"></translation>
+        <translation>Plátno</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="605"/>
         <source>Background</source>
-        <translation type="unfinished"></translation>
+        <translation>Pozadie</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="620"/>
         <location filename="../../mscore/prefsdialog.ui" line="726"/>
         <source>Wallpaper</source>
-        <translation type="unfinished"></translation>
+        <translation>Obrázok pozadia</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="627"/>
         <location filename="../../mscore/prefsdialog.ui" line="733"/>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Farba</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="674"/>
         <source>Notesheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Notový list</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="743"/>
         <source>Misc.</source>
-        <translation type="unfinished"></translation>
+        <translation>Rône</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="752"/>
         <source>Proximity for selecting elements</source>
-        <translation type="unfinished"></translation>
+        <translation>Vzdialenosť prvkov na výber</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="782"/>
         <source>disable antialiased drawing</source>
-        <translation type="unfinished"></translation>
+        <translation>Vypnúť vyhladzovanie</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="785"/>
         <source>uncheck this to speed up drawing</source>
-        <translation type="unfinished"></translation>
+        <translation>odznačte to, ak chcete zrýchliť vykresľovanie</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="788"/>
         <source>Draw Antialiased</source>
-        <translation type="unfinished"></translation>
+        <translation>Kresliť vyhladené</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="818"/>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Text</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="830"/>
         <source>Auto-correction</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatické opravy</translation>
     </message>
     <message utf8="true">
         <location filename="../../mscore/prefsdialog.ui" line="839"/>
         <source>Replace 1/2 with fraction character ½</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahrádzať 1/2 zlomkom ½</translation>
     </message>
     <message utf8="true">
         <location filename="../../mscore/prefsdialog.ui" line="846"/>
         <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahrádzať (C) symbolom copyrightu © (platí len na text v časti Autorské práva)</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="858"/>
         <source>Colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Farby</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="864"/>
         <source>Score element colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Farby prvkov notového zápisu</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="873"/>
         <source>Default foreground</source>
-        <translation type="unfinished"></translation>
+        <translation>Predvolenie popredie</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="893"/>
         <source>Select Voice 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrať hlas 1</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="916"/>
         <source>Select Voice 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrať hlas 2</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="939"/>
         <source>Select Voice 3</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrať hlas 3</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="962"/>
         <source>Select Voice 4</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrať hlas 4</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="985"/>
         <source>Drop Target</source>
-        <translation type="unfinished"></translation>
+        <translation>Pustiť cieľ</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1012"/>
         <source>Note Entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadanie noty</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1018"/>
         <source>Enable midi input</source>
-        <translation type="unfinished"></translation>
+        <translation>Povoliť vkladanie MIDI</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1027"/>
         <source>Play notes when editing</source>
-        <translation type="unfinished"></translation>
+        <translation>Prehrávať noty pri úpravách</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1047"/>
         <source>Default duration:</source>
-        <translation type="unfinished"></translation>
+        <translation>Predvolené trvanie:</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1054"/>
         <source>ms</source>
-        <translation type="unfinished"></translation>
+        <translation>ms</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1088"/>
         <source>Alternate input method</source>
-        <translation type="unfinished"></translation>
+        <translation>Alternatívny spôsov vkladania</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1106"/>
         <source>If you use the standard input method then the created note pitch depends on the current key signature. For example pressing F in G major creates an F sharp. If the alternate input method is enabled then the current key signature is irrelevant. For example pressing F always creates an F natural.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ak využijete štandardný spôsob vkladania, výška tónu noty závisí od tóniny. Napríklad pri použití F v G dur vytvoríte  fis (F#). Ak je povolený alternatívny spôsob vkladania, označenie tóniny je nepodstatné. Napríklad pri použití F vždy vytvoríte F bez predznamenania.</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1119"/>
         <source>Color notes outside of usable pitch range</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyfarbiť noty mimo použiteľného rozsahu výšky tónu</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1143"/>
         <source>Score</source>
-        <translation type="unfinished"></translation>
+        <translation>Notový zápis</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1149"/>
         <source>Default Paper Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Predvolená veľkosť papiera</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1190"/>
         <source>Two Sided</source>
-        <translation type="unfinished"></translation>
+        <translation>Dvojstránka</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1197"/>
         <source>Landscape</source>
-        <translation type="unfinished"></translation>
+        <translation>Na výšku</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1249"/>
         <source>Scaling</source>
-        <translation type="unfinished"></translation>
+        <translation>Veľkosť</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1264"/>
         <source>Space</source>
-        <translation type="unfinished"></translation>
+        <translation>Medzera</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1283"/>
         <source>mm</source>
         <extracomment>millimeter</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>mm</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1325"/>
         <source>I/O</source>
-        <translation type="unfinished"></translation>
+        <translation>Vstup/Výstup</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1337"/>
         <source>Use JACK MIDI output</source>
-        <translation type="unfinished"></translation>
+        <translation>Použiť výstup JACK MIDI</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1357"/>
         <source>Ports</source>
-        <translation type="unfinished"></translation>
+        <translation>Porty</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1379"/>
         <source>Remember last connection(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapamätať si posledné spojenie /-a</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1408"/>
         <source>Use internal synthesizer</source>
-        <translation type="unfinished"></translation>
+        <translation>Použiť vnútorný syntetizátor</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1420"/>
         <source>JACK Audio Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvukový server JACK</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1438"/>
         <source>Left-Port:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ľavá prípojka</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1460"/>
         <source>Right-Port:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pravá prípojka</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1498"/>
         <source>ALSA Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvuk ALSA</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1513"/>
         <location filename="../../mscore/prefsdialog.ui" line="1702"/>
         <source>Device:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zariadenie:</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1520"/>
         <source>default</source>
-        <translation type="unfinished"></translation>
+        <translation>predvolené</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1527"/>
         <source>Sample Rate:</source>
-        <translation type="unfinished"></translation>
+        <translation>Frekvencia ukážky</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1538"/>
         <source>192000</source>
-        <translation type="unfinished"></translation>
+        <translation>192 000</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1543"/>
         <source>96000</source>
-        <translation type="unfinished"></translation>
+        <translation>96 000</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1548"/>
         <source>88200</source>
-        <translation type="unfinished"></translation>
+        <translation>88 200</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1553"/>
         <source>48000</source>
-        <translation type="unfinished"></translation>
+        <translation>48 000</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1558"/>
         <source>44100</source>
-        <translation type="unfinished"></translation>
+        <translation>44 100</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1563"/>
         <source>32000</source>
-        <translation type="unfinished"></translation>
+        <translation>32 000</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1568"/>
         <source>22050</source>
-        <translation type="unfinished"></translation>
+        <translation>22 050</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1576"/>
         <source>Fragments:</source>
-        <translation type="unfinished"></translation>
+        <translation>Fragmenty:</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1599"/>
         <source>Period Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Veľkosť periódy:</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1610"/>
         <source>4096</source>
-        <translation type="unfinished"></translation>
+        <translation>4 096</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1615"/>
         <source>2048</source>
-        <translation type="unfinished"></translation>
+        <translation>2 048</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1620"/>
         <source>1024</source>
-        <translation type="unfinished"></translation>
+        <translation>1 024</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1625"/>
         <source>512</source>
-        <translation type="unfinished"></translation>
+        <translation>512</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1630"/>
         <source>256</source>
-        <translation type="unfinished"></translation>
+        <translation>256</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1635"/>
         <source>128</source>
-        <translation type="unfinished"></translation>
+        <translation>128</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1640"/>
         <source>64</source>
-        <translation type="unfinished"></translation>
+        <translation>64</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1670"/>
         <source>Portaudio</source>
-        <translation type="unfinished"></translation>
+        <translation>Portaudio</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1682"/>
         <source>Api:</source>
-        <translation type="unfinished"></translation>
+        <translation>Api:</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1753"/>
         <source>Choose PortMidi input interface</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrať rozhranie pre vstup PortMid</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1831"/>
         <source>Attention: Any changes on this page require a restart of MuseScore.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pozor: Akékoľvek zmeny na tejto strane si vyžadujú opätovné spustenie MuseScore.</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1855"/>
         <source>Import</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahrať</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1861"/>
         <source>Style Used for Import</source>
-        <translation type="unfinished"></translation>
+        <translation>Štýl, ktorý sa použije pri nahrávaní</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1870"/>
         <source>Built in style</source>
-        <translation type="unfinished"></translation>
+        <translation>Vstavaný štýl</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1879"/>
         <source>Use style file:</source>
-        <translation type="unfinished"></translation>
+        <translation>Použiť súbor štýlov:</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1905"/>
         <source>Character Set used when import non-unicode strings. (For binary file import)</source>
-        <translation type="unfinished"></translation>
+        <translation>Znaková sada, ktorá sa použije pri nahrávaní reťazcov, ktoré nepatria do unicode. (Pre načítanie binárnych súborov)</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1920"/>
         <source>Character Set</source>
-        <translation type="unfinished"></translation>
+        <translation>Znaková sada</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1957"/>
         <source>Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportovať</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1963"/>
         <source>PNG</source>
-        <translation type="unfinished"></translation>
+        <translation>PNG</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1972"/>
         <source>screen shot function</source>
-        <translation type="unfinished"></translation>
+        <translation>Funkcia snímky obrazovky</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1988"/>
         <source>Export MIDI</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportovať MIDI</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="1997"/>
         <source>Expand Repeats</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozšíriť opakovania</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="2024"/>
         <source>Shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation>Skratky</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="2055"/>
         <source>Action</source>
-        <translation type="unfinished"></translation>
+        <translation>Úkon</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="2060"/>
         <source>Shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>Skratka</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="2076"/>
         <location filename="../../mscore/prefsdialog.ui" line="2186"/>
         <source>Reset to Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastaviť pôvodné</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="2083"/>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyčistiť</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="2090"/>
         <source>Define...</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadať...</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="2116"/>
         <source>Update</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktualizovať</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="2122"/>
         <source>Automatic Update Check</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatická kontrola aktualizácie</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="2131"/>
         <source>Check for new versions of MuseScore on startup</source>
-        <translation type="unfinished"></translation>
+        <translation>Hľadať nové verzie MuseScore pri štarte programu</translation>
     </message>
 </context>
 <context>
@@ -6204,27 +6228,27 @@ is incompatible with current interface</source>
     <message>
         <location filename="../../mscore/textline.cpp" line="525"/>
         <source>Ped (Pedal)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ped (Pedál)</translation>
     </message>
     <message>
         <location filename="../../mscore/textline.cpp" line="526"/>
         <source>* (Pedal)</source>
-        <translation type="unfinished"></translation>
+        <translation>* (Pedál, zadržaný bas)</translation>
     </message>
     <message>
         <location filename="../../mscore/textline.cpp" line="527"/>
         <source>. (Pedal)</source>
-        <translation type="unfinished"></translation>
+        <translation>. (Pedál, zadržaný bas)</translation>
     </message>
     <message>
         <location filename="../../mscore/textline.cpp" line="528"/>
         <source>dash (Pedal)</source>
-        <translation type="unfinished"></translation>
+        <translation>čiarka (Pedál)</translation>
     </message>
     <message>
         <location filename="../../mscore/textline.cpp" line="529"/>
         <source>tr (Trill)</source>
-        <translation type="unfinished"></translation>
+        <translation>tr (trilok)</translation>
     </message>
 </context>
 <context>
@@ -6235,33 +6259,39 @@ is incompatible with current interface</source>
         <location filename="../../mscore/utils.cpp" line="392"/>
         <location filename="../../mscore/utils.cpp" line="400"/>
         <source>MuseScore:</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore:</translation>
     </message>
     <message>
         <location filename="../../mscore/utils.cpp" line="375"/>
         <source>No note selected:
 Please select a single note and retry operation
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Nevybrali ste žiadnu notu:&#13;
+Prosím vyberte jednu notu a zopakujte operáciu.
+</translation>
     </message>
     <message>
         <location filename="../../mscore/utils.cpp" line="384"/>
         <source>No note or rest selected:
 Please select a single note or rest and retry operation
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Nevybrali ste žiadnu notu alebo pomlčku:&#13;
+Prosím vyberte jednu notu a zopakujte operáciu.
+</translation>
     </message>
     <message>
         <location filename="../../mscore/utils.cpp" line="393"/>
         <source>Please select a single note or slur and retry operation
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Prosím, vyberte jednu notu alebo jeden legátový oblúčik a zopakujte operáciu
+</translation>
     </message>
     <message>
         <location filename="../../mscore/utils.cpp" line="401"/>
         <source>Please select one or more staves and retry operation
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Prosím, vyberte jednu notovú osnovu alebo viac a zopakujte operáciu
+</translation>
     </message>
 </context>
 <context>
@@ -6269,7 +6299,7 @@ Please select a single note or rest and retry operation
     <message>
         <location filename="../../mscore/capella.cpp" line="1338"/>
         <source>MuseScore: Import Capella</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Nahratie súboru Capella</translation>
     </message>
     <message>
         <location filename="../../mscore/capella.cpp" line="1340"/>
@@ -6285,118 +6315,118 @@ Please select a single note or rest and retry operation
         <location filename="../../mscore/palette.cpp" line="1302"/>
         <location filename="../../mscore/sym.cpp" line="614"/>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Skončiť</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.cpp" line="355"/>
         <source>MuseScore: Load Chord Description</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Nahratie opisu akordu</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.cpp" line="357"/>
         <location filename="../../mscore/harmonyedit.cpp" line="119"/>
         <location filename="../../mscore/harmonyedit.cpp" line="143"/>
         <source>MuseScore Chord Description (*.xml);;All Files (*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Opis akordu MuseScore (*.xml);;Všetky súbory (*)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="120"/>
         <source>MuseScore: file not found:</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: súbor sa nenašiel:</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="127"/>
         <source>MuseScore: load failed:</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: nepodarilo sa načítať:</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="927"/>
         <location filename="../../mscore/preferences.cpp" line="1408"/>
         <source>MuseScore: Load Style</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: načítanie štýlu</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="929"/>
         <location filename="../../mscore/preferences.cpp" line="1410"/>
         <source>MuseScore Styles (*.mss);;All Files (*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Štýly MuseScore (*.mss);;Všetky súbory (*)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="938"/>
         <location filename="../../mscore/file.cpp" line="960"/>
         <source>MuseScore: Load Style failed:</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: nepodarilo sa nahrať štýl:</translation>
     </message>
     <message>
         <location filename="../../mscore/harmony.cpp" line="1097"/>
         <source>MuseScore: Open chord list failed:</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Nepodarilo sa otvoriť zoznam akordov:</translation>
     </message>
     <message>
         <location filename="../../mscore/harmony.cpp" line="1110"/>
         <source>MuseScore: Load chord list failed:</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Nepodarilo sa nahrať zoznam akordov:</translation>
     </message>
     <message>
         <location filename="../../mscore/harmonyedit.cpp" line="117"/>
         <source>MuseScore: Load Chord Description File</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Nahratie súboru popisu akordu</translation>
     </message>
     <message>
         <location filename="../../mscore/harmonyedit.cpp" line="141"/>
         <source>MuseScore: Save Chord Description File</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Uloženie súboru popisu akordu</translation>
     </message>
     <message>
         <location filename="../../mscore/importmidi.cpp" line="1410"/>
         <source>MuseScore: load midi</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: načítanie midi</translation>
     </message>
     <message>
         <location filename="../../mscore/instrdialog.cpp" line="1065"/>
         <source>MuseScore: load Style failed:</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: načítanie štýlu sa nepodarilo:</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="1589"/>
         <source>MuseScore</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="1590"/>
         <source>reading file &lt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Číta sa súbor &lt;</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="2094"/>
         <source>MuseScore: Load languages failed:</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: nepodarilo sa nahrať jazyky:</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="2137"/>
         <source>MuseScore: invalid command</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Neplatný príkaz</translation>
     </message>
     <message>
         <location filename="../../mscore/palette.cpp" line="814"/>
         <source>MuseScore: Load Palette failed:</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: nepodarilo sa nahrať paletu:</translation>
     </message>
     <message>
         <location filename="../../mscore/palette.cpp" line="1300"/>
         <source>MuseScore: Load Palettes failed:</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Nepodarilo sa nahrať paletu:</translation>
     </message>
     <message>
         <location filename="../../mscore/plugins.cpp" line="114"/>
         <location filename="../../mscore/plugins.cpp" line="123"/>
         <source>MuseScore: register script plugin:</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Zaregistrovať zásuvný modul so skriptom:</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="612"/>
         <source>MuseScore: Load font symbols failed:</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Nepodarilo sa nahrať znaky písma:</translation>
     </message>
 </context>
 <context>
@@ -6404,7 +6434,7 @@ Please select a single note or rest and retry operation
     <message>
         <location filename="../../mscore/utils.cpp" line="42"/>
         <source>record</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahrávať</translation>
     </message>
 </context>
 <context>
@@ -6412,27 +6442,27 @@ Please select a single note or rest and retry operation
     <message>
         <location filename="../../mscore/rest.cpp" line="424"/>
         <source>Rest</source>
-        <translation type="unfinished"></translation>
+        <translation>Pomlčka</translation>
     </message>
     <message>
         <location filename="../../mscore/rest.cpp" line="426"/>
         <source>Tuplet...</source>
-        <translation type="unfinished"></translation>
+        <translation>Rytmická skupina...</translation>
     </message>
     <message>
         <location filename="../../mscore/rest.cpp" line="427"/>
         <source>Tuplet Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnosti rytmických skupín...</translation>
     </message>
     <message>
         <location filename="../../mscore/rest.cpp" line="429"/>
         <source>Delete Tuplet</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstrániť rytmickú skupinu</translation>
     </message>
     <message>
         <location filename="../../mscore/rest.cpp" line="432"/>
         <source>Rest Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnosti pomlčky...</translation>
     </message>
 </context>
 <context>
@@ -6440,34 +6470,34 @@ Please select a single note or rest and retry operation
     <message>
         <location filename="../../mscore/restproperties.ui" line="14"/>
         <source>Chord Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnosti akordu</translation>
     </message>
     <message>
         <location filename="../../mscore/restproperties.ui" line="47"/>
         <source>Rest Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnosti pomlčky</translation>
     </message>
     <message>
         <location filename="../../mscore/restproperties.ui" line="56"/>
         <source>small</source>
-        <translation type="unfinished"></translation>
+        <translation>Malý</translation>
     </message>
     <message>
         <location filename="../../mscore/restproperties.ui" line="65"/>
         <source>additional leading space </source>
-        <translation type="unfinished"></translation>
+        <translation>Ďalšia začiatočná medzera </translation>
     </message>
     <message>
         <location filename="../../mscore/restproperties.ui" line="72"/>
         <location filename="../../mscore/restproperties.ui" line="92"/>
         <source>sp</source>
         <comment>spatium unit</comment>
-        <translation type="unfinished"></translation>
+        <translation>sp</translation>
     </message>
     <message>
         <location filename="../../mscore/restproperties.ui" line="85"/>
         <source>additional trailing space</source>
-        <translation type="unfinished"></translation>
+        <translation>Ďalšia koncová medzera</translation>
     </message>
 </context>
 <context>
@@ -6475,47 +6505,47 @@ Please select a single note or rest and retry operation
     <message>
         <location filename="../../mscore/line.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulár</translation>
     </message>
     <message>
         <location filename="../../mscore/line.ui" line="20"/>
         <source>SLine</source>
-        <translation type="unfinished"></translation>
+        <translation>SLine</translation>
     </message>
     <message>
         <location filename="../../mscore/line.ui" line="33"/>
         <source>tick2</source>
-        <translation type="unfinished"></translation>
+        <translation>fajka 2</translation>
     </message>
     <message>
         <location filename="../../mscore/line.ui" line="57"/>
         <source>Anchor:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kotva:</translation>
     </message>
     <message>
         <location filename="../../mscore/line.ui" line="65"/>
         <source>SEGMENT</source>
-        <translation type="unfinished"></translation>
+        <translation>ČASŤ</translation>
     </message>
     <message>
         <location filename="../../mscore/line.ui" line="70"/>
         <source>MEASURE</source>
-        <translation type="unfinished"></translation>
+        <translation>TAKT</translation>
     </message>
     <message>
         <location filename="../../mscore/line.ui" line="80"/>
         <source>digonal</source>
-        <translation type="unfinished"></translation>
+        <translation>šikmý</translation>
     </message>
     <message>
         <location filename="../../mscore/line.ui" line="91"/>
         <source>LineSegments</source>
-        <translation type="unfinished"></translation>
+        <translation>Časti čiary</translation>
     </message>
     <message>
         <location filename="../../mscore/line.ui" line="99"/>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation>1</translation>
     </message>
 </context>
 <context>
@@ -6525,39 +6555,42 @@ Please select a single note or rest and retry operation
         <source>No staves found:
 please use the instruments dialog to
 first create some staves</source>
-        <translation type="unfinished"></translation>
+        <translation>Žiadne notové osnovy sa nenašli:&#13;
+Na vytvorenie notovej osnovy, vyberte, prosím, nástroj &#13;
+v paneli nástrojov a vytvorte aspoň zopár taktov</translation>
     </message>
     <message>
         <location filename="../../mscore/cmd.cpp" line="1519"/>
         <source>No Measure selected:
 please select a measure and try again</source>
-        <translation type="unfinished"></translation>
+        <translation>Žiadnu notovú osnovu ste nevybrali:&#13;
+prosím, vyberte notovú osnovu a skúste znova</translation>
     </message>
     <message>
         <location filename="../../mscore/edit.cpp" line="454"/>
         <location filename="../../mscore/file.cpp" line="1210"/>
         <source>MuseScore</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore</translation>
     </message>
     <message>
         <location filename="../../mscore/edit.cpp" line="455"/>
         <source>The first time signature of a piece can not be removed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Prvé označenie taktu diela sa nedá odstrániť.</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="248"/>
         <source>Compressed MuseScore File (*.mscz)</source>
-        <translation type="unfinished"></translation>
+        <translation>Komprimovaný súbor MuseScore (*.mscz)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="249"/>
         <source>MuseScore File (*.mscx)</source>
-        <translation type="unfinished"></translation>
+        <translation>Súbor MuseScore (*.mscx)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="251"/>
         <source>MuseScore: Save Score</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Uloženie notovej osnovy</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="278"/>
@@ -6565,7 +6598,10 @@ please select a measure and try again</source>
 %1 
 
 Try saving to a different location.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tento súbor je zamknutý: &#13;
+%1 &#13;
+&#13;
+Skúste uložiť inde.</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="279"/>
@@ -6575,13 +6611,14 @@ Try saving to a different location.</source>
         <location filename="../../mscore/file.cpp" line="349"/>
         <location filename="../../mscore/file.cpp" line="360"/>
         <source>MuseScore: Save File</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Uloženie súboru</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="310"/>
         <source>Open Temp File
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Otvoriť dočasný súbor
+</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="310"/>
@@ -6590,194 +6627,198 @@ Try saving to a different location.</source>
         <location filename="../../mscore/file.cpp" line="1019"/>
         <source>
 failed: </source>
-        <translation type="unfinished"></translation>
+        <translation>
+nepodarilo sa: </translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="322"/>
         <location filename="../../mscore/file.cpp" line="326"/>
         <source>MuseScore: Save File failed: </source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Ukladanie súboru bolo neúspešné: </translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="338"/>
         <source>removing old backup file </source>
-        <translation type="unfinished"></translation>
+        <translation>Odstaňuje sa starý záložný súbor </translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="338"/>
         <source> failed</source>
-        <translation type="unfinished"></translation>
+        <translation> nepodarilo sa</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="350"/>
         <source>renaming old file &lt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Premenúva sa starý súbor &lt;</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="351"/>
         <source>&gt; to backup &lt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&gt; do zálohy &lt;</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="351"/>
         <source>&gt; failed</source>
-        <translation type="unfinished"></translation>
+        <translation>&gt; nepodarilo sa</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="361"/>
         <source>renaming temp. file &lt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Premenúva sa dočasný súbor &lt;</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="361"/>
         <source>&gt; to &lt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&gt; do &lt;</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="361"/>
         <source>&gt; failed:
 </source>
-        <translation type="unfinished"></translation>
+        <translation>&gt; nepodarilo sa:
+</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="390"/>
         <source>Compressed MuseScore Format (*.mscz)</source>
-        <translation type="unfinished"></translation>
+        <translation>Komprimovaný formát MuseScore (*.mscz)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="391"/>
         <source>MuseScore Format (*.mscx)</source>
-        <translation type="unfinished"></translation>
+        <translation>Formát MuseScore (*.mscx)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="392"/>
         <source>MusicXML Format (*.xml)</source>
-        <translation type="unfinished"></translation>
+        <translation>Formát MusicXML (*.xml)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="393"/>
         <source>Compressed MusicXML Format (*.mxl)</source>
-        <translation type="unfinished"></translation>
+        <translation>Formát komprimovaný MusicXML (*.mxl)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="394"/>
         <source>Standard MIDI File (*.mid)</source>
-        <translation type="unfinished"></translation>
+        <translation>Štandardný súbor MIDI (*.mid)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="395"/>
         <source>PDF File (*.pdf)</source>
-        <translation type="unfinished"></translation>
+        <translation>Súbor PDF (*.pdf)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="396"/>
         <source>PostScript File (*.ps)</source>
-        <translation type="unfinished"></translation>
+        <translation>Súbor PostScript (*.ps)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="397"/>
         <source>PNG Bitmap Graphic (*.png)</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitmapová grafika PNG (*.png)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="398"/>
         <source>Scalable Vector Graphic (*.svg)</source>
-        <translation type="unfinished"></translation>
+        <translation>Prispôsobiteľná vektorová grafika (*.svg)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="399"/>
         <source>Lilypond Format (*.ly)</source>
-        <translation type="unfinished"></translation>
+        <translation>Formát Lilypond (*.ly)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="401"/>
         <source>Wave Audio (*.wav)</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvuk wave  (*.wav)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="402"/>
         <source>Flac Audio (*.flac)</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvuk Flac (*.flac)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="403"/>
         <source>Ogg Vorbis Audio (*.ogg)</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvuk Ogg Vorbis (*.ogg)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="406"/>
         <source>MuseScore: Save a Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Uloženie kópie</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="407"/>
         <location filename="../../mscore/file.cpp" line="454"/>
         <location filename="../../mscore/file.cpp" line="486"/>
         <source>MuseScore: Save As</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Uložiť ako</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="454"/>
         <source>cannot determine file type</source>
-        <translation type="unfinished"></translation>
+        <translation>Nedá sa určiť typ súboru</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="803"/>
         <location filename="../../mscore/file.cpp" line="912"/>
         <source>Open File
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Otvoriť súbor
+</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="1006"/>
         <source>MuseScore: Save Style</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Uloženie štýlu</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="1008"/>
         <source>MuseScore Style File (*.mss)</source>
-        <translation type="unfinished"></translation>
+        <translation>Súbor štýlov MuseScore (*.mss)</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="1019"/>
         <source>Open Style File
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Otvoriť súbor štýlov
+</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="1021"/>
         <source>MuseScore: Open Style file</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Otvorenie súboru štýlov</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="1034"/>
         <source>Write Style failed: </source>
-        <translation type="unfinished"></translation>
+        <translation>Zapís štýlu sa nepodaril: </translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="1035"/>
         <source>MuseScore: Write Style</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Zápis štýlu</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="1185"/>
         <source>MuseScore: Read File</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Čítanie súboru</translation>
     </message>
     <message>
         <location filename="../../mscore/importmidi.cpp" line="1411"/>
         <source>Load failed: </source>
-        <translation type="unfinished"></translation>
+        <translation>Spustenie sa nepodarilo </translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.cpp" line="154"/>
         <source>MuseScore: transpose</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Prevod</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.cpp" line="155"/>
         <source>There is nothing selected. Transpose whole score?</source>
-        <translation type="unfinished"></translation>
+        <translation>Nič ste nevybrali. Previesť celý notový zápis?</translation>
     </message>
 </context>
 <context>
@@ -6785,59 +6826,60 @@ failed: </source>
     <message>
         <location filename="../../mscore/scoreview.cpp" line="824"/>
         <source>Select</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte</translation>
     </message>
     <message>
         <location filename="../../mscore/scoreview.cpp" line="827"/>
         <source>More...</source>
-        <translation type="unfinished"></translation>
+        <translation>Viac...</translation>
     </message>
     <message>
         <location filename="../../mscore/scoreview.cpp" line="833"/>
         <location filename="../../mscore/scoreview.cpp" line="923"/>
         <source>Object Inspector</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontrola objektov</translation>
     </message>
     <message>
         <location filename="../../mscore/scoreview.cpp" line="889"/>
         <source>Staff</source>
-        <translation type="unfinished"></translation>
+        <translation>Notová osnova</translation>
     </message>
     <message>
         <location filename="../../mscore/scoreview.cpp" line="890"/>
         <source>Edit Drumset...</source>
-        <translation type="unfinished"></translation>
+        <translation>Upraviť bicie...</translation>
     </message>
     <message>
         <location filename="../../mscore/scoreview.cpp" line="896"/>
         <source>Drumroll Editor...</source>
-        <translation type="unfinished"></translation>
+        <translation>Editor zvuku bubnov...</translation>
     </message>
     <message>
         <location filename="../../mscore/scoreview.cpp" line="901"/>
         <source>Pianoroll Editor...</source>
-        <translation type="unfinished"></translation>
+        <translation>Editor valčeka v klavíri</translation>
     </message>
     <message>
         <location filename="../../mscore/scoreview.cpp" line="905"/>
         <source>Staff Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnosti notovej osnovy...</translation>
     </message>
     <message>
         <location filename="../../mscore/scoreview.cpp" line="907"/>
         <source>Split Staff...</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozdeliť notovú osnovu</translation>
     </message>
     <message>
         <location filename="../../mscore/scoreview.cpp" line="911"/>
         <source>Measure</source>
-        <translation type="unfinished"></translation>
+        <translation>Takt</translation>
     </message>
     <message>
         <location filename="../../mscore/scoreview.cpp" line="1625"/>
         <source>unknown drop format: formats %1:
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Neznámy odkládací formát: formáty %1:
+</translation>
     </message>
 </context>
 <context>
@@ -6845,62 +6887,62 @@ failed: </source>
     <message>
         <location filename="../../mscore/segment.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulár</translation>
     </message>
     <message>
         <location filename="../../mscore/segment.ui" line="26"/>
         <source>Segment</source>
-        <translation type="unfinished"></translation>
+        <translation>Časť</translation>
     </message>
     <message>
         <location filename="../../mscore/segment.ui" line="64"/>
         <source>Clef Segment</source>
-        <translation type="unfinished"></translation>
+        <translation>Časť kľúča</translation>
     </message>
     <message>
         <location filename="../../mscore/segment.ui" line="69"/>
         <source>Key Signature</source>
-        <translation type="unfinished"></translation>
+        <translation>Označenie tóniny</translation>
     </message>
     <message>
         <location filename="../../mscore/segment.ui" line="74"/>
         <source>Time Signature</source>
-        <translation type="unfinished"></translation>
+        <translation>Označenie taktu</translation>
     </message>
     <message>
         <location filename="../../mscore/segment.ui" line="79"/>
         <source>Begin Repeat</source>
-        <translation type="unfinished"></translation>
+        <translation>Začať opakovanie</translation>
     </message>
     <message>
         <location filename="../../mscore/segment.ui" line="84"/>
         <source>Chord/Rest</source>
-        <translation type="unfinished"></translation>
+        <translation>Akord/Pomlčka</translation>
     </message>
     <message>
         <location filename="../../mscore/segment.ui" line="89"/>
         <source>Breath Segment</source>
-        <translation type="unfinished"></translation>
+        <translation>Časť dýchania</translation>
     </message>
     <message>
         <location filename="../../mscore/segment.ui" line="94"/>
         <source>End Bar Line</source>
-        <translation type="unfinished"></translation>
+        <translation>Skončiť notovú čiaru</translation>
     </message>
     <message>
         <location filename="../../mscore/segment.ui" line="99"/>
         <source>Time Signature Announce</source>
-        <translation type="unfinished"></translation>
+        <translation>Uvedenie označenia taktu</translation>
     </message>
     <message>
         <location filename="../../mscore/segment.ui" line="110"/>
         <source>Lyrics:</source>
-        <translation type="unfinished"></translation>
+        <translation>Text piesne:</translation>
     </message>
     <message>
         <location filename="../../mscore/segment.ui" line="120"/>
         <source>Segment Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ časti:</translation>
     </message>
 </context>
 <context>
@@ -6908,57 +6950,57 @@ failed: </source>
     <message>
         <location filename="../../mscore/select.ui" line="14"/>
         <source>MuseScore: Select</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Výber</translation>
     </message>
     <message>
         <location filename="../../mscore/select.ui" line="47"/>
         <source>Search for</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyhľadať</translation>
     </message>
     <message>
         <location filename="../../mscore/select.ui" line="56"/>
         <source>Element Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ prvku:</translation>
     </message>
     <message>
         <location filename="../../mscore/select.ui" line="70"/>
         <source>same staff</source>
-        <translation type="unfinished"></translation>
+        <translation>rovnaká notová osnova</translation>
     </message>
     <message>
         <location filename="../../mscore/select.ui" line="77"/>
         <source>same voice</source>
-        <translation type="unfinished"></translation>
+        <translation>rovnaký hlas</translation>
     </message>
     <message>
         <location filename="../../mscore/select.ui" line="84"/>
         <source>same system</source>
-        <translation type="unfinished"></translation>
+        <translation>rovnaký systém</translation>
     </message>
     <message>
         <location filename="../../mscore/select.ui" line="94"/>
         <source>Action</source>
-        <translation type="unfinished"></translation>
+        <translation>Úkon</translation>
     </message>
     <message>
         <location filename="../../mscore/select.ui" line="103"/>
         <source>replace selection</source>
-        <translation type="unfinished"></translation>
+        <translation>nahradiť výber</translation>
     </message>
     <message>
         <location filename="../../mscore/select.ui" line="113"/>
         <source>add to selection</source>
-        <translation type="unfinished"></translation>
+        <translation>pridať do výberu</translation>
     </message>
     <message>
         <location filename="../../mscore/select.ui" line="123"/>
         <source>search in selection</source>
-        <translation type="unfinished"></translation>
+        <translation>hľadať vo výbere</translation>
     </message>
     <message>
         <location filename="../../mscore/select.ui" line="130"/>
         <source>subtract from selection</source>
-        <translation type="unfinished"></translation>
+        <translation>odobrať z výberu</translation>
     </message>
 </context>
 <context>
@@ -6966,17 +7008,17 @@ failed: </source>
     <message>
         <location filename="../../mscore/selectinstr.ui" line="14"/>
         <source>Dialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Dialógové okno</translation>
     </message>
     <message>
         <location filename="../../mscore/selectinstr.ui" line="21"/>
         <source>0</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../mscore/selectinstr.ui" line="29"/>
         <source>show more</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobraziť viac</translation>
     </message>
 </context>
 <context>
@@ -6985,29 +7027,39 @@ failed: </source>
         <location filename="../../mscore/seq.cpp" line="209"/>
         <source>Init audio driver failed.
 Sequencer will be disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ovládač zvuku sa nepodarilo spustiť.&#13;
+Sekvencer bude vypnutý.</translation>
     </message>
     <message>
         <location filename="../../mscore/seq.cpp" line="225"/>
         <location filename="../../mscore/seq.cpp" line="243"/>
         <source>MuseScore: Load SoundFont</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Nahratie zvukového písma</translation>
     </message>
     <message>
         <location filename="../../mscore/seq.cpp" line="226"/>
         <source>No SoundFont configured
 Playback will be disabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie je nastavené žiadne zvukové písmo.&#13;
+Prehrávanie bude bude vypnuté.</translation>
     </message>
     <message>
         <location filename="../../mscore/seq.cpp" line="238"/>
         <source>Loading SoundFont
-&quot;%1&quot;
+"%1"
 failed. Playback will be disabled.
 
 Go to Display &gt; Synthesizer 
 and check that the file location is correct</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepodarilo sa nahrať&#13;
+zvukové písmo "%1"&#13;
+Prehrávanie bude vypnuté.&#13;
+&#13;
+Choďte do menu &#13;
+Zobraziť -&gt; Syntetizátor a skontrolujte, či je umiestnenie súboru správne&#13;
+&#13;
+Go to Display &gt; Synthesizer &#13;
+and check that the file location is correct</translation>
     </message>
 </context>
 <context>
@@ -7015,12 +7067,12 @@ and check that the file location is correct</source>
     <message>
         <location filename="../../mscore/shortcutcapturedialog.cpp" line="80"/>
         <source>Shortcut conflicts with </source>
-        <translation type="unfinished"></translation>
+        <translation>Klávesová skratka je v konflikte s </translation>
     </message>
     <message>
         <location filename="../../mscore/shortcutcapturedialog.cpp" line="106"/>
         <source>Undefined</source>
-        <translation type="unfinished"></translation>
+        <translation>Nezadaná</translation>
     </message>
 </context>
 <context>
@@ -7028,37 +7080,37 @@ and check that the file location is correct</source>
     <message>
         <location filename="../../mscore/shortcutcapturedialog.ui" line="13"/>
         <source>Enter shortcut sequence</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadajte skratku</translation>
     </message>
     <message>
         <location filename="../../mscore/shortcutcapturedialog.ui" line="28"/>
         <source>Press up to 4 keys to enter shortcut sequence!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ak chcete zadať klávesovú skratku, stlačte najviac 4 klávesy!</translation>
     </message>
     <message>
         <location filename="../../mscore/shortcutcapturedialog.ui" line="45"/>
         <source>Old shortcut:</source>
-        <translation type="unfinished"></translation>
+        <translation>Stará skratka:</translation>
     </message>
     <message>
         <location filename="../../mscore/shortcutcapturedialog.ui" line="59"/>
         <source>New shortcut:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nová skratka:</translation>
     </message>
     <message>
         <location filename="../../mscore/shortcutcapturedialog.ui" line="81"/>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyčistiť</translation>
     </message>
     <message>
         <location filename="../../mscore/shortcutcapturedialog.ui" line="104"/>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <location filename="../../mscore/shortcutcapturedialog.ui" line="114"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Zrušiť</translation>
     </message>
 </context>
 <context>
@@ -7066,47 +7118,47 @@ and check that the file location is correct</source>
     <message>
         <location filename="../../mscore/inspector.cpp" line="799"/>
         <source>auto</source>
-        <translation type="unfinished"></translation>
+        <translation>automaticky</translation>
     </message>
     <message>
         <location filename="../../mscore/inspector.cpp" line="800"/>
         <source>beam begin</source>
-        <translation type="unfinished"></translation>
+        <translation>Začiatok zástavky</translation>
     </message>
     <message>
         <location filename="../../mscore/inspector.cpp" line="801"/>
         <source>beam mid</source>
-        <translation type="unfinished"></translation>
+        <translation>Stred zástavky</translation>
     </message>
     <message>
         <location filename="../../mscore/inspector.cpp" line="802"/>
         <source>beam end</source>
-        <translation type="unfinished"></translation>
+        <translation>Koniec zástavky</translation>
     </message>
     <message>
         <location filename="../../mscore/inspector.cpp" line="803"/>
         <source>no beam</source>
-        <translation type="unfinished"></translation>
+        <translation>Žiadna zástavka</translation>
     </message>
     <message>
         <location filename="../../mscore/inspector.cpp" line="804"/>
         <source>begin 1/32</source>
-        <translation type="unfinished"></translation>
+        <translation>začiatok 1/32</translation>
     </message>
     <message>
         <location filename="../../mscore/inspector.cpp" line="806"/>
         <source>Auto</source>
-        <translation type="unfinished"></translation>
+        <translation>Automaticky</translation>
     </message>
     <message>
         <location filename="../../mscore/inspector.cpp" line="807"/>
         <source>Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahor</translation>
     </message>
     <message>
         <location filename="../../mscore/inspector.cpp" line="808"/>
         <source>Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Nadol</translation>
     </message>
 </context>
 <context>
@@ -7114,7 +7166,7 @@ and check that the file location is correct</source>
     <message>
         <location filename="../../mscore/inspector.cpp" line="1186"/>
         <source>Clef Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ kľúča:</translation>
     </message>
 </context>
 <context>
@@ -7122,37 +7174,37 @@ and check that the file location is correct</source>
     <message>
         <location filename="../../mscore/inspector.cpp" line="1068"/>
         <source>auto</source>
-        <translation type="unfinished"></translation>
+        <translation>automaticky</translation>
     </message>
     <message>
         <location filename="../../mscore/inspector.cpp" line="1069"/>
         <source>beam begin</source>
-        <translation type="unfinished"></translation>
+        <translation>Začiatok zástavky</translation>
     </message>
     <message>
         <location filename="../../mscore/inspector.cpp" line="1070"/>
         <source>beam mid</source>
-        <translation type="unfinished"></translation>
+        <translation>Stred zástavky</translation>
     </message>
     <message>
         <location filename="../../mscore/inspector.cpp" line="1071"/>
         <source>beam end</source>
-        <translation type="unfinished"></translation>
+        <translation>Koniec zástavky</translation>
     </message>
     <message>
         <location filename="../../mscore/inspector.cpp" line="1072"/>
         <source>no beam</source>
-        <translation type="unfinished"></translation>
+        <translation>Žiadna zástavka</translation>
     </message>
     <message>
         <location filename="../../mscore/inspector.cpp" line="1073"/>
         <source>begin 1/32</source>
-        <translation type="unfinished"></translation>
+        <translation>začiatok 1/32</translation>
     </message>
     <message>
         <location filename="../../mscore/inspector.cpp" line="1088"/>
         <source>Segment:</source>
-        <translation type="unfinished"></translation>
+        <translation>Časť:</translation>
     </message>
 </context>
 <context>
@@ -7160,32 +7212,32 @@ and check that the file location is correct</source>
     <message>
         <location filename="../../mscore/slur.ui" line="13"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulár</translation>
     </message>
     <message>
         <location filename="../../mscore/slur.ui" line="34"/>
         <source>Slur</source>
-        <translation type="unfinished"></translation>
+        <translation>Legátový oblúčik</translation>
     </message>
     <message>
         <location filename="../../mscore/slur.ui" line="49"/>
         <source>Slur End</source>
-        <translation type="unfinished"></translation>
+        <translation>Koniec legátového oblúčika</translation>
     </message>
     <message>
         <location filename="../../mscore/slur.ui" line="58"/>
         <source>Staff:</source>
-        <translation type="unfinished"></translation>
+        <translation>Notová osnova:</translation>
     </message>
     <message>
         <location filename="../../mscore/slur.ui" line="72"/>
         <source>Voice:</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlas:</translation>
     </message>
     <message>
         <location filename="../../mscore/slur.ui" line="86"/>
         <source>Tick:</source>
-        <translation type="unfinished"></translation>
+        <translation>Fajka:</translation>
     </message>
 </context>
 <context>
@@ -7193,22 +7245,22 @@ and check that the file location is correct</source>
     <message>
         <location filename="../../mscore/slurproperties.ui" line="14"/>
         <source>Volta Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnosti volty</translation>
     </message>
     <message>
         <location filename="../../mscore/slurproperties.ui" line="38"/>
         <source>Slur Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnosti egátového oblúčika</translation>
     </message>
     <message>
         <location filename="../../mscore/slurproperties.ui" line="47"/>
         <source>solid</source>
-        <translation type="unfinished"></translation>
+        <translation>plný</translation>
     </message>
     <message>
         <location filename="../../mscore/slurproperties.ui" line="57"/>
         <source>dotted</source>
-        <translation type="unfinished"></translation>
+        <translation>bodkovaný</translation>
     </message>
 </context>
 <context>
@@ -7216,12 +7268,12 @@ and check that the file location is correct</source>
     <message>
         <location filename="../../mscore/slur.cpp" line="406"/>
         <source>Edit Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Režim úprav</translation>
     </message>
     <message>
         <location filename="../../mscore/slur.cpp" line="408"/>
         <source>Slur Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnosti egátového oblúčika...</translation>
     </message>
 </context>
 <context>
@@ -7229,19 +7281,19 @@ and check that the file location is correct</source>
     <message>
         <location filename="../../mscore/slurtie.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulár</translation>
     </message>
     <message>
         <location filename="../../mscore/slurtie.ui" line="111"/>
         <source>startElement</source>
         <extracomment>do not translate</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>začiatok prvku</translation>
     </message>
     <message>
         <location filename="../../mscore/slurtie.ui" line="118"/>
         <source>endElement</source>
         <extracomment>do not translate - only for debugging</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>koniec prvku</translation>
     </message>
 </context>
 <context>
@@ -7249,17 +7301,17 @@ and check that the file location is correct</source>
     <message>
         <location filename="../../mscore/splitstaff.ui" line="20"/>
         <source>MuseScore: Edit Staff/Part Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Upraviť vlastnosti notovej osnovy/hlasu</translation>
     </message>
     <message>
         <location filename="../../mscore/splitstaff.ui" line="52"/>
         <source>Split Staff</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozdeliť notovú osnovu</translation>
     </message>
     <message>
         <location filename="../../mscore/splitstaff.ui" line="72"/>
         <source>Split Point</source>
-        <translation type="unfinished"></translation>
+        <translation>Deliaci bod</translation>
     </message>
 </context>
 <context>
@@ -7267,7 +7319,7 @@ and check that the file location is correct</source>
     <message>
         <location filename="../../mscore/stafftext.cpp" line="79"/>
         <source>Staff Text Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnosti textu notovej osnovy</translation>
     </message>
 </context>
 <context>
@@ -7275,17 +7327,17 @@ and check that the file location is correct</source>
     <message>
         <location filename="../../mscore/stafftext.ui" line="13"/>
         <source>MuseScore: Staff Text Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Vlastnosti textu notovej osnovy</translation>
     </message>
     <message>
         <location filename="../../mscore/stafftext.ui" line="19"/>
         <source>Channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Kanál</translation>
     </message>
     <message>
         <location filename="../../mscore/stafftext.ui" line="37"/>
         <source>Midi Action</source>
-        <translation type="unfinished"></translation>
+        <translation>Činnosť Midi</translation>
     </message>
 </context>
 <context>
@@ -7293,7 +7345,7 @@ and check that the file location is correct</source>
     <message>
         <location filename="../../mscore/symboldialog.cpp" line="49"/>
         <source>MuseScore: Symbols</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Symboly</translation>
     </message>
 </context>
 <context>
@@ -7301,17 +7353,17 @@ and check that the file location is correct</source>
     <message>
         <location filename="../../mscore/symboldialog.ui" line="13"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulár</translation>
     </message>
     <message>
         <location filename="../../mscore/symboldialog.ui" line="37"/>
         <source>System Flag</source>
-        <translation type="unfinished"></translation>
+        <translation>Systémový príznak</translation>
     </message>
     <message>
         <location filename="../../mscore/symboldialog.ui" line="57"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstrániť</translation>
     </message>
 </context>
 <context>
@@ -7319,132 +7371,132 @@ and check that the file location is correct</source>
     <message>
         <location filename="../../mscore/synthcontrol.ui" line="14"/>
         <source>Synthesizer</source>
-        <translation type="unfinished"></translation>
+        <translation>Syntetizátor</translation>
     </message>
     <message>
         <location filename="../../mscore/synthcontrol.ui" line="38"/>
         <source>Rev</source>
-        <translation type="unfinished"></translation>
+        <translation>Ozvena</translation>
     </message>
     <message>
         <location filename="../../mscore/synthcontrol.ui" line="68"/>
         <source>Cho</source>
-        <translation type="unfinished"></translation>
+        <translation>Zbor</translation>
     </message>
     <message>
         <location filename="../../mscore/synthcontrol.ui" line="82"/>
         <source>master volume</source>
-        <translation type="unfinished"></translation>
+        <translation>master volume</translation>
     </message>
     <message>
         <location filename="../../mscore/synthcontrol.ui" line="98"/>
         <source>Vol</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvuk</translation>
     </message>
     <message>
         <location filename="../../mscore/synthcontrol.ui" line="112"/>
         <source>Loaded SoundFont</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahraté zvukové písmo</translation>
     </message>
     <message>
         <location filename="../../mscore/synthcontrol.ui" line="125"/>
         <location filename="../../mscore/synthcontrol.ui" line="318"/>
         <location filename="../../mscore/synthcontrol.ui" line="482"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../../mscore/synthcontrol.ui" line="136"/>
         <source>Master Tuning</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavné ladenie</translation>
     </message>
     <message>
         <location filename="../../mscore/synthcontrol.ui" line="156"/>
         <source>Hz</source>
         <extracomment>Frequency Herz</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Hz</translation>
     </message>
     <message>
         <location filename="../../mscore/synthcontrol.ui" line="175"/>
         <source>SoundFont</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvukové písmo</translation>
     </message>
     <message>
         <location filename="../../mscore/synthcontrol.ui" line="191"/>
         <source>Reverb</source>
-        <translation type="unfinished"></translation>
+        <translation>Ozvena</translation>
     </message>
     <message>
         <location filename="../../mscore/synthcontrol.ui" line="203"/>
         <source>Room Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Veľkosť miestnosti:</translation>
     </message>
     <message>
         <location filename="../../mscore/synthcontrol.ui" line="229"/>
         <source>Damp:</source>
-        <translation type="unfinished"></translation>
+        <translation>Stíšiť:</translation>
     </message>
     <message>
         <location filename="../../mscore/synthcontrol.ui" line="255"/>
         <source>Width:</source>
-        <translation type="unfinished"></translation>
+        <translation>Šírka:</translation>
     </message>
     <message>
         <location filename="../../mscore/synthcontrol.ui" line="296"/>
         <location filename="../../mscore/synthcontrol.ui" line="460"/>
         <source>Preset:</source>
-        <translation type="unfinished"></translation>
+        <translation>Prednastaviť:</translation>
     </message>
     <message>
         <location filename="../../mscore/synthcontrol.ui" line="310"/>
         <location filename="../../mscore/synthcontrol.ui" line="474"/>
         <source>not implemented</source>
-        <translation type="unfinished"></translation>
+        <translation>nerobí sa</translation>
     </message>
     <message>
         <location filename="../../mscore/synthcontrol.ui" line="362"/>
         <source>Chorus</source>
-        <translation type="unfinished"></translation>
+        <translation>Refrén</translation>
     </message>
     <message>
         <location filename="../../mscore/synthcontrol.ui" line="368"/>
         <source>Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Type:</translation>
     </message>
     <message>
         <location filename="../../mscore/synthcontrol.ui" line="376"/>
         <source>Sine</source>
-        <translation type="unfinished"></translation>
+        <translation>Sínus</translation>
     </message>
     <message>
         <location filename="../../mscore/synthcontrol.ui" line="381"/>
         <source>Triangle</source>
-        <translation type="unfinished"></translation>
+        <translation>Triangel</translation>
     </message>
     <message>
         <location filename="../../mscore/synthcontrol.ui" line="389"/>
         <source>Number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Číslo</translation>
     </message>
     <message>
         <location filename="../../mscore/synthcontrol.ui" line="406"/>
         <source>Speed:</source>
-        <translation type="unfinished"></translation>
+        <translation>Rýchlosť</translation>
     </message>
     <message>
         <location filename="../../mscore/synthcontrol.ui" line="429"/>
         <source>Depth:</source>
-        <translation type="unfinished"></translation>
+        <translation>Hĺbka:</translation>
     </message>
     <message>
         <location filename="../../mscore/synthcontrol.cpp" line="155"/>
         <source>Choose Synthesizer SoundFont</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte syntetizátor na zvukové písmo</translation>
     </message>
     <message>
         <location filename="../../mscore/synthcontrol.cpp" line="157"/>
         <source>SoundFont Files (*.sf2 *.SF2);;All (*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Soubory zvukového písma (*.sf2 *.SF2);;Všetko (*)</translation>
     </message>
 </context>
 <context>
@@ -7452,22 +7504,22 @@ and check that the file location is correct</source>
     <message>
         <location filename="../../mscore/tempoproperties.ui" line="13"/>
         <source>MuseScore: Tempo Text Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Vlastnosti textu tempa</translation>
     </message>
     <message>
         <location filename="../../mscore/tempoproperties.ui" line="37"/>
         <source>Tempo Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnosti tempa</translation>
     </message>
     <message>
         <location filename="../../mscore/tempoproperties.ui" line="65"/>
         <source>Tempo:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tempo:</translation>
     </message>
     <message>
         <location filename="../../mscore/tempoproperties.ui" line="72"/>
         <source>BPM</source>
-        <translation type="unfinished"></translation>
+        <translation>BPM</translation>
     </message>
 </context>
 <context>
@@ -7475,7 +7527,7 @@ and check that the file location is correct</source>
     <message>
         <location filename="../../mscore/tempotext.cpp" line="76"/>
         <source>Tempo Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnosti tempa...</translation>
     </message>
 </context>
 <context>
@@ -7483,17 +7535,17 @@ and check that the file location is correct</source>
     <message>
         <location filename="../../mscore/text.cpp" line="1348"/>
         <source>Set Invisible</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastaviť ako neviditeľné</translation>
     </message>
     <message>
         <location filename="../../mscore/text.cpp" line="1350"/>
         <source>Set Visible</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastaviť ako viditeľné</translation>
     </message>
     <message>
         <location filename="../../mscore/text.cpp" line="1352"/>
         <source>Text Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnosti textu</translation>
     </message>
 </context>
 <context>
@@ -7501,58 +7553,58 @@ and check that the file location is correct</source>
     <message>
         <location filename="../../mscore/text.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulár</translation>
     </message>
     <message>
         <location filename="../../mscore/text.ui" line="20"/>
         <source>Text</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation>Text</translation>
     </message>
     <message>
         <location filename="../../mscore/text.ui" line="35"/>
         <source>Text:</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation>Text:</translation>
     </message>
     <message>
         <location filename="../../mscore/text.ui" line="54"/>
         <source>Offset:</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation>Posun:</translation>
     </message>
     <message>
         <location filename="../../mscore/text.ui" line="108"/>
         <source>MM</source>
-        <translation type="unfinished"></translation>
+        <translation>MM</translation>
     </message>
     <message>
         <location filename="../../mscore/text.ui" line="113"/>
         <source>Space</source>
-        <translation type="unfinished"></translation>
+        <translation>Medzera</translation>
     </message>
     <message>
         <location filename="../../mscore/text.ui" line="127"/>
         <source>Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ:</translation>
     </message>
     <message>
         <location filename="../../mscore/text.ui" line="137"/>
         <source>Abs.:</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation>Abs.:</translation>
     </message>
     <message>
         <location filename="../../mscore/text.ui" line="144"/>
         <source>Rel.:</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation>Rel.:</translation>
     </message>
     <message>
         <location filename="../../mscore/text.ui" line="153"/>
         <source>TextStyle:</source>
         <comment>do not translate</comment>
-        <translation type="unfinished"></translation>
+        <translation>Štýl textu:</translation>
     </message>
 </context>
 <context>
@@ -7560,17 +7612,17 @@ and check that the file location is correct</source>
     <message>
         <location filename="../../mscore/text.cpp" line="1528"/>
         <source>Set Invisible</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastaviť ako neviditeľné</translation>
     </message>
     <message>
         <location filename="../../mscore/text.cpp" line="1530"/>
         <source>Set Visible</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastaviť ako viditeľné</translation>
     </message>
     <message>
         <location filename="../../mscore/text.cpp" line="1532"/>
         <source>Text Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnosti textu...</translation>
     </message>
 </context>
 <context>
@@ -7578,27 +7630,27 @@ and check that the file location is correct</source>
     <message>
         <location filename="../../mscore/textline.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulár</translation>
     </message>
     <message>
         <location filename="../../mscore/textline.ui" line="20"/>
         <source>TextLine</source>
-        <translation type="unfinished"></translation>
+        <translation>Riadok textu</translation>
     </message>
     <message>
         <location filename="../../mscore/textline.ui" line="31"/>
         <source>line width:</source>
-        <translation type="unfinished"></translation>
+        <translation>Šírka textu:</translation>
     </message>
     <message>
         <location filename="../../mscore/textline.ui" line="41"/>
         <source>BeginText</source>
-        <translation type="unfinished"></translation>
+        <translation>Začiatok textu</translation>
     </message>
     <message>
         <location filename="../../mscore/textline.ui" line="48"/>
         <source>ContinueText</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokračovať v texte</translation>
     </message>
 </context>
 <context>
@@ -7606,17 +7658,17 @@ and check that the file location is correct</source>
     <message>
         <location filename="../../mscore/textline.cpp" line="484"/>
         <source>Set Invisible</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastaviť ako neviditeľné</translation>
     </message>
     <message>
         <location filename="../../mscore/textline.cpp" line="486"/>
         <source>Set Visible</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastaviť ako viditeľné</translation>
     </message>
     <message>
         <location filename="../../mscore/textline.cpp" line="488"/>
         <source>Line Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnosti čiary...</translation>
     </message>
 </context>
 <context>
@@ -7624,12 +7676,12 @@ and check that the file location is correct</source>
     <message>
         <location filename="../../mscore/textpalette.ui" line="77"/>
         <source>MuseScore: Special Text Symbols</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Špeciálne textové symboly</translation>
     </message>
     <message>
         <location filename="../../mscore/textpalette.ui" line="93"/>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Text</translation>
     </message>
 </context>
 <context>
@@ -7638,13 +7690,13 @@ and check that the file location is correct</source>
         <location filename="../../mscore/textproperties.cpp" line="55"/>
         <source>mm</source>
         <comment>millimeter unit</comment>
-        <translation type="unfinished"></translation>
+        <translation>mm</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.cpp" line="55"/>
         <source>sp</source>
         <comment>spatium unit</comment>
-        <translation type="unfinished"></translation>
+        <translation>sp</translation>
     </message>
 </context>
 <context>
@@ -7652,12 +7704,12 @@ and check that the file location is correct</source>
     <message>
         <location filename="../../mscore/text.cpp" line="1477"/>
         <source>MuseScore: Text Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Vlastnosti textu</translation>
     </message>
     <message>
         <location filename="../../mscore/text.cpp" line="1486"/>
         <source>apply to all elements of same type</source>
-        <translation type="unfinished"></translation>
+        <translation>Použiť na všetky prvky rovnakého typu</translation>
     </message>
 </context>
 <context>
@@ -7665,72 +7717,72 @@ and check that the file location is correct</source>
     <message>
         <location filename="../../mscore/textproperties.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulár</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="28"/>
         <source>Font:</source>
-        <translation type="unfinished"></translation>
+        <translation>Písmo:</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="35"/>
         <source>font face</source>
-        <translation type="unfinished"></translation>
+        <translation>písmo</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="48"/>
         <source>Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Veľkosť</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="55"/>
         <source>font point size</source>
-        <translation type="unfinished"></translation>
+        <translation>Veľkosť písma v bodoch</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="81"/>
         <source>Style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Štýl:</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="108"/>
         <source>bold</source>
-        <translation type="unfinished"></translation>
+        <translation>Tučné</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="111"/>
         <source>B</source>
-        <translation type="unfinished"></translation>
+        <translation>B</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="144"/>
         <source>italic</source>
-        <translation type="unfinished"></translation>
+        <translation>Kurzíva</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="147"/>
         <source>I</source>
-        <translation type="unfinished"></translation>
+        <translation>I</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="174"/>
         <source>underline</source>
-        <translation type="unfinished"></translation>
+        <translation>Podčiarknúť</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="177"/>
         <source>U</source>
-        <translation type="unfinished"></translation>
+        <translation>U</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="200"/>
         <source>Align:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zarovnať:</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="219"/>
         <source>align left edge of text to reference point</source>
-        <translation type="unfinished"></translation>
+        <translation>Zarovať ľavý okraj textu na orientačný bod</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="222"/>
@@ -7740,197 +7792,197 @@ and check that the file location is correct</source>
         <location filename="../../mscore/textproperties.ui" line="314"/>
         <location filename="../../mscore/textproperties.ui" line="337"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="242"/>
         <source>center text on reference point</source>
-        <translation type="unfinished"></translation>
+        <translation>Vycentrovať text podľa orientačného bodu</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="265"/>
         <source>align right edge of text to reference point</source>
-        <translation type="unfinished"></translation>
+        <translation>Zarovnať pravý okraj textu na orientačný bod</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="288"/>
         <source>align top edge of text to reference point</source>
-        <translation type="unfinished"></translation>
+        <translation>Zarovnať horný okraj textu na orientačný bod</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="311"/>
         <source>center text vertical to reference point</source>
-        <translation type="unfinished"></translation>
+        <translation>Zarovnat text zvislo nastred  podľa orientačného bodu</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="334"/>
         <source>align bottom edge of text to reference point</source>
-        <translation type="unfinished"></translation>
+        <translation>Zarovnať dolný okraj textu na orientačný bod</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="361"/>
         <location filename="../../mscore/textproperties.ui" line="696"/>
         <source>Color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Farba:</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="380"/>
         <source>text color</source>
-        <translation type="unfinished"></translation>
+        <translation>Farba textu</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="401"/>
         <source>System Flag</source>
-        <translation type="unfinished"></translation>
+        <translation>Systémový príznak</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="423"/>
         <source>Offset</source>
-        <translation type="unfinished"></translation>
+        <translation>Posun</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="443"/>
         <source>X:</source>
         <extracomment>coordinate</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>X:</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="450"/>
         <source>horizontal offset to reference point</source>
-        <translation type="unfinished"></translation>
+        <translation>Vodorovný posun orientačného bodu</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="469"/>
         <source>relX:</source>
-        <translation type="unfinished"></translation>
+        <translation>relX:</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="476"/>
         <source>reference point offset in percent of parent width</source>
-        <translation type="unfinished"></translation>
+        <translation>Posun orientačného bodu v percentách pôvodnej šírky</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="479"/>
         <location filename="../../mscore/textproperties.ui" line="538"/>
         <source>%</source>
-        <translation type="unfinished"></translation>
+        <translation>%</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="502"/>
         <source>Y:</source>
         <extracomment>coordinate</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Y:</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="509"/>
         <source>vertical offset to reference point</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvislý posun orientačného bodu</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="528"/>
         <source>relY:</source>
-        <translation type="unfinished"></translation>
+        <translation>relY:</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="535"/>
         <source>reference point offset in percent of parent height</source>
-        <translation type="unfinished"></translation>
+        <translation>Posun orientačného bodu v percentách pôvodnej výšky</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="559"/>
         <source>Unit:</source>
-        <translation type="unfinished"></translation>
+        <translation>Jednotka:</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="572"/>
         <source>offset is absolute</source>
-        <translation type="unfinished"></translation>
+        <translation>Posun je úplný</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="575"/>
         <source>MM</source>
-        <translation type="unfinished"></translation>
+        <translation>MM</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="582"/>
         <source>offset in Space units</source>
-        <translation type="unfinished"></translation>
+        <translation>Posun v medzerníkoch</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="585"/>
         <source>Space</source>
-        <translation type="unfinished"></translation>
+        <translation>Medzera</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="595"/>
         <source>enable text frame</source>
-        <translation type="unfinished"></translation>
+        <translation>Povoliť textový rám</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="598"/>
         <source>Frame</source>
-        <translation type="unfinished"></translation>
+        <translation>Rám</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="615"/>
         <source>draw circled frame</source>
-        <translation type="unfinished"></translation>
+        <translation>Nakresliť okrúhly rám</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="618"/>
         <source>Circle</source>
-        <translation type="unfinished"></translation>
+        <translation>Kruh</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="625"/>
         <source>draw boxed frame</source>
-        <translation type="unfinished"></translation>
+        <translation>Nakresliť hranatý rám</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="628"/>
         <source>Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Pole</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="639"/>
         <source>Width:</source>
-        <translation type="unfinished"></translation>
+        <translation>Šírka:</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="646"/>
         <source>frame line width</source>
-        <translation type="unfinished"></translation>
+        <translation>Šírka čiary rámu</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="649"/>
         <location filename="../../mscore/textproperties.ui" line="669"/>
         <source>mm</source>
-        <translation type="unfinished"></translation>
+        <translation>mm</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="659"/>
         <source>Margin:</source>
-        <translation type="unfinished"></translation>
+        <translation>Okraj:</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="666"/>
         <source>frame inner margin</source>
-        <translation type="unfinished"></translation>
+        <translation>Vnútorný okraj rámu</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="682"/>
         <source>Round:</source>
-        <translation type="unfinished"></translation>
+        <translation>Okrúhly:</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="689"/>
         <source>corner round</source>
-        <translation type="unfinished"></translation>
+        <translation>oblé hrany</translation>
     </message>
     <message>
         <location filename="../../mscore/textproperties.ui" line="703"/>
         <source>frame color</source>
-        <translation type="unfinished"></translation>
+        <translation>Farba rámu</translation>
     </message>
 </context>
 <context>
@@ -7938,7 +7990,7 @@ and check that the file location is correct</source>
     <message>
         <location filename="../../mscore/textstyle.cpp" line="38"/>
         <source>MuseScore: Edit Text Styles</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Úprava textových štýlov</translation>
     </message>
 </context>
 <context>
@@ -7946,12 +7998,12 @@ and check that the file location is correct</source>
     <message>
         <location filename="../../mscore/textpalette.cpp" line="55"/>
         <source>Text Tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Textové nástroje</translation>
     </message>
     <message>
         <location filename="../../mscore/textpalette.cpp" line="58"/>
         <source>Text Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Úprava textu</translation>
     </message>
 </context>
 <context>
@@ -7959,17 +8011,17 @@ and check that the file location is correct</source>
     <message>
         <location filename="../../mscore/timedialog.cpp" line="37"/>
         <source>MuseScore: Time Signatures</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Označenia taktov</translation>
     </message>
     <message>
         <location filename="../../mscore/timedialog.cpp" line="73"/>
         <source>4/4 common time</source>
-        <translation type="unfinished"></translation>
+        <translation>Štvorštrťový takt</translation>
     </message>
     <message>
         <location filename="../../mscore/timedialog.cpp" line="74"/>
         <source>2/2 alla breve</source>
-        <translation type="unfinished"></translation>
+        <translation>2/2 alla breve</translation>
     </message>
 </context>
 <context>
@@ -7977,29 +8029,29 @@ and check that the file location is correct</source>
     <message>
         <location filename="../../mscore/timedialog.ui" line="78"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulár</translation>
     </message>
     <message>
         <location filename="../../mscore/timedialog.ui" line="179"/>
         <source>Create Time Signature</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvoriť označenie taktu</translation>
     </message>
     <message>
         <location filename="../../mscore/timedialog.ui" line="237"/>
         <location filename="../../mscore/timedialog.ui" line="263"/>
         <location filename="../../mscore/timedialog.ui" line="289"/>
         <source>+</source>
-        <translation type="unfinished"></translation>
+        <translation>+</translation>
     </message>
     <message>
         <location filename="../../mscore/timedialog.ui" line="407"/>
         <source>add time signature to palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridajte označenie taktu do palety</translation>
     </message>
     <message>
         <location filename="../../mscore/timedialog.ui" line="410"/>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať</translation>
     </message>
 </context>
 <context>
@@ -8007,51 +8059,54 @@ and check that the file location is correct</source>
     <message>
         <location filename="../../mscore/timesigwizard.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulár</translation>
     </message>
     <message>
         <location filename="../../mscore/timesigwizard.ui" line="26"/>
         <source>Enter Time Signature:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadajte označenie taktu:</translation>
     </message>
     <message>
         <location filename="../../mscore/timesigwizard.ui" line="35"/>
         <source>Time Signature: </source>
-        <translation type="unfinished"></translation>
+        <translation>Označenie taktu: </translation>
     </message>
     <message>
         <location filename="../../mscore/timesigwizard.ui" line="61"/>
         <location filename="../../mscore/timesigwizard.ui" line="135"/>
         <source>/</source>
-        <translation type="unfinished"></translation>
+        <translation>/</translation>
     </message>
     <message>
         <location filename="../../mscore/timesigwizard.ui" line="94"/>
         <source>Pickup Measure</source>
-        <translation type="unfinished"></translation>
+        <translation>Takt s pomlčkou na začiatku</translation>
     </message>
     <message>
         <location filename="../../mscore/timesigwizard.ui" line="109"/>
         <source>Time Signature</source>
-        <translation type="unfinished"></translation>
+        <translation>Označenie taktu</translation>
     </message>
     <message>
         <location filename="../../mscore/timesigwizard.ui" line="168"/>
         <source>Enter Number of Measures:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadajte počet taktov:</translation>
     </message>
     <message>
         <location filename="../../mscore/timesigwizard.ui" line="186"/>
         <source>Measures:</source>
-        <translation type="unfinished"></translation>
+        <translation>Taktov:</translation>
     </message>
     <message>
         <location filename="../../mscore/timesigwizard.ui" line="225"/>
-        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Hint: you can also add or remove measures after creation of the score.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Hint: you can also add or remove measures after creation of the score.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;&#13;
+p, li { white-space: pre-wrap; }&#13;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Pomôcka: takty môžete pridávať alebo odstraňovať aj po vytvorení notovej osnovy.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -8059,264 +8114,264 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/transposedialog.ui" line="14"/>
         <source>MuseScore: Transpose</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Prevod</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="42"/>
         <source>Transpose by Key</source>
-        <translation type="unfinished"></translation>
+        <translation>Previesť podľa tóniny</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="67"/>
         <source>Cb major / Ab minor</source>
-        <translation type="unfinished"></translation>
+        <translation>Ces dur/As mol</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="72"/>
         <source>Gb major / Eb minor</source>
-        <translation type="unfinished"></translation>
+        <translation>Ges dur/Es mol</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="77"/>
         <source>Db major / Bb minor</source>
-        <translation type="unfinished"></translation>
+        <translation>Des dur/Bes mol</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="82"/>
         <source>Ab major / F minor</source>
-        <translation type="unfinished"></translation>
+        <translation>As dur/F mol</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="87"/>
         <source>Eb major / C minor</source>
-        <translation type="unfinished"></translation>
+        <translation>Es dur/C mol</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="92"/>
         <source>Bb major / G minor</source>
-        <translation type="unfinished"></translation>
+        <translation>B dur/G mol</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="97"/>
         <source>F major / D minor</source>
-        <translation type="unfinished"></translation>
+        <translation>F dur/D mol</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="102"/>
         <source>C major / A minor</source>
-        <translation type="unfinished"></translation>
+        <translation>C dur/A mol</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="107"/>
         <source>G major / E minor</source>
-        <translation type="unfinished"></translation>
+        <translation>G dur/E mol</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="112"/>
         <source>D major / B minor</source>
-        <translation type="unfinished"></translation>
+        <translation>D dur/H mol</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="117"/>
         <source>A major / F# minor</source>
-        <translation type="unfinished"></translation>
+        <translation>A dur/Fis mol</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="122"/>
         <source>E major / C# minor</source>
-        <translation type="unfinished"></translation>
+        <translation>E dur/Cis mol</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="127"/>
         <source>B major / G# minor</source>
-        <translation type="unfinished"></translation>
+        <translation>H dur/Gis mol</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="132"/>
         <source>F# major / D# minor</source>
-        <translation type="unfinished"></translation>
+        <translation>Fis dur/Dis mol</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="137"/>
         <source>C# major / A# minor</source>
-        <translation type="unfinished"></translation>
+        <translation>Cis dur/Ais mol</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="145"/>
         <location filename="../../mscore/transposedialog.ui" line="196"/>
         <source>Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahor</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="152"/>
         <location filename="../../mscore/transposedialog.ui" line="340"/>
         <source>Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Nadol</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="159"/>
         <source>Closest</source>
-        <translation type="unfinished"></translation>
+        <translation>Najbližší</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="172"/>
         <source>Transpose by Interval</source>
-        <translation type="unfinished"></translation>
+        <translation>Previesť o interval</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="207"/>
         <source>Perfect Unison</source>
-        <translation type="unfinished"></translation>
+        <translation>Čistá prima</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="212"/>
         <source>Augmented Unison</source>
-        <translation type="unfinished"></translation>
+        <translation>Zväčšená prima</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="217"/>
         <source>Diminished Second</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmenšená sekunda</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="222"/>
         <source>Minor Second</source>
-        <translation type="unfinished"></translation>
+        <translation>Malá sekunda</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="227"/>
         <source>Major Second</source>
-        <translation type="unfinished"></translation>
+        <translation>Veľká sekunda</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="232"/>
         <source>Augmented Second</source>
-        <translation type="unfinished"></translation>
+        <translation>Zväčšená sekunda</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="237"/>
         <source>Diminished Third</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmenšená tercia</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="242"/>
         <source>Minor Third</source>
-        <translation type="unfinished"></translation>
+        <translation>Malá tercia</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="247"/>
         <source>Major Third</source>
-        <translation type="unfinished"></translation>
+        <translation>Veľká tercia</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="252"/>
         <source>Augmented Third</source>
-        <translation type="unfinished"></translation>
+        <translation>Zväčšená tercia</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="257"/>
         <source>Diminished Fourth</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmenšená kvarta</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="262"/>
         <source>Perfect Fourth</source>
-        <translation type="unfinished"></translation>
+        <translation>Čistá kvarta</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="267"/>
         <source>Augmented Fourth</source>
-        <translation type="unfinished"></translation>
+        <translation>Zväčšená kvarta</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="272"/>
         <source>Diminished Fifth</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmenšená kvarta</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="277"/>
         <source>Perfect Fifth</source>
-        <translation type="unfinished"></translation>
+        <translation>Čistá kvinta</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="282"/>
         <source>Augmented Fifth</source>
-        <translation type="unfinished"></translation>
+        <translation>Zväčšená kvinta</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="287"/>
         <source>Diminished Sixth</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmenšená kvinta</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="292"/>
         <source>Minor Sixth</source>
-        <translation type="unfinished"></translation>
+        <translation>Malá sexta</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="297"/>
         <source>Major Sixth</source>
-        <translation type="unfinished"></translation>
+        <translation>Veľká sexta</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="302"/>
         <source>Augmented Sixth</source>
-        <translation type="unfinished"></translation>
+        <translation>Zväčšená sexta</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="307"/>
         <source>Diminished Seventh</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmenšená sexta</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="312"/>
         <source>Minor Seventh</source>
-        <translation type="unfinished"></translation>
+        <translation>Malá septima</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="317"/>
         <source>Major Seventh</source>
-        <translation type="unfinished"></translation>
+        <translation>Veľká septima</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="322"/>
         <source>Augmented Seventh</source>
-        <translation type="unfinished"></translation>
+        <translation>Zväčšená septima</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="327"/>
         <source>Diminished Octave</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmenšená oktáva</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="332"/>
         <source>Perfect Octave</source>
-        <translation type="unfinished"></translation>
+        <translation>Čistá oktáva</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="350"/>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Voľby</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="365"/>
         <source>Transpose key signatures</source>
-        <translation type="unfinished"></translation>
+        <translation>Previesť označenia tónin</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="375"/>
         <source>Transpose chord names</source>
-        <translation type="unfinished"></translation>
+        <translation>Previesť názvy akordov</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="389"/>
         <source>Single sharps and flats only</source>
-        <translation type="unfinished"></translation>
+        <translation>Len jednoduché krížiky a béčka</translation>
     </message>
     <message>
         <location filename="../../mscore/transposedialog.ui" line="394"/>
         <source>Use double sharps and flats</source>
-        <translation type="unfinished"></translation>
+        <translation>Používať aj dvojité krížiky a dvojité béčka</translation>
     </message>
 </context>
 <context>
@@ -8324,19 +8379,19 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/tremolo.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulár</translation>
     </message>
     <message>
         <location filename="../../mscore/tremolo.ui" line="37"/>
         <source>firstChord</source>
         <extracomment>do not translate</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Prvý akord</translation>
     </message>
     <message>
         <location filename="../../mscore/tremolo.ui" line="44"/>
         <source>secondChord</source>
         <extracomment>do not translate - only for debugging</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Druhý akord</translation>
     </message>
 </context>
 <context>
@@ -8344,7 +8399,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/tuplet.cpp" line="563"/>
         <source>Tuplet Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnosti rytmických skupín...</translation>
     </message>
 </context>
 <context>
@@ -8352,7 +8407,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/tuplet.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Formulár</translation>
     </message>
 </context>
 <context>
@@ -8360,63 +8415,63 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/tupletdialog.ui" line="14"/>
         <source>MuseScore: create tuplet</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: vytváranie tupletov</translation>
     </message>
     <message>
         <location filename="../../mscore/tupletdialog.ui" line="44"/>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ</translation>
     </message>
     <message>
         <location filename="../../mscore/tupletdialog.ui" line="55"/>
         <source>relation:</source>
-        <translation type="unfinished"></translation>
+        <translation>vzťah:</translation>
     </message>
     <message>
         <location filename="../../mscore/tupletdialog.ui" line="81"/>
         <source>/</source>
-        <translation type="unfinished"></translation>
+        <translation>/</translation>
     </message>
     <message>
         <location filename="../../mscore/tupletdialog.ui" line="138"/>
         <source>Format</source>
-        <translation type="unfinished"></translation>
+        <translation>Formát</translation>
     </message>
     <message>
         <location filename="../../mscore/tupletdialog.ui" line="153"/>
         <source>Number</source>
-        <translation type="unfinished"></translation>
+        <translation>Číslo</translation>
     </message>
     <message>
         <location filename="../../mscore/tupletdialog.ui" line="165"/>
         <source>number</source>
-        <translation type="unfinished"></translation>
+        <translation>číslo</translation>
     </message>
     <message>
         <location filename="../../mscore/tupletdialog.ui" line="175"/>
         <source>relation</source>
-        <translation type="unfinished"></translation>
+        <translation>vzťah</translation>
     </message>
     <message>
         <location filename="../../mscore/tupletdialog.ui" line="182"/>
         <location filename="../../mscore/tupletdialog.ui" line="221"/>
         <source>nothing</source>
-        <translation type="unfinished"></translation>
+        <translation>nič</translation>
     </message>
     <message>
         <location filename="../../mscore/tupletdialog.ui" line="192"/>
         <source>Bracket</source>
-        <translation type="unfinished"></translation>
+        <translation>Zátvorka</translation>
     </message>
     <message>
         <location filename="../../mscore/tupletdialog.ui" line="204"/>
         <source>auto bracket</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatické zátvorky</translation>
     </message>
     <message>
         <location filename="../../mscore/tupletdialog.ui" line="214"/>
         <source>bracket</source>
-        <translation type="unfinished"></translation>
+        <translation>zátvorka</translation>
     </message>
 </context>
 <context>
@@ -8424,43 +8479,43 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/tupletproperties.ui" line="13"/>
         <source>MuseScore: Tuplet Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Vlastnosti tupletov</translation>
     </message>
     <message>
         <location filename="../../mscore/tupletproperties.ui" line="39"/>
         <source>Number</source>
-        <translation type="unfinished"></translation>
+        <translation>Číslo</translation>
     </message>
     <message>
         <location filename="../../mscore/tupletproperties.ui" line="51"/>
         <source>number</source>
-        <translation type="unfinished"></translation>
+        <translation>číslo</translation>
     </message>
     <message>
         <location filename="../../mscore/tupletproperties.ui" line="58"/>
         <source>relation</source>
-        <translation type="unfinished"></translation>
+        <translation>vzťah</translation>
     </message>
     <message>
         <location filename="../../mscore/tupletproperties.ui" line="65"/>
         <location filename="../../mscore/tupletproperties.ui" line="101"/>
         <source>nothing</source>
-        <translation type="unfinished"></translation>
+        <translation>nič</translation>
     </message>
     <message>
         <location filename="../../mscore/tupletproperties.ui" line="75"/>
         <source>Bracket</source>
-        <translation type="unfinished"></translation>
+        <translation>Zátvorka</translation>
     </message>
     <message>
         <location filename="../../mscore/tupletproperties.ui" line="87"/>
         <source>auto bracket</source>
-        <translation type="unfinished"></translation>
+        <translation>automatická zátvorka</translation>
     </message>
     <message>
         <location filename="../../mscore/tupletproperties.ui" line="94"/>
         <source>bracket</source>
-        <translation type="unfinished"></translation>
+        <translation>zátvorka</translation>
     </message>
 </context>
 <context>
@@ -8468,106 +8523,106 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../osdabzip/unzip.cpp" line="245"/>
         <source>ZIP operation completed successfully.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../osdabzip/unzip.cpp" line="246"/>
         <source>Failed to initialize or load zlib library.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../osdabzip/unzip.cpp" line="247"/>
         <source>zlib library error.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../osdabzip/unzip.cpp" line="248"/>
         <source>Unable to create or open file.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../osdabzip/unzip.cpp" line="249"/>
         <source>Partially corrupted archive. Some files might be extracted.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../osdabzip/unzip.cpp" line="250"/>
         <source>Corrupted archive.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../osdabzip/unzip.cpp" line="251"/>
         <source>Wrong password.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../osdabzip/unzip.cpp" line="252"/>
         <source>No archive has been created yet.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../osdabzip/unzip.cpp" line="253"/>
         <source>File or directory does not exist.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../osdabzip/unzip.cpp" line="254"/>
         <source>File read error.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../osdabzip/unzip.cpp" line="255"/>
         <source>File write error.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../osdabzip/unzip.cpp" line="256"/>
         <source>File seek error.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../osdabzip/unzip.cpp" line="257"/>
         <source>Unable to create a directory.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../osdabzip/unzip.cpp" line="258"/>
         <source>Invalid device.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../osdabzip/unzip.cpp" line="259"/>
         <source>Invalid or incompatible zip archive.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../osdabzip/unzip.cpp" line="260"/>
         <source>Inconsistent headers. Archive might be corrupted.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../osdabzip/unzip.cpp" line="264"/>
         <source>Unknown error.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
     <name>UpdateChecker</name>
     <message>
         <location filename="../../mscore/updatechecker.cpp" line="79"/>
-        <source>An update for MuseScore is available: &lt;a href=&quot;%1&quot;&gt;MuseScore %2 r.%3&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
+        <source>An update for MuseScore is available: &lt;a href="%1"&gt;MuseScore %2 r.%3&lt;/a&gt;</source>
+        <translation>Aktualizácia MuseScore je dostupná: &lt;a href="%1"&gt;MuseScore %2 r.%3&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../../mscore/updatechecker.cpp" line="83"/>
         <source>Update Available</source>
-        <translation type="unfinished"></translation>
+        <translation>Je dostupná aktualizácia</translation>
     </message>
     <message>
         <location filename="../../mscore/updatechecker.cpp" line="89"/>
         <location filename="../../mscore/updatechecker.cpp" line="90"/>
         <source>No Update Available</source>
-        <translation type="unfinished"></translation>
+        <translation>Žiadna aktualizácia nie je dostupná</translation>
     </message>
 </context>
 <context>
@@ -8575,12 +8630,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/box.cpp" line="422"/>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať</translation>
     </message>
     <message>
         <location filename="../../mscore/box.cpp" line="444"/>
         <source>VBox Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnosti VBoxu...</translation>
     </message>
 </context>
 <context>
@@ -8589,17 +8644,17 @@ p, li { white-space: pre-wrap; }
         <location filename="../../mscore/voltaproperties.ui" line="13"/>
         <location filename="../../mscore/voltaproperties.ui" line="37"/>
         <source>Volta Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnosti volty</translation>
     </message>
     <message>
         <location filename="../../mscore/voltaproperties.ui" line="48"/>
         <source>Text:</source>
-        <translation type="unfinished"></translation>
+        <translation>Text:</translation>
     </message>
     <message>
         <location filename="../../mscore/voltaproperties.ui" line="58"/>
         <source>Repeat List:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoznam opakovaní:</translation>
     </message>
 </context>
 <context>
@@ -8607,12 +8662,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/volta.cpp" line="175"/>
         <source>Volta Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnosti volty...</translation>
     </message>
     <message>
         <location filename="../../mscore/volta.cpp" line="177"/>
         <source>Line Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnosti čiary...</translation>
     </message>
 </context>
 <context>
@@ -8620,52 +8675,52 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../osdabzip/zip.cpp" line="498"/>
         <source>ZIP operation completed successfully.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../osdabzip/zip.cpp" line="499"/>
         <source>Failed to initialize or load zlib library.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../osdabzip/zip.cpp" line="500"/>
         <source>zlib library error.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../osdabzip/zip.cpp" line="501"/>
         <source>Unable to create or open file.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../osdabzip/zip.cpp" line="502"/>
         <source>No archive has been created yet.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../osdabzip/zip.cpp" line="503"/>
         <source>File or directory does not exist.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../osdabzip/zip.cpp" line="504"/>
         <source>File read error.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../osdabzip/zip.cpp" line="505"/>
         <source>File write error.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../osdabzip/zip.cpp" line="506"/>
         <source>File seek error.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../osdabzip/zip.cpp" line="510"/>
         <source>Unknown error.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -8673,127 +8728,127 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/accidental.cpp" line="41"/>
         <source>none</source>
-        <translation type="unfinished"></translation>
+        <translation>žiadne</translation>
     </message>
     <message>
         <location filename="../../mscore/accidental.cpp" line="42"/>
         <source>sharp</source>
-        <translation type="unfinished"></translation>
+        <translation>Krížik</translation>
     </message>
     <message>
         <location filename="../../mscore/accidental.cpp" line="43"/>
         <source>flat</source>
-        <translation type="unfinished"></translation>
+        <translation>Béčko</translation>
     </message>
     <message>
         <location filename="../../mscore/accidental.cpp" line="44"/>
         <source>double sharp</source>
-        <translation type="unfinished"></translation>
+        <translation>Dvojitý krížik</translation>
     </message>
     <message>
         <location filename="../../mscore/accidental.cpp" line="45"/>
         <source>double flat</source>
-        <translation type="unfinished"></translation>
+        <translation>Dvojité béčko</translation>
     </message>
     <message>
         <location filename="../../mscore/accidental.cpp" line="46"/>
         <source>natural</source>
-        <translation type="unfinished"></translation>
+        <translation>odrážka</translation>
     </message>
     <message>
         <location filename="../../mscore/accidental.cpp" line="48"/>
         <source>flat-slash</source>
-        <translation type="unfinished"></translation>
+        <translation>béčko – šikmá čiara</translation>
     </message>
     <message>
         <location filename="../../mscore/accidental.cpp" line="49"/>
         <source>flat-slash2</source>
-        <translation type="unfinished"></translation>
+        <translation>béčko – šikmá čiara 2</translation>
     </message>
     <message>
         <location filename="../../mscore/accidental.cpp" line="50"/>
         <source>mirrored-flat2</source>
-        <translation type="unfinished"></translation>
+        <translation>Zrkadlové béčko 2</translation>
     </message>
     <message>
         <location filename="../../mscore/accidental.cpp" line="51"/>
         <source>mirrored-flat</source>
-        <translation type="unfinished"></translation>
+        <translation>Zrkadlové béčko</translation>
     </message>
     <message>
         <location filename="../../mscore/accidental.cpp" line="52"/>
         <source>mirrored-flat-slash</source>
-        <translation type="unfinished"></translation>
+        <translation>Zrkadlové béčko – šikmá čiara</translation>
     </message>
     <message>
         <location filename="../../mscore/accidental.cpp" line="53"/>
         <source>flat-flat-slash</source>
-        <translation type="unfinished"></translation>
+        <translation>2 béčka – šikmá čiara</translation>
     </message>
     <message>
         <location filename="../../mscore/accidental.cpp" line="55"/>
         <source>sharp-slash</source>
-        <translation type="unfinished"></translation>
+        <translation>Krížik – šikmá čiara</translation>
     </message>
     <message>
         <location filename="../../mscore/accidental.cpp" line="56"/>
         <source>sharp-slash2</source>
-        <translation type="unfinished"></translation>
+        <translation>Krížik – šikmá čiara 2</translation>
     </message>
     <message>
         <location filename="../../mscore/accidental.cpp" line="57"/>
         <source>sharp-slash3</source>
-        <translation type="unfinished"></translation>
+        <translation>Krížik – šikmá čiara 3</translation>
     </message>
     <message>
         <location filename="../../mscore/accidental.cpp" line="58"/>
         <source>sharp-slash4</source>
-        <translation type="unfinished"></translation>
+        <translation>Krížik – šikmá čiara 4</translation>
     </message>
     <message>
         <location filename="../../mscore/accidental.cpp" line="60"/>
         <source>sharp arrow up</source>
-        <translation type="unfinished"></translation>
+        <translation>krížik – šípka hore</translation>
     </message>
     <message>
         <location filename="../../mscore/accidental.cpp" line="61"/>
         <source>sharp arrow down</source>
-        <translation type="unfinished"></translation>
+        <translation>krížik – šípka dole</translation>
     </message>
     <message>
         <location filename="../../mscore/accidental.cpp" line="62"/>
         <source>sharp arrow both</source>
-        <translation type="unfinished"></translation>
+        <translation>krížik – obe šípky</translation>
     </message>
     <message>
         <location filename="../../mscore/accidental.cpp" line="63"/>
         <source>flat arrow up</source>
-        <translation type="unfinished"></translation>
+        <translation>Béčko – šípka nahor</translation>
     </message>
     <message>
         <location filename="../../mscore/accidental.cpp" line="64"/>
         <source>flat arrow down</source>
-        <translation type="unfinished"></translation>
+        <translation>Béčko – šípka nadol</translation>
     </message>
     <message>
         <location filename="../../mscore/accidental.cpp" line="65"/>
         <source>flat arrow both</source>
-        <translation type="unfinished"></translation>
+        <translation>Béčko – obojsmerná šípka</translation>
     </message>
     <message>
         <location filename="../../mscore/accidental.cpp" line="66"/>
         <source>natural arrow up</source>
-        <translation type="unfinished"></translation>
+        <translation>Odrážka – šípka nahor</translation>
     </message>
     <message>
         <location filename="../../mscore/accidental.cpp" line="67"/>
         <source>natural arrow down</source>
-        <translation type="unfinished"></translation>
+        <translation>Odrážka – šípka nadol</translation>
     </message>
     <message>
         <location filename="../../mscore/accidental.cpp" line="68"/>
         <source>natural arrow both</source>
-        <translation type="unfinished"></translation>
+        <translation>Odrážka – obojsmerná šípka</translation>
     </message>
 </context>
 <context>
@@ -8801,822 +8856,822 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/actions.cpp" line="33"/>
         <source>Local handbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Príručka na počítači</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="36"/>
         <source>Local &amp;Handbook...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Príručka na počítači</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="37"/>
         <source>Show local handbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobraziť príručku na počítači</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="42"/>
         <source>File open</source>
-        <translation type="unfinished"></translation>
+        <translation>Otvorenie súboru</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="45"/>
         <source>Open...</source>
-        <translation type="unfinished"></translation>
+        <translation>Otvoriť...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="46"/>
         <source>Load score from file</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahrať notovú osnovu zo súboru</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="52"/>
         <source>File save</source>
-        <translation type="unfinished"></translation>
+        <translation>Uloženie súboru</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="55"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložiť</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="56"/>
         <source>Save score to file</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložiť notovú osnovu do súboru</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="62"/>
         <source>File save as</source>
-        <translation type="unfinished"></translation>
+        <translation>Súbor uložiť ako</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="65"/>
         <source>Save As...</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložiť ako...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="66"/>
         <source>Save score under a new file name</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložiť notovú osnovu pod novým menom</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="72"/>
         <source>File save a copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Uloženie kópie súboru</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="75"/>
         <source>Save a Copy...</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložiť kópiu</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="76"/>
         <source>Save a copy of the score in addition to the current file</source>
-        <translation type="unfinished"></translation>
+        <translation>Okrem uloženia notovej osnovy do aktuálneho vytvoriť ešte kópiu notovej osnovy</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="81"/>
         <source>File reload</source>
-        <translation type="unfinished"></translation>
+        <translation>Znova nahrať súbor</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="84"/>
         <source>Reload</source>
-        <translation type="unfinished"></translation>
+        <translation>Znova nahrať</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="85"/>
         <source>Reload score from file</source>
-        <translation type="unfinished"></translation>
+        <translation>Znova nahrať notovú osnovu zo súboru</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="90"/>
         <source>File close</source>
-        <translation type="unfinished"></translation>
+        <translation>Zatvorenie súboru</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="93"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Zatvoriť</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="94"/>
         <source>Close current score</source>
-        <translation type="unfinished"></translation>
+        <translation>Zatvoriť aktívnu notovú osnovu</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="99"/>
         <source>file new</source>
-        <translation type="unfinished"></translation>
+        <translation>Nový súbor</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="102"/>
         <source>New...</source>
-        <translation type="unfinished"></translation>
+        <translation>Nový...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="103"/>
         <source>Create new score</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvoriť novú notovú osnovu</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="109"/>
         <source>Print</source>
-        <translation type="unfinished"></translation>
+        <translation>Tlačiť</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="112"/>
         <source>Print...</source>
-        <translation type="unfinished"></translation>
+        <translation>Tlačiť...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="113"/>
         <source>Print score</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytlačiť notovú osnovu</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="119"/>
         <location filename="../../mscore/actions.cpp" line="122"/>
         <source>Undo</source>
-        <translation type="unfinished"></translation>
+        <translation>Odvolať</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="123"/>
         <source>Undo last change</source>
-        <translation type="unfinished"></translation>
+        <translation>Odvolať poslednú zmenu</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="129"/>
         <location filename="../../mscore/actions.cpp" line="132"/>
         <source>Redo</source>
-        <translation type="unfinished"></translation>
+        <translation>Opakovať</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="133"/>
         <source>Redo last undo</source>
-        <translation type="unfinished"></translation>
+        <translation>Opakovať poslednú zmenu</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="139"/>
         <location filename="../../mscore/actions.cpp" line="142"/>
         <source>Cut</source>
-        <translation type="unfinished"></translation>
+        <translation>Vystrihnúť</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="149"/>
         <location filename="../../mscore/actions.cpp" line="152"/>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopírovať</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="159"/>
         <location filename="../../mscore/actions.cpp" line="162"/>
         <source>Paste</source>
-        <translation type="unfinished"></translation>
+        <translation>Prilepiť</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="169"/>
         <location filename="../../mscore/actions.cpp" line="173"/>
         <source>Show instruments dialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobraziť okno hudobných nástrojov</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="172"/>
         <source>Instruments...</source>
-        <translation type="unfinished"></translation>
+        <translation>Hudobné nástroje...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="178"/>
         <location filename="../../mscore/actions.cpp" line="182"/>
         <source>Show clefs palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobraziť paletu Kľúče</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="181"/>
         <source>Clefs...</source>
-        <translation type="unfinished"></translation>
+        <translation>Kľúče...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="188"/>
         <source>show keys signatures palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobraziť paletu Označeniami taktov</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="191"/>
         <source>Key Signatures...</source>
-        <translation type="unfinished"></translation>
+        <translation>Označenia tóniny...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="192"/>
         <source>Show key signatures palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobraziť paletu Označenia tóniny</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="198"/>
         <location filename="../../mscore/actions.cpp" line="202"/>
         <source>Show symbols palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobraziť paletu Symboly</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="201"/>
         <source>Symbols...</source>
-        <translation type="unfinished"></translation>
+        <translation>Symboly...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="207"/>
         <location filename="../../mscore/actions.cpp" line="211"/>
         <source>Show time signatures palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobraziť paletu s označením taktov</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="210"/>
         <source>Time Signatures...</source>
-        <translation type="unfinished"></translation>
+        <translation>Označenia taktov...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="216"/>
         <location filename="../../mscore/actions.cpp" line="220"/>
         <source>Show dynamics palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobraziť paletu Dynamika</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="219"/>
         <source>Dynamics...</source>
-        <translation type="unfinished"></translation>
+        <translation>Dynamika...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="225"/>
         <location filename="../../mscore/actions.cpp" line="229"/>
         <source>Note input mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Režim vkladania nôt</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="228"/>
         <location filename="../../mscore/actions.cpp" line="1452"/>
         <source>Note Input</source>
-        <translation type="unfinished"></translation>
+        <translation>Vložiť notu</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="235"/>
         <location filename="../../mscore/actions.cpp" line="239"/>
         <source>Pitch spell</source>
-        <translation type="unfinished"></translation>
+        <translation>Hláskovanie výšky tónu</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="238"/>
         <source>Pitch Spell</source>
-        <translation type="unfinished"></translation>
+        <translation>Hláskovanie výšky tónu</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="244"/>
         <location filename="../../mscore/actions.cpp" line="248"/>
         <source>Enter unison above</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadať primu nad</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="247"/>
         <source>Unison Above</source>
-        <translation type="unfinished"></translation>
+        <translation>Primu nad</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="253"/>
         <location filename="../../mscore/actions.cpp" line="257"/>
         <source>Enter second above</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadať sekundu nad</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="256"/>
         <source>Second Above</source>
-        <translation type="unfinished"></translation>
+        <translation>Sekundu nad</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="262"/>
         <location filename="../../mscore/actions.cpp" line="266"/>
         <source>Enter third above</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadať terciu nad</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="265"/>
         <source>Third Above</source>
-        <translation type="unfinished"></translation>
+        <translation>Terciu nad</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="271"/>
         <location filename="../../mscore/actions.cpp" line="275"/>
         <source>Enter fourth above</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadať kvartu nad</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="274"/>
         <source>Fourth Above</source>
-        <translation type="unfinished"></translation>
+        <translation>Kvartu nad</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="280"/>
         <location filename="../../mscore/actions.cpp" line="284"/>
         <source>Enter fifth above</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadať kvintu nad</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="283"/>
         <source>Fifth Above</source>
-        <translation type="unfinished"></translation>
+        <translation>Kvintu nad</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="289"/>
         <location filename="../../mscore/actions.cpp" line="293"/>
         <source>Enter sixth above</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadať sextu nad</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="292"/>
         <source>Sixth Above</source>
-        <translation type="unfinished"></translation>
+        <translation>Sextu nad</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="298"/>
         <location filename="../../mscore/actions.cpp" line="302"/>
         <source>Enter seventh above</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadať septimu nad</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="301"/>
         <source>Seventh Above</source>
-        <translation type="unfinished"></translation>
+        <translation>Septimu nad</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="307"/>
         <location filename="../../mscore/actions.cpp" line="311"/>
         <source>Enter octave above</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadať oktávu nad</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="310"/>
         <source>Octave Above</source>
-        <translation type="unfinished"></translation>
+        <translation>Oktávu nad</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="316"/>
         <location filename="../../mscore/actions.cpp" line="320"/>
         <source>Enter ninth above</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadať nonu nad</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="319"/>
         <source>Ninth Above</source>
-        <translation type="unfinished"></translation>
+        <translation>Nonu nad</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="325"/>
         <location filename="../../mscore/actions.cpp" line="329"/>
         <source>Enter second below</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadať sekundu pod</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="328"/>
         <source>Second Below</source>
-        <translation type="unfinished"></translation>
+        <translation>Sekundu pod</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="334"/>
         <location filename="../../mscore/actions.cpp" line="338"/>
         <source>Enter third below</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadať terciu pod</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="337"/>
         <source>Third Below</source>
-        <translation type="unfinished"></translation>
+        <translation>TErciu pod</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="343"/>
         <location filename="../../mscore/actions.cpp" line="347"/>
         <source>Enter fourth below</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadať kvartu pod</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="346"/>
         <source>Fourth Below</source>
-        <translation type="unfinished"></translation>
+        <translation>Kvartu pod</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="352"/>
         <location filename="../../mscore/actions.cpp" line="356"/>
         <source>Enter fifth below</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadať kvintu pod</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="355"/>
         <source>Fifth Below</source>
-        <translation type="unfinished"></translation>
+        <translation>Kvintu pod</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="361"/>
         <location filename="../../mscore/actions.cpp" line="365"/>
         <source>Enter sixth below</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadať sextu pod</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="364"/>
         <source>Sixth Below</source>
-        <translation type="unfinished"></translation>
+        <translation>Sextu pod</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="370"/>
         <location filename="../../mscore/actions.cpp" line="374"/>
         <source>Enter seventh below</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadať septimu pod</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="373"/>
         <source>Seventh Below</source>
-        <translation type="unfinished"></translation>
+        <translation>Septimu pod</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="379"/>
         <location filename="../../mscore/actions.cpp" line="383"/>
         <source>Enter octave below</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadať oktávu pod</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="382"/>
         <source>Octave Below</source>
-        <translation type="unfinished"></translation>
+        <translation>Oktávu pod</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="388"/>
         <location filename="../../mscore/actions.cpp" line="392"/>
         <source>Enter ninth below</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadať nonu pod</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="391"/>
         <source>Ninth Below</source>
-        <translation type="unfinished"></translation>
+        <translation>Nonu pod</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="397"/>
         <location filename="../../mscore/actions.cpp" line="401"/>
         <source>Enter note A</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať notu A</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="400"/>
         <source>A</source>
-        <translation type="unfinished"></translation>
+        <translation>A</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="406"/>
         <location filename="../../mscore/actions.cpp" line="410"/>
         <source>Enter note B</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať notu H</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="409"/>
         <source>B</source>
-        <translation type="unfinished"></translation>
+        <translation>H</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="415"/>
         <location filename="../../mscore/actions.cpp" line="419"/>
         <source>Enter note C</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať notu C</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="418"/>
         <source>C</source>
-        <translation type="unfinished"></translation>
+        <translation>C</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="424"/>
         <location filename="../../mscore/actions.cpp" line="428"/>
         <source>Enter note D</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať notu D</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="427"/>
         <source>D</source>
-        <translation type="unfinished"></translation>
+        <translation>D</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="433"/>
         <location filename="../../mscore/actions.cpp" line="437"/>
         <source>Enter note E</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať notu E</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="436"/>
         <source>E</source>
-        <translation type="unfinished"></translation>
+        <translation>E</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="442"/>
         <location filename="../../mscore/actions.cpp" line="446"/>
         <source>Enter note F</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať notu F</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="445"/>
         <source>F</source>
-        <translation type="unfinished"></translation>
+        <translation>F</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="451"/>
         <location filename="../../mscore/actions.cpp" line="455"/>
         <source>Enter note G</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať notu G</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="454"/>
         <source>G</source>
-        <translation type="unfinished"></translation>
+        <translation>G</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="460"/>
         <location filename="../../mscore/actions.cpp" line="464"/>
         <source>Add note A to chord</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať do akordu notu A</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="463"/>
         <source>Add A</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať A</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="469"/>
         <location filename="../../mscore/actions.cpp" line="473"/>
         <source>Add note B to chord</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať do akordu notu H</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="472"/>
         <source>Add B</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať H</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="478"/>
         <location filename="../../mscore/actions.cpp" line="482"/>
         <source>Add note C to chord</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať do akordu notu C</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="481"/>
         <source>Add C</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať C</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="487"/>
         <location filename="../../mscore/actions.cpp" line="491"/>
         <source>Add note D to chord</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať do akordu notu D</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="490"/>
         <source>Add D</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať D</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="496"/>
         <location filename="../../mscore/actions.cpp" line="500"/>
         <source>Add note E to chord</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať do akordu notu E</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="499"/>
         <source>Add E</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať E</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="505"/>
         <location filename="../../mscore/actions.cpp" line="509"/>
         <source>Add note F to chord</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať do akordu notu F</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="508"/>
         <source>Add F</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať F</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="514"/>
         <location filename="../../mscore/actions.cpp" line="518"/>
         <source>Add note G to chord</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať do akordu notu G</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="517"/>
         <source>Add G</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať G</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="523"/>
         <location filename="../../mscore/actions.cpp" line="527"/>
         <source>Enter rest</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadať pomlčku</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="526"/>
         <source>Rest</source>
-        <translation type="unfinished"></translation>
+        <translation>Pomlčka</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="533"/>
         <location filename="../../mscore/actions.cpp" line="537"/>
         <source>Add staccato</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať staccato</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="536"/>
         <source>Staccato</source>
-        <translation type="unfinished"></translation>
+        <translation>Staccato</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="542"/>
         <location filename="../../mscore/actions.cpp" line="546"/>
         <source>Add trill</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať trilok</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="545"/>
         <source>Trill</source>
-        <translation type="unfinished"></translation>
+        <translation>Trilok</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="551"/>
         <source>More stretch</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozšíriť</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="554"/>
         <source>Add More Stretch</source>
-        <translation type="unfinished"></translation>
+        <translation>Roztiahnuť</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="555"/>
         <source>Add more stretch to selected measure</source>
-        <translation type="unfinished"></translation>
+        <translation>Roztiahnuť vybraný takt</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="560"/>
         <source>Less stretch</source>
-        <translation type="unfinished"></translation>
+        <translation>Zúžiť</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="563"/>
         <source>Add Less Stretch</source>
-        <translation type="unfinished"></translation>
+        <translation>Zúžiť</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="564"/>
         <source>Add less stretch to selected measure</source>
-        <translation type="unfinished"></translation>
+        <translation>Zúžiť vybraný takt</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="569"/>
         <location filename="../../mscore/actions.cpp" line="572"/>
         <source>Reset Beam Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Obnoviť režim zástavok</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="573"/>
         <source>Reset beam mode of selected measures</source>
-        <translation type="unfinished"></translation>
+        <translation>Obnoviť režim zástavok vo vybraných taktoch</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="578"/>
         <location filename="../../mscore/actions.cpp" line="582"/>
         <source>Flip direction</source>
-        <translation type="unfinished"></translation>
+        <translation>Otočiť smer</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="581"/>
         <source>Flip Direction</source>
-        <translation type="unfinished"></translation>
+        <translation>Otočiť smer</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="588"/>
         <location filename="../../mscore/actions.cpp" line="592"/>
         <source>Pitch up</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvýšiť</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="591"/>
         <source>Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahor</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="597"/>
         <source>Pitch up octave</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvýšiť o oktávu</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="600"/>
         <source>Up Octave</source>
-        <translation type="unfinished"></translation>
+        <translation>O oktávu vyššie</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="601"/>
         <source>Pitch up by an octave</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvýšiť oktávou</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="606"/>
         <source>Pitch up note in chord</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvýšiť o notu v akorde</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="609"/>
         <source>Up Note in Chord</source>
-        <translation type="unfinished"></translation>
+        <translation>O notu v akorde vyššie</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="610"/>
         <source>Go to higher pitched note in chord</source>
-        <translation type="unfinished"></translation>
+        <translation>Prejsť na vyššiu notu v akorde</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="615"/>
         <location filename="../../mscore/actions.cpp" line="619"/>
         <source>Go to top note in chord</source>
-        <translation type="unfinished"></translation>
+        <translation>Prejsť na najvyššiu notu v akorde</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="618"/>
         <source>Top Note in Chord</source>
-        <translation type="unfinished"></translation>
+        <translation>Nejvyššia nota v akorde</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="624"/>
         <source>Move up</source>
-        <translation type="unfinished"></translation>
+        <translation>Posunúť nahor</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="627"/>
         <location filename="../../mscore/actions.cpp" line="628"/>
         <source>up+shift+ctrl</source>
-        <translation type="unfinished"></translation>
+        <translation>šípka hore+shift+ctrl</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="633"/>
         <location filename="../../mscore/actions.cpp" line="637"/>
         <source>Pitch down</source>
-        <translation type="unfinished"></translation>
+        <translation>Znížiť</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="636"/>
         <source>Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Nadol</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="642"/>
         <source>Pitch down octave</source>
-        <translation type="unfinished"></translation>
+        <translation>Znížiť o oktávu</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="645"/>
         <source>Down octave</source>
-        <translation type="unfinished"></translation>
+        <translation>O oktávu nižšie</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="646"/>
         <source>Pitch down by an octave</source>
-        <translation type="unfinished"></translation>
+        <translation>Znížiť oktávou</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="651"/>
         <source>Pitch down note in chord</source>
-        <translation type="unfinished"></translation>
+        <translation>Znížiť o notu v akorde</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="654"/>
         <source>Down Note in Chord</source>
-        <translation type="unfinished"></translation>
+        <translation>O notu v akorde nižšie</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="655"/>
         <source>Go to lower pitched note in chord</source>
-        <translation type="unfinished"></translation>
+        <translation>Prejsť na nižšiu notu v akorde</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="660"/>
         <location filename="../../mscore/actions.cpp" line="664"/>
         <source>Go to bottom note in chord</source>
-        <translation type="unfinished"></translation>
+        <translation>Prejsť na najnižšiu notu v akorde</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="663"/>
         <source>Bottom Note in Chord</source>
-        <translation type="unfinished"></translation>
+        <translation>Najnižšia nota v akorde</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="669"/>
         <source>Move down</source>
-        <translation type="unfinished"></translation>
+        <translation>Prejsť nadol</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="672"/>
         <location filename="../../mscore/actions.cpp" line="673"/>
         <source>down+shift+ctrl</source>
-        <translation type="unfinished"></translation>
+        <translation>šípka dole+shift+ctrl</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="678"/>
@@ -9625,12 +9680,12 @@ p, li { white-space: pre-wrap; }
         <location filename="../../mscore/actions.cpp" line="1638"/>
         <location filename="../../mscore/actions.cpp" line="1639"/>
         <source>Previous chord</source>
-        <translation type="unfinished"></translation>
+        <translation>Predchádzajúci akord</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="681"/>
         <source>Previous Chord</source>
-        <translation type="unfinished"></translation>
+        <translation>Predchádzajúci akord</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="687"/>
@@ -9639,12 +9694,12 @@ p, li { white-space: pre-wrap; }
         <location filename="../../mscore/actions.cpp" line="1647"/>
         <location filename="../../mscore/actions.cpp" line="1648"/>
         <source>Previous measure</source>
-        <translation type="unfinished"></translation>
+        <translation>Predchádzajúci takt</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="690"/>
         <source>Previous Measure</source>
-        <translation type="unfinished"></translation>
+        <translation>Predchádzajúci takt</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="696"/>
@@ -9653,12 +9708,12 @@ p, li { white-space: pre-wrap; }
         <location filename="../../mscore/actions.cpp" line="1656"/>
         <location filename="../../mscore/actions.cpp" line="1657"/>
         <source>Next chord</source>
-        <translation type="unfinished"></translation>
+        <translation>Ďalší akord</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="699"/>
         <source>Next Chord</source>
-        <translation type="unfinished"></translation>
+        <translation>Ďalší akord</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="705"/>
@@ -9667,1370 +9722,1370 @@ p, li { white-space: pre-wrap; }
         <location filename="../../mscore/actions.cpp" line="1665"/>
         <location filename="../../mscore/actions.cpp" line="1666"/>
         <source>Next measure</source>
-        <translation type="unfinished"></translation>
+        <translation>Ďalší takt</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="708"/>
         <source>Next Measure</source>
-        <translation type="unfinished"></translation>
+        <translation>Ďalší takt</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="714"/>
         <source>add previous chord to selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať do výberu predchádzajúci akord</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="717"/>
         <location filename="../../mscore/actions.cpp" line="718"/>
         <source>left+shift</source>
-        <translation type="unfinished"></translation>
+        <translation>šípka vľavo+shift</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="723"/>
         <source>select to beginning of measure</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrať po začiatok taktu</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="726"/>
         <location filename="../../mscore/actions.cpp" line="727"/>
         <source>left+ctrl</source>
-        <translation type="unfinished"></translation>
+        <translation>šípka vľavo+ctrl</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="732"/>
         <source>add next chord to selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať ďalší akord do výberu</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="735"/>
         <location filename="../../mscore/actions.cpp" line="736"/>
         <source>right+shift</source>
-        <translation type="unfinished"></translation>
+        <translation>šípka vpravo+shift</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="741"/>
         <source>select to end of measure</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrať po koniec taktu</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="744"/>
         <location filename="../../mscore/actions.cpp" line="745"/>
         <source>right+ctrl+shift</source>
-        <translation type="unfinished"></translation>
+        <translation>right+ctrl+shift</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="750"/>
         <source>select to beginning of line</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrať po začiatok riadka</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="753"/>
         <location filename="../../mscore/actions.cpp" line="754"/>
         <source>shift+home</source>
-        <translation type="unfinished"></translation>
+        <translation>shift+home</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="759"/>
         <source>select to end of line</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrať po koniec taktu</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="762"/>
         <location filename="../../mscore/actions.cpp" line="763"/>
         <source>shift+end</source>
-        <translation type="unfinished"></translation>
+        <translation>shift+end</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="768"/>
         <source>select to beginning of score</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrať po začiatok notového zápisu</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="771"/>
         <location filename="../../mscore/actions.cpp" line="772"/>
         <source>ctrl+shift+home</source>
-        <translation type="unfinished"></translation>
+        <translation>ctrl+shift+home</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="777"/>
         <source>select to end of score</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrať po koniec notového zápisu</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="780"/>
         <location filename="../../mscore/actions.cpp" line="781"/>
         <source>ctrl+shift+end</source>
-        <translation type="unfinished"></translation>
+        <translation>ctrl+shift+end</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="786"/>
         <location filename="../../mscore/actions.cpp" line="789"/>
         <location filename="../../mscore/actions.cpp" line="790"/>
         <source>add staff above to selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať do výberu notovú osnovu vyššie</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="795"/>
         <location filename="../../mscore/actions.cpp" line="798"/>
         <location filename="../../mscore/actions.cpp" line="799"/>
         <source>add staff below to selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať do výberu notovú osnovu nižšie</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="804"/>
         <source>page-prev</source>
-        <translation type="unfinished"></translation>
+        <translation>Predchádzajúca strana</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="813"/>
         <source>page-next</source>
-        <translation type="unfinished"></translation>
+        <translation>Ďalšia strana</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="822"/>
         <source>page-top</source>
-        <translation type="unfinished"></translation>
+        <translation>Prvá strana</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="831"/>
         <source>page-end</source>
-        <translation type="unfinished"></translation>
+        <translation>Posledná strana</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="840"/>
         <source>add slur</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať legátový oblúčik</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="849"/>
         <source>crescendo</source>
-        <translation type="unfinished"></translation>
+        <translation>crescendo</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="858"/>
         <source>decrescendo</source>
-        <translation type="unfinished"></translation>
+        <translation>decrescendo</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="867"/>
         <source>ESCAPE</source>
-        <translation type="unfinished"></translation>
+        <translation>ESCAPE</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="876"/>
         <location filename="../../mscore/actions.cpp" line="879"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstrániť</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="880"/>
         <source>Delete contents of the selected measures</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstrániť obsah vybraných taktov</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="885"/>
         <location filename="../../mscore/actions.cpp" line="888"/>
         <source>Timewise Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Časovo úsporné odstraňovanie</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="889"/>
         <source>Delete element and duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstrániť prvok a trvanie</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="894"/>
         <location filename="../../mscore/actions.cpp" line="898"/>
         <source>Delete selected measures</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstrániť vybrané takty</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="897"/>
         <source>Delete Selected Measures</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstrániť vybrané takty</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="903"/>
         <source>Append measure</source>
-        <translation type="unfinished"></translation>
+        <translation>Pripojiť takt</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="906"/>
         <source>Append Measure</source>
-        <translation type="unfinished"></translation>
+        <translation>Pripojiť takt</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="911"/>
         <source>Append measures</source>
-        <translation type="unfinished"></translation>
+        <translation>Pripojiť takty</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="914"/>
         <source>Append Measures...</source>
-        <translation type="unfinished"></translation>
+        <translation>Pripojiť takty...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="919"/>
         <source>Insert measure</source>
-        <translation type="unfinished"></translation>
+        <translation>Vložiť takt</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="922"/>
         <source>Insert Measure</source>
-        <translation type="unfinished"></translation>
+        <translation>Vložiť takt</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="927"/>
         <source>Insert measures</source>
-        <translation type="unfinished"></translation>
+        <translation>Vložiť takty</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="930"/>
         <source>Insert Measures...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vložiť takty...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="935"/>
         <location filename="../../mscore/actions.cpp" line="938"/>
         <source>Insert Horizontal Frame</source>
-        <translation type="unfinished"></translation>
+        <translation>Vložiť vodorovný rám</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="943"/>
         <location filename="../../mscore/actions.cpp" line="946"/>
         <source>Insert Vertical Frame</source>
-        <translation type="unfinished"></translation>
+        <translation>Vložiť zvislý rám</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="951"/>
         <location filename="../../mscore/actions.cpp" line="954"/>
         <source>Append Horizontal Frame</source>
-        <translation type="unfinished"></translation>
+        <translation>Pripojiť vodorovný rám</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="959"/>
         <location filename="../../mscore/actions.cpp" line="962"/>
         <source>Append Vertical Frame</source>
-        <translation type="unfinished"></translation>
+        <translation>Pripojiť zvislý rám</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="967"/>
         <location filename="../../mscore/actions.cpp" line="970"/>
         <source>Duplet</source>
-        <translation type="unfinished"></translation>
+        <translation>Duplet</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="975"/>
         <location filename="../../mscore/actions.cpp" line="978"/>
         <source>Triplet</source>
-        <translation type="unfinished"></translation>
+        <translation>Triplet</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="983"/>
         <location filename="../../mscore/actions.cpp" line="986"/>
         <source>Quadruplet</source>
-        <translation type="unfinished"></translation>
+        <translation>Kvadruplet</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="991"/>
         <location filename="../../mscore/actions.cpp" line="994"/>
         <source>Quintuplet</source>
-        <translation type="unfinished"></translation>
+        <translation>Kvintuplet</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="999"/>
         <location filename="../../mscore/actions.cpp" line="1002"/>
         <source>Sextuplet</source>
-        <translation type="unfinished"></translation>
+        <translation>Sextuplet</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1007"/>
         <location filename="../../mscore/actions.cpp" line="1010"/>
         <source>Septuplet</source>
-        <translation type="unfinished"></translation>
+        <translation>Septuplet</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1015"/>
         <location filename="../../mscore/actions.cpp" line="1018"/>
         <source>Octuplet</source>
-        <translation type="unfinished"></translation>
+        <translation>Oktuplet</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1023"/>
         <location filename="../../mscore/actions.cpp" line="1026"/>
         <source>Nonuplet</source>
-        <translation type="unfinished"></translation>
+        <translation>Nonuplet</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1031"/>
         <source>Other Tuplets</source>
-        <translation type="unfinished"></translation>
+        <translation>Ďalšie rytmické skupiny</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1034"/>
         <source>Other...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ďalšie...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1039"/>
         <source>note longa</source>
-        <translation type="unfinished"></translation>
+        <translation>Nota longa</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1042"/>
         <location filename="../../mscore/actions.cpp" line="1043"/>
         <source>Longa</source>
-        <translation type="unfinished"></translation>
+        <translation>Longa</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1049"/>
         <source>note breve</source>
-        <translation type="unfinished"></translation>
+        <translation>Nota breve</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1052"/>
         <location filename="../../mscore/actions.cpp" line="1053"/>
         <source>Double whole note (breve)</source>
-        <translation type="unfinished"></translation>
+        <translation>Dvojitá celá nota</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1059"/>
         <source>pad note 1/1</source>
-        <translation type="unfinished"></translation>
+        <translation>Vypchávková celá nota</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1062"/>
         <location filename="../../mscore/actions.cpp" line="1063"/>
         <source>Whole note (semibreve)</source>
-        <translation type="unfinished"></translation>
+        <translation>Celá nota</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1069"/>
         <source>pad note 1/2</source>
-        <translation type="unfinished"></translation>
+        <translation>Vypchávková nota 1/2</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1072"/>
         <location filename="../../mscore/actions.cpp" line="1073"/>
         <source>Half note (minim)</source>
-        <translation type="unfinished"></translation>
+        <translation>Pólová nota</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1079"/>
         <source>pad note 1/4</source>
-        <translation type="unfinished"></translation>
+        <translation>Vypchávková nota 1/4</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1082"/>
         <location filename="../../mscore/actions.cpp" line="1083"/>
         <source>Quarter note (crochet)</source>
-        <translation type="unfinished"></translation>
+        <translation>Štvrťová nota</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1089"/>
         <source>pad note 1/8</source>
-        <translation type="unfinished"></translation>
+        <translation>Vypchávková nota 1/8</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1092"/>
         <location filename="../../mscore/actions.cpp" line="1093"/>
         <source>Eighth note (quaver)</source>
-        <translation type="unfinished"></translation>
+        <translation>Osminová nota</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1099"/>
         <source>pad note 1/16</source>
-        <translation type="unfinished"></translation>
+        <translation>Vypchávková nota 1/16</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1102"/>
         <location filename="../../mscore/actions.cpp" line="1103"/>
         <source>16th note (semiquaver)</source>
-        <translation type="unfinished"></translation>
+        <translation>Šestnástinová nota</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1109"/>
         <source>pad note 1/32</source>
-        <translation type="unfinished"></translation>
+        <translation>Vypchávková nota 1/32</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1112"/>
         <location filename="../../mscore/actions.cpp" line="1113"/>
         <source>32nd note (demi-semiquaver)</source>
-        <translation type="unfinished"></translation>
+        <translation>32-tinová nota</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1119"/>
         <source>pad note 1/64</source>
-        <translation type="unfinished"></translation>
+        <translation>Vypchávková nota 1/64</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1122"/>
         <location filename="../../mscore/actions.cpp" line="1123"/>
         <source>64th note (semi-demi-semiquaver)</source>
-        <translation type="unfinished"></translation>
+        <translation>64-tinová nota</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1129"/>
         <source>pad dot</source>
-        <translation type="unfinished"></translation>
+        <translation>Vypchávková bodka</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1132"/>
         <location filename="../../mscore/actions.cpp" line="1133"/>
         <source>Dot</source>
-        <translation type="unfinished"></translation>
+        <translation>Bodka</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1139"/>
         <source>pad double dot</source>
-        <translation type="unfinished"></translation>
+        <translation>Dvojitá vypchávková bodka</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1142"/>
         <location filename="../../mscore/actions.cpp" line="1143"/>
         <source>Double dot</source>
-        <translation type="unfinished"></translation>
+        <translation>Dvojitá bodka</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1149"/>
         <location filename="../../mscore/actions.cpp" line="1152"/>
         <location filename="../../mscore/actions.cpp" line="1153"/>
         <source>tie</source>
-        <translation type="unfinished"></translation>
+        <translation>ligatúra</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1159"/>
         <source>pad rest</source>
-        <translation type="unfinished"></translation>
+        <translation>Vypchávková pomlčka</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1162"/>
         <location filename="../../mscore/actions.cpp" line="1163"/>
         <source>rest</source>
-        <translation type="unfinished"></translation>
+        <translation>Pomlčka</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1169"/>
         <location filename="../../mscore/actions.cpp" line="1172"/>
         <location filename="../../mscore/actions.cpp" line="1173"/>
         <source>double sharp</source>
-        <translation type="unfinished"></translation>
+        <translation>dvojitý krížik</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1179"/>
         <location filename="../../mscore/actions.cpp" line="1182"/>
         <location filename="../../mscore/actions.cpp" line="1183"/>
         <source>sharp</source>
-        <translation type="unfinished"></translation>
+        <translation>krížik</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1189"/>
         <location filename="../../mscore/actions.cpp" line="1192"/>
         <location filename="../../mscore/actions.cpp" line="1193"/>
         <source>natural</source>
-        <translation type="unfinished"></translation>
+        <translation>odbrážka</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1199"/>
         <location filename="../../mscore/actions.cpp" line="1202"/>
         <location filename="../../mscore/actions.cpp" line="1203"/>
         <source>Flat</source>
-        <translation type="unfinished"></translation>
+        <translation>Béčko</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1209"/>
         <location filename="../../mscore/actions.cpp" line="1212"/>
         <location filename="../../mscore/actions.cpp" line="1213"/>
         <source>double flat</source>
-        <translation type="unfinished"></translation>
+        <translation>dvojité béčko</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1219"/>
         <location filename="../../mscore/actions.cpp" line="1222"/>
         <location filename="../../mscore/actions.cpp" line="1223"/>
         <source>acciaccatura</source>
-        <translation type="unfinished"></translation>
+        <translation>acciaccatura</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1229"/>
         <location filename="../../mscore/actions.cpp" line="1232"/>
         <location filename="../../mscore/actions.cpp" line="1233"/>
         <source>appoggiatura</source>
-        <translation type="unfinished"></translation>
+        <translation>appoggiatura</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1240"/>
         <location filename="../../mscore/actions.cpp" line="1243"/>
         <location filename="../../mscore/actions.cpp" line="1244"/>
         <source>grace-4</source>
-        <translation type="unfinished"></translation>
+        <translation>Ozdoba – 4</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1251"/>
         <location filename="../../mscore/actions.cpp" line="1254"/>
         <location filename="../../mscore/actions.cpp" line="1255"/>
         <source>grace-16</source>
-        <translation type="unfinished"></translation>
+        <translation>Ozdoba – 16</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1262"/>
         <location filename="../../mscore/actions.cpp" line="1265"/>
         <location filename="../../mscore/actions.cpp" line="1266"/>
         <source>grace-32</source>
-        <translation type="unfinished"></translation>
+        <translation>Ozdoba – 32</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1272"/>
         <location filename="../../mscore/actions.cpp" line="1275"/>
         <location filename="../../mscore/actions.cpp" line="1276"/>
         <source>voice 1</source>
-        <translation type="unfinished"></translation>
+        <translation>hlas 1</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1282"/>
         <location filename="../../mscore/actions.cpp" line="1285"/>
         <location filename="../../mscore/actions.cpp" line="1286"/>
         <source>voice 2</source>
-        <translation type="unfinished"></translation>
+        <translation>hlas 2</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1292"/>
         <location filename="../../mscore/actions.cpp" line="1295"/>
         <location filename="../../mscore/actions.cpp" line="1296"/>
         <source>voice 3</source>
-        <translation type="unfinished"></translation>
+        <translation>hlas 3</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1302"/>
         <location filename="../../mscore/actions.cpp" line="1305"/>
         <location filename="../../mscore/actions.cpp" line="1306"/>
         <source>voice 4</source>
-        <translation type="unfinished"></translation>
+        <translation>hlas 4</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1312"/>
         <source>midi input in</source>
-        <translation type="unfinished"></translation>
+        <translation>Vstup MIDI v</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1315"/>
         <location filename="../../mscore/actions.cpp" line="1316"/>
         <source>Enable MIDI Input</source>
-        <translation type="unfinished"></translation>
+        <translation>Povoliť vstup MIDI</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1322"/>
         <source>editing sound on</source>
-        <translation type="unfinished"></translation>
+        <translation>Úprava zvuku na</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1325"/>
         <location filename="../../mscore/actions.cpp" line="1326"/>
         <source>Enable sound while editing</source>
-        <translation type="unfinished"></translation>
+        <translation>Povoliť zvuk pri upravovaní</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1332"/>
         <location filename="../../mscore/actions.cpp" line="1335"/>
         <location filename="../../mscore/actions.cpp" line="1336"/>
         <source>beam start</source>
-        <translation type="unfinished"></translation>
+        <translation>Začiatok zástavky</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1342"/>
         <location filename="../../mscore/actions.cpp" line="1345"/>
         <location filename="../../mscore/actions.cpp" line="1346"/>
         <source>beam mid</source>
-        <translation type="unfinished"></translation>
+        <translation>Stred zástavky</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1352"/>
         <location filename="../../mscore/actions.cpp" line="1355"/>
         <location filename="../../mscore/actions.cpp" line="1356"/>
         <source>no beam</source>
-        <translation type="unfinished"></translation>
+        <translation>Žiadna zástavka</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1362"/>
         <location filename="../../mscore/actions.cpp" line="1365"/>
         <location filename="../../mscore/actions.cpp" line="1366"/>
         <source>beam 32</source>
-        <translation type="unfinished"></translation>
+        <translation>Zástavka 32</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1372"/>
         <location filename="../../mscore/actions.cpp" line="1375"/>
         <location filename="../../mscore/actions.cpp" line="1376"/>
         <source>auto beam</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatická zástavka</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1382"/>
         <location filename="../../mscore/actions.cpp" line="1389"/>
         <location filename="../../mscore/actions.cpp" line="1390"/>
         <source>Palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Paleta</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1395"/>
         <location filename="../../mscore/actions.cpp" line="1402"/>
         <location filename="../../mscore/actions.cpp" line="1403"/>
         <source>Play Panel</source>
-        <translation type="unfinished"></translation>
+        <translation>Prehrávací panel</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1408"/>
         <location filename="../../mscore/actions.cpp" line="1415"/>
         <location filename="../../mscore/actions.cpp" line="1416"/>
         <source>Navigator</source>
-        <translation type="unfinished"></translation>
+        <translation>Navigátor</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1426"/>
         <location filename="../../mscore/actions.cpp" line="1434"/>
         <location filename="../../mscore/actions.cpp" line="1435"/>
         <source>Mixer</source>
-        <translation type="unfinished"></translation>
+        <translation>Mixovací pult</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1440"/>
         <source>Transport Toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Panel s nástrojmi na prevod na zvuk</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1443"/>
         <source>Transport</source>
-        <translation type="unfinished"></translation>
+        <translation>Prevod na zvuk</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1449"/>
         <source>Note Input Toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Panel nástrojov na vkladanie nôt</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1458"/>
         <location filename="../../mscore/actions.cpp" line="1461"/>
         <location filename="../../mscore/actions.cpp" line="1462"/>
         <source>Status Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Stavový panel</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1468"/>
         <location filename="../../mscore/actions.cpp" line="1471"/>
         <location filename="../../mscore/actions.cpp" line="1472"/>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Skončiť</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1478"/>
         <location filename="../../mscore/actions.cpp" line="1481"/>
         <source>Mag</source>
-        <translation type="unfinished"></translation>
+        <translation>Zväčšiť</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1482"/>
         <source>Zoom Canvas</source>
-        <translation type="unfinished"></translation>
+        <translation>Zväčšiť plátno</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1488"/>
         <location filename="../../mscore/actions.cpp" line="1491"/>
         <location filename="../../mscore/actions.cpp" line="1492"/>
         <source>Lyrics</source>
-        <translation type="unfinished"></translation>
+        <translation>Text piesne</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1497"/>
         <source>Fingering Palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Paleta Prstoklad</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1500"/>
         <source>Fingering...</source>
-        <translation type="unfinished"></translation>
+        <translation>Prstoklad...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1501"/>
         <source>Fingering</source>
-        <translation type="unfinished"></translation>
+        <translation>Prstoklad</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1506"/>
         <source>Tempo Palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Paleta Tempo</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1509"/>
         <source>Tempo...</source>
-        <translation type="unfinished"></translation>
+        <translation>Tempo...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1510"/>
         <source>Tempo</source>
-        <translation type="unfinished"></translation>
+        <translation>Tempo</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1516"/>
         <location filename="../../mscore/actions.cpp" line="1519"/>
         <location filename="../../mscore/actions.cpp" line="1520"/>
         <source>Metronome</source>
-        <translation type="unfinished"></translation>
+        <translation>Metronóm</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1526"/>
         <location filename="../../mscore/actions.cpp" line="1530"/>
         <source>Add System Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidat text osnovy</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1529"/>
         <source>System Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Text osnovy</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1535"/>
         <location filename="../../mscore/actions.cpp" line="1539"/>
         <source>Add Staff Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať text notovej osnovy</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1538"/>
         <source>Staff Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Text notovej osnovy</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1544"/>
         <location filename="../../mscore/actions.cpp" line="1548"/>
         <source>Add Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať text</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1547"/>
         <source>Frame Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Text rámu</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1553"/>
         <source>Add Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať názov</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1556"/>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Názov</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1557"/>
         <source>Add Title Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať text názvu</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1562"/>
         <source>Add Subtitle</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať podnázov</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1565"/>
         <source>Subtitle</source>
-        <translation type="unfinished"></translation>
+        <translation>Podnázov</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1566"/>
         <source>Add Subtitle Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať text podnázvu</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1571"/>
         <source>Add Composer</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať meno autora hudby</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1574"/>
         <source>Composer</source>
-        <translation type="unfinished"></translation>
+        <translation>Hudba</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1575"/>
         <source>Add Composer Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať text mena autora hudby</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1580"/>
         <source>Add Poet</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať meno autora text</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1583"/>
         <source>Poet</source>
-        <translation type="unfinished"></translation>
+        <translation>Text</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1584"/>
         <source>Add Poet Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať text mena autora textu</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1589"/>
         <source>Add Copyright</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať autorské práva</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1592"/>
         <source>Copyright</source>
-        <translation type="unfinished"></translation>
+        <translation>Autorské práva</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1593"/>
         <source>Add Copyright Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať text autorských práv</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1598"/>
         <source>Add Chord Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať názov akordu</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1601"/>
         <source>Chord Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Názov taktu</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1602"/>
         <source>Add Chord Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať text akordu</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1607"/>
         <source>show harmony properties for chord</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobraziť vlastnosti harmónie akordu</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1610"/>
         <location filename="../../mscore/actions.cpp" line="1611"/>
         <source>Harmony Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastnosti harmónie</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1616"/>
         <location filename="../../mscore/actions.cpp" line="1620"/>
         <source>Add Rehearsal Mark</source>
-        <translation type="unfinished"></translation>
+        <translation>Pridať značku opakovania</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1619"/>
         <source>Rehearsal Mark</source>
-        <translation type="unfinished"></translation>
+        <translation>Značka opakovania</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1625"/>
         <source>Player play</source>
-        <translation type="unfinished"></translation>
+        <translation>Prehrať v prehrávači</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1628"/>
         <source>Play</source>
-        <translation type="unfinished"></translation>
+        <translation>Prehrať</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1629"/>
         <source>Start or stop playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Spustiť alebo zastaviť  playback</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1671"/>
         <source>Seek to begin</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1680"/>
         <source>Player rewind</source>
-        <translation type="unfinished"></translation>
+        <translation>Pretočiť v prehrávači</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1683"/>
         <source>Rewind</source>
-        <translation type="unfinished"></translation>
+        <translation>Pretočiť</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1684"/>
         <source>Rewind to start position</source>
-        <translation type="unfinished"></translation>
+        <translation>Pretočiť na začiatok</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1690"/>
         <source>Seek to end</source>
-        <translation type="unfinished"></translation>
+        <translation>Hľadať do konca</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1699"/>
         <location filename="../../mscore/actions.cpp" line="1703"/>
         <source>Play repeats on/off</source>
-        <translation type="unfinished"></translation>
+        <translation>Prehrať opakovania zapnúť/vypnúť</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1702"/>
         <source>Repeat</source>
-        <translation type="unfinished"></translation>
+        <translation>Opakovať</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1709"/>
         <source>Load style</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahrať štýl</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1712"/>
         <source>Load Style...</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahrať štýl...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1713"/>
         <source>Load Style</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahrať štýl</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1719"/>
         <source>Save style</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložiť štýl</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1722"/>
         <source>Save Style...</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložiť štýl...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1723"/>
         <source>Save Style</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložiť štýl</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1729"/>
         <source>Select all</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrať všetko</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1732"/>
         <location filename="../../mscore/actions.cpp" line="1733"/>
         <source>Select All</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrať všetko</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1738"/>
         <location filename="../../mscore/actions.cpp" line="1742"/>
         <source>Transpose</source>
-        <translation type="unfinished"></translation>
+        <translation>Previesť</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1741"/>
         <source>Transpose...</source>
-        <translation type="unfinished"></translation>
+        <translation>Previesť...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1747"/>
         <location filename="../../mscore/actions.cpp" line="1750"/>
         <location filename="../../mscore/actions.cpp" line="1751"/>
         <source>violin clef</source>
-        <translation type="unfinished"></translation>
+        <translation>husľový kľúč</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1756"/>
         <location filename="../../mscore/actions.cpp" line="1759"/>
         <location filename="../../mscore/actions.cpp" line="1760"/>
         <source>bass clef</source>
-        <translation type="unfinished"></translation>
+        <translation>basový kľúč</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1765"/>
         <location filename="../../mscore/actions.cpp" line="1768"/>
         <location filename="../../mscore/actions.cpp" line="1769"/>
         <source>Exchange Voice 1-2</source>
-        <translation type="unfinished"></translation>
+        <translation>Vymeniť hlas 1 – 2</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1774"/>
         <location filename="../../mscore/actions.cpp" line="1777"/>
         <location filename="../../mscore/actions.cpp" line="1778"/>
         <source>Exchange Voice 1-3</source>
-        <translation type="unfinished"></translation>
+        <translation>Vymeniť hlas 1 – 3</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1783"/>
         <location filename="../../mscore/actions.cpp" line="1786"/>
         <location filename="../../mscore/actions.cpp" line="1787"/>
         <source>Exchange Voice 1-4</source>
-        <translation type="unfinished"></translation>
+        <translation>Vymeniť hlas 1 – 4</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1792"/>
         <location filename="../../mscore/actions.cpp" line="1795"/>
         <location filename="../../mscore/actions.cpp" line="1796"/>
         <source>Exchange Voice 2-3</source>
-        <translation type="unfinished"></translation>
+        <translation>Vymeniť hlas 2 – 3</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1801"/>
         <location filename="../../mscore/actions.cpp" line="1804"/>
         <location filename="../../mscore/actions.cpp" line="1805"/>
         <source>Exchange Voice 2-4</source>
-        <translation type="unfinished"></translation>
+        <translation>Vymeniť hlas 2 – 4</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1810"/>
         <location filename="../../mscore/actions.cpp" line="1813"/>
         <location filename="../../mscore/actions.cpp" line="1814"/>
         <source>Exchange Voice 3-4</source>
-        <translation type="unfinished"></translation>
+        <translation>Vymeniť hlas 3 – 4</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1819"/>
         <source>display in concert pitch</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobraziť v koncertnom ladení</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1822"/>
         <source>Concert Pitch</source>
-        <translation type="unfinished"></translation>
+        <translation>Koncertné ladenie</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1823"/>
         <source>Display in Concert Pitch</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobraziť v koncertnom ladení</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1828"/>
         <source>repeat last command</source>
-        <translation type="unfinished"></translation>
+        <translation>Zopakovať posledný príkaz</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1831"/>
         <location filename="../../mscore/actions.cpp" line="1832"/>
         <source>Repeat last command</source>
-        <translation type="unfinished"></translation>
+        <translation>Zopakovať posledný príkaz</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1838"/>
         <source>edit score meta data</source>
-        <translation type="unfinished"></translation>
+        <translation>Upraviť metadata notovej osnovy</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1841"/>
         <source>Meta Data...</source>
-        <translation type="unfinished"></translation>
+        <translation>Metadata...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1842"/>
         <source>Meta Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Metadata</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1847"/>
         <source>toggle system break</source>
-        <translation type="unfinished"></translation>
+        <translation>Upraviť systémový zlom</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1850"/>
         <location filename="../../mscore/actions.cpp" line="1851"/>
         <source>Toggle System Break</source>
-        <translation type="unfinished"></translation>
+        <translation>Upraviť systémový zlom</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1856"/>
         <source>toggle page break</source>
-        <translation type="unfinished"></translation>
+        <translation>Upraviť zlom strany</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1859"/>
         <location filename="../../mscore/actions.cpp" line="1860"/>
         <source>Toggle Page Break</source>
-        <translation type="unfinished"></translation>
+        <translation>Upraviť zlom strany</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1865"/>
         <source>edit element</source>
-        <translation type="unfinished"></translation>
+        <translation>Upraviť prvok</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1868"/>
         <location filename="../../mscore/actions.cpp" line="1869"/>
         <source>Edit Element</source>
-        <translation type="unfinished"></translation>
+        <translation>Upraviť prvok</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1874"/>
         <source>reset positions</source>
-        <translation type="unfinished"></translation>
+        <translation>Pôvodné rozmiestnenie</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1877"/>
         <location filename="../../mscore/actions.cpp" line="1878"/>
         <source>Reset Positions</source>
-        <translation type="unfinished"></translation>
+        <translation>Pôvodné rozmiestnenie</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1883"/>
         <source>show inspector</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobraziť kontrolu</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1886"/>
         <location filename="../../mscore/actions.cpp" line="1887"/>
         <source>Inspector</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontrola</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1892"/>
         <source>reset measure stretch</source>
-        <translation type="unfinished"></translation>
+        <translation>Pôvodné roztiahnutie taktu</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1895"/>
         <location filename="../../mscore/actions.cpp" line="1896"/>
         <source>Reset Stretch</source>
-        <translation type="unfinished"></translation>
+        <translation>Pôvodné roztiahnutie</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1901"/>
         <source>show invisible</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobraziť nevideteľné</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1904"/>
         <location filename="../../mscore/actions.cpp" line="1905"/>
         <source>Show Invisible</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobraziť nevideteľné</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1910"/>
         <source>show frames</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobraziť rámy</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1913"/>
         <location filename="../../mscore/actions.cpp" line="1914"/>
         <source>Show Frames</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobraziť rámy</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1919"/>
         <source>show keyboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobraziť klávesnicu</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1922"/>
         <location filename="../../mscore/actions.cpp" line="1923"/>
         <source>Show Keyboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobraziť klávesnicu</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1929"/>
         <source>enable script debugger</source>
-        <translation type="unfinished"></translation>
+        <translation>povoliť kontrolu skriptov</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1932"/>
         <location filename="../../mscore/actions.cpp" line="1933"/>
         <source>Enable Script Debugger</source>
-        <translation type="unfinished"></translation>
+        <translation>Povoliť kontrolu skriptov</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1938"/>
         <location filename="../../mscore/actions.cpp" line="1942"/>
         <source>enter 1/1 rest</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadať celú pomlčku</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1941"/>
         <source>1/1 rest</source>
-        <translation type="unfinished"></translation>
+        <translation>Celá pomlčka</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1947"/>
         <location filename="../../mscore/actions.cpp" line="1951"/>
         <source>enter 1/2 rest</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadať polovú pomlčku</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1950"/>
         <source>1/2 rest</source>
-        <translation type="unfinished"></translation>
+        <translation>Pomlčka 1/2</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1956"/>
         <location filename="../../mscore/actions.cpp" line="1960"/>
         <source>enter 1/4 rest</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadať pomlčku 1/4</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1959"/>
         <source>1/4 rest</source>
-        <translation type="unfinished"></translation>
+        <translation>Pomlčka 1/4</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1965"/>
         <location filename="../../mscore/actions.cpp" line="1969"/>
         <source>enter 1/8 rest</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadať pomlčku 1/8</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1968"/>
         <source>1/8 rest</source>
-        <translation type="unfinished"></translation>
+        <translation>Pomlčka 1/8</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1974"/>
         <location filename="../../mscore/actions.cpp" line="1977"/>
         <location filename="../../mscore/actions.cpp" line="1978"/>
         <source>backspace</source>
-        <translation type="unfinished"></translation>
+        <translation>Návrat na predchádzajúci znak</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1983"/>
         <source>search</source>
-        <translation type="unfinished"></translation>
+        <translation>Násť</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1986"/>
         <location filename="../../mscore/actions.cpp" line="1987"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Nájsť</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1992"/>
         <location filename="../../mscore/actions.cpp" line="1995"/>
         <source>Zoom In</source>
-        <translation type="unfinished"></translation>
+        <translation>Zväčšiť</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="2003"/>
         <location filename="../../mscore/actions.cpp" line="2006"/>
         <source>Zoom Out</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmenšiť</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="2011"/>
         <location filename="../../mscore/actions.cpp" line="2014"/>
         <location filename="../../mscore/actions.cpp" line="2015"/>
         <source>mirror note head</source>
-        <translation type="unfinished"></translation>
+        <translation>Zrkadlová notová hlavička</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="2021"/>
         <location filename="../../mscore/actions.cpp" line="2024"/>
         <location filename="../../mscore/actions.cpp" line="2025"/>
         <source>Edit General Style...</source>
-        <translation type="unfinished"></translation>
+        <translation>Upraviť predvolený štýl...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="2030"/>
         <location filename="../../mscore/actions.cpp" line="2033"/>
         <location filename="../../mscore/actions.cpp" line="2034"/>
         <source>Edit Text Style...</source>
-        <translation type="unfinished"></translation>
+        <translation>Upraviť štýl textu...</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="2039"/>
         <location filename="../../mscore/actions.cpp" line="2042"/>
         <location filename="../../mscore/actions.cpp" line="2043"/>
         <source>Edit Chord Style...</source>
-        <translation type="unfinished"></translation>
+        <translation>Upraviť štýl akordu</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="2048"/>
         <source>Select all similar elements</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrať všetky podobné prvky</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="2051"/>
         <location filename="../../mscore/actions.cpp" line="2052"/>
         <source>All Similar Elements</source>
-        <translation type="unfinished"></translation>
+        <translation>Všetky podobné prvky</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="2057"/>
         <source>Select all similar elements in same staff</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrať všetky podobné prvky v rovnakej notovej osnove</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="2060"/>
         <location filename="../../mscore/actions.cpp" line="2061"/>
         <source>All Similar Elements in Same Staff</source>
-        <translation type="unfinished"></translation>
+        <translation>Všetky podobné prvky v rovnakej notovej osnove</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="2066"/>
         <location filename="../../mscore/actions.cpp" line="2069"/>
         <source>Synthesizer</source>
-        <translation type="unfinished"></translation>
+        <translation>Syntetizátor</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="2070"/>
         <source>Synthesizer Control</source>
-        <translation type="unfinished"></translation>
+        <translation>Ovládanie syntetizátora</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="2075"/>
         <location filename="../../mscore/actions.cpp" line="2078"/>
         <location filename="../../mscore/actions.cpp" line="2079"/>
         <source>double duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Dvojnásobný čas trvania</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="2084"/>
         <location filename="../../mscore/actions.cpp" line="2087"/>
         <location filename="../../mscore/actions.cpp" line="2088"/>
         <source>half duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Polovičný čas trvania</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="2093"/>
         <source>repeat selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Zopakovať výber</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="2096"/>
         <location filename="../../mscore/actions.cpp" line="2097"/>
         <source>Repeat selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Výber opakovania</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="2103"/>
         <source>follow song</source>
-        <translation type="unfinished"></translation>
+        <translation>Sledovať pieseň</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="2106"/>
         <location filename="../../mscore/actions.cpp" line="2107"/>
         <source>Follow Song</source>
-        <translation type="unfinished"></translation>
+        <translation>Sledovať pieseň</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="2112"/>
         <source>split window horizontal</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozdeliť okno vodorovne</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="2115"/>
         <location filename="../../mscore/actions.cpp" line="2116"/>
         <source>Documents Side by Side</source>
-        <translation type="unfinished"></translation>
+        <translation>Dokumenty vedľa seba</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="2121"/>
         <source>split window vertical</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozdeliť okno zvislo</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="2124"/>
         <location filename="../../mscore/actions.cpp" line="2125"/>
         <source>Documents Stacked</source>
-        <translation type="unfinished"></translation>
+        <translation>Dokumenty za sebou</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="2130"/>
         <location filename="../../mscore/actions.cpp" line="2133"/>
         <location filename="../../mscore/actions.cpp" line="2134"/>
         <source>Parts...</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlasy...</translation>
     </message>
 </context>
 <context>
@@ -11038,177 +11093,177 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/articulation.cpp" line="33"/>
         <source>ufermata</source>
-        <translation type="unfinished"></translation>
+        <translation>Fermata hore</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.cpp" line="34"/>
         <source>dfermata</source>
-        <translation type="unfinished"></translation>
+        <translation>Fermata dole</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.cpp" line="35"/>
         <source>ushortfermata</source>
-        <translation type="unfinished"></translation>
+        <translation>Krátka fermata hore</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.cpp" line="36"/>
         <source>dshortfermata</source>
-        <translation type="unfinished"></translation>
+        <translation>Krátka fermata dole</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.cpp" line="37"/>
         <source>ulongfermata</source>
-        <translation type="unfinished"></translation>
+        <translation>Dlhá fermata hore</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.cpp" line="38"/>
         <source>dlongfermata</source>
-        <translation type="unfinished"></translation>
+        <translation>Dlhá fermata dole</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.cpp" line="39"/>
         <source>uverylongfermata</source>
-        <translation type="unfinished"></translation>
+        <translation>Veľmi dlhá fermata hore</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.cpp" line="40"/>
         <source>dverylongfermata</source>
-        <translation type="unfinished"></translation>
+        <translation>Veľmi dlhá fermata dole</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.cpp" line="41"/>
         <source>thumb</source>
-        <translation type="unfinished"></translation>
+        <translation>Palec</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.cpp" line="42"/>
         <source>sforzato</source>
-        <translation type="unfinished"></translation>
+        <translation>sforzato</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.cpp" line="43"/>
         <source>espressivo</source>
-        <translation type="unfinished"></translation>
+        <translation>espressivo</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.cpp" line="44"/>
         <source>staccato</source>
-        <translation type="unfinished"></translation>
+        <translation>staccato</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.cpp" line="45"/>
         <source>ustaccatissimo</source>
-        <translation type="unfinished"></translation>
+        <translation>ustaccatissimo</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.cpp" line="46"/>
         <source>dstaccatissimo</source>
-        <translation type="unfinished"></translation>
+        <translation>dstaccatissimo</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.cpp" line="47"/>
         <source>tenuto</source>
-        <translation type="unfinished"></translation>
+        <translation>tenuto</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.cpp" line="48"/>
         <source>uportato</source>
-        <translation type="unfinished"></translation>
+        <translation>uportato</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.cpp" line="49"/>
         <source>dportato</source>
-        <translation type="unfinished"></translation>
+        <translation>dportato</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.cpp" line="50"/>
         <source>umarcato</source>
-        <translation type="unfinished"></translation>
+        <translation>umarcato</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.cpp" line="51"/>
         <source>dmarcato</source>
-        <translation type="unfinished"></translation>
+        <translation>dmarcato</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.cpp" line="52"/>
         <source>ouvert</source>
-        <translation type="unfinished"></translation>
+        <translation>Predohra</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.cpp" line="53"/>
         <source>plusstop</source>
-        <translation type="unfinished"></translation>
+        <translation>Plus stop</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.cpp" line="54"/>
         <source>upbow</source>
-        <translation type="unfinished"></translation>
+        <translation>Horný sláčik</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.cpp" line="55"/>
         <source>downbow</source>
-        <translation type="unfinished"></translation>
+        <translation>Dolný sláčik</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.cpp" line="56"/>
         <source>reverseturn</source>
-        <translation type="unfinished"></translation>
+        <translation>Otočenie o 360°</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.cpp" line="57"/>
         <source>turn</source>
-        <translation type="unfinished"></translation>
+        <translation>Otočenie</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.cpp" line="58"/>
         <source>trill</source>
-        <translation type="unfinished"></translation>
+        <translation>Trilok</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.cpp" line="59"/>
         <source>prall</source>
-        <translation type="unfinished"></translation>
+        <translation>Náraz</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.cpp" line="60"/>
         <source>mordent</source>
-        <translation type="unfinished"></translation>
+        <translation>Mordent</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.cpp" line="61"/>
         <source>prallprall</source>
-        <translation type="unfinished"></translation>
+        <translation>Náraz náraz</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.cpp" line="62"/>
         <source>prallmordent</source>
-        <translation type="unfinished"></translation>
+        <translation>Náraz mordent</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.cpp" line="63"/>
         <source>upprall</source>
-        <translation type="unfinished"></translation>
+        <translation>Náraz nahor</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.cpp" line="64"/>
         <source>downprall</source>
-        <translation type="unfinished"></translation>
+        <translation>Náraz nadol</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.cpp" line="65"/>
         <source>upmordent</source>
-        <translation type="unfinished"></translation>
+        <translation>mordent nahor</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.cpp" line="66"/>
         <source>downmordent</source>
-        <translation type="unfinished"></translation>
+        <translation>mordent nadol</translation>
     </message>
     <message>
         <location filename="../../mscore/articulation.cpp" line="67"/>
         <source>snappizzicato</source>
-        <translation type="unfinished"></translation>
+        <translation>snappizzicato</translation>
     </message>
 </context>
 <context>
@@ -11216,98 +11271,98 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/clef.cpp" line="48"/>
         <source>Treble clef</source>
-        <translation type="unfinished"></translation>
+        <translation>Husľový kľúč</translation>
     </message>
     <message>
         <location filename="../../mscore/clef.cpp" line="52"/>
         <source>Treble clef 8va</source>
-        <translation type="unfinished"></translation>
+        <translation>Husľový kľúč 8va</translation>
     </message>
     <message>
         <location filename="../../mscore/clef.cpp" line="55"/>
         <source>Treble clef 15ma</source>
-        <translation type="unfinished"></translation>
+        <translation>Husľový kľúč 15ma</translation>
     </message>
     <message>
         <location filename="../../mscore/clef.cpp" line="58"/>
         <source>Treble clef 8vb</source>
-        <translation type="unfinished"></translation>
+        <translation>Husľový kľúč 8vb</translation>
     </message>
     <message>
         <location filename="../../mscore/clef.cpp" line="61"/>
         <source>Bass clef</source>
-        <translation type="unfinished"></translation>
+        <translation>Basový kľúč</translation>
     </message>
     <message>
         <location filename="../../mscore/clef.cpp" line="64"/>
         <source>Bass clef 8vb</source>
-        <translation type="unfinished"></translation>
+        <translation>Basový kľúč 8vb</translation>
     </message>
     <message>
         <location filename="../../mscore/clef.cpp" line="67"/>
         <source>Bass clef 15mb</source>
-        <translation type="unfinished"></translation>
+        <translation>Basový kľúč 15mb</translation>
     </message>
     <message>
         <location filename="../../mscore/clef.cpp" line="71"/>
         <source>Baritone clef (F clef)</source>
-        <translation type="unfinished"></translation>
+        <translation>Barytónový kľúč (F-kľúč)</translation>
     </message>
     <message>
         <location filename="../../mscore/clef.cpp" line="74"/>
         <source>Subbass clef</source>
-        <translation type="unfinished"></translation>
+        <translation>Subbass kľúč</translation>
     </message>
     <message>
         <location filename="../../mscore/clef.cpp" line="78"/>
         <source>Soprano clef</source>
-        <translation type="unfinished"></translation>
+        <translation>Sopránový kľúč</translation>
     </message>
     <message>
         <location filename="../../mscore/clef.cpp" line="81"/>
         <source>Mezzo-soprano clef</source>
-        <translation type="unfinished"></translation>
+        <translation>Mezospránový kľúč</translation>
     </message>
     <message>
         <location filename="../../mscore/clef.cpp" line="84"/>
         <source>Alto clef</source>
-        <translation type="unfinished"></translation>
+        <translation>Altový kľúč</translation>
     </message>
     <message>
         <location filename="../../mscore/clef.cpp" line="87"/>
         <source>Tenor clef</source>
-        <translation type="unfinished"></translation>
+        <translation>Tenorový kľúč</translation>
     </message>
     <message>
         <location filename="../../mscore/clef.cpp" line="91"/>
         <source>Tablature</source>
-        <translation type="unfinished"></translation>
+        <translation>Tablatúra</translation>
     </message>
     <message>
         <location filename="../../mscore/clef.cpp" line="95"/>
         <location filename="../../mscore/clef.cpp" line="115"/>
         <source>Percussion</source>
-        <translation type="unfinished"></translation>
+        <translation>Bicie</translation>
     </message>
     <message>
         <location filename="../../mscore/clef.cpp" line="99"/>
         <source>Baritone clef (C clef)</source>
-        <translation type="unfinished"></translation>
+        <translation>Barytónový kľúč (C-kľúč)</translation>
     </message>
     <message>
         <location filename="../../mscore/clef.cpp" line="103"/>
         <source>French violin clef</source>
-        <translation type="unfinished"></translation>
+        <translation>Francúzsky husľový kľúč</translation>
     </message>
     <message>
         <location filename="../../mscore/clef.cpp" line="107"/>
         <source>Bass clef 8va</source>
-        <translation type="unfinished"></translation>
+        <translation>Basový kľúč 8va</translation>
     </message>
     <message>
         <location filename="../../mscore/clef.cpp" line="111"/>
         <source>Bass clef 15ma</source>
-        <translation type="unfinished"></translation>
+        <translation>Basový kľúč 15ma</translation>
     </message>
 </context>
 <context>
@@ -11315,87 +11370,87 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/drumset.cpp" line="161"/>
         <source>Acoustic Bass Drum</source>
-        <translation type="unfinished"></translation>
+        <translation>Akustický veľký bubon</translation>
     </message>
     <message>
         <location filename="../../mscore/drumset.cpp" line="162"/>
         <source>Bass Drum</source>
-        <translation type="unfinished"></translation>
+        <translation>Veľký bubon</translation>
     </message>
     <message>
         <location filename="../../mscore/drumset.cpp" line="163"/>
         <source>Side Stick</source>
-        <translation type="unfinished"></translation>
+        <translation>Postranná palička</translation>
     </message>
     <message>
         <location filename="../../mscore/drumset.cpp" line="164"/>
         <source>Snare (Acoustic)</source>
-        <translation type="unfinished"></translation>
+        <translation>Malý bubon (akustický)</translation>
     </message>
     <message>
         <location filename="../../mscore/drumset.cpp" line="165"/>
         <source>Snare (Electric)</source>
-        <translation type="unfinished"></translation>
+        <translation>Malý bubon (elektrický)</translation>
     </message>
     <message>
         <location filename="../../mscore/drumset.cpp" line="166"/>
         <source>Tom 5</source>
-        <translation type="unfinished"></translation>
+        <translation>Tom 5</translation>
     </message>
     <message>
         <location filename="../../mscore/drumset.cpp" line="167"/>
         <source>Hi-Hat Closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Zatvorené činely</translation>
     </message>
     <message>
         <location filename="../../mscore/drumset.cpp" line="168"/>
         <source>Tom 4</source>
-        <translation type="unfinished"></translation>
+        <translation>Tom 4</translation>
     </message>
     <message>
         <location filename="../../mscore/drumset.cpp" line="169"/>
         <source>Hi-Hat Pedal</source>
-        <translation type="unfinished"></translation>
+        <translation>Pedál činelov</translation>
     </message>
     <message>
         <location filename="../../mscore/drumset.cpp" line="170"/>
         <source>Tom 3</source>
-        <translation type="unfinished"></translation>
+        <translation>Tom 3</translation>
     </message>
     <message>
         <location filename="../../mscore/drumset.cpp" line="171"/>
         <source>Hi-Hat Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Otvorené činely</translation>
     </message>
     <message>
         <location filename="../../mscore/drumset.cpp" line="172"/>
         <source>Tom 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Tom 2</translation>
     </message>
     <message>
         <location filename="../../mscore/drumset.cpp" line="173"/>
         <source>Tom 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Tom 1</translation>
     </message>
     <message>
         <location filename="../../mscore/drumset.cpp" line="174"/>
         <source>Crash 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Rana 1</translation>
     </message>
     <message>
         <location filename="../../mscore/drumset.cpp" line="175"/>
         <source>Tom</source>
-        <translation type="unfinished"></translation>
+        <translation>Tom</translation>
     </message>
     <message>
         <location filename="../../mscore/drumset.cpp" line="176"/>
         <source>Ride</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../mscore/drumset.cpp" line="177"/>
         <source>China</source>
-        <translation type="unfinished"></translation>
+        <translation>Porcelán</translation>
     </message>
     <message>
         <location filename="../../mscore/drumset.cpp" line="178"/>
@@ -11404,22 +11459,22 @@ p, li { white-space: pre-wrap; }
         <location filename="../../mscore/drumset.cpp" line="182"/>
         <location filename="../../mscore/drumset.cpp" line="183"/>
         <source>Ride (Bell)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../mscore/drumset.cpp" line="179"/>
         <source>Tambourine</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamburína</translation>
     </message>
     <message>
         <location filename="../../mscore/drumset.cpp" line="184"/>
         <source>open high conga</source>
-        <translation type="unfinished"></translation>
+        <translation>Otvorená vysoká konga</translation>
     </message>
     <message>
         <location filename="../../mscore/drumset.cpp" line="185"/>
         <source>low conga</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlboká konga</translation>
     </message>
 </context>
 <context>
@@ -11427,352 +11482,352 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/element.cpp" line="77"/>
         <source>Symbol</source>
-        <translation type="unfinished"></translation>
+        <translation>Symbol</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="78"/>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Text</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="79"/>
         <source>SlurSegment</source>
-        <translation type="unfinished"></translation>
+        <translation>Časť legátového oblúčika</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="80"/>
         <source>BarLine</source>
-        <translation type="unfinished"></translation>
+        <translation>Taktová čiara</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="81"/>
         <source>StemSlash</source>
-        <translation type="unfinished"></translation>
+        <translation>Šikmá nožička</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="82"/>
         <source>Line</source>
-        <translation type="unfinished"></translation>
+        <translation>Čiara</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="83"/>
         <source>Bracket</source>
-        <translation type="unfinished"></translation>
+        <translation>Zátvorka</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="84"/>
         <source>Arpeggio</source>
-        <translation type="unfinished"></translation>
+        <translation>Arpeggio</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="85"/>
         <source>Accidental</source>
-        <translation type="unfinished"></translation>
+        <translation>Predznamenávanie</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="86"/>
         <source>Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Nota</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="87"/>
         <source>Stem</source>
-        <translation type="unfinished"></translation>
+        <translation>Nožička</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="88"/>
         <source>Clef</source>
-        <translation type="unfinished"></translation>
+        <translation>Kľúč</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="89"/>
         <source>KeySig</source>
-        <translation type="unfinished"></translation>
+        <translation>Tónina</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="90"/>
         <source>TimeSig</source>
-        <translation type="unfinished"></translation>
+        <translation>Takt</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="91"/>
         <source>Rest</source>
-        <translation type="unfinished"></translation>
+        <translation>Pomlčka</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="92"/>
         <source>Breath</source>
-        <translation type="unfinished"></translation>
+        <translation>Nádych</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="93"/>
         <source>Glissando</source>
-        <translation type="unfinished"></translation>
+        <translation>Glissando</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="94"/>
         <source>RepeatMeasure</source>
-        <translation type="unfinished"></translation>
+        <translation>Opakovanie taktu</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="95"/>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Obrázok</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="96"/>
         <source>Tie</source>
-        <translation type="unfinished"></translation>
+        <translation>Ligatúra</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="97"/>
         <source>Articulation</source>
-        <translation type="unfinished"></translation>
+        <translation>Artikulácia</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="98"/>
         <source>Dynamic</source>
-        <translation type="unfinished"></translation>
+        <translation>Dynamika</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="99"/>
         <source>Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Strana</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="100"/>
         <source>Beam</source>
-        <translation type="unfinished"></translation>
+        <translation>Zástavka</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="101"/>
         <source>Hook</source>
-        <translation type="unfinished"></translation>
+        <translation>Háčik</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="102"/>
         <source>Lyrics</source>
-        <translation type="unfinished"></translation>
+        <translation>Text piesne</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="103"/>
         <source>Marker</source>
-        <translation type="unfinished"></translation>
+        <translation>Značka</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="104"/>
         <source>Jump</source>
-        <translation type="unfinished"></translation>
+        <translation>Skok</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="105"/>
         <source>Tuplet</source>
-        <translation type="unfinished"></translation>
+        <translation>Rytmická skupina</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="106"/>
         <source>Tempo</source>
-        <translation type="unfinished"></translation>
+        <translation>Tempo</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="107"/>
         <source>StaffText</source>
-        <translation type="unfinished"></translation>
+        <translation>Text notovej osnovy</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="108"/>
         <source>Harmony</source>
-        <translation type="unfinished"></translation>
+        <translation>Harmónia</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="109"/>
         <source>Volta</source>
-        <translation type="unfinished"></translation>
+        <translation>Volta</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="110"/>
         <source>HairpinSegment</source>
-        <translation type="unfinished"></translation>
+        <translation>Časť sponky (de)crescenda</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="111"/>
         <source>OttavaSegment</source>
-        <translation type="unfinished"></translation>
+        <translation>Časť oktávy</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="112"/>
         <source>PedalSegment</source>
-        <translation type="unfinished"></translation>
+        <translation>Časť pedálu (zadržaného basu)</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="113"/>
         <source>TrillSegment</source>
-        <translation type="unfinished"></translation>
+        <translation>Časť trilku</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="114"/>
         <source>TextLineSegment</source>
-        <translation type="unfinished"></translation>
+        <translation>Časť riadku s textom</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="115"/>
         <source>VoltaSegment</source>
-        <translation type="unfinished"></translation>
+        <translation>Časť volty</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="116"/>
         <source>LayoutBreak</source>
-        <translation type="unfinished"></translation>
+        <translation>Zlom rozmiestnenia</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="117"/>
         <source>Spacer</source>
-        <translation type="unfinished"></translation>
+        <translation>Odsadenie</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="118"/>
         <source>LedgerLine</source>
-        <translation type="unfinished"></translation>
+        <translation>Notová čiara</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="119"/>
         <source>NoteHead</source>
-        <translation type="unfinished"></translation>
+        <translation>Notová hlavička</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="120"/>
         <source>Tremolo</source>
-        <translation type="unfinished"></translation>
+        <translation>Tremolo</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="121"/>
         <source>Measure</source>
-        <translation type="unfinished"></translation>
+        <translation>Takt</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="122"/>
         <source>StaffLines</source>
-        <translation type="unfinished"></translation>
+        <translation>Riadky notovej osnovy</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="123"/>
         <source>Cursor</source>
-        <translation type="unfinished"></translation>
+        <translation>Kurzor</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="124"/>
         <source>Selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Výber</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="125"/>
         <source>Lasso</source>
-        <translation type="unfinished"></translation>
+        <translation>Laso</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="126"/>
         <source>ShadowNote</source>
-        <translation type="unfinished"></translation>
+        <translation>Tieňová nota</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="127"/>
         <source>RubberBand</source>
-        <translation type="unfinished"></translation>
+        <translation>Gumička</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="128"/>
         <source>HairPin</source>
-        <translation type="unfinished"></translation>
+        <translation>Spona pre (de)crescscendo</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="129"/>
         <source>Ottava</source>
-        <translation type="unfinished"></translation>
+        <translation>Oktáva</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="130"/>
         <source>Pedal</source>
-        <translation type="unfinished"></translation>
+        <translation>Pedál (zadržaný bas)</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="131"/>
         <source>Trill</source>
-        <translation type="unfinished"></translation>
+        <translation>Trilok</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="132"/>
         <source>TextLine</source>
-        <translation type="unfinished"></translation>
+        <translation>Riadok textu</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="133"/>
         <source>Segment</source>
-        <translation type="unfinished"></translation>
+        <translation>Časť</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="134"/>
         <source>System</source>
-        <translation type="unfinished"></translation>
+        <translation>Osnova</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="135"/>
         <source>Compound</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="136"/>
         <source>Chord</source>
-        <translation type="unfinished"></translation>
+        <translation>Akord</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="137"/>
         <source>Slur</source>
-        <translation type="unfinished"></translation>
+        <translation>Legátový oblúčik</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="138"/>
         <source>Element</source>
-        <translation type="unfinished"></translation>
+        <translation>Prvok</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="139"/>
         <source>ElementList</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoznam prvkov</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="140"/>
         <source>StaffList</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoznam osnov</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="141"/>
         <source>MeasureList</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoznam taktov</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="142"/>
         <source>Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozmiestnenie</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="143"/>
         <source>HBox</source>
-        <translation type="unfinished"></translation>
+        <translation>Vodorovný rám</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="144"/>
         <source>VBox</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvislý rám</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="145"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikona</translation>
     </message>
     <message>
         <location filename="../../mscore/element.cpp" line="146"/>
         <source>AccidentalBracket</source>
-        <translation type="unfinished"></translation>
+        <translation>Predznamenávacia zátvorka</translation>
     </message>
 </context>
 <context>
@@ -11780,17 +11835,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/magbox.cpp" line="36"/>
         <source>Page Width</source>
-        <translation type="unfinished"></translation>
+        <translation>Na šírku strany</translation>
     </message>
     <message>
         <location filename="../../mscore/magbox.cpp" line="37"/>
         <source>Whole Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Na celú stranu</translation>
     </message>
     <message>
         <location filename="../../mscore/magbox.cpp" line="38"/>
         <source>Two Pages</source>
-        <translation type="unfinished"></translation>
+        <translation>Dvojstránka</translation>
     </message>
 </context>
 <context>
@@ -11798,37 +11853,37 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/preferences.cpp" line="60"/>
         <source>Every day</source>
-        <translation type="unfinished"></translation>
+        <translation>Každý deň</translation>
     </message>
     <message>
         <location filename="../../mscore/preferences.cpp" line="61"/>
         <source>Every 3 days</source>
-        <translation type="unfinished"></translation>
+        <translation>Každé 3 dni</translation>
     </message>
     <message>
         <location filename="../../mscore/preferences.cpp" line="62"/>
         <source>Every week</source>
-        <translation type="unfinished"></translation>
+        <translation>Každý týždeň</translation>
     </message>
     <message>
         <location filename="../../mscore/preferences.cpp" line="63"/>
         <source>Every 2 weeks</source>
-        <translation type="unfinished"></translation>
+        <translation>Každé 2 týždne</translation>
     </message>
     <message>
         <location filename="../../mscore/preferences.cpp" line="64"/>
         <source>Every month</source>
-        <translation type="unfinished"></translation>
+        <translation>Každý mesiac</translation>
     </message>
     <message>
         <location filename="../../mscore/preferences.cpp" line="65"/>
         <source>Every 2 months</source>
-        <translation type="unfinished"></translation>
+        <translation>Každé 2 mesiace</translation>
     </message>
     <message>
         <location filename="../../mscore/preferences.cpp" line="66"/>
         <source>Never</source>
-        <translation type="unfinished"></translation>
+        <translation>Nikdy</translation>
     </message>
 </context>
 <context>
@@ -11837,7 +11892,8 @@ p, li { white-space: pre-wrap; }
         <location filename="../../mscore/file.cpp" line="1211"/>
         <source>Cannot read this score:
 your version of MuseScore is too old.</source>
-        <translation type="unfinished"></translation>
+        <translation>Táto notová osnova sa nedá čítať:&#13;
+vaša verzia MuseScoreu je príliš stará.</translation>
     </message>
 </context>
 <context>
@@ -11845,1065 +11901,1065 @@ your version of MuseScore is too old.</source>
     <message>
         <location filename="../../mscore/sym.cpp" line="38"/>
         <source>whole rest</source>
-        <translation type="unfinished"></translation>
+        <translation>Celá pomlčka</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="39"/>
         <source>half rest</source>
-        <translation type="unfinished"></translation>
+        <translation>Polová pomlčka</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="40"/>
         <source>outside whole rest</source>
-        <translation type="unfinished"></translation>
+        <translation>Vonkajšia celá pomlčka</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="41"/>
         <source>outside half rest</source>
-        <translation type="unfinished"></translation>
+        <translation>Vonkajšia polová pomlčka</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="42"/>
         <source>rest M3</source>
-        <translation type="unfinished"></translation>
+        <translation>Pomlčka M3</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="43"/>
         <source>breve rest</source>
-        <translation type="unfinished"></translation>
+        <translation>Pomlčka breve</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="44"/>
         <source>longa rest</source>
-        <translation type="unfinished"></translation>
+        <translation>Pomlčka longa</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="45"/>
         <source>quart rest</source>
-        <translation type="unfinished"></translation>
+        <translation>Štvrťová pomlčka</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="46"/>
         <source>clas quart rest</source>
-        <translation type="unfinished"></translation>
+        <translation>Klasická štvrťová</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="47"/>
         <source>eight rest</source>
-        <translation type="unfinished"></translation>
+        <translation>Osminová pomlčka</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="48"/>
-        <source>16&apos; rest</source>
-        <translation type="unfinished"></translation>
+        <source>16' rest</source>
+        <translation>Šestnástinová pomlčka</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="49"/>
-        <source>32&apos; rest</source>
-        <translation type="unfinished"></translation>
+        <source>32' rest</source>
+        <translation>Dvaatridsatinová pomlčka</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="50"/>
-        <source>64&apos; rest</source>
-        <translation type="unfinished"></translation>
+        <source>64' rest</source>
+        <translation>Štyriašesťdesiatinová pomlčka</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="51"/>
-        <source>128&apos; rest</source>
-        <translation type="unfinished"></translation>
+        <source>128' rest</source>
+        <translation>Stoosemadvadsatinová pomlčka</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="53"/>
         <source>sharp</source>
-        <translation type="unfinished"></translation>
+        <translation>krížik</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="54"/>
         <source>sharp arrow up</source>
-        <translation type="unfinished"></translation>
+        <translation>krížik – šípka hore</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="55"/>
         <location filename="../../mscore/sym.cpp" line="56"/>
         <source>sharp arrow both</source>
-        <translation type="unfinished"></translation>
+        <translation>krížik – obe šípky</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="57"/>
         <source>sharp slash</source>
-        <translation type="unfinished"></translation>
+        <translation>dvojkrížik</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="58"/>
         <source>sharp slash2</source>
-        <translation type="unfinished"></translation>
+        <translation>Krížik – šikmá čiara 2</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="59"/>
         <source>sharp slash3</source>
-        <translation type="unfinished"></translation>
+        <translation>Krížik – šikmá čiara 3</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="60"/>
         <source>sharp slash4</source>
-        <translation type="unfinished"></translation>
+        <translation>Krížik – šikmá čiara 4</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="61"/>
         <source>natural</source>
-        <translation type="unfinished"></translation>
+        <translation>Odrážka</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="62"/>
         <source>natural arrow up</source>
-        <translation type="unfinished"></translation>
+        <translation>Odrážka – šípka nahor</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="63"/>
         <source>natural arrow down</source>
-        <translation type="unfinished"></translation>
+        <translation>Odrážka – šípka nadol</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="64"/>
         <source>natural arrow both</source>
-        <translation type="unfinished"></translation>
+        <translation>Odrážka – obojsmerná šípka</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="65"/>
         <source>flat</source>
-        <translation type="unfinished"></translation>
+        <translation>Béčko</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="66"/>
         <source>flat arrow up</source>
-        <translation type="unfinished"></translation>
+        <translation>Béčko – šípka nahor</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="67"/>
         <location filename="../../mscore/sym.cpp" line="68"/>
         <source>flat arrow both</source>
-        <translation type="unfinished"></translation>
+        <translation>Béčko – obojsmerná šípka</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="69"/>
         <source>flat slash</source>
-        <translation type="unfinished"></translation>
+        <translation>Béčko – šikmá čiara</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="70"/>
         <source>flat slash2</source>
-        <translation type="unfinished"></translation>
+        <translation>Béčko – šikmá čiara 2</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="71"/>
         <source>mirrored flat2</source>
-        <translation type="unfinished"></translation>
+        <translation>Zrkadlové béčko 2</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="72"/>
         <source>mirrored flat</source>
-        <translation type="unfinished"></translation>
+        <translation>Zrkadlové béčko</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="73"/>
         <source>mirrored flat slash</source>
-        <translation type="unfinished"></translation>
+        <translation>Zrkadlové béčko – šikmá čiara</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="74"/>
         <source>flat flat</source>
-        <translation type="unfinished"></translation>
+        <translation>2 béčka</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="75"/>
         <source>flat flat slash</source>
-        <translation type="unfinished"></translation>
+        <translation>2 béčka – šikmá čiara</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="76"/>
         <source>sharp sharp</source>
-        <translation type="unfinished"></translation>
+        <translation>2 krížiky</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="77"/>
         <source>right parenthesis</source>
-        <translation type="unfinished"></translation>
+        <translation>Pravá okrúhla zátvorka</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="78"/>
         <source>left parenthesis</source>
-        <translation type="unfinished"></translation>
+        <translation>Ľavá okrúhla zátvorka</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="89"/>
         <source>dot</source>
-        <translation type="unfinished"></translation>
+        <translation>Bodka</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="90"/>
         <source>longa up</source>
-        <translation type="unfinished"></translation>
+        <translation>Longa nahor</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="91"/>
         <source>longa down</source>
-        <translation type="unfinished"></translation>
+        <translation>Longa nadol</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="92"/>
         <source>brevis head</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavička brevis</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="93"/>
         <source>brevis double head</source>
-        <translation type="unfinished"></translation>
+        <translation>Dvojitá hlavička brevis</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="94"/>
         <source>whole head</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavička celej noty</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="95"/>
         <source>half head</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavička pólovej noty</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="96"/>
         <source>quart head</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavička štvrťovej noty</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="97"/>
         <source>whole diamond head</source>
-        <translation type="unfinished"></translation>
+        <translation>Kosoštvorcová hlavička celej noty</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="98"/>
         <source>half diamond head</source>
-        <translation type="unfinished"></translation>
+        <translation>Kosoštvorcová hlavička pólovej noty</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="99"/>
         <source>diamond head</source>
-        <translation type="unfinished"></translation>
+        <translation>Kosoštvorcová hlavička</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="100"/>
         <source>whole triangle head</source>
-        <translation type="unfinished"></translation>
+        <translation>Trojuholníková hlavička celej noty</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="101"/>
         <source>down half triangle head</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavička pólovej noty v tvare trojuholníka nadol</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="102"/>
         <source>up half triangle head</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavička pólovej noty v tvare trojuholníka nahor</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="103"/>
         <source>up quart triangle head</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavička štvrťovej noty v tvare trojuholníka nahor</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="104"/>
         <source>down quart triangle head</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavička štvrťovej noty v tvare trojuholníka nadol</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="105"/>
         <source>whole slash head</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavička celej noty v tvare lomky</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="106"/>
         <source>half slash head</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavička pólovej noty v tvare lomky</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="107"/>
         <source>quart slash head</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavička štvrťovej noty v tvare lomky</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="108"/>
         <source>whole cross head</source>
-        <translation type="unfinished"></translation>
+        <translation>Krížiková hlavička celej noty</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="109"/>
         <source>half cross head</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavička pólovej noty v tvare kríža</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="110"/>
         <source>cross head</source>
-        <translation type="unfinished"></translation>
+        <translation>Krížiková notová hlavička</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="111"/>
         <source>x circle head</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavička v tvare kruhu s x</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="112"/>
         <source>s0do head</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavička s0do</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="113"/>
         <source>d1do head</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavička d1do</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="114"/>
         <source>u1do head</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavička u1do</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="115"/>
         <source>d2do head</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavička d2do</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="116"/>
         <source>u2do head</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavička u2do</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="117"/>
         <source>s0re head</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavička s0re</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="118"/>
         <source>u1re head</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavička u1re</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="119"/>
         <source>d1re head</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavička d1re</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="120"/>
         <source>u2re head</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavička u2re</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="121"/>
         <source>d2re head</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavička d2re</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="122"/>
         <source>s0mi head</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavička s0mi</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="123"/>
         <source>s1mi head</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavička s1mi</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="124"/>
         <source>s2mi head</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavička s2mi</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="125"/>
         <source>u0fa head</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavička u0fa</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="126"/>
         <source>d0fa head</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavička d0fa</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="127"/>
         <source>u1fa head</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavička u1fa</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="128"/>
         <source>d1fa head</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavička d1fa</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="129"/>
         <source>u2fa head</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavička u2fa</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="130"/>
         <source>d2fa head</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavička d2fa</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="131"/>
         <source>s0la head</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavička s0la</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="132"/>
         <source>s1la head</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavička s1la</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="133"/>
         <source>s2la head</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavička s2la</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="134"/>
         <source>s0ti head</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavička s0ti</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="135"/>
         <source>u1ti head</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavička u1ti</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="136"/>
         <source>d1ti head</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavička d1ti</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="137"/>
         <source>u2ti head</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavička u2ti</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="138"/>
         <source>d2ti head</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavička d2ti</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="139"/>
         <source>ufermata</source>
-        <translation type="unfinished"></translation>
+        <translation>Fermata hore</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="140"/>
         <source>dfermata</source>
-        <translation type="unfinished"></translation>
+        <translation>Fermata dole</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="141"/>
         <source>snappizzicato</source>
-        <translation type="unfinished"></translation>
+        <translation>snappizzicato</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="142"/>
         <source>ushortfermata</source>
-        <translation type="unfinished"></translation>
+        <translation>Krátká fermata hore</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="143"/>
         <source>dshortfermata</source>
-        <translation type="unfinished"></translation>
+        <translation>Krátka fermata dole</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="144"/>
         <source>ulongfermata</source>
-        <translation type="unfinished"></translation>
+        <translation>Dlhá fermata hore</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="145"/>
         <source>dlongfermata</source>
-        <translation type="unfinished"></translation>
+        <translation>Dlhá fermata dole</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="146"/>
         <source>uverylongfermata</source>
-        <translation type="unfinished"></translation>
+        <translation>Veľmi dlhá fermata hore</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="147"/>
         <source>dverylongfermata</source>
-        <translation type="unfinished"></translation>
+        <translation>Veľmi dlhá fermata dole</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="148"/>
         <source>thumb</source>
-        <translation type="unfinished"></translation>
+        <translation>palec</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="149"/>
         <source>sforza to accent</source>
-        <translation type="unfinished"></translation>
+        <translation>sforza k dôrazu</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="150"/>
         <source>espressivo</source>
-        <translation type="unfinished"></translation>
+        <translation>espressivo</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="151"/>
         <source>staccato</source>
-        <translation type="unfinished"></translation>
+        <translation>staccato</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="152"/>
         <source>ustaccatissimo</source>
-        <translation type="unfinished"></translation>
+        <translation>ustaccatissimo</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="153"/>
         <source>dstaccatissimo</source>
-        <translation type="unfinished"></translation>
+        <translation>Staccatissimo dole</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="154"/>
         <source>tenuto</source>
-        <translation type="unfinished"></translation>
+        <translation>tenuto</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="155"/>
         <source>uportato</source>
-        <translation type="unfinished"></translation>
+        <translation>uportato</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="156"/>
         <source>dportato</source>
-        <translation type="unfinished"></translation>
+        <translation>dportato</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="157"/>
         <source>umarcato</source>
-        <translation type="unfinished"></translation>
+        <translation>umarcato</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="158"/>
         <source>dmarcato</source>
-        <translation type="unfinished"></translation>
+        <translation>dmarcato</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="159"/>
         <source>ouvert</source>
-        <translation type="unfinished"></translation>
+        <translation>Predohra</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="160"/>
         <source>plus stop</source>
-        <translation type="unfinished"></translation>
+        <translation>plus stop</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="161"/>
         <source>up bow</source>
-        <translation type="unfinished"></translation>
+        <translation>Horný sláčik</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="162"/>
         <source>down bow</source>
-        <translation type="unfinished"></translation>
+        <translation>Dolný sláčiť</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="163"/>
         <source>reverse turn</source>
-        <translation type="unfinished"></translation>
+        <translation>Otočenie o 360°</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="164"/>
         <source>turn</source>
-        <translation type="unfinished"></translation>
+        <translation>Otočenie</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="165"/>
         <source>trill</source>
-        <translation type="unfinished"></translation>
+        <translation>trilok</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="166"/>
         <source>upedal heel</source>
-        <translation type="unfinished"></translation>
+        <translation>Päta pedálu (zadržaného basu) nahor</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="167"/>
         <source>dpedalheel</source>
-        <translation type="unfinished"></translation>
+        <translation>Päta pedálu (zadržaného basu) nadol</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="168"/>
         <source>upedal toe</source>
-        <translation type="unfinished"></translation>
+        <translation>Špička pedálu (zadržaného basu) nahor</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="169"/>
         <source>dpedal toe</source>
-        <translation type="unfinished"></translation>
+        <translation>Špička pedálu (zadržaného basu) nadol</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="170"/>
         <source>flageolet</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobcová flauta</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="171"/>
         <source>segno</source>
-        <translation type="unfinished"></translation>
+        <translation>segno</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="172"/>
         <source>coda</source>
-        <translation type="unfinished"></translation>
+        <translation>koda</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="173"/>
         <source>varied coda</source>
-        <translation type="unfinished"></translation>
+        <translation>rôzna koda</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="174"/>
         <source>rcomma</source>
-        <translation type="unfinished"></translation>
+        <translation>Pravá koma</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="175"/>
         <source>lcomma</source>
-        <translation type="unfinished"></translation>
+        <translation>Ľavá koma</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="178"/>
         <source>arpeggio</source>
-        <translation type="unfinished"></translation>
+        <translation>arpeggio</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="179"/>
         <source>trillelement</source>
-        <translation type="unfinished"></translation>
+        <translation>Prvok trilok</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="180"/>
         <source>arpeggio arrow down</source>
-        <translation type="unfinished"></translation>
+        <translation>arpeggio – šípka nadol</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="181"/>
         <source>arpeggio arrow up</source>
-        <translation type="unfinished"></translation>
+        <translation>arpeggio – šípka nahor</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="182"/>
         <source>trill element</source>
-        <translation type="unfinished"></translation>
+        <translation>Prvok trilok</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="183"/>
         <source>prall</source>
-        <translation type="unfinished"></translation>
+        <translation>Náraz</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="184"/>
         <source>mordent</source>
-        <translation type="unfinished"></translation>
+        <translation>Mordent</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="185"/>
         <source>prall prall</source>
-        <translation type="unfinished"></translation>
+        <translation>Náraz náraz</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="186"/>
         <source>prall mordent</source>
-        <translation type="unfinished"></translation>
+        <translation>Náraz mordent</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="187"/>
         <source>up prall</source>
-        <translation type="unfinished"></translation>
+        <translation>Náraz nahor</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="188"/>
         <source>up mordent</source>
-        <translation type="unfinished"></translation>
+        <translation>Mordent nahor</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="189"/>
         <source>prall down</source>
-        <translation type="unfinished"></translation>
+        <translation>Náraz nadol</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="190"/>
         <source>down prall</source>
-        <translation type="unfinished"></translation>
+        <translation>Náraz nadol</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="191"/>
         <source>down mordent</source>
-        <translation type="unfinished"></translation>
+        <translation>Mordent nadol</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="192"/>
         <source>prall up</source>
-        <translation type="unfinished"></translation>
+        <translation>Náraz nahor</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="193"/>
         <source>line prall</source>
-        <translation type="unfinished"></translation>
+        <translation>Náraz na riadku</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="194"/>
         <source>caesura curved</source>
-        <translation type="unfinished"></translation>
+        <translation>Oblá cezúra</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="195"/>
         <source>caesura straight</source>
-        <translation type="unfinished"></translation>
+        <translation>Rovná cezúra</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="196"/>
         <source>eight flag</source>
-        <translation type="unfinished"></translation>
+        <translation>Osminová zástavka</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="197"/>
         <source>sixteenth flag</source>
-        <translation type="unfinished"></translation>
+        <translation>Šestnástinová zástavka</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="198"/>
         <source>thirtysecond flag</source>
-        <translation type="unfinished"></translation>
+        <translation>Dvaatridsatinová zástavka</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="199"/>
         <source>sixtyfour flag</source>
-        <translation type="unfinished"></translation>
+        <translation>Štyriašesťdesiatinová zástavka</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="200"/>
         <source>128flag</source>
-        <translation type="unfinished"></translation>
+        <translation>Stoosemadvadsatinová zástavka</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="201"/>
         <source>deight flag</source>
-        <translation type="unfinished"></translation>
+        <translation>Dolná osminová zástavka</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="202"/>
         <source>grace dash</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="203"/>
         <source>dgrace dash</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="204"/>
         <source>dsixteenth flag</source>
-        <translation type="unfinished"></translation>
+        <translation>Dolná šestnástinová zástavka</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="205"/>
         <source>dthirtysecond flag</source>
-        <translation type="unfinished"></translation>
+        <translation>Dolná dvaatridsatinová zástavka</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="206"/>
         <source>dsixtyfourth flag</source>
-        <translation type="unfinished"></translation>
+        <translation>Dolná štyriašesťdesiatinová zástavka</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="207"/>
         <source>d128flag</source>
-        <translation type="unfinished"></translation>
+        <translation>Dolná stoosemadvadsatinová zástavka</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="208"/>
         <source>alto clef</source>
-        <translation type="unfinished"></translation>
+        <translation>Violový kľúč</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="209"/>
         <source>calto clef</source>
-        <translation type="unfinished"></translation>
+        <translation>Malý violový kľúč</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="210"/>
         <source>bass clef</source>
-        <translation type="unfinished"></translation>
+        <translation>Basový kľúč</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="211"/>
         <source>cbass clef</source>
-        <translation type="unfinished"></translation>
+        <translation>Malý basový kľúč</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="212"/>
         <source>trebleclef</source>
-        <translation type="unfinished"></translation>
+        <translation>Husľový kľúč</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="213"/>
         <source>ctrebleclef</source>
-        <translation type="unfinished"></translation>
+        <translation>Malý husľový kľúč</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="214"/>
         <source>percussion clef</source>
-        <translation type="unfinished"></translation>
+        <translation>Kľúč pre bicie</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="215"/>
         <source>cpercussion clef</source>
-        <translation type="unfinished"></translation>
+        <translation>Malý kľúč pre bicie</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="216"/>
         <source>tab clef</source>
-        <translation type="unfinished"></translation>
+        <translation>Kľúč tablatúry</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="217"/>
         <source>ctab clef</source>
-        <translation type="unfinished"></translation>
+        <translation>Malý kľúč tablatúry</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="218"/>
         <source>four four meter</source>
-        <translation type="unfinished"></translation>
+        <translation>Metrum štyri štyri</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="219"/>
         <source>allabreve</source>
-        <translation type="unfinished"></translation>
+        <translation>allabreve</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="220"/>
         <source>pedalasterisk</source>
-        <translation type="unfinished"></translation>
+        <translation>Pedálová hviezdička</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="221"/>
         <source>pedaldash</source>
-        <translation type="unfinished"></translation>
+        <translation>Pedálová čiarka</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="222"/>
         <source>pedaldot</source>
-        <translation type="unfinished"></translation>
+        <translation>Pedálová bodka</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="223"/>
         <source>pedalP</source>
-        <translation type="unfinished"></translation>
+        <translation>Pedal P</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="224"/>
         <source>pedald</source>
-        <translation type="unfinished"></translation>
+        <translation>Pedál d</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="225"/>
         <source>pedale</source>
-        <translation type="unfinished"></translation>
+        <translation>Pedál e</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="226"/>
         <source>pedal ped</source>
-        <translation type="unfinished"></translation>
+        <translation>Pedál d</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="227"/>
         <source>bracket tips up</source>
-        <translation type="unfinished"></translation>
+        <translation>Konce zátvoriek hore</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="228"/>
         <source>bracket tips down</source>
-        <translation type="unfinished"></translation>
+        <translation>Konce zátvoriek dole</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="229"/>
         <source>bracket tips left up</source>
-        <translation type="unfinished"></translation>
+        <translation>Konce zátvoriek vľavo hore</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="230"/>
         <source>bracket tips left down</source>
-        <translation type="unfinished"></translation>
+        <translation>Konce zátvoriek vľavo dole</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="231"/>
         <source>acc dot</source>
-        <translation type="unfinished"></translation>
+        <translation>Predznamenanie – bodka</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="232"/>
         <source>acc freebase</source>
-        <translation type="unfinished"></translation>
+        <translation>Predznamenanie – freebase</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="233"/>
         <source>acc stdbase</source>
-        <translation type="unfinished"></translation>
+        <translation>Predznamenanie – stdbase</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="234"/>
         <source>acc bayanbase</source>
-        <translation type="unfinished"></translation>
+        <translation>Predznamenanie – bayanbase</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="235"/>
         <source>acc old ee</source>
-        <translation type="unfinished"></translation>
+        <translation>Predznamenanie –  old ee</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="236"/>
         <source>acc discant</source>
-        <translation type="unfinished"></translation>
+        <translation>Predznamenanie – diskant</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="243"/>
         <source>zero</source>
-        <translation type="unfinished"></translation>
+        <translation>nula</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="244"/>
         <source>one</source>
-        <translation type="unfinished"></translation>
+        <translation>jednotka</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="245"/>
         <source>two</source>
-        <translation type="unfinished"></translation>
+        <translation>dvojka</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="246"/>
         <source>three</source>
-        <translation type="unfinished"></translation>
+        <translation>trojka</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="247"/>
         <source>four</source>
-        <translation type="unfinished"></translation>
+        <translation>štvorka</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="248"/>
         <source>five</source>
-        <translation type="unfinished"></translation>
+        <translation>päťka</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="249"/>
         <source>six</source>
-        <translation type="unfinished"></translation>
+        <translation>šestka</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="250"/>
         <source>seven</source>
-        <translation type="unfinished"></translation>
+        <translation>sedmička</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="251"/>
         <source>eight</source>
-        <translation type="unfinished"></translation>
+        <translation>osmička</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="252"/>
         <source>nine</source>
-        <translation type="unfinished"></translation>
+        <translation>deviatka</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="253"/>
         <source>plus</source>
-        <translation type="unfinished"></translation>
+        <translation>plus</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="255"/>
         <location filename="../../mscore/sym.cpp" line="584"/>
         <source>z</source>
-        <translation type="unfinished"></translation>
+        <translation>z</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="256"/>
         <location filename="../../mscore/sym.cpp" line="579"/>
         <source>f</source>
-        <translation type="unfinished"></translation>
+        <translation>f</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="257"/>
         <location filename="../../mscore/sym.cpp" line="583"/>
         <source>s</source>
-        <translation type="unfinished"></translation>
+        <translation>s</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="258"/>
         <location filename="../../mscore/sym.cpp" line="581"/>
         <source>p</source>
-        <translation type="unfinished"></translation>
+        <translation>p</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="259"/>
         <location filename="../../mscore/sym.cpp" line="580"/>
         <source>m</source>
-        <translation type="unfinished"></translation>
+        <translation>m</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="260"/>
         <location filename="../../mscore/sym.cpp" line="582"/>
         <source>r</source>
-        <translation type="unfinished"></translation>
+        <translation>r</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="576"/>
         <source>clef eight</source>
-        <translation type="unfinished"></translation>
+        <translation>Kľúč 8</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="577"/>
         <source>clef one</source>
-        <translation type="unfinished"></translation>
+        <translation>Kľúč 1</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="578"/>
         <source>clef five</source>
-        <translation type="unfinished"></translation>
+        <translation>Kľúč 5</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="586"/>
         <source>note 1/2</source>
-        <translation type="unfinished"></translation>
+        <translation>pólová nota</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="587"/>
         <source>note 1/4</source>
-        <translation type="unfinished"></translation>
+        <translation>štvrťová nota</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="588"/>
         <source>note 1/8</source>
-        <translation type="unfinished"></translation>
+        <translation>osminová nota</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="589"/>
         <source>note 1/16</source>
-        <translation type="unfinished"></translation>
+        <translation>16-tinová nota</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="590"/>
         <source>note 1/32</source>
-        <translation type="unfinished"></translation>
+        <translation>32-tinová nota</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="591"/>
         <source>note 1/64</source>
-        <translation type="unfinished"></translation>
+        <translation>64-tinová nota</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="592"/>
         <source>dot dot</source>
-        <translation type="unfinished"></translation>
+        <translation>bodka bodka</translation>
     </message>
 </context>
 </TS>
