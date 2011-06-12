@@ -9,11 +9,11 @@
     </message>
     <message>
         <source>Version: 0.9.0</source>
-        <translation>Version: 0.9.0</translation>
+        <translation>Versión: 0.9.0</translation>
     </message>
     <message>
         <source>Revision: 628</source>
-        <translation>Revision: 628</translation>
+        <translation>Revisión: 628</translation>
     </message>
     <message utf8="true">
         <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
@@ -42,22 +42,22 @@ p, li { white-space: pre-wrap; }&#13;
     <name>AboutBoxDialog</name>
     <message>
         <source>Unstable Prerelease for Version: </source>
-        <translation>Unstable Prerelease for Version: </translation>
+        <translation>Ósikkur undansýning versión </translation>
     </message>
     <message>
         <source>Version: </source>
-        <translation>Version: </translation>
+        <translation>Versión </translation>
     </message>
     <message>
         <source>Revision: %1</source>
-        <translation>Revision: %1</translation>
+        <translation>Revisión: %1</translation>
     </message>
 </context>
 <context>
     <name>Accidental</name>
     <message>
         <source>round bracket</source>
-        <translation>round bracket</translation>
+        <translation>rundar klombur</translation>
     </message>
 </context>
 <context>
@@ -71,60 +71,60 @@ p, li { white-space: pre-wrap; }&#13;
     <name>ArticulationProperties</name>
     <message>
         <source>MuseScore: Articulations Properties</source>
-        <translation>MuseScore: Articulations Properties</translation>
+        <translation>MuseScore: Framsagnarhættir</translation>
     </message>
     <message>
         <source>Channel</source>
-        <translation>Channel</translation>
+        <translation>Kanal</translation>
     </message>
     <message>
         <source>Midi Action</source>
-        <translation>Midi Action</translation>
+        <translation>Midi hending</translation>
     </message>
 </context>
 <context>
     <name>BarLineBase</name>
     <message>
         <source>Form</source>
-        <translation>Form</translation>
+        <translation>Formur</translation>
     </message>
     <message>
         <source>BarLine</source>
-        <translation>Bar Line</translation>
+        <translation>Taktstrika</translation>
     </message>
     <message>
         <source>SubType:</source>
-        <translation>SubType:</translation>
+        <translation>Slag</translation>
     </message>
 </context>
 <context>
     <name>BeamBase</name>
     <message>
         <source>Form</source>
-        <translation>Form</translation>
+        <translation>Formur</translation>
     </message>
     <message>
         <source>up:</source>
-        <translation>up:</translation>
+        <translation>Upp</translation>
     </message>
     <message>
         <source>Chord/Rest</source>
-        <translation>Chord/Rest</translation>
+        <translation>Akkord/pausa</translation>
     </message>
 </context>
 <context>
     <name>BoxPropertiesBase</name>
     <message>
         <source>MuseScore: Frame Properties</source>
-        <translation>MuseScore: Frame Properties</translation>
+        <translation>MuseScore: Rammu Eginleikar</translation>
     </message>
     <message>
         <source>Margins</source>
-        <translation>Margins</translation>
+        <translation>Margin</translation>
     </message>
     <message>
         <source>left:</source>
-        <translation>left:</translation>
+        <translation>Vinstra</translation>
     </message>
     <message>
         <source>mm</source>
@@ -132,22 +132,22 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>right:</source>
-        <translation>right:</translation>
+        <translation>Høgra</translation>
     </message>
     <message>
         <source>top:</source>
-        <translation>top:</translation>
+        <translation>ovast</translation>
     </message>
     <message>
         <source>bottom:</source>
-        <translation>bottom:</translation>
+        <translation>niðast</translation>
     </message>
 </context>
 <context>
     <name>ChordBase</name>
     <message>
         <source>Form</source>
-        <translation>Form</translation>
+        <translation>Formur</translation>
     </message>
     <message>
         <source>Arpeggio</source>
@@ -166,15 +166,15 @@ p, li { white-space: pre-wrap; }&#13;
     <name>ChordEdit</name>
     <message>
         <source>MuseScore: Harmony Properties</source>
-        <translation>MuseScore: Harmony Properties</translation>
+        <translation>Harmoniskir eginleikar</translation>
     </message>
     <message>
         <source>TextLabel</source>
-        <translation>TextLabel</translation>
+        <translation>Tekst merki</translation>
     </message>
     <message>
         <source>Root</source>
-        <translation>Root</translation>
+        <translation>Rót</translation>
     </message>
     <message>
         <source>C</source>
@@ -186,7 +186,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>bb (double flat)</source>
-        <translation>bb (double flat)</translation>
+        <translation>bb (tvífalt b)</translation>
     </message>
     <message>
         <source>F</source>
@@ -194,7 +194,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>b (flat)</source>
-        <translation>b (flat)</translation>
+        <translation>b</translation>
     </message>
     <message>
         <source>G</source>
@@ -202,7 +202,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>(no accidental)</source>
-        <translation>(no accidental)</translation>
+        <translation>(einki fortekin)</translation>
     </message>
     <message>
         <source>A</source>
@@ -210,15 +210,15 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source># (sharp)</source>
-        <translation># (sharp)</translation>
+        <translation># (krossur)</translation>
     </message>
     <message>
         <source>B</source>
-        <translation>B</translation>
+        <translation>H</translation>
     </message>
     <message>
         <source>## (double sharp)</source>
-        <translation>## (double sharp)</translation>
+        <translation>## (tvífalt krossur)</translation>
     </message>
     <message>
         <source>D</source>
@@ -226,7 +226,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Extension</source>
-        <translation>Extension</translation>
+        <translation>Uppáset</translation>
     </message>
     <message>
         <source>Maj</source>
@@ -306,7 +306,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Other:</source>
-        <translation>Other:</translation>
+        <translation>Annað:</translation>
     </message>
     <message>
         <source>5b</source>
@@ -394,7 +394,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>7(Blues)</source>
-        <translation>7(blues)</translation>
+        <translation>7(Blues)</translation>
     </message>
     <message>
         <source>7b13</source>
@@ -750,7 +750,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Degrees</source>
-        <translation>Degrees</translation>
+        <translation>gradir</translation>
     </message>
     <message>
         <source>Add</source>
@@ -758,15 +758,15 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Delete</source>
-        <translation>Delete</translation>
+        <translation>Sletta</translation>
     </message>
     <message>
         <source>Bass Note / Inversion</source>
-        <translation>Bass Note / Inversion</translation>
+        <translation>Bass tóni/umvending</translation>
     </message>
     <message>
         <source>none</source>
-        <translation>none</translation>
+        <translation>eingin</translation>
     </message>
     <message>
         <source>/C</source>
@@ -848,15 +848,15 @@ p, li { white-space: pre-wrap; }&#13;
     <name>ChordPropertyBase</name>
     <message>
         <source>Chord Properties</source>
-        <translation>Chord Properties</translation>
+        <translation>Akkord Eginleikar</translation>
     </message>
     <message>
         <source>small</source>
-        <translation>small</translation>
+        <translation>lítil</translation>
     </message>
     <message>
         <source>additional leading space </source>
-        <translation>additional leading space </translation>
+        <translation>eyka pláss </translation>
     </message>
     <message>
         <source>sp</source>
@@ -865,19 +865,19 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>additional trailing space</source>
-        <translation>additional trailing space</translation>
+        <translation>eyka Pláss</translation>
     </message>
     <message>
         <source>Note Properties</source>
-        <translation>Note Properties</translation>
+        <translation>Nóta eginleikar</translation>
     </message>
     <message>
         <source>tuning offset</source>
-        <translation>tuning offset</translation>
+        <translation>stemmu grundarlag</translation>
     </message>
     <message>
         <source>stem direction</source>
-        <translation>stem direction</translation>
+        <translation>nótahálsur upp/niður</translation>
     </message>
     <message>
         <source>auto</source>
@@ -886,31 +886,31 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>up</source>
-        <translation>up</translation>
+        <translation>upp</translation>
     </message>
     <message>
         <source>down</source>
-        <translation>down</translation>
+        <translation>niður</translation>
     </message>
     <message>
         <source>note head positon </source>
-        <translation>note head positon </translation>
+        <translation>nótahøvd støða </translation>
     </message>
     <message>
         <source>left of stem</source>
-        <translation>left of stem</translation>
+        <translation>vinstrumeðin háls</translation>
     </message>
     <message>
         <source>right of stem</source>
-        <translation>right of stem</translation>
+        <translation>høgrumegin háls</translation>
     </message>
     <message>
         <source>stemless</source>
-        <translation>stemless</translation>
+        <translation>ongan háls</translation>
     </message>
     <message>
         <source>velocity type</source>
-        <translation>velocity type</translation>
+        <translation>velocity slag</translation>
     </message>
     <message>
         <source>velocity (0-127)</source>
@@ -919,7 +919,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <source>user</source>
         <extracomment>velocity type</extracomment>
-        <translation>user</translation>
+        <translation>brúkari</translation>
     </message>
     <message>
         <source>offset</source>
@@ -965,23 +965,23 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>cross</source>
-        <translation>cross</translation>
+        <translation>krossur</translation>
     </message>
     <message>
         <source>diamond</source>
-        <translation>diamond</translation>
+        <translation>diamantur</translation>
     </message>
     <message>
         <source>triangle</source>
-        <translation>triangle</translation>
+        <translation>tríkantur</translation>
     </message>
     <message>
         <source>slash</source>
-        <translation>slash</translation>
+        <translation>greffstrika</translation>
     </message>
     <message>
         <source>xcircle</source>
-        <translation>xcircle</translation>
+        <translation>xsirkul</translation>
     </message>
     <message>
         <source>do</source>
@@ -1013,15 +1013,15 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>whole</source>
-        <translation>semibreve</translation>
+        <translation>heil</translation>
     </message>
     <message>
         <source>half</source>
-        <translation>minim</translation>
+        <translation>hálv</translation>
     </message>
     <message>
         <source>quarter</source>
-        <translation>crotchet</translation>
+        <translation>kvart</translation>
     </message>
     <message>
         <source>breve</source>
@@ -1032,65 +1032,65 @@ p, li { white-space: pre-wrap; }&#13;
     <name>ChordRestBase</name>
     <message>
         <source>Form</source>
-        <translation>Form</translation>
+        <translation>Formur</translation>
     </message>
     <message>
         <source>SlurFor:</source>
-        <translation>SlurFor:</translation>
+        <translation>Sambd.-fram</translation>
     </message>
     <message>
         <source>SlurBack:</source>
-        <translation>SlurBack:</translation>
+        <translation>Sambd.-aftur</translation>
     </message>
     <message>
         <source>StaffMove:</source>
-        <translation>StaveMove:</translation>
+        <translation>Flyt linju</translation>
     </message>
 </context>
 <context>
     <name>ChordStyleEditor</name>
     <message>
         <source>Form</source>
-        <translation>Form</translation>
+        <translation>Formur</translation>
     </message>
     <message>
         <source>Chord Description File:</source>
-        <translation>Chord Description File:</translation>
+        <translation>Akkord greiðandi fíla</translation>
     </message>
     <message>
         <source>...</source>
-        <translation>…</translation>
+        <translation>...</translation>
     </message>
     <message>
         <source>Id</source>
-        <translation>ID</translation>
+        <translation>Id</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Name</translation>
+        <translation>Navn</translation>
     </message>
     <message>
         <source>Save As</source>
-        <translation>Save As</translation>
+        <translation>Goym sum</translation>
     </message>
     <message>
         <source>MuseScore: Chord Style Editor</source>
-        <translation>MuseScore: Chord Style Editor</translation>
+        <translation>MuseScore: Akkord Snið ritil</translation>
     </message>
 </context>
 <context>
     <name>Dynamic</name>
     <message>
         <source>Dynamics</source>
-        <translation>Dynamics</translation>
+        <translation>Dynamikkur</translation>
     </message>
     <message>
         <source>Set Invisible</source>
-        <translation>Set Invisible</translation>
+        <translation>ósjónlig</translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation>Set Visible</translation>
+        <translation>sjónlig</translation>
     </message>
     <message>
         <source>Text Properties...</source>
@@ -3684,23 +3684,23 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Capella Files (*.cap);;</source>
-        <translation>Capella Files (*.cap);;</translation>
+        <translation>Capella Fílar (*.cap);;</translation>
     </message>
     <message>
         <source>Bagpipe Music Writer Files (*.bww);;</source>
-        <translation>Bagpipe Music Writer Files (*.bww);;</translation>
+        <translation>Sekkjapípu tónleika skrivara fílar (*.bww);;</translation>
     </message>
     <message>
         <source>BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;</source>
-        <translation>BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;</translation>
+        <translation>BB Fílar &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;</translation>
     </message>
     <message>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
-        <translation>Overture Files &lt;experimental&gt; (*.ove);;</translation>
+        <translation>Overture Fílar &lt;experimental&gt; (*.ove);;</translation>
     </message>
     <message>
         <source>All Files (*)</source>
-        <translation>All Files (*)</translation>
+        <translation>Allir fílar (*)</translation>
     </message>
 </context>
 <context>
@@ -3954,7 +3954,7 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>First page no.</source>
-        <translation>First page no.</translation>
+        <translation>Nr. á fyrstu síðu</translation>
     </message>
 </context>
 <context>
@@ -6636,27 +6636,27 @@ p, li { white-space: pre-wrap; }
     <name>accidental</name>
     <message>
         <source>none</source>
-        <translation>none</translation>
+        <translation>eingin</translation>
     </message>
     <message>
         <source>sharp</source>
-        <translation>sharp</translation>
+        <translation>krossur</translation>
     </message>
     <message>
         <source>flat</source>
-        <translation>flat</translation>
+        <translation>b-tekin</translation>
     </message>
     <message>
         <source>double sharp</source>
-        <translation>double sharp</translation>
+        <translation>dupulkrossur</translation>
     </message>
     <message>
         <source>double flat</source>
-        <translation>double flat</translation>
+        <translation>dupult b-tekin</translation>
     </message>
     <message>
         <source>natural</source>
-        <translation>natural</translation>
+        <translation>uttan fortekin</translation>
     </message>
     <message>
         <source>flat-slash</source>
@@ -6739,83 +6739,83 @@ p, li { white-space: pre-wrap; }
     <name>action</name>
     <message>
         <source>Local &amp;Handbook...</source>
-        <translation>Local &amp;Handbook…</translation>
+        <translation>staðbundin &amp; vegleiðing</translation>
     </message>
     <message>
         <source>Open...</source>
-        <translation>Open…</translation>
+        <translation>Opna</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Save</translation>
+        <translation>Goym</translation>
     </message>
     <message>
         <source>Save As...</source>
-        <translation>Save As…</translation>
+        <translation>Goym sum</translation>
     </message>
     <message>
         <source>Save a Copy...</source>
-        <translation>Save a Copy…</translation>
+        <translation>Goym eitt avrit</translation>
     </message>
     <message>
         <source>Reload</source>
-        <translation>Reload</translation>
+        <translation>endurløða</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation>Close</translation>
+        <translation>stong</translation>
     </message>
     <message>
         <source>file new</source>
-        <translation>file new</translation>
+        <translation>nýggj fíla</translation>
     </message>
     <message>
         <source>New...</source>
-        <translation>New…</translation>
+        <translation>Nýggj</translation>
     </message>
     <message>
         <source>Create new score</source>
-        <translation>Create new score</translation>
+        <translation>Nýggj útseting</translation>
     </message>
     <message>
         <source>Print...</source>
-        <translation>Print…</translation>
+        <translation>Printa</translation>
     </message>
     <message>
         <source>Undo</source>
-        <translation>Undo</translation>
+        <translation>angra</translation>
     </message>
     <message>
         <source>Redo</source>
-        <translation>Redo</translation>
+        <translation>umaftur</translation>
     </message>
     <message>
         <source>Cut</source>
-        <translation>Cut</translation>
+        <translation>kuta</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation>Copy</translation>
+        <translation>avrita</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation>Paste</translation>
+        <translation>set inn</translation>
     </message>
     <message>
         <source>Instruments...</source>
-        <translation>Instruments…</translation>
+        <translation>Ljóðføri...</translation>
     </message>
     <message>
         <source>Symbols...</source>
-        <translation>Symbols…</translation>
+        <translation>Tekin</translation>
     </message>
     <message>
         <source>Dynamics...</source>
-        <translation>Dynamics…</translation>
+        <translation>Dynamikkur</translation>
     </message>
     <message>
         <source>Note Input</source>
-        <translation>Note Input</translation>
+        <translation>Nóta innsetan</translation>
     </message>
     <message>
         <source>Pitch Spell</source>
