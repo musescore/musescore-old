@@ -25,6 +25,21 @@
 #include "staff.h"
 
 //---------------------------------------------------------
+// initChannelCombo
+//---------------------------------------------------------
+
+static void initChannelCombo(QComboBox* cb, StaffText* st)
+      {
+      Part* part = st->staff()->part();
+      foreach(const Channel& a, part->instr()->channel()) {
+            if (a.name.isEmpty())
+                  cb->addItem("normal");
+            else
+                  cb->addItem(a.descr);
+            }
+      }
+
+//---------------------------------------------------------
 //   StaffTextProperties
 //---------------------------------------------------------
 
@@ -63,8 +78,8 @@ StaffTextProperties::StaffTextProperties(StaffText* st, QWidget* parent)
       // setup "switch channel"
       //---------------------------------------------------
 
-//TODO-LIB      for (int i = 0; i < 4; ++i)
-//            initChannelCombo(channelCombo[i], st);
+      for (int i = 0; i < 4; ++i)
+            initChannelCombo(channelCombo[i], st);
 
       Part* part = st->staff()->part();
       int n = part->instr()->channel().size();

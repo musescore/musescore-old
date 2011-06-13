@@ -350,7 +350,6 @@ class Score : public QObject {
       int processPendingNotes(QList<MNote*>* notes, int, int);
       void cmdResetBeamMode();
       void connectSlurs();
-      void tupletDialog();
 
       void cmdInsertClef(ClefType);
       void cmdExchangeVoice(int, int);

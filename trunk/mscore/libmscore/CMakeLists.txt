@@ -1,21 +1,14 @@
 #=============================================================================
-#  MusE
-#  Linux Music Editor
+#  MuseScore
+#  Music Composition & Notation
 #  $Id:$
 #
-#  Copyright (C) 2002-2006 by Werner Schweer and others
+#  Copyright (C) 2011 Werner Schweer
 #
 #  This program is free software; you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License version 2.
-#
-#  This program is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  You should have received a copy of the GNU General Public License
-#  along with this program; if not, write to the Free Software
-#  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+#  it under the terms of the GNU General Public License version 2
+#  as published by the Free Software Foundation and appearing in
+#  the file LICENSE.GPL
 #=============================================================================
 
 include (${PROJECT_SOURCE_DIR}/cmake/gch.cmake)
@@ -23,11 +16,7 @@ include (${PROJECT_SOURCE_DIR}/cmake/gch.cmake)
 include_directories(
       ${CMAKE_CURRENT_BINARY_DIR}
       ${PROJECT_SOURCE_DIR}
-      ${PROJECT_SOURCE_DIR}/libmscore
       ${PROJECT_SOURCE_DIR}/scriptdebug
-      ${PROJECT_SOURCE_DIR}/zarchive
-      ${PROJECT_SOURCE_DIR}/fluid
-      ${QTSINGLEAPPLICATION_INCLUDE_DIRS}
       )
 
 add_library (
