@@ -2299,6 +2299,7 @@ void Measure::read(QDomElement e, int idx)
                               t->setTextStyle(TEXT_STYLE_MEASURE_NUMBER);
                               t->setTick(-1);   // layout to start of measure
                               t->setTrack(-1);
+                              t->setSelectable(false);
                               }
                         add(t);
                         }
