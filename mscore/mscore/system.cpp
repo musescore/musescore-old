@@ -61,8 +61,8 @@ SysStaff::SysStaff()
 
 SysStaff::~SysStaff()
       {
-      foreach(Bracket* b, brackets)
-            delete b;
+      /*foreach(Bracket* b, brackets)
+            delete b;*/
       brackets.clear();
       //delete instrumentName;
       instrumentName = 0;
@@ -238,6 +238,8 @@ void System::layout(double xo1)
       if ((nstaves > 1 && score()->styleB(ST_startBarlineMultiple)) || (nstaves <= 1 && score()->styleB(ST_startBarlineSingle))) {
             if(barLine == 0){
               barLine = new Line(score(), true);
+              barLine->setSelectable(false);
+              barLine->setGenerated(true);
               barLine->setLineWidth(score()->styleS(ST_barWidth));
               barLine->setParent(this);
               }

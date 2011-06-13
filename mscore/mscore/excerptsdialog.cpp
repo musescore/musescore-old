@@ -258,13 +258,15 @@ void ExcerptsDialog::createExcerptClicked(QListWidgetItem* cur)
       {
       excerptChanged(cur, cur);
       Excerpt* excerpt = ((ExcerptItem*)cur)->excerpt();
-      Score* nscore = score->createExcerpt(excerpt);
-      nscore->rebuildMidiMapping();
-      nscore->updateChannel();
-      nscore->fixPpitch();
-      nscore->layout();
-
-      mscore->appendScore(nscore);
+      if(excerpt->parts()->size() > 0) { //prevent creating empty score
+            Score* nscore = score->createExcerpt(excerpt);
+            nscore->rebuildMidiMapping();
+            nscore->updateChannel();
+            nscore->fixPpitch();
+            nscore->layout();
+      
+            mscore->appendScore(nscore);
+            }
       }
 
 
