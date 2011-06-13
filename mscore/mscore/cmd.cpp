@@ -2296,7 +2296,7 @@ void Score::cmd(const QAction* a)
                   loadStyle();
                   }
             else if (cmd == "tuplet-dialog")
-                  tupletDialog();
+                  mscore->tupletDialog();
             else if (cmd == "voice-x12")
                   cmdExchangeVoice(0, 1);
             else if (cmd == "voice-x13")

@@ -217,6 +217,8 @@ class ScoreView : public QWidget {
       MeasureBase* appendMeasure(ElementType);
       void cmdInsertMeasure(ElementType);
       MeasureBase* insertMeasure(ElementType, int tick);
+      void createElementPropertyMenu(Element* e, QMenu*);
+      void elementPropertyAction(const QString&, Element* e);
 
    private slots:
       void textUndoLevelAdded();

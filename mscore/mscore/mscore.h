@@ -539,6 +539,8 @@ class MuseScore : public QMainWindow {
 
       void updateInputState(Score*);
       void setEditPos(const QPointF&);
+
+      void tupletDialog();
       };
 
 extern MuseScore* mscore;

@@ -860,7 +860,7 @@ MuseScore::MuseScore()
       a = getAction("synth-control");
       a->setCheckable(true);
       menuDisplay->addAction(a);
-      
+
       a = getAction("toogle-piano");
       a->setCheckable(true);
       menuDisplay->addAction(a);
@@ -915,11 +915,11 @@ MuseScore::MuseScore()
 
       menuHelp->addAction(getAction("local-help"));
       menuHelp->addAction(tr("Online Handbook"), this, SLOT(helpBrowser1()));
-            
+
       a = getAction("online-resources");
       a->setCheckable(true);
       menuHelp->addAction(a);
-      
+
       menuHelp->addSeparator();
       menuHelp->addAction(tr("&About"),   this, SLOT(about()));
       menuHelp->addAction(tr("About&Qt"), this, SLOT(aboutQt()));
@@ -3694,7 +3694,7 @@ void MuseScore::oscVolume(int val)
       if (seq)
             seq->setGain(v);
       }
-      
+
 //---------------------------------------------------------
 //   oscVolChannel
 //---------------------------------------------------------
@@ -3704,7 +3704,7 @@ void MuseScore::oscVolChannel(double val)
       if(!cs)
             return;
       PathObject* po = (PathObject*) sender();
-       
+
       int i = po->path().mid(4).toInt() - 1;
       QList<MidiMapping>* mms = cs->midiMapping();
       if( i >= 0 && i < mms->size()) {
@@ -3727,7 +3727,7 @@ void MuseScore::oscPanChannel(double val)
       if(!cs)
             return;
       PathObject* po = (PathObject*) sender();
-       
+
       int i = po->path().mid(4).toInt() - 1;
       QList<MidiMapping>* mms = cs->midiMapping();
       if( i >= 0 && i < mms->size()) {
@@ -3750,7 +3750,7 @@ void MuseScore::oscMuteChannel(double val)
       if(!cs)
             return;
       PathObject* po = (PathObject*) sender();
-       
+
       int i = po->path().mid(5).toInt() - 1;
       QList<MidiMapping>* mms = cs->midiMapping();
       if( i >= 0 && i < mms->size()) {

@@ -32,6 +32,7 @@
 #include "measure.h"
 #include "undo.h"
 #include "stem.h"
+#include "mscore.h"
 
 //---------------------------------------------------------
 //   TupletDialog
@@ -63,4 +64,44 @@ void TupletDialog::setupTuplet(Tuplet* tuplet)
       else if (noBracket->isChecked())
             tuplet->setBracketType(Tuplet::SHOW_NO_BRACKET);
       }
+
+//---------------------------------------------------------
+//   tupletDialog
+//    create tuplet dialog
+//---------------------------------------------------------
+
+void MuseScore::tupletDialog()
+      {
+      if (!cs)
+            return;
+      ChordRest* cr = cs->getSelectedChordRest();
+      if (cr == 0)
+            return;
+      TupletDialog td;
+      if (!td.exec())
+            return;
+
+      Tuplet* tuplet = new Tuplet(cs);
+      tuplet->setTrack(cr->track());
+      tuplet->setTick(cr->tick());
+      td.setupTuplet(tuplet);
+      //      tuplet->setRatio(tuplet->ratio().reduced());
+      Fraction f1(cr->duration());
+      tuplet->setDuration(f1);
+      Fraction f = f1 * tuplet->ratio();
+      f.reduce();
+
+      printf("len %s  ratio %s  base %s\n",
+         qPrintable(f1.print()),
+         qPrintable(tuplet->ratio().print()),
+         qPrintable(f.print()));
+
+      tuplet->setBaseLen(Fraction(1, f.denominator()));
+
+      Measure* measure = cr->measure();
+      tuplet->setParent(measure);
+
+      cs->cmdCreateTuplet(cr, tuplet);
+      }
+
 

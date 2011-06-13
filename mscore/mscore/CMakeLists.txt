@@ -161,6 +161,7 @@ add_executable ( ${ExecutableName}
       fretproperties.cpp sectionbreakprop.cpp hairpinprop.cpp
       bendproperties.cpp tremolobarprop.cpp file.cpp keyb.cpp
       layer.cpp jumpproperties.cpp selectdialog.cpp undo.cpp
+      propertymenu.cpp
       ${OMR_FILES}
       ${AUDIO}
       )
