@@ -378,6 +378,11 @@
                </item>
                <item>
                 <property name="text">
+                 <string>sol</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
                  <string>la</string>
                 </property>
                </item>

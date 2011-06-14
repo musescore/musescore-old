@@ -205,6 +205,10 @@ enum {
       d1tiHeadSym,
       u2tiHeadSym,
       d2tiHeadSym,
+      
+      s0solHeadSym,
+      s1solHeadSym,
+      s2solHeadSym,
 
       ufermataSym,
       dfermataSym,

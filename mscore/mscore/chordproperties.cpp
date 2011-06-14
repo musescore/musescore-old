@@ -44,7 +44,7 @@ ChordProperties::ChordProperties(const Note* note, QWidget* parent)
       //
       static const int heads[] = {
             HEAD_NORMAL, HEAD_CROSS, HEAD_DIAMOND, HEAD_TRIANGLE,
-            HEAD_SLASH, HEAD_XCIRCLE, HEAD_DO, HEAD_RE, HEAD_MI, HEAD_FA, HEAD_LA, HEAD_TI
+            HEAD_SLASH, HEAD_XCIRCLE, HEAD_DO, HEAD_RE, HEAD_MI, HEAD_FA, HEAD_SOL, HEAD_LA, HEAD_TI
             };
       int headGroup = note->headGroup();
       int headGroupIndex = 0;

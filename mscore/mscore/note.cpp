@@ -71,6 +71,7 @@ const int noteHeads[2][HEAD_GROUPS][4] = {
       { d0faHeadSym,          d1faHeadSym,         d2faHeadSym,       -1                   },
       { s0laHeadSym,          s1laHeadSym,         s2laHeadSym,       -1                   },
       { s0tiHeadSym,          d1tiHeadSym,         d2tiHeadSym,       -1                   },
+      { s0solHeadSym,         s1solHeadSym,        s2solHeadSym,      -1                   },
       },
       {     // up stem
       { wholeheadSym,         halfheadSym,         quartheadSym,      brevisheadSym        },
@@ -85,6 +86,7 @@ const int noteHeads[2][HEAD_GROUPS][4] = {
       { u0faHeadSym,          u1faHeadSym,         u2faHeadSym,       -1                   },
       { s0laHeadSym,          s1laHeadSym,         s2laHeadSym,       -1                   },
       { s0tiHeadSym,          u1tiHeadSym,         u2tiHeadSym,       -1                   },
+      { s0solHeadSym,         s1solHeadSym,        s2solHeadSym,      -1                   },
       }
       };
 

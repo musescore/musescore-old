@@ -136,6 +136,11 @@ SymbolNames lilypondNames[] = {
       { d1tiHeadSym,          QT_TRANSLATE_NOOP("symbol", "d1ti head"),            "noteheads.d1ti" },
       { u2tiHeadSym,          QT_TRANSLATE_NOOP("symbol", "u2ti head"),            "noteheads.u2ti" },
       { d2tiHeadSym,          QT_TRANSLATE_NOOP("symbol", "d2ti head"),            "noteheads.d2ti" },
+      
+      { s0solHeadSym,         QT_TRANSLATE_NOOP("symbol", "s0sol head"),           "noteheads.s0sol" },
+      { s1solHeadSym,         QT_TRANSLATE_NOOP("symbol", "s1sol head"),           "noteheads.s1sol" },
+      { s2solHeadSym,         QT_TRANSLATE_NOOP("symbol", "s2sol head"),           "noteheads.s2sol" },
+      
       { ufermataSym,          QT_TRANSLATE_NOOP("symbol", "ufermata"),             "scripts.ufermata" },
       { dfermataSym,          QT_TRANSLATE_NOOP("symbol", "dfermata"),             "scripts.dfermata" },
       { snappizzicatoSym,     QT_TRANSLATE_NOOP("symbol", "snappizzicato"),        "scripts.snappizzicato" },
