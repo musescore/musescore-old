@@ -53,7 +53,7 @@ static const int function_lengths_score[] = {
       1, 6,
       1, 1, 1,
       0, 0, 0, 1, 0, 0, 2, 0, 0,
-      0, 0, 0, 0, 1
+      0, 1, 0, 0, 1
       };
 
 static const QScriptValue::PropertyFlags flags_score[] = {
@@ -80,7 +80,7 @@ static const QScriptValue::PropertyFlags flags_score[] = {
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
 
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
-      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
@@ -394,6 +394,20 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                                 }
                             }
                         return qScriptValueFromValue(context->engine(), result);
+                        }
+                  else if(argc == 1) {
+                        //printf(":::setKeysig\n");
+                        int newKey = context->argument(0).toInt32();
+                        KeySigEvent ke;
+                        ke.setAccidentalType(newKey);
+    
+                        for (int idx = 0; idx < score->nstaves(); idx++) {
+                            int curKey = score->staff(idx)->key(0).accidentalType();
+                            if (curKey != newKey) {
+                                score->staff(idx)->changeKeySig(0, ke);
+                            }
+                        }
+                        return context->engine()->undefinedValue();
                         }
                   break;
             case 20:   //duration

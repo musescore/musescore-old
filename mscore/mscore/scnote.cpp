@@ -32,10 +32,11 @@ Q_DECLARE_METATYPE(Note*);
 Q_DECLARE_METATYPE(Score*);
 
 static const char* const function_names_note[] = {
-      "name", "pitch", "tuning", "color", "visible", "tpc", "tied", "userAccidental", "boundingRect", "pos", "noteHead"
+      "name", "pitch", "tuning", "color", "visible", "tpc", "tied", "userAccidental", 
+      "boundingRect", "pos", "noteHead", "velocity"
       };
 static const int function_lengths_note[] = {
-      0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1
+      0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1
       };
 
 static const QScriptValue::PropertyFlags flags_note[] = {
@@ -47,13 +48,14 @@ static const QScriptValue::PropertyFlags flags_note[] = {
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
-	  QScriptValue::SkipInEnumeration,
-	  QScriptValue::SkipInEnumeration,
-	  QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter
+  	  QScriptValue::SkipInEnumeration,
+  	  QScriptValue::SkipInEnumeration,
+  	  QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
+  	  QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter
       };
 
 ScriptInterface noteInterface = {
-      11,
+      sizeof(function_names_note) / sizeof(*function_names_note),
       function_names_note,
       function_lengths_note,
       flags_note
@@ -181,6 +183,32 @@ static QScriptValue prototype_Note_call(QScriptContext* context, QScriptEngine*)
                             score->undo()->push(new ChangeNoteHead(note, v, note->headType())); 
                       else 
                             note->setHeadGroup(v);
+                      }
+                return context->engine()->undefinedValue();
+                }
+				  break;
+      case 11:     // "velocity"
+				  if (context->argumentCount() == 0)
+					  return qScriptValueFromValue(context->engine(), note->velocity());
+					else if (context->argumentCount() == 1) {
+      				  int v = context->argument(0).toInt32();
+      				  Score* score = note->score();
+                if (!score)
+                     return context->engine()->undefinedValue();  
+                if(v < 0) {
+                      if (note->veloType() != AUTO_VAL) {
+                            score->undo()->push(new ChangeNoteProperties(note,
+                                AUTO_VAL, note->velocity(), note->veloOffset(),
+                                note->onTimeType(), note->onTimeOffset(), note->onTimeUserOffset(),
+                                note->offTimeType(), note->offTimeOffset(), note->offTimeUserOffset()));
+                                score->fixPpitch();
+                            }  
+                     }
+                else if (v < 127) {
+                      score->undo()->push(new ChangeNoteProperties(note,
+                           USER_VAL, v, note->veloOffset(),
+                           note->onTimeType(), note->onTimeOffset(), note->onTimeUserOffset(),
+                           note->offTimeType(), note->offTimeOffset(), note->offTimeUserOffset()));
                       }
                 return context->engine()->undefinedValue();
                 }
