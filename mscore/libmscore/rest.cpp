@@ -143,16 +143,16 @@ void Rest::setUserOffset(double x, double y)
 //   drag
 //---------------------------------------------------------
 
-QRectF Rest::drag(const QPointF& s)
+QRectF Rest::drag(const EditData& data)
       {
       QRectF r(abbox());
 
       // Limit horizontal drag range
       const qreal xDragRange = 250.0;
-      qreal xoff = (fabs(s.x()) > xDragRange) ? xDragRange : fabs(s.x());
-      if (s.x() < 0)
+      qreal xoff = (fabs(data.pos.x()) > xDragRange) ? xDragRange : fabs(data.pos.x());
+      if (data.pos.x() < 0)
             xoff *= -1;
-      setUserOffset(xoff, s.y());
+      setUserOffset(xoff, data.pos.y());
       layout();
       return abbox() | r;
       }

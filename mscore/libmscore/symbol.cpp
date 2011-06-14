@@ -128,28 +128,27 @@ void BSymbol::layout()
 //   drag
 //---------------------------------------------------------
 
-QRectF BSymbol::drag(const QPointF& pos)
+QRectF BSymbol::drag(const EditData& data)
       {
       QRectF r(abbox());
       foreach(const Element* e, _leafs)
             r |= e->abbox();
 
-      qreal x = pos.x();
-      qreal y = pos.y();
+      qreal x = data.pos.x();
+      qreal y = data.pos.y();
 
-#if 0 // TODO-LIB
       qreal _spatium = spatium();
-      if (mscore->hRaster()) {
+      if (data.hRaster) {
             qreal hRaster = _spatium / preferences.hRaster;
             int n = lrint(x / hRaster);
             x = hRaster * n;
             }
-      if (mscore->vRaster()) {
+      if (data.vRaster) {
             qreal vRaster = _spatium / preferences.vRaster;
             int n = lrint(y / vRaster);
             y = vRaster * n;
             }
-#endif
+
       setUserOff(QPointF(x, y));
 
       r |= abbox();

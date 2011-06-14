@@ -27,6 +27,7 @@
 #include "keycanvas.h"
 #include "clef.h"
 #include "painterqt.h"
+#include "libmscore/init.h"
 
 extern bool useFactorySettings;
 extern Palette* newAccidentalsPalette();
@@ -110,7 +111,7 @@ void KeyCanvas::paintEvent(QPaintEvent*)
       QRectF r = imatrix.mapRect(QRectF(x, y, w, wh));
 
       QPen pen(palette().brush(QPalette::Normal, QPalette::Text).color());
-      pen.setWidthF(mscore->defaultStyle()->valueS(ST_staffLineWidth).val() * spatium);
+      pen.setWidthF(defaultStyle()->valueS(ST_staffLineWidth).val() * spatium);
       p.setPen(pen);
 
       for (int i = 0; i < 5; ++i) {

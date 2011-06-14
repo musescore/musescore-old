@@ -3068,8 +3068,12 @@ void ScoreView::drag(const QPointF& delta)
             pt.setX(0.0);
       else if (qApp->keyboardModifiers() == Qt::ControlModifier)
             pt.setY(0.0);
+      EditData data;
+      data.hRaster = mscore->hRaster();
+      data.vRaster = mscore->vRaster();
+      data.pos     = pt;
       foreach(Element* e, _score->selection().elements())
-            _score->addRefresh(e->drag(pt));
+            _score->addRefresh(e->drag(data));
       _score->end();
       }
 

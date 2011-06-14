@@ -69,6 +69,7 @@
 #include "mediadialog.h"
 #include "profile.h"
 #include "webpage.h"
+#include "libmscore/init.h"
 
 #ifdef OSC
 #include "ofqf/qoscserver.h"
@@ -397,13 +398,13 @@ MuseScore::MuseScore()
 
       _midiRecordId         = -1;
       _fullscreen           = false;
-      _defaultStyle         = new Style();
-      setDefaultStyle(_defaultStyle);
-      _baseStyle            = new Style(*_defaultStyle);
+
+      initMuseScore();
+
       if (!preferences.styleName.isEmpty()) {
             QFile f(preferences.styleName);
             if (f.open(QIODevice::ReadOnly)) {
-                  _defaultStyle->load(&f);
+                  defaultStyle()->load(&f);
                   f.close();
                   }
             }
@@ -964,7 +965,6 @@ MuseScore::MuseScore()
 
 MuseScore::~MuseScore()
       {
-      delete _defaultStyle;
       }
 
 //---------------------------------------------------------
@@ -1086,7 +1086,7 @@ void MuseScore::selectScore(QAction* action)
       {
       QString a = action->data().toString();
       if (!a.isEmpty()) {
-            Score* score = new Score(_defaultStyle);
+            Score* score = new Score(defaultStyle());
             int rv = score->readScore(a);
             if (rv != 0)
                   readScoreError(rv, a);
@@ -1358,7 +1358,7 @@ void MuseScore::dropEvent(QDropEvent* event)
             int view = -1;
             foreach(const QUrl& u, event->mimeData()->urls()) {
                   if (u.scheme() == "file") {
-                        Score* score = new Score(_defaultStyle);
+                        Score* score = new Score(defaultStyle());
                         if (score->readScore(u.toLocalFile()) == 0)
                               view = appendScore(score);
                         else
@@ -1797,7 +1797,7 @@ static void loadScores(const QStringList& argv)
                               int c = settings.value("currentScore", 0).toInt();
                               for (int i = 0; i < n; ++i) {
                                     QString s = settings.value(QString("score-%1").arg(i),"").toString();
-                                    Score* score = new Score(mscore->defaultStyle());
+                                    Score* score = new Score(defaultStyle());
                                     scoreCreated = true;
                                     if (score->readScore(s) == 0) {
                                           int view = mscore->appendScore(score);
@@ -1813,14 +1813,14 @@ static void loadScores(const QStringList& argv)
                               mscore->newFile();
                               break;
                         case SCORE_SESSION:
-                              Score* score = new Score(mscore->defaultStyle());
+                              Score* score = new Score(defaultStyle());
                               scoreCreated = true;
                               if (score->readScore(preferences.startScore) == 0) {
                                     currentScoreView = mscore->appendScore(score);
                                     }
                               else {
                                     delete score;
-                                    Score* score = new Score(mscore->defaultStyle());
+                                    Score* score = new Score(defaultStyle());
                                     scoreCreated = true;
                                     if (score->readScore(":/data/Promenade_Example.mscx") == 0) {
                                           preferences.startScore = ":/data/Promenade_Example.mscx";
@@ -1835,7 +1835,7 @@ static void loadScores(const QStringList& argv)
             foreach(const QString& name, argv) {
                   if (name.isEmpty())
                         continue;
-                  Score* score = new Score(mscore->defaultStyle());
+                  Score* score = new Score(defaultStyle());
                   scoreCreated = true;
                   int rv = score->readScore(name);
                   if (rv != 0) {
@@ -2245,7 +2245,7 @@ int main(int argc, char* av[])
       initDrumset();
       initProfile();
       mscore = new MuseScore();
-      gscore = new Score(mscore->defaultStyle());
+      gscore = new Score(defaultStyle());
 
       //read languages list
       mscore->readLanguages(mscoreGlobalShare + "locale/languages.xml");
@@ -2462,7 +2462,7 @@ void MuseScore::cmd(QAction* a)
                         cv->postCmd("escape");
                         qApp->processEvents();
                         }
-                  Score* score = new Score(mscore->defaultStyle());
+                  Score* score = new Score(defaultStyle());
                   score->readScore(cs->filePath());
                   // hack: so we don't get another checkDirty in appendScore
                   cs->setDirty(false);
@@ -3152,7 +3152,7 @@ void MuseScore::handleMessage(const QString& message)
       if (message.isEmpty())
             return;
       ((QtSingleApplication*)(qApp))->activateWindow();
-      Score* score = new Score(mscore->defaultStyle());
+      Score* score = new Score(defaultStyle());
       if (score->readScore(message) == 0) {
             setCurrentScoreView(appendScore(score));
             lastOpenPath = score->fileInfo()->path();
@@ -3402,7 +3402,7 @@ bool MuseScore::restoreSession(bool always)
                                     else if (tag == "dirty")
                                           dirty = val.toInt();
                                     else if (tag == "path") {
-                                          Score* score = new Score(_defaultStyle);
+                                          Score* score = new Score(defaultStyle());
                                           if (score->readScore(val) != 0) {
                                                 delete score;
                                                 f.close();
@@ -4124,7 +4124,7 @@ void MuseScore::networkFinished(QNetworkReply* reply)
       f.write(data);
       f.close();
 
-      Score* score = new Score(_defaultStyle);
+      Score* score = new Score(defaultStyle());
       if (score->readScore(tmpName) != 0) {
             printf("readScore failed\n");
             delete score;
