@@ -144,59 +144,6 @@ Element* TimeSig::drop(const DropData& data)
       return 0;
       }
 
-#if 0
-//---------------------------------------------------------
-//   genPropertyMenu
-//---------------------------------------------------------
-
-bool TimeSig::genPropertyMenu(QMenu* popup) const
-      {
-      Element::genPropertyMenu(popup);
-      int _track = track();
-      // if the time sig. is not generated (= not courtesy) and is in track 0
-      // add the specific menu item
-      QAction* a;
-      if (!generated() && !_track) {
-            a = popup->addAction(_showCourtesySig
-               ? QT_TRANSLATE_NOOP("TimeSig", "Hide Courtesy Time Signature")
-               : QT_TRANSLATE_NOOP("TimeSig", "Show Courtesy Time Signature") );
-            a->setData("courtesy");
-            }
-      a = popup->addSeparator();
-      a = popup->addAction(tr("Time Signature Properties..."));
-      a->setData("props");
-      return true;
-      }
-
-//---------------------------------------------------------
-//   propertyAction
-//---------------------------------------------------------
-
-void TimeSig::propertyAction(ScoreView* viewer, const QString& s)
-      {
-      if (s == "courtesy")
-            score()->undo()->push(new ChangeTimesig(this,
-               !_showCourtesySig, sig(), stretch(), subtype(), sz, sn));
-      else if (s == "props") {
-            TimeSig r(*this);
-            TimeSigProperties vp(&r);
-            int rv = vp.exec();
-            if (rv) {
-                  bool stretchChanged = r.stretch() != _stretch;
-                  if (r.zText() != sz || r.nText() != sn || r.sig() != _nominal
-                     || stretchChanged || r.subtype() != subtype()) {
-                        score()->undo()->push(new ChangeTimesig(this,
-                           r.showCourtesySig(), r.sig(), r.stretch(), r.subtype(), r.zText(), r.nText()));
-                        if (stretchChanged)
-                              score()->timesigStretchChanged(this, measure(), staffIdx());
-                        }
-                  }
-            }
-      else
-            Element::propertyAction(viewer, s);
-      }
-#endif
-
 //---------------------------------------------------------
 //   setText
 //---------------------------------------------------------

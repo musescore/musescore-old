@@ -142,46 +142,6 @@ Harmony::~Harmony()
             delete ts;
       }
 
-#if 0
-//---------------------------------------------------------
-//   genPropertyMenu
-//---------------------------------------------------------
-
-bool Harmony::genPropertyMenu(QMenu* popup) const
-      {
-      Element::genPropertyMenu(popup);
-      QAction* a = popup->addSeparator();
-      a = popup->addAction(tr("Harmony Properties..."));
-      a->setData("hprops");
-      a = popup->addAction(tr("Text Properties..."));
-      a->setData("tprops");
-      return true;
-      }
-
-//---------------------------------------------------------
-//   propertyAction
-//---------------------------------------------------------
-
-void Harmony::propertyAction(ScoreView* viewer, const QString& s)
-      {
-      if (s == "hprops") {
-            ChordEdit ce(score());
-            ce.setHarmony(this);
-            int rv = ce.exec();
-            if (rv) {
-                  Harmony* h = ce.harmony()->clone();
-                  h->render();
-                  score()->undoChangeElement(this, h);
-                  }
-            }
-      else if (s == "tprops") {
-            Text::propertyAction(viewer, "props");
-            }
-      else
-            Element::propertyAction(viewer, s);
-      }
-#endif
-
 //---------------------------------------------------------
 //   write
 //---------------------------------------------------------

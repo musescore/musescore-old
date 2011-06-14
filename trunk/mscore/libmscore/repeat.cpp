@@ -238,34 +238,6 @@ void Marker::write(Xml& xml) const
       xml.etag();
       }
 
-#if 0
-//---------------------------------------------------------
-//   genPropertyMenu
-//---------------------------------------------------------
-
-bool Marker::genPropertyMenu(QMenu* popup) const
-      {
-      Element::genPropertyMenu(popup);
-      QAction* a = popup->addAction(tr("Marker Properties..."));
-      a->setData("props");
-      return true;
-      }
-
-//---------------------------------------------------------
-//   propertyAction
-//---------------------------------------------------------
-
-void Marker::propertyAction(ScoreView* viewer, const QString& s)
-      {
-      if (s == "props") {
-            MarkerProperties rp(this);
-            rp.exec();
-            }
-      else
-            Element::propertyAction(viewer, s);
-      }
-#endif
-
 //---------------------------------------------------------
 //   dragAnchor
 //---------------------------------------------------------
@@ -395,32 +367,4 @@ void Jump::write(Xml& xml) const
       xml.tag("continueAt", _continueAt);
       xml.etag();
       }
-
-#if 0
-//---------------------------------------------------------
-//   genPropertyMenu
-//---------------------------------------------------------
-
-bool Jump::genPropertyMenu(QMenu* popup) const
-      {
-      Element::genPropertyMenu(popup);
-      QAction* a = popup->addAction(tr("Jump Properties..."));
-      a->setData("props");
-      return true;
-      }
-
-//---------------------------------------------------------
-//   propertyAction
-//---------------------------------------------------------
-
-void Jump::propertyAction(ScoreView* viewer, const QString& s)
-      {
-      if (s == "props") {
-            JumpProperties rp(this);
-            rp.exec();
-            }
-      else
-            Element::propertyAction(viewer, s);
-      }
-#endif
 

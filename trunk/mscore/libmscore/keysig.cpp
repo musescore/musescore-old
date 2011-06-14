@@ -264,40 +264,6 @@ Element* KeySig::drop(const DropData& data)
       }
 
 //---------------------------------------------------------
-//   genPropertyMenu
-//---------------------------------------------------------
-
-bool KeySig::genPropertyMenu(QMenu* popup) const
-      {
-	Element::genPropertyMenu(popup);
-	if (!generated()) {
-            QAction* a = popup->addAction(_showCourtesySig
-               ? QT_TRANSLATE_NOOP("KeySig", "Hide Courtesy Key Signature")
-               : QT_TRANSLATE_NOOP("KeySig", "Show Courtesy Key Signature") );
-            a->setData("courtesy");
-		a = popup->addAction(_showNaturals
-               ? QT_TRANSLATE_NOOP("KeySig", "Hide Naturals")
-               : QT_TRANSLATE_NOOP("KeySig", "Show Naturals") );
-		a->setData("naturals");
-	      }
-	return true;
-      }
-
-//---------------------------------------------------------
-//   propertyAction
-//---------------------------------------------------------
-
-void KeySig::propertyAction(ScoreView* viewer, const QString& s)
-      {
-	if (s == "courtesy")
-            score()->undo()->push(new ChangeKeySig(this, keySigEvent(), !_showCourtesySig, _showNaturals));
-	else if (s == "naturals")
-            score()->undo()->push(new ChangeKeySig(this, keySigEvent(), _showCourtesySig, !_showNaturals));
-	else
-		Element::propertyAction(viewer, s);
-      }
-
-//---------------------------------------------------------
 //   setSig
 //---------------------------------------------------------
 

@@ -324,33 +324,6 @@ QLineF Symbol::dragAnchor() const
             }
       }
 
-#if 0
-//---------------------------------------------------------
-//   genPropertyMenu
-//---------------------------------------------------------
-
-bool Symbol::genPropertyMenu(QMenu* popup) const
-      {
-      Element::genPropertyMenu(popup);
-      QAction* a = popup->addAction(tr("symbol editor"));
-      a->setData("edit");
-      return true;
-      }
-
-//---------------------------------------------------------
-//   propertyAction
-//---------------------------------------------------------
-
-void Symbol::propertyAction(ScoreView* viewer, const QString& s)
-      {
-      if (s == "edit") {
-printf("not implemented: symbol editor\n");
-            }
-      else
-            Element::propertyAction(viewer, s);
-      }
-#endif
-
 //---------------------------------------------------------
 //   canvasPos
 //---------------------------------------------------------

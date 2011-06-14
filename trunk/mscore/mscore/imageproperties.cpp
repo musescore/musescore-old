@@ -19,12 +19,7 @@
 //=============================================================================
 
 #include "imageproperties.h"
-#include "xml.h"
-#include "mscore.h"
-#include "preferences.h"
-#include "score.h"
-#include "undo.h"
-#include "libmscore/painter.h"
+#include "libmscore/image.h"
 
 //---------------------------------------------------------
 //   ImageProperties

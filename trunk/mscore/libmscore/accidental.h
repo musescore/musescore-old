@@ -88,8 +88,6 @@ class Accidental : public Element {
 
       virtual void read(QDomElement);
       virtual void write(Xml& xml) const;
-      virtual bool genPropertyMenu(QMenu*) const;
-      virtual void propertyAction(ScoreView*, const QString&);
 
       static int subtype2value(AccidentalType);             // return effective pitch offset
       static const char* subtype2name(AccidentalType);      // return effective pitch offset

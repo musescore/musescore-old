@@ -115,34 +115,6 @@ void StaffText::read(QDomElement e)
       cursorPos = 0;
       }
 
-#if 0
-//---------------------------------------------------------
-//   genPropertyMenu
-//---------------------------------------------------------
-
-bool StaffText::genPropertyMenu(QMenu* popup) const
-      {
-      Text::genPropertyMenu(popup);
-      QAction* a = popup->addAction(tr("Staff Text Properties..."));
-      a->setData("sprops");
-      return true;
-      }
-
-//---------------------------------------------------------
-//   propertyAction
-//---------------------------------------------------------
-
-void StaffText::propertyAction(ScoreView* viewer, const QString& s)
-      {
-      if (s == "sprops") {
-            StaffTextProperties rp(this);
-            rp.exec();
-            }
-      else
-            Text::propertyAction(viewer, s);
-      }
-#endif
-
 //---------------------------------------------------------
 //   clearAeolusStops
 //---------------------------------------------------------

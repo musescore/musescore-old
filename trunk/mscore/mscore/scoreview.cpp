@@ -71,6 +71,8 @@
 #include "clef.h"
 #include "scoretab.h"
 #include "painterqt.h"
+#include "measureproperties.h"
+
 #include "libmscore/articulation.h"
 
 static const QEvent::Type CloneDrag = QEvent::Type(QEvent::User + 1);
@@ -988,11 +990,10 @@ void ScoreView::measurePopup(const QPoint& gpos, Measure* obj)
       popup->addAction(getAction("insert-measure"));
       popup->addSeparator();
 
-      if (obj->genPropertyMenu(popup))
-            popup->addSeparator();
+      popup->addAction(tr("Measure Properties..."))->setData("props");
+      popup->addSeparator();
 
-      a = popup->addAction(tr("Object Inspector"));
-      a->setData("list");
+      popup->addAction(tr("Object Inspector"))->setData("list");
 
       a = popup->exec(gpos);
       if (a == 0)
@@ -1035,8 +1036,10 @@ void ScoreView::measurePopup(const QPoint& gpos, Measure* obj)
             if (splitStaff.exec())
                   _score->splitStaff(staffIdx, splitStaff.getSplitPoint());
             }
-      else
-            obj->propertyAction(this, cmd);
+      else if (cmd == "props") {
+            MeasureProperties im(obj);
+            im.exec();
+            }
       _score->setLayoutAll(true);
       _score->endCmd();
       }

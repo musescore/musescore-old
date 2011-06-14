@@ -110,8 +110,6 @@ class Clef : public Element {
 
       bool showCourtesyClef() const       { return _showCourtesyClef; };
       void setShowCourtesyClef(bool v)    { _showCourtesyClef = v;    };
-      virtual bool genPropertyMenu(QMenu*) const;
-      virtual void propertyAction(ScoreView*, const QString&);
 
       virtual const QString subtypeName() const;
       virtual void setSubtype(const QString& s);

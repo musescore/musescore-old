@@ -77,8 +77,8 @@ class TimeSig : public Element {
       bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
       Element* drop(const DropData&);
 
-      Segment* segment() const { return (Segment*)parent(); }
-      Measure* measure() const { return (Measure*)parent()->parent(); }
+      Segment* segment() const           { return (Segment*)parent(); }
+      Measure* measure() const           { return (Measure*)parent()->parent(); }
 
       bool showCourtesySig() const       { return _showCourtesySig; };
       void setShowCourtesySig(bool v)    { _showCourtesySig = v;    };

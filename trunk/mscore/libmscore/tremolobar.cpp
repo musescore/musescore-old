@@ -151,33 +151,3 @@ void TremoloBar::read(QDomElement e)
             }
       }
 
-#if 0
-//---------------------------------------------------------
-//   genPropertyMenu
-//---------------------------------------------------------
-
-bool TremoloBar::genPropertyMenu(QMenu* popup) const
-      {
-      QAction* a;
-      a = popup->addAction(tr("TremoloBar Properties..."));
-      a->setData("props");
-      return true;
-      }
-
-//---------------------------------------------------------
-//   propertyAction
-//---------------------------------------------------------
-
-void TremoloBar::propertyAction(ScoreView* viewer, const QString& s)
-      {
-      if (s == "props") {
-            TremoloBarProperties bp(this, 0);
-            if (bp.exec()) {
-                  score()->undo()->push(new ChangeTremoloBar(this, bp.points()));
-                  }
-            }
-      else
-            Element::propertyAction(viewer, s);
-      }
-#endif
-

@@ -80,45 +80,6 @@ void TempoText::read(QDomElement e)
             }
       }
 
-#if 0
-//---------------------------------------------------------
-//   genPropertyMenu
-//---------------------------------------------------------
-
-bool TempoText::genPropertyMenu(QMenu* popup) const
-      {
-      Element::genPropertyMenu(popup);
-      QAction* a = popup->addAction(tr("Tempo Properties..."));
-      a->setData("props");
-      a = popup->addAction(tr("Text Properties..."));
-      a->setData("text");
-      return true;
-      }
-
-//---------------------------------------------------------
-//   propertyAction
-//---------------------------------------------------------
-
-void TempoText::propertyAction(ScoreView* viewer, const QString& s)
-      {
-      if (s == "props") {
-            TempoProperties rp(this);
-            rp.exec();
-            }
-      else if (s == "text") {
-            TempoText* nText = static_cast<TempoText*>(clone());
-            TextProperties tp(nText, 0);
-            int rv = tp.exec();
-            if (rv)
-                  score()->undoChangeElement(this, nText);
-            else
-                  delete nText;
-            }
-      else
-            Element::propertyAction(viewer, s);
-      }
-#endif
-
 //---------------------------------------------------------
 //   TempoPattern
 //---------------------------------------------------------

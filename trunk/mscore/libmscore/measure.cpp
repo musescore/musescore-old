@@ -1728,31 +1728,6 @@ void Measure::cmdRemoveEmptySegment(Segment* s)
             _score->undoRemoveElement(s);
       }
 
-#if 0
-//---------------------------------------------------------
-//   genPropertyMenu
-//---------------------------------------------------------
-
-bool Measure::genPropertyMenu(QMenu* popup) const
-      {
-      QAction* a = popup->addAction(tr("Measure Properties..."));
-      a->setData("props");
-      return true;
-      }
-
-//---------------------------------------------------------
-//   propertyAction
-//---------------------------------------------------------
-
-void Measure::propertyAction(ScoreView*, const QString& s)
-      {
-      if (s == "props") {
-            MeasureProperties im(this);
-            im.exec();
-            }
-      }
-#endif
-
 //---------------------------------------------------------
 //   adjustToLen
 //    the measure len has changed, adjust elements to

@@ -475,43 +475,6 @@ void SlurSegment::dump() const
             ups[3].off.x(), ups[3].off.y());
       }
 
-#if 0
-//---------------------------------------------------------
-//   genPropertyMenu
-//---------------------------------------------------------
-
-bool SlurSegment::genPropertyMenu(QMenu* popup) const
-      {
-      Element::genPropertyMenu(popup);
-      QAction* a = popup->addAction(tr("Edit Mode"));
-      a->setData("edit");
-      a = popup->addAction(tr("Slur Properties..."));
-      a->setData("props");
-      return true;
-      }
-
-//---------------------------------------------------------
-//   propertyAction
-//---------------------------------------------------------
-
-void SlurSegment::propertyAction(ScoreView* viewer, const QString& s)
-      {
-      if (s == "props") {
-            SlurProperties sp(0);
-            sp.setLineType(slurTie()->lineType());
-            int rv = sp.exec();
-            if (rv) {
-                  int lt = sp.getLineType();
-                  if (lt != slurTie()->lineType()) {
-                        score()->undo()->push(new ChangeSlurProperties(slurTie(), lt));
-                        }
-                  }
-            }
-      else
-            Element::propertyAction(viewer, s);
-      }
-#endif
-
 //---------------------------------------------------------
 //   SlurTie
 //---------------------------------------------------------

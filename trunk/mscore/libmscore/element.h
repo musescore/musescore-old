@@ -325,12 +325,6 @@ class Element {
       virtual void setSubtype(const QString& s) { setSubtype(s.toInt()); }
 
 /**
- extend property menu by elemement specific items
- */
-      virtual bool genPropertyMenu(QMenu*) const;
-      virtual void propertyAction(ScoreView*, const QString&);
-
-/**
  delivers mouseEvent to element in edit mode
  returns true if mouse event is accepted by element
  */

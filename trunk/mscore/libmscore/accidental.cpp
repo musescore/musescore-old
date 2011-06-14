@@ -445,30 +445,3 @@ void AccidentalBracket::setSubtype(int i)
       addElement(s1, -s1->bbox().x(), 0.0);
       addElement(s2, s2->bbox().width() - s2->bbox().x(), 0.0);
       }
-
-//---------------------------------------------------------
-//   genPropertyMenu
-//---------------------------------------------------------
-
-bool Accidental::genPropertyMenu(QMenu* popup) const
-      {
-      Element::genPropertyMenu(popup);
-      QAction* a = popup->addAction(QT_TRANSLATE_NOOP("Accidental", "small"));
-      a->setCheckable(true);
-      a->setChecked(_small);
-      a->setData("small");
-      return true;
-      }
-
-//---------------------------------------------------------
-//   propertyAction
-//---------------------------------------------------------
-
-void Accidental::propertyAction(ScoreView* viewer, const QString& s)
-      {
-      if (s == "small")
-            score()->undo()->push(new ChangeAccidental(this, !_small));
-      else
-            Element::propertyAction(viewer, s);
-      }
-

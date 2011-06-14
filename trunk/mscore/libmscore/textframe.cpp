@@ -21,7 +21,6 @@
 #include "box.h"
 #include "text.h"
 #include "score.h"
-// #include "mscore.h"
 #include "barline.h"
 #include "repeat.h"
 #include "scoreview.h"
@@ -105,29 +104,4 @@ Text* TBox::getText()
             return static_cast<Text*>(_el[0]);
       return 0;
       }
-
-#if 0
-//---------------------------------------------------------
-//   genPropertyMenu
-//---------------------------------------------------------
-
-bool TBox::genPropertyMenu(QMenu* popup) const
-      {
-      QAction* a = popup->addAction(tr("Frame Properties..."));
-      a->setData("props");
-      return true;
-      }
-
-//---------------------------------------------------------
-//   propertyAction
-//---------------------------------------------------------
-
-void TBox::propertyAction(ScoreView* /*viewer*/, const QString& cmd)
-      {
-      if (cmd == "props") {
-            BoxProperties vp(this, 0);
-            vp.exec();
-            }
-      }
-#endif
 

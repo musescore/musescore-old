@@ -218,6 +218,8 @@ class ScoreView : public QWidget {
       void cmdInsertMeasure(ElementType);
       MeasureBase* insertMeasure(ElementType, int tick);
       void createElementPropertyMenu(Element* e, QMenu*);
+      void genPropertyMenu1(Element* e, QMenu* popup);
+      void genPropertyMenuText(Element* e, QMenu* popup);
       void elementPropertyAction(const QString&, Element* e);
 
    private slots:
