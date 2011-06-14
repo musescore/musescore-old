@@ -33,18 +33,19 @@ Q_DECLARE_METATYPE(Harmony*);
 Q_DECLARE_METATYPE(Score*);
 
 static const char* const function_names_rest[] = {
-      "tickLen", "addHarmony"
+      "tickLen", "addHarmony", "small"
       };
 static const int function_lengths_rest[] = {
-      1, 1
+      1, 1, 1
       };
 static const QScriptValue::PropertyFlags flags_rest[] = {
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
-      QScriptValue::SkipInEnumeration
+      QScriptValue::SkipInEnumeration,
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter
       };
 
 ScriptInterface restInterface = {
-      2,
+      sizeof(function_names_rest) / sizeof(*function_names_rest),
       function_names_rest,
       function_lengths_rest,
       flags_rest
@@ -97,6 +98,17 @@ static QScriptValue prototype_Rest_call(QScriptContext* context, QScriptEngine*)
                         return context->engine()->undefinedValue();
                         }
                   break;
+            case 2:     //small
+                 {
+                 if (context->argumentCount() == 0) {
+                      return qScriptValueFromValue(context->engine(), rest->small());
+                      }
+                 else if (context->argumentCount() == 1) {
+                      bool small = context->argument(0).toBool();
+                      rest->score()->undoChangeChordRestSize(rest, small);
+                      }
+                return context->engine()->undefinedValue();
+                }
             }
       return context->throwError(QScriptContext::TypeError,
          QString::fromLatin1("Note.%0(): bad argument count or value")

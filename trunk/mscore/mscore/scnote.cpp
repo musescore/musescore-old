@@ -32,10 +32,11 @@ Q_DECLARE_METATYPE(Note*);
 Q_DECLARE_METATYPE(Score*);
 
 static const char* const function_names_note[] = {
-      "name", "pitch", "tuning", "color", "visible", "tpc", "tied", "userAccidental", "boundingRect", "pos", "noteHead"
+      "name", "pitch", "tuning", "color", "visible", "tpc", "tied", "userAccidental",
+      "boundingRect", "pos", "noteHead", "velocity"
       };
 static const int function_lengths_note[] = {
-      0, 1, 1, 1, 1, 1, 0, 1, 0, 0,0
+      0, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1
       };
 
 static const QScriptValue::PropertyFlags flags_note[] = {
@@ -53,7 +54,7 @@ static const QScriptValue::PropertyFlags flags_note[] = {
       };
 
 ScriptInterface noteInterface = {
-      11,
+      sizeof(function_names_note) / sizeof(*function_names_note),
       function_names_note,
       function_lengths_note,
       flags_note
@@ -162,31 +163,55 @@ static QScriptValue prototype_Note_call(QScriptContext* context, QScriptEngine*)
                         }
                   break;
             case 8:     // "boundingRect"
-				  if (context->argumentCount() == 0)
-					  return qScriptValueFromValue(context->engine(), note->bbox());
-				  break;
-		case 9:     // "pos"
-				  if (context->argumentCount() == 0){
-				  Page* page = (Page*)note->parent()->parent()->parent()->parent()->parent();
-				  QPointF pos(note->canvasPos().x() - page->canvasPos().x(),  note->canvasPos().y());
-				  return qScriptValueFromValue(context->engine(), pos);
-			  }
-			  break;
-		case 10:     // "noteHead"
-				  if (context->argumentCount() == 0)
-                return qScriptValueFromValue(context->engine(), note->noteHead());
-					else if (context->argumentCount() == 1) {
-                int v = context->argument(0).toInt32();
-                if(v < HEAD_GROUPS) {
-                      Score* score = note->score();
-                      if (score)
-                            score->undo()->push(new ChangeNoteHead(note, v, note->headType())); 
-                      else 
-                            note->setHeadGroup(v);
+  				        if (context->argumentCount() == 0)
+  					           return qScriptValueFromValue(context->engine(), note->bbox());
+  				        break;
+          	case 9:     // "pos"
+        				  if (context->argumentCount() == 0){
+              				  Page* page = (Page*)note->parent()->parent()->parent()->parent()->parent();
+              				  QPointF pos(note->canvasPos().x() - page->canvasPos().x(),  note->canvasPos().y());
+              				  return qScriptValueFromValue(context->engine(), pos);
+                        }
+          			  break;
+      			case 10:     // "noteHead"
+      				  if (context->argumentCount() == 0)
+      					  return qScriptValueFromValue(context->engine(), note->noteHead());
+      					else if (context->argumentCount() == 1) {
+            				  int v = context->argument(0).toInt32();
+                      if(v < HEAD_GROUPS) {
+                            Score* score = note->score();
+                            if (score)
+                                  score->undo()->push(new ChangeNoteHead(note, v, note->headType())); 
+                            else 
+                                  note->setHeadGroup(v);
+                            }
+                      return context->engine()->undefinedValue();
                       }
-                return context->engine()->undefinedValue();
-                }
-				  break;
+      				  break;
+            case 11:     // "velocity"
+      				  if (context->argumentCount() == 0)
+      					  return qScriptValueFromValue(context->engine(), note->veloOffset());
+      					else if (context->argumentCount() == 1) {
+            				  int v = context->argument(0).toInt32();
+            				  Score* score = note->score();
+                      if (!score)
+                           return context->engine()->undefinedValue();  
+                      if(v < 0) {
+                            if (note->veloType() != AUTO_VAL) {
+                                  score->undo()->push(new ChangeNoteProperties(note,
+                                      AUTO_VAL, note->veloOffset(),
+                                      note->onTimeUserOffset(), note->offTimeUserOffset()));
+                                      //score->updateVelo();
+                                  }  
+                           }
+                      else if (v < 127) {
+                            score->undo()->push(new ChangeNoteProperties(note,
+                                 USER_VAL, v,
+                                 note->onTimeUserOffset(), note->offTimeUserOffset()));
+                            }
+                      return context->engine()->undefinedValue();
+                      }
+      				  break;
             }
       return context->throwError(QScriptContext::TypeError,
          QString::fromLatin1("Note.%0(): bad argument count or value")

@@ -1,3 +1,5 @@
+14.jun (la)
+      - enhance plugin framework : chord.small, chord.noStem, rest.small, note.velocity, score.keysig
 12.jun (ws)
       - work in progress: moving gui independent code into libmscore
 11.jun (ws)
