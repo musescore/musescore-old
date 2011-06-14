@@ -502,49 +502,6 @@ LineSegment* TextLine::createLineSegment()
       {
       return new TextLineSegment(score());
       }
-#if 0
-//---------------------------------------------------------
-//   genPropertyMenu
-//---------------------------------------------------------
-
-bool TextLineSegment::genPropertyMenu(QMenu* popup) const
-      {
-      QAction* a;
-      if (visible())
-            a = popup->addAction(tr("Set Invisible"));
-      else
-            a = popup->addAction(tr("Set Visible"));
-      a->setData("invisible");
-      a = popup->addAction(tr("Line Properties..."));
-      a->setData("props");
-      return true;
-      }
-
-//---------------------------------------------------------
-//   propertyAction
-//---------------------------------------------------------
-
-void TextLineSegment::propertyAction(ScoreView* viewer, const QString& s)
-      {
-      if (s == "props") {
-            TextLine* nTl  = textLine()->clone();
-            LineProperties lp(nTl);
-            if (lp.exec()) {
-                  score()->undoChangeElement(textLine(), nTl);
-                  // force new text
-                  foreach(SpannerSegment* l, nTl->spannerSegments()) {
-                        static_cast<TextLineSegment*>(l)->clearText();
-                        }
-                  }
-            else
-                  delete nTl;
-            }
-      else if (s == "invisible")
-            score()->undoChangeInvisible(this, !visible());
-      else
-            Element::propertyAction(viewer, s);
-      }
-#endif
 
 //---------------------------------------------------------
 //   setBeginText

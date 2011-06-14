@@ -678,64 +678,6 @@ void Element::read(QDomElement e)
       }
 
 //---------------------------------------------------------
-//   genPropertyMenu
-//---------------------------------------------------------
-
-bool Element::genPropertyMenu(QMenu* popup) const
-      {
-      QAction* a;
-      if ((!_generated || type() == BAR_LINE) && (type() != LAYOUT_BREAK)) {
-            if (visible())
-                  a = popup->addAction(tr("Set Invisible"));
-            else
-                  a = popup->addAction(tr("Set Visible"));
-            a->setData("invisible");
-            a = popup->addAction(tr("Color..."));
-            a->setData("color");
-            if (flag(ELEMENT_HAS_TAG)) {
-                  a = popup->addSeparator();
-
-                  QMenu* menuLayer = new QMenu(tr("Layer"));
-                  for (int i = 0; i < MAX_TAGS; ++i) {
-                        QString tagName = score()->layerTags()[i];
-                        if (!tagName.isEmpty()) {
-                              a = menuLayer->addAction(tagName);
-                              a->setData(QString("layer-%1").arg(i));
-                              a->setCheckable(true);
-                              a->setChecked(tag() & (1 << i));
-                              }
-                        }
-                  popup->addMenu(menuLayer);
-                  }
-            }
-      return true;
-      }
-
-//---------------------------------------------------------
-//   propertyAction
-//---------------------------------------------------------
-
-void Element::propertyAction(ScoreView*, const QString& s)
-      {
-      bool val = !visible();
-      foreach(Element* e, score()->selection().elements()) {
-            if (e->type() != type())
-                  continue;
-            if (s.startsWith("layer-")) {
-                  int n = s.mid(6).toInt();
-                  uint mask = 1 << n;
-                  e->setTag(mask);
-                  }
-            else if (s == "invisible")
-                  score()->undoChangeInvisible(e, val);
-            else if (s == "color") {
-                  score()->colorItem(e);
-                  break;
-                  }
-            }
-      }
-
-//---------------------------------------------------------
 //   remove
 //---------------------------------------------------------
 

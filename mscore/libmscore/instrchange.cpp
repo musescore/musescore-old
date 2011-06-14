@@ -67,39 +67,3 @@ void InstrumentChange::read(QDomElement e)
             }
       }
 
-#if 0
-//---------------------------------------------------------
-//   genPropertyMenu
-//---------------------------------------------------------
-
-bool InstrumentChange::genPropertyMenu(QMenu* popup) const
-      {
-      Text::genPropertyMenu(popup);
-      QAction* a = popup->addAction(tr("Change Instrument..."));
-      a->setData("sprops");
-      return true;
-      }
-
-//---------------------------------------------------------
-//   propertyAction
-//---------------------------------------------------------
-
-void InstrumentChange::propertyAction(ScoreView* viewer, const QString& s)
-      {
-      if (s == "sprops") {
-            SelectInstrument si(_instrument, 0);
-            if (si.exec()) {
-                  const InstrumentTemplate* it = si.instrTemplate();
-                  if (it) {
-                        _instrument = Instrument::fromTemplate(it);
-                        score()->undo()->push(new ChangeInstrument(this, _instrument));
-                        }
-                  else
-                        printf("no template selected?\n");
-                  }
-            }
-      else
-            Text::propertyAction(viewer, s);
-      }
-#endif
-

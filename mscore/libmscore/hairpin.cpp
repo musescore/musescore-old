@@ -99,53 +99,6 @@ void HairpinSegment::draw(Painter* painter) const
       painter->drawLine(l2.x1(), l2.y1(), l2.x2(), l2.y2());
       }
 
-#if 0
-//---------------------------------------------------------
-//   genPropertyMenu
-//---------------------------------------------------------
-
-bool HairpinSegment::genPropertyMenu(QMenu* popup) const
-      {
-      QAction* a = popup->addSeparator();
-      a->setText(tr("Dynamics"));
-      if (visible())
-            a = popup->addAction(tr("Set Invisible"));
-      else
-            a = popup->addAction(tr("Set Visible"));
-      a->setData("invisible");
-
-      a = popup->addAction(tr("Hairpin Properties..."));
-      a->setData("dynamics");
-
-      return true;
-      }
-
-//---------------------------------------------------------
-//   propertyAction
-//---------------------------------------------------------
-
-void HairpinSegment::propertyAction(ScoreView* viewer, const QString& s)
-      {
-      if (s == "dynamics") {
-            Hairpin* hp = hairpin();
-            HairpinProperties dp(hp);
-            int rv = dp.exec();
-
-            int vo = dp.changeVelo();
-            DynamicType dt = dp.dynamicType();
-            if (rv && (
-               (vo != hp->veloChange())
-               || (dt != hp->dynType())
-               || (dp.allowDiagonal() != hp->diagonal())
-               )) {
-                  score()->undo()->push(new ChangeHairpin(hp, vo, dt, dp.allowDiagonal()));
-                  }
-            }
-      else
-            Element::propertyAction(viewer, s);
-      }
-#endif
-
 //---------------------------------------------------------
 //   Hairpin
 //---------------------------------------------------------

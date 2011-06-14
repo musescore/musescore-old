@@ -77,8 +77,6 @@ class KeySig : public Element {
       bool showNaturals() const           { return _showNaturals;    };
       void setShowCourtesySig(bool v)     { _showCourtesySig = v;    };
 	void setShowNaturals(bool v)        { _showNaturals = v;       };
-	virtual bool genPropertyMenu(QMenu*) const;
-	virtual void propertyAction(ScoreView*, const QString&);
 	};
 
 extern const char* keyNames[15];

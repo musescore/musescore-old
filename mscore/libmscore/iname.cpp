@@ -31,30 +31,3 @@ InstrumentName::InstrumentName(Score* s)
       _layoutPos = 0;
       }
 
-#if 0
-//---------------------------------------------------------
-//   genPropertyMenu
-//---------------------------------------------------------
-
-bool InstrumentName::genPropertyMenu(QMenu* popup) const
-      {
-      QAction* a = popup->addAction(tr("Staff Properties..."));
-      a->setData("sprops");
-      return true;
-      }
-
-//---------------------------------------------------------
-//   propertyAction
-//---------------------------------------------------------
-
-void InstrumentName::propertyAction(ScoreView* viewer, const QString& s)
-      {
-      if (s == "sprops") {
-            EditStaff editStaff(staff(), 0);
-            editStaff.exec();
-            }
-      else
-            Text::propertyAction(viewer, s);
-      }
-#endif
-

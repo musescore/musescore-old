@@ -261,60 +261,6 @@ void Dynamic::layout()
       Text::layout();
       }
 
-#if 0
-//---------------------------------------------------------
-//   genPropertyMenu
-//---------------------------------------------------------
-
-bool Dynamic::genPropertyMenu(QMenu* popup) const
-      {
-      QAction* a = popup->addSeparator();
-//      a->setText(tr("Dynamics"));
-      if (visible())
-            a = popup->addAction(tr("Set Invisible"));
-      else
-            a = popup->addAction(tr("Set Visible"));
-      a->setData("invisible");
-      a = popup->addAction(tr("MIDI Properties..."));
-      a->setData("dynamics");
-      a = popup->addAction(tr("Text Properties..."));
-      a->setData("props");
-      return true;
-      }
-
-//---------------------------------------------------------
-//   propertyAction
-//---------------------------------------------------------
-
-void Dynamic::propertyAction(ScoreView* viewer, const QString& s)
-      {
-      if (s == "props") {
-            Dynamic* nText = new Dynamic(*this);
-            TextProperties tp(nText, 0);
-            int rv = tp.exec();
-            if (rv)
-                  score()->undoChangeElement(this, nText);
-            else
-                  delete nText;
-            }
-      else if (s == "dynamics") {
-            int oldVelo    = _velocity;
-            DynamicType ot = _dynType;
-            DynamicProperties dp(this);
-            int rv = dp.exec();
-            if (rv) {
-                  int newVelo    = _velocity;
-                  DynamicType nt = _dynType;
-                  _velocity      = oldVelo;
-                  _dynType       = ot;
-                  score()->undoChangeDynamic(this, newVelo, nt);
-                  }
-            }
-      else
-            Element::propertyAction(viewer, s);
-      }
-#endif
-
 //---------------------------------------------------------
 //   dragAnchor
 //---------------------------------------------------------

@@ -318,43 +318,6 @@ void RasterImage::setPath(const QString& s)
             }
       }
 
-#if 0
-//---------------------------------------------------------
-//   genPropertyMenu
-//---------------------------------------------------------
-
-bool Image::genPropertyMenu(QMenu* popup) const
-      {
-      Element::genPropertyMenu(popup);
-      QAction* a = popup->addSeparator();
-      a->setText(tr("Image"));
-      a = popup->addAction(tr("Image Properties..."));
-      a->setData("props");
-      return true;
-      }
-
-//---------------------------------------------------------
-//   propertyAction
-//---------------------------------------------------------
-
-void Image::propertyAction(ScoreView* viewer, const QString& s)
-      {
-      if (s == "props") {
-            ImageProperties vp(this);
-            int rv = vp.exec();
-            if (rv) {
-                  if (vp.getLockAspectRatio() != lockAspectRatio()
-                     || vp.getAutoScale() != autoScale()) {
-                        score()->undo()->push(new ChangeImage(this,
-                           vp.getLockAspectRatio(), vp.getAutoScale()));
-                        }
-                  }
-            }
-      else
-            Element::propertyAction(viewer, s);
-      }
-#endif
-
 //---------------------------------------------------------
 //   addImage
 //---------------------------------------------------------

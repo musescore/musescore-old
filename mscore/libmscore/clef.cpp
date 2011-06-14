@@ -340,35 +340,6 @@ Element* Clef::drop(const DropData& data)
       }
 
 //---------------------------------------------------------
-//   genPropertyMenu
-//---------------------------------------------------------
-
-bool Clef::genPropertyMenu(QMenu* popup) const
-      {
-      Element::genPropertyMenu(popup);
-      // if the clef is not generated (= not courtesy) add the specific menu item
-      if (!generated()) {
-            QAction* a = popup->addAction(_showCourtesyClef
-               ? QT_TRANSLATE_NOOP("Clef", "Hide courtesy clef")
-               : QT_TRANSLATE_NOOP("Clef", "Show courtesy clef") );
-            a->setData("courtesy");
-            }
-      return true;
-      }
-
-//---------------------------------------------------------
-//   propertyAction
-//---------------------------------------------------------
-
-void Clef::propertyAction(ScoreView* viewer, const QString& s)
-      {
-      if (s == "courtesy")
-            score()->undo()->push(new ChangeClef(this, !_showCourtesyClef));
-      else
-            Element::propertyAction(viewer, s);
-      }
-
-//---------------------------------------------------------
 //   setSmall
 //---------------------------------------------------------
 

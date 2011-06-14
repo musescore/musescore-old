@@ -18,8 +18,8 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __VOLTAPROPERTIES_H__
-#define __VOLTAPROPERTIES_H__
+#ifndef __SLURPROPERTIES_H__
+#define __SLURPROPERTIES_H__
 
 #include "ui_slurproperties.h"
 

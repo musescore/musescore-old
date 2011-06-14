@@ -193,31 +193,3 @@ void Glissando::setSize(const QSizeF& s)
       line = QLineF(0.0, s.height(), s.width(), 0.0);
       }
 
-#if 0
-//---------------------------------------------------------
-//   genPropertyMenu
-//---------------------------------------------------------
-
-bool Glissando::genPropertyMenu(QMenu* popup) const
-      {
-      Element::genPropertyMenu(popup);
-      QAction* a = popup->addAction(tr("Glissando Properties..."));
-      a->setData("props");
-      return true;
-      }
-
-//---------------------------------------------------------
-//   propertyAction
-//---------------------------------------------------------
-
-void Glissando::propertyAction(ScoreView* viewer, const QString& s)
-      {
-      if (s == "props") {
-            GlissandoProperties vp(this);
-            vp.exec();
-            }
-      else
-            Element::propertyAction(viewer, s);
-      }
-#endif
-
