@@ -265,7 +265,7 @@ class ExportMusicXml {
       void dynamic(Dynamic* dyn, int staff);
       void symbol(Symbol * sym, int staff);
       void tempoText(TempoText* text, int staff);
-      void harmony(Harmony*);
+      void harmony(Harmony*, Element*);
       };
 
 //---------------------------------------------------------
@@ -3623,10 +3623,16 @@ foreach(Element* el, *(score->gel())) {
                               // look for harmony element for this tick position
                               if (el->isChordRest()) {
                                     QList<Element*> list;
-
+                                    ChordRest* cr = nextChordRest(static_cast<ChordRest*>(el));
+                                    int endTick = el->tick();
+                                    if (cr) {
+                                        endTick = cr->tick();
+                                        printf("CR %d %d\n", endTick, el->tick());
+                                        }
                                     foreach(Element* he, *m->el()) {
+                                    printf("staff %d %d tick %d\n", he->staffIdx(), sstaff, he->tick());
                                           if ((he->type() == HARMONY) && (he->staffIdx() == sstaff)
-                                             && (he->tick() == el->tick())) {
+                                             && (he->tick() >= el->tick()) && (he->tick() <= endTick)) {
                                                 list << he;
                                                 }
                                           }
@@ -3635,7 +3641,7 @@ foreach(Element* el, *(score->gel())) {
 
                                     foreach (Element* hhe, list){
                                           attr.doAttr(xml, false);
-                                          harmony((Harmony*)hhe);
+                                          harmony((Harmony*)hhe, el);
                                           }
                                     }
 
@@ -3873,7 +3879,7 @@ double ExportMusicXml::getTenthsFromDots(double dots){
 //   harmony
 //---------------------------------------------------------
 
-void ExportMusicXml::harmony(Harmony* h)
+void ExportMusicXml::harmony(Harmony* h, Element* e)
       {
       int rootTpc = h->rootTpc();
       if (rootTpc != INVALID_TPC) {
@@ -3938,6 +3944,8 @@ void ExportMusicXml::harmony(Harmony* h)
                         }
                   xml.etag();
                   }
+            if(e->tick() < h->tick())
+                  xml.tag("offset", (h->tick() - e->tick()) / div);
             xml.etag();
             }
       else {
