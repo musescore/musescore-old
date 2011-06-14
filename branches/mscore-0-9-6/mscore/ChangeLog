@@ -1,5 +1,6 @@
 14.jun (la)
       - add sol notehead
+      - enhance plugin framework : chord.small, chord.noStem, rest.small, note.velocity, score.keysig
 12.jun (la)
       - measure number no more selectable to avoid crash on undo
       - barline at start of system not selectable to avoid crash on undo
