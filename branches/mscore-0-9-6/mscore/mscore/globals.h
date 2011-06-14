@@ -69,6 +69,7 @@ extern qreal DPMM;      // logical dots/mm
 enum NoteHeadGroup {
       HEAD_NORMAL, HEAD_CROSS, HEAD_DIAMOND, HEAD_TRIANGLE, HEAD_MI,
       HEAD_SLASH, HEAD_XCIRCLE, HEAD_DO, HEAD_RE, HEAD_FA, HEAD_LA, HEAD_TI,
+      HEAD_SOL,
       HEAD_GROUPS
       };
 
