@@ -35,6 +35,7 @@
 #include "script.h"
 #include "score.h"
 #include "repeatlist.h"
+#include "libmscore/init.h"
 
 Q_DECLARE_METATYPE(PageFormat*);
 Q_DECLARE_METATYPE(Score*);
@@ -400,7 +401,7 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                         int newKey = context->argument(0).toInt32();
                         KeySigEvent ke;
                         ke.setAccidentalType(newKey);
-    
+
                         for (int idx = 0; idx < score->nstaves(); idx++) {
                             int curKey = score->staff(idx)->key(0).accidentalType();
                             if (curKey != newKey) {
@@ -449,7 +450,7 @@ static QScriptValue static_Score_call(QScriptContext* context, QScriptEngine*)
       {
       if (context->thisObject().strictlyEquals(context->engine()->globalObject()))
             return context->throwError(QString::fromLatin1("Score(): Did you forget to construct with 'new'?"));
-      Score* score = new Score(mscore->defaultStyle());
+      Score* score = new Score(defaultStyle());
       score->setName(mscore->createDefaultName());
       mscore->setCurrentScoreView(mscore->appendScore(score));
       score->startCmd();

@@ -39,6 +39,7 @@
 #include "textline.h"
 #include "painterqt.h"
 #include "measure.h"
+#include "libmscore/init.h"
 
 //---------------------------------------------------------
 //   needsStaff
@@ -476,7 +477,7 @@ void Palette::paintEvent(QPaintEvent* event)
       //
 
       QPen pen(palette().color(QPalette::Normal, QPalette::Text));
-      pen.setWidthF(mscore->defaultStyle()->valueS(ST_staffLineWidth).val() * PALETTE_SPATIUM * extraMag);
+      pen.setWidthF(defaultStyle()->valueS(ST_staffLineWidth).val() * PALETTE_SPATIUM * extraMag);
 
       p.fillRect(event->rect(), p.background().color());
       for (int idx = 0; idx < cells.size(); ++idx) {

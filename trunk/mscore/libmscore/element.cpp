@@ -449,26 +449,25 @@ QColor Element::curColor() const
  Return update Rect relative to canvas.
 */
 
-QRectF Element::drag(const QPointF& pos)
+QRectF Element::drag(const EditData& data)
       {
       QRectF r(abbox());
 
-      qreal x = pos.x();
-      qreal y = pos.y();
 
-//      qreal _spatium = spatium();
-#if 0  // TODO-LIB
-      if (mscore->hRaster()) {
+      qreal x = data.pos.x();
+      qreal y = data.pos.y();
+
+      qreal _spatium = spatium();
+      if (data.hRaster) {
             qreal hRaster = _spatium / preferences.hRaster;
             int n = lrint(x / hRaster);
             x = hRaster * n;
             }
-      if (mscore->vRaster()) {
+      if (data.vRaster) {
             qreal vRaster = _spatium / preferences.vRaster;
             int n = lrint(y / vRaster);
             y = vRaster * n;
             }
-#endif
       setUserOff(QPointF(x, y));
       return abbox() | r;
       }

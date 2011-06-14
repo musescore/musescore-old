@@ -21,6 +21,7 @@
 #include "webpage.h"
 #include "mscore.h"
 #include "score.h"
+#include "libmscore/init.cpp"
 
 //---------------------------------------------------------
 //   MyWebPage
@@ -258,7 +259,7 @@ void WebScoreView::networkFinished(QNetworkReply* reply)
       f.write(data);
       f.close();
 
-      Score* score = new Score(mscore->defaultStyle());
+      Score* score = new Score(defaultStyle());
       if (score->readScore(tmpName) != 0) {
             printf("readScore failed\n");
             delete score;

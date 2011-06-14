@@ -133,7 +133,7 @@ class Note : public Element {
 
       int _lineOffset;        ///< Used during mouse dragging.
 
-      virtual QRectF drag(const QPointF& s);
+      virtual QRectF drag(const EditData&);
       virtual void endDrag();
       virtual void endEdit();
 

@@ -901,7 +901,7 @@ void Note::read(QDomElement e)
 //   drag
 //---------------------------------------------------------
 
-QRectF Note::drag(const QPointF& s)
+QRectF Note::drag(const EditData& data)
       {
       dragMode = true;
       QRectF bb(chord()->bbox());
@@ -909,7 +909,7 @@ QRectF Note::drag(const QPointF& s)
       double _spatium = spatium();
       bool tab = staff()->useTablature();
       double step = _spatium * (tab ? staff()->staffType()->lineDistance().val() : 0.5);
-      _lineOffset = lrint(s.y() / step);
+      _lineOffset = lrint(data.pos.y() / step);
 //    USELESS: endDrag() will take care of string range and anyway
 //    WRONG: for tabulature notes, line is in _string not in _line
 //      if (tab) {

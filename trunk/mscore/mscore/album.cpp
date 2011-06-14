@@ -25,6 +25,7 @@
 #include "painterqt.h"
 #include "mscore.h"
 #include "icons.h"
+#include "libmscore/init.h"
 
 //---------------------------------------------------------
 //   Album
@@ -256,7 +257,7 @@ void Album::load(QDomElement e)
 void Album::loadScores()
       {
       foreach(AlbumItem* item, _scores) {
-            item->score = new Score(mscore->defaultStyle());
+            item->score = new Score(defaultStyle());
             int rv = item->score->readScore(item->path);
             if (rv != 0) {
                   mscore->readScoreError(rv, item->path);

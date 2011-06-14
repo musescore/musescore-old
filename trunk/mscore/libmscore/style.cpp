@@ -1067,8 +1067,10 @@ ChordList* StyleData::chordList()  const
       {
       if (_chordList == 0) {
             _chordList = new ChordList();
-            _chordList->read("chords.xml");
-            _chordList->read(value(ST_chordDescriptionFile).toString());
+#if 0 //TODO-LIB
+            mscore->readChordList(_chordList, "chords.xml");
+            mscore->readChordList(_chordList, value(ST_chordDescriptionFile).toString());
+#endif
             }
       return _chordList;
       }

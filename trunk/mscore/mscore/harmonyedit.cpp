@@ -100,7 +100,7 @@ void ChordStyleEditor::saveButtonClicked()
       QString fn = mscore->getChordStyleFilename(false);
       if (fn.isEmpty())
             return;
-      chordList->write(fn);
+      mscore->writeChordList(chordList, fn);
       }
 
 //---------------------------------------------------------
@@ -110,11 +110,11 @@ void ChordStyleEditor::saveButtonClicked()
 void ChordStyleEditor::loadChordDescriptionFile(const QString& s)
       {
       ChordList* cl = new ChordList;
-      if (!cl->read("chords.xml")) {
+      if (!mscore->readChordList(cl, "chords.xml")) {
             printf("cannot read <chords.xml>\n");
             return;
             }
-      if (!cl->read(s)) {
+      if (!mscore->readChordList(cl, s)) {
             printf("cannot read <%s>\n", qPrintable(s));
             return;
             }

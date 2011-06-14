@@ -108,18 +108,15 @@ void Box::editDrag(const EditData& ed)
       {
       if (type() == VBOX) {
             _boxHeight = Spatium((ed.pos.y() - abbox().y()) / spatium());
-#if 0 // TODO-LIB
-            if (mscore->vRaster()) {
+            if (ed.vRaster) {
                   qreal vRaster = 1.0 / qreal(preferences.vRaster);
                   int n = lrint(_boxHeight.val() / vRaster);
                   _boxHeight = Spatium(vRaster * n);
                   }
-#endif
             }
       else {
             _boxWidth += Spatium(ed.delta.x() / spatium());
-#if 0 // TODO-LIB
-            if (mscore->hRaster()) {
+            if (ed.hRaster) {
                   qreal hRaster = 1.0 / qreal(preferences.hRaster);
                   int n = lrint(_boxWidth.val() / hRaster);
                   _boxWidth = Spatium(hRaster * n);
@@ -130,7 +127,6 @@ void Box::editDrag(const EditData& ed)
                         static_cast<Text*>(e)->setModified(true);  // force relayout
                         }
                   }
-#endif
             }
       layout();   //??
       score()->setLayoutAll(true);
@@ -424,9 +420,9 @@ Element* Box::drop(const DropData& data)
 //   drag
 //---------------------------------------------------------
 
-QRectF HBox::drag(const QPointF& pos)
+QRectF HBox::drag(const EditData& data)
       {
-      QPointF delta(pos - startDragPosition());
+      QPointF delta(data.pos - startDragPosition());
       QRectF r(abbox());
       qreal diff = delta.x();
       qreal x1   = userOff().x() + diff;
@@ -439,7 +435,7 @@ QRectF HBox::drag(const QPointF& pos)
                   x1 = x2;
             }
       setUserOff(QPointF(x1, 0.0));
-      setStartDragPosition(pos);
+      setStartDragPosition(data.pos);
       return abbox() | r;
       }
 

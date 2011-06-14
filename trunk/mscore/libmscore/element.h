@@ -115,6 +115,8 @@ struct EditData {
       int curGrip;
       QPointF delta;
       QPointF pos;
+      bool hRaster;
+      bool vRaster;
       };
 
 //---------------------------------------------------------
@@ -247,7 +249,7 @@ class Element {
       virtual void write(Xml&) const;
       virtual void read(QDomElement);
 
-      virtual QRectF drag(const QPointF& s);
+      virtual QRectF drag(const EditData&);
       virtual void endDrag()                  {}
       virtual QLineF dragAnchor() const       { return QLineF(); }
 

@@ -73,6 +73,7 @@ class MediaDialog;
 class Profile;
 class AlbumManager;
 class WebPageDockWidget;
+class ChordList;
 
 extern QString mscoreGlobalShare;
 static const int PROJECT_LIST_LEN = 6;
@@ -285,9 +286,6 @@ class MuseScore : public QMainWindow {
 
       int _midiRecordId;
 
-      Style* _defaultStyle;
-      Style* _baseStyle;
-
       bool _fullscreen;
       QList<LanguageItem> _languages;
 
@@ -473,6 +471,8 @@ class MuseScore : public QMainWindow {
       double getMag(ScoreView*) const;
       void setMag(double);
       bool noScore() const { return scoreList.isEmpty(); }
+      bool writeChordList(ChordList*, const QString& name);
+      bool readChordList(ChordList* list, const QString& name);
 
       TextTools* textTools();
       void showDrumTools(Drumset*, Staff*);
@@ -513,8 +513,6 @@ class MuseScore : public QMainWindow {
       void populatePalette();
       void excerptsChanged(Score*);
       bool processMidiRemote(MidiRemoteType type, int data);
-      Style* defaultStyle() const { return _defaultStyle; }
-      Style* baseStyle() const { return _baseStyle; }
       ScoreTab* getTab1() const { return tab1; }
       ScoreTab* getTab2() const { return tab2; }
       void readScoreError(int rv, const QString&) const;
