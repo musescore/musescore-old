@@ -24,6 +24,7 @@
 #include "script.h"
 #include "harmony.h"
 #include "measure.h"
+#include "lyrics.h"
 
 Q_DECLARE_METATYPE(Chord);
 Q_DECLARE_METATYPE(Chord*);
@@ -32,10 +33,10 @@ Q_DECLARE_METATYPE(Score*);
 Q_DECLARE_METATYPE(Note*);
 
 static const char* const function_names_chord[] = {
-      "tickLen", "addHarmony", "topNote", "addNote", "removeNote", "notes", "note", "type"
+      "tickLen", "addHarmony", "topNote", "addNote", "removeNote", "notes", "note", "type", "lyrics", "noStem", "small"
       };
 static const int function_lengths_chord[] = {
-      1, 1, 0, 1, 1, 0, 1, 0
+      1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1
       };
 static const QScriptValue::PropertyFlags flags_chord[] = {
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
@@ -49,7 +50,7 @@ static const QScriptValue::PropertyFlags flags_chord[] = {
       };
 
 ScriptInterface chordInterface = {
-      8,
+      sizeof(function_names_chord) / sizeof(*function_names_chord),
       function_names_chord,
       function_lengths_chord,
       flags_chord
@@ -155,6 +156,38 @@ static QScriptValue prototype_Chord_call(QScriptContext* context, QScriptEngine*
                   break;
             case 7:     // "type"
                   return qScriptValueFromValue(context->engine(), int(chord->noteType()));
+            case 8:     // "lyric"
+                  {
+                  //TODO adapt to new lyric code
+                  /*QStringList ll; 
+                  LyricsList * lyrlist = chord->segment()->lyricsList(0);
+	                for (ciLyrics lix = lyrlist->begin(); lix != lyrlist->end(); ++lix)      
+                      ll.append((*lix)->getText());
+                  return qScriptValueFromValue(context->engine(), ll);*/
+                  return context->engine()->undefinedValue();
+                  }
+            case 9:     //noStem
+                 {
+                 if (context->argumentCount() == 0) {
+                      return qScriptValueFromValue(context->engine(), chord->noStem());
+                      }
+                 else if (context->argumentCount() == 1) {
+                      bool noStem = context->argument(0).toBool();
+                      chord->score()->undoChangeChordNoStem(chord, noStem);
+                      }
+                return context->engine()->undefinedValue();
+                }
+            case 10:     //small
+                 {
+                 if (context->argumentCount() == 0) {
+                      return qScriptValueFromValue(context->engine(), chord->small());
+                      }
+                 else if (context->argumentCount() == 1) {
+                      bool small = context->argument(0).toBool();
+                      chord->score()->undoChangeChordRestSize(chord, small);
+                      }
+                return context->engine()->undefinedValue();
+                }
             }
       return context->throwError(QScriptContext::TypeError,
          QString::fromLatin1("Chord.%0(): bad argument count or value")
