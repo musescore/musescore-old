@@ -207,7 +207,7 @@ bool LoadCompressedMusicXml::loader(QFile* qf)
       ec = uz.openArchive(qf->fileName());
       if (ec != UnZip::Ok) {
             error = "Unable to open archive(" + qf->fileName() + "):\n" + uz.formatError(ec);
-            return true;
+            return false;
             }
 
       QBuffer cbuf;
@@ -223,7 +223,7 @@ bool LoadCompressedMusicXml::loader(QFile* qf)
             ln.setNum(line);
             error = err + "\n at line " + ln + " column " + col;
             printf("error: %s\n", error.toLatin1().data());
-            return true;
+            return false;
             }
 
       // extract first rootfile
@@ -250,7 +250,7 @@ bool LoadCompressedMusicXml::loader(QFile* qf)
             }
       if (rootfile == "") {
             printf("can't find rootfile in: %s\n", qf->fileName().toLatin1().data());
-            return true;
+            return false;
             }
 
       QBuffer dbuf;
@@ -263,10 +263,10 @@ bool LoadCompressedMusicXml::loader(QFile* qf)
             ln.setNum(line);
             error = err + "\n at line " + ln + " column " + col;
             printf("error: %s\n", qPrintable(error));
-            return true;
+            return false;
             }
       docName = qf->fileName();
-      return false;
+      return true;
       }
 
 //---------------------------------------------------------
@@ -3226,6 +3226,7 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
 
       Harmony* ha = new Harmony(score);
       ha->setUserOff(QPointF(rx, ry + dy - styleYOff));
+      int offset = 0;
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             if (tag == "root") {
@@ -3318,13 +3319,13 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
                   domNotImplemented(e);
                   }
             else if (tag == "offset") {
-                  domNotImplemented(e);
+                  offset = (e.text().toInt() * AL::division)/divisions;
                   }
             else
                   domError(e);
             }
 
-      ha->setTick(tick);
+      ha->setTick(tick + offset);
 
       const ChordDescription* d = ha->fromXml(kind, degreeList);
       if (d == 0) {
