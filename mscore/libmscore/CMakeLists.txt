@@ -43,7 +43,7 @@ add_library (
       sym.cpp system.cpp tablature.cpp tempotext.cpp text.cpp
       textframe.cpp textline.cpp timesig.cpp
       tremolobar.cpp tremolo.cpp trill.cpp tuplet.cpp
-      utils.cpp velo.cpp volta.cpp xml.cpp init.cpp
+      utils.cpp velo.cpp volta.cpp xml.cpp mscore.cpp
       )
 set_target_properties (
       libmscore

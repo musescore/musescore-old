@@ -18,7 +18,7 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "mscore.h"
+#include "musescore.h"
 #include "harmonyedit.h"
 #include "harmonycanvas.h"
 #include "palette.h"

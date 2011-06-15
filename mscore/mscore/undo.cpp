@@ -45,7 +45,7 @@
 #include "chord.h"
 #include "al/sig.h"
 #include "key.h"
-#include "mscore.h"
+#include "musescore.h"
 #include "scoreview.h"
 #include "barline.h"
 #include "volta.h"
@@ -2979,6 +2979,7 @@ void ChangeDuration::flip()
 void AddExcerpt::undo()
       {
       score->parentScore()->removeExcerpt(score);
+      mscore->excerptsChanged(score);
       }
 
 //---------------------------------------------------------
@@ -2988,6 +2989,7 @@ void AddExcerpt::undo()
 void AddExcerpt::redo()
       {
       score->parentScore()->addExcerpt(score);
+      mscore->excerptsChanged(score);
       }
 
 //---------------------------------------------------------
@@ -2997,6 +2999,7 @@ void AddExcerpt::redo()
 void RemoveExcerpt::undo()
       {
       score->parentScore()->addExcerpt(score);
+      mscore->excerptsChanged(score);
       }
 
 //---------------------------------------------------------
@@ -3006,6 +3009,7 @@ void RemoveExcerpt::undo()
 void RemoveExcerpt::redo()
       {
       score->parentScore()->removeExcerpt(score);
+      mscore->excerptsChanged(score);
       }
 
 //---------------------------------------------------------

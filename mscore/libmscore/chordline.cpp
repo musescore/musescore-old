@@ -24,7 +24,7 @@
 #include "measure.h"
 #include "system.h"
 #include "note.h"
-#include "libmscore/painter.h"
+#include "painter.h"
 
 //---------------------------------------------------------
 //   ChordLine

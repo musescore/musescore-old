@@ -48,7 +48,7 @@
 #include "navigate.h"
 #include "stafftype.h"
 #include "stem.h"
-#include "libmscore/painter.h"
+#include "painter.h"
 
 //---------------------------------------------------------
 //   StemSlash

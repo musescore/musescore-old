@@ -31,7 +31,7 @@
 #include "awl/pitchlabel.h"
 #include "awl/pitchedit.h"
 #include "awl/poslabel.h"
-#include "mscore.h"
+#include "musescore.h"
 #include "undo.h"
 #include "part.h"
 #include "instrument.h"

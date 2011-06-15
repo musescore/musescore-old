@@ -22,7 +22,7 @@
 #include "text.h"
 #include "xml.h"
 #include "style.h"
-#include "mscore.h"
+#include "musescore.h"
 #include "scoreview.h"
 #include "score.h"
 #include "utils.h"

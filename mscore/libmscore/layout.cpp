@@ -47,7 +47,7 @@
 #include "beam.h"
 #include "tuplet.h"
 #include "sym.h"
-#include "libmscore/fingering.h"
+#include "fingering.h"
 #include "stem.h"
 #include "layoutbreak.h"
 

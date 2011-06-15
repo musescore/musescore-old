@@ -25,7 +25,7 @@
 #include "stafftype.h"
 #include "hook.h"
 #include "tremolo.h"
-#include "libmscore/painter.h"
+#include "painter.h"
 
 // TEMPORARY HACK!!
 #include "sym.h"

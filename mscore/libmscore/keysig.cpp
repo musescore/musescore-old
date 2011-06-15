@@ -27,7 +27,7 @@
 #include "measure.h"
 #include "score.h"
 #include "undo.h"
-#include "libmscore/painter.h"
+#include "painter.h"
 
 const char* keyNames[15] = {
       QT_TRANSLATE_NOOP("MuseScore", "G major, E minor"),

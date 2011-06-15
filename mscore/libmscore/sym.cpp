@@ -22,7 +22,6 @@
 #include "style.h"
 #include "sym.h"
 #include "utils.h"
-// #include "mscore.h"
 #include "score.h"
 #include "xml.h"
 #include "painterqt.h"

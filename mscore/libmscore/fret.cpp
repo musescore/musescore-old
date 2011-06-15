@@ -235,21 +235,14 @@ void FretDiagram::draw(Painter* painter) const
                   }
             if (_marker && _marker[i]) {
                   painter->setFont(font);
-#if 0 // TODO-LIB
                   double x = stringDist * i;
                   double y = -fretDist * .1;
-                  painter->drawText(QRectF(x, y, 0.0, 0.0),
-                     Qt::AlignHCenter | Qt::AlignBottom | Qt::TextDontClip, QChar(_marker[i]));
-#endif
+                  painter->drawTextHCentered(x, y, QChar(_marker[i]));
                   }
             }
-#if 0 // TODO-LIB
       if (_fretOffset > 0) {
-            p.drawText(QRectF(-stringDist * .4, 0.0, 0.0, fretDist),
-               Qt::AlignVCenter|Qt::AlignRight|Qt::TextDontClip,
-               QString("%1").arg(_fretOffset+1));
+            painter->drawText(-stringDist * .4, 0.0, QString("%1").arg(_fretOffset+1));
             }
-#endif
       }
 
 //---------------------------------------------------------

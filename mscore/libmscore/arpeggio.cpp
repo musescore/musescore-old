@@ -26,7 +26,7 @@
 #include "staff.h"
 #include "part.h"
 #include "segment.h"
-#include "libmscore/painter.h"
+#include "painter.h"
 
 //---------------------------------------------------------
 //   Arpeggio

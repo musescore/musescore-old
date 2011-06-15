@@ -18,7 +18,7 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "mscore.h"
+#include "musescore.h"
 #include "scnote.h"
 #include "note.h"
 #include "utils.h"
@@ -181,8 +181,8 @@ static QScriptValue prototype_Note_call(QScriptContext* context, QScriptEngine*)
                       if(v < HEAD_GROUPS) {
                             Score* score = note->score();
                             if (score)
-                                  score->undo()->push(new ChangeNoteHead(note, v, note->headType())); 
-                            else 
+                                  score->undo()->push(new ChangeNoteHead(note, v, note->headType()));
+                            else
                                   note->setHeadGroup(v);
                             }
                       return context->engine()->undefinedValue();
@@ -195,14 +195,14 @@ static QScriptValue prototype_Note_call(QScriptContext* context, QScriptEngine*)
             				  int v = context->argument(0).toInt32();
             				  Score* score = note->score();
                       if (!score)
-                           return context->engine()->undefinedValue();  
+                           return context->engine()->undefinedValue();
                       if(v < 0) {
                             if (note->veloType() != AUTO_VAL) {
                                   score->undo()->push(new ChangeNoteProperties(note,
                                       AUTO_VAL, note->veloOffset(),
                                       note->onTimeUserOffset(), note->offTimeUserOffset()));
                                       //score->updateVelo();
-                                  }  
+                                  }
                            }
                       else if (v < 127) {
                             score->undo()->push(new ChangeNoteProperties(note,

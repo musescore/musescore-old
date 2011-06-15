@@ -20,7 +20,7 @@
 
 #include "symboldialog.h"
 #include "palette.h"
-#include "mscore.h"
+#include "musescore.h"
 #include "sym.h"
 #include "style.h"
 #include "element.h"
@@ -58,7 +58,7 @@ SymbolDialog::SymbolDialog(QWidget* parent)
       sp->setSelectable(true);
 
       connect(systemFlag, SIGNAL(stateChanged(int)), SLOT(systemFlagChanged(int)));
-      
+
       sa->setWidget(sp);
       }
 
@@ -75,7 +75,7 @@ void SymbolDialog::systemFlagChanged(int state)
             Element* e = sp->element(i);
             if(e)
                   e->setSystemFlag(sysFlag);
-            } 
+            }
       }
 
 

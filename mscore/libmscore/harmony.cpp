@@ -529,21 +529,6 @@ const ChordDescription* Harmony::descr() const
       }
 
 //---------------------------------------------------------
-//   harmonyEndEdit
-//---------------------------------------------------------
-
-void ScoreView::harmonyEndEdit()
-      {
-      Harmony* harmony = static_cast<Harmony*>(editObject);
-      Harmony* origH   = static_cast<Harmony*>(origEditObject);
-
-      if (harmony->isEmpty() && origH->isEmpty()) {
-            Measure* measure = (Measure*)(harmony->parent());
-            measure->remove(harmony);
-            }
-      }
-
-//---------------------------------------------------------
 //   isEmpty
 //---------------------------------------------------------
 

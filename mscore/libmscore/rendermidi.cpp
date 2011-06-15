@@ -23,7 +23,6 @@
  render score into event list
 */
 
-// #include "mscore.h"
 #include "score.h"
 #include "volta.h"
 #include "note.h"

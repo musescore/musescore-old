@@ -21,7 +21,7 @@
 #include "texttools.h"
 #include "icons.h"
 #include "text.h"
-#include "mscore.h"
+#include "musescore.h"
 #include "score.h"
 #include "textpalette.h"
 

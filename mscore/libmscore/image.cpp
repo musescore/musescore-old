@@ -20,7 +20,6 @@
 
 #include "image.h"
 #include "xml.h"
-// #include "mscore.h"
 #include "preferences.h"
 #include "score.h"
 #include "undo.h"

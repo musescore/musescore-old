@@ -19,7 +19,7 @@
 //=============================================================================
 
 #include "excerptsdialog.h"
-#include "mscore.h"
+#include "musescore.h"
 #include "score.h"
 #include "part.h"
 #include "excerpt.h"

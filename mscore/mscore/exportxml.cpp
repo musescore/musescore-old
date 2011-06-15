@@ -34,7 +34,7 @@
 
 #include <math.h>
 #include "config.h"
-#include "mscore.h"
+#include "musescore.h"
 #include "file.h"
 #include "score.h"
 #include "rest.h"

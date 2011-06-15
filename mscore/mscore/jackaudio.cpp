@@ -22,7 +22,7 @@
 
 #include "preferences.h"
 #include "msynth/synti.h"
-#include "mscore.h"
+#include "musescore.h"
 #include "seq.h"
 #include "al/al.h"
 

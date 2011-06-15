@@ -18,7 +18,7 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "mscore.h"
+#include "musescore.h"
 #include "palette.h"
 #include "keyedit.h"
 #include "keysig.h"
@@ -27,7 +27,7 @@
 #include "keycanvas.h"
 #include "clef.h"
 #include "painterqt.h"
-#include "libmscore/init.h"
+#include "libmscore/mscore.h"
 
 extern bool useFactorySettings;
 extern Palette* newAccidentalsPalette();
@@ -111,7 +111,7 @@ void KeyCanvas::paintEvent(QPaintEvent*)
       QRectF r = imatrix.mapRect(QRectF(x, y, w, wh));
 
       QPen pen(palette().brush(QPalette::Normal, QPalette::Text).color());
-      pen.setWidthF(defaultStyle()->valueS(ST_staffLineWidth).val() * spatium);
+      pen.setWidthF(MScore::defaultStyle()->valueS(ST_staffLineWidth).val() * spatium);
       p.setPen(pen);
 
       for (int i = 0; i < 5; ++i) {

@@ -24,7 +24,7 @@
 #include "note.h"
 #include "noteevent.h"
 #include "preferences.h"
-#include "mscore.h"
+#include "musescore.h"
 
 static const int CHORD_MAP_OFFSET = 50;
 static const int grip = 7;

@@ -57,7 +57,7 @@ QT4_WRAP_UI (ui_headers
 
 QT4_WRAP_CPP (mocs
       scoreview.h editinstrument.h editstyle.h edittempo.h instrdialog.h inspector.h
-      mscore.h navigator.h pagesettings.h palette.h mixer.h playpanel.h
+      musescore.h navigator.h pagesettings.h palette.h mixer.h playpanel.h
       measureproperties.h preview.h score.h seq.h textpalette.h textstyle.h
       timedialog.h symboldialog.h shortcutcapturedialog.h simplebutton.h
       greendotbutton.h recordbutton.h editdrumset.h editstaff.h selinstrument.h
@@ -79,9 +79,9 @@ QT4_WRAP_CPP (mocs
       )
 
 if (APPLE)
-      QT4_ADD_RESOURCES (qrc_files mscore-apple.qrc)
+      QT4_ADD_RESOURCES (qrc_files musescore-apple.qrc)
 else (APPLE)
-      QT4_ADD_RESOURCES (qrc_files mscore.qrc)
+      QT4_ADD_RESOURCES (qrc_files musescore.qrc)
 endif (APPLE)
 
 
@@ -135,7 +135,7 @@ add_executable ( ${ExecutableName}
       actions.cpp scoreview.cpp cmd.cpp editinstrument.cpp editstyle.cpp
       edittempo.cpp exportxml.cpp icons.cpp importbww.cpp importxml.cpp
       instrdialog.cpp inspector.cpp menus.cpp midifile.cpp importmidi.cpp
-      mscore.cpp navigator.cpp pagesettings.cpp palette.cpp
+      musescore.cpp navigator.cpp pagesettings.cpp palette.cpp
       mixer.cpp playpanel.cpp preferences.cpp measureproperties.cpp
       preview.cpp seq.cpp boxproperties.cpp textpalette.cpp
       timedialog.cpp symboldialog.cpp shortcutcapturedialog.cpp
@@ -147,7 +147,7 @@ add_executable ( ${ExecutableName}
       scscore.cpp sccursor.cpp scchord.cpp scnote.cpp scpart.cpp sctext.cpp
       scmeasure.cpp scpageformat.cpp exportaudio.cpp exportmidi.cpp
       textproperties.cpp screst.cpp scharmony.cpp slurproperties.cpp
-      synthcontrol.cpp canonical.cpp drumroll.cpp pianoroll.cpp piano.cpp
+      synthcontrol.cpp drumroll.cpp pianoroll.cpp piano.cpp
       pianoview.cpp drumview.cpp scoretab.cpp keyedit.cpp harmonyedit.cpp
       updatechecker.cpp importove.cpp ove.cpp check.cpp ruler.cpp
       importgtp.cpp revisions.cpp fotomode.cpp drumtools.cpp
@@ -186,7 +186,6 @@ if (OSC)
 endif (OSC)
 
 if (MINGW)
-
    add_custom_command(
       OUTPUT ${PROJECT_BINARY_DIR}/resfile.o
       COMMAND ${QT_WRC_EXECUTABLE} -i mscore.rc -o ${PROJECT_BINARY_DIR}/mscore.res

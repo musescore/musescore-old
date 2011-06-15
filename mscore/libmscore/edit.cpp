@@ -36,7 +36,6 @@
 #include "barline.h"
 #include "tuplet.h"
 #include "seq.h"
-// #include "mscore.h"
 #include "lyrics.h"
 #include "image.h"
 #include "keysig.h"
@@ -351,7 +350,6 @@ Note* Score::addNote(Chord* chord, int pitch)
       note->setPitch(pitch);
       note->setTpcFromPitch();
       undoAddElement(note);
-//TODO-LIB      mscore->play(chord);
       select(note, SELECT_SINGLE, 0);
       return note;
       }
@@ -937,46 +935,6 @@ printf("putNote at tick %d staff %d line %d key %d clef %d\n",
       }
 
 //---------------------------------------------------------
-//   modifyElement
-//---------------------------------------------------------
-
-void ScoreView::modifyElement(Element* el)
-      {
-      if (el == 0) {
-            printf("modifyElement: el==0\n");
-            return;
-            }
-      Score* cs = el->score();
-      if (!cs->selection().isSingle()) {
-            printf("modifyElement: cs->selection().state() != SEL_SINGLE\n");
-            delete el;
-            return;
-            }
-      Element* e = cs->selection().element();
-      Chord* chord;
-      if (e->type() == CHORD)
-            chord = static_cast<Chord*>(e);
-      else if (e->type() == NOTE)
-            chord = static_cast<Note*>(e)->chord();
-      else {
-            printf("modifyElement: no note/Chord selected:\n  ");
-            e->dump();
-            delete el;
-            return;
-            }
-      switch (el->type()) {
-            case ARTICULATION:
-                  chord->add(static_cast<Articulation*>(el));
-                  break;
-            default:
-                  printf("modifyElement: %s not ARTICULATION\n", el->name());
-                  delete el;
-                  return;
-            }
-      cs->setLayoutAll(true);
-      }
-
-//---------------------------------------------------------
 //   cmdAddTie
 //---------------------------------------------------------
 
@@ -1526,57 +1484,6 @@ void Score::cmdDeleteSelection()
       }
 
 //---------------------------------------------------------
-//   chordTab
-//---------------------------------------------------------
-
-void ScoreView::chordTab(bool back)
-      {
-      Harmony* cn      = (Harmony*)editObject;
-      Segment* segment = cn->segment();
-      int track        = cn->track();
-      if (segment == 0) {
-            printf("chordTab: no segment\n");
-            return;
-            }
-
-      // search next chord
-      if (back)
-            segment = segment->prev1(SegChordRest);
-      else
-            segment = segment->next1(SegChordRest);
-      if (segment == 0) {
-            printf("no next segment\n");
-            return;
-            }
-      endEdit();
-      _score->startCmd();
-
-      // search for next chord name
-      cn = 0;
-      foreach(Element* e, segment->annotations()) {
-            if (e->type() == HARMONY && e->track() == track) {
-                  Harmony* h = static_cast<Harmony*>(e);
-                  cn = h;
-                  break;
-                  }
-            }
-
-      if (!cn) {
-            cn = new Harmony(_score);
-            cn->setTrack(track);
-            cn->setParent(segment);
-            _score->undoAddElement(cn);
-            }
-
-      _score->select(cn, SELECT_SINGLE, 0);
-      startEdit(cn, -1);
-      adjustCanvasPosition(cn, false);
-      ((Harmony*)editObject)->moveCursorToEnd();
-
-      _score->setLayoutAll(true);
-      }
-
-//---------------------------------------------------------
 //   addLyrics
 //    called from Keyboard Accelerator & menue
 //---------------------------------------------------------
@@ -1609,103 +1516,6 @@ Lyrics* Score::addLyrics()
       undoAddElement(lyrics);
       select(lyrics, SELECT_SINGLE, 0);
       return lyrics;
-      }
-
-//---------------------------------------------------------
-//   cmdTuplet
-//---------------------------------------------------------
-
-void ScoreView::cmdTuplet(int n)
-      {
-      _score->startCmd();
-      if (noteEntryMode()) {
-            _score->expandVoice();
-            _score->changeCRlen(_score->inputState().cr(), _score->inputState().duration());
-            if (_score->inputState().cr())
-                  cmdTuplet(n, _score->inputState().cr());
-            }
-      else {
-            QSet<ChordRest*> set;
-            foreach(Element* e, _score->selection().elements()) {
-                  if (e->type() == NOTE) {
-                        Note* note = static_cast<Note*>(e);
-                        if(note->noteType() != NOTE_NORMAL) { //no tuplet on grace notes
-                              _score->endCmd();
-                              return;
-                              }
-                        e = note->chord();
-                        }
-                  if (e->isChordRest()) {
-                        ChordRest* cr = static_cast<ChordRest*>(e);
-                        if(!set.contains(cr)) {
-                              cmdTuplet(n, cr);
-                              set.insert(cr);
-                              }
-                        }
-                  }
-            }
-      _score->endCmd();
-      }
-
-//---------------------------------------------------------
-//   cmdTuplet
-//---------------------------------------------------------
-
-void ScoreView::cmdTuplet(int n, ChordRest* cr)
-      {
-      Fraction f(cr->duration());
-      int tick    = cr->tick();
-      Tuplet* ot  = cr->tuplet();
-
-      f.reduce();       //measure duration might not be reduced
-      Fraction ratio(n, f.numerator());
-      Fraction fr(1, f.denominator());
-      while (ratio.numerator() >= ratio.denominator()*2) {
-            ratio /= 2;
-            fr    /= 2;
-            }
-
-      Tuplet* tuplet = new Tuplet(_score);
-      tuplet->setRatio(ratio);
-
-      //
-      // "fr" is the fraction value of one tuple element
-      //
-      // "tuplet time" is "normal time" / tuplet->ratio()
-      //    Example: an 1/8 has 240 midi ticks, in an 1/8 triplet the note
-      //             has a tick duration of 240 / (3/2) = 160 ticks
-      //
-
-      tuplet->setDuration(f);
-      Duration baseLen(fr);
-      tuplet->setBaseLen(baseLen);
-
-      tuplet->setTrack(cr->track());
-      tuplet->setTick(tick);
-      Measure* measure = cr->measure();
-      tuplet->setParent(measure);
-
-      if (ot)
-            tuplet->setTuplet(ot);
-      _score->cmdCreateTuplet(cr, tuplet);
-
-      const QList<DurationElement*>& cl = tuplet->elements();
-
-      int ne = cl.size();
-      DurationElement* el = 0;
-      if (ne && cl[0]->type() == REST)
-            el  = cl[0];
-      else if (ne > 1)
-            el = cl[1];
-      if (el) {
-            _score->select(el, SELECT_SINGLE, 0);
-            if (!noteEntryMode()) {
-                  sm->postEvent(new CommandEvent("note-input"));
-                  qApp->processEvents();
-                  }
-            _score->inputState().setDuration(baseLen);
-//TODO-LIB            mscore->updateInputState(_score);
-            }
       }
 
 //---------------------------------------------------------
@@ -1775,70 +1585,6 @@ printf("tuplet note duration %s  actualNotes %d  ticks %d\n",
             undoAddCR(rest, measure, tick);
             }
       layoutAll = true;
-      }
-
-//---------------------------------------------------------
-//   changeVoice
-//---------------------------------------------------------
-
-void ScoreView::changeVoice(int voice)
-      {
-      InputState* is = &score()->inputState();
-      int track = (is->track() / VOICES) * VOICES + voice;
-      is->setTrack(track);
-      //
-      // in note entry mode search for a valid input
-      // position
-      //
-      if (!is->noteEntryMode || is->cr()) {
-            score()->startCmd();
-            QList<Element*> el;
-            foreach(Element* e, score()->selection().elements()) {
-                  if (e->type() == NOTE) {
-                        Note* note = static_cast<Note*>(e);
-                        Chord* chord = note->chord();
-                        if (chord->voice() != voice) {
-                              int notes = note->chord()->notes().size();
-                              if (notes > 1) {
-                                    //
-                                    // TODO: check destination voice content
-                                    //
-                                    Note* newNote   = new Note(*note);
-                                    Chord* newChord = new Chord(score());
-                                    newNote->setSelected(false);
-                                    el.append(newNote);
-                                    int track = chord->staffIdx() * VOICES + voice;
-                                    newChord->setTrack(track);
-                                    newChord->setDurationType(chord->durationType());
-                                    newChord->setDuration(chord->duration());
-                                    newChord->setParent(chord->parent());
-                                    newChord->add(newNote);
-                                    score()->undoRemoveElement(note);
-                                    score()->undoAddElement(newChord);
-                                    }
-                              else if (notes > 1 || (voice && chord->voice())) {
-                                    Chord* newChord = new Chord(*chord);
-                                    int track = chord->staffIdx() * VOICES + voice;
-                                    newChord->setTrack(track);
-                                    newChord->setParent(chord->parent());
-                                    score()->undoRemoveElement(chord);
-                                    score()->undoAddElement(newChord);
-                                    }
-                              }
-                        }
-                  }
-            score()->selection().clear();
-            foreach(Element* e, el)
-                  score()->select(e, SELECT_ADD, -1);
-            score()->setLayoutAll(true);
-            score()->endCmd();
-            return;
-            }
-
-      is->setSegment(is->segment()->measure()->firstCRSegment());
-      score()->setUpdateAll(true);
-      score()->end();
-//TODO-LIB      mscore->setPos(is->segment()->tick());
       }
 
 //---------------------------------------------------------

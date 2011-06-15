@@ -21,7 +21,7 @@
 #include "timedialog.h"
 #include "timesig.h"
 #include "palette.h"
-#include "mscore.h"
+#include "musescore.h"
 #include "score.h"
 
 extern bool useFactorySettings;

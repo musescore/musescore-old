@@ -23,7 +23,7 @@
 #include "drumset.h"
 #include "preferences.h"
 #include "sym.h"
-#include "libmscore/painter.h"
+#include "painter.h"
 
 //---------------------------------------------------------
 //   ShadowNote

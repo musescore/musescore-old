@@ -18,8 +18,8 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __MSCORE_H__
-#define __MSCORE_H__
+#ifndef __MUSESCORE_H__
+#define __MUSESCORE_H__
 
 #include "config.h"
 

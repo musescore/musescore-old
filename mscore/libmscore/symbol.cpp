@@ -29,7 +29,6 @@
 #include "image.h"
 #include "segment.h"
 #include "painter.h"
-// #include "mscore.h"
 #include "preferences.h"
 
 //---------------------------------------------------------

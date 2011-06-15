@@ -20,7 +20,7 @@
 
 #include "config.h"
 #include "seq.h"
-#include "mscore.h"
+#include "musescore.h"
 
 #ifdef USE_ALSA
 #include "alsa.h"

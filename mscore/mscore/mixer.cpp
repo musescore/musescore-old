@@ -18,7 +18,7 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "mscore.h"
+#include "musescore.h"
 #include "score.h"
 #include "part.h"
 #include "mixer.h"
@@ -136,7 +136,7 @@ PartEdit* InstrumentListEditor::partEdit(int index)
             QWidgetItem* wi = (QWidgetItem*)(vb->itemAt(index));
             return (PartEdit*) wi->widget();
             }
-      return 0;      
+      return 0;
       }
 
 //---------------------------------------------------------

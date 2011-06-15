@@ -18,7 +18,7 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "mscore.h"
+#include "musescore.h"
 #include "instrtemplate.h"
 #include "clef.h"
 #include "staff.h"
@@ -35,7 +35,7 @@
 #include "script.h"
 #include "score.h"
 #include "repeatlist.h"
-#include "libmscore/init.h"
+#include "libmscore/mscore.h"
 
 Q_DECLARE_METATYPE(PageFormat*);
 Q_DECLARE_METATYPE(Score*);
@@ -450,7 +450,7 @@ static QScriptValue static_Score_call(QScriptContext* context, QScriptEngine*)
       {
       if (context->thisObject().strictlyEquals(context->engine()->globalObject()))
             return context->throwError(QString::fromLatin1("Score(): Did you forget to construct with 'new'?"));
-      Score* score = new Score(defaultStyle());
+      Score* score = new Score(MScore::defaultStyle());
       score->setName(mscore->createDefaultName());
       mscore->setCurrentScoreView(mscore->appendScore(score));
       score->startCmd();

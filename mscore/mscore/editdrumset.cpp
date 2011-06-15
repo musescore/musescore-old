@@ -19,7 +19,7 @@
 //=============================================================================
 
 #include "editdrumset.h"
-#include "mscore.h"
+#include "musescore.h"
 #include "xml.h"
 #include "utils.h"
 #include "chord.h"

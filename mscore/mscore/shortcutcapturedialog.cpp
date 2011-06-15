@@ -20,7 +20,7 @@
 //=============================================================================
 
 #include "shortcutcapturedialog.h"
-#include "mscore.h"
+#include "musescore.h"
 
 //---------------------------------------------------------
 //   ShortcutCaptureDialog

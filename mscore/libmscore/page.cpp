@@ -22,7 +22,6 @@
 #include "score.h"
 #include "text.h"
 #include "xml.h"
-// #include "mscore.h"
 #include "preferences.h"
 #include "measure.h"
 #include "style.h"

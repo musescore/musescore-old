@@ -28,7 +28,7 @@
 #include <sys/time.h>
 #include "alsa.h"
 #include "score.h"
-#include "mscore.h"
+#include "musescore.h"
 #include "preferences.h"
 #include "seq.h"
 #include "alsamidi.h"

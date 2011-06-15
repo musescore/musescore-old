@@ -20,7 +20,7 @@
 
 #include "transposedialog.h"
 #include "score.h"
-#include "mscore.h"
+#include "musescore.h"
 #include "chord.h"
 #include "note.h"
 #include "key.h"

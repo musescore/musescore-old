@@ -27,7 +27,7 @@
 #include "config.h"
 #include "mididriver.h"
 #include "preferences.h"
-#include "mscore.h"
+#include "musescore.h"
 #include "midifile.h"
 #include "globals.h"
 #include "seq.h"

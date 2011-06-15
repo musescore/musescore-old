@@ -21,7 +21,7 @@
 #include "stafftype.h"
 #include "staff.h"
 #include "xml.h"
-#include "libmscore/painter.h"
+#include "painter.h"
 
 QList<StaffType*> staffTypes;
 

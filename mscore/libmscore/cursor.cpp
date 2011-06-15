@@ -20,7 +20,7 @@
 
 #include "cursor.h"
 #include "preferences.h"
-#include "libmscore/painter.h"
+#include "painter.h"
 
 //---------------------------------------------------------
 //   Cursor

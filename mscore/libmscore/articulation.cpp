@@ -26,7 +26,7 @@
 #include "measure.h"
 #include "staff.h"
 #include "stafftype.h"
-#include "libmscore/painter.h"
+#include "painter.h"
 
 //---------------------------------------------------------
 //   Articulation::articulationList

@@ -37,7 +37,7 @@
 #include "stafftype.h"
 #include "part.h"
 #include "undo.h"
-#include "libmscore/painter.h"
+#include "painter.h"
 
 #define TR(a)  QT_TRANSLATE_NOOP("clefTable", a)
 

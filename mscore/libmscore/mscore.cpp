@@ -12,15 +12,16 @@
 //=============================================================================
 
 #include "style.h"
+#include "mscore.h"
 
-static Style* _defaultStyle;
-static Style* _baseStyle;
+Style* MScore::_defaultStyle;
+Style* MScore::_baseStyle;
 
 //---------------------------------------------------------
-//   initMuseScore
+//   init
 //---------------------------------------------------------
 
-void initMuseScore()
+void MScore::init()
       {
       _defaultStyle         = new Style();
       setDefaultStyle(_defaultStyle);     // initialize default style
@@ -31,7 +32,7 @@ void initMuseScore()
 //   defaultStyle
 //---------------------------------------------------------
 
-Style* defaultStyle()
+Style* MScore::defaultStyle()
       {
       return _defaultStyle;
       }
@@ -40,7 +41,7 @@ Style* defaultStyle()
 //   baseStyle
 //---------------------------------------------------------
 
-Style* baseStyle()
+Style* MScore::baseStyle()
       {
       return _baseStyle;
       }

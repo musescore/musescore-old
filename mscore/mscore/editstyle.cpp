@@ -25,7 +25,7 @@
 #include "articulation.h"
 #include "sym.h"
 #include "icons.h"
-#include "mscore.h"
+#include "musescore.h"
 #include "undo.h"
 #include "texteditor.h"
 #include "harmony.h"

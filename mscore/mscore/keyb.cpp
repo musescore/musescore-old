@@ -30,7 +30,7 @@
 #include "input.h"
 #include "key.h"
 #include "measure.h"
-#include "mscore.h"
+#include "musescore.h"
 #include "slur.h"
 #include "tuplet.h"
 #include "text.h"

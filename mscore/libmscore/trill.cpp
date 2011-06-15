@@ -28,7 +28,7 @@
 #include "score.h"
 #include "accidental.h"
 #include "segment.h"
-#include "libmscore/painter.h"
+#include "painter.h"
 
 //---------------------------------------------------------
 //   draw

@@ -24,7 +24,7 @@
 
 #include "config.h"
 #include "globals.h"
-#include "mscore.h"
+#include "musescore.h"
 #include "scoreview.h"
 #include "xml.h"
 #include "element.h"
@@ -87,7 +87,7 @@
 
 #include "diff/diff_match_patch.h"
 #include "libmscore/chordlist.h"
-#include "libmscore/init.h"
+#include "libmscore/mscore.h"
 
 //---------------------------------------------------------
 //   readScoreError
@@ -206,7 +206,7 @@ void MuseScore::loadFile()
          );
       if (fn.isEmpty())
             return;
-      Score* score = new Score(defaultStyle());
+      Score* score = new Score(MScore::defaultStyle());
       int rv = score->readScore(fn);
       if (rv == 0) {
             setCurrentScoreView(appendScore(score));
@@ -697,7 +697,7 @@ void MuseScore::newFile()
             measures += 1;
       KeySigEvent ks     = newWizard->keysig();
 
-      Score* score = new Score(defaultStyle());
+      Score* score = new Score(MScore::defaultStyle());
       score->setCreated(true);
 
       //
@@ -1099,7 +1099,7 @@ void Score::loadStyle()
 
       QFile f(fn);
       if (f.open(QIODevice::ReadOnly)) {
-            Style st(*defaultStyle());
+            Style st(*MScore::defaultStyle());
             if (st.load(&f)) {
                   _undo->push(new ChangeStyle(this, st));
                   return;
@@ -1630,6 +1630,7 @@ bool Score::read(QDomElement dScore)
                   s->setParentScore(this);
                   s->read(ee);
                   addExcerpt(s);
+                  mscore->excerptsChanged(s);
                   }
             else if (tag == "name")
                   setName(val);

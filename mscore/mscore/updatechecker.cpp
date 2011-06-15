@@ -18,7 +18,7 @@
 //=============================================================================
 
 #include "updatechecker.h"
-#include "mscore.h"
+#include "musescore.h"
 #include "preferences.h"
 
 UpdateChecker::UpdateChecker()

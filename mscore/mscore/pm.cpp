@@ -27,7 +27,7 @@
 
 #include "preferences.h"
 #include "pm.h"
-#include "mscore.h"
+#include "musescore.h"
 #include "seq.h"
 
 //---------------------------------------------------------

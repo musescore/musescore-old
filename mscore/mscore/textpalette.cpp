@@ -23,7 +23,7 @@
 #include "text.h"
 #include "sym.h"
 #include "style.h"
-#include "mscore.h"
+#include "musescore.h"
 
 extern TextPalette* textPalette;
 
