@@ -19,7 +19,7 @@
 //=============================================================================
 
 #include "config.h"
-#include "mscore.h"
+#include "musescore.h"
 #include "instrdialog.h"
 #include "instrtemplate.h"
 #include "scoreview.h"

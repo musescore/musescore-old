@@ -19,7 +19,7 @@
 //=============================================================================
 
 #include "scoreview.h"
-#include "mscore.h"
+#include "musescore.h"
 #include "score.h"
 #include "lasso.h"
 #include "icons.h"

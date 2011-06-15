@@ -21,7 +21,7 @@
 #include "preferences.h"
 #include "msynth/synti.h"
 #include "score.h"
-#include "mscore.h"
+#include "musescore.h"
 #include "seq.h"
 #include "pa.h"
 

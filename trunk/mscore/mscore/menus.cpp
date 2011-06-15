@@ -27,7 +27,7 @@
 #include "sym.h"
 #include "hairpin.h"
 #include "scoreview.h"
-#include "mscore.h"
+#include "musescore.h"
 #include "edittempo.h"
 #include "select.h"
 #include "al/tempo.h"

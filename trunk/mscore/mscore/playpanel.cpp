@@ -22,7 +22,7 @@
 #include "al/sig.h"
 #include "score.h"
 #include "seq.h"
-#include "mscore.h"
+#include "musescore.h"
 #include "measure.h"
 
 const int MIN_VOL = -60;

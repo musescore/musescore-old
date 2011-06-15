@@ -19,7 +19,7 @@
 //=============================================================================
 
 #include "newwizard.h"
-#include "mscore.h"
+#include "musescore.h"
 #include "instrtemplate.h"
 #include "score.h"
 #include "staff.h"

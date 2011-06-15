@@ -20,7 +20,7 @@
 
 #include "mediadialog.h"
 #include "icons.h"
-#include "mscore.h"
+#include "musescore.h"
 #include "score.h"
 #include "scoreview.h"
 #include "omr/omr.h"

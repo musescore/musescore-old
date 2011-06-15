@@ -19,7 +19,7 @@
 //=============================================================================
 
 #include "navigator.h"
-#include "mscore.h"
+#include "musescore.h"
 #include "scoreview.h"
 #include "score.h"
 #include "page.h"

@@ -34,7 +34,6 @@
 #include "undo.h"
 #include "system.h"
 #include "select.h"
-// #include "mscore.h"
 #include "scoreview.h"
 #include "segment.h"
 #include "xml.h"
@@ -61,7 +60,6 @@
 #include "excerpt.h"
 #include "stafftext.h"
 #include "magbox.h"
-// #include "textpalette.h"
 #include "preferences.h"
 #include "repeatlist.h"
 #include "keysig.h"
@@ -1090,31 +1088,6 @@ void Score::readStaff(QDomElement e)
             else
                   domError(e);
             }
-      }
-
-//---------------------------------------------------------
-//   textUndoLevelAdded
-//---------------------------------------------------------
-
-// void Score::textUndoLevelAdded()
-//      {
-//      ++textUndoLevel;
-//      }
-
-//---------------------------------------------------------
-//   midiNoteReceived
-//---------------------------------------------------------
-
-void ScoreView::midiNoteReceived(int pitch, bool chord)
-      {
-      MidiInputEvent ev;
-      ev.pitch = pitch;
-      ev.chord = chord;
-
-printf("midiNoteReceived %d chord %d\n", pitch, chord);
-      score()->enqueueMidiEvent(ev);
-      if (!score()->undo()->active())
-            cmd(0);
       }
 
 //---------------------------------------------------------
@@ -2300,7 +2273,6 @@ void Score::addExcerpt(Score* score)
                         }
                   }
             }
-//TODO-LIB      mscore->excerptsChanged(this);
       }
 
 //---------------------------------------------------------
@@ -2313,7 +2285,6 @@ void Score::removeExcerpt(Score* score)
             if (ex->score() == score) {
                   if (excerpts()->removeOne(ex)) {
                         delete ex;
-//TODO-LIB                        mscore->excerptsChanged(this);
                         return;
                         }
                   else

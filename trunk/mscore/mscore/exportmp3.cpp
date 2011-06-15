@@ -22,7 +22,7 @@
 #include "fluid.h"
 #include "al/tempo.h"
 #include "note.h"
-#include "mscore.h"
+#include "musescore.h"
 #include "part.h"
 #include "preferences.h"
 #include "seq.h"

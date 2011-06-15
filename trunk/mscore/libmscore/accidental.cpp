@@ -23,7 +23,7 @@
 #include "sym.h"
 #include "score.h"
 #include "staff.h"
-#include "libmscore/painter.h"
+#include "painter.h"
 #include "undo.h"
 
 //---------------------------------------------------------

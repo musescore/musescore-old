@@ -12,7 +12,7 @@
 //=============================================================================
 
 #include "scoreview.h"
-#include "mscore.h"
+#include "musescore.h"
 #include "undo.h"
 
 #include "score.h"

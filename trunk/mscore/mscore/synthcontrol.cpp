@@ -19,7 +19,7 @@
 //=============================================================================
 
 #include "synthcontrol.h"
-#include "mscore.h"
+#include "musescore.h"
 #include "seq.h"
 #include "msynth/synti.h"
 #include "preferences.h"

@@ -19,7 +19,7 @@
 //=============================================================================
 
 #include "profile.h"
-#include "mscore.h"
+#include "musescore.h"
 #include "xml.h"
 #include "preferences.h"
 #include "palette.h"

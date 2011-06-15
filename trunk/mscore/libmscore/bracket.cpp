@@ -27,7 +27,7 @@
 #include "score.h"
 #include "system.h"
 #include "sym.h"
-#include "libmscore/painter.h"
+#include "painter.h"
 
 //---------------------------------------------------------
 //   Bracket

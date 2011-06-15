@@ -11,13 +11,24 @@
 //  the file LICENSE.GPL
 //=============================================================================
 
+#ifndef __MSCORE_H__
+#define __MSCORE_H__
 
-#ifndef __INIT_H__
-#define __INIT_H__
 
-extern void initMuseScore();
-extern Style* defaultStyle();
-extern Style* baseStyle();
+//---------------------------------------------------------
+//   MScore
+//    MuseScore application object
+//---------------------------------------------------------
+
+class MScore {
+      static Style* _defaultStyle;
+      static Style* _baseStyle;
+
+   public:
+      static void init();
+      static Style* defaultStyle();
+      static Style* baseStyle();
+      };
 
 
 #endif

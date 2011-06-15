@@ -25,7 +25,7 @@
 #include "system.h"
 #include "measure.h"
 #include "segment.h"
-#include "libmscore/painter.h"
+#include "painter.h"
 #include "articulation.h"
 
 //---------------------------------------------------------

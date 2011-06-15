@@ -19,7 +19,7 @@
 //=============================================================================
 
 #include "inspector.h"
-#include "mscore.h"
+#include "musescore.h"
 #include "element.h"
 #include "page.h"
 #include "segment.h"

@@ -32,7 +32,7 @@
 #include "measure.h"
 #include "undo.h"
 #include "stem.h"
-#include "mscore.h"
+#include "musescore.h"
 
 //---------------------------------------------------------
 //   TupletDialog

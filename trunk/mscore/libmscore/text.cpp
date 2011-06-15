@@ -22,26 +22,20 @@
 #include "text.h"
 #include "xml.h"
 #include "style.h"
-// #include "mscore.h"
 #include "scoreview.h"
 #include "score.h"
 #include "utils.h"
 #include "page.h"
-// #include "textpalette.h"
 #include "sym.h"
 #include "symbol.h"
 #include "textline.h"
 #include "preferences.h"
 #include "system.h"
 #include "measure.h"
-// #include "textproperties.h"
-// #include "textprop.h"
 #include "box.h"
 #include "segment.h"
 #include "texttools.h"
 #include "painter.h"
-
-// extern TextPalette* textPalette;
 
 //---------------------------------------------------------
 //   Text
@@ -704,7 +698,6 @@ void Text::spatiumChanged(double oldVal, double newVal)
 
 void Text::startEdit(ScoreView* view, const QPointF& p)
       {
-//TODO-LIB      mscore->textTools()->show();
       cursor = new QTextCursor(doc());
       cursor->setVisualNavigation(true);
       cursor->setPosition(cursorPos);
@@ -794,7 +787,6 @@ bool Text::edit(ScoreView* view, int /*grip*/, int key, Qt::KeyboardModifiers mo
                         }
                         break;
                   }
-//TODO-LIB            mscore->textTools()->updateTools();
 #ifndef Q_WS_MAC
             if (key != Qt::Key_Space && key != Qt::Key_Minus)
                   return true;
@@ -863,8 +855,6 @@ bool Text::edit(ScoreView* view, int /*grip*/, int key, Qt::KeyboardModifiers mo
       if (key == Qt::Key_Return || key == Qt::Key_Space || key == Qt::Key_Tab) {
             replaceSpecialChars();
             }
-//TODO-LIB      mscore->textTools()->updateTools();
-
       layout();
       if (parent() && parent()->type() == TBOX) {
             TBox* tb = static_cast<TBox*>(parent());
@@ -944,13 +934,7 @@ void Text::endEdit()
             return;
             }
       cursorPos = cursor->position();
-#if 0 // TODO-LIB
-      if (textPalette) {
-            textPalette->hide();
-            mscore->textTools()->kbAction()->setChecked(false);
-            }
-      mscore->textTools()->hide();
-#endif
+
       delete cursor;
       cursor = 0;
       _editMode = false;
@@ -1502,63 +1486,4 @@ void Text::setFont(const QFont& f)
       {
       _localStyle.setFont(f);
       }
-
-#if 0 // TODO-LIB
-
-//---------------------------------------------------------
-//   TextProperties
-//---------------------------------------------------------
-
-TextProperties::TextProperties(Text* t, QWidget* parent)
-   : QDialog(parent)
-      {
-      setWindowTitle(tr("MuseScore: Text Properties"));
-      QGridLayout* layout = new QGridLayout;
-
-      tp = new TextProp;
-      tp->setScore(false, t->score());
-
-      layout->addWidget(tp, 0, 1);
-      QLabel* l = new QLabel;
-      l->setPixmap(QPixmap(":/data/bg1.jpg"));
-      l->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Ignored);
-
-      layout->addWidget(l, 0, 0, 2, 1);
-      QHBoxLayout* hb = new QHBoxLayout;
-      QDialogButtonBox* bb = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
-      hb->addWidget(bb);
-      layout->addLayout(hb, 1, 1);
-      setLayout(layout);
-
-      text = t;
-      if (t->styled()) {
-            text->setLocalStyle(text->score()->textStyle(text->textStyle()));
-            }
-
-      tp->setTextStyle(text->localStyle());
-      tp->setStyled(t->styled());
-      tp->setTextStyleType(t->textStyle());
-
-      connect(bb, SIGNAL(accepted()), SLOT(accept()));
-      connect(bb, SIGNAL(rejected()), SLOT(reject()));
-      }
-
-//---------------------------------------------------------
-//   accept
-//---------------------------------------------------------
-
-void TextProperties::accept()
-      {
-      text->setLocalStyle(tp->textStyle());
-
-      QDialog::accept();
-      if (tp->isStyled() != text->styled() || tp->isStyled()) {
-            // text->setTextStyle(tp->textStyleType());  // this sets styled = true
-
-            text->_textStyle = tp->textStyleType();
-            text->setStyled(tp->isStyled());
-            text->styleChanged();
-            }
-      }
-#endif
 

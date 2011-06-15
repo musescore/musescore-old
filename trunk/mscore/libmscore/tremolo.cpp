@@ -26,7 +26,7 @@
 #include "measure.h"
 #include "segment.h"
 #include "stem.h"
-#include "libmscore/painter.h"
+#include "painter.h"
 
 //---------------------------------------------------------
 //   Tremolo

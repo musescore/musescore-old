@@ -61,8 +61,6 @@
 #include "painter.h"
 #include "chordeditor.h"
 #include "noteevent.h"
-// #include "mscore.h"
-// #include "editstyle.h"
 
 //---------------------------------------------------------
 //   noteHeads

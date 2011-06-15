@@ -27,7 +27,7 @@
  */
 
 #include "config.h"
-#include "mscore.h"
+#include "musescore.h"
 #include "musicxml.h"
 #include "file.h"
 #include "score.h"

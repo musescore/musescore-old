@@ -20,7 +20,7 @@
 
 #include "layer.h"
 #include "score.h"
-#include "mscore.h"
+#include "musescore.h"
 
 //---------------------------------------------------------
 //   LayerManager

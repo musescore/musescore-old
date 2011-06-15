@@ -26,7 +26,7 @@
 #include "staff.h"
 #include "chord.h"
 #include "note.h"
-#include "libmscore/painter.h"
+#include "painter.h"
 
 //---------------------------------------------------------
 //   TremoloBar

@@ -18,7 +18,7 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "mscore.h"
+#include "musescore.h"
 #include "score.h"      // states
 #include "icons.h"
 
@@ -2542,7 +2542,7 @@ Shortcut MuseScore::sc[] = {
 #if defined(Q_WS_WIN)
           // Qt bug on windows : http://bugreports.qt.nokia.com/browse/QTBUG-15746
          Qt::CTRL+Qt::SHIFT+Qt::Key_Tab,
-#else         
+#else
          QKeySequence::PreviousChild,
 #endif
          Qt::ApplicationShortcut,

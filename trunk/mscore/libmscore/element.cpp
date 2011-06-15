@@ -62,7 +62,6 @@
 #include "articulation.h"
 #include "chord.h"
 #include "spacer.h"
-// #include "mscore.h"
 #include "tempotext.h"
 #include "harmony.h"
 #include "lyrics.h"

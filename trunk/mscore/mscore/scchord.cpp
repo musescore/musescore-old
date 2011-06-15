@@ -18,7 +18,7 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "mscore.h"
+#include "musescore.h"
 #include "chord.h"
 #include "note.h"
 #include "script.h"
@@ -159,9 +159,9 @@ static QScriptValue prototype_Chord_call(QScriptContext* context, QScriptEngine*
             case 8:     // "lyric"
                   {
                   //TODO adapt to new lyric code
-                  /*QStringList ll; 
+                  /*QStringList ll;
                   LyricsList * lyrlist = chord->segment()->lyricsList(0);
-	                for (ciLyrics lix = lyrlist->begin(); lix != lyrlist->end(); ++lix)      
+	                for (ciLyrics lix = lyrlist->begin(); lix != lyrlist->end(); ++lix)
                       ll.append((*lix)->getText());
                   return qScriptValueFromValue(context->engine(), ll);*/
                   return context->engine()->undefinedValue();

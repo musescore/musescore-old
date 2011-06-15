@@ -29,7 +29,7 @@
 #include "preferences.h"
 #include "utils.h"
 #include "segment.h"
-#include "mscore.h"
+#include "musescore.h"
 #include "seq.h"
 #include "staff.h"
 #include "chord.h"
@@ -74,8 +74,10 @@
 #include "measureproperties.h"
 
 #include "libmscore/articulation.h"
+#include "libmscore/tuplet.h"
 
 static const QEvent::Type CloneDrag = QEvent::Type(QEvent::User + 1);
+extern TextPalette* textPalette;
 
 //---------------------------------------------------------
 //   CloneEvent
@@ -3018,6 +3020,13 @@ void ScoreView::endEdit()
 
       _score->addRefresh(editObject->bbox());
       editObject->endEdit();
+      if (editObject->isText()) {
+            if (textPalette) {
+                  textPalette->hide();
+                  mscore->textTools()->kbAction()->setChecked(false);
+                  }
+            mscore->textTools()->hide();
+            }
       _score->addRefresh(editObject->bbox());
 
       if (editObject->isText()) {
@@ -3536,6 +3545,8 @@ bool ScoreView::fotoMode() const
 void ScoreView::editInputTransition(QInputMethodEvent* ie)
       {
       if (editObject->edit(this, curGrip, 0, 0, ie->commitString())) {
+            if (editObject->isText())
+                  mscore->textTools()->updateTools();
             updateGrips();
             _score->end();
             }
@@ -4186,4 +4197,673 @@ void ScoreView::setCursorVisible(bool v)
       {
       _cursor->setVisible(v);
       }
+
+//---------------------------------------------------------
+//   cmdTuplet
+//---------------------------------------------------------
+
+void ScoreView::cmdTuplet(int n, ChordRest* cr)
+      {
+      Fraction f(cr->duration());
+      int tick    = cr->tick();
+      Tuplet* ot  = cr->tuplet();
+
+      f.reduce();       //measure duration might not be reduced
+      Fraction ratio(n, f.numerator());
+      Fraction fr(1, f.denominator());
+      while (ratio.numerator() >= ratio.denominator()*2) {
+            ratio /= 2;
+            fr    /= 2;
+            }
+
+      Tuplet* tuplet = new Tuplet(_score);
+      tuplet->setRatio(ratio);
+
+      //
+      // "fr" is the fraction value of one tuple element
+      //
+      // "tuplet time" is "normal time" / tuplet->ratio()
+      //    Example: an 1/8 has 240 midi ticks, in an 1/8 triplet the note
+      //             has a tick duration of 240 / (3/2) = 160 ticks
+      //
+
+      tuplet->setDuration(f);
+      Duration baseLen(fr);
+      tuplet->setBaseLen(baseLen);
+
+      tuplet->setTrack(cr->track());
+      tuplet->setTick(tick);
+      Measure* measure = cr->measure();
+      tuplet->setParent(measure);
+
+      if (ot)
+            tuplet->setTuplet(ot);
+      _score->cmdCreateTuplet(cr, tuplet);
+
+      const QList<DurationElement*>& cl = tuplet->elements();
+
+      int ne = cl.size();
+      DurationElement* el = 0;
+      if (ne && cl[0]->type() == REST)
+            el  = cl[0];
+      else if (ne > 1)
+            el = cl[1];
+      if (el) {
+            _score->select(el, SELECT_SINGLE, 0);
+            if (!noteEntryMode()) {
+                  sm->postEvent(new CommandEvent("note-input"));
+                  qApp->processEvents();
+                  }
+            _score->inputState().setDuration(baseLen);
+            mscore->updateInputState(_score);
+            }
+      }
+
+//---------------------------------------------------------
+//   changeVoice
+//---------------------------------------------------------
+
+void ScoreView::changeVoice(int voice)
+      {
+      InputState* is = &score()->inputState();
+      int track = (is->track() / VOICES) * VOICES + voice;
+      is->setTrack(track);
+      //
+      // in note entry mode search for a valid input
+      // position
+      //
+      if (!is->noteEntryMode || is->cr()) {
+            score()->startCmd();
+            QList<Element*> el;
+            foreach(Element* e, score()->selection().elements()) {
+                  if (e->type() == NOTE) {
+                        Note* note = static_cast<Note*>(e);
+                        Chord* chord = note->chord();
+                        if (chord->voice() != voice) {
+                              int notes = note->chord()->notes().size();
+                              if (notes > 1) {
+                                    //
+                                    // TODO: check destination voice content
+                                    //
+                                    Note* newNote   = new Note(*note);
+                                    Chord* newChord = new Chord(score());
+                                    newNote->setSelected(false);
+                                    el.append(newNote);
+                                    int track = chord->staffIdx() * VOICES + voice;
+                                    newChord->setTrack(track);
+                                    newChord->setDurationType(chord->durationType());
+                                    newChord->setDuration(chord->duration());
+                                    newChord->setParent(chord->parent());
+                                    newChord->add(newNote);
+                                    score()->undoRemoveElement(note);
+                                    score()->undoAddElement(newChord);
+                                    }
+                              else if (notes > 1 || (voice && chord->voice())) {
+                                    Chord* newChord = new Chord(*chord);
+                                    int track = chord->staffIdx() * VOICES + voice;
+                                    newChord->setTrack(track);
+                                    newChord->setParent(chord->parent());
+                                    score()->undoRemoveElement(chord);
+                                    score()->undoAddElement(newChord);
+                                    }
+                              }
+                        }
+                  }
+            score()->selection().clear();
+            foreach(Element* e, el)
+                  score()->select(e, SELECT_ADD, -1);
+            score()->setLayoutAll(true);
+            score()->endCmd();
+            return;
+            }
+
+      is->setSegment(is->segment()->measure()->firstCRSegment());
+      score()->setUpdateAll(true);
+      score()->end();
+      mscore->setPos(is->segment()->tick());
+      }
+
+//---------------------------------------------------------
+//   harmonyEndEdit
+//---------------------------------------------------------
+
+void ScoreView::harmonyEndEdit()
+      {
+      Harmony* harmony = static_cast<Harmony*>(editObject);
+      Harmony* origH   = static_cast<Harmony*>(origEditObject);
+
+      if (harmony->isEmpty() && origH->isEmpty()) {
+            Measure* measure = (Measure*)(harmony->parent());
+            measure->remove(harmony);
+            }
+      }
+
+//---------------------------------------------------------
+//   lyricsUpDown
+//---------------------------------------------------------
+
+void ScoreView::lyricsUpDown(bool up, bool end)
+      {
+      Lyrics* lyrics   = static_cast<Lyrics*>(editObject);
+      int track        = lyrics->track();
+      ChordRest* cr    = lyrics->chordRest();
+      int verse        = lyrics->no();
+      const QList<Lyrics*>* ll = &lyrics->chordRest()->lyricsList();
+
+      if (up) {
+            if (verse == 0)
+                  return;
+            --verse;
+            }
+      else {
+            ++verse;
+            if (verse >= ll->size())
+                  return;
+            }
+      endEdit();
+      _score->startCmd();
+      lyrics = ll->value(verse);
+      if (!lyrics) {
+            lyrics = new Lyrics(_score);
+            lyrics->setTrack(track);
+            lyrics->setParent(cr);
+            lyrics->setNo(verse);
+            _score->undoAddElement(lyrics);
+            }
+
+      _score->select(lyrics, SELECT_SINGLE, 0);
+      startEdit(lyrics, -1);
+      adjustCanvasPosition(lyrics, false);
+      if (end)
+            ((Lyrics*)editObject)->moveCursorToEnd();
+      else
+            ((Lyrics*)editObject)->moveCursor(0);
+
+      _score->setLayoutAll(true);
+      }
+
+//---------------------------------------------------------
+//   lyricsTab
+//---------------------------------------------------------
+
+void ScoreView::lyricsTab(bool back, bool end, bool moveOnly)
+      {
+      Lyrics* lyrics   = (Lyrics*)editObject;
+      int track        = lyrics->track();
+      int staffIdx     = lyrics->staffIdx();
+      Segment* segment = lyrics->segment();
+      int verse        = lyrics->no();
+
+      Segment* nextSegment = segment;
+      if (back) {
+            // search prev chord
+            while ((nextSegment = nextSegment->prev1(SegChordRest | SegGrace))) {
+                  Element* el = nextSegment->element(track);
+                  if (el &&  el->type() == CHORD)
+                        break;
+                  }
+            }
+      else {
+            // search next chord
+            while ((nextSegment = nextSegment->next1(SegChordRest | SegGrace))) {
+                  Element* el = nextSegment->element(track);
+                  if (el &&  el->type() == CHORD)
+                        break;
+                  }
+            }
+      if (nextSegment == 0)
+            return;
+
+      endEdit();
+
+      // search previous lyric
+      Lyrics* oldLyrics = 0;
+      if (!back) {
+            while (segment) {
+                  const QList<Lyrics*>* nll = segment->lyricsList(staffIdx);
+                  if (nll) {
+                        oldLyrics = nll->value(verse);
+                        if (oldLyrics)
+                              break;
+                        }
+                  segment = segment->prev1(SegChordRest | SegGrace);
+                  }
+            }
+
+      const QList<Lyrics*>* ll = nextSegment->lyricsList(staffIdx);
+      if (ll == 0) {
+            printf("no next lyrics list: %s\n", nextSegment->element(track)->name());
+            return;
+            }
+      lyrics = ll->value(verse);
+
+      bool newLyrics = false;
+      if (!lyrics) {
+            lyrics = new Lyrics(_score);
+            lyrics->setTrack(track);
+            ChordRest* cr = static_cast<ChordRest*>(nextSegment->element(track));
+            lyrics->setParent(cr);
+            lyrics->setNo(verse);
+            lyrics->setSyllabic(Lyrics::SINGLE);
+            newLyrics = true;
+            }
+
+      _score->startCmd();
+
+      if (oldLyrics && !moveOnly) {
+            switch(lyrics->syllabic()) {
+                  case Lyrics::SINGLE:
+                  case Lyrics::BEGIN:
+                        break;
+                  case Lyrics::END:
+                        lyrics->setSyllabic(Lyrics::SINGLE);
+                        break;
+                  case Lyrics::MIDDLE:
+                        lyrics->setSyllabic(Lyrics::BEGIN);
+                        break;
+                  }
+            switch(oldLyrics->syllabic()) {
+                  case Lyrics::SINGLE:
+                  case Lyrics::END:
+                        break;
+                  case Lyrics::BEGIN:
+                        oldLyrics->setSyllabic(Lyrics::SINGLE);
+                        break;
+                  case Lyrics::MIDDLE:
+                        oldLyrics->setSyllabic(Lyrics::END);
+                        break;
+                  }
+            }
+
+      if (newLyrics)
+          _score->undoAddElement(lyrics);
+
+      _score->select(lyrics, SELECT_SINGLE, 0);
+      startEdit(lyrics, -1);
+      adjustCanvasPosition(lyrics, false);
+      if (end)
+            ((Lyrics*)editObject)->moveCursorToEnd();
+      else
+            ((Lyrics*)editObject)->moveCursor(0);
+
+      _score->setLayoutAll(true);
+      }
+
+//---------------------------------------------------------
+//   lyricsMinus
+//---------------------------------------------------------
+
+void ScoreView::lyricsMinus()
+      {
+      Lyrics* lyrics   = (Lyrics*)editObject;
+      int track        = lyrics->track();
+      int staffIdx     = lyrics->staffIdx();
+      Segment* segment = lyrics->segment();
+      int verse        = lyrics->no();
+
+      endEdit();
+
+      // search next chord
+      Segment* nextSegment = segment;
+      while ((nextSegment = nextSegment->next1(SegChordRest | SegGrace))) {
+            Element* el = nextSegment->element(track);
+            if (el &&  el->type() == CHORD)
+                  break;
+            }
+      if (nextSegment == 0) {
+            return;
+            }
+
+      // search previous lyric
+      Lyrics* oldLyrics = 0;
+      while (segment) {
+            const QList<Lyrics*>* nll = segment->lyricsList(staffIdx);
+            if (!nll) {
+                  segment = segment->prev1(SegChordRest | SegGrace);
+                  continue;
+                  }
+            oldLyrics = nll->value(verse);
+            if (oldLyrics)
+                  break;
+            segment = segment->prev1(SegChordRest | SegGrace);
+            }
+
+      _score->startCmd();
+
+      const QList<Lyrics*>* ll = nextSegment->lyricsList(staffIdx);
+      lyrics         = ll->value(verse);
+      bool newLyrics = (lyrics == 0);
+      if (!lyrics) {
+            lyrics = new Lyrics(_score);
+            lyrics->setTrack(track);
+            lyrics->setParent(nextSegment->element(track));
+            lyrics->setNo(verse);
+            lyrics->setSyllabic(Lyrics::END);
+            }
+
+      if(lyrics->syllabic()==Lyrics::BEGIN) {
+            lyrics->setSyllabic(Lyrics::MIDDLE);
+            }
+      else if(lyrics->syllabic()==Lyrics::SINGLE) {
+            lyrics->setSyllabic(Lyrics::END);
+            }
+
+      if (oldLyrics) {
+            switch(oldLyrics->syllabic()) {
+                  case Lyrics::BEGIN:
+                  case Lyrics::MIDDLE:
+                        break;
+                  case Lyrics::SINGLE:
+                        oldLyrics->setSyllabic(Lyrics::BEGIN);
+                        break;
+                  case Lyrics::END:
+                        oldLyrics->setSyllabic(Lyrics::MIDDLE);
+                        break;
+                  }
+            }
+
+      if(newLyrics)
+          _score->undoAddElement(lyrics);
+
+      _score->select(lyrics, SELECT_SINGLE, 0);
+      startEdit(lyrics, -1);
+      adjustCanvasPosition(lyrics, false);
+      ((Lyrics*)editObject)->moveCursorToEnd();
+
+      _score->setLayoutAll(true);
+      }
+
+//---------------------------------------------------------
+//   lyricsUnderscore
+//---------------------------------------------------------
+
+void ScoreView::lyricsUnderscore()
+      {
+      Lyrics* lyrics   = static_cast<Lyrics*>(editObject);
+      int track        = lyrics->track();
+      int staffIdx     = lyrics->staffIdx();
+      Segment* segment = lyrics->segment();
+      int verse        = lyrics->no();
+      int endTick      = segment->tick();
+
+      endEdit();
+
+      // search next chord
+      Segment* nextSegment = segment;
+      while ((nextSegment = nextSegment->next1(SegChordRest | SegGrace))) {
+            Element* el = nextSegment->element(track);
+            if (el &&  el->type() == CHORD)
+                  break;
+            }
+
+      // search previous lyric
+      Lyrics* oldLyrics = 0;
+      while (segment) {
+            const QList<Lyrics*>* nll = segment->lyricsList(staffIdx);
+            if (nll) {
+                  oldLyrics = nll->value(verse);
+                  if (oldLyrics)
+                        break;
+                  }
+            segment = segment->prev1(SegChordRest | SegGrace);
+            }
+
+      if (nextSegment == 0) {
+            if (oldLyrics) {
+                  switch(oldLyrics->syllabic()) {
+                        case Lyrics::SINGLE:
+                        case Lyrics::END:
+                              break;
+                        default:
+                              oldLyrics->setSyllabic(Lyrics::END);
+                              break;
+                        }
+                  if (oldLyrics->segment()->tick() < endTick)
+                        oldLyrics->setTicks(endTick - oldLyrics->segment()->tick());
+                  }
+            return;
+            }
+      _score->startCmd();
+
+      const QList<Lyrics*>* ll = nextSegment->lyricsList(staffIdx);
+      lyrics         = ll->value(verse);
+      bool newLyrics = (lyrics == 0);
+      if (!lyrics) {
+            lyrics = new Lyrics(_score);
+            lyrics->setTrack(track);
+            lyrics->setParent(nextSegment->element(track));
+            lyrics->setNo(verse);
+            }
+
+      lyrics->setSyllabic(Lyrics::SINGLE);
+
+      if (oldLyrics) {
+            switch(oldLyrics->syllabic()) {
+                  case Lyrics::SINGLE:
+                  case Lyrics::END:
+                        break;
+                  default:
+                        oldLyrics->setSyllabic(Lyrics::END);
+                        break;
+                  }
+            if (oldLyrics->segment()->tick() < endTick)
+                  oldLyrics->setTicks(endTick - oldLyrics->segment()->tick());
+            }
+      if (newLyrics)
+            _score->undoAddElement(lyrics);
+
+      _score->select(lyrics, SELECT_SINGLE, 0);
+      startEdit(lyrics, -1);
+      adjustCanvasPosition(lyrics, false);
+      ((Lyrics*)editObject)->moveCursorToEnd();
+
+      _score->setLayoutAll(true);
+      }
+
+//---------------------------------------------------------
+//   lyricsReturn
+//---------------------------------------------------------
+
+void ScoreView::lyricsReturn()
+      {
+      Lyrics* lyrics   = (Lyrics*)editObject;
+      Segment* segment = lyrics->segment();
+
+      endEdit();
+
+      _score->startCmd();
+
+      Lyrics* oldLyrics = lyrics;
+
+      lyrics = new Lyrics(_score);
+      lyrics->setTrack(oldLyrics->track());
+      lyrics->setParent(segment->element(oldLyrics->track()));
+      lyrics->setNo(oldLyrics->no() + 1);
+      _score->undoAddElement(lyrics);
+      _score->select(lyrics, SELECT_SINGLE, 0);
+      startEdit(lyrics, -1);
+      adjustCanvasPosition(lyrics, false);
+      _score->setLayoutAll(true);
+      }
+
+//---------------------------------------------------------
+//   lyricsEndEdit
+//---------------------------------------------------------
+
+void ScoreView::lyricsEndEdit()
+      {
+      Lyrics* lyrics = (Lyrics*)editObject;
+      Lyrics* origL  = (Lyrics*)origEditObject;
+      int endTick    = lyrics->segment()->tick();
+
+      // search previous lyric:
+      int verse    = lyrics->no();
+      int staffIdx = lyrics->staffIdx();
+
+      // search previous lyric
+      Lyrics* oldLyrics = 0;
+      Segment* segment  = lyrics->segment();
+      while (segment) {
+            const QList<Lyrics*>* nll = segment->lyricsList(staffIdx);
+            if (nll) {
+                  oldLyrics = nll->value(verse);
+                  if (oldLyrics)
+                        break;
+                  }
+            segment = segment->prev1(SegChordRest | SegGrace);
+            }
+
+      if (lyrics->isEmpty() && origL->isEmpty())
+            lyrics->parent()->remove(lyrics);
+      else {
+            if (oldLyrics && oldLyrics->syllabic() == Lyrics::END) {
+                  if (oldLyrics->endTick() >= endTick)
+                        oldLyrics->setTicks(0);
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   modifyElement
+//---------------------------------------------------------
+
+void ScoreView::modifyElement(Element* el)
+      {
+      if (el == 0) {
+            printf("modifyElement: el==0\n");
+            return;
+            }
+      Score* cs = el->score();
+      if (!cs->selection().isSingle()) {
+            printf("modifyElement: cs->selection().state() != SEL_SINGLE\n");
+            delete el;
+            return;
+            }
+      Element* e = cs->selection().element();
+      Chord* chord;
+      if (e->type() == CHORD)
+            chord = static_cast<Chord*>(e);
+      else if (e->type() == NOTE)
+            chord = static_cast<Note*>(e)->chord();
+      else {
+            printf("modifyElement: no note/Chord selected:\n  ");
+            e->dump();
+            delete el;
+            return;
+            }
+      switch (el->type()) {
+            case ARTICULATION:
+                  chord->add(static_cast<Articulation*>(el));
+                  break;
+            default:
+                  printf("modifyElement: %s not ARTICULATION\n", el->name());
+                  delete el;
+                  return;
+            }
+      cs->setLayoutAll(true);
+      }
+
+//---------------------------------------------------------
+//   chordTab
+//---------------------------------------------------------
+
+void ScoreView::chordTab(bool back)
+      {
+      Harmony* cn      = (Harmony*)editObject;
+      Segment* segment = cn->segment();
+      int track        = cn->track();
+      if (segment == 0) {
+            printf("chordTab: no segment\n");
+            return;
+            }
+
+      // search next chord
+      if (back)
+            segment = segment->prev1(SegChordRest);
+      else
+            segment = segment->next1(SegChordRest);
+      if (segment == 0) {
+            printf("no next segment\n");
+            return;
+            }
+      endEdit();
+      _score->startCmd();
+
+      // search for next chord name
+      cn = 0;
+      foreach(Element* e, segment->annotations()) {
+            if (e->type() == HARMONY && e->track() == track) {
+                  Harmony* h = static_cast<Harmony*>(e);
+                  cn = h;
+                  break;
+                  }
+            }
+
+      if (!cn) {
+            cn = new Harmony(_score);
+            cn->setTrack(track);
+            cn->setParent(segment);
+            _score->undoAddElement(cn);
+            }
+
+      _score->select(cn, SELECT_SINGLE, 0);
+      startEdit(cn, -1);
+      adjustCanvasPosition(cn, false);
+      ((Harmony*)editObject)->moveCursorToEnd();
+
+      _score->setLayoutAll(true);
+      }
+
+//---------------------------------------------------------
+//   cmdTuplet
+//---------------------------------------------------------
+
+void ScoreView::cmdTuplet(int n)
+      {
+      _score->startCmd();
+      if (noteEntryMode()) {
+            _score->expandVoice();
+            _score->changeCRlen(_score->inputState().cr(), _score->inputState().duration());
+            if (_score->inputState().cr())
+                  cmdTuplet(n, _score->inputState().cr());
+            }
+      else {
+            QSet<ChordRest*> set;
+            foreach(Element* e, _score->selection().elements()) {
+                  if (e->type() == NOTE) {
+                        Note* note = static_cast<Note*>(e);
+                        if(note->noteType() != NOTE_NORMAL) { //no tuplet on grace notes
+                              _score->endCmd();
+                              return;
+                              }
+                        e = note->chord();
+                        }
+                  if (e->isChordRest()) {
+                        ChordRest* cr = static_cast<ChordRest*>(e);
+                        if(!set.contains(cr)) {
+                              cmdTuplet(n, cr);
+                              set.insert(cr);
+                              }
+                        }
+                  }
+            }
+      _score->endCmd();
+      }
+
+//---------------------------------------------------------
+//   midiNoteReceived
+//---------------------------------------------------------
+
+void ScoreView::midiNoteReceived(int pitch, bool chord)
+      {
+      MidiInputEvent ev;
+      ev.pitch = pitch;
+      ev.chord = chord;
+
+printf("midiNoteReceived %d chord %d\n", pitch, chord);
+      score()->enqueueMidiEvent(ev);
+      if (!score()->undo()->active())
+            cmd(0);
+      }
+
 

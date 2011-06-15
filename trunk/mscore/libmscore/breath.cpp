@@ -24,7 +24,7 @@
 #include "segment.h"
 #include "measure.h"
 #include "score.h"
-#include "libmscore/painter.h"
+#include "painter.h"
 
 int Breath::symList[Breath::breathSymbols] = {
       rcommaSym,

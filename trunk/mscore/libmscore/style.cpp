@@ -22,13 +22,13 @@
 #include "style.h"
 #include "style_p.h"
 #include "xml.h"
-// #include "mscore.h"
 #include "score.h"
 #include "articulation.h"
 #include "harmony.h"
 #include "preferences.h"
 #include "chordlist.h"
 #include "page.h"
+#include "mscore.h"
 
 Style* style;
 //  20 points        font design size
@@ -993,20 +993,18 @@ void StyleData::load(QDomElement e)
 
 bool StyleData::isDefault(StyleIdx idx) const
       {
-#if 0 // TODO-LIB
       switch(styleTypes[idx].valueType()) {
             case ST_DOUBLE:
             case ST_SPATIUM:
-                  return _values[idx].toDouble() == mscore->baseStyle()->valueD(idx);
+                  return _values[idx].toDouble() == MScore::baseStyle()->valueD(idx);
             case ST_BOOL:
-                  return _values[idx].toBool() == mscore->baseStyle()->valueB(idx);
+                  return _values[idx].toBool() == MScore::baseStyle()->valueB(idx);
             case ST_INT:
             case ST_DIRECTION:
-                  return _values[idx].toInt() == mscore->baseStyle()->valueI(idx);
+                  return _values[idx].toInt() == MScore::baseStyle()->valueI(idx);
             case ST_STRING:
-                  return _values[idx].toString() == mscore->baseStyle()->valueSt(idx);
+                  return _values[idx].toString() == MScore::baseStyle()->valueSt(idx);
             }
-#endif
       return false;
       }
 
@@ -1018,7 +1016,6 @@ bool StyleData::isDefault(StyleIdx idx) const
 
 void StyleData::save(Xml& xml, bool optimize) const
       {
-#if 0 // TODO-LIB
       xml.stag("Style");
 
       for (int i = 0; i < ST_STYLES; ++i) {
@@ -1035,7 +1032,7 @@ void StyleData::save(Xml& xml, bool optimize) const
                   }
             }
       for (int i = 0; i < TEXT_STYLES; ++i) {
-            if (!optimize || _textStyles[i] != mscore->defaultStyle()->textStyle(TextStyleType(i)))
+            if (!optimize || _textStyles[i] != MScore::defaultStyle()->textStyle(TextStyleType(i)))
                   _textStyles[i].write(xml);
             }
       for (int i = TEXT_STYLES; i < _textStyles.size(); ++i)
@@ -1047,7 +1044,6 @@ void StyleData::save(Xml& xml, bool optimize) const
             }
       xml.tag("Spatium", _spatium / DPMM);
       xml.etag();
-#endif
       }
 
 //---------------------------------------------------------

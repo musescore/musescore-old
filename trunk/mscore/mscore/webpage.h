@@ -21,7 +21,7 @@
 #ifndef __WEBPAGE_H__
 #define __WEBPAGE_H__
 
-#include "mscore.h"
+#include "musescore.h"
 #include "scoreview.h"
 
 class MuseScore;

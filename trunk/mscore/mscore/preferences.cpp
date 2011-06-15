@@ -21,7 +21,7 @@
 #include "config.h"
 #include "xml.h"
 #include "score.h"
-#include "mscore.h"
+#include "musescore.h"
 #include "preferences.h"
 #include "prefsdialog.h"
 #include "msynth/synti.h"

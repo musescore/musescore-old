@@ -45,7 +45,7 @@
 #include "page.h"
 #include "barline.h"
 #include "seq.h"
-#include "mscore.h"
+#include "musescore.h"
 #include "tuplet.h"
 #include "padids.h"
 #include "xml.h"
@@ -366,8 +366,10 @@ void ScoreView::cmdAddPitch1(int pitch, bool addFlag)
             }
       if (noteEntryMode()) {
             Note* note = _score->addPitch(pitch, addFlag);
-            if (note)
+            if (note) {
+                  mscore->play(note->chord());
                   adjustCanvasPosition(note, false);
+                  }
             }
       else {
             Element* e = _score->selection().element();

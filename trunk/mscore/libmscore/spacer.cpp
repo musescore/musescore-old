@@ -22,7 +22,7 @@
 #include "preferences.h"
 #include "score.h"
 #include "scoreview.h"
-#include "libmscore/painter.h"
+#include "painter.h"
 
 //---------------------------------------------------------
 //   LayoutBreak
