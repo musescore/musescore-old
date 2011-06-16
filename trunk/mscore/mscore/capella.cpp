@@ -955,11 +955,12 @@ void Capella::readLayout()
 
 void Capella::readExtra()
       {
-      unsigned char n = readByte();
-      if (n)
+      uchar n = readByte();
+      if (n) {
             printf("Capella::readExtra(%d)\n", n);
-      for (int i = 0; i < n; ++i)
-            readByte();
+            for (int i = 0; i < n; ++i)
+                  readByte();
+            }
       }
 
 //---------------------------------------------------------
@@ -1029,11 +1030,17 @@ void CapKey::read()
 
 void CapMeter::read()
       {
-      numerator       = cap->readByte();
-      unsigned char d = cap->readByte();
-      log2Denom       = (d & 0x7f) - 1;
-      allaBreve       = d & 0x80;
-// printf("         Meter %d/%d allaBreve %d\n", numerator, log2Denom, allaBreve);
+      numerator = cap->readByte();
+      uchar d   = cap->readByte();
+      log2Denom = (d & 0x7f) - 1;
+      allaBreve = d & 0x80;
+      if (log2Denom > 7 || log2Denom < 0) {
+            printf("   Meter %d/%d allaBreve %d\n", numerator, log2Denom, allaBreve);
+            printf("   illegal fraction\n");
+            // abort();
+            log2Denom = 2;
+            numerator = 4;
+            }
       }
 
 //---------------------------------------------------------
@@ -1085,8 +1092,8 @@ printf("      readVoice %d\n", idx);
       unsigned nNoteObjs = readUnsigned();          // Notenobjekte
       for (unsigned i = 0; i < nNoteObjs; i++) {
             QColor color       = Qt::black;
-            unsigned char type = readByte();
-printf("         Voice %d read object %d\n", idx, type);
+            uchar type = readByte();
+printf("         Voice %d read object idx %d(%d) type %d\n", idx,  i, nNoteObjs, type);
             readExtra();
             if ((type != T_REST) && (type != T_CHORD) && (type != T_PAGE_BKGR))
                   color = readColor();
@@ -1416,15 +1423,6 @@ static void processBasicDrawObj(QList<BasicDrawObj*> objects, Segment* s, int tr
                                           case 's':
                                                 addDynamic(score, s, track, "sf");
                                                 break;
-                                          case 'z':
-                                                addDynamic(score, s, track, "sfz");
-                                                break;
-                                          case '{':
-                                                addDynamic(score, s, track, "fz");
-                                                break;
-                                          case '|':
-                                                addDynamic(score, s, track, "fp");
-                                                break;
                                           case 'f':
                                                 addDynamic(score, s, track, "f");
                                                 break;
@@ -1440,8 +1438,28 @@ static void processBasicDrawObj(QList<BasicDrawObj*> objects, Segment* s, int tr
                                           case 'j':
                                                 addDynamic(score, s, track, "mf");
                                                 break;
+                                          case 'l':         // ?
+                                                break;
+                                          case 't':   //    TRILL
+                                                addDynamic(score, s, track, "xxx");
+                                                break;
+                                          case 'u':   // fermata up
+                                          case 'v':   // 8va
+                                          case 'w':   // turn
+                                          case 'x':   // prall
+                                          case 'y':   // segno
+                                                break;
+                                          case 'z':   // sfz
+                                                addDynamic(score, s, track, "sfz");
+                                                break;
+                                          case '{':
+                                                addDynamic(score, s, track, "fz");
+                                                break;
+                                          case '|':
+                                                addDynamic(score, s, track, "fp");
+                                                break;
                                           default:
-                                                printf("====unsupported capella code %x\n", code);
+                                                printf("====unsupported capella code %x(%c)\n", code, code);
                                                 break;
                                           }
                                     break;
@@ -1482,6 +1500,7 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
       int voice = cvoice->voiceNo;
       int track = staffIdx * VOICES + voice;
 
+printf("readCapVoice 1\n");
       //
       // pass I
       //
@@ -1732,8 +1751,10 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                         {
                         CapMeter* o = static_cast<CapMeter*>(no);
 printf("     <Meter> tick %d %d/%d\n", tick, o->numerator, 1 << o->log2Denom);
-                        if (o->log2Denom > 7)
-                              break;
+                        if (o->log2Denom > 7 || o->log2Denom < 0) {
+                              printf("illegal fraction\n");
+                              abort();
+                              }
                         AL::SigEvent se = sigmap()->timesig(tick);
                         Fraction f(o->numerator, 1 << o->log2Denom);
                         AL::SigEvent ne(f);
@@ -1800,6 +1821,7 @@ printf("     <Barline>\n");
             }
       int endTick = tick;
 
+printf("readCapVoice 2\n");
       //
       // pass II
       //
@@ -1891,6 +1913,7 @@ printf("     <Barline>\n");
                   }
             tick += ticks;
             }
+printf("   readCapVoice\n");
       return endTick;
       }
 
