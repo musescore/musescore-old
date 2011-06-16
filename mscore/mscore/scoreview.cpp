@@ -928,11 +928,11 @@ void ScoreView::objectPopup(const QPoint& pos, Element* obj)
                   }
             }
       else if (cmd == "select-similar")
-            score()->selectSimilar(obj, false);
+            mscore->selectSimilar(obj, false);
       else if (cmd == "select-similar-staff")
-            score()->selectSimilar(obj, true);
+            mscore->selectSimilar(obj, true);
       else if (cmd == "select-dialog")
-            score()->selectElementDialog(obj);
+            mscore->selectElementDialog(obj);
       else {
             _score->startCmd();
             elementPropertyAction(cmd, obj);

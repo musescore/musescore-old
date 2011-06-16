@@ -166,8 +166,8 @@ enum ElementType {
       VBOX,
       TBOX,
       FBOX,
-      ICON,
       ACCIDENTAL_BRACKET,
+      ICON,
       MAXTYPE
       };
 

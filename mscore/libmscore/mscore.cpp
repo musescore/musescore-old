@@ -11,11 +11,13 @@
 //  the file LICENSE.GPL
 //=============================================================================
 
+#include "config.h"
 #include "style.h"
 #include "mscore.h"
 
 Style* MScore::_defaultStyle;
 Style* MScore::_baseStyle;
+QString MScore::_globalShare;
 
 //---------------------------------------------------------
 //   init
@@ -26,6 +28,18 @@ void MScore::init()
       _defaultStyle         = new Style();
       setDefaultStyle(_defaultStyle);     // initialize default style
       _baseStyle            = new Style(*_defaultStyle);
+
+#ifdef __MINGW32__
+      QDir dir(QCoreApplication::applicationDirPath() + QString("/../" INSTALL_NAME));
+      _globalShare = dir.absolutePath() + "/";
+#else
+#ifdef Q_WS_MAC
+      QDir dir(QCoreApplication::applicationDirPath() + QString("/../Resources"));
+      _globalShare = dir.absolutePath() + "/";
+#else
+      _globalShare = QString( INSTPREFIX "/share/" INSTALL_NAME);
+#endif
+#endif
       }
 
 //---------------------------------------------------------

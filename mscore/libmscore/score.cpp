@@ -565,8 +565,6 @@ int Score::readScore(QString name)
                   }
             }
 
-//TODO-LIB      mscore->updateRecentScores(this);
-
       int staffIdx = 0;
       foreach(Staff* st, _staves) {
             if (st->updateKeymap())

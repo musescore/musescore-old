@@ -21,6 +21,7 @@
 #include "chordlist.h"
 #include "xml.h"
 #include "pitchspelling.h"
+#include "mscore.h"
 
 //---------------------------------------------------------
 //   HChord
@@ -477,3 +478,98 @@ void ChordList::write(Xml& xml)
       foreach(ChordDescription* d, *this)
             d->write(xml);
       }
+
+//---------------------------------------------------------
+//   read
+//    read Chord List, return false on error
+//---------------------------------------------------------
+
+bool ChordList::read(const QString& name)
+      {
+      QString path;
+      QFileInfo ftest(name);
+      if (ftest.isAbsolute())
+            path = name;
+      else
+            path = QString("%1styles/%2").arg(MScore::globalShare()).arg(name);
+      if (debugMode)
+            printf("read chordlist from <%s>\n", qPrintable(path));
+      if (name.isEmpty())
+            return false;
+      QFile f(path);
+      if (!f.open(QIODevice::ReadOnly)) {
+#if 0 // TODO-LIB
+            if (!noGui) {
+                  QString error = QString("cannot open chord description: %1\n").arg(f.fileName());
+                  QMessageBox::warning(0,
+                     QWidget::tr("MuseScore: Open chord list failed:"),
+                     error,
+                     QString::null, QString::null, QString::null, 0, 1);
+                  }
+#endif
+            return false;
+            }
+      QDomDocument doc;
+      int line, column;
+      QString err;
+      if (!doc.setContent(&f, false, &err, &line, &column)) {
+            QString error = QString("error reading chord description %1 at line %2 column %3: %4\n")
+               .arg(f.fileName()).arg(line).arg(column).arg(err);
+#if 0 // TODO-LIB
+            QMessageBox::warning(0,
+               QWidget::tr("MuseScore: Load chord list failed:"),
+               error,
+               QString::null, QString::null, QString::null, 0, 1);
+#endif
+            return false;
+            }
+      docName = f.fileName();
+
+      for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            if (e.tagName() == "museScore") {
+                  // QString version = e.attribute(QString("version"));
+                  // QStringList sl = version.split('.');
+                  // int _mscVersion = sl[0].toInt() * 100 + sl[1].toInt();
+                  read(e);
+                  return true;
+                  }
+            }
+      return false;
+      }
+
+//---------------------------------------------------------
+//   writeChordList
+//---------------------------------------------------------
+
+bool ChordList::write(const QString& name)
+      {
+      QString ext(".xml");
+      QFileInfo info(name);
+
+      if (info.suffix().isEmpty())
+            info.setFile(info.filePath() + ext);
+      QFile f(info.filePath());
+      if (!f.open(QIODevice::WriteOnly)) {
+#if 0  // TODO-LIB
+            QString s = ("Open Chord Description\n") + f.fileName() + ("\nfailed: ")
+               + QString(strerror(errno));
+            QMessageBox::critical(mscore, ("MuseScore: Open Chord Description"), s);
+#endif
+            return false;
+            }
+
+      Xml xml(&f);
+      xml.header();
+      xml.stag("museScore version=\"" MSC_VERSION "\"");
+
+      write(xml);
+      xml.etag();
+      if (f.error() != QFile::NoError) {
+            QString s = qApp->translate("ChordList", "Write Chord Description failed: ") + f.errorString();
+            QMessageBox::critical(0, ("MuseScore: Write Chord Description"), s);
+            }
+      return true;
+      }
+
+
+
