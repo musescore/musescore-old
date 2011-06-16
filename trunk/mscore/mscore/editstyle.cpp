@@ -213,8 +213,8 @@ void EditStyle::getValues()
 
       if (lstyle.valueSt(ST_chordDescriptionFile) != chordDescriptionFile->text()) {
             ChordList* cl = new ChordList();
-            mscore->readChordList(cl, "chords.xml");
-            mscore->readChordList(cl, chordDescriptionFile->text());
+            cl->read("chords.xml");
+            cl->read(chordDescriptionFile->text());
             lstyle.setChordList(cl);
             lstyle.set(ST_chordDescriptionFile, chordDescriptionFile->text());
             }

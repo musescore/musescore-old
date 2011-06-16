@@ -67,6 +67,7 @@
 #include "stafftext.h"
 #include "instrchange.h"
 #include "profile.h"
+#include "icon.h"
 
 extern bool useFactorySettings;
 

@@ -14,6 +14,7 @@
 #ifndef __MSCORE_H__
 #define __MSCORE_H__
 
+class Style;
 
 //---------------------------------------------------------
 //   MScore
@@ -23,11 +24,13 @@
 class MScore {
       static Style* _defaultStyle;
       static Style* _baseStyle;
+      static QString _globalShare;
 
    public:
       static void init();
       static Style* defaultStyle();
       static Style* baseStyle();
+      static const QString& globalShare() { return _globalShare; }
       };
 
 

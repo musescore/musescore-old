@@ -171,8 +171,8 @@ static const char* elementNames[] = {
       QT_TRANSLATE_NOOP("elementName", "VBox"),
       QT_TRANSLATE_NOOP("elementName", "TBox"),
       QT_TRANSLATE_NOOP("elementName", "FBox"),
-      QT_TRANSLATE_NOOP("elementName", "Icon"),
-      QT_TRANSLATE_NOOP("elementName", "AccidentalBracket")
+      QT_TRANSLATE_NOOP("elementName", "AccidentalBracket"),
+      QT_TRANSLATE_NOOP("elementName", "Icon")
       };
 
 int LinkedElements::_linkId = 0;    // highest id in use
@@ -1162,34 +1162,6 @@ void Element::remove(Element* e)
       }
 
 //---------------------------------------------------------
-//   write
-//---------------------------------------------------------
-
-void Icon::write(Xml& xml) const
-      {
-      xml.stag(name());
-      Element::writeProperties(xml);
-      xml.tag("action", _action->data().toString());
-      xml.etag();
-      }
-
-//---------------------------------------------------------
-//   read
-//---------------------------------------------------------
-
-void Icon::read(QDomElement e)
-      {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            if (tag == "action") {
-//TODO-LIB                  _action = getAction(qPrintable(e.text()));
-                  }
-            else if (!Element::readProperties(e))
-                  domError(e);
-            }
-      }
-
-//---------------------------------------------------------
 //   create
 //    Element factory
 //---------------------------------------------------------
@@ -1226,7 +1198,7 @@ Element* Element::create(ElementType type, Score* score)
             case MARKER:            return new Marker(score);
             case JUMP:              return new Jump(score);
             case REPEAT_MEASURE:    return new RepeatMeasure(score);
-            case ICON:              return new Icon(score);
+//            case ICON:              return new Icon(score);
             case NOTE:              return new Note(score);
             case SYMBOL:            return new Symbol(score);
             case FSYMBOL:           return new FSymbol(score);
@@ -1373,7 +1345,7 @@ const char* Element::name(ElementType type)
             case VBOX:              return "VBox";
             case TBOX:              return "TBox";
             case FBOX:              return "FBox";
-            case ICON:              return "Icon";
+//            case ICON:              return "Icon";
             case ACCIDENTAL_BRACKET:  return "AccidentalBracket";
             case TAB_DURATION_SYMBOL: return "TabDurationSymbol";
             case INVALID:

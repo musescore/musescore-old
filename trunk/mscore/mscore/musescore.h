@@ -471,8 +471,6 @@ class MuseScore : public QMainWindow {
       double getMag(ScoreView*) const;
       void setMag(double);
       bool noScore() const { return scoreList.isEmpty(); }
-      bool writeChordList(ChordList*, const QString& name);
-      bool readChordList(ChordList* list, const QString& name);
 
       TextTools* textTools();
       void showDrumTools(Drumset*, Staff*);
@@ -539,6 +537,8 @@ class MuseScore : public QMainWindow {
       void setEditPos(const QPointF&);
 
       void tupletDialog();
+      void selectSimilar(Element*, bool);
+      void selectElementDialog(Element* e);
       };
 
 extern MuseScore* mscore;

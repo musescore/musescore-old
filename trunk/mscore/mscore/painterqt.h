@@ -53,12 +53,12 @@ class PainterQt : public Painter {
       virtual void setPenColor(const QColor&);
       virtual void setBrushColor(const QColor&);
 
-      virtual QColor penColor() const             { return _painter->pen().color(); }
-      virtual const QTransform& transform() const { return _painter->transform(); }
+      virtual QColor penColor() const                { return _painter->pen().color(); }
+      virtual const QTransform& transform() const    { return _painter->transform();   }
       virtual void setTransform(const QTransform& t) { _painter->setWorldTransform(t); }
 
       virtual void drawLine(qreal a, qreal b, qreal c, qreal d) {
-            _painter->drawLine(a, b, c, d);
+            _painter->drawLine(QLineF(a, b, c, d));
             }
       virtual void fillRect(qreal x1, qreal y1,
          qreal x2, qreal y2,

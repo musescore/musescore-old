@@ -512,25 +512,6 @@ class RubberBand : public Element {
       QPointF p2() const { return _p2; }
       };
 
-//---------------------------------------------------------
-//   Icon
-//    dummy element, used for drag&drop
-//---------------------------------------------------------
-
-class Icon : public Element {
-      QAction* _action;
-
-   public:
-      Icon(Score* s) : Element(s) {}
-      virtual Icon* clone() const        { return new Icon(*this); }
-      virtual ElementType type() const   { return ICON;    }
-      void setAction(QAction* a)         { _action = a;    }
-      QIcon icon() const                 { return _action->icon();   }
-      QAction* action() const            { return _action; }
-      virtual void write(Xml&) const;
-      virtual void read(QDomElement);
-      };
-
 extern void collectElements(void*, Element*);
 extern bool elementLessThan(const Element* const, const Element* const);
 

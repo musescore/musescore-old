@@ -422,8 +422,8 @@ void Score::updateRepeatList(bool expandRepeats)
 
 void Score::toEList(EventMap* events)
       {
-      // TODO-LIB:
-      bool repeat = true;     // = getAction("repeat")->isChecked();
+      // TODO-LIB:   bool repeat = getAction("repeat")->isChecked();
+      bool repeat = true;
       updateRepeatList(repeat);
       _foundPlayPosAfterRepeats = false;
       updateChannel();

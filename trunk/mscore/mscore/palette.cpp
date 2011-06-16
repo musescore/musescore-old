@@ -39,6 +39,7 @@
 #include "textline.h"
 #include "painterqt.h"
 #include "measure.h"
+#include "icon.h"
 #include "libmscore/mscore.h"
 
 //---------------------------------------------------------

@@ -770,8 +770,6 @@ class Score : public QObject {
       double point(const Spatium sp) const { return sp.val() * spatium(); }
 
       void scanElements(void* data, void (*func)(void*, Element*));
-      void selectSimilar(Element*, bool);
-      void selectElementDialog(Element* e);
       QByteArray buildCanonical(int track);
       int fileDivision() const { return _fileDivision; } ///< division of current loading *.msc file
       void splitStaff(int staffIdx, int splitPoint);

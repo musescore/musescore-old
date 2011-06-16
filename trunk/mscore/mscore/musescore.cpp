@@ -69,7 +69,9 @@
 #include "mediadialog.h"
 #include "profile.h"
 #include "webpage.h"
+#include "selectdialog.h"
 #include "libmscore/mscore.h"
+#include "libmscore/system.h"
 
 #ifdef OSC
 #include "ofqf/qoscserver.h"
@@ -4185,4 +4187,90 @@ void MuseScore::gotoPreviousScore()
             --idx;
       tab1->setCurrentIndex(idx);
       }
+
+//---------------------------------------------------------
+//   collectMatch
+//---------------------------------------------------------
+
+static void collectMatch(void* data, Element* e)
+      {
+      ElementPattern* p = static_cast<ElementPattern*>(data);
+/*      if (p->type == e->type() && p->subtype != e->subtype())
+            printf("%s subtype %d does not match\n", e->name(), e->subtype());
+      */
+      if ((p->type != e->type()) || (p->subtype != e->subtype()))
+            return;
+      if ((p->staff != -1) && (p->staff != e->staffIdx()))
+            return;
+      if (e->type() == CHORD || e->type() == REST || e->type() == NOTE || e->type() == LYRICS) {
+            if (p->voice != -1 && p->voice != e->voice())
+                  return;
+            }
+      if (p->system) {
+            Element* ee = e;
+            do {
+                  if (ee->type() == SYSTEM) {
+                        if (p->system != ee)
+                              return;
+                        break;
+                        }
+                  ee = ee->parent();
+                  } while (ee);
+            }
+      p->el.append(e);
+      }
+
+//---------------------------------------------------------
+//   selectSimilar
+//---------------------------------------------------------
+
+void MuseScore::selectSimilar(Element* e, bool sameStaff)
+      {
+      Score* score = e->score();
+      ElementPattern pattern;
+      pattern.type    = e->type();
+      pattern.subtype = e->subtype();
+      pattern.staff   = sameStaff ? e->staffIdx() : -1;
+      pattern.voice   = -1;
+      pattern.system  = 0;
+
+      score->scanElements(&pattern, collectMatch);
+
+      score->select(0, SELECT_SINGLE, 0);
+      foreach(Element* e, pattern.el)
+            score->select(e, SELECT_ADD, 0);
+      }
+
+//---------------------------------------------------------
+//   selectElementDialog
+//---------------------------------------------------------
+
+void MuseScore::selectElementDialog(Element* e)
+      {
+      Score* score = e->score();
+      SelectDialog sd(e, 0);
+      if (sd.exec()) {
+            ElementPattern pattern;
+            sd.setPattern(&pattern);
+            score->scanElements(&pattern, collectMatch);
+            if (sd.doReplace()) {
+                  score->select(0, SELECT_SINGLE, 0);
+                  foreach(Element* ee, pattern.el)
+                        score->select(ee, SELECT_ADD, 0);
+                  }
+            else if (sd.doSubtract()) {
+                  QList<Element*> sl(score->selection().elements());
+                  foreach(Element* ee, pattern.el)
+                        sl.removeOne(ee);
+                  score->select(0, SELECT_SINGLE, 0);
+                  foreach(Element* ee, sl)
+                        score->select(ee, SELECT_ADD, 0);
+                  }
+            else if (sd.doAdd()) {
+                  foreach(Element* ee, pattern.el)
+                        score->select(ee, SELECT_ADD, 0);
+                  }
+            }
+      }
+
 
