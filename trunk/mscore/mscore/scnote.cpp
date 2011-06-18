@@ -20,12 +20,12 @@
 
 #include "musescore.h"
 #include "scnote.h"
-#include "note.h"
-#include "utils.h"
-#include "undo.h"
+#include "libmscore/note.h"
+#include "libmscore/utils.h"
+#include "libmscore/undo.h"
 #include "script.h"
-#include "pitchspelling.h"
-#include "page.h"
+#include "libmscore/pitchspelling.h"
+#include "libmscore/page.h"
 
 Q_DECLARE_METATYPE(Note);
 Q_DECLARE_METATYPE(Note*);

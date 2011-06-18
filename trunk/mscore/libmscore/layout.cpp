@@ -24,7 +24,6 @@
 #include "key.h"
 #include "clef.h"
 #include "score.h"
-#include "globals.h"
 #include "segment.h"
 #include "text.h"
 #include "staff.h"
@@ -42,7 +41,6 @@
 #include "part.h"
 #include "utils.h"
 #include "measure.h"
-#include "preferences.h"
 #include "volta.h"
 #include "beam.h"
 #include "tuplet.h"
@@ -50,6 +48,7 @@
 #include "fingering.h"
 #include "stem.h"
 #include "layoutbreak.h"
+#include "mscore.h"
 
 //---------------------------------------------------------
 //   rebuildBspTree
@@ -743,7 +742,7 @@ void Score::doLayout()
             }
 #endif
       rebuildBspTree();
-      emit layoutChanged();
+//      emit layoutChanged();
       }
 
 //---------------------------------------------------------

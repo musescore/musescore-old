@@ -92,7 +92,7 @@ class HBox : public Box {
 
       virtual void layout();
 
-      virtual QRectF drag(const EditData&);
+      virtual QRectF drag(const EditData& s);
       void layout2();
       virtual bool isMovable() const;
       };

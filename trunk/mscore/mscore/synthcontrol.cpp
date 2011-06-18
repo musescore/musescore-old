@@ -25,12 +25,13 @@
 #include "preferences.h"
 #include "mixer.h"
 #include "aeolus/aeolus/aeolus.h"
-#include "score.h"
+#include "libmscore/score.h"
 #include "file.h"
 #include "msynth/sparm_p.h"
 #include "fluid/rev.h"
 #include "fluid/fluid.h"
 #include "icons.h"
+#include "libmscore/mscore.h"
 
 using namespace FluidS;
 
@@ -214,7 +215,7 @@ void MuseScore::closeSynthControl()
 
 void SynthControl::updatePreferences()
       {
-      if ((preferences.soundFont != soundFont->text())
+      if ((MScore::soundFont != soundFont->text())
          || (preferences.tuning != masterTuning->value())
          || (preferences.masterGain != gain->value())
          || (preferences.reverbRoomSize != reverbRoomSize->value())
@@ -225,7 +226,7 @@ void SynthControl::updatePreferences()
          ) {
             preferences.dirty  = true;
             }
-      preferences.soundFont  = soundFont->text();
+      MScore::soundFont  = soundFont->text();
       preferences.tuning     = masterTuning->value();
       preferences.masterGain = gain->value();
 

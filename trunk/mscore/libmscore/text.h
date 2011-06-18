@@ -21,7 +21,6 @@
 #ifndef __TEXT_H__
 #define __TEXT_H__
 
-#include "globals.h"
 #include "element.h"
 #include "style.h"
 #include "elementlayout.h"

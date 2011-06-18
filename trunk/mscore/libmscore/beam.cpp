@@ -25,7 +25,6 @@
 #include "segment.h"
 #include "score.h"
 #include "chord.h"
-#include "preferences.h"
 #include "al/sig.h"
 #include "style.h"
 #include "note.h"
@@ -41,6 +40,7 @@
 #include "stem.h"
 #include "painter.h"
 #include "hook.h"
+#include "mscore.h"
 
 //---------------------------------------------------------
 //   endBeam

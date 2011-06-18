@@ -22,7 +22,7 @@
 #define __ELEMENT_H__
 
 #include "xml.h"
-#include "globals.h"
+#include "mscore.h"
 
 /**
  \file

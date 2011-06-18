@@ -21,7 +21,7 @@
 #ifndef __TEMPOTEXTPROPERTIES_H__
 #define __TEMPOTEXTPROPERTIES_H__
 
-#include "text.h"
+#include "libmscore/text.h"
 #include "ui_tempoproperties.h"
 
 class TempoText;

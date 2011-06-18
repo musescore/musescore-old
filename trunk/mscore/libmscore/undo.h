@@ -27,7 +27,7 @@
 */
 
 #include "spatium.h"
-#include "globals.h"
+#include "mscore.h"
 #include "al/sig.h"
 #include "al/tempo.h"
 #include "input.h"
@@ -110,18 +110,12 @@ class UndoCommand {
 //   UndoStack
 //---------------------------------------------------------
 
-class UndoStack : public QObject {
-      Q_OBJECT
+class UndoStack {
       UndoGroup* group;
       UndoCommand* curCmd;
       QList<UndoCommand*> list;
       int curIdx;
       int cleanIdx;
-
-   signals:
-      void canUndoChanged(bool);
-      void canRedoChanged(bool);
-      void cleanChanged(bool);
 
    public:
       UndoStack();
@@ -146,21 +140,14 @@ class UndoStack : public QObject {
 //   UndoGroup
 //---------------------------------------------------------
 
-class UndoGroup : public QObject {
-      Q_OBJECT
+class UndoGroup {
       QList<UndoStack*> group;
       UndoStack* _activeStack;
 
-   signals:
-      void canUndoChanged(bool);
-      void canRedoChanged(bool);
-      void cleanChanged(bool);
-
-   public slots:
+   public:
       void undo();
       void redo();
 
-   public:
       UndoGroup();
       void addStack(UndoStack*);
       void removeStack(UndoStack*);

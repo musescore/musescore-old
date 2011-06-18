@@ -20,9 +20,10 @@
 
 #include "magbox.h"
 #include "scoreview.h"
-#include "page.h"
+#include "libmscore/page.h"
 #include "musescore.h"
-#include "score.h"
+#include "libmscore/score.h"
+#include "libmscore/mscore.h"
 
 static unsigned int startMag = MAG_100;
 

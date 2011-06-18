@@ -37,51 +37,6 @@
 #include "chord.h"
 
 //---------------------------------------------------------
-//   RecordButton
-//---------------------------------------------------------
-
-RecordButton::RecordButton(QWidget* parent)
-   : SimpleButton(":/data/recordOn.svg", ":/data/recordOff.svg", parent)
-      {
-      setCheckable(true);
-      defaultAction()->setCheckable(true);
-      setToolTip(tr("record"));
-      }
-
-//---------------------------------------------------------
-//   GreendotButton
-//---------------------------------------------------------
-
-GreendotButton::GreendotButton(QWidget* parent)
-   : SimpleButton(":/data/greendot.svg", ":/data/darkgreendot.svg", parent)
-      {
-      setCheckable(true);
-      setToolTip(tr("record"));
-      }
-
-//---------------------------------------------------------
-//   drawHandle
-//---------------------------------------------------------
-
-QRectF drawHandle(QPainter& p, const QPointF& pos, bool active)
-      {
-      p.save();
-      p.setPen(QPen(QColor(Qt::blue), 2.0/p.matrix().m11()));
-      if (active)
-            p.setBrush(Qt::blue);
-      else
-            p.setBrush(Qt::NoBrush);
-      qreal w = 8.0 / p.matrix().m11();
-      qreal h = 8.0 / p.matrix().m22();
-
-      QRectF r(-w/2, -h/2, w, h);
-      r.translate(pos);
-      p.drawRect(r);
-      p.restore();
-      return r;
-      }
-
-//---------------------------------------------------------
 //   handleRect
 //---------------------------------------------------------
 

@@ -18,12 +18,12 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "score.h"
-#include "tempotext.h"
+#include "libmscore/score.h"
+#include "libmscore/tempotext.h"
 #include "tempoproperties.h"
 #include "al/tempo.h"
-#include "system.h"
-#include "measure.h"
+#include "libmscore/system.h"
+#include "libmscore/measure.h"
 
 //---------------------------------------------------------
 //   TempoProperties

@@ -82,6 +82,7 @@ class Marker : public Text {
       virtual void read(QDomElement);
       virtual void write(Xml& xml) const;
 
+
       QString label() const            { return _label; }
       void setLabel(const QString& s)  { _label = s; }
 

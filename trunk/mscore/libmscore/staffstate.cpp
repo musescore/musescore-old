@@ -19,16 +19,15 @@
 //=============================================================================
 
 #include "staffstate.h"
-#include "preferences.h"
 #include "score.h"
 #include "scoreview.h"
-// #include "selinstrument.h"
 #include "instrtemplate.h"
 #include "segment.h"
 #include "staff.h"
 #include "part.h"
 #include "seq.h"
 #include "painter.h"
+#include "mscore.h"
 
 //---------------------------------------------------------
 //   StaffState
@@ -77,9 +76,9 @@ void StaffState::draw(Painter* painter) const
             return;
       QPen pen;
       if (selected())
-            painter->setPenColor(preferences.selectColor[0]);
+            painter->setPenColor(MScore::selectColor[0]);
       else
-            painter->setPenColor(preferences.layoutBreakColor);
+            painter->setPenColor(MScore::layoutBreakColor);
 
       painter->setLineWidth(lw);
       painter->setCapStyle(Qt::RoundCap);

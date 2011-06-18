@@ -21,7 +21,7 @@
 #ifndef __INSTRUMENT_H__
 #define __INSTRUMENT_H__
 
-#include "globals.h"
+#include "mscore.h"
 #include "event.h"
 #include "interval.h"
 

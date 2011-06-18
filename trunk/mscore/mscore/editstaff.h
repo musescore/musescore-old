@@ -23,7 +23,7 @@
 
 #include "ui_editstaff.h"
 #include "ui_selectinstr.h"
-#include "instrument.h"
+#include "libmscore/instrument.h"
 
 class Staff;
 struct InstrumentTemplate;

@@ -25,56 +25,60 @@
 
 #include "globals.h"
 #include "scoreview.h"
-#include "score.h"
+#include "libmscore/score.h"
 #include "preferences.h"
-#include "utils.h"
-#include "segment.h"
+#include "libmscore/utils.h"
+#include "libmscore/segment.h"
 #include "musescore.h"
 #include "seq.h"
-#include "staff.h"
-#include "chord.h"
-#include "rest.h"
-#include "page.h"
-#include "xml.h"
-#include "text.h"
-#include "note.h"
-#include "dynamic.h"
-#include "pedal.h"
-#include "volta.h"
-#include "ottava.h"
-#include "textline.h"
-#include "trill.h"
-#include "hairpin.h"
-#include "image.h"
-#include "part.h"
+#include "libmscore/staff.h"
+#include "libmscore/chord.h"
+#include "libmscore/rest.h"
+#include "libmscore/page.h"
+#include "libmscore/xml.h"
+#include "libmscore/text.h"
+#include "libmscore/note.h"
+#include "libmscore/dynamic.h"
+#include "libmscore/pedal.h"
+#include "libmscore/volta.h"
+#include "libmscore/ottava.h"
+#include "libmscore/textline.h"
+#include "libmscore/trill.h"
+#include "libmscore/hairpin.h"
+#include "libmscore/image.h"
+#include "libmscore/part.h"
 #include "editdrumset.h"
 #include "editstaff.h"
 #include "splitstaff.h"
-#include "barline.h"
-#include "system.h"
+#include "libmscore/barline.h"
+#include "libmscore/system.h"
 #include "magbox.h"
-#include "measure.h"
+#include "libmscore/measure.h"
 #include "drumroll.h"
-#include "lyrics.h"
+#include "libmscore/lyrics.h"
 #include "textpalette.h"
-#include "undo.h"
-#include "slur.h"
-#include "harmony.h"
-#include "navigate.h"
-#include "tablature.h"
-#include "shadownote.h"
-#include "sym.h"
-#include "lasso.h"
-#include "box.h"
-#include "cursor.h"
+#include "libmscore/undo.h"
+#include "libmscore/slur.h"
+#include "libmscore/harmony.h"
+#include "libmscore/navigate.h"
+#include "libmscore/tablature.h"
+#include "libmscore/shadownote.h"
+#include "libmscore/sym.h"
+#include "libmscore/lasso.h"
+#include "libmscore/box.h"
+#include "libmscore/cursor.h"
 #include "texttools.h"
-#include "clef.h"
+#include "libmscore/clef.h"
 #include "scoretab.h"
 #include "painterqt.h"
 #include "measureproperties.h"
+#include "libmscore/pitchspelling.h"
 
 #include "libmscore/articulation.h"
 #include "libmscore/tuplet.h"
+#include "libmscore/stafftext.h"
+#include "libmscore/keysig.h"
+#include "libmscore/timesig.h"
 
 static const QEvent::Type CloneDrag = QEvent::Type(QEvent::User + 1);
 extern TextPalette* textPalette;
@@ -816,7 +820,7 @@ ScoreView::ScoreView(QWidget* parent)
             setMouseTracking(true);
 
       if (preferences.bgUseColor)
-            setBackground(preferences.bgColor);
+            setBackground(MScore::bgColor);
       else {
             QPixmap* pm = new QPixmap(preferences.bgWallpaper);
             setBackground(pm);
@@ -837,7 +841,11 @@ ScoreView::ScoreView(QWidget* parent)
 
 void ScoreView::setScore(Score* s)
       {
+      if (_score)
+            _score->removeViewer(this);
       _score = s;
+      _score->addViewer(this);
+
       if (_cursor == 0) {
             _cursor = new Cursor(_score);
             shadowNote = new ShadowNote(_score);
@@ -853,9 +861,9 @@ void ScoreView::setScore(Score* s)
 
       lasso->setScore(s);
       _foto->setScore(s);
-      connect(s, SIGNAL(updateAll()),                SLOT(updateAll()));
-      connect(s, SIGNAL(dataChanged(const QRectF&)), SLOT(dataChanged(const QRectF&)));
-      connect(s, SIGNAL(inputCursorChanged()),       SLOT(moveCursor()));
+//      connect(s, SIGNAL(updateAll()),                SLOT(updateAll()));
+//      connect(s, SIGNAL(dataChanged(const QRectF&)), SLOT(dataChanged(const QRectF&)));
+//      connect(s, SIGNAL(inputCursorChanged()),       SLOT(moveCursor()));
       }
 
 //---------------------------------------------------------
@@ -864,6 +872,8 @@ void ScoreView::setScore(Score* s)
 
 ScoreView::~ScoreView()
       {
+      if (_score)
+            _score->removeViewer(this);
       delete lasso;
       delete _foto;
       delete _cursor;
@@ -1461,7 +1471,7 @@ void ScoreView::paintEvent(QPaintEvent* ev)
       if (grips) {
             qreal lw = 2.0/p.matrix().m11();
             // QPen pen(Qt::blue);
-            QPen pen(preferences.defaultColor);
+            QPen pen(MScore::defaultColor);
             pen.setWidthF(lw);
             p.setPen(pen);
             for (int i = 0; i < grips; ++i) {
@@ -2813,7 +2823,7 @@ void ScoreView::cmd(const QAction* a)
             Element* el = score()->selection().element();
             if (el && (el->type() == FINGERING)) {
                   score()->startCmd();
-                  QPointF pt(preferences.nudgeStep * el->spatium(), 0.0);
+                  QPointF pt(MScore::nudgeStep * el->spatium(), 0.0);
                   if (cmd == "prev-chord")
                         score()->undoMove(el, el->userOff() - pt);
                   else if (cmd == "next-chord")
@@ -4864,6 +4874,571 @@ printf("midiNoteReceived %d chord %d\n", pitch, chord);
       score()->enqueueMidiEvent(ev);
       if (!score()->undo()->active())
             cmd(0);
+      }
+
+//---------------------------------------------------------
+//   cmdInsertNote
+//---------------------------------------------------------
+
+void ScoreView::cmdInsertNote(int note)
+      {
+      printf("not implemented: cmdInsertNote %d\n", note);
+      }
+
+//---------------------------------------------------------
+//   cmdAddPitch
+//    c d e f g a b entered:
+//       insert note or add note to chord
+//---------------------------------------------------------
+
+void ScoreView::cmdAddPitch(int note, bool addFlag)
+      {
+      InputState& is = _score->inputState();
+      if (is.track() == -1)          // invalid state
+            return;
+      Drumset* ds = is.drumset();
+      int pitch;
+      if (ds) {
+            char note1 = "CDEFGAB"[note];
+            pitch = -1;
+            for (int i = 0; i < 127; ++i) {
+                  if (!ds->isValid(i))
+                        continue;
+                  if (ds->shortcut(i) && (ds->shortcut(i) == note1)) {
+                        pitch = i;
+                        break;
+                        }
+                  }
+            if (pitch == -1) {
+                  printf("  shortcut %c not defined in drumset\n", note1);
+                  return;
+                  }
+            is.setDrumNote(pitch);
+            }
+      else {
+            KeySigEvent key = _score->staff(is.track() / VOICES)->keymap()->key(is.tick());
+            int octave = is.pitch / 12;
+            pitch      = pitchKeyAdjust(note, key.accidentalType());
+            int delta  = is.pitch - (octave*12 + pitch);
+            if (delta > 6)
+                  is.pitch = (octave+1)*12 + pitch;
+            else if (delta < -6)
+                  is.pitch = (octave-1)*12 + pitch;
+            else
+                  is.pitch = octave*12 + pitch;
+            if (is.pitch < 0)
+                  is.pitch = 0;
+            if (is.pitch > 127)
+                  is.pitch = 127;
+            pitch = is.pitch;
+            }
+      cmdAddPitch1(pitch, addFlag);
+      }
+
+//---------------------------------------------------------
+//   cmdAddChordName
+//---------------------------------------------------------
+
+void ScoreView::cmdAddChordName()
+      {
+      if (!_score->checkHasMeasures())
+            return;
+      ChordRest* cr = _score->getSelectedChordRest();
+      if (!cr)
+            return;
+      _score->startCmd();
+      Harmony* s = new Harmony(_score);
+      s->setTrack(cr->track());
+      s->setParent(cr->segment());
+      _score->undoAddElement(s);
+
+      _score->setLayoutAll(true);
+
+      _score->select(s, SELECT_SINGLE, 0);
+      // adjustCanvasPosition(s, false);
+      startEdit(s);
+      }
+
+//---------------------------------------------------------
+//   cmdAddText
+//---------------------------------------------------------
+
+void ScoreView::cmdAddText(int subtype)
+      {
+      if (!_score->checkHasMeasures())
+            return;
+      Page* page = _score->pages().front();
+      const QList<System*>* sl = page->systems();
+      const QList<MeasureBase*>& ml = sl->front()->measures();
+      Text* s = 0;
+      _score->startCmd();
+      switch(subtype) {
+            case TEXT_TITLE:
+            case TEXT_SUBTITLE:
+            case TEXT_COMPOSER:
+            case TEXT_POET:
+                  {
+                  MeasureBase* measure = ml.front();
+                  if (measure->type() != VBOX) {
+                        measure = new VBox(_score);
+                        measure->setNext(ml.front());
+                        measure->setTick(0);
+                        _score->undoInsertMeasure(measure);
+                        }
+                  s = new Text(_score);
+                  switch(subtype) {
+                        case TEXT_TITLE:    s->setTextStyle(TEXT_STYLE_TITLE);    break;
+                        case TEXT_SUBTITLE: s->setTextStyle(TEXT_STYLE_SUBTITLE); break;
+                        case TEXT_COMPOSER: s->setTextStyle(TEXT_STYLE_COMPOSER); break;
+                        case TEXT_POET:     s->setTextStyle(TEXT_STYLE_POET);     break;
+                        }
+                  s->setSubtype(subtype);
+                  s->setParent(measure);
+                  }
+                  break;
+
+            case TEXT_REHEARSAL_MARK:
+                  {
+                  ChordRest* cr = _score->getSelectedChordRest();
+                  if (!cr)
+                        break;
+                  s = new Text(_score);
+                  s->setTrack(0);
+                  s->setSubtype(subtype);
+                  s->setTextStyle(TEXT_STYLE_REHEARSAL_MARK);
+                  s->setParent(cr->segment());
+                  }
+                  break;
+            case TEXT_STAFF:
+            case TEXT_SYSTEM:
+                  {
+                  ChordRest* cr = _score->getSelectedChordRest();
+                  if (!cr)
+                        break;
+                  s = new StaffText(_score);
+                  if (subtype == TEXT_SYSTEM) {
+                        s->setTrack(0);
+                        s->setSystemFlag(true);
+                        s->setTextStyle(TEXT_STYLE_SYSTEM);
+                        s->setSubtype(TEXT_SYSTEM);
+                        }
+                  else {
+                        s->setTrack(cr->track());
+                        s->setSystemFlag(false);
+                        s->setTextStyle(TEXT_STYLE_STAFF);
+                        s->setSubtype(TEXT_STAFF);
+                        }
+                  s->setSubtype(subtype);
+                  s->setParent(cr->segment());
+                  }
+                  break;
+            }
+
+      if (s) {
+            _score->undoAddElement(s);
+            _score->setLayoutAll(true);
+            _score->select(s, SELECT_SINGLE, 0);
+            _score->endCmd();
+            startEdit(s);
+            }
+      else
+            _score->endCmd();
+      }
+
+//---------------------------------------------------------
+//   cmdAppendMeasures
+///   Append \a n measures.
+///
+///   Keyboard callback, called from pulldown menu.
+//
+//    - called from pulldown menu
+//---------------------------------------------------------
+
+void ScoreView::cmdAppendMeasures(int n, ElementType type)
+      {
+      _score->startCmd();
+      appendMeasures(n, type);
+      _score->endCmd();
+      }
+
+//---------------------------------------------------------
+//   appendMeasure
+//---------------------------------------------------------
+
+MeasureBase* ScoreView::appendMeasure(ElementType type)
+      {
+      _score->startCmd();
+      MeasureBase* mb = _score->appendMeasure(type);
+      _score->endCmd();
+      return mb;
+      }
+
+//---------------------------------------------------------
+//   appendMeasures
+//---------------------------------------------------------
+
+void ScoreView::appendMeasures(int n, ElementType type)
+      {
+      if (_score->noStaves()) {
+            QMessageBox::warning(0, "MuseScore",
+               tr("No staves found:\n"
+                  "please use the instruments dialog to\n"
+                  "first create some staves"));
+            return;
+            }
+      bool createEndBar = false;
+      bool endBarGenerated = false;
+      if (type == MEASURE) {
+            Measure* lm = _score->lastMeasure();
+            if (lm && lm->endBarLineType() == END_BAR) {
+                  if (!lm->endBarLineGenerated()) {
+                        _score->undoChangeEndBarLineType(lm, NORMAL_BAR);
+                        createEndBar = true;
+                        // move end Bar to last Measure;
+                        }
+                  else {
+                        createEndBar    = true;
+                        endBarGenerated = true;
+                        lm->setEndBarLineType(NORMAL_BAR, endBarGenerated);
+                        }
+                  }
+            else if (lm == 0)
+                  createEndBar = true;
+            }
+      for (int i = 0; i < n; ++i)
+            _score->appendMeasure(type);
+      if (createEndBar) {
+            Measure* lm = _score->lastMeasure();
+            if (lm)
+                  lm->setEndBarLineType(END_BAR, endBarGenerated);
+            }
+      }
+
+//---------------------------------------------------------
+//   cmdInsertMeasures
+//    - keyboard callback
+//    - called from pulldown menu
+//---------------------------------------------------------
+
+void ScoreView::cmdInsertMeasures(int n, ElementType type)
+      {
+      _score->startCmd();
+      insertMeasures(n, type);
+      _score->endCmd();
+      }
+
+//---------------------------------------------------------
+//   insertMeasures
+//---------------------------------------------------------
+
+void ScoreView::insertMeasures(int n, ElementType type)
+      {
+	if (_score->selection().state() != SEL_RANGE) {
+		QMessageBox::warning(0, "MuseScore",
+			tr("No Measure selected:\n"
+			"please select a measure and try again"));
+		return;
+            }
+	int tick  = _score->selection().startSegment()->measure()->tick();
+	for (int i = 0; i < n; ++i)
+            insertMeasure(type, tick);
+      _score->select(0, SELECT_SINGLE, 0);
+      }
+
+//---------------------------------------------------------
+//   cmdInsertMeasure
+//---------------------------------------------------------
+
+void ScoreView::cmdInsertMeasure(ElementType type)
+      {
+	if (_score->selection().state() != SEL_RANGE) {
+		QMessageBox::warning(0, "MuseScore",
+			tr("No Measure selected:\n"
+			"please select a measure and try again"));
+		return;
+            }
+      _score->startCmd();
+	int tick  = _score->selection().startSegment()->tick();
+      MeasureBase* mb = insertMeasure(type, tick);
+      if (mb->type() == TBOX) {
+            TBox* tbox = static_cast<TBox*>(mb);
+            Text* s = tbox->getText();
+            _score->select(s, SELECT_SINGLE, 0);
+            _score->endCmd();
+            startEdit(s);
+            return;
+            }
+      _score->select(0, SELECT_SINGLE, 0);
+      _score->endCmd();
+      }
+
+//---------------------------------------------------------
+//   insertMeasure
+//---------------------------------------------------------
+
+MeasureBase* ScoreView::insertMeasure(ElementType type, int tick)
+      {
+      MeasureBase* mb = static_cast<MeasureBase*>(Element::create(type, _score));
+      mb->setTick(tick);
+
+      if (type == MEASURE) {
+            Measure* m = _score->tick2measure(tick);
+            Fraction f(m->timesig());
+	      int ticks = f.ticks();
+
+            Measure* measure = static_cast<Measure*>(mb);
+            measure->setTimesig(f);
+            measure->setLen(f);
+	      for (int staffIdx = 0; staffIdx < _score->nstaves(); ++staffIdx) {
+    	            Rest* rest = new Rest(_score, Duration(Duration::V_MEASURE));
+                  rest->setDuration(measure->len());
+              	rest->setTrack(staffIdx * VOICES);
+                    Segment* s = measure->getSegment(SegChordRest, tick);
+              	s->add(rest);
+	            }
+            QList<TimeSig*> tsl;
+            QList<KeySig*>  ksl;
+
+            if (tick == 0) {
+                  //
+                  // remove time and key signatures
+                  //
+                  for (int staffIdx = 0; staffIdx < _score->nstaves(); ++staffIdx) {
+                        for (Segment* s = _score->firstSegment(); s && s->tick() == 0; s = s->next()) {
+                              if (s->subtype() == SegKeySig) {
+                                    KeySig* e = static_cast<KeySig*>(s->element(staffIdx * VOICES));
+                                    if (e) {
+                                          if (!e->generated())
+                                                ksl.append(static_cast<KeySig*>(e));
+                                          _score->undoRemoveElement(e);
+                                          if (e->segment()->isEmpty())
+                                                _score->undoRemoveElement(e->segment());
+                                          }
+                                    }
+                              else if (s->subtype() == SegTimeSig) {
+                                    TimeSig* e = static_cast<TimeSig*>(s->element(staffIdx * VOICES));
+                                    if (e) {
+                                          if (!e->generated())
+                                                tsl.append(static_cast<TimeSig*>(e));
+                                          _score->undoRemoveElement(e);
+                                          if (e->segment()->isEmpty())
+                                                _score->undoRemoveElement(e->segment());
+                                          }
+                                    }
+                              else if (s->subtype() == SegClef) {
+                                    Element* e = s->element(staffIdx * VOICES);
+                                    if (e) {
+                                          _score->undoRemoveElement(e);
+                                          if (static_cast<Segment*>(e->parent())->isEmpty())
+                                                _score->undoRemoveElement(e->parent());
+                                          }
+                                    }
+                              }
+                        }
+                  }
+            _score->undoInsertMeasure(measure);
+            _score->undoInsertTime(tick, ticks);
+
+            //
+            // if measure is inserted at tick zero,
+            // create key and time signature
+            //
+            foreach(TimeSig* ts, tsl) {
+                  TimeSig* nts = new TimeSig(*ts);
+                  SegmentType st = SegTimeSig;
+                  Segment* s = measure->findSegment(st, 0);
+                  if (s == 0) {
+                        s = new Segment(measure, st, 0);
+                        _score->undoAddElement(s);
+                        }
+                  nts->setParent(s);
+                  _score->undoAddElement(nts);
+                  }
+            foreach(KeySig* ks, ksl) {
+                  KeySig* nks = new KeySig(*ks);
+                  SegmentType st = SegKeySig;
+                  Segment* s = measure->findSegment(st, 0);
+                  if (s == 0) {
+                        s = new Segment(measure, st, 0);
+                        _score->undoAddElement(s);
+                        }
+                  nks->setParent(s);
+                  _score->undoAddElement(nks);
+                  }
+            }
+      else {
+printf("insert measure\n");
+            _score->undoInsertMeasure(mb);
+            }
+      return mb;
+      }
+
+
+
+//---------------------------------------------------------
+//   cmdRepeatSelection
+//---------------------------------------------------------
+
+void ScoreView::cmdRepeatSelection()
+      {
+      const Selection& selection = _score->selection();
+      if (selection.isSingle() && noteEntryMode()) {
+            const InputState& is = _score->inputState();
+            cmdAddPitch1(is.pitch, false);
+            return;
+            }
+
+      if (selection.state() != SEL_RANGE) {
+            printf("wrong selection type\n");
+            return;
+            }
+
+      QString mimeType = selection.mimeType();
+      if (mimeType.isEmpty()) {
+            printf("mime type is empty\n");
+            return;
+            }
+      QMimeData* mimeData = new QMimeData;
+      mimeData->setData(mimeType, selection.mimeData());
+      if (debugMode)
+            printf("cmdRepeatSelection: <%s>\n", mimeData->data(mimeType).data());
+      QApplication::clipboard()->setMimeData(mimeData);
+
+      QByteArray data(mimeData->data(mimeType));
+
+// printf("repeat <%s>\n", data.data());
+
+      QDomDocument doc;
+      int line, column;
+      QString err;
+      if (!doc.setContent(data, &err, &line, &column)) {
+            printf("error reading paste data at line %d column %d: %s\n",
+               line, column, qPrintable(err));
+            printf("%s\n", data.data());
+            return;
+            }
+      docName = "--";
+
+      int dStaff = selection.staffStart();
+      Segment* endSegment = selection.endSegment();
+      if (endSegment && endSegment->subtype() != SegChordRest)
+            endSegment = endSegment->next(SegChordRest);
+      if (endSegment && endSegment->element(dStaff * VOICES)) {
+            Element* e = endSegment->element(dStaff * VOICES);
+            if (e) {
+                  ChordRest* cr = static_cast<ChordRest*>(e);
+                  _score->startCmd();
+                  _score->pasteStaff(doc.documentElement(), cr);
+                  _score->setLayoutAll(true);
+                  _score->endCmd();
+                  }
+            else
+                  printf("??? %p <%s>\n", e, e ? e->name() : "");
+            }
+      else {
+            printf("cmdRepeatSelection: endSegment: %p dStaff %d\n", endSegment, dStaff);
+            }
+      }
+
+//---------------------------------------------------------
+//   search
+//---------------------------------------------------------
+
+void ScoreView::search(const QString& s)
+      {
+      bool ok;
+
+      int n = s.toInt(&ok);
+      if (!ok || n <= 0)
+            return;
+      search(n);
+      }
+
+void ScoreView::search(int n)
+      {
+      int i = 0;
+      for (Measure* measure = _score->firstMeasure(); measure; measure = measure->nextMeasure()) {
+            if (++i < n)
+                  continue;
+            adjustCanvasPosition(measure, true);
+            int tracks = _score->nstaves() * VOICES;
+            for (Segment* segment = measure->first(); segment; segment = segment->next()) {
+                  if (segment->subtype() != SegChordRest)
+                        continue;
+                  int track;
+                  for (track = 0; track < tracks; ++track) {
+                        ChordRest* cr = static_cast<ChordRest*>(segment->element(track));
+                        if (cr) {
+                              Element* e;
+                              if(cr->type() == CHORD)
+                                    e =  static_cast<Chord*>(cr)->upNote();
+                              else //REST
+                                    e = cr;
+
+                              _score->select(e, SELECT_SINGLE, 0);
+                              break;
+                              }
+                        }
+                  if (track != tracks)
+                        break;
+                  }
+            _score->setUpdateAll(true);
+            _score->end();
+            break;
+            }
+      }
+
+//---------------------------------------------------------
+//   wrongPosition
+//---------------------------------------------------------
+
+static void wrongPosition()
+      {
+      printf("cannot enter notes here (no chord rest at current position)\n");
+      }
+
+//---------------------------------------------------------
+//   cmdAddPitch1
+//---------------------------------------------------------
+
+void ScoreView::cmdAddPitch1(int pitch, bool addFlag)
+      {
+      InputState& is = _score->inputState();
+
+      if (is.segment() == 0) {
+            wrongPosition();
+            return;
+            }
+      _score->startCmd();
+      _score->expandVoice();
+      if (is.cr() == 0) {
+            wrongPosition();
+            return;
+            }
+      if (!noteEntryMode()) {
+            sm->postEvent(new CommandEvent("note-input"));
+            qApp->processEvents();
+            if (is.drumset())
+                  is.setDrumNote(pitch);
+            }
+      if (noteEntryMode()) {
+            Note* note = _score->addPitch(pitch, addFlag);
+            if (note) {
+                  mscore->play(note->chord());
+                  adjustCanvasPosition(note, false);
+                  }
+            }
+      else {
+            Element* e = _score->selection().element();
+            if (e && e->type() == NOTE) {
+                  Note* note = static_cast<Note*>(e);
+                  Chord* chord = note->chord();
+                  int key = _score->staff(chord->staffIdx())->key(chord->segment()->tick()).accidentalType();
+                  int newTpc = pitch2tpc(pitch, key);
+                  _score->undoChangePitch(note, pitch, newTpc, note->line(), note->fret(), note->string());
+                  }
+            }
+      _score->endCmd();
       }
 
 

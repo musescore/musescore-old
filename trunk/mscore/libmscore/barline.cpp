@@ -122,7 +122,8 @@ void BarLine::draw(Painter* painter) const
                   painter->setLineStyle(Qt::DashLine);
 
             case NORMAL_BAR:
-                  painter->drawLine(lw * .5, y1, lw * .5, y2);
+                  // painter->drawLine(lw * .5, y1, lw * .5, y2);
+                  painter->drawLine(0.0, y1, 0.0, y2);
                   break;
 
             case END_BAR:

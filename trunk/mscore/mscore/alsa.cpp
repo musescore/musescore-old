@@ -27,12 +27,12 @@
 #ifdef USE_ALSA
 #include <sys/time.h>
 #include "alsa.h"
-#include "score.h"
+#include "libmscore/score.h"
 #include "musescore.h"
 #include "preferences.h"
 #include "seq.h"
 #include "alsamidi.h"
-#include "utils.h"
+#include "libmscore/utils.h"
 #include "msynth/synti.h"
 
 //---------------------------------------------------------

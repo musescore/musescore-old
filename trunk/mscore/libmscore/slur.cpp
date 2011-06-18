@@ -25,7 +25,6 @@
 #include "measure.h"
 #include "utils.h"
 #include "score.h"
-#include "preferences.h"
 #include "system.h"
 #include "segment.h"
 #include "staff.h"
@@ -37,6 +36,7 @@
 #include "stem.h"
 #include "beam.h"
 #include "painter.h"
+#include "mscore.h"
 
 //---------------------------------------------------------
 //   SlurSegment

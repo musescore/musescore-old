@@ -19,8 +19,8 @@
 //=============================================================================
 
 #include "cursor.h"
-#include "preferences.h"
 #include "painter.h"
+#include "mscore.h"
 
 //---------------------------------------------------------
 //   Cursor
@@ -41,7 +41,7 @@ void Cursor::draw(Painter* painter) const
       if (!visible())
             return;
       int v = track() == -1 ? 0 : voice();
-      QColor c(preferences.selectColor[v]);
+      QColor c(MScore::selectColor[v]);
       c.setAlpha(50);
       painter->setBrushColor(c);
       QRectF r(abbox());

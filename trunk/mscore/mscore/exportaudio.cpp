@@ -23,14 +23,15 @@
 #ifdef HAS_AUDIOFILE
 
 #include <sndfile.h>
-#include "score.h"
+#include "libmscore/score.h"
 #include "fluid.h"
 #include "al/tempo.h"
-#include "note.h"
+#include "libmscore/note.h"
 #include "musescore.h"
-#include "part.h"
+#include "libmscore/part.h"
 #include "preferences.h"
 #include "seq.h"
+#include "libmscore/mscore.h"
 
 //---------------------------------------------------------
 //   saveAudio
@@ -52,8 +53,8 @@ bool Score::saveAudio(const QString& name, const QString& ext, QString soundFont
       int sampleRate = preferences.exportAudioSampleRate;
 
       if (soundFont.isEmpty()) {
-            if (!preferences.soundFont.isEmpty())
-                  soundFont = preferences.soundFont;
+            if (!MScore::soundFont.isEmpty())
+                  soundFont = MScore::soundFont;
             else
                   soundFont = QString(getenv("DEFAULT_SOUNDFONT"));
             if (soundFont.isEmpty()) {

@@ -20,7 +20,7 @@
 #ifndef __TEXTLINE_H__
 #define __TEXTLINE_H__
 
-#include "globals.h"
+#include "mscore.h"
 #include "line.h"
 #include "style.h"
 

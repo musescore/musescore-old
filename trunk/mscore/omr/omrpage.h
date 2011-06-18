@@ -26,7 +26,7 @@ class Score;
 class Xml;
 class Pattern;
 
-#include "durationtype.h"
+#include "libmscore/durationtype.h"
 
 //---------------------------------------------------------
 //   HLine

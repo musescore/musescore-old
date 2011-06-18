@@ -26,6 +26,7 @@
 #include "score.h"
 #include "scoreview.h"
 #include "sym.h"
+#include "mscore.h"
 
 static bool showLines      = false;
 // static bool showStaffLines = true;

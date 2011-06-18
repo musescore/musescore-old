@@ -21,9 +21,9 @@
 #ifndef __SEQ_H__
 #define __SEQ_H__
 
-#include "event.h"
+#include "libmscore/event.h"
 #include "driver.h"
-#include "fifo.h"
+#include "libmscore/fifo.h"
 #include "al/tempo.h"
 
 class Note;

@@ -22,7 +22,7 @@
 #define __LINE_H__
 
 #include "spanner.h"
-#include "globals.h"
+#include "mscore.h"
 
 class SLine;
 class System;

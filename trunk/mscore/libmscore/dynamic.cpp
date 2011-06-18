@@ -26,6 +26,7 @@
 #include "segment.h"
 #include "utils.h"
 #include "style.h"
+#include "mscore.h"
 
 //
 // see: http://en.wikipedia.org/wiki/File:Dynamic's_Note_Velocity.svg

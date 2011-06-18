@@ -19,15 +19,16 @@
 //=============================================================================
 
 #include "musescore.h"
-#include "score.h"
-#include "undo.h"
+#include "libmscore/score.h"
+#include "libmscore/undo.h"
 #include "globals.h"
 #include "script.h"
 #include "config.h"
-#include "chord.h"
-#include "note.h"
-#include "utils.h"
+#include "libmscore/chord.h"
+#include "libmscore/note.h"
+#include "libmscore/utils.h"
 #include "sccursor.h"
+#include "libmscore/mscore.h"
 
 Q_DECLARE_METATYPE(Score*);
 Q_DECLARE_METATYPE(SCursor*);

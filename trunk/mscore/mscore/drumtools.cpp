@@ -21,16 +21,17 @@
 #include "drumtools.h"
 #include "musescore.h"
 #include "palette.h"
-#include "chord.h"
-#include "note.h"
-#include "drumset.h"
-#include "score.h"
+#include "libmscore/chord.h"
+#include "libmscore/note.h"
+#include "libmscore/drumset.h"
+#include "libmscore/score.h"
 #include "preferences.h"
 #include "seq.h"
 #include "editdrumset.h"
-#include "staff.h"
-#include "part.h"
-#include "stem.h"
+#include "libmscore/staff.h"
+#include "libmscore/part.h"
+#include "libmscore/stem.h"
+#include "libmscore/mscore.h"
 
 //---------------------------------------------------------
 //   DrumTools
@@ -177,7 +178,7 @@ void DrumTools::drumNoteSelected(int val)
       Element* element = drumPalette->element(val);
       Chord* ch        = static_cast<Chord*>(element);
       Note* note       = ch->downNote();
-      int ticks        = preferences.defaultPlayDuration;
+      int ticks        = MScore::defaultPlayDuration;
       int pitch        = note->pitch();
       seq->startNote(staff->part()->instr()->channel(0), pitch, 80, ticks, 0.0);
       _score->inputState().setDrumNote(note->pitch());

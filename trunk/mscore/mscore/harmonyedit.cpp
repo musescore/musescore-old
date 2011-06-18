@@ -22,12 +22,13 @@
 #include "harmonyedit.h"
 #include "harmonycanvas.h"
 #include "palette.h"
-#include "accidental.h"
-#include "score.h"
+#include "libmscore/accidental.h"
+#include "libmscore/score.h"
 #include "icons.h"
-#include "pitchspelling.h"
-#include "symbol.h"
-#include "chordlist.h"
+#include "libmscore/pitchspelling.h"
+#include "libmscore/symbol.h"
+#include "libmscore/chordlist.h"
+#include "libmscore/mscore.h"
 
 extern bool useFactorySettings;
 

@@ -30,6 +30,7 @@
 #include "image.h"
 #include "layoutbreak.h"
 #include "fret.h"
+#include "mscore.h"
 
 //---------------------------------------------------------
 //   TBox

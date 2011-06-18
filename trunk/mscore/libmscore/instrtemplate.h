@@ -21,7 +21,8 @@
 #ifndef __INSTRTEMPLATE_H__
 #define __INSTRTEMPLATE_H__
 
-#include "globals.h"
+#include "ui_instrdialog.h"
+#include "mscore.h"
 #include "instrument.h"
 
 class Xml;

@@ -18,13 +18,13 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "style.h"
+#include "libmscore/style.h"
 #include "textstyle.h"
 #include "globals.h"
-#include "score.h"
+#include "libmscore/score.h"
 #include "scoreview.h"
 #include "textprop.h"
-#include "undo.h"
+#include "libmscore/undo.h"
 
 //---------------------------------------------------------
 //   TextStyleDialog

@@ -27,6 +27,7 @@
 #include "bracket.h"
 #include "utils.h"
 #include "tablature.h"
+#include "mscore.h"
 
 QList<InstrumentGroup*> instrumentGroups;
 QList<MidiArticulation*> articulation;                // global articulations

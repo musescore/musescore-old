@@ -21,13 +21,13 @@
 #include "scoretab.h"
 #include "scoreview.h"
 #include "scoreview.h"
-#include "score.h"
+#include "libmscore/score.h"
 #include "magbox.h"
 #ifdef OMR
 #include "omr/omr.h"
 #include "omr/omrview.h"
 #endif
-#include "excerpt.h"
+#include "libmscore/excerpt.h"
 
 //---------------------------------------------------------
 //   ScoreTab

@@ -21,7 +21,7 @@
 #ifndef __TREMOLOBAR_H__
 #define __TREMOLOBAR_H__
 
-#include "element.h"
+#include "libmscore/element.h"
 #include "ui_tremolobar.h"
 #include "pitchvalue.h"
 

@@ -19,12 +19,12 @@
 //=============================================================================
 
 #include "musescore.h"
-#include "rest.h"
-#include "chord.h"
-#include "chordrest.h"
-#include "harmony.h"
-#include "measure.h"
-#include "note.h"
+#include "libmscore/rest.h"
+#include "libmscore/chord.h"
+#include "libmscore/chordrest.h"
+#include "libmscore/harmony.h"
+#include "libmscore/measure.h"
+#include "libmscore/note.h"
 #include "script.h"
 
 Q_DECLARE_METATYPE(Rest);

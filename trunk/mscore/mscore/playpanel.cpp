@@ -20,10 +20,10 @@
 
 #include "playpanel.h"
 #include "al/sig.h"
-#include "score.h"
+#include "libmscore/score.h"
 #include "seq.h"
 #include "musescore.h"
-#include "measure.h"
+#include "libmscore/measure.h"
 
 const int MIN_VOL = -60;
 const int MAX_VOL = 10;
@@ -68,11 +68,11 @@ void PlayPanel::setScore(Score* s)
       {
       if (cs != 0 && cs == s)
             return;
-      if (cs)
-            disconnect(cs, SIGNAL(posChanged(int)), this, SLOT(setPos(int)));
+//      if (cs)
+//            disconnect(cs, SIGNAL(posChanged(int)), this, SLOT(setPos(int)));
       cs = s;
-      if (cs)
-            connect(cs, SIGNAL(posChanged(int)), this, SLOT(setPos(int)));
+//      if (cs)
+//            connect(cs, SIGNAL(posChanged(int)), this, SLOT(setPos(int)));
       if (cs) {
             MeasureBase* lm = cs->last();
             if (lm)

@@ -25,7 +25,6 @@ SET_SOURCE_FILES_PROPERTIES(revision.h PROPERTIES GENERATED TRUE)
 include_directories(
       ${CMAKE_CURRENT_BINARY_DIR}
       ${PROJECT_SOURCE_DIR}
-      ${PROJECT_SOURCE_DIR}/libmscore
       ${PROJECT_SOURCE_DIR}/scriptdebug
       ${PROJECT_SOURCE_DIR}/zarchive
       ${PROJECT_SOURCE_DIR}/fluid
@@ -58,7 +57,7 @@ QT4_WRAP_UI (ui_headers
 QT4_WRAP_CPP (mocs
       scoreview.h editinstrument.h editstyle.h edittempo.h instrdialog.h inspector.h
       musescore.h navigator.h pagesettings.h palette.h mixer.h playpanel.h
-      measureproperties.h preview.h score.h seq.h textpalette.h textstyle.h
+      measureproperties.h preview.h seq.h textpalette.h textstyle.h
       timedialog.h symboldialog.h shortcutcapturedialog.h simplebutton.h
       greendotbutton.h recordbutton.h editdrumset.h editstaff.h selinstrument.h
       voltaproperties.h chordproperties.h restproperties.h timesigproperties.h
@@ -66,7 +65,7 @@ QT4_WRAP_CPP (mocs
       transposedialog.h chordedit.h tempoproperties.h importmidi.h lineproperties.h
       excerptsdialog.h stafftextproperties.h imageproperties.h glissandoproperties.h
       script.h articulationprop.h metaedit.h magbox.h voiceselector.h
-      textprop.h dynamicprop.h undo.h textproperties.h tupletdialog.h tupletproperties.h
+      textprop.h dynamicprop.h textproperties.h tupletdialog.h tupletproperties.h
       slurproperties.h selectdialog.h synthcontrol.h drumroll.h pianoroll.h
       piano.h ruler.h
       pianoview.h drumview.h splitstaff.h scoretab.h keyedit.h keycanvas.h harmonyedit.h
@@ -132,9 +131,9 @@ add_executable ( ${ExecutableName}
       ${PCH}
       ${resource_file}
 
-      actions.cpp scoreview.cpp cmd.cpp editinstrument.cpp editstyle.cpp
+      actions.cpp scoreview.cpp editinstrument.cpp editstyle.cpp
       edittempo.cpp exportxml.cpp icons.cpp importbww.cpp importxml.cpp
-      instrdialog.cpp inspector.cpp menus.cpp midifile.cpp importmidi.cpp
+      instrdialog.cpp inspector.cpp menus.cpp importmidi.cpp
       musescore.cpp navigator.cpp pagesettings.cpp palette.cpp
       mixer.cpp playpanel.cpp preferences.cpp measureproperties.cpp
       preview.cpp seq.cpp boxproperties.cpp textpalette.cpp
@@ -142,15 +141,15 @@ add_executable ( ${ExecutableName}
       simplebutton.cpp musedata.cpp lilypond.cpp exportly.cpp
       editdrumset.cpp editstaff.cpp voltaproperties.cpp chordproperties.cpp
       restproperties.cpp timesigproperties.cpp newwizard.cpp transposedialog.cpp
-      bb.cpp chordedit.cpp plugins.cpp excerptsdialog.cpp
+      chordedit.cpp plugins.cpp excerptsdialog.cpp
       metaedit.cpp magbox.cpp voiceselector.cpp capella.cpp
       scscore.cpp sccursor.cpp scchord.cpp scnote.cpp scpart.cpp sctext.cpp
       scmeasure.cpp scpageformat.cpp exportaudio.cpp exportmidi.cpp
       textproperties.cpp screst.cpp scharmony.cpp slurproperties.cpp
       synthcontrol.cpp drumroll.cpp pianoroll.cpp piano.cpp
       pianoview.cpp drumview.cpp scoretab.cpp keyedit.cpp harmonyedit.cpp
-      updatechecker.cpp importove.cpp ove.cpp check.cpp ruler.cpp
-      importgtp.cpp revisions.cpp fotomode.cpp drumtools.cpp
+      updatechecker.cpp importove.cpp ove.cpp ruler.cpp
+      importgtp.cpp fotomode.cpp drumtools.cpp
       selinstrument.cpp texteditor.cpp editstafftype.cpp texttools.cpp editpitch.cpp
       editstringdata.cpp editraster.cpp pianotools.cpp mediadialog.cpp
       profile.cpp exportmp3.cpp chordeditor.cpp chordview.cpp
@@ -160,7 +159,7 @@ add_executable ( ${ExecutableName}
       articulationprop.cpp textprop.cpp dynamicprop.cpp
       fretproperties.cpp sectionbreakprop.cpp hairpinprop.cpp
       bendproperties.cpp tremolobarprop.cpp file.cpp keyb.cpp
-      layer.cpp jumpproperties.cpp selectdialog.cpp undo.cpp
+      layer.cpp jumpproperties.cpp selectdialog.cpp
       propertymenu.cpp imageproperties.cpp icon.cpp
       ${OMR_FILES}
       ${AUDIO}

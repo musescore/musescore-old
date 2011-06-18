@@ -19,10 +19,10 @@
 //=============================================================================
 
 #include "spacer.h"
-#include "preferences.h"
 #include "score.h"
 #include "scoreview.h"
 #include "painter.h"
+#include "mscore.h"
 
 //---------------------------------------------------------
 //   LayoutBreak
@@ -51,9 +51,9 @@ void Spacer::draw(Painter* painter) const
             return;
       QPen pen;
       if (selected())
-            painter->setPenColor(preferences.selectColor[0]);
+            painter->setPenColor(MScore::selectColor[0]);
       else
-            painter->setPenColor(preferences.layoutBreakColor);
+            painter->setPenColor(MScore::layoutBreakColor);
 
       painter->setLineWidth(spatium() * 0.4);
       painter->setNoBrush(true);

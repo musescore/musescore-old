@@ -22,7 +22,6 @@
 #include "style.h"
 #include "xml.h"
 #include "utils.h"
-#include "preferences.h"
 #include "score.h"
 #include "measure.h"
 #include "segment.h"
@@ -30,6 +29,7 @@
 #include "undo.h"
 #include "staff.h"
 #include "painter.h"
+#include "mscore.h"
 
 //---------------------------------------------------------
 //   layout

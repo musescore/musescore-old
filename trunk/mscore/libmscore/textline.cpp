@@ -24,10 +24,10 @@
 #include "xml.h"
 #include "utils.h"
 #include "score.h"
-#include "preferences.h"
 #include "sym.h"
 #include "text.h"
 #include "painter.h"
+#include "mscore.h"
 
 //---------------------------------------------------------
 //   TextLineSegment
@@ -117,7 +117,7 @@ void TextLineSegment::draw(Painter* painter) const
       painter->setLineStyle(tl->lineStyle());
 
       if (selected() && !(score() && score()->printing()))
-            painter->setPenColor(preferences.selectColor[0]);
+            painter->setPenColor(MScore::selectColor[0]);
       else if (!visible())
             painter->setPenColor(Qt::gray);
       else

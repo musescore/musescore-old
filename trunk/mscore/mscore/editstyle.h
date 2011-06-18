@@ -23,7 +23,7 @@
 
 #include "ui_editstyle.h"
 #include "globals.h"
-#include "style.h"
+#include "libmscore/style.h"
 
 class Score;
 class Style;

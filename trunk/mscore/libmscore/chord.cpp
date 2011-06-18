@@ -41,7 +41,6 @@
 #include "staff.h"
 #include "utils.h"
 #include "articulation.h"
-#include "preferences.h"
 #include "undo.h"
 #include "chordline.h"
 #include "lyrics.h"
@@ -49,6 +48,7 @@
 #include "stafftype.h"
 #include "stem.h"
 #include "painter.h"
+#include "mscore.h"
 
 //---------------------------------------------------------
 //   StemSlash
@@ -633,9 +633,9 @@ void Chord::write(Xml& xml) const
             }
       if (_noStem)
             xml.tag("noStem", _noStem);
-      else if (_stem && (!_stem->userOff().isNull() || (_stem->userLen().val() != 0.0) || !_stem->visible() || (_stem->color() != preferences.defaultColor)))
+      else if (_stem && (!_stem->userOff().isNull() || (_stem->userLen().val() != 0.0) || !_stem->visible() || (_stem->color() != MScore::defaultColor)))
             _stem->write(xml);
-      if (_hook && (!_hook->visible() || !_hook->userOff().isNull() || (_hook->color() != preferences.defaultColor)))
+      if (_hook && (!_hook->visible() || !_hook->userOff().isNull() || (_hook->color() != MScore::defaultColor)))
             _hook->write(xml);
       switch(_stemDirection) {
             case UP:   xml.tag("StemDirection", QVariant("up")); break;

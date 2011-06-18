@@ -20,10 +20,10 @@
 
 #include "image.h"
 #include "xml.h"
-#include "preferences.h"
 #include "score.h"
 #include "undo.h"
 #include "painter.h"
+#include "mscore.h"
 
 //---------------------------------------------------------
 //   Image
@@ -323,6 +323,7 @@ void RasterImage::setPath(const QString& s)
 
 void Score::addImage(Element* e)
       {
+#if 0 // TODO-LIB
       QString fn = QFileDialog::getOpenFileName(
          0,
          tr("MuseScore: InsertImage"),
@@ -352,6 +353,7 @@ void Score::addImage(Element* e)
       s->setSize(QSizeF(200, 200));
       s->setParent(e);
       undoAddElement(s);
+#endif
       }
 
 //---------------------------------------------------------

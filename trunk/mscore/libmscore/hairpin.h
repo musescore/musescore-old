@@ -21,7 +21,7 @@
 #ifndef __HAIRPIN_H__
 
 #include "line.h"
-#include "globals.h"
+#include "mscore.h"
 
 class Score;
 class Hairpin;

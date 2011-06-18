@@ -25,6 +25,7 @@
 #include "noteevent.h"
 #include "preferences.h"
 #include "musescore.h"
+#include "libmscore/mscore.h"
 
 static const int CHORD_MAP_OFFSET = 50;
 static const int grip = 7;
@@ -51,7 +52,7 @@ GripItem::GripItem(int type, ChordView* v)
 
 void GripItem::paint(QPainter* p, const QStyleOptionGraphicsItem*, QWidget*)
       {
-      QPen pen(preferences.defaultColor);
+      QPen pen(MScore::defaultColor);
       pen.setWidthF(2.0);
       p->setPen(pen);
       p->setBrush(isSelected() ? QBrush(Qt::blue) : Qt::NoBrush);

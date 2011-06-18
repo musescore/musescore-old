@@ -19,9 +19,9 @@
 //=============================================================================
 
 #include "musescore.h"
-#include "harmony.h"
-#include "utils.h"
-#include "undo.h"
+#include "libmscore/harmony.h"
+#include "libmscore/utils.h"
+#include "libmscore/undo.h"
 #include "script.h"
 
 Q_DECLARE_METATYPE(Harmony*);

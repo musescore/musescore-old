@@ -48,6 +48,7 @@
 #include "ui_clef.h"
 
 #include "globals.h"
+#include "libmscore/mscore.h"
 
 class ShowElementBase;
 class Element;

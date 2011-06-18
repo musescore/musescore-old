@@ -22,7 +22,7 @@
 #define __DYNAMICS_H__
 
 #include "text.h"
-#include "globals.h"
+#include "mscore.h"
 
 class Measure;
 class Segment;
@@ -78,6 +78,7 @@ class Dynamic : public Text {
       int velocity() const;
       DynamicType dynType() const    { return _dynType; }
       void setDynType(DynamicType t) { _dynType = t;    }
+
 
       virtual QLineF dragAnchor() const;
       };

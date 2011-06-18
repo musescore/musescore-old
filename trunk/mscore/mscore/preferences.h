@@ -64,14 +64,10 @@ struct Preferences {
       QString bgWallpaper;
       QString fgWallpaper;
       QColor fgColor;
-      QColor bgColor;
       int iconHeight, iconWidth;
-      QColor selectColor[VOICES];
-      QColor defaultColor;
       QColor dropColor;
       bool enableMidiInput;
       bool playNotes;         // play notes on click
-      QString soundFont;      // default sound font used by synthesizer
       QString lPort;          // audio port left
       QString rPort;          // audio port right
       bool showNavigator;
@@ -93,20 +89,17 @@ struct Preferences {
       int portaudioDevice;
       QString portMidiInput;
 
-      QColor layoutBreakColor;
       bool antialiasedDrawing;
       SessionStart sessionStart;
       QString startScore;
       QString workingDirectory;
       QString defaultStyle;
-      QString partStyle;
       bool showSplashScreen;
 
       bool useMidiRemote;
       MidiRemote midiRemote[MIDI_REMOTES];
 
       bool midiExpandRepeats;
-      bool playRepeats;
       QString instrumentList; // file path of instrument templates
 
       bool alternateNoteEntryMethod;
@@ -117,13 +110,7 @@ struct Preferences {
       bool pngTransparent;
       QString language;
 
-      bool replaceFractions;
       bool replaceCopyrightSymbol;
-      QPrinter::PageSize paperSize;
-      double paperWidth, paperHeight;     // only valid if paperSize is QPrinter::Custom
-      bool landscape;
-      bool twosided;
-      double spatium;
       double mag;
 
       //update
@@ -137,8 +124,6 @@ struct Preferences {
       float reverbDamp;
       float reverbWidth;
 
-      int defaultPlayDuration;      // len of note play during note entry
-      bool warnPitchRange;
       bool followSong;
       QString importCharset;
       QString importStyleFile;
@@ -156,11 +141,9 @@ struct Preferences {
       QString myPluginsPath;
       QString mySoundFontsPath;
 
-      double nudgeStep;       // in spatium units (default 0.1)
       double nudgeStep10;     // Ctrl + cursor key (default 1.0)
       double nudgeStep50;     // Alt  + cursor key (default 5.0)
 
-      int hRaster, vRaster;
       bool nativeDialogs;
 
       int exportAudioSampleRate;

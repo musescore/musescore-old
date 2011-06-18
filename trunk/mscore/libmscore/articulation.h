@@ -90,6 +90,7 @@ class Articulation : public Symbol {
       QString channelName() const           { return _channelName; }
       void setChannelName(const QString& s) { _channelName = s;    }
 
+
       static QString idx2name(int idx);
       static int name2idx(const QString& name);
       };

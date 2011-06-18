@@ -22,7 +22,9 @@
 #define __SCANVAS_H__
 
 #include "globals.h"
-#include "durationtype.h"
+#include "libmscore/durationtype.h"
+#include "libmscore/mscore.h"
+#include "libmscore/mscoreview.h"
 
 class ChordRest;
 class Rest;
@@ -89,7 +91,7 @@ struct CommandEvent : public QEvent
 //   ScoreView
 //---------------------------------------------------------
 
-class ScoreView : public QWidget {
+class ScoreView : public QWidget, public MuseScoreView {
       Q_OBJECT
 
       enum States { NORMAL, DRAG, DRAG_OBJECT, EDIT, DRAG_EDIT, LASSO,
@@ -213,10 +215,11 @@ class ScoreView : public QWidget {
       void setupFotoMode();
 
       void insertMeasures(int, ElementType);
+      MeasureBase* insertMeasure(ElementType, int tick);
+
       void appendMeasures(int, ElementType);
       MeasureBase* appendMeasure(ElementType);
       void cmdInsertMeasure(ElementType);
-      MeasureBase* insertMeasure(ElementType, int tick);
       void createElementPropertyMenu(Element* e, QMenu*);
       void genPropertyMenu1(Element* e, QMenu* popup);
       void genPropertyMenuText(Element* e, QMenu* popup);
@@ -233,10 +236,7 @@ class ScoreView : public QWidget {
       void endFotoDragEdit();
 
    public slots:
-      void moveCursor();
       void setViewRect(const QRectF&);
-      void dataChanged(const QRectF&);
-      void updateAll();
 
       void startEdit();
       void endEdit();
@@ -252,7 +252,6 @@ class ScoreView : public QWidget {
 
       void endLasso();
       void deselectAll();
-      void adjustCanvasPosition(const Element* el, bool playBack);
 
       void editCopy();
       void editPaste();
@@ -286,7 +285,8 @@ class ScoreView : public QWidget {
 
       Page* addPage();
       void modifyElement(Element* obj);
-      void setScore(Score* s);
+      virtual void setScore(Score* s);
+      virtual void removeScore()  { _score = 0; }
 
       void setMag(qreal m);
       Element* elementAt(const QPointF& pp);
@@ -373,6 +373,11 @@ class ScoreView : public QWidget {
       Element* getCurElement() const { return curElement; }   // current item at mouse press
       void midiNoteReceived(int pitch, bool);
       void setEditPos(const QPointF&);
+
+      virtual void moveCursor();
+      virtual void dataChanged(const QRectF&);
+      virtual void updateAll();
+      virtual void adjustCanvasPosition(const Element* el, bool playBack);
       };
 
 //---------------------------------------------------------

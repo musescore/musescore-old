@@ -20,7 +20,7 @@
 
 #include "webpage.h"
 #include "musescore.h"
-#include "score.h"
+#include "libmscore/score.h"
 #include "libmscore/mscore.cpp"
 
 //---------------------------------------------------------

@@ -19,8 +19,8 @@
 //=============================================================================
 
 #include "musescore.h"
-#include "page.h"
-#include "utils.h"
+#include "libmscore/page.h"
+#include "libmscore/utils.h"
 #include "script.h"
 
 Q_DECLARE_METATYPE(PageFormat*);

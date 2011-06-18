@@ -27,7 +27,7 @@
 */
 
 #include "input.h"
-#include "globals.h"
+#include "mscore.h"
 #include "style.h"
 #include "durationtype.h"
 #include "select.h"
@@ -36,6 +36,7 @@
 #include "al/al.h"
 #include "interval.h"
 #include "msynth/sparm.h"
+#include "mscoreview.h"
 
 namespace AL {
       class TempoMap;
@@ -208,10 +209,10 @@ struct Layer {
 //   Score
 //---------------------------------------------------------
 
-class Score : public QObject {
-      Q_OBJECT
-
+class Score {
       Score* _parentScore;          // set if score is an excerpt (part)
+      QList<MuseScoreView*> viewer;
+
       QDate _creationDate;
 
       Revisions* _revisions;
@@ -392,16 +393,16 @@ class Score : public QObject {
       void pasteChordRest(ChordRest* cr, int tick);
       void adjustReadPos();
 
-   signals:
-      void selectionChanged(int);
-      void dirtyChanged(Score*);
-      void posChanged(int);
-      void updateAll();
-      void dataChanged(const QRectF&);
-      void layoutChanged();
-      void inputCursorChanged();
-
-   public slots:
+//   signals:
+//      void selectionChanged(int);
+//      void dirtyChanged(Score*);
+//      void posChanged(int);
+//      void updateAll();
+//      void dataChanged(const QRectF&);
+//      void layoutChanged();
+//      void inputCursorChanged();
+//
+   public:
       void setClean(bool val);
       void setDirty(bool val = true) { setClean(!val); }
 
@@ -427,7 +428,6 @@ class Score : public QObject {
       void cmdAddTie();
       void cmdAddHairpin(bool);
       void cmdAddStretch(double);
-      void transpose();
       void transpose(Note* n, Interval, bool useSharpsFlats);
 
       Score(const Style*);
@@ -799,7 +799,7 @@ class Score : public QObject {
       void enqueueMidiEvent(MidiInputEvent ev) { midiInputQueue.enqueue(ev); }
       void doLayout();
       void layoutChords1(Segment* segment, int staffIdx);
-      void emitSelectionChanged(int val)                 { emit selectionChanged(val); }
+//      void emitSelectionChanged(int val)                 { emit selectionChanged(val); }
       SyntiState& syntiState()                           { return _syntiState;         }
       void setSyntiState();
 
@@ -851,6 +851,10 @@ class Score : public QObject {
       QString* layerTagComments()           { return _layerTagComments;    }
       QList<Layer>* layer()                 { return &_layer;       }
       bool tagIsValid(uint tag) const       { return tag & _layer[_currentLayer].tags; }
+      void transpose(int mode, TransposeDirection, int transposeKey, int transposeInterval,
+         bool trKeys, bool transposeChordNames, bool useDoubleSharpsFlats);
+      void addViewer(MuseScoreView* v)      { viewer.append(v);   }
+      void removeViewer(MuseScoreView* v)   { viewer.removeAll(v); }
       };
 
 extern Score* gscore;

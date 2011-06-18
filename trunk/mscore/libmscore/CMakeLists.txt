@@ -44,6 +44,8 @@ add_library (
       textframe.cpp textline.cpp timesig.cpp
       tremolobar.cpp tremolo.cpp trill.cpp tuplet.cpp
       utils.cpp velo.cpp volta.cpp xml.cpp mscore.cpp
+      undo.cpp cmd.cpp scorefile.cpp midifile.cpp revisions.cpp
+      check.cpp bb.cpp
       )
 set_target_properties (
       libmscore

@@ -31,6 +31,7 @@
 #include "segment.h"
 #include "painter.h"
 #include "chordlist.h"
+#include "mscore.h"
 
 //---------------------------------------------------------
 //   harmonyName

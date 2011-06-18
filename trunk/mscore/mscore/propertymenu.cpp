@@ -13,11 +13,12 @@
 
 #include "scoreview.h"
 #include "musescore.h"
-#include "undo.h"
+#include "libmscore/undo.h"
 
-#include "score.h"
+#include "libmscore/score.h"
 #include "libmscore/element.h"
 #include "seq.h"
+#include "libmscore/mscore.h"
 
 #include "articulationprop.h"
 #include "bendproperties.h"

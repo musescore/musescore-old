@@ -19,38 +19,38 @@
 //=============================================================================
 
 #include "musescore.h"
-#include "midifile.h"
+#include "libmscore/midifile.h"
 #include "scoreview.h"
 #include "file.h"
-#include "score.h"
-#include "key.h"
-#include "clef.h"
+#include "libmscore/score.h"
+#include "libmscore/key.h"
+#include "libmscore/clef.h"
 #include "al/sig.h"
 #include "al/tempo.h"
-#include "note.h"
-#include "chord.h"
-#include "rest.h"
-#include "segment.h"
-#include "utils.h"
-#include "text.h"
-#include "slur.h"
-#include "staff.h"
-#include "measure.h"
-#include "style.h"
-#include "part.h"
-#include "timesig.h"
-#include "barline.h"
-#include "pedal.h"
-#include "ottava.h"
-#include "lyrics.h"
-#include "bracket.h"
-#include "keyfinder.h"
-#include "drumset.h"
+#include "libmscore/note.h"
+#include "libmscore/chord.h"
+#include "libmscore/rest.h"
+#include "libmscore/segment.h"
+#include "libmscore/utils.h"
+#include "libmscore/text.h"
+#include "libmscore/slur.h"
+#include "libmscore/staff.h"
+#include "libmscore/measure.h"
+#include "libmscore/style.h"
+#include "libmscore/part.h"
+#include "libmscore/timesig.h"
+#include "libmscore/barline.h"
+#include "libmscore/pedal.h"
+#include "libmscore/ottava.h"
+#include "libmscore/lyrics.h"
+#include "libmscore/bracket.h"
+#include "libmscore/keyfinder.h"
+#include "libmscore/drumset.h"
 #include "preferences.h"
-#include "box.h"
+#include "libmscore/box.h"
 #include "importmidi.h"
-#include "keysig.h"
-#include "pitchspelling.h"
+#include "libmscore/keysig.h"
+#include "libmscore/pitchspelling.h"
 
 static unsigned const char gmOnMsg[] = { 0x7e, 0x7f, 0x09, 0x01 };
 static unsigned const char gsOnMsg[] = { 0x41, 0x10, 0x42, 0x12, 0x40, 0x00, 0x7f, 0x00, 0x41 };
@@ -1422,10 +1422,12 @@ bool Score::importMidi(const QString& name)
             }
       catch(QString errorText) {
             if (!noGui) {
+#if 0 // TODO-LIB
                   QMessageBox::warning(0,
                      QWidget::tr("MuseScore: load midi"),
                      tr("Load failed: ") + errorText,
                      QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
+#endif
                   }
             fp.close();
             return false;

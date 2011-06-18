@@ -21,13 +21,13 @@
 #include "bracket.h"
 #include "xml.h"
 #include "style.h"
-#include "preferences.h"
 #include "utils.h"
 #include "staff.h"
 #include "score.h"
 #include "system.h"
 #include "sym.h"
 #include "painter.h"
+#include "mscore.h"
 
 //---------------------------------------------------------
 //   Bracket

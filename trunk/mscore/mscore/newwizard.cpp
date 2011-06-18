@@ -20,17 +20,17 @@
 
 #include "newwizard.h"
 #include "musescore.h"
-#include "instrtemplate.h"
-#include "score.h"
-#include "staff.h"
-#include "clef.h"
-#include "part.h"
-#include "drumset.h"
+#include "libmscore/instrtemplate.h"
+#include "libmscore/score.h"
+#include "libmscore/staff.h"
+#include "libmscore/clef.h"
+#include "libmscore/part.h"
+#include "libmscore/drumset.h"
 #include "palette.h"
-#include "keysig.h"
-#include "measure.h"
-#include "tablature.h"
-#include "stafftype.h"
+#include "libmscore/keysig.h"
+#include "libmscore/measure.h"
+#include "libmscore/tablature.h"
+#include "libmscore/stafftype.h"
 
 extern Palette* newKeySigPalette();
 

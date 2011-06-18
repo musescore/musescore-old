@@ -18,18 +18,18 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "score.h"
+#include "libmscore/score.h"
 #include "scoreview.h"
-#include "style.h"
+#include "libmscore/style.h"
 #include "editstyle.h"
-#include "articulation.h"
-#include "sym.h"
+#include "libmscore/articulation.h"
+#include "libmscore/sym.h"
 #include "icons.h"
 #include "musescore.h"
-#include "undo.h"
+#include "libmscore/undo.h"
 #include "texteditor.h"
-#include "harmony.h"
-#include "chordlist.h"
+#include "libmscore/harmony.h"
+#include "libmscore/chordlist.h"
 
 extern QString iconPath, iconGroup;
 

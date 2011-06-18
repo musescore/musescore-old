@@ -20,12 +20,13 @@
 
 #include "scoreview.h"
 #include "musescore.h"
-#include "score.h"
-#include "lasso.h"
+#include "libmscore/score.h"
+#include "libmscore/lasso.h"
 #include "icons.h"
-#include "page.h"
+#include "libmscore/page.h"
 #include "preferences.h"
-#include "image.h"
+#include "libmscore/image.h"
+#include "libmscore/mscore.h"
 
 //---------------------------------------------------------
 //   FotoScoreViewDragTransition

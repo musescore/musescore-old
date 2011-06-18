@@ -29,7 +29,7 @@
 #include "image.h"
 #include "segment.h"
 #include "painter.h"
-#include "preferences.h"
+#include "mscore.h"
 
 //---------------------------------------------------------
 //   BSymbol
@@ -138,12 +138,12 @@ QRectF BSymbol::drag(const EditData& data)
 
       qreal _spatium = spatium();
       if (data.hRaster) {
-            qreal hRaster = _spatium / preferences.hRaster;
+            qreal hRaster = _spatium / MScore::hRaster();
             int n = lrint(x / hRaster);
             x = hRaster * n;
             }
       if (data.vRaster) {
-            qreal vRaster = _spatium / preferences.vRaster;
+            qreal vRaster = _spatium / MScore::vRaster();
             int n = lrint(y / vRaster);
             y = vRaster * n;
             }
