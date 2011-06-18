@@ -21,7 +21,7 @@
 #ifndef __UTILS_H__
 #define __UTILS_H__
 
-#include "globals.h"
+#include "mscore.h"
 #include "interval.h"
 
 //---------------------------------------------------------

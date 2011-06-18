@@ -26,7 +26,7 @@
  Definition of class Staff.
 */
 
-#include "globals.h"
+#include "mscore.h"
 #include "key.h"
 #include "velo.h"
 #include "pitch.h"

@@ -22,6 +22,7 @@
 #include "staff.h"
 #include "xml.h"
 #include "painter.h"
+#include "mscore.h"
 
 QList<StaffType*> staffTypes;
 
@@ -497,6 +498,30 @@ void StaffTypeTablature::setFretMetrics()
       _refDPI = DPI;
       _fretMetricsValid = true;
 }
+
+//---------------------------------------------------------
+//   setDurationFontSize
+//---------------------------------------------------------
+
+void StaffTypeTablature::setDurationFontSize(double val)
+      {
+      _durationFontSize = val;
+//    _durationFont.setPointSizeF(val);
+      _durationFont.setPixelSize( lrint(val * DPI / PPI) );
+      _durationMetricsValid = false;
+      }
+
+//---------------------------------------------------------
+//   setFretFontSize
+//---------------------------------------------------------
+
+void StaffTypeTablature::setFretFontSize(double val)
+      {
+      _fretFontSize = val;
+//    _fretFont.setPointSizeF(val);
+      _fretFont.setPixelSize( lrint(val * DPI / PPI) );
+      _fretMetricsValid = false;
+      }
 
 //---------------------------------------------------------
 //   TabDurationSymbol

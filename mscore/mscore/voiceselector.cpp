@@ -21,6 +21,7 @@
 #include "musescore.h"
 #include "preferences.h"
 #include "voiceselector.h"
+#include "libmscore/mscore.h"
 
 //---------------------------------------------------------
 //   VoiceButton
@@ -42,7 +43,7 @@ VoiceButton::VoiceButton(int v, QWidget* parent)
 void VoiceButton::paintEvent(QPaintEvent* e)
       {
       QPainter p(this);
-      QColor c(preferences.selectColor[voice]);
+      QColor c(MScore::selectColor[voice]);
       QColor bg(palette().color(QPalette::Normal, QPalette::Window));
       p.fillRect(e->rect(), isChecked() ? c.light(170) : bg);
       p.setPen(QPen(preferences.globalStyle == 0 ? Qt::white : Qt::black));

@@ -21,7 +21,7 @@
 #ifndef __STYLE_H__
 #define __STYLE_H__
 
-#include "globals.h"
+#include "mscore.h"
 #include "spatium.h"
 
 class Xml;

@@ -19,16 +19,16 @@
 
 #include "lineproperties.h"
 #include "textproperties.h"
-#include "textline.h"
-#include "style.h"
-#include "system.h"
-#include "measure.h"
-#include "xml.h"
-#include "utils.h"
-#include "score.h"
+#include "libmscore/textline.h"
+#include "libmscore/style.h"
+#include "libmscore/system.h"
+#include "libmscore/measure.h"
+#include "libmscore/xml.h"
+#include "libmscore/utils.h"
+#include "libmscore/score.h"
 #include "preferences.h"
-#include "sym.h"
-#include "text.h"
+#include "libmscore/sym.h"
+#include "libmscore/text.h"
 
 //---------------------------------------------------------
 //   populateLineSymbolComboBox

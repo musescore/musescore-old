@@ -23,7 +23,7 @@
  Implementation of class Selection plus other selection related functions.
 */
 
-#include "globals.h"
+#include "mscore.h"
 #include "scoreview.h"
 #include "note.h"
 #include "chord.h"
@@ -326,7 +326,7 @@ void Score::select(Element* e, SelectType type, int staffIdx)
                         if (e->type() == NOTE)
                               e = e->parent();
                         _is.setSegment(static_cast<ChordRest*>(e)->segment());
-                        emit posChanged(_is.tick());
+//                        emit posChanged(_is.tick());
                         }
                   }
             _selection.setActiveSegment(0);
@@ -654,7 +654,7 @@ static void collectSelectedElements(void* data, Element* e)
 void Score::searchSelectedElements()
       {
       _selection.searchSelectedElements();
-      emit selectionChanged(int(_selection.state()));
+//      emit selectionChanged(int(_selection.state()));
       }
 
 void Selection::searchSelectedElements()
@@ -720,7 +720,7 @@ void Selection::setState(SelState s)
       {
       if (_state != s) {
             _state = s;
-            _score->emitSelectionChanged(int(_state));
+//            _score->emitSelectionChanged(int(_state));
             }
       }
 

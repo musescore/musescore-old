@@ -18,13 +18,13 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "globals.h"
 #include "style.h"
 #include "sym.h"
 #include "utils.h"
 #include "score.h"
 #include "xml.h"
 #include "painterqt.h"
+#include "mscore.h"
 
 QVector<Sym> symbols[2];
 static bool symbolsInitialized[2] = { false, false };

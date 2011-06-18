@@ -19,26 +19,27 @@
 //=============================================================================
 
 #include "scoreview.h"
-#include "note.h"
+#include "libmscore/note.h"
 #include "padids.h"
-#include "sym.h"
-#include "note.h"
-#include "score.h"
-#include "rest.h"
-#include "chord.h"
-#include "select.h"
+#include "libmscore/sym.h"
+#include "libmscore/note.h"
+#include "libmscore/score.h"
+#include "libmscore/rest.h"
+#include "libmscore/chord.h"
+#include "libmscore/select.h"
 #include "input.h"
-#include "key.h"
-#include "measure.h"
+#include "libmscore/key.h"
+#include "libmscore/measure.h"
 #include "musescore.h"
-#include "slur.h"
-#include "tuplet.h"
-#include "text.h"
-#include "staff.h"
-#include "part.h"
+#include "libmscore/slur.h"
+#include "libmscore/tuplet.h"
+#include "libmscore/text.h"
+#include "libmscore/staff.h"
+#include "libmscore/part.h"
 #include "drumtools.h"
 #include "preferences.h"
-#include "segment.h"
+#include "libmscore/segment.h"
+#include "libmscore/mscore.h"
 
 #ifdef Q_WS_MAC
 #define CONTROL_MODIFIER Qt::AltModifier
@@ -143,7 +144,7 @@ void ScoreView::editKey(QKeyEvent* ev)
             }
       QPointF delta;
       qreal _spatium = editObject->spatium();
-      qreal xval     = preferences.nudgeStep * _spatium;
+      qreal xval     = MScore::nudgeStep * _spatium;
 
       if (modifiers & Qt::ControlModifier)
             xval = preferences.nudgeStep10 * _spatium;
@@ -152,12 +153,12 @@ void ScoreView::editKey(QKeyEvent* ev)
       qreal yval = xval;
 
       if (mscore->vRaster()) {
-            qreal vRaster = _spatium / preferences.vRaster;
+            qreal vRaster = _spatium / MScore::vRaster();
             if (yval < vRaster)
                   yval = vRaster;
             }
       if (mscore->hRaster()) {
-            qreal hRaster = _spatium / preferences.hRaster;
+            qreal hRaster = _spatium / MScore::hRaster();
             if (xval < hRaster)
                   xval = hRaster;
             }

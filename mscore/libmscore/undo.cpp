@@ -45,7 +45,7 @@
 #include "chord.h"
 #include "al/sig.h"
 #include "key.h"
-#include "musescore.h"
+// #include "musescore.h"
 #include "scoreview.h"
 #include "barline.h"
 #include "volta.h"
@@ -207,10 +207,6 @@ void UndoStack::endMacro(bool rollback)
             return;
             }
       bool a = isClean();
-      if (list.size() > curIdx)
-            emit canRedoChanged(false);
-      if (curIdx == 0)
-            emit canUndoChanged(true);
       while (list.size() > curIdx) {
             UndoCommand* cmd = list.takeLast();
             delete cmd;
@@ -218,8 +214,6 @@ void UndoStack::endMacro(bool rollback)
       list.append(curCmd);
       curCmd = 0;
       ++curIdx;
-      if (a != isClean())
-            emit cleanChanged(!a);
       }
 
 //---------------------------------------------------------
@@ -264,7 +258,6 @@ void UndoStack::setClean()
       {
       if (cleanIdx != curIdx) {
             cleanIdx = curIdx;
-            emit cleanChanged(true);
             }
       }
 
@@ -275,17 +268,8 @@ void UndoStack::setClean()
 void UndoStack::undo()
       {
       if (curIdx) {
-            bool a = true;
-            bool b = canRedo();
-            bool c = isClean();
             --curIdx;
             list[curIdx]->undo();
-            if (a != canUndo())
-                  emit canUndoChanged(!a);
-            if (b != canRedo())
-                  emit canRedoChanged(!b);
-            if (c != isClean())
-                  emit cleanChanged(!c);
             }
       }
 
@@ -296,16 +280,7 @@ void UndoStack::undo()
 void UndoStack::redo()
       {
       if (canRedo()) {
-            bool a = canUndo();
-            bool b = true;
-            bool c = isClean();
             list[curIdx++]->redo();
-            if (a != canUndo())
-                  emit canUndoChanged(!a);
-            if (b != canRedo())
-                  emit canRedoChanged(!b);
-            if (c != isClean())
-                  emit cleanChanged(!c);
             }
       }
 
@@ -346,9 +321,6 @@ void UndoGroup::addStack(UndoStack* stack)
       {
       stack->setGroup(this);
       group.append(stack);
-      connect(stack, SIGNAL(canUndoChanged(bool)), this, SIGNAL(canUndoChanged(bool)));
-      connect(stack, SIGNAL(canRedoChanged(bool)), this, SIGNAL(canRedoChanged(bool)));
-      connect(stack, SIGNAL(cleanChanged(bool)), this, SIGNAL(cleanChanged(bool)));
       }
 
 //---------------------------------------------------------
@@ -357,15 +329,9 @@ void UndoGroup::addStack(UndoStack* stack)
 
 void UndoGroup::removeStack(UndoStack* stack)
       {
-      bool a = canUndo();
-      bool b = canRedo();
       group.removeOne(stack);
       if (stack == _activeStack)
             _activeStack = 0;
-      if (a)
-            emit canUndoChanged(!a);
-      if (b)
-            emit canRedoChanged(!b);
       }
 
 //---------------------------------------------------------
@@ -374,16 +340,7 @@ void UndoGroup::removeStack(UndoStack* stack)
 
 void UndoGroup::setActiveStack(UndoStack* stack)
       {
-      bool a = canUndo();
-      bool b = canRedo();
-      bool c = isClean();
       _activeStack = stack;
-      if (a != canUndo())
-            emit canUndoChanged(!a);
-      if (b != canRedo())
-            emit canRedoChanged(!b);
-      if (c != isClean())
-            emit cleanChanged(!c);
       }
 
 //---------------------------------------------------------
@@ -1405,8 +1362,8 @@ void ChangeConcertPitch::flip()
       {
       int oval = int(score->styleB(ST_concertPitch));
       score->style()->set(ST_concertPitch, val);
-      QAction* action = getAction("concert-pitch");
-      action->setChecked(score->styleB(ST_concertPitch));
+//TODO-LIB      QAction* action = getAction("concert-pitch");
+//      action->setChecked(score->styleB(ST_concertPitch));
       val = oval;
       }
 
@@ -2979,7 +2936,7 @@ void ChangeDuration::flip()
 void AddExcerpt::undo()
       {
       score->parentScore()->removeExcerpt(score);
-      mscore->excerptsChanged(score);
+//TODO-LIB      mscore->excerptsChanged(score);
       }
 
 //---------------------------------------------------------
@@ -2989,7 +2946,7 @@ void AddExcerpt::undo()
 void AddExcerpt::redo()
       {
       score->parentScore()->addExcerpt(score);
-      mscore->excerptsChanged(score);
+//TODO-LIB      mscore->excerptsChanged(score);
       }
 
 //---------------------------------------------------------
@@ -2999,7 +2956,7 @@ void AddExcerpt::redo()
 void RemoveExcerpt::undo()
       {
       score->parentScore()->addExcerpt(score);
-      mscore->excerptsChanged(score);
+//TODO-LIB      mscore->excerptsChanged(score);
       }
 
 //---------------------------------------------------------
@@ -3009,7 +2966,7 @@ void RemoveExcerpt::undo()
 void RemoveExcerpt::redo()
       {
       score->parentScore()->removeExcerpt(score);
-      mscore->excerptsChanged(score);
+//TODO-LIB      mscore->excerptsChanged(score);
       }
 
 //---------------------------------------------------------

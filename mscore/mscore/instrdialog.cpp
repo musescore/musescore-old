@@ -21,25 +21,25 @@
 #include "config.h"
 #include "musescore.h"
 #include "instrdialog.h"
-#include "instrtemplate.h"
+#include "libmscore/instrtemplate.h"
 #include "scoreview.h"
-#include "score.h"
-#include "system.h"
-#include "clef.h"
-#include "undo.h"
-#include "staff.h"
-#include "part.h"
-#include "segment.h"
-#include "style.h"
+#include "libmscore/score.h"
+#include "libmscore/system.h"
+#include "libmscore/clef.h"
+#include "libmscore/undo.h"
+#include "libmscore/staff.h"
+#include "libmscore/part.h"
+#include "libmscore/segment.h"
+#include "libmscore/style.h"
 #include "editinstrument.h"
-#include "drumset.h"
-#include "slur.h"
+#include "libmscore/drumset.h"
+#include "libmscore/slur.h"
 #include "seq.h"
-#include "measure.h"
-#include "line.h"
-#include "beam.h"
-#include "excerpt.h"
-#include "stafftype.h"
+#include "libmscore/measure.h"
+#include "libmscore/line.h"
+#include "libmscore/beam.h"
+#include "libmscore/excerpt.h"
+#include "libmscore/stafftype.h"
 
 //---------------------------------------------------------
 //   StaffListItem
@@ -753,223 +753,6 @@ void MuseScore::editInstrList()
       cs->endCmd();
       cs->rebuildMidiMapping();
       seq->initInstruments();
-      }
-
-//---------------------------------------------------------
-//   cmdInsertPart
-//    insert before staffIdx
-//---------------------------------------------------------
-
-void Score::cmdInsertPart(Part* part, int staffIdx)
-      {
-      undoInsertPart(part, staffIdx);
-
-      int sidx = this->staffIdx(part);
-      int eidx = sidx + part->nstaves();
-      for (Measure* m = firstMeasure(); m; m = m->nextMeasure())
-            m->cmdAddStaves(sidx, eidx, true);
-      adjustBracketsIns(sidx, eidx);
-      }
-
-//---------------------------------------------------------
-//   cmdRemovePart
-//---------------------------------------------------------
-
-void Score::cmdRemovePart(Part* part)
-      {
-      int sidx   = staffIdx(part);
-      int n      = part->nstaves();
-      int eidx   = sidx + n;
-
-// printf("cmdRemovePart %d-%d\n", sidx, eidx);
-
-      //
-      //    adjust measures
-      //
-      for (Measure* m = firstMeasure(); m; m = m->nextMeasure())
-            m->cmdRemoveStaves(sidx, eidx);
-
-      for (int i = 0; i < n; ++i)
-            cmdRemoveStaff(sidx);
-      undoRemovePart(part, sidx);
-      }
-
-//---------------------------------------------------------
-//   insertPart
-//---------------------------------------------------------
-
-void Score::insertPart(Part* part, int idx)
-      {
-      int staff = 0;
-      for (QList<Part*>::iterator i = _parts.begin(); i != _parts.end(); ++i) {
-            if (staff >= idx) {
-                  _parts.insert(i, part);
-                  return;
-                  }
-            staff += (*i)->nstaves();
-            }
-      _parts.push_back(part);
-      }
-
-//---------------------------------------------------------
-//   removePart
-//---------------------------------------------------------
-
-void Score::removePart(Part* part)
-      {
-      _parts.removeAt(_parts.indexOf(part));
-      }
-
-//---------------------------------------------------------
-//   insertStaff
-//---------------------------------------------------------
-
-void Score::insertStaff(Staff* staff, int idx)
-      {
-      _staves.insert(idx, staff);
-      staff->part()->insertStaff(staff);
-      }
-
-//---------------------------------------------------------
-//   adjustBracketsDel
-//---------------------------------------------------------
-
-void Score::adjustBracketsDel(int sidx, int eidx)
-      {
-      for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
-            Staff* staff = _staves[staffIdx];
-            for (int i = 0; i < staff->bracketLevels(); ++i) {
-                  int span = staff->bracketSpan(i);
-                  if ((span == 0) || ((staffIdx + span) < sidx) || (staffIdx > eidx))
-                        continue;
-                  if ((sidx >= staffIdx) && (eidx <= (staffIdx + span)))
-                        undoChangeBracketSpan(staff, i, span - (eidx-sidx));
-//                  else {
-//                        printf("TODO: adjust brackets, span %d\n", span);
-//                        }
-                  }
-            int span = staff->barLineSpan();
-            if ((sidx >= staffIdx) && (eidx <= (staffIdx + span)))
-                  undoChangeBarLineSpan(staff, span - (eidx-sidx));
-            }
-      }
-
-//---------------------------------------------------------
-//   adjustBracketsIns
-//---------------------------------------------------------
-
-void Score::adjustBracketsIns(int sidx, int eidx)
-      {
-      for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
-            Staff* staff = _staves[staffIdx];
-            int bl = staff->bracketLevels();
-            for (int i = 0; i < bl; ++i) {
-                  int span = staff->bracketSpan(i);
-                  if ((span == 0) || ((staffIdx + span) < sidx) || (staffIdx > eidx))
-                        continue;
-                  if ((sidx >= staffIdx) && (eidx < (staffIdx + span)))
-                        undoChangeBracketSpan(staff, i, span + (eidx-sidx));
-//                  else {
-//                        printf("TODO: adjust brackets\n");
-//                        }
-                  }
-            int span = staff->barLineSpan();
-            if ((sidx >= staffIdx) && (eidx < (staffIdx + span)))
-                  undoChangeBarLineSpan(staff, span + (eidx-sidx));
-            }
-      }
-
-//---------------------------------------------------------
-//   cmdRemoveStaff
-//---------------------------------------------------------
-
-void Score::cmdRemoveStaff(int staffIdx)
-      {
-      adjustBracketsDel(staffIdx, staffIdx+1);
-      Staff* s = staff(staffIdx);
-      undoRemoveStaff(s, staffIdx);
-      }
-
-//---------------------------------------------------------
-//   removeStaff
-//---------------------------------------------------------
-
-void Score::removeStaff(Staff* staff)
-      {
-      _staves.removeAll(staff);
-      staff->part()->removeStaff(staff);
-      }
-
-//---------------------------------------------------------
-//   sortStaves
-//---------------------------------------------------------
-
-void Score::sortStaves(QList<int>& dst)
-      {
-      systems()->clear();  //??
-      _parts.clear();
-      Part* curPart = 0;
-      QList<Staff*> dl;
-      foreach(int idx, dst) {
-            Staff* staff = _staves[idx];
-            if (staff->part() != curPart) {
-                  curPart = staff->part();
-                  curPart->staves()->clear();
-                  _parts.push_back(curPart);
-                  }
-            curPart->staves()->push_back(staff);
-            dl.push_back(staff);
-            }
-      _staves = dl;
-
-      for (MeasureBase* mb = _measures.first(); mb; mb = mb->next()) {
-            if (mb->type() != MEASURE)
-                  continue;
-            Measure* m = static_cast<Measure*>(mb);
-            m->sortStaves(dst);
-            }
-
-/*      foreach(Beam* beam, _beams) {
-            int staffIdx = beam->staffIdx();
-            int voice    = beam->voice();
-            int idx      = dst.indexOf(staffIdx);
-            beam->setTrack(idx * VOICES + voice);
-            }
-*/
-#if 0 // imlementation changed
-      foreach(Element* e, _gel) {
-            switch(e->type()) {
-                  case SLUR:
-                        {
-                        Slur* slur    = static_cast<Slur*>(e);
-                        int staffIdx  = slur->startElement()->staffIdx();
-                        int voice     = slur->startElement()->voice();
-                        int staffIdx2 = slur->endElement()->staffIdx();
-                        int voice2    = slur->endElement()->voice();
-                        slur->setTrack(dst[staffIdx] * VOICES + voice);
-                        slur->setTrack2(dst[staffIdx2] * VOICES + voice2);
-                        }
-                    break;
-                  case VOLTA:  //volta always attached to top staff
-                        break;
-                  case OTTAVA:
-                  case TRILL:
-                  case PEDAL:
-                  case HAIRPIN:
-                  case TEXTLINE:
-                        {
-                        SLine* line = static_cast<SLine*>(e);
-                        int voice    = line->voice();
-                        int staffIdx = line->staffIdx();
-                        int idx = dst.indexOf(staffIdx);
-                        line->setTrack(idx * VOICES + voice);
-                        }
-                        break;
-                  default:
-                        break;
-                }
-            }
-#endif
       }
 
 //---------------------------------------------------------

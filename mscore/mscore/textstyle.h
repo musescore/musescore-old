@@ -21,7 +21,7 @@
 #ifndef __TEXTSTYLE_H__
 #define __TEXTSTYLE_H__
 
-#include "style.h"
+#include "libmscore/style.h"
 #include "ui_textstyle.h"
 
 class Score;

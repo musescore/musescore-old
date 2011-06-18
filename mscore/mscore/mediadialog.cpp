@@ -21,7 +21,7 @@
 #include "mediadialog.h"
 #include "icons.h"
 #include "musescore.h"
-#include "score.h"
+#include "libmscore/score.h"
 #include "scoreview.h"
 #include "omr/omr.h"
 

@@ -19,11 +19,11 @@
 //=============================================================================
 
 #include "musescore.h"
-#include "measure.h"
-#include "layoutbreak.h"
-#include "page.h"
+#include "libmscore/measure.h"
+#include "libmscore/layoutbreak.h"
+#include "libmscore/page.h"
 #include "script.h"
-#include "system.h"
+#include "libmscore/system.h"
 
 Q_DECLARE_METATYPE(Measure*);
 Q_DECLARE_METATYPE(Score*);

@@ -19,11 +19,11 @@
 //=============================================================================
 
 #include "musescore.h"
-#include "score.h"
-#include "part.h"
+#include "libmscore/score.h"
+#include "libmscore/part.h"
 #include "mixer.h"
 #include "seq.h"
-#include "undo.h"
+#include "libmscore/undo.h"
 #include "msynth/synti.h"
 #include "synthcontrol.h"
 

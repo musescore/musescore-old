@@ -27,7 +27,6 @@
 #include "style.h"
 #include "xml.h"
 #include "score.h"
-#include "preferences.h"
 #include "staff.h"
 #include "utils.h"
 #include "sym.h"
@@ -82,6 +81,7 @@
 #include "stem.h"
 #include "painter.h"
 #include "iname.h"
+#include "mscore.h"
 
 extern bool debugMode;
 extern bool showInvisible;
@@ -298,7 +298,7 @@ Element::Element(Score* s) :
    _flags(ELEMENT_SELECTABLE),
    _subtype(0),
    _track(-1),
-   _color(preferences.defaultColor),
+   _color(MScore::defaultColor),
    _mag(1.0),
    _tag(1),
    _score(s),
@@ -425,15 +425,15 @@ QColor Element::curColor() const
       // the default element color is always interpreted as black in
       // printing
       if (score() && score()->printing())
-            return (_color == preferences.defaultColor) ? Qt::black : _color;
+            return (_color == MScore::defaultColor) ? Qt::black : _color;
 
       if (flag(ELEMENT_DROP_TARGET))
-            return preferences.dropColor;
+            return MScore::dropColor;
       if (_selected) {
             if (track() == -1)
-                  return preferences.selectColor[0];
+                  return MScore::selectColor[0];
             else
-                  return preferences.selectColor[voice()];
+                  return MScore::selectColor[voice()];
             }
       if (!_visible)
             return Qt::gray;
@@ -458,12 +458,12 @@ QRectF Element::drag(const EditData& data)
 
       qreal _spatium = spatium();
       if (data.hRaster) {
-            qreal hRaster = _spatium / preferences.hRaster;
+            qreal hRaster = _spatium / MScore::hRaster();
             int n = lrint(x / hRaster);
             x = hRaster * n;
             }
       if (data.vRaster) {
-            qreal vRaster = _spatium / preferences.vRaster;
+            qreal vRaster = _spatium / MScore::vRaster();
             int n = lrint(y / vRaster);
             y = vRaster * n;
             }
@@ -563,7 +563,7 @@ QList<Prop> Element::properties(Xml& xml, const Element* proto) const
             pl.append(Prop("selected", selected()));
       if (!visible())
             pl.append(Prop("visible", visible()));
-      if (_color != preferences.defaultColor)
+      if (_color != MScore::defaultColor)
             pl.append(Prop("color", _color));
       if (flag(ELEMENT_SYSTEM_FLAG) && (proto == 0 || proto->systemFlag() != flag(ELEMENT_SYSTEM_FLAG)))
             pl.append(Prop("systemFlag", flag(ELEMENT_SYSTEM_FLAG)));

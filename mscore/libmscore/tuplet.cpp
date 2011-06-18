@@ -23,7 +23,6 @@
 #include "chord.h"
 #include "note.h"
 #include "xml.h"
-#include "preferences.h"
 #include "style.h"
 #include "text.h"
 #include "element.h"
@@ -32,6 +31,7 @@
 #include "undo.h"
 #include "stem.h"
 #include "painter.h"
+#include "mscore.h"
 
 //---------------------------------------------------------
 //   Tuplet
@@ -633,6 +633,45 @@ void Tuplet::remove(Element* e)
                   break;
             }
       }
+
+//---------------------------------------------------------
+//   tupletDialog
+//    create tuplet dialog
+//---------------------------------------------------------
+
+#if 0 // TODO-LIB
+void Score::tupletDialog()
+      {
+      ChordRest* cr = getSelectedChordRest();
+      if (cr == 0)
+            return;
+      TupletDialog td;
+      if (!td.exec())
+            return;
+
+      Tuplet* tuplet = new Tuplet(this);
+      tuplet->setTrack(cr->track());
+      tuplet->setTick(cr->tick());
+      td.setupTuplet(tuplet);
+//      tuplet->setRatio(tuplet->ratio().reduced());
+      Fraction f1(cr->duration());
+      tuplet->setDuration(f1);
+      Fraction f = f1 * tuplet->ratio();
+      f.reduce();
+
+      printf("len %s  ratio %s  base %s\n",
+            qPrintable(f1.print()),
+            qPrintable(tuplet->ratio().print()),
+            qPrintable(f.print()));
+
+      tuplet->setBaseLen(Fraction(1, f.denominator()));
+
+      Measure* measure = cr->measure();
+      tuplet->setParent(measure);
+
+      cmdCreateTuplet(cr, tuplet);
+      }
+#endif
 
 //---------------------------------------------------------
 //   isEditable

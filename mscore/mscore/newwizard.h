@@ -25,7 +25,7 @@
 #include "ui_timesigwizard.h"
 #include "ui_newwizard.h"
 
-#include "key.h"
+#include "libmscore/key.h"
 #include "al/fraction.h"
 
 class Score;

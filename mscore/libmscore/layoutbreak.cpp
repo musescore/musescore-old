@@ -19,10 +19,10 @@
 //=============================================================================
 
 #include "layoutbreak.h"
-#include "preferences.h"
 #include "score.h"
 #include "scoreview.h"
 #include "painter.h"
+#include "mscore.h"
 
 //---------------------------------------------------------
 //   LayoutBreak
@@ -81,9 +81,9 @@ void LayoutBreak::draw(Painter* painter) const
       if (score()->printing() || !score()->showUnprintable())
             return;
       if (selected())
-            painter->setPenColor(preferences.selectColor[0]);
+            painter->setPenColor(MScore::selectColor[0]);
       else
-            painter->setPenColor(preferences.layoutBreakColor);
+            painter->setPenColor(MScore::layoutBreakColor);
 
       painter->setLineWidth(lw);
       painter->setCapStyle(Qt::RoundCap);

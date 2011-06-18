@@ -1736,8 +1736,8 @@ void Score::nextInputPos(ChordRest* cr, bool doSelect)
       _is.setSegment(ncr ? ncr->segment() : 0);
       if (doSelect)
             select(ncr, SELECT_SINGLE, 0);
-      if (ncr)
-            emit posChanged(ncr->tick());
+//      if (ncr)
+//            emit posChanged(ncr->tick());
       }
 
 //---------------------------------------------------------
@@ -1748,9 +1748,11 @@ void Score::cmdSplitMeasure()
       {
       Element* e = _selection.element();
       if (!(e && (e->type() == NOTE || e->type() == REST))) {
+#if 0 // TODO-LIB
 		QMessageBox::warning(0, "MuseScore",
 			tr("No chord/rest selected:\n"
 			"please select a chord/rest and try again"));
+#endif
             return;
             }
       if (e->type() == NOTE)
@@ -1886,9 +1888,11 @@ void Score::cmdJoinMeasure()
       Measure* m1 = _selection.startSegment()->measure();
       Measure* m2 = _selection.endSegment()->measure();
       if (_selection.state() != SEL_RANGE || (m1 == m2)) {
+#if 0 // TODO-LIB
 		QMessageBox::warning(0, "MuseScore",
 			tr("No measures selected:\n"
 			"please select range of measures to join and try again"));
+#endif
             return;
             }
       Measure* m = new Measure(this);

@@ -91,7 +91,7 @@ class PainterQt : public Painter {
       virtual void drawPolyline(const QPointF* v, int n) const {
             _painter->drawPolyline(v, n);
             }
-      virtual void drawPolygon(const QPolygonF& pg) { _painter->drawPolygon(pg); }
+      virtual void drawPolygon(const QPolygonF& pg) const { _painter->drawPolygon(pg); }
 
       virtual void drawArc(const QRectF& r, int a, int b) const {
             _painter->drawArc(r, a, b);

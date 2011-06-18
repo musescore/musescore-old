@@ -21,7 +21,7 @@
 #ifndef __SLUR_H__
 #define __SLUR_H__
 
-#include "globals.h"
+#include "mscore.h"
 #include "spanner.h"
 
 class Note;
@@ -75,6 +75,7 @@ class SlurSegment : public SpannerSegment {
 
       virtual void move(qreal xd, qreal yd) { move(QPointF(xd, yd)); }
       virtual void move(const QPointF& s);
+
 
       SlurTie* slurTie() const                      { return (SlurTie*)parent(); }
 

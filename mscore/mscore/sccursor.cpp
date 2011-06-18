@@ -18,19 +18,19 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "chordrest.h"
-#include "chord.h"
-#include "rest.h"
-#include "note.h"
-#include "stafftext.h"
-#include "text.h"
-#include "measure.h"
-#include "repeatlist.h"
-#include "page.h"
+#include "libmscore/chordrest.h"
+#include "libmscore/chord.h"
+#include "libmscore/rest.h"
+#include "libmscore/note.h"
+#include "libmscore/stafftext.h"
+#include "libmscore/text.h"
+#include "libmscore/measure.h"
+#include "libmscore/repeatlist.h"
+#include "libmscore/page.h"
 #include "script.h"
-#include "system.h"
+#include "libmscore/system.h"
 #include "sccursor.h"
-#include "segment.h"
+#include "libmscore/segment.h"
 
 //---------------------------------------------------------
 //   SCursor

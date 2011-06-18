@@ -21,9 +21,9 @@
 #include "shadownote.h"
 #include "score.h"
 #include "drumset.h"
-#include "preferences.h"
 #include "sym.h"
 #include "painter.h"
+#include "mscore.h"
 
 //---------------------------------------------------------
 //   ShadowNote
@@ -57,7 +57,7 @@ void ShadowNote::draw(Painter* painter) const
       else
             voice = ps.voice();
 
-      painter->setPenColor(preferences.selectColor[voice].light(140));  // was 160
+      painter->setPenColor(MScore::selectColor[voice].light(140));  // was 160
       painter->setLineWidth(lw);
 
       sym->draw(painter, magS());

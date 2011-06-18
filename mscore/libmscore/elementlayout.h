@@ -21,7 +21,7 @@
 #ifndef __ELEMENTLAYOUT_H__
 #define __ELEMENTLAYOUT_H__
 
-#include "globals.h"
+#include "mscore.h"
 
 class Element;
 class Xml;

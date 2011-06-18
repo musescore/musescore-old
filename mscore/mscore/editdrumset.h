@@ -22,7 +22,7 @@
 #define __EDITDRUMSET_H__
 
 #include "ui_editdrumset.h"
-#include "drumset.h"
+#include "libmscore/drumset.h"
 
 //---------------------------------------------------------
 //   EditDrumset

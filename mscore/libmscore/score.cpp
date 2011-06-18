@@ -60,7 +60,6 @@
 #include "excerpt.h"
 #include "stafftext.h"
 #include "magbox.h"
-#include "preferences.h"
 #include "repeatlist.h"
 #include "keysig.h"
 #include "beam.h"
@@ -73,6 +72,8 @@
 #include "tiemap.h"
 #include "spannermap.h"
 #include "layoutbreak.h"
+#include "harmony.h"
+#include "mscore.h"
 
 #include "omr/omr.h"
 
@@ -353,7 +354,6 @@ Score::Score(const Style* s)
       _showOmr        = false;
       _sigmap         = new AL::TimeSigMap();
       _tempomap       = new AL::TempoMap;
-      connect(_undo, SIGNAL(cleanChanged(bool)), SLOT(setClean(bool)));
       }
 
 //
@@ -386,8 +386,8 @@ Score::Score(Score* parent)
       _repeatList     = 0;
 
       _style = *parent->style();
-      if (!preferences.partStyle.isEmpty()) {
-            QFile f(preferences.partStyle);
+      if (!MScore::partStyle.isEmpty()) {
+            QFile f(MScore::partStyle);
             if (f.open(QIODevice::ReadOnly))
                   _style.load(&f);
             }
@@ -425,6 +425,8 @@ Score::Score(Score* parent)
 
 Score::~Score()
       {
+      foreach(MuseScoreView* v, viewer)
+            v->removeScore();
       deselectAll();
       for (MeasureBase* m = _measures.first(); m;) {
             MeasureBase* nm = m->next();
@@ -480,146 +482,6 @@ static void elementAdjustReadPos(void*, Element* e)
       }
 
 //---------------------------------------------------------
-//   readScore
-///   Import file \a name
-//    return 0 - OK, 1 _errno, 2 - bad file type
-//---------------------------------------------------------
-
-int Score::readScore(QString name)
-      {
-      _mscVersion = MSCVERSION;
-      _saved      = false;
-      info.setFile(name);
-
-      QString cs  = info.suffix();
-      QString csl = cs.toLower();
-
-      if (csl == "mscz") {
-            if (!loadCompressedMsc(name))
-                  return 1;
-            }
-      else if (csl == "msc" || csl == "mscx") {
-            if (!loadMsc(name))
-                  return 1;
-            }
-      else {
-            // import
-            if (!preferences.importStyleFile.isEmpty()) {
-                  QFile f(preferences.importStyleFile);
-                  // silently ignore style file on error
-                  if (f.open(QIODevice::ReadOnly))
-                        _style.load(&f);
-                  }
-
-            if (csl == "xml") {
-                  if (!importMusicXml(name))
-                        return 1;
-                  connectSlurs();
-                  }
-            else if (csl == "mxl") {
-                  if (!importCompressedMusicXml(name))
-                        return 1;
-                  connectSlurs();
-                  }
-            else if (csl == "mid" || csl == "midi" || csl == "kar") {
-                  if (!importMidi(name))
-                        return 1;
-                  }
-            else if (csl == "md") {
-                  if (!importMuseData(name))
-                        return 1;
-                  }
-            else if (csl == "ly") {
-                  if (!importLilypond(name))
-                        return 1;
-                  }
-            else if (csl == "mgu" || csl == "sgu") {
-                  if (!importBB(name))
-                        return 1;
-                  }
-            else if (csl == "cap") {
-                  if (!importCapella(name))
-                        return 1;
-                  }
-            else if (csl == "ove" || csl == "scw") {
-                  if (!importOve(name))
-            	      return 1;
-      	      }
-#ifdef OMR
-            else if (csl == "pdf") {
-                  if (!importPdf(name))
-                        return 1;
-                  }
-#endif
-            else if (csl == "bww") {
-                  if (!importBww(name))
-                        return 1;
-                  }
-            else if (csl == "gtp" || csl == "gp3" || csl == "gp4" || csl == "gp5") {
-                  if (!importGTP(name))
-                        return 1;
-                  }
-            else {
-                  printf("unknown file suffix <%s>, name <%s>\n", qPrintable(cs), qPrintable(name));
-                  return 2;
-                  }
-            }
-
-      int staffIdx = 0;
-      foreach(Staff* st, _staves) {
-            if (st->updateKeymap())
-                  st->keymap()->clear();
-            int track = staffIdx * VOICES;
-            KeySig* key1 = 0;
-            for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
-                  for (Segment* s = m->first(); s; s = s->next()) {
-                        if (!s->element(track))
-                              continue;
-                        Element* e = s->element(track);
-                        if (e->generated())
-                              continue;
-                        //if ((s->subtype() == SegClef) && st->updateClefList()) {
-                        //      Clef* clef = static_cast<Clef*>(e);
-                        //      st->setClef(s->tick(), clef->clefTypeList());
-                        //      }
-                        if ((s->subtype() == SegKeySig) && st->updateKeymap()) {
-                              KeySig* ks = static_cast<KeySig*>(e);
-                              int naturals = key1 ? key1->keySigEvent().accidentalType() : 0;
-                              ks->setOldSig(naturals);
-                              st->setKey(s->tick(), ks->keySigEvent());
-                              key1 = ks;
-                              }
-                        }
-                  if (m->sectionBreak())
-                        key1 = 0;
-                  }
-            st->setUpdateKeymap(false);
-            ++staffIdx;
-            }
-      adjustReadPos();
-
-      rebuildBspTree();
-
-      foreach(Excerpt* e, _excerpts) {
-            Score* score = e->score();
-            score->adjustReadPos();
-            }
-      //
-      // check if any soundfont is configured
-      //
-      bool hasSoundFont = false;
-      for (int i = 0; i < _syntiState.size(); ++i) {
-            const SyntiParameter& p = _syntiState.at(i);
-            if (p.name() == "soundfont")
-                  hasSoundFont = true;
-            }
-      if (!hasSoundFont)
-            _syntiState.prepend(SyntiParameter("soundfont", preferences.soundFont));
-      checkScore();
-      return 0;
-      }
-
-//---------------------------------------------------------
 //   adjustReadPos
 //---------------------------------------------------------
 
@@ -636,93 +498,6 @@ void Score::adjustReadPos()
       // adjust readPos
       scanElements(0, elementAdjustReadPos);
       _layer[_currentLayer].tags = layerBits;
-      }
-
-//---------------------------------------------------------
-//   write
-//---------------------------------------------------------
-
-void Score::write(Xml& xml, bool /*autosave*/)
-      {
-      slurs.clear();
-      xml.stag("Score");
-
-      if (_omr && xml.writeOmr)
-            _omr->write(xml);
-      if (_showOmr && xml.writeOmr)
-            xml.tag("showOmr", _showOmr);
-
-      for (int i = 0; i < 32; ++i) {
-            if (!_layerTags[i].isEmpty()) {
-                  xml.tag(QString("LayerTag id=\"%1\" tag=\"%2\"").arg(i).arg(_layerTags[i]),
-                     _layerTagComments[i]);
-                  }
-            }
-      int n = _layer.size();
-      for (int i = 1; i < n; ++i) {       // dont save default variant
-            const Layer& l = _layer[i];
-            xml.tagE(QString("Layer name=\"%1\" mask=\"%2\"").arg(l.name).arg(l.tags));
-            }
-      xml.tag("currentLayer", _currentLayer);
-
-      _syntiState.write(xml);
-
-      if (pageNumberOffset())
-            xml.tag("page-offset", pageNumberOffset());
-      xml.tag("Division", AL::division);
-      xml.curTrack = -1;
-
-      _style.save(xml, true);      // save only differences to buildin style
-
-      if (!parentScore()) {
-            int idx = 0;
-            foreach(StaffType* st, _staffTypes) {
-                  if ((idx >= STAFF_TYPES) || !st->isEqual(*::staffTypes[idx]))
-                        st->write(xml, idx);
-                  ++idx;
-                  }
-            }
-      xml.tag("showInvisible", _showInvisible);
-      xml.tag("showUnprintable", _showUnprintable);
-      xml.tag("showFrames", _showFrames);
-      pageFormat()->write(xml);
-
-      QMapIterator<QString, QString> i(_metaTags);
-      while (i.hasNext()) {
-            i.next();
-            if (!i.value().isEmpty())
-                  xml.tag(QString("metaTag name=\"%1\"").arg(i.key()), i.value());
-            }
-
-      foreach(KeySig* ks, customKeysigs)
-            ks->write(xml);
-      foreach(const Part* part, _parts)
-            part->write(xml);
-
-      for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
-            foreach(Tuplet* tuplet, *m->tuplets())
-                  tuplet->setId(xml.tupletId++);
-            }
-      xml.curTrack = 0;
-      for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
-            xml.stag(QString("Staff id=\"%1\"").arg(staffIdx + 1));
-            xml.curTick  = 0;
-            xml.curTrack = staffIdx * VOICES;
-            for (MeasureBase* m = first(); m; m = m->next()) {
-                  if (m->type() == MEASURE || staffIdx == 0)
-                        m->write(xml, staffIdx, staffIdx == 0);
-                  if (m->type() == MEASURE)
-                        xml.curTick = m->tick() + m->ticks();
-                  }
-            xml.etag();
-            }
-      xml.curTrack = -1;
-      xml.tag("cursorTrack", _is.track());
-      foreach(Excerpt* excerpt, _excerpts)
-            excerpt->score()->write(xml, false);       // recursion
-      if (parentScore())
-            xml.tag("name", name());
-      xml.etag();
       }
 
 //---------------------------------------------------------
@@ -1022,73 +797,6 @@ int Score::staffIdx(const Part* part) const
       }
 
 //---------------------------------------------------------
-//   readStaff
-//---------------------------------------------------------
-
-void Score::readStaff(QDomElement e)
-      {
-      MeasureBase* mb = first();
-      int staff       = e.attribute("id", "1").toInt() - 1;
-      curTick         = 0;
-      curTrack        = staff * VOICES;
-
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-
-            if (tag == "Measure") {
-                  Measure* measure = 0;
-                  if (staff == 0) {
-                        measure = new Measure(this);
-                        measure->setTick(curTick);
-                        add(measure);
-                        if (_mscVersion < 115) {
-                              const AL::SigEvent& ev = sigmap()->timesig(measure->tick());
-                              measure->setLen(ev.timesig());
-                              measure->setTimesig(ev.nominal());
-                              }
-                        else {
-                              //
-                              // inherit timesig from previous measure
-                              //
-                              Measure* m = measure->prevMeasure();
-                              Fraction f(m ? m->timesig() : Fraction(4,4));
-                              measure->setLen(f);
-                              measure->setTimesig(f);
-                              }
-                        }
-                  else {
-                        while (mb) {
-                              if (mb->type() != MEASURE) {
-                                    mb = mb->next();
-                                    }
-                              else {
-                                    measure = (Measure*)mb;
-                                    mb      = mb->next();
-                                    break;
-                                    }
-                              }
-                        if (measure == 0) {
-                              printf("Score::readStaff(): missing measure!\n");
-                              measure = new Measure(this);
-                              measure->setTick(curTick);
-                              add(measure);
-                              }
-                        }
-                  measure->read(e, staff);
-                  curTick = measure->tick() + measure->ticks();
-                  }
-            else if (tag == "HBox" || tag == "VBox" || tag == "TBox" || tag == "FBox") {
-                  MeasureBase* mb = static_cast<MeasureBase*>(Element::name2Element(tag, this));
-                  mb->read(e);
-                  mb->setTick(curTick);
-                  add(mb);
-                  }
-            else
-                  domError(e);
-            }
-      }
-
-//---------------------------------------------------------
 //   setShowInvisible
 //---------------------------------------------------------
 
@@ -1132,7 +840,7 @@ void Score::setClean(bool val)
       if (_dirty != val) {
             _dirty         = val;
             _playlistDirty = true;
-            emit dirtyChanged(this);
+//            emit dirtyChanged(this);
             }
       if (_dirty) {
             _playlistDirty = true;
@@ -2633,6 +2341,481 @@ void Score::splitStaff(int staffIdx, int splitPoint)
                   ctick += rest;
                   }
             }
+      }
+
+//---------------------------------------------------------
+//   cmdInsertPart
+//    insert before staffIdx
+//---------------------------------------------------------
+
+void Score::cmdInsertPart(Part* part, int staffIdx)
+      {
+      undoInsertPart(part, staffIdx);
+
+      int sidx = this->staffIdx(part);
+      int eidx = sidx + part->nstaves();
+      for (Measure* m = firstMeasure(); m; m = m->nextMeasure())
+            m->cmdAddStaves(sidx, eidx, true);
+      adjustBracketsIns(sidx, eidx);
+      }
+
+//---------------------------------------------------------
+//   cmdRemovePart
+//---------------------------------------------------------
+
+void Score::cmdRemovePart(Part* part)
+      {
+      int sidx   = staffIdx(part);
+      int n      = part->nstaves();
+      int eidx   = sidx + n;
+
+// printf("cmdRemovePart %d-%d\n", sidx, eidx);
+
+      //
+      //    adjust measures
+      //
+      for (Measure* m = firstMeasure(); m; m = m->nextMeasure())
+            m->cmdRemoveStaves(sidx, eidx);
+
+      for (int i = 0; i < n; ++i)
+            cmdRemoveStaff(sidx);
+      undoRemovePart(part, sidx);
+      }
+
+//---------------------------------------------------------
+//   insertPart
+//---------------------------------------------------------
+
+void Score::insertPart(Part* part, int idx)
+      {
+      int staff = 0;
+      for (QList<Part*>::iterator i = _parts.begin(); i != _parts.end(); ++i) {
+            if (staff >= idx) {
+                  _parts.insert(i, part);
+                  return;
+                  }
+            staff += (*i)->nstaves();
+            }
+      _parts.push_back(part);
+      }
+
+//---------------------------------------------------------
+//   removePart
+//---------------------------------------------------------
+
+void Score::removePart(Part* part)
+      {
+      _parts.removeAt(_parts.indexOf(part));
+      }
+
+//---------------------------------------------------------
+//   insertStaff
+//---------------------------------------------------------
+
+void Score::insertStaff(Staff* staff, int idx)
+      {
+      _staves.insert(idx, staff);
+      staff->part()->insertStaff(staff);
+      }
+
+//---------------------------------------------------------
+//   adjustBracketsDel
+//---------------------------------------------------------
+
+void Score::adjustBracketsDel(int sidx, int eidx)
+      {
+      for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
+            Staff* staff = _staves[staffIdx];
+            for (int i = 0; i < staff->bracketLevels(); ++i) {
+                  int span = staff->bracketSpan(i);
+                  if ((span == 0) || ((staffIdx + span) < sidx) || (staffIdx > eidx))
+                        continue;
+                  if ((sidx >= staffIdx) && (eidx <= (staffIdx + span)))
+                        undoChangeBracketSpan(staff, i, span - (eidx-sidx));
+//                  else {
+//                        printf("TODO: adjust brackets, span %d\n", span);
+//                        }
+                  }
+            int span = staff->barLineSpan();
+            if ((sidx >= staffIdx) && (eidx <= (staffIdx + span)))
+                  undoChangeBarLineSpan(staff, span - (eidx-sidx));
+            }
+      }
+
+//---------------------------------------------------------
+//   adjustBracketsIns
+//---------------------------------------------------------
+
+void Score::adjustBracketsIns(int sidx, int eidx)
+      {
+      for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
+            Staff* staff = _staves[staffIdx];
+            int bl = staff->bracketLevels();
+            for (int i = 0; i < bl; ++i) {
+                  int span = staff->bracketSpan(i);
+                  if ((span == 0) || ((staffIdx + span) < sidx) || (staffIdx > eidx))
+                        continue;
+                  if ((sidx >= staffIdx) && (eidx < (staffIdx + span)))
+                        undoChangeBracketSpan(staff, i, span + (eidx-sidx));
+//                  else {
+//                        printf("TODO: adjust brackets\n");
+//                        }
+                  }
+            int span = staff->barLineSpan();
+            if ((sidx >= staffIdx) && (eidx < (staffIdx + span)))
+                  undoChangeBarLineSpan(staff, span + (eidx-sidx));
+            }
+      }
+
+//---------------------------------------------------------
+//   cmdRemoveStaff
+//---------------------------------------------------------
+
+void Score::cmdRemoveStaff(int staffIdx)
+      {
+      adjustBracketsDel(staffIdx, staffIdx+1);
+      Staff* s = staff(staffIdx);
+      undoRemoveStaff(s, staffIdx);
+      }
+
+//---------------------------------------------------------
+//   removeStaff
+//---------------------------------------------------------
+
+void Score::removeStaff(Staff* staff)
+      {
+      _staves.removeAll(staff);
+      staff->part()->removeStaff(staff);
+      }
+
+//---------------------------------------------------------
+//   sortStaves
+//---------------------------------------------------------
+
+void Score::sortStaves(QList<int>& dst)
+      {
+      systems()->clear();  //??
+      _parts.clear();
+      Part* curPart = 0;
+      QList<Staff*> dl;
+      foreach(int idx, dst) {
+            Staff* staff = _staves[idx];
+            if (staff->part() != curPart) {
+                  curPart = staff->part();
+                  curPart->staves()->clear();
+                  _parts.push_back(curPart);
+                  }
+            curPart->staves()->push_back(staff);
+            dl.push_back(staff);
+            }
+      _staves = dl;
+
+      for (MeasureBase* mb = _measures.first(); mb; mb = mb->next()) {
+            if (mb->type() != MEASURE)
+                  continue;
+            Measure* m = static_cast<Measure*>(mb);
+            m->sortStaves(dst);
+            }
+
+/*      foreach(Beam* beam, _beams) {
+            int staffIdx = beam->staffIdx();
+            int voice    = beam->voice();
+            int idx      = dst.indexOf(staffIdx);
+            beam->setTrack(idx * VOICES + voice);
+            }
+*/
+#if 0 // imlementation changed
+      foreach(Element* e, _gel) {
+            switch(e->type()) {
+                  case SLUR:
+                        {
+                        Slur* slur    = static_cast<Slur*>(e);
+                        int staffIdx  = slur->startElement()->staffIdx();
+                        int voice     = slur->startElement()->voice();
+                        int staffIdx2 = slur->endElement()->staffIdx();
+                        int voice2    = slur->endElement()->voice();
+                        slur->setTrack(dst[staffIdx] * VOICES + voice);
+                        slur->setTrack2(dst[staffIdx2] * VOICES + voice2);
+                        }
+                    break;
+                  case VOLTA:  //volta always attached to top staff
+                        break;
+                  case OTTAVA:
+                  case TRILL:
+                  case PEDAL:
+                  case HAIRPIN:
+                  case TEXTLINE:
+                        {
+                        SLine* line = static_cast<SLine*>(e);
+                        int voice    = line->voice();
+                        int staffIdx = line->staffIdx();
+                        int idx = dst.indexOf(staffIdx);
+                        line->setTrack(idx * VOICES + voice);
+                        }
+                        break;
+                  default:
+                        break;
+                }
+            }
+#endif
+      }
+
+//---------------------------------------------------------
+//   keydiff2Interval
+//    keysig -   -7(Cb) - +7(C#)
+//---------------------------------------------------------
+
+static Interval keydiff2Interval(int oKey, int nKey, TransposeDirection dir)
+      {
+      static int stepTable[15] = {
+            // C  G  D  A  E  B Fis
+               0, 4, 1, 5, 2, 6, 3,
+            };
+
+      int cofSteps;     // circle of fifth steps
+      int diatonic;
+      if (nKey > oKey)
+            cofSteps = nKey - oKey;
+      else
+            cofSteps = 12 - (oKey - nKey);
+      diatonic = stepTable[(nKey + 7) % 7] - stepTable[(oKey + 7) % 7];
+      if (diatonic < 0)
+            diatonic += 7;
+      diatonic %= 7;
+      int chromatic = (cofSteps * 7) % 12;
+
+
+      if ((dir == TRANSPOSE_CLOSEST) && (chromatic > 6))
+            dir = TRANSPOSE_DOWN;
+
+      if (dir == TRANSPOSE_DOWN) {
+            chromatic = chromatic - 12;
+            diatonic  = diatonic - 7;
+            if (diatonic == -7)
+                  diatonic = 0;
+            if (chromatic == -12)
+                  chromatic = 0;
+            }
+printf("TransposeByKey %d -> %d   chromatic %d diatonic %d\n", oKey, nKey, chromatic, diatonic);
+      return Interval(diatonic, chromatic);
+      }
+
+//---------------------------------------------------------
+//   transpose
+//---------------------------------------------------------
+
+void Score::transpose(int mode, TransposeDirection direction, int transposeKey, int transposeInterval,
+   bool trKeys, bool transposeChordNames, bool useDoubleSharpsFlats)
+      {
+      bool rangeSelection = selection().state() == SEL_RANGE;
+      int startStaffIdx = 0;
+      int startTick     = 0;
+      if (rangeSelection) {
+            startStaffIdx = selection().staffStart();
+            startTick     = selection().tickStart();
+            }
+      KeyList* km = staff(startStaffIdx)->keymap();
+      int key     = km->key(startTick).accidentalType();
+
+      Interval interval;
+      if (mode == TRANSPOSE_BY_KEY) {
+            // calculate interval from "transpose by key"
+            km       = staff(startStaffIdx)->keymap();
+            int oKey = km->key(startTick).accidentalType();
+            interval = keydiff2Interval(oKey, transposeKey, direction);
+            }
+      else {
+            interval = intervalList[transposeInterval];
+            if (direction == TRANSPOSE_DOWN)
+                  interval.flip();
+            }
+
+      if (!rangeSelection)
+            trKeys = false;
+      bool fullOctave = (interval.chromatic % 12) == 0;
+      if (fullOctave && (mode != TRANSPOSE_BY_KEY)) {
+            trKeys = false;
+            transposeChordNames = false;
+            }
+
+      if (_selection.state() == SEL_LIST) {
+            foreach(Element* e, _selection.elements()) {
+                  if (e->staff()->staffType()->group() == PERCUSSION_STAFF)
+                        continue;
+                  if (e->type() == NOTE)
+                        transpose(static_cast<Note*>(e), interval, useDoubleSharpsFlats);
+                  else if ((e->type() == HARMONY) && transposeChordNames) {
+                        Harmony* h  = static_cast<Harmony*>(e);
+                        int rootTpc = transposeTpc(h->rootTpc(), interval, false);
+                        int baseTpc = transposeTpc(h->baseTpc(), interval, false);
+                        undoTransposeHarmony(h, rootTpc, baseTpc);
+                        }
+                  else if ((e->type() == KEYSIG) && trKeys) {
+                        KeySig* ks = static_cast<KeySig*>(e);
+                        KeySigEvent key  = km->key(ks->tick());
+                        KeySigEvent okey = km->key(ks->tick() - 1);
+                        key.setNaturalType(okey.accidentalType());
+                        undo()->push(new ChangeKeySig(ks, key, ks->showCourtesySig(),
+                           ks->showNaturals()));
+                        }
+                  }
+            return;
+            }
+
+      int startTrack = _selection.staffStart() * VOICES;
+      int endTrack   = _selection.staffEnd() * VOICES;
+
+      for (Segment* segment = _selection.startSegment(); segment && segment != _selection.endSegment(); segment = segment->next1()) {
+            for (int st = startTrack; st < endTrack; ++st) {
+                  if (staff(st/VOICES)->staffType()->group() == PERCUSSION_STAFF)
+                        continue;
+                  Element* e = segment->element(st);
+                  if (!e || e->type() != CHORD)
+                        continue;
+                  Chord* chord = static_cast<Chord*>(e);
+                  QList<Note*> nl = chord->notes();
+                  foreach (Note* n, nl)
+                        transpose(n, interval, useDoubleSharpsFlats);
+                  }
+            if (transposeChordNames) {
+                  foreach (Element* e, segment->annotations()) {
+                        if ((e->type() != HARMONY) || (e->track() < startTrack) || (e->track() >= endTrack))
+                              continue;
+                        Harmony* h  = static_cast<Harmony*>(e);
+                        int rootTpc = transposeTpc(h->rootTpc(), interval, false);
+                        int baseTpc = transposeTpc(h->baseTpc(), interval, false);
+                        undoTransposeHarmony(h, rootTpc, baseTpc);
+                        }
+                  }
+            }
+
+      if (trKeys) {
+            transposeKeys(_selection.staffStart(), _selection.staffEnd(),
+               _selection.tickStart(), _selection.tickEnd(), interval.chromatic);
+            }
+      setLayoutAll(true);
+      }
+
+//---------------------------------------------------------
+//   transposeStaff
+//---------------------------------------------------------
+
+void Score::cmdTransposeStaff(int staffIdx, Interval interval, bool useDoubleSharpsFlats)
+      {
+      if (staff(staffIdx)->staffType()->group() == PERCUSSION_STAFF)
+            return;
+      int startTrack = staffIdx * VOICES;
+      int endTrack   = startTrack + VOICES;
+
+      transposeKeys(staffIdx, staffIdx+1, 0, lastSegment()->tick(), interval.chromatic);
+
+      for (Segment* segment = firstSegment(); segment; segment = segment->next1()) {
+           for (int st = startTrack; st < endTrack; ++st) {
+                  Element* e = segment->element(st);
+                  if (!e || e->type() != CHORD)
+                      continue;
+
+                  Chord* chord = static_cast<Chord*>(e);
+                  QList<Note*> nl = chord->notes();
+                  foreach(Note* n, nl)
+                      transpose(n, interval, useDoubleSharpsFlats);
+                  }
+            }
+
+      for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
+            foreach (Element* e, *m->el()) {
+                  if (e->type() != HARMONY)
+                        continue;
+                  if (e->track() >= startTrack && e->track() < endTrack) {
+                        Harmony* h  = static_cast<Harmony*>(e);
+                        int rootTpc = transposeTpc(h->rootTpc(), interval, false);
+                        int baseTpc = transposeTpc(h->baseTpc(), interval, false);
+                        undoTransposeHarmony(h, rootTpc, baseTpc);
+                        }
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   cmdConcertPitchChanged
+//---------------------------------------------------------
+
+void Score::cmdConcertPitchChanged(bool flag, bool useDoubleSharpsFlats)
+      {
+      undo()->push(new ChangeConcertPitch(this, flag));
+
+      foreach(Staff* staff, _staves) {
+            if (staff->staffType()->group() == PERCUSSION_STAFF)
+                  continue;
+            Instrument* instr = staff->part()->instr();
+            Interval interval = instr->transpose();
+            if (interval.isZero())
+                  continue;
+            if (!flag)
+                  interval.flip();
+            cmdTransposeStaff(staff->idx(), interval, useDoubleSharpsFlats);
+            }
+      for (Segment* s = firstMeasure()->first(SegClef); s; s = s->next1(SegClef)) {
+            for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
+                  Clef* clef = static_cast<Clef*>(s->element(staffIdx * VOICES));
+                  if (!clef)
+                        continue;
+                  clef->setClefType(flag ? clef->concertClef() : clef->transposingClef());
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   transpose
+//---------------------------------------------------------
+
+void Score::transpose(Note* n, Interval interval, bool useDoubleSharpsFlats)
+      {
+      int npitch;
+      int ntpc;
+      transposeInterval(n->pitch(), n->tpc(), &npitch, &ntpc, interval,
+        useDoubleSharpsFlats);
+      undoChangePitch(n, npitch, ntpc, n->line(), n->fret(), n->string());
+      }
+
+//---------------------------------------------------------
+//   transposeKeys
+//    key -   -7(Cb) - +7(C#)
+//---------------------------------------------------------
+
+void Score::transposeKeys(int staffStart, int staffEnd, int tickStart, int tickEnd, int /*semitones*/)
+      {
+      for (int staffIdx = staffStart; staffIdx < staffEnd; ++staffIdx) {
+            if (staff(staffIdx)->staffType()->group() == PERCUSSION_STAFF)
+                  continue;
+            for (Segment* s = firstSegment(); s; s = s->next1()) {
+                  if (s->subtype() != SegKeySig)
+                        continue;
+                  if (s->tick() < tickStart)
+                        continue;
+                  if (s->tick() >= tickEnd)
+                        break;
+                  KeySig* ks = static_cast<KeySig*>(s->element(staffIdx * VOICES));
+                  if (ks) {
+                        KeyList* km      = staff(staffIdx)->keymap();
+                        KeySigEvent key  = km->key(s->tick());
+                        KeySigEvent okey = km->key(s->tick() - 1);
+                        key.setNaturalType(okey.accidentalType());
+                        undo()->push(new ChangeKeySig(ks, key, ks->showCourtesySig(),
+                           ks->showNaturals()));
+                        }
+                  }
+            }
+      }
+
+
+//---------------------------------------------------------
+//   addAudioTrack
+//---------------------------------------------------------
+
+void Score::addAudioTrack()
+      {
+      // TODO
       }
 
 

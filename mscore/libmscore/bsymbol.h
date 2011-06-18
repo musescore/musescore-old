@@ -47,7 +47,7 @@ class BSymbol : public Element, public ElementLayout {
       virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(const DropData&);
       virtual void layout();
-      virtual QRectF drag(const EditData&);
+      virtual QRectF drag(const EditData& pos);
 
       const QList<Element*>& leafs() const { return _leafs; }
       QList<Element*>& leafs()             { return _leafs; }

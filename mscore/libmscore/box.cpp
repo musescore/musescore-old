@@ -31,7 +31,7 @@
 #include "layoutbreak.h"
 #include "fret.h"
 #include "painter.h"
-#include "preferences.h"
+#include "mscore.h"
 
 static const double BOX_MARGIN = 0.0;
 
@@ -109,7 +109,7 @@ void Box::editDrag(const EditData& ed)
       if (type() == VBOX) {
             _boxHeight = Spatium((ed.pos.y() - abbox().y()) / spatium());
             if (ed.vRaster) {
-                  qreal vRaster = 1.0 / qreal(preferences.vRaster);
+                  qreal vRaster = 1.0 / MScore::vRaster();
                   int n = lrint(_boxHeight.val() / vRaster);
                   _boxHeight = Spatium(vRaster * n);
                   }
@@ -117,7 +117,7 @@ void Box::editDrag(const EditData& ed)
       else {
             _boxWidth += Spatium(ed.delta.x() / spatium());
             if (ed.hRaster) {
-                  qreal hRaster = 1.0 / qreal(preferences.hRaster);
+                  qreal hRaster = 1.0 / MScore::hRaster();
                   int n = lrint(_boxWidth.val() / hRaster);
                   _boxWidth = Spatium(hRaster * n);
                   }

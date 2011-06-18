@@ -19,7 +19,7 @@
 //=============================================================================
 
 #include "script.h"
-#include "text.h"
+#include "libmscore/text.h"
 
 Q_DECLARE_METATYPE(Text*);
 Q_DECLARE_METATYPE(Score*);

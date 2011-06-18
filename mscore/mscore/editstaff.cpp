@@ -19,23 +19,23 @@
 //=============================================================================
 
 #include "editstaff.h"
-#include "staff.h"
-#include "part.h"
+#include "libmscore/staff.h"
+#include "libmscore/part.h"
 #include "editdrumset.h"
-#include "score.h"
-#include "measure.h"
-#include "undo.h"
-#include "text.h"
-#include "utils.h"
-#include "instrtemplate.h"
+#include "libmscore/score.h"
+#include "libmscore/measure.h"
+#include "libmscore/undo.h"
+#include "libmscore/text.h"
+#include "libmscore/utils.h"
+#include "libmscore/instrtemplate.h"
 #include "seq.h"
-#include "stafftype.h"
+#include "libmscore/stafftype.h"
 #include "selinstrument.h"
 #include "texteditor.h"
 #include "editstafftype.h"
 #include "editpitch.h"
 #include "editstringdata.h"
-#include "tablature.h"
+#include "libmscore/tablature.h"
 
 //---------------------------------------------------------
 //   EditStaff

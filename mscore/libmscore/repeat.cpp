@@ -23,7 +23,7 @@
 #include "score.h"
 #include "system.h"
 #include "measure.h"
-#include "globals.h"
+#include "mscore.h"
 #include "painter.h"
 
 //---------------------------------------------------------

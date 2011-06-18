@@ -19,24 +19,25 @@
 //=============================================================================
 
 #include "config.h"
-#include "xml.h"
-#include "score.h"
+#include "libmscore/xml.h"
+#include "libmscore/score.h"
 #include "musescore.h"
 #include "preferences.h"
 #include "prefsdialog.h"
 #include "msynth/synti.h"
 #include "seq.h"
-#include "note.h"
+#include "libmscore/note.h"
 #include "playpanel.h"
 #include "icons.h"
 #include "shortcutcapturedialog.h"
 #include "scoreview.h"
-#include "sym.h"
+#include "libmscore/sym.h"
 #include "palette.h"
 #include "pa.h"
 #include "pm.h"
-#include "page.h"
+#include "libmscore/page.h"
 #include "file.h"
+#include "libmscore/mscore.h"
 
 bool useALSA = false, useJACK = false, usePortaudio = false;
 
@@ -158,20 +159,11 @@ void Preferences::init()
       bgWallpaper        = QString();
       fgWallpaper        = ":/data/paper5.png";
       fgColor.setRgb(255, 255, 255);
-      bgColor.setRgb(0x76, 0x76, 0x6e);
       iconHeight         = 25;
       iconWidth          = 20;
 
-      selectColor[0].setRgb(0, 0, 255);     //blue
-      selectColor[1].setRgb(0, 150, 0);     //green
-      selectColor[2].setRgb(230, 180, 50);  //yellow
-      selectColor[3].setRgb(200, 0, 200);   //purple
-      dropColor      = Qt::red;
-      defaultColor   = Qt::black;
-
       enableMidiInput    = true;
       playNotes          = true;
-      soundFont          = mscoreGlobalShare + "sound/TimGM6mb.sf2";
       lPort              = "";
       rPort              = "";
 
@@ -202,13 +194,11 @@ void Preferences::init()
       portaudioDevice    = -1;
       portMidiInput      = "";
 
-      layoutBreakColor         = Qt::green;
       antialiasedDrawing       = true;
       sessionStart             = SCORE_SESSION;
       startScore               = ":/data/Promenade_Example.mscx";
       workingDirectory         = QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation);
       defaultStyle             = "";
-      partStyle                = "";
       showSplashScreen         = true;
 
       useMidiRemote      = false;
@@ -216,7 +206,7 @@ void Preferences::init()
             midiRemote[i].type = MIDI_REMOTE_TYPE_INACTIVE;
 
       midiExpandRepeats        = true;
-      playRepeats              = true;
+      MScore::playRepeats      = true;
       instrumentList           = ":/data/instruments.xml";
 
       alternateNoteEntryMethod = false;
@@ -227,15 +217,8 @@ void Preferences::init()
       pngTransparent           = true;
       language                 = "system";
 
-      replaceFractions        = true;
       replaceCopyrightSymbol  = true;
 
-      paperSize               = QPrinter::A4;     // default paper size
-      paperWidth              = 1.0;
-      paperHeight             = 1.0;
-      landscape               = false;
-      twosided                = true;
-      spatium                 = SPATIUM20;
       mag                     = 1.0;
 
       checkUpdateStartup      = 0;
@@ -248,8 +231,6 @@ void Preferences::init()
       reverbDamp              = 0.5;
       reverbWidth             = 1.0;
 
-      defaultPlayDuration     = 300;      // ms
-      warnPitchRange          = true;
       followSong              = true;
       importCharset           = "GBK";
       importStyleFile         = "";
@@ -269,12 +250,11 @@ void Preferences::init()
       myPluginsPath           = "MuseScore/MyPlugins";
       mySoundFontsPath        = "MuseScore/MySoundFonts";
 
-      nudgeStep               = .1;       // in spatium units (default 0.1)
       nudgeStep10             = 1.0;      // Ctrl + cursor key (default 1.0)
       nudgeStep50             = 5.0;      // Alt  + cursor key (default 5.0)
 
-      hRaster                 = 2;        // _spatium / value
-      vRaster                 = 2;
+      MScore::setHRaster(2);        // _spatium / value
+      MScore::setVRaster(2);
       nativeDialogs           = false;    // use system native file dialogs
       exportAudioSampleRate   = exportAudioSampleRates[0];
 
@@ -295,20 +275,20 @@ void Preferences::write()
       s.setValue("bgWallpaper",        bgWallpaper);
       s.setValue("fgWallpaper",        fgWallpaper);
       s.setValue("fgColor",            fgColor);
-      s.setValue("bgColor",            bgColor);
+      s.setValue("bgColor",            MScore::bgColor);
       s.setValue("iconHeight",         iconHeight);
       s.setValue("iconWidth",          iconWidth);
 
-      s.setValue("selectColor1",       selectColor[0]);
-      s.setValue("selectColor2",       selectColor[1]);
-      s.setValue("selectColor3",       selectColor[2]);
-      s.setValue("selectColor4",       selectColor[3]);
-      s.setValue("dropColor",          dropColor);
-      s.setValue("defaultColor",       defaultColor);
+      s.setValue("selectColor1",       MScore::selectColor[0]);
+      s.setValue("selectColor2",       MScore::selectColor[1]);
+      s.setValue("selectColor3",       MScore::selectColor[2]);
+      s.setValue("selectColor4",       MScore::selectColor[3]);
+      s.setValue("dropColor",          MScore::dropColor);
+      s.setValue("defaultColor",       MScore::defaultColor);
       s.setValue("enableMidiInput",    enableMidiInput);
       s.setValue("playNotes",          playNotes);
 
-      s.setValue("soundFont",          soundFont);
+      s.setValue("soundFont",          MScore::soundFont);
       s.setValue("lPort",              lPort);
       s.setValue("rPort",              rPort);
       s.setValue("showNavigator",      showNavigator);
@@ -329,7 +309,7 @@ void Preferences::write()
       s.setValue("portaudioDevice",    portaudioDevice);
       s.setValue("portMidiInput",   portMidiInput);
 
-      s.setValue("layoutBreakColor",   layoutBreakColor);
+      s.setValue("layoutBreakColor",   MScore::layoutBreakColor);
       s.setValue("antialiasedDrawing", antialiasedDrawing);
       switch(sessionStart) {
             case EMPTY_SESSION:  s.setValue("sessionStart", "empty"); break;
@@ -340,11 +320,11 @@ void Preferences::write()
       s.setValue("startScore",         startScore);
       s.setValue("workingDirectory",   workingDirectory);
       s.setValue("defaultStyle",       defaultStyle);
-      s.setValue("partStyle",          partStyle);
+      s.setValue("partStyle",          MScore::partStyle);
       s.setValue("showSplashScreen",   showSplashScreen);
 
       s.setValue("midiExpandRepeats",  midiExpandRepeats);
-      s.setValue("playRepeats",        playRepeats);
+      s.setValue("playRepeats",        MScore::playRepeats);
       s.setValue("instrumentList", instrumentList);
 
       s.setValue("alternateNoteEntry", alternateNoteEntryMethod);
@@ -355,14 +335,14 @@ void Preferences::write()
       s.setValue("pngTransparent",     pngTransparent);
       s.setValue("language",           language);
 
-      s.setValue("replaceFractions", replaceFractions);
+      s.setValue("replaceFractions", MScore::replaceFractions);
       s.setValue("replaceCopyrightSymbol", replaceCopyrightSymbol);
-      s.setValue("paperSize", paperSize);
-      s.setValue("paperWidth", paperWidth);
-      s.setValue("paperHeight", paperHeight);
-      s.setValue("landscape", landscape);
-      s.setValue("twosided", twosided);
-      s.setValue("spatium", spatium);
+      s.setValue("paperSize", MScore::paperSize);
+      s.setValue("paperWidth", MScore::paperWidth);
+      s.setValue("paperHeight", MScore::paperHeight);
+      s.setValue("landscape", MScore::landscape);
+      s.setValue("twosided", MScore::twosided);
+      s.setValue("spatium", MScore::spatium);
       s.setValue("mag", mag);
       s.setValue("tuning", tuning);
       s.setValue("masterGain", masterGain);
@@ -372,10 +352,10 @@ void Preferences::write()
       s.setValue("reverbDamp", reverbDamp);
       s.setValue("reverbWidth", reverbWidth);
 
-      s.setValue("defaultPlayDuration", defaultPlayDuration);
+      s.setValue("defaultPlayDuration", MScore::defaultPlayDuration);
       s.setValue("importStyleFile", importStyleFile);
       s.setValue("importCharset", importCharset);
-      s.setValue("warnPitchRange", warnPitchRange);
+      s.setValue("warnPitchRange", MScore::warnPitchRange);
       s.setValue("followSong", followSong);
 
       s.setValue("useOsc", useOsc);
@@ -390,8 +370,8 @@ void Preferences::write()
       s.setValue("myPluginsPath", myPluginsPath);
       s.setValue("mySoundFontsPath", mySoundFontsPath);
 
-      s.setValue("hraster", hRaster);
-      s.setValue("vraster", vRaster);
+      s.setValue("hraster", MScore::hRaster());
+      s.setValue("vraster", MScore::vRaster());
       s.setValue("nativeDialogs", nativeDialogs);
       s.setValue("exportAudioSampleRate", exportAudioSampleRate);
 
@@ -433,27 +413,27 @@ void Preferences::read()
       bgWallpaper     = s.value("bgWallpaper", bgWallpaper).toString();
       fgWallpaper     = s.value("fgWallpaper", fgWallpaper).toString();
       fgColor         = s.value("fgColor", fgColor).value<QColor>();
-      bgColor         = s.value("bgColor", bgColor).value<QColor>();
+      MScore::bgColor = s.value("bgColor", MScore::bgColor).value<QColor>();
       iconHeight      = s.value("iconHeight", iconHeight).toInt();
       iconWidth       = s.value("iconWidth", iconWidth).toInt();
 
-      selectColor[0]  = s.value("selectColor1", selectColor[0]).value<QColor>();
-      selectColor[1]  = s.value("selectColor2", selectColor[1]).value<QColor>();
-      selectColor[2]  = s.value("selectColor3", selectColor[2]).value<QColor>();
-      selectColor[3]  = s.value("selectColor4", selectColor[3]).value<QColor>();
+      MScore::selectColor[0]  = s.value("selectColor1", MScore::selectColor[0]).value<QColor>();
+      MScore::selectColor[1]  = s.value("selectColor2", MScore::selectColor[1]).value<QColor>();
+      MScore::selectColor[2]  = s.value("selectColor3", MScore::selectColor[2]).value<QColor>();
+      MScore::selectColor[3]  = s.value("selectColor4", MScore::selectColor[3]).value<QColor>();
 
-      defaultColor    = s.value("defaultColor", defaultColor).value<QColor>();
-      dropColor       = s.value("dropColor",    dropColor).value<QColor>();
+      MScore::defaultColor    = s.value("defaultColor", MScore::defaultColor).value<QColor>();
+      MScore::dropColor       = s.value("dropColor",    MScore::dropColor).value<QColor>();
 
       enableMidiInput = s.value("enableMidiInput", enableMidiInput).toBool();
       playNotes       = s.value("playNotes", playNotes).toBool();
       lPort           = s.value("lPort", lPort).toString();
       rPort           = s.value("rPort", rPort).toString();
 
-      soundFont       = s.value("soundFont", soundFont).toString();
-      if (soundFont == ":/data/piano1.sf2") {
+      MScore::soundFont       = s.value("soundFont", MScore::soundFont).toString();
+      if (MScore::soundFont == ":/data/piano1.sf2") {
             // silently change to new default sound font
-            soundFont = mscoreGlobalShare + "sound/TimGM6mb.sf2";
+            MScore::soundFont = MScore::globalShare() + "sound/TimGM6mb.sf2";
             }
       showNavigator   = s.value("showNavigator", showNavigator).toBool();
       showStatusBar   = s.value("showStatusBar", showStatusBar).toBool();
@@ -470,16 +450,16 @@ void Preferences::read()
       alsaFragments      = s.value("alsaFragments", alsaFragments).toInt();
       portaudioDevice    = s.value("portaudioDevice", portaudioDevice).toInt();
       portMidiInput      = s.value("portMidiInput", portMidiInput).toString();
-      layoutBreakColor   = s.value("layoutBreakColor", layoutBreakColor).value<QColor>();
+      MScore::layoutBreakColor   = s.value("layoutBreakColor", MScore::layoutBreakColor).value<QColor>();
       antialiasedDrawing = s.value("antialiasedDrawing", antialiasedDrawing).toBool();
 
       workingDirectory   = s.value("workingDirectory", workingDirectory).toString();
       defaultStyle       = s.value("defaultStyle", defaultStyle).toString();
-      partStyle          = s.value("partStyle", partStyle).toString();
+      MScore::partStyle        = s.value("partStyle", MScore::partStyle).toString();
 
       showSplashScreen         = s.value("showSplashScreen", showSplashScreen).toBool();
       midiExpandRepeats        = s.value("midiExpandRepeats", midiExpandRepeats).toBool();
-      playRepeats              = s.value("playRepeats", playRepeats).toBool();
+      MScore::playRepeats      = s.value("playRepeats", MScore::playRepeats).toBool();
       alternateNoteEntryMethod = s.value("alternateNoteEntry", alternateNoteEntryMethod).toBool();
       midiPorts                = s.value("midiPorts", midiPorts).toInt();
       rememberLastMidiConnections = s.value("rememberLastMidiConnections", rememberLastMidiConnections).toBool();
@@ -490,14 +470,14 @@ void Preferences::read()
       pngTransparent           = s.value("pngTransparent", pngTransparent).toBool();
       language                 = s.value("language", language).toString();
 
-      replaceFractions = s.value("replaceFractions", replaceFractions).toBool();
+      MScore::replaceFractions = s.value("replaceFractions", MScore::replaceFractions).toBool();
       replaceCopyrightSymbol = s.value("replaceCopyrightSymbol", replaceCopyrightSymbol).toBool();
-      paperSize              = QPrinter::PageSize(s.value("paperSize", paperSize).toInt());
-      paperWidth             = s.value("paperWidth", paperWidth).toDouble();
-      paperHeight            = s.value("paperHeight", paperWidth).toDouble();
-      landscape              = s.value("landscape", landscape).toBool();
-      twosided               = s.value("twosided", twosided).toBool();
-      spatium                = s.value("spatium", spatium).toDouble();
+      MScore::paperSize      = QPrinter::PageSize(s.value("paperSize", MScore::paperSize).toInt());
+      MScore::paperWidth     = s.value("paperWidth", MScore::paperWidth).toDouble();
+      MScore::paperHeight    = s.value("paperHeight", MScore::paperWidth).toDouble();
+      MScore::landscape      = s.value("landscape", MScore::landscape).toBool();
+      MScore::twosided       = s.value("twosided", MScore::twosided).toBool();
+      MScore::spatium        = s.value("spatium", MScore::spatium).toDouble();
       mag                    = s.value("mag", mag).toDouble();
 
       tuning                 = s.value("tuning", tuning).toDouble();
@@ -508,10 +488,10 @@ void Preferences::read()
       reverbDamp             = s.value("reverbDamp",     reverbDamp).toDouble();
       reverbWidth            = s.value("reverbWidth",    reverbWidth).toDouble();
 
-      defaultPlayDuration    = s.value("defaultPlayDuration", defaultPlayDuration).toInt();
+      MScore::defaultPlayDuration = s.value("defaultPlayDuration", MScore::defaultPlayDuration).toInt();
       importStyleFile        = s.value("importStyleFile", importStyleFile).toString();
       importCharset          = s.value("importCharset", importCharset).toString();
-      warnPitchRange         = s.value("warnPitchRange", warnPitchRange).toBool();
+      MScore::warnPitchRange = s.value("warnPitchRange", MScore::warnPitchRange).toBool();
       followSong             = s.value("followSong", followSong).toBool();
 
       useOsc                 = s.value("useOsc", useOsc).toBool();
@@ -540,8 +520,8 @@ void Preferences::read()
       myPluginsPath    = s.value("myPluginsPath",    myPluginsPath).toString();
       mySoundFontsPath = s.value("mySoundFontsPath", mySoundFontsPath).toString();
 
-      hRaster          = s.value("hraster", hRaster).toInt();
-      vRaster          = s.value("vraster", vRaster).toInt();
+      MScore::setHRaster(s.value("hraster", MScore::hRaster()).toInt());
+      MScore::setVRaster(s.value("vraster", MScore::vRaster()).toInt());
 
       nativeDialogs    = s.value("nativeDialogs", nativeDialogs).toBool();
       exportAudioSampleRate = s.value("exportAudioSampleRate", exportAudioSampleRate).toInt();
@@ -781,7 +761,7 @@ void PreferenceDialog::updateValues(Preferences* p)
       fgWallpaperButton->setChecked(!p->fgUseColor);
 
       if (p->bgUseColor) {
-            bgColorLabel->setColor(p->bgColor);
+            bgColorLabel->setColor(MScore::bgColor);
             bgColorLabel->setPixmap(0);
             }
       else {
@@ -799,7 +779,7 @@ void PreferenceDialog::updateValues(Preferences* p)
       iconWidth->setValue(p->iconWidth);
       iconHeight->setValue(p->iconHeight);
 
-      replaceFractions->setChecked(p->replaceFractions);
+      replaceFractions->setChecked(MScore::replaceFractions);
       replaceCopyrightSymbol->setChecked(p->replaceCopyrightSymbol);
 
       enableMidiInput->setChecked(p->enableMidiInput);
@@ -833,7 +813,7 @@ void PreferenceDialog::updateValues(Preferences* p)
             jackLPort->setEnabled(false);
             }
 
-      soundFont->setText(p->soundFont);
+      soundFont->setText(MScore::soundFont);
       navigatorShow->setChecked(p->showNavigator);
       playPanelShow->setChecked(p->showPlayPanel);
       playPanelX->setValue(p->playPanelPos.x());
@@ -937,19 +917,19 @@ void PreferenceDialog::updateValues(Preferences* p)
       //
       bool mm = true;
       const char* suffix = mm ? "mm" : "in";
-      pageGroup->setCurrentIndex(p->paperSize);
+      pageGroup->setCurrentIndex(MScore::paperSize);
       paperWidth->setSuffix(suffix);
       paperHeight->setSuffix(suffix);
       paperWidth->blockSignals(true);
       paperHeight->blockSignals(true);
 
-      double pw = p->paperWidth;
-      double ph = p->paperHeight;
-      if (p->paperSize != QPrinter::Custom) {
-            pw = paperSizes[p->paperSize].w;
-            ph = paperSizes[p->paperSize].h;
+      double pw = MScore::paperWidth;
+      double ph = MScore::paperHeight;
+      if (MScore::paperSize != QPrinter::Custom) {
+            pw = paperSizes[MScore::paperSize].w;
+            ph = paperSizes[MScore::paperSize].h;
             }
-      if (p->landscape) {
+      if (MScore::landscape) {
             paperWidth->setValue(ph * INCH);
             paperHeight->setValue(pw * INCH);
             }
@@ -961,13 +941,13 @@ void PreferenceDialog::updateValues(Preferences* p)
       paperWidth->blockSignals(false);
       paperHeight->blockSignals(false);
 
-      twosided->setChecked(p->twosided);
-      spatiumEntry->setValue(p->spatium * INCH);
+      twosided->setChecked(MScore::twosided);
+      spatiumEntry->setValue(MScore::spatium * INCH);
       scale->setValue(p->mag);
 
-      landscape->setChecked(p->landscape);
+      landscape->setChecked(MScore::landscape);
 
-      defaultPlayDuration->setValue(p->defaultPlayDuration);
+      defaultPlayDuration->setValue(MScore::defaultPlayDuration);
       importStyleFile->setText(p->importStyleFile);
       useImportBuildinStyle->setChecked(p->importStyleFile.isEmpty());
       useImportStyleFile->setChecked(!p->importStyleFile.isEmpty());
@@ -983,7 +963,7 @@ void PreferenceDialog::updateValues(Preferences* p)
             idx++;
             }
 
-      warnPitchRange->setChecked(p->warnPitchRange);
+      warnPitchRange->setChecked(MScore::warnPitchRange);
 
       language->clear();
       int curIdx = 0;
@@ -1314,7 +1294,7 @@ void PreferenceDialog::apply()
       preferences.fgWallpaper    = fgWallpaper->text();
       preferences.bgWallpaper    = bgWallpaper->text();
       preferences.fgColor        = fgColorLabel->color();
-      preferences.bgColor        = bgColorLabel->color();
+      MScore::bgColor        = bgColorLabel->color();
 
       preferences.iconWidth      = iconWidth->value();
       preferences.iconHeight     = iconHeight->value();
@@ -1329,7 +1309,7 @@ void PreferenceDialog::apply()
             preferences.lPort       = jackLPort->currentText();
             preferences.rPort       = jackRPort->currentText();
             }
-      preferences.soundFont          = soundFont->text();
+      MScore::soundFont          = soundFont->text();
       preferences.showNavigator      = navigatorShow->isChecked();
       preferences.showPlayPanel      = playPanelShow->isChecked();
       preferences.playPanelPos       = QPoint(playPanelX->value(), playPanelY->value());
@@ -1419,7 +1399,7 @@ void PreferenceDialog::apply()
       bool languageChanged = l != preferences.language;
       preferences.language = l;
 
-      preferences.replaceFractions       = replaceFractions->isChecked();
+      MScore::replaceFractions       = replaceFractions->isChecked();
       preferences.replaceCopyrightSymbol = replaceCopyrightSymbol->isChecked();
 
       //update
@@ -1429,15 +1409,15 @@ void PreferenceDialog::apply()
 
       bool mmUnit = true;
       double f  = mmUnit ? 1.0/INCH : 1.0;
-      preferences.twosided    = twosided->isChecked();
-      preferences.spatium     = spatiumEntry->value() / INCH;
+      MScore::twosided    = twosided->isChecked();
+      MScore::spatium     = spatiumEntry->value() / INCH;
       preferences.mag         = scale->value();
-      preferences.landscape   = landscape->isChecked();
-      preferences.paperSize   = QPrinter::PageSize(pageGroup->currentIndex());
-      preferences.paperHeight = paperHeight->value() * f;
-      preferences.paperWidth  = paperWidth->value()  * f;
+      MScore::landscape   = landscape->isChecked();
+      MScore::paperSize   = QPrinter::PageSize(pageGroup->currentIndex());
+      MScore::paperHeight = paperHeight->value() * f;
+      MScore::paperWidth  = paperWidth->value()  * f;
 
-      preferences.defaultPlayDuration = defaultPlayDuration->value();
+      MScore::defaultPlayDuration = defaultPlayDuration->value();
 
       if (useImportStyleFile->isChecked())
             preferences.importStyleFile = importStyleFile->text();
@@ -1445,7 +1425,7 @@ void PreferenceDialog::apply()
             preferences.importStyleFile.clear();
 
       preferences.importCharset = importCharsetList->currentText();
-      preferences.warnPitchRange = warnPitchRange->isChecked();
+      MScore::warnPitchRange = warnPitchRange->isChecked();
 
       preferences.useOsc  = oscServer->isChecked();
       preferences.oscPort = oscPort->value();

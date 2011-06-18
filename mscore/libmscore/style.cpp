@@ -18,14 +18,13 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "globals.h"
+#include "mscore.h"
 #include "style.h"
 #include "style_p.h"
 #include "xml.h"
 #include "score.h"
 #include "articulation.h"
 #include "harmony.h"
-#include "preferences.h"
 #include "chordlist.h"
 #include "page.h"
 #include "mscore.h"
@@ -633,7 +632,7 @@ StyleData::StyleData()
 // _textStyles.append(TextStyle(defaultTextStyles[i]));
       _chordList = 0;
       _pageFormat = new PageFormat;
-      _spatium = preferences.spatium * DPI;
+      _spatium = MScore::spatium * DPI;
       };
 
 StyleData::StyleData(const StyleData& s)
@@ -713,7 +712,7 @@ TextStyleData::TextStyleData()
       frameWidth             = 0.35;
       paddingWidth           = 0.0;
       frameRound             = 25;
-      frameColor             = preferences.defaultColor;
+      frameColor             = MScore::defaultColor;
       circle                 = false;
       systemFlag             = false;
       foregroundColor        = Qt::black;

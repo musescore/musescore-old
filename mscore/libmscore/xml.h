@@ -21,7 +21,7 @@
 #ifndef __XML_H__
 #define __XML_H__
 
-#include "globals.h"
+#include "mscore.h"
 #include "spatium.h"
 #include "al/xml.h"
 #include "al/fraction.h"

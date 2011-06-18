@@ -23,7 +23,7 @@
 
 #include "element.h"
 #include "spatium.h"
-#include "globals.h"
+#include "mscore.h"
 #include "durationtype.h"
 
 #define STAFFTYPE_TAB_DEFAULTSTEMLEN      (3.0)
@@ -218,18 +218,12 @@ const QString fretFontName() const        { return _fretFontName;     }
       void    setDurationFontName(QString name) { _durationFontName = name;
                                                   _durationFont.setFamily(name);
                                                   _durationMetricsValid = false; }
-      void    setDurationFontSize(double val)   { _durationFontSize = val;
-//                                                  _durationFont.setPointSizeF(val);
-                                                  _durationFont.setPixelSize( lrint(val * DPI / PPI) );
-                                                  _durationMetricsValid = false; }
+      void    setDurationFontSize(double val);
       void    setDurationFontUserY(double val)  { _durationFontUserY = val; }
       void    setFretFontName(QString name)     { _fretFontName = name;
                                                   _fretFont.setFamily(name);
                                                   _fretMetricsValid = false; }
-      void    setFretFontSize(double val)       { _fretFontSize = val;
-//                                                  _fretFont.setPointSizeF(val);
-                                                    _fretFont.setPixelSize( lrint(val * DPI / PPI) );
-                                                  _fretMetricsValid = false; }
+      void    setFretFontSize(double val);
       void    setFretFontUserY(double val){ _fretFontUserY = val;     }
       void    setGenDurations(bool val)   { _genDurations = val;      }
       void    setLinesThrough(bool val)   { _linesThrough = val;      }

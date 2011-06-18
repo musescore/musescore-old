@@ -72,7 +72,7 @@ class Painter {
 
       virtual void drawPath(const QPainterPath&) = 0;
       virtual void drawPolyline(const QPointF*, int) const = 0;
-      virtual void drawPolygon(const QPolygonF&) = 0;
+      virtual void drawPolygon(const QPolygonF&) const = 0;
 
       virtual void drawArc(const QRectF&, int, int) const = 0;
       virtual void drawRoundRect(const QRectF&, qreal, qreal) const = 0;

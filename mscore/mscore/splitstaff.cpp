@@ -19,18 +19,18 @@
 //=============================================================================
 
 #include "splitstaff.h"
-#include "score.h"
-#include "staff.h"
-#include "clef.h"
-#include "measure.h"
-#include "part.h"
-#include "note.h"
-#include "chord.h"
-#include "bracket.h"
-#include "system.h"
+#include "libmscore/score.h"
+#include "libmscore/staff.h"
+#include "libmscore/clef.h"
+#include "libmscore/measure.h"
+#include "libmscore/part.h"
+#include "libmscore/note.h"
+#include "libmscore/chord.h"
+#include "libmscore/bracket.h"
+#include "libmscore/system.h"
 #include "seq.h"
-#include "slur.h"
-#include "segment.h"
+#include "libmscore/slur.h"
+#include "libmscore/segment.h"
 
 //---------------------------------------------------------
 //   SplitStaff

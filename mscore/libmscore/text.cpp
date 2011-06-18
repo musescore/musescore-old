@@ -18,7 +18,6 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "globals.h"
 #include "text.h"
 #include "xml.h"
 #include "style.h"
@@ -29,13 +28,13 @@
 #include "sym.h"
 #include "symbol.h"
 #include "textline.h"
-#include "preferences.h"
 #include "system.h"
 #include "measure.h"
 #include "box.h"
 #include "segment.h"
 #include "texttools.h"
 #include "painter.h"
+#include "mscore.h"
 
 //---------------------------------------------------------
 //   Text
@@ -413,7 +412,7 @@ void Text::draw(Painter* painter) const
             // if editing, use own color
             color = style().foregroundColor();
       else if (selected())
-            color = preferences.selectColor[0];
+            color = MScore::selectColor[0];
       else if (!visible()) {
             if (!score()->showInvisible())
                   return;
@@ -432,7 +431,7 @@ void Text::draw(Painter* painter) const
             if (!visible())
                   color = Qt::gray;
             // else if (selected())
-            //       color = preferences.selectColor[track() == -1 ? 0 : voice()];
+            //       color = MScore::selectColor[track() == -1 ? 0 : voice()];
             painter->setPenColor(color);
             painter->setLineWidth(frameWidth() * DPMM);
             painter->setNoBrush(true);
@@ -884,7 +883,7 @@ bool Text::replaceSpecialChars()
             SymCode sym = *charReplaceMap.value(s);
             switch (sym.type) {
                   case SYMBOL_FRACTION:
-                        if (!preferences.replaceFractions)
+                        if (!MScore::replaceFractions)
                               continue;
                         break;
                   default:

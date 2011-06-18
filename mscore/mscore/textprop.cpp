@@ -19,8 +19,8 @@
 //=============================================================================
 
 #include "textprop.h"
-#include "text.h"
-#include "score.h"
+#include "libmscore/text.h"
+#include "libmscore/score.h"
 
 //---------------------------------------------------------
 //   TextProp

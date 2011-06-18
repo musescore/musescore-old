@@ -34,7 +34,6 @@
 #include "slur.h"
 #include "text.h"
 #include "clef.h"
-#include "preferences.h"
 #include "staff.h"
 #include "pitchspelling.h"
 #include "arpeggio.h"
@@ -61,6 +60,7 @@
 #include "painter.h"
 #include "chordeditor.h"
 #include "noteevent.h"
+#include "mscore.h"
 
 //---------------------------------------------------------
 //   noteHeads
@@ -553,7 +553,8 @@ void Note::draw(Painter* painter) const
                   // warn if pitch extends usable range of instrument
                   // by coloring the note head
                   //
-                  if (chord() && chord()->segment() && staff() && !selected() && !score()->printing() && preferences.warnPitchRange) {
+                  if (chord() && chord()->segment() && staff() && !selected()
+                     && !score()->printing() && MScore::warnPitchRange) {
                         const Instrument* in = staff()->part()->instr();
                         int i = ppitch();
                         if (i < in->minPitchP() || i > in->maxPitchP())

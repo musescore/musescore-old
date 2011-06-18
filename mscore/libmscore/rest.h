@@ -41,7 +41,7 @@ class Rest : public ChordRest {
       double _mmWidth;        // width of multi measure rest
       double _yoffset;        // in spatium units
 
-      virtual QRectF drag(const EditData&);
+      virtual QRectF drag(const QPointF& s);
       virtual qreal upPos()   const;
       virtual qreal downPos() const;
       virtual qreal centerX() const;

@@ -25,21 +25,20 @@
 #include "piano.h"
 #include "ruler.h"
 #include "drumview.h"
-#include "staff.h"
-#include "score.h"
-#include "measure.h"
+#include "libmscore/staff.h"
+#include "libmscore/score.h"
+#include "libmscore/measure.h"
 #include "voiceselector.h"
-#include "note.h"
+#include "libmscore/note.h"
 #include "awl/pitchlabel.h"
 #include "awl/pitchedit.h"
 #include "awl/poslabel.h"
 #include "musescore.h"
-#include "undo.h"
-#include "part.h"
-#include "instrument.h"
+#include "libmscore/undo.h"
+#include "libmscore/part.h"
+#include "libmscore/instrument.h"
 #include "seq.h"
 #include "preferences.h"
-#include "seq.h"
 
 //---------------------------------------------------------
 //   DrumrollEditor
@@ -221,7 +220,7 @@ void DrumrollEditor::updateSelection()
 void DrumrollEditor::selectionChanged()
       {
       updateSelection();
-      _score->blockSignals(true);
+//      _score->blockSignals(true);
       QList<QGraphicsItem*> items = gv->scene()->selectedItems();
       if (items.size() == 1) {
             QGraphicsItem* item = items[0];
@@ -242,7 +241,7 @@ void DrumrollEditor::selectionChanged()
             }
       _score->setUpdateAll();
       _score->end();
-      _score->blockSignals(false);
+//      _score->blockSignals(false);
       }
 
 //---------------------------------------------------------
@@ -251,7 +250,7 @@ void DrumrollEditor::selectionChanged()
 
 void DrumrollEditor::changeSelection(int)
       {
-      gv->scene()->blockSignals(true);
+//      gv->scene()->blockSignals(true);
       gv->scene()->clearSelection();
       QList<QGraphicsItem*> il = gv->scene()->items();
       foreach(QGraphicsItem* item, il) {
@@ -259,7 +258,7 @@ void DrumrollEditor::changeSelection(int)
             if (note)
                   item->setSelected(note->selected());
             }
-      gv->scene()->blockSignals(false);
+//      gv->scene()->blockSignals(false);
       }
 
 //---------------------------------------------------------

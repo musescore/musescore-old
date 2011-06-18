@@ -19,7 +19,6 @@
 //=============================================================================
 
 #include "instrchange.h"
-#include "preferences.h"
 #include "score.h"
 #include "scoreview.h"
 #include "instrtemplate.h"
@@ -28,6 +27,7 @@
 #include "part.h"
 #include "seq.h"
 #include "undo.h"
+#include "mscore.h"
 
 //---------------------------------------------------------
 //   InstrumentChange

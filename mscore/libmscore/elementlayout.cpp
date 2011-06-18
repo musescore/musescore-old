@@ -22,6 +22,7 @@
 #include "xml.h"
 #include "element.h"
 #include "text.h"
+#include "mscore.h"
 
 //---------------------------------------------------------
 //   ElementLayout

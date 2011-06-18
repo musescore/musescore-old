@@ -39,7 +39,7 @@
 #include "page.h"
 #include "style.h"
 #include "bracket.h"
-#include "globals.h"
+#include "mscore.h"
 #include "barline.h"
 #include "lyrics.h"
 #include "system.h"

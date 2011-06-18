@@ -22,37 +22,36 @@
 
 #include "musescore.h"
 #include "scoreview.h"
-#include "style.h"
-#include "score.h"
+#include "libmscore/style.h"
+#include "libmscore/score.h"
 #include "instrdialog.h"
 #include "preferences.h"
 #include "prefsdialog.h"
 #include "icons.h"
 #include "textstyle.h"
-#include "xml.h"
+#include "libmscore/xml.h"
 #include "seq.h"
-#include "icons.h"
 #include "al/tempo.h"
-#include "sym.h"
+#include "libmscore/sym.h"
 #include "padids.h"
 #include "pagesettings.h"
 #include "inspector.h"
 #include "editstyle.h"
 #include "playpanel.h"
-#include "page.h"
+#include "libmscore/page.h"
 #include "mixer.h"
 #include "palette.h"
-#include "part.h"
-#include "drumset.h"
-#include "instrtemplate.h"
-#include "note.h"
-#include "staff.h"
+#include "libmscore/part.h"
+#include "libmscore/drumset.h"
+#include "libmscore/instrtemplate.h"
+#include "libmscore/note.h"
+#include "libmscore/staff.h"
 #include "driver.h"
-#include "harmony.h"
+#include "libmscore/harmony.h"
 #include "magbox.h"
 #include "voiceselector.h"
 #include "al/sig.h"
-#include "undo.h"
+#include "libmscore/undo.h"
 #include "synthcontrol.h"
 #include "pianoroll.h"
 #include "drumroll.h"
@@ -61,17 +60,20 @@
 #include "keyedit.h"
 #include "harmonyedit.h"
 #include "navigator.h"
-#include "chord.h"
+#include "libmscore/chord.h"
 #include "mstyle/mstyle.h"
-#include "segment.h"
+#include "libmscore/segment.h"
 #include "editraster.h"
 #include "pianotools.h"
 #include "mediadialog.h"
 #include "profile.h"
 #include "webpage.h"
 #include "selectdialog.h"
+#include "transposedialog.h"
+
 #include "libmscore/mscore.h"
 #include "libmscore/system.h"
+#include "libmscore/measurebase.h"
 
 #ifdef OSC
 #include "ofqf/qoscserver.h"
@@ -93,7 +95,6 @@ bool enableExperimental = false;
 
 QString dataPath;
 QString iconPath, iconGroup;
-qreal PDPI, DPI, DPMM;
 
 QMap<QString, Shortcut*> shortcuts;
 
@@ -272,7 +273,7 @@ void MuseScore::preferencesChanged()
             if (canvas == 0)
                   continue;
             if (preferences.bgUseColor)
-                  canvas->setBackground(preferences.bgColor);
+                  canvas->setBackground(MScore::bgColor);
             else {
                   QPixmap* pm = new QPixmap(preferences.bgWallpaper);
                   canvas->setBackground(pm);
@@ -292,7 +293,7 @@ void MuseScore::preferencesChanged()
                   if (canvas == 0)
                         continue;
                   if (preferences.bgUseColor)
-                        canvas->setBackground(preferences.bgColor);
+                        canvas->setBackground(MScore::bgColor);
                   else {
                         QPixmap* pm = new QPixmap(preferences.bgWallpaper);
                         canvas->setBackground(pm);
@@ -551,12 +552,10 @@ MuseScore::MuseScore()
 
       a = getAction("undo");
       a->setEnabled(false);
-      connect(_undoGroup, SIGNAL(canUndoChanged(bool)), a, SLOT(setEnabled(bool)));
       fileTools->addAction(a);
 
       a = getAction("redo");
       a->setEnabled(false);
-      connect(_undoGroup, SIGNAL(canRedoChanged(bool)), a, SLOT(setEnabled(bool)));
       fileTools->addAction(a);
 
       fileTools->addSeparator();
@@ -572,7 +571,7 @@ MuseScore::MuseScore()
       transportTools->addAction(getAction("play"));
       transportTools->addSeparator();
       a = getAction("repeat");
-      a->setChecked(preferences.playRepeats);
+      a->setChecked(MScore::playRepeats);
       transportTools->addAction(a);
 
 //      fileTools->addAction(getAction("mag"));
@@ -1114,9 +1113,9 @@ void MuseScore::selectionChanged(int state)
 
 int MuseScore::appendScore(Score* score)
       {
-      connect(score, SIGNAL(dirtyChanged(Score*)),  SLOT(dirtyChanged(Score*)));
-      connect(score, SIGNAL(selectionChanged(int)), SLOT(selectionChanged(int)));
-      connect(score, SIGNAL(posChanged(int)),       SLOT(setPos(int)));
+//      connect(score, SIGNAL(dirtyChanged(Score*)),  SLOT(dirtyChanged(Score*)));
+//      connect(score, SIGNAL(selectionChanged(int)), SLOT(selectionChanged(int)));
+//      connect(score, SIGNAL(posChanged(int)),       SLOT(setPos(int)));
 
       int index = scoreList.size();
       for (int i = 0; i < scoreList.size(); ++i) {
@@ -1312,6 +1311,8 @@ void MuseScore::setCurrentScoreView(ScoreView* view)
       getAction("show-invisible")->setChecked(cs->showInvisible());
       getAction("show-unprintable")->setChecked(cs->showUnprintable());
       getAction("show-frames")->setChecked(cs->showFrames());
+      updateUndoRedo();
+
       if (view->magIdx() == MAG_FREE)
             mag->setMag(view->mag());
       else
@@ -2401,198 +2402,6 @@ bool MuseScore::readLanguages(const QString& path)
       }
 
 //---------------------------------------------------------
-//   cmd
-//---------------------------------------------------------
-
-void MuseScore::cmd(QAction* a)
-      {
-      if (inChordEditor)      // HACK
-            return;
-      static QAction* lastCmd;
-
-      QString cmd(a->data().toString());
-
-      if (debugMode)
-            printf("MuseScore::cmd <%s>\n", cmd.toAscii().data());
-
-      Shortcut* sc = getShortcut(cmd.toAscii().data());
-      if (sc == 0) {
-            printf("MuseScore::cmd(): unknown action <%s>\n", qPrintable(cmd));
-            return;
-            }
-      if (cs && (sc->state & _sstate) == 0) {
-            QMessageBox::warning(0,
-               QWidget::tr("MuseScore: invalid command"),
-               QString("command %1 not valid in current state").arg(cmd),
-               QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
-            return;
-            }
-      if (cmd == "repeat-cmd") {
-            a = lastCmd;
-            if (a == 0)
-                  return;
-            cmd = a->data().toString();
-            }
-      else
-            lastCmd = a;
-      if (cmd == "instruments") {
-            editInstrList();
-            if (iledit)
-                  iledit->updateAll(cs);
-            }
-      else if (cmd == "clefs")
-            clefMenu();
-      else if (cmd == "keys")
-            showKeyEditor();
-      else if (cmd == "symbols")
-            symbolMenu();
-      else if (cmd == "times")
-            timeMenu();
-      else if (cmd == "dynamics")
-            dynamicsMenu();
-      else if (cmd == "file-open")
-            loadFile();
-      else if (cmd == "file-save")
-            saveFile();
-      else if (cmd == "file-export") {
-            if (cs)
-                  cs->exportFile();
-            }
-      else if (cmd == "file-reload") {
-            if (cs && !cs->created() && !checkDirty(cs)) {
-                  if (cv->editMode()) {
-                        cv->postCmd("escape");
-                        qApp->processEvents();
-                        }
-                  Score* score = new Score(MScore::defaultStyle());
-                  score->readScore(cs->filePath());
-                  // hack: so we don't get another checkDirty in appendScore
-                  cs->setDirty(false);
-                  setCurrentScoreView(appendScore(score));
-                  }
-            }
-      else if (cmd == "file-close")
-            removeTab(scoreList.indexOf(cs));
-      else if (cmd == "file-save-as") {
-            if (cs) {
-                  cs->setSyntiState();
-                  cs->saveAs(false);
-                  }
-            }
-      else if (cmd == "file-save-a-copy") {
-            if (cs) {
-                  cs->setSyntiState();
-                  cs->saveAs(true);
-                  }
-            }
-      else if (cmd == "file-new")
-            newFile();
-      else if (cmd == "quit")
-            close();
-      else if (cmd == "fingering")
-            fingeringMenu();
-      else if (cmd == "toggle-statusbar") {
-            preferences.showStatusBar = a->isChecked();
-            _statusBar->setShown(preferences.showStatusBar);
-            preferences.write();
-            }
-      else if (cmd == "append-measures")
-            cmdAppendMeasures();
-      else if (cmd == "insert-measures")
-            cmdInsertMeasures();
-      else if (cmd == "inspector")
-            startInspector();
-      else if (cmd == "album")
-            showAlbumManager();
-      else if (cmd == "layer")
-            showLayerManager();
-      else if (cmd == "script-debug") {
-            scriptDebug = a->isChecked();
-            }
-      else if (cmd == "backspace")
-            undo();
-      else if (cmd == "zoomin")
-            incMag();
-      else if (cmd == "zoomout")
-            decMag();
-      else if (cmd == "midi-on")
-            midiinToggled(a->isChecked());
-      else if (cmd == "sound-on")
-            speakerToggled(a->isChecked());
-      else if (cmd == "undo")
-            undo();
-      else if (cmd == "redo")
-            redo();
-      else if (cmd == "toggle-palette")
-            showPalette(a->isChecked());
-      else if (cmd == "toggle-playpanel")
-            showPlayPanel(a->isChecked());
-      else if (cmd == "toggle-navigator")
-            showNavigator(a->isChecked());
-      else if (cmd == "toggle-mixer")
-            showMixer(a->isChecked());
-      else if (cmd == "synth-control")
-            showSynthControl(a->isChecked());
-      else if (cmd == "show-keys")
-            ;
-      else if (cmd == "toggle-transport")
-            transportTools->setVisible(!transportTools->isVisible());
-      else if (cmd == "toggle-noteinput")
-            entryTools->setVisible(!entryTools->isVisible());
-      else if (cmd == "local-help")
-            helpBrowser();
-      else if (cmd == "follow")
-            preferences.followSong = a->isChecked();
-      else if (cmd == "split-h")
-            splitWindow(true);
-      else if (cmd == "split-v")
-            splitWindow(false);
-      else if (cmd == "edit-harmony")
-            editChordStyle();
-      else if (cmd == "parts")
-            startExcerptsDialog();
-      else if (cmd == "fullscreen") {
-            _fullscreen = a->isChecked();
-            if (_fullscreen)
-                  showFullScreen();
-            else
-                  showNormal();
-            }
-      else if (cmd == "config-raster")
-            editRaster();
-      else if (cmd == "hraster" || cmd == "vraster")  // value in [hv]RasterAction already set
-            ;
-      else if (cmd == "toogle-piano")
-            showPianoKeyboard(a->isChecked());
-      else if (cmd == "online-resources")
-            showWeb(WEB_TUTORIALS, a->isChecked());
-      else if (cmd == "media")
-            showMediaDialog();
-      else if (cmd == "page-settings")
-            showPageSettings();
-      else if (cmd == "next-score")
-            gotoNextScore();
-      else if (cmd == "previous-score")
-            gotoPreviousScore();
-      else if (cmd == "web-tutorials")
-            showWeb(WEB_TUTORIALS, true);
-      else if (cmd == "web-news")
-            showWeb(WEB_NEWS, true);
-      else if (cmd == "web-scorelib")
-            showWeb(WEB_SCORELIB, true);
-      else {
-            if (cv) {
-                  cv->setFocus();
-                  cv->cmd(a);
-                  }
-            else
-                  printf("2:unknown cmd <%s>\n", qPrintable(cmd));
-            }
-      if (inspector)
-            inspector->reloadClicked();
-      }
-
-//---------------------------------------------------------
 //   clipboardChanged
 //---------------------------------------------------------
 
@@ -2934,7 +2743,7 @@ void MuseScore::play(Element* e) const
                         const Channel& channel = instr->channel(n->subchannel());
                         seq->startNote(channel, n->ppitch(), 80, n->tuning());
                         }
-                  seq->startNoteTimer(preferences.defaultPlayDuration);
+                  seq->startNoteTimer(MScore::defaultPlayDuration);
                   }
             }
       }
@@ -2947,7 +2756,7 @@ void MuseScore::play(Element* e, int pitch) const
             int tick = note->chord()->segment() ? note->chord()->segment()->tick() : 0;
             Instrument* instr = part->instr(tick);
             const Channel& channel = instr->channel(note->subchannel());
-            seq->startNote(channel, pitch, 80, preferences.defaultPlayDuration, note->tuning());
+            seq->startNote(channel, pitch, 80, MScore::defaultPlayDuration, note->tuning());
             }
       }
 
@@ -3171,11 +2980,11 @@ void MuseScore::editInPianoroll(Staff* staff)
       {
       if (pianorollEditor == 0)
             pianorollEditor = new PianorollEditor;
-      else
-            disconnect(pianorollEditor->score(), SIGNAL(selectionChanged(int)), pianorollEditor, SLOT(changeSelection(int)));
+//      else
+//            disconnect(pianorollEditor->score(), SIGNAL(selectionChanged(int)), pianorollEditor, SLOT(changeSelection(int)));
       pianorollEditor->setStaff(staff);
       pianorollEditor->show();
-      connect(staff->score(), SIGNAL(selectionChanged(int)), pianorollEditor, SLOT(changeSelection(int)));
+//      connect(staff->score(), SIGNAL(selectionChanged(int)), pianorollEditor, SLOT(changeSelection(int)));
       }
 
 //---------------------------------------------------------
@@ -3186,11 +2995,11 @@ void MuseScore::editInDrumroll(Staff* staff)
       {
       if (drumrollEditor == 0)
             drumrollEditor = new DrumrollEditor;
-      else
-            disconnect(drumrollEditor->score(), SIGNAL(selectionChanged(int)), drumrollEditor, SLOT(changeSelection(int)));
+//      else
+//            disconnect(drumrollEditor->score(), SIGNAL(selectionChanged(int)), drumrollEditor, SLOT(changeSelection(int)));
       drumrollEditor->setStaff(staff);
       drumrollEditor->show();
-      connect(staff->score(), SIGNAL(selectionChanged(int)), drumrollEditor, SLOT(changeSelection(int)));
+//      connect(staff->score(), SIGNAL(selectionChanged(int)), drumrollEditor, SLOT(changeSelection(int)));
       }
 
 //---------------------------------------------------------
@@ -4271,6 +4080,354 @@ void MuseScore::selectElementDialog(Element* e)
                         score->select(ee, SELECT_ADD, 0);
                   }
             }
+      }
+
+//---------------------------------------------------------
+//   RecordButton
+//---------------------------------------------------------
+
+RecordButton::RecordButton(QWidget* parent)
+   : SimpleButton(":/data/recordOn.svg", ":/data/recordOff.svg", parent)
+      {
+      setCheckable(true);
+      defaultAction()->setCheckable(true);
+      setToolTip(tr("record"));
+      }
+
+//---------------------------------------------------------
+//   GreendotButton
+//---------------------------------------------------------
+
+GreendotButton::GreendotButton(QWidget* parent)
+   : SimpleButton(":/data/greendot.svg", ":/data/darkgreendot.svg", parent)
+      {
+      setCheckable(true);
+      setToolTip(tr("record"));
+      }
+
+//---------------------------------------------------------
+//   drawHandle
+//---------------------------------------------------------
+
+QRectF drawHandle(QPainter& p, const QPointF& pos, bool active)
+      {
+      p.save();
+      p.setPen(QPen(QColor(Qt::blue), 2.0/p.matrix().m11()));
+      if (active)
+            p.setBrush(Qt::blue);
+      else
+            p.setBrush(Qt::NoBrush);
+      qreal w = 8.0 / p.matrix().m11();
+      qreal h = 8.0 / p.matrix().m22();
+
+      QRectF r(-w/2, -h/2, w, h);
+      r.translate(pos);
+      p.drawRect(r);
+      p.restore();
+      return r;
+      }
+
+//---------------------------------------------------------
+//   transpose
+//---------------------------------------------------------
+
+void MuseScore::transpose()
+      {
+      if (cs->last() == 0)     // empty score?
+            return;
+      if (cs->selection().state() == SEL_NONE) {
+            QMessageBox::StandardButton sb = QMessageBox::question(mscore,
+               tr("MuseScore: transpose"),
+               tr("There is nothing selected. Transpose whole score?"),
+               QMessageBox::Yes | QMessageBox::Cancel,
+               QMessageBox::Yes
+            );
+            if (sb == QMessageBox::Cancel)
+                  return;
+            //
+            // select all
+            //
+            cs->selection().setState(SEL_RANGE);
+            cs->selection().setStartSegment(cs->tick2segment(0));
+            cs->selection().setEndSegment(
+               cs->tick2segment(cs->last()->tick() + cs->last()->ticks())
+               );
+            cs->selection().setStaffStart(0);
+            cs->selection().setStaffEnd(cs->nstaves());
+            }
+      bool rangeSelection = cs->selection().state() == SEL_RANGE;
+      TransposeDialog td;
+
+      // TRANSPOSE_BY_KEY and "transpose keys" is only possible if selection state is SEL_RANGE
+      td.enableTransposeKeys(rangeSelection);
+      td.enableTransposeByKey(rangeSelection);
+
+      int startStaffIdx = 0;
+      int startTick     = 0;
+      if (rangeSelection) {
+            startStaffIdx = cs->selection().staffStart();
+            startTick     = cs->selection().tickStart();
+            }
+      KeyList* km = cs->staff(startStaffIdx)->keymap();
+      int key     = km->key(startTick).accidentalType();
+      td.setKey(key);
+      if (!td.exec())
+            return;
+      cs->transpose(td.mode(), td.direction(), td.transposeKey(), td.transposeInterval(),
+         td.getTransposeKeys(), td.getTransposeChordNames(), td.useDoubleSharpsFlats());
+      }
+
+//---------------------------------------------------------
+//   cmd
+//---------------------------------------------------------
+
+void MuseScore::cmd(QAction* a)
+      {
+      if (inChordEditor)      // HACK
+            return;
+      static QAction* lastCmd;
+
+      QString cmdn(a->data().toString());
+
+      if (debugMode)
+            printf("MuseScore::cmd <%s>\n", cmdn.toAscii().data());
+
+      Shortcut* sc = getShortcut(cmdn.toAscii().data());
+      if (sc == 0) {
+            printf("MuseScore::cmd(): unknown action <%s>\n", qPrintable(cmdn));
+            return;
+            }
+      if (cs && (sc->state & _sstate) == 0) {
+            QMessageBox::warning(0,
+               QWidget::tr("MuseScore: invalid command"),
+               QString("command %1 not valid in current state").arg(cmdn),
+               QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
+            return;
+            }
+      if (cmdn == "repeat-cmd") {
+            a = lastCmd;
+            if (a == 0)
+                  return;
+            cmdn = a->data().toString();
+            }
+      else
+            lastCmd = a;
+
+      bool scoreIsDirty = false;
+      if (cs) {
+            scoreIsDirty = cs->dirty();
+            }
+      cmd(a, cmdn);
+      if (cs) {
+            if (!cs->noteEntryMode())
+                  updateInputState(cs);
+//            else
+//TODO-LIB                  emit inputCursorChanged();
+
+printf("================end cmd================== %d %d dirty %d->%d\n",
+               _undoGroup->canUndo(), _undoGroup->canRedo(), scoreIsDirty, !_undoGroup->isClean());
+
+            updateUndoRedo();
+            if (scoreIsDirty == _undoGroup->isClean()) {
+                  cs->setDirty(!scoreIsDirty);
+                  dirtyChanged(cs);
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   updateUndoRedo
+//---------------------------------------------------------
+
+void MuseScore::updateUndoRedo()
+      {
+      QAction* a = getAction("undo");
+      a->setEnabled(_undoGroup->canUndo());
+      a = getAction("redo");
+      a->setEnabled(_undoGroup->canRedo());
+      }
+
+//---------------------------------------------------------
+//   cmd
+//---------------------------------------------------------
+
+void MuseScore::cmd(QAction* a, const QString& cmd)
+      {
+      if (cmd == "instruments") {
+            editInstrList();
+            if (iledit)
+                  iledit->updateAll(cs);
+            }
+      else if (cmd == "rewind")
+            seq->rewindStart();
+      else if (cmd == "play-next-measure")
+            seq->nextMeasure();
+      else if (cmd == "play-next-chord")
+            seq->nextChord();
+      else if (cmd == "play-prev-measure")
+            seq->prevMeasure();
+      else if (cmd == "play-prev-chord")
+            seq->prevChord();
+      else if (cmd == "seek-begin")
+            seq->rewindStart();
+      else if (cmd == "seek-end")
+            seq->seekEnd();
+
+      else if (cmd == "clefs")
+            clefMenu();
+      else if (cmd == "keys")
+            showKeyEditor();
+      else if (cmd == "symbols")
+            symbolMenu();
+      else if (cmd == "times")
+            timeMenu();
+      else if (cmd == "dynamics")
+            dynamicsMenu();
+      else if (cmd == "file-open")
+            loadFile();
+      else if (cmd == "file-save")
+            saveFile();
+      else if (cmd == "file-export") {
+            if (cs)
+                  cs->exportFile();
+            }
+      else if (cmd == "file-reload") {
+            if (cs && !cs->created() && !checkDirty(cs)) {
+                  if (cv->editMode()) {
+                        cv->postCmd("escape");
+                        qApp->processEvents();
+                        }
+                  Score* score = new Score(MScore::defaultStyle());
+                  score->readScore(cs->filePath());
+                  // hack: so we don't get another checkDirty in appendScore
+                  cs->setDirty(false);
+                  setCurrentScoreView(appendScore(score));
+                  }
+            }
+      else if (cmd == "file-close")
+            removeTab(scoreList.indexOf(cs));
+      else if (cmd == "file-save-as") {
+            if (cs) {
+                  cs->setSyntiState();
+                  cs->saveAs(false);
+                  }
+            }
+      else if (cmd == "file-save-a-copy") {
+            if (cs) {
+                  cs->setSyntiState();
+                  cs->saveAs(true);
+                  }
+            }
+      else if (cmd == "file-new")
+            newFile();
+      else if (cmd == "quit")
+            close();
+      else if (cmd == "fingering")
+            fingeringMenu();
+      else if (cmd == "toggle-statusbar") {
+            preferences.showStatusBar = a->isChecked();
+            _statusBar->setShown(preferences.showStatusBar);
+            preferences.write();
+            }
+      else if (cmd == "append-measures")
+            cmdAppendMeasures();
+      else if (cmd == "insert-measures")
+            cmdInsertMeasures();
+      else if (cmd == "inspector")
+            startInspector();
+      else if (cmd == "album")
+            showAlbumManager();
+      else if (cmd == "layer")
+            showLayerManager();
+      else if (cmd == "script-debug") {
+            scriptDebug = a->isChecked();
+            }
+      else if (cmd == "backspace")
+            undo();
+      else if (cmd == "zoomin")
+            incMag();
+      else if (cmd == "zoomout")
+            decMag();
+      else if (cmd == "midi-on")
+            midiinToggled(a->isChecked());
+      else if (cmd == "sound-on")
+            speakerToggled(a->isChecked());
+      else if (cmd == "undo")
+            undo();
+      else if (cmd == "redo")
+            redo();
+      else if (cmd == "toggle-palette")
+            showPalette(a->isChecked());
+      else if (cmd == "toggle-playpanel")
+            showPlayPanel(a->isChecked());
+      else if (cmd == "toggle-navigator")
+            showNavigator(a->isChecked());
+      else if (cmd == "toggle-mixer")
+            showMixer(a->isChecked());
+      else if (cmd == "synth-control")
+            showSynthControl(a->isChecked());
+      else if (cmd == "show-keys")
+            ;
+      else if (cmd == "toggle-transport")
+            transportTools->setVisible(!transportTools->isVisible());
+      else if (cmd == "toggle-noteinput")
+            entryTools->setVisible(!entryTools->isVisible());
+      else if (cmd == "local-help")
+            helpBrowser();
+      else if (cmd == "follow")
+            preferences.followSong = a->isChecked();
+      else if (cmd == "split-h")
+            splitWindow(true);
+      else if (cmd == "split-v")
+            splitWindow(false);
+      else if (cmd == "edit-harmony")
+            editChordStyle();
+      else if (cmd == "parts")
+            startExcerptsDialog();
+      else if (cmd == "fullscreen") {
+            _fullscreen = a->isChecked();
+            if (_fullscreen)
+                  showFullScreen();
+            else
+                  showNormal();
+            }
+      else if (cmd == "config-raster")
+            editRaster();
+      else if (cmd == "hraster" || cmd == "vraster")  // value in [hv]RasterAction already set
+            ;
+      else if (cmd == "toogle-piano")
+            showPianoKeyboard(a->isChecked());
+      else if (cmd == "online-resources")
+            showWeb(WEB_TUTORIALS, a->isChecked());
+      else if (cmd == "media")
+            showMediaDialog();
+      else if (cmd == "page-settings")
+            showPageSettings();
+      else if (cmd == "next-score")
+            gotoNextScore();
+      else if (cmd == "previous-score")
+            gotoPreviousScore();
+      else if (cmd == "web-tutorials")
+            showWeb(WEB_TUTORIALS, true);
+      else if (cmd == "web-news")
+            showWeb(WEB_NEWS, true);
+      else if (cmd == "web-scorelib")
+            showWeb(WEB_SCORELIB, true);
+      else if (cmd == "transpose")
+            transpose();
+      else if (cmd == "tuplet-dialog")
+            tupletDialog();
+
+      else {
+            if (cv) {
+                  cv->setFocus();
+                  cv->cmd(a);
+                  }
+            else
+                  printf("2:unknown cmd <%s>\n", qPrintable(cmd));
+            }
+      if (inspector)
+            inspector->reloadClicked();
       }
 
 

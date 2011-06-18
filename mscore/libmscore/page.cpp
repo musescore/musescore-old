@@ -22,7 +22,6 @@
 #include "score.h"
 #include "text.h"
 #include "xml.h"
-#include "preferences.h"
 #include "measure.h"
 #include "style.h"
 #include "chord.h"
@@ -38,6 +37,94 @@
 #include "staff.h"
 #include "system.h"
 #include "painter.h"
+#include "mscore.h"
+
+#define MM(x) ((x)/INCH)
+
+const PaperSize paperSizes[] = {
+      PaperSize(QPrinter::A4,      "A4",        MM(210),  MM(297)),
+      PaperSize(QPrinter::B5,      "B5",        MM(176),  MM(250)),
+      PaperSize(QPrinter::Letter,  "Letter",    8.5,      11),
+      PaperSize(QPrinter::Legal,   "Legal",     8.5,      14),
+      PaperSize(QPrinter::Executive,"Executive",7.5,      10),
+      PaperSize(QPrinter::A0,      "A0",        MM(841),  MM(1189)),
+      PaperSize(QPrinter::A1,      "A1",        MM(594),  MM(841)),
+      PaperSize(QPrinter::A2,      "A2",        MM(420),  MM(594)),
+      PaperSize(QPrinter::A3,      "A3",        MM(297),  MM(420)),
+      PaperSize(QPrinter::A5,      "A5",        MM(148),  MM(210)),
+      PaperSize(QPrinter::A6,      "A6",        MM(105),  MM(148)),
+      PaperSize(QPrinter::A7,      "A7",        MM(74),   MM(105)),
+      PaperSize(QPrinter::A8,      "A8",        MM(52),   MM(74)),
+      PaperSize(QPrinter::A9,      "A9",        MM(37),   MM(52)),
+      PaperSize(QPrinter::B0,      "B0",        MM(1000), MM(1414)),
+      PaperSize(QPrinter::B1,      "B1",        MM(707),  MM(1000)),
+      PaperSize(QPrinter::B10,     "B10",       MM(31),   MM(44)),
+      PaperSize(QPrinter::B2,      "B2",        MM(500),  MM(707)),
+      PaperSize(QPrinter::B3,      "B3",        MM(353),  MM(500)),
+      PaperSize(QPrinter::B4,      "B4",        MM(250),  MM(353)),
+      PaperSize(QPrinter::B5,      "B5",        MM(125),  MM(176)),
+      PaperSize(QPrinter::B6,      "B6",        MM(88),   MM(125)),
+      PaperSize(QPrinter::B7,      "B7",        MM(62),   MM(88)),
+      PaperSize(QPrinter::B8,      "B8",        MM(44),   MM(62)),
+      PaperSize(QPrinter::B9,      "B9",        MM(163),  MM(229)),
+      PaperSize(QPrinter::Comm10E, "Comm10E",   MM(105),  MM(241)),
+      PaperSize(QPrinter::DLE,     "DLE",       MM(110),  MM(220)),
+      PaperSize(QPrinter::Folio,   "Folio",     MM(210),  MM(330)),
+      PaperSize(QPrinter::Ledger,  "Ledger",    MM(432),  MM(279)),
+      PaperSize(QPrinter::Tabloid, "Tabloid",   MM(279),  MM(432)),
+      PaperSize(int(QPrinter::Custom)+1, "iPad", MM(148),  MM(197)),
+      PaperSize(QPrinter::Custom,  "Custom",    MM(210),  MM(297)),
+      PaperSize(QPrinter::A4,      0, 0, 0  )
+      };
+
+//---------------------------------------------------------
+//   paperSizeNameToIndex
+//---------------------------------------------------------
+
+int paperSizeNameToIndex(const QString& name)
+      {
+      int i;
+      for (i = 0;;++i) {
+            if (paperSizes[i].name == 0)
+                  break;
+            if (name == paperSizes[i].name)
+                  return i;
+            }
+      printf("unknown paper size\n");
+      return 0;
+      }
+
+//---------------------------------------------------------
+//   paperSizeSizeToIndex
+//---------------------------------------------------------
+
+static const double minSize = 0.1;      // minimum paper size for sanity check
+static const double maxError = 0.01;    // max allowed error when matching sizes
+
+static double sizeError(const double si, const double sref)
+      {
+      double relErr = (si - sref) / sref;
+      return relErr > 0 ? relErr : -relErr;
+      }
+
+//---------------------------------------------------------
+//   paperSizeSizeToIndex
+//---------------------------------------------------------
+
+int paperSizeSizeToIndex(const double wi, const double hi)
+      {
+      if (wi < minSize || hi < minSize)
+            return -1;
+      int i;
+      for (i = 0;;++i) {
+            if (paperSizes[i].name == 0)
+                  break;
+            if (sizeError(wi, paperSizes[i].w) < maxError && sizeError(hi, paperSizes[i].h) < maxError)
+                  return i;
+            }
+      printf("unknown paper size\n");
+      return -1;
+      }
 
 //---------------------------------------------------------
 //   Page
@@ -197,7 +284,7 @@ void Page::draw(Painter* painter) const
                   c1.getHsv(&h1, &s1, &v1);
                   c2.getHsv(&h2, &s2, &v2);
 
-                  painter->setBrushColor(preferences.bgColor);
+                  painter->setBrushColor(MScore::bgColor);
                   painter->fillRect(x2-bw, y1, bw, bw);
                   painter->fillRect(x2-bw, y2-bw, bw, bw);
 
@@ -216,7 +303,7 @@ void Page::draw(Painter* painter) const
                   c2.getHsv(&h1, &s1, &v1);
                   c1.getHsv(&h2, &s2, &v2);
 
-                  painter->setBrushColor(preferences.bgColor);
+                  painter->setBrushColor(MScore::bgColor);
                   painter->fillRect(x1, y1, bw, bw);
                   painter->fillRect(x1, y2-bw, bw, bw);
                   int bbw = bw-1;
@@ -331,9 +418,9 @@ void Page::scanElements(void* data, void (*func)(void*, Element*))
 //---------------------------------------------------------
 
 PageFormat::PageFormat()
-   : size(preferences.paperSize),
-   _width(preferences.paperWidth),
-   _height(preferences.paperHeight),
+   : size(MScore::paperSize),
+   _width(MScore::paperWidth),
+   _height(MScore::paperHeight),
    evenLeftMargin(10.0 / INCH),
    evenRightMargin(10.0 / INCH),
    evenTopMargin(10.0 / INCH),
@@ -342,8 +429,8 @@ PageFormat::PageFormat()
    oddRightMargin(10.0 / INCH),
    oddTopMargin(10.0 / INCH),
    oddBottomMargin(20.0 / INCH),
-   landscape(preferences.landscape),
-   twosided(preferences.twosided)
+   landscape(MScore::landscape),
+   twosided(MScore::twosided)
       {
       }
 

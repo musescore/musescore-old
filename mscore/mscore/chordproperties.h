@@ -22,7 +22,7 @@
 #define __CHORDPROPERTIES_H__
 
 #include "ui_chordproperties.h"
-#include "globals.h"
+#include "libmscore/mscore.h"
 
 class Note;
 

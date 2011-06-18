@@ -21,7 +21,7 @@
 #ifndef __DRUMSET_H__
 #define __DRUMSET_H__
 
-#include "globals.h"
+#include "mscore.h"
 
 class Xml;
 

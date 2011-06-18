@@ -44,6 +44,7 @@
 #include "layoutbreak.h"
 #include "dynamic.h"
 #include "barline.h"
+#include "mscore.h"
 
 //---------------------------------------------------------
 //   errmsg

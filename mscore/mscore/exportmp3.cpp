@@ -18,12 +18,12 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "score.h"
+#include "libmscore/score.h"
 #include "fluid.h"
 #include "al/tempo.h"
-#include "note.h"
+#include "libmscore/note.h"
 #include "musescore.h"
-#include "part.h"
+#include "libmscore/part.h"
 #include "preferences.h"
 #include "seq.h"
 #include "exportmp3.h"
@@ -610,6 +610,7 @@ QString MP3Exporter::getLibraryTypeString()
 
 bool Score::saveMp3(const QString& name, QString soundFont)
       {
+#if 0 // TODO-LIB
       int sampleRate = preferences.exportAudioSampleRate;
 
       if (soundFont.isEmpty()) {
@@ -821,6 +822,7 @@ bool Score::saveMp3(const QString& name, QString soundFont)
       mscore->hideProgressBar();
       delete synti;
       file.close();
+#endif
       return true;
       }
 

@@ -26,7 +26,7 @@
  Definition of class MusicXML
 */
 
-#include "globals.h"
+#include "libmscore/mscore.h"
 
 class Instrument;
 class Measure;

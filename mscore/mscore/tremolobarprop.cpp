@@ -19,13 +19,13 @@
 //=============================================================================
 
 #include "tremolobarprop.h"
-#include "tremolobar.h"
+#include "libmscore/tremolobar.h"
 #include "tremolobarcanvas.h"
-#include "score.h"
-#include "undo.h"
-#include "staff.h"
-#include "chord.h"
-#include "note.h"
+#include "libmscore/score.h"
+#include "libmscore/undo.h"
+#include "libmscore/staff.h"
+#include "libmscore/chord.h"
+#include "libmscore/note.h"
 
 //---------------------------------------------------------
 //   TremoloBarProperties

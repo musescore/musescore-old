@@ -21,7 +21,7 @@
 #ifndef __HARMONYCANVAS_H__
 #define __HARMONYCANVAS_H__
 
-#include "harmony.h"
+#include "libmscore/harmony.h"
 
 struct TextSegment;
 struct ChordDescription;

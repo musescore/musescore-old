@@ -21,7 +21,7 @@
 #ifndef __HAIRPINPROP_H__
 #define __HAIRPINPROP_H__
 
-#include "globals.h"
+#include "libmscore/mscore.h"
 #include "ui_hairpinproperties.h"
 
 class Hairpin;

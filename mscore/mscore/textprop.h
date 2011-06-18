@@ -22,7 +22,7 @@
 #define __TEXTPROP_H__
 
 #include "ui_textproperties.h"
-#include "style.h"
+#include "libmscore/style.h"
 
 class Text;
 class Score;

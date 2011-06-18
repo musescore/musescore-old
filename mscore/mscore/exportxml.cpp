@@ -83,6 +83,7 @@
 #include "spanner.h"
 #include "drumset.h"
 #include "preferences.h"
+#include "mscore.h"
 
 static bool isTwoNoteTremolo(Chord* chord);
 
@@ -2326,7 +2327,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bo
 
             QString noteheadTagname = QString("notehead");
             QColor noteheadColor = note->color();
-            if(noteheadColor != preferences.defaultColor)
+            if (noteheadColor != MScore::defaultColor)
                   noteheadTagname += " color=\"" + noteheadColor.name() + "\"";
             if (note->headGroup() == 5) {
                   xml.tag(noteheadTagname, "slash");
@@ -2352,7 +2353,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bo
                   xml.tag(noteheadTagname, "ti");
             } else if(note->headGroup() == 12) {
                   xml.tag(noteheadTagname, "so");
-            } else if (noteheadColor != preferences.defaultColor) {
+            } else if (noteheadColor != MScore::defaultColor) {
                   xml.tag(noteheadTagname, "normal");
             }
 

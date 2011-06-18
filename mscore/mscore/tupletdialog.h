@@ -21,7 +21,7 @@
 #ifndef __TUPLETDIALOG_H__
 #define __TUPLETDIALOG_H__
 
-#include "duration.h"
+#include "libmscore/duration.h"
 #include "ui_tupletdialog.h"
 
 //---------------------------------------------------------
@@ -29,6 +29,7 @@
 //---------------------------------------------------------
 
 class TupletDialog : public QDialog, Ui::TupletDialog {
+      Q_OBJECT
 
    public:
       TupletDialog(QWidget* parent = 0);

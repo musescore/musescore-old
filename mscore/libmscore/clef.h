@@ -27,7 +27,7 @@
 */
 
 #include "element.h"
-#include "globals.h"
+#include "mscore.h"
 
 class Xml;
 class ScoreView;

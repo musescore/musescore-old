@@ -26,7 +26,7 @@
  Definition of classes Note and ShadowNote.
 */
 
-#include "globals.h"
+#include "mscore.h"
 #include "element.h"
 #include "symbol.h"
 #include "accidental.h"
@@ -133,7 +133,7 @@ class Note : public Element {
 
       int _lineOffset;        ///< Used during mouse dragging.
 
-      virtual QRectF drag(const EditData&);
+      virtual QRectF drag(const EditData& s);
       virtual void endDrag();
       virtual void endEdit();
 

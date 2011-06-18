@@ -77,7 +77,6 @@ class ChordList;
 
 extern QString mscoreGlobalShare;
 static const int PROJECT_LIST_LEN = 6;
-extern bool playRepeats;
 
 enum { WEB_TUTORIALS, WEB_NEWS, WEB_SCORELIB, WEB_PAGECOUNT };
 
@@ -366,6 +365,7 @@ class MuseScore : public QMainWindow {
       void enableEditMode(bool);
       void gotoNextScore();
       void gotoPreviousScore();
+      void updateUndoRedo();
 
    private slots:
       void autoSaveTimerTimeout();
@@ -393,6 +393,7 @@ class MuseScore : public QMainWindow {
       void removeTab(int);
       void removeTab();
       void cmd(QAction*);
+      void cmd(QAction* a, const QString& cmd);
       void clipboardChanged();
       void endSearch();
       void closeSynthControl();
@@ -539,6 +540,7 @@ class MuseScore : public QMainWindow {
       void tupletDialog();
       void selectSimilar(Element*, bool);
       void selectElementDialog(Element* e);
+      void transpose();
       };
 
 extern MuseScore* mscore;

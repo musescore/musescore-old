@@ -20,12 +20,12 @@
 
 #include "editdrumset.h"
 #include "musescore.h"
-#include "xml.h"
-#include "utils.h"
-#include "chord.h"
-#include "score.h"
-#include "note.h"
-#include "stem.h"
+#include "libmscore/xml.h"
+#include "libmscore/utils.h"
+#include "libmscore/chord.h"
+#include "libmscore/score.h"
+#include "libmscore/note.h"
+#include "libmscore/stem.h"
 
 enum { COL_PITCH, COL_NOTE, COL_SHORTCUT, COL_NAME };
 

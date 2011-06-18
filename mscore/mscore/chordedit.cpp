@@ -21,10 +21,10 @@
 #include <iostream>
 
 #include "chordedit.h"
-#include "harmony.h"
-#include "pitchspelling.h"
-#include "score.h"
-#include "chordlist.h"
+#include "libmscore/harmony.h"
+#include "libmscore/pitchspelling.h"
+#include "libmscore/score.h"
+#include "libmscore/chordlist.h"
 
 //---------------------------------------------------------
 //   ChordEdit

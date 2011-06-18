@@ -30,21 +30,21 @@
 #endif
 
 #include "msynth/synti.h"
-#include "slur.h"
-#include "score.h"
-#include "segment.h"
-#include "note.h"
-#include "chord.h"
+#include "libmscore/slur.h"
+#include "libmscore/score.h"
+#include "libmscore/segment.h"
+#include "libmscore/note.h"
+#include "libmscore/chord.h"
 #include "al/tempo.h"
 #include "scoreview.h"
 #include "playpanel.h"
-#include "staff.h"
-#include "measure.h"
+#include "libmscore/staff.h"
+#include "libmscore/measure.h"
 #include "preferences.h"
-#include "part.h"
-#include "ottava.h"
-#include "utils.h"
-#include "repeatlist.h"
+#include "libmscore/part.h"
+#include "libmscore/ottava.h"
+#include "libmscore/utils.h"
+#include "libmscore/repeatlist.h"
 #include "synthcontrol.h"
 #include "pianoroll.h"
 
@@ -140,7 +140,7 @@ void Seq::setScoreView(ScoreView* v)
       {
       if (cv !=v && cs) {
             cs->setSyntiState();
-            disconnect(cs, SIGNAL(selectionChanged(int)), this, SLOT(selectionChanged(int)));
+//            disconnect(cs, SIGNAL(selectionChanged(int)), this, SLOT(selectionChanged(int)));
             markedNotes.clear();
             stopWait();
             }
@@ -153,7 +153,7 @@ void Seq::setScoreView(ScoreView* v)
       playlistChanged = true;
       synti->reset();
       if (cs) {
-            connect(cs, SIGNAL(selectionChanged(int)), SLOT(selectionChanged(int)));
+//            connect(cs, SIGNAL(selectionChanged(int)), SLOT(selectionChanged(int)));
             synti->setState(cs->syntiState());
             initInstruments();
             seek(cs->playPos());

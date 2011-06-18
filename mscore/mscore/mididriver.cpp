@@ -28,11 +28,11 @@
 #include "mididriver.h"
 #include "preferences.h"
 #include "musescore.h"
-#include "midifile.h"
+#include "libmscore/midifile.h"
 #include "globals.h"
 #include "seq.h"
-#include "utils.h"
-#include "score.h"
+#include "libmscore/utils.h"
+#include "libmscore/score.h"
 
 //---------------------------------------------------------
 //   Port

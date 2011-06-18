@@ -26,7 +26,7 @@
  Definition of classes Chord, HelpLine and NoteList.
 */
 
-#include "globals.h"
+#include "mscore.h"
 #include "chordrest.h"
 
 class Note;

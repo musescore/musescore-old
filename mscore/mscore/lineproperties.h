@@ -21,8 +21,8 @@
 #define __LINEPROPERTIES_H__
 
 #include "globals.h"
-#include "line.h"
-#include "style.h"
+#include "libmscore/line.h"
+#include "libmscore/style.h"
 #include "ui_lineproperties.h"
 
 class TextLine;

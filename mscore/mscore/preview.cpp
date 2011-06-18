@@ -23,6 +23,7 @@
 #include "page.h"
 #include "globals.h"
 #include "painterqt.h"
+#include "mscore.h"
 
 //---------------------------------------------------------
 //   PagePreview

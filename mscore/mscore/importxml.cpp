@@ -74,6 +74,7 @@
 #include "breath.h"
 #include "al/tempo.h"
 #include "chordlist.h"
+#include "mscore.h"
 
 //---------------------------------------------------------
 //   xmlSetPitch

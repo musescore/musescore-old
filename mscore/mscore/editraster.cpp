@@ -19,7 +19,7 @@
 //=============================================================================
 
 #include "editraster.h"
-#include "preferences.h"
+#include "libmscore/mscore.h"
 
 //---------------------------------------------------------
 //   EditRaster
@@ -29,8 +29,8 @@ EditRaster::EditRaster(QWidget* parent)
    : QDialog(parent)
       {
       setupUi(this);
-      hraster->setValue(preferences.hRaster);
-      vraster->setValue(preferences.vRaster);
+      hraster->setValue(MScore::hRaster());
+      vraster->setValue(MScore::vRaster());
       }
 
 //---------------------------------------------------------
@@ -39,8 +39,8 @@ EditRaster::EditRaster(QWidget* parent)
 
 void EditRaster::accept()
       {
-      preferences.hRaster = hraster->value();
-      preferences.vRaster = vraster->value();
+      MScore::setHRaster(hraster->value());
+      MScore::setVRaster(vraster->value());
       QDialog::accept();
       }
 

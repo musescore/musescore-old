@@ -18,7 +18,7 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "globals.h"
+#include "mscore.h"
 #include "segment.h"
 #include "element.h"
 #include "chord.h"

@@ -19,19 +19,20 @@
 //=============================================================================
 
 #include "importpdf.h"
-#include "score.h"
+#include "libmscore/score.h"
 #include "omr/omr.h"
-#include "part.h"
-#include "staff.h"
-#include "measure.h"
+#include "libmscore/part.h"
+#include "libmscore/staff.h"
+#include "libmscore/measure.h"
 #include "al/al.h"
-#include "rest.h"
+#include "libmscore/rest.h"
 #include "omr/omrpage.h"
-#include "segment.h"
-#include "layoutbreak.h"
-#include "page.h"
-#include "clef.h"
-#include "bracket.h"
+#include "libmscore/segment.h"
+#include "libmscore/layoutbreak.h"
+#include "libmscore/page.h"
+#include "libmscore/clef.h"
+#include "libmscore/bracket.h"
+#include "libmscore/mscore.h"
 
 //---------------------------------------------------------
 //   importPdf

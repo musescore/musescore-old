@@ -24,6 +24,7 @@
 #include "musescore.h"
 #include "score.h"
 #include "textpalette.h"
+#include "mscore.h"
 
 TextPalette* textPalette;
 

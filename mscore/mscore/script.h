@@ -21,7 +21,7 @@
 #ifndef __SCRIPT_H__
 #define __SCRIPT_H__
 
-#include "score.h"
+#include "libmscore/score.h"
 
 static const int SCRIPT_MAJOR_VERSION = 1;
 static const int SCRIPT_MINOR_VERSION = 1;

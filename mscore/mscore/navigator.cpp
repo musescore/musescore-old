@@ -21,10 +21,11 @@
 #include "navigator.h"
 #include "musescore.h"
 #include "scoreview.h"
-#include "score.h"
-#include "page.h"
+#include "libmscore/score.h"
+#include "libmscore/page.h"
 #include "preferences.h"
 #include "painterqt.h"
+#include "libmscore/mscore.h"
 
 //---------------------------------------------------------
 //   Navigator
@@ -85,16 +86,16 @@ void Navigator::setScore(ScoreView* v)
       if (_cv) {
             disconnect(this, SIGNAL(viewRectMoved(const QRectF&)), _cv, SLOT(setViewRect(const QRectF&)));
             disconnect(_cv, SIGNAL(viewRectChanged()), this, SLOT(updateViewRect()));
-            if (_score)
-                  disconnect(_score, SIGNAL(layoutChanged()), this, SLOT(updateLayout()));
+//            if (_score)
+//                  disconnect(_score, SIGNAL(layoutChanged()), this, SLOT(updateLayout()));
             }
       _cv = QPointer<ScoreView>(v);
       if (v) {
             _score  = v->score();
             connect(this, SIGNAL(viewRectMoved(const QRectF&)), v, SLOT(setViewRect(const QRectF&)));
             connect(_cv,  SIGNAL(viewRectChanged()), this, SLOT(updateViewRect()));
-            if (_score)
-                  connect(_score,  SIGNAL(layoutChanged()), this, SLOT(updateLayout()));
+//            if (_score)
+//                  connect(_score,  SIGNAL(layoutChanged()), this, SLOT(updateLayout()));
             updateLayout();
             }
       else {

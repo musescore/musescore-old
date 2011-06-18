@@ -22,7 +22,7 @@
 #define __ILEDIT_H__
 
 #include "ui_mixer.h"
-#include "instrument.h"
+#include "libmscore/instrument.h"
 
 class Score;
 struct Channel;
