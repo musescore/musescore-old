@@ -19,7 +19,7 @@
 //=============================================================================
 
 #include "musescore.h"
-#include "score.h"      // states
+#include "libmscore/score.h"      // states
 #include "icons.h"
 
 //---------------------------------------------------------
