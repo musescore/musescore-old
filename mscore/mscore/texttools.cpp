@@ -20,11 +20,11 @@
 
 #include "texttools.h"
 #include "icons.h"
-#include "text.h"
+#include "libmscore/text.h"
 #include "musescore.h"
-#include "score.h"
+#include "libmscore/score.h"
 #include "textpalette.h"
-#include "mscore.h"
+#include "libmscore/mscore.h"
 
 TextPalette* textPalette;
 

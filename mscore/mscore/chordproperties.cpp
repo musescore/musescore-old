@@ -19,8 +19,8 @@
 //=============================================================================
 
 #include "chordproperties.h"
-#include "chord.h"
-#include "note.h"
+#include "libmscore/chord.h"
+#include "libmscore/note.h"
 
 //---------------------------------------------------------
 //   ChordProperties

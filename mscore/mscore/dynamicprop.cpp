@@ -18,7 +18,7 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "dynamic.h"
+#include "libmscore/dynamic.h"
 #include "dynamicprop.h"
 
 //---------------------------------------------------------

@@ -21,7 +21,7 @@
 #ifndef __INSTRTEMPLATE_H__
 #define __INSTRTEMPLATE_H__
 
-#include "ui_instrdialog.h"
+// #include "ui_instrdialog.h"
 #include "mscore.h"
 #include "instrument.h"
 

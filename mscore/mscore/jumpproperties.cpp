@@ -18,13 +18,13 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "repeat.h"
-#include "sym.h"
-#include "score.h"
-#include "system.h"
-#include "measure.h"
+#include "libmscore/repeat.h"
+#include "libmscore/sym.h"
+#include "libmscore/score.h"
+#include "libmscore/system.h"
+#include "libmscore/measure.h"
 #include "globals.h"
-#include "painter.h"
+#include "libmscore/painter.h"
 #include "jumpproperties.h"
 #include "markerproperties.h"
 

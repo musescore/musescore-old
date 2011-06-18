@@ -19,11 +19,11 @@
 //=============================================================================
 
 #include "measureproperties.h"
-#include "measure.h"
+#include "libmscore/measure.h"
 #include "al/sig.h"
-#include "score.h"
-#include "repeat.h"
-#include "undo.h"
+#include "libmscore/score.h"
+#include "libmscore/repeat.h"
+#include "libmscore/undo.h"
 
 //---------------------------------------------------------
 //   MeasureProperties

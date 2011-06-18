@@ -20,10 +20,10 @@
 
 #include "globals.h"
 #include "icons.h"
-#include "score.h"
-#include "style.h"
+#include "libmscore/score.h"
+#include "libmscore/style.h"
 #include "preferences.h"
-#include "sym.h"
+#include "libmscore/sym.h"
 #include "libmscore/mscore.h"
 
 extern QString iconPath, iconGroup;

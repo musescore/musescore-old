@@ -19,7 +19,7 @@
 //=============================================================================
 
 #include "sectionbreakprop.h"
-#include "layoutbreak.h"
+#include "libmscore/layoutbreak.h"
 
 //---------------------------------------------------------
 //   SectionBreakProperties

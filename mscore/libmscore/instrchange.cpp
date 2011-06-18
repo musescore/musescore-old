@@ -21,7 +21,7 @@
 #include "instrchange.h"
 #include "score.h"
 #include "scoreview.h"
-#include "instrtemplate.h"
+// #include "instrtemplate.h"
 #include "segment.h"
 #include "staff.h"
 #include "part.h"

@@ -18,11 +18,11 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "score.h"
+#include "libmscore/score.h"
 #include "stafftextproperties.h"
-#include "stafftext.h"
-#include "system.h"
-#include "staff.h"
+#include "libmscore/stafftext.h"
+#include "libmscore/system.h"
+#include "libmscore/staff.h"
 
 //---------------------------------------------------------
 // initChannelCombo

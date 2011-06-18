@@ -20,7 +20,7 @@
 
 #include "profile.h"
 #include "musescore.h"
-#include "xml.h"
+#include "libmscore/xml.h"
 #include "preferences.h"
 #include "palette.h"
 

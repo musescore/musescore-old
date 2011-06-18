@@ -18,15 +18,15 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "articulation.h"
+#include "libmscore/articulation.h"
 #include "articulationprop.h"
-#include "sym.h"
-#include "score.h"
-#include "chordrest.h"
-#include "system.h"
-#include "measure.h"
-#include "staff.h"
-#include "stafftype.h"
+#include "libmscore/sym.h"
+#include "libmscore/score.h"
+#include "libmscore/chordrest.h"
+#include "libmscore/system.h"
+#include "libmscore/measure.h"
+#include "libmscore/staff.h"
+#include "libmscore/stafftype.h"
 
 //---------------------------------------------------------
 //   ArticulationProperties

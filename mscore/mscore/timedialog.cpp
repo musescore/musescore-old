@@ -19,10 +19,10 @@
 //=============================================================================
 
 #include "timedialog.h"
-#include "timesig.h"
+#include "libmscore/timesig.h"
 #include "palette.h"
 #include "musescore.h"
-#include "score.h"
+#include "libmscore/score.h"
 
 extern bool useFactorySettings;
 

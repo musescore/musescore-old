@@ -19,8 +19,8 @@
 //=============================================================================
 
 #include "selinstrument.h"
-#include "instrument.h"
-#include "instrtemplate.h"
+#include "libmscore/instrument.h"
+#include "libmscore/instrtemplate.h"
 
 //---------------------------------------------------------
 //   SelectInstrument
