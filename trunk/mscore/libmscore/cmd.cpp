@@ -58,8 +58,8 @@
 #include "system.h"
 #include "stafftext.h"
 #include "articulation.h"
-#include "metaedit.h"
-#include "chordedit.h"
+// #include "metaedit.h"
+// #include "chordedit.h"
 #include "layoutbreak.h"
 #include "drumset.h"
 #include "beam.h"
@@ -70,8 +70,8 @@
 #include "al/tempo.h"
 #include "al/sig.h"
 #include "undo.h"
-#include "editstyle.h"
-#include "textstyle.h"
+// #include "editstyle.h"
+// #include "textstyle.h"
 #include "timesig.h"
 #include "repeat.h"
 #include "tempotext.h"
@@ -1009,7 +1009,7 @@ void Score::cmdAddChordName2()
             s->setRootTpc(rootTpc);
             created = true;
             }
-
+#if 0 // TODO-LIB
       ChordEdit ce(this);
       ce.setHarmony(s);
       int rv = ce.exec();
@@ -1030,6 +1030,7 @@ void Score::cmdAddChordName2()
             if (created)
                   delete s;
             }
+#endif
       }
 
 //---------------------------------------------------------
@@ -1589,8 +1590,9 @@ void Score::cmd(const QAction* a)
       else if (cmd == "save-style")
             saveStyle();
       else if (cmd == "edit-meta") {
-            MetaEditDialog med(this, 0);
+/*TODO-LIB            MetaEditDialog med(this, 0);
             med.exec();
+            */
             }
       else if (cmd == "show-invisible") {
             setShowInvisible(a->isChecked());
@@ -1875,12 +1877,12 @@ void Score::cmd(const QAction* a)
             else if (cmd == "mirror-note")
                   cmdMirrorNoteHead();
             else if (cmd == "edit-style") {
-                  EditStyle es(this, 0);
-                  es.exec();
+//TODO-LIB                  EditStyle es(this, 0);
+//                  es.exec();
                   }
             else if (cmd == "edit-text-style") {
-                  TextStyleDialog es(0, this);
-                  es.exec();
+//TODO-LIB                  TextStyleDialog es(0, this);
+//                  es.exec();
                   }
             else if (cmd == "double-duration")
                   cmdDoubleDuration();

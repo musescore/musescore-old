@@ -19,11 +19,11 @@
 //=============================================================================
 
 #include "preview.h"
-#include "score.h"
-#include "page.h"
+#include "libmscore/score.h"
+#include "libmscore/page.h"
 #include "globals.h"
 #include "painterqt.h"
-#include "mscore.h"
+#include "libmscore/mscore.h"
 
 //---------------------------------------------------------
 //   PagePreview

@@ -20,10 +20,10 @@
 
 #include "excerptsdialog.h"
 #include "musescore.h"
-#include "score.h"
-#include "part.h"
-#include "excerpt.h"
-#include "undo.h"
+#include "libmscore/score.h"
+#include "libmscore/part.h"
+#include "libmscore/excerpt.h"
+#include "libmscore/undo.h"
 
 //---------------------------------------------------------
 //   ExcerptItem

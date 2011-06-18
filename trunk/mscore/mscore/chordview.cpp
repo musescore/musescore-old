@@ -20,9 +20,9 @@
 
 #include "chordview.h"
 #include "piano.h"
-#include "chord.h"
-#include "note.h"
-#include "noteevent.h"
+#include "libmscore/chord.h"
+#include "libmscore/note.h"
+#include "libmscore/noteevent.h"
 #include "preferences.h"
 #include "musescore.h"
 #include "libmscore/mscore.h"

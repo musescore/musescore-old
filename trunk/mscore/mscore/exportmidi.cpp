@@ -18,18 +18,18 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "score.h"
-#include "part.h"
-#include "staff.h"
+#include "libmscore/score.h"
+#include "libmscore/part.h"
+#include "libmscore/staff.h"
 #include "al/tempo.h"
-#include "midifile.h"
-#include "event.h"
+#include "libmscore/midifile.h"
+#include "libmscore/event.h"
 #include "al/sig.h"
-#include "key.h"
+#include "libmscore/key.h"
 #include "preferences.h"
-#include "text.h"
-#include "measure.h"
-#include "repeatlist.h"
+#include "libmscore/text.h"
+#include "libmscore/measure.h"
+#include "libmscore/repeatlist.h"
 
 //---------------------------------------------------------
 //   exportMidi

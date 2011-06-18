@@ -19,9 +19,9 @@
 //=============================================================================
 
 #include "boxproperties.h"
-#include "box.h"
-#include "score.h"
-#include "undo.h"
+#include "libmscore/box.h"
+#include "libmscore/score.h"
+#include "libmscore/undo.h"
 
 //---------------------------------------------------------
 //   BoxProperties

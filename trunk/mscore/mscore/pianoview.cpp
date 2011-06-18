@@ -19,15 +19,15 @@
 //=============================================================================
 
 #include "pianoview.h"
-#include "staff.h"
+#include "libmscore/staff.h"
 #include "piano.h"
-#include "measure.h"
-#include "chord.h"
-#include "score.h"
-#include "note.h"
-#include "slur.h"
-#include "segment.h"
-#include "noteevent.h"
+#include "libmscore/measure.h"
+#include "libmscore/chord.h"
+#include "libmscore/score.h"
+#include "libmscore/note.h"
+#include "libmscore/slur.h"
+#include "libmscore/segment.h"
+#include "libmscore/noteevent.h"
 
 static const int MAP_OFFSET = 480;
 

@@ -20,11 +20,11 @@
 
 #include "globals.h"
 #include "pagesettings.h"
-#include "page.h"
-#include "style.h"
-#include "score.h"
+#include "libmscore/page.h"
+#include "libmscore/style.h"
+#include "libmscore/score.h"
 #include "preview.h"
-#include "mscore.h"
+#include "libmscore/mscore.h"
 
 //---------------------------------------------------------
 //   PageSettings

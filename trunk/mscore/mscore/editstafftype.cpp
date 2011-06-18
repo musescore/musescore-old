@@ -19,9 +19,9 @@
 //=============================================================================
 
 #include "editstafftype.h"
-#include "stafftype.h"
-#include "score.h"
-#include "staff.h"
+#include "libmscore/stafftype.h"
+#include "libmscore/score.h"
+#include "libmscore/staff.h"
 
 //---------------------------------------------------------
 //   EditStaffType

@@ -20,9 +20,9 @@
 
 #include "textpalette.h"
 #include "icons.h"
-#include "text.h"
-#include "sym.h"
-#include "style.h"
+#include "libmscore/text.h"
+#include "libmscore/sym.h"
+#include "libmscore/style.h"
 #include "musescore.h"
 
 extern TextPalette* textPalette;

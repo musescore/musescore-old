@@ -19,9 +19,9 @@
 //=============================================================================
 
 #include "hairpinprop.h"
-#include "hairpin.h"
-#include "segment.h"
-#include "staff.h"
+#include "libmscore/hairpin.h"
+#include "libmscore/segment.h"
+#include "libmscore/staff.h"
 
 //---------------------------------------------------------
 //   HairpinProperties

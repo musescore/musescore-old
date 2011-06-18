@@ -19,7 +19,7 @@
 //=============================================================================
 
 #include "timesigproperties.h"
-#include "timesig.h"
+#include "libmscore/timesig.h"
 
 //---------------------------------------------------------
 //    TimeSigProperties

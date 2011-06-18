@@ -19,7 +19,7 @@
 //=============================================================================
 
 #include "ruler.h"
-#include "score.h"
+#include "libmscore/score.h"
 
 static const int MAP_OFFSET = 2;
 

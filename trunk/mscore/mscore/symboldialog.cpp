@@ -21,10 +21,10 @@
 #include "symboldialog.h"
 #include "palette.h"
 #include "musescore.h"
-#include "sym.h"
-#include "style.h"
-#include "element.h"
-#include "symbol.h"
+#include "libmscore/sym.h"
+#include "libmscore/style.h"
+#include "libmscore/element.h"
+#include "libmscore/symbol.h"
 #include "preferences.h"
 
 //---------------------------------------------------------

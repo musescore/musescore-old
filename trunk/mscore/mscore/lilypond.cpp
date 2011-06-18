@@ -18,16 +18,16 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "score.h"
-#include "element.h"
-#include "part.h"
-#include "staff.h"
-#include "note.h"
-#include "rest.h"
-#include "chord.h"
-#include "barline.h"
-#include "measure.h"
-#include "segment.h"
+#include "libmscore/score.h"
+#include "libmscore/element.h"
+#include "libmscore/part.h"
+#include "libmscore/staff.h"
+#include "libmscore/note.h"
+#include "libmscore/rest.h"
+#include "libmscore/chord.h"
+#include "libmscore/barline.h"
+#include "libmscore/measure.h"
+#include "libmscore/segment.h"
 
 //---------------------------------------------------------
 //   LNote

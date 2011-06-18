@@ -20,8 +20,8 @@
 
 #include "album.h"
 #include "globals.h"
-#include "score.h"
-#include "page.h"
+#include "libmscore/score.h"
+#include "libmscore/page.h"
 #include "painterqt.h"
 #include "musescore.h"
 #include "icons.h"

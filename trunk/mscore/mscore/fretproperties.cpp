@@ -18,17 +18,17 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "fret.h"
+#include "libmscore/fret.h"
 #include "fretproperties.h"
-#include "measure.h"
-#include "system.h"
-#include "score.h"
+#include "libmscore/measure.h"
+#include "libmscore/system.h"
+#include "libmscore/score.h"
 #include "fretcanvas.h"
 #include "preferences.h"
-#include "tablature.h"
-#include "chord.h"
-#include "note.h"
-#include "segment.h"
+#include "libmscore/tablature.h"
+#include "libmscore/chord.h"
+#include "libmscore/note.h"
+#include "libmscore/segment.h"
 
 //---------------------------------------------------------
 //   FretDiagramProperties
