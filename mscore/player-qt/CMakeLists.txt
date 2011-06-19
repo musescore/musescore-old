@@ -37,6 +37,8 @@ target_link_libraries(mscoreplay
       omr
       al
       poppler
+      msynth
+      al
       )
 
 set_target_properties (

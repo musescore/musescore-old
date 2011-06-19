@@ -1587,8 +1587,6 @@ void Score::cmd(const QAction* a)
             updateRepeatList(MScore::playRepeats);
             _playlistDirty = true;
             }
-      else if (cmd == "save-style")
-            saveStyle();
       else if (cmd == "edit-meta") {
 /*TODO-LIB            MetaEditDialog med(this, 0);
             med.exec();

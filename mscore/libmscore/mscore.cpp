@@ -43,6 +43,7 @@ int     MScore::defaultPlayDuration;
 QString MScore::partStyle;
 QString MScore::soundFont;
 qreal   MScore::spatium;
+QString MScore::lastError;
 
 //---------------------------------------------------------
 //   init

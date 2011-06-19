@@ -386,7 +386,6 @@ class Score {
       bool rewriteMeasures(Measure* fm, Measure* lm, const Fraction&);
       void rewriteMeasures(Measure* fm, const Fraction& ns);
       void updateVelo();
-      QString createDefaultFileName();
       void addAudioTrack();
       void parseVersion(const QString&);
       QList<Fraction> splitGapToMeasureBoundaries(ChordRest*, Fraction);
@@ -654,7 +653,7 @@ class Score {
       const Style* style() const               { return &_style;                  }
       void setStyle(const Style& s)            { _style = s;                      }
       void loadStyle();
-      void saveStyle();
+      bool saveStyle(const QString&);
 
       StyleVal style(StyleIdx idx) const       { return _style.value(idx);   }
       Spatium styleS(StyleIdx idx) const       { return _style.valueS(idx);  }

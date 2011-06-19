@@ -33,7 +33,7 @@
 #include "seq.h"
 #include "al/tempo.h"
 #include "libmscore/sym.h"
-#include "padids.h"
+#include "libmscore/padids.h"
 #include "pagesettings.h"
 #include "inspector.h"
 #include "editstyle.h"
@@ -4272,7 +4272,6 @@ void MuseScore::cmd(QAction* a, const QString& cmd)
             seq->rewindStart();
       else if (cmd == "seek-end")
             seq->seekEnd();
-
       else if (cmd == "clefs")
             clefMenu();
       else if (cmd == "keys")
@@ -4417,7 +4416,17 @@ void MuseScore::cmd(QAction* a, const QString& cmd)
             transpose();
       else if (cmd == "tuplet-dialog")
             tupletDialog();
-
+      else if (cmd == "save-style") {
+            if (cs) {
+                  QString name = getStyleFilename(false);
+                  if (!name.isEmpty()) {
+                        if (!cs->saveStyle(name)) {
+                              QMessageBox::critical(this,
+                                 tr("MuseScore: save style"), MScore::lastError);
+                              }
+                        }
+                  }
+            }
       else {
             if (cv) {
                   cv->setFocus();

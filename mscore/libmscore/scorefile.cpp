@@ -38,6 +38,7 @@
 #include "omr/omr.h"
 #include "omr/omrpage.h"
 #include "al/sig.h"
+#include "undo.h"
 
 //---------------------------------------------------------
 //   readScore
@@ -336,32 +337,6 @@ void Score::readStaff(QDomElement e)
       }
 
 //---------------------------------------------------------
-//   createDefaultFileName
-//---------------------------------------------------------
-
-QString Score::createDefaultFileName()
-      {
-      QString fn = info.baseName();
-      Text* t = getText(TEXT_TITLE);
-      if (t)
-            fn = t->getText();
-      //
-      // special characters in filenames are a constant source
-      // of trouble, this replaces some of them common in german:
-      //
-      fn = fn.replace(QChar(' '),  "_");
-      fn = fn.replace(QChar('\n'), "_");
-      fn = fn.replace(QChar(0xe4), "ae");
-      fn = fn.replace(QChar(0xf6), "oe");
-      fn = fn.replace(QChar(0xfc), "ue");
-      fn = fn.replace(QChar(0xdf), "ss");
-      fn = fn.replace(QChar(0xc4), "Ae");
-      fn = fn.replace(QChar(0xd6), "Oe");
-      fn = fn.replace(QChar(0xdc), "Ue");
-      return fn;
-      }
-
-//---------------------------------------------------------
 //   saveFile
 ///   If file has generated name, create a modal file save dialog
 ///   and ask filename.
@@ -372,28 +347,6 @@ QString Score::createDefaultFileName()
 
 bool Score::saveFile(bool autosave)
       {
-#if 0 // TODO-LIB
-      if (created()) {
-            QString selectedFilter;
-            QString name = createDefaultFileName();
-            QString f1 = tr("Compressed MuseScore File (*.mscz)");
-            QString f2 = tr("MuseScore File (*.mscx)");
-
-            QString fname   = QString("%1.mscz").arg(name);
-            QString filter = f1 + ";;" + f2;
-            QString fn     = mscore->getSaveScoreName(
-               tr("MuseScore: Save Score"),
-               fname,
-               filter,
-               &selectedFilter
-               );
-            if (fn.isEmpty())
-                  return false;
-            info.setFile(fn);
-            mscore->updateRecentScores(this);
-            setCreated(false);
-            mscore->writeSessionFile(false);
-            }
       QString suffix = info.suffix();
       if ((suffix != "mscx") && (suffix != "mscz")) {
             QString s = info.filePath();
@@ -410,8 +363,8 @@ bool Score::saveFile(bool autosave)
             }
 
       if (info.exists() && !info.isWritable()) {
-            QString s(tr("The following file is locked: \n%1 \n\nTry saving to a different location."));
-            QMessageBox::critical(mscore, tr("MuseScore: Save File"), s.arg(info.filePath()));
+            QString s = QT_TRANSLATE_NOOP("file", "The following file is locked: \n%1 \n\nTry saving to a different location.");
+            MScore::lastError = s.arg(info.filePath());
             return false;
             }
 
@@ -426,7 +379,7 @@ bool Score::saveFile(bool autosave)
                         saveCompressedFile(info, autosave);
                   }
             catch (QString s) {
-                  QMessageBox::critical(mscore, tr("MuseScore: Save File"), s);
+                  MScore::lastError = s;
                   return false;
                   }
             undo()->setClean();
@@ -442,9 +395,8 @@ bool Score::saveFile(bool autosave)
       QString tempName = info.filePath() + QString(".temp");
       QFile temp(tempName);
       if (!temp.open(QIODevice::WriteOnly)) {
-            QString s = tr("Open Temp File\n") + tempName + tr("\nfailed: ")
-               + QString(strerror(errno));
-            QMessageBox::critical(mscore, tr("MuseScore: Save File"), s);
+            MScore::lastError = QT_TRANSLATE_NOOP("file", "Open Temp File\n")
+               + tempName + QT_TRANSLATE_NOOP("file", "\nfailed: ") + QString(strerror(errno));
             return false;
             }
       try {
@@ -454,11 +406,15 @@ bool Score::saveFile(bool autosave)
                   saveCompressedFile(&temp, info, autosave);
             }
       catch (QString s) {
-            QMessageBox::critical(mscore, tr("MuseScore: Save File failed: "), s);
+            MScore::lastError = s;
             return false;
             }
-      if (temp.error() != QFile::NoError)
-            QMessageBox::critical(mscore, tr("MuseScore: Save File failed: "), temp.errorString());
+      if (temp.error() != QFile::NoError) {
+            MScore::lastError = QT_TRANSLATE_NOOP("file",
+               "MuseScore: Save File failed: ") + temp.errorString();
+            temp.close();
+            return false;
+            }
       temp.close();
 
       //
@@ -469,8 +425,8 @@ bool Score::saveFile(bool autosave)
       QString backupName = QString(".") + info.fileName() + QString(",");
       if (dir.exists(backupName)) {
             if (!dir.remove(backupName)) {
-                  QMessageBox::critical(mscore, tr("MuseScore: Save File"),
-                     tr("removing old backup file ") + backupName + tr(" failed"));
+//                  QMessageBox::critical(mscore, tr("MuseScore: Save File"),
+//                     tr("removing old backup file ") + backupName + tr(" failed"));
                   }
             }
 
@@ -481,9 +437,9 @@ bool Score::saveFile(bool autosave)
       QString name(info.filePath());
       if (dir.exists(name)) {
             if (!dir.rename(name, backupName)) {
-                  QMessageBox::critical(mscore, tr("MuseScore: Save File"),
-                     tr("renaming old file <")
-                      + name + tr("> to backup <") + backupName + tr("> failed"));
+//                  QMessageBox::critical(mscore, tr("MuseScore: Save File"),
+//                     tr("renaming old file <")
+//                      + name + tr("> to backup <") + backupName + tr("> failed"));
                   }
             }
 
@@ -492,9 +448,10 @@ bool Score::saveFile(bool autosave)
       // rename temp name into file name
       //
       if (!QFile::rename(tempName, name)) {
-            QMessageBox::critical(mscore, tr("MuseScore: Save File"),
-               tr("renaming temp. file <") + tempName + tr("> to <") + name + tr("> failed:\n")
-               + QString(strerror(errno)));
+            MScore::lastError = QT_TRANSLATE_NOOP("file", "renaming temp. file <")
+               + tempName + QT_TRANSLATE_NOOP("file", "> to <") + name
+               + QT_TRANSLATE_NOOP("file", "> failed:\n")
+               + QString(strerror(errno));
             return false;
             }
       // make file readable by all
@@ -504,7 +461,6 @@ bool Score::saveFile(bool autosave)
       undo()->setClean();
       setClean(true);
       setSaved(true);
-#endif
       return true;
       }
 
@@ -920,12 +876,8 @@ void Score::loadStyle()
 //   saveStyle
 //---------------------------------------------------------
 
-void Score::saveStyle()
+bool Score::saveStyle(const QString& name)
       {
-#if 0 // TODO-LIB
-      QString name = mscore->getStyleFilename(false);
-      if (name.isEmpty())
-            return;
       QString ext(".mss");
       QFileInfo info(name);
 
@@ -933,10 +885,10 @@ void Score::saveStyle()
             info.setFile(info.filePath() + ext);
       QFile f(info.filePath());
       if (!f.open(QIODevice::WriteOnly)) {
-            QString s = tr("Open Style File\n") + f.fileName() + tr("\nfailed: ")
+            MScore::lastError = QT_TRANSLATE_NOOP("file", "Open Style File\n")
+               + f.fileName() + QT_TRANSLATE_NOOP("file", "\nfailed: ")
                + QString(strerror(errno));
-            QMessageBox::critical(mscore, tr("MuseScore: Open Style file"), s);
-            return;
+            return false;
             }
 
       Xml xml(&f);
@@ -945,10 +897,11 @@ void Score::saveStyle()
       _style.save(xml, false);     // save complete style
       xml.etag();
       if (f.error() != QFile::NoError) {
-            QString s = tr("Write Style failed: ") + f.errorString();
-            QMessageBox::critical(0, tr("MuseScore: Write Style"), s);
+            MScore::lastError = QT_TRANSLATE_NOOP("file", "Write Style failed: ")
+               + f.errorString();
+            return false;
             }
-#endif
+      return true;
       }
 
 //---------------------------------------------------------
@@ -1120,12 +1073,8 @@ bool Score::loadMsc(QString name)
       int line, column;
       QString err;
       if (!doc.setContent(&f, false, &err, &line, &column)) {
-            QString s;
-            s.sprintf("error reading file %s at line %d column %d: %s\n",
-               f.fileName().toLatin1().data(), line, column, err.toLatin1().data());
-#if 0 // TODO-LIB
-            QMessageBox::critical(mscore, tr("MuseScore: Read File"), s);
-#endif
+            QString s = QT_TRANSLATE_NOOP("file", "error reading file %1 at line %2 column %3: %4\n");
+            MScore::lastError = s.arg(f.fileName()).arg(line).arg(column).arg(err);
             return false;
             }
       f.close();
