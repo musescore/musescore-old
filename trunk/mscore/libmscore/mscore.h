@@ -563,6 +563,7 @@ class MScore {
       static int defaultPlayDuration;
       static QString partStyle;
       static QString soundFont;
+      static QString lastError;
 
       static qreal spatium;
       };

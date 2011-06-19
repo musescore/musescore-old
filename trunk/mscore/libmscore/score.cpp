@@ -74,6 +74,7 @@
 #include "layoutbreak.h"
 #include "harmony.h"
 #include "mscore.h"
+#include "padids.h"
 
 #include "omr/omr.h"
 
@@ -2816,6 +2817,180 @@ void Score::transposeKeys(int staffStart, int staffEnd, int tickStart, int tickE
 void Score::addAudioTrack()
       {
       // TODO
+      }
+
+//---------------------------------------------------------
+//   padToggle
+//    called from keyPadToggle
+//    menu button callback
+//---------------------------------------------------------
+
+void Score::padToggle(int n)
+      {
+      switch (n) {
+            case PAD_NOTE00:
+                  _is.setDuration(Duration::V_LONG);
+                  break;
+            case PAD_NOTE0:
+                  _is.setDuration(Duration::V_BREVE);
+                  break;
+            case PAD_NOTE1:
+                  _is.setDuration(Duration::V_WHOLE);
+                  break;
+            case PAD_NOTE2:
+                  _is.setDuration(Duration::V_HALF);
+                  break;
+            case PAD_NOTE4:
+                  _is.setDuration(Duration::V_QUARTER);
+                  break;
+            case PAD_NOTE8:
+                  _is.setDuration(Duration::V_EIGHT);
+                  break;
+            case PAD_NOTE16:
+                  _is.setDuration(Duration::V_16TH);
+                  break;
+            case PAD_NOTE32:
+                  _is.setDuration(Duration::V_32ND);
+                  break;
+            case PAD_NOTE64:
+                  _is.setDuration(Duration::V_64TH);
+                  break;
+            case PAD_NOTE128:
+                  _is.setDuration(Duration::V_128TH);
+                  break;
+            case PAD_REST:
+                  _is.rest = !_is.rest;
+                  break;
+            case PAD_DOT:
+                  if (_is.duration().dots() == 1)
+                        _is.setDots(0);
+                  else
+                        _is.setDots(1);
+                  break;
+            case PAD_DOTDOT:
+                  if (_is.duration().dots() == 2)
+                        _is.setDots(0);
+                  else
+                        _is.setDots(2);
+                  break;
+            case PAD_BEAM_START:
+                  cmdSetBeamMode(BEAM_BEGIN);
+                  break;
+            case PAD_BEAM_MID:
+                  cmdSetBeamMode(BEAM_MID);
+                  break;
+            case PAD_BEAM_NO:
+                  cmdSetBeamMode(BEAM_NO);
+                  break;
+            case PAD_BEAM32:
+                  cmdSetBeamMode(BEAM_BEGIN32);
+                  break;
+            }
+//TODO-LIB      mscore->updateInputState(this);
+      if (n < PAD_NOTE00 || n > PAD_DOTDOT)
+            return;
+
+      if (n >= PAD_NOTE00 && n <= PAD_NOTE128) {
+            _is.setDots(0);
+            //
+            // if in "note enter" mode, reset
+            // rest flag
+            //
+            if (noteEntryMode())
+                  _is.rest = false;
+            }
+
+      if (noteEntryMode() || !selection().isSingle()) {
+//TODO-LIB            mscore->updateInputState(this);    // updates dot state
+            return;
+            }
+
+      //do not allow to add a dot on a full measure rest
+      Element* e = selection().element();
+      if (e && e->type() == REST) {
+            Rest* r = static_cast<Rest*>(e);
+            Duration d = r->durationType();
+            if (d.type() == Duration::V_MEASURE) {
+                  _is.setDots(0);
+//TODO-LIB                  mscore->updateInputState(this);    // updates dot state
+                  // return;
+                  }
+            }
+
+      Element* el = selection().element();
+      if (el->type() == NOTE)
+            el = el->parent();
+      if (!el->isChordRest())
+            return;
+
+      ChordRest* cr = static_cast<ChordRest*>(el);
+      if (cr->type() == CHORD && (static_cast<Chord*>(cr)->noteType() != NOTE_NORMAL)) {
+            //
+            // handle appoggiatura and acciaccatura
+            //
+            cr->setDurationType(_is.duration());
+            }
+      else
+            changeCRlen(cr, _is.duration());
+      }
+
+//---------------------------------------------------------
+//   setInputState
+//---------------------------------------------------------
+
+void Score::setInputState(Element* e)
+      {
+// printf("setInputState %s\n", e ? e->name() : "--");
+      bool enable = e && (e->type() == NOTE || e->type() == REST);
+//TODO-LIB      enableInputToolbar(enable);
+      if (e == 0) {
+//TODO-LIB            mscore->showDrumTools(0, 0);
+            return;
+            }
+
+      _is.setDrumNote(-1);
+//      _is.setDrumset(0);
+      if (e->type() == NOTE) {
+            Note* note    = static_cast<Note*>(e);
+            Chord* chord  = note->chord();
+            _is.setDuration(chord->durationType());
+            _is.rest      = false;
+            _is.setTrack(note->track());
+            _is.pitch     = note->pitch();
+            _is.noteType  = note->noteType();
+            _is.beamMode  = chord->beamMode();
+            }
+      else if (e->type() == REST) {
+            Rest* rest   = static_cast<Rest*>(e);
+            if (rest->durationType().type() == Duration::V_MEASURE)
+                  _is.setDuration(Duration::V_QUARTER);
+            else
+                  _is.setDuration(rest->durationType());
+            _is.rest     = true;
+            _is.setTrack(rest->track());
+            _is.beamMode = rest->beamMode();
+            _is.noteType = NOTE_NORMAL;
+            }
+      else {
+/*            _is.rest     = false;
+            _is.setDots(0);
+            _is.setDuration(Duration::V_INVALID);
+            _is.noteType = NOTE_INVALID;
+            _is.beamMode = BEAM_INVALID;
+            _is.noteType = NOTE_NORMAL;
+*/
+            }
+      if (e->type() == NOTE || e->type() == REST) {
+            const Instrument* instr   = e->staff()->part()->instr();
+            if (instr->useDrumset()) {
+                  if (e->type() == NOTE)
+                        _is.setDrumNote(static_cast<Note*>(e)->pitch());
+                  else
+                        _is.setDrumNote(-1);
+//                  _is.setDrumset(instr->drumset());
+                  }
+            }
+//TODO-LIB      mscore->updateInputState(this);
       }
 
 

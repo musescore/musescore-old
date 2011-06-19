@@ -90,6 +90,28 @@
 #include "libmscore/mscore.h"
 
 //---------------------------------------------------------
+//   createDefaultFileName
+//---------------------------------------------------------
+
+static QString createDefaultFileName(QString fn)
+      {
+      //
+      // special characters in filenames are a constant source
+      // of trouble, this replaces some of them common in german:
+      //
+      fn = fn.replace(QChar(' '),  "_");
+      fn = fn.replace(QChar('\n'), "_");
+      fn = fn.replace(QChar(0xe4), "ae");
+      fn = fn.replace(QChar(0xf6), "oe");
+      fn = fn.replace(QChar(0xfc), "ue");
+      fn = fn.replace(QChar(0xdf), "ss");
+      fn = fn.replace(QChar(0xc4), "Ae");
+      fn = fn.replace(QChar(0xd6), "Oe");
+      fn = fn.replace(QChar(0xdc), "Ue");
+      return fn;
+      }
+
+//---------------------------------------------------------
 //   readScoreError
 //---------------------------------------------------------
 
@@ -234,23 +256,49 @@ void MuseScore::saveFile()
       if (cs == 0)
             return;
       cs->setSyntiState();
-      if (cs->saveFile(false)) {
-            setWindowTitle("MuseScore: " + cs->name());
-            int idx = scoreList.indexOf(cs);
-            tab1->setTabText(idx, cs->name());
-            if (tab2)
-                  tab2->setTabText(idx, cs->name());
-            QString tmp = cs->tmpName();
-            if (!tmp.isEmpty()) {
-                  QFile f(tmp);
-                  if (!f.remove())
-                        printf("cannot remove temporary file <%s>\n", qPrintable(f.fileName()));
-                  cs->setTmpName("");
-                  }
+      if (cs->created()) {
+            QString selectedFilter;
+            QString fn = cs->fileInfo()->baseName();
+            Text* t = cs->getText(TEXT_TITLE);
+            if (t)
+                  fn = t->getText();
+            QString name = createDefaultFileName(fn);
+            QString f1 = tr("Compressed MuseScore File (*.mscz)");
+            QString f2 = tr("MuseScore File (*.mscx)");
+
+            QString fname   = QString("%1.mscz").arg(name);
+            QString filter = f1 + ";;" + f2;
+            fn = mscore->getSaveScoreName(
+               tr("MuseScore: Save Score"),
+               fname,
+               filter,
+               &selectedFilter
+               );
+            if (fn.isEmpty())
+                  return;
+            cs->fileInfo()->setFile(fn);
+            updateRecentScores(cs);
+            cs->setCreated(false);
             writeSessionFile(false);
             }
+      if (!cs->saveFile(false)) {
+            QMessageBox::critical(mscore, tr("MuseScore: Save File"), MScore::lastError);
+            return;
+            }
+      setWindowTitle("MuseScore: " + cs->name());
+      int idx = scoreList.indexOf(cs);
+      tab1->setTabText(idx, cs->name());
+      if (tab2)
+            tab2->setTabText(idx, cs->name());
+      QString tmp = cs->tmpName();
+      if (!tmp.isEmpty()) {
+            QFile f(tmp);
+            if (!f.remove())
+                  printf("cannot remove temporary file <%s>\n", qPrintable(f.fileName()));
+            cs->setTmpName("");
+            }
+      writeSessionFile(false);
       }
-
 
 //---------------------------------------------------------
 //   createDefaultName
