@@ -1,3 +1,6 @@
+19.jun (lv)
+      - fix MusicXML import/export of notehead color
+      - add MusicXML testfile for noteheads
 14.jun (la)
       - add sol notehead
       - enhance plugin framework : chord.small, chord.noStem, rest.small, note.velocity, score.keysig
