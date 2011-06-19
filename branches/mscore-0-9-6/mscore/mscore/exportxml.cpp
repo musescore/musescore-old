@@ -2151,7 +2151,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool u
             QString noteheadTagname = QString("notehead");
             QColor noteheadColor = note->color();
             if(noteheadColor != preferences.defaultColor)
-                  noteheadTagname += " color=\"" + noteheadColor.name() + "\"";
+                  noteheadTagname += " color=\"" + noteheadColor.name().toUpper() + "\"";
             if (note->headGroup() == 5) {
                   xml.tag(noteheadTagname, "slash");
             } else if (note->headGroup() == 3) {

@@ -157,6 +157,7 @@ rwtestAllXml() {
       rwtestXml testMultiMeasureRest.xml
       rwtestXml testNoteAttributes1.xml
       rwtestXml testNoteAttributes2.xml
+      rwtestXml testNoteheads.xml
       rwtestXml testNotesRests1.xml
       rwtestXml testNotesRests2.xml
       rwtestXml testSystemBrackets1.xml

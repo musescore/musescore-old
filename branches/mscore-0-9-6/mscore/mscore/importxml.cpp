@@ -2762,7 +2762,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             Note* note = new Note(score);
             note->setHeadGroup(headGroup);
             note->setTrack(track);
-            note->setColor(noteheadColor);
+            if (noteheadColor != QColor::Invalid)
+                  note->setColor(noteheadColor);
             // note->setStaffMove(move);
 
             if (!fingering.isEmpty()) {
