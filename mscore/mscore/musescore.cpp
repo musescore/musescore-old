@@ -70,6 +70,7 @@
 #include "webpage.h"
 #include "selectdialog.h"
 #include "transposedialog.h"
+#include "metaedit.h"
 
 #include "libmscore/mscore.h"
 #include "libmscore/system.h"
@@ -2559,76 +2560,6 @@ void MuseScore::changeState(ScoreState val)
       }
 
 //---------------------------------------------------------
-//   Shortcut
-//---------------------------------------------------------
-
-Shortcut::Shortcut()
-      {
-      state       = STATE_NORMAL;
-      xml         = 0;
-      standardKey = QKeySequence::UnknownKey;
-      key         = 0;
-      context     = Qt::WindowShortcut;
-      icon        = -1;
-      action      = 0;
-      translated  = false;
-      }
-
-Shortcut::Shortcut(int s, const char* name, const char* d, const QKeySequence& k,
-   Qt::ShortcutContext cont, const char* txt, const char* h, int i)
-      {
-      state       = s;
-      xml         = name;
-      standardKey = QKeySequence::UnknownKey;
-      key         = k;
-      context     = cont;
-      icon        = i;
-      action      = 0;
-      descr       = qApp->translate("action", d);
-      help        = qApp->translate("action", h);
-      text        = qApp->translate("action", txt);
-      translated  = false;
-      }
-
-Shortcut::Shortcut(int s, const char* name, const char* d, QKeySequence::StandardKey sk,
-   Qt::ShortcutContext cont, const char* txt, const char* h, int i)
-      {
-      state       = s;
-      xml         = name;
-      standardKey = sk;
-      key         = 0;
-      context     = cont;
-      icon        = i;
-      action      = 0;
-      descr       = qApp->translate("action", d);
-      help        = qApp->translate("action", h);
-      text        = qApp->translate("action", txt);
-      translated  = false;
-      }
-
-Shortcut::Shortcut(const Shortcut& c)
-      {
-      state       = c.state;
-      xml         = c.xml;
-      standardKey = c.standardKey;
-      key         = c.key;
-      context     = c.context;
-      icon        = c.icon;
-      action      = c.action;
-      if (c.translated) {
-            descr   = c.descr;
-            help    = c.help;
-            text    = c.text;
-            }
-      else {
-            descr   = qApp->translate("action", c.descr.toUtf8().data());
-            help    = qApp->translate("action", c.help.toUtf8().data());
-            text    = qApp->translate("action", c.text.toUtf8().data());
-            translated = true;
-            }
-      }
-
-//---------------------------------------------------------
 //   writeSettings
 //---------------------------------------------------------
 
@@ -4186,10 +4117,11 @@ void MuseScore::cmd(QAction* a)
       if (inChordEditor)      // HACK
             return;
       static QAction* lastCmd;
+      static Shortcut* lastShortcut;
 
       QString cmdn(a->data().toString());
 
-      if (debugMode)
+//      if (debugMode)
             printf("MuseScore::cmd <%s>\n", cmdn.toAscii().data());
 
       Shortcut* sc = getShortcut(cmdn.toAscii().data());
@@ -4205,28 +4137,37 @@ void MuseScore::cmd(QAction* a)
             return;
             }
       if (cmdn == "repeat-cmd") {
-            a = lastCmd;
+            a  = lastCmd;
+            sc = lastShortcut;
             if (a == 0)
                   return;
             cmdn = a->data().toString();
             }
-      else
+      else {
             lastCmd = a;
-
-      bool scoreIsDirty = false;
-      if (cs) {
-            scoreIsDirty = cs->dirty();
+            lastShortcut = sc;
             }
+
+      if ((sc->flags & A_SCORE) && ! cs) {
+            printf("no score\n");
+            return;
+            }
+      if (sc->flags & A_CMD)
+            cs->startCmd();
+
+      bool scoreIsDirty = cs ? cs->dirty() : false;
+
       cmd(a, cmdn);
+
+      if (sc->flags & A_CMD)
+            cs->endCmd();
+
       if (cs) {
             if (!cs->noteEntryMode())
                   updateInputState(cs);
-//            else
-//TODO-LIB                  emit inputCursorChanged();
-
-printf("================end cmd================== %d %d dirty %d->%d\n",
-               _undoGroup->canUndo(), _undoGroup->canRedo(), scoreIsDirty, !_undoGroup->isClean());
-
+            else {
+                  cs->moveCursor();
+                  }
             updateUndoRedo();
             if (scoreIsDirty == _undoGroup->isClean()) {
                   cs->setDirty(!scoreIsDirty);
@@ -4286,12 +4227,10 @@ void MuseScore::cmd(QAction* a, const QString& cmd)
             loadFile();
       else if (cmd == "file-save")
             saveFile();
-      else if (cmd == "file-export") {
-            if (cs)
-                  cs->exportFile();
-            }
+      else if (cmd == "file-export")
+            cs->exportFile();
       else if (cmd == "file-reload") {
-            if (cs && !cs->created() && !checkDirty(cs)) {
+            if (!cs->created() && !checkDirty(cs)) {
                   if (cv->editMode()) {
                         cv->postCmd("escape");
                         qApp->processEvents();
@@ -4306,16 +4245,12 @@ void MuseScore::cmd(QAction* a, const QString& cmd)
       else if (cmd == "file-close")
             removeTab(scoreList.indexOf(cs));
       else if (cmd == "file-save-as") {
-            if (cs) {
-                  cs->setSyntiState();
-                  cs->saveAs(false);
-                  }
+            cs->setSyntiState();
+            cs->saveAs(false);
             }
       else if (cmd == "file-save-a-copy") {
-            if (cs) {
-                  cs->setSyntiState();
-                  cs->saveAs(true);
-                  }
+            cs->setSyntiState();
+            cs->saveAs(true);
             }
       else if (cmd == "file-new")
             newFile();
@@ -4338,9 +4273,8 @@ void MuseScore::cmd(QAction* a, const QString& cmd)
             showAlbumManager();
       else if (cmd == "layer")
             showLayerManager();
-      else if (cmd == "script-debug") {
+      else if (cmd == "script-debug")
             scriptDebug = a->isChecked();
-            }
       else if (cmd == "backspace")
             undo();
       else if (cmd == "zoomin")
@@ -4417,16 +4351,48 @@ void MuseScore::cmd(QAction* a, const QString& cmd)
       else if (cmd == "tuplet-dialog")
             tupletDialog();
       else if (cmd == "save-style") {
-            if (cs) {
-                  QString name = getStyleFilename(false);
-                  if (!name.isEmpty()) {
-                        if (!cs->saveStyle(name)) {
-                              QMessageBox::critical(this,
-                                 tr("MuseScore: save style"), MScore::lastError);
-                              }
+            QString name = getStyleFilename(false);
+            if (!name.isEmpty()) {
+                  if (!cs->saveStyle(name)) {
+                        QMessageBox::critical(this,
+                           tr("MuseScore: save style"), MScore::lastError);
                         }
                   }
             }
+      else if (cmd == "load-style") {
+            QString name = mscore->getStyleFilename(true);
+            if (!name.isEmpty()) {
+                  if (!cs->loadStyle(name)) {
+                        QMessageBox::critical(this,
+                           tr("MuseScore: load style"), MScore::lastError);
+                        }
+                  }
+            }
+      else if (cmd == "edit-style") {
+            EditStyle es(cs, 0);
+            es.exec();
+            }
+      else if (cmd == "edit-text-style") {
+            TextStyleDialog es(0, cs);
+            es.exec();
+            }
+      else if (cmd == "edit-meta") {
+            MetaEditDialog med(cs, 0);
+            med.exec();
+            }
+      else if (cmd == "print")
+            cs->printFile();
+      else if (cmd == "repeat") {
+            MScore::playRepeats = !MScore::playRepeats;
+            cs->updateRepeatList(MScore::playRepeats);
+            }
+      else if (cmd == "show-invisible")
+            cs->setShowInvisible(a->isChecked());
+      else if (cmd == "show-unprintable")
+            cs->setShowUnprintable(a->isChecked());
+      else if (cmd == "show-frames")
+            cs->setShowFrames(getAction(cmd.toLatin1().data())->isChecked());
+
       else {
             if (cv) {
                   cv->setFocus();

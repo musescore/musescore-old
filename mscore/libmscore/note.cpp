@@ -932,8 +932,6 @@ void Note::endDrag()
       if (_lineOffset == 0)
             return;
       int nLine;
-//      int nLine    = _line + _lineOffset;           // not so simple!
-//      _lineOffset  = 0;
       int staffIdx = chord()->staffIdx() + chord()->staffMove();
       Staff* staff = score()->staff(staffIdx);
       int nPitch;

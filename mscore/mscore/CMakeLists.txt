@@ -160,7 +160,7 @@ add_executable ( ${ExecutableName}
       fretproperties.cpp sectionbreakprop.cpp hairpinprop.cpp
       bendproperties.cpp tremolobarprop.cpp file.cpp keyb.cpp
       layer.cpp jumpproperties.cpp selectdialog.cpp
-      propertymenu.cpp imageproperties.cpp icon.cpp
+      propertymenu.cpp imageproperties.cpp icon.cpp shortcut.cpp
       ${OMR_FILES}
       ${AUDIO}
       )

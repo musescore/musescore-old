@@ -343,7 +343,6 @@ class Score {
 
       void cmdAddPitch(int note, bool addFlag);
 
-      void printFile();
       void addTempo();
       void addMetronome();
 
@@ -652,7 +651,7 @@ class Score {
       Style* style()                           { return &_style;                  }
       const Style* style() const               { return &_style;                  }
       void setStyle(const Style& s)            { _style = s;                      }
-      void loadStyle();
+      bool loadStyle(const QString&);
       bool saveStyle(const QString&);
 
       StyleVal style(StyleIdx idx) const       { return _style.value(idx);   }
@@ -854,6 +853,8 @@ class Score {
          bool trKeys, bool transposeChordNames, bool useDoubleSharpsFlats);
       void addViewer(MuseScoreView* v)      { viewer.append(v);   }
       void removeViewer(MuseScoreView* v)   { viewer.removeAll(v); }
+      void moveCursor();
+      void printFile();
       };
 
 extern Score* gscore;

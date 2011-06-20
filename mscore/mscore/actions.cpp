@@ -28,7 +28,8 @@
 
 Shortcut MuseScore::sc[] = {
       Shortcut(
-         STATE_INIT | STATE_DISABLED | STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY | STATE_SEARCH | STATE_FOTO,
+         STATE_ALL,
+         0,
          "local-help",
          QT_TRANSLATE_NOOP("action","Local handbook"),            // Appears in Edit > Preferences > Shortcuts
          Qt::Key_F1,
@@ -38,6 +39,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_DISABLED | STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
+         0,
          "file-open",
          QT_TRANSLATE_NOOP("action","File open"),
          QKeySequence::Open,
@@ -48,6 +50,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
+         0,
          "file-save",
          QT_TRANSLATE_NOOP("action","File save"),
          QKeySequence::Save,
@@ -58,6 +61,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
+         A_SCORE,
          "file-save-as",
          QT_TRANSLATE_NOOP("action","File save as"),
          QKeySequence::SaveAs,
@@ -68,6 +72,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
+         A_SCORE,
          "file-save-a-copy",
          QT_TRANSLATE_NOOP("action","File save a copy"),
          0,
@@ -77,6 +82,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
+         A_SCORE,
          "file-export",
          QT_TRANSLATE_NOOP("action","Export Score"),
          0,
@@ -87,6 +93,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
+         A_SCORE,
          "file-reload",
          QT_TRANSLATE_NOOP("action","File reload"),
          0,                         // no shortcut, its an destructive non undoable operation
@@ -96,6 +103,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
+         0,
          "file-close",
          QT_TRANSLATE_NOOP("action","File close"),
          QKeySequence::Close,
@@ -105,6 +113,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_DISABLED | STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
+         0,
          "file-new",
          QT_TRANSLATE_NOOP("action","File new"),
          Qt::CTRL+Qt::Key_N,
@@ -115,6 +124,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
+         A_SCORE,
          "print",
          QT_TRANSLATE_NOOP("action","Print"),
          Qt::CTRL+Qt::Key_P,
@@ -125,6 +135,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
+         0,
          "undo",
          QT_TRANSLATE_NOOP("action","Undo"),
          QKeySequence::Undo,      // Qt::CTRL+Qt::Key_Z, // QKeySequence::Undo,
@@ -135,6 +146,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
+         0,
          "redo",
          QT_TRANSLATE_NOOP("action","Redo"),
          QKeySequence::Redo,      // Qt::CTRL+Qt::SHIFT+Qt::Key_Z,    // QKeySequence::Redo,
@@ -145,6 +157,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
+         0,
          "cut",
          QT_TRANSLATE_NOOP("action","Cut"),
          Qt::CTRL+Qt::Key_X,        // QKeySequence::Cut,
@@ -155,6 +168,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_FOTO,
+         0,
          "copy",
          QT_TRANSLATE_NOOP("action","Copy"),
          Qt::CTRL+Qt::Key_C,        // QKeySequence::Copy,
@@ -165,6 +179,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
+         0,
          "paste",
          QT_TRANSLATE_NOOP("action","Paste"),
          Qt::CTRL+Qt::Key_V,        //  QKeySequence::Paste,
@@ -175,6 +190,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "instruments",
          QT_TRANSLATE_NOOP("action","Show instruments dialog"),
          Qt::Key_I,
@@ -184,6 +200,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "clefs",
          QT_TRANSLATE_NOOP("action","Show clefs palette"),
          Qt::Key_Y,
@@ -194,6 +211,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "keys",
          QT_TRANSLATE_NOOP("action","Show keys signatures palette"),
          Qt::Key_K,
@@ -204,6 +222,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "symbols",
          QT_TRANSLATE_NOOP("action","Show symbols palette"),
          Qt::Key_Z,
@@ -213,6 +232,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "times",
          QT_TRANSLATE_NOOP("action","Show time signatures palette"),
          Qt::Key_T,
@@ -222,6 +242,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "dynamics",
          QT_TRANSLATE_NOOP("action","Show dynamics palette"),
          Qt::Key_L,
@@ -231,6 +252,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "note-input",
          QT_TRANSLATE_NOOP("action","Note input mode"),
          Qt::Key_N,
@@ -241,6 +263,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "pitch-spell",
          QT_TRANSLATE_NOOP("action","Pitch spell"),
          0,
@@ -250,6 +273,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "interval1",
          QT_TRANSLATE_NOOP("action","Enter unison above"),
          Qt::ALT + Qt::Key_1,
@@ -259,6 +283,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "interval2",
          QT_TRANSLATE_NOOP("action","Enter second above"),
          Qt::ALT + Qt::Key_2,
@@ -268,6 +293,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "interval3",
          QT_TRANSLATE_NOOP("action","Enter third above"),
          Qt::ALT + Qt::Key_3,
@@ -277,6 +303,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "interval4",
          QT_TRANSLATE_NOOP("action","Enter fourth above"),
          Qt::ALT + Qt::Key_4,
@@ -286,6 +313,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "interval5",
          QT_TRANSLATE_NOOP("action","Enter fifth above"),
          Qt::ALT + Qt::Key_5,
@@ -295,6 +323,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "interval6",
          QT_TRANSLATE_NOOP("action","Enter sixth above"),
          Qt::ALT + Qt::Key_6,
@@ -304,6 +333,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "interval7",
          QT_TRANSLATE_NOOP("action","Enter seventh above"),
          Qt::ALT + Qt::Key_7,
@@ -313,6 +343,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "interval8",
          QT_TRANSLATE_NOOP("action","Enter octave above"),
          Qt::ALT + Qt::Key_8,
@@ -322,6 +353,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "interval9",
          QT_TRANSLATE_NOOP("action","Enter ninth above"),
          Qt::ALT + Qt::Key_9,
@@ -331,6 +363,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "interval-2",
          QT_TRANSLATE_NOOP("action","Enter second below"),
          Qt::SHIFT + Qt::Key_2,
@@ -340,6 +373,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "interval-3",
          QT_TRANSLATE_NOOP("action","Enter third below"),
          Qt::SHIFT + Qt::Key_3,
@@ -349,6 +383,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "interval-4",
          QT_TRANSLATE_NOOP("action","Enter fourth below"),
          Qt::SHIFT + Qt::Key_4,
@@ -358,6 +393,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "interval-5",
          QT_TRANSLATE_NOOP("action","Enter fifth below"),
          Qt::SHIFT + Qt::Key_5,
@@ -367,6 +403,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "interval-6",
          QT_TRANSLATE_NOOP("action","Enter sixth below"),
          Qt::SHIFT + Qt::Key_6,
@@ -376,6 +413,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "interval-7",
          QT_TRANSLATE_NOOP("action","Enter seventh below"),
          Qt::SHIFT + Qt::Key_7,
@@ -385,6 +423,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "interval-8",
          QT_TRANSLATE_NOOP("action","Enter octave below"),
          Qt::SHIFT + Qt::Key_8,
@@ -394,6 +433,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "interval-9",
          QT_TRANSLATE_NOOP("action","Enter ninth below"),
          Qt::SHIFT + Qt::Key_9,
@@ -403,6 +443,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "note-a",
          QT_TRANSLATE_NOOP("action","Enter note A"),
          Qt::Key_A,
@@ -412,6 +453,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "note-b",
          QT_TRANSLATE_NOOP("action","Enter note B"),
          Qt::Key_B,
@@ -421,6 +463,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "note-c",
          QT_TRANSLATE_NOOP("action","Enter note C"),
          Qt::Key_C,
@@ -430,6 +473,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "note-d",
          QT_TRANSLATE_NOOP("action","Enter note D"),
          Qt::Key_D,
@@ -439,6 +483,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "note-e",
          QT_TRANSLATE_NOOP("action","Enter note E"),
          Qt::Key_E,
@@ -448,6 +493,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "note-f",
          QT_TRANSLATE_NOOP("action","Enter note F"),
          Qt::Key_F,
@@ -457,6 +503,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "note-g",
          QT_TRANSLATE_NOOP("action","Enter note G"),
          Qt::Key_G,
@@ -466,6 +513,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "chord-a",
          QT_TRANSLATE_NOOP("action","Add note A to chord"),
          Qt::SHIFT + Qt::Key_A,
@@ -475,6 +523,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "chord-b",
          QT_TRANSLATE_NOOP("action","Add note B to chord"),
          Qt::SHIFT + Qt::Key_B,
@@ -484,6 +533,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "chord-c",
          QT_TRANSLATE_NOOP("action","Add note C to chord"),
          Qt::SHIFT + Qt::Key_C,
@@ -493,6 +543,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "chord-d",
          QT_TRANSLATE_NOOP("action","Add note D to chord"),
          Qt::SHIFT + Qt::Key_D,
@@ -502,6 +553,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "chord-e",
          QT_TRANSLATE_NOOP("action","Add note E to chord"),
          Qt::SHIFT + Qt::Key_E,
@@ -511,6 +563,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "chord-f",
          QT_TRANSLATE_NOOP("action","Add note F to chord"),
          Qt::SHIFT + Qt::Key_F,
@@ -520,6 +573,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "chord-g",
          QT_TRANSLATE_NOOP("action","Add note G to chord"),
          Qt::SHIFT + Qt::Key_G,
@@ -529,6 +583,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "insert-a",
          QT_TRANSLATE_NOOP("action","Insert note A"),
          Qt::CTRL + Qt::SHIFT + Qt::Key_A,
@@ -538,6 +593,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "insert-b",
          QT_TRANSLATE_NOOP("action","Insert note B"),
          Qt::CTRL + Qt::SHIFT + Qt::Key_B,
@@ -547,6 +603,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "insert-c",
          QT_TRANSLATE_NOOP("action","Insert note C"),
          Qt::CTRL + Qt::SHIFT + Qt::Key_C,
@@ -556,6 +613,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "insert-d",
          QT_TRANSLATE_NOOP("action","Insert note D"),
          Qt::CTRL + Qt::SHIFT + Qt::Key_D,
@@ -565,6 +623,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "insert-e",
          QT_TRANSLATE_NOOP("action","Insert note E"),
          Qt::CTRL + Qt::SHIFT + Qt::Key_E,
@@ -574,6 +633,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "insert-f",
          QT_TRANSLATE_NOOP("action","Insert note F"),
          Qt::CTRL + Qt::SHIFT + Qt::Key_F,
@@ -583,6 +643,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "insert-g",
          QT_TRANSLATE_NOOP("action","Insert note G"),
          Qt::CTRL + Qt::SHIFT + Qt::Key_G,
@@ -592,6 +653,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "rest",
          QT_TRANSLATE_NOOP("action","Enter rest"),
          Qt::Key_0,
@@ -602,6 +664,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "add-staccato",
          QT_TRANSLATE_NOOP("action","Add staccato"),
          Qt::SHIFT+Qt::Key_Period,
@@ -611,6 +674,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "add-tenuto",
          QT_TRANSLATE_NOOP("action","Add tenuto"),
          Qt::Key_Underscore,
@@ -620,6 +684,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "add-trill",
          QT_TRANSLATE_NOOP("action","Add trill"),
 	   0,
@@ -629,6 +694,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "stretch+",
          QT_TRANSLATE_NOOP("action","More stretch"),
          Qt::Key_BraceRight,
@@ -638,6 +704,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "stretch-",
          QT_TRANSLATE_NOOP("action","Less stretch"),
          Qt::Key_BraceLeft,
@@ -647,6 +714,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "reset-beammode",
          QT_TRANSLATE_NOOP("action","Reset Beam Mode"),
          0,
@@ -656,6 +724,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "flip",
          QT_TRANSLATE_NOOP("action","Flip direction"),
          Qt::Key_X,
@@ -666,6 +735,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "pitch-up",
          QT_TRANSLATE_NOOP("action","Pitch up"),
          Qt::Key_Up,
@@ -675,6 +745,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "pitch-up-diatonic",
          QT_TRANSLATE_NOOP("action","Diatonic pitch up"),
          Qt::SHIFT+Qt::Key_Up,
@@ -684,6 +755,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "pitch-up-octave",
          QT_TRANSLATE_NOOP("action","Pitch up octave"),
          Qt::CTRL + Qt::Key_Up,
@@ -693,6 +765,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "up-chord",
          QT_TRANSLATE_NOOP("action","Go to higher pitched note in chord"),
          Qt::ALT+Qt::Key_Up,
@@ -702,6 +775,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "top-chord",
          QT_TRANSLATE_NOOP("action","Go to top note in chord"),
          Qt::ALT+Qt::CTRL+Qt::Key_Up,
@@ -711,6 +785,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "move-up",
          QT_TRANSLATE_NOOP("action","Move up"),
          Qt::SHIFT+Qt::CTRL+Qt::Key_Up,
@@ -720,6 +795,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "pitch-down",
          QT_TRANSLATE_NOOP("action","Pitch down"),
          Qt::Key_Down,
@@ -729,6 +805,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "pitch-down-diatonic",
          QT_TRANSLATE_NOOP("action","Diatonic pitch down"),
          Qt::SHIFT+Qt::Key_Down,
@@ -738,6 +815,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "pitch-down-octave",
          QT_TRANSLATE_NOOP("action","Pitch down octave"),
          Qt::CTRL + Qt::Key_Down,
@@ -747,6 +825,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "down-chord",
          QT_TRANSLATE_NOOP("action","Go to lower pitched note in chord"),
          Qt::ALT+Qt::Key_Down,
@@ -756,6 +835,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "bottom-chord",
          QT_TRANSLATE_NOOP("action","Go to bottom note in chord"),
          Qt::ALT+Qt::CTRL+Qt::Key_Down,
@@ -765,6 +845,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "move-down",
          QT_TRANSLATE_NOOP("action","Move down"),
          Qt::SHIFT+Qt::CTRL+Qt::Key_Down,
@@ -774,6 +855,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "prev-chord",
          QT_TRANSLATE_NOOP("action","Previous chord"),
          Qt::Key_Left,
@@ -783,6 +865,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "prev-measure",
          QT_TRANSLATE_NOOP("action","Previous measure"),
          Qt::CTRL+Qt::Key_Left,
@@ -792,6 +875,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "next-chord",
          QT_TRANSLATE_NOOP("action","Next chord"),
          Qt::Key_Right,
@@ -801,6 +885,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "next-measure",
          QT_TRANSLATE_NOOP("action","Next measure"),
          Qt::CTRL+Qt::Key_Right,
@@ -810,6 +895,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL,
+         0,
          "select-prev-chord",
          QT_TRANSLATE_NOOP("action","Add previous chord to selection"),
          Qt::SHIFT+Qt::Key_Left,
@@ -819,6 +905,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL,
+         0,
          "select-prev-measure",
          QT_TRANSLATE_NOOP("action","Select to beginning of measure"),
          Qt::CTRL+Qt::SHIFT+Qt::Key_Left,
@@ -828,6 +915,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL,
+         0,
          "select-next-chord",
          QT_TRANSLATE_NOOP("action","Add next chord to selection"),
          Qt::SHIFT+Qt::Key_Right,
@@ -837,6 +925,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NOTE_ENTRY,
+         0,
          "move-right",
          QT_TRANSLATE_NOOP("action","Move chord/rest right"),
          Qt::SHIFT+Qt::Key_Right,
@@ -846,6 +935,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NOTE_ENTRY,
+         0,
          "move-left",
          QT_TRANSLATE_NOOP("action","Move chord/rest left"),
          Qt::SHIFT+Qt::Key_Left,
@@ -855,6 +945,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL,
+         0,
          "select-next-measure",
          QT_TRANSLATE_NOOP("action","Select to end of measure"),
          Qt::CTRL+Qt::SHIFT+Qt::Key_Right,
@@ -864,6 +955,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL,
+         0,
          "select-begin-line",
          QT_TRANSLATE_NOOP("action","Select to beginning of line"),
          Qt::SHIFT+Qt::Key_Home,
@@ -873,6 +965,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL,
+         0,
          "select-end-line",
          QT_TRANSLATE_NOOP("action","Select to end of line"),
          Qt::SHIFT+Qt::Key_End,
@@ -882,6 +975,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL,
+         0,
          "select-begin-score",
          QT_TRANSLATE_NOOP("action","Select to beginning of score"),
          Qt::CTRL+Qt::SHIFT+Qt::Key_Home,
@@ -891,6 +985,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL,
+         0,
          "select-end-score",
          QT_TRANSLATE_NOOP("action","Select to end of score"),
          Qt::CTRL+Qt::SHIFT+Qt::Key_End,
@@ -900,6 +995,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "select-staff-above",
          QT_TRANSLATE_NOOP("action","Add staff above to selection"),
          Qt::ALT+Qt::SHIFT+Qt::Key_Up,
@@ -909,6 +1005,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "select-staff-below",
          QT_TRANSLATE_NOOP("action","Add staff below to selection"),
          Qt::ALT+Qt::SHIFT+Qt::Key_Down,
@@ -918,6 +1015,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "page-prev",
          QT_TRANSLATE_NOOP("action","Page: previous"),
          Qt::Key_PageUp,
@@ -927,6 +1025,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "page-next",
          QT_TRANSLATE_NOOP("action","Page: next"),
          Qt::Key_PageDown,
@@ -936,6 +1035,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "page-top",
          QT_TRANSLATE_NOOP("action","Page: top"),
          Qt::Key_Home,
@@ -945,6 +1045,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "page-end",
          QT_TRANSLATE_NOOP("action","Page: end"),
          Qt::Key_End,
@@ -954,6 +1055,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "add-slur",
          QT_TRANSLATE_NOOP("action","Add slur"),
          Qt::Key_S,
@@ -963,6 +1065,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "add-hairpin",
          QT_TRANSLATE_NOOP("action","Crescendo"),
          Qt::Key_H,
@@ -972,6 +1075,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "add-hairpin-reverse",
          QT_TRANSLATE_NOOP("action","Decrescendo"),
          Qt::SHIFT+Qt::Key_H,
@@ -981,6 +1085,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY | STATE_SEARCH | STATE_FOTO,
+         0,
          "escape",
          QT_TRANSLATE_NOOP("action","Escape"),
          Qt::Key_Escape,
@@ -990,6 +1095,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "delete",
          QT_TRANSLATE_NOOP("action","Delete"),
          Qt::Key_Delete,
@@ -999,6 +1105,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL,
+         A_CMD,
          "time-delete",
          QT_TRANSLATE_NOOP("action","Timewise delete"),
          0, // Qt::CTRL + Qt::Key_Delete,
@@ -1008,6 +1115,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL,
+         A_CMD,
          "delete-measures",
          QT_TRANSLATE_NOOP("action","Delete selected measures"),
          Qt::CTRL + Qt::Key_Delete,
@@ -1017,6 +1125,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "append-measure",
          QT_TRANSLATE_NOOP("action","Append one measure"),      // Appears in Edit > Preferences > Shortcuts
          Qt::CTRL+Qt::Key_B,
@@ -1025,6 +1134,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "append-measures",
          QT_TRANSLATE_NOOP("action","Append measures"),
          Qt::CTRL+Qt::SHIFT+Qt::Key_B,
@@ -1033,6 +1143,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "insert-measure",
          QT_TRANSLATE_NOOP("action","Insert one measure"),
          Qt::Key_Insert,
@@ -1041,6 +1152,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "insert-measures",
          QT_TRANSLATE_NOOP("action","Insert measures"),
          Qt::CTRL+Qt::Key_Insert,
@@ -1049,6 +1161,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "insert-hbox",
          QT_TRANSLATE_NOOP("action","Insert horizontal frame"),
          0,
@@ -1057,6 +1170,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "insert-textframe",
          QT_TRANSLATE_NOOP("action","Insert text frame"),
          0,
@@ -1065,6 +1179,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "append-textframe",
          QT_TRANSLATE_NOOP("action","Append text frame"),
          0,
@@ -1073,6 +1188,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "insert-fretframe",
          QT_TRANSLATE_NOOP("action","Insert fret diagram frame"),
          0,
@@ -1081,6 +1197,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "insert-vbox",
          QT_TRANSLATE_NOOP("action","Insert vertical frame"),
          0,
@@ -1089,6 +1206,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "append-hbox",
          QT_TRANSLATE_NOOP("action","Append horizontal frame"),
          0,
@@ -1097,6 +1215,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "append-vbox",
          QT_TRANSLATE_NOOP("action","Append vertical frame"),
          0,
@@ -1105,6 +1224,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "duplet",
          QT_TRANSLATE_NOOP("action","Duplet"),
          Qt::CTRL+Qt::Key_2,
@@ -1113,6 +1233,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "triplet",
          QT_TRANSLATE_NOOP("action","Triplet"),
          Qt::CTRL+Qt::Key_3,
@@ -1121,6 +1242,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "quadruplet",
          QT_TRANSLATE_NOOP("action","Quadruplet"),
          Qt::CTRL+Qt::Key_4,
@@ -1129,6 +1251,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "quintuplet",
          QT_TRANSLATE_NOOP("action","Quintuplet"),
          Qt::CTRL+Qt::Key_5,
@@ -1137,6 +1260,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "sextuplet",
          QT_TRANSLATE_NOOP("action","Sextuplet"),
          Qt::CTRL+Qt::Key_6,
@@ -1145,6 +1269,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "septuplet",
          QT_TRANSLATE_NOOP("action","Septuplet"),
          Qt::CTRL+Qt::Key_7,
@@ -1153,6 +1278,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "octuplet",
          QT_TRANSLATE_NOOP("action","Octuplet"),
          Qt::CTRL+Qt::Key_8,
@@ -1161,6 +1287,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "nonuplet",
          QT_TRANSLATE_NOOP("action","Nonuplet"),
          Qt::CTRL+Qt::Key_9,
@@ -1169,6 +1296,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "tuplet-dialog",
          QT_TRANSLATE_NOOP("action","Other tuplets"),
          0,
@@ -1177,6 +1305,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "note-longa",
          QT_TRANSLATE_NOOP("action","Note duration: longa"),
          Qt::Key_9,
@@ -1187,6 +1316,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "note-breve",
          QT_TRANSLATE_NOOP("action","Note duration: breve"),
          Qt::Key_8,
@@ -1197,6 +1327,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "pad-note-1",
          QT_TRANSLATE_NOOP("action","Note duration: whole"),
          Qt::Key_7,
@@ -1207,6 +1338,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "pad-note-2",
          QT_TRANSLATE_NOOP("action","Note duration: half"),
          Qt::Key_6,
@@ -1217,6 +1349,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "pad-note-4",
          QT_TRANSLATE_NOOP("action","Note duration: quarter"),
          Qt::Key_5,
@@ -1227,6 +1360,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "pad-note-8",
          QT_TRANSLATE_NOOP("action","Note duration: 8th"),
          Qt::Key_4,
@@ -1237,6 +1371,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "pad-note-16",
          QT_TRANSLATE_NOOP("action","Note duration: 16th"),
          Qt::Key_3,
@@ -1247,6 +1382,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "pad-note-32",
          QT_TRANSLATE_NOOP("action","Note duration: 32nd"),
          Qt::Key_2,
@@ -1257,6 +1393,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "pad-note-64",
          QT_TRANSLATE_NOOP("action","Note duration: 64th"),
          Qt::Key_1,
@@ -1267,6 +1404,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "pad-note-128",
          QT_TRANSLATE_NOOP("action","Note duration: 128th"),
          0,
@@ -1277,6 +1415,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "pad-dot",
          QT_TRANSLATE_NOOP("action","Note duration: augmentation dot"),
          Qt::Key_Period,
@@ -1287,6 +1426,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "pad-dotdot",
          QT_TRANSLATE_NOOP("action","Note duration: double augmentation dot"),
          0,
@@ -1297,6 +1437,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "tie",
          QT_TRANSLATE_NOOP("action","Note duration: tie"),
          Qt::Key_Plus,
@@ -1307,6 +1448,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "pad-rest",
          QT_TRANSLATE_NOOP("action","Note entry: rest"),
          0,
@@ -1317,6 +1459,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "sharp2",
          QT_TRANSLATE_NOOP("action","Note entry: double sharp"),
          0,
@@ -1327,6 +1470,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "sharp",
          QT_TRANSLATE_NOOP("action","Note entry: sharp"),
          0,
@@ -1337,6 +1481,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "nat",
          QT_TRANSLATE_NOOP("action","Note entry: natural"),
          0,
@@ -1347,6 +1492,7 @@ Shortcut MuseScore::sc[] = {
          ),
        Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "flat",
          QT_TRANSLATE_NOOP("action","Note entry: flat"),
          Qt::Key_Minus,
@@ -1357,6 +1503,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "flat2",
          QT_TRANSLATE_NOOP("action","Note entry: double flat"),
          0,
@@ -1367,6 +1514,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "acciaccatura",
          QT_TRANSLATE_NOOP("action","Acciaccatura"),
          Qt::Key_Slash,
@@ -1377,6 +1525,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "appoggiatura",
          QT_TRANSLATE_NOOP("action","Appoggiatura"),
          0,
@@ -1387,6 +1536,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
 	 /* no stroke: 4th*/
         "grace4",
         QT_TRANSLATE_NOOP("action","Grace: quarter"),
@@ -1398,6 +1548,7 @@ Shortcut MuseScore::sc[] = {
         ),
      Shortcut(
         STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
       /* no stroke: 16th*/
         "grace16",
         QT_TRANSLATE_NOOP("action","Grace: 16th"),
@@ -1409,6 +1560,7 @@ Shortcut MuseScore::sc[] = {
         ),
      Shortcut(
         STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
       /* no stroke: 32th*/
         "grace32",
         QT_TRANSLATE_NOOP("action","Grace: 32nd"),
@@ -1420,6 +1572,7 @@ Shortcut MuseScore::sc[] = {
         ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "voice-1",
          QT_TRANSLATE_NOOP("action","Voice 1"),
          QKeySequence(Qt::CTRL+Qt::ALT+Qt::Key_1),
@@ -1430,6 +1583,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "voice-2",
          QT_TRANSLATE_NOOP("action","Voice 2"),
          QKeySequence(Qt::CTRL+Qt::ALT+Qt::Key_2),
@@ -1440,6 +1594,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "voice-3",
          QT_TRANSLATE_NOOP("action","Voice 3"),
          QKeySequence(Qt::CTRL+Qt::ALT+Qt::Key_3),
@@ -1450,6 +1605,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "voice-4",
          QT_TRANSLATE_NOOP("action","Voice 4"),
          QKeySequence(Qt::CTRL+Qt::ALT+Qt::Key_4),
@@ -1460,6 +1616,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "midi-on",
          QT_TRANSLATE_NOOP("action","MIDI input"),
          0,
@@ -1470,6 +1627,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "sound-on",
          QT_TRANSLATE_NOOP("action","Editing sound on"),
          0,
@@ -1480,6 +1638,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "beam-start",
          QT_TRANSLATE_NOOP("action","Beam start"),
          0,
@@ -1490,6 +1649,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "beam-mid",
          QT_TRANSLATE_NOOP("action","Beam middle"),
          0,
@@ -1500,6 +1660,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "no-beam",
          QT_TRANSLATE_NOOP("action","No beam"),
          0,
@@ -1510,6 +1671,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "beam32",
          QT_TRANSLATE_NOOP("action","Beam 32nd sub"),
          0,
@@ -1520,6 +1682,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "beam64",
          QT_TRANSLATE_NOOP("action","Beam 64th sub"),
          0,
@@ -1530,6 +1693,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "auto-beam",
          QT_TRANSLATE_NOOP("action","Auto beam"),
          0,
@@ -1540,6 +1704,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "fbeam1",
          QT_TRANSLATE_NOOP("action","Feathered beam, slower"),
          0,
@@ -1550,6 +1715,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "fbeam2",
          QT_TRANSLATE_NOOP("action","Feathered beam, faster"),
          0,
@@ -1560,6 +1726,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
+         0,
          "toggle-palette",
          QT_TRANSLATE_NOOP("action","Palette"),
 #ifdef Q_WS_MAC
@@ -1573,6 +1740,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
+         0,
          "toggle-playpanel",
          QT_TRANSLATE_NOOP("action","Play panel"),
 #ifdef Q_WS_MAC
@@ -1586,6 +1754,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
+         0,
          "toggle-navigator",
          QT_TRANSLATE_NOOP("action","Navigator"),
 #ifdef Q_WS_MAC
@@ -1602,8 +1771,9 @@ Shortcut MuseScore::sc[] = {
          //Avoid conflict with M in text
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
 #else
-		 STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
+	   STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
 #endif
+         0,
          "toggle-mixer",
          QT_TRANSLATE_NOOP("action","Mixer"),
 #ifdef Q_WS_MAC
@@ -1618,6 +1788,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
+         0,
          "toggle-transport",
          QT_TRANSLATE_NOOP("action","Transport toolbar"),
          0,
@@ -1627,6 +1798,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
+         0,
          "toggle-noteinput",
          QT_TRANSLATE_NOOP("action","Note input toolbar"),
          0,
@@ -1636,6 +1808,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
+         0,
          "toggle-statusbar",
          QT_TRANSLATE_NOOP("action","Status bar"),
          0,
@@ -1646,6 +1819,7 @@ Shortcut MuseScore::sc[] = {
 
       Shortcut(
          STATE_DISABLED | STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY | STATE_FOTO,
+         0,
          "quit",
          QT_TRANSLATE_NOOP("action","Quit"),
          Qt::CTRL + Qt::Key_Q,
@@ -1656,6 +1830,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
+         0,
          "mag",
          QT_TRANSLATE_NOOP("action","Zoom canvas"),
          0,
@@ -1666,6 +1841,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "lyrics",
          QT_TRANSLATE_NOOP("action","Lyrics"),
          Qt::CTRL + Qt::Key_L,
@@ -1675,6 +1851,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "fingering",
          QT_TRANSLATE_NOOP("action","Fingering palette"),
          0,
@@ -1684,6 +1861,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "tempo",
          QT_TRANSLATE_NOOP("action","Tempo"),
          Qt::CTRL+Qt::ALT + Qt::Key_T,
@@ -1694,6 +1872,7 @@ Shortcut MuseScore::sc[] = {
 #if 0
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "metronome",
          QT_TRANSLATE_NOOP("action","Metronome"),
          Qt::CTRL+Qt::ALT + Qt::Key_M,
@@ -1704,6 +1883,7 @@ Shortcut MuseScore::sc[] = {
 #endif
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "system-text",
          QT_TRANSLATE_NOOP("action","Add system text"),
          Qt::CTRL + Qt::SHIFT + Qt::Key_T,
@@ -1713,6 +1893,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "staff-text",
          QT_TRANSLATE_NOOP("action","Add staff text"),
          Qt::CTRL + Qt::Key_T,
@@ -1722,6 +1903,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL,
+         0,
          "frame-text",
          QT_TRANSLATE_NOOP("action","Add text"),
          0,
@@ -1731,6 +1913,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "title-text",
          QT_TRANSLATE_NOOP("action","Add title text"),
          0,
@@ -1740,6 +1923,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "subtitle-text",
          QT_TRANSLATE_NOOP("action","Add subtitle text"),
          0,
@@ -1749,6 +1933,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "composer-text",
          QT_TRANSLATE_NOOP("action","Add composer text"),
          0,
@@ -1758,6 +1943,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "poet-text",
          QT_TRANSLATE_NOOP("action","Add lyricist text"),
          0,
@@ -1767,6 +1953,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "chord-text",
          QT_TRANSLATE_NOOP("action","Add chord name"),
          Qt::CTRL + Qt::Key_K,
@@ -1776,6 +1963,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "harmony-properties",
          QT_TRANSLATE_NOOP("action","Show harmony properties for chord"),
          Qt::SHIFT+Qt::Key_K,
@@ -1785,6 +1973,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "rehearsalmark-text",
          QT_TRANSLATE_NOOP("action","Add rehearsal mark"),
          Qt::CTRL + Qt::Key_M,
@@ -1794,6 +1983,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "picture",
          QT_TRANSLATE_NOOP("action","Add picture"),
          0,
@@ -1803,6 +1993,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
+         0,
          "play",
          QT_TRANSLATE_NOOP("action","Player play"),
          Qt::Key_Space,
@@ -1813,6 +2004,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_PLAY,
+         0,
          "play-prev-chord",
          QT_TRANSLATE_NOOP("action","Previous chord"),
          Qt::Key_Left,
@@ -1822,6 +2014,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_PLAY,
+         0,
          "play-prev-measure",
          QT_TRANSLATE_NOOP("action","Previous measure"),
          Qt::CTRL+Qt::Key_Left,
@@ -1831,6 +2024,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_PLAY,
+         0,
          "play-next-chord",
          QT_TRANSLATE_NOOP("action","Next chord"),
          Qt::Key_Right,
@@ -1840,6 +2034,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_PLAY,
+         0,
          "play-next-measure",
          QT_TRANSLATE_NOOP("action","Next measure"),
          Qt::CTRL+Qt::Key_Right,
@@ -1849,6 +2044,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_PLAY,
+         0,
          "seek-begin",
          QT_TRANSLATE_NOOP("action","Player seek to begin"),
          Qt::Key_Home,
@@ -1858,6 +2054,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
+         0,
          "rewind",
          QT_TRANSLATE_NOOP("action","Player rewind"),
          0,
@@ -1868,6 +2065,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_PLAY,
+         0,
          "seek-end",
          QT_TRANSLATE_NOOP("action","Player seek to end"),
          Qt::Key_End,
@@ -1877,6 +2075,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL,
+         A_SCORE,
          "repeat",
          QT_TRANSLATE_NOOP("action","Play repeats on/off"),
          0,
@@ -1887,6 +2086,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
+         A_SCORE,
          "load-style",
          QT_TRANSLATE_NOOP("action","Load style"),
          0,
@@ -1897,6 +2097,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
+         A_SCORE,
          "save-style",
          QT_TRANSLATE_NOOP("action","Save style"),
          0,
@@ -1907,6 +2108,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut (
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
+         A_CMD,
          "select-all",
          QT_TRANSLATE_NOOP("action","Select all"),
          Qt::CTRL+Qt::Key_A,
@@ -1916,6 +2118,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut (
          STATE_NORMAL,
+         0,
          "transpose",
          QT_TRANSLATE_NOOP("action","Transpose"),
          0,
@@ -1925,6 +2128,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut (
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "clef-violin",
          QT_TRANSLATE_NOOP("action","Violin clef"),
          QKeySequence(Qt::CTRL+Qt::Key_Y, Qt::CTRL+Qt::Key_1),
@@ -1934,6 +2138,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut (
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "clef-bass",
          QT_TRANSLATE_NOOP("action","Bass clef"),
          QKeySequence(Qt::CTRL+Qt::Key_Y, Qt::CTRL+Qt::Key_2),
@@ -1943,6 +2148,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut (
          STATE_NORMAL,
+         A_CMD,
          "voice-x12",
          QT_TRANSLATE_NOOP("action","Exchange Voice 1-2"),
          0,
@@ -1952,6 +2158,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut (
          STATE_NORMAL,
+         A_CMD,
          "voice-x13",
          QT_TRANSLATE_NOOP("action","Exchange voice 1-3"),
          0,
@@ -1961,6 +2168,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut (
          STATE_NORMAL,
+         A_CMD,
          "voice-x14",
          QT_TRANSLATE_NOOP("action","Exchange voice 1-4"),
          0,
@@ -1970,6 +2178,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut (
          STATE_NORMAL,
+         A_CMD,
          "voice-x23",
          QT_TRANSLATE_NOOP("action","Exchange voice 2-3"),
          0,
@@ -1979,6 +2188,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut (
          STATE_NORMAL,
+         A_CMD,
          "voice-x24",
          QT_TRANSLATE_NOOP("action","Exchange voice 2-4"),
          0,
@@ -1988,6 +2198,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut (
          STATE_NORMAL,
+         A_CMD,
          "voice-x34",
          QT_TRANSLATE_NOOP("action","Exchange voice 3-4"),
          0,
@@ -1997,6 +2208,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut (
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "concert-pitch",
          QT_TRANSLATE_NOOP("action","Display in concert pitch"),
          0,
@@ -2006,6 +2218,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "repeat-cmd",
          QT_TRANSLATE_NOOP("action","Repeat last command"),
          0,
@@ -2016,6 +2229,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_SCORE,
          "edit-meta",
          QT_TRANSLATE_NOOP("action","Edit score meta data"),
          0,
@@ -2025,6 +2239,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "system-break",
          QT_TRANSLATE_NOOP("action","Toggle system break"),
          Qt::Key_Return,
@@ -2034,6 +2249,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "page-break",
          QT_TRANSLATE_NOOP("action","Toggle page break"),
          Qt::CTRL+Qt::Key_Return,
@@ -2043,6 +2259,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "section-break",
          QT_TRANSLATE_NOOP("action","Toggle section break"),
          0,
@@ -2052,6 +2269,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL,
+         0,
          "edit-element",
          QT_TRANSLATE_NOOP("action","Edit element"),
          Qt::CTRL+Qt::Key_E,
@@ -2061,6 +2279,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_EDIT,
+         0,
          "reset-positions",
          QT_TRANSLATE_NOOP("action","Reset positions"),
          Qt::CTRL+Qt::Key_R,
@@ -2070,6 +2289,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
+         0,
          "inspector",
          QT_TRANSLATE_NOOP("action","Show inspector"),
          0,
@@ -2079,6 +2299,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "reset-stretch",
          QT_TRANSLATE_NOOP("action","Reset measure stretch"),
          0,
@@ -2088,6 +2309,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_SCORE,
          "show-invisible",
          QT_TRANSLATE_NOOP("action","Show invisible"),
          0,
@@ -2097,6 +2319,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_SCORE,
          "show-unprintable",
          QT_TRANSLATE_NOOP("action","Show unprintable"),
          0,
@@ -2106,6 +2329,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_SCORE,
          "show-frames",
          QT_TRANSLATE_NOOP("action","Show frames"),
          0,
@@ -2115,6 +2339,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_EDIT,
+         0,
          "show-keys",
          QT_TRANSLATE_NOOP("action","Insert text symbol"),
          Qt::Key_F2,
@@ -2125,6 +2350,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
+         0,
          "script-debug",
          QT_TRANSLATE_NOOP("action","Enable script debugger"),
          0,
@@ -2134,6 +2360,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "rest-1",
          QT_TRANSLATE_NOOP("action","Note entry: whole rest"),
          QKeySequence(Qt::SHIFT+Qt::Key_R, Qt::SHIFT+Qt::Key_S),
@@ -2143,6 +2370,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "rest-2",
          QT_TRANSLATE_NOOP("action","Note entry: half rest"),
          QKeySequence(Qt::SHIFT+Qt::Key_R, Qt::SHIFT+Qt::Key_M),
@@ -2152,6 +2380,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "rest-4",
          QT_TRANSLATE_NOOP("action","Note entry: quarter rest"),
          QKeySequence(Qt::SHIFT+Qt::Key_R, Qt::SHIFT+Qt::Key_R),
@@ -2161,6 +2390,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "rest-8",
          QT_TRANSLATE_NOOP("action","Note entry: 8th rest"),
          QKeySequence(Qt::SHIFT+Qt::Key_R, Qt::SHIFT+Qt::Key_Q),
@@ -2170,6 +2400,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(                     // mapped to undo in note entry mode
          STATE_NOTE_ENTRY,
+         0,
          "backspace",
          QT_TRANSLATE_NOOP("action","Backspace"),
          QKeySequence(Qt::Key_Backspace),    // QKeySequence::Back,
@@ -2179,6 +2410,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_SEARCH,
+         0,
          "find",
          QT_TRANSLATE_NOOP("action","Search"),
          QKeySequence::Find,        // Qt::CTRL + Qt::Key_F,
@@ -2188,6 +2420,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
+         0,
          "zoomin",
          QT_TRANSLATE_NOOP("action","Zoom in"),
          Qt::CTRL + Qt::Key_Plus,
@@ -2199,6 +2432,7 @@ Shortcut MuseScore::sc[] = {
          // STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
 
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "zoomout",
          QT_TRANSLATE_NOOP("action","Zoom out"),
          Qt::CTRL + Qt::Key_Minus,
@@ -2207,6 +2441,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_CMD,
          "mirror-note",
          QT_TRANSLATE_NOOP("action","Mirror note head"),
          Qt::SHIFT + Qt::Key_X,
@@ -2217,6 +2452,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_SCORE,
          "edit-style",
          QT_TRANSLATE_NOOP("action","Edit general style"),
          0,
@@ -2226,6 +2462,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         A_SCORE,
          "edit-text-style",
          QT_TRANSLATE_NOOP("action","Edit text style"),
          0,
@@ -2235,6 +2472,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "edit-harmony",
          QT_TRANSLATE_NOOP("action","Edit chord style"),
          0,
@@ -2244,6 +2482,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "select-similar",
          QT_TRANSLATE_NOOP("action","Select all similar elements"),
          0,
@@ -2253,6 +2492,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "select-similar-staff",
          QT_TRANSLATE_NOOP("action","Select all similar elements in same staff"),
          0,
@@ -2262,6 +2502,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
+         0,
          "synth-control",
          QT_TRANSLATE_NOOP("action","Synthesizer"),
          0,
@@ -2271,6 +2512,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NOTE_ENTRY,
+         A_CMD,
          "double-duration",
          QT_TRANSLATE_NOOP("action","Double duration"),
          QKeySequence(Qt::Key_W),
@@ -2280,6 +2522,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NOTE_ENTRY,
+         A_CMD,
          "half-duration",
          QT_TRANSLATE_NOOP("action","Half duration"),
          QKeySequence(Qt::Key_Q),
@@ -2289,6 +2532,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "repeat-sel",
          QT_TRANSLATE_NOOP("action","Repeat selection"),
          Qt::Key_R,
@@ -2299,6 +2543,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
+         0,
          "follow",
          QT_TRANSLATE_NOOP("action","Follow song"),
          0,
@@ -2308,6 +2553,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
+         0,
          "split-h",
          QT_TRANSLATE_NOOP("action","Display documents side by side"),
          0,
@@ -2317,6 +2563,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
+         0,
          "split-v",
          QT_TRANSLATE_NOOP("action","Display documents stacked"),
          0,
@@ -2326,6 +2573,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
+         0,
          "parts",
          QT_TRANSLATE_NOOP("action","Parts..."),
          0,
@@ -2335,6 +2583,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
+         0,
          "show-omr",
          QT_TRANSLATE_NOOP("action","Show score image"),
          0,
@@ -2344,6 +2593,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "enh-up",
          QT_TRANSLATE_NOOP("action","Enharmonic up"),
          Qt::Key_J,
@@ -2353,6 +2603,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "enh-down",
          QT_TRANSLATE_NOOP("action","Enharmonic down"),
          Qt::CTRL+Qt::Key_J,
@@ -2362,6 +2613,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL,
+         0,
          "revision",
          QT_TRANSLATE_NOOP("action","Create new revision"),
 	   Qt::CTRL+Qt::Key_F11,
@@ -2371,6 +2623,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_FOTO,
+         0,
          "fotomode",
          QT_TRANSLATE_NOOP("action","Toggle foto mode"),
 	   0,
@@ -2381,6 +2634,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_EDIT,
+         0,
          "toggle-styled",
          QT_TRANSLATE_NOOP("action","Toggle styled"),
 	   0,
@@ -2390,6 +2644,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_ALL,
+         A_CMD,
          "add-audio",
          QT_TRANSLATE_NOOP("action","Add audio track"),
 	   0,
@@ -2399,6 +2654,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "show-omr",
          QT_TRANSLATE_NOOP("action","Show OMR scan"),
 	   Qt::Key_O,
@@ -2408,6 +2664,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_ALL,
+         0,
          "fullscreen",
          QT_TRANSLATE_NOOP("action","Full screen"),
 	   Qt::CTRL + Qt::Key_U,
@@ -2417,6 +2674,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
+         0,
          "hraster",
          QT_TRANSLATE_NOOP("action","Enable horizontal raster"),
 	   0,
@@ -2427,6 +2685,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
+         0,
          "vraster",
          QT_TRANSLATE_NOOP("action","Enable vertical raster"),
 	   0,
@@ -2437,6 +2696,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
+         0,
          "config-raster",
          QT_TRANSLATE_NOOP("action","Configure raster"),
 	   0,
@@ -2446,6 +2706,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NOTE_ENTRY,
+         A_CMD,
          "repitch",
          QT_TRANSLATE_NOOP("action","Re-pitch mode"),
 	   Qt::CTRL + Qt::SHIFT + Qt::Key_I,
@@ -2456,6 +2717,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         0,
          "stack-down",
          QT_TRANSLATE_NOOP("action","Stack down"),
          Qt::SHIFT + Qt::Key_Z,
@@ -2465,6 +2727,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_ALL,
+         0,
          "toogle-piano",
          QT_TRANSLATE_NOOP("action","Piano keyboard"),
          Qt::Key_P,
@@ -2474,6 +2737,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY | STATE_FOTO,
+         0,
          "media",
          QT_TRANSLATE_NOOP("action","Show media dialog"),
          0,
@@ -2483,6 +2747,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL,
+         0,
          "split-measure",
          QT_TRANSLATE_NOOP("action","Split Measure"),
          0,
@@ -2492,6 +2757,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL,
+         0,
          "join-measure",
          QT_TRANSLATE_NOOP("action","Join Measure"),
          0,
@@ -2501,6 +2767,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY | STATE_FOTO,
+         0,
          "page-settings",
          QT_TRANSLATE_NOOP("action","Page Settings"),
          0,
@@ -2510,6 +2777,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL,
+         0,
          "album",
          QT_TRANSLATE_NOOP("action","Album"),
          0,
@@ -2519,6 +2787,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL,
+         0,
          "layer",
          QT_TRANSLATE_NOOP("action","Layer"),
          0,
@@ -2528,6 +2797,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL,
+         0,
          "next-score",
          QT_TRANSLATE_NOOP("action","next score"),
          QKeySequence::NextChild,
@@ -2537,6 +2807,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL,
+         0,
          "previous-score",
          QT_TRANSLATE_NOOP("action","previous score"),
 #if defined(Q_WS_WIN)
@@ -2551,6 +2822,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL,
+         0,
          "online-resources",
          QT_TRANSLATE_NOOP("action","Online Resources"),
          Qt::Key_F7,
@@ -2559,6 +2831,6 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Online resources")
          ),
       // xml==0  marks end of list
-      Shortcut(0, 0, 0, QKeySequence::UnknownKey)
+      Shortcut(0, 0, 0, 0, QKeySequence::UnknownKey)
       };
 

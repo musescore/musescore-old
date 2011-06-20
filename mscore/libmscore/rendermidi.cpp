@@ -413,6 +413,7 @@ void Score::updateRepeatList(bool expandRepeats)
             repeatList()->unwind();
       if (debugMode)
             repeatList()->dump();
+      setPlaylistDirty(true);
       }
 
 //---------------------------------------------------------
