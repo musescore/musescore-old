@@ -347,6 +347,7 @@ class ScoreView : public QWidget, public MuseScoreView {
 
       void search(const QString& s);
       void search(int i);
+      void selectMeasure(int m);
       void postCmd(const char* cmd)   { sm->postEvent(new CommandEvent(cmd));  }
       void setFocusRect();
       Element* getDragElement() const { return dragElement; }
