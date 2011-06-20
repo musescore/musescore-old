@@ -72,7 +72,16 @@ bool Score::saveAudio(const QString& name, const QString& ext, QString soundFont
       for (int pass = 0; pass < 2; ++pass) {
             Synth* synth = new FluidS::Fluid();
             synth->init(sampleRate);
+            
+            synth->setMasterTuning(preferences.tuning);
+            synth->setMasterGain(preferences.masterGain);
+            synth->setEffectParameter(0, 0, preferences.reverbRoomSize);
+            synth->setEffectParameter(0, 1, preferences.reverbDamp);
+            synth->setEffectParameter(0, 2, preferences.reverbWidth);
+            synth->setEffectParameter(0, 3, preferences.reverbGain);
 
+            synth->setEffectParameter(1, 4, preferences.chorusGain);
+            
             if (soundFont.isEmpty()) {
                   if (!preferences.soundFont.isEmpty())
                         soundFont = preferences.soundFont;

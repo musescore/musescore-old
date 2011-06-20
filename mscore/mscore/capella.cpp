@@ -951,11 +951,12 @@ void Capella::readLayout()
 
 void Capella::readExtra()
       {
-      unsigned char n = readByte();
-      if (n)
+      uchar n = readByte();
+      if (n) {
             printf("Capella::readExtra(%d)\n", n);
-      for (int i = 0; i < n; ++i)
-            readByte();
+            for (int i = 0; i < n; ++i)
+                  readByte();
+            }
       }
 
 //---------------------------------------------------------
@@ -1016,11 +1017,17 @@ void CapKey::read()
 
 void CapMeter::read()
       {
-      numerator       = cap->readByte();
-      unsigned char d = cap->readByte();
-      log2Denom       = (d & 0x7f) - 1;
-      allaBreve       = d & 0x80;
-// printf("         Meter %d/%d allaBreve %d\n", numerator, log2Denom, allaBreve);
+      numerator = cap->readByte();
+      uchar d   = cap->readByte();
+      log2Denom = (d & 0x7f) - 1;
+      allaBreve = d & 0x80;
+      if (log2Denom > 7 || log2Denom < 0) {
+            printf("   Meter %d/%d allaBreve %d\n", numerator, log2Denom, allaBreve);
+            printf("   illegal fraction\n");
+            // abort();
+            log2Denom = 2;
+            numerator = 4;
+            }
       }
 
 //---------------------------------------------------------
@@ -1078,7 +1085,7 @@ void Capella::readVoice(CapStaff* cs, int idx)
       unsigned nNoteObjs = readUnsigned();          // Notenobjekte
       for (unsigned i = 0; i < nNoteObjs; i++) {
             QColor color       = Qt::black;
-            unsigned char type = readByte();
+            uchar type = readByte();
             readExtra();
             if (type != T_REST && type != T_CHORD && type != T_PAGE_BKGR)
                   color = readColor();
@@ -1531,7 +1538,7 @@ int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
                   case T_METER:
                         {
                         CapMeter* o = static_cast<CapMeter*>(no);
-                        if (o->log2Denom > 7)
+                        if (o->log2Denom > 7 || o->log2Denom < 0)
                               break;
                         AL::SigEvent se = sigmap()->timesig(tick);
                         AL::SigEvent ne(Fraction(o->numerator, 1 << o->log2Denom));

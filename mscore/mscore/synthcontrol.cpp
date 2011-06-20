@@ -42,15 +42,15 @@ SynthControl::SynthControl(Synth* s, QWidget* parent)
       chorus->setId(4);
 
       soundFont->setText(preferences.soundFont);
-      masterTuning->setValue(synth->masterTuning());
-      setMasterGain(synth->masterGain());
+      masterTuning->setValue(preferences.tuning);
+      setMasterGain(preferences.masterGain);
 
-      reverb->setValue(synth->effectParameter(0, 3));
-      roomSizeBox->setValue(synth->effectParameter(0, 0));
-      dampBox->setValue(synth->effectParameter(0, 1));
-      widthBox->setValue(synth->effectParameter(0, 2));
+      reverb->setValue(preferences.reverbGain);
+      roomSizeBox->setValue(preferences.reverbRoomSize);
+      dampBox->setValue(preferences.reverbDamp);
+      widthBox->setValue(preferences.reverbWidth);
 
-      chorus->setValue(synth->effectParameter(1, 4));
+      chorus->setValue(preferences.chorusGain);
       chorusSpeed->setValue(synth->effectParameter(1, 1));
       chorusDepth->setValue(synth->effectParameter(1, 2));
 
