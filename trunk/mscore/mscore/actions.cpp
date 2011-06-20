@@ -2821,7 +2821,7 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","previous score")
          ),
       Shortcut(
-         STATE_NORMAL,
+         STATE_INIT | STATE_DISABLED | STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY | STATE_SEARCH | STATE_FOTO,
          0,
          "online-resources",
          QT_TRANSLATE_NOOP("action","Online Resources"),

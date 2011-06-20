@@ -3348,6 +3348,8 @@ void MuseScore::initOsc()
       QObject::connect(oo, SIGNAL(data(int)), SLOT(oscNextMeasure()));
       oo = new PathObject( "/goto", QVariant::Int, osc);
       QObject::connect(oo, SIGNAL(data(int)), SLOT(oscGoto(int)));
+      oo = new PathObject( "/select-measure", QVariant::Int, osc);
+      QObject::connect(oo, SIGNAL(data(int)), SLOT(oscSelectMeasure(int)));
       for(int i=1; i <=12; i++ ) {
             oo = new PathObject( QString("/vol%1").arg(i), QVariant::Double, osc);
             QObject::connect(oo, SIGNAL(data(double)), SLOT(oscVolChannel(double)));
@@ -3407,6 +3409,14 @@ void MuseScore::oscGoto(int m)
       if (cv == 0)
             return;
       cv->search(m);
+      }
+      
+void MuseScore::oscSelectMeasure(int m)
+      {
+      printf("SelectMeasure %d\n", m);
+      if (cv == 0)
+            return;
+      cv->selectMeasure(m);
       }
 
 //---------------------------------------------------------

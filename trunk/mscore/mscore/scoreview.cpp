@@ -5339,6 +5339,31 @@ void ScoreView::cmdRepeatSelection()
       }
 
 //---------------------------------------------------------
+//   cmdRepeatSelection
+//---------------------------------------------------------
+
+void ScoreView::selectMeasure(int n)
+      {
+      int i = 0;
+      for (Measure* measure = _score->firstMeasure(); measure; measure = measure->nextMeasure()) {
+            if (++i < n)
+                  continue;
+            _score->selection().setState(SEL_RANGE);
+            _score->selection().setStartSegment(measure->first());
+            _score->selection().setEndSegment(measure->last());
+            _score->selection().setStaffStart(0);
+            _score->selection().setStaffEnd(_score->nstaves());
+            _score->selection().updateSelectedElements();
+            _score->selection().setState(SEL_RANGE);
+            _score->addRefresh(measure->abbox());
+            adjustCanvasPosition(measure, true);
+            _score->setUpdateAll(true);
+            _score->end();
+            break;
+            }
+      }
+
+//---------------------------------------------------------
 //   search
 //---------------------------------------------------------
 
