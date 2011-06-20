@@ -29,6 +29,7 @@
 #include "ui_aboutbox.h"
 #include <QtSingleApplication>
 #include "updatechecker.h"
+#include "shortcut.h"
 
 class ScoreView;
 class Element;
@@ -138,35 +139,6 @@ class MeasuresDialog : public QDialog, public Ui::MeasuresDialogBase {
 
    public:
       MeasuresDialog(QWidget* parent = 0);
-      };
-
-//---------------------------------------------------------
-//   Shortcut
-//    hold the basic values for configurable shortcuts
-//---------------------------------------------------------
-
-class Shortcut {
-   public:
-      int state;              //! shortcut is valid in this Mscore state
-      const char* xml;        //! xml tag name for configuration file
-      QString descr;          //! descriptor, shown in editor
-      QKeySequence key;       //! shortcut
-      QKeySequence::StandardKey standardKey;
-      Qt::ShortcutContext context;
-      QString text;           //! text as shown on buttons or menus
-      QString help;           //! ballon help
-      int icon;
-      QAction* action;        //! cached action
-      bool translated;
-
-      Shortcut();
-      Shortcut(int state, const char* name, const char* d, QKeySequence::StandardKey sk = QKeySequence::UnknownKey,
-         Qt::ShortcutContext cont = Qt::ApplicationShortcut,
-         const char* txt = 0, const char* h = 0, int i = -1);
-      Shortcut(int state, const char* name, const char* d, const QKeySequence& k = QKeySequence(),
-         Qt::ShortcutContext cont = Qt::ApplicationShortcut,
-         const char* txt = 0, const char* h = 0, int i = -1);
-      Shortcut(const Shortcut& c);
       };
 
 //---------------------------------------------------------

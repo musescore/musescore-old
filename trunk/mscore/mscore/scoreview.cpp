@@ -2707,14 +2707,12 @@ void ScoreView::cmd(const QAction* a)
             sm->postEvent(new CommandEvent(cmd));
             }
       else if (cmd == "lyrics") {
-            _score->startCmd();
             Lyrics* lyrics = _score->addLyrics();
             if (lyrics) {
                   _score->setLayoutAll(true);
                   startEdit(lyrics);
                   return;     // no endCmd()
                   }
-            _score->endCmd();
             }
       else if (cmd == "mag")
             sm->postEvent(new CommandEvent(cmd));

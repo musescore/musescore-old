@@ -848,28 +848,18 @@ void Score::saveFile(QFileInfo& info, bool autosave)
 //   loadStyle
 //---------------------------------------------------------
 
-void Score::loadStyle()
+bool Score::loadStyle(const QString& fn)
       {
-#if 0 // TODO-LIB
-      QString fn = mscore->getStyleFilename(true);
-      if (fn.isEmpty())
-            return;
-
       QFile f(fn);
       if (f.open(QIODevice::ReadOnly)) {
             Style st(*MScore::defaultStyle());
             if (st.load(&f)) {
                   _undo->push(new ChangeStyle(this, st));
-                  return;
+                  return true;
                   }
             }
-      else {
-            QMessageBox::warning(0,
-               QWidget::tr("MuseScore: Load Style failed:"),
-               QString(strerror(errno)),
-               QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
-            }
-#endif
+      MScore::lastError = strerror(errno);
+      return false;
       }
 
 //---------------------------------------------------------

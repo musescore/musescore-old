@@ -2886,7 +2886,6 @@ void Score::padToggle(int n)
                   cmdSetBeamMode(BEAM_BEGIN32);
                   break;
             }
-//TODO-LIB      mscore->updateInputState(this);
       if (n < PAD_NOTE00 || n > PAD_DOTDOT)
             return;
 
@@ -2901,7 +2900,6 @@ void Score::padToggle(int n)
             }
 
       if (noteEntryMode() || !selection().isSingle()) {
-//TODO-LIB            mscore->updateInputState(this);    // updates dot state
             return;
             }
 
@@ -2912,7 +2910,6 @@ void Score::padToggle(int n)
             Duration d = r->durationType();
             if (d.type() == Duration::V_MEASURE) {
                   _is.setDots(0);
-//TODO-LIB                  mscore->updateInputState(this);    // updates dot state
                   // return;
                   }
             }
@@ -2990,7 +2987,7 @@ void Score::setInputState(Element* e)
 //                  _is.setDrumset(instr->drumset());
                   }
             }
-//TODO-LIB      mscore->updateInputState(this);
+//      mscore->updateInputState(this);
       }
 
 

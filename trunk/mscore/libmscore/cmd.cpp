@@ -58,8 +58,6 @@
 #include "system.h"
 #include "stafftext.h"
 #include "articulation.h"
-// #include "metaedit.h"
-// #include "chordedit.h"
 #include "layoutbreak.h"
 #include "drumset.h"
 #include "beam.h"
@@ -70,8 +68,6 @@
 #include "al/tempo.h"
 #include "al/sig.h"
 #include "undo.h"
-// #include "editstyle.h"
-// #include "textstyle.h"
 #include "timesig.h"
 #include "repeat.h"
 #include "tempotext.h"
@@ -161,6 +157,8 @@ void Score::end1()
             _updateAll = true;
             _needLayout = true;
             }
+      if (_needLayout)
+            doLayout();
       if (_updateAll) {
             foreach(MuseScoreView* v, viewer)
                   v->updateAll();
@@ -172,12 +170,20 @@ void Score::end1()
             foreach(MuseScoreView* v, viewer)
                   v->dataChanged(refresh);
             }
-      if (_needLayout)
-            doLayout();
       refresh     = QRectF();
       layoutAll   = false;
       _updateAll  = false;
       startLayout = 0;
+      }
+
+//---------------------------------------------------------
+//   moveCursor
+//---------------------------------------------------------
+
+void Score::moveCursor()
+      {
+      foreach(MuseScoreView* v, viewer)
+            v->moveCursor();
       }
 
 //---------------------------------------------------------
@@ -1571,335 +1577,6 @@ void Score::cmdResetBeamMode()
       }
 
 //---------------------------------------------------------
-//   cmd
-//---------------------------------------------------------
-
-void Score::cmd(const QAction* a)
-      {
-      QString cmd(a ? a->data().toString() : "");
-      if (debugMode)
-            printf("Score::cmd <%s>\n", qPrintable(cmd));
-
-      if (cmd == "print")
-            printFile();
-      else if (cmd == "repeat") {
-            MScore::playRepeats = !MScore::playRepeats;
-            updateRepeatList(MScore::playRepeats);
-            _playlistDirty = true;
-            }
-      else if (cmd == "edit-meta") {
-/*TODO-LIB            MetaEditDialog med(this, 0);
-            med.exec();
-            */
-            }
-      else if (cmd == "show-invisible") {
-            setShowInvisible(a->isChecked());
-            _updateAll = true;
-            end();
-            }
-      else if (cmd == "show-unprintable") {
-            setShowUnprintable(a->isChecked());
-            _updateAll = true;
-            end();
-            }
-      else if (cmd == "show-frames") {
-//TODO-LIB            setShowFrames(getAction(cmd.toLatin1().data())->isChecked());
-            _updateAll = true;
-            end();
-            }
-      else {
-            if (undo()->active()) {
-                  printf("Score::cmd(): cmd already active\n");
-                  return;
-                  }
-            startCmd();
-
-            //
-            // Hack for moving articulations while selected
-            //
-            Element* el = selection().element();
-            if (cmd == "pitch-up") {
-                  if (el && (el->type() == ARTICULATION || el->type() == FINGERING))
-                        undoMove(el, el->userOff() + QPointF(0.0, -MScore::nudgeStep * el->spatium()));
-                  else if (el && el->type() == REST)
-                        cmdMoveRest(static_cast<Rest*>(el), UP);
-                  else if (el && el->type() == LYRICS)
-                        cmdMoveLyrics(static_cast<Lyrics*>(el), UP);
-                  else
-                        upDown(true, UP_DOWN_CHROMATIC);
-                  }
-            else if (cmd == "pitch-down") {
-                  if (el && (el->type() == ARTICULATION || el->type() == FINGERING))
-                        undoMove(el, el->userOff() + QPointF(0.0, MScore::nudgeStep * el->spatium()));
-                  else if (el && el->type() == REST)
-                        cmdMoveRest(static_cast<Rest*>(el), DOWN);
-                  else if (el && el->type() == LYRICS)
-                        cmdMoveLyrics(static_cast<Lyrics*>(el), DOWN);
-                  else
-                        upDown(false, UP_DOWN_CHROMATIC);
-                  }
-	      else if (cmd == "add-staccato")
-                  addArticulation(StaccatoSym);
-	      else if (cmd == "add-tenuto")
-                  addArticulation(TenutoSym);
-	      else if (cmd == "add-trill")
-                  addArticulation(TrillSym);
-            else if (cmd == "add-hairpin")
-                  cmdAddHairpin(false);
-            else if (cmd == "add-hairpin-reverse")
-                  cmdAddHairpin(true);
-            else if (cmd == "delete")
-                  cmdDeleteSelection();
-            else if (cmd == "delete-measures")
-                  cmdDeleteSelectedMeasures();
-            else if (cmd == "time-delete") {
-                  // TODO:
-                  // remove measures if stave-range is 0-nstaves()
-                  cmdDeleteSelectedMeasures();
-                  }
-            else if (cmd == "pitch-up-octave")
-                  upDown(true, UP_DOWN_OCTAVE);
-            else if (cmd == "pitch-down-octave")
-                  upDown(false, UP_DOWN_OCTAVE);
-            else if (cmd == "pitch-up-diatonic")
-                  upDown(true, UP_DOWN_DIATONIC);
-            else if (cmd == "pitch-down-diatonic")
-                  upDown(false, UP_DOWN_DIATONIC);
-            else if (cmd == "move-up") {
-                  setLayoutAll(false);
-                  Element* el = selection().element(); // single selection
-                  if (el && el->type() == NOTE) {
-                        Note* note = static_cast<Note*>(el);
-                        moveUp(note->chord());
-                        }
-                  }
-            else if (cmd == "move-down") {
-                  setLayoutAll(false);
-                  Element* el = selection().element(); // single selection
-                  if (el && el->type() == NOTE) {
-                        Note* note = static_cast<Note*>(el);
-                        moveDown(note->chord());
-                        }
-                  }
-            else if (cmd == "up-chord") {
-                  Element* el = selection().element(); // single selection
-                  if (el && (el->type() == NOTE || el->type() == REST)) {
-                        Element* e = upAlt(el);
-                        if (e) {
-//TODO-LIB                              if (e->type() == NOTE) {
-//                                    _is.pitch = static_cast<Note*>(e)->pitch();
-//                                    mscore->play(e);
-//                                    }
-                              select(e, SELECT_SINGLE, 0);
-                              }
-                        }
-                  setLayoutAll(false);
-                  }
-            else if (cmd == "down-chord") {
-                  Element* el = selection().element(); // single selection
-                  if (el && (el->type() == NOTE || el->type() == REST)) {
-                        Element* e = downAlt(el);
-                        if (e) {
-//TODO-LIB                              if (e->type() == NOTE) {
-//                                    _is.pitch = static_cast<Note*>(e)->pitch();
-//                                    mscore->play(e);
-//                                    }
-                              select(e, SELECT_SINGLE, 0);
-                              }
-                        }
-                  setLayoutAll(false);
-                  }
-            else if (cmd == "top-chord" ) {
-                  Element* el = selection().element(); // single selection
-                  if (el && el->type() == NOTE) {
-                        Element* e = upAltCtrl(static_cast<Note*>(el));
-                        if (e) {
-//TODO-LIB                              if (e->type() == NOTE) {
-//                                    _is.pitch = static_cast<Note*>(e)->pitch();
-//                                    mscore->play(e);
-//                                    }
-                              select(e, SELECT_SINGLE, 0);
-                              }
-                        }
-                  setLayoutAll(false);
-                  }
-            else if (cmd == "bottom-chord") {
-                  Element* el = selection().element(); // single selection
-                  if (el && el->type() == NOTE) {
-                        Element* e = downAltCtrl(static_cast<Note*>(el));
-                        if (e) {
-//TODO-LIB                              if (e->type() == NOTE) {
-//                                    _is.pitch = static_cast<Note*>(e)->pitch();
-//                                    mscore->play(e);
-//                                    }
-                              select(e, SELECT_SINGLE, 0);
-                              }
-                        }
-                  setLayoutAll(false);
-                  }
-            else if (cmd == "note-longa")
-                  padToggle(PAD_NOTE00);
-            else if (cmd == "note-breve")
-                  padToggle(PAD_NOTE0);
-            else if (cmd == "pad-note-1")
-                  padToggle(PAD_NOTE1);
-            else if (cmd == "pad-note-2")
-                  padToggle(PAD_NOTE2);
-            else if (cmd == "pad-note-4")
-                  padToggle(PAD_NOTE4);
-            else if (cmd == "pad-note-8")
-                  padToggle(PAD_NOTE8);
-            else if (cmd == "pad-note-16")
-                  padToggle(PAD_NOTE16);
-            else if (cmd == "pad-note-32")
-                  padToggle(PAD_NOTE32);
-            else if (cmd == "pad-note-64")
-                  padToggle(PAD_NOTE64);
-            else if (cmd == "pad-note-128")
-                  padToggle(PAD_NOTE128);
-            else if (cmd == "pad-rest")
-                  padToggle(PAD_REST);
-            else if (cmd == "pad-dot")
-                  padToggle(PAD_DOT);
-            else if (cmd == "pad-dotdot")
-                  padToggle(PAD_DOTDOT);
-            else if (cmd == "beam-start")
-                  padToggle(PAD_BEAM_START);
-            else if (cmd == "beam-mid")
-                  padToggle(PAD_BEAM_MID);
-            else if (cmd == "no-beam")
-                  padToggle(PAD_BEAM_NO);
-            else if (cmd == "beam-32")
-                  padToggle(PAD_BEAM32);
-            else if (cmd == "sharp2")
-                  changeAccidental(ACC_SHARP2);
-            else if (cmd == "sharp")
-                  changeAccidental(ACC_SHARP);
-            else if (cmd == "nat")
-                  changeAccidental(ACC_NATURAL);
-            else if (cmd == "flat")
-                  changeAccidental(ACC_FLAT);
-            else if (cmd == "flat2")
-                  changeAccidental(ACC_FLAT2);
-            else if (cmd == "repitch")
-                  _is.setRepitchMode(a->isChecked());
-            else if (cmd == "flip")
-                  cmdFlip();
-            else if (cmd == "stretch+")
-                  cmdAddStretch(0.1);
-            else if (cmd == "stretch-")
-                  cmdAddStretch(-0.1);
-            else if (cmd == "tempo")
-                  addTempo();
-            else if (cmd == "metronome")
-                  addMetronome();
-            else if (cmd == "pitch-spell")
-                  spell();
-            else if (cmd == "harmony-properties")
-                  cmdAddChordName2();
-            else if (cmd == "select-all") {
-                  MeasureBase* mb = _measures.last();
-                  if (mb) {   // check for empty score
-                        _selection.setState(SEL_RANGE);
-                        int tick = mb->tick();
-                        if (mb->type() == MEASURE)
-                              tick += static_cast<Measure*>(mb)->ticks();
-                        Segment* s1 = tick2segment(0);
-                        Segment* s2 = tick2segment(tick);
-                        _selection.setRange(s1, s2, 0, nstaves());
-                        _selection.updateSelectedElements();
-                        setUpdateAll(true);
-                        end();
-                        }
-                  else
-                        printf("no measures?\n");
-                  }
-            else if (cmd == "concert-pitch") {
-                  if (styleB(ST_concertPitch) != a->isChecked())
-                        cmdConcertPitchChanged(a->isChecked(), true);
-                  }
-            else if (cmd == "reset-beammode")
-                  cmdResetBeamMode();
-            else if (cmd == "clef-violin")
-                  cmdInsertClef(CLEF_G);
-            else if (cmd == "clef-bass")
-                  cmdInsertClef(CLEF_F);
-            else if (cmd == "load-style") {
-                  loadStyle();
-                  }
-            else if (cmd == "voice-x12")
-                  cmdExchangeVoice(0, 1);
-            else if (cmd == "voice-x13")
-                  cmdExchangeVoice(0, 2);
-            else if (cmd == "voice-x14")
-                  cmdExchangeVoice(0, 3);
-            else if (cmd == "voice-x23")
-                  cmdExchangeVoice(1, 2);
-            else if (cmd == "voice-x24")
-                  cmdExchangeVoice(1, 3);
-            else if (cmd == "voice-x34")
-                  cmdExchangeVoice(2, 3);
-            else if (cmd == "system-break" || cmd == "page-break" || cmd == "section-break") {
-                  int type;
-                  if (cmd == "system-break")
-                        type = LAYOUT_BREAK_LINE;
-                  else if (cmd == "page-break")
-                        type = LAYOUT_BREAK_PAGE;
-                  else
-                        type = LAYOUT_BREAK_SECTION;
-
-                  Element* e = selection().element();
-                  if (e && e->type() == BAR_LINE) {
-                        BarLine* barline = static_cast<BarLine*>(e);
-                        Measure* measure = barline->measure();
-                        if (!measure->lineBreak()) {
-                              LayoutBreak* lb = new LayoutBreak(this);
-                              lb->setSubtype(type);
-                              lb->setTrack(-1);       // this are system elements
-                              lb->setParent(measure);
-                              undoAddElement(lb);
-                              }
-                        else {
-                              // remove line break
-                              foreach(Element* e, *measure->el()) {
-                                    if (e->type() == LAYOUT_BREAK && e->subtype() ==type) {
-                                          undoRemoveElement(e);
-                                          break;
-                                          }
-                                    }
-                              }
-                        }
-                  }
-            else if (cmd == "reset-stretch")
-                  resetUserStretch();
-            else if (cmd == "mirror-note")
-                  cmdMirrorNoteHead();
-            else if (cmd == "edit-style") {
-//TODO-LIB                  EditStyle es(this, 0);
-//                  es.exec();
-                  }
-            else if (cmd == "edit-text-style") {
-//TODO-LIB                  TextStyleDialog es(0, this);
-//                  es.exec();
-                  }
-            else if (cmd == "double-duration")
-                  cmdDoubleDuration();
-            else if (cmd == "half-duration")
-                  cmdHalfDuration();
-            else if (cmd == "") {               //Midi note received only?
-                  if (!noteEntryMode())
-                        setLayoutAll(false);
-                  }
-            else if (cmd == "add-audio")
-                  addAudioTrack();
-            else
-                  printf("1unknown cmd <%s>\n", qPrintable(cmd));
-
-            endCmd();
-            }
-      }
-
-//---------------------------------------------------------
 //   processMidiInput
 //---------------------------------------------------------
 
@@ -2798,4 +2475,286 @@ void Score::cmdMoveLyrics(Lyrics* lyrics, Direction dir)
                   }
             }
       }
+
+//---------------------------------------------------------
+//   cmd
+//---------------------------------------------------------
+
+void Score::cmd(const QAction* a)
+      {
+      QString cmd(a ? a->data().toString() : "");
+      if (debugMode)
+            printf("Score::cmd <%s>\n", qPrintable(cmd));
+
+      //
+      // Hack for moving articulations while selected
+      //
+      Element* el = selection().element();
+      if (cmd == "pitch-up") {
+            if (el && (el->type() == ARTICULATION || el->type() == FINGERING))
+                  undoMove(el, el->userOff() + QPointF(0.0, -MScore::nudgeStep * el->spatium()));
+            else if (el && el->type() == REST)
+                  cmdMoveRest(static_cast<Rest*>(el), UP);
+            else if (el && el->type() == LYRICS)
+                  cmdMoveLyrics(static_cast<Lyrics*>(el), UP);
+            else
+                  upDown(true, UP_DOWN_CHROMATIC);
+            }
+      else if (cmd == "pitch-down") {
+            if (el && (el->type() == ARTICULATION || el->type() == FINGERING))
+                  undoMove(el, el->userOff() + QPointF(0.0, MScore::nudgeStep * el->spatium()));
+            else if (el && el->type() == REST)
+                  cmdMoveRest(static_cast<Rest*>(el), DOWN);
+            else if (el && el->type() == LYRICS)
+                  cmdMoveLyrics(static_cast<Lyrics*>(el), DOWN);
+            else
+                  upDown(false, UP_DOWN_CHROMATIC);
+            }
+	else if (cmd == "add-staccato")
+            addArticulation(StaccatoSym);
+	else if (cmd == "add-tenuto")
+            addArticulation(TenutoSym);
+	else if (cmd == "add-trill")
+            addArticulation(TrillSym);
+      else if (cmd == "add-hairpin")
+            cmdAddHairpin(false);
+      else if (cmd == "add-hairpin-reverse")
+            cmdAddHairpin(true);
+      else if (cmd == "delete")
+            cmdDeleteSelection();
+      else if (cmd == "delete-measures")
+            cmdDeleteSelectedMeasures();
+      else if (cmd == "time-delete") {
+            // TODO:
+            // remove measures if stave-range is 0-nstaves()
+            cmdDeleteSelectedMeasures();
+            }
+      else if (cmd == "pitch-up-octave")
+            upDown(true, UP_DOWN_OCTAVE);
+      else if (cmd == "pitch-down-octave")
+            upDown(false, UP_DOWN_OCTAVE);
+      else if (cmd == "pitch-up-diatonic")
+            upDown(true, UP_DOWN_DIATONIC);
+      else if (cmd == "pitch-down-diatonic")
+            upDown(false, UP_DOWN_DIATONIC);
+      else if (cmd == "move-up") {
+            setLayoutAll(false);
+            Element* el = selection().element(); // single selection
+            if (el && el->type() == NOTE) {
+                  Note* note = static_cast<Note*>(el);
+                  moveUp(note->chord());
+                  }
+            }
+      else if (cmd == "move-down") {
+            setLayoutAll(false);
+            Element* el = selection().element(); // single selection
+            if (el && el->type() == NOTE) {
+                  Note* note = static_cast<Note*>(el);
+                  moveDown(note->chord());
+                  }
+            }
+      else if (cmd == "up-chord") {
+            Element* el = selection().element(); // single selection
+            if (el && (el->type() == NOTE || el->type() == REST)) {
+                  Element* e = upAlt(el);
+                  if (e) {
+                        if (e->type() == NOTE) {
+                              _is.pitch = static_cast<Note*>(e)->pitch();
+//TODO-LIB                    mscore->play(e);
+                              }
+                        select(e, SELECT_SINGLE, 0);
+                        }
+                  }
+            setLayoutAll(false);
+            }
+      else if (cmd == "down-chord") {
+            Element* el = selection().element(); // single selection
+            if (el && (el->type() == NOTE || el->type() == REST)) {
+                  Element* e = downAlt(el);
+                  if (e) {
+                        if (e->type() == NOTE) {
+                              _is.pitch = static_cast<Note*>(e)->pitch();
+//TODO-LIB                    mscore->play(e);
+                              }
+                        select(e, SELECT_SINGLE, 0);
+                        }
+                  }
+            setLayoutAll(false);
+            }
+      else if (cmd == "top-chord" ) {
+            Element* el = selection().element(); // single selection
+            if (el && el->type() == NOTE) {
+                  Element* e = upAltCtrl(static_cast<Note*>(el));
+                  if (e) {
+                        if (e->type() == NOTE) {
+                              _is.pitch = static_cast<Note*>(e)->pitch();
+//TODO-LIB                    mscore->play(e);
+                              }
+                        select(e, SELECT_SINGLE, 0);
+                        }
+                  }
+            setLayoutAll(false);
+            }
+      else if (cmd == "bottom-chord") {
+            Element* el = selection().element(); // single selection
+            if (el && el->type() == NOTE) {
+                  Element* e = downAltCtrl(static_cast<Note*>(el));
+                  if (e) {
+                        if (e->type() == NOTE) {
+                              _is.pitch = static_cast<Note*>(e)->pitch();
+//TODO-LIB                    mscore->play(e);
+                        }
+                        select(e, SELECT_SINGLE, 0);
+                        }
+                  }
+            setLayoutAll(false);
+            }
+      else if (cmd == "note-longa")
+            padToggle(PAD_NOTE00);
+      else if (cmd == "note-breve")
+            padToggle(PAD_NOTE0);
+      else if (cmd == "pad-note-1")
+            padToggle(PAD_NOTE1);
+      else if (cmd == "pad-note-2")
+            padToggle(PAD_NOTE2);
+      else if (cmd == "pad-note-4")
+            padToggle(PAD_NOTE4);
+      else if (cmd == "pad-note-8")
+            padToggle(PAD_NOTE8);
+      else if (cmd == "pad-note-16")
+            padToggle(PAD_NOTE16);
+      else if (cmd == "pad-note-32")
+            padToggle(PAD_NOTE32);
+      else if (cmd == "pad-note-64")
+            padToggle(PAD_NOTE64);
+      else if (cmd == "pad-note-128")
+            padToggle(PAD_NOTE128);
+      else if (cmd == "pad-rest")
+            padToggle(PAD_REST);
+      else if (cmd == "pad-dot")
+            padToggle(PAD_DOT);
+      else if (cmd == "pad-dotdot")
+            padToggle(PAD_DOTDOT);
+      else if (cmd == "beam-start")
+            padToggle(PAD_BEAM_START);
+      else if (cmd == "beam-mid")
+            padToggle(PAD_BEAM_MID);
+      else if (cmd == "no-beam")
+            padToggle(PAD_BEAM_NO);
+      else if (cmd == "beam-32")
+            padToggle(PAD_BEAM32);
+      else if (cmd == "sharp2")
+            changeAccidental(ACC_SHARP2);
+      else if (cmd == "sharp")
+            changeAccidental(ACC_SHARP);
+      else if (cmd == "nat")
+            changeAccidental(ACC_NATURAL);
+      else if (cmd == "flat")
+            changeAccidental(ACC_FLAT);
+      else if (cmd == "flat2")
+            changeAccidental(ACC_FLAT2);
+      else if (cmd == "repitch")
+            _is.setRepitchMode(a->isChecked());
+      else if (cmd == "flip")
+            cmdFlip();
+      else if (cmd == "stretch+")
+            cmdAddStretch(0.1);
+      else if (cmd == "stretch-")
+            cmdAddStretch(-0.1);
+      else if (cmd == "tempo")
+            addTempo();
+      else if (cmd == "metronome")
+            addMetronome();
+      else if (cmd == "pitch-spell")
+            spell();
+      else if (cmd == "harmony-properties")
+            cmdAddChordName2();
+      else if (cmd == "select-all") {
+            MeasureBase* mb = _measures.last();
+            if (mb) {   // check for empty score
+                  _selection.setState(SEL_RANGE);
+                  int tick = mb->tick();
+                  if (mb->type() == MEASURE)
+                        tick += static_cast<Measure*>(mb)->ticks();
+                  Segment* s1 = tick2segment(0);
+                  Segment* s2 = tick2segment(tick);
+                  _selection.setRange(s1, s2, 0, nstaves());
+                  _selection.updateSelectedElements();
+                  setUpdateAll(true);
+                  end();
+                  }
+            else
+                  printf("no measures?\n");
+            }
+      else if (cmd == "concert-pitch") {
+            if (styleB(ST_concertPitch) != a->isChecked())
+                  cmdConcertPitchChanged(a->isChecked(), true);
+            }
+      else if (cmd == "reset-beammode")
+            cmdResetBeamMode();
+      else if (cmd == "clef-violin")
+            cmdInsertClef(CLEF_G);
+      else if (cmd == "clef-bass")
+            cmdInsertClef(CLEF_F);
+      else if (cmd == "voice-x12")
+            cmdExchangeVoice(0, 1);
+      else if (cmd == "voice-x13")
+            cmdExchangeVoice(0, 2);
+      else if (cmd == "voice-x14")
+            cmdExchangeVoice(0, 3);
+      else if (cmd == "voice-x23")
+            cmdExchangeVoice(1, 2);
+      else if (cmd == "voice-x24")
+            cmdExchangeVoice(1, 3);
+      else if (cmd == "voice-x34")
+            cmdExchangeVoice(2, 3);
+      else if (cmd == "system-break" || cmd == "page-break" || cmd == "section-break") {
+            int type;
+            if (cmd == "system-break")
+                  type = LAYOUT_BREAK_LINE;
+            else if (cmd == "page-break")
+                  type = LAYOUT_BREAK_PAGE;
+            else
+                  type = LAYOUT_BREAK_SECTION;
+
+            Element* e = selection().element();
+            if (e && e->type() == BAR_LINE) {
+                  BarLine* barline = static_cast<BarLine*>(e);
+                  Measure* measure = barline->measure();
+                  if (!measure->lineBreak()) {
+                        LayoutBreak* lb = new LayoutBreak(this);
+                        lb->setSubtype(type);
+                        lb->setTrack(-1);       // this are system elements
+                        lb->setParent(measure);
+                        undoAddElement(lb);
+                        }
+                  else {
+                        // remove line break
+                        foreach(Element* e, *measure->el()) {
+                              if (e->type() == LAYOUT_BREAK && e->subtype() ==type) {
+                                    undoRemoveElement(e);
+                                    break;
+                                    }
+                              }
+                        }
+                  }
+            }
+      else if (cmd == "reset-stretch")
+            resetUserStretch();
+      else if (cmd == "mirror-note")
+            cmdMirrorNoteHead();
+      else if (cmd == "double-duration")
+            cmdDoubleDuration();
+      else if (cmd == "half-duration")
+            cmdHalfDuration();
+      else if (cmd == "") {               //Midi note received only?
+            if (!noteEntryMode())
+                  setLayoutAll(false);
+            }
+      else if (cmd == "add-audio")
+            addAudioTrack();
+      else
+            printf("1unknown cmd <%s>\n", qPrintable(cmd));
+      }
+
 
