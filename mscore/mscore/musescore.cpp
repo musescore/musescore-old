@@ -3528,11 +3528,8 @@ void MuseScore::showWeb(bool on)
       QAction* a = getAction("online-resources");
       if (on) {
             if (_webPage == 0) {
-                  printf("create\n");
                   _webPage = new WebPageDockWidget(this, this);
-                  printf("connect\n");
                   connect(_webPage, SIGNAL(visibilityChanged(bool)), a, SLOT(setChecked(bool)));
-                  printf("add widget\n");
                   addDockWidget(Qt::RightDockWidgetArea, _webPage);
                   }
             _webPage->show();
@@ -4472,4 +4469,15 @@ void MuseScore::openExternalLink(const QString& url)
       {
       printf("URL : %s", qPrintable(url));
       QDesktopServices::openUrl(url);
+      }
+      
+//---------------------------------------------------------
+//   closeWebPanelPermanently
+//---------------------------------------------------------
+
+void MuseScore::closeWebPanelPermanently()
+      {
+      showWeb(false);
+      preferences.showWebPanel = false;
+      preferences.dirty  = true;
       }

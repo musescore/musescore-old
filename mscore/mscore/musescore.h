@@ -518,6 +518,7 @@ class MuseScore : public QMainWindow {
       void transpose();
 
       Q_INVOKABLE void openExternalLink(const QString&);
+      Q_INVOKABLE void closeWebPanelPermanently();
 
       void endCmd();
       void printFile();
