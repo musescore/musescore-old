@@ -1,5 +1,6 @@
 21.jun (la)
       - add more glyphs for old notation (patch from miwarre)
+      - add undo support for scnote pitch and tuning
 20.jun (la)
       - fix crash on capella import with timesig 0
       - fix #11164 : Synth control status on startup

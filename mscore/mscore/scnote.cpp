@@ -95,8 +95,18 @@ static QScriptValue prototype_Note_call(QScriptContext* context, QScriptEngine*)
                         int pitch = context->argument(0).toInt32();
                         if (pitch < 0 || pitch > 127)
                               break;
-                        note->setPitch(pitch);
-                        note->setTpcFromPitch();
+                        Score* score = note->score();
+                        if (score) {
+                              Note* tmp = note->clone();
+                              tmp->setPitch(pitch);
+                              tmp->setTpcFromPitch();
+                              score->undoChangePitch(note, pitch, tmp->tpc(), note->userAccidental());
+                              delete tmp;
+                              }
+                        else {
+                              note->setPitch(pitch);
+                              note->setTpcFromPitch();
+                              }
                         return context->engine()->undefinedValue();
                         }
                   break;
@@ -105,7 +115,13 @@ static QScriptValue prototype_Note_call(QScriptContext* context, QScriptEngine*)
                         return qScriptValueFromValue(context->engine(), note->tuning());
                   else if (argc == 1) {
                         double tuning = context->argument(0).toNumber();
-                        note->setTuning(tuning);
+                        Score* score = note->score();
+                        if (score) {
+                              score->undoChangeTuning(note, tuning);
+                              }
+                        else{
+                              note->setTuning(tuning);
+                              }
                         return context->engine()->undefinedValue();
                         }
                   break;
