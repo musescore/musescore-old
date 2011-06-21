@@ -222,7 +222,7 @@ QPointF Arpeggio::gripAnchor(int n) const
 //   edit
 //---------------------------------------------------------
 
-bool Arpeggio::edit(ScoreView*, int curGrip, int key, Qt::KeyboardModifiers modifiers, const QString&)
+bool Arpeggio::edit(MuseScoreView*, int curGrip, int key, Qt::KeyboardModifiers modifiers, const QString&)
       {
       if (curGrip != 1 || !(modifiers & Qt::ShiftModifier))
             return false;

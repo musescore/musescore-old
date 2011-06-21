@@ -161,7 +161,7 @@ QRectF Rest::drag(const QPointF& s)
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Rest::acceptDrop(ScoreView*, const QPointF&, int type, int subtype) const
+bool Rest::acceptDrop(MuseScoreView*, const QPointF&, int type, int subtype) const
       {
       if (
          (type == ICON && subtype == ICON_SBEAM)

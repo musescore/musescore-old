@@ -31,7 +31,7 @@ class Painter;
 
 class Lasso : public Element {
       QRectF _rect;
-      ScoreView* view;        // valid in edit mode
+      MuseScoreView* view;        // valid in edit mode
 
    public:
       Lasso(Score*);
@@ -44,7 +44,7 @@ class Lasso : public Element {
       QRectF rect() const                 { return _rect; }
       void setRect(const QRectF& r)       { _rect = r;    }
       virtual QRectF bbox() const;
-      virtual void startEdit(ScoreView*, const QPointF&);
+      virtual void startEdit(MuseScoreView*, const QPointF&);
       virtual void endEdit();
       };
 

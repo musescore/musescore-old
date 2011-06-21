@@ -42,7 +42,7 @@
 #include "chord.h"
 #include "rest.h"
 #include "slur.h"
-#include "seq.h"
+// #include "seq.h"
 #include "staff.h"
 #include "part.h"
 #include "style.h"
@@ -296,8 +296,8 @@ Score::Score(const Style* s)
       _mscVersion     = MSCVERSION;
       _created        = false;
 
-      _updateAll      = false;
-      layoutAll       = false;
+      _updateAll      = true;
+      layoutAll       = true;
       layoutFlags     = 0;
       _playNote       = false;
 
@@ -361,8 +361,8 @@ Score::Score(Score* parent)
       _mscVersion     = MSCVERSION;
       _created        = false;
 
-      _updateAll      = false;
-      layoutAll       = false;
+      _updateAll      = true;
+      layoutAll       = true;
       layoutFlags     = 0;
       _playNote       = false;
 
@@ -1538,7 +1538,7 @@ void Score::addElement(Element* element)
                   break;
             case INSTRUMENT_CHANGE:
                   rebuildMidiMapping();
-                  seq->initInstruments();
+//TODO-LIB                  seq->initInstruments();
                   break;
 
             default:
@@ -1646,7 +1646,7 @@ void Score::removeElement(Element* element)
                   break;
             case INSTRUMENT_CHANGE:
                   rebuildMidiMapping();
-                  seq->initInstruments();
+//TODO-LIB                  seq->initInstruments();
                   break;
             default:
                   break;
@@ -2112,11 +2112,13 @@ Score* Score::clone()
 
 void Score::setSyntiState()
       {
+#if 0 // TODO-LIB
       const SyntiState& s = synti->state();
       if (!(_syntiState == s)) {
             // _dirty = true;       // DEBUG: conflicts with setting of default sound font
             _syntiState = s;
             }
+#endif
       }
 
 //---------------------------------------------------------
@@ -2210,7 +2212,7 @@ void Score::splitStaff(int staffIdx, int splitPoint)
 //      cmdAdd(b);
 
       rebuildMidiMapping();
-      seq->initInstruments();
+//TODO-LIB      seq->initInstruments();
       startLayout = 0;
       doLayout();
 

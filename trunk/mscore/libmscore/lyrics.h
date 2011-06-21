@@ -51,7 +51,7 @@ class Lyrics : public Text {
       virtual ElementType type() const { return LYRICS; }
       virtual QPointF canvasPos() const;
       virtual void scanElements(void* data, void (*func)(void*, Element*));
-      virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
+      virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(const DropData&);
 
       Segment* segment() const { return (Segment*)parent()->parent(); }

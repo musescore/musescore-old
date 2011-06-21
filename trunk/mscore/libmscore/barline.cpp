@@ -397,7 +397,7 @@ Space BarLine::space() const
 //   acceptDrop
 //---------------------------------------------------------
 
-bool BarLine::acceptDrop(ScoreView*, const QPointF&, int type, int) const
+bool BarLine::acceptDrop(MuseScoreView*, const QPointF&, int type, int) const
       {
       return type == BAR_LINE
          || (type == ARTICULATION && segment() && segment()->subtype() == SegEndBarLine)

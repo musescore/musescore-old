@@ -26,7 +26,7 @@
 #include "spanner.h"
 
 class ChordRest;
-class ScoreView;
+class MuseScoreView;
 class Chord;
 class Painter;
 
@@ -95,7 +95,7 @@ class Beam : public Element {
       virtual QPointF canvasPos() const;  ///< position in canvas coordinates
 
       virtual bool isEditable() const { return true; }
-      virtual void startEdit(ScoreView*, const QPointF&);
+      virtual void startEdit(MuseScoreView*, const QPointF&);
       virtual void editDrag(const EditData&);
       virtual void updateGrips(int*, QRectF*) const;
 
@@ -126,7 +126,7 @@ class Beam : public Element {
       void setBeamDirection(Direction d);
       virtual QPainterPath shape() const;
       virtual bool contains(const QPointF& p) const;
-      virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
+      virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(const DropData&);
 
       double grow1() const      { return _grow1; }

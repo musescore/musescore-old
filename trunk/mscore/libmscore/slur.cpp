@@ -127,7 +127,7 @@ void SlurSegment::updateGrips(int* n, QRectF* r) const
 //    return true if event is accepted
 //---------------------------------------------------------
 
-bool SlurSegment::edit(ScoreView* viewer, int curGrip, int key, Qt::KeyboardModifiers modifiers, const QString&)
+bool SlurSegment::edit(MuseScoreView* viewer, int curGrip, int key, Qt::KeyboardModifiers modifiers, const QString&)
       {
       if (slurTie()->type() != SLUR)
             return false;
@@ -165,7 +165,7 @@ bool SlurSegment::edit(ScoreView* viewer, int curGrip, int key, Qt::KeyboardModi
 //   changeAnchor
 //---------------------------------------------------------
 
-void SlurSegment::changeAnchor(ScoreView* viewer, int curGrip, ChordRest* cr)
+void SlurSegment::changeAnchor(MuseScoreView* viewer, int curGrip, ChordRest* cr)
       {
       Slur* sl = static_cast<Slur*>(slurTie());
       if (curGrip == 0) {

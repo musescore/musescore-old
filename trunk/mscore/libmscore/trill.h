@@ -39,7 +39,7 @@ class TrillSegment : public LineSegment {
       virtual ElementType type() const    { return TRILL_SEGMENT; }
       virtual TrillSegment* clone() const { return new TrillSegment(*this); }
       virtual void draw(Painter*) const;
-      virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
+      virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(const DropData&);
       virtual void layout();
       };

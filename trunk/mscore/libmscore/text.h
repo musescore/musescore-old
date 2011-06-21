@@ -26,7 +26,7 @@
 #include "elementlayout.h"
 
 class TextPalette;
-class ScoreView;
+class MuseScoreView;
 class TextProp;
 
 struct SymCode;
@@ -146,8 +146,8 @@ class Text : public Element {
 
       virtual void draw(Painter*) const;
 
-      virtual void startEdit(ScoreView*, const QPointF&);
-      virtual bool edit(ScoreView*, int grip, int key, Qt::KeyboardModifiers, const QString&);
+      virtual void startEdit(MuseScoreView*, const QPointF&);
+      virtual bool edit(MuseScoreView*, int grip, int key, Qt::KeyboardModifiers, const QString&);
       virtual void endEdit();
       void addSymbol(const SymCode&, QTextCursor* c = 0);
       void addChar(int code, QTextCursor* cur = 0);

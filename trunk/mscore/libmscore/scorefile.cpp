@@ -41,148 +41,6 @@
 #include "undo.h"
 
 //---------------------------------------------------------
-//   readScore
-///   Import file \a name
-//    return 0 - OK, 1 _errno, 2 - bad file type
-//---------------------------------------------------------
-
-int Score::readScore(QString name)
-      {
-      _mscVersion = MSCVERSION;
-      _saved      = false;
-      info.setFile(name);
-
-      QString cs  = info.suffix();
-      QString csl = cs.toLower();
-
-      if (csl == "mscz") {
-            if (!loadCompressedMsc(name))
-                  return 1;
-            }
-      else if (csl == "msc" || csl == "mscx") {
-            if (!loadMsc(name))
-                  return 1;
-            }
-      else {
-            // import
-#if 0 // TODO-LIB
-            if (!preferences.importStyleFile.isEmpty()) {
-                  QFile f(preferences.importStyleFile);
-                  // silently ignore style file on error
-                  if (f.open(QIODevice::ReadOnly))
-                        _style.load(&f);
-                  }
-#endif
-
-            if (csl == "xml") {
-                  if (!importMusicXml(name))
-                        return 1;
-                  connectSlurs();
-                  }
-            else if (csl == "mxl") {
-                  if (!importCompressedMusicXml(name))
-                        return 1;
-                  connectSlurs();
-                  }
-            else if (csl == "mid" || csl == "midi" || csl == "kar") {
-                  if (!importMidi(name))
-                        return 1;
-                  }
-            else if (csl == "md") {
-                  if (!importMuseData(name))
-                        return 1;
-                  }
-            else if (csl == "ly") {
-                  if (!importLilypond(name))
-                        return 1;
-                  }
-            else if (csl == "mgu" || csl == "sgu") {
-                  if (!importBB(name))
-                        return 1;
-                  }
-            else if (csl == "cap") {
-                  if (!importCapella(name))
-                        return 1;
-                  }
-            else if (csl == "ove" || csl == "scw") {
-                  if (!importOve(name))
-            	      return 1;
-      	      }
-#ifdef OMR
-            else if (csl == "pdf") {
-                  if (!importPdf(name))
-                        return 1;
-                  }
-#endif
-            else if (csl == "bww") {
-                  if (!importBww(name))
-                        return 1;
-                  }
-            else if (csl == "gtp" || csl == "gp3" || csl == "gp4" || csl == "gp5") {
-                  if (!importGTP(name))
-                        return 1;
-                  }
-            else {
-                  printf("unknown file suffix <%s>, name <%s>\n", qPrintable(cs), qPrintable(name));
-                  return 2;
-                  }
-            }
-
-      int staffIdx = 0;
-      foreach(Staff* st, _staves) {
-            if (st->updateKeymap())
-                  st->keymap()->clear();
-            int track = staffIdx * VOICES;
-            KeySig* key1 = 0;
-            for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
-                  for (Segment* s = m->first(); s; s = s->next()) {
-                        if (!s->element(track))
-                              continue;
-                        Element* e = s->element(track);
-                        if (e->generated())
-                              continue;
-                        //if ((s->subtype() == SegClef) && st->updateClefList()) {
-                        //      Clef* clef = static_cast<Clef*>(e);
-                        //      st->setClef(s->tick(), clef->clefTypeList());
-                        //      }
-                        if ((s->subtype() == SegKeySig) && st->updateKeymap()) {
-                              KeySig* ks = static_cast<KeySig*>(e);
-                              int naturals = key1 ? key1->keySigEvent().accidentalType() : 0;
-                              ks->setOldSig(naturals);
-                              st->setKey(s->tick(), ks->keySigEvent());
-                              key1 = ks;
-                              }
-                        }
-                  if (m->sectionBreak())
-                        key1 = 0;
-                  }
-            st->setUpdateKeymap(false);
-            ++staffIdx;
-            }
-      adjustReadPos();
-
-      rebuildBspTree();
-
-      foreach(Excerpt* e, _excerpts) {
-            Score* score = e->score();
-            score->adjustReadPos();
-            }
-      //
-      // check if any soundfont is configured
-      //
-      bool hasSoundFont = false;
-      for (int i = 0; i < _syntiState.size(); ++i) {
-            const SyntiParameter& p = _syntiState.at(i);
-            if (p.name() == "soundfont")
-                  hasSoundFont = true;
-            }
-      if (!hasSoundFont)
-            _syntiState.prepend(SyntiParameter("soundfont", MScore::soundFont));
-      checkScore();
-      return 0;
-      }
-
-//---------------------------------------------------------
 //   write
 //---------------------------------------------------------
 
@@ -877,7 +735,7 @@ bool Score::loadCompressedMsc(QString name)
 
 //---------------------------------------------------------
 //   loadMsc
-//    return false if file not found or error loading
+//    return true on success
 //---------------------------------------------------------
 
 bool Score::loadMsc(QString name)
@@ -891,6 +749,7 @@ bool Score::loadMsc(QString name)
             }
       QFile f(name);
       if (!f.open(QIODevice::ReadOnly)) {
+            MScore::lastError = f.errorString();
             return false;
             }
 
@@ -974,16 +833,13 @@ bool Score::read1(QDomElement e)
                   _mscVersion = sl[0].toInt() * 100 + sl[1].toInt();
                   if (_mscVersion > MSCVERSION) {
                         // incompatible version
-                        QMessageBox::critical(0, QString("MuseScore"),
+                        MScore::lastError =
                            QT_TRANSLATE_NOOP("score", "Cannot read this score:\n"
-                           "your version of MuseScore is too old.")
-                           );
+                           "your version of MuseScore is too old.");
                         return false;
                         }
                   if (_mscVersion < 117) {
                         bool rv = read(e);
-//TODO-LIB                        if (rv)
-//                              mscore->updateRecentScores(this);
                         return rv;
                         }
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {

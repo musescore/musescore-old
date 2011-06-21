@@ -238,7 +238,7 @@ class ScoreView : public QWidget, public MuseScoreView {
    public slots:
       void setViewRect(const QRectF&);
 
-      void startEdit();
+      virtual void startEdit();
       void endEdit();
       void endStartEdit() { endEdit(); startEdit(); }
 
@@ -272,7 +272,7 @@ class ScoreView : public QWidget, public MuseScoreView {
       ScoreView(QWidget* parent = 0);
       ~ScoreView();
 
-      void startEdit(Element*, int startGrip);
+      virtual void startEdit(Element*, int startGrip);
       void startEdit(Element*);
 
       void moveCursor(Segment*, int staffIdx);
@@ -290,7 +290,7 @@ class ScoreView : public QWidget, public MuseScoreView {
 
       void setMag(qreal m);
       Element* elementAt(const QPointF& pp);
-      Element* elementNear(const QPointF& pp);
+      virtual Element* elementNear(const QPointF& pp);
       bool navigatorVisible() const;
       void cmd(const QAction* a);
 
@@ -315,7 +315,7 @@ class ScoreView : public QWidget, public MuseScoreView {
       bool fotoEditElementDragTransition(QMouseEvent* ev);
       bool editScoreViewDragTransition(QMouseEvent* e);
       void cmdAddSlur();
-      void cmdAddSlur(Note* firstNote, Note* lastNote);
+      virtual void cmdAddSlur(Note* firstNote, Note* lastNote);
       bool noteEntryMode() const;
       bool editMode() const;
       bool fotoMode() const;
@@ -324,10 +324,10 @@ class ScoreView : public QWidget, public MuseScoreView {
       void onEditPasteTransition(QMouseEvent* ev);
 
       Score* score() const                      { return _score; }
-      void setDropRectangle(const QRectF&);
+      virtual void setDropRectangle(const QRectF&);
       void setDropTarget(const Element*);
       void setDropAnchor(const QLineF&);
-      const QTransform& matrix() const           { return _matrix; }
+      virtual const QTransform& matrix() const           { return _matrix; }
       void setEditText(Text* t)                 { _editText = t;      }
       Text* editText() const                    { return _editText;   }
       qreal mag() const;

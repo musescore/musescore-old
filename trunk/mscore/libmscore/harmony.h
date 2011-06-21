@@ -99,8 +99,8 @@ class Harmony : public Text {
       virtual void layout();
 
       virtual bool isEditable() const { return true; }
-      virtual void startEdit(ScoreView*, const QPointF&);
-      virtual bool edit(ScoreView*, int grip, int key, Qt::KeyboardModifiers, const QString& s);
+      virtual void startEdit(MuseScoreView*, const QPointF&);
+      virtual bool edit(MuseScoreView*, int grip, int key, Qt::KeyboardModifiers, const QString& s);
       virtual void endEdit();
 
       int baseTpc() const                      { return _baseTpc;      }

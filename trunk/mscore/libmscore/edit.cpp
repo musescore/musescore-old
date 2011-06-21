@@ -35,7 +35,6 @@
 #include "page.h"
 #include "barline.h"
 #include "tuplet.h"
-#include "seq.h"
 #include "lyrics.h"
 #include "image.h"
 #include "keysig.h"

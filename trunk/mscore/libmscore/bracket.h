@@ -23,7 +23,7 @@
 
 #include "element.h"
 
-class ScoreView;
+class MuseScoreView;
 class System;
 class Painter;
 
@@ -63,15 +63,15 @@ class Bracket : public Element {
       virtual void layout();
 
       virtual bool isEditable() const { return true; }
-      virtual void startEdit(ScoreView*, const QPointF&);
-      virtual bool edit(ScoreView*, int, int, Qt::KeyboardModifiers, const QString&);
+      virtual void startEdit(MuseScoreView*, const QPointF&);
+      virtual bool edit(MuseScoreView*, int, int, Qt::KeyboardModifiers, const QString&);
       virtual void endEdit();
       virtual void editDrag(const EditData&);
       virtual void endEditDrag();
       virtual void updateGrips(int*, QRectF*) const;
       virtual QPointF gripAnchor(int grip) const;
 
-      virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
+      virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(const DropData&);
       };
 

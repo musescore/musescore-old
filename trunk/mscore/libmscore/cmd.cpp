@@ -1562,7 +1562,7 @@ void Score::processMidiInput()
 //   cmdPaste
 //---------------------------------------------------------
 
-void Score::cmdPaste(ScoreView* view)
+void Score::cmdPaste(MuseScoreView* view)
       {
       const QMimeData* ms = QApplication::clipboard()->mimeData();
       if (ms == 0) {
@@ -2595,10 +2595,12 @@ void Score::cmd(const QAction* a)
             cmdAddStretch(0.1);
       else if (cmd == "stretch-")
             cmdAddStretch(-0.1);
+#if 0 // TODO-LIB
       else if (cmd == "tempo")
             addTempo();
       else if (cmd == "metronome")
             addMetronome();
+#endif
       else if (cmd == "pitch-spell")
             spell();
       else if (cmd == "select-all") {

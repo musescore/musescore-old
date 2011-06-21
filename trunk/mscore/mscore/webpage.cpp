@@ -51,7 +51,7 @@ QObject* MyWebPage::createPlugin(
       // way. When we'd like to create non-visual objects in
       // Html to use them via JavaScript, we'd use a different
       // mechanism than this.
-
+#if 0
       if (classid == "WebScoreView") {
             WebScoreView* sv = new WebScoreView(view());
             int idx = paramNames.indexOf("score");
@@ -65,6 +65,7 @@ QObject* MyWebPage::createPlugin(
                   }
             return sv;
             }
+#endif
       return 0;
 
       /*QUiLoader loader;
@@ -149,22 +150,23 @@ WebPageDockWidget::WebPageDockWidget(MuseScore* mscore, QWidget* parent)
       setFeatures(QDockWidget::DockWidgetClosable);
 
       QWidget* mainWidget = new QWidget(this);
-      
+
       QVBoxLayout* layout = new QVBoxLayout;
       mainWidget->setLayout(layout);
 
       setObjectName("webpage");
       setAllowedAreas(Qt::LeftDockWidgetArea);
       const char* url = "http://cdn.musescore.org/universe.html";
-      
+
       web = new MyWebView;
       layout->addWidget(web);
       web->load(QUrl(url));
       web->setBusy();
-      
+
       setWidget(mainWidget);
       }
 
+#if 0
 //---------------------------------------------------------
 //   WebScoreView
 //---------------------------------------------------------
@@ -221,14 +223,14 @@ void WebScoreView::networkFinished(QNetworkReply* reply)
       f.write(data);
       f.close();
 
-      Score* score = new Score(MScore::defaultStyle());
-      if (score->readScore(tmpName) != 0) {
+      Score* score = mscore->readScore(tmpName);
+      if (!score) {
             printf("readScore failed\n");
-            delete score;
             return;
             }
       ScoreView::setScore(score);
       update();
       }
 
+#endif
 

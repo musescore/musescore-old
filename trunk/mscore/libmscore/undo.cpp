@@ -45,7 +45,6 @@
 #include "chord.h"
 #include "al/sig.h"
 #include "key.h"
-// #include "musescore.h"
 #include "scoreview.h"
 #include "barline.h"
 #include "volta.h"
@@ -55,7 +54,7 @@
 #include "part.h"
 #include "beam.h"
 #include "dynamic.h"
-#include "seq.h"
+// #include "seq.h"
 #include "page.h"
 #include "keysig.h"
 #include "timesig.h"
@@ -2276,7 +2275,7 @@ void ChangePatch::flip()
       channel->program = patch.prog;
       channel->bank    = patch.bank;
       channel->synti   = patch.synti;
-
+#if 0 // TODO-LIB
       Event event(ME_CONTROLLER);
       event.setChannel(channel->channel);
 
@@ -2295,7 +2294,7 @@ void ChangePatch::flip()
       event.setValue(patch.prog);
 
       seq->sendEvent(event);
-
+#endif
       patch = op;
       }
 
@@ -2427,7 +2426,7 @@ void ChangePart::flip()
       part->setInstrument(instrument);
       instrument            = oi;
       part->score()->rebuildMidiMapping();
-      seq->initInstruments();
+//TODO-LIB      seq->initInstruments();
       part->score()->setPlaylistDirty(true);
       }
 
@@ -3072,7 +3071,7 @@ void ChangeInstrument::flip()
 
       is->staff()->part()->setInstrument(instrument, is->segment()->tick());
       is->score()->rebuildMidiMapping();
-      seq->initInstruments();
+//TODO-LIB      seq->initInstruments();
       is->score()->setLayoutAll(true);
       instrument = oi;
       }

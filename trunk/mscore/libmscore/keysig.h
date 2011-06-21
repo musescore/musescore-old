@@ -53,7 +53,7 @@ class KeySig : public Element {
       virtual QPointF canvasPos() const;      ///< position in canvas coordinates
       virtual void draw(Painter*) const;
       virtual ElementType type() const { return KEYSIG; }
-      virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
+      virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(const DropData&);
       virtual void layout();
       void setSig(int oldSig, int newSig);

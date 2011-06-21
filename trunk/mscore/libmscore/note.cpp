@@ -971,7 +971,7 @@ void Note::endDrag()
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Note::acceptDrop(ScoreView*, const QPointF&, int type, int subtype) const
+bool Note::acceptDrop(MuseScoreView*, const QPointF&, int type, int subtype) const
       {
       return (type == ARTICULATION
          || type == CHORDLINE

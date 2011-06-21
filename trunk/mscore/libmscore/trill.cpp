@@ -91,7 +91,7 @@ void TrillSegment::layout()
 //   acceptDrop
 //---------------------------------------------------------
 
-bool TrillSegment::acceptDrop(ScoreView*, const QPointF&, int type, int /*subtype*/) const
+bool TrillSegment::acceptDrop(MuseScoreView*, const QPointF&, int type, int /*subtype*/) const
       {
       if (type == ACCIDENTAL)
             return true;

@@ -25,7 +25,7 @@
 #include "al/sig.h"
 #include "mscore.h"
 
-class ScoreView;
+class MuseScoreView;
 class Segment;
 class Painter;
 
@@ -75,7 +75,7 @@ class TimeSig : public Element {
       Fraction actualSig() const         { return _nominal / _stretch; }
       void setActualSig(const Fraction& f);
 
-      bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
+      bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
       Element* drop(const DropData&);
 
       Segment* segment() const { return (Segment*)parent(); }

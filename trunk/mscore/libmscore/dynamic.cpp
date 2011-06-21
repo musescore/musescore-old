@@ -201,7 +201,7 @@ const QString Dynamic::subtypeName() const
 //   startEdit
 //---------------------------------------------------------
 
-void Dynamic::startEdit(ScoreView* v, const QPointF& p)
+void Dynamic::startEdit(MuseScoreView* v, const QPointF& p)
       {
       setSubtype(0);
       Text::startEdit(v, p);

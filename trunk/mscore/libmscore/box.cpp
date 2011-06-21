@@ -86,7 +86,7 @@ void Box::draw(Painter* painter) const
 //   startEdit
 //---------------------------------------------------------
 
-void Box::startEdit(ScoreView*, const QPointF&)
+void Box::startEdit(MuseScoreView*, const QPointF&)
       {
       editMode = true;
       }
@@ -95,7 +95,7 @@ void Box::startEdit(ScoreView*, const QPointF&)
 //   edit
 //---------------------------------------------------------
 
-bool Box::edit(ScoreView*, int /*grip*/, int /*key*/, Qt::KeyboardModifiers, const QString&)
+bool Box::edit(MuseScoreView*, int /*grip*/, int /*key*/, Qt::KeyboardModifiers, const QString&)
       {
       return false;
       }
@@ -364,7 +364,7 @@ void HBox::layout2()
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Box::acceptDrop(ScoreView*, const QPointF&, int type, int) const
+bool Box::acceptDrop(MuseScoreView*, const QPointF&, int type, int) const
       {
       if (type == LAYOUT_BREAK)
             return true;

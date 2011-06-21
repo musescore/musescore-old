@@ -590,7 +590,7 @@ void Score::layoutStage3()
 
 void Score::doLayout()
       {
-// printf("=====doLayout\n");
+printf("=====doLayout\n");
       _symIdx = 0;
       if (_style.valueSt(ST_MusicalSymbolFont) == "Gonville")
             _symIdx = 1;

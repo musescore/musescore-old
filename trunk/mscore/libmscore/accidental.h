@@ -70,12 +70,12 @@ class Accidental : public Element {
       virtual void setSubtype(const QString& s);
       void setSubtype(AccidentalType t)     { Element::setSubtype(int(t)); }
       AccidentalType accidentalType() const { return AccidentalType(subtype()); }
-      virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
+      virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(const DropData&);
       virtual void layout();
       virtual void draw(Painter*) const;
       virtual bool isEditable() const                    { return true; }
-      virtual void startEdit(ScoreView*, const QPointF&) { setGenerated(false); }
+      virtual void startEdit(MuseScoreView*, const QPointF&) { setGenerated(false); }
 
       int symbol();
       Note* note() const                  { return (Note*)parent(); }

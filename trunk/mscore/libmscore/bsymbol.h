@@ -44,7 +44,7 @@ class BSymbol : public Element, public ElementLayout {
       virtual void add(Element*);
       virtual void remove(Element*);
       virtual void scanElements(void* data, void (*func)(void*, Element*));
-      virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
+      virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(const DropData&);
       virtual void layout();
       virtual QRectF drag(const EditData& pos);

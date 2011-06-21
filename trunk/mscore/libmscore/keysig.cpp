@@ -224,7 +224,7 @@ void KeySig::draw(Painter* p) const
 //   acceptDrop
 //---------------------------------------------------------
 
-bool KeySig::acceptDrop(ScoreView*, const QPointF&, int type, int) const
+bool KeySig::acceptDrop(MuseScoreView*, const QPointF&, int type, int) const
       {
       return type == KEYSIG;
       }

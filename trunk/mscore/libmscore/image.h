@@ -23,7 +23,6 @@
 
 #include "bsymbol.h"
 
-class ScoreView;
 class ImagePath;
 
 //---------------------------------------------------------

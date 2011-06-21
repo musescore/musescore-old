@@ -86,6 +86,7 @@ class WebPageDockWidget : public QDockWidget {
       WebPageDockWidget(MuseScore* mscore, QWidget* parent = 0);
       };
 
+#if 0
 //---------------------------------------------------------
 //   WebScoreView
 //---------------------------------------------------------
@@ -105,7 +106,7 @@ class WebScoreView : public ScoreView
       };
 
 Q_DECLARE_METATYPE(WebScoreView)
-
+#endif
 
 #endif
 
