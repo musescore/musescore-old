@@ -1321,7 +1321,7 @@ void Beam::toDefault()
 //   startEdit
 //---------------------------------------------------------
 
-void Beam::startEdit(ScoreView*, const QPointF& p)
+void Beam::startEdit(MuseScoreView*, const QPointF& p)
       {
       QPointF pt(p - canvasPos());
       double ydiff = 100000000.0;
@@ -1342,7 +1342,7 @@ void Beam::startEdit(ScoreView*, const QPointF& p)
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Beam::acceptDrop(ScoreView*, const QPointF&, int type, int subtype) const
+bool Beam::acceptDrop(MuseScoreView*, const QPointF&, int type, int subtype) const
       {
       return (type == ICON && subtype == ICON_FBEAM1)
          || (type == ICON && subtype == ICON_FBEAM2);

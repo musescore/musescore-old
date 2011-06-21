@@ -172,7 +172,7 @@ void Bracket::read(QDomElement e)
 //   startEdit
 //---------------------------------------------------------
 
-void Bracket::startEdit(ScoreView*, const QPointF&)
+void Bracket::startEdit(MuseScoreView*, const QPointF&)
       {
       yoff = 0.0;
       }
@@ -269,7 +269,7 @@ void Bracket::endEditDrag()
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Bracket::acceptDrop(ScoreView*, const QPointF&, int type, int) const
+bool Bracket::acceptDrop(MuseScoreView*, const QPointF&, int type, int) const
       {
       return type == BRACKET;
       }
@@ -300,7 +300,7 @@ Element* Bracket::drop(const DropData& data)
 //    return true if event is accepted
 //---------------------------------------------------------
 
-bool Bracket::edit(ScoreView*, int, int key, Qt::KeyboardModifiers modifiers, const QString&)
+bool Bracket::edit(MuseScoreView*, int, int key, Qt::KeyboardModifiers modifiers, const QString&)
       {
       if (modifiers & Qt::ShiftModifier) {
             if (key == Qt::Key_Left) {

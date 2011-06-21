@@ -695,7 +695,7 @@ void Text::spatiumChanged(double oldVal, double newVal)
 //   startEdit
 //---------------------------------------------------------
 
-void Text::startEdit(ScoreView* view, const QPointF& p)
+void Text::startEdit(MuseScoreView* view, const QPointF& p)
       {
       cursor = new QTextCursor(doc());
       cursor->setVisualNavigation(true);
@@ -725,7 +725,7 @@ void Text::startEdit(ScoreView* view, const QPointF& p)
 //    return true if event is accepted
 //---------------------------------------------------------
 
-bool Text::edit(ScoreView* view, int /*grip*/, int key, Qt::KeyboardModifiers modifiers, const QString& s)
+bool Text::edit(MuseScoreView* view, int /*grip*/, int key, Qt::KeyboardModifiers modifiers, const QString& s)
       {
       if (debugMode)
             printf("Text::edit(%p) key 0x%x mod 0x%x\n", this, key, int(modifiers));

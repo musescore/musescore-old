@@ -189,7 +189,7 @@ const QString LayoutBreak::subtypeName() const
 //   acceptDrop
 //---------------------------------------------------------
 
-bool LayoutBreak::acceptDrop(ScoreView*, const QPointF&, int type, int st) const
+bool LayoutBreak::acceptDrop(MuseScoreView*, const QPointF&, int type, int st) const
       {
       if (type == LAYOUT_BREAK && st != subtype())
             return true;

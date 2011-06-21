@@ -127,7 +127,7 @@ QPointF LineSegment::gripAnchor(int grip) const
 //    return true if event is accepted
 //---------------------------------------------------------
 
-bool LineSegment::edit(ScoreView* sv, int curGrip, int key, Qt::KeyboardModifiers modifiers, const QString&)
+bool LineSegment::edit(MuseScoreView* sv, int curGrip, int key, Qt::KeyboardModifiers modifiers, const QString&)
       {
       if (!((modifiers & Qt::ShiftModifier)
          && ((spannerSegmentType() == SEGMENT_SINGLE)

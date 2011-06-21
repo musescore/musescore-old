@@ -52,7 +52,7 @@ class Arpeggio : public Element {
       virtual bool isEditable() const { return true; }
       virtual void editDrag(const EditData&);
       virtual void updateGrips(int*, QRectF*) const;
-      virtual bool edit(ScoreView*, int curGrip, int key, Qt::KeyboardModifiers modifiers, const QString&);
+      virtual bool edit(MuseScoreView*, int curGrip, int key, Qt::KeyboardModifiers modifiers, const QString&);
 
       void read(QDomElement e);
       void write(Xml& xml) const;

@@ -30,7 +30,7 @@
 #include "mscore.h"
 
 class Xml;
-class ScoreView;
+class MuseScoreView;
 class Segment;
 class Painter;
 
@@ -94,7 +94,7 @@ class Clef : public Element {
       Segment* segment() const         { return (Segment*)parent(); }
       Measure* measure() const         { return (Measure*)parent()->parent(); }
 
-      virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
+      virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(const DropData&);
       virtual void layout();
       virtual void draw(Painter*) const;

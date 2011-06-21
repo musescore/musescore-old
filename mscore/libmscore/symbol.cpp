@@ -89,7 +89,7 @@ void BSymbol::scanElements(void* data, void (*func)(void*, Element*))
 //   acceptDrop
 //---------------------------------------------------------
 
-bool BSymbol::acceptDrop(ScoreView*, const QPointF&, int type, int) const
+bool BSymbol::acceptDrop(MuseScoreView*, const QPointF&, int type, int) const
       {
       return type == SYMBOL || type == IMAGE;
       }

@@ -373,7 +373,7 @@ bool Harmony::parseHarmony(const QString& ss, int* root, int* base)
 //   startEdit
 //---------------------------------------------------------
 
-void Harmony::startEdit(ScoreView* view, const QPointF& p)
+void Harmony::startEdit(MuseScoreView* view, const QPointF& p)
       {
       if (!textList.isEmpty()) {
             QString s(harmonyName());
@@ -386,7 +386,7 @@ void Harmony::startEdit(ScoreView* view, const QPointF& p)
 //   edit
 //---------------------------------------------------------
 
-bool Harmony::edit(ScoreView* view, int grip, int key, Qt::KeyboardModifiers mod, const QString& s)
+bool Harmony::edit(MuseScoreView* view, int grip, int key, Qt::KeyboardModifiers mod, const QString& s)
       {
       bool rv = Text::edit(view, grip, key, mod, s);
       QString str = getText();

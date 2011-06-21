@@ -388,7 +388,7 @@ void Accidental::draw(Painter* painter) const
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Accidental::acceptDrop(ScoreView*, const QPointF&, int type, int /*subtype*/) const
+bool Accidental::acceptDrop(MuseScoreView*, const QPointF&, int type, int /*subtype*/) const
       {
       return type == ACCIDENTAL_BRACKET;
       }

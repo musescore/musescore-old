@@ -240,8 +240,6 @@ protected:
 extern void initStaffTypes();
 extern QList<StaffType*> staffTypes;
 
-class ScoreView;
-
 //---------------------------------------------------------
 //   TabDurationSymbol
 //    Element used to draw duration symbols above tablatures

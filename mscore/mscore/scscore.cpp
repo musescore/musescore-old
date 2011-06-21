@@ -208,10 +208,12 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                   }
                   break;
             case 4:    // "load",
+#if 0 // TODO-LIB
                   if (argc == 1) {
                         QString s = qscriptvalue_cast<QString>(context->argument(0));
                         return qScriptValueFromValue(context->engine(), score->readScore(s) == 0);
                         }
+#endif
                   break;
             case 5:     // "save",
                   {

@@ -51,7 +51,7 @@ class LayoutBreak : public Element {
       virtual void setSubtype(const QString&);
       virtual void setSubtype(int st) { Element::setSubtype(st); }
       virtual const QString subtypeName() const;
-      virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
+      virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(const DropData&);
       virtual void write(Xml&) const;
       virtual void read(QDomElement);

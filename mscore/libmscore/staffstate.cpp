@@ -25,7 +25,7 @@
 #include "segment.h"
 #include "staff.h"
 #include "part.h"
-#include "seq.h"
+// #include "seq.h"
 #include "painter.h"
 #include "mscore.h"
 
@@ -183,7 +183,7 @@ const QString StaffState::subtypeName() const
 //   acceptDrop
 //---------------------------------------------------------
 
-bool StaffState::acceptDrop(ScoreView*, const QPointF&, int /*type*/, int /*st*/) const
+bool StaffState::acceptDrop(MuseScoreView*, const QPointF&, int /*type*/, int /*st*/) const
       {
       return false;
       }

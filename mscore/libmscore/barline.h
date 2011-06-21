@@ -23,7 +23,7 @@
 
 #include "element.h"
 
-class ScoreView;
+class MuseScoreView;
 class Segment;
 class Painter;
 
@@ -54,7 +54,7 @@ class BarLine : public Element {
       virtual void add(Element*);
       virtual void remove(Element*);
 
-      virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
+      virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(const DropData&);
       void setSpan(int val)    { _span = val;  }
       int span() const         { return _span; }

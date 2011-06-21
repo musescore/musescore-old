@@ -38,7 +38,7 @@ class NoteEvent;
 class Text;
 class Score;
 class Sym;
-class ScoreView;
+class MuseScoreView;
 class Bend;
 class Painter;
 
@@ -208,7 +208,7 @@ class Note : public Element {
       double stemYoff(bool upFlag) const;
       qreal yPos() const;
 
-      virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
+      virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(const DropData&);
 
       bool hidden() const              { return _hidden; }

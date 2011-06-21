@@ -42,7 +42,7 @@ SpannerSegment::SpannerSegment(const SpannerSegment& s)
 //   startEdit
 //---------------------------------------------------------
 
-void SpannerSegment::startEdit(ScoreView*s , const QPointF& p)
+void SpannerSegment::startEdit(MuseScoreView*s , const QPointF& p)
       {
       parent()->startEdit(s, p);
       }
@@ -111,7 +111,7 @@ void Spanner::scanElements(void* data, void (*func)(void*, Element*))
 //   startEdit
 //---------------------------------------------------------
 
-void Spanner::startEdit(ScoreView*, const QPointF&)
+void Spanner::startEdit(MuseScoreView*, const QPointF&)
       {
       oStartElement = _startElement;
       oEndElement   = _endElement;

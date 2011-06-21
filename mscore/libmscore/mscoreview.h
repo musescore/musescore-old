@@ -16,6 +16,7 @@
 
 class Element;
 class Score;
+class Note;
 
 //---------------------------------------------------------
 //   MuseScoreView
@@ -30,6 +31,18 @@ class MuseScoreView {
       virtual void adjustCanvasPosition(const Element* el, bool playBack) = 0;
       virtual void setScore(Score*) = 0;
       virtual void removeScore() = 0;
+
+      virtual void changeEditElement(Element*) = 0;
+//      virtual QCursor cursor() const = 0;
+//      virtual void setCursor(const QCursor&) = 0;
+      virtual int gripCount() const = 0;
+      virtual const QRectF& getGrip(int) const = 0;
+      virtual const QTransform& matrix() const = 0;
+      virtual void setDropRectangle(const QRectF&) = 0;
+      virtual void cmdAddSlur(Note* firstNote, Note* lastNote) = 0;
+      virtual void startEdit() = 0;
+      virtual void startEdit(Element*, int startGrip) = 0;
+      virtual Element* elementNear(const QPointF&) = 0;
       };
 
 #endif

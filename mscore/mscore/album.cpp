@@ -257,13 +257,9 @@ void Album::load(QDomElement e)
 void Album::loadScores()
       {
       foreach(AlbumItem* item, _scores) {
-            item->score = new Score(MScore::defaultStyle());
-            int rv = item->score->readScore(item->path);
-            if (rv != 0) {
-                  mscore->readScoreError(rv, item->path);
-                  delete item->score;
-                  item->score = 0;
-                  }
+            item->score = mscore->readScore(item->path);
+            if (!item->score)
+                  mscore->readScoreError(item->path);
             }
       }
 

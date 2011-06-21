@@ -315,7 +315,7 @@ void Clef::draw(Painter* painter) const
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Clef::acceptDrop(ScoreView*, const QPointF&, int type, int) const
+bool Clef::acceptDrop(MuseScoreView*, const QPointF&, int type, int) const
       {
       return type == CLEF;
       }

@@ -69,7 +69,7 @@ class Dynamic : public Text {
       virtual void read(QDomElement);
 
       virtual bool isEditable() const { return true; }
-      virtual void startEdit(ScoreView*, const QPointF&);
+      virtual void startEdit(MuseScoreView*, const QPointF&);
       virtual void endEdit();
       virtual void toDefault();
 

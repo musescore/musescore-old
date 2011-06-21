@@ -114,20 +114,12 @@ static QString createDefaultFileName(QString fn)
 //   readScoreError
 //---------------------------------------------------------
 
-void MuseScore::readScoreError(int rv, const QString& name) const
+void MuseScore::readScoreError(const QString& name) const
       {
-      if (rv == 1) {
-            QMessageBox::critical(0,
-               tr("MuseScore: Load error"),
-               QString(tr("Cannot read file: %1 error: %2").arg(name).arg(strerror(errno)))
-               );
-            }
-      else {
-            QMessageBox::critical(0,
-               tr("MuseScore: Load error"),
-               tr("unsupported file extension")
-               );
-            }
+      QMessageBox::critical(0,
+         tr("MuseScore: Load error"),
+         QString(tr("Cannot read file: %1 error: %2").arg(name).arg(MScore::lastError))
+         );
       }
 
 /**
@@ -227,16 +219,14 @@ void MuseScore::loadFile()
          );
       if (fn.isEmpty())
             return;
-      Score* score = new Score(MScore::defaultStyle());
-      int rv = score->readScore(fn);
-      if (rv == 0) {
+      Score* score = readScore(fn);
+      if (score) {
             setCurrentScoreView(appendScore(score));
             lastOpenPath = score->fileInfo()->path();
             writeSessionFile(false);
             }
       else {
-            readScoreError(rv, fn);
-            delete score;
+            readScoreError(fn);
             }
       }
 
@@ -348,23 +338,17 @@ void MuseScore::newFile()
             measures += 1;
       KeySigEvent ks     = newWizard->keysig();
 
-      Score* score = new Score(MScore::defaultStyle());
-      score->setCreated(true);
+      Score* score = 0;
 
       //
       //  create score from template
       //
       if (newWizard->useTemplate()) {
-            int rv = score->readScore(newWizard->templatePath());
-            if (rv != 0) {
-                  readScoreError(rv, newWizard->templatePath());
-#if 0
-                  QMessageBox::warning(0,
-                     tr("MuseScore: failure"),
-                     tr("Load template file ") + newWizard->templatePath() + tr(" failed"),
-                     QString::null, QString::null, QString::null, 0, 1);
-#endif
-                  delete score;
+            delete score;
+            score = readScore(newWizard->templatePath());
+            score->setCreated(true);
+            if (!score) {
+                  readScoreError(newWizard->templatePath());
                   return;
                   }
             score->fileInfo()->setFile(createDefaultName());
@@ -404,6 +388,8 @@ void MuseScore::newFile()
       //  create new score from scratch
       //
       else {
+            score = new Score(MScore::defaultStyle());
+            score->setCreated(true);
             score->fileInfo()->setFile(createDefaultName());
             newWizard->createInstruments(score);
             }
@@ -1434,6 +1420,150 @@ bool MuseScore::savePsPdf(const QString& saveName, QPrinter::OutputFormat format
             }
       p.end();
       return true;
+      }
+
+//---------------------------------------------------------
+//   readScore
+///   Import file \a name
+//    return 0 - OK, 1 _errno, 2 - bad file type
+//---------------------------------------------------------
+
+Score* MuseScore::readScore(QString name)
+      {
+      Score* score = new Score(MScore::defaultStyle());
+      score->setName(name);
+
+      QString cs  = score->fileInfo()->suffix();
+      QString csl = cs.toLower();
+
+      if (csl == "mscz") {
+            if (!score->loadCompressedMsc(name)) {
+                  delete score;
+                  return 0;
+                  }
+            }
+      else if (csl == "msc" || csl == "mscx") {
+            if (!score->loadMsc(name)) {
+                  delete score;
+                  return 0;
+                  }
+            }
+      else {
+            // import
+            if (!preferences.importStyleFile.isEmpty()) {
+                  QFile f(preferences.importStyleFile);
+                  // silently ignore style file on error
+                  if (f.open(QIODevice::ReadOnly))
+                        score->style()->load(&f);
+                  }
+
+            if (csl == "xml") {
+                  if (!score->importMusicXml(name))
+                        return 0;
+                  score->connectSlurs();
+                  }
+            else if (csl == "mxl") {
+                  if (!score->importCompressedMusicXml(name))
+                        return 0;
+                  score->connectSlurs();
+                  }
+            else if (csl == "mid" || csl == "midi" || csl == "kar") {
+                  if (!score->importMidi(name))
+                        return 0;
+                  }
+            else if (csl == "md") {
+                  if (!score->importMuseData(name))
+                        return 0;
+                  }
+            else if (csl == "ly") {
+                  if (!score->importLilypond(name))
+                        return 0;
+                  }
+            else if (csl == "mgu" || csl == "sgu") {
+                  if (!score->importBB(name))
+                        return 0;
+                  }
+            else if (csl == "cap") {
+                  if (!score->importCapella(name))
+                        return 0;
+                  }
+            else if (csl == "ove" || csl == "scw") {
+                  if (!score->importOve(name))
+            	      return 0;
+      	      }
+#ifdef OMR
+            else if (csl == "pdf") {
+                  if (!score->importPdf(name))
+                        return 0;
+                  }
+#endif
+            else if (csl == "bww") {
+                  if (!score->importBww(name))
+                        return 0;
+                  }
+            else if (csl == "gtp" || csl == "gp3" || csl == "gp4" || csl == "gp5") {
+                  if (!score->importGTP(name))
+                        return 0;
+                  }
+            else {
+                  printf("unknown file suffix <%s>, name <%s>\n", qPrintable(cs), qPrintable(name));
+                  return 0;
+                  }
+            }
+      int staffIdx = 0;
+      foreach(Staff* st, score->staves()) {
+            if (st->updateKeymap())
+                  st->keymap()->clear();
+            int track = staffIdx * VOICES;
+            KeySig* key1 = 0;
+            for (Measure* m = score->firstMeasure(); m; m = m->nextMeasure()) {
+                  for (Segment* s = m->first(); s; s = s->next()) {
+                        if (!s->element(track))
+                              continue;
+                        Element* e = s->element(track);
+                        if (e->generated())
+                              continue;
+                        //if ((s->subtype() == SegClef) && st->updateClefList()) {
+                        //      Clef* clef = static_cast<Clef*>(e);
+                        //      st->setClef(s->tick(), clef->clefTypeList());
+                        //      }
+                        if ((s->subtype() == SegKeySig) && st->updateKeymap()) {
+                              KeySig* ks = static_cast<KeySig*>(e);
+                              int naturals = key1 ? key1->keySigEvent().accidentalType() : 0;
+                              ks->setOldSig(naturals);
+                              st->setKey(s->tick(), ks->keySigEvent());
+                              key1 = ks;
+                              }
+                        }
+                  if (m->sectionBreak())
+                        key1 = 0;
+                  }
+            st->setUpdateKeymap(false);
+            ++staffIdx;
+            }
+      score->updateNotes();
+      score->doLayout();
+#if 0
+      score->adjustReadPos();
+
+      foreach(Excerpt* e, score->excerpts()) {
+            Score* score = e->score();
+            score->adjustReadPos();
+            }
+      //
+      // check if any soundfont is configured
+      //
+      bool hasSoundFont = false;
+      for (int i = 0; i < _syntiState.size(); ++i) {
+            const SyntiParameter& p = _syntiState.at(i);
+            if (p.name() == "soundfont")
+                  hasSoundFont = true;
+            }
+      if (!hasSoundFont)
+            _syntiState.prepend(SyntiParameter("soundfont", MScore::soundFont));
+      score->checkScore();
+#endif
+      return score;
       }
 
 

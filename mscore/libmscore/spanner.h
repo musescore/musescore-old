@@ -50,7 +50,7 @@ class SpannerSegment : public Element {
       void setSpannerSegmentType(SpannerSegmentType s) { setSubtype(s);              }
       SpannerSegmentType spannerSegmentType() const    { return SpannerSegmentType(subtype()); }
       void setSystem(System* s)                        { _system = s;                }
-      virtual void startEdit(ScoreView*, const QPointF&);
+      virtual void startEdit(MuseScoreView*, const QPointF&);
       virtual void endEdit()                           { parent()->endEdit(); }
       };
 
@@ -105,7 +105,7 @@ class Spanner : public Element {
       virtual void add(Element*);
       virtual void remove(Element*);
       virtual void scanElements(void* data, void (*func)(void*, Element*));
-      virtual void startEdit(ScoreView*, const QPointF&);
+      virtual void startEdit(MuseScoreView*, const QPointF&);
       virtual void setSelected(bool f);
       void setYoff(double d) { _yoffset = d;        }
       double yoff() const    { return _yoffset;     }

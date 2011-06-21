@@ -38,7 +38,7 @@ class Chord;
 class Text;
 class ChordRest;
 class Score;
-class ScoreView;
+class MuseScoreView;
 class System;
 class Note;
 class Spacer;
@@ -212,7 +212,7 @@ class Measure : public MeasureBase {
       void sortStaves(QList<int>& dst);
 
       void dump() const;
-      virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
+      virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(const DropData&);
 
       int repeatCount() const         { return _repeatCount; }

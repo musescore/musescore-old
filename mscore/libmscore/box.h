@@ -29,7 +29,7 @@
 #include "measurebase.h"
 
 class BarLine;
-class ScoreView;
+class MuseScoreView;
 class Text;
 class Painter;
 
@@ -49,8 +49,8 @@ class Box : public MeasureBase {
       Box(Score*);
       virtual void draw(Painter*) const;
       virtual bool isEditable() const { return true; }
-      virtual void startEdit(ScoreView*, const QPointF&);
-      virtual bool edit(ScoreView*, int grip, int key, Qt::KeyboardModifiers, const QString& s);
+      virtual void startEdit(MuseScoreView*, const QPointF&);
+      virtual bool edit(MuseScoreView*, int grip, int key, Qt::KeyboardModifiers, const QString& s);
       virtual void editDrag(const EditData&);
       virtual void endEditDrag();
       virtual void endEdit();
@@ -59,7 +59,7 @@ class Box : public MeasureBase {
       virtual void write(Xml&) const;
       virtual void write(Xml& xml, int, bool) const { write(xml); }
       virtual void read(QDomElement);
-      virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
+      virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(const DropData&);
       virtual void add(Element* e);
 

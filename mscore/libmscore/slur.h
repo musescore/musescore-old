@@ -29,7 +29,7 @@ class Chord;
 class System;
 class SlurTie;
 class Score;
-class ScoreView;
+class MuseScoreView;
 class Painter;
 class ChordRest;
 
@@ -51,7 +51,7 @@ class SlurSegment : public SpannerSegment {
 
       void computeBezier();
       void updatePath();
-      void changeAnchor(ScoreView*, int curGrip, ChordRest*);
+      void changeAnchor(MuseScoreView*, int curGrip, ChordRest*);
 
    public:
       SlurSegment(Score*);
@@ -67,7 +67,7 @@ class SlurSegment : public SpannerSegment {
 
       virtual bool isEditable() const { return true; }
       virtual void editDrag(const EditData&);
-      virtual bool edit(ScoreView*, int grip, int key, Qt::KeyboardModifiers, const QString& s);
+      virtual bool edit(MuseScoreView*, int grip, int key, Qt::KeyboardModifiers, const QString& s);
       virtual void updateGrips(int*, QRectF*) const;
       virtual QPointF gripAnchor(int grip) const;
       virtual QPointF getGrip(int) const;

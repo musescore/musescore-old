@@ -122,7 +122,7 @@ void TimeSig::setSubtype(int st)
 //   acceptDrop
 //---------------------------------------------------------
 
-bool TimeSig::acceptDrop(ScoreView*, const QPointF&, int type, int) const
+bool TimeSig::acceptDrop(MuseScoreView*, const QPointF&, int type, int) const
       {
       return type == TIMESIG;
       }

@@ -58,7 +58,7 @@ class Rest : public ChordRest {
       virtual void read(QDomElement, const QList<Tuplet*>&, QList<Slur*>*);
       virtual void scanElements(void* data, void (*func)(void*, Element*));
 
-      virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const;
+      virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(const DropData&);
       virtual void layout();
 

@@ -98,7 +98,7 @@ class Parameter;
 class StaffType;
 class Revisions;
 class Spanner;
-class ScoreView;
+class MuseScoreView;
 class LinkedElements;
 class Fingering;
 class Painter;
@@ -350,7 +350,6 @@ class Score {
 
       int processPendingNotes(QList<MNote*>* notes, int, int);
       void cmdResetBeamMode();
-      void connectSlurs();
 
       void cmdInsertClef(ClefType);
       void cmdExchangeVoice(int, int);
@@ -555,7 +554,7 @@ class Score {
       void appendPart(Part* p);
       void updateStaffIndex();
       void sortStaves(QList<int>& dst);
-      int readScore(QString name);
+//      int readScore(QString name);
 
       bool showInvisible() const   { return _showInvisible; }
       bool showUnprintable() const { return _showUnprintable; }
@@ -785,7 +784,7 @@ class Score {
       int addCustomKeySig(KeySig*);
       KeySig* customKeySig(int) const;
       KeySig* keySigFactory(const KeySigEvent&);
-      void cmdPaste(ScoreView*);
+      void cmdPaste(MuseScoreView*);
       Element* selectMove(const QString& cmd);
       Element* move(const QString& cmd);
       void cmdEnterRest(const Duration& d);
@@ -858,6 +857,7 @@ class Score {
       void moveCursor();
       bool playNote() const                 { return _playNote; }
       void setPlayNote(bool v)              { _playNote = v;    }
+      void connectSlurs();
       };
 
 extern Score* gscore;

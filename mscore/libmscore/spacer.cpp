@@ -101,7 +101,7 @@ void Spacer::layout()
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Spacer::acceptDrop(ScoreView*, const QPointF&, int, int) const
+bool Spacer::acceptDrop(MuseScoreView*, const QPointF&, int, int) const
       {
       return false;
       }

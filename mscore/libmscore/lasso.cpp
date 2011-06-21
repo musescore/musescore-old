@@ -54,7 +54,7 @@ void Lasso::draw(Painter* painter) const
 
 void Lasso::editDrag(const EditData& ed)
       {
-      Qt::CursorShape cursorShape = view->cursor().shape();
+      Qt::CursorShape cursorShape ; // TODO-LIB = view->cursor().shape();
       switch(ed.curGrip) {
             case 0:
                   cursorShape = Qt::SizeFDiagCursor;
@@ -89,7 +89,7 @@ void Lasso::editDrag(const EditData& ed)
                   _rect.setLeft(_rect.left() + ed.delta.x());
                   break;
             }
-      view->setCursor(cursorShape);
+//TODO-LIB      view->setCursor(QCursor(cursorShape));
       }
 
 //---------------------------------------------------------
@@ -129,7 +129,7 @@ QRectF Lasso::bbox() const
 //   startEdit
 //---------------------------------------------------------
 
-void Lasso::startEdit(ScoreView* sv, const QPointF&)
+void Lasso::startEdit(MuseScoreView* sv, const QPointF&)
       {
       view = sv;
       }

@@ -23,7 +23,7 @@
 #include "drumset.h"
 #include "articulation.h"
 #include "utils.h"
-#include "seq.h"
+// #include "seq.h"
 #include "tablature.h"
 #include "instrtemplate.h"
 
@@ -417,8 +417,8 @@ void Channel::write(Xml& xml) const
             if (e.type() != ME_INVALID)
                   e.write(xml);
             }
-      if (synti)
-            xml.tag("synti", seq->synthIndexToName(synti));
+//TODO-LIB      if (synti)
+//            xml.tag("synti", seq->synthIndexToName(synti));
       if (mute)
             xml.tag("mute", mute);
       if (solo)
@@ -489,8 +489,8 @@ void Channel::read(QDomElement e)
                   midiActions.append(a);
                   }
             else if (tag == "synti") {
-                  int idx = seq->synthNameToIndex(val);
-                  synti = idx == -1 ? val.toInt() : idx;
+//TODO-LIB                  int idx = seq->synthNameToIndex(val);
+//                  synti = idx == -1 ? val.toInt() : idx;
                   }
             else if (tag == "descr")
                   descr = e.text();

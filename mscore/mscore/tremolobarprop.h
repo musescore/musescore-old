@@ -18,39 +18,15 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __TREMOLOBAR_H__
-#define __TREMOLOBAR_H__
+#ifndef __TREMOLOBARPROP_H__
+#define __TREMOLOBARPROP_H__
 
 #include "libmscore/element.h"
 #include "ui_tremolobar.h"
 #include "pitchvalue.h"
 
 class Painter;
-
-//---------------------------------------------------------
-//   TremoloBar
-//---------------------------------------------------------
-
-class TremoloBar : public Element {
-      QList<PitchValue> _points;
-      double _lw;
-      QPointF notePos;
-      double noteWidth;
-
-   public:
-      TremoloBar(Score* s);
-      virtual TremoloBar* clone() const { return new TremoloBar(*this); }
-      virtual ElementType type() const { return TREMOLOBAR; }
-      virtual void layout();
-      virtual void draw(Painter*) const;
-      virtual void write(Xml&) const;
-      virtual void read(QDomElement e);
-      QList<PitchValue>& points()                { return _points; }
-      const QList<PitchValue>& points() const    { return _points; }
-      void setPoints(const QList<PitchValue>& p) { _points = p;    }
-      virtual bool genPropertyMenu(QMenu*) const;
-      virtual void propertyAction(ScoreView*, const QString&);
-      };
+class TremoloBar;
 
 //---------------------------------------------------------
 //   TremoloBarProperties

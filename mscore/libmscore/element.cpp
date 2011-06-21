@@ -1134,7 +1134,7 @@ void Element::editDrag(const EditData& ed)
 //    return true if event is accepted
 //---------------------------------------------------------
 
-bool Element::edit(ScoreView*, int, int key, Qt::KeyboardModifiers, const QString&)
+bool Element::edit(MuseScoreView*, int, int key, Qt::KeyboardModifiers, const QString&)
       {
       if (key ==  Qt::Key_Home) {
             setUserOff(QPoint());

@@ -270,7 +270,7 @@ int Lyrics::endTick() const
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Lyrics::acceptDrop(ScoreView*, const QPointF&, int type, int subtype) const
+bool Lyrics::acceptDrop(MuseScoreView*, const QPointF&, int type, int subtype) const
       {
       return (type == TEXT && subtype == TEXT_LYRICS_VERSE_NUMBER);
       }

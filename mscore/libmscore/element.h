@@ -36,7 +36,7 @@ class Measure;
 class Staff;
 class Score;
 class Sym;
-class ScoreView;
+class MuseScoreView;
 class Segment;
 class TextStyle;
 class Element;
@@ -98,7 +98,7 @@ class LinkedElements : public QList<Element*> {
 //---------------------------------------------------------
 
 struct DropData {
-      ScoreView* view;
+      MuseScoreView* view;
       QPointF pos;
       QPointF dragOffset;
       Element* element;
@@ -111,7 +111,7 @@ struct DropData {
 //---------------------------------------------------------
 
 struct EditData {
-      ScoreView* view;
+      MuseScoreView* view;
       int curGrip;
       QPointF delta;
       QPointF pos;
@@ -254,8 +254,8 @@ class Element {
       virtual QLineF dragAnchor() const       { return QLineF(); }
 
       virtual bool isEditable() const         { return !_generated; }
-      virtual void startEdit(ScoreView*, const QPointF&) {}
-      virtual bool edit(ScoreView*, int grip, int key, Qt::KeyboardModifiers, const QString& s);
+      virtual void startEdit(MuseScoreView*, const QPointF&) {}
+      virtual bool edit(MuseScoreView*, int grip, int key, Qt::KeyboardModifiers, const QString& s);
       virtual void editDrag(const EditData&);
       virtual void endEditDrag()                               {}
       virtual void endEdit()                                   {}
@@ -303,7 +303,7 @@ class Element {
  Reimplemented by elements that accept drops. Used to change cursor shape while
  dragging to indicate drop targets.
 */
-      virtual bool acceptDrop(ScoreView*, const QPointF&, int, int) const { return false; }
+      virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const { return false; }
 
 /**
  Handle a dropped element at canvas relative \a pos of given element

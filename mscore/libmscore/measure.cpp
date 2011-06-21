@@ -1439,7 +1439,7 @@ QRectF Measure::staffabbox(int staffIdx) const
  and key- and timesig (allow drop if left of first chord or rest).
 */
 
-bool Measure::acceptDrop(ScoreView* viewer, const QPointF& p, int type, int) const
+bool Measure::acceptDrop(MuseScoreView* viewer, const QPointF& p, int type, int) const
       {
       // convert p from canvas to measure relative position and take x and y coordinates
       QPointF mrp = p - canvasPos(); // pos() - system()->pos() - system()->page()->pos();
