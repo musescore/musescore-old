@@ -71,10 +71,12 @@
 #include "selectdialog.h"
 #include "transposedialog.h"
 #include "metaedit.h"
+#include "chordedit.h"
 
 #include "libmscore/mscore.h"
 #include "libmscore/system.h"
 #include "libmscore/measurebase.h"
+#include "libmscore/chordlist.h"
 
 #ifdef OSC
 #include "ofqf/qoscserver.h"
@@ -402,6 +404,8 @@ MuseScore::MuseScore()
 
       _midiRecordId         = -1;
       _fullscreen           = false;
+      lastCmd               = 0;
+      lastShortcut          = 0;
 
       MScore::init();
 
@@ -1927,9 +1931,9 @@ static bool processNonGui()
             if (fn.endsWith(".mid"))
                   return cs->saveMidi(fn);
             if (fn.endsWith(".pdf"))
-                  return cs->savePsPdf(fn, QPrinter::PdfFormat);
+                  return mscore->savePsPdf(fn, QPrinter::PdfFormat);
             if (fn.endsWith(".ps"))
-                  return cs->savePsPdf(fn, QPrinter::PostScriptFormat);
+                  return mscore->savePsPdf(fn, QPrinter::PostScriptFormat);
             if (fn.endsWith(".png"))
                   return cs->savePng(fn);
             if (fn.endsWith(".svg"))
@@ -4126,12 +4130,10 @@ void MuseScore::cmd(QAction* a)
       {
       if (inChordEditor)      // HACK
             return;
-      static QAction* lastCmd;
-      static Shortcut* lastShortcut;
 
       QString cmdn(a->data().toString());
 
-//      if (debugMode)
+      if (debugMode)
             printf("MuseScore::cmd <%s>\n", cmdn.toAscii().data());
 
       Shortcut* sc = getShortcut(cmdn.toAscii().data());
@@ -4165,24 +4167,49 @@ void MuseScore::cmd(QAction* a)
       if (sc->flags & A_CMD)
             cs->startCmd();
 
-      bool scoreIsDirty = cs ? cs->dirty() : false;
-
       cmd(a, cmdn);
-
-      if (sc->flags & A_CMD)
+      if (lastShortcut->flags & A_CMD)
             cs->endCmd();
+      endCmd();
+      }
 
+//---------------------------------------------------------
+//   endCmd
+//    called after every command action (including every
+//    mouse action)
+//---------------------------------------------------------
+
+void MuseScore::endCmd()
+      {
+      bool enableInput = false;
       if (cs) {
-            if (!cs->noteEntryMode())
-                  updateInputState(cs);
-            else {
+            if (cv->noteEntryMode())
                   cs->moveCursor();
-                  }
+            setPos(cs->inputState().tick());
+// printf("updateInputState %s\n", qPrintable(cs->inputState().duration().name()));
+            updateInputState(cs);
             updateUndoRedo();
-            if (scoreIsDirty == _undoGroup->isClean()) {
-                  cs->setDirty(!scoreIsDirty);
-                  dirtyChanged(cs);
-                  }
+            cs->setDirty(!_undoGroup->isClean());
+            dirtyChanged(cs);
+            Element* e = cs->selection().element();
+            if (e && cs->playNote())
+                  play(e);
+            cs->setPlayNote(false);
+            enableInput = e && (e->type() == NOTE || e->type() == REST);
+            cs->end();
+            }
+      static const char* actionNames[] = {
+            "pad-rest", "pad-dot", "pad-dotdot", "note-longa",
+            "note-breve", "pad-note-1", "pad-note-2", "pad-note-4",
+            "pad-note-8", "pad-note-16", "pad-note-32", "pad-note-64",
+            "pad-note-128",
+//            "voice-1", "voice-2", "voice-3", "voice-4",
+            "acciaccatura", "appoggiatura", "grace4", "grace16",
+            "grace32", "beam-start", "beam-mid", "no-beam", "beam32",
+            "auto-beam"
+            };
+      for (unsigned i = 0; i < sizeof(actionNames)/sizeof(*actionNames); ++i) {
+            getAction(actionNames[i])->setEnabled(enableInput);
             }
       }
 
@@ -4238,7 +4265,7 @@ void MuseScore::cmd(QAction* a, const QString& cmd)
       else if (cmd == "file-save")
             saveFile();
       else if (cmd == "file-export")
-            cs->exportFile();
+            exportFile();
       else if (cmd == "file-reload") {
             if (!cs->created() && !checkDirty(cs)) {
                   if (cv->editMode()) {
@@ -4391,7 +4418,7 @@ void MuseScore::cmd(QAction* a, const QString& cmd)
             med.exec();
             }
       else if (cmd == "print")
-            cs->printFile();
+            printFile();
       else if (cmd == "repeat") {
             MScore::playRepeats = !MScore::playRepeats;
             cs->updateRepeatList(MScore::playRepeats);
@@ -4402,6 +4429,8 @@ void MuseScore::cmd(QAction* a, const QString& cmd)
             cs->setShowUnprintable(a->isChecked());
       else if (cmd == "show-frames")
             cs->setShowFrames(getAction(cmd.toLatin1().data())->isChecked());
+      else if (cmd == "harmony-properties")
+            cmdAddChordName2();
 
       else {
             if (cv) {
@@ -4413,6 +4442,62 @@ void MuseScore::cmd(QAction* a, const QString& cmd)
             }
       if (inspector)
             inspector->reloadClicked();
+      }
+
+//---------------------------------------------------------
+//   cmdAddChordName2
+//---------------------------------------------------------
+
+void MuseScore::cmdAddChordName2()
+      {
+      if (cs == 0 || !cs->checkHasMeasures())
+            return;
+      ChordRest* cr = cs->getSelectedChordRest();
+      if (!cr)
+            return;
+      int rootTpc = 14;
+      if (cr->type() == CHORD) {
+            Chord* chord = static_cast<Chord*>(cr);
+            rootTpc = chord->downNote()->tpc();
+            }
+      Harmony* s = 0;
+      Segment* segment = cr->segment();
+
+      foreach(Element* e, segment->annotations()) {
+            if (e->type() == HARMONY && (e->track() == cr->track())) {
+                  s = static_cast<Harmony*>(e);
+                  break;
+                  }
+            }
+
+      bool created = false;
+      if (s == 0) {
+            s = new Harmony(cs);
+            s->setTrack(cr->track());
+            s->setParent(segment);
+            s->setRootTpc(rootTpc);
+            created = true;
+            }
+      ChordEdit ce(cs);
+      ce.setHarmony(s);
+      int rv = ce.exec();
+      if (rv) {
+            const Harmony* h = ce.harmony();
+            s->setRootTpc(h->rootTpc());
+            s->setBaseTpc(h->baseTpc());
+            s->setId(h->id());
+            s->clearDegrees();
+            for (int i = 0; i < h->numberOfDegrees(); i++)
+                  s->addDegree(h->degree(i));
+            s->render();
+            cs->select(s, SELECT_SINGLE, 0);
+            cs->undoAddElement(s);
+            cs->setLayoutAll(true);
+            }
+      else {
+            if (created)
+                  delete s;
+            }
       }
 
 

@@ -227,7 +227,7 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                         }
 #endif // HAS_AUDIOFILE
                   else if (argc == 2)
-                        return qScriptValueFromValue(context->engine(), score->saveAs(true, s, ext));
+                        return 0; // TODO-LIB  qScriptValueFromValue(context->engine(), score->saveAs(true, s, ext));
                   else if (argc == 6 && ext == "png") {
                         bool screenshot  = context->argument(2).toBool();
                         bool transparent = context->argument(3).toBool();

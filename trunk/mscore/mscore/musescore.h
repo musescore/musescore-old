@@ -289,6 +289,8 @@ class MuseScore : public QMainWindow {
 
       QComboBox* layerSwitch;
       QNetworkAccessManager* networkManager;
+      QAction* lastCmd;
+      Shortcut* lastShortcut;
 
       //---------------------
 
@@ -338,6 +340,7 @@ class MuseScore : public QMainWindow {
       void gotoNextScore();
       void gotoPreviousScore();
       void updateUndoRedo();
+      void cmdAddChordName2();
 
    private slots:
       void autoSaveTimerTimeout();
@@ -514,6 +517,11 @@ class MuseScore : public QMainWindow {
       void selectSimilar(Element*, bool);
       void selectElementDialog(Element* e);
       void transpose();
+      void endCmd();
+      void printFile();
+      bool exportFile();
+      bool saveAs(bool saveCopy, const QString& path, const QString& ext);
+      bool savePsPdf(const QString& saveName, QPrinter::OutputFormat format);
       };
 
 extern MuseScore* mscore;

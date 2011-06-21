@@ -91,45 +91,6 @@ bool midiOutputTrace = false;
 bool showRubberBand  = true;
 
 //---------------------------------------------------------
-//   InputState
-//---------------------------------------------------------
-
-InputState::InputState() :
-   _duration(Duration::V_INVALID),
-   _drumNote(-1),
-   _drumset(0),
-   _track(0),
-   _segment(0),
-   _repitchMode(false),
-   rest(false),
-   pad(0),
-   pitch(72),
-   noteType(NOTE_NORMAL),
-   beamMode(BEAM_AUTO),
-   noteEntryMode(false),
-   slur(0)
-      {
-      }
-
-//---------------------------------------------------------
-//   cr
-//---------------------------------------------------------
-
-ChordRest* InputState::cr() const
-      {
-      return _segment ? static_cast<ChordRest*>(_segment->element(_track)) : 0;
-      }
-
-//---------------------------------------------------------
-//   tick
-//---------------------------------------------------------
-
-int InputState::tick() const
-      {
-      return _segment ? _segment->tick() : 0;
-      }
-
-//---------------------------------------------------------
 //   MeasureBaseList
 //---------------------------------------------------------
 
@@ -334,9 +295,12 @@ Score::Score(const Style* s)
 
       _mscVersion     = MSCVERSION;
       _created        = false;
+
       _updateAll      = false;
       layoutAll       = false;
       layoutFlags     = 0;
+      _playNote       = false;
+
       keyState        = 0;
       _showInvisible  = true;
       _showUnprintable = true;
@@ -396,9 +360,12 @@ Score::Score(Score* parent)
 
       _mscVersion     = MSCVERSION;
       _created        = false;
+
       _updateAll      = false;
       layoutAll       = false;
       layoutFlags     = 0;
+      _playNote       = false;
+
       keyState        = 0;
       _showInvisible  = true;
       _showUnprintable  = true;
@@ -2938,6 +2905,10 @@ void Score::padToggle(int n)
 void Score::setInputState(Element* e)
       {
 // printf("setInputState %s\n", e ? e->name() : "--");
+
+      if (e && e->type() == CHORD)
+            e = static_cast<Chord*>(e)->upNote();
+
       bool enable = e && (e->type() == NOTE || e->type() == REST);
 //TODO-LIB      enableInputToolbar(enable);
       if (e == 0) {
@@ -2990,4 +2961,367 @@ void Score::setInputState(Element* e)
 //      mscore->updateInputState(this);
       }
 
+//---------------------------------------------------------
+//   deselect
+//---------------------------------------------------------
+
+void Score::deselect(Element* el)
+      {
+      refresh |= el->abbox();
+      _selection.remove(el);
+      }
+
+//---------------------------------------------------------
+//   select
+//    staffIdx is valid, if element is of type MEASURE
+//---------------------------------------------------------
+
+void Score::select(Element* e, SelectType type, int staffIdx)
+      {
+      if (e && (e->type() == NOTE || e->type() == REST)) {
+            Element* ee = e;
+            if (ee->type() == NOTE)
+                  ee = ee->parent();
+            setPlayPos(static_cast<ChordRest*>(ee)->segment()->tick());
+            }
+      if (debugMode)
+            printf("select element <%s> type %d(state %d) staff %d\n",
+               e ? e->name() : "", type, selection().state(), e ? e->staffIdx() : -1);
+
+      SelState selState = _selection.state();
+
+      if (type == SELECT_SINGLE) {
+            _selection.deselectAll();
+            if (e == 0) {
+                  selState = SEL_NONE;
+                  _updateAll = true;
+                  }
+            else {
+                  if (e->type() == MEASURE) {
+                        select(e, SELECT_RANGE, staffIdx);
+                        return;
+                        }
+                  refresh |= e->abbox();
+                  _selection.add(e);
+                  _is.setTrack(e->track());
+                  selState = SEL_LIST;
+                  if (e->type() == NOTE || e->type() == REST || e->type() == CHORD) {
+                        if (e->type() == NOTE)
+                              e = e->parent();
+                        _is.setSegment(static_cast<ChordRest*>(e)->segment());
+                        }
+                  }
+            _selection.setActiveSegment(0);
+            _selection.setActiveTrack(0);
+            }
+      else if (type == SELECT_ADD) {
+            if (e->type() == MEASURE) {
+                  Measure* m = static_cast<Measure*>(e);
+                  int tick  = m->tick();
+                  int etick = tick + m->ticks();
+                  if (_selection.state() == SEL_NONE) {
+                        _selection.setStartSegment(m->tick2segment(tick, true));
+                        _selection.setEndSegment(tick2segment(etick));
+                        }
+                  else {
+                        select(0, SELECT_SINGLE, 0);
+                        return;
+                        }
+                  _updateAll = true;
+                  selState = SEL_RANGE;
+                  _selection.setStaffStart(0);
+                  _selection.setStaffEnd(nstaves());
+                  _selection.updateSelectedElements();
+                  }
+            else {
+                  if (_selection.state() == SEL_RANGE) {
+                        select(0, SELECT_SINGLE, 0);
+                        return;
+                        }
+                  else {
+                        refresh |= e->abbox();
+                        if (_selection.elements().contains(e))
+                              _selection.remove(e);
+                        else {
+                            _selection.add(e);
+                            selState = SEL_LIST;
+                            }
+                        }
+                  }
+            }
+      else if (type == SELECT_RANGE) {
+            bool activeIsFirst = false;
+            int activeTrack = e->track();
+            if (e->type() == MEASURE) {
+                  Measure* m = static_cast<Measure*>(e);
+                  int tick  = m->tick();
+                  int etick = tick + m->ticks();
+                  activeTrack = staffIdx * VOICES;
+                  if (_selection.state() == SEL_NONE) {
+                        _selection.setStaffStart(staffIdx);
+                        _selection.setStaffEnd(staffIdx + 1);
+                        //_selection.setStartSegment(m->tick2segment(tick, true));
+                        _selection.setStartSegment(m->first());
+                        // _selection.setEndSegment(tick2segment(etick, true));
+                        _selection.setEndSegment(m->last());
+                        }
+                  else if (_selection.state() == SEL_RANGE) {
+                        if (staffIdx < _selection.staffStart())
+                              _selection.setStaffStart(staffIdx);
+                        else if (staffIdx >= _selection.staffEnd())
+                              _selection.setStaffEnd(staffIdx + 1);
+                        if (tick < _selection.tickStart()) {
+                              _selection.setStartSegment(m->tick2segment(tick, true));
+                              activeIsFirst = true;
+                              }
+                        else if (etick >= _selection.tickEnd())
+                              _selection.setEndSegment(tick2segment(etick, true));
+                        else {
+                              if (_selection.activeSegment() == _selection.startSegment()) {
+                                    _selection.setStartSegment(m->tick2segment(tick, true));
+                                    activeIsFirst = true;
+                                    }
+                              else
+                                    _selection.setEndSegment(tick2segment(etick, true));
+                              }
+                        }
+                  else if (_selection.isSingle()) {
+                        Segment* seg = 0;
+                        Element* oe  = _selection.element();
+                        bool reverse = false;
+                        int ticks    = 0;
+                        if (oe->isChordRest())
+                              ticks = static_cast<ChordRest*>(oe)->actualTicks();
+                        int oetick = 0;
+                        if (oe->parent()->type() == SEGMENT)
+                              oetick = static_cast<Segment*>(oe->parent())->tick();
+                        if (tick < oetick)
+                              seg = m->first();
+                        else if (etick >= oetick + ticks) {
+                              seg = m->last();
+                              reverse = true;
+                              }
+                        int track = staffIdx * VOICES;
+                        Element* el = 0;
+                        // find first or last chord/rest in measure
+                        for (;;) {
+                              el = seg->element(track);
+                              if (el && el->isChordRest())
+                                    break;
+                              if (reverse)
+                                    seg = seg->prev1();
+                              else
+                                    seg = seg->next1();
+                              if (!seg)
+                                    break;
+                              }
+                        if (el)
+                              select(el, SELECT_RANGE, staffIdx);
+                        return;
+                        }
+                  else {
+                        printf("SELECT_RANGE: measure: sel state %d\n", _selection.state());
+                        }
+                  }
+            else if (e->type() == NOTE || e->type() == REST || e->type() == CHORD) {
+                  if (e->type() == NOTE)
+                        e = static_cast<Note*>(e)->chord();
+                  ChordRest* cr = static_cast<ChordRest*>(e);
+
+                  if (_selection.state() == SEL_NONE) {
+                        _selection.setStaffStart(e->staffIdx());
+                        _selection.setStaffEnd(_selection.staffStart() + 1);
+                        _selection.setStartSegment(cr->segment());
+                        activeTrack = cr->track();
+                        _selection.setEndSegment(cr->segment()->nextCR(cr->track()));
+                        }
+                  else if (_selection.isSingle()) {
+                        Element* oe = _selection.element();
+                        if (oe && (oe->type() == NOTE || oe->type() == REST || oe->type() == CHORD)) {
+                              if (oe->type() == NOTE)
+                                    oe = oe->parent();
+                              ChordRest* ocr = static_cast<ChordRest*>(oe);
+                              _selection.setStaffStart(oe->staffIdx());
+                              _selection.setStaffEnd(_selection.staffStart() + 1);
+                              _selection.setStartSegment(ocr->segment());
+                              _selection.setEndSegment(ocr->segment()->nextCR(ocr->track()));
+                              if (!_selection.endSegment())
+                                    _selection.setEndSegment(ocr->segment()->next());
+
+                              staffIdx = cr->staffIdx();
+                              int tick = cr->tick();
+                              if (staffIdx < _selection.staffStart())
+                                    _selection.setStaffStart(staffIdx);
+                              else if (staffIdx >= _selection.staffEnd())
+                                    _selection.setStaffEnd(staffIdx + 1);
+                              if (tick < _selection.tickStart()) {
+                                    _selection.setStartSegment(cr->segment());
+                                    activeIsFirst = true;
+                                    }
+                              else if (tick >= _selection.tickEnd())
+                                    _selection.setEndSegment(cr->segment()->nextCR(cr->track()));
+                              else {
+                                    if (_selection.activeSegment() == _selection.startSegment()) {
+                                          _selection.setStartSegment(cr->segment());
+                                          activeIsFirst = true;
+                                          }
+                                    else
+                                          _selection.setEndSegment(cr->segment()->nextCR(cr->track()));
+                                    }
+                              }
+                        else {
+                              select(e, SELECT_SINGLE, 0);
+                              return;
+                              }
+                        }
+                  else if (_selection.state() == SEL_RANGE) {
+                        staffIdx = cr->staffIdx();
+                        int tick = cr->tick();
+                        if (staffIdx < _selection.staffStart())
+                              _selection.setStaffStart(staffIdx);
+                        else if (staffIdx >= _selection.staffEnd())
+                              _selection.setStaffEnd(staffIdx + 1);
+                        if (tick < _selection.tickStart()) {
+                              if (_selection.activeSegment() == _selection.endSegment())
+                                    _selection.setEndSegment(_selection.startSegment());
+                              _selection.setStartSegment(cr->segment());
+                              activeIsFirst = true;
+                              }
+                        else if (_selection.endSegment() && tick >= _selection.tickEnd()) {
+                              if (_selection.activeSegment() == _selection.startSegment())
+                                    _selection.setStartSegment(_selection.endSegment());
+                              Segment* s = cr->segment()->nextCR(cr->track());
+                              _selection.setEndSegment(s);
+                              }
+                        else {
+                              if (_selection.activeSegment() == _selection.startSegment()) {
+                                    _selection.setStartSegment(cr->segment());
+                                    activeIsFirst = true;
+                                    }
+                              else {
+                                    _selection.setEndSegment(cr->segment()->nextCR(cr->track()));
+                                    }
+                              }
+                        }
+                  else {
+                        printf("sel state %d\n", _selection.state());
+                        }
+                  selState = SEL_RANGE;
+                  if (!_selection.endSegment())
+                        _selection.setEndSegment(cr->segment()->nextCR());
+                  if (!_selection.startSegment())
+                        _selection.setStartSegment(cr->segment());
+                  }
+            else {
+                  select(e, SELECT_SINGLE, staffIdx);
+                  return;
+                  }
+
+            if (activeIsFirst)
+                  _selection.setActiveSegment(_selection.startSegment());
+            else
+                  _selection.setActiveSegment(_selection.endSegment());
+
+            _selection.setActiveTrack(activeTrack);
+
+            selState = SEL_RANGE;
+            _selection.updateSelectedElements();
+            }
+      _selection.setState(selState);
+      }
+
+//---------------------------------------------------------
+//   lassoSelect
+//---------------------------------------------------------
+
+void Score::lassoSelect(const QRectF& bbox)
+      {
+      select(0, SELECT_SINGLE, 0);
+      QRectF fr(bbox.normalized());
+      foreach(Page* page, _pages) {
+            QRectF pr(page->abbox());
+            if (pr.right() < fr.left())
+                  continue;
+            if (pr.left() > fr.right())
+                  break;
+
+            QList<const Element*> el = page->items(fr);
+            for (int i = 0; i < el.size(); ++i) {
+                  const Element* e = el.at(i);
+                  e->itemDiscovered = 0;
+                  if (fr.contains(e->abbox())) {
+                        if (e->type() != MEASURE && e->selectable())
+                              select(const_cast<Element*>(e), SELECT_ADD, 0);
+                        }
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   lassoSelectEnd
+//---------------------------------------------------------
+
+void Score::lassoSelectEnd()
+      {
+      int noteRestCount     = 0;
+      Segment* startSegment = 0;
+      Segment* endSegment   = 0;
+      int startStaff        = 0x7fffffff;
+      int endStaff          = 0;
+      int endTrack          = 0;
+
+      if (_selection.elements().isEmpty()) {
+            _selection.setState(SEL_NONE);
+            return;
+            }
+      _selection.setState(SEL_LIST);
+
+      foreach(const Element* e, _selection.elements()) {
+            if (e->type() != NOTE && e->type() != REST)
+                  continue;
+            ++noteRestCount;
+            if (e->type() == NOTE)
+                  e = e->parent();
+            Segment* seg = static_cast<const ChordRest*>(e)->segment();
+            if ((startSegment == 0) || (seg->tick() < startSegment->tick()))
+                  startSegment = seg;
+            if ((endSegment == 0) || (seg->tick() > endSegment->tick())) {
+                  endSegment = seg;
+                  endTrack = e->track();
+                  }
+            int idx = e->staffIdx();
+            if (idx < startStaff)
+                  startStaff = idx;
+            if (idx > endStaff)
+                  endStaff = idx;
+            }
+      if (noteRestCount > 0) {
+            endSegment = endSegment->nextCR(endTrack);
+            _selection.setRange(startSegment, endSegment, startStaff, endStaff+1);
+            if (_selection.state() != SEL_RANGE)
+                  _selection.setState(SEL_RANGE);
+            }
+      _updateAll = true;
+      }
+
+//---------------------------------------------------------
+//   searchSelectedElements
+//    "ElementList selected"
+//---------------------------------------------------------
+
+/**
+ Rebuild list of selected Elements.
+*/
+static void collectSelectedElements(void* data, Element* e)
+      {
+      QList<const Element*>* l = static_cast<QList<const Element*>*>(data);
+      if (e->selected())
+            l->append(e);
+      }
+
+void Score::searchSelectedElements()
+      {
+      _selection.searchSelectedElements();
+//      emit selectionChanged(int(_selection.state()));
+      }
 

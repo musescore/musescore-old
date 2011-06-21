@@ -27,7 +27,7 @@
 #include "libmscore/rest.h"
 #include "libmscore/chord.h"
 #include "libmscore/select.h"
-#include "input.h"
+#include "libmscore/input.h"
 #include "libmscore/key.h"
 #include "libmscore/measure.h"
 #include "musescore.h"
@@ -46,17 +46,6 @@
 #else
 #define CONTROL_MODIFIER Qt::ControlModifier
 #endif
-
-//---------------------------------------------------------
-//   drumset
-//---------------------------------------------------------
-
-Drumset* InputState::drumset() const
-      {
-      if (_segment == 0)
-            return 0;
-      return _segment->score()->staff(_track/VOICES)->part()->instr(_segment->tick())->drumset();
-      }
 
 //---------------------------------------------------------
 //   Canvas::editKey
