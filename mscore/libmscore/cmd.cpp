@@ -92,6 +92,7 @@ void Score::startCmd()
       if (debugMode)
             printf("===startCmd()\n");
       layoutAll = true;      ///< do a complete relayout
+      _playNote = false;
 
       // Start collecting low-level undo operations for a
       // user-visible undo action.
@@ -124,7 +125,7 @@ void Score::endCmd()
       bool noUndo = undo()->current()->childCount() <= 1;
       if (!noUndo)
             setClean(noUndo);
-      end();
+//      end();
       undo()->endMacro(noUndo);
       }
 
@@ -433,7 +434,7 @@ void Score::cmdAddInterval(int val, const QList<Note*>& nl)
             note->setPitch(npitch, ntpc);
 
             undoAddElement(note);
-//TODO-LIB            mscore->play(note);
+            _playNote = true;
             setLayout(on->chord()->measure());
 
             select(note, SELECT_SINGLE, 0);
@@ -544,9 +545,7 @@ Segment* Score::setNoteRest(Segment* segment, int track, NoteVal nval, Fraction 
                         }
                   ncr->setTuplet(cr ? cr->tuplet() : 0);
                   undoAddCR(ncr, measure, tick);
-//TODO-LIB                  if (ncr->type() == CHORD) {
-//                        mscore->play(ncr);
-//                        }
+                  _playNote = true;
                   segment = ncr->segment();
                   tick += ncr->actualTicks();
                   }
@@ -982,64 +981,6 @@ printf("  ChangeCRLen:: %d += %d(actual=%d)\n", tick, f2.ticks(), f2.ticks() * t
       }
 
 //---------------------------------------------------------
-//   cmdAddChordName2
-//---------------------------------------------------------
-
-void Score::cmdAddChordName2()
-      {
-      if (!checkHasMeasures())
-            return;
-      ChordRest* cr = getSelectedChordRest();
-      if (!cr)
-            return;
-      int rootTpc = 14;
-      if (cr->type() == CHORD) {
-            Chord* chord = static_cast<Chord*>(cr);
-            rootTpc = chord->downNote()->tpc();
-            }
-      Harmony* s = 0;
-      Segment* segment = cr->segment();
-
-      foreach(Element* e, segment->annotations()) {
-            if (e->type() == HARMONY && (e->track() == cr->track())) {
-                  s = static_cast<Harmony*>(e);
-                  break;
-                  }
-            }
-
-      bool created = false;
-      if (s == 0) {
-            s = new Harmony(this);
-            s->setTrack(cr->track());
-            s->setParent(segment);
-            s->setRootTpc(rootTpc);
-            created = true;
-            }
-#if 0 // TODO-LIB
-      ChordEdit ce(this);
-      ce.setHarmony(s);
-      int rv = ce.exec();
-      if (rv) {
-            const Harmony* h = ce.harmony();
-            s->setRootTpc(h->rootTpc());
-            s->setBaseTpc(h->baseTpc());
-            s->setId(h->id());
-            s->clearDegrees();
-            for (int i = 0; i < h->numberOfDegrees(); i++)
-                  s->addDegree(h->degree(i));
-            s->render();
-            select(s, SELECT_SINGLE, 0);
-            undoAddElement(s);
-            layoutAll = true;
-            }
-      else {
-            if (created)
-                  delete s;
-            }
-#endif
-      }
-
-//---------------------------------------------------------
 //   upDown
 ///   Increment/decrement pitch of note by one or by an octave.
 //---------------------------------------------------------
@@ -1181,8 +1122,7 @@ void Score::upDown(bool up, UpDownMode mode)
                   }
 
             // play new note with velocity 80 for 0.3 sec:
-//TODO-LIB            if (playNotes)
-//                  mscore->play(oNote);
+            _playNote = true;
             }
       _selection.updateState();     // accidentals may have changed
       }
@@ -1613,8 +1553,8 @@ void Score::processMidiInput()
             layoutAll = true;
             endCmd();
             //after relayout
-//TODO-LIB            if (n)
-//                  mscore->currentScoreView()->adjustCanvasPosition(n, false);
+            foreach(MuseScoreView* v, viewer)
+                  v->adjustCanvasPosition(n, false);
             }
       }
 
@@ -2195,10 +2135,7 @@ Element* Score::move(const QString& cmd)
                         Element* el = segment->element(e->track());
                         if (el == 0)
                               return 0;
-                        if (el->type() == CHORD) {
-                              // el = static_cast<Chord*>(el)->upNote();
-//TODO-LIB                              mscore->play(static_cast<Chord*>(el));
-                              }
+                        _playNote = true;
                         select(el, SELECT_SINGLE, 0);
                         return el;
                         }
@@ -2288,10 +2225,7 @@ Element* Score::move(const QString& cmd)
                 }
             }
       if (el) {
-//TODO-LIB            if (el->type() == CHORD) {
-//                  el = static_cast<Chord*>(el)->upNote();
-//                  mscore->play(static_cast<Note*>(el));
-//                  }
+            _playNote = true;
             select(el, SELECT_SINGLE, 0);
             }
       return el;
@@ -2560,7 +2494,7 @@ void Score::cmd(const QAction* a)
                   if (e) {
                         if (e->type() == NOTE) {
                               _is.pitch = static_cast<Note*>(e)->pitch();
-//TODO-LIB                    mscore->play(e);
+                              _playNote = true;
                               }
                         select(e, SELECT_SINGLE, 0);
                         }
@@ -2574,7 +2508,7 @@ void Score::cmd(const QAction* a)
                   if (e) {
                         if (e->type() == NOTE) {
                               _is.pitch = static_cast<Note*>(e)->pitch();
-//TODO-LIB                    mscore->play(e);
+                              _playNote = true;
                               }
                         select(e, SELECT_SINGLE, 0);
                         }
@@ -2588,7 +2522,7 @@ void Score::cmd(const QAction* a)
                   if (e) {
                         if (e->type() == NOTE) {
                               _is.pitch = static_cast<Note*>(e)->pitch();
-//TODO-LIB                    mscore->play(e);
+                              _playNote = true;
                               }
                         select(e, SELECT_SINGLE, 0);
                         }
@@ -2602,8 +2536,8 @@ void Score::cmd(const QAction* a)
                   if (e) {
                         if (e->type() == NOTE) {
                               _is.pitch = static_cast<Note*>(e)->pitch();
-//TODO-LIB                    mscore->play(e);
-                        }
+                              _playNote = true;
+                              }
                         select(e, SELECT_SINGLE, 0);
                         }
                   }
@@ -2667,8 +2601,6 @@ void Score::cmd(const QAction* a)
             addMetronome();
       else if (cmd == "pitch-spell")
             spell();
-      else if (cmd == "harmony-properties")
-            cmdAddChordName2();
       else if (cmd == "select-all") {
             MeasureBase* mb = _measures.last();
             if (mb) {   // check for empty score

@@ -909,15 +909,6 @@ QRectF Note::drag(const EditData& data)
       bool tab = staff()->useTablature();
       double step = _spatium * (tab ? staff()->staffType()->lineDistance().val() : 0.5);
       _lineOffset = lrint(data.pos.y() / step);
-//    USELESS: endDrag() will take care of string range and anyway
-//    WRONG: for tabulature notes, line is in _string not in _line
-//      if (tab) {
-//            int strings = staff()->lines();
-//            if (_line + _lineOffset < 0)
-//                  _lineOffset = -_line;
-//            else if (_line + _lineOffset >= strings)
-//                  _lineOffset = strings - _line - 1;
-//            }
       score()->setLayout(chord()->measure());
       return bb.translated(chord()->canvasPos());
       }

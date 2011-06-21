@@ -42,7 +42,6 @@
 #include "al/tempo.h"
 #include "libmscore/select.h"
 #include "preferences.h"
-#include "input.h"
 #include "playpanel.h"
 #include "libmscore/staff.h"
 #include "libmscore/part.h"
@@ -1148,4 +1147,293 @@ QString MuseScore::getDrumsetFilename(bool open)
             }
       return QString();
       }
+
+//---------------------------------------------------------
+//   printFile
+//---------------------------------------------------------
+
+void MuseScore::printFile()
+      {
+      QPrinter printerDev(QPrinter::HighResolution);
+      PageFormat* pf = cs->pageFormat();
+
+      if (paperSizes[pf->size].qtsize >= int(QPrinter::Custom)) {
+            printerDev.setPaperSize(QSizeF(pf->_width, pf->_height),
+               QPrinter::Inch);
+            }
+      else
+            printerDev.setPaperSize(QPrinter::PageSize(paperSizes[pf->size].qtsize));
+
+      printerDev.setOrientation(pf->landscape ? QPrinter::Landscape : QPrinter::Portrait);
+      printerDev.setCreator("MuseScore Version: " VERSION);
+      printerDev.setFullPage(true);
+      printerDev.setColorMode(QPrinter::Color);
+
+      printerDev.setDocName(cs->name());
+      printerDev.setDoubleSidedPrinting(pf->twosided);
+      printerDev.setOutputFormat(QPrinter::NativeFormat);
+
+#if defined(Q_WS_MAC) || defined(__MINGW32__)
+      printerDev.setOutputFileName("");
+#else
+      // when setting this on windows platform, pd.exec() does not
+      // show dialog
+      printerDev.setOutputFileName(cs->fileInfo()->path() + "/" + cs->name() + ".pdf");
+#endif
+
+      QPrintDialog pd(&printerDev, 0);
+      if (!pd.exec())
+            return;
+      QPainter p(&printerDev);
+      p.setRenderHint(QPainter::Antialiasing, true);
+      p.setRenderHint(QPainter::TextAntialiasing, true);
+      double mag = printerDev.logicalDpiX() / DPI;
+      p.scale(mag, mag);
+
+      const QList<Page*> pl = cs->pages();
+      int pages    = pl.size();
+      int offset   = cs->pageNumberOffset();
+      int fromPage = printerDev.fromPage() - 1 - offset;
+      int toPage   = printerDev.toPage() - 1 - offset;
+      if (fromPage < 0)
+            fromPage = 0;
+      if ((toPage < 0) || (toPage >= pages))
+            toPage = pages - 1;
+
+      PainterQt painter(&p, 0);
+
+      for (int copy = 0; copy < printerDev.numCopies(); ++copy) {
+            bool firstPage = true;
+            for (int n = fromPage; n <= toPage; ++n) {
+                  if (!firstPage)
+                        printerDev.newPage();
+                  firstPage = false;
+
+                  cs->print(&painter, n);
+                  if ((copy + 1) < printerDev.numCopies())
+                        printerDev.newPage();
+                  }
+            }
+      p.end();
+      }
+
+//---------------------------------------------------------
+//   saveAs
+//    return true on success
+//---------------------------------------------------------
+
+bool MuseScore::exportFile()
+      {
+      bool saveCopy = true;
+      QStringList fl;
+      fl.append(tr("Uncompressed MuseScore Format (*.mscx)"));
+      fl.append(tr("MusicXML Format (*.xml)"));
+      fl.append(tr("Compressed MusicXML Format (*.mxl)"));
+      fl.append(tr("Standard MIDI File (*.mid)"));
+      fl.append(tr("PDF File (*.pdf)"));
+      fl.append(tr("PostScript File (*.ps)"));
+      fl.append(tr("PNG Bitmap Graphic (*.png)"));
+      fl.append(tr("Scalable Vector Graphic (*.svg)"));
+      fl.append(tr("Lilypond Format (*.ly)"));
+#ifdef HAS_AUDIOFILE
+      fl.append(tr("Wave Audio (*.wav)"));
+      fl.append(tr("Flac Audio (*.flac)"));
+      fl.append(tr("Ogg Vorbis Audio (*.ogg)"));
+#endif
+      fl.append(tr("MP3 Audio (*.mp3)"));
+      QString saveDialogTitle = saveCopy ? tr("MuseScore: Save a Copy") :
+                                           tr("MuseScore: Save As");
+
+      QSettings settings;
+      if (lastSaveCopyDirectory.isEmpty())
+            lastSaveCopyDirectory = settings.value("lastSaveCopyDirectory", preferences.workingDirectory).toString();
+      if (lastSaveDirectory.isEmpty())
+            lastSaveDirectory = settings.value("lastSaveDirectory", preferences.workingDirectory).toString();
+      QString saveDirectory = saveCopy ?
+            lastSaveCopyDirectory : lastSaveDirectory;
+
+      if (saveDirectory.isEmpty()) {
+            saveDirectory = preferences.workingDirectory;
+            }
+
+      QString selectedFilter;
+      QString name   = QString("%1.mscx").arg(cs->fileInfo()->baseName());
+      QString filter = fl.join(";;");
+      QString fn = getSaveScoreName(saveDialogTitle, name, filter, &selectedFilter);
+      if (fn.isEmpty())
+            return false;
+
+      QFileInfo fi(fn);
+      if (saveCopy)
+            lastSaveCopyDirectory = fi.absolutePath();
+      else
+            lastSaveDirectory = fi.absolutePath();
+
+      QString ext;
+      if (selectedFilter.isEmpty())
+            ext = fi.suffix();
+      else {
+            int idx = fl.indexOf(selectedFilter);
+            if (idx != -1) {
+                  static const char* extensions[] = {
+                        "mscx", "xml", "mxl", "mid", "pdf", "ps", "png", "svg", "ly",
+#ifdef HAS_AUDIOFILE
+                        "wav", "flac", "ogg",
+#endif
+                        "mp3"
+                        };
+                  ext = extensions[idx];
+                  }
+            }
+      if (ext.isEmpty()) {
+            QMessageBox::critical(this, tr("MuseScore: Save As"), tr("cannot determine file type"));
+            return false;
+            }
+
+      if (fi.suffix() != ext)
+            fn += "." + ext;
+      return saveAs(saveCopy, fn, ext);
+      }
+
+//---------------------------------------------------------
+//   saveAs
+//---------------------------------------------------------
+
+bool MuseScore::saveAs(bool saveCopy, const QString& path, const QString& ext)
+      {
+      bool rv = false;
+      QString suffix = "." + ext;
+      QString fn(path);
+      if (!fn.endsWith(suffix))
+            fn += suffix;
+      if (ext == "mscx" || ext == "mscz") {
+            // save as mscore *.msc[xz] file
+            QFileInfo fi(fn);
+            rv = true;
+            try {
+                  if (ext == "mscz")
+                        cs->saveCompressedFile(fi, false);
+                  else
+                        cs->saveFile(fi, false);
+                  }
+            catch (QString s) {
+                  rv = false;
+                  QMessageBox::critical(this, tr("MuseScore: Save As"), s);
+                  }
+            if (rv && !saveCopy) {
+                  cs->fileInfo()->setFile(fn);
+                  setWindowTitle("MuseScore: " + cs->name());
+                  cs->undo()->setClean();
+                  dirtyChanged(cs);
+                  cs->setCreated(false);
+                  updateRecentScores(cs);
+                  writeSessionFile(false);
+                  }
+            }
+      else if (ext == "xml") {
+            // save as MusicXML *.xml file
+//TODO-LIB            rv = saveXml(fn);
+            }
+      else if (ext == "mxl") {
+            // save as compressed MusicXML *.mxl file
+//TODO-LIB            rv = saveMxl(fn);
+            }
+      else if (ext == "mid") {
+            // save as midi file *.mid
+//TODO-LIB            rv = saveMidi(fn);
+            }
+      else if (ext == "pdf") {
+            // save as pdf file *.pdf
+//TODO-LIB            rv = savePsPdf(fn, QPrinter::PdfFormat);
+            }
+      else if (ext == "ps") {
+            // save as postscript file *.ps
+//TODO-LIB            rv = savePsPdf(fn, QPrinter::PostScriptFormat);
+            }
+      else if (ext == "png") {
+            // save as png file *.png
+//TODO-LIB            rv = savePng(fn);
+            }
+      else if (ext == "svg") {
+            // save as svg file *.svg
+//TODO-LIB            rv = saveSvg(fn);
+            }
+      else if (ext == "ly") {
+            // save as lilypond file *.ly
+//TODO-LIB            rv = saveLilypond(fn);
+            }
+#ifdef HAS_AUDIOFILE
+      else if (ext == "wav" || ext == "flac" || ext == "ogg") {
+//TODO-LIB            rv = saveAudio(fn, ext);
+            }
+#endif
+      else if (ext == "mp3") {
+//TODO-LIB            rv = saveMp3(fn);
+            }
+      else {
+            fprintf(stderr, "internal error: unsupported extension <%s>\n",
+               qPrintable(ext));
+            return false;
+            }
+      return rv;
+      }
+
+//---------------------------------------------------------
+//   savePsPdf
+//---------------------------------------------------------
+
+bool MuseScore::savePsPdf(const QString& saveName, QPrinter::OutputFormat format)
+      {
+      PageFormat* pf = cs->pageFormat();
+      QPrinter printerDev(QPrinter::HighResolution);
+      if (paperSizes[pf->size].qtsize >= int(QPrinter::Custom)) {
+            printerDev.setPaperSize(QSizeF(pf->_width, pf->_height),
+               QPrinter::Inch);
+            }
+      else
+            printerDev.setPaperSize(QPrinter::PageSize(paperSizes[pf->size].qtsize));
+
+      printerDev.setOrientation(pf->landscape ? QPrinter::Landscape : QPrinter::Portrait);
+      printerDev.setCreator("MuseScore Version: " VERSION);
+      printerDev.setFullPage(true);
+      printerDev.setColorMode(QPrinter::Color);
+      printerDev.setDocName(cs->name());
+      printerDev.setDoubleSidedPrinting(pf->twosided);
+      printerDev.setOutputFormat(format);
+      printerDev.setOutputFileName(saveName);
+
+      QPainter p(&printerDev);
+      p.setRenderHint(QPainter::Antialiasing, true);
+      p.setRenderHint(QPainter::TextAntialiasing, true);
+      double mag = printerDev.logicalDpiX() / DPI;
+      p.scale(mag, mag);
+
+      const QList<Page*> pl = cs->pages();
+      int pages    = pl.size();
+      int offset   = cs->pageNumberOffset();
+      int fromPage = printerDev.fromPage() - 1 - offset;
+      int toPage   = printerDev.toPage() - 1 - offset;
+      if (fromPage < 0)
+            fromPage = 0;
+      if ((toPage < 0) || (toPage >= pages))
+            toPage = pages - 1;
+
+      PainterQt painter(&p, 0);
+
+      for (int copy = 0; copy < printerDev.numCopies(); ++copy) {
+            bool firstPage = true;
+            for (int n = fromPage; n <= toPage; ++n) {
+                  if (!firstPage)
+                        printerDev.newPage();
+                  firstPage = false;
+
+                  cs->print(&painter, n);
+                  if ((copy + 1) < printerDev.numCopies())
+                        printerDev.newPage();
+                  }
+            }
+      p.end();
+      return true;
+      }
+
 

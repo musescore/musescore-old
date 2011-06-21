@@ -101,6 +101,7 @@ class Spanner;
 class ScoreView;
 class LinkedElements;
 class Fingering;
+class Painter;
 
 extern bool showRubberBand;
 
@@ -270,6 +271,7 @@ class Score {
       Measure* startLayout;   ///< start a relayout at this measure
       bool layoutAll;         ///< do a complete relayout
       LayoutFlags layoutFlags;
+      bool _playNote;         ///< play selected note after command
 
       Qt::KeyboardModifiers keyState;
 
@@ -346,7 +348,6 @@ class Score {
       void addTempo();
       void addMetronome();
 
-      void cmdAddChordName2();
       int processPendingNotes(QList<MNote*>* notes, int, int);
       void cmdResetBeamMode();
       void connectSlurs();
@@ -582,14 +583,15 @@ class Score {
       void saveCompressedFile(QFileInfo&, bool autosave);
       void saveCompressedFile(QIODevice*, QFileInfo&, bool autosave);
       bool saveAs(bool saveCopy = false);
-      bool saveAs(bool saveCopy, const QString& name, const QString& ext);
+//      bool saveAs(bool saveCopy, const QString& name, const QString& ext);
       bool exportFile();
 
-      void print(QPrinter* printer);
+//      void print(QPrinter* printer);
+      void print(Painter* printer, int page);
       bool saveXml(const QString& name);
       bool saveMxl(const QString& name);
       bool saveMidi(const QString& name);
-      bool savePsPdf(const QString& saveName, QPrinter::OutputFormat format);
+//      bool savePsPdf(const QString& saveName, QPrinter::OutputFormat format);
       bool savePng(const QString& name);
       bool savePng(const QString& name, bool screenshot, bool transparent, double convDpi, QImage::Format format);
       bool saveSvg(const QString& name);
@@ -854,7 +856,8 @@ class Score {
       void addViewer(MuseScoreView* v)      { viewer.append(v);   }
       void removeViewer(MuseScoreView* v)   { viewer.removeAll(v); }
       void moveCursor();
-      void printFile();
+      bool playNote() const                 { return _playNote; }
+      void setPlayNote(bool v)              { _playNote = v;    }
       };
 
 extern Score* gscore;

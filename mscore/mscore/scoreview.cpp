@@ -3092,6 +3092,13 @@ void ScoreView::drag(const QPointF& delta)
       foreach(Element* e, _score->selection().elements())
             _score->addRefresh(e->drag(data));
       _score->end();
+      if (_score->playNote()) {
+            Element* e = _score->selection().element();
+            if (e) {
+                  mscore->play(e);
+                  }
+            _score->setPlayNote(false);
+            }
       }
 
 //---------------------------------------------------------
@@ -3110,6 +3117,7 @@ void ScoreView::endDrag()
       dragElement = 0;
       setDropTarget(0); // this also resets dropAnchor
       _score->endCmd();
+      mscore->endCmd();
       }
 
 //---------------------------------------------------------
@@ -3133,9 +3141,8 @@ void ScoreView::startNoteEntry()
       if (el == 0 || (el->type() != CHORD && el->type() != REST && el->type() != NOTE)) {
             int track = _score->inputState().track() == -1 ? 0 : _score->inputState().track();
             el = static_cast<ChordRest*>(_score->searchNote(0, track));
-            if (el == 0) {
+            if (el == 0)
                   return;
-                  }
             }
       if (el->type() == CHORD) {
             Chord* c = static_cast<Chord*>(el);
@@ -3149,8 +3156,9 @@ void ScoreView::startNoteEntry()
             _score->inputState().setDuration(Duration(Duration::V_QUARTER));
 
       _score->select(el, SELECT_SINGLE, 0);
+      _score->setInputState(el);
       _score->inputState().noteEntryMode = true;
-      mscore->updateInputState(_score);
+      _score->moveCursor();
       setCursorOn(true);
       _score->inputState().rest = false;
       getAction("pad-rest")->setChecked(false);
@@ -3329,9 +3337,8 @@ void ScoreView::select(QMouseEvent* ev)
             }
       else
             curElement = 0;
-      _score->setLayoutAll(false);
       _score->setUpdateAll(true);   //DEBUG
-      _score->end();    // update
+      mscore->endCmd();
       }
 
 //---------------------------------------------------------

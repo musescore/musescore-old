@@ -896,7 +896,7 @@ void Seq::startNote(const Channel& a, int pitch, int velo, double nt)
       //
       foreach(const Event& event, eventList) {
             if ((event.channel() == a.channel) && (event.pitch() == pitch)) {
-                  sendEvent(event);
+                  sendEvent(event); // send stop note
                   active = true;
                   break;
                   }

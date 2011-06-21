@@ -534,171 +534,6 @@ bool Score::saveAs(bool saveCopy)
       }
 
 //---------------------------------------------------------
-//   saveAs
-//    return true on success
-//---------------------------------------------------------
-
-bool Score::exportFile()
-      {
-#if 0 // TODO-LIB
-      bool saveCopy = true;
-      QStringList fl;
-      fl.append(tr("Uncompressed MuseScore Format (*.mscx)"));
-      fl.append(tr("MusicXML Format (*.xml)"));
-      fl.append(tr("Compressed MusicXML Format (*.mxl)"));
-      fl.append(tr("Standard MIDI File (*.mid)"));
-      fl.append(tr("PDF File (*.pdf)"));
-      fl.append(tr("PostScript File (*.ps)"));
-      fl.append(tr("PNG Bitmap Graphic (*.png)"));
-      fl.append(tr("Scalable Vector Graphic (*.svg)"));
-      fl.append(tr("Lilypond Format (*.ly)"));
-#ifdef HAS_AUDIOFILE
-      fl.append(tr("Wave Audio (*.wav)"));
-      fl.append(tr("Flac Audio (*.flac)"));
-      fl.append(tr("Ogg Vorbis Audio (*.ogg)"));
-#endif
-      fl.append(tr("MP3 Audio (*.mp3)"));
-      QString saveDialogTitle = saveCopy ? tr("MuseScore: Save a Copy") :
-                                           tr("MuseScore: Save As");
-
-      QSettings settings;
-      if (mscore->lastSaveCopyDirectory.isEmpty())
-            mscore->lastSaveCopyDirectory = settings.value("lastSaveCopyDirectory", preferences.workingDirectory).toString();
-      if (mscore->lastSaveDirectory.isEmpty())
-            mscore->lastSaveDirectory = settings.value("lastSaveDirectory", preferences.workingDirectory).toString();
-      QString saveDirectory = saveCopy ?
-            mscore->lastSaveCopyDirectory : mscore->lastSaveDirectory;
-
-      if (saveDirectory.isEmpty()) {
-            saveDirectory = preferences.workingDirectory;
-            }
-
-      QString selectedFilter;
-      QString name   = QString("%1.mscx").arg(info.baseName());
-      QString filter = fl.join(";;");
-      QString fn = mscore->getSaveScoreName(saveDialogTitle, name, filter, &selectedFilter);
-      if (fn.isEmpty())
-            return false;
-
-      QFileInfo fi(fn);
-      if (saveCopy)
-            mscore->lastSaveCopyDirectory = fi.absolutePath();
-      else
-            mscore->lastSaveDirectory = fi.absolutePath();
-
-      QString ext;
-      if (selectedFilter.isEmpty())
-            ext = fi.suffix();
-      else {
-            int idx = fl.indexOf(selectedFilter);
-            if (idx != -1) {
-                  static const char* extensions[] = {
-                        "mscx", "xml", "mxl", "mid", "pdf", "ps", "png", "svg", "ly",
-#ifdef HAS_AUDIOFILE
-                        "wav", "flac", "ogg",
-#endif
-                        "mp3"
-                        };
-                  ext = extensions[idx];
-                  }
-            }
-      if (ext.isEmpty()) {
-            QMessageBox::critical(mscore, tr("MuseScore: Save As"), tr("cannot determine file type"));
-            return false;
-            }
-
-      if (fi.suffix() != ext)
-            fn += "." + ext;
-      return saveAs(saveCopy, fn, ext);
-#endif
-      return 0;
-      }
-
-//---------------------------------------------------------
-//   saveAs
-//---------------------------------------------------------
-
-bool Score::saveAs(bool saveCopy, const QString& path, const QString& ext)
-      {
-      bool rv = false;
-#if 0 // TODO-LIB
-      QString suffix = "." + ext;
-      QString fn(path);
-      if (!fn.endsWith(suffix))
-            fn += suffix;
-      if (ext == "mscx" || ext == "mscz") {
-            // save as mscore *.msc[xz] file
-            QFileInfo fi(fn);
-            rv = true;
-            try {
-                  if (ext == "mscz")
-                        saveCompressedFile(fi, false);
-                  else
-                        saveFile(fi, false);
-                  }
-            catch (QString s) {
-                  rv = false;
-                  QMessageBox::critical(mscore, tr("MuseScore: Save As"), s);
-                  }
-            if (rv && !saveCopy) {
-                  fileInfo()->setFile(fn);
-                  mscore->setWindowTitle("MuseScore: " + name());
-                  undo()->setClean();
-                  mscore->dirtyChanged(this);
-                  setCreated(false);
-                  mscore->updateRecentScores(this);
-                  mscore->writeSessionFile(false);
-                  }
-            }
-      else if (ext == "xml") {
-            // save as MusicXML *.xml file
-            rv = saveXml(fn);
-            }
-      else if (ext == "mxl") {
-            // save as compressed MusicXML *.mxl file
-            rv = saveMxl(fn);
-            }
-      else if (ext == "mid") {
-            // save as midi file *.mid
-            rv = saveMidi(fn);
-            }
-      else if (ext == "pdf") {
-            // save as pdf file *.pdf
-            rv = savePsPdf(fn, QPrinter::PdfFormat);
-            }
-      else if (ext == "ps") {
-            // save as postscript file *.ps
-            rv = savePsPdf(fn, QPrinter::PostScriptFormat);
-            }
-      else if (ext == "png") {
-            // save as png file *.png
-            rv = savePng(fn);
-            }
-      else if (ext == "svg") {
-            // save as svg file *.svg
-            rv = saveSvg(fn);
-            }
-      else if (ext == "ly") {
-            // save as lilypond file *.ly
-            rv = saveLilypond(fn);
-            }
-#ifdef HAS_AUDIOFILE
-      else if (ext == "wav" || ext == "flac" || ext == "ogg")
-            rv = saveAudio(fn, ext);
-#endif
-      else if (ext == "mp3") {
-            rv = saveMp3(fn);
-            }
-      else {
-            fprintf(stderr, "internal error: unsupported extension <%s>\n",
-               qPrintable(ext));
-            return false;
-            }
-#endif
-      return rv;
-      }
-
-//---------------------------------------------------------
 //   saveCompressedFile
 //---------------------------------------------------------
 
@@ -1617,125 +1452,29 @@ void Score::connectSlurs()
       }
 
 //---------------------------------------------------------
-//   printFile
-//---------------------------------------------------------
-
-void Score::printFile()
-      {
-      QPrinter printerDev(QPrinter::HighResolution);
-
-      if (paperSizes[pageFormat()->size].qtsize >= int(QPrinter::Custom)) {
-            printerDev.setPaperSize(QSizeF(pageFormat()->_width, pageFormat()->_height),
-               QPrinter::Inch);
-            }
-      else
-            printerDev.setPaperSize(QPrinter::PageSize(paperSizes[pageFormat()->size].qtsize));
-
-      printerDev.setOrientation(pageFormat()->landscape ? QPrinter::Landscape : QPrinter::Portrait);
-      printerDev.setCreator("MuseScore Version: " VERSION);
-      printerDev.setFullPage(true);
-      printerDev.setColorMode(QPrinter::Color);
-
-      printerDev.setDocName(name());
-      printerDev.setDoubleSidedPrinting(pageFormat()->twosided);
-      printerDev.setOutputFormat(QPrinter::NativeFormat);
-
-#if defined(Q_WS_MAC) || defined(__MINGW32__)
-      printerDev.setOutputFileName("");
-#else
-      // when setting this on windows platform, pd.exec() does not
-      // show dialog
-      printerDev.setOutputFileName(info.path() + "/" + name() + ".pdf");
-#endif
-
-      QPrintDialog pd(&printerDev, 0);
-      if (!pd.exec())
-            return;
-      print(&printerDev);
-      }
-
-//---------------------------------------------------------
 //   print
 //---------------------------------------------------------
 
-void Score::print(QPrinter* printer)
+void Score::print(Painter* painter, int pageNo)
       {
-#if 0 // TODO-LIB
-      _printing = true;
-      QPainter p(printer);
-      Painter painter(&p, 0);
+      _printing  = true;
+      int offset = pageNumberOffset();
+      Page* page = pages().at(pageNo);
+      QRectF fr  = page->abbox();
 
-      p.setRenderHint(QPainter::Antialiasing, true);
-      p.setRenderHint(QPainter::TextAntialiasing, true);
-
-      double mag = printer->logicalDpiX() / DPI;
-      p.scale(mag, mag);
-
-      for (int copy = 0; copy < printer->numCopies(); ++copy) {
-            const QList<Page*> pl = pages();
-            int pages = pl.size();
-
-            int offset   = pageNumberOffset();
-            int fromPage = printer->fromPage() - 1 - offset;
-            int toPage   = printer->toPage() - 1 - offset;
-            if (fromPage < 0)
-                  fromPage = 0;
-            if ((toPage < 0) || (toPage >= pages))
-                  toPage = pages - 1;
-
-            bool firstPage = true;
-            for (int n = fromPage; n <= toPage; ++n) {
-                  if (!firstPage)
-                        printer->newPage();
-                  firstPage = false;
-                  Page* page = pl.at(n);
-
-                  QRectF fr = page->abbox();
-                  QList<const Element*> ell = page->items(fr);
-                  qStableSort(ell.begin(), ell.end(), elementLessThan);
-                  foreach(const Element* e, ell) {
-                        e->itemDiscovered = 0;
-                        if (!e->visible())
-                              continue;
-                        p.save();
-                        p.translate(e->canvasPos() - page->pos());
-                        p.setPen(QPen(e->color()));
-                        e->draw(&painter);
-                        p.restore();
-                        }
-                  }
-            if ((copy + 1) < printer->numCopies())
-                  printer->newPage();
+      QList<const Element*> ell = page->items(fr);
+      qStableSort(ell.begin(), ell.end(), elementLessThan);
+      foreach(const Element* e, ell) {
+            e->itemDiscovered = 0;
+            if (!e->visible())
+                  continue;
+            painter->save();
+            painter->translate(e->canvasPos() - page->pos());
+            painter->setPenColor(e->color());
+            e->draw(painter);
+            painter->restore();
             }
-      p.end();
-#endif
       _printing = false;
-      }
-
-//---------------------------------------------------------
-//   savePsPdf
-//---------------------------------------------------------
-
-bool Score::savePsPdf(const QString& saveName, QPrinter::OutputFormat format)
-      {
-      QPrinter p(QPrinter::HighResolution);
-      if (paperSizes[pageFormat()->size].qtsize >= int(QPrinter::Custom)) {
-            p.setPaperSize(QSizeF(pageFormat()->_width, pageFormat()->_height),
-               QPrinter::Inch);
-            }
-      else
-            p.setPaperSize(QPrinter::PageSize(paperSizes[pageFormat()->size].qtsize));
-
-      p.setOrientation(pageFormat()->landscape ? QPrinter::Landscape : QPrinter::Portrait);
-      p.setCreator("MuseScore Version: " VERSION);
-      p.setFullPage(true);
-      p.setColorMode(QPrinter::Color);
-      p.setDocName(name());
-      p.setDoubleSidedPrinting(pageFormat()->twosided);
-      p.setOutputFormat(format);
-      p.setOutputFileName(saveName);
-      print(&p);
-      return true;
       }
 
 //---------------------------------------------------------
