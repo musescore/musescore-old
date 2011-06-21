@@ -1,0 +1,18 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+   <qresource prefix="/">
+      <file alias="data/symbols.xml">../mscore/data/symbols.xml</file>
+      <file alias="data/gonville.xml">../mscore/data/gonville.xml</file>
+      <file alias="fonts/gonville-20.otf">../mscore/fonts/gonville-20.otf</file>
+      <file alias="fonts/mscore-20.otf">../mscore/fonts/mscore-20.otf</file>
+      <file alias="fonts/mscore1-20.ttf">../mscore/fonts/mscore1-20.ttf</file>
+      <file alias="fonts/MuseJazz.ttf">../mscore/fonts/MuseJazz.ttf</file>
+      <file alias="fonts/FreeSerifMscore.ttf">../mscore/fonts/FreeSerifMscore.ttf</file>
+      <file alias="fonts/FreeSerifBold.ttf">../mscore/fonts/FreeSerifBold.ttf</file>
+      <file alias="fonts/FreeSans.ttf">../mscore/fonts/FreeSans.ttf</file>
+      <file alias="fonts/mscore_tab_baroque.ttf">../mscore/fonts/mscore_tab_baroque.ttf</file>
+      <file alias="fonts/mscore_tab_modern.ttf">../mscore/fonts/mscore_tab_modern.ttf</file>
+      <file alias="fonts/mscore_tab_renaiss.ttf">../mscore/fonts/mscore_tab_renaiss.ttf</file>
+      <file alias="fonts/mscore_tab_renaiss2.ttf">../mscore/fonts/mscore_tab_renaiss2.ttf</file>
+   </qresource>
+</RCC>
