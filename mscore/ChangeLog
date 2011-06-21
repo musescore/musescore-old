@@ -1,3 +1,9 @@
+21.jun (la)
+      - add more glyphs for old notation (patch from miwarre)
+20.jun (la)
+      - fix crash on capella import with timesig 0
+      - fix #11164 : Synth control status on startup
+      - fix #11164 : Synth control during audio export
 19.jun (lv)
       - fix MusicXML import/export of notehead color
       - add MusicXML testfile for noteheads

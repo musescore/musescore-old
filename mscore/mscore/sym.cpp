@@ -263,6 +263,15 @@ SymbolNames lilypondNames[] = {
       { letterpSym,           QT_TRANSLATE_NOOP("symbol", "p"),                    "p" },
       { lettermSym,           QT_TRANSLATE_NOOP("symbol", "m"),                    "m" },
       { letterrSym,           QT_TRANSLATE_NOOP("symbol", "r"),                    "r" },
+
+      { longaupaltSym,        QT_TRANSLATE_NOOP("symbol", "longa up alt"),         "noteheads.uM2alt" },
+      { longadownaltSym,      QT_TRANSLATE_NOOP("symbol", "longa down alt"),       "noteheads.dM2alt" },
+      { brevisheadaltSym,     QT_TRANSLATE_NOOP("symbol", "brevis head alt"),      "noteheads.sM1alt" },
+      { timesigcdotSym,       QT_TRANSLATE_NOOP("symbol", "time sig C dot"),       "timesig.Cdot" },
+      { timesigoSym,          QT_TRANSLATE_NOOP("symbol", "time sig O"),           "timesig.O" },
+      { timesigocutSym,       QT_TRANSLATE_NOOP("symbol", "time sig O cut"),       "timesig.Ocut" },
+      { timesigodotSym,       QT_TRANSLATE_NOOP("symbol", "time sig O dot"),       "timesig.Odot" },
+
       };
 
 SymCode pSymbols[] = {

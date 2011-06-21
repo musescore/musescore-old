@@ -1303,6 +1303,48 @@
     <bbox x="0" y="-10.4167" w="7.81252" h="10.4167"/>
     </Glyph>
   <Glyph>
+    <name>noteheads.uM2alt</name>
+    <code>0xe1c4</code>
+    <attach x="9.90013" y="0"/>
+    <bbox x="0" y="-2.75003" w="9.90013" h="5.50006"/>
+    </Glyph>
+  <Glyph>
+    <name>noteheads.dM2alt</name>
+    <code>0xe1c5</code>
+    <attach x="9.90013" y="0"/>
+    <bbox x="0" y="-2.75003" w="9.90013" h="5.50006"/>
+    </Glyph>
+  <Glyph>
+    <name>noteheads.sM1alt</name>
+    <code>0xe1c6</code>
+    <attach x="9.90013" y="0"/>
+    <bbox x="0" y="-2.75003" w="9.90013" h="5.50006"/>
+    </Glyph>
+  <Glyph>
+    <name>timesig.Cdot</name>
+    <code>0xe1c7</code>
+    <attach x="8.49997" y="0"/>
+    <bbox x="0" y="-5" w="8.49997" h="10"/>
+    </Glyph>
+  <Glyph>
+    <name>timesig.O</name>
+    <code>0xe1c8</code>
+    <attach x="8.49997" y="0"/>
+    <bbox x="0" y="-5" w="8.49997" h="10"/>
+    </Glyph>
+  <Glyph>
+    <name>timesig.Ocut</name>
+    <code>0xe1c9</code>
+    <attach x="8.49997" y="0"/>
+    <bbox x="0" y="-5" w="8.49997" h="10"/>
+    </Glyph>
+  <Glyph>
+    <name>timesig.Odot</name>
+    <code>0xe1ca</code>
+    <attach x="8.49997" y="0"/>
+    <bbox x="0" y="-5" w="8.49997" h="10"/>
+    </Glyph>
+  <Glyph>
     <name>noteheads.s0sol</name>
     <code>0xe1cc</code>
     <attach x="6.94992" y="-1.30693"/>

@@ -330,6 +330,15 @@ enum {
       halfdiamond2headSym,
       diamond2headSym,
 
+      longaupaltSym,
+      longadownaltSym,
+      brevisheadaltSym,
+
+      timesigcdotSym,
+      timesigoSym,
+      timesigocutSym,
+      timesigodotSym,
+
       lastSym
       };
 
