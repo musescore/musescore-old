@@ -224,6 +224,7 @@ class ScoreView : public QWidget, public MuseScoreView {
       void genPropertyMenu1(Element* e, QMenu* popup);
       void genPropertyMenuText(Element* e, QMenu* popup);
       void elementPropertyAction(const QString&, Element* e);
+      void paintPageBorder(QPainter& p, Page* page);
 
    private slots:
       void textUndoLevelAdded();

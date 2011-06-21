@@ -1496,6 +1496,86 @@ void ScoreView::drawBackground(QPainter& p, QRectF r)
       }
 
 //---------------------------------------------------------
+//   paintPageBorder
+//---------------------------------------------------------
+
+void ScoreView::paintPageBorder(QPainter& p, Page* page)
+      {
+      QRectF r(page->bbox());
+      qreal x1 = r.x();
+      qreal y1 = r.y();
+      qreal x2 = x1 + r.width();
+      qreal y2 = y1 + r.height();
+
+      const QColor c1("#befbbefbbefb");
+      const QColor c2("#79e779e779e7");
+      int h1, h2, s1, s2, v1, v2;
+      int bw = 6;
+      c2.getHsv(&h1, &s1, &v1);
+      c1.getHsv(&h2, &s2, &v2);
+
+      if (page->no() & 1) {
+            int bbw = bw/2-1;
+            bbw = bbw >= 1 ? bbw : 1;
+            for (int i = 0; i < bw/2; ++i) {
+                  QColor c;
+                  c.setHsv(h1+((h2-h1)*i)/bbw,
+                     s1+((s2-s1)*i)/bbw,
+                     v1+((v2-v1)*i)/bbw);
+                  p.setPen(QPen(c));
+                  p.drawLine(QLineF(x1+i, y1, x1+i, y2));
+                  }
+            c1.getHsv(&h1, &s1, &v1);
+            c2.getHsv(&h2, &s2, &v2);
+
+            p.fillRect(x2-bw, y1, bw, bw, MScore::bgColor);
+            p.fillRect(x2-bw, y2-bw, bw, bw, MScore::bgColor);
+
+            bbw = bw-1;
+            bbw = bbw >= 1 ? bbw : 1;
+            for (int i = 0; i < bw; ++i) {
+                  QColor c;
+                  c.setHsv(h1+((h2-h1)*i)/bbw,
+                     s1+((s2-s1)*i)/bbw,
+                     v1+((v2-v1)*i)/bbw);
+                  p.setPen(QPen(c));
+                  p.drawLine(QLineF(x2-bw+i, y1+i+1, x2-bw+i, y2-i-1));
+                  }
+            }
+      else {
+            c2.getHsv(&h1, &s1, &v1);
+            c1.getHsv(&h2, &s2, &v2);
+
+            p.fillRect(x1, y1, bw, bw, MScore::bgColor);
+            p.fillRect(x1, y2-bw, bw, bw, MScore::bgColor);
+            int bbw = bw-1;
+            bbw = bbw >= 1 ? bbw : 1;
+            for (int i = 0; i < bw; ++i) {
+                  QColor c;
+                  c.setHsv(h1+((h2-h1)*i)/bbw,
+                     s1+((s2-s1)*i)/bbw,
+                     v1+((v2-v1)*i)/bbw);
+                  p.setPen(QColor(c));
+                  p.drawLine(QLineF(x1+i, y1+(bw-i), x1+i, y2-(bw-i)-1));
+                  }
+            c1.getHsv(&h1, &s1, &v1);
+            c2.getHsv(&h2, &s2, &v2);
+
+            bw/=2;
+            bbw = bw-1;
+            bbw = bbw >= 1 ? bbw : 1;
+            for (int i = 0; i < bw; ++i) {
+                  QColor c;
+                  c.setHsv(h1+((h2-h1)*i)/bbw,
+                     s1+((s2-s1)*i)/bbw,
+                     v1+((v2-v1)*i)/bbw);
+                  p.setPen(QColor(c));
+                  p.drawLine(QLineF(x2-bw+i, y1, x2-bw+i, y2));
+                  }
+            }
+      }
+
+//---------------------------------------------------------
 //   paint
 //---------------------------------------------------------
 
@@ -1514,6 +1594,8 @@ void ScoreView::paint(const QRect& rr, QPainter& p)
 
       QRegion r1(rr);
       foreach (Page* page, _score->pages()) {
+            if (!score()->printing())
+                  paintPageBorder(p, page);
             QRectF pr(page->abbox());
             if (pr.right() < fr.left())
                   continue;
