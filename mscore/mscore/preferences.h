@@ -72,6 +72,7 @@ struct Preferences {
       QString rPort;          // audio port right
       bool showNavigator;
       bool showPlayPanel;
+      bool showWebPanel;
       bool showStatusBar;
       QPoint playPanelPos;
 

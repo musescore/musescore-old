@@ -248,7 +248,10 @@ void MuseScore::closeEvent(QCloseEvent* ev)
 
       settings.setValue("lastSaveCopyDirectory", lastSaveCopyDirectory);
       settings.setValue("lastSaveDirectory", lastSaveDirectory);
-
+      
+      if(playPanel)
+            preferences.playPanelPos = playPanel->pos();
+      
       if (synthControl)
             synthControl->updatePreferences();
 
@@ -552,7 +555,7 @@ MuseScore::MuseScore()
       fileTools->addAction(getAction("file-open"));
       fileTools->addAction(getAction("file-save"));
       fileTools->addAction(getAction("print"));
-//      fileTools->addAction(whatsThis);
+      fileTools->addAction(getAction("online-resources"));
       fileTools->addSeparator();
 
       a = getAction("undo");
@@ -871,6 +874,10 @@ MuseScore::MuseScore()
       a = getAction("toogle-piano");
       a->setCheckable(true);
       menuDisplay->addAction(a);
+      
+      a = getAction("online-resources");
+      a->setCheckable(true);
+      menuDisplay->addAction(a);
 
       menuDisplay->addSeparator();
       menuDisplay->addAction(getAction("zoomin"));
@@ -923,10 +930,6 @@ MuseScore::MuseScore()
       menuHelp->addAction(getAction("local-help"));
       menuHelp->addAction(tr("Online Handbook"), this, SLOT(helpBrowser1()));
 
-      a = getAction("online-resources");
-      a->setCheckable(true);
-      menuHelp->addAction(a);
-
       menuHelp->addSeparator();
       menuHelp->addAction(tr("&About"),   this, SLOT(about()));
       menuHelp->addAction(tr("About&Qt"), this, SLOT(aboutQt()));
@@ -941,8 +944,6 @@ MuseScore::MuseScore()
       menuHelp->addAction(a);
       a->setEnabled(false);
 
-      // menuHelp->addAction(whatsThis);
-
       setCentralWidget(mainWindow);
 
       loadInstrumentTemplates(preferences.instrumentList);
@@ -954,7 +955,7 @@ MuseScore::MuseScore()
       loadScoreList();
 
       showPlayPanel(preferences.showPlayPanel);
-
+      
       QClipboard* cb = QApplication::clipboard();
       connect(cb, SIGNAL(dataChanged()), SLOT(clipboardChanged()));
       connect(cb, SIGNAL(selectionChanged()), SLOT(clipboardChanged()));
@@ -2267,6 +2268,9 @@ int main(int argc, char* av[])
             mscore->readSettings();
             QObject::connect(qApp, SIGNAL(messageReceived(const QString&)),
                mscore, SLOT(handleMessage(const QString&)));
+               
+            mscore->showWeb(preferences.showWebPanel);
+            
             static_cast<QtSingleApplication*>(qApp)->setActivationWindow(mscore, false);
             int files = 0;
             foreach(const QString& name, argv) {
@@ -2639,6 +2643,7 @@ void MuseScore::readSettings()
       if (settings.value("maximized", false).toBool())
             showMaximized();
       mscore->showPalette(settings.value("showPanel", "0").toBool());
+      
       restoreState(settings.value("state").toByteArray());
       _horizontalSplit = settings.value("split", true).toBool();
       bool splitScreen = settings.value("splitScreen", false).toBool();
@@ -3558,14 +3563,18 @@ void MuseScore::showPianoKeyboard(bool on)
 //   showWeb
 //---------------------------------------------------------
 
-void MuseScore::showWeb(int page, bool on)
+void MuseScore::showWeb(bool on)
       {
+      QAction* a = getAction("online-resources");
       if (on) {
             if (_webPage == 0) {
+                  printf("create\n");
                   _webPage = new WebPageDockWidget(this, this);
+                  printf("connect\n");
+                  connect(_webPage, SIGNAL(visibilityChanged(bool)), a, SLOT(setChecked(bool)));
+                  printf("add widget\n");
                   addDockWidget(Qt::RightDockWidgetArea, _webPage);
                   }
-            _webPage->setTab(page);
             _webPage->show();
             }
       else {
@@ -4368,7 +4377,7 @@ void MuseScore::cmd(QAction* a, const QString& cmd)
       else if (cmd == "toogle-piano")
             showPianoKeyboard(a->isChecked());
       else if (cmd == "online-resources")
-            showWeb(WEB_TUTORIALS, a->isChecked());
+            showWeb(a->isChecked());
       else if (cmd == "media")
             showMediaDialog();
       else if (cmd == "page-settings")
@@ -4377,12 +4386,6 @@ void MuseScore::cmd(QAction* a, const QString& cmd)
             gotoNextScore();
       else if (cmd == "previous-score")
             gotoPreviousScore();
-      else if (cmd == "web-tutorials")
-            showWeb(WEB_TUTORIALS, true);
-      else if (cmd == "web-news")
-            showWeb(WEB_NEWS, true);
-      else if (cmd == "web-scorelib")
-            showWeb(WEB_SCORELIB, true);
       else if (cmd == "transpose")
             transpose();
       else if (cmd == "tuplet-dialog")
@@ -4500,4 +4503,12 @@ void MuseScore::cmdAddChordName2()
             }
       }
 
+//---------------------------------------------------------
+//   openExternalLink
+//---------------------------------------------------------
 
+void MuseScore::openExternalLink(const QString& url)
+      {
+      printf("URL : %s", qPrintable(url));
+      QDesktopServices::openUrl(url);
+      }

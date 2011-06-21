@@ -169,6 +169,7 @@ void Preferences::init()
 
       showNavigator      = true;
       showPlayPanel      = false;
+      showWebPanel       = true;
       showStatusBar      = true;
       playPanelPos       = QPoint(100, 300);
 
@@ -293,6 +294,7 @@ void Preferences::write()
       s.setValue("rPort",              rPort);
       s.setValue("showNavigator",      showNavigator);
       s.setValue("showPlayPanel",      showPlayPanel);
+      s.setValue("showWebPanel",       showWebPanel);
       s.setValue("showStatusBar",      showStatusBar);
 
       s.setValue("useAlsaAudio",       useAlsaAudio);
@@ -438,6 +440,7 @@ void Preferences::read()
       showNavigator   = s.value("showNavigator", showNavigator).toBool();
       showStatusBar   = s.value("showStatusBar", showStatusBar).toBool();
       showPlayPanel   = s.value("showPlayPanel", showPlayPanel).toBool();
+      showWebPanel    = s.value("showWebPanel", showWebPanel).toBool();
 
       useAlsaAudio       = s.value("useAlsaAudio", useAlsaAudio).toBool();
       useJackAudio       = s.value("useJackAudio", useJackAudio).toBool();
@@ -649,7 +652,7 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       connect(partStyleButton,        SIGNAL(clicked()), SLOT(selectPartStyle()));
       connect(instrumentListButton,   SIGNAL(clicked()), SLOT(selectInstrumentList()));
       connect(startWithButton,        SIGNAL(clicked()), SLOT(selectStartWith()));
-      connect(playPanelCur,   SIGNAL(clicked()), SLOT(playPanelCurClicked()));
+      
       connect(shortcutList,   SIGNAL(itemActivated(QTreeWidgetItem*, int)), SLOT(defineShortcutClicked()));
       connect(resetShortcut,  SIGNAL(clicked()), SLOT(resetShortcutClicked()));
       connect(clearShortcut,  SIGNAL(clicked()), SLOT(clearShortcutClicked()));
@@ -816,8 +819,7 @@ void PreferenceDialog::updateValues(Preferences* p)
       soundFont->setText(MScore::soundFont);
       navigatorShow->setChecked(p->showNavigator);
       playPanelShow->setChecked(p->showPlayPanel);
-      playPanelX->setValue(p->playPanelPos.x());
-      playPanelY->setValue(p->playPanelPos.y());
+      webPanelShow->setChecked(p->showWebPanel);
 
       alsaDriver->setChecked(p->useAlsaAudio);
       jackDriver->setChecked(p->useJackAudio);
@@ -1312,7 +1314,7 @@ void PreferenceDialog::apply()
       MScore::soundFont          = soundFont->text();
       preferences.showNavigator      = navigatorShow->isChecked();
       preferences.showPlayPanel      = playPanelShow->isChecked();
-      preferences.playPanelPos       = QPoint(playPanelX->value(), playPanelY->value());
+      preferences.showWebPanel       = webPanelShow->isChecked();
       preferences.antialiasedDrawing = drawAntialiased->isChecked();
 
       if (
@@ -1463,19 +1465,6 @@ void PreferenceDialog::apply()
       mscore->startAutoSave();
       }
 
-//---------------------------------------------------------
-//   playPanelCurClicked
-//---------------------------------------------------------
-
-void PreferenceDialog::playPanelCurClicked()
-      {
-      PlayPanel* w = mscore->getPlayPanel();
-      if (w == 0)
-            return;
-      QPoint s(w->pos());
-      playPanelX->setValue(s.x());
-      playPanelY->setValue(s.y());
-      }
 
 //---------------------------------------------------------
 //   getShortcut
