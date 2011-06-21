@@ -23,7 +23,7 @@
 
 #include <QtGui/QWidget>
 
-class ScoreProxy;
+class Score;
 class QString;
 class QWheelEvent;
 
@@ -32,7 +32,7 @@ class QWheelEvent;
 //---------------------------------------------------------
 
 class ScoreView : public QWidget {
-      ScoreProxy* score;
+      Score* score;
       QTransform _matrix, imatrix;
       QPoint startDrag;
 

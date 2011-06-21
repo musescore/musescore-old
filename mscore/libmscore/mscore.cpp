@@ -45,6 +45,10 @@ QString MScore::soundFont;
 qreal   MScore::spatium;
 QString MScore::lastError;
 
+extern void initSymbols(int);
+extern void initStaffTypes();
+extern void initDrumset();
+
 //---------------------------------------------------------
 //   init
 //---------------------------------------------------------
@@ -86,6 +90,40 @@ void MScore::init()
       layoutBreakColor    = Qt::green;
       soundFont           = _globalShare + "sound/TimGM6mb.sf2";
       bgColor.setRgb(0x76, 0x76, 0x6e);
+
+      //
+      //  load internal fonts
+      //
+      //
+      // do not load application specific fonts
+      // for MAC, they are in Resources/fonts
+      //
+#ifndef Q_WS_MAC
+      static const char* fonts[] = {
+            "mscore-20.otf",
+            "mscore1-20.ttf",
+            "MuseJazz.ttf",
+            "FreeSans.ttf",
+            "FreeSerifMscore.ttf",
+            "FreeSerifBold.ttf",
+            "gonville-20.otf",
+            "mscore_tab_baroque.ttf",
+            "mscore_tab_modern.ttf",
+            "mscore_tab_renaiss.ttf",
+            "mscore_tab_renaiss2.ttf"
+            };
+      for (unsigned i = 0; i < sizeof(fonts)/sizeof(*fonts); ++i) {
+            QString s = QString(":/fonts/%1").arg(fonts[i]);
+            if (-1 == QFontDatabase::addApplicationFont(s)) {
+                  fprintf(stderr, "Mscore: fatal error: cannot load internal font <%s>\n", fonts[i]);
+                  if (!debugMode)
+                        exit(-1);
+                  }
+            }
+#endif
+      initSymbols(0);   // init emmentaler symbols
+      initStaffTypes();
+      initDrumset();
       }
 
 //---------------------------------------------------------

@@ -21,6 +21,8 @@ QT4_WRAP_CPP (mocs
      scoreview.h
      )
 
+QT4_ADD_RESOURCES(qrc_files mscoreplay.qrc)
+
 add_executable(mscoreplay
       ${PROJECT_BINARY_DIR}/all.h
       ${PCH}
@@ -28,6 +30,9 @@ add_executable(mscoreplay
       ${ui_headers}
       ${mocs}
       main.cpp
+      sparm.cpp
+      scoreview.cpp
+      painterqt.cpp
       )
 
 target_link_libraries(mscoreplay

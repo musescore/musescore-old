@@ -248,10 +248,10 @@ void MuseScore::closeEvent(QCloseEvent* ev)
 
       settings.setValue("lastSaveCopyDirectory", lastSaveCopyDirectory);
       settings.setValue("lastSaveDirectory", lastSaveDirectory);
-      
+
       if(playPanel)
             preferences.playPanelPos = playPanel->pos();
-      
+
       if (synthControl)
             synthControl->updatePreferences();
 
@@ -409,8 +409,6 @@ MuseScore::MuseScore()
       _fullscreen           = false;
       lastCmd               = 0;
       lastShortcut          = 0;
-
-      MScore::init();
 
       if (!preferences.styleName.isEmpty()) {
             QFile f(preferences.styleName);
@@ -874,7 +872,7 @@ MuseScore::MuseScore()
       a = getAction("toogle-piano");
       a->setCheckable(true);
       menuDisplay->addAction(a);
-      
+
       a = getAction("online-resources");
       a->setCheckable(true);
       menuDisplay->addAction(a);
@@ -955,7 +953,7 @@ MuseScore::MuseScore()
       loadScoreList();
 
       showPlayPanel(preferences.showPlayPanel);
-      
+
       QClipboard* cb = QApplication::clipboard();
       connect(cb, SIGNAL(dataChanged()), SLOT(clipboardChanged()));
       connect(cb, SIGNAL(selectionChanged()), SLOT(clipboardChanged()));
@@ -2089,7 +2087,7 @@ int main(int argc, char* av[])
             }
 
 /**/
-      if(dataPath.isEmpty())
+      if (dataPath.isEmpty())
             dataPath = QDesktopServices::storageLocation(QDesktopServices::DataLocation);
 
       // create local plugin directory
@@ -2168,30 +2166,6 @@ int main(int argc, char* av[])
                   }
             }
 
-      //
-      // do not load application specific fonts
-      // for MAC, they are in Resources/fonts
-      //
-#ifndef Q_WS_MAC
-      //
-      //  load internal fonts
-      //
-      static const char* fonts[] = {
-            "mscore-20", "mscore1-20", "MuseJazz",
-            "FreeSans", "FreeSerifMscore", "FreeSerifBold",
-            "gonville-20",
-            "mscore_tab_baroque", "mscore_tab_modern", "mscore_tab_renaiss", "mscore_tab_renaiss2"
-            };
-      for (unsigned i = 0; i < sizeof(fonts)/sizeof(*fonts); ++i) {
-            if (-1 == QFontDatabase::addApplicationFont(QString(":/fonts/%1.ttf").arg(fonts[i]))) {
-                  if (-1 == QFontDatabase::addApplicationFont(QString(":/fonts/%1.otf").arg(fonts[i]))) {
-                        fprintf(stderr, "Mscore: fatal error: cannot load internal font <%s>\n", fonts[i]);
-                        if (!debugMode)
-                              exit(-1);
-                        }
-                  }
-            }
-#endif
 /*      if (converterMode) {
             noSeq = true;
             seq = 0;
@@ -2225,6 +2199,8 @@ int main(int argc, char* av[])
       DPI  = PDPI;                     // logical drawing resolution
       DPMM = DPI / INCH;      // dots/mm
 
+      MScore::init();
+
       if (debugMode) {
             QStringList sl(QCoreApplication::libraryPaths());
             foreach(const QString& s, sl)
@@ -2235,13 +2211,10 @@ int main(int argc, char* av[])
       //   staff has 5 lines = 4 * _spatium
       //   _spatium    = SPATIUM20  * DPI;     // 20.0 / 72.0 * DPI / 4.0;
 
-      initSymbols(0);   // init emmentaler symbols
       genIcons();
-      initStaffTypes();
 
       if (!converterMode)
             qApp->setWindowIcon(*icons[window_ICON]);
-      initDrumset();
       initProfile();
       mscore = new MuseScore();
       gscore = new Score(MScore::defaultStyle());
@@ -2258,9 +2231,9 @@ int main(int argc, char* av[])
             mscore->readSettings();
             QObject::connect(qApp, SIGNAL(messageReceived(const QString&)),
                mscore, SLOT(handleMessage(const QString&)));
-               
+
             mscore->showWeb(preferences.showWebPanel);
-            
+
             static_cast<QtSingleApplication*>(qApp)->setActivationWindow(mscore, false);
             int files = 0;
             foreach(const QString& name, argv) {
@@ -2633,7 +2606,7 @@ void MuseScore::readSettings()
       if (settings.value("maximized", false).toBool())
             showMaximized();
       mscore->showPalette(settings.value("showPanel", "0").toBool());
-      
+
       restoreState(settings.value("state").toByteArray());
       _horizontalSplit = settings.value("split", true).toBool();
       bool splitScreen = settings.value("splitScreen", false).toBool();

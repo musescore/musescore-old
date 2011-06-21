@@ -31,7 +31,7 @@
 #include "style.h"
 #include "durationtype.h"
 #include "select.h"
-#include "config.h"
+// #include "config.h"
 #include "al/fraction.h"
 #include "al/al.h"
 #include "interval.h"

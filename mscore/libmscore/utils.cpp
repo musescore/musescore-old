@@ -20,6 +20,7 @@
 
 #include <sys/time.h>
 
+#include "config.h"
 #include "score.h"
 #include "page.h"
 #include "segment.h"
