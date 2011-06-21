@@ -46,8 +46,8 @@ enum { longaUp_ICON, brevis_ICON, note_ICON, note2_ICON, note4_ICON, note8_ICON,
       fotomode_ICON,
       hraster_ICON, vraster_ICON, repitch_ICON,
       formatListUnordered_ICON, formatListOrdered_ICON,
-      formatIndentMore_ICON, formatIndentLess_ICON,
-      voice1_ICON, voice2_ICON, voice3_ICON, voice4_ICON,
+      formatIndentMore_ICON, formatIndentLess_ICON, community_ICON,
+      voice1_ICON, voice2_ICON, voice3_ICON, voice4_ICON, 
       ICONS
       };
 

@@ -80,16 +80,10 @@ class MyWebView: public QWebView
 class WebPageDockWidget : public QDockWidget {
       Q_OBJECT
 
-      QTabBar* tab;
-      QStackedWidget* stack;
-      MyWebView* web[WEB_PAGECOUNT];
-
-   private slots:
-      void tabChanged(int);
-
+      MyWebView* web;
+      
    public:
       WebPageDockWidget(MuseScore* mscore, QWidget* parent = 0);
-      void setTab(int n);
       };
 
 //---------------------------------------------------------

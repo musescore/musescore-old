@@ -54,7 +54,6 @@ class PreferenceDialog : public QDialog, private Ui::PrefsDialogBase {
       void selectPartStyle();
       void selectInstrumentList();
       void selectStartWith();
-      void playPanelCurClicked();
       void resetShortcutClicked();
       void clearShortcutClicked();
       void defineShortcutClicked();

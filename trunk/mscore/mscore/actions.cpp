@@ -2824,11 +2824,12 @@ Shortcut MuseScore::sc[] = {
          STATE_INIT | STATE_DISABLED | STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY | STATE_SEARCH | STATE_FOTO,
          0,
          "online-resources",
-         QT_TRANSLATE_NOOP("action","Online Resources"),
+         QT_TRANSLATE_NOOP("action","MuseScore Universe"),
          Qt::Key_F7,
          Qt::ApplicationShortcut,
-         QT_TRANSLATE_NOOP("action","Online resources"),
-         QT_TRANSLATE_NOOP("action","Online resources")
+         QT_TRANSLATE_NOOP("action","MuseScore Universe"),
+         QT_TRANSLATE_NOOP("action","MuseScore Universe"),
+         community_ICON
          ),
       // xml==0  marks end of list
       Shortcut(0, 0, 0, 0, QKeySequence::UnknownKey)

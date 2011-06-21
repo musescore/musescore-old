@@ -79,8 +79,6 @@ class ChordList;
 extern QString mscoreGlobalShare;
 static const int PROJECT_LIST_LEN = 6;
 
-enum { WEB_TUTORIALS, WEB_NEWS, WEB_SCORELIB, WEB_PAGECOUNT };
-
 //---------------------------------------------------------
 //   LanguageItem
 //---------------------------------------------------------
@@ -332,7 +330,6 @@ class MuseScore : public QMainWindow {
       void initOsc();
       void editRaster();
       void showPianoKeyboard(bool);
-      void showWeb(int page, bool on);
       void showMediaDialog();
       void showAlbumManager();
       void showLayerManager();
@@ -451,6 +448,8 @@ class MuseScore : public QMainWindow {
 
       TextTools* textTools();
       void showDrumTools(Drumset*, Staff*);
+      void showWeb(bool on);      
+
 
       void updateTabNames();
       QProgressBar* showProgressBar();
@@ -517,11 +516,15 @@ class MuseScore : public QMainWindow {
       void selectSimilar(Element*, bool);
       void selectElementDialog(Element* e);
       void transpose();
+
+      Q_INVOKABLE void openExternalLink(const QString&);
+
       void endCmd();
       void printFile();
       bool exportFile();
       bool saveAs(bool saveCopy, const QString& path, const QString& ext);
       bool savePsPdf(const QString& saveName, QPrinter::OutputFormat format);
+
       };
 
 extern MuseScore* mscore;

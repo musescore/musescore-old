@@ -99,8 +99,8 @@ MyWebView::MyWebView(QWidget *parent):
 void MyWebView::stopBusy(bool val)
       {
       if (!val)
-            setHtml(tr("<html><body><h2>no internet connection?</h2>"
-               "</body></html>"));
+            setHtml(tr("<HTML><BODY BGCOLOR=\"#FFFFFF\"><H2>no internet connection?</H2>"
+               "</BODY></HTML>"));
       disconnect(this, SIGNAL(loadProgress(int)), progressBar, SLOT(setValue(int)));
       mscore->hideProgressBar();
       setCursor(Qt::ArrowCursor);
@@ -140,67 +140,29 @@ void MyWebView::link(const QUrl& url)
 WebPageDockWidget::WebPageDockWidget(MuseScore* mscore, QWidget* parent)
    : QDockWidget(parent)
       {
-      QString tabPages[WEB_PAGECOUNT];
 
-      tabPages[WEB_TUTORIALS] = tr("Tutorials");
-      tabPages[WEB_NEWS]      = tr("News");
-      tabPages[WEB_SCORELIB]  = tr("Scores");
-
-      QWidget* w = new QWidget(this);
-      setTitleBarWidget(w);
-      titleBarWidget()->hide();
+      //QWidget* w = new QWidget(this);
+      setWindowTitle (tr("MuseScore Universe"));
+      /*setTitleBarWidget(w);
+      titleBarWidget()->hide();*/
       setFloating(false);
+      setFeatures(QDockWidget::DockWidgetClosable);
 
       QWidget* mainWidget = new QWidget(this);
-      tab   = new QTabBar(mainWidget);
-      stack = new QStackedWidget(mainWidget);
+      
       QVBoxLayout* layout = new QVBoxLayout;
-      layout->addWidget(tab);
-      layout->addWidget(stack);
       mainWidget->setLayout(layout);
 
       setObjectName("webpage");
       setAllowedAreas(Qt::LeftDockWidgetArea);
-
-      for (int i = 0; i < WEB_PAGECOUNT; ++i) {
-            tab->addTab(tabPages[i]);
-            web[i] = new MyWebView;
-            stack->addWidget(web[i]);
-            }
-
+      const char* url = "http://cdn.musescore.org/universe.html";
+      
+      web = new MyWebView;
+      layout->addWidget(web);
+      web->load(QUrl(url));
+      web->setBusy();
+      
       setWidget(mainWidget);
-
-      connect(tab, SIGNAL(currentChanged(int)), stack, SLOT(setCurrentIndex(int)));
-      connect(tab, SIGNAL(currentChanged(int)), SLOT(tabChanged(int)));
-      }
-
-//---------------------------------------------------------
-//   setTab
-//---------------------------------------------------------
-
-void WebPageDockWidget::setTab(int n)
-      {
-      if (tab->currentIndex() != n)
-            tab->setCurrentIndex(n);
-      else
-            tabChanged(n);
-      }
-
-//---------------------------------------------------------
-//   tabChanged
-//---------------------------------------------------------
-
-void WebPageDockWidget::tabChanged(int n)
-      {
-printf("tabChanged %d\n", n);
-      static const char* urls[WEB_PAGECOUNT];
-
-      urls[WEB_SCORELIB]  = "http://musescore.com/sheetmusic";
-      urls[WEB_TUTORIALS] = "http://musescore.org/musescore-panel/tutorials";
-      urls[WEB_NEWS]      = "http://s.musescore.org/news.html";
-
-      web[n]->load(QUrl(urls[n]));
-      web[n]->setBusy();
       }
 
 //---------------------------------------------------------
