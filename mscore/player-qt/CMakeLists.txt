@@ -14,6 +14,7 @@
 include (${PROJECT_SOURCE_DIR}/cmake/gch.cmake)
 
 include_directories(
+      ${PROJECT_BINARY_DIR}
       ${PROJECT_SOURCE_DIR}
       )
 
@@ -39,9 +40,6 @@ target_link_libraries(mscoreplay
       ${QT_LIBRARIES}
       libmscore
       zarchive
-      omr
-      al
-      poppler
       al
       )
 

@@ -14,9 +14,16 @@
 #include <stdio.h>
 #include "libmscore/mscore.h"
 #include "scoreview.h"
+#include "omr/omr.h"
 
 bool debugMode = false;
 QString revision;
+
+// dummies:
+
+Omr::Omr(Score*) {}
+void Omr::write(Xml&) const {}
+void Omr::read(QDomElement) {}
 
 //---------------------------------------------------------
 //   main
