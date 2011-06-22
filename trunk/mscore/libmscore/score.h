@@ -31,7 +31,6 @@
 #include "style.h"
 #include "durationtype.h"
 #include "select.h"
-// #include "config.h"
 #include "al/fraction.h"
 #include "al/al.h"
 #include "interval.h"
@@ -272,6 +271,8 @@ class Score {
       bool layoutAll;         ///< do a complete relayout
       LayoutFlags layoutFlags;
       bool _playNote;         ///< play selected note after command
+      bool _excerptsChanged;
+      bool _instrumentsChanged;
 
       Qt::KeyboardModifiers keyState;
 
@@ -391,15 +392,6 @@ class Score {
       void pasteChordRest(ChordRest* cr, int tick);
       void adjustReadPos();
 
-//   signals:
-//      void selectionChanged(int);
-//      void dirtyChanged(Score*);
-//      void posChanged(int);
-//      void updateAll();
-//      void dataChanged(const QRectF&);
-//      void layoutChanged();
-//      void inputCursorChanged();
-//
    public:
       void setClean(bool val);
       void setDirty(bool val = true) { setClean(!val); }
@@ -554,7 +546,6 @@ class Score {
       void appendPart(Part* p);
       void updateStaffIndex();
       void sortStaves(QList<int>& dst);
-//      int readScore(QString name);
 
       bool showInvisible() const   { return _showInvisible; }
       bool showUnprintable() const { return _showUnprintable; }
@@ -581,16 +572,13 @@ class Score {
       void saveFile(QIODevice* f, bool msczFormat, bool autosave);
       void saveCompressedFile(QFileInfo&, bool autosave);
       void saveCompressedFile(QIODevice*, QFileInfo&, bool autosave);
-      bool saveAs(bool saveCopy = false);
-//      bool saveAs(bool saveCopy, const QString& name, const QString& ext);
+//      bool saveAs(bool saveCopy = false);
       bool exportFile();
 
-//      void print(QPrinter* printer);
       void print(Painter* printer, int page);
       bool saveXml(const QString& name);
       bool saveMxl(const QString& name);
       bool saveMidi(const QString& name);
-//      bool savePsPdf(const QString& saveName, QPrinter::OutputFormat format);
       bool savePng(const QString& name);
       bool savePng(const QString& name, bool screenshot, bool transparent, double convDpi, QImage::Format format);
       bool saveSvg(const QString& name);
@@ -798,7 +786,6 @@ class Score {
       void enqueueMidiEvent(MidiInputEvent ev) { midiInputQueue.enqueue(ev); }
       void doLayout();
       void layoutChords1(Segment* segment, int staffIdx);
-//      void emitSelectionChanged(int val)                 { emit selectionChanged(val); }
       SyntiState& syntiState()                           { return _syntiState;         }
       void setSyntiState();
 
@@ -858,6 +845,10 @@ class Score {
       bool playNote() const                 { return _playNote; }
       void setPlayNote(bool v)              { _playNote = v;    }
       void connectSlurs();
+      bool excerptsChanged() const          { return _excerptsChanged; }
+      void setExcerptsChanged(bool val)     { _excerptsChanged = val; }
+      bool instrumentsChanged() const       { return _instrumentsChanged; }
+      void setInstrumentsChanged(bool val)  { _instrumentsChanged = val; }
       };
 
 extern Score* gscore;

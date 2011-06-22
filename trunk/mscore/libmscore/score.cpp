@@ -300,6 +300,8 @@ Score::Score(const Style* s)
       layoutAll       = true;
       layoutFlags     = 0;
       _playNote       = false;
+      _excerptsChanged = false;
+      _instrumentsChanged = false;
 
       keyState        = 0;
       _showInvisible  = true;
@@ -365,6 +367,8 @@ Score::Score(Score* parent)
       layoutAll       = true;
       layoutFlags     = 0;
       _playNote       = false;
+      _excerptsChanged = false;
+      _instrumentsChanged = false;
 
       keyState        = 0;
       _showInvisible  = true;
@@ -1538,7 +1542,7 @@ void Score::addElement(Element* element)
                   break;
             case INSTRUMENT_CHANGE:
                   rebuildMidiMapping();
-//TODO-LIB                  seq->initInstruments();
+                  _instrumentsChanged = true;
                   break;
 
             default:
@@ -1646,7 +1650,7 @@ void Score::removeElement(Element* element)
                   break;
             case INSTRUMENT_CHANGE:
                   rebuildMidiMapping();
-//TODO-LIB                  seq->initInstruments();
+                  _instrumentsChanged = true;
                   break;
             default:
                   break;
@@ -2212,7 +2216,7 @@ void Score::splitStaff(int staffIdx, int splitPoint)
 //      cmdAdd(b);
 
       rebuildMidiMapping();
-//TODO-LIB      seq->initInstruments();
+      _instrumentsChanged = true;
       startLayout = 0;
       doLayout();
 

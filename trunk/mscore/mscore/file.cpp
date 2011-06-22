@@ -173,7 +173,7 @@ bool MuseScore::checkDirty(Score* s)
                               return true;
                         }
                   else {
-                        if (!s->saveAs(false))
+                        if (!saveAs(s, false))
                               return true;
                         }
 
@@ -1204,7 +1204,7 @@ void MuseScore::printFile()
       }
 
 //---------------------------------------------------------
-//   saveAs
+//   exportFile
 //    return true on success
 //---------------------------------------------------------
 
@@ -1278,14 +1278,14 @@ bool MuseScore::exportFile()
 
       if (fi.suffix() != ext)
             fn += "." + ext;
-      return saveAs(saveCopy, fn, ext);
+      return saveAs(cs, saveCopy, fn, ext);
       }
 
 //---------------------------------------------------------
 //   saveAs
 //---------------------------------------------------------
 
-bool MuseScore::saveAs(bool saveCopy, const QString& path, const QString& ext)
+bool MuseScore::saveAs(Score* cs, bool saveCopy, const QString& path, const QString& ext)
       {
       bool rv = false;
       QString suffix = "." + ext;
@@ -1564,6 +1564,71 @@ Score* MuseScore::readScore(QString name)
       score->checkScore();
 #endif
       return score;
+      }
+
+//---------------------------------------------------------
+//   saveAs
+//    return true on success
+//---------------------------------------------------------
+
+/**
+ Save the current score using a different name or type.
+ Handles the GUI's file-save-as and file-save-a-copy actions.
+ The saveCopy flag, if true, does not change the name of the active score nor marks it clean.
+ Return true if OK and false on error.
+ */
+
+bool MuseScore::saveAs(Score* cs, bool saveCopy)
+      {
+      QStringList fl;
+      fl.append(tr("MuseScore Format (*.mscz)"));
+      fl.append(tr("All Files (*)"));
+      QString saveDialogTitle = saveCopy ? tr("MuseScore: Save a Copy") :
+                                           tr("MuseScore: Save As");
+
+      QSettings settings;
+      if (mscore->lastSaveCopyDirectory.isEmpty())
+            mscore->lastSaveCopyDirectory = settings.value("lastSaveCopyDirectory", preferences.workingDirectory).toString();
+      if (mscore->lastSaveDirectory.isEmpty())
+            mscore->lastSaveDirectory = settings.value("lastSaveDirectory", preferences.workingDirectory).toString();
+      QString saveDirectory = saveCopy ? mscore->lastSaveCopyDirectory : mscore->lastSaveDirectory;
+
+      if (saveDirectory.isEmpty())
+            saveDirectory = preferences.workingDirectory;
+
+      QString selectedFilter;
+      QString name   = QString("%1.mscz").arg(cs->fileInfo()->baseName());
+      QString filter = fl.join(";;");
+      QString fn     = mscore->getSaveScoreName(saveDialogTitle, name, filter, &selectedFilter);
+      if (fn.isEmpty())
+            return false;
+
+      QFileInfo fi(fn);
+      if (saveCopy)
+            mscore->lastSaveCopyDirectory = fi.absolutePath();
+      else
+            mscore->lastSaveDirectory = fi.absolutePath();
+
+      QString ext;
+      if (selectedFilter.isEmpty())
+            ext = fi.suffix();
+      else {
+            int idx = fl.indexOf(selectedFilter);
+            if (idx != -1) {
+                  static const char* extensions[] = {
+                        "mscz"
+                        };
+                  ext = extensions[idx];
+                  }
+            }
+      if (ext.isEmpty()) {
+            QMessageBox::critical(mscore, tr("MuseScore: Save As"), tr("cannot determine file type"));
+            return false;
+            }
+
+      if (fi.suffix() != ext)
+            fn += "." + ext;
+      return saveAs(cs, saveCopy, fn, ext);
       }
 
 

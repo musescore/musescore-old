@@ -13,12 +13,6 @@
 
 include (${PROJECT_SOURCE_DIR}/cmake/gch.cmake)
 
-#include_directories(
-#      ${CMAKE_CURRENT_BINARY_DIR}
-#      ${PROJECT_SOURCE_DIR}
-#      ${PROJECT_SOURCE_DIR}/scriptdebug
-#      )
-
 add_library (
       libmscore STATIC
       ${PROJECT_BINARY_DIR}/all.h
