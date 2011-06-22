@@ -1,21 +1,14 @@
 //=============================================================================
-//  MusE Score
-//  Linux Music Score Editor
+//  MuseScore
+//  Music Composition & Notation
 //  $Id$
 //
-//  Copyright (C) 2002-2011 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer
 //
 //  This program is free software; you can redistribute it and/or modify
-//  it under the terms of the GNU General Public License version 2.
-//
-//  This program is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU General Public License for more details.
-//
-//  You should have received a copy of the GNU General Public License
-//  along with this program; if not, write to the Free Software
-//  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+//  it under the terms of the GNU General Public License version 2
+//  as published by the Free Software Foundation and appearing in
+//  the file LICENCE.GPL
 //=============================================================================
 
 #ifndef __SCORE_H__
@@ -103,6 +96,23 @@ class Fingering;
 class Painter;
 
 extern bool showRubberBand;
+
+enum {
+      PAD_NOTE00,
+      PAD_NOTE0,
+      PAD_NOTE1,
+      PAD_NOTE2,
+      PAD_NOTE4,
+      PAD_NOTE8,
+      PAD_NOTE16,
+      PAD_NOTE32,
+      PAD_NOTE64,
+      PAD_NOTE128,
+      //--------------------
+      PAD_REST,
+      PAD_DOT,
+      PAD_DOTDOT,
+      };
 
 //---------------------------------------------------------
 //   MeasureBaseList
@@ -314,6 +324,7 @@ class Score {
       QList<KeySig*> customKeysigs;
       Omr* _omr;
       bool _showOmr;
+      bool _playRepeats;
 
       SyntiState _syntiState;
 
@@ -391,6 +402,7 @@ class Score {
       QList<Fraction> splitGapToMeasureBoundaries(ChordRest*, Fraction);
       void pasteChordRest(ChordRest* cr, int tick);
       void adjustReadPos();
+      void init();
 
    public:
       void setClean(bool val);
@@ -558,7 +570,6 @@ class Score {
       bool loadCompressedMsc(QString name);
       bool importMusicXml(const QString&);
       bool importCompressedMusicXml(const QString&);
-      bool importMidi(const QString& name);
       bool importMuseData(const QString& name);
       bool importLilypond(const QString& name);
       bool importBB(const QString& name);
@@ -572,7 +583,6 @@ class Score {
       void saveFile(QIODevice* f, bool msczFormat, bool autosave);
       void saveCompressedFile(QFileInfo&, bool autosave);
       void saveCompressedFile(QIODevice*, QFileInfo&, bool autosave);
-//      bool saveAs(bool saveCopy = false);
       bool exportFile();
 
       void print(Painter* printer, int page);
@@ -796,7 +806,6 @@ class Score {
 
       void addLayoutFlags(LayoutFlags val)               { layoutFlags |= val; }
       int symIdx() const                                 { return _symIdx; }
-      void addImage(Element*);
       void updateHairpin(Hairpin*);       // add/modify hairpin to pitchOffset list
       void removeHairpin(Hairpin*);       // remove hairpin from pitchOffset list
       Volta* searchVolta(int tick) const;
@@ -849,6 +858,8 @@ class Score {
       void setExcerptsChanged(bool val)     { _excerptsChanged = val; }
       bool instrumentsChanged() const       { return _instrumentsChanged; }
       void setInstrumentsChanged(bool val)  { _instrumentsChanged = val; }
+      bool playRepeats() const              { return _playRepeats; }
+      void setPlayRepeats(bool val)         { _playRepeats = val; }
       };
 
 extern Score* gscore;

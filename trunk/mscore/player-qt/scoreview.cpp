@@ -255,7 +255,7 @@ void ScoreView::moveCursor()
       {
       }
 
-void ScoreView::adjustCanvasPosition(const Element* el, bool playBack)
+void ScoreView::adjustCanvasPosition(const Element*, bool)
       {
       }
 
@@ -278,7 +278,8 @@ int ScoreView::gripCount() const
 
 const QRectF& ScoreView::getGrip(int) const
       {
-      return QRectF();
+      static const QRectF a;
+      return a;
       }
 
 const QTransform& ScoreView::matrix() const
@@ -290,7 +291,7 @@ void ScoreView::setDropRectangle(const QRectF&)
       {
       }
 
-void ScoreView::cmdAddSlur(Note* firstNote, Note* lastNote)
+void ScoreView::cmdAddSlur(Note*, Note*)
       {
       }
 
@@ -298,7 +299,7 @@ void ScoreView::startEdit()
       {
       }
 
-void ScoreView::startEdit(Element*, int startGrip)
+void ScoreView::startEdit(Element*, int)
       {
       }
 

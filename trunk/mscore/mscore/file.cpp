@@ -77,6 +77,7 @@
 #include "libmscore/segment.h"
 #include "libmscore/tempotext.h"
 #include "libmscore/sym.h"
+#include "libmscore/image.h"
 #include "painterqt.h"
 
 #ifdef OMR
@@ -1468,7 +1469,7 @@ Score* MuseScore::readScore(QString name)
                   score->connectSlurs();
                   }
             else if (csl == "mid" || csl == "midi" || csl == "kar") {
-                  if (!score->importMidi(name))
+                  if (!importMidi(score, name))
                         return 0;
                   }
             else if (csl == "md") {
@@ -1629,6 +1630,43 @@ bool MuseScore::saveAs(Score* cs, bool saveCopy)
       if (fi.suffix() != ext)
             fn += "." + ext;
       return saveAs(cs, saveCopy, fn, ext);
+      }
+
+//---------------------------------------------------------
+//   addImage
+//---------------------------------------------------------
+
+void MuseScore::addImage(Score* score, Element* e)
+      {
+      QString fn = QFileDialog::getOpenFileName(
+         0,
+         tr("MuseScore: InsertImage"),
+         "",            // lastOpenPath,
+         tr("All Supported Files (*.svg *.jpg *.png *.xpm);;"
+            "Scalable vector graphics (*.svg);;"
+            "JPEG (*.jpg);;"
+            "PNG (*.png);;"
+            "XPM (*.xpm);;"
+            "All Files (*)"
+            )
+         );
+      if (fn.isEmpty())
+            return;
+
+      QFileInfo fi(fn);
+      Image* s = 0;
+      QString suffix(fi.suffix().toLower());
+
+      if (suffix == "svg")
+            s = new SvgImage(score);
+      else if (suffix == "jpg" || suffix == "png" || suffix == "xpm")
+            s = new RasterImage(score);
+      else
+            return;
+      s->setPath(fn);
+      s->setSize(QSizeF(200, 200));
+      s->setParent(e);
+      score->undoAddElement(s);
       }
 
 
