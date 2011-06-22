@@ -1408,7 +1408,7 @@ void ImportMidiDialog::setShortestNote(int val)
 //    return true on success
 //---------------------------------------------------------
 
-bool Score::importMidi(const QString& name)
+bool MuseScore::importMidi(Score* score, const QString& name)
       {
       if (name.isEmpty())
             return false;
@@ -1422,12 +1422,10 @@ bool Score::importMidi(const QString& name)
             }
       catch(QString errorText) {
             if (!noGui) {
-#if 0 // TODO-LIB
                   QMessageBox::warning(0,
                      QWidget::tr("MuseScore: load midi"),
                      tr("Load failed: ") + errorText,
                      QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
-#endif
                   }
             fp.close();
             return false;
@@ -1443,10 +1441,11 @@ bool Score::importMidi(const QString& name)
             }
       mf.setShortestNote(shortestNote);
 
-      _saved = false;
-      convertMidi(&mf);
-      rebuildMidiMapping();
-      _created = true;
+//TODO-LIB      convertMidi(&mf);
+
+      score->setSaved(false);
+      score->rebuildMidiMapping();
+      score->setCreated(true);
       return true;
       }
 

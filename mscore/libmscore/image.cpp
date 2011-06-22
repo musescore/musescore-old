@@ -1,21 +1,14 @@
 //=============================================================================
-//  MusE Score
-//  Linux Music Score Editor
+//  MuseScore
+//  Music Composition & Notation
 //  $Id$
 //
-//  Copyright (C) 2007-2011 Werner Schweer and others
+//  Copyright (C) 2007-2011 Werner Schweer
 //
 //  This program is free software; you can redistribute it and/or modify
-//  it under the terms of the GNU General Public License version 2.
-//
-//  This program is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU General Public License for more details.
-//
-//  You should have received a copy of the GNU General Public License
-//  along with this program; if not, write to the Free Software
-//  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+//  it under the terms of the GNU General Public License version 2
+//  as published by the Free Software Foundation and appearing in
+//  the file LICENCE.GPL
 //=============================================================================
 
 #include "image.h"
@@ -315,45 +308,6 @@ void RasterImage::setPath(const QString& s)
             sz = doc.size() * 0.4;
             _dirty = true;
             }
-      }
-
-//---------------------------------------------------------
-//   addImage
-//---------------------------------------------------------
-
-void Score::addImage(Element* e)
-      {
-#if 0 // TODO-LIB
-      QString fn = QFileDialog::getOpenFileName(
-         0,
-         tr("MuseScore: InsertImage"),
-         "",            // lastOpenPath,
-         tr("All Supported Files (*.svg *.jpg *.png *.xpm);;"
-            "Scalable vector graphics (*.svg);;"
-            "JPEG (*.jpg);;"
-            "PNG (*.png);;"
-            "XPM (*.xpm);;"
-            "All Files (*)"
-            )
-         );
-      if (fn.isEmpty())
-            return;
-
-      QFileInfo fi(fn);
-      Image* s = 0;
-      QString suffix(fi.suffix().toLower());
-
-      if (suffix == "svg")
-            s = new SvgImage(this);
-      else if (suffix == "jpg" || suffix == "png" || suffix == "xpm")
-            s = new RasterImage(this);
-      else
-            return;
-      s->setPath(fn);
-      s->setSize(QSizeF(200, 200));
-      s->setParent(e);
-      undoAddElement(s);
-#endif
       }
 
 //---------------------------------------------------------

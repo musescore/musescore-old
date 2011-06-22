@@ -1,21 +1,14 @@
 //=============================================================================
 //  MuseScore
-//  Linux Music Score Editor
+//  Music Composition & Notation
 //  $Id$
 //
-//  Copyright (C) 2002-2011 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer
 //
 //  This program is free software; you can redistribute it and/or modify
-//  it under the terms of the GNU General Public License version 2.
-//
-//  This program is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU General Public License for more details.
-//
-//  You should have received a copy of the GNU General Public License
-//  along with this program; if not, write to the Free Software
-//  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+//  it under the terms of the GNU General Public License version 2
+//  as published by the Free Software Foundation and appearing in
+//  the file LICENCE.GPL
 //=============================================================================
 
 /**
@@ -42,7 +35,6 @@
 #include "page.h"
 #include "barline.h"
 #include "tuplet.h"
-#include "padids.h"
 #include "xml.h"
 #include "ottava.h"
 #include "trill.h"
@@ -2569,13 +2561,13 @@ void Score::cmd(const QAction* a)
       else if (cmd == "pad-dotdot")
             padToggle(PAD_DOTDOT);
       else if (cmd == "beam-start")
-            padToggle(PAD_BEAM_START);
+            cmdSetBeamMode(BEAM_BEGIN);
       else if (cmd == "beam-mid")
-            padToggle(PAD_BEAM_MID);
+            cmdSetBeamMode(BEAM_MID);
       else if (cmd == "no-beam")
-            padToggle(PAD_BEAM_NO);
+            cmdSetBeamMode(BEAM_NO);
       else if (cmd == "beam-32")
-            padToggle(PAD_BEAM32);
+            cmdSetBeamMode(BEAM_BEGIN32);
       else if (cmd == "sharp2")
             changeAccidental(ACC_SHARP2);
       else if (cmd == "sharp")

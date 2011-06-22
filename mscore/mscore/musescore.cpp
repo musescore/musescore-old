@@ -33,7 +33,6 @@
 #include "seq.h"
 #include "al/tempo.h"
 #include "libmscore/sym.h"
-#include "libmscore/padids.h"
 #include "pagesettings.h"
 #include "inspector.h"
 #include "editstyle.h"

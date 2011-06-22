@@ -1,21 +1,14 @@
 //=============================================================================
 //  MuseScore
-//  Linux Music Score Editor
+//  Music Composition & Notation
 //  $Id$
 //
-//  Copyright (C) 2002-2011 Werner Schweer and others
+//  Copyright (C) 2002-2011 Werner Schweer
 //
 //  This program is free software; you can redistribute it and/or modify
-//  it under the terms of the GNU General Public License version 2.
-//
-//  This program is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU General Public License for more details.
-//
-//  You should have received a copy of the GNU General Public License
-//  along with this program; if not, write to the Free Software
-//  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+//  it under the terms of the GNU General Public License version 2
+//  as published by the Free Software Foundation and appearing in
+//  the file LICENCE.GPL
 //=============================================================================
 
 /**
@@ -70,8 +63,6 @@
 #include "layoutbreak.h"
 #include "harmony.h"
 #include "mscore.h"
-#include "padids.h"
-
 #include "omr/omr.h"
 
 Score* gscore;                 ///< system score, used for palettes etc.
@@ -262,14 +253,12 @@ void MeasureBaseList::change(MeasureBase* ob, MeasureBase* nb)
       }
 
 //---------------------------------------------------------
-//   Score
+//   init
 //---------------------------------------------------------
 
-Score::Score(const Style* s)
-   : _selection(this)
+void Score::init()
       {
       _parentScore    = 0;
-
       _currentLayer   = 0;
       Layer l;
       l.name          = "default";
@@ -284,7 +273,6 @@ Score::Score(const Style* s)
       startLayout     = 0;
       _undo           = new UndoStack();
       _repeatList     = new RepeatList(this);
-      _style          = *s;
       foreach(StaffType* st, ::staffTypes)
             _staffTypes.append(st->clone());
       _swingRatio     = 0.0;
@@ -317,6 +305,19 @@ Score::Score(const Style* s)
       _showOmr        = false;
       _sigmap         = new AL::TimeSigMap();
       _tempomap       = new AL::TempoMap;
+      _playRepeats    = true;
+
+      }
+
+//---------------------------------------------------------
+//   Score
+//---------------------------------------------------------
+
+Score::Score(const Style* s)
+   : _selection(this)
+      {
+      init();
+      _style = *s;
       }
 
 //
@@ -331,20 +332,8 @@ Score::Score(const Style* s)
 Score::Score(Score* parent)
    : _selection(this)
       {
-      _creationDate   = QDate::currentDate();
+      init();
       _parentScore    = parent;
-
-      _currentLayer   = 0;
-      Layer l;
-      l.name = "default";
-      l.tags = 1;
-      _layer.append(l);
-      _layerTags[0] = "default";
-
-      _revisions      = 0;
-      _symIdx         = 0;
-      _pageNumberOffset = 0;
-      startLayout     = 0;
       _undo           = 0;
       _repeatList     = 0;
 
@@ -354,34 +343,6 @@ Score::Score(Score* parent)
             if (f.open(QIODevice::ReadOnly))
                   _style.load(&f);
             }
-      _swingRatio     = 0.0;
-
-      _mscVersion     = MSCVERSION;
-      _created        = false;
-
-      _updateAll      = true;
-      layoutAll       = true;
-      layoutFlags     = 0;
-      _playNote       = false;
-      _excerptsChanged = false;
-      _instrumentsChanged = false;
-
-      keyState        = 0;
-      _showInvisible  = true;
-      _showUnprintable  = true;
-      _showFrames     = true;
-      editTempo       = 0;
-      _printing       = false;
-      _playlistDirty  = false;
-      _autosaveDirty  = false;
-      _dirty          = false;
-      _saved          = false;
-      _playPos        = 0;
-      _fileDivision   = AL::division;
-      _creditsRead    = false;
-      _defaultsRead   = false;
-      _omr            = 0;
-      _showOmr        = false;
       _sigmap         = 0;
       _tempomap       = 0;
       _syntiState     = parent->_syntiState;
@@ -2790,8 +2751,6 @@ void Score::addAudioTrack()
 
 //---------------------------------------------------------
 //   padToggle
-//    called from keyPadToggle
-//    menu button callback
 //---------------------------------------------------------
 
 void Score::padToggle(int n)
@@ -2842,22 +2801,7 @@ void Score::padToggle(int n)
                   else
                         _is.setDots(2);
                   break;
-            case PAD_BEAM_START:
-                  cmdSetBeamMode(BEAM_BEGIN);
-                  break;
-            case PAD_BEAM_MID:
-                  cmdSetBeamMode(BEAM_MID);
-                  break;
-            case PAD_BEAM_NO:
-                  cmdSetBeamMode(BEAM_NO);
-                  break;
-            case PAD_BEAM32:
-                  cmdSetBeamMode(BEAM_BEGIN32);
-                  break;
             }
-      if (n < PAD_NOTE00 || n > PAD_DOTDOT)
-            return;
-
       if (n >= PAD_NOTE00 && n <= PAD_NOTE128) {
             _is.setDots(0);
             //

@@ -378,7 +378,7 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
             score()->setLayoutAll(true);
             }
       else if (cmd == "picture") {
-            score()->addImage(static_cast<HBox*>(e));
+            mscore->addImage(score(), static_cast<HBox*>(e));
             }
       else if (cmd == "frame-text") {
             Text* t = new Text(score());
@@ -435,7 +435,7 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
             startEdit(s);
             }
       else if (cmd == "picture")
-            score()->addImage(e);
+            mscore->addImage(score(), e);
       else if (cmd == "t-props") {
             TupletProperties vp(static_cast<Tuplet*>(e));
             if (vp.exec()) {

@@ -1,21 +1,14 @@
 //=============================================================================
-//  MusE Score
-//  Linux Music Score Editor
+//  MuseScore
+//  Music Composition & Notation
 //  $Id:$
 //
-//  Copyright (C) 2011 Werner Schweer and others
+//  Copyright (C) 2011 Werner Schweer
 //
 //  This program is free software; you can redistribute it and/or modify
-//  it under the terms of the GNU General Public License version 2.
-//
-//  This program is distributed in the hope that it will be useful,
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//  GNU General Public License for more details.
-//
-//  You should have received a copy of the GNU General Public License
-//  along with this program; if not, write to the Free Software
-//  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+//  it under the terms of the GNU General Public License version 2
+//  as published by the Free Software Foundation and appearing in
+//  the file LICENCE.GPL
 //=============================================================================
 
 #include "chordlist.h"
@@ -498,29 +491,16 @@ bool ChordList::read(const QString& name)
             return false;
       QFile f(path);
       if (!f.open(QIODevice::ReadOnly)) {
-#if 0 // TODO-LIB
-            if (!noGui) {
-                  QString error = QString("cannot open chord description: %1\n").arg(f.fileName());
-                  QMessageBox::warning(0,
-                     QWidget::tr("MuseScore: Open chord list failed:"),
-                     error,
-                     QString::null, QString::null, QString::null, 0, 1);
-                  }
-#endif
+            QString s = QT_TRANSLATE_NOOP("file", "cannot open chord description:\n%1\n%2");
+            MScore::lastError = s.arg(f.fileName()).arg(f.errorString());
             return false;
             }
       QDomDocument doc;
       int line, column;
       QString err;
       if (!doc.setContent(&f, false, &err, &line, &column)) {
-            QString error = QString("error reading chord description %1 at line %2 column %3: %4\n")
-               .arg(f.fileName()).arg(line).arg(column).arg(err);
-#if 0 // TODO-LIB
-            QMessageBox::warning(0,
-               QWidget::tr("MuseScore: Load chord list failed:"),
-               error,
-               QString::null, QString::null, QString::null, 0, 1);
-#endif
+            QString s = QT_TRANSLATE_NOOP("file", "error reading chord description %1 at line %2 column %3: %4\n");
+            MScore::lastError = s.arg(f.fileName()).arg(line).arg(column).arg(err);
             return false;
             }
       docName = f.fileName();
@@ -550,11 +530,8 @@ bool ChordList::write(const QString& name)
             info.setFile(info.filePath() + ext);
       QFile f(info.filePath());
       if (!f.open(QIODevice::WriteOnly)) {
-#if 0  // TODO-LIB
-            QString s = ("Open Chord Description\n") + f.fileName() + ("\nfailed: ")
-               + QString(strerror(errno));
-            QMessageBox::critical(mscore, ("MuseScore: Open Chord Description"), s);
-#endif
+            QString s = QT_TRANSLATE_NOOP("file", "Open Chord Description\n%1\nfailed: %2");
+            MScore::lastError = s.arg(f.fileName()).arg(f.errorString());
             return false;
             }
 
@@ -565,8 +542,8 @@ bool ChordList::write(const QString& name)
       write(xml);
       xml.etag();
       if (f.error() != QFile::NoError) {
-            QString s = qApp->translate("ChordList", "Write Chord Description failed: ") + f.errorString();
-            QMessageBox::critical(0, ("MuseScore: Write Chord Description"), s);
+            QString s = QT_TRANSLATE_NOOP("file", "Write Chord Description failed: %1");
+            MScore::lastError = s.arg(f.errorString());
             }
       return true;
       }

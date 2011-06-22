@@ -20,7 +20,6 @@
 
 #include "scoreview.h"
 #include "libmscore/note.h"
-#include "libmscore/padids.h"
 #include "libmscore/sym.h"
 #include "libmscore/note.h"
 #include "libmscore/score.h"

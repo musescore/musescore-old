@@ -527,6 +527,8 @@ class MuseScore : public QMainWindow {
       bool savePsPdf(const QString& saveName, QPrinter::OutputFormat format);
       Score* readScore(QString name);
       bool saveAs(Score*, bool saveCopy = false);
+      void addImage(Score*, Element*);
+      bool importMidi(Score*, const QString& name);
       };
 
 extern MuseScore* mscore;
