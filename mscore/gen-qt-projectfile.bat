@@ -14,6 +14,7 @@ echo       %1/share/locale/mscore_de.ts \
 echo       %1/share/locale/mscore_el.ts \
 echo       %1/share/locale/mscore_en_GB.ts \
 echo       %1/share/locale/mscore_en_US.ts \
+echo       %1/share/locale/mscore_eo.ts \
 echo       %1/share/locale/mscore_es.ts \
 echo       %1/share/locale/mscore_eu.ts \
 echo       %1/share/locale/mscore_fi.ts \
