@@ -4157,9 +4157,19 @@ void MuseScore::endCmd()
             cs->setDirty(!_undoGroup->isClean());
             dirtyChanged(cs);
             Element* e = cs->selection().element();
-            if (e && cs->playNote())
+            if (e && cs->playNote()) {
                   play(e);
-            cs->setPlayNote(false);
+                  cs->setPlayNote(false);
+                  }
+            if (cs->excerptsChanged()) {
+                  excerptsChanged(cs);
+                  cs->setExcerptsChanged(false);
+                  }
+            if (cs->instrumentsChanged()) {
+                  seq->initInstruments();
+                  cs->setExcerptsChanged(false);
+                  }
+
             enableInput = e && (e->type() == NOTE || e->type() == REST);
             cs->end();
             }
@@ -4250,11 +4260,11 @@ void MuseScore::cmd(QAction* a, const QString& cmd)
             removeTab(scoreList.indexOf(cs));
       else if (cmd == "file-save-as") {
             cs->setSyntiState();
-            cs->saveAs(false);
+            saveAs(cs, false);
             }
       else if (cmd == "file-save-a-copy") {
             cs->setSyntiState();
-            cs->saveAs(true);
+            saveAs(cs, true);
             }
       else if (cmd == "file-new")
             newFile();
@@ -4470,7 +4480,7 @@ void MuseScore::openExternalLink(const QString& url)
       printf("URL : %s", qPrintable(url));
       QDesktopServices::openUrl(url);
       }
-      
+
 //---------------------------------------------------------
 //   closeWebPanelPermanently
 //---------------------------------------------------------

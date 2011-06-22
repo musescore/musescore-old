@@ -374,7 +374,7 @@ endif (OSC)
 
 include_directories(
    ${PROJECT_SOURCE_DIR}
-   ${PROJECT_SOURCE_DIR}/mscore
+#   ${PROJECT_SOURCE_DIR}/mscore
    ${PROJECT_BINARY_DIR}
    ${PROJECT_BINARY_DIR}/mscore
    ${ALSA_INCDIR}

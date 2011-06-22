@@ -205,7 +205,6 @@ void UndoStack::endMacro(bool rollback)
             curCmd = 0;
             return;
             }
-      bool a = isClean();
       while (list.size() > curIdx) {
             UndoCommand* cmd = list.takeLast();
             delete cmd;
@@ -2426,7 +2425,7 @@ void ChangePart::flip()
       part->setInstrument(instrument);
       instrument            = oi;
       part->score()->rebuildMidiMapping();
-//TODO-LIB      seq->initInstruments();
+      part->score()->setInstrumentsChanged(true);
       part->score()->setPlaylistDirty(true);
       }
 
@@ -2935,7 +2934,7 @@ void ChangeDuration::flip()
 void AddExcerpt::undo()
       {
       score->parentScore()->removeExcerpt(score);
-//TODO-LIB      mscore->excerptsChanged(score);
+      score->parentScore()->setExcerptsChanged(true);
       }
 
 //---------------------------------------------------------
@@ -2945,7 +2944,7 @@ void AddExcerpt::undo()
 void AddExcerpt::redo()
       {
       score->parentScore()->addExcerpt(score);
-//TODO-LIB      mscore->excerptsChanged(score);
+      score->parentScore()->setExcerptsChanged(true);
       }
 
 //---------------------------------------------------------
@@ -2955,7 +2954,7 @@ void AddExcerpt::redo()
 void RemoveExcerpt::undo()
       {
       score->parentScore()->addExcerpt(score);
-//TODO-LIB      mscore->excerptsChanged(score);
+      score->parentScore()->setExcerptsChanged(true);
       }
 
 //---------------------------------------------------------
@@ -2965,7 +2964,7 @@ void RemoveExcerpt::undo()
 void RemoveExcerpt::redo()
       {
       score->parentScore()->removeExcerpt(score);
-//TODO-LIB      mscore->excerptsChanged(score);
+      score->parentScore()->setExcerptsChanged(true);
       }
 
 //---------------------------------------------------------
@@ -3071,7 +3070,7 @@ void ChangeInstrument::flip()
 
       is->staff()->part()->setInstrument(instrument, is->segment()->tick());
       is->score()->rebuildMidiMapping();
-//TODO-LIB      seq->initInstruments();
+      is->score()->setInstrumentsChanged(true);
       is->score()->setLayoutAll(true);
       instrument = oi;
       }
