@@ -33,7 +33,7 @@
 #include "tremolo.h"
 #include "measure.h"
 #include "al/al.h"
-#include "icons.h"
+// #include "icons.h"
 #include "undo.h"
 #include "staff.h"
 #include "stafftype.h"

@@ -22,7 +22,7 @@
 #define __BENDPROPERTIES_H__
 
 #include "ui_bend.h"
-#include "pitchvalue.h"
+#include "libmscore/pitchvalue.h"
 
 class Bend;
 

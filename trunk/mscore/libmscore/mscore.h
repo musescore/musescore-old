@@ -43,10 +43,17 @@ static const int MSCVERSION = 122;
 
 
 static const int VOICES = 4;
+static const int MAX_TAGS = 32;
+
 static const qreal INCH = 25.4;
 static const qreal PPI  = 72.0;           // printer points per inch
 static const qreal SPATIUM20 = 5.0 / PPI; // size of Spatium for 20pt font in inch
 static const int MAX_STAVES = 4;
+
+static const char mimeSymbolFormat[]      = "application/mscore/symbol";
+static const char mimeSymbolListFormat[]  = "application/mscore/symbollist";
+static const char mimeStaffListFormat[]   = "application/mscore/stafflist";
+
 
 
 //---------------------------------------------------------
@@ -518,6 +525,13 @@ struct NoteVal {
       NoteVal() { pitch = -1; fret = -1; string = -1; headGroup = 0; }
       };
 
+// Icon() subtypes
+enum {
+      ICON_ACCIACCATURA, ICON_APPOGGIATURA, ICON_GRACE4, ICON_GRACE16, ICON_GRACE32,
+      ICON_SBEAM, ICON_MBEAM, ICON_NBEAM, ICON_BEAM32, ICON_BEAM64, ICON_AUTOBEAM,
+      ICON_FBEAM1, ICON_FBEAM2
+      };
+
 
 extern qreal PDPI;
 extern qreal DPI;
@@ -564,6 +578,7 @@ class MScore {
       static QString partStyle;
       static QString soundFont;
       static QString lastError;
+      static bool layoutDebug;
 
       static qreal spatium;
       };

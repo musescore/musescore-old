@@ -45,7 +45,6 @@
 #include "chord.h"
 #include "al/sig.h"
 #include "key.h"
-#include "scoreview.h"
 #include "barline.h"
 #include "volta.h"
 #include "tuplet.h"
@@ -1360,8 +1359,6 @@ void ChangeConcertPitch::flip()
       {
       int oval = int(score->styleB(ST_concertPitch));
       score->style()->set(ST_concertPitch, val);
-//TODO-LIB      QAction* action = getAction("concert-pitch");
-//      action->setChecked(score->styleB(ST_concertPitch));
       val = oval;
       }
 

@@ -20,7 +20,6 @@
 
 #include "spacer.h"
 #include "score.h"
-#include "scoreview.h"
 #include "painter.h"
 #include "mscore.h"
 

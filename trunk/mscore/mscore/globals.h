@@ -23,7 +23,6 @@
 
 extern bool enableExperimental;
 extern bool scriptDebug;
-extern bool layoutDebug;
 extern bool noSeq;            ///< Dont use sequencer; cmd line option.
 extern bool noMidi;           ///< Dont use midi; cmd line option.
 extern bool midiInputTrace;   ///< debug option: dump midi input
@@ -31,10 +30,6 @@ extern bool midiOutputTrace;  ///< debug option: dump midi output
 extern bool noGui;
 extern bool converterMode;
 extern double converterDpi;
-
-static const char mimeSymbolFormat[]      = "application/mscore/symbol";
-static const char mimeSymbolListFormat[]  = "application/mscore/symbollist";
-static const char mimeStaffListFormat[]   = "application/mscore/stafflist";
 
 //---------------------------------------------------------
 //    ScoreState
@@ -70,8 +65,6 @@ extern const char* stateName(ScoreState);
 
 static const qreal DPMM_DISPLAY = 4;   // 100 DPI
 static const qreal PALETTE_SPATIUM = 1.9 * DPMM_DISPLAY;
-
-static const int MAX_TAGS = 32;
 
 extern QPaintDevice* pdev;
 #endif

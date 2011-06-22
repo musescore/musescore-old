@@ -24,7 +24,6 @@
 */
 
 #include "mscore.h"
-#include "scoreview.h"
 #include "note.h"
 #include "chord.h"
 #include "rest.h"

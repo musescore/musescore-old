@@ -23,8 +23,6 @@
 #include "score.h"
 #include "barline.h"
 #include "repeat.h"
-#include "scoreview.h"
-#include "scoreview.h"
 #include "symbol.h"
 #include "system.h"
 #include "image.h"

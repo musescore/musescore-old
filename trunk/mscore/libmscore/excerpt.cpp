@@ -24,7 +24,6 @@
 #include "xml.h"
 #include "staff.h"
 #include "box.h"
-#include "scoreview.h"
 #include "style.h"
 #include "page.h"
 #include "text.h"

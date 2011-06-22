@@ -61,7 +61,7 @@ double covariance(const double data1[],
       long double covariance = 0.0;
 
       /* find the sum of the squares */
-      for (size_t i = 0; i < n; i++) {
+      for (size_t i = 0; i < (size_t)n; i++) {
             const long double delta1 = (data1[i] - mean1);
             const long double delta2 = (data2[i] - mean2);
             covariance += (delta1 * delta2 - covariance) / (i + 1);

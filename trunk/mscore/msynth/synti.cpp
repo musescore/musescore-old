@@ -19,7 +19,7 @@
 //=============================================================================
 
 #include "config.h"
-#include "preferences.h"
+#include "mscore/preferences.h"
 #include "libmscore/event.h"
 #include "libmscore/instrument.h"
 #include "synti.h"

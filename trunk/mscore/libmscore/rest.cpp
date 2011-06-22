@@ -25,7 +25,6 @@
 #include "utils.h"
 #include "tuplet.h"
 #include "sym.h"
-#include "icons.h"
 #include "stafftext.h"
 #include "articulation.h"
 #include "chord.h"

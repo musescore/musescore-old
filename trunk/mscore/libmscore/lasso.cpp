@@ -19,9 +19,9 @@
 //=============================================================================
 
 #include "lasso.h"
-#include "scoreview.h"
 #include "painter.h"
 #include "mscore.h"
+#include "mscoreview.h"
 
 //---------------------------------------------------------
 //   Lasso

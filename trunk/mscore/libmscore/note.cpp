@@ -38,7 +38,6 @@
 #include "pitchspelling.h"
 #include "arpeggio.h"
 #include "tremolo.h"
-#include "icons.h"
 #include "utils.h"
 #include "image.h"
 #include "system.h"
@@ -56,9 +55,7 @@
 #include "fingering.h"
 #include "bend.h"
 #include "bend.h"
-#include "scoreview.h"
 #include "painter.h"
-#include "chordeditor.h"
 #include "noteevent.h"
 #include "mscore.h"
 

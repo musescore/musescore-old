@@ -20,7 +20,7 @@
 
 #include "pattern.h"
 #include "utils.h"
-#include "sym.h"
+#include "libmscore/sym.h"
 
 //---------------------------------------------------------
 //   Pattern

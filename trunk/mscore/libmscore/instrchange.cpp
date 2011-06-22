@@ -20,11 +20,9 @@
 
 #include "instrchange.h"
 #include "score.h"
-#include "scoreview.h"
 #include "segment.h"
 #include "staff.h"
 #include "part.h"
-// #include "seq.h"
 #include "undo.h"
 #include "mscore.h"
 

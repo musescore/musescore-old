@@ -19,7 +19,6 @@
 //=============================================================================
 
 #include "element.h"
-#include "scoreview.h"
 #include "clef.h"
 #include "score.h"
 #include "note.h"

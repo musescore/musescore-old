@@ -19,8 +19,6 @@
 //=============================================================================
 
 #include "tremolobar.h"
-// #include "tremolobarprop.h"
-#include "tremolobarcanvas.h"
 #include "score.h"
 #include "undo.h"
 #include "staff.h"
