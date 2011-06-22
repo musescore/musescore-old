@@ -20,7 +20,7 @@
 
 #include "midifile.h"
 #include "xml.h"
-#include "driver.h"
+// #include "driver.h"
 #include "score.h"
 #include "part.h"
 #include "event.h"

@@ -22,7 +22,7 @@ include (${PROJECT_SOURCE_DIR}/cmake/gch.cmake)
 
 include_directories(
       ${PROJECT_SOURCE_DIR}
-      ${PROJECT_SOURCE_DIR}/libmscore
+      ${PROJECT_BINARY_DIR}
       )
 
 QT4_WRAP_CPP (mocs

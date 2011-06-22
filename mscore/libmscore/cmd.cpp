@@ -30,7 +30,6 @@
 #include "key.h"
 #include "clef.h"
 #include "navigate.h"
-#include "scoreview.h"
 #include "slur.h"
 #include "note.h"
 #include "rest.h"

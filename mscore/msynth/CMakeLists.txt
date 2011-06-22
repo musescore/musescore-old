@@ -21,9 +21,8 @@
 include (${PROJECT_SOURCE_DIR}/cmake/gch.cmake)
 
 include_directories(
-      ${CMAKE_CURRENT_BINARY_DIR}
+      ${PROJECT_BINARY_DIR}
       ${PROJECT_SOURCE_DIR}
-      ${PROJECT_SOURCE_DIR}/libmscore
       )
 
 add_library (

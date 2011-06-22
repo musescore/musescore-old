@@ -44,6 +44,7 @@ QString MScore::partStyle;
 QString MScore::soundFont;
 qreal   MScore::spatium;
 QString MScore::lastError;
+bool    MScore::layoutDebug = false;
 
 extern void initSymbols(int);
 extern void initStaffTypes();

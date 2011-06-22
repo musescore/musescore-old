@@ -20,7 +20,7 @@
 
 #include "omr.h"
 #include "omrview.h"
-#include "xml.h"
+#include "libmscore/xml.h"
 #include "omrpage.h"
 #include "pdf.h"
 #ifdef OCR

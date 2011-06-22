@@ -29,7 +29,6 @@
 #include "staff.h"
 #include "style.h"
 #include "timesig.h"
-#include "scoreview.h"
 #include "chord.h"
 #include "note.h"
 #include "slur.h"
@@ -1248,7 +1247,7 @@ bool Score::layoutSystem1(double& minWidth, double w, bool isFirstSystem, bool l
 QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
    bool isFirstSystem, bool useLongName, double* h)
       {
-      bool raggedRight = layoutDebug;
+      bool raggedRight = MScore::layoutDebug;
 
       *h = 0.0;
       QList<System*> sl;

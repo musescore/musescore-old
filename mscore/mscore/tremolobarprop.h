@@ -23,7 +23,7 @@
 
 #include "libmscore/element.h"
 #include "ui_tremolobar.h"
-#include "pitchvalue.h"
+#include "libmscore/pitchvalue.h"
 
 class Painter;
 class TremoloBar;

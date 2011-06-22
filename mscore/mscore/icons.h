@@ -21,12 +21,6 @@
 #ifndef __ICONS_H__
 #define __ICONS_H__
 
-enum {
-      ICON_ACCIACCATURA, ICON_APPOGGIATURA, ICON_GRACE4, ICON_GRACE16, ICON_GRACE32,
-      ICON_SBEAM, ICON_MBEAM, ICON_NBEAM, ICON_BEAM32, ICON_BEAM64, ICON_AUTOBEAM,
-      ICON_FBEAM1, ICON_FBEAM2
-      };
-
 extern void genIcons();
 
 enum { longaUp_ICON, brevis_ICON, note_ICON, note2_ICON, note4_ICON, note8_ICON, note16_ICON,
@@ -47,7 +41,7 @@ enum { longaUp_ICON, brevis_ICON, note_ICON, note2_ICON, note4_ICON, note8_ICON,
       hraster_ICON, vraster_ICON, repitch_ICON,
       formatListUnordered_ICON, formatListOrdered_ICON,
       formatIndentMore_ICON, formatIndentLess_ICON, community_ICON,
-      voice1_ICON, voice2_ICON, voice3_ICON, voice4_ICON, 
+      voice1_ICON, voice2_ICON, voice3_ICON, voice4_ICON,
       ICONS
       };
 

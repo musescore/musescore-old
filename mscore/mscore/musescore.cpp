@@ -1992,7 +1992,7 @@ int main(int argc, char* av[])
                         debugMode = true;
                         break;
                   case 'L':
-                        layoutDebug = true;
+                        MScore::layoutDebug = true;
                         break;
                   case 's':
                         noSeq = true;
@@ -4169,6 +4169,9 @@ void MuseScore::endCmd()
                   seq->initInstruments();
                   cs->setExcerptsChanged(false);
                   }
+
+            QAction* action = getAction("concert-pitch");
+            action->setChecked(cs->styleB(ST_concertPitch));
 
             enableInput = e && (e->type() == NOTE || e->type() == REST);
             cs->end();

@@ -23,7 +23,6 @@
 #include "system.h"
 #include "measure.h"
 #include "score.h"
-#include "scoreview.h"
 #include "sym.h"
 #include "segment.h"
 #include "painter.h"

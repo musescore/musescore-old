@@ -21,7 +21,7 @@
 #ifndef __TREMOLOBARCANVAS_H__
 #define __TREMOLOBARCANVAS_H__
 
-#include "pitchvalue.h"
+#include "libmscore/pitchvalue.h"
 
 //---------------------------------------------------------
 //   TremoloBarCanvas

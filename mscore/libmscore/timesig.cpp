@@ -25,7 +25,6 @@
 #include "style.h"
 #include "sym.h"
 #include "symbol.h"
-#include "scoreview.h"
 #include "system.h"
 #include "segment.h"
 #include "measure.h"

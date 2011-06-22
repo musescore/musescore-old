@@ -18,15 +18,15 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "globals.h"
+#include "mscore/globals.h"
 #include "omrview.h"
 #include "omr.h"
-#include "page.h"
+#include "libmscore/page.h"
 #include "omrpage.h"
-#include "score.h"
-#include "scoreview.h"
-#include "sym.h"
-#include "mscore.h"
+#include "libmscore/score.h"
+#include "mscore/scoreview.h"
+#include "libmscore/sym.h"
+#include "libmscore/mscore.h"
 
 static bool showLines      = false;
 // static bool showStaffLines = true;

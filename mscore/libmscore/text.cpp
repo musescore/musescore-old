@@ -21,7 +21,6 @@
 #include "text.h"
 #include "xml.h"
 #include "style.h"
-#include "scoreview.h"
 #include "score.h"
 #include "utils.h"
 #include "page.h"
@@ -32,7 +31,7 @@
 #include "measure.h"
 #include "box.h"
 #include "segment.h"
-#include "texttools.h"
+// #include "texttools.h"
 #include "painter.h"
 #include "mscore.h"
 

@@ -54,7 +54,6 @@
 #include "layoutbreak.h"
 #include "page.h"
 #include "lyrics.h"
-#include "scoreview.h"
 #include "volta.h"
 #include "image.h"
 #include "hook.h"

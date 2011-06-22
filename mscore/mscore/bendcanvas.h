@@ -21,7 +21,7 @@
 #ifndef __BENDCANVAS_H__
 #define __BENDCANVAS_H__
 
-#include "pitchvalue.h"
+#include "libmscore/pitchvalue.h"
 
 //---------------------------------------------------------
 //   BendCanvas

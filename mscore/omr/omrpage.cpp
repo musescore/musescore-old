@@ -25,11 +25,11 @@
 #ifdef OCR
 #include "ocr.h"
 #endif
-#include "score.h"
-#include "text.h"
-#include "measurebase.h"
-#include "box.h"
-#include "sym.h"
+#include "libmscore/score.h"
+#include "libmscore/text.h"
+#include "libmscore/measurebase.h"
+#include "libmscore/box.h"
+#include "libmscore/sym.h"
 #include "pattern.h"
 
 //---------------------------------------------------------

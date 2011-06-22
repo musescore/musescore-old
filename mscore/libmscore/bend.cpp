@@ -196,17 +196,12 @@ void Bend::draw(Painter* painter) const
                   painter->drawLine(x, y, x2, y2);
 
                   painter->setBrushColor(Qt::black);
-//                  painter->drawPolygon(arrowUp.translated(x2, y2 + _spatium * .2));
-#if 0 // TODO-LIB
+                  painter->drawPolygon(arrowUp.translated(x2, y2 + _spatium * .2));
+
                   int idx = (pitch + 12)/25;
                   const char* l = label[idx];
-                  QRectF r;
-                  painter->drawText(QRectF(x2, y2, 0, 0),
-                     Qt::AlignHCenter | Qt::AlignBottom | Qt::TextDontClip,
-                     QString(l),
-                     &r
-                     );
-#endif
+                  painter->drawTextHCentered(x2, y2, QString(l));
+
                   y = y2;
                   }
             if (pitch == _points[pt+1].pitch) {
@@ -230,18 +225,11 @@ void Bend::draw(Painter* painter) const
                   painter->drawPath(path);
 
                   painter->setBrushColor(Qt::black);
-//                  painter->drawPolygon(arrowUp.translated(x2, y2 + _spatium * .2));
+                  painter->drawPolygon(arrowUp.translated(x2, y2 + _spatium * .2));
 
-#if 0 // TODO-LIB
                   int idx = (_points[pt+1].pitch + 12)/25;
                   const char* l = label[idx];
-                  QRectF r;
-                  painter->drawText(QRectF(x2, y2, 0, 0),
-                     Qt::AlignHCenter | Qt::AlignBottom | Qt::TextDontClip,
-                     QString(l),
-                     &r
-                     );
-#endif
+                  painter->drawTextHCentered(x2, y2, QString(l));
                   }
             else {
                   // down
@@ -257,7 +245,7 @@ void Bend::draw(Painter* painter) const
                   painter->drawPath(path);
 
                   painter->setBrushColor(Qt::black);
-//                  painter->drawPolygon(arrowDown.translated(x2, y2 - _spatium * .2));
+                  painter->drawPolygon(arrowDown.translated(x2, y2 - _spatium * .2));
                   }
             x = x2;
             y = y2;
