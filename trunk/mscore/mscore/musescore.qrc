@@ -161,6 +161,7 @@
       <file>data/icons/format_indent_more.svgz</file>
       <file>data/icons/format_indent_less.svgz</file>
       <file>data/icons/community.svg</file>
+      <file>data/webview.css</file>
 
       <file>data/icons-dark/minus.svg</file>
       <file>data/icons-dark/flip.svg</file>

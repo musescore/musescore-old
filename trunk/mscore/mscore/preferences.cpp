@@ -260,6 +260,8 @@ void Preferences::init()
       exportAudioSampleRate   = exportAudioSampleRates[0];
 
       profile                 = "default";
+      
+      firstStartWeb = true;
       };
 
 //---------------------------------------------------------
@@ -378,6 +380,8 @@ void Preferences::write()
       s.setValue("exportAudioSampleRate", exportAudioSampleRate);
 
       s.setValue("profile", profile);
+      
+      s.setValue("firstStartWeb", firstStartWeb);
 
       //update
       s.setValue("checkUpdateStartup", checkUpdateStartup);
@@ -530,6 +534,8 @@ void Preferences::read()
       exportAudioSampleRate = s.value("exportAudioSampleRate", exportAudioSampleRate).toInt();
 
       profile          = s.value("profile", profile).toString();
+      
+      firstStartWeb = s.value("firstStartWeb", true).toBool();
 
       checkUpdateStartup = s.value("checkUpdateStartup", checkUpdateStartup).toInt();
       if (checkUpdateStartup == 0)

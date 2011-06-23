@@ -3,6 +3,13 @@
 //  Linux Music Score Editor
 //  $Id:$
 //
+//  The webview is shown on startup with a local file inviting user 
+//  to start connecting with the community. They can press start and 
+//  MuseScore will go online. If no connection, display a can't connect message
+//  On next startup, if no connection, the panel is closed. If connection, the
+//  MuseScore goes online directly. If the autoclose panel is reopen, the user
+//  can retry; retry should not close the panel.
+//
 //  Copyright (C) 2011 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
@@ -20,8 +27,10 @@
 
 #include "webpage.h"
 #include "musescore.h"
+#include "preferences.h"
 #include "libmscore/score.h"
 #include "libmscore/mscore.cpp"
+
 
 //---------------------------------------------------------
 //   MyWebPage
@@ -85,26 +94,53 @@ MyWebView::MyWebView(QWidget *parent):
       // object-tags correctly.
 
       m_page.setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
-      QWebFrame* frame = m_page.mainFrame();
-      frame->addToJavaScriptWindowObject("mscore", mscore);
+      
       setPage(&m_page);
       progressBar = 0;
       connect(this, SIGNAL(linkClicked(const QUrl&)), SLOT(link(const QUrl&)));
-      connect(this, SIGNAL(loadFinished(bool)), SLOT(stopBusy(bool)));
       }
 
 //---------------------------------------------------------
 //   stopBusy
 //---------------------------------------------------------
 
-void MyWebView::stopBusy(bool val)
+void MyWebView::stopBusy(bool val, bool close)
       {
-      if (!val)
-            setHtml(tr("<HTML><BODY BGCOLOR=\"#FFFFFF\"><H2>no internet connection?</H2>"
-               "</BODY></HTML>"));
+      if (!val) {
+            setHtml(tr("<html><head>"
+                 "<script type=\"text/javascript\">"
+                  "function closePermanently() { mscore.closeWebPanelPermanently(); return false;}"
+                  "</script>"
+                  "<link rel=\"stylesheet\" href=\"data/webview.css\" type=\"text/css\" /></head>"
+            "<body>"
+            "<div id=\"content\">"
+            "<div id=\"middle\">"
+            "  <div class=\"title\" align=\"center\"><h2>Could not<br /> connect</h2></div>"
+            "  <ul><li>To connect with the community, <br /> you need to have internet <br /> connection enabled</li></ul>"
+            "  <div align=\"center\"><a class=\"button\" href=\"#\" onclick=\"return panel.load();\">Retry</a></div>"
+            "  <div align=\"center\"><a class=\"close\" href=\"#\" onclick=\"return closePermanently();\">Close this permanently</div>"
+            "</div></div>"
+            "</body></html>"), QUrl("qrc:/"));
+            if(!preferences.firstStartWeb && close)
+                  mscore->showWebPanel(false);
+            }
       disconnect(this, SIGNAL(loadProgress(int)), progressBar, SLOT(setValue(int)));
       mscore->hideProgressBar();
       setCursor(Qt::ArrowCursor);
+      if(val) {
+            preferences.firstStartWeb = false;
+            preferences.dirty = true;
+            }
+      }
+
+void MyWebView::stopBusyAndClose(bool val)
+      {
+      stopBusy(val, true);
+      }
+
+void MyWebView::stopBusyStatic(bool val) 
+      {
+      stopBusy(val, false);
       }
 
 //---------------------------------------------------------
@@ -141,29 +177,61 @@ void MyWebView::link(const QUrl& url)
 WebPageDockWidget::WebPageDockWidget(MuseScore* mscore, QWidget* parent)
    : QDockWidget(parent)
       {
-
-      //QWidget* w = new QWidget(this);
-      setWindowTitle (tr("MuseScore Universe"));
-      /*setTitleBarWidget(w);
-      titleBarWidget()->hide();*/
+      setWindowTitle("MuseScore Connect");
       setFloating(false);
       setFeatures(QDockWidget::DockWidgetClosable);
-
-      QWidget* mainWidget = new QWidget(this);
-
-      QVBoxLayout* layout = new QVBoxLayout;
-      mainWidget->setLayout(layout);
-
+      
       setObjectName("webpage");
       setAllowedAreas(Qt::LeftDockWidgetArea);
-      const char* url = "http://cdn.musescore.org/universe.html";
 
       web = new MyWebView;
-      layout->addWidget(web);
-      web->load(QUrl(url));
-      web->setBusy();
+      web->setContextMenuPolicy(Qt::PreventContextMenu);
+      QWebFrame* frame = web->webPage()->mainFrame();
+      connect(frame, SIGNAL(javaScriptWindowObjectCleared()), this, SLOT(addToJavascript()));
+            
+      /*web->load(QUrl("http://localhost/webview/test.html"));
+      web->setBusy();*/
+      if(preferences.firstStartWeb) {
+            connect(web, SIGNAL(loadFinished(bool)), web, SLOT(stopBusyStatic(bool)));
+            web->setBusy();
+            web->setHtml("<html><head>"
+                  "<script type=\"text/javascript\">"
+                  "      function closePermanently() { mscore.closeWebPanelPermanently(); return false; }</script>"
+                  "      <link rel=\"stylesheet\" href=\"data/webview.css\" type=\"text/css\" /></head>"
+                  "<body>"
+                  "<div id=\"content\">"
+                  "<div id=\"middle\">"
+                  "  <div class=\"title\" align=\"center\"><h2>Connect with the <br /> Community</h2></div>"
+                  "  <ul><li>Find help</li>"
+                  "  <li>Improve your skills</li>"
+                  "  <li>Read the latest news</li>"
+                  "  <li>Download free sheet music</li></ul>"
+                  "  <div align=\"center\"><a class=\"button\" href=\"#\" onClick=\"return panel.load();\">Start</a></div>"
+                  "  <div align=\"center\"><a class=\"close\" href=\"#\" onclick=\"return closePermanently();\">Close this permanently</div>"
+                  "</div></div>"
+                  "</body></html>", QUrl("qrc:/"));
+            }
+      else{
+            //And not load ! 
+            connect(web, SIGNAL(loadFinished(bool)), web, SLOT(stopBusyAndClose(bool)));
+            web->setBusy();
+            web->load(QUrl(webUrl));
+            }
+      setWidget(web);
+      }
 
-      setWidget(mainWidget);
+void WebPageDockWidget::addToJavascript() 
+      {
+      QWebFrame* frame = web->webPage()->mainFrame();
+      frame->addToJavaScriptWindowObject("panel", this);
+      frame->addToJavaScriptWindowObject("mscore", mscore);
+      }
+
+void WebPageDockWidget::load()
+      {
+      connect(web, SIGNAL(loadFinished(bool)), web, SLOT(stopBusyStatic(bool)));
+      web->setBusy();
+      web->load(QUrl(webUrl));
       }
 
 #if 0
