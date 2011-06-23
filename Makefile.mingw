@@ -20,8 +20,8 @@
 
 
 REVISION  = $(shell type mscore\mscore\revision.h)
-VERSION   = 1.0r${REVISION}
-MINGW_DIR = C:\Qt\2010.02\mingw
+VERSION   = 1.1r${REVISION}
+MINGW_DIR = C:\QtSDK\mingw
 
 win32:
 	if not exist win32build\nul mkdir win32build
