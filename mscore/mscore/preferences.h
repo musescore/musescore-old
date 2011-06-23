@@ -150,6 +150,8 @@ struct Preferences {
       int exportAudioSampleRate;
 
       QString profile;
+      
+      bool firstStartWeb;
 
       bool dirty;
 

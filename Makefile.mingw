@@ -21,7 +21,7 @@
 
 REVISION  = $(shell type mscore\mscore\revision.h)
 VERSION   = 2.0r${REVISION}
-MINGW_DIR = C:\Qt\2010.05\mingw
+MINGW_DIR = C:\QtSDK\mingw
 CPUS = 2
 
 win32:

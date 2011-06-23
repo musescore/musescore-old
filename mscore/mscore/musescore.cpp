@@ -552,7 +552,7 @@ MuseScore::MuseScore()
       fileTools->addAction(getAction("file-open"));
       fileTools->addAction(getAction("file-save"));
       fileTools->addAction(getAction("print"));
-      fileTools->addAction(getAction("online-resources"));
+      fileTools->addAction(getAction("musescore-connect"));
       fileTools->addSeparator();
 
       a = getAction("undo");
@@ -872,7 +872,7 @@ MuseScore::MuseScore()
       a->setCheckable(true);
       menuDisplay->addAction(a);
 
-      a = getAction("online-resources");
+      a = getAction("musescore-connect");
       a->setCheckable(true);
       menuDisplay->addAction(a);
 
@@ -2231,7 +2231,7 @@ int main(int argc, char* av[])
             QObject::connect(qApp, SIGNAL(messageReceived(const QString&)),
                mscore, SLOT(handleMessage(const QString&)));
 
-            mscore->showWeb(preferences.showWebPanel);
+            mscore->showWebPanel(preferences.showWebPanel);
 
             static_cast<QtSingleApplication*>(qApp)->setActivationWindow(mscore, false);
             int files = 0;
@@ -3522,9 +3522,9 @@ void MuseScore::showPianoKeyboard(bool on)
 //   showWeb
 //---------------------------------------------------------
 
-void MuseScore::showWeb(bool on)
+void MuseScore::showWebPanel(bool on)
       {
-      QAction* a = getAction("online-resources");
+      QAction* a = getAction("musescore-connect");
       if (on) {
             if (_webPage == 0) {
                   _webPage = new WebPageDockWidget(this, this);
@@ -4346,8 +4346,8 @@ void MuseScore::cmd(QAction* a, const QString& cmd)
             ;
       else if (cmd == "toogle-piano")
             showPianoKeyboard(a->isChecked());
-      else if (cmd == "online-resources")
-            showWeb(a->isChecked());
+      else if (cmd == "musescore-connect")
+            showWebPanel(a->isChecked());
       else if (cmd == "media")
             showMediaDialog();
       else if (cmd == "page-settings")
@@ -4489,7 +4489,7 @@ void MuseScore::openExternalLink(const QString& url)
 
 void MuseScore::closeWebPanelPermanently()
       {
-      showWeb(false);
+      showWebPanel(false);
       preferences.showWebPanel = false;
       preferences.dirty  = true;
       }
