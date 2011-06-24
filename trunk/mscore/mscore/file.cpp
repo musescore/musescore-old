@@ -1669,4 +1669,174 @@ void MuseScore::addImage(Score* score, Element* e)
       score->undoAddElement(s);
       }
 
+//---------------------------------------------------------
+//   saveSvg
+//---------------------------------------------------------
+
+bool MuseScore::saveSvg(const QString& saveName)
+      {
+      QSvgGenerator printer;
+      printer.setResolution(int(DPI));
+      printer.setFileName(saveName);
+
+      cs->setPrinting(true);
+
+      QPainter p(&printer);
+      p.setRenderHint(QPainter::Antialiasing, true);
+      p.setRenderHint(QPainter::TextAntialiasing, true);
+      double mag = converterDpi / DPI;
+      p.scale(mag, mag);
+      PainterQt painter(&p, 0);
+
+      QList<Element*> eel;
+      for (MeasureBase* m = cs->measures()->first(); m; m = m->next()) {
+            // skip multi measure rests
+            if (m->type() == MEASURE) {
+                  Measure* mm = static_cast<Measure*>(m);
+                  if (mm->multiMeasure() < 0)
+                        continue;
+                  }
+            m->scanElements(&eel, collectElements);
+            }
+      QList<const Element*> el;
+      foreach(Page* page, cs->pages()) {
+            el.clear();
+            page->scanElements(&el, collectElements);
+            foreach(const Element* e, eel) {
+                  if (!e->visible())
+                        continue;
+                  p.save();
+                  p.translate(e->canvasPos() - page->pos());
+                  p.setPen(QPen(e->color()));
+                  e->draw(&painter);
+                  p.restore();
+                  }
+            foreach(const Element* e, el) {
+                  if (!e->visible())
+                        continue;
+                  p.save();
+                  p.translate(e->canvasPos() - page->pos());
+                  p.setPen(QPen(e->color()));
+                  e->draw(&painter);
+                  p.restore();
+                  }
+            }
+
+      cs->setPrinting(false);
+      p.end();
+      return true;
+      }
+
+//---------------------------------------------------------
+//   savePng
+//    return true on success
+//---------------------------------------------------------
+
+bool MuseScore::savePng(const QString& name)
+      {
+      return savePng(cs, name, false, true, converterDpi, QImage::Format_ARGB32_Premultiplied );
+      }
+
+//---------------------------------------------------------
+//   savePng with options
+//    return true on success
+//---------------------------------------------------------
+
+bool MuseScore::savePng(Score* score, const QString& name, bool screenshot, bool transparent, double convDpi, QImage::Format format)
+      {
+      bool rv = true;
+      score->setPrinting(!screenshot);    // dont print page break symbols etc.
+
+      QImage::Format f;
+      if (format != QImage::Format_Indexed8)
+          f = format;
+      else
+          f = QImage::Format_ARGB32_Premultiplied;
+
+      const QList<Page*>& pl = score->pages();
+      int pages = pl.size();
+
+      QList<Element*> eel;
+      for (MeasureBase* m = score->measures()->first(); m; m = m->next()) {
+            // skip multi measure rests
+            if (m->type() == MEASURE) {
+                  Measure* mm = static_cast<Measure*>(m);
+                  if (mm->multiMeasure() < 0)
+                        continue;
+                  }
+            m->scanElements(&eel, collectElements);
+            }
+      int padding = QString("%1").arg(pages).size();
+      for (int pageNumber = 0; pageNumber < pages; ++pageNumber) {
+            Page* page = pl.at(pageNumber);
+
+            QRectF r = page->abbox();
+            int w = lrint(r.width()  * convDpi / DPI);
+            int h = lrint(r.height() * convDpi / DPI);
+
+            QImage printer(w, h, f);
+
+            printer.setDotsPerMeterX(lrint(DPMM * 1000.0));
+            printer.setDotsPerMeterY(lrint(DPMM * 1000.0));
+
+            printer.fill(transparent ? 0 : 0xffffffff);
+
+            double mag = convDpi / DPI;
+            QPainter p(&printer);
+            PainterQt painter(&p, 0);
+
+            p.setRenderHint(QPainter::Antialiasing, true);
+            p.setRenderHint(QPainter::TextAntialiasing, true);
+            p.scale(mag, mag);
+
+            foreach(const Element* e, eel) {
+                  if (!e->visible())
+                        continue;
+                  QPointF ap(e->canvasPos() - page->pos());
+                  p.translate(ap);
+                  p.setPen(QPen(e->color()));
+                  e->draw(&painter);
+                  p.translate(-ap);
+                  }
+
+            QList<Element*> el;
+            page->scanElements(&el, collectElements);
+            foreach(const Element* e, el) {
+                  if (!e->visible())
+                        continue;
+                  QPointF ap(e->canvasPos() - page->pos());
+                  p.translate(ap);
+                  p.setPen(QPen(e->color()));
+                  e->draw(&painter);
+                  p.translate(-ap);
+                  }
+
+            if (format == QImage::Format_Indexed8) {
+                  //convert to grayscale & respect alpha
+                  QVector<QRgb> colorTable;
+                  colorTable.push_back(QColor(0, 0, 0, 0).rgba());
+                  if (!transparent) {
+                        for (int i = 1; i < 256; i++)
+                              colorTable.push_back(QColor(i, i, i).rgb());
+                        }
+                  else {
+                        for (int i = 1; i < 256; i++)
+                              colorTable.push_back(QColor(0, 0, 0, i).rgba());
+                        }
+                  printer = printer.convertToFormat(QImage::Format_Indexed8, colorTable);
+                  }
+
+            QString fileName(name);
+            if (fileName.endsWith(".png"))
+                  fileName = fileName.left(fileName.size() - 4);
+            fileName += QString("-%1.png").arg(pageNumber+1, padding, 10, QLatin1Char('0'));
+
+            rv = printer.save(fileName, "png");
+            if (!rv)
+                  break;
+            }
+      cs->setPrinting(false);
+      return rv;
+      }
+
 

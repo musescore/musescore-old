@@ -182,27 +182,6 @@ void ScoreView::editKey(QKeyEvent* ev)
       }
 
 //---------------------------------------------------------
-//   enableInputToolbar
-//---------------------------------------------------------
-
-static void enableInputToolbar(bool val)
-      {
-      static const char* actionNames[] = {
-            "pad-rest", "pad-dot", "pad-dotdot", "note-longa",
-            "note-breve", "pad-note-1", "pad-note-2", "pad-note-4",
-            "pad-note-8", "pad-note-16", "pad-note-32", "pad-note-64",
-            "pad-note-128",
-//            "voice-1", "voice-2", "voice-3", "voice-4",
-            "acciaccatura", "appoggiatura", "grace4", "grace16",
-            "grace32", "beam-start", "beam-mid", "no-beam", "beam32",
-            "auto-beam"
-            };
-      for (unsigned i = 0; i < sizeof(actionNames)/sizeof(*actionNames); ++i) {
-            getAction(actionNames[i])->setEnabled(val);
-            }
-      }
-
-//---------------------------------------------------------
 //   updateInputState
 //---------------------------------------------------------
 

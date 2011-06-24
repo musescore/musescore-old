@@ -236,7 +236,7 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                         double convDpi = context->argument(4).toNumber();
                         bool grayscale = context->argument(5).toBool();
                         QImage::Format f = grayscale ? QImage::Format_Indexed8 : QImage::Format_ARGB32_Premultiplied;
-                        score->savePng(s, screenshot, transparent, convDpi, f);
+                        mscore->savePng(score, s, screenshot, transparent, convDpi, f);
                         return context->engine()->undefinedValue();
                         }
                   }

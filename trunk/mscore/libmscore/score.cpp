@@ -2543,7 +2543,7 @@ void Score::transpose(int mode, TransposeDirection direction, int transposeKey, 
             startTick     = selection().tickStart();
             }
       KeyList* km = staff(startStaffIdx)->keymap();
-      int key     = km->key(startTick).accidentalType();
+//      int key     = km->key(startTick).accidentalType();
 
       Interval interval;
       if (mode == TRANSPOSE_BY_KEY) {
@@ -2849,15 +2849,10 @@ void Score::setInputState(Element* e)
       {
 // printf("setInputState %s\n", e ? e->name() : "--");
 
+      if (e == 0)
+            return;
       if (e && e->type() == CHORD)
             e = static_cast<Chord*>(e)->upNote();
-
-      bool enable = e && (e->type() == NOTE || e->type() == REST);
-//TODO-LIB      enableInputToolbar(enable);
-      if (e == 0) {
-//TODO-LIB            mscore->showDrumTools(0, 0);
-            return;
-            }
 
       _is.setDrumNote(-1);
 //      _is.setDrumset(0);
@@ -3251,16 +3246,6 @@ void Score::lassoSelectEnd()
 //   searchSelectedElements
 //    "ElementList selected"
 //---------------------------------------------------------
-
-/**
- Rebuild list of selected Elements.
-*/
-static void collectSelectedElements(void* data, Element* e)
-      {
-      QList<const Element*>* l = static_cast<QList<const Element*>*>(data);
-      if (e->selected())
-            l->append(e);
-      }
 
 void Score::searchSelectedElements()
       {
