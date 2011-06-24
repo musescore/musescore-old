@@ -139,7 +139,7 @@ void Seq::stopWait()
 void Seq::setScoreView(ScoreView* v)
       {
       if (cv !=v && cs) {
-            cs->setSyntiState();
+            cs->setSyntiState(synti->state());
 //            disconnect(cs, SIGNAL(selectionChanged(int)), this, SLOT(selectionChanged(int)));
             markedNotes.clear();
             stopWait();
