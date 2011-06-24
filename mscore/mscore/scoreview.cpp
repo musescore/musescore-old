@@ -1347,8 +1347,7 @@ void ScoreView::moveCursor(Segment* segment, int track)
             y              -= 2.0 * _spatium;
             }
       _cursor->setPos(x, y);
-      QRectF r(0.0, 0.0, w, h);
-      _cursor->setbbox(r);
+      _cursor->setbbox(QRectF(0.0, 0.0, w, h));
       update(_matrix.mapRect(QRectF(x, y, w, h)).toRect().adjusted(-1,-1,1,1));
       }
 
@@ -1446,11 +1445,11 @@ void ScoreView::paintEvent(QPaintEvent* ev)
       p.setRenderHint(QPainter::TextAntialiasing, true);
       PainterQt vp(&p, this);
 
-      QRegion region = ev->region();
-
-      const QVector<QRect>& vector = region.rects();
-      foreach(const QRect& r, vector)
-            paint(r, p);
+//      QRegion region = ev->region();
+//      const QVector<QRect>& vector = region.rects();
+//      foreach(const QRect& r, vector)
+//            paint(r, p);
+      paint(ev->rect(), p);
 
       p.setTransform(_matrix);
       p.setClipping(false);
