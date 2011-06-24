@@ -1,3 +1,5 @@
+28.jun (la)
+      - fix #11246: change default number of measures and pickup measure timesig
 14.jun (ws)
       - more work on libmscore: the element context menus are back
         (there is still some functionality commented out)
