@@ -1,3 +1,5 @@
+28.jun (la)
+      - fix #11246: change default number of measures and pickup measure timesig
 21.jun (la)
       - add more glyphs for old notation (patch from miwarre)
       - add undo support for scnote pitch and tuning
