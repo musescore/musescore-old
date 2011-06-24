@@ -3058,10 +3058,30 @@ void ScoreView::cmd(const QAction* a)
                   showOmr(!_score->showOmr());
             }
       else if (cmd == "split-measure") {
-            _score->cmdSplitMeasure();
+            Element* e = _score->selection().element();
+            if (!(e && (e->type() == NOTE || e->type() == REST))) {
+                  QMessageBox::warning(0, "MuseScore",
+                     tr("No chord/rest selected:\n"
+                     "please select a chord/rest and try again"));
+                  }
+            else {
+                  if (e->type() == NOTE)
+                        e = static_cast<Note*>(e)->chord();
+                  ChordRest* cr = static_cast<ChordRest*>(e);
+                  _score->cmdSplitMeasure(cr);
+                  }
             }
       else if (cmd == "join-measure") {
-            _score->cmdJoinMeasure();
+            Measure* m1 = _score->selection().startSegment()->measure();
+            Measure* m2 = _score->selection().endSegment()->measure();
+            if (_score->selection().state() != SEL_RANGE || (m1 == m2)) {
+                  QMessageBox::warning(0, "MuseScore",
+                     tr("No measures selected:\n"
+                     "please select range of measures to join and try again"));
+                  }
+            else {
+                  _score->cmdJoinMeasure(m1, m2);
+                  }
             }
       else
             _score->cmd(a);

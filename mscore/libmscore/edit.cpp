@@ -1735,20 +1735,8 @@ void Score::nextInputPos(ChordRest* cr, bool doSelect)
 //   cmdSplitMeasure
 //---------------------------------------------------------
 
-void Score::cmdSplitMeasure()
+void Score::cmdSplitMeasure(ChordRest* cr)
       {
-      Element* e = _selection.element();
-      if (!(e && (e->type() == NOTE || e->type() == REST))) {
-#if 0 // TODO-LIB
-		QMessageBox::warning(0, "MuseScore",
-			tr("No chord/rest selected:\n"
-			"please select a chord/rest and try again"));
-#endif
-            return;
-            }
-      if (e->type() == NOTE)
-            e = static_cast<Note*>(e)->chord();
-      ChordRest* cr = static_cast<ChordRest*>(e);
       Segment* segment = cr->segment();
       Measure* measure = segment->measure();
 
@@ -1874,18 +1862,8 @@ void Score::cmdSplitMeasure()
 //   cmdJoinMeasure
 //---------------------------------------------------------
 
-void Score::cmdJoinMeasure()
+void Score::cmdJoinMeasure(Measure* m1, Measure* m2)
       {
-      Measure* m1 = _selection.startSegment()->measure();
-      Measure* m2 = _selection.endSegment()->measure();
-      if (_selection.state() != SEL_RANGE || (m1 == m2)) {
-#if 0 // TODO-LIB
-		QMessageBox::warning(0, "MuseScore",
-			tr("No measures selected:\n"
-			"please select range of measures to join and try again"));
-#endif
-            return;
-            }
       Measure* m = new Measure(this);
       m->setTick(m1->tick());
       m->setNext(m2);

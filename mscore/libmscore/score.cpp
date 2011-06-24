@@ -2071,15 +2071,12 @@ Score* Score::clone()
 //   setSyntiSettings
 //---------------------------------------------------------
 
-void Score::setSyntiState()
+void Score::setSyntiState(const SyntiState& s)
       {
-#if 0 // TODO-LIB
-      const SyntiState& s = synti->state();
       if (!(_syntiState == s)) {
             // _dirty = true;       // DEBUG: conflicts with setting of default sound font
             _syntiState = s;
             }
-#endif
       }
 
 //---------------------------------------------------------

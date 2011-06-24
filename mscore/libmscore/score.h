@@ -797,7 +797,7 @@ class Score {
       void doLayout();
       void layoutChords1(Segment* segment, int staffIdx);
       SyntiState& syntiState()                           { return _syntiState;         }
-      void setSyntiState();
+      void setSyntiState(const SyntiState& s);
 
       const QList<StaffType*>& staffTypes() const;
       QList<StaffType*>& staffTypes();
@@ -833,8 +833,8 @@ class Score {
       MeasureBase* appendMeasure(ElementType type);
       bool concertPitch() const { return styleB(ST_concertPitch); }
       void layoutFingering(Fingering*);
-      void cmdSplitMeasure();
-      void cmdJoinMeasure();
+      void cmdSplitMeasure(ChordRest*);
+      void cmdJoinMeasure(Measure*, Measure*);
       void timesigStretchChanged(TimeSig* ts, Measure* fm, int staffIdx);
       int pageNumberOffset() const          { return _pageNumberOffset; }
       void setPageNumberOffset(int v)       { _pageNumberOffset = v; }

@@ -245,7 +245,7 @@ void MuseScore::saveFile()
       {
       if (cs == 0)
             return;
-      cs->setSyntiState();
+      cs->setSyntiState(synti->state());
       if (cs->created()) {
             QString selectedFilter;
             QString fn = cs->fileInfo()->baseName();
