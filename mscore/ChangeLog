@@ -1,4 +1,7 @@
-28.jun (la)
+24.jun (ws)
+      - added experimental sampler msynth2
+      - ongoing work on libmscore
+      (la)
       - fix #11246: change default number of measures and pickup measure timesig
 14.jun (ws)
       - more work on libmscore: the element context menus are back
