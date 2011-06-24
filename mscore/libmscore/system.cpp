@@ -123,6 +123,8 @@ void System::layout(double xo1)
             return;
       static const Spatium instrumentNameOffset(1.0);
 
+      qreal _spatium = score()->spatium();
+
       int nstaves  = _staves.size();
       if (nstaves != score()->nstaves())
             printf("System::layout: nstaves %d != %d\n", nstaves, score()->nstaves());
@@ -221,9 +223,8 @@ void System::layout(double xo1)
             delete barLine;
             barLine = 0;
             }
-      if (barLine) {
-            barLine->setPos(_leftMargin + xo1, point(score()->styleS(ST_barWidth)) * .25);
-            }
+      if (barLine)
+            barLine->setPos(_leftMargin + xo1 + barLine->lineWidth().val() * _spatium * .5, 0.0);
 
       //---------------------------------------------------
       //  layout brackets
@@ -355,8 +356,7 @@ void System::layout2()
 //            staffY[i] = staff(i)->bbox().y();
 
       if (barLine) {
-            Spatium lw = score()->styleS(ST_barWidth);
-            barLine->setLen(Spatium(systemHeight / _spatium) - lw * .5);
+            barLine->setLen(Spatium(systemHeight / _spatium));
             barLine->layout();
             }
 
