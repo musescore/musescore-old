@@ -1315,7 +1315,7 @@ void ScoreView::moveCursor(Segment* segment, int track)
       double y        = system->staffY(idx);
       double _spatium = _cursor->spatium();
 
-      update(_matrix.mapRect(_cursor->abbox()).toRect().adjusted(-1,-1,2,2));
+      update(_matrix.mapRect(_cursor->abbox()).toRect().adjusted(-1,-1,1,1));
 
       double h;
       double w;
@@ -1349,7 +1349,7 @@ void ScoreView::moveCursor(Segment* segment, int track)
       _cursor->setPos(x, y);
       QRectF r(0.0, 0.0, w, h);
       _cursor->setbbox(r);
-      update(_matrix.mapRect(_cursor->abbox()).toRect().adjusted(-1,-1,2,2));
+      update(_matrix.mapRect(QRectF(x, y, w, h)).toRect().adjusted(-1,-1,1,1));
       }
 
 //---------------------------------------------------------
@@ -1371,7 +1371,7 @@ void ScoreView::setCursorOn(bool val)
             _cursor->setVisible(val);
             cursorSegment = 0;
             cursorTrack   = -1;
-            update(_matrix.mapRect(_cursor->abbox()).toRect().adjusted(-1,-1,2,2));
+            update(_matrix.mapRect(_cursor->abbox()).toRect().adjusted(-2,-2,2,2));
             }
       }
 
