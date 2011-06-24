@@ -409,8 +409,8 @@ void Channel::write(Xml& xml) const
             if (e.type() != ME_INVALID)
                   e.write(xml);
             }
-//TODO-LIB      if (synti)
-//            xml.tag("synti", seq->synthIndexToName(synti));
+      if (synti)                    // HACK
+            xml.tag("synti", "Aeolus");
       if (mute)
             xml.tag("mute", mute);
       if (solo)
@@ -481,8 +481,10 @@ void Channel::read(QDomElement e)
                   midiActions.append(a);
                   }
             else if (tag == "synti") {
-//TODO-LIB                  int idx = seq->synthNameToIndex(val);
-//                  synti = idx == -1 ? val.toInt() : idx;
+                  if (val == "Aeolus")
+                        synti = 1;
+                  else
+                        synti = 0;
                   }
             else if (tag == "descr")
                   descr = e.text();

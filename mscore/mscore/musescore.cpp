@@ -1923,9 +1923,9 @@ static bool processNonGui()
             if (fn.endsWith(".ps"))
                   return mscore->savePsPdf(fn, QPrinter::PostScriptFormat);
             if (fn.endsWith(".png"))
-                  return cs->savePng(fn);
+                  return mscore->savePng(fn);
             if (fn.endsWith(".svg"))
-                  return cs->saveSvg(fn);
+                  return mscore->saveSvg(fn);
             if (fn.endsWith(".ly"))
                   return cs->saveLilypond(fn);
 #ifdef HAS_AUDIOFILE

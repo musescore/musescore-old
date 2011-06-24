@@ -529,6 +529,9 @@ class MuseScore : public QMainWindow {
       bool saveAs(Score*, bool saveCopy = false);
       void addImage(Score*, Element*);
       bool importMidi(Score*, const QString& name);
+      bool saveSvg(const QString& saveName);
+      bool savePng(const QString& name);
+      bool savePng(Score*, const QString& name, bool screenshot, bool transparent, double convDpi, QImage::Format format);
       };
 
 extern MuseScore* mscore;

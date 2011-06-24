@@ -33,8 +33,8 @@ class MuseScoreView {
       virtual void removeScore() = 0;
 
       virtual void changeEditElement(Element*) = 0;
-//      virtual QCursor cursor() const = 0;
-//      virtual void setCursor(const QCursor&) = 0;
+      virtual QCursor cursor() const = 0;
+      virtual void setCursor(const QCursor&) = 0;
       virtual int gripCount() const = 0;
       virtual const QRectF& getGrip(int) const = 0;
       virtual const QTransform& matrix() const = 0;
