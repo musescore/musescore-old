@@ -1050,7 +1050,7 @@ void Palette::actionToggled(bool /*val*/)
       for (int n = 0; n < nn; ++n) {
             Element* e = cells[n]->element;
             if (e && e->type() == ICON) {
-                  QAction* a = getAction(static_cast<Icon*>(e)->action().toAscii().data());
+                  QAction* a = getAction(static_cast<Icon*>(e)->action());
                   if (a->isChecked()) {
                         selectedIdx = n;
                         break;

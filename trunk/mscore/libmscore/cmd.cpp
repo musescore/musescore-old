@@ -330,6 +330,8 @@ void Score::expandVoice()
 
 Note* Score::addPitch(int pitch, bool addFlag)
       {
+printf("add pitch %d %d\n", pitch, addFlag);
+
       if (addFlag) {
             // add note to selected chord
             Note* note = static_cast<Note*>(selection().element());
@@ -477,6 +479,16 @@ void Score::setGraceNote(Chord* ch, int pitch, NoteType type, int len)
 Segment* Score::setNoteRest(Segment* segment, int track, NoteVal nval, Fraction sd,
    Direction stemDirection)
       {
+      if (segment->subtype() == SegGrace) {
+            Chord* chord = static_cast<Chord*>(segment->element(track));
+            if (chord->notes().size() == 1) {
+                  Note* note = chord->upNote();
+                  int tpc = pitch2tpc2(nval.pitch, true);
+                  int line = note->line();
+                  undoChangePitch(note, nval.pitch, tpc, line, nval.fret, nval.string);
+                  }
+            return segment;
+            }
       assert(segment->subtype() == SegChordRest);
 
       int tick      = segment->tick();

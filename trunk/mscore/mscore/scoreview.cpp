@@ -2197,6 +2197,7 @@ void ScoreView::dropEvent(QDropEvent* event)
             dragElement = 0;
             setDropTarget(0); // this also resets dropRectangle and dropAnchor
             score()->endCmd();
+            mscore->endCmd();
             return;
             }
 
@@ -2304,6 +2305,7 @@ if (debugMode)
             event->acceptProposedAction();
             _score->setLayoutAll(true);
             _score->endCmd();
+            mscore->endCmd();
             }
       setDropTarget(0); // this also resets dropRectangle and dropAnchor
       }
