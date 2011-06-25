@@ -73,6 +73,7 @@
 #include "painter.h"
 #include "iname.h"
 #include "mscore.h"
+#include "icon.h"
 
 extern bool debugMode;
 extern bool showInvisible;
@@ -1189,7 +1190,7 @@ Element* Element::create(ElementType type, Score* score)
             case MARKER:            return new Marker(score);
             case JUMP:              return new Jump(score);
             case REPEAT_MEASURE:    return new RepeatMeasure(score);
-//            case ICON:              return new Icon(score);
+            case ICON:              return new Icon(score);
             case NOTE:              return new Note(score);
             case SYMBOL:            return new Symbol(score);
             case FSYMBOL:           return new FSymbol(score);
@@ -1336,7 +1337,7 @@ const char* Element::name(ElementType type)
             case VBOX:              return "VBox";
             case TBOX:              return "TBox";
             case FBOX:              return "FBox";
-//            case ICON:              return "Icon";
+            case ICON:              return "Icon";
             case ACCIDENTAL_BRACKET:  return "AccidentalBracket";
             case TAB_DURATION_SYMBOL: return "TabDurationSymbol";
             case INVALID:
@@ -1387,19 +1388,8 @@ void collectElements(void* data, Element* e)
 
 bool elementLessThan(const Element* const e1, const Element* const e2)
       {
-//      return e1->type() > e2->type();
       return e1->z() > e2->z();
       }
-#if 0
-//---------------------------------------------------------
-//   setAlign
-//---------------------------------------------------------
-
-void Element::setAlign(Align val)
-      {
-      _align = val;
-      }
-#endif
 
 //---------------------------------------------------------
 //   getGrip

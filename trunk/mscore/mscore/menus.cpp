@@ -67,7 +67,7 @@
 #include "libmscore/stafftext.h"
 #include "libmscore/instrchange.h"
 #include "profile.h"
-#include "icon.h"
+#include "libmscore/icon.h"
 
 extern bool useFactorySettings;
 
@@ -182,27 +182,27 @@ void MuseScore::populatePalette()
 
       Icon* ik = new Icon(gscore);
       ik->setSubtype(ICON_ACCIACCATURA);
-      ik->setAction(getAction("acciaccatura"));
+      ik->setAction("acciaccatura", getAction("acciaccatura")->icon());
       notePalette->append(ik, tr("Acciaccatura"));
 
       ik = new Icon(gscore);
       ik->setSubtype(ICON_APPOGGIATURA);
-      ik->setAction(getAction("appoggiatura"));
+      ik->setAction("appoggiatura", getAction("appoggiatura")->icon());
       notePalette->append(ik, tr("Appoggiatura"));
 
       ik = new Icon(gscore);
       ik->setSubtype(ICON_GRACE4);
-      ik->setAction(getAction("grace4"));
+      ik->setAction("grace4", getAction("grace4")->icon());
       notePalette->append(ik, tr("Quarter grace note"));
 
       ik = new Icon(gscore);
       ik->setSubtype(ICON_GRACE16);
-      ik->setAction(getAction("grace16"));
+      ik->setAction("grace16", getAction("grace16")->icon());
       notePalette->append(ik, tr("16th grace note"));
 
       ik = new Icon(gscore);
       ik->setSubtype(ICON_GRACE32);
-      ik->setAction(getAction("grace32"));
+      ik->setAction("grace32", getAction("grace32")->icon());
       notePalette->append(ik, tr("32nd grace note"));
 
       paletteBox->addPalette(notePalette);
@@ -813,42 +813,42 @@ void MuseScore::populatePalette()
 
       ik = new Icon(gscore);
       ik->setSubtype(ICON_SBEAM);
-      ik->setAction(getAction("beam-start"));
+      ik->setAction("beam-start", getAction("beam-start")->icon());
       sp->append(ik, tr("Start beam"));
 
       ik = new Icon(gscore);
       ik->setSubtype(ICON_MBEAM);
-      ik->setAction(getAction("beam-mid"));
+      ik->setAction("beam-mid", getAction("beam-mid")->icon());
       sp->append(ik, tr("Middle of beam"));
 
       ik = new Icon(gscore);
       ik->setSubtype(ICON_NBEAM);
-      ik->setAction(getAction("no-beam"));
+      ik->setAction("no-beam", getAction("no-beam")->icon());
       sp->append(ik, tr("No beam"));
 
       ik = new Icon(gscore);
       ik->setSubtype(ICON_BEAM32);
-      ik->setAction(getAction("beam32"));
+      ik->setAction("beam32", getAction("beam32")->icon());
       sp->append(ik, tr("Start 1/32 subbeam"));
 
       ik = new Icon(gscore);
       ik->setSubtype(ICON_BEAM64);
-      ik->setAction(getAction("beam64"));
+      ik->setAction("beam64", getAction("beam64")->icon());
       sp->append(ik, tr("Start 1/64 subbeam"));
 
       ik = new Icon(gscore);
       ik->setSubtype(ICON_AUTOBEAM);
-      ik->setAction(getAction("auto-beam"));
+      ik->setAction("auto-beam", getAction("auto-beam")->icon());
       sp->append(ik, tr("Auto beam"));
 
       ik = new Icon(gscore);
       ik->setSubtype(ICON_FBEAM1);
-      ik->setAction(getAction("fbeam1"));
+      ik->setAction("fbeam1", getAction("fbeam1")->icon());
       sp->append(ik, tr("feathered beam"));
 
       ik = new Icon(gscore);
       ik->setSubtype(ICON_FBEAM2);
-      ik->setAction(getAction("fbeam2"));
+      ik->setAction("fbeam2", getAction("fbeam2")->icon());
       sp->append(ik, tr("feathered beam"));
 
       paletteBox->addPalette(sp);
@@ -1301,9 +1301,9 @@ void MuseScore::fingeringMenu()
 //   addTempo
 //---------------------------------------------------------
 
-void Score::addTempo()
+void MuseScore::addTempo()
       {
-      ChordRest* cr = getSelectedChordRest();
+      ChordRest* cr = cs->getSelectedChordRest();
       if (!cr)
             return;
       if (editTempo == 0)
@@ -1311,13 +1311,13 @@ void Score::addTempo()
       int rv = editTempo->exec();
       if (rv == 1) {
             double bps = editTempo->bpm() / 60.0;
-            TempoText* tt = new TempoText(this);
+            TempoText* tt = new TempoText(cs);
             tt->setParent(cr->segment());
             tt->setTrack(cr->track());
             tt->setText(editTempo->text());
             tt->setTempo(bps);
-            undoAddElement(tt);
-            refresh |= tt->abbox(); // ??
+            cs->undoAddElement(tt);
+            cs->addRefresh(tt->abbox());  // ??
             }
       }
 
@@ -1325,7 +1325,7 @@ void Score::addTempo()
 //   addMetronome
 //---------------------------------------------------------
 
-void Score::addMetronome()
+void MuseScore::addMetronome()
       {
       printf("addMetronome: not implemented\n");
       }

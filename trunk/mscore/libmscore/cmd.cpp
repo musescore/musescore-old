@@ -2586,12 +2586,6 @@ void Score::cmd(const QAction* a)
             cmdAddStretch(0.1);
       else if (cmd == "stretch-")
             cmdAddStretch(-0.1);
-#if 0 // TODO-LIB
-      else if (cmd == "tempo")
-            addTempo();
-      else if (cmd == "metronome")
-            addMetronome();
-#endif
       else if (cmd == "pitch-spell")
             spell();
       else if (cmd == "select-all") {
@@ -2681,5 +2675,4 @@ void Score::cmd(const QAction* a)
       else
             printf("1unknown cmd <%s>\n", qPrintable(cmd));
       }
-
 

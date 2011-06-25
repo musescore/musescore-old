@@ -71,6 +71,7 @@
 #include "transposedialog.h"
 #include "metaedit.h"
 #include "chordedit.h"
+#include "edittempo.h"
 
 #include "libmscore/mscore.h"
 #include "libmscore/system.h"
@@ -408,6 +409,7 @@ MuseScore::MuseScore()
       _fullscreen           = false;
       lastCmd               = 0;
       lastShortcut          = 0;
+      editTempo             = 0;
 
       if (!preferences.styleName.isEmpty()) {
             QFile f(preferences.styleName);
@@ -4404,7 +4406,10 @@ void MuseScore::cmd(QAction* a, const QString& cmd)
             cs->setShowFrames(getAction(cmd.toLatin1().data())->isChecked());
       else if (cmd == "harmony-properties")
             cmdAddChordName2();
-
+      else if (cmd == "tempo")
+            addTempo();
+      else if (cmd == "metronome")
+            addMetronome();
       else {
             if (cv) {
                   cv->setFocus();
@@ -4493,3 +4498,4 @@ void MuseScore::closeWebPanelPermanently()
       preferences.showWebPanel = false;
       preferences.dirty  = true;
       }
+

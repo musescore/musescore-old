@@ -36,7 +36,6 @@ class DurationElement : public Element {
       void setTuplet(Tuplet* t)                      { _tuplet = t;      }
       Tuplet* tuplet() const                         { return _tuplet;   }
       virtual Beam* beam() const                     { return 0;         }
-//      int ticks() const;
       virtual int tick() const = 0;
       int actualTicks() const;
 

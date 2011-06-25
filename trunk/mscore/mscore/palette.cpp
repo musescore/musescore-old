@@ -39,7 +39,7 @@
 #include "libmscore/textline.h"
 #include "painterqt.h"
 #include "libmscore/measure.h"
-#include "icon.h"
+#include "libmscore/icon.h"
 #include "libmscore/mscore.h"
 
 //---------------------------------------------------------
@@ -386,10 +386,10 @@ void Palette::append(Element* s, const QString& name, QString tag, qreal mag)
       cell->yoffset   = 0;
       cell->mag       = mag;
       update();
-      if (s && s->type() == ICON) {
-            Icon* icon = static_cast<Icon*>(s);
-            connect(icon->action(), SIGNAL(toggled(bool)), SLOT(actionToggled(bool)));
-            }
+//      if (s && s->type() == ICON) {
+//            Icon* icon = static_cast<Icon*>(s);
+//TODO-LIB            connect(icon->action(), SIGNAL(toggled(bool)), SLOT(actionToggled(bool)));
+//            }
       }
 
 void Palette::append(int symIdx)
@@ -425,10 +425,10 @@ void Palette::add(int idx, Element* s, const QString& name, QString tag)
       cell->yoffset   = 0;
       cell->mag       = 1.0;
       update();
-      if (s && s->type() == ICON) {
-            Icon* icon = static_cast<Icon*>(s);
-            connect(icon->action(), SIGNAL(toggled(bool)), SLOT(actionToggled(bool)));
-            }
+//      if (s && s->type() == ICON) {
+//            Icon* icon = static_cast<Icon*>(s);
+//TODO-LIB            connect(icon->action(), SIGNAL(toggled(bool)), SLOT(actionToggled(bool)));
+//            }
       }
 
 //---------------------------------------------------------
@@ -1050,7 +1050,8 @@ void Palette::actionToggled(bool /*val*/)
       for (int n = 0; n < nn; ++n) {
             Element* e = cells[n]->element;
             if (e && e->type() == ICON) {
-                  if (static_cast<Icon*>(e)->action()->isChecked()) {
+                  QAction* a = getAction(static_cast<Icon*>(e)->action().toAscii().data());
+                  if (a->isChecked()) {
                         selectedIdx = n;
                         break;
                         }

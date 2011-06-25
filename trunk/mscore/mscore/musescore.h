@@ -75,6 +75,7 @@ class Profile;
 class AlbumManager;
 class WebPageDockWidget;
 class ChordList;
+class EditTempo;
 
 extern QString mscoreGlobalShare;
 static const int PROJECT_LIST_LEN = 6;
@@ -289,6 +290,7 @@ class MuseScore : public QMainWindow {
       QNetworkAccessManager* networkManager;
       QAction* lastCmd;
       Shortcut* lastShortcut;
+      EditTempo* editTempo;
 
       //---------------------
 
@@ -532,6 +534,8 @@ class MuseScore : public QMainWindow {
       bool saveSvg(const QString& saveName);
       bool savePng(const QString& name);
       bool savePng(Score*, const QString& name, bool screenshot, bool transparent, double convDpi, QImage::Format format);
+      void addTempo();
+      void addMetronome();
       };
 
 extern MuseScore* mscore;
