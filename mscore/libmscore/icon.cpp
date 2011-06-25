@@ -1,7 +1,7 @@
 //=============================================================================
-//  MusE Score
+//  MuseScore
 //  Linux Music Score Editor
-//  $Id: element.h 4383 2011-06-14 21:28:16Z wschweer $
+//  $Id: element.cpp 4385 2011-06-15 13:26:41Z wschweer $
 //
 //  Copyright (C) 2002-2011 Werner Schweer and others
 //
@@ -18,30 +18,35 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __ICON_H__
-#define __ICON_H__
-
-#include "globals.h"
-#include "libmscore/element.h"
+#include <string.h>
+#include "xml.h"
+#include "icon.h"
 
 //---------------------------------------------------------
-//   Icon
-//    dummy element, used for drag&drop
+//   write
 //---------------------------------------------------------
 
-class Icon : public Element {
-      QAction* _action;
+void Icon::write(Xml& xml) const
+      {
+      xml.stag(name());
+      Element::writeProperties(xml);
+      xml.tag("action", _action);
+      xml.etag();
+      }
 
-   public:
-      Icon(Score* s) : Element(s) {}
-      virtual Icon* clone() const        { return new Icon(*this);   }
-      virtual ElementType type() const   { return MAXTYPE;          }
-      void setAction(QAction* a)         { _action = a;              }
-      QIcon icon() const                 { return _action->icon();   }
-      QAction* action() const            { return _action;           }
-      virtual void write(Xml&) const;
-      virtual void read(QDomElement);
-      };
+//---------------------------------------------------------
+//   read
+//---------------------------------------------------------
 
-#endif
+void Icon::read(QDomElement e)
+      {
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            QString tag(e.tagName());
+            if (tag == "action") {
+                  _action = strdup(e.text().toAscii().data());
+                  }
+            else if (!Element::readProperties(e))
+                  domError(e);
+            }
+      }
 

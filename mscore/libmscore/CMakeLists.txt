@@ -39,7 +39,7 @@ add_library (
       tremolobar.cpp tremolo.cpp trill.cpp tuplet.cpp
       utils.cpp velo.cpp volta.cpp xml.cpp mscore.cpp
       undo.cpp cmd.cpp scorefile.cpp midifile.cpp revisions.cpp
-      check.cpp bb.cpp input.cpp
+      check.cpp bb.cpp input.cpp icon.cpp
       )
 set_target_properties (
       libmscore

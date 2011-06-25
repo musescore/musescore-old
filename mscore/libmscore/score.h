@@ -53,7 +53,6 @@ class ChordRest;
 class Slur;
 class Hairpin;
 class Undo;
-class EditTempo;
 class Part;
 class MidiFile;
 class MidiTrack;
@@ -289,8 +288,6 @@ class Score {
       bool _showInvisible;
       bool _showUnprintable;
       bool _showFrames;
-
-      EditTempo* editTempo;
 
       QList<Part*> _parts;
       QList<Staff*> _staves;

@@ -291,7 +291,6 @@ void Score::init()
       _showInvisible  = true;
       _showUnprintable = true;
       _showFrames     = true;
-      editTempo       = 0;
       _printing       = false;
       _playlistDirty  = false;
       _autosaveDirty  = false;
