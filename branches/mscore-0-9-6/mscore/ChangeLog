@@ -1,4 +1,6 @@
-28.jun (la)
+25.jun (la)
+      - better handling of Tab key in text element
+24.jun (la)
       - fix #11246: change default number of measures and pickup measure timesig
 21.jun (la)
       - add more glyphs for old notation (patch from miwarre)
