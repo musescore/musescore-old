@@ -1,3 +1,5 @@
+25.jun (la)
+      - better handling of Tab key in text element
 24.jun (ws)
       - added experimental sampler msynth2
       - ongoing work on libmscore
