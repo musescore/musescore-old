@@ -1,4 +1,6 @@
-25.jun (la)
+25.jun (lv)
+      - fix #11245: MusicXML doesn't save Tempo Text if there's no name
+       (la)
       - better handling of Tab key in text element
 24.jun (la)
       - fix #11246: change default number of measures and pickup measure timesig

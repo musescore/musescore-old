@@ -1617,7 +1617,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   }
             }
 
-      if ((dirType == "words" && txt != "") || dirType == "metronome") {
+      if ((dirType == "words" && repeat == "") || dirType == "metronome") {
 /*
             printf("words txt='%s' metrEl='%s' tempo='%s' pl='%s' hasyoffs=%d fsz='%s' fst='%s' fw='%s'\n",
                     txt.toUtf8().data(),
