@@ -264,7 +264,7 @@ void MuseScore::closeEvent(QCloseEvent* ev)
       ev->accept();
       if (preferences.dirty)
             preferences.write();
-
+      delete this;
       qApp->quit();
       }
 
@@ -988,17 +988,28 @@ void MuseScore::startAutoSave()
       }
 
 //---------------------------------------------------------
-//   helpBrowser
-//    show local help
+//   getLocaleISOCode
 //---------------------------------------------------------
 
-void MuseScore::helpBrowser()
+QString MuseScore::getLocaleISOCode()
       {
       QString lang;
       if (localeName.toLower() == "system")
             lang = QLocale::system().name();
       else
             lang = localeName;
+      return lang;
+      }
+
+//---------------------------------------------------------
+//   helpBrowser
+//    show local help
+//---------------------------------------------------------
+
+void MuseScore::helpBrowser()
+      {
+      QString lang = getLocaleISOCode();
+
       if (debugMode)
             printf("open handbook for language <%s>\n", qPrintable(lang));
 
@@ -1035,11 +1046,8 @@ void MuseScore::helpBrowser()
 
 void MuseScore::helpBrowser1()
       {
-      QString lang;
-      if (localeName.toLower() == "system")
-            lang = QLocale::system().name();
-      else
-            lang = localeName;
+      QString lang = getLocaleISOCode();
+      
       if (debugMode)
             printf("open online handbook for language <%s>\n", qPrintable(lang));
       QString help("http://www.musescore.org/en/handbook");

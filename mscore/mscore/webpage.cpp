@@ -29,7 +29,6 @@
 #include "musescore.h"
 #include "preferences.h"
 #include "libmscore/score.h"
-#include "libmscore/mscore.cpp"
 
 
 //---------------------------------------------------------
@@ -94,8 +93,12 @@ MyWebView::MyWebView(QWidget *parent):
       // object-tags correctly.
 
       m_page.setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
-      
       setPage(&m_page);
+      
+      //set cookie jar for persistent cookies
+      CookieJar* jar = new CookieJar(QString(dataPath + "/cookies.txt"));
+      page()->networkAccessManager()->setCookieJar(jar);
+
       progressBar = 0;
       connect(this, SIGNAL(linkClicked(const QUrl&)), SLOT(link(const QUrl&)));
       }
@@ -107,7 +110,7 @@ MyWebView::MyWebView(QWidget *parent):
 void MyWebView::stopBusy(bool val, bool close)
       {
       if (!val) {
-            setHtml(tr("<html><head>"
+            setHtml(QString("<html><head>"
                  "<script type=\"text/javascript\">"
                   "function closePermanently() { mscore.closeWebPanelPermanently(); return false;}"
                   "</script>"
@@ -115,12 +118,17 @@ void MyWebView::stopBusy(bool val, bool close)
             "<body>"
             "<div id=\"content\">"
             "<div id=\"middle\">"
-            "  <div class=\"title\" align=\"center\"><h2>Could not<br /> connect</h2></div>"
-            "  <ul><li>To connect with the community, <br /> you need to have internet <br /> connection enabled</li></ul>"
-            "  <div align=\"center\"><a class=\"button\" href=\"#\" onclick=\"return panel.load();\">Retry</a></div>"
-            "  <div align=\"center\"><a class=\"close\" href=\"#\" onclick=\"return closePermanently();\">Close this permanently</div>"
+            "  <div class=\"title\" align=\"center\"><h2>%1</h2></div>"
+            "  <ul><li>%2</li></ul>"
+            "  <div align=\"center\"><a class=\"button\" href=\"#\" onclick=\"return panel.load();\">%3</a></div>"
+            "  <div align=\"center\"><a class=\"close\" href=\"#\" onclick=\"return closePermanently();\">%4</div>"
             "</div></div>"
-            "</body></html>"), QUrl("qrc:/"));
+            "</body></html>")
+            .arg(tr("Could not<br /> connect"))
+            .arg(tr("To connect with the community, <br /> you need to have internet <br /> connection enabled"))
+            .arg(tr("Retry"))
+            .arg(tr("Close this permanently"))
+            , QUrl("qrc:/"));
             if(!preferences.firstStartWeb && close)
                   mscore->showWebPanel(false);
             }
@@ -171,7 +179,7 @@ void MyWebView::link(const QUrl& url)
       }
 
 //---------------------------------------------------------
-//   WebPage
+//   WebPageDockWidget
 //---------------------------------------------------------
 
 WebPageDockWidget::WebPageDockWidget(MuseScore* mscore, QWidget* parent)
@@ -189,36 +197,46 @@ WebPageDockWidget::WebPageDockWidget(MuseScore* mscore, QWidget* parent)
       QWebFrame* frame = web->webPage()->mainFrame();
       connect(frame, SIGNAL(javaScriptWindowObjectCleared()), this, SLOT(addToJavascript()));
             
-      /*web->load(QUrl("http://localhost/webview/test.html"));
-      web->setBusy();*/
       if(preferences.firstStartWeb) {
             connect(web, SIGNAL(loadFinished(bool)), web, SLOT(stopBusyStatic(bool)));
             web->setBusy();
-            web->setHtml("<html><head>"
+            web->setHtml(QString("<html><head>"
                   "<script type=\"text/javascript\">"
                   "      function closePermanently() { mscore.closeWebPanelPermanently(); return false; }</script>"
                   "      <link rel=\"stylesheet\" href=\"data/webview.css\" type=\"text/css\" /></head>"
                   "<body>"
                   "<div id=\"content\">"
                   "<div id=\"middle\">"
-                  "  <div class=\"title\" align=\"center\"><h2>Connect with the <br /> Community</h2></div>"
-                  "  <ul><li>Find help</li>"
-                  "  <li>Improve your skills</li>"
-                  "  <li>Read the latest news</li>"
-                  "  <li>Download free sheet music</li></ul>"
-                  "  <div align=\"center\"><a class=\"button\" href=\"#\" onClick=\"return panel.load();\">Start</a></div>"
-                  "  <div align=\"center\"><a class=\"close\" href=\"#\" onclick=\"return closePermanently();\">Close this permanently</div>"
+                  "  <div class=\"title\" align=\"center\"><h2>%1</h2></div>"
+                  "  <ul><li>%2</li>"
+                  "  <li>%3</li>"
+                  "  <li>%4</li>"
+                  "  <li>%5</li></ul>"
+                  "  <div align=\"center\"><a class=\"button\" href=\"#\" onClick=\"return panel.load();\">%6</a></div>"
+                  "  <div align=\"center\"><a class=\"close\" href=\"#\" onclick=\"return closePermanently();\">%7</div>"
                   "</div></div>"
-                  "</body></html>", QUrl("qrc:/"));
+                  "</body></html>")
+                  .arg(tr("Connect with the <br /> Community"))
+                  .arg(tr("Find help"))
+                  .arg(tr("Improve your skills"))
+                  .arg(tr("Read the latest news"))
+                  .arg(tr("Download free sheet music"))
+                  .arg(tr("Start"))
+                  .arg(tr("Close this permanently"))
+                  , QUrl("qrc:/"));
             }
       else{
             //And not load ! 
             connect(web, SIGNAL(loadFinished(bool)), web, SLOT(stopBusyAndClose(bool)));
             web->setBusy();
-            web->load(QUrl(webUrl));
+            web->load(QUrl(webUrl()));
             }
       setWidget(web);
       }
+
+//---------------------------------------------------------
+//   addToJavascript
+//---------------------------------------------------------
 
 void WebPageDockWidget::addToJavascript() 
       {
@@ -227,11 +245,81 @@ void WebPageDockWidget::addToJavascript()
       frame->addToJavaScriptWindowObject("mscore", mscore);
       }
 
+//---------------------------------------------------------
+//   load
+//---------------------------------------------------------
+
 void WebPageDockWidget::load()
       {
       connect(web, SIGNAL(loadFinished(bool)), web, SLOT(stopBusyStatic(bool)));
       web->setBusy();
-      web->load(QUrl(webUrl));
+      web->load(QUrl(webUrl()));
+      }
+
+//---------------------------------------------------------
+//   load
+//---------------------------------------------------------
+QString WebPageDockWidget::webUrl()
+    { 
+    return QString("%1?language=%2").arg(staticUrl).arg(mscore->getLocaleISOCode()); 
+    }      
+
+
+//---------------------------------------------------------
+//   CookieJar
+//
+//   Once the QNetworkCookieJar object is deleted, all cookies it held will be 
+//   discarded as well. If you want to save the cookies, you should derive from 
+//   this class and implement the saving to disk to your own storage format. 
+//   (From QNetworkCookieJar documentation.)
+//---------------------------------------------------------
+
+CookieJar::CookieJar(QString path, QObject *parent) 
+    : QNetworkCookieJar(parent)
+      {
+      file = path;
+      QFile cookieFile(this->file);
+
+      if (cookieFile.exists() && cookieFile.open(QIODevice::ReadOnly)) {
+            QList<QNetworkCookie> list;
+            QByteArray line;
+
+            while(!(line = cookieFile.readLine()).isNull()) {
+                  list.append(QNetworkCookie::parseCookies(line));
+                  }
+            setAllCookies(list); 
+            }
+      else {
+            qWarning() << "Can't open "<< this->file << " to read cookies"; 
+            }
+      }
+
+//---------------------------------------------------------
+//   ~CookieJar
+//---------------------------------------------------------
+
+CookieJar::~CookieJar()
+      {
+      QList <QNetworkCookie> cookieList; 
+      cookieList = allCookies();
+      
+      QFile file(this->file);
+
+      if(!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+            qWarning() << "Can't open "<< this->file << " to save cookies";
+            return;
+            }
+                  
+      QTextStream out(&file);
+      for(int i = 0 ; i < cookieList.size() ; i++) {
+                //get cookie data
+                QNetworkCookie cookie = cookieList.at(i);
+                if (!cookie.isSessionCookie()) {
+                      QByteArray line =  cookieList.at(i).toRawForm(QNetworkCookie::Full);
+                      out << line << "\n";
+                      }
+            }
+      file.close();
       }
 
 #if 0
