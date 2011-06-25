@@ -536,6 +536,8 @@ class MuseScore : public QMainWindow {
       bool savePng(Score*, const QString& name, bool screenshot, bool transparent, double convDpi, QImage::Format format);
       void addTempo();
       void addMetronome();
+      
+      Q_INVOKABLE QString getLocaleISOCode();
       };
 
 extern MuseScore* mscore;

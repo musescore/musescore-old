@@ -142,6 +142,7 @@
 
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
+#include <QtNetwork/QNetworkCookieJar>
 #include <QtNetwork/QHostAddress>
 #include <QtNetwork/QUdpSocket>
 
