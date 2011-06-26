@@ -14,5 +14,6 @@
       <file alias="fonts/mscore_tab_modern.ttf">../mscore/fonts/mscore_tab_modern.ttf</file>
       <file alias="fonts/mscore_tab_renaiss.ttf">../mscore/fonts/mscore_tab_renaiss.ttf</file>
       <file alias="fonts/mscore_tab_renaiss2.ttf">../mscore/fonts/mscore_tab_renaiss2.ttf</file>
+      <file>mplayer.qml</file>
    </qresource>
 </RCC>

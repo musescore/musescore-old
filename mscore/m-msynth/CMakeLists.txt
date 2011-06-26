@@ -18,6 +18,11 @@
 #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #=============================================================================
 
+include_directories(
+      ${PROJECT_BINARY_DIR}
+      ${PROJECT_SOURCE_DIR}
+      )
+
 set(CMAKE_CXX_FLAGS         "-g -Wall -Wextra -Winvalid-pch")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DQT_NO_DEBUG")
 set(CMAKE_CXX_FLAGS_DEBUG   "-DQT_DEBUG")

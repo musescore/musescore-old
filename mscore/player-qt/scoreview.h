@@ -15,19 +15,21 @@
 #define __SCOREVIEW_H__
 
 #include "libmscore/mscoreview.h"
+
 #include <QtGui/QTransform>
 #include <QtCore/QRectF>
+#include <QtDeclarative/QDeclarativeItem>
 
 //---------------------------------------------------------
 //   ScoreView
 //---------------------------------------------------------
 
-class ScoreView : public QWidget, public MuseScoreView {
+class ScoreView : public QDeclarativeItem, public MuseScoreView {
       Q_OBJECT
 
       Score* score;
       QTransform _matrix, imatrix;
-      QPoint startDrag;
+      QPointF _startDrag;
 
       virtual void dataChanged(const QRectF&);
       virtual void updateAll();
@@ -45,15 +47,19 @@ class ScoreView : public QWidget, public MuseScoreView {
       virtual void startEdit(Element*, int startGrip);
       virtual Element* elementNear(const QPointF&);
 
-      virtual void paintEvent(QPaintEvent*);
-      virtual void wheelEvent(QWheelEvent*);
-      virtual void mousePressEvent(QMouseEvent*);
-      virtual void mouseMoveEvent(QMouseEvent*);
+      virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem*, QWidget*);
+
+      virtual void setCursor(const QCursor&) {} // { QWidget::setCursor(c); }
+      virtual QCursor cursor() const { return QCursor(); } // { return QWidget::cursor(); }
 
       void zoom(int step, const QPoint&);
 
+   public slots:
+      void drag(qreal x, qreal y);
+      void startDrag(qreal x, qreal y);
+
    public:
-      ScoreView(QWidget* parent = 0);
+      ScoreView(QDeclarativeItem* parent = 0);
       void loadFile(const QString& s);
       };
 

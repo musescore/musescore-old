@@ -149,9 +149,6 @@ bool PainterQt::editMode() const
 
 void PainterQt::drawBackground(const QRectF& r)
       {
-//      if (_view)
-//            _view->drawBackground(*_painter, r);
-//      else
-            _painter->eraseRect(r);
+      _painter->eraseRect(r);
       }
 

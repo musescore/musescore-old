@@ -337,8 +337,7 @@ subdirs(mscore al awl bww2mxml zarchive rtf2html share manual demos
 
 add_subdirectory(player-qt EXCLUDE_FROM_ALL)
 add_subdirectory(msynth2 EXCLUDE_FROM_ALL)
-
-# subdirs(m-libmscore m-al m-msynth qt)
+add_subdirectory(m-msynth EXCLUDE_FROM_ALL)
 
 if (BUILD_SCRIPTGEN)
       subdirs (scriptgen)

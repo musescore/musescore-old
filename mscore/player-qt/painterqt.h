@@ -59,27 +59,28 @@ class PainterQt : public Painter {
          qreal x4, qreal y4);
 
       virtual void fillRect(qreal x, qreal y, qreal w, qreal h) {
-            _painter->fillRect(x, y, w, h, _painter->brush());
+            _painter->fillRect(QRectF(x, y, w, h), _painter->brush());
             }
       virtual void drawRect(const QRectF& r) const {
             _painter->drawRect(r);
             }
 
       virtual void drawText(const QPointF& p, const QString& s) {
-            drawText(p.x(), p.y(), s);
+            _painter->drawText(p, s);
             }
       virtual void drawText(qreal x, qreal y, const QString& s) {
-            _painter->drawText(x, y, s);
+            _painter->drawText(QPointF(x, y), s);
             }
 
       virtual void drawText(const QTextDocument*, const QColor&, int cursor);
       virtual void drawTextHCentered(qreal x, qreal y, const QString& s);
+#if QT_VERSION >= 0x040800
       virtual void drawGlyphRun(const QPointF& pt, const QGlyphRun& gr) const {
             _painter->drawGlyphRun(pt, gr);
             }
-
+#endif
       virtual void drawPixmap(qreal x, qreal y, const QPixmap& pm) const {
-            _painter->drawPixmap(x, y, pm);
+            _painter->drawPixmap(QPointF(x, y), pm);
             }
       virtual void drawEllipse(QRectF v) const { _painter->drawEllipse(v); }
 
