@@ -12,6 +12,9 @@
 //=============================================================================
 
 #include <stdio.h>
+#include <QtDeclarative/qdeclarative.h>
+#include <QtDeclarative/QDeclarativeView>
+
 #include "libmscore/mscore.h"
 #include "scoreview.h"
 #include "omr/omr.h"
@@ -31,22 +34,21 @@ void Omr::read(QDomElement) {}
 
 int main(int argc, char* argv[])
       {
-      if (argc != 2) {
-            fprintf(stderr, "usage: %s <scorefile>\n", argv[0]);
-            return -1;
-            }
       new QApplication(argc, argv);
 
       QWidget wi(0);
-      PDPI = wi.logicalDpiX();         // physical resolution
-      DPI  = PDPI;                     // logical drawing resolution
-      DPMM = DPI / INCH;      // dots/mm
+      PDPI = wi.logicalDpiX();    // physical resolution
+      DPI  = PDPI;                // logical drawing resolution
+      DPMM = DPI / INCH;          // dots/mm
 
       MScore::init();
 
-      ScoreView* view = new ScoreView;
-      view->loadFile(argv[1]);
-      view->show();
+      qmlRegisterType<ScoreView>("MuseScore", 1, 0, "ScoreView");
+
+      QDeclarativeView view;
+      view.setSource(QUrl("qrc:/mplayer.qml"));
+      view.show();
+
       return qApp->exec();
       }
 

@@ -37,10 +37,12 @@
 //   ScoreView
 //---------------------------------------------------------
 
-ScoreView::ScoreView(QWidget* parent)
-   : QWidget(parent)
+ScoreView::ScoreView(QDeclarativeItem* parent)
+   : QDeclarativeItem(parent)
       {
+      setFlag(QGraphicsItem::ItemHasNoContents, false);
       score = 0;
+      loadFile("test1.mscx");
       }
 
 //---------------------------------------------------------
@@ -106,15 +108,15 @@ void ScoreView::loadFile(const QString& name)
 //   paintEvent
 //---------------------------------------------------------
 
-void ScoreView::paintEvent(QPaintEvent* e)
+void ScoreView::paint(QPainter* painter, const QStyleOptionGraphicsItem*, QWidget* w)
       {
-      QPainter painter(this);
-      painter.setRenderHint(QPainter::Antialiasing, true);
-      painter.setRenderHint(QPainter::TextAntialiasing, true);
-      painter.setWorldTransform(_matrix, false);
-      PainterQt p(&painter, this);
+      painter->setRenderHint(QPainter::Antialiasing, true);
+      painter->setRenderHint(QPainter::TextAntialiasing, true);
+      painter->setWorldTransform(_matrix, false);
+      PainterQt p(painter, this);
 
-      QRectF fr = imatrix.mapRect(e->rect());
+//      QRectF fr = imatrix.mapRect(e->rect());
+      QRectF fr = imatrix.mapRect(w->rect());
       foreach(Page* page, score->pages()) {
             QRectF pr(page->abbox());
             if (pr.right() < fr.left())
@@ -126,15 +128,15 @@ void ScoreView::paintEvent(QPaintEvent* e)
 
             foreach(const Element* e, ell) {
                   e->itemDiscovered = 0;
-                  painter.save();
-                  painter.translate(e->canvasPos());
-                  painter.setPen(QPen(e->curColor()));
+                  painter->save();
+                  painter->translate(e->canvasPos());
+                  painter->setPen(QPen(e->curColor()));
                   e->draw(&p);
-                  painter.restore();
+                  painter->restore();
                   }
             }
       }
-
+#if 0
 //---------------------------------------------------------
 //   wheelEvent
 //---------------------------------------------------------
@@ -195,6 +197,33 @@ void ScoreView::mouseMoveEvent(QMouseEvent* event)
       imatrix = _matrix.inverted();
       scroll(dx, dy, QRect(0, 0, width(), height()));
       update();
+      }
+#endif
+
+//---------------------------------------------------------
+//   scroll
+//---------------------------------------------------------
+
+void ScoreView::drag(qreal x, qreal y)
+      {
+      qreal dx = x - _startDrag.x();
+      qreal dy = y - _startDrag.y();
+      startDrag(x, y);
+      _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m13(), _matrix.m21(),
+         _matrix.m22(), _matrix.m23(), _matrix.dx()+dx, _matrix.dy()+dy, _matrix.m33());
+      imatrix = _matrix.inverted();
+      scroll(dx, dy, QRect(0, 0, width(), height()));
+      update();
+      }
+
+//---------------------------------------------------------
+//   startDrag
+//---------------------------------------------------------
+
+void ScoreView::startDrag(qreal x, qreal y)
+      {
+      _startDrag.setX(x);
+      _startDrag.setY(y);
       }
 
 //---------------------------------------------------------
