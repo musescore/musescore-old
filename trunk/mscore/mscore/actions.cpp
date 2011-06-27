@@ -2726,7 +2726,7 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Stack down")
          ),
       Shortcut(
-         STATE_ALL,
+         STATE_NORMAL | STATE_NOTE_ENTRY,
          0,
          "toogle-piano",
          QT_TRANSLATE_NOOP("action","Piano keyboard"),

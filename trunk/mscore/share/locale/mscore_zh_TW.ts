@@ -139,13 +139,6 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
-    <name>Articulation</name>
-    <message>
-        <source>Articulation Properties...</source>
-        <translation>演奏法屬性...</translation>
-    </message>
-</context>
-<context>
     <name>ArticulationProperties</name>
     <message>
         <source>MuseScore: Articulations Properties</source>
@@ -180,13 +173,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Chord/Rest</source>
         <translation type="unfinished">和弦 / 休止符</translation>
-    </message>
-</context>
-<context>
-    <name>Bend</name>
-    <message>
-        <source>Bend Properties...</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -962,13 +948,6 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
-    <name>ChordList</name>
-    <message>
-        <source>Write Chord Description failed: </source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>ChordPropertyBase</name>
     <message>
         <source>Chord Properties</source>
@@ -1264,25 +1243,6 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>MuseScore: &lt;%1&gt; Staff: %2</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Dynamic</name>
-    <message>
-        <source>Set Invisible</source>
-        <translation>設為隱藏</translation>
-    </message>
-    <message>
-        <source>Set Visible</source>
-        <translation>取消隱藏</translation>
-    </message>
-    <message>
-        <source>Text Properties...</source>
-        <translation>文字屬性...</translation>
-    </message>
-    <message>
-        <source>MIDI Properties...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3140,25 +3100,6 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
-    <name>Element</name>
-    <message>
-        <source>Set Invisible</source>
-        <translation>設為隱藏</translation>
-    </message>
-    <message>
-        <source>Set Visible</source>
-        <translation>取消隱藏</translation>
-    </message>
-    <message>
-        <source>Color...</source>
-        <translation>顏色...</translation>
-    </message>
-    <message>
-        <source>Layer</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>ElementBase</name>
     <message>
         <source>Form</source>
@@ -3209,25 +3150,6 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
-    <name>FretDiagram</name>
-    <message>
-        <source>Set Invisible</source>
-        <translation type="unfinished">設為隱藏</translation>
-    </message>
-    <message>
-        <source>Set Visible</source>
-        <translation type="unfinished">取消隱藏</translation>
-    </message>
-    <message>
-        <source>Color...</source>
-        <translation type="unfinished">顏色...</translation>
-    </message>
-    <message>
-        <source>Fret Diagram Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>FretDiagramProperties</name>
     <message>
         <source>MuseScore: Fret Diagram Properties</source>
@@ -3240,13 +3162,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Frets:</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Glissando</name>
-    <message>
-        <source>Glissando Properties...</source>
-        <translation>滑音屬性...</translation>
     </message>
 </context>
 <context>
@@ -3269,17 +3184,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>record</source>
         <translation>錄音</translation>
-    </message>
-</context>
-<context>
-    <name>HBox</name>
-    <message>
-        <source>Add</source>
-        <translation type="unfinished">增加</translation>
-    </message>
-    <message>
-        <source>Frame Properties...</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3330,47 +3234,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Hairpin Midi Playback</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>HairpinSegment</name>
-    <message>
-        <source>Dynamics</source>
-        <translation type="unfinished">力度記號</translation>
-    </message>
-    <message>
-        <source>Set Invisible</source>
-        <translation type="unfinished">設為隱藏</translation>
-    </message>
-    <message>
-        <source>Set Visible</source>
-        <translation type="unfinished">取消隱藏</translation>
-    </message>
-    <message>
-        <source>Hairpin Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Harmony</name>
-    <message>
-        <source>Harmony Properties...</source>
-        <translation>和聲性質...</translation>
-    </message>
-    <message>
-        <source>Text Properties...</source>
-        <translation type="unfinished">文字屬性...</translation>
-    </message>
-</context>
-<context>
-    <name>Image</name>
-    <message>
-        <source>Image</source>
-        <translation>圖片</translation>
-    </message>
-    <message>
-        <source>Image Properties...</source>
-        <translation>圖片屬性...</translation>
     </message>
 </context>
 <context>
@@ -3461,13 +3324,6 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
-    <name>InstrumentChange</name>
-    <message>
-        <source>Change Instrument...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>InstrumentDialogBase</name>
     <message>
         <source>MuseScore: Create Instruments</source>
@@ -3547,13 +3403,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>MuseScore: Part List</source>
         <translation>MuseScore：分部列表</translation>
-    </message>
-</context>
-<context>
-    <name>InstrumentName</name>
-    <message>
-        <source>Staff Properties...</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3660,13 +3509,6 @@ failed: </source>
     <message>
         <source>linked</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Jump</name>
-    <message>
-        <source>Jump Properties...</source>
-        <translation>跳越屬性...</translation>
     </message>
 </context>
 <context>
@@ -3909,13 +3751,6 @@ failed: </source>
     </message>
 </context>
 <context>
-    <name>LayoutBreak</name>
-    <message>
-        <source>Section Break Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>LinePropertiesDialog</name>
     <message>
         <source>MuseScore: Line Properties</source>
@@ -4104,13 +3939,6 @@ Would you like to locate %2 now?</source>
     </message>
 </context>
 <context>
-    <name>Marker</name>
-    <message>
-        <source>Marker Properties...</source>
-        <translation>標記屬性...</translation>
-    </message>
-</context>
-<context>
     <name>MarkerPropertyBase</name>
     <message>
         <source>Marker Properties</source>
@@ -4119,13 +3947,6 @@ Would you like to locate %2 now?</source>
     <message>
         <source>Label:</source>
         <translation>標記：</translation>
-    </message>
-</context>
-<context>
-    <name>Measure</name>
-    <message>
-        <source>Measure Properties...</source>
-        <translation>小節屬性...</translation>
     </message>
 </context>
 <context>
@@ -4388,66 +4209,6 @@ Would you like to locate %2 now?</source>
         <translation>MuseScore：載入樂譜</translation>
     </message>
     <message>
-        <source>G major, E minor</source>
-        <translation>G 大調，E 小調</translation>
-    </message>
-    <message>
-        <source>Cb major, Ab minor</source>
-        <translation>Cb 大調，Ab 小調</translation>
-    </message>
-    <message>
-        <source>D major, B minor</source>
-        <translation>D 大調，B 小調</translation>
-    </message>
-    <message>
-        <source>Gb major, Eb minor</source>
-        <translation>Gb 大調，Eb 小調</translation>
-    </message>
-    <message>
-        <source>A major, F# minor</source>
-        <translation>A 大調，F# 小調</translation>
-    </message>
-    <message>
-        <source>Db major, Bb minor</source>
-        <translation>Db 大調，Bb 小調</translation>
-    </message>
-    <message>
-        <source>E major, C# minor</source>
-        <translation>E 大調，C# 小調</translation>
-    </message>
-    <message>
-        <source>Ab major, F minor</source>
-        <translation>Ab 大調，F 小調</translation>
-    </message>
-    <message>
-        <source>B major, G# minor</source>
-        <translation>B 大調，G# 小調</translation>
-    </message>
-    <message>
-        <source>Eb major, C minor</source>
-        <translation>Eb 大調，C 小調</translation>
-    </message>
-    <message>
-        <source>F# major, D# minor</source>
-        <translation>F# 大調，D# 小調</translation>
-    </message>
-    <message>
-        <source>Bb major, G minor</source>
-        <translation>Bb 大調，G 小調</translation>
-    </message>
-    <message>
-        <source>C# major, A# minor</source>
-        <translation>C# 大調，A# 小調</translation>
-    </message>
-    <message>
-        <source>F major,  D minor</source>
-        <translation>F 大調，D 小調</translation>
-    </message>
-    <message>
-        <source>C major, A minor</source>
-        <translation>C 大調，A 小調</translation>
-    </message>
-    <message>
         <source>Clefs</source>
         <translation>譜號</translation>
     </message>
@@ -4697,18 +4458,6 @@ before closing?</source>
     <message>
         <source>Search</source>
         <translation>尋找</translation>
-    </message>
-    <message>
-        <source>MuseScore: failure</source>
-        <translation>MuseScore：失敗</translation>
-    </message>
-    <message>
-        <source>Load template file </source>
-        <translation>載入樣板檔 </translation>
-    </message>
-    <message>
-        <source> failed</source>
-        <translation> 失敗</translation>
     </message>
     <message>
         <source>End Bar</source>
@@ -4990,10 +4739,6 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>MuseScore: Load error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>unsupported file extension</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5365,6 +5110,125 @@ please choose a different name:</source>
         <source>y:</source>
         <translation type="unfinished">y:</translation>
     </message>
+    <message>
+        <source>Compressed MuseScore File (*.mscz)</source>
+        <translation type="unfinished">壓縮的 MuseScore 檔案 (*.mscz)</translation>
+    </message>
+    <message>
+        <source>MuseScore File (*.mscx)</source>
+        <translation type="unfinished">MuseScore 檔案 (*.mscx)</translation>
+    </message>
+    <message>
+        <source>MuseScore: Save Score</source>
+        <translation type="unfinished">MuseScore：儲存樂譜</translation>
+    </message>
+    <message>
+        <source>MuseScore: Save File</source>
+        <translation type="unfinished">MuseScore：儲存檔案</translation>
+    </message>
+    <message>
+        <source>Uncompressed MuseScore Format (*.mscx)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MusicXML Format (*.xml)</source>
+        <translation type="unfinished">MusicXML 格式 (*.xml)</translation>
+    </message>
+    <message>
+        <source>Compressed MusicXML Format (*.mxl)</source>
+        <translation type="unfinished">MusicXML 壓縮格式 (*.mxl)</translation>
+    </message>
+    <message>
+        <source>Standard MIDI File (*.mid)</source>
+        <translation type="unfinished">標準 MIDI 檔案 (*.mid)</translation>
+    </message>
+    <message>
+        <source>PDF File (*.pdf)</source>
+        <translation type="unfinished">PDF 檔案 (*.pdf)</translation>
+    </message>
+    <message>
+        <source>PostScript File (*.ps)</source>
+        <translation type="unfinished">PostScript 檔案 (*.ps)</translation>
+    </message>
+    <message>
+        <source>PNG Bitmap Graphic (*.png)</source>
+        <translation type="unfinished">PNG 點陣圖 (*.png)</translation>
+    </message>
+    <message>
+        <source>Scalable Vector Graphic (*.svg)</source>
+        <translation type="unfinished">可變動向量繪圖 (*.svg)</translation>
+    </message>
+    <message>
+        <source>Lilypond Format (*.ly)</source>
+        <translation type="unfinished">Lilypond 格式 (*.ly)</translation>
+    </message>
+    <message>
+        <source>Wave Audio (*.wav)</source>
+        <translation type="unfinished">Wave 音訊檔 (*.wav)</translation>
+    </message>
+    <message>
+        <source>Flac Audio (*.flac)</source>
+        <translation type="unfinished">Flac 音訊檔 (*.flac)</translation>
+    </message>
+    <message>
+        <source>Ogg Vorbis Audio (*.ogg)</source>
+        <translation type="unfinished">Ogg Vorbis 音訊檔 (*.ogg)</translation>
+    </message>
+    <message>
+        <source>MP3 Audio (*.mp3)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Save a Copy</source>
+        <translation type="unfinished">MuseScore：儲存副本</translation>
+    </message>
+    <message>
+        <source>MuseScore: Save As</source>
+        <translation type="unfinished">MuseScore：另存新檔</translation>
+    </message>
+    <message>
+        <source>cannot determine file type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore Format (*.mscz)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: InsertImage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All Supported Files (*.svg *.jpg *.png *.xpm);;Scalable vector graphics (*.svg);;JPEG (*.jpg);;PNG (*.png);;XPM (*.xpm);;All Files (*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load failed: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: transpose</source>
+        <translation type="unfinished">MuseScore：移調</translation>
+    </message>
+    <message>
+        <source>There is nothing selected. Transpose whole score?</source>
+        <translation type="unfinished">沒有任何音符被選取。請問要將整個樂譜移調嗎？</translation>
+    </message>
+    <message>
+        <source>MuseScore: save style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: load style</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MyWebView</name>
+    <message>
+        <source>&lt;html&gt;&lt;head&gt;&lt;script type=&quot;text/javascript&quot;&gt;function closePermanently() { mscore.closeWebPanelPermanently(); return false;}&lt;/script&gt;&lt;link rel=&quot;stylesheet&quot; href=&quot;data/webview.css&quot; type=&quot;text/css&quot; /&gt;&lt;/head&gt;&lt;body&gt;&lt;div id=&quot;content&quot;&gt;&lt;div id=&quot;middle&quot;&gt;  &lt;div class=&quot;title&quot; align=&quot;center&quot;&gt;&lt;h2&gt;Could not&lt;br /&gt; connect&lt;/h2&gt;&lt;/div&gt;  &lt;ul&gt;&lt;li&gt;To connect with the community, &lt;br /&gt; you need to have internet &lt;br /&gt; connection enabled&lt;/li&gt;&lt;/ul&gt;  &lt;div align=&quot;center&quot;&gt;&lt;a class=&quot;button&quot; href=&quot;#&quot; onclick=&quot;return panel.load();&quot;&gt;Retry&lt;/a&gt;&lt;/div&gt;  &lt;div align=&quot;center&quot;&gt;&lt;a class=&quot;close&quot; href=&quot;#&quot; onclick=&quot;return closePermanently();&quot;&gt;Close this permanently&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -5470,33 +5334,6 @@ please choose a different name:</source>
     <message>
         <source>BPM:</source>
         <translation type="unfinished">拍/分：</translation>
-    </message>
-</context>
-<context>
-    <name>Note</name>
-    <message>
-        <source>Note Properties...</source>
-        <translation>音符屬性...</translation>
-    </message>
-    <message>
-        <source>Tuplet Properties...</source>
-        <translation>連音符屬性...</translation>
-    </message>
-    <message>
-        <source>Tuplet...</source>
-        <translation>連音符...</translation>
-    </message>
-    <message>
-        <source>Delete Tuplet</source>
-        <translation>刪除連音符</translation>
-    </message>
-    <message>
-        <source>Style...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Chord Articulation...</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6063,14 +5900,6 @@ please choose a different name:</source>
         <translation>視窗</translation>
     </message>
     <message>
-        <source>Play Panel:</source>
-        <translation>播放控制板：</translation>
-    </message>
-    <message>
-        <source>show</source>
-        <translation>顯示</translation>
-    </message>
-    <message>
         <source>Auto Save</source>
         <translation>自動存檔</translation>
     </message>
@@ -6372,10 +6201,6 @@ please choose a different name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Navigator:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Remember last connection(s)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6393,10 +6218,6 @@ please choose a different name:</source>
     </message>
     <message>
         <source>Choose PortMidi input interface</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Use Current Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6607,6 +6428,18 @@ please choose a different name:</source>
         <source>Style for Part:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Show Play Panel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Navigator</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show MuseScore Connect</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Profile</name>
@@ -6658,47 +6491,6 @@ failed: </source>
     </message>
 </context>
 <context>
-    <name>QMessageBox</name>
-    <message>
-        <source>MuseScore:</source>
-        <translation>MuseScore：</translation>
-    </message>
-    <message>
-        <source>No note selected:
-Please select a single note and retry operation
-</source>
-        <translation>沒有選取的音符：
-請選取單一音符，然後重新操作。
-</translation>
-    </message>
-    <message>
-        <source>No note or rest selected:
-Please select a single note or rest and retry operation
-</source>
-        <translation>沒有選取的音符或休止符：
-請選取單一音符或休止符，然後重新操作。
-</translation>
-    </message>
-    <message>
-        <source>Please select a single note or slur and retry operation
-</source>
-        <translation>請選取單一音符或圓滑線，然後重新操作。
-</translation>
-    </message>
-    <message>
-        <source>Please select one or more staves and retry operation
-</source>
-        <translation>請選取一個或多個譜表，然後重新操作。
-</translation>
-    </message>
-    <message>
-        <source>No note or lyrics selected:
-Please select a single note or lyrics and retry operation
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>QWidget</name>
     <message>
         <source>MuseScore: load failed:</source>
@@ -6739,18 +6531,6 @@ Please select a single note or lyrics and retry operation
     <message>
         <source>MuseScore: file not found:</source>
         <translation>MuseScore：找不到檔案：</translation>
-    </message>
-    <message>
-        <source>MuseScore: Load chord list failed:</source>
-        <translation>MuseScore：載入和弦清單失敗：</translation>
-    </message>
-    <message>
-        <source>MuseScore: Open chord list failed:</source>
-        <translation>MuseScore：開啟和弦清單失敗：</translation>
-    </message>
-    <message>
-        <source>MuseScore: Load font symbols failed:</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>MuseScore: Load Palette failed:</source>
@@ -6823,31 +6603,16 @@ failed: </source>
         <source>MuseScore: Save File</source>
         <translation type="unfinished">MuseScore：儲存檔案</translation>
     </message>
+    <message>
+        <source>&gt; failed: </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RecordButton</name>
     <message>
         <source>record</source>
         <translation>錄音</translation>
-    </message>
-</context>
-<context>
-    <name>Rest</name>
-    <message>
-        <source>Rest Properties...</source>
-        <translation>休止符屬性...</translation>
-    </message>
-    <message>
-        <source>Tuplet...</source>
-        <translation type="unfinished">連音符...</translation>
-    </message>
-    <message>
-        <source>Tuplet Properties...</source>
-        <translation type="unfinished">連音符屬性...</translation>
-    </message>
-    <message>
-        <source>Delete Tuplet</source>
-        <translation type="unfinished">刪除連音符</translation>
     </message>
 </context>
 <context>
@@ -6884,197 +6649,6 @@ failed: </source>
 <context>
     <name>Score</name>
     <message>
-        <source>MuseScore: Save Score</source>
-        <translation>MuseScore：儲存樂譜</translation>
-    </message>
-    <message>
-        <source>Open Temp File
-</source>
-        <translation>開啟暫存檔
-</translation>
-    </message>
-    <message>
-        <source>
-failed: </source>
-        <translation>
-失敗： </translation>
-    </message>
-    <message>
-        <source>MuseScore: Save As</source>
-        <translation>MuseScore：另存新檔</translation>
-    </message>
-    <message>
-        <source>Open File
-</source>
-        <translation>開啟檔案
-</translation>
-    </message>
-    <message>
-        <source>Open Style File
-</source>
-        <translation>開啟樣式檔
-</translation>
-    </message>
-    <message>
-        <source>MuseScore: Open Style file</source>
-        <translation>MuseScore：開啟樣式檔</translation>
-    </message>
-    <message>
-        <source>MuseScore: Write Style</source>
-        <translation>MuseScore：寫入樣式</translation>
-    </message>
-    <message>
-        <source>MuseScore: Read File</source>
-        <translation>MuseScore：讀取檔案</translation>
-    </message>
-    <message>
-        <source>MuseScore: transpose</source>
-        <translation>MuseScore：移調</translation>
-    </message>
-    <message>
-        <source>There is nothing selected. Transpose whole score?</source>
-        <translation>沒有任何音符被選取。請問要將整個樂譜移調嗎？</translation>
-    </message>
-    <message>
-        <source>Compressed MuseScore File (*.mscz)</source>
-        <translation>壓縮的 MuseScore 檔案 (*.mscz)</translation>
-    </message>
-    <message>
-        <source>MuseScore File (*.mscx)</source>
-        <translation>MuseScore 檔案 (*.mscx)</translation>
-    </message>
-    <message>
-        <source>MuseScore: Save File</source>
-        <translation>MuseScore：儲存檔案</translation>
-    </message>
-    <message>
-        <source>removing old backup file </source>
-        <translation>移除舊的備份檔 </translation>
-    </message>
-    <message>
-        <source> failed</source>
-        <translation> 失敗</translation>
-    </message>
-    <message>
-        <source>&gt; to backup &lt;</source>
-        <translation>&gt; 做備份 &lt;</translation>
-    </message>
-    <message>
-        <source>&gt; failed</source>
-        <translation>&gt; 失敗</translation>
-    </message>
-    <message>
-        <source>&gt; to &lt;</source>
-        <translation>&gt; 到 &lt;</translation>
-    </message>
-    <message>
-        <source>MuseScore: Save File failed: </source>
-        <translation>MuseScore：儲存檔案失敗： </translation>
-    </message>
-    <message>
-        <source>renaming old file &lt;</source>
-        <translation>重新命名舊檔 &lt;</translation>
-    </message>
-    <message>
-        <source>renaming temp. file &lt;</source>
-        <translation>重新命名暫存檔 &lt;</translation>
-    </message>
-    <message>
-        <source>&gt; failed:
-</source>
-        <translation>&gt; 失敗：
-</translation>
-    </message>
-    <message>
-        <source>MusicXML Format (*.xml)</source>
-        <translation>MusicXML 格式 (*.xml)</translation>
-    </message>
-    <message>
-        <source>Compressed MusicXML Format (*.mxl)</source>
-        <translation>MusicXML 壓縮格式 (*.mxl)</translation>
-    </message>
-    <message>
-        <source>Standard MIDI File (*.mid)</source>
-        <translation>標準 MIDI 檔案 (*.mid)</translation>
-    </message>
-    <message>
-        <source>PDF File (*.pdf)</source>
-        <translation>PDF 檔案 (*.pdf)</translation>
-    </message>
-    <message>
-        <source>PostScript File (*.ps)</source>
-        <translation>PostScript 檔案 (*.ps)</translation>
-    </message>
-    <message>
-        <source>PNG Bitmap Graphic (*.png)</source>
-        <translation>PNG 點陣圖 (*.png)</translation>
-    </message>
-    <message>
-        <source>Scalable Vector Graphic (*.svg)</source>
-        <translation>可變動向量繪圖 (*.svg)</translation>
-    </message>
-    <message>
-        <source>Lilypond Format (*.ly)</source>
-        <translation>Lilypond 格式 (*.ly)</translation>
-    </message>
-    <message>
-        <source>Wave Audio (*.wav)</source>
-        <translation>Wave 音訊檔 (*.wav)</translation>
-    </message>
-    <message>
-        <source>Flac Audio (*.flac)</source>
-        <translation>Flac 音訊檔 (*.flac)</translation>
-    </message>
-    <message>
-        <source>Ogg Vorbis Audio (*.ogg)</source>
-        <translation>Ogg Vorbis 音訊檔 (*.ogg)</translation>
-    </message>
-    <message>
-        <source>MuseScore: Save a Copy</source>
-        <translation>MuseScore：儲存副本</translation>
-    </message>
-    <message>
-        <source>The following file is locked: 
-%1 
-
-Try saving to a different location.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore</source>
-        <translation type="unfinished">MuseScore</translation>
-    </message>
-    <message>
-        <source>cannot determine file type</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Write Style failed: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Load failed: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore: InsertImage</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>All Supported Files (*.svg *.jpg *.png *.xpm);;Scalable vector graphics (*.svg);;JPEG (*.jpg);;PNG (*.png);;XPM (*.xpm);;All Files (*)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No chord/rest selected:
-please select a chord/rest and try again</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No measures selected:
-please select range of measures to join and try again</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Error opening lame library</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7100,22 +6674,6 @@ please select range of measures to join and try again</source>
     </message>
     <message>
         <source>Error %1 returned from MP3 encoder</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore Format (*.mscz)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>All Files (*)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Uncompressed MuseScore Format (*.mscx)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MP3 Audio (*.mp3)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7208,6 +6766,168 @@ please select a measure and try again</source>
     </message>
     <message>
         <source>cannot determine file type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set Invisible</source>
+        <translation type="unfinished">設為隱藏</translation>
+    </message>
+    <message>
+        <source>Set Visible</source>
+        <translation type="unfinished">取消隱藏</translation>
+    </message>
+    <message>
+        <source>Color...</source>
+        <translation type="unfinished">顏色...</translation>
+    </message>
+    <message>
+        <source>Layer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text Properties...</source>
+        <translation type="unfinished">文字屬性...</translation>
+    </message>
+    <message>
+        <source>Articulation Properties...</source>
+        <translation type="unfinished">演奏法屬性...</translation>
+    </message>
+    <message>
+        <source>Bend Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>TremoloBar Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished">增加</translation>
+    </message>
+    <message>
+        <source>Frame Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tuplet Properties...</source>
+        <translation type="unfinished">連音符屬性...</translation>
+    </message>
+    <message>
+        <source>Volta Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Line Properties...</source>
+        <translation type="unfinished">線型記號屬性...</translation>
+    </message>
+    <message>
+        <source>Time Signature Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MIDI Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Staff Text Properties...</source>
+        <translation type="unfinished">譜表文字屬性...</translation>
+    </message>
+    <message>
+        <source>Tempo Properties...</source>
+        <translation type="unfinished">速度屬性...</translation>
+    </message>
+    <message>
+        <source>Change Instrument Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Mode</source>
+        <translation type="unfinished">編輯模式</translation>
+    </message>
+    <message>
+        <source>Slur Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tuplet...</source>
+        <translation type="unfinished">連音符...</translation>
+    </message>
+    <message>
+        <source>Delete Tuplet</source>
+        <translation type="unfinished">刪除連音符</translation>
+    </message>
+    <message>
+        <source>Rest Properties...</source>
+        <translation type="unfinished">休止符屬性...</translation>
+    </message>
+    <message>
+        <source>Note Properties...</source>
+        <translation type="unfinished">音符屬性...</translation>
+    </message>
+    <message>
+        <source>Style...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chord Articulation...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Marker Properties...</source>
+        <translation type="unfinished">標記屬性...</translation>
+    </message>
+    <message>
+        <source>Jump Properties...</source>
+        <translation type="unfinished">跳越屬性...</translation>
+    </message>
+    <message>
+        <source>Section Break Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change Instrument...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fret Diagram Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Glissando Properties...</source>
+        <translation type="unfinished">滑音屬性...</translation>
+    </message>
+    <message>
+        <source>Dynamics</source>
+        <translation type="unfinished">力度記號</translation>
+    </message>
+    <message>
+        <source>Hairpin Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Harmony Properties...</source>
+        <translation type="unfinished">和聲性質...</translation>
+    </message>
+    <message>
+        <source>Image</source>
+        <translation type="unfinished">圖片</translation>
+    </message>
+    <message>
+        <source>Image Properties...</source>
+        <translation type="unfinished">圖片屬性...</translation>
+    </message>
+    <message>
+        <source>Measure Properties...</source>
+        <translation type="unfinished">小節屬性...</translation>
+    </message>
+    <message>
+        <source>No chord/rest selected:
+please select a chord/rest and try again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No measures selected:
+please select range of measures to join and try again</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7536,14 +7256,6 @@ Sequencer will be disabled.</source>
 <context>
     <name>SlurSegment</name>
     <message>
-        <source>Edit Mode</source>
-        <translation>編輯模式</translation>
-    </message>
-    <message>
-        <source>Slur Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Form</source>
         <translation type="unfinished">表單</translation>
     </message>
@@ -7621,20 +7333,6 @@ Sequencer will be disabled.</source>
     <message>
         <source>Split Point</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>StaffState</name>
-    <message>
-        <source>Change Instrument Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>StaffText</name>
-    <message>
-        <source>Staff Text Properties...</source>
-        <translation>譜表文字屬性...</translation>
     </message>
 </context>
 <context>
@@ -7936,13 +7634,6 @@ altera</source>
     </message>
 </context>
 <context>
-    <name>Symbol</name>
-    <message>
-        <source>symbol editor</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>SymbolDialog</name>
     <message>
         <source>MuseScore: Symbols</source>
@@ -7958,10 +7649,6 @@ altera</source>
     <message>
         <source>System Flag</source>
         <translation>系統旗標</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation>刪除</translation>
     </message>
 </context>
 <context>
@@ -8145,13 +7832,6 @@ altera</source>
     </message>
 </context>
 <context>
-    <name>TBox</name>
-    <message>
-        <source>Frame Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>TempoProperties</name>
     <message>
         <source>MuseScore: Tempo Text Properties</source>
@@ -8171,36 +7851,6 @@ altera</source>
     </message>
     <message>
         <source>determine tempo from text</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TempoText</name>
-    <message>
-        <source>Tempo Properties...</source>
-        <translation>速度屬性...</translation>
-    </message>
-    <message>
-        <source>Text Properties...</source>
-        <translation type="unfinished">文字屬性...</translation>
-    </message>
-</context>
-<context>
-    <name>Text</name>
-    <message>
-        <source>Set Invisible</source>
-        <translation>設為隱藏</translation>
-    </message>
-    <message>
-        <source>Set Visible</source>
-        <translation>取消隱藏</translation>
-    </message>
-    <message>
-        <source>Text Properties...</source>
-        <translation>文字屬性...</translation>
-    </message>
-    <message>
-        <source>Layer</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8256,10 +7906,6 @@ altera</source>
 <context>
     <name>TextEditor</name>
     <message>
-        <source>Dialog</source>
-        <translation type="unfinished">對話框</translation>
-    </message>
-    <message>
         <source>bold</source>
         <translation type="unfinished">粗體</translation>
     </message>
@@ -8313,21 +7959,6 @@ altera</source>
     <message>
         <source>ContinueText</source>
         <translation>繼續文字</translation>
-    </message>
-</context>
-<context>
-    <name>TextLineSegment</name>
-    <message>
-        <source>Line Properties...</source>
-        <translation>線型記號屬性...</translation>
-    </message>
-    <message>
-        <source>Set Invisible</source>
-        <translation>設為隱藏</translation>
-    </message>
-    <message>
-        <source>Set Visible</source>
-        <translation>取消隱藏</translation>
     </message>
 </context>
 <context>
@@ -8758,10 +8389,6 @@ please choose a different name:</source>
         <source>Show Courtesy Time Signature</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Time Signature Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>TimeSigProperties</name>
@@ -9051,13 +8678,6 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
-    <name>TremoloBar</name>
-    <message>
-        <source>TremoloBar Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>TremoloBarDialog</name>
     <message>
         <source>MuseScore: Bend Properties</source>
@@ -9111,13 +8731,6 @@ p, li { white-space: pre-wrap; }
         <source>secondChord</source>
         <extracomment>do not translate - only for debugging</extracomment>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Tuplet</name>
-    <message>
-        <source>Tuplet Properties...</source>
-        <translation>連音符屬性...</translation>
     </message>
 </context>
 <context>
@@ -9244,17 +8857,6 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
-    <name>VBox</name>
-    <message>
-        <source>Add</source>
-        <translation>增加</translation>
-    </message>
-    <message>
-        <source>Frame Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>VoltaPropertyBase</name>
     <message>
         <source>Volta Properties</source>
@@ -9270,125 +8872,7 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
-    <name>VoltaSegment</name>
-    <message>
-        <source>Volta Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Line Properties...</source>
-        <translation type="unfinished">線型記號屬性...</translation>
-    </message>
-</context>
-<context>
-    <name>WebPage</name>
-    <message>
-        <source>WebView</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>accidental</name>
-    <message>
-        <source>none</source>
-        <translation type="unfinished">無</translation>
-    </message>
-    <message>
-        <source>sharp</source>
-        <translation type="unfinished">升記號</translation>
-    </message>
-    <message>
-        <source>flat</source>
-        <translation type="unfinished">降記號</translation>
-    </message>
-    <message>
-        <source>double sharp</source>
-        <translation type="unfinished">重升記號</translation>
-    </message>
-    <message>
-        <source>double flat</source>
-        <translation type="unfinished">重降記號</translation>
-    </message>
-    <message>
-        <source>natural</source>
-        <translation type="unfinished">還原記號 (本位記號)</translation>
-    </message>
-    <message>
-        <source>flat-slash</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>flat-slash2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>mirrored-flat2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>mirrored-flat</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>mirrored-flat-slash</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>flat-flat-slash</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>sharp-slash</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>sharp-slash2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>sharp-slash3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>sharp-slash4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>sharp arrow up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>sharp arrow down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>sharp arrow both</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>flat arrow up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>flat arrow down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>flat arrow both</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>natural arrow up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>natural arrow down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>natural arrow both</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Accidentals</source>
         <translation type="unfinished">臨時記號</translation>
@@ -10561,14 +10045,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>diatonic pitch up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>diatonic up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Diatonic pitch down</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11285,14 +10761,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Show piano keyboard</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>P</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Show media dialog</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11357,631 +10825,38 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Web</source>
+        <source>Diatonic pitch up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>W</source>
+        <source>Diatonic up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>WEB</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>addRemoveTimeSig</name>
-    <message>
-        <source>MuseScore</source>
-        <translation type="unfinished">MuseScore</translation>
-    </message>
-    <message>
-        <source>Rewrite measures
-until next time signature?</source>
+        <source>Piano keyboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>cannot rewrite measures:
-tuplet would cross measure</source>
+        <source>piano keyboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>next score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>previous score</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>articulation</name>
     <message>
-        <source>dfermata</source>
-        <translation type="unfinished">延長記號(下)</translation>
-    </message>
-    <message>
-        <source>thumb</source>
-        <translation type="unfinished">姆指把位</translation>
-    </message>
-    <message>
-        <source>sforzato</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>espressivo</source>
-        <translation type="unfinished">充滿感情地 (富有表情地)</translation>
-    </message>
-    <message>
-        <source>staccato</source>
-        <translation type="unfinished">斷音記號</translation>
-    </message>
-    <message>
-        <source>ustaccatissimo</source>
-        <translation type="unfinished">大斷音記號(上)</translation>
-    </message>
-    <message>
-        <source>dstaccatissimo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>tenuto</source>
-        <translation type="unfinished">持音記號</translation>
-    </message>
-    <message>
-        <source>uportato</source>
-        <translation type="unfinished">斷連奏(上)</translation>
-    </message>
-    <message>
-        <source>dportato</source>
-        <translation type="unfinished">斷連奏(下)</translation>
-    </message>
-    <message>
-        <source>umarcato</source>
-        <translation type="unfinished">強音記號(上)</translation>
-    </message>
-    <message>
-        <source>dmarcato</source>
-        <translation type="unfinished">強音記號(下)</translation>
-    </message>
-    <message>
-        <source>ouvert</source>
-        <translation type="unfinished">開放音；自然泛音</translation>
-    </message>
-    <message>
-        <source>plusstop</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>upbow</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>downbow</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>reverseturn</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>turn</source>
-        <translation type="unfinished">回音</translation>
-    </message>
-    <message>
-        <source>trill</source>
-        <translation type="unfinished">震音記號</translation>
-    </message>
-    <message>
-        <source>prall</source>
-        <translation type="unfinished">逆漣音</translation>
-    </message>
-    <message>
-        <source>mordent</source>
-        <translation type="unfinished">漣音</translation>
-    </message>
-    <message>
-        <source>prallprall</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>prallmordent</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>upprall</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>downprall</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>upmordent</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>downmordent</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>ufermata</source>
-        <translation type="unfinished">延長記號(上)</translation>
-    </message>
-    <message>
-        <source>ushortfermata</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dshortfermata</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>ulongfermata</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dlongfermata</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>uverylongfermata</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dverylongfermata</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>snappizzicato</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>tapping</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>slapping</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>popping</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Bend</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tremolo Bar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>pralldown</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>prallup</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>lineprall</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>drumset</name>
-    <message>
-        <source>Acoustic Bass Drum</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bass Drum</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Side Stick</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Snare (Acoustic)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Snare (Electric)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tom 5</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hi-Hat Closed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tom 4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hi-Hat Pedal</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tom 3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hi-Hat Open</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tom 2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tom 1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Crash 1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tom</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ride</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>China</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ride (Bell)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tambourine</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>open high conga</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>low conga</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>elementName</name>
-    <message>
-        <source>Symbol</source>
-        <translation>記號</translation>
-    </message>
-    <message>
-        <source>Text</source>
-        <translation>文字</translation>
-    </message>
-    <message>
-        <source>SlurSegment</source>
-        <translation>圓滑線線段</translation>
-    </message>
-    <message>
-        <source>BarLine</source>
-        <translation>小節線</translation>
-    </message>
-    <message>
-        <source>StemSlash</source>
-        <translation>符幹斜線</translation>
-    </message>
-    <message>
-        <source>Line</source>
-        <translation>線條</translation>
-    </message>
-    <message>
-        <source>Bracket</source>
-        <translation>括線</translation>
-    </message>
-    <message>
-        <source>Arpeggio</source>
-        <translation>琶音</translation>
-    </message>
-    <message>
-        <source>Accidental</source>
-        <translation>臨時記號</translation>
-    </message>
-    <message>
-        <source>Note</source>
-        <translation>音符</translation>
-    </message>
-    <message>
-        <source>Stem</source>
-        <translation>符幹</translation>
-    </message>
-    <message>
-        <source>Clef</source>
-        <translation>譜號</translation>
-    </message>
-    <message>
-        <source>KeySig</source>
-        <translation>調號</translation>
-    </message>
-    <message>
-        <source>TimeSig</source>
-        <translation>拍號</translation>
-    </message>
-    <message>
-        <source>Rest</source>
-        <translation>休止符</translation>
-    </message>
-    <message>
-        <source>Breath</source>
-        <translation>呼吸記號</translation>
-    </message>
-    <message>
-        <source>Glissando</source>
-        <translation>滑音</translation>
-    </message>
-    <message>
-        <source>RepeatMeasure</source>
-        <translation>音型反復</translation>
-    </message>
-    <message>
-        <source>Image</source>
-        <translation>圖片</translation>
-    </message>
-    <message>
-        <source>Tie</source>
-        <translation>連結線</translation>
-    </message>
-    <message>
-        <source>Articulation</source>
-        <translatorcomment>發音法記號</translatorcomment>
-        <translation>演奏法記號</translation>
-    </message>
-    <message>
-        <source>Dynamic</source>
-        <translation>力度</translation>
-    </message>
-    <message>
-        <source>Page</source>
-        <translation>頁</translation>
-    </message>
-    <message>
-        <source>Beam</source>
-        <translation>符槓</translation>
-    </message>
-    <message>
-        <source>Hook</source>
-        <translation>勾線</translation>
-    </message>
-    <message>
-        <source>Lyrics</source>
-        <translation>歌詞</translation>
-    </message>
-    <message>
-        <source>Marker</source>
-        <translation>標記</translation>
-    </message>
-    <message>
-        <source>Jump</source>
-        <translation>跳越</translation>
-    </message>
-    <message>
-        <source>Tuplet</source>
-        <translation>連音符</translation>
-    </message>
-    <message>
-        <source>Tempo</source>
-        <translation>速度</translation>
-    </message>
-    <message>
-        <source>StaffText</source>
-        <translation>譜表文字</translation>
-    </message>
-    <message>
-        <source>Harmony</source>
-        <translation>和聲</translation>
-    </message>
-    <message>
-        <source>Volta</source>
-        <translation>反復記號</translation>
-    </message>
-    <message>
-        <source>HairpinSegment</source>
-        <translation>音量變化線段</translation>
-    </message>
-    <message>
-        <source>OttavaSegment</source>
-        <translation>八度線段</translation>
-    </message>
-    <message>
-        <source>TrillSegment</source>
-        <translation>震音線段</translation>
-    </message>
-    <message>
-        <source>TextLineSegment</source>
-        <translation>文字標示線段</translation>
-    </message>
-    <message>
-        <source>VoltaSegment</source>
-        <translation>反復線段</translation>
-    </message>
-    <message>
-        <source>LayoutBreak</source>
-        <translation>版面斷開</translation>
-    </message>
-    <message>
-        <source>Spacer</source>
-        <translation>分隔器</translation>
-    </message>
-    <message>
-        <source>LedgerLine</source>
-        <translation>加線</translation>
-    </message>
-    <message>
-        <source>NoteHead</source>
-        <translation>符頭</translation>
-    </message>
-    <message>
-        <source>Tremolo</source>
-        <translation>顫音</translation>
-    </message>
-    <message>
-        <source>Measure</source>
-        <translation>小節</translation>
-    </message>
-    <message>
-        <source>StaffLines</source>
-        <translation>譜線</translation>
-    </message>
-    <message>
-        <source>Cursor</source>
-        <translation>游標</translation>
-    </message>
-    <message>
-        <source>Selection</source>
-        <translation>選取區</translation>
-    </message>
-    <message>
-        <source>Lasso</source>
-        <translation>套索</translation>
-    </message>
-    <message>
-        <source>ShadowNote</source>
-        <translation>暗化音符</translation>
-    </message>
-    <message>
-        <source>RubberBand</source>
-        <translatorcomment>橡皮圈</translatorcomment>
-        <translation>橡皮筋</translation>
-    </message>
-    <message>
-        <source>HairPin</source>
-        <translation>音量變化記號</translation>
-    </message>
-    <message>
-        <source>Ottava</source>
-        <translation>八度記號</translation>
-    </message>
-    <message>
-        <source>Pedal</source>
-        <translation>踏瓣記號</translation>
-    </message>
-    <message>
-        <source>Trill</source>
-        <translation>震音記號</translation>
-    </message>
-    <message>
-        <source>TextLine</source>
-        <translation>文字標示線</translation>
-    </message>
-    <message>
-        <source>Segment</source>
-        <translation>區段</translation>
-    </message>
-    <message>
-        <source>System</source>
-        <translation>系統</translation>
-    </message>
-    <message>
-        <source>Compound</source>
-        <translation>複合</translation>
-    </message>
-    <message>
-        <source>Chord</source>
-        <translation>和弦音符</translation>
-    </message>
-    <message>
-        <source>Slur</source>
-        <translation>圓滑線</translation>
-    </message>
-    <message>
-        <source>Element</source>
-        <translation>元件</translation>
-    </message>
-    <message>
-        <source>ElementList</source>
-        <translation>元件列表</translation>
-    </message>
-    <message>
-        <source>StaffList</source>
-        <translation>譜表列表</translation>
-    </message>
-    <message>
-        <source>MeasureList</source>
-        <translation>小節列表</translation>
-    </message>
-    <message>
-        <source>Layout</source>
-        <translation>版面</translation>
-    </message>
-    <message>
-        <source>HBox</source>
-        <translation>水平框架</translation>
-    </message>
-    <message>
-        <source>VBox</source>
-        <translation>垂直框架</translation>
-    </message>
-    <message>
-        <source>Icon</source>
-        <translation>圖示</translation>
-    </message>
-    <message>
-        <source>AccidentalBracket</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>invalid</source>
-        <translation type="unfinished">不設定</translation>
-    </message>
-    <message>
-        <source>InstrumentName</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>ChordLine</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Fingering</source>
-        <translation type="unfinished">指法記號</translation>
-    </message>
-    <message>
-        <source>InstrumentChange</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>FretDiagram</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bend</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>TremoloBar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>StaffState</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>NoteDot</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>TabDurationSymbol</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>FSymbol</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>TBox</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>FBox</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -12079,881 +10954,6 @@ tuplet would cross measure</source>
     </message>
     <message>
         <source>Every 2 months</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>score</name>
-    <message>
-        <source>Cannot read this score:
-your version of MuseScore is too old.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>symbol</name>
-    <message>
-        <source>f</source>
-        <translation>f</translation>
-    </message>
-    <message>
-        <source>m</source>
-        <translation>m</translation>
-    </message>
-    <message>
-        <source>p</source>
-        <translation>p</translation>
-    </message>
-    <message>
-        <source>r</source>
-        <translation>r</translation>
-    </message>
-    <message>
-        <source>s</source>
-        <translation>s</translation>
-    </message>
-    <message>
-        <source>z</source>
-        <translation>z</translation>
-    </message>
-    <message>
-        <source>whole rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>half rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>outside whole rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>outside half rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>rest M3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>breve rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>longa rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>quart rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>clas quart rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>eight rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>16&apos; rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>32&apos; rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>64&apos; rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>128&apos; rest</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>sharp</source>
-        <translation type="unfinished">升記號</translation>
-    </message>
-    <message>
-        <source>sharp arrow up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>sharp arrow both</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>sharp slash</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>sharp slash2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>sharp slash3</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>sharp slash4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>natural</source>
-        <translation type="unfinished">還原記號 (本位記號)</translation>
-    </message>
-    <message>
-        <source>natural arrow up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>natural arrow down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>natural arrow both</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>flat</source>
-        <translation type="unfinished">降記號</translation>
-    </message>
-    <message>
-        <source>flat arrow up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>flat arrow both</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>flat slash</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>flat slash2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>mirrored flat2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>mirrored flat</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>mirrored flat slash</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>flat flat</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>flat flat slash</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>sharp sharp</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>right parenthesis</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>left parenthesis</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dot</source>
-        <translation type="unfinished">‧‧‧‧‧‧ (點線)</translation>
-    </message>
-    <message>
-        <source>longa up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>longa down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>brevis head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>brevis double head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>whole head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>half head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>quart head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>whole diamond head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>half diamond head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>diamond head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>whole triangle head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>down half triangle head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>up half triangle head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>up quart triangle head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>down quart triangle head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>whole slash head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>half slash head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>quart slash head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>whole cross head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>half cross head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>cross head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>x circle head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>s0do head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>d1do head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>u1do head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>d2do head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>u2do head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>s0re head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>u1re head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>d1re head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>u2re head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>d2re head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>s0mi head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>s1mi head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>s2mi head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>u0fa head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>d0fa head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>u1fa head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>d1fa head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>u2fa head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>d2fa head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>s0la head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>s1la head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>s2la head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>s0ti head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>u1ti head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>d1ti head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>u2ti head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>d2ti head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>ufermata</source>
-        <translation type="unfinished">延長記號(上)</translation>
-    </message>
-    <message>
-        <source>dfermata</source>
-        <translation type="unfinished">延長記號(下)</translation>
-    </message>
-    <message>
-        <source>snappizzicato</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>ushortfermata</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dshortfermata</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>ulongfermata</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dlongfermata</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>uverylongfermata</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dverylongfermata</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>thumb</source>
-        <translation type="unfinished">姆指把位</translation>
-    </message>
-    <message>
-        <source>sforza to accent</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>espressivo</source>
-        <translation type="unfinished">充滿感情地 (富有表情地)</translation>
-    </message>
-    <message>
-        <source>staccato</source>
-        <translation type="unfinished">斷音記號</translation>
-    </message>
-    <message>
-        <source>ustaccatissimo</source>
-        <translation type="unfinished">大斷音記號(上)</translation>
-    </message>
-    <message>
-        <source>dstaccatissimo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>tenuto</source>
-        <translation type="unfinished">持音記號</translation>
-    </message>
-    <message>
-        <source>uportato</source>
-        <translation type="unfinished">斷連奏(上)</translation>
-    </message>
-    <message>
-        <source>dportato</source>
-        <translation type="unfinished">斷連奏(下)</translation>
-    </message>
-    <message>
-        <source>umarcato</source>
-        <translation type="unfinished">強音記號(上)</translation>
-    </message>
-    <message>
-        <source>dmarcato</source>
-        <translation type="unfinished">強音記號(下)</translation>
-    </message>
-    <message>
-        <source>ouvert</source>
-        <translation type="unfinished">開放音；自然泛音</translation>
-    </message>
-    <message>
-        <source>plus stop</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>up bow</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>down bow</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>reverse turn</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>turn</source>
-        <translation type="unfinished">回音</translation>
-    </message>
-    <message>
-        <source>trill</source>
-        <translation type="unfinished">震音記號</translation>
-    </message>
-    <message>
-        <source>upedal heel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dpedalheel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>upedal toe</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dpedal toe</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>flageolet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>segno</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>coda</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>varied coda</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>rcomma</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>lcomma</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>arpeggio</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>trillelement</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>arpeggio arrow down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>arpeggio arrow up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>trill element</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>prall</source>
-        <translation type="unfinished">逆漣音</translation>
-    </message>
-    <message>
-        <source>mordent</source>
-        <translation type="unfinished">漣音</translation>
-    </message>
-    <message>
-        <source>prall prall</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>prall mordent</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>up prall</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>up mordent</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>prall down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>down prall</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>down mordent</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>prall up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>line prall</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>caesura curved</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>caesura straight</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>eight flag</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>sixteenth flag</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>thirtysecond flag</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>sixtyfour flag</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>128flag</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>deight flag</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>grace dash</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dgrace dash</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dsixteenth flag</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dthirtysecond flag</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>dsixtyfourth flag</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>d128flag</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>alto clef</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>calto clef</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>bass clef</source>
-        <translation type="unfinished">低音譜號</translation>
-    </message>
-    <message>
-        <source>cbass clef</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>trebleclef</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>ctrebleclef</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>percussion clef</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>cpercussion clef</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>tab clef</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>ctab clef</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>four four meter</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>allabreve</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>pedalasterisk</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>pedaldash</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>pedaldot</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>pedalP</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>pedald</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>pedale</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>pedal ped</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>bracket tips up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>bracket tips down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>bracket tips left up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>bracket tips left down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>zero</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>one</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>two</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>three</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>four</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>five</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>six</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>seven</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>eight</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>nine</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>plus</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>sq longa up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>sq longa down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>sq brevis</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>tempus imperf prol maj</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>tempus perf prol min</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>tempus perf cut</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>tempus perf prol maj</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>tab2 clef</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>s0sol head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>s1sol head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>s2sol head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>halfopen</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>var segno</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>accordeon dot</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>accordeon freebase</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>accordeon stdbase</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>accordeon bayanbase</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>accordeon old ee</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>accordeon discant</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>accordeon push</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>accordeon pull</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

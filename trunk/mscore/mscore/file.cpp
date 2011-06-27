@@ -374,7 +374,7 @@ void MuseScore::newFile()
                         }
                   else if (
                      (s->subtype() == SegChordRest)
-                     || (s->subtype() == SegClef)
+//                     || (s->subtype() == SegClef)
                      || (s->subtype() == SegKeySig)
                      || (s->subtype() == SegGrace)
                      || (s->subtype() == SegBreath)
