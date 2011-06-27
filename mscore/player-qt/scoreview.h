@@ -28,8 +28,8 @@ class ScoreView : public QDeclarativeItem, public MuseScoreView {
       Q_OBJECT
 
       Score* score;
-      QTransform _matrix, imatrix;
       QPointF _startDrag;
+      QPointF _offset;
 
       virtual void dataChanged(const QRectF&);
       virtual void updateAll();

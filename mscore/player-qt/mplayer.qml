@@ -5,7 +5,7 @@ import Qt.labs.folderlistmodel 1.0
 Row {
       spacing: 5
       Rectangle {
-            width: 150; height: 400
+            width: 150; height: 400;
             color: "lightgray"
             ListView {
                   width: 150; height: 400
@@ -59,6 +59,8 @@ Row {
 
       ScoreView {
             width: 600; height: 400
+            clip: true
+            smooth: true
 
             MouseArea {
                   anchors.fill: parent
