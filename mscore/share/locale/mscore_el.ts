@@ -149,13 +149,6 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
-    <name>Articulation</name>
-    <message>
-        <source>Articulation Properties...</source>
-        <translation>Ιδιότητες Άρθρωσης...</translation>
-    </message>
-</context>
-<context>
     <name>ArticulationProperties</name>
     <message>
         <source>MuseScore: Articulations Properties</source>
@@ -192,13 +185,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Chord/Rest</source>
         <translation>Συγχορδία/Παύση</translation>
-    </message>
-</context>
-<context>
-    <name>Bend</name>
-    <message>
-        <source>Bend Properties...</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -975,13 +961,6 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
-    <name>ChordList</name>
-    <message>
-        <source>Write Chord Description failed: </source>
-        <translation>Γραφή Περιγραφής Συγχορδίας απέτυχε: </translation>
-    </message>
-</context>
-<context>
     <name>ChordPropertyBase</name>
     <message>
         <source>Chord Properties</source>
@@ -1280,25 +1259,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>MuseScore: &lt;%1&gt; Staff: %2</source>
         <translation type="unfinished">MuseScore:&lt;%1&gt; Πεντάγραμμο: %2</translation>
-    </message>
-</context>
-<context>
-    <name>Dynamic</name>
-    <message>
-        <source>Set Invisible</source>
-        <translation>Όρισε Αόρατο</translation>
-    </message>
-    <message>
-        <source>Set Visible</source>
-        <translation>Όρισε Ορατό</translation>
-    </message>
-    <message>
-        <source>MIDI Properties...</source>
-        <translation>Ιδιότητες MIDI...</translation>
-    </message>
-    <message>
-        <source>Text Properties...</source>
-        <translation>Ιδιότητες Κειμένου...</translation>
     </message>
 </context>
 <context>
@@ -3166,25 +3126,6 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
-    <name>Element</name>
-    <message>
-        <source>Set Invisible</source>
-        <translation>Όρισε Αόρατο</translation>
-    </message>
-    <message>
-        <source>Set Visible</source>
-        <translation>Όρισε Ορατό</translation>
-    </message>
-    <message>
-        <source>Color...</source>
-        <translation>Χρώμα...</translation>
-    </message>
-    <message>
-        <source>Layer</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>ElementBase</name>
     <message>
         <source>Form</source>
@@ -3236,25 +3177,6 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
-    <name>FretDiagram</name>
-    <message>
-        <source>Set Invisible</source>
-        <translation type="unfinished">Όρισε Αόρατο</translation>
-    </message>
-    <message>
-        <source>Set Visible</source>
-        <translation type="unfinished">Όρισε Ορατό</translation>
-    </message>
-    <message>
-        <source>Color...</source>
-        <translation type="unfinished">Χρώμα...</translation>
-    </message>
-    <message>
-        <source>Fret Diagram Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>FretDiagramProperties</name>
     <message>
         <source>MuseScore: Fret Diagram Properties</source>
@@ -3267,13 +3189,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Frets:</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Glissando</name>
-    <message>
-        <source>Glissando Properties...</source>
-        <translation>Ιδιότητες Glissando...</translation>
     </message>
 </context>
 <context>
@@ -3297,17 +3212,6 @@ p, li { white-space: pre-wrap; }
         <source>record</source>
         <translatorcomment>ή ηχογράφηση;</translatorcomment>
         <translation>εγγραφή</translation>
-    </message>
-</context>
-<context>
-    <name>HBox</name>
-    <message>
-        <source>Add</source>
-        <translation type="unfinished">Προσθήκη</translation>
-    </message>
-    <message>
-        <source>Frame Properties...</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3359,47 +3263,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Hairpin Midi Playback</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>HairpinSegment</name>
-    <message>
-        <source>Dynamics</source>
-        <translation type="unfinished">Δυναμικές</translation>
-    </message>
-    <message>
-        <source>Set Invisible</source>
-        <translation type="unfinished">Όρισε Αόρατο</translation>
-    </message>
-    <message>
-        <source>Set Visible</source>
-        <translation type="unfinished">Όρισε Ορατό</translation>
-    </message>
-    <message>
-        <source>Hairpin Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Harmony</name>
-    <message>
-        <source>Harmony Properties...</source>
-        <translation>Ιδιότητες Αρμονίας...</translation>
-    </message>
-    <message>
-        <source>Text Properties...</source>
-        <translation>Ιδιότητες Κειμένου...</translation>
-    </message>
-</context>
-<context>
-    <name>Image</name>
-    <message>
-        <source>Image</source>
-        <translation>Εικόνα</translation>
-    </message>
-    <message>
-        <source>Image Properties...</source>
-        <translation>Ιδιότητες Εικόνας...</translation>
     </message>
 </context>
 <context>
@@ -3491,13 +3354,6 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
-    <name>InstrumentChange</name>
-    <message>
-        <source>Change Instrument...</source>
-        <translation type="unfinished">Αλλαγή Οργάνου...</translation>
-    </message>
-</context>
-<context>
     <name>InstrumentDialogBase</name>
     <message>
         <source>MuseScore: Create Instruments</source>
@@ -3577,13 +3433,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>MuseScore: Part List</source>
         <translation>MuseScore: Λίστα Μερών</translation>
-    </message>
-</context>
-<context>
-    <name>InstrumentName</name>
-    <message>
-        <source>Staff Properties...</source>
-        <translation type="unfinished">Ιδιότητες Πενταγράμμου...</translation>
     </message>
 </context>
 <context>
@@ -3691,13 +3540,6 @@ failed: </source>
     <message>
         <source>linked</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Jump</name>
-    <message>
-        <source>Jump Properties...</source>
-        <translation>Μετάβαση σε Ιδιότητες...</translation>
     </message>
 </context>
 <context>
@@ -3940,13 +3782,6 @@ failed: </source>
     </message>
 </context>
 <context>
-    <name>LayoutBreak</name>
-    <message>
-        <source>Section Break Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>LinePropertiesDialog</name>
     <message>
         <source>MuseScore: Line Properties</source>
@@ -4137,13 +3972,6 @@ Would you like to locate %2 now?</source>
     </message>
 </context>
 <context>
-    <name>Marker</name>
-    <message>
-        <source>Marker Properties...</source>
-        <translation>Ιδιότητες Μαρκαδόρου...</translation>
-    </message>
-</context>
-<context>
     <name>MarkerPropertyBase</name>
     <message>
         <source>Marker Properties</source>
@@ -4152,13 +3980,6 @@ Would you like to locate %2 now?</source>
     <message>
         <source>Label:</source>
         <translation>Ετικέτα:</translation>
-    </message>
-</context>
-<context>
-    <name>Measure</name>
-    <message>
-        <source>Measure Properties...</source>
-        <translation>Ιδιότητες Μέτρου...</translation>
     </message>
 </context>
 <context>
@@ -4434,78 +4255,6 @@ before closing?</source>
     <message>
         <source>Untitled</source>
         <translation>Ανώνυμο</translation>
-    </message>
-    <message>
-        <source>MuseScore: failure</source>
-        <translation>MuseScore: αποτυχία</translation>
-    </message>
-    <message>
-        <source>Load template file </source>
-        <translation>Φόρτωση αρχείου-προτύπου </translation>
-    </message>
-    <message>
-        <source> failed</source>
-        <translation> απέτυχε</translation>
-    </message>
-    <message>
-        <source>G major, E minor</source>
-        <translation>Σολ μείζονα, Μι ελάσσονα</translation>
-    </message>
-    <message>
-        <source>Cb major, Ab minor</source>
-        <translation>Ντοb μείζονα, Λαb ελάσσονα</translation>
-    </message>
-    <message>
-        <source>D major, B minor</source>
-        <translation>Ρε μείζονα, Σι ελάσσονα</translation>
-    </message>
-    <message>
-        <source>Gb major, Eb minor</source>
-        <translation>Σολb μείζονα, Μιb ελάσσονα</translation>
-    </message>
-    <message>
-        <source>A major, F# minor</source>
-        <translation>Λα μείζονα, Φα# ελάσσονα</translation>
-    </message>
-    <message>
-        <source>Db major, Bb minor</source>
-        <translation>Ρεb μείζονα, Σιb ελάσσονα</translation>
-    </message>
-    <message>
-        <source>E major, C# minor</source>
-        <translation>Μι μείζονα, Ντο# ελάσσονα</translation>
-    </message>
-    <message>
-        <source>Ab major, F minor</source>
-        <translation>Λαb μείζονα, Φα ελάσσονα</translation>
-    </message>
-    <message>
-        <source>B major, G# minor</source>
-        <translation>Σι μείζονα, Σολ# ελάσσονα</translation>
-    </message>
-    <message>
-        <source>Eb major, C minor</source>
-        <translation>Μιb μείζονα, Ντο ελάσσονα</translation>
-    </message>
-    <message>
-        <source>F# major, D# minor</source>
-        <translation>Φα# μείζονα, Ρε# ελάσσονα</translation>
-    </message>
-    <message>
-        <source>Bb major, G minor</source>
-        <translation>Σιb μείζονα, Σολ ελάσσονα</translation>
-    </message>
-    <message>
-        <source>C# major, A# minor</source>
-        <translation>Ντο# μείζονα, Λα# ελάσσονα</translation>
-    </message>
-    <message>
-        <source>F major,  D minor</source>
-        <translation>Φα μείζονα, Ρε ελάσσονα</translation>
-    </message>
-    <message>
-        <source>C major, A minor</source>
-        <translation>Ντο μείζονα, Λα ελάσσονα</translation>
     </message>
     <message>
         <source>Grace Notes</source>
@@ -5033,10 +4782,6 @@ is incompatible with current interface</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>unsupported file extension</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>MuseScore Files (*.mscz *.mscx *.msc);;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5405,6 +5150,125 @@ please choose a different name:</source>
         <source>y:</source>
         <translation type="unfinished">y:</translation>
     </message>
+    <message>
+        <source>Compressed MuseScore File (*.mscz)</source>
+        <translation type="unfinished">Συμπιεσμένο Αρχείο MuseScore (*.mscz)</translation>
+    </message>
+    <message>
+        <source>MuseScore File (*.mscx)</source>
+        <translation type="unfinished">Αρχείο MuseScore (*.mscx)</translation>
+    </message>
+    <message>
+        <source>MuseScore: Save Score</source>
+        <translation type="unfinished">MuseScore: Αποθήκευση Παρτιτούρας</translation>
+    </message>
+    <message>
+        <source>MuseScore: Save File</source>
+        <translation type="unfinished">MuseScore: Αποθήκευση Αρχείου</translation>
+    </message>
+    <message>
+        <source>Uncompressed MuseScore Format (*.mscx)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MusicXML Format (*.xml)</source>
+        <translation type="unfinished">Μορφή MusicXML (*.xml)</translation>
+    </message>
+    <message>
+        <source>Compressed MusicXML Format (*.mxl)</source>
+        <translation type="unfinished">Μορφή Συμπιεσμένου MusicXML (*.mxl)</translation>
+    </message>
+    <message>
+        <source>Standard MIDI File (*.mid)</source>
+        <translation type="unfinished">Καθιερωμένο MIDI Αρχείο (*.mid)</translation>
+    </message>
+    <message>
+        <source>PDF File (*.pdf)</source>
+        <translation type="unfinished">PDF Αρχείο (*.pdf)</translation>
+    </message>
+    <message>
+        <source>PostScript File (*.ps)</source>
+        <translation type="unfinished">PostScript Αρχείο (*.ps)</translation>
+    </message>
+    <message>
+        <source>PNG Bitmap Graphic (*.png)</source>
+        <translation type="unfinished">PNG Γραφικά Bitmap (*.png)</translation>
+    </message>
+    <message>
+        <source>Scalable Vector Graphic (*.svg)</source>
+        <translation type="unfinished">Scalable Vector Graphic (*.svg)</translation>
+    </message>
+    <message>
+        <source>Lilypond Format (*.ly)</source>
+        <translation type="unfinished">Μορφή Lilypond (*.ly)</translation>
+    </message>
+    <message>
+        <source>Wave Audio (*.wav)</source>
+        <translation type="unfinished">Wave Audio (*.wav)</translation>
+    </message>
+    <message>
+        <source>Flac Audio (*.flac)</source>
+        <translation type="unfinished">Flac Audio (*.flac)</translation>
+    </message>
+    <message>
+        <source>Ogg Vorbis Audio (*.ogg)</source>
+        <translation type="unfinished">Ogg Vorbis Audio (*.ogg)</translation>
+    </message>
+    <message>
+        <source>MP3 Audio (*.mp3)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Save a Copy</source>
+        <translation type="unfinished">MuseScore: Αποθήκευση Αντιγράφου</translation>
+    </message>
+    <message>
+        <source>MuseScore: Save As</source>
+        <translation type="unfinished">MuseScore: Αποθήκευση Ως</translation>
+    </message>
+    <message>
+        <source>cannot determine file type</source>
+        <translation type="unfinished">αδύνατος ο προσδιορισμός του τύπου αρχείου</translation>
+    </message>
+    <message>
+        <source>MuseScore Format (*.mscz)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: InsertImage</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All Supported Files (*.svg *.jpg *.png *.xpm);;Scalable vector graphics (*.svg);;JPEG (*.jpg);;PNG (*.png);;XPM (*.xpm);;All Files (*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load failed: </source>
+        <translation type="unfinished">Φόρτωση απέτυχε: </translation>
+    </message>
+    <message>
+        <source>MuseScore: transpose</source>
+        <translation type="unfinished">MuseScore: τρανσπόρτο</translation>
+    </message>
+    <message>
+        <source>There is nothing selected. Transpose whole score?</source>
+        <translation type="unfinished">Δεν επιλέχθηκε τίποτα. Να γίνει Τρανσπόρτο σε ολόκληρη την παρτιτούρα;</translation>
+    </message>
+    <message>
+        <source>MuseScore: save style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: load style</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MyWebView</name>
+    <message>
+        <source>&lt;html&gt;&lt;head&gt;&lt;script type=&quot;text/javascript&quot;&gt;function closePermanently() { mscore.closeWebPanelPermanently(); return false;}&lt;/script&gt;&lt;link rel=&quot;stylesheet&quot; href=&quot;data/webview.css&quot; type=&quot;text/css&quot; /&gt;&lt;/head&gt;&lt;body&gt;&lt;div id=&quot;content&quot;&gt;&lt;div id=&quot;middle&quot;&gt;  &lt;div class=&quot;title&quot; align=&quot;center&quot;&gt;&lt;h2&gt;Could not&lt;br /&gt; connect&lt;/h2&gt;&lt;/div&gt;  &lt;ul&gt;&lt;li&gt;To connect with the community, &lt;br /&gt; you need to have internet &lt;br /&gt; connection enabled&lt;/li&gt;&lt;/ul&gt;  &lt;div align=&quot;center&quot;&gt;&lt;a class=&quot;button&quot; href=&quot;#&quot; onclick=&quot;return panel.load();&quot;&gt;Retry&lt;/a&gt;&lt;/div&gt;  &lt;div align=&quot;center&quot;&gt;&lt;a class=&quot;close&quot; href=&quot;#&quot; onclick=&quot;return closePermanently();&quot;&gt;Close this permanently&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewWizard</name>
@@ -5510,33 +5374,6 @@ please choose a different name:</source>
     <message>
         <source>BPM:</source>
         <translation type="unfinished">Χτύποι ανά λεπτό (χαλ):</translation>
-    </message>
-</context>
-<context>
-    <name>Note</name>
-    <message>
-        <source>Note Properties...</source>
-        <translation>Ιδιότητες Νότας...</translation>
-    </message>
-    <message>
-        <source>Tuplet...</source>
-        <translation>Υποδιαιρέσεις Χρόνου...</translation>
-    </message>
-    <message>
-        <source>Tuplet Properties...</source>
-        <translation>Ιδιότητες Υποδιαίρεσης Χρόνου...</translation>
-    </message>
-    <message>
-        <source>Delete Tuplet</source>
-        <translation>Διαγραφή Υποδιαίρεσης Χρόνου</translation>
-    </message>
-    <message>
-        <source>Style...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Chord Articulation...</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6121,14 +5958,6 @@ please choose a different name:</source>
         <translation>Παράθυρα</translation>
     </message>
     <message>
-        <source>Play Panel:</source>
-        <translation>Πίνακας Αναπαραγωγής:</translation>
-    </message>
-    <message>
-        <source>show</source>
-        <translation>εμφάνιση</translation>
-    </message>
-    <message>
         <source>Style</source>
         <translation>Στυλ</translation>
     </message>
@@ -6415,10 +6244,6 @@ please choose a different name:</source>
         <translation>χρήση αρχείου στυλ:</translation>
     </message>
     <message>
-        <source>Navigator:</source>
-        <translation>Πλοηγός:</translation>
-    </message>
-    <message>
         <source>Remember last connection(s)</source>
         <translation>Απομνημόνευση τελευταίας (-ων) σύνδεσης(-ων)</translation>
     </message>
@@ -6437,10 +6262,6 @@ please choose a different name:</source>
     <message>
         <source>Choose PortMidi input interface</source>
         <translation>Choose PortMidi input interface</translation>
-    </message>
-    <message>
-        <source>Use Current Position</source>
-        <translation>Χρήση Τρέχουσας Θέσης</translation>
     </message>
     <message>
         <source>MyScores Directory:</source>
@@ -6650,6 +6471,18 @@ please choose a different name:</source>
         <source>Style for Part:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Show Play Panel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Navigator</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show MuseScore Connect</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Profile</name>
@@ -6700,47 +6533,6 @@ failed: </source>
     </message>
 </context>
 <context>
-    <name>QMessageBox</name>
-    <message>
-        <source>MuseScore:</source>
-        <translation>MuseScore:</translation>
-    </message>
-    <message>
-        <source>No note selected:
-Please select a single note and retry operation
-</source>
-        <translation>Καμία νότα δεν επιλέχθηκε:
-Παρακαλώ επιλέξτε μία μονή νότα και ξαναδοκιμάστε
-</translation>
-    </message>
-    <message>
-        <source>No note or rest selected:
-Please select a single note or rest and retry operation
-</source>
-        <translation>Καμία νότα δεν επιλέχθηκε:
-Παρακαλώ επιλέξτε μία μονή νότα ή παύση και ξαναδοκιμάστε
-</translation>
-    </message>
-    <message>
-        <source>Please select a single note or slur and retry operation
-</source>
-        <translation>Παρακαλώ επιλέξτε μία μονή νότα ή σύζευξη προσωδίας και ξαναδοκιμάστε
-</translation>
-    </message>
-    <message>
-        <source>Please select one or more staves and retry operation
-</source>
-        <translation>Παρακαλώ επιλέξτε ένα ή περισσότερα πεντάγραμμα και ξαναδοκιμάστε
-</translation>
-    </message>
-    <message>
-        <source>No note or lyrics selected:
-Please select a single note or lyrics and retry operation
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>QWidget</name>
     <message>
         <source>MuseScore: Import Capella</source>
@@ -6763,14 +6555,6 @@ Please select a single note or lyrics and retry operation
         <translation>MuseScore: Φόρτωση Στυλ απέτυχε:</translation>
     </message>
     <message>
-        <source>MuseScore: Open chord list failed:</source>
-        <translation>MuseScore: Άνοιγμα λίστας συγχορδιών απέτυχε:</translation>
-    </message>
-    <message>
-        <source>MuseScore: Load chord list failed:</source>
-        <translation>MuseScore: Φόρτωση λίστας συγχορδιών απέτυχε:</translation>
-    </message>
-    <message>
         <source>MuseScore: load midi</source>
         <translation>MuseScore: φόρτωση midi</translation>
     </message>
@@ -6789,10 +6573,6 @@ Please select a single note or lyrics and retry operation
     <message>
         <source>MuseScore: invalid command</source>
         <translation>MuseScore: μη έγκυρη εντολή</translation>
-    </message>
-    <message>
-        <source>MuseScore: Load font symbols failed:</source>
-        <translation>MuseScore: Φόρτωση συμβόλων γραμματοσειράς απέτυχε:</translation>
     </message>
     <message>
         <source>MuseScore: Load Palette failed:</source>
@@ -6864,31 +6644,16 @@ failed: </source>
         <source>MuseScore: Save File</source>
         <translation type="unfinished">MuseScore: Αποθήκευση Αρχείου</translation>
     </message>
+    <message>
+        <source>&gt; failed: </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RecordButton</name>
     <message>
         <source>record</source>
         <translation>εγγραφή</translation>
-    </message>
-</context>
-<context>
-    <name>Rest</name>
-    <message>
-        <source>Tuplet...</source>
-        <translation>Υποδιαίρεση Χρόνου...</translation>
-    </message>
-    <message>
-        <source>Tuplet Properties...</source>
-        <translation>Ιδιότητες Υποδιαίρεσης Χρόνου...</translation>
-    </message>
-    <message>
-        <source>Delete Tuplet</source>
-        <translation>Διαγραφή Υποδιαίρεσης Χρόνου</translation>
-    </message>
-    <message>
-        <source>Rest Properties...</source>
-        <translation>Ιδιότητες Παύσεων...</translation>
     </message>
 </context>
 <context>
@@ -6925,200 +6690,6 @@ failed: </source>
 <context>
     <name>Score</name>
     <message>
-        <source>Compressed MuseScore File (*.mscz)</source>
-        <translation>Συμπιεσμένο Αρχείο MuseScore (*.mscz)</translation>
-    </message>
-    <message>
-        <source>MuseScore File (*.mscx)</source>
-        <translation>Αρχείο MuseScore (*.mscx)</translation>
-    </message>
-    <message>
-        <source>MuseScore: Save Score</source>
-        <translation>MuseScore: Αποθήκευση Παρτιτούρας</translation>
-    </message>
-    <message>
-        <source>The following file is locked: 
-%1 
-
-Try saving to a different location.</source>
-        <translation>Το παρακάτω αρχείο είναι κλειδωμένο: 
-%1 
-
-Δοκιμάστε να αποθηκεύσετε σε μία άλλη διεύθυνση.</translation>
-    </message>
-    <message>
-        <source>MuseScore: Save File</source>
-        <translation>MuseScore: Αποθήκευση Αρχείου</translation>
-    </message>
-    <message>
-        <source>Open Temp File
-</source>
-        <translation>Άνοιγμα Προσωρινού Αρχείου
-</translation>
-    </message>
-    <message>
-        <source>
-failed: </source>
-        <translation>
-απέτυχε: </translation>
-    </message>
-    <message>
-        <source>MuseScore: Save File failed: </source>
-        <translation>MuseScore: Η Αποθήκευση του Αρχείου απέτυχε: </translation>
-    </message>
-    <message>
-        <source>removing old backup file </source>
-        <translation>αφαίρεση παλιού εφεδρικού αρχείου </translation>
-    </message>
-    <message>
-        <source> failed</source>
-        <translation> απέτυχε</translation>
-    </message>
-    <message>
-        <source>renaming old file &lt;</source>
-        <translation>μετονομασία παλιού αρχείου &lt;</translation>
-    </message>
-    <message>
-        <source>&gt; to backup &lt;</source>
-        <translation>&gt; σε εφεδρικό αρχείο &lt;</translation>
-    </message>
-    <message>
-        <source>&gt; failed</source>
-        <translation>&gt; απέτυχε</translation>
-    </message>
-    <message>
-        <source>renaming temp. file &lt;</source>
-        <translation>μετονομασία προσωρινού αρχείου &lt;</translation>
-    </message>
-    <message>
-        <source>&gt; to &lt;</source>
-        <translation>&gt; σε &lt;</translation>
-    </message>
-    <message>
-        <source>&gt; failed:
-</source>
-        <translation>&gt; απέτυχε:
-</translation>
-    </message>
-    <message>
-        <source>MusicXML Format (*.xml)</source>
-        <translation>Μορφή MusicXML (*.xml)</translation>
-    </message>
-    <message>
-        <source>Compressed MusicXML Format (*.mxl)</source>
-        <translation>Μορφή Συμπιεσμένου MusicXML (*.mxl)</translation>
-    </message>
-    <message>
-        <source>Standard MIDI File (*.mid)</source>
-        <translation>Καθιερωμένο MIDI Αρχείο (*.mid)</translation>
-    </message>
-    <message>
-        <source>PDF File (*.pdf)</source>
-        <translation>PDF Αρχείο (*.pdf)</translation>
-    </message>
-    <message>
-        <source>PostScript File (*.ps)</source>
-        <translation>PostScript Αρχείο (*.ps)</translation>
-    </message>
-    <message>
-        <source>PNG Bitmap Graphic (*.png)</source>
-        <translation>PNG Γραφικά Bitmap (*.png)</translation>
-    </message>
-    <message>
-        <source>Scalable Vector Graphic (*.svg)</source>
-        <translation>Scalable Vector Graphic (*.svg)</translation>
-    </message>
-    <message>
-        <source>Lilypond Format (*.ly)</source>
-        <translation>Μορφή Lilypond (*.ly)</translation>
-    </message>
-    <message>
-        <source>Wave Audio (*.wav)</source>
-        <translation>Wave Audio (*.wav)</translation>
-    </message>
-    <message>
-        <source>Flac Audio (*.flac)</source>
-        <translation>Flac Audio (*.flac)</translation>
-    </message>
-    <message>
-        <source>Ogg Vorbis Audio (*.ogg)</source>
-        <translation>Ogg Vorbis Audio (*.ogg)</translation>
-    </message>
-    <message>
-        <source>MuseScore: Save a Copy</source>
-        <translation>MuseScore: Αποθήκευση Αντιγράφου</translation>
-    </message>
-    <message>
-        <source>MuseScore: Save As</source>
-        <translation>MuseScore: Αποθήκευση Ως</translation>
-    </message>
-    <message>
-        <source>Open File
-</source>
-        <translation>Άνοιγμα Αρχείου
-</translation>
-    </message>
-    <message>
-        <source>Open Style File
-</source>
-        <translation>Άνοιγμα Αρχείου Στυλ
-</translation>
-    </message>
-    <message>
-        <source>MuseScore: Open Style file</source>
-        <translation>MuseScore: Άνοιγμα Αρχείου Στυλ</translation>
-    </message>
-    <message>
-        <source>MuseScore: Write Style</source>
-        <translation>MuseScore: Στυλ Γραφής</translation>
-    </message>
-    <message>
-        <source>MuseScore: Read File</source>
-        <translation>MuseScore: Ανάγνωση Αρχείου</translation>
-    </message>
-    <message>
-        <source>MuseScore: transpose</source>
-        <translation>MuseScore: τρανσπόρτο</translation>
-    </message>
-    <message>
-        <source>There is nothing selected. Transpose whole score?</source>
-        <translation>Δεν επιλέχθηκε τίποτα. Να γίνει Τρανσπόρτο σε ολόκληρη την παρτιτούρα;</translation>
-    </message>
-    <message>
-        <source>MuseScore</source>
-        <translation>MuseScore</translation>
-    </message>
-    <message>
-        <source>cannot determine file type</source>
-        <translation>αδύνατος ο προσδιορισμός του τύπου αρχείου</translation>
-    </message>
-    <message>
-        <source>Write Style failed: </source>
-        <translation>Στυλ Γραφής απέτυχε: </translation>
-    </message>
-    <message>
-        <source>Load failed: </source>
-        <translation>Φόρτωση απέτυχε: </translation>
-    </message>
-    <message>
-        <source>MuseScore: InsertImage</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>All Supported Files (*.svg *.jpg *.png *.xpm);;Scalable vector graphics (*.svg);;JPEG (*.jpg);;PNG (*.png);;XPM (*.xpm);;All Files (*)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No chord/rest selected:
-please select a chord/rest and try again</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No measures selected:
-please select range of measures to join and try again</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Error opening lame library</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7144,22 +6715,6 @@ please select range of measures to join and try again</source>
     </message>
     <message>
         <source>Error %1 returned from MP3 encoder</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MuseScore Format (*.mscz)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>All Files (*)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Uncompressed MuseScore Format (*.mscx)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MP3 Audio (*.mp3)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7254,6 +6809,168 @@ please select a measure and try again</source>
     <message>
         <source>cannot determine file type</source>
         <translation type="unfinished">αδύνατος ο προσδιορισμός του τύπου αρχείου</translation>
+    </message>
+    <message>
+        <source>Set Invisible</source>
+        <translation type="unfinished">Όρισε Αόρατο</translation>
+    </message>
+    <message>
+        <source>Set Visible</source>
+        <translation type="unfinished">Όρισε Ορατό</translation>
+    </message>
+    <message>
+        <source>Color...</source>
+        <translation type="unfinished">Χρώμα...</translation>
+    </message>
+    <message>
+        <source>Layer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text Properties...</source>
+        <translation type="unfinished">Ιδιότητες Κειμένου...</translation>
+    </message>
+    <message>
+        <source>Articulation Properties...</source>
+        <translation type="unfinished">Ιδιότητες Άρθρωσης...</translation>
+    </message>
+    <message>
+        <source>Bend Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>TremoloBar Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished">Προσθήκη</translation>
+    </message>
+    <message>
+        <source>Frame Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tuplet Properties...</source>
+        <translation type="unfinished">Ιδιότητες Υποδιαίρεσης Χρόνου...</translation>
+    </message>
+    <message>
+        <source>Volta Properties...</source>
+        <translation type="unfinished">Ιδιότητες Volta...</translation>
+    </message>
+    <message>
+        <source>Line Properties...</source>
+        <translation type="unfinished">Ιδιότητες Γραμμής...</translation>
+    </message>
+    <message>
+        <source>Time Signature Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MIDI Properties...</source>
+        <translation type="unfinished">Ιδιότητες MIDI...</translation>
+    </message>
+    <message>
+        <source>Staff Text Properties...</source>
+        <translation type="unfinished">Ιδιότητες Κειμένου Πενταγράμμου...</translation>
+    </message>
+    <message>
+        <source>Tempo Properties...</source>
+        <translation type="unfinished">Ιδιότητες Τέμπο...</translation>
+    </message>
+    <message>
+        <source>Change Instrument Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Mode</source>
+        <translation type="unfinished">Λειτουργία Επεξεργασίας</translation>
+    </message>
+    <message>
+        <source>Slur Properties...</source>
+        <translation type="unfinished">Ιδιότητες Σύζευξης...</translation>
+    </message>
+    <message>
+        <source>Tuplet...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Tuplet</source>
+        <translation type="unfinished">Διαγραφή Υποδιαίρεσης Χρόνου</translation>
+    </message>
+    <message>
+        <source>Rest Properties...</source>
+        <translation type="unfinished">Ιδιότητες Παύσεων...</translation>
+    </message>
+    <message>
+        <source>Note Properties...</source>
+        <translation type="unfinished">Ιδιότητες Νότας...</translation>
+    </message>
+    <message>
+        <source>Style...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chord Articulation...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Marker Properties...</source>
+        <translation type="unfinished">Ιδιότητες Μαρκαδόρου...</translation>
+    </message>
+    <message>
+        <source>Jump Properties...</source>
+        <translation type="unfinished">Μετάβαση σε Ιδιότητες...</translation>
+    </message>
+    <message>
+        <source>Section Break Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change Instrument...</source>
+        <translation type="unfinished">Αλλαγή Οργάνου...</translation>
+    </message>
+    <message>
+        <source>Fret Diagram Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Glissando Properties...</source>
+        <translation type="unfinished">Ιδιότητες Glissando...</translation>
+    </message>
+    <message>
+        <source>Dynamics</source>
+        <translation type="unfinished">Δυναμικές</translation>
+    </message>
+    <message>
+        <source>Hairpin Properties...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Harmony Properties...</source>
+        <translation type="unfinished">Ιδιότητες Αρμονίας...</translation>
+    </message>
+    <message>
+        <source>Image</source>
+        <translation type="unfinished">Εικόνα</translation>
+    </message>
+    <message>
+        <source>Image Properties...</source>
+        <translation type="unfinished">Ιδιότητες Εικόνας...</translation>
+    </message>
+    <message>
+        <source>Measure Properties...</source>
+        <translation type="unfinished">Ιδιότητες Μέτρου...</translation>
+    </message>
+    <message>
+        <source>No chord/rest selected:
+please select a chord/rest and try again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No measures selected:
+please select range of measures to join and try again</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7582,14 +7299,6 @@ Sequencer will be disabled.</source>
 <context>
     <name>SlurSegment</name>
     <message>
-        <source>Edit Mode</source>
-        <translation>Λειτουργία Επεξεργασίας</translation>
-    </message>
-    <message>
-        <source>Slur Properties...</source>
-        <translation>Ιδιότητες Σύζευξης...</translation>
-    </message>
-    <message>
         <source>Form</source>
         <translation type="unfinished">Μορφή</translation>
     </message>
@@ -7667,20 +7376,6 @@ Sequencer will be disabled.</source>
     <message>
         <source>Split Point</source>
         <translation>Διαίρεση Σημείου</translation>
-    </message>
-</context>
-<context>
-    <name>StaffState</name>
-    <message>
-        <source>Change Instrument Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>StaffText</name>
-    <message>
-        <source>Staff Text Properties...</source>
-        <translation>Ιδιότητες Κειμένου Πενταγράμμου...</translation>
     </message>
 </context>
 <context>
@@ -7982,13 +7677,6 @@ altera</source>
     </message>
 </context>
 <context>
-    <name>Symbol</name>
-    <message>
-        <source>symbol editor</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>SymbolDialog</name>
     <message>
         <source>MuseScore: Symbols</source>
@@ -8004,10 +7692,6 @@ altera</source>
     <message>
         <source>System Flag</source>
         <translation>Σημαία Συστήματος</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation>Διαγραφή</translation>
     </message>
 </context>
 <context>
@@ -8192,13 +7876,6 @@ altera</source>
     </message>
 </context>
 <context>
-    <name>TBox</name>
-    <message>
-        <source>Frame Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>TempoProperties</name>
     <message>
         <source>MuseScore: Tempo Text Properties</source>
@@ -8219,36 +7896,6 @@ altera</source>
     </message>
     <message>
         <source>determine tempo from text</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TempoText</name>
-    <message>
-        <source>Tempo Properties...</source>
-        <translation>Ιδιότητες Τέμπο...</translation>
-    </message>
-    <message>
-        <source>Text Properties...</source>
-        <translation type="unfinished">Ιδιότητες Κειμένου...</translation>
-    </message>
-</context>
-<context>
-    <name>Text</name>
-    <message>
-        <source>Set Invisible</source>
-        <translation>Όρισε Αόρατο</translation>
-    </message>
-    <message>
-        <source>Set Visible</source>
-        <translation>Όρισε Ορατό</translation>
-    </message>
-    <message>
-        <source>Text Properties...</source>
-        <translation>Ιδιότητες Κειμένου...</translation>
-    </message>
-    <message>
-        <source>Layer</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8304,10 +7951,6 @@ altera</source>
 <context>
     <name>TextEditor</name>
     <message>
-        <source>Dialog</source>
-        <translation type="unfinished">Διάλογος</translation>
-    </message>
-    <message>
         <source>bold</source>
         <translation type="unfinished">έντονα</translation>
     </message>
@@ -8361,21 +8004,6 @@ altera</source>
     <message>
         <source>ContinueText</source>
         <translation>Συνέχεια Κειμένου</translation>
-    </message>
-</context>
-<context>
-    <name>TextLineSegment</name>
-    <message>
-        <source>Set Invisible</source>
-        <translation>Όρισε Αόρατο</translation>
-    </message>
-    <message>
-        <source>Set Visible</source>
-        <translation>Όρισε Ορατό</translation>
-    </message>
-    <message>
-        <source>Line Properties...</source>
-        <translation>Ιδιότητες Γραμμής...</translation>
     </message>
 </context>
 <context>
@@ -8806,10 +8434,6 @@ please choose a different name:</source>
         <source>Show Courtesy Time Signature</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Time Signature Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>TimeSigProperties</name>
@@ -9099,13 +8723,6 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
-    <name>TremoloBar</name>
-    <message>
-        <source>TremoloBar Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>TremoloBarDialog</name>
     <message>
         <source>MuseScore: Bend Properties</source>
@@ -9159,13 +8776,6 @@ p, li { white-space: pre-wrap; }
         <source>secondChord</source>
         <extracomment>do not translate - only for debugging</extracomment>
         <translation>δεύτερη συγχορδία</translation>
-    </message>
-</context>
-<context>
-    <name>Tuplet</name>
-    <message>
-        <source>Tuplet Properties...</source>
-        <translation>Ιδιότητες Υποδιαίρεσης Χρόνου...</translation>
     </message>
 </context>
 <context>
@@ -9293,17 +8903,6 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
-    <name>VBox</name>
-    <message>
-        <source>Add</source>
-        <translation>Προσθήκη</translation>
-    </message>
-    <message>
-        <source>Frame Properties...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>VoltaPropertyBase</name>
     <message>
         <source>Volta Properties</source>
@@ -9319,125 +8918,7 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
-    <name>VoltaSegment</name>
-    <message>
-        <source>Volta Properties...</source>
-        <translation>Ιδιότητες Volta...</translation>
-    </message>
-    <message>
-        <source>Line Properties...</source>
-        <translation>Ιδιότητες Γραμμής...</translation>
-    </message>
-</context>
-<context>
-    <name>WebPage</name>
-    <message>
-        <source>WebView</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>accidental</name>
-    <message>
-        <source>none</source>
-        <translation>κανένα</translation>
-    </message>
-    <message>
-        <source>sharp</source>
-        <translation>δίεση</translation>
-    </message>
-    <message>
-        <source>flat</source>
-        <translation>ύφεση</translation>
-    </message>
-    <message>
-        <source>double sharp</source>
-        <translation>διπλή δίεση</translation>
-    </message>
-    <message>
-        <source>double flat</source>
-        <translation>διπλή ύφεση</translation>
-    </message>
-    <message>
-        <source>natural</source>
-        <translation>αναίρεση</translation>
-    </message>
-    <message>
-        <source>flat-slash</source>
-        <translation>ύφεση-κάθετος</translation>
-    </message>
-    <message>
-        <source>flat-slash2</source>
-        <translation>ύφεση-κάθετος2</translation>
-    </message>
-    <message>
-        <source>mirrored-flat2</source>
-        <translation>ανεστραμμένη-ύφεση2</translation>
-    </message>
-    <message>
-        <source>mirrored-flat</source>
-        <translation>ανεστραμμένη-ύφεση</translation>
-    </message>
-    <message>
-        <source>mirrored-flat-slash</source>
-        <translation>ανεστραμμένη-ύφεση-κάθετος</translation>
-    </message>
-    <message>
-        <source>flat-flat-slash</source>
-        <translation>ύφεση-ύφεση-κάθετος</translation>
-    </message>
-    <message>
-        <source>sharp-slash</source>
-        <translation>δίεση-κάθετος</translation>
-    </message>
-    <message>
-        <source>sharp-slash2</source>
-        <translation>δίεση-κάθετος2</translation>
-    </message>
-    <message>
-        <source>sharp-slash3</source>
-        <translation>δίεση-κάθετος3</translation>
-    </message>
-    <message>
-        <source>sharp-slash4</source>
-        <translation>δίεση-κάθετος4</translation>
-    </message>
-    <message>
-        <source>sharp arrow up</source>
-        <translation>δείκτης δίεσης προς τα επάνω</translation>
-    </message>
-    <message>
-        <source>sharp arrow down</source>
-        <translation>δείκτης δίεσης προς τα κάτω</translation>
-    </message>
-    <message>
-        <source>sharp arrow both</source>
-        <translation>διπλός δείκτης δίεσης</translation>
-    </message>
-    <message>
-        <source>flat arrow up</source>
-        <translation>δείκτης ύφεσης προς τα επάνω</translation>
-    </message>
-    <message>
-        <source>flat arrow down</source>
-        <translation>δείκτης ύφεσης προς τα κάτω</translation>
-    </message>
-    <message>
-        <source>flat arrow both</source>
-        <translation>διπλός δείκτης ύφεσης</translation>
-    </message>
-    <message>
-        <source>natural arrow up</source>
-        <translation>δείκτης αναίρεσης προς τα επάνω</translation>
-    </message>
-    <message>
-        <source>natural arrow down</source>
-        <translation>δείκτης αναίρεσης προς τα κάτω</translation>
-    </message>
-    <message>
-        <source>natural arrow both</source>
-        <translation>διπλός δείκτης αναίρεσης</translation>
-    </message>
     <message>
         <source>Accidentals</source>
         <translation type="unfinished">Σημεία Αλλοίωσης</translation>
@@ -10610,14 +10091,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>diatonic pitch up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>diatonic up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Diatonic pitch down</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11334,14 +10807,6 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Show piano keyboard</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>P</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Show media dialog</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11406,629 +10871,38 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Web</source>
+        <source>Diatonic pitch up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>W</source>
+        <source>Diatonic up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>WEB</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>addRemoveTimeSig</name>
-    <message>
-        <source>MuseScore</source>
-        <translation type="unfinished">MuseScore</translation>
-    </message>
-    <message>
-        <source>Rewrite measures
-until next time signature?</source>
+        <source>Piano keyboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>cannot rewrite measures:
-tuplet would cross measure</source>
+        <source>piano keyboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>next score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>previous score</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>articulation</name>
     <message>
-        <source>ufermata</source>
-        <translation>ufermata</translation>
-    </message>
-    <message>
-        <source>dfermata</source>
-        <translation>dfermata</translation>
-    </message>
-    <message>
-        <source>thumb</source>
-        <translation>αντίχειρας</translation>
-    </message>
-    <message>
-        <source>sforzato</source>
-        <translation>sforzato</translation>
-    </message>
-    <message>
-        <source>espressivo</source>
-        <translation>espressivo</translation>
-    </message>
-    <message>
-        <source>staccato</source>
-        <translation>staccato</translation>
-    </message>
-    <message>
-        <source>ustaccatissimo</source>
-        <translation>ustaccatissimo</translation>
-    </message>
-    <message>
-        <source>dstaccatissimo</source>
-        <translation>dstaccatissimo</translation>
-    </message>
-    <message>
-        <source>tenuto</source>
-        <translation>tenuto</translation>
-    </message>
-    <message>
-        <source>uportato</source>
-        <translation>uportato</translation>
-    </message>
-    <message>
-        <source>dportato</source>
-        <translation>dportato</translation>
-    </message>
-    <message>
-        <source>umarcato</source>
-        <translation>umarcato</translation>
-    </message>
-    <message>
-        <source>dmarcato</source>
-        <translation>dmarcato</translation>
-    </message>
-    <message>
-        <source>ouvert</source>
-        <translation>ouvert</translation>
-    </message>
-    <message>
-        <source>plusstop</source>
-        <translation>plusstop</translation>
-    </message>
-    <message>
-        <source>upbow</source>
-        <translation>upbow</translation>
-    </message>
-    <message>
-        <source>downbow</source>
-        <translation>downbow</translation>
-    </message>
-    <message>
-        <source>reverseturn</source>
-        <translation>reverseturn</translation>
-    </message>
-    <message>
-        <source>turn</source>
-        <translation>turn</translation>
-    </message>
-    <message>
-        <source>trill</source>
-        <translation>trill</translation>
-    </message>
-    <message>
-        <source>prall</source>
-        <translation>prall</translation>
-    </message>
-    <message>
-        <source>mordent</source>
-        <translation>mordent</translation>
-    </message>
-    <message>
-        <source>prallprall</source>
-        <translation>prallprall</translation>
-    </message>
-    <message>
-        <source>prallmordent</source>
-        <translation>prallmordent</translation>
-    </message>
-    <message>
-        <source>upprall</source>
-        <translation>upprall</translation>
-    </message>
-    <message>
-        <source>downprall</source>
-        <translation>downprall</translation>
-    </message>
-    <message>
-        <source>upmordent</source>
-        <translation>upmordent</translation>
-    </message>
-    <message>
-        <source>downmordent</source>
-        <translation>downmordent</translation>
-    </message>
-    <message>
-        <source>ushortfermata</source>
-        <translation>ushortfermata</translation>
-    </message>
-    <message>
-        <source>dshortfermata</source>
-        <translation>dshortfermata</translation>
-    </message>
-    <message>
-        <source>ulongfermata</source>
-        <translation>ulongfermata</translation>
-    </message>
-    <message>
-        <source>dlongfermata</source>
-        <translation>dlongfermata</translation>
-    </message>
-    <message>
-        <source>uverylongfermata</source>
-        <translation>uverylongfermata</translation>
-    </message>
-    <message>
-        <source>dverylongfermata</source>
-        <translation>dverylongfermata</translation>
-    </message>
-    <message>
-        <source>snappizzicato</source>
-        <translation>snappizzicato</translation>
-    </message>
-    <message>
-        <source>tapping</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>slapping</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>popping</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Bend</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tremolo Bar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>pralldown</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>prallup</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>lineprall</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>drumset</name>
-    <message>
-        <source>Acoustic Bass Drum</source>
-        <translation>Ακουστική Ντράμς Μπάσο</translation>
-    </message>
-    <message>
-        <source>Bass Drum</source>
-        <translation>Μπάσο Ντράμς</translation>
-    </message>
-    <message>
-        <source>Side Stick</source>
-        <translation>Side Stick</translation>
-    </message>
-    <message>
-        <source>Snare (Acoustic)</source>
-        <translation>Snare (Acoustic)</translation>
-    </message>
-    <message>
-        <source>Snare (Electric)</source>
-        <translation>Snare (Electric)</translation>
-    </message>
-    <message>
-        <source>Tom 5</source>
-        <translation>Tom 5</translation>
-    </message>
-    <message>
-        <source>Hi-Hat Closed</source>
-        <translation>Hit-Hat Κλειστό</translation>
-    </message>
-    <message>
-        <source>Tom 4</source>
-        <translation>Tom 4</translation>
-    </message>
-    <message>
-        <source>Hi-Hat Pedal</source>
-        <translation>Hit-Hat Πεντάλ</translation>
-    </message>
-    <message>
-        <source>Tom 3</source>
-        <translation>Tom 3</translation>
-    </message>
-    <message>
-        <source>Hi-Hat Open</source>
-        <translation>Hit-Hat Ανοιχτό</translation>
-    </message>
-    <message>
-        <source>Tom 2</source>
-        <translation>Tom 2</translation>
-    </message>
-    <message>
-        <source>Tom 1</source>
-        <translation>Tom 1</translation>
-    </message>
-    <message>
-        <source>Crash 1</source>
-        <translation>Crash 1</translation>
-    </message>
-    <message>
-        <source>Tom</source>
-        <translation>Tom</translation>
-    </message>
-    <message>
-        <source>Ride</source>
-        <translation>Ride</translation>
-    </message>
-    <message>
-        <source>China</source>
-        <translation>China</translation>
-    </message>
-    <message>
-        <source>Ride (Bell)</source>
-        <translation>Ride (Bell)</translation>
-    </message>
-    <message>
-        <source>Tambourine</source>
-        <translation>Tambourine</translation>
-    </message>
-    <message>
-        <source>open high conga</source>
-        <translation>ανοιχτό high conga</translation>
-    </message>
-    <message>
-        <source>low conga</source>
-        <translation>χαμηλό conga</translation>
-    </message>
-</context>
-<context>
-    <name>elementName</name>
-    <message>
-        <source>Symbol</source>
-        <translation>Σύμβολο</translation>
-    </message>
-    <message>
-        <source>Text</source>
-        <translation>Κείμενο</translation>
-    </message>
-    <message>
-        <source>SlurSegment</source>
-        <translation>Τμήμα Σύζευξης</translation>
-    </message>
-    <message>
-        <source>BarLine</source>
-        <translation>Διαστολή</translation>
-    </message>
-    <message>
-        <source>StemSlash</source>
-        <translation>Κάθετος Στελέχους</translation>
-    </message>
-    <message>
-        <source>Line</source>
-        <translation>Γραμμή</translation>
-    </message>
-    <message>
-        <source>Bracket</source>
-        <translation>Αγκύλη</translation>
-    </message>
-    <message>
-        <source>Arpeggio</source>
-        <translation>Αρπισμός</translation>
-    </message>
-    <message>
-        <source>Accidental</source>
-        <translation>Σημείο Αλλοίωσης</translation>
-    </message>
-    <message>
-        <source>Note</source>
-        <translation>Νότα</translation>
-    </message>
-    <message>
-        <source>Stem</source>
-        <translation>Στέλεχος</translation>
-    </message>
-    <message>
-        <source>Clef</source>
-        <translation>Κλειδί</translation>
-    </message>
-    <message>
-        <source>KeySig</source>
-        <translation>Οπλισμός</translation>
-    </message>
-    <message>
-        <source>TimeSig</source>
-        <translation>Ετικέτα Χρόνου</translation>
-    </message>
-    <message>
-        <source>Rest</source>
-        <translation>Παύση</translation>
-    </message>
-    <message>
-        <source>Breath</source>
-        <translation>Αναπνοή</translation>
-    </message>
-    <message>
-        <source>Glissando</source>
-        <translation>Glissando</translation>
-    </message>
-    <message>
-        <source>RepeatMeasure</source>
-        <translation>Επανάληψη μέτρου</translation>
-    </message>
-    <message>
-        <source>Image</source>
-        <translation>Εικόνα</translation>
-    </message>
-    <message>
-        <source>Tie</source>
-        <translation>Δέσιμο</translation>
-    </message>
-    <message>
-        <source>Articulation</source>
-        <translation>Άρθρωση</translation>
-    </message>
-    <message>
-        <source>Dynamic</source>
-        <translation>Δυναμική</translation>
-    </message>
-    <message>
-        <source>Page</source>
-        <translation>Σελίδα</translation>
-    </message>
-    <message>
-        <source>Beam</source>
-        <translation>Ενωτική Γραμμή</translation>
-    </message>
-    <message>
-        <source>Hook</source>
-        <translation>Άγκυστρο</translation>
-    </message>
-    <message>
-        <source>Lyrics</source>
-        <translation>Στίχοι</translation>
-    </message>
-    <message>
-        <source>Marker</source>
-        <translation>Μαρκαδόρος</translation>
-    </message>
-    <message>
-        <source>Jump</source>
-        <translation>Μεταπήδηση</translation>
-    </message>
-    <message>
-        <source>Tuplet</source>
-        <translation>Υποδιαίρεση Χρόνου</translation>
-    </message>
-    <message>
-        <source>Tempo</source>
-        <translation>Τέμπο</translation>
-    </message>
-    <message>
-        <source>StaffText</source>
-        <translation>Κείμενο Πενταγράμμου</translation>
-    </message>
-    <message>
-        <source>Harmony</source>
-        <translation>Αρμονία</translation>
-    </message>
-    <message>
-        <source>Volta</source>
-        <translation>Volta</translation>
-    </message>
-    <message>
-        <source>HairpinSegment</source>
-        <translation>Τμήμα Φουρκέτας</translation>
-    </message>
-    <message>
-        <source>OttavaSegment</source>
-        <translation>Τμήμα Οκτάβας</translation>
-    </message>
-    <message>
-        <source>TrillSegment</source>
-        <translation>Τμήμα Τρίλιας</translation>
-    </message>
-    <message>
-        <source>TextLineSegment</source>
-        <translation>Τμήμα Γραμμής Κειμένου</translation>
-    </message>
-    <message>
-        <source>VoltaSegment</source>
-        <translation>Τμήμα Volta</translation>
-    </message>
-    <message>
-        <source>LayoutBreak</source>
-        <translation>Αλλαγή Διάταξης</translation>
-    </message>
-    <message>
-        <source>Spacer</source>
-        <translation>Διαχωριστικό</translation>
-    </message>
-    <message>
-        <source>LedgerLine</source>
-        <translation>LedgerLine</translation>
-    </message>
-    <message>
-        <source>NoteHead</source>
-        <translation>Κεφαλή Φθογγοσήμου</translation>
-    </message>
-    <message>
-        <source>Tremolo</source>
-        <translation>Τρέμολο</translation>
-    </message>
-    <message>
-        <source>Measure</source>
-        <translation>Μέτρο</translation>
-    </message>
-    <message>
-        <source>StaffLines</source>
-        <translation>Γραμμές Πενταγράμμου</translation>
-    </message>
-    <message>
-        <source>Cursor</source>
-        <translation>Κέρσορας</translation>
-    </message>
-    <message>
-        <source>Selection</source>
-        <translation>Επιλογή</translation>
-    </message>
-    <message>
-        <source>Lasso</source>
-        <translation>Λάσο</translation>
-    </message>
-    <message>
-        <source>ShadowNote</source>
-        <translation>Νότα Σκιά</translation>
-    </message>
-    <message>
-        <source>RubberBand</source>
-        <translation>RubberBand</translation>
-    </message>
-    <message>
-        <source>HairPin</source>
-        <translation>Φουρκέτα</translation>
-    </message>
-    <message>
-        <source>Ottava</source>
-        <translation>Οκτάβα</translation>
-    </message>
-    <message>
-        <source>Pedal</source>
-        <translation>Pedal (πεντάλ)</translation>
-    </message>
-    <message>
-        <source>Trill</source>
-        <translation>Τρίλια</translation>
-    </message>
-    <message>
-        <source>TextLine</source>
-        <translation>Γραμμή Κειμένου</translation>
-    </message>
-    <message>
-        <source>Segment</source>
-        <translation>Τμήμα</translation>
-    </message>
-    <message>
-        <source>System</source>
-        <translation>System (Σύστημα)</translation>
-    </message>
-    <message>
-        <source>Compound</source>
-        <translation>Compound</translation>
-    </message>
-    <message>
-        <source>Chord</source>
-        <translation>Συγχορδία</translation>
-    </message>
-    <message>
-        <source>Slur</source>
-        <translation>Σύζευξη</translation>
-    </message>
-    <message>
-        <source>Element</source>
-        <translation>Στοιχείο</translation>
-    </message>
-    <message>
-        <source>ElementList</source>
-        <translation>Λίστα Στοιχείων</translation>
-    </message>
-    <message>
-        <source>StaffList</source>
-        <translation>Λίστα Πενταγράμμων</translation>
-    </message>
-    <message>
-        <source>MeasureList</source>
-        <translation>Λίστα Μέτρων</translation>
-    </message>
-    <message>
-        <source>Layout</source>
-        <translation>Διάταξη</translation>
-    </message>
-    <message>
-        <source>HBox</source>
-        <translation>HBox</translation>
-    </message>
-    <message>
-        <source>VBox</source>
-        <translation>VBox</translation>
-    </message>
-    <message>
-        <source>Icon</source>
-        <translation>Εικονίδιο</translation>
-    </message>
-    <message>
-        <source>AccidentalBracket</source>
-        <translation>Αγκύλη Σημείου Αλλοίωσης</translation>
-    </message>
-    <message>
-        <source>invalid</source>
-        <translation type="unfinished">άκυρο</translation>
-    </message>
-    <message>
-        <source>InstrumentName</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>ChordLine</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Fingering</source>
-        <translation type="unfinished">Δακτυλισμοί</translation>
-    </message>
-    <message>
-        <source>InstrumentChange</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>FretDiagram</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bend</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>TremoloBar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>StaffState</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>NoteDot</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>TabDurationSymbol</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>FSymbol</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>TBox</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>FBox</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -12127,881 +11001,6 @@ tuplet would cross measure</source>
     <message>
         <source>Every 2 months</source>
         <translation>Κάθε 2 μήνες</translation>
-    </message>
-</context>
-<context>
-    <name>score</name>
-    <message>
-        <source>Cannot read this score:
-your version of MuseScore is too old.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>symbol</name>
-    <message>
-        <source>f</source>
-        <translation>f</translation>
-    </message>
-    <message>
-        <source>m</source>
-        <translation>m</translation>
-    </message>
-    <message>
-        <source>p</source>
-        <translation>p</translation>
-    </message>
-    <message>
-        <source>r</source>
-        <translation>r</translation>
-    </message>
-    <message>
-        <source>s</source>
-        <translation>s</translation>
-    </message>
-    <message>
-        <source>z</source>
-        <translation>z</translation>
-    </message>
-    <message>
-        <source>whole rest</source>
-        <translation>παύση ολόκληρου</translation>
-    </message>
-    <message>
-        <source>half rest</source>
-        <translation>παύση ήμιση</translation>
-    </message>
-    <message>
-        <source>outside whole rest</source>
-        <translation>πέραν της παύσης ολόκληρου</translation>
-    </message>
-    <message>
-        <source>outside half rest</source>
-        <translation>πέραν της παύσης μισού</translation>
-    </message>
-    <message>
-        <source>rest M3</source>
-        <translation>παύση M3</translation>
-    </message>
-    <message>
-        <source>breve rest</source>
-        <translation>παύση breve</translation>
-    </message>
-    <message>
-        <source>longa rest</source>
-        <translation>παύση longa</translation>
-    </message>
-    <message>
-        <source>quart rest</source>
-        <translation>παύση τετάρτου</translation>
-    </message>
-    <message>
-        <source>clas quart rest</source>
-        <translation>παύση clas quart</translation>
-    </message>
-    <message>
-        <source>eight rest</source>
-        <translation>παύση ογδόου</translation>
-    </message>
-    <message>
-        <source>16&apos; rest</source>
-        <translation>παύση 16&apos;</translation>
-    </message>
-    <message>
-        <source>32&apos; rest</source>
-        <translation>παύση 32&apos;</translation>
-    </message>
-    <message>
-        <source>64&apos; rest</source>
-        <translation>παύση 64&apos;</translation>
-    </message>
-    <message>
-        <source>128&apos; rest</source>
-        <translation>παύση 128&apos;</translation>
-    </message>
-    <message>
-        <source>sharp</source>
-        <translation>δίεση</translation>
-    </message>
-    <message>
-        <source>sharp arrow up</source>
-        <translation>δίεση βέλος προς τα πάνω</translation>
-    </message>
-    <message>
-        <source>sharp arrow both</source>
-        <translation>δίεση βέλος και τα δύο</translation>
-    </message>
-    <message>
-        <source>sharp slash</source>
-        <translation>δίεση-κάθετος</translation>
-    </message>
-    <message>
-        <source>sharp slash2</source>
-        <translation>δίεση-κάθετος2</translation>
-    </message>
-    <message>
-        <source>sharp slash3</source>
-        <translation>δίεση-κάθετος3</translation>
-    </message>
-    <message>
-        <source>sharp slash4</source>
-        <translation>δίεση-κάθετος4</translation>
-    </message>
-    <message>
-        <source>natural</source>
-        <translation>αναίρεση</translation>
-    </message>
-    <message>
-        <source>natural arrow up</source>
-        <translation>αναίρεση βέλος προς τα πάνω</translation>
-    </message>
-    <message>
-        <source>natural arrow down</source>
-        <translation>αναίρεση βέλος προς τα κάτω</translation>
-    </message>
-    <message>
-        <source>natural arrow both</source>
-        <translation>αναίρεση βέλος και τα δύο</translation>
-    </message>
-    <message>
-        <source>flat</source>
-        <translation>ύφεση</translation>
-    </message>
-    <message>
-        <source>flat arrow up</source>
-        <translation>ύφεση βέλος προς τα πάνω</translation>
-    </message>
-    <message>
-        <source>flat arrow both</source>
-        <translation>ύφεση βέλος και τα δύο</translation>
-    </message>
-    <message>
-        <source>flat slash</source>
-        <translation>ύφεση-κάθετος</translation>
-    </message>
-    <message>
-        <source>flat slash2</source>
-        <translation>ύφεση-κάθετος2</translation>
-    </message>
-    <message>
-        <source>mirrored flat2</source>
-        <translation>ανεστραμμένη-ύφεση2</translation>
-    </message>
-    <message>
-        <source>mirrored flat</source>
-        <translation>ανεστραμμένη-ύφεση</translation>
-    </message>
-    <message>
-        <source>mirrored flat slash</source>
-        <translation>ανεστραμμένη-ύφεση-κάθετος</translation>
-    </message>
-    <message>
-        <source>flat flat</source>
-        <translation>ύφεση ύφεση</translation>
-    </message>
-    <message>
-        <source>flat flat slash</source>
-        <translation>ύφεση-ύφεση-κάθετος</translation>
-    </message>
-    <message>
-        <source>sharp sharp</source>
-        <translation>δίεση δίεση</translation>
-    </message>
-    <message>
-        <source>right parenthesis</source>
-        <translation>δεξιά παρένθεση</translation>
-    </message>
-    <message>
-        <source>left parenthesis</source>
-        <translation>αριστερή παρένθεση</translation>
-    </message>
-    <message>
-        <source>dot</source>
-        <translation>παρεστιγμένο</translation>
-    </message>
-    <message>
-        <source>longa up</source>
-        <translation>longa επάνω</translation>
-    </message>
-    <message>
-        <source>longa down</source>
-        <translation>longa κάτω</translation>
-    </message>
-    <message>
-        <source>brevis head</source>
-        <translation>κεφαλή brevis</translation>
-    </message>
-    <message>
-        <source>brevis double head</source>
-        <translation>διπλή κεφαλή brevis</translation>
-    </message>
-    <message>
-        <source>whole head</source>
-        <translation>ολόκληρη κεφαλή</translation>
-    </message>
-    <message>
-        <source>half head</source>
-        <translation>μισή κεφαλή</translation>
-    </message>
-    <message>
-        <source>quart head</source>
-        <translation>1/4 κεφαλής</translation>
-    </message>
-    <message>
-        <source>whole diamond head</source>
-        <translation>ολόκληρη διαμαντοειδής κεφαλή</translation>
-    </message>
-    <message>
-        <source>half diamond head</source>
-        <translation>μισή διαμαντοειδής κεφαλή</translation>
-    </message>
-    <message>
-        <source>diamond head</source>
-        <translation>διαμαντοειδής κεφαλή</translation>
-    </message>
-    <message>
-        <source>whole triangle head</source>
-        <translation>ολόκληρη τριγωνική κεφαλή</translation>
-    </message>
-    <message>
-        <source>down half triangle head</source>
-        <translation>κάτω μισό τριγωνικής κεφαλής</translation>
-    </message>
-    <message>
-        <source>up half triangle head</source>
-        <translation>πάνω μισό τριγωνικής κεφαλής</translation>
-    </message>
-    <message>
-        <source>up quart triangle head</source>
-        <translation>πάνω 1/4 τριγωνικής κεφαλής</translation>
-    </message>
-    <message>
-        <source>down quart triangle head</source>
-        <translation>κάτω 1/4 τριγωνικής κεφαλής</translation>
-    </message>
-    <message>
-        <source>whole slash head</source>
-        <translation>ολόκληρη κάθετη κεφαλή</translation>
-    </message>
-    <message>
-        <source>half slash head</source>
-        <translation>μισή κάθετη κεφαλή</translation>
-    </message>
-    <message>
-        <source>quart slash head</source>
-        <translation>1/4 κάθετη κεφαλή</translation>
-    </message>
-    <message>
-        <source>whole cross head</source>
-        <translation>ολόκληρη χιαστή κεφαλή</translation>
-    </message>
-    <message>
-        <source>half cross head</source>
-        <translation>μισή χιαστή κεφαλή</translation>
-    </message>
-    <message>
-        <source>cross head</source>
-        <translation>χιαστή κεφαλή</translation>
-    </message>
-    <message>
-        <source>x circle head</source>
-        <translation>κεφαλή x circle</translation>
-    </message>
-    <message>
-        <source>s0do head</source>
-        <translation>κεφαλή s0do</translation>
-    </message>
-    <message>
-        <source>d1do head</source>
-        <translation>κεφαλή d1do</translation>
-    </message>
-    <message>
-        <source>u1do head</source>
-        <translation>κεφαλή u1do</translation>
-    </message>
-    <message>
-        <source>d2do head</source>
-        <translation>κεφαλή d2do</translation>
-    </message>
-    <message>
-        <source>u2do head</source>
-        <translation>κεφαλή u2do</translation>
-    </message>
-    <message>
-        <source>s0re head</source>
-        <translation>κεφαλή s0re</translation>
-    </message>
-    <message>
-        <source>u1re head</source>
-        <translation>κεφαλή u1re</translation>
-    </message>
-    <message>
-        <source>d1re head</source>
-        <translation>κεφαλή d1re</translation>
-    </message>
-    <message>
-        <source>u2re head</source>
-        <translation>κεφαλή u2re</translation>
-    </message>
-    <message>
-        <source>d2re head</source>
-        <translation>κεφαλή d2re</translation>
-    </message>
-    <message>
-        <source>s0mi head</source>
-        <translation>κεφαλή s0mi</translation>
-    </message>
-    <message>
-        <source>s1mi head</source>
-        <translation>κεφαλή s1mi</translation>
-    </message>
-    <message>
-        <source>s2mi head</source>
-        <translation>κεφαλή s2mi</translation>
-    </message>
-    <message>
-        <source>u0fa head</source>
-        <translation>κεφαλή u0fa</translation>
-    </message>
-    <message>
-        <source>d0fa head</source>
-        <translation>κεφαλή d0fa</translation>
-    </message>
-    <message>
-        <source>u1fa head</source>
-        <translation>κεφαλή u1fa</translation>
-    </message>
-    <message>
-        <source>d1fa head</source>
-        <translation>κεφαλή d1fa</translation>
-    </message>
-    <message>
-        <source>u2fa head</source>
-        <translation>κεφαλή u2fa</translation>
-    </message>
-    <message>
-        <source>d2fa head</source>
-        <translation>κεφαλή d2fa</translation>
-    </message>
-    <message>
-        <source>s0la head</source>
-        <translation>κεφαλή s0la</translation>
-    </message>
-    <message>
-        <source>s1la head</source>
-        <translation>κεφαλή s1la</translation>
-    </message>
-    <message>
-        <source>s2la head</source>
-        <translation>κεφαλή s2la</translation>
-    </message>
-    <message>
-        <source>s0ti head</source>
-        <translation>κεφαλή s0ti</translation>
-    </message>
-    <message>
-        <source>u1ti head</source>
-        <translation>κεφαλή u1ti</translation>
-    </message>
-    <message>
-        <source>d1ti head</source>
-        <translation>κεφαλή d1ti</translation>
-    </message>
-    <message>
-        <source>u2ti head</source>
-        <translation>κεφαλή u2ti</translation>
-    </message>
-    <message>
-        <source>d2ti head</source>
-        <translation>κεφαλή d2ti</translation>
-    </message>
-    <message>
-        <source>ufermata</source>
-        <translation>ufermata</translation>
-    </message>
-    <message>
-        <source>dfermata</source>
-        <translation>dfermata</translation>
-    </message>
-    <message>
-        <source>snappizzicato</source>
-        <translation>snappizzicato</translation>
-    </message>
-    <message>
-        <source>ushortfermata</source>
-        <translation>ushortfermata</translation>
-    </message>
-    <message>
-        <source>dshortfermata</source>
-        <translation>dshortfermata</translation>
-    </message>
-    <message>
-        <source>ulongfermata</source>
-        <translation>ulongfermata</translation>
-    </message>
-    <message>
-        <source>dlongfermata</source>
-        <translation>dlongfermata</translation>
-    </message>
-    <message>
-        <source>uverylongfermata</source>
-        <translation>uverylongfermata</translation>
-    </message>
-    <message>
-        <source>dverylongfermata</source>
-        <translation>dverylongfermata</translation>
-    </message>
-    <message>
-        <source>thumb</source>
-        <translation>αντίχειρας</translation>
-    </message>
-    <message>
-        <source>sforza to accent</source>
-        <translation>sforza to accent</translation>
-    </message>
-    <message>
-        <source>espressivo</source>
-        <translation>espressivo</translation>
-    </message>
-    <message>
-        <source>staccato</source>
-        <translation>staccato</translation>
-    </message>
-    <message>
-        <source>ustaccatissimo</source>
-        <translation>ustaccatissimo</translation>
-    </message>
-    <message>
-        <source>dstaccatissimo</source>
-        <translation>dstaccatissimo</translation>
-    </message>
-    <message>
-        <source>tenuto</source>
-        <translation>tenuto</translation>
-    </message>
-    <message>
-        <source>uportato</source>
-        <translation>uportato</translation>
-    </message>
-    <message>
-        <source>dportato</source>
-        <translation>dportato</translation>
-    </message>
-    <message>
-        <source>umarcato</source>
-        <translation>umarcato</translation>
-    </message>
-    <message>
-        <source>dmarcato</source>
-        <translation>dmarcato</translation>
-    </message>
-    <message>
-        <source>ouvert</source>
-        <translation>ouvert</translation>
-    </message>
-    <message>
-        <source>plus stop</source>
-        <translation>plus stop</translation>
-    </message>
-    <message>
-        <source>up bow</source>
-        <translation>up bow</translation>
-    </message>
-    <message>
-        <source>down bow</source>
-        <translation>down bow</translation>
-    </message>
-    <message>
-        <source>reverse turn</source>
-        <translation>αντίστροφο γύρισμα</translation>
-    </message>
-    <message>
-        <source>turn</source>
-        <translation>γύρισμα</translation>
-    </message>
-    <message>
-        <source>trill</source>
-        <translation>trill</translation>
-    </message>
-    <message>
-        <source>upedal heel</source>
-        <translation>upedal heel</translation>
-    </message>
-    <message>
-        <source>dpedalheel</source>
-        <translation>dpedalheel</translation>
-    </message>
-    <message>
-        <source>upedal toe</source>
-        <translation>upedal toe</translation>
-    </message>
-    <message>
-        <source>dpedal toe</source>
-        <translation>dpedal toe</translation>
-    </message>
-    <message>
-        <source>flageolet</source>
-        <translation>flageolet</translation>
-    </message>
-    <message>
-        <source>segno</source>
-        <translation>segno</translation>
-    </message>
-    <message>
-        <source>coda</source>
-        <translation>coda</translation>
-    </message>
-    <message>
-        <source>varied coda</source>
-        <translation>varied coda</translation>
-    </message>
-    <message>
-        <source>rcomma</source>
-        <translation>rcomma</translation>
-    </message>
-    <message>
-        <source>lcomma</source>
-        <translation>lcomma</translation>
-    </message>
-    <message>
-        <source>arpeggio</source>
-        <translation>αρπισμός</translation>
-    </message>
-    <message>
-        <source>trillelement</source>
-        <translation>trillelement</translation>
-    </message>
-    <message>
-        <source>arpeggio arrow down</source>
-        <translation>δείκτης αρπισμού κάτω</translation>
-    </message>
-    <message>
-        <source>arpeggio arrow up</source>
-        <translation>δείκτης αρπισμού πάνω</translation>
-    </message>
-    <message>
-        <source>trill element</source>
-        <translation>στοιχείο τρίλιας</translation>
-    </message>
-    <message>
-        <source>prall</source>
-        <translation>prall</translation>
-    </message>
-    <message>
-        <source>mordent</source>
-        <translation>mordent</translation>
-    </message>
-    <message>
-        <source>prall prall</source>
-        <translation>prall prall</translation>
-    </message>
-    <message>
-        <source>prall mordent</source>
-        <translation>prall mordent</translation>
-    </message>
-    <message>
-        <source>up prall</source>
-        <translation>prall επάνω</translation>
-    </message>
-    <message>
-        <source>up mordent</source>
-        <translation>mordent επάνω</translation>
-    </message>
-    <message>
-        <source>prall down</source>
-        <translation>prall κάτω</translation>
-    </message>
-    <message>
-        <source>down prall</source>
-        <translation>κάτω prall</translation>
-    </message>
-    <message>
-        <source>down mordent</source>
-        <translation>κάτω mordent</translation>
-    </message>
-    <message>
-        <source>prall up</source>
-        <translation>prall επάνω</translation>
-    </message>
-    <message>
-        <source>line prall</source>
-        <translation>line prall</translation>
-    </message>
-    <message>
-        <source>caesura curved</source>
-        <translation>caesura curved</translation>
-    </message>
-    <message>
-        <source>caesura straight</source>
-        <translation>caesura straight</translation>
-    </message>
-    <message>
-        <source>eight flag</source>
-        <translation>σημαία ογδόου</translation>
-    </message>
-    <message>
-        <source>sixteenth flag</source>
-        <translation>σημαία δεκάτου έκτου</translation>
-    </message>
-    <message>
-        <source>thirtysecond flag</source>
-        <translation>σημαία τριακοστού δευτέρου</translation>
-    </message>
-    <message>
-        <source>sixtyfour flag</source>
-        <translation>σημαία εξηκοστού τετάρτου</translation>
-    </message>
-    <message>
-        <source>128flag</source>
-        <translation>σημαία 128ου</translation>
-    </message>
-    <message>
-        <source>deight flag</source>
-        <translation>σημαία deight</translation>
-    </message>
-    <message>
-        <source>grace dash</source>
-        <translation>grace dash</translation>
-    </message>
-    <message>
-        <source>dgrace dash</source>
-        <translation>dgrace dash</translation>
-    </message>
-    <message>
-        <source>dsixteenth flag</source>
-        <translation>σημαία dsixteenth</translation>
-    </message>
-    <message>
-        <source>dthirtysecond flag</source>
-        <translation>σημαία dthirtysecond</translation>
-    </message>
-    <message>
-        <source>dsixtyfourth flag</source>
-        <translation>σημαία dsixtyfourth</translation>
-    </message>
-    <message>
-        <source>d128flag</source>
-        <translation>d128flag</translation>
-    </message>
-    <message>
-        <source>alto clef</source>
-        <translation>κλειδί άλτο</translation>
-    </message>
-    <message>
-        <source>calto clef</source>
-        <translation>calto clef</translation>
-    </message>
-    <message>
-        <source>bass clef</source>
-        <translation>κλειδί μπάσου</translation>
-    </message>
-    <message>
-        <source>cbass clef</source>
-        <translation>κλειδί cbass</translation>
-    </message>
-    <message>
-        <source>trebleclef</source>
-        <translation>κλειδί σοπράνο</translation>
-    </message>
-    <message>
-        <source>ctrebleclef</source>
-        <translation>κλειδί ctreble</translation>
-    </message>
-    <message>
-        <source>percussion clef</source>
-        <translation>κλειδί κρουστών</translation>
-    </message>
-    <message>
-        <source>cpercussion clef</source>
-        <translation>κλειδί cpercussion</translation>
-    </message>
-    <message>
-        <source>tab clef</source>
-        <translation>tab clef</translation>
-    </message>
-    <message>
-        <source>ctab clef</source>
-        <translation>ctab clef</translation>
-    </message>
-    <message>
-        <source>four four meter</source>
-        <translation>four four meter</translation>
-    </message>
-    <message>
-        <source>allabreve</source>
-        <translation>allabreve</translation>
-    </message>
-    <message>
-        <source>pedalasterisk</source>
-        <translation>αστερίσκος πεντάλ</translation>
-    </message>
-    <message>
-        <source>pedaldash</source>
-        <translation>παύλα πεντάλ</translation>
-    </message>
-    <message>
-        <source>pedaldot</source>
-        <translation>τελεία πεντάλ</translation>
-    </message>
-    <message>
-        <source>pedalP</source>
-        <translation>pedalP</translation>
-    </message>
-    <message>
-        <source>pedald</source>
-        <translation>pedald</translation>
-    </message>
-    <message>
-        <source>pedale</source>
-        <translation>pedale</translation>
-    </message>
-    <message>
-        <source>pedal ped</source>
-        <translation>pedal ped</translation>
-    </message>
-    <message>
-        <source>bracket tips up</source>
-        <translation>πληροφορίες αγκύλης επάνω</translation>
-    </message>
-    <message>
-        <source>bracket tips down</source>
-        <translation>πληροφορίες αγκύλης κάτω</translation>
-    </message>
-    <message>
-        <source>bracket tips left up</source>
-        <translation>πληροφορίες αγκύλης αριστερά πάνω</translation>
-    </message>
-    <message>
-        <source>bracket tips left down</source>
-        <translation>πληροφορίες αγκύλης αριστερά κάτω</translation>
-    </message>
-    <message>
-        <source>zero</source>
-        <translation>μηδέν</translation>
-    </message>
-    <message>
-        <source>one</source>
-        <translation>ένα</translation>
-    </message>
-    <message>
-        <source>two</source>
-        <translation>δύο</translation>
-    </message>
-    <message>
-        <source>three</source>
-        <translation>τρία</translation>
-    </message>
-    <message>
-        <source>four</source>
-        <translation>τέσσερα</translation>
-    </message>
-    <message>
-        <source>five</source>
-        <translation>πέντε</translation>
-    </message>
-    <message>
-        <source>six</source>
-        <translation>έξι</translation>
-    </message>
-    <message>
-        <source>seven</source>
-        <translation>εφτά</translation>
-    </message>
-    <message>
-        <source>eight</source>
-        <translation>οχτώ</translation>
-    </message>
-    <message>
-        <source>nine</source>
-        <translation>εννέα</translation>
-    </message>
-    <message>
-        <source>plus</source>
-        <translation>συν</translation>
-    </message>
-    <message>
-        <source>sq longa up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>sq longa down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>sq brevis</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>tempus imperf prol maj</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>tempus perf prol min</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>tempus perf cut</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>tempus perf prol maj</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>tab2 clef</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>s0sol head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>s1sol head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>s2sol head</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>halfopen</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>var segno</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>accordeon dot</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>accordeon freebase</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>accordeon stdbase</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>accordeon bayanbase</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>accordeon old ee</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>accordeon discant</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>accordeon push</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>accordeon pull</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -1,3 +1,6 @@
+27.jun (ws)
+      - fix: do not remove clefs from template in new wizard "create from template"
+      - fix: don't allow piano shortcut in edit mode (so you can enter 'p' in text)
 25.jun (la)
       - better handling of Tab key in text element
       - add permanent cookie support in MuseScore Connect, prepare translation
