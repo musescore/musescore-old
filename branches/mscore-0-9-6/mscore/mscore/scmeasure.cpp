@@ -110,7 +110,7 @@ static QScriptValue prototype_Measure_call(QScriptContext* context, QScriptEngin
 
             }
       return context->throwError(QScriptContext::TypeError,
-         QString::fromLatin1("Note.%0(): bad argument count or value")
+         QString::fromLatin1("Measure.%0(): bad argument count or value")
          .arg(function_names_measure[_id]));
       }
 

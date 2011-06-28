@@ -338,6 +338,7 @@ ScriptEngine::ScriptEngine()
       globalObject().setProperty("Measure",   create_Measure_class(this), QScriptValue::SkipInEnumeration);
       globalObject().setProperty("Part",      create_Part_class(this),    QScriptValue::SkipInEnumeration);
       globalObject().setProperty("PageFormat",create_PageFormat_class(this),    QScriptValue::SkipInEnumeration);
+      globalObject().setProperty("TimeSig",   create_TimeSig_class(this), QScriptValue::SkipInEnumeration);
 
       globalObject().setProperty("mscore",              newQObject(mscore));
       globalObject().setProperty("division",            newVariant(AL::division));

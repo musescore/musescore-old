@@ -334,6 +334,121 @@ Note* Score::addNote(Chord* chord, int pitch)
       }
 
 //---------------------------------------------------------
+//   replaceTimeSig
+//
+// replaces time signature at tick with TimeSig* ts
+// and adds clones of ts for all remaining staves
+//---------------------------------------------------------
+
+void Score::replaceTimeSig(int tick, TimeSig* ts)
+      {
+      undoFixTicks();
+      //printf(":::replaceTimeSig\n");
+
+      // record old tick lengths, since they will be modified when time is added/removed
+      QVector<int> tickLens;
+      for (Measure* m = firstMeasure(); m; m = m->nextMeasure())
+            tickLens.append(m->tickLen());
+
+      Fraction ofraction(_sigmap->timesig(tick).fraction());
+      Fraction nfraction(TimeSig::getSig(ts->subtype()));
+
+      // find existing timesig and remove it
+      bool notimesig = true;
+      for (Segment* s = firstSegment(); s; s = s->next1()) {
+            if (s->subtype() != SegTimeSig)
+                  continue;
+            int etick = s->tick();
+            if (etick > tick)
+                  break;
+            if (etick == tick) {
+                  for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
+                        int track = staffIdx * VOICES;
+                        Element* e = s->element(track);
+                        undoRemoveElement(e);
+                        }
+                  notimesig = false;
+                  break;
+                  }
+            }
+
+      // add new timesig
+      insertTimeSig(tick, ts);
+
+      AL::SigEvent nSig;
+      if (notimesig) {
+            AL::SigEvent nnSig(nfraction);
+            undoChangeSig(tick, AL::SigEvent(), nnSig);
+            }
+      else {
+            AL::SigEvent oSig;
+            AL::iSigEvent i = _sigmap->find(tick);
+            if (i != _sigmap->end()) {
+                  oSig = i->second;
+                  AL::SigEvent e = _sigmap->timesig(tick - 1);
+                  if ((tick == 0) || (e.getNominal() != nfraction)) {
+                        nSig = AL::SigEvent(nfraction);
+                        }
+                  }
+            else {
+                  nSig = AL::SigEvent(nfraction);
+                  }
+
+            undoChangeSig(tick, oSig, nSig);
+            }
+
+      if (ofraction == nfraction && !notimesig)
+            return;
+
+      //---------------------------------------------
+      // remove unnessesary timesig symbols
+      //---------------------------------------------
+
+      int staves = nstaves();
+      for (Segment* segment = firstSegment(); segment;) {
+            Segment* nseg = segment->next1();
+            if (segment->subtype() != SegTimeSig) {
+                  segment = nseg;
+                  continue;
+                  }
+            int etick = segment->tick();
+            if (etick > tick) {
+                  AL::iSigEvent i = _sigmap->find(segment->tick());
+                  if ((etick > tick) && (i->second.fraction() != nfraction))
+                        break;
+                  for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
+                        Element* e = segment->element(staffIdx * VOICES);
+                        if (e)
+                              undoRemoveElement(e);
+                        }
+                  undoRemoveElement(segment);   // segment is now empty
+                  break;
+                  }
+            segment = nseg;
+            }
+
+      //---------------------------------------------
+      // modify measures
+      //---------------------------------------------
+
+      int j = 0;
+      int ctick = 0;
+      for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
+            int newLen = _sigmap->ticksMeasure(ctick);
+            ctick += newLen;
+            int oldLen = tickLens[j];
+            ++j;
+            if (newLen == oldLen)
+                  continue;
+            m->adjustToLen(oldLen, newLen);
+            }
+      //if (nSig.valid())
+      //      insertTimeSig(tick, ts);
+      undoFixTicks();
+
+      }
+
+//---------------------------------------------------------
 //   changeTimeSig
 //
 // change time signature at tick into subtype st for all staves
@@ -514,6 +629,34 @@ void Score::cmdRemoveTimeSig(TimeSig* ts)
             m->adjustToLen(oldLen, newLen);
             }
       undoFixTicks();
+      }
+
+//---------------------------------------------------------
+//   insertTimeSig
+//---------------------------------------------------------
+
+void Score::insertTimeSig(int tick, TimeSig* ts)
+      {
+      Measure* measure = tick2measure(tick);
+      for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
+            TimeSig* nsig = 0;
+            if (staffIdx == 0)
+                  nsig = ts;
+            else
+                  nsig = ts->clone();
+            nsig->setScore(this);
+            nsig->setTrack(staffIdx * VOICES);
+            nsig->setTick(tick);
+            SegmentType st = Segment::segmentType(TIMESIG);
+            Segment* seg = measure->findSegment(st, tick);
+            if (seg == 0) {
+                  seg = measure->createSegment(st, tick);
+                  undoAddElement(seg);
+            }
+            nsig->setParent(seg);
+            undoAddElement(nsig);
+            }
+      layoutAll = true;
       }
 
 //---------------------------------------------------------
