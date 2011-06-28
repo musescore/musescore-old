@@ -35,25 +35,27 @@
 #include "script.h"
 #include "score.h"
 #include "repeatlist.h"
+#include "timesig.h"
 
 Q_DECLARE_METATYPE(PageFormat*);
 Q_DECLARE_METATYPE(Score*);
 Q_DECLARE_METATYPE(Part*);
 Q_DECLARE_METATYPE(Text*);
+Q_DECLARE_METATYPE(TimeSig*);
 
 static const char* const function_names_score[] = {
       "title", "subtitle", "composer", "poet",
       "load", "save",
       "setExpandRepeat", "appendPart", "appendMeasures",
       "pages", "measures", "parts", "part", "startUndo", "endUndo", "setStyle", "hasLyrics", "hasHarmonies",
-      "staves", "keysig", "duration", "pageFormat", "source"
+      "staves", "keysig", "duration", "pageFormat", "source", "timesig"
       };
 static const int function_lengths_score[] = {
       1, 1, 1, 1,
       1, 6,
       1, 1, 1,
       0, 0, 0, 1, 0, 0, 2, 0, 0,
-      0, 1, 0, 0, 1
+      0, 1, 0, 0, 1, 1
       };
 
 static const QScriptValue::PropertyFlags flags_score[] = {
@@ -84,6 +86,7 @@ static const QScriptValue::PropertyFlags flags_score[] = {
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter
       };
 
 ScriptInterface scoreInterface = {
@@ -396,7 +399,6 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                         return qScriptValueFromValue(context->engine(), result);
                         }
                   else if(argc == 1) {
-                        //printf(":::setKeysig\n");
                         int newKey = context->argument(0).toInt32();
                         KeySigEvent ke;
                         ke.setAccidentalType(newKey);
@@ -433,6 +435,26 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                         return context->engine()->undefinedValue();
                   }
                   break;
+            case 23:  // timesig
+                  if (argc == 0) {
+                        TimeSig* t = 0;
+                        Segment* s = 0;
+                        Measure* m = score->firstMeasure();
+                        if (m && (s = m->first(SegTimeSig)))
+                              t = static_cast<TimeSig*>(s->element(0));
+                        return qScriptValueFromValue(context->engine(), t);
+                  }
+                  else if (argc == 1) {
+                      TimeSig* timesig = qscriptvalue_cast<TimeSig*>(context->argument(0));
+                      if (!timesig)
+                            break;
+                      if (timesig->subtype() != 0)
+                          score->replaceTimeSig(0, timesig);
+                      return context->engine()->undefinedValue();
+                  }
+
+                  break;
+
             }
       return context->throwError(QScriptContext::TypeError,
          QString::fromLatin1("Score.%0(): bad argument count or value")

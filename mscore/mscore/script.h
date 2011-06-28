@@ -61,7 +61,7 @@ extern QScriptValue create_Text_class(QScriptEngine* engine);
 extern QScriptValue create_Measure_class(QScriptEngine* engine);
 extern QScriptValue create_Part_class(QScriptEngine* engine);
 extern QScriptValue create_PageFormat_class(QScriptEngine* engine);
-
+extern QScriptValue create_TimeSig_class(QScriptEngine* engine);
 
 #endif
 

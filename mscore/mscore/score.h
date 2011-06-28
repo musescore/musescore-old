@@ -495,6 +495,7 @@ class Score : public QObject {
       void removeElement(Element*);
 
       void addTimeSig(int tick, int keySigSubtype);
+      void insertTimeSig(int tick, TimeSig* ts);
 
       void cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset);
       void cmdAddBSymbol(BSymbol*, const QPointF&, const QPointF&);
@@ -589,6 +590,7 @@ class Score : public QObject {
       bool playlistDirty();
       void setPlaylistDirty(bool val) { _playlistDirty = val; }
       void changeTimeSig(int tick, int st);
+      void replaceTimeSig(int tick, TimeSig* ts);
 
       void cmd(const QAction*);
       int fileDivision(int t) const { return (t * AL::division + _fileDivision/2) / _fileDivision; }
