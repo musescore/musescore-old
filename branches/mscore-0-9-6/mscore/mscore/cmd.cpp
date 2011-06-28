@@ -2257,7 +2257,7 @@ void Score::processMidiInput()
                         else{
                               p = staff(staffIdx)->part();
                               }
-                        if(p)
+                        if(p && mscore->playEnabled())
                               seq->startNote(p->channel(0), ev.pitch, 80, preferences.defaultPlayDuration, 0.0);
                               }
                         else{
