@@ -46,6 +46,7 @@ int main(int argc, char* argv[])
       qmlRegisterType<ScoreView>("MuseScore", 1, 0, "ScoreView");
 
       QDeclarativeView view;
+      view.resize(1040, 780);
       view.setSource(QUrl("qrc:/mplayer.qml"));
       view.show();
 

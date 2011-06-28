@@ -43,14 +43,14 @@ ScoreView::ScoreView(QDeclarativeItem* parent)
       setFlag(QGraphicsItem::ItemHasNoContents, false);
       setSmooth(true);
       score = 0;
-      loadFile("test1.mscx");
+      setScore("test1.mscx");
       }
 
 //---------------------------------------------------------
 //   loadFile
 //---------------------------------------------------------
 
-void ScoreView::loadFile(const QString& name)
+void ScoreView::setScore(const QString& name)
       {
       delete score;
       score = new Score(MScore::defaultStyle());
@@ -103,6 +103,7 @@ void ScoreView::loadFile(const QString& name)
 //      _matrix = QTransform();
 //      _matrix.scale(2.0, 2.0);
 //      imatrix = _matrix.inverted();
+      update();
       }
 
 //---------------------------------------------------------
@@ -113,6 +114,7 @@ void ScoreView::paint(QPainter* painter, const QStyleOptionGraphicsItem*, QWidge
       {
       PainterQt p(painter, this);
 
+      painter->save();
       QRectF fr(boundingRect());
       painter->setClipRect(fr);
       painter->setClipping(true);
@@ -140,6 +142,7 @@ void ScoreView::paint(QPainter* painter, const QStyleOptionGraphicsItem*, QWidge
                   painter->restore();
                   }
             }
+      painter->restore();
       }
 
 #if 0
@@ -319,7 +322,7 @@ const QRectF& ScoreView::getGrip(int) const
 
 const QTransform& ScoreView::matrix() const
       {
-      QTransform t;
+      static const QTransform t;
       return t; // _matrix;
       }
 

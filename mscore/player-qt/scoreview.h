@@ -57,10 +57,10 @@ class ScoreView : public QDeclarativeItem, public MuseScoreView {
    public slots:
       void drag(qreal x, qreal y);
       void startDrag(qreal x, qreal y);
+      void setScore(const QString& s);
 
    public:
       ScoreView(QDeclarativeItem* parent = 0);
-      void loadFile(const QString& s);
       };
 
 
