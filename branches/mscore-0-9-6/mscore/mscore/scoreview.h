@@ -158,6 +158,7 @@ class ScoreView : public QWidget {
       void lyricsUnderscore();
       void harmonyEndEdit();
       void chordTab(bool back);
+      void chordTabTab(bool back);
       void cmdAddPitch(int note, bool addFlag);
       void cmdAddPitch1(int, bool);
       void cmdAddChordName();
