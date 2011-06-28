@@ -391,6 +391,11 @@
                  <string>ti</string>
                 </property>
                </item>
+               <item>
+                <property name="text">
+                 <string>alt. brevis</string>
+                </property>
+               </item>
               </widget>
              </item>
              <item row="3" column="1">
@@ -589,6 +594,24 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>smallCheckBox</tabstop>
+  <tabstop>noStemCheckBox</tabstop>
+  <tabstop>extraLeadingSpace</tabstop>
+  <tabstop>extraTrailingSpace</tabstop>
+  <tabstop>stemDirection</tabstop>
+  <tabstop>noteHeadGroup</tabstop>
+  <tabstop>noteHeadType</tabstop>
+  <tabstop>userMirror</tabstop>
+  <tabstop>tuningSpinBox</tabstop>
+  <tabstop>_veloType</tabstop>
+  <tabstop>velocity</tabstop>
+  <tabstop>_ontimeOffsetType</tabstop>
+  <tabstop>ontimeOffset</tabstop>
+  <tabstop>_offtimeOffsetType</tabstop>
+  <tabstop>offtimeOffset</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
  <resources>
   <include location="mscore.qrc"/>
  </resources>
