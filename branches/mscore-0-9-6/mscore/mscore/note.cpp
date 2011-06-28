@@ -72,6 +72,7 @@ const int noteHeads[2][HEAD_GROUPS][4] = {
       { s0laHeadSym,          s1laHeadSym,         s2laHeadSym,       -1                   },
       { s0tiHeadSym,          d1tiHeadSym,         d2tiHeadSym,       -1                   },
       { s0solHeadSym,         s1solHeadSym,        s2solHeadSym,      -1                   },
+      { wholeheadSym,         halfheadSym,         quartheadSym,      brevisheadaltSym     },
       },
       {     // up stem
       { wholeheadSym,         halfheadSym,         quartheadSym,      brevisheadSym        },
@@ -87,6 +88,7 @@ const int noteHeads[2][HEAD_GROUPS][4] = {
       { s0laHeadSym,          s1laHeadSym,         s2laHeadSym,       -1                   },
       { s0tiHeadSym,          u1tiHeadSym,         u2tiHeadSym,       -1                   },
       { s0solHeadSym,         s1solHeadSym,        s2solHeadSym,      -1                   },
+      { wholeheadSym,         halfheadSym,         quartheadSym,      brevisheadaltSym     },
       }
       };
 
@@ -973,7 +975,7 @@ Element* Note::drop(ScoreView* view, const QPointF& p1, const QPointF& p2, Eleme
                   int group = -1;
 
                   for (int i = 0; i < HEAD_GROUPS; ++i) {
-                        if (noteHeads[0][i][1] == s->sym()) {
+                        if (noteHeads[0][i][1] == s->sym() || noteHeads[0][i][3] == s->sym()) {
                               group = i;
                               break;
                               }

@@ -45,7 +45,8 @@ const char* noteHeadNames[HEAD_GROUPS] = {
       QT_TRANSLATE_NOOP("noteheadnames", "fa"),
       QT_TRANSLATE_NOOP("noteheadnames", "la"),
       QT_TRANSLATE_NOOP("noteheadnames", "ti"),
-      QT_TRANSLATE_NOOP("noteheadnames", "sol")
+      QT_TRANSLATE_NOOP("noteheadnames", "sol"),
+      QT_TRANSLATE_NOOP("noteheadnames", "alt. brevis"),
       };
 
 //---------------------------------------------------------
