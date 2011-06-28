@@ -1,6 +1,8 @@
 28.jun (la)
       - add alternative brevis notehead group (patch by Miwarre)
       - don't play midi note according to preferences (#10024)
+      - change chordnames entry : space goes to the next *beat*/chord/rest, tab 
+            goes to the next measure. Shift space/tab works as well.
 25.jun (lv)
       - fix #11245: MusicXML doesn't save Tempo Text if there's no name
        (la)

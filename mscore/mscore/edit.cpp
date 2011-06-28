@@ -1310,40 +1310,68 @@ void Score::cmdDeleteSelection()
 void ScoreView::chordTab(bool back)
       {
       Harmony* cn      = (Harmony*)editObject;
+      Score* score = cn->score();
       Measure* measure = (Measure*)cn->parent();
-      Segment* segment = measure->tick2segment(cn->tick());
+      Segment* segment = 0;
       int track        = cn->track();
-      if (segment == 0) {
-            printf("chordTab: no segment\n");
-            return;
-            }
-
+      int tick = cn->tick();
+      
       // search next chord
       if (back) {
-            while ((segment = segment->prev1())) {
-                  if (segment->subtype() == SegChordRest)
-                        break;
+           for (segment = measure->last(); segment; segment = segment->prev()) {
+                  if (segment->tick() < tick) {
+                        SegmentType t = SegmentType(segment->subtype());
+                        if (t == SegChordRest)
+                              break;
+                        }
                   }
             }
       else {
-            while ((segment = segment->next1())) {
-                  if (segment->subtype() == SegChordRest)
-                        break;
+            for (segment = measure->first(); segment; segment = segment->next()) {
+                  if (segment->tick() > tick) {
+                        SegmentType t = SegmentType(segment->subtype());
+                        if (t == SegChordRest)
+                              break;
+                        }
                   }
             }
-      if (segment == 0) {
-            printf("no next segment\n");
-            return;
+           
+      
+      //check if beat is closer
+       //get time sig
+       Fraction f = measure->fraction();
+      int beatsPerMeasure = (f.numerator() > 3 && f.numerator() % 3 == 0 && f.denominator() > 4) ? 
+            f.numerator() / 3 : f.numerator(); 
+      
+      int beat = measure->fraction().ticks() / beatsPerMeasure;
+      
+      int newTick = tick;
+      if (back) {
+            newTick = measure->tick()  + (((tick - 1 - measure->tick()) / beat)) * beat;
+            if(segment && segment->tick() > newTick) {
+                  newTick = segment->tick();
+                  }
+            }
+      else {
+            newTick = measure->tick()  + (((tick - measure->tick()) / beat) + 1) * beat;
+            if(newTick > measure->tick() + measure->tickLen()){
+                  chordTabTab(back); // first beat of next measure
+                  }
+            if(segment && segment->tick() < newTick) {
+                  newTick = segment->tick();
+                  }
             }
       endEdit();
+      if(newTick < 0 || newTick >= score->lastMeasure()->tick() + score->lastMeasure()->tickLen())
+            return;
       _score->startCmd();
 
       // search for next chord name
       cn              = 0;
-      measure         = segment->measure();
+      measure         = score->tick2measure(newTick);
       ElementList* el = measure->el();
       foreach(Element* e, *el) {
-            if (e->type() == HARMONY && e->tick() == segment->tick() && e->track() == track) {
+            if (e->type() == HARMONY && e->tick() == newTick && e->track() == track) {
                   cn = static_cast<Harmony*>(e);
                   break;
                   }
@@ -1351,7 +1379,53 @@ void ScoreView::chordTab(bool back)
 
       if (!cn) {
             cn = new Harmony(_score);
-            cn->setTick(segment->tick());
+            cn->setTick(newTick);
+            cn->setTrack(track);
+            cn->setParent(measure);
+            _score->undoAddElement(cn);
+            }
+
+      _score->select(cn, SELECT_SINGLE, 0);
+      startEdit(cn, -1);
+      adjustCanvasPosition(cn, false);
+      ((Harmony*)editObject)->moveCursorToEnd();
+
+      _score->setLayoutAll(true);
+      }
+
+void ScoreView::chordTabTab(bool back)
+      {
+      Harmony* cn      = (Harmony*)editObject;
+      Measure* measure = (Measure*)cn->parent();
+      int track        = cn->track();
+      
+      Measure* m = 0;
+      if(back)
+            m = measure->prevMeasure();
+      else
+            m = measure->nextMeasure();
+            
+      endEdit();
+      if(!m)
+            return;
+            
+      _score->startCmd();
+
+      // search for next chord name
+      int newTick     = m->tick();
+      cn              = 0;
+      measure         = m;
+      ElementList* el = measure->el();
+      foreach(Element* e, *el) {
+            if (e->type() == HARMONY && e->tick() == newTick && e->track() == track) {
+                  cn = static_cast<Harmony*>(e);
+                  break;
+                  }
+            }
+
+      if (!cn) {
+            cn = new Harmony(_score);
+            cn->setTick(newTick);
             cn->setTrack(track);
             cn->setParent(measure);
             _score->undoAddElement(cn);

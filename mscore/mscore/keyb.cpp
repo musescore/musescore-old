@@ -124,6 +124,11 @@ void ScoreView::editKey(QKeyEvent* ev)
                   ev->accept();
                   return;
                   }
+            if (ev->key() == Qt::Key_Tab || ev->key() == Qt::Key_Backtab) {
+                  chordTabTab(ev->key() == Qt::Key_Backtab?true:(modifiers & Qt::ShiftModifier));
+                  ev->accept();
+                  return;
+                  }
             }
       if (!((modifiers & Qt::ShiftModifier) && (key == Qt::Key_Backtab))) {
             if (e->edit(this, curGrip, key, modifiers, s)) {
