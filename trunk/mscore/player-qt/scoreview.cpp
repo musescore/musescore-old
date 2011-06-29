@@ -45,7 +45,7 @@ ScoreView::ScoreView(QDeclarativeItem* parent)
       setFlag(QGraphicsItem::ItemHasNoContents, false);
       setSmooth(true);
       score = 0;
-      setScore("test1.mscx");
+      setScore(":/scores/promenade.mscz");
       }
 
 //---------------------------------------------------------
