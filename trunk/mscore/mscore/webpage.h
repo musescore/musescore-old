@@ -69,6 +69,7 @@ class MyWebView: public QWebView
    public slots:
       void link(const QUrl& url);
       void stopBusyAndClose(bool);
+      void stopBusyAndFirst(bool);
       void stopBusyStatic(bool);
       void setBusy();
    
@@ -78,6 +79,7 @@ class MyWebView: public QWebView
    public:
       MyWebView(QWidget *parent = 0);
       MyWebPage* webPage() {return &m_page;}
+      virtual QSize	sizeHint () const;
       };
 
 //---------------------------------------------------------
