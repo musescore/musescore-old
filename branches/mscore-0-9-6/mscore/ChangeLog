@@ -1,7 +1,11 @@
+29.jun (ws)
+      - fix entry of underline character in lyrics entry mode
+        (for german keyboard press Strg+Umsch+"-", for english Ctrl+"_")
+      - add sctimesig.cpp to CMakeLists.txt source files
 28.jun (la)
       - add alternative brevis notehead group (patch by Miwarre)
       - don't play midi note according to preferences (#10024)
-      - change chordnames entry : space goes to the next *beat*/chord/rest, tab 
+      - change chordnames entry : space goes to the next *beat*/chord/rest, tab
             goes to the next measure. Shift space/tab works as well.
 25.jun (lv)
       - fix #11245: MusicXML doesn't save Tempo Text if there's no name
@@ -120,8 +124,8 @@
       - copy editing for demo scores (usuariomuse)
 13.feb (db)
       - copy editing for demo scores (usuariomuse)
-      
-======== MuseScore 1.0 released ==============      
+
+======== MuseScore 1.0 released ==============
 
 03.feb (la)
       - fix #9040: Dragging note horizontally removes accidental permanently
@@ -132,7 +136,7 @@
       - fix #8974: Rest entry shortcut does not work in Voice 2
       - fix #9002: Reset Position doesn't affect tuplet bracket
       - fix #4975: Parts should have multi-measure rests by default
-      - Update MuseScore.com plugin, better wording & worflow, 
+      - Update MuseScore.com plugin, better wording & worflow,
       easy signout, signout on exit
 30.jan (db)
       - fixed vocal range for bartione and bass (instruments.xml)

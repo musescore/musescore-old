@@ -37,6 +37,12 @@
 #include "staff.h"
 #include "part.h"
 
+#ifdef Q_WS_MAC
+#define CONTROL_MODIFIER Qt::AltModifier
+#else
+#define CONTROL_MODIFIER Qt::ControlModifier
+#endif
+
 //---------------------------------------------------------
 //   Canvas::editKey
 //---------------------------------------------------------
@@ -58,11 +64,7 @@ void ScoreView::editKey(QKeyEvent* ev)
 
       if (e->type() == LYRICS) {
             int found = false;
-#ifdef Q_WS_MAC
-            if (ev->key() == Qt::Key_Space && !(modifiers & Qt::AltModifier)) {
-#else
-		if (ev->key() == Qt::Key_Space && !(modifiers & Qt::ControlModifier)) {
-#endif
+            if (ev->key() == Qt::Key_Space && !(modifiers & CONTROL_MODIFIER)) {
                   // TODO: shift+tab events are filtered by qt
                   lyricsTab(modifiers & Qt::ShiftModifier, true, false);
                   found = true;
@@ -93,21 +95,21 @@ void ScoreView::editKey(QKeyEvent* ev)
                   lyricsReturn();
                   found = true;
                   }
-#ifdef Q_WS_MAC
-            else if (ev->key() == Qt::Key_Minus && !(modifiers & Qt::AltModifier)) {
-#else
-		else if (ev->key() == Qt::Key_Minus && !(modifiers & Qt::ControlModifier)) {
-#endif
+		else if (ev->key() == Qt::Key_Minus && !(modifiers & CONTROL_MODIFIER)) {
                   lyricsMinus();
                   found = true;
                   }
-#ifdef Q_WS_MAC
-		else if (ev->key() == Qt::Key_Underscore && !(modifiers & Qt::AltModifier)) {
-#else
-		else if (ev->key() == Qt::Key_Underscore && !(modifiers & Qt::ControlModifier)) {
-#endif
-                  lyricsUnderscore();
-                  found = true;
+            else if (ev->key() == Qt::Key_Underscore) {
+		      if (modifiers & CONTROL_MODIFIER) {
+                        if (modifiers & CONTROL_MODIFIER) {
+                              modifiers &= ~CONTROL_MODIFIER;
+                              s = "_";
+                              }
+                        else {
+                              lyricsUnderscore();
+                              found = true;
+                              }
+                        }
                   }
             if (found) {
                   ev->accept();
@@ -115,11 +117,7 @@ void ScoreView::editKey(QKeyEvent* ev)
                   }
             }
       if (e->type() == HARMONY) {
-#ifdef Q_WS_MAC
-            if (ev->key() == Qt::Key_Space && !(modifiers & Qt::AltModifier)) {
-#else
-            if (ev->key() == Qt::Key_Space && !(modifiers & Qt::ControlModifier)) {
-#endif
+            if (ev->key() == Qt::Key_Space && !(modifiers & CONTROL_MODIFIER)) {
                   chordTab(modifiers & Qt::ShiftModifier);
                   ev->accept();
                   return;
