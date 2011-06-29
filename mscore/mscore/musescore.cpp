@@ -4492,7 +4492,6 @@ void MuseScore::cmdAddChordName2()
 
 void MuseScore::openExternalLink(const QString& url)
       {
-      printf("URL : %s", qPrintable(url));
       QDesktopServices::openUrl(url);
       }
 

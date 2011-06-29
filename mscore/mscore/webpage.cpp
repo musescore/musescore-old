@@ -135,15 +135,20 @@ void MyWebView::stopBusy(bool val, bool close)
       disconnect(this, SIGNAL(loadProgress(int)), progressBar, SLOT(setValue(int)));
       mscore->hideProgressBar();
       setCursor(Qt::ArrowCursor);
-      if(val) {
-            preferences.firstStartWeb = false;
-            preferences.dirty = true;
-            }
       }
 
 void MyWebView::stopBusyAndClose(bool val)
       {
       stopBusy(val, true);
+      }
+
+void MyWebView::stopBusyAndFirst(bool val)
+      {
+      stopBusy(val, false);
+      if(val && preferences.firstStartWeb) {
+            preferences.firstStartWeb = false;
+            preferences.dirty = true;
+            }
       }
 
 void MyWebView::stopBusyStatic(bool val) 
@@ -176,6 +181,15 @@ void MyWebView::link(const QUrl& url)
             mscore->loadFile(url);
       else
             QDesktopServices::openUrl(url);
+      }
+
+//---------------------------------------------------------
+//   sizeHint
+//---------------------------------------------------------
+      
+QSize	MyWebView::sizeHint() const 
+      {
+      return QSize(300 , 300);
       }
 
 //---------------------------------------------------------
@@ -251,7 +265,7 @@ void WebPageDockWidget::addToJavascript()
 
 void WebPageDockWidget::load()
       {
-      connect(web, SIGNAL(loadFinished(bool)), web, SLOT(stopBusyStatic(bool)));
+      connect(web, SIGNAL(loadFinished(bool)), web, SLOT(stopBusyAndFirst(bool)));
       web->setBusy();
       web->load(QUrl(webUrl()));
       }
