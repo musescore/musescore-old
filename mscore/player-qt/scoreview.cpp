@@ -33,6 +33,8 @@
 #include "libmscore/segment.h"
 #include "libmscore/keysig.h"
 
+#include "seq.h"
+
 //---------------------------------------------------------
 //   ScoreView
 //---------------------------------------------------------
@@ -103,6 +105,8 @@ void ScoreView::setScore(const QString& name)
 //      _matrix = QTransform();
 //      _matrix.scale(2.0, 2.0);
 //      imatrix = _matrix.inverted();
+
+      seq->setScore(score);
       update();
       }
 
@@ -237,7 +241,7 @@ void ScoreView::startDrag(qreal x, qreal y)
 //   zoom
 //---------------------------------------------------------
 
-void ScoreView::zoom(int step, const QPoint& pos)
+void ScoreView::zoom(int /*step*/, const QPoint& /*pos*/)
       {
 #if 0
       QPointF p1 = imatrix.map(QPointF(pos));
@@ -297,14 +301,6 @@ void ScoreView::adjustCanvasPosition(const Element*, bool)
       {
       }
 
-void ScoreView::setScore(Score*)
-      {
-      }
-
-void ScoreView::removeScore()
-      {
-      }
-
 void ScoreView::changeEditElement(Element*)
       {
       }
@@ -334,17 +330,12 @@ void ScoreView::cmdAddSlur(Note*, Note*)
       {
       }
 
-void ScoreView::startEdit()
-      {
-      }
+//---------------------------------------------------------
+//   play
+//---------------------------------------------------------
 
-void ScoreView::startEdit(Element*, int)
+void ScoreView::play()
       {
+      seq->startStop();
       }
-
-Element* ScoreView::elementNear(const QPointF&)
-      {
-      return 0;
-      }
-
 

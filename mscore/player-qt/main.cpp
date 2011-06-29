@@ -18,8 +18,9 @@
 #include "libmscore/mscore.h"
 #include "scoreview.h"
 #include "omr/omr.h"
+#include "seq.h"
 
-bool debugMode = false;
+bool debugMode = true;
 QString revision;
 
 // dummies:
@@ -42,6 +43,11 @@ int main(int argc, char* argv[])
       DPMM = DPI / INCH;          // dots/mm
 
       MScore::init();
+      seq = new Seq;
+      if (!seq->init()) {
+            printf("cannot initialize sequencer\n");
+            exit(-1);
+            }
 
       qmlRegisterType<ScoreView>("MuseScore", 1, 0, "ScoreView");
 
