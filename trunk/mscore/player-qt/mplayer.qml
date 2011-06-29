@@ -199,6 +199,27 @@ Rectangle {
                               }
                         }
                   }
+            Rectangle {
+                  id: playButton
+                  x:      80
+                  width:  buttontext.implicitWidth+8
+                  border.width: 1
+                  smooth: true
+                  height: 20
+                  radius: 4
+                  anchors.verticalCenter: parent.verticalCenter
+                  color: "yellow"
+                  Text {
+                        anchors.centerIn: parent
+                        text: "Play"
+                        }
+                  MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                              scoreview.play()
+                              }
+                        }
+                  }
             }
       }
 

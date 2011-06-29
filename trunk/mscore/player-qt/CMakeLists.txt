@@ -34,6 +34,8 @@ add_executable(mscoreplay
       sparm.cpp
       scoreview.cpp
       painterqt.cpp
+      pa.cpp
+      seq.cpp
       )
 
 target_link_libraries(mscoreplay
@@ -42,6 +44,8 @@ target_link_libraries(mscoreplay
       libmscore
       zarchive
       al
+      m-msynth
+      portaudio
       )
 
 set_target_properties (
