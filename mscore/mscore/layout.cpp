@@ -78,8 +78,9 @@ void Score::rebuildBspTree()
 
       int n = el.size();
       bspTree.initialize(r, n);
-      for (int i = 0; i < n; ++i)
+      for (int i = 0; i < n; ++i) {
             bspTree.insert(el.at(i));
+            }
       }
 
 //---------------------------------------------------------
