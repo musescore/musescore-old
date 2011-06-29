@@ -100,15 +100,13 @@ void ScoreView::editKey(QKeyEvent* ev)
                   found = true;
                   }
             else if (ev->key() == Qt::Key_Underscore) {
-		      if (modifiers & CONTROL_MODIFIER) {
-                        if (modifiers & CONTROL_MODIFIER) {
-                              modifiers &= ~CONTROL_MODIFIER;
-                              s = "_";
-                              }
-                        else {
-                              lyricsUnderscore();
-                              found = true;
-                              }
+                  if (modifiers & CONTROL_MODIFIER) {
+                        modifiers &= ~CONTROL_MODIFIER;
+                        s = "_";
+                        }
+                  else {
+                        lyricsUnderscore();
+                        found = true;
                         }
                   }
             if (found) {
