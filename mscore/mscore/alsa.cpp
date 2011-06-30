@@ -677,7 +677,7 @@ void AlsaAudio::alsaLoop()
       float lbuffer[size];
       float rbuffer[size];
       while (runAlsa == 2) {
-            seq->process(size, lbuffer, rbuffer, 1);
+            seq->process(size, lbuffer, rbuffer);
             alsa->write(size, lbuffer, rbuffer);
             }
       alsa->pcmStop();

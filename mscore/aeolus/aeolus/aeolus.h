@@ -101,7 +101,7 @@ class Aeolus : public Synth {
       virtual bool loadSoundFonts(const QStringList&) { return true; }
       virtual QStringList soundFonts() const { return QStringList(); }
 
-      virtual void process(unsigned, float*, float*, int, float);
+      virtual void process(unsigned, float*, float*, float);
       virtual void play(const Event&);
 
       virtual const QList<MidiPatch*>& getPatchInfo() const;

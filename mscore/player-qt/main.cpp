@@ -20,7 +20,7 @@
 #include "omr/omr.h"
 #include "seq.h"
 
-bool debugMode = true;
+bool debugMode = false;
 QString revision;
 
 // dummies:

@@ -552,7 +552,7 @@ void Seq::processMessages()
 //   process
 //---------------------------------------------------------
 
-void Seq::process(unsigned n, float* lbuffer, float* rbuffer, int stride)
+void Seq::process(unsigned n, float* lbuffer, float* rbuffer)
       {
       unsigned frames = n;
       int driverState = driver->getState();
@@ -569,14 +569,8 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer, int stride)
 
       float* l = lbuffer;
       float* r = rbuffer;
-      for (unsigned i = 0; i < n; ++i) {
-            *l = 0;
-            *r = 0;
-            l += stride;
-            r += stride;
-            }
-      l = lbuffer;
-      r = rbuffer;
+      memset(l, 0, sizeof(float) * n);
+      memset(r, 0, sizeof(float) * n);
 
       processMessages();
 
@@ -596,9 +590,9 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer, int stride)
                         printf("%d:  %f - %f\n", playPos.key(), f, playTime);
 						n=0;
                         }
-                  synti->process(n, l, r, stride);
-                  l += n * stride;
-                  r += n * stride;
+                  synti->process(n, l, r);
+                  l += n;
+                  r += n;
                   playTime += double(n)/double(AL::sampleRate);
 
                   frames    -= n;
@@ -606,7 +600,7 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer, int stride)
                   playEvent(playPos.value());
                   }
             if (frames) {
-                  synti->process(frames, l, r, stride);
+                  synti->process(frames, l, r);
                   playTime += double(frames)/double(AL::sampleRate);
                   }
             if (playPos == events.constEnd()) {
@@ -615,7 +609,7 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer, int stride)
                   }
             }
       else {
-            synti->process(frames, l, r, stride);
+            synti->process(frames, l, r);
             }
 
       if (lbuffer == 0 || rbuffer == 0)   // midi only?
@@ -633,7 +627,7 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer, int stride)
             val = fabs(rbuffer[k]);
             if (rv < val)
                   rv = val;
-            k += stride;
+            k++;
             }
       meterValue[0] = lv;
       meterValue[1] = rv;

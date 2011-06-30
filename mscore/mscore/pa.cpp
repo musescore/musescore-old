@@ -44,7 +44,7 @@ int paCallback(const void*, void* out, long unsigned frames,
    const PaStreamCallbackTimeInfo*, PaStreamCallbackFlags, void *)
       {
       float* op = (float*)out;
-      seq->process((unsigned)frames, op, op+1, 2);
+      seq->process((unsigned)frames, op, op+1);
       return 0;
       }
 
@@ -103,7 +103,7 @@ bool Portaudio::init()
 
       out.device           = idx;
       out.channelCount     = 2;
-      out.sampleFormat     = paFloat32;
+      out.sampleFormat     = paFloat32 | paNonInterleaved;
       out.suggestedLatency = 0.100;
       out.hostApiSpecificStreamInfo = 0;
 

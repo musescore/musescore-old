@@ -58,12 +58,12 @@ if (MINGW)
 endif (MINGW)
 
 if (OMR)
-      set(OPENGL FALSE)
+#      set(OPENGL FALSE)
       set(OCR    FALSE) # requires tesseract 3.0
                         # for installation see: http://ubuntuforums.org/showthread.php?t=1647350
 else (OMR)
       set(OCR FALSE)
-      set(OPENGL FALSE)
+#      set(OPENGL FALSE)
 endif (OMR)
 
 if (APPLE)

@@ -365,7 +365,7 @@ int JackAudio::processAudio(jack_nframes_t frames, void* p)
                         }
                   }
             }
-      audio->seq->process((unsigned)frames, l, r, 1);
+      audio->seq->process((unsigned)frames, l, r);
       return 0;
       }
 

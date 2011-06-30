@@ -3095,6 +3095,7 @@ void ScoreView::cmd(const QAction* a)
 
 void ScoreView::showOmr(bool flag)
       {
+printf("showOmr %d\n", flag);
       _score->setShowOmr(flag);
       ScoreTab* t = mscore->getTab1();
       if (t->view() != this)
