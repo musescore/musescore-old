@@ -636,7 +636,7 @@ void Score::layoutStage2()
       foreach (Beam* beam, _beams) {
             if (beam->elements().isEmpty()) {
                   remove(beam);
-                  delete beam;
+                  //delete beam;  // can be in selection or in undo stack ...
                   }
             }
       }

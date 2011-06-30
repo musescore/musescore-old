@@ -1979,7 +1979,7 @@ void Score::removeChordRest(ChordRest* cr, bool clearSegment)
             Beam* beam = cr->beam();
             if (beam->generated()) {
                   beam->parent()->remove(beam);
-                  delete beam;
+                  //delete beam; // can be in selection or in undo stack ...
                   }
             else {
                   undoRemoveElement(beam);
