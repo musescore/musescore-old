@@ -63,7 +63,7 @@ class Synth {
 
       virtual QStringList soundFonts() const = 0;
 
-      virtual void process(unsigned, float*, float*, int, float) = 0;
+      virtual void process(unsigned, float*, float*, float) = 0;
       virtual void play(const Event&) = 0;
 
       virtual const QList<MidiPatch*>& getPatchInfo() const = 0;
@@ -94,7 +94,7 @@ class MasterSynth {
       ~MasterSynth();
       void init(int sampleRate);
 
-      void process(unsigned, float*, float*, int);
+      void process(unsigned, float*, float*);
       void play(const Event&, int);
 
       double gain() const     { return _gain; }

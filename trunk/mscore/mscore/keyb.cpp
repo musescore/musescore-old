@@ -58,52 +58,58 @@ void ScoreView::editKey(QKeyEvent* ev)
       bool ctrl                       = modifiers == Qt::ControlModifier;
 
       if (debugMode)
-            printf("keyPressEvent key 0x%02x mod 0x%04x <%s>\n",
-               key, int(modifiers), qPrintable(s));
+            printf("keyPressEvent key 0x%02x(%c) mod 0x%04x <%s>\n",
+               key, key, int(modifiers), qPrintable(s));
 
       if (!editObject)
             return;
 
       if (editObject->type() == LYRICS) {
             int found = false;
-		if (ev->key() == Qt::Key_Space && !(modifiers & CONTROL_MODIFIER)) {
+		if (key == Qt::Key_Space && !(modifiers & CONTROL_MODIFIER)) {
                   // TODO: shift+tab events are filtered by qt
                   lyricsTab(modifiers & Qt::ShiftModifier, true, false);
                   found = true;
                   }
-            else if (ev->key() == Qt::Key_Left) {
+            else if (key == Qt::Key_Left) {
                   if (!ctrl && editObject->edit(this, curGrip, key, modifiers, s))
                         _score->end();
                   else
                         lyricsTab(true, true, true);      // go to previous lyrics
                   found = true;
                   }
-            else if (ev->key() == Qt::Key_Right) {
+            else if (key == Qt::Key_Right) {
                   if (!ctrl && editObject->edit(this, curGrip, key, modifiers, s))
                         _score->end();
                   else
                         lyricsTab(false, false, true);    // go to next lyrics
                   found = true;
                   }
-            else if (ev->key() == Qt::Key_Up) {
+            else if (key == Qt::Key_Up) {
                   lyricsUpDown(true, true);
                   found = true;
                   }
-            else if (ev->key() == Qt::Key_Down) {
+            else if (key == Qt::Key_Down) {
                   lyricsUpDown(false, true);
                   found = true;
                   }
-            else if (ev->key() == Qt::Key_Return) {
+            else if (key == Qt::Key_Return) {
                   lyricsReturn();
                   found = true;
                   }
-		else if (ev->key() == Qt::Key_Minus && !(modifiers & CONTROL_MODIFIER)) {
+		else if (key == Qt::Key_Minus && !(modifiers & CONTROL_MODIFIER)) {
                   lyricsMinus();
                   found = true;
                   }
-		else if (ev->key() == Qt::Key_Underscore && !(modifiers & CONTROL_MODIFIER)) {
-                  lyricsUnderscore();
-                  found = true;
+		else if (key == Qt::Key_Underscore) {
+                  if (modifiers & CONTROL_MODIFIER) {
+                        modifiers &= ~CONTROL_MODIFIER;
+                        s = "_";
+                        }
+                  else {
+                        lyricsUnderscore();
+                        found = true;
+                        }
                   }
             if (found) {
                   ev->accept();
@@ -111,7 +117,7 @@ void ScoreView::editKey(QKeyEvent* ev)
                   }
             }
       if (editObject->type() == HARMONY) {
-            if (ev->key() == Qt::Key_Space && !(modifiers & CONTROL_MODIFIER)) {
+            if (key == Qt::Key_Space && !(modifiers & CONTROL_MODIFIER)) {
                   chordTab(modifiers & Qt::ShiftModifier);
                   ev->accept();
                   return;
@@ -124,7 +130,7 @@ void ScoreView::editKey(QKeyEvent* ev)
                   _score->end();
                   return;
                   }
-            if (editObject->isText() && (ev->key() == Qt::Key_Left || ev->key() == Qt::Key_Right)) {
+            if (editObject->isText() && (key == Qt::Key_Left || key == Qt::Key_Right)) {
                   ev->accept();
                   _score->end();
                   //return;
@@ -152,7 +158,7 @@ void ScoreView::editKey(QKeyEvent* ev)
             }
       // TODO: if raster, then xval/yval should be multiple of raster
 
-      switch (ev->key()) {
+      switch (key) {
             case Qt::Key_Left:
                   delta = QPointF(-xval, 0);
                   break;

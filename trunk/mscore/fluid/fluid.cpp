@@ -482,7 +482,7 @@ void Fluid::program_reset()
 //   process
 //---------------------------------------------------------
 
-void Fluid::process(unsigned len, float* lout, float* rout, int stride, float gain)
+void Fluid::process(unsigned len, float* lout, float* rout, float gain)
       {
       const int byte_size = len * sizeof(float);
 
@@ -507,10 +507,8 @@ void Fluid::process(unsigned len, float* lout, float* rout, int stride, float ga
             mutex.unlock();
             }
       for (unsigned i = 0; i < len; i++) {
-            *lout += gain * left_buf[i];
-            *rout += gain * right_buf[i];
-            lout += stride;
-            rout += stride;
+            *lout++ += gain * left_buf[i];
+            *rout++ += gain * right_buf[i];
             }
       }
 

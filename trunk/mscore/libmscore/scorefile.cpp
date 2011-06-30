@@ -653,7 +653,7 @@ bool Score::loadCompressedMsc(QString name)
                         QImage image;
                         if (image.loadFromData(dbuf.data(), "PNG")) {
                               page->setImage(image);
-                              // printf("read image %s\n", qPrintable(path));
+printf("read image %s\n", qPrintable(path));
                               }
                         else
                               printf("load image failed\n");
@@ -1245,7 +1245,7 @@ void Score::connectSlurs()
 void Score::print(Painter* painter, int pageNo)
       {
       _printing  = true;
-      int offset = pageNumberOffset();
+//      int offset = pageNumberOffset();
       Page* page = pages().at(pageNo);
       QRectF fr  = page->abbox();
 

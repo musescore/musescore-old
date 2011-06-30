@@ -113,7 +113,6 @@ bool Score::saveAudio(const QString& name, const QString& ext, QString soundFont
 
             static const unsigned FRAMES = 512;
             float buffer[FRAMES * 2];
-            int stride      = 2;
             double playTime = 0.0;
             synti->setGain(gain);
 
@@ -131,10 +130,10 @@ bool Score::saveAudio(const QString& name, const QString& ext, QString soundFont
                         if (f >= endTime)
                               break;
                         int n = lrint((f - playTime) * sampleRate);
-                        synti->process(n, l, r, stride);
+                        synti->process(n, l, r);
 
-                        l         += n * stride;
-                        r         += n * stride;
+                        l         += n;
+                        r         += n;
                         playTime += double(n)/double(sampleRate);
                         frames    -= n;
                         const Event& e = playPos.value();
@@ -147,7 +146,7 @@ bool Score::saveAudio(const QString& name, const QString& ext, QString soundFont
                               }
                         }
                   if (frames) {
-                        synti->process(frames, l, r, stride);
+                        synti->process(frames, l, r);
                         playTime += double(frames)/double(sampleRate);
                         }
                   if (pass == 1) {

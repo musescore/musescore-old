@@ -164,7 +164,7 @@ class Seq : public QObject {
       bool isStopped() const    { return state == TRANSPORT_STOP; }
 
       void processMessages();
-      void process(unsigned, float*, float*, int stride);
+      void process(unsigned, float*, float*);
       QList<QString> inputPorts();
       int getEndTick() const    { return endTick;  }
       bool isRealtime() const   { return true;     }

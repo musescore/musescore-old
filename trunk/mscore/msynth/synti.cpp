@@ -68,8 +68,6 @@ void MasterSynth::init(int sampleRate)
       bool useAlsaFlag      = preferences.useAlsaAudio;
       bool usePortaudioFlag = preferences.usePortaudioAudio;
 
-printf("MasterSynth::init\n");
-
       if (useJackFlag || useAlsaFlag || usePortaudioFlag) {
             syntis.append(new FluidS::Fluid());
 #ifdef AEOLUS
@@ -95,11 +93,11 @@ printf("MasterSynth::init\n");
 //   process
 //---------------------------------------------------------
 
-void MasterSynth::process(unsigned n, float* l, float* r, int stride)
+void MasterSynth::process(unsigned n, float* l, float* r)
       {
       foreach(Synth* s, syntis) {
             if (s->active())
-                  s->process(n, l, r, stride, _gain);
+                  s->process(n, l, r, _gain);
             }
       }
 
