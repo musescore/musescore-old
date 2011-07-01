@@ -64,6 +64,7 @@ class ChordStyleEditor;
 class UndoGroup;
 class Navigator;
 class LanguageItem;
+class WebPageDockWidget;
 
 extern QString mscoreGlobalShare;
 static const int PROJECT_LIST_LEN = 6;
@@ -219,6 +220,7 @@ class MuseScore : public QMainWindow {
       QToolBar* entryTools;
       TextTools* _textTools;
       QToolBar* voiceTools;
+      WebPageDockWidget* _webPage;
       InstrumentsDialog* instrList;
       MeasuresDialog* measuresDialog;
       InsertMeasuresDialog* insertMeasuresDialog;
@@ -231,6 +233,8 @@ class MuseScore : public QMainWindow {
 
       QWidget* searchDialog;
       QComboBox* searchCombo;
+      
+      QNetworkAccessManager* networkManager;
 
       PlayPanel* playPanel;
       InstrumentListEditor* iledit;
@@ -351,6 +355,7 @@ class MuseScore : public QMainWindow {
       void endSearch();
       void closeSynthControl();
       void loadPluginDir(const QString& pluginPath);
+      void networkFinished(QNetworkReply*);
 
    public slots:
       void dirtyChanged(Score*);
@@ -422,7 +427,17 @@ class MuseScore : public QMainWindow {
       bool readLanguages(const QString& path);
       void setRevision(QString& r){rev = r;}
       QString revision(){return rev;}
-      void newFile();
+      
+      void showWebPanel(bool on);
+      
+      Q_INVOKABLE void newFile();
+      Q_INVOKABLE void loadFile(const QString& url);
+      void loadFile(const QUrl&);
+      
+      Q_INVOKABLE void openExternalLink(const QString&);
+      Q_INVOKABLE void closeWebPanelPermanently();
+      Q_INVOKABLE QString getLocaleISOCode();
+      
       bool hasToCheckForUpdate();
       static bool unstable();
       bool eventFilter(QObject *, QEvent *);

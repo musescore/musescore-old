@@ -118,6 +118,10 @@
 
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
+#include <QtNetwork/QNetworkCookieJar>
+
+#include <QtWebKit/QWebView>
+#include <QtWebKit/QWebFrame>
 
 #include <QtScript/QScriptEngine>
 #include <QtScript/QScriptValueIterator>

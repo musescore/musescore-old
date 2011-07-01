@@ -137,8 +137,8 @@ void Preferences::init()
       rPort              = "";
       showNavigator      = true;
       showPlayPanel      = false;
+      showWebPanel       = true;
       showStatusBar      = true;
-      playPanelPos       = QPoint(100, 300);
 
 #if defined(Q_WS_MAC) || defined(__MINGW32__)
       useAlsaAudio       = false;
@@ -210,7 +210,7 @@ void Preferences::init()
       tuning                  = 440.0f;
       masterGain              = 0.2;
       chorusGain              = 0.5;
-      reverbGain              = 0.5;
+      reverbGain              = 0.2;
       reverbRoomSize          = 0.5;
       reverbDamp              = 0.5;
       reverbWidth             = 1.0;
@@ -222,6 +222,8 @@ void Preferences::init()
 
       //update
       checkUpdateStartup      = 0;
+      
+      firstStartWeb = true;
       };
 
 //---------------------------------------------------------
@@ -254,6 +256,7 @@ void Preferences::write()
       s.setValue("rPort",              rPort);
       s.setValue("showNavigator",      showNavigator);
       s.setValue("showPlayPanel",      showPlayPanel);
+      s.setValue("showWebPanel",       showWebPanel);
       s.setValue("showStatusBar",      showStatusBar);
 
       s.setValue("useAlsaAudio",       useAlsaAudio);
@@ -322,13 +325,11 @@ void Preferences::write()
       s.setValue("importCharset", importCharset);
       s.setValue("warnPitchRange", warnPitchRange);
       s.setValue("followSong", followSong);
+      
+      s.setValue("firstStartWeb", firstStartWeb);
 
       //update
       s.setValue("checkUpdateStartup", checkUpdateStartup);
-
-      s.beginGroup("PlayPanel");
-      s.setValue("pos", playPanelPos);
-      s.endGroup();
 
       writeShortcuts();
       }
@@ -369,6 +370,7 @@ void Preferences::read()
       showNavigator   = s.value("showNavigator", true).toBool();
       showStatusBar   = s.value("showStatusBar", true).toBool();
       showPlayPanel   = s.value("showPlayPanel", false).toBool();
+      showWebPanel    = s.value("showWebPanel", showWebPanel).toBool();
 
 #if defined(Q_WS_MAC) || defined(__MINGW32__)
       useAlsaAudio       = s.value("useAlsaAudio", false).toBool();
@@ -423,7 +425,7 @@ void Preferences::read()
       tuning                 = s.value("tuning", 440.0).toDouble();
       masterGain             = s.value("masterGain", 0.2).toDouble();
       chorusGain             = s.value("chorusGain", 0.5).toDouble();
-      reverbGain             = s.value("reverbGain", 0.5).toDouble();
+      reverbGain             = s.value("reverbGain", 0.2).toDouble();
       reverbRoomSize         = s.value("reverbRoomSize", 0.5).toDouble();
       reverbDamp             = s.value("reverbDamp", 0.5).toDouble();
       reverbWidth            = s.value("reverbWidth", 1.0).toDouble();
@@ -433,6 +435,8 @@ void Preferences::read()
       importCharset          = s.value("importCharset", "GBK").toString();
       warnPitchRange         = s.value("warnPitchRange", true).toBool();
       followSong             = s.value("followSong", true).toBool();
+      
+      firstStartWeb = s.value("firstStartWeb", true).toBool();
 
       checkUpdateStartup = s.value("checkUpdateStartup", UpdateChecker::defaultPeriod()).toInt();
       if (checkUpdateStartup == 0){
@@ -451,10 +455,6 @@ void Preferences::read()
 
       startScore     = s.value("startScore", ":/data/Promenade_Example.mscx").toString();
       instrumentList = s.value("instrumentList", ":/data/instruments.xml").toString();
-
-      s.beginGroup("PlayPanel");
-      playPanelPos = s.value("pos", QPoint(100, 300)).toPoint();
-      s.endGroup();
 
       readShortcuts();
       }
@@ -516,7 +516,6 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       connect(workingDirectoryButton, SIGNAL(clicked()), SLOT(selectWorkingDirectory()));
       connect(instrumentListButton,   SIGNAL(clicked()), SLOT(selectInstrumentList()));
       connect(startWithButton,        SIGNAL(clicked()), SLOT(selectStartWith()));
-      connect(playPanelCur, SIGNAL(clicked()), SLOT(playPanelCurClicked()));
       connect(shortcutList, SIGNAL(itemActivated(QTreeWidgetItem*, int)), SLOT(defineShortcutClicked()));
       connect(resetShortcut, SIGNAL(clicked()), SLOT(resetShortcutClicked()));
       connect(clearShortcut, SIGNAL(clicked()), SLOT(clearShortcutClicked()));
@@ -591,8 +590,7 @@ void PreferenceDialog::updateValues(Preferences* p)
 
       navigatorShow->setChecked(p->showNavigator);
       playPanelShow->setChecked(p->showPlayPanel);
-      playPanelX->setValue(p->playPanelPos.x());
-      playPanelY->setValue(p->playPanelPos.y());
+      webPanelShow->setChecked(p->showWebPanel);
 
       alsaDriver->setChecked(p->useAlsaAudio);
       jackDriver->setChecked(p->useJackAudio);
@@ -1043,7 +1041,8 @@ void PreferenceDialog::apply()
             }
       preferences.showNavigator      = navigatorShow->isChecked();
       preferences.showPlayPanel      = playPanelShow->isChecked();
-      preferences.playPanelPos       = QPoint(playPanelX->value(), playPanelY->value());
+      preferences.showWebPanel       = webPanelShow->isChecked();
+
       preferences.antialiasedDrawing = drawAntialiased->isChecked();
 
       if (
@@ -1190,20 +1189,6 @@ void PreferenceDialog::apply()
                   }
             }
       mscore->startAutoSave();
-      }
-
-//---------------------------------------------------------
-//   playPanelCurClicked
-//---------------------------------------------------------
-
-void PreferenceDialog::playPanelCurClicked()
-      {
-      PlayPanel* w = mscore->getPlayPanel();
-      if (w == 0)
-            return;
-      QPoint s(w->pos());
-      playPanelX->setValue(s.x());
-      playPanelY->setValue(s.y());
       }
 
 //---------------------------------------------------------

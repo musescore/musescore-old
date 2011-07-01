@@ -62,8 +62,8 @@ struct Preferences {
       QString rPort;            // audio port right
       bool showNavigator;
       bool showPlayPanel;
+      bool showWebPanel;
       bool showStatusBar;
-      QPoint playPanelPos;
 
       bool useAlsaAudio;
       bool useJackAudio;
@@ -128,6 +128,8 @@ struct Preferences {
       bool warnPitchRange;
       bool followSong;
 
+      bool firstStartWeb;
+
       bool dirty;
 
       Preferences();
@@ -173,7 +175,6 @@ class PreferenceDialog : public QDialog, private Ui::PrefsDialogBase {
       void selectWorkingDirectory();
       void selectInstrumentList();
       void selectStartWith();
-      void playPanelCurClicked();
       void resetShortcutClicked();
       void clearShortcutClicked();
       void defineShortcutClicked();
