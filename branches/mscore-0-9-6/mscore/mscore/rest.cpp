@@ -33,6 +33,7 @@
 #include "note.h"
 #include "measure.h"
 #include "undo.h"
+#include "staff.h"
 
 //---------------------------------------------------------
 //    Rest
@@ -325,7 +326,8 @@ void Rest::layout()
       {
       double _spatium = spatium();
       int line = lrint(userOff().y() / _spatium);
-
+      int lines = staff()->lines();
+      
       setYoff(2.0);
       switch(duration().type()) {
             case Duration::V_LONG:
@@ -337,7 +339,8 @@ void Rest::layout()
             case Duration::V_MEASURE:
             case Duration::V_WHOLE:
                   _sym = (line <= -2 || line >= 4) ? outsidewholerestSym : wholerestSym;
-                  setYoff(1.0);
+                  if(lines != 1 && lines != 3)
+                        setYoff(1.0);
                   break;
             case Duration::V_HALF:
                   _sym = (line <= -3 || line >= 3) ? outsidehalfrestSym : halfrestSym;

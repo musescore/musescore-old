@@ -3,6 +3,7 @@
       - implement MuseScore Connect
       - reduce default reverb gain from 0.5 to 0.2
       - open MuseScore maximize on very first startup
+      - fix rest position for 1 and 3 staff lines
 30.jun (la)
       - fix #11267: Shift + drag tuplet, delete, undo cause crash 
 29.jun (ws)
