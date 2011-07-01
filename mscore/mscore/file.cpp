@@ -1373,6 +1373,8 @@ bool MuseScore::savePsPdf(const QString& saveName, QPrinter::OutputFormat format
       {
       PageFormat* pf = cs->pageFormat();
       QPrinter printerDev(QPrinter::HighResolution);
+printf("Resolution %d\n", printerDev.resolution());
+
       if (paperSizes[pf->size].qtsize >= int(QPrinter::Custom)) {
             printerDev.setPaperSize(QSizeF(pf->_width, pf->_height),
                QPrinter::Inch);
