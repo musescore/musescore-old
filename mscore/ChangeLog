@@ -1,3 +1,5 @@
+1.jul  (la)
+      - fix printing of images (fix #10140: Save as PDF with several images causes crash)
 30.jun (la)
       - fix #11267: Shift + drag tuplet, delete, undo cause crash 
 29.jun (ws)

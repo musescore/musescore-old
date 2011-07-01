@@ -273,15 +273,22 @@ RasterImage* RasterImage::clone() const
 void RasterImage::draw(QPainter& p) const
       {
       p.save();
-      QTransform t = p.worldTransform();
-      QSize s = QSizeF(sz.width() * t.m11(), sz.height() * t.m22()).toSize();
-      t.setMatrix(1.0, t.m12(), t.m13(), t.m21(), 1.0, t.m23(), t.m31(), t.m32(), t.m33());
-      p.setWorldTransform(t);
-      if (buffer.size() != s || _dirty) {
-            buffer = QPixmap::fromImage(doc.scaled(s, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
-            _dirty = false;
+      if (score()->printing()) {
+            // use original image size for printing
+            p.scale(sz.width() / doc.width(), sz.height() / doc.height());
+            p.drawPixmap(0, 0, QPixmap::fromImage(doc));
             }
-      Image::draw(p);
+      else {
+            QTransform t = p.worldTransform();
+            QSize s = QSizeF(sz.width() * t.m11(), sz.height() * t.m22()).toSize();
+            t.setMatrix(1.0, t.m12(), t.m13(), t.m21(), 1.0, t.m23(), t.m31(), t.m32(), t.m33());
+            p.setWorldTransform(t);
+            if (buffer.size() != s || _dirty) {
+                  buffer = QPixmap::fromImage(doc.scaled(s, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+                  _dirty = false;
+                  }
+            Image::draw(p);
+            }
       p.restore();
       }
 
