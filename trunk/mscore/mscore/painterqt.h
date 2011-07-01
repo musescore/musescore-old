@@ -34,6 +34,7 @@ class PainterQt : public Painter {
 
       virtual void translate(const QPointF& pt) { _painter->translate(pt); }
       virtual void scale(qreal v)               { _painter->scale(v, v);   }
+      virtual void scale(qreal v, qreal w)      { _painter->scale(v, w);   }
       virtual void rotate(qreal v)              { _painter->rotate(v);     }
 
       virtual void setFont(const QFont& f)      { _painter->setFont(f);    }
