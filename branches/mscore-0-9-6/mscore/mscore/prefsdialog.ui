@@ -264,7 +264,7 @@
         </widget>
        </item>
        <item row="2" column="0">
-        <widget class="QGroupBox" name="groupBox">
+        <widget class="QGroupBox" name="webPanelShow">
          <property name="title">
           <string>Windows</string>
          </property>
@@ -279,57 +279,23 @@
            <number>3</number>
           </property>
           <item row="0" column="0">
-           <widget class="QLabel" name="label_17">
-            <property name="text">
-             <string>Play Panel:</string>
-            </property>
-            <property name="textFormat">
-             <enum>Qt::PlainText</enum>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
            <widget class="QCheckBox" name="playPanelShow">
             <property name="text">
-             <string>show</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="2">
-           <widget class="QSpinBox" name="playPanelX">
-            <property name="maximum">
-             <number>9999</number>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="3">
-           <widget class="QSpinBox" name="playPanelY">
-            <property name="maximum">
-             <number>9999</number>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="4">
-           <widget class="QToolButton" name="playPanelCur">
-            <property name="text">
-             <string>Use Current Position</string>
+             <string>Show Play Panel</string>
             </property>
            </widget>
           </item>
           <item row="1" column="0">
-           <widget class="QLabel" name="label_19">
+           <widget class="QCheckBox" name="navigatorShow">
             <property name="text">
-             <string>Navigator:</string>
-            </property>
-            <property name="textFormat">
-             <enum>Qt::PlainText</enum>
+             <string>Show Navigator</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="1">
-           <widget class="QCheckBox" name="navigatorShow">
+          <item row="0" column="1">
+           <widget class="QCheckBox" name="checkBox">
             <property name="text">
-             <string>show</string>
+             <string>Show MuseScore Connect</string>
             </property>
            </widget>
           </item>

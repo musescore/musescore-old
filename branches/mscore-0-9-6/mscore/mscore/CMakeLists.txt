@@ -103,7 +103,7 @@ QT4_WRAP_CPP (mocs
       text.h sccursor.h dynamics.h undo.h textproperties.h
       slurproperties.h select.h synthcontrol.h drumroll.h pianoroll.h piano.h ruler.h
       pianoscene.h splitstaff.h scoretab.h keyedit.h keycanvas.h harmonyedit.h
-      harmonycanvas.h updatechecker.h
+      harmonycanvas.h updatechecker.h webpage.h
       )
 
 QT4_ADD_RESOURCES (qrc_files mscore.qrc)
@@ -177,7 +177,7 @@ add_executable ( ${ExecutableName}
       harmony.cpp chordedit.cpp plugins.cpp tempotext.cpp
       excerptsdialog.cpp excerpt.cpp stafftext.cpp instrument.cpp durationtype.cpp
       event.cpp rendermidi.cpp articulation.cpp metaedit.cpp
-      fifo.cpp spacer.cpp magbox.cpp voiceselector.cpp capella.cpp
+      fifo.cpp spacer.cpp magbox.cpp voiceselector.cpp capella.cpp webpage.cpp
       scscore.cpp sccursor.cpp scchord.cpp scnote.cpp scpart.cpp sctext.cpp scmeasure.cpp scpageformat.cpp
       exportaudio.cpp repeatlist.cpp velo.cpp exportmidi.cpp textproperties.cpp
       screst.cpp scharmony.cpp slurproperties.cpp synthcontrol.cpp
@@ -259,6 +259,8 @@ if (MINGW)
       ${CROSSQT}/bin/QtScript4.dll
       ${CROSSQT}/bin/QtScriptTools4.dll
       ${CROSSQT}/bin/QtNetwork4.dll
+      ${CROSSQT}/bin/QtWebKit4.dll
+      ${CROSSQT}/bin/phonon4.dll
       )
    install_files ( /bin/iconengines .dll
       ${CROSSQT}/plugins/iconengines/qsvgicon4.dll

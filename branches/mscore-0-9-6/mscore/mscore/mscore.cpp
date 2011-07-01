@@ -60,6 +60,7 @@
 #include "keyedit.h"
 #include "harmonyedit.h"
 #include "navigator.h"
+#include "webpage.h"
 
 #ifdef STATIC_SCRIPT_BINDINGS
 Q_IMPORT_PLUGIN(com_trolltech_qt_gui_ScriptPlugin)
@@ -267,7 +268,8 @@ void MuseScore::closeEvent(QCloseEvent* ev)
       ev->accept();
       if (preferences.dirty)
             preferences.write();
-
+      
+      delete this;
       qApp->quit();
       }
 
@@ -378,6 +380,9 @@ MuseScore::MuseScore()
       _splitScreen          = false;
       _horizontalSplit      = true;
       chordStyleEditor      = 0;
+      _webPage              = 0;
+      
+      networkManager        = 0;
       
       lastSaveCopyDirectory = "";
       lastSaveDirectory     = "";
@@ -488,8 +493,8 @@ MuseScore::MuseScore()
       fileTools->addAction(getAction("file-new"));
       fileTools->addAction(getAction("file-open"));
       fileTools->addAction(getAction("file-save"));
-
       fileTools->addAction(getAction("print"));
+      fileTools->addAction(getAction("musescore-connect"));
       fileTools->addSeparator();
 
       a = getAction("undo");
@@ -785,6 +790,10 @@ MuseScore::MuseScore()
       a = getAction("synth-control");
       a->setCheckable(true);
       menuDisplay->addAction(a);
+      
+      a = getAction("musescore-connect");
+      a->setCheckable(true);
+      menuDisplay->addAction(a);
 
       menuDisplay->addSeparator();
       menuDisplay->addAction(getAction("zoomin"));
@@ -880,17 +889,28 @@ void MuseScore::startAutoSave()
       }
 
 //---------------------------------------------------------
-//   helpBrowser
-//    show local help
+//   getLocaleISOCode
 //---------------------------------------------------------
 
-void MuseScore::helpBrowser()
+QString MuseScore::getLocaleISOCode()
       {
       QString lang;
       if (localeName.toLower() == "system")
             lang = QLocale::system().name();
       else
             lang = localeName;
+      return lang;
+      }
+
+//---------------------------------------------------------
+//   helpBrowser
+//    show local help
+//---------------------------------------------------------
+
+void MuseScore::helpBrowser()
+      {
+      QString lang = getLocaleISOCode();
+
       if (debugMode)
             printf("open handbook for language <%s>\n", qPrintable(lang));
 
@@ -927,11 +947,8 @@ void MuseScore::helpBrowser()
 
 void MuseScore::helpBrowser1()
       {
-      QString lang;
-      if (localeName.toLower() == "system")
-            lang = QLocale::system().name();
-      else
-            lang = localeName;
+      QString lang = getLocaleISOCode();
+      
       if (debugMode)
             printf("open online handbook for language <%s>\n", qPrintable(lang));
       QString help("http://www.musescore.org/en/handbook");
@@ -1298,7 +1315,6 @@ void MuseScore::showPlayPanel(bool visible)
 
             playPanel->setVolume(seq->masterVolume());
             playPanel->setScore(cs);
-            playPanel->move(preferences.playPanelPos);
             }
       playPanel->setVisible(visible);
       playId->setChecked(visible);
@@ -1970,6 +1986,9 @@ int main(int argc, char* av[])
             mscore->readSettings();
             QObject::connect(qApp, SIGNAL(messageReceived(const QString&)),
                mscore, SLOT(handleMessage(const QString&)));
+             
+            mscore->showWebPanel(preferences.showWebPanel);
+                           
             static_cast<QtSingleApplication*>(qApp)->setActivationWindow(mscore, false);
             int files = 0;
             foreach(const QString& name, argv) {
@@ -2228,6 +2247,8 @@ void MuseScore::cmd(QAction* a)
             showMixer(a->isChecked());
       else if (cmd == "synth-control")
             showSynthControl(a->isChecked());
+      else if (cmd == "musescore-connect")
+            showWebPanel(a->isChecked());
       else if (cmd == "show-keys")
             ;
       else if (cmd == "toggle-transport")
@@ -2525,7 +2546,7 @@ void MuseScore::readSettings()
       mainWindow->restoreState(settings.value("inspectorSplitter").toByteArray());
       settings.setValue("inspectorSplitter", mainWindow->saveState());
       move(settings.value("pos", QPoint(10, 10)).toPoint());
-      if (settings.value("maximized", false).toBool())
+      if (settings.value("maximized", true).toBool())
             showMaximized();
       mscore->showPalette(settings.value("showPanel", "1").toBool());
       restoreState(settings.value("state").toByteArray());
@@ -3128,6 +3149,71 @@ const char* stateName(ScoreState s)
       }
 
 //---------------------------------------------------------
+//   networkFinished
+//---------------------------------------------------------
+
+void MuseScore::networkFinished(QNetworkReply* reply)
+      {
+      if (reply->error() != QNetworkReply::NoError) {
+            printf("Error while checking update [%s]\n", qPrintable(reply->errorString()));
+            return;
+            }
+      QByteArray ha = reply->rawHeader("Content-Disposition");
+      QString s(ha);
+      QString name;
+      QRegExp re(".*filename=\"(.*)\"");
+      if (s.isEmpty() || re.indexIn(s) == -1)
+            name = "unknown.mscz";
+      else
+            name = re.cap(1);
+
+      // attachment; filename="Bilder_einer_Ausstellung.mscz"
+
+      printf("header <%s>\n", qPrintable(s));
+      printf("name <%s>\n", qPrintable(name));
+
+      QByteArray data = reply->readAll();
+      QString tmpName = "/tmp/" + name;
+      QFile f(tmpName);
+      f.open(QIODevice::WriteOnly);
+      f.write(data);
+      f.close();
+
+      Score* score = new Score(defaultStyle);
+      if(!score->read(tmpName)) {
+            printf("readScore failed\n");
+            delete score;
+            return;
+            }
+           
+      score->setCreated(true);
+      score->setDirty(true);
+      setCurrentScoreView(appendScore(score));
+      lastOpenPath = score->fileInfo()->path();
+      writeSessionFile(false);
+      }
+
+//---------------------------------------------------------
+//   loadFile
+//    load file from url
+//---------------------------------------------------------
+
+void MuseScore::loadFile(const QString& s)
+      {
+      loadFile(QUrl(s));
+      }
+
+void MuseScore::loadFile(const QUrl& url)
+      {
+      if (!networkManager) {
+            networkManager = new QNetworkAccessManager(this);
+            connect(networkManager, SIGNAL(finished(QNetworkReply*)),
+               SLOT(networkFinished(QNetworkReply*)));
+            }
+      networkManager->get(QNetworkRequest(url));
+      }
+
+//---------------------------------------------------------
 //   gotoNextScore
 //---------------------------------------------------------
 
@@ -3154,4 +3240,45 @@ void MuseScore::gotoPreviousScore()
       else
             --idx;
       tab1->setCurrentIndex(idx);
+      }
+
+//---------------------------------------------------------
+//   showWeb
+//---------------------------------------------------------
+
+void MuseScore::showWebPanel(bool on)
+      {
+      QAction* a = getAction("musescore-connect");
+      if (on) {
+            if (_webPage == 0) {
+                  _webPage = new WebPageDockWidget(this, this);
+                  connect(_webPage, SIGNAL(visibilityChanged(bool)), a, SLOT(setChecked(bool)));
+                  addDockWidget(Qt::RightDockWidgetArea, _webPage);
+                  }
+            _webPage->show();
+            }
+      else {
+            if (_webPage)
+                  _webPage->hide();
+            }
+      }
+      
+//---------------------------------------------------------
+//   openExternalLink
+//---------------------------------------------------------
+
+void MuseScore::openExternalLink(const QString& url)
+      {
+      QDesktopServices::openUrl(url);
+      }
+
+//---------------------------------------------------------
+//   closeWebPanelPermanently
+//---------------------------------------------------------
+
+void MuseScore::closeWebPanelPermanently()
+      {
+      showWebPanel(false);
+      preferences.showWebPanel = false;
+      preferences.dirty  = true;
       }

@@ -85,6 +85,9 @@
       <file>data/sharp.svg</file>
       <file>data/sharpsharp.svg</file>
       
+      <file>data/webview.css</file>
+      <file>data/community.svg</file>
+      
       
       <file alias="images/bookmark.svg">data/bookmark.svg</file>
       <file alias="images/pending.svg">data/pending.svg</file>

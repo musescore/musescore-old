@@ -2156,6 +2156,16 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","previous score"),
          QT_TRANSLATE_NOOP("action","previous score")
          ),
+      Shortcut(
+         STATE_INIT | STATE_DISABLED | STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY | STATE_SEARCH,
+         "musescore-connect",
+         "MuseScore Connect",
+         Qt::Key_F7,
+         Qt::ApplicationShortcut,
+         "MuseScore Connect",
+         "MuseScore Connect",
+         community_ICON
+         ),
       // xml==0  marks end of list
       Shortcut(0, 0, 0, QKeySequence::UnknownKey),
       };

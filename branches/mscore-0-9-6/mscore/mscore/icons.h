@@ -36,7 +36,7 @@ enum { longaUp_ICON, brevis_ICON, note_ICON, note2_ICON, note4_ICON, note8_ICON,
       midiin_ICON, speaker_ICON, start_ICON, play_ICON, repeat_ICON, sbeam_ICON, mbeam_ICON,
       nbeam_ICON, beam32_ICON, abeam_ICON, fileOpen_ICON, fileNew_ICON, fileSave_ICON,
       fileSaveAs_ICON, exit_ICON, viewmag_ICON, window_ICON, acciaccatura_ICON, appoggiatura_ICON,
-      grace4_ICON, grace16_ICON, grace32_ICON, noteEntry_ICON, keys_ICON, tie_ICON,
+      grace4_ICON, grace16_ICON, grace32_ICON, noteEntry_ICON, keys_ICON, tie_ICON, community_ICON,
       ICONS
       };
 extern QIcon* icons[ICONS];
