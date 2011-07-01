@@ -35,6 +35,7 @@ class Painter {
 
       virtual void translate(const QPointF&) = 0;
       virtual void scale(qreal) = 0;
+      virtual void scale(qreal, qreal) = 0;
       virtual void rotate(qreal) = 0;
 
       virtual void setFont(const QFont& f) = 0;
