@@ -341,11 +341,8 @@ class Score {
       void moveUp(Chord*);
       void moveDown(Chord*);
 
-      void convertMidi(MidiFile*);
       void convertCapella(Capella* cap);
       int readCapVoice(CapVoice* cvoice, int staffIdx, int tick);
-      void convertTrack(MidiTrack*);
-      void convertTrack(BBTrack*, int);
 
       void moveInputPos(Segment* s);
       void moveToNextInputPos();
@@ -846,6 +843,8 @@ class Score {
       void setInstrumentsChanged(bool val)  { _instrumentsChanged = val; }
       bool playRepeats() const              { return _playRepeats; }
       void setPlayRepeats(bool val)         { _playRepeats = val; }
+      void convertTrack(MidiTrack*);
+      void convertTrack(BBTrack*, int);
       };
 
 extern Score* gscore;

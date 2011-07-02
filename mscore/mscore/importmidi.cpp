@@ -774,13 +774,13 @@ void MidiFile::processMeta(Score* cs, MidiTrack* track, const Event& mm)
 //   convertMidi
 //---------------------------------------------------------
 
-void Score::convertMidi(MidiFile* mf)
+void MuseScore::convertMidi(Score* score, MidiFile* mf)
       {
       mf->separateChannel();
       mf->process1();                    // merge noteOn/noteOff into NoteEvent etc.
       mf->changeDivision(AL::division);
 
-      *_sigmap = mf->siglist();
+      *(score->sigmap()) = mf->siglist();
 
       QList<MidiTrack*>* tracks = mf->tracks();
 
@@ -837,11 +837,11 @@ void Score::convertMidi(MidiFile* mf)
                   }
             int program  = track->getInitProgram();
             track->setProgram(program);
-            Part* part   = new Part(this);
+            Part* part   = new Part(score);
 
-            Staff* s = new Staff(this, part, 0);
+            Staff* s = new Staff(score, part, 0);
             part->insertStaff(s);
-            _staves.push_back(s);
+            score->staves().push_back(s);
             track->setStaff(s);
 
             if (track->isDrumTrack()) {
@@ -853,9 +853,9 @@ void Score::convertMidi(MidiFile* mf)
                      && ((program & 0xff) == 0) && tracks->at(idx+1)->staffIdx() != -1)) {
                         // assume that the current track and the next track
                         // form a piano part
-                        Staff* ss = new Staff(this, part, 1);
+                        Staff* ss = new Staff(score, part, 1);
                         part->insertStaff(ss);
-                        _staves.push_back(ss);
+                        score->staves().push_back(ss);
 
                         // s->setClef(0, CLEF_G);
                         s->setBracket(0, BRACKET_AKKOLADE);
@@ -869,7 +869,7 @@ void Score::convertMidi(MidiFile* mf)
                         // s->setClef(0, ct);
                         }
                   }
-            _parts.push_back(part);
+            score->appendPart(part);
             ++idx;
             }
 
@@ -891,13 +891,13 @@ void Score::convertMidi(MidiFile* mf)
       //---------------------------------------------------
 
       int startBar, endBar, beat, tick;
-      sigmap()->tickValues(lastTick, &endBar, &beat, &tick);
+      score->sigmap()->tickValues(lastTick, &endBar, &beat, &tick);
       if (beat || tick)
             ++endBar;
 
       for (startBar = 0; startBar < endBar; ++startBar) {
-            int tick1 = sigmap()->bar2tick(startBar, 0, 0);
-            int tick2 = sigmap()->bar2tick(startBar + 1, 0, 0);
+            int tick1 = score->sigmap()->bar2tick(startBar, 0, 0);
+            int tick2 = score->sigmap()->bar2tick(startBar + 1, 0, 0);
             int events = 0;
             foreach (MidiTrack* midiTrack, *tracks) {
                   if (midiTrack->staffIdx() == -1)
@@ -918,7 +918,7 @@ void Score::convertMidi(MidiFile* mf)
                   break;
             }
 
-      tick = sigmap()->bar2tick(startBar, 0, 0);
+      tick = score->sigmap()->bar2tick(startBar, 0, 0);
       if (tick)
             printf("remove empty measures %d ticks\n", tick);
       mf->move(-tick);
@@ -944,7 +944,7 @@ void Score::convertMidi(MidiFile* mf)
             }
       printf("=====tracks %d\n", xx);
       int bars;
-      sigmap()->tickValues(lastTick, &bars, &beat, &tick);
+      score->sigmap()->tickValues(lastTick, &bars, &beat, &tick);
       if (beat > 0 || tick > 0)
             ++bars;
 
@@ -953,16 +953,16 @@ void Score::convertMidi(MidiFile* mf)
       //---------------------------------------------------
 
       for (int i = 0; i < bars; ++i) {
-            Measure* measure  = new Measure(this);
-            int tick = sigmap()->bar2tick(i, 0, 0);
+            Measure* measure  = new Measure(score);
+            int tick = score->sigmap()->bar2tick(i, 0, 0);
             measure->setTick(tick);
-            Fraction ts(sigmap()->timesig(tick).timesig());
+            Fraction ts(score->sigmap()->timesig(tick).timesig());
             measure->setTimesig(ts);
             measure->setLen(ts);
 
-      	add(measure);
+      	score->add(measure);
             }
-      fixTicks();
+      score->fixTicks();
 
 	foreach (MidiTrack* midiTrack, *tracks) {
             if (midiTrack->staffIdx() == -1)
@@ -977,7 +977,7 @@ void Score::convertMidi(MidiFile* mf)
       foreach (MidiTrack* track, *tracks) {
             foreach (Event e, track->events()) {
                   if ((e.type() == ME_META) && (e.metaType() != META_LYRIC))
-                        mf->processMeta(this, track, e);
+                        mf->processMeta(score, track, e);
                   }
             if (debugMode) {
                   printf("Track %2d:%2d key %d <%s><%s>\n", track->outChannel(),
@@ -1008,29 +1008,29 @@ void Score::convertMidi(MidiFile* mf)
                   part->setMidiProgram(track->program() & 0x7f);  // only GM
                   }
             if (track->staffIdx() != -1)
-                  convertTrack(track);
+                  score->convertTrack(track);
 
             foreach (Event e, track->events()) {
                   if ((e.type() == ME_META) && (e.metaType() == META_LYRIC))
-                        mf->processMeta(this, track, e);
+                        mf->processMeta(score, track, e);
                   }
             }
 
-      for (AL::iSigEvent is = sigmap()->begin(); is != sigmap()->end(); ++is) {
+      for (AL::iSigEvent is = score->sigmap()->begin(); is != score->sigmap()->end(); ++is) {
             AL::SigEvent se = is->second;
             int tick    = is->first;
-            Measure* m  = tick2measure(tick);
+            Measure* m  = score->tick2measure(tick);
             if (!m)
                   continue;
-            for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
-                  TimeSig* ts = new TimeSig(this);
+            for (int staffIdx = 0; staffIdx < score->nstaves(); ++staffIdx) {
+                  TimeSig* ts = new TimeSig(score);
                   ts->setSig(se.timesig());
                   ts->setTrack(staffIdx * VOICES);
                   Segment* seg = m->getSegment(ts, tick);
                   seg->add(ts);
                   }
             }
-      connectTies();
+      score->connectTies();
       }
 
 //---------------------------------------------------------
@@ -1441,7 +1441,7 @@ bool MuseScore::importMidi(Score* score, const QString& name)
             }
       mf.setShortestNote(shortestNote);
 
-//TODO-LIB      convertMidi(&mf);
+      convertMidi(score, &mf);
 
       score->setSaved(false);
       score->rebuildMidiMapping();

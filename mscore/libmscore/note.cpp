@@ -136,6 +136,7 @@ Note::Note(Score* s)
       _accidental        = 0;
       _mirror            = false;
       _userMirror        = DH_AUTO;
+      _dotPosition       = AUTO;
       _line              = 0;
       _fret              = -1;
       _string            = -1;
@@ -204,6 +205,7 @@ Note::Note(const Note& n)
       _headType          = n._headType;
       _mirror            = n._mirror;
       _userMirror        = n._userMirror;
+      _dotPosition       = n._dotPosition;
       _accidental        = 0;
       if (n._accidental)
             add(new Accidental(*(n._accidental)));

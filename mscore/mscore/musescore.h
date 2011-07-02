@@ -540,6 +540,7 @@ class MuseScore : public QMainWindow {
       bool saveXml(Score* score, const QString& name);
       bool saveMidi(Score* score, const QString& name);
       bool saveLilypond(Score* score, const QString& name);
+      void convertMidi(Score* score, MidiFile* mf);
 
       void addTempo();
       void addMetronome();
