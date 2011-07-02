@@ -799,9 +799,6 @@ void Note::read(QDomElement e)
                         }
                   }
             else if (tag == "Accidental") {
-//                  Accidental* a = new Accidental(score());
-//                  a->read(e);
-//                  add(a);
                   // on older scores, a note could have both a <userAccidental> tag and an <Accidental> tag
                   // if a userAccidental has some other property set (like for instance offset)
                   Accidental* a;
@@ -809,6 +806,8 @@ void Note::read(QDomElement e)
                         a = _accidental;        // re-use the accidental it constructed
                   else
                         a = new Accidental(score());
+                  // the accidental needs to know the properties of the track it belongs to
+                  a->setTrack(track());
                   a->read(e);
                   if (!hasAccidental)           // only the new accidental, if it has been added previously
                         add(a);
