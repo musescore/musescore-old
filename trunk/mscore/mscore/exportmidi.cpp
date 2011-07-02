@@ -30,6 +30,7 @@
 #include "libmscore/text.h"
 #include "libmscore/measure.h"
 #include "libmscore/repeatlist.h"
+#include "musescore.h"
 
 //---------------------------------------------------------
 //   exportMidi
@@ -53,9 +54,9 @@ class ExportMidi {
 //    return false on error
 //---------------------------------------------------------
 
-bool Score::saveMidi(const QString& name)
+bool MuseScore::saveMidi(Score* score, const QString& name)
       {
-      ExportMidi em(this);
+      ExportMidi em(score);
       return em.write(name);
       }
 

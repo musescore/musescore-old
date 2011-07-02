@@ -583,14 +583,6 @@ class Score {
       bool exportFile();
 
       void print(Painter* printer, int page);
-      bool saveXml(const QString& name);
-      bool saveMxl(const QString& name);
-      bool saveMidi(const QString& name);
-      bool saveLilypond(const QString& name);
-#ifdef HAS_AUDIOFILE
-      bool saveAudio(const QString& name, const QString& ext, QString soundFont = QString());
-#endif
-      bool saveMp3(const QString& name, QString soundFont = QString());
       ChordRest* getSelectedChordRest() const;
       void getSelectedChordRest2(ChordRest** cr1, ChordRest** cr2) const;
 

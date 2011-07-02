@@ -1047,7 +1047,7 @@ void MuseScore::helpBrowser()
 void MuseScore::helpBrowser1()
       {
       QString lang = getLocaleISOCode();
-      
+
       if (debugMode)
             printf("open online handbook for language <%s>\n", qPrintable(lang));
       QString help("http://www.musescore.org/en/handbook");
@@ -1923,11 +1923,11 @@ static bool processNonGui()
                   return true;
                   }
             if (fn.endsWith(".xml"))
-                  return cs->saveXml(fn);
+                  return mscore->saveXml(cs, fn);
             if (fn.endsWith(".mxl"))
-                  return cs->saveMxl(fn);
+                  return mscore->saveMxl(cs, fn);
             if (fn.endsWith(".mid"))
-                  return cs->saveMidi(fn);
+                  return mscore->saveMidi(cs, fn);
             if (fn.endsWith(".pdf"))
                   return mscore->savePsPdf(fn, QPrinter::PdfFormat);
             if (fn.endsWith(".ps"))
@@ -1937,17 +1937,17 @@ static bool processNonGui()
             if (fn.endsWith(".svg"))
                   return mscore->saveSvg(fn);
             if (fn.endsWith(".ly"))
-                  return cs->saveLilypond(fn);
+                  return mscore->saveLilypond(cs, fn);
 #ifdef HAS_AUDIOFILE
             if (fn.endsWith(".wav"))
-                  return cs->saveAudio(fn, "wav");
+                  return mscore->saveAudio(cs, fn, "wav");
             if (fn.endsWith(".ogg"))
-                  return cs->saveAudio(fn, "ogg");
+                  return mscore->saveAudio(cs, fn, "ogg");
             if (fn.endsWith(".flac"))
-                  return cs->saveAudio(fn, "flac");
+                  return mscore->saveAudio(cs, fn, "flac");
 #endif
             if (fn.endsWith(".mp3"))
-                  return cs->saveMp3(fn);
+                  return mscore->saveMp3(cs, fn);
             else {
                   fprintf(stderr, "dont know how to convert to %s\n", qPrintable(outFileName));
                   return false;
