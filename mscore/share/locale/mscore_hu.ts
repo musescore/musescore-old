@@ -1027,6 +1027,14 @@ p, li { white-space: pre-wrap; }&#13;
         <source>breve</source>
         <translation>brévisz</translation>
     </message>
+    <message>
+        <source>sol</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>alt. brevis</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>ChordRestBase</name>
@@ -1148,22 +1156,6 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <source>invalid</source>
         <translation>érvénytelen</translation>
-    </message>
-    <message>
-        <source>Normal Head</source>
-        <translation>Normál fej</translation>
-    </message>
-    <message>
-        <source>Cross Head</source>
-        <translation>Kereszt fej</translation>
-    </message>
-    <message>
-        <source>Diamond Head</source>
-        <translation>Rombusz fej</translation>
-    </message>
-    <message>
-        <source>Triangle Head</source>
-        <translation>Háromszög fej</translation>
     </message>
     <message>
         <source>Load</source>
@@ -3704,6 +3696,25 @@ szkript futtatásához</translation>
     </message>
 </context>
 <context>
+    <name>MyWebView</name>
+    <message>
+        <source>Could not&lt;br /&gt; connect</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>To connect with the community, &lt;br /&gt; you need to have internet &lt;br /&gt; connection enabled</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Retry</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Close this permanently</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>NewWizard</name>
     <message>
         <source>MuseScore: Create New Score</source>
@@ -4327,14 +4338,6 @@ szkript futtatásához</translation>
         <translation>Ablakok</translation>
     </message>
     <message>
-        <source>Play Panel:</source>
-        <translation>Lejátszás panel:</translation>
-    </message>
-    <message>
-        <source>show</source>
-        <translation>mutat</translation>
-    </message>
-    <message>
         <source>Style</source>
         <translation>Stílus</translation>
     </message>
@@ -4712,10 +4715,6 @@ szkript futtatásához</translation>
         <translation>Stílusfájl használata:</translation>
     </message>
     <message>
-        <source>Navigator:</source>
-        <translation>Navigátor:</translation>
-    </message>
-    <message>
         <source>Use JACK MIDI output</source>
         <translation>JACK MIDI kimenet használata</translation>
     </message>
@@ -4740,16 +4739,24 @@ szkript futtatásához</translation>
         <translation>Válaszd ki a PortMidi kapcsolófelületet</translation>
     </message>
     <message>
-        <source>Use Current Position</source>
-        <translation>Aktuális pozíció használata</translation>
-    </message>
-    <message>
         <source>Character Set used when import non-unicode strings. (For binary file import)</source>
         <translation>Nem Unicode szövegek importálásakor használt karakterkészlet (bináris fájlok importálásához).</translation>
     </message>
     <message>
         <source>Character Set</source>
         <translation>Karakterkészlet</translation>
+    </message>
+    <message>
+        <source>Show Play Panel</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Show Navigator</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Show MuseScore Connect</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -5657,10 +5664,6 @@ győződj meg arról, hogy helyes-e a SoundFont fájl elérési útja.</translat
         <source>System Flag</source>
         <translation>Rendszer jelzés</translation>
     </message>
-    <message>
-        <source>Delete</source>
-        <translation>Törlés</translation>
-    </message>
 </context>
 <context>
     <name>SynthControl</name>
@@ -5867,8 +5870,8 @@ győződj meg arról, hogy helyes-e a SoundFont fájl elérési útja.</translat
         <translation>Legyen látható</translation>
     </message>
     <message>
-        <source>Text Properties...</source>
-        <translation>Szöveg tulajdonságai...</translation>
+        <source>Staff Properties...</source>
+        <translation type="unfinished">Kottasor tulajdonságai...</translation>
     </message>
 </context>
 <context>
@@ -6636,6 +6639,37 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Line Properties...</source>
         <translation>Vonal tulajdonságai...</translation>
+    </message>
+</context>
+<context>
+    <name>WebPageDockWidget</name>
+    <message>
+        <source>Connect with the &lt;br /&gt; Community</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Find help</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Improve your skills</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Read the latest news</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Download free sheet music</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Close this permanently</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -8343,6 +8377,14 @@ p, li { white-space: pre-wrap; }
         <source>Parts...</source>
         <translation>Kivonatok...</translation>
     </message>
+    <message>
+        <source>next score</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>previous score</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>articulation</name>
@@ -8949,6 +8991,65 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Two Pages</source>
         <translation>Két oldal</translation>
+    </message>
+</context>
+<context>
+    <name>noteheadnames</name>
+    <message>
+        <source>normal</source>
+        <translation type="unfinished">normál</translation>
+    </message>
+    <message>
+        <source>cross</source>
+        <translation type="unfinished">kereszt</translation>
+    </message>
+    <message>
+        <source>diamond</source>
+        <translation type="unfinished">rombusz</translation>
+    </message>
+    <message>
+        <source>triangle</source>
+        <translation type="unfinished">háromszög</translation>
+    </message>
+    <message>
+        <source>mi</source>
+        <translation type="unfinished">mi</translation>
+    </message>
+    <message>
+        <source>slash</source>
+        <translation type="unfinished">áthúzott</translation>
+    </message>
+    <message>
+        <source>xcircle</source>
+        <translation type="unfinished">xkör</translation>
+    </message>
+    <message>
+        <source>do</source>
+        <translation type="unfinished">dó</translation>
+    </message>
+    <message>
+        <source>re</source>
+        <translation type="unfinished">ré</translation>
+    </message>
+    <message>
+        <source>fa</source>
+        <translation type="unfinished">fá</translation>
+    </message>
+    <message>
+        <source>la</source>
+        <translation type="unfinished">lá</translation>
+    </message>
+    <message>
+        <source>ti</source>
+        <translation type="unfinished">ti</translation>
+    </message>
+    <message>
+        <source>sol</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>alt. brevis</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -9836,6 +9937,46 @@ a MuseScore verziód túl régi.</translation>
     <message>
         <source>plus</source>
         <translation>plusz</translation>
+    </message>
+    <message>
+        <source>s0sol head</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>s1sol head</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>s2sol head</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>longa up alt</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>longa down alt</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>brevis head alt</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>time sig C dot</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>time sig O</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>time sig O cut</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>time sig O dot</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>

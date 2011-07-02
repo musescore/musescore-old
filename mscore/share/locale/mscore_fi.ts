@@ -1027,6 +1027,14 @@ line break&#13;
         <source>breve</source>
         <translation>brevis</translation>
     </message>
+    <message>
+        <source>sol</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>alt. brevis</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>ChordRestBase</name>
@@ -1148,22 +1156,6 @@ line break&#13;
     <message>
         <source>invalid</source>
         <translation>epäkelpo</translation>
-    </message>
-    <message>
-        <source>Normal Head</source>
-        <translation>Normaali pää</translation>
-    </message>
-    <message>
-        <source>Cross Head</source>
-        <translation>Risti pää</translation>
-    </message>
-    <message>
-        <source>Diamond Head</source>
-        <translation>Timantti pää</translation>
-    </message>
-    <message>
-        <source>Triangle Head</source>
-        <translation>Kolmio pää</translation>
     </message>
     <message>
         <source>Load</source>
@@ -3707,6 +3699,25 @@ on ristiriidassa nykyisen rajapinnan kanssa</translation>
     </message>
 </context>
 <context>
+    <name>MyWebView</name>
+    <message>
+        <source>Could not&lt;br /&gt; connect</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>To connect with the community, &lt;br /&gt; you need to have internet &lt;br /&gt; connection enabled</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Retry</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Close this permanently</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>NewWizard</name>
     <message>
         <source>Form</source>
@@ -4318,14 +4329,6 @@ on ristiriidassa nykyisen rajapinnan kanssa</translation>
         <translation>Ikkuna</translation>
     </message>
     <message>
-        <source>Play Panel:</source>
-        <translation>Toistopaneeli:</translation>
-    </message>
-    <message>
-        <source>show</source>
-        <translation>näytä</translation>
-    </message>
-    <message>
         <source>Auto Save</source>
         <translation>Automaattinen tallennus</translation>
     </message>
@@ -4715,10 +4718,6 @@ on ristiriidassa nykyisen rajapinnan kanssa</translation>
         <translation>Käytä tyylitiedostoa:</translation>
     </message>
     <message>
-        <source>Navigator:</source>
-        <translation>Navigaattori:</translation>
-    </message>
-    <message>
         <source>Use JACK MIDI output</source>
         <translation>Käytä JACK MIDI ulostuloa</translation>
     </message>
@@ -4743,16 +4742,24 @@ on ristiriidassa nykyisen rajapinnan kanssa</translation>
         <translation>Valitse PortMidi input-liitäntä</translation>
     </message>
     <message>
-        <source>Use Current Position</source>
-        <translation>Käytä nykyistä sijaintia</translation>
-    </message>
-    <message>
         <source>Character Set used when import non-unicode strings. (For binary file import)</source>
         <translation>Merkistö käytössä kun  ei-unicode merkkijonoja tuodaan.(Binääritiedoston tuonti)</translation>
     </message>
     <message>
         <source>Character Set</source>
         <translation>Merkistö</translation>
+    </message>
+    <message>
+        <source>Show Play Panel</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Show Navigator</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Show MuseScore Connect</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -5660,10 +5667,6 @@ ja tarkista, että tiedoston sijainti on oikein.</translation>
         <source>System Flag</source>
         <translation>Järjestelmälippu</translation>
     </message>
-    <message>
-        <source>Delete</source>
-        <translation>Poista</translation>
-    </message>
 </context>
 <context>
     <name>SynthControl</name>
@@ -5870,8 +5873,8 @@ ja tarkista, että tiedoston sijainti on oikein.</translation>
         <translation>Aseta näkyväksi</translation>
     </message>
     <message>
-        <source>Text Properties...</source>
-        <translation>Tekstin ominaisuudet ...</translation>
+        <source>Staff Properties...</source>
+        <translation type="unfinished">Viivaston ominaisuudet ...</translation>
     </message>
 </context>
 <context>
@@ -6639,6 +6642,37 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Line Properties...</source>
         <translation>Viivan ominaisuudet ...</translation>
+    </message>
+</context>
+<context>
+    <name>WebPageDockWidget</name>
+    <message>
+        <source>Connect with the &lt;br /&gt; Community</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Find help</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Improve your skills</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Read the latest news</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Download free sheet music</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Close this permanently</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -8346,6 +8380,14 @@ p, li { white-space: pre-wrap; }
         <source>Parts...</source>
         <translation>Osat ...</translation>
     </message>
+    <message>
+        <source>next score</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>previous score</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>articulation</name>
@@ -8952,6 +8994,65 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Two Pages</source>
         <translation>Kaksi sivua</translation>
+    </message>
+</context>
+<context>
+    <name>noteheadnames</name>
+    <message>
+        <source>normal</source>
+        <translation type="unfinished">normaali</translation>
+    </message>
+    <message>
+        <source>cross</source>
+        <translation type="unfinished">risti</translation>
+    </message>
+    <message>
+        <source>diamond</source>
+        <translation type="unfinished">timantti</translation>
+    </message>
+    <message>
+        <source>triangle</source>
+        <translation type="unfinished">kolmio</translation>
+    </message>
+    <message>
+        <source>mi</source>
+        <translation type="unfinished">mi</translation>
+    </message>
+    <message>
+        <source>slash</source>
+        <translation type="unfinished">kauttaviiva</translation>
+    </message>
+    <message>
+        <source>xcircle</source>
+        <translation type="unfinished">x-ympyrä</translation>
+    </message>
+    <message>
+        <source>do</source>
+        <translation type="unfinished">do</translation>
+    </message>
+    <message>
+        <source>re</source>
+        <translation type="unfinished">re</translation>
+    </message>
+    <message>
+        <source>fa</source>
+        <translation type="unfinished">fa</translation>
+    </message>
+    <message>
+        <source>la</source>
+        <translation type="unfinished">la</translation>
+    </message>
+    <message>
+        <source>ti</source>
+        <translation type="unfinished">ti</translation>
+    </message>
+    <message>
+        <source>sol</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>alt. brevis</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -9839,6 +9940,46 @@ sinun MuseScore versio on liian vanha.</translation>
     <message>
         <source>plus</source>
         <translation>plus</translation>
+    </message>
+    <message>
+        <source>s0sol head</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>s1sol head</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>s2sol head</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>longa up alt</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>longa down alt</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>brevis head alt</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>time sig C dot</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>time sig O</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>time sig O cut</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>time sig O dot</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>

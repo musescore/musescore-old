@@ -1042,6 +1042,14 @@ p, li { white-space: pre-wrap; }&#13;
         <source>breve</source>
         <translation>optime</translation>
     </message>
+    <message>
+        <source>sol</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>alt. brevis</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>ChordRestBase</name>
@@ -1164,22 +1172,6 @@ p, li { white-space: pre-wrap; }&#13;
         <source>invalid</source>
         <translatorcomment>must investigate</translatorcomment>
         <translation>lipsă</translation>
-    </message>
-    <message>
-        <source>Normal Head</source>
-        <translation>normal (boabă rotundă)</translation>
-    </message>
-    <message>
-        <source>Cross Head</source>
-        <translation>în cruce (X)</translation>
-    </message>
-    <message>
-        <source>Diamond Head</source>
-        <translation>romb</translation>
-    </message>
-    <message>
-        <source>Triangle Head</source>
-        <translation>triunghi</translation>
     </message>
     <message>
         <source>Load</source>
@@ -3720,6 +3712,25 @@ nu este compatibil cu interfaţa curentă</translation>
     </message>
 </context>
 <context>
+    <name>MyWebView</name>
+    <message>
+        <source>Could not&lt;br /&gt; connect</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>To connect with the community, &lt;br /&gt; you need to have internet &lt;br /&gt; connection enabled</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Retry</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Close this permanently</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>NewWizard</name>
     <message>
         <source>MuseScore: Create New Score</source>
@@ -4343,14 +4354,6 @@ nu este compatibil cu interfaţa curentă</translation>
         <translation>Ferestre</translation>
     </message>
     <message>
-        <source>Play Panel:</source>
-        <translation>Panoul de Redare</translation>
-    </message>
-    <message>
-        <source>show</source>
-        <translation>arată</translation>
-    </message>
-    <message>
         <source>Style</source>
         <translation>Stil</translation>
     </message>
@@ -4728,10 +4731,6 @@ nu este compatibil cu interfaţa curentă</translation>
         <translation>Foloseşte fişierul de stil:</translation>
     </message>
     <message>
-        <source>Navigator:</source>
-        <translation>Navigator:</translation>
-    </message>
-    <message>
         <source>Use JACK MIDI output</source>
         <translation>Foloseşte ieşirea JACK MIDI</translation>
     </message>
@@ -4756,16 +4755,24 @@ nu este compatibil cu interfaţa curentă</translation>
         <translation>Alegeţi portul MIDI de intrare</translation>
     </message>
     <message>
-        <source>Use Current Position</source>
-        <translation>Foloseşte Poziţia Curentă</translation>
-    </message>
-    <message>
         <source>Character Set used when import non-unicode strings. (For binary file import)</source>
         <translation>Setul de caractere folosit când se importă conținut în format non-unicode. (Pentru import de fișiere binare)</translation>
     </message>
     <message>
         <source>Character Set</source>
         <translation>Set de Caractere</translation>
+    </message>
+    <message>
+        <source>Show Play Panel</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Show Navigator</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Show MuseScore Connect</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -5673,10 +5680,6 @@ Accesaţi "Afişează" &gt; "Sintetizator" din meniu&#13;
         <source>System Flag</source>
         <translation>apare în toate ştimele</translation>
     </message>
-    <message>
-        <source>Delete</source>
-        <translation>Şterge</translation>
-    </message>
 </context>
 <context>
     <name>SynthControl</name>
@@ -5883,8 +5886,8 @@ Accesaţi "Afişează" &gt; "Sintetizator" din meniu&#13;
         <translation>Vizibil</translation>
     </message>
     <message>
-        <source>Text Properties...</source>
-        <translation>Proprietăţile textului...</translation>
+        <source>Staff Properties...</source>
+        <translation type="unfinished">Proprietăţi Portativ...</translation>
     </message>
 </context>
 <context>
@@ -6652,6 +6655,37 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <source>Line Properties...</source>
         <translation>Proprietăţi Linie...</translation>
+    </message>
+</context>
+<context>
+    <name>WebPageDockWidget</name>
+    <message>
+        <source>Connect with the &lt;br /&gt; Community</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Find help</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Improve your skills</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Read the latest news</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Download free sheet music</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Close this permanently</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -8359,6 +8393,14 @@ p, li { white-space: pre-wrap; }&#13;
         <source>Parts...</source>
         <translation>Ştime...</translation>
     </message>
+    <message>
+        <source>next score</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>previous score</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>articulation</name>
@@ -8965,6 +9007,65 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <source>Two Pages</source>
         <translation>Două pagini</translation>
+    </message>
+</context>
+<context>
+    <name>noteheadnames</name>
+    <message>
+        <source>normal</source>
+        <translation type="unfinished">normal</translation>
+    </message>
+    <message>
+        <source>cross</source>
+        <translation type="unfinished">cruce</translation>
+    </message>
+    <message>
+        <source>diamond</source>
+        <translation type="unfinished">romb</translation>
+    </message>
+    <message>
+        <source>triangle</source>
+        <translation type="unfinished">triughi</translation>
+    </message>
+    <message>
+        <source>mi</source>
+        <translation type="unfinished">mi</translation>
+    </message>
+    <message>
+        <source>slash</source>
+        <translation type="unfinished">bară oblică</translation>
+    </message>
+    <message>
+        <source>xcircle</source>
+        <translation type="unfinished">cerc şi cruce</translation>
+    </message>
+    <message>
+        <source>do</source>
+        <translation type="unfinished">do</translation>
+    </message>
+    <message>
+        <source>re</source>
+        <translation type="unfinished">re</translation>
+    </message>
+    <message>
+        <source>fa</source>
+        <translation type="unfinished">fa</translation>
+    </message>
+    <message>
+        <source>la</source>
+        <translation type="unfinished">la</translation>
+    </message>
+    <message>
+        <source>ti</source>
+        <translation type="unfinished">ti</translation>
+    </message>
+    <message>
+        <source>sol</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>alt. brevis</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -9852,6 +9953,46 @@ versiunea dumneavoastră de MuseScore este prea veche.</translation>
     <message>
         <source>plus</source>
         <translation>plus</translation>
+    </message>
+    <message>
+        <source>s0sol head</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>s1sol head</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>s2sol head</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>longa up alt</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>longa down alt</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>brevis head alt</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>time sig C dot</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>time sig O</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>time sig O cut</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>time sig O dot</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>
