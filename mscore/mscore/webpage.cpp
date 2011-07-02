@@ -3,8 +3,8 @@
 //  Linux Music Score Editor
 //  $Id:$
 //
-//  The webview is shown on startup with a local file inviting user 
-//  to start connecting with the community. They can press start and 
+//  The webview is shown on startup with a local file inviting user
+//  to start connecting with the community. They can press start and
 //  MuseScore will go online. If no connection, display a can't connect message
 //  On next startup, if no connection, the panel is closed. If connection, the
 //  MuseScore goes online directly. If the autoclose panel is reopen, the user
@@ -30,6 +30,7 @@
 #include "preferences.h"
 #include "libmscore/score.h"
 
+static const char* staticUrl = "http://cdn.musescore.com/connect.html";
 
 //---------------------------------------------------------
 //   MyWebPage
@@ -94,7 +95,7 @@ MyWebView::MyWebView(QWidget *parent):
 
       m_page.setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
       setPage(&m_page);
-      
+
       //set cookie jar for persistent cookies
       CookieJar* jar = new CookieJar(QString(dataPath + "/cookies.txt"));
       page()->networkAccessManager()->setCookieJar(jar);
@@ -151,7 +152,7 @@ void MyWebView::stopBusyAndFirst(bool val)
             }
       }
 
-void MyWebView::stopBusyStatic(bool val) 
+void MyWebView::stopBusyStatic(bool val)
       {
       stopBusy(val, false);
       }
@@ -186,8 +187,8 @@ void MyWebView::link(const QUrl& url)
 //---------------------------------------------------------
 //   sizeHint
 //---------------------------------------------------------
-      
-QSize	MyWebView::sizeHint() const 
+
+QSize	MyWebView::sizeHint() const
       {
       return QSize(300 , 300);
       }
@@ -202,7 +203,7 @@ WebPageDockWidget::WebPageDockWidget(MuseScore* mscore, QWidget* parent)
       setWindowTitle("MuseScore Connect");
       setFloating(false);
       setFeatures(QDockWidget::DockWidgetClosable);
-      
+
       setObjectName("webpage");
       setAllowedAreas(Qt::LeftDockWidgetArea);
 
@@ -210,7 +211,7 @@ WebPageDockWidget::WebPageDockWidget(MuseScore* mscore, QWidget* parent)
       web->setContextMenuPolicy(Qt::PreventContextMenu);
       QWebFrame* frame = web->webPage()->mainFrame();
       connect(frame, SIGNAL(javaScriptWindowObjectCleared()), this, SLOT(addToJavascript()));
-            
+
       if(preferences.firstStartWeb) {
             connect(web, SIGNAL(loadFinished(bool)), web, SLOT(stopBusyStatic(bool)));
             web->setBusy();
@@ -240,7 +241,7 @@ WebPageDockWidget::WebPageDockWidget(MuseScore* mscore, QWidget* parent)
                   , QUrl("qrc:/"));
             }
       else{
-            //And not load ! 
+            //And not load !
             connect(web, SIGNAL(loadFinished(bool)), web, SLOT(stopBusyAndClose(bool)));
             web->setBusy();
             web->load(QUrl(webUrl()));
@@ -252,7 +253,7 @@ WebPageDockWidget::WebPageDockWidget(MuseScore* mscore, QWidget* parent)
 //   addToJavascript
 //---------------------------------------------------------
 
-void WebPageDockWidget::addToJavascript() 
+void WebPageDockWidget::addToJavascript()
       {
       QWebFrame* frame = web->webPage()->mainFrame();
       frame->addToJavaScriptWindowObject("panel", this);
@@ -274,21 +275,21 @@ void WebPageDockWidget::load()
 //   load
 //---------------------------------------------------------
 QString WebPageDockWidget::webUrl()
-    { 
-    return QString("%1?language=%2").arg(staticUrl).arg(mscore->getLocaleISOCode()); 
-    }      
+    {
+    return QString("%1?language=%2").arg(staticUrl).arg(mscore->getLocaleISOCode());
+    }
 
 
 //---------------------------------------------------------
 //   CookieJar
 //
-//   Once the QNetworkCookieJar object is deleted, all cookies it held will be 
-//   discarded as well. If you want to save the cookies, you should derive from 
-//   this class and implement the saving to disk to your own storage format. 
+//   Once the QNetworkCookieJar object is deleted, all cookies it held will be
+//   discarded as well. If you want to save the cookies, you should derive from
+//   this class and implement the saving to disk to your own storage format.
 //   (From QNetworkCookieJar documentation.)
 //---------------------------------------------------------
 
-CookieJar::CookieJar(QString path, QObject *parent) 
+CookieJar::CookieJar(QString path, QObject *parent)
     : QNetworkCookieJar(parent)
       {
       file = path;
@@ -301,10 +302,10 @@ CookieJar::CookieJar(QString path, QObject *parent)
             while(!(line = cookieFile.readLine()).isNull()) {
                   list.append(QNetworkCookie::parseCookies(line));
                   }
-            setAllCookies(list); 
+            setAllCookies(list);
             }
       else {
-            qWarning() << "Can't open "<< this->file << " to read cookies"; 
+            qWarning() << "Can't open "<< this->file << " to read cookies";
             }
       }
 
@@ -314,16 +315,16 @@ CookieJar::CookieJar(QString path, QObject *parent)
 
 CookieJar::~CookieJar()
       {
-      QList <QNetworkCookie> cookieList; 
+      QList <QNetworkCookie> cookieList;
       cookieList = allCookies();
-      
+
       QFile file(this->file);
 
       if(!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
             qWarning() << "Can't open "<< this->file << " to save cookies";
             return;
             }
-                  
+
       QTextStream out(&file);
       for(int i = 0 ; i < cookieList.size() ; i++) {
                 //get cookie data

@@ -37,7 +37,7 @@
 //   saveAudio
 //---------------------------------------------------------
 
-bool Score::saveAudio(const QString& name, const QString& ext, QString soundFont)
+bool MuseScore::saveAudio(Score* score, const QString& name, const QString& ext)
       {
       int format;
       if (ext == "wav")
@@ -52,22 +52,12 @@ bool Score::saveAudio(const QString& name, const QString& ext, QString soundFont
             }
       int sampleRate = preferences.exportAudioSampleRate;
 
-      if (soundFont.isEmpty()) {
-            if (!MScore::soundFont.isEmpty())
-                  soundFont = MScore::soundFont;
-            else
-                  soundFont = QString(getenv("DEFAULT_SOUNDFONT"));
-            if (soundFont.isEmpty()) {
-                  fprintf(stderr, "MuseScore: error: no soundfont configured\n");
-                  return false;
-                  }
-            }
       MasterSynth* synti = new MasterSynth();
       synti->init(sampleRate);
-      synti->setState(syntiState());
+      synti->setState(score->syntiState());
 
       EventMap events;
-      toEList(&events);
+      score->toEList(&events);
 
       SF_INFO info;
       memset(&info, 0, sizeof(info));
@@ -81,7 +71,7 @@ bool Score::saveAudio(const QString& name, const QString& ext, QString soundFont
             return false;
             }
 
-      QProgressBar* pBar = mscore->showProgressBar();
+      QProgressBar* pBar = showProgressBar();
       pBar->reset();
 
       double peak = 0.0;
@@ -91,21 +81,21 @@ bool Score::saveAudio(const QString& name, const QString& ext, QString soundFont
             playPos = events.constBegin();
             EventMap::const_iterator endPos = events.constEnd();
             --endPos;
-            double et = utick2utime(endPos.key());
+            double et = score->utick2utime(endPos.key());
             et += 1.0;   // add trailer (sec)
             pBar->setRange(0, int(et));
 
             //
             // init instruments
             //
-            foreach(const Part* part, _parts) {
+            foreach(const Part* part, *score->parts()) {
                   foreach(const Channel& a, part->instr()->channel()) {
                         a.updateInitList();
                         foreach(Event e, a.init) {
                               if (e.type() == ME_INVALID)
                                     continue;
                               e.setChannel(a.channel);
-                              int syntiIdx= _midiMapping[a.channel].articulation->synti;
+                              int syntiIdx= score->midiMapping(a.channel)->articulation->synti;
                               synti->play(e, syntiIdx);
                               }
                         }
@@ -126,7 +116,7 @@ bool Score::saveAudio(const QString& name, const QString& ext, QString soundFont
                   float* l = buffer;
                   float* r = buffer + 1;
                   for (; playPos != events.constEnd(); ++playPos) {
-                        double f = utick2utime(playPos.key());
+                        double f = score->utick2utime(playPos.key());
                         if (f >= endTime)
                               break;
                         int n = lrint((f - playTime) * sampleRate);
@@ -139,7 +129,7 @@ bool Score::saveAudio(const QString& name, const QString& ext, QString soundFont
                         const Event& e = playPos.value();
                         if (e.isChannelEvent()) {
                               int channelIdx = e.channel();
-                              Channel* c = _midiMapping[channelIdx].articulation;
+                              Channel* c = score->midiMapping(channelIdx)->articulation;
                               if (!c->mute) {
                                     synti->play(e, c->synti);
                                     }
@@ -166,7 +156,7 @@ bool Score::saveAudio(const QString& name, const QString& ext, QString soundFont
             gain = 0.99 / peak;
             }
 
-      mscore->hideProgressBar();
+      hideProgressBar();
 
       delete synti;
       if (sf_close(sf)) {

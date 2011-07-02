@@ -26,8 +26,6 @@
 
 class MuseScore;
 
-static const char* staticUrl = "http://cdn.musescore.com/connect.html";
-
 // Derive from QWebPage, because a WebPage handles
 // plugin creation
 
@@ -72,10 +70,10 @@ class MyWebView: public QWebView
       void stopBusyAndFirst(bool);
       void stopBusyStatic(bool);
       void setBusy();
-   
+
    private:
       void stopBusy(bool val, bool close);
-   
+
    public:
       MyWebView(QWidget *parent = 0);
       MyWebPage* webPage() {return &m_page;}
@@ -86,32 +84,32 @@ class MyWebView: public QWebView
 //   WebPage
 //---------------------------------------------------------
 
-class WebPageDockWidget : public QDockWidget 
+class WebPageDockWidget : public QDockWidget
       {
       Q_OBJECT
 
       MyWebView* web;
-   
+
    public slots:
       void addToJavascript();
-      
+
    public:
       WebPageDockWidget(MuseScore* mscore, QWidget* parent = 0);
       Q_INVOKABLE void load();
       QString webUrl();
       };
-      
-class CookieJar : public QNetworkCookieJar 
+
+class CookieJar : public QNetworkCookieJar
       {
       Q_OBJECT
-    
+
     public:
       CookieJar(QString path, QObject *parent = 0);  //load cookie
       ~CookieJar();  //save cookies
 
     private:
       QString file; // where to save cookies
-      };  
+      };
 
 
 #if 0

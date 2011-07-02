@@ -78,7 +78,7 @@ using std::cout;
 #include "libmscore/tremolo.h"
 #include "libmscore/tuplet.h"
 #include "libmscore/volta.h"
-
+#include "musescore.h"
 
 static  const int MAX_SLURS = 8;
 static  const int BRACKSTAVES=64;
@@ -2300,9 +2300,9 @@ void ExportLy::voltatest()
 //   exportLilypond
 //---------------------------------------------------------
 
-bool Score::saveLilypond(const QString& name)
+bool MuseScore::saveLilypond(Score* score, const QString& name)
 {
-  ExportLy em(this);
+  ExportLy em(score);
   return em.write(name);
 }
 

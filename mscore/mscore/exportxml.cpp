@@ -4178,12 +4178,12 @@ foreach(Element* el, *(score->gel())) {
  Return false on error.
  */
 
-bool Score::saveXml(const QString& name)
+bool MuseScore::saveXml(Score* score, const QString& name)
       {
       QFile f(name);
       if (!f.open(QIODevice::WriteOnly))
             return false;
-      ExportMusicXml em(this);
+      ExportMusicXml em(score);
       em.write(&f);
       return f.error() == QFile::NoError;
       }
@@ -4208,7 +4208,7 @@ bool Score::saveXml(const QString& name)
 //     </rootfiles>
 // </container>
 
-bool Score::saveMxl(const QString& name)
+bool MuseScore::saveMxl(Score* score, const QString& name)
       {
 //      printf("Score::saveMxl(%s)\n", name.toUtf8().data());
 
@@ -4247,7 +4247,7 @@ bool Score::saveMxl(const QString& name)
 
       QBuffer dbuf;
       dbuf.open(QIODevice::ReadWrite);
-      ExportMusicXml em(this);
+      ExportMusicXml em(score);
       em.write(&dbuf);
 //      printf("bufsize=%d\n", dbuf.data().size());
 //      printf("data=%s\n", dbuf.data().data());

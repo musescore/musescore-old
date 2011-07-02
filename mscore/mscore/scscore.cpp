@@ -223,9 +223,8 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                         ext = qscriptvalue_cast<QString>(context->argument(1));
                         }
 #ifdef HAS_AUDIOFILE
-                  if (argc == 3) {
-                        sf = qscriptvalue_cast<QString>(context->argument(1));
-                        return qScriptValueFromValue(context->engine(), score->saveAudio(s, ext, sf));
+                  if (argc == 2) {
+                        return qScriptValueFromValue(context->engine(), mscore->saveAudio(score, s, ext));
                         }
 #endif // HAS_AUDIOFILE
                   else if (argc == 2)

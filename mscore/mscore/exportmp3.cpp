@@ -608,21 +608,9 @@ QString MP3Exporter::getLibraryTypeString()
 //   saveMp3
 //---------------------------------------------------------
 
-bool Score::saveMp3(const QString& name, QString soundFont)
+bool MuseScore::saveMp3(Score* score, const QString& name)
       {
-#if 0 // TODO-LIB
       int sampleRate = preferences.exportAudioSampleRate;
-
-      if (soundFont.isEmpty()) {
-            if (!preferences.soundFont.isEmpty())
-                  soundFont = preferences.soundFont;
-            else
-                  soundFont = QString(getenv("DEFAULT_SOUNDFONT"));
-            if (soundFont.isEmpty()) {
-                  fprintf(stderr, "MuseScore: error: no soundfont configured\n");
-                  return false;
-                  }
-            }
 
       MP3Exporter exporter;
       if (!exporter.loadLibrary(MP3Exporter::Maybe)) {
@@ -693,12 +681,12 @@ bool Score::saveMp3(const QString& name, QString soundFont)
 
       MasterSynth* synti = new MasterSynth();
       synti->init(sampleRate);
-      synti->setState(syntiState());
+      synti->setState(score->syntiState());
 
       EventMap events;
-      toEList(&events);
+      score->toEList(&events);
 
-      QProgressBar* pBar = mscore->showProgressBar();
+      QProgressBar* pBar = showProgressBar();
       pBar->reset();
 
       double peak = 0.0;
@@ -708,21 +696,21 @@ bool Score::saveMp3(const QString& name, QString soundFont)
             playPos = events.constBegin();
             EventMap::const_iterator endPos = events.constEnd();
             --endPos;
-            double et = utick2utime(endPos.key());
+            double et = score->utick2utime(endPos.key());
             et += 1.0;   // add trailer (sec)
             pBar->setRange(0, int(et));
 
             //
             // init instruments
             //
-            foreach(const Part* part, _parts) {
+            foreach(const Part* part, *score->parts()) {
                   foreach(const Channel& a, part->instr()->channel()) {
                         a.updateInitList();
                         foreach(Event e, a.init) {
                               if (e.type() == ME_INVALID)
                                     continue;
                               e.setChannel(a.channel);
-                              int syntiIdx= _midiMapping[a.channel].articulation->synti;
+                              int syntiIdx= score->midiMapping(a.channel)->articulation->synti;
                               synti->play(e, syntiIdx);
                               }
                         }
@@ -731,7 +719,6 @@ bool Score::saveMp3(const QString& name, QString soundFont)
             int FRAMES = 512;
             float bufferL[FRAMES];
             float bufferR[FRAMES];
-            int stride      = 1;
             double playTime = 0.0;
             synti->setGain(gain);
 
@@ -746,27 +733,27 @@ bool Score::saveMp3(const QString& name, QString soundFont)
                   float* l = bufferL;
                   float* r = bufferR;
                   for (; playPos != events.constEnd(); ++playPos) {
-                        double f = utick2utime(playPos.key());
+                        double f = score->utick2utime(playPos.key());
                         if (f >= endTime)
                               break;
                         int n = lrint((f - playTime) * sampleRate);
-                        synti->process(n, l, r, stride);
+                        synti->process(n, l, r);
 
-                        l         += n * stride;
-                        r         += n * stride;
+                        l         += n;
+                        r         += n;
                         playTime += double(n)/double(sampleRate);
                         frames    -= n;
                         const Event& e = playPos.value();
                         if (e.isChannelEvent()) {
                               int channelIdx = e.channel();
-                              Channel* c = _midiMapping[channelIdx].articulation;
+                              Channel* c = score->midiMapping(channelIdx)->articulation;
                               if (!c->mute) {
                                     synti->play(e, c->synti);
                                     }
                               }
                         }
                   if (frames) {
-                        synti->process(frames, l, r, stride);
+                        synti->process(frames, l, r);
                         playTime += double(frames)/double(sampleRate);
                         }
                   if (pass == 1) {
@@ -819,10 +806,9 @@ bool Score::saveMp3(const QString& name, QString soundFont)
                   out << bufferOut[j];
             }
 
-      mscore->hideProgressBar();
+      hideProgressBar();
       delete synti;
       file.close();
-#endif
       return true;
       }
 

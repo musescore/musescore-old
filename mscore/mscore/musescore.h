@@ -534,9 +534,16 @@ class MuseScore : public QMainWindow {
       bool saveSvg(const QString& saveName);
       bool savePng(const QString& name);
       bool savePng(Score*, const QString& name, bool screenshot, bool transparent, double convDpi, QImage::Format format);
+      bool saveAudio(Score* score, const QString& name, const QString& type);
+      bool saveMp3(Score* score, const QString& name);
+      bool saveMxl(Score* score, const QString& name);
+      bool saveXml(Score* score, const QString& name);
+      bool saveMidi(Score* score, const QString& name);
+      bool saveLilypond(Score* score, const QString& name);
+
       void addTempo();
       void addMetronome();
-      
+
       Q_INVOKABLE QString getLocaleISOCode();
       };
 

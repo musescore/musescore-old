@@ -123,11 +123,12 @@ void MuseScore::readScoreError(const QString& name) const
          );
       }
 
-/**
- Load file \a name.
- Display message box with error if loading fails.
- Return true if OK and false on error.
- */
+//---------------------------------------------------------
+//   load
+///   Load file \a name.
+///   Display message box with error if loading fails.
+///   Return true if OK and false on error.
+//---------------------------------------------------------
 
 bool LoadFile::load(const QString& name)
       {
@@ -1319,23 +1320,23 @@ bool MuseScore::saveAs(Score* cs, bool saveCopy, const QString& path, const QStr
             }
       else if (ext == "xml") {
             // save as MusicXML *.xml file
-//TODO-LIB            rv = saveXml(fn);
+            rv = saveXml(cs, fn);
             }
       else if (ext == "mxl") {
             // save as compressed MusicXML *.mxl file
-//TODO-LIB            rv = saveMxl(fn);
+            rv = saveMxl(cs, fn);
             }
       else if (ext == "mid") {
             // save as midi file *.mid
-//TODO-LIB            rv = saveMidi(fn);
+            rv = saveMidi(cs, fn);
             }
       else if (ext == "pdf") {
             // save as pdf file *.pdf
-//TODO-LIB            rv = savePsPdf(fn, QPrinter::PdfFormat);
+            rv = savePsPdf(fn, QPrinter::PdfFormat);
             }
       else if (ext == "ps") {
             // save as postscript file *.ps
-//TODO-LIB            rv = savePsPdf(fn, QPrinter::PostScriptFormat);
+            rv = savePsPdf(fn, QPrinter::PostScriptFormat);
             }
       else if (ext == "png") {
             // save as png file *.png
@@ -1347,16 +1348,14 @@ bool MuseScore::saveAs(Score* cs, bool saveCopy, const QString& path, const QStr
             }
       else if (ext == "ly") {
             // save as lilypond file *.ly
-//TODO-LIB            rv = saveLilypond(fn);
+            rv = saveLilypond(cs, fn);
             }
 #ifdef HAS_AUDIOFILE
-      else if (ext == "wav" || ext == "flac" || ext == "ogg") {
-//TODO-LIB            rv = saveAudio(fn, ext);
-            }
+      else if (ext == "wav" || ext == "flac" || ext == "ogg")
+            rv = saveAudio(cs, fn, ext);
 #endif
-      else if (ext == "mp3") {
-//TODO-LIB            rv = saveMp3(fn);
-            }
+      else if (ext == "mp3")
+            rv = saveMp3(cs, fn);
       else {
             fprintf(stderr, "internal error: unsupported extension <%s>\n",
                qPrintable(ext));
@@ -1373,7 +1372,6 @@ bool MuseScore::savePsPdf(const QString& saveName, QPrinter::OutputFormat format
       {
       PageFormat* pf = cs->pageFormat();
       QPrinter printerDev(QPrinter::HighResolution);
-printf("Resolution %d\n", printerDev.resolution());
 
       if (paperSizes[pf->size].qtsize >= int(QPrinter::Custom)) {
             printerDev.setPaperSize(QSizeF(pf->_width, pf->_height),
