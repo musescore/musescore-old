@@ -1027,6 +1027,14 @@ p, li { white-space: pre-wrap; }&#13;
         <source>breve</source>
         <translation>breve</translation>
     </message>
+    <message>
+        <source>sol</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>alt. brevis</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>ChordRestBase</name>
@@ -1148,22 +1156,6 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <source>invalid</source>
         <translation>non válido</translation>
-    </message>
-    <message>
-        <source>Normal Head</source>
-        <translation>Cabeza normal</translation>
-    </message>
-    <message>
-        <source>Cross Head</source>
-        <translation>Cabeza de cruz</translation>
-    </message>
-    <message>
-        <source>Diamond Head</source>
-        <translation>Cabeza de rombo</translation>
-    </message>
-    <message>
-        <source>Triangle Head</source>
-        <translation>Cabeza de triángulo</translation>
     </message>
     <message>
         <source>Load</source>
@@ -2056,7 +2048,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Close</source>
-        <translation>Fechar</translation>
+        <translation>Pechar</translation>
     </message>
     <message>
         <source>Part-%1</source>
@@ -3025,7 +3017,7 @@ fallou: </translation>
     </message>
     <message>
         <source>Open &amp;Recent</source>
-        <translation>Abrir unha &amp;recente</translation>
+        <translation>Abrir ficheiros &amp;recentes</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
@@ -3081,11 +3073,11 @@ fallou: </translation>
     </message>
     <message>
         <source>note entry mode</source>
-        <translation>modo de introdución de notas</translation>
+        <translation>xeito de introdución de notas</translation>
     </message>
     <message>
         <source>edit mode</source>
-        <translation>modificar o modo</translation>
+        <translation>editar modo</translation>
     </message>
     <message>
         <source>play</source>
@@ -3704,6 +3696,25 @@ is incompatible with current interface</source>
     <message>
         <source>All Files (*)</source>
         <translation>Todos os ficheiros (*)</translation>
+    </message>
+</context>
+<context>
+    <name>MyWebView</name>
+    <message>
+        <source>Could not&lt;br /&gt; connect</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>To connect with the community, &lt;br /&gt; you need to have internet &lt;br /&gt; connection enabled</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Retry</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Close this permanently</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -4326,14 +4337,6 @@ is incompatible with current interface</source>
         <translation>Xanelas</translation>
     </message>
     <message>
-        <source>Play Panel:</source>
-        <translation>Panel de reprodución:</translation>
-    </message>
-    <message>
-        <source>show</source>
-        <translation>mostrar</translation>
-    </message>
-    <message>
         <source>Style</source>
         <translation>Estilo</translation>
     </message>
@@ -4715,10 +4718,6 @@ is incompatible with current interface</source>
         <translation>Empregar un ficheiro de estilo:</translation>
     </message>
     <message>
-        <source>Navigator:</source>
-        <translation>Navegador</translation>
-    </message>
-    <message>
         <source>Use JACK MIDI output</source>
         <translation>Empregar a saída MIDI JACK</translation>
     </message>
@@ -4743,16 +4742,24 @@ is incompatible with current interface</source>
         <translation>Escoller a interface de entrada PortMidi</translation>
     </message>
     <message>
-        <source>Use Current Position</source>
-        <translation>Empregar a posición actual</translation>
-    </message>
-    <message>
         <source>Character Set used when import non-unicode strings. (For binary file import)</source>
         <translation>Conxunto de caracteres empregado ao importar cadeas fóra do unicode. (Para importar ficheiros binarios)</translation>
     </message>
     <message>
         <source>Character Set</source>
         <translation>Conxunto de caracteres</translation>
+    </message>
+    <message>
+        <source>Show Play Panel</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Show Navigator</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Show MuseScore Connect</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -5013,7 +5020,7 @@ Seleccione unha única nota ou silencio e tente a operación de novo
     </message>
     <message>
         <source>There is nothing selected. Transpose whole score?</source>
-        <translation>Non hai nada seleccionado. Transpor a partitura completa?</translation>
+        <translation>Non hai nada seleccionado. Quere transpor a partitura completa?</translation>
     </message>
     <message>
         <source>No staves found:
@@ -5582,7 +5589,7 @@ e verifique que a localización do ficheiro é a correcta</translation>
     <name>SlurSegment</name>
     <message>
         <source>Edit Mode</source>
-        <translation>Modificar o modo</translation>
+        <translation>Editar o modo</translation>
     </message>
     <message>
         <source>Slur Properties...</source>
@@ -5659,10 +5666,6 @@ e verifique que a localización do ficheiro é a correcta</translation>
     <message>
         <source>System Flag</source>
         <translation>Bandeira de sistema</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation>Eliminar</translation>
     </message>
 </context>
 <context>
@@ -5870,8 +5873,8 @@ e verifique que a localización do ficheiro é a correcta</translation>
         <translation>Facer visíbel</translation>
     </message>
     <message>
-        <source>Text Properties...</source>
-        <translation>Propiedades do texto...</translation>
+        <source>Staff Properties...</source>
+        <translation type="unfinished">Propiedades do pentagrama</translation>
     </message>
 </context>
 <context>
@@ -6639,6 +6642,37 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>WebPageDockWidget</name>
+    <message>
+        <source>Connect with the &lt;br /&gt; Community</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Find help</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Improve your skills</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Read the latest news</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Download free sheet music</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Close this permanently</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>accidental</name>
     <message>
         <source>none</source>
@@ -6769,7 +6803,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Close</source>
-        <translation>Fechar</translation>
+        <translation>Pechar</translation>
     </message>
     <message>
         <source>file new</source>
@@ -6805,7 +6839,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Paste</source>
-        <translation>Apegar</translation>
+        <translation>Pegar</translation>
     </message>
     <message>
         <source>Instruments...</source>
@@ -7069,7 +7103,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Reset Beam Mode</source>
-        <translation>Restaurar o modo de exhibición das barras de ligazón</translation>
+        <translation>Restaurar o xeito de exhibición das barras de ligazón</translation>
     </message>
     <message>
         <source>up+shift+ctrl</source>
@@ -7657,11 +7691,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Save Style...</source>
-        <translation>Gravar o estilo...</translation>
+        <translation>Gardar o estilo...</translation>
     </message>
     <message>
         <source>Save Style</source>
-        <translation>Gravar o estilo</translation>
+        <translation>Gardar o estilo</translation>
     </message>
     <message>
         <source>Select All</source>
@@ -7949,27 +7983,27 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>File save</source>
-        <translation>Gravar ficheiro</translation>
+        <translation>Gardar ficheiro</translation>
     </message>
     <message>
         <source>Save score to file</source>
-        <translation>Gravar a partitura nun ficheiro</translation>
+        <translation>Gardar a partitura nun ficheiro</translation>
     </message>
     <message>
         <source>File save as</source>
-        <translation>Gravar o ficheiro como</translation>
+        <translation>Gardar o ficheiro como</translation>
     </message>
     <message>
         <source>Save score under a new file name</source>
-        <translation>Gravar a partitura cun nome novo</translation>
+        <translation>Gardar a partitura cun nome novo</translation>
     </message>
     <message>
         <source>File save a copy</source>
-        <translation>Gravar copia en ficheiro</translation>
+        <translation>Gardar copia en ficheiro</translation>
     </message>
     <message>
         <source>Save a copy of the score in addition to the current file</source>
-        <translation>Gravar unha copia da partitura a parte do ficheiro actual</translation>
+        <translation>Gardar unha copia da partitura a parte do ficheiro actual</translation>
     </message>
     <message>
         <source>File reload</source>
@@ -7981,11 +8015,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>File close</source>
-        <translation>Fechar o ficheiro</translation>
+        <translation>Pechar o ficheiro</translation>
     </message>
     <message>
         <source>Close current score</source>
-        <translation>Fechar a partitura</translation>
+        <translation>Pechar a partitura</translation>
     </message>
     <message>
         <source>Print</source>
@@ -8045,7 +8079,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Note input mode</source>
-        <translation>Modo de introdución de notas</translation>
+        <translation>Xeito de introdución de notas</translation>
     </message>
     <message>
         <source>Pitch spell</source>
@@ -8117,7 +8151,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Reset beam mode of selected measures</source>
-        <translation>Restaurar o modo de ligazón dos compases seleccionados</translation>
+        <translation>Restaurar o xeito de ligazón dos compases seleccionados</translation>
     </message>
     <message>
         <source>Flip direction</source>
@@ -8313,7 +8347,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Save style</source>
-        <translation>Gravar o estilo</translation>
+        <translation>Gardar o estilo</translation>
     </message>
     <message>
         <source>Select all</source>
@@ -8342,6 +8376,14 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Parts...</source>
         <translation>Partes...</translation>
+    </message>
+    <message>
+        <source>next score</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>previous score</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -8594,7 +8636,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Hi-Hat Closed</source>
-        <translation>Chimbau fechado</translation>
+        <translation>Chimbau Pechado</translation>
     </message>
     <message>
         <source>Tom 4</source>
@@ -8949,6 +8991,65 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Two Pages</source>
         <translation>Dúas páxinas</translation>
+    </message>
+</context>
+<context>
+    <name>noteheadnames</name>
+    <message>
+        <source>normal</source>
+        <translation type="unfinished">normal</translation>
+    </message>
+    <message>
+        <source>cross</source>
+        <translation type="unfinished">cruz</translation>
+    </message>
+    <message>
+        <source>diamond</source>
+        <translation type="unfinished">rombo</translation>
+    </message>
+    <message>
+        <source>triangle</source>
+        <translation type="unfinished">triángulo</translation>
+    </message>
+    <message>
+        <source>mi</source>
+        <translation type="unfinished">mi</translation>
+    </message>
+    <message>
+        <source>slash</source>
+        <translation type="unfinished">barra</translation>
+    </message>
+    <message>
+        <source>xcircle</source>
+        <translation type="unfinished">círculo x</translation>
+    </message>
+    <message>
+        <source>do</source>
+        <translation type="unfinished">do</translation>
+    </message>
+    <message>
+        <source>re</source>
+        <translation type="unfinished">re</translation>
+    </message>
+    <message>
+        <source>fa</source>
+        <translation type="unfinished">fa</translation>
+    </message>
+    <message>
+        <source>la</source>
+        <translation type="unfinished">la</translation>
+    </message>
+    <message>
+        <source>ti</source>
+        <translation type="unfinished">si</translation>
+    </message>
+    <message>
+        <source>sol</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>alt. brevis</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -9836,6 +9937,46 @@ esta versión do MuseScore é vella de máis.</translation>
     <message>
         <source>plus</source>
         <translation>máis</translation>
+    </message>
+    <message>
+        <source>s0sol head</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>s1sol head</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>s2sol head</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>longa up alt</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>longa down alt</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>brevis head alt</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>time sig C dot</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>time sig O</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>time sig O cut</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>time sig O dot</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>

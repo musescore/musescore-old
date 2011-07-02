@@ -1018,6 +1018,14 @@ p, li { white-space: pre-wrap; }
         <source>breve</source>
         <translation>breve</translation>
     </message>
+    <message>
+        <source>sol</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>alt. brevis</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>ChordRestBase</name>
@@ -1139,22 +1147,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>invalid</source>
         <translation>inválido</translation>
-    </message>
-    <message>
-        <source>Normal Head</source>
-        <translation>Cabeza Normal</translation>
-    </message>
-    <message>
-        <source>Cross Head</source>
-        <translation>Cabeza Tachada</translation>
-    </message>
-    <message>
-        <source>Diamond Head</source>
-        <translation>Cabeza de Diamante</translation>
-    </message>
-    <message>
-        <source>Triangle Head</source>
-        <translation>Cabeza Triangular</translation>
     </message>
     <message>
         <source>Load</source>
@@ -3695,6 +3687,25 @@ no es compatible con el interfaz actual</translation>
     </message>
 </context>
 <context>
+    <name>MyWebView</name>
+    <message>
+        <source>Could not&lt;br /&gt; connect</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>To connect with the community, &lt;br /&gt; you need to have internet &lt;br /&gt; connection enabled</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Retry</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Close this permanently</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>NewWizard</name>
     <message>
         <source>Form</source>
@@ -4306,14 +4317,6 @@ no es compatible con el interfaz actual</translation>
         <translation>Ventanas</translation>
     </message>
     <message>
-        <source>Play Panel:</source>
-        <translation>Panel de Reproducción</translation>
-    </message>
-    <message>
-        <source>show</source>
-        <translation>mostrar</translation>
-    </message>
-    <message>
         <source>Auto Save</source>
         <translation>Auto Guardar</translation>
     </message>
@@ -4703,10 +4706,6 @@ no es compatible con el interfaz actual</translation>
         <translation>Usar archivo de estilo:</translation>
     </message>
     <message>
-        <source>Navigator:</source>
-        <translation>Navegador:</translation>
-    </message>
-    <message>
         <source>Use JACK MIDI output</source>
         <translation>Usar salida JACK MIDI</translation>
     </message>
@@ -4731,16 +4730,24 @@ no es compatible con el interfaz actual</translation>
         <translation>Seleccionar interfaz de entrada para PortMidi</translation>
     </message>
     <message>
-        <source>Use Current Position</source>
-        <translation>Usar Posición Actual</translation>
-    </message>
-    <message>
         <source>Character Set used when import non-unicode strings. (For binary file import)</source>
         <translation>Juego de caracteres empleado para importar cadenas de texto distintas al standard unicode. (Para importación de archivos binarios)</translation>
     </message>
     <message>
         <source>Character Set</source>
         <translation>Juego de Caracteres</translation>
+    </message>
+    <message>
+        <source>Show Play Panel</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Show Navigator</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Show MuseScore Connect</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -5645,10 +5652,6 @@ y comprueba que la ruta al archivo es correcta.</translation>
         <source>System Flag</source>
         <translation>Bandera del Sistema</translation>
     </message>
-    <message>
-        <source>Delete</source>
-        <translation>Eliminar</translation>
-    </message>
 </context>
 <context>
     <name>SynthControl</name>
@@ -5855,8 +5858,8 @@ y comprueba que la ruta al archivo es correcta.</translation>
         <translation>Hacer Visible</translation>
     </message>
     <message>
-        <source>Text Properties...</source>
-        <translation>Propiedades del Texto...</translation>
+        <source>Staff Properties...</source>
+        <translation type="unfinished">Propiedades del Pentagrama...</translation>
     </message>
 </context>
 <context>
@@ -6624,6 +6627,37 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Line Properties...</source>
         <translation>Propiedades de la Línea...</translation>
+    </message>
+</context>
+<context>
+    <name>WebPageDockWidget</name>
+    <message>
+        <source>Connect with the &lt;br /&gt; Community</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Find help</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Improve your skills</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Read the latest news</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Download free sheet music</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Close this permanently</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -8331,6 +8365,14 @@ p, li { white-space: pre-wrap; }
         <source>Parts...</source>
         <translation>Partes...</translation>
     </message>
+    <message>
+        <source>next score</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>previous score</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>articulation</name>
@@ -8937,6 +8979,65 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Two Pages</source>
         <translation>Dos Páginas</translation>
+    </message>
+</context>
+<context>
+    <name>noteheadnames</name>
+    <message>
+        <source>normal</source>
+        <translation type="unfinished">normal</translation>
+    </message>
+    <message>
+        <source>cross</source>
+        <translation type="unfinished">cruz</translation>
+    </message>
+    <message>
+        <source>diamond</source>
+        <translation type="unfinished">diamante</translation>
+    </message>
+    <message>
+        <source>triangle</source>
+        <translation type="unfinished">triángulo</translation>
+    </message>
+    <message>
+        <source>mi</source>
+        <translation type="unfinished">mi</translation>
+    </message>
+    <message>
+        <source>slash</source>
+        <translation type="unfinished">barra inclinada</translation>
+    </message>
+    <message>
+        <source>xcircle</source>
+        <translation type="unfinished">xcirculo</translation>
+    </message>
+    <message>
+        <source>do</source>
+        <translation type="unfinished">do</translation>
+    </message>
+    <message>
+        <source>re</source>
+        <translation type="unfinished">re</translation>
+    </message>
+    <message>
+        <source>fa</source>
+        <translation type="unfinished">fa</translation>
+    </message>
+    <message>
+        <source>la</source>
+        <translation type="unfinished">la</translation>
+    </message>
+    <message>
+        <source>ti</source>
+        <translation type="unfinished">si</translation>
+    </message>
+    <message>
+        <source>sol</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>alt. brevis</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -9824,6 +9925,46 @@ Su versión de MuseScore es muy antigua</translation>
     <message>
         <source>plus</source>
         <translation>más</translation>
+    </message>
+    <message>
+        <source>s0sol head</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>s1sol head</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>s2sol head</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>longa up alt</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>longa down alt</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>brevis head alt</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>time sig C dot</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>time sig O</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>time sig O cut</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>time sig O dot</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>

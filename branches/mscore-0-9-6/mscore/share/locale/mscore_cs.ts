@@ -1027,6 +1027,14 @@ p, li { white-space: pre-wrap; }&#13;
         <source>breve</source>
         <translation>Breve</translation>
     </message>
+    <message>
+        <source>sol</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>alt. brevis</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>ChordRestBase</name>
@@ -1148,22 +1156,6 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <source>invalid</source>
         <translation>Neplatný</translation>
-    </message>
-    <message>
-        <source>Normal Head</source>
-        <translation>Obvyklá hlavička</translation>
-    </message>
-    <message>
-        <source>Cross Head</source>
-        <translation>Hlavička ve tvaru kříže</translation>
-    </message>
-    <message>
-        <source>Diamond Head</source>
-        <translation>Hlavička ve tvaru kosočtverce</translation>
-    </message>
-    <message>
-        <source>Triangle Head</source>
-        <translation>Hlavička ve tvaru trojúhelníku</translation>
     </message>
     <message>
         <source>Load</source>
@@ -3705,6 +3697,25 @@ není slučitelný se současným rozhraním</translation>
     </message>
 </context>
 <context>
+    <name>MyWebView</name>
+    <message>
+        <source>Could not&lt;br /&gt; connect</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>To connect with the community, &lt;br /&gt; you need to have internet &lt;br /&gt; connection enabled</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Retry</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Close this permanently</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>NewWizard</name>
     <message>
         <source>Form</source>
@@ -4324,14 +4335,6 @@ není slučitelný se současným rozhraním</translation>
         <translation>Okna</translation>
     </message>
     <message>
-        <source>Play Panel:</source>
-        <translation>Přehrávací panel:</translation>
-    </message>
-    <message>
-        <source>show</source>
-        <translation>Ukázat</translation>
-    </message>
-    <message>
         <source>Style</source>
         <translation>Styl</translation>
     </message>
@@ -4714,10 +4717,6 @@ v pixelech (vyšší hodnota rovná se větší poloměr)</translation>
         <translation>Použít soubor se stylem:</translation>
     </message>
     <message>
-        <source>Navigator:</source>
-        <translation>Navedení:</translation>
-    </message>
-    <message>
         <source>Use JACK MIDI output</source>
         <translation>Pro vstup použít JACK MIDI</translation>
     </message>
@@ -4742,16 +4741,24 @@ v pixelech (vyšší hodnota rovná se větší poloměr)</translation>
         <translation>Vybrat rozhraní pro vstup PortMidi</translation>
     </message>
     <message>
-        <source>Use Current Position</source>
-        <translation>Použít nynější polohu</translation>
-    </message>
-    <message>
         <source>Character Set used when import non-unicode strings. (For binary file import)</source>
         <translation>Znaková sada používaná při zavádění řetězců, jež nejsou unicode. (pro zavádění binárních souborů)</translation>
     </message>
     <message>
         <source>Character Set</source>
         <translation>Znaková sada</translation>
+    </message>
+    <message>
+        <source>Show Play Panel</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Show Navigator</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Show MuseScore Connect</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -5660,10 +5667,6 @@ a zaškrtněte, že umístění souboru je správné</translation>
         <source>System Flag</source>
         <translation>Systémový příznak</translation>
     </message>
-    <message>
-        <source>Delete</source>
-        <translation>Smazat</translation>
-    </message>
 </context>
 <context>
     <name>SynthControl</name>
@@ -5870,8 +5873,8 @@ a zaškrtněte, že umístění souboru je správné</translation>
         <translation>Nastavit viditelné</translation>
     </message>
     <message>
-        <source>Text Properties...</source>
-        <translation>Vlastnosti textu...</translation>
+        <source>Staff Properties...</source>
+        <translation type="unfinished">Vlastnosti osnovy...</translation>
     </message>
 </context>
 <context>
@@ -6639,6 +6642,37 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Line Properties...</source>
         <translation>Vlastnosti čáry</translation>
+    </message>
+</context>
+<context>
+    <name>WebPageDockWidget</name>
+    <message>
+        <source>Connect with the &lt;br /&gt; Community</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Find help</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Improve your skills</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Read the latest news</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Download free sheet music</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Close this permanently</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -8346,6 +8380,14 @@ p, li { white-space: pre-wrap; }
         <source>Parts...</source>
         <translation>Hlasy...</translation>
     </message>
+    <message>
+        <source>next score</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>previous score</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>articulation</name>
@@ -8952,6 +8994,65 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Two Pages</source>
         <translation>Dvě strany</translation>
+    </message>
+</context>
+<context>
+    <name>noteheadnames</name>
+    <message>
+        <source>normal</source>
+        <translation type="unfinished">Normální</translation>
+    </message>
+    <message>
+        <source>cross</source>
+        <translation type="unfinished">Křížek</translation>
+    </message>
+    <message>
+        <source>diamond</source>
+        <translation type="unfinished">Kosočtverec</translation>
+    </message>
+    <message>
+        <source>triangle</source>
+        <translation type="unfinished">Trojúhelník</translation>
+    </message>
+    <message>
+        <source>mi</source>
+        <translation type="unfinished">mi</translation>
+    </message>
+    <message>
+        <source>slash</source>
+        <translation type="unfinished">Šikmá čára</translation>
+    </message>
+    <message>
+        <source>xcircle</source>
+        <translation type="unfinished">XKruh</translation>
+    </message>
+    <message>
+        <source>do</source>
+        <translation type="unfinished">do</translation>
+    </message>
+    <message>
+        <source>re</source>
+        <translation type="unfinished">re</translation>
+    </message>
+    <message>
+        <source>fa</source>
+        <translation type="unfinished">fa</translation>
+    </message>
+    <message>
+        <source>la</source>
+        <translation type="unfinished">la</translation>
+    </message>
+    <message>
+        <source>ti</source>
+        <translation type="unfinished">ti</translation>
+    </message>
+    <message>
+        <source>sol</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>alt. brevis</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -9839,6 +9940,46 @@ vaše verze MuseScore je příliš stará.</translation>
     <message>
         <source>plus</source>
         <translation>Plus</translation>
+    </message>
+    <message>
+        <source>s0sol head</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>s1sol head</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>s2sol head</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>longa up alt</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>longa down alt</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>brevis head alt</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>time sig C dot</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>time sig O</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>time sig O cut</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>time sig O dot</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>

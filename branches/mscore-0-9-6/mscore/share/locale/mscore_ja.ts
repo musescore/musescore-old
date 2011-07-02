@@ -1027,6 +1027,14 @@ p, li { white-space: pre-wrap; }&#13;
         <source>breve</source>
         <translation>倍全音符の符頭</translation>
     </message>
+    <message>
+        <source>sol</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>alt. brevis</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>ChordRestBase</name>
@@ -1149,22 +1157,6 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <source>invalid</source>
         <translation>不正</translation>
-    </message>
-    <message>
-        <source>Normal Head</source>
-        <translation>標準符頭</translation>
-    </message>
-    <message>
-        <source>Cross Head</source>
-        <translation>十字形符頭</translation>
-    </message>
-    <message>
-        <source>Diamond Head</source>
-        <translation>菱形符頭</translation>
-    </message>
-    <message>
-        <source>Triangle Head</source>
-        <translation>三角形符頭</translation>
     </message>
     <message>
         <source>Load</source>
@@ -3702,6 +3694,25 @@ is incompatible with current interface</source>
     </message>
 </context>
 <context>
+    <name>MyWebView</name>
+    <message>
+        <source>Could not&lt;br /&gt; connect</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>To connect with the community, &lt;br /&gt; you need to have internet &lt;br /&gt; connection enabled</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Retry</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Close this permanently</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>NewWizard</name>
     <message>
         <source>MuseScore: Create New Score</source>
@@ -4325,14 +4336,6 @@ is incompatible with current interface</source>
         <translation>ウィンドウ</translation>
     </message>
     <message>
-        <source>Play Panel:</source>
-        <translation>再生パネル:</translation>
-    </message>
-    <message>
-        <source>show</source>
-        <translation>表示</translation>
-    </message>
-    <message>
         <source>Style</source>
         <translation>スタイル</translation>
     </message>
@@ -4711,10 +4714,6 @@ is incompatible with current interface</source>
         <translation>スタイルファイルを使う:</translation>
     </message>
     <message>
-        <source>Navigator:</source>
-        <translation>ナビゲーター</translation>
-    </message>
-    <message>
         <source>Use JACK MIDI output</source>
         <translation>JACK MIDI output を使用</translation>
     </message>
@@ -4739,16 +4738,24 @@ is incompatible with current interface</source>
         <translation>MIDI IN ポートの選択</translation>
     </message>
     <message>
-        <source>Use Current Position</source>
-        <translation>指定位置を使用</translation>
-    </message>
-    <message>
         <source>Character Set used when import non-unicode strings. (For binary file import)</source>
         <translation>Character Set used when import non-unicode strings. (For binary file import)</translation>
     </message>
     <message>
         <source>Character Set</source>
         <translation>Character Set</translation>
+    </message>
+    <message>
+        <source>Show Play Panel</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Show Navigator</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Show MuseScore Connect</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -5653,10 +5660,6 @@ and check that the file location is correct</source>
         <source>System Flag</source>
         <translation>五線のアンカーポイント</translation>
     </message>
-    <message>
-        <source>Delete</source>
-        <translation>消去</translation>
-    </message>
 </context>
 <context>
     <name>SynthControl</name>
@@ -5863,8 +5866,8 @@ and check that the file location is correct</source>
         <translation>表示する</translation>
     </message>
     <message>
-        <source>Text Properties...</source>
-        <translation>テキストのプロパティ...</translation>
+        <source>Staff Properties...</source>
+        <translation type="unfinished">譜表のプロパティ...</translation>
     </message>
 </context>
 <context>
@@ -6629,6 +6632,37 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Line Properties...</source>
         <translation>線のプロパティ...</translation>
+    </message>
+</context>
+<context>
+    <name>WebPageDockWidget</name>
+    <message>
+        <source>Connect with the &lt;br /&gt; Community</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Find help</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Improve your skills</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Read the latest news</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Download free sheet music</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Close this permanently</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -8336,6 +8370,14 @@ p, li { white-space: pre-wrap; }
         <source>Parts...</source>
         <translation>パート...</translation>
     </message>
+    <message>
+        <source>next score</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>previous score</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>articulation</name>
@@ -8942,6 +8984,65 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Two Pages</source>
         <translation>２ページ</translation>
+    </message>
+</context>
+<context>
+    <name>noteheadnames</name>
+    <message>
+        <source>normal</source>
+        <translation type="unfinished">標準</translation>
+    </message>
+    <message>
+        <source>cross</source>
+        <translation type="unfinished">×形符頭</translation>
+    </message>
+    <message>
+        <source>diamond</source>
+        <translation type="unfinished">菱形符頭</translation>
+    </message>
+    <message>
+        <source>triangle</source>
+        <translation type="unfinished">三角形</translation>
+    </message>
+    <message>
+        <source>mi</source>
+        <translation type="unfinished">シェイプ・ノート：　ミ</translation>
+    </message>
+    <message>
+        <source>slash</source>
+        <translation type="unfinished">スラッシュ</translation>
+    </message>
+    <message>
+        <source>xcircle</source>
+        <translation type="unfinished">ｘ サークル</translation>
+    </message>
+    <message>
+        <source>do</source>
+        <translation type="unfinished">シェイプ・ノート：　ド</translation>
+    </message>
+    <message>
+        <source>re</source>
+        <translation type="unfinished">シェイプ・ノート：　レ</translation>
+    </message>
+    <message>
+        <source>fa</source>
+        <translation type="unfinished">シェイプ・ノート：　ファ</translation>
+    </message>
+    <message>
+        <source>la</source>
+        <translation type="unfinished">シェイプ・ノート：　ラ</translation>
+    </message>
+    <message>
+        <source>ti</source>
+        <translation type="unfinished">シェイプ・ノート：　シ</translation>
+    </message>
+    <message>
+        <source>sol</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>alt. brevis</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -9829,6 +9930,46 @@ your version of MuseScore is too old.</source>
     <message>
         <source>plus</source>
         <translation>プラス</translation>
+    </message>
+    <message>
+        <source>s0sol head</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>s1sol head</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>s2sol head</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>longa up alt</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>longa down alt</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>brevis head alt</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>time sig C dot</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>time sig O</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>time sig O cut</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>time sig O dot</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>

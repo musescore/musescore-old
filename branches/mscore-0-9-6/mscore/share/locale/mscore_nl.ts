@@ -1027,6 +1027,14 @@ p, li { white-space: pre-wrap; }&#13;
         <source>breve</source>
         <translation>brevis</translation>
     </message>
+    <message>
+        <source>sol</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>alt. brevis</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>ChordRestBase</name>
@@ -1168,20 +1176,12 @@ p, li { white-space: pre-wrap; }&#13;
         <translation>ongeldig</translation>
     </message>
     <message>
-        <source>Diamond Head</source>
-        <translation>Ruit Nootkop</translation>
-    </message>
-    <message>
         <source>MuseScore drumset (*.drm)</source>
         <translation>MuseScore drumset (*.drm)</translation>
     </message>
     <message>
         <source>MuseScore: Load Drumset</source>
         <translation>MuseScore: Laad Drumset</translation>
-    </message>
-    <message>
-        <source>Normal Head</source>
-        <translation>Normale Nootkop</translation>
     </message>
     <message>
         <source>MuseScore: Save Drumset</source>
@@ -1196,14 +1196,6 @@ mislukt: </translation>
     <message>
         <source>MuseScore: Write Drumset</source>
         <translation>MuseScore: Schrijf Drumset</translation>
-    </message>
-    <message>
-        <source>Triangle Head</source>
-        <translation>Driehoek Nootkop</translation>
-    </message>
-    <message>
-        <source>Cross Head</source>
-        <translation>Kruis Nootkop</translation>
     </message>
     <message>
         <source>Write File failed: </source>
@@ -3707,6 +3699,25 @@ is niet compactibel met de huidige interface</translation>
     </message>
 </context>
 <context>
+    <name>MyWebView</name>
+    <message>
+        <source>Could not&lt;br /&gt; connect</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>To connect with the community, &lt;br /&gt; you need to have internet &lt;br /&gt; connection enabled</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Retry</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Close this permanently</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>NewWizard</name>
     <message>
         <source>Form</source>
@@ -4331,10 +4342,6 @@ is niet compactibel met de huidige interface</translation>
         <translation>Tekst</translation>
     </message>
     <message>
-        <source>show</source>
-        <translation>tonen</translation>
-    </message>
-    <message>
         <source>Use style file:</source>
         <translation>Gebruik stijlbestand:</translation>
     </message>
@@ -4527,10 +4534,6 @@ is niet compactibel met de huidige interface</translation>
         <translation>Importeer</translation>
     </message>
     <message>
-        <source>Play Panel:</source>
-        <translation>Afspeelpaneel:</translation>
-    </message>
-    <message>
         <source>Drop Target</source>
         <translation>Op doel geplaatst element</translation>
     </message>
@@ -4719,10 +4722,6 @@ is niet compactibel met de huidige interface</translation>
         <translation>Stijl voor gebruik invoer</translation>
     </message>
     <message>
-        <source>Navigator:</source>
-        <translation>Navigator:</translation>
-    </message>
-    <message>
         <source>Remember last connection(s)</source>
         <translation>Laatste verbinding onthouden</translation>
     </message>
@@ -4743,16 +4742,24 @@ is niet compactibel met de huidige interface</translation>
         <translation>Kies PortMidi input-interface</translation>
     </message>
     <message>
-        <source>Use Current Position</source>
-        <translation>Gebruik Huidige Positie</translation>
-    </message>
-    <message>
         <source>Character Set used when import non-unicode strings. (For binary file import)</source>
         <translation>Karakterset voor import van non-unicode tekst. (import van binaire bestanden)</translation>
     </message>
     <message>
         <source>Character Set</source>
         <translation>Tekenset</translation>
+    </message>
+    <message>
+        <source>Show Play Panel</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Show Navigator</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Show MuseScore Connect</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -5658,10 +5665,6 @@ en controleer dat de bestandslocatie juist is.</translation>
         <translation>Vorm</translation>
     </message>
     <message>
-        <source>Delete</source>
-        <translation>Verwijder</translation>
-    </message>
-    <message>
         <source>System Flag</source>
         <translation>Systeem Vlag</translation>
     </message>
@@ -5871,8 +5874,8 @@ en controleer dat de bestandslocatie juist is.</translation>
         <translation>Maak zichtbaar</translation>
     </message>
     <message>
-        <source>Text Properties...</source>
-        <translation>Teksteigenschappen...</translation>
+        <source>Staff Properties...</source>
+        <translation type="unfinished">Notenbalk Eigenschappen...</translation>
     </message>
 </context>
 <context>
@@ -6640,6 +6643,37 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Line Properties...</source>
         <translation>Lijneigenschappen...</translation>
+    </message>
+</context>
+<context>
+    <name>WebPageDockWidget</name>
+    <message>
+        <source>Connect with the &lt;br /&gt; Community</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Find help</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Improve your skills</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Read the latest news</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Download free sheet music</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Close this permanently</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -8347,6 +8381,14 @@ p, li { white-space: pre-wrap; }
         <source>Parts...</source>
         <translation>Partijen...</translation>
     </message>
+    <message>
+        <source>next score</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>previous score</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>articulation</name>
@@ -8953,6 +8995,65 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Page Width</source>
         <translation>Paginabreed</translation>
+    </message>
+</context>
+<context>
+    <name>noteheadnames</name>
+    <message>
+        <source>normal</source>
+        <translation type="unfinished">normaal</translation>
+    </message>
+    <message>
+        <source>cross</source>
+        <translation type="unfinished">kruis</translation>
+    </message>
+    <message>
+        <source>diamond</source>
+        <translation type="unfinished">ruit</translation>
+    </message>
+    <message>
+        <source>triangle</source>
+        <translation type="unfinished">driehoek</translation>
+    </message>
+    <message>
+        <source>mi</source>
+        <translation type="unfinished">mi</translation>
+    </message>
+    <message>
+        <source>slash</source>
+        <translation type="unfinished">slash</translation>
+    </message>
+    <message>
+        <source>xcircle</source>
+        <translation type="unfinished">xcirkel</translation>
+    </message>
+    <message>
+        <source>do</source>
+        <translation type="unfinished">do</translation>
+    </message>
+    <message>
+        <source>re</source>
+        <translation type="unfinished">re</translation>
+    </message>
+    <message>
+        <source>fa</source>
+        <translation type="unfinished">fa</translation>
+    </message>
+    <message>
+        <source>la</source>
+        <translation type="unfinished">la</translation>
+    </message>
+    <message>
+        <source>ti</source>
+        <translation type="unfinished">ti</translation>
+    </message>
+    <message>
+        <source>sol</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>alt. brevis</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -9840,6 +9941,46 @@ uw Musescore versie is te oud.</translation>
     <message>
         <source>plus</source>
         <translation>plus</translation>
+    </message>
+    <message>
+        <source>s0sol head</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>s1sol head</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>s2sol head</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>longa up alt</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>longa down alt</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>brevis head alt</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>time sig C dot</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>time sig O</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>time sig O cut</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>time sig O dot</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>
