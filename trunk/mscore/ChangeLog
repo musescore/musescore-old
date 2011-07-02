@@ -1,3 +1,5 @@
+2.jul (ws)
+      - fix #11035: Wrong position of (some) note dots (patch from Miwarre)
 27.jun (ws)
       - fix: do not remove clefs from template in new wizard "create from template"
       - fix: don't allow piano shortcut in edit mode (so you can enter 'p' in text)
