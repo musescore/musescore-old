@@ -819,6 +819,8 @@ void Chord::read(QDomElement e, const QList<Tuplet*>& tuplets)
             if (tag == "Note") {
                   Note* note = new Note(score());
                   note->setChord(this);
+                  // the note needs to know the properties of the track it belongs to
+                  note->setTrack(track());
                   note->read(e);
                   add(note);
                   }

@@ -1,3 +1,5 @@
+3.jul  (la)
+      - fix #10585: Accidental offset in small staves corrupted by saving and reloading (patch by Miwarre)
 1.jul  (la)
       - fix printing of images (fix #10140: Save as PDF with several images causes crash)
       - implement MuseScore Connect
