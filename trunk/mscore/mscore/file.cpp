@@ -1488,7 +1488,7 @@ bool MuseScore::readScore(Score* score, QString name)
       	      }
 #ifdef OMR
             else if (csl == "pdf") {
-                  if (!score->importPdf(name))
+                  if (!importPdf(score, name))
                         return false;
                   }
 #endif

@@ -541,6 +541,7 @@ class MuseScore : public QMainWindow {
       bool savePng(Score*, const QString& name);
       bool saveLilypond(Score* score, const QString& name);
       void convertMidi(Score* score, MidiFile* mf);
+      bool importPdf(Score* score, const QString& path);
 
       void addTempo();
       void addMetronome();

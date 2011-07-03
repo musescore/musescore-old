@@ -1,3 +1,5 @@
+3.jul (ws)
+      - fixed subbeam logic
 2.jul (ws)
       - fix #10585: Accidental offset in small staves corrupted by saving and reloading
       - fix #11035: Wrong position of (some) note dots (patch from Miwarre)
