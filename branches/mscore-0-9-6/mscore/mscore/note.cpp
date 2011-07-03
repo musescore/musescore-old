@@ -686,6 +686,8 @@ void Note::read(QDomElement e)
                   setUserAccidental(i);
             else if (tag == "Accidental") {
                   Accidental* a = new Accidental(score());
+                  // the accidental needs to know the properties of the track it belongs to
+                  a->setTrack(track());
                   a->read(e);
                   add(a);
                   }
