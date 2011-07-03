@@ -33,26 +33,27 @@
 #include "libmscore/clef.h"
 #include "libmscore/bracket.h"
 #include "libmscore/mscore.h"
+#include "musescore.h"
 
 //---------------------------------------------------------
 //   importPdf
 //---------------------------------------------------------
 
-bool Score::importPdf(const QString& path)
+bool MuseScore::importPdf(Score* score, const QString& path)
       {
-      _omr = new Omr(path, this);
-      if (!_omr->readPdf()) {
-            delete _omr;
-            _omr = 0;
+      Omr* omr = new Omr(path, score);
+      if (!omr->readPdf()) {
+            delete omr;
             return false;
             }
-      setSpatium(_omr->spatiumMM() * DPMM);
-      style()->set(StyleVal(ST_pageFillLimit, 1.0));
-      style()->set(StyleVal(ST_lastSystemFillLimit, 0.0));
-      style()->set(StyleVal(ST_staffLowerBorder, 0.0));
-      style()->set(StyleVal(ST_measureSpacing, 1.0));
+      score->setOmr(omr);
+      score->setSpatium(omr->spatiumMM() * DPMM);
+      score->style()->set(StyleVal(ST_pageFillLimit, 1.0));
+      score->style()->set(StyleVal(ST_lastSystemFillLimit, 0.0));
+      score->style()->set(StyleVal(ST_staffLowerBorder, 0.0));
+      score->style()->set(StyleVal(ST_measureSpacing, 1.0));
 
-      PageFormat* pF = pageFormat();
+      PageFormat* pF       = score->pageFormat();
       pF->evenLeftMargin   = 5.0 * DPMM / DPI;
       pF->evenRightMargin  = 5.0 * DPMM / DPI;
       pF->evenTopMargin    = 0;
@@ -62,23 +63,23 @@ bool Score::importPdf(const QString& path)
       pF->oddTopMargin     = 0;
       pF->oddBottomMargin  = 0;
 
-      style()->set(StyleVal(ST_systemDistance,   Spatium(_omr->systemDistance())));
-      style()->set(StyleVal(ST_akkoladeDistance, Spatium(_omr->staffDistance())));
+      score->style()->set(StyleVal(ST_systemDistance,   Spatium(omr->systemDistance())));
+      score->style()->set(StyleVal(ST_akkoladeDistance, Spatium(omr->staffDistance())));
 
-      Part* part   = new Part(this);
-      Staff* staff = new Staff(this, part, 0);
+      Part* part   = new Part(score);
+      Staff* staff = new Staff(score, part, 0);
       part->staves()->push_back(staff);
-      staves().insert(0, staff);
-      staff = new Staff(this, part, 1);
+      score->staves().insert(0, staff);
+      staff = new Staff(score, part, 1);
       part->staves()->push_back(staff);
-      staves().insert(1, staff);
+      score->staves().insert(1, staff);
       part->staves()->front()->setBarLineSpan(part->nstaves());
-      insertPart(part, 0);
+      score->insertPart(part, 0);
 
       Duration d(Duration::V_MEASURE);
       Measure* measure = 0;
       int tick = 0;
-      foreach(const OmrPage* omrPage, _omr->pages()) {
+      foreach(const OmrPage* omrPage, omr->pages()) {
             int nsystems = omrPage->systems().size();
             for (int k = 0; k < nsystems; ++k) {
                   const OmrSystem& omrSystem = omrPage->systems().at(k);
@@ -88,30 +89,30 @@ bool Score::importPdf(const QString& path)
                   else if (numMeasures > 50)
                         numMeasures = 50;
                   for (int i = 0; i < numMeasures; ++i) {
-                        measure = new Measure(this);
+                        measure = new Measure(score);
                         measure->setTick(tick);
 
-		            Rest* rest = new Rest(this, d);
+		            Rest* rest = new Rest(score, d);
                         rest->setDuration(Fraction(4,4));
                         rest->setTrack(0);
                         Segment* s = measure->getSegment(SegChordRest, tick);
 		            s->add(rest);
-		            rest = new Rest(this, d);
+		            rest = new Rest(score, d);
                         rest->setDuration(Fraction(4,4));
                         rest->setTrack(4);
 		            s->add(rest);
 
-                        measures()->add(measure);
+                        score->measures()->add(measure);
                         tick += AL::division * 4;
                         }
                   if (k < (nsystems-1)) {
-                        LayoutBreak* b = new LayoutBreak(this);
+                        LayoutBreak* b = new LayoutBreak(score);
                         b->setSubtype(LAYOUT_BREAK_LINE);
                         measure->add(b);
                         }
                   }
             if (measure) {
-                  LayoutBreak* b = new LayoutBreak(this);
+                  LayoutBreak* b = new LayoutBreak(score);
                   b->setSubtype(LAYOUT_BREAK_PAGE);
                   measure->add(b);
                   }
@@ -119,26 +120,26 @@ bool Score::importPdf(const QString& path)
 
       //---create bracket
 
-      _staves[0]->setBracket(0, BRACKET_AKKOLADE);
-      _staves[0]->setBracketSpan(0, 2);
+      score->staff(0)->setBracket(0, BRACKET_AKKOLADE);
+      score->staff(0)->setBracketSpan(0, 2);
 
       //---create clefs
 
-      measure = firstMeasure();
-      Clef* clef = new Clef(this);
+      measure = score->firstMeasure();
+      Clef* clef = new Clef(score);
       clef->setClefType(CLEF_G);
       clef->setTrack(0);
       Segment* segment = measure->getSegment(SegClef, 0);
       segment->add(clef);
 
-      clef = new Clef(this);
+      clef = new Clef(score);
       clef->setClefType(CLEF_F);
       clef->setTrack(4);
       segment->add(clef);
 
-      setShowOmr(true);
-      _omr->page(0)->readHeader(this);
-      rebuildMidiMapping();
+      score->setShowOmr(true);
+      omr->page(0)->readHeader(score);
+      score->rebuildMidiMapping();
       return true;
       }
 

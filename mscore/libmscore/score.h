@@ -569,7 +569,6 @@ class Score {
       bool importBB(const QString& name);
       bool importCapella(const QString& name);
       bool importOve(const QString& name);
-      bool importPdf(const QString& name);
       bool importBww(const QString& name);
       bool importGTP(const QString& name);
 

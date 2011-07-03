@@ -301,9 +301,17 @@ enum OffsetType {
 //---------------------------------------------------------
 
 enum BeamMode {
-      BEAM_AUTO, BEAM_BEGIN, BEAM_MID, BEAM_END,
-      BEAM_NO, BEAM_BEGIN32, BEAM_BEGIN64, BEAM_INVALID
+      BEAM_AUTO    = 0,
+      BEAM_BEGIN   = 0x01,
+      BEAM_MID     = 0x02,
+      BEAM_END     = 0x04,
+      BEAM_NO      = 0x08,
+      BEAM_BEGIN32 = 0x10,
+      BEAM_BEGIN64 = 0x20,
+      BEAM_INVALID = -1
       };
+
+#define beamModeMid(a) (a & (BEAM_MID | BEAM_BEGIN32 | BEAM_BEGIN64))
 
 //---------------------------------------------------------
 //   TransposeDirection

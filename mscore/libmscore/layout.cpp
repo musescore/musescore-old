@@ -398,7 +398,7 @@ void Score::layoutStage2()
                         continue;
                   bm = cr->beamMode();
                   if (cr->measure() != measure) {
-                        if (measure && (bm != BEAM_MID)) {
+                        if (measure && !beamModeMid(bm)) {
                               if (beam) {
                                     beam->layout1();
                                     beam = 0;
@@ -410,7 +410,7 @@ void Score::layoutStage2()
                                     }
                               }
                         measure = cr->measure();
-                        if (bm != BEAM_MID) {
+                        if (!beamModeMid(bm)) {
                               a1      = 0;
                               beam    = 0;
                               }
@@ -465,10 +465,10 @@ void Score::layoutStage2()
                   bool beamEnd = false;
                   if (beam) {
                         ChordRest* le = beam->elements().back();
-                        if (((bm != BEAM_MID) && (le->tuplet() != cr->tuplet())) || (bm == BEAM_BEGIN)) {
+                        if ((!beamModeMid(bm) && (le->tuplet() != cr->tuplet())) || (bm == BEAM_BEGIN)) {
                               beamEnd = true;
                               }
-                        else if (bm != BEAM_MID) {
+                        else if (!beamModeMid(bm)) {
                               if (endBeam(measure->timesig(), cr, le))
                                     beamEnd = true;
                               if (le->tick() + le->actualTicks() < cr->tick())
@@ -521,7 +521,7 @@ void Score::layoutStage2()
                         if (a1 == 0)
                               a1 = cr;
                         else {
-                              if (bm != BEAM_MID
+                              if (!beamModeMid(bm)
                                    &&
                                    (endBeam(measure->timesig(), cr, a1)
                                    || bm == BEAM_BEGIN
