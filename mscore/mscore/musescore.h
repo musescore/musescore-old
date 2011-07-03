@@ -527,18 +527,18 @@ class MuseScore : public QMainWindow {
       bool exportFile();
       bool saveAs(Score* s, bool saveCopy, const QString& path, const QString& ext);
       bool savePsPdf(const QString& saveName, QPrinter::OutputFormat format);
-      Score* readScore(QString name);
+      bool readScore(Score* score, QString name);
       bool saveAs(Score*, bool saveCopy = false);
       void addImage(Score*, Element*);
       bool importMidi(Score*, const QString& name);
-      bool saveSvg(const QString& saveName);
-      bool savePng(const QString& name);
       bool savePng(Score*, const QString& name, bool screenshot, bool transparent, double convDpi, QImage::Format format);
       bool saveAudio(Score* score, const QString& name, const QString& type);
       bool saveMp3(Score* score, const QString& name);
       bool saveMxl(Score* score, const QString& name);
       bool saveXml(Score* score, const QString& name);
       bool saveMidi(Score* score, const QString& name);
+      bool saveSvg(Score*, const QString& name);
+      bool savePng(Score*, const QString& name);
       bool saveLilypond(Score* score, const QString& name);
       void convertMidi(Score* score, MidiFile* mf);
 

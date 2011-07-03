@@ -386,10 +386,10 @@ void Palette::append(Element* s, const QString& name, QString tag, qreal mag)
       cell->yoffset   = 0;
       cell->mag       = mag;
       update();
-//      if (s && s->type() == ICON) {
-//            Icon* icon = static_cast<Icon*>(s);
-//TODO-LIB            connect(icon->action(), SIGNAL(toggled(bool)), SLOT(actionToggled(bool)));
-//            }
+      if (s && s->type() == ICON) {
+            Icon* icon = static_cast<Icon*>(s);
+            connect(getAction(icon->action()), SIGNAL(toggled(bool)), SLOT(actionToggled(bool)));
+            }
       }
 
 void Palette::append(int symIdx)
@@ -425,10 +425,10 @@ void Palette::add(int idx, Element* s, const QString& name, QString tag)
       cell->yoffset   = 0;
       cell->mag       = 1.0;
       update();
-//      if (s && s->type() == ICON) {
-//            Icon* icon = static_cast<Icon*>(s);
-//TODO-LIB            connect(icon->action(), SIGNAL(toggled(bool)), SLOT(actionToggled(bool)));
-//            }
+      if (s && s->type() == ICON) {
+            Icon* icon = static_cast<Icon*>(s);
+            connect(getAction(icon->action()), SIGNAL(toggled(bool)), SLOT(actionToggled(bool)));
+            }
       }
 
 //---------------------------------------------------------
