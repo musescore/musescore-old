@@ -925,7 +925,7 @@ void Score::loadStyle()
       {
       QString fn = QFileDialog::getOpenFileName(
          0, QWidget::tr("MuseScore: Load Style"),
-         QString("."),
+         QString("%1styles").arg(mscoreGlobalShare),
             QWidget::tr("MuseScore Styles (*.mss);;"
             "All Files (*)"
             )
