@@ -221,13 +221,14 @@ void MuseScore::loadFile()
          );
       if (fn.isEmpty())
             return;
-      Score* score = readScore(fn);
-      if (score) {
+      Score* score = new Score(MScore::defaultStyle());
+      if (readScore(score, fn)) {
             setCurrentScoreView(appendScore(score));
             lastOpenPath = score->fileInfo()->path();
             writeSessionFile(false);
             }
       else {
+            delete score;
             readScoreError(fn);
             }
       }
@@ -340,19 +341,18 @@ void MuseScore::newFile()
             measures += 1;
       KeySigEvent ks     = newWizard->keysig();
 
-      Score* score = 0;
+      Score* score = new Score(MScore::defaultStyle());
 
       //
       //  create score from template
       //
       if (newWizard->useTemplate()) {
-            delete score;
-            score = readScore(newWizard->templatePath());
-            score->setCreated(true);
-            if (!score) {
+            if (!readScore(score, newWizard->templatePath())) {
                   readScoreError(newWizard->templatePath());
+                  delete score;
                   return;
                   }
+            score->setCreated(true);
             score->fileInfo()->setFile(createDefaultName());
 
             int m = 0;
@@ -390,7 +390,6 @@ void MuseScore::newFile()
       //  create new score from scratch
       //
       else {
-            score = new Score(MScore::defaultStyle());
             score->setCreated(true);
             score->fileInfo()->setFile(createDefaultName());
             newWizard->createInstruments(score);
@@ -1340,11 +1339,11 @@ bool MuseScore::saveAs(Score* cs, bool saveCopy, const QString& path, const QStr
             }
       else if (ext == "png") {
             // save as png file *.png
-//TODO-LIB            rv = savePng(fn);
+            rv = savePng(cs, fn);
             }
       else if (ext == "svg") {
             // save as svg file *.svg
-//TODO-LIB            rv = saveSvg(fn);
+            rv = saveSvg(cs, fn);
             }
       else if (ext == "ly") {
             // save as lilypond file *.ly
@@ -1429,25 +1428,20 @@ bool MuseScore::savePsPdf(const QString& saveName, QPrinter::OutputFormat format
 //    return 0 - OK, 1 _errno, 2 - bad file type
 //---------------------------------------------------------
 
-Score* MuseScore::readScore(QString name)
+bool MuseScore::readScore(Score* score, QString name)
       {
-      Score* score = new Score(MScore::defaultStyle());
       score->setName(name);
 
       QString cs  = score->fileInfo()->suffix();
       QString csl = cs.toLower();
 
       if (csl == "mscz") {
-            if (!score->loadCompressedMsc(name)) {
-                  delete score;
-                  return 0;
-                  }
+            if (!score->loadCompressedMsc(name))
+                  return false;
             }
       else if (csl == "msc" || csl == "mscx") {
-            if (!score->loadMsc(name)) {
-                  delete score;
-                  return 0;
-                  }
+            if (!score->loadMsc(name))
+                  return false;
             }
       else {
             // import
@@ -1460,55 +1454,55 @@ Score* MuseScore::readScore(QString name)
 
             if (csl == "xml") {
                   if (!score->importMusicXml(name))
-                        return 0;
+                        return false;
                   score->connectSlurs();
                   }
             else if (csl == "mxl") {
                   if (!score->importCompressedMusicXml(name))
-                        return 0;
+                        return false;
                   score->connectSlurs();
                   }
             else if (csl == "mid" || csl == "midi" || csl == "kar") {
                   if (!importMidi(score, name))
-                        return 0;
+                        return false;
                   }
             else if (csl == "md") {
                   if (!score->importMuseData(name))
-                        return 0;
+                        return false;
                   }
             else if (csl == "ly") {
                   if (!score->importLilypond(name))
-                        return 0;
+                        return false;
                   }
             else if (csl == "mgu" || csl == "sgu") {
                   if (!score->importBB(name))
-                        return 0;
+                        return false;
                   }
             else if (csl == "cap") {
                   if (!score->importCapella(name))
-                        return 0;
+                        return false;
                   }
             else if (csl == "ove" || csl == "scw") {
                   if (!score->importOve(name))
-            	      return 0;
+            	      return false;
       	      }
 #ifdef OMR
             else if (csl == "pdf") {
                   if (!score->importPdf(name))
-                        return 0;
+                        return false;
                   }
 #endif
             else if (csl == "bww") {
                   if (!score->importBww(name))
-                        return 0;
+                        return false;
                   }
             else if (csl == "gtp" || csl == "gp3" || csl == "gp4" || csl == "gp5") {
                   if (!score->importGTP(name))
-                        return 0;
+                        return false;
                   }
             else {
                   printf("unknown file suffix <%s>, name <%s>\n", qPrintable(cs), qPrintable(name));
-                  return 0;
+                  return false;
                   }
             }
       int staffIdx = 0;
@@ -1564,7 +1558,7 @@ Score* MuseScore::readScore(QString name)
             _syntiState.prepend(SyntiParameter("soundfont", MScore::soundFont));
       score->checkScore();
 #endif
-      return score;
+      return true;
       }
 
 //---------------------------------------------------------
@@ -1673,13 +1667,13 @@ void MuseScore::addImage(Score* score, Element* e)
 //   saveSvg
 //---------------------------------------------------------
 
-bool MuseScore::saveSvg(const QString& saveName)
+bool MuseScore::saveSvg(Score* score, const QString& saveName)
       {
       QSvgGenerator printer;
       printer.setResolution(int(DPI));
       printer.setFileName(saveName);
 
-      cs->setPrinting(true);
+      score->setPrinting(true);
 
       QPainter p(&printer);
       p.setRenderHint(QPainter::Antialiasing, true);
@@ -1689,7 +1683,7 @@ bool MuseScore::saveSvg(const QString& saveName)
       PainterQt painter(&p, 0);
 
       QList<Element*> eel;
-      for (MeasureBase* m = cs->measures()->first(); m; m = m->next()) {
+      for (MeasureBase* m = score->measures()->first(); m; m = m->next()) {
             // skip multi measure rests
             if (m->type() == MEASURE) {
                   Measure* mm = static_cast<Measure*>(m);
@@ -1699,7 +1693,7 @@ bool MuseScore::saveSvg(const QString& saveName)
             m->scanElements(&eel, collectElements);
             }
       QList<const Element*> el;
-      foreach(Page* page, cs->pages()) {
+      foreach(Page* page, score->pages()) {
             el.clear();
             page->scanElements(&el, collectElements);
             foreach(const Element* e, eel) {
@@ -1722,7 +1716,7 @@ bool MuseScore::saveSvg(const QString& saveName)
                   }
             }
 
-      cs->setPrinting(false);
+      score->setPrinting(false);
       p.end();
       return true;
       }
@@ -1732,9 +1726,9 @@ bool MuseScore::saveSvg(const QString& saveName)
 //    return true on success
 //---------------------------------------------------------
 
-bool MuseScore::savePng(const QString& name)
+bool MuseScore::savePng(Score* score, const QString& name)
       {
-      return savePng(cs, name, false, true, converterDpi, QImage::Format_ARGB32_Premultiplied );
+      return savePng(score, name, false, true, converterDpi, QImage::Format_ARGB32_Premultiplied );
       }
 
 //---------------------------------------------------------

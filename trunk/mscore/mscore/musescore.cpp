@@ -1100,9 +1100,11 @@ void MuseScore::selectScore(QAction* action)
       {
       QString a = action->data().toString();
       if (!a.isEmpty()) {
-            Score* score = readScore(a);
-            if (!score)
+            Score* score = new Score(MScore::defaultStyle());
+            if (!readScore(score, a)) {
                   readScoreError(a);
+                  delete score;
+                  }
             else
                   setCurrentScoreView(appendScore(score));
             }
@@ -1373,9 +1375,11 @@ void MuseScore::dropEvent(QDropEvent* event)
             int view = -1;
             foreach(const QUrl& u, event->mimeData()->urls()) {
                   if (u.scheme() == "file") {
-                        Score* score = readScore(u.toLocalFile());
-                        if (score)
+                        Score* score = new Score(MScore::defaultStyle());
+                        if (readScore(score, u.toLocalFile()))
                               view = appendScore(score);
+                        else
+                              delete score;
                         }
                   }
             if(view != -1)
@@ -1809,12 +1813,14 @@ static void loadScores(const QStringList& argv)
                               int c = settings.value("currentScore", 0).toInt();
                               for (int i = 0; i < n; ++i) {
                                     QString s = settings.value(QString("score-%1").arg(i),"").toString();
-                                    Score* score = mscore->readScore(s);
-                                    if (score) {
+                                    Score* score = new Score(MScore::defaultStyle());
+                                    if (mscore->readScore(score, s)) {
                                           int view = mscore->appendScore(score);
                                           if (i == c)
                                                 currentScoreView = view;
                                           }
+                                    else
+                                          delete score;
                                     }
                               }
                               break;
@@ -1824,17 +1830,19 @@ static void loadScores(const QStringList& argv)
                               mscore->newFile();
                               break;
                         case SCORE_SESSION:
-                              Score* score = mscore->readScore(preferences.startScore);
-                              if (score) {
+                              {
+                              Score* score = new Score(MScore::defaultStyle());
+                              if (mscore->readScore(score, preferences.startScore))
                                     currentScoreView = mscore->appendScore(score);
-                                    }
                               else {
-                                    Score* score = mscore->readScore(":/data/Promenade_Example.mscx");
-                                    if (score) {
+                                    if (mscore->readScore(score, ":/data/Promenade_Example.mscx")) {
                                           preferences.startScore = ":/data/Promenade_Example.mscx";
                                           currentScoreView = mscore->appendScore(score);
                                           }
+                                    else
+                                          delete score;
                                     }
+                              }
                               break;
                         }
                   }
@@ -1843,8 +1851,8 @@ static void loadScores(const QStringList& argv)
             foreach(const QString& name, argv) {
                   if (name.isEmpty())
                         continue;
-                  Score* score = mscore->readScore(name);
-                  if (!score) {
+                  Score* score = new Score(MScore::defaultStyle());
+                  if (!mscore->readScore(score, name)) {
                         mscore->readScoreError(name);
                         QMessageBox::warning(0,
                               QWidget::tr("MuseScore"),
@@ -1852,6 +1860,7 @@ static void loadScores(const QStringList& argv)
                                  + name + QWidget::tr("> failed: ") +
                               QString(strerror(errno)),
                               QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
+                        delete score;
                         }
                   else {
                         mscore->appendScore(score);
@@ -1933,9 +1942,9 @@ static bool processNonGui()
             if (fn.endsWith(".ps"))
                   return mscore->savePsPdf(fn, QPrinter::PostScriptFormat);
             if (fn.endsWith(".png"))
-                  return mscore->savePng(fn);
+                  return mscore->savePng(cs, fn);
             if (fn.endsWith(".svg"))
-                  return mscore->saveSvg(fn);
+                  return mscore->saveSvg(cs, fn);
             if (fn.endsWith(".ly"))
                   return mscore->saveLilypond(cs, fn);
 #ifdef HAS_AUDIOFILE
@@ -2875,11 +2884,13 @@ void MuseScore::handleMessage(const QString& message)
       if (message.isEmpty())
             return;
       ((QtSingleApplication*)(qApp))->activateWindow();
-      Score* score = readScore(message);
-      if (score) {
+      Score* score = new Score(MScore::defaultStyle());
+      if (readScore(score, message)) {
             setCurrentScoreView(appendScore(score));
             lastOpenPath = score->fileInfo()->path();
             }
+      else
+            delete score;
       }
 
 //---------------------------------------------------------
@@ -3123,9 +3134,10 @@ bool MuseScore::restoreSession(bool always)
                                     else if (tag == "dirty")
                                           dirty = val.toInt();
                                     else if (tag == "path") {
-                                          Score* score = readScore(val);
-                                          if (!score) {
+                                          Score* score = new Score(MScore::defaultStyle());
+                                          if (!readScore(score, val)) {
                                                 f.close();
+                                                delete score;
                                                 continue;
                                                 }
                                           else {
@@ -3855,9 +3867,10 @@ void MuseScore::networkFinished(QNetworkReply* reply)
       f.write(data);
       f.close();
 
-      Score* score = readScore(tmpName);
-      if (!score) {
+      Score* score = new Score(MScore::defaultStyle());
+      if (!readScore(score, tmpName)) {
             printf("readScore failed\n");
+            delete score;
             return;
             }
       score->setCreated(true);
@@ -4254,19 +4267,16 @@ void MuseScore::cmd(QAction* a, const QString& cmd)
       else if (cmd == "file-export")
             exportFile();
       else if (cmd == "file-reload") {
-#if 0 // TODO-LIB
             if (!cs->created() && !checkDirty(cs)) {
                   if (cv->editMode()) {
                         cv->postCmd("escape");
                         qApp->processEvents();
                         }
-                  Score* score = readScore(cs->filePath());
-                  score->readScore(cs->filePath());
+                  readScore(cs, cs->filePath());
                   // hack: so we don't get another checkDirty in appendScore
                   cs->setDirty(false);
-                  setCurrentScoreView(appendScore(score));
+                  setCurrentScoreView(appendScore(cs));
                   }
-#endif
             }
       else if (cmd == "file-close")
             removeTab(scoreList.indexOf(cs));

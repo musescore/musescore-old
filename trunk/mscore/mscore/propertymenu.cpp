@@ -551,11 +551,10 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
             TextProperties tp(nText);
             int rv = tp.exec();
             if (rv) {
-#if 0 // TODO-LIB
                   QList<Element*> sl = score()->selection().elements();
                   QList<Element*> selectedElements;
                   foreach(Element* e, sl) {
-                        if ((e->type() != type()) || (e->subtype() != subtype()))
+                        if ((e->type() != ot->type()) || (e->subtype() != ot->subtype()))
                               continue;
                         Text* t  = static_cast<Text*>(e);
                         Text* tt = t->clone();
@@ -563,50 +562,50 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
                         if (nText->styled() != ot->styled())
                               tt->setStyled(nText->styled());
 
-                        if (nText->_textStyle != _textStyle) {
-                              tt->_textStyle = nText->_textStyle;
+                        if (nText->textStyle() != ot->textStyle()) {
+                              tt->setTextStyle(nText->textStyle());
                               tt->styleChanged();
                               }
 
-                        if (!nText->_styled) {
-                              if (nText->hasFrame() != hasFrame())
+                        if (!nText->styled()) {
+                              if (nText->hasFrame() != ot->hasFrame())
                                     tt->setHasFrame(nText->hasFrame());
-                              if (nText->frameWidth() != frameWidth())
+                              if (nText->frameWidth() != ot->frameWidth())
                                     tt->setFrameWidth(nText->frameWidth());
-                              if (nText->paddingWidth() != paddingWidth())
+                              if (nText->paddingWidth() != ot->paddingWidth())
                                     tt->setPaddingWidth(nText->paddingWidth());
-                              if (nText->frameColor() != frameColor())
+                              if (nText->frameColor() != ot->frameColor())
                                     tt->setFrameColor(nText->frameColor());
-                              if (nText->frameRound() != frameRound())
+                              if (nText->frameRound() != ot->frameRound())
                                     tt->setFrameRound(nText->frameRound());
-                              if (nText->circle() != circle())
+                              if (nText->circle() != ot->circle())
                                     tt->setCircle(nText->circle());
-                              if (nText->style().foregroundColor() != style().foregroundColor()) {
+                              if (nText->style().foregroundColor() != ot->style().foregroundColor()) {
                                     tt->localStyle().setForegroundColor(nText->style().foregroundColor());
                                     }
 
-                              if (nText->localStyle().family() != localStyle().family())
+                              if (nText->localStyle().family() != ot->localStyle().family())
                                     tt->localStyle().setFamily(nText->localStyle().family());
-                              if (nText->localStyle().size() != localStyle().size())
+                              if (nText->localStyle().size() != ot->localStyle().size())
                                     tt->localStyle().setSize(nText->localStyle().size());
-                              if (nText->localStyle().bold() != localStyle().bold())
+                              if (nText->localStyle().bold() != ot->localStyle().bold())
                                     tt->localStyle().setBold(nText->localStyle().bold());
-                              if (nText->localStyle().italic() != localStyle().italic())
+                              if (nText->localStyle().italic() != ot->localStyle().italic())
                                     tt->localStyle().setItalic(nText->localStyle().italic());
-                              if (nText->localStyle().underline() != localStyle().underline())
+                              if (nText->localStyle().underline() != ot->localStyle().underline())
                                     tt->localStyle().setUnderline(nText->localStyle().underline());
 
-                              if (nText->align() != align())
+                              if (nText->align() != ot->align())
                                     tt->setAlign(nText->align());
-                              if (nText->xoff() != xoff())
+                              if (nText->xoff() != ot->xoff())
                                     tt->setXoff(nText->xoff());
-                              if (nText->yoff() != yoff())
+                              if (nText->yoff() != ot->yoff())
                                     tt->setYoff(nText->yoff());
-                              if (nText->reloff() != reloff())
+                              if (nText->reloff() != ot->reloff())
                                     tt->setReloff(nText->reloff());
-                              if (nText->offsetType() != offsetType())
+                              if (nText->offsetType() != ot->offsetType())
                                     tt->setOffsetType(nText->offsetType());
-                              if(nText->sizeIsSpatiumDependent() != sizeIsSpatiumDependent())
+                              if(nText->sizeIsSpatiumDependent() != ot->sizeIsSpatiumDependent())
                                     tt->setSizeIsSpatiumDependent(nText->sizeIsSpatiumDependent());
                               }
 
@@ -618,7 +617,6 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
                   score()->select(0, SELECT_SINGLE, 0);
                   foreach(Element* e, selectedElements)
                         score()->select(e, SELECT_ADD, 0);
-#endif
                   }
             delete nText;
             }

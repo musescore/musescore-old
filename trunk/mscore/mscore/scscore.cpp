@@ -208,12 +208,10 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                   }
                   break;
             case 4:    // "load",
-#if 0 // TODO-LIB
                   if (argc == 1) {
                         QString s = qscriptvalue_cast<QString>(context->argument(0));
-                        return qScriptValueFromValue(context->engine(), score->readScore(s) == 0);
+                        return qScriptValueFromValue(context->engine(), !mscore->readScore(score, s));
                         }
-#endif
                   break;
             case 5:     // "save",
                   {
@@ -228,7 +226,7 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                         }
 #endif // HAS_AUDIOFILE
                   else if (argc == 2)
-                        return 0; // TODO-LIB  qScriptValueFromValue(context->engine(), score->saveAs(true, s, ext));
+                        return qScriptValueFromValue(context->engine(), mscore->saveAs(score, true, s, ext));
                   else if (argc == 6 && ext == "png") {
                         bool screenshot  = context->argument(2).toBool();
                         bool transparent = context->argument(3).toBool();
