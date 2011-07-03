@@ -236,5 +236,15 @@ void TextProp::get(TextStyle* s)
       s->hasFrame     = frame->isChecked();
       s->systemFlag   = systemFlag->isChecked();
       s->foregroundColor = color->color();
+      Align a = 0;
+      if (alignHCenter->isChecked())
+            a |= ALIGN_HCENTER;
+      if (alignRight->isChecked())
+            a |= ALIGN_RIGHT;
+      if (alignVCenter->isChecked())
+            a |= ALIGN_VCENTER;
+      if (alignBottom->isChecked())
+            a |= ALIGN_BOTTOM;
+      s->align = a;
       }
 
