@@ -5237,11 +5237,51 @@ please choose a different name:</source>
         <source>MuseScore: load style</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Error opening lame library</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not open MP3 encoding library!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not a valid or supported MP3 encoding library!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Encoding error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to initialize MP3 stream</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to open target file for writing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error %1 returned from MP3 encoder</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MyWebView</name>
     <message>
-        <source>&lt;html&gt;&lt;head&gt;&lt;script type=&quot;text/javascript&quot;&gt;function closePermanently() { mscore.closeWebPanelPermanently(); return false;}&lt;/script&gt;&lt;link rel=&quot;stylesheet&quot; href=&quot;data/webview.css&quot; type=&quot;text/css&quot; /&gt;&lt;/head&gt;&lt;body&gt;&lt;div id=&quot;content&quot;&gt;&lt;div id=&quot;middle&quot;&gt;  &lt;div class=&quot;title&quot; align=&quot;center&quot;&gt;&lt;h2&gt;Could not&lt;br /&gt; connect&lt;/h2&gt;&lt;/div&gt;  &lt;ul&gt;&lt;li&gt;To connect with the community, &lt;br /&gt; you need to have internet &lt;br /&gt; connection enabled&lt;/li&gt;&lt;/ul&gt;  &lt;div align=&quot;center&quot;&gt;&lt;a class=&quot;button&quot; href=&quot;#&quot; onclick=&quot;return panel.load();&quot;&gt;Retry&lt;/a&gt;&lt;/div&gt;  &lt;div align=&quot;center&quot;&gt;&lt;a class=&quot;close&quot; href=&quot;#&quot; onclick=&quot;return closePermanently();&quot;&gt;Close this permanently&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <source>Could not&lt;br /&gt; connect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>To connect with the community, &lt;br /&gt; you need to have internet &lt;br /&gt; connection enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Retry</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close this permanently</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6480,7 +6520,7 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>MuseScore: Write Style</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">MuseScore: Stildatei schreiben</translation>
     </message>
 </context>
 <context>
@@ -6660,37 +6700,6 @@ fehlgeschlagen: </translation>
     <message>
         <source>Form</source>
         <translation>Formular</translation>
-    </message>
-</context>
-<context>
-    <name>Score</name>
-    <message>
-        <source>Error opening lame library</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Could not open MP3 encoding library!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Not a valid or supported MP3 encoding library!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Encoding error</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unable to initialize MP3 stream</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unable to open target file for writing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error %1 returned from MP3 encoder</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8883,6 +8892,37 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Repeat List:</source>
         <translation>Wiederholungsliste:</translation>
+    </message>
+</context>
+<context>
+    <name>WebPageDockWidget</name>
+    <message>
+        <source>Connect with the &lt;br /&gt; Community</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Find help</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Improve your skills</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Read the latest news</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Download free sheet music</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close this permanently</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
