@@ -43,8 +43,9 @@ static PaStream* stream;
 int paCallback(const void*, void* out, long unsigned frames,
    const PaStreamCallbackTimeInfo*, PaStreamCallbackFlags, void *)
       {
-      float* op = (float*)out;
-      seq->process((unsigned)frames, op, op+1);
+      float* o1 = ((float**)out)[0];
+      float* o2 = ((float**)out)[1];
+      seq->process((unsigned)frames, o1, o2);
       return 0;
       }
 
