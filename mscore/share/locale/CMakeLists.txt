@@ -69,6 +69,7 @@ install(FILES
       qt_de.qm
       qt_el.qm
       qt_es.qm
+      qt_eu.qm
       qt_fi.qm
       qt_fr.qm
       qt_gl.qm
@@ -84,9 +85,11 @@ install(FILES
       qt_pt_BR.qm
       qt_ro.qm
       qt_ru.qm
+      qt_sk.qm
       qt_sv.qm
       qt_tr.qm
       qt_uk.qm
+      qt_vi.qm
       qt_zh_CN.qm
       qt_zh_TW.qm
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}locale
