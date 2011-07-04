@@ -40,6 +40,7 @@ install(FILES
       schnee.mscz
       sarabande-gfh.mscz
       All_Dudes.mscz
+      Triumph.mscz
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}demos
       )
 

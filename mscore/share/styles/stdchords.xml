@@ -544,5 +544,43 @@
   <chord id="207">
     <render>aug13</render>
     </chord>
+  <chord id="210">
+    <render>Maj 7 # 11</render>
+    </chord>
+  <chord id="211">
+    <render>Maj 9 # 5</render>
+    </chord>
+  <chord id="212">
+    <render>Maj 7 # 9</render>
+    </chord>
+  <chord id="213">
+    <render>add 2</render>
+    </chord>
+  <chord id="214">
+    <render>add 9</render>
+    </chord>
+  <chord id="215">
+    <render>sus b 9 </render>
+    </chord>
+  <chord id="216">
+    <render>Maj 7 sus</render>
+    </chord>
+  <chord id="217">
+    <render>Maj 9 sus</render>
+    </chord>
+  <chord id="220">
+    <render>m 7 b 9</render>
+    </chord>
+  <chord id="221">
+    <render>m 7 b 13</render>
+    </chord>
+  <chord id="222">
+    <render>Phryg</render>
+    </chord>
+  <chord id="223">
+    <render>m add 2 </render>
+    </chord>
+  <chord id="230">
+    <render>7 b 9 # 9</render>
+    </chord>
   </museScore>
-

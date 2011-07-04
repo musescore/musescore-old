@@ -995,7 +995,7 @@
     <voicing>C Eb Ab</voicing>
     </chord>
   <chord id="188">
-    <name>#13</name>
+    <name>add#13</name>
     <xml>major</xml>
     <degree>add#13</degree>
     <voicing>C E G A#</voicing>
@@ -1081,7 +1081,7 @@
     <degree>add#7</degree>
     </chord>
   <chord id="203">
-    <name>#59</name>
+    <name>aug9</name>
     <xml>augmented-seventh</xml>
     <degree>add9</degree>
     <voicing>C E Ab D</voicing>
@@ -1139,22 +1139,20 @@
     <voicing>C D E G</voicing>
     </chord>
   <chord id="215">
-    <!-- must enter "sus" before "b9" or else it would be parsed Cb 9sus rather than C b9 sus -->
-    <!-- alternative would be to enter (b9)sus; you may edit this entry by hand if you prefer that -->
     <name>susb9</name>
     <xml>suspended-fourth</xml>
     <degree>addb9</degree>
     <voicing>C Db F G</voicing>
     </chord>
   <chord id="216">
-    <name>ma7sus</name>
+    <name>Maj7sus</name>
     <xml>major-seventh</xml>
     <degree>sub3</degree>
     <degree>add4</degree>
     <voicing>C F G B</voicing>
     </chord>
   <chord id="217">
-    <name>ma9sus</name>
+    <name>Maj9sus</name>
     <xml>major-ninth</xml>
     <degree>sub3</degree>
     <degree>add4</degree>

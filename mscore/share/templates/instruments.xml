@@ -4553,6 +4553,22 @@
           <program value="44"/>
           </channel>
         </instrument>
+     <instrument>
+        <name>Acoustic Bass</name>
+        <short-name>Bass</short-name>
+        <clef>5</clef>
+        <aPitchRange>28-62</aPitchRange>
+        <pPitchRange>23-67</pPitchRange>
+        <channel>
+           <program>32</program>
+           </channel>
+        <channel name="arco">
+          <program value="43"/>
+          </channel>
+        <channel name="tremolo">
+          <program value="44"/>
+          </channel>
+        </instrument>
       <instrument>
         <name>Contrabasses</name>
         <short-name>Cbs.</short-name>
