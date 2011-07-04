@@ -300,6 +300,9 @@ else (MINGW)
       dl
       pthread
       )
+if (USE_PORTAUDIO)
+      target_link_libraries(mscore portaudio)
+endif (USE_PORTAUDIO)
 
    set_target_properties (
       mscore
