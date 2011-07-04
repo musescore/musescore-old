@@ -1106,6 +1106,7 @@ function processAnswerRequestToken(id ,error){
         var file   = new QFile(pluginPath + "/ui/start_browser_dialog.ui");
         file.open(QIODevice.OpenMode(QIODevice.ReadOnly, QIODevice.Text));
         form = loader.load(file, null);
+        form.setWindowFlags(Qt.WindowSystemMenuHint);
         form.buttonBox.accepted.connect(launchBrowser);
         form.show();  
     }else{
