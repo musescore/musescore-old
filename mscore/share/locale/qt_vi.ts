@@ -882,81 +882,81 @@ to
     <name>QDialog</name>
     <message>
         <source>What&apos;s This?</source>
-        <translatorcomment>Đây là gì?</translatorcomment>
-        <translation type="unfinished"></translation>
+        <translatorcomment></translatorcomment>
+        <translation>Đây là gì?</translation>
     </message>
     <message>
         <source>Done</source>
-        <translatorcomment>Hoàn tất</translatorcomment>
-        <translation type="unfinished"></translation>
+        <translatorcomment></translatorcomment>
+        <translation>Hoàn tất</translation>
     </message>
 </context>
 <context>
     <name>QDialogButtonBox</name>
     <message>
         <source>OK</source>
-        <translatorcomment>Đồng ý</translatorcomment>
-        <translation type="unfinished"></translation>
+        <translatorcomment></translatorcomment>
+        <translation>Đồng ý</translation>
     </message>
     <message>
         <source>Save</source>
-        <translatorcomment>Lưu trữ</translatorcomment>
-        <translation type="unfinished"></translation>
+        <translatorcomment></translatorcomment>
+        <translation>Lưu trữ</translation>
     </message>
     <message>
         <source>Open</source>
-        <translatorcomment>Mở tài liệu</translatorcomment>
-        <translation type="unfinished"></translation>
+        <translatorcomment></translatorcomment>
+        <translation>Mở tài liệu</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translatorcomment>Hủy bỏ</translatorcomment>
-        <translation type="unfinished"></translation>
+        <translatorcomment></translatorcomment>
+        <translation>Hủy bỏ</translation>
     </message>
     <message>
         <source>Close</source>
-        <translatorcomment>Đóng lại</translatorcomment>
-        <translation type="unfinished"></translation>
+        <translatorcomment></translatorcomment>
+        <translation>Đóng lại</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translatorcomment>Áp dụng</translatorcomment>
-        <translation type="unfinished"></translation>
+        <translatorcomment></translatorcomment>
+        <translation>Áp dụng</translation>
     </message>
     <message>
         <source>Reset</source>
-        <translatorcomment>Đặt lại</translatorcomment>
-        <translation type="unfinished"></translation>
+        <translatorcomment></translatorcomment>
+        <translation>Đặt lại</translation>
     </message>
     <message>
         <source>Help</source>
-        <translatorcomment>Giúp đỡ</translatorcomment>
-        <translation type="unfinished"></translation>
+        <translatorcomment></translatorcomment>
+        <translation>Giúp đỡ</translation>
     </message>
     <message>
         <source>Don&apos;t Save</source>
-        <translatorcomment>Đừng lưu trữ</translatorcomment>
-        <translation type="unfinished"></translation>
+        <translatorcomment></translatorcomment>
+        <translation>Đừng lưu trữ</translation>
     </message>
     <message>
         <source>Discard</source>
-        <translatorcomment>Không cần lưu trữ</translatorcomment>
-        <translation type="unfinished"></translation>
+        <translatorcomment></translatorcomment>
+        <translation>Không cần lưu trữ</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translatorcomment>&amp;Đồng ý</translatorcomment>
-        <translation type="unfinished"></translation>
+        <translatorcomment></translatorcomment>
+        <translation>&amp;Đồng ý</translation>
     </message>
     <message>
         <source>Yes to &amp;All</source>
-        <translatorcomment>Đồng ý &amp;hết</translatorcomment>
-        <translation type="unfinished"></translation>
+        <translatorcomment></translatorcomment>
+        <translation>Đồng ý &amp;hết</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translatorcomment>&amp;Không</translatorcomment>
-        <translation type="unfinished"></translation>
+        <translatorcomment></translatorcomment>
+        <translation>&amp;Không</translation>
     </message>
     <message>
         <source>N&amp;o to All</source>
@@ -964,38 +964,38 @@ to
     </message>
     <message>
         <source>Save All</source>
-        <translatorcomment>Lưu trữ hết</translatorcomment>
-        <translation type="unfinished"></translation>
+        <translatorcomment></translatorcomment>
+        <translation>Lưu trữ hết</translation>
     </message>
     <message>
         <source>Abort</source>
-        <translatorcomment>Bỏ không làm nữa</translatorcomment>
-        <translation type="unfinished"></translation>
+        <translatorcomment></translatorcomment>
+        <translation>Bỏ không làm nữa</translation>
     </message>
     <message>
         <source>Retry</source>
-        <translatorcomment>Thử lại</translatorcomment>
-        <translation type="unfinished"></translation>
+        <translatorcomment></translatorcomment>
+        <translation>Thử lại</translation>
     </message>
     <message>
         <source>Ignore</source>
-        <translatorcomment>Mặc kệ</translatorcomment>
-        <translation type="unfinished"></translation>
+        <translatorcomment></translatorcomment>
+        <translation>Mặc kệ</translation>
     </message>
     <message>
         <source>Restore Defaults</source>
-        <translatorcomment>Phục hồi lại phần định sẵn</translatorcomment>
-        <translation type="unfinished"></translation>
+        <translatorcomment></translatorcomment>
+        <translation>Phục hồi lại phần định sẵn</translation>
     </message>
     <message>
         <source>Close without Saving</source>
-        <translatorcomment>Đóng lại, không cần lưu trữ gì</translatorcomment>
-        <translation type="unfinished"></translation>
+        <translatorcomment></translatorcomment>
+        <translation>Đóng lại, không cần lưu trữ gì</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translatorcomment>&amp;Đồng ý</translatorcomment>
-        <translation type="unfinished"></translation>
+        <translatorcomment></translatorcomment>
+        <translation>&amp;Đồng ý</translation>
     </message>
 </context>
 <context>
