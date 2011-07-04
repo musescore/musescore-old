@@ -1,4 +1,5 @@
 4.jul (ws)
+      - fixes for chorus parameter handling
       - restrict augmentation dot alignment to staff (instead of system)
 3.jul (ws)
       - fixed subbeam logic

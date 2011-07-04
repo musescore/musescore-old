@@ -46,7 +46,7 @@ class SyntiParameter {
       SyntiParameter(const SyntiParameter&);
       SyntiParameter& operator=(const SyntiParameter&);
       SyntiParameter(const QString& name, float val);
-      SyntiParameter(int id, const QString& name, float val);
+      SyntiParameter(int id, const QString& name, float);
       SyntiParameter(int id, const QString& name, const QString& val);
       SyntiParameter(const QString& name, const QString& val);
 

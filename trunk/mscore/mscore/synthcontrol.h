@@ -55,8 +55,11 @@ class SynthControl : public QWidget, Ui::SynthControl {
       void masterTuningChanged(double);
       void reverbValueChanged(double val, int idx);
       void chorusValueChanged(double val, int idx);
+      void chorusValueChanged1(double val, int idx);
       void setAeolusValue(double, int);
       void currentSoundFontChanged(int row);
+      void chorusNumberChanged(int val);
+      void chorusTypeChanged(int val);
 
    signals:
       void closed();
