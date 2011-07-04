@@ -1713,7 +1713,7 @@ void Chord::renderArticulation(ArticulationType /*type*/)
 
 double Chord::dotPosX() const
       {
-      return segment()->dotPosX();
+      return segment()->dotPosX(staffIdx());
       }
 
 //---------------------------------------------------------
@@ -1722,6 +1722,6 @@ double Chord::dotPosX() const
 
 void Chord::setDotPosX(double val)
       {
-      segment()->setDotPosX(val);
+      segment()->setDotPosX(staffIdx(), val);
       }
 

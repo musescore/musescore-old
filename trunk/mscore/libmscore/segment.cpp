@@ -104,8 +104,7 @@ Segment::Segment(Measure* m)
       {
       setParent(m);
       init();
-      empty    = true;
-      _dotPosX = 0.0;
+      empty = true;
       }
 
 Segment::Segment(Measure* m, SegmentType st, int t)
@@ -115,8 +114,7 @@ Segment::Segment(Measure* m, SegmentType st, int t)
       setSubtype(st);
       setTick(t);
       init();
-      empty    = true;
-      _dotPosX = 0.0;
+      empty = true;
       }
 
 //---------------------------------------------------------
@@ -137,6 +135,7 @@ Segment::Segment(const Segment& s)
             add(ne);
             }
 
+      _elist.reserve(s._elist.size());
       foreach(Element* e, s._elist) {
             Element* ne = 0;
             if (e) {
@@ -186,8 +185,12 @@ void Segment::init()
       {
       int staves = score()->nstaves();
       int tracks = staves * VOICES;
+      _elist.reserve(tracks);
       for (int i = 0; i < tracks; ++i)
             _elist.push_back(0);
+      _dotPosX.reserve(staves);
+      for (int i = 0; i < staves; ++i)
+            _dotPosX.push_back(0.0);
       _prev = 0;
       _next = 0;
       }
@@ -323,6 +326,7 @@ void Segment::insertStaff(int staff)
       int track = staff * VOICES;
       for (int voice = 0; voice < VOICES; ++voice)
             _elist.insert(track, 0);
+      _dotPosX.insert(staff, 0.0);
       fixStaffIdx();
       }
 
@@ -334,12 +338,8 @@ void Segment::removeStaff(int staff)
       {
       int track = staff * VOICES;
       _elist.erase(_elist.begin() + track, _elist.begin() + track + VOICES);
+      _dotPosX.removeAt(staff);
 
-/*      foreach(Spanner* sp, _spannerFor) {
-            }
-      foreach(Spanner* sp, _spannerBack) {
-            }
-      */
       foreach(Element* e, _annotations) {
             int staffIdx = e->staffIdx();
             if (staffIdx > staff)
@@ -652,6 +652,7 @@ void Segment::sortStaves(QList<int>& dst)
       for (int i = 0; i < dst.size(); ++i) {
             int startTrack = dst[i] * VOICES;
             int endTrack   = startTrack + VOICES;
+            dl.reserve(VOICES);
             for (int k = startTrack; k < endTrack; ++k)
                   dl.append(_elist[k]);
             }
