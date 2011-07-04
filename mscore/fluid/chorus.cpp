@@ -71,7 +71,6 @@
 
 namespace FluidS {
 
-#define MAX_DELAY	      100
 #define MAX_DEPTH	      10
 #define MIN_SPEED_HZ	0.29
 #define MAX_SPEED_HZ    5
@@ -120,6 +119,7 @@ Chorus::Chorus(float sr)
                         }
                   }
             }
+printf("lookup_tab %d\n", (int)(sample_rate / MIN_SPEED_HZ));
       lookup_tab = new int[(int) (sample_rate / MIN_SPEED_HZ)];
       chorusbuf  = new float[MAX_SAMPLES];
       reset();
@@ -132,12 +132,12 @@ Chorus::Chorus(float sr)
 void Chorus::reset()
       {
       memset(chorusbuf, 0, MAX_SAMPLES * sizeof(*chorusbuf));
-      number_blocks     = 0;
-      new_number_blocks = FLUID_CHORUS_DEFAULT_N;
-      new_level         = FLUID_CHORUS_DEFAULT_LEVEL;
-      new_speed_Hz      = FLUID_CHORUS_DEFAULT_SPEED;
-      new_depth_ms      = FLUID_CHORUS_DEFAULT_DEPTH;
-      new_type          = FLUID_CHORUS_MOD_SINE;
+      number_blocks = 0;
+      number_blocks = FLUID_CHORUS_DEFAULT_N;
+      level         = FLUID_CHORUS_DEFAULT_LEVEL;
+      speed_Hz      = FLUID_CHORUS_DEFAULT_SPEED;
+      depth_ms      = FLUID_CHORUS_DEFAULT_DEPTH;
+      type          = FLUID_CHORUS_MOD_SINE;
 
       update();
       }
@@ -161,11 +161,11 @@ Chorus::~Chorus()
 void Chorus::update()
       {
       /* The modulating LFO goes through a full period every x samples: */
-      modulation_period_samples = lrint(sample_rate / new_speed_Hz);
+      modulation_period_samples = lrint(sample_rate / speed_Hz);
 
       /* The variation in delay time is x: */
       int modulation_depth_samples = (int)
-         (new_depth_ms / 1000.0  /* convert modulation depth in ms to s*/
+         (depth_ms / 1000.0  /* convert modulation depth in ms to s*/
          * sample_rate);
 
       if (modulation_depth_samples > MAX_SAMPLES) {
@@ -174,12 +174,12 @@ void Chorus::update()
             }
 
       /* initialize LFO table */
-      if (new_type == FLUID_CHORUS_MOD_SINE)
+      if (type == FLUID_CHORUS_MOD_SINE)
             sine(lookup_tab, modulation_period_samples, modulation_depth_samples);
-      else if (new_type == FLUID_CHORUS_MOD_TRIANGLE)
+      else if (type == FLUID_CHORUS_MOD_TRIANGLE)
             triangle(lookup_tab, modulation_period_samples, modulation_depth_samples);
       else {
-            new_type = FLUID_CHORUS_MOD_SINE;
+            type = FLUID_CHORUS_MOD_SINE;
             sine(lookup_tab, modulation_period_samples, modulation_depth_samples);
             }
 
@@ -190,19 +190,14 @@ void Chorus::update()
             }
 
       /* Start of the circular buffer */
-      counter       = 0;
-      type          = new_type;
-      depth_ms      = new_depth_ms;
-      level         = new_level;
-      speed_Hz      = new_speed_Hz;
-      number_blocks = new_number_blocks;
+      counter = 0;
       }
 
 //---------------------------------------------------------
 //   process
 //---------------------------------------------------------
 
-void Chorus::process(int n, float *in, float *left_out, float *right_out)
+void Chorus::process(int n, float* in, float* left_out, float* right_out)
       {
       for (int sample_index = 0; sample_index < n; sample_index++) {
             float d_in = in[sample_index];
@@ -294,22 +289,45 @@ void Chorus::triangle(int *buf, int len, int depth)
       }
 
 //---------------------------------------------------------
+//   pNames
+//    chorus parameter names, sync with fluid.h
+//---------------------------------------------------------
+
+static const char* pNames[] = {
+      "CHORUS_TYPE",
+      "CHORUS_SPEED",
+      "CHORUS_DEPTH",
+      "CHORUS_BLOCKS",
+      "CHORUS_GAIN"
+      };
+
+//---------------------------------------------------------
 //   setParameter
 //---------------------------------------------------------
 
-void Chorus::setParameter(int idx, double value)
+void Chorus::setParameter(int idx, float value)
       {
+// printf("Chorus: setParameter %s(%d) %f\n", pNames[idx], idx, value);
       switch (idx) {
-            case CHORUS_TYPE:   type = lrint(value); break;
-            case CHORUS_SPEED:  speed_Hz = value * MAX_SPEED_HZ + MIN_SPEED_HZ; break;
-            case CHORUS_DEPTH:  depth_ms = value * MAX_DEPTH; break;
-            case CHORUS_BLOCKS: number_blocks = lrint(value * 100.0); break;
-            case CHORUS_GAIN:   new_level = value; break;
+            case CHORUS_TYPE:
+                  type = lrint(value);
+                  break;
+            case CHORUS_SPEED:
+                  speed_Hz = value * MAX_SPEED_HZ + MIN_SPEED_HZ;
+                  break;
+            case CHORUS_DEPTH:
+                  depth_ms = value * MAX_DEPTH;
+                  break;
+            case CHORUS_BLOCKS:
+                  number_blocks = lrint(value * 100.0);
+                  break;
+            case CHORUS_GAIN:
+                  level = value;
+                  return;     // do not call update
             default:
                   printf("Chorus:setParameter: %x invalid\n", idx);
                   break;
             }
-// printf("Chorus: setParameter %d %f\n", idx, value);
       update();
       }
 
@@ -325,13 +343,12 @@ double Chorus::parameter(int idx) const
             case CHORUS_SPEED:  value = (speed_Hz-MIN_SPEED_HZ) / MAX_SPEED_HZ; break;
             case CHORUS_DEPTH:  value = depth_ms / MAX_DEPTH; break;
             case CHORUS_BLOCKS: value = number_blocks / 100.0; break;
-            case CHORUS_GAIN:   value = new_level; break;
+            case CHORUS_GAIN:   value = level; break;
             default:
                   printf("Chorus::parameter: 0x%x invalid\n", idx);
                   break;
             }
-// printf("Chorus: parameter %d %f\n", idx, value);
+// printf("Chorus: parameter %s(%d) %f\n", pNames[idx], idx, value);
       return value;
       }
-
 }

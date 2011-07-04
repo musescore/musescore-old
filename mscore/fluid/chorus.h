@@ -59,18 +59,13 @@ class Chorus {
       * - If it is invalid, 'new_parameter' is restored to 'parameter'.
       */
 
-      int type;                     // current value
-      int new_type;                 // next value, if parameter check is OK
-      float depth_ms;               // current value
-      float new_depth_ms;           // next value, if parameter check is OK
-      float level;                  // current value
-      float new_level;              // next value, if parameter check is OK
-      float speed_Hz;               // current value
-      float new_speed_Hz;           // next value, if parameter check is OK
-      int number_blocks;            // current value
-      int new_number_blocks;        // next value, if parameter check is OK
+      int type;
+      float depth_ms;
+      float level;
+      float speed_Hz;
+      int number_blocks;
 
-      float *chorusbuf;
+      float* chorusbuf;
       int counter;
       long phase[MAX_CHORUS];
       long modulation_period_samples;
@@ -85,13 +80,6 @@ class Chorus {
       ~Chorus();
 
       void update();
-#if 0
-      void set_nr(int nr)                      { new_number_blocks = nr;       }
-      void set_level(float level)              { new_level         = level;    }
-      void set_speed_Hz(float speed_Hz)        { new_speed_Hz      = speed_Hz; }
-      void set_depth_ms(float depth_ms)        { new_depth_ms      = depth_ms; }
-      void set_type(int type)                  { new_type          = type;     }
-#endif
       void process(int, float *in, float *left_out, float *right_out);
       void reset();
 
@@ -101,7 +89,7 @@ class Chorus {
       float get_depth_ms() const { return depth_ms; }
       int get_type() const       { return type;     }
 
-      void setParameter(int parameter, double value);
+      void setParameter(int parameter, float value);
       double parameter(int idx) const;
       };
 

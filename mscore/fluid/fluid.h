@@ -286,6 +286,7 @@ class Channel {
       int getInterpMethod() const         { return interp_method; }
       };
 
+// subsystems:
 enum {
       FLUID_GROUP  = 0,
       REVERB_GROUP = 1,

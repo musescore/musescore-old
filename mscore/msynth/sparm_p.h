@@ -65,7 +65,7 @@ class SyntiParameterData : public QSharedData {
    public:
       SyntiParameterData();
       SyntiParameterData(const QString& name, float val);
-      SyntiParameterData(int id, const QString& name, float val);
+      SyntiParameterData(int id, const QString& name, float);
       SyntiParameterData(const QString& name, const QString& val);
       SyntiParameterData(int id, const QString& name, const QString& val);
       SyntiParameterData(const SyntiParameterData& pd);

@@ -47,12 +47,16 @@ SynthControl::SynthControl(QWidget* parent)
       saveReverbPreset->setIcon(*icons[fileSave_ICON]);
       saveChorusPreset->setIcon(*icons[fileSave_ICON]);
 
-      reverbRoomSize->setId(0);
-      reverbDamp->setId(1);
-      reverbWidth->setId(2);
-      reverb->setId(3);
-      chorus->setId(4);
+      reverbRoomSize->setId(REVERB_ROOMSIZE);
+      reverbDamp->setId(REVERB_DAMP);
+      reverbWidth->setId(REVERB_WIDTH);
+      reverb->setId(REVERB_GAIN);
+
       position->setId(AEOLUS_STPOSIT);
+
+      chorus->setId(CHORUS_GAIN);
+      chorusSpeed->setId(CHORUS_SPEED);
+      chorusDepth->setId(CHORUS_DEPTH);
 
       connect(position, SIGNAL(valueChanged(double, int)), SLOT(setAeolusValue(double, int)));
 
@@ -105,6 +109,10 @@ SynthControl::SynthControl(QWidget* parent)
       connect(chorus,          SIGNAL(valueChanged(double,int)), SLOT(chorusValueChanged(double,int)));
       connect(chorusSpeed,     SIGNAL(valueChanged(double,int)), SLOT(chorusValueChanged(double,int)));
       connect(chorusDepth,     SIGNAL(valueChanged(double,int)), SLOT(chorusValueChanged(double,int)));
+      connect(chorusSpeedBox,  SIGNAL(valueChanged(double,int)), SLOT(chorusValueChanged1(double,int)));
+      connect(chorusDepthBox,  SIGNAL(valueChanged(double,int)), SLOT(chorusValueChanged1(double,int)));
+      connect(chorusNumber,    SIGNAL(valueChanged(int)),        SLOT(chorusNumberChanged(int)));
+      connect(chorusType,      SIGNAL(currentIndexChanged(int)), SLOT(chorusTypeChanged(int)));
 
       connect(soundFontUp,     SIGNAL(clicked()),                SLOT(sfUpClicked()));
       connect(soundFontDown,   SIGNAL(clicked()),                SLOT(sfDownClicked()));
@@ -131,8 +139,14 @@ void SynthControl::updateSyntiValues()
       reverb->setValue(synti->parameter     (SParmId(FLUID_ID, REVERB_GROUP, REVERB_GAIN).val).fval());
 
       chorus->setValue(synti->parameter     (SParmId(FLUID_ID, CHORUS_GROUP, CHORUS_GAIN).val).fval());
-      chorusSpeed->setValue(synti->parameter(SParmId(FLUID_ID, CHORUS_GROUP, CHORUS_SPEED).val).fval());
-      chorusDepth->setValue(synti->parameter(SParmId(FLUID_ID, CHORUS_GROUP, CHORUS_DEPTH).val).fval());
+
+      float val = synti->parameter(SParmId(FLUID_ID, CHORUS_GROUP, CHORUS_SPEED).val).fval();
+      chorusSpeed->setValue(val);
+      chorusSpeedBox->setValue(val * 5);
+
+      val = synti->parameter(SParmId(FLUID_ID, CHORUS_GROUP, CHORUS_DEPTH).val).fval();
+      chorusDepth->setValue(val);
+      chorusDepthBox->setValue(val * 10);
 
       reverbDelay->init(synti->parameter(SParmId(AEOLUS_ID, 0, AEOLUS_REVSIZE).val));
       reverbDelay->setId(AEOLUS_REVSIZE);
@@ -358,7 +372,7 @@ void SynthControl::stop()
 
 void SynthControl::reverbValueChanged(double val, int idx)
       {
-      synti->setParameter(SParmId(FLUID_ID, 0, idx).val, val);
+      synti->setParameter(SParmId(FLUID_ID, REVERB_GROUP, idx).val, val);
       }
 
 //---------------------------------------------------------
@@ -367,7 +381,24 @@ void SynthControl::reverbValueChanged(double val, int idx)
 
 void SynthControl::chorusValueChanged(double val, int idx)
       {
-      synti->setParameter(SParmId(FLUID_ID, 1, idx).val, val);
+      if (idx == CHORUS_SPEED)
+            chorusSpeedBox->setValue(val * 5.0);
+      else if (idx == CHORUS_DEPTH)
+            chorusDepthBox->setValue(val * 10.0);
+      synti->setParameter(SParmId(FLUID_ID, CHORUS_GROUP, idx).val, val);
+      }
+
+void SynthControl::chorusValueChanged1(double val, int idx)
+      {
+      if (idx == CHORUS_SPEED) {
+            val /= 5.0;
+            chorusSpeed->setValue(val);
+            }
+      else if (idx == CHORUS_DEPTH) {
+            val /= 10.0;
+            chorusDepth->setValue(val);
+            }
+      synti->setParameter(SParmId(FLUID_ID, CHORUS_GROUP, idx).val, val);
       }
 
 //---------------------------------------------------------
@@ -443,5 +474,23 @@ void SynthControl::updateUpDownButtons()
       soundFontUp->setEnabled(row > 0);
       soundFontDown->setEnabled((row != -1) && (row < (rows-1)));
       soundFontDelete->setEnabled(row != -1);
+      }
+
+//---------------------------------------------------------
+//   chorusNumberChanged
+//---------------------------------------------------------
+
+void SynthControl::chorusNumberChanged(int val)
+      {
+      synti->setParameter(SParmId(FLUID_ID, CHORUS_GROUP, CHORUS_BLOCKS).val, double(val)/100.0);
+      }
+
+//---------------------------------------------------------
+//   chorusTypeChanged
+//---------------------------------------------------------
+
+void SynthControl::chorusTypeChanged(int val)
+      {
+      synti->setParameter(SParmId(FLUID_ID, CHORUS_GROUP, CHORUS_TYPE).val, double(val));
       }
 

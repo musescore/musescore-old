@@ -67,15 +67,15 @@ static const Mod defaultMod[] = {
 //
 static SyntiParameter params[] = {
       SyntiParameter(SParmId(FLUID_ID, REVERB_GROUP, REVERB_ROOMSIZE).val, "RevRoomsize", 0.0),
-      SyntiParameter(SParmId(FLUID_ID, REVERB_GROUP, REVERB_DAMP).val, "RevDamp",   0.0),
-      SyntiParameter(SParmId(FLUID_ID, REVERB_GROUP, REVERB_WIDTH).val, "RevWidth",  0.0),
-      SyntiParameter(SParmId(FLUID_ID, REVERB_GROUP, REVERB_GAIN).val, "RevGain",   0.0),
+      SyntiParameter(SParmId(FLUID_ID, REVERB_GROUP, REVERB_DAMP).val, "RevDamp",         0.0),
+      SyntiParameter(SParmId(FLUID_ID, REVERB_GROUP, REVERB_WIDTH).val, "RevWidth",       0.0),
+      SyntiParameter(SParmId(FLUID_ID, REVERB_GROUP, REVERB_GAIN).val, "RevGain",         0.0),
 
-      SyntiParameter(SParmId(FLUID_ID, CHORUS_GROUP, CHORUS_TYPE).val, "ChoType",   0.0),
-      SyntiParameter(SParmId(FLUID_ID, CHORUS_GROUP, CHORUS_SPEED).val, "ChoSpeed",  0.0),
-      SyntiParameter(SParmId(FLUID_ID, CHORUS_GROUP, CHORUS_DEPTH).val, "ChoDepth",  0.0),
-      SyntiParameter(SParmId(FLUID_ID, CHORUS_GROUP, CHORUS_BLOCKS).val, "ChoBlocks", 0.0),
-      SyntiParameter(SParmId(FLUID_ID, CHORUS_GROUP, CHORUS_GAIN).val, "ChoGain",   0.0),
+      SyntiParameter(SParmId(FLUID_ID, CHORUS_GROUP, CHORUS_TYPE).val, "ChoType",         0.0),
+      SyntiParameter(SParmId(FLUID_ID, CHORUS_GROUP, CHORUS_SPEED).val, "ChoSpeed",       0.0),
+      SyntiParameter(SParmId(FLUID_ID, CHORUS_GROUP, CHORUS_DEPTH).val, "ChoDepth",       0.0),
+      SyntiParameter(SParmId(FLUID_ID, CHORUS_GROUP, CHORUS_BLOCKS).val, "ChoBlocks",     0.0),
+      SyntiParameter(SParmId(FLUID_ID, CHORUS_GROUP, CHORUS_GAIN).val, "ChoGain",         0.0),
       };
 
 //---------------------------------------------------------
@@ -1016,9 +1016,9 @@ void Fluid::setParameter(int id, double value)
       SParmId spid(id);
       if (spid.syntiId != FLUID_ID)
             return;
-      if (spid.subsystemId == 0)
+      if (spid.subsystemId == REVERB_GROUP)
             reverb->setParameter(spid.paramId, value);
-      else if (spid.subsystemId == 1)
+      else if (spid.subsystemId == CHORUS_GROUP)
             chorus->setParameter(spid.paramId, value);
       }
 
