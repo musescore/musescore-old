@@ -109,8 +109,8 @@ SynthControl::SynthControl(QWidget* parent)
       connect(chorus,          SIGNAL(valueChanged(double,int)), SLOT(chorusValueChanged(double,int)));
       connect(chorusSpeed,     SIGNAL(valueChanged(double,int)), SLOT(chorusValueChanged(double,int)));
       connect(chorusDepth,     SIGNAL(valueChanged(double,int)), SLOT(chorusValueChanged(double,int)));
-      connect(chorusSpeedBox,  SIGNAL(valueChanged(double,int)), SLOT(chorusValueChanged1(double,int)));
-      connect(chorusDepthBox,  SIGNAL(valueChanged(double,int)), SLOT(chorusValueChanged1(double,int)));
+      connect(chorusSpeedBox,  SIGNAL(valueChanged(double)),     SLOT(chorusSpeedChanged(double)));
+      connect(chorusDepthBox,  SIGNAL(valueChanged(double)),     SLOT(chorusDepthChanged(double)));
       connect(chorusNumber,    SIGNAL(valueChanged(int)),        SLOT(chorusNumberChanged(int)));
       connect(chorusType,      SIGNAL(currentIndexChanged(int)), SLOT(chorusTypeChanged(int)));
 
@@ -147,6 +147,9 @@ void SynthControl::updateSyntiValues()
       val = synti->parameter(SParmId(FLUID_ID, CHORUS_GROUP, CHORUS_DEPTH).val).fval();
       chorusDepth->setValue(val);
       chorusDepthBox->setValue(val * 10);
+
+      chorusNumber->setValue(synti->parameter(SParmId(FLUID_ID, CHORUS_GROUP, CHORUS_BLOCKS).val).fval() * 100.0);
+      chorusType->setCurrentIndex(int(synti->parameter(SParmId(FLUID_ID, CHORUS_GROUP, CHORUS_TYPE).val).fval()));
 
       reverbDelay->init(synti->parameter(SParmId(AEOLUS_ID, 0, AEOLUS_REVSIZE).val));
       reverbDelay->setId(AEOLUS_REVSIZE);
@@ -388,17 +391,26 @@ void SynthControl::chorusValueChanged(double val, int idx)
       synti->setParameter(SParmId(FLUID_ID, CHORUS_GROUP, idx).val, val);
       }
 
-void SynthControl::chorusValueChanged1(double val, int idx)
+//---------------------------------------------------------
+//   chorusSpeedChanged
+//---------------------------------------------------------
+
+void SynthControl::chorusSpeedChanged(double val)
       {
-      if (idx == CHORUS_SPEED) {
-            val /= 5.0;
-            chorusSpeed->setValue(val);
-            }
-      else if (idx == CHORUS_DEPTH) {
-            val /= 10.0;
-            chorusDepth->setValue(val);
-            }
-      synti->setParameter(SParmId(FLUID_ID, CHORUS_GROUP, idx).val, val);
+      val /= 5.0;
+      chorusSpeed->setValue(val);
+      synti->setParameter(SParmId(FLUID_ID, CHORUS_GROUP, CHORUS_SPEED).val, val);
+      }
+
+//---------------------------------------------------------
+//   chorusDepthChanged
+//---------------------------------------------------------
+
+void SynthControl::chorusDepthChanged(double val)
+      {
+      val /= 10.0;
+      chorusDepth->setValue(val);
+      synti->setParameter(SParmId(FLUID_ID, CHORUS_GROUP, CHORUS_DEPTH).val, val);
       }
 
 //---------------------------------------------------------
@@ -433,7 +445,7 @@ void SynthControl::sfUpClicked()
             QStringList sfonts = sy->soundFonts();
             sfonts.swap(row, row-1);
             sy->loadSoundFonts(sfonts);
-sfonts = sy->soundFonts();
+            sfonts = sy->soundFonts();
             soundFonts->clear();
             soundFonts->addItems(sfonts);
             soundFonts->setCurrentRow(row-1);
