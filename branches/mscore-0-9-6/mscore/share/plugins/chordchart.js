@@ -125,7 +125,7 @@ function run()
 //---------------------------------------------------------
 
 var mscorePlugin = {
-      menu: 'Plugins.Create Chord Chart',
+      menu: 'Plugins.Lead Sheet.Create Chord Chart',
       init: init,
       run:  run
       };
