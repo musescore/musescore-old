@@ -20,11 +20,9 @@
 
 install(FILES
       abc_import.js
-      test.js
       createscore.js
       notenames.js
       colornotes.js
-      fonttest.js
       removenotes.js
       removenotes.ui
       chordchart.js
