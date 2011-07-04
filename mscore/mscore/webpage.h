@@ -76,6 +76,7 @@ class MyWebView: public QWebView
    
    public:
       MyWebView(QWidget *parent = 0);
+      ~MyWebView();
       MyWebPage* webPage() {return &m_page;}
       virtual QSize	sizeHint () const;
       };

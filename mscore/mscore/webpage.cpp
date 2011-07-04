@@ -102,6 +102,17 @@ MyWebView::MyWebView(QWidget *parent):
       }
 
 //---------------------------------------------------------
+//   ~MyWebView
+//---------------------------------------------------------
+
+MyWebView::~MyWebView() 
+      {
+      disconnect(this, SIGNAL(loadFinished(bool)), this, SLOT(stopBusyAndClose(bool)));
+      disconnect(this, SIGNAL(loadFinished(bool)), this, SLOT(stopBusyAndFirst(bool)));
+      disconnect(this, SIGNAL(loadFinished(bool)), this, SLOT(stopBusyStatic(bool)));
+      }
+
+//---------------------------------------------------------
 //   stopBusy
 //---------------------------------------------------------
 
