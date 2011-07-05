@@ -2711,8 +2711,9 @@ AboutBoxDialog::AboutBoxDialog()
 //   dirtyChanged
 //---------------------------------------------------------
 
-void MuseScore::dirtyChanged(Score* score)
+void MuseScore::dirtyChanged(Score* s)
       {
+      Score* score = s->rootScore();
       int idx = scoreList.indexOf(score);
       if (idx == -1) {
             printf("score not in list\n");

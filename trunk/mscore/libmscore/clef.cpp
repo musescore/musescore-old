@@ -316,16 +316,18 @@ bool Clef::acceptDrop(MuseScoreView*, const QPointF&, int type, int) const
 Element* Clef::drop(const DropData& data)
       {
       Element* e = data.element;
-      Element* clef = 0;
+      Clef* c = 0;
       if (e->type() == CLEF) {
-            ClefType stype  = static_cast<Clef*>(e)->clefType();
+            Clef* clef = static_cast<Clef*>(e);
+            ClefType stype  = clef->clefType();
+printf("drop clef %d -> %d, track %d\n", int(clefType()), int(stype), track());
             if (clefType() != stype) {
                   score()->undoChangeClef(staff(), segment(), stype);
-                  clef = this;
+                  c = this;
                   }
             }
       delete e;
-      return clef;
+      return c;
       }
 
 //---------------------------------------------------------
@@ -370,8 +372,8 @@ void Clef::read(QDomElement e)
 void Clef::write(Xml& xml) const
       {
       xml.stag(name());
-      xml.tag("concertClefType", _clefTypes._concertClef);
-      xml.tag("transposingClefType", _clefTypes._transposingClef);
+      xml.tag("concertClefType",     clefTable[_clefTypes._concertClef].tag);
+      xml.tag("transposingClefType", clefTable[_clefTypes._transposingClef].tag);
       Element::writeProperties(xml);
       xml.etag();
       }
@@ -443,6 +445,7 @@ ClefType Clef::clefType(const QString& s)
                   case 17: ct = CLEF_F_8VA; break;
                   case 18: ct = CLEF_F_15MA; break;
                   case 19: ct = CLEF_PERC2; break;
+                  case 20: ct = CLEF_TAB2; break;
                   }
             }
       else {

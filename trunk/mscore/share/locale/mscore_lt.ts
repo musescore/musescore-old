@@ -9894,99 +9894,99 @@ altera</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/synthcontrol.ui" line="465"/>
+        <location filename="../../mscore/synthcontrol.ui" line="479"/>
         <source>Rev</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/synthcontrol.ui" line="495"/>
+        <location filename="../../mscore/synthcontrol.ui" line="509"/>
         <source>Cho</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/synthcontrol.ui" line="555"/>
+        <location filename="../../mscore/synthcontrol.ui" line="569"/>
         <source>Aeolus</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/synthcontrol.ui" line="563"/>
+        <location filename="../../mscore/synthcontrol.ui" line="577"/>
         <source>Azimuth</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/synthcontrol.ui" line="570"/>
+        <location filename="../../mscore/synthcontrol.ui" line="584"/>
         <source>Width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/synthcontrol.ui" line="577"/>
+        <location filename="../../mscore/synthcontrol.ui" line="591"/>
         <source>Reflect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/synthcontrol.ui" line="604"/>
+        <location filename="../../mscore/synthcontrol.ui" line="618"/>
         <source>Delay</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/synthcontrol.ui" line="611"/>
+        <location filename="../../mscore/synthcontrol.ui" line="625"/>
         <source>Time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/synthcontrol.ui" line="618"/>
+        <location filename="../../mscore/synthcontrol.ui" line="632"/>
         <source>Direct</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/synthcontrol.ui" line="936"/>
+        <location filename="../../mscore/synthcontrol.ui" line="950"/>
         <source>III</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/synthcontrol.ui" line="943"/>
+        <location filename="../../mscore/synthcontrol.ui" line="957"/>
         <source>II</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/synthcontrol.ui" line="950"/>
+        <location filename="../../mscore/synthcontrol.ui" line="964"/>
         <source>I</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/synthcontrol.ui" line="957"/>
+        <location filename="../../mscore/synthcontrol.ui" line="971"/>
         <source>P</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/synthcontrol.ui" line="971"/>
+        <location filename="../../mscore/synthcontrol.ui" line="985"/>
         <source>Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/synthcontrol.ui" line="986"/>
+        <location filename="../../mscore/synthcontrol.ui" line="1000"/>
         <source>master volume</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/synthcontrol.ui" line="1002"/>
+        <location filename="../../mscore/synthcontrol.ui" line="1016"/>
         <source>Vol</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/synthcontrol.ui" line="124"/>
         <location filename="../../mscore/synthcontrol.ui" line="291"/>
-        <location filename="../../mscore/synthcontrol.ui" line="421"/>
+        <location filename="../../mscore/synthcontrol.ui" line="435"/>
         <source>...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/synthcontrol.ui" line="509"/>
+        <location filename="../../mscore/synthcontrol.ui" line="523"/>
         <source>Master Tuning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/synthcontrol.ui" line="529"/>
+        <location filename="../../mscore/synthcontrol.ui" line="543"/>
         <source>Hz</source>
         <extracomment>Frequency Herz</extracomment>
         <translation type="unfinished"></translation>
@@ -9998,8 +9998,8 @@ altera</source>
     </message>
     <message>
         <location filename="../../mscore/synthcontrol.ui" line="134"/>
-        <location filename="../../mscore/synthcontrol.ui" line="584"/>
-        <location filename="../../mscore/synthcontrol.ui" line="964"/>
+        <location filename="../../mscore/synthcontrol.ui" line="598"/>
+        <location filename="../../mscore/synthcontrol.ui" line="978"/>
         <source>Reverb</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10020,13 +10020,13 @@ altera</source>
     </message>
     <message>
         <location filename="../../mscore/synthcontrol.ui" line="269"/>
-        <location filename="../../mscore/synthcontrol.ui" line="399"/>
+        <location filename="../../mscore/synthcontrol.ui" line="413"/>
         <source>Preset:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../../mscore/synthcontrol.ui" line="283"/>
-        <location filename="../../mscore/synthcontrol.ui" line="413"/>
+        <location filename="../../mscore/synthcontrol.ui" line="427"/>
         <source>not implemented</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10061,28 +10061,28 @@ altera</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/synthcontrol.ui" line="368"/>
+        <location filename="../../mscore/synthcontrol.ui" line="375"/>
         <source>Depth:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/synthcontrol.cpp" line="154"/>
+        <location filename="../../mscore/synthcontrol.cpp" line="171"/>
         <source>no score</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/synthcontrol.cpp" line="296"/>
-        <location filename="../../mscore/synthcontrol.cpp" line="305"/>
+        <location filename="../../mscore/synthcontrol.cpp" line="313"/>
+        <location filename="../../mscore/synthcontrol.cpp" line="322"/>
         <source>MuseScore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/synthcontrol.cpp" line="297"/>
+        <location filename="../../mscore/synthcontrol.cpp" line="314"/>
         <source>Soundfont already loaded</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/synthcontrol.cpp" line="306"/>
+        <location filename="../../mscore/synthcontrol.cpp" line="323"/>
         <source>cannot load soundfont</source>
         <translation type="unfinished"></translation>
     </message>

@@ -573,9 +573,9 @@ void MuseScore::newFile()
             }
       if (!copyright.isEmpty())
             score->setMetaTag("copyright", copyright);
-      
+
       score->syntiState().prepend(SyntiParameter("soundfont", MScore::soundFont));
-      
+
       score->rebuildMidiMapping();
       score->doLayout();
       setCurrentScoreView(appendScore(score));
@@ -1499,7 +1499,7 @@ bool MuseScore::readScore(Score* score, QString name)
                         return false;
                   }
             else if (csl == "gtp" || csl == "gp3" || csl == "gp4" || csl == "gp5") {
-                  if (!score->importGTP(name))
+                  if (!importGTP(score, name))
                         return false;
                   }
             else {

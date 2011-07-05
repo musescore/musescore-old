@@ -19,6 +19,7 @@
 //=============================================================================
 
 #include "importgtp.h"
+#include "musescore.h"
 #include "libmscore/score.h"
 #include "libmscore/measurebase.h"
 #include "libmscore/text.h"
@@ -2618,7 +2619,7 @@ void GuitarPro5::read(QFile* fp)
 //   importGTP
 //---------------------------------------------------------
 
-bool Score::importGTP(const QString& name)
+bool MuseScore::importGTP(Score* score, const QString& name)
       {
       if (name.isEmpty())
             return false;
@@ -2646,15 +2647,15 @@ bool Score::importGTP(const QString& name)
       GuitarPro* gp;
 
       if (a == 1)
-            gp = new GuitarPro1(this, version);
+            gp = new GuitarPro1(score, version);
       if (a == 2)
-            gp = new GuitarPro2(this, version);
+            gp = new GuitarPro2(score, version);
       if (a == 3)
-            gp = new GuitarPro3(this, version);
+            gp = new GuitarPro3(score, version);
       else if (a == 4)
-            gp = new GuitarPro4(this, version);
+            gp = new GuitarPro4(score, version);
       else if (a == 5)
-            gp = new GuitarPro5(this, version);
+            gp = new GuitarPro5(score, version);
       else {
             printf("unknown gtp format %d\n", version);
             return false;
@@ -2674,28 +2675,28 @@ bool Score::importGTP(const QString& name)
       fp.close();
 
       MeasureBase* m;
-      if (!_measures.first()) {
-            m = new VBox(this);
+      if (!score->measures()->first()) {
+            m = new VBox(score);
             m->setTick(0);
-            addMeasure(m);
+            score->addMeasure(m);
             }
       else  {
-            m = _measures.first();
+            m = score->measures()->first();
             if (m->type() != VBOX) {
-                  m = new VBox(this);
+                  m = new VBox(score);
                   m->setTick(0);
-                  addMeasure(m);
+                  score->addMeasure(m);
                   }
             }
       if (!gp->title.isEmpty()) {
-            Text* s = new Text(this);
+            Text* s = new Text(score);
             s->setSubtype(TEXT_TITLE);
             s->setTextStyle(TEXT_STYLE_TITLE);
             s->setText(gp->title);
             m->add(s);
             }
       if (!gp->subtitle.isEmpty() && !gp->artist.isEmpty() && !gp->album.isEmpty()) {
-            Text* s = new Text(this);
+            Text* s = new Text(score);
             s->setSubtype(TEXT_SUBTITLE);
             s->setTextStyle(TEXT_STYLE_SUBTITLE);
             QString str;
@@ -2715,7 +2716,7 @@ bool Score::importGTP(const QString& name)
             m->add(s);
             }
       if (!gp->composer.isEmpty()) {
-            Text* s = new Text(this);
+            Text* s = new Text(score);
             s->setSubtype(TEXT_COMPOSER);
             s->setTextStyle(TEXT_STYLE_COMPOSER);
             s->setText(gp->composer);
@@ -2723,73 +2724,73 @@ bool Score::importGTP(const QString& name)
             }
       int idx = 0;
 
-      for (Measure* m = firstMeasure(); m; m = m->nextMeasure(), ++idx) {
+      for (Measure* m = score->firstMeasure(); m; m = m->nextMeasure(), ++idx) {
             const GpBar& bar = gp->bars[idx];
             if (bar.barLine != NORMAL_BAR)
                   m->setEndBarLineType(bar.barLine, false);
             }
-      lastMeasure()->setEndBarLineType(END_BAR, false);
+      score->lastMeasure()->setEndBarLineType(END_BAR, false);
 
       //
       // create parts (excerpts)
       //
-      foreach(Part* part, _parts) {
-            Score* score = new Score(this);
-            score->style()->set(ST_createMultiMeasureRests, true);
+      foreach(Part* part, *score->parts()) {
+            Score* pscore = new Score(score);
+            pscore->style()->set(ST_createMultiMeasureRests, true);
 
             QList<int> stavesMap;
-            Part* p = new Part(score);
+            Part* p = new Part(pscore);
             p->setInstrument(*part->instr());
 
             Staff* staff = part->staves()->front();
 
-            Staff* s = new Staff(score, p, 0);
+            Staff* s = new Staff(pscore, p, 0);
             s->setUpdateKeymap(true);
             StaffType* st = staff->staffType();
             s->setStaffType(st);
-            int idx = score->staffTypes().indexOf(st);
+            int idx = pscore->staffTypes().indexOf(st);
             if (idx == -1)
-                  score->staffTypes().append(st);
+                  pscore->staffTypes().append(st);
             s->linkTo(staff);
             p->staves()->append(s);
-            score->staves().append(s);
-            stavesMap.append(staffIdx(staff));
+            pscore->staves().append(s);
+            stavesMap.append(score->staffIdx(staff));
             if (part->staves()->front()->staffType()->group() == PITCHED_STAFF) {
-                  s = new Staff(score, p, 1);
+                  s = new Staff(pscore, p, 1);
                   s->setUpdateKeymap(true);
-                  StaffType* st = score->staffTypes().at(TAB_STAFF_TYPE);
+                  StaffType* st = pscore->staffTypes().at(TAB_STAFF_TYPE);
                   s->setStaffType(st);
                   s->linkTo(staff);
                   p->staves()->append(s);
-                  score->staves().append(s);
-                  stavesMap.append(staffIdx(staff));
+                  pscore->staves().append(s);
+                  stavesMap.append(score->staffIdx(staff));
                   p->staves()->front()->addBracket(BracketItem(BRACKET_NORMAL, 2));
                   }
-            score->appendPart(p);
+            pscore->appendPart(p);
 
-            cloneStaves(this, score, stavesMap);
+            cloneStaves(score, pscore, stavesMap);
 
-            score->setName(part->trackName());
-            Excerpt* excerpt = new Excerpt(score);
+            pscore->setName(part->trackName());
+            Excerpt* excerpt = new Excerpt(pscore);
             excerpt->setTitle(part->trackName());
             excerpt->parts()->append(part);
-            _excerpts.append(excerpt);
+            score->excerpts()->append(excerpt);
 
             if (part->staves()->front()->staffType()->group() == PITCHED_STAFF) {
-                  Staff* staff2 = score->staff(1);
-                  staff2->setStaffType(score->staffTypes().at(TAB_STAFF_TYPE));
+                  Staff* staff2 = pscore->staff(1);
+                  staff2->setStaffType(pscore->staffTypes().at(TAB_STAFF_TYPE));
                   }
 
             //
             // create excerpt title
             //
-            MeasureBase* measure = score->first();
+            MeasureBase* measure = pscore->first();
             if (!measure || (measure->type() != VBOX)) {
-                  measure = new VBox(score);
+                  measure = new VBox(pscore);
                   measure->setTick(0);
-                  score->addMeasure(measure);
+                  pscore->addMeasure(measure);
                   }
-            Text* txt = new Text(score);
+            Text* txt = new Text(pscore);
             txt->setSubtype(TEXT_INSTRUMENT_EXCERPT);
             txt->setTextStyle(TEXT_STYLE_INSTRUMENT_EXCERPT);
             txt->setText(part->longName().toPlainText());
@@ -2798,22 +2799,23 @@ bool Score::importGTP(const QString& name)
             //
             // layout score
             //
-            score->setPlaylistDirty(true);
-            score->rebuildMidiMapping();
-            score->updateChannel();
+            pscore->setPlaylistDirty(true);
+            pscore->rebuildMidiMapping();
+            pscore->updateChannel();
+            pscore->updateNotes();
 
-            score->setLayoutAll(true);
-            score->addLayoutFlags(LAYOUT_FIX_TICKS | LAYOUT_FIX_PITCH_VELO);
-            score->doLayout();
+            pscore->setLayoutAll(true);
+            pscore->addLayoutFlags(LAYOUT_FIX_TICKS | LAYOUT_FIX_PITCH_VELO);
+            pscore->doLayout();
             }
 
 //      album
 //      copyright
 
-      _saved = false;
-      _created = true;
+      score->setSaved(false);
+      score->setCreated(true);
       delete gp;
-      rebuildMidiMapping();
+      score->rebuildMidiMapping();
       return true;
       }
 
