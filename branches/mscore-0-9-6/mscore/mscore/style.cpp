@@ -811,7 +811,11 @@ ChordList* Style::chordList()  const
       if (_chordList == 0) {
             _chordList = new ChordList();
             _chordList->read("chords.xml");
-            _chordList->read(value(ST_chordDescriptionFile).toString());
+            QString filename = value(ST_chordDescriptionFile).toString();
+            QFileInfo fi(filename)
+            if(!fi.exists())
+                  filename = QString("stdchords.xml");
+            _chordList->read(filename);
             }
       return _chordList;
       }
