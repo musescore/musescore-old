@@ -682,7 +682,7 @@ void Staff::setStaffType(StaffType* st)
       if (_staffType->group() != csg) {
 //            _clefList->clear();
             switch(_staffType->group()) {
-                  case TAB_STAFF:        ct = CLEF_TAB2; break;
+                  case TAB_STAFF:        ct = ClefType(score()->styleI(ST_tabClef)); break;
                   case PITCHED_STAFF:    ct = CLEF_G; break;      // TODO: use preferred clef for instrument
                   case PERCUSSION_STAFF: ct = CLEF_PERC; break;
                   }

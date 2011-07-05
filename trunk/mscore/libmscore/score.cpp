@@ -274,7 +274,7 @@ void Score::init()
       _undo           = new UndoStack();
       _repeatList     = new RepeatList(this);
       foreach(StaffType* st, ::staffTypes)
-            _staffTypes.append(st->clone());
+             _staffTypes.append(st->clone());
       _swingRatio     = 0.0;
 
       _mscVersion     = MSCVERSION;
@@ -305,7 +305,6 @@ void Score::init()
       _sigmap         = new AL::TimeSigMap();
       _tempomap       = new AL::TempoMap;
       _playRepeats    = true;
-
       }
 
 //---------------------------------------------------------

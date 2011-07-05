@@ -2328,6 +2328,7 @@ void ExportLy::writeClef(int clef)
   case CLEF_C2:     out <<  "mezzo-soprano\n"; break;
   case CLEF_C3:     out <<  "alto\n";          break;
   case CLEF_C4:     out <<  "tenor\n";         break;
+  case CLEF_TAB2:
   case CLEF_TAB:    out <<  "tab\n";           break;
   case CLEF_PERC:   out <<  "percussion\n";    break;
   }
