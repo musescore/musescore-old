@@ -1,3 +1,5 @@
+5.jul (ws)
+      - fix #10709: Unable to change TAB clef
 4.jul (ws)
       - fixes for chorus parameter handling
       - restrict augmentation dot alignment to staff (instead of system)

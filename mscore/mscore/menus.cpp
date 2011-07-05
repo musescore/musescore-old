@@ -127,28 +127,8 @@ Palette* newAccidentalsPalette()
 void MuseScore::showPalette(bool visible)
       {
       QAction* a = getAction("toggle-palette");
-      if (paletteBox == 0) {
+      if (paletteBox == 0)
             profile->read();
-#if 0
-
-            paletteBox = new PaletteBox(this);
-
-            connect(paletteBox, SIGNAL(paletteVisible(bool)), a, SLOT(setChecked(bool)));
-            addDockWidget(Qt::LeftDockWidgetArea, paletteBox);
-
-            if (!useFactorySettings) {
-                  QFile f(dataPath + "/" + "mscore-palette.xml");
-                  if (f.exists()) {
-                        if (paletteBox->read(&f)) {
-                              paletteBox->setShown(visible);
-                              a->setChecked(visible);
-                              return;
-                              }
-                        }
-                  }
-            populatePalette();
-#endif
-            }
       if (paletteBox)   // read failed?
             paletteBox->setShown(visible);
       a->setChecked(visible);
@@ -225,7 +205,7 @@ void MuseScore::populatePalette()
       for (int i = 0; i < 20; ++i) {
             ClefType j = clefs[i];
             Clef* k = new ::Clef(gscore);
-            k->setClefType(j);
+            k->setClefType(ClefTypeList(j, j));
             sp->append(k, qApp->translate("clefTable", clefTable[j].name));
             }
       paletteBox->addPalette(sp);

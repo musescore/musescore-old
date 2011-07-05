@@ -570,7 +570,6 @@ class Score {
       bool importCapella(const QString& name);
       bool importOve(const QString& name);
       bool importBww(const QString& name);
-      bool importGTP(const QString& name);
 
       void saveFile(QFileInfo& info, bool autosave);
       void saveFile(QIODevice* f, bool msczFormat, bool autosave);
