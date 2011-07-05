@@ -189,15 +189,15 @@ class StaffTypeTablature : public StaffType {
                                             setDurationMetrics(); return _durationBoxH; }
       double  durationBoxY()              { if(!_genDurations && !_slashStyle) return 0.0;
                                             setDurationMetrics(); return _durationBoxY + _durationFontUserY; }
-const QFont&  durationFont()              { return _durationFont;     }
-const	QString durationFontName() const    { return _durationFontName; }
+      const QFont&  durationFont()        { return _durationFont;     }
+      const	QString durationFontName() const    { return _durationFontName; }
       double  durationFontSize() const    { return _durationFontSize; }
       double  durationFontUserY() const   { return _durationFontUserY;}
       double  durationFontYOffset()       { setDurationMetrics(); return _durationYOffset + _durationFontUserY; }
       double  fretBoxH()                  { setFretMetrics(); return _fretBoxH; }
       double  fretBoxY()                  { setFretMetrics(); return _fretBoxY + _fretFontUserY; }
-const QFont&  fretFont()                  { return _fretFont;         }
-const QString fretFontName() const        { return _fretFontName;     }
+      const QFont&  fretFont()            { return _fretFont;         }
+      const QString fretFontName() const  { return _fretFontName;     }
       double  fretFontSize() const        { return _fretFontSize;     }
       double  fretFontUserY() const       { return _fretFontUserY;    }
       double  fretFontYOffset()           { setFretMetrics(); return _fretYOffset + _fretFontUserY; }
@@ -223,7 +223,7 @@ const QString fretFontName() const        { return _fretFontName;     }
       void    setUpsideDown(bool val)     { _upsideDown = val;        }
       void    setUseNumbers(bool val)     { _useNumbers = val; _fretMetricsValid = false; }
 
-protected:
+   protected:
       void    setDurationMetrics();
       void    setFretMetrics();
       };

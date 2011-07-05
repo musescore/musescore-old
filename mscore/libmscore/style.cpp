@@ -228,6 +228,8 @@ StyleType styleTypes[] = {
       StyleType("ottavaY",                 ST_SPATIUM),
       StyleType("ottavaHook",              ST_SPATIUM),
       StyleType("ottavaLineWidth",         ST_SPATIUM),
+
+      StyleType("tabClef",                ST_INT),
       };
 
 static const QString ff("FreeSerifMscore");
@@ -616,7 +618,8 @@ StyleData::StyleData()
 
             StyleVal(ST_ottavaY, Spatium(-3.0)),
             StyleVal(ST_ottavaHook, Spatium(1.9)),
-            StyleVal(ST_ottavaLineWidth, Spatium(.1))
+            StyleVal(ST_ottavaLineWidth, Spatium(.1)),
+            StyleVal(ST_tabClef, int(CLEF_TAB2))
             };
 
       for (int idx = 0; idx < ST_STYLES; ++idx)

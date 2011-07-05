@@ -2674,6 +2674,8 @@ bool MuseScore::importGTP(Score* score, const QString& name)
             }
       fp.close();
 
+      score->syntiState().append(SyntiParameter("soundfont", MScore::soundFont));
+
       MeasureBase* m;
       if (!score->measures()->first()) {
             m = new VBox(score);
@@ -2736,6 +2738,7 @@ bool MuseScore::importGTP(Score* score, const QString& name)
       //
       foreach(Part* part, *score->parts()) {
             Score* pscore = new Score(score);
+            pscore->syntiState().append(SyntiParameter("soundfont", MScore::soundFont));
             pscore->style()->set(ST_createMultiMeasureRests, true);
 
             QList<int> stavesMap;
@@ -2758,7 +2761,9 @@ bool MuseScore::importGTP(Score* score, const QString& name)
             if (part->staves()->front()->staffType()->group() == PITCHED_STAFF) {
                   s = new Staff(pscore, p, 1);
                   s->setUpdateKeymap(true);
-                  StaffType* st = pscore->staffTypes().at(TAB_STAFF_TYPE);
+                  StaffTypeTablature* st = static_cast<StaffTypeTablature*>(pscore->staffTypes().at(TAB_STAFF_TYPE));
+                  st->setSlashStyle(true);
+
                   s->setStaffType(st);
                   s->linkTo(staff);
                   p->staves()->append(s);

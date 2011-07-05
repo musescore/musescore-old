@@ -128,7 +128,7 @@ void Clef::layout()
                   if (!staffType->genClef())
                         return;
                   if (clefTable[st].staffGroup != TAB_STAFF)
-                        st = CLEF_TAB;
+                        st = ClefType(score()->styleI(ST_tabClef));
 	            }
             lines = staffType->lines();
             lineDist = staffType->lineDistance().val();

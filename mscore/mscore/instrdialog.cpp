@@ -230,7 +230,7 @@ void InstrumentsDialog::genPartList()
                   sli->setPartIdx(s->rstaff());
                   sli->staffIdx = s->idx();
                   if (s->useTablature())
-                        sli->setClef(CLEF_TAB);
+                        sli->setClef(ClefType(cs->styleI(ST_tabClef)));
                   else
                         sli->setClef(s->clef(0));
                   const LinkedStaves* ls = s->linkedStaves();
