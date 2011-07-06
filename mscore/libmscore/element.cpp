@@ -588,6 +588,7 @@ bool Element::readProperties(QDomElement e)
       QString tag(e.tagName());
       QString val(e.text());
       int i = val.toInt();
+      float _spatium = spatium();
 
       if (tag == "lid") {
             _links = score()->links().value(i);
@@ -606,12 +607,12 @@ bool Element::readProperties(QDomElement e)
       else if (tag == "tick")
             score()->curTick = score()->fileDivision(i);
       else if (tag == "offset") {         // ??obsolete
-            QPointF pt(readPoint(e) * spatium());
+            QPointF pt(readPoint(e) * _spatium);
             setUserOff(pt);
             _readPos = QPointF();
             }
       else if (tag == "pos")
-            _readPos = readPoint(e) * spatium();
+            _readPos = readPoint(e) * _spatium;
       else if (tag == "visible")
             setVisible(i);
       else if (tag == "voice")
