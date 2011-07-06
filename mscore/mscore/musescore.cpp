@@ -4291,8 +4291,10 @@ void MuseScore::cmd(QAction* a, const QString& cmd)
             }
       else if (cmd == "file-new")
             newFile();
-      else if (cmd == "quit")
+      else if (cmd == "quit") {
             close();
+            exit(0);
+            }
       else if (cmd == "fingering")
             fingeringMenu();
       else if (cmd == "toggle-statusbar") {
