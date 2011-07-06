@@ -3698,7 +3698,7 @@ er ikke kompatibelt med nåværende grensesnitt</translation>
     <name>MyWebView</name>
     <message>
         <source>Could not&lt;br /&gt; connect</source>
-        <translation type="unfinished"/>
+        <translation>Kunne ikke&lt;br /&gt; koble til</translation>
     </message>
     <message>
         <source>To connect with the community, &lt;br /&gt; you need to have internet &lt;br /&gt; connection enabled</source>
@@ -3706,7 +3706,7 @@ er ikke kompatibelt med nåværende grensesnitt</translation>
     </message>
     <message>
         <source>Retry</source>
-        <translation type="unfinished"/>
+        <translation>Prøv igjen</translation>
     </message>
     <message>
         <source>Close this permanently</source>
@@ -4747,11 +4747,11 @@ er ikke kompatibelt med nåværende grensesnitt</translation>
     </message>
     <message>
         <source>Show Play Panel</source>
-        <translation type="unfinished"/>
+        <translation>Vis avspillingsvindu</translation>
     </message>
     <message>
         <source>Show Navigator</source>
-        <translation type="unfinished"/>
+        <translation>Vis navigatør</translation>
     </message>
     <message>
         <source>Show MuseScore Connect</source>
@@ -6656,7 +6656,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Read the latest news</source>
-        <translation type="unfinished"/>
+        <translation>Les de seneste nyhetene</translation>
     </message>
     <message>
         <source>Download free sheet music</source>
