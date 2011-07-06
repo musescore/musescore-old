@@ -409,25 +409,6 @@ static void elementAdjustReadPos(void*, Element* e)
       }
 
 //---------------------------------------------------------
-//   adjustReadPos
-//---------------------------------------------------------
-
-void Score::adjustReadPos()
-      {
-      uint layerBits = _layer[_currentLayer].tags;
-      _layer[_currentLayer].tags = 0xffffffff;         // process all elements
-
-      updateNotes();
-      addLayoutFlags(LAYOUT_FIX_TICKS | LAYOUT_FIX_PITCH_VELO);
-      setLayoutAll(true);
-      doLayout();
-
-      // adjust readPos
-      scanElements(0, elementAdjustReadPos);
-      _layer[_currentLayer].tags = layerBits;
-      }
-
-//---------------------------------------------------------
 //   instrument
 //---------------------------------------------------------
 

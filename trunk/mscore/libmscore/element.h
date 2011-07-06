@@ -142,7 +142,6 @@ class Element {
       QPointF _pos;               ///< Reference position, relative to _parent.
       QPointF _userOff;           ///< offset from normal layout position:
                                   ///< user dragged object this amount.
-                                  ///< depends on Spatium ("space") units!
       QPointF _readPos;
 
       mutable QRectF _bbox;       ///< Bounding box relative to _pos + _userOff
@@ -207,8 +206,8 @@ class Element {
       int mxmlOff() const                     { return _mxmlOff;  }
       void setMxmlOff(int o)                  { _mxmlOff = o;     }
 
-      QPointF readPos() const                 { return _readPos;           }
-      void setReadPos(const QPointF& p)       { _readPos = p;              }
+      QPointF readPos() const                 { return _readPos;   }
+      void setReadPos(const QPointF& p)       { _readPos = p;      }
       void adjustReadPos();
 
       virtual QRectF bbox() const             { return _bbox;              }

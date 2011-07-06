@@ -347,6 +347,7 @@ void Score::layoutChords1(Segment* segment, int staffIdx)
                         x -= note->headWidth();
                   }
             note->accidental()->setPos(x, 0);
+            note->accidental()->adjustReadPos();
             }
       }
 

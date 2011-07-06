@@ -114,6 +114,7 @@ void BSymbol::layout()
       {
       foreach(Element* e, _leafs)
             e->layout();
+      adjustReadPos();
       }
 
 //---------------------------------------------------------
@@ -389,7 +390,6 @@ void FSymbol::write(Xml& xml) const
 void FSymbol::read(QDomElement e)
       {
       QPointF pos;
-//      int s = -1;
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
@@ -421,6 +421,7 @@ void FSymbol::layout()
             s = QChar(_code);
       QFontMetricsF fm(_font);
       setbbox(fm.boundingRect(s));
+      adjustReadPos();
       }
 
 //---------------------------------------------------------

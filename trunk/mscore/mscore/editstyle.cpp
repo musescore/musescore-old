@@ -292,6 +292,8 @@ void EditStyle::getValues()
       lstyle.set(ST_ottavaY,                 Spatium(ottavaY->value()));
       lstyle.set(ST_ottavaHook,              Spatium(ottavaHook->value()));
       lstyle.set(ST_ottavaLineWidth,         Spatium(ottavaLineWidth->value()));
+
+      lstyle.set(ST_tabClef, clefTab1->isChecked() ? CLEF_TAB : CLEF_TAB2);
       }
 
 //---------------------------------------------------------
@@ -458,6 +460,9 @@ void EditStyle::setValues()
       ottavaY->setValue(lstyle.value(ST_ottavaY).toSpatium().val());
       ottavaHook->setValue(lstyle.value(ST_ottavaHook).toSpatium().val());
       ottavaLineWidth->setValue(lstyle.value(ST_ottavaLineWidth).toSpatium().val());
+
+      clefTab1->setChecked(lstyle.value(ST_tabClef).toInt() == CLEF_TAB);
+      clefTab2->setChecked(lstyle.value(ST_tabClef).toInt() == CLEF_TAB2);
       }
 
 //---------------------------------------------------------
