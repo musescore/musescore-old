@@ -5,15 +5,15 @@
     <name>AboutBox</name>
     <message>
         <source>AboutBox</source>
-        <translation>AboutBox</translation>
+        <translation>Pria skatolo</translation>
     </message>
     <message>
         <source>Version: 0.9.0</source>
-        <translation>Version: 0.9.0</translation>
+        <translation>Versio: 0.9.0</translation>
     </message>
     <message>
         <source>Revision: 628</source>
-        <translation>Revision: 628</translation>
+        <translation>Revizio: 628</translation>
     </message>
     <message utf8="true">
         <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
@@ -26,45 +26,45 @@ p, li { white-space: pre-wrap; }
 &lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Visit &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; for new versions and more information.&lt;/span&gt;&lt;/p&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Support MuseScore with &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;your donation&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2011 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;line break&#13;
+&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;line break&#13;
+p, li { white-space: pre-wrap; }line break&#13;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;line break&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Vidu &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; por novaj versioj kaj plia informo.&lt;/span&gt;&lt;/p&gt;line break&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Helpu MuseScore per&lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;via donaĵo&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;line break&#13;
+line break&#13;
+&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;line break&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Aŭtorrajto &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;line break&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Eldonita sub la GNU Generala Publika Rajtigilo&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
     <name>AboutBoxDialog</name>
     <message>
         <source>Unstable Prerelease for Version: </source>
-        <translation>Unstable Prerelease for Version: </translation>
+        <translation>Nestabila eldono de Versio: </translation>
     </message>
     <message>
         <source>Version: </source>
-        <translation>Version: </translation>
+        <translation>Versio: </translation>
     </message>
     <message>
         <source>Revision: %1</source>
-        <translation>Revision: %1</translation>
+        <translation>Revizio: %1</translation>
     </message>
 </context>
 <context>
     <name>Accidental</name>
     <message>
         <source>round bracket</source>
-        <translation>round bracket</translation>
+        <translation>ronda bracko</translation>
     </message>
 </context>
 <context>
     <name>Articulation</name>
     <message>
         <source>Articulation Properties...</source>
-        <translation>Articulation Properties…</translation>
+        <translation>Artikulaciaj Ecoj</translation>
     </message>
 </context>
 <context>
@@ -6670,326 +6670,326 @@ p, li { white-space: pre-wrap; }
     <name>accidental</name>
     <message>
         <source>none</source>
-        <translation>none</translation>
+        <translation>neniu</translation>
     </message>
     <message>
         <source>sharp</source>
-        <translation>sharp</translation>
+        <translation>dieso</translation>
     </message>
     <message>
         <source>flat</source>
-        <translation>flat</translation>
+        <translation>bemolo</translation>
     </message>
     <message>
         <source>double sharp</source>
-        <translation>double sharp</translation>
+        <translation>duopa dieso</translation>
     </message>
     <message>
         <source>double flat</source>
-        <translation>double flat</translation>
+        <translation>duopa bemolo</translation>
     </message>
     <message>
         <source>natural</source>
-        <translation>natural</translation>
+        <translation>bekvadrato</translation>
     </message>
     <message>
         <source>flat-slash</source>
-        <translation>flat-slash</translation>
+        <translation>oblikvstangita bemolo</translation>
     </message>
     <message>
         <source>flat-slash2</source>
-        <translation>flat-slash2</translation>
+        <translation>oblikvstangita bemolo 2</translation>
     </message>
     <message>
         <source>mirrored-flat2</source>
-        <translation>mirrored-flat2</translation>
+        <translation>simetria bemolo 2</translation>
     </message>
     <message>
         <source>mirrored-flat</source>
-        <translation>mirrored-flat</translation>
+        <translation>simetria bemolo</translation>
     </message>
     <message>
         <source>mirrored-flat-slash</source>
-        <translation>mirrored-flat-slash</translation>
+        <translation>simetria oblikvstangita bemolo</translation>
     </message>
     <message>
         <source>flat-flat-slash</source>
-        <translation>flat-flat-slash</translation>
+        <translation>oblikvstangita duopo bemolo</translation>
     </message>
     <message>
         <source>sharp-slash</source>
-        <translation>sharp-slash</translation>
+        <translation>oblikvstangita dieso</translation>
     </message>
     <message>
         <source>sharp-slash2</source>
-        <translation>sharp-slash2</translation>
+        <translation>oblikvstangita dieso 2</translation>
     </message>
     <message>
         <source>sharp-slash3</source>
-        <translation>sharp-slash3</translation>
+        <translation>oblikvstangita dieso 3</translation>
     </message>
     <message>
         <source>sharp-slash4</source>
-        <translation>sharp-slash4</translation>
+        <translation>oblikvstangita dieso 4</translation>
     </message>
     <message>
         <source>sharp arrow up</source>
-        <translation>sharp arrow up</translation>
+        <translation>altsagita dieso</translation>
     </message>
     <message>
         <source>sharp arrow down</source>
-        <translation>sharp arrow down</translation>
+        <translation>malaltsagita dieso</translation>
     </message>
     <message>
         <source>sharp arrow both</source>
-        <translation>sharp arrow both</translation>
+        <translation>duopsagita sago</translation>
     </message>
     <message>
         <source>flat arrow up</source>
-        <translation>flat arrow up</translation>
+        <translation>altsagita bemolo</translation>
     </message>
     <message>
         <source>flat arrow down</source>
-        <translation>flat arrow down</translation>
+        <translation>malaltsagita bemolo</translation>
     </message>
     <message>
         <source>flat arrow both</source>
-        <translation>flat arrow both</translation>
+        <translation>duopsagita bemolo</translation>
     </message>
     <message>
         <source>natural arrow up</source>
-        <translation>natural arrow up</translation>
+        <translation>altsagita bekvadrato</translation>
     </message>
     <message>
         <source>natural arrow down</source>
-        <translation>natural arrow down</translation>
+        <translation>malaltsagita bekvadrato</translation>
     </message>
     <message>
         <source>natural arrow both</source>
-        <translation>natural arrow both</translation>
+        <translation>duopsagita bekvadrato</translation>
     </message>
 </context>
 <context>
     <name>action</name>
     <message>
         <source>Local &amp;Handbook...</source>
-        <translation>Local &amp;Handbook…</translation>
+        <translation>Loka &amp;Lernolibro</translation>
     </message>
     <message>
         <source>Open...</source>
-        <translation>Open…</translation>
+        <translation>Malfermi...</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Save</translation>
+        <translation>Registri</translation>
     </message>
     <message>
         <source>Save As...</source>
-        <translation>Save As…</translation>
+        <translation>Registri tiel...</translation>
     </message>
     <message>
         <source>Save a Copy...</source>
-        <translation>Save a Copy…</translation>
+        <translation>Kopion registri</translation>
     </message>
     <message>
         <source>Reload</source>
-        <translation>Reload</translation>
+        <translation>Refreŝigi</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation>Close</translation>
+        <translation>Fermi</translation>
     </message>
     <message>
         <source>file new</source>
-        <translation>file new</translation>
+        <translation>Nova dosiero</translation>
     </message>
     <message>
         <source>New...</source>
-        <translation>New…</translation>
+        <translation>Nova...</translation>
     </message>
     <message>
         <source>Create new score</source>
-        <translation>Create new score</translation>
+        <translation>Novan partituron krei</translation>
     </message>
     <message>
         <source>Print...</source>
-        <translation>Print…</translation>
+        <translation>Printi</translation>
     </message>
     <message>
         <source>Undo</source>
-        <translation>Undo</translation>
+        <translation>Malfari</translation>
     </message>
     <message>
         <source>Redo</source>
-        <translation>Redo</translation>
+        <translation>Refari</translation>
     </message>
     <message>
         <source>Cut</source>
-        <translation>Cut</translation>
+        <translation>Tranĉi</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation>Copy</translation>
+        <translation>Kopii</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation>Paste</translation>
+        <translation>Glui</translation>
     </message>
     <message>
         <source>Instruments...</source>
-        <translation>Instruments…</translation>
+        <translation>Muzikiloj...</translation>
     </message>
     <message>
         <source>Symbols...</source>
-        <translation>Symbols…</translation>
+        <translation>Simboloj...</translation>
     </message>
     <message>
         <source>Dynamics...</source>
-        <translation>Dynamics…</translation>
+        <translation>Nuancoj...</translation>
     </message>
     <message>
         <source>Note Input</source>
-        <translation>Note Input</translation>
+        <translation>Noton enigi</translation>
     </message>
     <message>
         <source>Pitch Spell</source>
-        <translation>Pitch Spell</translation>
+        <translation>Intervalo</translation>
     </message>
     <message>
         <source>Unison Above</source>
-        <translation>Unison Above</translation>
+        <translation>Supra Unuto</translation>
     </message>
     <message>
         <source>Enter unison above</source>
-        <translation>Enter unison above</translation>
+        <translation>Supran unuton enigi</translation>
     </message>
     <message>
         <source>Second Above</source>
-        <translation>Second Above</translation>
+        <translation>Supra Duto</translation>
     </message>
     <message>
         <source>Enter second above</source>
-        <translation>Enter second above</translation>
+        <translation>Supran duton enigi</translation>
     </message>
     <message>
         <source>Third Above</source>
-        <translation>Third Above</translation>
+        <translation>Supra Trito</translation>
     </message>
     <message>
         <source>Enter third above</source>
-        <translation>Enter third above</translation>
+        <translation>Supran triton enigi</translation>
     </message>
     <message>
         <source>Fourth Above</source>
-        <translation>Fourth Above</translation>
+        <translation>Supra Kvarto</translation>
     </message>
     <message>
         <source>Enter fourth above</source>
-        <translation>Enter fourth above</translation>
+        <translation>Supran kvarton enigi</translation>
     </message>
     <message>
         <source>Fifth Above</source>
-        <translation>Fifth Above</translation>
+        <translation>Supra Kvinto</translation>
     </message>
     <message>
         <source>Enter fifth above</source>
-        <translation>Enter fifth above</translation>
+        <translation>Supran kvinton enigi</translation>
     </message>
     <message>
         <source>Sixth Above</source>
-        <translation>Sixth Above</translation>
+        <translation>Supra Sesto</translation>
     </message>
     <message>
         <source>Enter sixth above</source>
-        <translation>Enter sixth above</translation>
+        <translation>Supran seston enigi</translation>
     </message>
     <message>
         <source>Seventh Above</source>
-        <translation>Seventh Above</translation>
+        <translation>Supra Septo</translation>
     </message>
     <message>
         <source>Enter seventh above</source>
-        <translation>Enter seventh above</translation>
+        <translation>Supran septon enigi</translation>
     </message>
     <message>
         <source>Octave Above</source>
-        <translation>Octave Above</translation>
+        <translation>Supra Okto</translation>
     </message>
     <message>
         <source>Enter octave above</source>
-        <translation>Enter octave above</translation>
+        <translation>Supran okton enigi</translation>
     </message>
     <message>
         <source>Ninth Above</source>
-        <translation>Ninth Above</translation>
+        <translation>Supra Naǔto</translation>
     </message>
     <message>
         <source>Enter ninth above</source>
-        <translation>Enter ninth above</translation>
+        <translation>Supran naǔton enigi</translation>
     </message>
     <message>
         <source>Second Below</source>
-        <translation>Second Below</translation>
+        <translation>Suba Duto</translation>
     </message>
     <message>
         <source>Enter second below</source>
-        <translation>Enter second below</translation>
+        <translation>Suban duton enigi</translation>
     </message>
     <message>
         <source>Third Below</source>
-        <translation>Third Below</translation>
+        <translation>Suba Trito</translation>
     </message>
     <message>
         <source>Enter third below</source>
-        <translation>Enter third below</translation>
+        <translation>Suban triton enigi</translation>
     </message>
     <message>
         <source>Fourth Below</source>
-        <translation>Fourth Below</translation>
+        <translation>Suba DKvarto</translation>
     </message>
     <message>
         <source>Enter fourth below</source>
-        <translation>Enter fourth below</translation>
+        <translation>Suban kvarton enigi</translation>
     </message>
     <message>
         <source>Fifth Below</source>
-        <translation>Fifth Below</translation>
+        <translation>Suba Kvinto</translation>
     </message>
     <message>
         <source>Enter fifth below</source>
-        <translation>Enter fifth below</translation>
+        <translation>Suban kvinton enigi</translation>
     </message>
     <message>
         <source>Sixth Below</source>
-        <translation>Sixth Below</translation>
+        <translation>Suba Sesto</translation>
     </message>
     <message>
         <source>Enter sixth below</source>
-        <translation>Enter sixth below</translation>
+        <translation>Suban seston enigi</translation>
     </message>
     <message>
         <source>Seventh Below</source>
-        <translation>Seventh Below</translation>
+        <translation>Suba Septo</translation>
     </message>
     <message>
         <source>Enter seventh below</source>
-        <translation>Enter seventh below</translation>
+        <translation>Suban septon enigi</translation>
     </message>
     <message>
         <source>Octave Below</source>
-        <translation>Octave Below</translation>
+        <translation>Suba Okto</translation>
     </message>
     <message>
         <source>Enter octave below</source>
-        <translation>Enter octave below</translation>
+        <translation>Suban okton enigi</translation>
     </message>
     <message>
         <source>Ninth Below</source>
-        <translation>Ninth Below</translation>
+        <translation>Suba Naǔto</translation>
     </message>
     <message>
         <source>Enter ninth below</source>
-        <translation>Enter ninth below</translation>
+        <translation>Suban naǔton enigi</translation>
     </message>
     <message>
         <source>A</source>
@@ -7009,7 +7009,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>E</source>
-        <translation>C</translation>
+        <translation>E</translation>
     </message>
     <message>
         <source>F</source>
@@ -7021,79 +7021,79 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add A</source>
-        <translation>Add A</translation>
+        <translation>A—on aldoni</translation>
     </message>
     <message>
         <source>Add note A to chord</source>
-        <translation>Add note A to chord</translation>
+        <translation>Noton A al akordo aldoni</translation>
     </message>
     <message>
         <source>Add B</source>
-        <translation>Add B</translation>
+        <translation>B—on aldoni</translation>
     </message>
     <message>
         <source>Add note B to chord</source>
-        <translation>Add note B to chord</translation>
+        <translation>Noton B al akordo aldoni</translation>
     </message>
     <message>
         <source>Add C</source>
-        <translation>Add C</translation>
+        <translation>C—on aldoni</translation>
     </message>
     <message>
         <source>Add note C to chord</source>
-        <translation>Add note C to chord</translation>
+        <translation>Noton C al akordo aldoni</translation>
     </message>
     <message>
         <source>Add D</source>
-        <translation>Add D</translation>
+        <translation>D—on aldoni</translation>
     </message>
     <message>
         <source>Add note D to chord</source>
-        <translation>Add note D to chord</translation>
+        <translation>Noton D al akordo aldoni</translation>
     </message>
     <message>
         <source>Add E</source>
-        <translation>Add E</translation>
+        <translation>E—on aldoni</translation>
     </message>
     <message>
         <source>Add note E to chord</source>
-        <translation>Add note E to chord</translation>
+        <translation>Noton E al akordo aldoni</translation>
     </message>
     <message>
         <source>Add F</source>
-        <translation>Add F</translation>
+        <translation>F—on aldoni</translation>
     </message>
     <message>
         <source>Add note F to chord</source>
-        <translation>Add note F to chord</translation>
+        <translation>Noton F al akordo aldoni</translation>
     </message>
     <message>
         <source>Add G</source>
-        <translation>Add G</translation>
+        <translation>G—on aldoni</translation>
     </message>
     <message>
         <source>Add note G to chord</source>
-        <translation>Add note G to chord</translation>
+        <translation>Noton G al akordo aldoni</translation>
     </message>
     <message>
         <source>rest</source>
-        <translation>rest</translation>
+        <translation>ripozo</translation>
     </message>
     <message>
         <source>Add More Stretch</source>
-        <translation>Add More Stretch</translation>
+        <translation>Plistreĉi</translation>
     </message>
     <message>
         <source>Add more stretch to selected measure</source>
-        <translation>Add more stretch to selected measure</translation>
+        <translation>Elektitan mezuron plistreĉi</translation>
     </message>
     <message>
         <source>Add Less Stretch</source>
-        <translation>Add Less Stretch</translation>
+        <translation>Malplistreĉi</translation>
     </message>
     <message>
         <source>Add less stretch to selected measure</source>
-        <translation>Add less stretch to selected measure</translation>
+        <translation>Elektitan mezuron malplistreĉi</translation>
     </message>
     <message>
         <source>Reset Beam Mode</source>

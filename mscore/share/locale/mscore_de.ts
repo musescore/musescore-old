@@ -1030,11 +1030,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>sol</source>
-        <translation type="unfinished"/>
+        <translation>sol</translation>
     </message>
     <message>
         <source>alt. brevis</source>
-        <translation type="unfinished"/>
+        <translation>alt. Brevis</translation>
     </message>
 </context>
 <context>
@@ -3702,19 +3702,19 @@ inkompatibel mit derzeitiger Schnittstelle</translation>
     <name>MyWebView</name>
     <message>
         <source>Could not&lt;br /&gt; connect</source>
-        <translation type="unfinished"/>
+        <translation>Kann nicht &lt;br /&gt;  verbinden</translation>
     </message>
     <message>
         <source>To connect with the community, &lt;br /&gt; you need to have internet &lt;br /&gt; connection enabled</source>
-        <translation type="unfinished"/>
+        <translation>Um sich mit der Gemeninschaft zu verbinden, &lt;br /&gt; wird eine Internetverbindung benötigt</translation>
     </message>
     <message>
         <source>Retry</source>
-        <translation type="unfinished"/>
+        <translation>Wiederholen</translation>
     </message>
     <message>
         <source>Close this permanently</source>
-        <translation type="unfinished"/>
+        <translation>Dauerhaft schließen</translation>
     </message>
 </context>
 <context>
@@ -4752,15 +4752,15 @@ in Pixel (größerer Wert gleich größerer Radius)</translation>
     </message>
     <message>
         <source>Show Play Panel</source>
-        <translation type="unfinished"/>
+        <translation>Zeige Wiedergabetafel</translation>
     </message>
     <message>
         <source>Show Navigator</source>
-        <translation type="unfinished"/>
+        <translation>Zeige Navigator</translation>
     </message>
     <message>
         <source>Show MuseScore Connect</source>
-        <translation type="unfinished"/>
+        <translation>Zeige MuseScore Connect</translation>
     </message>
 </context>
 <context>
@@ -5873,7 +5873,7 @@ abgebrochen. Abspielen nicht möglich.&#13;
     </message>
     <message>
         <source>Staff Properties...</source>
-        <translation type="unfinished">Eigenschaften Notenzeile...</translation>
+        <translation>Notenzeilen-Eigenschaften</translation>
     </message>
 </context>
 <context>
@@ -6647,31 +6647,31 @@ p, li { white-space: pre-wrap; }&#13;
     <name>WebPageDockWidget</name>
     <message>
         <source>Connect with the &lt;br /&gt; Community</source>
-        <translation type="unfinished"/>
+        <translation>Verbinde Dich mit &lt;br /&gt; der Gemeinschaft</translation>
     </message>
     <message>
         <source>Find help</source>
-        <translation type="unfinished"/>
+        <translation>Finde Hilfe</translation>
     </message>
     <message>
         <source>Improve your skills</source>
-        <translation type="unfinished"/>
+        <translation>Verbessere Deine Fähigkeiten</translation>
     </message>
     <message>
         <source>Read the latest news</source>
-        <translation type="unfinished"/>
+        <translation>Lese die letzten Neuigkeiten</translation>
     </message>
     <message>
         <source>Download free sheet music</source>
-        <translation type="unfinished"/>
+        <translation>Freie Partituren herunterladen</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"/>
+        <translation>Start</translation>
     </message>
     <message>
         <source>Close this permanently</source>
-        <translation type="unfinished"/>
+        <translation>Dauerhaft schließen</translation>
     </message>
 </context>
 <context>
@@ -8381,11 +8381,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>next score</source>
-        <translation type="unfinished"/>
+        <translation>nächste Partitur</translation>
     </message>
     <message>
         <source>previous score</source>
-        <translation type="unfinished"/>
+        <translation>vorige Partitur</translation>
     </message>
 </context>
 <context>
@@ -8999,59 +8999,59 @@ p, li { white-space: pre-wrap; }&#13;
     <name>noteheadnames</name>
     <message>
         <source>normal</source>
-        <translation type="unfinished">normal</translation>
+        <translation>Normal</translation>
     </message>
     <message>
         <source>cross</source>
-        <translation type="unfinished">Kreuz</translation>
+        <translation>Kreuz</translation>
     </message>
     <message>
         <source>diamond</source>
-        <translation type="unfinished">Raute</translation>
+        <translation>Karo</translation>
     </message>
     <message>
         <source>triangle</source>
-        <translation type="unfinished">Dreieck</translation>
+        <translation>Dreieck</translation>
     </message>
     <message>
         <source>mi</source>
-        <translation type="unfinished">mi</translation>
+        <translation>mi</translation>
     </message>
     <message>
         <source>slash</source>
-        <translation type="unfinished">Schräger</translation>
+        <translation>Schrägstrich</translation>
     </message>
     <message>
         <source>xcircle</source>
-        <translation type="unfinished">Kreuzkreis</translation>
+        <translation>Kreuzkreis</translation>
     </message>
     <message>
         <source>do</source>
-        <translation type="unfinished">do</translation>
+        <translation>do</translation>
     </message>
     <message>
         <source>re</source>
-        <translation type="unfinished">re</translation>
+        <translation>re</translation>
     </message>
     <message>
         <source>fa</source>
-        <translation type="unfinished">fa</translation>
+        <translation>fa</translation>
     </message>
     <message>
         <source>la</source>
-        <translation type="unfinished">la</translation>
+        <translation>la</translation>
     </message>
     <message>
         <source>ti</source>
-        <translation type="unfinished">ti</translation>
+        <translation>ti</translation>
     </message>
     <message>
         <source>sol</source>
-        <translation type="unfinished"/>
+        <translation>sol</translation>
     </message>
     <message>
         <source>alt. brevis</source>
-        <translation type="unfinished"/>
+        <translation>alt. Brevis</translation>
     </message>
 </context>
 <context>
@@ -9942,27 +9942,27 @@ Du verwendest eine zu alte Programmversion.</translation>
     </message>
     <message>
         <source>s0sol head</source>
-        <translation type="unfinished"/>
+        <translation>s0sol Kopf</translation>
     </message>
     <message>
         <source>s1sol head</source>
-        <translation type="unfinished"/>
+        <translation>s1sol Kopf</translation>
     </message>
     <message>
         <source>s2sol head</source>
-        <translation type="unfinished"/>
+        <translation>s2sol Kopf</translation>
     </message>
     <message>
         <source>longa up alt</source>
-        <translation type="unfinished"/>
+        <translation>alt. Longa oben</translation>
     </message>
     <message>
         <source>longa down alt</source>
-        <translation type="unfinished"/>
+        <translation>alt. Longa unten</translation>
     </message>
     <message>
         <source>brevis head alt</source>
-        <translation type="unfinished"/>
+        <translation>alt. Brevis Kopf</translation>
     </message>
     <message>
         <source>time sig C dot</source>

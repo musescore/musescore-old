@@ -26,14 +26,13 @@ p, li { white-space: pre-wrap; }
 &lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;line break&#13;
-&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;line break&#13;
-p, li { white-space: pre-wrap; }line break&#13;
-&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;line break&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Đến thăm trang nhà &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; để tìm phiên bản mới và tìm thêm tin tức.&lt;/span&gt;&lt;/p&gt;line break&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Hổ trợ MuseScore với &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;tiền tặng của bạn&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;line break&#13;
-line break&#13;
-&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;line break&#13;
+        <translation>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;&#13;
+&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;&#13;
+p, li { white-space: pre-wrap; }&#13;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Đến thăm trang nhà &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; để tìm phiên bản mới và tìm thêm tin tức.&lt;/span&gt;&lt;/p&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Hổ trợ MuseScore với &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;tiền tặng của bạn&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&#13;
+&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;&#13;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer và những người khác. &lt;/span&gt;&lt;/p&gt;line break&#13;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Xuất bản dưới license của GNU General Public&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -105,11 +104,11 @@ line break&#13;
     </message>
     <message>
         <source>up:</source>
-        <translation>up:</translation>
+        <translation>lên:</translation>
     </message>
     <message>
         <source>Chord/Rest</source>
-        <translation>Chord/Rest</translation>
+        <translation>Hợp âm/dấu lặng</translation>
     </message>
 </context>
 <context>
@@ -155,7 +154,7 @@ line break&#13;
     </message>
     <message>
         <source>Tremolo</source>
-        <translation>Tremolo</translation>
+        <translation>Tiếng vê</translation>
     </message>
     <message>
         <source>Glissando</source>
@@ -186,7 +185,7 @@ line break&#13;
     </message>
     <message>
         <source>bb (double flat)</source>
-        <translation>bb (flat đôi)</translation>
+        <translation>bb (giáng đôi)</translation>
     </message>
     <message>
         <source>F</source>
@@ -194,7 +193,7 @@ line break&#13;
     </message>
     <message>
         <source>b (flat)</source>
-        <translation>b (flat)</translation>
+        <translation>b (giáng)</translation>
     </message>
     <message>
         <source>G</source>
@@ -826,7 +825,7 @@ line break&#13;
     </message>
     <message>
         <source>Type</source>
-        <translation>Type</translation>
+        <translation>Loại</translation>
     </message>
     <message>
         <source>Value</source>
@@ -848,7 +847,7 @@ line break&#13;
     <name>ChordPropertyBase</name>
     <message>
         <source>Chord Properties</source>
-        <translation>Đặc tính của Chord</translation>
+        <translation>Đặc tính của hợp âm</translation>
     </message>
     <message>
         <source>small</source>
@@ -877,7 +876,7 @@ line break&#13;
     </message>
     <message>
         <source>stem direction</source>
-        <translation>chiuều hướng của stem</translation>
+        <translation>chiều hướng của stem</translation>
     </message>
     <message>
         <source>auto</source>
@@ -1029,11 +1028,11 @@ line break&#13;
     </message>
     <message>
         <source>sol</source>
-        <translation type="unfinished"/>
+        <translation>sol</translation>
     </message>
     <message>
         <source>alt. brevis</source>
-        <translation type="unfinished"/>
+        <translation>alt. brevis</translation>
     </message>
 </context>
 <context>
@@ -1132,7 +1131,7 @@ line break&#13;
     </message>
     <message>
         <source>staff</source>
-        <translation>staff</translation>
+        <translation>khuôn nhạc</translation>
     </message>
     <message>
         <source>part</source>
@@ -1313,7 +1312,7 @@ không thành công </translation>
     </message>
     <message>
         <source>Transpose</source>
-        <translation>Thăng/Giảm</translation>
+        <translation>Chuyển hóa</translation>
     </message>
     <message>
         <source>Midi Program</source>
@@ -1333,7 +1332,7 @@ không thành công </translation>
     </message>
     <message>
         <source>Pitch</source>
-        <translation>Pitch</translation>
+        <translation>Âm độ</translation>
     </message>
 </context>
 <context>
@@ -1376,7 +1375,7 @@ không thành công </translation>
     </message>
     <message>
         <source>Stemless</source>
-        <translation>KhÔng có stem</translation>
+        <translation>Không có stem</translation>
     </message>
     <message>
         <source>Invisible</source>
@@ -1404,11 +1403,11 @@ không thành công </translation>
     </message>
     <message>
         <source>Perfect Unison</source>
-        <translation>Perfect Unison</translation>
+        <translation>Đồng âm đúng</translation>
     </message>
     <message>
         <source>Augmented Unison</source>
-        <translation>Augmented Unison</translation>
+        <translation>Đồng âm được tăng</translation>
     </message>
     <message>
         <source>Diminished Second</source>
@@ -1543,7 +1542,7 @@ không thành công </translation>
     </message>
     <message>
         <source>Chord</source>
-        <translation>Chord</translation>
+        <translation>Hợp âm</translation>
     </message>
 </context>
 <context>
@@ -1562,7 +1561,7 @@ không thành công </translation>
     </message>
     <message>
         <source>Measure</source>
-        <translation>Measure</translation>
+        <translation>Trường canh</translation>
     </message>
     <message>
         <source>Numbers</source>
@@ -1590,11 +1589,11 @@ không thành công </translation>
     </message>
     <message>
         <source>Create Multi Measure Rests</source>
-        <translation>Tạo ra Multi Measure Rests</translation>
+        <translation>Tạo ra nhiều trường canh dấu lặng</translation>
     </message>
     <message>
         <source>Hide Empty Staves</source>
-        <translation>Giấu đi Staves trống không</translation>
+        <translation>Giấu đi khuôn nhạc trống không</translation>
     </message>
     <message>
         <source>sp</source>
@@ -1619,11 +1618,11 @@ space unit</extracomment>
     </message>
     <message>
         <source>Create clef for all systems</source>
-        <translation>Tạo ra khóa âm nhạc cho tất cả hệ thống</translation>
+        <translation>Tạo ra khóa âm nhạc cho tất cả systems</translation>
     </message>
     <message>
         <source>Create time signatures</source>
-        <translation>Tạo ra time signatures</translation>
+        <translation>Tạo ra số nhịp</translation>
     </message>
     <message>
         <source>Create key sig for all systems</source>
@@ -1631,7 +1630,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Create courtesy time signatures</source>
-        <translation>Tạo ra courtesy time signatures</translation>
+        <translation>Tạo ra courtesy của số nhịp</translation>
     </message>
     <message>
         <source>spaces</source>
@@ -1651,7 +1650,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Measure Numbers</source>
-        <translation>Measure Numbers</translation>
+        <translation>Số trường canh</translation>
     </message>
     <message>
         <source>all staffs</source>
@@ -1663,7 +1662,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>interval</source>
-        <translation>interval</translation>
+        <translation>quãng nhạc</translation>
     </message>
     <message>
         <source>beam width units</source>
@@ -1679,7 +1678,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>System</source>
-        <translation>Hệ thống</translation>
+        <translation>System</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -1687,7 +1686,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Articulations, Ornaments</source>
-        <translation>Articulations, Ornaments</translation>
+        <translation>Phụ âm, Nét hoa mỹ</translation>
     </message>
     <message>
         <source>Voices</source>
@@ -1695,11 +1694,11 @@ space unit</extracomment>
     </message>
     <message>
         <source>Minumum width of measure:</source>
-        <translation>Minumum width of measure:</translation>
+        <translation>Minumum width của trường canh:</translation>
     </message>
     <message>
         <source>Minimum Number of empty measures:</source>
-        <translation>Số lượng measure để trống tối thiểu:</translation>
+        <translation>Số lượng trường canh để trống tối thiểu:</translation>
     </message>
     <message>
         <source>System Bracket Distance:</source>
@@ -1752,15 +1751,15 @@ space unit</extracomment>
     </message>
     <message>
         <source>Fix Number of Measures/System:</source>
-        <translation>Fix Number of Measures/System:</translation>
+        <translation>Fix Number of trường canh/System:</translation>
     </message>
     <message>
         <source>Fix Measure Width</source>
-        <translation>Fix Measure Width</translation>
+        <translation>Chiều ngang cố định của trường canh</translation>
     </message>
     <message>
         <source>Barlines</source>
-        <translation>Barlines</translation>
+        <translation>Vạch ngăn</translation>
     </message>
     <message>
         <source>Barline at start of single staff</source>
@@ -1852,7 +1851,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Progression</source>
-        <translation>Progression</translation>
+        <translation>Tiến hành</translation>
     </message>
     <message>
         <source>Shortest stem</source>
@@ -1940,11 +1939,11 @@ space unit</extracomment>
     </message>
     <message>
         <source>Articulation - note stem distance</source>
-        <translation>Articulation - note stem distance</translation>
+        <translation>Phụ âm - note stem distance</translation>
     </message>
     <message>
         <source>Articulation - articulation distance</source>
-        <translation>Articulation - articulation distance</translation>
+        <translation>Phụ âm - khoảng cách của phụ âm</translation>
     </message>
     <message>
         <source>Stem Direction in Multi Voice Context</source>
@@ -2186,15 +2185,15 @@ space unit</extracomment>
     <name>InsertMeasuresDialogBase</name>
     <message>
         <source>Mscore: Insert Measures</source>
-        <translation>Mscore: Insert Measures</translation>
+        <translation>Mscore: Thêm trường canh vào</translation>
     </message>
     <message>
         <source>Insert empty measures:</source>
-        <translation>Chêm vào measures trống không:</translation>
+        <translation>Chêm vào trường canh trống không:</translation>
     </message>
     <message>
         <source>Number of measures to insert</source>
-        <translation>Số lượng measures muốn chêm vào</translation>
+        <translation>Số lượng trường canh muốn chêm vào</translation>
     </message>
     <message>
         <source>OK</source>
@@ -2372,7 +2371,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>MuseScore Instruments (*.xml);;</source>
-        <translation>MuseScore Instruments (*.xml);;</translation>
+        <translation>Nhạc cụ dạng MuseScore (*.xml);;</translation>
     </message>
     <message>
         <source>Open Instruments File
@@ -2400,7 +2399,7 @@ không thành công </translation>
     </message>
     <message>
         <source>MuseScore Instruments (*.xml);;All files (*)</source>
-        <translation>MuseScore Instruments (*.xml);;All files (*)</translation>
+        <translation>Nhạc cụ dạng MuseScore (*.xml);;All files (*)</translation>
     </message>
     <message>
         <source>Staff %1</source>
@@ -2430,7 +2429,7 @@ không thành công </translation>
     </message>
     <message>
         <source>Jump to:</source>
-        <translation>Nhảy thẳng đến:</translation>
+        <translation>Đi thẳng đến:</translation>
     </message>
     <message>
         <source>Play until:</source>
@@ -2457,7 +2456,7 @@ không thành công </translation>
     </message>
     <message>
         <source>add time signature to palette</source>
-        <translation>thêm time signature vào palette</translation>
+        <translation>thêm số nhịp vào bảng palette</translation>
     </message>
     <message>
         <source>Add</source>
@@ -2483,11 +2482,11 @@ không thành công </translation>
     </message>
     <message>
         <source>Hide naturals</source>
-        <translation>Giấu đi naturals</translation>
+        <translation>Giấu đi âm giai tự nhiên</translation>
     </message>
     <message>
         <source>Show naturals</source>
-        <translation>Cho thấy naturals</translation>
+        <translation>Cho thấy âm giai tự nhiên</translation>
     </message>
 </context>
 <context>
@@ -2562,7 +2561,7 @@ không thành công </translation>
     </message>
     <message>
         <source>Ped (Pedal)</source>
-        <translation>Ped (Pedal)</translation>
+        <translation>Lưu âm (Pedal)</translation>
     </message>
     <message>
         <source>x:</source>
@@ -2737,11 +2736,11 @@ không thành công </translation>
     <name>MeasurePropertiesBase</name>
     <message>
         <source>MuseScore: Measure Properties</source>
-        <translation>MuseScore: Đặc tính của Measure</translation>
+        <translation>MuseScore: Đặc tính của trường canh</translation>
     </message>
     <message>
         <source>Measure Duration</source>
-        <translation>Measure trường độ</translation>
+        <translation>Trường độ của trường canh</translation>
     </message>
     <message>
         <source>nominal</source>
@@ -2820,15 +2819,15 @@ không thành công </translation>
     <name>MeasuresDialogBase</name>
     <message>
         <source>Mscore: Append Measures</source>
-        <translation>Mscore: Append Measures</translation>
+        <translation>Mscore: Viết thêm trường canh vào</translation>
     </message>
     <message>
         <source>Append empty measures:</source>
-        <translation>Append empty measures:</translation>
+        <translation>Viết thêm trường canh trống vào:</translation>
     </message>
     <message>
         <source>Number of measures to append</source>
-        <translation>Number of measures to append</translation>
+        <translation>Số lượng trường canh muốn viết thêm vào</translation>
     </message>
     <message>
         <source>OK</source>
@@ -2881,7 +2880,7 @@ không thành công </translation>
     </message>
     <message>
         <source>Fingering</source>
-        <translation>Fingering</translation>
+        <translation>Ngón bấm</translation>
     </message>
     <message>
         <source>Tempo</source>
@@ -3013,7 +3012,7 @@ không thành công </translation>
     </message>
     <message>
         <source>pedal</source>
-        <translation>pedal</translation>
+        <translation>lưu âm</translation>
     </message>
     <message>
         <source>Lines</source>
@@ -3021,15 +3020,15 @@ không thành công </translation>
     </message>
     <message>
         <source>Breath</source>
-        <translation>Breath</translation>
+        <translation>Thở</translation>
     </message>
     <message>
         <source>Brackets</source>
-        <translation>Brackets</translation>
+        <translation>Ngoặc nối khuôn nhạc</translation>
     </message>
     <message>
         <source>Accidentals</source>
-        <translation>Dấu thăng/giáng</translation>
+        <translation>Dấu hóa</translation>
     </message>
     <message>
         <source>Dynamics</source>
@@ -3037,7 +3036,7 @@ không thành công </translation>
     </message>
     <message>
         <source>Tremolo</source>
-        <translation>Tremolo</translation>
+        <translation>Tiếng vê</translation>
     </message>
     <message>
         <source>Segno</source>
@@ -3069,15 +3068,15 @@ không thành công </translation>
     </message>
     <message>
         <source>To Coda</source>
-        <translation>al Coda</translation>
+        <translation>To Coda</translation>
     </message>
     <message>
         <source>Repeats</source>
-        <translation>Repeats</translation>
+        <translation>Lập lại</translation>
     </message>
     <message>
         <source>Symbols</source>
-        <translation>Symbols</translation>
+        <translation>Ký hiệu</translation>
     </message>
     <message>
         <source>&amp;Create</source>
@@ -3085,7 +3084,7 @@ không thành công </translation>
     </message>
     <message>
         <source>Barlines...</source>
-        <translation>Barlines...</translation>
+        <translation>Vạch ngăn...</translation>
     </message>
     <message>
         <source>&amp;Lines...</source>
@@ -3093,7 +3092,7 @@ không thành công </translation>
     </message>
     <message>
         <source>Accidentals...</source>
-        <translation>Dấu thăng/giáng...</translation>
+        <translation>Dấu hóa...</translation>
     </message>
     <message>
         <source>MuseScore: Clefs</source>
@@ -3109,7 +3108,7 @@ không thành công </translation>
     </message>
     <message>
         <source>Note Entry</source>
-        <translation>Note Entry</translation>
+        <translation>Viết nốt nhạc</translation>
     </message>
     <message>
         <source>Open &amp;Recent</source>
@@ -3133,7 +3132,7 @@ không thành công </translation>
     </message>
     <message>
         <source>Add Interval</source>
-        <translation>Thêm Interval vào</translation>
+        <translation>Thêm quãng nhạc vào</translation>
     </message>
     <message>
         <source>Tuplets</source>
@@ -3173,11 +3172,11 @@ không thành công </translation>
     </message>
     <message>
         <source>note entry mode</source>
-        <translation>note entry mode</translation>
+        <translation>bấm N để bắt đầu viết nốt nhạc xuống dòng nhạc</translation>
     </message>
     <message>
         <source>edit mode</source>
-        <translation>edit mode</translation>
+        <translation>điều chỉnh thể</translation>
     </message>
     <message>
         <source>play</source>
@@ -3287,7 +3286,7 @@ trước khi đóng thảo trình?</translation>
     </message>
     <message>
         <source>Measures</source>
-        <translation>Measures</translation>
+        <translation>Trường canh</translation>
     </message>
     <message>
         <source>Text</source>
@@ -3351,7 +3350,7 @@ trước khi đóng thảo trình?</translation>
     </message>
     <message>
         <source>Bracket</source>
-        <translation>Bracket</translation>
+        <translation>Ngoặc nối khuôn nhạc</translation>
     </message>
     <message>
         <source>Akkolade</source>
@@ -3367,7 +3366,7 @@ trước khi đóng thảo trình?</translation>
     </message>
     <message>
         <source>MuseScore: Accidentals</source>
-        <translation>MuseScore: Dấu thăng/giáng</translation>
+        <translation>MuseScore: Dấu hóa</translation>
     </message>
     <message>
         <source>MuseScore: Dynamics</source>
@@ -3375,11 +3374,11 @@ trước khi đóng thảo trình?</translation>
     </message>
     <message>
         <source>MuseScore: Barlines</source>
-        <translation>MuseScore: Barlines</translation>
+        <translation>MuseScore: Vạch ngăn</translation>
     </message>
     <message>
         <source>MuseScore: Fingering</source>
-        <translation>MuseScore: Fingering</translation>
+        <translation>MuseScore: Ngón bấm</translation>
     </message>
     <message>
         <source>MuseScore: failure</source>
@@ -3404,7 +3403,7 @@ trước khi đóng thảo trình?</translation>
     <message>
         <source>MuseScore handbook not found at: 
 </source>
-        <translation>Sách hướng dẫn cho MuseScore không tìm thấy tại:line break 
+        <translation>Sách hướng dẫn cho MuseScore không tìm thấy tại: 
 </translation>
     </message>
     <message>
@@ -3445,7 +3444,7 @@ Trong danh bạ "Giúp đỡ", chọn "Sách hướng dẫn trên mạng".</tran
     </message>
     <message>
         <source>Time Signatures</source>
-        <translation>Time Signatures</translation>
+        <translation>Số nhịp</translation>
     </message>
     <message>
         <source>2/2 alla breve</source>
@@ -3453,7 +3452,7 @@ Trong danh bạ "Giúp đỡ", chọn "Sách hướng dẫn trên mạng".</tran
     </message>
     <message>
         <source>Barlines</source>
-        <translation>Bar lines</translation>
+        <translation>Vạch ngăn</translation>
     </message>
     <message>
         <source>Normal</source>
@@ -3513,7 +3512,7 @@ Trong danh bạ "Giúp đỡ", chọn "Sách hướng dẫn trên mạng".</tran
     </message>
     <message>
         <source>Breath &amp;&amp; Pauses</source>
-        <translation>Breath &amp;&amp; Pauses</translation>
+        <translation>Thở &amp;&amp; Ngắt hơi</translation>
     </message>
     <message>
         <source>Caesura</source>
@@ -3521,11 +3520,11 @@ Trong danh bạ "Giúp đỡ", chọn "Sách hướng dẫn trên mạng".</tran
     </message>
     <message>
         <source>Articulations &amp;&amp; Ornaments</source>
-        <translation>Articulations &amp;&amp; Ornaments</translation>
+        <translation>Phụ âm &amp;&amp; Nét hoa mỹ</translation>
     </message>
     <message>
         <source>Fingering %1</source>
-        <translation>Fingering %1</translation>
+        <translation>Ngón bấm. %1</translation>
     </message>
     <message>
         <source>String number %1</source>
@@ -3533,7 +3532,7 @@ Trong danh bạ "Giúp đỡ", chọn "Sách hướng dẫn trên mạng".</tran
     </message>
     <message>
         <source>Repeat measure sign</source>
-        <translation>Lập lại measure sign</translation>
+        <translation>Lập lại dấu hiệu của trường canh</translation>
     </message>
     <message>
         <source>Da Capo</source>
@@ -3561,7 +3560,7 @@ Trong danh bạ "Giúp đỡ", chọn "Sách hướng dẫn trên mạng".</tran
     </message>
     <message>
         <source>Staff spacer</source>
-        <translation>Stave spacer</translation>
+        <translation>Staff spacer</translation>
     </message>
     <message>
         <source>Start beam</source>
@@ -3585,19 +3584,19 @@ Trong danh bạ "Giúp đỡ", chọn "Sách hướng dẫn trên mạng".</tran
     </message>
     <message>
         <source>Brackets...</source>
-        <translation>Brackets…</translation>
+        <translation>Ngoặc nối khuôn nhạc...</translation>
     </message>
     <message>
         <source>Articulations &amp;&amp; Ornaments...</source>
-        <translation>Articulations &amp;&amp; Ornaments...</translation>
+        <translation>Phụ âm &amp;&amp; Nét hoa mỹ...</translation>
     </message>
     <message>
         <source>Pedal</source>
-        <translation>Pedal</translation>
+        <translation>Lưu âm</translation>
     </message>
     <message>
         <source>MuseScore: Brackets</source>
-        <translation>MuseScore: Brackets</translation>
+        <translation>MuseScore: Ngoặc nối khuôn nhạc</translation>
     </message>
     <message>
         <source>Breaks &amp;&amp; Spacer...</source>
@@ -3607,8 +3606,8 @@ Trong danh bạ "Giúp đỡ", chọn "Sách hướng dẫn trên mạng".</tran
         <source>The previous session quit unexpectedly.
 
 Restore session?</source>
-        <translation>Việc làm vừa rồi bất ngờ bị mất đi.line break&#13;
-line break&#13;
+        <translation>Việc làm vừa rồi bất ngờ bị mất đi.&#13;
+&#13;
 Phục hồi lại?</translation>
     </message>
     <message>
@@ -3621,7 +3620,7 @@ Phục hồi lại?</translation>
     </message>
     <message>
         <source>MuseScore: Articulations &amp; Ornaments</source>
-        <translation>MuseScore: Articulations &amp; Ornaments</translation>
+        <translation>MuseScore: Phụ âm &amp; Nét hoa mỹ</translation>
     </message>
     <message>
         <source>MuseScore: Breaks &amp; Spacer</source>
@@ -3642,12 +3641,12 @@ không thích hợp với interface hiện có</translation>
     <message>
         <source>MuseScore is too old to run script
 %1</source>
-        <translation>Thao trình MuseScore này quá cũ, không thể chạy được scriptline break&#13;
+        <translation>Thảo trình MuseScore này quá cũ, không thể chạy được scriptline break&#13;
 %1</translation>
     </message>
     <message>
         <source>Bar %1 Beat %2.%3</source>
-        <translation>Bar %1 Beat %2.%3</translation>
+        <translation>Bar %1 Phách %2.%3</translation>
     </message>
     <message>
         <source>Error loading plugin
@@ -3659,39 +3658,39 @@ không thích hợp với interface hiện có</translation>
     </message>
     <message>
         <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</source>
-        <translation>Tất cả các tài liệu được hỗ trợ (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</translation>
+        <translation>Tất cả các dạng tài liệu nhạc được hỗ trợ (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</translation>
     </message>
     <message>
         <source>MuseScore Files (*.mscz *.mscx *.msc);;</source>
-        <translation>MuseScore Files (*.mscz *.mscx *.msc);;</translation>
+        <translation>Tài liệu nhạc MuseScore (*.mscz *.mscx *.msc);;</translation>
     </message>
     <message>
         <source>MusicXML Files (*.xml *.mxl);;</source>
-        <translation>MusicXML Files (*.xml *.mxl);;</translation>
+        <translation>Tài liệu nhạc MusicXML (*.xml *.mxl);;</translation>
     </message>
     <message>
         <source>MIDI Files (*.mid *.midi *.kar);;</source>
-        <translation>MIDI Files (*.mid *.midi *.kar);;</translation>
+        <translation>Tài liệu nhạc MIDI (*.mid *.midi *.kar);;</translation>
     </message>
     <message>
         <source>Muse Data Files (*.md);;</source>
-        <translation>Muse Data Files (*.md);;</translation>
+        <translation>Tài liệu nhạc Muse Data (*.md);;</translation>
     </message>
     <message>
         <source>Capella Files (*.cap);;</source>
-        <translation>Capella Files (*.cap);;</translation>
+        <translation>Tài liệu nhạc Capella (*.cap);;</translation>
     </message>
     <message>
         <source>Bagpipe Music Writer Files (*.bww);;</source>
-        <translation>Bagpipe Music Writer Files (*.bww);;</translation>
+        <translation>Tài liệu nhạc Bagpipe Music Writer (*.bww);;</translation>
     </message>
     <message>
         <source>BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;</source>
-        <translation>BB Files &lt;thử nghiệm&gt; (*.mgu *.MGU *.sgu *.SGU);;</translation>
+        <translation>Tài liệu nhạc BB &lt;thử nghiệm&gt; (*.mgu *.MGU *.sgu *.SGU);;</translation>
     </message>
     <message>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
-        <translation>Overture Files &lt;thử nghiệm&gt; (*.ove);;</translation>
+        <translation>Tài liệu nhạc Overture &lt;thử nghiệm&gt; (*.ove);;</translation>
     </message>
     <message>
         <source>All Files (*)</source>
@@ -3702,15 +3701,15 @@ không thích hợp với interface hiện có</translation>
     <name>MyWebView</name>
     <message>
         <source>Could not&lt;br /&gt; connect</source>
-        <translation type="unfinished"/>
+        <translation>Không thể&lt;br &gt; kết nối</translation>
     </message>
     <message>
         <source>To connect with the community, &lt;br /&gt; you need to have internet &lt;br /&gt; connection enabled</source>
-        <translation type="unfinished"/>
+        <translation>Muốn kết nối với cộng đồng sử dụng MuseScore, &lt;br /&gt;bạn cần có &lt;br /&gt;đường dây nối mạng lưới nhện internet.</translation>
     </message>
     <message>
         <source>Retry</source>
-        <translation type="unfinished"/>
+        <translation>Thử lại</translation>
     </message>
     <message>
         <source>Close this permanently</source>
@@ -3775,7 +3774,7 @@ không thích hợp với interface hiện có</translation>
     </message>
     <message>
         <source>Define a set of instruments. Each instrument is represented by one or more staves</source>
-        <translation>Define a set of instruments. Each instrument is represented by one or more staves.</translation>
+        <translation>Xác định nhạc cụ. Một hoặc nhiều khuôn nhạc đại diện cho một nhạc cụ.</translation>
     </message>
 </context>
 <context>
@@ -3786,7 +3785,7 @@ không thích hợp với interface hiện có</translation>
     </message>
     <message>
         <source>Create Time Signature</source>
-        <translation>Tạo ra Time Signature</translation>
+        <translation>Tạo ra số nhịp</translation>
     </message>
 </context>
 <context>
@@ -3858,7 +3857,7 @@ không thích hợp với interface hiện có</translation>
     </message>
     <message>
         <source>Tuning</source>
-        <translation>Lên dây đàn</translation>
+        <translation>Tuning</translation>
     </message>
     <message>
         <source>OnTime:</source>
@@ -3968,7 +3967,7 @@ không thích hợp với interface hiện có</translation>
     </message>
     <message>
         <source>First page no.</source>
-        <translation>First page no.</translation>
+        <translation>Trang đầu tiên số.</translation>
     </message>
 </context>
 <context>
@@ -3993,7 +3992,7 @@ không thích hợp với interface hiện có</translation>
     <name>PaletteBoxButton</name>
     <message>
         <source>Palette Properties</source>
-        <translation>Đặc tính cua bảng danh sách</translation>
+        <translation>Đặc tính của bảng danh sách</translation>
     </message>
     <message>
         <source>Insert new Palette</source>
@@ -4001,11 +4000,11 @@ không thích hợp với interface hiện có</translation>
     </message>
     <message>
         <source>Move Palette Up</source>
-        <translation>Dời bảng danh sách lên trên</translation>
+        <translation>Chuyển bảng danh sách lên trên</translation>
     </message>
     <message>
         <source>Move Palette Down</source>
-        <translation>Dời bảng danh sách xuống</translation>
+        <translation>Chuyển bảng danh sách xuống</translation>
     </message>
     <message>
         <source>Enable Editing</source>
@@ -4020,7 +4019,7 @@ không thích hợp với interface hiện có</translation>
     <name>PaletteCellProperties</name>
     <message>
         <source>Chord Properties</source>
-        <translation>Đặc tính của Chord</translation>
+        <translation>Đặc tính của hợp âm</translation>
     </message>
     <message>
         <source>Palette Cell Properties</source>
@@ -4086,7 +4085,7 @@ không thích hợp với interface hiện có</translation>
     </message>
     <message>
         <source>Volume</source>
-        <translation>Volume</translation>
+        <translation>Âm thanh lớn nhỏ</translation>
     </message>
     <message>
         <source>Panorama Position</source>
@@ -4161,7 +4160,7 @@ không thích hợp với interface hiện có</translation>
     </message>
     <message>
         <source>Pitch:</source>
-        <translation>Pitch:</translation>
+        <translation>Âm độ:</translation>
     </message>
     <message>
         <source>MuseScore: &lt;%1&gt; Staff: %2</source>
@@ -4184,7 +4183,7 @@ không thích hợp với interface hiện có</translation>
     </message>
     <message>
         <source>measure.beat</source>
-        <translation>bar.beat</translation>
+        <translation>measure.beat</translation>
     </message>
     <message>
         <source>001.01</source>
@@ -4259,11 +4258,11 @@ không thích hợp với interface hiện có</translation>
     </message>
     <message>
         <source>default</source>
-        <translation>default</translation>
+        <translation>định sẵn</translation>
     </message>
     <message>
         <source>Choose Working Directory</source>
-        <translation>Choose Working Directory</translation>
+        <translation>Chọn Working Directory</translation>
     </message>
     <message>
         <source>Choose Instrument List</source>
@@ -4271,7 +4270,7 @@ không thích hợp với interface hiện có</translation>
     </message>
     <message>
         <source>Choose Starting Score</source>
-        <translation>Choose Starting Score</translation>
+        <translation>Chọn Starting Score</translation>
     </message>
     <message>
         <source>Instrument List (*.xml)</source>
@@ -4298,7 +4297,7 @@ không thích hợp với interface hiện có</translation>
     </message>
     <message>
         <source>start with new score</source>
-        <translation>start with new score</translation>
+        <translation>bắt đầu với bài nhạc mới</translation>
     </message>
     <message>
         <source>start with score:</source>
@@ -4386,7 +4385,7 @@ không thích hợp với interface hiện có</translation>
     </message>
     <message>
         <source>Note Entry</source>
-        <translation>Note Entry</translation>
+        <translation>Viết nốt nhạc</translation>
     </message>
     <message>
         <source>Enable midi input</source>
@@ -4394,7 +4393,7 @@ không thích hợp với interface hiện có</translation>
     </message>
     <message>
         <source>Play notes when editing</source>
-        <translation>Chơi nốt nhạc khi điều chỉnh</translation>
+        <translation>Chơi nốt nhạc khi đang điều chỉnh</translation>
     </message>
     <message>
         <source>Alternate input method</source>
@@ -4414,7 +4413,7 @@ không thích hợp với interface hiện có</translation>
     </message>
     <message>
         <source>Use internal synthesizer</source>
-        <translation>Use internal synthesiser</translation>
+        <translation>Use internal synthesizer</translation>
     </message>
     <message>
         <source>JACK Audio Server</source>
@@ -4438,7 +4437,7 @@ không thích hợp với interface hiện có</translation>
     </message>
     <message>
         <source>default</source>
-        <translation>default</translation>
+        <translation>định sẵn</translation>
     </message>
     <message>
         <source>Sample Rate:</source>
@@ -4566,7 +4565,7 @@ không thích hợp với interface hiện có</translation>
     </message>
     <message>
         <source>Attention: changing the language requires a restart of MuseScore.</source>
-        <translation>Attention: changing the language requires a restart of MuseScore.</translation>
+        <translation>Chú ý: Thay đổi ngôn ngữ xong phải đóng và mở thảo trình MuseScore lại.</translation>
     </message>
     <message>
         <source>Style</source>
@@ -4586,19 +4585,19 @@ không thích hợp với interface hiện có</translation>
     </message>
     <message>
         <source>Width</source>
-        <translation>Width</translation>
+        <translation>Chiều ngang</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation>Height</translation>
+        <translation>Chiều cao</translation>
     </message>
     <message>
         <source>Note Entry:</source>
-        <translation>Note Entry:</translation>
+        <translation>Viết nốt nhạc:</translation>
     </message>
     <message>
         <source>Application Font</source>
-        <translation>Application Font</translation>
+        <translation>Phông chữ của application</translation>
     </message>
     <message>
         <source>pt</source>
@@ -4610,27 +4609,27 @@ không thích hợp với interface hiện có</translation>
     </message>
     <message>
         <source>Score element colors</source>
-        <translation>Score element colours</translation>
+        <translation>Score element colors</translation>
     </message>
     <message>
         <source>Default foreground</source>
-        <translation>Default foreground</translation>
+        <translation>Foeground định sẵn</translation>
     </message>
     <message>
         <source>Select Voice 1</source>
-        <translation>Select Voice 1</translation>
+        <translation>Chọn Voice 1</translation>
     </message>
     <message>
         <source>Select Voice 2</source>
-        <translation>Select Voice 2</translation>
+        <translation>Chọn Voice 2</translation>
     </message>
     <message>
         <source>Select Voice 3</source>
-        <translation>Select Voice 3</translation>
+        <translation>Chọn Voice 3</translation>
     </message>
     <message>
         <source>Select Voice 4</source>
-        <translation>Select Voice 4</translation>
+        <translation>Chọn Voice 4</translation>
     </message>
     <message>
         <source>Drop Target</source>
@@ -4650,19 +4649,19 @@ không thích hợp với interface hiện có</translation>
     </message>
     <message>
         <source>Score</source>
-        <translation>Score</translation>
+        <translation>Bài nhạc</translation>
     </message>
     <message>
         <source>Default Paper Size</source>
-        <translation>Default Paper Size</translation>
+        <translation>Khổ giấy định sẵn</translation>
     </message>
     <message>
         <source>Two Sided</source>
-        <translation>Two Sided</translation>
+        <translation>Hai mặt</translation>
     </message>
     <message>
         <source>Landscape</source>
-        <translation>Landscape</translation>
+        <translation>Nằm ngang</translation>
     </message>
     <message>
         <source>Scaling</source>
@@ -4751,22 +4750,22 @@ không thích hợp với interface hiện có</translation>
     </message>
     <message>
         <source>Show Play Panel</source>
-        <translation type="unfinished"/>
+        <translation>Cho thấy bảng chơi nhạc</translation>
     </message>
     <message>
         <source>Show Navigator</source>
-        <translation type="unfinished"/>
+        <translation>Cho thấy Navigator</translation>
     </message>
     <message>
         <source>Show MuseScore Connect</source>
-        <translation type="unfinished"/>
+        <translation>Cho thấy phần MuseScore Connect</translation>
     </message>
 </context>
 <context>
     <name>QComboBox</name>
     <message>
         <source>Ped (Pedal)</source>
-        <translation>Ped (Pedal)</translation>
+        <translation>Lưu âm  (Pedal)</translation>
     </message>
     <message>
         <source>* (Pedal)</source>
@@ -4795,14 +4794,16 @@ không thích hợp với interface hiện có</translation>
         <source>No note selected:
 Please select a single note and retry operation
 </source>
-        <translation>No note selected: Please select a single note and retry operation.
+        <translation>Không có nốt nhạc nào được chọn lựa:&#13;
+Xin vui lòng chọn một nốt nhạc và thử lại lần nữa
 </translation>
     </message>
     <message>
         <source>No note or rest selected:
 Please select a single note or rest and retry operation
 </source>
-        <translation>No note or rest selected: Please select a single note or rest and retry operation.
+        <translation>Không có nốt nhạc hoặc dấu lặng nào được chọn lựa:&#13;
+Xin vui lòng chọn một nốt nhạc hoặc một dấu lặng và thử lại lần nữa
 </translation>
     </message>
     <message>
@@ -4838,11 +4839,11 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>MuseScore: load midi</source>
-        <translation>MuseScore: load MIDI</translation>
+        <translation>MuseScore: load midi</translation>
     </message>
     <message>
         <source>MuseScore: invalid command</source>
-        <translation>MuseScore: invalid command</translation>
+        <translation>MuseScore: Mệnh lệnh không đúng</translation>
     </message>
     <message>
         <source>MuseScore: Load Palettes failed:</source>
@@ -4902,7 +4903,7 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>MuseScore: Save Chord Description File</source>
-        <translation>MuseScore: Lưu trữ Chord Description File</translation>
+        <translation>MuseScore: Save Chord Description File</translation>
     </message>
     <message>
         <source>MuseScore: Load languages failed:</source>
@@ -4917,18 +4918,18 @@ Please select a single note or rest and retry operation
     <name>RecordButton</name>
     <message>
         <source>record</source>
-        <translation>record</translation>
+        <translation>thâu</translation>
     </message>
 </context>
 <context>
     <name>Rest</name>
     <message>
         <source>Rest</source>
-        <translation>Rest</translation>
+        <translation>Dấu lặng</translation>
     </message>
     <message>
         <source>Rest Properties...</source>
-        <translation>Đặc tính của Rest...</translation>
+        <translation>Đặc tính của dấu lặng...</translation>
     </message>
     <message>
         <source>Tuplet...</source>
@@ -4947,7 +4948,7 @@ Please select a single note or rest and retry operation
     <name>RestPropertyBase</name>
     <message>
         <source>Rest Properties</source>
-        <translation>Rest Properties</translation>
+        <translation>Đặc tính của dấu lặng</translation>
     </message>
     <message>
         <source>small</source>
@@ -4955,7 +4956,7 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>Chord Properties</source>
-        <translation>Đặc tính của Chord</translation>
+        <translation>Đặc tính của hợp âm</translation>
     </message>
     <message>
         <source>additional leading space </source>
@@ -5003,11 +5004,11 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>MEASURE</source>
-        <translation>MEASURE</translation>
+        <translation>TRƯỜNG CANH</translation>
     </message>
     <message>
         <source>digonal</source>
-        <translation>diagonal</translation>
+        <translation>digonal</translation>
     </message>
 </context>
 <context>
@@ -5023,7 +5024,8 @@ tạo ra vài khuông nhạc trước đã</translation>
     <message>
         <source>No Measure selected:
 please select a measure and try again</source>
-        <translation>No Measure selected: please select a measure and try again.</translation>
+        <translation>Chưa có trường canh nào được chọn:&#13;
+Vui lòng chọn một trường canh và thử lại lần nữa</translation>
     </message>
     <message>
         <source>MuseScore: Save Score</source>
@@ -5039,7 +5041,6 @@ please select a measure and try again</source>
         <source>
 failed: </source>
         <translation>
-line break&#13;
 không thành công </translation>
     </message>
     <message>
@@ -5076,11 +5077,11 @@ không thành công </translation>
     </message>
     <message>
         <source>MuseScore: transpose</source>
-        <translation>MuseScore: Thăng/Giảm</translation>
+        <translation>MuseScore: Chuyển hóa</translation>
     </message>
     <message>
         <source>There is nothing selected. Transpose whole score?</source>
-        <translation>Không thấy bạn chọn lựa gì. Transpose tất cả?</translation>
+        <translation>Không thấy bạn chọn lựa gì. Chuyển hóa tất cả?</translation>
     </message>
     <message>
         <source>Compressed MuseScore File (*.mscz)</source>
@@ -5138,19 +5139,19 @@ không thành công </translation>
     </message>
     <message>
         <source>Compressed MuseScore Format (*.mscz)</source>
-        <translation>Nén MuseScore Format (*.mscz)</translation>
+        <translation>Nén cấu trúc MuseScore (*.mscz)</translation>
     </message>
     <message>
         <source>MuseScore Format (*.mscx)</source>
-        <translation>MuseScore Format (*.mscx)</translation>
+        <translation>Cấu trúc MuseScore (*.mscx)</translation>
     </message>
     <message>
         <source>MusicXML Format (*.xml)</source>
-        <translation>MusicXML Format (*.xml)</translation>
+        <translation>Cấu trúc MusicXML (*.xml)</translation>
     </message>
     <message>
         <source>Compressed MusicXML Format (*.mxl)</source>
-        <translation>Compressed MusicXML Format (*.mxl)</translation>
+        <translation>Nén cấu trúc MusicXML (*.mxl)</translation>
     </message>
     <message>
         <source>Standard MIDI File (*.mid)</source>
@@ -5174,7 +5175,7 @@ không thành công </translation>
     </message>
     <message>
         <source>Lilypond Format (*.ly)</source>
-        <translation>Lilypond Format (*.ly)</translation>
+        <translation>Cấu trúc Lilypond (*.ly)</translation>
     </message>
     <message>
         <source>Wave Audio (*.wav)</source>
@@ -5197,8 +5198,9 @@ không thành công </translation>
 %1 
 
 Try saving to a different location.</source>
-        <translation>The following file is locked:
-%1
+        <translation>The following file is locked: &#13;
+%1 &#13;
+&#13;
 Try saving to a different location.</translation>
     </message>
     <message>
@@ -5207,11 +5209,11 @@ Try saving to a different location.</translation>
     </message>
     <message>
         <source>The first time signature of a piece can not be removed.</source>
-        <translation>The first time signature of a piece cannot be removed.</translation>
+        <translation>Không thể xóa đi số nhịp đầu tiên của một piece.</translation>
     </message>
     <message>
         <source>cannot determine file type</source>
-        <translation>cannot determine filetype</translation>
+        <translation>không thể nhận diện loại tài liệu này</translation>
     </message>
     <message>
         <source>Write Style failed: </source>
@@ -5226,7 +5228,7 @@ Try saving to a different location.</translation>
     <name>ScoreView</name>
     <message>
         <source>Select</source>
-        <translation>Select</translation>
+        <translation>Chọn</translation>
     </message>
     <message>
         <source>More...</source>
@@ -5238,7 +5240,7 @@ Try saving to a different location.</translation>
     </message>
     <message>
         <source>Staff</source>
-        <translation>Stave</translation>
+        <translation>Khuôn nhạc</translation>
     </message>
     <message>
         <source>Edit Drumset...</source>
@@ -5258,11 +5260,11 @@ Try saving to a different location.</translation>
     </message>
     <message>
         <source>Split Staff...</source>
-        <translation>Split Stave...</translation>
+        <translation>Split Staff...</translation>
     </message>
     <message>
         <source>Measure</source>
-        <translation>Measure</translation>
+        <translation>Trường canh</translation>
     </message>
     <message>
         <source>unknown drop format: formats %1:
@@ -5291,7 +5293,7 @@ Try saving to a different location.</translation>
     </message>
     <message>
         <source>Time Signature</source>
-        <translation>Time Signature</translation>
+        <translation>Số nhịp</translation>
     </message>
     <message>
         <source>Begin Repeat</source>
@@ -5299,19 +5301,19 @@ Try saving to a different location.</translation>
     </message>
     <message>
         <source>Chord/Rest</source>
-        <translation>Chord/Rest</translation>
+        <translation>Hợp âm/dấu lặng</translation>
     </message>
     <message>
         <source>Breath Segment</source>
-        <translation>Breath Segment</translation>
+        <translation>Segment của thở</translation>
     </message>
     <message>
         <source>End Bar Line</source>
-        <translation>End Bar Line</translation>
+        <translation>Hết vạch ngăn</translation>
     </message>
     <message>
         <source>Time Signature Announce</source>
-        <translation>Time Signature Announce</translation>
+        <translation>Số nhịp Announce</translation>
     </message>
     <message>
         <source>Lyrics:</source>
@@ -5334,11 +5336,11 @@ Try saving to a different location.</translation>
     </message>
     <message>
         <source>Element Type:</source>
-        <translation>Element Type:</translation>
+        <translation>Thể loại của element:</translation>
     </message>
     <message>
         <source>same staff</source>
-        <translation>same stave</translation>
+        <translation>cùng khuôn nhạc</translation>
     </message>
     <message>
         <source>same voice</source>
@@ -5448,15 +5450,15 @@ và kiểm tra xem file location có đúng hay không</translation>
     </message>
     <message>
         <source>Clear</source>
-        <translation>Clear</translation>
+        <translation>Làm lại</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>OK</translation>
+        <translation>Đồng ý</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Cancel</translation>
+        <translation>Hủy bỏ</translation>
     </message>
 </context>
 <context>
@@ -5491,18 +5493,18 @@ và kiểm tra xem file location có đúng hay không</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation>Up</translation>
+        <translation>lên</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation>Down</translation>
+        <translation>xuống</translation>
     </message>
 </context>
 <context>
     <name>ShowClefWidget</name>
     <message>
         <source>Clef Type:</source>
-        <translation>Clef Type:</translation>
+        <translation>Loại khóa nhạc:</translation>
     </message>
 </context>
 <context>
@@ -5552,7 +5554,7 @@ và kiểm tra xem file location có đúng hay không</translation>
     </message>
     <message>
         <source>Staff:</source>
-        <translation>Stave:</translation>
+        <translation>Khuôn nhạc:</translation>
     </message>
     <message>
         <source>Voice:</source>
@@ -5579,14 +5581,14 @@ và kiểm tra xem file location có đúng hay không</translation>
     </message>
     <message>
         <source>dotted</source>
-        <translation>dotted</translation>
+        <translation>chấm</translation>
     </message>
 </context>
 <context>
     <name>SlurSegment</name>
     <message>
         <source>Edit Mode</source>
-        <translation>Edit Mode</translation>
+        <translation>điều chỉnh thể</translation>
     </message>
     <message>
         <source>Slur Properties...</source>
@@ -5614,11 +5616,11 @@ và kiểm tra xem file location có đúng hay không</translation>
     <name>SplitStaff</name>
     <message>
         <source>MuseScore: Edit Staff/Part Properties</source>
-        <translation>MuseScore: Điều chỉnh Staff/Part Properties</translation>
+        <translation>MuseScore: Điều chỉnh đặc tính của khuôn nhạc/Part</translation>
     </message>
     <message>
         <source>Split Staff</source>
-        <translation>Split Stave</translation>
+        <translation>Split Staff</translation>
     </message>
     <message>
         <source>Split Point</source>
@@ -5644,14 +5646,14 @@ và kiểm tra xem file location có đúng hay không</translation>
     </message>
     <message>
         <source>Midi Action</source>
-        <translation>MIDI Action</translation>
+        <translation>Midi Action</translation>
     </message>
 </context>
 <context>
     <name>SymbolDialog</name>
     <message>
         <source>MuseScore: Symbols</source>
-        <translation>MuseScore: Symbols</translation>
+        <translation>MuseScore: Ký hiệu</translation>
     </message>
 </context>
 <context>
@@ -5846,12 +5848,12 @@ và kiểm tra xem file location có đúng hay không</translation>
     <message>
         <source>Abs.:</source>
         <comment>do not translate</comment>
-        <translation>Abs:</translation>
+        <translation>Abs.:</translation>
     </message>
     <message>
         <source>Rel.:</source>
         <comment>do not translate</comment>
-        <translation>Rel:</translation>
+        <translation>Rel.:</translation>
     </message>
     <message>
         <source>TextStyle:</source>
@@ -5916,7 +5918,7 @@ và kiểm tra xem file location có đúng hay không</translation>
     <name>TextPaletteBase</name>
     <message>
         <source>MuseScore: Special Text Symbols</source>
-        <translation>MuseScore: Symbols của chữ viết đặc biệt</translation>
+        <translation>MuseScore: Ký hiệu của chữ viết đặc biệt</translation>
     </message>
     <message>
         <source>Text</source>
@@ -5944,7 +5946,7 @@ và kiểm tra xem file location có đúng hay không</translation>
     </message>
     <message>
         <source>apply to all elements of same type</source>
-        <translation>apply to all elements of same type</translation>
+        <translation>áp dụng cho tất cả elements tương tự</translation>
     </message>
 </context>
 <context>
@@ -5955,7 +5957,7 @@ và kiểm tra xem file location có đúng hay không</translation>
     </message>
     <message>
         <source>Font:</source>
-        <translation>Font:</translation>
+        <translation>Phông chữ:</translation>
     </message>
     <message>
         <source>font face</source>
@@ -5963,11 +5965,11 @@ và kiểm tra xem file location có đúng hay không</translation>
     </message>
     <message>
         <source>Size:</source>
-        <translation>Size:</translation>
+        <translation>Cỡ:</translation>
     </message>
     <message>
         <source>font point size</source>
-        <translation>font point size</translation>
+        <translation>cỡ phông chữ</translation>
     </message>
     <message>
         <source>Style:</source>
@@ -5975,7 +5977,7 @@ và kiểm tra xem file location có đúng hay không</translation>
     </message>
     <message>
         <source>bold</source>
-        <translation>bold</translation>
+        <translation>tô đậm</translation>
     </message>
     <message>
         <source>B</source>
@@ -6031,7 +6033,7 @@ và kiểm tra xem file location có đúng hay không</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation>Colour:</translation>
+        <translation>Màu:</translation>
     </message>
     <message>
         <source>text color</source>
@@ -6056,7 +6058,7 @@ và kiểm tra xem file location có đúng hay không</translation>
     </message>
     <message>
         <source>reference point offset in percent of parent width</source>
-        <translation>reference point offset in percentage of parent width</translation>
+        <translation>reference point offset in percent of parent width</translation>
     </message>
     <message>
         <source>%</source>
@@ -6077,11 +6079,11 @@ và kiểm tra xem file location có đúng hay không</translation>
     </message>
     <message>
         <source>reference point offset in percent of parent height</source>
-        <translation>reference point offset by percentage of parent height</translation>
+        <translation>reference point offset in percent of parent height</translation>
     </message>
     <message>
         <source>Unit:</source>
-        <translation>Unit:</translation>
+        <translation>Đơn vị:</translation>
     </message>
     <message>
         <source>offset is absolute</source>
@@ -6125,7 +6127,7 @@ và kiểm tra xem file location có đúng hay không</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation>Width:</translation>
+        <translation>Chiều ngang:</translation>
     </message>
     <message>
         <source>frame line width</source>
@@ -6149,11 +6151,11 @@ và kiểm tra xem file location có đúng hay không</translation>
     </message>
     <message>
         <source>corner round</source>
-        <translation>corner round</translation>
+        <translation>góc tròn</translation>
     </message>
     <message>
         <source>frame color</source>
-        <translation>frame colour</translation>
+        <translation>frame color</translation>
     </message>
     <message>
         <source>System Flag</source>
@@ -6182,7 +6184,7 @@ và kiểm tra xem file location có đúng hay không</translation>
     <name>TimeDialog</name>
     <message>
         <source>MuseScore: Time Signatures</source>
-        <translation>MuseScore: Time Signatures</translation>
+        <translation>MuseScore: Số nhịp</translation>
     </message>
     <message>
         <source>4/4 common time</source>
@@ -6205,15 +6207,15 @@ và kiểm tra xem file location có đúng hay không</translation>
     </message>
     <message>
         <source>add time signature to palette</source>
-        <translation>thêm time signature vào bảng danh sách to</translation>
+        <translation>thêm số nhịp vào bảng palette</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation>Add</translation>
+        <translation>Thêm vào</translation>
     </message>
     <message>
         <source>Create Time Signature</source>
-        <translation>Tạo ra Time Signature</translation>
+        <translation>Tạo ra số nhịp</translation>
     </message>
 </context>
 <context>
@@ -6224,11 +6226,11 @@ và kiểm tra xem file location có đúng hay không</translation>
     </message>
     <message>
         <source>Enter Time Signature:</source>
-        <translation>Điền vào Time Signature:</translation>
+        <translation>Điền vào số nhịp:</translation>
     </message>
     <message>
         <source>Time Signature: </source>
-        <translation>Time Signature: </translation>
+        <translation>Số nhịp: </translation>
     </message>
     <message>
         <source>/</source>
@@ -6236,19 +6238,19 @@ và kiểm tra xem file location có đúng hay không</translation>
     </message>
     <message>
         <source>Pickup Measure</source>
-        <translation>Pickup Measure</translation>
+        <translation>Pickup trường canh</translation>
     </message>
     <message>
         <source>Time Signature</source>
-        <translation>Time Signature</translation>
+        <translation>Số nhịp</translation>
     </message>
     <message>
         <source>Enter Number of Measures:</source>
-        <translation>Enter Number of Bars:</translation>
+        <translation>Điền vào bao nhiêu trường canh:</translation>
     </message>
     <message>
         <source>Measures:</source>
-        <translation>Bars:</translation>
+        <translation>Trường canh:</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
@@ -6258,26 +6260,26 @@ p, li { white-space: pre-wrap; }
         <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;&#13;
 p, li { white-space: pre-wrap; }&#13;
 &lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Gợi ý: Bạn có thể thêm vào hoặc bớt đi measures sau khi tạo ra khuôn nhạc.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Gợi ý: Bạn có thể thêm vào hoặc bớt đi trường canh sau khi tạo ra khuôn nhạc.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
     <name>TransposeDialogBase</name>
     <message>
         <source>Transpose key signatures</source>
-        <translation>Thăng/Giảm bộ khóa</translation>
+        <translation>Chuyển hóa bộ khóa</translation>
     </message>
     <message>
         <source>Transpose chord names</source>
-        <translation>Thăng/Giảm chord names</translation>
+        <translation>Chuyển hóa tên của hợp âm</translation>
     </message>
     <message>
         <source>MuseScore: Transpose</source>
-        <translation>MuseScore: Thăng/Giảm</translation>
+        <translation>MuseScore: Chuyển hóa</translation>
     </message>
     <message>
         <source>Transpose by Key</source>
-        <translation>Thăng/Giảm by Key</translation>
+        <translation>Chuyển hóa bằng Key</translation>
     </message>
     <message>
         <source>Cb major / Ab minor</source>
@@ -6341,11 +6343,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Up</source>
-        <translation>Up</translation>
+        <translation>lên</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation>Down</translation>
+        <translation>xuống</translation>
     </message>
     <message>
         <source>Closest</source>
@@ -6353,15 +6355,15 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Transpose by Interval</source>
-        <translation>Thăng/Giảm by Interval</translation>
+        <translation>Chuyển hóa bằng quãng nhạc</translation>
     </message>
     <message>
         <source>Perfect Unison</source>
-        <translation>Perfect Unison</translation>
+        <translation>Đồng âm đúng</translation>
     </message>
     <message>
         <source>Augmented Unison</source>
-        <translation>Augmented Unison</translation>
+        <translation>Đồng âm được tăng</translation>
     </message>
     <message>
         <source>Diminished Second</source>
@@ -6465,11 +6467,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Single sharps and flats only</source>
-        <translation>Single sharps and flats only</translation>
+        <translation>Thăng đơn và giáng đơn mà thôi</translation>
     </message>
     <message>
         <source>Use double sharps and flats</source>
-        <translation>Use double sharps and flats</translation>
+        <translation>Dùng thăng đơn và giáng</translation>
     </message>
 </context>
 <context>
@@ -6481,12 +6483,12 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <source>firstChord</source>
         <extracomment>do not translate</extracomment>
-        <translation>Dây thứ nhất</translation>
+        <translation>firstChord</translation>
     </message>
     <message>
         <source>secondChord</source>
         <extracomment>do not translate - only for debugging</extracomment>
-        <translation>Dây thứ hai</translation>
+        <translation>secondChord</translation>
     </message>
 </context>
 <context>
@@ -6515,7 +6517,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Format</source>
-        <translation>Format</translation>
+        <translation>Cấu trúc</translation>
     </message>
     <message>
         <source>Number</source>
@@ -6531,19 +6533,19 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>nothing</source>
-        <translation>nothing</translation>
+        <translation>không có gì</translation>
     </message>
     <message>
         <source>Bracket</source>
-        <translation>Bracket</translation>
+        <translation>Ngoặc nối khuôn nhạc</translation>
     </message>
     <message>
         <source>auto bracket</source>
-        <translation>auto bracket</translation>
+        <translation>Ngoặc nối khuôn nhạc tự động</translation>
     </message>
     <message>
         <source>bracket</source>
-        <translation>bracket</translation>
+        <translation>Ngoặc nối khuôn nhạc</translation>
     </message>
     <message>
         <source>relation:</source>
@@ -6574,19 +6576,19 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>nothing</source>
-        <translation>nothing</translation>
+        <translation>không có gì</translation>
     </message>
     <message>
         <source>Bracket</source>
-        <translation>Bracket</translation>
+        <translation>Ngoặc nối khuôn nhạc</translation>
     </message>
     <message>
         <source>auto bracket</source>
-        <translation>auto bracket</translation>
+        <translation>Ngoặc nối khuôn nhạc tự động</translation>
     </message>
     <message>
         <source>bracket</source>
-        <translation>bracket</translation>
+        <translation>Ngoặc nối khuôn nhạc</translation>
     </message>
 </context>
 <context>
@@ -6645,27 +6647,27 @@ p, li { white-space: pre-wrap; }&#13;
     <name>WebPageDockWidget</name>
     <message>
         <source>Connect with the &lt;br /&gt; Community</source>
-        <translation type="unfinished"/>
+        <translation>Kết nối với &lt;br /&gt;cộng đồng sử dụng MuseScore</translation>
     </message>
     <message>
         <source>Find help</source>
-        <translation type="unfinished"/>
+        <translation>Tìm sự giúp đỡ</translation>
     </message>
     <message>
         <source>Improve your skills</source>
-        <translation type="unfinished"/>
+        <translation>Tăng khả năng chuyên môn</translation>
     </message>
     <message>
         <source>Read the latest news</source>
-        <translation type="unfinished"/>
+        <translation>Đọc tin mới nhất</translation>
     </message>
     <message>
         <source>Download free sheet music</source>
-        <translation type="unfinished"/>
+        <translation>Chuyển về sheet music miễn phí</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"/>
+        <translation>Cho chạy</translation>
     </message>
     <message>
         <source>Close this permanently</source>
@@ -6680,23 +6682,23 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>sharp</source>
-        <translation>sharp</translation>
+        <translation>thăng</translation>
     </message>
     <message>
         <source>flat</source>
-        <translation>flat</translation>
+        <translation>giáng</translation>
     </message>
     <message>
         <source>double sharp</source>
-        <translation>double sharp</translation>
+        <translation>thăng đôi</translation>
     </message>
     <message>
         <source>double flat</source>
-        <translation>double flat</translation>
+        <translation>giáng đôi</translation>
     </message>
     <message>
         <source>natural</source>
-        <translation>natural</translation>
+        <translation>tự nhiên</translation>
     </message>
     <message>
         <source>flat-slash</source>
@@ -6764,11 +6766,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>natural arrow up</source>
-        <translation>natural arrow up</translation>
+        <translation>arrow tự nhiên up</translation>
     </message>
     <message>
         <source>natural arrow down</source>
-        <translation>natural arrow down</translation>
+        <translation>arrow tự nhiên down</translation>
     </message>
     <message>
         <source>natural arrow both</source>
@@ -6847,7 +6849,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Symbols...</source>
-        <translation>Symbols…</translation>
+        <translation>Ký hiệu...</translation>
     </message>
     <message>
         <source>Dynamics...</source>
@@ -6855,7 +6857,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Note Input</source>
-        <translation>Note Input</translation>
+        <translation>Input nốt nhạc</translation>
     </message>
     <message>
         <source>Pitch Spell</source>
@@ -6863,11 +6865,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Unison Above</source>
-        <translation>Unison Above</translation>
+        <translation>Đồng âm ở trên</translation>
     </message>
     <message>
         <source>Enter unison above</source>
-        <translation>Enter unison above</translation>
+        <translation>Điền vào đồng âm ở trên</translation>
     </message>
     <message>
         <source>Second Above</source>
@@ -7031,7 +7033,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Add note A to chord</source>
-        <translation>Add note A to chord</translation>
+        <translation>Thêm nốt A vào hợp âm</translation>
     </message>
     <message>
         <source>Add B</source>
@@ -7039,7 +7041,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Add note B to chord</source>
-        <translation>Add note B to chord</translation>
+        <translation>Thêm nốt B vào hợp âm</translation>
     </message>
     <message>
         <source>Add C</source>
@@ -7047,7 +7049,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Add note C to chord</source>
-        <translation>Add note C to chord</translation>
+        <translation>Thêm nốt C vào hợp âm</translation>
     </message>
     <message>
         <source>Add D</source>
@@ -7055,7 +7057,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Add note D to chord</source>
-        <translation>Add note D to chord</translation>
+        <translation>Thêm nốt D vào hợp âm</translation>
     </message>
     <message>
         <source>Add E</source>
@@ -7063,7 +7065,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Add note E to chord</source>
-        <translation>Add note E to chord</translation>
+        <translation>Thêm nốt E vào hợp âm</translation>
     </message>
     <message>
         <source>Add F</source>
@@ -7071,7 +7073,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Add note F to chord</source>
-        <translation>Add note F to chord</translation>
+        <translation>Thêm nốt F vào hợp âm</translation>
     </message>
     <message>
         <source>Add G</source>
@@ -7079,11 +7081,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Add note G to chord</source>
-        <translation>Add note G to chord</translation>
+        <translation>Thêm nốt G vào hợp âm</translation>
     </message>
     <message>
         <source>rest</source>
-        <translation>rest</translation>
+        <translation>dấu lặng</translation>
     </message>
     <message>
         <source>Add More Stretch</source>
@@ -7119,7 +7121,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>add previous chord to selection</source>
-        <translation>add previous chord to selection</translation>
+        <translation>thêm hợp âm trước vào selection</translation>
     </message>
     <message>
         <source>left+shift</source>
@@ -7131,7 +7133,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>add next chord to selection</source>
-        <translation>add next chord to selection</translation>
+        <translation>thêm hợp âm kế vào selection</translation>
     </message>
     <message>
         <source>right+shift</source>
@@ -7179,11 +7181,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>add staff above to selection</source>
-        <translation>add stave above to selection</translation>
+        <translation>add staff above to selection</translation>
     </message>
     <message>
         <source>add staff below to selection</source>
-        <translation>add stave below to selection</translation>
+        <translation>add staff below to selection</translation>
     </message>
     <message>
         <source>page-prev</source>
@@ -7219,7 +7221,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Delete Selected Measures</source>
-        <translation>Xóa bỏ measures được chọn</translation>
+        <translation>Xóa bỏ trường canh đã được đánh dấu</translation>
     </message>
     <message>
         <source>Append Measure</source>
@@ -7227,23 +7229,23 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Append Measures...</source>
-        <translation>Append Measures…</translation>
+        <translation>Viết thêm trường canh vào...</translation>
     </message>
     <message>
         <source>Insert Measure</source>
-        <translation>Insert Measure</translation>
+        <translation>Chêm trường canh vào</translation>
     </message>
     <message>
         <source>Insert Measures...</source>
-        <translation>Insert Measures…</translation>
+        <translation>Chêm trường canh vào...</translation>
     </message>
     <message>
         <source>Insert Horizontal Frame</source>
-        <translation>Insert Horizontal Frame</translation>
+        <translation>Chêm Horizontal Frame vào</translation>
     </message>
     <message>
         <source>Insert Vertical Frame</source>
-        <translation>Insert Vertical Frame</translation>
+        <translation>Chêm Vertical Frame</translation>
     </message>
     <message>
         <source>Append Horizontal Frame</source>
@@ -7291,11 +7293,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Other...</source>
-        <translation>Other…</translation>
+        <translation>Other...</translation>
     </message>
     <message>
         <source>note longa</source>
-        <translation>note longa</translation>
+        <translation>nốt longa</translation>
     </message>
     <message>
         <source>Longa</source>
@@ -7303,7 +7305,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>note breve</source>
-        <translation>note breve</translation>
+        <translation>nốt breve</translation>
     </message>
     <message>
         <source>Double whole note (breve)</source>
@@ -7327,7 +7329,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>pad note 1/4</source>
-        <translation>pade note 1/4</translation>
+        <translation>pad note 1/4</translation>
     </message>
     <message>
         <source>Quarter note (crochet)</source>
@@ -7399,7 +7401,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>natural</source>
-        <translation>natural</translation>
+        <translation>tự nhiên</translation>
     </message>
     <message>
         <source>double flat</source>
@@ -7527,15 +7529,15 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Fingering Palette</source>
-        <translation>Fingering Palette</translation>
+        <translation>Bảng Palette của ngón bấm</translation>
     </message>
     <message>
         <source>Fingering...</source>
-        <translation>Fingering…</translation>
+        <translation>Ngón bấm...</translation>
     </message>
     <message>
         <source>Fingering</source>
-        <translation>Fingering</translation>
+        <translation>Ngón bấm</translation>
     </message>
     <message>
         <source>Tempo Palette</source>
@@ -7579,7 +7581,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Add Title</source>
-        <translation>Add Title</translation>
+        <translation>Điền tựa đề</translation>
     </message>
     <message>
         <source>Title</source>
@@ -7639,23 +7641,23 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Add Chord Name</source>
-        <translation>Add Chord Name</translation>
+        <translation>Thêm tên của hợp âm</translation>
     </message>
     <message>
         <source>Chord Name</source>
-        <translation>Chord Name</translation>
+        <translation>Tên của hợp âm</translation>
     </message>
     <message>
         <source>Add Chord Text</source>
-        <translation>Viết lời cho Chord</translation>
+        <translation>Viết chữ cho hợp âm</translation>
     </message>
     <message>
         <source>show harmony properties for chord</source>
-        <translation>cho thấy đặc tính của harmony của chord</translation>
+        <translation>cho thấy đặc tính hòa âm của hợp âm</translation>
     </message>
     <message>
         <source>Harmony Properties</source>
-        <translation>Đặc tính của harmony</translation>
+        <translation>Đặc tính của hòa âm</translation>
     </message>
     <message>
         <source>Add Rehearsal Mark</source>
@@ -7675,7 +7677,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Rewind</source>
-        <translation>Rewind</translation>
+        <translation>Quay lại</translation>
     </message>
     <message>
         <source>Repeat</source>
@@ -7683,7 +7685,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Load Style...</source>
-        <translation>Load Style…</translation>
+        <translation>Load Style...</translation>
     </message>
     <message>
         <source>Load Style</source>
@@ -7703,11 +7705,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Transpose...</source>
-        <translation>Thăng/Giảm...</translation>
+        <translation>Chuyển hóa</translation>
     </message>
     <message>
         <source>Transpose</source>
-        <translation>Thăng/Giảm</translation>
+        <translation>Chuyển hóa</translation>
     </message>
     <message>
         <source>violin clef</source>
@@ -7755,11 +7757,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>repeat last command</source>
-        <translation>repeat last command</translation>
+        <translation>lập lại mệnh lệnh cuối</translation>
     </message>
     <message>
         <source>Repeat last command</source>
-        <translation>Repeat last command</translation>
+        <translation>Lập lại mệnh lệnh cuối</translation>
     </message>
     <message>
         <source>edit score meta data</source>
@@ -7775,19 +7777,19 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>toggle system break</source>
-        <translation>toggle system break</translation>
+        <translation>tắt/mở system break</translation>
     </message>
     <message>
         <source>Toggle System Break</source>
-        <translation>Toggle System Break</translation>
+        <translation>Tắt/mở System Break</translation>
     </message>
     <message>
         <source>toggle page break</source>
-        <translation>toggle page break</translation>
+        <translation>tắt/mở page break</translation>
     </message>
     <message>
         <source>Toggle Page Break</source>
-        <translation>Toggle Page Break</translation>
+        <translation>Tắt/mở Page Break</translation>
     </message>
     <message>
         <source>edit element</source>
@@ -7855,35 +7857,35 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>enter 1/1 rest</source>
-        <translation>enter 1/1 rest</translation>
+        <translation>điền vào 1/1 dấu lặng</translation>
     </message>
     <message>
         <source>1/1 rest</source>
-        <translation>1/1 rest</translation>
+        <translation>dấu lặng 1/1</translation>
     </message>
     <message>
         <source>enter 1/2 rest</source>
-        <translation>enter ½ rest</translation>
+        <translation>điền vào 1/2 dấu lặng</translation>
     </message>
     <message>
         <source>1/2 rest</source>
-        <translation>1/2 rest</translation>
+        <translation>dấu lặng 1/2</translation>
     </message>
     <message>
         <source>enter 1/4 rest</source>
-        <translation>enter ¼ rest</translation>
+        <translation>điền vào 1/4 dấu lặng</translation>
     </message>
     <message>
         <source>1/4 rest</source>
-        <translation>¼ rest</translation>
+        <translation>dấu lặng 1/4</translation>
     </message>
     <message>
         <source>enter 1/8 rest</source>
-        <translation>enter 1/8 rest</translation>
+        <translation>enter 1/8 dấu lặng</translation>
     </message>
     <message>
         <source>1/8 rest</source>
-        <translation>1/8 rest</translation>
+        <translation>1/8 dấu lặng</translation>
     </message>
     <message>
         <source>backspace</source>
@@ -7923,15 +7925,15 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>All Similar Elements</source>
-        <translation>All Similar Elements</translation>
+        <translation>Chọn tất cả elements tương tự</translation>
     </message>
     <message>
         <source>Select all similar elements in same staff</source>
-        <translation>Chọn tất cả elements tương tự trong cùng một staff</translation>
+        <translation>Chọn tất cả elements tương tự trong cùng một khuôn nhạc</translation>
     </message>
     <message>
         <source>All Similar Elements in Same Staff</source>
-        <translation>All Similar Elements in Same Stave</translation>
+        <translation>Tất Cả Elements Tương Tự Trong Cùng Một Khuôn Nhạc</translation>
     </message>
     <message>
         <source>Synthesizer</source>
@@ -7967,11 +7969,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Local handbook</source>
-        <translation>Local handbook</translation>
+        <translation>Sách hướng dẫn</translation>
     </message>
     <message>
         <source>Show local handbook</source>
-        <translation>Show local handbook</translation>
+        <translation>Đọc sách hướng dẫn</translation>
     </message>
     <message>
         <source>File open</source>
@@ -8011,7 +8013,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Reload score from file</source>
-        <translation>Reload score from file</translation>
+        <translation>Chuyển bài nhạc vào MuseScore lần nữa</translation>
     </message>
     <message>
         <source>File close</source>
@@ -8063,15 +8065,15 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Show symbols palette</source>
-        <translation>Show symbols palette</translation>
+        <translation>Cho thấy bảng ký hiệu</translation>
     </message>
     <message>
         <source>Show time signatures palette</source>
-        <translation>Show time signatures palette</translation>
+        <translation>Cho  thấy bảng số nhịp</translation>
     </message>
     <message>
         <source>Time Signatures...</source>
-        <translation>Time Signatures…</translation>
+        <translation>Số nhịp...</translation>
     </message>
     <message>
         <source>Show dynamics palette</source>
@@ -8115,11 +8117,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Enter rest</source>
-        <translation>Enter rest</translation>
+        <translation>Điền vào dấu lặng</translation>
     </message>
     <message>
         <source>Rest</source>
-        <translation>Rest</translation>
+        <translation>Dấu lặng</translation>
     </message>
     <message>
         <source>Add staccato</source>
@@ -8167,7 +8169,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Up</source>
-        <translation>Up</translation>
+        <translation>lên</translation>
     </message>
     <message>
         <source>Pitch up octave</source>
@@ -8183,35 +8185,35 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Pitch up note in chord</source>
-        <translation>Pitch up note in chord</translation>
+        <translation>Pitch up note trong hợp âm</translation>
     </message>
     <message>
         <source>Up Note in Chord</source>
-        <translation>Up Note in Chord</translation>
+        <translation>Up Note trong hợp âm</translation>
     </message>
     <message>
         <source>Go to higher pitched note in chord</source>
-        <translation>Go to higher pitched note in chord</translation>
+        <translation>Go to higher pitched note trong hợp âm</translation>
     </message>
     <message>
         <source>Go to top note in chord</source>
-        <translation>Go to top note in chord</translation>
+        <translation>Go to top note trong hợp âm</translation>
     </message>
     <message>
         <source>Top Note in Chord</source>
-        <translation>Top Note in Chord</translation>
+        <translation>Top nốt nhạc trong hợp âm</translation>
     </message>
     <message>
         <source>Move up</source>
-        <translation>Move up</translation>
+        <translation>Chuyển lên</translation>
     </message>
     <message>
         <source>Pitch down</source>
-        <translation>Pitch down</translation>
+        <translation>Giảm âm độ</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation>Down</translation>
+        <translation>xuống</translation>
     </message>
     <message>
         <source>Pitch down octave</source>
@@ -8227,79 +8229,79 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Pitch down note in chord</source>
-        <translation>Pitch down note in chord</translation>
+        <translation>Pitch down nốt nhạc trong hợp âm</translation>
     </message>
     <message>
         <source>Down Note in Chord</source>
-        <translation>Down Note in Chord</translation>
+        <translation>Down nốt nhạc trong hợp âm</translation>
     </message>
     <message>
         <source>Go to lower pitched note in chord</source>
-        <translation>Go to lower pitched note in chord</translation>
+        <translation>Go to lower pitched note trong hợp âm</translation>
     </message>
     <message>
         <source>Go to bottom note in chord</source>
-        <translation>Go to bottom note in chord</translation>
+        <translation>Go to bottom note trong hợp âm</translation>
     </message>
     <message>
         <source>Bottom Note in Chord</source>
-        <translation>Bottom Note in Chord</translation>
+        <translation>Bottom Note trong hợp âm</translation>
     </message>
     <message>
         <source>Move down</source>
-        <translation>Dời xuống</translation>
+        <translation>Chuyển xuống</translation>
     </message>
     <message>
         <source>Previous chord</source>
-        <translation>Previous chord</translation>
+        <translation>Hợp âm trước đó</translation>
     </message>
     <message>
         <source>Previous Chord</source>
-        <translation>Previous Chord</translation>
+        <translation>Hợp âm trước đó</translation>
     </message>
     <message>
         <source>Previous measure</source>
-        <translation>Previous measure</translation>
+        <translation>Trường canh trước đó</translation>
     </message>
     <message>
         <source>Previous Measure</source>
-        <translation>Previous Measure</translation>
+        <translation>Trường canh trước đó</translation>
     </message>
     <message>
         <source>Next chord</source>
-        <translation>Next chord</translation>
+        <translation>Hợp âm kế tiếp</translation>
     </message>
     <message>
         <source>Next Chord</source>
-        <translation>Next Chord</translation>
+        <translation>Hợp âm kế tiếp</translation>
     </message>
     <message>
         <source>Next measure</source>
-        <translation>Next measure</translation>
+        <translation>Trường canh tiếp theo</translation>
     </message>
     <message>
         <source>Next Measure</source>
-        <translation>Next Measure</translation>
+        <translation>Trường canh tiếp theo</translation>
     </message>
     <message>
         <source>Delete selected measures</source>
-        <translation>Xóa bỏ measures được chọn</translation>
+        <translation>Xóa bỏ trường canh được chọn</translation>
     </message>
     <message>
         <source>Append measure</source>
-        <translation>Append measure</translation>
+        <translation>Append trường canh</translation>
     </message>
     <message>
         <source>Append measures</source>
-        <translation>Append measures</translation>
+        <translation>Viết thêm trường canh vào</translation>
     </message>
     <message>
         <source>Insert measure</source>
-        <translation>Insert measure</translation>
+        <translation>Chêm trường canh vào</translation>
     </message>
     <message>
         <source>Insert measures</source>
-        <translation>Insert measures</translation>
+        <translation>Chêm trường canh vào</translation>
     </message>
     <message>
         <source>split window horizontal</source>
@@ -8307,7 +8309,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Documents Side by Side</source>
-        <translation>Documents Side by Side</translation>
+        <translation>Tài liệu nằm cạnh nhau</translation>
     </message>
     <message>
         <source>split window vertical</source>
@@ -8315,7 +8317,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Documents Stacked</source>
-        <translation>Documents Stacked</translation>
+        <translation>Tài liệu nằm chồng lên nhau</translation>
     </message>
     <message>
         <source>Player play</source>
@@ -8355,15 +8357,15 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Edit Chord Style...</source>
-        <translation>Điều chỉnh Chord Style...</translation>
+        <translation>Điều chỉnh Style của hợp âm...</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Delete</translation>
+        <translation>Xóa bỏ</translation>
     </message>
     <message>
         <source>Delete contents of the selected measures</source>
-        <translation>Delete contents of the selected measures</translation>
+        <translation>Xóa nội dung của trường canh đã được đánh dấu</translation>
     </message>
     <message>
         <source>Timewise Delete</source>
@@ -8375,15 +8377,15 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Parts...</source>
-        <translation>Parts…</translation>
+        <translation>Parts...</translation>
     </message>
     <message>
         <source>next score</source>
-        <translation type="unfinished"/>
+        <translation>bài nhạc kế tiếp</translation>
     </message>
     <message>
         <source>previous score</source>
-        <translation type="unfinished"/>
+        <translation>bài nhạc trước đó</translation>
     </message>
 </context>
 <context>
@@ -8398,7 +8400,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>sforzato</source>
-        <translation>sforzando</translation>
+        <translation>sforzato</translation>
     </message>
     <message>
         <source>espressivo</source>
@@ -8723,7 +8725,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Bracket</source>
-        <translation>Bracket</translation>
+        <translation>Ngoặc nối khuôn nhạc</translation>
     </message>
     <message>
         <source>Arpeggio</source>
@@ -8735,7 +8737,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Note</source>
-        <translation>Note</translation>
+        <translation>Nốt nhạc</translation>
     </message>
     <message>
         <source>Stem</source>
@@ -8743,7 +8745,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Clef</source>
-        <translation>Clef</translation>
+        <translation>Khóa nhạc</translation>
     </message>
     <message>
         <source>KeySig</source>
@@ -8755,11 +8757,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Rest</source>
-        <translation>Rest</translation>
+        <translation>Dấu lặng</translation>
     </message>
     <message>
         <source>Breath</source>
-        <translation>Breath</translation>
+        <translation>Thở</translation>
     </message>
     <message>
         <source>Glissando</source>
@@ -8771,7 +8773,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Image</source>
-        <translation>Image</translation>
+        <translation>Hình ảnh</translation>
     </message>
     <message>
         <source>Tie</source>
@@ -8783,7 +8785,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Page</source>
-        <translation>Page</translation>
+        <translation>Trang</translation>
     </message>
     <message>
         <source>Beam</source>
@@ -8795,7 +8797,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Lyrics</source>
-        <translation>Lyrics</translation>
+        <translation>Lời bài nhạc</translation>
     </message>
     <message>
         <source>Marker</source>
@@ -8803,7 +8805,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Jump</source>
-        <translation>Jump</translation>
+        <translation>Đi trực tiếp tới</translation>
     </message>
     <message>
         <source>Tuplet</source>
@@ -8867,15 +8869,15 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Tremolo</source>
-        <translation>Tremolo</translation>
+        <translation>Tiếng vê</translation>
     </message>
     <message>
         <source>Measure</source>
-        <translation>Measure</translation>
+        <translation>Trường canh</translation>
     </message>
     <message>
         <source>StaffLines</source>
-        <translation>StaveLines</translation>
+        <translation>StaffLines</translation>
     </message>
     <message>
         <source>Cursor</source>
@@ -8907,7 +8909,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Pedal</source>
-        <translation>Pedal</translation>
+        <translation>Lưu âm</translation>
     </message>
     <message>
         <source>Trill</source>
@@ -8931,7 +8933,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Chord</source>
-        <translation>Chord</translation>
+        <translation>Hợp âm</translation>
     </message>
     <message>
         <source>Slur</source>
@@ -8947,7 +8949,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>StaffList</source>
-        <translation>StaveList</translation>
+        <translation>StaffList</translation>
     </message>
     <message>
         <source>MeasureList</source>
@@ -8971,7 +8973,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Articulation</source>
-        <translation>Cường độ của từng nốt nhạc</translation>
+        <translation>Phụ âm của từng nốt nhạc</translation>
     </message>
     <message>
         <source>AccidentalBracket</source>
@@ -8982,7 +8984,7 @@ p, li { white-space: pre-wrap; }&#13;
     <name>magTable</name>
     <message>
         <source>Page Width</source>
-        <translation>Page Width</translation>
+        <translation>Chiều ngang của trang</translation>
     </message>
     <message>
         <source>Whole Page</source>
@@ -8997,59 +8999,59 @@ p, li { white-space: pre-wrap; }&#13;
     <name>noteheadnames</name>
     <message>
         <source>normal</source>
-        <translation type="unfinished">bình thường</translation>
+        <translation>bình thường</translation>
     </message>
     <message>
         <source>cross</source>
-        <translation type="unfinished">cross</translation>
+        <translation>cross</translation>
     </message>
     <message>
         <source>diamond</source>
-        <translation type="unfinished">diamond</translation>
+        <translation>diamond</translation>
     </message>
     <message>
         <source>triangle</source>
-        <translation type="unfinished">triangle</translation>
+        <translation>triangle</translation>
     </message>
     <message>
         <source>mi</source>
-        <translation type="unfinished">mi</translation>
+        <translation>mi</translation>
     </message>
     <message>
         <source>slash</source>
-        <translation type="unfinished">slash</translation>
+        <translation>slash</translation>
     </message>
     <message>
         <source>xcircle</source>
-        <translation type="unfinished">xcircle</translation>
+        <translation>xcircle</translation>
     </message>
     <message>
         <source>do</source>
-        <translation type="unfinished">đô</translation>
+        <translation>đồ</translation>
     </message>
     <message>
         <source>re</source>
-        <translation type="unfinished">rê</translation>
+        <translation>rê</translation>
     </message>
     <message>
         <source>fa</source>
-        <translation type="unfinished">fa</translation>
+        <translation>fa</translation>
     </message>
     <message>
         <source>la</source>
-        <translation type="unfinished">la</translation>
+        <translation>la</translation>
     </message>
     <message>
         <source>ti</source>
-        <translation type="unfinished">ti</translation>
+        <translation>ti</translation>
     </message>
     <message>
         <source>sol</source>
-        <translation type="unfinished"/>
+        <translation>sol</translation>
     </message>
     <message>
         <source>alt. brevis</source>
-        <translation type="unfinished"/>
+        <translation>alt. brevis</translation>
     </message>
 </context>
 <context>
@@ -9160,23 +9162,23 @@ Phiên bản MuseCrore của bạn quá cũ.</translation>
     </message>
     <message>
         <source>whole rest</source>
-        <translation>whole rest</translation>
+        <translation>dấu lặng nốt tròn</translation>
     </message>
     <message>
         <source>half rest</source>
-        <translation>half rest</translation>
+        <translation>dấu lặng nốt trắng</translation>
     </message>
     <message>
         <source>outside whole rest</source>
-        <translation>outside whole rest</translation>
+        <translation>outside dấu lặng nốt tròn</translation>
     </message>
     <message>
         <source>outside half rest</source>
-        <translation>outside half rest</translation>
+        <translation>outside dấu lặng nốt trắng</translation>
     </message>
     <message>
         <source>rest M3</source>
-        <translation>rest M3</translation>
+        <translation>dấu lặng nốt trắng M3</translation>
     </message>
     <message>
         <source>breve rest</source>
@@ -9244,11 +9246,11 @@ Phiên bản MuseCrore của bạn quá cũ.</translation>
     </message>
     <message>
         <source>natural</source>
-        <translation>natural</translation>
+        <translation>tự nhiên</translation>
     </message>
     <message>
         <source>natural arrow up</source>
-        <translation>natural arrow up</translation>
+        <translation>arrow tự nhiên up</translation>
     </message>
     <message>
         <source>natural arrow down</source>
@@ -9856,19 +9858,19 @@ Phiên bản MuseCrore của bạn quá cũ.</translation>
     </message>
     <message>
         <source>bracket tips up</source>
-        <translation>bracket tips up</translation>
+        <translation>Ngoặc nối khuôn nhạc tips up</translation>
     </message>
     <message>
         <source>bracket tips down</source>
-        <translation>bracket tips down</translation>
+        <translation>Ngoặc nối khuôn nhạc tips down</translation>
     </message>
     <message>
         <source>bracket tips left up</source>
-        <translation>bracket tips left up</translation>
+        <translation>Ngoặc nối khuôn nhạc tips left up</translation>
     </message>
     <message>
         <source>bracket tips left down</source>
-        <translation>bracket tips left down</translation>
+        <translation>Ngoặc nối khuôn nhạc tips left down</translation>
     </message>
     <message>
         <source>acc dot</source>
@@ -9896,7 +9898,7 @@ Phiên bản MuseCrore của bạn quá cũ.</translation>
     </message>
     <message>
         <source>zero</source>
-        <translation>zero</translation>
+        <translation>số không</translation>
     </message>
     <message>
         <source>one</source>
@@ -9940,43 +9942,43 @@ Phiên bản MuseCrore của bạn quá cũ.</translation>
     </message>
     <message>
         <source>s0sol head</source>
-        <translation type="unfinished"/>
+        <translation>s0sol head</translation>
     </message>
     <message>
         <source>s1sol head</source>
-        <translation type="unfinished"/>
+        <translation>s1sol head</translation>
     </message>
     <message>
         <source>s2sol head</source>
-        <translation type="unfinished"/>
+        <translation>s2sol head</translation>
     </message>
     <message>
         <source>longa up alt</source>
-        <translation type="unfinished"/>
+        <translation>longa up alt</translation>
     </message>
     <message>
         <source>longa down alt</source>
-        <translation type="unfinished"/>
+        <translation>longa down alt</translation>
     </message>
     <message>
         <source>brevis head alt</source>
-        <translation type="unfinished"/>
+        <translation>brevis head alt</translation>
     </message>
     <message>
         <source>time sig C dot</source>
-        <translation type="unfinished"/>
+        <translation>time sig C dot</translation>
     </message>
     <message>
         <source>time sig O</source>
-        <translation type="unfinished"/>
+        <translation>time sig O</translation>
     </message>
     <message>
         <source>time sig O cut</source>
-        <translation type="unfinished"/>
+        <translation>time sig O cut</translation>
     </message>
     <message>
         <source>time sig O dot</source>
-        <translation type="unfinished"/>
+        <translation>time sig O dot</translation>
     </message>
 </context>
 </TS>

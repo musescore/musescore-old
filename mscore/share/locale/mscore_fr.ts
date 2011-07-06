@@ -1030,11 +1030,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>sol</source>
-        <translation type="unfinished"/>
+        <translation>sol</translation>
     </message>
     <message>
         <source>alt. brevis</source>
-        <translation type="unfinished"/>
+        <translation>alt. brevis</translation>
     </message>
 </context>
 <context>
@@ -3703,19 +3703,19 @@ est incompatible avec l'interface actuelle</translation>
     <name>MyWebView</name>
     <message>
         <source>Could not&lt;br /&gt; connect</source>
-        <translation type="unfinished"/>
+        <translation>Connection &lt;br /&gt; impossible</translation>
     </message>
     <message>
         <source>To connect with the community, &lt;br /&gt; you need to have internet &lt;br /&gt; connection enabled</source>
-        <translation type="unfinished"/>
+        <translation>Pour vous connecter, &lt;br /&gt; vous devez avoir une &lt;br /&gt; connexion internet</translation>
     </message>
     <message>
         <source>Retry</source>
-        <translation type="unfinished"/>
+        <translation>Réessayer</translation>
     </message>
     <message>
         <source>Close this permanently</source>
-        <translation type="unfinished"/>
+        <translation>Fermer définitivement</translation>
     </message>
 </context>
 <context>
@@ -4753,15 +4753,15 @@ est incompatible avec l'interface actuelle</translation>
     </message>
     <message>
         <source>Show Play Panel</source>
-        <translation type="unfinished"/>
+        <translation>Afficher la fenêtre de lecture</translation>
     </message>
     <message>
         <source>Show Navigator</source>
-        <translation type="unfinished"/>
+        <translation>Afficher le navigateur</translation>
     </message>
     <message>
         <source>Show MuseScore Connect</source>
-        <translation type="unfinished"/>
+        <translation>Afficher MuseScore Connect</translation>
     </message>
 </context>
 <context>
@@ -5876,7 +5876,7 @@ et vérifier que le chemin du fichier est correct</translation>
     </message>
     <message>
         <source>Staff Properties...</source>
-        <translation type="unfinished">Propriétés de la portée...</translation>
+        <translation>Propriétés de la portée...</translation>
     </message>
 </context>
 <context>
@@ -6650,31 +6650,31 @@ p, li { white-space: pre-wrap; }
     <name>WebPageDockWidget</name>
     <message>
         <source>Connect with the &lt;br /&gt; Community</source>
-        <translation type="unfinished"/>
+        <translation>Connectez vous à la &lt;br /&gt; communauté</translation>
     </message>
     <message>
         <source>Find help</source>
-        <translation type="unfinished"/>
+        <translation>Trouver de l'aide</translation>
     </message>
     <message>
         <source>Improve your skills</source>
-        <translation type="unfinished"/>
+        <translation>Découvrir des astuces</translation>
     </message>
     <message>
         <source>Read the latest news</source>
-        <translation type="unfinished"/>
+        <translation>Lire les dernières infos</translation>
     </message>
     <message>
         <source>Download free sheet music</source>
-        <translation type="unfinished"/>
+        <translation>Télécharger des partitions gratuites</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"/>
+        <translation>Commencer</translation>
     </message>
     <message>
         <source>Close this permanently</source>
-        <translation type="unfinished"/>
+        <translation>Fermer définitivement</translation>
     </message>
 </context>
 <context>
@@ -7100,11 +7100,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add Less Stretch</source>
-        <translation>Retrécir</translation>
+        <translation>Rétrécir</translation>
     </message>
     <message>
         <source>Add less stretch to selected measure</source>
-        <translation>Retrécir la mesure sélectionnée</translation>
+        <translation>Rétrécir la mesure sélectionnée</translation>
     </message>
     <message>
         <source>Reset Beam Mode</source>
@@ -8152,7 +8152,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Less stretch</source>
-        <translation>Retrécir</translation>
+        <translation>Rétrécir</translation>
     </message>
     <message>
         <source>Reset beam mode of selected measures</source>
@@ -8384,11 +8384,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>next score</source>
-        <translation type="unfinished"/>
+        <translation>partition suivante</translation>
     </message>
     <message>
         <source>previous score</source>
-        <translation type="unfinished"/>
+        <translation>partition précédente</translation>
     </message>
 </context>
 <context>
@@ -9002,59 +9002,59 @@ p, li { white-space: pre-wrap; }
     <name>noteheadnames</name>
     <message>
         <source>normal</source>
-        <translation type="unfinished">normal</translation>
+        <translation>normal</translation>
     </message>
     <message>
         <source>cross</source>
-        <translation type="unfinished">croix</translation>
+        <translation>croix</translation>
     </message>
     <message>
         <source>diamond</source>
-        <translation type="unfinished">diamant</translation>
+        <translation>diamant</translation>
     </message>
     <message>
         <source>triangle</source>
-        <translation type="unfinished">triangle</translation>
+        <translation>triangle</translation>
     </message>
     <message>
         <source>mi</source>
-        <translation type="unfinished">mi</translation>
+        <translation>mi</translation>
     </message>
     <message>
         <source>slash</source>
-        <translation type="unfinished">slash</translation>
+        <translation>slash</translation>
     </message>
     <message>
         <source>xcircle</source>
-        <translation type="unfinished">croix cerclée</translation>
+        <translation>x dans cercle</translation>
     </message>
     <message>
         <source>do</source>
-        <translation type="unfinished">do</translation>
+        <translation>do</translation>
     </message>
     <message>
         <source>re</source>
-        <translation type="unfinished">ré</translation>
+        <translation>ré</translation>
     </message>
     <message>
         <source>fa</source>
-        <translation type="unfinished">fa</translation>
+        <translation>fa</translation>
     </message>
     <message>
         <source>la</source>
-        <translation type="unfinished">la</translation>
+        <translation>la</translation>
     </message>
     <message>
         <source>ti</source>
-        <translation type="unfinished">ti</translation>
+        <translation>si</translation>
     </message>
     <message>
         <source>sol</source>
-        <translation type="unfinished"/>
+        <translation>sol</translation>
     </message>
     <message>
         <source>alt. brevis</source>
-        <translation type="unfinished"/>
+        <translation>alt. brevis</translation>
     </message>
 </context>
 <context>
@@ -9945,43 +9945,43 @@ votre version de MuseScore est trop ancienne.</translation>
     </message>
     <message>
         <source>s0sol head</source>
-        <translation type="unfinished"/>
+        <translation>s0sol head</translation>
     </message>
     <message>
         <source>s1sol head</source>
-        <translation type="unfinished"/>
+        <translation>s1sol head</translation>
     </message>
     <message>
         <source>s2sol head</source>
-        <translation type="unfinished"/>
+        <translation>s2sol head</translation>
     </message>
     <message>
         <source>longa up alt</source>
-        <translation type="unfinished"/>
+        <translation>longa up alt</translation>
     </message>
     <message>
         <source>longa down alt</source>
-        <translation type="unfinished"/>
+        <translation>longa down alt</translation>
     </message>
     <message>
         <source>brevis head alt</source>
-        <translation type="unfinished"/>
+        <translation>brevis head alt</translation>
     </message>
     <message>
         <source>time sig C dot</source>
-        <translation type="unfinished"/>
+        <translation>time sig C dot</translation>
     </message>
     <message>
         <source>time sig O</source>
-        <translation type="unfinished"/>
+        <translation>time sig O</translation>
     </message>
     <message>
         <source>time sig O cut</source>
-        <translation type="unfinished"/>
+        <translation>time sig O cut</translation>
     </message>
     <message>
         <source>time sig O dot</source>
-        <translation type="unfinished"/>
+        <translation>time sig O dot</translation>
     </message>
 </context>
 </TS>
