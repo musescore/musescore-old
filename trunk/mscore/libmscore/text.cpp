@@ -283,6 +283,7 @@ void Text::layout()
       to.setWrapMode(w <= 0.0 ? QTextOption::NoWrap : QTextOption::WrapAtWordBoundaryOrAnywhere);
       _doc->setDefaultTextOption(to);
       layout(w, x, y);
+      adjustReadPos();
       }
 
 //---------------------------------------------------------

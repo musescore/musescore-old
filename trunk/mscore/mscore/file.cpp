@@ -1541,12 +1541,6 @@ bool MuseScore::readScore(Score* score, QString name)
       score->updateNotes();
       score->doLayout();
 #if 0
-      score->adjustReadPos();
-
-      foreach(Excerpt* e, score->excerpts()) {
-            Score* score = e->score();
-            score->adjustReadPos();
-            }
       //
       // check if any soundfont is configured
       //

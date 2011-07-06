@@ -857,6 +857,7 @@ void Seq::seek(int tick)
             mscore->currentScoreView()->moveCursor(seg, -1);
             }
       cs->setPlayPos(tick);
+      cs->setLayoutAll(false);
       cs->end();
 
       tick = cs->repeatList()->tick2utick(tick);

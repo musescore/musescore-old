@@ -463,6 +463,7 @@ void SLine::layout()
                   }
             seg->layout();
             seg->move(QPointF(0.0, _yoffset * spatium()));
+            seg->adjustReadPos();
             }
       }
 
