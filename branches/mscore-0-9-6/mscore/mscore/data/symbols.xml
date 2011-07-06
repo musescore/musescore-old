@@ -296,7 +296,7 @@
     </Glyph>
   <Glyph>
     <name>noteheads.uM2</name>
-    <code>0xe118</code>
+    <code>0xe128</code>
     <attach x="10.65" y="0"/>
     <bbox x="-0.78125" y="-2.75003" w="9.90234" h="5.50006"/>
     </Glyph>
