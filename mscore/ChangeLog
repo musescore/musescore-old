@@ -1,4 +1,6 @@
 7.jul (ws)
+      - fix #11428: Right-click on tuplet or on a text brings up both Tuplet and Test
+        property dialog boxes
       - squared longa and brevis (patch from miwarre)
       - fix image offsets (patch from miwarre)
       - fix multimeasure rest number position
