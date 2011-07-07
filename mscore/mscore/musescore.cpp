@@ -4402,7 +4402,7 @@ void MuseScore::cmd(QAction* a, const QString& cmd)
                   }
             }
       else if (cmd == "edit-style") {
-            EditStyle es(cs, 0);
+            EditStyle es(cs, this);
             es.exec();
             }
       else if (cmd == "edit-text-style") {

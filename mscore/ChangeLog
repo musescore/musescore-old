@@ -1,3 +1,5 @@
+7.jul (ws)
+      - fix multimeasure rest number position
 5.jul (ws)
       - fix #11386: Quitting MuseScore causes crash
       - fix #10709: Unable to change TAB clef

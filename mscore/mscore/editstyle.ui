@@ -40,7 +40,7 @@
       </sizepolicy>
      </property>
      <property name="currentIndex">
-      <number>7</number>
+      <number>14</number>
      </property>
      <widget class="QWidget" name="Seite_5">
       <layout class="QVBoxLayout" name="verticalLayout_20">
@@ -2985,10 +2985,6 @@ p, li { white-space: pre-wrap; }
              <widget class="QToolButton" name="chordDescriptionFileButton">
               <property name="text">
                <string>...</string>
-              </property>
-              <property name="icon">
-               <iconset>
-                <normaloff>:/data/fileopen.svg</normaloff>:/data/fileopen.svg</iconset>
               </property>
              </widget>
             </item>
