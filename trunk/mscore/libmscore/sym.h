@@ -340,14 +340,14 @@ enum {
       halfdiamond2headSym,
       diamond2headSym,
 
-      sqlongaupSym,
-      sqlongadownSym,
-      sqbrevisheadSym,
+      longaupaltSym,
+      longadownaltSym,
+      brevisheadaltSym,
 
-      tempimpprolmajSym,
-      tempperfprolminSym,
-      tempperfcutSym,
-      tempperfprolmajSym,
+      timesigcdotSym,
+      timesigoSym,
+      timesigocutSym,
+      timesigodotSym,
 
       tabclef2Sym,
 

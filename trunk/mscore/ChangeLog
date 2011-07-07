@@ -1,4 +1,6 @@
 7.jul (ws)
+      - squared longa and brevis (patch from miwarre)
+      - fix image offsets (patch from miwarre)
       - fix multimeasure rest number position
 5.jul (ws)
       - fix #11386: Quitting MuseScore causes crash

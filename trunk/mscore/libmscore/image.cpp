@@ -323,24 +323,27 @@ void RasterImage::setPath(const QString& s)
 
 void Image::layout()
       {
-      if (!autoScale() || !parent() || (parent()->type() != HBOX && parent()->type() != VBOX))
-            return;
-
-      if (_lockAspectRatio) {
-            QSizeF size(imageSize());
-            double ratio = size.width() / size.height();
-            double w = parent()->width();
-            double h = parent()->height();
-            if ((w / h) < ratio) {
-                  sz.setWidth(w);
-                  sz.setHeight(w / ratio);
+      // if autoscale && inside a box, scale to box relevant size
+      if (autoScale() && parent() && ((parent()->type() == HBOX || parent()->type() == VBOX))) {
+            if (_lockAspectRatio) {
+                  QSizeF size(imageSize());
+                  double ratio = size.width() / size.height();
+                  double w = parent()->width();
+                  double h = parent()->height();
+                  if ((w / h) < ratio) {
+                        sz.setWidth(w);
+                        sz.setHeight(w / ratio);
+                        }
+                  else {
+                        sz.setHeight(h);
+                        sz.setWidth(h * ratio);
+                        }
                   }
-            else {
-                  sz.setHeight(h);
-                  sz.setWidth(h * ratio);
-                  }
+            else
+                  sz = parent()->bbox().size();
             }
-      else
-            sz = parent()->bbox().size();
+
+      // in any case, adjust position relative to parent
+      adjustReadPos();
       }
 

@@ -189,6 +189,7 @@ void EditStaffType::typeChanged(QListWidgetItem* n, QListWidgetItem* o)
       // retrieve staff type corresponding to new current item in type list
       int idx = n->data(Qt::UserRole).toInt();
       StaffType* st = staffTypes[idx];
+
       // set properties common to all groups (some props appears in multiple group pages)
       name->setText(st->name());
       lines->setValue(st->lines());
