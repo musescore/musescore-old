@@ -196,8 +196,13 @@ static QScriptValue prototype_Cursor_call(QScriptContext* context, QScriptEngine
                         }
                   break;
             case 4:     // "measure",
-                  if (context->argumentCount() == 0)
-                        return qScriptValueFromValue(context->engine(), cursor->cr()->measure());
+                  if (context->argumentCount() == 0){
+                        ChordRest* cr = cursor->cr();
+                        if(cr)
+                              return qScriptValueFromValue(context->engine(), cr->measure());
+                        else
+                              return context->engine()->undefinedValue();
+                        }
                   break;
             case 5:     // "next",
                   if (context->argumentCount() == 0) {
