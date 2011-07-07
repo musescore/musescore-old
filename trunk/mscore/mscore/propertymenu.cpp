@@ -133,7 +133,7 @@ void ScoreView::genPropertyMenuText(Element* e, QMenu* popup)
                   }
             popup->addMenu(menuLayer);
             }
-      popup->addAction(tr("Text Properties..."))->setData("t-props");
+      popup->addAction(tr("Text Properties..."))->setData("text-props");
       }
 
 //---------------------------------------------------------
@@ -176,7 +176,7 @@ void ScoreView::createElementPropertyMenu(Element* e, QMenu* popup)
             }
       else if (e->type() == TUPLET) {
             genPropertyMenu1(e, popup);
-            popup->addAction(tr("Tuplet Properties..."))->setData("t-props");
+            popup->addAction(tr("Tuplet Properties..."))->setData("tuplet-props");
             }
       else if (e->type() == VOLTA) {
             genPropertyMenu1(e, popup);
@@ -243,7 +243,7 @@ void ScoreView::createElementPropertyMenu(Element* e, QMenu* popup)
       else if (e->type() == TEMPO_TEXT) {
             genPropertyMenu1(e, popup);
             popup->addAction(tr("Tempo Properties..."))->setData("tempo-props");
-            popup->addAction(tr("Text Properties..."))->setData("t-props");
+            popup->addAction(tr("Text Properties..."))->setData("text-props");
             }
       else if (e->type() == KEYSIG) {
             genPropertyMenu1(e, popup);
@@ -334,7 +334,7 @@ void ScoreView::createElementPropertyMenu(Element* e, QMenu* popup)
             genPropertyMenu1(e, popup);
             popup->addSeparator();
             popup->addAction(tr("Harmony Properties..."))->setData("ha-props");
-            popup->addAction(tr("Text Properties..."))->setData("t-props");
+            popup->addAction(tr("Text Properties..."))->setData("text-props");
             }
       else if (e->type() == IMAGE) {
             genPropertyMenu1(e, popup);
@@ -436,7 +436,7 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
             }
       else if (cmd == "picture")
             mscore->addImage(score(), e);
-      else if (cmd == "t-props") {
+      else if (cmd == "tuplet-props") {
             TupletProperties vp(static_cast<Tuplet*>(e));
             if (vp.exec()) {
                   //
@@ -545,7 +545,7 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
                   score()->undoChangeDynamic(dynamic, newVelo, nt);
                   }
             }
-      else if (cmd == "t-props") {
+      else if (cmd == "text-props") {
             Text* ot    = static_cast<Text*>(e);
             Text* nText = static_cast<Text*>(ot->clone());
             TextProperties tp(nText);
