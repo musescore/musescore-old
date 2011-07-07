@@ -33,6 +33,7 @@ void PainterQt::drawText(const QTextDocument* doc, const QColor& color, int cp)
 void PainterQt::drawTextHCentered(qreal x, qreal y, const QString& s)
       {
       _painter->drawText(QRectF(x, y, 0.0, 0.0), Qt::AlignHCenter|Qt::TextDontClip, s);
+//      _painter->drawText(QRectF(x, y, 0.0, 0.0), Qt::AlignCenter|Qt::TextDontClip, s);
       }
 
 //---------------------------------------------------------

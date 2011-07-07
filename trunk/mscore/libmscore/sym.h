@@ -85,8 +85,8 @@ class Sym {
       void draw(Painter* painter, double mag, qreal x = 0.0, qreal y = 0.0) const;
       void setAttach(const QPointF& r)       { _attach = r; }
       bool isValid() const                   { return _code != 0; }
-      QRectF getBbox() const    { return _bbox; }
-      QPointF getAttach() const { return _attach; }
+      QRectF getBbox() const               { return _bbox; }
+      QPointF getAttach() const            { return _attach; }
       QString toString() const;
       };
 

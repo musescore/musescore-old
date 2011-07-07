@@ -591,5 +591,12 @@ class MScore {
       static qreal spatium;
       };
 
+//---------------------------------------------------------
+//   center
+//---------------------------------------------------------
+
+inline static qreal center(qreal x1, qreal x2) {
+      return (x1 + (x2 - x1) * .5);
+      }
 #endif
 

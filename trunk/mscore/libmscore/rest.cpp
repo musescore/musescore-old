@@ -67,7 +67,6 @@ void Rest::draw(Painter* painter) const
       double _spatium = spatium();
 
       Measure* m = measure();
-      double mag = magS();
       if (m && m->multiMeasure()) {
             int n     = m->multiMeasure();
             double pw = _spatium * .7;
@@ -80,28 +79,27 @@ void Rest::draw(Painter* painter) const
             pw *= .5;
             painter->drawLine(x1 + pw, y, x2 - pw, y);
 
+            // draw vertical lines:
             painter->setLineWidth(_spatium * .2);
             painter->drawLine(x1, y-_spatium, x1, y+_spatium);
             painter->drawLine(x2, y-_spatium, x2, y+_spatium);
 
-            painter->setFont(symbols[score()->symIdx()][allabreveSym].font());
-            painter->scale(mag);
-            double imag = 1.0 / mag;
-
-            y = -_spatium * 6.75 * imag;
-            x1 = x1 + (x2 - x1) * .5 * imag;
-            painter->drawTextHCentered(x1, y, QString("%1").arg(n));
-            painter->scale(imag);
+            QFont font = symbols[score()->symIdx()][allabreveSym].font();
+            painter->setFont(font);
+            QFontMetrics fm(font);
+            y  = -_spatium * .5 - fm.ascent();
+            painter->drawTextHCentered(center(x1, x2), y, QString("%1").arg(n));
             }
       else {
+            double mag = magS();
             symbols[score()->symIdx()][_sym].draw(painter, mag);
             int dots = durationType().dots();
             if (dots) {
                   double y = dotline * _spatium * .5;
                   for (int i = 1; i <= dots; ++i) {
-                        double x = symbols[score()->symIdx()][_sym].width(magS())
+                        double x = symbols[score()->symIdx()][_sym].width(mag)
                                    + point(score()->styleS(ST_dotNoteDistance)) * i;
-                        symbols[score()->symIdx()][dotSym].draw(painter, magS(), x, y);
+                        symbols[score()->symIdx()][dotSym].draw(painter, mag, x, y);
                         }
                   }
             }

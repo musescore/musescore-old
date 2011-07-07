@@ -2771,6 +2771,7 @@ void ScoreView::normalPaste()
       _score->startCmd();
       _score->cmdPaste(this);
       _score->endCmd();
+      mscore->endCmd();
       }
 
 //---------------------------------------------------------
