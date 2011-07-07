@@ -199,6 +199,8 @@ void Selection::clear()
             _score->addRefresh(e->abbox());
             }
       _el.clear();
+      setStartSegment(0);
+      setEndSegment(0);
       setState(SEL_NONE);
       }
 
