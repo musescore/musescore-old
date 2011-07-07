@@ -389,10 +389,15 @@ void GuitarPro::createMeasures()
 
             if (i == 0 || ts != nts) {
                   for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
-                        TimeSig* t = new TimeSig(score, nts);
-                        t->setTrack(staffIdx * VOICES);
-                        Segment* s = m->getSegment(SegTimeSig, tick);
-                        s->add(t);
+                        Staff* staff = score->staff(staffIdx);
+                        StaffType* staffType = staff->staffType();
+printf("staff %d group %d timesig %d\n", staffIdx, int(staffType->group()), staffType->genTimesig());
+                        if (staffType->genTimesig()) {
+                              TimeSig* t = new TimeSig(score, nts);
+                              t->setTrack(staffIdx * VOICES);
+                              Segment* s = m->getSegment(SegTimeSig, tick);
+                              s->add(t);
+                              }
                         }
                   }
             if (i == 0 || (bars[i].keysig != GP_INVALID_KEYSIG)) {
