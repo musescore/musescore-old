@@ -75,6 +75,7 @@ class PainterQt : public Painter {
 
       virtual void drawText(const QTextDocument*, const QColor&, int cursor);
       virtual void drawTextHCentered(qreal x, qreal y, const QString& s);
+      virtual void drawTextVCentered(qreal x, qreal y, const QString& s);
 #if QT_VERSION >= 0x040800
       virtual void drawGlyphRun(const QPointF& pt, const QGlyphRun& gr) const {
             _painter->drawGlyphRun(pt, gr);

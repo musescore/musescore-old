@@ -601,8 +601,8 @@ void Note::write(Xml& xml) const
       if (dots) {
             bool hasUserModifiedDots = false;
             for (int i = 0; i < dots; ++i) {
-                  if (!_dots[i]->userOff().isNull() || !_dots[i]->visible()
-                     || _dots[i]->color() != Qt::black) {
+                  if (_dots[i] && (!_dots[i]->userOff().isNull() || !_dots[i]->visible()
+                     || _dots[i]->color() != Qt::black)) {
                         hasUserModifiedDots = true;
                         break;
                         }

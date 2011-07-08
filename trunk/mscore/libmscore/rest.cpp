@@ -86,7 +86,7 @@ void Rest::draw(Painter* painter) const
 
             QFont font = symbols[score()->symIdx()][allabreveSym].font();
             painter->setFont(font);
-            QFontMetrics fm(font);
+            QFontMetricsF fm(font);
             y  = -_spatium * .5 - fm.ascent();
             painter->drawTextHCentered(center(x1, x2), y, QString("%1").arg(n));
             }

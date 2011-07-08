@@ -218,6 +218,8 @@ void FretDiagram::draw(Painter* painter) const
             double y = fretDist * i;
             painter->drawLine(0.0, y, x2, y);
             }
+      painter->setFont(font);
+      QFontMetricsF fm(font);
       for (int i = 0; i < _strings; ++i) {
             if (_dots && _dots[i]) {
                   double dotd = stringDist * .6;
@@ -227,14 +229,13 @@ void FretDiagram::draw(Painter* painter) const
                   painter->drawEllipse(QRectF(x, y, dotd, dotd));
                   }
             if (_marker && _marker[i]) {
-                  painter->setFont(font);
                   double x = stringDist * i;
-                  double y = -fretDist * .1;
+                  double y = -fretDist * .3 - fm.ascent();
                   painter->drawTextHCentered(x, y, QChar(_marker[i]));
                   }
             }
       if (_fretOffset > 0) {
-            painter->drawText(-stringDist * .4, 0.0, QString("%1").arg(_fretOffset+1));
+            painter->drawTextVCentered(-stringDist, fretDist*.5, QString("%1").arg(_fretOffset+1));
             }
       }
 
@@ -265,6 +266,7 @@ void FretDiagram::layout()
 //      Element::layout();      // alignment & offset
 //      setPos(ipos() + QPointF(-w * .5, - (h + _spatium * 1.5)));
       setPos(0.0, 0.0);
+      adjustReadPos();
       }
 
 //---------------------------------------------------------
