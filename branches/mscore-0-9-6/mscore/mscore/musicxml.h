@@ -175,7 +175,7 @@ class MusicXml {
       void scorePartwise(QDomElement);
       void xmlPartList(QDomElement);
       void xmlPart(QDomElement, QString id);
-      void xmlScorePart(QDomElement node, QString id);
+      void xmlScorePart(QDomElement node, QString id, int& parts);
       Measure* xmlMeasure(Part*, QDomElement, int);
       void xmlAttributes(Measure*, int stave, QDomElement node);
       void xmlLyric(Measure* measure, int staff, QDomElement e);

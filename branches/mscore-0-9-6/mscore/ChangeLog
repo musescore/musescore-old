@@ -1,3 +1,5 @@
+8.jul  (lv)
+      - fix #11441: Failure to read MusicXML file with missing parts
 3.jul  (la)
       - fix #10585: Accidental offset in small staves corrupted by saving and reloading (patch by Miwarre)
       - fix #10313: Align settings in Edit Text Style dlg box not stored (patch by Miwarre)
