@@ -88,6 +88,8 @@ class Page : public Element {
       QList<System*>* systems()              { return &_systems;   }
 
       virtual void layout();
+      virtual void write(Xml&) const;
+      virtual void read(QDomElement);
 
       void appendSystem(System* s);
 

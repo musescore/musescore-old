@@ -44,7 +44,7 @@
 //   write
 //---------------------------------------------------------
 
-void Score::write(Xml& xml, bool /*autosave*/)
+void Score::write(Xml& xml)
       {
       slurs.clear();
       xml.stag("Score");
@@ -98,6 +98,12 @@ void Score::write(Xml& xml, bool /*autosave*/)
 
       foreach(KeySig* ks, customKeysigs)
             ks->write(xml);
+
+      xml.stag("PageList");
+      foreach(Page* page, _pages)
+            page->write(xml);
+      xml.etag();
+
       foreach(const Part* part, _parts)
             part->write(xml);
 
@@ -121,7 +127,7 @@ void Score::write(Xml& xml, bool /*autosave*/)
       xml.curTrack = -1;
       xml.tag("cursorTrack", _is.track());
       foreach(Excerpt* excerpt, _excerpts)
-            excerpt->score()->write(xml, false);       // recursion
+            excerpt->score()->write(xml);       // recursion
       if (parentScore())
             xml.tag("name", name());
       xml.etag();
@@ -379,7 +385,6 @@ void Score::saveCompressedFile(QIODevice* f, QFileInfo& info, bool autosave)
             ++idx;
             }
 
-
       xml.etag();
       xml.etag();
       cbuf.seek(0);
@@ -421,8 +426,6 @@ void Score::saveCompressedFile(QIODevice* f, QFileInfo& info, bool autosave)
       //
       if (_omr) {
             int n = _omr->numPages();
-if (n)
-      printf("save OMR-pages %d\n", n);
             for (int i = 0; i < n; ++i) {
                   QString path = QString("OmrPages/page%1.png").arg(i+1);
                   QBuffer cbuf;
@@ -533,7 +536,7 @@ void Score::saveFile(QIODevice* f, bool msczFormat, bool autosave)
       xml.stag("museScore version=\"" MSC_VERSION "\"");
       xml.tag("programVersion", VERSION);
       xml.tag("programRevision", revision);
-      write(xml, autosave);
+      write(xml);
       xml.etag();
       if (!parentScore())
             _revisions->write(xml);
@@ -998,6 +1001,18 @@ bool Score::read(QDomElement dScore)
                   s->read(ee);
                   addExcerpt(s);
                   s->setExcerptsChanged(true);
+                  }
+            else if (tag == "PageList") {
+                  for (QDomElement e = ee.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+                        QString tag(e.tagName());
+                        if (e.tagName() == "Page") {
+                              Page* page = new Page(this);
+                              _pages.append(page);
+                              page->read(e);
+                              }
+                        else
+                              domError(e);
+                        }
                   }
             else if (tag == "name")
                   setName(val);

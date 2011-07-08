@@ -432,7 +432,7 @@ class Score {
       Score* clone();
       bool appendScore(Score*);
 
-      void write(Xml&, bool autosave);
+      void write(Xml&);
       bool read(QDomElement);
       bool read1(QDomElement);
 

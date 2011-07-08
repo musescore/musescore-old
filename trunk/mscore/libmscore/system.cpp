@@ -900,3 +900,29 @@ double System::staffY(int staffIdx) const
       return _staves[staffIdx]->y() + canvasPos().y();
       }
 
+//---------------------------------------------------------
+//   write
+//---------------------------------------------------------
+
+void System::write(Xml& xml) const
+      {
+      xml.stag("System");
+      xml.etag();
+      }
+
+//---------------------------------------------------------
+//   read
+//---------------------------------------------------------
+
+void System::read(QDomElement e)
+      {
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            QString tag(e.tagName());
+
+            if (tag == "System") {
+                  }
+            else
+                  domError(e);
+            }
+      }
+

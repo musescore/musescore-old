@@ -558,12 +558,10 @@ void GuitarPro1::read(QFile* fp)
                         Segment* segment = measure->getSegment(SegChordRest, tick);
                         if (beatBits & 0x2)
                               readChord(segment, staffIdx * VOICES);
+                        Lyrics* lyrics = 0;
                         if (beatBits & 0x4) {
-                              QString txt = readDelphiString();
-                              Lyrics* l = new Lyrics(score);
-                              l->setText(txt);
-                              l->setTrack(staffIdx * VOICES);
-                              segment->add(l);
+                              lyrics = new Lyrics(score);
+                              lyrics->setText(readDelphiString());
                               }
                         if (beatBits & 0x8)
                               readBeatEffects(staffIdx * VOICES, segment);
@@ -578,6 +576,8 @@ void GuitarPro1::read(QFile* fp)
                         else
                               cr = new Rest(score);
                         cr->setTrack(staffIdx * VOICES);
+                        if (lyrics)
+                              cr->add(lyrics);
                         if (tuple) {
                               Tuplet* tuplet = tuplets[staffIdx];
                               if ((tuplet == 0) || (tuplet->elements().size() == tuple)) {
@@ -853,12 +853,11 @@ printf("BeginRepeat=============================================\n");
                         Segment* segment = measure->getSegment(SegChordRest, tick);
                         if (beatBits & 0x2)
                               readChord(segment, staffIdx * VOICES);
+                        Lyrics* lyrics = 0;
                         if (beatBits & 0x4) {
                               QString txt = readDelphiString();
-                              Lyrics* l = new Lyrics(score);
-                              l->setText(txt);
-                              l->setTrack(staffIdx * VOICES);
-                              segment->add(l);
+                              lyrics = new Lyrics(score);
+                              lyrics->setText(txt);
                               }
                         if (beatBits & 0x8)
                               readBeatEffects(staffIdx * VOICES, segment);
@@ -873,6 +872,8 @@ printf("BeginRepeat=============================================\n");
                         else
                               cr = new Rest(score);
                         cr->setTrack(staffIdx * VOICES);
+                        if (lyrics)
+                              cr->add(lyrics);
                         if (tuple) {
                               Tuplet* tuplet = tuplets[staffIdx];
                               if ((tuplet == 0) || (tuplet->elements().size() == tuple)) {
@@ -1333,12 +1334,11 @@ printf("BeginRepeat=============================================\n");
                         Segment* segment = measure->getSegment(SegChordRest, tick);
                         if (beatBits & 0x2)
                               readChord(segment, staffIdx * VOICES);
+                        Lyrics* lyrics = 0;
                         if (beatBits & 0x4) {
                               QString txt = readDelphiString();
-                              Lyrics* l = new Lyrics(score);
-                              l->setText(txt);
-                              l->setTrack(staffIdx * VOICES);
-                              segment->add(l);
+                              lyrics = new Lyrics(score);
+                              lyrics->setText(txt);
                               }
                         if (beatBits & 0x8)
                               readBeatEffects(staffIdx * VOICES, segment);
@@ -1371,6 +1371,8 @@ printf("BeginRepeat=============================================\n");
                         else
                               cr = new Rest(score);
                         cr->setTrack(staffIdx * VOICES);
+                        if (lyrics)
+                              cr->add(lyrics);
                         if (tuple) {
                               Tuplet* tuplet = tuplets[staffIdx];
                               if ((tuplet == 0) || (tuplet->elements().size() == tuple)) {
@@ -1853,19 +1855,17 @@ void GuitarPro4::read(QFile* fp)
                         Segment* segment = measure->getSegment(SegChordRest, tick);
                         if (beatBits & 0x2)
                               readChord(segment, staffIdx * VOICES);
+                        Lyrics* lyrics = 0;
                         if (beatBits & 0x4) {
-                              QString txt = readDelphiString();
-                              Lyrics* l = new Lyrics(score);
-                              l->setText(txt);
-                              l->setTrack(staffIdx * VOICES);
-                              segment->add(l);
+                              lyrics = new Lyrics(score);
+                              lyrics->setText(readDelphiString());
                               }
                         if (beatBits & 0x8)
                               readBeatEffects(staffIdx * VOICES, segment);
                         if (beatBits & 0x10)
                               readMixChange();
                         int strings = readUChar();   // used strings mask
-                        Fraction l = len2fraction(len);
+                        Fraction l  = len2fraction(len);
 
                         ChordRest* cr;
                         if (strings == 0)
@@ -1873,6 +1873,8 @@ void GuitarPro4::read(QFile* fp)
                         else
                               cr = new Chord(score);
                         cr->setTrack(staffIdx * VOICES);
+                        if (lyrics)
+                              cr->add(lyrics);
                         if (tuple) {
                               Tuplet* tuplet = tuplets[staffIdx];
                               if ((tuplet == 0) || (tuplet->elements().size() == tuple)) {
@@ -2251,12 +2253,11 @@ int GuitarPro5::readBeat(int tick, int voice, Measure* measure, int staffIdx, Tu
       Segment* segment = measure->getSegment(SegChordRest, tick);
       if (beatBits & 0x2)
             readChord(segment, staffIdx * VOICES);
+      Lyrics* lyrics = 0;
       if (beatBits & 0x4) {
             QString txt = readDelphiString();
-            Lyrics* l = new Lyrics(score);
-            l->setText(txt);
-            l->setTrack(staffIdx * VOICES);
-            segment->add(l);
+            lyrics = new Lyrics(score);
+            lyrics->setText(txt);
             }
       int beatEffects = 0;
       if (beatBits & 0x8)
@@ -2314,6 +2315,8 @@ int GuitarPro5::readBeat(int tick, int voice, Measure* measure, int staffIdx, Tu
                         note->setTpcFromPitch();
                         }
                   }
+            if (lyrics)
+                  cr->add(lyrics);
             }
       int rr = readChar();
       if (cr && (cr->type() == CHORD)) {
@@ -2674,6 +2677,7 @@ bool MuseScore::importGTP(Score* score, const QString& name)
                QString("Load failed: ") + gp->error(errNo),
                QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
             fp.close();
+            printf("guitar pro import error====\n");
             // avoid another error message box
             return true;
             }
