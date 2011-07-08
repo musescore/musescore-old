@@ -144,9 +144,10 @@ void Bend::layout()
             x = x2;
             y = y2;
             }
-
       bb.adjust(-_lw, -_lw, _lw, _lw);
       setbbox(bb);
+      setPos(0.0, 0.0);
+      adjustReadPos();
       }
 
 //---------------------------------------------------------

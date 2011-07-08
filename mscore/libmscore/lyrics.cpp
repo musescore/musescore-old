@@ -205,6 +205,10 @@ void Lyrics::layout()
       double noteHeadWidth2 = symbols[score()->symIdx()][quartheadSym].width(magS()) * .5;
 
       System* sys = measure()->system();
+      if (sys == 0) {
+            printf("lyrics layout: no system!\n");
+            abort();
+            }
       const QList<Lyrics*>* ll = &(chordRest()->lyricsList());
 
       int line       = ll->indexOf(this);

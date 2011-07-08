@@ -333,6 +333,8 @@ void Inspector::updateList(Score* s)
                                                       new ElementItem(sli, ss);
                                                       }
                                                 }
+                                          foreach(Lyrics* lyrics, cr->lyricsList())
+                                                new ElementItem(sei, lyrics);
                                           }
                                     }
                               foreach(Spanner* s, segment->spannerFor()) {
@@ -764,6 +766,7 @@ ShowChordWidget::ShowChordWidget()
       connect(crb.attributes, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
       connect(crb.slurFor, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
       connect(crb.slurBack, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
+      connect(crb.lyrics, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
 
       // chord
       QWidget* ch = new QWidget;
@@ -847,6 +850,14 @@ void ShowChordWidget::setElement(Element* e)
             s.setNum(long(slur), 16);
             QListWidgetItem* item = new QListWidgetItem(s);
             item->setData(Qt::UserRole, QVariant::fromValue<void*>((void*)slur));
+            crb.slurBack->addItem(item);
+            }
+      crb.lyrics->clear();
+      foreach(Lyrics* lyrics, chord->lyricsList()) {
+            QString s;
+            s.setNum(long(lyrics), 16);
+            QListWidgetItem* item = new QListWidgetItem(s);
+            item->setData(Qt::UserRole, QVariant::fromValue<void*>((void*)lyrics));
             crb.slurBack->addItem(item);
             }
 
@@ -1114,6 +1125,7 @@ ShowRestWidget::ShowRestWidget()
       connect(crb.attributes, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
       connect(crb.slurFor, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
       connect(crb.slurBack, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
+      connect(crb.lyrics, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
 
       QFrame* line = new QFrame(this);
       line->setFrameStyle(QFrame::HLine | QFrame::Raised);
@@ -1167,13 +1179,21 @@ void ShowRestWidget::setElement(Element* e)
             item->setData(Qt::UserRole, QVariant::fromValue<void*>((void*)slur));
             crb.slurBack->addItem(item);
             }
-
+      crb.attributes->clear();
       foreach(Articulation* a, *rest->getArticulations()) {
             QString s;
             s.setNum(long(a), 16);
             QListWidgetItem* item = new QListWidgetItem(s);
             item->setData(Qt::UserRole, QVariant::fromValue<void*>((void*)a));
             crb.attributes->addItem(item);
+            }
+      crb.lyrics->clear();
+      foreach(Lyrics* lyrics, rest->lyricsList()) {
+            QString s;
+            s.setNum(long(lyrics), 16);
+            QListWidgetItem* item = new QListWidgetItem(s);
+            item->setData(Qt::UserRole, QVariant::fromValue<void*>((void*)lyrics));
+            crb.slurBack->addItem(item);
             }
 
       Measure* m = rest->measure();

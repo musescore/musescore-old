@@ -728,3 +728,35 @@ bool Page::isOdd() const
       return (_no + 1 + score()->pageNumberOffset()) & 1;
       }
 
+//---------------------------------------------------------
+//   write
+//---------------------------------------------------------
+
+void Page::write(Xml& xml) const
+      {
+      xml.stag("Page");
+      QList<System*> _systems;
+      foreach(System* system, _systems) {
+            system->write(xml);
+            }
+      xml.etag();
+      }
+
+//---------------------------------------------------------
+//   read
+//---------------------------------------------------------
+
+void Page::read(QDomElement e)
+      {
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            QString tag(e.tagName());
+
+            if (tag == "System") {
+                  System* system = new System(score());
+                  score()->systems()->append(system);
+                  system->read(e);
+                  }
+            else
+                  domError(e);
+            }
+      }
