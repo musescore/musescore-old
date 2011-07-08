@@ -809,6 +809,7 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
             FretDiagramProperties fp(nFret, 0);
             int rv = fp.exec();
             if (rv) {
+                  nFret->layout();
                   score()->undoChangeElement(fd, nFret);
                   return;
                   }

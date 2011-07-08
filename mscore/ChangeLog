@@ -1,4 +1,7 @@
+8.jul (ws)
+      - fix #11430: Cancel on General Style dlg box crashes if no edits (patch from miwarre)
 7.jul (ws)
+      - fix fret diagram
       - fix #11428: Right-click on tuplet or on a text brings up both Tuplet and Test
         property dialog boxes
       - squared longa and brevis (patch from miwarre)
