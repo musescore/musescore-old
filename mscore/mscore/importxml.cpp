@@ -784,10 +784,8 @@ void MusicXml::xmlPartList(QDomElement e)
             partGroups[i] = 0;
 
       for (;!e.isNull(); e = e.nextSiblingElement()) {
-            if (e.tagName() == "score-part") {
-                  xmlScorePart(e.firstChildElement(), e.attribute(QString("id")));
-                  scoreParts++;
-                  }
+            if (e.tagName() == "score-part")
+                  xmlScorePart(e.firstChildElement(), e.attribute(QString("id")), scoreParts);
             else if (e.tagName() == "part-group") {
                   int number = e.attribute(QString("number")).toInt() - 1;
                   QString symbol = "";
@@ -822,18 +820,23 @@ void MusicXml::xmlPartList(QDomElement e)
  Read the MusicXML score-part element.
  */
 
-void MusicXml::xmlScorePart(QDomElement e, QString id)
+void MusicXml::xmlScorePart(QDomElement e, QString id, int& parts)
       {
       Part* part = 0;
       foreach(Part* p, *score->parts()) {
             if (p->id() == id) {
                   part = p;
+                  parts++;
                   break;
                   }
             }
       if (part == 0) {
+            // Some versions of Rosegarden (at least v11.02) mention parts
+            // in the <part-list>, but don't contain the corresponding <part>s.
+            // (i.e. the part-list is overcomplete).
+            // These parts are reported but can safely be ignored.
             printf("Import MusicXml:xmlScorePart: cannot find part %s\n", qPrintable(id));
-            exit(-1);
+            return;
             }
 
 // printf("create track id:<%s>\n", id.toLatin1().data());
@@ -845,7 +848,7 @@ void MusicXml::xmlScorePart(QDomElement e, QString id)
                   part->setTrackName(e.text());
                   }
             else if (e.tagName() == "part-abbreviation") {
-            	  part->setShortName(e.text());
+                  part->setShortName(e.text());
                   }
             else if (e.tagName() == "score-instrument") {
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
