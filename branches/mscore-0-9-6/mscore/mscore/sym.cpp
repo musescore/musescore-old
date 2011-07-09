@@ -74,6 +74,9 @@ SymbolNames lilypondNames[] = {
       { flatflatSym,          QT_TRANSLATE_NOOP("symbol", "flat flat"),            "accidentals.flatflat" },
       { flatflatslashSym,     QT_TRANSLATE_NOOP("symbol", "flat flat slash"),      "accidentals.flatflat.slash" },
       { sharpsharpSym,        QT_TRANSLATE_NOOP("symbol", "sharp sharp"),          "accidentals.doublesharp" },
+      { soriSym,              QT_TRANSLATE_NOOP("symbol", "sori"),                 "accidentals.sori" },
+  	 	{ koronSym,             QT_TRANSLATE_NOOP("symbol", "koron"),                "accidentals.koron" },
+      
       { rightparenSym,        QT_TRANSLATE_NOOP("symbol", "right parenthesis"),    "accidentals.rightparen" },
       { leftparenSym,         QT_TRANSLATE_NOOP("symbol", "left parenthesis"),     "accidentals.leftparen" },
 
