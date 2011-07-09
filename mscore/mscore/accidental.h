@@ -60,6 +60,8 @@ enum AccidentalType {
       ACC_NATURAL_ARROW_UP,
       ACC_NATURAL_ARROW_DOWN,
       ACC_NATURAL_ARROW_BOTH,
+      ACC_SORI,
+      ACC_KORON,
       ACC_END
       };
 

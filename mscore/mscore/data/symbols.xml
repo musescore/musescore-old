@@ -1362,4 +1362,16 @@
     <attach x="6.94992" y="-1.30693"/>
     <bbox x="0" y="-2.75003" w="6.94992" h="5.50006"/>
     </Glyph>
+  <Glyph>
+    <name>accidentals.sori</name>
+    <code>0xe1d4</code>
+    <attach x="5.50003" y="0"/>
+    <bbox x="0" y="-7.5" w="9.2" h="15"/>
+    </Glyph>
+  <Glyph>
+    <name>accidentals.koron</name>
+    <code>0xe1d5</code>
+    <attach x="5.50003" y="0"/>
+    <bbox x="0" y="-5.1" w="5.50003" h="14.1"/>
+    </Glyph>
   </museScore>
