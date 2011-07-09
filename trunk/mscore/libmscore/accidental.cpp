@@ -61,7 +61,9 @@ Acc accList[] = {
       Acc("flat arrow both",     QT_TRANSLATE_NOOP("accidental", "flat arrow both"),     0, 0, flatArrowBothSym),
       Acc("natural arrow up",    QT_TRANSLATE_NOOP("accidental", "natural arrow up"),    0, 0, naturalArrowUpSym),
       Acc("natural arrow down",  QT_TRANSLATE_NOOP("accidental", "natural arrow down"),  0, 0, naturalArrowDownSym),
-      Acc("natural arrow both",  QT_TRANSLATE_NOOP("accidental", "natural arrow both"),  0, 0, naturalArrowBothSym)
+      Acc("natural arrow both",  QT_TRANSLATE_NOOP("accidental", "natural arrow both"),  0, 0, naturalArrowBothSym),
+      Acc("sori",                QT_TRANSLATE_NOOP("accidental", "sori"),                0, 0, soriSym),
+      Acc("koron",               QT_TRANSLATE_NOOP("accidental", "koron"),               0, 0, koronSym)
       };
 
 //---------------------------------------------------------

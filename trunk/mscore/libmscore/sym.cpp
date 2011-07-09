@@ -76,6 +76,9 @@ SymbolNames lilypondNames[] = {
       { flatflatSym,          QT_TRANSLATE_NOOP("symbol", "flat flat"),            "accidentals.flatflat" },
       { flatflatslashSym,     QT_TRANSLATE_NOOP("symbol", "flat flat slash"),      "accidentals.flatflat.slash" },
       { sharpsharpSym,        QT_TRANSLATE_NOOP("symbol", "sharp sharp"),          "accidentals.doublesharp" },
+      { soriSym,              QT_TRANSLATE_NOOP("symbol", "sori"),                 "accidentals.sori" },
+      { koronSym,             QT_TRANSLATE_NOOP("symbol", "koron"),                 "accidentals.koron" },
+
       { rightparenSym,        QT_TRANSLATE_NOOP("symbol", "right parenthesis"),    "accidentals.rightparen" },
       { leftparenSym,         QT_TRANSLATE_NOOP("symbol", "left parenthesis"),     "accidentals.leftparen" },
 
@@ -660,7 +663,7 @@ void initSymbols(int idx)
       for (unsigned int i = 0; i < sizeof(lilypondNames)/sizeof(*lilypondNames); ++i)
             lnhash[QString(lilypondNames[i].name)] = lilypondNames[i].msIndex;
 
-      QString path = idx == 0 ? ":/data/symbols.xml" : ":/data/gonville.xml";
+      QString path = idx == 0 ? ":/fonts/mscore20.xml" : ":/fonts/gonville.xml";
       QFile f(path);
       if (!f.open(QFile::ReadOnly)) {
             printf("cannot open symbols file\n");

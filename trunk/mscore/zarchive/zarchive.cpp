@@ -162,6 +162,8 @@ Zip::Zip()
 	// keep an unsigned pointer so we avoid to over bloat the code with casts
 	uBuffer  = (uchar*) buffer1;
 	crcTable = (quint32*) get_crc_table();
+	memset(buffer1, 0, sizeof(buffer1));
+	memset(buffer2, 0, sizeof(buffer2));
       }
 
 Zip::~Zip()

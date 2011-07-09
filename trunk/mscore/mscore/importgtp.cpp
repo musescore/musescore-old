@@ -1895,7 +1895,7 @@ void GuitarPro4::read(QFile* fp)
                         if (dotted)
                               l = l + (l/2);
                         cr->setDuration(l);
-                        if (cr->type() == REST && pause == 0)
+                        if (cr->type() == REST && (pause == 0 || l == measure->len()))
                               cr->setDurationType(Duration::V_MEASURE);
                         else
                               cr->setDurationType(d);

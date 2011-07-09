@@ -1,3 +1,6 @@
+9.jul (ws)
+      - new quartertone accidentals: sori, koron
+      - moved fonts from mscore/mscore/fonts to mscore/fonts
 8.jul (ws)
       - fix lyrics for guitar pro import
       - fix #11430: Cancel on General Style dlg box crashes if no edits (patch from miwarre)

@@ -153,6 +153,8 @@ enum {
       flatflatSym,
       flatflatslashSym,
       sharpsharpSym,
+      soriSym,
+      koronSym,
 
       rightparenSym,
       leftparenSym,
