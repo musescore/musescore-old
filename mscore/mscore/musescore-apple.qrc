@@ -12,21 +12,21 @@
       <file>data/reload.png</file>
       <file>data/tab_remove.png</file>
       <file>data/table.svg</file>
-      <file>data/symbols.xml</file>
-      <file>data/gonville.xml</file>
-      <file>fonts/gonville-20.otf</file>
-      <file>fonts/mscore-20.otf</file>
-      <file>fonts/mscore1-20.ttf</file>
-      <file>fonts/MuseJazz.ttf</file>
-      
-      <file>fonts/FreeSerifMscore.ttf</file>
-      <file>fonts/FreeSerifBold.ttf</file>
-      <file>fonts/FreeSans.ttf</file>
-      
-      <file>fonts/mscore_tab_baroque.ttf</file>
-      <file>fonts/mscore_tab_modern.ttf</file>
-      <file>fonts/mscore_tab_renaiss.ttf</file>
-      <file>fonts/mscore_tab_renaiss2.ttf</file>
+
+      <file alias="fonts/mscore20.xml">../fonts/mscore20.xml</file>
+      <file alias="fonts/gonville.xml">../fonts/gonville.xml</file>
+      <file alias="fonts/gonville-20.otf">../fonts/gonville-20.otf</file>
+      <file alias="fonts/mscore-20.otf">../fonts/mscore-20.otf</file>
+      <file alias="fonts/mscore1-20.ttf">../fonts/mscore1-20.ttf</file>
+      <file alias="fonts/MuseJazz.ttf">../fonts/MuseJazz.ttf</file>
+      <file alias="fonts/FreeSerifMscore.ttf">../fonts/FreeSerifMscore.ttf</file>
+      <file alias="fonts/FreeSerifBold.ttf">../fonts/FreeSerifBold.ttf</file>
+      <file alias="fonts/FreeSans.ttf">../fonts/FreeSans.ttf</file>
+      <file alias="fonts/mscore_tab_baroque.ttf">../fonts/mscore_tab_baroque.ttf</file>
+      <file alias="fonts/mscore_tab_modern.ttf">../fonts/mscore_tab_modern.ttf</file>
+      <file alias="fonts/mscore_tab_renaiss.ttf">../fonts/mscore_tab_renaiss.ttf</file>
+      <file alias="fonts/mscore_tab_renaiss2.ttf">../fonts/mscore_tab_renaiss2.ttf</file>
+
       <file alias="data/instruments.xml">../share/templates/instruments.xml</file>
       <file>data/splash.jpg</file>
       <file alias="data/Promenade_Example.mscz">../demos/promenade.mscz</file>

@@ -529,7 +529,7 @@ void Note::draw(Painter* painter) const
                   if (!tab->linesThrough() || fretConflict()) {
                         double currSpatium = spatium();
                         double d  = currSpatium * .2;
-                        QRectF bb = bbox().adjusted(-d, 0.0, d, 0.0);
+                        QRectF bb = bbox().adjusted(-d, d, d, -d);
                         painter->drawBackground(bb);
                         if (fretConflict()) {          //on fret conflict, draw on red background
                               painter->save();
