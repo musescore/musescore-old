@@ -155,6 +155,9 @@ Var AR_RegFlags
 
   !define MUI_HEADERIMAGE
   !define MUI_ABORTWARNING
+  !define MUI_FINISHPAGE_LINK "http://musescore.org"
+  !define MUI_FINISHPAGE_LINK_LOCATION "http://musescore.org"
+  !define MUI_FINISHPAGE_RUN "$INSTDIR\bin\@CPACK_PACKAGE_NAME@.exe"
     
 ;--------------------------------
 ; path functions
