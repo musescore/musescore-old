@@ -36,6 +36,15 @@ void PainterQt::drawTextHCentered(qreal x, qreal y, const QString& s)
       }
 
 //---------------------------------------------------------
+//   drawTextVCentered
+//---------------------------------------------------------
+
+void PainterQt::drawTextVCentered(qreal x, qreal y, const QString& s)
+      {
+      _painter->drawText(QRectF(x, y, 0.0, 0.0), Qt::AlignVCenter|Qt::TextDontClip, s);
+      }
+
+//---------------------------------------------------------
 //   setLineWidth
 //---------------------------------------------------------
 

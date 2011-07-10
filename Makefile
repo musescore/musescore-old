@@ -28,10 +28,10 @@ VERSION   = "2.0b${REVISION}"
 ROOT=`pwd`
 
 release:
-	if test ! -d build;                              \
+	if test ! -d build.release;                      \
          then                                          \
-            mkdir build;                               \
-            cd build;                                  \
+            mkdir build.release;                       \
+            cd build.release;                          \
             cmake -DCMAKE_BUILD_TYPE=RELEASE	       \
             	  -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
             	   ../mscore; 			       \
@@ -42,10 +42,10 @@ release:
          fi;
 
 debug:
-	if test ! -d build;                              \
+	if test ! -d build.debug;                        \
          then                                          \
-            mkdir build;                               \
-            cd build;                                  \
+            mkdir build.debug;                         \
+            cd build.debug;                            \
             cmake -DCMAKE_BUILD_TYPE=DEBUG	       \
             	  -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
             	   ../mscore; 			       \
@@ -84,7 +84,7 @@ win32:
 #
 
 clean:
-	-rm -rf build
+	-rm -rf build.debug build.release
 	-rm -rf win32build win32install
 
 #
@@ -114,8 +114,8 @@ revision:
 version: revision
 	@echo ${VERSION}
 
-install:
-	cd build; make install
+install: release revision
+	cd build.release; make install
 
 #
 #  linux
