@@ -1644,12 +1644,12 @@ void ScoreView::cmdTuplet(int n)
       {
       _score->startCmd();
       if (noteEntryMode()) {
+            _score->expandVoice();
             //stop creating tuplets
             if(_score->inputState().cr()->fraction() <= Fraction(1,128)) {
                   _score->endCmd();
                   return; 
                   }
-            _score->expandVoice();
             _score->changeCRlen(_score->inputState().cr(), _score->inputState().duration());
             if (_score->inputState().cr())
                   cmdTuplet(n, _score->inputState().cr());
