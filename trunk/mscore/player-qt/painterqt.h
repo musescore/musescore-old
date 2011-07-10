@@ -34,6 +34,7 @@ class PainterQt : public Painter {
 
       virtual void translate(const QPointF& pt) { _painter->translate(pt); }
       virtual void scale(qreal v)               { _painter->scale(v, v);   }
+      virtual void scale(qreal x, qreal y)      { _painter->scale(x, y);   }
       virtual void rotate(qreal v)              { _painter->rotate(v);     }
 
       virtual void setFont(const QFont& f)      { _painter->setFont(f);    }
@@ -74,6 +75,7 @@ class PainterQt : public Painter {
 
       virtual void drawText(const QTextDocument*, const QColor&, int cursor);
       virtual void drawTextHCentered(qreal x, qreal y, const QString& s);
+      virtual void drawTextVCentered(qreal x, qreal y, const QString& s);
 #if QT_VERSION >= 0x040800
       virtual void drawGlyphRun(const QPointF& pt, const QGlyphRun& gr) const {
             _painter->drawGlyphRun(pt, gr);
