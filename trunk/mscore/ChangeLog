@@ -1,4 +1,5 @@
 11.jul (ws)
+      - fix #9907: Pasting multiple rests (one with overlap) causes crash
       - fix #11446: template directory ignored
       - fix #10362: Backw. comp.: lyrics underscores from 1.0 are sometimes corrupted
         (patch from miwarre)

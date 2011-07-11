@@ -1756,7 +1756,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                               int track = dstStaffIdx * VOICES + voice;
                               cr->setTrack(track);
                               int tick = curTick - tickStart + dstTick;
-
+printf("============== tick: %d\n", tick);
                               //
                               // check for tuplet
                               //
@@ -1973,6 +1973,7 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
 
 void Score::pasteChordRest(ChordRest* cr, int tick)
       {
+// printf("pasteChordRest %s at %d\n", cr->name(), tick);
       if (cr->type() == CHORD) {
             // set note track
             // check if staffMove moves a note to a
@@ -2052,26 +2053,21 @@ void Score::pasteChordRest(ChordRest* cr, int tick)
                   }
             else {
                   // split Rest
-                  Rest* r  = static_cast<Rest*>(cr);
-                  int rest = r->actualTicks();
-                  int len  = measureEnd - r->tick();
-                  rest    -= len;
-                  Duration d;
-                  d.setVal(len);
-                  r->setDurationType(d);
-                  undoAddCR(r, measure, tick);
-                  while (rest) {
-                        Rest* r2 = static_cast<Rest*>(r->clone());
-                        int tick = r->tick() + r->actualTicks();
-                        measure = tick2measure(tick);
-                        len = measure->ticks() > rest ? rest : measure->ticks();
-                        Duration d;
-                        d.setVal(len);
-                        r2->setDurationType(d);
-				rest -= len;
+                  Rest* r       = static_cast<Rest*>(cr);
+                  Fraction rest = r->duration();
+
+                  while (!rest.isZero()) {
+                        Rest* r2      = static_cast<Rest*>(r->clone());
+                        measure       = tick2measure(tick);
+                        Fraction mlen = Fraction::fromTicks(measure->tick() + measure->ticks() - tick);
+                        Fraction len  = rest > mlen ? mlen : rest;
+                        r2->setDuration(len);
+                        r2->setDurationType(Duration(len));
                         undoAddCR(r2, measure, tick);
-                        r = r2;
+                        rest -= len;
+                        tick += r2->actualTicks();
                         }
+                  delete r;
                   }
             }
       else {
