@@ -737,11 +737,16 @@ printf("  akkumulated %d/%d rest %d/%d (-%d/%d)\n",
             if (sd.isZero())
                   return akkumulated;
             }
-      int ticks = measure->tick() + measure->ticks() - segment->tick();
-      Fraction td = Fraction::fromTicks(ticks);
-      if (td > sd)
-            td = sd;
-      akkumulated += td;
+//      int ticks = measure->tick() + measure->ticks() - segment->tick();
+//      Fraction td = Fraction::fromTicks(ticks);
+// NEEDS REVIEW !!
+// once the statement below is removed, these two lines do nothing
+//      if (td > sd)
+//            td = sd;
+// ???  akkumulated should already contain the total value of the created gap: line 749, 811 or 838
+//      this line creates a double-sized gap if the needed gap crosses a measure boundary
+//      by adding again the duration already added in line 838
+//      akkumulated += td;
       return akkumulated;
       }
 

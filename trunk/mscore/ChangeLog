@@ -1,3 +1,6 @@
+11.jul (ws)
+      - fix #10826: Notes exceeding measure contents corrupt measure total value
+        (patch from miwarre)
 9.jul (ws)
       - new quartertone accidentals: sori, koron
       - moved fonts from mscore/mscore/fonts to mscore/fonts
