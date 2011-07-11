@@ -2082,7 +2082,7 @@ int main(int argc, char* av[])
             argv.removeAt(i);
             }
       mscoreGlobalShare = getSharePath();
-      iconPath = externalIcons ? mscoreGlobalShare + QString("/icons/") :  QString(":/data/");
+      iconPath = externalIcons ? mscoreGlobalShare + QString("icons/") :  QString(":/data/");
       iconGroup = "icons-dark/";
 
       if (!converterMode) {
