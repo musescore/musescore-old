@@ -328,10 +328,6 @@ enum {
       note64Sym,
       dotdotSym,
 
-      wholediamond2headSym,
-      halfdiamond2headSym,
-      diamond2headSym,
-
       longaupaltSym,
       longadownaltSym,
       brevisheadaltSym,
