@@ -103,8 +103,10 @@ void TextStyleDialog::buttonClicked(QAbstractButton* b)
                   done(1);
                   break;
             default:
-                  cs->undo()->current()->unwind();
-                  cs->setLayoutAll(true);
+                  if (cs->undo()->current()) {
+                        cs->undo()->current()->unwind();
+                        cs->setLayoutAll(true);
+                        }
                   done(0);
                   break;
             }
