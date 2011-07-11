@@ -756,46 +756,69 @@ printf("  akkumulated %d/%d rest %d/%d (-%d/%d)\n",
 //    chord/rest
 //    - cr is top level (not part of a tuplet)
 //    - do not stop at measure end
-//
-//    return size of actual gap
 //---------------------------------------------------------
 
 bool Score::makeGap1(int tick, int staffIdx, Fraction len)
       {
       ChordRest* cr = 0;
-      Segment* seg = tick2segment(tick, true);
+      Segment* seg = tick2segment(tick, true, SegChordRest | SegGrace);
       if (!seg) {
             printf("1:makeGap1: no segment at %d\n", tick);
             return false;
             }
-      while (seg && !(seg->subtype() & (SegChordRest | SegGrace)))
-            seg = seg->next1();
-      if (!seg) {
-            printf("2:makeGap1: no segment at %d\n", tick);
-            return false;
-            }
-      cr = static_cast<ChordRest*>(seg->element(staffIdx * VOICES));
+      int track = staffIdx * VOICES;
+      cr = static_cast<ChordRest*>(seg->element(track));
       if (!cr) {
             if (seg->subtype() & SegGrace) {
-                  while (seg && !(seg->subtype() & SegChordRest))
-                        seg = seg->next1();
-                  cr = static_cast<ChordRest*>(seg->element(staffIdx * VOICES));
-                  if (!cr) {
+                  seg = seg->next1(SegChordRest);
+                  if (!seg || !seg->element(track)) {
                         printf("makeGap1: no chord/rest at %d staff %d\n", tick, staffIdx);
                         return false;
+                        }
+                  cr = static_cast<ChordRest*>(seg->element(track));
+                  }
+            else {
+                  // check if we are in the middle of a chord/rest
+                  Segment* seg1 = 0;
+                  for (;;) {
+                        seg1 = seg->prev(SegChordRest);
+                        if (seg1 == 0) {
+                              printf("1:makeGap1: no segment at %d\n", tick);
+                              return false;
+                              }
+                        if (seg1->element(track))
+                              break;
+                        }
+                  ChordRest* cr1 = static_cast<ChordRest*>(seg1->element(track));
+                  Fraction dstF = Fraction::fromTicks(tick - cr1->tick());
+                  len -= cr1->duration() - dstF;
+                  undoChangeChordRestLen(cr1, Duration(dstF));
+                  for (;;) {
+                        seg = seg->next1(SegChordRest | SegGrace);
+                        if (seg == 0) {
+                              printf("2:makeGap1: no segment\n");
+                              return false;
+                              }
+                        if (seg->element(track)) {
+                              tick = seg->tick();
+                              cr = static_cast<ChordRest*>(seg->element(track));
+                              break;
+                              }
                         }
                   }
             }
 
-      Fraction gap;
       for (;;) {
-            if(!cr)
+            if (!cr) {
+                  printf("makeGap1: cannot make gap\n");
                   return false;
+                  }
             Fraction l = makeGap(cr->segment(), cr->track(), len, 0);
-            if (l.isZero())
-                  break;
+            if (l.isZero()) {
+                  printf("makeGap1: makeGap returns zero gap\n");
+                  return false;
+                  }
             len -= l;
-            gap += l;
             if (len.isZero())
                   break;
             // go to next cr
@@ -813,7 +836,6 @@ bool Score::makeGap1(int tick, int staffIdx, Fraction len)
             int track  = cr->track();
             cr = static_cast<ChordRest*>(s->element(track));
             if (cr == 0) {
-                  // addRest(s->tick(), track, Duration(Duration::V_MEASURE), 0);
                   addRest(s, track, Duration(Duration::V_MEASURE), 0);
                   cr = static_cast<ChordRest*>(s->element(track));
                   }
@@ -1708,8 +1730,10 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                   int staffIdx = i + dstStaffStart;
                   if (staffIdx >= nstaves())
                         break;
-                  if (!makeGap1(dst->tick(), staffIdx, Fraction::fromTicks(tickLen)))
+                  if (!makeGap1(dst->tick(), staffIdx, Fraction::fromTicks(tickLen))) {
+printf("cannot make gap in staff %d at tick %d\n", staffIdx, dst->tick());
                         blackList.insert(staffIdx);
+                        }
                   }
             bool pasted = false;
             for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
@@ -1756,7 +1780,6 @@ void Score::pasteStaff(QDomElement e, ChordRest* dst)
                               int track = dstStaffIdx * VOICES + voice;
                               cr->setTrack(track);
                               int tick = curTick - tickStart + dstTick;
-printf("============== tick: %d\n", tick);
                               //
                               // check for tuplet
                               //
