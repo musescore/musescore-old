@@ -20,13 +20,15 @@
 
 #include "newwizard.h"
 #include "musescore.h"
+#include "preferences.h"
+#include "palette.h"
+
 #include "libmscore/instrtemplate.h"
 #include "libmscore/score.h"
 #include "libmscore/staff.h"
 #include "libmscore/clef.h"
 #include "libmscore/part.h"
 #include "libmscore/drumset.h"
-#include "palette.h"
 #include "libmscore/keysig.h"
 #include "libmscore/measure.h"
 #include "libmscore/tablature.h"
@@ -533,31 +535,33 @@ NewWizardPage4::NewWizardPage4(QWidget* parent)
       setTitle(tr("Create New Score"));
       setSubTitle(tr("Select Template File:"));
 
-      QStringList nameFilter;
-      nameFilter.append("*.mscz");
-      nameFilter.append("*.mscx");
+      templateFileDialog = new QFileDialog;
+      templateFileDialog->setParent(this);
+      templateFileDialog->setModal(false);
+      templateFileDialog->setSizeGripEnabled(false);
+      templateFileDialog->setFileMode(QFileDialog::ExistingFile);
+      templateFileDialog->setOption(QFileDialog::DontUseNativeDialog, true);
+      templateFileDialog->setWindowTitle(tr("MuseScore: Select Template"));
+      QString filter = tr("MuseScore Template Files (*.mscz *.mscx)");
+      templateFileDialog->setNameFilter(filter);
 
-      model = new QFileSystemModel(this);
-      model->setFilter(QDir::Files|QDir::AllDirs|QDir::NoDotAndDotDot);
-      model->setNameFilterDisables(false);
-      model->setNameFilters(nameFilter);
+      QFileInfo myTemplates(preferences.myTemplatesPath);
+      if (myTemplates.isRelative())
+            myTemplates.setFile(QDir::home(), preferences.myTemplatesPath);
+      QList<QUrl> urls;
+      urls.append(QUrl::fromLocalFile(mscoreGlobalShare + "templates"));
+      urls.append(QUrl::fromLocalFile(myTemplates.absoluteFilePath()));
+      templateFileDialog->setSidebarUrls(urls);
 
-      tree  = new QTreeView;
-      tree->setSelectionMode(QAbstractItemView::SingleSelection);
-      tree->setSelectionBehavior(QAbstractItemView::SelectRows);
-
-      tree->setModel(model);
-      tree->header()->hideSection(1);
-      tree->header()->hideSection(2);
-      tree->header()->hideSection(3);
+      QSettings settings;
+      templateFileDialog->restoreState(settings.value("templateFileDialog").toByteArray());
+      templateFileDialog->setAcceptMode(QFileDialog::AcceptOpen);
 
       QGridLayout* grid = new QGridLayout;
-      grid->addWidget(tree, 0, 0);
+      grid->addWidget(templateFileDialog, 0, 0);
       setLayout(grid);
 
-      QItemSelectionModel* sm = tree->selectionModel();
-      connect(sm, SIGNAL(selectionChanged(const QItemSelection&, const QItemSelection&)),
-         this, SLOT(templateChanged(const QItemSelection&, const QItemSelection&)));
+      connect(templateFileDialog, SIGNAL(currentChanged(const QString&)), SLOT(templateChanged(const QString&)));
       }
 
 //---------------------------------------------------------
@@ -566,12 +570,49 @@ NewWizardPage4::NewWizardPage4(QWidget* parent)
 
 void NewWizardPage4::initializePage()
       {
-      QString path(mscoreGlobalShare);
-      path += "/templates";
-      QDir dir(path);
-      model->setRootPath(dir.absolutePath());
-      tree->setRootIndex(model->index(dir.absolutePath()));
+      // modify dialog
+      // possibly this is not portable as we make some assumptions on the
+      // implementation of QFileDialog
+
+      QList<QPushButton*>widgets = templateFileDialog->findChildren<QPushButton*>();
+      foreach(QPushButton* w, widgets) {
+            w->setEnabled(false);
+            w->setVisible(false);
+            }
+      path.clear();
       }
+
+//---------------------------------------------------------
+//   isComplete
+//---------------------------------------------------------
+
+bool NewWizardPage4::isComplete() const
+      {
+      return !path.isEmpty();
+      }
+
+//---------------------------------------------------------
+//   templateChanged
+//---------------------------------------------------------
+
+void NewWizardPage4::templateChanged(const QString& s)
+      {
+      path = s;
+      emit completeChanged();
+      }
+
+//---------------------------------------------------------
+//   templatePath
+//---------------------------------------------------------
+
+QString NewWizardPage4::templatePath() const
+      {
+      bool useTemplate = field("useTemplate").toBool();
+      if (useTemplate)
+            return path;
+      return QString();
+      }
+
 
 //---------------------------------------------------------
 //   NewWizardPage5
@@ -624,50 +665,6 @@ KeySigEvent NewWizardPage5::keysig() const
       int idx    = sp->getSelectedIdx();
       Element* e = sp->element(idx);
       return static_cast<KeySig*>(e)->keySigEvent();
-      }
-
-//---------------------------------------------------------
-//   isComplete
-//---------------------------------------------------------
-
-bool NewWizardPage4::isComplete() const
-      {
-      QItemSelectionModel* sm = tree->selectionModel();
-      QModelIndexList l = sm->selectedRows();
-      bool hasSelection = false;
-      if (!l.isEmpty()) {
-            QModelIndex idx = l.front();
-            hasSelection = idx.isValid();
-            }
-      return hasSelection;
-      }
-
-//---------------------------------------------------------
-//   templateChanged
-//---------------------------------------------------------
-
-void NewWizardPage4::templateChanged(const QItemSelection&, const QItemSelection&)
-      {
-      emit completeChanged();
-      }
-
-//---------------------------------------------------------
-//   templatePath
-//---------------------------------------------------------
-
-QString NewWizardPage4::templatePath() const
-      {
-      bool useTemplate = field("useTemplate").toBool();
-      if (useTemplate) {
-            QItemSelectionModel* sm = tree->selectionModel();
-            QModelIndexList l = sm->selectedRows();
-            if (l.isEmpty())
-                  return QString();
-            QModelIndex idx = l.front();
-            if (idx.isValid())
-                  return model->filePath(idx);
-            }
-      return QString();
       }
 
 //---------------------------------------------------------

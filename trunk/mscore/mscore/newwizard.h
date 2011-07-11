@@ -141,16 +141,17 @@ class NewWizardPage3 : public QWizardPage {
 
 //---------------------------------------------------------
 //   NewWizardPage4
+//    request template file
 //---------------------------------------------------------
 
 class NewWizardPage4 : public QWizardPage {
       Q_OBJECT
 
-      QFileSystemModel* model;
-      QTreeView* tree;
+      QFileDialog* templateFileDialog;
+      QString path;
 
    private slots:
-      void templateChanged(const QItemSelection&, const QItemSelection&);
+      void templateChanged(const QString&);
 
    public:
       NewWizardPage4(QWidget* parent = 0);
