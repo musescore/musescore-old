@@ -1,4 +1,6 @@
 11.jul (ws)
+      - fix #10362: Backw. comp.: lyrics underscores from 1.0 are sometimes corrupted
+        (patch from miwarre)
       - fix #11448: Cancel on Style/TextStyle dlg box crashes if no edits
         (patch from miwarre)
       - fix #10826: Notes exceeding measure contents corrupt measure total value

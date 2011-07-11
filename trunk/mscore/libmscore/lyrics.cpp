@@ -99,6 +99,8 @@ void Lyrics::write(Xml& xml) const
 
 void Lyrics::read(QDomElement e)
       {
+      int   iEndTick = 0;           // used for backward compatibility
+
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
@@ -118,8 +120,9 @@ void Lyrics::read(QDomElement e)
                         printf("bad syllabic property\n");
                   }
             else if (tag == "endTick") {          // obsolete
-                  _ticks = i - score()->curTick;
-                  printf("Lyrics::endTick: %d  ticks %d\n", i, _ticks);
+                  // store <endTick> tag value until a <ticks> tag has been read
+                  // which positions this lyrics element in the score
+                  iEndTick = i;
                   }
             else if (tag == "ticks")
                   _ticks = i;
@@ -130,6 +133,11 @@ void Lyrics::read(QDomElement e)
                   }
             else if (!Text::readProperties(e))
                   domError(e);
+            }
+      // if any endTick, make it relative to current tick
+      if(iEndTick) {
+            _ticks = iEndTick - score()->curTick;
+            printf("Lyrics::endTick: %d  ticks %d\n", iEndTick, _ticks);
             }
       }
 
