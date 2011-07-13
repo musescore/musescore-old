@@ -19,6 +19,7 @@
 const int MAX_BARS = 255;
 
 class BBFile;
+class MNote;
 
 //---------------------------------------------------------
 //   BBTrack
@@ -135,6 +136,7 @@ class BBFile {
 
       int timesigZ() { return styles[_style].timesigZ; }
       int timesigN() { return styles[_style].timesigN; }
+      int processPendingNotes(Score*, QList<MNote*>* notes, int, int);
 
    public:
       BBFile();
@@ -149,6 +151,7 @@ class BBFile {
       int endChorus() const          { return _endChorus;   }
       int repeats() const            { return _repeats;     }
       int key() const                { return _key;         }
+      void convertTrack(Score* score, BBTrack* track, int staffIdx);
       };
 
 #endif

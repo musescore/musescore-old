@@ -52,10 +52,10 @@
 #include <string.h>
 #include <math.h>
 #include "keyfinder.h"
-#include "midifile.h"
+// #include "midifile.h"
 #include "al/sig.h"
-#include "midifile.h"
 #include "pitchspelling.h"
+#include "event.h"
 
 //---------------------------------------------------------
 //   SBeat
@@ -799,6 +799,7 @@ static void best_key_analysis()
             }
       }
 
+#if 0
 //---------------------------------------------------------
 //   findKey
 //---------------------------------------------------------
@@ -924,4 +925,5 @@ int findKey(MidiTrack* mt, AL::TimeSigMap* sigmap)
 
       return xkey;
       }
+#endif
 

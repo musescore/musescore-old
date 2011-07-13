@@ -20,6 +20,6 @@ namespace AL {
       class TimeSigMap;
       };
 
-extern int findKey(MidiTrack*, AL::TimeSigMap*);
+// extern int findKey(MidiTrack*, AL::TimeSigMap*);
 #endif
 

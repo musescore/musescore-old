@@ -15,7 +15,7 @@
 #define __EVENT_H__
 
 class Note;
-class MidiFile;
+// class MidiFile;
 class Xml;
 
 //---------------------------------------------------------
@@ -138,7 +138,7 @@ class Event {
       Event& operator=(const Event&);
       bool operator==(const Event&) const;
 
-      void write(MidiFile*) const;
+//      void write(MidiFile*) const;
       void write(Xml&) const;
 
       bool isChannelEvent() const;
@@ -201,6 +201,9 @@ class EventMap : public QMap<int, Event> {};
 
 typedef EventList::iterator iEvent;
 typedef EventList::const_iterator ciEvent;
+
+extern QString midiMetaName(int meta);
+
 
 #endif
 

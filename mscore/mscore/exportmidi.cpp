@@ -22,7 +22,7 @@
 #include "libmscore/part.h"
 #include "libmscore/staff.h"
 #include "al/tempo.h"
-#include "libmscore/midifile.h"
+#include "midifile.h"
 #include "libmscore/event.h"
 #include "al/sig.h"
 #include "libmscore/key.h"

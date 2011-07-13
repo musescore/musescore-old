@@ -1382,7 +1382,7 @@ void Style::addTextStyle(const TextStyle& ts)
 //   removeTextStyle
 //---------------------------------------------------------
 
-void Style::removeTextStyle(const TextStyle& ts)
+void Style::removeTextStyle(const TextStyle& /*ts*/)
       {
       // TODO: d->_textStyles.append(ts);
       }
