@@ -127,7 +127,8 @@ void KeyCanvas::paintEvent(QPaintEvent*)
       foreach(Accidental* a, accidentals) {
             p.save();
             p.translate(a->canvasPos());
-            p.setPen(QPen(a->curColor()));
+//            p.setPen(QPen(a->curColor()));
+            p.setPen(QPen(Qt::white));
             a->draw(&painter);
             p.restore();
             }
@@ -306,8 +307,16 @@ KeyEditor::KeyEditor(QWidget* parent)
 
       l->addWidget(accPalette);
 
-      connect(addButton, SIGNAL(clicked()), SLOT(addClicked()));
+      connect(addButton,   SIGNAL(clicked()), SLOT(addClicked()));
       connect(clearButton, SIGNAL(clicked()), SLOT(clearClicked()));
+      connect(sp,          SIGNAL(changed()), SLOT(setDirty()));
+
+      //
+      // set all "buildin" key signatures to read only
+      //
+      int n = sp->size();
+      for (int i = 0; i < n; ++i)
+            sp->setCellReadOnly(i, true);
 
       if (!useFactorySettings) {
             QFile f(dataPath + "/" + "keysigs.xml");
@@ -346,6 +355,7 @@ void KeyEditor::addClicked()
       ks->setCustom(symbols);
       sp->append(ks, "custom");
       _dirty = true;
+      sp->updateGeometry();
       }
 
 //---------------------------------------------------------

@@ -1,4 +1,5 @@
 13.jul (ws)
+      - fix #11469: Selecting "Time Signatures" in palette causes crash
       - fix non default profile: missing palette symbols
       - fix #11473: Preference values overwritten on program initialisation
 11.jul (ws)

@@ -72,6 +72,33 @@
 extern bool useFactorySettings;
 
 //---------------------------------------------------------
+//   IconActions
+//---------------------------------------------------------
+
+struct IconAction {
+      int subtype;
+      const char* action;
+      };
+
+//---------------------------------------------------------
+//   populateIconPalette
+//---------------------------------------------------------
+
+static void populateIconPalette(Palette* p, const IconAction* a)
+      {
+      while (a->subtype != -1) {
+            Icon* ik = new Icon(gscore);
+            ik->setSubtype(a->subtype);
+            Shortcut* s = getShortcut(a->action);
+            QAction* action = getAction(s);
+            QIcon icon(action->icon());
+            ik->setAction(a->action, icon);
+            p->append(ik, s->help);
+            ++a;
+            }
+      }
+
+//---------------------------------------------------------
 //   newKeySigPalette
 //---------------------------------------------------------
 
@@ -160,27 +187,15 @@ void MuseScore::populatePalette()
       notePalette->setGrid(32, 40);
       notePalette->setDrawGrid(true);
 
-      struct IconActions {
-            int subtype;
-            const char* action;
-            };
-      static const IconActions gna[] = {
+      static const IconAction gna[] = {
             { ICON_ACCIACCATURA, "acciaccatura" },
             { ICON_APPOGGIATURA, "appoggiatura" },
             { ICON_GRACE4,       "grace4" },
             { ICON_GRACE16,      "grace16" },
             { ICON_GRACE32,      "grace32" },
+            { -1, "" }
             };
-
-      for (uint i = 0; i < sizeof(gna)/sizeof(*gna); ++i) {
-            Icon* ik = new Icon(gscore);
-            ik->setSubtype(gna[i].subtype);
-            Shortcut* s = getShortcut(gna[i].action);
-            QAction* a = getAction(s);
-            QIcon icon(a->icon());
-            ik->setAction(gna[i].action, icon);
-            notePalette->append(ik, s->help);
-            }
+      populateIconPalette(notePalette, gna);
 
       paletteBox->addPalette(notePalette);
 
@@ -790,46 +805,19 @@ void MuseScore::populatePalette()
       sp->setGrid(27, 40);
       sp->setDrawGrid(true);
 
-      Icon* ik = new Icon(gscore);
-      ik->setSubtype(ICON_SBEAM);
-      ik->setAction("beam-start", getAction("beam-start")->icon());
-      sp->append(ik, tr("Start beam"));
+      static const IconAction bpa[] = {
+            { ICON_SBEAM,    "beam-start" },
+            { ICON_MBEAM,    "beam-mid" },
+            { ICON_NBEAM,    "no-beam" },
+            { ICON_BEAM32,   "beam32" },
+            { ICON_BEAM64,   "beam64" },
+            { ICON_AUTOBEAM, "auto-beam" },
+            { ICON_FBEAM1,   "fbeam1" },
+            { ICON_FBEAM2,   "fbeam2" },
+            { -1, ""}
+            };
 
-      ik = new Icon(gscore);
-      ik->setSubtype(ICON_MBEAM);
-      ik->setAction("beam-mid", getAction("beam-mid")->icon());
-      sp->append(ik, tr("Middle of beam"));
-
-      ik = new Icon(gscore);
-      ik->setSubtype(ICON_NBEAM);
-      ik->setAction("no-beam", getAction("no-beam")->icon());
-      sp->append(ik, tr("No beam"));
-
-      ik = new Icon(gscore);
-      ik->setSubtype(ICON_BEAM32);
-      ik->setAction("beam32", getAction("beam32")->icon());
-      sp->append(ik, tr("Start 1/32 subbeam"));
-
-      ik = new Icon(gscore);
-      ik->setSubtype(ICON_BEAM64);
-      ik->setAction("beam64", getAction("beam64")->icon());
-      sp->append(ik, tr("Start 1/64 subbeam"));
-
-      ik = new Icon(gscore);
-      ik->setSubtype(ICON_AUTOBEAM);
-      ik->setAction("auto-beam", getAction("auto-beam")->icon());
-      sp->append(ik, tr("Auto beam"));
-
-      ik = new Icon(gscore);
-      ik->setSubtype(ICON_FBEAM1);
-      ik->setAction("fbeam1", getAction("fbeam1")->icon());
-      sp->append(ik, tr("feathered beam"));
-
-      ik = new Icon(gscore);
-      ik->setSubtype(ICON_FBEAM2);
-      ik->setAction("fbeam2", getAction("fbeam2")->icon());
-      sp->append(ik, tr("feathered beam"));
-
+      populateIconPalette(sp, bpa);
       paletteBox->addPalette(sp);
 
       //-----------------------------------
