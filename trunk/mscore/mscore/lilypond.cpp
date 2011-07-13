@@ -18,6 +18,7 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
+#include "musescore.h"
 #include "libmscore/score.h"
 #include "libmscore/element.h"
 #include "libmscore/part.h"
@@ -84,15 +85,12 @@ class Lilypond {
 //    return true on success
 //---------------------------------------------------------
 
-bool Score::importLilypond(const QString& name)
+bool MuseScore::importLilypond(Score* score, const QString& name)
       {
-      Lilypond ly(this);
+      Lilypond ly(score);
       if (!ly.read(name))
             return false;
       ly.convert();
-
-      _saved = false;
-      _created = true;
       return true;
       }
 

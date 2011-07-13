@@ -76,6 +76,8 @@ class AlbumManager;
 class WebPageDockWidget;
 class ChordList;
 class EditTempo;
+class Capella;
+class CapVoice;
 
 extern QString mscoreGlobalShare;
 static const int PROJECT_LIST_LEN = 6;
@@ -340,6 +342,8 @@ class MuseScore : public QMainWindow {
       void gotoPreviousScore();
       void updateUndoRedo();
       void cmdAddChordName2();
+      void convertCapella(Score*, Capella* cap);
+      int readCapVoice(Score*, CapVoice* cvoice, int staffIdx, int tick);
 
    private slots:
       void autoSaveTimerTimeout();
@@ -525,24 +529,32 @@ class MuseScore : public QMainWindow {
       void endCmd();
       void printFile();
       bool exportFile();
-      bool saveAs(Score* s, bool saveCopy, const QString& path, const QString& ext);
+      bool saveAs(Score*, bool saveCopy, const QString& path, const QString& ext);
       bool savePsPdf(const QString& saveName, QPrinter::OutputFormat format);
-      bool readScore(Score* score, QString name);
+      bool readScore(Score*, QString name);
       bool saveAs(Score*, bool saveCopy = false);
       void addImage(Score*, Element*);
       bool importMidi(Score*, const QString& name);
       bool savePng(Score*, const QString& name, bool screenshot, bool transparent, double convDpi, QImage::Format format);
-      bool saveAudio(Score* score, const QString& name, const QString& type);
-      bool saveMp3(Score* score, const QString& name);
-      bool saveMxl(Score* score, const QString& name);
-      bool saveXml(Score* score, const QString& name);
-      bool saveMidi(Score* score, const QString& name);
+      bool saveAudio(Score*, const QString& name, const QString& type);
+      bool saveMp3(Score*, const QString& name);
+      bool saveMxl(Score*, const QString& name);
+      bool saveXml(Score*, const QString& name);
+      bool saveMidi(Score*, const QString& name);
       bool saveSvg(Score*, const QString& name);
       bool savePng(Score*, const QString& name);
-      bool saveLilypond(Score* score, const QString& name);
-      void convertMidi(Score* score, MidiFile* mf);
-      bool importPdf(Score* score, const QString& path);
-      bool importGTP(Score* score, const QString& name);
+      bool saveLilypond(Score*, const QString& name);
+      void convertMidi(Score*, MidiFile* mf);
+      bool importPdf(Score*, const QString& path);
+      bool importGTP(Score*, const QString& name);
+      bool importBww(Score*, const QString& path);
+      bool importMusicXml(Score*, const QString&);
+      bool importCompressedMusicXml(Score*, const QString&);
+      bool importMuseData(Score*, const QString& name);
+      bool importLilypond(Score*, const QString& name);
+      bool importBB(Score*, const QString& name);
+      bool importCapella(Score*, const QString& name);
+      bool importOve(Score*, const QString& name);
 
       void addTempo();
       void addMetronome();

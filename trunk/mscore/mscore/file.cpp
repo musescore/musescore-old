@@ -1446,6 +1446,34 @@ bool MuseScore::readScore(Score* score, QString name)
                   return false;
             }
       else {
+            typedef bool (MuseScore::*ImportFunction)(Score*, const QString&);
+            struct ImportDef {
+                  const char* extension;
+                  ImportFunction importF;
+                  };
+            ImportDef imports[] = {
+                  { "xml",  &MuseScore::importMusicXml           },
+                  { "mxl",  &MuseScore::importCompressedMusicXml },
+                  { "mid",  &MuseScore::importMidi               },
+                  { "midi", &MuseScore::importMidi               },
+                  { "kar",  &MuseScore::importMidi               },
+                  { "md",   &MuseScore::importMuseData           },
+                  { "ly",   &MuseScore::importLilypond           },
+                  { "mgu",  &MuseScore::importBB                 },
+                  { "sgu",  &MuseScore::importBB                 },
+                  { "cap",  &MuseScore::importCapella            },
+                  { "ove",  &MuseScore::importOve                },
+                  { "scw",  &MuseScore::importOve                },
+#ifdef OMR
+                  { "pdf",  &MuseScore::importPdf                },
+#endif
+                  { "bww",  &MuseScore::importBww                },
+                  { "gtp",  &MuseScore::importGTP                },
+                  { "gp3",  &MuseScore::importGTP                },
+                  { "gp4",  &MuseScore::importGTP                },
+                  { "gp5",  &MuseScore::importGTP                },
+                  };
+
             // import
             if (!preferences.importStyleFile.isEmpty()) {
                   QFile f(preferences.importStyleFile);
@@ -1453,60 +1481,25 @@ bool MuseScore::readScore(Score* score, QString name)
                   if (f.open(QIODevice::ReadOnly))
                         score->style()->load(&f);
                   }
-
-            if (csl == "xml") {
-                  if (!score->importMusicXml(name))
-                        return false;
-                  score->connectSlurs();
+            uint n = sizeof(imports)/sizeof(*imports);
+            uint i;
+            for (i = 0; i < n; ++i) {
+                  if (imports[i].extension == csl) {
+                        if ((this->*imports[i].importF)(score, name))
+                              return false;
+                        break;
+                        }
                   }
-            else if (csl == "mxl") {
-                  if (!score->importCompressedMusicXml(name))
-                        return false;
-                  score->connectSlurs();
-                  }
-            else if (csl == "mid" || csl == "midi" || csl == "kar") {
-                  if (!importMidi(score, name))
-                        return false;
-                  }
-            else if (csl == "md") {
-                  if (!score->importMuseData(name))
-                        return false;
-                  }
-            else if (csl == "ly") {
-                  if (!score->importLilypond(name))
-                        return false;
-                  }
-            else if (csl == "mgu" || csl == "sgu") {
-                  if (!score->importBB(name))
-                        return false;
-                  }
-            else if (csl == "cap") {
-                  if (!score->importCapella(name))
-                        return false;
-                  }
-            else if (csl == "ove" || csl == "scw") {
-                  if (!score->importOve(name))
-            	      return false;
-      	      }
-#ifdef OMR
-            else if (csl == "pdf") {
-                  if (!importPdf(score, name))
-                        return false;
-                  }
-#endif
-            else if (csl == "bww") {
-                  if (!score->importBww(name))
-                        return false;
-                  }
-            else if (csl == "gtp" || csl == "gp3" || csl == "gp4" || csl == "gp5") {
-                  if (!importGTP(score, name))
-                        return false;
-                  }
-            else {
+            if (i == n) {
                   printf("unknown file suffix <%s>, name <%s>\n", qPrintable(cs), qPrintable(name));
                   return false;
                   }
             }
+      score->connectTies();
+      score->rebuildMidiMapping();
+      score->setCreated(false);
+      score->setSaved(false);
+
       int staffIdx = 0;
       foreach(Staff* st, score->staves()) {
             if (st->updateKeymap())

@@ -3232,3 +3232,33 @@ void Score::searchSelectedElements()
 //      emit selectionChanged(int(_selection.state()));
       }
 
+//---------------------------------------------------------
+//   addLyrics
+//---------------------------------------------------------
+
+void Score::addLyrics(int tick, int staffIdx, const QString& txt)
+      {
+      if (txt.trimmed().isEmpty())
+            return;
+      Measure* measure = tick2measure(tick);
+      Segment* seg     = measure->findSegment(SegChordRest, tick);
+      if (seg == 0) {
+            printf("no segment found for lyrics<%s> at tick %d\n",
+               qPrintable(txt), tick);
+            return;
+            }
+      int track = staffIdx * VOICES;
+      ChordRest* cr = static_cast<ChordRest*>(seg->element(track));
+      if (cr) {
+            Lyrics* l = new Lyrics(this);
+            l->setText(txt);
+            l->setTrack(staffIdx * VOICES);
+            cr->add(l);
+            }
+      else {
+            printf("no chord/rest for lyrics<%s> at tick %d, staff %d\n",
+               qPrintable(txt), tick, staffIdx);
+            }
+      }
+
+

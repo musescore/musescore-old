@@ -15,7 +15,7 @@
 #define __EVENT_P_H__
 
 class Note;
-class MidiFile;
+// class MidiFile;
 class Xml;
 
 //---------------------------------------------------------
@@ -89,7 +89,7 @@ class EventData : public QSharedData {
       EventData(int t);
       ~EventData();
 
-      void write(MidiFile*) const;
+//      void write(MidiFile*) const;
       void write(Xml&) const;
 //      void read(QDomElement);
 

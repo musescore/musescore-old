@@ -54,22 +54,16 @@ class Slur;
 class Hairpin;
 class Undo;
 class Part;
-class MidiFile;
-class MidiTrack;
 class BSymbol;
 class KeySig;
 class KeySigEvent;
 class Volta;
-class BBTrack;
 class MidiEvent;
-struct MNote;
 class Excerpt;
 class EventMap;
 class Harmony;
 struct Channel;
 class Tuplet;
-class Capella;
-struct CapVoice;
 class Dynamic;
 class Measure;
 class MeasureBase;
@@ -341,9 +335,6 @@ class Score {
       void moveUp(Chord*);
       void moveDown(Chord*);
 
-      void convertCapella(Capella* cap);
-      int readCapVoice(CapVoice* cvoice, int staffIdx, int tick);
-
       void moveInputPos(Segment* s);
       void moveToNextInputPos();
 
@@ -354,7 +345,6 @@ class Score {
       void addTempo();
       void addMetronome();
 
-      int processPendingNotes(QList<MNote*>* notes, int, int);
       void cmdResetBeamMode();
 
       void cmdInsertClef(ClefType);
@@ -561,14 +551,6 @@ class Score {
 
       bool loadMsc(QString name);
       bool loadCompressedMsc(QString name);
-      bool importMusicXml(const QString&);
-      bool importCompressedMusicXml(const QString&);
-      bool importMuseData(const QString& name);
-      bool importLilypond(const QString& name);
-      bool importBB(const QString& name);
-      bool importCapella(const QString& name);
-      bool importOve(const QString& name);
-      bool importBww(const QString& name);
 
       void saveFile(QFileInfo& info, bool autosave);
       void saveFile(QIODevice* f, bool msczFormat, bool autosave);
@@ -840,8 +822,6 @@ class Score {
       void setInstrumentsChanged(bool val)  { _instrumentsChanged = val; }
       bool playRepeats() const              { return _playRepeats; }
       void setPlayRepeats(bool val)         { _playRepeats = val; }
-      void convertTrack(MidiTrack*);
-      void convertTrack(BBTrack*, int);
       };
 
 extern Score* gscore;

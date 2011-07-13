@@ -19,6 +19,7 @@
 //=============================================================================
 
 #include "musedata.h"
+#include "musescore.h"
 #include "libmscore/score.h"
 #include "libmscore/part.h"
 #include "libmscore/staff.h"
@@ -732,15 +733,12 @@ void MuseData::convert()
 //    return true on success
 //---------------------------------------------------------
 
-bool Score::importMuseData(const QString& name)
+bool MuseScore::importMuseData(Score* score, const QString& name)
       {
-      MuseData md(this);
+      MuseData md(score);
       if (!md.read(name))
             return false;
       md.convert();
-
-      _saved = false;
-      _created = true;
       return true;
       }
 

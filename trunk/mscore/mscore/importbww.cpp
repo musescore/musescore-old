@@ -18,12 +18,11 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include <stdio.h>
-
 #include "bww2mxml/lexer.h"
 #include "bww2mxml/writer.h"
 #include "bww2mxml/parser.h"
 
+#include "musescore.h"
 #include "libmscore/barline.h"
 #include "libmscore/box.h"
 #include "libmscore/chord.h"
@@ -485,7 +484,7 @@ void MsScWriter::note(const QString pitch, const QVector<Bww::BeamType> beamList
 //   importBww
 //---------------------------------------------------------
 
-bool Score::importBww(const QString& path)
+bool MuseScore::importBww(Score* score, const QString& path)
       {
       printf("Score::importBww(%s)\n", qPrintable(path));
 
@@ -496,22 +495,22 @@ bool Score::importBww(const QString& path)
             return false;
 
       QString id("importBww");
-      Part* part = new Part(this);
+      Part* part = new Part(score);
       part->setId(id);
-      appendPart(part);
-      Staff* staff = new Staff(this, part, 0);
+      score->appendPart(part);
+      Staff* staff = new Staff(score, part, 0);
       part->staves()->push_back(staff);
-      staves().push_back(staff);
+      score->staves().push_back(staff);
 
       Bww::Lexer lex(&fp);
       Bww::MsScWriter wrt;
-      wrt.setScore(this);
+      wrt.setScore(score);
       Bww::Parser p(lex, wrt);
       p.parse();
 
-      _saved = false;
-      _created = true;
-      connectTies();
+      score->setSaved(false);
+      score->setCreated(true);
+      score->connectTies();
       printf("Score::importBww() done\n");
 //      return false;	// error
       return true;	// OK

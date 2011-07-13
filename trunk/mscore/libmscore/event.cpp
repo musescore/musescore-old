@@ -11,7 +11,7 @@
 //  the file LICENCE.GPL
 //=============================================================================
 
-#include "midifile.h"
+// #include "midifile.h"
 #include "xml.h"
 #include "score.h"
 #include "part.h"
@@ -226,69 +226,6 @@ bool EventData::operator==(const EventData&) const
       }
 
 //---------------------------------------------------------
-//   EventData::write
-//---------------------------------------------------------
-
-void EventData::write(MidiFile* mf) const
-      {
-      switch(_type) {
-            case ME_NOTEON:
-                  mf->writeStatus(ME_NOTEON, channel());
-                  mf->put(pitch());
-                  mf->put(velo());
-                  break;
-
-            case ME_NOTEOFF:
-                  mf->writeStatus(ME_NOTEOFF, channel());
-                  mf->put(pitch());
-                  mf->put(velo());
-                  break;
-
-            case ME_CONTROLLER:
-                  switch(controller()) {
-                        case CTRL_PROGRAM:
-                              mf->writeStatus(ME_PROGRAM, channel());
-                              mf->put(value() & 0x7f);
-                              break;
-                        case CTRL_PITCH:
-                              {
-                              mf->writeStatus(ME_PITCHBEND, channel());
-                              int v = value() + 8192;
-                              mf->put(v & 0x7f);
-                              mf->put((v >> 7) & 0x7f);
-                              }
-                              break;
-                        case CTRL_PRESS:
-                              mf->writeStatus(ME_AFTERTOUCH, channel());
-                              mf->put(value() & 0x7f);
-                              break;
-                        default:
-                              mf->writeStatus(ME_CONTROLLER, channel());
-                              mf->put(controller());
-                              mf->put(value() & 0x7f);
-                              break;
-                        }
-                  break;
-
-            case ME_META:
-                  mf->put(ME_META);
-                  mf->put(_metaType);
-                  mf->putvl(len());
-                  mf->write(data(), len());
-                  mf->resetRunningStatus();     // really ?!
-                  break;
-
-            case ME_SYSEX:
-                  mf->put(ME_SYSEX);
-                  mf->putvl(len() + 1);  // including 0xf7
-                  mf->write(data(), len());
-                  mf->put(ME_ENDSYSEX);
-                  mf->resetRunningStatus();
-                  break;
-            }
-      }
-
-//---------------------------------------------------------
 //   Event
 //---------------------------------------------------------
 
@@ -317,7 +254,7 @@ Event& Event::operator=(const Event& s)
       return *this;
       }
 
-void Event::write(MidiFile* mf) const { d->write(mf);  }
+// void Event::write(MidiFile* mf) const { d->write(mf);  }
 void Event::write(Xml& xml) const     { d->write(xml); }
 // void Event::read(QDomElement e)       { d->read(e);    }
 
@@ -366,3 +303,41 @@ double Event::tuning() const          { return d->_tuning;              }
 void Event::setTuning(double v)       { d->_tuning = v;                 }
 bool Event::operator==(const Event& e) const { return d->operator==(*e.d);   }
 
+//---------------------------------------------------------
+//    midi_meta_name
+//---------------------------------------------------------
+
+QString midiMetaName(int meta)
+      {
+      const char* s = "";
+      switch (meta) {
+            case 0:     s = "Sequence Number"; break;
+            case 1:     s = "Text Event"; break;
+            case 2:     s = "Copyright"; break;
+            case 3:     s = "Sequence/Track Name"; break;
+            case 4:     s = "Instrument Name"; break;
+            case 5:     s = "Lyric"; break;
+            case 6:     s = "Marker"; break;
+            case 7:     s = "Cue Point"; break;
+            case 8:
+            case 9:
+            case 0x0a:
+            case 0x0b:
+            case 0x0c:
+            case 0x0d:
+            case 0x0e:
+            case 0x0f:  s = "Text"; break;
+            case 0x20:  s = "Channel Prefix"; break;
+            case 0x21:  s = "Port Change"; break;
+            case 0x2f:  s = "End of Track"; break;
+            case META_TEMPO:  s = "Tempo"; break;
+            case 0x54:  s = "SMPTE Offset"; break;
+            case META_TIME_SIGNATURE:  s = "Time Signature"; break;
+            case META_KEY_SIGNATURE:   s = "Key Signature"; break;
+            case 0x74:                 s = "Sequencer-Specific1"; break;
+            case 0x7f:                 s = "Sequencer-Specific2"; break;
+            default:
+                  break;
+            }
+      return QString(s);
+      }

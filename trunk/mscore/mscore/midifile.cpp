@@ -12,11 +12,11 @@
 //=============================================================================
 
 #include "midifile.h"
-#include "xml.h"
-#include "part.h"
-#include "note.h"
-#include "drumset.h"
-#include "utils.h"
+#include "libmscore/xml.h"
+#include "libmscore/part.h"
+#include "libmscore/note.h"
+#include "libmscore/drumset.h"
+#include "libmscore/utils.h"
 #include "al/al.h"
 
 #define BE_SHORT(x) ((((x)&0xFF)<<8) | (((x)>>8)&0xFF))
@@ -63,45 +63,6 @@ const int  gsOnMsgLen = sizeof(gsOnMsg);
 const int  xgOnMsgLen = sizeof(xgOnMsg);
 
 //---------------------------------------------------------
-//    midi_meta_name
-//---------------------------------------------------------
-
-QString midiMetaName(int meta)
-      {
-      const char* s = "";
-      switch (meta) {
-            case 0:     s = "Sequence Number"; break;
-            case 1:     s = "Text Event"; break;
-            case 2:     s = "Copyright"; break;
-            case 3:     s = "Sequence/Track Name"; break;
-            case 4:     s = "Instrument Name"; break;
-            case 5:     s = "Lyric"; break;
-            case 6:     s = "Marker"; break;
-            case 7:     s = "Cue Point"; break;
-            case 8:
-            case 9:
-            case 0x0a:
-            case 0x0b:
-            case 0x0c:
-            case 0x0d:
-            case 0x0e:
-            case 0x0f:  s = "Text"; break;
-            case 0x20:  s = "Channel Prefix"; break;
-            case 0x21:  s = "Port Change"; break;
-            case 0x2f:  s = "End of Track"; break;
-            case META_TEMPO:  s = "Tempo"; break;
-            case 0x54:  s = "SMPTE Offset"; break;
-            case META_TIME_SIGNATURE:  s = "Time Signature"; break;
-            case META_KEY_SIGNATURE:   s = "Key Signature"; break;
-            case 0x74:                 s = "Sequencer-Specific1"; break;
-            case 0x7f:                 s = "Sequencer-Specific2"; break;
-            default:
-                  break;
-            }
-      return QString(s);
-      }
-
-//---------------------------------------------------------
 //   MidiFile
 //---------------------------------------------------------
 
@@ -135,6 +96,69 @@ bool MidiFile::write(QIODevice* out)
       }
 
 //---------------------------------------------------------
+//   write
+//---------------------------------------------------------
+
+void MidiFile::writeEvent(const Event& event)
+      {
+      switch(event.type()) {
+            case ME_NOTEON:
+                  writeStatus(ME_NOTEON, event.channel());
+                  put(event.pitch());
+                  put(event.velo());
+                  break;
+
+            case ME_NOTEOFF:
+                  writeStatus(ME_NOTEOFF, event.channel());
+                  put(event.pitch());
+                  put(event.velo());
+                  break;
+
+            case ME_CONTROLLER:
+                  switch(event.controller()) {
+                        case CTRL_PROGRAM:
+                              writeStatus(ME_PROGRAM, event.channel());
+                              put(event.value() & 0x7f);
+                              break;
+                        case CTRL_PITCH:
+                              {
+                              writeStatus(ME_PITCHBEND, event.channel());
+                              int v = event.value() + 8192;
+                              put(v & 0x7f);
+                              put((v >> 7) & 0x7f);
+                              }
+                              break;
+                        case CTRL_PRESS:
+                              writeStatus(ME_AFTERTOUCH, event.channel());
+                              put(event.value() & 0x7f);
+                              break;
+                        default:
+                              writeStatus(ME_CONTROLLER, event.channel());
+                              put(event.controller());
+                              put(event.value() & 0x7f);
+                              break;
+                        }
+                  break;
+
+            case ME_META:
+                  put(ME_META);
+                  put(event.metaType());
+                  putvl(event.len());
+                  write(event.data(), event.len());
+                  resetRunningStatus();     // really ?!
+                  break;
+
+            case ME_SYSEX:
+                  put(ME_SYSEX);
+                  putvl(event.len() + 1);  // including 0xf7
+                  write(event.data(), event.len());
+                  put(ME_ENDSYSEX);
+                  resetRunningStatus();
+                  break;
+            }
+      }
+
+//---------------------------------------------------------
 //   writeTrack
 //---------------------------------------------------------
 
@@ -154,8 +178,7 @@ bool MidiFile::writeTrack(const MidiTrack* t)
             //    channel for all events in this track
             //
             if (t->outChannel() != -1)
-                  ev.setChannel(t->outChannel());
-            ev.write(this);
+                  writeEvent(ev);
             tick = ntick;
             }
 

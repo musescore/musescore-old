@@ -15,7 +15,8 @@
 //  algorithmus from Emilios Cambouropoulos as published in:
 //  "Automatic Pitch Spelling: From Numbers to Sharps and Flats"
 
-#include "midifile.h"
+// #include "midifile.h"
+#include "event.h"
 #include "note.h"
 #include "key.h"
 #include "pitchspelling.h"

@@ -21,6 +21,7 @@
 #include "ove.h"
 
 #include "globals.h"
+#include "musescore.h"
 #include "al/sig.h"
 #include "al/tempo.h"
 #include "libmscore/arpeggio.h"
@@ -2408,7 +2409,7 @@ void OveToMScore::convertWedges(Measure* measure, int part, int staff, int track
 }
 
 //////////////////////////////////////////////////////////////////////////
-bool Score::importOve(const QString& name) {
+bool MuseScore::importOve(Score* score, const QString& name) {
 	OVE::IOVEStreamLoader* oveLoader = OVE::createOveStreamLoader();
 	OVE::OveSong oveSong;
 
@@ -2431,17 +2432,14 @@ bool Score::importOve(const QString& name) {
 
 	if(result){
 		OveToMScore otm;
-		otm.convert(&oveSong, this);
+		otm.convert(&oveSong, score);
 
-		connectTies();
-		connectSlurs();
-		rebuildMidiMapping();
-            for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
+		score->connectSlurs();
+            for (Measure* m = score->firstMeasure(); m; m = m->nextMeasure()) {
                   int tick = m->tick();
-                  m->setLen(sigmap()->timesig(tick).timesig());
-                  m->setTimesig(sigmap()->timesig(tick).timesig()); //?
+                  m->setLen(score->sigmap()->timesig(tick).timesig());
+                  m->setTimesig(score->sigmap()->timesig(tick).timesig()); //?
                   }
-		layoutAll = true;
 	}
 
 	return result;

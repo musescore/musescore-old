@@ -15,7 +15,7 @@
 #define __MIDIFILE_H__
 
 #include "al/sig.h"
-#include "event.h"
+#include "libmscore/event.h"
 
 const int MIDI_CHANNEL = 16;
 
@@ -119,6 +119,8 @@ class MidiFile {
       qint64 curPos;             ///< current file byte position
       int _shortestNote;
 
+      void writeEvent(const Event& event);
+
    protected:
       // write
       bool write(const void*, qint64);
@@ -164,14 +166,13 @@ class MidiFile {
       void processMeta(Score*, MidiTrack* track, const Event& e);
       void setShortestNote(int v)     { _shortestNote = v;    }
       int shortestNote() const        { return _shortestNote; }
+      void convertTrack(Score* score, MidiTrack* midiTrack);
 
       friend class EventData;
       friend class MidiTrack;
       };
 
 int MidiTrack::division() const { return mf->division(); }
-
-extern QString midiMetaName(int meta);
 
 #endif
 

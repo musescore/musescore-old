@@ -22,8 +22,10 @@
 //    Capella 2000 import filter
 //
 #include <assert.h>
-#include "libmscore/score.h"
+#include "musescore.h"
+#include "libmscore/mscore.h"
 #include "capella.h"
+#include "libmscore/score.h"
 #include "libmscore/part.h"
 #include "libmscore/staff.h"
 #include "libmscore/rest.h"
@@ -44,7 +46,6 @@
 #include "libmscore/layoutbreak.h"
 #include "libmscore/dynamic.h"
 #include "libmscore/barline.h"
-#include "libmscore/mscore.h"
 
 //---------------------------------------------------------
 //   errmsg
@@ -1338,7 +1339,7 @@ void Capella::read(QFile* fp)
 //   importCapella
 //---------------------------------------------------------
 
-bool Score::importCapella(const QString& name)
+bool MuseScore::importCapella(Score* score, const QString& name)
       {
       if (name.isEmpty())
             return false;
@@ -1360,10 +1361,7 @@ bool Score::importCapella(const QString& name)
             return true;
             }
       fp.close();
-
-      _saved = false;
-      convertCapella(&cf);
-      _created = true;
+      convertCapella(score, &cf);
       return true;
       }
 
@@ -1496,7 +1494,7 @@ printf("======================Text:\n");
 //   readCapVoice
 //---------------------------------------------------------
 
-int Score::readCapVoice(CapVoice* cvoice, int staffIdx, int tick)
+int MuseScore::readCapVoice(Score* score, CapVoice* cvoice, int staffIdx, int tick)
       {
       int voice = cvoice->voiceNo;
       int track = staffIdx * VOICES + voice;
@@ -1518,7 +1516,7 @@ printf("readCapVoice 1\n");
                   case T_REST:
                         {
 //printf("     <Rest>\n");
-                        Measure* m = getCreateMeasure(tick);
+                        Measure* m = score->getCreateMeasure(tick);
                         RestObj* o = static_cast<RestObj*>(no);
                         int ticks  = o->ticks();
                         Duration d;
@@ -1528,7 +1526,7 @@ printf("readCapVoice 1\n");
                                     tupletCount = o->count;
                                     nTuplet     = 0;
                                     tupletTick  = tick;
-                                    tuplet      = new Tuplet(this);
+                                    tuplet      = new Tuplet(score);
                                     Fraction f(3,2);
                                     if (tupletCount == 3)
                                           f = Fraction(3,2);
@@ -1550,9 +1548,9 @@ printf("readCapVoice 1\n");
                               ticks = ft * o->fullMeasures;
                               if (!o->invisible) {
                                     for (unsigned i = 0; i < o->fullMeasures; ++i) {
-                                          Measure* m = getCreateMeasure(tick + i * ft);
+                                          Measure* m = score->getCreateMeasure(tick + i * ft);
                                           Segment* s = m->getSegment(SegChordRest, tick + i * ft);
-                                          Rest* rest = new Rest(this);
+                                          Rest* rest = new Rest(score);
                                           rest->setDurationType(Duration(Duration::V_MEASURE));
                                           rest->setDuration(m->len());
                                           rest->setTrack(staffIdx * VOICES + voice);
@@ -1562,7 +1560,7 @@ printf("readCapVoice 1\n");
                               }
                         if (!o->invisible || voice == 0) {
                               Segment* s = m->getSegment(SegChordRest, tick);
-                              Rest* rest = new Rest(this);
+                              Rest* rest = new Rest(score);
                               Duration d;
                               if (o->fullMeasures) {
                                     d.setType(Duration::V_MEASURE);
@@ -1588,7 +1586,7 @@ printf("readCapVoice 1\n");
                         int ticks = o->ticks();
                         Duration d;
                         d.setVal(ticks);
-                        Measure* m = getCreateMeasure(tick);
+                        Measure* m = score->getCreateMeasure(tick);
                         Segment* s = m->getSegment(SegChordRest, tick);
 
                         if (o->count) {
@@ -1596,7 +1594,7 @@ printf("readCapVoice 1\n");
                                     tupletCount = o->count;
                                     nTuplet     = 0;
                                     tupletTick  = tick;
-                                    tuplet      = new Tuplet(this);
+                                    tuplet      = new Tuplet(score);
                                     Fraction f(3,2);
                                     if (tupletCount == 3)
                                           f = Fraction(3,2);
@@ -1616,7 +1614,7 @@ printf("readCapVoice 1\n");
 //                                 o->objects.size());
                               }
 
-                        Chord* chord = new Chord(this);
+                        Chord* chord = new Chord(score);
                         chord->setTuplet(tuplet);
                         chord->setDurationType(d);
                         chord->setDuration(d.fraction());
@@ -1636,8 +1634,8 @@ printf("readCapVoice 1\n");
                                     break;
                               }
                         s->add(chord);
-                        int clef = staff(staffIdx)->clef(tick);
-                        int key  = staff(staffIdx)->key(tick).accidentalType();
+                        int clef = score->staff(staffIdx)->clef(tick);
+                        int key  = score->staff(staffIdx)->key(tick).accidentalType();
                         int off;
                         switch(clef) {
                               case CLEF_F:    off = -14; break;
@@ -1659,7 +1657,7 @@ printf("readCapVoice 1\n");
                         off += keyOffsets[key + 7];
 
                         foreach(CNote n, o->notes) {
-                              Note* note = new Note(this);
+                              Note* note = new Note(score);
                               int l = n.pitch + off + 7 * 6;
                               int octave = 0;
                               while (l < 0) {
@@ -1684,14 +1682,14 @@ printf("readCapVoice 1\n");
 
                               chord->add(note);
                               if (o->rightTie) {
-                                    Tie* tie = new Tie(this);
+                                    Tie* tie = new Tie(score);
                                     tie->setStartNote(note);
                                     tie->setTrack(track);
                                     note->setTieFor(tie);
                                     }
                               }
                         foreach(Verse v, o->verse) {
-                              Lyrics* l = new Lyrics(this);
+                              Lyrics* l = new Lyrics(score);
                               l->setTrack(track);
                               l->setText(v.text);
                               if (v.hyphen)
@@ -1724,10 +1722,10 @@ printf("readCapVoice 1\n");
                         if (nclef == CLEF_INVALID)
                               break;
                         // staff(staffIdx)->setClef(tick, nclef);
-                        Clef* clef = new Clef(this);
+                        Clef* clef = new Clef(score);
                         clef->setClefType(nclef);
                         clef->setTrack(staffIdx * VOICES);
-                        Measure* m = getCreateMeasure(tick);
+                        Measure* m = score->getCreateMeasure(tick);
                         Segment* s = m->getSegment(SegClef, tick);
                         s->add(clef);
                         }
@@ -1736,12 +1734,12 @@ printf("readCapVoice 1\n");
                         {
 //printf("   <Key>\n");
                         CapKey* o = static_cast<CapKey*>(no);
-                        int key = staff(staffIdx)->key(tick).accidentalType();
+                        int key = score->staff(staffIdx)->key(tick).accidentalType();
                         if (key != o->signature) {
-                              staff(staffIdx)->setKey(tick, o->signature);
-                              KeySig* ks = new KeySig(this);
+                              score->staff(staffIdx)->setKey(tick, o->signature);
+                              KeySig* ks = new KeySig(score);
                               ks->setTrack(staffIdx * VOICES);
-                              Measure* m = getCreateMeasure(tick);
+                              Measure* m = score->getCreateMeasure(tick);
                               Segment* s = m->getSegment(SegKeySig, tick);
                               s->add(ks);
                               ks->setSig(key, o->signature);
@@ -1756,15 +1754,15 @@ printf("     <Meter> tick %d %d/%d\n", tick, o->numerator, 1 << o->log2Denom);
                               printf("illegal fraction\n");
                               abort();
                               }
-                        AL::SigEvent se = sigmap()->timesig(tick);
+                        AL::SigEvent se = score->sigmap()->timesig(tick);
                         Fraction f(o->numerator, 1 << o->log2Denom);
                         AL::SigEvent ne(f);
                         if (!(se == ne))
-                              sigmap()->add(tick, ne);
-                        TimeSig* ts = new TimeSig(this);
+                              score->sigmap()->add(tick, ne);
+                        TimeSig* ts = new TimeSig(score);
                         ts->setSig(f);
                         ts->setTrack(track);
-                        Measure* m = getCreateMeasure(tick);
+                        Measure* m = score->getCreateMeasure(tick);
                         Segment* s = m->getSegment(SegTimeSig, tick);
                         s->add(ts);
                         }
@@ -1774,7 +1772,7 @@ printf("     <Meter> tick %d %d/%d\n", tick, o->numerator, 1 << o->log2Denom);
                         {
                         CapExplicitBarline* o = static_cast<CapExplicitBarline*>(no);
 printf("     <Barline>\n");
-                        Measure* m = getCreateMeasure(tick-1);
+                        Measure* m = score->getCreateMeasure(tick-1);
                         int ticks = tick - m->tick();
                         if (ticks > 0 && ticks != m->ticks()) {
                               // this is a measure with different actual duration
@@ -1783,9 +1781,9 @@ printf("     <Barline>\n");
 #if 0
                               AL::SigEvent ne(f);
                               ne.setNominal(m->timesig());
-                              sigmap()->add(m->tick(), ne);
+                              score->sigmap()->add(m->tick(), ne);
                               AL::SigEvent ne2(m->timesig());
-                              sigmap()->add(m->tick() + m->ticks(), ne2);
+                              score->sigmap()->add(m->tick() + m->ticks(), ne2);
 #endif
                               }
                         if (m == 0)
@@ -1847,7 +1845,7 @@ printf("readCapVoice 2\n");
                               SlurObj* so = static_cast<SlurObj*>(o);
                               // printf("slur tick %d  %d-%d-%d-%d   %d-%d\n", tick, so->nEnd, so->nMid,
                               //   so->nDotDist, so->nDotWidth, so->nRefNote, so->nNotes);
-                              Segment* seg = tick2segment(tick);
+                              Segment* seg = score->tick2segment(tick);
                               int tick2 = -1;
                               if (seg) {
                                     int n = so->nNotes;
@@ -1867,12 +1865,12 @@ printf("readCapVoice 2\n");
                               else
                                     printf("  segment at %d not found\n", tick);
                               if (tick2 >= 0) {
-                                    Slur* slur = new Slur(this);
+                                    Slur* slur = new Slur(score);
                                     // TODO1 slur->setTick(tick);
                                     slur->setTrack(track);
                                     // TODO1 slur->setTick2(tick2);
                                     slur->setTrack2(track);
-                                    add(slur);
+                                    score->add(slur);
                                     }
                               else
                                     printf("second anchor for slur not found\n");
@@ -1882,17 +1880,17 @@ printf("readCapVoice 2\n");
                               extern QString rtf2html(const QString&);
 
                               TextObj* to = static_cast<TextObj*>(o);
-                              Text* s = new Text(this);
+                              Text* s = new Text(score);
                               QString ss = rtf2html(QString(to->text));
 
 //printf("string %f:%f w %d ratio %d <%s>\n",
 //   to->relPos.x(), to->relPos.y(), to->width, to->yxRatio, qPrintable(ss));
                               s->setHtml(ss);
-                              MeasureBase* measure = _measures.first();
+                              MeasureBase* measure = score->measures()->first();
                               if (measure->type() != VBOX) {
-                                    measure = new VBox(this);
+                                    measure = new VBox(score);
                                     measure->setTick(0);
-                                    addMeasure(measure);
+                                    score->addMeasure(measure);
                                     }
                               s->setSubtype(TEXT_TITLE);
                               measure->add(s);
@@ -1907,7 +1905,7 @@ printf("readCapVoice 2\n");
             if (no->type() == T_REST) {
                   RestObj* o = static_cast<RestObj*>(no);
                   if (o->fullMeasures) {
-                        Measure* m = getCreateMeasure(tick);
+                        Measure* m = score->getCreateMeasure(tick);
                         int ft     = m->ticks();
                         ticks = ft * o->fullMeasures;
                         }
@@ -1922,17 +1920,17 @@ printf("   readCapVoice\n");
 //   convertCapella
 //---------------------------------------------------------
 
-void Score::convertCapella(Capella* cap)
+void MuseScore::convertCapella(Score* score, Capella* cap)
       {
       if (cap->systems.isEmpty())
             return;
       printf("==================convert-capella\n");
 
-      style()->set(ST_measureSpacing, 1.0);
-      setSpatium(cap->normalLineDist * DPMM);
-      style()->set(ST_smallStaffMag, cap->smallLineDist / cap->normalLineDist);
-      style()->set(ST_systemDistance, Spatium(8));
-//      style()->set(ST_hideEmptyStaves, true);
+      score->style()->set(ST_measureSpacing, 1.0);
+      score->setSpatium(cap->normalLineDist * DPMM);
+      score->style()->set(ST_smallStaffMag, cap->smallLineDist / cap->normalLineDist);
+      score->style()->set(ST_systemDistance, Spatium(8));
+//      score->style()->set(ST_hideEmptyStaves, true);
 
 #if 1
       foreach(CapSystem* csys, cap->systems) {
@@ -1965,7 +1963,7 @@ void Score::convertCapella(Capella* cap)
 
       CapStaff* cs = cap->systems[0]->staves[0];
       if (cs->log2Denom <= 7)
-            sigmap()->add(0, Fraction(cs->numerator, 1 << cs->log2Denom));
+            score->sigmap()->add(0, Fraction(cs->numerator, 1 << cs->log2Denom));
 
       Staff* bstaff = 0;
       int span;
@@ -1975,11 +1973,11 @@ void Score::convertCapella(Capella* cap)
             CapStaffLayout* cl = cap->staffLayout(staffIdx);
 // printf("Midi staff %d program %d\n", staffIdx, cl->sound);
             if (midiPatch != cl->sound || part == 0) {
-                  part = new Part(this);
+                  part = new Part(score);
                   midiPatch = cl->sound;
-                  _parts.push_back(part);
+                  score->appendPart(part);
                   }
-            Staff* s = new Staff(this, part, staffIdx);
+            Staff* s = new Staff(score, part, staffIdx);
             if (cl->bPercussion)
                   part->setMidiProgram(0, 128);
             else
@@ -2002,14 +2000,14 @@ void Score::convertCapella(Capella* cap)
                   }
             s->setSmall(cl->bSmall);
             part->insertStaff(s);
-            _staves.push_back(s);
+            score->staves().push_back(s);
             // _parts.push_back(part);
             }
       if (bstaff)
             bstaff->setBarLineSpan(span);
 
       foreach(CapBracket cb, cap->brackets) {
-            Staff* staff = _staves.value(cb.from);
+            Staff* staff = score->staves().value(cb.from);
             if (staff == 0) {
                   printf("bad bracket 'from' value\n");
                   continue;
@@ -2023,7 +2021,7 @@ void Score::convertCapella(Capella* cap)
                   case CAP_SIMPLE_TEXT:
                         {
                         SimpleTextObj* to = static_cast<SimpleTextObj*>(o);
-                        Text* s = new Text(this);
+                        Text* s = new Text(score);
                         s->setSubtype(TEXT_TITLE);
                         QFont f(to->font());
                         s->setItalic(f.italic());
@@ -2033,9 +2031,9 @@ void Score::convertCapella(Capella* cap)
 
                         QString ss = to->text();
                         s->setText(ss);
-                        MeasureBase* measure = new VBox(this);
+                        MeasureBase* measure = new VBox(score);
                         measure->setTick(0);
-                        addMeasure(measure);
+                        score->addMeasure(measure);
                         measure->add(s);
                         }
                         break;
@@ -2047,12 +2045,13 @@ void Score::convertCapella(Capella* cap)
 
       if (cap->topDist) {
             VBox* mb;
-            if (_measures.size() && _measures.first()->type() == VBOX)
-                  mb = static_cast<VBox*>(_measures.first());
+            MeasureBaseList* mbl = score->measures();
+            if (mbl->size() && mbl->first()->type() == VBOX)
+                  mb = static_cast<VBox*>(mbl->first());
             else {
-                  mb = new VBox(this);
+                  mb = new VBox(score);
                   mb->setTick(0);
-                  addMeasure(mb);
+                  score->addMeasure(mb);
                   }
             mb->setBoxHeight(Spatium(cap->topDist));
             }
@@ -2061,10 +2060,10 @@ void Score::convertCapella(Capella* cap)
       foreach(CapSystem* csys, cap->systems) {
 printf("readCapSystem\n");
 /*            if (csys->explLeftIndent > 0) {
-                  HBox* mb = new HBox(this);
+                  HBox* mb = new HBox(score);
                   mb->setTick(systemTick);
                   mb->setBoxWidth(Spatium(csys->explLeftIndent));
-                  addMeasure(mb);
+                  score->addMeasure(mb);
                   }
 */
             int mtick = 0;
@@ -2078,15 +2077,15 @@ printf("  ReadCapStaff %d/%d\n", cstaff->numerator, 1 << cstaff->log2Denom);
                   int staffIdx = cstaff->iLayout;
                   int voice = 0;
                   foreach(CapVoice* cvoice, cstaff->voices) {
-                        int tick = readCapVoice(cvoice, staffIdx, systemTick);
+                        int tick = readCapVoice(score, cvoice, staffIdx, systemTick);
                         ++voice;
                         if (tick > mtick)
                               mtick = tick;
                         }
                   }
-            Measure* m = tick2measure(mtick-1);
+            Measure* m = score->tick2measure(mtick-1);
             if (m && !m->lineBreak()) {
-                  LayoutBreak* lb = new LayoutBreak(this);
+                  LayoutBreak* lb = new LayoutBreak(score);
                   lb->setSubtype(LAYOUT_BREAK_LINE);
                   lb->setTrack(-1);       // this are system elements
                   m->add(lb);
@@ -2098,8 +2097,8 @@ printf("  ReadCapStaff %d/%d\n", cstaff->numerator, 1 << cstaff->log2Denom);
       // fill empty measures with rests
       //
       SegmentType st = SegChordRest;
-      for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
-            for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
+      for (Measure* m = score->firstMeasure(); m; m = m->nextMeasure()) {
+            for (int staffIdx = 0; staffIdx < score->staves().size(); ++staffIdx) {
                   bool empty = true;
                   for (Segment* s = m->first(st); s; s = s->next(st)) {
                         if (s->element(staffIdx * VOICES)) {
@@ -2109,7 +2108,7 @@ printf("  ReadCapStaff %d/%d\n", cstaff->numerator, 1 << cstaff->log2Denom);
                         }
                   if (empty) {
                         Segment* s = m->getSegment(SegChordRest, m->tick());
-                        Rest* rest = new Rest(this);
+                        Rest* rest = new Rest(score);
                         Duration d(m->len());
                         if ((m->len() == m->timesig()) || !d.isValid())
                               rest->setDurationType(Duration::V_MEASURE);
@@ -2121,8 +2120,6 @@ printf("  ReadCapStaff %d/%d\n", cstaff->numerator, 1 << cstaff->log2Denom);
                         }
                   }
             }
-      connectTies();
-      connectSlurs();
-      rebuildMidiMapping();
+      score->connectSlurs();
       }
 

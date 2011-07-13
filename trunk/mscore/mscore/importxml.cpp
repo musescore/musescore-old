@@ -291,18 +291,13 @@ bool LoadCompressedMusicXml::loader(QFile* qf)
  Import MusicXML file \a name into the Score.
  */
 
-bool Score::importMusicXml(const QString& name)
+bool MuseScore::importMusicXml(Score* score, const QString& name)
       {
       LoadMusicXml lx;
       if (!lx.load(name))
             return false;
-      setSaved(false);
       MusicXml musicxml(lx.doc());
-      musicxml.import(this);
-      connectTies();
-      rebuildMidiMapping();
-      layoutAll = true;
-      _created = false;
+      musicxml.import(score);
       return true;
       }
 
@@ -315,18 +310,13 @@ bool Score::importMusicXml(const QString& name)
  Import compressed MusicXML file \a name into the Score.
  */
 
-bool Score::importCompressedMusicXml(const QString& name)
+bool MuseScore::importCompressedMusicXml(Score* score, const QString& name)
       {
       LoadCompressedMusicXml lx;
       if (!lx.load(name))
             return false;
-      setSaved(false);
       MusicXml musicxml(lx.doc());
-      musicxml.import(this);
-      connectTies();
-      rebuildMidiMapping();
-      layoutAll = true;
-      _created = false;
+      musicxml.import(score);
       return true;
       }
 

@@ -246,10 +246,10 @@ void Page::layout()
 void Page::draw(Painter* painter) const
       {
       QRectF r = bbox();
-      qreal x1 = r.x();
-      qreal y1 = r.y();
-      qreal x2 = x1 + r.width();
-      qreal y2 = y1 + r.height();
+//      qreal x1 = r.x();
+//      qreal y1 = r.y();
+//      qreal x2 = x1 + r.width();
+//      qreal y2 = y1 + r.height();
 
       //
       // draw header/footer
