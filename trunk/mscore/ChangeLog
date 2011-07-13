@@ -1,3 +1,6 @@
+13.jul (ws)
+      - fix non default profile: missing palette symbols
+      - fix #11473: Preference values overwritten on program initialisation
 11.jul (ws)
       - fix #9907: Pasting multiple rests (one with overlap) causes crash
       - fix #11446: template directory ignored

@@ -56,9 +56,7 @@ extern void initDrumset();
 
 void MScore::init()
       {
-      _defaultStyle         = new Style();
-      setDefaultStyle(_defaultStyle);     // initialize default style
-      _baseStyle            = new Style(*_defaultStyle);
+      spatium = SPATIUM20;
 
 #ifdef __MINGW32__
       QDir dir(QCoreApplication::applicationDirPath() + QString("/../" INSTALL_NAME));
@@ -85,13 +83,15 @@ void MScore::init()
       paperHeight         = 1.0;
       landscape           = false;
       twosided            = true;
-      spatium             = SPATIUM20;
       replaceFractions    = true;
       partStyle           = "";
       layoutBreakColor    = Qt::green;
       soundFont           = _globalShare + "sound/TimGM6mb.sf2";
       bgColor.setRgb(0x76, 0x76, 0x6e);
 
+      _defaultStyle         = new Style();
+      setDefaultStyle(_defaultStyle);     // initialize default style
+      _baseStyle            = new Style(*_defaultStyle);
       //
       //  load internal fonts
       //

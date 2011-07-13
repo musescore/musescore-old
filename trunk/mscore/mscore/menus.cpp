@@ -160,30 +160,27 @@ void MuseScore::populatePalette()
       notePalette->setGrid(32, 40);
       notePalette->setDrawGrid(true);
 
-      Icon* ik = new Icon(gscore);
-      ik->setSubtype(ICON_ACCIACCATURA);
-      ik->setAction("acciaccatura", getAction("acciaccatura")->icon());
-      notePalette->append(ik, tr("Acciaccatura"));
+      struct IconActions {
+            int subtype;
+            const char* action;
+            };
+      static const IconActions gna[] = {
+            { ICON_ACCIACCATURA, "acciaccatura" },
+            { ICON_APPOGGIATURA, "appoggiatura" },
+            { ICON_GRACE4,       "grace4" },
+            { ICON_GRACE16,      "grace16" },
+            { ICON_GRACE32,      "grace32" },
+            };
 
-      ik = new Icon(gscore);
-      ik->setSubtype(ICON_APPOGGIATURA);
-      ik->setAction("appoggiatura", getAction("appoggiatura")->icon());
-      notePalette->append(ik, tr("Appoggiatura"));
-
-      ik = new Icon(gscore);
-      ik->setSubtype(ICON_GRACE4);
-      ik->setAction("grace4", getAction("grace4")->icon());
-      notePalette->append(ik, tr("Quarter grace note"));
-
-      ik = new Icon(gscore);
-      ik->setSubtype(ICON_GRACE16);
-      ik->setAction("grace16", getAction("grace16")->icon());
-      notePalette->append(ik, tr("16th grace note"));
-
-      ik = new Icon(gscore);
-      ik->setSubtype(ICON_GRACE32);
-      ik->setAction("grace32", getAction("grace32")->icon());
-      notePalette->append(ik, tr("32nd grace note"));
+      for (uint i = 0; i < sizeof(gna)/sizeof(*gna); ++i) {
+            Icon* ik = new Icon(gscore);
+            ik->setSubtype(gna[i].subtype);
+            Shortcut* s = getShortcut(gna[i].action);
+            QAction* a = getAction(s);
+            QIcon icon(a->icon());
+            ik->setAction(gna[i].action, icon);
+            notePalette->append(ik, s->help);
+            }
 
       paletteBox->addPalette(notePalette);
 
@@ -793,7 +790,7 @@ void MuseScore::populatePalette()
       sp->setGrid(27, 40);
       sp->setDrawGrid(true);
 
-      ik = new Icon(gscore);
+      Icon* ik = new Icon(gscore);
       ik->setSubtype(ICON_SBEAM);
       ik->setAction("beam-start", getAction("beam-start")->icon());
       sp->append(ik, tr("Start beam"));

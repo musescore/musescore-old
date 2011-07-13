@@ -2128,14 +2128,20 @@ int main(int argc, char* av[])
 
       setMscoreLocale(localeName);
 
-      initShortcuts();
+//      initShortcuts();
       preferences.init();
+
+      QWidget wi(0);
+      PDPI = wi.logicalDpiX();         // physical resolution
+      DPI  = PDPI;                     // logical drawing resolution
+      DPMM = DPI / INCH;      // dots/mm
+      MScore::init();         // initialize libmscore
+
       if (!useFactorySettings)
             preferences.read();
 
-      if (converterDpi == 0) {
+      if (converterDpi == 0)
             converterDpi = preferences.pngResolution;
-            }
 
       QSplashScreen* sc = 0;
       if (!noGui && preferences.showSplashScreen) {
@@ -2184,22 +2190,14 @@ int main(int argc, char* av[])
                   }
             }
 
-/*      if (converterMode) {
-            noSeq = true;
-            seq = 0;
-            }
-      else {
-      */
-            synti = new MasterSynth();
-            seq   = new Seq();
-            if (!noSeq) {
-                  if (!seq->init()) {
-                        printf("sequencer init failed\n");
-                        noSeq = true;
-                        }
+      synti = new MasterSynth();
+      seq   = new Seq();
+      if (!noSeq) {
+            if (!seq->init()) {
+                  printf("sequencer init failed\n");
+                  noSeq = true;
                   }
-//            }
-#if 0
+            }
       //
       // avoid font problems by overriding the environment
       //    fall back to "C" locale
@@ -2209,15 +2207,6 @@ int main(int argc, char* av[])
       setenv("LANG", "C", 1);
 #endif
       QLocale::setDefault(QLocale(QLocale::C));
-#endif
-
-      QWidget wi(0);
-
-      PDPI = wi.logicalDpiX();         // physical resolution
-      DPI  = PDPI;                     // logical drawing resolution
-      DPMM = DPI / INCH;      // dots/mm
-
-      MScore::init();
 
       if (debugMode) {
             QStringList sl(QCoreApplication::libraryPaths());
@@ -2230,6 +2219,7 @@ int main(int argc, char* av[])
       //   _spatium    = SPATIUM20  * DPI;     // 20.0 / 72.0 * DPI / 4.0;
 
       genIcons();
+      initShortcuts();
 
       if (!converterMode)
             qApp->setWindowIcon(*icons[window_ICON]);
@@ -2245,13 +2235,17 @@ int main(int argc, char* av[])
 #endif
       mscore->setRevision(revision);
 
-      if (!noGui) {
+MScore::init();         // initialize libmscore
+      if (noGui) {
+            loadScores(argv);
+            exit(processNonGui() ? 0 : -1);
+            }
+      else {
             mscore->readSettings();
             QObject::connect(qApp, SIGNAL(messageReceived(const QString&)),
                mscore, SLOT(handleMessage(const QString&)));
 
             mscore->showWebPanel(preferences.showWebPanel);
-
             static_cast<QtSingleApplication*>(qApp)->setActivationWindow(mscore, false);
             int files = 0;
             foreach(const QString& name, argv) {
@@ -2268,10 +2262,6 @@ int main(int argc, char* av[])
             if (!mscore->restoreSession((preferences.sessionStart == LAST_SESSION) && (files == 0)) || files)
                   loadScores(argv);
 #endif
-            }
-      else {
-            loadScores(argv);
-            exit(processNonGui() ? 0 : -1);
             }
       mscore->loadPlugins();
       mscore->writeSessionFile(false);

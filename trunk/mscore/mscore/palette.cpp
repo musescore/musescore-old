@@ -567,12 +567,12 @@ void Palette::paintEvent(QPaintEvent* event)
             else {
                   int x      = r.x();
                   int y      = r.y();
-                  QIcon icon = static_cast<Icon*>(el)->icon();
+                  Icon* _icon = static_cast<Icon*>(el);
+                  QIcon icon = _icon->icon();
                   static const int border = 2;
                   int size   = (hgrid < vgrid ? hgrid : vgrid) - 2 * border;
-                  p.drawPixmap(x + (hgrid - size) / 2, y + (vgrid - size) / 2,
-                     icon.pixmap(size, QIcon::Normal, QIcon::On)
-                     );
+                  QPixmap pm(icon.pixmap(size, QIcon::Normal, QIcon::On));
+                  p.drawPixmap(x + (hgrid - size) / 2, y + (vgrid - size) / 2, pm);
                   }
             }
       }
@@ -975,6 +975,12 @@ void Palette::read(QDomElement e)
                                           }
                                     else {
                                           element->read(ee);
+                                          if (element->type() == ICON) {
+                                                Icon* icon = static_cast<Icon*>(element);
+                                                Shortcut* s = getShortcut(icon->action());
+                                                QIcon qicon(getAction(icon->action())->icon());
+                                                icon->setAction(icon->action(), qicon);
+                                                }
                                           append(element, name);
                                           }
                                     }
