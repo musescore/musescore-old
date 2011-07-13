@@ -260,7 +260,7 @@ void Preferences::init()
       exportAudioSampleRate   = exportAudioSampleRates[0];
 
       profile                 = "default";
-      
+
       firstStartWeb = true;
       };
 
@@ -380,7 +380,7 @@ void Preferences::write()
       s.setValue("exportAudioSampleRate", exportAudioSampleRate);
 
       s.setValue("profile", profile);
-      
+
       s.setValue("firstStartWeb", firstStartWeb);
 
       //update
@@ -534,7 +534,7 @@ void Preferences::read()
       exportAudioSampleRate = s.value("exportAudioSampleRate", exportAudioSampleRate).toInt();
 
       profile          = s.value("profile", profile).toString();
-      
+
       firstStartWeb = s.value("firstStartWeb", true).toBool();
 
       checkUpdateStartup = s.value("checkUpdateStartup", checkUpdateStartup).toInt();
@@ -658,7 +658,7 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       connect(partStyleButton,        SIGNAL(clicked()), SLOT(selectPartStyle()));
       connect(instrumentListButton,   SIGNAL(clicked()), SLOT(selectInstrumentList()));
       connect(startWithButton,        SIGNAL(clicked()), SLOT(selectStartWith()));
-      
+
       connect(shortcutList,   SIGNAL(itemActivated(QTreeWidgetItem*, int)), SLOT(defineShortcutClicked()));
       connect(resetShortcut,  SIGNAL(clicked()), SLOT(resetShortcutClicked()));
       connect(clearShortcut,  SIGNAL(clicked()), SLOT(clearShortcutClicked()));
@@ -1469,79 +1469,6 @@ void PreferenceDialog::apply()
       emit preferencesChanged();
       preferences.write();
       mscore->startAutoSave();
-      }
-
-
-//---------------------------------------------------------
-//   getShortcut
-//---------------------------------------------------------
-
-Shortcut* getShortcut(const char* id)
-      {
-      Shortcut* s = shortcuts.value(id);
-      if (s == 0) {
-            printf("internal error: shortcut <%s> not found\n", id);
-            return 0;
-            }
-      return s;
-      }
-
-//---------------------------------------------------------
-//   getAction
-//    returns action for shortcut
-//---------------------------------------------------------
-
-QAction* getAction(const char* id)
-      {
-      Shortcut* s = getShortcut(id);
-      return getAction(s);
-      }
-
-QAction* getAction(Shortcut* s)
-      {
-      if (s == 0)
-            return 0;
-      if (s->action == 0) {
-            QAction* a = new QAction(s->xml, 0); // mscore);
-            s->action  = a;
-            a->setData(s->xml);
-            if(!s->key.isEmpty())
-                a->setShortcut(s->key);
-            else
-                a->setShortcuts(s->standardKey);
-            a->setShortcutContext(s->context);
-            if (!s->help.isEmpty()) {
-                  a->setToolTip(s->help);
-                  a->setWhatsThis(s->help);
-                  }
-            else {
-                  a->setToolTip(s->descr);
-                  a->setWhatsThis(s->descr);
-                  }
-            if (s->standardKey != QKeySequence::UnknownKey) {
-                  QList<QKeySequence> kl = a->shortcuts();
-                  if (!kl.isEmpty()) {
-                        QString s(a->toolTip());
-                        s += " (";
-                        for (int i = 0; i < kl.size(); ++i) {
-                              if (i)
-                                    s += ",";
-                              s += kl[i].toString(QKeySequence::NativeText);
-                              }
-                        s += ")";
-                        a->setToolTip(s);
-                        }
-                  }
-            else if (!s->key.isEmpty()) {
-                  a->setToolTip(a->toolTip() +
-                        " (" + s->key.toString(QKeySequence::NativeText) + ")" );
-                  }
-            if (!s->text.isEmpty())
-                  a->setText(s->text);
-            if (s->icon != -1)
-                  a->setIcon(*icons[s->icon]);
-            }
-      return s->action;
       }
 
 //---------------------------------------------------------

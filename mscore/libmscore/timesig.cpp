@@ -347,7 +347,7 @@ void TimeSig::layout()
 
 void TimeSig::draw(Painter* painter) const
       {
-      if (!staff()->staffType()->genTimesig())
+      if (staff() && !staff()->staffType()->genTimesig())
             return;
       painter->setFont(symbols[score()->symIdx()][allabreveSym].font());
       qreal m  = spatium() / (DPI * SPATIUM20);
