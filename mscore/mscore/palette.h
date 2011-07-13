@@ -42,6 +42,7 @@ struct PaletteCell {
       double x, y;
       int xoffset, yoffset;
       qreal mag;
+      bool readOnly;
       };
 
 //---------------------------------------------------------
@@ -240,6 +241,7 @@ class Palette : public QWidget {
       int columns() const            { return width() / hgrid; }
       int rows() const;
       int size() const               { return cells.size(); }
+      void setCellReadOnly(int c, bool v) { cells[c]->readOnly = v; }
       int heightForWidth(int) const;
       QString name() const           { return _name;        }
       void setName(const QString& s) { _name = s;           }

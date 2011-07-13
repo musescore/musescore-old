@@ -119,7 +119,11 @@ void Palette::contextMenuEvent(QContextMenuEvent* event)
       QMenu menu;
       QAction* deleteAction = menu.addAction(tr("Delete Contents"));
       QAction* contextAction = menu.addAction(tr("Properties..."));
+      if (cells[i] && cells[i]->readOnly)
+            deleteAction->setEnabled(false);
+
       QAction* action = menu.exec(mapToGlobal(event->pos()));
+
       if (action == deleteAction) {
             PaletteCell* cell = cells[i];
             if (cell)
@@ -385,6 +389,7 @@ void Palette::append(Element* s, const QString& name, QString tag, qreal mag)
       cell->xoffset   = 0;
       cell->yoffset   = 0;
       cell->mag       = mag;
+      cell->readOnly  = false;
       update();
       if (s && s->type() == ICON) {
             Icon* icon = static_cast<Icon*>(s);
@@ -424,6 +429,7 @@ void Palette::add(int idx, Element* s, const QString& name, QString tag)
       cell->xoffset   = 0;
       cell->yoffset   = 0;
       cell->mag       = 1.0;
+      cell->readOnly  = false;
       update();
       if (s && s->type() == ICON) {
             Icon* icon = static_cast<Icon*>(s);
@@ -811,6 +817,8 @@ void Palette::write(Xml& xml, const QString& name) const
 
       int n = cells.size();
       for (int i = 0; i < n; ++i) {
+            if (cells[i] && cells[i]->readOnly)
+                  continue;
             if (cells[i] == 0 || cells[i]->element == 0) {
                   xml.tagE("Cell");
                   continue;
