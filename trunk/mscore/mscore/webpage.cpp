@@ -399,7 +399,7 @@ void WebScoreView::networkFinished(QNetworkReply* reply)
             name = re.cap(1);
 
       QByteArray data = reply->readAll();
-      QString tmpName = "/tmp/" + name;
+      QString tmpName = QDir::tempPath () + "/"+ name;
       QFile f(tmpName);
       f.open(QIODevice::WriteOnly);
       f.write(data);
