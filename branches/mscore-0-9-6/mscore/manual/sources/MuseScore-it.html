@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
-    <script type="text/javascript" src="/sites/musescore.org/files/js/js_aaef62eda412f21da7a5460348b7209c.js"></script>
+    <script type="text/javascript" src="/sites/musescore.org/files/js/js_fbd0d4f2d001bc0c6566fcd4839390d8.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
 jQuery.extend(Drupal.settings, {"basePath":"\/","googleanalytics":{"trackOutgoing":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|avi|csv|doc|exe|flv|gif|gz|jpe?g|js|mp(3|4|e?g)|mov|pdf|phps|png|ppt|rar|sit|tar|torrent|txt|wma|wmv|xls|xml|zip|dmg|mscz|mscx|bz2"}});
@@ -13,7 +13,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","googleanalytics":{"trackOutgoin
     <meta name='robots' content='noindex, nofollow' />
     <base href='http://musescore.org/it/manuale/indice' />
     <link rel='shortcut icon' href='/sites/musescore.org/files/amadou_favicon_11.ico' type='image/x-icon' />
-    <link type="text/css" rel="stylesheet" media="all" href="/sites/musescore.org/files/css/css_7f96be45e9c22d870f655a1dd0918955.css" />
+    <link type="text/css" rel="stylesheet" media="all" href="/sites/musescore.org/files/css/css_d50da39cfa359c23b6efeb3db75ce8c3.css" />
   </head>
   <body>
         <div class="print-logo"><img class='print-logo' src='/sites/musescore.org/files/musescore-logo.png' alt='' />
@@ -21,7 +21,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","googleanalytics":{"trackOutgoin
     <div class="print-slogan">Software libero di composizione e notazione musicale</div>
     <p></p>
     <hr class="print-hr" />
-    <div class="print-site_name">Retrieved from <a href="http://musescore.org/it">http://musescore.org</a> on Ven, 02/04/2011</div>
+    <div class="print-site_name">Retrieved from <a href="http://musescore.org/it">http://musescore.org</a> on Gio, 07/14/2011</div>
     <h1 class="print-title"></h1>
     <div class="print-submitted"></div>
     <div class="print-created"></div>
@@ -33,7 +33,8 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","googleanalytics":{"trackOutgoin
   <p>Questo capitolo è di aiuto per l'installazione ed il primo avvio di MuseScore. Verrà anche mostrato come creare una nuova partitura.</p>
   <div id="node-837" class="section-3">
   <h1 class="book-heading">Installazione</h1>
-  <h3>Windows</h3>
+  <p>MuseScore funziona su differenti sistemi operativi come  Windows, Mac OS e Linux. </p>
+<h3 id="windows-installation">Windows</h3>
 <p>Potete trovare il programma di installazione nella pagina di <a href="http://musescore.org/it/../download">Download</a> del sito di MuseScore. Fare clic sul collegamento per scaricare il programma. Il browser (es. Explorer, Firefox) chiederà conferma. Fare clic su “Salva file”. </p>
 <p>Quando il file è stato scaricato fare doppio clic su questo file per iniziare l'installazione. Windows apre una finestra per chiedere conferma. Fare clic su “Continua”.</p>
 <p><img src="/sites/musescore.org/files/install-wizard-1-winxp_0.png" alt="install-wizard-1-winxp.png" title="install-wizard-1-winxp.png" width="377" height="295" class="inline" /></p>
@@ -61,66 +62,14 @@ Uninstall.exe /S</code></p>
 È possibile ora lanciare MuseScore da Applicazioni oppure da SpotLight.</p>
 <h4>Disinstallazione</h4>
 <p>Cancellare MuseScore dalla cartella Applicazioni.</p>
-<h3>Linux</h3>
-<p>Questa guida è stata scritta principalmente per gli utilizzatori del K Desktop Environment (KDE), ambiente desktop usato nei sistemi Linux come SUSE o Kubuntu, con le istruzioni tra parentesi (...) per gli utilizzatori del GNOME Desktop Environment, ambiente desktop usato nei sistemi Linux come Ubuntu. Per istruzioni specifiche per Fedora vai al <a href="print/book/export/html/772#fedora-installation">paragrafo qui sotto</a>. </p>
-<h4>Installare MuseScore</h4>
-<p>I sorgenti del progetto sono disponibili all'indirizzo <a class="freelinking external" href="http://www.musescore.org/it/download">http://www.musescore.org/it/download</a> ma in genere trovate i package binari nei repository della distribuzione che utilizzate.<br />
-Nella distribuzione Ubuntu, il package MuseScore si trova nel repository "universe". Se volete installare MuseScore il repository "universe" deve essere abilitato.<br />
-Per il suono potete utilizzare in alternativa ALSA oppure JACK sound server. Quale delle due soluzioni funziona meglio dipende dalla configurazione del sistema.</p>
-<p>Per installare MuseScore seguire questi passaggi:</p>
-<ol>
-<li>Aprire Aggiungi/Rimuovi Software (in Gnome: Aggiungi/Rimuovi Programmi - Ubuntu Karmic: Ubuntu Software Center)</li>
-<li>Nella categoria Multimedia (in Gnome: Audio &amp; Video), selezionare MuseScore</li>
-<li>Selezionare anche nella stessa categoria l'applicativo  "JACK Control".</li>
-<li>Fare clic su Anteprima (solo KDE)</li>
-<li>Fare clic su Applica Modifiche</li>
-</ol>
-<h4>Configurazione di JACK server</h4>
-<p>Lanciare l'applicativo "Jack Control" e nella finestra "JACK Audio Connection Kit" selezionare Setup.</p>
-<ol>
-<li>All'interno della scheda  “Settings” deselezionare "realtime"</li>
-<li>Se utilizzate ALSA audio, alla voce driver selezionare "ALSA" e alle voci Input Device e Output Device I/O device selezionare “hw:0”<br />
-             In alcuni sistemi funziona OSS ma non ALSA.<br />
-             Se utilizzate OSS audio, alla voce driver selezionare "Oss" e alle voci Input Device e Output Device I/O device selezionare "/dev/audio".</li>
-<li>Confermare i cambiamenti e avviare JACK server</li>
-</ol>
-<h4>Configurazione di MuseScore</h4>
-<p>Per la configurazione di MuseScore seguire questi passaggi:</p>
-<ol>
-<li>Aprire MuseScore, che si trova nella sezione Multimedia del menu principale (in Gnome: Audio e Video)</li>
-<li>Dal menù selezionare Modifica e quindi Preferenze</li>
-<li>Selezionare la scheda Sintetizzatore:
-<ol>
-<li>Controllare che la sia selezionata l'opzione "Usa sintetizzatore interno"</li>
-<li>Controllare che il SoundFont sia <kbd>/usr/share/sounds/sf2/FluidR3_GM.sf2</kbd> - è il SoundFont di default - oppure selezionare un SoundFont diverso eventualmente installato</li>
-<li>Se utilizzate ALSA audio, alla voce Porta Audio selezionare "ALSA" e alla voce Dispositivo selezionare <kbd>hw:0</kbd> (hw:Zero)<br />
-             Negli altri casi deselezionare ALSA e attivare JACK audio server</li>
-</ol>
-</li>
-<li>Fare clic su Applica, e quindi clic su OK</li>
-<li>Chiudere MuseScore, aprirlo di nuovo e ora potete cominciare a scrivere la vostra musica</li>
-</ol>
-<h4>Commenti</h4>
-<ul>
-<li>I lettori multimediali, come Amarok o Rhythmbox, non possono riprodurre la musica quando JACK server è attivo. Si deve fermare la riproduzione della musica o anche chiudere il lettore per far partire JACK server. Comunque, per ascoltare di nuovo la musica, occorre semplicemente fare clic su Stop nella finestra JACK Audio Connection Kit e far partire di nuovo il lettore multimediale.<br />
-Se si tenta di avviare Jack server mentre è in corso una riproduzione di musica, JACK Connection GUI si bloccherà.</li>
-<li>Se incontrate dei problemi con i suoni MIDI, è possibile che il sistema non sia configurato per la riproduzione MIDI. Aprite una finestra Console o Terminale e lanciate questi comandi:<br />
-<pre>sudo modprobe snd-seq
-sudo su -c 'echo snd-seq &gt;&gt; /etc/modules'</pre></li>
-<li>Jack server è un applicativo complesso che si può bloccare se non è correttamente configurato. Se riscontrate dei problemi e queste istruzioni non sono sufficienti a risolvere, potete consultare le seguenti pagine web:
-<ul>
-<li><a href="https://help.ubuntu.com/community/UbuntuStudioPreparation" title="https://help.ubuntu.com/community/UbuntuStudioPreparation">https://help.ubuntu.com/community/UbuntuStudioPreparation</a></li>
-<li><a href="https://help.ubuntu.com/community/HowToQjackCtlConnections" title="https://help.ubuntu.com/community/HowToQjackCtlConnections">https://help.ubuntu.com/community/HowToQjackCtlConnections</a></li>
-<li><a href="https://help.ubuntu.com/community/HowToJACKConfiguration" title="https://help.ubuntu.com/community/HowToJACKConfiguration">https://help.ubuntu.com/community/HowToJACKConfiguration</a></li>
-</ul>
-</li>
-</ul>
+<h3 id="linux-installation">Linux</h3>
+<p>Si prega di consultare la pagina di <a href="http://musescore.org/it/download">Download</a> per le istruzioni relative a MuseScore su Linux. I pacchetti sono disponibili per Debian, Ubuntu, Fedora e PCLinuxOS. Per le altre distribuzioni è necessario compilare l'applicazione dai sorgenti. Per istruzioni specifiche per Fedora vai al <a href="print/book/export/html/772#fedora-installation">paragrafo qui sotto</a>. </p>
 <h3 id="fedora-installation">Fedora</h3>
 <ol>
 <li>Importare la GPG key:<br />
 <pre>su
 rpm --import http://prereleases.musescore.org/linux/Fedora/RPM-GPG-KEY-Seve</pre></li>
-<li>Andare alla pagina di <a href="http://musescore.org/it/../download">Download</a> del sito di MuseScore. Fare clic sul collegamento della versione stabile per Fedora e scegliere quindi il package rpm corretto per la vostra architettura di sistema</li>
+<li>Andare alla pagina di <a href="http://musescore.org/it/download">Download</a> del sito di MuseScore. Fare clic sul collegamento della versione stabile per Fedora e scegliere quindi il package rpm corretto per la vostra architettura di sistema</li>
 <li>A seconda della architettura di sistema, utilizzare uno dei due gruppi di comandi per installare MuseScore
 <ul>
 <li>per architettura i386<br />
@@ -324,6 +273,7 @@ la tastiera alfabetica del computer. Per gli esempi seguenti utilizzare la tasti
 <li><kbd><kbd>Maiusc</kbd>+<kbd>→</kbd></kbd>: 		sposta la maniglia a destra di una misura o di una nota (unità di tempo, diversa dagli”spazi” grafici)</li>
 <li><kbd><kbd>Tab</kbd></kbd>: 		vai alla maniglia successiva</li>
 </ul>
+<p>Se è necessario è possibile muovere orizzontalmente una nota: fare un doppio clic sulla nota e utilizzare i tasti freccia per spostarla. Funziona anche con le pause e altri simboli come diesis e bemolle.</p>
 <p>Vedi anche: <a href="http://musescore.org/it/manuale/inserimento-e-modifica-testo" title="Inserimento e modifica testo">Inserimento e modifica testo</a>, <a href="http://musescore.org/it/manuale/legatura-di-portamento" title="Legatura di portamento">Legatura di portamento</a>, <a href="http://musescore.org/it/manuale/graffe-accollatura" title="Graffe accollatura">Graffe accollatura</a>, <a href="http://musescore.org/it/manuale/linee" title="Linee">Linee</a></p>
   </div>
 <div id="node-855" class="section-3">
@@ -395,6 +345,12 @@ Selezionare "tutti i pentagrammi" se desiderate che la numerazione sia ripetuta 
 <dd class="latest">MSCX è la versione non compressa dei file <i>MuseScore</i> usata dalla versione 0.9.5 e successive. Una partitura salvata in questo formato non perde nessuna informazione eccetto le immagini ed è raccomandata se avete bisogno di modificare manualmente il file utilizzando un editor di testo. Le precedenti versioni di MuseScore usavano l'estensione MSC. Tuttavia l'estensione di file MSC presenta un conflitto di associazione nell'ambiente Windows ed è bloccato da alcuni provider di posta elettronica . La nuova estensione di file MSCX sostituisce la vecchia estensione MSC a causa di questi problemi.</dd>
 </dl>
 <p><strong>Nota</strong>: MuseScore non incorpora i font nel file. Se si desidera condividere un file MuseScore con altre persone scegliere un font per il testo che le altre persone hanno sul loro computer. Quando un computer non ha i caratteri specificati nel file, MuseScore utilizza al suo posto un carattere di ripiego. Naturalmente questo tipo di carattere avrà un aspetto diverso.</p>
+<h3>File di backup di MuseScore</h3>
+<dl>
+<dt>File di backup di MuseScore (<code>.*.mscz,</code> <i>oppure</i> <code>.*.mscx,</code>)</dt>
+<dd>MuseScore crea automaticamente dei file di backup e li salva nella stessa cartella del file normale. Il file di backup è contraddistinto da un punto (.) all'inizio del nome del file e una virgola (,) alla fine (per esempio se il file normale si chiama "<code>senzatitolo.mscz</code>", allora il file di backup si chiama "<code>.senzatitolo.mscz,</code>"). La copia di backup contiene l'ultima versione precedentemente salvata del file normale e questo può essere importante se il file della copia normale si corrompe oppure se si vuole dare un'occhiata a una versione precedente della partitura. Per aprire un file di backup di MuseScore si deve prima rinominarlo togliendo il punto e la virgola. Siccome questo file di backup si trova nella stessa cartella del file normale, è necessario dargli un nome univoco (per esempio potete cambiare il nome del file da "<code>.senzatitolo.mscz,</code>" a "<code>senzatitolo-backup1.mscz</code>"). </p>
+<p>Se state utilizzando Linux per poter visualizzare i file di backup di MuseScore dovete cambiare le impostazioni di visualizzazione selezionando "Mostra file nascosti".</dd>
+</dl>
 <h3>Stampare e leggere (solo esportazione)</h3>
 <dl>
 <dt>PDF (<code>*.pdf</code>)</dt>
@@ -690,7 +646,7 @@ Tutte le stanghette della partitura saranno modificate e la modifica sarà visib
 <div id="node-900" class="section-3">
   <h1 class="book-heading">Tonalità (armatura di chiave)</h1>
   <p>I simboli della <strong>tonalità</strong> (diesis o bemolli della <strong>armatura di chiave</strong>) possono essere inseriti o modificati trascinandoli dalla tavolozza.<br />
-<img src="/sites/musescore.org/files/keypalette_0.png" alt="Keys palette" title="Keys palette" width="177" height="251" class="inline" /></p>
+<img src="/sites/musescore.org/files/key-palette.png" alt="Keys palette" title="Keys palette" width="172" height="248" class="inline" /></p>
 <p>Utilizzare il tasto <kbd><kbd>F9</kbd></kbd> per mostrare o nascondere la finestra delle <a href="http://musescore.org/it/manuale/tavolozze-palette" title="Tavolozze (palette)">tavolozze</a>.</p>
 <h3>Modificare</h3>
 <p>Trascinare il simbolo della nuova tonalità dalla tavolozza sul simbolo già presente nello spartito. È possibile anche spostare un simbolo di tonalità da un punto all'altro dello spartito  con la combinazione <kbd><kbd>Maiusc</kbd>+<kbd class="mouse">clic</kbd>+trascinare</kbd>.</p>
@@ -728,7 +684,7 @@ Tutte le stanghette della partitura saranno modificate e la modifica sarà visib
 <li class="v0-9-3"><strong class="label">Soltanto per la versione 0.9.3:</strong> Se state usando la versione 0.9.3 o precedente prima di inserire la seconda voce si devono invertire verso l'alto tutti i gambi delle note della prima voce. Selezionare una nota e fare clic sul pulsante <img src="/sites/musescore.org/files/flipdirection.png" alt="Inverti direzione gambi note" title="Inverti direzione gambi note" width="26" height="33" class="inline" /> "Inverte orientamento gambi note o legatura" sulla barra degli strumenti oppure premere <kbd><kbd>X</kbd></kbd> sulla tastiera.<br />
 <img src="/sites/musescore.org/files/voices1.png" alt="note della Voce 1 con i gambi in su" title="note della Voce 1 con i gambi in su" width="338" height="50" class="inline" /></li>
 <li>Se per inserie le note si usa la tastiera del computer o una tastiera MIDI (invece del mouse), utilizzare il tasto freccia <kbd><kbd>←</kbd></kbd> per riportare il cursore all'inizio della battuta.</li>
-<li>Fare clic sul pulsante <img src="/sites/musescore.org/files/voice2button.png" alt="Voce 2 selezionata" title="Voce 2 selezionata" width="26" height="33" class="inline" /> "Voce 2" e iniziare ad inserire la seconda voce (tutte le note devono avranno i gambi rivolti verso il basso).</li>
+<li>Fare clic sul pulsante <img src="/sites/musescore.org/files/voice-2-button.png" alt="Voce 2 selezionata" title="Voce 2 selezionata" width="18" height="12" class="inline" /> "Voce 2" e iniziare ad inserire la seconda voce (tutte le note devono avranno i gambi rivolti verso il basso).</li>
 <li class="v0-9-3"><strong class="label">Soltanto per la versione 0.9.3:</strong> Ancora una volta se usate la versione 0.9.3 o precedente prima di andare avanti dovete invertire verso il basso i gambi delle note utilizzando <kbd><kbd>X</kbd></kbd> sulla tastiera oppure il pulsante<img src="/sites/musescore.org/files/flipdirection.png" alt="Inverti direzione gambi note" title="Inverti direzione gambi note" width="26" height="33" class="inline" /> "Inverte orientamento gambi note o legatura"</li>
 <li>Alla fine il risultato sarà come l'esempio seguente:<br />
 <img src="/sites/musescore.org/files/voices2.png" alt="Voci 1 e 2" title="Voci 1 e 2" width="405" height="61" class="inline" /></li>
@@ -917,7 +873,7 @@ Premendo il pulsante "Avvia riproduzione" <img src="/sites/musescore.org/files/p
 <li><kbd><kbd>F2</kbd></kbd> mostra la tavolozza del testo. Questa tavolozza può essere usata per immettere caratteri speciali e simboli.</li>
 </ul>
 <p>Tavolozza del testo:<br />
-<img src="/sites/musescore.org/files/special-text-symbols.png" alt="The text palette contains methods for changing text alignment, style, size, and font, plus buttons for inserting symbols into the text such as a quarter note or special characters such as a copyright symbol or accented letters." title="The text palette contains methods for changing text alignment, style, size, and font, plus buttons for inserting symbols into the text such as a quarter note or special characters such as a copyright symbol or accented letters." width="613" height="272" class="inline" /></p>
+<img src="/sites/musescore.org/files/special-text-symbols_1.png" alt="The text palette contains methods for changing text alignment, style, size, and font, plus buttons for inserting symbols into the text such as a quarter note or special characters such as a copyright symbol or accented letters." title="The text palette contains methods for changing text alignment, style, size, and font, plus buttons for inserting symbols into the text such as a quarter note or special characters such as a copyright symbol or accented letters." width="562" height="263" class="inline" /></p>
 <p>Vedi anche: <a href="http://musescore.org/it/manuale/nomi-degli-accordi" title="Nomi degli accordi">Nomi degli accordi</a>, <a href="http://musescore.org/it/manuale/parole" title="Parole">Parole</a></p>
   </div>
 <div id="node-935" class="section-3">
