@@ -707,7 +707,7 @@ MuseScore::MuseScore()
       a = getAction("paste");
       a->setEnabled(false);
       menuEdit->addAction(a);
-      selectionChanged(0);
+      selectionChanged(SEL_NONE);
       menuEdit->addSeparator();
       menuEdit->addAction(getAction("select-all"));
       menuEdit->addAction(getAction("find"));
@@ -1128,7 +1128,6 @@ void MuseScore::selectionChanged(int state)
 int MuseScore::appendScore(Score* score)
       {
 //      connect(score, SIGNAL(dirtyChanged(Score*)),  SLOT(dirtyChanged(Score*)));
-//      connect(score, SIGNAL(selectionChanged(int)), SLOT(selectionChanged(int)));
 //      connect(score, SIGNAL(posChanged(int)),       SLOT(setPos(int)));
 
       int index = scoreList.size();
@@ -2892,11 +2891,8 @@ void MuseScore::editInPianoroll(Staff* staff)
       {
       if (pianorollEditor == 0)
             pianorollEditor = new PianorollEditor;
-//      else
-//            disconnect(pianorollEditor->score(), SIGNAL(selectionChanged(int)), pianorollEditor, SLOT(changeSelection(int)));
       pianorollEditor->setStaff(staff);
       pianorollEditor->show();
-//      connect(staff->score(), SIGNAL(selectionChanged(int)), pianorollEditor, SLOT(changeSelection(int)));
       }
 
 //---------------------------------------------------------
@@ -2907,11 +2903,8 @@ void MuseScore::editInDrumroll(Staff* staff)
       {
       if (drumrollEditor == 0)
             drumrollEditor = new DrumrollEditor;
-//      else
-//            disconnect(drumrollEditor->score(), SIGNAL(selectionChanged(int)), drumrollEditor, SLOT(changeSelection(int)));
       drumrollEditor->setStaff(staff);
       drumrollEditor->show();
-//      connect(staff->score(), SIGNAL(selectionChanged(int)), drumrollEditor, SLOT(changeSelection(int)));
       }
 
 //---------------------------------------------------------
@@ -4181,6 +4174,15 @@ void MuseScore::endCmd()
             if (cs->instrumentsChanged()) {
                   seq->initInstruments();
                   cs->setExcerptsChanged(false);
+                  }
+            if (cs->selectionChanged()) {
+                  cs->setSelectionChanged(false);
+                  SelState ss = cs->selection().state();
+                  selectionChanged(ss);
+                  if (pianorollEditor)
+                        pianorollEditor->changeSelection(ss);
+                  if (drumrollEditor)
+                        drumrollEditor->changeSelection(ss);
                   }
 
             QAction* action = getAction("concert-pitch");
