@@ -370,7 +370,7 @@ void Preferences::read()
       showNavigator   = s.value("showNavigator", true).toBool();
       showStatusBar   = s.value("showStatusBar", true).toBool();
       showPlayPanel   = s.value("showPlayPanel", false).toBool();
-      showWebPanel    = s.value("showWebPanel", showWebPanel).toBool();
+      showWebPanel    = s.value("showWebPanel", true).toBool();
 
 #if defined(Q_WS_MAC) || defined(__MINGW32__)
       useAlsaAudio       = s.value("useAlsaAudio", false).toBool();
