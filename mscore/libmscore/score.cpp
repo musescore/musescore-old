@@ -286,6 +286,7 @@ void Score::init()
       _playNote       = false;
       _excerptsChanged = false;
       _instrumentsChanged = false;
+      _selectionChanged   = false;
 
       keyState        = 0;
       _showInvisible  = true;
@@ -3229,7 +3230,7 @@ void Score::lassoSelectEnd()
 void Score::searchSelectedElements()
       {
       _selection.searchSelectedElements();
-//      emit selectionChanged(int(_selection.state()));
+      _selectionChanged = true;
       }
 
 //---------------------------------------------------------

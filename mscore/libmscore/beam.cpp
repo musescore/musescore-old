@@ -986,8 +986,6 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
 
             for (int idx = 0; idx < chordRests; ++idx) {
                   ChordRest* cr = crl[idx];
-                  // if (cr->type() != CHORD)
-                  //      continue;
                   bool b32 = (beamLevel >= 1) && (cr->beamMode() == BEAM_BEGIN32);
                   bool b64 = (beamLevel >= 2) && (cr->beamMode() == BEAM_BEGIN64);
 
@@ -1015,19 +1013,26 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                               // create broken segment
                               double len = beamMinLen;
 
-                              // find out direction of beam fragment
-                              // if on first chord: right
-                              // if on last chord:  left
-                              // else ...
-                              //    point to same direction as beam starting
-                              //       one level higher
-                              //
-                              if (!hasBeamSegment[idx-1] && (cr1 != crl[0])) {
-                                    Duration d = cr1->durationType();
-                                    d = d.shift(-1);
-                                    int rtick = cr1->tick() - cr1->measure()->tick();
-                                    if (rtick % d.ticks())
+                              if ((idx > 1) && (idx < chordRests)
+                                 && (crl[idx-2]->duration() != crl[idx]->duration())) {
+                                    if (crl[idx-2]->duration() < crl[idx]->duration())
                                           len = -len;
+                                    }
+                              else {
+                                    // find out direction of beam fragment
+                                    // if on first chord: right
+                                    // if on last chord:  left
+                                    // else ...
+                                    //    point to same direction as beam starting
+                                    //       one level higher
+                                    //
+                                    if (!hasBeamSegment[idx-1] && (cr1 != crl[0])) {
+                                          Duration d = cr1->durationType();
+                                          d = d.shift(-1);
+                                          int rtick = cr1->tick() - cr1->measure()->tick();
+                                          if (rtick % d.ticks())
+                                                len = -len;
+                                          }
                                     }
                               double x2 = cr1->stemPos(cr1->up(), false).x();
                               double x3 = x2 + len;

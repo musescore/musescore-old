@@ -281,7 +281,7 @@ void Selection::setRange(Segment* a, Segment* b, int c, int d)
       _activeSegment = b;
       _staffStart    = c;
       _staffEnd      = d;
-      _state         = SEL_RANGE;
+      setState(SEL_RANGE);
       }
 
 //---------------------------------------------------------
@@ -349,7 +349,7 @@ void Selection::updateState()
       if (n == 0)
             setState(SEL_NONE);
       else if (_state == SEL_NONE)
-            _state = SEL_LIST;
+            setState(SEL_LIST);
       if (!_score->noteEntryMode())
              _score->setInputState(e);
       }
@@ -362,7 +362,7 @@ void Selection::setState(SelState s)
       {
       if (_state != s) {
             _state = s;
-//            _score->emitSelectionChanged(int(_state));
+            _score->setSelectionChanged(true);
             }
       }
 
