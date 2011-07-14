@@ -3703,19 +3703,19 @@ is incompatible with current interface</source>
     <name>MyWebView</name>
     <message>
         <source>Could not&lt;br /&gt; connect</source>
-        <translation type="unfinished"/>
+        <translation>不能&lt;br /&gt; 连接</translation>
     </message>
     <message>
         <source>To connect with the community, &lt;br /&gt; you need to have internet &lt;br /&gt; connection enabled</source>
-        <translation type="unfinished"/>
+        <translation>为连接社区,&lt; br / &gt;你需要上互联网&lt; br / &gt;连接启用</translation>
     </message>
     <message>
         <source>Retry</source>
-        <translation type="unfinished"/>
+        <translation>重试</translation>
     </message>
     <message>
         <source>Close this permanently</source>
-        <translation type="unfinished"/>
+        <translation>永久关闭</translation>
     </message>
 </context>
 <context>
@@ -4752,15 +4752,15 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Show Play Panel</source>
-        <translation type="unfinished"/>
+        <translation>显示 放音 面板</translation>
     </message>
     <message>
         <source>Show Navigator</source>
-        <translation type="unfinished"/>
+        <translation>显示 导航器</translation>
     </message>
     <message>
         <source>Show MuseScore Connect</source>
-        <translation type="unfinished"/>
+        <translation>显示 MuseScore 连接</translation>
     </message>
 </context>
 <context>
@@ -5874,7 +5874,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Staff Properties...</source>
-        <translation type="unfinished">谱表属性...</translation>
+        <translation>谱表 属性...</translation>
     </message>
 </context>
 <context>
@@ -6648,31 +6648,31 @@ p, li { white-space: pre-wrap; }
     <name>WebPageDockWidget</name>
     <message>
         <source>Connect with the &lt;br /&gt; Community</source>
-        <translation type="unfinished"/>
+        <translation>连接&lt; br / &gt;社区</translation>
     </message>
     <message>
         <source>Find help</source>
-        <translation type="unfinished"/>
+        <translation>寻找 帮助</translation>
     </message>
     <message>
         <source>Improve your skills</source>
-        <translation type="unfinished"/>
+        <translation>提高您的技能</translation>
     </message>
     <message>
         <source>Read the latest news</source>
-        <translation type="unfinished"/>
+        <translation>阅读最新的消息</translation>
     </message>
     <message>
         <source>Download free sheet music</source>
-        <translation type="unfinished"/>
+        <translation>下载免费的乐谱</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"/>
+        <translation>开始</translation>
     </message>
     <message>
         <source>Close this permanently</source>
-        <translation type="unfinished"/>
+        <translation>永久关闭</translation>
     </message>
 </context>
 <context>

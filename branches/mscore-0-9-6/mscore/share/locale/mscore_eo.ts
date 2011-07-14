@@ -6682,11 +6682,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>double sharp</source>
-        <translation>duopa dieso</translation>
+        <translation>dudieso</translation>
     </message>
     <message>
         <source>double flat</source>
-        <translation>duopa bemolo</translation>
+        <translation>dubemolo</translation>
     </message>
     <message>
         <source>natural</source>
@@ -7097,107 +7097,107 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Reset Beam Mode</source>
-        <translation>Reset Beam Mode</translation>
+        <translation>Trabreĝimon reeki</translation>
     </message>
     <message>
         <source>up+shift+ctrl</source>
-        <translation>up+shift+ctrl</translation>
+        <translation>Sup+Maj+Ktrl</translation>
     </message>
     <message>
         <source>down+shift+ctrl</source>
-        <translation>down+shift+ctrl</translation>
+        <translation>Sub+Maj+Ktrl</translation>
     </message>
     <message>
         <source>left+ctrl</source>
-        <translation>left+ctrl</translation>
+        <translation>Liv+Ktrl</translation>
     </message>
     <message>
         <source>add previous chord to selection</source>
-        <translation>add previous chord to selection</translation>
+        <translation>Antaǔan noton plielekti</translation>
     </message>
     <message>
         <source>left+shift</source>
-        <translation>left+shift</translation>
+        <translation>Liv+Maj</translation>
     </message>
     <message>
         <source>select to beginning of measure</source>
-        <translation>select to beginning of measure</translation>
+        <translation>Ĝis mezurkomenco elekti</translation>
     </message>
     <message>
         <source>add next chord to selection</source>
-        <translation>add next chord to selection</translation>
+        <translation>Postan noton plielekti</translation>
     </message>
     <message>
         <source>right+shift</source>
-        <translation>right+shift</translation>
+        <translation>Deks+Maj</translation>
     </message>
     <message>
         <source>select to end of measure</source>
-        <translation>select to end of measure</translation>
+        <translation>Ĝis mezurfino elekti</translation>
     </message>
     <message>
         <source>right+ctrl+shift</source>
-        <translation>right+ctrl+shift</translation>
+        <translation>deks+ktrl+maj</translation>
     </message>
     <message>
         <source>select to beginning of line</source>
-        <translation>select to beginning of line</translation>
+        <translation>ĝis linjkomenco elekti</translation>
     </message>
     <message>
         <source>shift+home</source>
-        <translation>shift+home</translation>
+        <translation>maj+hejm</translation>
     </message>
     <message>
         <source>select to end of line</source>
-        <translation>select to end of line</translation>
+        <translation>ĝis linjfino elekti</translation>
     </message>
     <message>
         <source>shift+end</source>
-        <translation>shift+end</translation>
+        <translation>maj+fin</translation>
     </message>
     <message>
         <source>select to beginning of score</source>
-        <translation>select to beginning of score</translation>
+        <translation>ĝis partiturkomenco elekti</translation>
     </message>
     <message>
         <source>ctrl+shift+home</source>
-        <translation>ctrl+shift+home</translation>
+        <translation>ktrl+maj+hejm</translation>
     </message>
     <message>
         <source>select to end of score</source>
-        <translation>select to end of score</translation>
+        <translation>ĝis partiturfino elekti</translation>
     </message>
     <message>
         <source>ctrl+shift+end</source>
-        <translation>ctrl+shift+end</translation>
+        <translation>ktrl+maj+fin</translation>
     </message>
     <message>
         <source>add staff above to selection</source>
-        <translation>add stave above to selection</translation>
+        <translation>liniaron aldoni super elektaĵo</translation>
     </message>
     <message>
         <source>add staff below to selection</source>
-        <translation>add stave below to selection</translation>
+        <translation>liniaron aldoni malsuper elektaĵo</translation>
     </message>
     <message>
         <source>page-prev</source>
-        <translation>page-prev</translation>
+        <translation>Antaŭan paĝon</translation>
     </message>
     <message>
         <source>page-next</source>
-        <translation>page-next</translation>
+        <translation>Malantaŭan paĝon</translation>
     </message>
     <message>
         <source>page-top</source>
-        <translation>page-top</translation>
+        <translation>Paĝsupron</translation>
     </message>
     <message>
         <source>page-end</source>
-        <translation>page-end</translation>
+        <translation>Paĝfinon</translation>
     </message>
     <message>
         <source>add slur</source>
-        <translation>add slur</translation>
+        <translation>Ligon aldoni</translation>
     </message>
     <message>
         <source>crescendo</source>
@@ -7209,239 +7209,239 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>ESCAPE</source>
-        <translation>ESCAPE</translation>
+        <translation>ESKAPI</translation>
     </message>
     <message>
         <source>Delete Selected Measures</source>
-        <translation>Delete Selected Measures</translation>
+        <translation>Forviŝi elektitajn mezurojn</translation>
     </message>
     <message>
         <source>Append Measure</source>
-        <translation>Append Measure</translation>
+        <translation>Mezuron almeti</translation>
     </message>
     <message>
         <source>Append Measures...</source>
-        <translation>Append Measures…</translation>
+        <translation>Mezurojn almeti...</translation>
     </message>
     <message>
         <source>Insert Measure</source>
-        <translation>Insert Measure</translation>
+        <translation>Mezuron eningigi</translation>
     </message>
     <message>
         <source>Insert Measures...</source>
-        <translation>Insert Measures…</translation>
+        <translation>Mezurojn eningigi...</translation>
     </message>
     <message>
         <source>Insert Horizontal Frame</source>
-        <translation>Insert Horizontal Frame</translation>
+        <translation>Horizontalan framon eningigi</translation>
     </message>
     <message>
         <source>Insert Vertical Frame</source>
-        <translation>Insert Vertical Frame</translation>
+        <translation>Vertikalan framon eningigi</translation>
     </message>
     <message>
         <source>Append Horizontal Frame</source>
-        <translation>Append Horizontal Frame</translation>
+        <translation>Horizontalan framon enmeti</translation>
     </message>
     <message>
         <source>Append Vertical Frame</source>
-        <translation>Append Vertical Frame</translation>
+        <translation>Vertikalan framon enmeti</translation>
     </message>
     <message>
         <source>Duplet</source>
-        <translation>Duplet</translation>
+        <translation>Duonnotaro</translation>
     </message>
     <message>
         <source>Triplet</source>
-        <translation>Triplet</translation>
+        <translation>Trionnotaro</translation>
     </message>
     <message>
         <source>Quadruplet</source>
-        <translation>Quadruplet</translation>
+        <translation>Kvaronnotaro</translation>
     </message>
     <message>
         <source>Quintuplet</source>
-        <translation>Quintuplet</translation>
+        <translation>Kvinonnotaro</translation>
     </message>
     <message>
         <source>Sextuplet</source>
-        <translation>Sextuplet</translation>
+        <translation>Sesonnotaro</translation>
     </message>
     <message>
         <source>Septuplet</source>
-        <translation>Septuplet</translation>
+        <translation>Seponnotaro</translation>
     </message>
     <message>
         <source>Octuplet</source>
-        <translation>Octuplet</translation>
+        <translation>Okonnotaro</translation>
     </message>
     <message>
         <source>Nonuplet</source>
-        <translation>Nonuplet</translation>
+        <translation>Naŭonnotaro</translation>
     </message>
     <message>
         <source>Other Tuplets</source>
-        <translation>Other Tuplets</translation>
+        <translation>Aliaj notaroj</translation>
     </message>
     <message>
         <source>Other...</source>
-        <translation>Other…</translation>
+        <translation>Alia...</translation>
     </message>
     <message>
         <source>note longa</source>
-        <translation>note longa</translation>
+        <translation>longnoto</translation>
     </message>
     <message>
         <source>Longa</source>
-        <translation>Longa</translation>
+        <translation>Longnoto</translation>
     </message>
     <message>
         <source>note breve</source>
-        <translation>note breve</translation>
+        <translation>Mallongnoto</translation>
     </message>
     <message>
         <source>Double whole note (breve)</source>
-        <translation>Breve (double whole note)</translation>
+        <translation>Duobla plennoto (Mallongnoto)</translation>
     </message>
     <message>
         <source>pad note 1/1</source>
-        <translation>pad note 1/1</translation>
+        <translation>1/1</translation>
     </message>
     <message>
         <source>Whole note (semibreve)</source>
-        <translation>Semibreve (whole note)</translation>
+        <translation>Plennoto</translation>
     </message>
     <message>
         <source>pad note 1/2</source>
-        <translation>pad note 1/2</translation>
+        <translation>1/2</translation>
     </message>
     <message>
         <source>Half note (minim)</source>
-        <translation>Minim (half note)</translation>
+        <translation>Duonnoto</translation>
     </message>
     <message>
         <source>pad note 1/4</source>
-        <translation>pade note 1/4</translation>
+        <translation>1/4</translation>
     </message>
     <message>
         <source>Quarter note (crochet)</source>
-        <translation>Quarter note (crochet)</translation>
+        <translation>Okonnoto</translation>
     </message>
     <message>
         <source>pad note 1/8</source>
-        <translation>pad note 1/8</translation>
+        <translation>1/8</translation>
     </message>
     <message>
         <source>Eighth note (quaver)</source>
-        <translation>Quaver (eighth note)</translation>
+        <translation>Okonnoto</translation>
     </message>
     <message>
         <source>pad note 1/16</source>
-        <translation>pad note 1/16</translation>
+        <translation>1/16</translation>
     </message>
     <message>
         <source>16th note (semiquaver)</source>
-        <translation>Semiquaver (16th note)</translation>
+        <translation>Deksesonnoto</translation>
     </message>
     <message>
         <source>pad note 1/32</source>
-        <translation>pad note 1/32</translation>
+        <translation>1/32</translation>
     </message>
     <message>
         <source>32nd note (demi-semiquaver)</source>
-        <translation>Demisemiquaver (32nd note)</translation>
+        <translation>Tridekduonnoto</translation>
     </message>
     <message>
         <source>pad note 1/64</source>
-        <translation>pad note 1/64</translation>
+        <translation>1/64</translation>
     </message>
     <message>
         <source>64th note (semi-demi-semiquaver)</source>
-        <translation>Hemidemisemiquaver (64th note)</translation>
+        <translation>Sesdekkvaronnoto</translation>
     </message>
     <message>
         <source>pad dot</source>
-        <translation>pad dot</translation>
+        <translation>punkto</translation>
     </message>
     <message>
         <source>Dot</source>
-        <translation>Dot</translation>
+        <translation>Punkto</translation>
     </message>
     <message>
         <source>pad double dot</source>
-        <translation>pad double dot</translation>
+        <translation>Duobla punkto</translation>
     </message>
     <message>
         <source>Double dot</source>
-        <translation>Double dot</translation>
+        <translation>duobla punkto</translation>
     </message>
     <message>
         <source>tie</source>
-        <translation>tie</translation>
+        <translation>ligo</translation>
     </message>
     <message>
         <source>pad rest</source>
-        <translation>pad rest</translation>
+        <translation>silenco</translation>
     </message>
     <message>
         <source>double sharp</source>
-        <translation>double sharp</translation>
+        <translation>dudiezo</translation>
     </message>
     <message>
         <source>sharp</source>
-        <translation>sharp</translation>
+        <translation>diezo</translation>
     </message>
     <message>
         <source>natural</source>
-        <translation>natural</translation>
+        <translation>bekvadrato</translation>
     </message>
     <message>
         <source>double flat</source>
-        <translation>double flat</translation>
+        <translation>dubemolo</translation>
     </message>
     <message>
         <source>acciaccatura</source>
-        <translation>acciaccatura</translation>
+        <translation>akrigaĵo</translation>
     </message>
     <message>
         <source>appoggiatura</source>
-        <translation>appoggiatura</translation>
+        <translation>apogaĵo</translation>
     </message>
     <message>
         <source>grace-4</source>
-        <translation>grace-crotchet</translation>
+        <translation>ornamaĵo-4</translation>
     </message>
     <message>
         <source>grace-16</source>
-        <translation>grace-semiquaver</translation>
+        <translation>ornamaĵo-16</translation>
     </message>
     <message>
         <source>grace-32</source>
-        <translation>grace-demisemiquaver</translation>
+        <translation>ornamaĵo-32</translation>
     </message>
     <message>
         <source>voice 1</source>
-        <translation>voice 1</translation>
+        <translation>voĉo 1</translation>
     </message>
     <message>
         <source>voice 2</source>
-        <translation>voice 2</translation>
+        <translation>voĉo 2</translation>
     </message>
     <message>
         <source>voice 3</source>
-        <translation>voice 3</translation>
+        <translation>voĉo 3</translation>
     </message>
     <message>
         <source>voice 4</source>
-        <translation>voice 4</translation>
+        <translation>voĉo 4</translation>
     </message>
     <message>
         <source>midi input in</source>
-        <translation>midi input in</translation>
+        <translation>MIDI_a enigo</translation>
     </message>
     <message>
         <source>Enable MIDI Input</source>
-        <translation>Enable MIDI Input</translation>
+        <translation>MIDI_a enigon ebligi</translation>
     </message>
     <message>
         <source>editing sound on</source>

@@ -5,15 +5,15 @@
     <name>AboutBox</name>
     <message>
         <source>AboutBox</source>
-        <translation>AboutBox</translation>
+        <translation>درباره</translation>
     </message>
     <message>
         <source>Version: 0.9.0</source>
-        <translation>Version: 0.9.0</translation>
+        <translation>نسخه:</translation>
     </message>
     <message>
         <source>Revision: 628</source>
-        <translation>Revision: 628</translation>
+        <translation>بازبینی:</translation>
     </message>
     <message utf8="true">
         <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
@@ -26,38 +26,38 @@ p, li { white-space: pre-wrap; }
 &lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;&#13;
-&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;&#13;
-p, li { white-space: pre-wrap; }&#13;
-&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Visit &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; for new versions and more information.&lt;/span&gt;&lt;/p&gt;&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Support MuseScore with &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;your donation&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&#13;
-&#13;
-&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2011 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;line break&#13;
+&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;line break&#13;
+p, li { white-space: pre-wrap; }line break&#13;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;line break&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;نگاهی به &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;برای اطلاعات بیشتر درباره ی نرم افزار یا نسخه های جدیدتر نرم افزار بندازید.&lt;/span&gt;&lt;/p&gt;line break&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;میوزسکور را با کمک های خودتان &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;پشتیبانی کنید.&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;line break&#13;
+line break&#13;
+&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;line break&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;حق انتشار محفوظ &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;1999-2009 ورنر شوویر و دیگران &lt;/span&gt;&lt;/p&gt;line break&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;انتشار یافته تحت اجازه نامه ی همگانی گنو&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
     <name>AboutBoxDialog</name>
     <message>
         <source>Unstable Prerelease for Version: </source>
-        <translation>Unstable Prerelease for Version: </translation>
+        <translation>نسخه ی منتشر شده ی ناپایدار برای نسخه ی: </translation>
     </message>
     <message>
         <source>Version: </source>
-        <translation>Version: </translation>
+        <translation>نسخه: </translation>
     </message>
     <message>
         <source>Revision: %1</source>
-        <translation>Revision: %1</translation>
+        <translation>بازبینی:</translation>
     </message>
 </context>
 <context>
     <name>Accidental</name>
     <message>
         <source>round bracket</source>
-        <translation>round bracket</translation>
+        <translation>براکت های کناری</translation>
     </message>
 </context>
 <context>
@@ -71,15 +71,15 @@ p, li { white-space: pre-wrap; }&#13;
     <name>ArticulationProperties</name>
     <message>
         <source>MuseScore: Articulations Properties</source>
-        <translation>MuseScore: Articulations Properties</translation>
+        <translation>میوزسکور: تنظیمات تلفظ صدا</translation>
     </message>
     <message>
         <source>Channel</source>
-        <translation>Channel</translation>
+        <translation>کانال</translation>
     </message>
     <message>
         <source>Midi Action</source>
-        <translation>Midi Action</translation>
+        <translation>وضعیت MIDI</translation>
     </message>
 </context>
 <context>
@@ -94,18 +94,18 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>SubType:</source>
-        <translation>SubType:</translation>
+        <translation>گونه ی فرعی</translation>
     </message>
 </context>
 <context>
     <name>BeamBase</name>
     <message>
         <source>Form</source>
-        <translation>Form</translation>
+        <translation>حالت</translation>
     </message>
     <message>
         <source>up:</source>
-        <translation>up:</translation>
+        <translation>بالا:</translation>
     </message>
     <message>
         <source>Chord/Rest</source>
@@ -120,11 +120,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Margins</source>
-        <translation>Margins</translation>
+        <translation>حاشیه بندی</translation>
     </message>
     <message>
         <source>left:</source>
-        <translation>left:</translation>
+        <translation>چپ:</translation>
     </message>
     <message>
         <source>mm</source>
@@ -132,15 +132,15 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>right:</source>
-        <translation>right:</translation>
+        <translation>راست:</translation>
     </message>
     <message>
         <source>top:</source>
-        <translation>top:</translation>
+        <translation>بالا:</translation>
     </message>
     <message>
         <source>bottom:</source>
-        <translation>bottom:</translation>
+        <translation>پایین:</translation>
     </message>
 </context>
 <context>
@@ -174,63 +174,63 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Root</source>
-        <translation>Root</translation>
+        <translation>پایه</translation>
     </message>
     <message>
         <source>C</source>
-        <translation>C</translation>
+        <translation>دو</translation>
     </message>
     <message>
         <source>E</source>
-        <translation>E</translation>
+        <translation>می</translation>
     </message>
     <message>
         <source>bb (double flat)</source>
-        <translation>bb (double flat)</translation>
+        <translation>bb - دو بمل</translation>
     </message>
     <message>
         <source>F</source>
-        <translation>F</translation>
+        <translation>فا</translation>
     </message>
     <message>
         <source>b (flat)</source>
-        <translation>b (flat)</translation>
+        <translation>b - بمل</translation>
     </message>
     <message>
         <source>G</source>
-        <translation>G</translation>
+        <translation>سل</translation>
     </message>
     <message>
         <source>(no accidental)</source>
-        <translation>(no accidental)</translation>
+        <translation>غیر تصادفی</translation>
     </message>
     <message>
         <source>A</source>
-        <translation>A</translation>
+        <translation>لا</translation>
     </message>
     <message>
         <source># (sharp)</source>
-        <translation># (sharp)</translation>
+        <translation># - دیز</translation>
     </message>
     <message>
         <source>B</source>
-        <translation>B</translation>
+        <translation>سی</translation>
     </message>
     <message>
         <source>## (double sharp)</source>
-        <translation>## (double sharp)</translation>
+        <translation>## - دو دیز</translation>
     </message>
     <message>
         <source>D</source>
-        <translation>D</translation>
+        <translation>ر</translation>
     </message>
     <message>
         <source>Extension</source>
-        <translation>Extension</translation>
+        <translation>کشش</translation>
     </message>
     <message>
         <source>Maj</source>
-        <translation>Maj</translation>
+        <translation>ماژور</translation>
     </message>
     <message>
         <source>2</source>
@@ -238,11 +238,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Maj7</source>
-        <translation>Maj7</translation>
+        <translation>ماژور هفتم</translation>
     </message>
     <message>
         <source>Maj9</source>
-        <translation>Maj9</translation>
+        <translation>ماژور نهم</translation>
     </message>
     <message>
         <source>6</source>
@@ -274,7 +274,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>7Sus</source>
-        <translation>7sus</translation>
+        <translation>7Sus</translation>
     </message>
     <message>
         <source>m6</source>
@@ -306,7 +306,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Other:</source>
-        <translation>Other:</translation>
+        <translation>دیگر:</translation>
     </message>
     <message>
         <source>5b</source>
@@ -750,71 +750,71 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Degrees</source>
-        <translation>Degrees</translation>
+        <translation>درجات</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation>Add</translation>
+        <translation>افزودن</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Delete</translation>
+        <translation>پاک کردن</translation>
     </message>
     <message>
         <source>Bass Note / Inversion</source>
-        <translation>Bass Note / Inversion</translation>
+        <translation>نوت بم / وارونه</translation>
     </message>
     <message>
         <source>none</source>
-        <translation>none</translation>
+        <translation>هیچی</translation>
     </message>
     <message>
         <source>/C</source>
-        <translation>/C</translation>
+        <translation>/دو</translation>
     </message>
     <message>
         <source>/Db</source>
-        <translation>/Db</translation>
+        <translation>/ر بمل</translation>
     </message>
     <message>
         <source>/D</source>
-        <translation>/D</translation>
+        <translation>/ر</translation>
     </message>
     <message>
         <source>/Eb</source>
-        <translation>/Eb</translation>
+        <translation>/می بمل</translation>
     </message>
     <message>
         <source>/E</source>
-        <translation>/E</translation>
+        <translation>/می</translation>
     </message>
     <message>
         <source>/F</source>
-        <translation>/F</translation>
+        <translation>/فا</translation>
     </message>
     <message>
         <source>/F#</source>
-        <translation>/F#</translation>
+        <translation>/فا دیز</translation>
     </message>
     <message>
         <source>/G</source>
-        <translation>/G</translation>
+        <translation>/سل</translation>
     </message>
     <message>
         <source>/Ab</source>
-        <translation>/Ab</translation>
+        <translation>/لا بمل</translation>
     </message>
     <message>
         <source>/A</source>
-        <translation>/A</translation>
+        <translation>/لا</translation>
     </message>
     <message>
         <source>/Bb</source>
-        <translation>/Bb</translation>
+        <translation>/سی بمل</translation>
     </message>
     <message>
         <source>/B</source>
-        <translation>/B</translation>
+        <translation>/سی</translation>
     </message>
     <message>
         <source>1</source>
@@ -852,7 +852,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>small</source>
-        <translation>small</translation>
+        <translation>کوچک</translation>
     </message>
     <message>
         <source>additional leading space </source>
@@ -869,7 +869,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Note Properties</source>
-        <translation>Note Properties</translation>
+        <translation>مشخصات نوت</translation>
     </message>
     <message>
         <source>tuning offset</source>
@@ -882,49 +882,49 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <source>auto</source>
         <extracomment>velocity type</extracomment>
-        <translation>auto</translation>
+        <translation>خودکار</translation>
     </message>
     <message>
         <source>up</source>
-        <translation>up</translation>
+        <translation>بالا</translation>
     </message>
     <message>
         <source>down</source>
-        <translation>down</translation>
+        <translation>پایین</translation>
     </message>
     <message>
         <source>note head positon </source>
-        <translation>note head positon </translation>
+        <translation>مکان سر/پیکان نوت </translation>
     </message>
     <message>
         <source>left of stem</source>
-        <translation>left of stem</translation>
+        <translation>سوی چپ میله ی نوت</translation>
     </message>
     <message>
         <source>right of stem</source>
-        <translation>right of stem</translation>
+        <translation>سوی راست میله ی نوت</translation>
     </message>
     <message>
         <source>stemless</source>
-        <translation>stemless</translation>
+        <translation>نوت بی میله</translation>
     </message>
     <message>
         <source>velocity type</source>
-        <translation>velocity type</translation>
+        <translation>نوع سرعت</translation>
     </message>
     <message>
         <source>velocity (0-127)</source>
-        <translation>velocity (0-127)</translation>
+        <translation>سرعت - 0 تا 127</translation>
     </message>
     <message>
         <source>user</source>
         <extracomment>velocity type</extracomment>
-        <translation>user</translation>
+        <translation>کاربر</translation>
     </message>
     <message>
         <source>offset</source>
         <extracomment>velocity type</extracomment>
-        <translation>offset</translation>
+        <translation>نقطه ی شروع</translation>
     </message>
     <message>
         <source>ontime offset type</source>
@@ -965,19 +965,19 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>cross</source>
-        <translation>cross</translation>
+        <translation>علامت صلیب</translation>
     </message>
     <message>
         <source>diamond</source>
-        <translation>diamond</translation>
+        <translation>ستاره</translation>
     </message>
     <message>
         <source>triangle</source>
-        <translation>triangle</translation>
+        <translation>مثلث</translation>
     </message>
     <message>
         <source>slash</source>
-        <translation>slash</translation>
+        <translation>بریده</translation>
     </message>
     <message>
         <source>xcircle</source>
@@ -985,47 +985,47 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>do</source>
-        <translation>do</translation>
+        <translation>دو</translation>
     </message>
     <message>
         <source>re</source>
-        <translation>re</translation>
+        <translation>ر</translation>
     </message>
     <message>
         <source>mi</source>
-        <translation>mi</translation>
+        <translation>می</translation>
     </message>
     <message>
         <source>fa</source>
-        <translation>fa</translation>
+        <translation>فا</translation>
     </message>
     <message>
         <source>la</source>
-        <translation>la</translation>
+        <translation>لا</translation>
     </message>
     <message>
         <source>ti</source>
-        <translation>ti</translation>
+        <translation>سی</translation>
     </message>
     <message>
         <source>Auto</source>
-        <translation>Auto</translation>
+        <translation>خودکار</translation>
     </message>
     <message>
         <source>whole</source>
-        <translation>semibreve</translation>
+        <translation>همه</translation>
     </message>
     <message>
         <source>half</source>
-        <translation>minim</translation>
+        <translation>نوت سفید</translation>
     </message>
     <message>
         <source>quarter</source>
-        <translation>crotchet</translation>
+        <translation>نوت چهارلا چنگ</translation>
     </message>
     <message>
         <source>breve</source>
-        <translation>breve</translation>
+        <translation>نوت دو بار گرد</translation>
     </message>
     <message>
         <source>sol</source>
@@ -1075,11 +1075,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Name</source>
-        <translation>Name</translation>
+        <translation>نام</translation>
     </message>
     <message>
         <source>Save As</source>
-        <translation>Save As</translation>
+        <translation>ذخیره ی دیگر</translation>
     </message>
     <message>
         <source>MuseScore: Chord Style Editor</source>
@@ -1094,11 +1094,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Set Invisible</source>
-        <translation>Set Invisible</translation>
+        <translation>تنظیم به نامریی</translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation>Set Visible</translation>
+        <translation>تنظیم به مریی</translation>
     </message>
     <message>
         <source>Text Properties...</source>
@@ -2969,51 +2969,51 @@ failed: </translation>
     </message>
     <message>
         <source>F# major, D# minor</source>
-        <translation>F# major, D# minor</translation>
+        <translation>فا دیز ماژور ، ر دیز مینور</translation>
     </message>
     <message>
         <source>Bb major, G minor</source>
-        <translation>Bb major, G minor</translation>
+        <translation>سی بمل ماژور ، سل مینور</translation>
     </message>
     <message>
         <source>C# major, A# minor</source>
-        <translation>C# major, A# minor</translation>
+        <translation>دو دیز ماژور ، لا دیز مینور</translation>
     </message>
     <message>
         <source>F major,  D minor</source>
-        <translation>F major, D minor</translation>
+        <translation>فا ماژور ، ر مینور</translation>
     </message>
     <message>
         <source>C major, A minor</source>
-        <translation>C major, A minor</translation>
+        <translation>دو ماژور ، لا مینور</translation>
     </message>
     <message>
         <source>Clefs</source>
-        <translation>Clefs</translation>
+        <translation>کلیدها</translation>
     </message>
     <message>
         <source>4/4 common time</source>
-        <translation>4/4 common time</translation>
+        <translation>مقیاس معمول 4/4</translation>
     </message>
     <message>
         <source>8va</source>
-        <translation>8va</translation>
+        <translation>اکتاو بالا</translation>
     </message>
     <message>
         <source>15ma</source>
-        <translation>15ma</translation>
+        <translation>دو اکتاو بالا</translation>
     </message>
     <message>
         <source>8vb</source>
-        <translation>8vb</translation>
+        <translation>اکتاو پایین</translation>
     </message>
     <message>
         <source>15mb</source>
-        <translation>15mb</translation>
+        <translation>دو اکتاو پایین</translation>
     </message>
     <message>
         <source>pedal</source>
-        <translation>pedal</translation>
+        <translation>پدال</translation>
     </message>
     <message>
         <source>Lines</source>
@@ -3021,7 +3021,7 @@ failed: </translation>
     </message>
     <message>
         <source>Breath</source>
-        <translation>Breath</translation>
+        <translation>تنفس</translation>
     </message>
     <message>
         <source>Brackets</source>
@@ -3089,7 +3089,7 @@ failed: </translation>
     </message>
     <message>
         <source>&amp;Lines...</source>
-        <translation>&amp;Lines…</translation>
+        <translation>خطوط</translation>
     </message>
     <message>
         <source>Accidentals...</source>
@@ -3117,11 +3117,11 @@ failed: </translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>&amp;Edit</translation>
+        <translation>ویرایش</translation>
     </message>
     <message>
         <source>Voices</source>
-        <translation>Voices</translation>
+        <translation>صداها</translation>
     </message>
     <message>
         <source>Preferences...</source>
@@ -3153,19 +3153,19 @@ failed: </translation>
     </message>
     <message>
         <source>&amp;Display</source>
-        <translation>&amp;Display</translation>
+        <translation>نمایش</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation>&amp;Help</translation>
+        <translation>راهنما</translation>
     </message>
     <message>
         <source>&amp;About</source>
-        <translation>&amp;About</translation>
+        <translation>درباره ی نرم افزار</translation>
     </message>
     <message>
         <source>About&amp;Qt</source>
-        <translation>About&amp;Qt</translation>
+        <translation>درباره ی Qt</translation>
     </message>
     <message>
         <source>MuseScore: Open Help</source>
@@ -3213,15 +3213,15 @@ failed: </translation>
     </message>
     <message>
         <source>Page Number Odd</source>
-        <translation>Page Number Odd</translation>
+        <translation>شماره ی صفحه ی فرد</translation>
     </message>
     <message>
         <source>Page Number Even</source>
-        <translation>Page Number Even</translation>
+        <translation>شماره ی صفحه ی زوج</translation>
     </message>
     <message>
         <source>Translator</source>
-        <translation>Translator</translation>
+        <translation>مترجم</translation>
     </message>
     <message>
         <source>System</source>
@@ -3229,7 +3229,7 @@ failed: </translation>
     </message>
     <message>
         <source>Staff</source>
-        <translation>Stave</translation>
+        <translation>خط های حامل</translation>
     </message>
     <message>
         <source>Chordname</source>
@@ -3241,7 +3241,7 @@ failed: </translation>
     </message>
     <message>
         <source>Volta</source>
-        <translation>Volta</translation>
+        <translation>تکرار</translation>
     </message>
     <message>
         <source>Frame</source>
@@ -3261,7 +3261,7 @@ failed: </translation>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation>&amp;File</translation>
+        <translation>پرونده</translation>
     </message>
     <message>
         <source>no score</source>
@@ -3286,7 +3286,7 @@ before closing?</source>
     </message>
     <message>
         <source>Measures</source>
-        <translation>Bars</translation>
+        <translation>میزان ها</translation>
     </message>
     <message>
         <source>Text</source>
@@ -3382,28 +3382,28 @@ before closing?</source>
     </message>
     <message>
         <source>MuseScore: failure</source>
-        <translation>MuseScore: failure</translation>
+        <translation>خطا در میوزسکور</translation>
     </message>
     <message>
         <source>Load template file </source>
-        <translation>Load template file </translation>
+        <translation>فایل پیش ساخته را بیاور </translation>
     </message>
     <message>
         <source> failed</source>
-        <translation> failed</translation>
+        <translation> نشد</translation>
     </message>
     <message>
         <source>Go To: </source>
-        <translation>Go To: </translation>
+        <translation>برو به: </translation>
     </message>
     <message>
         <source>Online Handbook</source>
-        <translation>Online Handbook</translation>
+        <translation>راهنما روی اینترنت</translation>
     </message>
     <message>
         <source>MuseScore handbook not found at: 
 </source>
-        <translation>MuseScore handbook not found at: 
+        <translation>راهنمای میوزسکور در این آدرس پیدا نشد: 
 </translation>
     </message>
     <message>
@@ -3416,7 +3416,7 @@ From the "Help" menu try choosing "Online Handbook" instead.</translation>
     </message>
     <message>
         <source>Grace Notes</source>
-        <translation>Grace Notes</translation>
+        <translation>نوت های زینت</translation>
     </message>
     <message>
         <source>Acciaccatura</source>
@@ -3428,15 +3428,15 @@ From the "Help" menu try choosing "Online Handbook" instead.</translation>
     </message>
     <message>
         <source>Quarter grace note</source>
-        <translation>Crotchet grace note</translation>
+        <translation>نوت سیاه زینت</translation>
     </message>
     <message>
         <source>16th grace note</source>
-        <translation>Semiquaver grace note</translation>
+        <translation>نوت دو لا چنگ زینت</translation>
     </message>
     <message>
         <source>32nd grace note</source>
-        <translation>Demisemiquaver grace note</translation>
+        <translation>نوت سه لا چنگ زینت</translation>
     </message>
     <message>
         <source>Key Signatures</source>
@@ -3699,19 +3699,19 @@ is incompatible with current interface</translation>
     <name>MyWebView</name>
     <message>
         <source>Could not&lt;br /&gt; connect</source>
-        <translation type="unfinished"/>
+        <translation>&lt;br /&gt; نمی تواند وصل شود</translation>
     </message>
     <message>
         <source>To connect with the community, &lt;br /&gt; you need to have internet &lt;br /&gt; connection enabled</source>
-        <translation type="unfinished"/>
+        <translation>برای برقراری ارتباط با گروه &lt;br /&gt; شما باید به اینترنت وصل باشید &lt;br /&gt;</translation>
     </message>
     <message>
         <source>Retry</source>
-        <translation type="unfinished"/>
+        <translation>تلاش دوباره</translation>
     </message>
     <message>
         <source>Close this permanently</source>
-        <translation type="unfinished"/>
+        <translation>این را برای همیشه ببند</translation>
     </message>
 </context>
 <context>
@@ -4158,7 +4158,7 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Pitch:</source>
-        <translation>Pitch:</translation>
+        <translation>ارتفاع نوت:</translation>
     </message>
     <message>
         <source>MuseScore: &lt;%1&gt; Staff: %2</source>
@@ -4189,7 +4189,7 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>h:mm:s</source>
-        <translation>h:mm:ss</translation>
+        <translation>ساعت:دقیقه:ثانیه</translation>
     </message>
     <message>
         <source>0:00:00</source>
@@ -4197,11 +4197,11 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>actual tempo</source>
-        <translation>actual tempo</translation>
+        <translation>میزان ضرب(سرعت)</translation>
     </message>
     <message>
         <source>120bpm</source>
-        <translation>120bpm</translation>
+        <translation>120 ضرب در دقیقه</translation>
     </message>
     <message>
         <source>relative tempo</source>
@@ -4213,15 +4213,15 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Rewind</source>
-        <translation>Rewind</translation>
+        <translation>برعکس</translation>
     </message>
     <message>
         <source>Play</source>
-        <translation>Play</translation>
+        <translation>پخش</translation>
     </message>
     <message>
         <source>Vol</source>
-        <translation>Vol</translation>
+        <translation>میزان صدا</translation>
     </message>
     <message>
         <source>Tmp</source>
@@ -4237,7 +4237,7 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Shuffle</source>
-        <translation>Shuffle</translation>
+        <translation>پخش در هم</translation>
     </message>
 </context>
 <context>
@@ -4248,15 +4248,15 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Images (*.jpg *.gif *.png)</source>
-        <translation>Images (*.jpg *.gif *.png)</translation>
+        <translation>عکس ها ( *.jpg *.gif *.png )</translation>
     </message>
     <message>
         <source>Choose Background Wallpaper</source>
-        <translation>Choose Background Wallpaper</translation>
+        <translation>انتخاب عکس پس زمینه</translation>
     </message>
     <message>
         <source>default</source>
-        <translation>default</translation>
+        <translation>پیش فرض</translation>
     </message>
     <message>
         <source>Choose Working Directory</source>
@@ -4264,7 +4264,7 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Choose Instrument List</source>
-        <translation>Choose Instrument List</translation>
+        <translation>لیست انتخاب ساز</translation>
     </message>
     <message>
         <source>Choose Starting Score</source>
@@ -4272,34 +4272,34 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Instrument List (*.xml)</source>
-        <translation>Instrument List (*.xml)</translation>
+        <translation>لیست ساز (*.xml)</translation>
     </message>
     <message>
         <source>MuseScore Files (*.mscz *.mscx *.msc);;All (*)</source>
-        <translation>MuseScore Files (*.mscz *.mscx *.msc);;All (*)</translation>
+        <translation>فایل های میوزسکور (*.mscz *.mscx *.msc) ؛؛ همه(*)</translation>
     </message>
 </context>
 <context>
     <name>PrefsDialogBase</name>
     <message>
         <source>MuseScore: Preferences</source>
-        <translation>MuseScore: Preferences</translation>
+        <translation>میوزسکور: تنظیم های برنامه</translation>
     </message>
     <message>
         <source>General</source>
-        <translation>General</translation>
+        <translation>عمومی</translation>
     </message>
     <message>
         <source>Program Start</source>
-        <translation>Program Start</translation>
+        <translation>شروع برنامه</translation>
     </message>
     <message>
         <source>start with new score</source>
-        <translation>start with new score</translation>
+        <translation>آغاز کار با صفحه ی نوت تازه</translation>
     </message>
     <message>
         <source>start with score:</source>
-        <translation>start with score:</translation>
+        <translation>آغاز با صفحه ی نوت:</translation>
     </message>
     <message>
         <source>continue last session</source>
@@ -4315,7 +4315,7 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Instrument List:</source>
-        <translation>Instrument List:</translation>
+        <translation>لیست ساز:</translation>
     </message>
     <message>
         <source>Working Directory:</source>
@@ -4323,43 +4323,43 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Windows</source>
-        <translation>Windows</translation>
+        <translation>پنجره ها</translation>
     </message>
     <message>
         <source>Auto Save</source>
-        <translation>Auto Save</translation>
+        <translation>ذخیره ی خودکار</translation>
     </message>
     <message>
         <source>minutes</source>
-        <translation>minutes</translation>
+        <translation>دقیقه</translation>
     </message>
     <message>
         <source>Language</source>
-        <translation>Language</translation>
+        <translation>زبان</translation>
     </message>
     <message>
         <source>Canvas</source>
-        <translation>Canvas</translation>
+        <translation>رنگ و پوشش</translation>
     </message>
     <message>
         <source>Background</source>
-        <translation>Background</translation>
+        <translation>پس زمینه</translation>
     </message>
     <message>
         <source>Wallpaper</source>
-        <translation>Wallpaper</translation>
+        <translation>عکس</translation>
     </message>
     <message>
         <source>Color</source>
-        <translation>Colour</translation>
+        <translation>رنگ</translation>
     </message>
     <message>
         <source>Notesheet</source>
-        <translation>Notesheet</translation>
+        <translation>صفحه ی نوت</translation>
     </message>
     <message>
         <source>Misc.</source>
-        <translation>Misc.</translation>
+        <translation>دیگر تنظیمات</translation>
     </message>
     <message>
         <source>disable antialiased drawing</source>
@@ -4379,7 +4379,7 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Colors</source>
-        <translation>Colours</translation>
+        <translation>رنگ ها</translation>
     </message>
     <message>
         <source>Note Entry</source>
@@ -4387,15 +4387,15 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Enable midi input</source>
-        <translation>Enable MIDI input</translation>
+        <translation>فعال سازی ورودی MIDI</translation>
     </message>
     <message>
         <source>Play notes when editing</source>
-        <translation>Play notes when editing</translation>
+        <translation>پخش نوت ها به هنگام ویرایش</translation>
     </message>
     <message>
         <source>Alternate input method</source>
-        <translation>Alternate input method</translation>
+        <translation>ورودی جایگزین</translation>
     </message>
     <message>
         <source>Expand Repeats</source>
@@ -4403,15 +4403,15 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>I/O</source>
-        <translation>I/O</translation>
+        <translation>ورودی/خروجی</translation>
     </message>
     <message>
         <source>Ports</source>
-        <translation>Ports</translation>
+        <translation>درگاه ها</translation>
     </message>
     <message>
         <source>Use internal synthesizer</source>
-        <translation>Use internal synthesiser</translation>
+        <translation>استفاده از ترکیب کننده خود برنامه</translation>
     </message>
     <message>
         <source>JACK Audio Server</source>
@@ -4419,27 +4419,27 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Left-Port:</source>
-        <translation>Left-Port:</translation>
+        <translation>درگاه راست</translation>
     </message>
     <message>
         <source>Right-Port:</source>
-        <translation>Right-Port:</translation>
+        <translation>درگاه چپ</translation>
     </message>
     <message>
         <source>ALSA Audio</source>
-        <translation>ALSA Audio</translation>
+        <translation>صدای ALSA</translation>
     </message>
     <message>
         <source>Device:</source>
-        <translation>Device:</translation>
+        <translation>دستگاه:</translation>
     </message>
     <message>
         <source>default</source>
-        <translation>default</translation>
+        <translation>پیش فرض</translation>
     </message>
     <message>
         <source>Sample Rate:</source>
-        <translation>Sample Rate:</translation>
+        <translation>میزان سیگنال (Sample Rate):</translation>
     </message>
     <message>
         <source>192000</source>
@@ -4511,19 +4511,19 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Api:</source>
-        <translation>Api:</translation>
+        <translation>رابط کاربری:</translation>
     </message>
     <message>
         <source>Attention: Any changes on this page require a restart of MuseScore.</source>
-        <translation>Attention: Any changes made on this page will require a restart of MuseScore.</translation>
+        <translation>توجه : برای این که تغییرات این قسمت اجرا شوند باید میوزسکور را ببندید و دوباره باز کنید.</translation>
     </message>
     <message>
         <source>Import</source>
-        <translation>Import</translation>
+        <translation>وارد کردن</translation>
     </message>
     <message>
         <source>Export</source>
-        <translation>Export</translation>
+        <translation>خروجی ها</translation>
     </message>
     <message>
         <source>PNG</source>
@@ -4535,99 +4535,99 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Shortcuts</source>
-        <translation>Shortcuts</translation>
+        <translation>میانبرها</translation>
     </message>
     <message>
         <source>Action</source>
-        <translation>Action</translation>
+        <translation>فرمان</translation>
     </message>
     <message>
         <source>Shortcut</source>
-        <translation>Shortcut</translation>
+        <translation>میانبر</translation>
     </message>
     <message>
         <source>Reset to Default</source>
-        <translation>Reset to Default</translation>
+        <translation>برگشت به تنظیم های پیش فرض</translation>
     </message>
     <message>
         <source>Clear</source>
-        <translation>Clear</translation>
+        <translation>پاک کن</translation>
     </message>
     <message>
         <source>Define...</source>
-        <translation>Define…</translation>
+        <translation>تعیین فرمان...</translation>
     </message>
     <message>
         <source>start empty</source>
-        <translation>start empty</translation>
+        <translation>شروع خالی</translation>
     </message>
     <message>
         <source>Attention: changing the language requires a restart of MuseScore.</source>
-        <translation>Attention: changing the language requires a restart of MuseScore.</translation>
+        <translation>توجه : برای اجرا شدن زبان انتخابی باید میوزسکور را ببندید و دوباره باز کنید.</translation>
     </message>
     <message>
         <source>Style</source>
-        <translation>Style</translation>
+        <translation>سبک</translation>
     </message>
     <message>
         <source>Save every</source>
-        <translation>Save every</translation>
+        <translation>ذخیره در هر</translation>
     </message>
     <message>
         <source>Icons</source>
-        <translation>Icons</translation>
+        <translation>نشانه ها:</translation>
     </message>
     <message>
         <source>General:</source>
-        <translation>General:</translation>
+        <translation>عمومی:</translation>
     </message>
     <message>
         <source>Width</source>
-        <translation>Width</translation>
+        <translation>عرض</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation>Height</translation>
+        <translation>طول</translation>
     </message>
     <message>
         <source>Note Entry:</source>
-        <translation>Note Entry:</translation>
+        <translation>ورودی نوت:</translation>
     </message>
     <message>
         <source>Application Font</source>
-        <translation>Application Font</translation>
+        <translation>قلم برنامه</translation>
     </message>
     <message>
         <source>pt</source>
-        <translation>pt</translation>
+        <translation>اندازه</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation>Text</translation>
+        <translation>متن</translation>
     </message>
     <message>
         <source>Score element colors</source>
-        <translation>Score element colours</translation>
+        <translation>تنظیم رنگ نوت ها</translation>
     </message>
     <message>
         <source>Default foreground</source>
-        <translation>Default foreground</translation>
+        <translation>رنگ پیش زمینه</translation>
     </message>
     <message>
         <source>Select Voice 1</source>
-        <translation>Select Voice 1</translation>
+        <translation>اولین صدای انتخاب شده</translation>
     </message>
     <message>
         <source>Select Voice 2</source>
-        <translation>Select Voice 2</translation>
+        <translation>دومین صدای انتخاب شده</translation>
     </message>
     <message>
         <source>Select Voice 3</source>
-        <translation>Select Voice 3</translation>
+        <translation>سومین صدای انتخاب شده</translation>
     </message>
     <message>
         <source>Select Voice 4</source>
-        <translation>Select Voice 4</translation>
+        <translation>چهارمین صدای انتخاب شده</translation>
     </message>
     <message>
         <source>Drop Target</source>
@@ -4635,11 +4635,11 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Default duration:</source>
-        <translation>Default duration:</translation>
+        <translation>مدت پخش پیش فرض</translation>
     </message>
     <message>
         <source>ms</source>
-        <translation>ms</translation>
+        <translation>میلی ثانیه</translation>
     </message>
     <message>
         <source>If you use the standard input method then the created note pitch depends on the current key signature. For example pressing F in G major creates an F sharp. If the alternate input method is enabled then the current key signature is irrelevant. For example pressing F always creates an F natural.</source>
@@ -6339,11 +6339,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Down</source>
-        <translation>Down</translation>
+        <translation>پایین</translation>
     </message>
     <message>
         <source>Closest</source>
-        <translation>Closest</translation>
+        <translation>نزدیک ترین</translation>
     </message>
     <message>
         <source>Transpose by Interval</source>
@@ -6639,31 +6639,31 @@ p, li { white-space: pre-wrap; }
     <name>WebPageDockWidget</name>
     <message>
         <source>Connect with the &lt;br /&gt; Community</source>
-        <translation type="unfinished"/>
+        <translation>ارتباط با گروه &lt;br /&gt;</translation>
     </message>
     <message>
         <source>Find help</source>
-        <translation type="unfinished"/>
+        <translation>پیدا کردن راهنما</translation>
     </message>
     <message>
         <source>Improve your skills</source>
-        <translation type="unfinished"/>
+        <translation>مهارتتون رو بهبود ببخشین</translation>
     </message>
     <message>
         <source>Read the latest news</source>
-        <translation type="unfinished"/>
+        <translation>خواندن آخرین خبرها</translation>
     </message>
     <message>
         <source>Download free sheet music</source>
-        <translation type="unfinished"/>
+        <translation>گرفتن صفحه های نوت رایگان</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"/>
+        <translation>آغاز</translation>
     </message>
     <message>
         <source>Close this permanently</source>
-        <translation type="unfinished"/>
+        <translation>این را برای همیشه ببند</translation>
     </message>
 </context>
 <context>

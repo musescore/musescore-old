@@ -167,7 +167,7 @@ p, li { white-space: pre-wrap; }&#13;
     <name>ChordEdit</name>
     <message>
         <source>TextLabel</source>
-        <translation>Etiquette de texte</translation>
+        <translation>Étiquette de texte</translation>
     </message>
     <message>
         <source>Root</source>
@@ -978,7 +978,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>slash</source>
-        <translation>slash</translation>
+        <translation>barre oblique (slash)</translation>
     </message>
     <message>
         <source>xcircle</source>
