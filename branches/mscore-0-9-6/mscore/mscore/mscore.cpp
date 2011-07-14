@@ -3173,7 +3173,7 @@ void MuseScore::networkFinished(QNetworkReply* reply)
       printf("name <%s>\n", qPrintable(name));
 
       QByteArray data = reply->readAll();
-      QString tmpName = "/tmp/" + name;
+      QString tmpName = QDir::tempPath () + "/"+ name;
       QFile f(tmpName);
       f.open(QIODevice::WriteOnly);
       f.write(data);
