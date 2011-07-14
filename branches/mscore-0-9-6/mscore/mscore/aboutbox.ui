@@ -571,14 +571,14 @@
          <item>
           <widget class="QLabel" name="versionLabel">
            <property name="text">
-            <string>Version: 0.9.0</string>
+            <string notr="true">Version: 0.9.0</string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QLabel" name="revisionLabel">
            <property name="text">
-            <string>Revision: 628</string>
+            <string notr="true">Revision: 628</string>
            </property>
           </widget>
          </item>
