@@ -276,6 +276,7 @@ class Score {
       bool _playNote;         ///< play selected note after command
       bool _excerptsChanged;
       bool _instrumentsChanged;
+      bool _selectionChanged;
 
       Qt::KeyboardModifiers keyState;
 
@@ -822,6 +823,8 @@ class Score {
       void setInstrumentsChanged(bool val)  { _instrumentsChanged = val; }
       bool playRepeats() const              { return _playRepeats; }
       void setPlayRepeats(bool val)         { _playRepeats = val; }
+      bool selectionChanged() const         { return _selectionChanged; }
+      void setSelectionChanged(bool val)    { _selectionChanged = val;  }
       };
 
 extern Score* gscore;

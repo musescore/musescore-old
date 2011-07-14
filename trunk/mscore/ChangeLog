@@ -1,3 +1,5 @@
+14.jul (ws)
+      - fix #6380: Conflicting flag directions for sub-beams
 13.jul (ws)
       - fix #11469: Selecting "Time Signatures" in palette causes crash
       - fix non default profile: missing palette symbols
