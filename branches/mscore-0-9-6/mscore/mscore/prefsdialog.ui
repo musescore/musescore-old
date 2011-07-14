@@ -264,7 +264,7 @@
         </widget>
        </item>
        <item row="2" column="0">
-        <widget class="QGroupBox" name="webPanelShow">
+        <widget class="QGroupBox" name="groupBox">
          <property name="title">
           <string>Windows</string>
          </property>
@@ -293,7 +293,7 @@
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QCheckBox" name="checkBox">
+           <widget class="QCheckBox" name="webPanelShow">
             <property name="text">
              <string>Show MuseScore Connect</string>
             </property>
