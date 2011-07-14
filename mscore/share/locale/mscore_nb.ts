@@ -1029,11 +1029,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>sol</source>
-        <translation type="unfinished"/>
+        <translation>Sol</translation>
     </message>
     <message>
         <source>alt. brevis</source>
-        <translation type="unfinished"/>
+        <translation>Breve alt.</translation>
     </message>
 </context>
 <context>
@@ -3702,7 +3702,7 @@ er ikke kompatibelt med nåværende grensesnitt</translation>
     </message>
     <message>
         <source>To connect with the community, &lt;br /&gt; you need to have internet &lt;br /&gt; connection enabled</source>
-        <translation type="unfinished"/>
+        <translation>For å koble til, &lt;br /&gt; må du ha en fungerende &lt;br /&gt; internettilkobling</translation>
     </message>
     <message>
         <source>Retry</source>
@@ -3710,7 +3710,7 @@ er ikke kompatibelt med nåværende grensesnitt</translation>
     </message>
     <message>
         <source>Close this permanently</source>
-        <translation type="unfinished"/>
+        <translation>Lukk denne permanent</translation>
     </message>
 </context>
 <context>
@@ -4755,7 +4755,7 @@ er ikke kompatibelt med nåværende grensesnitt</translation>
     </message>
     <message>
         <source>Show MuseScore Connect</source>
-        <translation type="unfinished"/>
+        <translation>Vis MuseScore Connect</translation>
     </message>
 </context>
 <context>
@@ -5870,7 +5870,7 @@ og sjekk at stilen til fila er riktig</translation>
     </message>
     <message>
         <source>Staff Properties...</source>
-        <translation type="unfinished">Egenskaper for notesystem...</translation>
+        <translation>Egenskaper for notesystem...</translation>
     </message>
 </context>
 <context>
@@ -6644,15 +6644,15 @@ p, li { white-space: pre-wrap; }&#13;
     <name>WebPageDockWidget</name>
     <message>
         <source>Connect with the &lt;br /&gt; Community</source>
-        <translation type="unfinished"/>
+        <translation>Koble til &lt;br /&gt; MuseScores brukerfellesskap</translation>
     </message>
     <message>
         <source>Find help</source>
-        <translation type="unfinished"/>
+        <translation>Få hjelp</translation>
     </message>
     <message>
         <source>Improve your skills</source>
-        <translation type="unfinished"/>
+        <translation>Lær mer</translation>
     </message>
     <message>
         <source>Read the latest news</source>
@@ -6660,15 +6660,15 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Download free sheet music</source>
-        <translation type="unfinished"/>
+        <translation>Last ned gratis noter</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"/>
+        <translation>Start</translation>
     </message>
     <message>
         <source>Close this permanently</source>
-        <translation type="unfinished"/>
+        <translation>Lukk denne permanent</translation>
     </message>
 </context>
 <context>
@@ -8378,11 +8378,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>next score</source>
-        <translation type="unfinished"/>
+        <translation>Neste musikkstykke</translation>
     </message>
     <message>
         <source>previous score</source>
-        <translation type="unfinished"/>
+        <translation>Forrige musikkstykke</translation>
     </message>
 </context>
 <context>
@@ -8996,59 +8996,59 @@ p, li { white-space: pre-wrap; }&#13;
     <name>noteheadnames</name>
     <message>
         <source>normal</source>
-        <translation type="unfinished">normal</translation>
+        <translation>Vanlig</translation>
     </message>
     <message>
         <source>cross</source>
-        <translation type="unfinished">Kryss</translation>
+        <translation>Kryss</translation>
     </message>
     <message>
         <source>diamond</source>
-        <translation type="unfinished">Diamant</translation>
+        <translation>Diamant</translation>
     </message>
     <message>
         <source>triangle</source>
-        <translation type="unfinished">Triangel</translation>
+        <translation>Triangel</translation>
     </message>
     <message>
         <source>mi</source>
-        <translation type="unfinished">Mi</translation>
+        <translation>mi</translation>
     </message>
     <message>
         <source>slash</source>
-        <translation type="unfinished">Strek</translation>
+        <translation>Strek</translation>
     </message>
     <message>
         <source>xcircle</source>
-        <translation type="unfinished">Xsirkel</translation>
+        <translation>Xsirkel</translation>
     </message>
     <message>
         <source>do</source>
-        <translation type="unfinished">Do</translation>
+        <translation>do</translation>
     </message>
     <message>
         <source>re</source>
-        <translation type="unfinished">Re</translation>
+        <translation>re</translation>
     </message>
     <message>
         <source>fa</source>
-        <translation type="unfinished">Fa</translation>
+        <translation>fa</translation>
     </message>
     <message>
         <source>la</source>
-        <translation type="unfinished">La</translation>
+        <translation>la</translation>
     </message>
     <message>
         <source>ti</source>
-        <translation type="unfinished">Ti</translation>
+        <translation>ti</translation>
     </message>
     <message>
         <source>sol</source>
-        <translation type="unfinished"/>
+        <translation>sol</translation>
     </message>
     <message>
         <source>alt. brevis</source>
-        <translation type="unfinished"/>
+        <translation>Breve alt.</translation>
     </message>
 </context>
 <context>
@@ -9939,43 +9939,43 @@ din versjon av MuseScore er for gammel.</translation>
     </message>
     <message>
         <source>s0sol head</source>
-        <translation type="unfinished"/>
+        <translation>Notehode Sol s0</translation>
     </message>
     <message>
         <source>s1sol head</source>
-        <translation type="unfinished"/>
+        <translation>Notehode Sol s1</translation>
     </message>
     <message>
         <source>s2sol head</source>
-        <translation type="unfinished"/>
+        <translation>Notehode Sol s2</translation>
     </message>
     <message>
         <source>longa up alt</source>
-        <translation type="unfinished"/>
+        <translation>Longa opp alt.</translation>
     </message>
     <message>
         <source>longa down alt</source>
-        <translation type="unfinished"/>
+        <translation>Longa ned alt.</translation>
     </message>
     <message>
         <source>brevis head alt</source>
-        <translation type="unfinished"/>
+        <translation>Breve notehode alt.</translation>
     </message>
     <message>
         <source>time sig C dot</source>
-        <translation type="unfinished"/>
+        <translation>Taktart C prikk</translation>
     </message>
     <message>
         <source>time sig O</source>
-        <translation type="unfinished"/>
+        <translation>Taktart O</translation>
     </message>
     <message>
         <source>time sig O cut</source>
-        <translation type="unfinished"/>
+        <translation>Taktart O strek</translation>
     </message>
     <message>
         <source>time sig O dot</source>
-        <translation type="unfinished"/>
+        <translation>Taktart O prikk</translation>
     </message>
 </context>
 </TS>

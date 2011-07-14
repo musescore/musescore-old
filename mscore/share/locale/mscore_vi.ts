@@ -1131,7 +1131,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>staff</source>
-        <translation>khuôn nhạc</translation>
+        <translation>khuông nhạc</translation>
     </message>
     <message>
         <source>part</source>
@@ -1320,7 +1320,7 @@ không thành công </translation>
     </message>
     <message>
         <source>Staves</source>
-        <translation>Khuôn nhạc</translation>
+        <translation>Khuông nhạc</translation>
     </message>
     <message>
         <source>OK</source>
@@ -1343,7 +1343,7 @@ không thành công </translation>
     </message>
     <message>
         <source>Staff Properties</source>
-        <translation>Đặc tính của khuôn nhạc</translation>
+        <translation>Đặc tính của khuông nhạc</translation>
     </message>
     <message>
         <source>Lines:</source>
@@ -1593,7 +1593,7 @@ không thành công </translation>
     </message>
     <message>
         <source>Hide Empty Staves</source>
-        <translation>Giấu đi khuôn nhạc trống không</translation>
+        <translation>Giấu đi khuông nhạc trống không</translation>
     </message>
     <message>
         <source>sp</source>
@@ -1907,7 +1907,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Small staff size</source>
-        <translation>Khuôn nhạc nhỏ</translation>
+        <translation>Khuông nhạc nhỏ</translation>
     </message>
     <message>
         <source>Small note size</source>
@@ -2529,7 +2529,7 @@ không thành công </translation>
     </message>
     <message>
         <source>dot</source>
-        <translation>dot</translation>
+        <translation>dấu chấm</translation>
     </message>
     <message>
         <source>dash dot</source>
@@ -2772,7 +2772,7 @@ không thành công </translation>
     </message>
     <message>
         <source>Staff</source>
-        <translation>Khuôn nhạc</translation>
+        <translation>Khuông nhạc</translation>
     </message>
     <message>
         <source>Visible</source>
@@ -3024,7 +3024,7 @@ không thành công </translation>
     </message>
     <message>
         <source>Brackets</source>
-        <translation>Ngoặc nối khuôn nhạc</translation>
+        <translation>Ngoặc nối khuông nhạc</translation>
     </message>
     <message>
         <source>Accidentals</source>
@@ -3228,7 +3228,7 @@ không thành công </translation>
     </message>
     <message>
         <source>Staff</source>
-        <translation>Khuôn nhạc</translation>
+        <translation>Khuông nhạc</translation>
     </message>
     <message>
         <source>Chordname</source>
@@ -3282,7 +3282,7 @@ trước khi đóng thảo trình?</translation>
     </message>
     <message>
         <source>Beam Properties</source>
-        <translation>Đặc tính của nối kết (các nốt nhạc)</translation>
+        <translation>Đặc tính nối kết (của nốt nhạc)</translation>
     </message>
     <message>
         <source>Measures</source>
@@ -3350,7 +3350,7 @@ trước khi đóng thảo trình?</translation>
     </message>
     <message>
         <source>Bracket</source>
-        <translation>Ngoặc nối khuôn nhạc</translation>
+        <translation>Ngoặc nối khuông nhạc</translation>
     </message>
     <message>
         <source>Akkolade</source>
@@ -3584,7 +3584,7 @@ Trong danh bạ "Giúp đỡ", chọn "Sách hướng dẫn trên mạng".</tran
     </message>
     <message>
         <source>Brackets...</source>
-        <translation>Ngoặc nối khuôn nhạc...</translation>
+        <translation>Ngoặc nối khuông nhạc...</translation>
     </message>
     <message>
         <source>Articulations &amp;&amp; Ornaments...</source>
@@ -3596,7 +3596,7 @@ Trong danh bạ "Giúp đỡ", chọn "Sách hướng dẫn trên mạng".</tran
     </message>
     <message>
         <source>MuseScore: Brackets</source>
-        <translation>MuseScore: Ngoặc nối khuôn nhạc</translation>
+        <translation>MuseScore: Ngoặc nối khuông nhạc</translation>
     </message>
     <message>
         <source>Breaks &amp;&amp; Spacer...</source>
@@ -3774,7 +3774,7 @@ không thích hợp với interface hiện có</translation>
     </message>
     <message>
         <source>Define a set of instruments. Each instrument is represented by one or more staves</source>
-        <translation>Xác định nhạc cụ. Một hoặc nhiều khuôn nhạc đại diện cho một nhạc cụ.</translation>
+        <translation>Xác định nhạc cụ. Một hoặc nhiều khuông nhạc đại diện cho một nhạc cụ.</translation>
     </message>
 </context>
 <context>
@@ -4301,7 +4301,7 @@ không thích hợp với interface hiện có</translation>
     </message>
     <message>
         <source>start with score:</source>
-        <translation>start with score:</translation>
+        <translation>bắt đầu với bài nhạc:</translation>
     </message>
     <message>
         <source>continue last session</source>
@@ -4609,7 +4609,7 @@ không thích hợp với interface hiện có</translation>
     </message>
     <message>
         <source>Score element colors</source>
-        <translation>Score element colors</translation>
+        <translation>Màu của element của bài nhạc</translation>
     </message>
     <message>
         <source>Default foreground</source>
@@ -4815,7 +4815,7 @@ Xin vui lòng chọn một nốt nhạc hoặc một dấu lặng và thử lạ
     <message>
         <source>Please select one or more staves and retry operation
 </source>
-        <translation>Xin vui lòng chọn một hoặc nhiều khuôn nhạc và làm lại lần nữa
+        <translation>Xin vui lòng chọn một hoặc nhiều khuông nhạc và làm lại lần nữa
 </translation>
     </message>
 </context>
@@ -5017,7 +5017,7 @@ Xin vui lòng chọn một nốt nhạc hoặc một dấu lặng và thử lạ
         <source>No staves found:
 please use the instruments dialog to
 first create some staves</source>
-        <translation>Không tìm thấy khuôn nhạc nào:&#13;
+        <translation>Không tìm thấy khuông nhạc nào:&#13;
 Xin vui lòng dùng phần instruments dialog để&#13;
 tạo ra vài khuông nhạc trước đã</translation>
     </message>
@@ -5240,7 +5240,7 @@ Try saving to a different location.</translation>
     </message>
     <message>
         <source>Staff</source>
-        <translation>Khuôn nhạc</translation>
+        <translation>Khuông nhạc</translation>
     </message>
     <message>
         <source>Edit Drumset...</source>
@@ -5256,7 +5256,7 @@ Try saving to a different location.</translation>
     </message>
     <message>
         <source>Staff Properties...</source>
-        <translation>Đặc tính của khuôn nhạc...</translation>
+        <translation>Đặc tính của khuông nhạc...</translation>
     </message>
     <message>
         <source>Split Staff...</source>
@@ -5340,7 +5340,7 @@ Try saving to a different location.</translation>
     </message>
     <message>
         <source>same staff</source>
-        <translation>cùng khuôn nhạc</translation>
+        <translation>cùng khuông nhạc</translation>
     </message>
     <message>
         <source>same voice</source>
@@ -5554,7 +5554,7 @@ và kiểm tra xem file location có đúng hay không</translation>
     </message>
     <message>
         <source>Staff:</source>
-        <translation>Khuôn nhạc:</translation>
+        <translation>Khuông nhạc:</translation>
     </message>
     <message>
         <source>Voice:</source>
@@ -5616,7 +5616,7 @@ và kiểm tra xem file location có đúng hay không</translation>
     <name>SplitStaff</name>
     <message>
         <source>MuseScore: Edit Staff/Part Properties</source>
-        <translation>MuseScore: Điều chỉnh đặc tính của khuôn nhạc/Part</translation>
+        <translation>MuseScore: Điều chỉnh đặc tính của khuông nhạc/Part</translation>
     </message>
     <message>
         <source>Split Staff</source>
@@ -5631,14 +5631,14 @@ và kiểm tra xem file location có đúng hay không</translation>
     <name>StaffText</name>
     <message>
         <source>Staff Text Properties...</source>
-        <translation>Đặc tính chữ viết của khuôn nhạc...</translation>
+        <translation>Đặc tính chữ viết của khuông nhạc...</translation>
     </message>
 </context>
 <context>
     <name>StaffTextProperties</name>
     <message>
         <source>MuseScore: Staff Text Properties</source>
-        <translation>MuseScore:Đặc tính chữ viết của khuôn nhạc</translation>
+        <translation>MuseScore: Đặc tính chữ viết của khuông nhạc</translation>
     </message>
     <message>
         <source>Channel</source>
@@ -5873,7 +5873,7 @@ và kiểm tra xem file location có đúng hay không</translation>
     </message>
     <message>
         <source>Staff Properties...</source>
-        <translation>Đặc tính của khuôn nhạc...</translation>
+        <translation>Đặc tính của khuông nhạc...</translation>
     </message>
 </context>
 <context>
@@ -6173,7 +6173,7 @@ và kiểm tra xem file location có đúng hay không</translation>
     <name>TextTools</name>
     <message>
         <source>Text Edit</source>
-        <translation>Điều chỉnhText</translation>
+        <translation>Điều chỉnh chữ viết</translation>
     </message>
     <message>
         <source>Text Tools</source>
@@ -6260,7 +6260,7 @@ p, li { white-space: pre-wrap; }
         <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;&#13;
 p, li { white-space: pre-wrap; }&#13;
 &lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Gợi ý: Bạn có thể thêm vào hoặc bớt đi trường canh sau khi tạo ra khuôn nhạc.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Gợi ý: Bạn có thể thêm vào hoặc bớt đi trường canh sau khi tạo ra khuông nhạc.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -6537,15 +6537,15 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Bracket</source>
-        <translation>Ngoặc nối khuôn nhạc</translation>
+        <translation>Ngoặc nối khuông nhạc</translation>
     </message>
     <message>
         <source>auto bracket</source>
-        <translation>Ngoặc nối khuôn nhạc tự động</translation>
+        <translation>Ngoặc nối khuông nhạc tự động</translation>
     </message>
     <message>
         <source>bracket</source>
-        <translation>Ngoặc nối khuôn nhạc</translation>
+        <translation>Ngoặc nối khuông nhạc</translation>
     </message>
     <message>
         <source>relation:</source>
@@ -6580,15 +6580,15 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Bracket</source>
-        <translation>Ngoặc nối khuôn nhạc</translation>
+        <translation>Ngoặc nối khuông nhạc</translation>
     </message>
     <message>
         <source>auto bracket</source>
-        <translation>Ngoặc nối khuôn nhạc tự động</translation>
+        <translation>Ngoặc nối khuông nhạc tự động</translation>
     </message>
     <message>
         <source>bracket</source>
-        <translation>Ngoặc nối khuôn nhạc</translation>
+        <translation>Ngoặc nối khuông nhạc</translation>
     </message>
 </context>
 <context>
@@ -7373,7 +7373,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Dot</source>
-        <translation>Dot</translation>
+        <translation>Dấu chấm</translation>
     </message>
     <message>
         <source>pad double dot</source>
@@ -7381,7 +7381,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Double dot</source>
-        <translation>Double dot</translation>
+        <translation>Dấu chấm đôi</translation>
     </message>
     <message>
         <source>tie</source>
@@ -7565,11 +7565,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Add Staff Text</source>
-        <translation>Thêm chữ viết vào khuôn nhạc</translation>
+        <translation>Thêm chữ viết vào khuông nhạc</translation>
     </message>
     <message>
         <source>Staff Text</source>
-        <translation>Chữ viết của khuôn nhạc</translation>
+        <translation>Chữ viết của khuông nhạc</translation>
     </message>
     <message>
         <source>Add Text</source>
@@ -7917,7 +7917,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Edit Text Style...</source>
-        <translation>Điều chỉnhText Style...</translation>
+        <translation>Điều chỉnh loại chữ viết...</translation>
     </message>
     <message>
         <source>Select all similar elements</source>
@@ -7929,11 +7929,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Select all similar elements in same staff</source>
-        <translation>Chọn tất cả elements tương tự trong cùng một khuôn nhạc</translation>
+        <translation>Chọn tất cả elements tương tự trong cùng một khuông nhạc</translation>
     </message>
     <message>
         <source>All Similar Elements in Same Staff</source>
-        <translation>Tất Cả Elements Tương Tự Trong Cùng Một Khuôn Nhạc</translation>
+        <translation>Tất Cả Elements Tương Tự Trong Cùng Một Khuông Nhạc</translation>
     </message>
     <message>
         <source>Synthesizer</source>
@@ -8037,7 +8037,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Redo last undo</source>
-        <translation>Lấy lại điều vừa bỏ từ hành động bỏ đi vừa rồi</translation>
+        <translation>Lấy lại điều vừa bỏ từ hành động vừa rồi</translation>
     </message>
     <message>
         <source>Show instruments dialog</source>
@@ -8157,11 +8157,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Flip direction</source>
-        <translation>Flip direction</translation>
+        <translation>Đổi chiều</translation>
     </message>
     <message>
         <source>Flip Direction</source>
-        <translation>Flip Direction</translation>
+        <translation>Đổi chiều</translation>
     </message>
     <message>
         <source>Pitch up</source>
@@ -8725,7 +8725,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Bracket</source>
-        <translation>Ngoặc nối khuôn nhạc</translation>
+        <translation>Ngoặc nối khuông nhạc</translation>
     </message>
     <message>
         <source>Arpeggio</source>
@@ -9858,19 +9858,19 @@ Phiên bản MuseCrore của bạn quá cũ.</translation>
     </message>
     <message>
         <source>bracket tips up</source>
-        <translation>Ngoặc nối khuôn nhạc tips up</translation>
+        <translation>Ngoặc nối khuông nhạc tips up</translation>
     </message>
     <message>
         <source>bracket tips down</source>
-        <translation>Ngoặc nối khuôn nhạc tips down</translation>
+        <translation>Ngoặc nối khuông nhạc tips down</translation>
     </message>
     <message>
         <source>bracket tips left up</source>
-        <translation>Ngoặc nối khuôn nhạc tips left up</translation>
+        <translation>Ngoặc nối khuông nhạc tips left up</translation>
     </message>
     <message>
         <source>bracket tips left down</source>
-        <translation>Ngoặc nối khuôn nhạc tips left down</translation>
+        <translation>Ngoặc nối khuông nhạc tips left down</translation>
     </message>
     <message>
         <source>acc dot</source>
