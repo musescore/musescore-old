@@ -647,8 +647,8 @@ ScoreView::ScoreView(QWidget* parent)
       s->addTransition(et);
       s->addTransition(new SelectTransition(this));                           // select
       connect(s, SIGNAL(entered()), mscore, SLOT(setNormalState()));
-      s->addTransition(new DeSelectTransition(this));                         // deselect
-      connect(s, SIGNAL(entered()), mscore, SLOT(setNormalState()));
+//      s->addTransition(new DeSelectTransition(this));                         // deselect
+//      connect(s, SIGNAL(entered()), mscore, SLOT(setNormalState()));
       s->addTransition(new ScoreViewDragTransition(this, states[DRAG]));      // ->stateDrag
       s->addTransition(new ScoreViewLassoTransition(this, states[LASSO]));    // ->stateLasso
       s->addTransition(new ElementDragTransition(this, states[DRAG_OBJECT])); // ->stateDragObject
@@ -3646,6 +3646,7 @@ void ScoreView::endLasso()
       lasso->setRect(QRectF());
       _score->lassoSelectEnd();
       _score->end();
+      mscore->endCmd();
       }
 
 //---------------------------------------------------------
@@ -3656,6 +3657,7 @@ void ScoreView::deselectAll()
       {
       _score->deselectAll();
       _score->end();
+      mscore->endCmd();
       }
 
 //---------------------------------------------------------
@@ -3696,6 +3698,7 @@ void ScoreView::editInputTransition(QInputMethodEvent* ie)
                   mscore->textTools()->updateTools();
             updateGrips();
             _score->end();
+            mscore->endCmd();
             }
       }
 
