@@ -50,6 +50,8 @@ QPointF BarLine::canvasPos() const
       for (Element* e = parent(); e; e = e->parent())
             xp += e->x();
       System* system = measure()->system();
+      if (system == 0)
+            return QPointF(xp, y());
       double yp = y() + system->staff(staffIdx())->y() + system->y();
       return QPointF(xp, yp);
       }
