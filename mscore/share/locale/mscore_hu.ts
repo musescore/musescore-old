@@ -7,14 +7,6 @@
         <source>AboutBox</source>
         <translation>Névjegy</translation>
     </message>
-    <message>
-        <source>Version: 0.9.0</source>
-        <translation>Verzió: 0.9.0</translation>
-    </message>
-    <message>
-        <source>Revision: 628</source>
-        <translation>Revízió: 628</translation>
-    </message>
     <message utf8="true">
         <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
@@ -6774,6 +6766,14 @@ p, li { white-space: pre-wrap; }
         <source>natural arrow both</source>
         <translation>feloldójel, fel-le nyíl</translation>
     </message>
+    <message>
+        <source>sori</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>koron</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>action</name>
@@ -9976,6 +9976,14 @@ a MuseScore verziód túl régi.</translation>
     </message>
     <message>
         <source>time sig O dot</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>sori</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>koron</source>
         <translation type="unfinished"/>
     </message>
 </context>

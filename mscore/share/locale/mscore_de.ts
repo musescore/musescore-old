@@ -7,14 +7,6 @@
         <source>AboutBox</source>
         <translation>Über MuseScore</translation>
     </message>
-    <message>
-        <source>Version: 0.9.0</source>
-        <translation>Version: 0.9.0</translation>
-    </message>
-    <message>
-        <source>Revision: 628</source>
-        <translation>Revision: 628</translation>
-    </message>
     <message utf8="true">
         <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
@@ -6776,6 +6768,14 @@ p, li { white-space: pre-wrap; }&#13;
         <source>natural arrow both</source>
         <translation>Auflösung Pfeil beide</translation>
     </message>
+    <message>
+        <source>sori</source>
+        <translation>Sori</translation>
+    </message>
+    <message>
+        <source>koron</source>
+        <translation>Koron</translation>
+    </message>
 </context>
 <context>
     <name>action</name>
@@ -9979,6 +9979,14 @@ Du verwendest eine zu alte Programmversion.</translation>
     <message>
         <source>time sig O dot</source>
         <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>sori</source>
+        <translation>Sori</translation>
+    </message>
+    <message>
+        <source>koron</source>
+        <translation>Koron</translation>
     </message>
 </context>
 </TS>
