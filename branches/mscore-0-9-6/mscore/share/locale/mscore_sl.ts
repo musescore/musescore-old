@@ -8,16 +8,6 @@
         <source>AboutBox</source>
         <translation>O programu</translation>
     </message>
-    <message>
-        <location filename="../../mscore/aboutbox.ui" line="574"/>
-        <source>Version: 0.9.0</source>
-        <translation>Različica: 0.9.0</translation>
-    </message>
-    <message>
-        <location filename="../../mscore/aboutbox.ui" line="581"/>
-        <source>Revision: 628</source>
-        <translation>Revizija: 628</translation>
-    </message>
     <message utf8="true">
         <location filename="../../mscore/aboutbox.ui" line="594"/>
         <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
@@ -4711,22 +4701,22 @@ is incompatible with current interface</source>
 <context>
     <name>MyWebView</name>
     <message>
-        <location filename="../../mscore/webpage.cpp" line="125"/>
+        <location filename="../../mscore/webpage.cpp" line="136"/>
         <source>Could not&lt;br /&gt; connect</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/webpage.cpp" line="126"/>
+        <location filename="../../mscore/webpage.cpp" line="137"/>
         <source>To connect with the community, &lt;br /&gt; you need to have internet &lt;br /&gt; connection enabled</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/webpage.cpp" line="127"/>
+        <location filename="../../mscore/webpage.cpp" line="138"/>
         <source>Retry</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/webpage.cpp" line="128"/>
+        <location filename="../../mscore/webpage.cpp" line="139"/>
         <source>Close this permanently</source>
         <translation type="unfinished"/>
     </message>
@@ -4847,22 +4837,22 @@ is incompatible with current interface</source>
 <context>
     <name>Note</name>
     <message>
-        <location filename="../../mscore/note.cpp" line="1129"/>
+        <location filename="../../mscore/note.cpp" line="1131"/>
         <source>Note Properties...</source>
         <translation>Lastnosti note ...</translation>
     </message>
     <message>
-        <location filename="../../mscore/note.cpp" line="1132"/>
+        <location filename="../../mscore/note.cpp" line="1134"/>
         <source>Tuplet...</source>
         <translation>Triole ...</translation>
     </message>
     <message>
-        <location filename="../../mscore/note.cpp" line="1133"/>
+        <location filename="../../mscore/note.cpp" line="1135"/>
         <source>Tuplet Properties...</source>
         <translation>Lastnosti triole ...</translation>
     </message>
     <message>
-        <location filename="../../mscore/note.cpp" line="1135"/>
+        <location filename="../../mscore/note.cpp" line="1137"/>
         <source>Delete Tuplet</source>
         <translation>Zbriši triolo</translation>
     </message>
@@ -6133,7 +6123,7 @@ Izberite eno noto ali pavzo in ponovite operacijo
         <location filename="../../mscore/mscore.cpp" line="2153"/>
         <location filename="../../mscore/palette.cpp" line="816"/>
         <location filename="../../mscore/palette.cpp" line="1302"/>
-        <location filename="../../mscore/sym.cpp" line="628"/>
+        <location filename="../../mscore/sym.cpp" line="631"/>
         <source>Quit</source>
         <translation>Izhod</translation>
     </message>
@@ -6244,7 +6234,7 @@ Izberite eno noto ali pavzo in ponovite operacijo
         <translation>MuseScore: registracija skriptnega vtičnika:</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="626"/>
+        <location filename="../../mscore/sym.cpp" line="629"/>
         <source>MuseScore: Load font symbols failed:</source>
         <translation>MuseScore: Nalaganje simbolov v pisavi spodletelo:</translation>
     </message>
@@ -8397,37 +8387,37 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>WebPageDockWidget</name>
     <message>
-        <location filename="../../mscore/webpage.cpp" line="231"/>
+        <location filename="../../mscore/webpage.cpp" line="242"/>
         <source>Connect with the &lt;br /&gt; Community</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/webpage.cpp" line="232"/>
+        <location filename="../../mscore/webpage.cpp" line="243"/>
         <source>Find help</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/webpage.cpp" line="233"/>
+        <location filename="../../mscore/webpage.cpp" line="244"/>
         <source>Improve your skills</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/webpage.cpp" line="234"/>
+        <location filename="../../mscore/webpage.cpp" line="245"/>
         <source>Read the latest news</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/webpage.cpp" line="235"/>
+        <location filename="../../mscore/webpage.cpp" line="246"/>
         <source>Download free sheet music</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/webpage.cpp" line="236"/>
+        <location filename="../../mscore/webpage.cpp" line="247"/>
         <source>Start</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/webpage.cpp" line="237"/>
+        <location filename="../../mscore/webpage.cpp" line="248"/>
         <source>Close this permanently</source>
         <translation type="unfinished"/>
     </message>
@@ -8557,6 +8547,16 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="../../mscore/accidental.cpp" line="68"/>
         <source>natural arrow both</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../mscore/accidental.cpp" line="69"/>
+        <source>sori</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../mscore/accidental.cpp" line="70"/>
+        <source>koron</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -11878,932 +11878,942 @@ vaša različica MuseScore je prestara.</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="77"/>
+        <source>sori</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../mscore/sym.cpp" line="78"/>
+        <source>koron</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../mscore/sym.cpp" line="80"/>
         <source>right parenthesis</source>
         <translation>desni oklepaj</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="78"/>
+        <location filename="../../mscore/sym.cpp" line="81"/>
         <source>left parenthesis</source>
         <translation>levi oklepaj</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="89"/>
+        <location filename="../../mscore/sym.cpp" line="92"/>
         <source>dot</source>
         <translation type="unfinished">pikčasto</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="90"/>
+        <location filename="../../mscore/sym.cpp" line="93"/>
         <source>longa up</source>
         <translation>longa gor</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="91"/>
+        <location filename="../../mscore/sym.cpp" line="94"/>
         <source>longa down</source>
         <translation>longa dol</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="92"/>
+        <location filename="../../mscore/sym.cpp" line="95"/>
         <source>brevis head</source>
         <translation>glavica brevis</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="93"/>
+        <location filename="../../mscore/sym.cpp" line="96"/>
         <source>brevis double head</source>
         <translation>dvojna glavica brevis</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="94"/>
+        <location filename="../../mscore/sym.cpp" line="97"/>
         <source>whole head</source>
         <translation>glavica celinke</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="95"/>
+        <location filename="../../mscore/sym.cpp" line="98"/>
         <source>half head</source>
         <translation>glavica polovinke</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="96"/>
+        <location filename="../../mscore/sym.cpp" line="99"/>
         <source>quart head</source>
         <translation>glavica četrtinke</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="97"/>
+        <location filename="../../mscore/sym.cpp" line="100"/>
         <source>whole diamond head</source>
         <translation>celinska diamantna glavica</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="98"/>
+        <location filename="../../mscore/sym.cpp" line="101"/>
         <source>half diamond head</source>
         <translation>polovinska diamantna glavica</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="99"/>
+        <location filename="../../mscore/sym.cpp" line="102"/>
         <source>diamond head</source>
         <translation>diamantna glavica</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="100"/>
+        <location filename="../../mscore/sym.cpp" line="103"/>
         <source>whole triangle head</source>
         <translation>celinska trikotna glavica</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="101"/>
+        <location filename="../../mscore/sym.cpp" line="104"/>
         <source>down half triangle head</source>
         <translation>pol znižana trikotna glavica</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="102"/>
+        <location filename="../../mscore/sym.cpp" line="105"/>
         <source>up half triangle head</source>
         <translation>pol zvišana trikotna glavica</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="103"/>
+        <location filename="../../mscore/sym.cpp" line="106"/>
         <source>up quart triangle head</source>
         <translation>četrt zvišana trikotna glavica</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="104"/>
+        <location filename="../../mscore/sym.cpp" line="107"/>
         <source>down quart triangle head</source>
         <translation>četrt znižana trikotna glavica</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="105"/>
+        <location filename="../../mscore/sym.cpp" line="108"/>
         <source>whole slash head</source>
         <translation>celinska poševna glavica</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="106"/>
+        <location filename="../../mscore/sym.cpp" line="109"/>
         <source>half slash head</source>
         <translation>polovinska poševna glavica</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="107"/>
+        <location filename="../../mscore/sym.cpp" line="110"/>
         <source>quart slash head</source>
         <translation>četrtinska poševna glavica</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="108"/>
+        <location filename="../../mscore/sym.cpp" line="111"/>
         <source>whole cross head</source>
         <translation>celinska križna glavica</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="109"/>
+        <location filename="../../mscore/sym.cpp" line="112"/>
         <source>half cross head</source>
         <translation>polovinska križna glavica</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="110"/>
+        <location filename="../../mscore/sym.cpp" line="113"/>
         <source>cross head</source>
         <translation>križna glavica</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="111"/>
+        <location filename="../../mscore/sym.cpp" line="114"/>
         <source>x circle head</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="112"/>
+        <location filename="../../mscore/sym.cpp" line="115"/>
         <source>s0do head</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="113"/>
+        <location filename="../../mscore/sym.cpp" line="116"/>
         <source>d1do head</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="114"/>
+        <location filename="../../mscore/sym.cpp" line="117"/>
         <source>u1do head</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="115"/>
+        <location filename="../../mscore/sym.cpp" line="118"/>
         <source>d2do head</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="116"/>
+        <location filename="../../mscore/sym.cpp" line="119"/>
         <source>u2do head</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="117"/>
+        <location filename="../../mscore/sym.cpp" line="120"/>
         <source>s0re head</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="118"/>
+        <location filename="../../mscore/sym.cpp" line="121"/>
         <source>u1re head</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="119"/>
+        <location filename="../../mscore/sym.cpp" line="122"/>
         <source>d1re head</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="120"/>
+        <location filename="../../mscore/sym.cpp" line="123"/>
         <source>u2re head</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="121"/>
+        <location filename="../../mscore/sym.cpp" line="124"/>
         <source>d2re head</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="122"/>
+        <location filename="../../mscore/sym.cpp" line="125"/>
         <source>s0mi head</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="123"/>
+        <location filename="../../mscore/sym.cpp" line="126"/>
         <source>s1mi head</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="124"/>
+        <location filename="../../mscore/sym.cpp" line="127"/>
         <source>s2mi head</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="125"/>
+        <location filename="../../mscore/sym.cpp" line="128"/>
         <source>u0fa head</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="126"/>
+        <location filename="../../mscore/sym.cpp" line="129"/>
         <source>d0fa head</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="127"/>
+        <location filename="../../mscore/sym.cpp" line="130"/>
         <source>u1fa head</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="128"/>
+        <location filename="../../mscore/sym.cpp" line="131"/>
         <source>d1fa head</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="129"/>
+        <location filename="../../mscore/sym.cpp" line="132"/>
         <source>u2fa head</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="130"/>
+        <location filename="../../mscore/sym.cpp" line="133"/>
         <source>d2fa head</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="131"/>
+        <location filename="../../mscore/sym.cpp" line="134"/>
         <source>s0la head</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="132"/>
+        <location filename="../../mscore/sym.cpp" line="135"/>
         <source>s1la head</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="133"/>
+        <location filename="../../mscore/sym.cpp" line="136"/>
         <source>s2la head</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="134"/>
+        <location filename="../../mscore/sym.cpp" line="137"/>
         <source>s0ti head</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="135"/>
+        <location filename="../../mscore/sym.cpp" line="138"/>
         <source>u1ti head</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="136"/>
+        <location filename="../../mscore/sym.cpp" line="139"/>
         <source>d1ti head</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="137"/>
+        <location filename="../../mscore/sym.cpp" line="140"/>
         <source>u2ti head</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="138"/>
+        <location filename="../../mscore/sym.cpp" line="141"/>
         <source>d2ti head</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="140"/>
+        <location filename="../../mscore/sym.cpp" line="143"/>
         <source>s0sol head</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="141"/>
+        <location filename="../../mscore/sym.cpp" line="144"/>
         <source>s1sol head</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="142"/>
+        <location filename="../../mscore/sym.cpp" line="145"/>
         <source>s2sol head</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="144"/>
+        <location filename="../../mscore/sym.cpp" line="147"/>
         <source>ufermata</source>
         <translation type="unfinished">Korona zgoraj</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="145"/>
+        <location filename="../../mscore/sym.cpp" line="148"/>
         <source>dfermata</source>
         <translation type="unfinished">Korona spodaj</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="146"/>
+        <location filename="../../mscore/sym.cpp" line="149"/>
         <source>snappizzicato</source>
         <translation type="unfinished">Pizzicato</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="147"/>
+        <location filename="../../mscore/sym.cpp" line="150"/>
         <source>ushortfermata</source>
         <translation type="unfinished">Kratka korona zgoraj</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="148"/>
+        <location filename="../../mscore/sym.cpp" line="151"/>
         <source>dshortfermata</source>
         <translation type="unfinished">Kratka korona spodaj</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="149"/>
+        <location filename="../../mscore/sym.cpp" line="152"/>
         <source>ulongfermata</source>
         <translation type="unfinished">Dolga korona zgoraj</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="150"/>
+        <location filename="../../mscore/sym.cpp" line="153"/>
         <source>dlongfermata</source>
         <translation type="unfinished">Dolga korona spodaj</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="151"/>
+        <location filename="../../mscore/sym.cpp" line="154"/>
         <source>uverylongfermata</source>
         <translation type="unfinished">Zelo dolga korona zgoraj</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="152"/>
+        <location filename="../../mscore/sym.cpp" line="155"/>
         <source>dverylongfermata</source>
         <translation type="unfinished">Zelo dolga korona spodaj</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="153"/>
+        <location filename="../../mscore/sym.cpp" line="156"/>
         <source>thumb</source>
         <translation type="unfinished">Palec</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="154"/>
+        <location filename="../../mscore/sym.cpp" line="157"/>
         <source>sforza to accent</source>
         <translation>Sforza v akcent</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="155"/>
+        <location filename="../../mscore/sym.cpp" line="158"/>
         <source>espressivo</source>
         <translation type="unfinished">Espressivo</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="156"/>
+        <location filename="../../mscore/sym.cpp" line="159"/>
         <source>staccato</source>
         <translation type="unfinished">Staccato</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="157"/>
+        <location filename="../../mscore/sym.cpp" line="160"/>
         <source>ustaccatissimo</source>
         <translation type="unfinished">Staccatissimo zgoraj</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="158"/>
+        <location filename="../../mscore/sym.cpp" line="161"/>
         <source>dstaccatissimo</source>
         <translation type="unfinished">Staccatissimo spodaj</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="159"/>
+        <location filename="../../mscore/sym.cpp" line="162"/>
         <source>tenuto</source>
         <translation type="unfinished">Tenuto</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="160"/>
+        <location filename="../../mscore/sym.cpp" line="163"/>
         <source>uportato</source>
         <translation type="unfinished">Portato zgoraj</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="161"/>
+        <location filename="../../mscore/sym.cpp" line="164"/>
         <source>dportato</source>
         <translation type="unfinished">Portato spodaj</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="162"/>
+        <location filename="../../mscore/sym.cpp" line="165"/>
         <source>umarcato</source>
         <translation type="unfinished">Marcato zgoraj</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="163"/>
+        <location filename="../../mscore/sym.cpp" line="166"/>
         <source>dmarcato</source>
         <translation type="unfinished">Marcato spodaj</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="164"/>
+        <location filename="../../mscore/sym.cpp" line="167"/>
         <source>ouvert</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="165"/>
+        <location filename="../../mscore/sym.cpp" line="168"/>
         <source>plus stop</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="166"/>
+        <location filename="../../mscore/sym.cpp" line="169"/>
         <source>up bow</source>
         <translation>Lok gor</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="167"/>
+        <location filename="../../mscore/sym.cpp" line="170"/>
         <source>down bow</source>
         <translation>Lok dol</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="168"/>
+        <location filename="../../mscore/sym.cpp" line="171"/>
         <source>reverse turn</source>
         <translation>Drugi obrat</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="169"/>
+        <location filename="../../mscore/sym.cpp" line="172"/>
         <source>turn</source>
         <translation type="unfinished">Obrat</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="170"/>
+        <location filename="../../mscore/sym.cpp" line="173"/>
         <source>trill</source>
         <translation type="unfinished">Trilček</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="171"/>
+        <location filename="../../mscore/sym.cpp" line="174"/>
         <source>upedal heel</source>
         <translation>Pedal peta zgoraj</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="172"/>
+        <location filename="../../mscore/sym.cpp" line="175"/>
         <source>dpedalheel</source>
         <translation>Pedal peta spodaj</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="173"/>
+        <location filename="../../mscore/sym.cpp" line="176"/>
         <source>upedal toe</source>
         <translation>Pedal palec zgoraj</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="174"/>
+        <location filename="../../mscore/sym.cpp" line="177"/>
         <source>dpedal toe</source>
         <translation>Pedal palec spodaj</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="175"/>
+        <location filename="../../mscore/sym.cpp" line="178"/>
         <source>flageolet</source>
         <translation>Flageolet</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="176"/>
+        <location filename="../../mscore/sym.cpp" line="179"/>
         <source>segno</source>
         <translation>Segno</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="177"/>
+        <location filename="../../mscore/sym.cpp" line="180"/>
         <source>coda</source>
         <translation>Coda</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="178"/>
+        <location filename="../../mscore/sym.cpp" line="181"/>
         <source>varied coda</source>
         <translation>Coda2</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="179"/>
+        <location filename="../../mscore/sym.cpp" line="182"/>
         <source>rcomma</source>
         <translation>Vejica desno</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="180"/>
+        <location filename="../../mscore/sym.cpp" line="183"/>
         <source>lcomma</source>
         <translation>Vejica levo</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="183"/>
+        <location filename="../../mscore/sym.cpp" line="186"/>
         <source>arpeggio</source>
         <translation>Arpeggio</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="184"/>
+        <location filename="../../mscore/sym.cpp" line="187"/>
         <source>trillelement</source>
         <translation>Trilček element</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="185"/>
+        <location filename="../../mscore/sym.cpp" line="188"/>
         <source>arpeggio arrow down</source>
         <translation>Arpeggio puščica dol</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="186"/>
+        <location filename="../../mscore/sym.cpp" line="189"/>
         <source>arpeggio arrow up</source>
         <translation>Arpeggio puščica gor</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="187"/>
+        <location filename="../../mscore/sym.cpp" line="190"/>
         <source>trill element</source>
         <translation>Trilček element</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="188"/>
+        <location filename="../../mscore/sym.cpp" line="191"/>
         <source>prall</source>
         <translation type="unfinished">Pral</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="189"/>
+        <location filename="../../mscore/sym.cpp" line="192"/>
         <source>mordent</source>
         <translation type="unfinished">Mordent</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="190"/>
+        <location filename="../../mscore/sym.cpp" line="193"/>
         <source>prall prall</source>
         <translation>Pral pral</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="191"/>
+        <location filename="../../mscore/sym.cpp" line="194"/>
         <source>prall mordent</source>
         <translation>Pral mordent</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="192"/>
+        <location filename="../../mscore/sym.cpp" line="195"/>
         <source>up prall</source>
         <translation>Pral gor</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="193"/>
+        <location filename="../../mscore/sym.cpp" line="196"/>
         <source>up mordent</source>
         <translation>Mordent gor</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="194"/>
+        <location filename="../../mscore/sym.cpp" line="197"/>
         <source>prall down</source>
         <translation>Pral dol</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="195"/>
+        <location filename="../../mscore/sym.cpp" line="198"/>
         <source>down prall</source>
         <translation>Pral dol</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="196"/>
+        <location filename="../../mscore/sym.cpp" line="199"/>
         <source>down mordent</source>
         <translation>Mordent dol</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="197"/>
+        <location filename="../../mscore/sym.cpp" line="200"/>
         <source>prall up</source>
         <translation>Pral gor</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="198"/>
+        <location filename="../../mscore/sym.cpp" line="201"/>
         <source>line prall</source>
         <translation>Črta pral</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="199"/>
+        <location filename="../../mscore/sym.cpp" line="202"/>
         <source>caesura curved</source>
         <translation>Cezura vijugasta</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="200"/>
+        <location filename="../../mscore/sym.cpp" line="203"/>
         <source>caesura straight</source>
         <translation>Cezura oglata</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="201"/>
+        <location filename="../../mscore/sym.cpp" line="204"/>
         <source>eight flag</source>
         <translation>Osminska zastavica</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="202"/>
+        <location filename="../../mscore/sym.cpp" line="205"/>
         <source>sixteenth flag</source>
         <translation>16-inska zastavica</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="203"/>
+        <location filename="../../mscore/sym.cpp" line="206"/>
         <source>thirtysecond flag</source>
         <translation>32-inska zastavica</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="204"/>
+        <location filename="../../mscore/sym.cpp" line="207"/>
         <source>sixtyfour flag</source>
         <translation>64-inska zastavica</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="205"/>
+        <location filename="../../mscore/sym.cpp" line="208"/>
         <source>128flag</source>
         <translation>128-inska zastavica</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="206"/>
+        <location filename="../../mscore/sym.cpp" line="209"/>
         <source>deight flag</source>
         <translation>Osminska zastavica dol</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="207"/>
+        <location filename="../../mscore/sym.cpp" line="210"/>
         <source>grace dash</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="208"/>
+        <location filename="../../mscore/sym.cpp" line="211"/>
         <source>dgrace dash</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="209"/>
+        <location filename="../../mscore/sym.cpp" line="212"/>
         <source>dsixteenth flag</source>
         <translation>16-inska zastavica dol</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="210"/>
+        <location filename="../../mscore/sym.cpp" line="213"/>
         <source>dthirtysecond flag</source>
         <translation>32-inska zastavica dol</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="211"/>
+        <location filename="../../mscore/sym.cpp" line="214"/>
         <source>dsixtyfourth flag</source>
         <translation>64-inska zastavica dol</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="212"/>
+        <location filename="../../mscore/sym.cpp" line="215"/>
         <source>d128flag</source>
         <translation>128-inska zastavica dol</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="213"/>
+        <location filename="../../mscore/sym.cpp" line="216"/>
         <source>alto clef</source>
         <translation>Altovski ključ</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="214"/>
+        <location filename="../../mscore/sym.cpp" line="217"/>
         <source>calto clef</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="215"/>
+        <location filename="../../mscore/sym.cpp" line="218"/>
         <source>bass clef</source>
         <translation type="unfinished">basovski ključ</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="216"/>
+        <location filename="../../mscore/sym.cpp" line="219"/>
         <source>cbass clef</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="217"/>
+        <location filename="../../mscore/sym.cpp" line="220"/>
         <source>trebleclef</source>
         <translation>Violinski ključ</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="218"/>
+        <location filename="../../mscore/sym.cpp" line="221"/>
         <source>ctrebleclef</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="219"/>
+        <location filename="../../mscore/sym.cpp" line="222"/>
         <source>percussion clef</source>
         <translation>Ključ za tolkala</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="220"/>
+        <location filename="../../mscore/sym.cpp" line="223"/>
         <source>cpercussion clef</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="221"/>
+        <location filename="../../mscore/sym.cpp" line="224"/>
         <source>tab clef</source>
         <translation>Ključ za tablaturo</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="222"/>
+        <location filename="../../mscore/sym.cpp" line="225"/>
         <source>ctab clef</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="223"/>
+        <location filename="../../mscore/sym.cpp" line="226"/>
         <source>four four meter</source>
         <translation>Štiri četrtinski takt</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="224"/>
+        <location filename="../../mscore/sym.cpp" line="227"/>
         <source>allabreve</source>
         <translation>Alla breve</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="225"/>
+        <location filename="../../mscore/sym.cpp" line="228"/>
         <source>pedalasterisk</source>
         <translation>Pedal zvezdica</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="226"/>
+        <location filename="../../mscore/sym.cpp" line="229"/>
         <source>pedaldash</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="227"/>
+        <location filename="../../mscore/sym.cpp" line="230"/>
         <source>pedaldot</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="228"/>
+        <location filename="../../mscore/sym.cpp" line="231"/>
         <source>pedalP</source>
         <translation>Pedal P</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="229"/>
+        <location filename="../../mscore/sym.cpp" line="232"/>
         <source>pedald</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="230"/>
+        <location filename="../../mscore/sym.cpp" line="233"/>
         <source>pedale</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="231"/>
+        <location filename="../../mscore/sym.cpp" line="234"/>
         <source>pedal ped</source>
         <translation>Pedal Ped</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="232"/>
+        <location filename="../../mscore/sym.cpp" line="235"/>
         <source>bracket tips up</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="233"/>
+        <location filename="../../mscore/sym.cpp" line="236"/>
         <source>bracket tips down</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="234"/>
+        <location filename="../../mscore/sym.cpp" line="237"/>
         <source>bracket tips left up</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="235"/>
+        <location filename="../../mscore/sym.cpp" line="238"/>
         <source>bracket tips left down</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="236"/>
+        <location filename="../../mscore/sym.cpp" line="239"/>
         <source>acc dot</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="237"/>
+        <location filename="../../mscore/sym.cpp" line="240"/>
         <source>acc freebase</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="238"/>
+        <location filename="../../mscore/sym.cpp" line="241"/>
         <source>acc stdbase</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="239"/>
+        <location filename="../../mscore/sym.cpp" line="242"/>
         <source>acc bayanbase</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="240"/>
+        <location filename="../../mscore/sym.cpp" line="243"/>
         <source>acc old ee</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="241"/>
+        <location filename="../../mscore/sym.cpp" line="244"/>
         <source>acc discant</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="248"/>
+        <location filename="../../mscore/sym.cpp" line="251"/>
         <source>zero</source>
         <translation>Ničti</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="249"/>
+        <location filename="../../mscore/sym.cpp" line="252"/>
         <source>one</source>
         <translation>Prvi</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="250"/>
+        <location filename="../../mscore/sym.cpp" line="253"/>
         <source>two</source>
         <translation>Drugi</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="251"/>
+        <location filename="../../mscore/sym.cpp" line="254"/>
         <source>three</source>
         <translation>Tretji</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="252"/>
+        <location filename="../../mscore/sym.cpp" line="255"/>
         <source>four</source>
         <translation>Četrti</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="253"/>
+        <location filename="../../mscore/sym.cpp" line="256"/>
         <source>five</source>
         <translation>Peti</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="254"/>
+        <location filename="../../mscore/sym.cpp" line="257"/>
         <source>six</source>
         <translation>Šesti</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="255"/>
+        <location filename="../../mscore/sym.cpp" line="258"/>
         <source>seven</source>
         <translation>Sedmi</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="256"/>
+        <location filename="../../mscore/sym.cpp" line="259"/>
         <source>eight</source>
         <translation>Osmi</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="257"/>
+        <location filename="../../mscore/sym.cpp" line="260"/>
         <source>nine</source>
         <translation>Deveti</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="258"/>
+        <location filename="../../mscore/sym.cpp" line="261"/>
         <source>plus</source>
         <translation>Plus</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="260"/>
-        <location filename="../../mscore/sym.cpp" line="598"/>
+        <location filename="../../mscore/sym.cpp" line="263"/>
+        <location filename="../../mscore/sym.cpp" line="601"/>
         <source>z</source>
         <translation>z</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="261"/>
-        <location filename="../../mscore/sym.cpp" line="593"/>
+        <location filename="../../mscore/sym.cpp" line="264"/>
+        <location filename="../../mscore/sym.cpp" line="596"/>
         <source>f</source>
         <translation>f</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="262"/>
-        <location filename="../../mscore/sym.cpp" line="597"/>
+        <location filename="../../mscore/sym.cpp" line="265"/>
+        <location filename="../../mscore/sym.cpp" line="600"/>
         <source>s</source>
         <translation>s</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="263"/>
-        <location filename="../../mscore/sym.cpp" line="595"/>
+        <location filename="../../mscore/sym.cpp" line="266"/>
+        <location filename="../../mscore/sym.cpp" line="598"/>
         <source>p</source>
         <translation>p</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="264"/>
-        <location filename="../../mscore/sym.cpp" line="594"/>
+        <location filename="../../mscore/sym.cpp" line="267"/>
+        <location filename="../../mscore/sym.cpp" line="597"/>
         <source>m</source>
         <translation type="unfinished">m</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="265"/>
-        <location filename="../../mscore/sym.cpp" line="596"/>
+        <location filename="../../mscore/sym.cpp" line="268"/>
+        <location filename="../../mscore/sym.cpp" line="599"/>
         <source>r</source>
         <translation>r</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="267"/>
+        <location filename="../../mscore/sym.cpp" line="270"/>
         <source>longa up alt</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="268"/>
+        <location filename="../../mscore/sym.cpp" line="271"/>
         <source>longa down alt</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="269"/>
+        <location filename="../../mscore/sym.cpp" line="272"/>
         <source>brevis head alt</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="270"/>
+        <location filename="../../mscore/sym.cpp" line="273"/>
         <source>time sig C dot</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="271"/>
+        <location filename="../../mscore/sym.cpp" line="274"/>
         <source>time sig O</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="272"/>
+        <location filename="../../mscore/sym.cpp" line="275"/>
         <source>time sig O cut</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="273"/>
+        <location filename="../../mscore/sym.cpp" line="276"/>
         <source>time sig O dot</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="590"/>
+        <location filename="../../mscore/sym.cpp" line="593"/>
         <source>clef eight</source>
         <translation>Osmica pri ključu</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="591"/>
+        <location filename="../../mscore/sym.cpp" line="594"/>
         <source>clef one</source>
         <translation>Enica pri ključu</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="592"/>
+        <location filename="../../mscore/sym.cpp" line="595"/>
         <source>clef five</source>
         <translation>Petka pri ključu</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="600"/>
+        <location filename="../../mscore/sym.cpp" line="603"/>
         <source>note 1/2</source>
         <translation>Polovinka</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="601"/>
+        <location filename="../../mscore/sym.cpp" line="604"/>
         <source>note 1/4</source>
         <translation>Četrtinka</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="602"/>
+        <location filename="../../mscore/sym.cpp" line="605"/>
         <source>note 1/8</source>
         <translation>Osminka</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="603"/>
+        <location filename="../../mscore/sym.cpp" line="606"/>
         <source>note 1/16</source>
         <translation>16-inka</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="604"/>
+        <location filename="../../mscore/sym.cpp" line="607"/>
         <source>note 1/32</source>
         <translation>32-inka</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="605"/>
+        <location filename="../../mscore/sym.cpp" line="608"/>
         <source>note 1/64</source>
         <translation>64-inka</translation>
     </message>
     <message>
-        <location filename="../../mscore/sym.cpp" line="606"/>
+        <location filename="../../mscore/sym.cpp" line="609"/>
         <source>dot dot</source>
         <translation>dvojna pika</translation>
     </message>

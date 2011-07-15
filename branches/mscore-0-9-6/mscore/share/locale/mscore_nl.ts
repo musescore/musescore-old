@@ -3,10 +3,6 @@
 <TS version="2.0" language="nl_NL">
 <context>
     <name>AboutBox</name>
-    <message>
-        <source>Version: 0.9.0</source>
-        <translation>Versie: 0.9.0</translation>
-    </message>
     <message utf8="true">
         <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
@@ -32,10 +28,6 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <source>AboutBox</source>
         <translation>AboutBox</translation>
-    </message>
-    <message>
-        <source>Revision: 628</source>
-        <translation>Revisie: 628</translation>
     </message>
 </context>
 <context>
@@ -6778,6 +6770,14 @@ p, li { white-space: pre-wrap; }
         <source>sharp arrow down</source>
         <translation>kruis met pijl naar beneden</translation>
     </message>
+    <message>
+        <source>sori</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>koron</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>action</name>
@@ -9980,6 +9980,14 @@ uw Musescore versie is te oud.</translation>
     </message>
     <message>
         <source>time sig O dot</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>sori</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>koron</source>
         <translation type="unfinished"/>
     </message>
 </context>

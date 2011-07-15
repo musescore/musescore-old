@@ -7,14 +7,6 @@
         <source>AboutBox</source>
         <translation>Về thảo trình này</translation>
     </message>
-    <message>
-        <source>Version: 0.9.0</source>
-        <translation>Phiên bản 0.9.0</translation>
-    </message>
-    <message>
-        <source>Revision: 628</source>
-        <translation>Phiên bản tu chỉnh: 628</translation>
-    </message>
     <message utf8="true">
         <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
@@ -4179,7 +4171,7 @@ không thích hợp với interface hiện có</translation>
     <name>PlayPanelBase</name>
     <message>
         <source>MuseScore: Play Panel</source>
-        <translation>MuseScore: Play Panel</translation>
+        <translation>MuseScore: Bảng điều khiển (để nghe nhạc)</translation>
     </message>
     <message>
         <source>measure.beat</source>
@@ -4227,7 +4219,7 @@ không thích hợp với interface hiện có</translation>
     </message>
     <message>
         <source>Tmp</source>
-        <translation>Tmp</translation>
+        <translation>Nhịp</translation>
     </message>
     <message>
         <source>Straight</source>
@@ -4750,7 +4742,7 @@ không thích hợp với interface hiện có</translation>
     </message>
     <message>
         <source>Show Play Panel</source>
-        <translation>Cho thấy bảng chơi nhạc</translation>
+        <translation>Cho thấy Bảng điều khiển (để nghe nhạc)</translation>
     </message>
     <message>
         <source>Show Navigator</source>
@@ -6776,6 +6768,14 @@ p, li { white-space: pre-wrap; }&#13;
         <source>natural arrow both</source>
         <translation>natural arrow both</translation>
     </message>
+    <message>
+        <source>sori</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>koron</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>action</name>
@@ -6821,7 +6821,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Print...</source>
-        <translation>In...</translation>
+        <translation>In ra...</translation>
     </message>
     <message>
         <source>Undo</source>
@@ -7393,11 +7393,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>double sharp</source>
-        <translation>double sharp</translation>
+        <translation>thăng đôi</translation>
     </message>
     <message>
         <source>sharp</source>
-        <translation>sharp</translation>
+        <translation>thăng</translation>
     </message>
     <message>
         <source>natural</source>
@@ -7405,7 +7405,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>double flat</source>
-        <translation>double flat</translation>
+        <translation>giáng đôi</translation>
     </message>
     <message>
         <source>acciaccatura</source>
@@ -7485,7 +7485,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Play Panel</source>
-        <translation>Play Panel</translation>
+        <translation>Bảng điều khiển (để nghe nhạc)</translation>
     </message>
     <message>
         <source>Navigator</source>
@@ -7981,7 +7981,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Load score from file</source>
-        <translation>Lấy bài nhạc mang vào trong thảo trình MuseScore</translation>
+        <translation>Mang bài nhạc vào trong thảo trình MuseScore</translation>
     </message>
     <message>
         <source>File save</source>
@@ -8081,7 +8081,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Note input mode</source>
-        <translation>Note input mode</translation>
+        <translation>Điền loại nốt nhạc</translation>
     </message>
     <message>
         <source>Pitch spell</source>
@@ -9218,7 +9218,7 @@ Phiên bản MuseCrore của bạn quá cũ.</translation>
     </message>
     <message>
         <source>sharp</source>
-        <translation>sharp</translation>
+        <translation>thăng</translation>
     </message>
     <message>
         <source>sharp arrow up</source>
@@ -9294,7 +9294,7 @@ Phiên bản MuseCrore của bạn quá cũ.</translation>
     </message>
     <message>
         <source>flat flat</source>
-        <translation>flat flat</translation>
+        <translation>giáng giáng</translation>
     </message>
     <message>
         <source>flat flat slash</source>
@@ -9302,7 +9302,7 @@ Phiên bản MuseCrore của bạn quá cũ.</translation>
     </message>
     <message>
         <source>sharp sharp</source>
-        <translation>sharp sharp</translation>
+        <translation>thăng thăng</translation>
     </message>
     <message>
         <source>right parenthesis</source>
@@ -9979,6 +9979,14 @@ Phiên bản MuseCrore của bạn quá cũ.</translation>
     <message>
         <source>time sig O dot</source>
         <translation>time sig O dot</translation>
+    </message>
+    <message>
+        <source>sori</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>koron</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>

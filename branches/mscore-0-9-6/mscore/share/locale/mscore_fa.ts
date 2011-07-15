@@ -7,14 +7,6 @@
         <source>AboutBox</source>
         <translation>درباره</translation>
     </message>
-    <message>
-        <source>Version: 0.9.0</source>
-        <translation>نسخه:</translation>
-    </message>
-    <message>
-        <source>Revision: 628</source>
-        <translation>بازبینی:</translation>
-    </message>
     <message utf8="true">
         <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
@@ -3632,14 +3624,14 @@ Restore session?</source>
         <source>Script
 %1
 is incompatible with current interface</source>
-        <translation>Script&#13;
-%1&#13;
+        <translation>Script
+%1
 is incompatible with current interface</translation>
     </message>
     <message>
         <source>MuseScore is too old to run script
 %1</source>
-        <translation>MuseScore version is too old to run script&#13;
+        <translation>MuseScore version is too old to run script
 %1</translation>
     </message>
     <message>
@@ -3650,8 +3642,8 @@ is incompatible with current interface</translation>
         <source>Error loading plugin
 "%1" line %2:
 %3</source>
-        <translation>Error loading plugin&#13;
-"%1" line %2:&#13;
+        <translation>Error loading plugin
+"%1" line %2:
 %3</translation>
     </message>
     <message>
@@ -5191,8 +5183,8 @@ failed: </translation>
 %1 
 
 Try saving to a different location.</source>
-        <translation>The following file is locked:&#13;
-%1&#13;
+        <translation>The following file is locked:
+%1
 Try saving to a different location.</translation>
     </message>
     <message>
@@ -5383,7 +5375,7 @@ Try saving to a different location.</translation>
     <message>
         <source>Init audio driver failed.
 Sequencer will be disabled.</source>
-        <translation>Init audio driver failed.&#13;
+        <translation>Init audio driver failed.
 Sequencer will be disabled.</translation>
     </message>
     <message>
@@ -5393,7 +5385,7 @@ Sequencer will be disabled.</translation>
     <message>
         <source>No SoundFont configured
 Playback will be disabled.</source>
-        <translation>No SoundFont configured&#13;
+        <translation>No SoundFont configured
 Playback will be disabled.</translation>
     </message>
     <message>
@@ -5403,11 +5395,11 @@ failed. Playback will be disabled.
 
 Go to Display &gt; Synthesizer 
 and check that the file location is correct</source>
-        <translation>Loading SoundFont&#13;
-"%1"&#13;
-failed. Playback will be disabled.&#13;
-&#13;
-Go to Display &gt; Synthesizer &#13;
+        <translation>Loading SoundFont
+"%1"
+failed. Playback will be disabled.
+
+Go to Display &gt; Synthesizer 
 and check that the file location is correct</translation>
     </message>
 </context>
@@ -6767,6 +6759,14 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>natural arrow both</source>
         <translation>natural arrow both</translation>
+    </message>
+    <message>
+        <source>sori</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>koron</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -9082,7 +9082,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Cannot read this score:
 your version of MuseScore is too old.</source>
-        <translation>Cannot read this score:&#13;
+        <translation>Cannot read this score:
 this version of MuseScore is too old.</translation>
     </message>
 </context>
@@ -9970,6 +9970,14 @@ this version of MuseScore is too old.</translation>
     </message>
     <message>
         <source>time sig O dot</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>sori</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>koron</source>
         <translation type="unfinished"/>
     </message>
 </context>

@@ -7,14 +7,6 @@
         <source>AboutBox</source>
         <translation>Om</translation>
     </message>
-    <message>
-        <source>Version: 0.9.0</source>
-        <translation>Version: 0.9.0</translation>
-    </message>
-    <message>
-        <source>Revision: 628</source>
-        <translation>Revision: 628</translation>
-    </message>
     <message utf8="true">
         <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
@@ -6777,6 +6769,14 @@ p, li { white-space: pre-wrap; }
         <source>natural arrow both</source>
         <translation>opløsningstegn pil op/ned</translation>
     </message>
+    <message>
+        <source>sori</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>koron</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>action</name>
@@ -9980,6 +9980,14 @@ din version af MuseScore er for gammel</translation>
     </message>
     <message>
         <source>time sig O dot</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>sori</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>koron</source>
         <translation type="unfinished"/>
     </message>
 </context>

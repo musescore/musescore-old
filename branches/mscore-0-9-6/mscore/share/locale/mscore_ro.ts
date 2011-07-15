@@ -7,14 +7,6 @@
         <source>AboutBox</source>
         <translation>Despre MuseScore</translation>
     </message>
-    <message>
-        <source>Version: 0.9.0</source>
-        <translation>Versiune: 0.9.0</translation>
-    </message>
-    <message>
-        <source>Revision: 628</source>
-        <translation>Revizie: 628</translation>
-    </message>
     <message utf8="true">
         <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
@@ -6790,6 +6782,14 @@ p, li { white-space: pre-wrap; }&#13;
         <source>natural arrow both</source>
         <translation>becar (mai sus sau mai jos)</translation>
     </message>
+    <message>
+        <source>sori</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>koron</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>action</name>
@@ -9992,6 +9992,14 @@ versiunea dumneavoastră de MuseScore este prea veche.</translation>
     </message>
     <message>
         <source>time sig O dot</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>sori</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>koron</source>
         <translation type="unfinished"/>
     </message>
 </context>

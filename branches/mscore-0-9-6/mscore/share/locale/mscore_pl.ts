@@ -7,14 +7,6 @@
         <source>AboutBox</source>
         <translation>O programie</translation>
     </message>
-    <message>
-        <source>Version: 0.9.0</source>
-        <translation>Wersja: 0.9.0</translation>
-    </message>
-    <message>
-        <source>Revision: 628</source>
-        <translation>Wydanie: 628</translation>
-    </message>
     <message utf8="true">
         <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
@@ -3709,7 +3701,7 @@ jest niekompatybilny z obecnym interfejsem.</translation>
     </message>
     <message>
         <source>Close this permanently</source>
-        <translation>Zamknij bez pytania</translation>
+        <translation>Zamknij</translation>
     </message>
 </context>
 <context>
@@ -6769,6 +6761,14 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <source>natural arrow both</source>
         <translation>Kasownik ze strzałkami</translation>
+    </message>
+    <message>
+        <source>sori</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>koron</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -9960,7 +9960,7 @@ Twoja wersja MuseScore jest zbyt stara.</translation>
     </message>
     <message>
         <source>time sig C dot</source>
-        <translation>Metrum C kropka</translation>
+        <translation>Metrum C z kropką</translation>
     </message>
     <message>
         <source>time sig O</source>
@@ -9968,11 +9968,19 @@ Twoja wersja MuseScore jest zbyt stara.</translation>
     </message>
     <message>
         <source>time sig O cut</source>
-        <translation>Metrum O cut</translation>
+        <translation>Metrum O przekreślone</translation>
     </message>
     <message>
         <source>time sig O dot</source>
-        <translation>Metrum O kropka</translation>
+        <translation>Metrum O z kropką</translation>
+    </message>
+    <message>
+        <source>sori</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>koron</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 </TS>

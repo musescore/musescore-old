@@ -7,14 +7,6 @@
         <source>AboutBox</source>
         <translation>Pria skatolo</translation>
     </message>
-    <message>
-        <source>Version: 0.9.0</source>
-        <translation>Versio: 0.9.0</translation>
-    </message>
-    <message>
-        <source>Revision: 628</source>
-        <translation>Revizio: 628</translation>
-    </message>
     <message utf8="true">
         <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
@@ -6768,6 +6760,14 @@ p, li { white-space: pre-wrap; }
         <source>natural arrow both</source>
         <translation>duopsagita bekvadrato</translation>
     </message>
+    <message>
+        <source>sori</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>koron</source>
+        <translation type="unfinished"/>
+    </message>
 </context>
 <context>
     <name>action</name>
@@ -7305,7 +7305,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>pad note 1/1</source>
-        <translation>1/1</translation>
+        <translation>Plennoto (ciferklavaro)</translation>
     </message>
     <message>
         <source>Whole note (semibreve)</source>
@@ -7313,7 +7313,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>pad note 1/2</source>
-        <translation>1/2</translation>
+        <translation>Duonnoto (ciferklavaro)</translation>
     </message>
     <message>
         <source>Half note (minim)</source>
@@ -7321,15 +7321,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>pad note 1/4</source>
-        <translation>1/4</translation>
+        <translation>Kvaronnoto(ciferklavaro)</translation>
     </message>
     <message>
         <source>Quarter note (crochet)</source>
-        <translation>Okonnoto</translation>
+        <translation>Kvaronnoto</translation>
     </message>
     <message>
         <source>pad note 1/8</source>
-        <translation>1/8</translation>
+        <translation>Okonnoto(ciferklavaro)</translation>
     </message>
     <message>
         <source>Eighth note (quaver)</source>
@@ -7337,7 +7337,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>pad note 1/16</source>
-        <translation>1/16</translation>
+        <translation>Deksesonnoto (ciferklavaro)</translation>
     </message>
     <message>
         <source>16th note (semiquaver)</source>
@@ -7345,7 +7345,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>pad note 1/32</source>
-        <translation>1/32</translation>
+        <translation>Tridekduonnoto (ciferklavaro)</translation>
     </message>
     <message>
         <source>32nd note (demi-semiquaver)</source>
@@ -7353,7 +7353,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>pad note 1/64</source>
-        <translation>1/64</translation>
+        <translation>Sesdekkvaronnoto (ciferklavaro)</translation>
     </message>
     <message>
         <source>64th note (semi-demi-semiquaver)</source>
@@ -7369,7 +7369,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>pad double dot</source>
-        <translation>Duobla punkto</translation>
+        <translation>Duobla punkto (ciferklavaro)</translation>
     </message>
     <message>
         <source>Double dot</source>
@@ -7381,7 +7381,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>pad rest</source>
-        <translation>silenco</translation>
+        <translation>silenco (ciferklavaro)</translation>
     </message>
     <message>
         <source>double sharp</source>
@@ -7445,43 +7445,43 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>editing sound on</source>
-        <translation>editing sound on</translation>
+        <translation>Sono dum redakto ebligita</translation>
     </message>
     <message>
         <source>Enable sound while editing</source>
-        <translation>Enable sound whilst editing</translation>
+        <translation>Sonon dum redakto ebligi</translation>
     </message>
     <message>
         <source>beam start</source>
-        <translation>beam start</translation>
+        <translation>Trabeko</translation>
     </message>
     <message>
         <source>beam mid</source>
-        <translation>beam mid</translation>
+        <translation>Trabmezo</translation>
     </message>
     <message>
         <source>no beam</source>
-        <translation>no beam</translation>
+        <translation>Sen trabo</translation>
     </message>
     <message>
         <source>beam 32</source>
-        <translation>beam 32</translation>
+        <translation>32ontrabo</translation>
     </message>
     <message>
         <source>auto beam</source>
-        <translation>auto beam</translation>
+        <translation>memtrabi</translation>
     </message>
     <message>
         <source>Palette</source>
-        <translation>Palette</translation>
+        <translation>Paletro</translation>
     </message>
     <message>
         <source>Play Panel</source>
-        <translation>Play Panel</translation>
+        <translation>Ludpanelo</translation>
     </message>
     <message>
         <source>Navigator</source>
-        <translation>Navigator</translation>
+        <translation>Stirilo</translation>
     </message>
     <message>
         <source>Mixer</source>
@@ -7757,7 +7757,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>edit score meta data</source>
-        <translation>edit score meta data</translation>
+        <translation>Metadatumojn redakti</translation>
     </message>
     <message>
         <source>Meta Data...</source>
@@ -7785,11 +7785,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>edit element</source>
-        <translation>edit element</translation>
+        <translation>eron redakti</translation>
     </message>
     <message>
         <source>Edit Element</source>
-        <translation>Edit Element</translation>
+        <translation>Eron Redakti</translation>
     </message>
     <message>
         <source>reset positions</source>
@@ -7905,11 +7905,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Edit General Style...</source>
-        <translation>Edit General Style…</translation>
+        <translation>Ĝeneralan stilon redakti</translation>
     </message>
     <message>
         <source>Edit Text Style...</source>
-        <translation>Edit Text Style…</translation>
+        <translation>Tekststilon redakti</translation>
     </message>
     <message>
         <source>Select all similar elements</source>
@@ -8145,7 +8145,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Reset beam mode of selected measures</source>
-        <translation>Reset beam mode of selected measures</translation>
+        <translation>Elektitajn mezurojn retrabi</translation>
     </message>
     <message>
         <source>Flip direction</source>
@@ -8349,7 +8349,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Edit Chord Style...</source>
-        <translation>Edit Chord Style…</translation>
+        <translation>Akordstilon redakti</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -9970,6 +9970,14 @@ this version of MuseScore is too old.</translation>
     </message>
     <message>
         <source>time sig O dot</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>sori</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>koron</source>
         <translation type="unfinished"/>
     </message>
 </context>

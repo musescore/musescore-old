@@ -7,15 +7,6 @@
         <source>AboutBox</source>
         <translation>A propos de MuseScore</translation>
     </message>
-    <message>
-        <source>Version: 0.9.0</source>
-        <translation>Version : 0.9.6</translation>
-    </message>
-    <message>
-        <source>Revision: 628</source>
-        <translatorcomment>r2381 translated JLWaltener - 06/12/2009 - QT Linguist v4.6.0</translatorcomment>
-        <translation>Révision : 2381</translation>
-    </message>
     <message utf8="true">
         <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
@@ -6779,6 +6770,14 @@ p, li { white-space: pre-wrap; }
         <source>natural arrow both</source>
         <translation>bécarre 2 flèches</translation>
     </message>
+    <message>
+        <source>sori</source>
+        <translation>sori</translation>
+    </message>
+    <message>
+        <source>koron</source>
+        <translation>koron</translation>
+    </message>
 </context>
 <context>
     <name>action</name>
@@ -9982,6 +9981,14 @@ votre version de MuseScore est trop ancienne.</translation>
     <message>
         <source>time sig O dot</source>
         <translation>time sig O dot</translation>
+    </message>
+    <message>
+        <source>sori</source>
+        <translation>sori</translation>
+    </message>
+    <message>
+        <source>koron</source>
+        <translation>koron</translation>
     </message>
 </context>
 </TS>
