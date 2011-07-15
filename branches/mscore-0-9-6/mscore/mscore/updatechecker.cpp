@@ -25,6 +25,9 @@ UpdateChecker::UpdateChecker()
 {
     manager = new QNetworkAccessManager(this);
     connect(manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(onRequestFinished(QNetworkReply*)));
+    os = QString();
+    release = QString();
+    revision = QString();
 }
 
 UpdateChecker::~UpdateChecker()
@@ -78,7 +81,7 @@ void UpdateChecker::onRequestFinished(QNetworkReply* reply)
 
     QString message = QString(tr("An update for MuseScore is available: <a href=\"%1\">MuseScore %2 r.%3</a>")).arg(downloadUrl).arg(version).arg(upgradeRevision);
     printf("revision %s\n", revision.toAscii().constData());
-    if(!version.isNull() &&  upgradeRevision > revision ){
+    if(!version.isEmpty() &&  upgradeRevision > revision ){
         QMessageBox msgBox;
         msgBox.setWindowTitle(tr("Update Available"));
         msgBox.setText(message);
@@ -120,7 +123,7 @@ void UpdateChecker::check(QString rev, bool m)
         release = "nightly";
     }
     printf("release type: %s\n", release.toAscii().constData());
-    if(!os.isNull() && !release.isNull()){
+    if(!os.isEmpty() && !release.isEmpty()){
         revision =  rev;
         manager->get(QNetworkRequest(QUrl("http://update.musescore.org/update_"+os +"_" + release +".xml")));
     }
