@@ -523,7 +523,7 @@ MuseScore::MuseScore()
       a->setChecked(preferences.playRepeats);
       transportTools->addAction(a);
 
-      fileTools->addAction(getAction("mag"));
+//      fileTools->addAction(getAction("mag"));
 
       mag = new MagBox;
       connect(mag, SIGNAL(magChanged(int)), SLOT(magChanged(int)));
