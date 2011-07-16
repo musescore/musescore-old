@@ -1059,12 +1059,7 @@ ChordList* StyleData::chordList()  const
       if (_chordList == 0) {
             _chordList = new ChordList();
             _chordList->read("chords.xml");
-            QString filename = value(ST_chordDescriptionFile).toString();
-            QFileInfo fi(filename);
-            if(!fi.exists()) {
-                  filename = QString("stdchords.xml");
-                  }
-            _chordList->read(filename);
+            _chordList->read(value(ST_chordDescriptionFile).toString());
             }
       return _chordList;
       }
