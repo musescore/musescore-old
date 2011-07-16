@@ -148,7 +148,7 @@ void genIcons()
       icons[fileSave_ICON]   = new QIcon(":/data/filesave.svg");
       icons[fileSaveAs_ICON] = new QIcon(":/data/filesaveas.svg");
       icons[exit_ICON]       = new QIcon(":/data/exit.svg");
-      icons[viewmag_ICON]    = new QIcon(":/data/viewmag.xpm");
+      icons[viewmag_ICON]    = new QIcon(":/data/viewmag.svg");
       icons[repeat_ICON]     = new QIcon(":/data/repeat.svg");
       icons[noteEntry_ICON]  = new QIcon(":/data/noteentry.svg");
       icons[grace4_ICON]     = new QIcon(":/data/grace4.svg");
