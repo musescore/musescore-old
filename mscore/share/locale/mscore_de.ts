@@ -3469,19 +3469,19 @@ Versuche im "Hilfe"-Menü das "Online-Handbuch" aufzurufen.</translation>
     </message>
     <message>
         <source>Prima volta</source>
-        <translation>Prima Volta</translation>
+        <translation>Erste Volta</translation>
     </message>
     <message>
         <source>Seconda volta</source>
-        <translation>Seconda Volta</translation>
+        <translation>Zweite Volta</translation>
     </message>
     <message>
         <source>Terza volta</source>
-        <translation>Terza Volta</translation>
+        <translation>Dritte Volta</translation>
     </message>
     <message>
         <source>Seconda volta 2</source>
-        <translation>Seconda Volta 2</translation>
+        <translation>Zweite Volta 2</translation>
     </message>
     <message>
         <source>Trill line</source>
@@ -8849,7 +8849,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>VoltaSegment</source>
-        <translation>Voltasegment</translation>
+        <translation>VoltaSegment</translation>
     </message>
     <message>
         <source>LayoutBreak</source>

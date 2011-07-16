@@ -7485,51 +7485,51 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Mixer</source>
-        <translation>Mixer</translation>
+        <translation>Miksilo</translation>
     </message>
     <message>
         <source>Transport Toolbar</source>
-        <translation>Transport Toolbar</translation>
+        <translation>Ludililaro</translation>
     </message>
     <message>
         <source>Transport</source>
-        <translation>Transport</translation>
+        <translation>Ludilo</translation>
     </message>
     <message>
         <source>Note Input Toolbar</source>
-        <translation>Note Input Toolbar</translation>
+        <translation>Muziknotililaro</translation>
     </message>
     <message>
         <source>Status Bar</source>
-        <translation>Status Bar</translation>
+        <translation>Stata breto</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation>Quit</translation>
+        <translation>Forlasi</translation>
     </message>
     <message>
         <source>Mag</source>
-        <translation>Mag</translation>
+        <translation>Lupeo</translation>
     </message>
     <message>
         <source>Zoom Canvas</source>
-        <translation>Zoom Canvas</translation>
+        <translation>Lupeo</translation>
     </message>
     <message>
         <source>Lyrics</source>
-        <translation>Lyrics</translation>
+        <translation>Vortoj</translation>
     </message>
     <message>
         <source>Fingering Palette</source>
-        <translation>Fingering Palette</translation>
+        <translation>Fingrumpaletro</translation>
     </message>
     <message>
         <source>Fingering...</source>
-        <translation>Fingering…</translation>
+        <translation>Fingrumo...</translation>
     </message>
     <message>
         <source>Fingering</source>
-        <translation>Fingering</translation>
+        <translation>Fingrumo</translation>
     </message>
     <message>
         <source>Tempo Palette</source>
