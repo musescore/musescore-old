@@ -62,7 +62,6 @@ class MyWebView: public QWebView
       Q_OBJECT
 
       MyWebPage m_page;
-      QProgressBar* progressBar;
 
    public slots:
       void link(const QUrl& url);

@@ -97,7 +97,6 @@ MyWebView::MyWebView(QWidget *parent):
       CookieJar* jar = new CookieJar(QString(dataPath + "/cookies.txt"));
       page()->networkAccessManager()->setCookieJar(jar);
 
-      progressBar = 0;
       connect(this, SIGNAL(linkClicked(const QUrl&)), SLOT(link(const QUrl&)));
       }
 
@@ -141,8 +140,6 @@ void MyWebView::stopBusy(bool val, bool close)
             if(!preferences.firstStartWeb && close)
                   mscore->showWebPanel(false);
             }
-      disconnect(this, SIGNAL(loadProgress(int)), progressBar, SLOT(setValue(int)));
-      mscore->hideProgressBar();
       setCursor(Qt::ArrowCursor);
       }
 
@@ -171,10 +168,6 @@ void MyWebView::stopBusyStatic(bool val)
 
 void MyWebView::setBusy()
       {
-      progressBar = mscore->showProgressBar();
-      progressBar->setRange(0, 100);
-      progressBar->setValue(0);
-      connect(this, SIGNAL(loadProgress(int)), progressBar, SLOT(setValue(int)));
       setCursor(Qt::WaitCursor);
       }
 
