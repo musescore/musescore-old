@@ -4746,7 +4746,7 @@ jest niekompatybilny z obecnym interfejsem.</translation>
     </message>
     <message>
         <source>Show MuseScore Connect</source>
-        <translation>Pokaż Połączenie MuseScore</translation>
+        <translation>Pokaż MuseScore Connect</translation>
     </message>
 </context>
 <context>
@@ -6657,7 +6657,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Close this permanently</source>
-        <translation>Zamknij bez pytania</translation>
+        <translation>Zamknij</translation>
     </message>
 </context>
 <context>
@@ -6764,11 +6764,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>sori</source>
-        <translation type="unfinished"/>
+        <translation>Sori</translation>
     </message>
     <message>
         <source>koron</source>
-        <translation type="unfinished"/>
+        <translation>Koron</translation>
     </message>
 </context>
 <context>
@@ -9976,11 +9976,11 @@ Twoja wersja MuseScore jest zbyt stara.</translation>
     </message>
     <message>
         <source>sori</source>
-        <translation type="unfinished"/>
+        <translation>Sori</translation>
     </message>
     <message>
         <source>koron</source>
-        <translation type="unfinished"/>
+        <translation>Koron</translation>
     </message>
 </context>
 </TS>
