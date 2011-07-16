@@ -46,7 +46,6 @@ install(FILES
       Guitar\ Tab.mscx
       carol.mscx
       Jazz\ Lead\ Sheet.mscz
-      Jazz\ Lead\ Sheet\ 2.mscz
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}templates
       )
 

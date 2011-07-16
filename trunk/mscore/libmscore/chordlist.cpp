@@ -485,6 +485,10 @@ bool ChordList::read(const QString& name)
             path = name;
       else
             path = QString("%1styles/%2").arg(MScore::globalShare()).arg(name);
+      //default to stdchords.xml
+      QFileInfo fi(path);
+      if(!fi.exists())
+            path = QString("%1styles/%2").arg(mscoreGlobalShare).arg("stdchords.xml");
       if (debugMode)
             printf("read chordlist from <%s>\n", qPrintable(path));
       if (name.isEmpty())
