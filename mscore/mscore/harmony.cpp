@@ -1085,6 +1085,10 @@ bool ChordList::read(const QString& name)
             path = name;
       else
             path = QString("%1styles/%2").arg(mscoreGlobalShare).arg(name);
+      //default to stdchords.xml
+      QFileInfo fi(path);
+      if(!fi.exists())
+            path = QString("%1styles/%2").arg(mscoreGlobalShare).arg("stdchords.xml");
       if (debugMode)
             printf("read chordlist from <%s>\n", qPrintable(path));
       if (name.isEmpty())
@@ -1104,12 +1108,14 @@ bool ChordList::read(const QString& name)
       int line, column;
       QString err;
       if (!doc.setContent(&f, false, &err, &line, &column)) {
-            QString error = QString("error reading chord description %1 at line %2 column %3: %4\n")
-               .arg(f.fileName()).arg(line).arg(column).arg(err);
-            QMessageBox::warning(0,
-               QWidget::tr("MuseScore: Load chord list failed:"),
-               error,
-               QString::null, QString::null, QString::null, 0, 1);
+            if(!noGui) {           
+                  QString error = QString("error reading chord description %1 at line %2 column %3: %4\n")
+                    .arg(f.fileName()).arg(line).arg(column).arg(err);
+                  QMessageBox::warning(0,
+                    QWidget::tr("MuseScore: Load chord list failed:"),
+                    error,
+                    QString::null, QString::null, QString::null, 0, 1);
+                  }
             return false;
             }
       docName = f.fileName();
