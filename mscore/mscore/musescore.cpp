@@ -264,7 +264,7 @@ void MuseScore::closeEvent(QCloseEvent* ev)
       ev->accept();
       if (preferences.dirty)
             preferences.write();
-      this->deleteAfter();
+      this->deleteLater();
       qApp->quit();
       }
 
