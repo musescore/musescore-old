@@ -70,7 +70,7 @@ const ClefInfo clefTable[] = {
             { 4, 0, 3, -1, 2, 5, 1, 1, 5, 2, 6, 3, 7, 4 },
             QT_TRANSLATE_NOOP("clefTable", "Baritone clef (F clef)") },
       { "F",   5,  0, -14, 31,
-            { 1,1,1,1,1,1,1,1,1,1,1,1,1,1 },
+            { 0, 3, -1, 2, 5, 1, 4 , 4, 1,  5, 2, 6, 3, 7 },
             QT_TRANSLATE_NOOP("clefTable", "Subbass clef") },
 
       { "C",   1,  0,  -2, 43,
