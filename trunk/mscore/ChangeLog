@@ -1,4 +1,5 @@
 18.jul (ws)
+      - fix #11530: Creation from template partially broken
       - fix #11554: In "Single Palette Mode" the previous palette collapses only
         half way (patch from mokaspar)
       - #11558: pinch gesture for zooming in and out (patch from mokaspar)
