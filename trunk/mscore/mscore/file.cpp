@@ -225,6 +225,7 @@ void MuseScore::loadFile()
       if (readScore(score, fn)) {
             setCurrentScoreView(appendScore(score));
             lastOpenPath = score->fileInfo()->path();
+            updateRecentScores(score);
             writeSessionFile(false);
             }
       else {
