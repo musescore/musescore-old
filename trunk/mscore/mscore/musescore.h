@@ -456,7 +456,6 @@ class MuseScore : public QMainWindow {
       void showDrumTools(Drumset*, Staff*);
       void showWebPanel(bool on);
 
-
       void updateTabNames();
       QProgressBar* showProgressBar();
       void hideProgressBar();

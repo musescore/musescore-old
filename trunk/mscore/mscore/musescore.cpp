@@ -2474,6 +2474,7 @@ void MuseScore::changeState(ScoreState val)
                   if (inspector)
                         inspector->hide();
                   showDrumTools(0, 0);
+                  showPianoKeyboard(false);
                   break;
             case STATE_NORMAL:
                   _modeText->hide();
@@ -3723,7 +3724,8 @@ PaletteBox* MuseScore::getPaletteBox()
 
 void MuseScore::midiNoteReceived(int pitch, bool ctrl)
       {
-      cv->midiNoteReceived(pitch, ctrl);
+      if (cv)
+            cv->midiNoteReceived(pitch, ctrl);
       }
 
 //---------------------------------------------------------
