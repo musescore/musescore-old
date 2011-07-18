@@ -2473,6 +2473,7 @@ void MuseScore::changeState(ScoreState val)
                   _modeText->show();
                   if (inspector)
                         inspector->hide();
+                  showDrumTools(0, 0);
                   break;
             case STATE_NORMAL:
                   _modeText->hide();
