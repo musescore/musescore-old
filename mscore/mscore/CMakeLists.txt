@@ -643,16 +643,16 @@ endif (MINGW)
 
 if (APPLE)
      install (FILES
-      fonts/gonville-20.otf
-      fonts/mscore-20.otf
-      fonts/mscore1-20.ttf
-      fonts/MuseJazz.ttf
-      fonts/FreeSerifMscore.ttf
-      fonts/FreeSans.ttf
-      fonts/mscore_tab_baroque.ttf
-      fonts/mscore_tab_modern.ttf
-      fonts/mscore_tab_renaiss.ttf
-      fonts/mscore_tab_renaiss2.ttf
+      ../fonts/gonville-20.otf
+      ../fonts/mscore-20.otf
+      ../fonts/mscore1-20.ttf
+      ../fonts/MuseJazz.ttf
+      ../fonts/FreeSerifMscore.ttf
+      ../fonts/FreeSans.ttf
+      ../fonts/mscore_tab_baroque.ttf
+      ../fonts/mscore_tab_modern.ttf
+      ../fonts/mscore_tab_renaiss.ttf
+      ../fonts/mscore_tab_renaiss2.ttf
      DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}fonts
      )
 endif (APPLE)
