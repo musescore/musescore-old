@@ -1,4 +1,5 @@
 18.jul (ws)
+      - fix #11108: Clicking on Piano Keyboard with no score causes crash
       - fix #11565: closing drumset after closing score causes crash
       - fix #11557: slow scroll events on the scoreview get lost
         (patch from mokaspar)
