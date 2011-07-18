@@ -15,6 +15,7 @@
 #include "xml.h"
 #include "utils.h"
 #include "score.h"
+#include "pitchspelling.h"
 
 //---------------------------------------------------------
 //   KeySigEvent
@@ -136,6 +137,34 @@ bool KeySigEvent::operator!=(const KeySigEvent& e) const
       else
             return e._accidentalType != _accidentalType;
       }
+
+//---------------------------------------------------------
+//   initLineList
+//    preset lines list with accidentals for given key
+//---------------------------------------------------------
+
+void AccidentalState::init(const KeySigEvent& ks)
+      {
+      int type = ks.accidentalType();
+      memset(state, 0, 74);
+      for (int octave = 0; octave < 11; ++octave) {
+            if (type > 0) {
+                  for (int i = 0; i < type; ++i) {
+                        int idx = tpc2step(20 + i) + octave * 7;
+                        if (idx < 74)
+                              state[idx] = 1;
+                        }
+                  }
+            else {
+                  for (int i = 0; i > type; --i) {
+                        int idx = tpc2step(12 + i) + octave * 7;
+                        if (idx < 74)
+                              state[idx] = -1;
+                        }
+                  }
+            }
+      }
+
 
 //---------------------------------------------------------
 //   key

@@ -84,6 +84,7 @@
 #include "libmscore/drumset.h"
 #include "preferences.h"
 #include "libmscore/mscore.h"
+#include "libmscore/accidental.h"
 
 static bool isTwoNoteTremolo(Chord* chord);
 

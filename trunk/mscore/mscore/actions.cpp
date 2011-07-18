@@ -2582,16 +2582,6 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Parts...")
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
-         0,
-         "show-omr",
-         QT_TRANSLATE_NOOP("action","Show score image"),
-         0,
-         Qt::WindowShortcut,
-         QT_TRANSLATE_NOOP("action","Show OMR image"),
-         QT_TRANSLATE_NOOP("action","Show OMR image")
-         ),
-      Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          0,
          "enh-up",
@@ -2653,14 +2643,14 @@ Shortcut MuseScore::sc[] = {
          QT_TRANSLATE_NOOP("action","Add audio track")
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
          0,
          "show-omr",
-         QT_TRANSLATE_NOOP("action","Show OMR scan"),
-	   Qt::Key_O,
-         Qt::ApplicationShortcut,
-         QT_TRANSLATE_NOOP("action","Show OMR Scan"),
-         QT_TRANSLATE_NOOP("action","Show OMR scan")
+         QT_TRANSLATE_NOOP("action","Show score image"),
+         Qt::Key_O,
+         Qt::WindowShortcut,
+         QT_TRANSLATE_NOOP("action","Show OMR image"),
+         QT_TRANSLATE_NOOP("action","Show OMR image")
          ),
       Shortcut(
          STATE_ALL,

@@ -46,7 +46,6 @@
 #include "part.h"
 #include "beam.h"
 #include "dynamic.h"
-// #include "seq.h"
 #include "page.h"
 #include "keysig.h"
 #include "timesig.h"
@@ -63,6 +62,7 @@
 #include "instrchange.h"
 #include "box.h"
 #include "stafftype.h"
+#include "accidental.h"
 
 extern Measure* tick2measure(int tick);
 

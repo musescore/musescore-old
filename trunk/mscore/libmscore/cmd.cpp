@@ -71,6 +71,7 @@
 #include "segment.h"
 #include "chordlist.h"
 #include "mscore.h"
+#include "accidental.h"
 
 //---------------------------------------------------------
 //   startCmd
@@ -1289,7 +1290,7 @@ void Score::changeAccidental(Note* note, AccidentalType accidental)
       // accidental change may result in pitch change
       //
       int acc    = Accidental::subtype2value(accidental);
-      int acc2   = measure->findAccidental2(note);
+      int acc2   = measure->findAccidental(note);
       AccidentalType accType;
 
       int pitch, tpc;

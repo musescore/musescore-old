@@ -1935,15 +1935,13 @@ void Score::updateNotes()
       {
       for (Measure* m = firstMeasure(); m; m = m->nextMeasure()) {
             for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
-                  KeySigEvent key = staff(staffIdx)->keymap()->key(m->tick());
-
-                  char tversatz[75];      // list of already set accidentals for this measure
-                  initLineList(tversatz, key.accidentalType());
+                  AccidentalState tversatz;      // state of already set accidentals for this measure
+                  tversatz.init(staff(staffIdx)->keymap()->key(m->tick()));
 
                   for (Segment* segment = m->first(); segment; segment = segment->next()) {
                         if (!(segment->subtype() & (SegChordRest | SegGrace)))
                               continue;
-                        m->layoutChords10(segment, staffIdx * VOICES, tversatz);
+                        m->layoutChords10(segment, staffIdx * VOICES, &tversatz);
                         }
                   }
             }
@@ -1970,14 +1968,12 @@ void Score::updateAccidentals(Measure* m, int staffIdx)
       {
 // printf("updateAccidentals measure %d staff %d\n", m->no(), staffIdx);
       Staff* st = staff(staffIdx);
-      KeySigEvent key = st->keymap()->key(m->tick());
-
-      char tversatz[75];      // list of already set accidentals for this measure
-      initLineList(tversatz, key.accidentalType());
+      AccidentalState tversatz;      // list of already set accidentals for this measure
+      tversatz.init(st->keymap()->key(m->tick()));
 
       for (Segment* segment = m->first(); segment; segment = segment->next()) {
             if (segment->subtype() & (SegChordRest | SegGrace))
-                  m->updateAccidentals(segment, staffIdx, tversatz);
+                  m->updateAccidentals(segment, staffIdx, &tversatz);
             }
       }
 

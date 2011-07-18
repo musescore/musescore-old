@@ -75,6 +75,7 @@
 #include "al/tempo.h"
 #include "libmscore/chordlist.h"
 #include "libmscore/mscore.h"
+#include "libmscore/accidental.h"
 
 //---------------------------------------------------------
 //   xmlSetPitch

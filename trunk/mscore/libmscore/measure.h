@@ -38,6 +38,7 @@ class Spacer;
 class SlurMap;
 class TieMap;
 class SpannerMap;
+class AccidentalState;
 
 //---------------------------------------------------------
 //   MStaff
@@ -234,7 +235,6 @@ class Measure : public MeasureBase {
       int repeatFlags() const                   { return _repeatFlags; }
       void setRepeatFlags(int val);
       int findAccidental(Note*) const;
-      int findAccidental2(Note*) const;
       void exchangeVoice(int, int, int, int);
       void checkMultiVoices(int staffIdx);
       bool hasVoice(int track) const;
@@ -254,15 +254,13 @@ class Measure : public MeasureBase {
       int multiMeasure() const                  { return _multiMeasure; }
       void setMultiMeasure(int val)             { _multiMeasure = val;  }
       void layoutChords0(Segment* segment, int startTrack);
-      void layoutChords10(Segment* segment, int startTrack, char* tversatz);
-      void updateAccidentals(Segment* segment, int staffIdx, char* tversatz);
+      void layoutChords10(Segment* segment, int startTrack, AccidentalState*);
+      void updateAccidentals(Segment* segment, int staffIdx, AccidentalState*);
       void layoutStage1();
       int playbackCount() const      { return _playbackCount; }
       void setPlaybackCount(int val) { _playbackCount = val; }
       QRectF staffabbox(int staffIdx) const;
       };
-
-extern void initLineList(char* ll, int key);
 
 #endif
 

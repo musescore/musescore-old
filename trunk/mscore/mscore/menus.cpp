@@ -68,6 +68,7 @@
 #include "libmscore/instrchange.h"
 #include "profile.h"
 #include "libmscore/icon.h"
+#include "libmscore/accidental.h"
 
 extern bool useFactorySettings;
 

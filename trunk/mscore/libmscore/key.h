@@ -22,7 +22,7 @@ class Score;
 //---------------------------------------------------------
 
 class KeySigEvent {
-      int _accidentalType;
+      int _accidentalType;          // -7 -> +7
       int _naturalType;
       int _customType;
       bool _custom;
@@ -47,6 +47,21 @@ class KeySigEvent {
       bool custom() const        { return _custom;         }
       bool invalid() const       { return _invalid;        }
       void initFromSubtype(int);    // for backward compatibility
+      void initLineList(char*);
+      };
+
+//---------------------------------------------------------
+//   AccidentalState
+//---------------------------------------------------------
+
+class AccidentalState {
+      char state[75];
+
+   public:
+      AccidentalState() {}
+      void init(const KeySigEvent&);
+      int accidentalVal(int line) const        { return state[line]; }
+      void setAccidentalVal(int line, int val) { state[line] = val; }
       };
 
 //---------------------------------------------------------

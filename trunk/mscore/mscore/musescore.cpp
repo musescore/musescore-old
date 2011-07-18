@@ -264,7 +264,7 @@ void MuseScore::closeEvent(QCloseEvent* ev)
       ev->accept();
       if (preferences.dirty)
             preferences.write();
-      this->deleteLater();
+//      this->deleteLater();     !?
       qApp->quit();
       }
 
@@ -1913,7 +1913,7 @@ static bool processNonGui()
             if (fn.endsWith(".mscx")) {
                   QFileInfo fi(fn);
                   try {
-                        cs->saveFile(fi, false);
+                        cs->saveFile(fi);
                         }
                   catch(QString) {
                         return false;
@@ -1923,7 +1923,7 @@ static bool processNonGui()
             if (fn.endsWith(".mscz")) {
                   QFileInfo fi(fn);
                   try {
-                        cs->saveCompressedFile(fi, false);
+                        cs->saveCompressedFile(fi);
                         }
                   catch(QString) {
                         return false;
@@ -3019,7 +3019,7 @@ void MuseScore::autoSaveTimerTimeout()
                   if (!tmp.isEmpty()) {
                         QFileInfo fi(tmp);
                         // TODO: cannot catch exeption here:
-                        cs->saveCompressedFile(fi, true);
+                        cs->saveCompressedFile(fi);
                         }
                   else {
                         QDir dir;
@@ -3032,7 +3032,7 @@ void MuseScore::autoSaveTimerTimeout()
                               }
                         s->setTmpName(tf.fileName());
                         QFileInfo info(tf.fileName());
-                        s->saveCompressedFile(&tf, info, true);
+                        s->saveCompressedFile(&tf, info);
                         tf.close();
                         sessionChanged = true;
                         }

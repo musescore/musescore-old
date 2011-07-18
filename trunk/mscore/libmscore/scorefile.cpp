@@ -209,7 +209,7 @@ void Score::readStaff(QDomElement e)
 ///   Return true if OK and false on error.
 //---------------------------------------------------------
 
-bool Score::saveFile(bool autosave)
+bool Score::saveFile()
       {
       QString suffix = info.suffix();
       if ((suffix != "mscx") && (suffix != "mscz")) {
@@ -238,9 +238,9 @@ bool Score::saveFile(bool autosave)
       if (saved()) {
             try {
                   if (suffix == "msc" || suffix == "mscx")
-                        saveFile(info, autosave);
+                        saveFile(info);
                   else
-                        saveCompressedFile(info, autosave);
+                        saveCompressedFile(info);
                   }
             catch (QString s) {
                   MScore::lastError = s;
@@ -265,9 +265,9 @@ bool Score::saveFile(bool autosave)
             }
       try {
             if (suffix == "msc" || suffix == "mscx")
-                  saveFile(&temp, false, autosave);
+                  saveFile(&temp, false);
             else
-                  saveCompressedFile(&temp, info, autosave);
+                  saveCompressedFile(&temp, info);
             }
       catch (QString s) {
             MScore::lastError = s;
@@ -332,7 +332,7 @@ bool Score::saveFile(bool autosave)
 //   saveCompressedFile
 //---------------------------------------------------------
 
-void Score::saveCompressedFile(QFileInfo& info, bool autosave)
+void Score::saveCompressedFile(QFileInfo& info)
       {
       if (info.suffix().isEmpty())
             info.setFile(info.filePath() + ".mscz");
@@ -343,7 +343,7 @@ void Score::saveCompressedFile(QFileInfo& info, bool autosave)
                + QString(strerror(errno));
             throw(s);
             }
-      saveCompressedFile(&fp, info, autosave);
+      saveCompressedFile(&fp, info);
       fp.close();
       }
 
@@ -352,7 +352,7 @@ void Score::saveCompressedFile(QFileInfo& info, bool autosave)
 //    file is already opened
 //---------------------------------------------------------
 
-void Score::saveCompressedFile(QIODevice* f, QFileInfo& info, bool autosave)
+void Score::saveCompressedFile(QIODevice* f, QFileInfo& info)
       {
       Zip uz;
       if (!uz.createArchive(f))
@@ -444,7 +444,7 @@ void Score::saveCompressedFile(QIODevice* f, QFileInfo& info, bool autosave)
 
       QBuffer dbuf;
       dbuf.open(QIODevice::ReadWrite);
-      saveFile(&dbuf, true, autosave);
+      saveFile(&dbuf, true);
       dbuf.seek(0);
       if (!uz.createEntry(fn, dbuf, dt))
             throw(QString("Cannot add %1 to zipfile '%2'").arg(fn).arg(info.filePath()));
@@ -457,7 +457,7 @@ void Score::saveCompressedFile(QIODevice* f, QFileInfo& info, bool autosave)
 //    return true on success
 //---------------------------------------------------------
 
-void Score::saveFile(QFileInfo& info, bool autosave)
+void Score::saveFile(QFileInfo& info)
       {
       if (info.suffix().isEmpty())
             info.setFile(info.filePath() + ".mscx");
@@ -467,7 +467,7 @@ void Score::saveFile(QFileInfo& info, bool autosave)
                + QString(strerror(errno));
             throw(s);
             }
-      saveFile(&fp, false, autosave);
+      saveFile(&fp, false);
       fp.close();
       }
 
@@ -528,7 +528,7 @@ bool Score::saveStyle(const QString& name)
 
 extern QString revision;
 
-void Score::saveFile(QIODevice* f, bool msczFormat, bool autosave)
+void Score::saveFile(QIODevice* f, bool msczFormat)
       {
       Xml xml(f);
       xml.writeOmr = msczFormat;
