@@ -20,6 +20,9 @@
 
 #include "inspector.h"
 #include "musescore.h"
+#include "icons.h"
+#include "textstyle.h"
+#include "globals.h"
 #include "libmscore/element.h"
 #include "libmscore/page.h"
 #include "libmscore/segment.h"
@@ -29,11 +32,9 @@
 #include "libmscore/chord.h"
 #include "libmscore/measure.h"
 #include "libmscore/text.h"
-#include "textstyle.h"
 #include "libmscore/hairpin.h"
 #include "libmscore/beam.h"
 #include "libmscore/tuplet.h"
-#include "globals.h"
 #include "libmscore/clef.h"
 #include "libmscore/barline.h"
 #include "libmscore/hook.h"
@@ -51,8 +52,8 @@
 #include "libmscore/ottava.h"
 #include "libmscore/bend.h"
 #include "libmscore/stem.h"
-#include "icons.h"
 #include "libmscore/iname.h"
+#include "libmscore/accidental.h"
 
 extern bool useFactorySettings;
 

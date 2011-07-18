@@ -19,10 +19,8 @@
  Definition of classes Note and ShadowNote.
 */
 
-#include "mscore.h"
 #include "element.h"
 #include "symbol.h"
-#include "accidental.h"
 #include "durationtype.h"
 
 class Tie;
@@ -34,6 +32,8 @@ class Sym;
 class MuseScoreView;
 class Bend;
 class Painter;
+class AccidentalState;
+class Accidental;
 
 extern const int noteHeads[2][HEAD_GROUPS][4];
 
@@ -139,7 +139,7 @@ class Note : public Element {
       virtual ElementType type() const { return NOTE; }
       virtual QPointF canvasPos() const;      ///< position in canvas coordinates
       virtual void layout();
-      void layout10(char* tversatz);
+      void layout10(AccidentalState*);
       virtual void scanElements(void* data, void (*func)(void*, Element*));
       virtual void setTrack(int val);
 
@@ -244,7 +244,7 @@ class Note : public Element {
       void setBend(Bend* b)            { _bend = b;    }
       int customizeVelocity(int velo) const;
       NoteDot* dot(int n)              { return _dots[n];           }
-      void updateAccidental(char* tversatz);
+      void updateAccidental(AccidentalState*);
       void updateLine();
       void setNval(NoteVal);
       QList<NoteEvent*>& playEvents()                { return _playEvents; }

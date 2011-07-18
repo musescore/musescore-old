@@ -42,6 +42,7 @@
 #include "stem.h"
 #include "painter.h"
 #include "mscore.h"
+#include "accidental.h"
 
 //---------------------------------------------------------
 //   StemSlash

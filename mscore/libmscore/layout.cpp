@@ -41,6 +41,7 @@
 #include "stem.h"
 #include "layoutbreak.h"
 #include "mscore.h"
+#include "accidental.h"
 
 //---------------------------------------------------------
 //   rebuildBspTree

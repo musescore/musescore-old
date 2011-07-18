@@ -51,6 +51,7 @@
 #include "painter.h"
 #include "noteevent.h"
 #include "mscore.h"
+#include "accidental.h"
 
 //---------------------------------------------------------
 //   noteHeads
@@ -220,8 +221,7 @@ Note::Note(const Note& n)
 
       _tieFor   = n._tieFor;
       _tieBack  = n._tieBack;
-
-      _bend              = 0;
+      _bend     = 0;
       if (n._bend)
             add(new Bend(*n._bend));
       for (int i = 0; i < 3; ++i) {
@@ -238,11 +238,7 @@ Note::Note(const Note& n)
 
 void Note::setPitch(int val)
       {
-      if (val > 127)
-            val = 127;
-      else if (val < 0)
-            val = 0;
-      _pitch = val;
+      _pitch = restrict(val, 0, 127);
       int pitchOffset = 0;
       if (score()) {
             Part* part = score()->part(staffIdx());
@@ -1305,7 +1301,7 @@ bool Note::dotIsUp() const
 //    compute actual accidental and line
 //---------------------------------------------------------
 
-void Note::layout10(char* tversatz)
+void Note::layout10(AccidentalState* tversatz)
       {
       if (staff()->useTablature()) {
             if (_accidental) {
@@ -1336,9 +1332,9 @@ void Note::layout10(char* tversatz)
                   acci = _accidental->accidentalType();
             else  {
                   int accVal = tpc2alter(_tpc);
-                  if ((accVal != tversatz[int(_line)]) || hidden()) {
+                  if ((accVal != tversatz->accidentalVal(int(_line))) || hidden()) {
                         if (_tieBack == 0)
-                              tversatz[int(_line)] = accVal;
+                              tversatz->setAccidentalVal(int(_line), accVal);
                         acci = Accidental::value2subtype(accVal);
                         if (acci == ACC_NONE)
                               acci = ACC_NATURAL;
@@ -1562,7 +1558,7 @@ void Note::endEdit()
 //   updateAccidental
 //---------------------------------------------------------
 
-void Note::updateAccidental(char* tversatz)
+void Note::updateAccidental(AccidentalState* tversatz)
       {
       _line          = tpc2step(_tpc) + (_pitch/12) * 7;
       int tpcPitch   = tpc2pitch(_tpc);
@@ -1578,9 +1574,9 @@ void Note::updateAccidental(char* tversatz)
             acci = _accidental->accidentalType();
       else  {
             int accVal = tpc2alter(_tpc);
-            if ((accVal != tversatz[int(_line)]) || hidden()) {
+            if ((accVal != tversatz->accidentalVal(int(_line))) || hidden()) {
                   if (_tieBack == 0)
-                        tversatz[int(_line)] = accVal;
+                        tversatz->setAccidentalVal(int(_line), accVal);
                   acci = Accidental::value2subtype(accVal);
                   if (acci == ACC_NONE)
                         acci = ACC_NATURAL;

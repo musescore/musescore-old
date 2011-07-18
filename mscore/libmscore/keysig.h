@@ -21,9 +21,10 @@ class Sym;
 class Segment;
 class Painter;
 
+
 //---------------------------------------------------------
-//   KeySig
-///   The KeySig class represents a Key Signature on a staff
+//   KeySym
+//    position of one symbol in KeySig
 //---------------------------------------------------------
 
 struct KeySym {
@@ -31,6 +32,11 @@ struct KeySym {
       QPointF spos;
       QPointF pos;
       };
+
+//---------------------------------------------------------
+//   KeySig
+///   The KeySig class represents a Key Signature on a staff
+//---------------------------------------------------------
 
 class KeySig : public Element {
 	bool	_showCourtesySig;

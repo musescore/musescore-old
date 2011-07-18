@@ -553,10 +553,10 @@ class Score {
       bool loadMsc(QString name);
       bool loadCompressedMsc(QString name);
 
-      void saveFile(QFileInfo& info, bool autosave);
-      void saveFile(QIODevice* f, bool msczFormat, bool autosave);
-      void saveCompressedFile(QFileInfo&, bool autosave);
-      void saveCompressedFile(QIODevice*, QFileInfo&, bool autosave);
+      void saveFile(QFileInfo& info);
+      void saveFile(QIODevice* f, bool msczFormat);
+      void saveCompressedFile(QFileInfo&);
+      void saveCompressedFile(QIODevice*, QFileInfo&);
       bool exportFile();
 
       void print(Painter* printer, int page);
@@ -585,7 +585,7 @@ class Score {
 
       void cmd(const QAction*);
       int fileDivision(int t) const { return (t * AL::division + _fileDivision/2) / _fileDivision; }
-      bool saveFile(bool autosave);
+      bool saveFile();
 
       QString filePath() const       { return info.filePath(); }
       QString absoluteFilePath() const { return info.absoluteFilePath(); }

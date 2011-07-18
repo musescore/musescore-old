@@ -601,5 +601,17 @@ class MScore {
 inline static qreal center(qreal x1, qreal x2) {
       return (x1 + (x2 - x1) * .5);
       }
+
+//---------------------------------------------------------
+//   restrict
+//---------------------------------------------------------
+
+inline static int restrict(int val, int min, int max) {
+      if (val > max)
+            return max;
+      if (val < min)
+            return min;
+      return val;
+      }
 #endif
 

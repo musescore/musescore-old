@@ -171,7 +171,7 @@ bool MuseScore::checkDirty(Score* s)
                QMessageBox::Save);
             if (n == QMessageBox::Save) {
                   if (s->isSavable()) {
-                        if (!s->saveFile(false))
+                        if (!s->saveFile())
                               return true;
                         }
                   else {
@@ -273,7 +273,7 @@ void MuseScore::saveFile()
             cs->setCreated(false);
             writeSessionFile(false);
             }
-      if (!cs->saveFile(false)) {
+      if (!cs->saveFile()) {
             QMessageBox::critical(mscore, tr("MuseScore: Save File"), MScore::lastError);
             return;
             }
@@ -1301,9 +1301,9 @@ bool MuseScore::saveAs(Score* cs, bool saveCopy, const QString& path, const QStr
             rv = true;
             try {
                   if (ext == "mscz")
-                        cs->saveCompressedFile(fi, false);
+                        cs->saveCompressedFile(fi);
                   else
-                        cs->saveFile(fi, false);
+                        cs->saveFile(fi);
                   }
             catch (QString s) {
                   rv = false;
