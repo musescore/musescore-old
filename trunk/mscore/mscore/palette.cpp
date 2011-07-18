@@ -1156,6 +1156,8 @@ void PaletteBoxButton::showPalette(bool visible)
             emit closeAll();
             }
       scrollArea->setVisible(visible);
+      // this->setChecked(visible);
+      setChecked(visible);
 //      palette->updateGeometry();
       setArrowType(visible ? Qt::DownArrow : Qt::RightArrow );
       }
@@ -1409,8 +1411,8 @@ void PaletteBox::closeEvent(QCloseEvent* ev)
 void PaletteBox::closeAll()
       {
       for (int i = 0; i < (vbox->count() - 1); i += 2) {
-            PaletteScrollArea* sa = static_cast<PaletteScrollArea*>(vbox->itemAt(i + 1)->widget());
-            sa->setVisible(false);
+            PaletteBoxButton* b = static_cast<PaletteBoxButton*> (vbox->itemAt(i)->widget() );
+            b->showPalette(false);
             }
       }
 
