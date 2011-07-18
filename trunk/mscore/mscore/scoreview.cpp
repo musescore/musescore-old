@@ -2380,8 +2380,12 @@ void ScoreView::zoom(int step, const QPoint& pos)
 
 void ScoreView::wheelEvent(QWheelEvent* event)
       {
+      static int deltaSum = 0;
+      deltaSum += event->delta();
+      int n = deltaSum / 120;
+      deltaSum %= 120;
+
       if (event->buttons() & Qt::RightButton) {
-            int n = event->delta() / 120;
             bool up = n > 0;
             if (!up)
                   n = -n;
@@ -2393,7 +2397,7 @@ void ScoreView::wheelEvent(QWheelEvent* event)
             }
       if (event->modifiers() & Qt::ControlModifier) {
             QApplication::sendPostedEvents(this, 0);
-            zoom(event->delta() / 120, event->pos());
+            zoom(n, event->pos());
             return;
             }
       int dx = 0;
@@ -2402,19 +2406,13 @@ void ScoreView::wheelEvent(QWheelEvent* event)
             //
             //    scroll horizontal
             //
-            int n = width() / 10;
-            if (n < 2)
-                  n = 2;
-            dx = event->delta() * n / 120;
+            dx = n * qMax(2, width() / 10);
             }
       else {
             //
             //    scroll vertical
             //
-            int n = height() / 10;
-            if (n < 2)
-                  n = 2;
-            dy = event->delta() * n / 120;
+            dy = n * qMax(2, height() / 10);
             }
 
       _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m13(), _matrix.m21(),

@@ -1,3 +1,6 @@
+18.jul (ws)
+      - fix #11557: slow scroll events on the scoreview get lost
+        (patch from mokaspar)
 14.jul (ws)
       - fix #6380: Conflicting flag directions for sub-beams
 13.jul (ws)
