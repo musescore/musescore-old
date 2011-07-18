@@ -1924,7 +1924,7 @@ void MuseScore::convertCapella(Score* score, Capella* cap)
       {
       if (cap->systems.isEmpty())
             return;
-      printf("==================convert-capella\n");
+printf("==================convert-capella\n");
 
       score->style()->set(ST_measureSpacing, 1.0);
       score->setSpatium(cap->normalLineDist * DPMM);
