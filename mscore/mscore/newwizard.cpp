@@ -544,6 +544,7 @@ NewWizardPage4::NewWizardPage4(QWidget* parent)
       templateFileDialog->setWindowTitle(tr("MuseScore: Select Template"));
       QString filter = tr("MuseScore Template Files (*.mscz *.mscx)");
       templateFileDialog->setNameFilter(filter);
+      templateFileDialog->setSizePolicy(QSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored));
 
       QFileInfo myTemplates(preferences.myTemplatesPath);
       if (myTemplates.isRelative())
@@ -556,12 +557,14 @@ NewWizardPage4::NewWizardPage4(QWidget* parent)
       QSettings settings;
       templateFileDialog->restoreState(settings.value("templateFileDialog").toByteArray());
       templateFileDialog->setAcceptMode(QFileDialog::AcceptOpen);
+      templateFileDialog->setDirectory(mscoreGlobalShare + "templates");
 
-      QGridLayout* grid = new QGridLayout;
-      grid->addWidget(templateFileDialog, 0, 0);
-      setLayout(grid);
+      QLayout* layout = new QVBoxLayout;
+      layout->addWidget(templateFileDialog);
+      setLayout(layout);
 
       connect(templateFileDialog, SIGNAL(currentChanged(const QString&)), SLOT(templateChanged(const QString&)));
+      connect(templateFileDialog, SIGNAL(accepted()), SLOT(fileAccepted()));
       }
 
 //---------------------------------------------------------
@@ -574,6 +577,7 @@ void NewWizardPage4::initializePage()
       // possibly this is not portable as we make some assumptions on the
       // implementation of QFileDialog
 
+      templateFileDialog->show();
       QList<QPushButton*>widgets = templateFileDialog->findChildren<QPushButton*>();
       foreach(QPushButton* w, widgets) {
             w->setEnabled(false);
@@ -589,6 +593,16 @@ void NewWizardPage4::initializePage()
 bool NewWizardPage4::isComplete() const
       {
       return !path.isEmpty();
+      }
+
+//---------------------------------------------------------
+//   fileAccepted
+//---------------------------------------------------------
+
+void NewWizardPage4::fileAccepted()
+      {
+      templateFileDialog->show();
+      wizard()->next();
       }
 
 //---------------------------------------------------------

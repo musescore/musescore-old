@@ -152,6 +152,7 @@ class NewWizardPage4 : public QWizardPage {
 
    private slots:
       void templateChanged(const QString&);
+      void fileAccepted();
 
    public:
       NewWizardPage4(QWidget* parent = 0);
