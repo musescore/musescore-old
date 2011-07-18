@@ -1,4 +1,5 @@
 18.jul (ws)
+      - #11558: pinch gesture for zooming in and out (patch from mokaspar)
       - fix #11524: no more recent files (patch from mokaspar)
       - fix #11108: Clicking on Piano Keyboard with no score causes crash
       - fix #11565: closing drumset after closing score causes crash

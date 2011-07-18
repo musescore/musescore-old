@@ -169,6 +169,7 @@ class ScoreView : public QWidget, public MuseScoreView {
       void saveChord(Xml&);
 
       virtual bool event(QEvent* event);
+      virtual bool gestureEvent(QGestureEvent*);
       virtual void resizeEvent(QResizeEvent*);
       virtual void wheelEvent(QWheelEvent*);
       virtual void dragEnterEvent(QDragEnterEvent*);
@@ -299,6 +300,7 @@ class ScoreView : public QWidget, public MuseScoreView {
       void startUndoRedo();
       void endUndoRedo();
       void zoom(int step, const QPoint& pos);
+      void zoom(qreal _mag, const QPointF& pos);
       void contextPopup(QMouseEvent* ev);
       void setOrigEditObject(Element* e) { origEditObject = e; }
       void editKey(QKeyEvent*);

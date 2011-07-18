@@ -29,6 +29,7 @@
 #include <unistd.h>
 #include <math.h>
 
+#include <QtGui/QtGui>
 #include <QtGui/QItemDelegate>
 #include <QtCore/QModelIndex>
 #include <QtGui/QStandardItemModel>

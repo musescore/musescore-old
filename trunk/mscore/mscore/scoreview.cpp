@@ -814,6 +814,10 @@ ScoreView::ScoreView(QWidget* parent)
       sm->setInitialState(stateActive);
 
       sm->start();
+
+
+      grabGesture(Qt::PinchGesture);
+
       //-----------------------------------------------------------------------
 
       if (debugMode)
@@ -2332,10 +2336,6 @@ void ScoreView::dragLeaveEvent(QDragLeaveEvent*)
 
 void ScoreView::zoom(int step, const QPoint& pos)
       {
-      QPointF p1 = imatrix.map(QPointF(pos));
-      //
-      //    magnify
-      //
       qreal _mag = mag();
 
       if (step > 0) {
@@ -2348,6 +2348,19 @@ void ScoreView::zoom(int step, const QPoint& pos)
                   _mag /= 1.1;
                   }
             }
+
+      zoom(_mag, QPointF(pos));
+      }
+
+//---------------------------------------------------------
+//   zoom
+//---------------------------------------------------------
+
+void ScoreView::zoom(qreal _mag, const QPointF& pos)
+      {
+
+      QPointF p1 = imatrix.map(pos);
+
       if (_mag > 16.0)
             _mag = 16.0;
       else if (_mag < 0.05)
@@ -2357,7 +2370,7 @@ void ScoreView::zoom(int step, const QPoint& pos)
       setMag(_mag);
       _magIdx = MAG_FREE;
 
-      QPointF p2 = imatrix.map(QPointF(pos));
+      QPointF p2 = imatrix.map(pos);
       QPointF p3 = p2 - p1;
 
       double m = _mag;
@@ -2372,6 +2385,29 @@ void ScoreView::zoom(int step, const QPoint& pos)
       emit viewRectChanged();
       emit offsetChanged(_matrix.dx(), _matrix.dy());
       update();
+      }
+
+//---------------------------------------------------------
+//   gestureEvent
+//---------------------------------------------------------
+
+bool ScoreView::gestureEvent(QGestureEvent *event)
+      {
+      if (QGesture *gesture = event->gesture(Qt::PinchGesture)) {
+            // Zoom in/out when receiving a pinch gesture
+            QPinchGesture *pinch = static_cast<QPinchGesture *>(gesture);
+
+            static qreal magStart = 1.0;
+
+            if (pinch->state() == Qt::GestureStarted) {
+                  magStart = mag();
+                  }
+            if (pinch->changeFlags() & QPinchGesture::ScaleFactorChanged) {
+                  qreal value = pinch->property("scaleFactor").toReal();
+                  zoom(magStart*value, pinch->startCenterPoint());
+                  }
+            }
+      return true;
       }
 
 //---------------------------------------------------------
@@ -4121,6 +4157,9 @@ bool ScoreView::event(QEvent* event)
       else if (event->type() == CloneDrag) {
             Element* e = static_cast<CloneEvent*>(event)->element();
             cloneElement(e);
+            }
+      else if (event->type() == QEvent::Gesture) {
+            return gestureEvent(static_cast<QGestureEvent*>(event));
             }
       return QWidget::event(event);
       }
