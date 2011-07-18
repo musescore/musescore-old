@@ -1486,7 +1486,7 @@ bool MuseScore::readScore(Score* score, QString name)
             uint i;
             for (i = 0; i < n; ++i) {
                   if (imports[i].extension == csl) {
-                        if ((this->*imports[i].importF)(score, name))
+                        if (!(this->*imports[i].importF)(score, name))
                               return false;
                         break;
                         }
