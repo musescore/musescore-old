@@ -88,6 +88,8 @@ enum PaletteCommand {
 class PaletteBoxButton : public QToolButton {
       Q_OBJECT
 
+      friend class PaletteBox;
+
       Palette* palette;
       PaletteScrollArea* scrollArea;
       QAction* editAction;
