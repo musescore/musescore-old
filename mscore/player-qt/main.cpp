@@ -35,7 +35,7 @@ void Omr::read(QDomElement) {}
 
 int main(int argc, char* argv[])
       {
-      new QApplication(argc, argv);
+      QApplication app(argc, argv);
 
       QWidget wi(0);
       PDPI = wi.logicalDpiX();    // physical resolution
@@ -55,7 +55,6 @@ int main(int argc, char* argv[])
       view.resize(1040, 780);
       view.setSource(QUrl("qrc:/mplayer.qml"));
       view.show();
-
-      return qApp->exec();
+      return app.exec();
       }
 

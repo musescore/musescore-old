@@ -381,6 +381,11 @@ void SLine::layout()
                   }
             return;
             }
+      if (startElement() == 0 || endElement() == 0) {
+            printf("SLine::layout() failed: %s %s\n", parent()->name(), name());
+            printf("   start %p   end %p\n", startElement(), endElement());
+            return;
+            }
 
       System* s1;
       System* s2;

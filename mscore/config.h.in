@@ -41,3 +41,5 @@
 #cmakedefine OPENGL
 #cmakedefine SOUNDFONT3
 
+#define SVG_IMAGES      true
+

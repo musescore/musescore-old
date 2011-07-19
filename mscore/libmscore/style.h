@@ -146,9 +146,9 @@ enum StyleIdx {
       ST_minMeasureWidth,
 
       ST_barWidth,
-      ST_qrealBarWidth,
+      ST_doubleBarWidth,
       ST_endBarWidth,
-      ST_qrealBarDistance,
+      ST_doubleBarDistance,
       ST_endBarDistance,
       ST_repeatBarTips,
       ST_startBarlineSingle,
