@@ -247,7 +247,7 @@ void Measure::remove(Segment* el)
 
 struct AcEl {
       Note* note;
-      double x;
+      qreal x;
       };
 
 //---------------------------------------------------------
@@ -260,7 +260,7 @@ void Measure::layoutChords0(Segment* segment, int startTrack)
       {
       int staffIdx     = startTrack/VOICES;
       Staff* staff     = score()->staff(staffIdx);
-      double staffMag  = staff->mag();
+      qreal staffMag  = staff->mag();
       Drumset* drumset = 0;
 
       if (staff->part()->instr()->useDrumset())
@@ -272,7 +272,7 @@ void Measure::layoutChords0(Segment* segment, int startTrack)
             if (!e)
                  continue;
             ChordRest* cr = static_cast<ChordRest*>(e);
-            double m = staffMag;
+            qreal m = staffMag;
             if (cr->small())
                   m *= score()->styleD(ST_smallNoteMag);
 
@@ -408,7 +408,7 @@ int Measure::findAccidental(Note* note) const
  Note: minWidth = width - stretch
 */
 
-void Measure::layout(double width)
+void Measure::layout(qreal width)
       {
       int nstaves = _score->nstaves();
       for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
@@ -431,11 +431,11 @@ void Measure::layout(double width)
 //   tick2pos
 //---------------------------------------------------------
 
-double Measure::tick2pos(int tck) const
+qreal Measure::tick2pos(int tck) const
       {
       Segment* s;
-      double x1 = 0;
-      double x2 = 0;
+      qreal x1 = 0;
+      qreal x2 = 0;
       int tick1 = tick();
       int tick2 = tick1;
       for (s = first(); s; s = s->next()) {
@@ -455,9 +455,9 @@ double Measure::tick2pos(int tck) const
             x2    = width();
             tick2 = tick() + ticks();
             }
-      double x = 0;
+      qreal x = 0;
       if (tick2 > tick1) {
-            double dx = x2 - x1;
+            qreal dx = x2 - x1;
             int dt    = tick2 - tick1;
             if (dt == 0)
                   x = 0.0;
@@ -477,7 +477,7 @@ void Measure::layout2()
       if (parent() == 0)
             return;
 
-      double _spatium = spatium();
+      qreal _spatium = spatium();
       int tracks = staves.size() * VOICES;
       static const SegmentTypes st = SegGrace | SegChordRest;
       for (int track = 0; track < tracks; ++track) {
@@ -492,7 +492,7 @@ void Measure::layout2()
                   }
             if (track % VOICES == 0) {
                   int staffIdx = track / VOICES;
-                  double y = system()->staff(staffIdx)->y();
+                  qreal y = system()->staff(staffIdx)->y();
                   Spacer* sp = staves[staffIdx]->_vspacerDown;
                   if (sp) {
                         sp->layout();
@@ -1332,8 +1332,8 @@ bool Measure::acceptDrop(MuseScoreView* viewer, const QPointF& p, int type, int)
       {
       // convert p from canvas to measure relative position and take x and y coordinates
       QPointF mrp = p - canvasPos(); // pos() - system()->pos() - system()->page()->pos();
-      double mrpx = mrp.x();
-      double mrpy = mrp.y();
+      qreal mrpx = mrp.x();
+      qreal mrpy = mrp.y();
 
       System* s = system();
       int idx = s->y2staff(p.y());
@@ -1433,7 +1433,7 @@ printf("Measure drop %s\n", e->name());
       if (e->systemFlag())
             staffIdx = 0;
       QPointF mrp(data.pos - canvasPos());
-//      double mrpx  = mrp.x();
+//      qreal mrpx  = mrp.x();
       Staff* staff = score()->staff(staffIdx);
 
       switch(e->type()) {
@@ -2131,9 +2131,12 @@ void Measure::read(QDomElement e, int staffIdx)
                         path = ee.text();
                   Image* image = 0;
                   QString s(path.toLower());
+#ifdef SVG_IMAGES
                   if (s.endsWith(".svg"))
                         image = new SvgImage(score());
-                  else if (s.endsWith(".jpg")
+                  else
+#endif
+                        if (s.endsWith(".jpg")
                      || s.endsWith(".png")
                      || s.endsWith(".xpm")
                         ) {
@@ -2686,12 +2689,12 @@ void Space::max(const Space& s)
 
 struct Spring {
       int seg;
-      double stretch;
-      double fix;
-      Spring(int i, double s, double f) : seg(i), stretch(s), fix(f) {}
+      qreal stretch;
+      qreal fix;
+      Spring(int i, qreal s, qreal f) : seg(i), stretch(s), fix(f) {}
       };
 
-typedef std::multimap<double, Spring, std::less<double> > SpringMap;
+typedef std::multimap<qreal, Spring, std::less<qreal> > SpringMap;
 typedef SpringMap::iterator iSpring;
 
 //---------------------------------------------------------
@@ -2699,15 +2702,15 @@ typedef SpringMap::iterator iSpring;
 //    compute 1/Force for a given Extend
 //---------------------------------------------------------
 
-static double sff(double x, double xMin, SpringMap& springs)
+static qreal sff(qreal x, qreal xMin, SpringMap& springs)
       {
       if (x <= xMin)
             return 0.0;
       iSpring i = springs.begin();
-      double c  = i->second.stretch;
+      qreal c  = i->second.stretch;
       if (c == 0.0)           //DEBUG
             c = 1.1;
-      double f = 0.0;
+      qreal f = 0.0;
       for (; i != springs.end();) {
             xMin -= i->second.fix;
             f = (x - xMin) / c;
@@ -2729,7 +2732,7 @@ static double sff(double x, double xMin, SpringMap& springs)
 ///   to find out the minimal width of the measure.
 //-----------------------------------------------------------------------------
 
-void Measure::layoutX(double stretch)
+void Measure::layoutX(qreal stretch)
       {
       if (!_dirty && (stretch == 1.0))
             return;
@@ -2748,29 +2751,29 @@ void Measure::layoutX(double stretch)
             return;
             }
 
-      double _spatium           = spatium();
+      qreal _spatium           = spatium();
       int tracks                = nstaves * VOICES;
-      double clefKeyRightMargin = score()->styleS(ST_clefKeyRightMargin).val() * _spatium;
+      qreal clefKeyRightMargin = score()->styleS(ST_clefKeyRightMargin).val() * _spatium;
 
-      double rest[nstaves];    // fixed space needed from previous segment
-      memset(rest, 0, nstaves * sizeof(double));
+      qreal rest[nstaves];    // fixed space needed from previous segment
+      memset(rest, 0, nstaves * sizeof(qreal));
       //--------tick table for segments
       int ticksList[segs];
       memset(ticksList, 0, segs * sizeof(int));
 
-      double xpos[segs+1];
+      qreal xpos[segs+1];
       SegmentType types[segs];
-      double width[segs];
+      qreal width[segs];
 
       int segmentIdx  = 0;
-      double x        = 0.0;
+      qreal x        = 0.0;
       int minTick     = 100000;
       int ntick       = tick() + ticks();   // position of next measure
 
       qreal minNoteDistance = score()->styleS(ST_minNoteDistance).val() * _spatium;
 
-      double clefWidth[nstaves];
-      memset(clefWidth, 0, nstaves * sizeof(double));
+      qreal clefWidth[nstaves];
+      memset(clefWidth, 0, nstaves * sizeof(qreal));
 
       for (const Segment* s = first(); s; s = s->next(), ++segmentIdx) {
             if ((s->subtype() == SegClef) && (s != first())) {
@@ -2788,19 +2791,19 @@ void Measure::layoutX(double stretch)
             bool rest2[nstaves+1];
             SegmentType segType    = s->segmentType();
             types[segmentIdx]      = segType;
-            double segmentWidth    = 0.0;
-            double stretchDistance = 0.0;
+            qreal segmentWidth    = 0.0;
+            qreal stretchDistance = 0.0;
             Segment* pSeg          = s->prev();
             int pt                 = pSeg ? pSeg->subtype() : SegBarLine;
 
             for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
-                  double minDistance = 0.0;
+                  qreal minDistance = 0.0;
                   Space space;
                   int track  = staffIdx * VOICES;
                   bool found = false;
                   if (segType & (SegChordRest | SegGrace)) {
-                        double llw = 0.0;
-                        double rrw = 0.0;
+                        qreal llw = 0.0;
+                        qreal rrw = 0.0;
                         Lyrics* lyrics = 0;
                         for (int voice = 0; voice < VOICES; ++voice) {
                               ChordRest* cr = static_cast<ChordRest*>(s->element(track+voice));
@@ -2808,7 +2811,7 @@ void Measure::layoutX(double stretch)
                                     continue;
                               found = true;
                               if (pt & (SegStartRepeatBarLine | SegBarLine)) {
-                                    double sp       = score()->styleS(ST_barNoteDistance).val() * _spatium;
+                                    qreal sp       = score()->styleS(ST_barNoteDistance).val() * _spatium;
                                     minDistance     = qMax(minDistance, sp);
                                     stretchDistance = sp * .7;
                                     }
@@ -2837,18 +2840,18 @@ void Measure::layoutX(double stretch)
                                     l->layout();
                                     lyrics = l;
                                     QRectF b(l->bbox().translated(l->pos()));
-                                    double lw = -b.left();
+                                    qreal lw = -b.left();
                                     if (lw > llw)
                                           llw = lw;
                                     if (lw > rrw)
                                           rrw = lw;
-                                    double rw = b.right();
+                                    qreal rw = b.right();
                                     if (rw > rrw)
                                           rrw = rw;
                                     }
                               }
                         if (lyrics) {
-                              double y = lyrics->ipos().y() + point(score()->styleS(ST_lyricsMinBottomDistance));
+                              qreal y = lyrics->ipos().y() + point(score()->styleS(ST_lyricsMinBottomDistance));
                               if (y > staves[staffIdx]->distanceDown)
                                  staves[staffIdx]->distanceDown = y;
                               space.max(Space(llw, rrw));
@@ -2885,7 +2888,7 @@ void Measure::layoutX(double stretch)
                         }
                   if (found) {
                         space.rLw() += clefWidth[staffIdx];
-                        double sp  = minDistance + rest[staffIdx] + stretchDistance;
+                        qreal sp  = minDistance + rest[staffIdx] + stretchDistance;
                         if (space.lw() > stretchDistance)
                               sp += (space.lw() - stretchDistance);
                         rest[staffIdx]  = space.rw();
@@ -2934,7 +2937,7 @@ void Measure::layoutX(double stretch)
             }
 
       for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
-            double distAbove;
+            qreal distAbove;
             Staff * staff = _score->staff(staffIdx);
             if (staff->useTablature()) {
                   distAbove = -((StaffTypeTablature*)(staff->staffType()))->durationBoxY();
@@ -2942,7 +2945,7 @@ void Measure::layoutX(double stretch)
                      staves[staffIdx]->distanceUp = distAbove;
                   }
             }
-      double segmentWidth = 0.0;
+      qreal segmentWidth = 0.0;
       for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx)
             segmentWidth = qMax(segmentWidth, rest[staffIdx]);
       xpos[segmentIdx]    = x + segmentWidth;
@@ -2960,20 +2963,20 @@ void Measure::layoutX(double stretch)
       //---------------------------------------------------
 
       SpringMap springs;
-//      double stretchList[segs];
-      double stretchSum = 0.0;
+//      qreal stretchList[segs];
+      qreal stretchSum = 0.0;
 //      stretchList[0]    = 0.0;
 
-      double minimum = xpos[0];
+      qreal minimum = xpos[0];
       for (int i = 0; i < segs; ++i) {
-            double str = 1.0;
-            double d;
-            double w = width[i];
+            qreal str = 1.0;
+            qreal d;
+            qreal w = width[i];
 
             int t = ticksList[i];
             if (t) {
                   if (minTick > 0)
-                        str += .6 * log2(double(t) / double(minTick));
+                        str += .6 * log2(qreal(t) / qreal(minTick));
                   d = w / str;
                   stretchSum += str;
                   }
@@ -2982,7 +2985,7 @@ void Measure::layoutX(double stretch)
                   d   = 100000000.0;      // CHECK
                   }
 //            stretchList[i] = str;
-            springs.insert(std::pair<double, Spring>(d, Spring(i, str, w)));
+            springs.insert(std::pair<qreal, Spring>(d, Spring(i, str, w)));
             minimum += w;
             }
 
@@ -2990,10 +2993,10 @@ void Measure::layoutX(double stretch)
       //    distribute stretch to segments
       //---------------------------------------------------
 
-      double force = sff(stretch, minimum, springs);
+      qreal force = sff(stretch, minimum, springs);
 
       for (iSpring i = springs.begin(); i != springs.end(); ++i) {
-            double stretch = force * i->second.stretch;
+            qreal stretch = force * i->second.stretch;
             if (stretch < i->second.fix)
                   stretch = i->second.fix;
             width[i->second.seg] = stretch;
@@ -3041,7 +3044,7 @@ void Measure::layoutX(double stretch)
                         if (_multiMeasure > 0) {
                               if ((track % VOICES) == 0) {
                                     Segment* ls = last();
-                                    double eblw = 0.0;
+                                    qreal eblw = 0.0;
                                     int t = (track / VOICES) * VOICES;
                                     if (ls->subtype() == SegEndBarLine) {
                                           Element* e = ls->element(t);
@@ -3057,8 +3060,8 @@ void Measure::layoutX(double stretch)
                                     }
                               }
                         else if (rest->durationType() == Duration::V_MEASURE) {
-                              double x1 = seg == 0 ? 0.0 : xpos[seg] - clefKeyRightMargin;
-                              double w;
+                              qreal x1 = seg == 0 ? 0.0 : xpos[seg] - clefKeyRightMargin;
+                              qreal w;
                               if ((segs > 2) && types[segs-2] == SegClef)
                                     w  = xpos[segs-2] - x1;
                               else
@@ -3067,8 +3070,8 @@ void Measure::layoutX(double stretch)
                               }
                         }
                   else if (t == REPEAT_MEASURE) {
-                        double x1 = seg == 0 ? 0.0 : xpos[seg] - clefKeyRightMargin;
-                        double w  = xpos[segs-1] - x1;
+                        qreal x1 = seg == 0 ? 0.0 : xpos[seg] - clefKeyRightMargin;
+                        qreal w  = xpos[segs-1] - x1;
                         e->rxpos() = (w - e->width()) * .5 + x1 - s->x();
                         }
                   else if (t == CHORD) {
@@ -3076,7 +3079,7 @@ void Measure::layoutX(double stretch)
                         chord->layout2();
                         }
                   else if (t == CLEF) {
-                        double gap = 0.0;
+                        qreal gap = 0.0;
                         Segment* ps = s->prev();
                         if (ps)
                               gap = s->x() - (ps->x() + ps->width());
@@ -3380,8 +3383,8 @@ int Measure::snap(int tick, const QPointF p) const
       {
       Segment* s = first();
       for (; s->next(); s = s->next()) {
-            double x  = s->x();
-            double dx = s->next()->x() - x;
+            qreal x  = s->x();
+            qreal dx = s->next()->x() - x;
             if (s->tick() == tick)
                   x += dx / 3.0 * 2.0;
             else  if (s->next()->tick() == tick)
@@ -3407,8 +3410,8 @@ int Measure::snapNote(int /*tick*/, const QPointF p, int staff) const
                   ns = ns->next();
             if (ns == 0)
                   break;
-            double x  = s->x();
-            double nx = x + (ns->x() - x) * .5;
+            qreal x  = s->x();
+            qreal nx = x + (ns->x() - x) * .5;
             if (p.x() < nx)
                   break;
             s = ns;

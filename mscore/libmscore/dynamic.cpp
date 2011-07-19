@@ -147,8 +147,8 @@ void Dynamic::setSubtype(int idx)
             cursor.movePosition(QTextCursor::Start);
             QTextCharFormat tf = cursor.charFormat();
             const TextStyle& ts = score()->textStyle(TEXT_STYLE_DYNAMICS);
-            double size = ts.size();
-            double m = size;
+            qreal size = ts.size();
+            qreal m = size;
             if (ts.sizeIsSpatiumDependent())
                   m *= (score()->spatium() / (SPATIUM20 * DPI));
             m *= mag();
@@ -261,10 +261,10 @@ void Dynamic::layout()
 
 QLineF Dynamic::dragAnchor() const
       {
-      double xp = 0.0;
+      qreal xp = 0.0;
       for (Element* e = parent(); e; e = e->parent())
             xp += e->x();
-      double yp = measure()->system()->staffY(staffIdx());
+      qreal yp = measure()->system()->staffY(staffIdx());
       QPointF p(xp, yp);
       return QLineF(p, canvasPos());
       }

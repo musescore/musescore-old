@@ -30,7 +30,7 @@ Glissando::Glissando(Score* s)
       setFlags(ELEMENT_MOVABLE | ELEMENT_SELECTABLE);
       _text = "gliss.";
       _showText = true;
-      double _spatium = spatium();
+      qreal _spatium = spatium();
       setSize(QSizeF(_spatium * 2, _spatium * 4));    // for use in palettes
       }
 
@@ -68,15 +68,15 @@ void Glissando::layout()
       QPointF cp2    = anchor2->canvasPos();
 
       // construct line from notehead to notehead
-      double x1 = (anchor1->headWidth()) - (cp2.x() - cp1.x());
-      double y1 = anchor1->pos().y();
-      double x2 = anchor2->pos().x();
-      double y2 = anchor2->pos().y();
+      qreal x1 = (anchor1->headWidth()) - (cp2.x() - cp1.x());
+      qreal y1 = anchor1->pos().y();
+      qreal x2 = anchor2->pos().x();
+      qreal y2 = anchor2->pos().y();
       QLineF fullLine(x1, y1, x2, y2);
 
       // shorten line on each side by offsets
-      double xo = spatium() * .5;
-      double yo = xo;   // spatium() * .5;
+      qreal xo = spatium() * .5;
+      qreal yo = xo;   // spatium() * .5;
       QPointF p1 = fullLine.pointAt(xo / fullLine.length());
       QPointF p2 = fullLine.pointAt(1 - (yo / fullLine.length()));
 
@@ -120,25 +120,25 @@ void Glissando::read(QDomElement e)
 
 void Glissando::draw(Painter* painter) const
       {
-      double _spatium = spatium();
+      qreal _spatium = spatium();
 
       painter->save();
       painter->setLineWidth(_spatium * .15);
       painter->setCapStyle(Qt::RoundCap);
 
-      double w = line.dx();
-      double h = line.dy();
+      qreal w = line.dx();
+      qreal h = line.dy();
 
-      double l = sqrt(w * w + h * h);
+      qreal l = sqrt(w * w + h * h);
       painter->translate(line.p1());
-      double wi = asin(-h / l) * 180.0 / M_PI;
+      qreal wi = asin(-h / l) * 180.0 / M_PI;
       painter->rotate(-wi);
 
       if (subtype() == 0) {
             painter->drawLine(0.0, 0.0, l, 0.0);
             }
       else if (subtype() == 1) {
-            double mags = magS();
+            qreal mags = magS();
             QRectF b = symbols[score()->symIdx()][trillelementSym].bbox(mags);
             qreal w  = symbols[score()->symIdx()][trillelementSym].width(mags);
             int n    = lrint(l / w);
@@ -151,7 +151,7 @@ void Glissando::draw(Painter* painter) const
             if (r.width() < l) {
                   QFont f = st.fontPx(_spatium);
                   painter->setFont(f);
-                  double x = (l - r.width()) * .5;
+                  qreal x = (l - r.width()) * .5;
                   painter->drawText(x, -_spatium * .5, _text);
                   }
             }

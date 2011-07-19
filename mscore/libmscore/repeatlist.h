@@ -26,8 +26,8 @@ class RepeatSegment {
       int tick;         // start tick
       int len;
       int utick;
-      double utime;
-      double timeOffset;
+      qreal utime;
+      qreal timeOffset;
 
       RepeatSegment();
       };
@@ -51,8 +51,8 @@ class RepeatList: public QList<RepeatSegment*>
       int utick2tick(int tick) const;
       int tick2utick(int tick) const;
       void dump() const;
-      int utime2utick(double) const;
-      double utick2utime(int) const;
+      int utime2utick(qreal) const;
+      qreal utick2utime(int) const;
       void update();
       };
 

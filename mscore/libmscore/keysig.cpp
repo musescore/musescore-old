@@ -69,10 +69,10 @@ QPointF KeySig::canvasPos() const
       {
       if (parent() == 0)
             return pos();
-      double xp = x();
+      qreal xp = x();
       for (Element* e = parent(); e; e = e->parent())
             xp += e->x();
-      double yp = y();
+      qreal yp = y();
       System* system = segment()->measure()->system();
       if (system)
             yp += system->staff(staffIdx())->y() + system->y();
@@ -93,11 +93,11 @@ void KeySig::setCustom(const QList<KeySym*>& symbols)
 //   add
 //---------------------------------------------------------
 
-void KeySig::addLayout(int sym, double x, int line)
+void KeySig::addLayout(int sym, qreal x, int line)
       {
       KeySym* ks = new KeySym;
       ks->sym    = sym;
-      ks->spos   = QPointF(x, double(line) * .5);
+      ks->spos   = QPointF(x, qreal(line) * .5);
       keySymbols.append(ks);
       }
 
@@ -107,7 +107,7 @@ void KeySig::addLayout(int sym, double x, int line)
 
 void KeySig::layout()
       {
-      double _spatium = spatium();
+      qreal _spatium = spatium();
       setbbox(QRectF());
 
       if (isCustom()) {

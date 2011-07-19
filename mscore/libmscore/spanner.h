@@ -64,7 +64,7 @@ class Spanner : public Element {
    protected:
       Element* oStartElement; // start/end element at startEdit()
       Element* oEndElement;
-      double _yoffset;        // in spatium units
+      qreal _yoffset;        // in spatium units
 
    public:
       Spanner(Score*);
@@ -100,8 +100,8 @@ class Spanner : public Element {
       virtual void scanElements(void* data, void (*func)(void*, Element*));
       virtual void startEdit(MuseScoreView*, const QPointF&);
       virtual void setSelected(bool f);
-      void setYoff(double d) { _yoffset = d;        }
-      double yoff() const    { return _yoffset;     }
+      void setYoff(qreal d) { _yoffset = d;        }
+      qreal yoff() const    { return _yoffset;     }
       };
 #endif
 

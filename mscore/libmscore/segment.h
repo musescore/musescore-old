@@ -57,7 +57,7 @@ class Segment : public Element {
 
       mutable bool empty;           // cached value
       int _tick;
-      QList<double>   _dotPosX;     ///< size = staves
+      QList<qreal>   _dotPosX;     ///< size = staves
 
       QList<Spanner*> _spannerFor;
       QList<Spanner*> _spannerBack;
@@ -106,8 +106,8 @@ class Segment : public Element {
 
       Measure* measure() const            { return (Measure*)parent(); }
       System* system() const              { return (System*)parent()->parent(); }
-      double x() const                    { return ipos().x();         }
-      void setX(double v)                 { rxpos() = v;               }
+      qreal x() const                    { return ipos().x();         }
+      void setX(qreal v)                 { rxpos() = v;               }
 
       void insertStaff(int staff);
       void removeStaff(int staff);
@@ -140,8 +140,8 @@ class Segment : public Element {
       const QList<Element*>& annotations() const  { return _annotations;  }
       void removeAnnotation(Element* e)           { _annotations.removeOne(e); }
 
-      double dotPosX(int staffIdx) const          { return _dotPosX[staffIdx]; }
-      void setDotPosX(int staffIdx, double val)   { _dotPosX[staffIdx] = val;  }
+      qreal dotPosX(int staffIdx) const          { return _dotPosX[staffIdx]; }
+      void setDotPosX(int staffIdx, qreal val)   { _dotPosX[staffIdx] = val;  }
       };
 
 #endif

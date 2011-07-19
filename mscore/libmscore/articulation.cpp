@@ -225,7 +225,7 @@ QPointF Articulation::canvasPos() const
       if (parent() == 0 || parent()->parent() == 0)
             return pos();
       if (parent()->isChordRest()) {
-            double xp = x();
+            qreal xp = x();
             for (Element* e = parent(); e; e = e->parent())
                   xp += e->x();
             ChordRest* cr = static_cast<ChordRest*>(parent());
@@ -235,7 +235,7 @@ QPointF Articulation::canvasPos() const
             System* system = m->system();
             if (system == 0)
                   return pos();
-            double yp = y() + system->staff(staffIdx() + cr->staffMove())->y() + system->y();
+            qreal yp = y() + system->staff(staffIdx() + cr->staffMove())->y() + system->y();
             return QPointF(xp, yp);
             }
       return Element::canvasPos();

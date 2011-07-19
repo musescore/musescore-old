@@ -357,7 +357,7 @@ void StaffTypeTablature::read(QDomElement e)
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             int v = e.text().toInt();
-            double val = e.text().toDouble();
+            qreal val = e.text().toDouble();
             if(tag == "durations")
                   setGenDurations(v != 0);
             else if(tag == "durationFontName")
@@ -496,7 +496,7 @@ void StaffTypeTablature::setFretMetrics()
 //   setDurationFontSize
 //---------------------------------------------------------
 
-void StaffTypeTablature::setDurationFontSize(double val)
+void StaffTypeTablature::setDurationFontSize(qreal val)
       {
       _durationFontSize = val;
 //    _durationFont.setPointSizeF(val);
@@ -508,7 +508,7 @@ void StaffTypeTablature::setDurationFontSize(double val)
 //   setFretFontSize
 //---------------------------------------------------------
 
-void StaffTypeTablature::setFretFontSize(double val)
+void StaffTypeTablature::setFretFontSize(qreal val)
       {
       _fretFontSize = val;
 //    _fretFont.setPointSizeF(val);
@@ -552,8 +552,8 @@ TabDurationSymbol::TabDurationSymbol(const TabDurationSymbol& e)
 void TabDurationSymbol::layout()
       {
       QFontMetricsF fm(_tab->durationFont());
-      double mags = magS();
-      double w = fm.width(_text);
+      qreal mags = magS();
+      qreal w = fm.width(_text);
       _bbox = QRectF(0.0, _tab->durationBoxY() * mags, w * mags, _tab->durationBoxH() * mags);
       }
 */
@@ -565,8 +565,8 @@ void TabDurationSymbol::draw(Painter* painter) const
       {
       if(!_tab)
             return;
-      double mag = magS();
-      double imag = 1.0 / mag;
+      qreal mag = magS();
+      qreal imag = 1.0 / mag;
 
       painter->scale(mag);
       painter->setFont(_tab->durationFont());

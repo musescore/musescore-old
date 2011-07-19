@@ -243,13 +243,13 @@ Beam::~Beam()
 
 QPointF Beam::canvasPos() const
       {
-      double xp = x();
+      qreal xp = x();
       for (Element* e = parent(); e; e = e->parent())
             xp += e->x();
       System* system = static_cast<System*>(parent());
       if (system == 0)
             return pos();
-      double yp = y() + system->staff(staffIdx())->y() + system->y();
+      qreal yp = y() + system->staff(staffIdx())->y() + system->y();
       return QPointF(xp, yp);
       }
 
@@ -300,7 +300,7 @@ void Beam::draw(Painter* painter) const
 //   move
 //---------------------------------------------------------
 
-void Beam::move(double x, double y)
+void Beam::move(qreal x, qreal y)
       {
       Element::move(x, y);
       foreach (QLineF* bs, beamSegments)
@@ -556,10 +556,10 @@ bool Beam::contains(const QPointF& p) const
 //   alignBeam
 //---------------------------------------------------------
 
-static double alignBeam(int line, double y, double _spatium, bool _up)
+static qreal alignBeam(int line, qreal y, qreal _spatium, bool _up)
       {
-      double _spatium2 = _spatium * .5;
-      double _spatium4 = _spatium * .25;
+      qreal _spatium2 = _spatium * .5;
+      qreal _spatium4 = _spatium * .25;
       if (_up)
             _spatium4 = -_spatium4;
       int n = lrint(y / _spatium2);
@@ -574,7 +574,7 @@ static double alignBeam(int line, double y, double _spatium, bool _up)
 //   absLimit
 //---------------------------------------------------------
 
-inline double absLimit(double val, double limit)
+inline qreal absLimit(qreal val, qreal limit)
       {
       if (val > limit)
             return limit;
@@ -603,23 +603,23 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
 
       BeamFragment* f  = fragments[frag];
       int idx          = (_direction == AUTO || _direction == DOWN) ? 0 : 1;
-      double _spatium  = spatium();
+      qreal _spatium  = spatium();
       cut               = 0;
       QPointF canvPos(canvasPos());
-      double bd         = score()->styleD(ST_beamDistance);
+      qreal bd         = score()->styleD(ST_beamDistance);
       Spatium bw        = score()->styleS(ST_beamWidth);
-      double beamMinLen = point(score()->styleS(ST_beamMinLen));
-      double graceMag   = score()->styleD(ST_graceNoteMag);
+      qreal beamMinLen = point(score()->styleS(ST_beamMinLen));
+      qreal graceMag   = score()->styleD(ST_graceNoteMag);
 
       // TODO: what about undefined direction (_up = -1)?
       if (_up == -1)
             _up = 1;
 
-      // double beamDist = point(bd * bw + bw) * (_up ? 1.0 : -1.0);
-      double beamDist = point(bd * bw + bw);
+      // qreal beamDist = point(bd * bw + bw) * (_up ? 1.0 : -1.0);
+      qreal beamDist = point(bd * bw + bw);
       if (isGrace)
             beamDist *= graceMag;
-      double x1, x2;
+      qreal x1, x2;
 
       if (staff()->useTablature()) {
 
@@ -627,8 +627,8 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
             // TABLATURE STAVES: SETUP
             //
 
-            double xoffLeft  = point(score()->styleS(ST_stemWidth)) * .5;
-            double xoffRight = xoffLeft;
+            qreal xoffLeft  = point(score()->styleS(ST_stemWidth)) * .5;
+            qreal xoffRight = xoffLeft;
             QPointF c1StemPos= c1->stemPos(true, false);
             QPointF c2StemPos= c2->stemPos(true, false);
             x1        = c1StemPos.x() - xoffLeft;
@@ -647,8 +647,8 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
             // PITCHED STAVES: SETUP
             //
 
-            double p1x = c1->upNote()->canvasPos().x();
-            double p2x = c2->upNote()->canvasPos().x();
+            qreal p1x = c1->upNote()->canvasPos().x();
+            qreal p2x = c2->upNote()->canvasPos().x();
             int l1     = c1->line(_up);
             int l2     = c2->line(_up);
 
@@ -656,7 +656,7 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
             f->p2[idx] += canvPos;
 
             if (_userModified[idx]) {
-                  double beamY = f->p1[idx].y();
+                  qreal beamY = f->p1[idx].y();
                   slope        = (f->p2[idx].y() - f->p1[idx].y()) / (p2x - p1x);
                   //
                   // set stem direction for every chord
@@ -666,7 +666,7 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                               continue;
                         Chord* c  = static_cast<Chord*>(cr);
                         QPointF p = c->upNote()->canvasPos();
-                        double y1 = beamY + (p.x() - p1x) * slope;
+                        qreal y1 = beamY + (p.x() - p1x) * slope;
                         bool nup  = y1 < p.y();
                         if (c->up() != nup) {
                               c->setUp(nup);
@@ -677,14 +677,14 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                   _up = crl.front()->up();
                   }
             else if (cross) {
-                  double beamY   = 0.0;  // y position of main beam start
-                  double y1   = -200000;
-                  double y2   = 200000;
+                  qreal beamY   = 0.0;  // y position of main beam start
+                  qreal y1   = -200000;
+                  qreal y2   = 200000;
                   foreach(ChordRest* cr, crl) {
                         if (cr->type() != CHORD)
                               continue;
                         Chord* c = static_cast<Chord*>(cr);
-                        double y = c->upNote()->canvasPos().y();
+                        qreal y = c->upNote()->canvasPos().y();
                         y1       = qMax(y1, y);
                         y2       = qMin(y2, y);
                         }
@@ -701,7 +701,7 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                         if (cr->type() != CHORD)
                               continue;
                         Chord* c  = static_cast<Chord*>(cr);
-                        double y  = c->upNote()->canvasPos().y();
+                        qreal y  = c->upNote()->canvasPos().y();
                         bool nup = beamY < y;
                         if (c->up() != nup) {
                               c->setUp(nup);
@@ -755,10 +755,10 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                         }
 
                   if (!concave) {
-                        double dx = c2->canvasPos().x() - c1->canvasPos().x();
+                        qreal dx = c2->canvasPos().x() - c1->canvasPos().x();
                         if (dx) {
-                              double maxSlope = score()->style(ST_beamMaxSlope).toDouble();
-                              double lslope = l2 - l1;
+                              qreal maxSlope = score()->style(ST_beamMaxSlope).toDouble();
+                              qreal lslope = l2 - l1;
                               if (crl.size() <= 3) {
                                     //
                                     // if notes are spaced very close together (<= 3.0 spaces)
@@ -805,8 +805,8 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
             //    create beam segments
             //---------------------------------------------------
 
-            double xoffLeft  = point(score()->styleS(ST_stemWidth)) * .5;
-            double xoffRight = xoffLeft;
+            qreal xoffLeft  = point(score()->styleS(ST_stemWidth)) * .5;
+            qreal xoffRight = xoffLeft;
             x1               = c1->stemPos(c1->up(), false).x() - xoffLeft;
             x2               = c2->stemPos(c2->up(), false).x() + xoffRight;
 
@@ -818,12 +818,12 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                   // compute final y position of 1/8 beam
                   //
                   if (cross) {
-                        double yDownMax = -300000;
-                        double yUpMin   = 300000;
+                        qreal yDownMax = -300000;
+                        qreal yUpMin   = 300000;
                         foreach(ChordRest* cr, crl) {
                               if (cr->type() != CHORD)
                                     continue;
-                              double y;
+                              qreal y;
                               bool _up = cr->up();
                               y = cr->stemPos(!cr->up(), false).y();
                               if (_up)
@@ -836,7 +836,7 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                   else {
                         QPointF p1s(c1->stemPos(c1->up(), false));
                         QPointF p2s(c2->stemPos(c2->up(), false));
-                        double ys = (x2 - x1) * slope;
+                        qreal ys = (x2 - x1) * slope;
 
                         if (cut >= 0) {
                               // left dot is reference
@@ -848,12 +848,12 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                               f->p2[idx].ry() = p2s.y();
                               f->p1[idx].ry() = f->p2[idx].y() - ys;
                               }
-                        double my  = _spatium * 2.0 + canvPos.y();
+                        qreal my  = _spatium * 2.0 + canvPos.y();
 
-                        double min        =  1000000.0;
-                        double max        = -1000000.0;
+                        qreal min        =  1000000.0;
+                        qreal max        = -1000000.0;
                         bool toMiddleLine = true;
-                        double minStemLen = 3.0 * _spatium;
+                        qreal minStemLen = 3.0 * _spatium;
                         if (isGrace)
                               minStemLen *= graceMag;
 
@@ -864,9 +864,9 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                                     continue;
                               Chord* chord  = static_cast<Chord*>(cr);
                               QPointF npos(chord->stemPos(_up, true));
-                              double y1 = npos.y();
-                              double y2 = f->p1[idx].y() + (npos.x() - x1) * slope;
-                              double stemLen;
+                              qreal y1 = npos.y();
+                              qreal y2 = f->p1[idx].y() + (npos.x() - x1) * slope;
+                              qreal stemLen;
                               if (_up) {
                                     if ((y1-my) < minStemLen)
                                           toMiddleLine = false;
@@ -894,12 +894,12 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                               }
                         else {
                               // adjust beam position
-                              double n = 3.5 * _spatium;
+                              qreal n = 3.5 * _spatium;
                               if (isGrace)
                                     n *= graceMag;
 
-                              double diff;
-                              double beamsHeight = 0.0; // beams * beamDist * .5;
+                              qreal diff;
+                              qreal beamsHeight = 0.0; // beams * beamDist * .5;
                               switch (beams) {
                                     case 0:
                                     case 1: beamsHeight = 0.0; break;
@@ -942,7 +942,7 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                                     }
                               }
                         }
-                  double yy       = system()->staffY(c1->staffIdx());
+                  qreal yy       = system()->staffY(c1->staffIdx());
                   f->p1[idx].ry() = alignBeam(l1, f->p1[idx].y() - yy, _spatium, _up) + yy;
                   f->p2[idx].ry() = alignBeam(l2, f->p2[idx].y() - yy, _spatium, _up) + yy;
                   }
@@ -964,7 +964,7 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
       //---------------------------------------------
 
       qreal stemWidth2 = point(score()->styleS(ST_stemWidth)) * .5;
-      double p1dy = f->p1[idx].y();
+      qreal p1dy = f->p1[idx].y();
 
       int beamLevels = 1;
       int chordRests = crl.size();
@@ -982,7 +982,7 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
             bool hasBeamSegment1[chordRests];
             memset(hasBeamSegment1, 0, sizeof(hasBeamSegment));
 
-            double dist = beamDist * beamLevel;
+            qreal dist = beamDist * beamLevel;
 
             for (int idx = 0; idx < chordRests; ++idx) {
                   ChordRest* cr = crl[idx];
@@ -994,24 +994,24 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                   if ((crLevel < beamLevel) || b32 || b64) {
                         if (cr2) {
                               // create short segment
-                              double y1;
+                              qreal y1;
                               if (cr2->up())
                                     y1 = p1dy + dist;
                               else
                                     y1 = p1dy - dist;
-                              double x2 = cr1->stemPos(cr1->up(), false).x();
-                              double x3 = cr2->stemPos(cr2->up(), false).x();
+                              qreal x2 = cr1->stemPos(cr1->up(), false).x();
+                              qreal x3 = cr2->stemPos(cr2->up(), false).x();
                               beamSegments.push_back(new QLineF(x2 - canvPos.x(), (x2 - x1) * slope + y1,
                                  x3 - canvPos.x(), (x3 - x1) * slope + y1));
                               }
                         else if (cr1) {
-                              double y1;
+                              qreal y1;
                               if (cr1->up())
                                     y1 = p1dy + dist;
                               else
                                     y1 = p1dy - dist;
                               // create broken segment
-                              double len = beamMinLen;
+                              qreal len = beamMinLen;
 
                               if ((idx > 1) && (idx < chordRests)
                                  && (crl[idx-2]->duration() != crl[idx]->duration())) {
@@ -1034,8 +1034,8 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                                                 len = -len;
                                           }
                                     }
-                              double x2 = cr1->stemPos(cr1->up(), false).x();
-                              double x3 = x2 + len;
+                              qreal x2 = cr1->stemPos(cr1->up(), false).x();
+                              qreal x3 = x2 + len;
                               beamSegments.push_back(new QLineF(x2 - canvPos.x(), (x2 - x1) * slope + y1,
                                  x3 - canvPos.x(), (x3 - x1) * slope + y1));
                               hasBeamSegment1[idx-1] = false;
@@ -1061,8 +1061,8 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                   if (!cr2->up())
                         dist = -dist;
 
-                  double x2 = cr1->stemPos(cr1->up(), false).x();
-                  double x3 = cr2->stemPos(cr2->up(), false).x();
+                  qreal x2 = cr1->stemPos(cr1->up(), false).x();
+                  qreal x3 = cr2->stemPos(cr2->up(), false).x();
 
                   if (st == SEGMENT_BEGIN)
                         x3 += _spatium * 2;
@@ -1079,8 +1079,8 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                   // create broken segment
                   if (!cr1->up())
                         dist = -dist;
-                  double x3 = cr1->stemPos(cr1->up(), false).x();
-                  double x2 = x3 - beamMinLen;
+                  qreal x3 = cr1->stemPos(cr1->up(), false).x();
+                  qreal x2 = x3 - beamMinLen;
                   beamSegments.push_back(new QLineF(x2 - canvPos.x(), (x2 - x1) * slope + p1dy + dist,
                      x3 - canvPos.x(), (x3 - x1) * slope + p1dy + dist));
                   }
@@ -1117,17 +1117,17 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                   bool chordUp = chord->up();
                   QPointF npos(chord->stemPos(chordUp, false));   // canvas coordinates
 
-                  double x2 = npos.x();
-                  double y1 = npos.y();
-                  double y  = chordUp ? 1000000.0 : -1000000;
+                  qreal x2 = npos.x();
+                  qreal y1 = npos.y();
+                  qreal y  = chordUp ? 1000000.0 : -1000000;
 
                   //  extend stem to farest beam segment
                   qreal x = x2 - parent()->canvasPos().x();
                   foreach(QLineF* l, beamSegments) {
                         if ((l->x1() <= x) && (l->x2() > x)) {
-                              double dx = x - l->x1();
-                              double dy = dx * slope;
-                              double yy = l->y1() + dy;
+                              qreal dx = x - l->x1();
+                              qreal dy = dx * slope;
+                              qreal yy = l->y1() + dy;
 
                               if (chordUp) {
                                     if (yy < y)
@@ -1139,8 +1139,8 @@ void Beam::layout2(QList<ChordRest*>crl, SpannerSegmentType st, int frag)
                                     }
                               }
                         }
-                  double y2 = y + canvPos.y();
-                  double stemLen = chordUp ? (y1 - y2) : (y2 - y1);
+                  qreal y2 = y + canvPos.y();
+                  qreal stemLen = chordUp ? (y1 - y2) : (y2 - y1);
 
                   stem->setLen(stemLen);
 
@@ -1175,7 +1175,7 @@ void Beam::write(Xml& xml) const
             }
       int idx = (_direction == AUTO || _direction == DOWN) ? 0 : 1;
       if (_userModified[idx]) {
-            double _spatium = spatium();
+            qreal _spatium = spatium();
             foreach(BeamFragment* f, fragments) {
                   xml.stag("Fragment");
                   xml.tag("y1", f->p1[idx].y() / _spatium);
@@ -1221,10 +1221,10 @@ void Beam::read(QDomElement e)
                   BeamFragment* f = new BeamFragment;
                   int idx = (_direction == AUTO || _direction == DOWN) ? 0 : 1;
                   _userModified[idx] = true;
-                  double _spatium = spatium();
+                  qreal _spatium = spatium();
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         QString tag(ee.tagName());
-                        double v = ee.text().toDouble() * _spatium;
+                        qreal v = ee.text().toDouble() * _spatium;
                         if (tag == "y1")
                               f->p1[idx] = QPointF(0.0, v);
                         else if (tag == "y2")
@@ -1318,12 +1318,12 @@ void Beam::toDefault()
 void Beam::startEdit(MuseScoreView*, const QPointF& p)
       {
       QPointF pt(p - canvasPos());
-      double ydiff = 100000000.0;
+      qreal ydiff = 100000000.0;
       int idx = (_direction == AUTO || _direction == DOWN) ? 0 : 1;
       int i = 0;
       editFragment = 0;
       foreach (BeamFragment* f, fragments) {
-            double d = fabs(f->p1[idx].y() - pt.y());
+            qreal d = fabs(f->p1[idx].y() - pt.y());
             if (d < ydiff) {
                   ydiff = d;
                   editFragment = i;
@@ -1349,8 +1349,8 @@ bool Beam::acceptDrop(MuseScoreView*, const QPointF&, int type, int subtype) con
 Element* Beam::drop(const DropData& data)
       {
       Element* e = data.element;
-      double g1;
-      double g2;
+      qreal g1;
+      qreal g2;
       if (e->subtype() == ICON_FBEAM1) {
             g1 = 1.0;
             g2 = 0.0;

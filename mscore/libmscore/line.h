@@ -59,7 +59,7 @@ class LineSegment : public SpannerSegment {
       void setPos2(const QPointF& p)              { _p2 = p;                }
       QPointF pos2() const                        { return _p2 + _userOff2; }
       virtual void toDefault();
-      virtual void spatiumChanged(double, double);
+      virtual void spatiumChanged(qreal, qreal);
       virtual QPointF canvasPos() const;
 
       friend class SLine;
@@ -83,7 +83,7 @@ class SLine : public Spanner {
       bool readProperties(QDomElement node);
       void writeProperties(Xml& xml, const SLine* proto = 0) const;
       virtual LineSegment* createLineSegment() = 0;
-      void setLen(double l);
+      void setLen(qreal l);
       virtual QRectF bbox() const;
 
       virtual QPointF tick2pos(int grip, System** system);

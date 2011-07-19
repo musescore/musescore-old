@@ -158,7 +158,7 @@ void Score::end1()
             }
       else {
             // update a little more:
-            double d = spatium() * .5;
+            qreal d = spatium() * .5;
             refresh.adjust(-d, -d, 2 * d, 2 * d);
             foreach(MuseScoreView* v, viewer)
                   v->dataChanged(refresh);
@@ -745,7 +745,7 @@ printf("  akkumulated %d/%d rest %d/%d (-%d/%d)\n",
 //      if (td > sd)
 //            td = sd;
 // ???  akkumulated should already contain the total value of the created gap: line 749, 811 or 838
-//      this line creates a double-sized gap if the needed gap crosses a measure boundary
+//      this line creates a qreal-sized gap if the needed gap crosses a measure boundary
 //      by adding again the duration already added in line 838
 //      akkumulated += td;
       return akkumulated;
@@ -1482,7 +1482,7 @@ printf("moveDown staffMove==%d  rstaff %d rstaves %d\n", staffMove, rstaff, rsta
 //   cmdAddStretch
 //---------------------------------------------------------
 
-void Score::cmdAddStretch(double val)
+void Score::cmdAddStretch(qreal val)
       {
       if (selection().state() != SEL_RANGE)
             return;
@@ -1493,7 +1493,7 @@ void Score::cmdAddStretch(double val)
                   continue;
             if (m->tick() >= endTick)
                   break;
-            double stretch = m->userStretch();
+            qreal stretch = m->userStretch();
             stretch += val;
             undo()->push(new ChangeStretch(m, stretch));
             }

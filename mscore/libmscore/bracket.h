@@ -48,7 +48,7 @@ class Bracket : public Element {
 
       virtual QRectF bbox() const;
       virtual void setHeight(qreal);
-      virtual double width() const;
+      virtual qreal width() const;
 
       virtual void draw(Painter*) const;
       virtual void write(Xml& xml) const;

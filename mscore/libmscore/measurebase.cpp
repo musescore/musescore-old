@@ -200,7 +200,7 @@ Measure* MeasureBase::prevMeasure() const
 //   spatiumChanged
 //---------------------------------------------------------
 
-void MeasureBase::spatiumChanged(double oldValue, double newValue)
+void MeasureBase::spatiumChanged(qreal oldValue, qreal newValue)
       {
       foreach(Element* e, _el)
             e->spatiumChanged(oldValue, newValue);
@@ -237,7 +237,7 @@ void MeasureBase::spatiumChanged(double oldValue, double newValue)
 //   pause
 //---------------------------------------------------------
 
-double MeasureBase::pause() const
+qreal MeasureBase::pause() const
       {
       return _sectionBreak ? _sectionBreak->pause() : 0.0;
       }

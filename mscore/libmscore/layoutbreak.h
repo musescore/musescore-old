@@ -30,7 +30,7 @@ enum { LAYOUT_BREAK_PAGE, LAYOUT_BREAK_LINE, LAYOUT_BREAK_SECTION };
 class LayoutBreak : public Element {
       qreal lw;
       QPainterPath path;
-      double _pause;
+      qreal _pause;
       bool _startWithLongNames;
       bool _startWithMeasureOne;
 
@@ -48,8 +48,8 @@ class LayoutBreak : public Element {
       virtual Element* drop(const DropData&);
       virtual void write(Xml&) const;
       virtual void read(QDomElement);
-      double pause() const                { return _pause; }
-      void setPause(double v)             { _pause = v; }
+      qreal pause() const                { return _pause; }
+      void setPause(qreal v)             { _pause = v; }
       bool startWithLongNames() const     { return _startWithLongNames; }
       void setStartWithLongNames(bool v)  { _startWithLongNames = v; }
       bool startWithMeasureOne() const    { return _startWithMeasureOne; }

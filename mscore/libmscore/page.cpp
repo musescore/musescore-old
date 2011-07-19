@@ -91,12 +91,12 @@ int paperSizeNameToIndex(const QString& name)
 //   paperSizeSizeToIndex
 //---------------------------------------------------------
 
-static const double minSize = 0.1;      // minimum paper size for sanity check
-static const double maxError = 0.01;    // max allowed error when matching sizes
+static const qreal minSize = 0.1;      // minimum paper size for sanity check
+static const qreal maxError = 0.01;    // max allowed error when matching sizes
 
-static double sizeError(const double si, const double sref)
+static qreal sizeError(const qreal si, const qreal sref)
       {
-      double relErr = (si - sref) / sref;
+      qreal relErr = (si - sref) / sref;
       return relErr > 0 ? relErr : -relErr;
       }
 
@@ -104,7 +104,7 @@ static double sizeError(const double si, const double sref)
 //   paperSizeSizeToIndex
 //---------------------------------------------------------
 
-int paperSizeSizeToIndex(const double wi, const double hi)
+int paperSizeSizeToIndex(const qreal wi, const qreal hi)
       {
       if (wi < minSize || hi < minSize)
             return -1;
@@ -156,7 +156,7 @@ QList<const Element*> Page::items(const QPointF& p)
 //   tm
 //---------------------------------------------------------
 
-double Page::tm() const
+qreal Page::tm() const
       {
       PageFormat* pf = score()->pageFormat();
       return ((!pf->twosided || isOdd()) ? pf->oddTopMargin : pf->evenTopMargin) * DPI;
@@ -166,7 +166,7 @@ double Page::tm() const
 //   bm
 //---------------------------------------------------------
 
-double Page::bm() const
+qreal Page::bm() const
       {
       PageFormat* pf = score()->pageFormat();
       return ((!pf->twosided || isOdd()) ? pf->oddBottomMargin : pf->evenBottomMargin) * DPI;
@@ -176,7 +176,7 @@ double Page::bm() const
 //   lm
 //---------------------------------------------------------
 
-double Page::lm() const
+qreal Page::lm() const
       {
       PageFormat* pf = score()->pageFormat();
       return ((!pf->twosided || isOdd()) ? pf->oddLeftMargin : pf->evenLeftMargin) * DPI;
@@ -186,7 +186,7 @@ double Page::lm() const
 //   rm
 //---------------------------------------------------------
 
-double Page::rm() const
+qreal Page::rm() const
       {
       PageFormat* pf = score()->pageFormat();
       return ((!pf->twosided || isOdd()) ? pf->oddRightMargin : pf->evenRightMargin) * DPI;
@@ -196,7 +196,7 @@ double Page::rm() const
 //   loWidth
 //---------------------------------------------------------
 
-double Page::loWidth() const
+qreal Page::loWidth() const
       {
       return score()->pageFormat()->width() * DPI;
       }
@@ -205,7 +205,7 @@ double Page::loWidth() const
 //   loHeight
 //---------------------------------------------------------
 
-double Page::loHeight() const
+qreal Page::loHeight() const
       {
       return score()->pageFormat()->height() * DPI;
       }
@@ -367,7 +367,7 @@ QString PageFormat::name() const
 //    return in inch
 //---------------------------------------------------------
 
-double PageFormat::width() const
+qreal PageFormat::width() const
       {
       if (paperSizes[size].qtsize == QPrinter::Custom)
             return landscape ? _height : _width;
@@ -379,7 +379,7 @@ double PageFormat::width() const
 //    return in inch
 //---------------------------------------------------------
 
-double PageFormat::height() const
+qreal PageFormat::height() const
       {
       if (paperSizes[size].qtsize == QPrinter::Custom)
             return landscape ? _width : _height;
@@ -418,11 +418,11 @@ void PageFormat::read(QDomElement e, Score* score)
                   landscape = i;
             else if (tag == "page-margins") {
                   QString type = e.attribute("type","both");
-                  double lm = 0.0, rm = 0.0, tm = 0.0, bm = 0.0;
+                  qreal lm = 0.0, rm = 0.0, tm = 0.0, bm = 0.0;
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         QString tag(ee.tagName());
-//                        double val = ee.text().toDouble() * (20/4)/ PPI  * .1;
-                        double val = ee.text().toDouble() * 0.5 / PPI;
+//                        qreal val = ee.text().toDouble() * (20/4)/ PPI  * .1;
+                        qreal val = ee.text().toDouble() * 0.5 / PPI;
                         if (tag == "left-margin")
                               lm = val;
                         else if (tag == "right-margin")
@@ -479,7 +479,7 @@ void PageFormat::read(QDomElement e, Score* score)
 //    sizes are given in units of 1/10 spatium;
 //---------------------------------------------------------
 
-void PageFormat::readMusicXML(QDomElement e, double conversion)
+void PageFormat::readMusicXML(QDomElement e, qreal conversion)
       {
       landscape = false;
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
@@ -487,12 +487,12 @@ void PageFormat::readMusicXML(QDomElement e, double conversion)
             QString val(e.text());
             if (tag == "page-margins") {
                   QString type = e.attribute("type","both");
-                  double lm = 0.0, rm = 0.0, tm = 0.0, bm = 0.0;
+                  qreal lm = 0.0, rm = 0.0, tm = 0.0, bm = 0.0;
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         QString tag(ee.tagName());
-                        //double val = ee.text().toDouble() * (18/4)/ PPI  * .1;
-                        //double val = ee.text().toDouble() * 0.45 / PPI; OLD!!!
-                        double val = ee.text().toDouble() * conversion;
+                        //qreal val = ee.text().toDouble() * (18/4)/ PPI  * .1;
+                        //qreal val = ee.text().toDouble() * 0.45 / PPI; OLD!!!
+                        qreal val = ee.text().toDouble() * conversion;
                         if (tag == "left-margin")
                               lm = val;
                         else if (tag == "right-margin")
@@ -547,8 +547,8 @@ void PageFormat::write(Xml& xml)
       // convert inch to 1/10 spatium units
       // 20 - font design size in point
       // SPATIUM = 20/4
-      // double t = 10 * PPI / (20 / 4);
-      double t = 2 * PPI;
+      // qreal t = 10 * PPI / (20 / 4);
+      qreal t = 2 * PPI;
 
       if (name() != "Custom") {
             xml.tag("pageFormat", QString(name()));
@@ -584,11 +584,11 @@ void PageFormat::write(Xml& xml)
 //   writeMusicXML
 //---------------------------------------------------------
 
-void PageFormat::writeMusicXML(Xml& xml, double conversion )
+void PageFormat::writeMusicXML(Xml& xml, qreal conversion )
       {
       xml.stag("page-layout");
 
-      //double t = 2 * PPI * 10 / 9;
+      //qreal t = 2 * PPI * 10 / 9;
 
       xml.tag("page-height", height() * conversion);
       xml.tag("page-width", width() * conversion);

@@ -29,7 +29,7 @@ class Painter;
 */
 
 class Stem : public Element {
-      double _len;
+      qreal _len;
       Spatium _userLen;
 
    public:
@@ -39,8 +39,8 @@ class Stem : public Element {
       virtual Stem* clone() const      { return new Stem(*this); }
       virtual ElementType type() const { return STEM; }
       virtual void draw(Painter*) const;
-      void setLen(double v)            { _len = v; }
-      double stemLen() const           { return _len + point(_userLen); }
+      void setLen(qreal v)            { _len = v; }
+      qreal stemLen() const           { return _len + point(_userLen); }
       virtual QRectF bbox() const;
       virtual bool isEditable() const { return true; }
 

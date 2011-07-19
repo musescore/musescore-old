@@ -77,6 +77,7 @@ class RasterImage : public Image {
       virtual QSizeF imageSize() const { return doc.size(); }
       };
 
+#ifdef SVG_IMAGES
 //---------------------------------------------------------
 //   SvgImage
 //---------------------------------------------------------
@@ -92,6 +93,7 @@ class SvgImage : public Image {
       virtual void setPath(const QString& s);
       virtual QSizeF imageSize() const { return doc->defaultSize(); }
       };
+#endif
 
 #endif
 

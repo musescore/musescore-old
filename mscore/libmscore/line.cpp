@@ -100,8 +100,8 @@ QPointF LineSegment::canvasPos() const
 QPointF LineSegment::gripAnchor(int grip) const
       {
       if (spannerSegmentType() == SEGMENT_MIDDLE) {
-            double y = _system->staffY(staffIdx());
-            double x;
+            qreal y = _system->staffY(staffIdx());
+            qreal x;
             if (grip == 0)
                   x = _system->firstMeasure()->abbox().left();
             else
@@ -287,7 +287,7 @@ void LineSegment::editDrag(const EditData& ed)
 //   spatiumChanged
 //---------------------------------------------------------
 
-void LineSegment::spatiumChanged(double ov, double nv)
+void LineSegment::spatiumChanged(qreal ov, qreal nv)
       {
       Element::spatiumChanged(ov, nv);
       _userOff2 *= nv / ov;
@@ -330,7 +330,7 @@ QPointF SLine::tick2pos(int grip, System** sys)
       Measure* m   = seg->measure();
       *sys         = m->system();
 
-      double x = seg->canvasPos().x();
+      qreal x = seg->canvasPos().x();
 
       if (anchor() == ANCHOR_SEGMENT) {
             if ((grip == 1)
@@ -357,7 +357,7 @@ QPointF SLine::tick2pos(int grip, System** sys)
                         }
                   }
             }
-      double y = (*sys)->staffY(staffIdx());
+      qreal y = (*sys)->staffY(staffIdx());
       return QPointF(x, y);
       }
 
@@ -433,9 +433,9 @@ void SLine::layout()
                   continue;
             LineSegment* seg = segmentAt(segIdx++);
             seg->setSystem(system);
-            double x1 = system->firstMeasure()->first(SegChordRest)->canvasPos().x();
-            double x2 = system->abbox().right();
-            double y  = system->staffY(si);
+            qreal x1 = system->firstMeasure()->first(SegChordRest)->canvasPos().x();
+            qreal x2 = system->abbox().right();
+            qreal y  = system->staffY(si);
 
             if (sysIdx1 == sysIdx2) {
                   // single segment
@@ -566,7 +566,7 @@ bool SLine::readProperties(QDomElement e)
 //    used to create an element suitable for palette
 //---------------------------------------------------------
 
-void SLine::setLen(double l)
+void SLine::setLen(qreal l)
       {
       if (spannerSegments().isEmpty())
             add(createLineSegment());

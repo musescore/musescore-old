@@ -24,7 +24,7 @@
 #include "painter.h"
 #include "mscore.h"
 
-static const double BOX_MARGIN = 0.0;
+static const qreal BOX_MARGIN = 0.0;
 
 //---------------------------------------------------------
 //   Box
@@ -65,7 +65,7 @@ void Box::draw(Painter* painter) const
                   painter->setPenColor(Qt::blue);
             else
                   painter->setPenColor(Qt::gray);
-            double w = 2.0 / painter->transform().m11();
+            qreal w = 2.0 / painter->transform().m11();
             painter->setLineWidth(w);
             painter->setNoBrush(true);
             w *= .5;
@@ -188,18 +188,18 @@ void Box::read(QDomElement e)
       _leftMargin = _rightMargin = _topMargin = _bottomMargin = 0.0;
       bool keepMargins = false;        // whether original margins have to be kept when reading old file
 
-      double _spatium = spatium();
+      qreal _spatium = spatium();
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
             if (tag == "height") {
-                  double v = val.toDouble();
+                  qreal v = val.toDouble();
                   if (score()->mscVersion() <= 100)
                         v /= _spatium;
                   _boxHeight = Spatium(v);
                   }
             else if (tag == "width") {
-                  double v = val.toDouble();
+                  qreal v = val.toDouble();
                   if (score()->mscVersion() <= 100)
                         v /= _spatium;
                   _boxWidth = Spatium(v);
@@ -237,9 +237,12 @@ void Box::read(QDomElement e)
                         path = ee.text();
                   Image* image = 0;
                   QString s(path.toLower());
+#ifdef SVG_IMAGES
                   if (s.endsWith(".svg"))
                         image = new SvgImage(score());
-                  else if (s.endsWith(".jpg")
+                  else
+#endif
+                        if (s.endsWith(".jpg")
                      || s.endsWith(".png")
                      || s.endsWith(".gif")
                      || s.endsWith(".xpm")
@@ -327,10 +330,10 @@ void HBox::layout()
       {
       if (parent() && parent()->type() == VBOX) {
             VBox* vb = static_cast<VBox*>(parent());
-            double x = vb->leftMargin() * DPMM;
-            double y = vb->topMargin() * DPMM;
-            double w = point(boxWidth());
-            double h = vb->height() - (vb->topMargin() + vb->bottomMargin()) * DPMM;
+            qreal x = vb->leftMargin() * DPMM;
+            qreal y = vb->topMargin() * DPMM;
+            qreal w = point(boxWidth());
+            qreal h = vb->height() - (vb->topMargin() + vb->bottomMargin()) * DPMM;
             setPos(x, y);
             setbbox(QRectF(0.0, 0.0, w, h));
             }

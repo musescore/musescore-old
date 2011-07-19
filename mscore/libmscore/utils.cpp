@@ -273,7 +273,7 @@ int pitchKeyAdjust(int step, int key)
 //   y2pitch
 //---------------------------------------------------------
 
-int y2pitch(double y, int clef, double _spatium)
+int y2pitch(qreal y, int clef, qreal _spatium)
       {
       int l = lrint(y / _spatium * 2.0);
       return line2pitch(l, clef, 0);
@@ -324,16 +324,16 @@ int quantizeLen(int len, int raster)
 //   curTime
 //---------------------------------------------------------
 
-double curTime()
+qreal curTime()
       {
 #if defined (__MINGW32__) || defined (__APPLE__)
       struct timeval t;
       gettimeofday(&t, 0);
-      return (double)((double)t.tv_sec + (t.tv_usec / 1000000.0));
+      return (qreal)((qreal)t.tv_sec + (t.tv_usec / 1000000.0));
 #else
       struct timespec t;
       clock_gettime(CLOCK_MONOTONIC, &t);
-      return double(t.tv_sec) + double(t.tv_nsec) / 1000000000.0;
+      return qreal(t.tv_sec) + qreal(t.tv_nsec) / 1000000000.0;
 #endif
       }
 
@@ -518,7 +518,7 @@ int searchInterval(int steps, int semitones)
  * @param interval
  *  The interval to transpose by.
  * @param useDoubleSharpsFlats
- *  Determines whether the output may include double sharbs or flats (Abb)
+ *  Determines whether the output may include double sharps or flats (Abb)
  *  or should use an enharmonic pitch (Abb = G).
  */
 

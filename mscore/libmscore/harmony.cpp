@@ -540,8 +540,8 @@ void Harmony::layout()
             }
       style().layout(this);
       Measure* m = measure();
-      double yy = track() < 0 ? 0.0 : m->system()->staff(track() / VOICES)->y();
-      double xx = 0.0;  // (segment()->tick() < 0) ? 0.0 : m->tick2pos(segment()->tick());
+      qreal yy = track() < 0 ? 0.0 : m->system()->staff(track() / VOICES)->y();
+      qreal xx = 0.0;  // (segment()->tick() < 0) ? 0.0 : m->tick2pos(segment()->tick());
 
       setPos(ipos() + QPointF(xx, yy));
 
@@ -582,7 +582,7 @@ void Harmony::draw(Painter* painter) const
 //   TextSegment
 //---------------------------------------------------------
 
-TextSegment::TextSegment(const QString& s, const QFont& f, double x, double y)
+TextSegment::TextSegment(const QString& s, const QFont& f, qreal x, qreal y)
       {
       set(s, f, x, y);
       select = false;
@@ -592,10 +592,10 @@ TextSegment::TextSegment(const QString& s, const QFont& f, double x, double y)
 //   width
 //---------------------------------------------------------
 
-double TextSegment::width() const
+qreal TextSegment::width() const
       {
       QFontMetricsF fm(font);
-      double w = 0.0;
+      qreal w = 0.0;
       foreach(QChar c, text) {
             w += fm.width(c);
             }
@@ -616,7 +616,7 @@ QRectF TextSegment::boundingRect() const
 //   set
 //---------------------------------------------------------
 
-void TextSegment::set(const QString& s, const QFont& f, double _x, double _y)
+void TextSegment::set(const QString& s, const QFont& f, qreal _x, qreal _y)
       {
       font = f;
       x    = _x;
@@ -628,13 +628,13 @@ void TextSegment::set(const QString& s, const QFont& f, double _x, double _y)
 //   render
 //---------------------------------------------------------
 
-void Harmony::render(const QList<RenderAction>& renderList, double& x, double& y, int tpc)
+void Harmony::render(const QList<RenderAction>& renderList, qreal& x, qreal& y, int tpc)
       {
       ChordList* chordList = score()->style()->chordList();
       QStack<QPointF> stack;
       int fontIdx = 0;
-      double _spatium = spatium();
-      double mag = (DPI / PPI) * (_spatium / (SPATIUM20 * DPI));
+      qreal _spatium = spatium();
+      qreal mag = (DPI / PPI) * (_spatium / (SPATIUM20 * DPI));
 
       foreach(const RenderAction& a, renderList) {
             if (a.type == RenderAction::RENDER_SET) {
@@ -738,7 +738,7 @@ void Harmony::render(const TextStyle* st)
             delete s;
       textList.clear();
 
-      double x = 0.0, y = 0.0;
+      qreal x = 0.0, y = 0.0;
       render(chordList->renderListRoot, x, y, _rootTpc);
       ChordDescription* cd = chordList->value(_id);
       if (cd) {
@@ -752,7 +752,7 @@ void Harmony::render(const TextStyle* st)
 //   spatiumChanged
 //---------------------------------------------------------
 
-void Harmony::spatiumChanged(double oldValue, double newValue)
+void Harmony::spatiumChanged(qreal oldValue, qreal newValue)
       {
       Text::spatiumChanged(oldValue, newValue);
       render();
@@ -764,10 +764,10 @@ void Harmony::spatiumChanged(double oldValue, double newValue)
 
 QLineF Harmony::dragAnchor() const
       {
-      double xp = 0.0;
+      qreal xp = 0.0;
       for (Element* e = parent(); e; e = e->parent())
             xp += e->x();
-      double yp = measure()->system()->staffY(staffIdx());
+      qreal yp = measure()->system()->staffY(staffIdx());
       QPointF p(xp, yp);
       return QLineF(p, canvasPos());
       }

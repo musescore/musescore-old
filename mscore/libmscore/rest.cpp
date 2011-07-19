@@ -64,18 +64,18 @@ void Rest::draw(Painter* painter) const
       {
       if (staff()->useTablature() || generated())
             return;
-      double _spatium = spatium();
+      qreal _spatium = spatium();
 
       Measure* m = measure();
       if (m && m->multiMeasure()) {
             int n     = m->multiMeasure();
-            double pw = _spatium * .7;
+            qreal pw = _spatium * .7;
             painter->setLineWidth(pw);
 
-            double w  = _mmWidth;
-            double y  = _spatium;
-            double x1 = 0.0;
-            double x2 =  w;
+            qreal w  = _mmWidth;
+            qreal y  = _spatium;
+            qreal x1 = 0.0;
+            qreal x2 =  w;
             pw *= .5;
             painter->drawLine(x1 + pw, y, x2 - pw, y);
 
@@ -91,13 +91,13 @@ void Rest::draw(Painter* painter) const
             painter->drawTextHCentered(center(x1, x2), y, QString("%1").arg(n));
             }
       else {
-            double mag = magS();
+            qreal mag = magS();
             symbols[score()->symIdx()][_sym].draw(painter, mag);
             int dots = durationType().dots();
             if (dots) {
-                  double y = dotline * _spatium * .5;
+                  qreal y = dotline * _spatium * .5;
                   for (int i = 1; i <= dots; ++i) {
-                        double x = symbols[score()->symIdx()][_sym].width(mag)
+                        qreal x = symbols[score()->symIdx()][_sym].width(mag)
                                    + point(score()->styleS(ST_dotNoteDistance)) * i;
                         symbols[score()->symIdx()][dotSym].draw(painter, mag, x, y);
                         }
@@ -112,9 +112,9 @@ void Rest::draw(Painter* painter) const
 //      replaced by special symbols with ledger lines
 //---------------------------------------------------------
 
-void Rest::setUserOffset(double x, double y)
+void Rest::setUserOffset(qreal x, qreal y)
       {
-      double _spatium = spatium();
+      qreal _spatium = spatium();
       int line = lrint(y/_spatium);
 
       if (_sym == wholerestSym && (line <= -2 || line >= 3))
@@ -126,7 +126,7 @@ void Rest::setUserOffset(double x, double y)
       else if (_sym == outsidehalfrestSym && (line > -3 && line < 3))
             _sym = halfrestSym;
 
-      setUserOff(QPointF(x, double(line) * _spatium));
+      setUserOff(QPointF(x, qreal(line) * _spatium));
       }
 
 //---------------------------------------------------------
@@ -326,7 +326,7 @@ void Rest::layout()
                   dotline = -1;
                   break;
             }
-      double _spatium = spatium();
+      qreal _spatium = spatium();
       int line        = lrint(userOff().y() / _spatium); //  + ((staff()->lines()-1) * 2);
       int lineOffset  = 0;
 
@@ -399,7 +399,7 @@ void Rest::layout()
 
       int yo;
       _sym = getSymbol(durationType().type(), line + lineOffset/2, lines, &yo);
-      setYoff(double(yo) + double(lineOffset) * .5);
+      setYoff(qreal(yo) + qreal(lineOffset) * .5);
       layoutArticulations();
       setPos(0.0, yoff() * _spatium);
 
@@ -410,9 +410,9 @@ void Rest::layout()
             }
       Segment* s = segment();
       if (s && s->measure() && s->measure()->multiMeasure()) {
-            double _spatium = spatium();
-            double h = _spatium * 6.5;
-            double w = point(score()->styleS(ST_minMMRestWidth));
+            qreal _spatium = spatium();
+            qreal h = _spatium * 6.5;
+            qreal w = point(score()->styleS(ST_minMMRestWidth));
             setbbox(QRectF(-w * .5, -h + 2 * _spatium, w, h));
             }
       else {
@@ -467,14 +467,14 @@ void Rest::scanElements(void* data, void (*func)(void*, Element*))
 //   setMMWidth
 //---------------------------------------------------------
 
-void Rest::setMMWidth(double val)
+void Rest::setMMWidth(qreal val)
       {
       _mmWidth = val;
       Segment* s = segment();
       if (s && s->measure() && s->measure()->multiMeasure()) {
-            double _spatium = spatium();
-            double h = _spatium * 6.5;
-            double w = _mmWidth;
+            qreal _spatium = spatium();
+            qreal h = _spatium * 6.5;
+            qreal w = _mmWidth;
             // setbbox(QRectF(-w * .5, -h + 2 * _spatium, w, h));
             setbbox(QRectF(0.0, -h + 2 * _spatium, w, h));
             }

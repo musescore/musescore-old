@@ -35,13 +35,13 @@ class TextStyle {
    public:
       TextStyle();
       TextStyle(QString _name, QString _family,
-         double _size,
+         qreal _size,
          bool _bold, bool _italic, bool _underline,
          Align _align,
-         double _xoff = 0, double _yoff = 0, OffsetType _ot = OFFSET_SPATIUM,
-         double _rxoff = 0, double _ryoff = 0,
+         qreal _xoff = 0, qreal _yoff = 0, OffsetType _ot = OFFSET_SPATIUM,
+         qreal _rxoff = 0, qreal _ryoff = 0,
          bool sd = false,
-         double fw = 0.0, double pw = 0.0, int fr = 25,
+         qreal fw = 0.0, qreal pw = 0.0, int fr = 25,
          QColor co = QColor(Qt::black), bool circle = false, bool systemFlag = false,
          QColor fg = QColor(Qt::black));
 
@@ -51,22 +51,22 @@ class TextStyle {
 
       QString name() const;
       QString family() const;
-      double size() const;
+      qreal size() const;
       bool bold() const;
       bool italic() const;
       bool underline() const;
       bool hasFrame() const;
       Align align() const;
-      double xoff() const;
-      double yoff() const;
+      qreal xoff() const;
+      qreal yoff() const;
       OffsetType offsetType() const;
-      double rxoff() const;
-      double ryoff() const;
+      qreal rxoff() const;
+      qreal ryoff() const;
       QPointF reloff() const;
       void setReloff(const QPointF& p);
       bool sizeIsSpatiumDependent() const;
-      double frameWidth()  const;
-      double paddingWidth() const;
+      qreal frameWidth()  const;
+      qreal paddingWidth() const;
       int frameRound() const;
       QColor frameColor() const;
       bool circle() const;
@@ -74,20 +74,20 @@ class TextStyle {
       QColor foregroundColor() const;
       void setName(const QString& s);
       void setFamily(const QString& s);
-      void setSize(double v);
+      void setSize(qreal v);
       void setBold(bool v);
       void setItalic(bool v);
       void setUnderline(bool v);
       void setHasFrame(bool v);
       void setAlign(Align v);
-      void setXoff(double v);
-      void setYoff(double v);
+      void setXoff(qreal v);
+      void setYoff(qreal v);
       void setOffsetType(OffsetType v);
-      void setRxoff(double v);
-      void setRyoff(double v);
+      void setRxoff(qreal v);
+      void setRyoff(qreal v);
       void setSizeIsSpatiumDependent(bool v);
-      void setFrameWidth(double v);
-      void setPaddingWidth(double v);
+      void setFrameWidth(qreal v);
+      void setPaddingWidth(qreal v);
       void setFrameRound(int v);
       void setFrameColor(const QColor& v);
       void setCircle(bool v);
@@ -97,10 +97,10 @@ class TextStyle {
       void writeProperties(Xml& xml) const;
       void read(QDomElement v);
       bool readProperties(QDomElement v);
-      QFont font(double space) const;
-      QFont fontPx(double spatium) const;
-      QRectF bbox(double space, const QString& s) const;
-      QFontMetricsF fontMetrics(double space) const;
+      QFont font(qreal space) const;
+      QFont fontPx(qreal spatium) const;
+      QRectF bbox(qreal space, const QString& s) const;
+      QFontMetricsF fontMetrics(qreal space) const;
       bool operator!=(const TextStyle& s) const;
       void layout(Element*) const;
       void setFont(const QFont& f);
@@ -146,9 +146,9 @@ enum StyleIdx {
       ST_minMeasureWidth,
 
       ST_barWidth,
-      ST_doubleBarWidth,
+      ST_qrealBarWidth,
       ST_endBarWidth,
-      ST_doubleBarDistance,
+      ST_qrealBarDistance,
       ST_endBarDistance,
       ST_repeatBarTips,
       ST_startBarlineSingle,
@@ -338,7 +338,7 @@ class StyleVal {
       StyleIdx idx;
       QString   s;
       union {
-            double  dbl;
+            qreal  dbl;
             bool      b;
             int       i;
             Direction d;
@@ -350,14 +350,14 @@ class StyleVal {
       StyleVal& operator=(const StyleVal& val);
 
       StyleVal(StyleIdx t, Spatium val);
-      StyleVal(StyleIdx t, double val);
+      StyleVal(StyleIdx t, qreal val);
       StyleVal(StyleIdx t, bool val);
       StyleVal(StyleIdx t, int val);
       StyleVal(StyleIdx t, Direction val);
       StyleVal(StyleIdx t, const QString& val);
 
       Spatium toSpatium() const       { return Spatium(v.dbl); }
-      double toDouble() const         { return v.dbl;  }
+      qreal toDouble() const         { return v.dbl;  }
       bool toBool() const             { return v.b;  }
       int toInt() const               { return v.i;  }
       QString toString() const        { return s;    }
@@ -396,7 +396,7 @@ class Style {
       void set(StyleIdx t, Spatium val);
       void set(StyleIdx t, const QString& val);
       void set(StyleIdx t, bool val);
-      void set(StyleIdx t, double val);
+      void set(StyleIdx t, qreal val);
       void set(StyleIdx t, int val);
       void set(StyleIdx t, Direction val);
       void set(const StyleVal& v);
@@ -405,7 +405,7 @@ class Style {
       Spatium  valueS(StyleIdx idx) const;
       QString  valueSt(StyleIdx idx) const;
       bool     valueB(StyleIdx idx) const;
-      double   valueD(StyleIdx idx) const;
+      qreal   valueD(StyleIdx idx) const;
       int      valueI(StyleIdx idx) const;
 
       bool load(QFile* qf);
@@ -413,8 +413,8 @@ class Style {
       void save(Xml& xml, bool optimize);
       PageFormat* pageFormat() const;
       void setPageFormat(const PageFormat& pf);
-      double spatium() const;
-      void setSpatium(double v);
+      qreal spatium() const;
+      void setSpatium(qreal v);
       };
 
 extern QVector<TextStyle> defaultTextStyles;

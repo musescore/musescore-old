@@ -94,11 +94,11 @@ QPointF Breath::canvasPos() const
       {
       if (parent() == 0)
             return pos();
-      double xp = x();
+      qreal xp = x();
       for (Element* e = parent(); e; e = e->parent())
             xp += e->x();
       System* system = segment()->measure()->system();
-      double yp = y();
+      qreal yp = y();
       if (system)
             yp += system->staff(staffIdx())->y() + system->y();
       return QPointF(xp, yp);

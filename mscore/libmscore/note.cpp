@@ -311,7 +311,7 @@ int Note::noteHead() const
 //   headWidth
 //---------------------------------------------------------
 
-double Note::headWidth() const
+qreal Note::headWidth() const
       {
       return symbols[score()->symIdx()][noteHead()].width(magS());
       }
@@ -320,7 +320,7 @@ double Note::headWidth() const
 //   headHeight
 //---------------------------------------------------------
 
-double Note::headHeight() const
+qreal Note::headHeight() const
       {
       return symbols[score()->symIdx()][noteHead()].height(magS());
       }
@@ -464,9 +464,9 @@ QPointF Note::stemPos(bool upFlag) const
       if (_mirror)
             upFlag = !upFlag;
 
-      double sw   = point(score()->styleS(ST_stemWidth)) * .5;
+      qreal sw   = point(score()->styleS(ST_stemWidth)) * .5;
       if (chord() && chord()->staff() && chord()->staff()->useTablature()) {
-            double xoffset = (sw + bbox().width() + bbox().x()) * .5;
+            qreal xoffset = (sw + bbox().width() + bbox().x()) * .5;
             pt += QPointF(xoffset, (bbox().height() * .5 + spatium() * .5) * (upFlag ? -1.0 : 1.0));
             }
       else {
@@ -487,7 +487,7 @@ QPointF Note::stemPos(bool upFlag) const
 //   stemYoff
 //---------------------------------------------------------
 
-double Note::stemYoff(bool upFlag) const
+qreal Note::stemYoff(bool upFlag) const
       {
       if (_mirror)
             upFlag = !upFlag;
@@ -512,8 +512,8 @@ void Note::draw(Painter* painter) const
                   if (tieBack())
                         return;
                   StaffTypeTablature* tab = (StaffTypeTablature*)staff()->staffType();
-                  double mag = magS();
-                  double imag = 1.0 / mag;
+                  qreal mag = magS();
+                  qreal imag = 1.0 / mag;
 
                   painter->scale(mag);
                   painter->setFont(tab->fretFont());
@@ -523,8 +523,8 @@ void Note::draw(Painter* painter) const
                           ( tab->useNumbers() ? QString::number(_fret) : QString('a' + _fret + (_fret > 8)) );
                   // draw background, if required
                   if (!tab->linesThrough() || fretConflict()) {
-                        double currSpatium = spatium();
-                        double d  = currSpatium * .2;
+                        qreal currSpatium = spatium();
+                        qreal d  = currSpatium * .2;
                         QRectF bb = bbox().adjusted(-d, d, d, -d);
                         painter->drawBackground(bb);
                         if (fretConflict()) {          //on fret conflict, draw on red background
@@ -712,9 +712,12 @@ void Note::read(QDomElement e)
                         path = ee.text();
                   Image* image = 0;
                   QString s(path.toLower());
+#ifdef SVG_IMAGES
                   if (s.endsWith(".svg"))
                         image = new SvgImage(score());
-                  else if (s.endsWith(".jpg")
+                  else
+#endif
+                        if (s.endsWith(".jpg")
                      || s.endsWith(".png")
                      || s.endsWith(".xpm")
                         ) {
@@ -894,9 +897,9 @@ QRectF Note::drag(const EditData& data)
       dragMode = true;
       QRectF bb(chord()->bbox());
 
-      double _spatium = spatium();
+      qreal _spatium = spatium();
       bool tab = staff()->useTablature();
-      double step = _spatium * (tab ? staff()->staffType()->lineDistance().val() : 0.5);
+      qreal step = _spatium * (tab ? staff()->staffType()->lineDistance().val() : 0.5);
       _lineOffset = lrint(data.pos.y() / step);
       score()->setLayout(chord()->measure());
       return bb.translated(chord()->canvasPos());
@@ -1218,7 +1221,7 @@ void Note::layout()
       bool useTablature = staff() && staff()->useTablature();
       if (useTablature) {
             StaffTypeTablature* tab = (StaffTypeTablature*)staff()->staffType();
-            double mags = magS();
+            qreal mags = magS();
             QFont f(tab->fretFontName());
             int size = lrint(tab->fretFontSize() * DPI / PPI);
             f.setPixelSize(size);
@@ -1226,7 +1229,7 @@ void Note::layout()
             // when using letters, "+(_fret > 8)" skips 'j'
             QString s = _ghost ? "X" :
                         ( tab->useNumbers() ? QString::number(_fret) : QString('a' + _fret + (_fret > 8)) );
-            double w = fm.width(s) * mags;
+            qreal w = fm.width(s) * mags;
             setbbox(QRectF(0.0, tab->fretBoxY() * mags, w, tab->fretBoxH() * mags));
             }
       else
@@ -1262,15 +1265,15 @@ void Note::layout()
                         score()->undoRemoveElement(_dots[i]);
                   }
             if (dots) {
-                  double _spatium = spatium();
-                  double d  = point(score()->styleS(ST_dotNoteDistance));
-                  double dd = point(score()->styleS(ST_dotDotDistance));
-                  double y  = 0.0;
-                  double x  = chord()->dotPosX() - pos().x() - chord()->pos().x();
+                  qreal _spatium = spatium();
+                  qreal d  = point(score()->styleS(ST_dotNoteDistance));
+                  qreal dd = point(score()->styleS(ST_dotDotDistance));
+                  qreal y  = 0.0;
+                  qreal x  = chord()->dotPosX() - pos().x() - chord()->pos().x();
 
                   // do not draw dots on staff line
                   if ((_line & 1) == 0) {
-                        double up;
+                        qreal up;
                         if (_dotPosition == AUTO)
                               up = (voice() == 0 || voice() == 2) ? -1.0 : 1.0;
                         else if (_dotPosition == UP)
@@ -1384,7 +1387,7 @@ QPointF Note::canvasPos() const
       {
       if (parent() == 0)
             return pos();
-      double xp = x();
+      qreal xp = x();
       for (Element* e = parent(); e; e = e->parent())
             xp += e->x();
       Chord* ch = chord();
@@ -1396,7 +1399,7 @@ QPointF Note::canvasPos() const
       System* system = m->system();
       if (system == 0)
             return pos();
-      double yp = y() + system->staff(staffIdx() + chord()->staffMove())->y() + system->y();
+      qreal yp = y() + system->staff(staffIdx() + chord()->staffMove())->y() + system->y();
       return QPointF(xp, yp);
       }
 
@@ -1467,7 +1470,7 @@ void Note::toDefault()
 //   setMag
 //---------------------------------------------------------
 
-void Note::setMag(double val)
+void Note::setMag(qreal val)
       {
       Element::setMag(val);
       if (_accidental)

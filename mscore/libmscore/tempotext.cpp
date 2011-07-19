@@ -79,8 +79,8 @@ void TempoText::read(QDomElement e)
 
 struct TempoPattern {
       const char* pattern;
-      double f;
-      TempoPattern(const char* s, double v) : pattern(s), f(v) {}
+      qreal f;
+      TempoPattern(const char* s, qreal v) : pattern(s), f(v) {}
       };
 
 //---------------------------------------------------------
@@ -108,7 +108,7 @@ void TempoText::textChanged()
             if (re.indexIn(s) != -1) {
                   QStringList sl = re.capturedTexts();
                   if (sl.size() == 2) {
-                        _tempo = double(sl[1].toInt()) * tp[i].f;
+                        _tempo = qreal(sl[1].toInt()) * tp[i].f;
                         break;
                         }
                   }

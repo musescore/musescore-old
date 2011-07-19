@@ -265,9 +265,9 @@ void Text::resetMode()
 void Text::layout()
       {
       _doc->setDefaultFont(style().font(score()->spatium()));
-      double w = -1.0;
-      double x = 0.0;
-      double y = 0.0;
+      qreal w = -1.0;
+      qreal x = 0.0;
+      qreal y = 0.0;
       if (parent() && _layoutToParentWidth) {
             w = parent()->width();
             if (parent()->type() == HBOX || parent()->type() == VBOX || parent()->type() == TBOX) {
@@ -290,7 +290,7 @@ void Text::layout()
 //   layoutW
 //---------------------------------------------------------
 
-void Text::layout(double layoutWidth, double x, double y)
+void Text::layout(qreal layoutWidth, qreal x, qreal y)
       {
       QTextOption to = _doc->defaultTextOption();
       to.setUseDesignMetrics(true);
@@ -320,7 +320,7 @@ void Text::layout(double layoutWidth, double x, double y)
                         frame.setWidth(frame.height());
                         }
                   }
-            double w = (paddingWidth() + frameWidth() * .5) * DPMM;
+            qreal w = (paddingWidth() + frameWidth() * .5) * DPMM;
             frame.adjust(-w, -w, w, w);
             w = frameWidth() * DPMM;
             setbbox(frame.adjusted(-w, -w, w, w));
@@ -359,10 +359,10 @@ QRectF Text::pageRectangle() const
       if (parent() && (parent()->type() == HBOX || parent()->type() == VBOX || parent()->type() == TBOX)) {
             QRectF r = parent()->abbox();
             Box* box = static_cast<Box*>(parent());
-            double x = r.x() + box->leftMargin() * DPMM;
-            double y = r.y() + box->topMargin() * DPMM;
-            double h = r.height() - (box->topMargin() + box->bottomMargin()) * DPMM;
-            double w = r.width()  - (box->leftMargin() + box->rightMargin()) * DPMM;
+            qreal x = r.x() + box->leftMargin() * DPMM;
+            qreal y = r.y() + box->topMargin() * DPMM;
+            qreal h = r.height() - (box->topMargin() + box->bottomMargin()) * DPMM;
+            qreal w = r.width()  - (box->leftMargin() + box->rightMargin()) * DPMM;
 
             // QSizeF ps = _doc->pageSize();
             // return QRectF(x, y, ps.width(), ps.height());
@@ -663,12 +663,12 @@ bool Text::readProperties(QDomElement e)
 //   spatiumChanged
 //---------------------------------------------------------
 
-void Text::spatiumChanged(double oldVal, double newVal)
+void Text::spatiumChanged(qreal oldVal, qreal newVal)
       {
       Element::spatiumChanged(oldVal, newVal);
       if (!sizeIsSpatiumDependent())
             return;
-      double v = newVal / oldVal;
+      qreal v = newVal / oldVal;
       QTextCursor cursor(_doc);
       cursor.movePosition(QTextCursor::Start);
       for (;;) {
@@ -972,7 +972,7 @@ qreal Text::baseLine() const
 //   lineSpacing
 //---------------------------------------------------------
 
-double Text::lineSpacing() const
+qreal Text::lineSpacing() const
       {
       return QFontMetricsF(style().font(spatium())).lineSpacing();
       }
@@ -982,7 +982,7 @@ double Text::lineSpacing() const
 //    HACK
 //---------------------------------------------------------
 
-double Text::lineHeight() const
+qreal Text::lineHeight() const
       {
       return QFontMetricsF(style().font(spatium())).height();
       }
@@ -1114,18 +1114,18 @@ QLineF Text::dragAnchor() const
       if (parent()->type() == MEASURE) {
             Measure* m     = static_cast<Measure*>(parent());
             System* system = m->system();
-            double yp      = system->staff(staffIdx())->y() + system->y();
-            // TODO1 double xp      = m->tick2pos(tick()) + m->canvasPos().x();
-            double xp = 0.0;
+            qreal yp      = system->staff(staffIdx())->y() + system->y();
+            // TODO1 qreal xp      = m->tick2pos(tick()) + m->canvasPos().x();
+            qreal xp = 0.0;
             p1 = QPointF(xp, yp);
             }
       else {
             p1 = QPointF(parent()->abbox().topLeft());
             }
-      double tw = width();
-      double th = height();
-      double x  = 0.0;
-      double y  = 0.0;
+      qreal tw = width();
+      qreal th = height();
+      qreal x  = 0.0;
+      qreal y  = 0.0;
       if (align() & ALIGN_BOTTOM)
             y = th;
       else if (align() & ALIGN_VCENTER)
@@ -1181,7 +1181,7 @@ void Text::setSizeIsSpatiumDependent(int v)
 //   frameWidth
 //---------------------------------------------------------
 
-double Text::frameWidth() const
+qreal Text::frameWidth() const
       {
       return style().frameWidth();
       }
@@ -1199,7 +1199,7 @@ bool Text::hasFrame() const
 //   paddingWidth
 //---------------------------------------------------------
 
-double Text::paddingWidth() const
+qreal Text::paddingWidth() const
       {
       return style().paddingWidth();
       }
@@ -1235,7 +1235,7 @@ bool Text::circle() const
 //   xoff
 //---------------------------------------------------------
 
-double Text::xoff() const
+qreal Text::xoff() const
       {
       return style().xoff();
       }
@@ -1280,7 +1280,7 @@ void Text::setAlign(Align val)
 //   setXoff
 //---------------------------------------------------------
 
-void Text::setXoff(double val)
+void Text::setXoff(qreal val)
       {
       _localStyle.setXoff(val);
       }
@@ -1289,7 +1289,7 @@ void Text::setXoff(double val)
 //   setYoff
 //---------------------------------------------------------
 
-void Text::setYoff(double val)
+void Text::setYoff(qreal val)
       {
       _localStyle.setYoff(val);
       }
@@ -1307,7 +1307,7 @@ void Text::setOffsetType(OffsetType val)
 //   setRxoff
 //---------------------------------------------------------
 
-void Text::setRxoff(double v)
+void Text::setRxoff(qreal v)
       {
       _localStyle.setRxoff(v);
       }
@@ -1316,7 +1316,7 @@ void Text::setRxoff(double v)
 //   setRyoff
 //---------------------------------------------------------
 
-void Text::setRyoff(double v)
+void Text::setRyoff(qreal v)
       {
       _localStyle.setRyoff(v);
       }
@@ -1334,7 +1334,7 @@ void Text::setReloff(const QPointF& p)
 //   rxoff
 //---------------------------------------------------------
 
-double Text::rxoff() const
+qreal Text::rxoff() const
       {
       return style().rxoff();
       }
@@ -1343,7 +1343,7 @@ double Text::rxoff() const
 //   ryoff
 //---------------------------------------------------------
 
-double Text::ryoff() const
+qreal Text::ryoff() const
       {
       return style().ryoff();
       }
@@ -1352,7 +1352,7 @@ double Text::ryoff() const
 //   yoff
 //---------------------------------------------------------
 
-double Text::yoff() const
+qreal Text::yoff() const
       {
       return style().yoff();
       }
@@ -1361,7 +1361,7 @@ double Text::yoff() const
 //   setFrameWidth
 //---------------------------------------------------------
 
-void Text::setFrameWidth(double val)
+void Text::setFrameWidth(qreal val)
       {
       _localStyle.setFrameWidth(val);
       }
@@ -1370,7 +1370,7 @@ void Text::setFrameWidth(double val)
 //   setPaddingWidth
 //---------------------------------------------------------
 
-void Text::setPaddingWidth(double val)
+void Text::setPaddingWidth(qreal val)
       {
       _localStyle.setPaddingWidth(val);
       }
@@ -1424,7 +1424,7 @@ void Text::setBold(bool val)
 //   setSize
 //---------------------------------------------------------
 
-void Text::setSize(double v)
+void Text::setSize(qreal v)
       {
       _localStyle.setSize(v);
       }

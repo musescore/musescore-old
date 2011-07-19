@@ -56,18 +56,18 @@ Q_DECLARE_OPERATORS_FOR_FLAGS(ElementFlags)
 //---------------------------------------------------------
 
 class Space {
-      double _lw;       // space needed to the left
-      double _rw;       // space needed to the right
+      qreal _lw;       // space needed to the left
+      qreal _rw;       // space needed to the right
 
    public:
       Space() : _lw(0.0), _rw(0.0)  {}
-      Space(double a, double b) : _lw(a), _rw(b) {}
-      double lw() const             { return _lw; }
-      double rw() const             { return _rw; }
-      double& rLw()                 { return _lw; }
-      double& rRw()                 { return _rw; }
-      void setLw(double e)          { _lw = e; }
-      void setRw(double m)          { _rw = m; }
+      Space(qreal a, qreal b) : _lw(a), _rw(b) {}
+      qreal lw() const             { return _lw; }
+      qreal rw() const             { return _rw; }
+      qreal& rLw()                 { return _lw; }
+      qreal& rRw()                 { return _rw; }
+      void setLw(qreal e)          { _lw = e; }
+      void setRw(qreal m)          { _rw = m; }
       inline void max(const Space& s);
       };
 
@@ -137,7 +137,7 @@ class Element {
       int _track;                 ///< staffIdx * VOICES + voice
                                   ///< -1 if this is a system element
       QColor _color;
-      double _mag;                ///< standard magnification (derived value)
+      qreal _mag;                ///< standard magnification (derived value)
 
       QPointF _pos;               ///< Reference position, relative to _parent.
       QPointF _userOff;           ///< offset from normal layout position:
@@ -175,7 +175,7 @@ class Element {
       Element* parent() const                 { return _parent;     }
       void setParent(Element* e)              { _parent = e;        }
 
-      double spatium() const;
+      qreal spatium() const;
 
       bool selected() const                   { return _selected;   }
       virtual void setSelected(bool f)        { _selected = f;      }
@@ -187,14 +187,14 @@ class Element {
 
       const QPointF& ipos() const             { return _pos;                    }
       virtual QPointF pos() const             { return _pos + _userOff;         }
-      virtual double x() const                { return _pos.x() + _userOff.x(); }
-      virtual double y() const                { return _pos.y() + _userOff.y(); }
-      void setPos(double x, double y);
+      virtual qreal x() const                { return _pos.x() + _userOff.x(); }
+      virtual qreal y() const                { return _pos.y() + _userOff.y(); }
+      void setPos(qreal x, qreal y);
       void setPos(const QPointF& p)           { setPos(p.x(), p.y());           }
       void movePos(const QPointF& p)          { _pos += p;               }
       qreal& rxpos()                          { return _pos.rx();        }
       qreal& rypos()                          { return _pos.ry();        }
-      virtual void move(double xd, double yd) { _pos += QPointF(xd, yd); }
+      virtual void move(qreal xd, qreal yd) { _pos += QPointF(xd, yd); }
       virtual void move(const QPointF& s)     { _pos += s;               }
 
       virtual QPointF canvasPos() const;      ///< position in canvas coordinates
@@ -211,9 +211,9 @@ class Element {
       void adjustReadPos();
 
       virtual QRectF bbox() const             { return _bbox;              }
-      virtual double height() const           { return bbox().height();    }
+      virtual qreal height() const           { return bbox().height();    }
       virtual void setHeight(qreal v)         { _bbox.setHeight(v);        }
-      virtual double width() const            { return bbox().width();     }
+      virtual qreal width() const            { return bbox().width();     }
       virtual void setWidth(qreal v)          { _bbox.setWidth(v);         }
       QRectF abbox() const;
       virtual void setbbox(const QRectF& r) const   { _bbox = r;           }
@@ -271,7 +271,7 @@ class Element {
       virtual void change(Element* o, Element* n);
 
       virtual void layout() {}
-      virtual void spatiumChanged(double /*oldValue*/, double /*newValue*/);
+      virtual void spatiumChanged(qreal /*oldValue*/, qreal /*newValue*/);
       virtual void resetMode() {}
 
       // debug functions
@@ -331,9 +331,9 @@ class Element {
 
       virtual void toDefault();
 
-      double mag() const                        { return _mag;   }
-      double magS() const;
-      virtual void setMag(double val)           { _mag = val;    }
+      qreal mag() const                        { return _mag;   }
+      qreal magS() const;
+      virtual void setMag(qreal val)           { _mag = val;    }
 
       bool isText() const {
               return type()  == TEXT
@@ -346,7 +346,7 @@ class Element {
                 || type() == INSTRUMENT_CHANGE
                 || type() == TEMPO_TEXT;
             }
-      double point(const Spatium sp) const { return sp.val() * spatium(); }
+      qreal point(const Spatium sp) const { return sp.val() * spatium(); }
 
       //
       // check element for consistency; return false if element
@@ -428,8 +428,8 @@ class StaffLines : public Element {
       Measure* measure() const             { return (Measure*)parent(); }
       virtual void draw(Painter*) const;
       virtual QPointF canvasPos() const;   ///< position in canvas coordinates
-      double y1() const;
-      double y2() const;
+      qreal y1() const;
+      qreal y2() const;
       };
 
 //---------------------------------------------------------
@@ -479,7 +479,7 @@ class Compound : public Element {
       virtual ElementType type() const = 0;
 
       virtual void draw(Painter*) const;
-      virtual void addElement(Element*, double x, double y);
+      virtual void addElement(Element*, qreal x, qreal y);
       void clear();
       virtual void setSelected(bool f);
       virtual void setVisible(bool);

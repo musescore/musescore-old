@@ -89,7 +89,7 @@ struct RenderAction {
             };
 
       RenderActionType type;
-      double movex, movey;          // RENDER_MOVE
+      qreal movex, movey;          // RENDER_MOVE
       QString text;                 // RENDER_SET
 
       RenderAction() {}
@@ -133,7 +133,7 @@ struct ChordSymbol {
 
 struct ChordFont {
       QString family;
-      double mag;
+      qreal mag;
       };
 
 //---------------------------------------------------------

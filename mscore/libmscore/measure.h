@@ -49,8 +49,8 @@ class AccidentalState;
 */
 
 struct MStaff {
-      double distanceUp;
-      double distanceDown;
+      qreal distanceUp;
+      qreal distanceDown;
       StaffLines*  lines;
       Spacer* _vspacerUp;
       Spacer* _vspacerDown;
@@ -99,7 +99,7 @@ class Measure : public MeasureBase {
       int    _noOffset;       ///< Offset to measure number
       Text* _noText;          ///< Measure number text object
 
-      double _userStretch;
+      qreal _userStretch;
 
       bool _irregular;              ///< Irregular measure, do not count
       bool _breakMultiMeasureRest;  ///< set by user
@@ -156,8 +156,8 @@ class Measure : public MeasureBase {
       Text* noText() const                 { return _noText;      }
       void setNo(int n)                    { _no = n;             }
       void setNoOffset(int n)              { _noOffset = n;       }
-      virtual double distanceUp(int i) const   { return staves[i]->distanceUp; }
-      virtual double distanceDown(int i) const { return staves[i]->distanceDown; }
+      virtual qreal distanceUp(int i) const   { return staves[i]->distanceUp; }
+      virtual qreal distanceDown(int i) const { return staves[i]->distanceDown; }
       virtual Spatium userDistanceUp(int i) const;
       virtual Spatium userDistanceDown(int i) const;
 
@@ -177,11 +177,11 @@ class Measure : public MeasureBase {
       void remove(Segment* s);
       SegmentList* segments()              { return &_segments; }
 
-      double userStretch() const           { return _userStretch; }
-      void setUserStretch(double v)        { _userStretch = v;    }
+      qreal userStretch() const           { return _userStretch; }
+      void setUserStretch(qreal v)        { _userStretch = v;    }
 
-      void layoutX(double stretch);
-      void layout(double width);
+      void layoutX(qreal stretch);
+      void layout(qreal width);
       void layout2();
 
       Chord* findChord(int tick, int track, int gl);
@@ -200,7 +200,7 @@ class Measure : public MeasureBase {
       void removeStaves(int s, int e);
       void insertStaves(int s, int e);
 
-      double tick2pos(int) const;
+      qreal tick2pos(int) const;
       Segment* tick2segment(int, bool grace = false) const;
 
       void sortStaves(QList<int>& dst);

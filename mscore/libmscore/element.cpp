@@ -200,7 +200,7 @@ void LinkedElements::setLid(int id)
 //   spatiumChanged
 //---------------------------------------------------------
 
-void Element::spatiumChanged(double oldValue, double newValue)
+void Element::spatiumChanged(qreal oldValue, qreal newValue)
       {
       _userOff *= (newValue / oldValue);
       }
@@ -209,10 +209,10 @@ void Element::spatiumChanged(double oldValue, double newValue)
 //   spatium
 //---------------------------------------------------------
 
-double Element::spatium() const
+qreal Element::spatium() const
       {
       Staff* s = staff();
-      double v = _score->spatium();
+      qreal v = _score->spatium();
       return s ? v * s->mag() : v;
       }
 
@@ -220,7 +220,7 @@ double Element::spatium() const
 //   magS
 //---------------------------------------------------------
 
-double Element::magS() const
+qreal Element::magS() const
       {
       return _mag * (_score->spatium() /(DPI * SPATIUM20));
       }
@@ -354,7 +354,7 @@ Element* Element::linkedClone()
 //   setPos
 //---------------------------------------------------------
 
-void Element::setPos(double x, double y)
+void Element::setPos(qreal x, qreal y)
       {
       _pos.rx() = x;
       _pos.ry() = y;
@@ -795,13 +795,13 @@ void StaffLines::draw(Painter* painter) const
 //   y1
 //---------------------------------------------------------
 
-double StaffLines::y1() const
+qreal StaffLines::y1() const
       {
      System* system = measure()->system();
      if (system == 0)
            return 0.0;
-      double _spatium = spatium();
-      double y = system->staff(staffIdx())->y() + ipos().y();
+      qreal _spatium = spatium();
+      qreal y = system->staff(staffIdx())->y() + ipos().y();
       switch (lines) {
             case 1:
                   return y - _spatium;
@@ -814,14 +814,14 @@ double StaffLines::y1() const
 //   y2
 //---------------------------------------------------------
 
-double StaffLines::y2() const
+qreal StaffLines::y2() const
       {
       System* system = measure()->system();
       if (system == 0)
             return 0.0;
 
       QPointF _pos(0.0, 0.0);
-      double y = system->staff(staffIdx())->y() + ipos().y();
+      qreal y = system->staff(staffIdx())->y() + ipos().y();
 
       switch (lines) {
             case 1:
@@ -874,10 +874,10 @@ void Line::setLineWidth(Spatium w)
 
 void Line::layout()
       {
-      double sp = spatium();
-      double w  = _width.val() * sp;
-      double l  = _len.val() * sp;
-      double w2 = w * .5;
+      qreal sp = spatium();
+      qreal w  = _width.val() * sp;
+      qreal l  = _len.val() * sp;
+      qreal w2 = w * .5;
       if (vertical)
             setbbox(QRectF(-w2, -w2, w, l + w));
       else
@@ -891,10 +891,10 @@ void Line::layout()
 void Line::draw(Painter* painter) const
       {
       painter->setCapStyle(Qt::FlatCap);
-      double sp = spatium();
+      qreal sp = spatium();
       painter->setLineWidth(_width.val() * sp);
 
-      double l = _len.val() * sp;
+      qreal l = _len.val() * sp;
       if (vertical)
             painter->drawLine(0.0, 0.0, 0.0, l);
       else
@@ -972,7 +972,7 @@ void Compound::draw(Painter* painter) const
  offset \a x and \a y are in Point units
 */
 
-void Compound::addElement(Element* e, double x, double y)
+void Compound::addElement(Element* e, qreal x, qreal y)
       {
       e->setPos(x, y);
       e->setParent(this);
@@ -1398,7 +1398,7 @@ bool elementLessThan(const Element* const e1, const Element* const e2)
 
 QPointF Element::getGrip(int) const
       {
-      double _spatium = score()->spatium();
+      qreal _spatium = score()->spatium();
       return QPointF(userOff().x() / _spatium, userOff().y() / _spatium);
       }
 
@@ -1408,7 +1408,7 @@ QPointF Element::getGrip(int) const
 
 void Element::setGrip(int, const QPointF& pt)
       {
-      double _spatium = score()->spatium();
+      qreal _spatium = score()->spatium();
       setUserOff(QPointF(pt.x() * _spatium, pt.y() * _spatium));
       }
 

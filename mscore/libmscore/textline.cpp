@@ -64,7 +64,7 @@ void TextLineSegment::setSelected(bool f)
 void TextLineSegment::draw(Painter* painter) const
       {
       TextLine* tl    = textLine();
-      double _spatium = spatium();
+      qreal _spatium = spatium();
 
       qreal textlineLineWidth    = tl->lineWidth().val() * _spatium;
       qreal textlineTextDistance = _spatium * .5;
@@ -124,7 +124,7 @@ void TextLineSegment::draw(Painter* painter) const
       painter->drawLine(pp1.x(), pp1.y(), pp2.x(), pp2.y());
 
       if (tl->beginHook()) {
-            double hh = tl->beginHookHeight().val() * _spatium;
+            qreal hh = tl->beginHookHeight().val() * _spatium;
             if (spannerSegmentType() == SEGMENT_SINGLE || spannerSegmentType() == SEGMENT_BEGIN) {
                   if (tl->beginHookType() == HOOK_45)
                         painter->drawLine(pp1.x(), pp1.y(), pp1.x() - fabs(hh * .4), pp1.y() + hh);
@@ -133,7 +133,7 @@ void TextLineSegment::draw(Painter* painter) const
                   }
             }
       if (tl->endHook()) {
-            double hh = tl->endHookHeight().val() * _spatium;
+            qreal hh = tl->endHookHeight().val() * _spatium;
             if (spannerSegmentType() == SEGMENT_SINGLE || spannerSegmentType() == SEGMENT_END) {
                   if (tl->endHookType() == HOOK_45)
                         painter->drawLine(pp2.x(), pp2.y(), pp2.x() + fabs(hh * .4), pp2.y() + hh);
@@ -155,12 +155,12 @@ QRectF TextLineSegment::bbox() const
 
       if (!_text && pp2.y() != 0)
             return QRectF(pp1, pp2).normalized();
-      double y1 = point(-textLine()->lineWidth());
-      double y2 = -y1;
+      qreal y1 = point(-textLine()->lineWidth());
+      qreal y2 = -y1;
 
       int sym = textLine()->beginSymbol();
       if (_text) {
-            double h = _text->height();
+            qreal h = _text->height();
             if (textLine()->beginTextPlace() == PLACE_ABOVE)
                   y1 = -h;
             else if (textLine()->beginTextPlace() == PLACE_BELOW)
@@ -171,19 +171,19 @@ QRectF TextLineSegment::bbox() const
                   }
             }
       else if (sym != -1) {
-            double hh = symbols[score()->symIdx()][sym].height(magS()) * .5;
+            qreal hh = symbols[score()->symIdx()][sym].height(magS()) * .5;
             y1 = -hh;
             y2 = hh;
             }
       if (textLine()->endHook()) {
-            double h = point(textLine()->endHookHeight());
+            qreal h = point(textLine()->endHookHeight());
             if (h > y2)
                   y2 = h;
             else if (h < y1)
                   y1 = h;
             }
       if (textLine()->beginHook()) {
-            double h = point(textLine()->beginHookHeight());
+            qreal h = point(textLine()->beginHookHeight());
             if (h > y2)
                   y2 = h;
             else if (h < y1)
@@ -532,7 +532,7 @@ void TextLine::layout()
 //   spatiumChanged
 //---------------------------------------------------------
 
-void TextLineSegment::spatiumChanged(double ov, double nv)
+void TextLineSegment::spatiumChanged(qreal ov, qreal nv)
       {
       parent()->spatiumChanged(ov, nv);
       }
@@ -541,7 +541,7 @@ void TextLineSegment::spatiumChanged(double ov, double nv)
 //   spatiumChanged
 //---------------------------------------------------------
 
-void TextLine::spatiumChanged(double ov, double nv)
+void TextLine::spatiumChanged(qreal ov, qreal nv)
       {
       if (_beginText)
             _beginText->spatiumChanged(ov, nv);

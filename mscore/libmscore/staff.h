@@ -170,9 +170,9 @@ class Staff {
       int barLineSpan() const        { return _barLineSpan; }
       void setBarLineSpan(int val)   { _barLineSpan = val;  }
       Score* score() const           { return _score;       }
-      double mag() const;
-      double height() const;
-      double spatium() const;
+      qreal mag() const;
+      qreal height() const;
+      qreal spatium() const;
       int channel(int tick, int voice) const;
       QMap<int,int>* channelList(int voice) { return  &_channelList[voice]; }
 

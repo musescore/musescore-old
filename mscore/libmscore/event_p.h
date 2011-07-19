@@ -38,7 +38,7 @@ class EventData : public QSharedData {
       int _len;
       int _metaType;
       const Note* _note;
-      double _tuning;
+      qreal _tuning;
 
       int noquantOntime() const      { return  _noquantOntime;       }
       void setNoquantOntime(int v)   {  _noquantOntime = v;          }
@@ -79,8 +79,8 @@ class EventData : public QSharedData {
       void setTpc(int v)             {  _tpc = v;                    }
       const Note* note() const       { return  _note;                }
       void setNote(const Note* v)    {  _note = v;                   }
-      double tuning() const          { return  _tuning;              }
-      void setTuning(double v)       {  _tuning = v;                 }
+      qreal tuning() const          { return  _tuning;              }
+      void setTuning(qreal v)       {  _tuning = v;                 }
       bool operator==(const EventData& e) const;
 
    public:

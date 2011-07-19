@@ -74,7 +74,7 @@ struct MidiSegment {
       int end;
       QList<Event> snote;
       int numnotes;           // number of notes in the segment
-      double average_dur;     // average input vector value (needed for K-S algorithm)
+      qreal average_dur;     // average input vector value (needed for K-S algorithm)
       };
 
 #define CHANGE_PENALTY        12
@@ -84,9 +84,9 @@ static int npc_or_tpc_profile = 1;
 static int scoring_mode       = 1;
 static int verbosity          = 1;
 
-static double major_profile[12] = {5.0, 2.0, 3.5, 2.0, 4.5, 4.0, 2.0, 4.5, 2.0, 3.5, 1.5, 4.0};
-static double minor_profile[12] = {5.0, 2.0, 3.5, 4.5, 2.0, 4.0, 2.0, 4.5, 3.5, 2.0, 1.5, 4.0};
-static double default_profile_value=1.5;
+static qreal major_profile[12] = {5.0, 2.0, 3.5, 2.0, 4.5, 4.0, 2.0, 4.5, 2.0, 3.5, 1.5, 4.0};
+static qreal minor_profile[12] = {5.0, 2.0, 3.5, 4.5, 2.0, 4.0, 2.0, 4.5, 3.5, 2.0, 1.5, 4.0};
+static qreal default_profile_value=1.5;
 
 /*
 
@@ -114,12 +114,12 @@ static QList<Event> note;
 static QList<MidiSegment> segment;  // An array storing the notes in each segment
 static int segtotal;                // total number of segments - 1
 
-static double seglength;
+static qreal seglength;
 
 static QList<int> seg_prof[28];
-static QList<double> key_score[56];
+static QList<qreal> key_score[56];
 static QList<SBeat> sbeat;
-static QList<double> analysis[56][56];
+static QList<qreal> analysis[56][56];
 
 static QList<int> best[56];
 static QList<int> final;
@@ -127,9 +127,9 @@ static QList<int> final;
 static int numnotes, numchords, num_sbeats;
 
 static QList<int> pc_tally;
-static QList<double> final_score;
+static QList<qreal> final_score;
 
-static double key_profile[56][28];
+static qreal key_profile[56][28];
 static int final_timepoint;
 
 //---------------------------------------------------------
@@ -264,7 +264,7 @@ static void count_segment_notes()
             for (int y = 0; y < 28; ++y)  // cycle through the pc's, make sure all the seg_prof values are zero
                   seg_prof[y].append(0);
 
-            double total_dur = 0;
+            qreal total_dur = 0;
 
             for (int n = 0; n < segment[s].numnotes; ++n) {
                   if (scoring_mode == 0)
@@ -314,11 +314,11 @@ static void count_segment_notes()
 
 static void prepare_profiles()
       {
-      double total = 0.0;
+      qreal total = 0.0;
       for (int i = 0; i < 12; i++) {
             total += major_profile[i];
             }
-      double average = total / 12.0;
+      qreal average = total / 12.0;
       for (int i = 0; i < 12; i++)
             major_profile[i]=major_profile[i] - average;
 
@@ -487,8 +487,8 @@ static void generate_npc_profiles()
 static void match_profiles()
       {
       int key, tpc, s, best_key, i;
-      double major_sumsq, minor_sumsq, input_sumsq;
-      double kprob[56];
+      qreal major_sumsq, minor_sumsq, input_sumsq;
+      qreal kprob[56];
 
       for (key = 0; key < 56; ++key) {
             for (s = 0; s <= segtotal; ++s)
@@ -506,7 +506,7 @@ static void match_profiles()
                   printf("major_sumsq = %6.3f, minor_sumsq = %6.3f\n", major_sumsq, minor_sumsq);
             }
 
-      double total_prob[segtotal + 1];
+      qreal total_prob[segtotal + 1];
 
       for (s = 0; s <= segtotal; ++s) {
             if (scoring_mode==0) {
@@ -659,7 +659,7 @@ static void choose_best_i(int seg)
 static void make_first_table(int seg)
       {
       int i, j, s;
-      double seg_factor, mod_factor, nomod_factor;
+      qreal seg_factor, mod_factor, nomod_factor;
 
       if (scoring_mode==3) {
             mod_factor = log(change_penalty);
@@ -696,7 +696,7 @@ static void make_first_table(int seg)
 
 static void make_tables()
       {
-      double seg_factor, mod_factor, nomod_factor;
+      qreal seg_factor, mod_factor, nomod_factor;
 
       /* When scoring_mode = 3, the change_penalty represents the probability of changing key. So raising
          the penalty actually _increases_ the likelihood of modulations. */

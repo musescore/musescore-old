@@ -25,9 +25,9 @@ class Painter;
 
 class TremoloBar : public Element {
       QList<PitchValue> _points;
-      double _lw;
+      qreal _lw;
       QPointF notePos;
-      double noteWidth;
+      qreal noteWidth;
 
    public:
       TremoloBar(Score* s);

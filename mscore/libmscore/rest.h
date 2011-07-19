@@ -31,14 +31,14 @@ class Rest : public ChordRest {
       int _sym;
 
       int dotline;            // depends on rest symbol
-      double _mmWidth;        // width of multi measure rest
-      double _yoffset;        // in spatium units
+      qreal _mmWidth;        // width of multi measure rest
+      qreal _yoffset;        // in spatium units
 
       virtual QRectF drag(const QPointF& s);
       virtual qreal upPos()   const;
       virtual qreal downPos() const;
       virtual qreal centerX() const;
-      void setUserOffset(double x, double y);
+      void setUserOffset(qreal x, qreal y);
 
    public:
       Rest(Score* s = 0);
@@ -55,12 +55,12 @@ class Rest : public ChordRest {
       virtual Element* drop(const DropData&);
       virtual void layout();
 
-      void setMMWidth(double val);
-      double mmWidth() const        { return _mmWidth; }
+      void setMMWidth(qreal val);
+      qreal mmWidth() const        { return _mmWidth; }
       static int getSymbol(Duration::DurationType type, int line, int lines,  int* yoffset);
 
-      void setYoff(double d) { _yoffset = d;        }
-      double yoff() const    { return _yoffset;     }
+      void setYoff(qreal d) { _yoffset = d;        }
+      qreal yoff() const    { return _yoffset;     }
       };
 
 #endif

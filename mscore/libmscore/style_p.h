@@ -32,7 +32,7 @@ class TextStyleData : public QSharedData, public ElementLayout {
    protected:
       QString name;
       QString family;
-      double size;
+      qreal size;
       bool bold;
       bool italic;
       bool underline;
@@ -40,8 +40,8 @@ class TextStyleData : public QSharedData, public ElementLayout {
 
       bool sizeIsSpatiumDependent;        // text point size depends on _spatium unit
 
-      double frameWidth;
-      double paddingWidth;
+      qreal frameWidth;
+      qreal paddingWidth;
       int frameRound;
       QColor frameColor;
       bool circle;
@@ -49,13 +49,13 @@ class TextStyleData : public QSharedData, public ElementLayout {
       QColor foregroundColor;
 
    public:
-      TextStyleData(QString _name, QString _family, double _size,
+      TextStyleData(QString _name, QString _family, qreal _size,
          bool _bold, bool _italic, bool _underline,
          Align _align,
-         double _xoff, double _yoff, OffsetType _ot,
-         double _rxoff, double _ryoff,
+         qreal _xoff, qreal _yoff, OffsetType _ot,
+         qreal _rxoff, qreal _ryoff,
          bool sd,
-         double fw, double pw, int fr,
+         qreal fw, qreal pw, int fr,
          QColor co, bool circle, bool systemFlag,
          QColor fg);
       TextStyleData();
@@ -65,10 +65,10 @@ class TextStyleData : public QSharedData, public ElementLayout {
       void read(QDomElement);
       bool readProperties(QDomElement v);
 
-      QFont font(double space) const;
-      QFont fontPx(double spatium) const;
-      QRectF bbox(double space, const QString& s) const { return fontMetrics(space).boundingRect(s); }
-      QFontMetricsF fontMetrics(double space) const     { return QFontMetricsF(font(space)); }
+      QFont font(qreal space) const;
+      QFont fontPx(qreal spatium) const;
+      QRectF bbox(qreal space, const QString& s) const { return fontMetrics(space).boundingRect(s); }
+      QFontMetricsF fontMetrics(qreal space) const     { return QFontMetricsF(font(space)); }
       bool operator!=(const TextStyleData& s) const;
       friend class TextStyle;
       };
@@ -84,7 +84,7 @@ class StyleData : public QSharedData {
       mutable ChordList* _chordList;
       QList<TextStyle> _textStyles;
       PageFormat* _pageFormat;
-      double _spatium;
+      qreal _spatium;
 
       bool _customChordList;        // if true, chordlist will be saved as part of score
 
@@ -111,8 +111,8 @@ class StyleData : public QSharedData {
       PageFormat* pageFormat() const           { return _pageFormat; }
       void setPageFormat(const PageFormat& pf);
       friend class Style;
-      double spatium() const    { return _spatium; }
-      void setSpatium(double v) { _spatium = v; }
+      qreal spatium() const    { return _spatium; }
+      void setSpatium(qreal v) { _spatium = v; }
       };
 
 #endif

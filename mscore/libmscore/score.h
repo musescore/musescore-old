@@ -296,7 +296,7 @@ class Score {
                         ///< saves will not overwrite the backup file.
       int _playPos;     ///< sequencer seek position
 
-      double _swingRatio; ///< Swing ratio
+      qreal _swingRatio; ///< Swing ratio
 
       bool _foundPlayPosAfterRepeats; ///< Temporary used during playback rendering
                                       ///< indicating if playPos after expanded repeats
@@ -362,8 +362,8 @@ class Score {
 
       Page* addPage();
       bool layoutPage();
-      bool layoutSystem1(double& minWidth, double w, bool, bool);
-      QList<System*> layoutSystemRow(qreal x, qreal y, qreal w, bool, bool, double*);
+      bool layoutSystem1(qreal& minWidth, qreal w, bool, bool);
+      QList<System*> layoutSystemRow(qreal x, qreal y, qreal w, bool, bool, qreal*);
       void processSystemHeader(Measure* m, bool);
       System* getNextSystem(bool, bool);
       void getCurPage();
@@ -413,7 +413,7 @@ class Score {
       void cmdRemovePart(Part*);
       void cmdAddTie();
       void cmdAddHairpin(bool);
-      void cmdAddStretch(double);
+      void cmdAddStretch(qreal);
       void transpose(Note* n, Interval, bool useSharpsFlats);
 
       Score(const Style*);
@@ -472,8 +472,8 @@ class Score {
       void undoChangeInvisible(Element*, bool);
       void undoMove(Element* e, const QPointF& pt);
       void undoChangeBracketSpan(Staff* staff, int column, int span);
-      void undoChangeTuning(Note*, double);
-      void undoChangePageFormat(PageFormat*, double spatium, int);
+      void undoChangeTuning(Note*, qreal);
+      void undoChangePageFormat(PageFormat*, qreal spatium, int);
       void undoChangeUserMirror(Note*, DirectionH);
       void undoChangeKeySig(Staff* ostaff, int tick, KeySigEvent st);
       void undoChangeClef(Staff* ostaff, Segment*, ClefType st);
@@ -621,7 +621,7 @@ class Score {
       qreal   styleP(StyleIdx idx) const       { return _style.valueS(idx).val() * spatium();  }
       QString styleSt(StyleIdx idx) const      { return _style.valueSt(idx); }
       bool    styleB(StyleIdx idx) const       { return _style.valueB(idx);  }
-      double  styleD(StyleIdx idx) const       { return _style.valueD(idx);  }
+      qreal  styleD(StyleIdx idx) const       { return _style.valueD(idx);  }
       int     styleI(StyleIdx idx) const       { return _style.valueI(idx);  }
       const TextStyle& textStyle(TextStyleType idx) const { return _style.textStyle(idx); }
 
@@ -637,7 +637,7 @@ class Score {
       void setInputState(const InputState& st) { _is = st;           }
       void setInputTrack(int);
 
-      void spatiumChanged(double oldValue, double newValue);
+      void spatiumChanged(qreal oldValue, qreal newValue);
 
       void pasteStaff(QDomElement, ChordRest* dst);
       void toEList(EventMap* events);
@@ -667,8 +667,8 @@ class Score {
       AL::TempoMap* tempomap() const;
       AL::TimeSigMap* sigmap() const;
 
-      double swingRatio()                            { return _swingRatio;}
-      void setSwingRatio(double d)                   { _swingRatio = d;}
+      qreal swingRatio()                            { return _swingRatio;}
+      void setSwingRatio(qreal d)                   { _swingRatio = d;}
 
       bool creditsRead() const                       { return _creditsRead;     }
       void setCreditsRead(bool val)                  { _creditsRead = val;      }
@@ -702,15 +702,15 @@ class Score {
       void endUndoRedo();
       Measure* searchLabel(const QString& s);
       RepeatList* repeatList() const;
-      double utick2utime(int tick) const;
-      int utime2utick(double utime) const;
+      qreal utick2utime(int tick) const;
+      int utime2utick(qreal utime) const;
       void updateRepeatList(bool expandRepeats);
 
       void nextInputPos(ChordRest* cr, bool);
       void cmdMirrorNoteHead();
 
-      double spatium() const                   { return style()->spatium();    }
-      void setSpatium(double v)                { style()->setSpatium(v);       }
+      qreal spatium() const                   { return style()->spatium();    }
+      void setSpatium(qreal v)                { style()->setSpatium(v);       }
       PageFormat* pageFormat() const           { return style()->pageFormat(); }
       void setPageFormat(const PageFormat& pf) { style()->setPageFormat(pf);   }
       const QList<Page*>& pages() const        { return _pages;                }
@@ -727,7 +727,7 @@ class Score {
 
       virtual void add(Element*);
       virtual void remove(Element*);
-      double point(const Spatium sp) const { return sp.val() * spatium(); }
+      qreal point(const Spatium sp) const { return sp.val() * spatium(); }
 
       void scanElements(void* data, void (*func)(void*, Element*));
       QByteArray buildCanonical(int track);

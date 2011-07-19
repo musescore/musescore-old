@@ -78,11 +78,11 @@ QPointF TimeSig::canvasPos() const
       {
       if (parent() == 0)
             return pos();
-      double xp = x();
+      qreal xp = x();
       for (Element* e = parent(); e; e = e->parent())
             xp += e->x();
       System* system = segment()->measure()->system();
-      double yp = system ? y() + system->staff(staffIdx())->y() + system->y() : 0.0;
+      qreal yp = system ? y() + system->staff(staffIdx())->y() + system->y() : 0.0;
       return QPointF(xp, yp);
       }
 
@@ -267,14 +267,14 @@ void TimeSig::read(QDomElement e)
 
 void TimeSig::layout()
       {
-      double _spatium = spatium();
+      qreal _spatium = spatium();
 
       setbbox(QRectF());                          // prepare for an empty time signature
       pz = QPointF(0.0, 0.0);
       pn = QPointF(0.0, 0.0);
 
       int st            = subtype();
-      double lineDist   = 1.0;            // assume dimensions a standard staff
+      qreal lineDist   = 1.0;            // assume dimensions a standard staff
       int    numOfLines = 5;
       if (staff()) {
             StaffType* staffType = staff()->staffType();
@@ -291,8 +291,8 @@ void TimeSig::layout()
       // if some symbol
       // compute vert. displacement to center in the staff height
       // determine middle staff position:
-      double yoff = _spatium * (numOfLines-1) / 2.0 * lineDist;
-      double mag  = magS();
+      qreal yoff = _spatium * (numOfLines-1) / 2.0 * lineDist;
+      qreal mag  = magS();
       // C and Ccut are placed at the middle of the staff: use yoff directly
       if (st ==  TSIG_FOUR_FOUR) {
             pz = QPointF(0.0, yoff);
@@ -325,7 +325,7 @@ void TimeSig::layout()
             // position numerator and denominator; vertical displacement:
             // number of lines is odd: 0.0 (strings are directly above and below the middle line)
             // number of lines even:   0.5 (strings are moved up/down to leave 1 line dist. between them)
-            double displ = numOfLines & 1 ? 0.0 : (0.5 * lineDist * _spatium);
+            qreal displ = numOfLines & 1 ? 0.0 : (0.5 * lineDist * _spatium);
             pz = QPointF(0.0, yoff - displ);
             // denom. horiz. posit.: centred around centre of numerator
             // vert. position:       base line is lowered by displ and by the whole height of a digit
@@ -334,7 +334,7 @@ void TimeSig::layout()
             addbbox(rn.translated(pn));
             }
 
-      double im = (DPI * SPATIUM20) / _spatium;
+      qreal im = (DPI * SPATIUM20) / _spatium;
 
       pz *= im;                           // convert positions to raster units
       pn *= im;

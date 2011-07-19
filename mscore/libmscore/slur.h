@@ -100,11 +100,11 @@ class SlurTie : public Spanner {
       int _lineType;          // 0 = solid, 1 = dotted
 
    protected:
-      double _len;
+      qreal _len;
       bool up;
       QQueue<SlurSegment*> delSegments;   // "deleted" segments
       Direction _slurDirection;
-      double firstNoteRestSegmentX(System* system);
+      qreal firstNoteRestSegmentX(System* system);
 
    public:
       SlurTie(Score*);
@@ -125,7 +125,7 @@ class SlurTie : public Spanner {
       void slurPos(SlurPos*);
 
       virtual void toDefault();
-      void setLen(double v)               { _len = v; }
+      void setLen(qreal v)               { _len = v; }
       int lineType() const                { return _lineType; }
       void setLineType(int val)           { _lineType = val;  }
       SlurSegment* frontSegment() const   { return (SlurSegment*)spannerSegments().front(); }

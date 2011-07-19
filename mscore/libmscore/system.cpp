@@ -117,7 +117,7 @@ void System::removeStaff(int idx)
 //    width of this box.
 //---------------------------------------------------------
 
-void System::layout(double xo1)
+void System::layout(qreal xo1)
       {
       if (isVbox())                 // ignore vbox
             return;
@@ -134,7 +134,7 @@ void System::layout(double xo1)
       //    create brackets
       //---------------------------------------------------
 
-      double xoff2 = 0.0;         // x offset for instrument name
+      qreal xoff2 = 0.0;         // x offset for instrument name
 
       int bracketLevels = 0;
       for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
@@ -142,7 +142,7 @@ void System::layout(double xo1)
             if (n > bracketLevels)
                   bracketLevels = n;
             }
-      double bracketWidth[bracketLevels];
+      qreal bracketWidth[bracketLevels];
       for (int i = 0; i < bracketLevels; ++i)
             bracketWidth[i] = 0.0;
 
@@ -178,14 +178,14 @@ void System::layout(double xo1)
                         int span = s->bracketSpan(i);
                         b->setSpan(span);
                         b->setLevel(i);
-                        double w = b->width();
+                        qreal w = b->width();
                         if (w > bracketWidth[i])
                               bracketWidth[i] = w;
                         }
                   }
             foreach(InstrumentName* t, ss->instrumentNames) {
                   t->layout();
-                  double w = t->width() + point(instrumentNameOffset);
+                  qreal w = t->width() + point(instrumentNameOffset);
                   if (w > xoff2)
                         xoff2 = w;
                   }
@@ -208,7 +208,7 @@ void System::layout(double xo1)
                   s->setbbox(QRectF());
                   continue;
                   }
-            double staffMag = staff->mag();
+            qreal staffMag = staff->mag();
             s->setbbox(QRectF(_leftMargin + xo1, 0.0, 0.0, 4 * spatium() * staffMag));
             }
 
@@ -235,7 +235,7 @@ void System::layout(double xo1)
             if (!ss->show())
                   continue;
 
-            double xo = -xo1;
+            qreal xo = -xo1;
             for (int i = 0; i < bracketLevels; ++i) {
                   xo += bracketWidth[i] + point(score()->styleS(ST_bracketDistance));
                   Bracket* b = ss->brackets[i];
@@ -275,7 +275,7 @@ void System::layout(double xo1)
             SysStaff* s = staff(idx);
             int nstaves = p->nstaves();
             foreach(InstrumentName* t, s->instrumentNames) {
-                  double d  = point(instrumentNameOffset) + t->bbox().width();
+                  qreal d  = point(instrumentNameOffset) + t->bbox().width();
                   t->rxpos() = xoff2 - d + xo1;
                   }
             idx += nstaves;
@@ -294,7 +294,7 @@ void System::layout2()
             return;
 
       int nstaves     = _staves.size();
-      double _spatium = spatium();
+      qreal _spatium = spatium();
 
       qreal y = 0.0;
       int lastStaffIdx  = 0;   // last visible staff
@@ -318,8 +318,8 @@ void System::layout2()
             else
                   s->setDistanceDown(score()->styleS(ST_staffDistance));
 
-            double distDown = 0.0;
-            double distUp   = 0.0;
+            qreal distDown = 0.0;
+            qreal distUp   = 0.0;
             foreach(MeasureBase* m, ml) {
                   distDown = std::max(distDown, m->distanceDown(staffIdx));
                   distDown = std::max(distDown, point(m->userDistanceDown(staffIdx)));
@@ -336,7 +336,7 @@ void System::layout2()
                   s->setbbox(QRectF());  // already done in layout() ?
                   continue;
                   }
-            double sHeight = staff->height();   // (staff->lines() - 1) * _spatium * staffMag;
+            qreal sHeight = staff->height();   // (staff->lines() - 1) * _spatium * staffMag;
             s->setbbox(QRectF(_leftMargin, y, width() - _leftMargin, sHeight));
             y += sHeight + (s->distanceDown().val() * _spatium);
             lastStaffIdx = staffIdx;
@@ -351,7 +351,7 @@ void System::layout2()
                   static_cast<HBox*>(m)->layout2();
             }
 
-//      double staffY[nstaves];
+//      qreal staffY[nstaves];
 //      for (int i = 0; i < nstaves; ++i)
 //            staffY[i] = staff(i)->bbox().y();
 
@@ -400,7 +400,7 @@ void System::layout2()
                   //
                   // override Text->layout()
                   //
-                  double y1, y2;
+                  qreal y1, y2;
                   switch(t->layoutPos()) {
                         default:
                         case 0:           // center at part
@@ -428,7 +428,7 @@ void System::layout2()
                               y2 = staff(staffIdx + 2)->bbox().bottom();
                               break;
                         }
-                  double y  = y1 + (y2 - y1) * .5 - t->bbox().height() * .5;
+                  qreal y  = y1 + (y2 - y1) * .5 - t->bbox().height() * .5;
                   t->rypos() = y;
                   }
             staffIdx += nstaves;
@@ -439,7 +439,7 @@ void System::layout2()
 //   move
 //---------------------------------------------------------
 
-void SysStaff::move(double x, double y)
+void SysStaff::move(qreal x, qreal y)
       {
       _bbox.translate(x, y);
       foreach(Bracket* b, brackets)
@@ -739,10 +739,10 @@ void System::layoutLyrics(Lyrics* l, Segment* s, int staffIdx)
             l->clearSeparator();
             return;
             }
-      double _spatium = spatium();
+      qreal _spatium = spatium();
 
       const TextStyle& ts = score()->textStyle(l->textStyle());
-      double lmag = double(ts.size()) / 11.0;
+      qreal lmag = qreal(ts.size()) / 11.0;
 
       if (l->ticks()) {
             Segment* seg = score()->tick2segment(l->endTick());
@@ -758,7 +758,7 @@ void System::layoutLyrics(Lyrics* l, Segment* s, int staffIdx)
             int sysIdx1  = systems->indexOf(s1);
             int sysIdx2  = systems->indexOf(s2);
 
-            double lw = l->bbox().right();            // lyrics width
+            qreal lw = l->bbox().right();            // lyrics width
             QPointF p1(lw, l->baseLine());
 
             int segIdx = 0;
@@ -773,15 +773,15 @@ void System::layoutLyrics(Lyrics* l, Segment* s, int staffIdx)
                   if (sysIdx1 == sysIdx2) {
                         // single segment
                         line->setPos(p1);
-                        double len = seg->canvasPos().x() - l->canvasPos().x() - lw + 2 * _spatium;
+                        qreal len = seg->canvasPos().x() - l->canvasPos().x() - lw + 2 * _spatium;
                         line->setLen(Spatium(len / _spatium));
                         }
                   else if (i == sysIdx1) {
                         // start segment
                         line->setPos(p1);
-                        double w   = system->staff(l->staffIdx())->right();
-                        double x   = system->canvasPos().x() + w;
-                        double len = x - l->canvasPos().x() - lw;
+                        qreal w   = system->staff(l->staffIdx())->right();
+                        qreal x   = system->canvasPos().x() + w;
+                        qreal len = x - l->canvasPos().x() - lw;
                         line->setLen(Spatium(len / _spatium));
                         }
                   else if (i > 0 && i != sysIdx2) {
@@ -802,7 +802,7 @@ void System::layoutLyrics(Lyrics* l, Segment* s, int staffIdx)
       Segment* ns = s;
 
       // TODO: the next two values should be style parameters
-      const double maxl = 0.5 * _spatium * lmag;   // lyrics hyphen length
+      const qreal maxl = 0.5 * _spatium * lmag;   // lyrics hyphen length
       const Spatium hlw(0.14 * lmag);              // hyphen line width
 
       while ((ns = ns->next1(SegChordRest | SegGrace))) {
@@ -848,11 +848,11 @@ void System::layoutLyrics(Lyrics* l, Segment* s, int staffIdx)
                   x2 = system->canvasPos().x() + system->bbox().width();
                   }
 
-            double gap = x2 - x1 - w;
+            qreal gap = x2 - x1 - w;
             len        = gap;
             if (len > maxl)
                   len = maxl;
-            double xo = (gap - len) * .5;
+            qreal xo = (gap - len) * .5;
 
             line->setLineWidth(hlw);
             line->setPos(QPointF(x + xo, y));
@@ -890,7 +890,7 @@ void System::scanElements(void* data, void (*func)(void*, Element*))
 //   staffY
 //---------------------------------------------------------
 
-double System::staffY(int staffIdx) const
+qreal System::staffY(int staffIdx) const
       {
       if (_staves.size() <= staffIdx) {
             printf("staffY: staves %d <= staff %d, vbox %d\n",

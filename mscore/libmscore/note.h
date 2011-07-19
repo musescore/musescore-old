@@ -102,7 +102,7 @@ class Note : public Element {
       ValueType _veloType;
       int _veloOffset;        ///< velocity user offset in percent, or absolute velocity for this note
 
-      double _tuning;         ///< pitch offset in cent, playable only by internal synthesizer
+      qreal _tuning;         ///< pitch offset in cent, playable only by internal synthesizer
 
       int _onTimeOffset;      ///< start note offset in ticks
       int _onTimeUserOffset;  ///< start note user offset
@@ -145,8 +145,8 @@ class Note : public Element {
 
       int playTicks() const;
 
-      double headWidth() const;
-      double headHeight() const;
+      qreal headWidth() const;
+      qreal headHeight() const;
       int noteHead() const;
       int headGroup() const            { return _headGroup; }
       NoteHeadType headType() const    { return _headType;  }
@@ -157,8 +157,8 @@ class Note : public Element {
       void setPitch(int val);
       void setPitch(int a, int b);
       int ppitch() const;
-      double tuning() const           { return _tuning;   }
-      void setTuning(double v)        { _tuning = v;      }
+      qreal tuning() const           { return _tuning;   }
+      void setTuning(qreal v)        { _tuning = v;      }
 
       int tpc() const                 { return _tpc;      }
       void setTpc(int v);
@@ -198,7 +198,7 @@ class Note : public Element {
       virtual void write(Xml& xml) const;
 
       QPointF stemPos(bool upFlag) const;    ///< Point to connect stem.
-      double stemYoff(bool upFlag) const;
+      qreal stemYoff(bool upFlag) const;
       qreal yPos() const;
 
       virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
@@ -223,7 +223,7 @@ class Note : public Element {
       bool dotIsUp() const;               // actual dot position
 
       virtual void toDefault();
-      virtual void setMag(double val);
+      virtual void setMag(qreal val);
 
       ValueType veloType() const       { return _veloType;          }
       void setVeloType(ValueType v)    { _veloType = v;             }

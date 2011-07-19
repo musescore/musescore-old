@@ -29,7 +29,7 @@
 
 void TrillSegment::draw(Painter* painter) const
       {
-      double mag = magS();
+      qreal mag = magS();
       int idx    = score()->symIdx();
       qreal w2   = symbols[idx][trillelementSym].width(mag);
       QRectF b2(symbols[idx][trillelementSym].bbox(mag));
@@ -67,7 +67,7 @@ void TrillSegment::draw(Painter* painter) const
 
 void TrillSegment::layout()
       {
-      double mag = magS();
+      qreal mag = magS();
       int idx    = score()->symIdx();
       QRectF b1(symbols[idx][trillSym].bbox(mag));
       QRectF rr(b1.translated(-b1.x(), 0.0));
@@ -153,7 +153,7 @@ void Trill::remove(Element* e)
 
 void Trill::layout()
       {
-      double _spatium = spatium();
+      qreal _spatium = spatium();
       setPos(0.0, yoff() * _spatium);
       SLine::layout();
 

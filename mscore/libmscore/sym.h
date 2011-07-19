@@ -57,7 +57,7 @@ class Sym {
       int fontId;
       const char* _name;
       QFont _font;
-      double w;
+      qreal w;
       QRectF _bbox;
       QPointF _attach;
 #ifdef USE_GLYPHS
@@ -68,21 +68,21 @@ class Sym {
 
    public:
       Sym() { _code = 0; }
-      Sym(const char* name, int c, int fid, double x=0.0, double y=0.0);
+      Sym(const char* name, int c, int fid, qreal x=0.0, qreal y=0.0);
       Sym(const char* name, int c, int fid, const QPointF&, const QRectF&);
 
       const char* name() const             { return _name; }
       void setName(const char* s)          { _name = s; }
-      const QRectF bbox(double mag) const;
-      double height(double mag) const      { return _bbox.height() * mag; }
-      double width(double mag) const       { return w * mag;  }
-      QPointF attach(double mag) const     { return _attach * mag;   }
+      const QRectF bbox(qreal mag) const;
+      qreal height(qreal mag) const      { return _bbox.height() * mag; }
+      qreal width(qreal mag) const       { return w * mag;  }
+      QPointF attach(qreal mag) const     { return _attach * mag;   }
       int code() const                     { return _code;    }
       int getFontId() const                { return fontId;   }
       int setFontId(int v)                 { return fontId = v;   }
       QFont font() const                   { return _font;    }
-      void draw(Painter* painter, double mag, qreal x, qreal y, int n) const;
-      void draw(Painter* painter, double mag, qreal x = 0.0, qreal y = 0.0) const;
+      void draw(Painter* painter, qreal mag, qreal x, qreal y, int n) const;
+      void draw(Painter* painter, qreal mag, qreal x = 0.0, qreal y = 0.0) const;
       void setAttach(const QPointF& r)       { _attach = r; }
       bool isValid() const                   { return _code != 0; }
       QRectF getBbox() const               { return _bbox; }
@@ -163,7 +163,7 @@ enum {
       longaupSym,
       longadownSym,
       brevisheadSym,
-      brevisdoubleheadSym,
+      brevisqrealheadSym,
       wholeheadSym,
       halfheadSym,
       quartheadSym,
@@ -355,7 +355,7 @@ enum {
 
 extern QVector<Sym> symbols[2];
 
-extern QString symToHtml(const Sym&, int leftMargin=0, const TextStyle* ts = 0, double sp=10.0);
+extern QString symToHtml(const Sym&, int leftMargin=0, const TextStyle* ts = 0, qreal sp=10.0);
 extern QString symToHtml(const Sym&, const Sym&, int leftMargin=0);
 extern QFont fontId2font(int id);
 #endif

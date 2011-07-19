@@ -91,11 +91,11 @@ QPointF FretDiagram::canvasPos() const
       {
       if (parent() == 0)
             return pos();
-      double xp = x();
+      qreal xp = x();
       for (Element* e = parent(); e; e = e->parent())
             xp += e->x();
       System* system = measure()->system();
-      double yp = y();
+      qreal yp = y();
       if (system)
             yp += system->staffY(staffIdx());
       return QPointF(xp, yp);
@@ -109,15 +109,15 @@ QLineF FretDiagram::dragAnchor() const
       {
       Measure* m     = measure();
       System* system = m->system();
-      double yp      = system->staff(staffIdx())->y() + system->y();
-      double xp      = m->tick2pos(segment()->tick()) + m->canvasPos().x();
+      qreal yp      = system->staff(staffIdx())->y() + system->y();
+      qreal xp      = m->tick2pos(segment()->tick()) + m->canvasPos().x();
       QPointF p1(xp, yp);
 
-      double x  = 0.0;
-      double y  = 0.0;
+      qreal x  = 0.0;
+      qreal y  = 0.0;
 #if 0 // TODOxx
-      double tw = width();
-      double th = height();
+      qreal tw = width();
+      qreal th = height();
       if (_align & ALIGN_BOTTOM)
             y = th;
       else if (_align & ALIGN_VCENTER)
@@ -201,36 +201,36 @@ void FretDiagram::init(Tablature* tab, Chord* chord)
 
 void FretDiagram::draw(Painter* painter) const
       {
-      double _spatium = spatium();
+      qreal _spatium = spatium();
       painter->setLineWidth(lw2);
       painter->setCapStyle(Qt::FlatCap);
       painter->setBrushColor(painter->penColor());
-      double x2 = (_strings-1) * stringDist;
+      qreal x2 = (_strings-1) * stringDist;
       painter->drawLine(-lw1*.5, 0.0, x2+lw1*.5, 0.0);
 
       painter->setLineWidth(lw1);
-      double y2 = (_frets+1) * fretDist - fretDist*.5;
+      qreal y2 = (_frets+1) * fretDist - fretDist*.5;
       for (int i = 0; i < _strings; ++i) {
-            double x = stringDist * i;
+            qreal x = stringDist * i;
             painter->drawLine(x, _fretOffset ? -_spatium*.2 : 0.0, x, y2);
             }
       for (int i = 1; i <= _frets; ++i) {
-            double y = fretDist * i;
+            qreal y = fretDist * i;
             painter->drawLine(0.0, y, x2, y);
             }
       painter->setFont(font);
       QFontMetricsF fm(font);
       for (int i = 0; i < _strings; ++i) {
             if (_dots && _dots[i]) {
-                  double dotd = stringDist * .6;
+                  qreal dotd = stringDist * .6;
                   int fret = _dots[i] - 1;
-                  double x = stringDist * i - dotd * .5;
-                  double y = fretDist * fret + fretDist * .5 - dotd * .5;
+                  qreal x = stringDist * i - dotd * .5;
+                  qreal y = fretDist * fret + fretDist * .5 - dotd * .5;
                   painter->drawEllipse(QRectF(x, y, dotd, dotd));
                   }
             if (_marker && _marker[i]) {
-                  double x = stringDist * i;
-                  double y = -fretDist * .3 - fm.ascent();
+                  qreal x = stringDist * i;
+                  qreal y = -fretDist * .3 - fm.ascent();
                   painter->drawTextHCentered(x, y, QChar(_marker[i]));
                   }
             }
@@ -245,17 +245,17 @@ void FretDiagram::draw(Painter* painter) const
 
 void FretDiagram::layout()
       {
-      double _spatium = spatium();
+      qreal _spatium = spatium();
       lw1             = _spatium * 0.08;
       lw2             = _fretOffset ? lw1 : _spatium * 0.2;
       stringDist      = _spatium * .7;
       fretDist        = _spatium * .8;
 
-      double w = stringDist * (_strings-1);
-      double h = _frets * fretDist + fretDist * .5;
-      double y = 0.0;
-      double dotd = stringDist * .6;
-      double x = -((dotd+lw1) * .5);
+      qreal w = stringDist * (_strings-1);
+      qreal h = _frets * fretDist + fretDist * .5;
+      qreal y = 0.0;
+      qreal dotd = stringDist * .6;
+      qreal x = -((dotd+lw1) * .5);
       w += dotd + lw1;
       if (_marker) {
             QFontMetricsF fm(font);

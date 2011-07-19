@@ -49,9 +49,9 @@ void Bracket::setHeight(qreal h)
 //   width
 //---------------------------------------------------------
 
-double Bracket::width() const
+qreal Bracket::width() const
       {
-      double w;
+      qreal w;
       if (subtype() == BRACKET_AKKOLADE)
             w = point(score()->styleS(ST_akkoladeWidth));
       else
@@ -65,7 +65,7 @@ double Bracket::width() const
 
 void Bracket::layout()
       {
-      double _spatium = spatium();
+      qreal _spatium = spatium();
       path = QPainterPath();
       if (h2 == 0.0)
             return;
@@ -74,10 +74,10 @@ void Bracket::layout()
 
       if (subtype() == BRACKET_AKKOLADE) {
             qreal w         = point(score()->styleS(ST_akkoladeWidth));
-            const double X1 =  2.0 * w;
-            const double X2 = -0.7096 * w;
-            const double X3 = -1.234 * w;
-            const double X4 =  1.734 * w;
+            const qreal X1 =  2.0 * w;
+            const qreal X2 = -0.7096 * w;
+            const qreal X3 = -1.234 * w;
+            const qreal X4 =  1.734 * w;
 
             path.moveTo(0, h);
             path.cubicTo(X1,  h + h * .3359, X2,  h + h * .5089, w, 2 * h);
