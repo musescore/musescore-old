@@ -71,7 +71,7 @@ void StemSlash::draw(Painter* painter) const
 void StemSlash::setLine(const QLineF& l)
       {
       line = l;
-      double w = point(score()->styleS(ST_stemWidth)) * .5;
+      qreal w = point(score()->styleS(ST_stemWidth)) * .5;
       setbbox(QRectF(line.p1(), line.p2()).normalized().adjusted(-w, w, 2.0*w, 2.0*w));
       }
 
@@ -221,7 +221,7 @@ void Chord::setStem(Stem* s)
 QPointF Chord::stemPos(bool upFlag, bool top) const
       {
       if(staff() && staff()->useTablature()) {
-            double sp = spatium();
+            qreal sp = spatium();
             return QPointF(STAFFTYPE_TAB_DEFAULTSTEMPOSX*sp, STAFFTYPE_TAB_DEFAULTSTEMPOSY*sp) +
                         canvasPos();
             }
@@ -415,13 +415,13 @@ QRectF Chord::bbox() const
 ///   \arg line       vertical position of line
 //---------------------------------------------------------
 
-void Chord::addLedgerLine(double x, int staffIdx, int line, int lr)
+void Chord::addLedgerLine(qreal x, int staffIdx, int line, int lr)
       {
-      double _spatium = spatium();
-      double hw       = upNote()->headWidth();
-      double hw2      = hw * .5;
+      qreal _spatium = spatium();
+      qreal hw       = upNote()->headWidth();
+      qreal hw2      = hw * .5;
 
-      double y = line * _spatium * .5;
+      qreal y = line * _spatium * .5;
 
       LedgerLine* h   = new LedgerLine(score());
       h->setParent(this);
@@ -431,7 +431,7 @@ void Chord::addLedgerLine(double x, int staffIdx, int line, int lr)
       // ledger lines extend less than half a space on each side
       // of the notehead:
       //
-      double ll = _notes[0]->headWidth() + score()->styleS(ST_ledgerLineLength).val() * _spatium;
+      qreal ll = _notes[0]->headWidth() + score()->styleS(ST_ledgerLineLength).val() * _spatium;
       Spatium len(ll / _spatium);
 
       if (_noteType != NOTE_NORMAL)
@@ -463,7 +463,7 @@ void Chord::addLedgerLine(double x, int staffIdx, int line, int lr)
 //   addLedgerLines
 //---------------------------------------------------------
 
-void Chord::addLedgerLines(double x, int move)
+void Chord::addLedgerLines(qreal x, int move)
       {
       int uppos = 1000;
       int ulr   = 0;
@@ -909,12 +909,12 @@ LedgerLine::LedgerLine(Score* s)
 
 QPointF LedgerLine::canvasPos() const
       {
-      double xp = x();
+      qreal xp = x();
       for (Element* e = parent(); e; e = e->parent())
             xp += e->x();
       System* system = chord()->measure()->system();
       int st = track() / VOICES;
-      double yp = y() + system->staff(st)->y() + system->y();
+      qreal yp = y() + system->staff(st)->y() + system->y();
       return QPointF(xp, yp);
       }
 
@@ -922,9 +922,9 @@ QPointF LedgerLine::canvasPos() const
 //   measureXPos
 //---------------------------------------------------------
 
-double LedgerLine::measureXPos() const
+qreal LedgerLine::measureXPos() const
       {
-      double xp = x();                   // chord relative
+      qreal xp = x();                   // chord relative
       xp += chord()->x();                // segment relative
       xp += chord()->segment()->x();     // measure relative
       return xp;
@@ -944,7 +944,7 @@ void LedgerLine::layout()
 //   setMag
 //---------------------------------------------------------
 
-void Chord::setMag(double val)
+void Chord::setMag(qreal val)
       {
       Element::setMag(val);
       foreach (LedgerLine* ll, _ledgerLines)
@@ -1036,7 +1036,7 @@ void Chord::layoutStem()
             // tablatures require stems only if not stemless
             if(!staff()->staffType()->slashStyle() && _stem) {   // if tab uses stems and this chord has one
                   // in tablatures, stem/hook setup is fixed: a simple 'comb' above the staff
-                  double sp = spatium();
+                  qreal sp = spatium();
                   // process stem
                   _stem->setLen(STAFFTYPE_TAB_DEFAULTSTEMLEN*sp);
                   _stem->setPos(STAFFTYPE_TAB_DEFAULTSTEMPOSX*sp, STAFFTYPE_TAB_DEFAULTSTEMPOSY*sp);
@@ -1060,15 +1060,15 @@ void Chord::layoutStem()
             int hookIdx      = durationType().hooks();
             Note* upnote     = upNote();
             Note* downnote   = downNote();
-            double ul        = upnote->line() * .5;
-            double dl        = downnote->line() * .5;
+            qreal ul        = upnote->line() * .5;
+            qreal dl        = downnote->line() * .5;
             bool shortenStem = score()->styleB(ST_shortenStem);
 
 
             Spatium progression(score()->styleS(ST_shortStemProgression));
             Spatium shortest(score()->styleS(ST_shortestStem));
 
-            double normalStemLen = small() ? 2.5 : 3.5;
+            qreal normalStemLen = small() ? 2.5 : 3.5;
             switch(hookIdx) {
                   case 3: normalStemLen += small() ? .5  : 0.75; break; //32nd notes
                   case 4: normalStemLen += small() ? 1.0 : 1.5;  break; //64th notes
@@ -1097,8 +1097,8 @@ void Chord::layoutStem()
                   }
             else {
                   if (up()) {
-                        double dy  = dl + downnote->stemYoff(true);
-                        double sel = ul - normalStemLen;
+                        qreal dy  = dl + downnote->stemYoff(true);
+                        qreal sel = ul - normalStemLen;
 
                         if (shortenStem && (sel < 0.0) && (hookIdx == 0 || !downnote->mirror()))
                               sel -= sel  * progression.val();
@@ -1109,8 +1109,8 @@ void Chord::layoutStem()
                               stemLen = -shortest;
                         }
                   else {
-                        double uy  = ul + upnote->stemYoff(false);
-                        double sel = dl + normalStemLen;
+                        qreal uy  = ul + upnote->stemYoff(false);
+                        qreal sel = dl + normalStemLen;
 
                         if (shortenStem && (sel > 4.0) && (hookIdx == 0 || downnote->mirror()))
                               sel -= (sel - 4.0)  * progression.val();
@@ -1124,21 +1124,21 @@ void Chord::layoutStem()
 
             QPointF npos(stemPos(_up, false));
 
-            double sl = point(stemLen);
+            qreal sl = point(stemLen);
             _stem->setLen(sl);
             _stem->setPos(npos - canvasPos());
 
             if (_stemSlash) {
                   // TODO: does not work for chords
-                  double l = spatium() * 1.0;
-                  double x = _stem->pos().x() + l * .1;
-                  double y = _stem->pos().y() + point(stemLen);
+                  qreal l = spatium() * 1.0;
+                  qreal x = _stem->pos().x() + l * .1;
+                  qreal y = _stem->pos().y() + point(stemLen);
                   if (up())
                         y += l * 1.2;
                   else
                         y -= l * 1.2;
-                  double h2 = l * (up() ? .4 : -.4);
-                  double w  = upnote->headWidth() * .7;
+                  qreal h2 = l * (up() ? .4 : -.4);
+                  qreal w  = upnote->headWidth() * .7;
                   _stemSlash->setLine(QLineF(QPointF(x + w, y - h2), QPointF(x - w, y + h2)));
                   }
 
@@ -1177,14 +1177,14 @@ void Chord::layout2()
       {
       if (glissando())
             glissando()->layout();
-      double _spatium = spatium();
+      qreal _spatium = spatium();
 
       //
       // Experimental:
       //    look for colliding ledger lines
       //
 
-      const double minDist = _spatium * .17;
+      const qreal minDist = _spatium * .17;
 
       Segment* s = segment()->prev(SegChordRest | SegGrace);
       if (s) {
@@ -1192,10 +1192,10 @@ void Chord::layout2()
             int etrack = strack + VOICES;
             foreach (LedgerLine* h, _ledgerLines) {
                   Spatium len(h->len());
-                  double y   = h->y();
-                  double x   = h->x();
+                  qreal y   = h->y();
+                  qreal x   = h->x();
                   bool found = false;
-                  double cx  = h->measureXPos();
+                  qreal cx  = h->measureXPos();
 
                   for (int track = strack; track < etrack; ++track) {
                         Element* e = s->element(track);
@@ -1205,12 +1205,12 @@ void Chord::layout2()
                               if (ll->y() != y)
                                     continue;
 
-                              double d = cx - ll->measureXPos() - (ll->len().val() * _spatium);
+                              qreal d = cx - ll->measureXPos() - (ll->len().val() * _spatium);
                               if (d < minDist) {
                                     //
                                     // the ledger lines overlap
                                     //
-                                    double shorten = (minDist - d) * .5;
+                                    qreal shorten = (minDist - d) * .5;
                                     x   += shorten;
                                     len -= Spatium(shorten / _spatium);
                                     ll->setLen(ll->len() - Spatium(shorten / _spatium));
@@ -1237,9 +1237,9 @@ void Chord::layout2()
                         if (_notes.size() > 1) {
                               }
                         else {
-                              double x = note->headWidth() * .5;
+                              qreal x = note->headWidth() * .5;
                               x -= e->width() * .5;
-                              double y;
+                              qreal y;
                               if (up())
                                     y = _spatium * .4;     // below
                               else
@@ -1261,15 +1261,15 @@ void Chord::layout()
       if (_notes.empty())
             return;
 
-      double _spatium  = spatium();
+      qreal _spatium  = spatium();
 
       foreach(const LedgerLine* l, _ledgerLines)
             delete l;
       _ledgerLines.clear();
 
-      double lx         = 0.0;
+      qreal lx         = 0.0;
       Note*  upnote     = upNote();
-      double headWidth  = upnote->headWidth();
+      qreal headWidth  = upnote->headWidth();
       qreal minNoteDistance = score()->styleS(ST_minNoteDistance).val() * _spatium;
 
       if (staff() && staff()->useTablature()) {
@@ -1277,7 +1277,7 @@ void Chord::layout()
             // TABLATURE STAVES
             //
             StaffTypeTablature * tab = (StaffTypeTablature*)staff()->staffType();
-            double lineDist = tab->lineDistance().val();
+            qreal lineDist = tab->lineDistance().val();
             foreach(Note* note, _notes) {
                   note->layout();
                   note->setPos(0.0, _spatium * (tab->upsideDown() ? tab->lines()-note->string()-1 : note->string()) * lineDist);
@@ -1341,8 +1341,8 @@ void Chord::layout()
                   //
                   foreach(Note* note, _notes) {
                         note->layout();
-                        double x = 0.0;
-                        double y = note->line() * _spatium * .5;
+                        qreal x = 0.0;
+                        qreal y = note->line() * _spatium * .5;
                         note->setPos(x, y);
                         }
                   return;
@@ -1353,12 +1353,12 @@ void Chord::layout()
             //    - position
             //-----------------------------------------
 
-            double stepDistance = _spatium * .5;
+            qreal stepDistance = _spatium * .5;
             int stepOffset      = staff()->staffType()->stepOffset();
 
             foreach(Note* note, _notes) {
                   note->layout();
-                  double x = 0.0;
+                  qreal x = 0.0;
 
                   bool stemUp = up();
                   if (staffMove() < 0)
@@ -1385,7 +1385,7 @@ void Chord::layout()
             //    upper staff
             //---------------------------------------------------
 
-            double x  = upnote->pos().x();
+            qreal x  = upnote->pos().x();
             if ((up() && !upnote->mirror()) || (!up() && upnote->mirror()))
                   x += headWidth;
 
@@ -1399,14 +1399,14 @@ void Chord::layout()
       // COMMON TO ALL STAVES
       //
       renderPlayback();
-      double lll = -lx;
+      qreal lll = -lx;
 
       if (_arpeggio) {
-            double headHeight = upnote->headHeight();
+            qreal headHeight = upnote->headHeight();
             _arpeggio->layout();
             lll += _arpeggio->width() + _spatium * .5;
-            double y = upNote()->pos().y() - headHeight * .5;
-            double h = downNote()->pos().y() - y;
+            qreal y = upNote()->pos().y() - headHeight * .5;
+            qreal h = downNote()->pos().y() - y;
             _arpeggio->setHeight(h);
             _arpeggio->setPos(-lll, y);
 
@@ -1418,10 +1418,10 @@ void Chord::layout()
       if (_glissando)
             lll += _spatium * .5;
 
-      double rrr = 0.0;
+      qreal rrr = 0.0;
       foreach(const Note* note, _notes) {
-            double lhw = note->headWidth();
-            double rr = 0.0;
+            qreal lhw = note->headWidth();
+            qreal rr = 0.0;
             if (note->mirror()) {
                   if (up())
                         rr = lhw * 2.0;
@@ -1434,7 +1434,7 @@ void Chord::layout()
                   rr = lhw;
             if (rr > rrr)
                   rrr = rr;
-            double xx = note->pos().x() + headWidth;
+            qreal xx = note->pos().x() + headWidth;
             if (xx > dotPosX())
                   setDotPosX(xx);
             }
@@ -1465,7 +1465,7 @@ void Chord::layout()
                   }
             }
       if (_noteType != NOTE_NORMAL) {
-            double m = score()->styleD(ST_graceNoteMag);
+            qreal m = score()->styleD(ST_graceNoteMag);
             _space.rLw() *= m;
             _space.rRw() *= m;
             }
@@ -1515,8 +1515,8 @@ void Chord::layoutArpeggio2()
       if (!_arpeggio)
             return;
       Note* upnote      = upNote();
-      double headHeight = upnote->headHeight();
-      double y          = upNote()->canvasPos().y() - headHeight * .5;
+      qreal headHeight = upnote->headHeight();
+      qreal y          = upNote()->canvasPos().y() - headHeight * .5;
       int span          = _arpeggio->span();
       Note* dnote       = downNote();
       int btrack        = track() + (span - 1) * VOICES;
@@ -1524,7 +1524,7 @@ void Chord::layoutArpeggio2()
 
       if (bchord && bchord->type() == CHORD)
             dnote = static_cast<Chord*>(bchord)->downNote();
-      double h = dnote->canvasPos().y() - y;
+      qreal h = dnote->canvasPos().y() - y;
       _arpeggio->setHeight(h);
 
       QList<Note*> notes;
@@ -1712,7 +1712,7 @@ void Chord::renderArticulation(ArticulationType /*type*/)
 //   dotPosX
 //---------------------------------------------------------
 
-double Chord::dotPosX() const
+qreal Chord::dotPosX() const
       {
       return segment()->dotPosX(staffIdx());
       }
@@ -1721,7 +1721,7 @@ double Chord::dotPosX() const
 //   setDotPosX
 //---------------------------------------------------------
 
-void Chord::setDotPosX(double val)
+void Chord::setDotPosX(qreal val)
       {
       segment()->setDotPosX(staffIdx(), val);
       }

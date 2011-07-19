@@ -148,7 +148,7 @@ QRectF Image::bbox() const
 
 void Image::editDrag(const EditData& ed)
       {
-      double ratio = sz.width() / sz.height();
+      qreal ratio = sz.width() / sz.height();
       if (ed.curGrip == 0) {
             sz.setWidth(sz.width() + ed.delta.x());
             if (_lockAspectRatio)
@@ -190,6 +190,7 @@ void Image::endEdit()
       {
       }
 
+#ifdef SVG_IMAGES
 //---------------------------------------------------------
 //   SvgImage
 //---------------------------------------------------------
@@ -253,6 +254,7 @@ void SvgImage::setPath(const QString& s)
             _dirty = true;
             }
       }
+#endif
 
 //---------------------------------------------------------
 //   RasterImage
@@ -264,7 +266,7 @@ RasterImage::RasterImage(Score* s)
       }
 
 //---------------------------------------------------------
-//   SvgImage
+//   RasterImage
 //---------------------------------------------------------
 
 RasterImage::~RasterImage()
@@ -327,9 +329,9 @@ void Image::layout()
       if (autoScale() && parent() && ((parent()->type() == HBOX || parent()->type() == VBOX))) {
             if (_lockAspectRatio) {
                   QSizeF size(imageSize());
-                  double ratio = size.width() / size.height();
-                  double w = parent()->width();
-                  double h = parent()->height();
+                  qreal ratio = size.width() / size.height();
+                  qreal w = parent()->width();
+                  qreal h = parent()->height();
                   if ((w / h) < ratio) {
                         sz.setWidth(w);
                         sz.setHeight(w / ratio);

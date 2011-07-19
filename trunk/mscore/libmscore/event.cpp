@@ -299,8 +299,8 @@ int Event::tpc() const                { return d->_tpc;                 }
 void Event::setTpc(int v)             { d->_tpc = v;                    }
 const Note* Event::note() const       { return d->_note;                }
 void Event::setNote(const Note* v)    { d->_note = v;                   }
-double Event::tuning() const          { return d->_tuning;              }
-void Event::setTuning(double v)       { d->_tuning = v;                 }
+qreal Event::tuning() const          { return d->_tuning;              }
+void Event::setTuning(qreal v)       { d->_tuning = v;                 }
 bool Event::operator==(const Event& e) const { return d->operator==(*e.d);   }
 
 //---------------------------------------------------------

@@ -34,7 +34,7 @@ TremoloBar::TremoloBar(Score* s)
 
 void TremoloBar::layout()
       {
-      double _spatium = spatium();
+      qreal _spatium = spatium();
 
       if (staff() && !staff()->useTablature()) {
             setbbox(QRectF());
@@ -57,9 +57,9 @@ void TremoloBar::layout()
             }
 //      int n    = _points.size();
 //      int pt   = 0;
-//      double x = noteWidth * .5;
-//      double y = notePos.y() - _spatium;
-//      double x2, y2;
+//      qreal x = noteWidth * .5;
+//      qreal y = notePos.y() - _spatium;
+//      qreal x2, y2;
 
       QRectF bb (0, 0, _spatium*3, -_spatium * 4);
 #if 0
@@ -87,16 +87,16 @@ void TremoloBar::draw(Painter* painter) const
       painter->setJoinStyle(Qt::RoundJoin);
       painter->setBrushColor(Qt::black);
 
-      double _spatium = spatium();
+      qreal _spatium = spatium();
       const TextStyle* st = &score()->textStyle(TEXT_STYLE_BENCH);
       QFont f = st->fontPx(_spatium);
       painter->setFont(f);
 
       int n    = _points.size();
 //      int pt   = 0;
-//      double x = noteWidth;
-//      double y = -_spatium * .8;
-//      double x2, y2;
+//      qreal x = noteWidth;
+//      qreal y = -_spatium * .8;
+//      qreal x2, y2;
 
       for (int pt = 0; pt < n; ++pt) {
             if (pt == (n-1))

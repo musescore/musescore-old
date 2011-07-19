@@ -42,10 +42,10 @@ void ElementLayout::layout(Element* e) const
             o *= e->spatium();
       else
             o *= DPI;
-      double h = 0.0;
-      double w = 0.0;
+      qreal h = 0.0;
+      qreal w = 0.0;
       if (e->parent()) {
-            double pw, ph;
+            qreal pw, ph;
             if ((e->type() == MARKER || e->type() == JUMP) && e->parent()->parent()) {
                   pw = e->parent()->parent()->width();      // measure width
                   ph = e->parent()->parent()->height();
@@ -99,8 +99,8 @@ void ElementLayout::writeProperties(Xml& xml) const
             xml.tag("valign", "top");
 
       if (_xoff != 0.0 || _yoff != 0.0) {
-            double x(_xoff);
-            double y(_yoff);
+            qreal x(_xoff);
+            qreal y(_yoff);
             if (offsetType() == OFFSET_ABS) {
                   x *= INCH;
                   y *= INCH;
@@ -156,13 +156,13 @@ bool ElementLayout::readProperties(QDomElement e)
                   printf("Text::readProperties: unknown alignment: <%s>\n", qPrintable(val));
             }
       else if (tag == "xoffset") {
-            double xo = val.toDouble();
+            qreal xo = val.toDouble();
             if (offsetType() == OFFSET_ABS)
                   xo /= INCH;
             setXoff(xo);
             }
       else if (tag == "yoffset") {
-            double yo = val.toDouble();
+            qreal yo = val.toDouble();
             if (offsetType() == OFFSET_ABS)
                   yo /= INCH;
             setYoff(yo);

@@ -1170,7 +1170,7 @@ void Score::undoRemoveElement(Element* element)
 //   undoChangeTuning
 //---------------------------------------------------------
 
-void Score::undoChangeTuning(Note* n, double v)
+void Score::undoChangeTuning(Note* n, qreal v)
       {
       undo()->push(new ChangeTuning(n, v));
       }
@@ -1184,7 +1184,7 @@ void Score::undoChangeUserMirror(Note* n, DirectionH d)
 //   undoChangePageFormat
 //---------------------------------------------------------
 
-void Score::undoChangePageFormat(PageFormat* p, double v, int pageOffset)
+void Score::undoChangePageFormat(PageFormat* p, qreal v, int pageOffset)
       {
       undo()->push(new ChangePageFormat(this, p, v, pageOffset));
       }
@@ -2293,7 +2293,7 @@ void ChangePatch::flip()
 
 void ChangeTuning::flip()
       {
-      double ot = note->tuning();
+      qreal ot = note->tuning();
       note->setTuning(tuning);
       tuning = ot;
       }
@@ -2313,7 +2313,7 @@ void ChangeUserMirror::flip()
 //   ChangePageFormat
 //---------------------------------------------------------
 
-ChangePageFormat::ChangePageFormat(Score* cs, PageFormat* p, double s, int po)
+ChangePageFormat::ChangePageFormat(Score* cs, PageFormat* p, qreal s, int po)
       {
       score   = cs;
       pf      = new PageFormat(*p);
@@ -2333,7 +2333,7 @@ ChangePageFormat::~ChangePageFormat()
 void ChangePageFormat::flip()
       {
       PageFormat f = *(score->pageFormat());
-      double os    = score->spatium();
+      qreal os    = score->spatium();
       int po       = score->pageNumberOffset();
 
       *(score->pageFormat()) = *pf;
@@ -2483,7 +2483,7 @@ void AddTextStyle::redo()
 //   ChangeStretch
 //---------------------------------------------------------
 
-ChangeStretch::ChangeStretch(Measure* m, double s)
+ChangeStretch::ChangeStretch(Measure* m, qreal s)
    : measure(m), stretch(s)
       {
       }
@@ -2494,7 +2494,7 @@ ChangeStretch::ChangeStretch(Measure* m, double s)
 
 void ChangeStretch::flip()
       {
-      double oStretch = measure->userStretch();
+      qreal oStretch = measure->userStretch();
       measure->setUserStretch(stretch);
       measure->score()->setLayoutAll(true);
       stretch = oStretch;
@@ -2661,7 +2661,7 @@ ChangeMeasureProperties::ChangeMeasureProperties(
    const Fraction& _len,
    bool _bmm,
    int rc,
-   double s,
+   qreal s,
    int o,
    bool ir
    ) :
@@ -2684,7 +2684,7 @@ void ChangeMeasureProperties::flip()
       {
       bool a   = measure->breakMultiMeasureRest();
       int r    = measure->repeatCount();
-      double s = measure->userStretch();
+      qreal s = measure->userStretch();
       int o    = measure->noOffset();
       bool ir  = measure->irregular();
       Fraction _sig = measure->timesig();
@@ -2997,8 +2997,8 @@ void ChangeNoteEvents::flip()
 
 void ChangeBeamProperties::flip()
       {
-      double g1 = beam->grow1();
-      double g2 = beam->grow2();
+      qreal g1 = beam->grow1();
+      qreal g2 = beam->grow2();
       beam->setGrow1(grow1);
       beam->setGrow2(grow2);
       grow1 = g1;
@@ -3070,8 +3070,8 @@ void ChangeInstrument::flip()
 //---------------------------------------------------------
 
 ChangeBoxProperties::ChangeBoxProperties(Box* box,
-   double marginLeft, double marginTop, double marginRight, double marginBottom,
-   double height, double width)
+   qreal marginLeft, qreal marginTop, qreal marginRight, qreal marginBottom,
+   qreal height, qreal width)
       {
       _box              = box;
       _marginLeft       = marginLeft;
@@ -3089,10 +3089,10 @@ ChangeBoxProperties::ChangeBoxProperties(Box* box,
 void ChangeBoxProperties::flip()
       {
       // flip margins
-      double marginLeft       = _box->leftMargin();
-      double marginTop        = _box->topMargin();
-      double marginRight      = _box->rightMargin();
-      double marginBottom     = _box->bottomMargin();
+      qreal marginLeft       = _box->leftMargin();
+      qreal marginTop        = _box->topMargin();
+      qreal marginRight      = _box->rightMargin();
+      qreal marginBottom     = _box->bottomMargin();
 
       _box->setLeftMargin  (_marginLeft);
       _box->setRightMargin (_marginRight);
@@ -3105,7 +3105,7 @@ void ChangeBoxProperties::flip()
       _marginBottom     = marginBottom;
 
       // according to box type, flip either height or width (or none)
-      double val;
+      qreal val;
       if (_box->type() == VBOX) {
             val = _box->boxHeight().val();
             _box->setBoxHeight(Spatium(_height));

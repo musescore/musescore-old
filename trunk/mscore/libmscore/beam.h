@@ -56,8 +56,8 @@ class Beam : public Element {
       QList<QLineF*> beamSegments;
       Direction _direction;
       int _up;                // -1: unknown  0: down   1: up
-      double _grow1;          // define "feather" beams
-      double _grow2;
+      qreal _grow1;          // define "feather" beams
+      qreal _grow2;
 
       QList<BeamFragment*> fragments;     // beam splits across systems
 
@@ -108,7 +108,7 @@ class Beam : public Element {
       void add(ChordRest* a);
       void remove(ChordRest* a);
       void writeMusicXml(Xml& xml, ChordRest* cr) const;
-      virtual void move(double, double);
+      virtual void move(qreal, qreal);
       virtual void draw(Painter*) const;
       int up() const                      { return _up; }
       void setUp(int v)                   { _up = v; }
@@ -122,10 +122,10 @@ class Beam : public Element {
       virtual bool acceptDrop(MuseScoreView*, const QPointF&, int, int) const;
       virtual Element* drop(const DropData&);
 
-      double grow1() const      { return _grow1; }
-      double grow2() const      { return _grow2; }
-      void setGrow1(double val) { _grow1 = val; }
-      void setGrow2(double val) { _grow2 = val; }
+      qreal grow1() const      { return _grow1; }
+      qreal grow2() const      { return _grow2; }
+      void setGrow1(qreal val) { _grow1 = val; }
+      void setGrow2(qreal val) { _grow2 = val; }
       };
 
 extern bool endBeam(const Fraction&, ChordRest* cr, ChordRest* prevCr);

@@ -55,19 +55,19 @@ void ShadowNote::draw(Painter* painter) const
 
       sym->draw(painter, magS());
 
-      double ms = spatium();
+      qreal ms = spatium();
 
-      double x1 = sym->width(magS())*.5 - ms;
-      double x2 = x1 + 2 * ms;
+      qreal x1 = sym->width(magS())*.5 - ms;
+      qreal x2 = x1 + 2 * ms;
 
       ms *= .5;
       if (_line < 100 && _line > -100) {
             for (int i = -2; i >= _line; i -= 2) {
-                  double y = ms * (i - _line);
+                  qreal y = ms * (i - _line);
                   painter->drawLine(x1, y, x2, y);
                   }
             for (int i = 10; i <= _line; i += 2) {
-                  double y = ms * (i - _line);
+                  qreal y = ms * (i - _line);
                   painter->drawLine(x1, y, x2, y);
                   }
             }
@@ -83,9 +83,9 @@ QRectF ShadowNote::bbox() const
       if (sym == 0)
             return QRectF();
       QRectF b = sym->bbox(magS());
-      double _spatium = spatium();
-      double x  = b.width()/2 - _spatium;
-      double lw = point(score()->styleS(ST_ledgerLineWidth));
+      qreal _spatium = spatium();
+      qreal x  = b.width()/2 - _spatium;
+      qreal lw = point(score()->styleS(ST_ledgerLineWidth));
 
       if (_line < 100 && _line > -100) {
             QRectF r(0, -lw/2.0, 2 * _spatium, lw);

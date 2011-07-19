@@ -190,11 +190,11 @@ void Lyrics::draw(Painter* painter) const
 
 QPointF Lyrics::canvasPos() const
       {
-      double xp = x();
+      qreal xp = x();
       for (Element* e = parent(); e; e = e->parent())
             xp += e->x();
       System* system = measure()->system();
-      double yp = y();
+      qreal yp = y();
 	  if(system)
 	      yp = yp + system->staff(staffIdx())->y() + system->y();
       return QPointF(xp, yp);
@@ -209,8 +209,8 @@ void Lyrics::layout()
       if (!styled())
             _textStyle = (_no % 2) ? TEXT_STYLE_LYRIC2 : TEXT_STYLE_LYRIC1;
       Text::layout();
-      double lh             = lineSpacing() * score()->styleD(ST_lyricsLineHeight);
-      double noteHeadWidth2 = symbols[score()->symIdx()][quartheadSym].width(magS()) * .5;
+      qreal lh             = lineSpacing() * score()->styleD(ST_lyricsLineHeight);
+      qreal noteHeadWidth2 = symbols[score()->symIdx()][quartheadSym].width(magS()) * .5;
 
       System* sys = measure()->system();
       if (sys == 0) {
@@ -220,9 +220,9 @@ void Lyrics::layout()
       const QList<Lyrics*>* ll = &(chordRest()->lyricsList());
 
       int line       = ll->indexOf(this);
-      double y       = lh * line + point(score()->styleS(ST_lyricsDistance))
+      qreal y       = lh * line + point(score()->styleS(ST_lyricsDistance))
                        + sys->staff(staffIdx())->bbox().height();
-      double x;
+      qreal x;
       //
       // left align if syllable has a number
       //

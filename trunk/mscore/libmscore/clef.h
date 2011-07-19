@@ -93,7 +93,7 @@ class Clef : public Element {
       virtual void draw(Painter*) const;
       virtual void read(QDomElement);
       virtual void write(Xml&) const;
-      virtual void add(Element* e, double x, double y);
+      virtual void add(Element* e, qreal x, qreal y);
 
       virtual Space space() const      { return Space(0.0, bbox().x() * 2.0 + width()); }
 

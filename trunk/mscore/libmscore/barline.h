@@ -28,7 +28,7 @@ class BarLine : public Element {
       int _span;
       qreal yoff;       // used during drag edit to extend y2
 
-      void getY(double*, double*) const;
+      void getY(qreal*, qreal*) const;
       ElementList _el;        ///< fermata or other articulations
 
    public:

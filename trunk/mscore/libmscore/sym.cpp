@@ -478,7 +478,7 @@ void Sym::genGlyphs()
 //   Sym
 //---------------------------------------------------------
 
-Sym::Sym(const char* name, int c, int fid, double ax, double ay)
+Sym::Sym(const char* name, int c, int fid, qreal ax, qreal ay)
    : _code(c), fontId(fid), _name(name), _font(fontId2font(fid)), _attach(ax * DPI/PPI, ay * DPI/PPI)
       {
       QFontMetricsF fm(_font);
@@ -494,7 +494,7 @@ Sym::Sym(const char* name, int c, int fid, double ax, double ay)
 Sym::Sym(const char* name, int c, int fid, const QPointF& a, const QRectF& b)
    : _code(c), fontId(fid), _name(name), _font(fontId2font(fontId))
       {
-      double ds = DPI/PPI;
+      qreal ds = DPI/PPI;
       _bbox.setRect(b.x() * ds, b.y() * ds, b.width() * ds, b.height() * ds);
       _attach = a * ds;
       w = _bbox.width();
@@ -507,7 +507,7 @@ Sym::Sym(const char* name, int c, int fid, const QPointF& a, const QRectF& b)
 //   bbox
 //---------------------------------------------------------
 
-const QRectF Sym::bbox(double mag) const
+const QRectF Sym::bbox(qreal mag) const
       {
       return QRectF(_bbox.x() * mag, _bbox.y() * mag, _bbox.width() * mag, _bbox.height() * mag);
       }
@@ -516,9 +516,9 @@ const QRectF Sym::bbox(double mag) const
 //   draw
 //---------------------------------------------------------
 
-void Sym::draw(Painter* painter, double mag, qreal x, qreal y) const
+void Sym::draw(Painter* painter, qreal mag, qreal x, qreal y) const
       {
-      double imag = 1.0 / mag;
+      qreal imag = 1.0 / mag;
       painter->scale(mag);
 #ifdef USE_GLYPHS
       painter->drawGlyphRun(QPointF(x * imag, y * imag), glyphs);
@@ -549,9 +549,9 @@ QString Sym::toString() const
 //   draw
 //---------------------------------------------------------
 
-void Sym::draw(Painter* painter, double mag, qreal x, qreal y, int n) const
+void Sym::draw(Painter* painter, qreal mag, qreal x, qreal y, int n) const
       {
-      double imag = 1.0 / mag;
+      qreal imag = 1.0 / mag;
       painter->scale(mag);
       painter->setFont(_font);
       painter->drawText(x * imag, y * imag, QString(n, _code));
@@ -564,9 +564,9 @@ void Sym::draw(Painter* painter, double mag, qreal x, qreal y, int n) const
 //    for QDocument->setHtml()
 //---------------------------------------------------------
 
-QString symToHtml(const Sym& s, int leftMargin, const TextStyle* ts, double _spatium)
+QString symToHtml(const Sym& s, int leftMargin, const TextStyle* ts, qreal _spatium)
       {
-      double size;
+      qreal size;
       if (ts) {
             size = ts->fontPx(_spatium).pixelSize();
             }
@@ -598,7 +598,7 @@ QString symToHtml(const Sym& s, int leftMargin, const TextStyle* ts, double _spa
 QString symToHtml(const Sym& s1, const Sym& s2, int leftMargin)
       {
       QFont f        = s1.font();
-      double size    = s1.font().pixelSize() * 72.0 / DPI;
+      qreal size    = s1.font().pixelSize() * 72.0 / DPI;
       QString family = f.family();
 
       return QString(

@@ -110,8 +110,8 @@ QRectF Lasso::bbox() const
       {
       QRectF bb(_rect);
       if (view) {
-            double dx = 1.5 / view->matrix().m11();
-            double dy = 1.5 / view->matrix().m22();
+            qreal dx = 1.5 / view->matrix().m11();
+            qreal dy = 1.5 / view->matrix().m22();
             for (int i = 0; i < view->gripCount(); ++i)
                   bb |= view->getGrip(i).adjusted(-dx, -dy, dx, dy);
             }

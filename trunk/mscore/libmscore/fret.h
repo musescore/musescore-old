@@ -33,10 +33,10 @@ class FretDiagram : public Element {
       char* _marker;
       char* _fingering;
 
-      double lw1;
-      double lw2;             // top line
-      double stringDist;
-      double fretDist;
+      qreal lw1;
+      qreal lw2;             // top line
+      qreal stringDist;
+      qreal fretDist;
       QFont font;
 
    public:

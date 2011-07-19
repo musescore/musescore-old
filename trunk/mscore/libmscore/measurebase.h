@@ -35,11 +35,11 @@ class LayoutBreak;
 */
 
 struct MeasureWidth {
-      double stretchable;
-      double nonStretchable;
+      qreal stretchable;
+      qreal nonStretchable;
 
       MeasureWidth() {}
-      MeasureWidth(double a, double b) {
+      MeasureWidth(qreal a, qreal b) {
             stretchable = a;
             nonStretchable = b;
             }
@@ -104,8 +104,8 @@ class MeasureBase : public Element {
 
       virtual void moveTicks(int diff)       { setTick(tick() + diff); }
 
-      virtual double distanceUp(int) const        { return 0.0; }
-      virtual double distanceDown(int) const      { return 0.0; }
+      virtual qreal distanceUp(int) const        { return 0.0; }
+      virtual qreal distanceDown(int) const      { return 0.0; }
       virtual Spatium userDistanceUp(int) const   { return Spatium(0.0); }
       virtual Spatium userDistanceDown(int) const { return Spatium(0.0); }
 
@@ -113,12 +113,12 @@ class MeasureBase : public Element {
       virtual void remove(Element*);
       void setDirty(bool val = true)              { _dirty = val; }
       bool dirty() const                          { return _dirty; }
-      virtual void spatiumChanged(double oldValue, double newValue);
+      virtual void spatiumChanged(qreal oldValue, qreal newValue);
 
       int tick() const                       { return _tick;         }
       void setTick(int t)                    { _tick = t;            }
 
-      double pause() const;
+      qreal pause() const;
       };
 
 #endif

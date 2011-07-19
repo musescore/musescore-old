@@ -42,9 +42,9 @@ void Tremolo::draw(Painter* painter) const
       painter->setBrushColor(painter->penColor());
       painter->drawPath(path);
       if ((parent() == 0) && !twoNotes()) {
-            double x = 0.0; // bbox().width() * .25;
+            qreal x = 0.0; // bbox().width() * .25;
             painter->setLineWidth(point(score()->styleS(ST_stemWidth)));
-            double _spatium = spatium();
+            qreal _spatium = spatium();
             painter->drawLine(x, -_spatium*.5, x, bbox().height() + _spatium);
             }
       }
@@ -55,11 +55,11 @@ void Tremolo::draw(Painter* painter) const
 
 void Tremolo::layout()
       {
-      double sp  = spatium();
-      double w   = sp * 1.2;
-      double h   = sp * .8;
-      double lw  = sp * .35;
-      double d   = sp * 0.8;
+      qreal sp  = spatium();
+      qreal w   = sp * 1.2;
+      qreal h   = sp * .8;
+      qreal lw  = sp * .35;
+      qreal d   = sp * 0.8;
       path       = QPainterPath();
 
       qreal y   = 0.0;
@@ -117,12 +117,12 @@ void Tremolo::layout()
                   }
             else {
                   bool up  = _chord1->up();
-                  double d = _chord1->downNote()->y() - _chord1->upNote()->y();
+                  qreal d = _chord1->downNote()->y() - _chord1->upNote()->y();
                   if (_chord1->beam()) {
-                        double bd  = score()->styleD(ST_beamDistance);
-                        double bw = score()->styleS(ST_beamWidth).val() * sp;
+                        qreal bd  = score()->styleD(ST_beamDistance);
+                        qreal bw = score()->styleS(ST_beamWidth).val() * sp;
                         int n = _chord1->durationType().hooks();
-                        double beamHeight = bw * n + bw * bd * (n-1);
+                        qreal beamHeight = bw * n + bw * bd * (n-1);
                         if (up)
                               h += beamHeight;
                         else
@@ -156,8 +156,8 @@ void Tremolo::layout()
       _chord2->setTremolo(this);
       _chord2->setTremoloChordType(TremoloSecondNote);
 
-      double x2     = _chord2->stemPos(_chord2->up(), true).x();
-      double x1     = _chord1->stemPos(_chord1->up(), true).x();
+      qreal x2     = _chord2->stemPos(_chord2->up(), true).x();
+      qreal x1     = _chord1->stemPos(_chord1->up(), true).x();
       x             = x1 - _chord1->canvasPos().x() + (x2 - x1) * .5;
       setPos(x, y);
       }

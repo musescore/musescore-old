@@ -540,7 +540,7 @@ void Score::fixTicks()
                               if (!e)
                                     continue;
                               ChordRest* cr = static_cast<ChordRest*>(e);
-                              double stretch = -1.0;
+                              qreal stretch = -1.0;
                               foreach(Articulation* a, *cr->getArticulations()) {
                                     switch(a->subtype()) {
                                           case UshortfermataSym:
@@ -564,8 +564,8 @@ void Score::fixTicks()
                                           }
                                     }
                               if (stretch > 0.0) {
-                                    double otempo = tempomap()->tempo(cr->tick());
-                                    double ntempo = otempo / stretch;
+                                    qreal otempo = tempomap()->tempo(cr->tick());
+                                    qreal ntempo = otempo / stretch;
                                     tempomap()->addTempo(cr->tick(), ntempo);
                                     tempomap()->addTempo(cr->tick() + cr->actualTicks(), otempo);
                                     break;      // do not consider more staves/voices
@@ -614,8 +614,8 @@ MeasureBase* Score::pos2measure(const QPointF& p, int* rst, int* pitch,
             return 0;
 
       System* s = m->system();
-//      double sy1 = 0;
-      double y   = p.y() - s->canvasPos().y();
+//      qreal sy1 = 0;
+      qreal y   = p.y() - s->canvasPos().y();
 
       int i;
       for (i = 0; i < nstaves();) {
@@ -631,10 +631,10 @@ MeasureBase* Score::pos2measure(const QPointF& p, int* rst, int* pitch,
                         break;
                   }
 
-            double sy2;
+            qreal sy2;
             if (ni != nstaves()) {
                   SysStaff* nstaff = s->staff(ni);
-                  double s1y2 = staff->bbox().y() + staff->bbox().height();
+                  qreal s1y2 = staff->bbox().y() + staff->bbox().height();
                   sy2 = s1y2 + (nstaff->bbox().y() - s1y2)/2;
                   }
             else
@@ -1026,9 +1026,9 @@ QList<System*> Score::searchSystem(const QPointF& pos) const
       Page* page = searchPage(pos);
       if (page == 0)
             return systems;
-      double y = pos.y() - page->pos().y();  // transform to page relative
+      qreal y = pos.y() - page->pos().y();  // transform to page relative
       const QList<System*>* sl = page->systems();
-      double y2;
+      qreal y2;
       int n = sl->size();
       for (int i = 0; i < n; ++i) {
             System* s = sl->at(i);
@@ -1042,7 +1042,7 @@ QList<System*> Score::searchSystem(const QPointF& pos) const
             if ((ii == n) || (ns == 0))
                   y2 = page->height();
             else  {
-                  double sy2 = s->y() + s->bbox().height();
+                  qreal sy2 = s->y() + s->bbox().height();
                   y2         = sy2 + (ns->y() - sy2) * .5;
                   }
             if (y < y2) {
@@ -1069,7 +1069,7 @@ Measure* Score::searchMeasure(const QPointF& p) const
             return 0;
 
       foreach(System* system, systems) {
-            double x = p.x() - system->canvasPos().x();
+            qreal x = p.x() - system->canvasPos().x();
             foreach(MeasureBase* mb, system->measures()) {
                   if (mb->type() != MEASURE)
                         continue;
@@ -1155,17 +1155,17 @@ bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
       //
       //    search staff
       //
-//      double sy1         = 0;
+//      qreal sy1         = 0;
       pos->staffIdx      = 0;
       SysStaff* sstaff   = 0;
       System* system     = pos->measure->system();
-      double y           = p.y() - system->canvasPos().y();
+      qreal y           = p.y() - system->canvasPos().y();
       for (; pos->staffIdx < nstaves(); ++pos->staffIdx) {
-            double sy2;
+            qreal sy2;
             SysStaff* ss = system->staff(pos->staffIdx);
             if ((pos->staffIdx+1) != nstaves()) {
                   SysStaff* nstaff = system->staff(pos->staffIdx+1);
-                  double s1y2 = ss->bbox().y() + ss->bbox().height();
+                  qreal s1y2 = ss->bbox().y() + ss->bbox().height();
                   sy2         = s1y2 + (nstaff->bbox().y() - s1y2) * .5;
                   }
             else
@@ -1183,7 +1183,7 @@ bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
       //    search segment
       //
       QPointF pppp(p - pos->measure->canvasPos());
-      double x         = pppp.x();
+      qreal x         = pppp.x();
       Segment* segment = 0;
       pos->segment     = 0;
 
@@ -1196,10 +1196,10 @@ bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
                   break;
             Segment* ns = getNextValidInputSegment(segment->next(SegChordRest), track, voice);
 
-            double x1 = segment->x();
-            double x2;
+            qreal x1 = segment->x();
+            qreal x2;
 //            int ntick;
-            double d;
+            qreal d;
             if (ns) {
                   x2    = ns->x();
 //                  ntick = ns->tick();
@@ -1227,8 +1227,8 @@ bool Score::getPosition(Position* pos, const QPointF& p, int voice) const
       // TODO: restrict to reasonable values (pitch 0-127)
       //
       Staff* s    = staff(pos->staffIdx);
-      double mag = staff(pos->staffIdx)->mag();
-      double lineDist = (s->useTablature() ? 1.5 * spatium() : spatium() * .5) * mag;
+      qreal mag = staff(pos->staffIdx)->mag();
+      qreal lineDist = (s->useTablature() ? 1.5 * spatium() : spatium() * .5) * mag;
 
       pos->line  = lrint((pppp.y() - sstaff->bbox().y()) / lineDist);
       if (s->useTablature()) {
@@ -1342,7 +1342,7 @@ void Score::moveBracket(int staffIdx, int srcCol, int dstCol)
 
 static void spatiumHasChanged(void* data, Element* e)
       {
-      double* val = (double*)data;
+      qreal* val = (qreal*)data;
       e->spatiumChanged(val[0], val[1]);
       }
 
@@ -1350,9 +1350,9 @@ static void spatiumHasChanged(void* data, Element* e)
 //   spatiumChanged
 //---------------------------------------------------------
 
-void Score::spatiumChanged(double oldValue, double newValue)
+void Score::spatiumChanged(qreal oldValue, qreal newValue)
       {
-      double data[2];
+      qreal data[2];
       data[0] = oldValue;
       data[1] = newValue;
       scanElements(data, spatiumHasChanged);
@@ -1643,7 +1643,7 @@ Segment* Score::lastSegment() const
 //   utick2utime
 //---------------------------------------------------------
 
-double Score::utick2utime(int tick) const
+qreal Score::utick2utime(int tick) const
       {
       return repeatList()->utick2utime(tick);
       }
@@ -1652,7 +1652,7 @@ double Score::utick2utime(int tick) const
 //   utime2utick
 //---------------------------------------------------------
 
-int Score::utime2utick(double utime) const
+int Score::utime2utick(qreal utime) const
       {
       return repeatList()->utime2utick(utime);
       }

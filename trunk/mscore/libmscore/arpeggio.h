@@ -29,7 +29,7 @@ enum { ARP_NORMAL, ARP_UP, ARP_DOWN, ARP_BRACKET};
 class Arpeggio : public Element {
       Spatium _userLen1;
       Spatium _userLen2;
-      double _height;
+      qreal _height;
       int _span;              // spanning staves
 
       virtual QLineF dragAnchor() const;
@@ -52,7 +52,7 @@ class Arpeggio : public Element {
       int span() const      { return _span; }
       void setSpan(int val) { _span = val; }
 
-      void setHeight(double);
+      void setHeight(qreal);
       };
 
 #endif

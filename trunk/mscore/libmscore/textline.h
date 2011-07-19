@@ -48,7 +48,7 @@ class TextLineSegment : public LineSegment {
       Text* text() const { return _text; }
       void clearText();
 
-      virtual void spatiumChanged(double /*oldValue*/, double /*newValue*/);
+      virtual void spatiumChanged(qreal /*oldValue*/, qreal /*newValue*/);
       };
 
 enum HookType { HOOK_90, HOOK_45 };
@@ -72,7 +72,7 @@ class TextLine : public SLine {
       QPointF _beginSymbolOffset, _continueSymbolOffset, _endSymbolOffset;
 
       int _mxmlOff2;
-      double _sp;       // cached value from last spatiumChanged() call
+      qreal _sp;       // cached value from last spatiumChanged() call
 
    protected:
       Text* _beginText;
@@ -140,7 +140,7 @@ class TextLine : public SLine {
       void setEndSymbolOffset(QPointF v)      { _endSymbolOffset = v;         }
       void setMxmlOff2(int v)                 { _mxmlOff2 = v;                }
       int mxmlOff2() const                    { return _mxmlOff2;             }
-      virtual void spatiumChanged(double /*oldValue*/, double /*newValue*/);
+      virtual void spatiumChanged(qreal /*oldValue*/, qreal /*newValue*/);
       };
 
 #endif

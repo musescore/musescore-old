@@ -288,7 +288,7 @@ void Accidental::layout()
       {
       el.clear();
 
-      double m = magS();
+      qreal m = magS();
       QRectF r;
 
       QPointF pos;
@@ -306,7 +306,7 @@ void Accidental::layout()
       pos += symbols[score()->symIdx()][s].attach(m);
 
       if (_hasBracket) {
-            double x = pos.x();     // symbols[s].width(m) + symbols[s].bbox(m).x();
+            qreal x = pos.x();     // symbols[s].width(m) + symbols[s].bbox(m).x();
             SymElement e(rightparenSym, x);
             el.append(e);
             r |= symbols[score()->symIdx()][rightparenSym].bbox(m).translated(x, 0.0);
@@ -372,7 +372,7 @@ AccidentalType Accidental::name2subtype(const QString& tag)
 
 void Accidental::draw(Painter* painter) const
       {
-      double m = magS();
+      qreal m = magS();
       if (_small)
             m *= score()->styleD(ST_smallNoteMag);
       foreach(const SymElement& e, el)

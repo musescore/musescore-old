@@ -103,39 +103,39 @@ class Text : public Element {
 
       virtual void resetMode();
 
-      double frameWidth() const;
-      double paddingWidth() const;
+      qreal frameWidth() const;
+      qreal paddingWidth() const;
       QColor frameColor() const;
       int frameRound() const;
       bool circle() const;
       bool sizeIsSpatiumDependent() const;
       void setSizeIsSpatiumDependent(int v);
-      void setFrameWidth(double val);
-      void setPaddingWidth(double val);
+      void setFrameWidth(qreal val);
+      void setPaddingWidth(qreal val);
       void setFrameColor(const QColor& val);
       void setFrameRound(int val);
       void setCircle(bool val);
       bool hasFrame() const;
       void setHasFrame(bool);
-      double xoff() const;
-      double yoff() const;
+      qreal xoff() const;
+      qreal yoff() const;
       Align align() const;
       OffsetType offsetType() const;
       QPointF reloff() const;
       void setAlign(Align val);
-      void setXoff(double val);
-      void setYoff(double val);
+      void setXoff(qreal val);
+      void setYoff(qreal val);
       void setOffsetType(OffsetType val);
-      void setRxoff(double v);
-      void setRyoff(double v);
-      double rxoff() const;
-      double ryoff() const;
+      void setRxoff(qreal v);
+      void setRyoff(qreal v);
+      qreal rxoff() const;
+      qreal ryoff() const;
       void setReloff(const QPointF&);
       QFont font() const;
       void setFont(const QFont&);
       void setItalic(bool);
       void setBold(bool);
-      void setSize(double);
+      void setSize(qreal);
 
       virtual void draw(Painter*) const;
 
@@ -151,11 +151,11 @@ class Text : public Element {
       void writeProperties(Xml& xml, bool writeText = true) const;
       bool readProperties(QDomElement node);
       virtual void layout();
-      virtual void layout(double width, double x, double y);
+      virtual void layout(qreal width, qreal x, qreal y);
       virtual QPainterPath shape() const;
       virtual bool mousePress(const QPointF&, QMouseEvent* ev);
-      double lineSpacing() const;
-      double lineHeight() const;
+      qreal lineSpacing() const;
+      qreal lineHeight() const;
       void moveCursorToEnd();
       void moveCursor(int val);
 
@@ -168,7 +168,7 @@ class Text : public Element {
       bool replaceSpecialChars();
       QTextCursor* getCursor() const { return cursor; }
 
-      virtual void spatiumChanged(double oldValue, double newValue);
+      virtual void spatiumChanged(qreal oldValue, qreal newValue);
 
       virtual void setTextStyle(TextStyleType);
       TextStyleType textStyle() const        { return _textStyle; }

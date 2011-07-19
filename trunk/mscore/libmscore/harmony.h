@@ -25,16 +25,16 @@ struct ChordDescription;
 struct TextSegment {
       QFont font;
       QString text;
-      double x, y;
+      qreal x, y;
       bool select;
 
-      double width() const;
+      qreal width() const;
       QRectF boundingRect() const;
 
       TextSegment()                { select = false; x = y = 0.0; }
-      TextSegment(const QFont& f, double _x, double _y) : font(f), x(_x), y(_y), select(false) {}
-      TextSegment(const QString&, const QFont&, double x, double y);
-      void set(const QString&, const QFont&, double x, double y);
+      TextSegment(const QFont& f, qreal _x, qreal _y) : font(f), x(_x), y(_y), select(false) {}
+      TextSegment(const QString&, const QFont&, qreal x, qreal y);
+      void set(const QString&, const QFont&, qreal x, qreal y);
       void setText(const QString& t)      { text = t; }
       };
 
@@ -70,7 +70,7 @@ class Harmony : public Text {
       QList<TextSegment*> textList;       // rendered chord
 
       virtual void draw(Painter*) const;
-      void render(const QList<RenderAction>& renderList, double&, double&, int tpc);
+      void render(const QList<RenderAction>& renderList, qreal&, qreal&, int tpc);
 
    public:
       Harmony(Score*);
@@ -123,7 +123,7 @@ class Harmony : public Text {
 
       const ChordDescription* fromXml(const QString& s,  const QList<HDegree>&);
       const ChordDescription* fromXml(const QString& s);
-      virtual void spatiumChanged(double oldValue, double newValue);
+      virtual void spatiumChanged(qreal oldValue, qreal newValue);
       virtual QLineF dragAnchor() const;
       void setHarmony(const QString& s);
       virtual QPainterPath shape() const;

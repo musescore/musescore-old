@@ -182,8 +182,8 @@ class Event {
       void setTpc(int v);
       const Note* note() const;
       void setNote(const Note* v);
-      double tuning() const;
-      void setTuning(double v);
+      qreal tuning() const;
+      void setTuning(qreal v);
       };
 
 //---------------------------------------------------------

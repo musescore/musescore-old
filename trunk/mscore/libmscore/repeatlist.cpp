@@ -120,12 +120,12 @@ void RepeatList::update()
       const AL::TempoMap* tl = _score->tempomap();
 
       int utick = 0;
-      double t  = 0;
+      qreal t  = 0;
 
       foreach(RepeatSegment* s, *this) {
             s->utick      = utick;
             s->utime      = t;
-            double ct     = tl->tick2time(s->tick);
+            qreal ct     = tl->tick2time(s->tick);
             s->timeOffset = t - ct;
             utick        += s->len;
             t            += tl->tick2time(s->tick + s->len) - ct;
@@ -170,14 +170,14 @@ int RepeatList::tick2utick(int tick) const
 //   utick2utime
 //---------------------------------------------------------
 
-double RepeatList::utick2utime(int tick) const
+qreal RepeatList::utick2utime(int tick) const
       {
       unsigned n = size();
       unsigned ii = (idx1 < n) && (tick >= at(idx1)->utick) ? idx1 : 0;
       for (unsigned i = ii; i < n; ++i) {
             if ((tick >= at(i)->utick) && ((i + 1 == n) || (tick < at(i+1)->utick))) {
                   int t     = tick - (at(i)->utick - at(i)->tick);
-                  double tt = _score->tempomap()->tick2time(t) + at(i)->timeOffset;
+                  qreal tt = _score->tempomap()->tick2time(t) + at(i)->timeOffset;
                   return tt;
                   }
             }
@@ -188,7 +188,7 @@ double RepeatList::utick2utime(int tick) const
 //   utime2utick
 //---------------------------------------------------------
 
-int RepeatList::utime2utick(double t) const
+int RepeatList::utime2utick(qreal t) const
       {
       unsigned n = size();
       unsigned ii = (idx2 < n) && (t >= at(idx2)->utime) ? idx2 : 0;

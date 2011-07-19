@@ -52,11 +52,11 @@ QPointF BarLine::canvasPos() const
       {
       if (parent() == 0)
             return pos();
-      double xp = x();
+      qreal xp = x();
       for (Element* e = parent(); e; e = e->parent())
             xp += e->x();
       System* system = measure()->system();
-      double yp = y();
+      qreal yp = y();
       if (system)
             yp += system->staff(staffIdx())->y() + system->y();
       return QPointF(xp, yp);
@@ -66,7 +66,7 @@ QPointF BarLine::canvasPos() const
 //   getY
 //---------------------------------------------------------
 
-void BarLine::getY(double* y1, double* y2) const
+void BarLine::getY(qreal* y1, qreal* y2) const
       {
       if (parent() && parent()->type() == SEGMENT) {
             int staffIdx1    = staffIdx();
@@ -77,7 +77,7 @@ void BarLine::getY(double* y1, double* y2) const
             StaffLines* l1   = measure->staffLines(staffIdx1);
             StaffLines* l2   = measure->staffLines(staffIdx2);
 
-            double yp;
+            qreal yp;
             if (system)
                   yp = system->staff(staffIdx())->y();
             else
@@ -100,15 +100,15 @@ void BarLine::getY(double* y1, double* y2) const
 
 void BarLine::draw(Painter* painter) const
       {
-      double lw = point(score()->styleS(ST_barWidth));
-      double y1, y2;
+      qreal lw = point(score()->styleS(ST_barWidth));
+      qreal y1, y2;
       getY(&y1, &y2);
 
       painter->setLineWidth(lw);
       painter->setCapStyle(Qt::FlatCap);
 
-      double mags = magS();
-      double ld   = spatium();       // actual line distance
+      qreal mags = magS();
+      qreal ld   = spatium();       // actual line distance
 
       switch(subtype()) {
             case BROKEN_BAR:
@@ -121,12 +121,12 @@ void BarLine::draw(Painter* painter) const
 
             case END_BAR:
                   {
-                  double lw2 = point(score()->styleS(ST_endBarWidth));
-                  double d   = point(score()->styleS(ST_endBarDistance));
+                  qreal lw2 = point(score()->styleS(ST_endBarWidth));
+                  qreal d   = point(score()->styleS(ST_endBarDistance));
 
                   painter->drawLine(lw * .5, y1, lw * .5, y2);
                   painter->setLineWidth(lw2);
-                  double x = d + lw2 * .5 + lw;
+                  qreal x = d + lw2 * .5 + lw;
                   painter->drawLine(x, y1, x, y2);
                   }
                   break;
@@ -134,10 +134,10 @@ void BarLine::draw(Painter* painter) const
             case DOUBLE_BAR:
                   {
                   lw      = point(score()->styleS(ST_doubleBarWidth));
-                  double d = point(score()->styleS(ST_doubleBarDistance));
+                  qreal d = point(score()->styleS(ST_doubleBarDistance));
 
                   painter->setLineWidth(lw);
-                  double x = lw * .5;
+                  qreal x = lw * .5;
                   painter->drawLine(x, y1, x, y2);
                   x += d + lw;
                   painter->drawLine(x, y1, x, y2);
@@ -146,21 +146,21 @@ void BarLine::draw(Painter* painter) const
 
             case START_REPEAT:
                   {
-                  double lw2 = point(score()->styleS(ST_endBarWidth));
-                  double d1  = point(score()->styleS(ST_endBarDistance));
+                  qreal lw2 = point(score()->styleS(ST_endBarWidth));
+                  qreal d1  = point(score()->styleS(ST_endBarDistance));
 
                   const Sym& dotsym = symbols[score()->symIdx()][dotSym];
 
-                  double x2   =  lw2 * .5;                               // thick line (lw2)
-                  double x1   =  lw2 + d1 + lw * .5;                     // thin line (lw)
-                  double x0   =  lw2 + d1 + lw + d1;                     // dot position
+                  qreal x2   =  lw2 * .5;                               // thick line (lw2)
+                  qreal x1   =  lw2 + d1 + lw * .5;                     // thin line (lw)
+                  qreal x0   =  lw2 + d1 + lw + d1;                     // dot position
 
                   if (parent() == 0) {    // for use in palette
                         dotsym.draw(painter, mags, x0, 1.5 * ld);
                         dotsym.draw(painter, mags, x0, 2.5 * ld);
                         }
                   else {
-                        double doty1, doty2;
+                        qreal doty1, doty2;
                         if (staff()->useTablature()) {
                               switch(staff()->lines()) {
                                     case 4:
@@ -181,10 +181,10 @@ void BarLine::draw(Painter* painter) const
                         Segment* segment = (Segment*)parent();
                         Measure* measure = segment->measure();
                         System* system   = measure->system();
-                        double yp = system->staff(staffIdx())->y();
+                        qreal yp = system->staff(staffIdx())->y();
                         for (int i = 0; i < _span; ++i) {
                               StaffLines* l2 = measure->staffLines(staffIdx() + i);
-                              double yy = l2->y2() - yp;
+                              qreal yy = l2->y2() - yp;
 
                               dotsym.draw(painter, mags, x0, yy - doty1 * ld);
                               dotsym.draw(painter, mags, x0, yy - doty2 * ld);
@@ -205,19 +205,19 @@ void BarLine::draw(Painter* painter) const
 
             case END_REPEAT:
                   {
-                  double lw2  = point(score()->styleS(ST_endBarWidth));
-                  double d1   = point(score()->styleS(ST_endBarDistance));
+                  qreal lw2  = point(score()->styleS(ST_endBarWidth));
+                  qreal d1   = point(score()->styleS(ST_endBarDistance));
                   const Sym& dotsym = symbols[score()->symIdx()][dotSym];
-                  double dotw = dotsym.width(mags);
-                  double x1   =  dotw + d1 + lw * .5;
-                  double x2   =  dotw + d1 + lw + d1 + lw2 * .5;
+                  qreal dotw = dotsym.width(mags);
+                  qreal x1   =  dotw + d1 + lw * .5;
+                  qreal x2   =  dotw + d1 + lw + d1 + lw2 * .5;
 
                   if (parent() == 0) {    // for use in palette
                         dotsym.draw(painter, mags, 0.0, 1.5 * ld);
                         dotsym.draw(painter, mags, 0.0, 2.5 * ld);
                         }
                   else {
-                        double doty1, doty2;
+                        qreal doty1, doty2;
                         if (staff()->useTablature()) {
                               switch(staff()->lines()) {
                                     case 4:
@@ -238,10 +238,10 @@ void BarLine::draw(Painter* painter) const
                         Segment* segment = (Segment*)parent();
                         Measure* measure = segment->measure();
                         System* system   = measure->system();
-                        double yp = system->staff(staffIdx())->y();
+                        qreal yp = system->staff(staffIdx())->y();
                         for (int i = 0; i < _span; ++i) {
                               StaffLines* l2 = measure->staffLines(staffIdx() + i);
-                              double yy = l2->y2() - yp;
+                              qreal yy = l2->y2() - yp;
                               dotsym.draw(painter, mags, 0.0, yy - doty1 * ld);
                               dotsym.draw(painter, mags, 0.0, yy - doty2 * ld);
                               }
@@ -251,7 +251,7 @@ void BarLine::draw(Painter* painter) const
                   painter->setLineWidth(lw2);
                   painter->drawLine(x2, y1, x2, y2);
                   if (score()->styleB(ST_repeatBarTips)) {
-                        double x = x2 + lw2 * .5;
+                        qreal x = x2 + lw2 * .5;
                         symbols[score()->symIdx()][brackettipsLeftUp].draw(painter, mags, x, y1);
                         symbols[score()->symIdx()][brackettipsLeftDown].draw(painter, mags, x, y2);
                         }
@@ -260,15 +260,15 @@ void BarLine::draw(Painter* painter) const
 
             case END_START_REPEAT:
                   {
-                  double lw2  = point(score()->styleS(ST_endBarWidth));
-                  double d1   = point(score()->styleS(ST_endBarDistance));
+                  qreal lw2  = point(score()->styleS(ST_endBarWidth));
+                  qreal d1   = point(score()->styleS(ST_endBarDistance));
                   const Sym& dotsym = symbols[score()->symIdx()][dotSym];
-                  double dotw = dotsym.width(mags);
+                  qreal dotw = dotsym.width(mags);
 
-                  double x1   =  dotw + d1 + lw * .5;                                // thin bar
-                  double x2   =  dotw + d1 + lw + d1 + lw2 * .5;                     // thick bar
-                  double x3   =  dotw + d1 + lw + d1 + lw2 + d1 + lw * .5;           // thin bar
-                  double x4   =  dotw + d1 + lw + d1 + lw2 + d1 + lw + d1;           // dot position
+                  qreal x1   =  dotw + d1 + lw * .5;                                // thin bar
+                  qreal x2   =  dotw + d1 + lw + d1 + lw2 * .5;                     // thick bar
+                  qreal x3   =  dotw + d1 + lw + d1 + lw2 + d1 + lw * .5;           // thin bar
+                  qreal x4   =  dotw + d1 + lw + d1 + lw2 + d1 + lw + d1;           // dot position
 
                   if (parent() == 0) {    // for use in palette
                         dotsym.draw(painter, mags, .0, 1.5 * ld);
@@ -277,7 +277,7 @@ void BarLine::draw(Painter* painter) const
                         dotsym.draw(painter, mags, x4, 2.5 * ld);
                         }
                   else {
-                        double doty1, doty2;
+                        qreal doty1, doty2;
                         if (staff()->useTablature()) {
                               switch(staff()->lines()) {
                                     case 4:
@@ -298,10 +298,10 @@ void BarLine::draw(Painter* painter) const
                         Segment* segment = (Segment*)parent();
                         Measure* measure = segment->measure();
                         System* system   = measure->system();
-                        double yp = system->staff(staffIdx())->y();
+                        qreal yp = system->staff(staffIdx())->y();
                         for (int i = 0; i < _span; ++i) {
                               StaffLines* l2 = measure->staffLines(staffIdx() + i);
-                              double yy = l2->y2() - yp;
+                              qreal yy = l2->y2() - yp;
 
                               dotsym.draw(painter, mags, 0.0, yy - doty1 * ld);
                               dotsym.draw(painter, mags, 0.0, yy - doty2 * ld);
@@ -438,8 +438,8 @@ Element* BarLine::drop(const DropData& data)
 void BarLine::updateGrips(int* grips, QRectF* grip) const
       {
       *grips   = 1;
-      double lw = point(score()->styleS(ST_barWidth));
-      double y1, y2;
+      qreal lw = point(score()->styleS(ST_barWidth));
+      qreal y1, y2;
       getY(&y1, &y2);
       grip[0].translate(QPointF(lw * .5, y2) + canvasPos());
       }
@@ -485,11 +485,11 @@ void BarLine::editDrag(const EditData& ed)
 
 void BarLine::endEditDrag()
       {
-      double y1, h2;
+      qreal y1, h2;
       getY(&y1, &h2);
       yoff      = 0.0;
-      double ay1 = canvasPos().y();
-      double ay2 = ay1 + h2;
+      qreal ay1 = canvasPos().y();
+      qreal ay2 = ay1 + h2;
 
       int staffIdx1 = staffIdx();
       int staffIdx2;
@@ -500,12 +500,12 @@ void BarLine::endEditDrag()
       if (staffIdx1 + 1 >= n)
             staffIdx2 = staffIdx1;
       else {
-            double ay = s->canvasPos().y();
-            double y  = s->staff(staffIdx1)->y() + ay;
-            double h1 = staff()->lines() * spatium();
+            qreal ay = s->canvasPos().y();
+            qreal y  = s->staff(staffIdx1)->y() + ay;
+            qreal h1 = staff()->lines() * spatium();
 
             for (staffIdx2 = staffIdx1 + 1; staffIdx2 < n; ++staffIdx2) {
-                  double h = s->staff(staffIdx2)->y() + ay - y;
+                  qreal h = s->staff(staffIdx2)->y() + ay - y;
                   if (ay2 < (y + (h + h1) * .5))
                         break;
                   y += h;
@@ -541,12 +541,12 @@ void BarLine::layout()
       {
 //      _span = staff() ? staff()->barLineSpan() : 1;
 
-      double y1, y2;
+      qreal y1, y2;
       getY(&y1, &y2);
       Spatium w = score()->styleS(ST_barWidth);
-      double dw  = 0.0;
+      qreal dw  = 0.0;
 
-      double dotwidth = symbols[score()->symIdx()][dotSym].width(magS());
+      qreal dotwidth = symbols[score()->symIdx()][dotSym].width(magS());
       switch(subtype()) {
             case DOUBLE_BAR:
                   w  = score()->styleS(ST_doubleBarWidth) * 2 + score()->styleS(ST_doubleBarDistance);
@@ -580,7 +580,7 @@ void BarLine::layout()
       QRectF r(0.0, y1, dw, y2);
 
       if (score()->styleB(ST_repeatBarTips)) {
-            // double mags = magS();
+            // qreal mags = magS();
             switch(subtype()) {
                   case START_REPEAT:
                         //r |= symbols[brackettipsRightUp].bbox(mags).translated(0, y1);
@@ -598,7 +598,7 @@ void BarLine::layout()
             if (e->type() == ARTICULATION) {
                   Articulation* a       = static_cast<Articulation*>(e);
                   ArticulationAnchor aa = a->anchor();
-                  double distance       = score()->styleS(ST_propertyDistanceStem).val() * _spatium;
+                  qreal distance       = score()->styleS(ST_propertyDistanceStem).val() * _spatium;
                   qreal topY            = y1 - distance;
                   qreal botY            = y2 + distance;
                   qreal x               = 0.0;

@@ -192,7 +192,7 @@ void Symbol::setAbove(bool val)
 
 void Symbol::layout()
       {
-//      double m = parent() ? parent()->mag() : 1.0;
+//      qreal m = parent() ? parent()->mag() : 1.0;
 //      if (_small)
 //            m *= score()->styleD(ST_smallNoteMag);
 //      setMag(m);
@@ -267,9 +267,12 @@ void Symbol::read(QDomElement e)
                         path = ee.text();
                   Image* image = 0;
                   QString s(path.toLower());
+#ifdef SVG_IMAGES
                   if (s.endsWith(".svg"))
                         image = new SvgImage(score());
-                  else if (s.endsWith(".jpg")
+                  else
+#endif
+                        if (s.endsWith(".jpg")
                      || s.endsWith(".png")
                      || s.endsWith(".xpm")
                         ) {
@@ -307,7 +310,7 @@ QLineF Symbol::dragAnchor() const
             Segment* seg     = segment();
             Measure* measure = seg->measure();
             System* s        = measure->system();
-            double y         = measure->canvasPos().y() + s->staff(staffIdx())->y();
+            qreal y         = measure->canvasPos().y() + s->staff(staffIdx())->y();
             QPointF anchor(seg->abbox().x(), y);
             return QLineF(canvasPos(), anchor);
             }
@@ -323,10 +326,10 @@ QLineF Symbol::dragAnchor() const
 QPointF BSymbol::canvasPos() const
       {
       if (parent() && (parent()->type() == SEGMENT)) {
-            double xp = x();
+            qreal xp = x();
             for (Element* e = parent(); e; e = e->parent())
                   xp += e->x();
-            double yp = y();
+            qreal yp = y();
             Segment* s = static_cast<Segment*>(parent());
             yp += s->measure()->system()->staffY(staffIdx());
             return QPointF(xp, yp);

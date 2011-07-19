@@ -74,7 +74,7 @@ void Tuplet::layout()
             printf("Tuplet::layout(): tuplet is empty\n");
             return;
             }
-      double _spatium = spatium();
+      qreal _spatium = spatium();
       if (_numberType != NO_TEXT) {
             if (_number == 0) {
                   _number = new Text(score());
@@ -163,7 +163,7 @@ void Tuplet::layout()
       //
       //    calculate bracket start and end point p1 p2
       //
-      double headDistance = _spatium * .75;
+      qreal headDistance = _spatium * .75;
       if (_isUp) {
             p1       = cr1->abbox().topLeft();
             p1.ry() -= headDistance;
@@ -226,7 +226,7 @@ void Tuplet::layout()
 
             int n = _elements.size();
             if (n >= 3) {
-                  double d = (p2.y() - p1.y())/(p2.x() - p1.x());
+                  qreal d = (p2.y() - p1.y())/(p2.x() - p1.x());
                   for (int i = 1; i < (n-1); ++i) {
                         Element* e = _elements[i];
                         if (e->type() == CHORD) {
@@ -234,10 +234,10 @@ void Tuplet::layout()
                               const Stem* stem = chord->stem();
                               if (stem) {
                                     QRectF r(chord->up() ? stem->abbox() : chord->abbox());
-                                    double y3 = r.top();
-                                    double x3 = r.x() + r.width() * .5;
-                                    double y0 = p1.y() + (x3 - p1.x()) * d;
-                                    double c  = y0 - y3;
+                                    qreal y3 = r.top();
+                                    qreal x3 = r.x() + r.width() * .5;
+                                    qreal y0 = p1.y() + (x3 - p1.x()) * d;
+                                    qreal c  = y0 - y3;
                                     if (c > 0) {
                                           p1.ry() -= c;
                                           p2.ry() -= c;
@@ -305,7 +305,7 @@ void Tuplet::layout()
 
             int n = _elements.size();
             if (n >= 3) {
-                  double d  = (p2.y() - p1.y())/(p2.x() - p1.x());
+                  qreal d  = (p2.y() - p1.y())/(p2.x() - p1.x());
                   for (int i = 1; i < (n-1); ++i) {
                         Element* e = _elements[i];
                         if (e->type() == CHORD) {
@@ -313,10 +313,10 @@ void Tuplet::layout()
                               const Stem* stem = chord->stem();
                               if (stem) {
                                     QRectF r(chord->up() ? chord->abbox() : stem->abbox());
-                                    double y3 = r.bottom();
-                                    double x3 = r.x() + r.width() * .5;
-                                    double y0 = p1.y() + (x3 - p1.x()) * d;
-                                    double c  = y0 - y3;
+                                    qreal y3 = r.bottom();
+                                    qreal x3 = r.x() + r.width() * .5;
+                                    qreal y0 = p1.y() + (x3 - p1.x()) * d;
+                                    qreal c  = y0 - y3;
                                     if (c < 0) {
                                           p1.ry() -= c;
                                           p2.ry() -= c;

@@ -31,11 +31,11 @@
 void HairpinSegment::layout()
       {
       QTransform t;
-      double _spatium = spatium();
-      double h1 = score()->styleS(ST_hairpinHeight).val() * _spatium * .5;
-      double h2 = score()->styleS(ST_hairpinContHeight).val() * _spatium * .5;
+      qreal _spatium = spatium();
+      qreal h1 = score()->styleS(ST_hairpinHeight).val() * _spatium * .5;
+      qreal h2 = score()->styleS(ST_hairpinContHeight).val() * _spatium * .5;
 
-      double len;
+      qreal len;
       qreal x = pos2().x();
       if (x < _spatium)             // minimum size of hairpin
             x = _spatium;
@@ -77,7 +77,7 @@ void HairpinSegment::layout()
       l2 = t.map(l2);
 
       QRectF r = QRectF(l1.p1(), l1.p2()).normalized() | QRectF(l2.p1(), l2.p2()).normalized();
-      double w = point(score()->styleS(ST_hairpinWidth));
+      qreal w = point(score()->styleS(ST_hairpinWidth));
       setbbox(r.adjusted(-w*.5, -w*.5, w, w));
       }
 

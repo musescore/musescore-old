@@ -82,7 +82,7 @@ Clef::Clef(const Clef& c)
 //   add
 //---------------------------------------------------------
 
-void Clef::add(Element* e, double x, double y)
+void Clef::add(Element* e, qreal x, qreal y)
       {
       e->layout();
       e->setPos(x, y);
@@ -98,11 +98,11 @@ QPointF Clef::canvasPos() const
       {
       if (parent() == 0)
             return pos();
-      double xp = x();
+      qreal xp = x();
       for (Element* e = parent(); e; e = e->parent())
             xp += e->x();
       System* system = segment()->measure()->system();
-      double yp = y() + system->staff(staffIdx())->y() + system->y();
+      qreal yp = y() + system->staff(staffIdx())->y() + system->y();
       return QPointF(xp, yp);
       }
 
@@ -112,10 +112,10 @@ QPointF Clef::canvasPos() const
 
 void Clef::layout()
       {
-      double smag     = _small ? score()->style(ST_smallClefMag).toDouble() : 1.0;
-      double _spatium = spatium();
-      double msp      = _spatium * smag;
-      double yoff     = 0.0;
+      qreal smag     = _small ? score()->style(ST_smallClefMag).toDouble() : 1.0;
+      qreal _spatium = spatium();
+      qreal msp      = _spatium * smag;
+      qreal yoff     = 0.0;
       elements.clear();
 
       ClefType st    = clefType();

@@ -45,7 +45,7 @@ Bend::Bend(Score* s)
 
 void Bend::layout()
       {
-      double _spatium = spatium();
+      qreal _spatium = spatium();
 
       if (staff() && !staff()->useTablature()) {
             setbbox(QRectF());
@@ -73,11 +73,11 @@ void Bend::layout()
 
       int n    = _points.size();
 //      int pt   = 0;
-      double x = noteWidth;
-      double y = -_spatium * .8;
-      double x2, y2;
+      qreal x = noteWidth;
+      qreal y = -_spatium * .8;
+      qreal x2, y2;
 
-      double aw = _spatium * .5;
+      qreal aw = _spatium * .5;
       QPolygonF arrowUp;
       arrowUp << QPointF(0, 0) << QPointF(aw*.5, aw) << QPointF(-aw*.5, aw);
       QPolygonF arrowDown;
@@ -111,8 +111,8 @@ void Bend::layout()
                   // up
                   x2 = x + _spatium*.5;
                   y2 = -notePos.y() -_spatium * 2;
-                  double dx = x2 - x;
-                  double dy = y2 - y;
+                  qreal dx = x2 - x;
+                  qreal dy = y2 - y;
 
                   QPainterPath path;
                   path.moveTo(x, y);
@@ -131,8 +131,8 @@ void Bend::layout()
                   // down
                   x2 = x + _spatium*.5;
                   y2 = y + _spatium * 3;
-                  double dx = x2 - x;
-                  double dy = y2 - y;
+                  qreal dx = x2 - x;
+                  qreal dy = y2 - y;
 
                   QPainterPath path;
                   path.moveTo(x, y);
@@ -163,18 +163,18 @@ void Bend::draw(Painter* painter) const
       painter->setJoinStyle(Qt::RoundJoin);
       painter->setBrushColor(Qt::black);
 
-      double _spatium = spatium();
+      qreal _spatium = spatium();
       const TextStyle* st = &score()->textStyle(TEXT_STYLE_BENCH);
       QFont f = st->fontPx(_spatium);
       painter->setFont(f);
 
       int n    = _points.size();
 //      int pt   = 0;
-      double x = noteWidth;
-      double y = -_spatium * .8;
-      double x2, y2;
+      qreal x = noteWidth;
+      qreal y = -_spatium * .8;
+      qreal x2, y2;
 
-      double aw = _spatium * .5;
+      qreal aw = _spatium * .5;
       QPolygonF arrowUp;
       arrowUp << QPointF(0, 0) << QPointF(aw*.5, aw) << QPointF(-aw*.5, aw);
       QPolygonF arrowDown;
@@ -209,8 +209,8 @@ void Bend::draw(Painter* painter) const
                   // up
                   x2 = x + _spatium*.5;
                   y2 = -notePos.y() -_spatium * 2;
-                  double dx = x2 - x;
-                  double dy = y2 - y;
+                  qreal dx = x2 - x;
+                  qreal dy = y2 - y;
 
                   QPainterPath path;
                   path.moveTo(x, y);
@@ -229,8 +229,8 @@ void Bend::draw(Painter* painter) const
                   // down
                   x2 = x + _spatium*.5;
                   y2 = y + _spatium * 3;
-                  double dx = x2 - x;
-                  double dy = y2 - y;
+                  qreal dx = x2 - x;
+                  qreal dy = y2 - y;
 
                   QPainterPath path;
                   path.moveTo(x, y);

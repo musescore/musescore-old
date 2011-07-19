@@ -69,7 +69,7 @@ class LedgerLine : public Line {
       virtual QPointF canvasPos() const;      ///< position in canvas coordinates
       Chord* chord() const { return (Chord*)parent(); }
       virtual void layout();
-      double measureXPos() const;
+      qreal measureXPos() const;
       };
 
 //---------------------------------------------------------
@@ -102,8 +102,8 @@ class Chord : public ChordRest {
       virtual qreal upPos()   const;
       virtual qreal downPos() const;
       virtual qreal centerX() const;
-      void addLedgerLine(double x, int staffIdx, int line, int extend);
-      void addLedgerLines(double x, int move);
+      void addLedgerLine(qreal x, int staffIdx, int line, int extend);
+      void addLedgerLines(qreal x, int move);
       void renderArticulation(ArticulationType);
 
    public:
@@ -171,11 +171,11 @@ class Chord : public ChordRest {
       virtual void setTrack(int val);
 
       void computeUp();
-      double dotPosX() const;
-      void setDotPosX(double val);
+      qreal dotPosX() const;
+      void setDotPosX(qreal val);
       bool noStem() const                 { return _noStem;  }
       void setNoStem(bool val)            { _noStem = val;   }
-      virtual void setMag(double val);
+      virtual void setMag(qreal val);
       void pitchChanged();
       void renderPlayback();
       TremoloChordType tremoloChordType() const      { return _tremoloChordType; }

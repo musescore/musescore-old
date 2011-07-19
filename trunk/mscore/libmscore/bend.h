@@ -25,9 +25,9 @@ class Painter;
 
 class Bend : public Element {
       QList<PitchValue> _points;
-      double _lw;
+      qreal _lw;
       QPointF notePos;
-      double noteWidth;
+      qreal noteWidth;
 
    public:
       Bend(Score* s);

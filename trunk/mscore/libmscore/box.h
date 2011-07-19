@@ -33,8 +33,8 @@ class Painter;
 class Box : public MeasureBase {
       Spatium _boxWidth;       // only valid for HBox
       Spatium _boxHeight;      // only valid for VBox
-      double _leftMargin, _rightMargin;   // values in metric mm
-      double _topMargin, _bottomMargin;
+      qreal _leftMargin, _rightMargin;   // values in metric mm
+      qreal _topMargin, _bottomMargin;
       bool editMode;
       qreal dragX;            // used during drag of hbox
 
@@ -60,14 +60,14 @@ class Box : public MeasureBase {
       void setBoxWidth(Spatium val)    { _boxWidth = val;      }
       Spatium boxHeight() const        { return _boxHeight;    }
       void setBoxHeight(Spatium val)   { _boxHeight = val;     }
-      double leftMargin() const        { return _leftMargin;   }
-      double rightMargin() const       { return _rightMargin;  }
-      double topMargin() const         { return _topMargin;    }
-      double bottomMargin() const      { return _bottomMargin; }
-      void setLeftMargin(double val)   { _leftMargin = val;    }
-      void setRightMargin(double val)  { _rightMargin = val;   }
-      void setTopMargin(double val)    { _topMargin = val;     }
-      void setBottomMargin(double val) { _bottomMargin = val;  }
+      qreal leftMargin() const        { return _leftMargin;   }
+      qreal rightMargin() const       { return _rightMargin;  }
+      qreal topMargin() const         { return _topMargin;    }
+      qreal bottomMargin() const      { return _bottomMargin; }
+      void setLeftMargin(qreal val)   { _leftMargin = val;    }
+      void setRightMargin(qreal val)  { _rightMargin = val;   }
+      void setTopMargin(qreal val)    { _topMargin = val;     }
+      void setBottomMargin(qreal val) { _bottomMargin = val;  }
       };
 
 //---------------------------------------------------------

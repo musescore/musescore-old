@@ -22,7 +22,7 @@
 
 class TempoText : public Text  {
       Q_DECLARE_TR_FUNCTIONS(TempoText)
-      double _tempo;          // beats per second
+      qreal _tempo;          // beats per second
       bool _followText;       // parse text to determine tempo
 
    public:
@@ -33,8 +33,8 @@ class TempoText : public Text  {
       virtual void read(QDomElement);
       Segment* segment() const   { return (Segment*)parent(); }
       Measure* measure() const   { return (Measure*)parent()->parent(); }
-      double tempo() const       { return _tempo;      }
-      void setTempo(double v)    { _tempo = v;         }
+      qreal tempo() const       { return _tempo;      }
+      void setTempo(qreal v)    { _tempo = v;         }
       bool followText() const    { return _followText; }
       void setFollowText(bool v) { _followText = v;    }
       virtual void textChanged();

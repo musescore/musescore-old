@@ -42,7 +42,7 @@ class KeySig : public Element {
 	bool	_showCourtesySig;
 	bool	_showNaturals;
       QList<KeySym*> keySymbols;
-      void addLayout(int sym, double x, int y);
+      void addLayout(int sym, qreal x, int y);
       KeySigEvent _sig;
 
    public:

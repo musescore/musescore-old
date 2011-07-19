@@ -37,7 +37,7 @@ Arpeggio::Arpeggio(Score* s)
 //   setHeight
 //---------------------------------------------------------
 
-void Arpeggio::setHeight(double h)
+void Arpeggio::setHeight(qreal h)
       {
       _height = h;
       }
@@ -85,9 +85,9 @@ void Arpeggio::read(QDomElement e)
 
 QRectF Arpeggio::bbox() const
       {
-      double _spatium = spatium();
-      double y1 = -_userLen1.val() * _spatium;
-      double y2 = _height + _userLen2.val() * _spatium;
+      qreal _spatium = spatium();
+      qreal y1 = -_userLen1.val() * _spatium;
+      qreal y2 = _height + _userLen2.val() * _spatium;
       switch (subtype()) {
             case ARP_NORMAL:
             case ARP_UP:
@@ -96,8 +96,8 @@ QRectF Arpeggio::bbox() const
                   return QRectF(0.0, y1, symbols[score()->symIdx()][arpeggioSym].width(magS()), y2-y1);
             case ARP_BRACKET:
                   {
-                  double lw = score()->styleS(ST_ArpeggioLineWidth).val() * _spatium;
-                  double w = score()->styleS(ST_ArpeggioHookLen).val() * _spatium;
+                  qreal lw = score()->styleS(ST_ArpeggioLineWidth).val() * _spatium;
+                  qreal w = score()->styleS(ST_ArpeggioHookLen).val() * _spatium;
                   return QRectF(-lw * .5, y1 - lw * .5, w + lw, y2 - y1 + lw);
                   }
             }
@@ -109,23 +109,23 @@ QRectF Arpeggio::bbox() const
 
 void Arpeggio::draw(Painter* p) const
       {
-      double _spatium = spatium();
+      qreal _spatium = spatium();
 
-      double y1 = _spatium - _userLen1.val() * _spatium;
-      double y2 = _height + (_userLen2.val() + .5) * _spatium;
+      qreal y1 = _spatium - _userLen1.val() * _spatium;
+      qreal y2 = _height + (_userLen2.val() + .5) * _spatium;
       switch (subtype()) {
             case ARP_NORMAL:
-                  for (double y = y1; y < y2; y += _spatium)
+                  for (qreal y = y1; y < y2; y += _spatium)
                         symbols[score()->symIdx()][arpeggioSym].draw(p, 1.0, 0.0, y);
                   break;
             case ARP_UP:
                   symbols[score()->symIdx()][arpeggioarrowupSym].draw(p, 1.0, 0.0, y1);
-                  for (double y = y1 + _spatium; y < y2; y += _spatium)
+                  for (qreal y = y1 + _spatium; y < y2; y += _spatium)
                         symbols[score()->symIdx()][arpeggioSym].draw(p, 1.0, 0.0, y);
                   break;
             case ARP_DOWN:
                   {
-                  double y = y1;
+                  qreal y = y1;
                   for (; y < y2 - _spatium; y += _spatium)
                         symbols[score()->symIdx()][arpeggioSym].draw(p, 1.0, 0.0, y);
                   symbols[score()->symIdx()][arpeggioarrowdownSym].draw(p, 1.0, 0.0, y);
@@ -140,7 +140,7 @@ void Arpeggio::draw(Painter* p) const
                   p->setLineWidth(score()->styleS(ST_ArpeggioLineWidth).val() * _spatium);
                   p->setCapStyle(Qt::RoundCap);
 
-                  double w = score()->styleS(ST_ArpeggioHookLen).val() * _spatium;
+                  qreal w = score()->styleS(ST_ArpeggioHookLen).val() * _spatium;
                   p->drawLine(0.0, y1, 0.0, y2);
                   p->drawLine(0.0, y1, w, y1);
                   p->drawLine(0.0, y2, w, y2);
@@ -156,7 +156,7 @@ void Arpeggio::draw(Painter* p) const
 
 void Arpeggio::updateGrips(int* grips, QRectF* grip) const
       {
-      double _spatium = spatium();
+      qreal _spatium = spatium();
       *grips   = 2;
       QPointF p1(0.0, -_userLen1.val() * _spatium);
       QPointF p2(0.0, _height + _userLen2.val() * _spatium);

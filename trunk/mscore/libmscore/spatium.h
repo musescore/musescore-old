@@ -22,12 +22,12 @@
 //---------------------------------------------------------
 
 class Spatium {
-      double _val;
+      qreal _val;
 
    public:
       Spatium()                        { _val = 0.0; }
-      explicit Spatium(double v)       { _val = v; }
-      double val() const               { return _val; }
+      explicit Spatium(qreal v)       { _val = v; }
+      qreal val() const               { return _val; }
       bool operator>(const Spatium& a) const  { return _val > a._val; }
       bool operator<(const Spatium& a) const  { return _val < a._val; }
       bool operator==(const Spatium& a) const { return _val == a._val; }
@@ -41,18 +41,18 @@ class Spatium {
             _val -= a._val;
             return *this;
             }
-      Spatium& operator/=(double d) {
+      Spatium& operator/=(qreal d) {
             _val /= d;
             return *this;
             }
-      double operator/(const Spatium& b) {
+      qreal operator/(const Spatium& b) {
             return _val / b._val;
             }
       Spatium& operator*=(int d) {
             _val *= d;
             return *this;
             }
-      Spatium& operator*=(double d) {
+      Spatium& operator*=(qreal d) {
             _val *= d;
             return *this;
             }
@@ -71,7 +71,7 @@ inline Spatium operator-(const Spatium& a, const Spatium& b)
       r -= b;
       return r;
       }
-inline Spatium operator/(const Spatium& a, double b)
+inline Spatium operator/(const Spatium& a, qreal b)
       {
       Spatium r(a);
       r /= b;
@@ -89,13 +89,13 @@ inline Spatium operator*(int a, const Spatium& b)
       r *= a;
       return r;
       }
-inline Spatium operator*(const Spatium& a, double b)
+inline Spatium operator*(const Spatium& a, qreal b)
       {
       Spatium r(a);
       r *= b;
       return r;
       }
-inline Spatium operator*(double a, const Spatium& b)
+inline Spatium operator*(qreal a, const Spatium& b)
       {
       Spatium r(b);
       r *= a;

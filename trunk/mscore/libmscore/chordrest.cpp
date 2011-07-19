@@ -180,13 +180,13 @@ QPointF ChordRest::canvasPos() const
       {
       if (parent() == 0)
             return QPointF(x(), y());
-      double xp = x();
+      qreal xp = x();
       for (Element* e = parent(); e; e = e->parent())
             xp += e->x();
       System* system = measure()->system();
       if (system == 0)
             return QPointF();
-      double yp = y() + system->staff(staffIdx())->y() + system->y();
+      qreal yp = y() + system->staff(staffIdx())->y() + system->y();
       return QPointF(xp, yp);
       }
 
@@ -423,7 +423,7 @@ bool ChordRest::readProperties(QDomElement e, const QList<Tuplet*>& tuplets, QLi
 void ChordRest::setSmall(bool val)
       {
       _small   = val;
-      double m = 1.0;
+      qreal m = 1.0;
       if (_small)
             m = score()->styleD(ST_smallNoteMag);
       if (staff()->small())
@@ -440,16 +440,16 @@ void ChordRest::layoutArticulations()
       {
       if (parent() == 0 || articulations.isEmpty())
             return;
-      double _spatium  = spatium();
+      qreal _spatium  = spatium();
 //      Measure* m       = measure();
 //      System* s        = m->system();
 //      int idx          = staff()->rstaff() + staffMove();   // DEBUG
 
       qreal x          = centerX();
 
-      double distance0 = score()->styleS(ST_propertyDistance).val() * _spatium;
-      double distance1 = score()->styleS(ST_propertyDistanceHead).val() * _spatium;
-      double distance2 = score()->styleS(ST_propertyDistanceStem).val() * _spatium;
+      qreal distance0 = score()->styleS(ST_propertyDistance).val() * _spatium;
+      qreal distance1 = score()->styleS(ST_propertyDistanceHead).val() * _spatium;
+      qreal distance2 = score()->styleS(ST_propertyDistanceStem).val() * _spatium;
 
       qreal chordTopY = upPos();
       qreal chordBotY = downPos();

@@ -54,10 +54,10 @@ class SysStaff {
 
       const QRectF& bbox() const     { return _bbox; }
       QRectF& rbb()                  { return _bbox; }
-      double y() const               { return _bbox.y(); }
-      double right() const           { return _bbox.right(); }
+      qreal y() const               { return _bbox.y(); }
+      qreal right() const           { return _bbox.right(); }
       void setbbox(const QRectF& r)  { _bbox = r; }
-      void move(double x, double y);
+      void move(qreal x, qreal y);
 
       Spatium distanceUp() const      { return _distanceUp;   }
       void setDistanceUp(Spatium v)   { _distanceUp = v;      }
@@ -110,7 +110,7 @@ class System : public Element {
 
       Page* page() const                 { return (Page*)parent(); }
 
-      virtual void layout(double xoffset);
+      virtual void layout(qreal xoffset);
       void layout2();         ///< Called after Measure layout.
       void clear();                       ///< Clear measure list.
 
@@ -119,7 +119,7 @@ class System : public Element {
       QRectF bboxStaff(int staff) const      { return _staves[staff]->bbox(); }
       QList<SysStaff*>* staves()             { return &_staves;   }
       const QList<SysStaff*>* staves() const { return &_staves;   }
-      double staffY(int staffIdx) const;
+      qreal staffY(int staffIdx) const;
       SysStaff* staff(int staffIdx) const    { return _staves[staffIdx]; }
 
       Spatium distanceUp(int idx) const      { return _staves[idx]->distanceUp(); }
@@ -142,7 +142,7 @@ class System : public Element {
       MeasureBase* prevMeasure(const MeasureBase*) const;
       MeasureBase* nextMeasure(const MeasureBase*) const;
 
-      double leftMargin() const   { return _leftMargin; }
+      qreal leftMargin() const   { return _leftMargin; }
       void setFirstSystem(bool v) { _firstSystem = v;   }
       bool isVbox() const         { return _vbox;       }
       void setVbox(bool v)        { _vbox = v;          }

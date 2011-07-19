@@ -116,7 +116,7 @@ int Score::clefOffset(int tick, Staff* staff) const
 
 struct AcEl {
       Note* note;
-      double x;
+      qreal x;
       };
 
 //---------------------------------------------------------
@@ -246,9 +246,9 @@ void Score::layoutChords1(Segment* segment, int staffIdx)
 
       QList<AcEl> aclist;
 
-      double dotPosX  = 0.0;
+      qreal dotPosX  = 0.0;
       int nNotes = notes.size();
-      double headWidth = notes[0]->headWidth();
+      qreal headWidth = notes[0]->headWidth();
       for (int i = nNotes-1; i >= 0; --i) {
             Note* note     = notes[i];
             Accidental* ac = note->accidental();
@@ -260,7 +260,7 @@ void Score::layoutChords1(Segment* segment, int staffIdx)
                   acel.x    = 0.0;
                   aclist.append(acel);
                   }
-            double xx = note->pos().x() + headWidth;
+            qreal xx = note->pos().x() + headWidth;
             if (xx > dotPosX)
                   dotPosX = xx;
             }
@@ -269,8 +269,8 @@ void Score::layoutChords1(Segment* segment, int staffIdx)
       int nAcc = aclist.size();
       if (nAcc == 0)
             return;
-      double pd  = point(styleS(ST_accidentalDistance));
-      double pnd = point(styleS(ST_accidentalNoteDistance));
+      qreal pd  = point(styleS(ST_accidentalDistance));
+      qreal pnd = point(styleS(ST_accidentalNoteDistance));
       //
       // layout top accidental
       //
@@ -313,7 +313,7 @@ void Score::layoutChords1(Segment* segment, int staffIdx)
                   int l1 = aclist[i-1].note->line();
                   int l2 = note->line();
                   int l3 = aclist[n].note->line();
-                  double x = 0.0;
+                  qreal x = 0.0;
 
                   int st1 = aclist[i-1].note->accidental()->subtype();
                   int st2 = acc->subtype();
@@ -341,7 +341,7 @@ void Score::layoutChords1(Segment* segment, int staffIdx)
 
       foreach(const AcEl e, aclist) {
             Note* note = e.note;
-            double x   = e.x;
+            qreal x   = e.x;
             if (moveLeft) {
                   Chord* chord = note->chord();
                   if (((note->mirror() && chord->up()) || (!note->mirror() && !chord->up())))
@@ -884,7 +884,7 @@ void Score::getCurPage()
       Page* page = curPage >= _pages.size() ? addPage() : _pages[curPage];
       page->setNo(curPage);
       page->layout();
-      double x = (curPage == 0) ? 0.0 : _pages[curPage - 1]->pos().x()
+      qreal x = (curPage == 0) ? 0.0 : _pages[curPage - 1]->pos().x()
 //         + page->width() + ((curPage & 1) ? 1.0 : 50.0);
          + page->width() + ((curPage & 1) ? 50.0 : 1.0);
       page->setPos(x, 0.0);
@@ -898,8 +898,8 @@ void Score::getCurPage()
 bool Score::layoutPage()
       {
       Page* page = _pages[curPage];
-      const double slb = point(styleS(ST_staffLowerBorder));
-      const double sub = point(styleS(ST_staffUpperBorder));
+      const qreal slb = point(styleS(ST_staffLowerBorder));
+      const qreal sub = point(styleS(ST_staffUpperBorder));
 
       // usable width of page:
       qreal w  = page->loWidth() - page->lm() - page->rm();
@@ -913,7 +913,7 @@ bool Score::layoutPage()
       bool firstSystemOnPage = true;
 
       while (curMeasure) {
-            double h;
+            qreal h;
             QList<System*> sl;
             ElementType t = curMeasure->type();
             if (t == VBOX || t == TBOX || t == FBOX) {
@@ -959,15 +959,15 @@ bool Score::layoutPage()
                         printf("layoutSystemRow returns zero systems\n");
                         abort();
                         }
-                  double moveY = 0.0;
+                  qreal moveY = 0.0;
                   if (!page->systems()->isEmpty()) {
                         System* ps = page->systems()->back();
-                        double b1;
+                        qreal b1;
                         if (ps->staves()->isEmpty())
                               b1 = 0.0;
                         else
                               b1 = ps->distanceDown(ps->staves()->size() - 1).val() * spatium();
-                        double b2  = 0.0;
+                        qreal b2  = 0.0;
                         foreach(System* s, sl) {
                               if (s->distanceUp(0).val() * spatium() > b2)
                                     b2 = s->distanceUp(0).val() * spatium();
@@ -1010,19 +1010,19 @@ bool Score::layoutPage()
       // then increase system distance to fill page
       //-----------------------------------------------------------------------
 
-      double restHeight = ey - y;
-      double ph         = page->loHeight() - page->bm() - page->tm() - slb - sub;
+      qreal restHeight = ey - y;
+      qreal ph         = page->loHeight() - page->bm() - page->tm() - slb - sub;
 
       if ((rows <= 1) || (restHeight > (ph * (1.0 - styleD(ST_pageFillLimit)))))
             return true;
 
-      double systemDistance = point(styleS(ST_systemDistance));
-      double extraDist      = (restHeight + systemDistance) / (rows - 1);
+      qreal systemDistance = point(styleS(ST_systemDistance));
+      qreal extraDist      = (restHeight + systemDistance) / (rows - 1);
       y = 0;
       int n = page->systems()->size();
       for (int i = 0; i < n;) {
             System* system = page->systems()->at(i);
-            double yy = system->pos().y();
+            qreal yy = system->pos().y();
             system->move(0, y);
             ++i;
             if (i >= n)
@@ -1073,11 +1073,11 @@ Measure* Score::skipEmptyMeasures(Measure* m, System* system)
 //    return true on line break
 //---------------------------------------------------------
 
-bool Score::layoutSystem1(double& minWidth, double w, bool isFirstSystem, bool longName)
+bool Score::layoutSystem1(qreal& minWidth, qreal w, bool isFirstSystem, bool longName)
       {
       System* system = getNextSystem(isFirstSystem, false);
 
-      double xo = 0;
+      qreal xo = 0;
       if (curMeasure->type() == HBOX)
             xo = point(static_cast<Box*>(curMeasure)->boxWidth());
 
@@ -1085,7 +1085,7 @@ bool Score::layoutSystem1(double& minWidth, double w, bool isFirstSystem, bool l
       system->layout(xo);
 
       minWidth            = system->leftMargin();
-      double systemWidth  = w;
+      qreal systemWidth  = w;
 
       bool continueFlag   = false;
 
@@ -1109,8 +1109,8 @@ bool Score::layoutSystem1(double& minWidth, double w, bool isFirstSystem, bool l
 
             System* oldSystem = curMeasure->system();
             curMeasure->setSystem(system);
-            double ww      = 0.0;
-            double stretch = 0.0;
+            qreal ww      = 0.0;
+            qreal stretch = 0.0;
 
             if (curMeasure->type() == HBOX) {
                   ww = point(static_cast<Box*>(curMeasure)->boxWidth());
@@ -1142,7 +1142,7 @@ bool Score::layoutSystem1(double& minWidth, double w, bool isFirstSystem, bool l
                                     if (!isFirstMeasure || (seg->subtype() == SegTimeSigAnnounce))
                                           seg->setElement(track, 0);
                                     }
-                              double staffMag = staff(staffIdx)->mag();
+                              qreal staffMag = staff(staffIdx)->mag();
                               if (el->type() == CLEF) {
                                     Clef* clef = static_cast<Clef*>(el);
                                     clef->setSmall(!isFirstMeasure || (seg != m->first()));
@@ -1235,15 +1235,15 @@ bool Score::layoutSystem1(double& minWidth, double w, bool isFirstSystem, bool l
 //---------------------------------------------------------
 
 QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
-   bool isFirstSystem, bool useLongName, double* h)
+   bool isFirstSystem, bool useLongName, qreal* h)
       {
       bool raggedRight = MScore::layoutDebug;
 
       *h = 0.0;
       QList<System*> sl;
 
-      double ww = rowWidth;
-      double minWidth;
+      qreal ww = rowWidth;
+      qreal minWidth;
       for (bool a = true; a;) {
             a = layoutSystem1(minWidth, ww, isFirstSystem, useLongName);
             sl.append(_systems[curSystem]);
@@ -1343,7 +1343,7 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                                           s->add(ks);
                                           needRelayout = true;
                                           }
-                                    // change bar line to double bar line
+                                    // change bar line to qreal bar line
                                     m->setEndBarLineType(DOUBLE_BAR, true);
                                     }
                               }
@@ -1423,7 +1423,7 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                   if (mb == ml.back()) {       // last measure in system?
                         //
                         // if last bar has a courtesy key signature,
-                        // create a double bar line as end bar line
+                        // create a qreal bar line as end bar line
                         //
                         BarLineType bl = hasCourtesyKeysig ? DOUBLE_BAR : NORMAL_BAR;
 
@@ -1479,7 +1479,7 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
             }
 
       minWidth           = 0.0;
-      double totalWeight = 0.0;
+      qreal totalWeight = 0.0;
 
       foreach(System* system, sl) {
             foreach (MeasureBase* mb, system->measures()) {
@@ -1496,15 +1496,15 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
             minWidth += system->leftMargin();
             }
 
-      double rest = (raggedRight ? 0.0 : rowWidth - minWidth) / totalWeight;
-      double xx   = 0.0;
+      qreal rest = (raggedRight ? 0.0 : rowWidth - minWidth) / totalWeight;
+      qreal xx   = 0.0;
 
       foreach(System* system, sl) {
             QPointF pos;
 
             bool firstMeasure = true;
             foreach(MeasureBase* mb, system->measures()) {
-                  double ww = 0.0;
+                  qreal ww = 0.0;
                   if (mb->type() == MEASURE) {
                         if (firstMeasure) {
                               pos.rx() += system->leftMargin();
@@ -1516,7 +1516,7 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                               ww = rowWidth / system->measures().size();
                               }
                         else {
-                              double weight = m->ticks() * m->userStretch();
+                              qreal weight = m->ticks() * m->userStretch();
                               ww            = m->layoutWidth().stretchable + rest * weight;
                               }
                         m->layout(ww);
@@ -1529,7 +1529,7 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                   pos.rx() += ww;
                   }
             system->setPos(xx + x, y);
-            double w = pos.x();
+            qreal w = pos.x();
             system->setWidth(w);
             system->layout2();
             foreach(MeasureBase* mb, system->measures()) {
@@ -1537,7 +1537,7 @@ QList<System*> Score::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                         mb->setHeight(system->height());
                   }
             xx += w;
-            double hh = system->height() + point(system->staves()->back()->distanceDown());
+            qreal hh = system->height() + point(system->staves()->back()->distanceDown());
             if (hh > *h)
                   *h = hh;
             }
@@ -1675,14 +1675,14 @@ bool Score::doReLayout()
 #endif
       System* system  = startLayout->system();
       qreal sysWidth  = system->width();
-      double minWidth = system->leftMargin();
+      qreal minWidth = system->leftMargin();
 
       //
       //  check if measures still fit in system
       //
       MeasureBase* m = 0;
       foreach(m, system->measures()) {
-            double ww;
+            qreal ww;
             if (m->type() == HBOX)
                   ww = point(static_cast<Box*>(m)->boxWidth());
             else {            // MEASURE
@@ -1692,7 +1692,7 @@ bool Score::doReLayout()
 
                   measure->layoutX(1.0);
                   ww      = measure->layoutWidth().stretchable;
-                  double stretch = measure->userStretch() * styleD(ST_measureSpacing);
+                  qreal stretch = measure->userStretch() * styleD(ST_measureSpacing);
 
                   ww *= stretch;
                   if (ww < point(styleS(ST_minMeasureWidth)))
@@ -1710,8 +1710,8 @@ bool Score::doReLayout()
       if (m && m->subtype() == MEASURE) {
             Measure* measure = static_cast<Measure*>(m);
             measure->layoutX(1.0);
-            double ww      = measure->layoutWidth().stretchable;
-            double stretch = measure->userStretch() * styleD(ST_measureSpacing);
+            qreal ww      = measure->layoutWidth().stretchable;
+            qreal stretch = measure->userStretch() * styleD(ST_measureSpacing);
 
             ww *= stretch;
             if (ww < point(styleS(ST_minMeasureWidth)))
@@ -1723,7 +1723,7 @@ bool Score::doReLayout()
       // stretch measures
       //
       minWidth    = system->leftMargin();
-      double totalWeight = 0.0;
+      qreal totalWeight = 0.0;
       foreach (MeasureBase* mb, system->measures()) {
             if (mb->type() == HBOX)
                   minWidth += point(static_cast<Box*>(mb)->boxWidth());
@@ -1734,12 +1734,12 @@ bool Score::doReLayout()
                   }
             }
 
-      double rest = (sysWidth - minWidth) / totalWeight;
+      qreal rest = (sysWidth - minWidth) / totalWeight;
 
       bool firstMeasure = true;
       QPointF pos;
       foreach(MeasureBase* mb, system->measures()) {
-            double ww = 0.0;
+            qreal ww = 0.0;
             if (mb->type() == MEASURE) {
                   if (firstMeasure) {
                         pos.rx() += system->leftMargin();
@@ -1747,7 +1747,7 @@ bool Score::doReLayout()
                         }
                   mb->setPos(pos);
                   Measure* m    = static_cast<Measure*>(mb);
-                  double weight = m->ticks() * m->userStretch();
+                  qreal weight = m->ticks() * m->userStretch();
                   ww            = m->layoutWidth().stretchable + rest * weight;
                   m->layout(ww);
                   }

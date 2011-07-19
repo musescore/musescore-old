@@ -44,13 +44,13 @@ void RepeatMeasure::draw(Painter* painter) const
 
 void RepeatMeasure::layout()
       {
-      double sp  = spatium();
+      qreal sp  = spatium();
 
-      double y   = sp;
-      double w   = sp * 2.0;
-      double h   = sp * 2.0;
-      double lw  = sp * .30;  // line width
-      double r   = sp * .15;  // dot radius
+      qreal y   = sp;
+      qreal w   = sp * 2.0;
+      qreal h   = sp * 2.0;
+      qreal lw  = sp * .30;  // line width
+      qreal r   = sp * .15;  // dot radius
 
       path       = QPainterPath();
 

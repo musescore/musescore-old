@@ -665,12 +665,12 @@ TextStyle::TextStyle()
       }
 
 TextStyle::TextStyle(
-   QString _name, QString _family, double _size,
+   QString _name, QString _family, qreal _size,
    bool _bold, bool _italic, bool _underline,
    Align _align,
-   double _xoff, double _yoff, OffsetType _ot, double _rxoff, double _ryoff,
+   qreal _xoff, qreal _yoff, OffsetType _ot, qreal _rxoff, qreal _ryoff,
    bool sd,
-   double fw, double pw, int fr, QColor co, bool _circle, bool _systemFlag,
+   qreal fw, qreal pw, int fr, QColor co, bool _circle, bool _systemFlag,
    QColor fg)
       {
       d = new TextStyleData(_name, _family, _size,
@@ -715,12 +715,12 @@ TextStyleData::TextStyleData()
       }
 
 TextStyleData::TextStyleData(
-   QString _name, QString _family, double _size,
+   QString _name, QString _family, qreal _size,
    bool _bold, bool _italic, bool _underline,
    Align _align,
-   double _xoff, double _yoff, OffsetType _ot, double _rxoff, double _ryoff,
+   qreal _xoff, qreal _yoff, OffsetType _ot, qreal _rxoff, qreal _ryoff,
    bool sd,
-   double fw, double pw, int fr, QColor co, bool _circle, bool _systemFlag,
+   qreal fw, qreal pw, int fr, QColor co, bool _circle, bool _systemFlag,
    QColor fg)
    :
    ElementLayout(_align, _xoff, _yoff, _ot, _rxoff, _ryoff),
@@ -766,9 +766,9 @@ bool TextStyleData::operator!=(const TextStyleData& s) const
 //   font
 //---------------------------------------------------------
 
-QFont TextStyleData::font(double _spatium) const
+QFont TextStyleData::font(qreal _spatium) const
       {
-      double m = size;
+      qreal m = size;
 
       QFont f(family);
       f.setBold(bold);
@@ -786,9 +786,9 @@ QFont TextStyleData::font(double _spatium) const
 //   font
 //---------------------------------------------------------
 
-QFont TextStyleData::fontPx(double _spatium) const
+QFont TextStyleData::fontPx(qreal _spatium) const
       {
-      double m = size * DPI / PPI;
+      qreal m = size * DPI / PPI;
 
       QFont f(family);
       f.setBold(bold);
@@ -1081,7 +1081,7 @@ StyleVal::StyleVal(StyleIdx t, Spatium val)
       v.dbl = val.val();
       }
 
-StyleVal::StyleVal(StyleIdx t, double val)
+StyleVal::StyleVal(StyleIdx t, qreal val)
       {
       idx  = t;
       v.dbl = val;
@@ -1237,20 +1237,20 @@ void StyleData::setTextStyle(const TextStyle& ts)
 
 QString TextStyle::name() const                           { return d->name; }
 QString TextStyle::family() const                         { return d->family; }
-double TextStyle::size() const                            { return d->size; }
+qreal TextStyle::size() const                            { return d->size; }
 bool TextStyle::bold() const                              { return d->bold; }
 bool TextStyle::italic() const                            { return d->italic; }
 bool TextStyle::underline() const                         { return d->underline; }
 bool TextStyle::hasFrame() const                          { return d->hasFrame; }
 Align TextStyle::align() const                            { return d->align(); }
-double TextStyle::xoff() const                            { return d->xoff(); }
-double TextStyle::yoff() const                            { return d->yoff(); }
+qreal TextStyle::xoff() const                            { return d->xoff(); }
+qreal TextStyle::yoff() const                            { return d->yoff(); }
 OffsetType TextStyle::offsetType() const                  { return d->offsetType(); }
-double TextStyle::rxoff() const                           { return d->rxoff(); }
-double TextStyle::ryoff() const                           { return d->ryoff(); }
+qreal TextStyle::rxoff() const                           { return d->rxoff(); }
+qreal TextStyle::ryoff() const                           { return d->ryoff(); }
 bool TextStyle::sizeIsSpatiumDependent() const            { return d->sizeIsSpatiumDependent; }
-double TextStyle::frameWidth()  const                     { return d->frameWidth; }
-double TextStyle::paddingWidth() const                    { return d->paddingWidth; }
+qreal TextStyle::frameWidth()  const                     { return d->frameWidth; }
+qreal TextStyle::paddingWidth() const                    { return d->paddingWidth; }
 int TextStyle::frameRound() const                         { return d->frameRound; }
 QColor TextStyle::frameColor() const                      { return d->frameColor; }
 bool TextStyle::circle() const                            { return d->circle;     }
@@ -1258,20 +1258,20 @@ bool TextStyle::systemFlag() const                        { return d->systemFlag
 QColor TextStyle::foregroundColor() const                 { return d->foregroundColor; }
 void TextStyle::setName(const QString& s)                 { d->name = s; }
 void TextStyle::setFamily(const QString& s)               { d->family = s; }
-void TextStyle::setSize(double v)                         { d->size = v; }
+void TextStyle::setSize(qreal v)                         { d->size = v; }
 void TextStyle::setBold(bool v)                           { d->bold = v; }
 void TextStyle::setItalic(bool v)                         { d->italic = v; }
 void TextStyle::setUnderline(bool v)                      { d->underline = v; }
 void TextStyle::setHasFrame(bool v)                       { d->hasFrame = v; }
 void TextStyle::setAlign(Align v)                         { d->setAlign(v); }
-void TextStyle::setXoff(double v)                         { d->setXoff(v); }
-void TextStyle::setYoff(double v)                         { d->setYoff(v); }
+void TextStyle::setXoff(qreal v)                         { d->setXoff(v); }
+void TextStyle::setYoff(qreal v)                         { d->setYoff(v); }
 void TextStyle::setOffsetType(OffsetType v)               { d->setOffsetType(v); }
-void TextStyle::setRxoff(double v)                        { d->setRxoff(v); }
-void TextStyle::setRyoff(double v)                        { d->setRyoff(v); }
+void TextStyle::setRxoff(qreal v)                        { d->setRxoff(v); }
+void TextStyle::setRyoff(qreal v)                        { d->setRyoff(v); }
 void TextStyle::setSizeIsSpatiumDependent(bool v)         { d->sizeIsSpatiumDependent = v; }
-void TextStyle::setFrameWidth(double v)                   { d->frameWidth = v; }
-void TextStyle::setPaddingWidth(double v)                 { d->paddingWidth = v; }
+void TextStyle::setFrameWidth(qreal v)                   { d->frameWidth = v; }
+void TextStyle::setPaddingWidth(qreal v)                 { d->paddingWidth = v; }
 void TextStyle::setFrameRound(int v)                      { d->frameRound = v; }
 void TextStyle::setFrameColor(const QColor& v)            { d->frameColor = v; }
 void TextStyle::setCircle(bool v)                         { d->circle = v;     }
@@ -1279,10 +1279,10 @@ void TextStyle::setSystemFlag(bool v)                     { d->systemFlag = v; }
 void TextStyle::setForegroundColor(const QColor& v)       { d->foregroundColor = v; }
 void TextStyle::write(Xml& xml) const                     { d->write(xml); }
 void TextStyle::read(QDomElement v)                       { d->read(v); }
-QFont TextStyle::font(double space) const                 { return d->font(space); }
-QFont TextStyle::fontPx(double spatium) const             { return d->fontPx(spatium); }
-QRectF TextStyle::bbox(double sp, const QString& s) const { return d->bbox(sp, s); }
-QFontMetricsF TextStyle::fontMetrics(double space) const  { return fontMetrics(space); }
+QFont TextStyle::font(qreal space) const                 { return d->font(space); }
+QFont TextStyle::fontPx(qreal spatium) const             { return d->fontPx(spatium); }
+QRectF TextStyle::bbox(qreal sp, const QString& s) const { return d->bbox(sp, s); }
+QFontMetricsF TextStyle::fontMetrics(qreal space) const  { return fontMetrics(space); }
 bool TextStyle::operator!=(const TextStyle& s) const      { return d->operator!=(*s.d); }
 void TextStyle::layout(Element* e) const                  { d->layout(e);    }
 void TextStyle::writeProperties(Xml& xml) const           { d->writeProperties(xml); }
@@ -1410,7 +1410,7 @@ void Style::set(StyleIdx t, bool val)
       set(StyleVal(t, val));
       }
 
-void Style::set(StyleIdx t, double val)
+void Style::set(StyleIdx t, qreal val)
       {
       set(StyleVal(t, val));
       }
@@ -1456,7 +1456,7 @@ bool Style::valueB(StyleIdx idx) const
 //   valueD
 //---------------------------------------------------------
 
-double Style::valueD(StyleIdx idx) const
+qreal Style::valueD(StyleIdx idx) const
       {
       return value(idx).toDouble();
       }
@@ -1555,12 +1555,12 @@ void StyleData::setPageFormat(const PageFormat& pf)
       *_pageFormat = pf;
       }
 
-double Style::spatium() const
+qreal Style::spatium() const
       {
       return d->spatium();
       }
 
-void Style::setSpatium(double v)
+void Style::setSpatium(qreal v)
       {
       d->setSpatium(v);
       }

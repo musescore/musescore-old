@@ -125,8 +125,8 @@ void Xml::fTag(const char* name, const Fraction& f)
 
 Fraction readFraction(QDomElement e)
       {
-      double z = e.attribute("z", "0.0").toDouble();
-      double n = e.attribute("n", "0.0").toDouble();
+      qreal z = e.attribute("z", "0.0").toDouble();
+      qreal n = e.attribute("n", "0.0").toDouble();
       return Fraction(z, n);
       }
 

@@ -58,12 +58,12 @@ void Spacer::draw(Painter* painter) const
 
 void Spacer::layout()
       {
-      double _spatium = spatium();
+      qreal _spatium = spatium();
 
       path     = QPainterPath();
-      double w = _spatium;
-      double b = w * .5;
-      double h = _space.val() * _spatium;
+      qreal w = _spatium;
+      qreal b = w * .5;
+      qreal h = _space.val() * _spatium;
 
       if (subtype() == SPACER_DOWN) {
             path.lineTo(w, 0.0);
@@ -83,7 +83,7 @@ void Spacer::layout()
             path.moveTo(0.0, h);
             path.lineTo(w, h);
             }
-      double lw = spatium() * 0.4;
+      qreal lw = spatium() * 0.4;
       QRectF bb(0, 0, w, h);
       bb.adjust(-lw, -lw, lw, lw);
       setbbox(bb);
@@ -131,7 +131,7 @@ void Spacer::editDrag(const EditData& ed)
 void Spacer::updateGrips(int* grips, QRectF* grip) const
       {
       *grips   = 1;
-      double _spatium = spatium();
+      qreal _spatium = spatium();
       QPointF p;
       if (subtype() == SPACER_DOWN)
             p = QPointF(_spatium * .5, _space.val() * _spatium);

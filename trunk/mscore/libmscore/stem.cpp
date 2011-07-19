@@ -110,8 +110,8 @@ void Stem::setVisible(bool f)
 
 QRectF Stem::bbox() const
       {
-      double w = point(score()->styleS(ST_stemWidth));
-      double l = _len + point(_userLen);
+      qreal w = point(score()->styleS(ST_stemWidth));
+      qreal l = _len + point(_userLen);
       return QRectF(-w * .5, 0, w, l).normalized();
       }
 

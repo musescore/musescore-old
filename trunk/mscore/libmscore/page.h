@@ -31,8 +31,8 @@ class Painter;
 struct PaperSize {
       int qtsize;
       const char* name;
-      double w, h;            // size in inch
-      PaperSize(int s, const char* n, double wi, double hi)
+      qreal w, h;            // size in inch
+      PaperSize(int s, const char* n, qreal wi, qreal hi)
          : qtsize(s), name(n), w(wi), h(hi) {}
       };
 
@@ -42,28 +42,28 @@ struct PaperSize {
 
 struct PageFormat {
       int size;                     // index in paperSizes[]
-      double _width;
-      double _height;
-      double evenLeftMargin;        // values in inch
-      double evenRightMargin;
-      double evenTopMargin;
-      double evenBottomMargin;
-      double oddLeftMargin;
-      double oddRightMargin;
-      double oddTopMargin;
-      double oddBottomMargin;
+      qreal _width;
+      qreal _height;
+      qreal evenLeftMargin;        // values in inch
+      qreal evenRightMargin;
+      qreal evenTopMargin;
+      qreal evenBottomMargin;
+      qreal oddLeftMargin;
+      qreal oddRightMargin;
+      qreal oddTopMargin;
+      qreal oddBottomMargin;
       bool landscape;
       bool twosided;
 
    public:
       PageFormat();
-      double width() const;         // return width in inch
-      double height() const;        // height in inch
+      qreal width() const;         // return width in inch
+      qreal height() const;        // height in inch
       QString name() const;
       void read(QDomElement,  Score*);
-      void readMusicXML(QDomElement, double);
+      void readMusicXML(QDomElement, qreal);
       void write(Xml&);
-      void writeMusicXML(Xml&, double);
+      void writeMusicXML(Xml&, qreal);
       };
 
 //---------------------------------------------------------
@@ -97,12 +97,12 @@ class Page : public Element {
       void setNo(int n);
       bool isOdd() const;
 
-      double tm() const;            // margins in pixel
-      double bm() const;
-      double lm() const;
-      double rm() const;
-      double loWidth() const;
-      double loHeight() const;
+      qreal tm() const;            // margins in pixel
+      qreal bm() const;
+      qreal lm() const;
+      qreal rm() const;
+      qreal loWidth() const;
+      qreal loHeight() const;
 
       virtual void draw(Painter*) const;
       virtual void scanElements(void* data, void (*func)(void*, Element*));
@@ -115,6 +115,6 @@ class Page : public Element {
 
 extern const PaperSize paperSizes[];
 extern int paperSizeNameToIndex(const QString&);
-extern int paperSizeSizeToIndex(const double wi, const double hi);
+extern int paperSizeSizeToIndex(const qreal wi, const qreal hi);
 
 #endif

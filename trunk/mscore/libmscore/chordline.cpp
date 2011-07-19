@@ -43,7 +43,7 @@ ChordLine::ChordLine(const ChordLine& cl)
 
 void ChordLine::setSubtype(int st)
       {
-      double x2, y2;
+      qreal x2, y2;
       switch(st) {
             case 0:
                   break;
@@ -70,7 +70,7 @@ void ChordLine::setSubtype(int st)
 
 void ChordLine::layout()
       {
-      double _spatium = spatium();
+      qreal _spatium = spatium();
       if (parent()) {
             Note* note = chord()->upNote();
             QPointF p(note->pos());
@@ -100,8 +100,8 @@ void ChordLine::read(QDomElement e)
                         QString tag(ee.tagName());
                         if (tag == "Element") {
                               int type = ee.attribute("type").toInt();
-                              double x = ee.attribute("x").toDouble();
-                              double y = ee.attribute("y").toDouble();
+                              qreal x = ee.attribute("x").toDouble();
+                              qreal y = ee.attribute("y").toDouble();
                               switch(QPainterPath::ElementType(type)) {
                                     case QPainterPath::MoveToElement:
                                           path.moveTo(x, y);
@@ -164,9 +164,9 @@ void ChordLine::write(Xml& xml) const
 
 void ChordLine::draw(Painter* painter) const
       {
-      double _spatium = spatium();
+      qreal _spatium = spatium();
       painter->scale(_spatium);
-      double lw = 0.15;
+      qreal lw = 0.15;
       painter->setLineWidth(lw);
       painter->setCapStyle(Qt::RoundCap);
       painter->setJoinStyle(Qt::RoundJoin);
@@ -182,13 +182,13 @@ void ChordLine::editDrag(const EditData& ed)
       {
       int n = path.elementCount();
       QPainterPath p;
-      double sp = spatium();
-      double dx = ed.delta.x() / sp;
-      double dy = ed.delta.y() / sp;
+      qreal sp = spatium();
+      qreal dx = ed.delta.x() / sp;
+      qreal dy = ed.delta.y() / sp;
       for (int i = 0; i < n; ++i) {
             const QPainterPath::Element& e = path.elementAt(i);
-            double x = e.x;
-            double y = e.y;
+            qreal x = e.x;
+            qreal y = e.y;
             if (ed.curGrip == i) {
                   x += dx;
                   y += dy;
@@ -204,10 +204,10 @@ void ChordLine::editDrag(const EditData& ed)
                         break;
                   case QPainterPath::CurveToElement:
                         {
-                        double x2 = path.elementAt(i+1).x;
-                        double y2 = path.elementAt(i+1).y;
-                        double x3 = path.elementAt(i+2).x;
-                        double y3 = path.elementAt(i+2).y;
+                        qreal x2 = path.elementAt(i+1).x;
+                        qreal y2 = path.elementAt(i+1).y;
+                        qreal x3 = path.elementAt(i+2).x;
+                        qreal y3 = path.elementAt(i+2).y;
                         if (i + 1 == ed.curGrip) {
                               x2 += dx;
                               y2 += dy;
@@ -236,7 +236,7 @@ void ChordLine::updateGrips(int* grips, QRectF* grip) const
       int n = path.elementCount();
       *grips = n;
       QPointF cp(canvasPos());
-      double sp = spatium();
+      qreal sp = spatium();
       for (int i = 0; i < n; ++i)
             grip[i].translate(cp + QPointF(path.elementAt(i).x * sp, path.elementAt(i).y * sp));
       }

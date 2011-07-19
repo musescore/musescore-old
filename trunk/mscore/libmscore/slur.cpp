@@ -53,13 +53,13 @@ SlurSegment::SlurSegment(const SlurSegment& b)
 
 void SlurSegment::updatePath()
       {
-      double _spatium = spatium();
+      qreal _spatium = spatium();
 
       QPointF pp[4];
       for (int i = 0; i < 4; ++i)
             pp[i] = ups[i].p + ups[i].off * _spatium;
       path = QPainterPath();
-      double w = (score()->styleS(ST_SlurMidWidth).val() - score()->styleS(ST_SlurEndWidth).val()) * _spatium;
+      qreal w = (score()->styleS(ST_SlurMidWidth).val() - score()->styleS(ST_SlurEndWidth).val()) * _spatium;
       QPointF t(0.0, w);    // thickness of slur
 
       path.moveTo(pp[0]);
@@ -371,7 +371,7 @@ void SlurSegment::read(QDomElement e)
 
 void SlurSegment::computeBezier()
       {
-      double _spatium = spatium();
+      qreal _spatium = spatium();
       qreal bow       = score()->styleS(ST_SlurBow).val() * _spatium;
       //
       //  compute bezier help points
@@ -522,7 +522,7 @@ static qreal fixArticulations(qreal yo, Chord* c, qreal _up)
 
 void SlurTie::slurPos(SlurPos* sp)
       {
-      double _spatium = spatium();
+      qreal _spatium = spatium();
       Element* e1 = startElement();
       Element* e2 = endElement();
       bool isTie  = e1->type() == NOTE;
@@ -568,9 +568,9 @@ void SlurTie::slurPos(SlurPos* sp)
       //    horizontal: middle of note head
       //    vertical:   _spatium * .4 above/below note head
       //
-      double hw  = note1->headWidth();
-      double hh  = note1->headHeight();
-      double _up = up ? -1.0 : 1.0;
+      qreal hw  = note1->headWidth();
+      qreal hh  = note1->headHeight();
+      qreal _up = up ? -1.0 : 1.0;
 
       //------p1
       xo = hw * .5;
@@ -589,7 +589,7 @@ void SlurTie::slurPos(SlurPos* sp)
 
                   Beam* beam1 = sc->beam();
                   if (beam1 && (beam1->elements().back() != sc) && (sc->up() == up)) {
-                        double sh = stem1->height() + _spatium;
+                        qreal sh = stem1->height() + _spatium;
                         if (up)
                               yo = sc->downNote()->yPos() - sh;
                         else
@@ -608,9 +608,9 @@ void SlurTie::slurPos(SlurPos* sp)
                         if ((sc->up() != ec->up()) && (sc->up() == up)) {
                               Note* n1  = sc->up() ? sc->downNote() : sc->upNote();
                               Note* n2  = ec->up() ? ec->downNote() : ec->upNote();
-                              double yd = n2->yPos() - n1->yPos();
+                              qreal yd = n2->yPos() - n1->yPos();
 
-                              double sh = stem1->height();    // limit y move
+                              qreal sh = stem1->height();    // limit y move
                               if (yd > 0.0) {
                                     if (yd > sh)
                                           yd = sh;
@@ -649,7 +649,7 @@ void SlurTie::slurPos(SlurPos* sp)
                        && (sc->noteType() == NOTE_NORMAL)
                        )
                         ) {
-                        double sh = stem2->height() + _spatium;
+                        qreal sh = stem2->height() + _spatium;
                         if (up)
                               yo = ec->downNote()->yPos() - sh;
                         else
@@ -665,9 +665,9 @@ void SlurTie::slurPos(SlurPos* sp)
                   if ((sc->up() != ec->up()) && (ec->up() == up)) {
                         Note* n1 = sc->up() ? sc->downNote() : sc->upNote();
                         Note* n2 = ec->up() ? ec->downNote() : ec->upNote();
-                        double yd = n2->yPos() - n1->yPos();
+                        qreal yd = n2->yPos() - n1->yPos();
 
-                        double mh = stem2->height();    // limit y move
+                        qreal mh = stem2->height();    // limit y move
                         if (yd > 0.0) {
                               if (yd > mh)
                                     yd = mh;
@@ -848,7 +848,7 @@ static bool isDirectionMixture(Chord* c1, Chord* c2)
 
 void Slur::layout()
       {
-      double _spatium = spatium();
+      qreal _spatium = spatium();
 
       if (score() == gscore || !startElement()) {
             //
@@ -1011,7 +1011,7 @@ void Slur::layout()
 //   firstNoteRestSegmentX
 //---------------------------------------------------------
 
-double SlurTie::firstNoteRestSegmentX(System* system)
+qreal SlurTie::firstNoteRestSegmentX(System* system)
       {
       foreach(const MeasureBase* mb, system->measures()) {
             if (mb->type() == MEASURE) {
@@ -1113,7 +1113,7 @@ void Tie::layout()
             return;
             }
 
-      double _spatium = spatium();
+      qreal _spatium = spatium();
 
       Chord* c1   = startNote()->chord();
       Measure* m1 = c1->measure();

@@ -84,12 +84,12 @@ void StaffState::draw(Painter* painter) const
 
 void StaffState::layout()
       {
-      double _spatium = spatium();
+      qreal _spatium = spatium();
       path      = QPainterPath();
       lw        = _spatium * 0.3;
-      double h  = _spatium * 4;
-      double w  = _spatium * 2.5;
-//      double w1 = w * .6;
+      qreal h  = _spatium * 4;
+      qreal w  = _spatium * 2.5;
+//      qreal w1 = w * .6;
 
       switch(subtype()) {
             case STAFF_STATE_INSTRUMENT:

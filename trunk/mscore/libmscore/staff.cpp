@@ -473,7 +473,7 @@ void Staff::changeKeySig(int tick, KeySigEvent st)
 //   height
 //---------------------------------------------------------
 
-double Staff::height() const
+qreal Staff::height() const
       {
       return (lines()-1) * spatium() * _staffType->lineDistance().val();
       }
@@ -482,7 +482,7 @@ double Staff::height() const
 //   spatium
 //---------------------------------------------------------
 
-double Staff::spatium() const
+qreal Staff::spatium() const
       {
       return _score->spatium() * mag();
       }
@@ -491,7 +491,7 @@ double Staff::spatium() const
 //   mag
 //---------------------------------------------------------
 
-double Staff::mag() const
+qreal Staff::mag() const
       {
       return _small ? score()->styleD(ST_smallStaffMag) : 1.0;
       }

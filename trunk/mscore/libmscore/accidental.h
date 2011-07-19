@@ -31,8 +31,8 @@ class Painter;
 
 struct SymElement {
       int sym;
-      double x;
-      SymElement(int _sym, double _x) : sym(_sym), x(_x) {}
+      qreal x;
+      SymElement(int _sym, qreal _x) : sym(_sym), x(_x) {}
       };
 
 //---------------------------------------------------------

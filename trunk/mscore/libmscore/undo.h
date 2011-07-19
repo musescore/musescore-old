@@ -1009,12 +1009,12 @@ class ChangePatch : public UndoCommand {
 
 class ChangeTuning : public UndoCommand {
       Note* note;
-      double tuning;
+      qreal tuning;
 
       void flip();
 
    public:
-      ChangeTuning(Note* n, double t) : note(n), tuning(t) {}
+      ChangeTuning(Note* n, qreal t) : note(n), tuning(t) {}
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       UNDO_NAME("ChangeTuning");
@@ -1044,13 +1044,13 @@ class ChangeUserMirror : public UndoCommand {
 class ChangePageFormat : public UndoCommand {
       Score* score;
       PageFormat* pf;
-      double spatium;
+      qreal spatium;
       int pageOffset;
 
       void flip();
 
    public:
-      ChangePageFormat(Score*, PageFormat*, double sp, int po);
+      ChangePageFormat(Score*, PageFormat*, qreal sp, int po);
       ~ChangePageFormat();
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
@@ -1132,11 +1132,11 @@ class AddTextStyle : public UndoCommand {
 
 class ChangeStretch : public UndoCommand {
       Measure* measure;
-      double stretch;
+      qreal stretch;
       void flip();
 
    public:
-      ChangeStretch(Measure*, double);
+      ChangeStretch(Measure*, qreal);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       UNDO_NAME("ChangeStretch");
@@ -1251,7 +1251,7 @@ class ChangeMeasureProperties : public UndoCommand {
       Fraction len;
       bool breakMM;
       int repeatCount;
-      double stretch;
+      qreal stretch;
       int noOffset;
       bool irregular;
 
@@ -1260,7 +1260,7 @@ class ChangeMeasureProperties : public UndoCommand {
    public:
       ChangeMeasureProperties(Measure*, const Fraction& sig, const Fraction& len,
          bool breakMM,
-         int repeatCount, double stretch, int noOffset, bool irregular);
+         int repeatCount, qreal stretch, int noOffset, bool irregular);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       UNDO_NAME("ChangeMeasureProperties");
@@ -1498,12 +1498,12 @@ class ChangeNoteEvents : public UndoCommand {
 
 class ChangeBeamProperties : public UndoCommand {
       Beam* beam;
-      double grow1, grow2;
+      qreal grow1, grow2;
 
       void flip();
 
    public:
-      ChangeBeamProperties(Beam* b, double g1, double g2) : beam(b), grow1(g1), grow2(g2) {}
+      ChangeBeamProperties(Beam* b, qreal g1, qreal g2) : beam(b), grow1(g1), grow2(g2) {}
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       UNDO_NAME("ChangeBeamProperties");
@@ -1535,13 +1535,13 @@ extern void updateNoteLines(Segment* segment, int track);
 class ChangeBoxProperties : public UndoCommand {
       Box* _box;
 
-      double _marginLeft, _marginTop, _marginRight, _marginBottom;
-      double _height, _width;
+      qreal _marginLeft, _marginTop, _marginRight, _marginBottom;
+      qreal _height, _width;
 
       void flip();
 
    public:
-      ChangeBoxProperties(Box *, double, double, double, double, double, double);
+      ChangeBoxProperties(Box *, qreal, qreal, qreal, qreal, qreal, qreal);
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       UNDO_NAME("ChangeBoxProperties");
