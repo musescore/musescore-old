@@ -127,14 +127,14 @@ static QScriptValue qtscript_QMouseEvent_prototype_call(QScriptContext *context,
         return QScriptValue(context->engine(), _q_result);
     }
     break;
-
+#if 0 // WSHACK
     case 5:
     if (context->argumentCount() == 0) {
         bool _q_result = _q_self->hasExtendedInfo();
         return QScriptValue(context->engine(), _q_result);
     }
     break;
-
+#endif
     case 6:
     if (context->argumentCount() == 0) {
         QPoint _q_result = _q_self->pos();
@@ -209,7 +209,7 @@ static QScriptValue qtscript_QMouseEvent_static_call(QScriptContext *context, QS
         return _q_result;
     }
     break;
-
+#if 0 // WSHACK
     case 1:
     if (context->argumentCount() == 6) {
         QEvent::Type _q_arg0 = qscriptvalue_cast<QEvent::Type>(context->argument(0));
@@ -222,7 +222,7 @@ static QScriptValue qtscript_QMouseEvent_static_call(QScriptContext *context, QS
         return qScriptValueFromValue(context->engine(), _q_result);
     }
     break;
-
+#endif
     default:
     Q_ASSERT(false);
     }

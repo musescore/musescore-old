@@ -2018,6 +2018,8 @@ void Measure::read(QDomElement e, int staffIdx)
                               score()->updateHairpin(hp);
                               }
                         }
+                  else
+                        printf("Measure::read(): cannot find spanner %d\n", id);
                   }
             else if (tag == "HairPin"
                || tag == "Pedal"
@@ -3278,78 +3280,86 @@ Measure* Measure::cloneMeasure(Score* sc, SlurMap* slurMap, TieMap* tieMap, Span
             m->_segments.push_back(s);
             for (int track = 0; track < tracks; ++track) {
                   Element* oe = oseg->element(track);
-                  if (oe == 0)
-                        continue;
-                  Element* ne = oe->clone();
-                  if (oe->isChordRest()) {
-                        ChordRest* ocr = static_cast<ChordRest*>(oe);
-                        ChordRest* ncr = static_cast<ChordRest*>(ne);
-                        Tuplet* ot     = ocr->tuplet();
-                        if (ot) {
-                              Tuplet* nt = tupletMap[track].findNew(ot);
-                              if (nt == 0) {
-                                    nt = new Tuplet(*ot);
-                                    nt->clear();
-                                    nt->setTrack(track);
-                                    nt->setScore(sc);
-                                    m->add(nt);
-                                    tupletMap[track].add(ot, nt);
-                                    }
-                              ncr->setTuplet(nt);
-                              }
-                        foreach(Slur* s, ocr->slurFor()) {
-                              Slur* slur = new Slur(sc);
-                              slur->setStartElement(ncr);
-                              ncr->addSlurFor(slur);
-                              slurMap[track].add(s, slur);
-                              }
-                        foreach(Slur* s, ocr->slurBack()) {
-                              Slur* slur = slurMap[track].findNew(s);
-                              if (slur) {
-                                    slur->setEndElement(ncr);
-                                    ncr->addSlurBack(slur);
-                                    }
-                              else {
-                                    printf("cloneMeasure: cannot find slur\n");
-                                    }
-                              }
-                        if (oe->type() == CHORD) {
-                              Chord* och = static_cast<Chord*>(ocr);
-                              Chord* nch = static_cast<Chord*>(ncr);
-                              int n = och->notes().size();
-                              for (int i = 0; i < n; ++i) {
-                                    Note* on = och->notes().at(i);
-                                    Note* nn = nch->notes().at(i);
-                                    if (on->tieFor()) {
-                                          Tie* tie = new Tie(sc);
-                                          nn->setTieFor(tie);
-                                          tie->setStartNote(nn);
-                                          tieMap[track].add(on->tieFor(), tie);
+                  if (oe) {
+                        Element* ne = oe->clone();
+                        if (oe->isChordRest()) {
+                              ChordRest* ocr = static_cast<ChordRest*>(oe);
+                              ChordRest* ncr = static_cast<ChordRest*>(ne);
+                              Tuplet* ot     = ocr->tuplet();
+                              if (ot) {
+                                    Tuplet* nt = tupletMap[track].findNew(ot);
+                                    if (nt == 0) {
+                                          nt = new Tuplet(*ot);
+                                          nt->clear();
+                                          nt->setTrack(track);
+                                          nt->setScore(sc);
+                                          m->add(nt);
+                                          tupletMap[track].add(ot, nt);
                                           }
-                                    if (on->tieBack()) {
-                                          Tie* tie = tieMap[track].findNew(on->tieBack());
-                                          if (tie) {
-                                                nn->setTieBack(tie);
-                                                tie->setEndNote(nn);
-                                                }
-                                          else {
-                                                printf("cloneMeasure: cannot find tie\n");
+                                    ncr->setTuplet(nt);
+                                    }
+                              foreach(Slur* s, ocr->slurFor()) {
+                                    Slur* slur = new Slur(sc);
+                                    slur->setStartElement(ncr);
+                                    ncr->addSlurFor(slur);
+                                    slurMap[track].add(s, slur);
+                                    }
+                              foreach(Slur* s, ocr->slurBack()) {
+                                    Slur* slur = slurMap[track].findNew(s);
+                                    if (slur) {
+                                          slur->setEndElement(ncr);
+                                          ncr->addSlurBack(slur);
+                                          }
+                                    else {
+                                          printf("cloneMeasure(%d): cannot find slur, track %d\n", tick(), track);
+                                          int tracks = score()->nstaves() * VOICES;
+                                          for (int i = 0; i < tracks; ++i) {
+                                                Slur* sl = slurMap[i].findNew(s);
+                                                if (sl) {
+                                                      printf("    found in track %d\n", i);
+                                                      break;
+                                                      }
                                                 }
                                           }
                                     }
+                              if (oe->type() == CHORD) {
+                                    Chord* och = static_cast<Chord*>(ocr);
+                                    Chord* nch = static_cast<Chord*>(ncr);
+                                    int n = och->notes().size();
+                                    for (int i = 0; i < n; ++i) {
+                                          Note* on = och->notes().at(i);
+                                          Note* nn = nch->notes().at(i);
+                                          if (on->tieFor()) {
+                                                Tie* tie = new Tie(sc);
+                                                nn->setTieFor(tie);
+                                                tie->setStartNote(nn);
+                                                tieMap->add(on->tieFor(), tie);
+                                                }
+                                          if (on->tieBack()) {
+                                                Tie* tie = tieMap->findNew(on->tieBack());
+                                                if (tie) {
+                                                      nn->setTieBack(tie);
+                                                      tie->setEndNote(nn);
+                                                      }
+                                                else {
+                                                      printf("cloneMeasure: cannot find tie, track %d\n", track);
+                                                      }
+                                                }
+                                          }
+                                    }
                               }
+                        s->add(ne);
                         }
-                  s->add(ne);
                   foreach(Element* e, oseg->annotations()) {
-                        if (e->generated())
-                              continue;
-                        if (e->track() != track)
+                        if (e->generated() || e->track() != track)
                               continue;
                         Element* ne = e->clone();
                         ne->setTrack(track);
                         s->add(ne);
                         }
                   foreach(Spanner* spanner, oseg->spannerFor()) {
+                        if (spanner->track() != track)
+                              continue;
                         Spanner* nsp = static_cast<Spanner*>(spanner->clone());
                         nsp->setScore(sc);
                         s->addSpannerFor(nsp);
@@ -3357,6 +3367,8 @@ Measure* Measure::cloneMeasure(Score* sc, SlurMap* slurMap, TieMap* tieMap, Span
                         nsp->setStartElement(s);
                         }
                   foreach(Spanner* osp, oseg->spannerBack()) {
+                        if (osp->track() != track)
+                              continue;
                         Spanner* spanner = spannerMap->findNew(osp);
                         if (spanner) {
                               s->addSpannerBack(spanner);

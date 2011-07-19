@@ -257,7 +257,15 @@ void Album::load(QDomElement e)
 void Album::loadScores()
       {
       foreach(AlbumItem* item, _scores) {
+            if (item->path.isEmpty())
+                  continue;
             Score* score = new Score(MScore::defaultStyle());
+            QString ip = item->path;
+            if (ip[0] != '/') {
+                  // score path it relative to album path:
+                  QFileInfo f(_path);
+                  ip = f.path() + "/" + item->path;
+                  }
             if (mscore->readScore(score, item->path)) {
                   item->score = score;
                   }

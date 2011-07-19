@@ -2088,14 +2088,14 @@ bool Score::appendScore(Score* score)
       {
       int tracks       = score->nstaves() * VOICES;
       SlurMap* slurMap = new SlurMap[tracks];
-      TieMap*  tieMap  = new TieMap[tracks];
+      TieMap  tieMap;
       SpannerMap spannerMap;
 
       MeasureBaseList* ml = &score->_measures;
       for (MeasureBase* mb = ml->first(); mb; mb = mb->next()) {
             MeasureBase* nmb;
             if (mb->type() == MEASURE)
-                  nmb = static_cast<Measure*>(mb)->cloneMeasure(this, slurMap, tieMap, &spannerMap);
+                  nmb = static_cast<Measure*>(mb)->cloneMeasure(this, slurMap, &tieMap, &spannerMap);
             else
                   nmb = mb->clone();
             nmb->setNext(0);
@@ -2106,7 +2106,6 @@ bool Score::appendScore(Score* score)
       fixTicks();
       renumberMeasures();
       delete[] slurMap;
-      delete[] tieMap;
       return true;
       }
 

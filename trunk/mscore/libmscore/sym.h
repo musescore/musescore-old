@@ -163,7 +163,7 @@ enum {
       longaupSym,
       longadownSym,
       brevisheadSym,
-      brevisqrealheadSym,
+      brevisdoubleheadSym,
       wholeheadSym,
       halfheadSym,
       quartheadSym,
