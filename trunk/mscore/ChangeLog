@@ -1,3 +1,6 @@
+20.jul (lv)
+      - fix MusicXML import/export of notehead color
+      - add MusicXML testfile for noteheads
 18.jul (ws)
       - fix #11530: Creation from template partially broken
       - fix #11554: In "Single Palette Mode" the previous palette collapses only
