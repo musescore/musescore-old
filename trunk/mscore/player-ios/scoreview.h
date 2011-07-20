@@ -62,7 +62,6 @@ class ScoreView : public QDeclarativeItem, public MuseScoreView {
 
    public:
       ScoreView(QDeclarativeItem* parent = 0);
-      virtual ~ScoreView() {}
       };
 
 

@@ -11,6 +11,7 @@
 //  the file LICENCE.GPL
 //=============================================================================
 
+
 #include "style.h"
 #include "sym.h"
 #include "utils.h"
@@ -21,6 +22,8 @@
 
 QVector<Sym> symbols[2];
 static bool symbolsInitialized[2] = { false, false };
+
+#undef USE_GLYPHS
 
 #ifdef USE_GLYPHS
 static bool fontsInitialized = false;
@@ -482,8 +485,10 @@ Sym::Sym(const char* name, int c, int fid, qreal ax, qreal ay)
    : _code(c), fontId(fid), _name(name), _font(fontId2font(fid)), _attach(ax * DPI/PPI, ay * DPI/PPI)
       {
       QFontMetricsF fm(_font);
-      if (!fm.inFont(_code))
+      if (!fm.inFont(_code)) {
             printf("Sym: character 0x%x(%d) <%s> are not in font <%s>\n", c, c, _name, qPrintable(_font.family()));
+            return;
+            }
       w     = fm.width(_code);
       _bbox = fm.boundingRect(_code);
 #ifdef USE_GLYPHS

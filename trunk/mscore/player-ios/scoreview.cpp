@@ -149,6 +149,70 @@ void ScoreView::paint(QPainter* painter, const QStyleOptionGraphicsItem*, QWidge
       painter->restore();
       }
 
+#if 0
+//---------------------------------------------------------
+//   wheelEvent
+//---------------------------------------------------------
+
+void ScoreView::wheelEvent(QWheelEvent* event)
+      {
+      if (event->modifiers() & Qt::ControlModifier) {
+            zoom(event->delta() / 120, event->pos());
+            return;
+            }
+      int dx = 0;
+      int dy = 0;
+      if (event->modifiers() & Qt::ShiftModifier || event->orientation() == Qt::Horizontal) {
+            //
+            //    scroll horizontal
+            //
+            int n = width() / 10;
+            if (n < 2)
+                  n = 2;
+            dx = event->delta() * n / 120;
+            }
+      else {
+            //
+            //    scroll vertical
+            //
+            int n = height() / 10;
+            if (n < 2)
+                  n = 2;
+            dy = event->delta() * n / 120;
+            }
+      _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m13(), _matrix.m21(),
+         _matrix.m22(), _matrix.m23(), _matrix.dx()+dx, _matrix.dy()+dy, _matrix.m33());
+      imatrix = _matrix.inverted();
+      scroll(dx, dy, QRect(0, 0, width(), height()));
+      update();
+      }
+
+//---------------------------------------------------------
+//   mousePressEvent
+//---------------------------------------------------------
+
+void ScoreView::mousePressEvent(QMouseEvent* event)
+      {
+      startDrag = event->pos();
+      }
+
+//---------------------------------------------------------
+//   mouseMoveEvent
+//---------------------------------------------------------
+
+void ScoreView::mouseMoveEvent(QMouseEvent* event)
+      {
+      int dx = event->pos().x() - startDrag.x();
+      int dy = event->pos().y() - startDrag.y();
+      startDrag = event->pos();
+      _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m13(), _matrix.m21(),
+         _matrix.m22(), _matrix.m23(), _matrix.dx()+dx, _matrix.dy()+dy, _matrix.m33());
+      imatrix = _matrix.inverted();
+      scroll(dx, dy, QRect(0, 0, width(), height()));
+      update();
+      }
+#endif
+
 //---------------------------------------------------------
 //   scroll
 //---------------------------------------------------------
