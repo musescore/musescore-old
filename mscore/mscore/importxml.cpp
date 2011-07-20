@@ -2866,7 +2866,8 @@ printf("new Tie %p\n", tie);
             note->setHeadGroup(headGroup);
             // note->setTrack(track);
             // note->setStaffMove(move);
-            note->setColor(noteheadColor);
+            if (noteheadColor != QColor::Invalid)
+                  note->setColor(noteheadColor);
 
             if (!fingering.isEmpty()) {
                   Text* f = new Text(score);
