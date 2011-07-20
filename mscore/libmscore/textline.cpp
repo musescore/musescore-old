@@ -444,7 +444,7 @@ bool TextLine::readProperties(QDomElement e)
       else if (tag == "endHookType")
             _endHookType = HookType(text.toInt());
       else if (tag == "hookUp")           // obsolete
-            _endHookHeight *= -1.0;
+            _endHookHeight *= qreal(-1.0);
       else if (tag == "beginSymbol" || tag == "symbol")     // "symbol" is obsolete
             _beginSymbol = text.toInt();
       else if (tag == "continueSymbol")

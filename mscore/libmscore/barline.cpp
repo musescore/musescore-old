@@ -553,11 +553,11 @@ void BarLine::layout()
                   dw = point(w);
                   break;
             case START_REPEAT:
-                  w  += score()->styleS(ST_endBarWidth) + 2.0 * score()->styleS(ST_endBarDistance);
+                  w  += score()->styleS(ST_endBarWidth) + qreal(2.0) * score()->styleS(ST_endBarDistance);
                   dw = point(w) + dotwidth;
                   break;
             case END_REPEAT:
-                  w  += score()->styleS(ST_endBarWidth) + 2.0 * score()->styleS(ST_endBarDistance);
+                  w  += score()->styleS(ST_endBarWidth) + qreal(2.0) * score()->styleS(ST_endBarDistance);
                   dw = point(w) + dotwidth;
                   break;
             case END_BAR:

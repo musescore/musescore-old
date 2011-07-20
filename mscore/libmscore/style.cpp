@@ -383,7 +383,7 @@ StyleData::StyleData()
             StyleVal(ST_systemDistance, Spatium(9.25)),
             StyleVal(ST_lyricsDistance, Spatium(2)),
             StyleVal(ST_lyricsMinBottomDistance, Spatium(2)),
-            StyleVal(ST_lyricsLineHeight, 1.0),
+            StyleVal(ST_lyricsLineHeight, qreal(1.0)),
             StyleVal(ST_systemFrameDistance, Spatium(7.0)),
             StyleVal(ST_frameSystemDistance, Spatium(1.0)),
             StyleVal(ST_minMeasureWidth, Spatium(4.0)),
@@ -415,7 +415,7 @@ StyleData::StyleData()
             StyleVal(ST_barNoteDistance,Spatium(1.2)),
             StyleVal(ST_noteBarDistance,Spatium(1.0)),
 
-            StyleVal(ST_measureSpacing,1.2),
+            StyleVal(ST_measureSpacing, qreal(1.2)),
             StyleVal(ST_staffLineWidth,Spatium(0.08)),      // 0.09375
             StyleVal(ST_ledgerLineWidth,Spatium(0.12)),     // 0.1875
             StyleVal(ST_ledgerLineLength, Spatium(.6)),
@@ -423,11 +423,11 @@ StyleData::StyleData()
             StyleVal(ST_accidentalDistance,Spatium(0.22)),
             StyleVal(ST_accidentalNoteDistance,Spatium(0.22)),
             StyleVal(ST_beamWidth,Spatium(0.5)),            // was 0.48
-            StyleVal(ST_beamDistance, 0.5),
+            StyleVal(ST_beamDistance, qreal(0.5)),
             StyleVal(ST_beamMinLen,Spatium(1.25)),
-            StyleVal(ST_beamMinSlope,0.05),
+            StyleVal(ST_beamMinSlope, qreal(0.05)),
 
-            StyleVal(ST_beamMaxSlope,         0.2),
+            StyleVal(ST_beamMaxSlope,         qreal(0.2)),
             StyleVal(ST_maxBeamTicks,         AL::division),
             StyleVal(ST_dotNoteDistance,      Spatium(0.35)),
             StyleVal(ST_dotRestDistance,      Spatium(0.25)),
@@ -435,25 +435,25 @@ StyleData::StyleData()
             StyleVal(ST_propertyDistanceHead, Spatium(1.0)),
             StyleVal(ST_propertyDistanceStem, Spatium(1.8)),
             StyleVal(ST_propertyDistance,     Spatium(1.0)),
-            StyleVal(ST_pageFillLimit,        0.7),
-            StyleVal(ST_lastSystemFillLimit,  0.3),
+            StyleVal(ST_pageFillLimit,        qreal(0.7)),
+            StyleVal(ST_lastSystemFillLimit,  qreal(0.3)),
 
-            StyleVal(ST_hairpinHeight,Spatium(1.2)),
-            StyleVal(ST_hairpinContHeight,Spatium(0.5)),
-            StyleVal(ST_hairpinWidth,Spatium(0.13)),
-            StyleVal(ST_showPageNumber,true),
-            StyleVal(ST_showPageNumberOne,false),
-            StyleVal(ST_pageNumberOddEven,true),
-            StyleVal(ST_showMeasureNumber,true),
-            StyleVal(ST_showMeasureNumberOne,false),
-            StyleVal(ST_measureNumberInterval,5),
-            StyleVal(ST_measureNumberSystem,true),
+            StyleVal(ST_hairpinHeight, Spatium(1.2)),
+            StyleVal(ST_hairpinContHeight, Spatium(0.5)),
+            StyleVal(ST_hairpinWidth, Spatium(0.13)),
+            StyleVal(ST_showPageNumber, true),
+            StyleVal(ST_showPageNumberOne, false),
+            StyleVal(ST_pageNumberOddEven, true),
+            StyleVal(ST_showMeasureNumber, true),
+            StyleVal(ST_showMeasureNumberOne, false),
+            StyleVal(ST_measureNumberInterval, 5),
+            StyleVal(ST_measureNumberSystem, true),
 
             StyleVal(ST_measureNumberAllStaffs,false),
-            StyleVal(ST_smallNoteMag,0.7),
-            StyleVal(ST_graceNoteMag,0.7),
-            StyleVal(ST_smallStaffMag,0.7),
-            StyleVal(ST_smallClefMag,0.8),
+            StyleVal(ST_smallNoteMag, qreal(.7)),
+            StyleVal(ST_graceNoteMag, qreal(0.7)),
+            StyleVal(ST_smallStaffMag, qreal(0.7)),
+            StyleVal(ST_smallClefMag, qreal(0.8)),
             StyleVal(ST_genClef,true),
             StyleVal(ST_genKeysig,true),
             StyleVal(ST_genTimesig,true),
@@ -530,7 +530,7 @@ StyleData::StyleData()
             StyleVal(ST_SlurDottedWidth, Spatium(.1)),
             StyleVal(ST_SlurBow, Spatium(1.6)),
 
-            StyleVal(ST_SectionPause, 3.0),
+            StyleVal(ST_SectionPause, qreal(3.0)),
 
             StyleVal(ST_MusicalSymbolFont, QString("Emmentaler")),
 
@@ -957,7 +957,7 @@ void StyleData::load(QDomElement e)
                               StyleIdx i = StyleIdx(idx);
                               switch(styleTypes[idx].valueType()) {
                                     case ST_SPATIUM:   set(StyleVal(i, Spatium(val.toDouble()))); break;
-                                    case ST_DOUBLE:    set(StyleVal(i, val.toDouble()));          break;
+                                    case ST_DOUBLE:    set(StyleVal(i, qreal(val.toDouble())));          break;
                                     case ST_BOOL:      set(StyleVal(i, bool(val.toInt())));       break;
                                     case ST_INT:       set(StyleVal(i, val.toInt()));             break;
                                     case ST_DIRECTION: set(StyleVal(i, Direction(val.toInt())));  break;
