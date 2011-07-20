@@ -1829,19 +1829,18 @@ int main(int argc, char* av[])
 
       if (!converterMode) {
             if (!argv.isEmpty()) {
-                  int ok = true;
-                  foreach(QString message, argv) {
-                        QFileInfo fi(message);
-                        if (!app->sendMessage(fi.absoluteFilePath())) {
-                              ok = false;
-                              break;
+                  if(app->isRunning()) {
+                        foreach(QString message, argv) {
+                              QFileInfo fi(message);
+                              if (!app->sendMessage(fi.absoluteFilePath())) {
+                                    break;
+                                    }
                               }
-                        }
-                  if (ok)
                         return 0;
+                        }
                   }
             else{
-                   if (app->sendMessage("")) {
+                   if (app->isRunning()) {
                       return 0;
                       }
                 }
