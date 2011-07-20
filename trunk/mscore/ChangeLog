@@ -1,4 +1,5 @@
 20.jul (lv)
+      - fix #11441: Failure to read MusicXML file with missing parts
       - fix MusicXML import/export of notehead color
       - add MusicXML testfile for noteheads
 18.jul (ws)
