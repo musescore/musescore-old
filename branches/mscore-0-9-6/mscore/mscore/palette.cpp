@@ -239,7 +239,9 @@ void Palette::mouseDoubleClickEvent(QMouseEvent* ev)
       else if (sel.state() == SEL_RANGE) {
             int track1 = sel.staffStart() * VOICES;
             int track2 = sel.staffEnd() * VOICES;
-            for (Segment* s = sel.startSegment(); s && s != sel.endSegment(); s = s->next1()) {
+            Segment* ss = sel.startSegment();
+            Segment* es = sel.endSegment();
+            for (Segment* s = ss; s && s != es; s = s->next1()) {
                   for (int track = track1; track < track2; ++track) {
                         Element* e = s->element(track);
                         if (e == 0)
