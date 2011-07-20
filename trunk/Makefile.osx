@@ -61,6 +61,7 @@ debug:
 
 clean:
 	-rm -rf build
+	-rm -rf applebuild
 
 lupdate:
 	cd build;xcodebuild -project mscore.xcodeproj -target lupdate;
