@@ -1,112 +1,225 @@
-/****************************************************************************
-**
-** Copyright (C) 2011 Nokia Corporation and/or its subsidiary(-ies).
-** All rights reserved.
-** Contact: Nokia Corporation (qt-info@nokia.com)
-**
-** This file is part of the examples of the Qt Toolkit.
-**
-** $QT_BEGIN_LICENSE:BSD$
-** You may use this file under the terms of the BSD license as follows:
-**
-** "Redistribution and use in source and binary forms, with or without
-** modification, are permitted provided that the following conditions are
-** met:
-**   * Redistributions of source code must retain the above copyright
-**     notice, this list of conditions and the following disclaimer.
-**   * Redistributions in binary form must reproduce the above copyright
-**     notice, this list of conditions and the following disclaimer in
-**     the documentation and/or other materials provided with the
-**     distribution.
-**   * Neither the name of Nokia Corporation and its Subsidiary(-ies) nor
-**     the names of its contributors may be used to endorse or promote
-**     products derived from this software without specific prior written
-**     permission.
-**
-** THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-** "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-** LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-** A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-** OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-** SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-** LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-** DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-** THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-** (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-** OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
-** $QT_END_LICENSE$
-**
-****************************************************************************/
+//=============================================================================
+//  MuseScore
+//  Music Composition & Notation
+//  $Id:$
+//
+//  Copyright (C) 2011 Werner Schweer
+//
+//  This program is free software; you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License version 2
+//  as published by the Free Software Foundation and appearing in
+//  the file LICENSE.GPL
+//=============================================================================
 
 import QtQuick 1.0
+import MuseScore 1.0
+// import Qt.labs.folderlistmodel 1.0
 
 Rectangle {
-    id: box
-    width: 350; height: 250
+      id: player
+      x: 0; y: 0
+      width: 1024; height: 768
+      state: "myscores"
+      border.width: 1
 
-    Rectangle {
-        id: redSquare
-        width: 80; height: 80
-        anchors.top: parent.top; anchors.left: parent.left; anchors.margins: 10
-        color: "red"
-
-        Text { text: "Click"; font.pixelSize: 16; anchors.centerIn: parent }
-
-        MouseArea {
-            anchors.fill: parent 
-            hoverEnabled: true
-            acceptedButtons: Qt.LeftButton | Qt.RightButton
-
-            onEntered: info.text = 'Entered'
-            onExited: info.text = 'Exited (pressed=' + pressed + ')'
-
-            onPressed: {
-                info.text = 'Pressed (button=' + (mouse.button == Qt.RightButton ? 'right' : 'left') 
-                    + ' shift=' + (mouse.modifiers & Qt.ShiftModifier ? 'true' : 'false') + ')'
-                var posInBox = redSquare.mapToItem(box, mouse.x, mouse.y)
-                posInfo.text = + mouse.x + ',' + mouse.y + ' in square'
-                        + ' (' + posInBox.x + ',' + posInBox.y + ' in window)'
+      states: [
+            State {
+                  name: "normal"
+                  PropertyChanges { target: toolbar; opacity: 0 }
+                  PropertyChanges { target: scores; width: 0 }
+                  },
+            State {
+                  name: "toolbar1"
+                  PropertyChanges { target: toolbar; opacity: 1 }
+                  PropertyChanges { target: scores;  width: 0 }
+                  },
+            State {
+                  name: "myscores"
+                  PropertyChanges { target: toolbar; opacity: 1 }
+                  PropertyChanges { target: scores;  width: 250 }
+                  }
+            ]
+      transitions: Transition {
+            PropertyAnimation {
+                  property: "width"
+                  easing.type: Easing.Linear
+                  duration: 500
+                  }
+            PropertyAnimation {
+                  property: "opacity"
+                  easing.type: Easing.Linear
+                  duration: 500
+                  }
             }
 
-            onReleased: {
-                info.text = 'Released (isClick=' + mouse.isClick + ' wasHeld=' + mouse.wasHeld + ')'
-                posInfo.text = ''
+      ListModel {
+            id: scorelist
+            ListElement {
+                  type: "Promenade"
+                  path: ":/scores/promenade.mscz"
+                  }
+            ListElement {
+                  type: "Leise rieselt der Schnee"
+                  path: ":/scores/schnee.mscz"
+                  }
+            ListElement {
+                  type: "Italienisches Konzert"
+                  path: ":/scores/italian-1.mscz"
+                  }
             }
 
-            onPressAndHold: info.text = 'Press and hold'
-            onClicked: info.text = 'Clicked (wasHeld=' + mouse.wasHeld + ')'
-            onDoubleClicked: info.text = 'Double clicked'
-        }
-    }
+      Component {
+            id: scorelistdelegate
+            Text {
+                  id: label
+                  font.pixelSize: 18
+                  text: type
+                  }
+            }
 
-    Rectangle {
-        id: blueSquare
-        width: 80; height: 80
-        x: box.width - width - 10; y: 10    // making this item draggable, so don't use anchors
-        color: "blue"
+      ListView {
+            id: scores
+            anchors.left: player.left
+            anchors.top: player.top
+            anchors.bottom: player.bottom
+            anchors.margins: 10
+            clip: true
 
-        Text { text: "Drag"; font.pixelSize: 16; color: "white"; anchors.centerIn: parent }
+            model: scorelist
+            delegate: scorelistdelegate
+            header: myScoresBanner
+            footer: Rectangle {
+                  width: parent.width; height: 30
+                  gradient: scorecolors
+                  }
+            highlight: Rectangle {
+                  width: parent.width
+                  color: "lightgray"
+                  }
+            MouseArea {
+                  anchors.fill: parent
+                  onClicked: {
+                        var idx = scores.indexAt(mouseX, mouseY)
+                        if (idx >= 0) {
+                              scores.currentIndex = idx
+                              console.log(idx)
+                              console.log(scorelist.get(idx).type)
+                              scoreview.setScore(scorelist.get(idx).path)
+                              }
+                        }
+                  }
+            }
+      Component {
+            id: myScoresBanner
+            Rectangle {
+                  id: banner
+                  width: parent.width; height: 50
+                  gradient: scorecolors
+                  border { color: "#9eddf2"; width: 2 }
+                  Text {
+                        anchors.centerIn: parent
+                        text: "My Scores"
+                        font.pixelSize: 32
+                        }
+                  }
+            }
+      Gradient {
+            id: scorecolors
+            GradientStop { position: 0.0; color:  "#8ee2fe" }
+            GradientStop { position: 0.66; color: "#7ed2ee" }
+            }
 
-        MouseArea {
-            anchors.fill: parent
-            drag.target: blueSquare
-            drag.axis: Drag.XandYAxis
-            drag.minimumX: 0
-            drag.maximumX: box.width - parent.width
-            drag.minimumY: 0
-            drag.maximumY: box.height - parent.width
-        }
-    }
+      ScoreView {
+            id: scoreview
+            anchors.left: scores.right
+            anchors.right: player.right
+            anchors.top: player.top
+            anchors.bottom: player.bottom
 
-    Text {
-        id: info
-        anchors.bottom: posInfo.top; anchors.horizontalCenter: parent.horizontalCenter; anchors.margins: 30
+            MouseArea {
+                  state: "normal"
+                  states: [
+                        State { name: "normal" },
+                        State { name: "pressed" },
+                        State { name: "drag" }
+                        ]
+                  anchors.fill: parent
+                  onPositionChanged: {
+                        parent.drag(mouseX, mouseY)
+                        state = "drag"
+                        }
+                  onPressed:         {
+                        state = "pressed"
+                        parent.startDrag(mouseX, mouseY)
+                        }
+                  onReleased: {
+                        if (state == "pressed") {
+                              if (player.state == "normal")
+                                    player.state = "toolbar1"
+                              else
+                                    player.state = "normal"
+                              }
+                        state = "normal";
+                        }
+                  }
+            }
 
-        onTextChanged: console.log(text)
-    }
+      Rectangle {
+            id: toolbar
+            x: 0
+            z: 1
+            height: 25
+            color: "lightblue"
+            anchors.bottom: player.bottom
+            anchors.left:   player.left
+            anchors.right:  player.right
 
-    Text {
-        id: posInfo
-        anchors.bottom: parent.bottom; anchors.horizontalCenter: parent.horizontalCenter; anchors.margins: 30
-    }
-}
+            Rectangle {
+                  id: myScoreButton
+                  x:      10
+                  width:  buttontext.implicitWidth+8
+                  border.width: 1
+                  smooth: true
+                  height: 20
+                  radius: 4
+                  anchors.verticalCenter: parent.verticalCenter
+                  color: "yellow"
+                  Text {
+                        id: buttontext
+                        anchors.centerIn: parent
+                        text: "MyScores"
+                        }
+                  MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                              if (player.state == "toolbar1")
+                                    player.state = "myscores"
+                              else
+                                    player.state = "toolbar1"
+                              }
+                        }
+                  }
+            Rectangle {
+                  id: playButton
+                  x:      80
+                  width:  buttontext.implicitWidth+8
+                  border.width: 1
+                  smooth: true
+                  height: 20
+                  radius: 4
+                  anchors.verticalCenter: parent.verticalCenter
+                  color: "yellow"
+                  Text {
+                        anchors.centerIn: parent
+                        text: "Play"
+                        }
+                  MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                              scoreview.play()
+                              }
+                        }
+                  }
+            }
+      }
+

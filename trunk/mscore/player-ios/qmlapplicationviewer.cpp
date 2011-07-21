@@ -21,12 +21,20 @@ QString revision;
 // void Omr::write(Xml&) const {}
 // void Omr::read(QDomElement) {}
 
+//---------------------------------------------------------
+//   QmlApplicationViewerPrivate
+//---------------------------------------------------------
+
 class QmlApplicationViewerPrivate
       {
       QString mainQmlFile;
       friend class QmlApplicationViewer;
       static QString adjustPath(const QString &path);
       };
+
+//---------------------------------------------------------
+//   adjustPath
+//---------------------------------------------------------
 
 QString QmlApplicationViewerPrivate::adjustPath(const QString &path)
       {
@@ -43,7 +51,7 @@ QString QmlApplicationViewerPrivate::adjustPath(const QString &path)
 QmlApplicationViewer::QmlApplicationViewer(QWidget *parent)
    : QDeclarativeView(parent), m_d(new QmlApplicationViewerPrivate)
       {
-      PDPI = 75;
+      PDPI = 100;
       DPI  = PDPI;
       DPMM = DPI / INCH;
 
@@ -58,7 +66,7 @@ QmlApplicationViewer::QmlApplicationViewer(QWidget *parent)
 
 QmlApplicationViewer::~QmlApplicationViewer()
       {
-    delete m_d;
+      delete m_d;
       }
 
 void QmlApplicationViewer::setMainQmlFile(const QString &file)
