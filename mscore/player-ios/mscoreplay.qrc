@@ -1,0 +1,10 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+   <qresource prefix="/">
+      <file alias="fonts/mscore20.xml">../fonts/mscore20.xml</file>
+      <file alias="fonts/gonville.xml">../fonts/gonville.xml</file>
+      <file alias="scores/promenade.mscz">../demos/promenade.mscz</file>
+      <file alias="scores/schnee.mscz">../demos/schnee.mscz</file>
+      <file alias="scores/italian-1.mscz">../demos/italian-1.mscz</file>
+   </qresource>
+</RCC>
