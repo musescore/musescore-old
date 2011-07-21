@@ -373,6 +373,16 @@ void Element::adjustReadPos()
       }
 
 //---------------------------------------------------------
+//   scanElements
+//---------------------------------------------------------
+
+void Element::scanElements(void* data, void (*func)(void*, Element*), bool all)
+      {
+      if (all || _visible)
+            func(data, this);
+      }
+
+//---------------------------------------------------------
 //   toDefault
 //---------------------------------------------------------
 
@@ -729,7 +739,8 @@ StaffLines::StaffLines(Score* s)
 QPointF StaffLines::canvasPos() const
       {
       System* system = measure()->system();
-      return QPointF(measure()->x() + system->x() + system->page()->x(),
+//      return QPointF(measure()->x() + system->x() + system->page()->x(),
+      return QPointF(measure()->x() + system->x(),
          system->staff(staffIdx())->y() + system->y());
       }
 

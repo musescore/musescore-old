@@ -843,7 +843,7 @@ qreal Chord::centerX() const
 //   scanElements
 //---------------------------------------------------------
 
-void Chord::scanElements(void* data, void (*func)(void*, Element*))
+void Chord::scanElements(void* data, void (*func)(void*, Element*), bool all)
       {
       if (_hook)
             func(data, _hook);
@@ -860,10 +860,10 @@ void Chord::scanElements(void* data, void (*func)(void*, Element*))
       foreach(LedgerLine* h, _ledgerLines)
             func(data, h);
       foreach(Note* n, _notes)
-            n->scanElements(data, func);
+            n->scanElements(data, func, all);
       foreach(Element* e, _el)
-            e->scanElements(data, func);
-      ChordRest::scanElements(data, func);
+            e->scanElements(data, func, all);
+      ChordRest::scanElements(data, func, all);
       }
 
 //---------------------------------------------------------

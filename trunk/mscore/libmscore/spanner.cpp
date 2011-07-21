@@ -94,10 +94,10 @@ void Spanner::remove(Element* e)
 //   scanElements
 //---------------------------------------------------------
 
-void Spanner::scanElements(void* data, void (*func)(void*, Element*))
+void Spanner::scanElements(void* data, void (*func)(void*, Element*), bool all)
       {
       foreach(SpannerSegment* seg, segments)
-            seg->scanElements(data, func);
+            seg->scanElements(data, func, true);
       }
 
 //---------------------------------------------------------

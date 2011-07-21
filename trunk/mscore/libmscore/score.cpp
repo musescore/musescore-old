@@ -1671,12 +1671,12 @@ int Score::inputPos() const
 //    scan all elements
 //---------------------------------------------------------
 
-void Score::scanElements(void* data, void (*func)(void*, Element*))
+void Score::scanElements(void* data, void (*func)(void*, Element*), bool all)
       {
       for(MeasureBase* m = first(); m; m = m->next())
-            m->scanElements(data, func);
+            m->scanElements(data, func, all);
       foreach(Page* page, pages())
-            page->scanElements(data, func);
+            page->scanElements(data, func, all);
       }
 
 //---------------------------------------------------------

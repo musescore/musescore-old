@@ -216,7 +216,8 @@ qreal Page::loHeight() const
 
 void Page::appendSystem(System* s)
       {
-      s->setParent(this);
+//      s->setParent(this);
+      s->setParent(0);
       _systems.append(s);
       }
 
@@ -325,11 +326,12 @@ void Page::draw(Painter* painter) const
 //   scanElements
 //---------------------------------------------------------
 
-void Page::scanElements(void* data, void (*func)(void*, Element*))
+void Page::scanElements(void* data, void (*func)(void*, Element*), bool all)
       {
       foreach(System* s, _systems)
-            s->scanElements(data, func);
-      func(data, this);
+            s->scanElements(data, func, all);
+      if (all)
+            func(data, this);
       }
 
 //---------------------------------------------------------
@@ -631,9 +633,9 @@ void Page::doRebuildBspTree()
       QList<Element*> el;
       foreach(System* s, _systems)
             foreach(MeasureBase* m, s->measures()) {
-                  m->scanVisibleElements(&el, collectElements, true);
+                  m->scanElements(&el, collectElements, false);
             }
-      scanElements(&el, collectElements);
+      scanElements(&el, collectElements, false);
 
       int n = el.size();
       bspTree.initialize(abbox(), n);

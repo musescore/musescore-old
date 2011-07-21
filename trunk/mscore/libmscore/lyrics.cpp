@@ -63,7 +63,7 @@ Lyrics::~Lyrics()
 //   scanElements
 //---------------------------------------------------------
 
-void Lyrics::scanElements(void* data, void (*func)(void*, Element*))
+void Lyrics::scanElements(void* data, void (*func)(void*, Element*), bool)
       {
       if (_verseNumber)
             func(data, _verseNumber);

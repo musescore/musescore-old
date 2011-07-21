@@ -86,8 +86,7 @@ class MeasureBase : public Element {
       virtual int ticks() const              { return 0;       }
       virtual void write(Xml&, int, bool) const = 0;
 
-      virtual void scanElements(void* data, void (*func)(void*, Element*));
-      virtual void scanVisibleElements(void* data, void (*func)(void*, Element*), bool onlyVisible);
+      virtual void scanElements(void* data, void (*func)(void*, Element*), bool all=true);
       MeasureWidth& layoutWidth()            { return _mw;        }
       void setLayoutWidth(const MeasureWidth& w) { _mw = w; }
       ElementList* el()                      { return &_el; }

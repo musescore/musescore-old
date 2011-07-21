@@ -1,4 +1,6 @@
-21.jul (la)
+21.jul
+      - Element->canvasPos() is now page relative; Page->canvasPos() is zero for all pages
+      (la)
       - fix #11605: Shift-X with measure selected -> crash
 20.jul (lv)
       - fix #11245: MusicXML doesn't save Tempo Text if there's no name

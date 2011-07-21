@@ -69,7 +69,7 @@ class ChordRest : public DurationElement {
       bool readProperties(QDomElement e, const QList<Tuplet*>&, QList<Slur*>*);
       QList<Prop> properties(Xml&, bool clipboardmode) const;
       virtual QList<Prop> properties(Xml& xml) const { return properties(xml, false); }
-      virtual void scanElements(void* data, void (*func)(void*, Element*));
+      virtual void scanElements(void* data, void (*func)(void*, Element*), bool all=true);
 
       void setBeamMode(BeamMode m)              { _beamMode = m; }
       BeamMode beamMode() const                 { return _beamMode; }

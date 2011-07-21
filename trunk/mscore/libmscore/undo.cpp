@@ -2456,10 +2456,6 @@ void ChangeTextStyle::flip()
       score->scanElements(&ts, updateTextStyle);
       score->setLayoutAll(true);
       }
-#if 0
-      Score* score;
-      TextStyle style;
-#endif
 
 //---------------------------------------------------------
 //   AddTextStyle::undo

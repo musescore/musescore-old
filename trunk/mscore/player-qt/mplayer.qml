@@ -13,7 +13,6 @@
 
 import QtQuick 1.0
 import MuseScore 1.0
-import Qt.labs.folderlistmodel 1.0
 
 Rectangle {
       id: player
@@ -129,37 +128,58 @@ Rectangle {
             GradientStop { position: 0.66; color: "#7ed2ee" }
             }
 
-      ScoreView {
-            id: scoreview
-            anchors.left: scores.right
+      Rectangle {
+            id: view
+            anchors.left:  scores.right
             anchors.right: player.right
-            anchors.top: player.top
+            anchors.top:   player.top
             anchors.bottom: player.bottom
 
-            MouseArea {
-                  state: "normal"
-                  states: [
-                        State { name: "normal" },
-                        State { name: "pressed" },
-                        State { name: "drag" }
-                        ]
-                  anchors.fill: parent
-                  onPositionChanged: {
-                        parent.drag(mouseX, mouseY)
-                        state = "drag"
-                        }
-                  onPressed:         {
-                        state = "pressed"
-                        parent.startDrag(mouseX, mouseY)
-                        }
-                  onReleased: {
-                        if (state == "pressed") {
-                              if (player.state == "normal")
-                                    player.state = "toolbar1"
-                              else
-                                    player.state = "normal"
+            ScoreView {
+                  id: scoreview
+                  x: 0
+                  y: 0
+
+                  MouseArea {
+                        state: "normal"
+                        states: [
+                              State { name: "normal" },
+                              State { name: "pressed" },
+                              State { name: "drag" }
+                              ]
+                        anchors.fill: parent
+                        drag.target: scoreview
+                        drag.axis: Drag.XandYAxis
+                        drag.minimumX: 0
+                        drag.maximumX: 1000
+                        drag.minimumY: 0
+                        drag.maximumY: 1000
+
+                        onPositionChanged: {
+                              // parent.drag(mouseX, mouseY)
+                              state = "drag"
                               }
-                        state = "normal";
+                        onPressed:         {
+                              state = "pressed"
+                             // parent.startDrag(mouseX, mouseY)
+                              }
+                        onReleased: {
+                              if (state == "pressed"
+                                 && (mouseX > width * .3)
+                                 && (mouseX < width * .6)) {
+                                    if (player.state == "normal")
+                                          player.state = "toolbar1"
+                                    else if (player.state == "toolbar1")
+                                          player.state = "normal"
+                                    }
+                              // state = "normal";
+                              }
+                        onClicked: {
+                              if (mouseX < width * .3)
+                                    parent.prevPage()
+                              else if (mouseX > width * .6)
+                                    parent.nextPage()
+                              }
                         }
                   }
             }

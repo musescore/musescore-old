@@ -457,10 +457,10 @@ qreal Rest::downPos() const
 //   scanElements
 //---------------------------------------------------------
 
-void Rest::scanElements(void* data, void (*func)(void*, Element*))
+void Rest::scanElements(void* data, void (*func)(void*, Element*), bool all)
       {
       func(data, this);
-      ChordRest::scanElements(data, func);
+      ChordRest::scanElements(data, func, all);
       }
 
 //---------------------------------------------------------

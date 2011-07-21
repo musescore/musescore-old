@@ -1449,11 +1449,13 @@ void ScoreView::paintEvent(QPaintEvent* ev)
       p.setRenderHint(QPainter::TextAntialiasing, true);
       PainterQt vp(&p, this);
 
-//      QRegion region = ev->region();
-//      const QVector<QRect>& vector = region.rects();
-//      foreach(const QRect& r, vector)
-//            paint(r, p);
+#if 0
+      // for whatever reason this does not work
+      foreach(const QRect& r, ev->region().rects())
+            paint(r.adjusted(-2, -2, 2, 2), p); // adjust for antialiased drawing
+#else
       paint(ev->rect(), p);
+#endif
 
       p.setTransform(_matrix);
       p.setClipping(false);
@@ -1469,7 +1471,7 @@ void ScoreView::paintEvent(QPaintEvent* ev)
             p.drawLine(dropAnchor);
             }
       if (dragElement)
-            dragElement->scanElements(&vp, paintElement);
+            dragElement->scanElements(&vp, paintElement, false);
 
       if (grips) {
             qreal lw = 2.0/p.matrix().m11();
@@ -1582,24 +1584,24 @@ void ScoreView::paintPageBorder(QPainter& p, Page* page)
 //   paint
 //---------------------------------------------------------
 
-void ScoreView::paint(const QRect& rr, QPainter& p)
+void ScoreView::paint(const QRect& r, QPainter& p)
       {
       p.save();
       if (fgPixmap == 0 || fgPixmap->isNull())
-            p.fillRect(rr, _fgColor);
+            p.fillRect(r, _fgColor);
       else {
-            p.drawTiledPixmap(rr, *fgPixmap, rr.topLeft()
+            p.drawTiledPixmap(r, *fgPixmap, r.topLeft()
                - QPoint(lrint(_matrix.dx()), lrint(_matrix.dy())));
             }
 
       p.setTransform(_matrix);
-      QRectF fr = imatrix.mapRect(QRectF(rr));
+      QRectF fr = imatrix.mapRect(QRectF(r));
 
-      QRegion r1(rr);
+      QRegion r1(r);
       foreach (Page* page, _score->pages()) {
             if (!score()->printing())
                   paintPageBorder(p, page);
-            QRectF pr(page->abbox());
+            QRectF pr(page->abbox().translated(page->pos()));
             if (pr.right() < fr.left())
                   continue;
             if (pr.left() > fr.right())
@@ -1608,17 +1610,17 @@ void ScoreView::paint(const QRect& rr, QPainter& p)
                   //
                   // show page margins
                   //
-//                  QRectF bpr = pr.adjusted(page->lm(), page->tm(), -page->rm(), -page->bm());
                   p.setPen(QPen(Qt::gray));
-            //      p.drawRect(bpr);
                   p.drawRect(fr);
                   }
-            QList<const Element*> ell = page->items(fr);
+            QList<const Element*> ell = page->items(fr.translated(-page->pos()));
             qStableSort(ell.begin(), ell.end(), elementLessThan);
+// printf("==============paint %d\n", ell.size());
+            p.translate(page->pos());
             drawElements(p, ell);
+            p.translate(-page->pos());
             r1 -= _matrix.mapRect(pr).toAlignedRect();
             }
-//      p.setClipRect(fr);
 
       if (dropRectangle.isValid())
             p.fillRect(dropRectangle, QColor(80, 0, 0, 80));
@@ -1628,25 +1630,10 @@ void ScoreView::paint(const QRect& rr, QPainter& p)
       //
       if (_editText && !(_editText->parent() && _editText->parent()->type() == TBOX)) {
             QRectF r = _editText->pageRectangle(); // abbox();
-//            qreal w = 6.0 / matrix().m11();   // 6 pixel border
-//            r.adjust(-w, -w, w, w);
             p.setPen(QPen(QBrush(Qt::blue), 2.0 / matrix().m11()));  // 2 pixel pen size
             p.setBrush(QBrush(Qt::NoBrush));
             p.drawRect(r);
             }
-#if 0
-      if (grips) {
-            qreal lw = 2.0/p.matrix().m11();
-            // QPen pen(Qt::blue);
-            QPen pen(preferences.defaultColor);
-            pen.setWidthF(lw);
-            p.setPen(pen);
-            for (int i = 0; i < grips; ++i) {
-                  p.setBrush(((i == curGrip) && hasFocus()) ? QBrush(Qt::blue) : Qt::NoBrush);
-                  p.drawRect(grip[i]);
-                  }
-            }
-#endif
       const Selection& sel = _score->selection();
       if (sel.state() == SEL_RANGE) {
             Segment* ss = sel.startSegment();
@@ -1717,9 +1704,9 @@ void ScoreView::paint(const QRect& rr, QPainter& p)
       if (!r1.isEmpty()) {
             p.setClipRegion(r1);  // only background
             if (bgPixmap == 0 || bgPixmap->isNull())
-                  p.fillRect(rr, _bgColor);
+                  p.fillRect(r, _bgColor);
             else
-                  p.drawTiledPixmap(rr, *bgPixmap, rr.topLeft()-QPoint(lrint(xoffset()), lrint(yoffset())));
+                  p.drawTiledPixmap(r, *bgPixmap, r.topLeft()-QPoint(lrint(xoffset()), lrint(yoffset())));
             }
       p.restore();
       }
@@ -2568,10 +2555,57 @@ Element* ScoreView::elementNear(const QPointF& p)
       }
 
 //---------------------------------------------------------
+//   drawDebugInfo
+//---------------------------------------------------------
+
+static void drawDebugInfo(QPainter& p, const Element* e)
+      {
+      //
+      //  draw bounding box rectangle for all
+      //  selected Elements
+      //
+      p.setBrush(Qt::NoBrush);
+
+      // p.setPen(QPen(Qt::blue, 0, Qt::SolidLine));
+      // p.drawPath(e->shape());
+
+      p.setPen(QPen(Qt::red, 0, Qt::SolidLine));
+      p.drawRect(e->bbox());
+
+      p.setPen(QPen(Qt::red, 0, Qt::SolidLine));
+      qreal w = 5.0 / p.matrix().m11();
+      qreal h = w;
+      qreal x = 0; // e->bbox().x();
+      qreal y = 0; // e->bbox().y();
+      p.drawLine(QLineF(x-w, y-h, x+w, y+h));
+      p.drawLine(QLineF(x+w, y-h, x-w, y+h));
+      if (e->parent()) {
+            p.restore();
+            p.save();
+            const Element* ee = e->parent();
+            if (e->type() == NOTE)
+                  ee = static_cast<const Note*>(e)->chord()->segment();
+            else if (e->type() == CLEF)
+                  ee = static_cast<const Clef*>(e)->segment();
+
+            p.setPen(QPen(Qt::green, 0, Qt::SolidLine));
+            p.drawRect(ee->abbox());
+
+            if (ee->type() == SEGMENT) {
+                  qreal w    = 7.0 / p.matrix().m11();
+                  QPointF pt = ee->canvasPos();
+                  p.setPen(QPen(Qt::blue, 0, Qt::SolidLine));
+                  p.drawLine(QLineF(pt.x()-w, pt.y()-h, pt.x()+w, pt.y()+h));
+                  p.drawLine(QLineF(pt.x()+w, pt.y()-h, pt.x()-w, pt.y()+h));
+                  }
+            }
+      }
+
+//---------------------------------------------------------
 //   drawElements
 //---------------------------------------------------------
 
-void ScoreView::drawElements(QPainter& p,const QList<const Element*>& el)
+void ScoreView::drawElements(QPainter& p, const QList<const Element*>& el)
       {
       PainterQt painter(&p, this);
 
@@ -2581,54 +2615,16 @@ void ScoreView::drawElements(QPainter& p,const QList<const Element*>& el)
                   if (score()->printing() || !score()->showInvisible())
                         continue;
                   }
-            p.save();
-            p.translate(e->canvasPos());
+            // p.save();
+            QPointF pos(e->canvasPos());
+            p.translate(pos);
             p.setPen(QPen(e->curColor()));
             e->draw(&painter);
 
-            if (debugMode && e->selected()) {
-                  //
-                  //  draw bounding box rectangle for all
-                  //  selected Elements
-                  //
-                  p.setBrush(Qt::NoBrush);
-
-                  // p.setPen(QPen(Qt::blue, 0, Qt::SolidLine));
-                  // p.drawPath(e->shape());
-
-                  p.setPen(QPen(Qt::red, 0, Qt::SolidLine));
-                  p.drawRect(e->bbox());
-
-                  p.setPen(QPen(Qt::red, 0, Qt::SolidLine));
-                  qreal w = 5.0 / p.matrix().m11();
-                  qreal h = w;
-                  qreal x = 0; // e->bbox().x();
-                  qreal y = 0; // e->bbox().y();
-                  p.drawLine(QLineF(x-w, y-h, x+w, y+h));
-                  p.drawLine(QLineF(x+w, y-h, x-w, y+h));
-                  if (e->parent()) {
-                        p.restore();
-                        const Element* ee = e->parent();
-                        if (e->type() == NOTE)
-                              ee = static_cast<const Note*>(e)->chord()->segment();
-                        else if (e->type() == CLEF)
-                              ee = static_cast<const Clef*>(e)->segment();
-
-                        p.setPen(QPen(Qt::green, 0, Qt::SolidLine));
-                        p.drawRect(ee->abbox());
-#if 1
-                        if (ee->type() == SEGMENT) {
-                              qreal w    = 7.0 / p.matrix().m11();
-                              QPointF pt = ee->canvasPos();
-                              p.setPen(QPen(Qt::blue, 0, Qt::SolidLine));
-                              p.drawLine(QLineF(pt.x()-w, pt.y()-h, pt.x()+w, pt.y()+h));
-                              p.drawLine(QLineF(pt.x()+w, pt.y()-h, pt.x()-w, pt.y()+h));
-                              }
-#endif
-                        continue;
-                        }
-                  }
-            p.restore();
+            if (debugMode && e->selected())
+                  drawDebugInfo(p, e);
+            p.translate(-pos);
+            // p.restore();
             }
       }
 
@@ -3888,7 +3884,7 @@ void ScoreView::pageNext()
 
       Page* page = score()->pages().back();
       qreal x    = xoffset() - (page->width() + 25.0) * mag();
-      qreal lx   = 10.0 - page->canvasPos().x() * mag();
+      qreal lx   = 10.0 - page->pos().x() * mag();
       if (x < lx)
             x = lx;
       setOffset(x, 10.0);
@@ -3930,7 +3926,7 @@ void ScoreView::pageEnd()
       if (score()->pages().empty())
             return;
       Page* lastPage = score()->pages().back();
-      QPointF p(lastPage->canvasPos());
+      QPointF p(lastPage->pos());
       setOffset(25.0 - p.x() * mag(), 25.0);
       update();
       }

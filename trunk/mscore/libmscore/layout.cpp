@@ -713,24 +713,7 @@ void Score::doLayout()
       for (Measure* m = firstMeasure(); m; m = m->nextMeasure())
             m->layout2();
 
-      //---------------------------------------------------
-      //    remove remaining pages and systems
-      //---------------------------------------------------
-
-      int n = _pages.size() - curPage;
-      for (int i = 0; i < n; ++i) {
-            Page* page = _pages.takeLast();
-            delete page;
-            }
-#if 0 // maybe referenced from undo stack
-      n = _systems.size() - curSystem;
-      for (int i = 0; i < n; ++i) {
-            System* system = _systems.takeLast();
-            delete system;
-            }
-#endif
       rebuildBspTree();
-//      emit layoutChanged();
       }
 
 //---------------------------------------------------------

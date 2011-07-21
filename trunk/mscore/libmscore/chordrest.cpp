@@ -156,17 +156,17 @@ ChordRest::~ChordRest()
 //   scanElements
 //---------------------------------------------------------
 
-void ChordRest::scanElements(void* data, void (*func)(void*, Element*))
+void ChordRest::scanElements(void* data, void (*func)(void*, Element*), bool all)
       {
       if (_beam && (_beam->elements().front() == this))
-            _beam->scanElements(data, func);
+            _beam->scanElements(data, func, all);
       foreach(Slur* slur, _slurFor)
-            slur->scanElements(data, func);
+            slur->scanElements(data, func, all);
       foreach(Articulation* a, articulations)
             func(data, a);
       foreach(Lyrics* l, _lyricsList) {
             if (l)
-                  l->scanElements(data, func);
+                  l->scanElements(data, func, all);
             }
       if (_tabDur)
             func(data, _tabDur);
