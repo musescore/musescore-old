@@ -2868,16 +2868,18 @@ Element* Score::selectMove(const QString& cmd)
 
 void Score::cmdMirrorNoteHead()
       {
-      Element* e = getSelectedElement();
-      if (e->type() != NOTE)
-            return;
-      Note* note = static_cast<Note*>(e);
-      DirectionH d = note->userMirror();
-      if (d == DH_AUTO)
-            d = note->chord()->up() ? DH_RIGHT : DH_LEFT;
-      else
-            d = d == DH_LEFT ? DH_RIGHT : DH_LEFT;
-      undoChangeUserMirror(note, d);
+      const QList<Element*>& el = selection().elements();
+      foreach(Element* e, el) {
+            if (e->type() == NOTE) {
+                  Note* note = static_cast<Note*>(e);
+                  DirectionH d = note->userMirror();
+                  if (d == DH_AUTO)
+                        d = note->chord()->up() ? DH_RIGHT : DH_LEFT;
+                  else
+                        d = d == DH_LEFT ? DH_RIGHT : DH_LEFT;
+                  undoChangeUserMirror(note, d);
+                  }
+            }
       }
 
 //---------------------------------------------------------
