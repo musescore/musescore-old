@@ -43,9 +43,14 @@ static PaStream* stream;
 int paCallback(const void*, void* out, long unsigned frames,
    const PaStreamCallbackTimeInfo*, PaStreamCallbackFlags, void *)
       {
+#ifdef Q_WS_MAC // mac does not support non interleaved
+      float* op = (float*)out;
+      seq->process((unsigned)frames, op, op+1);      
+#else
       float* o1 = ((float**)out)[0];
       float* o2 = ((float**)out)[1];
       seq->process((unsigned)frames, o1, o2);
+#endif
       return 0;
       }
 
@@ -104,7 +109,11 @@ bool Portaudio::init()
 
       out.device           = idx;
       out.channelCount     = 2;
+      #ifdef Q_WS_MAC // mac does not support non interleaved
+      out.sampleFormat     = paFloat32;
+      #else
       out.sampleFormat     = paFloat32 | paNonInterleaved;
+      #endif
       out.suggestedLatency = 0.100;
       out.hostApiSpecificStreamInfo = 0;
 
