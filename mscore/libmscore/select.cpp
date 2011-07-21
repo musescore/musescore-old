@@ -302,7 +302,7 @@ static void collectSelectedElements(void* data, Element* e)
 void Selection::searchSelectedElements()
       {
       _el.clear();
-      _score->scanElements(&_el, collectSelectedElements);
+      _score->scanElements(&_el, collectSelectedElements, true);
       updateState();
       }
 

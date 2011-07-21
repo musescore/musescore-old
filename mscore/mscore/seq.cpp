@@ -571,7 +571,6 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer)
       float* r = rbuffer;
       memset(l, 0, sizeof(float) * n);
       memset(r, 0, sizeof(float) * n);
-
       processMessages();
 
       if (state == TRANSPORT_PLAY) {
@@ -611,9 +610,6 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer)
       else {
             synti->process(frames, l, r);
             }
-
-      if (lbuffer == 0 || rbuffer == 0)   // midi only?
-            return;
       //
       // metering
       //

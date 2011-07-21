@@ -43,7 +43,7 @@ class BarLine : public Element {
       virtual Space space() const;
       virtual QPointF canvasPos() const;      ///< position in canvas coordinates
       virtual void layout();
-      virtual void scanElements(void* data, void (*func)(void*, Element*));
+      virtual void scanElements(void* data, void (*func)(void*, Element*), bool all=true);
       virtual void add(Element*);
       virtual void remove(Element*);
 

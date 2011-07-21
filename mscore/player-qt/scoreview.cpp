@@ -43,6 +43,7 @@ ScoreView::ScoreView(QDeclarativeItem* parent)
    : QDeclarativeItem(parent)
       {
       setFlag(QGraphicsItem::ItemHasNoContents, false);
+      setCacheMode(QGraphicsItem::DeviceCoordinateCache);
       setSmooth(true);
       score = 0;
       setScore(":/scores/promenade.mscz");
@@ -54,6 +55,7 @@ ScoreView::ScoreView(QDeclarativeItem* parent)
 
 void ScoreView::setScore(const QString& name)
       {
+      _currentPage = 0;
       delete score;
       score = new Score(MScore::defaultStyle());
       score->setName(name);
@@ -102,11 +104,9 @@ void ScoreView::setScore(const QString& name)
       score->updateNotes();
       score->doLayout();
 
-//      _matrix = QTransform();
-//      _matrix.scale(2.0, 2.0);
-//      imatrix = _matrix.inverted();
-
       seq->setScore(score);
+      setWidth(boundingRect().width());
+      setHeight(boundingRect().height());
       update();
       }
 
@@ -125,98 +125,69 @@ void ScoreView::paint(QPainter* painter, const QStyleOptionGraphicsItem*, QWidge
       painter->setRenderHint(QPainter::Antialiasing, true);
       painter->setRenderHint(QPainter::TextAntialiasing, true);
 
-      painter->translate(_offset);
-      fr.translate(-_offset);
+      Page* page = score->pages()[_currentPage];
+      QRectF pr(page->abbox());
 
-      foreach(Page* page, score->pages()) {
-            QRectF pr(page->abbox());
-            if (pr.right() < fr.left())
-                  continue;
-            if (pr.left() > fr.right())
-                  break;
-            QList<const Element*> ell = page->items(fr);
-            qStableSort(ell.begin(), ell.end(), elementLessThan);
+      QList<const Element*> ell = page->items(fr);
+      qStableSort(ell.begin(), ell.end(), elementLessThan);
 
-            foreach(const Element* e, ell) {
-                  e->itemDiscovered = 0;
-                  painter->save();
-                  painter->translate(e->canvasPos());
-                  painter->setPen(QPen(e->curColor()));
-                  e->draw(&p);
-                  painter->restore();
-                  }
+      foreach(const Element* e, ell) {
+            e->itemDiscovered = 0;
+            painter->save();
+            painter->translate(e->canvasPos());
+            painter->setPen(QPen(e->curColor()));
+            e->draw(&p);
+            painter->restore();
             }
       painter->restore();
       }
 
 //---------------------------------------------------------
-//   scroll
+//   boundingRect
 //---------------------------------------------------------
 
-void ScoreView::drag(qreal x, qreal y)
+QRectF ScoreView::boundingRect() const
       {
-      qreal dx = x - _startDrag.x();
-      qreal dy = y - _startDrag.y();
-      startDrag(x, y);
-      _offset += QPointF(dx, dy);
-      scroll(dx, dy, QRect(0, 0, width(), height()));
+      Page* page = score->pages()[_currentPage];
+      QRectF pr(page->abbox());
+      return QRectF(0.0, 0.0, pr.width(), pr.height());
+      }
+
+//---------------------------------------------------------
+//   setCurrentPage
+//---------------------------------------------------------
+
+void ScoreView::setCurrentPage(int n)
+      {
+      if (score == 0)
+            return;
+      if (n < 0)
+            n = 0;
+      int nn = score->pages().size();
+      if (nn == 0)
+            return;
+      if (n >= nn)
+            n = nn - 1;
+      _currentPage = n;
       update();
       }
 
 //---------------------------------------------------------
-//   startDrag
+//   nextPage
 //---------------------------------------------------------
 
-void ScoreView::startDrag(qreal x, qreal y)
+void ScoreView::nextPage()
       {
-      _startDrag.setX(x);
-      _startDrag.setY(y);
+      setCurrentPage(_currentPage + 1);
       }
 
 //---------------------------------------------------------
-//   zoom
+//   prevPage
 //---------------------------------------------------------
 
-void ScoreView::zoom(int /*step*/, const QPoint& /*pos*/)
+void ScoreView::prevPage()
       {
-#if 0
-      QPointF p1 = imatrix.map(QPointF(pos));
-      //
-      //    magnify
-      //
-      qreal mag = _matrix.m11();
-      qreal omag = mag;
-      if (step > 0) {
-            for (int i = 0; i < step; ++i) {
-                  mag *= 1.1;
-                  }
-            }
-      else {
-            for (int i = 0; i < -step; ++i) {
-                  mag /= 1.1;
-                  }
-            }
-      if (mag > 16.0)
-            mag = 16.0;
-      else if (mag < 0.05)
-            mag = 0.05;
-
-      qreal deltamag = mag / omag;
-      _matrix.setMatrix(mag, _matrix.m12(), _matrix.m13(), _matrix.m21(),
-         mag, _matrix.m23(), _matrix.dx()*deltamag, _matrix.dy()+deltamag, _matrix.m33());
-      imatrix = _matrix.inverted();
-
-      QPointF p2 = imatrix.map(QPointF(pos));
-      QPointF p3 = p2 - p1;
-      int dx     = lrint(p3.x() * mag);
-      int dy     = lrint(p3.y() * mag);
-
-      _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m13(), _matrix.m21(),
-         _matrix.m22(), _matrix.m23(), _matrix.dx()+dx, _matrix.dy()+dy, _matrix.m33());
-      imatrix = _matrix.inverted();
-      scroll(dx, dy, QRect(0, 0, width(), height()));
-      update();
-#endif
+      setCurrentPage(_currentPage - 1);
       }
 
 void ScoreView::dataChanged(const QRectF&)
@@ -231,39 +202,47 @@ void ScoreView::updateAll()
 
 void ScoreView::moveCursor()
       {
+      printf("moveCursor\n");
       }
 
 void ScoreView::adjustCanvasPosition(const Element*, bool)
       {
+      printf("adjustCanvasPosition\n");
       }
 
 void ScoreView::changeEditElement(Element*)
       {
+      printf("changeEditElement\n");
       }
 
 int ScoreView::gripCount() const
       {
+      printf("gripCount\n");
       return 0;
       }
 
 const QRectF& ScoreView::getGrip(int) const
       {
+      printf("getGrip\n");
       static const QRectF a;
       return a;
       }
 
 const QTransform& ScoreView::matrix() const
       {
+      printf("matrix\n");
       static const QTransform t;
       return t; // _matrix;
       }
 
 void ScoreView::setDropRectangle(const QRectF&)
       {
+      printf("setDropRectanble\n");
       }
 
 void ScoreView::cmdAddSlur(Note*, Note*)
       {
+      printf("cmdAddSlur\n");
       }
 
 //---------------------------------------------------------

@@ -868,7 +868,7 @@ void System::layoutLyrics(Lyrics* l, Segment* s, int staffIdx)
 //    collect all visible elements
 //---------------------------------------------------------
 
-void System::scanElements(void* data, void (*func)(void*, Element*))
+void System::scanElements(void* data, void (*func)(void*, Element*), bool all)
       {
       if (isVbox())
             return;

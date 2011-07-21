@@ -228,8 +228,7 @@ class Measure : public MeasureBase {
       QColor endBarLineColor() const            { return _endBarLineColor;     }
 
       void cmdRemoveEmptySegment(Segment* s);
-      virtual void scanElements(void* data, void (*func)(void*, Element*));
-      virtual void scanVisibleElements(void* data, void (*func)(void*, Element*), bool onlyVisible);
+      virtual void scanElements(void* data, void (*func)(void*, Element*), bool all=true);
       void createVoice(int track);
       void adjustToLen(int, int);
       int repeatFlags() const                   { return _repeatFlags; }

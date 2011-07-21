@@ -28,37 +28,36 @@ class ScoreView : public QDeclarativeItem, public MuseScoreView {
       Q_OBJECT
 
       Score* score;
-      QPointF _startDrag;
-      QPointF _offset;
+      int _currentPage;
 
       virtual void dataChanged(const QRectF&);
       virtual void updateAll();
       virtual void moveCursor();
       virtual void adjustCanvasPosition(const Element* el, bool playBack);
-      virtual void setScore(Score*) {}
-      virtual void removeScore() {}
+      virtual void setScore(Score*) { printf("setScore\n");}
+      virtual void removeScore() {printf("removeScore\n");}
       virtual void changeEditElement(Element*);
       virtual int gripCount() const;
       virtual const QRectF& getGrip(int) const;
       virtual const QTransform& matrix() const;
       virtual void setDropRectangle(const QRectF&);
       virtual void cmdAddSlur(Note* firstNote, Note* lastNote);
-      virtual void startEdit() {}
-      virtual void startEdit(Element*, int /*startGrip*/) {}
-      virtual Element* elementNear(const QPointF&) { return 0; }
+      virtual void startEdit() { printf("startEdit\n");}
+      virtual void startEdit(Element*, int /*startGrip*/) { printf("startEdit\n");}
+      virtual Element* elementNear(const QPointF&) { printf("elementNear\n"); return 0; }
 
       virtual void paint(QPainter* painter, const QStyleOptionGraphicsItem*, QWidget*);
 
       virtual void setCursor(const QCursor&) {} // { QWidget::setCursor(c); }
       virtual QCursor cursor() const { return QCursor(); } // { return QWidget::cursor(); }
-
-      void zoom(int step, const QPoint&);
+      virtual QRectF boundingRect() const;
 
    public slots:
-      void drag(qreal x, qreal y);
-      void startDrag(qreal x, qreal y);
       void setScore(const QString& s);
       void play();
+      void setCurrentPage(int n);
+      void nextPage();
+      void prevPage();
 
    public:
       ScoreView(QDeclarativeItem* parent = 0);

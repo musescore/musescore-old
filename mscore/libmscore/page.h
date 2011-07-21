@@ -105,12 +105,13 @@ class Page : public Element {
       qreal loHeight() const;
 
       virtual void draw(Painter*) const;
-      virtual void scanElements(void* data, void (*func)(void*, Element*));
+      virtual void scanElements(void* data, void (*func)(void*, Element*), bool all=true);
       void clear();
 
       QList<const Element*> items(const QRectF& r);
       QList<const Element*> items(const QPointF& p);
       void rebuildBspTree() { bspTreeValid = false; }
+      virtual QPointF canvasPos() const { return QPointF(); }     ///< position in page coordinates
       };
 
 extern const PaperSize paperSizes[];

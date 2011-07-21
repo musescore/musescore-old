@@ -106,7 +106,7 @@ class System : public Element {
       virtual void write(Xml&) const;
       virtual void read(QDomElement);
 
-      virtual void scanElements(void* data, void (*func)(void*, Element*));
+      virtual void scanElements(void* data, void (*func)(void*, Element*), bool all=true);
 
       Page* page() const                 { return (Page*)parent(); }
 

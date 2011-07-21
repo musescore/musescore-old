@@ -140,7 +140,7 @@ class Note : public Element {
       virtual QPointF canvasPos() const;      ///< position in canvas coordinates
       virtual void layout();
       void layout10(AccidentalState*);
-      virtual void scanElements(void* data, void (*func)(void*, Element*));
+      virtual void scanElements(void* data, void (*func)(void*, Element*), bool all=true);
       virtual void setTrack(int val);
 
       int playTicks() const;

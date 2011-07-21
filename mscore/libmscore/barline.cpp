@@ -656,11 +656,11 @@ BarLineType BarLine::barLineType(const QString& s)
 //   scanElements
 //---------------------------------------------------------
 
-void BarLine::scanElements(void* data, void (*func)(void*, Element*))
+void BarLine::scanElements(void* data, void (*func)(void*, Element*), bool all)
       {
       func(data, this);
       foreach(Element* e, _el)
-            e->scanElements(data, func);
+            e->scanElements(data, func, all);
       }
 
 //---------------------------------------------------------

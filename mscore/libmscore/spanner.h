@@ -97,7 +97,7 @@ class Spanner : public Element {
 
       virtual void add(Element*);
       virtual void remove(Element*);
-      virtual void scanElements(void* data, void (*func)(void*, Element*));
+      virtual void scanElements(void* data, void (*func)(void*, Element*), bool all=true);
       virtual void startEdit(MuseScoreView*, const QPointF&);
       virtual void setSelected(bool f);
       void setYoff(qreal d) { _yoffset = d;        }

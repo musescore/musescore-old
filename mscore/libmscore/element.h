@@ -327,7 +327,7 @@ class Element {
       mutable int itemDiscovered;     ///< helper flag for bsp
 
       virtual QList<Prop> properties(Xml&, const Element* proto = 0) const;
-      virtual void scanElements(void* data, void (*func)(void*, Element*)) { func(data, this); }
+      virtual void scanElements(void* data, void (*func)(void*, Element*), bool all=true);
 
       virtual void toDefault();
 

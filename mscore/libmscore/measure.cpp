@@ -2258,22 +2258,13 @@ bool Measure::slashStyle(int staffIdx) const
 //   scanElements
 //---------------------------------------------------------
 
-void Measure::scanElements(void* data, void (*func)(void*, Element*))
+void Measure::scanElements(void* data, void (*func)(void*, Element*), bool all)
       {
-      scanVisibleElements(data, func, false);
-      }
-
-//---------------------------------------------------------
-//   scanVisibleElements
-//---------------------------------------------------------
-
-void Measure::scanVisibleElements(void* data, void (*func)(void*, Element*), bool onlyVisible)
-      {
-      MeasureBase::scanElements(data, func);
+      MeasureBase::scanElements(data, func, all);
 
       int nstaves = score()->nstaves();
       for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
-            if (onlyVisible && !visible(staffIdx))
+            if (!all && !visible(staffIdx))
                   continue;
             MStaff* ms = staves[staffIdx];
             if (ms->lines)
@@ -2287,21 +2278,21 @@ void Measure::scanVisibleElements(void* data, void (*func)(void*, Element*), boo
       int tracks = nstaves * VOICES;
       for (Segment* s = first(); s; s = s->next()) {
             for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
-                  if (onlyVisible && !visible(staffIdx))
+                  if (!all && !visible(staffIdx))
                         continue;
                   }
             for (int track = 0; track < tracks; ++track) {
-                  if (onlyVisible && !visible(track/VOICES)) {
+                  if (!all && !visible(track/VOICES)) {
                         track += VOICES - 1;
                         continue;
                         }
                   Element* e = s->element(track);
                   if (e == 0)
                         continue;
-                  e->scanElements(data, func);
+                  e->scanElements(data, func, all);
                   }
             foreach(Spanner* e, s->spannerFor())
-                  e->scanElements(data,  func);
+                  e->scanElements(data,  func, all);
             foreach(Element* e, s->annotations()) {
 #if 0
                   if (e->type() == TEMPO_TEXT) {
@@ -2310,7 +2301,7 @@ void Measure::scanVisibleElements(void* data, void (*func)(void*, Element*), boo
                         printf("scan %f %f %f %f<%s>\n", r.x(), r.y(), r.width(), r.height(), qPrintable(s));
                         }
 #endif
-                  e->scanElements(data,  func);
+                  e->scanElements(data,  func, all);
                   }
             }
       foreach(Tuplet* tuplet, _tuplets) {

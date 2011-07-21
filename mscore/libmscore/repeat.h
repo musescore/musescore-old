@@ -34,7 +34,6 @@ class RepeatMeasure : public Rest {
       virtual ElementType type() const      { return REPEAT_MEASURE; }
       virtual void draw(Painter*) const;
       virtual void layout();
-      virtual void scanElements(void* data, void (*func)(void*, Element*)) { func(data, this); }
       };
 
 enum MarkerType {

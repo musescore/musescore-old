@@ -80,24 +80,20 @@ MeasureBase::~MeasureBase()
 //   scanElements
 //---------------------------------------------------------
 
-void MeasureBase::scanElements(void* data, void (*func)(void*, Element*))
+void MeasureBase::scanElements(void* data, void (*func)(void*, Element*), bool all)
       {
       if (type() == MEASURE) {
             foreach(Element* e, _el) {
                   if ((e->track() == -1) || ((Measure*)this)->visible(e->staffIdx()))
-                        e->scanElements(data, func);
+                        e->scanElements(data, func, all);
                   }
             }
       else {
             foreach(Element* e, _el)
-                  e->scanElements(data, func);
+                  e->scanElements(data, func, all);
             }
-      func(data, this);
-      }
-
-void MeasureBase::scanVisibleElements(void* data, void (*func)(void*, Element*), bool)
-      {
-      scanElements(data, func);
+      if (all)
+            func(data, this);
       }
 
 //---------------------------------------------------------

@@ -1407,14 +1407,14 @@ QPointF Note::canvasPos() const
 //   scanElements
 //---------------------------------------------------------
 
-void Note::scanElements(void* data, void (*func)(void*, Element*))
+void Note::scanElements(void* data, void (*func)(void*, Element*), bool all)
       {
       func(data, this);
       if (_tieFor && !staff()->useTablature())  // no ties in tablature
-            _tieFor->scanElements(data, func);
+            _tieFor->scanElements(data, func, all);
       foreach(Element* e, _el) {
             if (score()->tagIsValid(e->tag()))
-                  e->scanElements(data, func);
+                  e->scanElements(data, func, all);
             }
       if (!dragMode && _accidental)
             func(data, _accidental);
