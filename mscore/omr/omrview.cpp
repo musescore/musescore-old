@@ -121,11 +121,6 @@ void OmrView::paintEvent(QPaintEvent* event)
 
       QPainter p(this);
       p.setTransform(_matrix);
-//      p.setRenderHint(QPainter::SmoothPixmapTransform, true);
-//      p.setRenderHint(QPainter::HighQualityAntialiasing, true);
-//      p.setRenderHint(QPainter::Antialiasing, true);
-//      p.setRenderHint(QPainter::TextAntialiasing, true);
-//      p.setRenderHint(QPainter::NonCosmeticDefaultPen, true);
 
       QRect r(event->rect());
 

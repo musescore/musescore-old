@@ -216,8 +216,7 @@ qreal Page::loHeight() const
 
 void Page::appendSystem(System* s)
       {
-//      s->setParent(this);
-      s->setParent(0);
+      s->setParent(this);
       _systems.append(s);
       }
 

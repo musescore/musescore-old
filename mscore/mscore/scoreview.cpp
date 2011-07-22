@@ -2615,7 +2615,7 @@ void ScoreView::drawElements(QPainter& p, const QList<const Element*>& el)
                   if (score()->printing() || !score()->showInvisible())
                         continue;
                   }
-            // p.save();
+            p.save();
             QPointF pos(e->canvasPos());
             p.translate(pos);
             p.setPen(QPen(e->curColor()));
@@ -2624,7 +2624,7 @@ void ScoreView::drawElements(QPainter& p, const QList<const Element*>& el)
             if (debugMode && e->selected())
                   drawDebugInfo(p, e);
             p.translate(-pos);
-            // p.restore();
+            p.restore();
             }
       }
 

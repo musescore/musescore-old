@@ -92,7 +92,7 @@ void MeasureBase::scanElements(void* data, void (*func)(void*, Element*), bool a
             foreach(Element* e, _el)
                   e->scanElements(data, func, all);
             }
-      if (all)
+//      if (all)
             func(data, this);
       }
 

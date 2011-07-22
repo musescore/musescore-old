@@ -32,6 +32,8 @@
 #include "libmscore/sym.h"
 #include "pattern.h"
 
+// #define SEARCH_NOTES
+
 //---------------------------------------------------------
 //   Lv
 //    line + value
@@ -158,9 +160,10 @@ void OmrSystem::searchBarLines()
             staves[0].setWidth(dx - staves[0].x());
             staves[1].setWidth(dx - staves[1].x());
             }
+#ifdef SEARCH_NOTES
       searchNotes(quartheadSym);
       searchNotes(halfheadSym);
-
+#endif
       //
       // remove false positive barlines:
       //    - two barlines too narrow (repeat-/end-barlines
@@ -764,7 +767,7 @@ void OmrSystem::searchNotes(QList<OmrNote*>* noteList, Pattern* pattern,
 
       QList<Peak> notePeaks;
       int xx1 = -1000;
-      double val;
+      double val = 0.0;
 
       for (int x = x1; x < x2; ++x) {
             Pattern p(&_page->image(), x, y - hh/2, hw, hh);
