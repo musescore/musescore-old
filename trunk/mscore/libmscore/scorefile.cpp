@@ -435,7 +435,7 @@ void Score::saveCompressedFile(QIODevice* f, QFileInfo& info)
                         throw(QString("cannot create image"));
                   if (!cbuf.open(QIODevice::ReadOnly))
                         throw(QString("cannot open buffer cbuf"));
-                  if (!uz.createEntry(path, cbuf, dt, false, true, 0))
+                  if (!uz.createEntry(path, cbuf, dt, false, true))
                         throw(QString("Cannot add <%1> to zipfile\n").arg(path));
                   cbuf.close();
                   }
