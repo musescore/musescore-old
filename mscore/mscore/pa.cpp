@@ -47,7 +47,7 @@ static PaStream* stream;
 int paCallback(const void*, void* out, long unsigned frames,
    const PaStreamCallbackTimeInfo*, PaStreamCallbackFlags, void *)
       {
-#ifdef INVERLEAVED_AUDIO
+#ifdef INTERLEAVED_AUDIO
       float lb[frames];
       float rb[frames];
       seq->process((unsigned)frames, lb, rb);
@@ -119,7 +119,7 @@ bool Portaudio::init()
 
       out.device           = idx;
       out.channelCount     = 2;
-#ifdef INVERLEAVED_AUDIO
+#ifdef INTERLEAVED_AUDIO
       out.sampleFormat     = paFloat32;
 #else
       out.sampleFormat     = paFloat32 | paNonInterleaved;
