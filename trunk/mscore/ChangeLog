@@ -1,3 +1,5 @@
+22.jul (lv)
+      - fix #10849: musicxml exports lyrics only with notes in voice 1
 21.jul
       - Element->canvasPos() is now page relative; Page->canvasPos() is zero for all pages
       (la)
