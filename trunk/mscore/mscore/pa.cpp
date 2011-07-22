@@ -51,7 +51,7 @@ int paCallback(const void*, void* out, long unsigned frames,
       float lb[frames];
       float rb[frames];
       seq->process((unsigned)frames, lb, rb);
-      float* ob = (float*)out;
+      float* op = (float*)out;
       for (int i = 0; i < frames; ++i) {
             *op++ = lb[i];
             *op++ = rb[i];
