@@ -71,9 +71,11 @@ install(FILES
       qt_el.qm
       qt_es.qm
       qt_eu.qm
+      qt_fa.qm
       qt_fi.qm
       qt_fr.qm
       qt_gl.qm
+      qt_he.qm
       qt_hu.qm
       qt_id.qm
       qt_it.qm
