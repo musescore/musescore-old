@@ -1461,7 +1461,7 @@ void ScoreView::chordTab(bool back)
       
       // search next chord
       if (back) {
-           for (segment = measure->last(); segment; segment = segment->prev()) {
+            for (segment = measure->last(); segment; segment = segment->prev1()) {
                   if (segment->tick() < tick) {
                         SegmentType t = SegmentType(segment->subtype());
                         if (t == SegChordRest)
@@ -1490,7 +1490,21 @@ void ScoreView::chordTab(bool back)
       
       int newTick = tick;
       if (back) {
-            newTick = measure->tick()  + (((tick - 1 - measure->tick()) / beat)) * beat;
+            if(tick == measure->tick()) {
+                  //find last beat of previous measure, possibly different timesig
+                  Measure* prev = measure->prevMeasure();
+                  if(prev) {
+                        f = prev->fraction();
+                        beatsPerMeasure = (f.numerator() > 3 && f.numerator() % 3 == 0 && f.denominator() > 4) ? 
+                            f.numerator() / 3 : f.numerator(); 
+                        beat = prev->fraction().ticks() / beatsPerMeasure;
+                        newTick = prev->tick() + (beatsPerMeasure -1) * beat;
+                        }
+                  }
+            else {
+                  newTick = measure->tick()  + (((tick - 1 - measure->tick()) / beat)) * beat;
+                  }
+            
             if(segment && segment->tick() > newTick) {
                   newTick = segment->tick();
                   }

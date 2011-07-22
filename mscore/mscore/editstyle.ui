@@ -326,8 +326,8 @@
           <double>1000.000000000000000</double>
          </property>
          <property name="singleStep">
-          <double>0.5</double>
-         </property>              
+          <double>0.500000000000000</double>
+         </property>
         </widget>
        </item>
        <item row="1" column="2">
@@ -364,8 +364,8 @@
           <double>1000.000000000000000</double>
          </property>
          <property name="singleStep">
-          <double>0.1</double>
-         </property>          
+          <double>0.100000000000000</double>
+         </property>
         </widget>
        </item>
        <item row="2" column="0">
@@ -430,9 +430,12 @@
          <property name="decimals">
           <number>1</number>
          </property>
-          <property name="singleStep">
-           <double>0.5</double>
-          </property>           
+         <property name="minimum">
+          <double>-100.000000000000000</double>
+         </property>
+         <property name="singleStep">
+          <double>0.500000000000000</double>
+         </property>
         </widget>
        </item>
        <item row="3" column="2">
@@ -671,9 +674,12 @@
          <property name="decimals">
           <number>1</number>
          </property>
+         <property name="minimum">
+          <double>-100.000000000000000</double>
+         </property>
          <property name="singleStep">
-          <double>0.5</double>
-         </property>          
+          <double>0.500000000000000</double>
+         </property>
         </widget>
        </item>
       </layout>
@@ -722,8 +728,8 @@
                <double>1000.000000000000000</double>
               </property>
               <property name="singleStep">
-               <double>0.1</double>
-              </property>   
+               <double>0.100000000000000</double>
+              </property>
              </widget>
             </item>
             <item row="1" column="0">
@@ -785,11 +791,11 @@
                </sizepolicy>
               </property>
               <property name="minimum">
-               <double>1.0</double>
+               <double>1.000000000000000</double>
               </property>
               <property name="singleStep">
-                <double>0.1</double>
-              </property>   
+               <double>0.100000000000000</double>
+              </property>
              </widget>
             </item>
             <item row="1" column="0">
@@ -810,11 +816,11 @@
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-            <property name="singleStep">
-              <double>0.1</double>
-            </property>               
               <property name="suffix">
                <string>sp</string>
+              </property>
+              <property name="singleStep">
+               <double>0.100000000000000</double>
               </property>
              </widget>
             </item>
@@ -836,11 +842,11 @@
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-            <property name="singleStep">
-              <double>0.1</double>
-            </property>               
               <property name="suffix">
                <string>sp</string>
+              </property>
+              <property name="singleStep">
+               <double>0.100000000000000</double>
               </property>
              </widget>
             </item>
@@ -862,11 +868,11 @@
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-            <property name="singleStep">
-              <double>0.1</double>
-            </property>               
               <property name="suffix">
                <string>sp</string>
+              </property>
+              <property name="singleStep">
+               <double>0.100000000000000</double>
               </property>
              </widget>
             </item>
@@ -888,11 +894,11 @@
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-            <property name="singleStep">
-              <double>0.1</double>
-            </property>               
               <property name="suffix">
                <string>sp</string>
+              </property>
+              <property name="singleStep">
+               <double>0.100000000000000</double>
               </property>
              </widget>
             </item>
@@ -914,11 +920,11 @@
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-            <property name="singleStep">
-              <double>0.1</double>
-            </property>               
               <property name="suffix">
                <string>sp</string>
+              </property>
+              <property name="singleStep">
+               <double>0.100000000000000</double>
               </property>
              </widget>
             </item>
@@ -940,11 +946,11 @@
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-              <property name="singleStep">
-                <double>0.1</double>
-              </property>               
               <property name="suffix">
                <string>sp</string>
+              </property>
+              <property name="singleStep">
+               <double>0.100000000000000</double>
               </property>
              </widget>
             </item>
@@ -966,11 +972,11 @@
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-              <property name="singleStep">
-                <double>0.05</double>
-              </property>            
               <property name="suffix">
                <string>sp</string>
+              </property>
+              <property name="singleStep">
+               <double>0.050000000000000</double>
               </property>
              </widget>
             </item>
@@ -986,11 +992,11 @@
             </item>
             <item row="8" column="1">
              <widget class="QDoubleSpinBox" name="clefBarlineDistance">
-            <property name="singleStep">
-              <double>0.01</double>
-            </property>              
               <property name="suffix">
                <string extracomment="spatium unit">sp</string>
+              </property>
+              <property name="singleStep">
+               <double>0.010000000000000</double>
               </property>
              </widget>
             </item>
@@ -1102,7 +1108,7 @@
                   <string extracomment="space unit">sp</string>
                  </property>
                  <property name="singleStep">
-                  <double>0.05</double>
+                  <double>0.050000000000000</double>
                  </property>
                 </widget>
                </item>
@@ -1115,7 +1121,7 @@
                   <double>1.000000000000000</double>
                  </property>
                  <property name="singleStep">
-                  <double>0.25</double>
+                  <double>0.250000000000000</double>
                  </property>
                 </widget>
                </item>
@@ -1164,11 +1170,11 @@
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-              <property name="singleStep">
-               <double>0.01</double>
-              </property>              
               <property name="suffix">
                <string>sp</string>
+              </property>
+              <property name="singleStep">
+               <double>0.010000000000000</double>
               </property>
              </widget>
             </item>
@@ -1187,11 +1193,11 @@
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-              <property name="singleStep">
-               <double>0.01</double>
-              </property>                  
               <property name="suffix">
                <string>sp</string>
+              </property>
+              <property name="singleStep">
+               <double>0.010000000000000</double>
               </property>
              </widget>
             </item>
@@ -1210,11 +1216,11 @@
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-              <property name="singleStep">
-               <double>0.1</double>
-              </property>                 
               <property name="suffix">
                <string>sp</string>
+              </property>
+              <property name="singleStep">
+               <double>0.100000000000000</double>
               </property>
              </widget>
             </item>
@@ -1233,11 +1239,11 @@
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-              <property name="singleStep">
-               <double>0.1</double>
-              </property>               
               <property name="suffix">
                <string>sp</string>
+              </property>
+              <property name="singleStep">
+               <double>0.100000000000000</double>
               </property>
              </widget>
             </item>
@@ -1256,11 +1262,11 @@
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-              <property name="singleStep">
-               <double>0.01</double>
-              </property> 
               <property name="suffix">
                <string>sp</string>
+              </property>
+              <property name="singleStep">
+               <double>0.010000000000000</double>
               </property>
              </widget>
             </item>
@@ -1313,7 +1319,7 @@
                <double>99999999.000000000000000</double>
               </property>
               <property name="singleStep">
-               <double>0.2</double>
+               <double>0.200000000000000</double>
               </property>
              </widget>
             </item>
@@ -1333,7 +1339,7 @@
                <double>999999.000000000000000</double>
               </property>
               <property name="singleStep">
-               <double>0.01</double>
+               <double>0.010000000000000</double>
               </property>
              </widget>
             </item>
@@ -1508,10 +1514,10 @@
           </item>
           <item row="0" column="1">
            <widget class="QDoubleSpinBox" name="beamWidth">
-           <property name="singleStep">
-            <double>0.01</double>
-           </property>
-           </widget> 
+            <property name="singleStep">
+             <double>0.010000000000000</double>
+            </property>
+           </widget>
           </item>
           <item row="0" column="2">
            <widget class="QLabel" name="label_55">
@@ -1529,9 +1535,9 @@
           </item>
           <item row="1" column="1">
            <widget class="QDoubleSpinBox" name="beamDistance">
-           <property name="singleStep">
-            <double>0.1</double>
-           </property>            
+            <property name="singleStep">
+             <double>0.100000000000000</double>
+            </property>
            </widget>
           </item>
           <item row="1" column="2">
@@ -1550,10 +1556,10 @@
           </item>
           <item row="2" column="1">
            <widget class="QDoubleSpinBox" name="beamMinLen">
-           <property name="singleStep">
-            <double>0.05</double>
-           </property> 
-           </widget>           
+            <property name="singleStep">
+             <double>0.050000000000000</double>
+            </property>
+           </widget>
           </item>
           <item row="2" column="2">
            <widget class="QLabel" name="label_60">
@@ -1575,7 +1581,7 @@
              <double>1.000000000000000</double>
             </property>
             <property name="singleStep">
-             <double>0.05</double>
+             <double>0.050000000000000</double>
             </property>
            </widget>
           </item>
@@ -1592,7 +1598,7 @@
              <double>1.000000000000000</double>
             </property>
             <property name="singleStep">
-             <double>0.05</double>
+             <double>0.050000000000000</double>
             </property>
            </widget>
           </item>
@@ -1788,10 +1794,10 @@
        </item>
        <item row="0" column="1">
         <widget class="QDoubleSpinBox" name="hairpinLineWidth">
-           <property name="singleStep">
-            <double>0.01</double>
-           </property> 
-        </widget>        
+         <property name="singleStep">
+          <double>0.010000000000000</double>
+         </property>
+        </widget>
        </item>
        <item row="0" column="2">
         <spacer>
@@ -1815,10 +1821,10 @@
        </item>
        <item row="1" column="1">
         <widget class="QDoubleSpinBox" name="hairpinHeight">
-           <property name="singleStep">
-            <double>0.1</double>
-           </property>
-       </widget> 
+         <property name="singleStep">
+          <double>0.100000000000000</double>
+         </property>
+        </widget>
        </item>
        <item row="2" column="0">
         <widget class="QLabel" name="label_10">
@@ -1842,9 +1848,9 @@
        </item>
        <item row="2" column="1">
         <widget class="QDoubleSpinBox" name="hairpinContinueHeight">
-           <property name="singleStep">
-            <double>0.1</double>
-           </property>         
+         <property name="singleStep">
+          <double>0.100000000000000</double>
+         </property>
         </widget>
        </item>
       </layout>
@@ -1927,8 +1933,8 @@
             <string comment="space unit">sp</string>
            </property>
            <property name="singleStep">
-            <double>0.1</double>
-           </property>            
+            <double>0.100000000000000</double>
+           </property>
           </widget>
          </item>
          <item row="1" column="0">
@@ -1944,8 +1950,8 @@
             <string comment="space unit">sp</string>
            </property>
            <property name="singleStep">
-            <double>0.1</double>
-           </property> 
+            <double>0.100000000000000</double>
+           </property>
           </widget>
          </item>
          <item row="2" column="0">
@@ -1961,8 +1967,8 @@
             <string comment="space unit">sp</string>
            </property>
            <property name="singleStep">
-            <double>0.1</double>
-           </property>            
+            <double>0.100000000000000</double>
+           </property>
           </widget>
          </item>
         </layout>
