@@ -251,7 +251,7 @@ class ExportMusicXml {
       void barlineRight(Measure* m);
       void pitch2xml(Note* note, char& c, int& alter, int& octave);
       void unpitch2xml(Note* note, char& c, int& octave);
-      void lyrics(const QList<Lyrics*>* ll);
+      void lyrics(const QList<Lyrics*>* ll, const int trk);
       void work(const MeasureBase* measure);
       void calcDivMoveToTick(int t);
       void calcDivisions();
@@ -2427,7 +2427,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bo
             notations.etag(xml);
             // write lyrics (only for first note)
             if ((note == nl.front()) && ll)
-                  lyrics(ll);
+                  lyrics(ll, chord->track());
             xml.etag();
             }
       }
@@ -3083,26 +3083,30 @@ void ExportMusicXml::symbol(Symbol* sym, int staff)
 //   lyrics
 //---------------------------------------------------------
 
-void ExportMusicXml::lyrics(const QList<Lyrics*>* ll)
+void ExportMusicXml::lyrics(const QList<Lyrics*>* ll, const int trk)
       {
+//      for (ciLyrics i = ll->begin(); i != ll->end(); ++i) {
+//            if (*i) {
       foreach(const Lyrics* l, *ll) {
             if (l) {
-                  xml.stag(QString("lyric number=\"%1\"").arg(l->no() + 1));
-                  int syl   = l->syllabic();
-                  QString s = "";
-                  switch(syl) {
-                        case Lyrics::SINGLE: s = "single"; break;
-                        case Lyrics::BEGIN:  s = "begin";  break;
-                        case Lyrics::END:    s = "end";    break;
-                        case Lyrics::MIDDLE: s = "middle"; break;
-                        default:
-                              printf("unknown syllabic %d\n", syl);
+                  if ((l)->track() == trk) {
+                        xml.stag(QString("lyric number=\"%1\"").arg((l)->no() + 1));
+                        int syl   = (l)->syllabic();
+                        QString s = "";
+                        switch(syl) {
+                              case Lyrics::SINGLE: s = "single"; break;
+                              case Lyrics::BEGIN:  s = "begin";  break;
+                              case Lyrics::END:    s = "end";    break;
+                              case Lyrics::MIDDLE: s = "middle"; break;
+                              default:
+                                    printf("unknown syllabic %d\n", syl);
+                              }
+                        xml.tag("syllabic", s);
+                        xml.tag("text", (l)->getText());
+                        if((l)->endTick() > 0)
+                              xml.tagE("extend");
+                        xml.etag();
                         }
-                  xml.tag("syllabic", s);
-                  xml.tag("text", l->getText());
-                  if(l->endTick() > 0)
-                	  xml.tagE("extend");
-                  xml.etag();
                   }
             }
       }
