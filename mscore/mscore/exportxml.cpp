@@ -3962,7 +3962,7 @@ foreach(Element* el, *(score->gel())) {
                                           // at line beginning
                                           Clef* cle = static_cast<Clef*>(el);
                                           int ti = cle->segment()->tick();
-                                          int ct = cle->subtype();
+                                          int ct = cle->clefType();
                                           printf("exportxml: clef at start measure ti=%d ct=%d gen=%d\n", ti, ct, el->generated());
                                           if (!cle->generated())
                                                 clef(sstaff, ct);
@@ -4072,7 +4072,7 @@ foreach(Element* el, *(score->gel())) {
                                           // also ignore clefs at the start of a measure,
                                           // these have already been output
                                           int ti = seg->tick();
-                                          int ct = ((Clef*)el)->subtype();
+                                          int ct = ((Clef*)el)->clefType();
                                           printf("exportxml: clef in measure ti=%d ct=%d gen=%d\n", ti, ct, el->generated());
                                           if (el->generated()) {
                                                 printf("exportxml: generated clef not exported\n");
