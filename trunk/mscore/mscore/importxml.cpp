@@ -204,7 +204,7 @@ class LoadCompressedMusicXml : public LoadFile {
 //---------------------------------------------------------
 
 /**
- Load compressed MusicXML file \a qf, return false if OK and true on error.
+ Load compressed MusicXML file \a qf, return true if OK and false on error.
  */
 
 bool LoadCompressedMusicXml::loader(QFile* qf)
@@ -213,14 +213,14 @@ bool LoadCompressedMusicXml::loader(QFile* qf)
       Unzip uz;
       if (!uz.openArchive(qf->fileName())) {
             error = "Unable to open archive(" + qf->fileName() + "):\n" + uz.errorString();
-            return true;
+            return false;
             }
-// printf("openArchive ec=%d\n", ec);
+// printf("openArchive\n");
 
       QBuffer cbuf;
       cbuf.open(QIODevice::WriteOnly);
       uz.extractFile("META-INF/container.xml", &cbuf);
-// printf("extractFile ec=%d, bufsize=%d\n", ec, cbuf.data().size());
+// printf("extractFile bufsize=%d\n", cbuf.data().size());
 // printf("data=%s\n", cbuf.data().data());
 
       QDomDocument container;
@@ -232,7 +232,7 @@ bool LoadCompressedMusicXml::loader(QFile* qf)
             ln.setNum(line);
             error = err + "\n at line " + ln + " column " + col;
             printf("error: %s\n", error.toLatin1().data());
-            return true;
+            return false;
             }
 // printf("container=%s\n", container.toString().toUtf8().data());
 
@@ -260,7 +260,7 @@ bool LoadCompressedMusicXml::loader(QFile* qf)
             }
       if (rootfile == "") {
             printf("can't find rootfile in: %s\n", qf->fileName().toLatin1().data());
-            return true;
+            return false;
             }
 // else
 //   printf("rootfile=%s\n", rootfile.toUtf8().data());
@@ -268,8 +268,9 @@ bool LoadCompressedMusicXml::loader(QFile* qf)
       QBuffer dbuf;
       dbuf.open(QIODevice::WriteOnly);
       uz.extractFile(rootfile, &dbuf);
-// printf("ec=%d, bufsize=%d\n", ec, dbuf.data().size());
+// printf("bufsize=%d\n", dbuf.data().size());
 // printf("data=%s\n", dbuf.data().data());
+// printf("data end\n");
 
       if (!_doc->setContent(dbuf.data(), false, &err, &line, &column)) {
             QString col, ln;
@@ -277,10 +278,11 @@ bool LoadCompressedMusicXml::loader(QFile* qf)
             ln.setNum(line);
             error = err + "\n at line " + ln + " column " + col;
             printf("error: %s\n", qPrintable(error));
-            return true;
+            return false;
             }
       docName = qf->fileName();
-      return false;
+// printf("LoadCompressedMusicXml::loader loaded (%s) successfully\n", qPrintable(qf->fileName()));
+      return true;
       }
 
 //---------------------------------------------------------
