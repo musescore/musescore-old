@@ -1,3 +1,6 @@
+23.jul (lv)
+      - fix crash when importing musicxml lyrics
+      - remove spurious "Unknown Node <staff>" or "... <voice>" messages on MusicXML import
 22.jul (lv)
       - fix #10849: musicxml exports lyrics only with notes in voice 1
 21.jul
