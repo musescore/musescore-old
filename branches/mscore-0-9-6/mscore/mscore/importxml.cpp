@@ -2404,8 +2404,10 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   if (!grace)
                         tick -= lastLen;
                   }
-            else if (tag == "voice")
-                  ; // ignore (but prevent spurious "Unknown Node <voice>" message)
+            else if (tag == "staff" || tag == "voice")
+                  // already handled by voice mapper, ignore here but prevent
+                  // spurious "Unknown Node <staff>" or "... <voice>" messages
+                  ;
             else if (tag == "stem") {
                   if (s == "up")
                         sd = UP;
