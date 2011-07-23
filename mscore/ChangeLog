@@ -1,4 +1,5 @@
 23.jul (lv)
+      - fix #11641 Compressed MusicXML does not open
       - fix #11226 MusicXML exports treble clefs only
       - fix crash when importing musicxml lyrics
       - remove spurious "Unknown Node <staff>" or "... <voice>" messages on MusicXML import
