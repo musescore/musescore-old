@@ -54,7 +54,7 @@ function run()
       file.open(QIODevice.OpenMode(QIODevice.ReadOnly, QIODevice.Text));
       form = loader.load(file, null);
       form.buttonBox.accepted.connect(accept);
-      form.show();
+      form.exec();
       }
 
 //---------------------------------------------------------
@@ -67,13 +67,19 @@ function accept()
       var value = form.mSpinBox.value;
       
       var cursor   = new Cursor(curScore);
-      curScore.startUndo();
       cursor.staff = 0;
       cursor.voice = 0;
-      cursor.rewind();  // set cursor to first chord/rest
+      cursor.goToSelectionEnd();
+      var endTick = cursor.tick(); // if no selection, go to end of score
+      cursor.goToSelectionStart();
+      if (cursor.eos()) {
+            cursor.rewind();       // if no selection, start at beginning of score
+      }
 
       var i = 1;
-      while (!cursor.eos()) {
+      curScore.startUndo();
+      while (cursor.tick() < endTick) {
+        
             var m = cursor.measure();
             if(value != 0){
                 if (i % value == 0) {
@@ -103,4 +109,3 @@ var mscorePlugin = {
       };
 
 mscorePlugin;
-
