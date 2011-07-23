@@ -2230,13 +2230,16 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
 //   xmlLyric
 //---------------------------------------------------------
 
-void MusicXml::xmlLyric(Measure* measure, int trk, QDomElement e)
+Lyrics* MusicXml::xmlLyric(int trk, QDomElement e)
       {
       int lyricNo = e.attribute(QString("number"), "1").toInt() - 1;
-      if (lyricNo > MAX_LYRICS)
+      if (lyricNo > MAX_LYRICS) {
             printf("too much lyrics (>%d)\n", MAX_LYRICS);
+            return 0;
+            }
       Lyrics* l = new Lyrics(score);
       l->setNo(lyricNo);
+      l->setTrack(trk);
 //TODO-WS      l->setTick(tick);
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
@@ -2269,9 +2272,7 @@ void MusicXml::xmlLyric(Measure* measure, int trk, QDomElement e)
             else
                   domError(e);
             }
-      l->setTrack(trk);
-      Segment* segment = measure->getSegment(l, tick);
-      segment->add(l);
+      return l;
       }
 
 //---------------------------------------------------------
@@ -2392,6 +2393,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       QSet<Slur *> slursStarted;
       QSet<Slur *> slursStopped;
       QColor noteheadColor = QColor::Invalid;
+      QList<Lyrics *> lyrics;
 
       // first read voice and staff and do voice mapping
       QDomElement e2 = e;
@@ -2507,6 +2509,10 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   if (!grace)
                         tick -= lastLen;
                   }
+            else if (tag == "staff" || tag == "voice")
+                  // already handled by voice mapper, ignore here but prevent
+                  // spurious "Unknown Node <staff>" or "... <voice>" messages
+                  ;
             else if (tag == "stem") {
                   if (s == "up")
                         sd = UP;
@@ -2547,8 +2553,11 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                               domError(ee);
                         }
                   }
-            else if (tag == "lyric")
-                  xmlLyric(measure, trk + voice, e);
+            else if (tag == "lyric") {
+                  Lyrics* l = xmlLyric(trk + voice, e);
+                  if (l)
+                        lyrics.append(l);
+                  }
             else if (tag == "dot")
                   ++dots;
             else if (tag == "accidental") {
@@ -3266,6 +3275,10 @@ printf("use Tie %p\n", tie);
             Segment* s = measure->getSegment(SegChordRest, tick);
             s->add(dyn);
 */
+            }
+
+      while (!lyrics.isEmpty()) {
+            cr->add(lyrics.takeFirst());
             }
 
       prevtick = tick;
