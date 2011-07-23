@@ -411,7 +411,7 @@ void TempoMap::removeTime(int tick, int len)
       {
       TempoMap tmp;
       for (ciTEvent i = begin(); i != end(); ++i) {
-            if ((i->first >= tick) && (tick != 0)) {
+            if (i->first >= tick) {
                   if (i->first >= tick + len)
                         tmp.add(i->first - len, i->second);
                   else
@@ -434,7 +434,7 @@ void TempoMap::insertTime(int tick, int len)
       {
       TempoMap tmp;
       for (ciTEvent i = begin(); i != end(); ++i) {
-            if ((i->first >= tick) && (tick != 0))
+            if (i->first >= tick)
                   tmp.add(i->first + len, i->second);
             else
                   tmp.add(i->first, i->second);
