@@ -1,3 +1,6 @@
+23.jul (lv)
+      - remove spurious "Unknown Node <voice>" messages on MusicXML import
+      - disable unnecessary voice mapper debug message on MusicXML import
 21.jul (la)
       - fix #11605: Shift-X with measure selected -> crash
 9.jul  (la)

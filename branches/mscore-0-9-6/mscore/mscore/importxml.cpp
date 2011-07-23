@@ -2404,6 +2404,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   if (!grace)
                         tick -= lastLen;
                   }
+            else if (tag == "voice")
+                  ; // ignore (but prevent spurious "Unknown Node <voice>" message)
             else if (tag == "stem") {
                   if (s == "up")
                         sd = UP;
@@ -2710,8 +2712,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             }
 
       int track = trk + voice;
-      printf("staff=%d relStaff=%d VOICES=%d voice=%d track=%d\n",
-             staff, relStaff, VOICES, voice, track);
+//      printf("staff=%d relStaff=%d VOICES=%d voice=%d track=%d\n",
+//             staff, relStaff, VOICES, voice, track);
 
       int ticks = (AL::division * duration) / divisions;
 
