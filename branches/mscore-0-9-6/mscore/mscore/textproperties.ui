@@ -323,6 +323,29 @@
       </widget>
      </item>
      <item>
+      <widget class="QToolButton" name="alignBaseline">
+       <property name="minimumSize">
+        <size>
+         <width>28</width>
+         <height>28</height>
+        </size>
+       </property>
+       <property name="toolTip">
+        <string>center text vertical to text baseline</string>
+       </property>
+       <property name="text">
+        <string>...</string>
+       </property>
+       <property name="icon">
+        <iconset resource="mscore.qrc">
+         <normaloff>:/data/text_vcenter.svg</normaloff>:/data/text_vcenter.svg</iconset>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QToolButton" name="alignBottom">
        <property name="minimumSize">
         <size>

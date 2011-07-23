@@ -37,6 +37,7 @@ TextProp::TextProp(QWidget* parent)
       QButtonGroup* g2 = new QButtonGroup(this);
       g2->addButton(alignTop);
       g2->addButton(alignVCenter);
+      g2->addButton(alignBaseline);
       g2->addButton(alignBottom);
 
       QButtonGroup* g3 = new QButtonGroup(this);
@@ -75,6 +76,8 @@ void TextProp::set(TextB* tb)
             alignVCenter->setChecked(true);
       else if (a & ALIGN_BOTTOM)
             alignBottom->setChecked(true);
+      else if (a & ALIGN_BASELINE)
+            alignBaseline->setChecked(true);
       else
             alignTop->setChecked(true);
 
@@ -140,6 +143,8 @@ void TextProp::get(TextB* tb)
             a |= ALIGN_VCENTER;
       if (alignBottom->isChecked())
             a |= ALIGN_BOTTOM;
+      if (alignBaseline->isChecked())
+            a |= ALIGN_BASELINE;
       tb->setAlign(Align(a));
       tb->doc()->setModified(true);       // force relayout
 
@@ -174,6 +179,8 @@ void TextProp::set(TextStyle* s)
             alignVCenter->setChecked(true);
       else if (a & ALIGN_BOTTOM)
             alignBottom->setChecked(true);
+      else if (a & ALIGN_BASELINE)
+            alignBaseline->setChecked(true);
       else
             alignTop->setChecked(true);
 
@@ -206,6 +213,7 @@ void TextProp::set(TextStyle* s)
       paddingWidth->setValue(s->paddingWidth);
       frameRound->setValue(s->frameRound);
       circleButton->setChecked(s->circle);
+      boxButton->setChecked(!s->circle);
       }
 
 //---------------------------------------------------------
@@ -245,6 +253,8 @@ void TextProp::get(TextStyle* s)
             a |= ALIGN_VCENTER;
       if (alignBottom->isChecked())
             a |= ALIGN_BOTTOM;
+      if (alignBaseline->isChecked())
+            a |= ALIGN_BASELINE;
       s->align = a;
       }
 
