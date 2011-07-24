@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.14">
   <Style>
-    <staffUpperBorder>6.5</staffUpperBorder>
-    <staffLowerBorder>6</staffLowerBorder>
+    <staffUpperBorder>6</staffUpperBorder>
+    <staffLowerBorder>2</staffLowerBorder>
     <staffDistance>6.5</staffDistance>
     <akkoladeDistance>6.5</akkoladeDistance>
-    <systemDistance>9.8</systemDistance>
+    <systemDistance>9.5</systemDistance>
     <lyricsDistance>2</lyricsDistance>
     <lyricsMinBottomDistance>2</lyricsMinBottomDistance>
     <systemFrameDistance>1</systemFrameDistance>
@@ -52,8 +52,8 @@
     <propertyDistanceHead>1</propertyDistanceHead>
     <propertyDistanceStem>0.5</propertyDistanceStem>
     <propertyDistance>1</propertyDistance>
-    <pageFillLimit>0.9</pageFillLimit>
-    <lastSystemFillLimit>0.25</lastSystemFillLimit>
+    <pageFillLimit>0.7</pageFillLimit>
+    <lastSystemFillLimit>0.3</lastSystemFillLimit>
     <hairpinHeight>1.2</hairpinHeight>
     <hairpinContHeight>0.5</hairpinContHeight>
     <hairpinWidth>0.13</hairpinWidth>
@@ -392,7 +392,7 @@
     <bold>0</bold>
     <italic>0</italic>
     <underline>0</underline>
-    <align>14</align>
+    <align>10</align>
     <offsetType>1</offsetType>
     <sizeIsSpatiumDependent>1</sizeIsSpatiumDependent>
     <foregroundColor r="0" g="0" b="0"/>
@@ -513,7 +513,7 @@
     <bold>0</bold>
     <italic>0</italic>
     <underline>0</underline>
-    <align>18</align>
+    <align>17</align>
     <offsetType>1</offsetType>
     <sizeIsSpatiumDependent>1</sizeIsSpatiumDependent>
     <foregroundColor r="0" g="0" b="0"/>
@@ -525,7 +525,6 @@
     <paddingWidth>0.3</paddingWidth>
     <frameRound>10</frameRound>
     <frameColor r="0" g="0" b="0"/>
-    <circle>1</circle>
     <systemFlag>1</systemFlag>
     </TextStyle>
   <TextStyle name="Repeat Text">
@@ -539,7 +538,7 @@
     <sizeIsSpatiumDependent>1</sizeIsSpatiumDependent>
     <foregroundColor r="0" g="0" b="0"/>
     <xoffset>0</xoffset>
-    <yoffset>-2</yoffset>
+    <yoffset>-4</yoffset>
     <rxoffset>100</rxoffset>
     <ryoffset>0</ryoffset>
     <systemFlag>1</systemFlag>
