@@ -32,26 +32,31 @@
             associate symbols (code points) with names
 -->
   <font id="0" family="MuseJazz">
-    <sym code="0x80" name="Maj"/>    <!-- ma -->
-    <sym code="0x81" name="m"/>      <!-- mi -->
-    <sym code="0x36" name="6"/>
-    <sym code="0x37" name="7"/>
-    <sym code="0x39" name="9"/>
-    <sym code="0x5e" name="b"/>
-    <sym code="0x5f" name="#"/>
+    <mag>1.33</mag>                    <!-- for compatibility with older versions of MuseJazz -->
+    <sym code="0xe180" name="Maj"/>    <!-- ma -->
+    <sym code="0xe181" name="m"/>      <!-- mi -->
+    <sym code="0xe192" name="2"/>
+    <sym code="0xe193" name="3"/>
+    <sym code="0xe194" name="4"/>
+    <sym code="0xe195" name="5"/>
+    <sym code="0xe196" name="6"/>
+    <sym code="0xe197" name="7"/>
+    <sym code="0xe199" name="9"/>
 
-    <sym code="0x82" name="11"/>
-    <sym code="0x83" name="13"/>
-    <sym code="0x84" name="dim"/>
-    <sym code="0x85" name="sus"/>
-    <sym code="0x8d" name="sus4"/>
-    <sym code="0x86" name="+"/>
-    <sym code="0x87" name="o"/>
-    <sym code="0x88" name="sb"/>
-    <sym code="0x89" name="s#"/>
-    <sym code="0x8a" name="5"/>
-    <sym code="0x8b" name="add"/>
-    <sym code="0x8c" name="add11"/>
+    <sym code="0xe10c" name="#"/>
+    <sym code="0xe10d" name="b"/>
+
+    <sym code="0xe182" name="11"/>
+    <sym code="0xe183" name="13"/>
+    <sym code="0xe184" name="dim"/>
+    <sym code="0xe185" name="sus"/>
+    <sym code="0xe18d" name="sus4"/>
+    <sym code="0xe186" name="+"/>
+    <sym code="0xe187" name="o"/>
+    <sym code="0xe188" name="sb"/>
+    <sym code="0xe189" name="s#"/>
+    <sym code="0xe18b" name="add"/>
+    <sym code="0xe18c" name="add11"/>
     </font>
 
 <!--
@@ -65,7 +70,7 @@
 -->
 
   <renderRoot>:n :a</renderRoot>
-  <renderBase>m:-3:0 / m:-5:4 :n :a</renderBase>
+  <renderBase>/ m:0:1 :n :a m:0:-1</renderBase>
 
   <chord id="1">
     <render></render>
@@ -119,7 +124,7 @@
     <render>m +</render>
     </chord>
   <chord id="18">
-    <render>m Maj 7</render>
+    <render>m ( Maj 7 )</render>
     </chord>
   <chord id="19">
     <render>m 7</render>
@@ -492,7 +497,7 @@
     <render>m add sb 13</render>
     </chord>
   <chord id="188">
-    <render>s# 13</render>
+    <render>add s# 13</render>
     </chord>
   <chord id="189">
     <render>add s# 11 s# 13</render>
@@ -551,5 +556,44 @@
   <chord id="207">
     <render>aug 13</render>
     </chord>
-  </museScore>
+  <chord id="210">
+    <render>Maj 7 s# 11</render>
+    </chord>
+  <chord id="211">
+    <render>Maj 9 s# 5</render>
+    </chord>
+  <chord id="212">
+    <render>Maj 7 s# 9</render>
+    </chord>
+  <chord id="213">
+    <render>add 2</render>
+    </chord>
+  <chord id="214">
+    <render>add 9</render>
+    </chord>
+  <chord id="215">
+    <render>sus sb 9 </render>
+    </chord>
+  <chord id="216">
+    <render>Maj 7 sus</render>
+    </chord>
+  <chord id="217">
+    <render>Maj 9 sus</render>
+    </chord>
+  <chord id="220">
+    <render>m 7 sb 9</render>
+    </chord>
+  <chord id="221">
+    <render>m 7 sb 13</render>
+    </chord>
+  <chord id="222">
+    <render>Phryg</render>
+    </chord>
+  <chord id="223">
+    <render>m add 2 </render>
+    </chord>
+  <chord id="230">
+    <render>7 sb 9 s# 9</render>
+    </chord>
 
+  </museScore>
