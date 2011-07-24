@@ -226,7 +226,7 @@ QPointF Articulation::canvasPos() const
             return pos();
       if (parent()->isChordRest()) {
             qreal xp = x();
-            for (Element* e = parent(); e; e = e->parent())
+            for (Element* e = parent(); e && e->parent(); e = e->parent())
                   xp += e->x();
             ChordRest* cr = static_cast<ChordRest*>(parent());
             Measure* m = cr->measure();

@@ -190,14 +190,11 @@ void Lyrics::draw(Painter* painter) const
 
 QPointF Lyrics::canvasPos() const
       {
-      qreal xp = x();
-      for (Element* e = parent(); e; e = e->parent())
-            xp += e->x();
       System* system = measure()->system();
       qreal yp = y();
-	  if(system)
+      if (system)
 	      yp = yp + system->staff(staffIdx())->y() + system->y();
-      return QPointF(xp, yp);
+      return QPointF(canvasX(), yp);
       }
 
 //---------------------------------------------------------

@@ -326,13 +326,10 @@ QLineF Symbol::dragAnchor() const
 QPointF BSymbol::canvasPos() const
       {
       if (parent() && (parent()->type() == SEGMENT)) {
-            qreal xp = x();
-            for (Element* e = parent(); e; e = e->parent())
-                  xp += e->x();
             qreal yp = y();
             Segment* s = static_cast<Segment*>(parent());
             yp += s->measure()->system()->staffY(staffIdx());
-            return QPointF(xp, yp);
+            return QPointF(canvasX(), yp);
             }
       else
             return Element::canvasPos();

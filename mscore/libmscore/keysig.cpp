@@ -69,14 +69,11 @@ QPointF KeySig::canvasPos() const
       {
       if (parent() == 0)
             return pos();
-      qreal xp = x();
-      for (Element* e = parent(); e; e = e->parent())
-            xp += e->x();
       qreal yp = y();
       System* system = segment()->measure()->system();
       if (system)
             yp += system->staff(staffIdx())->y() + system->y();
-      return QPointF(xp, yp);
+      return QPointF(canvasX(), yp);
       }
 
 //---------------------------------------------------------

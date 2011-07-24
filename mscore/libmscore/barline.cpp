@@ -53,7 +53,7 @@ QPointF BarLine::canvasPos() const
       if (parent() == 0)
             return pos();
       qreal xp = x();
-      for (Element* e = parent(); e; e = e->parent())
+      for (Element* e = parent(); e && e->parent(); e = e->parent())
             xp += e->x();
       System* system = measure()->system();
       qreal yp = y();

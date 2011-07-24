@@ -1387,9 +1387,6 @@ QPointF Note::canvasPos() const
       {
       if (parent() == 0)
             return pos();
-      qreal xp = x();
-      for (Element* e = parent(); e; e = e->parent())
-            xp += e->x();
       Chord* ch = chord();
       if (ch == 0 || ch->parent() == 0)
             return pos();
@@ -1400,7 +1397,7 @@ QPointF Note::canvasPos() const
       if (system == 0)
             return pos();
       qreal yp = y() + system->staff(staffIdx() + chord()->staffMove())->y() + system->y();
-      return QPointF(xp, yp);
+      return QPointF(canvasX(), yp);
       }
 
 //---------------------------------------------------------

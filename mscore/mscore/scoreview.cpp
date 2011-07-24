@@ -1616,9 +1616,11 @@ void ScoreView::paint(const QRect& r, QPainter& p)
             QList<const Element*> ell = page->items(fr.translated(-page->pos()));
             qStableSort(ell.begin(), ell.end(), elementLessThan);
 // printf("==============paint %d\n", ell.size());
+            p.save();
             p.translate(page->pos());
             drawElements(p, ell);
-            p.translate(-page->pos());
+//            p.translate(-page->pos());
+            p.restore();
             r1 -= _matrix.mapRect(pr).toAlignedRect();
             }
 
@@ -1828,9 +1830,12 @@ void ScoreView::dragEnterEvent(QDragEnterEvent* event)
                   Image* image = 0;
                   QString lp(path.toLower());
 
+#ifdef SVG_IMAGES
                   if (lp.endsWith(".svg"))
                         image = new SvgImage(score());
-                  else if (lp.endsWith(".jpg")
+                  else
+#endif
+                        if (lp.endsWith(".jpg")
                      || lp.endsWith(".png")
                      || lp.endsWith(".gif")
                      || lp.endsWith(".xpm")
@@ -2199,9 +2204,12 @@ void ScoreView::dropEvent(QDropEvent* event)
                   QFileInfo fi(u.path());
                   Image* s = 0;
                   QString suffix = fi.suffix().toLower();
+#ifdef SVG_IMAGES
                   if (suffix == "svg")
                         s = new SvgImage(score());
-                  else if (suffix == "jpg"
+                  else
+#endif
+                        if (suffix == "jpg"
                      || suffix == "png"
                      || suffix == "gif"
                      || suffix == "xpm"
@@ -2623,7 +2631,7 @@ void ScoreView::drawElements(QPainter& p, const QList<const Element*>& el)
 
             if (debugMode && e->selected())
                   drawDebugInfo(p, e);
-            p.translate(-pos);
+//            p.translate(-pos);
             p.restore();
             }
       }

@@ -187,17 +187,18 @@ class Element {
 
       const QPointF& ipos() const             { return _pos;                    }
       virtual QPointF pos() const             { return _pos + _userOff;         }
-      virtual qreal x() const                { return _pos.x() + _userOff.x(); }
-      virtual qreal y() const                { return _pos.y() + _userOff.y(); }
+      virtual qreal x() const                 { return _pos.x() + _userOff.x(); }
+      virtual qreal y() const                 { return _pos.y() + _userOff.y(); }
       void setPos(qreal x, qreal y);
       void setPos(const QPointF& p)           { setPos(p.x(), p.y());           }
       void movePos(const QPointF& p)          { _pos += p;               }
       qreal& rxpos()                          { return _pos.rx();        }
       qreal& rypos()                          { return _pos.ry();        }
-      virtual void move(qreal xd, qreal yd) { _pos += QPointF(xd, yd); }
+      virtual void move(qreal xd, qreal yd)   { _pos += QPointF(xd, yd); }
       virtual void move(const QPointF& s)     { _pos += s;               }
 
       virtual QPointF canvasPos() const;      ///< position in canvas coordinates
+      qreal canvasX() const;
 
       const QPointF& userOff() const          { return _userOff;  }
       void setUserOff(const QPointF& o)       { _userOff = o;     }
@@ -211,9 +212,9 @@ class Element {
       void adjustReadPos();
 
       virtual QRectF bbox() const             { return _bbox;              }
-      virtual qreal height() const           { return bbox().height();    }
+      virtual qreal height() const            { return bbox().height();    }
       virtual void setHeight(qreal v)         { _bbox.setHeight(v);        }
-      virtual qreal width() const            { return bbox().width();     }
+      virtual qreal width() const             { return bbox().width();     }
       virtual void setWidth(qreal v)          { _bbox.setWidth(v);         }
       QRectF abbox() const;
       virtual void setbbox(const QRectF& r) const   { _bbox = r;           }
