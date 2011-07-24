@@ -948,7 +948,7 @@ void PreferenceDialog::selectInstrumentList()
       QString s = QFileDialog::getOpenFileName(
          this,
          tr("Choose Instrument List"),
-         instrumentList->text(),
+         mscoreGlobalShare + "templates",
          tr("Instrument List (*.xml)")
          );
       if (!s.isNull())
