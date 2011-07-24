@@ -3103,8 +3103,12 @@ void ExportMusicXml::lyrics(const QList<Lyrics*>* ll, const int trk)
                               }
                         xml.tag("syllabic", s);
                         xml.tag("text", (l)->getText());
+/*
+ Temporarily disabled because it doesn't work yet (and thus breaks the regression test).
+ See MusicXml::xmlLyric: "// TODO-WS      l->setTick(tick);"
                         if((l)->endTick() > 0)
                               xml.tagE("extend");
+*/
                         xml.etag();
                         }
                   }
