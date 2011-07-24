@@ -1,4 +1,6 @@
-24.jul (lv)
+24.jul
+      - fix #11642: score layout scrambled after first page
+      (lv)
       - disabled writing MusicXML lyric extend element, as it currently doesn't work
 23.jul (lv)
       - fix #11641 Compressed MusicXML does not open

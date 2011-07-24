@@ -98,12 +98,9 @@ QPointF Clef::canvasPos() const
       {
       if (parent() == 0)
             return pos();
-      qreal xp = x();
-      for (Element* e = parent(); e; e = e->parent())
-            xp += e->x();
       System* system = segment()->measure()->system();
       qreal yp = y() + system->staff(staffIdx())->y() + system->y();
-      return QPointF(xp, yp);
+      return QPointF(canvasX(), yp);
       }
 
 //---------------------------------------------------------

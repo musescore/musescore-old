@@ -834,6 +834,7 @@ void ScoreView::fotoDragDrop(QMouseEvent*)
 
 void ScoreView::fotoDragDrop(QMouseEvent*)
       {
+#ifdef SVG_IMAGES
       bool printMode   = true;
       double convDpi   = DPI; // preferences.pngResolution;
       double mag       = convDpi / DPI;
@@ -859,6 +860,7 @@ void ScoreView::fotoDragDrop(QMouseEvent*)
       image->setPath(fn);
 
       cloneElement(image);
+#endif
       }
 #endif
 

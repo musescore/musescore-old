@@ -693,9 +693,12 @@ void Palette::dropEvent(QDropEvent* event)
                   QFileInfo fi(u.path());
                   Image* s = 0;
                   QString suffix(fi.suffix().toLower());
+#ifdef SVG_IMAGES
                   if (suffix == "svg")
                         s = new SvgImage(gscore);
-                  else if (suffix == "jpg"
+                  else
+#endif
+                        if (suffix == "jpg"
                      || suffix == "png"
                      || suffix == "xpm"
                         )
@@ -735,9 +738,12 @@ void Palette::dropEvent(QDropEvent* event)
                         }
                   Image* image = 0;
                   QString s(path.toLower());
+#ifdef SVG_IMAGES
                   if (s.endsWith(".svg"))
                         image = new SvgImage(gscore);
-                  else if (s.endsWith(".jpg")
+                  else
+#endif
+                        if (s.endsWith(".jpg")
                      || s.endsWith(".png")
                      || s.endsWith(".xpm")
                         )
@@ -960,9 +966,12 @@ void Palette::read(QDomElement e)
                                           }
                                     Image* image = 0;
                                     QString s(path.toLower());
+#ifdef SVG_IMAGES
                                     if (s.endsWith(".svg"))
                                           image = new SvgImage(gscore);
-                                    else if (s.endsWith(".jpg")
+                                    else
+#endif
+                                          if (s.endsWith(".jpg")
                                        || s.endsWith(".png")
                                        || s.endsWith(".xpm")
                                           )
@@ -985,7 +994,7 @@ void Palette::read(QDomElement e)
                                           element->read(ee);
                                           if (element->type() == ICON) {
                                                 Icon* icon = static_cast<Icon*>(element);
-                                                Shortcut* s = getShortcut(icon->action());
+                                                // Shortcut* s = getShortcut(icon->action());
                                                 QIcon qicon(getAction(icon->action())->icon());
                                                 icon->setAction(icon->action(), qicon);
                                                 }

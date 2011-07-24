@@ -480,10 +480,22 @@ QRectF Element::drag(const EditData& data)
 
 QPointF Element::canvasPos() const
       {
-      QPointF p(_pos + _userOff);
-      if (parent())
+      QPointF p(pos());
+      if (parent() && parent()->parent())
             p += parent()->canvasPos();
       return p;
+      }
+
+//---------------------------------------------------------
+//   canvasX
+//---------------------------------------------------------
+
+qreal Element::canvasX() const
+      {
+      qreal xp = x();
+      for (Element* e = parent(); e && e->parent(); e = e->parent())
+            xp += e->x();
+      return xp;
       }
 
 //---------------------------------------------------------
@@ -739,7 +751,6 @@ StaffLines::StaffLines(Score* s)
 QPointF StaffLines::canvasPos() const
       {
       System* system = measure()->system();
-//      return QPointF(measure()->x() + system->x() + system->page()->x(),
       return QPointF(measure()->x() + system->x(),
          system->staff(staffIdx())->y() + system->y());
       }

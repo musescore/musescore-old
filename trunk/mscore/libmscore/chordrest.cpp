@@ -179,15 +179,12 @@ void ChordRest::scanElements(void* data, void (*func)(void*, Element*), bool all
 QPointF ChordRest::canvasPos() const
       {
       if (parent() == 0)
-            return QPointF(x(), y());
-      qreal xp = x();
-      for (Element* e = parent(); e; e = e->parent())
-            xp += e->x();
+            return pos();
       System* system = measure()->system();
       if (system == 0)
             return QPointF();
       qreal yp = y() + system->staff(staffIdx())->y() + system->y();
-      return QPointF(xp, yp);
+      return QPointF(canvasX(), yp);
       }
 
 //---------------------------------------------------------

@@ -1641,9 +1641,12 @@ void MuseScore::addImage(Score* score, Element* e)
       Image* s = 0;
       QString suffix(fi.suffix().toLower());
 
+#ifdef SVG_IMAGES
       if (suffix == "svg")
             s = new SvgImage(score);
-      else if (suffix == "jpg" || suffix == "png" || suffix == "xpm")
+      else
+#endif
+            if (suffix == "jpg" || suffix == "png" || suffix == "xpm")
             s = new RasterImage(score);
       else
             return;

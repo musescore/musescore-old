@@ -909,13 +909,10 @@ LedgerLine::LedgerLine(Score* s)
 
 QPointF LedgerLine::canvasPos() const
       {
-      qreal xp = x();
-      for (Element* e = parent(); e; e = e->parent())
-            xp += e->x();
       System* system = chord()->measure()->system();
       int st = track() / VOICES;
       qreal yp = y() + system->staff(st)->y() + system->y();
-      return QPointF(xp, yp);
+      return QPointF(canvasX(), yp);
       }
 
 //---------------------------------------------------------
