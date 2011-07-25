@@ -240,9 +240,15 @@ void Preferences::init()
       oscPort                 = 5282;
       appStyleFile            = ":/data/appstyle-dark.css";
       singlePalette           = false;
-
+      
+#if defined(Q_WS_MAC)
+      // On OSX, the default style should be native to get Aqua
+      styleName               = "native";   // ??
+      globalStyle             = STYLE_NATIVE;
+#else
       styleName               = "dark";   // ??
       globalStyle             = STYLE_DARK;
+#endif
 
       myScoresPath            = "MyScores";
       myStylesPath            = "MuseScore/MyStyles";
