@@ -2621,7 +2621,7 @@ void MuseScore::readSettings()
       move(settings.value("pos", QPoint(10, 10)).toPoint());
       if (settings.value("maximized", false).toBool())
             showMaximized();
-      mscore->showPalette(settings.value("showPanel", "0").toBool());
+      mscore->showPalette(settings.value("showPanel", "1").toBool());
 
       restoreState(settings.value("state").toByteArray());
       _horizontalSplit = settings.value("split", true).toBool();

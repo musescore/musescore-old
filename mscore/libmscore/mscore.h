@@ -151,6 +151,7 @@ enum ElementType {
       FBOX,
       ACCIDENTAL_BRACKET,
       ICON,
+      OSSIA,
       MAXTYPE
       };
 
