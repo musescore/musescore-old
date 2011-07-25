@@ -70,6 +70,11 @@ Q_IMPORT_PLUGIN(com_trolltech_qt_uitools_ScriptPlugin)
 Q_IMPORT_PLUGIN(com_trolltech_qt_xml_ScriptPlugin)
 #endif
 
+// Mac-Applications don't have menubar icons
+#ifdef Q_WS_MAC
+void qt_mac_set_menubar_icons(bool b);
+#endif
+
 QList<LanguageItem> languages;
 
 bool debugMode          = false;
@@ -1978,6 +1983,8 @@ int main(int argc, char* av[])
       mscore = new MuseScore();
 #ifdef Q_WS_MAC
       QApplication::instance()->installEventFilter(mscore);
+      // Mac-Applications don't have menubar icons
+      qt_mac_set_menubar_icons(false);
 #endif
       mscore->setRevision(revision);
 
