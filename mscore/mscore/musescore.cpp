@@ -1975,22 +1975,20 @@ int main(int argc, char* av[])
       revision = QString(f.readAll());
       f.close();
 
-#ifdef OPENGL
-      // omr display needs hardware acceleration for pixmap scaling:
-//      QApplication::setGraphicsSystem(QString("opengl"));
-#endif
-      QApplication::setGraphicsSystem(QString("raster"));
-
 #ifdef Q_WS_MAC
-      MuseScoreApplication* app = new MuseScoreApplication("mscore1", argc, av);
+      MuseScoreApplication* app = new MuseScoreApplication("mscore-dev", argc, av);
 #else
-      QtSingleApplication* app = new QtSingleApplication("mscore1", argc, av);
+      QtSingleApplication* app = new QtSingleApplication("mscore-dev", argc, av);
 #endif
 
       QCoreApplication::setOrganizationName("MuseScore");
       QCoreApplication::setOrganizationDomain("musescore.org");
-      QCoreApplication::setApplicationName("MuseScore1");
+      QCoreApplication::setApplicationName("MuseScoreDevelopment");
+
+#ifndef Q_WS_MAC
+      // Save the preferences in QSettings::NativeFormat
       QSettings::setDefaultFormat(QSettings::IniFormat);
+#endif
 
       QStringList argv =  QCoreApplication::arguments();
       argv.removeFirst();
