@@ -1,4 +1,5 @@
 25.jul (ws)
+      - fix #11682: remove menubar icons for OSX
       - fix #11657: save preferences on OSX using the native format
       - fix #11669: self-explaining name for "dev-build"
 24.jul (ws)
