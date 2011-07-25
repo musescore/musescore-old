@@ -3411,11 +3411,11 @@ From the "Help" menu try choosing "Online Handbook" instead.</source>
     </message>
     <message>
         <source>Acciaccatura</source>
-        <translation>Короткий форшлаґ (аччаккату́ра)</translation>
+        <translation>Короткий форшлаґ (аччаккатура)</translation>
     </message>
     <message>
         <source>Appoggiatura</source>
-        <translation>Довгий форшлаґ (апподджату́ра)</translation>
+        <translation>Довгий форшлаґ (апподджатура)</translation>
     </message>
     <message>
         <source>Quarter grace note</source>
@@ -3692,11 +3692,11 @@ is incompatible with current interface</source>
     <name>MyWebView</name>
     <message>
         <source>Could not&lt;br /&gt; connect</source>
-        <translation type="unfinished"/>
+        <translation>Не вдається &lt;br /&gt;  з’єднатися</translation>
     </message>
     <message>
         <source>To connect with the community, &lt;br /&gt; you need to have internet &lt;br /&gt; connection enabled</source>
-        <translation type="unfinished"/>
+        <translation>Для зв’язку із спільнотою &lt;br /&gt; Вам необхідно мати включене &lt;br /&gt; з’єднання з Інтернет.</translation>
     </message>
     <message>
         <source>Retry</source>
@@ -3761,7 +3761,7 @@ is incompatible with current interface</source>
     <name>NewWizardPage2</name>
     <message>
         <source>Create New Score</source>
-        <translation>Створення нової партитури</translation>
+        <translation>Створити нову партитуру</translation>
     </message>
     <message>
         <source>Define a set of instruments. Each instrument is represented by one or more staves</source>
@@ -3772,7 +3772,7 @@ is incompatible with current interface</source>
     <name>NewWizardPage3</name>
     <message>
         <source>Create New Score</source>
-        <translation>Створення нової партитури</translation>
+        <translation>Створити нову партитуру</translation>
     </message>
     <message>
         <source>Create Time Signature</source>
@@ -3783,7 +3783,7 @@ is incompatible with current interface</source>
     <name>NewWizardPage4</name>
     <message>
         <source>Create New Score</source>
-        <translation>Створення нової партитури</translation>
+        <translation>Створити нову партитуру</translation>
     </message>
     <message>
         <source>Select Template File:</source>
@@ -3794,7 +3794,7 @@ is incompatible with current interface</source>
     <name>NewWizardPage5</name>
     <message>
         <source>Create New Score</source>
-        <translation>Створення нової партитури</translation>
+        <translation>Створити нову партитуру</translation>
     </message>
     <message>
         <source>Select Key Signature:</source>
@@ -4265,7 +4265,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Choose Starting Score</source>
-        <translation type="unfinished"/>
+        <translation>Вибрати початкову партитуру</translation>
     </message>
     <message>
         <source>MuseScore Files (*.mscz *.mscx *.msc);;All (*)</source>
@@ -4749,7 +4749,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Show MuseScore Connect</source>
-        <translation type="unfinished"/>
+        <translation>Показати зв’язок із спільнотою MuseScore</translation>
     </message>
 </context>
 <context>
@@ -4902,7 +4902,7 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>MuseScore: register script plugin:</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore: реєстрація додатку із сценарієм:</translation>
     </message>
 </context>
 <context>
@@ -6639,7 +6639,7 @@ p, li { white-space: pre-wrap; }
     <name>WebPageDockWidget</name>
     <message>
         <source>Connect with the &lt;br /&gt; Community</source>
-        <translation type="unfinished"/>
+        <translation>Зв’язок із &lt;br /&gt;  спільнотою</translation>
     </message>
     <message>
         <source>Find help</source>
@@ -7189,19 +7189,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>page-prev</source>
-        <translation>сторінка_попередня</translation>
+        <translation>попередня сторінка</translation>
     </message>
     <message>
         <source>page-next</source>
-        <translation>сторінка_наступна</translation>
+        <translation>наступна сторінка</translation>
     </message>
     <message>
         <source>page-top</source>
-        <translation>сторінка_верх</translation>
+        <translation>верхня сторінка</translation>
     </message>
     <message>
         <source>page-end</source>
-        <translation>сторінка_низ</translation>
+        <translation>нижня сторінка</translation>
     </message>
     <message>
         <source>add slur</source>
@@ -7409,11 +7409,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>acciaccatura</source>
-        <translation>короткий форшлаґ (аччаккату́ра)</translation>
+        <translation>короткий форшлаґ (аччаккатура)</translation>
     </message>
     <message>
         <source>appoggiatura</source>
-        <translation>довгий форшлаґ (апподджату́ра)</translation>
+        <translation>довгий форшлаґ (апподджатура)</translation>
     </message>
     <message>
         <source>grace-4</source>
@@ -7765,7 +7765,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>edit score meta data</source>
-        <translation type="unfinished">редагування метаданих партитури</translation>
+        <translation>редагування мета-інформації щодо партитури</translation>
     </message>
     <message>
         <source>Meta Data...</source>
@@ -8021,7 +8021,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Close current score</source>
-        <translation type="unfinished"/>
+        <translation>Зачинити поточну партитуру</translation>
     </message>
     <message>
         <source>Print</source>
@@ -8381,11 +8381,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>next score</source>
-        <translation type="unfinished"/>
+        <translation>наступна партитура</translation>
     </message>
     <message>
         <source>previous score</source>
-        <translation type="unfinished"/>
+        <translation>попередня партитура</translation>
     </message>
 </context>
 <context>

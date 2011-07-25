@@ -978,7 +978,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>xcircle</source>
-        <translation>xcircle</translation>
+        <translation>κυκλική-χιαστή</translation>
     </message>
     <message>
         <source>do</source>
@@ -1002,7 +1002,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>ti</source>
-        <translation>ti</translation>
+        <translation>σι</translation>
     </message>
     <message>
         <source>Auto</source>
@@ -1026,11 +1026,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>sol</source>
-        <translation type="unfinished"/>
+        <translation>σολ</translation>
     </message>
     <message>
         <source>alt. brevis</source>
-        <translation type="unfinished"/>
+        <translation>alt. brevis</translation>
     </message>
 </context>
 <context>
@@ -1042,11 +1042,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>SlurFor:</source>
-        <translation>Σύζευξη Μπροστά</translation>
+        <translation>Σύζευξη Μπροστά:</translation>
     </message>
     <message>
         <source>SlurBack:</source>
-        <translation>Σύζευξη Πίσω</translation>
+        <translation>Σύζευξη Πίσω:</translation>
     </message>
     <message>
         <source>StaffMove:</source>
@@ -1213,7 +1213,7 @@ failed: </source>
     </message>
     <message>
         <source>Note</source>
-        <translation>Νότα</translation>
+        <translation>Φθογγόσημο</translation>
     </message>
     <message>
         <source>Shortcut</source>
@@ -1581,7 +1581,7 @@ failed: </source>
     </message>
     <message>
         <source>Notes</source>
-        <translation>Φθογγόσημα</translation>
+        <translation>Νότες</translation>
     </message>
     <message>
         <source>Arpeggios</source>
@@ -2501,7 +2501,7 @@ failed: </source>
     </message>
     <message>
         <source>Show naturals</source>
-        <translation>Εμφάνιση ανεραίσεων</translation>
+        <translation>Εμφάνιση αναιρέσεων</translation>
     </message>
 </context>
 <context>
@@ -2588,11 +2588,11 @@ failed: </source>
     </message>
     <message>
         <source>x:</source>
-        <translation>x:</translation>
+        <translation>χ:</translation>
     </message>
     <message>
         <source>y:</source>
-        <translation>y:</translation>
+        <translation>ψ:</translation>
     </message>
     <message>
         <source>Hook</source>
@@ -3177,7 +3177,7 @@ before closing?</source>
     </message>
     <message>
         <source>Beam Properties</source>
-        <translation>Ιδιότητες Ενωτικής γραμμής</translation>
+        <translation>Ιδιότητες Ενωτικής Γραμμής</translation>
     </message>
     <message>
         <source>Symbols</source>
@@ -3716,19 +3716,19 @@ is incompatible with current interface</translation>
     <name>MyWebView</name>
     <message>
         <source>Could not&lt;br /&gt; connect</source>
-        <translation type="unfinished"/>
+        <translation>Αδυναμία &lt;br/&gt; σύνδεσης</translation>
     </message>
     <message>
         <source>To connect with the community, &lt;br /&gt; you need to have internet &lt;br /&gt; connection enabled</source>
-        <translation type="unfinished"/>
+        <translation>Για να συνδεθείτε με την κοινότητα, &lt;br/&gt; χρειάζεται να ενεργοποιήσετε &lt;br/&gt; τη σύνδεσή σας με το διαδίκτυο</translation>
     </message>
     <message>
         <source>Retry</source>
-        <translation type="unfinished"/>
+        <translation>Νέα προσπάθεια</translation>
     </message>
     <message>
         <source>Close this permanently</source>
-        <translation type="unfinished"/>
+        <translation>Οριστικό κλείσιμο</translation>
     </message>
 </context>
 <context>
@@ -4768,15 +4768,15 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Show Play Panel</source>
-        <translation type="unfinished"/>
+        <translation>Εμφάνισε τον Πίνακα Αναπαραγωγής</translation>
     </message>
     <message>
         <source>Show Navigator</source>
-        <translation type="unfinished"/>
+        <translation>Εμφάνισε το Πρόγραμμα Πλοήγησης</translation>
     </message>
     <message>
         <source>Show MuseScore Connect</source>
-        <translation type="unfinished"/>
+        <translation>Εμφάνισε τη Σύνδεση με MuseScore</translation>
     </message>
 </context>
 <context>
@@ -5893,7 +5893,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Staff Properties...</source>
-        <translation type="unfinished">Ιδιότητες Πενταγράμμου...</translation>
+        <translation>Ιδιότητες Πενταγράμμου...</translation>
     </message>
 </context>
 <context>
@@ -6668,31 +6668,31 @@ p, li { white-space: pre-wrap; }
     <name>WebPageDockWidget</name>
     <message>
         <source>Connect with the &lt;br /&gt; Community</source>
-        <translation type="unfinished"/>
+        <translation>Σύνδεση με &lt;br/&gt; την κοινότητα</translation>
     </message>
     <message>
         <source>Find help</source>
-        <translation type="unfinished"/>
+        <translation>Εύρεση βοήθειας</translation>
     </message>
     <message>
         <source>Improve your skills</source>
-        <translation type="unfinished"/>
+        <translation>Βελτιώστε τις δεξιότητες σας</translation>
     </message>
     <message>
         <source>Read the latest news</source>
-        <translation type="unfinished"/>
+        <translation>Διάβασε τα τελευταία νέα</translation>
     </message>
     <message>
         <source>Download free sheet music</source>
-        <translation type="unfinished"/>
+        <translation>Μεταφόρτωσε δωρεάν παρτιτούρες</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"/>
+        <translation>Εκκίνηση</translation>
     </message>
     <message>
         <source>Close this permanently</source>
-        <translation type="unfinished"/>
+        <translation>Κλείστο οριστικά</translation>
     </message>
 </context>
 <context>
@@ -6799,11 +6799,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>sori</source>
-        <translation type="unfinished"/>
+        <translation>sori</translation>
     </message>
     <message>
         <source>koron</source>
-        <translation type="unfinished"/>
+        <translation>koron</translation>
     </message>
 </context>
 <context>
@@ -8410,22 +8410,22 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>next score</source>
-        <translation type="unfinished"/>
+        <translation>επόμενη παρτιτούρα</translation>
     </message>
     <message>
         <source>previous score</source>
-        <translation type="unfinished"/>
+        <translation>προηγούμενη παρτιτούρα</translation>
     </message>
 </context>
 <context>
     <name>articulation</name>
     <message>
         <source>ufermata</source>
-        <translation>ufermata</translation>
+        <translation>πάνω fermata</translation>
     </message>
     <message>
         <source>dfermata</source>
-        <translation>dfermata</translation>
+        <translation>κάτω fermata</translation>
     </message>
     <message>
         <source>thumb</source>
@@ -8445,11 +8445,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>ustaccatissimo</source>
-        <translation>ustaccatissimo</translation>
+        <translation>πάνω staccatissimo</translation>
     </message>
     <message>
         <source>dstaccatissimo</source>
-        <translation>dstaccatissimo</translation>
+        <translation>κάτω staccatissimo</translation>
     </message>
     <message>
         <source>tenuto</source>
@@ -8457,19 +8457,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>uportato</source>
-        <translation>uportato</translation>
+        <translation>πάνω portato</translation>
     </message>
     <message>
         <source>dportato</source>
-        <translation>dportato</translation>
+        <translation>κάτω portato</translation>
     </message>
     <message>
         <source>umarcato</source>
-        <translation>umarcato</translation>
+        <translation>πάνω marcato</translation>
     </message>
     <message>
         <source>dmarcato</source>
-        <translation>dmarcato</translation>
+        <translation>κάτω marcato</translation>
     </message>
     <message>
         <source>ouvert</source>
@@ -8481,11 +8481,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>upbow</source>
-        <translation>upbow</translation>
+        <translation>πάνω δοξαριά (πουσέ)</translation>
     </message>
     <message>
         <source>downbow</source>
-        <translation>downbow</translation>
+        <translation>κάτω δοξαριά (τιρέ)</translation>
     </message>
     <message>
         <source>reverseturn</source>
@@ -8517,43 +8517,43 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>upprall</source>
-        <translation>upprall</translation>
+        <translation>πάνω prall</translation>
     </message>
     <message>
         <source>downprall</source>
-        <translation>downprall</translation>
+        <translation>κάτω prall</translation>
     </message>
     <message>
         <source>upmordent</source>
-        <translation>upmordent</translation>
+        <translation>πάνω mordent</translation>
     </message>
     <message>
         <source>downmordent</source>
-        <translation>downmordent</translation>
+        <translation>κάτω mordent</translation>
     </message>
     <message>
         <source>ushortfermata</source>
-        <translation>ushortfermata</translation>
+        <translation>πάνω μικρή fermata</translation>
     </message>
     <message>
         <source>dshortfermata</source>
-        <translation>dshortfermata</translation>
+        <translation>κάτω μικρή fermata</translation>
     </message>
     <message>
         <source>ulongfermata</source>
-        <translation>ulongfermata</translation>
+        <translation>πάνω μεγάλη fermata</translation>
     </message>
     <message>
         <source>dlongfermata</source>
-        <translation>dlongfermata</translation>
+        <translation>κάτω μεγάλη fermata</translation>
     </message>
     <message>
         <source>uverylongfermata</source>
-        <translation>uverylongfermata</translation>
+        <translation>πάνω πολύ μεγάλη fermata</translation>
     </message>
     <message>
         <source>dverylongfermata</source>
-        <translation>dverylongfermata</translation>
+        <translation>κάτω πολύ μεγάλη fermata</translation>
     </message>
     <message>
         <source>snappizzicato</source>
@@ -9028,59 +9028,59 @@ p, li { white-space: pre-wrap; }
     <name>noteheadnames</name>
     <message>
         <source>normal</source>
-        <translation type="unfinished">κανονικό</translation>
+        <translation>κανονικά</translation>
     </message>
     <message>
         <source>cross</source>
-        <translation type="unfinished">χιαστή</translation>
+        <translation>χιαστή</translation>
     </message>
     <message>
         <source>diamond</source>
-        <translation type="unfinished">διαμαντοειδές</translation>
+        <translation>διαμαντοειδής</translation>
     </message>
     <message>
         <source>triangle</source>
-        <translation type="unfinished">τριγωνική</translation>
+        <translation>τριγωνική</translation>
     </message>
     <message>
         <source>mi</source>
-        <translation type="unfinished">μι</translation>
+        <translation>μι</translation>
     </message>
     <message>
         <source>slash</source>
-        <translation type="unfinished">κάθετος</translation>
+        <translation>κάθετη</translation>
     </message>
     <message>
         <source>xcircle</source>
-        <translation type="unfinished">xcircle</translation>
+        <translation>κυκλική-χιαστή</translation>
     </message>
     <message>
         <source>do</source>
-        <translation type="unfinished">ντο</translation>
+        <translation>ντο</translation>
     </message>
     <message>
         <source>re</source>
-        <translation type="unfinished">ρε</translation>
+        <translation>ρε</translation>
     </message>
     <message>
         <source>fa</source>
-        <translation type="unfinished">φα</translation>
+        <translation>φα</translation>
     </message>
     <message>
         <source>la</source>
-        <translation type="unfinished">λα</translation>
+        <translation>λα</translation>
     </message>
     <message>
         <source>ti</source>
-        <translation type="unfinished">ti</translation>
+        <translation>σι</translation>
     </message>
     <message>
         <source>sol</source>
-        <translation type="unfinished"/>
+        <translation>σολ</translation>
     </message>
     <message>
         <source>alt. brevis</source>
-        <translation type="unfinished"/>
+        <translation>alt. brevis</translation>
     </message>
 </context>
 <context>
@@ -9971,51 +9971,51 @@ your version of MuseScore is too old.</source>
     </message>
     <message>
         <source>s0sol head</source>
-        <translation type="unfinished"/>
+        <translation>s0σολ κεφαλή</translation>
     </message>
     <message>
         <source>s1sol head</source>
-        <translation type="unfinished"/>
+        <translation>s1σολ κεφαλή</translation>
     </message>
     <message>
         <source>s2sol head</source>
-        <translation type="unfinished"/>
+        <translation>s2σολ κεφαλή</translation>
     </message>
     <message>
         <source>longa up alt</source>
-        <translation type="unfinished"/>
+        <translation>longa up alt</translation>
     </message>
     <message>
         <source>longa down alt</source>
-        <translation type="unfinished"/>
+        <translation>longa down alt</translation>
     </message>
     <message>
         <source>brevis head alt</source>
-        <translation type="unfinished"/>
+        <translation>κεφαλή brevis alt</translation>
     </message>
     <message>
         <source>time sig C dot</source>
-        <translation type="unfinished"/>
+        <translation>time sig C dot</translation>
     </message>
     <message>
         <source>time sig O</source>
-        <translation type="unfinished"/>
+        <translation>time sig O</translation>
     </message>
     <message>
         <source>time sig O cut</source>
-        <translation type="unfinished"/>
+        <translation>time sig O cut</translation>
     </message>
     <message>
         <source>time sig O dot</source>
-        <translation type="unfinished"/>
+        <translation>time sig O dot</translation>
     </message>
     <message>
         <source>sori</source>
-        <translation type="unfinished"/>
+        <translation>sori</translation>
     </message>
     <message>
         <source>koron</source>
-        <translation type="unfinished"/>
+        <translation>koron</translation>
     </message>
 </context>
 </TS>

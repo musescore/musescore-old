@@ -762,7 +762,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>/Bb</source>
-        <translation>/B</translation>
+        <translation>/Bb</translation>
     </message>
     <message>
         <source>/B</source>
@@ -3058,7 +3058,7 @@ fehlgeschlagen: </translation>
     </message>
     <message>
         <source>Copyright</source>
-        <translation>Copyright</translation>
+        <translation>Urheberrecht</translation>
     </message>
     <message>
         <source>Segno</source>
@@ -3409,7 +3409,7 @@ Versuche im "Hilfe"-Menü das "Online-Handbuch" aufzurufen.</translation>
     </message>
     <message>
         <source>Grace Notes</source>
-        <translation>Vorschlagsnoten</translation>
+        <translation>Vorschlagnoten</translation>
     </message>
     <message>
         <source>Acciaccatura</source>
@@ -3733,7 +3733,7 @@ inkompatibel mit derzeitiger Schnittstelle</translation>
     </message>
     <message>
         <source>Copyright:</source>
-        <translation>Copyright:</translation>
+        <translation>Urheberrecht</translation>
     </message>
     <message>
         <source>Create new score from template</source>
@@ -4696,7 +4696,7 @@ in Pixel (größerer Wert gleich größerer Radius)</translation>
     </message>
     <message utf8="true">
         <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
-        <translation>Ersetze (C) durch Copyright-Symbol © (Nur für Copyright-Text)</translation>
+        <translation>Ersetze (C) durch Copyright-Symbol © (Nur für Urheberrecht-Text)</translation>
     </message>
     <message>
         <source>Style Used for Import</source>
@@ -7629,15 +7629,15 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Add Copyright</source>
-        <translation>Urheberschutz hinzufügen</translation>
+        <translation>Urheberrecht hinzufügen</translation>
     </message>
     <message>
         <source>Copyright</source>
-        <translation>Urheberschutz</translation>
+        <translation>Urheberrecht</translation>
     </message>
     <message>
         <source>Add Copyright Text</source>
-        <translation>Text für Urheberschutz hinzufügen</translation>
+        <translation>Text für Urheberrecht hinzufügen</translation>
     </message>
     <message>
         <source>Add Chord Name</source>
