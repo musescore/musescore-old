@@ -86,16 +86,12 @@ void Navigator::setScore(ScoreView* v)
       if (_cv) {
             disconnect(this, SIGNAL(viewRectMoved(const QRectF&)), _cv, SLOT(setViewRect(const QRectF&)));
             disconnect(_cv, SIGNAL(viewRectChanged()), this, SLOT(updateViewRect()));
-//            if (_score)
-//                  disconnect(_score, SIGNAL(layoutChanged()), this, SLOT(updateLayout()));
             }
       _cv = QPointer<ScoreView>(v);
       if (v) {
             _score  = v->score();
             connect(this, SIGNAL(viewRectMoved(const QRectF&)), v, SLOT(setViewRect(const QRectF&)));
             connect(_cv,  SIGNAL(viewRectChanged()), this, SLOT(updateViewRect()));
-//            if (_score)
-//                  connect(_score,  SIGNAL(layoutChanged()), this, SLOT(updateLayout()));
             updateLayout();
             }
       else {
@@ -164,12 +160,13 @@ void Navigator::paintEvent(QPaintEvent* ev)
 
             QRegion r1(rr);
             foreach(Page* page, _score->pages()) {
-                  QRectF pbbox(page->abbox());
-                  r1 -= matrix.mapRect(pbbox).toRect();
+                  const QPointF& pp = page->pos();
+                  r1 -= matrix.mapRect(page->abbox().translated(pp)).toAlignedRect();
 
-                  QList<const Element*> ell = page->items(fr);
-                  // qStableSort(ell.begin(), ell.end(), elementLessThan);
+                  QList<const Element*> ell = page->items(fr.translated(-pp));
 
+                  p.save();
+                  p.translate(pp);
                   foreach(const Element* e, ell) {
                         e->itemDiscovered = 0;
                         if (!e->visible())
@@ -180,6 +177,7 @@ void Navigator::paintEvent(QPaintEvent* ev)
                         e->draw(&painter);
                         p.restore();
                         }
+                  p.restore();
                   }
             p.setMatrixEnabled(false);
             p.setClipRegion(r1);
