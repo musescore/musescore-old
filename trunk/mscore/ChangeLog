@@ -1,4 +1,5 @@
 25.jul (ws)
+      - fix #11677: score pages crammed into one in navigator
       - fix #11654: set default style on OSX to Native
       - fix #11682: remove menubar icons for OSX
       - fix #11657: save preferences on OSX using the native format
