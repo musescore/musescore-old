@@ -120,6 +120,12 @@ QString revision;
 
 extern void initStaffTypes();
 
+// Mac-Applications don't have menubar icons:
+#ifdef Q_WS_MAC
+extern void qt_mac_set_menubar_icons(bool b);
+#endif
+
+
 //---------------------------------------------------------
 // cmdInsertMeasure
 //---------------------------------------------------------
@@ -932,9 +938,9 @@ MuseScore::MuseScore()
       menuHelp->addSeparator();
       menuHelp->addAction(tr("&About"),   this, SLOT(about()));
       menuHelp->addAction(tr("About&Qt"), this, SLOT(aboutQt()));
-      #if defined(Q_WS_MAC) || defined(Q_WS_WIN)
+#if defined(Q_WS_MAC) || defined(Q_WS_WIN)
       menuHelp->addAction(tr("Check for Update"), this, SLOT(checkForUpdate()));
-      #endif
+#endif
       menuHelp->addSeparator();
 
       a = getAction("script-debug");
@@ -2229,6 +2235,9 @@ int main(int argc, char* av[])
 
 #ifdef Q_WS_MAC
       QApplication::instance()->installEventFilter(mscore);
+
+      // Mac-Applications don't have menubar icons
+      qt_mac_set_menubar_icons(false);
 #endif
       mscore->setRevision(revision);
 
