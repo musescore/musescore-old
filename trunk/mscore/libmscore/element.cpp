@@ -74,6 +74,7 @@
 #include "iname.h"
 #include "mscore.h"
 #include "icon.h"
+#include "ossia.h"
 
 extern bool debugMode;
 extern bool showInvisible;
@@ -164,7 +165,8 @@ static const char* elementNames[] = {
       QT_TRANSLATE_NOOP("elementName", "TBox"),
       QT_TRANSLATE_NOOP("elementName", "FBox"),
       QT_TRANSLATE_NOOP("elementName", "AccidentalBracket"),
-      QT_TRANSLATE_NOOP("elementName", "Icon")
+      QT_TRANSLATE_NOOP("elementName", "Icon"),
+      QT_TRANSLATE_NOOP("elementName", "Ossia")
       };
 
 int LinkedElements::_linkId = 0;    // highest id in use
@@ -1237,6 +1239,7 @@ Element* Element::create(ElementType type, Score* score)
             case FBOX:              return new FBox(score);
             case MEASURE:           return new Measure(score);
             case TAB_DURATION_SYMBOL: return new TabDurationSymbol(score);
+            case OSSIA:               return new Ossia(score);
 
             case SLUR_SEGMENT:
             case STEM_SLASH:
@@ -1361,6 +1364,7 @@ const char* Element::name(ElementType type)
             case TBOX:              return "TBox";
             case FBOX:              return "FBox";
             case ICON:              return "Icon";
+            case OSSIA:             return "Ossia";
             case ACCIDENTAL_BRACKET:  return "AccidentalBracket";
             case TAB_DURATION_SYMBOL: return "TabDurationSymbol";
             case INVALID:

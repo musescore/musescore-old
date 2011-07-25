@@ -107,6 +107,10 @@ enum {
       PAD_DOTDOT,
       };
 
+enum LayoutMode {
+      LayoutPage, LayoutFloat, LayoutLine
+      };
+
 //---------------------------------------------------------
 //   MeasureBaseList
 //---------------------------------------------------------
@@ -277,6 +281,8 @@ class Score {
       bool _excerptsChanged;
       bool _instrumentsChanged;
       bool _selectionChanged;
+
+      LayoutMode _layoutMode;
 
       Qt::KeyboardModifiers keyState;
 
@@ -825,6 +831,9 @@ class Score {
       void setPlayRepeats(bool val)         { _playRepeats = val; }
       bool selectionChanged() const         { return _selectionChanged; }
       void setSelectionChanged(bool val)    { _selectionChanged = val;  }
+
+      LayoutMode layoutMode() const         { return _layoutMode; }
+      void setLayoutMode(LayoutMode lm)     { _layoutMode = lm;   }
       };
 
 extern Score* gscore;

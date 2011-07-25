@@ -1923,6 +1923,7 @@ void Measure::read(QDomElement e, int staffIdx)
                         Tremolo* tremolo = chord->tremolo();
                         TremoloType st;
                         switch(tremolo->subtype()) {
+                              default:
                               case 0: st = TREMOLO_R8;  break;
                               case 1: st = TREMOLO_R16; break;
                               case 2: st = TREMOLO_R32; break;

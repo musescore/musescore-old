@@ -306,6 +306,7 @@ void Score::init()
       _sigmap         = new AL::TimeSigMap();
       _tempomap       = new AL::TempoMap;
       _playRepeats    = true;
+      _layoutMode     = LayoutPage;
       }
 
 //---------------------------------------------------------

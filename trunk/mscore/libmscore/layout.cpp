@@ -880,19 +880,20 @@ void Score::getCurPage()
 
 bool Score::layoutPage()
       {
-      Page* page = _pages[curPage];
-      const qreal slb = point(styleS(ST_staffLowerBorder));
-      const qreal sub = point(styleS(ST_staffUpperBorder));
+      Page* page      = _pages[curPage];
+      qreal _spatium  = spatium();
+      const qreal slb = styleS(ST_staffLowerBorder).val() * _spatium;
+      const qreal sub = styleS(ST_staffUpperBorder).val() * _spatium;
 
       // usable width of page:
-      qreal w  = page->loWidth() - page->lm() - page->rm();
       qreal x  = page->lm();
+      qreal w  = page->loWidth() - x - page->rm();
       qreal ey = page->loHeight() - page->bm() - slb;
 
       page->clear();
       qreal y = page->tm();
 
-      int  rows = 0;
+      int  rows              = 0;
       bool firstSystemOnPage = true;
 
       while (curMeasure) {
@@ -926,7 +927,7 @@ bool Score::layoutPage()
 
                   curMeasure = curMeasure->next();
                   ++curSystem;
-                  y += h + point(styleS(ST_frameSystemDistance));
+                  y += h + styleS(ST_frameSystemDistance).val() * _spatium;
                   if (y > ey) {
                         ++rows;
                         break;
@@ -949,11 +950,11 @@ bool Score::layoutPage()
                         if (ps->staves()->isEmpty())
                               b1 = 0.0;
                         else
-                              b1 = ps->distanceDown(ps->staves()->size() - 1).val() * spatium();
+                              b1 = ps->distanceDown(ps->staves()->size() - 1).val() * _spatium;
                         qreal b2  = 0.0;
                         foreach(System* s, sl) {
-                              if (s->distanceUp(0).val() * spatium() > b2)
-                                    b2 = s->distanceUp(0).val() * spatium();
+                              if (s->distanceUp(0).val() * _spatium > b2)
+                                    b2 = s->distanceUp(0).val() * _spatium;
                               }
                         if (b2 > b1)
                               moveY = b2 - b1;
@@ -977,9 +978,9 @@ bool Score::layoutPage()
                         page->appendSystem(system);
                         system->rypos() = y;
                         }
-                  firstSystem  = !sl.isEmpty() && sl.back()->lastMeasure()
-                     && sl.back()->lastMeasure()->sectionBreak();
-                  startWithLongNames = firstSystem && sl.back()->lastMeasure()->sectionBreak()->startWithLongNames();
+                  Measure* lm = sl.back()->lastMeasure();
+                  firstSystem  = !sl.isEmpty() && lm && lm->sectionBreak();
+                  startWithLongNames = firstSystem && lm->sectionBreak()->startWithLongNames();
                   firstSystemOnPage = false;
                   y += h;
                   }
@@ -999,7 +1000,7 @@ bool Score::layoutPage()
       if ((rows <= 1) || (restHeight > (ph * (1.0 - styleD(ST_pageFillLimit)))))
             return true;
 
-      qreal systemDistance = point(styleS(ST_systemDistance));
+      qreal systemDistance = styleS(ST_systemDistance).val() * _spatium;
       qreal extraDist      = (restHeight + systemDistance) / (rows - 1);
       y = 0;
       int n = page->systems()->size();
