@@ -5,7 +5,7 @@
     <name>AboutBox</name>
     <message>
         <source>AboutBox</source>
-        <translation>CaixaAcercaDe</translation>
+        <translation>Caixa Sobre</translation>
     </message>
     <message utf8="true">
         <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
@@ -1172,7 +1172,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <source>Open File
 </source>
-        <translation>Abrir ficheiro
+        <translation>Abrir un ficheiro
 </translation>
     </message>
     <message>
@@ -1776,11 +1776,11 @@ space unit</extracomment>
     </message>
     <message>
         <source>Akkolade distance</source>
-        <translation>Distancia de acolada</translation>
+        <translation>Distancia da acolada</translation>
     </message>
     <message>
         <source>System distance</source>
-        <translation>Distancia do sistema</translation>
+        <translation>Distancia entre sistemas</translation>
     </message>
     <message>
         <source>Lyrics upper margin</source>
@@ -2084,7 +2084,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>HBox Properties...</source>
-        <translation>Propiedades de caixa horizontal...</translation>
+        <translation>Propiedades de moldura horizontal...</translation>
     </message>
 </context>
 <context>
@@ -2227,7 +2227,7 @@ space unit</extracomment>
     <name>InstrumentDialogBase</name>
     <message>
         <source>MuseScore: Create Instruments</source>
-        <translation>MuseScore: Crear instrumentos</translation>
+        <translation>MuseScore: Creación de instrumentos</translation>
     </message>
     <message>
         <source>0</source>
@@ -2313,11 +2313,11 @@ space unit</extracomment>
     </message>
     <message>
         <source>Up</source>
-        <translation>Arriba</translation>
+        <translation>Subir</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation>Abaixo</translation>
+        <translation>Baixar</translation>
     </message>
     <message>
         <source>Add Above</source>
@@ -2369,7 +2369,7 @@ space unit</extracomment>
     <message>
         <source>Open Instruments File
 </source>
-        <translation>Abrir ficheiro de instrumentos
+        <translation>Abrir un ficheiro de instrumentos
 </translation>
     </message>
     <message>
@@ -2380,7 +2380,7 @@ fallou: </translation>
     </message>
     <message>
         <source>MuseScore: Open Instruments file</source>
-        <translation>MuseScore: Abrir ficheiro de instrumentos</translation>
+        <translation>MuseScore: Abrir un ficheiro de instrumentos</translation>
     </message>
     <message>
         <source>MuseScore: Write Style</source>
@@ -3053,11 +3053,11 @@ fallou: </translation>
     </message>
     <message>
         <source>&amp;About</source>
-        <translation>&amp;Acerca de</translation>
+        <translation>&amp;Sobre</translation>
     </message>
     <message>
         <source>About&amp;Qt</source>
-        <translation>Acerca do &amp;Qt</translation>
+        <translation>Sobre o &amp;Qt</translation>
     </message>
     <message>
         <source>MuseScore: Open Help</source>
@@ -3694,19 +3694,19 @@ is incompatible with current interface</source>
     <name>MyWebView</name>
     <message>
         <source>Could not&lt;br /&gt; connect</source>
-        <translation type="unfinished"/>
+        <translation>Non foi posíbel&lt;br /&gt; conectar</translation>
     </message>
     <message>
         <source>To connect with the community, &lt;br /&gt; you need to have internet &lt;br /&gt; connection enabled</source>
-        <translation type="unfinished"/>
+        <translation>Para conectar coa comunidade, &lt;br /&gt; hai que ter activada &lt;br /&gt; a conexión á Internet.</translation>
     </message>
     <message>
         <source>Retry</source>
-        <translation type="unfinished"/>
+        <translation>Tentar de novo</translation>
     </message>
     <message>
         <source>Close this permanently</source>
-        <translation type="unfinished"/>
+        <translation>Pechar isto permanentemente</translation>
     </message>
 </context>
 <context>
@@ -3763,7 +3763,7 @@ is incompatible with current interface</source>
     <name>NewWizardPage2</name>
     <message>
         <source>Create New Score</source>
-        <translation>Crear unha partitura nova</translation>
+        <translation>Creación dunha partitura nova</translation>
     </message>
     <message>
         <source>Define a set of instruments. Each instrument is represented by one or more staves</source>
@@ -3774,7 +3774,7 @@ is incompatible with current interface</source>
     <name>NewWizardPage3</name>
     <message>
         <source>Create New Score</source>
-        <translation>Crear unha partitura nova</translation>
+        <translation>Creación dunha partitura nova</translation>
     </message>
     <message>
         <source>Create Time Signature</source>
@@ -3785,7 +3785,7 @@ is incompatible with current interface</source>
     <name>NewWizardPage4</name>
     <message>
         <source>Create New Score</source>
-        <translation>Crear unha partitura nova</translation>
+        <translation>Creación dunha partitura nova</translation>
     </message>
     <message>
         <source>Select Template File:</source>
@@ -3796,11 +3796,11 @@ is incompatible with current interface</source>
     <name>NewWizardPage5</name>
     <message>
         <source>Create New Score</source>
-        <translation>Crear unha partitura nova</translation>
+        <translation>Creación dunha partitura nova</translation>
     </message>
     <message>
         <source>Select Key Signature:</source>
-        <translation>Seleccionar a armadura:</translation>
+        <translation>Seleccione a armadura:</translation>
     </message>
 </context>
 <context>
@@ -4434,7 +4434,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>If you use the standard input method then the created note pitch depends on the current key signature. For example pressing F in G major creates an F sharp. If the alternate input method is enabled then the current key signature is irrelevant. For example pressing F always creates an F natural.</source>
-        <translation>Se se emprega o método de entrada normal, a altura da nota que se cree dependerá da armadura actual. Por exemplo, ao premer fa en sol maior créase un fa sostenido. Se se activa o método de entrada alternativo, a armadura actual é irrelevante. Por exemplo, ao premer fa sempre se crea un fa natural.</translation>
+        <translation>Se se emprega o método de entrada normal, a altura da nota que se cree dependerá da armadura actual. Por exemplo, ao premer fa en sol maior créase un fa sostido. Se se activa o método de entrada alternativo, a armadura actual é irrelevante. Por exemplo, ao premer fa sempre se crea un fa natural.</translation>
     </message>
     <message>
         <source>Expand Repeats</source>
@@ -4454,7 +4454,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>JACK Audio Server</source>
-        <translation>Servidor de audio JACK</translation>
+        <translation>Servidor de son JACK</translation>
     </message>
     <message>
         <source>Left-Port:</source>
@@ -4466,7 +4466,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>ALSA Audio</source>
-        <translation>Audio ALSA</translation>
+        <translation>Son ALSA</translation>
     </message>
     <message>
         <source>Device:</source>
@@ -4550,7 +4550,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Api:</source>
-        <translation>Api:</translation>
+        <translation>API:</translation>
     </message>
     <message>
         <source>Attention: Any changes on this page require a restart of MuseScore.</source>
@@ -4586,7 +4586,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Reset to Default</source>
-        <translation>Devolver aos valores por omisión</translation>
+        <translation>Restaurar os valores por omisión</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -4691,7 +4691,7 @@ is incompatible with current interface</source>
     </message>
     <message utf8="true">
         <source>Replace 1/2 with fraction character ½</source>
-        <translation>Substituír 1/2 polo carácter de fracción½</translation>
+        <translation>Substituír 1/2 polo carácter de fracción ½</translation>
     </message>
     <message utf8="true">
         <source>Replace (C) with copyright symbol © (Only applies to text in the copyright section)</source>
@@ -4743,7 +4743,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Show Play Panel</source>
-        <translation type="unfinished"/>
+        <translation>Mostrar o panel de reprodución</translation>
     </message>
     <message>
         <source>Show Navigator</source>
@@ -4751,7 +4751,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Show MuseScore Connect</source>
-        <translation type="unfinished"/>
+        <translation>Mostrar o Conecte do MuseScore</translation>
     </message>
 </context>
 <context>
@@ -5172,15 +5172,15 @@ fallou: </translation>
     </message>
     <message>
         <source>Wave Audio (*.wav)</source>
-        <translation>Audio Wave (*.wav)</translation>
+        <translation>Son Wave (*.wav)</translation>
     </message>
     <message>
         <source>Flac Audio (*.flac)</source>
-        <translation>Audio Flac (*.flac)</translation>
+        <translation>Son Flac (*.flac)</translation>
     </message>
     <message>
         <source>Ogg Vorbis Audio (*.ogg)</source>
-        <translation>Audio Ogg Vorbis (*.ogg)</translation>
+        <translation>Son Ogg Vorbis (*.ogg)</translation>
     </message>
     <message>
         <source>MuseScore: Save a Copy</source>
@@ -5384,7 +5384,7 @@ Tente gardar nun sitio diferente.</translation>
     <message>
         <source>Init audio driver failed.
 Sequencer will be disabled.</source>
-        <translation>Fallou a inicialización do controlador de audio.&#13;
+        <translation>Fallou a inicialización do controlador de son.&#13;
 Desactívase o secuenciador.</translation>
     </message>
     <message>
@@ -5866,7 +5866,7 @@ e verifique que a localización do ficheiro é a correcta</translation>
     </message>
     <message>
         <source>Staff Properties...</source>
-        <translation type="unfinished">Propiedades do pentagrama</translation>
+        <translation>Propiedades do pentagrama...</translation>
     </message>
 </context>
 <context>
@@ -6116,7 +6116,7 @@ e verifique que a localización do ficheiro é a correcta</translation>
     </message>
     <message>
         <source>Box</source>
-        <translation>Caixa</translation>
+        <translation>Moldura</translation>
     </message>
     <message>
         <source>Width:</source>
@@ -6604,7 +6604,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>VBox Properties...</source>
-        <translation>Propiedades do VBox...</translation>
+        <translation>Propiedades da moldura vertical...</translation>
     </message>
 </context>
 <context>
@@ -6637,31 +6637,31 @@ p, li { white-space: pre-wrap; }
     <name>WebPageDockWidget</name>
     <message>
         <source>Connect with the &lt;br /&gt; Community</source>
-        <translation type="unfinished"/>
+        <translation>Conectar coa &lt;br /&gt; Comunidade</translation>
     </message>
     <message>
         <source>Find help</source>
-        <translation type="unfinished"/>
+        <translation>Buscar axuda</translation>
     </message>
     <message>
         <source>Improve your skills</source>
-        <translation type="unfinished"/>
+        <translation>Mellorar as súas destrezas</translation>
     </message>
     <message>
         <source>Read the latest news</source>
-        <translation type="unfinished"/>
+        <translation>Ler as últimas novas</translation>
     </message>
     <message>
         <source>Download free sheet music</source>
-        <translation type="unfinished"/>
+        <translation>Obter partituras gratuítas</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"/>
+        <translation>Comezar</translation>
     </message>
     <message>
         <source>Close this permanently</source>
-        <translation type="unfinished"/>
+        <translation>Pechar isto permanentemente</translation>
     </message>
 </context>
 <context>
@@ -7975,7 +7975,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>File open</source>
-        <translation>Abrir ficheiro</translation>
+        <translation>Abrir un ficheiro</translation>
     </message>
     <message>
         <source>Load score from file</source>
@@ -8379,11 +8379,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>next score</source>
-        <translation type="unfinished"/>
+        <translation>partitura seguinte</translation>
     </message>
     <message>
         <source>previous score</source>
-        <translation type="unfinished"/>
+        <translation>partitura anterior</translation>
     </message>
 </context>
 <context>
@@ -8997,19 +8997,19 @@ p, li { white-space: pre-wrap; }
     <name>noteheadnames</name>
     <message>
         <source>normal</source>
-        <translation type="unfinished">normal</translation>
+        <translation>normal</translation>
     </message>
     <message>
         <source>cross</source>
-        <translation type="unfinished">cruz</translation>
+        <translation>cruz</translation>
     </message>
     <message>
         <source>diamond</source>
-        <translation type="unfinished">rombo</translation>
+        <translation>rombo</translation>
     </message>
     <message>
         <source>triangle</source>
-        <translation type="unfinished">triángulo</translation>
+        <translation>triángulo</translation>
     </message>
     <message>
         <source>mi</source>
@@ -9017,7 +9017,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>slash</source>
-        <translation type="unfinished">barra</translation>
+        <translation>barra</translation>
     </message>
     <message>
         <source>xcircle</source>
@@ -9025,27 +9025,27 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>do</source>
-        <translation type="unfinished">do</translation>
+        <translation>Do</translation>
     </message>
     <message>
         <source>re</source>
-        <translation type="unfinished">re</translation>
+        <translation>Re</translation>
     </message>
     <message>
         <source>fa</source>
-        <translation type="unfinished">fa</translation>
+        <translation>Fa</translation>
     </message>
     <message>
         <source>la</source>
-        <translation type="unfinished">la</translation>
+        <translation>La</translation>
     </message>
     <message>
         <source>ti</source>
-        <translation type="unfinished">si</translation>
+        <translation>Si</translation>
     </message>
     <message>
         <source>sol</source>
-        <translation type="unfinished"/>
+        <translation>Sol</translation>
     </message>
     <message>
         <source>alt. brevis</source>
@@ -9856,19 +9856,19 @@ esta versión do MuseScore é vella de máis.</translation>
     </message>
     <message>
         <source>bracket tips up</source>
-        <translation>chave con puntas para arriba</translation>
+        <translation>punta superior de chave</translation>
     </message>
     <message>
         <source>bracket tips down</source>
-        <translation>chave con puntas para abaixo</translation>
+        <translation>punta inferior de chave</translation>
     </message>
     <message>
         <source>bracket tips left up</source>
-        <translation>chave con puntas para a esquerda</translation>
+        <translation>punta superior esquerda de chave</translation>
     </message>
     <message>
         <source>bracket tips left down</source>
-        <translation>punta superior esquerda da chave</translation>
+        <translation>punta inferior esquerda de chave</translation>
     </message>
     <message>
         <source>acc dot</source>

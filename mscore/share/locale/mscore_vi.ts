@@ -150,7 +150,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Glissando</source>
-        <translation>Glissando</translation>
+        <translation>Lớn dần</translation>
     </message>
 </context>
 <context>
@@ -2050,14 +2050,14 @@ space unit</extracomment>
     <name>Glissando</name>
     <message>
         <source>Glissando Properties...</source>
-        <translation>Đặc tính của Glissando...</translation>
+        <translation>Đặc tính của (âm) lớn dần...</translation>
     </message>
 </context>
 <context>
     <name>GlissandoProperties</name>
     <message>
         <source>MuseScore: Glissando Properties</source>
-        <translation>MuseScore: Đặc tính của Glissando</translation>
+        <translation>MuseScore: Đặc tính của (âm) lớn dần</translation>
     </message>
     <message>
         <source>Show Text</source>
@@ -2900,7 +2900,7 @@ không thành công </translation>
     </message>
     <message>
         <source>Copyright</source>
-        <translation>Giữ bản quyên</translation>
+        <translation>Giữ bản quyền</translation>
     </message>
     <message>
         <source>Rehearsal Mark</source>
@@ -3100,7 +3100,7 @@ không thành công </translation>
     </message>
     <message>
         <source>Note Entry</source>
-        <translation>Viết nốt nhạc</translation>
+        <translation>Điền nốt nhạc</translation>
     </message>
     <message>
         <source>Open &amp;Recent</source>
@@ -3164,7 +3164,7 @@ không thành công </translation>
     </message>
     <message>
         <source>note entry mode</source>
-        <translation>bấm N để bắt đầu viết nốt nhạc xuống dòng nhạc</translation>
+        <translation>bấm N để bắt đầu điền nốt nhạc xuống dòng nhạc</translation>
     </message>
     <message>
         <source>edit mode</source>
@@ -3244,7 +3244,7 @@ không thành công </translation>
     </message>
     <message>
         <source>Glissando</source>
-        <translation>Glissando</translation>
+        <translation>Lớn dần</translation>
     </message>
     <message>
         <source>String Number</source>
@@ -3740,7 +3740,7 @@ không thích hợp với interface hiện có</translation>
     </message>
     <message>
         <source>Create new score from scratch</source>
-        <translation>Sáng tác một bài nhạc mới</translation>
+        <translation>Tạo ra một bài nhạc mới</translation>
     </message>
     <message>
         <source>MuseScore: Create New Score</source>
@@ -4246,7 +4246,7 @@ không thích hợp với interface hiện có</translation>
     </message>
     <message>
         <source>Choose Background Wallpaper</source>
-        <translation>Chọn Background Wallpaper</translation>
+        <translation>Chọn Wallpaper làm nền (phía sau)</translation>
     </message>
     <message>
         <source>default</source>
@@ -4254,7 +4254,7 @@ không thích hợp với interface hiện có</translation>
     </message>
     <message>
         <source>Choose Working Directory</source>
-        <translation>Chọn Working Directory</translation>
+        <translation>Chọn nơi lưu trữ tài liệu</translation>
     </message>
     <message>
         <source>Choose Instrument List</source>
@@ -4281,11 +4281,11 @@ không thích hợp với interface hiện có</translation>
     </message>
     <message>
         <source>General</source>
-        <translation>General</translation>
+        <translation>Tổng quát</translation>
     </message>
     <message>
         <source>Program Start</source>
-        <translation>Program Start</translation>
+        <translation>Khi bắt đầu chạy</translation>
     </message>
     <message>
         <source>start with new score</source>
@@ -4297,11 +4297,11 @@ không thích hợp với interface hiện có</translation>
     </message>
     <message>
         <source>continue last session</source>
-        <translation>continue last session</translation>
+        <translation>tiếp tục từ lần trước</translation>
     </message>
     <message>
         <source>show splash screen</source>
-        <translation>show splash screen</translation>
+        <translation>cho thấy phần giới thiệu MuseCreen</translation>
     </message>
     <message>
         <source>Paths</source>
@@ -4313,7 +4313,7 @@ không thích hợp với interface hiện có</translation>
     </message>
     <message>
         <source>Working Directory:</source>
-        <translation>Working Directory:</translation>
+        <translation>Lưu trữ tài liệu tại:</translation>
     </message>
     <message>
         <source>Windows</source>
@@ -4337,7 +4337,7 @@ không thích hợp với interface hiện có</translation>
     </message>
     <message>
         <source>Background</source>
-        <translation>Background</translation>
+        <translation>Nền (phía sau)</translation>
     </message>
     <message>
         <source>Wallpaper</source>
@@ -4377,7 +4377,7 @@ không thích hợp với interface hiện có</translation>
     </message>
     <message>
         <source>Note Entry</source>
-        <translation>Viết nốt nhạc</translation>
+        <translation>Điền nốt nhạc</translation>
     </message>
     <message>
         <source>Enable midi input</source>
@@ -4525,7 +4525,7 @@ không thích hợp với interface hiện có</translation>
     </message>
     <message>
         <source>screen shot function</source>
-        <translation>chức năng chụp hình mản ảnh</translation>
+        <translation>chụp hình màn ảnh dạng PNG</translation>
     </message>
     <message>
         <source>Shortcuts</source>
@@ -4553,7 +4553,7 @@ không thích hợp với interface hiện có</translation>
     </message>
     <message>
         <source>start empty</source>
-        <translation>start empty</translation>
+        <translation>bắt đầu từ chỗ không có gì</translation>
     </message>
     <message>
         <source>Attention: changing the language requires a restart of MuseScore.</source>
@@ -4573,7 +4573,7 @@ không thích hợp với interface hiện có</translation>
     </message>
     <message>
         <source>General:</source>
-        <translation>General:</translation>
+        <translation>Tổng quát:</translation>
     </message>
     <message>
         <source>Width</source>
@@ -4585,7 +4585,7 @@ không thích hợp với interface hiện có</translation>
     </message>
     <message>
         <source>Note Entry:</source>
-        <translation>Viết nốt nhạc:</translation>
+        <translation>Điền nốt nhạc:</translation>
     </message>
     <message>
         <source>Application Font</source>
@@ -4605,7 +4605,7 @@ không thích hợp với interface hiện có</translation>
     </message>
     <message>
         <source>Default foreground</source>
-        <translation>Foeground định sẵn</translation>
+        <translation>Nền (phía trước) định sẵn</translation>
     </message>
     <message>
         <source>Select Voice 1</source>
@@ -6801,7 +6801,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Reload</source>
-        <translation>Reload</translation>
+        <translation>Làm mới lại dữ liệu trên màn ảnh</translation>
     </message>
     <message>
         <source>Close</source>
@@ -6837,11 +6837,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Copy</source>
-        <translation>Sao chép</translation>
+        <translation>Làm một bản sao</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation>Dán</translation>
+        <translation>Dán (từ bản sao)</translation>
     </message>
     <message>
         <source>Instruments...</source>
@@ -7309,7 +7309,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Double whole note (breve)</source>
-        <translation>Nốt tròn nhân đôi (breve)</translation>
+        <translation>Nốt tròn đôi (breve)</translation>
     </message>
     <message>
         <source>pad note 1/1</source>
@@ -7385,7 +7385,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>tie</source>
-        <translation>tie</translation>
+        <translation>dấu nối</translation>
     </message>
     <message>
         <source>pad rest</source>
@@ -7913,7 +7913,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Edit General Style...</source>
-        <translation>Điều chỉnh General Style...</translation>
+        <translation>Điều chỉnh Style tổng quát...</translation>
     </message>
     <message>
         <source>Edit Text Style...</source>
@@ -8005,11 +8005,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Save a copy of the score in addition to the current file</source>
-        <translation>Lưu trữ thêm một bản sao của score dù đã lưu trữ trong file hiện tại</translation>
+        <translation>Lưu trữ thêm một bản sao của bài  nhạc dù đã hiện tại lưu trữ trong hồ sơ rồi</translation>
     </message>
     <message>
         <source>File reload</source>
-        <translation>File reload</translation>
+        <translation>Chuyển tài liệu lại lần nữa</translation>
     </message>
     <message>
         <source>Reload score from file</source>
@@ -8765,7 +8765,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Glissando</source>
-        <translation>Glissando</translation>
+        <translation>Lớn dần</translation>
     </message>
     <message>
         <source>RepeatMeasure</source>

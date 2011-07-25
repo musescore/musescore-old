@@ -957,11 +957,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>cross</source>
-        <translation>kors</translation>
+        <translation>kryss</translation>
     </message>
     <message>
         <source>diamond</source>
-        <translation>diamant</translation>
+        <translation>romb</translation>
     </message>
     <message>
         <source>triangle</source>
@@ -973,7 +973,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>xcircle</source>
-        <translation>xcircle</translation>
+        <translation>kryss m cirkel</translation>
     </message>
     <message>
         <source>do</source>
@@ -1021,11 +1021,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>sol</source>
-        <translation type="unfinished"/>
+        <translation>sol</translation>
     </message>
     <message>
         <source>alt. brevis</source>
-        <translation type="unfinished"/>
+        <translation>alt. brevis</translation>
     </message>
 </context>
 <context>
@@ -1124,7 +1124,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>staff</source>
-        <translation>system</translation>
+        <translation>notplan</translation>
     </message>
     <message>
         <source>part</source>
@@ -1132,7 +1132,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>system</source>
-        <translation>ackolad</translation>
+        <translation>ackolad/system</translation>
     </message>
     <message>
         <source>MIDI Values</source>
@@ -1332,11 +1332,11 @@ misslyckades: </translation>
     <name>EditStaffBase</name>
     <message>
         <source>MuseScore: Edit Staff/Part Properties</source>
-        <translation>MuseScore: Redigera system-/stäm-egenskaper</translation>
+        <translation>MuseScore: Redigera notplansegenskaper</translation>
     </message>
     <message>
         <source>Staff Properties</source>
-        <translation>Systemegenskaper</translation>
+        <translation>Notplansegenskaper</translation>
     </message>
     <message>
         <source>Lines:</source>
@@ -1344,11 +1344,11 @@ misslyckades: </translation>
     </message>
     <message>
         <source>Small</source>
-        <translation>Liten</translation>
+        <translation>Litet</translation>
     </message>
     <message>
         <source>Part Properties</source>
-        <translation>Stämegenskaper</translation>
+        <translation>Instrumentegenskaper</translation>
     </message>
     <message>
         <source>Long Instrument Name:</source>
@@ -1631,11 +1631,11 @@ space unit</extracomment>
     </message>
     <message>
         <source>Last system fill threshold</source>
-        <translation>Fyllnadströskel för sista ackolad</translation>
+        <translation>Fyllnadströskel för sista system</translation>
     </message>
     <message>
         <source>Create clef for all systems</source>
-        <translation>Skapa klaver för alla ackolader</translation>
+        <translation>Skapa klaver för alla system</translation>
     </message>
     <message>
         <source>Create time signatures</source>
@@ -1643,11 +1643,11 @@ space unit</extracomment>
     </message>
     <message>
         <source>Create key sig for all systems</source>
-        <translation>Skapa tonartssignaturer för alla ackolader</translation>
+        <translation>Skapa tonartssignaturer för alla system</translation>
     </message>
     <message>
         <source>Create courtesy time signatures</source>
-        <translation>Skapa varslande taktartssignaturer</translation>
+        <translation>Skapa förtydligande taktartssignaturer</translation>
     </message>
     <message>
         <source>System Bracket Distance:</source>
@@ -1659,7 +1659,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>show first</source>
-        <translation>visa först</translation>
+        <translation>visa på första</translation>
     </message>
     <message>
         <source>odd/even</source>
@@ -1740,7 +1740,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Create courtesy key signatures</source>
-        <translation>Skapa förvarnande tonartssignaturer</translation>
+        <translation>Skapa förtydligande tonartssignaturer</translation>
     </message>
     <message>
         <source>Barlines</source>
@@ -2404,29 +2404,29 @@ misslyckades: </translation>
     </message>
     <message>
         <source>Write Style failed: </source>
-        <translation>Misslyckades att skriva formatmall </translation>
+        <translation>Gick inte att spara stilmall: </translation>
     </message>
 </context>
 <context>
     <name>Jump</name>
     <message>
         <source>Jump Properties...</source>
-        <translation>Hoppegenskaper ...</translation>
+        <translation>Språngegenskaper ...</translation>
     </message>
 </context>
 <context>
     <name>JumpPropertyBase</name>
     <message>
         <source>Jump Properties</source>
-        <translation>Hoppegenskaper</translation>
+        <translation>Språngegenskaper</translation>
     </message>
     <message>
         <source>Jump to:</source>
-        <translation>Hoppa till:</translation>
+        <translation>Språng till:</translation>
     </message>
     <message>
         <source>Play until:</source>
-        <translation>Spela upp till:</translation>
+        <translation>Spela fram till:</translation>
     </message>
     <message>
         <source>Continue at:</source>
@@ -2467,19 +2467,19 @@ misslyckades: </translation>
     <name>KeySig</name>
     <message>
         <source>Hide courtesy signature</source>
-        <translation type="unfinished"/>
+        <translation>Dölj förtydligande tonartssignatur</translation>
     </message>
     <message>
         <source>Show courtesy signature</source>
-        <translation type="unfinished"/>
+        <translation>Visa förtydligande tonartssignatur</translation>
     </message>
     <message>
         <source>Hide naturals</source>
-        <translation type="unfinished"/>
+        <translation>Dölj återställningstecken</translation>
     </message>
     <message>
         <source>Show naturals</source>
-        <translation type="unfinished"/>
+        <translation>Visa återställningstecken</translation>
     </message>
 </context>
 <context>
@@ -3453,7 +3453,7 @@ Försök istället välja Internethandbok från menyn Hjälp.</translation>
     </message>
     <message>
         <source>Slur</source>
-        <translation>Legatobåge</translation>
+        <translation>Båge</translation>
     </message>
     <message>
         <source>Crescendo</source>
@@ -3509,7 +3509,7 @@ Försök istället välja Internethandbok från menyn Hjälp.</translation>
     </message>
     <message>
         <source>Articulations &amp;&amp; Ornaments</source>
-        <translation>Artikulation &amp; Ornamentik</translation>
+        <translation>Artikulation och Ornamentik</translation>
     </message>
     <message>
         <source>Fingering %1</source>
@@ -3577,7 +3577,7 @@ Försök istället välja Internethandbok från menyn Hjälp.</translation>
     </message>
     <message>
         <source>Articulations &amp;&amp; Ornaments...</source>
-        <translation>Artikulation &amp; Ornamentik...</translation>
+        <translation>Artikulation och Ornamentik...</translation>
     </message>
     <message>
         <source>Pedal</source>
@@ -3609,7 +3609,7 @@ Restore session?</source>
     </message>
     <message>
         <source>MuseScore: Articulations &amp; Ornaments</source>
-        <translation>MuseScore: Artikulation &amp; Ornamentik</translation>
+        <translation>MuseScore: Artikulation och Ornamentik</translation>
     </message>
     <message>
         <source>MuseScore: Breaks &amp; Spacer</source>
@@ -3642,62 +3642,62 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</source>
-        <translation type="unfinished"/>
+        <translation>Alla filtyper som stöds (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</translation>
     </message>
     <message>
         <source>MuseScore Files (*.mscz *.mscx *.msc);;</source>
-        <translation type="unfinished"/>
+        <translation>MuseScore filtyper (*.mscz *.mscx *.msc);;</translation>
     </message>
     <message>
         <source>MusicXML Files (*.xml *.mxl);;</source>
-        <translation type="unfinished"/>
+        <translation>MusicXML filtyper (*.xml *.mxl);;</translation>
     </message>
     <message>
         <source>MIDI Files (*.mid *.midi *.kar);;</source>
-        <translation type="unfinished"/>
+        <translation>MIDI filtyper (*.mid *.midi *.kar);;</translation>
     </message>
     <message>
         <source>Muse Data Files (*.md);;</source>
-        <translation type="unfinished"/>
+        <translation>Muse Data-filer (*.md);;</translation>
     </message>
     <message>
         <source>Capella Files (*.cap);;</source>
-        <translation type="unfinished"/>
+        <translation>Capella-filer (*.cap);;</translation>
     </message>
     <message>
         <source>Bagpipe Music Writer Files (*.bww);;</source>
-        <translation type="unfinished"/>
+        <translation>Bagpipe Music Writer-filer (*.bww);;</translation>
     </message>
     <message>
         <source>BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;</source>
-        <translation type="unfinished"/>
+        <translation>BB-filer &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;</translation>
     </message>
     <message>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
-        <translation type="unfinished"/>
+        <translation>Overture-filer &lt;experimental&gt; (*.ove);;</translation>
     </message>
     <message>
         <source>All Files (*)</source>
-        <translation type="unfinished"/>
+        <translation>Alla filtyper (*)</translation>
     </message>
 </context>
 <context>
     <name>MyWebView</name>
     <message>
         <source>Could not&lt;br /&gt; connect</source>
-        <translation type="unfinished"/>
+        <translation>Kunde inte&lt;br /&gt; ansluta</translation>
     </message>
     <message>
         <source>To connect with the community, &lt;br /&gt; you need to have internet &lt;br /&gt; connection enabled</source>
-        <translation type="unfinished"/>
+        <translation>För att ansluta till gemenskapen, &lt;br /&gt; måste du ha internet-anslutningen &lt;br /&gt; aktiverad</translation>
     </message>
     <message>
         <source>Retry</source>
-        <translation type="unfinished"/>
+        <translation>Försök igen</translation>
     </message>
     <message>
         <source>Close this permanently</source>
-        <translation type="unfinished"/>
+        <translation>Stäng det här permanent</translation>
     </message>
 </context>
 <context>
@@ -3951,7 +3951,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>First page no.</source>
-        <translation type="unfinished"/>
+        <translation>Framsidas sidnr.</translation>
     </message>
 </context>
 <context>
@@ -4242,7 +4242,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Choose Background Wallpaper</source>
-        <translation>Välj bakgrund</translation>
+        <translation>Välj bakgrundsmönster</translation>
     </message>
     <message>
         <source>Choose Working Directory</source>
@@ -4377,7 +4377,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Wallpaper</source>
-        <translation>Bakgrund</translation>
+        <translation>Bakgrundsmönster</translation>
     </message>
     <message>
         <source>Color</source>
@@ -4473,11 +4473,11 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Expand Repeats</source>
-        <translation>Utvidga repriser</translation>
+        <translation>Expandera repriser</translation>
     </message>
     <message>
         <source>Score</source>
-        <translation>Partitur</translation>
+        <translation>Notblad</translation>
     </message>
     <message>
         <source>Default Paper Size</source>
@@ -4690,15 +4690,15 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Style Used for Import</source>
-        <translation>Formatmall använd för import</translation>
+        <translation>Stilmall använd för import</translation>
     </message>
     <message>
         <source>Built in style</source>
-        <translation>Inbyggd formatmall</translation>
+        <translation>Inbyggd stilmall</translation>
     </message>
     <message>
         <source>Use style file:</source>
-        <translation>Använd formatmall:</translation>
+        <translation>Använd stilmall:</translation>
     </message>
     <message>
         <source>Use JACK MIDI output</source>
@@ -4726,23 +4726,23 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Character Set used when import non-unicode strings. (For binary file import)</source>
-        <translation type="unfinished"/>
+        <translation>Använd teckentabell vid import av icke-unicode-text (vid import av binärfil)</translation>
     </message>
     <message>
         <source>Character Set</source>
-        <translation type="unfinished"/>
+        <translation>Teckentabell</translation>
     </message>
     <message>
         <source>Show Play Panel</source>
-        <translation type="unfinished"/>
+        <translation>Visa Uppspelningspanel</translation>
     </message>
     <message>
         <source>Show Navigator</source>
-        <translation type="unfinished"/>
+        <translation>Visa Navigator</translation>
     </message>
     <message>
         <source>Show MuseScore Connect</source>
-        <translation type="unfinished"/>
+        <translation>Visa MuseScore Connect</translation>
     </message>
 </context>
 <context>
@@ -4793,7 +4793,7 @@ Vänligen markera ett not- eller paustecken och försök igen
     <message>
         <source>Please select a single note or slur and retry operation
 </source>
-        <translation>Vänligen markera en not eller legatobåge och försök igen
+        <translation>Vänligen markera en not eller båge och försök igen
 </translation>
     </message>
     <message>
@@ -5201,7 +5201,7 @@ Försök spara på annan plats.</translation>
     </message>
     <message>
         <source>Write Style failed: </source>
-        <translation>Misslyckades att skriva formatmall: </translation>
+        <translation>Gick inte att spara stilmall: </translation>
     </message>
     <message>
         <source>Load failed: </source>
@@ -5228,7 +5228,7 @@ Försök spara på annan plats.</translation>
     </message>
     <message>
         <source>Edit Drumset...</source>
-        <translation>Redigera trumset...</translation>
+        <translation>Redigera notsystem...</translation>
     </message>
     <message>
         <source>Drumroll Editor...</source>
@@ -5551,7 +5551,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Slur Properties</source>
-        <translation>Egenskaper för legatobåge</translation>
+        <translation>Egenskaper för båge</translation>
     </message>
     <message>
         <source>solid</source>
@@ -5570,7 +5570,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Slur Properties...</source>
-        <translation>Egenskaper för legatobåge ...</translation>
+        <translation>Egenskaper för båge ...</translation>
     </message>
 </context>
 <context>
@@ -5851,7 +5851,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>Staff Properties...</source>
-        <translation type="unfinished">Notplansegenskaper...</translation>
+        <translation>Notplansegenskaper</translation>
     </message>
 </context>
 <context>
@@ -6235,10 +6235,10 @@ and check that the file location is correct</source>
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;"&gt;
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;Hint: you can also add or remove measures after creation of the score.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=" typsnittfamilj:'Sans Serif'; storlek:9pt; typsnittsvikt:400; stil:normal;"&gt;
-&lt;p style=" sidhuvud:0px; sidfot:0px; vänstermarginal:0px; högermarginal:0px; -qt-block-indrag:0; textindrag:0px;"&gt;Vink: Du kan även lägga till eller radera takter sedan du skapat dokumentet.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;&#13;
+p, li { white-space: pre-wrap; }&#13;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=" typsnittfamilj:'Sans Serif'; storlek:9pt; typsnittsvikt:400; stil:normal;"&gt;&#13;
+&lt;p style=" sidhuvud:0px; sidfot:0px; vänstermarginal:0px; högermarginal:0px; -qt-block-indrag:0; textindrag:0px;"&gt;Tips: Du kan även lägga till eller radera takter sedan du skapat dokumentet.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
@@ -6625,31 +6625,31 @@ p, li { white-space: pre-wrap; }
     <name>WebPageDockWidget</name>
     <message>
         <source>Connect with the &lt;br /&gt; Community</source>
-        <translation type="unfinished"/>
+        <translation>Anslut till &lt;br /&gt; Community</translation>
     </message>
     <message>
         <source>Find help</source>
-        <translation type="unfinished"/>
+        <translation>Sök hjälp</translation>
     </message>
     <message>
         <source>Improve your skills</source>
-        <translation type="unfinished"/>
+        <translation>Förbättra dina kunskaper</translation>
     </message>
     <message>
         <source>Read the latest news</source>
-        <translation type="unfinished"/>
+        <translation>Läs de senaste nyheterna</translation>
     </message>
     <message>
         <source>Download free sheet music</source>
-        <translation type="unfinished"/>
+        <translation>Ladda ner gratis noter</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"/>
+        <translation>Start</translation>
     </message>
     <message>
         <source>Close this permanently</source>
-        <translation type="unfinished"/>
+        <translation>Stäng det här permanent</translation>
     </message>
 </context>
 <context>
@@ -6756,11 +6756,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>sori</source>
-        <translation type="unfinished"/>
+        <translation>sori</translation>
     </message>
     <message>
         <source>koron</source>
-        <translation type="unfinished"/>
+        <translation>koron</translation>
     </message>
 </context>
 <context>
@@ -6799,7 +6799,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>New...</source>
-        <translation>Ny...</translation>
+        <translation>Nytt...</translation>
     </message>
     <message>
         <source>Create new score</source>
@@ -8367,11 +8367,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>next score</source>
-        <translation type="unfinished"/>
+        <translation>nästa dokument</translation>
     </message>
     <message>
         <source>previous score</source>
-        <translation type="unfinished"/>
+        <translation>föregående dokument</translation>
     </message>
 </context>
 <context>
@@ -8695,7 +8695,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>SlurSegment</source>
-        <translation>Legatobågesegment</translation>
+        <translation>Båge</translation>
     </message>
     <message>
         <source>BarLine</source>
@@ -8787,11 +8787,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Marker</source>
-        <translation>Markering</translation>
+        <translation>Markör</translation>
     </message>
     <message>
         <source>Jump</source>
-        <translation>Hopp</translation>
+        <translation>Språng</translation>
     </message>
     <message>
         <source>Tuplet</source>
@@ -8815,7 +8815,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>HairpinSegment</source>
-        <translation>Dynamikklykesegmnet</translation>
+        <translation>Dynamikklyka</translation>
     </message>
     <message>
         <source>OttavaSegment</source>
@@ -8839,7 +8839,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>LayoutBreak</source>
-        <translation>Utläggningsbrytning</translation>
+        <translation>Brytning</translation>
     </message>
     <message>
         <source>Spacer</source>
@@ -8985,59 +8985,59 @@ p, li { white-space: pre-wrap; }
     <name>noteheadnames</name>
     <message>
         <source>normal</source>
-        <translation type="unfinished">normal</translation>
+        <translation>vanligt</translation>
     </message>
     <message>
         <source>cross</source>
-        <translation type="unfinished">kors</translation>
+        <translation>kryss</translation>
     </message>
     <message>
         <source>diamond</source>
-        <translation type="unfinished">diamant</translation>
+        <translation>romb</translation>
     </message>
     <message>
         <source>triangle</source>
-        <translation type="unfinished">triangel</translation>
+        <translation>triangel</translation>
     </message>
     <message>
         <source>mi</source>
-        <translation type="unfinished">mi</translation>
+        <translation>mi</translation>
     </message>
     <message>
         <source>slash</source>
-        <translation type="unfinished">snedstreck</translation>
+        <translation>snedstreck</translation>
     </message>
     <message>
         <source>xcircle</source>
-        <translation type="unfinished">xcircle</translation>
+        <translation>kryss m cirkel</translation>
     </message>
     <message>
         <source>do</source>
-        <translation type="unfinished">do</translation>
+        <translation>do</translation>
     </message>
     <message>
         <source>re</source>
-        <translation type="unfinished">re</translation>
+        <translation>re</translation>
     </message>
     <message>
         <source>fa</source>
-        <translation type="unfinished">fa</translation>
+        <translation>fa</translation>
     </message>
     <message>
         <source>la</source>
-        <translation type="unfinished">la</translation>
+        <translation>la</translation>
     </message>
     <message>
         <source>ti</source>
-        <translation type="unfinished">si</translation>
+        <translation>ti</translation>
     </message>
     <message>
         <source>sol</source>
-        <translation type="unfinished"/>
+        <translation>sol</translation>
     </message>
     <message>
         <source>alt. brevis</source>
-        <translation type="unfinished"/>
+        <translation>alt. brevis</translation>
     </message>
 </context>
 <context>
@@ -9076,7 +9076,8 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Cannot read this score:
 your version of MuseScore is too old.</source>
-        <translation type="unfinished"/>
+        <translation>Kan inte läsa detta dokument:&#13;
+din version av MuseScore är för gammal.</translation>
     </message>
 </context>
 <context>
@@ -9927,51 +9928,51 @@ your version of MuseScore is too old.</source>
     </message>
     <message>
         <source>s0sol head</source>
-        <translation type="unfinished"/>
+        <translation>s0sol nothuvud</translation>
     </message>
     <message>
         <source>s1sol head</source>
-        <translation type="unfinished"/>
+        <translation>s1sol nothuvud</translation>
     </message>
     <message>
         <source>s2sol head</source>
-        <translation type="unfinished"/>
+        <translation>s2sol nothuvud</translation>
     </message>
     <message>
         <source>longa up alt</source>
-        <translation type="unfinished"/>
+        <translation>longa upp alt</translation>
     </message>
     <message>
         <source>longa down alt</source>
-        <translation type="unfinished"/>
+        <translation>longa ner alt</translation>
     </message>
     <message>
         <source>brevis head alt</source>
-        <translation type="unfinished"/>
+        <translation>brevishuvud alt</translation>
     </message>
     <message>
         <source>time sig C dot</source>
-        <translation type="unfinished"/>
+        <translation>taktartssign C m punkt</translation>
     </message>
     <message>
         <source>time sig O</source>
-        <translation type="unfinished"/>
+        <translation>taktartssign O</translation>
     </message>
     <message>
         <source>time sig O cut</source>
-        <translation type="unfinished"/>
+        <translation>taktartssign O genomstruken</translation>
     </message>
     <message>
         <source>time sig O dot</source>
-        <translation type="unfinished"/>
+        <translation>taktartssign O m punkt</translation>
     </message>
     <message>
         <source>sori</source>
-        <translation type="unfinished"/>
+        <translation>sori</translation>
     </message>
     <message>
         <source>koron</source>
-        <translation type="unfinished"/>
+        <translation>koron</translation>
     </message>
 </context>
 </TS>

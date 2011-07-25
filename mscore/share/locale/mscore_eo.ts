@@ -7533,227 +7533,227 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Tempo Palette</source>
-        <translation>Tempo Palette</translation>
+        <translation>Pulspaletro</translation>
     </message>
     <message>
         <source>Tempo...</source>
-        <translation>Tempo…</translation>
+        <translation>Pulso...</translation>
     </message>
     <message>
         <source>Tempo</source>
-        <translation>Tempo</translation>
+        <translation>Pulso</translation>
     </message>
     <message>
         <source>Metronome</source>
-        <translation>Metronome</translation>
+        <translation>Pulsilo</translation>
     </message>
     <message>
         <source>Add System Text</source>
-        <translation>Add System Text</translation>
+        <translation>Liniararan tekston aldoni</translation>
     </message>
     <message>
         <source>System Text</source>
-        <translation>System Text</translation>
+        <translation>Liniarara teksto</translation>
     </message>
     <message>
         <source>Add Staff Text</source>
-        <translation>Add Stave Text</translation>
+        <translation>Liniaran tekston aldoni</translation>
     </message>
     <message>
         <source>Staff Text</source>
-        <translation>Stave Text</translation>
+        <translation>Liniara teksto</translation>
     </message>
     <message>
         <source>Add Text</source>
-        <translation>Add Text</translation>
+        <translation>Tekston aldoni</translation>
     </message>
     <message>
         <source>Frame Text</source>
-        <translation>Frame Text</translation>
+        <translation>Frama teksto</translation>
     </message>
     <message>
         <source>Add Title</source>
-        <translation>Add Title</translation>
+        <translation>Titolon aldoni</translation>
     </message>
     <message>
         <source>Title</source>
-        <translation>Title</translation>
+        <translation>Titolo</translation>
     </message>
     <message>
         <source>Add Title Text</source>
-        <translation>Add Title Text</translation>
+        <translation>Titolan tekston aldoni</translation>
     </message>
     <message>
         <source>Add Subtitle</source>
-        <translation>Add Subtitle</translation>
+        <translation>Subitolon aldoni</translation>
     </message>
     <message>
         <source>Subtitle</source>
-        <translation>Subtitle</translation>
+        <translation>Subitolo</translation>
     </message>
     <message>
         <source>Add Subtitle Text</source>
-        <translation>Add Subtitle Text</translation>
+        <translation>Subtitolan tekston aldoni</translation>
     </message>
     <message>
         <source>Add Composer</source>
-        <translation>Add Composer</translation>
+        <translation>Komponfiston aldoni</translation>
     </message>
     <message>
         <source>Composer</source>
-        <translation>Composer</translation>
+        <translation>Komponfisto</translation>
     </message>
     <message>
         <source>Add Composer Text</source>
-        <translation>Add Composer Text</translation>
+        <translation>Komponistan tekston aldoni</translation>
     </message>
     <message>
         <source>Add Poet</source>
-        <translation>Add Lyricist</translation>
+        <translation>Vortiston aldoni</translation>
     </message>
     <message>
         <source>Poet</source>
-        <translation>Lyricist</translation>
+        <translation>Vortisto</translation>
     </message>
     <message>
         <source>Add Poet Text</source>
-        <translation>Add Lyricist Text</translation>
+        <translation>Vortistan tekston aldoni</translation>
     </message>
     <message>
         <source>Add Copyright</source>
-        <translation>Add Copyright</translation>
+        <translation>Kopirajton aldoni</translation>
     </message>
     <message>
         <source>Copyright</source>
-        <translation>Copyright</translation>
+        <translation>Kopirajto</translation>
     </message>
     <message>
         <source>Add Copyright Text</source>
-        <translation>Add Copyright Text</translation>
+        <translation>Kopirajtan tekston aldoni</translation>
     </message>
     <message>
         <source>Add Chord Name</source>
-        <translation>Add Chord Name</translation>
+        <translation>Akordnomon aldoni</translation>
     </message>
     <message>
         <source>Chord Name</source>
-        <translation>Chord Name</translation>
+        <translation>Akordnomo</translation>
     </message>
     <message>
         <source>Add Chord Text</source>
-        <translation>Add Chord Text</translation>
+        <translation>Akordnoman tekston aldoni</translation>
     </message>
     <message>
         <source>show harmony properties for chord</source>
-        <translation>show harmony properties for chord</translation>
+        <translation>Akordproprecojn montri</translation>
     </message>
     <message>
         <source>Harmony Properties</source>
-        <translation>Harmony Properties</translation>
+        <translation>Akordproprecoj</translation>
     </message>
     <message>
         <source>Add Rehearsal Mark</source>
-        <translation>Add Rehearsal Mark</translation>
+        <translation>Limŝtonon aldoni</translation>
     </message>
     <message>
         <source>Rehearsal Mark</source>
-        <translation>Rehearsal Mark</translation>
+        <translation>Limŝtono</translation>
     </message>
     <message>
         <source>Play</source>
-        <translation>Play</translation>
+        <translation>Ludi</translation>
     </message>
     <message>
         <source>Start or stop playback</source>
-        <translation>Start or stop playback</translation>
+        <translation>Ludon ek/halt-igi</translation>
     </message>
     <message>
         <source>Rewind</source>
-        <translation>Rewind</translation>
+        <translation>Komencen</translation>
     </message>
     <message>
         <source>Repeat</source>
-        <translation>Repeat</translation>
+        <translation>Ripeti</translation>
     </message>
     <message>
         <source>Load Style...</source>
-        <translation>Load Style…</translation>
+        <translation>Stilon enigi...</translation>
     </message>
     <message>
         <source>Load Style</source>
-        <translation>Load Style</translation>
+        <translation>Stilon enigi</translation>
     </message>
     <message>
         <source>Save Style...</source>
-        <translation>Save Style…</translation>
+        <translation>Stilon registri...</translation>
     </message>
     <message>
         <source>Save Style</source>
-        <translation>Save Style</translation>
+        <translation>Stilon registri</translation>
     </message>
     <message>
         <source>Select All</source>
-        <translation>Select All</translation>
+        <translation>Ĉiun elekti</translation>
     </message>
     <message>
         <source>Transpose...</source>
-        <translation>Transpose…</translation>
+        <translation>Transmeti...</translation>
     </message>
     <message>
         <source>Transpose</source>
-        <translation>Transpose</translation>
+        <translation>Transmeti</translation>
     </message>
     <message>
         <source>violin clef</source>
-        <translation>violin clef</translation>
+        <translation>Violonkleo</translation>
     </message>
     <message>
         <source>bass clef</source>
-        <translation>bass clef</translation>
+        <translation>Baskleo</translation>
     </message>
     <message>
         <source>Exchange Voice 1-2</source>
-        <translation>Exchange Voice 1-2</translation>
+        <translation>Voĉojn 1-2 interŝanĝi</translation>
     </message>
     <message>
         <source>Exchange Voice 1-3</source>
-        <translation>Exchange Voice 1-3</translation>
+        <translation>Voĉojn 1-3 interŝanĝi</translation>
     </message>
     <message>
         <source>Exchange Voice 1-4</source>
-        <translation>Exchange Voice 1-4</translation>
+        <translation>Voĉojn 1-4 interŝanĝi</translation>
     </message>
     <message>
         <source>Exchange Voice 2-3</source>
-        <translation>Exchange Voice 2-3</translation>
+        <translation>Voĉojn 2-3 interŝanĝi</translation>
     </message>
     <message>
         <source>Exchange Voice 2-4</source>
-        <translation>Exchange Voice 2-4</translation>
+        <translation>Voĉojn 2-4 interŝanĝi</translation>
     </message>
     <message>
         <source>Exchange Voice 3-4</source>
-        <translation>Exchange Voice 3-4</translation>
+        <translation>Voĉojn 3-4 interŝanĝi</translation>
     </message>
     <message>
         <source>display in concert pitch</source>
-        <translation>display in concert pitch</translation>
+        <translation>Per aŭdota ĉeftono afiŝi</translation>
     </message>
     <message>
         <source>Concert Pitch</source>
-        <translation>Concert Pitch</translation>
+        <translation>Aŭdota ĉeftono</translation>
     </message>
     <message>
         <source>Display in Concert Pitch</source>
-        <translation>Display in Concert Pitch</translation>
+        <translation>Per aŭdota ĉeftono afiŝi</translation>
     </message>
     <message>
         <source>repeat last command</source>
-        <translation>repeat last command</translation>
+        <translation>lastan ordonon ripeti</translation>
     </message>
     <message>
         <source>Repeat last command</source>
-        <translation>Repeat last command</translation>
+        <translation>Lastan ordonon ripeti</translation>
     </message>
     <message>
         <source>edit score meta data</source>
@@ -7761,27 +7761,27 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Meta Data...</source>
-        <translation>Metadata…</translation>
+        <translation>Metadatumoj...</translation>
     </message>
     <message>
         <source>Meta Data</source>
-        <translation>Metadata</translation>
+        <translation>Metadatumoj</translation>
     </message>
     <message>
         <source>toggle system break</source>
-        <translation>toggle system break</translation>
+        <translation>liniararsalton baskuli</translation>
     </message>
     <message>
         <source>Toggle System Break</source>
-        <translation>Toggle System Break</translation>
+        <translation>Liniararsalton Baskuli</translation>
     </message>
     <message>
         <source>toggle page break</source>
-        <translation>toggle page break</translation>
+        <translation>paĝsalton baskuli</translation>
     </message>
     <message>
         <source>Toggle Page Break</source>
-        <translation>Toggle Page Break</translation>
+        <translation>Paĝsalton Baskuli</translation>
     </message>
     <message>
         <source>edit element</source>
@@ -7793,19 +7793,19 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>reset positions</source>
-        <translation>reset positions</translation>
+        <translation>poziciojn ripari</translation>
     </message>
     <message>
         <source>Reset Positions</source>
-        <translation>Reset Positions</translation>
+        <translation>Poziciojn Ripari</translation>
     </message>
     <message>
         <source>show inspector</source>
-        <translation>show inspector</translation>
+        <translation>reviziilon montri</translation>
     </message>
     <message>
         <source>Inspector</source>
-        <translation>Inspector</translation>
+        <translation>Reviziilo</translation>
     </message>
     <message>
         <source>reset measure stretch</source>

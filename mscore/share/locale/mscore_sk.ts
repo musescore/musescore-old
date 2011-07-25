@@ -4706,22 +4706,22 @@ nie je kompatibilný so súčasným používateľským rozhraním</translation>
     <message>
         <location filename="../../mscore/webpage.cpp" line="136"/>
         <source>Could not&lt;br /&gt; connect</source>
-        <translation type="unfinished"/>
+        <translation>Nedá sa pripojiť</translation>
     </message>
     <message>
         <location filename="../../mscore/webpage.cpp" line="137"/>
         <source>To connect with the community, &lt;br /&gt; you need to have internet &lt;br /&gt; connection enabled</source>
-        <translation type="unfinished"/>
+        <translation>Aby ste sa mohli spojiť s ostatnými používateľmi,&lt;br /&gt;musíte mať zapnuté&lt;br /&gt;pripojenie na internet</translation>
     </message>
     <message>
         <location filename="../../mscore/webpage.cpp" line="138"/>
         <source>Retry</source>
-        <translation type="unfinished"/>
+        <translation>Skúsiť znova</translation>
     </message>
     <message>
         <location filename="../../mscore/webpage.cpp" line="139"/>
         <source>Close this permanently</source>
-        <translation type="unfinished"/>
+        <translation>Zatvoriť navždy</translation>
     </message>
 </context>
 <context>
@@ -5514,17 +5514,17 @@ nie je kompatibilný so súčasným používateľským rozhraním</translation>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="284"/>
         <source>Show Play Panel</source>
-        <translation type="unfinished"/>
+        <translation>Zobraziť prehrávací panel</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="291"/>
         <source>Show Navigator</source>
-        <translation type="unfinished"/>
+        <translation>Zobraziť Navigátora</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="298"/>
         <source>Show MuseScore Connect</source>
-        <translation type="unfinished"/>
+        <translation>Zobraziť MuseScore Connect</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="308"/>
@@ -7430,7 +7430,7 @@ and check that the file location is correct</translation>
     <message>
         <location filename="../../mscore/text.cpp" line="1543"/>
         <source>Staff Properties...</source>
-        <translation type="unfinished">Vlastnosti notovej osnovy...</translation>
+        <translation>Vlastnosti notovej osnovy...</translation>
     </message>
 </context>
 <context>
@@ -8395,37 +8395,37 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/webpage.cpp" line="242"/>
         <source>Connect with the &lt;br /&gt; Community</source>
-        <translation type="unfinished"/>
+        <translation>Spojiť sa s ostatnými používateľmi</translation>
     </message>
     <message>
         <location filename="../../mscore/webpage.cpp" line="243"/>
         <source>Find help</source>
-        <translation type="unfinished"/>
+        <translation>Nájsť pomoc</translation>
     </message>
     <message>
         <location filename="../../mscore/webpage.cpp" line="244"/>
         <source>Improve your skills</source>
-        <translation type="unfinished"/>
+        <translation>Zlepšite svoje zručnosti</translation>
     </message>
     <message>
         <location filename="../../mscore/webpage.cpp" line="245"/>
         <source>Read the latest news</source>
-        <translation type="unfinished"/>
+        <translation>Prečítať si najnovšie správy</translation>
     </message>
     <message>
         <location filename="../../mscore/webpage.cpp" line="246"/>
         <source>Download free sheet music</source>
-        <translation type="unfinished"/>
+        <translation>Stiahnuť bezplatný notový zápis</translation>
     </message>
     <message>
         <location filename="../../mscore/webpage.cpp" line="247"/>
         <source>Start</source>
-        <translation type="unfinished"/>
+        <translation>Začať</translation>
     </message>
     <message>
         <location filename="../../mscore/webpage.cpp" line="248"/>
         <source>Close this permanently</source>
-        <translation type="unfinished"/>
+        <translation>Zatvoriť navždy</translation>
     </message>
 </context>
 <context>
@@ -8558,12 +8558,12 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/accidental.cpp" line="69"/>
         <source>sori</source>
-        <translation type="unfinished"/>
+        <translation>sori</translation>
     </message>
     <message>
         <location filename="../../mscore/accidental.cpp" line="70"/>
         <source>koron</source>
-        <translation type="unfinished"/>
+        <translation>koron</translation>
     </message>
 </context>
 <context>
@@ -10807,14 +10807,14 @@ p, li { white-space: pre-wrap; }&#13;
         <location filename="../../mscore/actions.cpp" line="2142"/>
         <location filename="../../mscore/actions.cpp" line="2143"/>
         <source>next score</source>
-        <translation type="unfinished"/>
+        <translation>Ďalší notový zápis</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="2148"/>
         <location filename="../../mscore/actions.cpp" line="2156"/>
         <location filename="../../mscore/actions.cpp" line="2157"/>
         <source>previous score</source>
-        <translation type="unfinished"/>
+        <translation>predchádzajúci notový zápis</translation>
     </message>
 </context>
 <context>
@@ -11582,7 +11582,7 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="36"/>
         <source>normal</source>
-        <translation type="unfinished">normálna</translation>
+        <translation>normálna</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="37"/>
@@ -11597,12 +11597,12 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="39"/>
         <source>triangle</source>
-        <translation type="unfinished">trojuholník</translation>
+        <translation>trojuholníkové</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="40"/>
         <source>mi</source>
-        <translation type="unfinished">mi</translation>
+        <translation>mi</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="41"/>
@@ -11612,37 +11612,37 @@ p, li { white-space: pre-wrap; }&#13;
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="42"/>
         <source>xcircle</source>
-        <translation type="unfinished">xkruh</translation>
+        <translation>x-kruh</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="43"/>
         <source>do</source>
-        <translation type="unfinished">do</translation>
+        <translation>do</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="44"/>
         <source>re</source>
-        <translation type="unfinished">re</translation>
+        <translation>re</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="45"/>
         <source>fa</source>
-        <translation type="unfinished">fa</translation>
+        <translation>fa</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="46"/>
         <source>la</source>
-        <translation type="unfinished">la</translation>
+        <translation>la</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="47"/>
         <source>ti</source>
-        <translation type="unfinished">si</translation>
+        <translation>si</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="48"/>
         <source>sol</source>
-        <translation type="unfinished"/>
+        <translation>sol</translation>
     </message>
     <message>
         <location filename="../../mscore/editdrumset.cpp" line="49"/>
@@ -11885,12 +11885,12 @@ vaša verzia MuseScoreu je príliš stará.</translation>
     <message>
         <location filename="../../mscore/sym.cpp" line="77"/>
         <source>sori</source>
-        <translation type="unfinished"/>
+        <translation>sori</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="78"/>
         <source>koron</source>
-        <translation type="unfinished"/>
+        <translation>koron</translation>
     </message>
     <message>
         <location filename="../../mscore/sym.cpp" line="80"/>

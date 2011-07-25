@@ -3686,7 +3686,7 @@ no es compatible con el interfaz actual</translation>
     </message>
     <message>
         <source>To connect with the community, &lt;br /&gt; you need to have internet &lt;br /&gt; connection enabled</source>
-        <translation type="unfinished"/>
+        <translation>Para conectar con la comunidad, &lt;br/&gt; necesita tener una conexión de internet &lt;br/&gt; activada</translation>
     </message>
     <message>
         <source>Retry</source>
@@ -4731,11 +4731,11 @@ no es compatible con el interfaz actual</translation>
     </message>
     <message>
         <source>Show Play Panel</source>
-        <translation type="unfinished"/>
+        <translation>Mostrar Panel de Reproducción</translation>
     </message>
     <message>
         <source>Show Navigator</source>
-        <translation type="unfinished"/>
+        <translation>Mostrar Navegador</translation>
     </message>
     <message>
         <source>Show MuseScore Connect</source>
@@ -5851,7 +5851,7 @@ y comprueba que la ruta al archivo es correcta.</translation>
     </message>
     <message>
         <source>Staff Properties...</source>
-        <translation type="unfinished">Propiedades del Pentagrama...</translation>
+        <translation>Propiedades de Pentagrama...</translation>
     </message>
 </context>
 <context>
@@ -6637,11 +6637,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Read the latest news</source>
-        <translation type="unfinished"/>
+        <translation>Leer las últimas novedades</translation>
     </message>
     <message>
         <source>Download free sheet music</source>
-        <translation type="unfinished"/>
+        <translation>Descargar partituras gratis</translation>
     </message>
     <message>
         <source>Start</source>
@@ -8367,11 +8367,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>next score</source>
-        <translation type="unfinished"/>
+        <translation>siguiente partitura</translation>
     </message>
     <message>
         <source>previous score</source>
-        <translation type="unfinished"/>
+        <translation>partitura anterior</translation>
     </message>
 </context>
 <context>
@@ -8985,23 +8985,23 @@ p, li { white-space: pre-wrap; }
     <name>noteheadnames</name>
     <message>
         <source>normal</source>
-        <translation type="unfinished">normal</translation>
+        <translation>normal</translation>
     </message>
     <message>
         <source>cross</source>
-        <translation type="unfinished">cruz</translation>
+        <translation>cruz</translation>
     </message>
     <message>
         <source>diamond</source>
-        <translation type="unfinished">diamante</translation>
+        <translation>diamante</translation>
     </message>
     <message>
         <source>triangle</source>
-        <translation type="unfinished">triángulo</translation>
+        <translation>triángulo</translation>
     </message>
     <message>
         <source>mi</source>
-        <translation type="unfinished">mi</translation>
+        <translation>mi</translation>
     </message>
     <message>
         <source>slash</source>
@@ -9013,27 +9013,27 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>do</source>
-        <translation type="unfinished">do</translation>
+        <translation>do</translation>
     </message>
     <message>
         <source>re</source>
-        <translation type="unfinished">re</translation>
+        <translation>re</translation>
     </message>
     <message>
         <source>fa</source>
-        <translation type="unfinished">fa</translation>
+        <translation>fa</translation>
     </message>
     <message>
         <source>la</source>
-        <translation type="unfinished">la</translation>
+        <translation>la</translation>
     </message>
     <message>
         <source>ti</source>
-        <translation type="unfinished">si</translation>
+        <translation>si</translation>
     </message>
     <message>
         <source>sol</source>
-        <translation type="unfinished"/>
+        <translation>sol</translation>
     </message>
     <message>
         <source>alt. brevis</source>
