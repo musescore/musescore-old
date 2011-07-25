@@ -1,4 +1,7 @@
-24.jul
+25.jul (ws)
+      - fix #11657: save preferences on OSX using the native format
+      - fix #11669: self-explaining name for "dev-build"
+24.jul (ws)
       - fix #11642: score layout scrambled after first page
       (lv)
       - disabled writing MusicXML lyric extend element, as it currently doesn't work

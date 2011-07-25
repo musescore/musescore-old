@@ -52,14 +52,11 @@ QPointF BarLine::canvasPos() const
       {
       if (parent() == 0)
             return pos();
-      qreal xp = x();
-      for (Element* e = parent(); e && e->parent(); e = e->parent())
-            xp += e->x();
       System* system = measure()->system();
       qreal yp = y();
       if (system)
-            yp += system->staff(staffIdx())->y() + system->y();
-      return QPointF(xp, yp);
+            yp += system->staffY(staffIdx());
+      return QPointF(canvasX(), yp);
       }
 
 //---------------------------------------------------------

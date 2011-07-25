@@ -243,14 +243,11 @@ Beam::~Beam()
 
 QPointF Beam::canvasPos() const
       {
-      qreal xp = x();
-      for (Element* e = parent(); e && e->parent(); e = e->parent())
-            xp += e->x();
       System* system = static_cast<System*>(parent());
       if (system == 0)
             return pos();
       qreal yp = y() + system->staff(staffIdx())->y() + system->y();
-      return QPointF(xp, yp);
+      return QPointF(canvasX(), yp);
       }
 
 //---------------------------------------------------------
