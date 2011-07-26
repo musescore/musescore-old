@@ -32,7 +32,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="mscore.qrc">:/data/bg1.jpg</pixmap>
+      <pixmap resource="musescore.qrc">:/data/bg1.jpg</pixmap>
      </property>
     </widget>
    </item>
@@ -202,7 +202,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="mscore.qrc"/>
+  <include location="musescore.qrc"/>
  </resources>
  <connections>
   <connection>

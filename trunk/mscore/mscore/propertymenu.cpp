@@ -853,9 +853,9 @@ void ScoreView::elementPropertyAction(const QString& cmd, Element* e)
             int rv = vp.exec();
             if (rv) {
                   if (vp.getLockAspectRatio() != img->lockAspectRatio()
-                     || vp.getAutoScale() != img->autoScale()) {
+                     || vp.getAutoScale() != img->autoScale() || vp.getZ() != img->z()) {
                         score()->undo()->push(new ChangeImage(img,
-                           vp.getLockAspectRatio(), vp.getAutoScale()));
+                           vp.getLockAspectRatio(), vp.getAutoScale(), vp.getZ()));
                         }
                   }
             }

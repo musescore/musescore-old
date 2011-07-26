@@ -42,7 +42,7 @@ class MuseScoreView {
       virtual void cmdAddSlur(Note* firstNote, Note* lastNote) = 0;
       virtual void startEdit() = 0;
       virtual void startEdit(Element*, int startGrip) = 0;
-      virtual Element* elementNear(const QPointF&) = 0;
+      virtual Element* elementNear(QPointF) = 0;
       };
 
 #endif

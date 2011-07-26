@@ -38,6 +38,7 @@ class ImageProperties : public QDialog, public Ui::ImageProperties {
       ImageProperties(Image*, QWidget* parent = 0);
       bool getLockAspectRatio() const { return lockAspectRatio->isChecked();}
       bool getAutoScale() const       { return autoScale->isChecked(); }
+      int getZ() const                { return z->value(); }
       };
 
 #endif

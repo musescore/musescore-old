@@ -1043,7 +1043,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="mscore.qrc"/>
+  <include location="musescore.qrc"/>
  </resources>
  <connections>
   <connection>

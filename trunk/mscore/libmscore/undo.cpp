@@ -2878,10 +2878,13 @@ void ChangeImage::flip()
       {
       bool _lockAspectRatio = image->lockAspectRatio();
       bool _autoScale       = image->autoScale();
+      int  _z               = image->z();
       image->setLockAspectRatio(lockAspectRatio);
       image->setAutoScale(autoScale);
+      image->setZ(z);
       lockAspectRatio = _lockAspectRatio;
       autoScale       = _autoScale;
+      z               = _z;
       }
 
 //---------------------------------------------------------

@@ -1665,7 +1665,7 @@ void ScoreView::paint(const QRect& r, QPainter& p)
             double y2       = ss2->y() + ss2->bbox().height() + 2 * _spatium + y;
 
             // drag vertical start line
-            p.drawLine(QLineF(x2, y1, x2, y2));
+            p.drawLine(QLineF(x2, y1, x2, y2).translated(system2->page()->pos()));
 
             System* system1 = system2;
             double x1;
@@ -1692,14 +1692,14 @@ void ScoreView::paint(const QRect& r, QPainter& p)
                   ss2 = system2->staff(staffEnd - 1);
                   y1  = ss1->y() - 2 * _spatium + y;
                   y2  = ss2->y() + ss2->bbox().height() + 2 * _spatium + y;
-                  p.drawLine(QLineF(x1, y1, x2, y1));
-                  p.drawLine(QLineF(x1, y2, x2, y2));
+                  p.drawLine(QLineF(x1, y1, x2, y1).translated(system2->page()->pos()));
+                  p.drawLine(QLineF(x1, y2, x2, y2).translated(system2->page()->pos()));
                   s = ns;
                   }
             //
             // draw vertical end line
             //
-            p.drawLine(QLineF(x2, y1, x2, y2));
+            p.drawLine(QLineF(x2, y1, x2, y2).translated(system2->page()->pos()));
             }
 
       p.setMatrixEnabled(false);
@@ -2243,6 +2243,7 @@ if (debugMode)
 
                   event->acceptProposedAction();
                   score()->endCmd();
+                  mscore->endCmd();
                   setDropTarget(0); // this also resets dropRectangle and dropAnchor
                   return;
                   }
@@ -2473,7 +2474,7 @@ static bool elementLower(const Element* e1, const Element* e2)
 Page* ScoreView::point2page(const QPointF& p)
       {
       foreach(Page* page, score()->pages()) {
-            if (page->abbox().contains(p))
+            if (page->bbox().translated(page->pos()).contains(p))
                   return page;
             }
       return 0;
@@ -2489,7 +2490,7 @@ const QList<const Element*> ScoreView::elementsAt(const QPointF& p)
 
       Page* page = point2page(p);
       if (page) {
-            el = page->items(p);
+            el = page->items(p - page->pos());
             qSort(el.begin(), el.end(), elementLower);
             }
       return el;
@@ -2517,23 +2518,25 @@ Element* ScoreView::elementAt(const QPointF& p)
 //   elementNear
 //---------------------------------------------------------
 
-Element* ScoreView::elementNear(const QPointF& p)
+Element* ScoreView::elementNear(QPointF p)
       {
-      double w  = (preferences.proximity * .5) / matrix().m11();
-      QRectF r(p.x() - w, p.y() - w, 3.0 * w, 3.0 * w);
-
       Page* page = point2page(p);
       if (!page) {
             // printf("  no page\n");
             return 0;
             }
 
+      p -= page->pos();
+      double w  = (preferences.proximity * .5) / matrix().m11();
+      QRectF r(p.x() - w, p.y() - w, 3.0 * w, 3.0 * w);
+
       QList<const Element*> el = page->items(r);
       QList<const Element*> ll;
-      for (int i = 0; i < el.size(); ++i) {
-            const Element* e = el.at(i);
+      foreach(const Element* e, el) {
             e->itemDiscovered = 0;
-            if (e->selectable() && (e->type() != PAGE) && e->contains(p))
+            if (!e->selectable() || e->type() == PAGE)
+                  continue;
+            if (e->contains(p))
                   ll.append(e);
             }
       int n = ll.size();
@@ -2541,9 +2544,10 @@ Element* ScoreView::elementNear(const QPointF& p)
             //
             // if no relevant element hit, look nearby
             //
-            for (int i = 0; i < el.size(); ++i) {
-                  const Element* e = el.at(i);
-                  if ((e->type() != PAGE) && e->selectable() && e->intersects(r))
+            foreach(const Element* e, el) {
+                  if (e->type() == PAGE || !e->selectable())
+                        continue;
+                  if (e->intersects(r))
                         ll.append(e);
                   }
             }

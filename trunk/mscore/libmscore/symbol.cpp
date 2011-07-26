@@ -31,6 +31,7 @@
 BSymbol::BSymbol(const BSymbol& s)
    : Element(s), ElementLayout(s)
       {
+      _z = s._z;
       foreach(Element* e, s._leafs) {
             Element* ee = e->clone();
             ee->setParent(this);
