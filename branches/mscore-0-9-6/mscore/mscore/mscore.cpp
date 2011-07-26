@@ -2544,6 +2544,7 @@ void MuseScore::readSettings()
             QList<int> sizes;
             sizes << 500 << 100;
             mainWindow->setSizes(sizes);
+            showMaximized();
             return;
             }
       QSettings settings;
