@@ -26,7 +26,7 @@
         </sizepolicy>
        </property>
        <property name="icon">
-        <iconset resource="mscore.qrc">
+        <iconset resource="musescore.qrc">
          <normaloff>:/data/previous.png</normaloff>:/data/previous.png</iconset>
        </property>
       </widget>
@@ -34,7 +34,7 @@
      <item>
       <widget class="QToolButton" name="forward">
        <property name="icon">
-        <iconset resource="mscore.qrc">
+        <iconset resource="musescore.qrc">
          <normaloff>:/data/next.png</normaloff>:/data/next.png</iconset>
        </property>
       </widget>
@@ -42,7 +42,7 @@
      <item>
       <widget class="QToolButton" name="reload">
        <property name="icon">
-        <iconset resource="mscore.qrc">
+        <iconset resource="musescore.qrc">
          <normaloff>:/data/reload.png</normaloff>:/data/reload.png</iconset>
        </property>
       </widget>
@@ -116,7 +116,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="mscore.qrc"/>
+  <include location="musescore.qrc"/>
  </resources>
  <connections/>
 </ui>

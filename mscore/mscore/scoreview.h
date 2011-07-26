@@ -292,7 +292,7 @@ class ScoreView : public QWidget, public MuseScoreView {
 
       void setMag(qreal m);
       Element* elementAt(const QPointF& pp);
-      virtual Element* elementNear(const QPointF& pp);
+      virtual Element* elementNear(QPointF pp);
       bool navigatorVisible() const;
       void cmd(const QAction* a);
 

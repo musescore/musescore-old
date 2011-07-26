@@ -40,10 +40,10 @@ extern QString iconPath, iconGroup;
 EditStyle::EditStyle(Score* s, QWidget* parent)
    : QDialog(parent)
       {
+      setupUi(this);
       cs     = s;
       lstyle = *s->style();
       setModal(true);
-      setupUi(this);
 
       chordDescriptionFileButton->setIcon(*icons[fileOpen_ICON]);
 

@@ -1366,11 +1366,13 @@ class ChangeImage : public UndoCommand {
       Image* image;
       bool lockAspectRatio;
       bool autoScale;
+      int z;
 
       void flip();
 
    public:
-      ChangeImage(Image* i, bool l, bool a) : image(i), lockAspectRatio(l), autoScale(a) {}
+      ChangeImage(Image* i, bool l, bool a, int _z)
+         : image(i), lockAspectRatio(l), autoScale(a), z(_z) {}
       virtual void undo() { flip(); }
       virtual void redo() { flip(); }
       UNDO_NAME("ChangeImage");

@@ -32,5 +32,6 @@ ImageProperties::ImageProperties(Image* i, QWidget* parent)
       setupUi(this);
       lockAspectRatio->setChecked(img->lockAspectRatio());
       autoScale->setChecked(img->autoScale());
+      z->setValue(img->z());
       }
 

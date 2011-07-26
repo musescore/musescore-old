@@ -607,7 +607,7 @@
        <string>G 4</string>
       </property>
       <property name="icon">
-       <iconset resource="mscore.qrc">
+       <iconset resource="musescore.qrc">
         <normaloff>:/data/icons/clef.svg</normaloff>:/data/icons/clef.svg</iconset>
       </property>
       <property name="flags">
@@ -1141,7 +1141,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="mscore.qrc"/>
+  <include location="musescore.qrc"/>
  </resources>
  <connections>
   <connection>

@@ -280,7 +280,7 @@
               <string>...</string>
              </property>
              <property name="icon">
-              <iconset resource="mscore.qrc">
+              <iconset resource="musescore.qrc">
                <normaloff>:/data/icons-dark/text_left.svg</normaloff>:/data/icons-dark/text_left.svg</iconset>
              </property>
              <property name="checkable">
@@ -303,7 +303,7 @@
               <string>...</string>
              </property>
              <property name="icon">
-              <iconset resource="mscore.qrc">
+              <iconset resource="musescore.qrc">
                <normaloff>:/data/icons-dark/text_center.svg</normaloff>:/data/icons-dark/text_center.svg</iconset>
              </property>
              <property name="checkable">
@@ -326,7 +326,7 @@
               <string>...</string>
              </property>
              <property name="icon">
-              <iconset resource="mscore.qrc">
+              <iconset resource="musescore.qrc">
                <normaloff>:/data/icons-dark/text_right.svg</normaloff>:/data/icons-dark/text_right.svg</iconset>
              </property>
              <property name="checkable">
@@ -349,7 +349,7 @@
               <string>...</string>
              </property>
              <property name="icon">
-              <iconset resource="mscore.qrc">
+              <iconset resource="musescore.qrc">
                <normaloff>:/data/icons-dark/text_top.svg</normaloff>:/data/icons-dark/text_top.svg</iconset>
              </property>
              <property name="checkable">
@@ -372,7 +372,7 @@
               <string>...</string>
              </property>
              <property name="icon">
-              <iconset resource="mscore.qrc">
+              <iconset resource="musescore.qrc">
                <normaloff>:/data/icons-dark/text_vcenter.svg</normaloff>:/data/icons-dark/text_vcenter.svg</iconset>
              </property>
              <property name="checkable">
@@ -395,7 +395,7 @@
               <string>...</string>
              </property>
              <property name="icon">
-              <iconset resource="mscore.qrc">
+              <iconset resource="musescore.qrc">
                <normaloff>:/data/icons-dark/text_vcenter.svg</normaloff>:/data/icons-dark/text_vcenter.svg</iconset>
              </property>
              <property name="checkable">
@@ -418,7 +418,7 @@
               <string>...</string>
              </property>
              <property name="icon">
-              <iconset resource="mscore.qrc">
+              <iconset resource="musescore.qrc">
                <normaloff>:/data/icons-dark/text_bottom.svg</normaloff>:/data/icons-dark/text_bottom.svg</iconset>
              </property>
              <property name="checkable">
@@ -871,7 +871,7 @@
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="mscore.qrc"/>
+  <include location="musescore.qrc"/>
  </resources>
  <connections/>
 </ui>

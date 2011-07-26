@@ -14,7 +14,120 @@
    <string>MuseScore: Edit Style</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_11">
-   <item row="1" column="0">
+   <item row="0" column="0">
+    <widget class="QListWidget" name="pageList">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>170</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="horizontalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOff</enum>
+     </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
+     <property name="resizeMode">
+      <enum>QListView::Fixed</enum>
+     </property>
+     <property name="uniformItemSizes">
+      <bool>true</bool>
+     </property>
+     <item>
+      <property name="text">
+       <string>Score</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Page</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Header, Footer, Numbers</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>System</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Measure</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Barlines</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Notes</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Clefs</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Arpeggios</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Beams</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Slurs/Ties</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Sizes</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Hairpins, Volta, Ottava</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Chordnames</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Articulations, Ornaments</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Accidentals</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Voices</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="1" column="0" colspan="2">
     <layout class="QHBoxLayout">
      <property name="spacing">
       <number>6</number>
@@ -33,16 +146,10 @@
    </item>
    <item row="0" column="1">
     <widget class="QStackedWidget" name="pageStack">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-       <horstretch>4</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>15</number>
      </property>
-     <widget class="QWidget" name="Seite_5">
+     <widget class="QWidget" name="Seite1">
       <layout class="QVBoxLayout" name="verticalLayout_20">
        <item>
         <widget class="QGroupBox" name="groupBox_12">
@@ -185,7 +292,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="page2">
+     <widget class="QWidget" name="Seite2">
       <layout class="QVBoxLayout" name="verticalLayout_21">
        <item>
         <widget class="QGroupBox" name="groupBox_13">
@@ -736,7 +843,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="headerFooterNumbers">
+     <widget class="QWidget" name="Seite3">
       <layout class="QGridLayout" name="gridLayout_10">
        <property name="margin">
         <number>8</number>
@@ -1333,7 +1440,7 @@ p, li { white-space: pre-wrap; }
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="Seite_8">
+     <widget class="QWidget" name="Seite4">
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
         <widget class="QGroupBox" name="groupBox_2">
@@ -1405,7 +1512,7 @@ p, li { white-space: pre-wrap; }
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="page3">
+     <widget class="QWidget" name="Seite5">
       <layout class="QVBoxLayout" name="verticalLayout_4">
        <item>
         <widget class="QGroupBox" name="groupBox_3">
@@ -1721,7 +1828,7 @@ p, li { white-space: pre-wrap; }
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="page_barlines">
+     <widget class="QWidget" name="Seite6">
       <layout class="QVBoxLayout" name="verticalLayout_17">
        <item>
         <widget class="QGroupBox" name="groupBox_8">
@@ -1871,7 +1978,7 @@ p, li { white-space: pre-wrap; }
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="page_note">
+     <widget class="QWidget" name="Seite7">
       <layout class="QVBoxLayout" name="verticalLayout_7">
        <item>
         <widget class="QGroupBox" name="groupBox_4">
@@ -2117,7 +2224,7 @@ p, li { white-space: pre-wrap; }
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="page_3">
+     <widget class="QWidget" name="Seite8">
       <layout class="QVBoxLayout" name="verticalLayout_27">
        <item>
         <widget class="QGroupBox" name="groupBox_17">
@@ -2166,7 +2273,7 @@ p, li { white-space: pre-wrap; }
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="page">
+     <widget class="QWidget" name="Seite9">
       <layout class="QVBoxLayout" name="verticalLayout_15">
        <item>
         <widget class="QGroupBox" name="groupBox_7">
@@ -2259,7 +2366,7 @@ p, li { white-space: pre-wrap; }
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="Seite">
+     <widget class="QWidget" name="Seite10">
       <layout class="QVBoxLayout" name="verticalLayout_14">
        <item>
         <widget class="QGroupBox" name="groupBox_6">
@@ -2385,7 +2492,7 @@ p, li { white-space: pre-wrap; }
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="page_2">
+     <widget class="QWidget" name="Seite11">
       <layout class="QVBoxLayout" name="verticalLayout_13">
        <item>
         <widget class="QGroupBox" name="groupBox_9">
@@ -2523,7 +2630,7 @@ p, li { white-space: pre-wrap; }
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="Seite_2">
+     <widget class="QWidget" name="Seite12">
       <layout class="QVBoxLayout" name="verticalLayout_18">
        <item>
         <widget class="QGroupBox" name="groupBox_10">
@@ -2695,7 +2802,7 @@ p, li { white-space: pre-wrap; }
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="Seite_3">
+     <widget class="QWidget" name="Seite13">
       <layout class="QVBoxLayout" name="verticalLayout_19">
        <item>
         <widget class="QGroupBox" name="groupBox_11">
@@ -2951,7 +3058,7 @@ p, li { white-space: pre-wrap; }
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="Seite_4">
+     <widget class="QWidget" name="Seite14">
       <layout class="QVBoxLayout" name="verticalLayout_12">
        <item>
         <widget class="QGroupBox" name="groupBox_5">
@@ -3008,7 +3115,7 @@ p, li { white-space: pre-wrap; }
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="Seite_6">
+     <widget class="QWidget" name="Seite15">
       <layout class="QVBoxLayout" name="verticalLayout_24">
        <item>
         <widget class="QGroupBox" name="groupBox_14">
@@ -3129,7 +3236,7 @@ p, li { white-space: pre-wrap; }
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="page_4">
+     <widget class="QWidget" name="Seite16">
       <layout class="QVBoxLayout" name="verticalLayout_30">
        <item>
         <widget class="QGroupBox" name="groupBox_19">
@@ -3161,8 +3268,8 @@ p, li { white-space: pre-wrap; }
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="Seite_7">
-      <layout class="QVBoxLayout" name="verticalLayout">
+     <widget class="QWidget" name="Seite17">
+      <layout class="QVBoxLayout" name="verticalLayout1">
        <item>
         <widget class="QGroupBox" name="groupBox">
          <property name="title">
@@ -3276,121 +3383,9 @@ p, li { white-space: pre-wrap; }
      </widget>
     </widget>
    </item>
-   <item row="0" column="0">
-    <widget class="QListWidget" name="pageList">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-       <horstretch>2</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="horizontalScrollBarPolicy">
-      <enum>Qt::ScrollBarAlwaysOff</enum>
-     </property>
-     <property name="alternatingRowColors">
-      <bool>true</bool>
-     </property>
-     <property name="resizeMode">
-      <enum>QListView::Fixed</enum>
-     </property>
-     <property name="uniformItemSizes">
-      <bool>true</bool>
-     </property>
-     <property name="currentRow">
-      <number>-1</number>
-     </property>
-     <item>
-      <property name="text">
-       <string>Score</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Page</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Header, Footer, Numbers</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>System</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Measure</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Barlines</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Notes</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Clefs</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Arpeggios</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Beams</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Slurs/Ties</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Sizes</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Hairpins, Volta, Ottava</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Chordnames</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Articulations, Ornaments</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Accidentals</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Voices</string>
-      </property>
-     </item>
-    </widget>
-   </item>
   </layout>
  </widget>
- <resources>
-  <include location="mscore.qrc"/>
- </resources>
+ <resources/>
  <connections>
   <connection>
    <sender>pageList</sender>

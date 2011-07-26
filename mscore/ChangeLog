@@ -1,3 +1,7 @@
+26.jul (ws)
+      - fix #11710: cannot select any element on pages other than first
+      - add screen update after dropping image element
+      - expose z-coordinate (stacking order) in image property dialog
 25.jul (ws)
       - fix #11690: TextLineSegment property menu is missing
       - fix #11677: score pages crammed into one in navigator
