@@ -1615,11 +1615,9 @@ void ScoreView::paint(const QRect& r, QPainter& p)
                   }
             QList<const Element*> ell = page->items(fr.translated(-page->pos()));
             qStableSort(ell.begin(), ell.end(), elementLessThan);
-// printf("==============paint %d\n", ell.size());
             p.save();
             p.translate(page->pos());
             drawElements(p, ell);
-//            p.translate(-page->pos());
             p.restore();
             r1 -= _matrix.mapRect(pr).toAlignedRect();
             }
