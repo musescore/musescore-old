@@ -1021,7 +1021,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>sol</source>
-        <translation type="unfinished"/>
+        <translation>szó</translation>
     </message>
     <message>
         <source>alt. brevis</source>
@@ -3347,7 +3347,7 @@ módosításait bezárás előtt?</translation>
     </message>
     <message>
         <source>System</source>
-        <translation>Sorcsoport</translation>
+        <translation>Rendszer</translation>
     </message>
     <message>
         <source>Staff</source>
@@ -3691,15 +3691,15 @@ szkript futtatásához</translation>
     <name>MyWebView</name>
     <message>
         <source>Could not&lt;br /&gt; connect</source>
-        <translation type="unfinished"/>
+        <translation>Nem sikerült kapcsolódni</translation>
     </message>
     <message>
         <source>To connect with the community, &lt;br /&gt; you need to have internet &lt;br /&gt; connection enabled</source>
-        <translation type="unfinished"/>
+        <translation>A közösséghez való kapcsolódáshoz &lt;br /&gt; engedélyezned kell &lt;br /&gt; az Internetre kapcsolódást</translation>
     </message>
     <message>
         <source>Retry</source>
-        <translation type="unfinished"/>
+        <translation>Újra</translation>
     </message>
     <message>
         <source>Close this permanently</source>
@@ -4740,11 +4740,11 @@ szkript futtatásához</translation>
     </message>
     <message>
         <source>Show Play Panel</source>
-        <translation type="unfinished"/>
+        <translation>Mutasd a Lejátszás panelt</translation>
     </message>
     <message>
         <source>Show Navigator</source>
-        <translation type="unfinished"/>
+        <translation>Mutasd a Navigátort</translation>
     </message>
     <message>
         <source>Show MuseScore Connect</source>
@@ -5863,7 +5863,7 @@ győződj meg arról, hogy helyes-e a SoundFont fájl elérési útja.</translat
     </message>
     <message>
         <source>Staff Properties...</source>
-        <translation type="unfinished">Kottasor tulajdonságai...</translation>
+        <translation>Kottasor tulajdonságai...</translation>
     </message>
 </context>
 <context>
@@ -6637,27 +6637,27 @@ p, li { white-space: pre-wrap; }
     <name>WebPageDockWidget</name>
     <message>
         <source>Connect with the &lt;br /&gt; Community</source>
-        <translation type="unfinished"/>
+        <translation>Kapcsolódj a &lt;br /&gt; Közösséghez</translation>
     </message>
     <message>
         <source>Find help</source>
-        <translation type="unfinished"/>
+        <translation>Kérj segítséget</translation>
     </message>
     <message>
         <source>Improve your skills</source>
-        <translation type="unfinished"/>
+        <translation>Fejleszd a tudásod</translation>
     </message>
     <message>
         <source>Read the latest news</source>
-        <translation type="unfinished"/>
+        <translation>Olvasd el a legfrissebb híreket</translation>
     </message>
     <message>
         <source>Download free sheet music</source>
-        <translation type="unfinished"/>
+        <translation>Tölts le ingyenes kottákat</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"/>
+        <translation>Start</translation>
     </message>
     <message>
         <source>Close this permanently</source>
@@ -8379,11 +8379,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>next score</source>
-        <translation type="unfinished"/>
+        <translation>előző darab</translation>
     </message>
     <message>
         <source>previous score</source>
-        <translation type="unfinished"/>
+        <translation>következő darab</translation>
     </message>
 </context>
 <context>
@@ -8997,23 +8997,23 @@ p, li { white-space: pre-wrap; }
     <name>noteheadnames</name>
     <message>
         <source>normal</source>
-        <translation type="unfinished">normál</translation>
+        <translation>normál</translation>
     </message>
     <message>
         <source>cross</source>
-        <translation type="unfinished">kereszt</translation>
+        <translation>kereszt</translation>
     </message>
     <message>
         <source>diamond</source>
-        <translation type="unfinished">rombusz</translation>
+        <translation>rombusz</translation>
     </message>
     <message>
         <source>triangle</source>
-        <translation type="unfinished">háromszög</translation>
+        <translation>háromszög</translation>
     </message>
     <message>
         <source>mi</source>
-        <translation type="unfinished">mi</translation>
+        <translation>mi</translation>
     </message>
     <message>
         <source>slash</source>
@@ -9021,31 +9021,31 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>xcircle</source>
-        <translation type="unfinished">xkör</translation>
+        <translation>xkör</translation>
     </message>
     <message>
         <source>do</source>
-        <translation type="unfinished">dó</translation>
+        <translation>dó</translation>
     </message>
     <message>
         <source>re</source>
-        <translation type="unfinished">ré</translation>
+        <translation>ré</translation>
     </message>
     <message>
         <source>fa</source>
-        <translation type="unfinished">fá</translation>
+        <translation>fá</translation>
     </message>
     <message>
         <source>la</source>
-        <translation type="unfinished">lá</translation>
+        <translation>lá</translation>
     </message>
     <message>
         <source>ti</source>
-        <translation type="unfinished">ti</translation>
+        <translation>ti</translation>
     </message>
     <message>
         <source>sol</source>
-        <translation type="unfinished"/>
+        <translation>szó</translation>
     </message>
     <message>
         <source>alt. brevis</source>

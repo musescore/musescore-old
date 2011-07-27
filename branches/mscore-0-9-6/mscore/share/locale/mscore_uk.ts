@@ -120,7 +120,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>mm</source>
-        <translation> мм</translation>
+        <translation>мм</translation>
     </message>
     <message>
         <source>right:</source>
@@ -973,7 +973,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>xcircle</source>
-        <translation type="unfinished"/>
+        <translation>х в колі</translation>
     </message>
     <message>
         <source>do</source>
@@ -1025,7 +1025,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>alt. brevis</source>
-        <translation type="unfinished"/>
+        <translation>альтернативна бревіс</translation>
     </message>
 </context>
 <context>
@@ -1147,7 +1147,7 @@ p, li { white-space: pre-wrap; }&#13;
     <name>EditDrumset</name>
     <message>
         <source>invalid</source>
-        <translation type="unfinished"/>
+        <translation>некоректне</translation>
     </message>
     <message>
         <source>Load</source>
@@ -1523,7 +1523,7 @@ failed: </source>
     </message>
     <message>
         <source>Anchor</source>
-        <translation type="unfinished"/>
+        <translation>Якір</translation>
     </message>
     <message>
         <source>TopStaff</source>
@@ -1990,7 +1990,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>invalid</source>
-        <translation type="unfinished"/>
+        <translation>некоректне</translation>
     </message>
     <message>
         <source>selectable</source>
@@ -2213,7 +2213,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Back</source>
-        <translation type="unfinished"/>
+        <translation>Назад</translation>
     </message>
     <message>
         <source>Forward</source>
@@ -2454,7 +2454,7 @@ failed: </source>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished">Додати</translation>
+        <translation>Додати</translation>
     </message>
 </context>
 <context>
@@ -3700,11 +3700,11 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Retry</source>
-        <translation type="unfinished"/>
+        <translation>Повторити</translation>
     </message>
     <message>
         <source>Close this permanently</source>
-        <translation type="unfinished"/>
+        <translation>Зачинити це на постійно</translation>
     </message>
 </context>
 <context>
@@ -3910,7 +3910,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>mm</source>
-        <translation> мм</translation>
+        <translation>мм</translation>
     </message>
     <message>
         <source>inch</source>
@@ -3969,7 +3969,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Properties...</source>
-        <translation type="unfinished"/>
+        <translation>Властивості…</translation>
     </message>
 </context>
 <context>
@@ -4014,7 +4014,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Palette Cell Properties</source>
-        <translation type="unfinished"/>
+        <translation>Властивості палітри комірки</translation>
     </message>
     <message>
         <source>Content Offset</source>
@@ -4249,7 +4249,7 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>default</source>
-        <translation>по умовчанню</translation>
+        <translation>за умовчанням</translation>
     </message>
     <message>
         <source>Choose Working Directory</source>
@@ -4649,7 +4649,7 @@ is incompatible with current interface</source>
     <message>
         <source>mm</source>
         <extracomment>millimeter</extracomment>
-        <translation> мм</translation>
+        <translation>мм</translation>
     </message>
     <message>
         <source>Import</source>
@@ -4741,15 +4741,15 @@ is incompatible with current interface</source>
     </message>
     <message>
         <source>Show Play Panel</source>
-        <translation type="unfinished"/>
+        <translation>показувати пульт програвання</translation>
     </message>
     <message>
         <source>Show Navigator</source>
-        <translation type="unfinished"/>
+        <translation>показувати навігатор</translation>
     </message>
     <message>
         <source>Show MuseScore Connect</source>
-        <translation>Показати зв’язок із спільнотою MuseScore</translation>
+        <translation>показати зв’язок із спільнотою MuseScore</translation>
     </message>
 </context>
 <context>
@@ -4928,7 +4928,7 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>Tuplet Properties...</source>
-        <translation type="unfinished">Влстивості тріолеподібної групи...</translation>
+        <translation>Властивості тріолеподібної групи…</translation>
     </message>
     <message>
         <source>Delete Tuplet</source>
@@ -4987,7 +4987,7 @@ Please select a single note or rest and retry operation
     </message>
     <message>
         <source>Anchor:</source>
-        <translation type="unfinished"/>
+        <translation>Якір:</translation>
     </message>
     <message>
         <source>SEGMENT</source>
@@ -5558,7 +5558,7 @@ and check that the file location is correct</source>
     <name>SlurPropertyBase</name>
     <message>
         <source>Volta Properties</source>
-        <translation type="unfinished">Властивості вольти</translation>
+        <translation>Властивості вольти</translation>
     </message>
     <message>
         <source>Slur Properties</source>
@@ -5620,7 +5620,7 @@ and check that the file location is correct</source>
     <name>StaffText</name>
     <message>
         <source>Staff Text Properties...</source>
-        <translation type="unfinished"/>
+        <translation>Властивості тексту нотного стану…</translation>
     </message>
 </context>
 <context>
@@ -5790,11 +5790,11 @@ and check that the file location is correct</source>
     <name>Text</name>
     <message>
         <source>Set Invisible</source>
-        <translation type="unfinished">Зробити невидимою</translation>
+        <translation>Зробити невидимим</translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation type="unfinished">Зробити видимою</translation>
+        <translation>Зробити видимим</translation>
     </message>
     <message>
         <source>Text Properties...</source>
@@ -5813,7 +5813,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>MM</source>
-        <translation> мм</translation>
+        <translation>мм</translation>
     </message>
     <message>
         <source>Space</source>
@@ -5857,15 +5857,15 @@ and check that the file location is correct</source>
     <name>TextC</name>
     <message>
         <source>Set Invisible</source>
-        <translation type="unfinished">Зробити невидимою</translation>
+        <translation>Зробити невидимим</translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation type="unfinished">Зробити видимою</translation>
+        <translation>Зробити видимим</translation>
     </message>
     <message>
         <source>Staff Properties...</source>
-        <translation type="unfinished">Властивості нотоносця</translation>
+        <translation>Властивості нотоносця…</translation>
     </message>
 </context>
 <context>
@@ -5895,11 +5895,11 @@ and check that the file location is correct</source>
     <name>TextLineSegment</name>
     <message>
         <source>Set Invisible</source>
-        <translation type="unfinished">Зробити невидимою</translation>
+        <translation>Зробити невидимим</translation>
     </message>
     <message>
         <source>Set Visible</source>
-        <translation type="unfinished">Зробити видимою</translation>
+        <translation>Зробити видимим</translation>
     </message>
     <message>
         <source>Line Properties...</source>
@@ -5922,7 +5922,7 @@ and check that the file location is correct</source>
     <message>
         <source>mm</source>
         <comment>millimeter unit</comment>
-        <translation> мм</translation>
+        <translation>мм</translation>
     </message>
     <message>
         <source>sp</source>
@@ -6083,7 +6083,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>MM</source>
-        <translation> мм</translation>
+        <translation>мм</translation>
     </message>
     <message>
         <source>offset in Space units</source>
@@ -6127,7 +6127,7 @@ and check that the file location is correct</source>
     </message>
     <message>
         <source>mm</source>
-        <translation> мм</translation>
+        <translation>мм</translation>
     </message>
     <message>
         <source>Margin:</source>
@@ -6487,7 +6487,7 @@ p, li { white-space: pre-wrap; }
     <name>Tuplet</name>
     <message>
         <source>Tuplet Properties...</source>
-        <translation>Влстивості тріолеподібної групи...</translation>
+        <translation>Властивості тріолеподібної групи…</translation>
     </message>
 </context>
 <context>
@@ -6628,11 +6628,11 @@ p, li { white-space: pre-wrap; }
     <name>VoltaSegment</name>
     <message>
         <source>Volta Properties...</source>
-        <translation type="unfinished"/>
+        <translation>Властивості вольти…</translation>
     </message>
     <message>
         <source>Line Properties...</source>
-        <translation type="unfinished">Властивості лінії...</translation>
+        <translation>Властивості лінії</translation>
     </message>
 </context>
 <context>
@@ -6643,27 +6643,27 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Find help</source>
-        <translation type="unfinished"/>
+        <translation>Знайти допомогу</translation>
     </message>
     <message>
         <source>Improve your skills</source>
-        <translation type="unfinished"/>
+        <translation>Вдосконалюйте свої навички</translation>
     </message>
     <message>
         <source>Read the latest news</source>
-        <translation type="unfinished"/>
+        <translation>Читати останні новини</translation>
     </message>
     <message>
         <source>Download free sheet music</source>
-        <translation type="unfinished"/>
+        <translation>Звантажити вільну нотну музику</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"/>
+        <translation>Початок</translation>
     </message>
     <message>
         <source>Close this permanently</source>
-        <translation type="unfinished"/>
+        <translation>Зачинити це на постійно</translation>
     </message>
 </context>
 <context>
@@ -6770,11 +6770,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>sori</source>
-        <translation type="unfinished"/>
+        <translation>сорі</translation>
     </message>
     <message>
         <source>koron</source>
-        <translation type="unfinished"/>
+        <translation>корон</translation>
     </message>
 </context>
 <context>
@@ -7657,7 +7657,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Harmony Properties</source>
-        <translation type="unfinished">Властивості гармонії</translation>
+        <translation>Властивості гармонії</translation>
     </message>
     <message>
         <source>Add Rehearsal Mark</source>
@@ -7689,7 +7689,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Load Style</source>
-        <translation type="unfinished">Завантажити стиль</translation>
+        <translation>Завантажити стиль</translation>
     </message>
     <message>
         <source>Save Style...</source>
@@ -9024,7 +9024,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>xcircle</source>
-        <translation type="unfinished"/>
+        <translation>х в колі</translation>
     </message>
     <message>
         <source>do</source>
@@ -9052,7 +9052,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>alt. brevis</source>
-        <translation type="unfinished"/>
+        <translation>альтернативна бревіс</translation>
     </message>
 </context>
 <context>
@@ -9875,27 +9875,27 @@ your version of MuseScore is too old.</source>
     </message>
     <message>
         <source>acc dot</source>
-        <translation type="unfinished"/>
+        <translation>акордеонна крапка</translation>
     </message>
     <message>
         <source>acc freebase</source>
-        <translation type="unfinished"/>
+        <translation>акордеонний вільний стиль</translation>
     </message>
     <message>
         <source>acc stdbase</source>
-        <translation type="unfinished"/>
+        <translation>акордеонний стандартний стиль</translation>
     </message>
     <message>
         <source>acc bayanbase</source>
-        <translation type="unfinished"/>
+        <translation>акордеонний стиль баяну</translation>
     </message>
     <message>
         <source>acc old ee</source>
-        <translation type="unfinished"/>
+        <translation>акордеонне старе EE</translation>
     </message>
     <message>
         <source>acc discant</source>
-        <translation type="unfinished"/>
+        <translation>акордеонний дискант</translation>
     </message>
     <message>
         <source>zero</source>
@@ -9947,7 +9947,7 @@ your version of MuseScore is too old.</source>
     </message>
     <message>
         <source>s1sol head</source>
-        <translation type="unfinished"/>
+        <translation>головка „s1sol“</translation>
     </message>
     <message>
         <source>s2sol head</source>
@@ -9963,7 +9963,7 @@ your version of MuseScore is too old.</source>
     </message>
     <message>
         <source>brevis head alt</source>
-        <translation type="unfinished"/>
+        <translation>альтернативна головка ноти бревіс</translation>
     </message>
     <message>
         <source>time sig C dot</source>
@@ -9983,11 +9983,11 @@ your version of MuseScore is too old.</source>
     </message>
     <message>
         <source>sori</source>
-        <translation type="unfinished"/>
+        <translation>сорі</translation>
     </message>
     <message>
         <source>koron</source>
-        <translation type="unfinished"/>
+        <translation>корон</translation>
     </message>
 </context>
 </TS>

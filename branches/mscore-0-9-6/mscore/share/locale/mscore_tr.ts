@@ -1756,11 +1756,11 @@ space unit</extracomment>
     </message>
     <message>
         <source>Barline at start of single staff</source>
-        <translation type="unfinished"/>
+        <translation>Tek enstrumanın başlangıcında ölçü çizgisi</translation>
     </message>
     <message>
         <source>Barline at start of multiple staves</source>
-        <translation type="unfinished"/>
+        <translation>Çoklu enstrumanların başlangıcında ölçü çizgisi</translation>
     </message>
     <message>
         <source>Music upper margin</source>
@@ -1888,15 +1888,15 @@ space unit</extracomment>
     </message>
     <message>
         <source>Minimum length</source>
-        <translation type="unfinished"/>
+        <translation>En kısa uzunluk</translation>
     </message>
     <message>
         <source>Minimum slope</source>
-        <translation type="unfinished"/>
+        <translation>En küçük eğim</translation>
     </message>
     <message>
         <source>Maximum slope</source>
-        <translation type="unfinished"/>
+        <translation>En büyük eğim</translation>
     </message>
     <message>
         <source>Small staff size</source>
@@ -1920,7 +1920,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Use German names</source>
-        <translation type="unfinished"/>
+        <translation>Alman isimlendirmesini kullan</translation>
     </message>
     <message>
         <source>Chord description file</source>
@@ -1947,7 +1947,7 @@ space unit</extracomment>
     <name>EditTempoBase</name>
     <message>
         <source>BPM:</source>
-        <translation type="unfinished"/>
+        <translation>Tempo (birim dakikadaki vuruş)</translation>
     </message>
     <message>
         <source>Text:</source>
@@ -1955,7 +1955,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>OK</source>
-        <translation>TAMAM</translation>
+        <translation>Tamam</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -1993,7 +1993,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>selectable</source>
-        <translation type="unfinished"/>
+        <translation>seçilebilir</translation>
     </message>
     <message>
         <source>droptarget</source>
@@ -2032,7 +2032,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>File Name:</source>
-        <translation type="unfinished"/>
+        <translation>Dosya İsmi</translation>
     </message>
     <message>
         <source>Part Title:</source>
@@ -2040,7 +2040,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished">Kapat</translation>
+        <translation>Kapat</translation>
     </message>
     <message>
         <source>Part-%1</source>
@@ -2066,7 +2066,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Text:</source>
-        <translation>Metin:</translation>
+        <translation>Metin</translation>
     </message>
 </context>
 <context>
@@ -2114,7 +2114,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>Text Properties...</source>
-        <translation type="unfinished">Metin Özellikleri</translation>
+        <translation>Metin Özellikleri...</translation>
     </message>
 </context>
 <context>
@@ -2190,7 +2190,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>OK</source>
-        <translation>TAMAM</translation>
+        <translation>Tamam</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -2212,11 +2212,11 @@ space unit</extracomment>
     </message>
     <message>
         <source>Back</source>
-        <translation type="unfinished"/>
+        <translation>Geri</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished"/>
+        <translation>İleri</translation>
     </message>
     <message>
         <source>...</source>
@@ -2275,7 +2275,7 @@ space unit</extracomment>
     </message>
     <message>
         <source>OK</source>
-        <translation>TAMAM</translation>
+        <translation>Tamam</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -2400,7 +2400,7 @@ Açılamadı: </translation>
     </message>
     <message>
         <source>Instrument List</source>
-        <translation type="unfinished">Çalgı listesi</translation>
+        <translation>Enstruman Listesi</translation>
     </message>
     <message>
         <source>Write Style failed: </source>
@@ -2441,7 +2441,7 @@ Açılamadı: </translation>
     </message>
     <message>
         <source>Create Key Signature</source>
-        <translation type="unfinished"/>
+        <translation>Anahtar Oluştur</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -2449,11 +2449,11 @@ Açılamadı: </translation>
     </message>
     <message>
         <source>add time signature to palette</source>
-        <translation type="unfinished">Palete zaman damgası ekle</translation>
+        <translation>Palete zaman işareti ekle</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished">Ekle</translation>
+        <translation>Ekle</translation>
     </message>
 </context>
 <context>
@@ -2570,7 +2570,7 @@ Açılamadı: </translation>
     </message>
     <message>
         <source>diagonally</source>
-        <translation type="unfinished"/>
+        <translation>çaprazlama</translation>
     </message>
     <message>
         <source>place:</source>
@@ -2718,7 +2718,7 @@ Açılamadı: </translation>
     <name>MeasureProperties</name>
     <message>
         <source>visible</source>
-        <translation type="unfinished"/>
+        <translation>görünür</translation>
     </message>
     <message>
         <source>stemless</source>
@@ -2824,7 +2824,7 @@ Açılamadı: </translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>TAMAM</translation>
+        <translation>Tamam</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -2835,7 +2835,7 @@ Açılamadı: </translation>
     <name>MenuNotes</name>
     <message>
         <source>&amp;Notes</source>
-        <translation type="unfinished"/>
+        <translation>Nota</translation>
     </message>
 </context>
 <context>
@@ -3367,7 +3367,7 @@ kaydetmek ister misiniz?</translation>
     </message>
     <message>
         <source>MuseScore: Barlines</source>
-        <translation type="unfinished">MuseScore: Ölçü Çizgileri</translation>
+        <translation>Muse Score: Ölçü Çizgileri</translation>
     </message>
     <message>
         <source>MuseScore: Fingering</source>

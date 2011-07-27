@@ -3698,7 +3698,7 @@ inkompatibel mit derzeitiger Schnittstelle</translation>
     </message>
     <message>
         <source>To connect with the community, &lt;br /&gt; you need to have internet &lt;br /&gt; connection enabled</source>
-        <translation>Um sich mit der Gemeninschaft zu verbinden, &lt;br /&gt; wird eine Internetverbindung benötigt</translation>
+        <translation>Um sich mit der Gemeinschaft zu verbinden &lt;br /&gt; wird eine Internetverbindung benötigt</translation>
     </message>
     <message>
         <source>Retry</source>

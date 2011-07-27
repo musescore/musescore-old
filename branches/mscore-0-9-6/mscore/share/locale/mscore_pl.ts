@@ -3316,11 +3316,11 @@ before closing?</source>
     </message>
     <message>
         <source>InstrumentsLong</source>
-        <translation>Instrumenty - długa</translation>
+        <translation>Instrumenty - nazwa</translation>
     </message>
     <message>
         <source>InstrumentsShort</source>
-        <translation>Instrumenty - krótka</translation>
+        <translation>Instrumenty - skrót</translation>
     </message>
     <message>
         <source>InstrumentsExcerpt</source>
@@ -4341,7 +4341,7 @@ jest niekompatybilny z obecnym interfejsem.</translation>
     </message>
     <message>
         <source>minutes</source>
-        <translation>minut</translation>
+        <translation>minut(y)</translation>
     </message>
     <message>
         <source>Icons</source>
