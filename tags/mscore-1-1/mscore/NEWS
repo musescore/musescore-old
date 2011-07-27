@@ -1,0 +1,376 @@
+Realease 1.1
+-----------------------------------
+http://musescore.org/en/node/11412
+
+Release 1.0
+-----------------------------------
+http://musescore.org/en/node/9020
+
+Release 0.9.6.3:
+-----------------------------------
+http://musescore.org/en/node/7200
+
+Release 0.9.6.2:
+-----------------------------------
+http://musescore.org/en/node/6745
+
+Release 0.9.6.1:
+-----------------------------------
+http://musescore.org/en/node/6456
+
+Release 0.9.6:
+-----------------------------------
+http://musescore.org/node/4697
+
+Release 0.9.5:
+-----------------------------------
+Complete release note at: http://www.musescore.org/node/1915
+
+Top new features
+
+    * With the release of MuseScore 0.9.5 comes the first stable release for Mac OS X 10.4 and above
+    * Create sound files of your scores via File → Save As... (WAV, OGG, and FLAC)
+    * Use and create plugins
+    * Know the pitch range of instruments (MuseScore marks out-of-range notes for amateurs in yellow and professionals in red)
+    * Double-click to open a MuseScore file
+    * Over 30 crashes fixed
+
+Playback
+
+    * Dynamic markings affect playback. For example ff sounds louder than mp
+    * 8va and 8vb now affects a single staff (as expected) instead of all staves in a score
+    * Tempo changes playback correctly for scores with repeats
+    * All staves playback on Windows using the default
+      SoundFont. Previous versions only played the top staff unless you manually setup a General MIDI SoundFont
+    * Position of slider in play panel is now reliable
+    * Mixer allows you to change instrument sounds on Windows. Linux versions could already do this
+    * Individual notes can be microtuned up to 200 cents above or below the original pitch via the note/chord properties dialog. The Tuning plugin allows you to modify the pitch of all notes in a piece
+    * Reworked internal fluid synthesizer
+          o Reduced the idle load on the processor from ten percent to nearly zero percent. MuseScore only processes chorus and reverb if sound is present
+          o Faster startup and smaller memory footprint especially when using large SoundFonts. MuseScore only loads samples from the SoundFont if needed
+
+Files
+
+    * Sets file type associations for MuseScore (".mscz" and ".mscx")
+    * Drag-and-drop of files onto the MuseScore window opens the score on Windows (already available in Linux)
+    * Automatically delete temporary files with names such "msHp4124" on Windows
+    * New file extension ".mscx" replaces the old file extension ".msc". The old file extension conflicted with a type of Windows system file
+    * Fixed problem with special characters (&<>\") in filenames for Compressed MuseScore Files
+    * Part extraction is less prone to crashes (slurs, voltas, and bar lines through multiple staves are no longer a problem)
+    * Export to sound file. See Export for more details on WAV, OGG, and FLAC
+    * Improvements to MusicXML import: recognize text style, credits, meta-data, multi-measure rests, dominant chords
+    * Improvements to MusicXML export: include information about page layout, credits, meta-data, multi-measure rests; fixed dominant chords, percussion clef, tempo markings, measure width, correct order for elements in note tag, correct octave for B sharps
+    * Improvements to MIDI import: recognize key signature changes, copyright text
+    * Improvements to LilyPond export: fixes for B, C, and C-sharp major key signatures
+    * Implemented a preference that lets you apply a custom style file to all imported scores
+
+User Interface
+
+    * Close button appears on each tab similar to modern browsers instead of a single button off to the side
+    * Default shortcuts conform to platform conventions. For example Ctrl+Y for redo on Windows, Ctrl+Shift+Z for redo on Debian/Ubuntu
+    * Beginning note entry with the mouse in a selected measure no longer causes a crash (prominent crash introduced in 0.9.4)
+    * More instruments added to the new score wizard
+    * Drag-and-drop of dynamics now works
+    * Copy-paste of measures also includes chord names and lyrics
+    * Copy-paste of full-measure rests
+    * Note and rest split correctly across barline on paste
+    * Note entry mode
+          o Cursor now advances when you enter a rest
+          o Notes snap into correct positions so that a slightly misplaced mouse no longer divides existing notes into unexpected smaller durations (bug introduced in 0.9.4)
+          o Backspace undoes the previously added note
+          o Tuplet are created a little differently.
+    * Undo now works for the following
+          o Moving note up or down with mouse (pitch change)
+          o Changes to the Page Settings dialog
+          o Changes to Edit Text Style dialog
+          o Changes to Edit Style dialog
+          o Stem flip
+          o Part and staff property changes
+          o Measure stretch
+    * Added Slur to line palette (previously only available via keyboard shortcuts)
+    * Breath marks placed after the note it was dropped on instead of before
+    * Notes outside of the pitch range of an instrument appear red and notes only playable by professionals in yellow
+    * Edit → Search allows you to jump to a measure
+
+Notation
+
+    * Ledger lines
+          o Thicker lines to match standard engraving practice
+          o Half-note and whole-note rests in voice 2 have proper ledger lines
+          o Avoid touching other ledger lines when notes are close
+          o Automatically widen to reach noteheads on the opposite side of the stem
+    * Percussion
+          o Note entry for drums and percussion is less prone to crashes
+          o Drumset can include notes above staff
+          o New Score wizard no longer adds key signatures to unpitched percussion staves
+    * Vertical note alignment and slurs for whole-note chords now follow the same rules as stemmed notes
+    * Ties copy-paste correctly (bug introduced in 0.9.4)
+    * Accidentals after a tied note now follow standard notation rules
+    * More control over the layout of notes and articulations in the Style → Edit Style dialog
+    * Dotted notes allowed in tuplets
+    * Shifting notes by an octave retains pitch spelling (sharps or flats)
+    * On small staves key signatures, time signatures, accidentals and dynamics are also small and rests are positioned correctly
+    * The measure property dialog now has options for "layout stretch" and "measure number offset"
+    * The bar line for grand staff instruments goes through both staves by default
+    * Arpeggios can span two staves
+    * Multi-measure rests automatically break at voltas, key changes, and time changes
+    * The default size of the staff and notes can be changed via the scaling option in the preferences
+    * Two new clefs: bass clef 8va and bass clef 15va
+    * Visibility of note stems and staff lines is now saved
+    * Note head position (left/right of stem) can now be overridden by user. This supports notation of "Griffschrift" for Steirische Harmonika
+
+Text
+
+    * A special toolbar for text editing makes it easier to change the formatting of specific text
+    * Improved layout for formatting options in the Edit Text Style dialog
+    * Separate style options for odd and even lyrics. For example you can alternate between normal and italic type for each stanza
+    * Lyric hyphens better match the lyric text
+    * Lyrics, measure numbers, and other relevant text resizes with the staff when you change the scaling (via Layout → Page Settings...)
+    * Changes to the text style (via Style → Edit Text Style) are visible without closing and reopening score
+    * Dynamics (such as mf or pp) now resize properly using Style → Edit Text Style → Dynamics
+    * Flats and sharps in chord names now resize properly using Style → Edit Text Style → Chordnames
+    * Chord names are configurable via an external XML file: styles\chords.xml
+    * Experimental jazz font for chord names (the font is incomplete and several symbols are missing)
+
+Plugins
+
+    * Plugins enabled for Debian and Ubuntu due to new features in Qt 4.5
+    * Plugins can now include dialogs created with Qt Designer
+    * Eight sample plugins added
+    * Most script actions are now undoable
+    * Script debugger option added to the Help menu
+    * Added -p option on command line to launch a plugin
+
+Internationalization
+
+    * Eight new translations for the software: Arabic, Danish, Finnish, Swedish, Norwegian, Traditional Chinese, Traditional Chinese (Taiwan) and Ukrainian. This brings the total to 18 languages and dialects
+    * More text in MuseScore is now translatable (certain sections of the user interface were English only in previous versions)
+    * Italian and Norwegian versions of the handbook. The handbook is now available in nine languages
+
+
+Release 0.9.4:
+-----------------------------------
+Complete release note at: http://www.musescore.org/en/node/866
+
+Top new features: improvements to note selection and copy-paste, automatic scrolling during playback, more languages, improvements to drum input, MIDI keyboard support on Windows (Linux version already supported this), about 30 crashes fixed
+
+Playback
+
+    * Automatic scrolling during playback
+    * Increased note length during playback so that normal notes no longer sound semi-staccato
+    * When playback reaches the end of the piece it automatically rewinds back to the beginning so that it is ready for the next time you play the piece.
+    * Arpeggio or "rolled chord" markings affects playback
+    * Support for pizzicato and tremolo on string instruments and mute for trumpet
+
+Notation
+
+    * Support for longer note durations including double whole notes (breves) and longas
+    * Stem directions adjust automatically for multi-voice measures
+    * Many fixes for tuplets regarding chords, accidentals, deletion, and editable brackets
+    * More accidentals as need for Turkish makam music
+    * Ensemble scores
+          o Ability to hide empty staves
+          o Preliminary support for multi-measure rests            
+          o New templates for choir SATB and hymns
+          o Improvements to parts created from a full score including fixes to playback, slurs, tempo text
+    * Instrument specific
+          o Special drum palette to allow mouse input of percussion notation
+          o New instruments/voices including alto voice, recorder, cornet, flugelhorn
+          o Improved support for classical guitar notation including circled fingering numbers
+          o Support for guitar slash notation
+          o New clefs including French violin clef and baritone C clef and fixes for tenor clef
+          o More options for piano pedal markings
+    * Layout
+          o Distance between staves is adjustable for individual systems using the new staff spacer
+          o Improvements to initial slur placement
+          o Vertical position of rests adjustable
+          o Multi-voice seconds and unisons no longer collide when they are not supposed to
+          o Beam height and slant are editable
+          o Fixed incorrect direction of fractional beams
+          o Brackets can be moved left or right 
+
+Text
+
+    * Easily copy and paste lyric text into your score one word at a time. In lyrics mode MuseScore pastes only the first word, removes that word from the clipboard, and moves the text cursor to the next note.
+    * Lyric hyphens now display as standard length
+    * Automatic conversion of simple fractions and copyright symbol. For example "1/2" becomes "½" and "(C)" becomes "©"
+    * Flats and sharps display correctly in chord names. For example "b" becomes "♭­" and "#" becomes "♯"
+    * When you type lyrics or chord names the score moves automatically to keep your typing area on the screen
+    * If the text palette covers your typing area then you can move it out of the way. In previous versions it was immovable
+    * Changes to text style no longer require you to close and reopen the score to see the changes
+
+User Interface
+
+    * Copy-paste of partial measures and lasso (Shift+drag) selections
+    * Copying a selection of music now includes chord names, lyrics and
+    * Fixed font issues that stopped MuseScore from working on some Windows machines
+    * Icon tooltips show keyboard shortcuts in parentheses
+    * Undo now works for ties and pitch spell
+    * List of recently opened files in the File menu is more reliable
+    * Switch to next or previous tab using Ctrl+Tab and Ctrl+Shift+Tab
+    * Palette can be configured and edited by user
+    * New start option: start with no score
+    * Inverted color scheme possible (white score elements on black background)
+
+Internationalization
+
+    * Version 0.9.4 adds Dutch, Galician, Turkish, Brazilian Portuguese, and Hindi translations of the interface, bring a total of 12 languages to MuseScore.
+    * The handbook for the previous release came in three languages (English, German, and Spanish). The current release adds French, Dutch, and Galician translations of the handbook.
+    * Ability to change the default paper size from A4 to US Letter or another paper size. In previous versions you had to change the paper size manually for each new score.
+
+Import and Export
+
+    * Improvements to MusicXML import include chord names, percussion clef, octave shift, elisions (lyric slurs), part names, barline span, transposition
+    * Imrpovements to MusicXML export include ties, lyric extensions, correct order of chord names, Unicode file names
+    * Improvements to Lilypond export include separation of voices for easier hand editing, support for ties, pickup measures, incomplete measures, triplets, octave corrections, grace note beams, simple brackets and braces
+    * New experimental import for Capella files
+    * MIDI import includes support for files without a time signature and no longer creates unnecessary staves
+    * PDF export now works with custom page sizes
+
+
+Release 0.9.3:
+-----------------------------------
+      - "concert pitch" view
+      - midi articulation
+      - integrated plugin script debugger
+      - plugin script bindings for qt gui library
+      - tremolo between notes
+      - new element: glissando
+      - more tuplet types; allow for notes/rests of different len in tuplets
+      - speedups/optimizations for layout
+      - configurable autosave
+      - more configuration and style options
+      - new compressed file format *.mscz
+      - lots of bug fixes and render enhancements
+
+Release 0.9.2:
+-----------------------------------
+      - excerpts
+      - more line types with property editor
+      - new online documentation
+      - midi output
+      - new Harmony element replacing Text element for chord names
+            - Harmony elements are also imported from or exported to
+              MusixXml. Only a few MusixXml chord names are currently
+              supported.
+      - new "select all"
+      - new transpose function
+      - can now import some "band in a box" files
+      - Slur entry in "note entry mode":
+            While in note entry mode typing "S" starts a slur. The slur
+            is extended during subsequent note entries until you hit
+            "S" again or leave note entry mode.
+      - lots of bug fixes
+
+Release 0.9
+-----------------------------------
+      There are two new palettes, "Notes" and "Beam Properties". This
+      palettes replace the "Note Entry Pad" which is removed in this release.
+      Palettes operate via drag&drop but by first selecting an object and
+      then double click on a palette entry they work like the old Pad.
+
+      Creation of new chords is now guided by a "New Score Wizard".
+
+      New implemented score elements are acciaccatura and appoggiatura
+      grace notes. There is also a new line object which combines a text
+      with a line. Texts can now be circled.
+
+      Import and Export of compressed MusicXml files (*.mxl) is now supported.
+
+Release 0.8
+-----------------------------------
+      - audio output for windows version
+      - better drag&drop visualization
+      - extended repeats
+      - small staves
+      - small notes and rests
+      - horizontal and vertical frame objects to structure
+        score
+      - extended MusicXml import and export
+
+Release 0.7
+-----------------------------------
+      - better note head positioning in chords
+      - measure insert/delete function
+      - drumset editor
+      - tremolo
+      - repeat measure symbol
+      - changable note heads
+
+      As usual this release also contains many bug fixes and code
+      cleanups.
+
+Release 0.6.1
+-----------------------------------
+      This is a bugfix release. Most notably the crash when importing
+      a midi file is fixed.
+
+Release 0.6
+-----------------------------------
+      - text frames
+      - arpeggio lines
+      - MuseData import (www.musedata.org)
+      - better automatic pitch spelling using context information
+      - automatic key detection on midi import
+      - configurable symbol palette
+      - new button to remove a score tab from the tab bar
+      - new dock widget which collects all palettes
+
+Release 0.5
+-----------------------------------
+      - editing in the Mag combobox to enter arbitrary zoom factors is
+        now implemented
+      - the default application font is not hard coded anymore and can
+        be changed by external utilities (qtconfig)
+      - bracket editing with keyboard
+      - nested system brackets
+      - extended lyrics
+      - subscript and superscript for text
+      - irregular measures
+      - more cut&paste and drag&drop operations
+      - better visual feedback for some drag&drop operations
+      - the sequencer now interprets ottava and pedal lines. They are
+        are also exported to midi.
+      - some line object can now span several systems (ottava, pedal,
+        trill and hairpins)
+      - as usual many fixes, enhancements and internal code cleanups
+
+Release 0.4:
+-----------------------------------
+      - configurable keyboard short cuts
+      - Instrument names and text can contain musical symbols
+      - added ALSA audio driver in addition to JACK driver
+      - many MusicXML fixes and enhancements
+      - enhanced midi import
+      - integrated music fonts, no font install necessary
+      - now uses unicode and utf8
+      - many fixes, enhancements and internal code cleanups
+      - many internal changes and code cleanups
+      - now using cmake as build system instead of autotools
+      - moved from cvs to svn
+
+Release 0.2:
+-----------------------------------
+      Release 0.2 of MuseScore is a major feature release. Its based on
+      the brand new Qt4 gui library using its features like antialiased
+      screen drawings.
+
+      * new elements: volta brackets, ottava lines (8va---)
+        system brackets, pedal lines, trill lines
+      * drag & drop from symbol panels
+      * navigator panel
+      * page layout preview
+      * tabbed multiple document interface
+      * Mscore now uses the unmodified project lilypond "emmentaler" font.
+
+Release 0.1:
+-----------------------------------
+      * integrated fluid software synthesizer for play function;
+        plays with JACK audio server
+      * Mscore now supports musicXml import/export. Only a subset is
+        currently supported.
+      * simple midi import/export
+      * midi input (step recording)
+      * some support for multiple voices in a staff
+      * new demo files
+      * numerous fixes and enhancements
