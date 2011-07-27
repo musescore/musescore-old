@@ -3703,7 +3703,7 @@ szkript futtatásához</translation>
     </message>
     <message>
         <source>Close this permanently</source>
-        <translation type="unfinished"/>
+        <translation>Ez ne nyíljon meg többször</translation>
     </message>
 </context>
 <context>
@@ -4748,7 +4748,7 @@ szkript futtatásához</translation>
     </message>
     <message>
         <source>Show MuseScore Connect</source>
-        <translation type="unfinished"/>
+        <translation>Mutasd a MuseScore Connectet</translation>
     </message>
 </context>
 <context>
@@ -6661,7 +6661,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Close this permanently</source>
-        <translation type="unfinished"/>
+        <translation>Ez ne nyíljon meg többször</translation>
     </message>
 </context>
 <context>

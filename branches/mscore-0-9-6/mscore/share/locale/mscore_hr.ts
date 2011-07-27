@@ -5,7 +5,7 @@
     <name>AboutBox</name>
     <message>
         <source>AboutBox</source>
-        <translation>AboutBox</translation>
+        <translation>O programu</translation>
     </message>
     <message utf8="true">
         <source>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd"&gt;
@@ -22,34 +22,34 @@ p, li { white-space: pre-wrap; }
 &lt;html&gt;&lt;head&gt;&lt;meta name="qrichtext" content="1" /&gt;&lt;style type="text/css"&gt;&#13;
 p, li { white-space: pre-wrap; }&#13;
 &lt;/style&gt;&lt;/head&gt;&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;"&gt;&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Visit &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; for new versions and more information.&lt;/span&gt;&lt;/p&gt;&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Support MuseScore with &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;your donation&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Posjetite &lt;/span&gt;&lt;a href="http://www.musescore.org/"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;www.musescore.org&lt;/span&gt;&lt;/a&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; za nove inačice i dodatne informacije.&lt;/span&gt;&lt;/p&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Podržite MuseScore &lt;/span&gt;&lt;a href="http://www.musescore.org/en/donate"&gt;&lt;span style=" font-size:10pt; text-decoration: underline; color:#0000ff;"&gt;svojom donacijom&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&#13;
 &#13;
 &lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Arial'; font-size:10pt;"&gt;&lt;/p&gt;&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2011 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;&#13;
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Published under the GNU General Public License&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Copyright &lt;/span&gt;&lt;span style=" font-size:10pt;"&gt;©&lt;/span&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt; 1999-2009 Werner Schweer i drugi. &lt;/span&gt;&lt;/p&gt;&#13;
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"&gt;&lt;span style=" font-family:'Arial'; font-size:10pt;"&gt;Objavljeno pod licencom GNU GPL&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>
     <name>AboutBoxDialog</name>
     <message>
         <source>Unstable Prerelease for Version: </source>
-        <translation>Unstable Prerelease for Version: </translation>
+        <translation>Nestabilno izdanje za inačicu: </translation>
     </message>
     <message>
         <source>Version: </source>
-        <translation>Version: </translation>
+        <translation>Inačica: </translation>
     </message>
     <message>
         <source>Revision: %1</source>
-        <translation>Revision: %1</translation>
+        <translation>Revizija: %1</translation>
     </message>
 </context>
 <context>
     <name>Accidental</name>
     <message>
         <source>round bracket</source>
-        <translation>round bracket</translation>
+        <translation>okrugla zagrada</translation>
     </message>
 </context>
 <context>
@@ -67,41 +67,41 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Channel</source>
-        <translation>Channel</translation>
+        <translation>Kanal</translation>
     </message>
     <message>
         <source>Midi Action</source>
-        <translation>Midi Action</translation>
+        <translation>Midi akcija</translation>
     </message>
 </context>
 <context>
     <name>BarLineBase</name>
     <message>
         <source>Form</source>
-        <translation>Form</translation>
+        <translation>Obrazac</translation>
     </message>
     <message>
         <source>BarLine</source>
-        <translation>Bar Line</translation>
+        <translation>Taktna crta</translation>
     </message>
     <message>
         <source>SubType:</source>
-        <translation>SubType:</translation>
+        <translation>Podvrsta:</translation>
     </message>
 </context>
 <context>
     <name>BeamBase</name>
     <message>
         <source>Form</source>
-        <translation>Form</translation>
+        <translation>Obrazac</translation>
     </message>
     <message>
         <source>up:</source>
-        <translation>up:</translation>
+        <translation>gore:</translation>
     </message>
     <message>
         <source>Chord/Rest</source>
-        <translation>Chord/Rest</translation>
+        <translation>Akord/Pauza</translation>
     </message>
 </context>
 <context>
@@ -112,11 +112,11 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>Margins</source>
-        <translation>Margins</translation>
+        <translation>Rubovi</translation>
     </message>
     <message>
         <source>left:</source>
-        <translation>left:</translation>
+        <translation>lijevi:</translation>
     </message>
     <message>
         <source>mm</source>
@@ -124,15 +124,15 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>right:</source>
-        <translation>right:</translation>
+        <translation>desni:</translation>
     </message>
     <message>
         <source>top:</source>
-        <translation>top:</translation>
+        <translation>gornji:</translation>
     </message>
     <message>
         <source>bottom:</source>
-        <translation>bottom:</translation>
+        <translation>donji:</translation>
     </message>
 </context>
 <context>
@@ -178,7 +178,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>bb (double flat)</source>
-        <translation>bb (double flat)</translation>
+        <translation>bb (dvostruka snizilica)</translation>
     </message>
     <message>
         <source>F</source>
@@ -186,7 +186,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>b (flat)</source>
-        <translation>b (flat)</translation>
+        <translation>b (snizilica)</translation>
     </message>
     <message>
         <source>G</source>
@@ -194,7 +194,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>(no accidental)</source>
-        <translation>(no accidental)</translation>
+        <translation>(bez predznaka)</translation>
     </message>
     <message>
         <source>A</source>
@@ -202,15 +202,15 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source># (sharp)</source>
-        <translation># (sharp)</translation>
+        <translation># (povisilica)</translation>
     </message>
     <message>
         <source>B</source>
-        <translation>B</translation>
+        <translation>H</translation>
     </message>
     <message>
         <source>## (double sharp)</source>
-        <translation>## (double sharp)</translation>
+        <translation>## (dvostruka povisilica)</translation>
     </message>
     <message>
         <source>D</source>
@@ -266,7 +266,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>7Sus</source>
-        <translation>7sus</translation>
+        <translation>7Sus</translation>
     </message>
     <message>
         <source>m6</source>
@@ -386,7 +386,7 @@ p, li { white-space: pre-wrap; }&#13;
     </message>
     <message>
         <source>7(Blues)</source>
-        <translation>7(blues)</translation>
+        <translation>7(Blues)</translation>
     </message>
     <message>
         <source>7b13</source>
@@ -3648,43 +3648,43 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</source>
-        <translation>All Supported Files (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</translation>
+        <translation>Sve podržane datoteke (*.mscz *.mscx *.msc *.xml *.mxl *.mid *.midi *.kar *.md *.mgu *.MGU *.sgu *.SGU *.cap *.ove *.bww);;</translation>
     </message>
     <message>
         <source>MuseScore Files (*.mscz *.mscx *.msc);;</source>
-        <translation>MuseScore Files (*.mscz *.mscx *.msc);;</translation>
+        <translation>MuseScore datoteke (*.mscz *.mscx *.msc);;</translation>
     </message>
     <message>
         <source>MusicXML Files (*.xml *.mxl);;</source>
-        <translation>MusicXML Files (*.xml *.mxl);;</translation>
+        <translation>MusicXML datoteke (*.xml *.mxl);;</translation>
     </message>
     <message>
         <source>MIDI Files (*.mid *.midi *.kar);;</source>
-        <translation>MIDI Files (*.mid *.midi *.kar);;</translation>
+        <translation>MIDI datoteke (*.mid *.midi *.kar);;</translation>
     </message>
     <message>
         <source>Muse Data Files (*.md);;</source>
-        <translation>Muse Data Files (*.md);;</translation>
+        <translation>Muse Data datoteke (*.md);;</translation>
     </message>
     <message>
         <source>Capella Files (*.cap);;</source>
-        <translation>Capella Files (*.cap);;</translation>
+        <translation>Capella datoteke (*.cap);;</translation>
     </message>
     <message>
         <source>Bagpipe Music Writer Files (*.bww);;</source>
-        <translation>Bagpipe Music Writer Files (*.bww);;</translation>
+        <translation>Bagpipe Music Writer datoteke (*.bww);;</translation>
     </message>
     <message>
         <source>BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;</source>
-        <translation>BB Files &lt;experimental&gt; (*.mgu *.MGU *.sgu *.SGU);;</translation>
+        <translation>BB datoteke &lt;eksperimentalno&gt; (*.mgu *.MGU *.sgu *.SGU);;</translation>
     </message>
     <message>
         <source>Overture Files &lt;experimental&gt; (*.ove);;</source>
-        <translation>Overture Files &lt;experimental&gt; (*.ove);;</translation>
+        <translation>Overture datoteke &lt;eksperimentalno&gt; (*.ove);;</translation>
     </message>
     <message>
         <source>All Files (*)</source>
-        <translation>All Files (*)</translation>
+        <translation>Sve datoteke (*)</translation>
     </message>
 </context>
 <context>
@@ -3710,94 +3710,94 @@ is incompatible with current interface</translation>
     <name>NewWizard</name>
     <message>
         <source>Form</source>
-        <translation>Form</translation>
+        <translation>Obrazac</translation>
     </message>
     <message>
         <source>Title:</source>
-        <translation>Title:</translation>
+        <translation>Naslov:</translation>
     </message>
     <message>
         <source>Subtitle:</source>
-        <translation>Subtitle:</translation>
+        <translation>Podnaslov:</translation>
     </message>
     <message>
         <source>Composer:</source>
-        <translation>Composer:</translation>
+        <translation>Skladatelj:</translation>
     </message>
     <message>
         <source>Poet:</source>
-        <translation>Lyricist:</translation>
+        <translation>Tekstopisac:</translation>
     </message>
     <message>
         <source>Copyright:</source>
-        <translation>Copyright:</translation>
+        <translation>Autorska prava:</translation>
     </message>
     <message>
         <source>Create new score from template</source>
-        <translation>Create new score from template.</translation>
+        <translation>Stvori novu skladbu iz obrasca</translation>
     </message>
     <message>
         <source>Create new score from scratch</source>
-        <translation>Create new score from scratch.</translation>
+        <translation>Stvoru novu praznu skladbu</translation>
     </message>
     <message>
         <source>MuseScore: Create New Score</source>
-        <translation>MuseScore: Create New Score</translation>
+        <translation>MuseScore: Stvori novu skladbu</translation>
     </message>
 </context>
 <context>
     <name>NewWizardPage1</name>
     <message>
         <source>Create New Score</source>
-        <translation>Create New Score</translation>
+        <translation>Stvori novu skladbu</translation>
     </message>
     <message>
         <source>This wizard creates a new score</source>
-        <translation>This wizard creates a new score.</translation>
+        <translation>Ovaj čarobnjak stvara novu skladbu</translation>
     </message>
 </context>
 <context>
     <name>NewWizardPage2</name>
     <message>
         <source>Create New Score</source>
-        <translation>Create New Score</translation>
+        <translation>Stvori novu skladbu</translation>
     </message>
     <message>
         <source>Define a set of instruments. Each instrument is represented by one or more staves</source>
-        <translation>Define a set of instruments. Each instrument is represented by one or more staves.</translation>
+        <translation>Odredi skup instrumenata. Svaki instrument prikazan je kroz jedno ili više crtovlja</translation>
     </message>
 </context>
 <context>
     <name>NewWizardPage3</name>
     <message>
         <source>Create New Score</source>
-        <translation>Create New Score</translation>
+        <translation>Stvori novu skladbu</translation>
     </message>
     <message>
         <source>Create Time Signature</source>
-        <translation>Create Time Signature</translation>
+        <translation>Odredi tonalitet</translation>
     </message>
 </context>
 <context>
     <name>NewWizardPage4</name>
     <message>
         <source>Create New Score</source>
-        <translation>Create New Score</translation>
+        <translation>Stvori novu skladbu</translation>
     </message>
     <message>
         <source>Select Template File:</source>
-        <translation>Select Template File:</translation>
+        <translation>Odaberi datoteku obrasca:</translation>
     </message>
 </context>
 <context>
     <name>NewWizardPage5</name>
     <message>
         <source>Create New Score</source>
-        <translation>Create New Score</translation>
+        <translation>Stvori novu skladbu</translation>
     </message>
     <message>
         <source>Select Key Signature:</source>
-        <translation>Select Key Signature:</translation>
+        <translation>Odaberi mjeru:</translation>
     </message>
 </context>
 <context>
@@ -3957,7 +3957,7 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>First page no.</source>
-        <translation>First page no.</translation>
+        <translation>Broj prve stranice</translation>
     </message>
 </context>
 <context>
@@ -4732,11 +4732,11 @@ is incompatible with current interface</translation>
     </message>
     <message>
         <source>Character Set used when import non-unicode strings. (For binary file import)</source>
-        <translation>Character Set used when import non-unicode strings. (For binary file import)</translation>
+        <translation>Skup znakova za korištenje pri uvozu ne-unicode teksta.</translation>
     </message>
     <message>
         <source>Character Set</source>
-        <translation>Character Set</translation>
+        <translation>Skup znakova</translation>
     </message>
     <message>
         <source>Show Play Panel</source>
@@ -6579,15 +6579,15 @@ p, li { white-space: pre-wrap; }
     <name>UpdateChecker</name>
     <message>
         <source>An update for MuseScore is available: &lt;a href="%1"&gt;MuseScore %2 r.%3&lt;/a&gt;</source>
-        <translation>An update for MuseScore is available: &lt;a href="%1"&gt;MuseScore %2 r.%3&lt;/a&gt;</translation>
+        <translation>Dostupno je novo izdanje MuseScorea: &lt;a href="%1"&gt;MuseScore %2 r.%3&lt;/a&gt;</translation>
     </message>
     <message>
         <source>Update Available</source>
-        <translation>Update Available</translation>
+        <translation>Postoji novije izdanje</translation>
     </message>
     <message>
         <source>No Update Available</source>
-        <translation>No Update Available</translation>
+        <translation>Ne postoji novije izdanje</translation>
     </message>
 </context>
 <context>
@@ -6662,27 +6662,27 @@ p, li { white-space: pre-wrap; }
     <name>accidental</name>
     <message>
         <source>none</source>
-        <translation>none</translation>
+        <translation>ništa</translation>
     </message>
     <message>
         <source>sharp</source>
-        <translation>sharp</translation>
+        <translation>povisilica</translation>
     </message>
     <message>
         <source>flat</source>
-        <translation>flat</translation>
+        <translation>snizilica</translation>
     </message>
     <message>
         <source>double sharp</source>
-        <translation>double sharp</translation>
+        <translation>dvostruka povisilica</translation>
     </message>
     <message>
         <source>double flat</source>
-        <translation>double flat</translation>
+        <translation>dvostruka snizilica</translation>
     </message>
     <message>
         <source>natural</source>
-        <translation>natural</translation>
+        <translation>razrješilica</translation>
     </message>
     <message>
         <source>flat-slash</source>
@@ -6773,83 +6773,83 @@ p, li { white-space: pre-wrap; }
     <name>action</name>
     <message>
         <source>Local &amp;Handbook...</source>
-        <translation>Local &amp;Handbook…</translation>
+        <translation>Lokalni priručnik...</translation>
     </message>
     <message>
         <source>Open...</source>
-        <translation>Open…</translation>
+        <translation>Otvori...</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Save</translation>
+        <translation>Spremi</translation>
     </message>
     <message>
         <source>Save As...</source>
-        <translation>Save As…</translation>
+        <translation>Spremi kao...</translation>
     </message>
     <message>
         <source>Save a Copy...</source>
-        <translation>Save a Copy…</translation>
+        <translation>Spremi kopiju...</translation>
     </message>
     <message>
         <source>Reload</source>
-        <translation>Reload</translation>
+        <translation>Ponovo učitaj</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation>Close</translation>
+        <translation>Zatvori</translation>
     </message>
     <message>
         <source>file new</source>
-        <translation>file new</translation>
+        <translation>nova datoteka</translation>
     </message>
     <message>
         <source>New...</source>
-        <translation>New…</translation>
+        <translation>Nova...</translation>
     </message>
     <message>
         <source>Create new score</source>
-        <translation>Create new score</translation>
+        <translation>Stvori novu skladbu</translation>
     </message>
     <message>
         <source>Print...</source>
-        <translation>Print…</translation>
+        <translation>Ispis...</translation>
     </message>
     <message>
         <source>Undo</source>
-        <translation>Undo</translation>
+        <translation>Poništi</translation>
     </message>
     <message>
         <source>Redo</source>
-        <translation>Redo</translation>
+        <translation>Ponovi</translation>
     </message>
     <message>
         <source>Cut</source>
-        <translation>Cut</translation>
+        <translation>Izreži</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation>Copy</translation>
+        <translation>Kopiraj</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation>Paste</translation>
+        <translation>Zalijepi</translation>
     </message>
     <message>
         <source>Instruments...</source>
-        <translation>Instruments…</translation>
+        <translation>Instrumenti...</translation>
     </message>
     <message>
         <source>Symbols...</source>
-        <translation>Symbols…</translation>
+        <translation>Simboli...</translation>
     </message>
     <message>
         <source>Dynamics...</source>
-        <translation>Dynamics…</translation>
+        <translation>Dinamika...</translation>
     </message>
     <message>
         <source>Note Input</source>
-        <translation>Note Input</translation>
+        <translation>Unos nota</translation>
     </message>
     <message>
         <source>Pitch Spell</source>
@@ -6857,139 +6857,139 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Unison Above</source>
-        <translation>Unison Above</translation>
+        <translation>Prima iznad</translation>
     </message>
     <message>
         <source>Enter unison above</source>
-        <translation>Enter unison above</translation>
+        <translation>Unesi primu iznad</translation>
     </message>
     <message>
         <source>Second Above</source>
-        <translation>Second Above</translation>
+        <translation>Sekunda iznad</translation>
     </message>
     <message>
         <source>Enter second above</source>
-        <translation>Enter second above</translation>
+        <translation>Unesi sekundu iznad</translation>
     </message>
     <message>
         <source>Third Above</source>
-        <translation>Third Above</translation>
+        <translation>Terca iznad</translation>
     </message>
     <message>
         <source>Enter third above</source>
-        <translation>Enter third above</translation>
+        <translation>Unesi tercu iznad</translation>
     </message>
     <message>
         <source>Fourth Above</source>
-        <translation>Fourth Above</translation>
+        <translation>Kvarta iznad</translation>
     </message>
     <message>
         <source>Enter fourth above</source>
-        <translation>Enter fourth above</translation>
+        <translation>Unesi kvartu iznad</translation>
     </message>
     <message>
         <source>Fifth Above</source>
-        <translation>Fifth Above</translation>
+        <translation>Kvinta iznad</translation>
     </message>
     <message>
         <source>Enter fifth above</source>
-        <translation>Enter fifth above</translation>
+        <translation>Unesi kvintu iznad</translation>
     </message>
     <message>
         <source>Sixth Above</source>
-        <translation>Sixth Above</translation>
+        <translation>Seksta izand</translation>
     </message>
     <message>
         <source>Enter sixth above</source>
-        <translation>Enter sixth above</translation>
+        <translation>Unesi sekstu iznad</translation>
     </message>
     <message>
         <source>Seventh Above</source>
-        <translation>Seventh Above</translation>
+        <translation>Septima iznad</translation>
     </message>
     <message>
         <source>Enter seventh above</source>
-        <translation>Enter seventh above</translation>
+        <translation>Unesi septimu iznad</translation>
     </message>
     <message>
         <source>Octave Above</source>
-        <translation>Octave Above</translation>
+        <translation>Oktava iznad</translation>
     </message>
     <message>
         <source>Enter octave above</source>
-        <translation>Enter octave above</translation>
+        <translation>Unesi oktavu iznad</translation>
     </message>
     <message>
         <source>Ninth Above</source>
-        <translation>Ninth Above</translation>
+        <translation>Nona iznad</translation>
     </message>
     <message>
         <source>Enter ninth above</source>
-        <translation>Enter ninth above</translation>
+        <translation>Unesi nonu iznad</translation>
     </message>
     <message>
         <source>Second Below</source>
-        <translation>Second Below</translation>
+        <translation>Sekunda ispod</translation>
     </message>
     <message>
         <source>Enter second below</source>
-        <translation>Enter second below</translation>
+        <translation>Unesi sekundu ispod</translation>
     </message>
     <message>
         <source>Third Below</source>
-        <translation>Third Below</translation>
+        <translation>Terca ispod</translation>
     </message>
     <message>
         <source>Enter third below</source>
-        <translation>Enter third below</translation>
+        <translation>Unesi tercu ispod</translation>
     </message>
     <message>
         <source>Fourth Below</source>
-        <translation>Fourth Below</translation>
+        <translation>Kvarta ispod</translation>
     </message>
     <message>
         <source>Enter fourth below</source>
-        <translation>Enter fourth below</translation>
+        <translation>Unesi kvartu ispod</translation>
     </message>
     <message>
         <source>Fifth Below</source>
-        <translation>Fifth Below</translation>
+        <translation>Kvinta ispod</translation>
     </message>
     <message>
         <source>Enter fifth below</source>
-        <translation>Enter fifth below</translation>
+        <translation>Unesi kvintu ispod</translation>
     </message>
     <message>
         <source>Sixth Below</source>
-        <translation>Sixth Below</translation>
+        <translation>Seksta ispod</translation>
     </message>
     <message>
         <source>Enter sixth below</source>
-        <translation>Enter sixth below</translation>
+        <translation>Unesi sekstu ispod</translation>
     </message>
     <message>
         <source>Seventh Below</source>
-        <translation>Seventh Below</translation>
+        <translation>Septima ispod</translation>
     </message>
     <message>
         <source>Enter seventh below</source>
-        <translation>Enter seventh below</translation>
+        <translation>Unesi septimu ispod</translation>
     </message>
     <message>
         <source>Octave Below</source>
-        <translation>Octave Below</translation>
+        <translation>Oktava ispod</translation>
     </message>
     <message>
         <source>Enter octave below</source>
-        <translation>Enter octave below</translation>
+        <translation>Unesi oktavu ispod</translation>
     </message>
     <message>
         <source>Ninth Below</source>
-        <translation>Ninth Below</translation>
+        <translation>Nona ispod</translation>
     </message>
     <message>
         <source>Enter ninth below</source>
-        <translation>Enter ninth below</translation>
+        <translation>Unesi nonu ispod</translation>
     </message>
     <message>
         <source>A</source>
@@ -6997,7 +6997,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>B</source>
-        <translation>B</translation>
+        <translation>H</translation>
     </message>
     <message>
         <source>C</source>
@@ -7009,7 +7009,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>E</source>
-        <translation>C</translation>
+        <translation>E</translation>
     </message>
     <message>
         <source>F</source>
@@ -7021,79 +7021,79 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>Add A</source>
-        <translation>Add A</translation>
+        <translation>Dodaj A</translation>
     </message>
     <message>
         <source>Add note A to chord</source>
-        <translation>Add note A to chord</translation>
+        <translation>Dodaj notu A u akord</translation>
     </message>
     <message>
         <source>Add B</source>
-        <translation>Add B</translation>
+        <translation>Dodaj H</translation>
     </message>
     <message>
         <source>Add note B to chord</source>
-        <translation>Add note B to chord</translation>
+        <translation>Dodaj notu H u akord</translation>
     </message>
     <message>
         <source>Add C</source>
-        <translation>Add C</translation>
+        <translation>Dodaj C</translation>
     </message>
     <message>
         <source>Add note C to chord</source>
-        <translation>Add note C to chord</translation>
+        <translation>Dodaj notu C u akord</translation>
     </message>
     <message>
         <source>Add D</source>
-        <translation>Add D</translation>
+        <translation>Dodaj D</translation>
     </message>
     <message>
         <source>Add note D to chord</source>
-        <translation>Add note D to chord</translation>
+        <translation>Dodaj notu D u akord</translation>
     </message>
     <message>
         <source>Add E</source>
-        <translation>Add E</translation>
+        <translation>Dodaj E</translation>
     </message>
     <message>
         <source>Add note E to chord</source>
-        <translation>Add note E to chord</translation>
+        <translation>Dodaj notu E u akord</translation>
     </message>
     <message>
         <source>Add F</source>
-        <translation>Add F</translation>
+        <translation>Dodaj F</translation>
     </message>
     <message>
         <source>Add note F to chord</source>
-        <translation>Add note F to chord</translation>
+        <translation>Dodaj notu F u akord</translation>
     </message>
     <message>
         <source>Add G</source>
-        <translation>Add G</translation>
+        <translation>Dodaj G</translation>
     </message>
     <message>
         <source>Add note G to chord</source>
-        <translation>Add note G to chord</translation>
+        <translation>Dodaj notu G u akord</translation>
     </message>
     <message>
         <source>rest</source>
-        <translation>rest</translation>
+        <translation>pauza</translation>
     </message>
     <message>
         <source>Add More Stretch</source>
-        <translation>Add More Stretch</translation>
+        <translation>Više prostora</translation>
     </message>
     <message>
         <source>Add more stretch to selected measure</source>
-        <translation>Add more stretch to selected measure</translation>
+        <translation>Dodaj još prostora u odabrani takt</translation>
     </message>
     <message>
         <source>Add Less Stretch</source>
-        <translation>Add Less Stretch</translation>
+        <translation>Manje prostora</translation>
     </message>
     <message>
         <source>Add less stretch to selected measure</source>
-        <translation>Add less stretch to selected measure</translation>
+        <translation>Oduzmi prostor iz odabranog takta</translation>
     </message>
     <message>
         <source>Reset Beam Mode</source>
@@ -7101,47 +7101,47 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>up+shift+ctrl</source>
-        <translation>up+shift+ctrl</translation>
+        <translation>gore+shift+ctrl</translation>
     </message>
     <message>
         <source>down+shift+ctrl</source>
-        <translation>down+shift+ctrl</translation>
+        <translation>dolje+shift+ctrl</translation>
     </message>
     <message>
         <source>left+ctrl</source>
-        <translation>left+ctrl</translation>
+        <translation>lijevo+ctrl</translation>
     </message>
     <message>
         <source>add previous chord to selection</source>
-        <translation>add previous chord to selection</translation>
+        <translation>dodaj prethodni akord odabiru</translation>
     </message>
     <message>
         <source>left+shift</source>
-        <translation>left+shift</translation>
+        <translation>lijevo+shift</translation>
     </message>
     <message>
         <source>select to beginning of measure</source>
-        <translation>select to beginning of measure</translation>
+        <translation>odaberi do početka takta</translation>
     </message>
     <message>
         <source>add next chord to selection</source>
-        <translation>add next chord to selection</translation>
+        <translation>dodaj sljedeći akord odabiru</translation>
     </message>
     <message>
         <source>right+shift</source>
-        <translation>right+shift</translation>
+        <translation>desno+shift</translation>
     </message>
     <message>
         <source>select to end of measure</source>
-        <translation>select to end of measure</translation>
+        <translation>odaberi do kraja takta</translation>
     </message>
     <message>
         <source>right+ctrl+shift</source>
-        <translation>right+ctrl+shift</translation>
+        <translation>desno+ctrl+shift</translation>
     </message>
     <message>
         <source>select to beginning of line</source>
-        <translation>select to beginning of line</translation>
+        <translation>odaberi do početka retka</translation>
     </message>
     <message>
         <source>shift+home</source>
@@ -7149,7 +7149,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>select to end of line</source>
-        <translation>select to end of line</translation>
+        <translation>odaberi do kraja retka</translation>
     </message>
     <message>
         <source>shift+end</source>
@@ -7157,7 +7157,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>select to beginning of score</source>
-        <translation>select to beginning of score</translation>
+        <translation>odaberi do početka skladbe</translation>
     </message>
     <message>
         <source>ctrl+shift+home</source>
@@ -7165,7 +7165,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>select to end of score</source>
-        <translation>select to end of score</translation>
+        <translation>odaberi do kraja skladbe</translation>
     </message>
     <message>
         <source>ctrl+shift+end</source>
@@ -7173,11 +7173,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <source>add staff above to selection</source>
-        <translation>add stave above to selection</translation>
+        <translation>dodaj gornje crtovlje u odabir</translation>
     </message>
     <message>
         <source>add staff below to selection</source>
-        <translation>add stave below to selection</translation>
+        <translation>dodaj donje crtovlje u odabir</translation>
     </message>
     <message>
         <source>page-prev</source>
@@ -9082,8 +9082,8 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Cannot read this score:
 your version of MuseScore is too old.</source>
-        <translation>Cannot read this score:&#13;
-this version of MuseScore is too old.</translation>
+        <translation>Nemoguće je pročitati zapis:&#13;
+vaša inačica MuseScorea je prestara.</translation>
     </message>
 </context>
 <context>
