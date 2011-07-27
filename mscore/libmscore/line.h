@@ -96,10 +96,10 @@ class SLine : public Spanner {
       int tick()  const;
       int tick2() const;
 
-      LineSegment* frontSegment() const { return (LineSegment*)spannerSegments().front(); }
-      LineSegment* backSegment() const  { return (LineSegment*)spannerSegments().back();  }
-      LineSegment* takeFirstSegment()   { return (LineSegment*)spannerSegments().takeFirst(); }
-      LineSegment* takeLastSegment()    { return (LineSegment*)spannerSegments().takeLast(); }
+      LineSegment* frontSegment() const   { return (LineSegment*)spannerSegments().front(); }
+      LineSegment* backSegment() const    { return (LineSegment*)spannerSegments().back();  }
+      LineSegment* takeFirstSegment()     { return (LineSegment*)spannerSegments().takeFirst(); }
+      LineSegment* takeLastSegment()      { return (LineSegment*)spannerSegments().takeLast(); }
       LineSegment* segmentAt(int n) const { return (LineSegment*)spannerSegments().at(n); }
       };
 

@@ -28,7 +28,7 @@ class TrillSegment : public LineSegment {
    protected:
    public:
       TrillSegment(Score* s) : LineSegment(s) {}
-      Trill* trill() const                { return (Trill*)parent(); }
+      Trill* trill() const                { return (Trill*)spanner(); }
       virtual ElementType type() const    { return TRILL_SEGMENT; }
       virtual TrillSegment* clone() const { return new TrillSegment(*this); }
       virtual void draw(Painter*) const;

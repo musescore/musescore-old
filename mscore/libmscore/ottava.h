@@ -39,7 +39,7 @@ class OttavaSegment : public TextLineSegment {
       OttavaSegment(Score* s) : TextLineSegment(s) {}
       virtual ElementType type() const     { return OTTAVA_SEGMENT; }
       virtual OttavaSegment* clone() const { return new OttavaSegment(*this); }
-      Ottava* ottava() const               { return (Ottava*)parent(); }
+      Ottava* ottava() const               { return (Ottava*)spanner(); }
       };
 
 //---------------------------------------------------------

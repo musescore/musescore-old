@@ -3758,7 +3758,6 @@ void ScoreView::editInputTransition(QInputMethodEvent* ie)
 void ScoreView::setDropTarget(const Element* el)
       {
       if (dropTarget != el) {
-            QRectF r = dropTarget->abbox();
             if (dropTarget) {
                   dropTarget->setDropTarget(false);
                   _score->addRefresh(dropTarget->abbox());
