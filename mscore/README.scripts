@@ -2,6 +2,8 @@
       MuseScore Scripting Interface
 =====================================================
 
+Full documentation : http://musescore.org/en/node/4497
+
 MuseScore supports plugin extensions in ECMAScript code (ECMA-262 aka
 "Java Script").
 
