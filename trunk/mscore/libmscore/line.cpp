@@ -90,7 +90,10 @@ QPointF LineSegment::getGrip(int grip) const
 
 QPointF LineSegment::pagePos() const
       {
-      return pos() + parent()->pos();
+      QPointF pt(pos());
+      if (parent())
+            pt += parent()->pos();
+      return pt;
       }
 
 //---------------------------------------------------------

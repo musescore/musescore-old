@@ -30,7 +30,7 @@ class HairpinSegment : public LineSegment {
    protected:
    public:
       HairpinSegment(Score* s) : LineSegment(s) {}
-      Hairpin* hairpin() const              { return (Hairpin*)parent(); }
+      Hairpin* hairpin() const              { return (Hairpin*)spanner(); }
       virtual HairpinSegment* clone() const { return new HairpinSegment(*this); }
       virtual ElementType type() const      { return HAIRPIN_SEGMENT; }
       virtual void draw(Painter*) const;

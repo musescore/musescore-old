@@ -38,7 +38,7 @@ class TextLineSegment : public LineSegment {
       TextLineSegment(const TextLineSegment&);
       virtual TextLineSegment* clone() const { return new TextLineSegment(*this); }
       virtual ElementType type() const       { return TEXTLINE_SEGMENT; }
-      TextLine* textLine() const             { return (TextLine*)parent(); }
+      TextLine* textLine() const             { return (TextLine*)spanner(); }
       virtual void draw(Painter*) const;
       virtual QRectF bbox() const;
 

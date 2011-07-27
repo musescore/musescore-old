@@ -33,7 +33,7 @@ class VoltaSegment : public TextLineSegment {
       VoltaSegment(Score* s) : TextLineSegment(s) {}
       virtual ElementType type() const     { return VOLTA_SEGMENT; }
       virtual VoltaSegment* clone() const  { return new VoltaSegment(*this); }
-      Volta* volta() const                 { return (Volta*)parent(); }
+      Volta* volta() const                 { return (Volta*)spanner(); }
       };
 
 //---------------------------------------------------------
