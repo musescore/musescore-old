@@ -40,6 +40,7 @@ install(FILES
       mscore_gl.qm
       mscore_he.qm
       mscore_hi_IN.qm
+      mscore_hr.qm
       mscore_hu.qm
       mscore_id.qm      
       mscore_it.qm
