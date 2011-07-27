@@ -21,10 +21,7 @@
 #ifndef __SCANVAS_H__
 #define __SCANVAS_H__
 
-#include "globals.h"
-#include "libmscore/durationtype.h"
-#include "libmscore/mscore.h"
-#include "libmscore/mscoreview.h"
+#include "durationtype.h"
 
 class ChordRest;
 class Rest;
@@ -39,42 +36,7 @@ class Segment;
 class Measure;
 class System;
 class Score;
-class ScoreView;
-class Text;
-class MeasureBase;
-
-//---------------------------------------------------------
-//   CommandTransition
-//---------------------------------------------------------
-
-class CommandTransition : public QAbstractTransition
-      {
-      QString val;
-
-   protected:
-      virtual bool eventTest(QEvent* e);
-      virtual void onTransition(QEvent*) {}
-
-   public:
-      CommandTransition(const QString& cmd, QState* target) : val(cmd) {
-            setTargetState(target);
-            }
-      };
-
-//---------------------------------------------------------
-//   ScoreViewDragTransition
-//---------------------------------------------------------
-
-class ScoreViewDragTransition : public QMouseEventTransition
-      {
-      ScoreView* canvas;
-
-   protected:
-      virtual bool eventTest(QEvent* event);
-
-   public:
-      ScoreViewDragTransition(ScoreView* c, QState* target);
-      };
+class TextB;
 
 //---------------------------------------------------------
 //   CommandEvent
@@ -91,14 +53,12 @@ struct CommandEvent : public QEvent
 //   ScoreView
 //---------------------------------------------------------
 
-class ScoreView : public QWidget, public MuseScoreView {
+class ScoreView : public QWidget {
       Q_OBJECT
 
       enum States { NORMAL, DRAG, DRAG_OBJECT, EDIT, DRAG_EDIT, LASSO,
-            NOTE_ENTRY, MAG, PLAY, SEARCH, ENTRY_PLAY, FOTOMODE,
-            STATES
+            NOTE_ENTRY, MAG, PLAY, SEARCH, ENTRY_PLAY, STATES
             };
-      static const int MAX_GRIPS = 8;
 
       Score* _score;
 
@@ -118,7 +78,7 @@ class ScoreView : public QWidget, public MuseScoreView {
       QLineF dropAnchor;            ///< line to current anchor point during dragMove
 
       // in text edit mode text is framed
-      Text* _editText;
+      TextB* _editText;
 
       QTransform _matrix, imatrix;
       int _magIdx;
@@ -128,6 +88,7 @@ class ScoreView : public QWidget, public MuseScoreView {
       bool addSelect;
 
       QFocusFrame* focusFrame;
+      int level;
 
       Element* dragElement;   // valid in state DRAG_OBJECT
 
@@ -139,29 +100,27 @@ class ScoreView : public QWidget, public MuseScoreView {
 
       // editing mode
       int curGrip;
-      QRectF grip[8];         // edit "grips"
+      QRectF grip[4];         // edit "grips"
       int grips;              // number of used grips
-      Element* origEditObject;
-      Element* editObject;         ///< Valid in edit mode
-      int textUndoLevel;
 
       //--input state:
-      Cursor* _cursor;
-      Segment* cursorSegment;
-      int cursorTrack;
+      Cursor* cursor;
       ShadowNote* shadowNote;
 
       Lasso* lasso;           ///< temporarily drawn lasso selection
-      Lasso* _foto;
+      QRectF _lassoRect;
 
       QColor _bgColor;
       QColor _fgColor;
       QPixmap* bgPixmap;
       QPixmap* fgPixmap;
 
+      Element* origEditObject;
+      Element* editObject;          ///< Valid in edit mode
+      int textUndoLevel;
+
       virtual void paintEvent(QPaintEvent*);
       void paint(const QRect&, QPainter&);
-      void paint1(bool printMode, const QRectF&, QPainter&);
 
       void objectPopup(const QPoint&, Element*);
       void measurePopup(const QPoint&, Measure*);
@@ -169,7 +128,6 @@ class ScoreView : public QWidget, public MuseScoreView {
       void saveChord(Xml&);
 
       virtual bool event(QEvent* event);
-      virtual bool gestureEvent(QGestureEvent*);
       virtual void resizeEvent(QResizeEvent*);
       virtual void wheelEvent(QWheelEvent*);
       virtual void dragEnterEvent(QDragEnterEvent*);
@@ -200,47 +158,28 @@ class ScoreView : public QWidget, public MuseScoreView {
       void lyricsUnderscore();
       void harmonyEndEdit();
       void chordTab(bool back);
-      void cmdInsertNote(int note);
+      void chordTabTab(bool back);
       void cmdAddPitch(int note, bool addFlag);
       void cmdAddPitch1(int, bool);
       void cmdAddChordName();
       void cmdAddText(int style);
-      void cmdEnterRest(const Duration&);
+      void cmdEnterRest(const Duration& d);
       void cmdEnterRest();
-      void cmdTuplet(int n, ChordRest*);
+      void cmdTuplet(int n, ChordRest* cr);
       void cmdTuplet(int);
       void cmdRepeatSelection();
-      void cmdChangeEnharmonic(bool);
-
-      Page* point2page(const QPointF&);
-      void setupFotoMode();
-
-      void insertMeasures(int, ElementType);
-      MeasureBase* insertMeasure(ElementType, int tick);
-
-      void appendMeasures(int, ElementType);
-      MeasureBase* appendMeasure(ElementType);
-      void cmdInsertMeasure(ElementType);
-      void createElementPropertyMenu(Element* e, QMenu*);
-      void genPropertyMenu1(Element* e, QMenu* popup);
-      void genPropertyMenuText(Element* e, QMenu* popup);
-      void elementPropertyAction(const QString&, Element* e);
-      void paintPageBorder(QPainter& p, Page* page);
 
    private slots:
       void textUndoLevelAdded();
       void enterState();
       void exitState();
-      void startFotomode();
-      void stopFotomode();
-      void startFotoDrag();
-      void endFotoDrag();
-      void endFotoDragEdit();
 
    public slots:
+      void moveCursor();
       void setViewRect(const QRectF&);
+      void dataChanged(const QRectF&);
 
-      virtual void startEdit();
+      void startEdit();
       void endEdit();
       void endStartEdit() { endEdit(); startEdit(); }
 
@@ -254,6 +193,7 @@ class ScoreView : public QWidget, public MuseScoreView {
 
       void endLasso();
       void deselectAll();
+      void adjustCanvasPosition(Element* el, bool playBack);
 
       void editCopy();
       void editPaste();
@@ -262,23 +202,17 @@ class ScoreView : public QWidget, public MuseScoreView {
       void normalCopy();
       void normalPaste();
 
-      void cloneElement(Element* e);
-      void doFotoDragEdit(QMouseEvent* ev);
-
    signals:
       void viewRectChanged();
-      void scaleChanged(double);
-      void offsetChanged(double, double);
 
    public:
       ScoreView(QWidget* parent = 0);
       ~ScoreView();
 
-      virtual void startEdit(Element*, int startGrip);
+      void startEdit(Element*, int startGrip);
       void startEdit(Element*);
 
       void moveCursor(Segment*, int staffIdx);
-      int cursorTick() const;
       void setCursorOn(bool);
       void setBackground(QPixmap*);
       void setBackground(const QColor&);
@@ -287,12 +221,14 @@ class ScoreView : public QWidget, public MuseScoreView {
 
       Page* addPage();
       void modifyElement(Element* obj);
-      virtual void setScore(Score* s);
-      virtual void removeScore()  { _score = 0; }
+      void setScore(Score* s);
 
       void setMag(qreal m);
+      void redraw(const QRectF& r);
       Element* elementAt(const QPointF& pp);
-      virtual Element* elementNear(QPointF pp);
+      Element* elementNear(const QPointF& pp);
+      QRectF lassoRect() const { return _lassoRect; }
+      void setLassoRect(const QRectF& r) { _lassoRect = r; }
       bool navigatorVisible() const;
       void cmd(const QAction* a);
 
@@ -300,7 +236,6 @@ class ScoreView : public QWidget, public MuseScoreView {
       void startUndoRedo();
       void endUndoRedo();
       void zoom(int step, const QPoint& pos);
-      void zoom(qreal _mag, const QPointF& pos);
       void contextPopup(QMouseEvent* ev);
       void setOrigEditObject(Element* e) { origEditObject = e; }
       void editKey(QKeyEvent*);
@@ -309,30 +244,27 @@ class ScoreView : public QWidget, public MuseScoreView {
       void noteEntryButton(QMouseEvent* ev);
       void doDragElement(QMouseEvent* ev);
       void doDragLasso(QMouseEvent* ev);
-      void doDragFoto(QMouseEvent* ev);
       void doDragEdit(QMouseEvent* ev);
       void select(QMouseEvent*);
       bool mousePress(QMouseEvent* ev);
       bool testElementDragTransition(QMouseEvent* ev) const;
       bool editElementDragTransition(QMouseEvent* ev);
-      bool fotoEditElementDragTransition(QMouseEvent* ev);
       bool editScoreViewDragTransition(QMouseEvent* e);
       void cmdAddSlur();
-      virtual void cmdAddSlur(Note* firstNote, Note* lastNote);
+      void cmdAddSlur(Note* firstNote, Note* lastNote);
       bool noteEntryMode() const;
       bool editMode() const;
-      bool fotoMode() const;
 
       void editInputTransition(QInputMethodEvent* ie);
       void onEditPasteTransition(QMouseEvent* ev);
 
       Score* score() const                      { return _score; }
-      virtual void setDropRectangle(const QRectF&);
+      void setDropRectangle(const QRectF&);
       void setDropTarget(const Element*);
       void setDropAnchor(const QLineF&);
-      virtual const QTransform& matrix() const           { return _matrix; }
-      void setEditText(Text* t)                 { _editText = t;      }
-      Text* editText() const                    { return _editText;   }
+      const QTransform& matrix() const           { return _matrix; }
+      void setEditText(TextB* t)                 { _editText = t;      }
+      TextB* editText() const                    { return _editText;   }
       qreal mag() const;
       int magIdx() const                         { return _magIdx; }
       void setMag(int idx, double mag);
@@ -345,61 +277,14 @@ class ScoreView : public QWidget, public MuseScoreView {
       void pageTop();
       void pageEnd();
       QPointF toLogical(const QPoint& p) const { return imatrix.map(QPointF(p)); }
-      QRectF  toLogical(const QRectF& r) const { return imatrix.mapRect(r);      }
-      QRect toPhysical(const QRectF& r) const { return _matrix.mapRect(r).toRect(); }
-
+      QRectF toLogical(const QRectF& r) const { return imatrix.mapRect(r); }
       void search(const QString& s);
-      void search(int i);
-      void selectMeasure(int m);
       void postCmd(const char* cmd)   { sm->postEvent(new CommandEvent(cmd));  }
       void setFocusRect();
       Element* getDragElement() const { return dragElement; }
-      void changeVoice(int voice);
-      void drawBackground(QPainter& p, QRectF r);
-      bool fotoScoreViewDragTest(QMouseEvent*);
-      bool fotoScoreViewDragRectTest(QMouseEvent*);
-      void doDragFotoRect(QMouseEvent*);
-      void fotoContextPopup(QMouseEvent*);
-      bool fotoRectHit(const QPoint& p);
-      void paintRect(bool printMode, QPainter& p, const QRectF& r, double mag);
-      bool saveFotoAs(bool printMode, const QRectF&);
-      void fotoDragDrop(QMouseEvent*);
-      const QRectF& getGrip(int n) const { return grip[n]; }
-      int gripCount() const { return grips; }              // number of used grips
-      void changeEditElement(Element*);
-
-      void cmdAppendMeasures(int, ElementType);
-      void cmdInsertMeasures(int, ElementType);
-
-      ScoreState mscoreState() const;
-      void setCursorVisible(bool v);
-      void showOmr(bool flag);
-      Element* getCurElement() const { return curElement; }   // current item at mouse press
+      void changeLineSegment(bool);
       void midiNoteReceived(int pitch, bool);
-      void setEditPos(const QPointF&);
-
-      virtual void moveCursor();
-      virtual void dataChanged(const QRectF&);
-      virtual void updateAll();
-      virtual void adjustCanvasPosition(const Element* el, bool playBack);
-      virtual void setCursor(const QCursor& c) { QWidget::setCursor(c); }
-      virtual QCursor cursor() const { return QWidget::cursor(); }
-      };
-
-//---------------------------------------------------------
-//   DragTransition
-//---------------------------------------------------------
-
-class DragTransition : public QEventTransition
-      {
-      ScoreView* canvas;
-
-   protected:
-      virtual void onTransition(QEvent* e);
-
-   public:
-      DragTransition(ScoreView* c)
-         : QEventTransition(c, QEvent::MouseMove), canvas(c) {}
+      void changeVoice(int voice);
       };
 
 extern int searchStaff(const Element* element);

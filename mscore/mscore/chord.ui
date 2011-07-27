@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>307</width>
-    <height>185</height>
+    <width>423</width>
+    <height>253</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -26,134 +26,129 @@
       <string notr="true" comment="do not translate">Chord</string>
      </property>
      <property name="flat">
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
-     <layout class="QGridLayout" name="gridLayout">
+     <layout class="QVBoxLayout">
       <property name="spacing">
-       <number>0</number>
+       <number>6</number>
       </property>
-      <item row="0" column="0">
-       <widget class="QPushButton" name="hookButton">
-        <property name="toolTip">
-         <string notr="true"/>
+      <property name="margin">
+       <number>8</number>
+      </property>
+      <item>
+       <layout class="QGridLayout" name="gridLayout" rowminimumheight="0,0">
+        <property name="topMargin">
+         <number>0</number>
         </property>
-        <property name="text">
-         <string notr="true" comment="do not translate">Hook</string>
+        <property name="bottomMargin">
+         <number>0</number>
         </property>
-       </widget>
+        <item row="0" column="0">
+         <widget class="QPushButton" name="hookButton">
+          <property name="toolTip">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string notr="true" comment="do not translate">Hook</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QPushButton" name="stemButton">
+          <property name="toolTip">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string notr="true" comment="do not translate">Stem</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QPushButton" name="stemSlashButton">
+          <property name="text">
+           <string notr="true" extracomment="do not translate">StemSlash</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QPushButton" name="arpeggioButton">
+          <property name="text">
+           <string>Arpeggio</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QPushButton" name="tremoloButton">
+          <property name="text">
+           <string>Tremolo</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QPushButton" name="glissandoButton">
+          <property name="text">
+           <string>Glissando</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
-      <item row="0" column="1" colspan="3">
-       <widget class="QPushButton" name="stemButton">
-        <property name="toolTip">
-         <string notr="true"/>
+      <item>
+       <layout class="QHBoxLayout">
+        <property name="spacing">
+         <number>6</number>
         </property>
-        <property name="text">
-         <string notr="true" comment="do not translate">Stem</string>
+        <property name="margin">
+         <number>0</number>
         </property>
-       </widget>
+        <item>
+         <widget class="QCheckBox" name="graceNote">
+          <property name="text">
+           <string notr="true" comment="do not translate">Grace Note</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string notr="true" comment="do not translate">Stem Direction</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="stemDirection"/>
+        </item>
+       </layout>
       </item>
-      <item row="0" column="4" colspan="2">
-       <widget class="QPushButton" name="stemSlashButton">
-        <property name="text">
-         <string notr="true" extracomment="do not translate">StemSlash</string>
+      <item>
+       <layout class="QGridLayout">
+        <property name="margin">
+         <number>0</number>
         </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QPushButton" name="arpeggioButton">
-        <property name="text">
-         <string>Arpeggio</string>
+        <property name="spacing">
+         <number>6</number>
         </property>
-       </widget>
-      </item>
-      <item row="1" column="1" colspan="3">
-       <widget class="QPushButton" name="tremoloButton">
-        <property name="text">
-         <string>Tremolo</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="4" colspan="2">
-       <widget class="QPushButton" name="glissandoButton">
-        <property name="text">
-         <string>Glissando</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0" colspan="2">
-       <widget class="QCheckBox" name="graceNote">
-        <property name="text">
-         <string notr="true" comment="do not translate">Grace Note</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="2" colspan="3">
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string notr="true" comment="do not translate">Stem Direction</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="5">
-       <widget class="QComboBox" name="stemDirection"/>
-      </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="label_2">
-        <property name="text">
-         <string notr="true" comment="do not translate">Notes:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="3" colspan="3">
-       <widget class="QLabel" name="label_3">
-        <property name="text">
-         <string notr="true" comment="do not translate">Ledger Lines:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="0" colspan="3">
-       <widget class="QListWidget" name="notes">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>50</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>50</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="3" colspan="3">
-       <widget class="QListWidget" name="helplineList">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>50</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>50</height>
-         </size>
-        </property>
-       </widget>
+        <item row="1" column="1">
+         <widget class="QListWidget" name="helplineList"/>
+        </item>
+        <item row="1" column="0">
+         <widget class="QListWidget" name="notes"/>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string notr="true" comment="do not translate">Notes:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLabel" name="label_3">
+          <property name="text">
+           <string notr="true" comment="do not translate">Help Lines:</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
      </layout>
     </widget>

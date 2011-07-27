@@ -24,8 +24,6 @@
 static const int pianoWidth = 40;
 static const int keyHeight = 13;
 
-enum PianoOrientation { PIANO_HORIZONTAL, PIANO_VERTICAL };
-
 //---------------------------------------------------------
 //   Piano
 //---------------------------------------------------------
@@ -33,7 +31,6 @@ enum PianoOrientation { PIANO_HORIZONTAL, PIANO_VERTICAL };
 class Piano : public QWidget {
       Q_OBJECT
 
-      PianoOrientation _orientation;
       double _ymag;
       int _ypos;
 
@@ -68,7 +65,6 @@ class Piano : public QWidget {
 
    public:
       Piano(QWidget* parent = 0);
-      void setOrientation(PianoOrientation);
       };
 
 #endif

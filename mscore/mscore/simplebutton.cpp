@@ -29,9 +29,8 @@ SimpleButton::SimpleButton(const QString& on, const QString& off, QWidget* paren
    : QToolButton(parent)
       {
       setAutoRaise(true);
-      QIcon icon(on);
+      QIcon icon;
       icon.addFile(on,  QSize(), QIcon::Normal, QIcon::On);
-      icon.addFile(on,  QSize(), QIcon::Active, QIcon::On);
       icon.addFile(off, QSize(), QIcon::Normal, QIcon::Off);
       QAction* a = new QAction(this);
       a->setIcon(icon);

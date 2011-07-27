@@ -1,14 +1,21 @@
 //=============================================================================
 //  MuseScore
-//  Music Composition & Notation
+//  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2009-2011 Werner Schweer
+//  Copyright (C) 2009 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
-//  it under the terms of the GNU General Public License version 2
-//  as published by the Free Software Foundation and appearing in
-//  the file LICENCE.GPL
+//  it under the terms of the GNU General Public License version 2.
+//
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with this program; if not, write to the Free Software
+//  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
 #ifndef _BB_H__
@@ -19,7 +26,6 @@
 const int MAX_BARS = 255;
 
 class BBFile;
-class MNote;
 
 //---------------------------------------------------------
 //   BBTrack
@@ -41,8 +47,8 @@ class BBTrack {
       EventList& events()               { return _events;     }
       int outChannel() const            { return _outChannel; }
       void setOutChannel(int n)         { _outChannel = n;    }
-      void insert(const Event& e)       { _events.insert(e);  }
-      void append(const Event& e)       { _events.append(e);  }
+      void insert(Event* e)             { _events.insert(e);  }
+      void append(Event* e)             { _events.append(e);  }
 
       void findChords();
       int separateVoices(int);
@@ -136,7 +142,6 @@ class BBFile {
 
       int timesigZ() { return styles[_style].timesigZ; }
       int timesigN() { return styles[_style].timesigN; }
-      int processPendingNotes(Score*, QList<MNote*>* notes, int, int);
 
    public:
       BBFile();
@@ -151,7 +156,6 @@ class BBFile {
       int endChorus() const          { return _endChorus;   }
       int repeats() const            { return _repeats;     }
       int key() const                { return _key;         }
-      void convertTrack(Score* score, BBTrack* track, int staffIdx);
       };
 
 #endif

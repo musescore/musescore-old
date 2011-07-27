@@ -34,15 +34,4 @@ MidiPanKnob::MidiPanKnob(QWidget* parent)
       setLineStep(1.0f);
       setPageStep(10.0f);
       }
-
-//---------------------------------------------------------
-//   valueChange
-//---------------------------------------------------------
-
-void MidiPanKnob::valueChange()
-      {
-      emit valueChanged(_value + 64.0f, _id);
-      update();
-      }
-
 }

@@ -252,8 +252,8 @@ DECL_FUNCTION(jack_nframes_t, jack_get_current_transport_frame, (const jack_clie
 DECL_FUNCTION(int, jack_transport_reposition, (jack_client_t *client, jack_position_t *pos), (client, pos));
 DECL_VOID_FUNCTION(jack_transport_start, (jack_client_t *client), (client));
 DECL_VOID_FUNCTION(jack_transport_stop, (jack_client_t *client), (client));
-// DECL_VOID_FUNCTION(jack_get_transport_info, (jack_client_t *client, jack_transport_info_t *tinfo), (client,tinfo));
-// DECL_VOID_FUNCTION(jack_set_transport_info, (jack_client_t *client, jack_transport_info_t *tinfo), (client,tinfo));
+DECL_VOID_FUNCTION(jack_get_transport_info, (jack_client_t *client, jack_transport_info_t *tinfo), (client,tinfo));
+DECL_VOID_FUNCTION(jack_set_transport_info, (jack_client_t *client, jack_transport_info_t *tinfo), (client,tinfo));
 
 DECL_FUNCTION(int, jack_client_real_time_priority, (jack_client_t* client), (client));
 DECL_FUNCTION(int, jack_client_max_real_time_priority, (jack_client_t* client), (client));

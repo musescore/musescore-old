@@ -25,24 +25,33 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="text">
+        <string>Back</string>
+       </property>
        <property name="icon">
-        <iconset resource="musescore.qrc">
+        <iconset resource="mscore.qrc">
          <normaloff>:/data/previous.png</normaloff>:/data/previous.png</iconset>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QToolButton" name="forward">
+       <property name="text">
+        <string>Forward</string>
+       </property>
        <property name="icon">
-        <iconset resource="musescore.qrc">
+        <iconset resource="mscore.qrc">
          <normaloff>:/data/next.png</normaloff>:/data/next.png</iconset>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QToolButton" name="reload">
+       <property name="text">
+        <string>...</string>
+       </property>
        <property name="icon">
-        <iconset resource="musescore.qrc">
+        <iconset resource="mscore.qrc">
          <normaloff>:/data/reload.png</normaloff>:/data/reload.png</iconset>
        </property>
       </widget>
@@ -116,7 +125,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="musescore.qrc"/>
+  <include location="mscore.qrc"/>
  </resources>
  <connections/>
 </ui>

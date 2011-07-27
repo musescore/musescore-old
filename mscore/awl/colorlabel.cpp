@@ -22,87 +22,33 @@
 
 namespace Awl {
 
-//---------------------------------------------------------
-//   ColorLabel
-//---------------------------------------------------------
+      //---------------------------------------------------------
+      //   paintEvent
+      //---------------------------------------------------------
 
-ColorLabel::ColorLabel(QWidget* parent)
-   : QFrame (parent)
-      {
-      _color  = Qt::blue;
-      _pixmap = 0;
-      }
-
-ColorLabel::~ColorLabel()
-      {
-      delete _pixmap;
-      }
-
-//---------------------------------------------------------
-//   setColor
-//---------------------------------------------------------
-
-void ColorLabel::setColor(const QColor& c)
-      {
-      _color = c;
-      update();
-      }
-
-//---------------------------------------------------------
-//   setPixmap
-//---------------------------------------------------------
-
-void ColorLabel::setPixmap(QPixmap* pm)
-      {
-      delete _pixmap;
-      _pixmap = pm;
-      update();
-      }
-
-//---------------------------------------------------------
-//   sizeHint
-//---------------------------------------------------------
-
-QSize ColorLabel::sizeHint() const
-      {
-      return QSize(50, 20);
-      }
-
-//---------------------------------------------------------
-//   paintEvent
-//---------------------------------------------------------
-
-void ColorLabel::paintEvent(QPaintEvent* ev)
-      {
-      {
-      QPainter p(this);
-      int fw = frameWidth();
-      QRect r(frameRect().adjusted(fw, fw, -2*fw, -2*fw));
-      if (_pixmap)
-            p.drawTiledPixmap(r, *_pixmap);
-      else
+      void ColorLabel::paintEvent(QPaintEvent* ev)
+            {
+            QFrame::paintEvent(ev);
+            QPainter p(this);
+            int fw = frameWidth();
+            QRect r(frameRect().adjusted(fw, fw, -2*fw, -2*fw));
             p.fillRect(r, _color);
-      }
-      QFrame::paintEvent(ev);
-      }
+            }
 
-//---------------------------------------------------------
-//   mousePressEvent
-//---------------------------------------------------------
+      //---------------------------------------------------------
+      //   mousePressEvent
+      //---------------------------------------------------------
 
-void ColorLabel::mousePressEvent(QMouseEvent*)
-      {
-      if (_pixmap)
-            return;
-      QColor c = QColorDialog::getColor(_color, this);
-      if (c.isValid()) {
-            if (_color != c) {
-                  _color = c;
-                  emit colorChanged(_color);
-                  update();
+      void ColorLabel::mousePressEvent(QMouseEvent*)
+            {
+            QColor c = QColorDialog::getColor(_color, this);
+            if (c.isValid()) {
+                  if (_color != c) {
+                        _color = c;
+                        emit colorChanged(_color);
+                        update();
+                        }
                   }
             }
-      }
 
-} // namespace Awl
-
+      } // namespace Awl

@@ -19,9 +19,7 @@
 //=============================================================================
 
 #include "boxproperties.h"
-#include "libmscore/box.h"
-#include "libmscore/score.h"
-#include "libmscore/undo.h"
+#include "box.h"
 
 //---------------------------------------------------------
 //   BoxProperties
@@ -32,15 +30,6 @@ BoxProperties::BoxProperties(Box* b, QWidget* parent)
       {
       _box = b;
       setupUi(this);
-
-      if (b->type() == HBOX) {     // enable width and set it to box width
-            frameWidth->setEnabled(true);
-            frameWidth->setValue(b->boxWidth().val());
-            }
-      if(b->type() == VBOX) {     // enable height and set it to box height
-            frameHeight->setEnabled(true);
-            frameHeight->setValue(b->boxHeight().val());
-            }
 
       leftMargin->setValue(b->leftMargin());
       rightMargin->setValue(b->rightMargin());
@@ -55,14 +44,9 @@ BoxProperties::BoxProperties(Box* b, QWidget* parent)
 
 void BoxProperties::ok()
       {
-      ElementType type = _box->type();
-      // scan selection and update each element of the same type of this one
-      foreach (Element* elem, _box->score()->selection().elements()) {
-            if (elem->type() == type) {  // if current element matches type of this box, push new box props in undo stack
-                  Box* box = static_cast<Box*>(elem);
-                  box->score()->undo()->push(new ChangeBoxProperties(box, leftMargin->value(), topMargin->value(),
-                        rightMargin->value(), bottomMargin->value(), frameHeight->value(), frameWidth->value()));
-                  }
-            }
+      _box->setLeftMargin(leftMargin->value());
+      _box->setRightMargin(rightMargin->value());
+      _box->setTopMargin(topMargin->value());
+      _box->setBottomMargin(bottomMargin->value());
       }
 

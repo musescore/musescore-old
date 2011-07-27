@@ -19,8 +19,6 @@
 #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #=============================================================================
 
-include (${PROJECT_SOURCE_DIR}/cmake/gch.cmake)
-
 add_library(bww STATIC
    lexer.cpp
    parser.cpp
@@ -28,7 +26,7 @@ add_library(bww STATIC
    writer.cpp
    )
 
-if (NOT MINGW)
+if (NOT MINGW AND NOT APPLE)
 add_executable(bww2mxml
    lexer.cpp
    main.cpp
@@ -38,18 +36,8 @@ add_executable(bww2mxml
    writer.cpp
    )
 
-
-set_target_properties (
-      bww2mxml
-      PROPERTIES
-         COMPILE_FLAGS "-x c++ -include ${PROJECT_BINARY_DIR}/all.h -g -Wall -Wextra -Winvalid-pch"
-      )
-endif (NOT MINGW)
-
 target_link_libraries(bww2mxml
    ${QT_LIBRARIES}
    )
-
-ADD_DEPENDENCIES(al mops1)
-ADD_DEPENDENCIES(al mops2)
+endif (NOT MINGW AND NOT APPLE)
 

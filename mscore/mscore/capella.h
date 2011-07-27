@@ -21,8 +21,6 @@
 #ifndef __CAPELLA_H__
 #define __CAPELLA_H__
 
-#include "globals.h"
-
 enum TIMESTEP { D1, D2, D4, D8, D16, D32, D64, D128, D256, D_BREVE };
 
 #if 0
@@ -32,8 +30,7 @@ static const char* timeNames[] = { "1/1", "1/2", "1/4", "1/8", "1/16", "1/32", "
 
 class Capella;
 
-enum CapellaNoteObjectType {
-      T_REST, T_CHORD, T_CLEF, T_KEY, T_METER, T_EXPL_BARLINE, T_IMPL_BARLINE,
+enum {T_REST, T_CHORD, T_CLEF, T_KEY, T_METER, T_EXPL_BARLINE, T_IMPL_BARLINE,
       T_PAGE_BKGR
       };
 
@@ -56,24 +53,11 @@ class CapellaObj {
 //---------------------------------------------------------
 
 class NoteObj {
-      CapellaNoteObjectType _type;
+      int _type;
 
    public:
-      NoteObj(CapellaNoteObjectType t) { _type = t; }
-      CapellaNoteObjectType type() const  { return _type; }
-      };
-
-enum FORM {
-      FORM_G, FORM_C, FORM_F, FORM_PERCUSSION,
-      FORM_NULL, CLEF_UNCHANGED
-      };
-
-enum CLEF_LINE {
-      LINE_5, LINE_4, LINE_3, LINE_2, LINE_1
-      };
-
-enum OCT  {
-      OCT_ALTA, OCT_NULL, OCT_BASSA
+      NoteObj(int t) { _type = t; }
+      int type() const  { return _type; }
       };
 
 //---------------------------------------------------------
@@ -81,6 +65,12 @@ enum OCT  {
 //---------------------------------------------------------
 
 class CapClef : public NoteObj, public CapellaObj {
+      enum FORM { FORM_G, FORM_C, FORM_F, FORM_PERCUSSION,
+                  FORM_NULL, CLEF_UNCHANGED
+                  };
+      enum LINE {LINE_5, LINE_4, LINE_3, LINE_2, LINE_1};
+      enum OCT  {OCT_ALTA, OCT_NULL, OCT_BASSA};
+
       FORM form;
 
    public:
@@ -90,11 +80,10 @@ class CapClef : public NoteObj, public CapellaObj {
             static const char* formName[] = { "G", "C", "F", "=", " ", "*" };
             return formName[form];
             }
-      ClefType clef() const;
+      int clef() const;
 
-      CLEF_LINE line;
+      LINE line;
       OCT  oct;
-      static ClefType clefType(FORM, CLEF_LINE, OCT);
       };
 
 //---------------------------------------------------------
@@ -106,7 +95,7 @@ class CapKey : public NoteObj, public CapellaObj {
    public:
       CapKey(Capella* c) : NoteObj(T_KEY), CapellaObj(c) {}
       void read();
-      int signature;    // -7 - +7
+      int signature;
       };
 
 //---------------------------------------------------------
@@ -128,17 +117,15 @@ class CapMeter : public NoteObj, public CapellaObj {
 //---------------------------------------------------------
 
 class CapExplicitBarline : public NoteObj, public CapellaObj {
-      int _type;
-      int _barMode;      // 0 = auto, 1 = nur Zeilen, 2 = durchgezogen
+      enum {BAR_SINGLE, BAR_DOUBLE, BAR_END,
+            BAR_REPEND, BAR_REPSTART, BAR_REPENDSTART};
+
+      int type;
+      int barMode;      // 0 = auto, 1 = nur Zeilen, 2 = durchgezogen
 
    public:
-      CapExplicitBarline(Capella* c) : NoteObj(T_EXPL_BARLINE), CapellaObj(c) {}
+      CapExplicitBarline(Capella* c) : NoteObj(T_IMPL_BARLINE), CapellaObj(c) {}
       void read();
-      int type() const    { return _type; }
-      int barMode() const { return _barMode; }
-
-      enum { BAR_SINGLE, BAR_DOUBLE, BAR_END,
-            BAR_REPEND, BAR_REPSTART, BAR_REPENDSTART};
       };
 
 //---------------------------------------------------------
@@ -146,8 +133,8 @@ class CapExplicitBarline : public NoteObj, public CapellaObj {
 //---------------------------------------------------------
 
 struct CapVoice {
-      uchar y0Lyrics;
-      uchar dyLyrics;
+      unsigned char y0Lyrics;
+      unsigned char dyLyrics;
       QFont lyricsFont;
       unsigned char stemDir;
       QList<NoteObj*> objects;
@@ -159,11 +146,11 @@ struct CapVoice {
 //---------------------------------------------------------
 
 struct CapStaff {
-      uchar numerator;      // default time signature
+      unsigned char numerator;      // default time signature
       int log2Denom;
       bool allaBreve;
 
-      uchar iLayout;
+      unsigned char iLayout;
       int topDistX;
       int btmDistX;
       QColor color;
@@ -175,18 +162,16 @@ struct CapStaff {
 //---------------------------------------------------------
 
 struct CapStaffLayout {
-      uchar barlineMode;
-      uchar noteLines;
+      unsigned char barlineMode;
+      unsigned char noteLines;
       bool bSmall;
       int topDist;
       int btmDist;
       int groupDist;
-      uchar barlineFrom;
-      uchar barlineTo;
+      unsigned char barlineFrom;
+      unsigned char barlineTo;
 
-      FORM form;
-      CLEF_LINE line;
-      OCT oct;                // clef
+      int form, line, oct;          // clef
 
       // Schlagzeuginformation
       bool bPercussion;             // use drum channel
@@ -254,7 +239,7 @@ class BasicRectObj : public BasicDrawObj {
       BasicRectObj(int t, Capella* c) : BasicDrawObj(t, c) {}
       void read();
 
-      QPointF relPos;
+      QPoint relPos;
       int width;
       int yxRatio;
       int height;
@@ -269,7 +254,7 @@ class GroupObj : public BasicDrawObj {
       GroupObj(Capella* c) : BasicDrawObj(CAP_GROUP, c) {}
       void read();
 
-      QPointF relPos;
+      QPoint relPos;
       QList<BasicDrawObj*> objects;
       };
 
@@ -282,7 +267,7 @@ class TransposableObj : public BasicDrawObj {
       TransposableObj(Capella* c) : BasicDrawObj(CAP_TRANSPOSABLE, c) {}
       void read();
 
-      QPointF relPos;
+      QPoint relPos;
       char b;
       QList<BasicDrawObj*> variants;
       };
@@ -291,9 +276,9 @@ class TransposableObj : public BasicDrawObj {
 //   MetafileObj
 //---------------------------------------------------------
 
-class MetafileObj : public BasicRectObj {
+class MetafileObj : public BasicDrawObj {
    public:
-      MetafileObj(Capella* c) : BasicRectObj(CAP_METAFILE, c) {}
+      MetafileObj(Capella* c) : BasicDrawObj(CAP_METAFILE, c) {}
       void read();
       };
 
@@ -308,7 +293,7 @@ class LineObj : public BasicDrawObj {
       LineObj(int t, Capella* c) : BasicDrawObj(t, c) {}
       void read();
 
-      QPointF pt1, pt2;
+      QPoint pt1, pt2;
       QColor color;
       char lineWidth;
       };
@@ -397,7 +382,7 @@ class GuitarObj : public BasicDrawObj {
       GuitarObj(Capella* c) : BasicDrawObj(CAP_GUITAR, c) {}
       void read();
 
-      QPointF relPos;
+      QPoint relPos;
       QColor color;
       short flags;
       int strings;      // 8 Saiten in 8 Halbbytes
@@ -422,7 +407,7 @@ class TrillObj : public BasicDrawObj {
 //---------------------------------------------------------
 
 class SlurObj : public BasicDrawObj {
-      QPointF bezierPoint[4];
+      QPoint bezierPoint[4];
       QColor color;
 
    public:
@@ -451,7 +436,7 @@ class TextObj : public BasicRectObj {
 
 class SimpleTextObj : public BasicDrawObj {
       char* _text;
-      QPointF relPos;
+      QPoint relPos;
       unsigned char align;
       QFont _font;
 
@@ -461,7 +446,6 @@ class SimpleTextObj : public BasicDrawObj {
       void read();
       QString text() const { return QString(_text); }
       QFont font() const { return _font; }
-      QPointF pos() const { return relPos; }
       };
 
 //---------------------------------------------------------
@@ -496,7 +480,7 @@ class WedgeObj : public LineObj {
 //---------------------------------------------------------
 
 class BasicDurationalObj : public CapellaObj {
-   public:
+   protected:
       int nDots;
       bool noDuration;
       bool postGrace;
@@ -612,7 +596,7 @@ class Capella {
       unsigned char beamRelMax1;
       unsigned nRel;                // presentation parameter
       unsigned nAbs;
-      bool bUseRealSize;
+      bool bUseReadSize;
       bool bAllowCompression;
       bool bPrintLandscape;
 
@@ -630,8 +614,11 @@ class Capella {
       unsigned btmPageMargins;
 
       QList<QFont> fonts;
-      QList<CapStaffLayout*> _staffLayouts;      // staff layout
+      QList<CapStaffLayout*> staves;      // staff layout
 
+      int smallLineDist;            // layout
+      int normalLineDist;
+      int topDist;
       int interDist;
       unsigned char txtAlign;       // Stimmenbezeichnungen 0=links, 1=zentriert, 2=rechts
       unsigned char adjustVert;     // 0=nein, 1=außer letzte Seite, 3=alle Seiten
@@ -672,17 +659,11 @@ class Capella {
       QList<BasicDrawObj*> readDrawObjectArray();
       void read(void* p, qint64 len);
       QFont readFont();
-      QPointF readPoint();
+      QPoint readPoint();
 
       QList<CapSystem*> systems;
       QList<CapBracket> brackets;
       ChordObj* backgroundChord;
-      CapStaffLayout* staffLayout(int idx)               { return _staffLayouts[idx]; }
-      const QList<CapStaffLayout*>& staffLayouts() const { return _staffLayouts; }
-
-      double smallLineDist;            // spatium unit in metric mm
-      double normalLineDist;
-      int topDist;
       };
 
 #endif

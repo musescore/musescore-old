@@ -25,7 +25,7 @@
 //   VoiceSelector
 //---------------------------------------------------------
 
-class VoiceSelector : public QFrame {
+class VoiceSelector : public QWidget {
       Q_OBJECT
 
    signals:
@@ -45,10 +45,10 @@ class VoiceButton : public QToolButton {
       int voice;
 
       virtual void paintEvent(QPaintEvent*);
+      virtual QSize sizeHint() const;
 
    public:
       VoiceButton(int voice, QWidget* parent = 0);
-      virtual QSize sizeHint() const { return QSize(16,8); }
       };
 
 #endif

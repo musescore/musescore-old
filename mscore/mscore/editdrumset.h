@@ -22,7 +22,7 @@
 #define __EDITDRUMSET_H__
 
 #include "ui_editdrumset.h"
-#include "libmscore/drumset.h"
+#include "drumset.h"
 
 //---------------------------------------------------------
 //   EditDrumset
@@ -34,7 +34,11 @@ class EditDrumset : public QDialog, private Ui::EditDrumsetBase {
       Drumset* oDrumset;
       Drumset  nDrumset;
 
+      QPushButton* loadButton;
+      QPushButton* saveButton;
       void apply();
+      void load();
+      void save();
       void updateList();
       void updateList2();
       void updateExample();
@@ -45,8 +49,6 @@ class EditDrumset : public QDialog, private Ui::EditDrumsetBase {
       void nameChanged(const QString&);
       void shortcutChanged();
       void valueChanged();
-      void load();
-      void save();
 
    public:
       EditDrumset(Drumset* ds, QWidget* parent = 0);

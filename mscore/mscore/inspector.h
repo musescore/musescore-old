@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2011 Werner Schweer and others
+//  Copyright (C) 2002-2009 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -42,13 +42,6 @@
 #include "ui_lyrics.h"
 #include "ui_beam.h"
 #include "ui_tremolo.h"
-#include "ui_spanner.h"
-#include "ui_slursegment.h"
-#include "ui_accidental.h"
-#include "ui_clef.h"
-
-#include "globals.h"
-#include "libmscore/mscore.h"
 
 class ShowElementBase;
 class Element;
@@ -70,7 +63,29 @@ class Inspector : public QDialog, public Ui::InspectorBase {
       QStack<Element*>backStack;
       QStack<Element*>forwardStack;
 
-      ShowElementBase* elementViews[MAXTYPE];
+      ShowElementBase* pagePanel;
+      ShowElementBase* systemPanel;
+      ShowElementBase* measurePanel;
+      ShowElementBase* chordPanel;
+      ShowElementBase* notePanel;
+      ShowElementBase* restPanel;
+      ShowElementBase* clefPanel;
+      ShowElementBase* timesigPanel;
+      ShowElementBase* keysigPanel;
+      ShowElementBase* segmentView;
+      ShowElementBase* textView;
+      ShowElementBase* elementView;
+      ShowElementBase* hairpinView;
+      ShowElementBase* barLineView;
+      ShowElementBase* dynamicView;
+      ShowElementBase* tupletView;
+      ShowElementBase* slurView;
+      ShowElementBase* tieView;
+      ShowElementBase* voltaView;
+      ShowElementBase* voltaSegmentView;
+      ShowElementBase* lyricsView;
+      ShowElementBase* beamView;
+      ShowElementBase* tremoloView;
 
       bool searchElement(QTreeWidgetItem* pi, Element* el);
       void addSymbol(ElementItem* parent, BSymbol* bs);
@@ -124,7 +139,6 @@ class ShowElementBase : public QWidget {
 
    private slots:
       void parentClicked();
-      void linkClicked();
       void offsetxChanged(double);
       void offsetyChanged(double);
       void selectedClicked(bool);
@@ -243,11 +257,7 @@ class ShowNoteWidget : public ShowElementBase {
       void tieForClicked();
       void tieBackClicked();
       void accidentalClicked();
-      void bendClicked();
       void tpcChanged(int);
-      void dot1Clicked();
-      void dot2Clicked();
-      void dot3Clicked();
 
    signals:
       void scoreChanged();
@@ -274,6 +284,20 @@ class ShowRestWidget : public ShowElementBase {
 
    public:
       ShowRestWidget();
+      virtual void setElement(Element*);
+      };
+
+//---------------------------------------------------------
+//   ShowClefWidget
+//---------------------------------------------------------
+
+class ShowClefWidget : public ShowElementBase {
+      Q_OBJECT;
+
+      QSpinBox* idx;
+
+   public:
+      ShowClefWidget();
       virtual void setElement(Element*);
       };
 
@@ -329,12 +353,6 @@ class HairpinView : public ShowElementBase {
       Q_OBJECT;
 
       Ui::HairpinBase hp;
-      Ui::SLineBase sl;
-      Ui::SpannerBase sp;
-
-   private slots:
-      void startClicked();
-      void endClicked();
 
    public:
       HairpinView();
@@ -447,8 +465,6 @@ class TieView : public ShowElementBase {
 
    private slots:
       void segmentClicked(QTreeWidgetItem* item);
-      void startClicked();
-      void endClicked();
 
    public:
       TieView();
@@ -469,8 +485,6 @@ class VoltaView : public ShowElementBase {
       void segmentClicked(QTreeWidgetItem* item);
       void beginTextClicked();
       void continueTextClicked();
-      void leftElementClicked();
-      void rightElementClicked();
 
    public:
       VoltaView();
@@ -537,67 +551,6 @@ class TremoloView : public ShowElementBase {
 
    public:
       TremoloView();
-      virtual void setElement(Element*);
-      };
-
-//---------------------------------------------------------
-//   OttavaView
-//---------------------------------------------------------
-
-class OttavaView : public ShowElementBase {
-      Q_OBJECT;
-
-      Ui::SpannerBase sb;
-//      Ui::OttavaBase ob;
-
-   private slots:
-      void startElementClicked();
-      void endElementClicked();
-
-   public:
-      OttavaView();
-      virtual void setElement(Element*);
-      };
-
-//---------------------------------------------------------
-//   SlurSegmentView
-//---------------------------------------------------------
-
-class SlurSegmentView : public ShowElementBase {
-      Q_OBJECT;
-
-      Ui::SlurSegment ss;
-
-   public:
-      SlurSegmentView();
-      virtual void setElement(Element*);
-      };
-
-//---------------------------------------------------------
-//   AccidentalView
-//---------------------------------------------------------
-
-class AccidentalView : public ShowElementBase {
-      Q_OBJECT;
-
-      Ui::Accidental acc;
-
-   public:
-      AccidentalView();
-      virtual void setElement(Element*);
-      };
-
-//---------------------------------------------------------
-//   ClefView
-//---------------------------------------------------------
-
-class ClefView : public ShowElementBase {
-      Q_OBJECT;
-
-      Ui::Clef clef;
-
-   public:
-      ClefView();
       virtual void setElement(Element*);
       };
 

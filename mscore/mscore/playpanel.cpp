@@ -20,10 +20,10 @@
 
 #include "playpanel.h"
 #include "al/sig.h"
-#include "libmscore/score.h"
+#include "score.h"
 #include "seq.h"
-#include "musescore.h"
-#include "libmscore/measure.h"
+#include "mscore.h"
+#include "measure.h"
 
 const int MIN_VOL = -60;
 const int MAX_VOL = 10;
@@ -68,13 +68,17 @@ void PlayPanel::setScore(Score* s)
       {
       if (cs != 0 && cs == s)
             return;
+      if (cs)
+            disconnect(cs, SIGNAL(posChanged(int)), this, SLOT(setPos(int)));
       cs = s;
+      if (cs)
+            connect(cs, SIGNAL(posChanged(int)), this, SLOT(setPos(int)));
       if (cs) {
             MeasureBase* lm = cs->last();
             if (lm)
-                  setEndpos(lm->tick() + lm->ticks());
+                  setEndpos(lm->tick() + lm->tickLen());
             }
-      bool enable = cs != 0;
+      bool enable = (cs != 0);
       volumeSlider->setEnabled(enable);
       posSlider->setEnabled(enable);
       tempoSlider->setEnabled(enable);
@@ -83,21 +87,18 @@ void PlayPanel::setScore(Score* s)
             setTempo(cs->tempomap()->tempo(0));
             setRelTempo(cs->tempomap()->relTempo());
             Measure* m = cs->lastMeasure();
-            if (m)
-                  setEndpos(m ? m->tick() + m->ticks() : 0);
-            int tick = cs->playPos();
-            heartBeat(tick, tick);
+            if (m)      
+                  setEndpos(m ? m->tick() + m->tickLen() : 0);
             }
       else {
             setTempo(120.0);
             setRelTempo(100);
             setEndpos(0);
-            heartBeat(0, 0);
             }
-//      heartBeat2(seq->getCurTime());
-//      int tick, utick;
-//      seq->getCurTick(&tick, &utick);
-//      heartBeat(tick, utick);
+      heartBeat2(seq->getCurTime());
+      int tick, utick;
+      seq->getCurTick(&tick, &utick);
+      heartBeat(tick, utick);
       update();
       }
 
@@ -131,10 +132,10 @@ void PlayPanel::setRelTempo(int val)
       }
 
 //---------------------------------------------------------
-//   setGain
+//   setVolume
 //---------------------------------------------------------
 
-void PlayPanel::setGain(float val)
+void PlayPanel::setVolume(float val)
       {
       volumeSlider->setValue(val);
       }
@@ -145,11 +146,11 @@ void PlayPanel::setGain(float val)
 
 void PlayPanel::volumeChanged(double val, int)
       {
-      emit gainChange(val);
+      emit volChange(val);
       }
 
 //---------------------------------------------------------
-//    setPos
+//   setPos
 //---------------------------------------------------------
 
 void PlayPanel::setPos(int tick)

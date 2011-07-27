@@ -1,21 +1,28 @@
 //=============================================================================
-//  MuseScore
-//  Music Composition & Notation
+//  MusE Score
+//  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2011 Werner Schweer
+//  Copyright (C) 2002-2009 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
-//  it under the terms of the GNU General Public License version 2
-//  as published by the Free Software Foundation and appearing in
-//  the file LICENCE.GPL
+//  it under the terms of the GNU General Public License version 2.
+//
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with this program; if not, write to the Free Software
+//  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
 #ifndef __MIDIFILE_H__
 #define __MIDIFILE_H__
 
 #include "al/sig.h"
-#include "libmscore/event.h"
+#include "event.h"
 
 const int MIDI_CHANNEL = 16;
 
@@ -61,7 +68,7 @@ class MidiTrack {
       ~MidiTrack();
 
       bool empty() const;
-      const EventList& events() const   { return _events;     }
+      const EventList events() const    { return _events;     }
       EventList& events()               { return _events;     }
       int outChannel() const            { return _outChannel; }
       void setOutChannel(int n);
@@ -71,11 +78,8 @@ class MidiTrack {
       void setName(const QString& s)    { _name = s;          }
       QString comment() const           { return _comment;    }
       void setComment(const QString& s) { _comment = s;       }
-      void insert(const Event& e)       { _events.insert(e);  }
-      void append(const Event& e)       { _events.append(e);  }
-
-      void addCtrl(int tick, int channel, int type, int value);
-
+      void insert(Event* e)             { _events.insert(e);  }
+      void append(Event* e)             { _events.append(e);  }
       void mergeNoteOnOff();
       void cleanup();
       inline int division() const;
@@ -119,11 +123,10 @@ class MidiFile {
       qint64 curPos;             ///< current file byte position
       int _shortestNote;
 
-      void writeEvent(const Event& event);
-
    protected:
       // write
       bool write(const void*, qint64);
+      bool skip(qint64);
       void writeShort(int);
       void writeLong(int);
       bool writeTrack(const MidiTrack*);
@@ -132,13 +135,12 @@ class MidiFile {
       void writeStatus(int type, int channel);
 
       // read
-      void read(void*, qint64);
+      bool read(void*, qint64);
       int getvl();
       int readShort();
       int readLong();
-      bool readEvent(Event*);
+      Event* readEvent();
       bool readTrack();
-      void skip(qint64);
 
       void resetRunningStatus() { status = -1; }
 
@@ -163,16 +165,17 @@ class MidiFile {
       AL::TimeSigMap siglist() const     { return _siglist;         }
       int noRunningStatus() const     { return _noRunningStatus; }
       void setNoRunningStatus(bool v) { _noRunningStatus = v;    }
-      void processMeta(Score*, MidiTrack* track, const Event& e);
+      void processMeta(Score*, MidiTrack* track, Event* e);
       void setShortestNote(int v)     { _shortestNote = v;    }
       int shortestNote() const        { return _shortestNote; }
-      void convertTrack(Score* score, MidiTrack* midiTrack);
 
-      friend class EventData;
+      friend class Event;
       friend class MidiTrack;
       };
 
 int MidiTrack::division() const { return mf->division(); }
+
+extern QString midiMetaName(int meta);
 
 #endif
 

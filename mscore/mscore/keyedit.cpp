@@ -1,9 +1,9 @@
-//=============================================================================
+//==========
 //  MuseScore
 //  Linux Music Score Editor
 //  $Id:$
 //
-//  Copyright (C) 2009-2011 Werner Schweer and others
+//  Copyright (C) 2009 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -18,20 +18,16 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "musescore.h"
+#include "mscore.h"
 #include "palette.h"
 #include "keyedit.h"
-#include "libmscore/keysig.h"
-#include "libmscore/score.h"
-#include "libmscore/accidental.h"
+#include "keysig.h"
+#include "score.h"
+#include "accidental.h"
 #include "keycanvas.h"
-#include "libmscore/clef.h"
-#include "painterqt.h"
-#include "libmscore/mscore.h"
+#include "clef.h"
 
 extern bool useFactorySettings;
-extern Palette* newAccidentalsPalette();
-extern Palette* newKeySigPalette();
 
 //---------------------------------------------------------
 //   KeyCanvas
@@ -50,8 +46,7 @@ KeyCanvas::KeyCanvas(QWidget* parent)
       QAction* a = new QAction("delete", this);
       a->setShortcut(Qt::Key_Delete);
       addAction(a);
-      clef = new Clef(gscore);
-      clef->setClefType(CLEF_G);
+      clef = new Clef(gscore, CLEF_G);
       connect(a, SIGNAL(triggered()), SLOT(deleteElement()));
       }
 
@@ -89,11 +84,11 @@ void KeyCanvas::clear()
 
 void KeyCanvas::paintEvent(QPaintEvent*)
       {
-      double spatium = 2.0 * PALETTE_SPATIUM / extraMag;
+      double spatium = 2.0 * PALETTE_SPATIUM / (PDPI/DPI * extraMag);
       gscore->setSpatium(spatium);
+      gscore->setPaintDevice(this);
 
       QPainter p(this);
-      PainterQt painter(&p, 0);
       p.setRenderHint(QPainter::Antialiasing, true);
       qreal wh = double(height());
       qreal ww = double(width());
@@ -111,7 +106,7 @@ void KeyCanvas::paintEvent(QPaintEvent*)
       QRectF r = imatrix.mapRect(QRectF(x, y, w, wh));
 
       QPen pen(palette().brush(QPalette::Normal, QPalette::Text).color());
-      pen.setWidthF(MScore::defaultStyle()->valueS(ST_staffLineWidth).val() * spatium);
+      pen.setWidthF(defaultStyle[ST_staffLineWidth].toSpatium().val() * spatium);
       p.setPen(pen);
 
       for (int i = 0; i < 5; ++i) {
@@ -120,22 +115,21 @@ void KeyCanvas::paintEvent(QPaintEvent*)
             }
       if (dragElement) {
             p.save();
-            p.translate(dragElement->pagePos());
-            dragElement->draw(&painter);
+            p.translate(dragElement->canvasPos());
+            dragElement->draw(p);
             p.restore();
             }
       foreach(Accidental* a, accidentals) {
             p.save();
-            p.translate(a->pagePos());
-//            p.setPen(QPen(a->curColor()));
-            p.setPen(QPen(Qt::white));
-            a->draw(&painter);
+            p.translate(a->canvasPos());
+            p.setPen(QPen(a->curColor()));
+            a->draw(p);
             p.restore();
             }
       clef->setPos(0.0, 0.0);
       clef->layout();
-      p.translate(clef->pagePos());
-      clef->draw(&painter);
+      p.translate(clef->canvasPos());
+      clef->draw(p);
       }
 
 //---------------------------------------------------------
@@ -262,7 +256,7 @@ void KeyCanvas::dropEvent(QDropEvent*)
 void KeyCanvas::snap(Accidental* a)
       {
       double y = a->ipos().y();
-      double spatium2 = PALETTE_SPATIUM / extraMag;
+      double spatium2 = PALETTE_SPATIUM / (PDPI/DPI * extraMag);
       int line = int(y / spatium2);
       y = line * spatium2;
       a->rypos() = y;
@@ -283,8 +277,7 @@ KeyEditor::KeyEditor(QWidget* parent)
       QLayout* l = new QVBoxLayout();
       l->setContentsMargins(0, 0, 0, 0);
       frame->setLayout(l);
-
-      sp = newKeySigPalette();
+      sp = new Palette();
       sp->setReadOnly(false);
 
       PaletteScrollArea* keyPalette = new PaletteScrollArea(sp);
@@ -293,36 +286,52 @@ KeyEditor::KeyEditor(QWidget* parent)
       keyPalette->setRestrictHeight(false);
 
       l->addWidget(keyPalette);
+      sp->setMag(0.8);
+      sp->setGrid(56, 45);
+      sp->setYOffset(6.0);
 
       // create accidental palette
 
       l = new QVBoxLayout();
       l->setContentsMargins(0, 0, 0, 0);
       frame_3->setLayout(l);
-      sp1 = newAccidentalsPalette();
+      sp1 = new Palette();
       PaletteScrollArea* accPalette = new PaletteScrollArea(sp1);
       QSizePolicy policy1(QSizePolicy::Expanding, QSizePolicy::Expanding);
       accPalette->setSizePolicy(policy1);
       accPalette->setRestrictHeight(false);
 
       l->addWidget(accPalette);
-
-      connect(addButton,   SIGNAL(clicked()), SLOT(addClicked()));
+      sp1->setGrid(33, 36);
+      for (int i = ACC_SHARP; i < ACC_END; ++i) {
+            Accidental* s = new Accidental(gscore);
+            s->setSubtype(i);
+            sp1->append(s, qApp->translate("accidental", s->subtypeUserName()));
+            }
+      connect(addButton, SIGNAL(clicked()), SLOT(addClicked()));
       connect(clearButton, SIGNAL(clicked()), SLOT(clearClicked()));
-      connect(sp,          SIGNAL(changed()), SLOT(setDirty()));
-
-      //
-      // set all "buildin" key signatures to read only
-      //
-      int n = sp->size();
-      for (int i = 0; i < n; ++i)
-            sp->setCellReadOnly(i, true);
 
       if (!useFactorySettings) {
             QFile f(dataPath + "/" + "keysigs.xml");
             if (f.exists() && sp->read(&f))
                   return;
             }
+      //
+      // create default palette
+      //
+      for (int i = 0; i < 7; ++i) {
+            KeySig* k = new KeySig(gscore);
+            k->setSubtype(i+1);
+            sp->append(k, qApp->translate("MuseScore", keyNames[i*2]));
+            }
+      for (int i = -7; i < 0; ++i) {
+            KeySig* k = new KeySig(gscore);
+            k->setSubtype(i & 0xff);
+            sp->append(k, qApp->translate("MuseScore", keyNames[(7 + i) * 2 + 1]));
+            }
+      KeySig* k = new KeySig(gscore);
+      k->setSubtype(0);
+      sp->append(k, qApp->translate("MuseScore", keyNames[14]));
       }
 
 //---------------------------------------------------------
@@ -335,7 +344,7 @@ void KeyEditor::addClicked()
 
       double extraMag = 2.0;
       const QList<Accidental*> al = canvas->getAccidentals();
-      double spatium = 2.0 * PALETTE_SPATIUM / extraMag;
+      double spatium = 2.0 * PALETTE_SPATIUM / (PDPI/DPI * extraMag);
       double xoff = 10000000.0;
       foreach(Accidental* a, al) {
             QPointF pos = a->ipos();
@@ -355,7 +364,6 @@ void KeyEditor::addClicked()
       ks->setCustom(symbols);
       sp->append(ks, "custom");
       _dirty = true;
-      sp->updateGeometry();
       }
 
 //---------------------------------------------------------

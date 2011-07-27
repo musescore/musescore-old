@@ -7,7 +7,7 @@
 //    Copyright (C) 2003 Fons Adriaensen
 //  partly based on original work from Paul Davis
 //
-//  Copyright (C) 2002-2010 Werner Schweer and others
+//  Copyright (C) 2002-2007 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -27,13 +27,12 @@
 #ifdef USE_ALSA
 #include <sys/time.h>
 #include "alsa.h"
-#include "libmscore/score.h"
-#include "musescore.h"
+#include "score.h"
+#include "mscore.h"
 #include "preferences.h"
 #include "seq.h"
 #include "alsamidi.h"
-#include "libmscore/utils.h"
-#include "msynth/synti.h"
+#include "utils.h"
 
 //---------------------------------------------------------
 //   AlsaDriver
@@ -145,13 +144,11 @@ bool AlsaDriver::pcmStart()
             fprintf  (stderr, "Alsa_driver: full buffer not available at start.\n");
             return true;
             }
-      if (mmappedInterface) {
-            for (unsigned i = 0; i < _nfrags; i++) {
-                  playInit (_frsize);
-                  for (unsigned j = 0; j < _play_nchan; j++)
-                        clearChan(j, _frsize);
-                  snd_pcm_mmap_commit(_play_handle, _play_offs, _frsize);
-                  }
+      for (unsigned i = 0; i < _nfrags; i++) {
+            playInit (_frsize);
+            for (unsigned j = 0; j < _play_nchan; j++)
+                  clearChan(j, _frsize);
+            snd_pcm_mmap_commit(_play_handle, _play_offs, _frsize);
             }
       if ((err = snd_pcm_start (_play_handle)) < 0) {
             fprintf (stderr, "Alsa_driver: pcm_start(play): %s.\n", snd_strerror (err));
@@ -167,6 +164,7 @@ bool AlsaDriver::pcmStart()
 int AlsaDriver::pcmStop()
       {
       int err;
+
       if (_play_handle && ((err = snd_pcm_drop (_play_handle)) < 0)) {
             fprintf (stderr, "Alsa_driver: pcm_drop(play): %s\n", snd_strerror (err));
             return -1;
@@ -282,17 +280,18 @@ int AlsaDriver::setHwpar(snd_pcm_t* handle, snd_pcm_hw_params_t* hwpar)
             return -1;
             }
 
-      mmappedInterface = true;
       if (((err = snd_pcm_hw_params_set_access (handle, hwpar, SND_PCM_ACCESS_MMAP_NONINTERLEAVED)) < 0)
          && ((err = snd_pcm_hw_params_set_access (handle, hwpar, SND_PCM_ACCESS_MMAP_INTERLEAVED)) < 0)) {
-            mmappedInterface = false;
             fprintf (stderr, "Alsa_driver: the interface doesn't support mmap-based access.\n");
-            if (((err = snd_pcm_hw_params_set_access (handle, hwpar, SND_PCM_ACCESS_RW_NONINTERLEAVED)) < 0)
-               && ((err = snd_pcm_hw_params_set_access (handle, hwpar, SND_PCM_ACCESS_RW_INTERLEAVED)) < 0)) {
-                  fprintf (stderr, "Alsa_driver: the interface doesn't support rw-based access.\n");
+            rwAccess = true;
+//            if (((err = snd_pcm_hw_params_set_access (handle, hwpar, SND_PCM_ACCESS_RW_NONINTERLEAVED)) < 0)
+//               && ((err = snd_pcm_hw_params_set_access (handle, hwpar, SND_PCM_ACCESS_RW_INTERLEAVED)) < 0)) {
+//                  fprintf (stderr, "Alsa_driver: the interface doesn't support rw-based access.\n");
                   return -1;
-                  }
+//                  }
             }
+      else
+            rwAccess = false;
 
       if (((err = snd_pcm_hw_params_set_format(handle, hwpar, SND_PCM_FORMAT_S16)) < 0)
          && ((err = snd_pcm_hw_params_set_format(handle, hwpar, SND_PCM_FORMAT_S24_3LE)) < 0)
@@ -409,16 +408,18 @@ int AlsaDriver::recover()
 
 char* AlsaDriver::play_16le (const float* src, char* dst, int step, int nfrm)
       {
+      float     s;
+      short int d;
+
       while (nfrm--) {
-            short d;
-            float s = *src++;
+            s = *src++;
             if (s >  1)
                   d = 0x7fff;
             else if (s < -1)
                   d = 0x8001;
             else
-                  d = (short)(0x7fff * s);
-            *((short*) dst) = d;
+                  d = (short int)(0x7fff * s);
+            *((short int *) dst) = d;
             dst += step;
             }
       return dst;
@@ -543,43 +544,10 @@ void AlsaDriver::write(int n, float* l, float* r)
                   }
             break;
             }
-      if (mmappedInterface) {
-            playInit(n);
-            _play_ptr[0] = _play_func(l, _play_ptr[0], _play_step, n);
-            _play_ptr[1] = _play_func(r, _play_ptr[1], _play_step, n);
-            snd_pcm_mmap_commit(_play_handle, _play_offs, n);
-            }
-      else {
-            //
-            //  tested only INTERLEAVED and S16 format
-            //
-            int err;
-            if (_play_access == SND_PCM_ACCESS_RW_NONINTERLEAVED) {
-                  //
-                  // untested
-                  //
-                  short lbuffer[n];
-                  short rbuffer[n];
-                  _play_func(l, (char*)lbuffer, 2, n);
-                  _play_func(r, (char*)rbuffer, 2, n);
-                  void* bp[2];
-                  bp[0] = lbuffer;
-                  bp[1] = rbuffer;
-                  if ((err = snd_pcm_writen(_play_handle, bp, n)) < 0)
-                        printf("AlsaDriver::write(): failed (%s)\n", snd_strerror(err));
-                  }
-            else if (_play_access == SND_PCM_ACCESS_RW_INTERLEAVED) {
-                  short buffer[n * 2];
-                  _play_func(l, (char*)buffer, 4, n);
-                  _play_func(r, (char*)(buffer + 1), 4, n);
-                  if ((err = snd_pcm_writei(_play_handle, buffer, n)) < 0)
-                        printf("AlsaDriver::write(): failed (%s)\n", snd_strerror(err));
-                  }
-            else {
-                  printf("AlsaDriver::write(): unsupported accesss type %d\n", _play_access);
-                  return;
-                  }
-            }
+      playInit(n);
+      _play_ptr[0] = _play_func(l, _play_ptr[0], _play_step, n);
+      _play_ptr[1] = _play_func(r, _play_ptr[1], _play_step, n);
+      snd_pcm_mmap_commit(_play_handle, _play_offs, n);
       }
 
 //---------------------------------------------------------
@@ -590,7 +558,8 @@ AlsaAudio::AlsaAudio(Seq* s)
    : Driver(s)
       {
       alsa       = 0;
-      state      = Seq::TRANSPORT_STOP;
+      synth      = 0;
+      state      = Seq::STOP;
       seekflag   = false;
       startTime  = curTime();
       midiDriver = 0;
@@ -614,7 +583,7 @@ int AlsaAudio::sampleRate() const
 
 AlsaAudio::~AlsaAudio()
       {
-      stop();
+      delete synth;
       delete alsa;
       }
 
@@ -636,6 +605,8 @@ bool AlsaAudio::init()
             fprintf(stderr, "init ALSA audio driver failed\n");
             return false;
             }
+      synth = new FluidS::Fluid();
+      synth->init(alsa->sampleRate());
 
       midiDriver = new AlsaMidiDriver(seq);
       if (!midiDriver->init()) {
@@ -677,7 +648,7 @@ void AlsaAudio::alsaLoop()
       float lbuffer[size];
       float rbuffer[size];
       while (runAlsa == 2) {
-            seq->process(size, lbuffer, rbuffer);
+            seq->process(size, lbuffer, rbuffer, 1);
             alsa->write(size, lbuffer, rbuffer);
             }
       alsa->pcmStop();
@@ -719,8 +690,9 @@ bool AlsaAudio::stop()
 //   registerPort
 //---------------------------------------------------------
 
-void AlsaAudio::registerPort(const QString&, bool, bool)
+int AlsaAudio::registerPort(const QString&, bool, bool)
       {
+      return -1;
       }
 
 //---------------------------------------------------------
@@ -755,7 +727,7 @@ void AlsaAudio::disconnect(void* /*src*/, void* /*dst*/)
 
 void AlsaAudio::startTransport()
       {
-      state = Seq::TRANSPORT_PLAY;
+      state = Seq::PLAY;
       }
 
 //---------------------------------------------------------
@@ -764,7 +736,7 @@ void AlsaAudio::startTransport()
 
 void AlsaAudio::stopTransport()
       {
-      state = Seq::TRANSPORT_STOP;
+      state = Seq::STOP;
       }
 
 //---------------------------------------------------------
@@ -774,6 +746,24 @@ void AlsaAudio::stopTransport()
 int AlsaAudio::getState()
       {
       return state;
+      }
+
+//---------------------------------------------------------
+//   putEvent
+//---------------------------------------------------------
+
+void AlsaAudio::putEvent(const Event& e, unsigned /* framePos */)
+      {
+      synth->play(e);
+      }
+
+//---------------------------------------------------------
+//   process
+//---------------------------------------------------------
+
+void AlsaAudio::process(int n, float* l, float* r, int stride)
+      {
+      synth->process(n, l, r, stride);
       }
 
 //---------------------------------------------------------

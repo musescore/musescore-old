@@ -21,7 +21,7 @@
 #ifndef __WEBPAGE_H__
 #define __WEBPAGE_H__
 
-#include "musescore.h"
+#include "mscore.h"
 #include "scoreview.h"
 
 class MuseScore;
@@ -62,7 +62,6 @@ class MyWebView: public QWebView
       Q_OBJECT
 
       MyWebPage m_page;
-      QProgressBar* progressBar;
 
    public slots:
       void link(const QUrl& url);
@@ -70,10 +69,10 @@ class MyWebView: public QWebView
       void stopBusyAndFirst(bool);
       void stopBusyStatic(bool);
       void setBusy();
-
+   
    private:
       void stopBusy(bool val, bool close);
-
+   
    public:
       MyWebView(QWidget *parent = 0);
       ~MyWebView();
@@ -85,35 +84,33 @@ class MyWebView: public QWebView
 //   WebPage
 //---------------------------------------------------------
 
-class WebPageDockWidget : public QDockWidget
+class WebPageDockWidget : public QDockWidget 
       {
       Q_OBJECT
 
       MyWebView* web;
-
+   
    public slots:
       void addToJavascript();
-
+      
    public:
       WebPageDockWidget(MuseScore* mscore, QWidget* parent = 0);
       Q_INVOKABLE void load();
       QString webUrl();
       };
-
-class CookieJar : public QNetworkCookieJar
+      
+class CookieJar : public QNetworkCookieJar 
       {
       Q_OBJECT
-
+    
     public:
       CookieJar(QString path, QObject *parent = 0);  //load cookie
       ~CookieJar();  //save cookies
 
     private:
       QString file; // where to save cookies
-      };
+      };  
 
-
-#if 0
 //---------------------------------------------------------
 //   WebScoreView
 //---------------------------------------------------------
@@ -133,7 +130,6 @@ class WebScoreView : public ScoreView
       };
 
 Q_DECLARE_METATYPE(WebScoreView)
-#endif
 
 #endif
 

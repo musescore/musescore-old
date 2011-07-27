@@ -149,8 +149,8 @@ rwtestAllXml() {
       rwtestXml testImplicitMeasure1.xml
       rwtestXml testInvisibleElements.xml
       rwtestXml testKeysig1.xml
-      rwtestXmlRef testLines1.xml
-      rwtestXmlRef testLines2.xml
+      rwtestXml testLines1.xml
+      rwtestXml testLines2.xml
       rwtestXml testLyricsVoice2a.xml
       rwtestXmlRef testLyricsVoice2b.xml
       rwtestXml testMetaData.xml
@@ -172,7 +172,7 @@ rwtestAllXml() {
       rwtestXml testVoicePiano1.xml
       rwtestXml testVolta1.xml
       rwtestXml testWedge1.xml
-      rwtestXmlRef testWedge2.xml
+      rwtestXml testWedge2.xml
       rwtestXml testWords1.xml
       }
 

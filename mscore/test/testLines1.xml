@@ -13,13 +13,6 @@
       <encoding-date>2007-09-10</encoding-date>
       </encoding>
     </identification>
-    <miscellaneous>
-      <miscellaneous-field name="description">Expected iotest differences:
-        - part P1 measure 3 octave-shift stop moved to measure 4 start
-        - part P1 measure 4 octave-shift stop moved to measure 5 start
-        - part P1 measure 5 pedal line stop moved to measure 6 start
-        </miscellaneous-field>
-      </miscellaneous>
   <part-list>
     <score-part id="P1">
       <part-name>Guitar</part-name>
@@ -267,7 +260,7 @@
         <type>quarter</type>
         <stem>up</stem>
         </note>
-      <direction placement="below">
+      <direction>
         <direction-type>
           <pedal type="start" line="yes"/>
           </direction-type>
@@ -302,7 +295,7 @@
         <type>quarter</type>
         <stem>up</stem>
         </note>
-      <direction placement="below">
+      <direction>
         <direction-type>
           <pedal type="stop" line="yes"/>
           </direction-type>
@@ -344,11 +337,6 @@
         <voice>1</voice>
         <type>quarter</type>
         <stem>down</stem>
-        <notations>
-          <ornaments>
-            <wavy-line type="stop"/>
-            </ornaments>
-          </notations>
         </note>
       <note>
         <pitch>
@@ -359,6 +347,11 @@
         <voice>1</voice>
         <type>quarter</type>
         <stem>down</stem>
+        <notations>
+          <ornaments>
+            <wavy-line type="stop"/>
+            </ornaments>
+          </notations>
         </note>
       </measure>
     </part>

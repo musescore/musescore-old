@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2010 Werner Schweer and others
+//  Copyright (C) 2002-2009 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -23,7 +23,7 @@
 
 #include "ui_editstyle.h"
 #include "globals.h"
-#include "libmscore/style.h"
+#include "style.h"
 
 class Score;
 class Style;
@@ -48,13 +48,11 @@ class EditStyle : public QDialog, private Ui::EditStyleBase {
    private slots:
       void selectChordDescriptionFile();
       void buttonClicked(QAbstractButton*);
-      void editTextClicked(int id);
 
    public:
-      enum { PAGE_NOTE = 6 };
       EditStyle(Score*, QWidget*);
-      void setPage(int no);
       };
+
 
 #endif
 

@@ -20,15 +20,13 @@
 
 install(FILES
       abc_import.js
-      test.js
       createscore.js
       notenames.js
       colornotes.js
-      fonttest.js
       removenotes.js
       removenotes.ui
       chordchart.js
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}plugins
       )
 
-subdirs(break)
+subdirs(break musescore.com)

@@ -19,11 +19,11 @@
 //=============================================================================
 
 #include "measureproperties.h"
-#include "libmscore/measure.h"
+#include "measure.h"
 #include "al/sig.h"
-#include "libmscore/score.h"
-#include "libmscore/repeat.h"
-#include "libmscore/undo.h"
+#include "score.h"
+#include "repeat.h"
+#include "undo.h"
 
 //---------------------------------------------------------
 //   MeasureProperties
@@ -32,46 +32,14 @@
 MeasureProperties::MeasureProperties(Measure* _m, QWidget* parent)
    : QDialog(parent)
       {
-      setupUi(this);
-      setMeasure(_m);
-      staves->verticalHeader()->hide();
-      connect(buttonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(bboxClicked(QAbstractButton*)));
-      connect(nextButton, SIGNAL(clicked()), SLOT(gotoNextMeasure()));
-      connect(previousButton, SIGNAL(clicked()), SLOT(gotoPreviousMeasure()));
-      }
-
-//---------------------------------------------------------
-//   gotoNextMeasure
-//---------------------------------------------------------
-
-void MeasureProperties::gotoNextMeasure()
-      {
-      if (m->nextMeasure())
-            setMeasure(m->nextMeasure());
-      }
-
-//---------------------------------------------------------
-//   gotoPreviousMeasure
-//---------------------------------------------------------
-
-void MeasureProperties::gotoPreviousMeasure()
-      {
-      if (m->prevMeasure())
-            setMeasure(m->prevMeasure());
-      }
-
-//---------------------------------------------------------
-//   setMeasure
-//---------------------------------------------------------
-
-void MeasureProperties::setMeasure(Measure* _m)
-      {
       m = _m;
-      setWindowTitle(QString(tr("MuseScore: Measure Properties for Measure %1")).arg(m->no()+1));
-      actualZ->setValue(m->len().numerator());
-      actualN->setValue(m->len().denominator());
-      nominalZ->setNum(m->timesig().numerator());
-      nominalN->setNum(m->timesig().denominator());
+      setupUi(this);
+      const AL::SigEvent ev(m->score()->sigmap()->timesig(m->tick()));
+
+      actualZ->setValue(ev.fraction().numerator());
+      actualN->setValue(ev.fraction().denominator());
+      nominalZ->setValue(ev.getNominal().numerator());
+      nominalN->setValue(ev.getNominal().denominator());
 
       irregular->setChecked(m->irregular());
       breakMultiMeasureRest->setChecked(m->getBreakMultiMeasureRest());
@@ -103,6 +71,8 @@ void MeasureProperties::setMeasure(Measure* _m)
             item->setCheckState(ms->_slashStyle ? Qt::Checked : Qt::Unchecked);
             staves->setItem(staffIdx, 2, item);
             }
+      staves->verticalHeader()->hide();
+      connect(buttonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(bboxClicked(QAbstractButton*)));
       }
 
 //---------------------------------------------------------
@@ -155,9 +125,11 @@ bool MeasureProperties::slashStyle(int staffIdx)
 //   sig
 //---------------------------------------------------------
 
-Fraction MeasureProperties::len() const
+AL::SigEvent MeasureProperties::sig() const
       {
-      return Fraction(actualZ->value(), actualN->value());
+      AL::SigEvent e(Fraction(actualZ->value(), actualN->value()),
+         Fraction(nominalZ->value(), nominalN->value()));
+      return e;
       }
 
 //---------------------------------------------------------
@@ -178,6 +150,12 @@ int MeasureProperties::repeatCount() const
       return count->value();
       }
 
+// HACK: to reconstruct siglist
+struct MS {
+      Measure* measure;
+      AL::SigEvent se;
+      };
+
 //---------------------------------------------------------
 //   apply
 //---------------------------------------------------------
@@ -197,27 +175,66 @@ void MeasureProperties::apply()
          || breakMultiMeasureRest->isChecked() != m->breakMultiMeasureRest()
          || repeatCount() != m->repeatCount()
          || layoutStretch->value() != m->userStretch()
-         || measureNumberOffset->value() != m->noOffset()
-         || m->len() != len()
-         ) {
-            Fraction oLen(m->len());
-            score->undo()->push(new ChangeMeasureProperties(
-               m,
-               m->timesig(),
-               len(),
-               breakMultiMeasureRest->isChecked(),
-               repeatCount(),
-               layoutStretch->value(),
-               measureNumberOffset->value(),
-               isIrregular())
-               );
-            if (oLen != len()) {
-                  m->adjustToLen(oLen.ticks(), len().ticks());
-                  score->select(m, SELECT_RANGE, 0);
-                  }
+         || measureNumberOffset->value() != m->noOffset()) {
+            score->undo()->push(new ChangeMeasureProperties(m, breakMultiMeasureRest->isChecked(),
+               repeatCount(), layoutStretch->value(), measureNumberOffset->value(), isIrregular()));
             }
 
+      score->setDirty();
       score->select(0, SELECT_SINGLE, 0);
+      AL::TimeSigMap* sl = score->sigmap();
+
+      AL::SigEvent oev = sl->timesig(m->tick());
+      AL::SigEvent newEvent = sig();
+
+      if (!(oev == newEvent)) {
+            // HACK: buildup evList to reconstruct siglist
+            QList<MS> evList;
+            for (Measure* measure = score->firstMeasure(); measure; measure = measure->nextMeasure()) {
+                  MS ms;
+                  ms.measure = measure;
+                  if (m == measure)
+                        ms.se = newEvent;
+                  else
+                        ms.se = sl->timesig(measure->tick());
+                  evList.append(ms);
+                  }
+
+            int oldLen = oev.ticks;
+            int newLen = newEvent.ticks;
+
+            AL::SigEvent oldEvent;
+            AL::iSigEvent i = sl->find(m->tick());
+            if (i != sl->end())
+                  oldEvent = i->second;
+
+            score->undoFixTicks();
+            score->undoChangeSig(m->tick(), oldEvent, newEvent);
+            //
+            // change back to nominal values if there is
+            // not already another TimeSig
+            //
+            i = sl->find(m->tick() + oldLen);
+            if (i == sl->end()) {
+                  score->undoChangeSig(m->tick() + newLen, AL::SigEvent(), oev);
+                  }
+            // score->select(0, SELECT_SINGLE, 0);
+            m->adjustToLen(oldLen, newLen);
+
+            // HACK: reconstruct siglist
+            sl->clear();
+            AL::SigEvent ev;
+            int ctick = 0;
+            foreach(MS ms, evList) {
+                  ms.measure->moveTicks(ctick - ms.measure->tick());
+                  if (!(ms.se == ev))
+                        sl->add(ctick, ms.se);
+                  ctick += sl->ticksMeasure(ctick);
+                  ev = ms.se;
+                  }
+            score->undoFixTicks();
+            score->select(m, SELECT_RANGE, 0);
+            }
       score->renumberMeasures();
       score->setLayoutAll(true);
       score->end();

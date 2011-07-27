@@ -25,51 +25,31 @@ class ScoreView;
 class Score;
 
 //---------------------------------------------------------
-//   TabScoreView
-//---------------------------------------------------------
-
-struct TabScoreView {
-      Score* score;
-      int part;
-      TabScoreView(Score* s) {
-            score = s;
-            part  = 0;
-            }
-      };
-
-//---------------------------------------------------------
 //   ScoreTab
 //---------------------------------------------------------
 
 class ScoreTab : public QWidget {
       Q_OBJECT
       QList<Score*>* scoreList;
-      QTabBar* tab;                 // list of scores
-      QTabBar* tab2;                // list of excerpts for current score
+      QTabBar* tab;
       QStackedLayout* stack;
 
-      void clearTab2();
+   private slots:
+      void setCurrent(int);
 
    signals:
       void currentScoreViewChanged(ScoreView*);
       void tabCloseRequested(int);
 
-   public slots:
-      void updateExcerpts();
-      void setExcerpt(int);
-      void setCurrent(int);
-
    public:
       ScoreTab(QList<Score*>*, QWidget* parent = 0);
-      void insertTab(Score*);
+      void insertTab(int idx, const QString&);
       void setTabText(int, const QString&);
       int currentIndex() const;
       void setCurrentIndex(int);
       void removeTab(int);
-      int count() const       { return scoreList->size(); }
+      int count() const { return scoreList->size(); }
       ScoreView* view(int) const;
-      QSplitter* viewSplitter(int n) const;
-
       ScoreView* view() const { return view(currentIndex()); }
       bool contains(ScoreView*) const;
       void initScoreView(int idx, double mag, int magIdx, double xoffset, double yoffset);

@@ -319,19 +319,7 @@ int Piano::y2pitch(int y) const
 void Piano::paintEvent(QPaintEvent* event)
       {
       QPainter p(this);
-      const QRect& rr = event->rect();
-      QRect r;
-      if (_orientation == PIANO_HORIZONTAL) {
-            int w = keyHeight * 52;
-            p.translate(w, 0);
-            p.rotate(90.0);
-            r.setWidth(rr.height());
-            r.setHeight(rr.width());
-            r.setX(0);
-            r.setY(0);
-            }
-      else
-            r = rr;
+      const QRect& r = event->rect();
       p.setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform | QPainter::TextAntialiasing);
       int   d = int(_ymag)+1;
       qreal x = qreal(r.x());
@@ -455,13 +443,4 @@ void Piano::leaveEvent(QEvent*)
             }
       }
 
-//---------------------------------------------------------
-//   setOrientation
-//---------------------------------------------------------
-
-void Piano::setOrientation(PianoOrientation o)
-      {
-      _orientation = o;
-      update();
-      }
 

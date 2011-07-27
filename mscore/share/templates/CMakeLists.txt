@@ -35,7 +35,6 @@ install(FILES
       instruments_zh_CN.xml
       instruments_zh_TW.xml
       instruments.xml
-      instruments-band.xml
       Chamber\ Orchestra.mscx
       Choir\ SATB.mscx
       Choir\ SATB\ with\ Piano.mscx
@@ -43,8 +42,6 @@ install(FILES
       Hymn.mscz
       Lead\ Sheet.mscx
       Piano.mscx
-      Guitar\ Tab.mscx
-      carol.mscx
       Jazz\ Lead\ Sheet.mscz
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}templates
       )

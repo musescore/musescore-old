@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2011 Werner Schweer and others
+//  Copyright (C) 2002-2009 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -21,37 +21,23 @@
 #ifndef __PREFERENCES_H__
 #define __PREFERENCES_H__
 
+#include "ui_prefsdialog.h"
 #include "globals.h"
+
+struct Shortcut;
 
 enum SessionStart {
       EMPTY_SESSION, LAST_SESSION, NEW_SESSION, SCORE_SESSION
       };
 
-// midi remote control values:
-enum {
-      RMIDI_REWIND,
-      RMIDI_TOGGLE_PLAY,
-      RMIDI_PLAY,
-      RMIDI_STOP,
-      RMIDI_NOTE1,
-      RMIDI_NOTE2,
-      RMIDI_NOTE4,
-      RMIDI_NOTE8,
-      RMIDI_NOTE16,
-      RMIDI_NOTE32,
-      RMIDI_NOTE64,
-      RMIDI_REST,
-      RMIDI_DOT,
-      RMIDI_DOTDOT,
-      RMIDI_TIE,
-      RMIDI_NOTE_EDIT_MODE,
-      MIDI_REMOTES
-      };
+//---------------------------------------------------------
+//   MidiRemote
+//---------------------------------------------------------
 
-enum MuseScoreStyleType {
-      STYLE_DARK,
-      STYLE_LIGHT,
-      STYLE_NATIVE
+struct MidiRemote {
+      int channel;
+      int type;         // -1 : inactive, 0 : noteOn, 1 : ctrl
+      int data;         // pitch or controller number
       };
 
 //---------------------------------------------------------
@@ -64,17 +50,20 @@ struct Preferences {
       QString bgWallpaper;
       QString fgWallpaper;
       QColor fgColor;
-      int iconHeight, iconWidth;
+      QColor bgColor;
+      QColor selectColor[VOICES];
+      QColor defaultColor;
       QColor dropColor;
       bool enableMidiInput;
-      bool playNotes;         // play notes on click
-      QString lPort;          // audio port left
-      QString rPort;          // audio port right
+      bool playNotes;           // play notes on click
+      QString defaultSoundfont; // store the default soundfont for fallback
+      QString soundFont;        // sound font used by synthesizer
+      QString lPort;            // audio port left
+      QString rPort;            // audio port right
       bool showNavigator;
       bool showPlayPanel;
       bool showWebPanel;
       bool showStatusBar;
-      QPoint playPanelPos;
 
       bool useAlsaAudio;
       bool useJackAudio;
@@ -90,67 +79,55 @@ struct Preferences {
       int portaudioDevice;
       QString portMidiInput;
 
+      QColor layoutBreakColor;
       bool antialiasedDrawing;
       SessionStart sessionStart;
       QString startScore;
       QString workingDirectory;
-      QString defaultStyle;
       bool showSplashScreen;
 
-      bool useMidiRemote;
-      MidiRemote midiRemote[MIDI_REMOTES];
-
+      MidiRemote rewind, play, stop;
+      MidiRemote len1, len2, len4, len8, len16, len32;
+      MidiRemote len3, len6, len12, len24;
       bool midiExpandRepeats;
-      QString instrumentList; // file path of instrument templates
 
+      bool playRepeats;
+      QString instrumentList;  // file path of instrument templates
       bool alternateNoteEntryMethod;
-      int proximity;          // proximity for selecting elements on canvas
+      int proximity;    // proximity for selecting elements on canvas
       bool autoSave;
       int autoSaveTime;
-      double pngResolution;
-      bool pngTransparent;
+      bool pngScreenShot;
       QString language;
-
+      int iconWidth, iconHeight;
+      int noteEntryIconWidth, noteEntryIconHeight;
+      QString applicationFont;
+      QString style;
+      bool replaceFractions;
       bool replaceCopyrightSymbol;
-      double mag;
-
+      QPrinter::PageSize paperSize;
+      double paperWidth, paperHeight;     // only valid if paperSize is QPrinter::Custom
+      bool landscape;
+      bool twosided;
+      double spatium;
+      
       //update
       int checkUpdateStartup;
-
+      
       float tuning;                 // synthesizer master tuning offset (440Hz)
-      float masterGain;             // synthesizer master gain
+      float masterGain;            // synthesizer master gain
       float chorusGain;
       float reverbGain;
       float reverbRoomSize;
       float reverbDamp;
       float reverbWidth;
 
-      bool followSong;
-      QString importCharset;
+      int defaultPlayDuration;      // len of note play during note entry
       QString importStyleFile;
+      QString importCharset;
+      bool warnPitchRange;
+      bool followSong;
 
-      bool useOsc;
-      int oscPort;
-      bool singlePalette;
-      QString styleName;
-      int globalStyle;        // 0 - dark, 1 - light
-
-      QString myScoresPath;
-      QString myStylesPath;
-      QString myImagesPath;
-      QString myTemplatesPath;
-      QString myPluginsPath;
-      QString mySoundFontsPath;
-
-      double nudgeStep10;     // Ctrl + cursor key (default 1.0)
-      double nudgeStep50;     // Alt  + cursor key (default 5.0)
-
-      bool nativeDialogs;
-
-      int exportAudioSampleRate;
-
-      QString profile;
-      
       bool firstStartWeb;
 
       bool dirty;
@@ -171,6 +148,48 @@ class ShortcutItem : public QTreeWidgetItem {
 
    public:
       ShortcutItem() : QTreeWidgetItem() {}
+      };
+
+//---------------------------------------------------------
+//   PreferenceDialog
+//---------------------------------------------------------
+
+class PreferenceDialog : public QDialog, private Ui::PrefsDialogBase {
+      Q_OBJECT
+
+      QMap<QString, Shortcut*> localShortcuts;
+      bool shortcutsChanged;
+
+      void apply();
+      bool sfChanged;
+      void updateSCListView();
+      void setUseMidiOutput(bool);
+      void updateValues(Preferences*);
+
+   private slots:
+      void buttonBoxClicked(QAbstractButton*);
+      void bgClicked(bool);
+      void fgClicked(bool);
+      void selectFgWallpaper();
+      void selectBgWallpaper();
+      void selectWorkingDirectory();
+      void selectInstrumentList();
+      void selectStartWith();
+      void resetShortcutClicked();
+      void clearShortcutClicked();
+      void defineShortcutClicked();
+      void portaudioApiActivated(int idx);
+      void resetAllValues();
+      void paperSizeChanged(double);
+      void pageFormatSelected(int);
+      void landscapeToggled(bool);
+      void styleFileButtonClicked();
+
+   signals:
+      void preferencesChanged();
+
+   public:
+      PreferenceDialog(QWidget* parent);
       };
 
 extern Preferences preferences;

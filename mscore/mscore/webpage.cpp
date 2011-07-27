@@ -3,8 +3,8 @@
 //  Linux Music Score Editor
 //  $Id:$
 //
-//  The webview is shown on startup with a local file inviting user
-//  to start connecting with the community. They can press start and
+//  The webview is shown on startup with a local file inviting user 
+//  to start connecting with the community. They can press start and 
 //  MuseScore will go online. If no connection, display a can't connect message
 //  On next startup, if no connection, the panel is closed. If connection, the
 //  MuseScore goes online directly. If the autoclose panel is reopen, the user
@@ -26,11 +26,10 @@
 //=============================================================================
 
 #include "webpage.h"
-#include "musescore.h"
+#include "mscore.h"
 #include "preferences.h"
-#include "libmscore/score.h"
+#include "score.h"
 
-static const char* staticUrl = "http://cdn.musescore.com/connect.html";
 
 //---------------------------------------------------------
 //   MyWebPage
@@ -60,7 +59,6 @@ QObject* MyWebPage::createPlugin(
       // way. When we'd like to create non-visual objects in
       // Html to use them via JavaScript, we'd use a different
       // mechanism than this.
-#if 0
       if (classid == "WebScoreView") {
             WebScoreView* sv = new WebScoreView(view());
             int idx = paramNames.indexOf("score");
@@ -74,7 +72,6 @@ QObject* MyWebPage::createPlugin(
                   }
             return sv;
             }
-#endif
       return 0;
 
       /*QUiLoader loader;
@@ -95,12 +92,11 @@ MyWebView::MyWebView(QWidget *parent):
 
       m_page.setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
       setPage(&m_page);
-
+      
       //set cookie jar for persistent cookies
       CookieJar* jar = new CookieJar(QString(dataPath + "/cookies.txt"));
       page()->networkAccessManager()->setCookieJar(jar);
 
-      progressBar = 0;
       connect(this, SIGNAL(linkClicked(const QUrl&)), SLOT(link(const QUrl&)));
       }
 
@@ -108,7 +104,7 @@ MyWebView::MyWebView(QWidget *parent):
 //   ~MyWebView
 //---------------------------------------------------------
 
-MyWebView::~MyWebView()
+MyWebView::~MyWebView() 
       {
       disconnect(this, SIGNAL(loadFinished(bool)), this, SLOT(stopBusyAndClose(bool)));
       disconnect(this, SIGNAL(loadFinished(bool)), this, SLOT(stopBusyAndFirst(bool)));
@@ -144,8 +140,6 @@ void MyWebView::stopBusy(bool val, bool close)
             if(!preferences.firstStartWeb && close)
                   mscore->showWebPanel(false);
             }
-//      disconnect(this, SIGNAL(loadProgress(int)), progressBar, SLOT(setValue(int)));
-      mscore->hideProgressBar();
       setCursor(Qt::ArrowCursor);
       }
 
@@ -163,7 +157,7 @@ void MyWebView::stopBusyAndFirst(bool val)
             }
       }
 
-void MyWebView::stopBusyStatic(bool val)
+void MyWebView::stopBusyStatic(bool val) 
       {
       stopBusy(val, false);
       }
@@ -174,11 +168,6 @@ void MyWebView::stopBusyStatic(bool val)
 
 void MyWebView::setBusy()
       {
-/*      progressBar = mscore->showProgressBar();
-      progressBar->setRange(0, 100);
-      progressBar->setValue(0);
-      connect(this, SIGNAL(loadProgress(int)), progressBar, SLOT(setValue(int)));
-*/
       setCursor(Qt::WaitCursor);
       }
 
@@ -199,8 +188,8 @@ void MyWebView::link(const QUrl& url)
 //---------------------------------------------------------
 //   sizeHint
 //---------------------------------------------------------
-
-QSize	MyWebView::sizeHint() const
+      
+QSize	MyWebView::sizeHint() const 
       {
       return QSize(300 , 300);
       }
@@ -215,7 +204,7 @@ WebPageDockWidget::WebPageDockWidget(MuseScore* mscore, QWidget* parent)
       setWindowTitle("MuseScore Connect");
       setFloating(false);
       setFeatures(QDockWidget::DockWidgetClosable);
-
+      
       setObjectName("webpage");
       setAllowedAreas(Qt::LeftDockWidgetArea);
 
@@ -223,7 +212,7 @@ WebPageDockWidget::WebPageDockWidget(MuseScore* mscore, QWidget* parent)
       web->setContextMenuPolicy(Qt::PreventContextMenu);
       QWebFrame* frame = web->webPage()->mainFrame();
       connect(frame, SIGNAL(javaScriptWindowObjectCleared()), this, SLOT(addToJavascript()));
-
+            
       if(preferences.firstStartWeb) {
             connect(web, SIGNAL(loadFinished(bool)), web, SLOT(stopBusyStatic(bool)));
             web->setBusy();
@@ -253,11 +242,12 @@ WebPageDockWidget::WebPageDockWidget(MuseScore* mscore, QWidget* parent)
                   , QUrl("qrc:/"));
             }
       else{
-            //And not load !
+            //And not load ! 
             connect(web, SIGNAL(loadFinished(bool)), web, SLOT(stopBusyAndClose(bool)));
             web->setBusy();
             web->load(QUrl(webUrl()));
             }
+
       setWidget(web);
       }
 
@@ -265,7 +255,7 @@ WebPageDockWidget::WebPageDockWidget(MuseScore* mscore, QWidget* parent)
 //   addToJavascript
 //---------------------------------------------------------
 
-void WebPageDockWidget::addToJavascript()
+void WebPageDockWidget::addToJavascript() 
       {
       QWebFrame* frame = web->webPage()->mainFrame();
       frame->addToJavaScriptWindowObject("panel", this);
@@ -287,21 +277,22 @@ void WebPageDockWidget::load()
 //   load
 //---------------------------------------------------------
 QString WebPageDockWidget::webUrl()
-    {
-    return QString("%1?language=%2").arg(staticUrl).arg(mscore->getLocaleISOCode());
-    }
+    { 
+    static const char* staticUrl = "http://cdn.musescore.com/connect.html";
+    return QString("%1?language=%2").arg(staticUrl).arg(mscore->getLocaleISOCode()); 
+    }      
 
 
 //---------------------------------------------------------
 //   CookieJar
 //
-//   Once the QNetworkCookieJar object is deleted, all cookies it held will be
-//   discarded as well. If you want to save the cookies, you should derive from
-//   this class and implement the saving to disk to your own storage format.
+//   Once the QNetworkCookieJar object is deleted, all cookies it held will be 
+//   discarded as well. If you want to save the cookies, you should derive from 
+//   this class and implement the saving to disk to your own storage format. 
 //   (From QNetworkCookieJar documentation.)
 //---------------------------------------------------------
 
-CookieJar::CookieJar(QString path, QObject *parent)
+CookieJar::CookieJar(QString path, QObject *parent) 
     : QNetworkCookieJar(parent)
       {
       file = path;
@@ -314,10 +305,10 @@ CookieJar::CookieJar(QString path, QObject *parent)
             while(!(line = cookieFile.readLine()).isNull()) {
                   list.append(QNetworkCookie::parseCookies(line));
                   }
-            setAllCookies(list);
+            setAllCookies(list); 
             }
       else {
-            qWarning() << "Can't open "<< this->file << " to read cookies";
+            qWarning() << "Can't open "<< this->file << " to read cookies"; 
             }
       }
 
@@ -327,16 +318,16 @@ CookieJar::CookieJar(QString path, QObject *parent)
 
 CookieJar::~CookieJar()
       {
-      QList <QNetworkCookie> cookieList;
+      QList <QNetworkCookie> cookieList; 
       cookieList = allCookies();
-
+      
       QFile file(this->file);
 
       if(!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
             qWarning() << "Can't open "<< this->file << " to save cookies";
             return;
             }
-
+                  
       QTextStream out(&file);
       for(int i = 0 ; i < cookieList.size() ; i++) {
                 //get cookie data
@@ -349,7 +340,6 @@ CookieJar::~CookieJar()
       file.close();
       }
 
-#if 0
 //---------------------------------------------------------
 //   WebScoreView
 //---------------------------------------------------------
@@ -400,20 +390,21 @@ void WebScoreView::networkFinished(QNetworkReply* reply)
             name = re.cap(1);
 
       QByteArray data = reply->readAll();
-      QString tmpName = QDir::tempPath () + "/"+ name;
+      QString tmpName = "/tmp/" + name;
       QFile f(tmpName);
       f.open(QIODevice::WriteOnly);
       f.write(data);
       f.close();
-
-      Score* score = mscore->readScore(tmpName);
-      if (!score) {
+      
+      Score* score = new Score(defaultStyle);
+      if(!score->read(tmpName)) {
             printf("readScore failed\n");
+            delete score;
             return;
             }
+
       ScoreView::setScore(score);
       update();
       }
 
-#endif
 

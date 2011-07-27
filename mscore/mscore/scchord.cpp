@@ -18,13 +18,13 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "musescore.h"
-#include "libmscore/chord.h"
-#include "libmscore/note.h"
+#include "mscore.h"
+#include "chord.h"
+#include "note.h"
 #include "script.h"
-#include "libmscore/harmony.h"
-#include "libmscore/measure.h"
-#include "libmscore/lyrics.h"
+#include "harmony.h"
+#include "measure.h"
+#include "lyrics.h"
 
 Q_DECLARE_METATYPE(Chord);
 Q_DECLARE_METATYPE(Chord*);
@@ -46,7 +46,10 @@ static const QScriptValue::PropertyFlags flags_chord[] = {
       QScriptValue::SkipInEnumeration,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::ReadOnly,
       QScriptValue::SkipInEnumeration,
-      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::ReadOnly
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::ReadOnly,
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::ReadOnly,
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter
       };
 
 ScriptInterface chordInterface = {
@@ -73,25 +76,26 @@ static QScriptValue prototype_Chord_call(QScriptContext* context, QScriptEngine*
                QString::fromLatin1("Chord.%0(): this object is not a Chord")
                .arg(function_names_chord[_id]));
             }
+            
       switch(_id) {
-            case 0:
+            case 0: //tickLen
                   if (context->argumentCount() == 0)
-                        return qScriptValueFromValue(context->engine(), chord->actualTicks());
+                        return qScriptValueFromValue(context->engine(), chord->tickLen());
                   else if (context->argumentCount() == 1) {
                         int ticks = context->argument(0).toInt32();
                         if (ticks < 1)
                               break;
-                        chord->setDurationType(ticks);
+                        chord->setDurationVal(ticks);
                         return context->engine()->undefinedValue();
                         }
                   break;
-            case 1:
+            case 1: //addHarmony
                   if (context->argumentCount() == 1) {
                         Harmony* h = qscriptvalue_cast<Harmony*>(context->argument(0));
                         if (!h)
                               break;
                         h->setParent(chord->measure());
-//TODO1                        h->setTick(chord->tick());
+                        h->setTick(chord->tick());
                         Score* score = chord->score();
                         if (score) {
                               h->setScore(score);
@@ -158,13 +162,11 @@ static QScriptValue prototype_Chord_call(QScriptContext* context, QScriptEngine*
                   return qScriptValueFromValue(context->engine(), int(chord->noteType()));
             case 8:     // "lyric"
                   {
-                  //TODO adapt to new lyric code
-                  /*QStringList ll;
+                  QStringList ll; 
                   LyricsList * lyrlist = chord->segment()->lyricsList(0);
-	                for (ciLyrics lix = lyrlist->begin(); lix != lyrlist->end(); ++lix)
+	                for (ciLyrics lix = lyrlist->begin(); lix != lyrlist->end(); ++lix)      
                       ll.append((*lix)->getText());
-                  return qScriptValueFromValue(context->engine(), ll);*/
-                  return context->engine()->undefinedValue();
+                  return qScriptValueFromValue(context->engine(), ll);
                   }
             case 9:     //noStem
                  {

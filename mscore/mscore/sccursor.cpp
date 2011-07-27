@@ -18,19 +18,18 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "libmscore/chordrest.h"
-#include "libmscore/chord.h"
-#include "libmscore/rest.h"
-#include "libmscore/note.h"
-#include "libmscore/stafftext.h"
-#include "libmscore/text.h"
-#include "libmscore/measure.h"
-#include "libmscore/repeatlist.h"
-#include "libmscore/page.h"
+#include "chordrest.h"
+#include "chord.h"
+#include "rest.h"
+#include "note.h"
+#include "stafftext.h"
+#include "text.h"
+#include "measure.h"
+#include "repeatlist.h"
+#include "page.h"
 #include "script.h"
-#include "libmscore/system.h"
+#include "system.h"
 #include "sccursor.h"
-#include "libmscore/segment.h"
 
 //---------------------------------------------------------
 //   SCursor
@@ -68,8 +67,8 @@ ChordRest* SCursor::cr() const
       if (_segment) {
             int track = _staffIdx * VOICES + _voice;
             Element* e = _segment->element(track);
-            if (e && (e->isChordRest() || e->type() == REPEAT_MEASURE))
-                  return static_cast<ChordRest*>(e);
+            if (e && (e->isChordRest() || e->type() == REPEAT_MEASURE)) 
+                  return static_cast<ChordRest*>(e);  
             }
       return 0;
       }
@@ -118,7 +117,7 @@ Q_DECLARE_METATYPE(Text*);
 
 static const char* const function_names_cursor[] = {
       "rewind", "eos", "chord", "rest", "measure", "next", "nextMeasure", "putStaffText",  "isChord", "isRest",
-      "add", "tick", "time", "staff", "voice", "pageNumber", "pos", "goToSelectionStart", "goToSelectionEnd",
+      "add", "tick", "time", "staff", "voice", "pageNumber", "pos", "goToSelectionStart", "goToSelectionEnd",  
       };
 static const int function_lengths_cursor[] = {
       0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0
@@ -197,8 +196,13 @@ static QScriptValue prototype_Cursor_call(QScriptContext* context, QScriptEngine
                         }
                   break;
             case 4:     // "measure",
-                  if (context->argumentCount() == 0)
-                        return qScriptValueFromValue(context->engine(), cursor->cr()->measure());
+                  if (context->argumentCount() == 0){
+                        ChordRest* cr = cursor->cr();
+                        if(cr)
+                              return qScriptValueFromValue(context->engine(), cr->measure());
+                        else
+                              return context->engine()->undefinedValue();
+                        }
                   break;
             case 5:     // "next",
                   if (context->argumentCount() == 0) {
@@ -288,8 +292,8 @@ static QScriptValue prototype_Cursor_call(QScriptContext* context, QScriptEngine
              case 16:    // "pos"
                   if (context->argumentCount() == 0){
                         if(cursor->segment()){
-                              Page* page = (Page*)cursor->segment()->measure()->parent()->parent();
-                              QPointF pos(cursor->segment()->pagePos().x() - page->pagePos().x(),  cursor->segment()->pagePos().y());
+                              Page* page = (Page*)cursor->segment()->measure()->parent()->parent();	  
+                              QPointF pos(cursor->segment()->canvasPos().x() - page->canvasPos().x(),  cursor->segment()->canvasPos().y());
                               return qScriptValueFromValue(context->engine(), pos);
                             }
                         }
@@ -305,7 +309,7 @@ static QScriptValue prototype_Cursor_call(QScriptContext* context, QScriptEngine
                         cursor->rewind(2);
                         return context->engine()->undefinedValue();
                         }
-                  break;
+                  break;                                    
             }
       return context->throwError(QScriptContext::TypeError,
          QString::fromLatin1("Cursor.%0(): bad argument count or value")
@@ -413,7 +417,7 @@ bool SCursor::nextMeasure()
       if (rs && expandRepeat()){
             int startTick  = rs->tick;
             int endTick    = startTick + rs->len;
-            if ((m  && (m->tick() + m->ticks() > endTick) ) || (!m) ){
+            if ((m  && (m->tick() + m->tickLen() > endTick) ) || (!m) ){
                   int rsIdx = repeatSegmentIndex();
                   rsIdx ++;
                   if (rsIdx < score()->repeatList()->size()) {       //there is a next repeat segment
@@ -450,11 +454,12 @@ void SCursor::putStaffText(Text* s)
       {
       if (!cr() || !s)
             return;
+      QFont f = s->defaultFont();
       s->setTrack(cr()->track());
       s->setSystemFlag(false);
       s->setSubtype(TEXT_STAFF);
       s->setParent(cr()->measure());
-//TODO1      s->setTick(cr()->tick());
+      s->setTick(cr()->tick());
       s->score()->undoAddElement(s);
       s->score()->setLayoutAll(true);
       }
@@ -467,32 +472,31 @@ void SCursor::add(ChordRest* c)
       {
       ChordRest* chordRest = cr();
       int track       = _staffIdx * VOICES + _voice;
-
+      
       if (!chordRest) {
             if(_voice > 0) { //create rests
                 int t = tick();
                 //trick : go to the start if we don't have segment nor chord.
-                if(t == _score->lastMeasure()->tick() + _score->lastMeasure()->ticks())
+                if(t == _score->lastMeasure()->tick() + _score->lastMeasure()->tickLen())
                       t = 0;
                 Measure* measure = score()->tick2measure(t);
                 SegmentType st = SegChordRest;
                 Segment* seg = measure->findSegment(st, t);
                 if (seg == 0) {
-                      seg = new Segment(measure, st, t);
+                      seg = measure->createSegment(st, t);
                       score()->undoAddElement(seg);
                       }
                 chordRest = score()->addRest(seg, track, Duration(Duration::V_MEASURE), 0);
                 }
             if (!chordRest) {
-                  printf("SCursor::add: no cr\n");
+                  printf("SCursor::add: no cr\n");    
                   return;
                   }
             }
       int tick = chordRest->tick();
-      Fraction len(c->durationType().fraction());
-
-      Fraction gap    = score()->makeGap(chordRest->segment(), chordRest->track(),
-         len, chordRest->tuplet());
+      Fraction len(c->duration().fraction());
+      
+      Fraction gap    = score()->makeGap(chordRest, len, chordRest->tuplet());
       if (gap < len) {
             printf("cannot make gap\n");
             return;
@@ -501,7 +505,7 @@ void SCursor::add(ChordRest* c)
       SegmentType st = SegChordRest;
       Segment* seg = measure->findSegment(st, tick);
       if (seg == 0) {
-            seg = new Segment(measure, st, tick);
+            seg = measure->createSegment(st, tick);
             score()->undoAddElement(seg);
             }
       c->setScore(score());
@@ -531,7 +535,7 @@ int SCursor::tick()
       else if (segment())
           return segment()->tick() + offset;
       else
-          return _score->lastMeasure()->tick() + _score->lastMeasure()->ticks() + offset;  // end of score
+          return _score->lastMeasure()->tick() + _score->lastMeasure()->tickLen() + offset;  // end of score
       }
 
 //---------------------------------------------------------

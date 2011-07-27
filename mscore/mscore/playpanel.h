@@ -44,11 +44,11 @@ class PlayPanel : public QWidget, private Ui::PlayPanelBase {
    signals:
       void relTempoChanged(double,int);
       void posChange(int);
-      void gainChange(float);
+      void volChange(float);      
       void closed();
 
    public slots:
-      void setGain(float);
+      void setVolume(float);
       void setPos(int);
 
    public:

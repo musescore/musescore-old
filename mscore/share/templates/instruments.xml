@@ -2602,8 +2602,7 @@
            </channel>
         </instrument>
      <instrument>
-        <name>Snare
-        Drum</name>
+        <name>Snare Drum</name>
         <short-name>Sn. Dr.</short-name>
         <stafflines>1</stafflines>
         <clef>14</clef>
@@ -2614,7 +2613,6 @@
            <voice>0</voice>
            <name>Side Stick</name>
            <stem>2</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <Drum pitch="38">
            <head>0</head>
@@ -2622,7 +2620,6 @@
            <voice>0</voice>
            <name>Acoustic Snare</name>
            <stem>2</stem>
-           <shortcut>B</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -2640,7 +2637,6 @@
            <voice>0</voice>
            <name>Acoustic Bass Drum</name>
            <stem>2</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -2658,7 +2654,6 @@
            <voice>0</voice>
            <name>Side Stick</name>
            <stem>2</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <Drum pitch="40">
            <head>0</head>
@@ -2666,7 +2661,6 @@
            <voice>0</voice>
            <name>Snare Drum 2</name>
            <stem>2</stem>
-           <shortcut>B</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -2684,7 +2678,6 @@
            <voice>0</voice>
            <name>Side Stick</name>
            <stem>2</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <Drum pitch="38">
            <head>0</head>
@@ -2692,7 +2685,6 @@
            <voice>0</voice>
            <name>Acoustic Snare</name>
            <stem>2</stem>
-           <shortcut>B</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -2710,7 +2702,6 @@
            <voice>0</voice>
            <name>High Tom 1</name>
            <stem>1</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <Drum pitch="48">
            <head>0</head>
@@ -2718,7 +2709,6 @@
            <voice>0</voice>
            <name>High Tom 2</name>
            <stem>1</stem>
-           <shortcut>B</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -2736,7 +2726,6 @@
            <voice>0</voice>
            <name>Mid Tom 1</name>
            <stem>1</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <Drum pitch="45">
            <head>0</head>
@@ -2744,7 +2733,6 @@
            <voice>0</voice>
            <name>Mid Tom 2</name>
            <stem>1</stem>
-           <shortcut>B</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -2762,7 +2750,6 @@
            <voice>0</voice>
            <name>Low Tom 1</name>
            <stem>1</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <Drum pitch="43">
            <head>0</head>
@@ -2770,7 +2757,6 @@
            <voice>0</voice>
            <name>Low Tom 2</name>
            <stem>1</stem>
-           <shortcut>B</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -2788,7 +2774,6 @@
            <voice>3</voice>
            <name>Pedal Hi-hat</name>
            <stem>2</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <Drum pitch="n">
            <head>1</head>
@@ -2796,7 +2781,6 @@
            <voice>0</voice>
            <name>Ching</name>
            <stem>2</stem>
-           <shortcut>B</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -2814,7 +2798,6 @@
            <voice>0</voice>
            <name>Low Bongo</name>
            <stem>1</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -2832,7 +2815,6 @@
            <voice>0</voice>
            <name>High Bongo</name>
            <stem>1</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <Drum pitch="61">
            <head>0</head>
@@ -2840,7 +2822,6 @@
            <voice>0</voice>
            <name>Low Bongo</name>
            <stem>1</stem>
-           <shortcut>B</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -2858,7 +2839,6 @@
            <voice>0</voice>
            <name>Open High Conga</name>
            <stem>1</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <Drum pitch="62">
            <head>0</head>
@@ -2866,7 +2846,6 @@
            <voice>0</voice>
            <name>Mute High Conga</name>
            <stem>1</stem>
-           <shortcut>B</shortcut>
            </Drum>
         <Drum pitch="63">
            <head>0</head>
@@ -2874,7 +2853,6 @@
            <voice>0</voice>
            <name>Low Conga</name>
            <stem>1</stem>
-           <shortcut>C</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -2892,7 +2870,6 @@
            <voice>0</voice>
            <name>High Timbale</name>
            <stem>1</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <Drum pitch="66">
            <head>0</head>
@@ -2900,7 +2877,6 @@
            <voice>0</voice>
            <name>Low Timbale</name>
            <stem>1</stem>
-           <shortcut>B</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -2918,7 +2894,6 @@
            <voice>0</voice>
            <name>Mid Tom 2</name>
            <stem>1</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -2936,7 +2911,6 @@
            <voice>0</voice>
            <name>Mute High Conga</name>
            <stem>1</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <Drum pitch="64">
            <head>0</head>
@@ -2944,7 +2918,6 @@
            <voice>0</voice>
            <name>Low Conga</name>
            <stem>1</stem>
-           <shortcut>B</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -2962,7 +2935,6 @@
            <voice>0</voice>
            <name>Open Cuica</name>
            <stem>1</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <Drum pitch="78">
            <head>1</head>
@@ -2970,7 +2942,6 @@
            <voice>0</voice>
            <name>Mute Cuica</name>
            <stem>1</stem>
-           <shortcut>B</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -2988,7 +2959,6 @@
            <voice>0</voice>
            <name>Open Triangle</name>
            <stem>1</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -3006,7 +2976,6 @@
            <voice>0</voice>
            <name>Open Hi-hat</name>
            <stem>1</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <Drum pitch="42">
            <head>1</head>
@@ -3014,7 +2983,6 @@
            <voice>0</voice>
            <name>Closed Hi-hat</name>
            <stem>1</stem>
-           <shortcut>B</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -3032,7 +3000,6 @@
            <voice>0</voice>
            <name>Chinese Cymbal</name>
            <stem>1</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -3050,7 +3017,6 @@
            <voice>0</voice>
            <name>Ride Bell</name>
            <stem>1</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -3068,7 +3034,6 @@
            <voice>0</voice>
            <name>Cabasa</name>
            <stem>1</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -3086,7 +3051,6 @@
            <voice>0</voice>
            <name>Vibra Slap</name>
            <stem>1</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -3104,7 +3068,6 @@
            <voice>0</voice>
            <name>Chinese Cymbal</name>
            <stem>1</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -3122,7 +3085,6 @@
            <voice>0</voice>
            <name>Open Triangle</name>
            <stem>1</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -3140,7 +3102,6 @@
            <voice>0</voice>
            <name>High Agogo</name>
            <stem>1</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -3158,7 +3119,6 @@
            <voice>0</voice>
            <name>Low Agogo</name>
            <stem>1</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -3176,7 +3136,6 @@
            <voice>0</voice>
            <name>Low Agogo</name>
            <stem>1</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -3194,7 +3153,6 @@
            <voice>0</voice>
            <name>Cabasa</name>
            <stem>1</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -3212,7 +3170,6 @@
            <voice>0</voice>
            <name>Ride Bell</name>
            <stem>1</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -3230,7 +3187,6 @@
            <voice>0</voice>
            <name>High Wood Block</name>
            <stem>1</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <Drum pitch="77">
            <head>0</head>
@@ -3238,7 +3194,6 @@
            <voice>0</voice>
            <name>Low Wood Block</name>
            <stem>1</stem>
-           <shortcut>B</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -3256,7 +3211,6 @@
            <voice>0</voice>
            <name>High Wood Block</name>
            <stem>1</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <Drum pitch="77">
            <head>0</head>
@@ -3264,7 +3218,6 @@
            <voice>0</voice>
            <name>Low Wood Block</name>
            <stem>1</stem>
-           <shortcut>B</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -3282,7 +3235,6 @@
            <voice>0</voice>
            <name>Open Triangle</name>
            <stem>2</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <Drum pitch="80">
            <head>1</head>
@@ -3290,7 +3242,6 @@
            <voice>0</voice>
            <name>Mute Triangle</name>
            <stem>2</stem>
-           <shortcut>B</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -3308,7 +3259,6 @@
            <voice>0</voice>
            <name>Crash Cymbal 2</name>
            <stem>2</stem>
-           <shortcut>A</shortcut>
            </Drum>
          </instrument>
      <instrument>
@@ -3323,7 +3273,6 @@
            <voice>0</voice>
            <name>Ride Cymbal 1</name>
            <stem>2</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <Drum pitch="53">
            <head>0</head>
@@ -3331,7 +3280,6 @@
            <voice>0</voice>
            <name>Ride Bell</name>
            <stem>2</stem>
-           <shortcut>B</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -3349,7 +3297,6 @@
            <voice>0</voice>
            <name>Chinese Cymbal</name>
            <stem>2</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -3367,7 +3314,6 @@
            <voice>0</voice>
            <name>Crash Cymbal 1</name>
            <stem>2</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -3385,7 +3331,6 @@
            <voice>0</voice>
            <name>Splash Cymbal</name>
            <stem>2</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -3403,7 +3348,6 @@
            <voice>0</voice>
            <name>Cowbell</name>
            <stem>2</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -3421,7 +3365,6 @@
            <voice>0</voice>
            <name>Claves</name>
            <stem>2</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -3439,7 +3382,6 @@
            <voice>0</voice>
            <name>High Wood Block</name>
            <stem>1</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -3457,7 +3399,6 @@
            <voice>0</voice>
            <name>Short Guiro</name>
            <stem>1</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -3475,7 +3416,6 @@
            <voice>0</voice>
            <name>Maracas</name>
            <stem>2</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -3493,7 +3433,6 @@
            <voice>0</voice>
            <name>Cabasa</name>
            <stem>1</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -3511,7 +3450,6 @@
            <voice>0</voice>
            <name>Cabasa</name>
            <stem>1</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -3529,7 +3467,6 @@
            <voice>0</voice>
            <name>Vibra Slap</name>
            <stem>1</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -3547,7 +3484,6 @@
            <voice>0</voice>
            <name>Low Wood Block</name>
            <stem>1</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -3565,7 +3501,6 @@
            <voice>0</voice>
            <name>High Wood Block</name>
            <stem>1</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -3583,7 +3518,6 @@
            <voice>0</voice>
            <name>Short Guiro</name>
            <stem>1</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -3601,7 +3535,6 @@
            <voice>0</voice>
            <name>Crash Cymbal 1</name>
            <stem>1</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -3619,7 +3552,6 @@
            <voice>0</voice>
            <name>Maracas</name>
            <stem>1</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -3637,7 +3569,6 @@
            <voice>0</voice>
            <name>Cabasa</name>
            <stem>1</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -3655,7 +3586,6 @@
            <voice>0</voice>
            <name>Cabasa</name>
            <stem>1</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -3673,7 +3603,6 @@
            <voice>0</voice>
            <name>Cabasa</name>
            <stem>1</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -3691,7 +3620,6 @@
            <voice>0</voice>
            <name>Cabasa</name>
            <stem>1</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -3709,7 +3637,6 @@
            <voice>0</voice>
            <name>Cabasa</name>
            <stem>1</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -3727,7 +3654,6 @@
            <voice>0</voice>
            <name>High Agogo</name>
            <stem>1</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -3745,7 +3671,6 @@
            <voice>0</voice>
            <name>Claves</name>
            <stem>1</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -3763,7 +3688,6 @@
            <voice>0</voice>
            <name>Hand Clap</name>
            <stem>1</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -3781,7 +3705,6 @@
            <voice>0</voice>
            <name>Low Tom 2</name>
            <stem>1</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -3799,7 +3722,6 @@
            <voice>0</voice>
            <name>Bass Drum 2</name>
            <stem>1</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -3817,7 +3739,6 @@
            <voice>0</voice>
            <name>Snare Drum 2</name>
            <stem>1</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -3835,7 +3756,6 @@
            <voice>0</voice>
            <name>Tambourine</name>
            <stem>2</stem>
-           <shortcut>A</shortcut>
            </Drum>
         <channel>
            <program>0</program>
@@ -4267,340 +4187,11 @@
         <clef staff="1">0</clef>
         <clef staff="2">4</clef>
         <clef staff="3">4</clef>
-        <bracket staff="1">1</bracket>
-        <bracketSpan staff="1">2</bracketSpan>
-        <barlineSpan staff="1">2</barlineSpan>
+        <bracket>1</bracket>
         <channel>
            <program>19</program>
            </channel>
         </instrument>
-     <instrument>
-        <description>Pipe-Organ</description>
-        <longName  pos="2">Man.</longName>
-        <longName  pos="5">Ped.</longName>
-        <shortName pos="2">Man.</shortName>
-        <shortName pos="5">Ped.</shortName>
-        <staves>3</staves>
-        <clef staff="1">0</clef>
-        <clef staff="2">4</clef>
-        <clef staff="3">4</clef>
-        <bracket staff="1">1</bracket>
-        <bracketSpan staff="1">2</bracketSpan>
-        <barlineSpan staff="1">2</barlineSpan>
-        <channel name="I">
-            <descr>Division I</descr>
-            <synti>Aeolus</synti>
-            <MidiAction name="Reset">
-               <descr>Reset all stops</descr>
-               <controller ctrl="98" value="66"/>
-               </MidiAction>
-            <MidiAction name="prin8">
-               <descr>set stop Principal 8</descr>
-               <controller ctrl="98" value="98"/>
-               <controller ctrl="98" value="0"/>
-               </MidiAction>
-            <MidiAction name="prin4">
-               <descr>set stop Principal 4</descr>
-               <controller ctrl="98" value="98"/>
-               <controller ctrl="98" value="1"/>
-               </MidiAction>
-            <MidiAction name="oct2">
-               <descr>set stop Octave 2</descr>
-               <controller ctrl="98" value="98"/>
-               <controller ctrl="98" value="2"/>
-               </MidiAction>
-            <MidiAction name="oct1">
-               <descr>set stop Octave 1</descr>
-               <controller ctrl="98" value="98"/>
-               <controller ctrl="98" value="3"/>
-               </MidiAction>
-            <MidiAction name="qu513">
-               <descr>set stop Quint 5 1/3</descr>
-               <controller ctrl="98" value="98"/>
-               <controller ctrl="98" value="4"/>
-               </MidiAction>
-            <MidiAction name="qu223">
-               <descr>set stop Quint 2 2/3</descr>
-               <controller ctrl="98" value="98"/>
-               <controller ctrl="98" value="5"/>
-               </MidiAction>
-            <MidiAction name="tibia8">
-               <descr>set stop Tibia 8</descr>
-               <controller ctrl="98" value="98"/>
-               <controller ctrl="98" value="6"/>
-               </MidiAction>
-            <MidiAction name="celes8">
-               <descr>set stop Celesta 8</descr>
-               <controller ctrl="98" value="98"/>
-               <controller ctrl="98" value="7"/>
-               </MidiAction>
-            <MidiAction name="flute8">
-               <descr>set stop Flöte 8</descr>
-               <controller ctrl="98" value="98"/>
-               <controller ctrl="98" value="8"/>
-               </MidiAction>
-            <MidiAction name="flute4">
-               <descr>set stop Flöte 4</descr>
-               <controller ctrl="98" value="98"/>
-               <controller ctrl="98" value="9"/>
-               </MidiAction>
-            <MidiAction name="flute2">
-               <descr>set stop Flöte 2</descr>
-               <controller ctrl="98" value="98"/>
-               <controller ctrl="98" value="10"/>
-               </MidiAction>
-            <MidiAction name="cymb">
-               <descr>set stop Cymbel VI</descr>
-               <controller ctrl="98" value="98"/>
-               <controller ctrl="98" value="11"/>
-               </MidiAction>
-            <MidiAction name="mixt">
-               <descr>set stop Mixtur</descr>
-               <controller ctrl="98" value="98"/>
-               <controller ctrl="98" value="12"/>
-               </MidiAction>
-            <MidiAction name="trum8">
-               <descr>set stop Trumpet</descr>
-               <controller ctrl="98" value="98"/>
-               <controller ctrl="98" value="13"/>
-               </MidiAction>
-            <MidiAction name="C1+2">
-               <descr>set stop I+II</descr>
-               <controller ctrl="98" value="98"/>
-               <controller ctrl="98" value="14"/>
-               </MidiAction>
-            <MidiAction name="C1+3">
-               <descr>set stop I+III</descr>
-               <controller ctrl="98" value="98"/>
-               <controller ctrl="98" value="15"/>
-               </MidiAction>
-            </channel>
-        <channel name="II">
-            <descr>Division II</descr>
-            <synti>Aeolus</synti>
-            <MidiAction name="Reset">
-               <descr>Reset all stops</descr>
-               <controller ctrl="98" value="65"/>
-               </MidiAction>
-            <MidiAction name="rofl8">
-               <descr>set stop Rohrflöte 8</descr>
-               <controller ctrl="98" value="97"/>
-               <controller ctrl="98" value="0"/>
-               </MidiAction>
-            <MidiAction name="half8">
-               <descr>set stop Harmonic Flute 8</descr>
-               <controller ctrl="98" value="97"/>
-               <controller ctrl="98" value="1"/>
-               </MidiAction>
-            <MidiAction name="fldo4">
-               <descr>set stop Flauto Dolce 4</descr>
-               <controller ctrl="98" value="97"/>
-               <controller ctrl="98" value="2"/>
-               </MidiAction>
-            <MidiAction name="nasard">
-               <descr>set stop Nasard 2 2/3</descr>
-               <controller ctrl="98" value="97"/>
-               <controller ctrl="98" value="3"/>
-               </MidiAction>
-            <MidiAction name="otta2">
-               <descr>set stop Ottavina2</descr>
-               <controller ctrl="98" value="97"/>
-               <controller ctrl="98" value="4"/>
-               </MidiAction>
-            <MidiAction name="tertia">
-               <descr>set stop Tertia 1 3/5</descr>
-               <controller ctrl="98" value="97"/>
-               <controller ctrl="98" value="5"/>
-               </MidiAction>
-            <MidiAction name="sesqui">
-               <descr>set stop Sesquialtera</descr>
-               <controller ctrl="98" value="97"/>
-               <controller ctrl="98" value="6"/>
-               </MidiAction>
-            <MidiAction name="septim">
-               <descr>set stop Septime</descr>
-               <controller ctrl="98" value="97"/>
-               <controller ctrl="98" value="7"/>
-               </MidiAction>
-            <MidiAction name="krumh">
-               <descr>set stop Krumhorn</descr>
-               <controller ctrl="98" value="97"/>
-               <controller ctrl="98" value="9"/>
-               </MidiAction>
-            <MidiAction name="melod">
-               <descr>set stop Melodia</descr>
-               <controller ctrl="98" value="97"/>
-               <controller ctrl="98" value="10"/>
-               </MidiAction>
-            <MidiAction name="TR">
-               <descr>set stop Tremulant</descr>
-               <controller ctrl="98" value="97"/>
-               <controller ctrl="98" value="11"/>
-               </MidiAction>
-            <MidiAction name="C2+3">
-               <descr>set stop II+III</descr>
-               <controller ctrl="98" value="97"/>
-               <controller ctrl="98" value="12"/>
-               </MidiAction>
-            </channel>
-        <channel name="III">
-            <descr>Division III</descr>
-            <synti>Aeolus</synti>
-            <MidiAction name="Reset">
-               <descr>Reset all stops in group III</descr>
-               <controller ctrl="98" value="64"/>
-               </MidiAction>
-            <MidiAction name="prin8">
-               <descr>set stop Princiapl 8</descr>
-               <controller ctrl="98" value="96"/>
-               <controller ctrl="98" value="0"/>
-               </MidiAction>
-            <MidiAction name="gems8">
-               <descr>set stop Gemshorn 8</descr>
-               <controller ctrl="98" value="96"/>
-               <controller ctrl="98" value="1"/>
-               </MidiAction>
-            <MidiAction name="quna8">
-               <descr>set stop Quintadena 8</descr>
-               <controller ctrl="98" value="96"/>
-               <controller ctrl="98" value="2"/>
-               </MidiAction>
-            <MidiAction name="suab8">
-               <descr>set stop Suabile 8</descr>
-               <controller ctrl="98" value="96"/>
-               <controller ctrl="98" value="3"/>
-               </MidiAction>
-            <MidiAction name="rofl4">
-               <descr>set stop Rohrflöte 4</descr>
-               <controller ctrl="98" value="96"/>
-               <controller ctrl="98" value="4"/>
-               </MidiAction>
-            <MidiAction name="dulz4">
-               <descr>set stop Dulzflöte 4</descr>
-               <controller ctrl="98" value="96"/>
-               <controller ctrl="98" value="5"/>
-               </MidiAction>
-            <MidiAction name="fl223">
-               <descr>set stop Quintflöte 2 2/3</descr>
-               <controller ctrl="98" value="96"/>
-               <controller ctrl="98" value="6"/>
-               </MidiAction>
-            <MidiAction name="soct2">
-               <descr>set stop Superoctav2 2</descr>
-               <controller ctrl="98" value="96"/>
-               <controller ctrl="98" value="7"/>
-               </MidiAction>
-            <MidiAction name="siff1">
-               <descr>set stop Sifflet 1</descr>
-               <controller ctrl="98" value="96"/>
-               <controller ctrl="98" value="8"/>
-               </MidiAction>
-            <MidiAction name="cymb">
-               <descr>set stop Cymbel VI</descr>
-               <controller ctrl="98" value="96"/>
-               <controller ctrl="98" value="9"/>
-               </MidiAction>
-            <MidiAction name="oboe">
-               <descr>set stop Oboe</descr>
-               <controller ctrl="98" value="96"/>
-               <controller ctrl="98" value="10"/>
-               </MidiAction>
-            <MidiAction name="TR">
-               <descr>set stop Tremulant</descr>
-               <controller ctrl="98" value="96"/>
-               <controller ctrl="98" value="11"/>
-               </MidiAction>
-            </channel>
-        <channel name="P">
-            <descr>Division P (pedal)</descr>
-            <synti>Aeolus</synti>
-            <MidiAction name="Reset">
-               <descr>Reset all stops</descr>
-               <controller ctrl="98" value="67"/>
-               </MidiAction>
-            <MidiAction name="subb16">
-               <descr>set stop Subbass 16</descr>
-               <controller ctrl="98" value="99"/>
-               <controller ctrl="98" value="0"/>
-               </MidiAction>
-            <MidiAction name="prin16">
-               <descr>set stop Principal 16</descr>
-               <controller ctrl="98" value="99"/>
-               <controller ctrl="98" value="1"/>
-               </MidiAction>
-            <MidiAction name="prin8">
-               <descr>set stop Principal 8</descr>
-               <controller ctrl="98" value="99"/>
-               <controller ctrl="98" value="2"/>
-               </MidiAction>
-            <MidiAction name="prin4">
-               <descr>set stop Principal 4</descr>
-               <controller ctrl="98" value="99"/>
-               <controller ctrl="98" value="3"/>
-               </MidiAction>
-            <MidiAction name="oct2">
-               <descr>set stop Octave 2</descr>
-               <controller ctrl="98" value="99"/>
-               <controller ctrl="98" value="4"/>
-               </MidiAction>
-            <MidiAction name="oct1">
-               <descr>set stop Octave 1</descr>
-               <controller ctrl="98" value="99"/>
-               <controller ctrl="98" value="5"/>
-               </MidiAction>
-            <MidiAction name="qu513">
-               <descr>set stop Quint 5 1/3</descr>
-               <controller ctrl="98" value="99"/>
-               <controller ctrl="98" value="6"/>
-               </MidiAction>
-            <MidiAction name="qu223">
-               <descr>set stop Quint 2 2/3</descr>
-               <controller ctrl="98" value="99"/>
-               <controller ctrl="98" value="7"/>
-               </MidiAction>
-            <MidiAction name="mixt">
-               <descr>set stop Mixture</descr>
-               <controller ctrl="98" value="99"/>
-               <controller ctrl="98" value="8"/>
-               </MidiAction>
-            <MidiAction name="bass18">
-               <descr>set stop Fagott 15</descr>
-               <controller ctrl="98" value="99"/>
-               <controller ctrl="98" value="9"/>
-               </MidiAction>
-            <MidiAction name="trom16">
-               <descr>set stop Trombone 16</descr>
-               <controller ctrl="98" value="99"/>
-               <controller ctrl="98" value="10"/>
-               </MidiAction>
-            <MidiAction name="bomb32">
-               <descr>set stop Bombarde 32</descr>
-               <controller ctrl="98" value="99"/>
-               <controller ctrl="98" value="11"/>
-               </MidiAction>
-            <MidiAction name="trum8">
-               <descr>set stop Trumpet</descr>
-               <controller ctrl="98" value="99"/>
-               <controller ctrl="98" value="12"/>
-               </MidiAction>
-            <MidiAction name="CP+1">
-               <descr>set stop P+I</descr>
-               <controller ctrl="98" value="99"/>
-               <controller ctrl="98" value="13"/>
-               </MidiAction>
-            <MidiAction name="CP+2">
-               <descr>set stop P+II</descr>
-               <controller ctrl="98" value="99"/>
-               <controller ctrl="98" value="14"/>
-               </MidiAction>
-            <MidiAction name="CP+3">
-               <descr>set stop P+III</descr>
-               <controller ctrl="98" value="99"/>
-               <controller ctrl="98" value="15"/>
-               </MidiAction>
-            </channel>
-        </instrument>
-
      <instrument>
         <name>Electronic Organ</name>
         <short-name>Et. Org.</short-name>
@@ -4608,9 +4199,7 @@
         <clef staff="1">0</clef>
         <clef staff="2">4</clef>
         <clef staff="3">4</clef>
-        <bracket staff="1">1</bracket>
-        <bracketSpan staff="1">2</bracketSpan>
-        <barlineSpan staff="1">2</barlineSpan>
+        <bracket>1</bracket>
         <channel>
            <program>18</program>
            </channel>
@@ -4818,13 +4407,13 @@
           </channel>
         </instrument>
      <instrument>
-        <name>Soprano Viola da gamba</name>
-        <short-name>S. Vla. d. g.</short-name>
+        <name>Pardessus de viole</name>
+        <short-name>Pds. v.</short-name>
         <clef>9</clef>
-        <aPitchRange>50-86</aPitchRange>
-        <pPitchRange>50-93</pPitchRange>
+        <aPitchRange>55-91</aPitchRange>
+        <pPitchRange>55-96</pPitchRange>
         <channel>
-           <program>110</program>
+           <program>40</program>
            </channel>
         <channel name="pizzicato">
           <program value="45"/>
@@ -4835,13 +4424,13 @@
         <extended>1</extended>
         </instrument>
      <instrument>
-        <name>Alto Viola da gamba</name>
-        <short-name>A. Vla. d. g.</short-name>
+        <name>Treble Viol</name>
+        <short-name>Tr. v.</short-name>
         <clef>11</clef>
-        <aPitchRange>45-81</aPitchRange>
-        <pPitchRange>45-88</pPitchRange>
+        <aPitchRange>50-86</aPitchRange>
+        <pPitchRange>50-91</pPitchRange>
         <channel>
-           <program>110</program>
+           <program>40</program>
            </channel>
         <channel name="pizzicato">
           <program value="45"/>
@@ -4852,13 +4441,13 @@
         <extended>1</extended>
         </instrument>
      <instrument>
-        <name>Tenor Viola da gamba</name>
-        <short-name>T. Vla. d. g.</short-name>
+        <name>Tenor Viol</name>
+        <short-name>Ten. V.</short-name>
         <clef>12</clef>
         <aPitchRange>43-79</aPitchRange>
-        <pPitchRange>43-86</pPitchRange>
+        <pPitchRange>43-84</pPitchRange>
         <channel>
-           <program>110</program>
+           <program>41</program>
            </channel>
         <channel name="pizzicato">
           <program value="45"/>
@@ -4870,12 +4459,28 @@
         </instrument>
      <instrument>
         <name>Viola da gamba</name>
-        <short-name>Vla. d. g.</short-name>
+        <short-name>V. d. g.</short-name>
         <clef>4</clef>
         <aPitchRange>38-74</aPitchRange>
-        <pPitchRange>38-81</pPitchRange>
+        <pPitchRange>38-79</pPitchRange>
         <channel>
-           <program>110</program>
+           <program>42</program>
+           </channel>
+        <channel name="pizzicato">
+          <program value="45"/>
+          </channel>
+        <channel name="tremolo">
+          <program value="44"/>
+          </channel>
+        </instrument>
+     <instrument>
+        <name>Viola da gamba (7 strings)</name>
+        <short-name>V. d. g.</short-name>
+        <clef>4</clef>
+        <aPitchRange>33-74</aPitchRange>
+        <pPitchRange>33-79</pPitchRange>
+        <channel>
+           <program>42</program>
            </channel>
         <channel name="pizzicato">
           <program value="45"/>
@@ -4948,7 +4553,7 @@
           <program value="44"/>
           </channel>
         </instrument>
-      <instrument>
+     <instrument>
         <name>Acoustic Bass</name>
         <short-name>Bass</short-name>
         <clef>5</clef>

@@ -18,43 +18,44 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "musescore.h"
-#include "libmscore/instrtemplate.h"
-#include "libmscore/clef.h"
-#include "libmscore/staff.h"
-#include "libmscore/part.h"
-#include "libmscore/system.h"
-#include "libmscore/page.h"
-#include "libmscore/text.h"
-#include "libmscore/box.h"
+#include "mscore.h"
+#include "instrtemplate.h"
+#include "clef.h"
+#include "staff.h"
+#include "part.h"
+#include "system.h"
+#include "page.h"
+#include "text.h"
+#include "box.h"
 #include "preferences.h"
-#include "libmscore/style.h"
-#include "libmscore/measure.h"
-#include "libmscore/segment.h"
-#include "libmscore/harmony.h"
+#include "style.h"
+#include "measure.h"
+#include "segment.h"
+#include "harmony.h"
 #include "script.h"
-#include "libmscore/score.h"
-#include "libmscore/repeatlist.h"
-#include "libmscore/mscore.h"
+#include "score.h"
+#include "repeatlist.h"
+#include "timesig.h"
 
 Q_DECLARE_METATYPE(PageFormat*);
 Q_DECLARE_METATYPE(Score*);
 Q_DECLARE_METATYPE(Part*);
 Q_DECLARE_METATYPE(Text*);
+Q_DECLARE_METATYPE(TimeSig*);
 
 static const char* const function_names_score[] = {
       "title", "subtitle", "composer", "poet",
       "load", "save",
       "setExpandRepeat", "appendPart", "appendMeasures",
       "pages", "measures", "parts", "part", "startUndo", "endUndo", "setStyle", "hasLyrics", "hasHarmonies",
-      "staves", "keysig", "duration", "pageFormat", "metatag"
+      "staves", "keysig", "duration", "pageFormat", "source", "timesig"
       };
 static const int function_lengths_score[] = {
       1, 1, 1, 1,
       1, 6,
       1, 1, 1,
       0, 0, 0, 1, 0, 0, 2, 0, 0,
-      0, 1, 0, 0, 2
+      0, 1, 0, 0, 1, 1
       };
 
 static const QScriptValue::PropertyFlags flags_score[] = {
@@ -84,7 +85,8 @@ static const QScriptValue::PropertyFlags flags_score[] = {
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
       QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter,
-      QScriptValue::SkipInEnumeration,
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter,
+      QScriptValue::SkipInEnumeration | QScriptValue::PropertyGetter | QScriptValue::PropertySetter
       };
 
 ScriptInterface scoreInterface = {
@@ -143,7 +145,7 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                   {
                   Text* t = score->getText(TEXT_TITLE);
                   if (argc == 0) {
-                        QString s = t ? t->getText() : "";
+                        QString s = t ? t->getText().replace(QString(0xe10d), QString(0x266D)) : "";
                         return qScriptValueFromValue(context->engine(), s);
                         }
                   else if (argc == 1) {
@@ -160,7 +162,7 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                   {
                   Text* t = score->getText(TEXT_SUBTITLE);
                   if (argc == 0) {
-                        QString s = t ? t->getText() : "";
+                        QString s = t ? t->getText().replace(QString(0xe10d), QString(0x266D)) : "";
                         return qScriptValueFromValue(context->engine(), s);
                         }
                   else if (argc == 1) {
@@ -177,7 +179,7 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                   {
                   Text* t = score->getText(TEXT_COMPOSER);
                   if (argc == 0) {
-                        QString s = t ? t->getText() : "";
+                        QString s = t ? t->getText().replace(QString(0xe10d), QString(0x266D)) : "";
                         return qScriptValueFromValue(context->engine(), s);
                         }
                   else if (argc == 1) {
@@ -194,7 +196,7 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                   {
                   Text* t = score->getText(TEXT_POET);
                   if (argc == 0) {
-                        QString s = t ? t->getText() : "";
+                        QString s = t ? t->getText().replace(QString(0xe10d), QString(0x266D)) : "";
                         return qScriptValueFromValue(context->engine(), s);
                         }
                   else if (argc == 1) {
@@ -210,7 +212,7 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
             case 4:    // "load",
                   if (argc == 1) {
                         QString s = qscriptvalue_cast<QString>(context->argument(0));
-                        return qScriptValueFromValue(context->engine(), !mscore->readScore(score, s));
+                        return qScriptValueFromValue(context->engine(), score->read(s));
                         }
                   break;
             case 5:     // "save",
@@ -221,19 +223,20 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                         ext = qscriptvalue_cast<QString>(context->argument(1));
                         }
 #ifdef HAS_AUDIOFILE
-                  if (argc == 2) {
-                        return qScriptValueFromValue(context->engine(), mscore->saveAudio(score, s, ext));
+                  if (argc == 3) {
+                        sf = qscriptvalue_cast<QString>(context->argument(1));
+                        return qScriptValueFromValue(context->engine(), score->saveAudio(s, ext, sf));
                         }
 #endif // HAS_AUDIOFILE
                   else if (argc == 2)
-                        return qScriptValueFromValue(context->engine(), mscore->saveAs(score, true, s, ext));
+                        return qScriptValueFromValue(context->engine(), score->saveAs(true, s, ext));
                   else if (argc == 6 && ext == "png") {
                         bool screenshot  = context->argument(2).toBool();
                         bool transparent = context->argument(3).toBool();
                         double convDpi = context->argument(4).toNumber();
                         bool grayscale = context->argument(5).toBool();
                         QImage::Format f = grayscale ? QImage::Format_Indexed8 : QImage::Format_ARGB32_Premultiplied;
-                        mscore->savePng(score, s, screenshot, transparent, convDpi, f);
+                        score->savePng(s, screenshot, transparent, convDpi, f);
                         return context->engine()->undefinedValue();
                         }
                   }
@@ -275,11 +278,11 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                   int n = score->nstaves();
                   for (int i = 0; i < t->staves; ++i) {
                         Staff* staff = new Staff(score, part, i);
-                        // staff->setClef(0, t->clefIdx[i]);
+                        staff->clefList()->setClef(0, t->clefIdx[i]);
                         staff->setLines(t->staffLines[i]);
                         staff->setSmall(t->smallStaff[i]);
                         if (i == 0) {
-                              staff->setBracket(0, t->bracket[0]);
+                              staff->setBracket(0, t->bracket);
                               staff->setBracketSpan(0, t->staves);
                               }
                         score->undoInsertStaff(staff, n + i);
@@ -341,7 +344,7 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                         QString name = qscriptvalue_cast<QString>(context->argument(0));
                         QString val  = qscriptvalue_cast<QString>(context->argument(1));
                         StyleVal sv(name, val);
-                        score->style()->set(sv);
+                        score->setStyle(sv.getIdx(), sv);
                         return context->engine()->undefinedValue();
                         }
                   break;
@@ -350,7 +353,7 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                         for (Measure* m = score->firstMeasure(); m; m = m->nextMeasure()) {
                               for (Segment* seg = m->first(); seg; seg = seg->next()) {
                                     for (int i = 0; i < score->nstaves(); ++i) {
-                                          if (seg->lyricsList(i) && seg->lyricsList(i)->size() > 0)
+                                          if (seg->lyricsList(i)->size() > 0)
                                                 return qScriptValueFromValue(context->engine(), true);
                                           }
                                     }
@@ -383,28 +386,27 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                             Staff* st = score->staff(0);
                             KeyList* kl = st->keymap();
                             KeySigEvent key = kl->key(0);
-                            if(key.custom()) {
+                            if(key.custom()){
                                  QString s = "undefined";
                                  return qScriptValueFromValue(context->engine(), s);
                                  }
                             result = key.accidentalType();
-                            int tr =  st->part()->instr()->transpose().chromatic;
+                            int tr =  st->part()->transpose().chromatic;
                             if (!score->styleB(ST_concertPitch) && tr){
                                 result = transposeKey(key.accidentalType(), tr);
                                 }
                             }
                         return qScriptValueFromValue(context->engine(), result);
                         }
-                   else if(argc == 1) {
-                        //printf(":::setKeysig\n");
+                  else if(argc == 1) {
                         int newKey = context->argument(0).toInt32();
                         KeySigEvent ke;
                         ke.setAccidentalType(newKey);
-
+    
                         for (int idx = 0; idx < score->nstaves(); idx++) {
                             int curKey = score->staff(idx)->key(0).accidentalType();
                             if (curKey != newKey) {
-                                score->undoChangeKeySig(score->staff(idx), 0, ke);
+                                score->staff(idx)->changeKeySig(0, ke);
                             }
                         }
                         return context->engine()->undefinedValue();
@@ -422,19 +424,37 @@ static QScriptValue prototype_Score_call(QScriptContext* context, QScriptEngine*
                     return qScriptValueFromValue(context->engine(), score->pageFormat());
                   }
                   break;
-            case 22:   //metatag
-                  if (argc == 1) {
-                        QString tag = qscriptvalue_cast<QString>(context->argument(0));
-                        QString val = score->metaTag(tag);
-                        return qScriptValueFromValue(context->engine(), val);
+            case 22:   //source
+                  if (argc == 0) {           
+                        return qScriptValueFromValue(context->engine(), score->source());
                         }
-                  else if (argc == 2) {
-                        QString tag = qscriptvalue_cast<QString>(context->argument(0));
-                        QString val = qscriptvalue_cast<QString>(context->argument(1));
-                        score->setMetaTag(tag, val);
+                  else if (argc == 1) {
+                        QString s = qscriptvalue_cast<QString>(context->argument(0));
+                        if (s != 0)
+                              score->setSource(s);
                         return context->engine()->undefinedValue();
                   }
                   break;
+            case 23:  // timesig
+                  if (argc == 0) {
+                        TimeSig* t = 0;
+                        Segment* s = 0;
+                        Measure* m = score->firstMeasure();
+                        if (m && (s = m->first(SegTimeSig)))
+                              t = static_cast<TimeSig*>(s->element(0));
+                        return qScriptValueFromValue(context->engine(), t);
+                  }
+                  else if (argc == 1) {
+                      TimeSig* timesig = qscriptvalue_cast<TimeSig*>(context->argument(0));
+                      if (!timesig)
+                            break;
+                      if (timesig->subtype() != 0)
+                          score->replaceTimeSig(0, timesig);
+                      return context->engine()->undefinedValue();
+                  }
+
+                  break;
+
             }
       return context->throwError(QScriptContext::TypeError,
          QString::fromLatin1("Score.%0(): bad argument count or value")
@@ -449,7 +469,7 @@ static QScriptValue static_Score_call(QScriptContext* context, QScriptEngine*)
       {
       if (context->thisObject().strictlyEquals(context->engine()->globalObject()))
             return context->throwError(QString::fromLatin1("Score(): Did you forget to construct with 'new'?"));
-      Score* score = new Score(MScore::defaultStyle());
+      Score* score = new Score(defaultStyle);
       score->setName(mscore->createDefaultName());
       mscore->setCurrentScoreView(mscore->appendScore(score));
       score->startCmd();

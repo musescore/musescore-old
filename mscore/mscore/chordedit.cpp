@@ -21,10 +21,9 @@
 #include <iostream>
 
 #include "chordedit.h"
-#include "libmscore/harmony.h"
-#include "libmscore/pitchspelling.h"
-#include "libmscore/score.h"
-#include "libmscore/chordlist.h"
+#include "harmony.h"
+#include "pitchspelling.h"
+#include "score.h"
 
 //---------------------------------------------------------
 //   ChordEdit
@@ -81,13 +80,9 @@ ChordEdit::ChordEdit(Score* s, QWidget* parent)
       extensionGroup->addButton(extOther,  0);
 
       extOtherCombo->clear();
-      ChordList* cl = score->style()->chordList();
+      ChordList* cl = score->style().chordList();
       foreach (const ChordDescription* cd, *cl) {
-            QString p;
-            if (cd->names.isEmpty())
-                  p = "?";
-            else
-                  p = cd->names.front();
+            QString p(cd->name);
             extOtherCombo->addItem(p, cd->id);
             }
       connect(rootGroup, SIGNAL(buttonClicked(int)), SLOT(chordChanged()));
@@ -229,10 +224,10 @@ const ChordDescription* ChordEdit::extension()
             return 0;
       else if (id == 0) {
             int idx = extOtherCombo->currentIndex();
-            return score->style()->chordDescription(extOtherCombo->itemData(idx).toInt());
+            return score->style().chordDescription(extOtherCombo->itemData(idx).toInt());
             }
       else
-            return score->style()->chordDescription(id);
+            return score->style().chordDescription(id);
       }
 
 //---------------------------------------------------------

@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2009-2010 Werner Schweer et al.
+//  Copyright (C) 2009 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -18,10 +18,9 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "musescore.h"
+#include "mscore.h"
 #include "preferences.h"
 #include "voiceselector.h"
-#include "libmscore/mscore.h"
 
 //---------------------------------------------------------
 //   VoiceButton
@@ -32,8 +31,11 @@ VoiceButton::VoiceButton(int v, QWidget* parent)
       {
       voice = v;
       setToolButtonStyle(Qt::ToolButtonIconOnly);
-      setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
-      setCheckable(true);
+      setAutoFillBackground(true);
+      QPalette pal = palette();
+      pal.setColor(QPalette::Window, preferences.selectColor[voice].light(170));
+      pal.setColor(QPalette::Button, preferences.selectColor[voice].light(100));
+      setPalette(pal);
       }
 
 //---------------------------------------------------------
@@ -43,16 +45,28 @@ VoiceButton::VoiceButton(int v, QWidget* parent)
 void VoiceButton::paintEvent(QPaintEvent* e)
       {
       QPainter p(this);
-      QColor c(MScore::selectColor[voice]);
-      QColor bg(palette().color(QPalette::Normal, QPalette::Window));
-      p.fillRect(e->rect(), isChecked() ? c.light(170) : bg);
-      p.setPen(QPen(preferences.globalStyle == 0 ? Qt::white : Qt::black));
-      if (isChecked())
-            p.setPen(QPen(Qt::black));
+      if (isChecked()) {
+            p.fillRect(e->rect(), palette().color(isChecked() ? QPalette::Button : QPalette::Window));
+            p.setPen(1);
+            p.drawRect(0, 0, width()-1, height()-1);
+            }
+      else
+            p.fillRect(e->rect(), palette().color(QPalette::Window));
       QFont f = font();
-      f.setPixelSize(height());
+      f.setPixelSize(preferences.iconHeight / 2);
       p.setFont(f);
-      p.drawText(QRect(0, 1, width(), height()), Qt::AlignCenter, QString("%1").arg(voice+1));
+      p.drawText(rect(), Qt::AlignCenter, QString("%1").arg(voice+1));
+      }
+
+//---------------------------------------------------------
+//   sizeHint
+//---------------------------------------------------------
+
+QSize VoiceButton::sizeHint() const
+      {
+      int w = preferences.iconWidth / 2;
+      int h = preferences.iconHeight / 2;
+      return QSize((w * 3)/2, h);
       }
 
 //---------------------------------------------------------
@@ -60,10 +74,8 @@ void VoiceButton::paintEvent(QPaintEvent* e)
 //---------------------------------------------------------
 
 VoiceSelector::VoiceSelector(QWidget* parent)
-   : QFrame(parent)
+   : QWidget(parent)
       {
-      setLineWidth(2);
-      setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
       QGridLayout* vwl = new QGridLayout;
       vwl->setSpacing(0);
       vwl->setContentsMargins(0, 0, 0, 0);

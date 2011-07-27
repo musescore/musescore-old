@@ -34,57 +34,54 @@
 
 #include <math.h>
 #include "config.h"
-#include "musescore.h"
+#include "mscore.h"
 #include "file.h"
-#include "libmscore/score.h"
-#include "libmscore/rest.h"
-#include "libmscore/chord.h"
+#include "score.h"
+#include "rest.h"
+#include "chord.h"
 #include "al/sig.h"
-#include "libmscore/key.h"
-#include "libmscore/clef.h"
-#include "libmscore/note.h"
-#include "libmscore/segment.h"
-#include "libmscore/xml.h"
-#include "libmscore/beam.h"
-#include "libmscore/staff.h"
-#include "libmscore/part.h"
-#include "libmscore/measure.h"
-#include "libmscore/style.h"
+#include "key.h"
+#include "clef.h"
+#include "note.h"
+#include "segment.h"
+#include "xml.h"
+#include "beam.h"
+#include "staff.h"
+#include "part.h"
+#include "measure.h"
+#include "style.h"
 #include "musicxml.h"
-#include "libmscore/slur.h"
-#include "libmscore/hairpin.h"
-#include "libmscore/dynamic.h"
-#include "libmscore/barline.h"
-#include "libmscore/timesig.h"
-#include "libmscore/ottava.h"
-#include "libmscore/pedal.h"
-#include "libmscore/text.h"
-#include "libmscore/tuplet.h"
-#include "libmscore/lyrics.h"
-#include "libmscore/volta.h"
-#include "libmscore/keysig.h"
-#include "libmscore/bracket.h"
-#include "libmscore/arpeggio.h"
-#include "libmscore/repeat.h"
-#include "libmscore/tremolo.h"
-#include "libmscore/trill.h"
-#include "zarchive.h"
-#include "libmscore/harmony.h"
-#include "libmscore/tempotext.h"
-#include "libmscore/sym.h"
-#include "libmscore/pitchspelling.h"
-#include "libmscore/utils.h"
-#include "libmscore/articulation.h"
-#include "libmscore/page.h"
-#include "libmscore/system.h"
-#include "libmscore/element.h"
-#include "libmscore/glissando.h"
-#include "libmscore/navigate.h"
-#include "libmscore/spanner.h"
-#include "libmscore/drumset.h"
+#include "slur.h"
+#include "hairpin.h"
+#include "dynamics.h"
+#include "barline.h"
+#include "timesig.h"
+#include "ottava.h"
+#include "pedal.h"
+#include "text.h"
+#include "tuplet.h"
+#include "lyrics.h"
+#include "volta.h"
+#include "keysig.h"
+#include "bracket.h"
+#include "arpeggio.h"
+#include "repeat.h"
+#include "tremolo.h"
+#include "trill.h"
+#include "zip.h"
+#include "harmony.h"
+#include "tempotext.h"
+#include "sym.h"
+#include "pitchspelling.h"
+#include "utils.h"
+#include "articulation.h"
+#include "page.h"
+#include "system.h"
+#include "element.h"
+#include "glissando.h"
+#include "navigate.h"
+#include "drumset.h"
 #include "preferences.h"
-#include "libmscore/mscore.h"
-#include "libmscore/accidental.h"
 
 static bool isTwoNoteTremolo(Chord* chord);
 
@@ -225,8 +222,6 @@ class GlissandoHandler {
 //   ExportMusicXml
 //---------------------------------------------------------
 
-typedef QHash<const Chord*, const Trill*> TrillHash;
-
 class ExportMusicXml {
       Score* score;
       Xml xml;
@@ -238,11 +233,9 @@ class ExportMusicXml {
       int div;
       double millimeters;
       int tenths;
-      TrillHash trillStart;
-      TrillHash trillStop;
 
       int findBracket(const TextLine* tl) const;
-      void chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bool useDrumset);
+      void chord(Chord* chord, int staff, const LyricsList* ll, bool useDrumset);
       void rest(Rest* chord, int staff);
       void clef(int staff, int clef);
       void timesig(TimeSig* tsig);
@@ -251,7 +244,7 @@ class ExportMusicXml {
       void barlineRight(Measure* m);
       void pitch2xml(Note* note, char& c, int& alter, int& octave);
       void unpitch2xml(Note* note, char& c, int& octave);
-      void lyrics(const QList<Lyrics*>* ll, const int trk);
+      void lyrics(const LyricsList* ll, const int trk);
       void work(const MeasureBase* measure);
       void calcDivMoveToTick(int t);
       void calcDivisions();
@@ -272,7 +265,7 @@ class ExportMusicXml {
       void dynamic(Dynamic* dyn, int staff);
       void symbol(Symbol * sym, int staff);
       void tempoText(TempoText* text, int staff);
-      void harmony(Harmony*);
+      void harmony(Harmony*, Element*);
       };
 
 //---------------------------------------------------------
@@ -768,7 +761,7 @@ void DirectionsHandler::handleElements(ExportMusicXml* /*exp*/, Staff* staff, in
 //   findSpecificMatchInMeasure -- find chord or rest in measure
 //     starting or ending at tick
 //---------------------------------------------------------
-/*
+
 static DirectionsAnchor* findSpecificMatchInMeasure(int tick, Staff* stf, bool start, Measure* m, int strack, int etrack)
       {
       for (int st = strack; st < etrack; ++st) {
@@ -778,8 +771,8 @@ static DirectionsAnchor* findSpecificMatchInMeasure(int tick, Staff* stf, bool s
                         continue;
                   if (el->isChordRest() && el->staff() == stf) {
                         ChordRest* cr = static_cast<ChordRest*>(el);
-                        if ((start && cr->tick() == tick)
-                            || (!start && (cr->tick() + cr->ticks()) == tick)) {
+                        if (   ( start && el->tick() == tick)
+                            || (!start && (el->tick() + cr->tickLen()) == tick)) {
                               return new DirectionsAnchor(el, start, tick);
                               }
                         }
@@ -787,11 +780,11 @@ static DirectionsAnchor* findSpecificMatchInMeasure(int tick, Staff* stf, bool s
             }
             return 0;
       }
-*/
+
 //---------------------------------------------------------
 //   findMatchInMeasure -- find chord or rest in measure
 //---------------------------------------------------------
-/*
+
 static DirectionsAnchor* findMatchInMeasure(int tick, Staff* st, Measure* m, Part* p, int strack, int etrack)
       {
       DirectionsAnchor* da;
@@ -805,12 +798,12 @@ static DirectionsAnchor* findMatchInMeasure(int tick, Staff* st, Measure* m, Par
             return new DirectionsAnchor(tick);
       else return 0;
       }
-*/
+
 //---------------------------------------------------------
 //   findSpecificMatchInPart -- find chord or rest in part
 //     starting or ending at tick
 //---------------------------------------------------------
-/*
+
 static DirectionsAnchor* findSpecificMatchInPart(int tick, Staff* st, bool start, Score* sc, int strack, int etrack)
       {
       for (MeasureBase* mb = sc->measures()->first(); mb; mb = mb->next()) {
@@ -823,13 +816,13 @@ static DirectionsAnchor* findSpecificMatchInPart(int tick, Staff* st, bool start
             }
       return 0;
       }
-*/
+
 //---------------------------------------------------------
 //   findMatchInPart -- find chord or rest in part
 //     if start is true, try to find a match at start first
 //     if start is false, try to find a match at end first
 //---------------------------------------------------------
-/*
+
 static DirectionsAnchor* findMatchInPart(int tick, Staff* st, bool start, Score* sc, Part* p, int strack, int etrack)
       {
       DirectionsAnchor* da = 0;
@@ -846,16 +839,15 @@ static DirectionsAnchor* findMatchInPart(int tick, Staff* st, bool start, Score*
             return da;
       return (st && st->part() == p) ? new DirectionsAnchor(tick) : 0;
       }
-*/
+
 //---------------------------------------------------------
 //   buildDirectionsList -- associate directions (measure relative elements)
 //     with elements in segments to enable writing at the correct position
 //     in the output stream. Called once for every part to handle all part-level elements.
 //---------------------------------------------------------
 
-void DirectionsHandler::buildDirectionsList(Part* /* p */, int /* strack */, int /* etrack */)
+void DirectionsHandler::buildDirectionsList(Part* p, int strack, int etrack)
       {
-#if 0 // TODO-WS: implementation has changed
       // part-level elements stored in the score layout
       foreach(Element* dir, *(cs->gel())) {
             DirectionsAnchor* da = 0;
@@ -871,7 +863,7 @@ void DirectionsHandler::buildDirectionsList(Part* /* p */, int /* strack */, int
                               da->setDirect(dir);
                               storeAnchor(da);
                               }
-//TODO-WS                        da = findMatchInPart(sl->tick2(), sl->staff(), false, cs, p, strack, etrack);
+                        da = findMatchInPart(sl->tick2(), sl->staff(), false, cs, p, strack, etrack);
                         if (da) {
                               da->setDirect(dir);
                               storeAnchor(da);
@@ -892,7 +884,6 @@ void DirectionsHandler::buildDirectionsList(Part* /* p */, int /* strack */, int
             Measure* m = (Measure*)mb;
             buildDirectionsList(m, true, p, strack, etrack);
             }
-#endif
       }
 
 //---------------------------------------------------------
@@ -902,11 +893,11 @@ void DirectionsHandler::buildDirectionsList(Part* /* p */, int /* strack */, int
 //     part-level or measure-level elements.
 //---------------------------------------------------------
 
-void DirectionsHandler::buildDirectionsList(Measure* m, bool /* dopart */, Part* /* p */, int /* strack */, int /* etrack */)
+void DirectionsHandler::buildDirectionsList(Measure* m, bool dopart, Part* p, int strack, int etrack)
       {
       // loop over all measure relative elements in this measure
       for (ciElement ci = m->el()->begin(); ci != m->el()->end(); ++ci) {
-//            DirectionsAnchor* da = 0;
+            DirectionsAnchor* da = 0;
             Element* dir = *ci;
             switch(dir->type()) {
                   case DYNAMIC:
@@ -914,7 +905,6 @@ void DirectionsHandler::buildDirectionsList(Measure* m, bool /* dopart */, Part*
                   case TEMPO_TEXT:
                   case TEXT:
                   case STAFF_TEXT:
-#if 0 // TODOxx
                         if (!dopart) {
                               // LVIFIX 20071110 TODO
                               // Even though they are moved to from measure to vbox, the elements
@@ -928,7 +918,6 @@ void DirectionsHandler::buildDirectionsList(Measure* m, bool /* dopart */, Part*
                                     storeAnchor(da);
                                     }
                         }
-#endif
                         break;
                   default:
                         // all others silently ignored
@@ -939,112 +928,7 @@ void DirectionsHandler::buildDirectionsList(Measure* m, bool /* dopart */, Part*
             }
       }
 
-//---------------------------------------------------------
-// trill hadling
-//---------------------------------------------------------
-
-// Find chords to attach trills to. This is necessary because in MuseScore
-// trills are spanners (thus attached to segments), while in MusicXML trills
-// are attached to notes.
-// TBD: must trill end be in the same staff as trill started ?
-// if so, no need to pass in strack and etrack (trill has a track)
-
-static void findTrillAnchors(const Trill* trill, const Segment* seg, Chord* & startChord, Chord* & stopChord)
-      {
-      printf("findTrillAnchors(trill=%p)", trill);
-      const int startTick = seg->tick();
-      const int endTick = (static_cast<Segment*>(trill->endElement()))->tick();
-      const int strack = trill->track();
-      printf(" startTick %d endTick %d strack %d\n", startTick, endTick, strack);
-      // try to find chords in the same track:
-      // find a track with suitable chords both for start and stop
-      for (int i = 0; i < VOICES; ++i) {
-            Element* el = seg->element(strack + i);
-            if (!el)
-                  continue;
-            if (el->type() != CHORD)
-                  continue;
-            startChord = static_cast<Chord*>(el);
-            Segment* s = trill->score()->tick2segmentEnd(strack + i, endTick);
-            printf("\n");
-            if (!s)
-                  continue;
-            el = s->element(strack + i);
-            if (!el)
-                  continue;
-            if (el->type() != CHORD)
-                  continue;
-            stopChord = static_cast<Chord*>(el);
-            printf("findTrillAnchors startChord %p track %d stopChord %p track %d\n",
-                   startChord, startChord->track(), stopChord, stopChord->track());
-            return;
-            }
-      // try to find start/stop chords in different tracks
-      for (int i = 0; i < VOICES; ++i) {
-            Element* el = seg->element(strack + i);
-            if (!el)
-                  continue;
-            if (el->type() != CHORD)
-                  continue;
-            startChord = static_cast<Chord*>(el);
-            break;      // first chord found is OK
-            }
-      for (int i = 0; i < VOICES; ++i) {
-            Segment* s = trill->score()->tick2segmentEnd(strack + i, endTick);
-            printf("\n");
-            if (!s)
-                  continue;
-            Element* el = s->element(strack + i);
-            if (!el)
-                  continue;
-            if (el->type() != CHORD)
-                  continue;
-            stopChord = static_cast<Chord*>(el);
-            break;      // first chord found is OK
-            }
-            if (startChord && stopChord)
-                  printf("findTrillAnchors startChord %p track %d stopChord %p track %d\n",
-                         startChord, startChord->track(), stopChord, stopChord->track());
-      }
-
-// find all trills in this measure and this part
-
-static void findTrills(Measure* measure, int strack, int etrack, TrillHash& trillStart, TrillHash& trillStop)
-      {
-      printf("findTrills(measure=%p, strack=%d, etrack=%d)\n", measure, strack, etrack);
-      // loop over all segments in this measure
-      for (Segment* seg = measure->first(); seg; seg = seg->next()) {
-            // loop over all spanners in this segment
-            foreach(const Element* e, seg->spannerFor()) {
-                  const Spanner* sp = static_cast<const Spanner*>(e);
-                  printf("findTrills seg %p elem %p type %d (%s) track %d endElem %p",
-                         seg, e, e->type(), qPrintable(e->subtypeName()), e->track(), sp->endElement());
-                  if (e->type() == TRILL && strack <= e->track() && e->track() < etrack) {
-                        printf(" trill forward");
-                        printf("\n findTrills start tick %d end tick %d trill track %d",
-                               seg->tick(), (static_cast<Segment*>(sp->endElement()))->tick(), e->track());
-                        // a trill is found starting in this segment, trill end time is known
-                        printf("\n");
-                        // determine notes to write trill start and stop
-                        const Trill* tr = static_cast<const Trill*>(e);
-                        Chord* startChord = 0;  // chord where trill starts
-                        Chord* stopChord = 0;   // chord where trill stops
-                        findTrillAnchors(tr, seg, startChord, stopChord);
-                        if (startChord && stopChord) {
-                              printf(" findTrills startChord %p track %d stopChord %p track %d\n",
-                                     startChord, startChord->track(), stopChord, stopChord->track());
-                              trillStart.insert(startChord, tr);
-                              trillStop.insert(stopChord, tr);
-                              }
-                        }
-                  printf("\n");
-                  } // foreach
-            }
-      }
-
-//---------------------------------------------------------
 // helpers for ::calcDivisions
-//---------------------------------------------------------
 
 typedef QList<int> IntVector;
 static IntVector integers;
@@ -1086,11 +970,11 @@ static void addInteger(int len)
 void ExportMusicXml::calcDivMoveToTick(int t)
       {
       if (t < tick) {
-            printf("backup %d\n", tick - t);
+//            printf("backup %d\n", tick - t);
             addInteger(tick - t);
             }
       else if (t > tick) {
-            printf("forward %d\n", t - tick);
+//            printf("forward %d\n", t - tick);
             addInteger(t - tick);
             }
       tick = t;
@@ -1162,17 +1046,17 @@ void ExportMusicXml::calcDivisions()
                               if (el->type() == BAR_LINE && el->subtype() == START_REPEAT)
                                     continue;
 
-                              if (tick != seg->tick()) {
+                              if (tick != el->tick()) {
 //                                    attr.doAttr(xml, false);
-                                    calcDivMoveToTick(seg->tick());
+                                    calcDivMoveToTick(el->tick());
                                     }
                               if (el->isChordRest()) {
-                                    int l = static_cast<ChordRest*>(el)->actualTicks();
+                                    int l = static_cast<ChordRest*>(el)->ticks();
                                     if (el->type() == CHORD) {
                                           if (isTwoNoteTremolo(static_cast<Chord*>(el)))
                                                 l /= 2;
                                           }
-                                    printf("chordrest %d\n", l);
+                                    // printf("chordrest %d\n", l);
                                     addInteger(l);
                                     tick += l;
                                     }
@@ -1186,11 +1070,11 @@ void ExportMusicXml::calcDivisions()
                               // LVIFIX: find exact cause
 //                              int ssstaff = sstaff > 0 ? sstaff : sstaff + 1;
                               // printf("st=%d sstaff=%d ssstaff=%d\n", st, sstaff, ssstaff);
-//                              dh.handleElements(this, part->staff(ssstaff - 1), m->tick(), m->tick() + m->ticks(), sstaff);
+//                              dh.handleElements(this, part->staff(ssstaff - 1), m->tick(), m->tick() + m->tickLen(), sstaff);
                               }
                         }
                   // move to end of measure (in case of incomplete last voice)
-                  calcDivMoveToTick(m->tick() + m->ticks());
+                  calcDivMoveToTick(m->tick() + m->tickLen());
                   }
             }
 
@@ -1202,7 +1086,7 @@ void ExportMusicXml::calcDivisions()
             }
 
       div = AL::division / integers[0];
-      printf("divisions=%d div=%d\n", integers[0], div);
+      // printf("divisions=%d div=%d\n", integers[0], div);
       }
 
 //---------------------------------------------------------
@@ -1249,8 +1133,9 @@ static void creditWords(Xml& xml, double x, double y, int fs, QString just, QStr
 void ExportMusicXml::credits(Xml& xml)
       {
       // debug
-      printf("credits:\n");
+      // printf("credits:\n");
       const MeasureBase* measure = score->measures()->first();
+/*
       foreach(const Element* element, *measure->el()) {
             if (element->type() == TEXT) {
                   const Text* text = (const Text*)element;
@@ -1276,15 +1161,15 @@ void ExportMusicXml::credits(Xml& xml)
                         }
                   if (mustPrint) printf(" '%s at %f,%f'\n",
                                         text->getText().toUtf8().data(),
-                                        text->pagePos().x(),
-                                        text->pagePos().y()
+                                        text->canvasPos().x(),
+                                        text->canvasPos().y()
                                        );
                   }
             }
-      QString rights = score->metaTag("Copyright");
-      if (!rights.isEmpty())
-            printf("copyright '%s'\n", qPrintable(rights));
+      if (score->copyright()) printf("copyright '%s'\n", score->copyright()->getText().toUtf8().data());
       printf("end credits\n");
+*/
+
       // determine formatting
       PageFormat* pf = score->pageFormat();
       if (!pf) return;
@@ -1294,22 +1179,24 @@ void ExportMusicXml::credits(Xml& xml)
       const double w  = getTenthsFromInches(pf->width());
       const double lm = getTenthsFromInches(pf->oddLeftMargin);
       const double rm = getTenthsFromInches(pf->oddRightMargin);
-      const double tm = getTenthsFromInches(pf->oddTopMargin);
+//      const double tm = getTenthsFromInches(pf->oddTopMargin);
       const double bm = getTenthsFromInches(pf->oddBottomMargin);
-      printf(" h=%g w=%g lm=%g rm=%g tm=%g bm=%g\n", h, w, lm, rm, tm, bm);
-/**/
+//      printf(" h=%g w=%g lm=%g rm=%g tm=%g bm=%g\n", h, w, lm, rm, tm, bm);
+
       // write the credits
       // TODO add real font size
       foreach(const Element* element, *measure->el()) {
             if (element->type() == TEXT) {
                   const Text* text = (const Text*)element;
+/*
                   printf("x=%g, y=%g fs=%d\n",
-                         text->pagePos().x(),
-                         h - text->pagePos().y(),
-                         text->font().pointSize()
+                         text->canvasPos().x(),
+                         h - text->canvasPos().y(),
+                         text->defaultFont().pointSize()
                         );
-                  const double ty = h - getTenthsFromDots(text->pagePos().y());
-                  const int fs = text->font().pointSize();
+*/
+                  const double ty = h - getTenthsFromDots(text->canvasPos().y());
+                  const int fs = text->defaultFont().pointSize();
                   switch (text->subtype()) {
                         case TEXT_TITLE:
                               creditWords(xml, w / 2, ty, fs, "center", "top", text->getText());
@@ -1331,9 +1218,9 @@ void ExportMusicXml::credits(Xml& xml)
                         }
                   }
             }
-      if (!rights.isEmpty()) {
-            const int fs = 8; // score->copyright()->font().pointSize();
-            creditWords(xml, w / 2, bm, fs, "center", "bottom", rights);
+      if (score->copyright()) {
+            const int fs = score->copyright()->defaultFont().pointSize();
+            creditWords(xml, w / 2, bm, fs, "center", "bottom", score->copyright()->getText());
             }
 /**/
       }
@@ -1348,7 +1235,7 @@ void ExportMusicXml::pitch2xml(Note* note, char& c, int& alter, int& octave)
 
       int tick   = note->chord()->tick();
       Staff* i   = note->staff();
-      ClefType clef   = i->clef(tick);
+      int clef   = i->clefList()->clef(tick);
       int offset = clefTable[clef].yOffset;
 
       int step   = (note->line() - offset + 700) % 7;
@@ -1382,8 +1269,8 @@ void ExportMusicXml::pitch2xml(Note* note, char& c, int& alter, int& octave)
             case   0: ottava =  0; break;
             case -12: ottava = -1; break;
             case -24: ottava = -2; break;
-            default:  printf("pitch2xml() tick=%d pitch()=%d ppitch()=%dd\n",
-                             tick, note->pitch(), note->ppitch());
+            default:  /* printf("pitch2xml() tick=%d pitch()=%d ppitch()=%dd\n",
+                             tick, note->pitch(), note->ppitch()) */;
             }
       octave += ottava;
 //      printf("pitch2xml() tick=%d offset=%d step=%d pitch()=%d ppitch()=%d npitch=%d alter=%d ottava=%d\n",
@@ -1412,7 +1299,7 @@ void ExportMusicXml::unpitch2xml(Note* note, char& c, int& octave)
 
           int tick   = note->chord()->tick();
           Staff* i   = note->staff();
-          int offset = clefTable[i->clef(tick)].yOffset;
+          int offset = clefTable[i->clefList()->clef(tick)].yOffset;
 
           int step   = (note->line() - offset + 700) % 7;
           c          = table1[step];
@@ -1440,14 +1327,11 @@ static QString tick2xml(const int ticks, int* dots)
 
 static Volta* findVolta(Measure* m, bool left)
       {
-      Segment* s = m->score()->firstMeasure()->first(SegChordRest);
-      for (; s; s = s->next1(SegChordRest)) {
-            foreach(Spanner* el, s->spannerFor()) {
-                  if (el->type() != VOLTA)
-                        continue;
+      foreach(Element* el, *(m->score()->gel())) {
+            if (el->type() == VOLTA) {
                   Volta* v = (Volta*) el;
                   if ((left && v->tick() == m->tick())
-                      || (!left && v->tick2() == (m->tick() + m->ticks()))) {
+                      || (!left && v->tick2() == (m->tick() + m->tickLen()))) {
                         return v;
                         }
                   }
@@ -1564,14 +1448,14 @@ void ExportMusicXml::moveToTick(int t)
       {
 //      printf("ExportMusicXml::moveToTick(t=%d) tick=%d\n", t, tick);
       if (t < tick) {
-            printf(" -> backup\n");
+//            printf(" -> backup");
             attr.doAttr(xml, false);
             xml.stag("backup");
             xml.tag("duration", (tick - t) / div);
             xml.etag();
             }
       else if (t > tick) {
-            printf(" -> forward\n");
+//            printf(" -> forward");
             attr.doAttr(xml, false);
             xml.stag("forward");
             xml.tag("duration", (t - tick) / div);
@@ -1587,14 +1471,17 @@ void ExportMusicXml::moveToTick(int t)
 
 void ExportMusicXml::timesig(TimeSig* tsig)
       {
+      int n  = 0;
       int st = tsig->subtype();
-      Fraction ts = tsig->sig();
-      int z1 = ts.numerator();
-      int n  = ts.denominator();
+      int z1 = 0;
+      int z2 = 0;
+      int z3 = 0;
+      int z4 = 0;
+      tsig->getSig(&n, &z1, &z2, &z3, &z4);
       if (st == TSIG_ALLA_BREVE) {
             // MuseScore calls this 2+2/4, MusicXML 2/2
-            n  = 2;
-            //z2 = 0;
+            n = 2;
+            z2 = 0;
             }
       attr.doAttr(xml, true);
       if (st == TSIG_FOUR_FOUR)
@@ -1604,9 +1491,9 @@ void ExportMusicXml::timesig(TimeSig* tsig)
       else
             xml.stag("time");
       QString z = QString("%1").arg(z1);
-//      if (z2) z += QString("+%1").arg(z2);    // TODO TS
-//      if (z3) z += QString("+%1").arg(z3);
-//      if (z4) z += QString("+%1").arg(z4);
+      if (z2) z += QString("+%1").arg(z2);
+      if (z3) z += QString("+%1").arg(z3);
+      if (z4) z += QString("+%1").arg(z4);
       xml.tag("beats", z);
       xml.tag("beat-type", n);
       xml.etag();
@@ -1634,7 +1521,7 @@ void ExportMusicXml::keysig(int key, bool visible)
 
 void ExportMusicXml::clef(int staff, int clef)
       {
-      printf("ExportMusicXml::clef(staff=%d, clef=%d)\n", staff, clef);
+//      printf("ExportMusicXml::clef(staff=%d, clef=%d)\n", staff, clef);
       attr.doAttr(xml, true);
       if (staff)
             xml.stag(QString("clef number=\"%1\"").arg(staff));
@@ -1676,10 +1563,8 @@ static void tupletStartStop(ChordRest* cr, Notations& notations, Xml& xml)
 //   wavyLineStartStop
 //---------------------------------------------------------
 
-static void wavyLineStartStop(Chord* chord, Notations& notations, Ornaments& ornaments, Xml& xml,
-                              TrillHash& trillStart, TrillHash& trillStop)
+static void wavyLineStartStop(Chord* chord, Notations& notations, Ornaments& ornaments, Xml& xml)
       {
-#if 0 // TODO-WS implementation has changed
       // search for trill starting at this chord
       foreach(Element* el, *(chord->score()->gel())) {
             if (el->type() == TRILL) {
@@ -1691,31 +1576,12 @@ static void wavyLineStartStop(Chord* chord, Notations& notations, Ornaments& orn
                         xml.tagE("trill-mark");
                         xml.tagE("wavy-line type=\"start\"");
                         }
-#if 0 // TODO-WS
-                  else if (t->tick2() == chord->tick()+chord->ticks() && t->track() == chord->track()) {
+                  else if (t->tick2() == chord->tick()+chord->tickLen() && t->track() == chord->track()) {
                         notations.tag(xml);
                         ornaments.tag(xml);
                         xml.tagE("wavy-line type=\"stop\"");
                         }
-#endif
                   }
-            }
-#endif
-      // TODO LVI this does not support overlapping trills
-      printf("wavyLineStartStop(chord=%p)\n", chord);
-      if (trillStop.contains(chord)) {
-            notations.tag(xml);
-            ornaments.tag(xml);
-            xml.tagE("wavy-line type=\"stop\"");
-            trillStop.remove(chord);
-            }
-      if (trillStart.contains(chord)) {
-            notations.tag(xml);
-            ornaments.tag(xml);
-            // mscore only supports wavy-line with trill-mark
-            xml.tagE("trill-mark");
-            xml.tagE("wavy-line type=\"start\"");
-            trillStart.remove(chord);
             }
       }
 
@@ -1760,7 +1626,7 @@ static bool isTwoNoteTremolo(Chord* chord)
 
 static void tremoloSingleStartStop(Chord* chord, Notations& notations, Ornaments& ornaments, Xml& xml)
       {
-      printf("tremoloSingleStartStop: chord=%p trem=%p nextchord=%p\n", chord, chord->tremolo(), nextChordRest(chord));
+//      printf("tremoloSingleStartStop: chord=%p trem=%p nextchord=%p\n", chord, chord->tremolo(), nextChordRest(chord));
       ChordRest* cr = nextChordRest(chord);
       Chord* nextChord = 0;
       if (cr && cr->type() == CHORD) nextChord = static_cast<Chord*>(cr);
@@ -1768,31 +1634,25 @@ static void tremoloSingleStartStop(Chord* chord, Notations& notations, Ornaments
             Tremolo * tr = nextChord->tremolo();
             int st = tr->subtype();
             switch (st) {
-                  case TREMOLO_R8:
-                  case TREMOLO_R16:
-                  case TREMOLO_R32:
-                  case TREMOLO_R64:
+                  case TREMOLO_1:
+                  case TREMOLO_2:
+                  case TREMOLO_3:
                         // ignore
                         break;
-                  case TREMOLO_C8:
+                  case 3:
                         notations.tag(xml);
                         ornaments.tag(xml);
                         xml.tag("tremolo type=\"start\"", "1");
                         break;
-                  case TREMOLO_C16:
+                  case 4:
                         notations.tag(xml);
                         ornaments.tag(xml);
                         xml.tag("tremolo type=\"start\"", "2");
                         break;
-                  case TREMOLO_C32:
+                  case 5:
                         notations.tag(xml);
                         ornaments.tag(xml);
                         xml.tag("tremolo type=\"start\"", "3");
-                        break;
-                  case TREMOLO_C64:
-                        notations.tag(xml);
-                        ornaments.tag(xml);
-                        xml.tag("tremolo type=\"start\"", "4");
                         break;
                   default:
                         printf("unknown tremolo %d\n", st);
@@ -1803,45 +1663,35 @@ static void tremoloSingleStartStop(Chord* chord, Notations& notations, Ornaments
             Tremolo * tr = chord->tremolo();
             int st = tr->subtype();
             switch (st) {
-                  case TREMOLO_R8:
+                  case TREMOLO_1:
                         notations.tag(xml);
                         ornaments.tag(xml);
                         xml.tag("tremolo type=\"single\"", "1");
                         break;
-                  case TREMOLO_R16:
+                  case TREMOLO_2:
                         notations.tag(xml);
                         ornaments.tag(xml);
                         xml.tag("tremolo type=\"single\"", "2");
                         break;
-                  case TREMOLO_R32:
+                  case TREMOLO_3:
                         notations.tag(xml);
                         ornaments.tag(xml);
                         xml.tag("tremolo type=\"single\"", "3");
                         break;
-                  case TREMOLO_R64:
-                        notations.tag(xml);
-                        ornaments.tag(xml);
-                        xml.tag("tremolo type=\"single\"", "4");
-                        break;
-                  case TREMOLO_C8:
+                  case 3:
                         notations.tag(xml);
                         ornaments.tag(xml);
                         xml.tag("tremolo type=\"stop\"", "1");
                         break;
-                  case TREMOLO_C16:
+                  case 4:
                         notations.tag(xml);
                         ornaments.tag(xml);
                         xml.tag("tremolo type=\"stop\"", "2");
                         break;
-                  case TREMOLO_C32:
+                  case 5:
                         notations.tag(xml);
                         ornaments.tag(xml);
                         xml.tag("tremolo type=\"stop\"", "3");
-                        break;
-                  case TREMOLO_C64:
-                        notations.tag(xml);
-                        ornaments.tag(xml);
-                        xml.tag("tremolo type=\"stop\"", "4");
                         break;
                   default:
                         printf("unknown tremolo %d\n", st);
@@ -1854,17 +1704,16 @@ static void tremoloSingleStartStop(Chord* chord, Notations& notations, Ornaments
 //   chordAttributes
 //---------------------------------------------------------
 
-static void chordAttributes(Chord* chord, Notations& notations, Technical& technical, Xml& xml,
-                            TrillHash& trillStart, TrillHash& trillStop)
+static void chordAttributes(Chord* chord, Notations& notations, Technical& technical, Xml& xml)
       {
       QList<Articulation*>* na = chord->getArticulations();
       // first output the fermatas
-      foreach (const Articulation* a, *na) {
-            if (a->subtype() == UfermataSym) {
+      for (ciArticulation ia = chord->getArticulations()->begin(); ia != chord->getArticulations()->end(); ++ia) {
+            if ((*ia)->subtype() == UfermataSym) {
                   notations.tag(xml);
                   xml.tagE("fermata type=\"upright\"");
                   }
-            else if (a->subtype() == DfermataSym) {
+            else if ((*ia)->subtype() == DfermataSym) {
                   notations.tag(xml);
                   xml.tagE("fermata type=\"inverted\"");
                   }
@@ -1872,8 +1721,8 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
 
       // then the attributes whose elements are children of <articulations>
       Articulations articulations;
-      foreach (const Articulation* a, *na) {
-            switch (a->subtype()) {
+      for (ciArticulation ia = na->begin(); ia != na->end(); ++ia) {
+            switch ((*ia)->subtype()) {
                   case UfermataSym:
                   case DfermataSym:
                         // ignore, already handled
@@ -1934,7 +1783,7 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
                         // ignore, handled with technical
                         break;
                   default:
-                        printf("unknown chord attribute %s\n", qPrintable(a->subtypeUserName()));
+                        printf("unknown chord attribute %s\n", (*ia)->name().toLatin1().data());
                         break;
                   }
             }
@@ -1947,8 +1796,8 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
 
       // then the attributes whose elements are children of <ornaments>
       Ornaments ornaments;
-      foreach (const Articulation* a, *na) {
-            switch (a->subtype()) {
+      for (ciArticulation ia = na->begin(); ia != na->end(); ++ia) {
+            switch ((*ia)->subtype()) {
                   case UfermataSym:
                   case DfermataSym:
                   case SforzatoaccentSym:
@@ -2001,17 +1850,17 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
                         // ignore, handled with technical
                         break;
                   default:
-                        printf("unknown chord attribute %s\n", qPrintable(a->subtypeUserName()));
+                        printf("unknown chord attribute %s\n", (*ia)->name().toLatin1().data());
                         break;
                   }
             }
             tremoloSingleStartStop(chord, notations, ornaments, xml);
-            wavyLineStartStop(chord, notations, ornaments, xml, trillStart, trillStop);
+            wavyLineStartStop(chord, notations, ornaments, xml);
             ornaments.etag(xml);
 
       // and finally the attributes whose elements are children of <technical>
-      foreach (const Articulation* a, *na) {
-            switch (a->subtype()) {
+      for (ciArticulation ia = na->begin(); ia != na->end(); ++ia) {
+            switch ((*ia)->subtype()) {
                   case PlusstopSym:
                         {
                         notations.tag(xml);
@@ -2035,7 +1884,7 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
                         break;
                   default:
                         // others silently ignored
-                        // printf("unknown chord attribute %s\n", qPrintable(a->subtypeUserName()));
+                        // printf("unknown chord attribute %s\n", (*ia)->name().toLatin1().data());
                         break;
                   }
             }
@@ -2114,9 +1963,9 @@ static Chord* nextChord(Chord* ch)
  For a single-staff part, \a staff equals zero, suppressing the <staff> element.
  */
 
-void ExportMusicXml::chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bool useDrumset)
+void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll, bool useDrumset)
       {
-      printf("ExportMusicXml::chord() oldtick=%d\n", tick);
+//      printf("ExportMusicXml::chord() oldtick=%d\n", tick);
       QList<Note*> nl = chord->notes();
       NoteType gracen = nl.front()->noteType();
       bool grace = (gracen == NOTE_ACCIACCATURA
@@ -2124,11 +1973,11 @@ void ExportMusicXml::chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bo
                  || gracen == NOTE_GRACE4
                  || gracen == NOTE_GRACE16
                  || gracen == NOTE_GRACE32);
-      printf("notetype=%d grace=%d\n", gracen, grace);
+//      printf("notetype=%d grace=%d\n", gracen, grace);
       int tremCorr = 1; // duration correction for two note tremolo
       if (isTwoNoteTremolo(chord)) tremCorr = 2;
-      if (!grace) tick += chord->actualTicks() / tremCorr;
-      printf(" newtick=%d\n", tick);
+      if (!grace) tick += chord->ticks() / tremCorr;
+//      printf(" newtick=%d\n", tick);
 
       PageFormat* pf = score->pageFormat();
       const double pageHeight  = getTenthsFromInches(pf->height());
@@ -2141,10 +1990,10 @@ void ExportMusicXml::chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bo
             QString noteTag = QString("note");
 
             if (pf && (!converterMode || score->defaultsRead()) ) {
-                  double measureX = getTenthsFromDots(chord->measure()->pagePos().x());
-                  double measureY = pageHeight - getTenthsFromDots(chord->measure()->pagePos().y());
-                  double noteX = getTenthsFromDots(note->pagePos().x());
-                  double noteY = pageHeight - getTenthsFromDots(note->pagePos().y());
+                  double measureX = getTenthsFromDots(chord->measure()->canvasPos().x());
+                  double measureY = pageHeight - getTenthsFromDots(chord->measure()->canvasPos().y());
+                  double noteX = getTenthsFromDots(note->canvasPos().x());
+                  double noteY = pageHeight - getTenthsFromDots(note->canvasPos().y());
 
                   noteTag += QString(" default-x=\"%1\"").arg(QString::number(noteX - measureX,'f',2));
                   noteTag += QString(" default-y=\"%1\"").arg(QString::number(noteY - measureY,'f',2));
@@ -2195,12 +2044,10 @@ void ExportMusicXml::chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bo
 
             // duration
             if (!grace)
-                  xml.tag("duration", note->chord()->actualTicks() / (div * tremCorr));
-
+                  xml.tag("duration", note->chord()->tickLen() / (div * tremCorr));
             //instrument for unpitched
-            if (useDrumset)
+            if (useDrumset)            
                   xml.tagE(QString("instrument id=\"P%1-I%2\"").arg(score->parts()->indexOf(note->staff()->part()) + 1).arg(note->pitch() + 1));
-
             if (note->tieBack())
                   xml.tagE("tie type=\"stop\"");
             if (note->tieFor())
@@ -2225,10 +2072,10 @@ void ExportMusicXml::chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bo
                   nrmNotes = t->ratio().denominator();
                   }
 
-            QString s = tick2xml(note->chord()->actualTicks() * actNotes / (nrmNotes * tremCorr), &dots);
+            QString s = tick2xml(note->chord()->tickLen() * actNotes / (nrmNotes * tremCorr), &dots);
             if (s.isEmpty()) {
                   printf("no note type found for ticks %d\n",
-                     note->chord()->actualTicks());
+                     note->chord()->tickLen());
                   }
             xml.tag("type", s);
             for (int ni = dots; ni > 0; ni--)
@@ -2238,11 +2085,20 @@ void ExportMusicXml::chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bo
             // Note: in Binchois.xml two accidentals have parentheses which are encoded
             // as editorial="yes". Wikipedia calls this a cautionary accidental.
             // Brackets/parenthese are controlled by the level-display entity (DTD 1.1)
-
             bool editorial = false;
-            Accidental* acc = note->accidental();
-            if (acc) {
-                  editorial = acc->hasBracket();
+            int acc        = note->accidentalType();
+            if (acc != ACC_NONE) {
+                  if (6 <= acc && acc <= 10) {
+                        acc -= 5;
+                        editorial = true;
+                        }
+                  else if (11 <= acc && acc <= 15) {
+                        acc -= 10;
+                        editorial = true;
+                        }
+                  if (note->accidental()->hasBracket()) {
+                        editorial = true;
+                        }
                   /*
                         MusicXML accidental names include:
                         sharp,natural, flat, double-sharp, sharp-sharp, flat-flat,
@@ -2250,60 +2106,26 @@ void ExportMusicXml::chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bo
                         three-quarters-flat, and three-quarters-sharp
                     */
                   QString s;
-                  switch(acc->accidentalType()) {
-                        case ACC_SHARP:
-                              s = "sharp";
-                              break;
-                        case ACC_FLAT:
-                              s = "flat";
-                              break;
-                        case ACC_SHARP2:
-                              s = "double-sharp";
-                              break;
-                        case ACC_FLAT2:
-                              s = "flat-flat";
-                              break;
-                        case ACC_NATURAL:
-                              s = "natural";
-                              break;
-                        case ACC_FLAT_SLASH:          // (alternative)
-                              s = "quarter-flat";
-                              break;
-                        case ACC_MIRRORED_FLAT:       // (recommended by Michael)
-                              s = "quarter-flat";
-                              break;
-                        case ACC_FLAT_ARROW_UP:       // (alternative)
-                              s = "quarter-flat";
-                              break;
-                        case ACC_NATURAL_ARROW_DOWN:  // (alternative)
-                              s = "quarter-flat";
-                              break;
-                        case ACC_SHARP_SLASH:         // (recommended by Michael)
-                              s = "quarter-sharp";
-                              break;
-                        case ACC_SHARP_ARROW_DOWN:    // (alternative)
-                              s = "quarter-sharp";
-                              break;
-                        case ACC_NATURAL_ARROW_UP:    // (alternative)
-                              s = "quarter-sharp";
-                              break;
-                        case ACC_MIRRORED_FLAT2:      // (recommended by Michael)
-                              s = "three-quarters-flat";
-                              break;
-                        case ACC_FLAT_FLAT_SLASH:     // (alternative)
-                              s = "three-quarters-flat";
-                              break;
-                        case ACC_FLAT_ARROW_DOWN:     // (alternative)
-                              s = "three-quarters-flat";
-                              break;
-                        case ACC_SHARP_SLASH4:        // (recommended by Michael)
-                              s = "three-quarters-sharp";
-                              break;
-                        case ACC_SHARP_ARROW_UP:      // (alternate)
-                              s = "three-quarters-sharp";
-                              break;
+                  switch(acc) {
+                        case ACC_SHARP:   s = "sharp";        break;
+                        case ACC_FLAT:    s = "flat";         break;
+                        case ACC_SHARP2:  s = "double-sharp"; break;
+                        case ACC_FLAT2:   s = "flat-flat";    break;
+                        case ACC_NATURAL: s = "natural";      break;
+                        case 16: s = "quarter-flat";          break; //flat-slash (alternative)
+                        case 19: s = "quarter-flat";          break; //mirrored-flat (recommended by Michael)
+                        case 29: s = "quarter-flat";          break; //flat arrow up (alternative)
+                        case 33: s = "quarter-flat";          break; //natural arrow down (alternative)
+                        case 22: s = "quarter-sharp";         break; //sharp-slash (recommended by Michael)
+                        case 27: s = "quarter-sharp";         break; //sharp arrow down (alternative)
+                        case 32: s = "quarter-sharp";         break; //natural arrow up (alternative)
+                        case 18: s = "three-quarters-flat";   break; //mirrored-flat1 (recommended by Michael)
+                        case 21: s = "three-quarters-flat";   break; //flat-flat-slash (alternative)
+                        case 30: s = "three-quarters-flat";   break; //flat arrow down (alternative)
+                        case 25: s = "three-quarters-sharp";  break; //sharp-slash4 (recommended by Michael)
+                        case 26: s = "three-quarters-sharp";  break; //sharp arrow up (alternate)
                         default:
-                              printf("unknown accidental %d\n", acc->accidentalType());
+                              printf("unknown accidental %d\n", acc);
                         }
                   if (editorial)
                         xml.tag("accidental editorial=\"yes\"", s);
@@ -2322,13 +2144,13 @@ void ExportMusicXml::chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bo
             if (chord->noStem() || chord->measure()->slashStyle(chord->staffIdx())){
                   xml.tag("stem", QString("none"));
             }
-            else if ((note->chord()->actualTicks() * actNotes / (nrmNotes * tremCorr)) < (4 * AL::division)) {
+            else if ((note->chord()->tickLen() * actNotes / (nrmNotes * tremCorr)) < (4 * AL::division)) {
                   xml.tag("stem", QString(note->chord()->up() ? "up" : "down"));
             }
 
             QString noteheadTagname = QString("notehead");
             QColor noteheadColor = note->color();
-            if (noteheadColor != MScore::defaultColor)
+            if(noteheadColor != preferences.defaultColor)
                   noteheadTagname += " color=\"" + noteheadColor.name().toUpper() + "\"";
             if (note->headGroup() == 5) {
                   xml.tag(noteheadTagname, "slash");
@@ -2352,9 +2174,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bo
                   xml.tag(noteheadTagname, "la");
             } else if(note->headGroup() == 11) {
                   xml.tag(noteheadTagname, "ti");
-            } else if(note->headGroup() == 12) {
-                  xml.tag(noteheadTagname, "so");
-            } else if (noteheadColor != MScore::defaultColor) {
+            } else if (noteheadColor != preferences.defaultColor) {
                   xml.tag(noteheadTagname, "normal");
             }
 
@@ -2387,7 +2207,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bo
                   tupletStartStop(chord, notations, xml);
                   sh.doSlurStop(chord, notations, xml);
                   sh.doSlurStart(chord, notations, xml);
-                  chordAttributes(chord, notations, technical, xml, trillStart, trillStop);
+                  chordAttributes(chord, notations, technical, xml);
                   }
             foreach (const Element* e, *note->el()) {
                   if (e->type() == TEXT
@@ -2425,6 +2245,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bo
                   gh.doGlissandoStop(chord, notations, xml);
                   }
             notations.etag(xml);
+//            printf("chord %p track %d\n", chord, chord->track());
             // write lyrics (only for first note)
             if ((note == nl.front()) && ll)
                   lyrics(ll, chord->track());
@@ -2445,7 +2266,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const QList<Lyrics*>* ll, bo
 void ExportMusicXml::rest(Rest* rest, int staff)
       {
       static char table2[]  = "CDEFGAB";
-      printf("ExportMusicXml::rest() oldtick=%d", tick);
+//      printf("ExportMusicXml::rest() oldtick=%d", tick);
       attr.doAttr(xml, false);
 
       QString noteTag = QString("note");
@@ -2458,7 +2279,7 @@ void ExportMusicXml::rest(Rest* rest, int staff)
       int    yOffsSt = - 2 * int(yOffsSp > 0.0 ? yOffsSp + 0.5 : yOffsSp - 0.5); // same rounded to int (positive = up)
 //      printf(" yshift=%g", yOffsSp);
 //      printf(" (up %d steps)", yOffsSt);
-      ClefType clef = rest->staff()->clef(rest->tick());
+      int clef = rest->staff()->clefList()->clef(rest->tick());
       int po = clefTable[clef].pitchOffset;
       po -= 4;          // pitch middle staff line (two lines times two steps lower than top line)
       po += yOffsSt;    // rest "pitch"
@@ -2478,14 +2299,14 @@ void ExportMusicXml::rest(Rest* rest, int staff)
             xml.etag();
             }
 
-      Duration d = rest->durationType();
-      int tickLen = rest->actualTicks();
+      Duration d = rest->duration();
+      int tickLen = rest->tickLen();
       if (d.type() == Duration::V_MEASURE){
             // to avoid forward since rest->ticklen=0 in this case.
-            tickLen = rest->measure()->ticks();
+            tickLen = rest->measure()->tickLen();
             }
       tick += tickLen;
-      printf(" tickLen=%d newtick=%d\n", tickLen, tick);
+//      printf(" tickLen=%d newtick=%d\n", tickLen, tick);
 
       xml.tag("duration", tickLen / div);
 
@@ -2533,85 +2354,83 @@ static void directionTag(Xml& xml, Attributes& attr, Element* el = 0)
       QString tagname = QString("direction");
       if (el) {
 /*
-            printf("directionTag() spatium=%g nelem tp=%d st=%d (%s,%s)\ndirectionTag()  x=%g y=%g xsp,ysp=%g,%g w=%g h=%g userOff.y=%g\n",
+            printf("directionTag() spatium=%g\nelem tp=%d st=%d (%s,%s) x=%g y=%g w=%g h=%g userOff.y=%g\n",
                    el->spatium(),
                    el->type(), el->subtype(),
                    el->name(), el->subtypeName().toUtf8().data(),
                    el->x(), el->y(),
-                   el->x()/el->spatium(), el->y()/el->spatium(),
                    el->width(), el->height(),
-                   el->userOff().y()
-                  );
+                   el->userOff().y());
+*/
             if (el->type() == HAIRPIN || el->type() == OTTAVA || el->type() == TEXTLINE) {
                   SLine* sl = static_cast<const SLine*>(el);
-                  printf("directionTag()  slin segsz=%d", sl->spannerSegments().size());
-                  if (sl->spannerSegments().size() > 0) {
-                        LineSegment* seg = (LineSegment*)sl->spannerSegments().at(0);
+//                  printf("slin segsz=%d", sl->lineSegments().size());
+                  if (sl->lineSegments().size() > 0) {
+                        LineSegment* seg = sl->lineSegments().at(0);
+/*
                         printf(" x=%g y=%g w=%g h=%g cpx=%g cpy=%g userOff.y=%g\n",
                                seg->x(), seg->y(),
                                seg->width(), seg->height(),
-                               seg->pagePos().x(), seg->pagePos().y(),
+                               seg->canvasPos().x(), seg->canvasPos().y(),
                                seg->userOff().y());
-                         }
-                  } // if (el->type() == ...
 */
-            Element* pel = el->parent();
-            Element* ppel = 0;
-            if (pel) ppel = pel->parent();
+                        System* sys = 0;
+                        QPointF pnt = sl->tick2pos(0, el->tick(), el->staffIdx(), &sys);
+                        if (sys) {
+                              QRectF bb = sys->staff(el->staffIdx())->bbox();
 /*
+                              printf("syst x=%g y=%g cpx=%g cpy=%g\n",
+                                     sys->pos().x(),  sys->pos().y(),
+                                     sys->canvasPos().x(),
+                                     sys->canvasPos().y()
+                                    );
+                              printf("staf x=%g y=%g w=%g h=%g\n",
+                                     bb.x(), bb.y(),
+                                     bb.width(), bb.height());
+*/
+                              // for the line type elements the reference point is vertically centered
+                              // actual position info is in the segments
+                              // compare the segment's canvas ypos with the staff's center height
+                              if (seg->canvasPos().y() < sys->canvasPos().y() + bb.y() + bb.height() / 2)
+                                     tagname += " placement=\"above\"";
+                              else
+                                     tagname += " placement=\"below\"";
+                              }
+                         }
+                  }
+            Element* pel = el->parent();
             if (pel) {
-                  printf("directionTag()  prnt tp=%d st=%d (%s,%s) x=%g y=%g w=%g h=%g userOff.y=%g\n",
+/*
+                  printf("prnt tp=%d st=%d (%s,%s) x=%g y=%g w=%g h=%g userOff.y=%g\n",
                          pel->type(), pel->subtype(),
                          pel->name(), pel->subtypeName().toUtf8().data(),
                          pel->x(), pel->y(),
                          pel->width(), pel->height(),
                          pel->userOff().y());
-                  }
-            if (ppel) {
-                  printf("directionTag()  pprnt tp=%d st=%d (%s,%s) x=%g y=%g w=%g h=%g userOff.y=%g\n",
-                         ppel->type(), ppel->subtype(),
-                         ppel->name(), ppel->subtypeName().toUtf8().data(),
-                         ppel->x(), ppel->y(),
-                         ppel->width(), ppel->height(),
-                         ppel->userOff().y());
-                  }
 */
-            if (ppel && ppel->type() == MEASURE) {
-                  Measure* m = static_cast<Measure*>(ppel);
+                  }
+            // printf("\n");
+            if (pel && pel->type() == MEASURE) {
+                  Measure* m = static_cast<Measure*>(pel);
                   System* sys = m->system();
                   QRectF bb = sys->staff(el->staffIdx())->bbox();
 /*
-                  printf("directionTag()  syst x=%g y=%g cpx=%g cpy=%g\n",
+                  printf("syst x=%g y=%g cpx=%g cpy=%g\n",
                          sys->pos().x(),  sys->pos().y(),
-                         sys->pagePos().x(),
-                         sys->pagePos().y()
+                         sys->canvasPos().x(),
+                         sys->canvasPos().y()
                         );
-                  printf("directionTag()  staf x=%g y=%g w=%g h=%g\n",
+                  printf("staf x=%g y=%g w=%g h=%g\n",
                          bb.x(), bb.y(),
                          bb.width(), bb.height());
                   // element is above the staff if center of bbox is above center of staff
-                  printf("directionTag()  center diff=%g\n", el->y() + el->height() / 2 - bb.y() - bb.height() / 2);
+                  printf("center diff=%g\n", el->y() + el->height() / 2 - bb.y() - bb.height() / 2);
 */
-                  if (el->type() == HAIRPIN || el->type() == OTTAVA || el->type() == TEXTLINE) {
-                        SLine* sl = static_cast<SLine*>(el);
-                        if (sl->spannerSegments().size() > 0) {
-                              LineSegment* seg = (LineSegment*)sl->spannerSegments().at(0);
-                              // for the line type elements the reference point is vertically centered
-                              // actual position info is in the segments
-                              // compare the segment's canvas ypos with the staff's center height
-                              if (seg->pagePos().y() < sys->pagePos().y() + bb.y() + bb.height() / 2)
-                                     tagname += " placement=\"above\"";
-                              else
-                                     tagname += " placement=\"below\"";
-                              }
-                        }
-                  else {
-                        if (el->y() + el->height() / 2 < bb.y() + bb.height() / 2)
-                              tagname += " placement=\"above\"";
-                        else
-                              tagname += " placement=\"below\"";
-                        }
-                  } // if (ppel && ...
+                  if (el->y() + el->height() / 2 < bb.y() + bb.height() / 2)
+                        tagname += " placement=\"above\"";
+                  else
+                        tagname += " placement=\"below\"";
+                  }
 //            printf("\n");
             }
       xml.stag(tagname);
@@ -2670,8 +2489,8 @@ static bool findUnitAndDots(QString words, QString& unit, int& dots)
       {
       unit = "";
       dots = 0;
-      printf("findUnitAndDots('%s') slen=%d", qPrintable(words), words.length());
-      if (!metro.exactMatch(words)) { printf("\n"); return false; }
+//      printf("findUnitAndDots('%s') slen=%d", qPrintable(words), words.length());
+      if (!metro.exactMatch(words)) { /* printf("\n"); */ return false; }
       switch (words.at(0).unicode()) {
             case 0xe100: unit = "breve"; break;
             case 0xe101: unit = "whole"; break;
@@ -2692,7 +2511,7 @@ static bool findUnitAndDots(QString words, QString& unit, int& dots)
                   default: printf("findUnitAndDots: unknown char '%s'(0x%0xd)\n",
                                   qPrintable(words.mid(i, 1)), words.at(i).unicode());
                   }
-      printf(" unit='%s' dots=%d\n", qPrintable(unit), dots);
+//      printf(" unit='%s' dots=%d\n", qPrintable(unit), dots);
       return true;
       }
 
@@ -2704,7 +2523,7 @@ static bool findMetronome(QString words,
                           QString& wordsRight  // words right of metronome
                          )
       {
-      printf("findMetronome('%s') slen=%d", qPrintable(words), words.length());
+//      printf("findMetronome('%s') slen=%d", qPrintable(words), words.length());
       wordsLeft  = "";
       hasParen   = false;
       metroLeft  = "";
@@ -2713,25 +2532,29 @@ static bool findMetronome(QString words,
       int pos = metroPlusEquals.indexIn(words);
       if (pos != -1) {
             int len = metroPlusEquals.matchedLength();
+/*
             printf(" mpos=%d mlen=%d\n",
                    pos, len
                   );
+*/
             if (words.length() > pos + len) {
                   QString s1 = words.mid(0, pos);    // string to the left of metronome
                   QString s2 = words.mid(pos, len);  // first note and equals sign
                   QString s3 = words.mid(pos + len); // string to the right of equals sign
+/*
                   printf("found metronome: '%s'%s'%s'",
                          qPrintable(s1),
                          qPrintable(s2),
                          qPrintable(s3)
                         );
+*/
                   // determine if metronome has parentheses
                   // left part of string must end with parenthesis plus optional spaces
                   // right part of string must have parenthesis (but not in first pos)
                   int lparen = leftParen.indexIn(s1);
                   int rparen = s3.indexOf(")");
                   hasParen = (lparen != -1 && rparen > 0);
-                  printf(" lparen=%d rparen=%d hasP=%d", lparen, rparen, hasParen);
+//                  printf(" lparen=%d rparen=%d hasP=%d", lparen, rparen, hasParen);
                   if (hasParen) wordsLeft = s1.mid(0, lparen);
                   else wordsLeft = s1;
                   int equalsPos = equals.indexIn(s2);
@@ -2744,12 +2567,14 @@ static bool findMetronome(QString words,
                   else {
                         metroRight = s3;
                         }
+/*
                   printf(" '%s'%s'%s'%s'\n",
                          qPrintable(wordsLeft),
                          qPrintable(metroLeft),
                          qPrintable(metroRight),
                          qPrintable(wordsRight)
                         );
+*/
 //                  bool res;
                   QString unit;
                   int dots;
@@ -2816,7 +2641,7 @@ static void wordsMetrome(Xml& xml, Text* text)
 
 void ExportMusicXml::tempoText(TempoText* text, int staff)
       {
-      printf("ExportMusicXml::tempoText(TempoText='%s')\n", qPrintable(text->getText()));
+//      printf("ExportMusicXml::tempoText(TempoText='%s')\n", qPrintable(text->getText()));
       attr.doAttr(xml, false);
       xml.stag(QString("direction placement=\"%1\"").arg((text->parent()->y()-text->y() < 0.0) ? "below" : "above"));
       wordsMetrome(xml, text);
@@ -2835,9 +2660,11 @@ void ExportMusicXml::tempoText(TempoText* text, int staff)
 
 void ExportMusicXml::words(Text* text, int staff)
       {
+/*
       printf("ExportMusicXml::words userOff.x=%f userOff.y=%f xoff=%g yoff=%g text='%s'\n",
              text->userOff().x(), text->userOff().y(), text->xoff(), text->yoff(),
              text->getText().toUtf8().data());
+*/
       directionTag(xml, attr, text);
       if (text->subtypeName() == "RehearsalMark") {
             xml.stag("direction-type");
@@ -2971,7 +2798,7 @@ void ExportMusicXml::textLine(TextLine* tl, int staff, int tick)
                         lineType = "solid";
                   }
             rest += QString(" line-type=\"%1\"").arg(lineType);
-            p = tl->spannerSegments().first()->userOff();
+            p = tl->lineSegments().first()->userOff();
             offs = tl->mxmlOff();
             type = "start";
             }
@@ -2987,7 +2814,7 @@ void ExportMusicXml::textLine(TextLine* tl, int staff, int tick)
                         }
                   rest += QString(" end-length=\"%1\"").arg(h * 10);
                   }
-            p = ((LineSegment*)tl->spannerSegments().last())->userOff2();
+            p = tl->lineSegments().last()->userOff2();
             offs = tl->mxmlOff2();
             type = "stop";
             }
@@ -3062,7 +2889,7 @@ void ExportMusicXml::dynamic(Dynamic* dyn, int staff)
 
 void ExportMusicXml::symbol(Symbol* sym, int staff)
       {
-      QString name = symbols[score->symIdx()][sym->sym()].name();
+      QString name = symbols[sym->sym()].name();
       const char* mxmlName = "";
       if (name == "pedal ped")
             mxmlName = "pedal type=\"start\"";
@@ -3083,15 +2910,14 @@ void ExportMusicXml::symbol(Symbol* sym, int staff)
 //   lyrics
 //---------------------------------------------------------
 
-void ExportMusicXml::lyrics(const QList<Lyrics*>* ll, const int trk)
+void ExportMusicXml::lyrics(const LyricsList* ll, const int trk)
       {
-//      for (ciLyrics i = ll->begin(); i != ll->end(); ++i) {
-//            if (*i) {
-      foreach(const Lyrics* l, *ll) {
-            if (l) {
-                  if ((l)->track() == trk) {
-                        xml.stag(QString("lyric number=\"%1\"").arg((l)->no() + 1));
-                        int syl   = (l)->syllabic();
+      for (ciLyrics i = ll->begin(); i != ll->end(); ++i) {
+            if (*i) {
+//                  printf("lyric trk %d\n", (*i)->track());
+                  if ((*i)->track() == trk) {
+                        xml.stag(QString("lyric number=\"%1\"").arg((*i)->no() + 1));
+                        int syl   = (*i)->syllabic();
                         QString s = "";
                         switch(syl) {
                               case Lyrics::SINGLE: s = "single"; break;
@@ -3102,13 +2928,9 @@ void ExportMusicXml::lyrics(const QList<Lyrics*>* ll, const int trk)
                                     printf("unknown syllabic %d\n", syl);
                               }
                         xml.tag("syllabic", s);
-                        xml.tag("text", (l)->getText());
-/*
- Temporarily disabled because it doesn't work yet (and thus breaks the regression test).
- See MusicXml::xmlLyric: "// TODO-WS      l->setTick(tick);"
-                        if((l)->endTick() > 0)
+                        xml.tag("text", (*i)->getText());
+                        if((*i)->endTick() > 0)
                               xml.tagE("extend");
-*/
                         xml.etag();
                         }
                   }
@@ -3121,7 +2943,7 @@ void ExportMusicXml::lyrics(const QList<Lyrics*>* ll, const int trk)
 
 // LVIFIX: TODO coda and segno should be numbered uniquely
 
-static void directionJump(Xml& xml, const Jump* const jp)
+static void directionJump(Xml& xml, Jump* jp)
       {
       int jtp = jp->jumpType();
       QString words = "";
@@ -3192,7 +3014,7 @@ static void directionJump(Xml& xml, const Jump* const jp)
 //   directionMarker -- write marker
 //---------------------------------------------------------
 
-static void directionMarker(Xml& xml, const Marker* const m)
+static void directionMarker(Xml& xml, Marker* m)
       {
       int mtp = m->markerType();
       QString words = "";
@@ -3242,90 +3064,46 @@ static void directionMarker(Xml& xml, const Marker* const m)
       }
 
 //---------------------------------------------------------
-//  findTrackForAnnotations
-//---------------------------------------------------------
-
-// An annotation is attched to the staff, with track set
-// to the lowest track in the staff. Find a track for it
-// (the lowest track in this staff that has a chord or rest)
-
-static int findTrackForAnnotations(int track, Segment* seg)
-      {
-//      printf("findTrackForAnnotations(track=%d seg=%p)\n", track, seg);
-      if (seg->segmentType() != SegChordRest)
-            return -1;
-      int staff = track / VOICES;
-      int strack = staff * VOICES;      // start track of staff containing track
-      int etrack = strack + VOICES;     // end track of staff containing track + 1
-//      printf("findTrackForAnnotations() strack=%d etrack=%d\n", strack, etrack);
-      for (int i = strack; i < etrack; i++) {
-            if (seg->element(i)) {
-//                  printf("findTrackForAnnotations() found element at track=%d\n", i);
-                  return i;
-                  }
-            }
-      return -1;
-      }
-
-//---------------------------------------------------------
 //  repeatAtMeasureStart -- write repeats at begin of measure
 //---------------------------------------------------------
 
-static void repeatAtMeasureStart(Xml& xml, Attributes& attr, Measure* m, int strack, int etrack, int track)
+static void repeatAtMeasureStart(Xml& xml, Attributes& attr, Measure* m)
       {
-      // loop over all segments
-      for (Segment* seg = m->first(); seg; seg = seg->next()) {
-            if (seg->segmentType() == SegChordRest) {
-                  foreach(const Element* e, seg->annotations()) {
-                        printf("repeatAtMeasureStart seg %p elem %p type %d (%s) track %d\n",
-                               seg, e, e->type(), qPrintable(e->subtypeName()), e->track());
-                        int wtrack = -1; // track to write jump
-                        if (strack <= e->track() && e->track() < etrack)
-                              wtrack = findTrackForAnnotations(e->track(), seg);
-                        if (track == wtrack) {
-                              switch(e->type()) {
-                                    case SYMBOL:
-                                    case TEMPO_TEXT:
-                                    case STAFF_TEXT:
-                                    case TEXT:
-                                    case DYNAMIC:
-                                    case HARMONY:
-                                    case JUMP: // note: all jumps are handled at measure stop
-                                          break;
-                                    case MARKER:
-                                          {
-                                          // filter out the markers at measure Start
-                                          const Marker* const mk = static_cast<const Marker* const>(e);
-                                          int mtp = mk->markerType();
-                                          printf("repeatAtMeasureStart: marker type %d", mtp);
-                                          if (   mtp == MARKER_SEGNO
-                                              || mtp == MARKER_CODA
-                                             ) {
-                                                printf(" -> handled\n");
-                                                attr.doAttr(xml, false);
-                                                directionMarker(xml, mk);
-                                                }
-                                          else if (   mtp == MARKER_FINE
-                                                   || mtp == MARKER_TOCODA
-                                                  ) {
-                                                printf(" -> ignored\n");
-                                                // ignore
-                                                }
-                                          else {
-                                                printf(" -> not implemented\n");
-                                                printf("repeatAtMeasureStart: marker %d not implemented\n", mtp);
-                                                }
-                                          }
-                                          break;
-                                    default:
-                                          printf("repeatAtMeasureStart: direction type %s at tick %d not implemented\n",
-                                                  Element::name(e->type()), seg->tick());
-                                          break;
-                                    }
-                              } else {
-                              printf("repeatAtMeasureStart: no track found\n");
-                              }
-                        } // foreach
+      // loop over all measure relative elements in this measure
+      // looking for JUMPS and MARKERS
+      for (ciElement ci = m->el()->begin(); ci != m->el()->end(); ++ci) {
+            Element* dir = *ci;
+            int tp = dir->type();
+            if (tp == JUMP) {
+                  // note: all jumps are handled at measure stop
+                  /*
+                  Jump* jp = (Jump*) dir;
+                  printf("repeatAtMeasureStart: jump st=%d jumpType=%d"
+                         " getText=%s jumpTo=%s playUntil=%s continueAt=%s\n",
+                         jp->subtype(), jp->jumpType(),
+                         jp->getText().toLatin1().data(),
+                         jp->jumpTo().toLatin1().data(),
+                         jp->playUntil().toLatin1().data(),
+                         jp->continueAt().toLatin1().data());
+                  */
+                  }
+            else if (tp == MARKER) {
+                  // filter out the markers at measure start
+                  Marker* m = (Marker*) dir;
+                  int mtp = m->markerType();
+                  /*
+                  printf("repeatAtMeasureStart: marker st=%d markerType=%d"
+                         " getText=%s label=%s\n",
+                         m->subtype(), mtp,
+                         m->getText().toLatin1().data(),
+                         m->label().toLatin1().data());
+                  */
+                  if (   mtp == MARKER_SEGNO
+                      || mtp == MARKER_CODA
+                     ) {
+                        attr.doAttr(xml, false);
+                        directionMarker(xml, m);
+                        }
                   }
             }
       }
@@ -3334,61 +3112,27 @@ static void repeatAtMeasureStart(Xml& xml, Attributes& attr, Measure* m, int str
 //  repeatAtMeasureStop -- write repeats at end of measure
 //---------------------------------------------------------
 
-static void repeatAtMeasureStop(Xml& xml, Measure* m, int strack, int etrack, int track)
+static void repeatAtMeasureStop(Xml& xml, Measure* m)
       {
-      // loop over all segments
-      for (Segment* seg = m->first(); seg; seg = seg->next()) {
-            if (seg->segmentType() == SegChordRest) {
-                  foreach(const Element* e, seg->annotations()) {
-                        printf("repeatAtMeasureStop seg %p elem %p type %d (%s) track %d\n",
-                               seg, e, e->type(), qPrintable(e->subtypeName()), e->track());
-                        int wtrack = -1; // track to write jump
-                        if (strack <= e->track() && e->track() < etrack)
-                              wtrack = findTrackForAnnotations(e->track(), seg);
-                        if (track == wtrack) {
-                              switch(e->type()) {
-                                    case SYMBOL:
-                                    case TEMPO_TEXT:
-                                    case STAFF_TEXT:
-                                    case TEXT:
-                                    case DYNAMIC:
-                                    case HARMONY:
-                                    case MARKER:
-                                          {
-                                          // filter out the markers at measure stop
-                                          const Marker* const mk = static_cast<const Marker* const>(e);
-                                          int mtp = mk->markerType();
-                                          printf("repeatAtMeasureStop: marker type %d", mtp);
-                                          if (   mtp == MARKER_FINE
-                                              || mtp == MARKER_TOCODA
-                                             ) {
-                                                printf(" -> handled\n");
-                                                directionMarker(xml, mk);
-                                                }
-                                          else if (   mtp == MARKER_SEGNO
-                                                   || mtp == MARKER_CODA
-                                                  ) {
-                                                printf(" -> ignored\n");
-                                                // ignore
-                                                }
-                                          else {
-                                                printf(" -> not implemented\n");
-                                                printf("repeatAtMeasureStop: marker %d not implemented\n", mtp);
-                                                }
-                                          }
-                                          break;
-                                    case JUMP:
-                                          directionJump(xml, static_cast<const Jump* const>(e));
-                                          break;
-                                    default:
-                                          printf("repeatAtMeasureStop: direction type %s at tick %d not implemented\n",
-                                                  Element::name(e->type()), seg->tick());
-                                          break;
-                                    }
-                              } else {
-                              printf("repeatAtMeasureStop: no track found\n");
-                              }
-                        } // foreach
+      // loop over all measure relative elements in this measure
+      // looking for JUMPS and MARKERS
+      for (ciElement ci = m->el()->begin(); ci != m->el()->end(); ++ci) {
+            Element* dir = *ci;
+            int tp = dir->type();
+            if (tp == JUMP) {
+                  // all jumps are handled at measure stop
+                  Jump* jp = (Jump*) dir;
+                  directionJump(xml, jp);
+                  }
+            else if (tp == MARKER) {
+                  // filter out the markers at measure stop
+                  Marker* m = (Marker*) dir;
+                  int mtp = m->markerType();
+                  if (   mtp == MARKER_FINE
+                      || mtp == MARKER_TOCODA
+                     ) {
+                        directionMarker(xml, m);
+                        }
                   }
             }
       }
@@ -3402,20 +3146,18 @@ static void repeatAtMeasureStop(Xml& xml, Measure* m, int strack, int etrack, in
 
 void ExportMusicXml::work(const MeasureBase* /*measure*/)
       {
-      QString workTitle  = score->metaTag("workTitle");
-      QString workNumber = score->metaTag("workNumber");
-      if (!(workTitle.isEmpty() && workNumber.isEmpty())) {
+      if (!(score->workTitle().isEmpty() && score->workNumber().isEmpty())) {
             xml.stag("work");
-            if (!workNumber.isEmpty())
-                  xml.tag("work-number", workNumber);
-            if (!workTitle.isEmpty())
-                  xml.tag("work-title", workTitle);
+            if (!score->workNumber().isEmpty())
+                  xml.tag("work-number", score->workNumber());
+            if (!score->workTitle().isEmpty())
+                  xml.tag("work-title", score->workTitle());
             xml.etag();
             }
-      if (!score->metaTag("movementNumber").isEmpty())
-            xml.tag("movement-number", score->metaTag("movementNumber"));
-      if (!score->metaTag("movementTitle").isEmpty())
-            xml.tag("movement-title", score->metaTag("movementTitle"));
+      if (!score->movementNumber().isEmpty())
+            xml.tag("movement-number", score->movementNumber());
+      if (!score->movementTitle().isEmpty())
+            xml.tag("movement-title", score->movementTitle());
       }
 
 
@@ -3446,148 +3188,6 @@ static void measureStyle(Xml& xml, Attributes& attr, Measure* m)
             xml.etag();
             }
 //      printf("\n");
-      }
-
-//---------------------------------------------------------
-//  annotations
-//---------------------------------------------------------
-
-static void annotations(ExportMusicXml* exp, int strack, int etrack, int track, int sstaff, Segment* seg)
-      {
-//      printf("annotations(strack=%d etrack=%d track=%d sstaff=%d seg=%p)\n", strack, etrack, track, sstaff, seg);
-      if (seg->segmentType() == SegChordRest) {
-            foreach(const Element* e, seg->annotations()) {
-//                  printf("annotation seg %p elem %p type %d (%s) track %d\n",
-//                         seg, e, e->type(), qPrintable(e->subtypeName()), e->track());
-                  int wtrack = -1; // track to write annotation
-                  if (strack <= e->track() && e->track() < etrack)
-                        wtrack = findTrackForAnnotations(e->track(), seg);
-                  if (track == wtrack) {
-                        switch(e->type()) {
-                              case SYMBOL:
-                                    exp->symbol((Symbol*) e, sstaff);
-                                    break;
-                              case TEMPO_TEXT:
-                                    exp->tempoText((TempoText*) e, sstaff);
-                                    break;
-                              case STAFF_TEXT:
-                              case TEXT:
-                                    exp->words((Text*) e, sstaff);
-                                    break;
-                              case DYNAMIC:
-                                    exp->dynamic((Dynamic*) e, sstaff);
-                                    break;
-                              case HARMONY:
-                                    exp->harmony((Harmony*) e /*, sstaff */);
-                                    break;
-                              case JUMP:
-                                    // ignore
-                                    break;
-                              default:
-                                    printf("annotations: direction type %s at tick %d not implemented\n",
-                                            Element::name(e->type()), seg->tick());
-                                    break;
-                              }
-                        }
-                  } // foreach
-            }
-      }
-
-//---------------------------------------------------------
-//  spannerStart
-//---------------------------------------------------------
-
-// TODO (check)
-// for each spanner start:
-// find start track
-// find stop track
-// if stop track < start track
-//   get data from list of already stopped spanners
-// else
-//   calculate data
-// write start if in right track
-
-static void spannerStart(ExportMusicXml* exp, int strack, int etrack, int track, int sstaff, Segment* seg)
-      {
-      printf("spannerStart(strack=%d etrack=%d track=%d sstaff=%d seg=%p)\n", strack, etrack, track, sstaff, seg);
-      if (seg->segmentType() == SegChordRest) {
-            foreach(const Element* e, seg->spannerFor()) {
-                  const Spanner* sp = static_cast<const Spanner*>(e);
-                  printf("spannerStart seg %p elem %p type %d (%s) track %d endElem %p\n",
-                         seg, e, e->type(), qPrintable(e->subtypeName()), e->track(), sp->endElement());
-                  int wtrack = -1; // track to write spanner
-                  if (strack <= e->track() && e->track() < etrack)
-                        wtrack = findTrackForAnnotations(e->track(), seg);
-                  if (track == wtrack) {
-                        switch(e->type()) {
-                              case HAIRPIN:
-                                    exp->hairpin((Hairpin*) e, sstaff, seg->tick());
-                                    break;
-                              case OTTAVA:
-                                    exp->ottava((Ottava*) e, sstaff, seg->tick());
-                                    break;
-                              case PEDAL:
-                                    exp->pedal((Pedal*) e, sstaff, seg->tick());
-                                    break;
-                              case TEXTLINE:
-                                    exp->textLine((TextLine*) e, sstaff, seg->tick());
-                                    break;
-                              case TRILL:
-                                    // ignore (written as <note><notations><ornaments><wavy-line>
-                                    break;
-                              default:
-                                    printf("spannerStart: direction type %s at tick %d not implemented\n",
-                                            Element::name(e->type()), seg->tick());
-                                    break;
-                              }
-                        }
-                  } // foreach
-            }
-      }
-
-//---------------------------------------------------------
-//  spannerStop
-//---------------------------------------------------------
-
-// TODO
-// see spanner start
-
-static void spannerStop(ExportMusicXml* exp, int strack, int etrack, int track, int sstaff, Segment* seg)
-      {
-      printf("spannerStop(strack=%d etrack=%d track=%d sstaff=%d seg=%p)\n", strack, etrack, track, sstaff, seg);
-      if (seg->segmentType() == SegChordRest) {
-            foreach(const Element* e, seg->spannerBack()) {
-                  const Spanner* sp = static_cast<const Spanner*>(e);
-                  printf("spannerStop seg %p elem %p type %d (%s) track %d endElem %p\n",
-                         seg, e, e->type(), qPrintable(e->subtypeName()), e->track(), sp->endElement());
-                  int wtrack = -1; // track to write spanner
-                  if (strack <= e->track() && e->track() < etrack)
-                        wtrack = findTrackForAnnotations(e->track(), seg);
-                  if (track == wtrack) {
-                        switch(e->type()) {
-                              case HAIRPIN:
-                                    exp->hairpin((Hairpin*) e, sstaff, -1);
-                                    break;
-                              case OTTAVA:
-                                    exp->ottava((Ottava*) e, sstaff, -1);
-                                    break;
-                              case PEDAL:
-                                    exp->pedal((Pedal*) e, sstaff, -1);
-                                    break;
-                              case TEXTLINE:
-                                    exp->textLine((TextLine*) e, sstaff, -1);
-                                    break;
-                              case TRILL:
-                                    // ignore (written as <note><notations><ornaments><wavy-line>
-                                    break;
-                              default:
-                                    printf("spannerStop: direction type %s at tick %d not implemented\n",
-                                            Element::name(e->type()), seg->tick());
-                                    break;
-                              }
-                        }
-                  } // foreach
-            }
       }
 
 //---------------------------------------------------------
@@ -3641,15 +3241,17 @@ foreach(Element* el, *(score->gel())) {
       // use meta data here instead
       xml.stag("identification");
       for (int i = 0; i < score->numberOfCreators(); ++i) {
+/*
             printf("creator type='%s' text='%s'\n",
                    score->getCreator(i)->crType().toUtf8().data(),
                    score->getCreator(i)->crText().toUtf8().data()
                   );
+*/
             const MusicXmlCreator* crt = score->getCreator(i);
             xml.tag(QString("creator type=\"%1\"").arg(crt->crType()), crt->crText());
             }
-      if (!score->metaTag("Copyright").isEmpty())
-            xml.tag("rights", score->metaTag("Copyright"));
+      if (!score->mxmlRights().isEmpty())
+            xml.tag("rights", score->mxmlRights());
       xml.stag("encoding");
       if (debugMode) {
             xml.tag("software", QString("MuseScore 0.7.0"));
@@ -3660,8 +3262,8 @@ foreach(Element* el, *(score->gel())) {
             xml.tag("encoding-date", QDate::currentDate().toString(Qt::ISODate));
             }
       xml.etag();
-      if (!score->metaTag("source").isEmpty())
-            xml.tag("source", score->metaTag("source"));
+      if (!score->source().isEmpty())
+            xml.tag("source", score->source());
       xml.etag();
 
       // to keep most regression testfiles simple, write defaults and credits
@@ -3726,12 +3328,12 @@ foreach(Element* el, *(score->gel())) {
                   }
 
             xml.stag(QString("score-part id=\"P%1\"").arg(idx+1));
-            xml.tag("part-name", part->longName().toPlainText());
-            if (!part->shortName().isEmpty())
-                xml.tag("part-abbreviation", part->shortName().toPlainText());
-
-            if (part->instr()->useDrumset()) {
-                  Drumset* drumset = part->instr()->drumset();
+            xml.tag("part-name", part->longName()->getText());
+            if(part->shortName() && ! part->shortName()->getText().isEmpty ())
+                xml.tag("part-abbreviation", part->shortName()->getText());
+            
+            if (part->useDrumset()) {
+                  Drumset* drumset = part->drumset();
                   for (int i = 0; i < 128; ++i) {
                         DrumInstrument di = drumset->drum(i);
                         if (di.notehead >= 0) {
@@ -3753,15 +3355,14 @@ foreach(Element* el, *(score->gel())) {
                   }
             else {
                   xml.stag(QString("score-instrument id=\"P%1-I%2\"").arg(idx+1).arg(3));
-                  xml.tag("instrument-name", part->longName().toPlainText());
+                  xml.tag("instrument-name", part->longName()->getText());
                   xml.etag();
-
+      
                   xml.stag(QString("midi-instrument id=\"P%1-I%2\"").arg(idx+1).arg(3));
                   xml.tag("midi-channel", part->midiChannel() + 1);
                   xml.tag("midi-program", part->midiProgram() + 1);
                   xml.etag();
                   }
-
             xml.etag();
             staffCount += part->nstaves();
             for (int i = MAX_PART_GROUPS - 1; i >= 0; i--) {
@@ -3790,8 +3391,6 @@ foreach(Element* el, *(score->gel())) {
 
             DirectionsHandler dh(score);
             dh.buildDirectionsList(part, strack, etrack);
-            trillStart.clear();
-            trillStop.clear();
 
             int measureNo = 1;          // number of next regular measure
             int irregularMeasureNo = 1; // number of next irregular measure
@@ -3800,7 +3399,7 @@ foreach(Element* el, *(score->gel())) {
             for (MeasureBase* mb = score->measures()->first(); mb; mb = mb->next()) {
                   if (mb->type() != MEASURE)
                         continue;
-                  Measure* m = static_cast<Measure*>(mb);
+                  Measure* m = (Measure*)mb;
                   PageFormat* pf = score->pageFormat();
 
 
@@ -3831,10 +3430,10 @@ foreach(Element* el, *(score->gel())) {
 
                   if ((irregularMeasureNo + measureNo + pickupMeasureNo) == 4)
                         currentSystem = TopSystem;
-                  else if ((measureNo > 2 && int(m->pagePos().x() / DPI / pf->width()) != int(previousMeasure->pagePos().x() / DPI / pf->width())))    // TODO: MeasureBase
+                  else if ((measureNo > 2 && int(m->canvasPos().x() / DPI / pf->width()) != int(previousMeasure->canvasPos().x() / DPI / pf->width())))    // TODO: MeasureBase
                         currentSystem = NewPage;
                   else if (previousMeasure &&
-                        m->pagePos().y() > (previousMeasure->pagePos().y()))  // TODO: MeasureBase
+                        m->canvasPos().y() > (previousMeasure->canvasPos().y()))  // TODO: MeasureBase
                         currentSystem = NewSystem;
 
                   if (currentSystem != NoSystem) {
@@ -3855,7 +3454,7 @@ foreach(Element* el, *(score->gel())) {
                           // Put the system print suggestions only for the first part in a score...
                           if (idx == 0) {
                               // Find the right margin of the system.
-                              double systemLM = getTenthsFromDots(m->pagePos().x() - m->system()->page()->pagePos().x()) - lm;
+                              double systemLM = getTenthsFromDots(m->canvasPos().x() - m->system()->page()->canvasPos().x()) - lm;
                               double systemRM = pageWidth - rm - (getTenthsFromDots(m->system()->bbox().width()) + lm);
 
                               xml.stag("system-layout");
@@ -3865,9 +3464,9 @@ foreach(Element* el, *(score->gel())) {
                               xml.etag();
 
                               if (currentSystem == NewPage || currentSystem == TopSystem)
-                                  xml.tag("top-system-distance", QString("%1").arg(QString::number(getTenthsFromDots(m->pagePos().y()) - tm,'f',2)) );
+                                  xml.tag("top-system-distance", QString("%1").arg(QString::number(getTenthsFromDots(m->canvasPos().y()) - tm,'f',2)) );
                               else if (currentSystem == NewSystem)
-                                  xml.tag("system-distance", QString("%1").arg(QString::number(getTenthsFromDots(m->pagePos().y() - previousMeasure->pagePos().y() - previousMeasure->bbox().height()),'f',2)));
+                                  xml.tag("system-distance", QString("%1").arg(QString::number(getTenthsFromDots(m->canvasPos().y() - previousMeasure->canvasPos().y() - previousMeasure->bbox().height()),'f',2)));
 
                               xml.etag();
                               }
@@ -3875,7 +3474,7 @@ foreach(Element* el, *(score->gel())) {
                           // Staff layout elements.
                           for (int staffIdx = (staffCount == 0) ? 1 : 0; staffIdx < staves; staffIdx++) {
                               xml.stag(QString("staff-layout number=\"%1\"").arg(staffIdx + 1));
-                              xml.tag("staff-distance", QString("%1").arg(QString::number(getTenthsFromDots(mb->score()->point(mb->system()->staff(staffCount + staffIdx - 1)->distanceDown())),'f',2)));
+                              xml.tag("staff-distance", QString("%1").arg(QString::number(getTenthsFromDots(mb->score()->point(mb->system()->staff(staffCount + staffIdx - 1)->distance())),'f',2)));
                               xml.etag();
                               }
 
@@ -3892,7 +3491,6 @@ foreach(Element* el, *(score->gel())) {
 
                   attr.start();
                   dh.buildDirectionsList(m, false, part, strack, etrack);
-                  findTrills(m, strack, etrack, trillStart, trillStop);
 
                   // barline left must be the first element in a measure
                   barlineLeft(m);
@@ -3964,14 +3562,14 @@ foreach(Element* el, *(score->gel())) {
                                     if (el && el->type() == CLEF) {
                                           // output only clef changes, not generated clefs
                                           // at line beginning
-                                          Clef* cle = static_cast<Clef*>(el);
-                                          int ti = cle->segment()->tick();
-                                          int ct = cle->clefType();
-                                          printf("exportxml: clef at start measure ti=%d ct=%d gen=%d\n", ti, ct, el->generated());
-                                          if (!cle->generated())
+                                          int ti = el->tick();
+                                          int ct = ((Clef*)el)->subtype();
+//                                          printf("exportxml: clef ti=%d ct=%d\n", ti, ct);
+                                          ClefList* cl = score->staff(st/VOICES)->clefList();
+                                          ciClefEvent ci = cl->find(ti);
+                                          if (ci != cl->end()) {
                                                 clef(sstaff, ct);
-                                          else
-                                                printf("exportxml: clef not exported\n");
+                                                }
                                           }
                                     }
                         }
@@ -3988,11 +3586,10 @@ foreach(Element* el, *(score->gel())) {
                             xml.etag();
                           }
                         }
-                        const Instrument* instrument = part->instr();
-                        if (instrument->transpose().chromatic) {
+                        if (part->transpose().chromatic) {
                           xml.stag("transpose");
-                          xml.tag("diatonic",  instrument->transpose().diatonic);
-                          xml.tag("chromatic", instrument->transpose().chromatic);
+                          xml.tag("diatonic",  part->transpose().diatonic);
+                          xml.tag("chromatic", part->transpose().chromatic);
                           xml.etag();
                         }
                       }
@@ -4003,7 +3600,7 @@ foreach(Element* el, *(score->gel())) {
                   // MuseScore limitation: repeats are always in the first part
                   // and are implicitly placed at either measure start or stop
                   if (idx == 0)
-                        repeatAtMeasureStart(xml, attr, m, strack, etrack, strack);
+                        repeatAtMeasureStart(xml, attr, m);
 
                   for (int st = strack; st < etrack; ++st) {
                         // sstaff - xml staff number, counting from 1 for this
@@ -4026,31 +3623,34 @@ foreach(Element* el, *(score->gel())) {
                               // look for harmony element for this tick position
                               if (el->isChordRest()) {
                                     QList<Element*> list;
-
-#if 0 // TODO-WS
+                                    ChordRest* cr = nextChordRest(static_cast<ChordRest*>(el));
+                                    int endTick = el->tick();
+                                    if (cr) {
+                                        endTick = cr->tick();
+                                        printf("CR %d %d\n", endTick, el->tick());
+                                        }
                                     foreach(Element* he, *m->el()) {
+                                    printf("staff %d %d tick %d\n", he->staffIdx(), sstaff, he->tick());
                                           if ((he->type() == HARMONY) && (he->staffIdx() == sstaff)
-                                             && (he->tick() == el->tick())) {
+                                             && (he->tick() >= el->tick()) && (he->tick() <= endTick)) {
                                                 list << he;
                                                 }
                                           }
-#endif
 
                                     qSort(list.begin(), list.end(), elementRighter);
 
                                     foreach (Element* hhe, list){
                                           attr.doAttr(xml, false);
-                                          harmony((Harmony*)hhe);
+                                          harmony((Harmony*)hhe, el);
                                           }
                                     }
 
                               // generate backup or forward to the start time of the element
                               // but not for breath, which has the same start time as the
                               // previous note, while tick is already at the end of that note
-                              if (tick != seg->tick()) {
+                              if (tick != el->tick()) {
                                     attr.doAttr(xml, false);
-                                    if (el->type() != BREATH)
-                                          moveToTick(seg->tick());
+                                    if (el->type() != BREATH) moveToTick(el->tick());
                                     }
 /*
                               if (el->isChordRest()) {
@@ -4059,34 +3659,20 @@ foreach(Element* el, *(score->gel())) {
                                     printf(" newtick=%d\n", tick);
                                     }
 */
-                              // handle annotations and spanners (directions attached to this note or rest)
-//                              dh.handleElement(this, el, sstaff, true);
-                              if (el->isChordRest()) {
-                                    attr.doAttr(xml, false);
-                                    annotations(this, strack, etrack, st, sstaff, seg);
-                                    spannerStop(this, strack, etrack, st, sstaff, seg);
-                                    spannerStart(this, strack, etrack, st, sstaff, seg);
-                                    }
-
+                              dh.handleElement(this, el, sstaff, true);
                               switch (el->type()) {
                                     case CLEF:
                                           {
                                           // output only clef changes, not generated clefs
                                           // at line beginning
-                                          // also ignore clefs at the start of a measure,
+                                          // also ignore clefs at the start o a measure,
                                           // these have already been output
-                                          int ti = seg->tick();
-                                          int ct = ((Clef*)el)->clefType();
-                                          printf("exportxml: clef in measure ti=%d ct=%d gen=%d\n", ti, ct, el->generated());
-                                          if (el->generated()) {
-                                                printf("exportxml: generated clef not exported\n");
-                                                break;
-                                                }
-                                          if (!el->generated() && seg->tick() != m->tick()) {
+                                          int ti = el->tick();
+                                          int ct = ((Clef*)el)->subtype();
+                                          ClefList* cl = score->staff(st/VOICES)->clefList();
+                                          ciClefEvent ci = cl->find(ti);
+                                          if (ci != cl->end() && el->tick() != m->tick()) {
                                                 clef(sstaff, ct);
-                                                }
-                                          else {
-                                                printf("exportxml: clef not exported\n");
                                                 }
                                           }
                                           break;
@@ -4119,16 +3705,17 @@ foreach(Element* el, *(score->gel())) {
                                           break;
                                     case CHORD:
                                           {
-                                          Chord* c                 = static_cast<Chord*>(el);
-                                          const QList<Lyrics*>* ll = &c->lyricsList();
-
-                                          chord(c, sstaff, ll, part->instr()->useDrumset());
+                                          // note: in MuseScore there is one lyricslist for each staff
+                                          // MusicXML associates lyrics with notes in a specific voice
+                                          // (too) simple solution: output lyrics only for the first voice
+                                          const LyricsList* ll = 0;
+                                          /* if ((st % VOICES) == 0) */ ll = seg->lyricsList(st / VOICES);
+                                          chord((Chord*)el, sstaff, ll, part->useDrumset());
                                           break;
                                           }
                                     case REST:
                                           rest((Rest*)el, sstaff);
                                           break;
-
                                     case BAR_LINE:
                                           // Following must be enforced (ref MusicXML barline.dtd):
                                           // If location is left, it should be the first element in the measure;
@@ -4148,7 +3735,7 @@ foreach(Element* el, *(score->gel())) {
                                           break;
                                     }
                               dh.handleElement(this, el, sstaff, false);
-                              } // for (Segment* seg = ...
+                              }
                         attr.stop(xml);
                         if (!((st + 1) % VOICES)) {
                               // sstaff may be 0, which causes a failed assertion (and abort)
@@ -4156,14 +3743,14 @@ foreach(Element* el, *(score->gel())) {
                               // LVIFIX: find exact cause
                               int ssstaff = sstaff > 0 ? sstaff : sstaff + 1;
                               // printf("st=%d sstaff=%d ssstaff=%d\n", st, sstaff, ssstaff);
-                              dh.handleElements(this, part->staff(ssstaff - 1), m->tick(), m->tick() + m->ticks(), sstaff);
+                              dh.handleElements(this, part->staff(ssstaff - 1), m->tick(), m->tick() + m->tickLen(), sstaff);
                               }
-                        } // for (int st = ...
+                        }
                   // move to end of measure (in case of incomplete last voice)
-                  printf("end of measure\n");
-                  moveToTick(m->tick() + m->ticks());
+//                  printf("end of measure\n");
+                  moveToTick(m->tick() + m->tickLen());
                   if (idx == 0)
-                        repeatAtMeasureStop(xml, m, strack, etrack, strack);
+                        repeatAtMeasureStop(xml, m);
                   // note: don't use "m->repeatFlags() & RepeatEnd" here, because more
                   // barline types need to be handled besides repeat end ("light-heavy")
                   barlineRight(m);
@@ -4187,12 +3774,12 @@ foreach(Element* el, *(score->gel())) {
  Return false on error.
  */
 
-bool MuseScore::saveXml(Score* score, const QString& name)
+bool Score::saveXml(const QString& name)
       {
       QFile f(name);
       if (!f.open(QIODevice::WriteOnly))
             return false;
-      ExportMusicXml em(score);
+      ExportMusicXml em(this);
       em.write(&f);
       return f.error() == QFile::NoError;
       }
@@ -4217,16 +3804,18 @@ bool MuseScore::saveXml(Score* score, const QString& name)
 //     </rootfiles>
 // </container>
 
-bool MuseScore::saveMxl(Score* score, const QString& name)
+bool Score::saveMxl(const QString& name)
       {
 //      printf("Score::saveMxl(%s)\n", name.toUtf8().data());
 
+      Zip::ErrorCode ec;
       Zip uz;
-      if (!uz.createArchive(name)) {
-            printf("Cannot create zipfile %s\n", qPrintable(name + ": " + uz.errorString()));
+
+      ec = uz.createArchive(name);
+      if (ec != Zip::Ok) {
+            printf("Cannot create zipfile '%s'\n", name.toUtf8().data());
             return false;
             }
-
       QFileInfo fi(name);
       QDateTime dt;
       if (debugMode)
@@ -4249,27 +3838,31 @@ bool MuseScore::saveMxl(Score* score, const QString& name)
 //      printf("bufsize=%d\n", cbuf.data().size());
 //      printf("data=%s\n", cbuf.data().data());
       cbuf.seek(0);
-      if (!uz.createEntry("META-INF/container.xml", cbuf, dt)) {
-            printf("Cannot add container.xml to zipfile '%s'\n", qPrintable(name + ": " + uz.errorString()));
+      ec = uz.createEntry("META-INF/container.xml", cbuf, dt);
+      if (ec != Zip::Ok) {
+            printf("Cannot add container.xml to zipfile '%s'\n", name.toUtf8().data());
             return false;
             }
 
       QBuffer dbuf;
       dbuf.open(QIODevice::ReadWrite);
-      ExportMusicXml em(score);
+      ExportMusicXml em(this);
       em.write(&dbuf);
 //      printf("bufsize=%d\n", dbuf.data().size());
 //      printf("data=%s\n", dbuf.data().data());
       dbuf.seek(0);
-      if (!uz.createEntry(fn, dbuf, dt)) {
-            printf("Cannot add %s to zipfile '%s'\n", qPrintable(fn), qPrintable(name));
+      ec = uz.createEntry(fn, dbuf, dt);
+      if (ec != Zip::Ok) {
+            printf("Cannot add %s to zipfile '%s'\n", fn.toUtf8().data(), name.toUtf8().data());
             return false;
             }
 
-      if (!uz.closeArchive()) {
-            printf("Cannot close zipfile '%s'\n", qPrintable(name));
+      ec = uz.closeArchive();
+      if (ec != Zip::Ok) {
+            printf("Cannot close zipfile '%s'\n", name.toUtf8().data());
             return false;
             }
+
       return true;
       }
 
@@ -4286,7 +3879,7 @@ double ExportMusicXml::getTenthsFromDots(double dots){
 //   harmony
 //---------------------------------------------------------
 
-void ExportMusicXml::harmony(Harmony* h)
+void ExportMusicXml::harmony(Harmony* h, Element* e)
       {
       int rootTpc = h->rootTpc();
       if (rootTpc != INVALID_TPC) {
@@ -4351,6 +3944,8 @@ void ExportMusicXml::harmony(Harmony* h)
                         }
                   xml.etag();
                   }
+            if(e->tick() < h->tick())
+                  xml.tag("offset", (h->tick() - e->tick()) / div);
             xml.etag();
             }
       else {

@@ -11,14 +11,6 @@
       <software>MuseScore 0.7.0</software>
       <encoding-date>2007-09-10</encoding-date>
       </encoding>
-    <miscellaneous>
-      <miscellaneous-field name="description">Expected iotest differences:
-        - part P1 measure 2 wedge stop moved to measure 3 start
-        - part P1 measure 3 wedge start missing
-        - part P1 measure 3 wedge stop missing
-          (cannot import spanners ending at last measures end)
-        </miscellaneous-field>
-      </miscellaneous>
     </identification>
   <part-list>
     <score-part id="P1">

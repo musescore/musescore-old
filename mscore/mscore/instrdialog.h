@@ -24,7 +24,7 @@
 #include "ui_instrdialog.h"
 #include "globals.h"
 
-struct InstrumentTemplate;
+class InstrumentTemplate;
 class Instrument;
 class Part;
 class Staff;
@@ -48,9 +48,9 @@ class InstrumentsDialog : public QDialog, public Ui::InstrumentDialogBase {
       void on_removeButton_clicked();
       void on_upButton_clicked();
       void on_downButton_clicked();
-//      void on_editButton_clicked();
+      void on_editButton_clicked();
+      void on_aboveButton_clicked();
       void on_belowButton_clicked();
-      void on_linkedButton_clicked();
       void on_saveButton_clicked();
       void on_loadButton_clicked();
       void buildTemplateList();

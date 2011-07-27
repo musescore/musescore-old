@@ -19,22 +19,16 @@
 //=============================================================================
 
 #include "newwizard.h"
-#include "musescore.h"
-#include "preferences.h"
+#include "mscore.h"
+#include "instrtemplate.h"
+#include "score.h"
+#include "staff.h"
+#include "clef.h"
+#include "part.h"
+#include "drumset.h"
 #include "palette.h"
-
-#include "libmscore/instrtemplate.h"
-#include "libmscore/score.h"
-#include "libmscore/staff.h"
-#include "libmscore/clef.h"
-#include "libmscore/part.h"
-#include "libmscore/drumset.h"
-#include "libmscore/keysig.h"
-#include "libmscore/measure.h"
-#include "libmscore/tablature.h"
-#include "libmscore/stafftype.h"
-
-extern Palette* newKeySigPalette();
+#include "keysig.h"
+#include "measure.h"
 
 //---------------------------------------------------------
 //   InstrumentWizard
@@ -57,7 +51,7 @@ InstrumentWizard::InstrumentWizard(QWidget* parent)
       removeButton->setEnabled(false);
       upButton->setEnabled(false);
       downButton->setEnabled(false);
-      linkedButton->setEnabled(false);
+      aboveButton->setEnabled(false);
       belowButton->setEnabled(false);
       connect(showMore, SIGNAL(clicked()), SLOT(buildTemplateList()));
       }
@@ -107,7 +101,7 @@ void InstrumentWizard::on_partiturList_itemSelectionChanged()
       removeButton->setEnabled(flag);
       upButton->setEnabled(flag);
       downButton->setEnabled(flag);
-      linkedButton->setEnabled(item && item->type() == STAFF_LIST_ITEM);
+      aboveButton->setEnabled(item && item->type() == STAFF_LIST_ITEM);
       belowButton->setEnabled(item && item->type() == STAFF_LIST_ITEM);
       }
 
@@ -268,10 +262,10 @@ void InstrumentWizard::on_downButton_clicked()
       }
 
 //---------------------------------------------------------
-//   on_linkedButton_clicked
+//   on_aboveButton_clicked
 //---------------------------------------------------------
 
-void InstrumentWizard::on_linkedButton_clicked()
+void InstrumentWizard::on_aboveButton_clicked()
       {
       QList<QTreeWidgetItem*> wi = partiturList->selectedItems();
       if (wi.isEmpty())
@@ -286,11 +280,9 @@ void InstrumentWizard::on_linkedButton_clicked()
       StaffListItem* nsli = new StaffListItem();
       nsli->staff         = staff;
       nsli->setClef(sli->clef());
-      nsli->setLinked(true);
-      nsli->setVisible(true);
       if (staff)
             nsli->op = ITEM_ADD;
-      pli->insertChild(pli->indexOfChild(sli)+1, nsli);
+      pli->insertChild(pli->indexOfChild(sli), nsli);
       partiturList->clearSelection();     // should not be necessary
       partiturList->setItemSelected(nsli, true);
       }
@@ -350,25 +342,38 @@ void InstrumentWizard::createInstruments(Score* cs)
             int rstaff = 0;
             for (int cidx = 0; (ci = pli->child(cidx)); ++cidx) {
                   StaffListItem* sli = (StaffListItem*)ci;
-                  Staff* staff       = new Staff(cs, part, rstaff);
-                  sli->staff         = staff;
+                  Staff* staff = new Staff(cs, part, rstaff);
+                  sli->staff = staff;
                   staff->setRstaff(rstaff);
                   ++rstaff;
-
-                  staff->init(t, cidx);
-
+                  staff->clefList()->setClef(0, sli->clef());
+                  if (cidx > MAX_STAVES) {
+                        staff->setLines(5);
+                        staff->setSmall(false);
+                        }
+                  else {
+                        staff->setLines(t->staffLines[cidx]);
+                        staff->setSmall(t->smallStaff[cidx]);
+                        }
+                  if (cidx == 0) {
+                        staff->setBracket(0, t->bracket);
+                        staff->setBracketSpan(0, t->staves);
+                        }
                   part->staves()->push_back(staff);
                   cs->staves().insert(staffIdx + rstaff, staff);
                   }
-
-//            part->staves()->front()->setBarLineSpan(part->nstaves());
+            part->staves()->front()->setBarLineSpan(part->nstaves());
 
             // insert part
             cs->insertPart(part, staffIdx);
             int sidx = cs->staffIdx(part);
             int eidx = sidx + part->nstaves();
-            for (Measure* m = cs->firstMeasure(); m; m = m->nextMeasure())
-                  m->cmdAddStaves(sidx, eidx, true);
+            for (MeasureBase* mb = cs->measures()->first(); mb; mb = mb->next()) {
+                  if (mb->type() != MEASURE)
+                        continue;
+                  Measure* m = (Measure*)mb;
+                  m->cmdAddStaves(sidx, eidx);
+                  }
             staffIdx += rstaff;
             }
       //
@@ -413,9 +418,10 @@ int TimesigWizard::measures() const
 //   timesig
 //---------------------------------------------------------
 
-Fraction TimesigWizard::timesig() const
+void TimesigWizard::timesig(int* z, int* n) const
       {
-      return Fraction(timesigZ->value(), timesigN->value());
+      *z = timesigZ->value();
+      *n = timesigN->value();
       }
 
 //---------------------------------------------------------
@@ -535,36 +541,29 @@ NewWizardPage4::NewWizardPage4(QWidget* parent)
       setTitle(tr("Create New Score"));
       setSubTitle(tr("Select Template File:"));
 
-      templateFileDialog = new QFileDialog;
-      templateFileDialog->setParent(this);
-      templateFileDialog->setModal(false);
-      templateFileDialog->setSizeGripEnabled(false);
-      templateFileDialog->setFileMode(QFileDialog::ExistingFile);
-      templateFileDialog->setOption(QFileDialog::DontUseNativeDialog, true);
-      templateFileDialog->setWindowTitle(tr("MuseScore: Select Template"));
-      QString filter = tr("MuseScore Template Files (*.mscz *.mscx)");
-      templateFileDialog->setNameFilter(filter);
-      templateFileDialog->setSizePolicy(QSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored));
+      QStringList nameFilter;
+      nameFilter.append("*.mscz");
+      nameFilter.append("*.mscx");
 
-      QFileInfo myTemplates(preferences.myTemplatesPath);
-      if (myTemplates.isRelative())
-            myTemplates.setFile(QDir::home(), preferences.myTemplatesPath);
-      QList<QUrl> urls;
-      urls.append(QUrl::fromLocalFile(mscoreGlobalShare + "templates"));
-      urls.append(QUrl::fromLocalFile(myTemplates.absoluteFilePath()));
-      templateFileDialog->setSidebarUrls(urls);
+      model = new QDirModel;
+      model->setNameFilters(nameFilter);
 
-      QSettings settings;
-      templateFileDialog->restoreState(settings.value("templateFileDialog").toByteArray());
-      templateFileDialog->setAcceptMode(QFileDialog::AcceptOpen);
-      templateFileDialog->setDirectory(mscoreGlobalShare + "templates");
+      tree  = new QTreeView;
+      tree->setSelectionMode(QAbstractItemView::SingleSelection);
+      tree->setSelectionBehavior(QAbstractItemView::SelectRows);
 
-      QLayout* layout = new QVBoxLayout;
-      layout->addWidget(templateFileDialog);
-      setLayout(layout);
+      tree->setModel(model);
+      tree->header()->hideSection(1);
+      tree->header()->hideSection(2);
+      tree->header()->hideSection(3);
 
-      connect(templateFileDialog, SIGNAL(currentChanged(const QString&)), SLOT(templateChanged(const QString&)));
-      connect(templateFileDialog, SIGNAL(accepted()), SLOT(fileAccepted()));
+      QGridLayout* grid = new QGridLayout;
+      grid->addWidget(tree, 0, 0);
+      setLayout(grid);
+
+      QItemSelectionModel* sm = tree->selectionModel();
+      connect(sm, SIGNAL(selectionChanged(const QItemSelection&, const QItemSelection&)),
+         this, SLOT(templateChanged(const QItemSelection&, const QItemSelection&)));
       }
 
 //---------------------------------------------------------
@@ -573,60 +572,11 @@ NewWizardPage4::NewWizardPage4(QWidget* parent)
 
 void NewWizardPage4::initializePage()
       {
-      // modify dialog
-      // possibly this is not portable as we make some assumptions on the
-      // implementation of QFileDialog
-
-      templateFileDialog->show();
-      QList<QPushButton*>widgets = templateFileDialog->findChildren<QPushButton*>();
-      foreach(QPushButton* w, widgets) {
-            w->setEnabled(false);
-            w->setVisible(false);
-            }
-      path.clear();
+      model->refresh();
+      QString path(mscoreGlobalShare);
+      path += "/templates";
+      tree->setRootIndex(model->index(path));
       }
-
-//---------------------------------------------------------
-//   isComplete
-//---------------------------------------------------------
-
-bool NewWizardPage4::isComplete() const
-      {
-      return !path.isEmpty();
-      }
-
-//---------------------------------------------------------
-//   fileAccepted
-//---------------------------------------------------------
-
-void NewWizardPage4::fileAccepted()
-      {
-      templateFileDialog->show();
-      wizard()->next();
-      }
-
-//---------------------------------------------------------
-//   templateChanged
-//---------------------------------------------------------
-
-void NewWizardPage4::templateChanged(const QString& s)
-      {
-      path = s;
-      emit completeChanged();
-      }
-
-//---------------------------------------------------------
-//   templatePath
-//---------------------------------------------------------
-
-QString NewWizardPage4::templatePath() const
-      {
-      bool useTemplate = field("useTemplate").toBool();
-      if (useTemplate)
-            return path;
-      return QString();
-      }
-
 
 //---------------------------------------------------------
 //   NewWizardPage5
@@ -636,38 +586,33 @@ NewWizardPage5::NewWizardPage5(QWidget* parent)
    : QWizardPage(parent)
       {
       setTitle(tr("Create New Score"));
-      setSubTitle(tr("Select Key Signature and Tempo:"));
+      setSubTitle(tr("Select Key Signature:"));
 
-      QGroupBox* b1 = new QGroupBox;
-      b1->setTitle(tr("Key Signature"));
-      sp = newKeySigPalette();
+      sp = new Palette;
+      sp->setMag(.8);
+      sp->setGrid(56, 45);
       sp->setSelectable(true);
+
+      QVBoxLayout* layout = new QVBoxLayout;
+      layout->addWidget(sp);
+      setLayout(layout);
+
+      for (int i = 0; i < 7; ++i) {
+            KeySig* k = new KeySig(gscore);
+            k->setSubtype(i+1);
+            sp->append(k, qApp->translate("MuseScore", keyNames[i*2]));
+            }
+      for (int i = -7; i < 0; ++i) {
+            KeySig* k = new KeySig(gscore);
+            k->setSubtype(i & 0xff);
+            sp->append(k, qApp->translate("MuseScore", keyNames[(7 + i) * 2 + 1]));
+            }
+      KeySig* k = new KeySig(gscore);
+      k->setSubtype(0);
+      sp->append(k, qApp->translate("MuseScore", keyNames[14]));
       sp->setSelected(14);
-      PaletteScrollArea* sa = new PaletteScrollArea(sp);
-      QVBoxLayout* l1 = new QVBoxLayout;
-      l1->addWidget(sa);
-      b1->setLayout(l1);
 
-      tempoGroup = new QGroupBox;
-      tempoGroup->setCheckable(true);
-      tempoGroup->setChecked(true);
-      tempoGroup->setTitle(tr("Tempo"));
-      QLabel* bpm = new QLabel;
-      bpm->setText(tr("BPM:"));
-      _tempo = new QDoubleSpinBox;
-      _tempo->setRange(20.0, 400.0);
-      _tempo->setValue(100.0);
-      QHBoxLayout* l2 = new QHBoxLayout;
-      l2->addWidget(bpm);
-      l2->addWidget(_tempo);
-      l2->addStretch(100);
-      tempoGroup->setLayout(l2);
-
-      QVBoxLayout* l3 = new QVBoxLayout;
-      l3->addWidget(b1);
-      l3->addWidget(tempoGroup);
-      l3->addStretch(100);
-      setLayout(l3);
+      sp->resizeWidth(300);
       }
 
 //---------------------------------------------------------
@@ -682,22 +627,63 @@ KeySigEvent NewWizardPage5::keysig() const
       }
 
 //---------------------------------------------------------
+//   isComplete
+//---------------------------------------------------------
+
+bool NewWizardPage4::isComplete() const
+      {
+      QItemSelectionModel* sm = tree->selectionModel();
+      QModelIndexList l = sm->selectedRows();
+      bool hasSelection = false;
+      if (!l.isEmpty()) {
+            QModelIndex idx = l.front();
+            hasSelection = idx.isValid();
+            }
+      return hasSelection;
+      }
+
+//---------------------------------------------------------
+//   templateChanged
+//---------------------------------------------------------
+
+void NewWizardPage4::templateChanged(const QItemSelection&, const QItemSelection&)
+      {
+      emit completeChanged();
+      }
+
+//---------------------------------------------------------
+//   templatePath
+//---------------------------------------------------------
+
+QString NewWizardPage4::templatePath() const
+      {
+      bool useTemplate = field("useTemplate").toBool();
+      if (useTemplate) {
+            QItemSelectionModel* sm = tree->selectionModel();
+            QModelIndexList l = sm->selectedRows();
+            if (l.isEmpty())
+                  return QString();
+            QModelIndex idx = l.front();
+            if (idx.isValid())
+                  return model->filePath(idx);
+            }
+      return QString();
+      }
+
+//---------------------------------------------------------
 //   NewWizard
 //---------------------------------------------------------
 
 NewWizard::NewWizard(QWidget* parent)
    : QWizard(parent)
       {
-#if defined(Q_WS_WIN)
-      setWizardStyle(QWizard::ClassicStyle);
-#endif
       setPixmap(QWizard::LogoPixmap, QPixmap(":/data/mscore.png"));
       setPixmap(QWizard::WatermarkPixmap, QPixmap(":/data/bg1.jpg"));
       setWindowTitle(tr("MuseScore: Create New Score"));
-      setOption(QWizard::NoCancelButton, false);
-      setOption(QWizard::CancelButtonOnLeft, true);
-      setOption(QWizard::HaveFinishButtonOnEarlyPages, true);
-      setOption(QWizard::HaveNextButtonOnLastPage, true);
+    setOption(QWizard::NoCancelButton, false);
+    setOption(QWizard::CancelButtonOnLeft, true);
+    setOption(QWizard::HaveFinishButtonOnEarlyPages, true);
+    setOption(QWizard::HaveNextButtonOnLastPage, true);
 
 
       p1 = new NewWizardPage1;

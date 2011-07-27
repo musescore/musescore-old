@@ -21,9 +21,9 @@
 #ifndef __SEQ_H__
 #define __SEQ_H__
 
-#include "libmscore/event.h"
+#include "event.h"
 #include "driver.h"
-#include "libmscore/fifo.h"
+#include "fifo.h"
 #include "al/tempo.h"
 
 class Note;
@@ -35,16 +35,13 @@ class Driver;
 class Part;
 struct Channel;
 class ScoreView;
-class MasterSynth;
 
 //---------------------------------------------------------
 //   SeqMsg
 //    message format for gui -> sequencer messages
 //---------------------------------------------------------
 
-enum { SEQ_NO_MESSAGE, SEQ_TEMPO_CHANGE, SEQ_PLAY, SEQ_SEEK,
-       SEQ_MIDI_INPUT_EVENT
-      };
+enum { SEQ_NO_MESSAGE, SEQ_TEMPO_CHANGE, SEQ_PLAY, SEQ_SEEK };
 
 struct SeqMsg {
       int id;
@@ -56,7 +53,7 @@ struct SeqMsg {
 //   SeqMsgFifo
 //---------------------------------------------------------
 
-static const int SEQ_MSG_FIFO_SIZE = 512;
+static const int SEQ_MSG_FIFO_SIZE = 256;
 
 class SeqMsgFifo : public FifoBase {
       SeqMsg messages[SEQ_MSG_FIFO_SIZE];
@@ -79,12 +76,11 @@ class Seq : public QObject {
       Score* cs;
       ScoreView* cv;
       bool running;                       // true if sequencer is available
-      int state;                          // TRANSPORT_STOP, TRANSPORT_PLAY, TRANSPORT_STARTING=3
-
+      int state;                          // STOP, PLAY, START_PLAY
       bool playlistChanged;
 
       SeqMsgFifo toSeq;
-      SeqMsgFifo fromSeq;
+
       Driver* driver;
 
       double meterValue[2];
@@ -93,13 +89,13 @@ class Seq : public QObject {
 
       EventMap events;                    // playlist
 
-      QList<Event> activeNotes;           // notes sounding
+      QList<const Event*> activeNotes;    // notes sounding
       double playTime;
       double startTime;
 
       EventMap::const_iterator playPos;   // moved in real time thread
       EventMap::const_iterator guiPos;    // moved in gui thread
-      QList<const Note*> markedNotes;     // notes marked as sounding
+      QList<Note*> markedNotes;           // notes marked as sounding
 
       int endTick;
       int curTick;
@@ -108,15 +104,17 @@ class Seq : public QObject {
       QTimer* heartBeatTimer;
       QTimer* noteTimer;
 
-      QList<Event> eventList;
+      QList<Event*> eventList;
+
 
       void collectMeasureEvents(Measure*, int staffIdx);
 
       void stopTransport();
       void startTransport();
       void setPos(int);
-      void playEvent(const Event&);
+      void playEvent(const Event*, unsigned framePos);
       void guiToSeq(const SeqMsg& msg);
+      void startNote(const Channel&, int, int, double nt);
 
    private slots:
       void seqMessage(int msg);
@@ -126,7 +124,7 @@ class Seq : public QObject {
 
    public slots:
       void setRelTempo(double);
-      void setGain(float);
+      void setMasterVolume(float);
       void seek(int);
       void stopNotes();
       void start();
@@ -136,12 +134,10 @@ class Seq : public QObject {
       void started();
       void stopped();
       int toGui(int);
-      void gainChanged(float);
+      void masterVolumeChanged(float);
 
    public:
-      // this are also the jack audio transport states:
-      enum { TRANSPORT_STOP=0, TRANSPORT_PLAY=1, TRANSPORT_STARTING=3,
-           TRANSPORT_NET_STARTING=4 };
+      enum { STOP, PLAY, START_PLAY };
 
       Seq();
       ~Seq();
@@ -155,16 +151,15 @@ class Seq : public QObject {
 
       void collectEvents();
       void guiStop();
-      void stopWait();
 
       bool init();
       void exit();
       bool isRunning() const    { return running; }
-      bool isPlaying() const    { return state == TRANSPORT_PLAY; }
-      bool isStopped() const    { return state == TRANSPORT_STOP; }
+      bool isPlaying() const    { return state == PLAY; }
+      bool isStopped() const    { return state == STOP; }
 
       void processMessages();
-      void process(unsigned, float*, float*);
+      void process(unsigned, float*, float*, int stride);
       QList<QString> inputPorts();
       int getEndTick() const    { return endTick;  }
       bool isRealtime() const   { return true;     }
@@ -177,26 +172,15 @@ class Seq : public QObject {
       ScoreView* viewer() const { return cv; }
       void initInstruments();
 
-      QList<MidiPatch*> getPatchInfo() const;
+      const QList<MidiPatch*>& getPatchInfo() const;
       Driver* getDriver()  { return driver; }
       int getCurTime();
       int getCurTick();
       void getCurTick(int*, int*);
-
-      float gain() const;
-
-      int synthNameToIndex(const QString&) const;
-      QString synthIndexToName(int) const;
-      void putEvent(const Event&);
-      void startNoteTimer(int duration);
-      void startNote(const Channel&, int, int, double nt);
-      void eventToGui(Event);
-      void processToGuiMessages();
+      float masterVolume() const;
       };
 
 extern Seq* seq;
-extern MasterSynth* synti;
-
 extern void initSequencer();
 extern bool initMidi();
 #endif

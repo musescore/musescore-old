@@ -56,16 +56,18 @@ class PartItem : public QListWidgetItem {
 class ExcerptsDialog : public QDialog, private Ui::ExcerptsDialog {
       Q_OBJECT
       Score* score;
+      QList<Excerpt*> el;
 
    private slots:
       void deleteClicked();
       void newClicked();
       void excerptChanged(QListWidgetItem* cur, QListWidgetItem* prev);
       void partDoubleClicked(QListWidgetItem*);
-      void partClicked(QListWidgetItem*);
       void createExcerptClicked();
       void createExcerptClicked(QListWidgetItem*);
-      void titleChanged(const QString&);
+
+   public slots:
+      virtual void accept();
 
    public:
       ExcerptsDialog(Score*, QWidget* parent = 0);

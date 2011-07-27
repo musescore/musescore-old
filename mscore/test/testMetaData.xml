@@ -45,13 +45,13 @@
     <credit-words default-x="661.415" default-y="1737.7" font-size="14" justify="center" valign="top">PrintedSubtitle</credit-words>
     </credit>
   <credit page="1">
-    <credit-words default-x="1259.84" default-y="1750.58" font-size="12" justify="right" valign="top">PrintedComposer</credit-words>
+    <credit-words default-x="1259.84" default-y="1746.87" font-size="12" justify="right" valign="top">PrintedComposer</credit-words>
     </credit>
   <credit page="1">
-    <credit-words default-x="62.9921" default-y="1750.58" font-size="12" justify="left" valign="top">PrintedPoet</credit-words>
+    <credit-words default-x="62.9921" default-y="1746.87" font-size="12" justify="left" valign="top">PrintedPoet</credit-words>
     </credit>
   <credit page="1">
-    <credit-words default-x="661.415" default-y="125.984" font-size="8" justify="center" valign="bottom">MetaRights</credit-words>
+    <credit-words default-x="661.415" default-y="125.984" font-size="8" justify="center" valign="bottom">PrintedCopyright</credit-words>
     </credit>
   <part-list>
     <score-part id="P1">
@@ -66,12 +66,12 @@
       </score-part>
     </part-list>
   <part id="P1">
-    <measure number="1" width="103.75">
+    <measure number="1" width="114.37">
       <print>
         <system-layout>
           <system-margins>
-            <left-margin>68.54</left-margin>
-            <right-margin>1024.55</right-margin>
+            <left-margin>76.73</left-margin>
+            <right-margin>1005.75</right-margin>
             </system-margins>
           <top-system-distance>180.00</top-system-distance>
           </system-layout>

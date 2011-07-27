@@ -19,7 +19,7 @@
 //=============================================================================
 
 #include "editinstrument.h"
-#include "libmscore/instrtemplate.h"
+#include "instrtemplate.h"
 
 //---------------------------------------------------------
 //   EditInstrument

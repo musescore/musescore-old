@@ -542,7 +542,7 @@
             <enum>Qt::PlainText</enum>
            </property>
            <property name="pixmap">
-            <pixmap resource="musescore.qrc">:/data/musescore_logo_full.png</pixmap>
+            <pixmap resource="mscore.qrc">:/data/musescore_logo_full.png</pixmap>
            </property>
            <property name="margin">
             <number>0</number>
@@ -571,14 +571,14 @@
          <item>
           <widget class="QLabel" name="versionLabel">
            <property name="text">
-            <string notr="true" comment="do not translate">Version: 0.9.0</string>
+            <string notr="true">Version: 0.9.0</string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QLabel" name="revisionLabel">
            <property name="text">
-            <string notr="true" comment="do not translate">Revision: 628</string>
+            <string notr="true">Revision: 628</string>
            </property>
           </widget>
          </item>
@@ -627,7 +627,7 @@ p, li { white-space: pre-wrap; }
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
-  <include location="musescore.qrc"/>
+  <include location="mscore.qrc"/>
  </resources>
  <connections>
   <connection>

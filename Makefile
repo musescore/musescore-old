@@ -22,16 +22,16 @@ REVISION  = `cat mscore/mscore/revision.h`
 CPUS      = `grep -c processor /proc/cpuinfo`
 
 PREFIX    = "/usr/local"
-VERSION   = "2.0b${REVISION}"
-#VERSION   = 2.0
+#VERSION   = "1.0r${REVISION}"
+VERSION   = 1.1
 
 ROOT=`pwd`
 
 release:
-	if test ! -d build.release;                      \
+	if test ! -d build;                              \
          then                                          \
-            mkdir build.release;                       \
-            cd build.release;                          \
+            mkdir build;                               \
+            cd build;                                  \
             cmake -DCMAKE_BUILD_TYPE=RELEASE	       \
             	  -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
             	   ../mscore; 			       \
@@ -42,10 +42,10 @@ release:
          fi;
 
 debug:
-	if test ! -d build.debug;                        \
+	if test ! -d build;                              \
          then                                          \
-            mkdir build.debug;                         \
-            cd build.debug;                            \
+            mkdir build;                               \
+            cd build;                                  \
             cmake -DCMAKE_BUILD_TYPE=DEBUG	       \
             	  -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
             	   ../mscore; 			       \
@@ -84,7 +84,7 @@ win32:
 #
 
 clean:
-	-rm -rf build.debug build.release
+	-rm -rf build
 	-rm -rf win32build win32install
 
 #
@@ -114,8 +114,8 @@ revision:
 version: revision
 	@echo ${VERSION}
 
-install: release revision
-	cd build.release; make install
+install:
+	cd build; make install
 
 #
 #  linux

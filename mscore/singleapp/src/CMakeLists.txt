@@ -18,7 +18,11 @@
 #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #=============================================================================
 
-include (${PROJECT_SOURCE_DIR}/cmake/gch.cmake)
+if (GCC_VISIBILITY)
+set(CMAKE_CXX_FLAGS "-fexceptions -g -Wall -Wextra -Winvalid-pch -fvisibility=hidden -fvisibility-inlines-hidden")
+else (GCC_VISIBILITY)
+set(CMAKE_CXX_FLAGS "-fexceptions -g -Wall -Wextra -Winvalid-pch")
+endif (GCC_VISIBILITY)
 
 QT4_WRAP_CPP (mocs
       qtsingleapplication.h
@@ -27,12 +31,12 @@ QT4_WRAP_CPP (mocs
 
 add_library (
   qtsingleapp STATIC
-  ${PROJECT_BINARY_DIR}/all.h
-  ${PCH}
   ${mocs}
   qtsingleapplication.cpp
   qtlocalpeer.cpp
   )
 
-ADD_DEPENDENCIES(qtsingleapp mops1)
-ADD_DEPENDENCIES(qtsingleapp mops2)
+set_target_properties( qtsingleapp
+   PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h"
+   )
+

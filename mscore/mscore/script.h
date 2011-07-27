@@ -21,7 +21,7 @@
 #ifndef __SCRIPT_H__
 #define __SCRIPT_H__
 
-#include "libmscore/score.h"
+#include "score.h"
 
 static const int SCRIPT_MAJOR_VERSION = 1;
 static const int SCRIPT_MINOR_VERSION = 1;
@@ -61,7 +61,7 @@ extern QScriptValue create_Text_class(QScriptEngine* engine);
 extern QScriptValue create_Measure_class(QScriptEngine* engine);
 extern QScriptValue create_Part_class(QScriptEngine* engine);
 extern QScriptValue create_PageFormat_class(QScriptEngine* engine);
-
+extern QScriptValue create_TimeSig_class(QScriptEngine* engine);
 
 #endif
 

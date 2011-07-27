@@ -29,7 +29,7 @@ install(FILES
       inv13.mscx
       praeludium1.mscx
       prelude.mscx
-      promenade.mscz
+      promenade.mscx
       scales.mscx
       sonata16.mscx
       italian-1.mscz
@@ -39,7 +39,6 @@ install(FILES
       wtc1fuga5.mscz
       schnee.mscz
       sarabande-gfh.mscz
-      bwv565.mscz
       All_Dudes.mscz
       Triumph.mscz
       DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}demos

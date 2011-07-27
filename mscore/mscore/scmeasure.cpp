@@ -18,12 +18,12 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "musescore.h"
-#include "libmscore/measure.h"
-#include "libmscore/layoutbreak.h"
-#include "libmscore/page.h"
+#include "mscore.h"
+#include "measure.h"
+#include "layoutbreak.h"
+#include "page.h"
 #include "script.h"
-#include "libmscore/system.h"
+#include "system.h"
 
 Q_DECLARE_METATYPE(Measure*);
 Q_DECLARE_METATYPE(Score*);
@@ -75,22 +75,21 @@ static QScriptValue prototype_Measure_call(QScriptContext* context, QScriptEngin
                         bool lineb = measure->lineBreak();
                         if (lineb == val)
                               return context->engine()->undefinedValue();
-                        if (val) {
-                	            LayoutBreak* lb = new LayoutBreak(score);
-                              lb->setSubtype(LAYOUT_BREAK_LINE);
-                              lb->setTrack(-1);       // this are system elements
-                              lb->setParent(measure);
-                              score->undoAddElement(lb);
-                              }
-                        else {
-                              // remove line break
-                              foreach(Element* e, *measure->el()) {
-                                    if (e->type() == LAYOUT_BREAK && e->subtype() == LAYOUT_BREAK_LINE) {
-                                          measure->score()->undoRemoveElement(e);
-                                          }
+                        if (val){	       
+                	          LayoutBreak* lb = new LayoutBreak(score);	   
+                            lb->setSubtype(LAYOUT_BREAK_LINE);	       
+                            lb->setTrack(-1);       // this are system elements	       
+                            lb->setParent(measure);	             
+                            score->cmdAdd(lb);
+                        }else{ 	 
+                            // remove line break	 
+                            foreach(Element* e, *measure->el()) {	 
+                                if (e->type() == LAYOUT_BREAK && e->subtype() == LAYOUT_BREAK_LINE) {	 
+                                    measure->score()->cmdRemove(e); 
                                     }
-                              }
-                        return context->engine()->undefinedValue();
+                                }
+                             }
+                          return context->engine()->undefinedValue();     
                         }
                   break;
             case 1:     // "pageNumber",
@@ -103,15 +102,15 @@ static QScriptValue prototype_Measure_call(QScriptContext* context, QScriptEngin
                   break;
             case 3:     // "pos"
                   if (context->argumentCount() == 0){
-                        Page* page = (Page*)measure->parent()->parent();
-                        QPointF pos(measure->pagePos().x() - page->pagePos().x(),  measure->pagePos().y());
+                        Page* page = (Page*)measure->parent()->parent();	  
+                        QPointF pos(measure->canvasPos().x() - page->canvasPos().x(),  measure->canvasPos().y());
                         return qScriptValueFromValue(context->engine(), pos);
                         }
                   break;
 
             }
       return context->throwError(QScriptContext::TypeError,
-         QString::fromLatin1("Note.%0(): bad argument count or value")
+         QString::fromLatin1("Measure.%0(): bad argument count or value")
          .arg(function_names_measure[_id]));
       }
 

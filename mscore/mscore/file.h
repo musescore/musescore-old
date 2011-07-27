@@ -26,6 +26,7 @@
 //---------------------------------------------------------
 
 class LoadFile {
+      bool popenFlag;
       QString _name;
 
    protected:
@@ -34,11 +35,12 @@ class LoadFile {
    public:
       LoadFile() {}
       virtual ~LoadFile() {}
-      virtual bool loader(QFile* f) = 0;        // return false on error
-      bool load(const QString& name);           // return false on error
+      virtual bool loader(QFile* f) = 0;    // return false on error
+      bool load(QWidget* parent, const QString& base, const QString& ext,
+         const QString& caption);         // return false on error
+      bool load(const QString& name);     // return false on error
       QString name() const { return _name; }
       };
 
-extern QString getSoundFont(const QString&);
 #endif
 

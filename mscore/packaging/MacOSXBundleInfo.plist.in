@@ -52,6 +52,49 @@
 				</array>
 			</dict>
 		</dict>
+	</array>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>mscx</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>musescoreDocument.icns</string>
+			<key>CFBundleTypeMIMETypes</key>
+			<array>
+				<string>application/x-musescore+xml</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>MuseScore File</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSTypeIsPackage</key>
+			<false/>
+			<key>LSIsAppleDefaultForType</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>mscz</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>musescoreDocument.icns</string>
+			<key>CFBundleTypeMIMETypes</key>
+			<array>
+				<string>application/x-musescore</string>
+			</array>
+      		<key>CFBundleTypeName</key>
+			<string>Compressed MuseScore File</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSTypeIsPackage</key>
+			<true/>
+			<key>LSIsAppleDefaultForType</key>
+			<true/>
+		</dict>
 		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
@@ -183,52 +226,6 @@
 			<string>Viewer</string>
 		</dict>
 	</array>
-	<key>CFBundleDocumentTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string>mscx</string>
-			</array>
-			<key>CFBundleTypeIconFile</key>
-			<string>musescoreDocument.icns</string>
-			<key>CFBundleTypeMIMETypes</key>
-			<array>
-				<string>application/x-musescore+xml</string>
-			</array>
-			<key>CFBundleTypeName</key>
-			<string>MuseScore File</string>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>LSTypeIsPackage</key>
-			<false/>
-			<key>LSIsAppleDefaultForType</key>
-			<true/>
-		</dict>
-		<dict>
-			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string>mscz</string>
-			</array>
-			<key>CFBundleTypeIconFile</key>
-			<string>musescoreDocument.icns</string>
-			<key>CFBundleTypeMIMETypes</key>
-			<array>
-				<string>application/x-musescore</string>
-			</array>
-      		<key>CFBundleTypeName</key>
-			<string>Compressed MuseScore File</string>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>LSTypeIsPackage</key>
-			<true/>
-			<key>LSIsAppleDefaultForType</key>
-			<true/>
-		</dict>
-	</array>
-      <key>ATSApplicationFontsPath</key>
-      <string>fonts</string>
-
 	<key>CFBundleExecutable</key>
 	<string>${MACOSX_BUNDLE_EXECUTABLE_NAME}</string>
 	<key>CFBundleGetInfoString</key>
@@ -257,7 +254,5 @@
 	<true/>
 	<key>NSHumanReadableCopyright</key>
 	<string>${MACOSX_BUNDLE_COPYRIGHT}</string>
-	<key>ATSApplicationFontsPath</key>
-	<string>fonts/</string>
 </dict>
 </plist>

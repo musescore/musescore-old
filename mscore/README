@@ -18,7 +18,7 @@ Features:
 
 Licence:
       MuseScore is distributed under the GNU General Public License (GPL).
-      Please read the file LICENSE in this directory for more
+      Please read the file COPYING in this directory for more
       details.
 
 Requirements:
@@ -57,6 +57,7 @@ User Documentation:
       Look at the handbook section at http://www.musescore.org
 
 Program Documentation:
+
       Type
             cd build
             make doxy
@@ -79,24 +80,15 @@ Test:
       "preferences" dialog.
 
 =================================================================
-      Status
-=================================================================
-
-      MuseScore is in beta state. That means you should not use
-      it for any mission critical work. It is incomplete and surely has
-      a lot of bugs. Also the save format (*.mscx and *.mscz files) will
-      most likely change in future versions.
-
-=================================================================
       Help needed
 =================================================================
 
-      We need your help!
+      We need your help! http://musescore.org
 
 =================================================================
       Contact
 =================================================================
 
-      Werner Schweer; ws at wschweer.de
+      Werner Schweer; ws@seh.de
       http://www.musescore.org/
 

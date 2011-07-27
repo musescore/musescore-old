@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: select.h 2047 2009-08-26 18:33:38Z wschweer $
 //
-//  Copyright (C) 2002-2010 Werner Schweer and others
+//  Copyright (C) 2002-2009 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -23,12 +23,7 @@
 
 #include "ui_synthcontrol.h"
 
-class MasterSynth;
-namespace Awl {
-      class AbstractSlider;
-      };
-
-class Score;
+class Synth;
 
 //---------------------------------------------------------
 //   SynthControl
@@ -37,45 +32,31 @@ class Score;
 class SynthControl : public QWidget, Ui::SynthControl {
       Q_OBJECT
 
-      Awl::AbstractSlider* aeolusSection[4][5];
+      Synth* synth;
 
       virtual void closeEvent(QCloseEvent*);
-      void updateSyntiValues();
-      void updateUpDownButtons();
 
    private slots:
       void selectSoundFont();
-      void sfUpClicked();
-      void sfDownClicked();
-      void sfDeleteClicked();
-      void sfAddClicked();
-      void sfChanged(const QString&);
-
-      void gainChanged(double, int);
+      void masterGainChanged(double, int);
       void masterTuningChanged(double);
       void reverbValueChanged(double val, int idx);
       void chorusValueChanged(double val, int idx);
-      void chorusSpeedChanged(double val);
-      void chorusDepthChanged(double val);
-      void setAeolusValue(double, int);
-      void currentSoundFontChanged(int row);
-      void chorusNumberChanged(int val);
-      void chorusTypeChanged(int val);
 
    signals:
       void closed();
-      void gainChanged(float);
+      void masterGainChanged(float);
       void soundFontChanged();
 
    public slots:
-      void setGain(float);
+      void setMasterGain(float);
 
    public:
-      SynthControl(QWidget* parent);
+      Synth* getSynth() const { return synth; }
+      SynthControl(Synth*, QWidget* parent);
       void updatePreferences();
       void setMeter(float, float, float, float);
       void stop();
-      void setScore(Score*);
       };
 
 #endif

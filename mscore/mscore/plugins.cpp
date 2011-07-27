@@ -18,17 +18,16 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "musescore.h"
-#include "libmscore/score.h"
-#include "libmscore/undo.h"
+#include "mscore.h"
+#include "score.h"
+#include "undo.h"
 #include "globals.h"
 #include "script.h"
 #include "config.h"
-#include "libmscore/chord.h"
-#include "libmscore/note.h"
-#include "libmscore/utils.h"
+#include "chord.h"
+#include "note.h"
+#include "utils.h"
 #include "sccursor.h"
-#include "libmscore/mscore.h"
 
 Q_DECLARE_METATYPE(Score*);
 Q_DECLARE_METATYPE(SCursor*);
@@ -64,7 +63,7 @@ void MuseScore::registerPlugin(const QString& pluginPath)
             se = new ScriptEngine();
             se->installTranslatorFunctions();
             }
-
+            
       //load translation
       QFileInfo fi(pluginPath);
       QString pPath = fi.absolutePath();
@@ -75,7 +74,7 @@ void MuseScore::registerPlugin(const QString& pluginPath)
       QTranslator* translator = new QTranslator;
       if(translator->load("locale_"+lName, pPath+"/translations"))
             qApp->installTranslator(translator);
-
+           
       QScriptValue val  = se->evaluate(f.readAll(), pluginPath);
       if (se->hasUncaughtException()) {
             QScriptValue sv = se->uncaughtException();
@@ -127,12 +126,12 @@ void MuseScore::registerPlugin(const QString& pluginPath)
                   }
             }
 
-      // int pluginIdx = plugins.size();
+      int pluginIdx = plugins.size();
       plugins.append(pluginPath);
-
+      
       //give access to pluginPath in init
       se->globalObject().setProperty("pluginPath", se->newVariant(pPath));
-
+      
       init.call();
       QString menu = val.property("menu").toString();
       QString context = fi.baseName();
@@ -214,11 +213,8 @@ void MuseScore::registerPlugin(const QString& pluginPath)
                         else {
                               a = cm->addAction(m);
                               }
-                        registerPlugin(a);
-#if 0
                         connect(a, SIGNAL(triggered()), pluginMapper, SLOT(map()));
                         pluginMapper->setMapping(a, pluginIdx);
-#endif
                         if (debugMode)
                               printf("add action <%s>\n", qPrintable(m));
                         }
@@ -241,11 +237,10 @@ void MuseScore::registerPlugin(QAction* a)
             printf("registerPlugin: no pluginMapper\n");
             return;
             }
-      a->setEnabled(_sstate != STATE_DISABLED);
-      pluginActions.append(a);
       int pluginIdx = plugins.size() - 1; // plugin is already appended
       connect(a, SIGNAL(triggered()), pluginMapper, SLOT(map()));
       pluginMapper->setMapping(a, pluginIdx);
+printf("registerPlugin: add action idx %d\n", pluginIdx);
       }
 
 //---------------------------------------------------------
@@ -318,11 +313,6 @@ bool MuseScore::loadPlugin(const QString& filename)
 ScriptEngine::ScriptEngine()
    : QScriptEngine()
       {
-#if 0
-      QStringList sl = availableExtensions();
-      foreach(QString s, sl)
-            printf("available script extension: <%s>\n", qPrintable(s));
-#endif
       static const char* xts[] = {
             "qt.core", "qt.gui", "qt.xml", "qt.network", "qt.uitools"
             };
@@ -330,8 +320,7 @@ ScriptEngine::ScriptEngine()
             importExtension(xts[i]);
             if (hasUncaughtException()) {
                   QScriptValue val = uncaughtException();
-                  printf("Error loading Script extension <%s>: %s\n",
-                     xts[i], qPrintable(val.toString()));
+                  printf("%s\n", qPrintable(val.toString()));
                   }
             }
 
@@ -349,6 +338,7 @@ ScriptEngine::ScriptEngine()
       globalObject().setProperty("Measure",   create_Measure_class(this), QScriptValue::SkipInEnumeration);
       globalObject().setProperty("Part",      create_Part_class(this),    QScriptValue::SkipInEnumeration);
       globalObject().setProperty("PageFormat",create_PageFormat_class(this),    QScriptValue::SkipInEnumeration);
+      globalObject().setProperty("TimeSig",   create_TimeSig_class(this), QScriptValue::SkipInEnumeration);
 
       globalObject().setProperty("mscore",              newQObject(mscore));
       globalObject().setProperty("division",            newVariant(AL::division));

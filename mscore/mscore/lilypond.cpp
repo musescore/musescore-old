@@ -18,17 +18,15 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "musescore.h"
-#include "libmscore/score.h"
-#include "libmscore/element.h"
-#include "libmscore/part.h"
-#include "libmscore/staff.h"
-#include "libmscore/note.h"
-#include "libmscore/rest.h"
-#include "libmscore/chord.h"
-#include "libmscore/barline.h"
-#include "libmscore/measure.h"
-#include "libmscore/segment.h"
+#include "score.h"
+#include "element.h"
+#include "part.h"
+#include "staff.h"
+#include "note.h"
+#include "rest.h"
+#include "chord.h"
+#include "barline.h"
+#include "measure.h"
 
 //---------------------------------------------------------
 //   LNote
@@ -85,12 +83,15 @@ class Lilypond {
 //    return true on success
 //---------------------------------------------------------
 
-bool MuseScore::importLilypond(Score* score, const QString& name)
+bool Score::importLilypond(const QString& name)
       {
-      Lilypond ly(score);
+      Lilypond ly(this);
       if (!ly.read(name))
             return false;
       ly.convert();
+
+      _saved = false;
+      _created = true;
       return true;
       }
 
@@ -259,7 +260,7 @@ void Lilypond::scanRest()
 
 void Lilypond::createMeasure()
       {
-      if (tick >= measure->tick() + measure->ticks()) {
+      if (tick >= measure->tick() + measure->tickLen()) {
             measure = new Measure(score);
             measure->setTick(tick);
             score->add(measure);
@@ -285,7 +286,8 @@ void Lilypond::addNote(const LNote& lnote)
       chord->setParent(segment);
       Duration d;
       d.setVal(lnote.len);
-      chord->setDurationType(d);
+      chord->setDuration(d);
+      chord->setTick(tick);
 
       segment->add(chord);
 
@@ -317,7 +319,9 @@ void Lilypond::addRest()
       rest->setParent(segment);
       Duration d;
       d.setVal(curLen);
-      rest->setDurationType(d);
+      rest->setDuration(d);
+      rest->setTick(tick);
+
       segment->add(rest);
       tick += curLen;
       }

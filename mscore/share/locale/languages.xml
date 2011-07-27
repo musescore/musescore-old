@@ -3,7 +3,7 @@
   <language code="af" name="Afrikaans" />
   <language code="ar" name="العربية" handbook="http://musescore.org/ar/الكتيّب"/>
   <language code="ast" name="Asturianu" />
-  <language code="bg" name="български" />
+  <language code="bg" name="български" handbook="http://musescore.org/bg/ръководство"/>
   <language code="ca" name="Català" handbook="http://musescore.org/ca/manual" />
   <language code="cs" name="Czech" />
   <language code="da" name="Dansk" handbook="http://musescore.org/da/håndbog" />
@@ -14,8 +14,8 @@
   <language code="eo" name="Esperanto" />
   <language code="es" name="Español" handbook="http://www.musescore.org/es/manual" />
   <language code="eu" name="Euskara" />
-  <language code="fa" name="فارسی" />
   <language code="fi" name="Finnish" handbook="http://www.musescore.org/fi/käsikirja" />
+  <language code="fa" name="فارسی" />
   <language code="fo" name="Faeroese" />
   <language code="fr" name="Français" handbook="http://www.musescore.org/fr/manuel" />
   <language code="gl" name="Galego" handbook="http://www.musescore.org/gl/manual" />
@@ -41,7 +41,7 @@
   <language code="th" name="ภาษาไทย" />
   <language code="tr" name="Türkçe" handbook="http://www.musescore.org/tr/kullanım"/>
   <language code="uk" name="Ukrajina" handbook="http://musescore.org/uk/підручник"/>
-  <language code="vi" name="Tiếng Việt" />
+  <language code="vi" name="Tiếng Việt" /> 
   <language code="zh_CN" name="简体中文" handbook="http://musescore.org/zh-hans/用户手册"/>
   <language code="zh_TW" name="繁體中文 (台灣)" handbook="http://musescore.org/zh-hans/用户手册"/>
 </languages>

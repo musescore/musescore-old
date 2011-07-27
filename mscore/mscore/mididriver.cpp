@@ -27,12 +27,12 @@
 #include "config.h"
 #include "mididriver.h"
 #include "preferences.h"
-#include "musescore.h"
+#include "mscore.h"
 #include "midifile.h"
 #include "globals.h"
 #include "seq.h"
-#include "libmscore/utils.h"
-#include "libmscore/score.h"
+#include "utils.h"
+#include "score.h"
 
 //---------------------------------------------------------
 //   Port
@@ -349,30 +349,32 @@ void AlsaMidiDriver::getOutputPollFd(struct pollfd** p, int* n)
 
 void AlsaMidiDriver::read()
       {
+      static int active = 0;
+
       snd_seq_event_t* ev;
       for (;;) {
             int rv = snd_seq_event_input(alsaSeq, &ev);
-            if (rv < 0)
+            if (rv < 0 || mscore == 0)
                   return;
 
-            if (!mscore || !mscore->midiinEnabled()) {
+            if (!mscore->midiinEnabled()) {
                   snd_seq_free_event(ev);
+                  active = 0;
                   return;
                   }
 
             if (ev->type == SND_SEQ_EVENT_NOTEON) {
-                  int pitch = ev->data.note.note;
-                  int velo  = ev->data.note.velocity;
-                  mscore->midiNoteReceived(ev->data.note.channel, pitch, velo);
+                  int pitch   = ev->data.note.note;
+                  int velo    = ev->data.note.velocity;
+                  if (velo) {
+                        mscore->midiNoteReceived(pitch, active);
+                        ++active;
+                        }
+                  else
+                        --active;
                   }
-            else if (ev->type == SND_SEQ_EVENT_NOTEOFF) {    // "Virtual Keyboard" sends this
-                  int pitch = ev->data.note.note;
-                  mscore->midiNoteReceived(ev->data.note.channel, pitch, 0);
-                  }
-            else if (ev->type == SND_SEQ_EVENT_CONTROLLER) {
-                  mscore->midiCtrlReceived(ev->data.control.param,
-                     ev->data.control.value);
-                  }
+            else if (ev->type == SND_SEQ_EVENT_NOTEOFF)     // "Virtual Keyboard" sends this
+                  --active;
 
             if (midiInputTrace) {
                   printf("MidiIn: ");

@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2011 Werner Schweer and others
+//  Copyright (C) 2002-2009 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -25,7 +25,6 @@ class Element;
 class Sym;
 class Xml;
 class Palette;
-class PaletteScrollArea;
 
 #include "ui_palette.h"
 #include "ui_cellproperties.h"
@@ -37,12 +36,9 @@ class PaletteScrollArea;
 struct PaletteCell {
       Element* element;
       QString name;
-      QString tag;
       bool drawStaff;
       double x, y;
       int xoffset, yoffset;
-      qreal mag;
-      bool readOnly;
       };
 
 //---------------------------------------------------------
@@ -88,16 +84,13 @@ enum PaletteCommand {
 class PaletteBoxButton : public QToolButton {
       Q_OBJECT
 
-      friend class PaletteBox;
-
       Palette* palette;
-      PaletteScrollArea* scrollArea;
       QAction* editAction;
 
       int id;
 
+//      virtual void paintEvent(QPaintEvent*);
       virtual void changeEvent(QEvent*);
-      virtual void paintEvent( QPaintEvent * );
 
    private slots:
       void deleteTriggered()     { emit paletteCmd(PALETTE_DELETE, id);  }
@@ -107,14 +100,12 @@ class PaletteBoxButton : public QToolButton {
       void newTriggered()        { emit paletteCmd(PALETTE_NEW, id);     }
       void beforePulldown();
       void enableEditing(bool);
-      void showPalette(bool);
 
    signals:
       void paletteCmd(int, int);
-      void closeAll();
 
    public:
-      PaletteBoxButton(PaletteScrollArea*, Palette*, QWidget* parent = 0);
+      PaletteBoxButton(QWidget*, Palette*, QWidget* parent = 0);
       void setId(int v) { id = v; }
       };
 
@@ -133,8 +124,6 @@ class PaletteBox : public QDockWidget {
    private slots:
       void paletteCmd(int, int);
       void setDirty() { _dirty = true; }
-      void contextMenu(const QPoint&);
-      void closeAll();
 
    signals:
       void paletteVisible(bool);
@@ -143,9 +132,8 @@ class PaletteBox : public QDockWidget {
       PaletteBox(QWidget* parent = 0);
       void addPalette(Palette*);
       bool dirty() const      { return _dirty; }
-      void write(Xml&);
-      bool read(QDomElement);
-      void clear();
+      void write(const QString& path);
+      bool read(QFile*);
       };
 
 //---------------------------------------------------------
@@ -172,7 +160,6 @@ class Palette : public QWidget {
       Q_OBJECT
 
       QString _name;
-      QString _tag;
       QList<PaletteCell*> cells;
 
       int hgrid, vgrid;
@@ -186,6 +173,7 @@ class Palette : public QWidget {
       bool _selectable;
       bool _readOnly;
       qreal _yOffset;
+      bool _drumPalette;
 
       void redraw(const QRect&);
       virtual void paintEvent(QPaintEvent*);
@@ -199,7 +187,6 @@ class Palette : public QWidget {
       virtual void dragMoveEvent(QDragMoveEvent*);
       virtual void dropEvent(QDropEvent*);
       virtual void contextMenuEvent(QContextMenuEvent*);
-      virtual QSize sizeHint() const;
 
       int idx(const QPoint&) const;
       QRect idxRect(int);
@@ -217,8 +204,8 @@ class Palette : public QWidget {
       Palette(QWidget* parent = 0);
       ~Palette();
 
-      void append(Element*, const QString& name, QString tag = QString(), qreal mag = 1.0);
-      void add(int idx, Element*, const QString& name, const QString tag = QString());
+      void append(Element*, const QString& name);
+      void add(int idx, Element*, const QString& name);
       void append(int sym);
 
       void setGrid(int, int);
@@ -243,8 +230,9 @@ class Palette : public QWidget {
       int columns() const            { return width() / hgrid; }
       int rows() const;
       int size() const               { return cells.size(); }
-      void setCellReadOnly(int c, bool v) { cells[c]->readOnly = v; }
-      int heightForWidth(int) const;
+      int resizeWidth(int);
+      bool drumPalette() const       { return _drumPalette; }
+      void setDrumPalette(bool val)  { _drumPalette = val;  }
       QString name() const           { return _name;        }
       void setName(const QString& s) { _name = s;           }
       int gridWidth() const          { return hgrid;        }

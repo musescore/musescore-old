@@ -20,10 +20,9 @@
 
 #include "magbox.h"
 #include "scoreview.h"
-#include "libmscore/page.h"
-#include "musescore.h"
-#include "libmscore/score.h"
-#include "libmscore/mscore.h"
+#include "page.h"
+#include "mscore.h"
+#include "score.h"
 
 static unsigned int startMag = MAG_100;
 
@@ -50,8 +49,8 @@ MagBox::MagBox(QWidget* parent)
       freeMag = 1.0;
       setEditable(true);
       setInsertPolicy(QComboBox::InsertAtBottom);
-      setToolTip(tr("Zoom"));
-      setWhatsThis(tr("Zoom"));
+      setToolTip(tr("Magnification"));
+      setWhatsThis(tr("Zoom Canvas"));
       setValidator(new MagValidator(this));
 
       unsigned int n = sizeof(magTable)/sizeof(*magTable) - 1;

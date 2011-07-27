@@ -28,6 +28,7 @@
 #include "driver.h"
 #include "mididriver.h"
 #include "config.h"
+#include "fluid.h"
 
 #define ALSA_PCM_NEW_HW_PARAMS_API
 #define ALSA_PCM_NEW_SW_PARAMS_API
@@ -51,6 +52,8 @@ class AlsaDriver {
       int setSwpar(snd_pcm_t* handle, snd_pcm_sw_params_t* swpar);
       int recover();
 
+      bool rwAccess;
+
       unsigned int           _rate;
       snd_pcm_uframes_t      _frsize;
       unsigned int           _nfrags;
@@ -71,7 +74,6 @@ class AlsaDriver {
       bool                   _xrun;
       clear_function         _clear_func;
       play_function          _play_func;
-      bool                   mmappedInterface;
 
       static char* clear_32le(char* dst, int step, int nfrm);
       static char* clear_24le(char* dst, int step, int nfrm);
@@ -110,6 +112,7 @@ class AlsaAudio : public Driver {
       bool seekflag;
       double startTime;
 
+//      Port midiInPort;
       MidiDriver* midiDriver;
 
       void registerClient();
@@ -133,9 +136,11 @@ class AlsaAudio : public Driver {
       void alsaLoop();
       void write(int n, void* l, void* r);
 
+      virtual void putEvent(const Event&, unsigned framePos);
+      virtual void process(int, float*, float*, int);
       virtual void midiRead();
 
-      virtual void registerPort(const QString& name, bool input, bool midi);
+      virtual int registerPort(const QString& name, bool input, bool midi);
       virtual void unregisterPort(int);
       };
 

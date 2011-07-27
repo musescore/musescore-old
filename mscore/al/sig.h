@@ -32,27 +32,30 @@ class Xml;
 //    a nominal duration different from actual duration.
 //-------------------------------------------------------------------
 
-class SigEvent {
-      Fraction _timesig;
-      Fraction _nominal;
-      int _bar;               ///< precomputed value
+struct SigEvent {
+      Fraction actual;
+      Fraction nominal;
+      int bar;                ///< precomputed value
+      int ticks;              ///< ticks per measure, precomputed value
 
-   public:
       int read(QDomElement, int fileDivision);
       void write(Xml&, int) const;
 
-      SigEvent() : _timesig(0, 0) {}       ///< default SigEvent is invalid
-      SigEvent(const Fraction& s, int bar = 0) : _timesig(s), _bar(bar) {}
-      SigEvent(const SigEvent& e);
+      SigEvent() : actual(0, 0) {}                    ///< default SigEvent is invalid
+      SigEvent(const Fraction&);                      ///< set regular event
+      SigEvent(const Fraction&, const Fraction&);     ///< set irregular event
 
       bool operator==(const SigEvent& e) const;
-      bool valid() const       { return _timesig.isValid(); }
-      QString print() const    { return _timesig.print();  }
-      Fraction timesig() const { return _timesig;          }
-      Fraction nominal() const { return _nominal;          }
-      void setNominal(const Fraction& f) { _nominal = f;  }
-      int bar() const          { return _bar;              }
-      void setBar(int val)     { _bar = val;               }
+      bool valid() const { return actual.isValid(); }
+      QString print() const {
+            return valid() ? actual.print() : QString("void");
+            }
+      bool nominalEqual(const SigEvent& e) const {
+            return nominal.identical(e.nominal);
+            }
+      bool nominalEqualActual() const { return actual.identical(nominal); }
+      Fraction fraction() const       { return actual;            }
+      Fraction getNominal() const     { return nominal;           }
       };
 
 //---------------------------------------------------------
@@ -63,12 +66,14 @@ typedef std::map<const int, SigEvent>::iterator iSigEvent;
 typedef std::map<const int, SigEvent>::const_iterator ciSigEvent;
 
 class TimeSigMap : public std::map<const int, SigEvent > {
+      unsigned _serial;
       void normalize();
 
    public:
       TimeSigMap();
-
       void add(int tick, const Fraction&);
+      void add(int tick, const Fraction& a, const Fraction& n);
+      void add(int tick, int ticks, const Fraction& nominal);
       void add(int tick, const SigEvent& ev);
 
       void del(int tick);
@@ -82,11 +87,19 @@ class TimeSigMap : public std::map<const int, SigEvent > {
       void tickValues(int t, int* bar, int* beat, int* tick) const;
       int bar2tick(int bar, int beat, int tick) const;
 
+      int ticksMeasure(int tick) const;
+
+      void removeTime(int start, int len);
+      void insertTime(int start, int len);
+      int serial() const { return _serial; }
       unsigned raster(unsigned tick, int raster) const;
       unsigned raster1(unsigned tick, int raster) const;    // round down
       unsigned raster2(unsigned tick, int raster) const;    // round up
       int rasterStep(unsigned tick, int raster) const;
+      Fraction measureRest(unsigned tick) const;
       };
+
+extern int ticks_measure(const Fraction&);
 
 }     // namespace AL
 #endif

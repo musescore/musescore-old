@@ -21,7 +21,7 @@
 #ifndef __CHORDEDIT_H__
 #define __CHORDEDIT_H__
 
-#include "libmscore/harmony.h"
+#include "harmony.h"
 #include "ui_chordedit.h"
 
 class DegreeTabDelegate;

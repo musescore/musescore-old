@@ -40,8 +40,7 @@ class JackAudio : public Driver {
       char _jackName[8];
 
       QList<jack_port_t*> ports;
-      QList<jack_port_t*> midiOutputPorts;
-      QList<jack_port_t*> midiInputPorts;
+      QList<jack_port_t*> midiPorts;
 
       static int processAudio(jack_nframes_t, void*);
 
@@ -61,9 +60,10 @@ class JackAudio : public Driver {
       virtual int getState();
       virtual int sampleRate() const    { return jack_get_sample_rate(client); }
       virtual void putEvent(const Event&, unsigned framePos);
+      virtual void process(int, float*, float*, int);
       virtual void midiRead();
 
-      virtual void registerPort(const QString& name, bool input, bool midi);
+      virtual int registerPort(const QString& name, bool input, bool midi);
       virtual void unregisterPort(int);
       };
 

@@ -19,11 +19,10 @@
 //=============================================================================
 
 #include "excerptsdialog.h"
-#include "musescore.h"
-#include "libmscore/score.h"
-#include "libmscore/part.h"
-#include "libmscore/excerpt.h"
-#include "libmscore/undo.h"
+#include "mscore.h"
+#include "score.h"
+#include "part.h"
+#include "excerpt.h"
 
 //---------------------------------------------------------
 //   ExcerptItem
@@ -33,7 +32,7 @@ ExcerptItem::ExcerptItem(Excerpt* e, QListWidget* parent)
    : QListWidgetItem(parent)
       {
       _excerpt = e;
-      setText(e->title());
+      setText(e->name());
       }
 
 //---------------------------------------------------------
@@ -58,16 +57,20 @@ ExcerptsDialog::ExcerptsDialog(Score* s, QWidget* parent)
       {
       setupUi(this);
       setModal(true);
-
       score = s;
-      if (score->parentScore())
-            score = score->parentScore();
 
-      foreach(Excerpt* e, *score->excerpts()) {
+      // make a deep copy of all excerpts:
+
+      QList<Excerpt*>* sel = score->excerpts();
+      foreach(Excerpt* e, *sel)
+            el.append(new Excerpt(*e));
+
+      foreach(Excerpt* e, el) {
             ExcerptItem* ei = new ExcerptItem(e);
             excerptList->addItem(ei);
             }
-      foreach(Part* p, *score->parts()) {
+
+      foreach(Part* p, *s->parts()) {
             PartItem* item = new PartItem(p);
             partList->addItem(item);
             }
@@ -81,15 +84,50 @@ ExcerptsDialog::ExcerptsDialog(Score* s, QWidget* parent)
          SLOT(createExcerptClicked(QListWidgetItem*)));
       connect(partList, SIGNAL(itemDoubleClicked(QListWidgetItem*)),
          SLOT(partDoubleClicked(QListWidgetItem*)));
-      connect(partList, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(partClicked(QListWidgetItem*)));
       connect(createExcerpt, SIGNAL(clicked()), SLOT(createExcerptClicked()));
-      connect(title, SIGNAL(textChanged(const QString&)), SLOT(titleChanged(const QString&)));
 
-//      if (!sel->isEmpty())
-//            excerptList->setCurrentRow(0);
+      if (!sel->isEmpty())
+            excerptList->setCurrentRow(0);
       bool flag = excerptList->currentItem() != 0;
       editGroup->setEnabled(flag);
       deleteButton->setEnabled(flag);
+      }
+
+//---------------------------------------------------------
+//   accept
+//---------------------------------------------------------
+
+void ExcerptsDialog::accept()
+      {
+      QListWidgetItem* cur = excerptList->currentItem();
+      excerptChanged(0, cur);
+
+      //
+      // set dirty if list changed
+      //
+      QList<Excerpt*>* sel = score->excerpts();
+      bool dirty = false;
+      if (sel->size() != el.size())
+            dirty = true;
+      else {
+            int n = sel->size();
+            for (int i = 0; i < n; ++i) {
+                  if (*(sel->at(i)) != *(el.at(i))) {
+                        dirty = true;
+                        break;
+                        }
+                  }
+            }
+      if (dirty)
+            score->setDirty(true);
+
+      foreach(Excerpt* e, *sel)
+            delete e;
+      sel->clear();
+      foreach(Excerpt* e, el)
+            sel->append(e);
+      el.clear();
+      QDialog::accept();
       }
 
 //---------------------------------------------------------
@@ -112,18 +150,9 @@ void MuseScore::startExcerptsDialog()
 
 void ExcerptsDialog::deleteClicked()
       {
-      QListWidgetItem* cur = excerptList->currentItem();
-      if (cur == 0)
-            return;
-      Excerpt* ex = static_cast<ExcerptItem*>(cur)->excerpt();
-
-      if (ex->score()) {
-            score->startCmd();
-            score->undo()->push(new RemoveExcerpt(ex->score()));
-            score->endCmd();
-            }
-      int row = excerptList->row(cur);
-      excerptList->takeItem(row);
+      int idx = excerptList->currentRow();
+      delete excerptList->item(idx);
+      el.removeAt(idx);
       }
 
 //---------------------------------------------------------
@@ -132,37 +161,48 @@ void ExcerptsDialog::deleteClicked()
 
 void ExcerptsDialog::newClicked()
       {
+      Excerpt* e = new Excerpt(score);
       QString name;
       for (int i = 1;; ++i) {
             name = tr("Part-%1").arg(i);
-            int n = excerptList->count();
-
             Excerpt* ee = 0;
-            for (int k = 0; k < n; ++k) {
-                  ee = static_cast<ExcerptItem*>(excerptList->item(k))->excerpt();
-                  if (ee->title() == name)
+            foreach(ee, el) {
+                  if (ee->name() == name)
                         break;
                   }
-            if ((ee == 0) || (ee->title() != name))
+            if ((ee == 0) || (ee->name() != name))
                   break;
             }
-      Excerpt* e = new Excerpt(0);
-      e->setTitle(name);
+      e->setName(name);
+      el.append(e);
       ExcerptItem* ei = new ExcerptItem(e);
       excerptList->addItem(ei);
-      excerptList->setCurrentRow(score->excerpts()->size() - 1);
+      excerptList->setCurrentRow(el.size() - 1);
       }
 
 //---------------------------------------------------------
 //   excerptChanged
 //---------------------------------------------------------
 
-void ExcerptsDialog::excerptChanged(QListWidgetItem* cur, QListWidgetItem*)
+void ExcerptsDialog::excerptChanged(QListWidgetItem* cur, QListWidgetItem* prev)
       {
       createExcerpt->setEnabled(true);
-      bool b;
+      if (prev) {
+            Excerpt* pex = ((ExcerptItem*)prev)->excerpt();
+            prev->setText(name->text());
+            pex->setName(name->text());
+            pex->setTitle(title->text());
+            int n = partList->count();
+            pex->parts()->clear();
+            for (int i = 0; i < n; ++i) {
+                  PartItem* pi = (PartItem*)partList->item(i);
+                  if (pi->checkState() == Qt::Checked)
+                        pex->parts()->append(pi->part());
+                  }
+            }
       if (cur) {
             Excerpt* e = ((ExcerptItem*)cur)->excerpt();
+            name->setText(e->name());
             title->setText(e->title());
 
             // set selection:
@@ -173,20 +213,16 @@ void ExcerptsDialog::excerptChanged(QListWidgetItem* cur, QListWidgetItem*)
                   int idx = pl->indexOf(pi->part());
                   pi->setCheckState(idx != -1 ? Qt::Checked : Qt::Unchecked);
                   }
-            b = e->score() == 0;
             }
       else {
+            name->setText("");
             title->setText("");
             int n = partList->count();
             for (int i = 0; i < n; ++i) {
                   PartItem* pi = (PartItem*)partList->item(i);
                   pi->setCheckState(Qt::Unchecked);
                   }
-            b = false;
             }
-      partList->setEnabled(b);
-      title->setEnabled(b);
-
       bool flag = excerptList->currentItem() != 0;
       editGroup->setEnabled(flag);
       deleteButton->setEnabled(flag);
@@ -203,46 +239,15 @@ void ExcerptsDialog::partDoubleClicked(QListWidgetItem* item)
       }
 
 //---------------------------------------------------------
-//   partClicked
-//---------------------------------------------------------
-
-void ExcerptsDialog::partClicked(QListWidgetItem* item)
-      {
-      QListWidgetItem* cur = excerptList->currentItem();
-      if (cur == 0)
-            return;
-      Excerpt* excerpt = static_cast<ExcerptItem*>(cur)->excerpt();
-
-      PartItem* pi = static_cast<PartItem*>(item);
-      if (item->checkState() == Qt::Checked) {
-            foreach(Part* p, *excerpt->parts()) {
-                  if (p == pi->part())
-                        return;
-                  }
-            excerpt->parts()->append(pi->part());
-           }
-      else {
-            excerpt->parts()->removeOne(pi->part());
-            }
-      }
-
-//---------------------------------------------------------
 //   createExcerptClicked
 //---------------------------------------------------------
 
 void ExcerptsDialog::createExcerptClicked()
       {
-      int n = excerptList->count();
-      for (int i = 0; i < n; ++i) {
-            QListWidgetItem* item = excerptList->item(i);
-            Excerpt* excerpt = static_cast<ExcerptItem*>(item)->excerpt();
-            if (excerpt->score()) {
-printf("  already there %d %d\n", i, n);
-                  continue;
-                  }
-printf("create %d %d\n", i, n);
-            createExcerptClicked(item);
-            }
+      QListWidgetItem* cur = excerptList->currentItem();
+      if (cur == 0)
+            return;
+      createExcerptClicked(cur);
       }
 
 //---------------------------------------------------------
@@ -251,39 +256,17 @@ printf("create %d %d\n", i, n);
 
 void ExcerptsDialog::createExcerptClicked(QListWidgetItem* cur)
       {
-      Excerpt* e = static_cast<ExcerptItem*>(cur)->excerpt();
-      if (e->score())
-            return;
-      Score* nscore = ::createExcerpt(*e->parts());
-      if (nscore == 0)
-            return;
-      nscore->setParentScore(score);
-      e->setScore(nscore);
-      nscore->setName(e->title());
-      nscore->rebuildMidiMapping();
-      nscore->updateChannel();
-      nscore->addLayoutFlags(LAYOUT_FIX_PITCH_VELO);
-      nscore->setLayoutAll(true);
-      score->startCmd();
-      score->undo()->push(new AddExcerpt(nscore));
-      score->endCmd();
-      nscore->style()->set(ST_createMultiMeasureRests, true);
-
-      partList->setEnabled(false);
-      title->setEnabled(false);
-      }
-
-//---------------------------------------------------------
-//   titleChanged
-//---------------------------------------------------------
-
-void ExcerptsDialog::titleChanged(const QString& s)
-      {
-      QListWidgetItem* cur = excerptList->currentItem();
-      if (cur == 0)
-            return;
+      excerptChanged(cur, cur);
       Excerpt* excerpt = ((ExcerptItem*)cur)->excerpt();
-      excerpt->setTitle(s);
-      cur->setText(s);
+      if(excerpt->parts()->size() > 0) { //prevent creating empty score
+            Score* nscore = score->createExcerpt(excerpt);
+            nscore->rebuildMidiMapping();
+            nscore->updateChannel();
+            nscore->fixPpitch();
+            nscore->layout();
+      
+            mscore->appendScore(nscore);
+            }
       }
+
 

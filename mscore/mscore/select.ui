@@ -32,7 +32,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="musescore.qrc">:/data/bg1.jpg</pixmap>
+      <pixmap resource="mscore.qrc">:/data/bg1.jpg</pixmap>
      </property>
     </widget>
    </item>
@@ -47,7 +47,7 @@
         <string>Search for</string>
        </property>
        <property name="flat">
-        <bool>false</bool>
+        <bool>true</bool>
        </property>
        <layout class="QGridLayout" name="gridLayout_2">
         <item row="0" column="0">
@@ -94,7 +94,7 @@
         <string>Action</string>
        </property>
        <property name="flat">
-        <bool>false</bool>
+        <bool>true</bool>
        </property>
        <layout class="QGridLayout" name="gridLayout">
         <item row="0" column="0">
@@ -149,7 +149,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="musescore.qrc"/>
+  <include location="mscore.qrc"/>
  </resources>
  <connections>
   <connection>

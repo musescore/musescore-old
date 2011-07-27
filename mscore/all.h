@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: allqt.h,v 1.24 2006/03/02 17:08:30 wschweer Exp $
 //
-//  Copyright (C) 2004-2011 Werner Schweer (ws@seh.de)
+//  Copyright (C) 2004-2006 Werner Schweer (ws@seh.de)
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -24,43 +24,28 @@
 #include <stdio.h>
 #include <limits.h>
 #include <map>
+#include <cmath>
 #include <errno.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include <math.h>
 
-#include <QtGui/QtGui>
 #include <QtGui/QItemDelegate>
 #include <QtCore/QModelIndex>
 #include <QtGui/QStandardItemModel>
 #include <QtGui/QSpinBox>
-#include <QtGui/QFormLayout>
-#include <QtGui/QDateTimeEdit>
-#include <QtGui/QInputDialog>
-
-#include <QtWebKit/QWebView>
-#include <QtWebKit/QWebFrame>
 
 #include <QtXml/QtXml>
-
-#ifdef Q_WS_X11
-#include <QtGui/QX11Info>
-#endif
-
 #include <QtCore/QPointF>
 #include <QtCore/QVariant>
 #include <QtCore/QMap>
 #include <QtCore/QDateTime>
 #include <QtCore/QtGlobal>
 #include <QtCore/QtDebug>
-#include <QtCore/QSharedData>
 
 #if QT_VERSION >= 0x040400
 #include <QtCore/QAtomicInt>
 #endif
-#if QT_VERSION >= 0x040700
-#include <QtGui/QStaticText>
-#endif
+
 #include <QtGui/QPainterPath>
 #include <QtGui/QScrollArea>
 #include <QtGui/QScrollBar>
@@ -99,13 +84,11 @@
 #include <QtCore/QProcess>
 #include <QtGui/QDesktopServices>
 #include <QtGui/QTextDocument>
-#include <QtGui/QTextDocumentFragment>
 #include <QtGui/QTextCursor>
 #include <QtGui/QAbstractTextDocumentLayout>
 #include <QtGui/QToolBox>
 #include <QtGui/QToolButton>
 #include <QtGui/QTextBlock>
-#include <QtGui/QTextList>
 #include <QtGui/QTextFrameFormat>
 #include <QtGui/QClipboard>
 #include <QtGui/QStatusBar>
@@ -116,7 +99,7 @@
 #include <QtGui/QStyleFactory>
 #include <QtGui/QWizard>
 #include <QtGui/QRadioButton>
-#include <QtGui/QFileSystemModel>
+#include <QtGui/QDirModel>
 #include <QtGui/QHeaderView>
 #include <QtGui/QUndoGroup>
 #include <QtGui/QUndoStack>
@@ -129,14 +112,6 @@
 #include <QtGui/QLabel>
 #include <QtGui/QFocusFrame>
 #include <QtGui/QMouseEventTransition>
-#include <QtGui/QCommonStyle>
-#include <QtGui/QLineEdit>
-#include <QtGui/QGroupBox>
-#include <QtGui/QDial>
-#include <QtGui/QTextEdit>
-#include <QtGui/QMdiSubWindow>
-#include <QtGui/QSpacerItem>
-#include <QtGui/QGraphicsSceneMouseEvent>
 
 #include <QtSvg/QSvgRenderer>
 #include <QtSvg/QSvgGenerator>
@@ -144,8 +119,9 @@
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
 #include <QtNetwork/QNetworkCookieJar>
-#include <QtNetwork/QHostAddress>
-#include <QtNetwork/QUdpSocket>
+
+#include <QtWebKit/QWebView>
+#include <QtWebKit/QWebFrame>
 
 #include <QtScript/QScriptEngine>
 #include <QtScript/QScriptValueIterator>

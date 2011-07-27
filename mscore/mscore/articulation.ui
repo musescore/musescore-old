@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ui version="4.0">
+<ui version="4.0" >
  <class>ArticulationProperties</class>
- <widget class="QDialog" name="ArticulationProperties">
-  <property name="geometry">
+ <widget class="QDialog" name="ArticulationProperties" >
+  <property name="geometry" >
    <rect>
     <x>0</x>
     <y>0</y>
@@ -10,75 +9,75 @@
     <height>346</height>
    </rect>
   </property>
-  <property name="windowTitle">
+  <property name="windowTitle" >
    <string>MuseScore: Articulations Properties</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_4">
+  <layout class="QVBoxLayout" name="verticalLayout_4" >
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
+    <layout class="QHBoxLayout" name="horizontalLayout" >
      <item>
-      <widget class="QLabel" name="label_3">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Ignored">
+      <widget class="QLabel" name="label_3" >
+       <property name="sizePolicy" >
+        <sizepolicy vsizetype="Ignored" hsizetype="Fixed" >
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <property name="text">
+       <property name="text" >
         <string/>
        </property>
-       <property name="pixmap">
-        <pixmap resource="musescore.qrc">:/data/bg1.jpg</pixmap>
+       <property name="pixmap" >
+        <pixmap resource="mscore.qrc" >:/data/bg1.jpg</pixmap>
        </property>
       </widget>
      </item>
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout">
+      <layout class="QVBoxLayout" name="verticalLayout" >
        <item>
-        <widget class="QGroupBox" name="channelChange">
-         <property name="title">
+        <widget class="QGroupBox" name="channelChange" >
+         <property name="title" >
           <string>Channel</string>
          </property>
-         <property name="flat">
-          <bool>false</bool>
-         </property>
-         <property name="checkable">
+         <property name="flat" >
           <bool>true</bool>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_2">
+         <property name="checkable" >
+          <bool>true</bool>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_2" >
           <item>
-           <widget class="QListWidget" name="channelList"/>
+           <widget class="QListWidget" name="channelList" />
           </item>
          </layout>
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="midiAction">
-         <property name="title">
+        <widget class="QGroupBox" name="midiAction" >
+         <property name="title" >
           <string>Midi Action</string>
          </property>
-         <property name="flat">
-          <bool>false</bool>
-         </property>
-         <property name="checkable">
+         <property name="flat" >
           <bool>true</bool>
          </property>
-         <property name="checked">
+         <property name="checkable" >
+          <bool>true</bool>
+         </property>
+         <property name="checked" >
           <bool>false</bool>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_3">
+         <layout class="QVBoxLayout" name="verticalLayout_3" >
           <item>
-           <widget class="QListWidget" name="midiActionList"/>
+           <widget class="QListWidget" name="midiActionList" />
           </item>
          </layout>
         </widget>
        </item>
        <item>
-        <widget class="QDialogButtonBox" name="buttonBox">
-         <property name="orientation">
+        <widget class="QDialogButtonBox" name="buttonBox" >
+         <property name="orientation" >
           <enum>Qt::Horizontal</enum>
          </property>
-         <property name="standardButtons">
+         <property name="standardButtons" >
           <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
          </property>
         </widget>
@@ -90,7 +89,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="musescore.qrc"/>
+  <include location="mscore.qrc" />
  </resources>
  <connections>
   <connection>
@@ -99,11 +98,11 @@
    <receiver>ArticulationProperties</receiver>
    <slot>accept()</slot>
    <hints>
-    <hint type="sourcelabel">
+    <hint type="sourcelabel" >
      <x>248</x>
      <y>254</y>
     </hint>
-    <hint type="destinationlabel">
+    <hint type="destinationlabel" >
      <x>157</x>
      <y>274</y>
     </hint>
@@ -115,11 +114,11 @@
    <receiver>ArticulationProperties</receiver>
    <slot>reject()</slot>
    <hints>
-    <hint type="sourcelabel">
+    <hint type="sourcelabel" >
      <x>316</x>
      <y>260</y>
     </hint>
-    <hint type="destinationlabel">
+    <hint type="destinationlabel" >
      <x>286</x>
      <y>274</y>
     </hint>

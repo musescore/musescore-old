@@ -22,19 +22,19 @@
 #include "pianoroll.h"
 #include "piano.h"
 #include "ruler.h"
-#include "pianoview.h"
-#include "libmscore/staff.h"
-#include "libmscore/score.h"
-#include "libmscore/measure.h"
+#include "pianoscene.h"
+#include "staff.h"
+#include "score.h"
+#include "measure.h"
 #include "voiceselector.h"
-#include "libmscore/note.h"
+#include "note.h"
 #include "awl/pitchlabel.h"
 #include "awl/pitchedit.h"
 #include "awl/poslabel.h"
-#include "musescore.h"
-#include "libmscore/undo.h"
-#include "libmscore/part.h"
-#include "libmscore/instrument.h"
+#include "mscore.h"
+#include "undo.h"
+#include "part.h"
+#include "instrument.h"
 #include "seq.h"
 #include "preferences.h"
 #include "seq.h"
@@ -47,7 +47,7 @@ PianorollEditor::PianorollEditor(QWidget* parent)
    : QMainWindow(parent)
       {
       setWindowTitle(QString("MuseScore"));
-//      setIconSize(QSize(preferences.iconWidth, preferences.iconHeight));
+      setIconSize(QSize(preferences.iconWidth, preferences.iconHeight));
 
       QWidget* mainWidget = new QWidget;
       QGridLayout* layout = new QGridLayout;
@@ -161,6 +161,7 @@ void PianorollEditor::setStaff(Staff* st)
       staff = st;
       _score = staff->score();
       setWindowTitle(QString(tr("MuseScore: <%1> Staff: %2")).arg(_score->name()).arg(st->idx()));
+
       AL::TempoMap* tl = _score->tempomap();
       AL::TimeSigMap*  sl = _score->sigmap();
       for (int i = 0; i < 3; ++i)
@@ -219,7 +220,7 @@ void PianorollEditor::updateSelection()
 void PianorollEditor::selectionChanged()
       {
       updateSelection();
-//      _score->blockSignals(true);
+      _score->blockSignals(true);
       QList<QGraphicsItem*> items = gv->scene()->selectedItems();
       if (items.size() == 1) {
             QGraphicsItem* item = items[0];
@@ -240,7 +241,7 @@ void PianorollEditor::selectionChanged()
             }
       _score->setUpdateAll();
       _score->end();
-//      _score->blockSignals(false);
+      _score->blockSignals(false);
       }
 
 //---------------------------------------------------------
@@ -249,7 +250,7 @@ void PianorollEditor::selectionChanged()
 
 void PianorollEditor::changeSelection(int)
       {
-//      gv->scene()->blockSignals(true);
+      gv->scene()->blockSignals(true);
       gv->scene()->clearSelection();
       QList<QGraphicsItem*> il = gv->scene()->items();
       foreach(QGraphicsItem* item, il) {
@@ -257,7 +258,7 @@ void PianorollEditor::changeSelection(int)
             if (note)
                   item->setSelected(note->selected());
             }
-//      gv->scene()->blockSignals(false);
+      gv->scene()->blockSignals(false);
       }
 
 //---------------------------------------------------------
@@ -275,7 +276,7 @@ void PianorollEditor::veloTypeChanged(int val)
             return;
 
       _score->undo()->beginMacro();
-      _score->undo()->push(new ChangeVelocity(note, ValueType(val), note->veloOffset()));
+      _score->undo()->push(new ChangeVelocity(note, ValueType(val), note->velocity(), note->veloOffset()));
       _score->undo()->endMacro(_score->undo()->current()->childCount() == 0);
       updateVelocity(note);
       }
@@ -310,7 +311,7 @@ void PianorollEditor::updateVelocity(Note* note)
       switch(vt) {
             case AUTO_VAL:
             case USER_VAL:
-                  // TODO velocity->setValue(note->velocity());
+                  velocity->setValue(note->velocity());
                   break;
             case OFFSET_VAL:
                   velocity->setValue(note->veloOffset());
@@ -336,8 +337,16 @@ void PianorollEditor::velocityChanged(int val)
       if (vt == AUTO_VAL)
             return;
 
+      int velocity = note->velocity();
+      int offset   = note->veloOffset();
+
+      if (vt == USER_VAL)
+            velocity = val;
+      else
+            offset = val;
+
       _score->undo()->beginMacro();
-      _score->undo()->push(new ChangeVelocity(note, vt, val));
+      _score->undo()->push(new ChangeVelocity(note, vt, velocity, offset));
       _score->undo()->endMacro(_score->undo()->current()->childCount() == 0);
       }
 
@@ -347,7 +356,7 @@ void PianorollEditor::velocityChanged(int val)
 
 void PianorollEditor::keyPressed(int pitch)
       {
-      seq->startNote(staff->part()->instr()->channel(0), pitch, 80, 0, 0.0);
+      seq->startNote(staff->part()->channel(0), pitch, 80, 0, 0.0);
       }
 
 //---------------------------------------------------------

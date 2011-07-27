@@ -26,7 +26,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="musescore.qrc">:/data/bg1.jpg</pixmap>
+      <pixmap resource="mscore.qrc">:/data/bg1.jpg</pixmap>
      </property>
      <property name="scaledContents">
       <bool>false</bool>
@@ -36,7 +36,7 @@
    <item row="0" column="1">
     <widget class="QGroupBox" name="groupBox">
      <property name="title">
-      <string>Midi Playback Parameter</string>
+      <string>MIDI Values</string>
      </property>
      <property name="flat">
       <bool>true</bool>
@@ -120,7 +120,7 @@
   <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources>
-  <include location="musescore.qrc"/>
+  <include location="mscore.qrc"/>
  </resources>
  <connections>
   <connection>

@@ -19,13 +19,12 @@
 //=============================================================================
 
 #include "editdrumset.h"
-#include "musescore.h"
-#include "libmscore/xml.h"
-#include "libmscore/utils.h"
-#include "libmscore/chord.h"
-#include "libmscore/score.h"
-#include "libmscore/note.h"
-#include "libmscore/stem.h"
+#include "mscore.h"
+#include "xml.h"
+#include "utils.h"
+#include "chord.h"
+#include "score.h"
+#include "note.h"
 
 enum { COL_PITCH, COL_NOTE, COL_SHORTCUT, COL_NAME };
 
@@ -45,7 +44,9 @@ const char* noteHeadNames[HEAD_GROUPS] = {
       QT_TRANSLATE_NOOP("noteheadnames", "re"),
       QT_TRANSLATE_NOOP("noteheadnames", "fa"),
       QT_TRANSLATE_NOOP("noteheadnames", "la"),
-      QT_TRANSLATE_NOOP("noteheadnames", "ti")
+      QT_TRANSLATE_NOOP("noteheadnames", "ti"),
+      QT_TRANSLATE_NOOP("noteheadnames", "sol"),
+      QT_TRANSLATE_NOOP("noteheadnames", "alt. brevis"),
       };
 
 //---------------------------------------------------------
@@ -56,6 +57,15 @@ EditDrumset::EditDrumset(Drumset* ds, QWidget* parent)
    : QDialog(parent)
       {
       oDrumset = ds;
+#if 0
+      for (int i = 0; i < 128; ++i) {
+            nDrumset.drum[i].name          = ds->drum[i].name;
+            nDrumset.drum[i].notehead      = ds->drum[i].notehead;
+            nDrumset.drum[i].line          = ds->drum[i].line;
+            nDrumset.drum[i].voice         = ds->drum[i].voice;
+            nDrumset.drum[i].stemDirection = ds->drum[i].stemDirection;
+            }
+#endif
       nDrumset = *ds;
       setupUi(this);
 
@@ -69,6 +79,11 @@ EditDrumset::EditDrumset(Drumset* ds, QWidget* parent)
       for (int i = 0; i < HEAD_GROUPS; ++i)
             noteHead->addItem(noteHeadNames[i]);
 
+      loadButton = new QPushButton(tr("Load"));
+      saveButton = new QPushButton(tr("Save"));
+      buttonBox->addButton(loadButton, QDialogButtonBox::ActionRole);
+      buttonBox->addButton(saveButton, QDialogButtonBox::ActionRole);
+
       connect(pitchList, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),
          SLOT(itemChanged(QTreeWidgetItem*, QTreeWidgetItem*)));
       connect(buttonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(bboxClicked(QAbstractButton*)));
@@ -78,8 +93,6 @@ EditDrumset::EditDrumset(Drumset* ds, QWidget* parent)
       connect(voice, SIGNAL(valueChanged(int)), SLOT(valueChanged()));
       connect(stemDirection, SIGNAL(currentIndexChanged(int)), SLOT(valueChanged()));
       connect(shortcut, SIGNAL(currentIndexChanged(int)), SLOT(shortcutChanged()));
-      connect(loadButton, SIGNAL(clicked()), SLOT(load()));
-      connect(saveButton, SIGNAL(clicked()), SLOT(save()));
       }
 
 //---------------------------------------------------------
@@ -185,6 +198,15 @@ void EditDrumset::bboxClicked(QAbstractButton* button)
 
             case QDialogButtonBox::RejectRole:
                   close();
+                  break;
+
+            case QDialogButtonBox::ActionRole:
+                  if (button == loadButton)
+                        load();
+                  else if (button == saveButton)
+                        save();
+                  else
+                        printf("EditDrumSet: unknown action button\n");
                   break;
 
             default:
@@ -294,7 +316,7 @@ void EditDrumset::updateExample()
       else
             up = line > 4;
       Chord* chord = new Chord(gscore);
-      chord->setDurationType(Duration::V_QUARTER);
+      chord->setDuration(Duration::V_QUARTER);
       chord->setStemDirection(dir);
       chord->setTrack(voice);
       Note* note = new Note(gscore);
@@ -319,7 +341,11 @@ void EditDrumset::updateExample()
 
 void EditDrumset::load()
       {
-      QString name = mscore->getDrumsetFilename(true);
+      QString name = QFileDialog::getOpenFileName(
+         this, tr("MuseScore: Load Drumset"),
+         ".",
+         tr("MuseScore drumset (*.drm)")
+         );
       if (name.isEmpty())
             return;
 
@@ -360,7 +386,11 @@ void EditDrumset::load()
 
 void EditDrumset::save()
       {
-      QString name = mscore->getDrumsetFilename(false);
+      QString name = QFileDialog::getSaveFileName(
+         this, tr("MuseScore: Save Drumset"),
+         ".",
+         tr("MuseScore drumset (*.drm)")
+         );
       if (name.isEmpty())
             return;
 

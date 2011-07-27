@@ -19,7 +19,7 @@
 //=============================================================================
 
 #include "script.h"
-#include "libmscore/text.h"
+#include "text.h"
 
 Q_DECLARE_METATYPE(Text*);
 Q_DECLARE_METATYPE(Score*);
@@ -75,10 +75,10 @@ static QScriptValue prototype_Text_call(QScriptContext* context, QScriptEngine*)
                   break;
             case 1:     // "defaultFont",
                   if (context->argumentCount() == 0)
-                        return qScriptValueFromValue(context->engine(), text->font());
+                        return qScriptValueFromValue(context->engine(), text->defaultFont());
                   else if (context->argumentCount() == 1) {
                         QFont f = qscriptvalue_cast<QFont>(context->argument(0));
-                        text->setFont(f);
+                        text->setDefaultFont(f);
                         return context->engine()->undefinedValue();
                         }
                   break;

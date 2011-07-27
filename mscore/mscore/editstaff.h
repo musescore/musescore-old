@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2010 Werner Schweer and others
+//  Copyright (C) 2002-2009 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -23,10 +23,10 @@
 
 #include "ui_editstaff.h"
 #include "ui_selectinstr.h"
-#include "libmscore/instrument.h"
+#include "instrument.h"
 
 class Staff;
-struct InstrumentTemplate;
+class InstrumentTemplate;
 
 //---------------------------------------------------------
 //   EditStaff
@@ -36,32 +36,37 @@ struct InstrumentTemplate;
 class EditStaff : public QDialog, private Ui::EditStaffBase {
       Q_OBJECT
 
-      Staff*      staff;
-      Instrument  instrument;
-      int         _minPitchA, _maxPitchA, _minPitchP, _maxPitchP;
+      Staff* staff;
+      Instrument instrument;
 
       void apply();
       void initFromInstrument(const Instrument&);
       void setInterval(const Interval&);
 
-   protected:
-      QString midiCodeToStr(int midiCode);
-
    private slots:
       void bboxClicked(QAbstractButton* button);
       void editDrumsetClicked();
-      void editStringDataClicked();
       void showInstrumentDialog();
-      void showEditStaffType();
-      void editShortNameClicked();
-      void editLongNameClicked();
-      void minPitchAClicked();
-      void maxPitchAClicked();
-      void minPitchPClicked();
-      void maxPitchPClicked();
 
    public:
       EditStaff(Staff*, QWidget* parent = 0);
+      };
+
+//---------------------------------------------------------
+//   SelectInstrument
+//---------------------------------------------------------
+
+class SelectInstrument : public QDialog, private Ui::SelectInstrument {
+      Q_OBJECT
+
+   private slots:
+      void buildTemplateList();
+      void on_instrumentList_itemSelectionChanged();
+      void on_instrumentList_itemDoubleClicked(QTreeWidgetItem* item, int);
+
+   public:
+      SelectInstrument(QWidget* parent = 0);
+      InstrumentTemplate* instrTemplate() const;
       };
 
 #endif

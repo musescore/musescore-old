@@ -22,7 +22,7 @@
 #define __TRANSPOSEDIALOG_H__
 
 #include "ui_transposedialog.h"
-#include "libmscore/mscore.h"
+#include "globals.h"
 
 //---------------------------------------------------------
 //   TransposeDialog

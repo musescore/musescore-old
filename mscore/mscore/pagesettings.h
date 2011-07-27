@@ -60,9 +60,9 @@ class PageSettings : public QDialog, private Ui::PageSettingsBase {
       void spatiumChanged(double val);
       void pageHeightChanged(double);
       void pageWidthChanged(double);
-	void pageOffsetChanged(int val);
+      void pageOffsetChanged(int val);
 
-	public:
+   public:
       PageSettings(QWidget* parent = 0);
       ~PageSettings();
       void setScore(Score*);

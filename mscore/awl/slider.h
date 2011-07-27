@@ -74,7 +74,6 @@ class Slider : public AbstractSlider {
 
       virtual void setInvertedAppearance(bool val);
       virtual QSize sizeHint() const;
-      virtual void init(const SyntiParameter& p) { AbstractSlider::init(p); }
       };
 }
 

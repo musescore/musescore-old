@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id$
 //
-//  Copyright (C) 2002-2010 Werner Schweer and others
+//  Copyright (C) 2002-2007 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -33,22 +33,7 @@ TempoMap::TempoMap()
       _tempo    = 2.0;
       _tempoSN  = 1;
       _relTempo = 100;
-      }
-
-//---------------------------------------------------------
-//   addPause
-//---------------------------------------------------------
-
-void TempoMap::addP(int tick, double pause)
-      {
-      iTEvent e = find(tick);
-      if (e != end())
-            e->second.pause = pause;
-      else {
-            double t = tempo(tick);
-            insert(std::pair<const int, TEvent> (tick, TEvent(t, pause)));
-            }
-      normalize();
+      useList   = true;
       }
 
 //---------------------------------------------------------
@@ -83,9 +68,8 @@ void TempoMap::normalize()
       for (iTEvent e = begin(); e != end(); ++e) {
             int delta = e->first - tick;
             time += double(delta) / (division * tempo * _relTempo * 0.01);
-            time += e->second.pause;
             e->second.time = time;
-            tick  = e->first;
+            tick = e->first;
             tempo = e->second.tempo;
             }
       }
@@ -118,6 +102,8 @@ void TempoMap::clear()
 
 double TempoMap::tempo(int tick) const
       {
+      if (!useList)
+            return _tempo;
       if (empty())
             return 2.0;
       ciTEvent i = lower_bound(tick);
@@ -139,6 +125,8 @@ double TempoMap::tempo(int tick) const
 
 TEvent TempoMap::getTempo(int tick) const
       {
+      if (!useList)
+            return TEvent(_tempo);
       if (empty())
             return TEvent(2.0);
       ciTEvent i = lower_bound(tick);
@@ -188,6 +176,21 @@ void TempoMap::change(int tick, double newTempo)
       }
 
 //---------------------------------------------------------
+//   setTempo
+//    called from transport window
+//    & slave mode tempo changes
+//---------------------------------------------------------
+
+void TempoMap::setTempo(int tick, double newTempo)
+      {
+      if (useList)
+            add(tick, newTempo);
+      else
+            _tempo = newTempo;
+      ++_tempoSN;
+      }
+
+//---------------------------------------------------------
 //   setRelTempo
 //---------------------------------------------------------
 
@@ -196,16 +199,6 @@ void TempoMap::setRelTempo(int val)
       _relTempo = val;
       ++_tempoSN;
       normalize();
-      }
-
-//---------------------------------------------------------
-//   addPause
-//---------------------------------------------------------
-
-void TempoMap::addPause(int t, double pause)
-      {
-      addP(t, pause);
-      ++_tempoSN;
       }
 
 //---------------------------------------------------------
@@ -245,6 +238,20 @@ void TempoMap::changeTempo(int tick, double newTempo)
       }
 
 //---------------------------------------------------------
+//   setMasterFlag
+//---------------------------------------------------------
+
+bool TempoMap::setMasterFlag(int /*tick*/, bool val)
+      {
+      if (useList != val) {
+            useList = val;
+            ++_tempoSN;
+            return true;
+            }
+      return false;
+      }
+
+//---------------------------------------------------------
 //   tick2time
 //---------------------------------------------------------
 
@@ -273,30 +280,34 @@ double TempoMap::tick2time(int tick, int* sn) const
       double delta = double(tick);
       double tempo = 2.0;
 
-      if (!empty()) {
-            int ptick  = 0;
-            ciTEvent e = lower_bound(tick);
-            if (e == end()) {
-                  ciTEvent pe = e;
-                  --pe;
-                  ptick = pe->first;
-                  tempo = pe->second.tempo;
-                  time  = pe->second.time;
+      if (useList) {
+            if (!empty()) {
+                  int ptick  = 0;
+                  ciTEvent e = lower_bound(tick);
+                  if (e == end()) {
+                        ciTEvent pe = e;
+                        --pe;
+                        ptick = pe->first;
+                        tempo = pe->second.tempo;
+                        time  = pe->second.time;
+                        }
+                  else if (e->first == tick) {
+                        ptick = tick;
+                        tempo = e->second.tempo;
+                        time  = e->second.time;
+                        }
+                  else if (e != begin()) {
+                        ciTEvent pe = e;
+                        --pe;
+                        ptick = pe->first;
+                        tempo = pe->second.tempo;
+                        time  = pe->second.time;
+                        }
+                  delta = double(tick - ptick);
                   }
-            else if (e->first == tick) {
-                  ptick = tick;
-                  tempo = e->second.tempo;
-                  time  = e->second.time;
-                  }
-            else if (e != begin()) {
-                  ciTEvent pe = e;
-                  --pe;
-                  ptick = pe->first;
-                  tempo = pe->second.tempo;
-                  time  = pe->second.time;
-                  }
-            delta = double(tick - ptick);
             }
+      else
+            tempo = _tempo;
       if (sn)
             *sn = _tempoSN;
       time += delta / (division * tempo * _relTempo * 0.01);
@@ -313,16 +324,18 @@ int TempoMap::time2tick(double time, int* sn) const
       double delta = time;
       double tempo = _tempo;
 
-      delta = 0.0;
-      tempo = 2.0;
-      for (ciTEvent e = begin(); e != end(); ++e) {
-            if (e->second.time >= time)
-                  break;
-            delta = e->second.time;
-            tempo = e->second.tempo;
-            tick  = e->first;
+      if (useList) {
+            delta = 0.0;
+            tempo = 2.0;
+            for (ciTEvent e = begin(); e != end(); ++e) {
+                  if (e->second.time >= time)
+                        break;
+                  delta = e->second.time;
+                  tempo = e->second.tempo;
+                  tick  = e->first;
+                  }
+            delta = time - delta;
             }
-      delta = time - delta;
       tick += lrint(delta * _relTempo * 0.01 * division * tempo);
       if (sn)
             *sn = _tempoSN;

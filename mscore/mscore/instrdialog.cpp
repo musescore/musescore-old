@@ -19,27 +19,25 @@
 //=============================================================================
 
 #include "config.h"
-#include "musescore.h"
+#include "mscore.h"
 #include "instrdialog.h"
-#include "libmscore/instrtemplate.h"
+#include "instrtemplate.h"
 #include "scoreview.h"
-#include "libmscore/score.h"
-#include "libmscore/system.h"
-#include "libmscore/clef.h"
-#include "libmscore/undo.h"
-#include "libmscore/staff.h"
-#include "libmscore/part.h"
-#include "libmscore/segment.h"
-#include "libmscore/style.h"
+#include "score.h"
+#include "system.h"
+#include "clef.h"
+#include "undo.h"
+#include "staff.h"
+#include "part.h"
+#include "segment.h"
+#include "style.h"
 #include "editinstrument.h"
-#include "libmscore/drumset.h"
-#include "libmscore/slur.h"
+#include "drumset.h"
+#include "slur.h"
 #include "seq.h"
-#include "libmscore/measure.h"
-#include "libmscore/line.h"
-#include "libmscore/beam.h"
-#include "libmscore/excerpt.h"
-#include "libmscore/stafftype.h"
+#include "measure.h"
+#include "line.h"
+#include "beam.h"
 
 //---------------------------------------------------------
 //   StaffListItem
@@ -52,9 +50,7 @@ StaffListItem::StaffListItem(PartListItem* li)
       staff    = 0;
       setPartIdx(0);
       staffIdx = 0;
-      setLinked(false);
-      setClef(CLEF_G);
-      setFlags(flags() | Qt::ItemIsUserCheckable);
+      setClef(0);
       }
 
 StaffListItem::StaffListItem()
@@ -64,8 +60,7 @@ StaffListItem::StaffListItem()
       staff    = 0;
       setPartIdx(0);
       staffIdx = 0;
-      setClef(CLEF_G);
-      setLinked(false);
+      setClef(0);
       }
 
 //---------------------------------------------------------
@@ -82,38 +77,10 @@ void StaffListItem::setPartIdx(int val)
 //   setClef
 //---------------------------------------------------------
 
-void StaffListItem::setClef(ClefType val)
+void StaffListItem::setClef(int val)
       {
       _clef = val;
-      setText(2, qApp->translate("clefTable", clefTable[_clef].name));
-      }
-
-//---------------------------------------------------------
-//   setLinked
-//---------------------------------------------------------
-
-void StaffListItem::setLinked(bool val)
-      {
-      _linked = val;
-      setText(3, _linked ? InstrumentsDialog::tr("linked") : "");
-      }
-
-//---------------------------------------------------------
-//   setVisible
-//---------------------------------------------------------
-
-void StaffListItem::setVisible(bool val)
-      {
-      setCheckState(1, val ? Qt::Checked : Qt::Unchecked);
-      }
-
-//---------------------------------------------------------
-//   visible
-//---------------------------------------------------------
-
-bool StaffListItem::visible() const
-      {
-      return checkState(1) == Qt::Checked;
+      setText(1, qApp->translate("clefTable", clefTable[_clef].name));
       }
 
 //---------------------------------------------------------
@@ -187,12 +154,12 @@ InstrumentsDialog::InstrumentsDialog(QWidget* parent)
       setupUi(this);
       cs = 0;
 
-      QAction* a = getAction("instruments");
-      connect(a, SIGNAL(triggered()), SLOT(reject()));
-      addAction(a);
-
       instrumentList->setSelectionMode(QAbstractItemView::SingleSelection);
       partiturList->setSelectionMode(QAbstractItemView::SingleSelection);
+
+      instrumentList->setHeaderLabels(QStringList(tr("Instrument List")));
+      QStringList header = (QStringList() << tr("Staves") << tr("Clef"));
+      partiturList->setHeaderLabels(header);
 
       buildTemplateList();
 
@@ -200,8 +167,12 @@ InstrumentsDialog::InstrumentsDialog(QWidget* parent)
       removeButton->setEnabled(false);
       upButton->setEnabled(false);
       downButton->setEnabled(false);
+      if (enableExperimental)
+            editButton->setEnabled(false);
+      else
+            editButton->setVisible(false);
+      aboveButton->setEnabled(false);
       belowButton->setEnabled(false);
-      linkedButton->setEnabled(false);
       connect(showMore, SIGNAL(clicked()), SLOT(buildTemplateList()));
       }
 
@@ -229,13 +200,7 @@ void InstrumentsDialog::genPartList()
                   sli->staff    = s;
                   sli->setPartIdx(s->rstaff());
                   sli->staffIdx = s->idx();
-                  if (s->useTablature())
-                        sli->setClef(ClefType(cs->styleI(ST_tabClef)));
-                  else
-                        sli->setClef(s->clef(0));
-                  const LinkedStaves* ls = s->linkedStaves();
-                  sli->setLinked(ls && !ls->isEmpty());
-                  sli->setVisible(s->show());
+                  sli->setClef(s->clefList()->clef(0));
                   }
             partiturList->setItemExpanded(pli, true);
             }
@@ -267,8 +232,8 @@ void InstrumentsDialog::on_partiturList_itemSelectionChanged()
       removeButton->setEnabled(flag);
       upButton->setEnabled(flag);
       downButton->setEnabled(flag);
+      aboveButton->setEnabled(item && item->type() == STAFF_LIST_ITEM);
       belowButton->setEnabled(item && item->type() == STAFF_LIST_ITEM);
-      linkedButton->setEnabled(item && item->type() == STAFF_LIST_ITEM);
       }
 
 //---------------------------------------------------------
@@ -383,20 +348,6 @@ void InstrumentsDialog::on_upButton_clicked()
                   parent->insertChild(idx-1, item);
                   partiturList->setItemSelected(item, true);
                   }
-            else {
-                  int parentIdx = partiturList->indexOfTopLevelItem(parent);
-                  if (parentIdx) {
-                        partiturList->selectionModel()->clear();
-                        QTreeWidgetItem* item = parent->takeChild(idx);
-                        QTreeWidgetItem* prevParent = partiturList->topLevelItem(parentIdx - 1);
-                        prevParent->addChild(item);
-                        partiturList->setItemSelected(item, true);
-                        PartListItem* pli = static_cast<PartListItem*>(prevParent);
-                        StaffListItem* sli = static_cast<StaffListItem*>(item);
-                        int idx = pli->part->nstaves();
-                        cs->undo()->push(new MoveStaff(sli->staff, pli->part, idx));
-                        }
-                  }
             }
       }
 
@@ -433,20 +384,6 @@ void InstrumentsDialog::on_downButton_clicked()
                   parent->insertChild(idx+1, item);
                   partiturList->setItemSelected(item, true);
                   }
-            else {
-                  int parentIdx = partiturList->indexOfTopLevelItem(parent);
-                  int n = partiturList->topLevelItemCount();
-                  if (parentIdx < (n-1)) {
-                        partiturList->selectionModel()->clear();
-                        QTreeWidgetItem* item = parent->takeChild(idx);
-                        QTreeWidgetItem* nextParent = partiturList->topLevelItem(parentIdx - 1);
-                        nextParent->addChild(item);
-                        partiturList->setItemSelected(item, true);
-                        PartListItem* pli = static_cast<PartListItem*>(nextParent);
-                        StaffListItem* sli = static_cast<StaffListItem*>(item);
-                        cs->undo()->push(new MoveStaff(sli->staff, pli->part, 0));
-                        }
-                  }
             }
       }
 
@@ -455,7 +392,6 @@ void InstrumentsDialog::on_downButton_clicked()
 //    start instrument editor for selected instrument
 //---------------------------------------------------------
 
-#if 0
 void InstrumentsDialog::on_editButton_clicked()
       {
       QList<QTreeWidgetItem*> wi = instrumentList->selectedItems();
@@ -474,7 +410,32 @@ void InstrumentsDialog::on_editButton_clicked()
       editInstrument->setInstrument(tp);
       editInstrument->show();
       }
-#endif
+
+//---------------------------------------------------------
+//   on_aboveButton_clicked
+//---------------------------------------------------------
+
+void InstrumentsDialog::on_aboveButton_clicked()
+      {
+      QList<QTreeWidgetItem*> wi = partiturList->selectedItems();
+      if (wi.isEmpty())
+            return;
+      QTreeWidgetItem* item = wi.front();
+      if (item->type() != STAFF_LIST_ITEM)
+            return;
+
+      StaffListItem* sli  = (StaffListItem*)item;
+      Staff* staff        = sli->staff;
+      PartListItem* pli   = (PartListItem*)sli->parent();
+      StaffListItem* nsli = new StaffListItem();
+      nsli->staff         = staff;
+      nsli->setClef(sli->clef());
+      if (staff)
+            nsli->op = ITEM_ADD;
+      pli->insertChild(pli->indexOfChild(sli), nsli);
+      partiturList->clearSelection();     // should not be necessary
+      partiturList->setItemSelected(nsli, true);
+      }
 
 //---------------------------------------------------------
 //   on_belowButton_clicked
@@ -503,34 +464,6 @@ void InstrumentsDialog::on_belowButton_clicked()
       }
 
 //---------------------------------------------------------
-//   on_linkedButton_clicked
-//---------------------------------------------------------
-
-void InstrumentsDialog::on_linkedButton_clicked()
-      {
-      QList<QTreeWidgetItem*> wi = partiturList->selectedItems();
-      if (wi.isEmpty())
-            return;
-      QTreeWidgetItem* item = wi.front();
-      if (item->type() != STAFF_LIST_ITEM)
-            return;
-
-      StaffListItem* sli  = (StaffListItem*)item;
-      Staff* staff        = sli->staff;
-      PartListItem* pli   = (PartListItem*)sli->parent();
-      StaffListItem* nsli = new StaffListItem();
-      nsli->staff         = staff;
-      nsli->setClef(sli->clef());
-      nsli->setLinked(true);
-      nsli->setVisible(true);
-      if (staff)
-            nsli->op = ITEM_ADD;
-      pli->insertChild(pli->indexOfChild(sli)+1, nsli);
-      partiturList->clearSelection();     // should not be necessary
-      partiturList->setItemSelected(nsli, true);
-      }
-
-//---------------------------------------------------------
 //   accept
 //---------------------------------------------------------
 
@@ -545,29 +478,22 @@ void InstrumentsDialog::accept()
 
 void MuseScore::editInstrList()
       {
-      if (cs == 0)
-            return;
       if (!instrList)
             instrList = new InstrumentsDialog(this);
-      else if (instrList->isVisible()) {
-            instrList->done(0);
-            return;
-            }
-
       instrList->setScore(cs);
       instrList->genPartList();
-      cs->startCmd();
-  	cs->deselectAll();
       int rv = instrList->exec();
-
-      if (rv == 0) {
-            cs->endCmd();
+      if (rv == 0)
             return;
-            }
-  	cs->inputState().setTrack(-1);
+
+//TODO-S      cs->setNoteEntry(false);
+  	cs->inputState().track = -1;
       //
       // process modified partitur list
       //
+      cs->startCmd();
+  	  //TODO check if current selection is in a removed staff?
+  	  cs->deselectAll();
 
       QTreeWidget* pl = instrList->partiturList;
       Part* part   = 0;
@@ -594,8 +520,9 @@ void MuseScore::editInstrList()
       for (int idx = 0; (item = pl->topLevelItem(idx)); ++idx) {
             rstaff = 0;
             PartListItem* pli = static_cast<PartListItem*>(item);
-            if (pli->op == ITEM_DELETE)
+            if (pli->op == ITEM_DELETE) {
                   cs->cmdRemovePart(pli->part);
+                  }
             else if (pli->op == ITEM_ADD) {
                   const InstrumentTemplate* t = ((PartListItem*)item)->it;
                   part = new Part(cs);
@@ -609,15 +536,19 @@ void MuseScore::editInstrList()
                         Staff* staff       = new Staff(cs, part, rstaff);
                         sli->staff         = staff;
                         staff->setRstaff(rstaff);
+                        // ++rstaff;
+                        staff->clefList()->setClef(0, sli->clef());
+                        staff->setLines(t->staffLines[cidx]);
+                        staff->setSmall(t->smallStaff[cidx]);
 
-                        staff->init(t, cidx);
+                        // TODO: find out the right key signature
+                        // staff->setKey(0, nKey);
 
-                        cs->undoInsertStaff(staff, staffIdx + rstaff);
-                        if (sli->linked()) {
-                              // TODO: link staff
-                              printf("TODO: link staff\n");
+                        if (cidx == 0) {
+                              staff->setBracket(0, t->bracket);
+                              staff->setBracketSpan(0, t->staves);
                               }
-
+                        cs->undoInsertStaff(staff, staffIdx + rstaff);
                         ++rstaff;
                         }
                   part->staves()->front()->setBarLineSpan(part->nstaves());
@@ -640,12 +571,11 @@ void MuseScore::editInstrList()
                                     Measure* m = (Measure*)mb;
                                     m->cmdRemoveStaves(sidx, eidx);
                                     }
-/*                              foreach(Beam* e, cs->beams()) {
+                              foreach(Beam* e, cs->beams()) {
                                     int staffIdx = e->staffIdx();
                                     if (staffIdx >= sidx && staffIdx < eidx)
                                           cs->undoRemoveElement(e);
                                     }
- */
                               cs->cmdRemoveStaff(sidx);
                               }
                         else if (sli->op == ITEM_ADD) {
@@ -656,32 +586,22 @@ void MuseScore::editInstrList()
 
                               cs->undoInsertStaff(staff, staffIdx);
 
-                              for (Measure* m = cs->firstMeasure(); m; m = m->nextMeasure()) {
-                                    // do not create whole measure rests for linked staves
-                                    m->cmdAddStaves(staffIdx, staffIdx+1, !sli->linked());
+                              for (MeasureBase* mb = cs->measures()->first(); mb; mb = mb->next()) {
+                                    if (mb->type() != MEASURE)
+                                          continue;
+                                    Measure* m = (Measure*)mb;
+                                    m->cmdAddStaves(staffIdx, staffIdx+1);
                                     }
 
                               cs->adjustBracketsIns(staffIdx, staffIdx+1);
 
+                              staff->clefList()->setClef(0, sli->clef());
                               KeySigEvent nKey = part->staff(0)->key(0);
                               staff->setKey(0, nKey);
 
-                              if (sli->linked()) {
-                                    int idx = cs->staffIdx(staff);
-                                    if (idx > 0) {
-                                          Staff* ostaff = cs->staff(idx - 1);
-                                          staff->setStaffType(ostaff->staffType());
-                                          cloneStaff(ostaff, staff);
-                                          }
-                                    }
                               ++staffIdx;
                               }
                         else {
-                              Staff* staff = sli->staff;
-                              if (sli->visible() != staff->show()) {
-                                    cs->undo()->push(new ChangeStaff(staff, staff->small(), staff->invisible(),
-                                       sli->visible(), staff->staffType()));
-                                    }
                               ++staffIdx;
                               ++rstaff;
                               }
@@ -715,15 +635,15 @@ void MuseScore::editInstrList()
                   dl.push_back(idx);
             }
 
-//      bool sort = false;
-//      for (int i = 0; i < dl.size(); ++i) {
-//            if (dl[i] != i) {
-//                  sort = true;
-//                  break;
-//                  }
-//            }
+      bool sort = false;
+      for (int i = 0; i < dl.size(); ++i) {
+            if (dl[i] != i) {
+                  sort = true;
+                  break;
+                  }
+            }
 
-//      if (sort)
+      if (sort)
             cs->undo()->push(new SortStaves(cs, dl));
 
       //
@@ -753,6 +673,332 @@ void MuseScore::editInstrList()
       cs->endCmd();
       cs->rebuildMidiMapping();
       seq->initInstruments();
+      }
+
+//---------------------------------------------------------
+//   cmdInsertPart
+//    insert before staffIdx
+//---------------------------------------------------------
+
+void Score::cmdInsertPart(Part* part, int staffIdx)
+      {
+      undoInsertPart(part, staffIdx);
+
+      int sidx = this->staffIdx(part);
+      int eidx = sidx + part->nstaves();
+      for (MeasureBase* mb = _measures.first(); mb; mb = mb->next()) {
+            if (mb->type() != MEASURE)
+                  continue;
+            Measure* m = (Measure*)mb;
+            m->cmdAddStaves(sidx, eidx);
+            }
+      adjustBracketsIns(sidx, eidx);
+      }
+
+//---------------------------------------------------------
+//   cmdRemovePart
+//---------------------------------------------------------
+
+void Score::cmdRemovePart(Part* part)
+      {
+      int sidx   = staffIdx(part);
+      int n      = part->nstaves();
+      int eidx   = sidx + n;
+
+// printf("cmdRemovePart %d-%d\n", sidx, eidx);
+
+      //
+      //    remove/adjust slurs in _gel
+      //
+#if 0
+      int strack = sidx * VOICES;
+      int etrack = eidx * VOICES;
+      foreach(Element* e, _gel) {
+            if (e->type() != SLUR) {
+                  printf("gel element %s %d\n", e->name(), e->track());
+                  continue;
+                  }
+            Slur* slur = (Slur*)e;
+            if (((slur->track() >= strack) && (slur->track() < etrack)
+               || ((slur->track2() >= strack) && (slur->track2() < etrack))))
+                  undoRemoveElement(slur);
+            else {
+                  if (slur->track() >= etrack)
+                        slur->setTrack(slur->track() - VOICES);
+                  if (slur->track2() >= etrack)
+                        slur->setTrack2(slur->track2() - VOICES);
+                  }
+            }
+#endif
+      //
+      //    adjust measures
+      //
+      for (Measure* m = firstMeasure(); m; m = m->nextMeasure())
+            m->cmdRemoveStaves(sidx, eidx);
+
+      for (int i = 0; i < n; ++i)
+            cmdRemoveStaff(sidx);
+      undoRemovePart(part, sidx);
+      }
+
+//---------------------------------------------------------
+//   insertPart
+//---------------------------------------------------------
+
+void Score::insertPart(Part* part, int idx)
+      {
+      int staff = 0;
+      for (QList<Part*>::iterator i = _parts.begin(); i != _parts.end(); ++i) {
+            if (staff >= idx) {
+                  _parts.insert(i, part);
+                  return;
+                  }
+            staff += (*i)->nstaves();
+            }
+      _parts.push_back(part);
+      }
+
+//---------------------------------------------------------
+//   removePart
+//---------------------------------------------------------
+
+void Score::removePart(Part* part)
+      {
+      _parts.removeAt(_parts.indexOf(part));
+      }
+
+//---------------------------------------------------------
+//   insertStaff
+//---------------------------------------------------------
+
+void Score::insertStaff(Staff* staff, int idx)
+      {
+      _staves.insert(idx, staff);
+
+      staff->part()->insertStaff(staff);
+
+      int track = idx * VOICES;
+      foreach (Element* e, _gel) {
+            switch(e->type()) {
+                  case SLUR:
+                        {
+                        Slur* slur = static_cast<Slur*>(e);
+                        if (slur->track() >= track)
+                              slur->setTrack(slur->track() + VOICES);
+                        if (slur->track2() >= track)
+                              slur->setTrack2(slur->track2() + VOICES);
+                        }
+                        break;
+                  case VOLTA:
+                  case OTTAVA:
+                  case TRILL:
+                  case PEDAL:
+                  case HAIRPIN:
+                  case TEXTLINE:
+                        {
+                        SLine* line = static_cast<SLine*>(e);
+                        if (line->track() >= track)
+                              line->setTrack(line->track() + VOICES);
+                        }
+                        break;
+                  default:
+                        break;
+                  }
+            }
+      foreach (Beam* b, _beams) {
+            if (b->track() >= track)
+                  b->setTrack(b->track() + VOICES);
+            }
+      }
+
+//---------------------------------------------------------
+//   adjustBracketsDel
+//---------------------------------------------------------
+
+void Score::adjustBracketsDel(int sidx, int eidx)
+      {
+      for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
+            Staff* staff = _staves[staffIdx];
+            for (int i = 0; i < staff->bracketLevels(); ++i) {
+                  int span = staff->bracketSpan(i);
+                  if ((span == 0) || ((staffIdx + span) < sidx) || (staffIdx > eidx))
+                        continue;
+                  if ((sidx >= staffIdx) && (eidx <= (staffIdx + span)))
+                        undoChangeBracketSpan(staff, i, span - (eidx-sidx));
+//                  else {
+//                        printf("TODO: adjust brackets, span %d\n", span);
+//                        }
+                  }
+            int span = staff->barLineSpan();
+            if ((sidx >= staffIdx) && (eidx <= (staffIdx + span)))
+                  undoChangeBarLineSpan(staff, span - (eidx-sidx));
+            }
+      }
+
+//---------------------------------------------------------
+//   adjustBracketsIns
+//---------------------------------------------------------
+
+void Score::adjustBracketsIns(int sidx, int eidx)
+      {
+      for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
+            Staff* staff = _staves[staffIdx];
+            int bl = staff->bracketLevels();
+            for (int i = 0; i < bl; ++i) {
+                  int span = staff->bracketSpan(i);
+                  if ((span == 0) || ((staffIdx + span) < sidx) || (staffIdx > eidx))
+                        continue;
+                  if ((sidx >= staffIdx) && (eidx < (staffIdx + span)))
+                        undoChangeBracketSpan(staff, i, span + (eidx-sidx));
+//                  else {
+//                        printf("TODO: adjust brackets\n");
+//                        }
+                  }
+            int span = staff->barLineSpan();
+            if ((sidx >= staffIdx) && (eidx < (staffIdx + span)))
+                  undoChangeBarLineSpan(staff, span + (eidx-sidx));
+            }
+      }
+
+//---------------------------------------------------------
+//   cmdRemoveStaff
+//---------------------------------------------------------
+
+void Score::cmdRemoveStaff(int staffIdx)
+      {
+      foreach(Element* e, _gel) {
+            switch(e->type()) {
+                  case VOLTA:
+                  case OTTAVA:
+                  case TRILL:
+                  case PEDAL:
+                  case HAIRPIN:
+                  case TEXTLINE:
+                        if (e->staffIdx() == staffIdx) {
+                              undoRemoveElement(e);
+                              }
+                        break;
+                  default:
+                        break;
+                  }
+            }
+      adjustBracketsDel(staffIdx, staffIdx+1);
+      Staff* s = staff(staffIdx);
+      undoRemoveStaff(s, staffIdx);
+      }
+
+//---------------------------------------------------------
+//   removeStaff
+//---------------------------------------------------------
+
+void Score::removeStaff(Staff* staff)
+      {
+      int idx = staff->idx();
+      _staves.removeAll(staff);
+      staff->part()->removeStaff(staff);
+      int track = idx * VOICES;
+      foreach(Element* e, _gel) {
+            switch(e->type()) {
+                  case SLUR:
+                        {
+                        Slur* slur = static_cast<Slur*>(e);
+                        if (slur->track() > track)
+                              slur->setTrack(slur->track() - VOICES);
+                        if (slur->track2() > track)
+                              slur->setTrack2(slur->track2() - VOICES);
+                        }
+                        break;
+                  case VOLTA:
+                  case OTTAVA:
+                  case TRILL:
+                  case PEDAL:
+                  case HAIRPIN:
+                  case TEXTLINE:
+                        {
+                        SLine* line = static_cast<SLine*>(e);
+                        if (line->track() > track)
+                              line->setTrack(line->track() - VOICES);
+                        }
+                        break;
+                  default:
+                        break;
+                  }
+            }
+      foreach(Beam* e, beams()) {
+            if (e->track() > track)
+                  e->setTrack(e->track() - VOICES);
+            }
+      }
+
+//---------------------------------------------------------
+//   sortStaves
+//---------------------------------------------------------
+
+void Score::sortStaves(QList<int>& dst)
+      {
+      systems()->clear();  //??
+      _parts.clear();
+      Part* curPart = 0;
+      QList<Staff*> dl;
+      foreach(int idx, dst) {
+            Staff* staff = _staves[idx];
+            if (staff->part() != curPart) {
+                  curPart = staff->part();
+                  curPart->staves()->clear();
+                  _parts.push_back(curPart);
+                  }
+            curPart->staves()->push_back(staff);
+            dl.push_back(staff);
+            }
+      _staves = dl;
+
+      for (MeasureBase* mb = _measures.first(); mb; mb = mb->next()) {
+            if (mb->type() != MEASURE)
+                  continue;
+            Measure* m = static_cast<Measure*>(mb);
+            m->sortStaves(dst);
+            }
+
+printf("sortStaves\n");
+      foreach(Beam* beam, _beams) {
+            int staffIdx = beam->staffIdx();
+            int voice    = beam->voice();
+            int idx      = dst.indexOf(staffIdx);
+printf("  beam set track %d %d\n", beam->track(), idx * VOICES + voice);
+            beam->setTrack(idx * VOICES + voice);
+            }
+
+      foreach(Element* e, _gel) {
+            switch(e->type()) {
+                  case SLUR:
+                        {
+                        Slur* slur    = static_cast<Slur*>(e);
+                        int staffIdx  = slur->startElement()->staffIdx();
+                        int voice     = slur->startElement()->voice();
+                        int staffIdx2 = slur->endElement()->staffIdx();
+                        int voice2    = slur->endElement()->voice();
+                        slur->setTrack(dst[staffIdx] * VOICES + voice);
+                        slur->setTrack2(dst[staffIdx2] * VOICES + voice2);
+                        }
+                    break;
+                  case VOLTA:
+                  case OTTAVA:
+                  case TRILL:
+                  case PEDAL:
+                  case HAIRPIN:
+                  case TEXTLINE:
+                        {
+                        SLine* line = static_cast<SLine*>(e);
+                        int voice    = line->voice();
+                        int staffIdx = line->staffIdx();
+                        int idx = dst.indexOf(staffIdx);
+                        line->setTrack(idx * VOICES + voice);
+                        }
+                        break;
+                  default:
+                        break;
+                }
+            }
       }
 
 //---------------------------------------------------------
@@ -806,7 +1052,7 @@ void InstrumentsDialog::on_loadButton_clicked()
       {
       QString fn = QFileDialog::getOpenFileName(
          this, tr("MuseScore: Load Instrument List"),
-          mscoreGlobalShare + "/templates",
+          mscoreGlobalShare + "templates",
          tr("MuseScore Instruments (*.xml);;"
             "All files (*)"
             )

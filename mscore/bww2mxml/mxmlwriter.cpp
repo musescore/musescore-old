@@ -113,7 +113,8 @@ namespace Bww {
     if ((regularMeasureNumber + irregularMeasureNumber) == 1)
     {
       out << "      <attributes>" << endl;
-      out << "        <divisions>" << WHOLE_DUR / 4 << "</divisions>" << endl;
+      out << "        <divisions>" << wholeDur() / 4 << "</divisions>" << endl;
+//      out << "        <key print-object=\"no\">" << endl;
       out << "        <key>" << endl;
       out << "          <fifths>2</fifths>" << endl;
       out << "          <mode>major</mode>" << endl;
@@ -131,7 +132,7 @@ namespace Bww {
       {
         out << "      <direction placement=\"above\">" << endl;
         out << "        <direction-type>" << endl;
-        out << "          <metronome>" << endl;
+        out << "          <metronome parentheses=\"no\">" << endl;
         out << "            <beat-unit>quarter</beat-unit>" << endl;
         out << "            <per-minute>" << tempo << "</per-minute>" << endl;
         out << "          </metronome>" << endl;
@@ -149,12 +150,16 @@ namespace Bww {
   void MxmlWriter::endMeasure(const Bww::MeasureEndFlags mef)
   {
     // qDebug() << "MxmlWriter::endMeasure()";
-    if (mef.repeatEnd || mef.endingEnd)
+    if (mef.repeatEnd || mef.endingEnd || mef.lastOfPart || mef.doubleBarLine)
     {
       out << "      <barline location=\"right\">" << endl;
-      if (mef.repeatEnd)
+      if (mef.repeatEnd || mef.lastOfPart)
       {
         out << "        <bar-style>light-heavy</bar-style>" << endl;
+      }
+      else if (mef.doubleBarLine)
+      {
+        out << "        <bar-style>light-light</bar-style>" << endl;
       }
       if (mef.endingEnd)
       {
@@ -196,8 +201,9 @@ namespace Bww {
     }
     StepAlterOct sao = stepAlterOctMap.value(pitch);
 
-    int dur = WHOLE_DUR / type.toInt();
+    int dur = wholeDur() / type.toInt();
     if (dots == 1) dur = 3 * dur / 2;
+    if (triplet != ST_NONE) dur = 2 * dur / 3;
     out << "      <note>" << endl;
     if (grace) out << "        <grace/>" << endl;
     out << "        <pitch>" << endl;
@@ -223,7 +229,10 @@ namespace Bww {
     if (grace)
       out << "        <stem>up</stem>" << endl;
     else
-      out << "        <stem>down</stem>" << endl;
+    {
+      if (type != "1")
+        out << "        <stem>down</stem>" << endl;
+    }
     for (int i = 0; i < maxBeamLevel; ++i)
     {
       QString s;
@@ -250,7 +259,12 @@ namespace Bww {
       if (tieStop)
         out << "          <tied type=\"stop\"/>" << endl;
       if (triplet == ST_START)
-        out << "          <tuplet type=\"start\"/>" << endl;
+      {
+        if (type == "1" || type == "2" || type == "4")
+          out << "          <tuplet type=\"start\" bracket=\"yes\"/>" << endl;
+        else
+          out << "          <tuplet type=\"start\" bracket=\"no\"/>" << endl;
+      }
       if (triplet == ST_STOP)
         out << "          <tuplet type=\"stop\"/>" << endl;
       out << "        </notations>" << endl;
@@ -262,7 +276,7 @@ namespace Bww {
    Write the header.
    */
 
-  void MxmlWriter::header(const QString title, const QString type,
+  void MxmlWriter::header(const QString title, const QString /* type */,
                           const QString composer, const QString footer,
                           const unsigned int temp)
   {
@@ -299,13 +313,13 @@ namespace Bww {
     out << "  </identification>" << endl;
     out << "  <part-list>" << endl;
     out << "    <score-part id=\"P1\">" << endl;
-    out << "      <part-name>" << instrumentName << "</part-name>" << endl;
+    out << "      <part-name>" << instrumentName() << "</part-name>" << endl;
     out << "      <score-instrument id=\"P1-I1\">" << endl;
-    out << "        <instrument-name>" << instrumentName << "</instrument-name>" << endl;
+    out << "        <instrument-name>" << instrumentName() << "</instrument-name>" << endl;
     out << "      </score-instrument>" << endl;
     out << "      <midi-instrument id=\"P1-I1\">" << endl;
     out << "        <midi-channel>1</midi-channel>" << endl;
-    out << "        <midi-program>" << midiProgram << "</midi-program>" << endl;
+    out << "        <midi-program>" << midiProgram() << "</midi-program>" << endl;
     out << "      </midi-instrument>" << endl;
     out << "    </score-part>" << endl;
     out << "  </part-list>" << endl;

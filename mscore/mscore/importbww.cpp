@@ -18,28 +18,32 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "bww2mxml/lexer.h"
-#include "bww2mxml/writer.h"
-#include "bww2mxml/parser.h"
+#include <stdio.h>
 
-#include "musescore.h"
-#include "libmscore/barline.h"
-#include "libmscore/box.h"
-#include "libmscore/chord.h"
-#include "libmscore/keysig.h"
-#include "libmscore/layoutbreak.h"
-#include "libmscore/measure.h"
-#include "libmscore/note.h"
-#include "libmscore/part.h"
-#include "libmscore/pitchspelling.h"
-#include "libmscore/score.h"
-#include "libmscore/slur.h"
-#include "libmscore/staff.h"
-#include "libmscore/tempotext.h"
-#include "libmscore/timesig.h"
-#include "libmscore/tuplet.h"
-#include "libmscore/volta.h"
-#include "libmscore/segment.h"
+#include "lexer.h"
+#include "writer.h"
+#include "parser.h"
+
+#include "barline.h"
+#include "box.h"
+#include "chord.h"
+#include "keysig.h"
+#include "layoutbreak.h"
+#include "measure.h"
+#include "note.h"
+#include "part.h"
+#include "pitchspelling.h"
+#include "score.h"
+#include "slur.h"
+#include "staff.h"
+#include "tempotext.h"
+#include "timesig.h"
+#include "tuplet.h"
+#include "volta.h"
+#include "al/tempo.h"
+#include "sym.h"
+#include "clef.h"
+#include "musicxml.h"
 
 //---------------------------------------------------------
 //   addText
@@ -47,7 +51,7 @@
 //   TODO: remove duplicate code
 //---------------------------------------------------------
 
-static void addText(VBox* & vbx, Score* s, QString strTxt, int sbtp, TextStyleType stl)
+static void addText(VBox* & vbx, Score* s, QString strTxt, int sbtp, int stl)
       {
       if (!strTxt.isEmpty()) {
             Text* text = new Text(s);
@@ -96,6 +100,42 @@ static void xmlSetPitch(Note* n, char step, int alter, int octave)
       }
 
 //---------------------------------------------------------
+//   addSymbolToText
+//   copied from importxml.cpp
+//   TODO: remove duplicate code
+//---------------------------------------------------------
+
+static void addSymbolToText(const SymCode& s, QTextCursor* cur)
+      {
+      QTextCharFormat oFormat = cur->charFormat();
+      if (s.fontId >= 0) {
+            QTextCharFormat oFormat = cur->charFormat();
+            QTextCharFormat nFormat(oFormat);
+            nFormat.setFontFamily(fontId2font(s.fontId).family());
+            cur->setCharFormat(nFormat);
+            cur->insertText(s.code);
+            cur->setCharFormat(oFormat);
+            }
+      else
+            cur->insertText(s.code);
+      }
+
+//---------------------------------------------------------
+//   metronome
+//   copied and adapted from importxml.cpp
+//   TODO: remove duplicate code
+//---------------------------------------------------------
+
+static void metronome(Text* t, int tempo)
+      {
+      QTextDocument* d = t->doc();
+      QTextCursor c(d);
+      c.movePosition(QTextCursor::EndOfLine);
+      addSymbolToText(SymCode(0xe105, 1), &c);
+      c.insertText(QString(" = %1").arg(tempo));
+      }
+
+//---------------------------------------------------------
 //   setTempo
 //   copied and adapted from importgtp.cpp
 //   TODO: remove duplicate code
@@ -105,15 +145,13 @@ static void setTempo(Score* score, int tempo)
       {
       TempoText* tt = new TempoText(score);
       tt->setTempo(double(tempo)/60.0);
-      int uc = 0x1d15f;
-      QChar h(QChar::highSurrogate(uc));
-      QChar l(QChar::lowSurrogate(uc));
-      tt->setText(QString("%1%2 = %3 ").arg(h).arg(l).arg(tempo));
-
+      metronome(tt, tempo);
+      tt->setTick(0);
       tt->setTrack(0);
       Measure* measure = score->firstMeasure();
-      Segment* segment = measure->getSegment(SegChordRest, 0);
-      segment->add(tt);
+      measure->add(tt);
+      AL::TempoMap* tl = score->tempomap();
+      if(tl) tl->addTempo(0, tempo/60.0);
       }
 
 namespace Bww {
@@ -140,7 +178,7 @@ namespace Bww {
     void tsig(const int beats, const int beat);
     void trailer();
   private:
-    void doTriplet(Chord* cr, StartStop triplet = ST_NONE);
+    void doTriplet(ChordRest* cr, StartStop triplet = ST_NONE);
     static const int WHOLE_DUR = 64;                    ///< Whole note duration
     struct StepAlterOct {                               ///< MusicXML step/alter/oct values
       QChar s;
@@ -160,6 +198,7 @@ namespace Bww {
     Tuplet* tuplet;                                     ///< Current tuplet
     Volta* lastVolta;                                   ///< Current volta
     unsigned int tempo;                                 ///< Tempo (0 = not specified)
+    unsigned int ending;                                ///< Current ending
   };
 
   /**
@@ -175,7 +214,8 @@ namespace Bww {
     currentMeasure(0),
     tuplet(0),
     lastVolta(0),
-    tempo(0)
+    tempo(0),
+    ending(0)
   {
     qDebug() << "MsScWriter::MsScWriter()";
 
@@ -207,9 +247,10 @@ namespace Bww {
       ++measureNumber;
 
       // create a new measure
+      // TimeSig ts = TimeSig(score, beat, beats);
       currentMeasure  = new Measure(score);
       currentMeasure->setTick(tick);
-      currentMeasure->setTimesig(Fraction(beats, beat));
+      // currentMeasure->setTimesig(ts.getSig());
       currentMeasure->setNo(measureNumber);
       score->measures()->add(currentMeasure);
 
@@ -222,35 +263,53 @@ namespace Bww {
       if (mbf.endingFirst || mbf.endingSecond) {
             Volta* volta = new Volta(score);
             volta->setTrack(0);
-// TODO            volta->setTick(tick);
+            volta->setTick(tick);
             volta->endings().clear();
             if (mbf.endingFirst) {
                   volta->setText("1");
                   volta->endings().append(1);
+                  ending = 1;
                   }
             else {
                   volta->setText("2");
                   volta->endings().append(2);
+                  ending = 2;
                   }
             lastVolta = volta;
             }
 
       // set key and time signature in the first measure
       if (measureNumber == 1) {
+            // clef
+            int clef = CLEF_G;
+            Staff* part = score->staff(0);
+            ClefList* ct = part->clefList();
+            (*ct)[0] = clef;
             // keysig
             KeySigEvent key;
             key.setAccidentalType(2);
+            (*score->staff(0)->keymap())[tick] = key; 
             KeySig* keysig = new KeySig(score);
-            keysig->setKeySigEvent(key);
+            keysig->setTick(tick);
             keysig->setTrack(0);
-            Segment* s = currentMeasure->getSegment(keysig, tick);
+            keysig->setSubtype(key);
+//            keysig->setVisible(false);
+            Segment* s = currentMeasure->getSegment(keysig);
             s->add(keysig);
             // timesig
-            TimeSig* timesig = new TimeSig(score);
-            timesig->setSig(Fraction(beats, beat));
-            timesig->setTrack(0);
-            s = currentMeasure->getSegment(timesig, tick);
-            s->add(timesig);
+            TimeSig ts = TimeSig(score, beat, beats);
+            int st = ts.subtype();
+            if (st) {
+                  score->sigmap()->add(tick, TimeSig::getSig(st)); 
+                  TimeSig* timesig = new TimeSig(score);
+                  timesig->setTick(tick);
+                  timesig->setSubtype(st);
+                  timesig->setTrack(0);
+                  Segment* s = currentMeasure->getSegment(timesig);
+                  s->add(timesig);
+                  }
+
+            if (tempo) setTempo(score, tempo);
             }
   }
 
@@ -261,19 +320,17 @@ namespace Bww {
 void MsScWriter::endMeasure(const Bww::MeasureEndFlags mef)
 {
       qDebug() << "MsScWriter::endMeasure()";
-//      BarLine* barLine = new BarLine(score);
-//      bool visible = true;
       if (mef.repeatEnd)
             currentMeasure->setRepeatFlags(RepeatEnd);
-//      barLine->setSubtype(NORMAL_BAR);
-//      barLine->setTrack(0);
-//      currentMeasure->setEndBarLineType(barLine->subtype(), false, visible);
 
       if (mef.endingEnd) {
             if (lastVolta) {
                   printf("adding volta\n");
-                  lastVolta->setSubtype(Volta::VOLTA_CLOSED);
-// TODO                  lastVolta->setTick2(tick);
+                  if (ending == 1)
+                        lastVolta->setSubtype(Volta::VOLTA_CLOSED);
+                  else
+                        lastVolta->setSubtype(Volta::VOLTA_OPEN);
+                  lastVolta->setTick2(tick);
                   score->add(lastVolta);
                   lastVolta = 0;
                   }
@@ -287,6 +344,27 @@ void MsScWriter::endMeasure(const Bww::MeasureEndFlags mef)
             lb->setTrack(0);
             lb->setSubtype(LAYOUT_BREAK_LINE);
             currentMeasure->add(lb);
+            }
+
+      if (mef.lastOfPart && !mef.repeatEnd) {
+            currentMeasure->setEndBarLineType(END_BAR, false, true);
+            }
+      else if (mef.doubleBarLine) {
+            currentMeasure->setEndBarLineType(DOUBLE_BAR, false, true);
+            }
+
+      int mTick = currentMeasure->tick();
+      int measureLen = tick - mTick;
+//      printf("MsScWriter::endMeasure() meas->tick %d tick %d measLen %d\n",
+//             mTick, tick, measureLen);
+
+      AL::TimeSigMap* sigmap = score->sigmap();
+      AL::SigEvent se = sigmap->timesig(mTick);
+
+      if (measureLen != sigmap->ticksMeasure(mTick)) {
+            AL::SigEvent se = sigmap->timesig(mTick);
+            Fraction f = se.getNominal();
+            score->sigmap()->add(mTick, measureLen, f);
             }
 }
 
@@ -325,24 +403,24 @@ void MsScWriter::note(const QString pitch, const QVector<Bww::BeamType> beamList
       Direction sd = AUTO;
 
       // create chord
-      Chord* cr = new Chord(score);
-      //ws cr->setTick(tick);
+      ChordRest* cr = new Chord(score);
+      cr->setTick(tick);
       cr->setBeamMode(bm);
       cr->setTrack(0);
       if (grace) {
-            cr->setNoteType(NOTE_GRACE32);
+            ((Chord*)cr)->setNoteType(NOTE_GRACE32);
             cr->setDurationType(Duration::V_32ND);
             sd = UP;
             }
       else {
             if (durationType.type() == Duration::V_INVALID)
                   durationType.setType(Duration::V_QUARTER);
-            cr->setDurationType(durationType);
+            cr->setDuration(durationType);
             sd = DOWN;
             }
       cr->setDuration(durationType.fraction());
       cr->setDots(dots);
-      cr->setStemDirection(sd);
+      ((Chord*)cr)->setStemDirection(sd);
       // add note to chord
       Note* note = new Note(score);
       note->setTrack(0);
@@ -355,14 +433,14 @@ void MsScWriter::note(const QString pitch, const QVector<Bww::BeamType> beamList
             }
       cr->add(note);
       // add chord to measure
-      Segment* s = currentMeasure->getSegment(cr, tick);
+      Segment* s = currentMeasure->getSegment(cr);
       s->add(cr);
-      doTriplet(cr, triplet);
       if (!grace) {
+            doTriplet(cr, triplet);
             int tickBefore = tick;
             tick += ticks;
             Fraction nl(Fraction::fromTicks(tick - currentMeasure->tick()));
-            currentMeasure->setLen(nl);
+            // currentMeasure->setLen(nl);
             qDebug() << "MsScWriter::note()"
               << "tickBefore:" << tickBefore
               << "tick:" << tick
@@ -390,7 +468,11 @@ void MsScWriter::note(const QString pitch, const QVector<Bww::BeamType> beamList
       // save tempo for later use
       tempo = temp;
 
-//  score->setWorkTitle(title);
+      score->setWorkTitle(title);
+      QString strType = "composer";
+      QString strComposer = composer; // TODO: const parameters ctor MusicXmlCreator
+      score->addCreator(new MusicXmlCreator(strType, strComposer));
+      score->setmxmlRights(footer);
       VBox* vbox  = 0;
       addText(vbox, score, title, TEXT_TITLE, TEXT_STYLE_TITLE);
       addText(vbox, score, type, TEXT_SUBTITLE, TEXT_STYLE_SUBTITLE);
@@ -402,11 +484,11 @@ void MsScWriter::note(const QString pitch, const QVector<Bww::BeamType> beamList
             score->measures()->add(vbox);
             }
       if (!footer.isEmpty())
-            score->style()->set(ST_oddFooterC, footer);
+            score->setCopyright(footer);
 
       Part* part = score->part(0);
-      part->setLongName(Bww::instrumentName);
-      part->setMidiProgram(Bww::midiProgram - 1);
+      part->setLongName(instrumentName());
+      part->setMidiProgram(midiProgram() - 1);
   }
 
   /**
@@ -432,15 +514,13 @@ void MsScWriter::note(const QString pitch, const QVector<Bww::BeamType> beamList
   {
       qDebug() << "MsScWriter::trailer()"
         ;
-
-      if (tempo) setTempo(score, tempo);
   }
 
   /**
    Handle the triplet.
    */
 
-  void MsScWriter::doTriplet(Chord* cr, StartStop triplet)
+  void MsScWriter::doTriplet(ChordRest* cr, StartStop triplet)
   {
       qDebug() << "MsScWriter::doTriplet(" << triplet << ")"
         ;
@@ -456,6 +536,20 @@ void MsScWriter::note(const QString pitch, const QVector<Bww::BeamType> beamList
             if (tuplet) {
                   cr->setTuplet(tuplet);
                   tuplet->add(cr);
+                  int totalDuration = 0;
+                  foreach(DurationElement* de, tuplet->elements()) {
+                        if (de->type() == CHORD || de->type() == REST){
+                              totalDuration += de->tickLen();
+                              }
+                        }
+                  if (totalDuration) {
+                        Duration d;
+                        d.setVal(totalDuration);
+                        tuplet->setFraction(d.fraction());
+                        Duration d2;
+                        d2.setVal(totalDuration / 2);
+                        tuplet->setBaseLen(d2.fraction());
+                        }
                   tuplet = 0;
                   }
             else
@@ -484,7 +578,7 @@ void MsScWriter::note(const QString pitch, const QVector<Bww::BeamType> beamList
 //   importBww
 //---------------------------------------------------------
 
-bool MuseScore::importBww(Score* score, const QString& path)
+bool Score::importBww(const QString& path)
       {
       printf("Score::importBww(%s)\n", qPrintable(path));
 
@@ -495,22 +589,22 @@ bool MuseScore::importBww(Score* score, const QString& path)
             return false;
 
       QString id("importBww");
-      Part* part = new Part(score);
+      Part* part = new Part(this);
       part->setId(id);
-      score->appendPart(part);
-      Staff* staff = new Staff(score, part, 0);
+      appendPart(part);
+      Staff* staff = new Staff(this, part, 0);
       part->staves()->push_back(staff);
-      score->staves().push_back(staff);
+      staves().push_back(staff);
 
       Bww::Lexer lex(&fp);
       Bww::MsScWriter wrt;
-      wrt.setScore(score);
+      wrt.setScore(this);
       Bww::Parser p(lex, wrt);
       p.parse();
 
-      score->setSaved(false);
-      score->setCreated(true);
-      score->connectTies();
+      _saved = false;
+      _created = true;
+      connectTies();
       printf("Score::importBww() done\n");
 //      return false;	// error
       return true;	// OK

@@ -22,7 +22,7 @@
 #ifndef __FLUID_S_H__
 #define __FLUID_S_H__
 
-#include "msynth/synti.h"
+#include "synti.h"
 #include "rev.h"
 
 namespace FluidS {
@@ -32,7 +32,7 @@ class SFont;
 class Preset;
 class Sample;
 class Channel;
-struct Mod;
+class Mod;
 class Reverb;
 class Chorus;
 class Fluid;
@@ -286,34 +286,12 @@ class Channel {
       int getInterpMethod() const         { return interp_method; }
       };
 
-// subsystems:
-enum {
-      FLUID_GROUP  = 0,
-      REVERB_GROUP = 1,
-      CHORUS_GROUP = 2
-      };
-
-enum {
-      REVERB_ROOMSIZE = 0,
-      REVERB_DAMP,
-      REVERB_WIDTH,
-      REVERB_GAIN
-      };
-
-enum {
-      CHORUS_TYPE = 0,
-      CHORUS_SPEED,
-      CHORUS_DEPTH,
-      CHORUS_BLOCKS,
-      CHORUS_GAIN
-      };
-
 //---------------------------------------------------------
 //   Fluid
 //---------------------------------------------------------
 
 class Fluid : public Synth {
-      static const int SILENT_BLOCKS = 32*5;
+      static const int SILENT_BLOCKS = 32;
       int silentBlocks;
 
       QList<SFont*> sfonts;               // the loaded soundfonts
@@ -335,7 +313,7 @@ class Fluid : public Synth {
       void updatePatchList();
 
    protected:
-      int _state;                         // the synthesizer state
+      int state;                          // the synthesizer state
 
       unsigned int sfont_id;
 
@@ -351,33 +329,25 @@ class Fluid : public Synth {
       Reverb* reverb;
       Chorus* chorus;
 
-      SFont* get_sfont_by_name(const QString& name);
-      SFont* get_sfont_by_id(int id);
-      SFont* get_sfont(int idx) const     { return sfonts[idx];   }
-      void remove_sfont(SFont* sf);
-      int add_sfont(SFont* sf);
-      bool sfunload(int id, bool reset_presets);
-      int sfload(const QString& filename, bool reset_presets);
-
    public:
       Fluid();
       ~Fluid();
       virtual void init(int sampleRate);
 
-      virtual const char* name() const { return "Fluid"; }
+      virtual bool loadSoundFont(const QString& s);
+      virtual QString soundFont() const;
 
       virtual void play(const Event&);
       virtual const QList<MidiPatch*>& getPatchInfo() const { return patches; }
 
-      // set/get a single parameter
-      virtual SyntiParameter parameter(int id) const;
-      virtual void setParameter(int id, double val);
-
-      // get/set synthesizer state (parameter set)
-      virtual SyntiState state() const;
-      virtual void setState(SyntiState&);
+      virtual double masterGain() const            { return _gain; }
+      virtual void setMasterGain(double val)       { _gain = val;  }
+      virtual double effectParameter(int effect, int parameter);
+      virtual void setEffectParameter(int ffect, int parameter, double value);
 
       bool log(const char* fmt, ...);
+
+      bool set_reverb_preset(int num);
 
       Preset* get_preset(unsigned int sfontnum, unsigned int banknum, unsigned int prognum);
       Preset* find_preset(unsigned int banknum, unsigned int prognum);
@@ -410,18 +380,25 @@ class Fluid : public Synth {
       void set_interp_method(int chan, int interp_method);
 
       Preset* get_channel_preset(int chan) const { return channel[chan]->preset(); }
-
-      virtual bool loadSoundFonts(const QStringList& s);
-      virtual bool addSoundFont(const QString& s);
-      virtual bool removeSoundFont(const QString& s);
-      virtual QStringList soundFonts() const;
+      SFont* get_sfont_by_name(const QString& name);
+      SFont* get_sfont_by_id(unsigned int id);
+      SFont* get_sfont(unsigned int num)             { return sfonts[num];   }
+      const SFont* get_sfont(unsigned int num) const { return sfonts[num];   }
+      int sfcount() const                            { return sfonts.size(); }
+      void remove_sfont(SFont* sf);
+      int add_sfont(SFont* sf);
+      int sfreload(unsigned int id);
+      bool sfunload(unsigned int id, int reset_presets);
+      int sfload(const QString& filename, int reset_presets);
 
       void start_voice(Voice* voice);
       Voice* alloc_voice(unsigned id, Sample* sample, int chan, int key, int vel, double vt);
       void free_voice_by_kill();
 
-      virtual void process(unsigned len, float* lout, float* rout, float gain);
+      virtual void process(unsigned len, float* lout, float* rout, int stride);
 
+      void set_chorus(int nr, double level, double speed, double depth_ms, int type);
+      void set_reverb(double roomsize, double damping, double width, double level);
       void program_reset();
 
       bool program_select2(int chan, char* sfont_name, unsigned bank_num, unsigned preset_num);
@@ -449,7 +426,6 @@ class Fluid : public Synth {
       QString error() const { return _error; }
 
       friend class Voice;
-      friend class Preset;
       };
 
   /*
@@ -496,14 +472,11 @@ enum fluid_interp {
 
 /** Sample types */
 
-enum {
-      FLUID_SAMPLETYPE_MONO =	      1,
-      FLUID_SAMPLETYPE_RIGHT =	2,
-      FLUID_SAMPLETYPE_LEFT =	      4,
-      FLUID_SAMPLETYPE_LINKED =	8,
-      FLUID_SAMPLETYPE_OGG_VORBIS = 0x10,
-      FLUID_SAMPLETYPE_ROM =	      0x8000
-      };
+#define FLUID_SAMPLETYPE_MONO	      1
+#define FLUID_SAMPLETYPE_RIGHT	2
+#define FLUID_SAMPLETYPE_LEFT	      4
+#define FLUID_SAMPLETYPE_LINKED	8
+#define FLUID_SAMPLETYPE_ROM	      0x8000
 
 /* Sets the sound data of the sample
  *     Warning : if copy_data is FALSE, data should have 8 unused frames at start
@@ -592,23 +565,27 @@ enum fluid_mod_flags {
 
 struct Mod
       {
-      unsigned char dest;
-      unsigned char src1;
-      unsigned char flags1;
-      unsigned char src2;
-      unsigned char flags2;
+      uchar dest;
+      uchar src1;
+      uchar flags1;
+      uchar src2;
+      uchar flags2;
       double amount;
 
-      void clone(Mod* mod) const;
+      Mod();
+      Mod(uchar a, uchar b, uchar c, uchar d, uchar e, double f)
+         : dest(a), src1(b), flags1(c), src2(d), flags2(e), amount(f) {}
+
       void dump() const;
-      int has_source(bool cc, int ctrl) {
-            return (((src1 == ctrl) && (flags1 & FLUID_MOD_CC)    && cc)
+      bool has_source(bool cc, int ctrl) const {
+            return (((src1 == ctrl) &&   (flags1 & FLUID_MOD_CC)  && cc)
                 || (((src1 == ctrl) && (!(flags1 & FLUID_MOD_CC)) && !cc)))
-                || (((src2 == ctrl) && (flags2 & FLUID_MOD_CC)    && cc)
+                || (((src2 == ctrl) &&   (flags2 & FLUID_MOD_CC)  && cc)
                 || (((src2 == ctrl) && (!(flags2 & FLUID_MOD_CC)) && !cc)));
             }
-      void set_source1(int src, int flags);
-      void set_source2(int src, int flags);
+      bool has_dest(uchar gen) const            { return dest == gen; }
+      void set_source1(int src, int flags)      { src1 = src; flags1 = flags; }
+      void set_source2(int src, int flags)      { src2 = src; flags2 = flags; }
       void set_dest(int val)                    { dest = val;    }
       void set_amount(double val)               { amount = val;  }
       int get_source1() const                   { return src1;   }
@@ -638,14 +615,6 @@ enum fluid_mod_src {
 bool test_identity(const Mod * mod1, const Mod * mod2);
 
 void fluid_dump_modulator(Mod * mod);
-
-#define fluid_mod_has_source(mod,cc,ctrl)  \
-( ((((mod)->src1 == ctrl) && (((mod)->flags1 & FLUID_MOD_CC) != 0) && (cc != 0)) \
-   || ((((mod)->src1 == ctrl) && (((mod)->flags1 & FLUID_MOD_CC) == 0) && (cc == 0)))) \
-|| ((((mod)->src2 == ctrl) && (((mod)->flags2 & FLUID_MOD_CC) != 0) && (cc != 0)) \
-    || ((((mod)->src2 == ctrl) && (((mod)->flags2 & FLUID_MOD_CC) == 0) && (cc == 0)))))
-
-#define fluid_mod_has_dest(mod,gen)  ((mod)->dest == gen)
 
 /*
  *  phase

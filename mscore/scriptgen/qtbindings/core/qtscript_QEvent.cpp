@@ -362,7 +362,7 @@ static const char * const qtscript_QEvent_Type_keys[] = {
     , "UngrabMouse"
     , "GrabKeyboard"
     , "UngrabKeyboard"
-    //, "CocoaRequestModal"
+//    , "CocoaRequestModal"
     , "User"
     , "MaxUser"
 };
