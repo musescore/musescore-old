@@ -11,7 +11,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","googleanalytics":{"trackOutgoin
 //--><!]]>
 </script>
     <meta name='robots' content='noindex, nofollow' />
-    <base href='http://musescore.org/en/handbook-0' />
+    <base href='http://musescore.org/en/handbook/handbook' />
     <link rel='shortcut icon' href='/sites/musescore.org/files/amadou_favicon_11.ico' type='image/x-icon' />
     <link type="text/css" rel="stylesheet" media="all" href="/sites/musescore.org/files/css/css_d50da39cfa359c23b6efeb3db75ce8c3.css" />
   </head>
@@ -21,7 +21,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","googleanalytics":{"trackOutgoin
     <div class="print-slogan">Free music composition &amp; notation software</div>
     <p></p>
     <hr class="print-hr" />
-    <div class="print-site_name">Retrieved from <a href="http://musescore.org/en">http://musescore.org</a> on Thu, 07/14/2011</div>
+    <div class="print-site_name">Retrieved from <a href="http://musescore.org/en">http://musescore.org</a> on Wed, 07/27/2011</div>
     <h1 class="print-title"></h1>
     <div class="print-submitted"></div>
     <div class="print-created"></div>
@@ -102,6 +102,7 @@ yum localinstall musescore-0.9.4-1.fc10.x86_64.rpm</pre></li>
 <li>Select the duration of the note (or rest) you want to enter</li>
 <li>Enter the pitch (or rest) using keyboard shortcut, mouse or a MIDI keyboard</li>
 </ol>
+<p>To add notes of different durations that play at the same time, see <a href="http://musescore.org/en/handbook/voices" title="Voices">Voices</a>.  </p>
 <h3>Step 1: Starting position</h3>
 <p>First select a note or rest on the score as your starting position for note entry. Note entry in MuseScore replaces the existing notes or rests in a measure with your new notes (i.e. overwrites rather than inserts). However you can insert new measures at any point (see <a href="http://musescore.org/en/handbook/measure-operations" title="measure operations">measure operations</a>, "Insert") or use <a href="http://musescore.org/en/handbook/copy-and-paste" title="copy and paste">copy and paste</a> to move a passage of notes.</p>
 <h3>Step 2: Note entry mode</h3>
@@ -490,8 +491,8 @@ Display of all staff bar lines updates when you leave <samp class="mode">edit mo
 <p>Notation for drumsets often include upstem and downstem notes happening simultaneously. If are unfamiliar with editing multiple voices in a single staff then see <a href="http://musescore.org/en/handbook/voices" title="voices">voices</a> for an overview. See below for instructions specific to percussion notation.</p>
 <h3>MIDI keyboard</h3>
 <p>The easiest way to add drum notation to your score is via MIDI keyboard. Most MIDI keyboard have percussion markings above each key. If you press the key for high hat then MuseScore will add the correct notation to the score. MuseScore automatically takes care of the stem direction and type of note head.</p>
-<h3>computer keyboard</h3>
-<p>only a few drum-instruments:</p>
+<h3>Computer keyboard</h3>
+<p>Only a few drum-instruments are mapped to shortcut by default. You can add more with right click on the staff  <kbd> → <samp class="menuitem">Edit drumset...</samp></kbd></p>
 <ul>
 <li>c for Bass-Drum</li>
 <li>d for Ride</li>
@@ -627,11 +628,19 @@ Display of all staff bar lines updates when you leave <samp class="mode">edit mo
 </ol>
 <h3>Adjustments</h3>
 <p>The boxes or handles (displayed in the images for steps 2-4 above) can be adjusted with the mouse. The two outer handles adjust the start and end of the slur. The two inner handles adjust the contour of the slur.</p>
-<p>A slur can span several systems and pages. The start and end of a slur is anchored to a note/chord or rest.  If the notes are repositioned due to changes in the layout, stretch or style, the slur also moves and adjusts in size.</p>
+<p>A slur can span several systems and pages. The start and end of a slur is anchored to a note/chord or rest.  If the notes are repositioned due to changes in the layout, stretch or style, the slur also moves and adjusts in size. </p>
+<p>This example shows a slur that spans from the bass to the treble clef. Using the mouse, select the first note of the slur, hold down the <kbd><kbd>Ctrl</kbd></kbd> key and select the last note for the slur, and press <kbd><kbd>S</kbd></kbd> to add the slur.</p>
+<p><img src="/sites/musescore.org/files/slur_b2t.png" alt="Slur across clefs" title="Slur across clefs" width="355" height="198" class="inline" /></p>
 <p><b>Note:</b> It is not possible to change the start and end anchor notes using the mouse.  Use <kbd><kbd>Shift</kbd></kbd> + left or right arrow keys to adjust the start and end points of a slur.</p>
 <h3>Dotted line</h3>
 <p>Dotted slurs are sometimes used in songs where the presence of a slur varies between stanzas. Dotted slurs are also used to indicate an editor's suggestion (as opposed to the composers original markings). To change an existing slur into a dotted slur right-click on it and choose <kbd><samp class="menuitem">Slur Properties...</samp></kbd>. From the Slur Properties dialog you can choose whether you want a solid or a dotted slur.</p>
 <p>See also: <a href="http://musescore.org/en/handbook/tie" title="Tie">Tie</a>, <a href="http://musescore.org/en/handbook/edit-mode" title="Edit mode">Edit mode</a>.</p>
+<table id="attachments" class="sticky-enabled">
+ <thead><tr><th>Attachment</th><th>Size</th> </tr></thead>
+<tbody>
+ <tr class="odd"><td><a href="http://musescore.org/sites/musescore.org/files/slur_b2t.png">slur_b2t.png</a></td><td>12.16 KB</td> </tr>
+</tbody>
+</table>
   </div>
 <div id="node-89" class="section-3">
   <h1 class="book-heading">Tie</h1>
@@ -730,6 +739,8 @@ Display of all staff bar lines updates when you leave <samp class="mode">edit mo
 <p>You can change the text and many other properties of a volta bracket using the Line Properties dialog. Right-click on a volta bracket and choose <kbd><samp class="menuitem">Line Properties...</samp></kbd>. The figure below shows the volta text as "1.-5."</p>
 <p><img src="/sites/musescore.org/files/volta-line-properties.png" alt="Line Properties dialog" title="Line Properties dialog" width="607" height="219" class="inline" /></p>
 <p><img src="/sites/musescore.org/files/volta4_0.png" alt="Sample first-through-fifth ending followed by sixth ending" title="Sample first-through-fifth ending followed by sixth ending" width="401" height="73" class="inline" /></p>
+<p>You can also right-click on the Volta and bring up the Volta Properties dialog. From here you can change both the displayed Volta text (the same from the Line Properties above) and the Repeat List. If you want one volta to be played only on certain repeats and another volta on other repeats, enter the repeat times in a comma separated list. In the example below, this volta will be played during repeat 1, 2, 4, 5 and 7. Another volta will have the other ending, like 3, 6 and possibly other higher numbers like 8, 9, etc.</p>
+<p><img src="/sites/musescore.org/files/volta-properties.png" alt="Volta Properties dialog" title="Volta Properties dialog" width="529" height="297" class="inline" /></p>
 <h3>Playback</h3>
 <p>Sometimes a repeat plays for more than two times. In the figure above the volta text indicates that it should play five times before it continues. If you want to change the number of times MuseScore plays a repeat then go to the measure containing the repeat bar line and change its Repeat Count (see <a href="http://musescore.org/en/handbook/measure-operations" title="Measure operations">Measure operations</a> for details).</p>
 <h3 class="v0-9-4">Issues with multi-part scores</h3>
@@ -941,19 +952,43 @@ Download <a class="freelinking external" href="http://mscore.svn.sourceforge.net
   <h1 class="book-heading">Chord name</h1>
   <p><strong>Chord names</strong> can be entered by first selecting a note and then pressing  <kbd><kbd>Ctrl</kbd>+<kbd>K</kbd></kbd> (Mac: <kbd><kbd>⌘</kbd>+<kbd>K</kbd></kbd>). This creates a chord name text object for the selected chord.</p>
 <ul>
-<li>Type <kbd><kbd>Space</kbd></kbd> to move to the next chord.</li>
-<li><kbd><kbd>Shift</kbd>+<kbd>Space</kbd></kbd> moves to the previous chord.</li>
-<li><kbd><kbd>Ctrl</kbd>+<kbd>Space</kbd></kbd> enters a space into the chord name text.</li>
+<li>Type <kbd><kbd>Space</kbd></kbd> to move to the next chord (or beat in versions 1.1 and later)</li>
+<li><kbd><kbd>Shift</kbd>+<kbd>Space</kbd></kbd> moves to the previous chord (or beat in versions 1.1 and later)</li>
+<li>Type <kbd><kbd>Tab</kbd></kbd> to move to the next measure (versions 1.1 and later).</li>
+<li><kbd><kbd>Shift</kbd>+<kbd>Tab</kbd></kbd> moves to the previous measure (versions 1.1 and later)</li>
 </ul>
 <p>Chord names can be <a href="http://musescore.org/en/handbook/text-editing" title="text editing">edited</a> as normal text. To add a sharp type <kbd>#</kbd> and to add a flat type <kbd>b</kbd>. These characters will automatically turn into proper sharp or flat signs when you move to the next chord.</p>
-<h3>Jazz font</h3>
-<p>If you prefer a more handwritten appearance to the chord names in your score then versions 0.9.5 and later include a jazz font option.</p>
+<h3>MuseJazz font</h3>
+<p>If you prefer a more handwritten appearance to the chord names in your score, then versions 0.9.5 and later include a font option called "MuseJazz".</p>
 <p><img src="/sites/musescore.org/files/jazz-chord-names_0.png" alt="Chord names have a handwritten appearance" title="Chord names have a handwritten appearance" width="182" height="49" class="inline" /></p>
+<p>To use this font in version 1.1 or later:</p>
+<ol>
+<li>From the main menu choose <kbd><samp class="menu">Style</samp> → <samp class="menuitem">Load Style...</samp></kbd></li>
+<li>Navigate to the <kbd>styles</kbd> folder if necessary</li>
+<li>Select <kbd>MuseJazz.mss</kbd></li>
+</ol>
+<p>This will set up your score to use "MuseJazz" for most text, including chord names. If you prefer to use "MuseJazz" for chord names only, or if you are using version 1.0 or earlier, use the following procedure:</p>
 <ol>
 <li>From the main menu choose <kbd><samp class="menu">Style</samp> → <samp class="menuitem">Edit General Style...</samp></kbd></li>
 <li>From the left pane select <kbd><samp>Chordnames</samp></kbd></li>
-<li>In the right pane replace the text <kbd>stdchords.xml</kbd> with <kbd>jazzchords.xml</kbd></li>
+<li>In the right pane replace the text <kbd>stdchords.xml</kbd> with <kbd>jazzchords.xml</kbd> or one of the following files.</li>
 </ol>
+<p>In 1.1 and later, MuseScore provides several new alternatives for chord name style in addition to <kbd>jazzchords.xml</kbd> that can be selected using the above procedure. Here are the available styles:</p>
+<ul>
+<li><kbd>cchords_muse.xml</kbd> (the default when using <kbd>MuseJazz.mss</kbd>):<img src="/sites/musescore.org/files/cchords_muse_1.png" alt="cchords_muse.xml sample" title="cchords_muse.xml sample" width="585" height="71" class="inline" /></li>
+<li><kbd>cchords_nrb.xml</kbd>:<img src="/sites/musescore.org/files/cchords_nrb_1.png" alt="cchords_nrb.xml sample" title="cchords_nrb.xml sample" width="585" height="71" class="inline" /></li>
+<li><kbd>cchords_rb.xml</kbd>:<img src="/sites/musescore.org/files/cchords_rb_1.png" alt="cchords_rb.xml sample" title="cchords_rb.xml sample" width="585" height="72" class="inline" /></li>
+<li><kbd>cchords_sym.xml</kbd>:<img src="/sites/musescore.org/files/cchords_sym_1.png" alt="cchords_sym.xml sample" title="cchords_sym.xml sample" width="585" height="72" class="inline" /></li>
+</ul>
+<table id="attachments" class="sticky-enabled">
+ <thead><tr><th>Attachment</th><th>Size</th> </tr></thead>
+<tbody>
+ <tr class="odd"><td><a href="http://musescore.org/sites/musescore.org/files/cchords_muse_1.png">cchords_muse.png</a></td><td>11.77 KB</td> </tr>
+ <tr class="even"><td><a href="http://musescore.org/sites/musescore.org/files/cchords_nrb_1.png">cchords_nrb.png</a></td><td>12.55 KB</td> </tr>
+ <tr class="odd"><td><a href="http://musescore.org/sites/musescore.org/files/cchords_rb_1.png">cchords_rb.png</a></td><td>11.28 KB</td> </tr>
+ <tr class="even"><td><a href="http://musescore.org/sites/musescore.org/files/cchords_sym_1.png">cchords_sym.png</a></td><td>11 KB</td> </tr>
+</tbody>
+</table>
   </div>
 <div id="node-74" class="section-3">
   <h1 class="book-heading">Fingering</h1>
@@ -1107,7 +1142,24 @@ To color all the notes in black, right click on a notehead -&gt; Select  -&gt; A
 <div id="node-308" class="section-2">
   <h1 class="book-heading">Support</h1>
   <p>This chapter describes how to find help using MuseScore: the best places to look, the best way to ask a question on the forums, and tips for reporting a bug.</p>
-  <div id="node-7021" class="section-3">
+  <div id="node-77" class="section-3">
+  <h1 class="book-heading">How to report bug or ask for support</h1>
+  <p>Before posting your support request <a href="http://musescore.org/en/forum">in the forum</a>:</p>
+<ul>
+<li>PLEASE, look for a solution in the <a href="http://musescore.org/en/handbook">user handbook</a>.</li>
+<li>Use the <a href="http://musescore.org/en/search">search</a> function of the website to see if someone has already encountered the same problem on the <a href="http://musescore.org/en/forum">forums</a>. </li>
+<li>If you are posting an error report, first try to reproduce the problem with <a href="http://musescore.org/en/download">the latest prerelease</a>. You may also view the <a href="http://mscore.svn.sourceforge.net/viewvc/mscore/trunk/mscore/ChangeLog">version history</a> to check whether it has been fixed already.</li>
+</ul>
+<p>When posting your request for support or bug report, please include as much of the following information as you know:</p>
+<ul>
+<li>Version of MuseScore you are using (e.g. version 1.0) or the revision number if you are using a prerelease (e.g. revision 3996)</li>
+<li>Operating system you are running it on (e.g. Windows Vista, Windows 7, Mac OS 10.6 or Ubuntu 10.10)</li>
+<li>If you are reporting a bug, please describe the precise steps that lead to the problem (where do you click, what keys do you press, what do you see, etc.).  If you are not able to reproduce the problem with the steps, it is probably not worth reporting it as the developers will not be able to reproduce it (and solve) either.</li>
+<li>Limit your reports in the issue tracker to one bug per report</li>
+<li>Remember that the goal of a bug report is not only to show the bug but to allow others to reproduce the bug easily</li>
+</ul>
+  </div>
+<div id="node-7021" class="section-3">
   <h1 class="book-heading">Known incompatibilities</h1>
   <h3>Hardware incompatibilities</h3>
 <p>The following software is known to crash MuseScore on startup : </p>
@@ -1378,8 +1430,8 @@ Decrescendo: <kbd><kbd>Shift</kbd>+<kbd>H</kbd></kbd></p>
 <h3>Lyric entry</h3>
 <p>Previous lyric syllable: <kbd><kbd>Ctrl</kbd>+<kbd>Left</kbd></kbd><br />
 Next lyric syllable: <kbd><kbd>Ctrl</kbd>+<kbd>Right</kbd></kbd></p>
-<p>Up to previous stanza: <kbd><kbd>Ctrl</kbd>+<kbd>Up</kbd></kbd> (Mac: <kbd><kbd>⌘</kbd>+<kbd>Left</kbd></kbd>)<br />
-Down to next stanza: <kbd><kbd>Ctrl</kbd>+<kbd>Down</kbd></kbd> (Mac: <kbd><kbd>⌘</kbd>+<kbd>Right</kbd></kbd>)</p>
+<p>Up to previous stanza: <kbd><kbd>Ctrl</kbd>+<kbd>Up</kbd></kbd> (Mac: <kbd><kbd>⌘</kbd>+<kbd>Up</kbd></kbd>)<br />
+Down to next stanza: <kbd><kbd>Ctrl</kbd>+<kbd>Down</kbd></kbd> (Mac: <kbd><kbd>⌘</kbd>+<kbd>Down</kbd></kbd>)</p>
 <p><i>For more lyric shortcuts see <a href="http://musescore.org/en/handbook/lyrics" title="lyrics">lyrics</a></i></p>
 <h3>Display</h3>
 <p>Navigator: <kbd><kbd>F12</kbd></kbd> (Mac: <kbd><kbd>⌥</kbd>+<kbd>⌘</kbd>+<kbd>N</kbd></kbd>)<br />
