@@ -1,4 +1,5 @@
 27.jul (ws)
+      - fix #11731: printing problems
       - fix #11707: Shortcuts not read back from .ini file (patch from Miwarre)
       - fix #11709: slur/tie across page break shown on wrong page
         (all spanner elements are affected)

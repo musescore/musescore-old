@@ -97,7 +97,7 @@ void TextPalette::populate()
       bool musical = musicalSymbols->isChecked();
 
 //      QFont f(musical ? "MScore1" : "FreeSerif");
-      QFont f("FreeSerif");
+      QFont f("FreeSerifMscore");
 
       f.setPixelSize(40);
       codePage->setEnabled(!musical);
@@ -134,13 +134,12 @@ void TextPalette::populate()
                               ss = QChar(QChar::highSurrogate(code));
                               ss += QChar(QChar::lowSurrogate(code));
                               tb->setToolTip(QString("0x%1").arg(code, 5, 16, QLatin1Char('0')));
-                              tb->setIcon(codeIcon(ss, f));
                               }
                         else {
                               ss = QChar(code);
                               tb->setToolTip(QString("0x%1").arg(code, 4, 16, QLatin1Char('0')));
-                              tb->setIcon(codeIcon(ss,f));
                               }
+                        tb->setIcon(codeIcon(ss, f));
                         sg->setId(tb, code);
                         tb->setEnabled(true);
                         }
